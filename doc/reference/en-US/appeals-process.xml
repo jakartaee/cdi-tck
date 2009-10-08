@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<chapter id="appeals-process">
+   <title>Appeals Process</title>
+   <para>
+      While the CDI TCK is rigourous about enforcing an implementation's
+      conformance to the JSR-299 specification, it's reasonable to assume that
+      an implementor may discover new and/or better ways to validate the
+      assertions. This chapter covers the appeals process, defined by the
+      Specification Lead, Red Hat Middleware LLC., which allows implementors of
+      the JSR-299 specification to challenge one or more tests defined by the
+      CDI TCK.
+   </para>
+   <para>
+      The appeals process identifies who can make challenges to the TCK, what
+      challenges to the TCK may be submitted, how these challenges are
+      submitted, how and by whom challenges are addressed and how accepted
+      challenges to the TCK are managed.
+   </para>
+   <para>
+      Following the recent adoption of transparency in the JCP, implementors
+      are encouraged to make their appeals public, which this process
+      facilitates. The JCP community should recognize that issue reports are a
+      central aspect of any good software and it's only natural to point out
+      shortcomings and strive to make improvements. Despite this good faith,
+      not all implementors will be comfortable with a public appeals process.
+      Instructions about how to make a private appeal are therefore provided.
+   </para>
+   <section>
+      <title>Who can make challenges to the TCK?</title>
+      <para>
+         Any implementor may submit an appeal to challenge one or more tests in
+         the CDI TCK. In fact, members of the JSR-299 Expert Group (EG) encourage
+         this level of participation.
+      </para>
+   </section>
+   <section>
+      <title>What challenges to the TCK may be submitted?</title>
+      <para>
+         Any test case (e.g., <literal>@Artifact</literal> class,
+         <literal>@Test</literal> method), test case configuration (e.g.,
+         beans.xml), test beans, annotations and other resources may be
+         challenged by an appeal.
+      </para>
+      <para>
+         What is generally not challengable are the assertions made by the
+         specification. The specification document is controlled by a separate
+         process and challenges to it should be handled through the JSR-299 EG
+         by sending an e-mail to <ulink
+         url="mailto:jsr299-comments@jcp.org">jsr299-comments@jcp.org</ulink>.
+      </para>
+   </section>
+   <section>
+      <title>How these challenges are submitted?</title>
+      <para>
+         To submit a challenge, a new issue should be created in the <ulink
+         url="https://jira.jboss.org/jira/browse/WBTCK">WBTCK project</ulink>
+         of the JBoss JIRA using the Issue Type: Bug. The appellant should
+         complete the Summary, Component (TCK Appeal), Environment and
+         Description Field only. Any communication regarding the issue should
+         be pursed in the comments of the filed issue for accurate record. 
+      </para>
+      <para>
+         To submit an issue in the JBoss JIRA, you must have a (free) JBoss.com
+         member account. You can create a member account using the <ulink
+         url="http://www.jboss.org/index.html?op=checkage&amp;module=user">on-line
+         registration</ulink>.
+      </para>
+      <para>
+         If you wish to make a private challenge, you should follow the above
+         procedure, setting the Security Level to Private. Only the issue
+         reporter, TCK Project Lead and designates will be able to view the 
+         issue.
+      </para>
+   </section>
+   <section>
+      <title>How and by whom challenges are addressed?</title>
+      <para>
+         The challenges will be addressed in a timely fashion by the CDI TCK
+         Project Lead, as designated by Specification Lead, Red Hat Middleware
+         LLC. or his/her designate. The appellant can also monitor the process
+         by following the issue report filed in the <ulink
+         url="https://jira.jboss.org/jira/browse/WBTCK">WBTCK project</ulink>
+         of the JBoss JIRA.
+      </para>
+      <para>
+         The current TCK Project Lead is listed on the <ulink
+         url="https://jira.jboss.org/jira/browse/WBTCK">WBTCK Project Summary
+         Page</ulink> on the JBoss JIRA.
+      </para>
+   </section>
+   <section>
+      <title>How accepted challenges to the TCK are managed?</title>
+      <para>
+         Accepted challenges will be acknowledged via the filed issue's comment
+         section. Communication between the CDI TCK Project Lead and the
+         appellant will take place via the issue comments. The issue's status
+         will be set to "Resolved" when the TCK project lead believes the issue
+         to be resolved. The appellant should, within 30 days, either close the
+         issue if they agree, or reopen the issue if they do not believe the
+         issue to be resolved.
+      </para>
+      <para>
+         Resolved issue not addressed for 30 days will be closed by the TCK
+         Project Lead. If the TCK Project Lead and appellant are unable to
+         agree on the issue resolution, it will be referred to the JSR-299
+         specification lead or his/her designate.
+      </para>
+      <para>
+         Periodically, an updated TCK will be released containing tests altered
+         due to challenges. No new tests will be added. Implementations are 
+         required to pass the updated TCK. This release stream is named 1.0.z where
+         z will be incremented.
+      </para>
+      <para>
+         Additionally, new tests will be added to the TCK improving coverage of the
+         specification. We encourage implementations to pass this TCK, however it is
+         not required. This release stream is named 1.y.z where y > 0.
+      </para>
+   </section>
+</chapter>

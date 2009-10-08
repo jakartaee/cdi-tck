@@ -1,0 +1,37 @@
+<Beans xmlns="urn:java:ee" 
+		xmlns:test="urn:java:org.jboss.jsr299.tck.tests.xml.namespace.javaee.pkg">
+	
+	<test:TestBindingType>
+		<BindingType />
+	</test:TestBindingType>
+	
+	<test:Order>
+		<RequestScoped />
+		<test:TestBindingType />
+		<Integer />
+		<Date />
+		<DataSource />
+		<InvocationContext />
+		<Event>
+		   <String />
+		</Event>
+		<TimerHandle />
+		<EntityManager />
+		<Binding />
+	</test:Order>
+</Beans>
+
+
+<!--
+   javax.context.RequestScoped;
+   java.lang.Integer;
+   java.util.Date;
+   javax.sql.DataSource;
+   javax.interceptor.InvocationContext;
+   javax.event.Event;
+   javax.ejb.ScheduleExpression;
+   javax.persistence.EntityManager;
+   javax.xml.ws.Binding;
+   javax.inject.BindingType;
+   javax.annotation.Resource;         
+-->

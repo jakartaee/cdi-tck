@@ -1,0 +1,6 @@
+<beans> 
+   <decorators>
+      <decorator>org.jboss.jsr299.tck.tests.context.dependent.InteriorDecorator</decorator>
+   </decorators>
+
+</beans>

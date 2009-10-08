@@ -1,0 +1,695 @@
+<specification
+    xmlns="http://jboss.com/products/webbeans/tck/audit"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jboss.com/products/webbeans/tck/audit"
+    name="JSR-318: Enterprise JavaBeans Interceptors Requirements"
+    id="int"
+    version="3.1.PFD">
+
+  <section id="1" title="Overview">
+    <assertion id="a">
+      <text>An interceptor method may be defined on a target class itself or on an interceptor class associated with the target class.</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>An interceptor class is a class (distinct from the target class) whose methods are invoked in response to invocations and/or lifecycle events on the target class.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>Any number of interceptor classes may be associated with a target class.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>It is possible to carry state across multiple interceptor method invocations for a single method invocation or lifecycle callback event in the context data of the |InvocationContext| object.</text>
+    </assertion>
+    
+    <assertion id="e">
+      <text>An interceptor class must have a public no-arg constructor.</text>
+    </assertion>
+    
+    <assertion id="f">
+      <text>Interceptor methods and interceptor classes are defined for a class by means of metadata annotations or the deployment descriptor.</text>
+    </assertion>
+    
+    <assertion id="g">
+      <text>When annotations are used, one or more interceptor classes are denoted using the |Interceptors| annotation on the target class itself and/or on its methods.</text>
+    </assertion>
+    
+    <assertion id="h">
+      <text>In the method case, the |Interceptors| annotation can be applied to a method of the class or superclass.</text>
+    </assertion>
+    
+    <assertion id="i">
+      <text>If multiple interceptors are defined, the order in which they are invoked is determined by the order in which they are specified in the |Interceptors| annotation.</text>
+    </assertion>
+
+    <group>    
+      <text>The deployment descriptor may be used as an alternative to specify the invocation order of interceptors or to override the order specified in metadata annotations.</text>
+      
+      <assertion id="j" testable="false">
+        <text>Test that the deployment descriptor can be used to specify the invocation order.</text>
+        <note>CDI doesn't support interceptors</note>
+      </assertion>
+      
+      <assertion id="k" testable="false">
+        <text>Test that the deployment descriptor overrides the order specified by the annotations.</text>
+        <note>CDI doesn't support interceptors</note>
+      </assertion>
+    </group>
+    
+    <assertion id="l" testable="false">
+      <text>Default interceptors may be defined using the deployment descriptor.</text>
+    </assertion>
+  </section>
+  
+  <section id="2" title="Interceptor Life Cycle">
+    <assertion id="a">
+      <text>The lifecycle of an interceptor instance is the same as that of the target class instance with which it is associated.</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>When the target instance is created, a corresponding interceptor instance is created for each associated interceptor class.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>These interceptor instances are destroyed when the target instance is removed.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>Both the interceptor instance and the target instance are created before any |PostConstruct| callbacks are invoked.  Any |PreDestroy| callbacks are invoked before the destruction of either the target instance or interceptor instance.</text>
+    </assertion>
+    
+    <assertion id="e">
+      <text>An interceptor instance may hold state.</text>
+    </assertion>
+    
+    <assertion id="f">
+      <text>An interceptor instance may be the target of dependency injection.  Dependency injection is performed when the interceptor instance is created, using the naming context of the associated target class.</text>
+    </assertion>
+    
+    <assertion id="g">
+      <text>The |PostConstruct| interceptor callback method is invoked after this dependency injection has taken place on both the interceptor instances and the target instance.</text>
+    </assertion>
+    
+    <assertion id="h">
+      <text>An interceptor class shares the enterprise naming context of its associated target class.</text>
+    </assertion>
+    
+    <assertion id="i">
+      <text>Annotations ~and/or XML deployment descriptor elements~ for dependency injection or for direct JNDI lookup refer to this shared naming context.</text>
+    </assertion>      
+  </section>
+  
+  <section id="3" title="Method interceptors">
+    <assertion id="a">
+      <text>Interceptor methods that interpose on method invocations are denoted by the |AroundInvoke| annotation ~or |around-invoke| deployment descriptor element~.</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>Around-invoke methods may be defined on interceptor classes and the target class (or superclass).  However, only one around-invoke method may be present on a given class.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>Around-invoke methods can have |public|, |private|, |protected|, or |package| level access.  An around-invoke method must not be declared as |final| or |static|.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>Around-invoke methods have the following signature: |Object &lt;METHOD&gt;(InvocationContext) throws Exception|</text>
+    </assertion>
+    
+    <assertion id="e">
+      <text>An around-invoke method can invoke any component or resource that the method it is intercepting can invoke.</text>
+    </assertion>
+    
+    <assertion id="f">
+      <text>Around-invoke method invocations occur within the same transaction and security context as the method on which they are interposing.</text>
+    </assertion>
+  </section>
+  
+  <section id="3.1" title="Multiple Method Interceptor Methods">
+    <assertion id="a" testable="false">
+      <text>The deployment descriptor may be used to override the interceptor invocation order specified in annotations.</text>
+      <note>CDI doesn't support interceptors</note>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>Default interceptors, if any, are invoked first.  Default interceptors can only be specified in the deployment descriptor.  Default interceptors are invoked in the order of their specification in the deployment descriptor.</text>
+      <note>CDI doesn't support interceptors</note>
+    </assertion>
+    
+    <assertion id="c" >
+      <text>If there are any interceptor classes associated with the target class using the |Interceptors| annotation, the interceptor methods defined by those interceptor classes are invoked before any interceptor methods defined on the target class itself.</text>
+    </assertion>    
+    
+    <assertion id="d">
+      <text>The around-invoke methods defined on those interceptor classes are invoked in the same order as the specification of the interceptor classes in the |Interceptors| annotation.</text>
+    </assertion>
+    
+    <assertion id="e">
+      <text>If an interceptor class itself has superclasses, the interceptor methods defined by the interceptor class's superclasses are invoked before the interceptor method defined by the interceptor class, most general superclass first.</text>
+    </assertion>
+    
+    <assertion id="f">
+      <text>After the interceptor methods defined on interceptor classes have been invoked, then, in order: If any method-level interceptors are defined for the target class method that is to be invoked, the methods defined on those interceptor classes are invoked in the same order as the specification of those interceptor classes in the |Interceptors| annotation applied to that target class method.  If a target class has superclasses, any around-invoke methods defined on those superclasses are invoked, most general superclass first.  The around-invoke method, if any, on the target class itself is invoked.</text>
+    </assertion>
+    
+    <assertion id="g">
+      <text>If an around-invoke method is overridden by another method (regardless of whether that method is itself an around-invoke method), it will not be invoked.</text>
+    </assertion>
+    
+    <assertion id="h" testable="false">
+      <text>The deployment descriptor may be used to override the interceptor invocation order specified in annotations.</text>
+      <note>CDI doesn't support interceptors</note>
+    </assertion>
+    
+    <assertion id="i">
+      <text>The |InvocationContext| object provides metadata that enables interceptor methods to control the behaviour of the invocation chain, including whether the next method in the chain is invoked and the values of its parameters and result.</text>
+    </assertion>
+  </section>
+  
+  <section id="3.2" title="Exceptions">
+    <assertion id="a">
+      <text>Around-invoke interceptor methods may throw any exceptions that are allowed in the throws clause of the target class method on which they are interposing.</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>Around-invoke methods are allowed to catch and suppress exceptions and recover by calling |proceed()|.  Around-invoke methods are allowed to throw runtime exceptions or any checked exceptions that the associated target method allows within its throws clause.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>Around-invoke methods run in the same Java call stack as the associated target method.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>|InvocationContext.proceed()| will throw the same exception as any thrown by the associated target method unless an interceptor further down the Java call stack has caught it and thrown a different exception.</text>
+    </assertion>
+    
+    <assertion id="e" testable="false">
+      <text>Exceptions and initialization and/or cleanup operations should typically be handled in try/catch/finally blocks around the |proceed()| method.</text>
+      <note>This is a generalization></note>
+    </assertion>
+  </section>
+  
+  <section id="4" title="Timeout Method Interceptors">
+    <assertion id="a" testable="false">
+      <text>Interceptor methods that interpose on timeout methods are denoted by the |AroundTimeout| annotation or |around-timeout| deployment descriptor element.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>Around-timeout methods may be defined on interceptor classes and the target class (or superclass).  However, only one |AroundTimeout| method may be present on a given class.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <group>
+      <text>Around-timer methods can have |public|, |private|, |protected|, or |package| level access.</text>
+      
+      <assertion id="c" testable="false">
+        <text>Test with a |public| method.</text>
+        <note>CDI doesn't support timeout methods</note>
+      </assertion>
+      
+      <assertion id="d" testable="false">
+        <text>Test with a |private| method.</text>
+        <note>CDI doesn't support timeout methods</note>
+      </assertion>
+      
+      <assertion id="e" testable="false">
+        <text>Test with a |protected| method.</text>
+        <note>CDI doesn't support timeout methods</note>
+      </assertion>
+      
+      <assertion id="f" testable="false">
+        <text>Test with a |package| method.</text>
+        <note>CDI doesn't support timeout methods</note>
+      </assertion>
+    </group>
+    
+    <assertion id="g" testable="false">
+      <text>An around-timer method must not be declared as |final| or |static|.</text>
+      <note>The behaviour here is undefined.</note>
+    </assertion>
+    
+    <assertion id="h" testable="false">
+      <text>Around-timer methods must have the following signature: |Object &lt;METHOD&gt;(InvocationContext) throws Exception|</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="i" testable="false">
+      <text>An around-timer method can invoke any component or resource that its corresponding timeout method can invoke.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="j" testable="false">
+      <text>Around-timer method invocations occur within the same transaction and security context as the timeout method on which they are interposing.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="k" testable="false">
+      <text>The |InvocationContext.getTimer()| method allows the around-timeout method to retrieve the timer object associated with the timeout.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+  </section>
+  
+  <section id="4.1" title="Multiple Timeout Method Interceptor Methods">
+    <assertion id="a" testable="false">
+      <text>If multiple timeout method interceptor methods are defined for a target class, the following rules governing their invocation order apply.  The deployment descriptor may be used to override the interceptor invocation order specified in annotations.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>Default interceptors, if any, are invoked first.  Default interceptors can only be specified in the deployment descriptor.  Default interceptors are invoked in the order of their specification in the deployment descriptor.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="c" testable="false">
+      <text>If there are any interceptor classes associated with the target class using the |Interceptors| annotation, the interceptor methods defined by those interceptor classes are invoked before any interceptor methods defined on the target class itself.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="d" testable="false">
+      <text>The around-timeout methods defined on those interceptor classes are invoked in the same order as the specification of the interceptor classes in the |Interceptors| annotation.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="e" testable="false">
+      <text>If an interceptor class itself has superclasses, the interceptor methods defined by the interceptor class's superclasses are invoked before the interceptor method defined by the interceptor class, most general superclass first.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="f" testable="false">
+      <text>After the interceptor methods defined on interceptor classes have been invoked, then, in order: If any method-level interceptors are defined for the target class method that is to be invoked, the methods defined on those interceptor classes are invoked in the same order as the specification of those interceptor classes in the |Interceptors| annotation applied to that target class method.  If a target class has superclasses, any around-timeout methods defined on those superclasses are invoked, most general superclass first.  The around-timeout method, if any, on the target class itself is invoked.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="g" testable="false">
+      <text>If an around-timeout method is overridden by another method (regardless of whether that method is itself an around-timeout method), it will not be invoked.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="h" testable="false">
+      <text>The deployment descriptor may be used to override the interceptor invocation order specified in annotations.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="i" testable="false">
+      <text>The |InvocationContext| object provides metadata that enables interceptor methods to control the behaviour of the invocation chain, including whether the next method in the chain is invoked and the values of its parameters and result.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+  </section>
+  
+  <section id="4.2" title="Exceptions">
+    <assertion id="a" testable="false">
+      <text>Around-timeout interceptor methods may throw any exceptions that are allowed in the throws clause of the timeout method on which they are interposing.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>Around-timeout methods are allowed to catch and suppress exceptions and recover by calling |proceed()|.  Around-timeout methods are allowed to throw runtime exceptions or any checked exceptions that the associated target method allows within its throws clause.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="c" testable="false">
+      <text>Around-timeout methods run in the same Java call stack as the associated target method.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="d" testable="false">
+      <text>|InvocationContext.proceed()| will throw the same exception as any thrown by the associated target method unless an interceptor further down the Java call stack has caught it and thrown a different exception.</text>
+      <note>CDI doesn't support timeout methods</note>
+    </assertion>
+    
+    <assertion id="e" testable="false">
+      <text>Exceptions and initialization and/or cleanup operations should typically be handled in try/catch/finally blocks around the |proceed()| method.</text>
+      <note>This is a generalization.</note>
+    </assertion>
+  </section>
+  
+  <section id="5" title="Interceptors for LifeCycle Event Callbacks">
+    <assertion id="a">
+      <text>Interceptor methods for a lifecycle event callbacks can be defined on an interceptor class and/or directly on the target class.  The |PostConstruct| and |PreDestroy| annotations are used to define an interceptor method for a lifecycle callback event.</text>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>If the deployment descriptor is used to define interceptors, the |post-construct| and |pre-destroy| elements are used.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="c">
+      <text>Lifecycle callback interceptor methods and |AroundInvoke| interceptor methods may be defined on the same interceptor class.</text>
+    </assertion>
+    
+    <assertion id="d" testable="false">
+      <text>Lifecycle callback interceptor methods are invoked in an unspecified security context.</text>
+    </assertion>
+    
+    <assertion id="e" testable="false">
+      <text>Lifecycle callback interceptor methods are invoked in an unspecified transaction context.</text>
+    </assertion>
+    
+    <assertion id="f">
+      <text>Lifecycle callback interceptor methods may be defined on superclasses of the target class or interceptor classes.  However, a given class may not have more than one lifecycle callback interceptor method for the same lifecycle event.  Any subset or combination of lifecycle callback annotations may be specified on a given class.</text>
+    </assertion>
+    
+    <assertion id="g">
+      <text>A single lifecycle callback interceptor method may be used to interpose on multiple callback events.</text>
+    </assertion>
+    
+    <assertion id="h">
+      <text>Lifecycle callback interceptor methods defined on an interceptor class have the following signature: |void &lt;METHOD&gt;(InvocationContext)|</text>
+    </assertion>
+    
+    <assertion id="i">
+      <text>Lifecycle callback interceptor methods defined on a target class have the following signature: |void &lt;METHOD&gt;()|</text>
+    </assertion>
+    
+    <group>
+      <text>Lifecycle callback interceptor methods can have |public|, |private|, |protected| or |package| level access.</text>
+      
+      <assertion id="j">
+        <text>Test with a |public| method.</text>
+      </assertion>
+      
+      <assertion id="k">
+        <text>Test with a |private| method.</text>
+      </assertion>
+      
+      <assertion id="l">
+        <text>Test with a |protected| method.</text>
+      </assertion>
+      
+      <assertion id="m">
+        <text>Test with a |package| method.</text>
+      </assertion>      
+    </group>
+    
+    <assertion id="n" testable="false">
+      <text>A lifecycle callback interceptor method must not be declared as |final| or |static|.</text>
+      <note>The behaviour here is unspecified.</note>
+    </assertion>
+  </section>
+  
+  <section id="5.1" title="Multiple Callback Interceptor Methods for a Life Cycle Callback Event">
+    <assertion id="a">
+      <text>If multiple callback interceptor methods are defined for a lifecycle event for a target class, the following rules governing their invocation order apply.  The deployment descriptor may be used to override the interceptor invocation order specified in annotations.</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>Default interceptors, if any, are invoked first.  Default interceptors can only be specified in the deployment descriptor.  Default interceptors are invoked in the order of their specification in the deployment descriptor.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>If there are any interceptor classes associated with the target class using the |Interceptors| annotation, the lifecycle callback interceptor methods defined by those interceptor classes are invoked before any lifecycle callback interceptor methods defined on the target class itself.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>The lifecycle callback interceptor methods defined on those interceptor classes are invoked in the same order as the specification of the interceptor classes in the |Interceptors| annotation.</text>
+    </assertion>
+    
+    <assertion id="e">
+      <text>If an interceptor class itself has superclasses, the lifecycle callback interceptor methods defined by the interceptor class's superclasses are invoked before the lifecycle callback interceptor method defined by the interceptor class, most general superclass first.</text>
+    </assertion>
+    
+    <assertion id="f">
+      <text>After the lifecycle callback interceptor methods defined on interceptor classes have been invoked, then if a target class has superclasses, any lifecycle callback interceptor methods defined on those superclasses are invoked, most general superclass first.  The lifecycle callback interceptor method, if any, on the target class itself is invoked.</text>
+    </assertion>
+    
+    <assertion id="g">
+      <text>If a lifecycle callback interceptor method is overridden by another method (regardless of whether that method is itself a lifecycle callback interceptor method (of the same or different type)), it will not be invoked.</text>
+    </assertion>
+    
+    <assertion id="h" testable="false">
+      <text>The deployment descriptor may be used to override the interceptor invocation order specified in annotations.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="i">
+      <text>All lifecycle callback interceptor methods for a given lifecycle event run in the same Java call stack.</text>
+    </assertion>
+    
+    <assertion id="j">
+      <text>If there is no corresponding callback method on the target class (or any of its superclasses), the |InvocationContext.proceed()| invocation on the last interceptor method defined on an interceptor class in the chain will be a no-op.</text>
+    </assertion>
+    
+    <assertion id="k">
+      <text>The |InvocationContext| object provides metadata that enables interceptor methods to control the invocation of further methods in the chain.</text>
+    </assertion>
+  </section>
+  
+  <section id="5.2" title="Exceptions">
+    <assertion id="a">
+      <text>Lifecycle callback interceptor methods may throw runtime exceptions, but not checked exceptions.</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>The lifecycle callback interceptor methods for a lifecycle event run in the same Java call stack as the lifecycle callback method on the target class.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>|InvocationContext.proceed()| will throw the same exception as any thrown by another lifecycle callback interceptor method or lifecycle callback method on the target class unless an interceptor further down the Java call stack has caught it and thrown a different exception.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>A lifecycle callback interceptor method (other than a method on the target class or its superclasses) may catch an exception thrown by another lifecycle callback interceptor method in the invocation chain, and clean up before returning.</text>
+    </assertion>
+    
+    <assertion id="e" testable="false">
+      <text>Exceptions and initialization and/or cleanup operations should typically be handled in try/catch/finally blocks around the |proceed()| method.</text>
+      <note>This is a generalization.</note>
+    </assertion>
+      
+    <assertion id="f">
+      <text>The |PreDestroy| callbacks are not invoked when the target instance and the interceptors are discarded as a result of such exceptions: the lifecycle callback interceptor methods in the chain should perform any necessary clean-up operations as the interceptor chain unwinds.</text>
+    </assertion>
+  </section>
+  
+  <section id="6" title="InvocationContext">
+    <assertion id="a">
+      <text>The same |InvocationContext| instance will be passed to each interceptor method for a given target class method or lifecycle event interception. This allows an interceptor to save information in the context data property of the |InvocationContext| that can be subsequently retrieved in other interceptors as a means to pass contextual data between interceptors.</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>The contextual data is not sharable across separate target class method invocations or lifecycle callback events.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>If interceptors are invoked as a result of the invocation on a web service endpoint, the map returned by |getContextData()| will be the JAX-WS |MessageContext|.  The lifecycle of the |InvocationContext| instance is otherwise unspecified.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>The |getTarget()| method returns the associated target instance.</text>
+    </assertion>
+    
+    <assertion id="e">
+      <text>The |getTimer()| method returns the timer object associated with a timeout method invocation.</text>
+    </assertion>
+    
+    <assertion id="f">
+      <text>The |getTimer()| method returns |null| for around-invoke methods and lifecycle callback interceptor methods.</text>
+    </assertion>
+    
+    <group>
+      <text>The |getMethod()| method returns the method of the target class for which the interceptor was invoked.  For |AroundInvoke| methods, this is the method on the associated class; for lifecycle callback interceptor methods, |getMethod()| returns null.</text>
+      
+      <assertion id="g">
+        <text>Test with an |AroundInvoke| method.</text>
+      </assertion>
+      
+      <assertion id="h">
+        <text>Test with a lifecycle callback interceptor method.</text>
+      </assertion>
+    </group>
+    
+    <assertion id="i">
+      <text>The |getParameters()| method returns the parameters of the method invocation.</text>
+    </assertion>
+    
+    <assertion id="j">
+      <text>If |setParameters()| has been called, |getParameters()| returns the values to which the parameters have been set.</text>
+    </assertion>
+    
+    <assertion id="k">
+      <text>The |setParameters()| method modifies the parameters used for the target class method invocation.  Modifying the parameter value does not affect the determination of the method that is invoked on the target class. </text>
+    </assertion>
+    
+    <assertion id="l">
+      <text>The parameter types must match the types for the target class method, and the number of parameters supplied must equal the number of parameters on the target class method, or an |IllegalArgumentException| is thrown.</text>
+    </assertion>
+    
+    <assertion id="m">
+      <text>The |proceed()| method causes the invocation of the next interceptor method in the chain, or when called from the last |AroundInvoke| interceptor method, the target class method.</text>
+    </assertion>
+    
+    <assertion id="n">
+      <text>Interceptor methods must always call |InvocationContext.proceed()| or no subsequent interceptor methods or target class method or lifecycle callback methods will be invoked.</text>
+    </assertion>
+    
+    <assertion id="o">
+      <text>The |proceed()| method returns the result of the next method invoked.  If a method is of type |void|, proceed returns |null|.</text>
+    </assertion>
+    
+    <assertion id="p">
+      <text>For lifecycle callback interceptor methods, if there is no callback method defined on the target class, the invocation of |proceed()| in the last interceptor method in the chain is a no-op, and |null| is returned.</text>
+    </assertion>
+    
+    <assertion id="q">
+      <text>If there is more than one such interceptor method, the invocation of |proceed()| causes the container to execute those methods in order.</text>
+    </assertion>
+  </section>
+  
+  <section id="7" title="Default Interceptors">
+    <assertion id="a" testable="false">
+      <text>Default interceptors may be defined to apply to a set of target classes.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>The deployment descriptor is used to define default interceptors and their relative ordering.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="c" testable="false">
+      <text>The |ExcludeDefaultInterceptors| annotation or |exclude-default-interceptors| deployment descriptor element is used to exclude the invocation of default interceptors for a target class.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="d" testable="false">
+      <text>The default interceptors are invoked before any other interceptors for a target class.  The |interceptor-order| deployment descriptor element may be used to specify alternative orderings.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+  </section>
+  
+  <section id="8" title="Method-level Interceptors">
+    <assertion id="a">
+      <text>An around-invoke interceptor method may be defined to apply only to a specific target class method invocation, independent of the other methods of the target class.</text>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>Likewise, an around-timeout interceptor method may be defined to apply only to a specific timeout method, independent of the other timeout methods of the target class.</text>
+      <note>CDI doesn't support timeout interceptors</note>
+    </assertion>
+    
+    <assertion id="c">
+      <text>Method-level interceptors are used to specify method interceptor methods ~or timeout interceptor methods~.  If an interceptor class that is _only_ used as a method-level interceptor defines lifecycle callback interceptor methods, those lifecycle callback interceptor methods are not invoked.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>Method-specific around-invoke ~and around-timeout~ interceptors can be defined by applying the |Interceptors| annotation to the method for which the interceptors are to be invoked~, or by means of the |interceptor-binding| deployment descriptor element~.</text>
+    </assertion>
+    
+    <assertion id="e">
+      <text>If more than one method-level interceptor is defined for a target class method, the interceptors are invoked in the order specified.</text>
+    </assertion>
+    
+    <assertion id="f" testable="false">
+      <text>Method-level target class method interceptors are invoked in addition to any default interceptors and interceptors defined for the target class (and its superclasses).  The deployment descriptor may be used to override this ordering.</text>
+      <note>Default interceptors not supported</note>
+    </assertion>
+    
+    <assertion id="g">
+      <text>The same interceptor may be applied to more than one method of the target class.</text>
+    </assertion>
+    
+    <assertion id="h">
+      <text>The applicability of a method-level interceptor to more than one method of an associated target class does not affect the relationship between the interceptor instance and the target class - only a single instance of the interceptor class is created per target class instance.</text>
+    </assertion>
+    
+    <assertion id="i" testable="false">
+      <text>The |ExcludeDefaultInterceptors| annotation or |exclude-default-interceptors| deployment descriptor element, when applied to a target class method, is used to exclude the invocation of default interceptors for that method.</text>
+      <note>CDI doesn't support default interceptors</note>
+    </assertion>
+    
+    <assertion id="j">
+      <text>The |ExcludeClassInterceptors| annotation ~or |exclude-class-interceptors| deployment descriptor element~ is used ~similarly~ to exclude the invocation of the class-level interceptors.</text>
+    </assertion>
+    
+    <assertion id="k" testable="false">
+      <text>If default interceptors have also been defined for the bean class, they can be excluded for the specific method by applying the |ExcludeDefaultInterceptors| annotation on the method.</text>
+      <note>CDI doesn't support default interceptors</note>
+    </assertion>
+  </section>
+  
+  <section id="9" title="Specification of Interceptors in the Deployment Descriptor">
+    <assertion id="a" testable="false">
+      <text>The deployment descriptor can be used as an alternative to metadata annotations to specify interceptors and their binding to target classes or to override the invocation order of interceptors as specified in annotations.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+  </section>
+  
+  <section id="9.1" title="Specification of Interceptors">
+    <assertion id="a" testable="false">
+      <text>The |interceptor| deployment descriptor element is used to specify the interceptor methods of an interceptor class.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>The interceptor methods are specified by using the |around-invoke|, |around-timeout|, |post-construct| and |pre-destroy| elements.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="c" testable="false">
+      <text>At most one method of a given interceptor class can be designated as an around-invoke method, an around-timeout method, a post-construct method, or pre-destroy method, regardless of whether the deployment descriptor is used to defined interceptors or whether some combination of annotations and deployment descriptor elements is used.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+  </section>
+  
+  <section id="9.2" title="Binding of Interceptors to TargetClasses">
+    <assertion id="a" testable="false">
+      <text>The |interceptor-binding| element is used to specify the binding of interceptor classes to target classes and their methods.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>The |target-name| element must identify the associated target class or the wildcard value "*" (which is used to define interceptors that are bound to all target classes).</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="c" testable="false">
+      <text>The |interceptor-class| element specifies the interceptor class.  The interceptor class contained in an |interceptor-class| element must either be declared in the |interceptor| deployment descriptor element or appear in a least one |@Interceptor| annotation on a target class.  The |interceptor-order| element is used as an optional alternative to specify a total ordering over the interceptors defined for the given level and above.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="d" testable="false">
+      <text>The |exclude-default-interceptors| and |exclude-class-interceptors| elements specify that default interceptors and class interceptors, respectively, are not to be applied to a target class and/or method.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="e" testable="false">
+      <text>The |method-name| element specifies the method name for a method-level interceptor; and the optional |method-params| elements identify a single method among multiple methods with an overloaded method name.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="f" testable="false">
+      <text>Interceptors bound to all target classes using the wildcard syntax "*" are default interceptors.  In addition, interceptors may be bound at the level of the target class (class-level interceptors) or methods of the target class (method-level interceptors).</text>?
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="g" testable="false">
+      <text>The binding of interceptors to classes is additive.  If interceptors are bound at the class-level and/or default-level as well as at the method-level, both class-level and/or default-level as well as method-level interceptors will apply.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="h" testable="false">
+      <text>The deployment descriptor may be used to augment the interceptors and interceptor methods defined by means of annotations.  When the deployment descriptor is used to augment the interceptors specified in annotations, the interceptor methods specified in the deployment descriptor will be invoked after those specified in annotations, according to the ordering specified earlier.  The |interceptor-order| deployment descriptor element may be used to override this ordering.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="i" testable="false">
+      <text>The |exclude-default-interceptors| element disables default interceptors for the level at which it is specified and lower.  That is, |exclude-default-interceptors| when applied at the class-level disables the application of default-interceptors for all methods of the class.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="j" testable="false">
+      <text>The |exclude-class-interceptors| element applied to a method, disables the application of class-level interceptors for the given method.  Explicitly listing an excluded higher-level interceptor at a lower level causes it to be applied at that level and below.</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    <assertion id="k" testable="false">
+      <text>It is possible to override the ordering of interceptors by using the |interceptor-order| element to specify a total ordering of interceptors at class-level and/or method-level.  If the |interceptor-order| element is used, the ordering specified at the given level must be a total order over all interceptor classes that have been defined at that level and above (unless they have been explicitly excluded by means of one of the exclude- elements described above).</text>
+      <note>CDI doesn't support deployment descriptors</note>
+    </assertion>
+    
+    
+  </section>
+  
+</specification>

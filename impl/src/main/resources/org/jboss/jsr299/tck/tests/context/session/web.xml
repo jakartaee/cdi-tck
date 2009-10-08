@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <description>Test servlets used to test session contexts.</description>
+ <display-name>Session Context Tests</display-name>
+ <filter>
+  <display-name>Test Filter for Sessions</display-name>
+  <filter-name>filterTest</filter-name>
+  <filter-class>org.jboss.jsr299.tck.tests.context.session.TestFilter</filter-class>
+ </filter>
+ <filter-mapping>
+  <filter-name>filterTest</filter-name>
+  <url-pattern>/SimplePage.html</url-pattern>
+ </filter-mapping>
+ <listener>
+  <listener-class>org.jboss.testharness.impl.runner.servlet.HarnessServletListener</listener-class>
+ </listener>
+ <servlet>
+  <display-name>serviceMethod</display-name>
+  <servlet-name>service</servlet-name>
+  <servlet-class>org.jboss.jsr299.tck.tests.context.session.ServiceMethodServlet</servlet-class>
+ </servlet>
+ <servlet>
+  <display-name>Introspection Service for Sessions</display-name>
+  <servlet-name>sessionIntrospector</servlet-name>
+  <servlet-class>org.jboss.jsr299.tck.tests.context.session.IntrospectSession</servlet-class>
+ </servlet>
+ <servlet>
+  <display-name>Session Invalidation</display-name>
+  <servlet-name>invalidator</servlet-name>
+  <servlet-class>org.jboss.jsr299.tck.tests.context.session.InvalidateSession</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>service</servlet-name>
+  <url-pattern>/serviceMethodTest</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>sessionIntrospector</servlet-name>
+  <url-pattern>/IntrospectSession</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>invalidator</servlet-name>
+  <url-pattern>/InvalidateSession</url-pattern>
+ </servlet-mapping>
+ <session-config>
+  <session-timeout>10</session-timeout>
+ </session-config>
+ <login-config>
+  <auth-method>BASIC</auth-method>
+ </login-config>
+</web-app>

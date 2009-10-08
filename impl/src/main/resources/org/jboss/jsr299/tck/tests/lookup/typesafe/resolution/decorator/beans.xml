@@ -1,0 +1,5 @@
+<beans> 
+   <decorators>
+      <class>org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.decorator.CatDecorator</class>
+   </decorators>
+</beans>

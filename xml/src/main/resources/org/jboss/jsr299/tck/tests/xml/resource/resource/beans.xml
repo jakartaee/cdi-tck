@@ -1,0 +1,11 @@
+<Beans xmlns="urn:java:ee"
+       xmlns:app="urn:java:org.jboss.jsr299.tck.tests.xml.resource.resource"
+       xmlns:m="urn:java:javax.enterprise.inject.spi">
+          
+   <m:Manager>
+      <Resource>
+         <mappedName>java:app/Manager</mappedName>
+      </Resource>
+      <app:Another />
+   </m:Manager>
+</Beans>

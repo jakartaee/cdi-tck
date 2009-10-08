@@ -1,0 +1,5 @@
+<beans> 
+  <interceptors>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.multipleBindings.MissileInterceptor</class>      
+  </interceptors>
+</beans>

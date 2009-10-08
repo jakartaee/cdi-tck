@@ -1,0 +1,11 @@
+<Beans xmlns="urn:java:ee"
+       xmlns:test="urn:java:org.jboss.jsr299.tck.tests.implementation.simple.lifecycle"> 
+   <Deploy>
+      <Standard />
+      <Production />
+      <test:AnotherDeploymentType />
+   </Deploy>
+   <test:Farm>
+      <test:location>Indiana</test:location>
+   </test:Farm>
+</Beans>

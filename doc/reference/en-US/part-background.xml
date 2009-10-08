@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE part PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<part>
+   <title>Getting Acquainted with the TCK</title>
+
+   <partintro>
+      <para>
+         The CDI TCK must be used to ensure that your implementation conforms to
+         the CDI specification. This part introduces the TCK, gives some
+         background about its purpose, states the requirements for passing the
+         TCK and outlines the appeals process.
+      </para>
+      <para>
+         In this part you will learn where to obtain the CDI TCK and supporting
+         software. You are then presented with recommendations of how to
+         organize and configure the software so that you are ready to execute
+         the TCK.
+      </para>
+      <para>
+         Finally, it discusses the reporting provided by the TCK.
+      </para>
+   </partintro>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="introduction.xml" />
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="appeals-process.xml" />
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="installation.xml" />
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="configuration.xml" />
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="reporting.xml" />
+<!--
+vim: ts=3:sw=3:tw=80:set expandtab
+-->
+</part>

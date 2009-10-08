@@ -1,0 +1,6 @@
+<beans> 
+  <interceptors>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.interceptorOrder.SecondInterceptor</class>      
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.interceptorOrder.FirstInterceptor</class>
+  </interceptors>
+</beans>

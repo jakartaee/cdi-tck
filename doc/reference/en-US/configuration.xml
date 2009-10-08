@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<chapter id="configuration">
+   <title>Configuration</title>
+   <para>
+      This chapter lays out how to configure the TCK Harness by specifying
+      the SPI implementation classes, defining the target container connection
+      information, and various other switches. You then learn how to setup a TCK
+      runner project that executes the the TCK test suite, putting these
+      settings into practice. Finally, a detailed account of how the JBoss Test
+      Harness negotiates the execution of the tests in the container is given.
+   </para>
+
+   <para>
+      This chapter does not discuss in detail how to use the TCK in standalone
+      mode. The JBoss Test Harness guide provides more on running in standalone
+      mode.
+   </para>
+   <section id="tck-harness-properties">
+      <title>TCK Harness Properties</title>
+      <para>
+         The JBoss Test Harness allows the test suite to be launched in a
+         pluggable fashion. In order to execute the TCK, the JBoss Test Harness
+         must be configured by specifying implementations of the test launcher
+         and container APIs.
+      </para>
+      <para>
+         System properties and/or the resource
+         <code>META-INF/jboss-test-harness.properties</code>,
+         a Java properties file, are used to configure the JBoss Test Harness.
+         You can read more about configuring the JBoss Test Harness in
+         <xref linkend="test-harness-properties" />.
+      </para>
+      <para>
+         You should set the following properties:
+      </para>
+      <table frame="all">
+         <title>Required JBoss Test Harness Configuration Properties</title>
+         <tgroup cols="2">
+            <colspec colnum="1" colname="property" colwidth="5*" />
+            <colspec colnum="2" colname="description" colwidth="2*" />
+            <thead>
+               <row>
+                  <entry>Property = Required/Example Value</entry>
+                  <entry>Description</entry>
+               </row>
+            </thead>
+            <tbody>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.libraryDirectory=/path/to/extra/libraries
+                     </literal>
+                  </entry>
+                  <entry>
+                     Directory containing extra JARs you want placed in
+                     artifact library directory such as the porting package
+                     implementation.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.standalone=false</literal>
+                  </entry>
+                  <entry>
+                     You must run the tests in-container to pass the TCK
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.runIntegrationTests=true
+                     </literal>
+                  </entry>
+                  <entry>
+                     You must run the integration tests to pass the TCK
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.spi.Containers=com.acme.AcmeContainer
+                     </literal>
+                  </entry>
+                  <entry>
+                     The container implementation for deploying and
+                     executing
+                     in-container tests. See
+                     <xref linkend="deployment-api-contributions" />
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.api.TestLauncher=org.jboss.testharness.impl.runner.servlet.ServletTestLauncher
+                     </literal>
+                  </entry>
+                  <entry>
+                     You should use the
+                     <literal>ServletTestLauncher</literal>
+                     for Java EE 6 and Java EE 6 Web Profile.
+                  </entry>
+               </row>
+            </tbody>
+         </tgroup>
+      </table>
+      <para>
+         To run the full TCK you must additionally implement
+         <literal>org.jboss.testharness.spi.Containers</literal>,
+         which handles deploying the test artifact to the container. An
+         implementations of this API is already available for JBoss AS 5.1.
+         Therefore, you only need to implement this part of the porting package
+         if you wish to use another container.
+      </para>
+      <note id="deployment-api-contributions">
+         <para>
+            Red Hat Middleware LLC encourages CDI implementators to
+            contribute JBoss Test Harness Deployment API implementations for
+            other containers under the ASL license. Please contact the CDI TCK
+            lead. 
+         </para>
+      </note>
+   </section>
+   <section>
+      <title>The Porting Package</title>
+      <para>
+         The CDI TCK relies on an implementation of the porting package to
+         function. The porting package can be divided into two parts. The first
+         part is comprised of extensions to the CDI SPIs to allow testing of a
+         container. The second part must implement the JBoss Test Harness
+         artifact deployment APIs for deploying artifacts to the Java EE
+         container.
+      </para>
+      <para>
+         As mentioned earlier, there are times when the tests need to tap
+         directly into the CDI implementation to manipulate behavior or verify
+         results. The porting package includes a set of SPIs that provide the
+         TCK this level of access without tying the tests to a given
+         implementation.
+      </para>
+      <para>
+         The four SPI classes in the CDI TCK are as follows:
+      </para>
+      <itemizedlist>
+         <listitem>
+            <para>
+               <literal>org.jboss.jsr299.tck.spi.Beans</literal>
+            </para>
+         </listitem>
+         <listitem>
+            <para>
+               <literal>org.jboss.jsr299.tck.spi.Contexts</literal>
+            </para>
+         </listitem>
+         <listitem>
+            <para>
+               <literal>org.jboss.jsr299.tck.spi.EL</literal>
+            </para>
+         </listitem>
+         <listitem>
+            <para>
+               <literal>org.jboss.jsr299.tck.spi.Managers</literal>
+            </para>
+         </listitem>
+      </itemizedlist>
+
+      <para>
+         Please consult the JavaDoc for these interfaces for the implementation
+         requirements.
+      </para>
+
+   </section>
+
+   <section>
+      <title>Configuring TestNG to execute the TCK</title>
+      <para>
+         The JBoss Test Harness is built atop TestNG, and it's TestNG that is
+         responsible for selecting the tests to execute, the order of
+         execution, and reporting the results. Detailed TestNG documentation
+         can be found at <ulink
+         url="http://testng.org/doc/documentation-main.html">testng.org</ulink>.
+      </para>
+      <para>
+         The
+         <literal>tck-tests.xml</literal>
+         artifact provided in the TCK distribution must be run by TestNG 5.9
+         (described by the TestNG documenation as "with a
+         <literal>testng.xml</literal>
+         file") unmodified for an implementation to pass the TCK. This file also
+         allows tests to be excluded from a run:
+      </para>
+      <programlisting><![CDATA[<suite name="JSR-299 TCK" verbose="2">
+   <test name="JSR-299 TCK">
+      ...
+      <classes>
+         <class name="org.jboss.jsr299.tck.tests.context.application.ApplicationContextTest">
+            <methods>
+               <exclude name="testApplicationScopeActiveDuringServiceMethod"/>
+            </methods>
+         </class>
+      </classes>
+      ...
+   </test>
+</suite>]]></programlisting>
+
+      <para>
+         TestNG provides extensive reporting information. Depending on the
+         build tool or IDE you use, the reporting will take a different format.
+         Please consult the TestNG documentation and the tool documentation for
+         more information.
+      </para>
+   </section>
+
+   <section>
+      <title>Configuring your build environment to execute the TCK</title>
+      <para>
+         It's beyond the scope of this guide to describe in how to set up your
+         build environment to run the TCK. The JBoss Test Harness guide
+         describes how Web Beans uses Maven 2 to execute the CDI TCK. See
+         <xref linkend="test-suite-runner" />. The TestNG documentation provides
+         extensive information on launching TestNG using the Java, Ant, Eclipse
+         or IntellJ IDEA.
+      </para>
+
+   </section>
+<!--
+vim: ts=3:sw=3:tw=80:set expandtab
+-->
+</chapter>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<chapter id="introduction">
+   <title>Introduction (CDI TCK)</title>
+
+   <para>
+      This chapter explains the purpose of a TCK and identifies the
+      foundation elements of the CDI TCK.
+   </para>
+   <section>
+      <title>TCK Primer</title>
+      <para>
+         A TCK, or Technology Compatibility Kit, is one of the three required
+         pieces for any JSR (the other two being the specification document and
+         the reference implementation). The TCK is a set of tools and tests to
+         verify that an implementation of the technology conforms to the
+         specification. The tests are the primary component, but the tools serve
+         an equally critical role of providing a framework and/or set of SPIs
+         for executing the tests.
+      </para>
+      <para>
+         The tests in the TCK are derived from assertions in the written
+         specification document. The assertions are itemized in an XML
+         document, where they each get assigned a unique identifier, and
+         materialize as a suite of automated tests that collectively validate
+         whether an implementation complies with the aforementioned assertions,
+         and in turn the specification. For a particular implementation to be
+         certified, all of the required tests must pass (i.e., the provided
+         test suite must be run unmodified).
+      </para>
+      <para>
+         A TCK is entirely implementation agnostic. Ideally, it should validate
+         assertions by consulting the specficiation's public API.  However, when
+         the information returned by the public API is not low-level enough to
+         validate the assertion, the implementation must be consulted directly.
+         In this case, the TCK provides an independent API as part of a porting
+         package that enables this transparency. The porting package must be
+         implemented for each CDI implementation. Section 1.3.4 introduces the
+         porting package and section 4.1 covers the requirements for
+         implementing it.
+      </para>
+      <note>
+         <para>
+            Sun Microsystems, Inc. will implement the porting package for the
+            CDI RI and test the CDI RI on the Java EE Reference Implementation.
+         </para>
+      </note>
+   </section>
+   <section>
+      <title>Compatibility Testing</title>
+
+      <para>
+         The goal of any specification is to eliminate portability problems
+         so long as the program which uses the implementation also conforms to
+         the rules laid out in the specification.
+      </para>
+      <para>
+         Executing the TCK is a form of compatibility testing. It's important
+         to understand that compatibility testing is distinctly different from
+         product testing. The TCK is not concerned with robustness, performance
+         or ease of use, and therefore cannot vouch for how well an
+         implementation meets these criteria. What a TCK can do is to ensure the
+         exactness of an implementation as it relates to the specification.
+      </para>
+      <para>
+         Compatibility testing of any feature relies on both a complete
+         specification and a complete reference implementation. The reference
+         implementation demonstrates how each test can be passed and provides
+         additional context to the implementor during development for the
+         corresponding assertion.
+      </para>
+
+      <section>
+         <title>Why Compatibility Is Important</title>
+         <para>
+            Java platform compatibility is important to different groups
+            involved with Java technologies for different reasons:
+         </para>
+         <itemizedlist>
+            <listitem>
+               <para>
+                  Compatibility testing is the means by which the JCP ensures
+                  that the Java platform does not become fragmented as it's
+                  ported to different operating systems and hardware.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  Compatibility testing benefits developers working in the
+                  Java programming language, enabling them to write applications
+                  once and deploy them across heterogeneous computing
+                  environments without porting.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  Compatibility testing enables application users to obtain
+                  applications from disparate sources and deploy them with
+                  confidence.
+               </para>
+            </listitem>
+            <listitem>
+               <para>Conformance testing benefits Java platform implementors by
+                  ensuring the same extent of reliability for all Java platform
+                  ports.
+               </para>
+            </listitem>
+         </itemizedlist>
+         <para>
+            The CDI specification goes to great lengths to ensure that
+            programs written for Java EE are compatible and the TCK is rigorous
+            about enforcing the rules the specification lays down.
+         </para>
+      </section>
+
+   </section>
+
+   <section>
+      <title>About the CDI TCK</title>
+
+      <para>
+         The CDI TCK is designed as a portable, configurable and automated test
+         suite for verifying the compatibility of an implementation of the
+         JSR-299: Contexts and Dependency Injection for Java EE specification.
+         The test suite is built atop TestNG and provides a series of extensions
+         that allow runtime packaging and deployment of JEE artifacts for
+         in-container testing (JBoss Test Harness).
+      </para>
+      <note>
+         <para>
+            The CDI TCK harness is based on the JBoss Test harness, which
+            provides most of the aforementioned functionality.
+         </para>
+      </note>
+      <para>
+         Each test class in the suite acts as a deployable unit. The
+         deployable units, or artifacts, are defined declaratively using
+         annotations. The artifact produced can be either a WAR or an EAR.
+      </para>
+      <para>
+         The declarative approach allows many of the tests to be executed in
+         a standalone implementation of CDI, accounting for a boast in developer
+         productivity. However, an implementation is only valid if all tests
+         pass using the in-container execution mode. The standalone mode is
+         merely a developer convenience.
+      </para>
+
+      <section>
+         <title>CDI TCK Specifications and Requirements</title>
+         <para>
+            This section lists the applicable requirements and specifications
+            for the CDI TCK.
+         </para>
+         <itemizedlist>
+            <listitem>
+               <para>
+                  <emphasis role="bold">Specification requirements</emphasis>
+                  - Software requirements for a CDI implementation are itemized
+                  in section 1.2, "Relationship to other specifications" in the
+                  CDI specification, with details provided throughout the
+                  specification. Generally, the CDI specification targets the
+                  Java EE 6 platform and is aligned with its specifications.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">Contexts and Dependency Injection for
+                     Java EE 1.0 API</emphasis>
+                  - The Java API defined in the CDI specification and provided
+                  by the reference implementation.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">JBoss Test Harness</emphasis>
+                  - The CDI TCK requires version 1.0.0 of the JBoss Test
+                  Harness. The Harness is based on TestNG 5.x 
+                  (<ulink url="http://testng.org">http://testng.org</ulink>).
+                  You can read more about the harness in
+                  <xref linkend="test-harness" />.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">Porting Package</emphasis>
+                  - An implementation of SPIs that are required for the test
+                  suite to run the in-container tests and at times extend the
+                  CDI 1.0 API to provide extra information to the TCK.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">TCK Audit Tool</emphasis>
+                  - An itemization of the assertions in the specification
+                  documents which are cross referenced by the individual tests.
+                  Describes how well the TCK covers the specification.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">Reference runtime</emphasis>
+                  - The designated reference runtimes for compatibility testing
+                  of the CDI specification is the Sun Java Platform, Enterprise
+                  Edition (Java EE) 6 reference implementation (RI). See details
+                  at Java EE 6
+                  (<ulink url="http://java.sun.com/javaee/6/docs/api/">http://java.sun.com/javaee/6/docs/api/</ulink>).
+               </para>
+            </listitem>
+         </itemizedlist>
+      </section>
+
+      <section>
+         <title>CDI TCK Components</title>
+         <para>The CDI TCK includes the following components:</para>
+         <itemizedlist>
+            <listitem>
+               <para>
+                  <emphasis role="bold">JBoss Test Harness 1.0.0</emphasis>
+                  and related documentation.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">TestNG 5.9</emphasis>, the testing
+                  framework on which the JBoss Test Harness is based and which
+                  provides the extension points for selecting an executing the
+                  tests in the test suite.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">Porting Package SPIs</emphasis>
+                  - Extensions to the CDI SPIs to allow testing of a
+                  container.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">The test suite</emphasis>, which is a
+                  collection of TestNG tests, the TestNG test suite descriptor
+                  and supplemental resources that configure CDI and other
+                  software components.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">The TCK audit</emphasis>
+                  is used to list out the assertions identified in the CDI
+                  specification. It matches the assertions to testcases in the
+                  test suite by unique identifier and produces a coverage report.
+               </para>
+               <para>
+                  The audit document is provided along with the TCK; at least
+                  75% of assertions are tested. Each assertion is defined with a
+                  reference to a chapter, section and paragraph from the
+                  specification document, making it easy for the implementor to
+                  locate the language in the specification document that
+                  supports the feature being tested.
+         </para>
+            </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">TCK documentation</emphasis>
+                  accompanied by release notes identifying updates between
+                  versions.
+               </para>
+            </listitem>
+         </itemizedlist>
+         <note>
+            <para>
+               Sun Microsystems, Inc. will implement the porting package for the
+               CDI RI and test the CDI RI on the Java EE Reference
+               Implementation as well as other platforms.
+            </para>
+         </note>
+         <para>The CDI TCK has been tested run on following platforms:</para>
+         <itemizedlist>
+            <listitem>
+               <para>
+                  JBoss AS 5.1.0.GA using Sun Java SE 6 on Red Hat Enterprise 
+                  Linux 5.2
+               </para>
+            </listitem>
+         </itemizedlist>
+         <para>
+            CDI supports Java EE 5, Java EE 6, Java EE 6 Web Profile and the
+            Embeddable EJB 3.1. The TCK will execute on any of these runtimes, 
+            but is only part of the CTS for Java EE 6 and Java EE 6 Web Profile.
+         </para>
+      </section>
+   </section>
+<!--
+vim: ts=3:sw=3:tw=80:set expandtab
+-->
+</chapter>

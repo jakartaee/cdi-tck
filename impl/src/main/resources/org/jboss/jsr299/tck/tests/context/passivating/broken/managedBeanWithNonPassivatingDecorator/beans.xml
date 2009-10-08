@@ -1,0 +1,4 @@
+<beans> 
+   <decorators>        <decorator>org.jboss.jsr299.tck.tests.context.passivating.broken.managedBeanWithNonPassivatingDecorator.MaarianhaminaDecorator</decorator>
+   </decorators>
+</beans>

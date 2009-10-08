@@ -1,0 +1,6 @@
+<beans> 
+  <interceptors>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.broken.sameClassListedTwiceInBeansXml.FordInterceptor</class>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.broken.sameClassListedTwiceInBeansXml.FordInterceptor</class>    
+  </interceptors>
+</beans>

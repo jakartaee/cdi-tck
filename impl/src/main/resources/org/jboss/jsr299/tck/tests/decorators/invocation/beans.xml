@@ -1,0 +1,7 @@
+<beans> 
+   <decorators>
+      <class>org.jboss.jsr299.tck.tests.decorators.invocation.TimestampLogger</class>
+      <class>org.jboss.jsr299.tck.tests.decorators.invocation.FooDecorator1</class>
+      <class>org.jboss.jsr299.tck.tests.decorators.invocation.FooDecorator2</class>
+   </decorators>
+</beans>

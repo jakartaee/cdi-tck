@@ -1,0 +1,21 @@
+<Beans xmlns="urn:java:ee" 
+		xmlns:test="urn:java:org.jboss.jsr299.tck.tests.xml.namespace.javatypes">
+	<Deploy>
+		<Standard />
+		<Production />
+	</Deploy>
+	<StringBuilder>
+		<test:CurrentCustomerName />
+	</StringBuilder>
+	<StringBuilder>
+		<test:CurrentCustomerAddress />
+	</StringBuilder>
+	<test:ShipTo>
+		<test:name>
+			<test:CurrentCustomerName />
+		</test:name>
+		<test:address>
+			<test:CurrentCustomerAddress />
+		</test:address>
+	</test:ShipTo>
+</Beans>

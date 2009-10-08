@@ -1,0 +1,8 @@
+<beans> 
+  <interceptors>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.AtomicInterceptor</class>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.MissileInterceptor</class>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.SecureInterceptor</class>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.TransactionalInterceptor</class>
+  </interceptors>
+</beans>

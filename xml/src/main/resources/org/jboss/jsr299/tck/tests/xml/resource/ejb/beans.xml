@@ -1,0 +1,12 @@
+<Beans xmlns="urn:java:ee"
+       xmlns:test="urn:java:org.jboss.jsr299.tck.tests.xml.resource.ejb"> 
+   <Deploy>
+      <Standard />
+      <Production />
+   </Deploy>
+   <test:RemoteEjbInterface>
+      <EJB>
+         <mappedName>ejb/MyRemoteEjb</mappedName>
+      </EJB>
+   </test:RemoteEjbInterface>
+</Beans>

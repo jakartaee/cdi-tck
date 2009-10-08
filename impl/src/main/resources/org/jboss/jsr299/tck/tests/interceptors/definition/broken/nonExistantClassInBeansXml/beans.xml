@@ -1,0 +1,5 @@
+<beans> 
+  <interceptors>
+    <class>com.acme.Foo</class>
+  </interceptors>
+</beans>

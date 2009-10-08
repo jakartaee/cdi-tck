@@ -1,0 +1,7 @@
+<beans> 
+   <decorators>
+      <decorator>org.jboss.jsr299.tck.tests.decorators.definition.broken.decoratorCanNotDecorateDecorator.FooDecorator</decorator>
+      <decorator>org.jboss.jsr299.tck.tests.decorators.definition.broken.decoratorCanNotDecorateDecorator.FooDecoratorDecorator</decorator>      
+   </decorators>
+
+</beans>

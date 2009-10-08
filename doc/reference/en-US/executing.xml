@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<chapter id="executing">
+   <title>Executing the Test Suite</title>
+   <para>
+      This chapter explains how to run the TCK on Web Beans as well as your own
+      implementation. The CDI TCK uses the Maven 2 TestNG plugin and the JBoss
+      Test Harness to execute the test suite. Learning to execute the test suite
+      from Maven 2 is prerequisite knowlege for running the tests in an IDE,
+      such as Eclipse.
+   </para>
+   <section>
+      <title>The Test Suite Runner</title>
+
+      <para>
+         The test suite is executed by the Maven 2 TestNG plugin during the test
+         phase of the Maven 2 life cycle. The execution happens within a TCK
+         runner project (as opposed to the TCK project itself). Web Beans
+         includes a TCK runner project that executes the CDI TCK on Web Beans
+         running inside JBoss AS 5.1. To execute the CDI TCK on your own CDI
+         implementation, you could modify the TCK runner project included with
+         Web Beans to use your CDI implementation as described in <xref
+         linkend="configuration" />.
+      </para>
+   </section>
+
+   <section>
+      <title>Running the Tests In Standalone Mode</title>
+      <para>
+         To execute the TCK test suite against Web Beans, first switch to the
+         jboss-tck-runner directory in the extracted Web Beans distribution:
+      </para>
+
+      <programlisting>cd webbeans/jboss-tck-runner</programlisting>
+      <note>
+         <para>
+             These instructions assume you have extracted the CDI-related
+             software according to the recommendation given in <xref
+             linkend="tck-environment"/>.
+         </para>
+      </note>
+      <para>
+         Then execute the Maven 2 life cycle through the test phase:
+      </para>
+      <programlisting>mvn test</programlisting>
+      <para>
+         Without any command-line flags, the test suite is run in standalone
+         mode, which means that any test class with the
+         <literal>@org.jboss.testharness.impl.packaging.IntegrationTest
+         </literal>
+         annotation is skipped. This mode uses the
+         <literal>StandaloneContainers</literal>
+         SPI to invoke the test artifact within a mock Java EE life cycle and
+         capture the results of the test. However, passing the suite in this
+         mode is not sufficient to pass the TCK as a whole. The suite must be
+         passed while executing using the in-container mode.
+      </para>
+   </section>
+   <section>
+      <title>Running the Tests In the Container</title>
+      <para>
+         To execute the test suite using in-container mode with the JBoss TCK
+         runner, you first have to setup JBoss AS as described in the 
+         <xref linkend="tck-in-jboss-as" /> callout.
+      </para>
+      <para>
+         Then, execute the TCK runner with Maven 2 as follows:
+      </para>
+      <programlisting>mvn test -Dincontainer</programlisting>
+      <para>
+         The presence of the <literal>incontainer</literal> property activates a
+         Maven 2 profile that assigns the
+         <literal>org.jboss.testharness.standalone</literal> system property to
+         <literal>false</literal> and the
+         <literal>org.jboss.testharness.runIntegrationTests</literal> system
+         property to <literal>true</literal>, hence activating the in-container
+         test mode. This time, all the test artifacts in the test suite are
+         executed.
+      </para>
+      <para>
+         The in-container profile will also start and stop the application
+         server automatically, a feature which the profile activates by setting
+         the <literal>org.jboss.testharness.container.forceRestart</literal> to
+         <literal>true</literal>.
+      </para>
+      <para>
+         The in-container mode uses the <literal>Containers</literal> SPI to
+         deploy the test artifact to the container and execute the test in a
+         true Java EE life cycle. The JBoss TCK runner has a dependency on the
+         library that provides an implementation of this interface for JBoss AS
+         5.1.
+      </para>
+      <para>
+         Since in-container tests are executed in a remote JVM, the results of
+         the test must be communicated back to the runner over a
+         container-supported protocol. The JBoss Test Harness provides
+         servlet-based communication over HTTP as described in <xref
+         linkend="incontainer-communication" />.
+      </para>
+   </section>
+   <section>
+      <title>Dumping the Test Artifacts</title>
+      <para>
+         As you have learned, when the test suite is executing using
+         in-container mode, each test class is packaged as a deployable artifact
+         and deployed to the container. The test is then executed within the
+         context of the deployed application. This leaves room for errors in
+         packaging. When investigating a test failure, you may find it helpful
+         to inspect the artifact after it's generated. The TCK can accommodate
+         this type of inspection by "dumping" the generated artifact to disk.
+      </para>
+      <para>
+         The feature just described is activated in the jboss-tck-runner project
+         by appending the <literal>dumpArtifacts</literal> command line property
+         to the end of the command that invokes the Maven 2 test phase.
+      </para>
+      <programlisting>mvn test-compile -DdumpArtifacts</programlisting>
+      <para>
+         The directory where the artifacts get written is configured using the
+         <literal>org.jboss.testharness.outputDirectory</literal> property. The
+         <literal>dumpArtifacts</literal> profile in the jboss-tck-runner
+         project sets this value to the relative directory path
+         <literal>target/jsr299-artifacts</literal>.
+      </para>
+      <para>
+         You can read more about this feature in <xref linkend="dumping-test-artifacts" />.
+      </para>
+   </section>
+<!--
+vim: ts=3:sw=3:tw=80:set expandtab
+-->
+</chapter>

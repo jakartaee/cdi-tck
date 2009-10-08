@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<chapter id="installation">
+   <title>Installation</title>
+   <para>
+      This chapter explains how to obtain the TCK and supporting software and
+      provides recommendations for how to install/extract it on your system.
+   </para>
+   <section>
+      <title>Obtaining the Software</title>
+      <para>
+         You can obtain a release of the CDI TCK project from the from the
+         <ulink url="http://seamframework.org/Download">download page</ulink>
+         on Seam Framework website. The CDI TCK is distributed as a ZIP file,
+         which contains the TCK artifacts (the test suite binary and source,
+         porting package API binary and source, the test suite descriptor, the
+         audit source and report) in
+         <code>/artifacts</code>, the TCK library dependencies in
+         <code>/lib</code>
+         and documentation in
+         <code>/lib</code>.
+      </para>
+      <para>
+         You can also download the currnet source code from
+         <ulink url="http://anonsvn.jboss.org/repos/webbeans/tck/trunk">JBoss SVN repository</ulink>.
+      </para>
+      <para>
+         The TCK project is available in the JBoss Maven 2 repository as
+         <code>org.jboss.jsr299.tck:jsr299-tck-impl</code>; the POM defines all
+         dependencies required to run the TCK.
+      </para>
+      <para>
+         Executing the TCK requires a Java EE 5 or better runtime environment
+         (i.e., application server), to which the test artifacts are deployed
+         and the individual tests are invoked. The TCK does not depend on any
+         particular Java EE implementation.
+      </para>
+      <para>
+         The JSR-299: Contexts and Dependency Injection for Java EE 1.0
+         reference implementation (RI) project is named Web Beans. You can
+         obtain the latest Web Beans release from the
+         <ulink url="http://seamframework.org/Download">download page</ulink>
+         on Seam Framework website.
+      </para>
+      <note>
+         <para>
+            Web Beans is not required for running the CDI TCK, but it can be
+            used as a reference for familiarizing yourself with the TCK before
+            testing your own CDI implementation.
+         </para>
+      </note>
+      <para>
+         Naturally, to execute Java programs, you must have a Java SE runtime
+         environment. The TCK requires Java 5 or better, which you can obtain
+         from the
+         <ulink url="http://java.sun.com">Java Software</ulink>
+         website.
+      </para>
+   </section>
+
+   <section id="tck-environment">
+      <title>The TCK Environment</title>
+
+      <para>
+         The TCK requires the following two Java runtime environments:
+      </para>
+      <itemizedlist>
+         <listitem>
+            <para>
+               Java 5 or better
+            </para>
+         </listitem>
+         <listitem>
+            <para>
+               Java EE 5 or better (e.g., JBoss AS 5.x or GlassFish V3)
+            </para>
+         </listitem>
+      </itemizedlist>
+      <para>
+         You should refer to vendor instructions for how to install the
+         runtime.
+      </para>
+      <para>
+         The rest of the TCK software can simply be extracted. It's
+         recommended that you create a folder named jsr299 to hold all of the
+         jsr299-related projects. Then, extract the TCK distribution into a
+         subfolder named tck. If you have downloaded the Web Beans distribution,
+         extract it into a sibling folder named webbeans. The resulting folder
+         structure is shown here:
+      </para>
+      <note>
+         <para>
+            This layout is assumed through all descriptions in this reference
+            guide.
+         </para>
+      </note>
+      <programlisting><![CDATA[jsr299/
+   webbeans/
+   tck/]]></programlisting>
+
+      <para>
+         Each test class is treated as an individual artifact (hence the
+         <literal>@Artifact</literal>
+         annotation on the class). All test methods (i.e., methods annotated
+         with
+         <literal>@Test</literal>)
+         in the test class are run in the application, meaning bean discovery
+         occurs exactly once per artifact and the same BeanManager is used by
+         each test method in the class.
+      </para>
+
+      <tip id="tck-in-jboss-as">
+         <title>
+            Running the TCK against the CDI RI (Web Beans) and JBoss AS
+         </title>
+
+         <para>
+            Web Beans is built as a modular library, and as such can be
+            retro-fitted to Java EE 5 products as required. JBoss AS 5.1 and
+            above releases bundle Web Beans. JBoss AS 5.1 also allows you to
+            upgrade the Web Beans module to the current release (though some
+            functionality may be disabled).
+         </para>
+
+         <para>
+            To install JBoss AS 5.1 and update to the latest Web Beans
+            release: 
+         </para>
+
+         <itemizedlist>
+            <listitem>
+               <para>
+                  First, you should download JBoss AS 5.1 from the JBoss AS
+                  <ulink url="http://jboss.org/jbossas/downloads">project page</ulink>.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  Set the
+                  <literal>JBOSS_HOME</literal>
+                  environment variable to the location of the JBoss AS software.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  Change to the webbeans directory.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  Make sure the
+                  <literal>jboss.home</literal>
+                  property in the local.build.properties file in the jboss-as
+                  directory references a JBoss AS 5.1 installation:
+               </para>
+               <programlisting>jboss.home=/path/to/jboss-as-5.1</programlisting>
+            </listitem>
+            <listitem>
+               <para>
+                  Then, run Ant from the jboss-as directory to install the
+                  deployer:
+               </para>
+               <programlisting>ant update</programlisting>
+               <para>
+                  The libraries needed by the deployer are fetched from the
+                  Maven 2 repository on demand.
+               </para>
+            </listitem>
+         </itemizedlist>
+
+         <para>
+            Web Beans includes a TCK runner that executes the TCK using Web
+            Beans as the CDI implementation and JBoss AS as the Java EE runtime.
+            To run the tck:
+         </para>
+
+         <itemizedlist>
+            <listitem>
+               <para>
+                  You need to install Maven. You can find documention on how to
+                  install Maven 2 in the
+                  <ulink
+                     url="http://www.sonatype.com/books/maven-book/reference/installation-sect-maven-install.html">Maven: The Definitive Guide</ulink>
+                  book published by Sonatype. Web Beans bundles a copy of Maven
+                  in the
+                  <code>lib/maven</code>
+                  directory.
+               </para>
+            </listitem>
+            <listitem>
+               <para>
+                  Next, instruct Maven to run the TCK:
+               </para>
+               <programlisting><![CDATA[cd jboss-tck-runner
+mvn test -Dincontainer]]></programlisting>
+            </listitem>
+            <listitem>
+               <para>
+                  TestNG will report, via Maven, the outcome of the run, and
+                  report
+                  any failures on the console. Details can be found in
+                  <code>target/surefire-reports/TestSuite.txt</code>.
+               </para>
+            </listitem>
+         </itemizedlist>
+
+      </tip>
+   </section>
+   <section id="eclipse-plugins">
+      <title>Eclipse Plugins</title>
+      <para>
+         Eclipse, or any other IDE, is not required to execute or pass the TCK.
+         However an implementor may wish to execute tests in an IDE to aid
+         debugging the tests. This section introduces two essential Eclipse
+         plugins, TestNG and Maven 2, and points you to resources explaining
+         how to install them.
+      </para>
+      <section id="eclipse-testng-plugin">
+         <title>TestNG Plugin</title>
+         <para>
+            The TCK is built on the JBoss Test Harness, which is in turn built on
+            TestNG. Therefore, having the TestNG plugin installed in Eclipse is
+            essential. Instructions for using the TestNG update site to add the
+            TestNG plugin to Eclipse are provided on the TestNG
+            <ulink url="http://testng.org/doc/download.html">download page</ulink>.
+            You can find a tutorial that explains how to use the TestNG plugin on
+            the TestNG
+            <ulink url="http://testng.org/doc/eclipse.html">Eclipse page</ulink>.
+         </para>
+      </section>
+      <section id="m2eclipse-plugin">
+         <title>Maven 2 Plugin (m2eclipse)</title>
+         <para>
+            Another useful plugin is m2eclipse. Both the TCK project and Web Beans
+            are use Maven 2. Therefore, to work with these projects in Eclipse, you
+            may wish to have native support for Maven 2 projects, which the m2eclipse
+            plugin provides. Instructions for using the m2eclipse update site to
+            add the m2eclipse plugin to Eclipse are provided on the m2eclipse home
+            page. For more, read the m2eclipse
+            <ulink url="http://www.sonatype.com/books/m2eclipse-book/reference">reference guide</ulink>.
+         </para>
+         <para>
+            m2eclipse is still a rather young project dealing with a complex
+            domain and you may run into problems using it. If that is the case,
+            you can alternatively use the Eclipse plugin for Maven 2 to
+            generate native Eclipse projects from Maven 2 projects.
+         </para>
+         <para>
+            If you have Maven 2 installed, you have everything you need.  Just
+            execute the following command from any Maven 2 project to produce
+            the Eclipse project files.
+         </para>
+         <programlisting>mvn eclipse:eclipse</programlisting>
+      </section>
+      <para>
+         Again, the Eclipse plugins are not required to execute the TCK, but
+         can be very helpful when validating an implementation against the TCK
+         test suite and especially when using the modules from the Web Beans
+         project.
+      </para>
+   </section>
+<!--
+vim: ts=3:sw=3:tw=80:set expandtab
+-->
+</chapter>

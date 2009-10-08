@@ -1,0 +1,9 @@
+<Beans xmlns="urn:java:ee"
+	xmlns:dd="urn:java:org.jboss.jsr299.tck.tests.xml.annotationtypes.notvalidxml.foo">
+	<dd:TestBindingType>
+		<BindingType />
+	</dd:TestBindingType>
+	<dd:TestBindingType>
+		<BindingType />
+	</dd:TestBindingType>
+</Beans>

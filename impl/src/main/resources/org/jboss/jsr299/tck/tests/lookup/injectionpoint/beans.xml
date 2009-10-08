@@ -1,0 +1,6 @@
+<beans> 
+   <decorators>
+      <class>org.jboss.jsr299.tck.tests.lookup.injectionpoint.TimestampLogger</class>
+      <class>org.jboss.jsr299.tck.tests.lookup.injectionpoint.CatDecorator</class>
+   </decorators>
+</beans>

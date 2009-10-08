@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE part PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<part id="test-harness">
+   <title>JBoss Test Harness</title>
+   <partintro>
+      <para>
+         In this part you learn about the JBoss Test Harness through selected 
+         chapters from the JBoss Test Harness Reference Guide. You can view the
+         entire JBoss Test Harness Reference Guide at <ulink url="">TODO</ulink>.
+      </para>
+   </partintro>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="harness/introduction.xml" />
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="harness/configuration.xml" />
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="harness/executing.xml" />
+<!--
+vim: ts=3:sw=3:tw=80:set expandtab
+-->
+</part>

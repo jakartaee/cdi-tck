@@ -1,0 +1,6 @@
+<Beans xmlns="urn:java:ee"
+	xmlns:dd="urn:java:org.jboss.jsr299.tck.tests.xml.annotationtypes.notvalidxml.foo">
+	<dd:NotJavaType>
+		<InterceptorBindingType />
+	</dd:NotJavaType>
+</Beans>
