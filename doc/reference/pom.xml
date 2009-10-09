@@ -52,8 +52,8 @@
             <extensions>true</extensions>
             <dependencies>
                <dependency>
-                  <groupId>org.jboss.webbeans</groupId>
-                  <artifactId>webbeans-docbook-xslt</artifactId>
+                  <groupId>org.jboss.weld</groupId>
+                  <artifactId>weld-docbook-xslt</artifactId>
                   <version>1.1.1.BETA2</version>
                   <exclusions>
                      <exclusion>
@@ -102,21 +102,21 @@
                   <format>
                      <formatName>pdf</formatName>
                      <stylesheetResource>
-                        classpath:/xslt/org/jboss/webbeans/pdf.xsl
+                        classpath:/xslt/org/jboss/weld/pdf.xsl
                      </stylesheetResource>
                      <finalName>jsr299-tck-reference.pdf</finalName>
                   </format>
                   <format>
                      <formatName>html</formatName>
                      <stylesheetResource>
-                        classpath:/xslt/org/jboss/webbeans/xhtml.xsl
+                        classpath:/xslt/org/jboss/weld/xhtml.xsl
                      </stylesheetResource>
                      <finalName>index.html</finalName>
                   </format>
                   <format>
                      <formatName>html_single</formatName>
                      <stylesheetResource>
-                        classpath:/xslt/org/jboss/webbeans/xhtml-single.xsl
+                        classpath:/xslt/org/jboss/weld/xhtml-single.xsl
                      </stylesheetResource>
                      <finalName>index.html</finalName>
                   </format>
@@ -330,11 +330,11 @@
 
    <scm>
 
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/webbeans/tck
+      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck
       </connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/webbeans/tck
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck
       </developerConnection>
-      <url>http://fisheye.jboss.org/browse/WebBeans/tck</url>
+      <url>http://fisheye.jboss.org/browse/Weld/cdi-tck</url>
    </scm>
 
    <distributionManagement>

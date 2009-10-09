@@ -30,7 +30,7 @@ limitations under the License.
 	<artifactId>jsr299-tck-api</artifactId>
 	<packaging>jar</packaging>
 	<name>JSR-299 TCK API</name>
-	<url>http://www.seamframework.org/WebBeans</url>
+	<url>http://www.seamframework.org/Weld</url>
    
    <dependencies>
 

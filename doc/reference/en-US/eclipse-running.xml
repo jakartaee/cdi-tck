@@ -45,11 +45,11 @@
          <para>
             If you choose to use the Maven 2 Eclipse plugin
             (<literal>maven-eclipse-plugin</literal>), you should execute the
-            plugin in both the tck and webbeans projects:
+            plugin in both the tck and weld projects:
          </para>
          <programlisting><![CDATA[cd tck
 mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs
-cd ../webbeans
+cd ../weld
 mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs]]></programlisting>
       </tip>
    </section>
@@ -89,22 +89,22 @@ mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs]]><
       <para>
          Your workspace should appear as follows:
       </para>
-      <programlisting><![CDATA[Web Beans
-  jsr299-api
-  webbeans-api
-  webbeans-core
-  webbeans-core-test
-  webbeans-logging
-  webbeans-parent
-  webbeans-spi
-  webbeans-version-matrix
+      <programlisting><![CDATA[Weld
+  cdi-api
+  weld-api
+  weld-core
+  weld-core-test
+  weld-logging
+  weld-parent
+  weld-spi
+  weld-version-matrix
 CDI TCK
   jsr299-tck-api
   jsr299-tck-impl
   jsr299-tck-parent
 Web Beans JBoss TCK Runner
-  webbeans-jboss-tck-runner
-  webbeans-porting-package]]></programlisting>
+  weld-jboss-tck-runner
+  weld-porting-package]]></programlisting>
       <para>
          The tests in the TCK test suite are located in the jsr299-tck-impl
          project. You'll be working within this project in Eclipse when you are
@@ -113,7 +113,7 @@ Web Beans JBoss TCK Runner
          individual test in Eclipse? The secret is that you need to establish a
          link in Eclipse (not in Maven) between the jsr299-tck-impl project and
          your TCK runner project, which in this case is
-         webbeans-jboss-tck-runner (the project in the jboss-tck-runner
+         weld-jboss-tck-runner (the project in the jboss-tck-runner
          directory).
       </para>
       <para>
@@ -142,7 +142,7 @@ Web Beans JBoss TCK Runner
          </listitem>
          <listitem>
             <para>
-               Check the TCK runner project (e.g., webbeans-jboss-tck-runner)
+               Check the TCK runner project (e.g., weld-jboss-tck-runner)
             </para>
          </listitem>
          <listitem>
@@ -158,7 +158,7 @@ Web Beans JBoss TCK Runner
          </listitem>
       </orderedlist>
       <para>
-         Of course, the webbeans-jboss-tck-runner also depends on the
+         Of course, the weld-jboss-tck-runner also depends on the
          jsr299-tck-impl at runtime (so it can actually find the tests to
          execute). But Eclipse doesn't distinguish between build-time and
          runtime dependencies. As a result, we've created a circular dependency
@@ -175,7 +175,7 @@ Web Beans JBoss TCK Runner
       <orderedlist>
          <listitem>
             <para>
-               Right click on the webbeans-jboss-tck-runner project
+               Right click on the weld-jboss-tck-runner project
             </para>
          </listitem>
          <listitem>
@@ -345,7 +345,7 @@ orjboss.testharness.runIntegrationTests=true</programlisting>
          </listitem>
          <listitem>
             <para>
-               Select the webbeans-jboss-tck-runner/src/test/debug-resources
+               Select the weld-jboss-tck-runner/src/test/debug-resources
                folder
             </para>
          </listitem>
@@ -356,12 +356,12 @@ orjboss.testharness.runIntegrationTests=true</programlisting>
          </listitem>
          <listitem>
             <para>
-               Click on the webbeans-jboss-tck-runner entry
+               Click on the weld-jboss-tck-runner entry
             </para>
          </listitem>
          <listitem>
             <para>
-               Move the webbeans-jboss-tck-runner to the first entry using
+               Move the weld-jboss-tck-runner to the first entry using
                the Up button
             </para>
          </listitem>
@@ -411,7 +411,7 @@ orjboss.testharness.runIntegrationTests=true</programlisting>
          </listitem>
          <listitem>
             <para>
-               Check the webbeans-jboss-tck-runner/src/test/debug-resources
+               Check the weld-jboss-tck-runner/src/test/debug-resources
                folder
             </para>
          </listitem>

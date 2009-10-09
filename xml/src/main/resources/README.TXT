@@ -7,4 +7,4 @@ Generating a signature file
 ---------------------------
 To generate a signature file, use the following command:
 
-java -cp %JAVA_HOME%\jre\lib\rt.jar%;sigtestdev.jar com.sun.tdk.signaturetest.Setup -Package javax.annotation -Package javax.context -Package javax.decorator -Package javax.event -Package javax.inject -Package javax.interceptor -Package javax.webbeans -FileName webbeans.sig -Classpath .;%JAVA_HOME%\jre\lib\rt.jar -static -Exclude java
+java -cp %JAVA_HOME%\jre\lib\rt.jar%;sigtestdev.jar com.sun.tdk.signaturetest.Setup -Package javax.annotation -Package javax.context -Package javax.decorator -Package javax.event -Package javax.inject -Package javax.interceptor -Package javax.weld -FileName weld.sig -Classpath .;%JAVA_HOME%\jre\lib\rt.jar -static -Exclude java

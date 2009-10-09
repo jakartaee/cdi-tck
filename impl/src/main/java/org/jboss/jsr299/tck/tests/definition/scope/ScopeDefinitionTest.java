@@ -102,7 +102,7 @@ public class ScopeDefinitionTest extends AbstractJSR299Test
      @SpecAssertion(section = "2.7.2", id = "db"),
      @SpecAssertion(section = "4.1", id = "ab")
    })
-   public void testWebBeanScopeTypeOverridesStereotype()
+   public void testCDIScopeTypeOverridesStereotype()
    {
       assert getBeans(RedSnapper.class).size() == 1; 
       Bean<RedSnapper> bean = getBeans(RedSnapper.class).iterator().next();

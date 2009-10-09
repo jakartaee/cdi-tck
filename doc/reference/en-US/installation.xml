@@ -22,7 +22,7 @@
       </para>
       <para>
          You can also download the currnet source code from
-         <ulink url="http://anonsvn.jboss.org/repos/webbeans/tck/trunk">JBoss SVN repository</ulink>.
+         <ulink url="http://anonsvn.jboss.org/repos/weld/cdi-tck/trunk">JBoss SVN repository</ulink>.
       </para>
       <para>
          The TCK project is available in the JBoss Maven 2 repository as
@@ -84,8 +84,8 @@
          The rest of the TCK software can simply be extracted. It's
          recommended that you create a folder named jsr299 to hold all of the
          jsr299-related projects. Then, extract the TCK distribution into a
-         subfolder named tck. If you have downloaded the Web Beans distribution,
-         extract it into a sibling folder named webbeans. The resulting folder
+         subfolder named tck. If you have downloaded the Weld distribution,
+         extract it into a sibling folder named weld. The resulting folder
          structure is shown here:
       </para>
       <note>
@@ -95,7 +95,7 @@
          </para>
       </note>
       <programlisting><![CDATA[jsr299/
-   webbeans/
+   weld/
    tck/]]></programlisting>
 
       <para>
@@ -143,7 +143,7 @@
             </listitem>
             <listitem>
                <para>
-                  Change to the webbeans directory.
+                  Change to the weld directory.
                </para>
             </listitem>
             <listitem>

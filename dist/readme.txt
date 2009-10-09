@@ -8,7 +8,8 @@ CDI
 This distribution, as a whole, is licensed under the terms of the Apache Public
 License (see apl.txt).
 
-Documentation can be found at http://seamframework.org/WebBeans/JSR299TCK
+Documentation can be found at
+http://seamframework.org/Weld/WeldDevelopmentOverview
 
 This distribution consists of:
 

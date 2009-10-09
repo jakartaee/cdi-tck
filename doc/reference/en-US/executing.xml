@@ -31,7 +31,7 @@
          jboss-tck-runner directory in the extracted Web Beans distribution:
       </para>
 
-      <programlisting>cd webbeans/jboss-tck-runner</programlisting>
+      <programlisting>cd weld/jboss-tck-runner</programlisting>
       <note>
          <para>
              These instructions assume you have extracted the CDI-related

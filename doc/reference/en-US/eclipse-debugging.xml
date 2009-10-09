@@ -52,7 +52,7 @@
          <listitem>
             <para>
                Check the project the contains the class you want to debug
-               (e.g., webbeans-core)
+               (e.g., weld-core)
             </para>
          </listitem>
          <listitem>
