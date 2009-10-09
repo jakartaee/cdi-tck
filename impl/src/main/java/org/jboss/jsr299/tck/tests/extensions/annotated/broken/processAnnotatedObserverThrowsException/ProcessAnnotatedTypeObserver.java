@@ -6,7 +6,7 @@ import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
 public class ProcessAnnotatedTypeObserver implements Extension
 {
-   public void observeAnnotatedType1(@Observes ProcessAnnotatedType<Dog> event)
+   public void observeAnnotatedType(@Observes ProcessAnnotatedType<Dog> event)
    {
       throw new RuntimeException();
    }

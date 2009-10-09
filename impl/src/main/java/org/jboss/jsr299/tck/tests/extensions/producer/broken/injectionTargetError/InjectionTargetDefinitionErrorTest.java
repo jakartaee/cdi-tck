@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 public class InjectionTargetDefinitionErrorTest extends AbstractJSR299Test
 {
 
-   @Test(groups = "ri-broken")
+   @Test(groups = "jboss-as-broken")
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "da")
    })

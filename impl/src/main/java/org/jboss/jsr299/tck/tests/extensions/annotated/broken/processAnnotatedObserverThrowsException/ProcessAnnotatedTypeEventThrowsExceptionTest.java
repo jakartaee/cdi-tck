@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="PFD2")
 public class ProcessAnnotatedTypeEventThrowsExceptionTest extends AbstractJSR299Test
 {
-   @Test(groups="ri-broken")
+   @Test(groups="jboss-as-broken")
    @SpecAssertion(section = "11.5.5", id = "e")
    public void testProcessAnnotatedTypeEventThrowsExceptionNotOk()
    {

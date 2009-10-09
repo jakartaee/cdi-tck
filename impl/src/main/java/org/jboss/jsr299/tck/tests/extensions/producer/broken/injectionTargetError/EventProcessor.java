@@ -4,7 +4,7 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 
-class EventProcessor implements Extension
+public class EventProcessor implements Extension
 {
    public void processDogInjectionTarget(@Observes ProcessInjectionTarget<Dog> injectionTargetEvent)
    {

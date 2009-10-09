@@ -24,6 +24,8 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
+import org.jboss.testharness.impl.packaging.Resource;
+import org.jboss.testharness.impl.packaging.Resources;
 import org.testng.annotations.Test;
 
 /**
@@ -34,11 +36,14 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @ExpectedDeploymentException(DeploymentError.class)
+@Resources({
+   @Resource(source="javax.enterprise.inject.spi.Extension", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
+})
 @IntegrationTest
 @SpecVersion(spec="cdi", version="PFD2")
 public class ProcessInjectionTargetEventThrowsExceptionTest extends AbstractJSR299Test
 {
-   @Test(groups="ri-broken")
+   @Test(groups="jboss-as-broken")
    @SpecAssertion(section = "11.5.6", id = "f")
    public void testProcessInjectionTargetEventThrowsExceptionNotOk()
    {

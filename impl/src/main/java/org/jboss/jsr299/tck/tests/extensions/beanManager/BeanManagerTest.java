@@ -65,14 +65,14 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="PFD2")
 public class BeanManagerTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "11.3.6", id = "a")
-   //WBRI-328
    public void testGetPassivationCapableBeanById()
    {
-      Bean<?> bean = getCurrentManager().getBeans(Cat.class).iterator().next();
+      Bean<?> bean = getCurrentManager().getBeans(Cow.class).iterator().next();
       assert PassivationCapable.class.isAssignableFrom(bean.getClass());
-      Bean<?> passivatingBean = getCurrentManager().getPassivationCapableBean(CatBean.bean.getId());
+      PassivationCapable passivationCapable = (PassivationCapable) bean;
+      Bean<?> passivatingBean = getCurrentManager().getPassivationCapableBean(passivationCapable.getId());
       assert bean == passivatingBean;
    }
 
