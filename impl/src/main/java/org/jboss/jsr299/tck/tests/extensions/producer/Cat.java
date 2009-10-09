@@ -15,8 +15,8 @@ class Cat
    @Inject
    public Cat(LitterBox litterBox)
    {
-      constructorCalled = true;
       assert litterBox != null;
+      constructorCalled = true;
    }
    
    @Inject

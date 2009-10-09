@@ -6,33 +6,33 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.InjectionTarget;
 
-class BirdCageInjectionTarget implements InjectionTarget<BirdCage>
+class CheckableInjectionTarget<T> implements InjectionTarget<T>
 {
-   private InjectionTarget<BirdCage> wrappedInjectionTarget;
+   private InjectionTarget<T> wrappedInjectionTarget;
    private static boolean injectCalled;
 
-   public BirdCageInjectionTarget(InjectionTarget<BirdCage> originalInjectionTarget)
+   public CheckableInjectionTarget(InjectionTarget<T> originalInjectionTarget)
    {
       this.wrappedInjectionTarget = originalInjectionTarget;
    }
 
-   public void inject(BirdCage instance, CreationalContext<BirdCage> ctx)
+   public void inject(T instance, CreationalContext<T> ctx)
    {
       injectCalled = true;
       wrappedInjectionTarget.inject(instance, ctx);
    }
 
-   public void postConstruct(BirdCage instance)
+   public void postConstruct(T instance)
    {
       wrappedInjectionTarget.postConstruct(instance);
    }
 
-   public void preDestroy(BirdCage instance)
+   public void preDestroy(T instance)
    {
       wrappedInjectionTarget.preDestroy(instance);
    }
 
-   public void dispose(BirdCage instance)
+   public void dispose(T instance)
    {
       wrappedInjectionTarget.dispose(instance);
    }
@@ -42,7 +42,7 @@ class BirdCageInjectionTarget implements InjectionTarget<BirdCage>
       return wrappedInjectionTarget.getInjectionPoints();
    }
 
-   public BirdCage produce(CreationalContext<BirdCage> ctx)
+   public T produce(CreationalContext<T> ctx)
    {
       return wrappedInjectionTarget.produce(ctx);
    }
@@ -54,7 +54,7 @@ class BirdCageInjectionTarget implements InjectionTarget<BirdCage>
 
    public static void setInjectCalled(boolean injectCalled)
    {
-      BirdCageInjectionTarget.injectCalled = injectCalled;
+      CheckableInjectionTarget.injectCalled = injectCalled;
    }
 
 }

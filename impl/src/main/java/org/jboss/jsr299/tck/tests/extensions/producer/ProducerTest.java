@@ -30,24 +30,25 @@ import org.testng.annotations.Test;
 // Must be an integration test as it needs a resource copied to a folder
 @IntegrationTest
 @SpecVersion(spec="cdi", version="PFD2")
-// TODO All tests fall under WBRI-345 for now, please create new issues for any failing tests after WBRI-345 is done
 public class ProducerTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.2", id = "ba")
    })
-   public void testProduceCallsInitializerAndConstructor()
+   public void testProduceAndInjectCallsInitializerAndConstructor()
    {
       InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
       Bean<Cat> catBean = getUniqueBean(Cat.class);
       Cat.reset();
-      injectionTarget.produce(getCurrentManager().createCreationalContext(catBean));
+      CreationalContext<Cat> ctx = getCurrentManager().createCreationalContext(catBean);
+      Cat instance = injectionTarget.produce(ctx);
       assert Cat.isConstructorCalled();
+      injectionTarget.inject(instance, ctx);
       assert Cat.isInitializerCalled();
    }
 
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.2", id = "c")
    })
@@ -61,7 +62,7 @@ public class ProducerTest extends AbstractJSR299Test
       cat.ping();
    }
 
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.2", id = "da")
    })
@@ -80,42 +81,30 @@ public class ProducerTest extends AbstractJSR299Test
       assert injectionPointPresent;
    }
 
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
-      @SpecAssertion(section = "11.2", id = "db")
+      @SpecAssertion(section = "11.2", id = "db"),
+      @SpecAssertion(section = "11.2", id = "dc")
    })
    public void testGetInjectionPointsForConstructorAndInitializer()
    {
       InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
       assert injectionTarget.getInjectionPoints().size() == 3;
-      boolean dogIPPresent = false;
+      boolean constructorIPPresent = false;
+      boolean initializerMethodIPPresent = false;
       for (InjectionPoint injectionPoint : injectionTarget.getInjectionPoints())
       {
-         if (injectionPoint.getType().equals(Dog.class))
+         if (injectionPoint.getType().equals(LitterBox.class))
          {
-            dogIPPresent = true;
+            constructorIPPresent = true;
          }
-      }
-      assert dogIPPresent;
-   }
-
-   @Test(groups = "ri-broken")
-   @SpecAssertions({
-      @SpecAssertion(section = "11.2", id = "dc")
-   })
-   public void testGetInjectionPointsForInitializer()
-   {
-      InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
-      assert injectionTarget.getInjectionPoints().size() == 3;
-      boolean injectionPointPresent = false;
-      for (InjectionPoint injectionPoint : injectionTarget.getInjectionPoints())
-      {
          if (injectionPoint.getType().equals(Bird.class))
          {
-            injectionPointPresent = true;
+            initializerMethodIPPresent = true;
          }
       }
-      assert injectionPointPresent;
+      assert initializerMethodIPPresent;
+      assert constructorIPPresent;
    }
 
    @Test
@@ -135,6 +124,17 @@ public class ProducerTest extends AbstractJSR299Test
       Dog dog = producer.produce(getCurrentManager().createCreationalContext(dogBean));
       assert DogProducer.isNoisyDogProducerCalled();
       assert dog.getColor().equals(DogProducer.NOISY_DOG_COLOR);
+   }
+   
+   @Test
+   @SpecAssertions({
+      @SpecAssertion(section = "11.5.7", id="e")
+   })
+   public void testSetProducerOverridesProducer()
+   {
+      ProducerProcessor.reset();
+      assert getInstanceByType(Cow.class, new AnnotationLiteral<Noisy>() {}) instanceof Cow;
+      assert ProducerProcessor.isOverriddenCowProducerCalled();
    }
 
    @Test
@@ -184,7 +184,7 @@ public class ProducerTest extends AbstractJSR299Test
    }
 
    @SuppressWarnings("unchecked")
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.2", id = "i"),
       @SpecAssertion(section = "11.5.6", id = "ba"),
@@ -201,7 +201,7 @@ public class ProducerTest extends AbstractJSR299Test
       assert dog.getDogBone() != null;
    }
 
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.2", id = "j")
    })
@@ -214,7 +214,7 @@ public class ProducerTest extends AbstractJSR299Test
       assert Dog.isPostConstructCalled();
    }
 
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.2", id = "k")
    })
@@ -227,19 +227,19 @@ public class ProducerTest extends AbstractJSR299Test
       assert Dog.isPreDestroyCalled();
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "bb"),
       @SpecAssertion(section = "11.5.6", id = "ea")
    })
    public void testSettingInjectionTargetReplacesIt()
    {
-      BirdCageInjectionTarget.setInjectCalled(false);
+      CheckableInjectionTarget.setInjectCalled(false);
       getInstanceByType(BirdCage.class);
-      assert BirdCageInjectionTarget.isInjectCalled();
+      assert CheckableInjectionTarget.isInjectCalled();
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aba")
    })
