@@ -169,6 +169,11 @@
          	</exclusions>
          </dependency>
          <dependency>
+            <groupId>org.jboss.interceptor</groupId>
+            <artifactId>jboss-interceptor-api</artifactId>
+            <version>3.1.0-SNAPSHOT</version>
+         </dependency>
+         <dependency>
          	<groupId>javax.jws</groupId>
          	<artifactId>jsr181-api</artifactId>
          	<version>1.0-MR1</version>
