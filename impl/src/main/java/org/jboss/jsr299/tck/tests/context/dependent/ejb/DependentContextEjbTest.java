@@ -44,10 +44,12 @@ public class DependentContextEjbTest extends AbstractJSR299Test
       Bean<HouseLocal> bean = getBeans(HouseLocal.class).iterator().next();
       CreationalContext<HouseLocal> creationalContext = getCurrentManager().createCreationalContext(bean);
       HouseLocal instance = bean.create(creationalContext);
-      instance.open();
+      instance.open().getTable().lay();
       Room.destroyed = false;
       Table.destroyed = false;
+      House.destroyed = false;
       bean.destroy(instance, creationalContext);
+      assert House.destroyed;
       assert Room.destroyed;
       assert Table.destroyed;
    }
@@ -62,7 +64,9 @@ public class DependentContextEjbTest extends AbstractJSR299Test
       FarmLocal farm = farmBean.create(creationalContext);
       Horse.destroyed = false;
       Stable.destroyed = false;
+      Farm.destroyed = false;
       farmBean.destroy(farm, creationalContext);
+      assert Farm.destroyed;
       assert Horse.destroyed;
       assert Stable.destroyed;
     }

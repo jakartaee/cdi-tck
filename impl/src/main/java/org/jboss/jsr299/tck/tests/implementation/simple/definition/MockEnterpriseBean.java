@@ -1,9 +1,8 @@
 package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
-import javax.ejb.Stateless;
+import javax.ejb.EnterpriseBean;
 
-@Stateless
-class MockEnterpriseBean implements MockEnterpriseBeanLocal
+class MockEnterpriseBean implements EnterpriseBean
 {
 
 	/**

@@ -2700,15 +2700,16 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
 
     <assertion id="d">
-    <text>When a context is destroyed, all mapped instances belonging to that context are destroyed by passing them to the |Contextual.destroy()| method.</text>
+      <text>When a context is destroyed, all mapped instances belonging to that context are destroyed by passing them to the |Contextual.destroy()| method.</text>
     </assertion>
 
     <assertion id="e">
       <text>Contexts with normal scopes must obey the following rule: Suppose beans A, B and Z all have normal scopes. Suppose A has an injection point x, and B has an injection point y. Suppose further that both x and y resolve to bean Z according to the typesafe resolution algorithm. If a is the current instance of A, and b is the current instance of B, then both a.x and b.y refer to the same instance of Z. This instance is the current instance of Z.</text>
     </assertion>
     
-    <assertion id="ea">
+    <assertion id="ea" testable="false">
       <text>All normal scopes must be explicitly declared |@NormalScope|, to indicate to the container that a client proxy is required.</text>
+      <note>A statement of intent</note>
     </assertion>
 
     <assertion id="fa" testable="false">
@@ -5616,8 +5617,9 @@ provider and all superclases and interfaces.</text>
   </section>
 
   <section id="11.5.8" title="ProcessBean event">
-    <assertion id="aa">
-    <text>The container must fire an event for each bean it discovers, before registering the |Bean| object.  The event object in the package |javax.enterprise.inject.spi| depends upon what kind of bean was discovered.</text>
+    <assertion id="aa" testable="false">
+      <text>The container must fire an event for each bean it discovers, before registering the |Bean| object.  The event object in the package |javax.enterprise.inject.spi| depends upon what kind of bean was discovered.</text>
+      <note>Tested below</note>
     </assertion>
 
     <assertion id="ba">
@@ -5640,23 +5642,54 @@ provider and all superclases and interfaces.</text>
       <text>Resources are considered to be producer fields.</text>
     </assertion>
     
-    <assertion id="ed">
+    <group>
       <text>The interface |javax.enterprise.inject.spi.ProcessBean| is a supertype of all these event types.</text>
-    </assertion>
+      <assertion id="eda">
+         <text>Test |ProcessManagedBean|</text>
+      </assertion>
+      <assertion id="edb">
+         <text>Test |ProcessSessionBean|</text>
+      </assertion>
+      <assertion id="edc">
+         <text>Test |ProcessProducerMethod|</text>
+      </assertion>
+      <assertion id="edd">
+         <text>Test |ProcessProducerField|</text>
+      </assertion>
+    </group>
    
     <group>
       <text>|getAnnotated()| returns the |AnnotatedType| representing the bean class, the |AnnotatedMethod| representing the producer method, or the |AnnotatedField| representing the producer field.</text>
       <assertion id="efa">
-        <text>Test producer method</text>
+         <text>Test |ProcessManagedBean|</text>
       </assertion>
       <assertion id="efb">
-        <text>Test producer field</text>
+         <text>Test |ProcessSessionBean|</text>
       </assertion>
-    </group> 
+      <assertion id="efc">
+         <text>Test |ProcessProducerMethod|</text>
+      </assertion>
+      <assertion id="efd">
+         <text>Test |ProcessProducerField|</text>
+      </assertion>
+    </group>
 
-    <assertion id="fa">
+    <group>
       <text>|getBean()| returns the |Bean| object that is about to be registered.  The |Bean| may implement |Interceptor| or |Decorator|.</text>
-    </assertion>
+      <assertion id="fa">
+         <text>Test |ProcessManagedBean|</text>
+      </assertion>
+      <assertion id="fb">
+         <text>Test |ProcessSessionBean|</text>
+      </assertion>
+      <assertion id="fc">
+         <text>Test |ProcessProducerMethod|</text>
+      </assertion>
+      <assertion id="fd">
+         <text>Test |ProcessProducerField|</text>
+      </assertion>
+    </group>
+    
 
     <assertion id="h">
       <text>|addDefinitionError()| registers a definition error with the container, causing the container to abort deployment after bean discovery is complete.</text>
@@ -5673,6 +5706,33 @@ provider and all superclases and interfaces.</text>
     <assertion id="hd">
       <text>If any observer method of a |ProcessBean| event throws an exception, the exception is treated as a definition error by the container.</text>
     </assertion>
+    
+    <assertion id="i" implied="true">
+      <text>Check the |getAnnotatedProducerMethod()|</text>
+    </assertion>
+    
+    <assertion id="j" implied="true">
+      <text>Check the |getAnnotatedDisposesParameter()|</text>
+    </assertion>
+    
+    <assertion id="k" implied="true">
+      <text>Check the |getAnnotatedSessionBeanClass()|</text>
+    </assertion>
+    
+    <group>
+      <text>Check the |getAnnotatedBeanClass()|</text>
+      <assertion id="l" implied="true">
+         <text>Check for managed bean</text>
+      </assertion>
+      <assertion id="m" implied="true">
+         <text>Check for session bean</text>
+      </assertion>
+    </group>
+    
+    <assertion id="n" implied="true">
+      <text>Check the |getAnnotatedProducerField()|</text>
+    </assertion>
+    
   </section>
 
   <section id="11.5.9" title="ProcessObserverMethod event">

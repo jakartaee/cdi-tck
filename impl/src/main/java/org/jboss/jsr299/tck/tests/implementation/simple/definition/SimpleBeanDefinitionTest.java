@@ -7,10 +7,13 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.Packaging;
+import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
 @Artifact
 @SpecVersion(spec="cdi", version="PFD2")
+@Packaging(PackagingType.EAR)
 public class SimpleBeanDefinitionTest extends AbstractJSR299Test
 {
 
@@ -46,7 +49,8 @@ public class SimpleBeanDefinitionTest extends AbstractJSR299Test
       assert getBeans(Car.class).size() == 0;
    }
 
-   @Test
+   @Test(groups = "broken")
+   // TODO The bean will be discovered, just not as a managed bean. This test is doesn't check that *at all*
    @SpecAssertion(section="3.1.1", id="f")
    public void testClassesImplementingEnterpriseBeanInterfaceNotDiscoveredAsSimpleBean()
    {

@@ -187,8 +187,8 @@ public class ProducerTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.2", id = "i"),
-      @SpecAssertion(section = "11.5.6", id = "ba"),
-      @SpecAssertion(section = "12.3", id = "ba")
+      @SpecAssertion(section = "12.3", id = "ba"),
+      @SpecAssertion(section = "11.5.6", id = "aaa")
    })
    public void testInjectionTargetInject()
    {
