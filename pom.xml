@@ -44,6 +44,11 @@
          <organization>Red Hat Inc.</organization>
       </developer>
    </developers>
+   
+   <organization>
+      <name>Seam Framework</name>
+      <url>http://seamframework.org</url>
+   </organization>
 
    <ciManagement>
       <system>Hudson</system>
@@ -73,7 +78,7 @@
       <jsr299.tck.version>${project.version}</jsr299.tck.version>
       <jboss.test.audit.version>1.1.0-SNAPSHOT</jboss.test.audit.version>
       <jboss.test.harness.version>1.1.0-SNAPSHOT</jboss.test.harness.version>
-      <testng.version>5.8</testng.version>
+      <testng.version>5.9</testng.version>
       <jsr250.api.version>1.0</jsr250.api.version>
       <cdi.api.version>1.0-SNAPSHOT</cdi.api.version>
       <atinject.api.version>1.0-PFD-1</atinject.api.version>
@@ -314,18 +319,5 @@
       </developerConnection>
       <url>http://fisheye.jboss.org/browse/Weld</url>
    </scm>
-
-   <distributionManagement>
-      <repository>
-         <id>oss.sonatype.org/jboss-staging</id>
-         <name>Sonatype Nexus Maven Repository</name>
-         <url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-      </repository>
-      <snapshotRepository>
-         <id>oss.sonatype.org/jboss-snapshots</id>
-         <name>Sonatype Nexus Snapshot Repository</name>
-         <url>http://oss.sonatype.org/content/repositories/jboss-snapshots</url>
-      </snapshotRepository>
-   </distributionManagement>
 
 </project>
