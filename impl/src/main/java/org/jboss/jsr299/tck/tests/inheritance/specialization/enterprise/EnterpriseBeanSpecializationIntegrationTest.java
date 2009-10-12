@@ -37,12 +37,4 @@ public class EnterpriseBeanSpecializationIntegrationTest extends AbstractJSR299T
       assert farmer.getClassName().equals(LazyFarmer.class.getName());
    }
    
-   
-   //@Test
-   //@SpecAssertion(section="4.3.2", id = "aa") removed from spec
-   public void testProducerMethodOnSpecializedBeanCalledOnSpecializingBean() throws Exception
-   {
-      assert getBeans(Waste.class).size() == 1;
-      assert getInstanceByType(Waste.class).getFrom().equals(Office.class.getName());
-   }
 }
