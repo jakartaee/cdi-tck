@@ -43,7 +43,6 @@ public class DecoratorInvocationTest extends AbstractJSR299Test
       @SpecAssertion(section="8.1.2", id="f"),
       @SpecAssertion(section="8.1.2", id="b"),
       @SpecAssertion(section="7.2", id="b")
-      //@SpecAssertion(section="7.2", id="ha") removed from spec
    })
    public void testDecoratorInvocation()
    {
