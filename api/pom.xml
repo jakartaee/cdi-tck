@@ -29,8 +29,8 @@ limitations under the License.
 	<groupId>org.jboss.jsr299.tck</groupId>
 	<artifactId>jsr299-tck-api</artifactId>
 	<packaging>jar</packaging>
-	<name>JSR-299 TCK API</name>
-	<url>http://www.seamframework.org/Weld</url>
+	<name>CDI TCK Porting Package API</name>
+	<description>Porting Package APIs for CDI TCK</description>
    
    <dependencies>
 
@@ -42,6 +42,11 @@ limitations under the License.
       <dependency>
          <groupId>org.jboss.test-harness</groupId>
          <artifactId>jboss-test-harness-api</artifactId>
+      </dependency>
+      
+      <dependency>
+         <groupId>javax.el</groupId>
+         <artifactId>el-api</artifactId>
       </dependency>
    </dependencies>
 
