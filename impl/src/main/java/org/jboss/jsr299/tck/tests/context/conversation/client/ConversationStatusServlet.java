@@ -38,7 +38,7 @@ public class ConversationStatusServlet extends HttpServlet
          }
          else
          {
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            resp.setStatus(208);
          }
       }
       else if ("invalidateSession".equals(method))

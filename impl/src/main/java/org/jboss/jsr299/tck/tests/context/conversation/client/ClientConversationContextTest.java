@@ -78,8 +78,6 @@ public class ClientConversationContextTest extends AbstractConversationTest
    {
       WebClient client = new WebClient();
       
-      
-      
       HtmlPage storm = client.getPage(getPath("/storm.jsf"));
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
       storm = beginConversationButton.click();

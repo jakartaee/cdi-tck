@@ -21,7 +21,6 @@ public abstract class AbstractConversationTest extends AbstractJSR299Test
    
    protected boolean isCloudDestroyed(WebClient client) throws Exception
    {
-      client.setThrowExceptionOnFailingStatusCode(false);
       Page page = client.getPage(getConversationStatusPath("cloudDestroyed"));
       return page.getWebResponse().getStatusCode() == 200;
    }
