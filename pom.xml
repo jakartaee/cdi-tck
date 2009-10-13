@@ -76,8 +76,8 @@
 
    <properties>
       <jsr299.tck.version>${project.version}</jsr299.tck.version>
-      <jboss.test.audit.version>1.1.0-SNAPSHOT</jboss.test.audit.version>
-      <jboss.test.harness.version>1.1.0-SNAPSHOT</jboss.test.harness.version>
+      <jboss.test.audit.version>1.0.0</jboss.test.audit.version>
+      <jboss.test.harness.version>1.1.0-CR1</jboss.test.harness.version>
       <testng.version>5.9</testng.version>
       <jsr250.api.version>1.0</jsr250.api.version>
       <cdi.api.version>1.0-CR1</cdi.api.version>
@@ -99,8 +99,6 @@
       <jws.api.version>1.0-MR1</jws.api.version>
       <apache.httpclient.version>3.1</apache.httpclient.version>
       <htmlunit.version>2.4</htmlunit.version>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
    </properties>
 
    <!-- Dependency management -->
