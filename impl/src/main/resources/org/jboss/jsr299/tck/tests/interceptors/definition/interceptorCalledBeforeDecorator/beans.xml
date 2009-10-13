@@ -2,4 +2,7 @@
   <interceptors>
     <class>org.jboss.jsr299.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator.TransactionInterceptor</class>      
   </interceptors>
+  <decorators>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator.FooDecorator</class>
+  </decorators>
 </beans>
