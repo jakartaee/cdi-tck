@@ -75,7 +75,6 @@
    </modules>
 
    <properties>
-      <jsr299.tck.version>${project.version}</jsr299.tck.version>
       <jboss.test.audit.version>1.0.0</jboss.test.audit.version>
       <jboss.test.harness.version>1.1.0-CR1</jboss.test.harness.version>
       <testng.version>5.9</testng.version>
@@ -214,7 +213,7 @@
          <dependency>
             <groupId>org.jboss.jsr299.tck</groupId>
             <artifactId>jsr299-tck-api</artifactId>
-            <version>${jsr299.tck.version}</version>
+            <version>${project.version}</version>
          </dependency>
 
          <dependency>
