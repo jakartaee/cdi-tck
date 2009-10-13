@@ -5,41 +5,55 @@
       <groupId>org.jboss.jsr299.tck</groupId>
       <artifactId>jsr299-tck-parent</artifactId>
       <version>1.0.0-SNAPSHOT</version>
+      <relativePath>../pom.xml</relativePath>
    </parent>
    <groupId>org.jboss.jsr299.tck</groupId>
    <artifactId>jsr299-tck-dist</artifactId>
    <packaging>pom</packaging>
    <version>1.0.0-SNAPSHOT</version>
    <name>JSR-299 TCK Distribution</name>
+   
+   <properties>
+      <weld.version>1.0.0-SNAPSHOT</weld.version>
+   </properties>
+   
+   <modules>
+      <module>porting-package</module>
+   </modules>
 
    <dependencies>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
          <artifactId>jsr299-tck-api</artifactId>
          <version>${project.version}</version>
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
          <artifactId>jsr299-tck-api</artifactId>
          <version>${project.version}</version>
          <classifier>sources</classifier>
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
          <artifactId>jsr299-tck-reference-guide</artifactId>
          <version>${project.version}</version>
          <type>war</type>
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
          <artifactId>jsr299-tck-impl</artifactId>
          <version>${project.version}</version>
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
          <artifactId>jsr299-tck-impl</artifactId>
          <version>${project.version}</version>
          <classifier>sources</classifier>
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
@@ -47,6 +61,7 @@
          <version>${project.version}</version>
          <classifier>audit-cdi</classifier>
          <type>xml</type>
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
@@ -54,6 +69,7 @@
          <version>${project.version}</version>
          <classifier>audit-mb</classifier>
          <type>xml</type>
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
@@ -61,6 +77,7 @@
          <version>${project.version}</version>
          <classifier>suite</classifier>
          <type>xml</type>
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
@@ -68,6 +85,7 @@
          <version>${project.version}</version>
          <classifier>coverage-cdi</classifier>
          <type>html</type>
+         <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>org.jboss.jsr299.tck</groupId>
@@ -75,18 +93,19 @@
          <version>${project.version}</version>
          <classifier>coverage-mb</classifier>
          <type>html</type>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>org.jboss.jsr299.tck</groupId>
+         <artifactId>jsr299-tck-dist-porting-package</artifactId>
+         <version>${project.version}</version>
+         <type>zip</type>
+         <optional>true</optional>
+         <classifier>dist</classifier>
       </dependency>
    </dependencies>
 
    <build>
-      <defaultGoal>deploy</defaultGoal>
-      <extensions>
-         <extension>
-            <groupId>org.apache.maven.wagon</groupId>
-            <artifactId>wagon-webdav</artifactId>
-            <version>1.0-beta-2</version>
-         </extension>
-      </extensions>
       <plugins>
          <plugin>
             <artifactId>maven-assembly-plugin</artifactId>

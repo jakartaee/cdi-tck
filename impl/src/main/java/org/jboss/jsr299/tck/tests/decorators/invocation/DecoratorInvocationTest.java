@@ -51,7 +51,6 @@ public class DecoratorInvocationTest extends AbstractJSR299Test
       getInstanceByType(CowShed.class).milk();
       assert TimestampLogger.getMessage().equals(CowShed.MESSAGE);
       assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + CowShed.MESSAGE);
-      assert !TimestampLogger.isInitializeCalled();
       assert MockLogger.isInitializeCalled();
    }
    
