@@ -11,7 +11,7 @@
    <parent>
       <groupId>org.jboss.weld</groupId>
       <artifactId>weld-parent</artifactId>
-      <version>2-SNAPSHOT</version>
+      <version>2</version>
    </parent>
 
    <!-- Metadata -->
@@ -80,7 +80,7 @@
       <jboss.test.harness.version>1.1.0-SNAPSHOT</jboss.test.harness.version>
       <testng.version>5.9</testng.version>
       <jsr250.api.version>1.0</jsr250.api.version>
-      <cdi.api.version>1.0-SNAPSHOT</cdi.api.version>
+      <cdi.api.version>1.0-CR1</cdi.api.version>
       <atinject.api.version>1.0-PFD-1</atinject.api.version>
       <ejb.api.version>3.1.0-Alpha1</ejb.api.version>
       <jsr250.api.version>1.0</jsr250.api.version>
@@ -94,7 +94,7 @@
       <uel.api.version>2.1.2-b04</uel.api.version>
       <jsf.api.version>1.2_13</jsf.api.version>
       <jaxws.api.version>2.1</jaxws.api.version>
-      <interceptor.api.version>3.1.0-SNAPSHOT</interceptor.api.version>
+      <interceptor.api.version>3.1.0-CR1</interceptor.api.version>
       <log4j.version>1.2.14</log4j.version>
       <jws.api.version>1.0-MR1</jws.api.version>
       <apache.httpclient.version>3.1</apache.httpclient.version>
