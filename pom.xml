@@ -302,7 +302,6 @@
                <artifactId>maven-release-plugin</artifactId>
                <configuration>
                   <tagBase>https://svn.jboss.org/repos/weld/cdi-tck/tags</tagBase>
-                  <autoVersionSubmodules>true</autoVersionSubmodules>
                </configuration>
             </plugin>
          </plugins>
