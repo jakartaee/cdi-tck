@@ -38,13 +38,22 @@ public class ProcessAnnotatedTypeObserver implements Extension
       {
          wrapAnnotatedType(event);
       }
+      else if (event.getAnnotatedType().getJavaClass().equals(Grocery.class))
+      {
+         wrapGroceryAnnotatedType(event);
+      }
    }
 
    private <X> void wrapAnnotatedType(ProcessAnnotatedType<X> event)
    {
       event.setAnnotatedType(new TestAnnotatedType<X>(event.getAnnotatedType()));
    }
-
+   
+   private <X> void wrapGroceryAnnotatedType(ProcessAnnotatedType<X> event)
+   {
+      event.setAnnotatedType(new GroceryAnnotatedType<X>(event.getAnnotatedType()));
+   }
+   
    public static HashSet<Class<?>> getAnnotatedclasses()
    {
       return annotatedClasses;
@@ -54,5 +63,4 @@ public class ProcessAnnotatedTypeObserver implements Extension
    {
       return dogAnnotatedType;
    }
-
 }

@@ -1,7 +1,6 @@
 package org.jboss.jsr299.tck.tests.extensions.annotated;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 import java.util.Set;
 
 import javax.enterprise.inject.spi.AnnotatedConstructor;
@@ -9,15 +8,16 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-public class TestAnnotatedType<X> implements AnnotatedType<X>
+public class TestAnnotatedType<X> extends TestAnnotated implements AnnotatedType<X>
 {
    private AnnotatedType<X> delegate;
    private static boolean getConstructorsUsed = false;
    private static boolean getFieldsUsed = false;
    private static boolean getMethodsUsed = false;
    
-   public TestAnnotatedType(AnnotatedType<X> delegate)
+   public TestAnnotatedType(AnnotatedType<X> delegate, Annotation...annotations)
    {
+      super(delegate, annotations);
       this.delegate = delegate;
    }
 
@@ -42,31 +42,6 @@ public class TestAnnotatedType<X> implements AnnotatedType<X>
    {
       getMethodsUsed = true;
       return delegate.getMethods();
-   }
-
-   public <T extends Annotation> T getAnnotation(Class<T> annotationType)
-   {
-      return delegate.getAnnotation(annotationType);
-   }
-
-   public Set<Annotation> getAnnotations()
-   {
-      return delegate.getAnnotations();
-   }
-
-   public Type getBaseType()
-   {
-      return delegate.getBaseType();
-   }
-
-   public Set<Type> getTypeClosure()
-   {
-      return delegate.getTypeClosure();
-   }
-
-   public boolean isAnnotationPresent(Class<? extends Annotation> annotationType)
-   {
-      return delegate.isAnnotationPresent(annotationType);
    }
 
    public static boolean isGetConstructorsUsed()
