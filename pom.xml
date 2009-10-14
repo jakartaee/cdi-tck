@@ -301,7 +301,7 @@
                <artifactId>maven-release-plugin</artifactId>
                <configuration>
                   <tagBase>https://svn.jboss.org/repos/weld/cdi-tck/tags</tagBase>
-                  <arguments>-Pdocs</arguments>
+                  <arguments>-Pdocs -Dtck-audit</arguments>
                </configuration>
             </plugin>
          </plugins>

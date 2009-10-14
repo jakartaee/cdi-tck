@@ -14,7 +14,7 @@
    <name>JSR-299 TCK Distribution</name>
    
    <properties>
-      <weld.version>1.0.0-SNAPSHOT</weld.version>
+      <weld.version>1.0.0-CR1</weld.version>
    </properties>
    
    <modules>
