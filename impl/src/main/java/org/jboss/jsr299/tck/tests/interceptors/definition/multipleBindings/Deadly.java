@@ -11,12 +11,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
+import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD, PARAMETER, FIELD })
+@Target( { TYPE, METHOD})
 @Retention(RUNTIME)
 @Documented
-@Qualifier
-@interface Deadly
+@InterceptorBinding
+public @interface Deadly
 {
 
 }

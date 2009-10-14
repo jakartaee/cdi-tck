@@ -166,7 +166,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       assert interceptors.get(1).getInterceptorBindingTypes().contains(transactionalBinding);
    }
 
-   @Test(groups = "ri-broken", expectedExceptions = {IllegalArgumentException.class})
+   @Test(expectedExceptions = {IllegalArgumentException.class})
    @SpecAssertions({
          @SpecAssertion(section = "11.3.12", id = "b")
    })
@@ -179,7 +179,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, transactionalBinding, transactionalBinding);
    }
 
-   @Test(groups = "ri-broken", expectedExceptions = {IllegalArgumentException.class})
+   @Test(expectedExceptions = {IllegalArgumentException.class})
    @SpecAssertions({
          @SpecAssertion(section = "11.3.12", id = "c")
    })
@@ -189,7 +189,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE);
    }
 
-   @Test(groups = "ri-broken", expectedExceptions = {IllegalArgumentException.class})
+   @Test(expectedExceptions = {IllegalArgumentException.class})
    @SpecAssertions({
          @SpecAssertion(section = "11.3.12", id = "d")
    })
@@ -229,7 +229,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       assert !MissileInterceptor.intercepted;
    }
 
-   @Test (groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "7.2", id = "ia")
    public void testProducerMethodsAreIntercepted()
    {
@@ -277,7 +277,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       assert NetworkLogger.intercepted;
    }
 
-   @Test (groups = "ri-broken")
+   @Test
    @SpecAssertions({
          @SpecAssertion(section = "9.1.1", id = "a"),
          @SpecAssertion(section = "9.1.1", id = "b")

@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class MultipleInterceptorBindingsTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "9.5.1", id = "a"),
       @SpecAssertion(section = "9.5", id = "ca")
@@ -24,21 +24,19 @@ public class MultipleInterceptorBindingsTest extends AbstractJSR299Test
    {
       MissileInterceptor.intercepted = false;
       
-      Missile missile = getInstanceByType(Missile.class, 
-            new AnnotationLiteral<Fast>() {}, new AnnotationLiteral<Deadly>() {});      
+      Missile missile = getInstanceByType(FastAndDeadlyMissile.class);
       missile.fire();
       
       assert MissileInterceptor.intercepted;
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.5.1", id = "b")
    public void testInterceptorNotAppliedToBeanWithSomeBindings()
    {
       MissileInterceptor.intercepted = false;
       
-      Missile missile = getInstanceByType(Missile.class, 
-            new AnnotationLiteral<Slow>() {}, new AnnotationLiteral<Deadly>() {});      
+      Missile missile = getInstanceByType(SlowMissile.class);      
       missile.fire();
       
       assert !MissileInterceptor.intercepted;

@@ -398,7 +398,7 @@ public class DependentContextTest extends AbstractJSR299Test
       assert InteriorDecorator.isDestroyed();
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "6.4.1", id = "aa")
    public void testDependentScopedInterceptorsAreDependentObjectsOfBean()
    {
