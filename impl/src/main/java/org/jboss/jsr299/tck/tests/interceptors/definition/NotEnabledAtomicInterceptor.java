@@ -4,8 +4,8 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Logged @Interceptor
-class FileLogger
+@Atomic @Interceptor
+class NotEnabledAtomicInterceptor
 {
    public static boolean intercepted = false;
 

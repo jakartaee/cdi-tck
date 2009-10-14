@@ -42,6 +42,7 @@ import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.PassivationCapable;
+import javax.enterprise.inject.spi.InterceptionType;
 import javax.enterprise.inject.stereotype.Stereotype;
 import javax.inject.Qualifier;
 
@@ -142,7 +143,7 @@ public class BeanManagerTest extends AbstractJSR299Test
       assert !getCurrentManager().isStereotype(Transactional.class);
    }
    
-   @Test(groups = {"ri-broken", "rewrite"})
+   @Test(groups="rewrite")
    // WBRI-59
    // Should also check a custom interceptor binding type
    @SpecAssertion(section = "11.3.13", id = "ad")
