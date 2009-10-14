@@ -1,0 +1,12 @@
+-------------
+* 1.0.0.CR1 *
+-------------
+
+Known Issues
+-------------
+
+These known issues will be fixed for 1.0.0.CR2
+
+* CDITCK-34: log4j-1.2.14.jar must be included on the server classpath
+* CDITCK-37: harness tries to load classes from WEB-INF/classes, which the servlet spec doesn't require to be supported
+* CDITCK-38: coverage for 11.4, 11.5.6, 11.5.8 and 12.3 is low

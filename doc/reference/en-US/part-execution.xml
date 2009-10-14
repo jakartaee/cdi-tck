@@ -5,8 +5,8 @@
    <partintro>
       <para>
          In this part you learn how to execute the CDI TCK on the CDI
-         reference implementation (Web Beans). First, you are walked through
-         the steps necessary to execute the test suite on Web Beans. Then you
+         reference implementation (Weld). First, you are walked through
+         the steps necessary to execute the test suite on Weld. Then you
          discover how to modify the TCK runner to execute the test suite on
          your own implementation. Finally, you learn how to debug tests from
          the test suite in Eclipse.

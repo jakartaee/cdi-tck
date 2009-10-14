@@ -22,6 +22,12 @@
    <version>1.0.0-SNAPSHOT</version>
    <packaging>jdocbook</packaging>
    <name>JSR-299 TCK Reference Guide</name>
+   
+   <parent>
+      <groupId>org.jboss.weld</groupId>
+      <artifactId>weld-parent</artifactId>
+      <version>2</version>
+   </parent>
 
    <pluginRepositories>
       <pluginRepository>
@@ -52,8 +58,8 @@
             <extensions>true</extensions>
             <dependencies>
                <dependency>
-                  <groupId>org.jboss.weld</groupId>
-                  <artifactId>weld-docbook-xslt</artifactId>
+                  <groupId>org.jboss.webbeans</groupId>
+                  <artifactId>webbeans-docbook-xslt</artifactId>
                   <version>1.1.1.BETA2</version>
                   <exclusions>
                      <exclusion>
@@ -83,15 +89,6 @@
                <sourceDirectory>${pom.basedir}</sourceDirectory>
                <sourceDocumentName>master.xml</sourceDocumentName>
                <masterTranslation>en-US</masterTranslation>
-               <!--
-                  <translations> <translation>it-IT</translation>
-                  <translation>zh-CN</translation>
-                  <translation>zh-TW</translation>
-                  <translation>es-ES</translation>
-                  <translation>ko-KR</translation>
-                  <translation>de-DE</translation>
-                  <translation>pt-BR</translation> </translations>
-               -->
                <imageResource>
                   <directory>${pom.basedir}/en-US</directory>
                   <includes>
@@ -102,21 +99,21 @@
                   <format>
                      <formatName>pdf</formatName>
                      <stylesheetResource>
-                        classpath:/xslt/org/jboss/weld/pdf.xsl
+                        classpath:/xslt/org/jboss/webbeans/pdf.xsl
                      </stylesheetResource>
                      <finalName>jsr299-tck-reference.pdf</finalName>
                   </format>
                   <format>
                      <formatName>html</formatName>
                      <stylesheetResource>
-                        classpath:/xslt/org/jboss/weld/xhtml.xsl
+                        classpath:/xslt/org/jboss/webbeans/xhtml.xsl
                      </stylesheetResource>
                      <finalName>index.html</finalName>
                   </format>
                   <format>
                      <formatName>html_single</formatName>
                      <stylesheetResource>
-                        classpath:/xslt/org/jboss/weld/xhtml-single.xsl
+                        classpath:/xslt/org/jboss/webbeans/xhtml-single.xsl
                      </stylesheetResource>
                      <finalName>index.html</finalName>
                   </format>
@@ -129,17 +126,6 @@
                   <docbookVersion>1.72.0</docbookVersion>
                   <localeSeparator>-</localeSeparator>
                </options>
-            </configuration>
-         </plugin>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-enforcer-plugin</artifactId>
-         </plugin>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-release-plugin</artifactId>
-            <configuration>
-               <arguments>-Dbuild.translations</arguments>
             </configuration>
          </plugin>
          <plugin>
@@ -164,156 +150,7 @@
             </executions>
          </plugin>
       </plugins>
-      <pluginManagement>
-         <plugins>
-            <plugin>
-               <groupId>org.codehaus.mojo</groupId>
-               <artifactId>build-helper-maven-plugin</artifactId>
-               <version>1.4</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-dependency-plugin</artifactId>
-               <version>2.0</version>
-            </plugin>
-            <plugin>
-               <groupId>org.jboss.maven.plugins</groupId>
-               <artifactId>maven-jdocbook-plugin</artifactId>
-               <version>${mpjdocbook.version}</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-jar-plugin</artifactId>
-               <configuration>
-                  <archive>
-                     <manifest>
-                        <addDefaultImplementationEntries>
-                           true
-                        </addDefaultImplementationEntries>
-                        <addDefaultSpecificationEntries>
-                           true
-                        </addDefaultSpecificationEntries>
-                     </manifest>
-                  </archive>
-               </configuration>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-surefire-report-plugin</artifactId>
-               <version>2.4.3</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-surefire-plugin</artifactId>
-               <version>2.4.3</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-clean-plugin</artifactId>
-               <version>2.2</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-deploy-plugin</artifactId>
-               <version>2.4</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-javadoc-plugin</artifactId>
-               <version>2.4</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-install-plugin</artifactId>
-               <version>2.2</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-site-plugin</artifactId>
-               <version>2.0-beta-6</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-source-plugin</artifactId>
-               <version>2.0.4</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-jar-plugin</artifactId>
-               <version>2.2</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-antrun-plugin</artifactId>
-               <version>1.1</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-release-plugin</artifactId>
-               <version>2.0-beta-7</version>
-            </plugin>
-            <plugin>
-               <groupId>org.apache.maven.plugins</groupId>
-               <artifactId>maven-enforcer-plugin</artifactId>
-               <version>1.0-alpha-4</version>
-               <executions>
-                  <execution>
-                     <id>enforce</id>
-                     <goals>
-                        <goal>enforce</goal>
-                     </goals>
-                     <configuration>
-                        <rules>
-                           <requireMavenVersion>
-                              <version>2.0.9</version>
-                           </requireMavenVersion>
-                           <requirePluginVersions>
-                              <unCheckedPlugins>
-                                 <unCheckedPlugin>org.apache.maven.plugins:maven-eclipse-plugin
-                                 </unCheckedPlugin>
-                              </unCheckedPlugins>
-                           </requirePluginVersions>
-                        </rules>
-                     </configuration>
-                  </execution>
-               </executions>
-            </plugin>
-         </plugins>
-      </pluginManagement>
-      <extensions>
-         <extension>
-            <groupId>org.apache.maven.wagon</groupId>
-            <artifactId>wagon-webdav</artifactId>
-            <version>1.0-beta-2</version>
-         </extension>
-      </extensions>
    </build>
-
-   <profiles>
-      <profile>
-         <activation>
-            <property>
-               <name>build.translations</name>
-            </property>
-         </activation>
-         <build>
-            <plugins>
-               <plugin>
-                  <groupId>org.jboss.maven.plugins</groupId>
-                  <artifactId>maven-jdocbook-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                           <goal>translate</goal>
-                        </goals>
-                     </execution>
-                  </executions>
-               </plugin>
-            </plugins>
-         </build>
-      </profile>
-   </profiles>
 
    <ciManagement>
       <system>Hudson</system>
@@ -337,16 +174,4 @@
       <url>http://fisheye.jboss.org/browse/Weld/cdi-tck</url>
    </scm>
 
-   <distributionManagement>
-       <repository>
-          <id>repository.jboss.org</id>
-          <name>JBoss Releases Repository</name>
-          <url>dav:https://svn.jboss.org/repos/repository.jboss.org/maven2</url>
-      </repository>
-      <snapshotRepository>
-         <id>snapshots.jboss.org</id>
-         <name>JBoss Snapshot Repository</name>
-         <url>dav:https://snapshots.jboss.org/maven2</url>
-      </snapshotRepository>
-   </distributionManagement>
 </project>

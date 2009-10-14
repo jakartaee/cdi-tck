@@ -37,14 +37,14 @@
       </para>
       <para>
          The JSR-299: Contexts and Dependency Injection for Java EE 1.0
-         reference implementation (RI) project is named Web Beans. You can
-         obtain the latest Web Beans release from the
+         reference implementation (RI) project is named . You can
+         obtain the latest  release from the
          <ulink url="http://seamframework.org/Download">download page</ulink>
          on Seam Framework website.
       </para>
       <note>
          <para>
-            Web Beans is not required for running the CDI TCK, but it can be
+             is not required for running the CDI TCK, but it can be
             used as a reference for familiarizing yourself with the TCK before
             testing your own CDI implementation.
          </para>
@@ -111,19 +111,19 @@
 
       <tip id="tck-in-jboss-as">
          <title>
-            Running the TCK against the CDI RI (Web Beans) and JBoss AS
+            Running the TCK against the CDI RI () and JBoss AS
          </title>
 
          <para>
-            Web Beans is built as a modular library, and as such can be
+             is built as a modular library, and as such can be
             retro-fitted to Java EE 5 products as required. JBoss AS 5.1 and
-            above releases bundle Web Beans. JBoss AS 5.1 also allows you to
-            upgrade the Web Beans module to the current release (though some
+            above releases bundle . JBoss AS 5.1 also allows you to
+            upgrade the  module to the current release (though some
             functionality may be disabled).
          </para>
 
          <para>
-            To install JBoss AS 5.1 and update to the latest Web Beans
+            To install JBoss AS 5.1 and update to the latest 
             release: 
          </para>
 
@@ -169,7 +169,7 @@
          </itemizedlist>
 
          <para>
-            Web Beans includes a TCK runner that executes the TCK using Web
+             includes a TCK runner that executes the TCK using Web
             Beans as the CDI implementation and JBoss AS as the Java EE runtime.
             To run the tck:
          </para>
@@ -181,7 +181,7 @@
                   install Maven 2 in the
                   <ulink
                      url="http://www.sonatype.com/books/maven-book/reference/installation-sect-maven-install.html">Maven: The Definitive Guide</ulink>
-                  book published by Sonatype. Web Beans bundles a copy of Maven
+                  book published by Sonatype.  bundles a copy of Maven
                   in the
                   <code>lib/maven</code>
                   directory.
@@ -231,7 +231,7 @@ mvn test -Dincontainer]]></programlisting>
       <section id="m2eclipse-plugin">
          <title>Maven 2 Plugin (m2eclipse)</title>
          <para>
-            Another useful plugin is m2eclipse. Both the TCK project and Web Beans
+            Another useful plugin is m2eclipse. Both the TCK project and 
             are use Maven 2. Therefore, to work with these projects in Eclipse, you
             may wish to have native support for Maven 2 projects, which the m2eclipse
             plugin provides. Instructions for using the m2eclipse update site to
@@ -255,7 +255,7 @@ mvn test -Dincontainer]]></programlisting>
       <para>
          Again, the Eclipse plugins are not required to execute the TCK, but
          can be very helpful when validating an implementation against the TCK
-         test suite and especially when using the modules from the Web Beans
+         test suite and especially when using the modules from the 
          project.
       </para>
    </section>

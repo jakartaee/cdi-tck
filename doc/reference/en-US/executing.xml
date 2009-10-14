@@ -3,7 +3,7 @@
 <chapter id="executing">
    <title>Executing the Test Suite</title>
    <para>
-      This chapter explains how to run the TCK on Web Beans as well as your own
+      This chapter explains how to run the TCK on Weld as well as your own
       implementation. The CDI TCK uses the Maven 2 TestNG plugin and the JBoss
       Test Harness to execute the test suite. Learning to execute the test suite
       from Maven 2 is prerequisite knowlege for running the tests in an IDE,
@@ -15,11 +15,11 @@
       <para>
          The test suite is executed by the Maven 2 TestNG plugin during the test
          phase of the Maven 2 life cycle. The execution happens within a TCK
-         runner project (as opposed to the TCK project itself). Web Beans
-         includes a TCK runner project that executes the CDI TCK on Web Beans
+         runner project (as opposed to the TCK project itself). Weld
+         includes a TCK runner project that executes the CDI TCK on Weld
          running inside JBoss AS 5.1. To execute the CDI TCK on your own CDI
          implementation, you could modify the TCK runner project included with
-         Web Beans to use your CDI implementation as described in <xref
+         Weld to use your CDI implementation as described in <xref
          linkend="configuration" />.
       </para>
    </section>
@@ -27,8 +27,8 @@
    <section>
       <title>Running the Tests In Standalone Mode</title>
       <para>
-         To execute the TCK test suite against Web Beans, first switch to the
-         jboss-tck-runner directory in the extracted Web Beans distribution:
+         To execute the TCK test suite against Weld, first switch to the
+         jboss-tck-runner directory in the extracted Weld distribution:
       </para>
 
       <programlisting>cd weld/jboss-tck-runner</programlisting>

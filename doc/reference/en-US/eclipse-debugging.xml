@@ -13,14 +13,13 @@
          There is almost no difference in how you debug a standalone test
          from how you run it. With the test class open in the Eclipse editor,
          simply right click in the editor view and select Debug As &gt; TestNG
-         Test. Eclipse will stop at any breakpoints you set just like it would
-         with any other local debug process.
+         Test. Eclipse will stop at any breakpoints you set just like it would         with any other local debug process.
       </para>
       <para>
-         If you plan to step into a class in a Web Beans implementation (or any
+         If you plan to step into a class in the Weld implementation (or any
          other dependent library), you must ensure that the source is properly
          associated with the library. Below are the steps to follow to associate
-         the source of Web Beans with the TestNG debug configuration:
+         the source of Weld with the TestNG debug configuration:
       </para>
       <orderedlist>
          <listitem>

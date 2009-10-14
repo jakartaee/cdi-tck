@@ -301,6 +301,7 @@
                <artifactId>maven-release-plugin</artifactId>
                <configuration>
                   <tagBase>https://svn.jboss.org/repos/weld/cdi-tck/tags</tagBase>
+                  <arguments>-Pdocs</arguments>
                </configuration>
             </plugin>
          </plugins>
@@ -314,5 +315,17 @@
       </developerConnection>
       <url>http://fisheye.jboss.org/browse/Weld</url>
    </scm>
+
+   <profiles>
+      <profile>
+      <id>docs</id>
+      <modules>
+         <module>api</module>
+         <module>impl</module>
+         <module>doc/reference</module>
+      </modules>
+    </profile>
+   
+   </profiles>
 
 </project>

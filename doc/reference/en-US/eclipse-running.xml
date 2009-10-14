@@ -36,9 +36,9 @@
 
       <para>
          With the m2eclipse plugin installed, Eclipse should recognize the
-         CDI TCK projects as valid Eclipse projects (or any Web Beans project
+         CDI TCK projects as valid Eclipse projects (or any Weld project
          for that matter). Import them into the Eclipse workspace at this time.
-         You should also import the Web Beans projects if you want to debug into
+         You should also import the Weld projects if you want to debug into
          that code, which is covered later.
       </para>
       <tip>
@@ -62,8 +62,8 @@ mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs]]><
       <orderedlist>
          <listitem>
             <para>
-               <emphasis role="bold">Web Beans</emphasis> - Groups the CDI API
-               and the CDI RI (i.e., Web Beans) projects
+               <emphasis role="bold">Weld</emphasis> - Groups the CDI API
+               and the CDI RI (i.e., Weld) projects
             </para>
          </listitem>
          <listitem>
@@ -74,9 +74,9 @@ mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs]]><
          </listitem>
          <listitem>
             <para>
-               <emphasis role="bold">Web Beans JBoss TCK Runner</emphasis> -
+               <emphasis role="bold">Weld JBoss TCK Runner</emphasis> -
                Groups the porting package implementation and TCK runner projects
-               that are configured to certify Web Beans deployed on JBoss AS 5.1
+               that are configured to certify Weld deployed on JBoss AS 5.1
             </para>
          </listitem>
       </orderedlist>
@@ -102,7 +102,7 @@ CDI TCK
   jsr299-tck-api
   jsr299-tck-impl
   jsr299-tck-parent
-Web Beans JBoss TCK Runner
+Weld JBoss TCK Runner
   weld-jboss-tck-runner
   weld-porting-package]]></programlisting>
       <para>
@@ -436,7 +436,7 @@ orjboss.testharness.runIntegrationTests=true</programlisting>
          Eclipse classpath. 
       </para>
       <para>
-         You have now mastered running the CDI TCK against Web Beans using
+         You have now mastered running the CDI TCK against Weld using
          both Maven 2 and within Eclipse. Now you're likely interested in how to
          debug a test so that you can efficiently investigate test failures.
       </para>

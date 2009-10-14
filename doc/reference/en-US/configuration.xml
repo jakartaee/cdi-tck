@@ -212,7 +212,7 @@
       <para>
          It's beyond the scope of this guide to describe in how to set up your
          build environment to run the TCK. The JBoss Test Harness guide
-         describes how Web Beans uses Maven 2 to execute the CDI TCK. See
+         describes how Weld uses Maven 2 to execute the CDI TCK. See
          <xref linkend="test-suite-runner" />. The TestNG documentation provides
          extensive information on launching TestNG using the Java, Ant, Eclipse
          or IntellJ IDEA.
