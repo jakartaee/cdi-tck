@@ -24,7 +24,7 @@
    <parent>
       <groupId>org.jboss.jsr299.tck</groupId>
       <artifactId>jsr299-tck-parent</artifactId>
-      <version>1.0.0-CR1</version>
+      <version>1.0.0-SNAPSHOT</version>
       <relativePath>../../pom.xml</relativePath>
    </parent>
 
@@ -166,11 +166,11 @@
 
    <scm>
 
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/tags/1.0.0-CR1
+      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/trunk
       </connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.0-CR1
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk
       </developerConnection>
-     <url>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/jsr299-tck-reference-guide/1.0.0-CR1/jsr299-tck-reference-guide</url>
+     <url>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/jsr299-tck-reference-guide</url>
   </scm>
 
 </project>
