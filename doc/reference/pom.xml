@@ -12,8 +12,7 @@
       KIND, either express or implied. See the License for the specific language
       governing permissions and limitations under the License.
    -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
    <modelVersion>4.0.0</modelVersion>
 
@@ -25,7 +24,8 @@
    <parent>
       <groupId>org.jboss.jsr299.tck</groupId>
       <artifactId>jsr299-tck-parent</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0-CR1</version>
+      <relativePath>../../pom.xml</relativePath>
    </parent>
 
    <pluginRepositories>
@@ -166,11 +166,11 @@
 
    <scm>
 
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck
+      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/1.0.0-CR1
       </connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.0-CR1
       </developerConnection>
-      <url>http://fisheye.jboss.org/browse/Weld/cdi-tck</url>
+      <url>http://fisheye.jboss.org/browse/Weld/cdi-tck/1.0.0-CR1</url>
    </scm>
 
 </project>
