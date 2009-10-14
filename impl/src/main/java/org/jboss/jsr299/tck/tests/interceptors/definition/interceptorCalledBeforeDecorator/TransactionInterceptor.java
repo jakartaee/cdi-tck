@@ -4,7 +4,6 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor
 public class TransactionInterceptor
 {
    @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception

@@ -1,6 +1,8 @@
 <beans> 
    <decorators>
-      <decorator>org.jboss.jsr299.tck.tests.context.dependent.InteriorDecorator</decorator>
+      <class>org.jboss.jsr299.tck.tests.context.dependent.InteriorDecorator</class>
    </decorators>
-
+   <interceptors>
+      <class>org.jboss.jsr299.tck.tests.context.dependent.TransactionalInterceptor</class>
+   </interceptors>
 </beans>

@@ -411,7 +411,7 @@ public class DependentContextTest extends AbstractJSR299Test
       AccountTransaction trans = bean.create(ctx);
       trans.execute();
       
-      assert TransactionalInterceptor.intercepted = true;
+      assert TransactionalInterceptor.intercepted;
       
       bean.destroy(trans, ctx);
       
