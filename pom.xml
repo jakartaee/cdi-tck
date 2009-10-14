@@ -303,6 +303,7 @@
                <configuration>
                   <tagBase>https://svn.jboss.org/repos/weld/cdi-tck/tags</tagBase>
                   <arguments>-Pdocs -Dtck-audit -Prelease -Pdist</arguments>
+                  <preparationGoals>install</preparationGoals>
                </configuration>
             </plugin>
          </plugins>
