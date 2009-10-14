@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class NonInterceptorClassInBeansXmlTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.4", id = "cab")
    public void testNonInterceptorClassInBeansXmlNotOk()
    {
