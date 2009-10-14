@@ -4,7 +4,7 @@
    <groupId>org.jboss.jsr299.tck</groupId>
    <artifactId>jsr299-tck-parent</artifactId>
    <packaging>pom</packaging>
-   <version>1.0.0-SNAPSHOT</version>
+   <version>1.0.0-CR1</version>
    <name>CDI TCK</name>
 
    <parent>
@@ -301,7 +301,7 @@
                <artifactId>maven-release-plugin</artifactId>
                <configuration>
                   <tagBase>https://svn.jboss.org/repos/weld/cdi-tck/tags</tagBase>
-                  <arguments>-Pdocs -Dtck-audit</arguments>
+                  <arguments>-Pdocs -Dtck-audit -Prelease</arguments>
                </configuration>
             </plugin>
          </plugins>
@@ -309,11 +309,11 @@
    </build>
 
    <scm>
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/trunk</connection>
+      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/tags/1.0.0-CR1</connection>
       <developerConnection>
-         scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk
+         scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.0-CR1
       </developerConnection>
-      <url>http://fisheye.jboss.org/browse/Weld</url>
+      <url>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.0-CR1</url>
    </scm>
 
    <profiles>
