@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class SameClassListedTwiceInBeansXmlTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.4", id = "cb")
    public void testSameInterceptorClassListedTwiceInBeansXmlNotOk()
    {

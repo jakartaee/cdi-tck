@@ -4,7 +4,6 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor
 class AnotherInterceptor
 {
    public static boolean first = false;

@@ -1,4 +1,4 @@
-package org.jboss.jsr299.tck.tests.interceptors.definition.broken.invalidBindingAnnotations;
+package org.jboss.jsr299.tck.tests.interceptors.definition.interceptorOrder;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -10,14 +10,13 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.enterprise.inject.stereotype.Stereotype;
+import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD, FIELD })
+@Target( { TYPE, METHOD})
 @Retention(RUNTIME)
 @Documented
-@FooBinding("abc")
-public @Stereotype
-@interface FooStereotype
+@InterceptorBinding
+@interface Secure
 {
 
 }

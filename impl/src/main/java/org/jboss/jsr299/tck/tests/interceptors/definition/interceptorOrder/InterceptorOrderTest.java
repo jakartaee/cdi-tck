@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class InterceptorOrderTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "9.4", id = "b"),
       @SpecAssertion(section = "9.5", id = "ea")
@@ -29,7 +29,7 @@ public class InterceptorOrderTest extends AbstractJSR299Test
       assert SecondInterceptor.calledFirst;
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.4", id = "f")
    public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding()
    {

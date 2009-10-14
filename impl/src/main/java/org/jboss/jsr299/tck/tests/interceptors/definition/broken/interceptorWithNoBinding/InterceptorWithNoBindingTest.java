@@ -17,10 +17,10 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="PFD2")
 public class InterceptorWithNoBindingTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.2", id = "c")
    public void testInterceptorWithNoBindingNotOk()
    {
-      
+      assert false;
    }
 }

@@ -2,7 +2,7 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.interceptorOrder;
 
 import javax.interceptor.Interceptors;
 
-@Interceptors({FirstInterceptor.class, SecondInterceptor.class})
+@Secure
 class Foo
 {
    public void bar() {}

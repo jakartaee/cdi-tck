@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class InterceptorCanNotBeDecoratorTest extends AbstractJSR299Test
 {
-   @Test(groups = { "ri-broken" })
+   @Test
    @SpecAssertion(section = "3.1", id = "f0")
    public void testInterceptorCanNotAlsoBeDecorator() throws Exception
    {
