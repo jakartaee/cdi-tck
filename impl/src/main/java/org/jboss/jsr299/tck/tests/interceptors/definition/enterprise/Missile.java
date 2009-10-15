@@ -4,7 +4,7 @@ import javax.ejb.Stateful;
 import javax.interceptor.Interceptors;
 
 @Stateful
-@Interceptors(MissileInterceptor.class)
+@Airborne
 public class Missile implements MissileLocal
 {
    public void fire() {}
