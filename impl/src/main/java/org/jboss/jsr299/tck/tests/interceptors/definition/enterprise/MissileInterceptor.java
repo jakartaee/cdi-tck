@@ -1,11 +1,13 @@
 package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise;
 
+import java.io.Serializable;
+
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Interceptor @Airborne
-class MissileInterceptor
+class MissileInterceptor implements Serializable
 {
    public static boolean intercepted = false;
    
