@@ -10,7 +10,7 @@
    <parent>
       <groupId>org.jboss.weld</groupId>
       <artifactId>weld-parent</artifactId>
-      <version>2</version>
+      <version>3</version>
    </parent>
 
    <!-- Metadata -->
@@ -56,7 +56,7 @@
 
    <issueManagement>
       <system>JIRA</system>
-      <url>http://jira.jboss.org/browse/WBTCK</url>
+      <url>http://jira.jboss.org/browse/CDITCK</url>
    </issueManagement>
 
    <inceptionYear>2008</inceptionYear>
@@ -75,7 +75,7 @@
 
    <properties>
       <jboss.test.audit.version>1.0.0</jboss.test.audit.version>
-      <jboss.test.harness.version>1.1.0-SNAPSHOT</jboss.test.harness.version>
+      <jboss.test.harness.version>1.1.0-CR2</jboss.test.harness.version>
       <testng.version>5.10</testng.version>
       <jsr250.api.version>1.0</jsr250.api.version>
       <cdi.api.version>1.0-CR1</cdi.api.version>
@@ -294,7 +294,6 @@
                <artifactId>maven-release-plugin</artifactId>
                <configuration>
                   <tagBase>https://svn.jboss.org/repos/weld/cdi-tck/tags</tagBase>
-                  <arguments>-Pdocs -Dtck-audit -Prelease -Pdist</arguments>
                   <preparationGoals>install</preparationGoals>
                </configuration>
             </plugin>
@@ -313,6 +312,11 @@
    <profiles>
       <profile>
          <id>docs</id>
+         <activation>
+            <property>
+               <name>release</name>
+            </property>
+         </activation>
          <modules>
             <module>doc/reference</module>
          </modules>
@@ -320,6 +324,11 @@
 
       <profile>
          <id>dist</id>
+         <activation>
+            <property>
+               <name>release</name>
+            </property>
+         </activation>
          <modules>
             <module>dist</module>
          </modules>
