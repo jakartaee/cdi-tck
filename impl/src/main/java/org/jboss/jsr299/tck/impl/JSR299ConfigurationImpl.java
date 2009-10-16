@@ -12,11 +12,6 @@ import org.jboss.testharness.impl.ConfigurationImpl;
 public class JSR299ConfigurationImpl extends ConfigurationImpl implements JSR299Configuration
 {
    
-   public static JSR299Configuration get()
-   {
-      return ConfigurationImpl.get(JSR299Configuration.class);
-   }
-   
    public static final String INTEGRATION_TEST_PACKAGE_NAME = "org.jboss.jsr299.tck.integration";
    public static final String UNIT_TEST_PACKAGE_NAME = "org.jboss.jsr299.tck.unit";
  

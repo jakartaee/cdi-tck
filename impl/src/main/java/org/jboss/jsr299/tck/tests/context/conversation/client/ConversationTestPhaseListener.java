@@ -9,41 +9,34 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.jsr299.tck.impl.JSR299ConfigurationImpl;
+import org.jboss.jsr299.tck.api.JSR299Configuration;
 import org.jboss.jsr299.tck.impl.OldSPIBridge;
+import org.jboss.testharness.impl.ConfigurationFactory;
 
 public class ConversationTestPhaseListener implements PhaseListener
 {
-   
+
    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1197355854770726526L;
+   private static final long serialVersionUID = 1197355854770726526L;
 
-public static final String ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME = "org.jboss.jsr299.tck.activeBeforeApplyRequestValues";
+   public static final String ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME = "org.jboss.jsr299.tck.activeBeforeApplyRequestValues";
 
    private boolean activeBeforeApplyRequestValues;
-   
+
    public void afterPhase(PhaseEvent event)
    {
    }
 
    public void beforePhase(PhaseEvent event)
    {
-      try
-      {
-         JSR299ConfigurationImpl.get();
-      }
-      catch (NoClassDefFoundError e) 
-      {
-         e.printStackTrace();
-         e.getCause().printStackTrace();
-      }
+      JSR299Configuration configuration = ConfigurationFactory.get(JSR299Configuration.class);
       if (event.getPhaseId().equals(PhaseId.APPLY_REQUEST_VALUES))
       {
          try
          {
-            JSR299ConfigurationImpl.get().getManagers().getManager().getContext(ConversationScoped.class);
+            configuration.getManagers().getManager().getContext(ConversationScoped.class);
             activeBeforeApplyRequestValues = true;
          }
          catch (ContextNotActiveException e)
@@ -53,7 +46,7 @@ public static final String ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME = "org
       }
       if (event.getPhaseId().equals(PhaseId.RENDER_RESPONSE))
       {
-         BeanManager beanManager = JSR299ConfigurationImpl.get().getManagers().getManager();
+         BeanManager beanManager = configuration.getManagers().getManager();
          Conversation conversation = OldSPIBridge.getInstanceByType(beanManager, Conversation.class);
          HttpServletResponse response = (HttpServletResponse) event.getFacesContext().getExternalContext().getResponse();
          response.addHeader(AbstractConversationTest.CID_HEADER_NAME, conversation.getId());
@@ -67,5 +60,5 @@ public static final String ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME = "org
    {
       return PhaseId.ANY_PHASE;
    }
-   
+
 }

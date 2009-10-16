@@ -21,9 +21,9 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 
 import org.jboss.jsr299.tck.api.JSR299Configuration;
-import org.jboss.jsr299.tck.impl.JSR299ConfigurationImpl;
 import org.jboss.jsr299.tck.impl.OldSPIBridge;
 import org.jboss.testharness.api.DeploymentException;
+import org.jboss.testharness.impl.ConfigurationFactory;
 
 public abstract class AbstractJSR299Test extends org.jboss.testharness.AbstractTest
 {
@@ -64,7 +64,7 @@ public abstract class AbstractJSR299Test extends org.jboss.testharness.AbstractT
    @Override
    protected JSR299Configuration getCurrentConfiguration()
    {
-      return JSR299ConfigurationImpl.get();
+      return ConfigurationFactory.get(JSR299Configuration.class);
    }
 
    /**
