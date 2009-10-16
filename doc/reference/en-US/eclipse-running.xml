@@ -76,7 +76,7 @@ mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs]]><
             <para>
                <emphasis role="bold">Weld JBoss TCK Runner</emphasis> -
                Groups the porting package implementation and TCK runner projects
-               that are configured to certify Weld deployed on JBoss AS 5.1
+               that are configured to certify Weld deployed on JBoss AS 5.2
             </para>
          </listitem>
       </orderedlist>
@@ -238,7 +238,7 @@ Weld JBoss TCK Runner
       <para>
          Let's see what has to be done to execute an integration test. This
          will result in the artifact being deployed to the container, which is
-         JBoss AS 5.1 if you are using the JBoss TCK runner.
+         JBoss AS 5.2 if you are using the JBoss TCK runner.
       </para>
    </section>
    <section id="eclipse-in-container">
@@ -275,7 +275,7 @@ Weld JBoss TCK Runner
                - the relative path from the jboss-tck-impl project to a
                directory that contains a build.properties or
                local.build.properties file defining the location of a JBoss AS
-               5.1 installation in the
+               5.2 installation in the
                <literal>jboss.home</literal>
                property
             </para>
@@ -373,7 +373,7 @@ orjboss.testharness.runIntegrationTests=true</programlisting>
       </orderedlist>
       <para>
          When you run the test this time, it should pass. If you get a
-         failure that the container (e.g., JBoss AS 5.1) must be run with
+         failure that the container (e.g., JBoss AS 5.2) must be run with
          assertions enabled, you need to stop the container and start it with
          the -ea flag (or just leave it stopped and the test will start it
          appropriately). 

@@ -17,7 +17,7 @@
          phase of the Maven 2 life cycle. The execution happens within a TCK
          runner project (as opposed to the TCK project itself). Weld
          includes a TCK runner project that executes the CDI TCK on Weld
-         running inside JBoss AS 5.1. To execute the CDI TCK on your own CDI
+         running inside JBoss AS 5.2. To execute the CDI TCK on your own CDI
          implementation, you could modify the TCK runner project included with
          Weld to use your CDI implementation as described in <xref
          linkend="configuration" />.
@@ -88,7 +88,7 @@
          deploy the test artifact to the container and execute the test in a
          true Java EE life cycle. The JBoss TCK runner has a dependency on the
          library that provides an implementation of this interface for JBoss AS
-         5.1.
+         5.2.
       </para>
       <para>
          Since in-container tests are executed in a remote JVM, the results of

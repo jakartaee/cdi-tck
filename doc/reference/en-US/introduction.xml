@@ -270,14 +270,14 @@
             <para>
                Sun Microsystems, Inc. will implement the porting package for the
                CDI RI and test the CDI RI on the Java EE Reference
-               Implementation as well as other platforms.
+               Implementation .
             </para>
          </note>
          <para>The CDI TCK has been tested run on following platforms:</para>
          <itemizedlist>
             <listitem>
                <para>
-                  JBoss AS 5.1.0.GA using Sun Java SE 6 on Red Hat Enterprise 
+                  JBoss AS 5.2.0.Beta1 using Sun Java SE 6 on Red Hat Enterprise 
                   Linux 5.2
                </para>
             </listitem>
