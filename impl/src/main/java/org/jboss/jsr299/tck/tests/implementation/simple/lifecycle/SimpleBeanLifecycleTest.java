@@ -173,7 +173,11 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
    {
       assert getBeans(TunaFarm.class).size() == 1;
       TunaFarm tunaFarm = getInstanceByType(TunaFarm.class);
-      assert tunaFarm.tuna != null;
+      assert tunaFarm.tuna != null;      
+      assert tunaFarm.tuna.getName().equals("Ophir");
+      
+      assert tunaFarm.qualifiedTuna != null;
+      assert tunaFarm.qualifiedTuna.getName().equals("qualifiedTuna");            
    }
 
    @Test(groups = "beanLifecycle")

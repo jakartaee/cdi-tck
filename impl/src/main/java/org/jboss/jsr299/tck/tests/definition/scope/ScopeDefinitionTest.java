@@ -82,7 +82,7 @@ public class ScopeDefinitionTest extends AbstractJSR299Test
    }
    
    @Test @SpecAssertion(section="2.4.4", id = "da")
-   public void testMutipleIncompatibleScopeStereotypesWithScopeSpecified()
+   public void testMultipleIncompatibleScopeStereotypesWithScopeSpecified()
    {
       assert getBeans(Pollock.class).size() == 1; 
       Bean<Pollock> bean = getBeans(Pollock.class).iterator().next();
@@ -90,7 +90,7 @@ public class ScopeDefinitionTest extends AbstractJSR299Test
    }
    
    @Test @SpecAssertion(section="2.4.4", id = "c")
-   public void testMutipleCompatibleScopeStereotypes()
+   public void testMultipleCompatibleScopeStereotypes()
    {
       assert getBeans(Grayling.class).size() == 1; 
       Bean<Grayling> bean = getBeans(Grayling.class).iterator().next();
@@ -102,7 +102,7 @@ public class ScopeDefinitionTest extends AbstractJSR299Test
      @SpecAssertion(section = "2.7.2", id = "db"),
      @SpecAssertion(section = "4.1", id = "ab")
    })
-   public void testCDIScopeTypeOverridesStereotype()
+   public void testWebBeanScopeTypeOverridesStereotype()
    {
       assert getBeans(RedSnapper.class).size() == 1; 
       Bean<RedSnapper> bean = getBeans(RedSnapper.class).iterator().next();

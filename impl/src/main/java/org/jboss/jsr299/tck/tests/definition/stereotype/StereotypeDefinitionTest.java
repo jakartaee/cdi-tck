@@ -71,7 +71,7 @@ public class StereotypeDefinitionTest extends AbstractJSR299Test
    public void testExplicitScopeOverridesMergedScopesFromMultipleStereotype()
    {
       assert getBeans(Springbok.class).size() == 1;
-      assert getBeans(Springbok.class).iterator().next().getScope().equals(ApplicationScoped.class);
+      assert getBeans(Springbok.class).iterator().next().getScope().equals(RequestScoped.class);
    }
 
    @Test

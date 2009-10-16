@@ -43,8 +43,7 @@ public class EJBDecoratorInvocationTest extends AbstractJSR299Test
       @SpecAssertion(section="8.5", id="b"),
       @SpecAssertion(section="8.1.3", id="d"),
       @SpecAssertion(section="8.1.2", id="f"),
-      @SpecAssertion(section="8.1.2", id="b"),
-      @SpecAssertion(section="7.2", id="d")
+      @SpecAssertion(section="8.1.2", id="b")
    })
    public void testDecoratorInvocation()
    {
@@ -53,6 +52,18 @@ public class EJBDecoratorInvocationTest extends AbstractJSR299Test
       getInstanceByType(PigSty.class).clean();
       assert TimestampLogger.getMessage().equals(PigSty.MESSAGE);
       assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + PigSty.MESSAGE);
+   }
+   
+   @Test
+   @SpecAssertions({
+      @SpecAssertion(section="7.2", id="d")
+   })
+   public void testEJBDecoratorInvocation() {
+       // testDecoratorInvocation tests decorators of normal beans called from an EJB
+       // it doesn't test actual decoration of the EJB
+       PigStyDecorator.decoratorCalled = false;
+       getInstanceByType(PigSty.class).clean();
+       assert PigStyDecorator.decoratorCalled;
    }
    
    @Test

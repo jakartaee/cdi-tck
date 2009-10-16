@@ -44,7 +44,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
    @SpecAssertions( {
       @SpecAssertion(section = "7.3.2", id = "aa"),
       @SpecAssertion(section = "7.3.2", id = "bb"),
-      @SpecAssertion(section = "7.3.3", id = "b"),
+      //@SpecAssertion(section = "7.3.3", id = "b"),
       @SpecAssertion(section = "6.5.3", id = "b"),
       @SpecAssertion(section = "12.1", id="bba")
    })
@@ -103,6 +103,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
       Context requestContext = getCurrentManager().getContext(RequestScoped.class);
       CreationalContext<KleinStadt> creationalContext = getCurrentManager().createCreationalContext(stadtBean);
       KleinStadt kassel = stadtBean.create(creationalContext);
+      assert requestContext.get(stadtBean) != null : "bean exists in request context";
       kassel.ping();
       stadtBean.destroy(kassel, creationalContext);
       
@@ -119,6 +120,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
    })
    public void testRemovedEjbIgnored()
    {
+      assert false;
       KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {});
       assert stadtInstance != null : "Expected instance to be created by container";
       stadtInstance.setName("Kassel-Wilhelmshoehe");
@@ -131,7 +133,8 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "enterpriseBeans", "lifecycle", "integration" })
-   @SpecAssertion(section = "7.3.3", id = "a")
+   @SpecAssertions({
+       @SpecAssertion(section = "7.3.3", id = "b")})
    public void testCreateSLSB()
    {
       Bean<NeueStadt> stadtBean = getBeans(NeueStadt.class).iterator().next();
@@ -144,6 +147,16 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
       Set<Class> interfaces = new HashSet<Class>(Arrays.asList(stadtInstance.getClass().getInterfaces()));
       assert interfaces.contains(NeueStadt.class);
       assert interfaces.contains(GeschichtslosStadt.class);
+   }
+   
+   @Test(groups = { "enterpriseBeans", "clientProxy", "lifecycle", "integration" })
+   @SpecAssertions({
+      @SpecAssertion(section = "7.3.3", id = "c")
+   })
+   public void testDestroyDiscardsSLSB() throws Exception
+   {
+      // stub for test
+      assert false;
    }
 
    @Test(groups = { "enterpriseBeans", "lifecycle", "integration" })

@@ -35,11 +35,14 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test
    })
    public void testBindingTypesAppliedToDisposalMethodParameters() throws Exception
    {
+      assert !SpiderProducer.isTameSpiderDestroyed();
+      assert !SpiderProducer.isDeadliestSpiderDestroyed();
       Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
       CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);
       Tarantula instance = tarantula.create(creationalContext);
       tarantula.destroy(instance, creationalContext);
       assert SpiderProducer.isTameSpiderDestroyed();
+      assert SpiderProducer.isDeadliestSpiderDestroyed();
    }
 
    @Test

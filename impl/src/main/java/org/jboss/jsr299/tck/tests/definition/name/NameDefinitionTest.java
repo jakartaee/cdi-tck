@@ -46,7 +46,7 @@ public class NameDefinitionTest extends AbstractJSR299Test
       @SpecAssertion(section = "2.7", id = "a"),
       @SpecAssertion(section = "2.7.1.3", id = "aaa")
    })
-   public void testSterotypeDefaultsName()
+   public void testStereotypeDefaultsName()
    {
       assert getBeans(RedSnapper.class).size() == 1; 
       Bean<RedSnapper> bean = getBeans(RedSnapper.class).iterator().next();

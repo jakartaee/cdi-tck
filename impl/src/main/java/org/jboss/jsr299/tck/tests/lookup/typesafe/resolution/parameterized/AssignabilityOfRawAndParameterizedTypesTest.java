@@ -44,7 +44,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
    public void testAssignabilityToRawType()
    {
       Set<Bean<Dao>> beans = getBeans(Dao.class);
-      assert getBeans(Dao.class).size() == 3; // Dao, DaoProducer.getDao() and ObjectDao
+      assert getBeans(Dao.class).size() == 4; // Dao, DaoProducer.getDao(), DaoProducer.getRawDao and ObjectDao
    }
 
    @Test(groups= {"resolution"})

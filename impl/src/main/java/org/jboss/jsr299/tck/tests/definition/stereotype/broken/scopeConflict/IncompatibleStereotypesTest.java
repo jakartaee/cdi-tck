@@ -18,7 +18,7 @@ public class IncompatibleStereotypesTest extends AbstractJSR299Test
    @SpecAssertions( { 
       @SpecAssertion(section = "2.4.4", id = "da") 
    })
-   public void testMutipleIncompatibleScopeStereotypes()
+   public void testMultipleIncompatibleScopeStereotypes()
    {
       assert false;
    }

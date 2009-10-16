@@ -9,7 +9,11 @@ class TunaFarm
    @Inject
    public Tuna tuna;
    
+   
+   @SuppressWarnings("unused")
+   @Inject @Tame
+   public Tuna qualifiedTuna;
+   
    public Tuna notInjectedTuna = new Tuna();
-
    
 }

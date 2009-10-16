@@ -20,14 +20,15 @@ package org.jboss.jsr299.tck.tests.interceptors.definition;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.ArrayList;
 
 import javax.enterprise.inject.AnnotationLiteral;
+import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InterceptionType;
 import javax.enterprise.inject.spi.Interceptor;
 
@@ -36,8 +37,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
-
 import org.testng.annotations.Test;
 
 /**
@@ -45,24 +44,23 @@ import org.testng.annotations.Test;
  * their execution.
  *
  * @author David Allen
- * @author Marius Bogoevici
+ *
  */
 @Artifact
-@SpecVersion(spec = "cdi", version = "PFD2")
-@BeansXml("beans.xml")
+@SpecVersion(spec="cdi", version="PFD2")
 public class InterceptorDefinitionTest extends AbstractJSR299Test
 {
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "11.1.2", id = "a")
+      @SpecAssertion(section = "11.1.2", id = "a")
    })
    // WBRI-59
    public void testInterceptorsImplementInterceptorInterface()
    {
       boolean interfaceFound = false;
-      for (Type type : getInterfacesImplemented(getTransactionalInterceptor().getClass()))
+      for (Type type : getInterfacesImplemented(getBeans(TransactionalInterceptor.class).iterator().next().getClass()))
       {
-         if (type instanceof ParameterizedTypeImpl && ((ParameterizedTypeImpl)type).getRawType().equals(Interceptor.class))
+         if (type.equals(Interceptor.class))
          {
             interfaceFound = true;
             break;
@@ -70,28 +68,35 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       }
       assert interfaceFound;
    }
-
-   @Test
+   
+   private Set<Type> getInterfacesImplemented(Class<?> clazz)
+   {
+      Set<Type> interfaces = new HashSet<Type>();
+      interfaces.addAll(new HierarchyDiscovery(clazz).getFlattenedTypes());
+      return interfaces;
+   }
+   
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "11.1.2", id = "b")
+      @SpecAssertion(section = "11.1.2", id = "b")
    })
    // WBRI-59
    public void testInterceptorBindingTypes()
    {
-      Interceptor<?> interceptorBean = getTransactionalInterceptor();
+      Interceptor<?> interceptorBean = (Interceptor<?>) getBeans(TransactionalInterceptor.class).iterator().next();
       assert interceptorBean.getInterceptorBindingTypes().size() == 1;
-      assert interceptorBean.getInterceptorBindingTypes().contains(new AnnotationLiteral<Transactional>(){});
+      assert interceptorBean.getInterceptorBindingTypes().contains(Transactional.class);
    }
 
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "11.1.2", id = "c"),
-         @SpecAssertion(section = "11.1.2", id = "e")
+      @SpecAssertion(section = "11.1.2", id = "c"),
+      @SpecAssertion(section = "11.1.2", id = "e")
    })
    // WBRI-59
    public void testInterceptionType()
    {
-      Interceptor<?> interceptorBean = getTransactionalInterceptor();
+      Interceptor<?> interceptorBean = (Interceptor<?>) getBeans(TransactionalInterceptor.class).iterator().next();
       assert interceptorBean.intercepts(InterceptionType.AROUND_INVOKE);
       assert !interceptorBean.intercepts(InterceptionType.POST_ACTIVATE);
       assert !interceptorBean.intercepts(InterceptionType.POST_CONSTRUCT);
@@ -99,61 +104,24 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       assert !interceptorBean.intercepts(InterceptionType.PRE_PASSIVATE);
    }
 
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertion(section = "11.1.2", id = "f")
    // WBRI-59
    public void testInstanceOfInterceptorForEveryEnabledInterceptor()
    {
-      List<AnnotationLiteral<?>> annotationLiterals = Arrays.<AnnotationLiteral<?>>asList(
-            new AnnotationLiteral<Transactional>(){},
-            new AnnotationLiteral<Secure>(){},
-            new AnnotationLiteral<MissileBinding>(){},
-            new AnnotationLiteral<Logged>(){});
-
-      List<Class<?>> interceptorClasses = new ArrayList<Class<?>>(Arrays.<Class<?>>asList(
-            AtomicInterceptor.class,
-            MissileInterceptor.class,
-            SecureInterceptor.class,
-            TransactionalInterceptor.class,
-            NetworkLogger.class,
-            FileLogger.class,
-            NotEnabledAtomicInterceptor.class
-      ));
-
-      for (AnnotationLiteral<?> annotationLiteral: annotationLiterals)
-      {
-         List<Interceptor<?>> interceptors = getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, annotationLiteral);
-         for (Interceptor<?> interceptor: interceptors)
-         {
-            interceptorClasses.remove(interceptor.getBeanClass());
-         }
-      }
-
-      List<Interceptor<?>> interceptors = getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
-                                                                              new AnnotationLiteral<Atomic>(){},
-                                                                              new AnnotationLiteral<MissileBinding>(){});
-      for (Interceptor<?> interceptor : interceptors)
-      {
-         interceptorClasses.remove(interceptor.getBeanClass());
-      }
-
-      assert interceptorClasses.size() == 1;
-      assert interceptorClasses.get(0).equals(NotEnabledAtomicInterceptor.class);
+      assert !getBeans(TransactionalInterceptor.class).isEmpty();
+      assert !getBeans(SecureInterceptor.class).isEmpty();
    }
 
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "11.3.12", id = "a")
+      @SpecAssertion(section = "11.3.12", id = "a")
    })
    // WBRI-59
    public void testResolveInterceptorsReturnsOrderedList()
    {
-      Annotation transactionalBinding = new AnnotationLiteral<Transactional>()
-      {
-      };
-      Annotation secureBinding = new AnnotationLiteral<Secure>()
-      {
-      };
+      Annotation transactionalBinding = new AnnotationLiteral<Transactional>() {};
+      Annotation secureBinding = new AnnotationLiteral<Secure>() {};
       List<Interceptor<?>> interceptors = getCurrentManager().resolveInterceptors(
             InterceptionType.AROUND_INVOKE,
             transactionalBinding,
@@ -161,158 +129,126 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       );
       assert interceptors.size() == 2;
       assert interceptors.get(0).getInterceptorBindingTypes().size() == 1;
-      assert interceptors.get(0).getInterceptorBindingTypes().contains(secureBinding);
+      assert interceptors.get(0).getInterceptorBindingTypes().contains(transactionalBinding);
       assert interceptors.get(1).getInterceptorBindingTypes().size() == 1;
-      assert interceptors.get(1).getInterceptorBindingTypes().contains(transactionalBinding);
+      assert interceptors.get(1).getInterceptorBindingTypes().contains(secureBinding);
    }
-
-   @Test(expectedExceptions = {IllegalArgumentException.class})
+   
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "11.3.12", id = "b")
+      @SpecAssertion(section = "11.3.12", id = "b")
    })
    // WBRI-59
    public void testSameBindingTypesToResolveInterceptorsFails()
    {
-      Annotation transactionalBinding = new AnnotationLiteral<Transactional>()
-      {
-      };
+      Annotation transactionalBinding = new AnnotationLiteral<Transactional>() {};
       getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, transactionalBinding, transactionalBinding);
    }
-
-   @Test(expectedExceptions = {IllegalArgumentException.class})
+   
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "11.3.12", id = "c")
+      @SpecAssertion(section = "11.3.12", id = "c")
    })
    // WBRI-59
    public void testNoBindingTypesToResolveInterceptorsFails()
    {
       getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE);
    }
-
-   @Test(expectedExceptions = {IllegalArgumentException.class})
+   
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "11.3.12", id = "d")
+      @SpecAssertion(section = "11.3.12", id = "d")
    })
    // WBRI-59
    public void testNonBindingTypeToResolveInterceptorsFails()
    {
-      Annotation nonBinding = new AnnotationLiteral<NonBindingType>()
-      {
-      };
+      Annotation nonBinding = new AnnotationLiteral<NonBindingType>() {};
       getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, nonBinding);
    }
-
-   @Test
+   
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "7.2", id = "a"),
-         @SpecAssertion(section = "9.2", id = "a"),
-         @SpecAssertion(section = "12.3", id = "kb")
+     @SpecAssertion(section = "7.2", id = "a"),
+     @SpecAssertion(section = "9.2", id = "a"),
+     @SpecAssertion(section = "12.3", id = "kb")
    })
    public void testManagedBeanIsIntercepted()
    {
       MissileInterceptor.intercepted = false;
-
+      
       Missile missile = getInstanceByType(Missile.class);
       missile.fire();
-
+      
       assert MissileInterceptor.intercepted;
    }
-
+   
    @Test
    @SpecAssertion(section = "7.2", id = "a1")
    public void testInitializerMethodsNotIntercepted()
    {
       MissileInterceptor.intercepted = false;
-
-      getInstanceByType(Missile.class);
-
+      
+      Missile missile = getInstanceByType(Missile.class);
+      assert missile.initCalled;
       assert !MissileInterceptor.intercepted;
    }
-
-   @Test
+   
+   @Test(groups = "ri-broken")
    @SpecAssertion(section = "7.2", id = "ia")
    public void testProducerMethodsAreIntercepted()
    {
       MissileInterceptor.intercepted = false;
-
+      
       getInstanceByType(Wheat.class);
-
+      
       assert MissileInterceptor.intercepted;
    }
-
-   @Test
+   
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "9.1", id = "a"),
-         @SpecAssertion(section = "9.1", id = "b"),
-         @SpecAssertion(section = "9.1", id = "c"),
-         @SpecAssertion(section = "9.3", id = "a")
+      @SpecAssertion(section = "9.1", id = "a"),
+      @SpecAssertion(section = "9.1", id = "b"),
+      @SpecAssertion(section = "9.1", id = "c"),
+      @SpecAssertion(section = "9.3", id = "a")
    })
    public void testInterceptorBindingAnnotation()
-   {
-      Interceptor<?> interceptorBean = getLoggedInterceptors().iterator().next();
+   {      
+      Interceptor<?> interceptorBean = (Interceptor<?>) getBeans(FileLogger.class).iterator().next();
       assert interceptorBean.getInterceptorBindingTypes().size() == 1;
-      assert interceptorBean.getInterceptorBindingTypes().contains(new AnnotationLiteral<Logged>(){});
+      assert interceptorBean.getInterceptorBindingTypes().contains(Logged.class);            
 
-      Target target = (interceptorBean.getInterceptorBindingTypes().iterator().next()).annotationType().getAnnotation(Target.class);
+      Target target = ((AnnotatedElement) interceptorBean.getInterceptorBindingTypes().iterator().next()).getAnnotation(Target.class);
       List<ElementType> elements = Arrays.asList(target.value());
       assert elements.contains(ElementType.TYPE);
-      assert elements.contains(ElementType.METHOD);
+      assert elements.contains(ElementType.METHOD);          
    }
-
-   @Test
+   
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "9.1.2", id = "a"),
-         @SpecAssertion(section = "9.1.2", id = "b"),
-         @SpecAssertion(section = "2.7.1.2", id = "b")
+      @SpecAssertion(section = "9.1.2", id = "a"),
+      @SpecAssertion(section = "9.1.2", id = "b"),
+      @SpecAssertion(section = "2.7.1.2", id = "b")
    })
    public void testStereotypeInterceptorBindings()
-   {
-      FileLogger.intercepted = false;
-      NetworkLogger.intercepted = false;
-
-      SecureTransaction secureTransaction = getInstanceByType(SecureTransaction.class);
-      secureTransaction.transact();
-
-      assert FileLogger.intercepted;
-      assert NetworkLogger.intercepted;
+   {      
+      Bean<SecureTransaction> bean = getBeans(SecureTransaction.class).iterator().next();
+      assert bean.getQualifiers().contains(Logged.class);      
    }
-
-   @Test
+ 
+   @Test(groups = "ri-broken")
    @SpecAssertions({
-         @SpecAssertion(section = "9.1.1", id = "a"),
-         @SpecAssertion(section = "9.1.1", id = "b")
+      @SpecAssertion(section = "9.1.1", id = "a"),
+      @SpecAssertion(section = "9.1.1", id = "b")
    })
    public void testInterceptorBindingsCanDeclareOtherInterceptorBindings()
    {
       AtomicInterceptor.intercepted = false;
       MissileInterceptor.intercepted = false;
-
+      
       AtomicFoo foo = getInstanceByType(AtomicFoo.class);
       foo.doAction();
-
+      
       assert AtomicInterceptor.intercepted;
       assert MissileInterceptor.intercepted;
    }
-
-   private Interceptor<?> getTransactionalInterceptor()
-   {
-      return getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>()
-      {
-      }).iterator().next();
-   }
-
-   private List<Interceptor<?>> getLoggedInterceptors()
-   {
-      return getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Logged>()
-      {
-      });
-   }
-
-   private Set<Type> getInterfacesImplemented(Class<?> clazz)
-   {
-      Set<Type> interfaces = new HashSet<Type>();
-      interfaces.addAll(new HierarchyDiscovery(clazz).getFlattenedTypes());
-      return interfaces;
-   }
-
 }

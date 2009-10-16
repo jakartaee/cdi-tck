@@ -5,8 +5,8 @@ import javax.enterprise.inject.Produces;
 
 class Lays
 {
-   public @Produces @RequestScoped PotatoChip makeChip()
-   {
+   public @Produces @Null @RequestScoped PotatoChip makeChip()
+   {       
       return null;
    }
 }

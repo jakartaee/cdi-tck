@@ -91,7 +91,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
       @SpecAssertion(section = "5.3", id = "la"),
       @SpecAssertion(section = "5.3.6", id = "a"),
       @SpecAssertion(section = "5.3.6", id = "d") })
-   public void testAllBindingTypesSpecifiedForResolutionMustAppearOnBean()
+   public void testAllQualifiersSpecifiedForResolutionMustAppearOnBean()
    {
       assert getBeans(Animal.class, new ChunkyLiteral(), new AnnotationLiteral<Whitefish>()
       {
@@ -208,39 +208,5 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
       assert !types.contains(DaddyLongLegs.class);
 
       assert getCurrentManager().getBeans("crabSpider").size() == 0;
-   }
-   
-   @Test
-   @SpecAssertion(section = "TBD", id = "TBD")
-   public void testBeanTypesOnManagedBean()
-   {
-      assert getBeans(Canary.class).size() == 1;
-      Set<Bean<Bird>> beans = getBeans(Bird.class);
-      Bean<Canary> bean = getUniqueBean(Canary.class);
-      assert getBeans(Bird.class).isEmpty();
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(Canary.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "TBD", id = "TBD")
-   public void testBeanTypesOnProducerMethod()
-   {
-      assert getBeans(Parrot.class).size() == 1;
-      assert getBeans(Bird.class).isEmpty();
-      Bean<Parrot> bean = getUniqueBean(Parrot.class);
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(Parrot.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "TBD", id = "TBD")
-   public void testBeanTypesOnProducerField()
-   {
-      assert getBeans(Dove.class).size() == 1;
-      assert getBeans(Bird.class).isEmpty();
-      Bean<Dove> bean = getUniqueBean(Dove.class);
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(Dove.class);
    }
 }

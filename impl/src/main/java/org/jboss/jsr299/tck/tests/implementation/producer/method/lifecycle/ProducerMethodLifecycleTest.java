@@ -105,18 +105,9 @@ public class ProducerMethodLifecycleTest extends AbstractJSR299Test
    })
    public void testCreateFailsIfProducerReturnsNullAndNotDependent()
    {
-      // QUESTION is there an easier way to get the producer method bean instead of the top-level (dependent) type?
-      Bean<PotatoChip> potatoChipBean = null;
-      for (Bean<PotatoChip> candidate : getBeans(PotatoChip.class))
-      {
-         if (candidate.getScope().equals(RequestScoped.class))
-         {
-            potatoChipBean = candidate;
-            break;
-         }
-      }
-      
+      Bean<PotatoChip> potatoChipBean = getBeans(PotatoChip.class, NULL_LITERAL).iterator().next();
       assert potatoChipBean != null;
+      
       CreationalContext<PotatoChip> chipCc = getCurrentManager().createCreationalContext(potatoChipBean);
       potatoChipBean.create(chipCc);
       assert false;

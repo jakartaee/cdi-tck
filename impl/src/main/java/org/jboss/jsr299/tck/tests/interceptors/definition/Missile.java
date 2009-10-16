@@ -5,8 +5,16 @@ import javax.inject.Inject;
 @MissileBinding
 class Missile
 {
+   boolean initCalled = false;
+   
    @Inject
-   public void init() { }
+   public void init() { 
+       initCalled = true;
+   }
+   
+   public boolean initCalled() {
+      return initCalled;
+   }
    
    public void fire() { }
 }

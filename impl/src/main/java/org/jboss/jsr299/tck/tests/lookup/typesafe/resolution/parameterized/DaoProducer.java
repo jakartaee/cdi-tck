@@ -31,4 +31,9 @@ public class DaoProducer
       return new Dao<Object, Object>();
    }
    
+   @SuppressWarnings("unchecked")
+   @Produces Dao getRawDao() {
+       return getDao();
+   }
+   
 }

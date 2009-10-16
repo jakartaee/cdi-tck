@@ -42,7 +42,7 @@ public class BeanDefinitionTest extends AbstractJSR299Test
       @SpecAssertion(section = "2", id = "b"),
       @SpecAssertion(section = "11.1", id = "ba")
    })
-   public void testBindingTypesNonEmpty()
+   public void testQualifiersNonEmpty()
    {
       assert getBeans(RedSnapper.class).size() == 1;
       assert getBeans(RedSnapper.class).iterator().next().getQualifiers().size() > 0;

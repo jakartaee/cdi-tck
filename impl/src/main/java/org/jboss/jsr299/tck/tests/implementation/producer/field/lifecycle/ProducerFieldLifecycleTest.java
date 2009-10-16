@@ -1,6 +1,10 @@
 package org.jboss.jsr299.tck.tests.implementation.producer.field.lifecycle;
 
 import javax.enterprise.inject.IllegalProductException;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.AnnotationLiteral;
+import javax.enterprise.context.spi.CreationalContext;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -15,7 +19,9 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="PFD2")
 public class ProducerFieldLifecycleTest extends AbstractJSR299Test
 {
-
+   private AnnotationLiteral<Null>   NULL_LITERAL   = new AnnotationLiteral<Null>()   {};
+   private AnnotationLiteral<Broken> BROKEN_LITERAL = new AnnotationLiteral<Broken>() {};
+    
    @Test(groups = { "producerField" })
    @SpecAssertions({
       @SpecAssertion(section = "3.4", id = "aa") // removed from spec
@@ -68,6 +74,19 @@ public class ProducerFieldLifecycleTest extends AbstractJSR299Test
    {
       NullSpiderConsumer consumerBean = getInstanceByType(NullSpiderConsumer.class);
       assert consumerBean.getInjectedSpider() == null;
+   }
+   
+   @Test(groups = { "producerField" }, expectedExceptions = IllegalProductException.class)  
+   @SpecAssertions({
+     @SpecAssertion(section = "7.3.5", id = "n")
+   })   
+   public void testProducerFieldForNullValueNotDependent() throws Exception {
+       Bean<BlackWidow> spiderBean = getBeans(BlackWidow.class, NULL_LITERAL, BROKEN_LITERAL).iterator().next();
+
+       CreationalContext<BlackWidow> spiderContext = getCurrentManager().createCreationalContext(spiderBean);
+       spiderBean.create(spiderContext);
+             
+       assert false;
    }
 
    @Test(groups = { "producerField" }, expectedExceptions = IllegalProductException.class)  

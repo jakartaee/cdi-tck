@@ -29,11 +29,11 @@ public class ProducerDecorator
 {
    
    @Decorates
-   private Producer logger;
+   private Producer producer;
    
    public Foo produce()
    {
-      return new Foo(logger.produce().getFoo() + "!!");
+      return new Foo(producer.produce().getFoo() + "!!");
    }
    
    /**
@@ -46,7 +46,7 @@ public class ProducerDecorator
    
    public void dispose(Foo foo)
    {
-      logger.dispose(new Foo("decorated"));
+      producer.dispose(new Foo("decorated"));
    }
 
 
