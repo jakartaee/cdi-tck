@@ -106,7 +106,7 @@ public class DependentContextTest extends AbstractJSR299Test
    public void testInstanceUsedForDisposalMethodNotShared()
    {
       SpiderProducer spiderProducer = getInstanceByType(SpiderProducer.class);
-      Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class).iterator().next();
+      Bean<Tarantula> tarantulaBean = getUniqueBean(Tarantula.class, PET_LITERAL);
       CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
       Tarantula tarantula = tarantulaBean.create(creationalContext);
       assert tarantula != null;
