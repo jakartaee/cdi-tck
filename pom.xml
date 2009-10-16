@@ -295,6 +295,7 @@
                <configuration>
                   <tagBase>https://svn.jboss.org/repos/weld/cdi-tck/tags</tagBase>
                   <preparationGoals>install</preparationGoals>
+                  <arguments>-Drelease -Dtck-audit</arguments>
                </configuration>
             </plugin>
          </plugins>
