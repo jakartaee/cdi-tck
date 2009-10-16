@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
    <!--
-      JBoss, Home of Professional Open Source Copyright 2008, Red Hat Middleware
-      LLC, and individual contributors by the @authors tag. See the
-      copyright.txt in the distribution for a full listing of individual
-      contributors. Licensed under the Apache License, Version 2.0 (the
-      "License"); you may not use this file except in compliance with the
-      License. You may obtain a copy of the License at
-      http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable
-      law or agreed to in writing, software distributed under the License is
-      distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-      KIND, either express or implied. See the License for the specific language
-      governing permissions and limitations under the License.
+      JBoss, Home of Professional Open Source Copyright 2008, Red Hat
+      Middleware LLC, and individual contributors by the @authors tag.
+      See the copyright.txt in the distribution for a full listing of
+      individual contributors. Licensed under the Apache License,
+      Version 2.0 (the "License"); you may not use this file except in
+      compliance with the License. You may obtain a copy of the License
+      at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
+      applicable law or agreed to in writing, software distributed under
+      the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+      OR CONDITIONS OF ANY KIND, either express or implied. See the
+      License for the specific language governing permissions and
+      limitations under the License.
    -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
    <modelVersion>4.0.0</modelVersion>
 
@@ -20,7 +22,7 @@
    <artifactId>jsr299-tck-reference-guide</artifactId>
    <packaging>jdocbook</packaging>
    <name>JSR-299 TCK Reference Guide</name>
-   
+
    <parent>
       <groupId>org.jboss.jsr299.tck</groupId>
       <artifactId>jsr299-tck-parent</artifactId>
@@ -28,104 +30,12 @@
       <relativePath>../../pom.xml</relativePath>
    </parent>
 
-   <pluginRepositories>
-      <pluginRepository>
-         <id>repository.jboss.org</id>
-         <name>JBoss Repository</name>
-         <url>http://repository.jboss.org/maven2</url>
-      </pluginRepository>
-   </pluginRepositories>
-   <repositories>
-      <repository>
-         <id>repository.jboss.org</id>
-         <name>JBoss Repository</name>
-         <url>http://repository.jboss.org/maven2</url>
-      </repository>
-   </repositories>
-
-   <properties>
-      <mpjdocbook.version>2.1.1</mpjdocbook.version>
-   </properties>
-
    <build>
       <defaultGoal>process-classes</defaultGoal>
       <plugins>
          <plugin>
             <groupId>org.jboss.maven.plugins</groupId>
             <artifactId>maven-jdocbook-plugin</artifactId>
-            <version>${mpjdocbook.version}</version>
-            <extensions>true</extensions>
-            <dependencies>
-               <dependency>
-                  <groupId>org.jboss.webbeans</groupId>
-                  <artifactId>webbeans-docbook-xslt</artifactId>
-                  <version>1.1.1.BETA2</version>
-                  <exclusions>
-                     <exclusion>
-                        <groupId>org.eclipse.wst.css</groupId>
-                        <artifactId>core</artifactId>
-                     </exclusion>
-                     <exclusion>
-                        <groupId>org.eclipse.wst.sse</groupId>
-                        <artifactId>core</artifactId>
-                     </exclusion>
-                  </exclusions>
-               </dependency>
-               <dependency>
-                  <groupId>org.jboss.seam</groupId>
-                  <artifactId>seam-jdocbook-style</artifactId>
-                  <version>1.1.0.GA</version>
-                  <type>jdocbook-style</type>
-               </dependency>
-               <dependency>
-                  <groupId>org.jboss</groupId>
-                  <artifactId>jbossorg-jdocbook-style</artifactId>
-                  <version>1.1.0</version>
-                  <type>jdocbook-style</type>
-               </dependency>
-            </dependencies>
-            <configuration>
-               <sourceDirectory>${pom.basedir}</sourceDirectory>
-               <sourceDocumentName>master.xml</sourceDocumentName>
-               <masterTranslation>en-US</masterTranslation>
-               <imageResource>
-                  <directory>${pom.basedir}/en-US</directory>
-                  <includes>
-                     <include>images/*.png</include>
-                  </includes>
-               </imageResource>
-               <formats>
-                  <format>
-                     <formatName>pdf</formatName>
-                     <stylesheetResource>
-                        classpath:/xslt/org/jboss/webbeans/pdf.xsl
-                     </stylesheetResource>
-                     <finalName>jsr299-tck-reference.pdf</finalName>
-                  </format>
-                  <format>
-                     <formatName>html</formatName>
-                     <stylesheetResource>
-                        classpath:/xslt/org/jboss/webbeans/xhtml.xsl
-                     </stylesheetResource>
-                     <finalName>index.html</finalName>
-                  </format>
-                  <format>
-                     <formatName>html_single</formatName>
-                     <stylesheetResource>
-                        classpath:/xslt/org/jboss/webbeans/xhtml-single.xsl
-                     </stylesheetResource>
-                     <finalName>index.html</finalName>
-                  </format>
-               </formats>
-               <options>
-                  <xincludeSupported>true</xincludeSupported>
-                  <xmlTransformerType>saxon</xmlTransformerType>
-                  <!-- needed for uri-resolvers; can be ommitted if using 'current' uri scheme -->
-                  <!--     could also locate the docbook dependency and inspect its version... -->
-                  <docbookVersion>1.72.0</docbookVersion>
-                  <localeSeparator>-</localeSeparator>
-               </options>
-            </configuration>
          </plugin>
          <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -151,26 +61,9 @@
       </plugins>
    </build>
 
-   <ciManagement>
-      <system>Hudson</system>
-      <url />
-
-   </ciManagement>
-
-   <issueManagement>
-      <system>JIRA</system>
-      <url>http://jira.jboss.org/browse/WBRI</url>
-   </issueManagement>
-
-   <inceptionYear>2008</inceptionYear>
-
    <scm>
-
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/trunk
-      </connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk
-      </developerConnection>
-     <url>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/jsr299-tck-reference-guide</url>
-  </scm>
+      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/trunk</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk</developerConnection>
+   </scm>
 
 </project>
