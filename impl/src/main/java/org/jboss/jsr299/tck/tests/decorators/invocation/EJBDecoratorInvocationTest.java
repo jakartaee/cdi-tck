@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
 public class EJBDecoratorInvocationTest extends AbstractJSR299Test
 {
 
-   @Test
+   @Test(groups="ri-broken")
    @SpecAssertions({
       @SpecAssertion(section="8.5", id="a"),
       @SpecAssertion(section="8.5", id="c"),
@@ -54,7 +54,7 @@ public class EJBDecoratorInvocationTest extends AbstractJSR299Test
       assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + PigSty.MESSAGE);
    }
    
-   @Test
+   @Test(groups="ri-broken")
    @SpecAssertions({
       @SpecAssertion(section="7.2", id="d")
    })
@@ -66,7 +66,7 @@ public class EJBDecoratorInvocationTest extends AbstractJSR299Test
        assert PigStyDecorator.decoratorCalled;
    }
    
-   @Test
+   @Test(groups="ri-broken")
    @SpecAssertions({
       @SpecAssertion(section="8.5", id="d"),
       @SpecAssertion(section="8.5", id="e"),

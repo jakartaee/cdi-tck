@@ -148,13 +148,13 @@ public class ProcessAnnotatedTypeTest extends AbstractJSR299Test
       assert getInstanceByType(Grocery.class, new AnyLiteral()).isConstructorWithParameterUsed();
    }
    
-   @Test
+   @Test(groups="ri-broken")
    @SpecAssertion(section = "11.4", id = "t")
    public void testPreviouslyNonInjectAnnotatedFieldIsInjected() {
       assert getInstanceByType(Grocery.class, new AnyLiteral()).isVegetablesInjected();
    }
    
-   @Test
+   @Test(groups="ri-broken")
    @SpecAssertion(section = "11.4", id = "u")
    public void testExtraQualifierIsAppliedToInjectedField() {
       Set<Annotation> qualifiers = getInstanceByType(Grocery.class, new AnyLiteral()).getFruit().getMetadata().getQualifiers();
