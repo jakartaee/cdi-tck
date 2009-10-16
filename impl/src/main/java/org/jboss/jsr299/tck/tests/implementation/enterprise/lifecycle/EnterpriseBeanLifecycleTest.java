@@ -148,16 +148,6 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
       assert interfaces.contains(NeueStadt.class);
       assert interfaces.contains(GeschichtslosStadt.class);
    }
-   
-   @Test(groups = { "enterpriseBeans", "clientProxy", "lifecycle", "integration" })
-   @SpecAssertions({
-      @SpecAssertion(section = "7.3.3", id = "c")
-   })
-   public void testDestroyDiscardsSLSB() throws Exception
-   {
-      // stub for test
-      assert false;
-   }
 
    @Test(groups = { "enterpriseBeans", "lifecycle", "integration" })
    @SpecAssertion(section = "3.9.2", id = "b")
