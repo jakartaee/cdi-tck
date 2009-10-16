@@ -3,11 +3,10 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWith
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
-import javax.interceptor.Interceptors;
 
 @Stateful
 @SessionScoped
-@Interceptors(BrokenInterceptor.class)
+@City
 class Espoo_Broken implements EspooLocal_Broken
 {  
    @Remove
