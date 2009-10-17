@@ -1,6 +1,6 @@
 package org.jboss.jsr299.tck.tests.context.passivating.broken.interceptorWithNonPassivatingBeanConstructorParameter;
 
-class Violation
+class UnserializableManagedBean
 {
-   public Violation(String foo) {}
+   
 }

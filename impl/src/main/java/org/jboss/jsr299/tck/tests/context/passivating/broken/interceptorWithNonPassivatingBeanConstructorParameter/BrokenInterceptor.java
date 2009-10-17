@@ -13,7 +13,7 @@ import javax.interceptor.InvocationContext;
 class BrokenInterceptor implements Serializable
 {
    @Inject
-   public BrokenInterceptor(@Default Violation violation)
+   public BrokenInterceptor(@Default UnserializableManagedBean violation)
    {
    }
 
