@@ -22,6 +22,8 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
+import org.jboss.testharness.impl.packaging.Packaging;
+import org.jboss.testharness.impl.packaging.PackagingType;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
@@ -32,27 +34,10 @@ import org.testng.annotations.Test;
 @Artifact
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="PFD2")
+@Packaging(PackagingType.EAR)
 @IntegrationTest
 public class EJBDecoratorInvocationTest extends AbstractJSR299Test
 {
-
-   @Test(groups="ri-broken")
-   @SpecAssertions({
-      @SpecAssertion(section="8.5", id="a"),
-      @SpecAssertion(section="8.5", id="c"),
-      @SpecAssertion(section="8.5", id="b"),
-      @SpecAssertion(section="8.1.3", id="d"),
-      @SpecAssertion(section="8.1.2", id="f"),
-      @SpecAssertion(section="8.1.2", id="b")
-   })
-   public void testDecoratorInvocation()
-   {
-      TimestampLogger.reset();
-      MockLogger.reset();
-      getInstanceByType(PigSty.class).clean();
-      assert TimestampLogger.getMessage().equals(PigSty.MESSAGE);
-      assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + PigSty.MESSAGE);
-   }
    
    @Test(groups="ri-broken")
    @SpecAssertions({
@@ -61,36 +46,11 @@ public class EJBDecoratorInvocationTest extends AbstractJSR299Test
    public void testEJBDecoratorInvocation() {
        // testDecoratorInvocation tests decorators of normal beans called from an EJB
        // it doesn't test actual decoration of the EJB
-       PigStyDecorator.decoratorCalled = false;
+       PigStyDecorator.reset();
+       PigStyImpl.reset();
        getInstanceByType(PigSty.class).clean();
-       assert PigStyDecorator.decoratorCalled;
-   }
-   
-   @Test(groups="ri-broken")
-   @SpecAssertions({
-      @SpecAssertion(section="8.5", id="d"),
-      @SpecAssertion(section="8.5", id="e"),
-      @SpecAssertion(section="8.5", id="f"),
-      @SpecAssertion(section="8.4", id="a"),
-      @SpecAssertion(section="8.1.3", id="d"),
-      @SpecAssertion(section="8.1.2", id="f"),
-      @SpecAssertion(section="8.1.2", id="b")
-   })
-   public void testChainedDecoratorInvocation()
-   {
-      FooDecorator1.reset();
-      FooDecorator2.reset();
-      FooImpl.reset();
-      getInstanceByType(PigSty.class).washDown();
-      assert FooDecorator1.getMessage().equals(PigSty.MESSAGE);
-      assert FooDecorator1.getInjectionPoint().getBean().getBeanClass().equals(PigStyImpl.class);
-      assert !FooDecorator1.getInjectionPoint().isDelegate();
-      assert FooDecorator2.getMessage().equals(PigSty.MESSAGE + FooDecorator1.SUFFIX);
-      assert FooDecorator2.getInjectionPoint().getBean().getBeanClass().equals(FooDecorator1.class);
-      assert FooDecorator2.getInjectionPoint().isDelegate();
-      assert FooImpl.getMessage().equals(PigSty.MESSAGE + FooDecorator1.SUFFIX + FooDecorator2.SUFFIX);
-      assert FooImpl.getInjectionPoint().getBean().getBeanClass().equals(FooDecorator2.class);
-      assert FooImpl.getInjectionPoint().isDelegate();
+       assert PigStyDecorator.isDecoratorCalled();
+       assert PigStyImpl.isBeanCalled();
    }
 
 }

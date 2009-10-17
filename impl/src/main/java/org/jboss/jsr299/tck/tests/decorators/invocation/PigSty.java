@@ -16,17 +16,18 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
+import javax.ejb.Local;
+
 /**
  * @author pmuir
  *
  */
+@Local
 public interface PigSty
 {
    
    public static final String MESSAGE = "smelly work!";
 
    public void clean();
-   
-   public void washDown();
 
 }

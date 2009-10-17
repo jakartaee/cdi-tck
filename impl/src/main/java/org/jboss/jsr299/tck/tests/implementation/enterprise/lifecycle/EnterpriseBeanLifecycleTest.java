@@ -103,7 +103,6 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
       Context requestContext = getCurrentManager().getContext(RequestScoped.class);
       CreationalContext<KleinStadt> creationalContext = getCurrentManager().createCreationalContext(stadtBean);
       KleinStadt kassel = stadtBean.create(creationalContext);
-      assert requestContext.get(stadtBean) != null : "bean exists in request context";
       kassel.ping();
       stadtBean.destroy(kassel, creationalContext);
       
@@ -120,7 +119,6 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
    })
    public void testRemovedEjbIgnored()
    {
-      assert false;
       KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {});
       assert stadtInstance != null : "Expected instance to be created by container";
       stadtInstance.setName("Kassel-Wilhelmshoehe");

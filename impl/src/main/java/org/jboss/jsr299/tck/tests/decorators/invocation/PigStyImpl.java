@@ -16,27 +16,36 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
+import javax.ejb.Stateful;
 import javax.inject.Inject;
 
 /**
  * @author pmuir
  *
  */
+@Stateful
 public class PigStyImpl implements PigSty
 {
    
-   @Inject Logger logger;
+   @Inject
+   private Pig pig;
+   
+   private static boolean BEAN_CALLED; 
    
    public void clean()
    {
-      logger.log(PigSty.MESSAGE);
+      BEAN_CALLED = true;
+      assert pig instanceof Pig;
    }
    
-   @Inject Foo foo;
-   
-   public void washDown()
+   public static boolean isBeanCalled()
    {
-      foo.log(MESSAGE);
+      return BEAN_CALLED;
+   }
+   
+   public static void reset()
+   {
+      BEAN_CALLED = false;
    }
 
 }
