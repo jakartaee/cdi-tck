@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="JSR-299 TCK" verbose="1"  >
+<suite name="JSR-299 TCK" verbose="0"  >
    <test name="JSR-299 TCK">
       <method-selectors>
          <method-selector>
