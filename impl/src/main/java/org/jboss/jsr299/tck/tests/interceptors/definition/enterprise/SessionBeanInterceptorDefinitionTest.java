@@ -8,7 +8,6 @@ import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Packaging;
 import org.jboss.testharness.impl.packaging.PackagingType;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
-
 import org.testng.annotations.Test;
 
 
@@ -19,7 +18,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class SessionBeanInterceptorDefinitionTest extends AbstractJSR299Test
 {
-   @Test
+   @Test(groups = "jboss-as-broken")
    @SpecAssertion(section = "7.2", id = "c")
    public void testSessionBeanIsIntercepted()
    {
