@@ -21,7 +21,7 @@ public class EnterpriseBeanWithIllegalDependencyTest extends AbstractJSR299Test
 {
    @Test(groups = { "contexts", "passivation", "integration"})
    @SpecAssertion(section = "6.6.4", id = "fb")
-   public void testDependentScopedProducerFieldReturnsNonSerializableObjectForInjectionIntoStatefulSessionBeanFails()
+   public void test()
    {
       assert false;
    }
