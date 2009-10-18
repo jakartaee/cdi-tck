@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 @Packaging(PackagingType.EAR)
 @IntegrationTest
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class SessionBeanPolicyTest extends AbstractJSR299Test
 {
 

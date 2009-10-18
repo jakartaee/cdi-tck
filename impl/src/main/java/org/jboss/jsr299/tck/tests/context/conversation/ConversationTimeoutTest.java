@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  */
 @Artifact
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class ConversationTimeoutTest extends AbstractJSR299Test
 {
    @Test

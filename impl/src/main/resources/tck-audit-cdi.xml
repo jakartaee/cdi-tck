@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd"
     name="JSR-299: Contexts and Dependency Injection for Java Enterprise Edition"
     id="cdi"
-    version="PFD2">
+    version="20091018">
 
   <section id="2" title="Concepts">
 
@@ -525,6 +525,11 @@ detects the problem and treats it as a definition error, as defined in Section 1
       <text>A stereotype should not declare any qualifier annotation other than |@Named|.  If a stereotype declares any other qualifier annotation, non-portable behavior results.</text>
       <note>The behavior here is undefined.</note>
     </assertion>
+    
+    <assertion id="c" testable="false">
+      <text>A stereotype should not be annotated |@Typed|. If a stereotype is annotated |@Typed|, non-portable behavior results.</text>
+    </assertion>
+    
   </section>
 
   <section id="2.7.1.4" title="Declaring an @Alternative stereotype">
@@ -641,8 +646,9 @@ detects the problem and treats it as a definition error, as defined in Section 1
   </section>
 
   <section id="3.1.2" title="Bean types of a managed bean">
+  
     <assertion id="a">
-      <text>The set of bean types for a managed bean contains the bean class, every superclass and all interfaces it implements directly or indirectly.</text>
+      <text>The unrestricted set of bean types for a managed bean contains the bean class, every superclass and all interfaces it implements directly or indirectly.</text>
     </assertion>
   </section>
 
@@ -786,7 +792,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
 
   <section id="3.2.2" title="Bean types of a session bean">
     <assertion id="aa">
-      <text>The set of bean types for a session bean contains all local interfaces of the bean and their superinterfaces.</text>
+      <text>The unrestricted set of bean types for a session bean contains all local interfaces of the bean and their superinterfaces.</text>
     </assertion>
 
     <assertion id="ba">
@@ -904,19 +910,23 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
 
   <section id="3.3.1" title="Bean types of a producer method">
     <assertion id="a">
-      <text>If the return type of a producer method is an interface, the set of bean types contains the return type, all interfaces it extends directly or indirectly and |java.lang.Object|</text>
+      <text>If the return type of a producer method is an interface, the unrestricted set of bean types contains the return type, all interfaces it extends directly or indirectly and |java.lang.Object|</text>
     </assertion>
 
-    <assertion id="ba">
-      <text>If a return type of a producer method is primitive ~or is a Java array type~, the set of bean types contains exactly two types: the method return type and |java.lang.Object|.</text>
-    </assertion>
+    <group>
+      <text>If a return type of a producer method is primitive or is a Java array type, the unrestricted set of bean types contains exactly two types: the method return type and |java.lang.Object|.</text>
+      <assertion id="ba">
+        <text>Check primitive return type</text>
+      </assertion>
     
-    <assertion id="bb">
-      <text>If a return type of a producer method is ~primitive or is~ a Java array type, the set of bean types contains exactly two types: the method return type and |java.lang.Object|.</text>
-    </assertion>
+      <assertion id="bb">
+        <text>Check array return type</text>
+      </assertion>
+    </group>
+    
 
     <assertion id="c">
-      <text>If the return type of a producer method is a class, the set of bean types contains the return type, every superclass and all interfaces it implements directly or indirectly.</text>
+      <text>If the return type of a producer method is a class, the unrestricted set of bean types contains the return type, every superclass and all interfaces it implements directly or indirectly.</text>
     </assertion>
   </section>
 
@@ -1149,19 +1159,23 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
 
   <section id="3.4.1" title="Bean types of a producer field">
     <assertion id="a">
-      <text>The bean types of a producer field depend upon the field type.  If the field type is an interface, the set of bean types contains the field type, all interfaces it extends directly or indirectly and java.lang.Object</text>
+      <text>The bean types of a producer field depend upon the field type.  If the field type is an interface, the unrestricted set of bean types contains the field type, all interfaces it extends directly or indirectly and java.lang.Object</text>
     </assertion>
 
-    <assertion id="ba">
-      <text>The bean types of a producer field depend upon the field type.  If a field type is primitive ~or is a Java array type,~ the set of bean types contains exactly two types: the field type and java.lang.Object</text>
-    </assertion>
+    <group>
+      <text>The bean types of a producer field depend upon the field type.  If a field type is primitive or is a Java array type, the unrestricted set of bean types contains exactly two types: the field type and java.lang.Object</text>
+      <assertion id="ba">
+        <text>Check primitive type</text>
+      </assertion>
     
-    <assertion id="bb">
-      <text>The bean types of a producer field depend upon the field type.  If a field type is ~primitive or is~ a Java array type, the set of bean types contains exactly two types: the field type and java.lang.Object</text>
-    </assertion>
+      <assertion id="bb">
+        <text>Check array type</text>
+      </assertion>
+    </group>
+    
 
     <assertion id="c">
-      <text>The bean types of a producer field depend upon the field type.  If the field type is a class, the set of bean types contains the field type, every superclass and all interfaces it implements directly or indirectly</text>
+      <text>The bean types of a producer field depend upon the field type.  If the field type is a class, the unrestricted set of bean types contains the field type, every superclass and all interfaces it implements directly or indirectly</text>
     </assertion>
   </section>
 
@@ -1243,9 +1257,24 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
   </section>
 
   <section id="3.5.2" title="Bean types of a resource">
-    <assertion id="a">
-      <text>The bean types of a resource are the declared type of the field declaration, together with |java.lang.Object|.</text>
-    </assertion>
+    <group>
+      <text>The unrestricted set of bean types of a resource is determined by the declared type of the producer field, as specified by Section 3.4.1, “Bean types of a producer field”.</text>
+      <assertion id="aa">
+        <text>Check @Resource</text>
+      </assertion>
+      <assertion id="ab">
+        <text>Check @PersistenceContext</text>
+      </assertion>
+      <assertion id="ac">
+        <text>Check @PersistenceUnit</text>
+      </assertion>
+      <assertion id="ad">
+        <text>Check @EJB</text>
+      </assertion>
+      <assertion id="ae">
+        <text>Check @WebServiceRef</text>
+      </assertion>
+    </group>
   </section>
 
   <section id="3.6" title="Additional built-in beans">
@@ -1532,6 +1561,16 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     <assertion id="xb">
       <text>This second bean is not an alternative.</text>
     </assertion>
+    
+    <group>
+      <text>Note that this second bean exists, is enabled, and is available for injection whenever the bean class is in the application classpath, even if the first bean is disabled, as defined by Section 5.2.2, “Enabled and disabled beans” or is deployed out- side of a bean deployment archive, as defined in Section 12.1, “Bean deployment archives”, and is therefore not discovered during the bean discovery process defined in Chapter 12, Packaging and deployment.</text>
+      <assertion id="ya">
+        <text>Check that @New on a class outside the BDA, but in the classpath causes a bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yb">
+        <text>Check that @New on a class (which is a session bean class) outside the BDA, but in the classpath causes a session bean with qualifier @New and the given type to be created</text>
+      </assertion>
+    </group>
 
     <assertion id="z">
       <text>When the binding |@New| is specified at an injection point and no |value| member is explicitly specified, the container defaults the |value| to the declared type of the injection point.</text>
@@ -1909,7 +1948,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
 
   <section id="5.1" title="Inter-module accessibility in Java EE">
     <group>
-      <text>Beans packaged in a certain Java EE _module or library are available for injection, lookup and EL resolution to classes and JSP/JSF pages packaged in some other Java EE module or library if and only if the first module or library is required to be accessible to the other module or library by the Java EE platform specification.</text>
+      <text>Beans packaged in a certain Java EE module or library are available for injection, lookup and EL resolution to classes and JSP/JSF pages packaged in some other Java EE module or library if and only if the first module or library is required to be accessible to the other module or library by the Java EE platform specification.</text>
             
       <assertion id="aa">
         <text>Test with injection.</text>
@@ -2374,13 +2413,133 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
   </section>
 
   <section id="5.6.4" title="Injection of fields and initializer methods">
-    <assertion id="a">
-  <text>When the container creates a new instance of a managed bean, session bean, or of any other Java EE component class supporting injection, the container must initialize the values of all injected fields after injection of Java EE component environment resources has been performed and before the |@PostConstruct| callback occurs and before the servlet |init()| method is called.  The container sets the value of each injected field to an injectable reference.</text>
-    </assertion>
-
-    <assertion id="b">
-      <text>After the container initializes the values of the injected fields, it must call all initializer methods, passing an injectable reference to each parameter.</text>
-    </assertion>
+    <group>
+      <text>When the container creates a new instance of a managed bean, session bean, or of any other Java EE component class supporting injection, the container must: Initialize the values of all injected fields. The container sets the value of each injected field to an injectable reference. Call all initializer methods, passing an injectable reference to each parameter.</text>
+      <assertion id="aa">
+        <text>Test session bean fields injected</text>
+      </assertion>
+      <assertion id="ab">
+        <text>Test session bean initializer methods called</text>
+      </assertion>
+      <assertion id="ac">
+        <text>Test managed bean fields injected</text>
+      </assertion>
+      <assertion id="ad">
+        <text>Test managed bean initializer methods called</text>
+      </assertion>
+      <assertion id="ae">
+        <text>Test Servlet fields injected</text>
+      </assertion>
+      <assertion id="af">
+        <text>Test Servlet initializer methods called</text>
+      </assertion>
+      <assertion id="ag">
+        <text>Test Servlet Filter fields injected</text>
+      </assertion>
+      <assertion id="ah">
+        <text>Test Servlet Filter initializer methods called</text>
+      </assertion>
+      <assertion id="ai">
+        <text>Test Servlet Listener fields injected</text>
+      </assertion>
+      <assertion id="aj">
+        <text>Test Servlet Listener initializer methods called</text>
+      </assertion>
+      <assertion id="ak">
+        <text>Test non-contextual session bean fields injected</text>
+      </assertion>
+      <assertion id="al">
+        <text>Test non-contextual session bean initializer methods called</text>
+      </assertion>
+      <assertion id="am">
+        <text>Test tag handler fields injected</text>
+      </assertion>
+      <assertion id="an">
+        <text>Test tag handler initializer methods called</text>
+      </assertion>
+      <assertion id="ao">
+        <text>Test EJB interceptor fields injected</text>
+      </assertion>
+      <assertion id="ap">
+        <text>Test EJB interceptor initializer methods called</text>
+      </assertion>
+      <assertion id="aq">
+        <text>Test WS endpoint fields injected</text>
+      </assertion>
+      <assertion id="ar">
+        <text>Test WS endpoint bean initializer methods called</text>
+      </assertion>
+      <assertion id="as">
+        <text>Test tag handler listener fields injected</text>
+      </assertion>
+      <assertion id="at">
+        <text>Test tag handler listener initializer methods called</text>
+      </assertion>
+      <assertion id="au">
+        <text>Test JSF managed bean fields injected</text>
+      </assertion>
+      <assertion id="av">
+        <text>Test JSF managed bean initializer methods called</text>
+      </assertion>
+    </group> 
+    
+    <group>
+      <text>The container must ensure that: Initializer methods declared by a class X in the type hierarchy of the bean are called after all injected fields declared by X or by superclasses of X have been initialized, and after all Java EE component environment resource dependencies declared by X or by superclasses of X have been injected. Any @PostConstruct callback declared by a class X in the type hierarchy of the bean is called after all initializer meth- ods declared by X or by superclasses of X have been called, after all injected fields declared by X or by superclasses of X have been initialized, and after all Java EE component environment resource dependencies declared by X or by superclasses of X have been injected. Any servlet init() method is called after all initializer methods have been called, all injected fields have been initialized and all Java EE component environment resource dependencies have been injected.</text>
+      <assertion id="ba">
+        <text>Test session bean initializer methods called after injected field of X</text>
+      </assertion>
+      <assertion id="bb">
+        <text>Test session bean initializer methods called after injected field of superclass of X</text>
+      </assertion>
+      <assertion id="bc">
+        <text>Test session bean initializer methods called after EE resource injection of X</text>
+      </assertion>
+      <assertion id="bd">
+        <text>Test session bean initializer methods called after EE resource injection of superclass of X</text>
+      </assertion>
+      <assertion id="be">
+        <text>Test session bean @PostConstruct called after initializer of X</text>
+      </assertion>
+      <assertion id="bf">
+        <text>Test session bean @PostConstruct called after initializer of superclass of X</text>
+      </assertion>
+      <assertion id="bg">
+        <text>Test managed bean initializer methods called after injected field of X</text>
+      </assertion>
+      <assertion id="bh">
+        <text>Test managed bean initializer methods called after injected field of superclass of X</text>
+      </assertion>
+      <assertion id="bi">
+        <text>Test managed bean initializer methods called after EE resource injection of X</text>
+      </assertion>
+      <assertion id="bj">
+        <text>Test managed bean initializer methods called after EE resource injection of superclass of X</text>
+      </assertion>
+      <assertion id="bk">
+        <text>Test managed bean @PostConstruct called after initializer of X</text>
+      </assertion>
+      <assertion id="bl">
+        <text>Test managed bean @PostConstruct called after initializer of superclass of X</text>
+      </assertion>
+      <assertion id="bm">
+        <text>Servlet |init()| method called after initializer method</text>
+      </assertion>
+      <assertion id="bn">
+        <text>Servlet |init()| method called after injected fields</text>
+      </assertion>
+      <assertion id="bo">
+        <text>Servlet |init()| method called after Java EE resource injection</text>
+      </assertion>
+      <assertion id="bp">
+        <text>Servlet Filter |init()| method called after initializer method</text>
+      </assertion>
+      <assertion id="bq">
+        <text>Servlet Filter |init()| method called after injected fields</text>
+      </assertion>
+      <assertion id="br">
+        <text>Servle Filtert |init()| method called after Java EE resource injection</text>
+      </assertion>
+    </group>
   </section>
 
   <section id="5.6.5" title="Destruction of dependent objects">
@@ -2530,6 +2689,11 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
 
     <assertion id="e">
       <text>If an instance of an annotation that is not a qualifier type is passed to |select()|, an |IllegalArgumentException| is thrown.</text>
+    </assertion>
+    
+    <assertion id="ea" testable="false">
+      <text>If an instance of javax.enterprise.inject.New is passed to select(), non-portable behavior results. Portable applications should not pass qualifiers of type @New to select().</text>
+      <note>Describes non-portable behavior</note>
     </assertion>
 
     <assertion id="fa">
@@ -3667,6 +3831,10 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
       </assertion>
     </group>
     
+    <assertion id="ig">
+      <text>Invocation of EJB timer service timeouts by the container are not business method invocations, but are intercepted by interceptors for EJB timeouts.</text>
+    </assertion>
+    
     <assertion id="j">
       <text>Invocation of lifecycle callbacks by the container are not business method invocations, but are intercepted by interceptors for lifecycle callbacks.</text>
     </assertion>
@@ -4215,21 +4383,46 @@ called first.</text>
       </text>
     </assertion>
 
-    <assertion id="b">
-      <text>For a method, the bean interceptor bindings include the interceptor bindings declared by the bean at the class level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively, and of stereotypes, together with all interceptor bindings declared at the method level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively.</text>
-    </assertion>
-
+    <group>
+      <text>For a business method, or EJB timeout method, the bean interceptor bindings include the interceptor bindings declared by the bean at the class level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively, and of stereotypes, together with all interceptor bindings declared at the method level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively.</text>
+      <assertion id="ba">
+         <text>Check a business method</text>
+      </assertion>
+      <assertion id="ba">
+         <text>Check an EJB timeout method</text>
+      </assertion>
+    </group>
+    
     <assertion id="ca">
-  <text>First, the container identifies the set of matching enabled interceptors where, for each interceptor binding declared by the interceptor, there exists an interceptor binding in the set of bean interceptor bindings with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.inject.NonBinding| (see Section 9.5.2, "Interceptor binding types with members"), and the interceptor intercepts the given kind of lifecycle callback or business method, and the interceptor is enabled in the bean deployment archive of the bean.</text>
+      <text>First, the container identifies the set of matching enabled interceptors where, for each interceptor binding declared by the interceptor, there exists an interceptor binding in the set of bean interceptor bindings with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.inject.NonBinding| (see Section 9.5.2, "Interceptor binding types with members"), and the interceptor intercepts the given kind of lifecycle callback or business method, and the interceptor is enabled in the bean deployment archive of the bean.</text>
     </assertion>
 
     <assertion id="ea">
       <text>Next, the container orders the matching interceptors according to the interceptor ordering specified in Section 9.4, "Interceptor enablement and ordering".</text>
     </assertion>
     
-    <assertion id="f">
-      <text>For a custom implementation of the Interceptor interface defined in Section 11.1.2, "The Interceptor interface", the container calls |getInterceptorBindings()| to determine the interceptor bindings of the interceptor and |intercepts()| to determine if the interceptor intercepts a given kind of lifecycle callback or business method.</text>
-    </assertion>
+    <group>
+      <text>For a custom implementation of the Interceptor interface defined in Section 11.1.2, "The Interceptor interface", the container calls |getInterceptorBindings()| to determine the interceptor bindings of the interceptor and |intercepts()| to determine if the interceptor intercepts a given kind of lifecycle callback, EJB timeout or business method.</text>
+      <assertion id="fa">
+         <text>Check for @PostConstruct</text>
+      </assertion>
+      <assertion id="fb">
+         <text>Check for @PreDestroy</text>
+      </assertion>
+      <assertion id="fc">
+         <text>Check for @PostActivate</text>
+      </assertion>
+      <assertion id="fd">
+         <text>Check for @PrePassivate</text>
+      </assertion>
+      <assertion id="fe">
+         <text>Check for @AroundInvoke</text>
+      </assertion>
+      <assertion id="ff">
+         <text>Check for @AroundTimeout</text>
+      </assertion>
+    </group>
+    
   </section>
 
   <section id="9.5.1" title="Interceptors with multiple bindings">
@@ -4731,7 +4924,7 @@ dependencies".</text>
     </assertion>
 
     <assertion id="e">
-      <text>An |InterceptionType| identifies the kind of lifecycle callback or business method.</text>
+      <text>An |InterceptionType| identifies the kind of lifecycle callback, EJB timeout method or business method.</text>
     </assertion>
     
     <assertion id="f">
@@ -4775,9 +4968,25 @@ dependencies".</text>
       <note>Statement of intent</note>
     </assertion>
 
-    <assertion id="ba">
-      <text>For a |Producer| that represents a class, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no parameters otherwise, as defined in Section 5.6.3, "Injection using the bean constructor".</text>
-    </assertion>
+    <group>
+      <text>For a |Producer| that represents a class, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no parameters otherwise, as defined in Section 5.6.3, "Injection using the bean constructor". and returns the resulting instance. If the class has interceptors, |produce()| is responsible for building the interceptor and decorator stacks for the instance.</text>
+      <assertion id="ba">
+         <text>Test field injection occurs</text>
+      </assertion>
+      <assertion id="bb">
+         <text>Test initializer methods called</text>
+      </assertion>
+      <assertion id="bc">
+         <text>Test constructor injected</text>
+      </assertion>
+      <assertion id="bd">
+         <text>Test decorator stack built</text>
+      </assertion>
+      <assertion id="be">
+         <text>Test interceptor stack built</text>
+      </assertion>
+    </group>
+    
         
     <assertion id="c">
       <text>For a |Producer| that represents a class, |dispose()| does nothing.</text>
@@ -4999,6 +5208,12 @@ dependencies".</text>
     <assertion id="e">
       <text>If an instance of an annotation that is not a qualifier type is given, an |IllegalArgumentException| is thrown.</text>
     </assertion>
+    
+    <assertion id="f" testable="false">
+      <text>If an instance of |javax.enterprise.inject.New| is passed to |getBeans()|, non-portable behavior results. Portable applications should not pass qualifiers of type |@New| to |getBeans()|.</text>
+      <note>Describes non-portable behavior</note>
+   </assertion>
+    
   </section>
   
   <section id="11.3.10" title="Observer method resolution">

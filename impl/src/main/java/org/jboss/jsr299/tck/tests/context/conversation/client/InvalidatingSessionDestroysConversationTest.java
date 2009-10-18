@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
   @Resource(destination="clouds.jspx", source="clouds.jsf"),
   @Resource(destination="cloud.jspx", source="cloud.jsf")
 })
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class InvalidatingSessionDestroysConversationTest extends AbstractConversationTest
 {
    

@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest
 @Extension("javax.enterprise.inject.spi.Extension")
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class AfterBeanDiscoveryTest extends AbstractJSR299Test
 {
    

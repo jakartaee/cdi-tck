@@ -19,7 +19,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
   @Resource(destination=WarArtifactDescriptor.WEB_XML_DESTINATION, source="web.xml"),
   @Resource(destination="SimplePage.html", source="SimplePage.html")
 })
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class SessionContextTest extends AbstractJSR299Test
 {
    @Test(groups = { "contexts", "servlet", "integration" })

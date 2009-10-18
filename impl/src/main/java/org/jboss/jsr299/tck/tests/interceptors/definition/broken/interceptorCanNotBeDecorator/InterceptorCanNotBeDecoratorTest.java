@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 @BeansXml("beans.xml")
 public class InterceptorCanNotBeDecoratorTest extends AbstractJSR299Test
 {

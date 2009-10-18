@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class EJBApplicationContextTest extends AbstractJSR299Test
 {
    @Test(groups = { "rewrite", "contexts", "webservice", "integration", "jboss-as-broken" })

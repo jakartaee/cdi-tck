@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
    @Resource(destination = "WEB-INF/faces-config.xml", source = "faces-config.xml"), 
    @Resource(destination = "JSFTestPage.jsp", source = "JSFTestPage.jsp"),
    @Resource(destination = "JSPTestPage.jsp", source = "JSPTestPage.jsp")})
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class IntegrationWithUnifiedELTest extends AbstractJSR299Test
 {
    @Test(groups = {"el" } )

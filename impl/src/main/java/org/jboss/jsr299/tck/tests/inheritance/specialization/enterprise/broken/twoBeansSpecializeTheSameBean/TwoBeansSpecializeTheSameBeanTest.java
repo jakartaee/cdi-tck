@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 @Packaging(PackagingType.EAR)
 @BeansXml("beans.xml")
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class TwoBeansSpecializeTheSameBeanTest extends AbstractJSR299Test
 {
    /**

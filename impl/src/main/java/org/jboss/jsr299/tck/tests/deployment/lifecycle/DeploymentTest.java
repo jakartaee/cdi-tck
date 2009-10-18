@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @Test
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 @BeansXml("beans.xml")
 @Resources({
    @Resource(source="javax.enterprise.inject.spi.Extension.DeploymentTest", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")

@@ -8,7 +8,7 @@ import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 @BeansXml("beans.xml")
 public class InterceptorNotListedInBeansXmlNotEnabledTest extends AbstractJSR299Test
 {

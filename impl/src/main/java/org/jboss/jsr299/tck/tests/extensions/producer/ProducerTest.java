@@ -29,12 +29,14 @@ import org.testng.annotations.Test;
 })
 // Must be an integration test as it needs a resource copied to a folder
 @IntegrationTest
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class ProducerTest extends AbstractJSR299Test
 {
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "11.2", id = "ba")
+      @SpecAssertion(section = "11.2", id = "ba"),
+      @SpecAssertion(section = "11.2", id = "bb"),
+      @SpecAssertion(section = "11.2", id = "bc")
    })
    public void testProduceAndInjectCallsInitializerAndConstructor()
    {

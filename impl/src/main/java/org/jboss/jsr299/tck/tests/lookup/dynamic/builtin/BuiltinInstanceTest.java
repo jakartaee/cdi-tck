@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
  * Tests for built-in Instance.
  */
 @Artifact
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class BuiltinInstanceTest extends AbstractJSR299Test {
 
 	@Test

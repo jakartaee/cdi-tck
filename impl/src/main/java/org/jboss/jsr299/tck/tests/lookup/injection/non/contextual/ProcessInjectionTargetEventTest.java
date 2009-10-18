@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
    @Resource(destination = "ManagedBeanTestPage.jsp", source = "ManagedBeanTestPage.jsp"),
    @Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension") })
 @IntegrationTest
-@SpecVersion(spec = "cdi", version = "PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class ProcessInjectionTargetEventTest extends AbstractJSR299Test
 {
    @Test(groups = "ri-broken")

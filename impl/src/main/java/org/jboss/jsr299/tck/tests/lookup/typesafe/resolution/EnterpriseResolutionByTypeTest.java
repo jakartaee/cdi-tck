@@ -27,7 +27,7 @@ import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 @Packaging(PackagingType.EAR)
 public class EnterpriseResolutionByTypeTest extends AbstractJSR299Test
 {

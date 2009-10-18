@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 @Artifact
 @ExpectedDeploymentException(DeploymentError.class)
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class NonExistantDecoratorClassInBeansXmlTest extends AbstractJSR299Test
 {
    @Test

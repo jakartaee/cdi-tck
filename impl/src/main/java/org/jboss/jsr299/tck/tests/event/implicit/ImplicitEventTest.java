@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  */
 @Artifact
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class ImplicitEventTest extends AbstractJSR299Test
 {
    private static final TypeLiteral<Event<StudentRegisteredEvent>> STUDENT_REGISTERED_EVENT_LITERAL = new TypeLiteral<Event<StudentRegisteredEvent>>() {};

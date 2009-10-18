@@ -21,11 +21,11 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.ArrayList;
 
 import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.spi.InterceptionType;
@@ -37,7 +37,6 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
-
 import org.testng.annotations.Test;
 
 /**
@@ -48,7 +47,7 @@ import org.testng.annotations.Test;
  * @author Marius Bogoevici
  */
 @Artifact
-@SpecVersion(spec = "cdi", version = "PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 @BeansXml("beans.xml")
 public class InterceptorDefinitionTest extends AbstractJSR299Test
 {
@@ -83,12 +82,13 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       assert interceptorBean.getInterceptorBindingTypes().contains(new AnnotationLiteral<Transactional>(){});
    }
 
-   @Test
+   @Test(groups="rewrite")
    @SpecAssertions({
          @SpecAssertion(section = "11.1.2", id = "c"),
          @SpecAssertion(section = "11.1.2", id = "e")
    })
    // WBRI-59
+   // TODO Add tests for EJB timeout method PLM
    public void testInterceptionType()
    {
       Interceptor<?> interceptorBean = getTransactionalInterceptor();

@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 @IntegrationTest
 @Artifact
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 @BeansXml("beans.xml")
 public class SessionBeanInterceptorDefinitionTest extends AbstractJSR299Test
 {

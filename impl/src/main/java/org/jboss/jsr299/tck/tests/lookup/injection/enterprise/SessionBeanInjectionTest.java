@@ -29,14 +29,18 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class SessionBeanInjectionTest extends AbstractJSR299Test
 {
 
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.6", id = "a"),
-      @SpecAssertion(section = "5.6.4", id = "a")})
+      @SpecAssertion(section = "5.6.4", id = "aa"),
+      @SpecAssertion(section = "5.6.4", id = "ab"),
+      @SpecAssertion(section = "5.6.4", id = "ba"),
+      @SpecAssertion(section = "5.6.4", id = "be")
+   })
    public void testInjectionOnContextualSessionBean()
    {
       assert getInstanceByType(FarmLocal.class).isInjectionPerformedCorrectly();
@@ -45,7 +49,9 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.6", id = "c"),
-      @SpecAssertion(section = "5.6.4", id = "a")})
+      @SpecAssertion(section = "5.6.4", id = "ak"),
+      @SpecAssertion(section = "5.6.4", id = "al")
+   })
    public void testInjectionOnNonContextualSessionBean()
    {
       assert getInstanceByType(InjectedSessionBeanLocal.class).getFarm().isInjectionPerformedCorrectly();

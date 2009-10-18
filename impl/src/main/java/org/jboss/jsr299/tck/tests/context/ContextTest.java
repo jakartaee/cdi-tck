@@ -18,7 +18,7 @@ import org.jboss.testharness.impl.packaging.Resources;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 @Resources({
    @Resource(source="javax.enterprise.inject.spi.Extension", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
 })

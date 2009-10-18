@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest(runLocally = true)
 @Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml")
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
 {
    @WebServiceRef(wsdlLocation = "http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl")

@@ -12,7 +12,7 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class CheckTypeParametersWhenResolvingObserversTest extends AbstractJSR299Test
 {
    public static class CharacterList extends ArrayList<Character>

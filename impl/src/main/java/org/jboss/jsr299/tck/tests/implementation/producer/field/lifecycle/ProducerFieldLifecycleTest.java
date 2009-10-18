@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class ProducerFieldLifecycleTest extends AbstractJSR299Test
 {
    private AnnotationLiteral<Null>   NULL_LITERAL   = new AnnotationLiteral<Null>()   {};

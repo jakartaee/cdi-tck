@@ -12,7 +12,7 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class GetOnInactiveContextTest extends AbstractJSR299Test
 {
    @Test(groups = { "contexts" }, expectedExceptions = { ContextNotActiveException.class })

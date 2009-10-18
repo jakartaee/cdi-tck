@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 @Extension("javax.enterprise.inject.spi.Extension")
 // Must be an integration test as it needs a resource copied to a folder
 @IntegrationTest
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class ProcessBeanTest extends AbstractJSR299Test
 {
    

@@ -37,7 +37,7 @@ import org.testng.annotations.Test;
    @Resource(source="javax.enterprise.inject.spi.Extension.ExtensionsTest", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
 })
 @IntegrationTest
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class ExtensionsTest extends AbstractJSR299Test
 {
    

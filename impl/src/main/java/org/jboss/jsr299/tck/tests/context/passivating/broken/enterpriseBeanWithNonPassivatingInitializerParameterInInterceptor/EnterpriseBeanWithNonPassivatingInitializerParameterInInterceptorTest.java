@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Artifact
 @Packaging(PackagingType.EAR)
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 @BeansXml("beans.xml")
 public class EnterpriseBeanWithNonPassivatingInitializerParameterInInterceptorTest extends AbstractJSR299Test
 {   

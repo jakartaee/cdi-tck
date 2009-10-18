@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 @Resource(source = "persistence.xml", destination = "WEB-INF/classes/META-INF/persistence.xml")
 //@PersistenceXml("persistence.xml")
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class PersistenceContextInjectionTest extends AbstractJSR299Test
 {
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
@@ -108,7 +108,6 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test
    
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
    @SpecAssertions( {
-      @SpecAssertion(section = "3.5.2", id = "a"),
       @SpecAssertion(section = "3.5.1", id = "hh")
    })
    public void testBeanTypesAndBindingTypesOfPersistenceContext()

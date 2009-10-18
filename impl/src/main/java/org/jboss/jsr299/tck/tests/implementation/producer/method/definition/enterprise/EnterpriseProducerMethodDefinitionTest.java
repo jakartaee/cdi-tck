@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 @Artifact
 @BeansXml("beans.xml")
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test
 {
    @Test

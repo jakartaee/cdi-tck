@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class EnterpriseScopeDefinitionTest extends AbstractJSR299Test
 {
    @Test 

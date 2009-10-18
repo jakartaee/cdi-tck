@@ -42,7 +42,7 @@ import org.testng.annotations.Test;
 @IntegrationTest
 @Resource(source="web.xml", destination="/WEB-INF/web.xml")
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class EnvInjectionTest extends AbstractJSR299Test
 {
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })

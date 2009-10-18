@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class InitializerMethodTest extends AbstractJSR299Test
 {
 
@@ -33,7 +33,7 @@ public class InitializerMethodTest extends AbstractJSR299Test
       @SpecAssertion(section = "3.9", id = "g"), 
       @SpecAssertion(section = "3.9.1", id = "a"),
       @SpecAssertion(section = "3.9.2", id = "aa"),
-      @SpecAssertion(section = "5.6.4", id = "b"),
+      @SpecAssertion(section = "5.6.4", id = "ab"),
       @SpecAssertion(section = "3.10", id = "a")
    })
    public void testMultipleInitializerMethodsAreCalled()

@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class ProducerMethodLifecycleTest extends AbstractJSR299Test
 {
    private AnnotationLiteral<Pet> PET_LITERAL = new AnnotationLiteral<Pet>() {};

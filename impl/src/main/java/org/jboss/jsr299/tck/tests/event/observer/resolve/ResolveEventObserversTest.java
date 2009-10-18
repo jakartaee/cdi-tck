@@ -16,7 +16,7 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="PFD2")
+@SpecVersion(spec="cdi", version="20091018")
 public class ResolveEventObserversTest extends AbstractJSR299Test
 {
    private static final String BEAN_MANAGER_RESOLVE_OBSERVERS_METHOD_NAME = "resolveObserverMethods";
