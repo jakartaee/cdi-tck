@@ -101,7 +101,7 @@ public class BeanDefinitionTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "2.2.2", id = "a")
+   @SpecAssertion(section = "2.2.3", id = "a")
    @SuppressWarnings("unused")
    public void testBeanClientCanCastBeanInstanceToAnyBeanType()
    {

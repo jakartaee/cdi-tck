@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,6 +41,13 @@ import org.testng.annotations.Test;
 public class ResolutionByTypeTest extends AbstractJSR299Test
 {
 
+   private static final TypeLiteral<FlightlessBird<Australian>> AUSTRALIAN_FLIGHTLESS_BIRD = new TypeLiteral<FlightlessBird<Australian>>() {};
+   private static final TypeLiteral<FlightlessBird<European>> EUROPEAN_FLIGHTLESS_BIRD = new TypeLiteral<FlightlessBird<European>>() {};
+   private static final TypeLiteral<Cat<European>> EUROPEAN_CAT = new TypeLiteral<Cat<European>>() {};
+   private static final TypeLiteral<Cat<African>> AFRICAN_CAT = new TypeLiteral<Cat<African>>() {};
+   private static final Annotation TAME = new AnnotationLiteral<Tame>() {};
+   private static final Annotation WILD = new AnnotationLiteral<Wild>() {};
+   
    @Test(groups = "resolution")
    @SpecAssertion(section = "5.3", id = "lb")
    public void testDefaultBindingTypeAssumed() throws Exception
@@ -211,11 +219,10 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "TBD", id = "TBD")
+   @SpecAssertion(section = "2.2.2", id = "a")
    public void testBeanTypesOnManagedBean()
    {
       assert getBeans(Canary.class).size() == 1;
-      Set<Bean<Bird>> beans = getBeans(Bird.class);
       Bean<Canary> bean = getUniqueBean(Canary.class);
       assert getBeans(Bird.class).isEmpty();
       assert bean.getTypes().size() == 1;
@@ -223,7 +230,19 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "TBD", id = "TBD")
+   @SpecAssertion(section = "2.2.2", id = "e")
+   public void testGenericBeanTypesOnManagedBean()
+   {
+      assert getBeans(AUSTRALIAN_FLIGHTLESS_BIRD).size() == 1;
+      assert getBeans(Emu.class).isEmpty();
+      assert getBeans(EUROPEAN_FLIGHTLESS_BIRD).isEmpty();
+      Bean<FlightlessBird<Australian>> bean = getUniqueBean(AUSTRALIAN_FLIGHTLESS_BIRD);
+      assert bean.getTypes().size() == 1;
+      assert bean.getTypes().iterator().next().equals(AUSTRALIAN_FLIGHTLESS_BIRD.getType());
+   }
+   
+   @Test
+   @SpecAssertion(section = "2.2.2", id = "c")
    public void testBeanTypesOnProducerMethod()
    {
       assert getBeans(Parrot.class).size() == 1;
@@ -234,8 +253,30 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "TBD", id = "TBD")
-   public void testBeanTypesOnProducerField()
+   @SpecAssertion(section = "2.2.2", id = "h")
+   public void testGenericBeanTypesOnProducerField()
+   {
+      assert getBeans(EUROPEAN_CAT, TAME).size() == 1;
+      assert getBeans(DomesticCat.class, TAME).isEmpty();
+      Bean<Cat<European>> bean = getUniqueBean(EUROPEAN_CAT, TAME);
+      assert bean.getTypes().size() == 1;
+      assert bean.getTypes().iterator().next().equals(EUROPEAN_CAT.getType());
+   }
+   
+   @Test
+   @SpecAssertion(section = "2.2.2", id = "g")
+   public void testGenericBeanTypesOnProducerMethod()
+   {
+      assert getBeans(AFRICAN_CAT, WILD).size() == 1;
+      assert getBeans(Lion.class, WILD).isEmpty();
+      Bean<Cat<African>> bean = getUniqueBean(AFRICAN_CAT, WILD);
+      assert bean.getTypes().size() == 1;
+      assert bean.getTypes().iterator().next().equals(AFRICAN_CAT.getType());
+   }
+   
+   @Test
+   @SpecAssertion(section = "2.2.2", id = "d")
+   public void testGeeBeanTypesOnProducerField()
    {
       assert getBeans(Dove.class).size() == 1;
       assert getBeans(Bird.class).isEmpty();

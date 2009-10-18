@@ -97,8 +97,51 @@
       <text>A parameterized type that contains a wildcard type parameter is not a legal bean type.</text>
     </assertion>
   </section>
+  
+  <section id="2.2.2" title="Restricting the bean types of a bean">
+    <group>
+      <text>The bean types of a bean may be restricted by annotating the bean class or producer method or field with the annotation @javax.enterprise.inject.BeanTypes. When a @BeanTypes annotation is explicitly specified, only the types whose classes are explicitly listed using the value member are bean types of the bean.</text>
+      <assertion id="a">
+        <text>Check managed bean</text>
+      </assertion>
+      <assertion id="b">
+        <text>Check session bean</text>
+      </assertion>
+      <assertion id="c">
+        <text>Check producer method</text>
+      </assertion>
+      <assertion id="d">
+        <text>Check producer field</text>
+      </assertion>
+      <assertion id="e">
+        <text>Check generic managed bean</text>
+      </assertion>
+      <assertion id="g">
+        <text>Check generic producer method</text>
+      </assertion>
+      <assertion id="h">
+        <text>Check generic producer field</text>
+      </assertion>
+    </group>
+    
+    <group>
+      <text>If a bean class or producer method or field specifies a @BeanTypes annotation, and the value member specifies a class which does not correspond to a type in the unrestricted set of bean types of a bean, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <assertion id="j">
+        <text>Check managed bean</text>
+      </assertion>
+      <assertion id="k">
+        <text>Check session bean</text>
+      </assertion>
+      <assertion id="l">
+        <text>Check producer method</text>
+      </assertion>
+      <assertion id="m">
+        <text>Check producer field</text>
+      </assertion>
+    </group>
+  </section>
 
-  <section id="2.2.2" title="Typecasting between bean types">
+  <section id="2.2.3" title="Typecasting between bean types">
     <assertion id="a">
       <text>A client of a bean may typecast its contextual reference to a bean to any bean type of the bean which is a Java interface.  However, the client may not in general typecast its contextual reference to an arbitrary concrete bean type of the bean.</text>
     </assertion>

@@ -30,10 +30,10 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="PFD2")
 @Packaging(PackagingType.EAR)
 public class EnterpriseResolutionByTypeTest extends AbstractJSR299Test
-{  
+{
    
    @Test
-   @SpecAssertion(section = "TBD", id = "TBD")
+   @SpecAssertion(section = "2.2.2", id = "b")
    public void testBeanTypesOnSessionBean()
    {
       assert getBeans(CapercaillieLocal.class).size() == 1;
