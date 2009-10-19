@@ -10,8 +10,9 @@
    <section>
      <title>Obtaining the sigtest tool</title>
      <para>
-       You can obtain the Sigtest tool from the Sigtest home page at <ulink url="https://sigtest.dev.java.net/"/>.  
-       The user guide can be found at <ulink url="http://java.sun.com/javame/sigtest/docs/sigtest2.1_usersguide.pdf"/>.
+       You can obtain the Sigtest tool (at the time of writing the TCK uses version 2.1) from the Sigtest home 
+       page at <ulink url="https://sigtest.dev.java.net/"/>. The user guide can be found at 
+       <ulink url="http://java.sun.com/javame/sigtest/docs/sigtest2.1_usersguide.pdf"/>.
      </para>
    </section>
    
@@ -21,28 +22,26 @@
         The general command for generating a signature file looks like this:
       </para>
       
-      <programlisting><![CDATA[
-java -cp %JAVA_HOME%\jre\lib\rt.jar%;sigtestdev.jar com.sun.tdk.signaturetest.Setup -Package javax.decorator -Package javax.enterprise -Package javax.event -Package javax.inject -Package javax.interceptor -FileName weld.sig -Classpath .;%JAVA_HOME%\jre\lib\rt.jar -static]]></programlisting>
+      <programlisting><![CDATA[java -jar sigtestdev.jar Setup -classpath "%JAVA_HOME%\jre\lib\rt.jar:cdi-api.jar:javax.inject.jar:el-api.jar:jboss-interceptor-api.jar" -Package javax.decorator -Package javax.enterprise -FileName cdi-api.sig -static]]></programlisting>
 
       <para>
-        Here's a working example with the classpaths filled out:
+        Usually all the required libraries will be located in a local Maven repository, so here's a working example with the 
+        classpaths filled out:
       </para>
       
-      <programlisting><![CDATA[
-java -cp %JAVA_HOME%\jre\lib\rt.jar;/home/shane/java/sigtest-2.0/lib/sigtestdev.jar com.sun.tdk.signaturetest.Setup -Package javax.decorator -Package javax.enterprise -Package javax.event -Package javax.inject -Package javax.interceptor -FileName weld.sig -Classpath .;%JAVA_HOME%/jre/lib/rt.jar;/home/shane/.m2/repository/org/jboss/weld/jsr299-api/1.0.0-SNAPSHOT/jsr299-api-1.0.0-SNAPSHOT.jar;/home/shane/.m2/repository/javax/el/el-api/1.2/el-api-1.2.jar -static]]></programlisting>
+      <programlisting><![CDATA[java -jar  "/home/shane/java/sigtest-2.1/lib/sigtestdev.jar" Setup -classpath "/usr/local/java/jre/lib/rt.jar:/home/shane/.m2/repository/javax/enterprise/cdi-api/1.0.0-SNAPSHOT/cdi-api-1.0.0-SNAPSHOT.jar:/home/shane/.m2/repository/javax/inject/javax.inject/1.0-PFD-1/javax.inject-1.0-PFD-1.jar:/home/shane/.m2/repository/javax/el/el-api/2.1.2-b04/el-api-2.1.2-b04.jar:/home/shane/.m2/repository/org/jboss/interceptor/jboss-interceptor-api/3.1.0-CR1/jboss-interceptor-api-3.1.0-CR1.jar" -Package javax.decorator -Package javax.enterprise -FileName cdi-api.sig -static]]></programlisting>      
    </section>
    
    <section>
      <title>Running the signature test</title>
      
-     <para>To run the signature test simply change the execution class from <literal>Setup</literal> to <literal>SignatureTest</literal>:</para>
+     <para>To run the signature test simply change the execution command from <literal>Setup</literal> to <literal>SignatureTest</literal>:</para>
 
-     <programlisting><![CDATA[
-java -cp %JAVA_HOME%\jre\lib\rt.jar%;sigtestdev.jar com.sun.tdk.signaturetest.SignatureTest -Package javax.decorator -Package javax.enterprise -Package javax.event -Package javax.inject -Package javax.interceptor -FileName weld.sig -Classpath .;%JAVA_HOME%\jre\lib\rt.jar -static]]></programlisting>
+      <programlisting><![CDATA[java -jar sigtestdev.jar SignatureTest -classpath "%JAVA_HOME%\jre\lib\rt.jar:cdi-api.jar:javax.inject.jar:el-api.jar:jboss-interceptor-api.jar" -Package javax.decorator -Package javax.enterprise -FileName cdi-api.sig -static]]></programlisting>
 
-     <para>Here's a working example:</para>
+     <para>Once again, here's a working example:</para>
 
-     <programlisting><![CDATA[java -cp %JAVA_HOME%\jre\lib\rt.jar;/home/shane/java/sigtest-2.0/lib/sigtestdev.jar com.sun.tdk.signaturetest.SignatureTest -Package javax.decorator -Package javax.enterprise -Package javax.event -Package javax.inject -Package javax.interceptor -FileName weld.sig -Classpath .;%JAVA_HOME%\jre\lib\rt.jar;/home/shane/.m2/repository/org/jboss/weld/jsr299-api/1.0.0-SNAPSHOT/jsr299-api-1.0.0-SNAPSHOT.jar;/home/shane/.m2/repository/javax/el/el-api/1.2/el-api-1.2.jar -static]]></programlisting>
+     <programlisting><![CDATA[java -jar  "/home/shane/java/sigtest-2.1/lib/sigtestdev.jar" SignatureTest -classpath "/usr/local/java/jre/lib/rt.jar:/home/shane/.m2/repository/javax/enterprise/cdi-api/1.0.0-SNAPSHOT/cdi-api-1.0.0-SNAPSHOT.jar:/home/shane/.m2/repository/javax/inject/javax.inject/1.0-PFD-1/javax.inject-1.0-PFD-1.jar:/home/shane/.m2/repository/javax/el/el-api/2.1.2-b04/el-api-2.1.2-b04.jar:/home/shane/.m2/repository/org/jboss/interceptor/jboss-interceptor-api/3.1.0-CR1/jboss-interceptor-api-3.1.0-CR1.jar" -Package javax.decorator -Package javax.enterprise -FileName cdi-api.sig -static]]></programlisting>
 
      <para>When running the signature test, you may get the following message:</para>
 
@@ -56,34 +55,41 @@ java -cp %JAVA_HOME%\jre\lib\rt.jar%;sigtestdev.jar com.sun.tdk.signaturetest.Si
      
      <para>Just for fun (and to confirm that the signature test is working correctly), you can try the following:</para>
 
-     <para>1) Edit weld.sig</para>
+     <para>1) Edit cdi-api.sig</para>
      
-     <para>2) Modify one of the class signatures - in the following example we change one of the constructors for <literal>NullableDependencyException</literal> - here's the original:</para>
+     <para>2) Modify one of the class signatures - in the following example we change one of the constructors for <literal>BusyConversationException</literal> - here's the original:</para>
 
-     <programlisting><![CDATA[
-CLSS public javax.inject.NullableDependencyException
-cons public NullableDependencyException()
-cons public NullableDependencyException(java.lang.String)]]></programlisting>
+     <programlisting><![CDATA[CLSS public javax.enterprise.context.BusyConversationException
+cons public BusyConversationException()
+cons public BusyConversationException(java.lang.String)
+cons public BusyConversationException(java.lang.String,java.lang.Throwable)
+cons public BusyConversationException(java.lang.Throwable)
+supr javax.enterprise.context.ContextException
+hfds serialVersionUID
+]]></programlisting>
 
-     <para>Let's change the constructor parameter to a <literal>java.lang.Integer</literal> instead:</para>
+     <para>Let's change the default (empty) constructor parameter to one with a <literal>java.lang.Integer</literal>parameter instead:</para>
 
-     <programlisting><![CDATA[
-CLSS public javax.inject.NullableDependencyException
-cons public NullableDependencyException()
-cons public NullableDependencyException(java.lang.Integer)]]></programlisting>
+     <programlisting><![CDATA[CLSS public javax.enterprise.context.BusyConversationException
+cons public BusyConversationException(java.lang.Integer)
+cons public BusyConversationException(java.lang.String)
+cons public BusyConversationException(java.lang.String,java.lang.Throwable)
+cons public BusyConversationException(java.lang.Throwable)
+supr javax.enterprise.context.ContextException
+hfds serialVersionUID
+]]></programlisting>
 
-     <para>3) Now we run the signature test using the above command, which should result in the following errors:</para>
+     <para>3) Now when we run the signature test using the above command, we should get the following errors:</para>
 
-     <programlisting><![CDATA[
-Missing Constructors
+     <programlisting><![CDATA[Missing Constructors
 --------------------
 
-javax.inject.NullableDependencyException:                   constructor public javax.inject.NullableDependencyException.NullableDependencyException(java.lang.Integer)
+javax.enterprise.context.BusyConversationException:         constructor public javax.enterprise.context.BusyConversationException.BusyConversationException(java.lang.Integer)
 
 Added Constructors
 ------------------
 
-javax.inject.NullableDependencyException:                   constructor public javax.inject.NullableDependencyException.NullableDependencyException(java.lang.String)
+javax.enterprise.context.BusyConversationException:         constructor public javax.enterprise.context.BusyConversationException.BusyConversationException()
 
 
 STATUS:Failed.2 errors]]></programlisting>   
