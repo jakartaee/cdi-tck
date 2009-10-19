@@ -1,13 +1,20 @@
 package org.jboss.jsr299.tck.tests.implementation.simple.newSimpleBean;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.New;
+import javax.enterprise.inject.TypeLiteral;
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -27,7 +34,66 @@ public class NewSimpleBeanTest extends AbstractJSR299Test
    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>()
    {
    };
+   
+   @Test
+   @SpecAssertions({
+      @SpecAssertion(section = "3.12", id = "ya")
+   })
+   public void testNewBeanCreatedForFieldInjectionPoint()
+   {
+      assert getInstanceByType(Griffin.class).getList() instanceof ArrayList<?>;
+   }
 
+   @Test
+   @SpecAssertions({
+      @SpecAssertion(section = "3.12", id = "yc")
+   })
+   public void testNewBeanCreatedForInitializerInjectionPoint()
+   {
+      assert getInstanceByType(Dragon.class).getChildren() instanceof HashSet<?>;
+   }
+   
+   @Test
+   @SpecAssertions({
+      @SpecAssertion(section = "3.12", id = "ye")
+   })
+   public void testNewBeanCreatedForConstructorInjectioAnPoint()
+   {
+      assert getInstanceByType(Hippogriff.class).getHomes() instanceof HashMap<?, ?>;
+   }
+   
+   @Test
+   @SpecAssertions({
+      @SpecAssertion(section = "3.12", id = "yg")
+   })
+   public void testNewBeanCreatedForProducerMethod()
+   {
+      assert getInstanceByType(new TypeLiteral<Collection<Dragon>>() {}) instanceof ArrayList<?>;
+   }
+   
+   @Test
+   @SpecAssertions({
+      @SpecAssertion(section = "3.12", id = "yi")
+   })
+   public void testNewBeanCreatedForObserverMethod()
+   {
+      getCurrentManager().fireEvent(new Griffin());
+      assert getInstanceByType(Bestiary.class).getPossibleNames() instanceof TreeSet<?>;
+   }
+   
+   @Test
+   @SpecAssertions({
+      @SpecAssertion(section = "3.12", id = "yk")
+   })
+   public void testNewBeanCreatedForDisposerMethod()
+   {
+      Bean<Collection<Dragon>> bean = getUniqueBean(new TypeLiteral<Collection<Dragon>>() {});
+      CreationalContext<Collection<Dragon>> ctx = getCurrentManager().createCreationalContext(bean);
+      Collection<Dragon> dragons = bean.create(ctx);
+      bean.destroy(dragons, ctx);
+      assert getInstanceByType(Bestiary.class).getKnightsWhichKilledTheDragons() instanceof LinkedHashSet<?>;
+   }
+   
    @Test(groups = { "new" })
    @SpecAssertions({
       @SpecAssertion(section = "3.12", id = "p")

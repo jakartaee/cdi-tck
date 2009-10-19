@@ -1565,10 +1565,40 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     <group>
       <text>Note that this second bean exists, is enabled, and is available for injection whenever the bean class is in the application classpath, even if the first bean is disabled, as defined by Section 5.2.2, “Enabled and disabled beans” or is deployed out- side of a bean deployment archive, as defined in Section 12.1, “Bean deployment archives”, and is therefore not discovered during the bean discovery process defined in Chapter 12, Packaging and deployment.</text>
       <assertion id="ya">
-        <text>Check that @New on a class outside the BDA, but in the classpath causes a bean with qualifier @New and the given type to be created</text>
+        <text>Check that @New on a field injection point outside the BDA, but in the classpath causes a bean with qualifier @New and the given type to be created</text>
       </assertion>
       <assertion id="yb">
-        <text>Check that @New on a class (which is a session bean class) outside the BDA, but in the classpath causes a session bean with qualifier @New and the given type to be created</text>
+        <text>Check that @New on a field injection point (which is a session bean class) outside the BDA, but in the classpath causes a session bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yc">
+        <text>Check that @New on a initializer method injection point outside the BDA, but in the classpath causes a bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yd">
+        <text>Check that @New on a initializer method injection point (which is a session bean class) outside the BDA, but in the classpath causes a session bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="ye">
+        <text>Check that @New on a constructor injection point outside the BDA, but in the classpath causes a bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yf">
+        <text>Check that @New on a constructor injection point (which is a session bean class) outside the BDA, but in the classpath causes a session bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yg">
+        <text>Check that @New on a producer method injection point outside the BDA, but in the classpath causes a bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yh">
+        <text>Check that @New on a producer method injection point (which is a session bean class) outside the BDA, but in the classpath causes a session bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yi">
+        <text>Check that @New on a observer method injection point outside the BDA, but in the classpath causes a bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yj">
+        <text>Check that @New on a observer method injection point (which is a session bean class) outside the BDA, but in the classpath causes a session bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yk">
+        <text>Check that @New on a disposer method injection point outside the BDA, but in the classpath causes a bean with qualifier @New and the given type to be created</text>
+      </assertion>
+      <assertion id="yl">
+        <text>Check that @New on a disposer method injection point (which is a session bean class) outside the BDA, but in the classpath causes a session bean with qualifier @New and the given type to be created</text>
       </assertion>
     </group>
 
