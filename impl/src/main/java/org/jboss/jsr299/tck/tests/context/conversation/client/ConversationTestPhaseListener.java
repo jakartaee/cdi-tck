@@ -50,7 +50,7 @@ public class ConversationTestPhaseListener implements PhaseListener
          Conversation conversation = OldSPIBridge.getInstanceByType(beanManager, Conversation.class);
          HttpServletResponse response = (HttpServletResponse) event.getFacesContext().getExternalContext().getResponse();
          response.addHeader(AbstractConversationTest.CID_HEADER_NAME, conversation.getId());
-         response.addHeader(AbstractConversationTest.LONG_RUNNING_HEADER_NAME, String.valueOf(conversation.isLongRunning()));
+         response.addHeader(AbstractConversationTest.LONG_RUNNING_HEADER_NAME, String.valueOf(!conversation.isTransient()));
          response.addHeader(Cloud.RAINED_HEADER_NAME, new Boolean(OldSPIBridge.getInstanceByType(beanManager, Cloud.class).isRained()).toString());
          response.addHeader(ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME, new Boolean(activeBeforeApplyRequestValues).toString());
       }

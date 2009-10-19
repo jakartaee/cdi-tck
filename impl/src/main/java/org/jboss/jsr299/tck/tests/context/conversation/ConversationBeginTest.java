@@ -22,7 +22,7 @@ public class ConversationBeginTest extends AbstractJSR299Test
    {
       super.beforeMethod();
       Conversation conversation = getInstanceByType(Conversation.class, new AnyLiteral());
-      if (conversation.isLongRunning())
+      if (!conversation.isTransient())
       {
          conversation.end();
       }
@@ -35,7 +35,7 @@ public class ConversationBeginTest extends AbstractJSR299Test
       Conversation conversation = getInstanceByType(Conversation.class, new AnyLiteral());
       assert conversation.isTransient();
       conversation.begin();
-      assert conversation.isLongRunning();
+      assert !conversation.isTransient();
    }
 
    @Test(groups = { "contexts" }, expectedExceptions = IllegalStateException.class)

@@ -21,7 +21,7 @@ public class ConversationEndTest extends AbstractJSR299Test
    {
       super.beforeMethod();
       Conversation conversation = getInstanceByType(Conversation.class);
-      if (conversation.isLongRunning())
+      if (!conversation.isTransient())
       {
          conversation.end();
       }
@@ -38,10 +38,8 @@ public class ConversationEndTest extends AbstractJSR299Test
       Conversation conversation = getInstanceByType(Conversation.class);
       assert conversation.isTransient();
       conversation.begin();
-      assert conversation.isLongRunning();
       assert !conversation.isTransient();
       conversation.end();
-      assert !conversation.isLongRunning();
       assert conversation.isTransient();
    }
    

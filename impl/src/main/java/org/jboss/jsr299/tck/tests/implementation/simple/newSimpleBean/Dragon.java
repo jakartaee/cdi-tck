@@ -12,7 +12,7 @@ public class Dragon
    private Set<String> children;
    
    @Inject
-   public void initialize(@New HashSet<String> children)
+   public void initialize(@New(HashSet.class) Set<String> children)
    {
       this.children = children;
    }

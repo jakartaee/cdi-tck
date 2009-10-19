@@ -25,7 +25,7 @@ public class ConversationContextTest extends AbstractJSR299Test
    @SpecAssertion(section = "6.7.4", id = "e")
    public void testDefaultConversationIsTransient()
    {
-      assert !getInstanceByType(Conversation.class, new AnyLiteral()).isLongRunning();
+      assert getInstanceByType(Conversation.class, new AnyLiteral()).isTransient();
    }
    
    @Test(groups = { "contexts" })
@@ -62,7 +62,7 @@ public class ConversationContextTest extends AbstractJSR299Test
    public void testTransientConversationHasNullId()
    {
       Conversation conversation = getInstanceByType(Conversation.class, new AnyLiteral());
-      assert !conversation.isLongRunning();
+      assert conversation.isTransient();
       assert conversation.getId() == null;
    }
    
