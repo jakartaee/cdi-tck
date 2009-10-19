@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<chapter id="sigtest">
+   <title>Running the Signature Test</title>
+   <para>
+      One of the requirements of an implementation passing the TCK is for it to pass the CDI signature test.
+      This section describes how the signature file is generated and how to run it against your implementation.
+   </para>
+   
+   <section>
+     <title>Obtaining the sigtest tool</title>
+     <para>
+       You can obtain the Sigtest tool from the Sigtest home page at <ulink url="https://sigtest.dev.java.net/"/>.  
+       The user guide can be found at <ulink url="http://java.sun.com/javame/sigtest/docs/sigtest2.1_usersguide.pdf"/>.
+     </para>
+   </section>
+   
+   <section>
+      <title>Generating the signature file</title>
+      <para>
+        The general command for generating a signature file looks like this:
+      </para>
+      
+      <programlisting><![CDATA[
+java -cp %JAVA_HOME%\jre\lib\rt.jar%;sigtestdev.jar com.sun.tdk.signaturetest.Setup -Package javax.decorator -Package javax.enterprise -Package javax.event -Package javax.inject -Package javax.interceptor -FileName weld.sig -Classpath .;%JAVA_HOME%\jre\lib\rt.jar -static]]></programlisting>
+
+      <para>
+        Here's a working example with the classpaths filled out:
+      </para>
+      
+      <programlisting><![CDATA[
+java -cp %JAVA_HOME%\jre\lib\rt.jar;/home/shane/java/sigtest-2.0/lib/sigtestdev.jar com.sun.tdk.signaturetest.Setup -Package javax.decorator -Package javax.enterprise -Package javax.event -Package javax.inject -Package javax.interceptor -FileName weld.sig -Classpath .;%JAVA_HOME%/jre/lib/rt.jar;/home/shane/.m2/repository/org/jboss/weld/jsr299-api/1.0.0-SNAPSHOT/jsr299-api-1.0.0-SNAPSHOT.jar;/home/shane/.m2/repository/javax/el/el-api/1.2/el-api-1.2.jar -static]]></programlisting>
+   </section>
+   
+   <section>
+     <title>Running the signature test</title>
+     
+     <para>To run the signature test simply change the execution class from <literal>Setup</literal> to <literal>SignatureTest</literal>:</para>
+
+     <programlisting><![CDATA[
+java -cp %JAVA_HOME%\jre\lib\rt.jar%;sigtestdev.jar com.sun.tdk.signaturetest.SignatureTest -Package javax.decorator -Package javax.enterprise -Package javax.event -Package javax.inject -Package javax.interceptor -FileName weld.sig -Classpath .;%JAVA_HOME%\jre\lib\rt.jar -static]]></programlisting>
+
+     <para>Here's a working example:</para>
+
+     <programlisting><![CDATA[java -cp %JAVA_HOME%\jre\lib\rt.jar;/home/shane/java/sigtest-2.0/lib/sigtestdev.jar com.sun.tdk.signaturetest.SignatureTest -Package javax.decorator -Package javax.enterprise -Package javax.event -Package javax.inject -Package javax.interceptor -FileName weld.sig -Classpath .;%JAVA_HOME%\jre\lib\rt.jar;/home/shane/.m2/repository/org/jboss/weld/jsr299-api/1.0.0-SNAPSHOT/jsr299-api-1.0.0-SNAPSHOT.jar;/home/shane/.m2/repository/javax/el/el-api/1.2/el-api-1.2.jar -static]]></programlisting>
+
+     <para>When running the signature test, you may get the following message:</para>
+
+     <literal>"The return type java.lang.reflect.Member can't be resolved"</literal>
+  
+     <para>This can safely be ignored - the important thing is to get the <literal>"STATUS:Passed."</literal> message.</para>
+   </section>
+   
+   <section>
+     <title>Forcing a signature test failure</title>
+     
+     <para>Just for fun (and to confirm that the signature test is working correctly), you can try the following:</para>
+
+     <para>1) Edit weld.sig</para>
+     
+     <para>2) Modify one of the class signatures - in the following example we change one of the constructors for <literal>NullableDependencyException</literal> - here's the original:</para>
+
+     <programlisting><![CDATA[
+CLSS public javax.inject.NullableDependencyException
+cons public NullableDependencyException()
+cons public NullableDependencyException(java.lang.String)]]></programlisting>
+
+     <para>Let's change the constructor parameter to a <literal>java.lang.Integer</literal> instead:</para>
+
+     <programlisting><![CDATA[
+CLSS public javax.inject.NullableDependencyException
+cons public NullableDependencyException()
+cons public NullableDependencyException(java.lang.Integer)]]></programlisting>
+
+     <para>3) Now we run the signature test using the above command, which should result in the following errors:</para>
+
+     <programlisting><![CDATA[
+Missing Constructors
+--------------------
+
+javax.inject.NullableDependencyException:                   constructor public javax.inject.NullableDependencyException.NullableDependencyException(java.lang.Integer)
+
+Added Constructors
+------------------
+
+javax.inject.NullableDependencyException:                   constructor public javax.inject.NullableDependencyException.NullableDependencyException(java.lang.String)
+
+
+STATUS:Failed.2 errors]]></programlisting>   
+   </section>
+   
+   
+</chapter>
