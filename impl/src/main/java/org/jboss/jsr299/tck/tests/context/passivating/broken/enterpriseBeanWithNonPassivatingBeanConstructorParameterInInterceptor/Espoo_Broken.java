@@ -7,7 +7,7 @@ import javax.interceptor.Interceptors;
 
 @Stateful
 @SessionScoped
-@Interceptors(BrokenInterceptor.class)
+@CityBinding
 class Espoo_Broken implements EspooLocal_Broken
 {  
    @Remove

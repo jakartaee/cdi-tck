@@ -8,7 +8,7 @@ import javax.interceptor.Interceptors;
 @Stateful
 @SessionScoped
 @Interceptors(BrokenInterceptor.class)
-class Espoo_Broken implements EspooLocal_Broken
+public class Espoo_Broken implements EspooLocal_Broken
 {  
    @Remove
    public void bye() {

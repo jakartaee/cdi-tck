@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091018")
 public class ManagedBeanWithNonSerializableInterceptorClassTest extends AbstractJSR299Test
 {
-   @Test(groups = { "contexts", "passivation", "ri-broken"})
+   @Test(groups = { "contexts", "passivation"})
    @SpecAssertion(section = "6.6.1", id = "bb")
    // WBRI-361
    public void testManagedBeanWithNonSerializableInterceptorClassNotOK()

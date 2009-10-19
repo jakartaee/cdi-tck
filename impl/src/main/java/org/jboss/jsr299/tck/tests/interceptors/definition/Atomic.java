@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD, PARAMETER, FIELD })
+@Target( { TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented
 @MissileBinding
