@@ -219,6 +219,17 @@
       </para>
 
    </section>
+   
+   <section>
+      <title>Configuring your application server to execute the TCK</title>
+      <para>
+         The TCK makes use of the Java 1.4 keyword <literal>assert</literal>; you
+         must ensure that the JVM used to run the application server is started
+         with assertions enabled. See 
+         <ulink url="http://java.sun.com/j2se/1.4.2/docs/guide/lang/assert.html#enable-disable">Programming With Assertions</ulink>
+         for more information on how to enable assertions.
+      </para>
+   </section>
 <!--
 vim: ts=3:sw=3:tw=80:set expandtab
 -->
