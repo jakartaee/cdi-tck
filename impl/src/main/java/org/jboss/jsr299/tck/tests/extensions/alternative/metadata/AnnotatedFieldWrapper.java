@@ -1,4 +1,4 @@
-package org.jboss.jsr299.tck.tests.extensions.annotated;
+package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -6,14 +6,14 @@ import java.lang.reflect.Field;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-class TestAnnotatedField<X> extends TestAnnotated implements AnnotatedField<X>
+class AnnotatedFieldWrapper<X> extends AnnotatedWrapper implements AnnotatedField<X>
 {
    
    private AnnotatedField<X> delegate;
    
-   public TestAnnotatedField(AnnotatedField<X> delegate, Annotation... annotations)
+   public AnnotatedFieldWrapper(AnnotatedField<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations)
    {
-      super(delegate, annotations);
+      super(delegate, keepOriginalAnnotations, annotations);
       this.delegate = delegate;
    }
    

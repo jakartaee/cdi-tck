@@ -1,4 +1,4 @@
-package org.jboss.jsr299.tck.tests.extensions.annotated;
+package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -16,7 +16,7 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-@interface Expensive
+@interface Cheap
 {
 
 }

@@ -1,4 +1,4 @@
-package org.jboss.jsr299.tck.tests.extensions.annotated;
+package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -8,14 +8,14 @@ import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-class TestAnnotatedConstructor<X> extends TestAnnotated implements AnnotatedConstructor<X>
+class AnnotatedConstructorWrapper<X> extends AnnotatedWrapper implements AnnotatedConstructor<X>
 {
    
    private AnnotatedConstructor<X> delegate;
    
-   public TestAnnotatedConstructor(AnnotatedConstructor<X> delegate, Annotation... annotations)
+   public AnnotatedConstructorWrapper(AnnotatedConstructor<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations)
    {
-      super(delegate, annotations);
+      super(delegate, keepOriginalAnnotations, annotations);
       this.delegate = delegate;
    }
 

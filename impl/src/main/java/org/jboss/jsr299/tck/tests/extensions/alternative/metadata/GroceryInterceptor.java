@@ -1,12 +1,15 @@
-package org.jboss.jsr299.tck.tests.extensions.annotated;
+package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
+
+import java.io.Serializable;
 
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+@SuppressWarnings("serial")
 @Interceptor
 @GroceryInterceptorBinding
-class GroceryInterceptor
+class GroceryInterceptor implements Serializable
 {
    @AroundInvoke
    public Object interceptFoo(InvocationContext ctx) throws Exception
@@ -15,9 +18,6 @@ class GroceryInterceptor
       {
          return "foo";
       }
-      else
-      {
-         return ctx.proceed();
-      }
+      return ctx.proceed();
    }
 }

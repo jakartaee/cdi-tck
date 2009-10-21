@@ -17,13 +17,7 @@
 
 package org.jboss.jsr299.tck.tests.extensions.annotated;
 
-import java.lang.annotation.Annotation;
-import java.util.Set;
-
-import javax.enterprise.context.RequestScoped;
-
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -31,7 +25,6 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Resource;
 import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 
@@ -43,7 +36,6 @@ import org.testng.annotations.Test;
  *
  */
 @Artifact
-@BeansXml("beans.xml")
 @Resources({
    @Resource(source="javax.enterprise.inject.spi.Extension", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
 })
@@ -92,119 +84,5 @@ public class ProcessAnnotatedTypeTest extends AbstractJSR299Test
    public void testVeto()
    {
       assert getCurrentManager().getBeans(VetoedBean.class).isEmpty();
-   }
-   
-   @Test(groups = "ri-broken")
-   @SpecAssertion(section = "11.4", id = "h")
-   // WELD-200
-   public void testGetBaseTypeUsedToDetermineTypeOfInjectionPoing() {
-      // The base type of the fruit injection point is overridden to TropicalFruit
-      assert GroceryAnnotatedType.isGetBaseTypeOfFruitFieldUsed();
-      assert getInstanceByType(Grocery.class, new AnyLiteral()).getFruit().getMetadata().getType().equals(TropicalFruit.class);
-   }
-   
-   @Test(groups = "ri-broken")
-   @SpecAssertion(section = "11.4", id = "k")
-   // WELD-201
-   public void testGetTypeClosureUsed() {
-      assert GroceryAnnotatedType.isGetTypeClosureUsed();
-      // should be [Object, Grocery] instead of [Object, Shop, Grocery]
-      assert getBeans(Grocery.class, new AnyLiteral()).iterator().next().getTypes().size() == 2;
-      assert getBeans(Shop.class, new AnyLiteral()).size() == 0;
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "l")
-   public void testGetAnnotationUsedForGettingScopeInformation() {
-      // @ApplicationScoped is overridden by @RequestScoped
-      assert getBeans(Grocery.class, new AnyLiteral()).iterator().next().getScope().isAssignableFrom(RequestScoped.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "m")
-   public void testGetAnnotationUsedForGettingQualifierInformation() {
-      // @Expensive is overridden by @Cheap
-      assert getBeans(Grocery.class, new CheapLiteral()).size() == 1;
-      assert getBeans(Grocery.class, new ExpensiveLiteral()).size() == 0;
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "n")
-   public void testGetAnnotationUsedForGettingStereotypeInformation() {
-      // The extension adds a stereotype with @Named qualifier
-      assert getInstanceByName("grocery") != null;
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "p")
-   public void testGetAnnotationUsedForGettingInterceptorInformation() {
-      // The extension adds the GroceryInterceptorBinding
-      assert getInstanceByType(Grocery.class, new AnyLiteral()).foo().equals("foo");
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "r")
-   public void testPreviouslyNonInjectAnnotatedConstructorIsUsed() {
-      assert getInstanceByType(Grocery.class, new AnyLiteral()).isConstructorWithParameterUsed();
-   }
-   
-   @Test(groups="ri-broken")
-   @SpecAssertion(section = "11.4", id = "t")
-   public void testPreviouslyNonInjectAnnotatedFieldIsInjected() {
-      assert getInstanceByType(Grocery.class, new AnyLiteral()).isVegetablesInjected();
-   }
-   
-   @Test(groups="ri-broken")
-   @SpecAssertion(section = "11.4", id = "u")
-   public void testExtraQualifierIsAppliedToInjectedField() {
-      Set<Annotation> qualifiers = getInstanceByType(Grocery.class, new AnyLiteral()).getFruit().getMetadata().getQualifiers();
-      assert qualifiers.size() == 1;
-      assert annotationSetMatches(qualifiers, Cheap.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "v")
-   public void testProducesCreatesProducerField() {
-      // The extension adds @Producer to the bread field
-      assert getBeans(Bread.class, new AnyLiteral()).size() == 1;
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "w")
-   public void testInjectCreatesInitializerMethod() {
-      // The extension adds @Inject to the nonInjectAnnotatedInitializer() method
-      assert getInstanceByType(Grocery.class, new AnyLiteral()).isWaterInjected();
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "x")
-   public void testQualifierAddedToInitializerParameter() {
-      // The @Cheap qualifier is added to the method parameter
-      Set<Annotation> qualifiers = getInstanceByType(Grocery.class, new AnyLiteral()).getInitializerFruit().getMetadata().getQualifiers();
-      assert annotationSetMatches(qualifiers, Cheap.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "y")
-   public void testProducesCreatesProducerMethod() {
-      // The extension adds @Producer to the getMilk() method
-      assert getBeans(Milk.class, new AnyLiteral()).size() == 1;
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "z")
-   public void testQualifierIsAppliedToProducerMethod() {
-      // The extension adds @Expensive to the getMilk() method
-      assert getBeans(Yogurt.class, new ExpensiveLiteral()).size() == 1;
-      assert getBeans(Yogurt.class, new CheapLiteral()).size() == 0;
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.4", id = "aa")
-   public void testQualifierIsAppliedToProducerMethodParameter() {
-      // The @Cheap qualifier is added to the method parameter
-      Set<Annotation> qualifiers = getInstanceByType(Yogurt.class, new AnyLiteral()).getFruit().getMetadata().getQualifiers();
-      assert qualifiers.size() == 1;
-      assert annotationSetMatches(qualifiers, Cheap.class);
    }
 }

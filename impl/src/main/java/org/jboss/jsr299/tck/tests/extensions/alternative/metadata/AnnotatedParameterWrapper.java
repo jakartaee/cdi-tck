@@ -1,17 +1,17 @@
-package org.jboss.jsr299.tck.tests.extensions.annotated;
+package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.inject.spi.AnnotatedCallable;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 
-class TestAnnotatedParameter<X> extends TestAnnotated implements AnnotatedParameter<X>
+class AnnotatedParameterWrapper<X> extends AnnotatedWrapper implements AnnotatedParameter<X>
 {
    private AnnotatedParameter<X> delegate;
    
-   public TestAnnotatedParameter(AnnotatedParameter<X> delegate, Annotation... annotations)
+   public AnnotatedParameterWrapper(AnnotatedParameter<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations)
    {
-      super(delegate, annotations);
+      super(delegate, keepOriginalAnnotations, annotations);
       this.delegate = delegate;
    }
 

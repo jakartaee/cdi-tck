@@ -1,4 +1,4 @@
-package org.jboss.jsr299.tck.tests.extensions.annotated;
+package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

@@ -1,4 +1,4 @@
-package org.jboss.jsr299.tck.tests.extensions.annotated;
+package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import javax.enterprise.inject.AnnotationLiteral;
 

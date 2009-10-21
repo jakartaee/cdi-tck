@@ -58,5 +58,4 @@ public class TestAnnotatedType<X> extends TestAnnotated implements AnnotatedType
    {
       return getMethodsUsed;
    }
-
 }

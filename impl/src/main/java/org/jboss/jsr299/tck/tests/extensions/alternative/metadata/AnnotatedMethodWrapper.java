@@ -1,4 +1,4 @@
-package org.jboss.jsr299.tck.tests.extensions.annotated;
+package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -9,14 +9,14 @@ import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-class TestAnnotatedMethod<X> extends TestAnnotated implements AnnotatedMethod<X>
+class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements AnnotatedMethod<X>
 {
 
    private AnnotatedMethod<X> delegate;
    
-   public TestAnnotatedMethod(AnnotatedMethod<X> delegate, Annotation... annotations) 
+   public AnnotatedMethodWrapper(AnnotatedMethod<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) 
    {
-      super(delegate, annotations);
+      super(delegate, keepOriginalAnnotations, annotations);
       this.delegate = delegate;
    }
 

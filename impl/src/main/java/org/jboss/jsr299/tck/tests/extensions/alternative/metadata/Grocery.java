@@ -1,9 +1,10 @@
-package org.jboss.jsr299.tck.tests.extensions.annotated;
+package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import java.io.Serializable;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -13,12 +14,17 @@ import javax.inject.Inject;
 @Expensive
 class Grocery implements Shop
 {
-   private Vegetables vegetables = null;
+   private Vegetables vegetables;
+   @Inject
    private Fruit fruit;
    private boolean constructorWithParameterUsed = false;
    private TropicalFruit initializerFruit = null;
    private Bread bread = new Bread(true);
    private Water water = null;
+   
+   private Milk observerEvent = null;
+   private TropicalFruit observerParameter = null;
+   private boolean observer2Used = false;
    
    public Grocery()
    {
@@ -73,7 +79,31 @@ class Grocery implements Shop
       return new Yogurt(fruit);
    }
    
+   public void observer1(Milk event, TropicalFruit fruit) {
+      observerEvent = event;
+      observerParameter = fruit;
+   }
+   
+   public void observer2(@Observes Bread event) {
+      observer2Used = true;
+   }
+   
    public boolean isWaterInjected() {
       return water != null;
+   }
+
+   public Milk getObserverEvent()
+   {
+      return observerEvent;
+   }
+
+   public TropicalFruit getObserverParameter()
+   {
+      return observerParameter;
+   }
+
+   public boolean isObserver2Used()
+   {
+      return observer2Used;
    }
 }
