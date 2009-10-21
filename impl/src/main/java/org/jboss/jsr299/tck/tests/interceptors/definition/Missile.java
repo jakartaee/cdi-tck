@@ -5,6 +5,9 @@ import javax.inject.Inject;
 @MissileBinding
 class Missile
 {
+   @Inject
+   private Warhead warhead;
+   
    boolean initCalled = false;
    
    @Inject
@@ -17,4 +20,9 @@ class Missile
    }
    
    public void fire() { }
+
+   public Warhead getWarhead()
+   {
+      return warhead;
+   }
 }

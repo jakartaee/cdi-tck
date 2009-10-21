@@ -202,20 +202,22 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, nonBinding);
    }
 
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertions({
          @SpecAssertion(section = "7.2", id = "a"),
          @SpecAssertion(section = "9.2", id = "a"),
          @SpecAssertion(section = "12.3", id = "kb")
    })
+   //WELD-219
    public void testManagedBeanIsIntercepted()
    {
       MissileInterceptor.intercepted = false;
 
       Missile missile = getInstanceByType(Missile.class);
       missile.fire();
-
       assert MissileInterceptor.intercepted;
+      
+      assert missile.getWarhead() != null; // test that injection works
    }
 
    @Test
