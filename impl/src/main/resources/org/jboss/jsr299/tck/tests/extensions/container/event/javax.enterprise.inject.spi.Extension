@@ -1,0 +1,4 @@
+org.jboss.jsr299.tck.tests.extensions.container.event.ProcessBeanObserver
+org.jboss.jsr299.tck.tests.extensions.container.event.ProcessInjectionTargetObserver
+org.jboss.jsr299.tck.tests.extensions.container.event.ProcessAnnotatedTypeObserver
+
