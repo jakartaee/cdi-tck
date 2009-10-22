@@ -84,9 +84,7 @@ public class ContainerEventTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section="11.5.6", id="aal"),
-      @SpecAssertion(section="11.5.6", id="aam"),
-      @SpecAssertion(section="11.5.6", id="aau"),
-      @SpecAssertion(section="11.5.6", id="aav")
+      @SpecAssertion(section="11.5.6", id="aam")
    })
    public void testTypeOfProcessInjectionTargetParameter() {
       assert ProcessInjectionTargetObserver.getEvent1Observed() == 0;
