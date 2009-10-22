@@ -5709,12 +5709,6 @@ provider and all superclases and interfaces.</text>
       <assertion id="aai">
         <text>Test event is fired for a filter</text>
       </assertion>
-      <assertion id="aaj">
-         <text>Test event is fired for a producer method</text>
-      </assertion>
-      <assertion id="aak">
-         <text>Test event is fired for a producer field</text>
-      </assertion>
       <assertion id="aal">
          <text>Test type for a managed bean</text>
       </assertion>
@@ -5741,12 +5735,6 @@ provider and all superclases and interfaces.</text>
       </assertion>
       <assertion id="aat">
         <text>Test type for a filter</text>
-      </assertion>
-      <assertion id="aau">
-         <text>Test type for a producer method</text>
-      </assertion>
-      <assertion id="aav">
-         <text>Test type for a producer field</text>
       </assertion>
     </group>
     
@@ -5778,12 +5766,6 @@ provider and all superclases and interfaces.</text>
       </assertion>
       <assertion id="abi">
         <text>Test type for a filter</text>
-      </assertion>
-      <assertion id="abj">
-         <text>Test type for a producer method</text>
-      </assertion>
-      <assertion id="abk">
-         <text>Test type for a producer field</text>
       </assertion>
     </group>
     
@@ -5823,12 +5805,6 @@ provider and all superclases and interfaces.</text>
       </assertion>
       <assertion id="ei">
         <text>Test type for a filter</text>
-      </assertion>
-      <assertion id="ej">
-         <text>Test type for a producer method</text>
-      </assertion>
-      <assertion id="ek">
-         <text>Test type for a producer field</text>
       </assertion>
     </group>
     
@@ -6242,43 +6218,37 @@ provider and all superclases and interfaces.</text>
 
     <group>   
       <text>For each Java class in any bean deployment archive, the container must, if the class is a managed bean, session bean, producer method or field, or other Java EE component class supporting injection, create an |InjectionTarget| for the class, as defined in Section 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type |ProcessInjectionTarget|, as defined in Section 11.5.6, "ProcessInjectionTarget event"</text>
-      <assertion id="ba">
+      <assertion id="da">
         <text>Check managed bean</text>  
       </assertion>
-      <assertion id="bb">
+      <assertion id="db">
         <text>Check session bean</text>  
       </assertion>
-      <assertion id="bb">
-        <text>Check producer field</text>  
-      </assertion>
-      <assertion id="bb">
-        <text>Check producer method</text>  
-      </assertion>
-      <assertion id="bc">
+      <assertion id="dc">
         <text>Check non-contextual session bean</text>
       </assertion>
-      <assertion id="bd">
+      <assertion id="dd">
         <text>Check JSF managed beans</text>
       </assertion>
-      <assertion id="be">
+      <assertion id="de">
         <text>Check servlet listener</text>
       </assertion>
-      <assertion id="bf">
+      <assertion id="df">
         <text>Check tag handler</text>
       </assertion>
-      <assertion id="bg">
+      <assertion id="dg">
         <text>Check tag library listener</text>
       </assertion>
-      <assertion id="bh">
+      <assertion id="dh">
         <text>Check EJB Interceptor</text>
       </assertion>
-      <assertion id="bi">
+      <assertion id="di">
         <text>Check WS endpoint</text>
       </assertion>
-      <assertion id="bj">
+      <assertion id="dj">
         <text>Check servlet</text>
       </assertion>
-      <assertion id="bk">
+      <assertion id="dk">
         <text>Check filter</text>
       </assertion>
     </group>
