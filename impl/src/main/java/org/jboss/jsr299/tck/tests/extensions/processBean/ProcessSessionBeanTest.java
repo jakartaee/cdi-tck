@@ -38,7 +38,8 @@ public class ProcessSessionBeanTest extends AbstractJSR299Test
       @SpecAssertion(section = "11.5.8", id = "hb"),
       @SpecAssertion(section = "11.5.8", id = "hc"),
       @SpecAssertion(section = "11.5.8", id = "m"),
-      @SpecAssertion(section = "11.5.8", id = "k")
+      @SpecAssertion(section = "11.5.8", id = "k"),
+      @SpecAssertion(section = "12.3", id = "fb")
    })
    public void testProcessSessionBeanEvent()
    {

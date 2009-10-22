@@ -33,7 +33,8 @@ public class ProcessBeanTest extends AbstractJSR299Test
       @SpecAssertion(section = "11.5.8", id = "eda"),
       @SpecAssertion(section = "11.5.8", id = "efa"),
       @SpecAssertion(section = "11.5.8", id = "fa"),
-      @SpecAssertion(section = "11.5.8", id = "l")
+      @SpecAssertion(section = "11.5.8", id = "l"),
+      @SpecAssertion(section = "12.3", id = "fa")
    })
    public void testProcessBeanEvent()
    {
@@ -49,7 +50,8 @@ public class ProcessBeanTest extends AbstractJSR299Test
       @SpecAssertion(section = "11.5.8", id = "efc"),
       @SpecAssertion(section = "11.5.8", id = "fc"),
       @SpecAssertion(section = "11.5.8", id = "i"),
-      @SpecAssertion(section = "11.5.8", id = "j")
+      @SpecAssertion(section = "11.5.8", id = "j"),
+      @SpecAssertion(section = "12.3", id = "ha")
    })
    @Test
    public void testProcessProducerMethodEvent()
@@ -71,7 +73,8 @@ public class ProcessBeanTest extends AbstractJSR299Test
       @SpecAssertion(section = "11.5.8", id = "edd"),
       @SpecAssertion(section = "11.5.8", id = "efd"),
       @SpecAssertion(section = "11.5.8", id = "fd"),
-      @SpecAssertion(section = "11.5.8", id = "n")
+      @SpecAssertion(section = "11.5.8", id = "n"),
+      @SpecAssertion(section = "12.3", id = "hb")
    })
    @Test
    public void testProcessProducerFieldEvent()
