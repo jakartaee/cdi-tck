@@ -58,7 +58,10 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test
    }
 
    @Test(groups = "jboss-as-broken")
-   @SpecAssertion(section = "5.6", id = "ed")
+   @SpecAssertions({
+      @SpecAssertion(section = "5.6", id = "ed"),
+      @SpecAssertion(section = "5.6.4", id = "ao")
+   })
    //JBAS-7046
    public void testInjectionOnEJBInterceptor()
    {

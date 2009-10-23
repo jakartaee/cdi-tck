@@ -166,7 +166,25 @@ public class InjectionPointTest extends AbstractJSR299Test
       assert getBeans(InjectionPoint.class).size() == 1;
       assert getBeans(InjectionPoint.class).iterator().next().getScope().equals(Dependent.class);
    }
-
+   
+   @Test(groups = { "injectionPoint", "ri-broken" })
+   @SpecAssertion(section = "5.6.9", id = "eb")
+   //WELD-227
+   public void testPassivationCapability() throws Exception
+   {
+      InjectionPoint ip1 = getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
+      InjectionPoint ip2 = getInstanceByType(MethodInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
+      InjectionPoint ip3 = getInstanceByType(ConstructorInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
+      
+      ip1 = (InjectionPoint) deserialize(serialize(ip1));
+      ip2 = (InjectionPoint) deserialize(serialize(ip2));
+      ip3 = (InjectionPoint) deserialize(serialize(ip3));
+      
+      assert ip1.getType().equals(BeanWithInjectionPointMetadata.class);
+      assert ip2.getType().equals(BeanWithInjectionPointMetadata.class);
+      assert ip3.getType().equals(BeanWithInjectionPointMetadata.class);
+   }
+   
    @Test(groups = { "injectionPoint" })
    @SpecAssertions({
       @SpecAssertion(section = "5.6.9", id = "ea")
