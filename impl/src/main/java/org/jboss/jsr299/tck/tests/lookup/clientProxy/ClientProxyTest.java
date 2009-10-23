@@ -62,26 +62,44 @@ public class ClientProxyTest extends AbstractJSR299Test
       assert tuna.getState().equals("tuned");
       // TODO expand this test
    }
-   @Test
+   @Test(expectedExceptions = { ContextNotActiveException.class, IllegalStateException.class })
    @SpecAssertions({
       @SpecAssertion(section="5.5.2", id="ab"),
       @SpecAssertion(section = "6.5.4", id="a")
    })
-   public void testInactiveScope() throws Exception 
+   public void testInactiveScope() throws Exception
    {
       assert getCurrentConfiguration().getContexts().getRequestContext().isActive();
       setContextInactive(getCurrentConfiguration().getContexts().getRequestContext());
       assert !getCurrentConfiguration().getContexts().getRequestContext().isActive();
-      try {
+      try
+      {
          getInstanceByType(TunedTuna.class).getState();
-         assert false;
-      } catch (ContextNotActiveException cnae) {
-      } catch (IllegalStateException ise) {
-      } catch (Throwable t) {
-         assert false;
       }
-      
-      // need to set request scope active again, some other tests will fail otherwise
+      finally
+      {
+         // need to set request scope active again, some other tests will fail otherwise
+         setContextActive(getCurrentConfiguration().getContexts().getRequestContext());
+      }
+   }
+   
+   @Test(groups = "ri-broken")
+   @SpecAssertion(section = "5.5", id = "d")
+   //WELD-229
+   public void testInvocationIsProcessedOnCurrentInstance() {
+      // create new car
+      getInstanceByType(Car.class).setMake("Honda");
+      // check that the car is injected
+      Garage garage = getInstanceByType(Garage.class);
+      assert garage.getMakeOfTheParkedCar().equals("Honda");
+      // destroy the request context
+      setContextInactive(getCurrentConfiguration().getContexts().getRequestContext());
       setContextActive(getCurrentConfiguration().getContexts().getRequestContext());
+      // check that the old instance is not in the context anymore
+      // a new one should be created
+      assert getInstanceByType(Car.class).getMake().equals("unknown");
+      getInstanceByType(Car.class).setMake("Toyota");
+      // check that the invocation is processed by the current instance of injected bean
+      assert garage.getMakeOfTheParkedCar().equals("Toyota");
    }
 }
