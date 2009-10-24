@@ -1,7 +1,7 @@
 package org.jboss.jsr299.tck.tests.event.observer.conditional;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Notify;
+import javax.enterprise.event.Reception;
 import javax.enterprise.event.Observes;
 
 /**
@@ -15,7 +15,7 @@ class RecluseSpider
    private boolean instanceNotified = false;
    private Web web;
    
-   public void observe(@Observes(notifyObserver = Notify.IF_EXISTS) ConditionalEvent someEvent)
+   public void observe(@Observes(notifyObserver = Reception.IF_EXISTS) ConditionalEvent someEvent)
    {
       notified = true;
       instanceNotified = true;

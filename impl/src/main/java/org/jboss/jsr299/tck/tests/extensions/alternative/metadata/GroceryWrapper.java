@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Notify;
+import javax.enterprise.event.Reception;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.AnnotationLiteral;
@@ -130,9 +130,9 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery>
                   return TransactionPhase.IN_PROGRESS;
                }
 
-               public Notify notifyObserver()
+               public Reception notifyObserver()
                {
-                  return Notify.ALWAYS;
+                  return Reception.ALWAYS;
                }
 
                public Class<? extends Annotation> annotationType()

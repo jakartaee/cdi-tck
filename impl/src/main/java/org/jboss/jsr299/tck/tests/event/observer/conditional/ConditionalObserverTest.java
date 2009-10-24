@@ -3,7 +3,7 @@ package org.jboss.jsr299.tck.tests.event.observer.conditional;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.event.Notify;
+import javax.enterprise.event.Reception;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -54,9 +54,9 @@ public class ConditionalObserverTest extends AbstractJSR299Test
    @SpecAssertion(section = "10.4.4", id = "c")
    public void testNotifyEnumerationContainsNotifyValues()
    {
-      assert Notify.values().length == 2;
+      assert Reception.values().length == 2;
       List<String> notifyValueNames = new ArrayList<String>();
-      for (Notify value : Notify.values())
+      for (Reception value : Reception.values())
       {
          notifyValueNames.add(value.name());
       }

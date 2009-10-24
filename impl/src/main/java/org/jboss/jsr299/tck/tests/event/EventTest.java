@@ -114,7 +114,7 @@ public class EventTest extends AbstractJSR299Test
       Set<ObserverMethod<?, Egg>> observers = getCurrentManager().resolveObserverMethods(egg);
       assert observers.size() == 1;
 
-      // Notify the observer so we can confirm that it
+      // Reception the observer so we can confirm that it
       // is a method only on Farmer, and not LazyFarmer
       observers.iterator().next().notify(egg);
       assert egg.getClassesVisited().size() == 1;
@@ -132,7 +132,7 @@ public class EventTest extends AbstractJSR299Test
       Set<ObserverMethod<?, StockPrice>> observers = getCurrentManager().resolveObserverMethods(price);
       assert observers.size() == 1;
 
-      // Notify the observer so we can confirm that it
+      // Reception the observer so we can confirm that it
       // is a method only on StockWatcher, and not IntermediateStockWatcher
       // or IndirectStockWatcher
       observers.iterator().next().notify(price);

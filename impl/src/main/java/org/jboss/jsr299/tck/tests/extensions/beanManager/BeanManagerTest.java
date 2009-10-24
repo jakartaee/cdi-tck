@@ -38,12 +38,12 @@ import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.InjectionException;
 import javax.enterprise.inject.Specializes;
+import javax.enterprise.inject.Stereotype;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.PassivationCapable;
 import javax.enterprise.inject.spi.InterceptionType;
-import javax.enterprise.inject.stereotype.Stereotype;
 import javax.inject.Qualifier;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;

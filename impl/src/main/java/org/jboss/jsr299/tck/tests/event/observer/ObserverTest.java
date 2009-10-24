@@ -3,7 +3,7 @@ package org.jboss.jsr299.tck.tests.event.observer;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-import javax.enterprise.event.Notify;
+import javax.enterprise.event.Reception;
 import javax.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -85,11 +85,11 @@ public class ObserverTest extends AbstractJSR299Test
    {
       Set<ObserverMethod<?, StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
       assert observers.size() == 1;
-      assert observers.iterator().next().getNotify().equals(Notify.ALWAYS);
+      assert observers.iterator().next().getReception().equals(Reception.ALWAYS);
 
       Set<ObserverMethod<?, ConditionalEvent>> conditionalObservers = getCurrentManager().resolveObserverMethods(new ConditionalEvent());
       assert !conditionalObservers.isEmpty();
-      assert conditionalObservers.iterator().next().getNotify().equals(Notify.IF_EXISTS);
+      assert conditionalObservers.iterator().next().getReception().equals(Reception.IF_EXISTS);
    }
 
 }
