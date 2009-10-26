@@ -32,8 +32,8 @@ import org.testng.annotations.Test;
 public class ResolutionByNameTest extends AbstractJSR299Test
 {
    
-   //@Test
-   //@SpecAssertion(section="5.8", id="c") removed from spec
+   @Test
+   @SpecAssertion(section="6.4.3", id="a")
    public void testQualifiedNameLookup()
    {
       assert getCurrentConfiguration().getEl().evaluateValueExpression("#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class);
