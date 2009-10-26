@@ -6,4 +6,5 @@ import javax.ejb.Local;
 public interface InjectedSessionBeanLocal
 {
    FarmLocal getFarm();
+   boolean isInitializerCalledAfterResourceInjection();
 }

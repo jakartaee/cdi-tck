@@ -2,6 +2,7 @@ package org.jboss.jsr299.tck.tests.lookup.injection;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
@@ -23,7 +24,11 @@ public class InjectionTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "5.3", id = "kc")
+   @SpecAssertions({
+      @SpecAssertion(section = "5.3", id = "kc"),
+      @SpecAssertion(section = "5.6", id = "b"),
+      @SpecAssertion(section = "5.6.4", id = "ac")
+   })
    public void testInjectionOfNamedBean()
    {
       WolfPack wolfPack = getInstanceByType(WolfPack.class);

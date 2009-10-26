@@ -7,7 +7,8 @@
  <body>
    <f:view>
      <h1>
-      <h:outputText value="#{farm.sheepInjected ? 'It works' : 'It is broken'}"/>
+      <h:outputText value="#{farm.sheepInjected ? 'Injection works' : 'Injection is broken'}"/>
+      <h:outputText value="#{farm.initializerCalled ? 'Initializer works' : 'Initializer is broken'}"/>
      </h1>
    </f:view>
  </body>

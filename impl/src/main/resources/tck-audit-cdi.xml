@@ -2244,17 +2244,9 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
       <text>An annotation member may be excluded from consideration using the |@NonBinding| annotation.</text>
     </assertion>
 
-    <group>
+    <assertion id="c" testable="false">
       <text>Array-valued or annotation-valued members of a qualifier type must be annotated |@NonBinding| in a portable application. If an array-valued or annotation-valued member of a binding type is not annotated |@NonBinding|, non-portable behavior results.</text>
-    
-      <assertion id="d">
-        <text>Test with an array-valued member.</text>
-      </assertion>
-
-      <assertion id="e">
-        <text>Test with an annotation-valued member.</text>
-      </assertion>
-    </group>
+    </assertion>
   </section>
 
   <section id="5.3.6" title="Multiple qualifiers">

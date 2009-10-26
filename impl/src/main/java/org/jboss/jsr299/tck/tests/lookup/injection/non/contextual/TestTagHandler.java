@@ -11,22 +11,28 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 public class TestTagHandler extends SimpleTagSupport
 {
    private static final long serialVersionUID = -3048065065359948044L;
-   public static final String SUCCESS = "It works.";
-   public static final String FAILURE = "It is broken.";
+   public static final String INJECTION_SUCCESS = "Injection works.";
+   public static final String INITIALIZER_SUCCESS = "Initializer works.";
    
    @Inject
    private Sheep sheep;
+   private boolean initializerCalled = false;
+   
+   @Inject
+   public void initialize(Sheep sheep) {
+      initializerCalled = sheep != null;
+   }
    
    @Override
    public void doTag() throws JspException, IOException
    {
-      if (sheep == null)
+      if (sheep != null)
       {
-         getJspContext().getOut().write(FAILURE);
+         getJspContext().getOut().write(INJECTION_SUCCESS);
       }
-      else
+      if (initializerCalled) 
       {
-         getJspContext().getOut().write(SUCCESS);
+         getJspContext().getOut().append(INITIALIZER_SUCCESS);
       }
    }
 }

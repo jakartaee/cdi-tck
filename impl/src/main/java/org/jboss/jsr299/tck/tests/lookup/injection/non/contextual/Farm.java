@@ -23,7 +23,18 @@ public class Farm
 {
    @Inject
    private Sheep sheep;
+   private boolean initializerCalled = false;
    
+   @Inject
+   public void initialize(Sheep sheep) {
+      initializerCalled = sheep != null;
+   }
+   
+   public boolean isInitializerCalled()
+   {
+      return initializerCalled;
+   }
+
    public boolean isSheepInjected() {
       return sheep != null;
    }

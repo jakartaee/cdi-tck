@@ -9,9 +9,15 @@ public class SheepWSEndPoint
 {
    @Inject
    private Sheep sheep;
+   private boolean initializerCalled = false;
+   
+   @Inject
+   public void initialize(Sheep sheep) {
+      initializerCalled = sheep != null;
+   }
    
    @WebMethod
    public boolean isSheepInjected() {
-      return (sheep != null);
+      return (sheep != null) && initializerCalled;
    }
 }

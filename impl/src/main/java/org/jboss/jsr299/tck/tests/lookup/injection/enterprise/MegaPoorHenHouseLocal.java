@@ -6,4 +6,6 @@ import javax.ejb.Local;
 public interface MegaPoorHenHouseLocal
 {
    Fox getFox();
+   boolean isPostConstructCalledAfterSuperclassInitializer();
+   boolean isInitializerCalledAfterSuperclassInjection();
 }

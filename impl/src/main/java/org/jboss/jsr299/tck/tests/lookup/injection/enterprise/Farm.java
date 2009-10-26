@@ -8,26 +8,28 @@ import javax.interceptor.Interceptors;
 @Stateless
 public class Farm implements FarmLocal
 {
-   @Inject private Sheep sheepField;
-   
-   private boolean initializerCalled;
+   @Inject
+   private Sheep sheepField;
+
+   private boolean initializerCalledAfterInjection = false;
    private boolean injectionPerformedCorrectly = false;
-   
-   @Inject private void initialize(Sheep sheep)
+
+   @Inject
+   public void initialize(Sheep sheep)
    {
-      assert sheepField != null;
-      initializerCalled = true;
+      initializerCalledAfterInjection = (sheepField != null) && (sheep != null);
    }
 
    @Interceptors(FarmInterceptor.class)
-   public int getAnimalCount() {
+   public int getAnimalCount()
+   {
       return 1;
    }
-   
+
    @PostConstruct
-   public void postConstruct() {
-      assert initializerCalled;
-      injectionPerformedCorrectly = true;
+   public void postConstruct()
+   {
+      injectionPerformedCorrectly = initializerCalledAfterInjection;
    }
 
    public boolean isInjectionPerformedCorrectly()

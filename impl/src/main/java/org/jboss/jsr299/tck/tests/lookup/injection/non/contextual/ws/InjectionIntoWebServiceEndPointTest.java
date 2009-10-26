@@ -20,6 +20,7 @@ import javax.xml.ws.WebServiceRef;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
@@ -37,7 +38,11 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
    SheepWSEndPointService service;
 
    @Test(groups = "jboss-as-broken")
-   @SpecAssertion(section = "5.6", id = "ee")
+   @SpecAssertions({
+      @SpecAssertion(section = "5.6", id = "ee"),
+      @SpecAssertion(section = "5.6.4", id = "aq"),
+      @SpecAssertion(section = "5.6.4", id = "ar")
+   })
    // JBAS-7046
    public void testInjectionIntoWebServiceEndpoint() throws Exception
    {

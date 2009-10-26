@@ -8,6 +8,12 @@ public class TagLibraryListener implements ServletContextListener
 {
    @Inject
    private Sheep sheep;
+   private boolean initializerCalled = false;
+   
+   @Inject
+   public void initialize(Sheep sheep) {
+      initializerCalled = sheep != null;
+   }
 
    public void contextDestroyed(ServletContextEvent sce)
    {
@@ -16,5 +22,6 @@ public class TagLibraryListener implements ServletContextListener
    public void contextInitialized(ServletContextEvent sce)
    {
       sce.getServletContext().setAttribute("tag.library.listener.injected", sheep != null);
+      sce.getServletContext().setAttribute("tag.library.listener.initializer.called", initializerCalled);
    }
 }

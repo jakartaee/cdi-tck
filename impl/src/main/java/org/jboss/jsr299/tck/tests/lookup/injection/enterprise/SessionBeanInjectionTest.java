@@ -60,7 +60,8 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test
    @Test(groups = "jboss-as-broken")
    @SpecAssertions({
       @SpecAssertion(section = "5.6", id = "ed"),
-      @SpecAssertion(section = "5.6.4", id = "ao")
+      @SpecAssertion(section = "5.6.4", id = "ao"),
+      @SpecAssertion(section = "5.6.4", id = "ap")
    })
    //JBAS-7046
    public void testInjectionOnEJBInterceptor()
@@ -87,5 +88,24 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test
       MegaPoorHenHouseLocal henHouse = getInstanceByType(MegaPoorHenHouseLocal.class);
       assert henHouse.getFox() != null;
       assert henHouse.getFox().getName().equals("gavin");      
-   }   
+   }
+   
+   @Test
+   @SpecAssertion(section = "5.6.4", id = "bb")
+   public void testInitializerCalledAfterFieldInjectionOfSuperclass() {
+      MegaPoorHenHouseLocal house = getInstanceByType(MegaPoorHenHouseLocal.class);
+      assert house.isInitializerCalledAfterSuperclassInjection();
+   }
+   
+   @Test
+   @SpecAssertion(section = "5.6.4", id = "bf")
+   public void testPostConstructCalledAfterInitializerOfSuperclass() {
+      assert getInstanceByType(MegaPoorHenHouseLocal.class).isPostConstructCalledAfterSuperclassInitializer();
+   }
+   
+   @Test
+   @SpecAssertion(section = "5.6.4", id = "bc")
+   public void testInitializerCalledAfterResourceInjection() {
+      assert getInstanceByType(InjectedSessionBeanLocal.class).isInitializerCalledAfterResourceInjection();
+   }
 }
