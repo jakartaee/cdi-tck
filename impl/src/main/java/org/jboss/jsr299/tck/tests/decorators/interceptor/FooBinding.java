@@ -15,24 +15,20 @@
  * limitations under the License.
  */
 
-package org.jboss.jsr299.tck.tests.decorators.definition;
+package org.jboss.jsr299.tck.tests.decorators.interceptor;
 
-import javax.decorator.Decorates;
-import javax.decorator.Decorator;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-/**
- * @author pmuir
- *
- */
-@Decorator
-@Meta
-public class FooDecorator extends AbstractFooDecorator implements Foo, Bar
-{
+import javax.interceptor.InterceptorBinding;
 
-   /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2253839366401409666L;
-	@Decorates FooBar foobar;
+@Inherited 
+@InterceptorBinding 
+@Target(ElementType.TYPE) 
+@Retention(RetentionPolicy.RUNTIME)
+public @interface FooBinding {
 
 }

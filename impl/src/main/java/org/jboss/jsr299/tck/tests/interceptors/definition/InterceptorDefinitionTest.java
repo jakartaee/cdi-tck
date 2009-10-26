@@ -251,7 +251,10 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
    })
    public void testInterceptorBindingAnnotation()
    {
-      Interceptor<?> interceptorBean = getLoggedInterceptors().iterator().next();
+      List<Interceptor<?>> interceptors = getLoggedInterceptors();
+      assert interceptors.size() > 1;
+      
+      Interceptor<?> interceptorBean = interceptors.iterator().next();
       assert interceptorBean.getInterceptorBindingTypes().size() == 1;
       assert interceptorBean.getInterceptorBindingTypes().contains(new AnnotationLiteral<Logged>(){});
 

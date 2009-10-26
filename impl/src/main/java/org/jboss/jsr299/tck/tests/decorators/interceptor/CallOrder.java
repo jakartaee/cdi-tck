@@ -14,25 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jboss.jsr299.tck.tests.decorators.interceptor;
 
-package org.jboss.jsr299.tck.tests.decorators.definition;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.decorator.Decorates;
-import javax.decorator.Decorator;
-
-/**
- * @author pmuir
- *
- */
-@Decorator
-@Meta
-public class FooDecorator extends AbstractFooDecorator implements Foo, Bar
-{
-
-   /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2253839366401409666L;
-	@Decorates FooBar foobar;
+public class CallOrder {
+    private static List<String> callers = new ArrayList<String>();
+    
+    public static void resetCallers() {
+        callers = new ArrayList<String>();
+    }
+    
+    public static void addCaller(String caller) {
+        callers.add(caller);
+    }
+    
+    public static List<String> callers() {
+        return callers;
+    }
 
 }

@@ -15,24 +15,18 @@
  * limitations under the License.
  */
 
-package org.jboss.jsr299.tck.tests.decorators.definition;
+package org.jboss.jsr299.tck.tests.decorators.interceptor;
 
 import javax.decorator.Decorates;
 import javax.decorator.Decorator;
 
-/**
- * @author pmuir
- *
- */
 @Decorator
-@Meta
-public class FooDecorator extends AbstractFooDecorator implements Foo, Bar
-{
+public class FooDecorator implements Foo {
+    public static String NAME = "FooDecorator";
 
-   /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2253839366401409666L;
-	@Decorates FooBar foobar;
+    @Decorates Foo foo;
 
+    public void doSomething() {
+        CallOrder.addCaller(NAME);        
+    }
 }
