@@ -43,7 +43,7 @@ public class ResolveEventObserversTest extends AbstractJSR299Test
       Set<ObserverMethod<?, Temperature>> temperatureObservers = getCurrentManager().resolveObserverMethods(new Temperature(0d));
       assert temperatureObservers.size() == 1;
       ObserverMethod<?, Temperature> temperatureObserver = temperatureObservers.iterator().next();
-      assert temperatureObserver.getBean() == getUniqueBean(AirConditioner.class);
+      assert temperatureObserver.getBeanClass().equals(AirConditioner.class);
       assert temperatureObserver.getObservedType().equals(Temperature.class);
       
       Method method = AirConditioner.class.getMethod("temperatureChanged", Temperature.class);

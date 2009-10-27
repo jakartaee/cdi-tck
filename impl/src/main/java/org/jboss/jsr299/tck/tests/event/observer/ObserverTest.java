@@ -55,7 +55,7 @@ public class ObserverTest extends AbstractJSR299Test
       Set<ObserverMethod<?, StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
       assert observers.size() == 1;
       ObserverMethod<?, StockPrice> observerMethod = observers.iterator().next();
-      assert observerMethod.getBean().getBeanClass().equals(StockWatcher.class);
+      assert observerMethod.getBeanClass().equals(StockWatcher.class);
    }
 
    @Test(groups = { "events" })
