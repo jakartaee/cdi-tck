@@ -3,6 +3,15 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
  <description>Test servlets used to test session contexts.</description>
  <display-name>Session Context Tests</display-name>
+ <listener>
+    <listener-class>org.jboss.jsr299.tck.tests.context.application.TestServletContextListener</listener-class>
+</listener>
+<listener>
+    <listener-class>org.jboss.jsr299.tck.tests.context.application.TestHttpSessionListener</listener-class>
+</listener>
+<listener>
+    <listener-class>org.jboss.jsr299.tck.tests.context.application.TestServletRequestListener</listener-class>
+</listener>
  <filter>
   <display-name>Test Filter for Sessions</display-name>
   <filter-name>filterTest</filter-name>
@@ -16,9 +25,9 @@
   <listener-class>org.jboss.testharness.impl.runner.servlet.HarnessServletListener</listener-class>
  </listener>
  <servlet>
-  <display-name>serviceMethod</display-name>
-  <servlet-name>service</servlet-name>
-  <servlet-class>org.jboss.jsr299.tck.tests.context.application.ServiceMethodServlet</servlet-class>
+  <display-name>TestServlet</display-name>
+  <servlet-name>TestServlet</servlet-name>
+  <servlet-class>org.jboss.jsr299.tck.tests.context.application.TestServlet</servlet-class>
  </servlet>
  <servlet>
   <display-name>Introspection Service for Application Context</display-name>
@@ -26,8 +35,8 @@
   <servlet-class>org.jboss.jsr299.tck.tests.context.application.IntrospectApplication</servlet-class>
  </servlet>
  <servlet-mapping>
-  <servlet-name>service</servlet-name>
-  <url-pattern>/serviceMethodTest</url-pattern>
+  <servlet-name>TestServlet</servlet-name>
+  <url-pattern>/TestServlet</url-pattern>
  </servlet-mapping>
  <servlet-mapping>
   <servlet-name>applicationIntrospector</servlet-name>
