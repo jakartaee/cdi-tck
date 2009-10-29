@@ -11,13 +11,13 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.TransactionPhase;
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.jsr299.tck.literals.InjectLiteral;
 

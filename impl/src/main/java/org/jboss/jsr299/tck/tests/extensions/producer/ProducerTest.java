@@ -1,11 +1,11 @@
 package org.jboss.jsr299.tck.tests.extensions.producer;
 
 import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.InjectionTarget;
 import javax.enterprise.inject.spi.Producer;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;

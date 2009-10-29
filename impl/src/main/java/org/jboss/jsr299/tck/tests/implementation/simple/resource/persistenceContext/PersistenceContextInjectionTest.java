@@ -1,9 +1,9 @@
 package org.jboss.jsr299.tck.tests.implementation.simple.resource.persistenceContext;
 
 import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.persistence.EntityManager;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;

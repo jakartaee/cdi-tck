@@ -15,10 +15,10 @@ import java.util.Set;
 
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.inject.AmbiguousResolutionException;
-import javax.enterprise.inject.TypeLiteral;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.jsr299.tck.api.JSR299Configuration;
 import org.jboss.jsr299.tck.impl.OldSPIBridge;

@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.literals;
 
 import java.lang.annotation.Target;
 
-import javax.enterprise.inject.AnnotationLiteral;
+import javax.enterprise.util.AnnotationLiteral;
 
 /**
  * @author pmuir

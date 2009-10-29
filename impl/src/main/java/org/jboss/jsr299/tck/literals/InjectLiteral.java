@@ -1,6 +1,6 @@
 package org.jboss.jsr299.tck.literals;
 
-import javax.enterprise.inject.AnnotationLiteral;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
 /**

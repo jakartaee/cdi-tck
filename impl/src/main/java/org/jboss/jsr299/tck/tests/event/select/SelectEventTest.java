@@ -1,7 +1,7 @@
 package org.jboss.jsr299.tck.tests.event.select;
 
-import javax.enterprise.inject.AnnotationLiteral;
-import javax.enterprise.inject.TypeLiteral;
+import javax.enterprise.util.AnnotationLiteral;
+import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;

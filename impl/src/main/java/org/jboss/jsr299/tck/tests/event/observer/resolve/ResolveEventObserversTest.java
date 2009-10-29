@@ -5,8 +5,8 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.spi.ObserverMethod;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;

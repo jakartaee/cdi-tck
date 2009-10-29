@@ -4,10 +4,10 @@ import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.CreationException;
 import javax.enterprise.inject.IllegalProductException;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;

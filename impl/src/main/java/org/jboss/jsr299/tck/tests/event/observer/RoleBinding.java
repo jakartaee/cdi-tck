@@ -1,6 +1,6 @@
 package org.jboss.jsr299.tck.tests.event.observer;
 
-import javax.enterprise.inject.AnnotationLiteral;
+import javax.enterprise.util.AnnotationLiteral;
 
 class RoleBinding extends AnnotationLiteral<Role> implements Role
 {

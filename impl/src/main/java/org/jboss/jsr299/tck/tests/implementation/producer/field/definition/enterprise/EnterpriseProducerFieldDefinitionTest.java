@@ -1,6 +1,6 @@
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition.enterprise;
 
-import javax.enterprise.inject.AnnotationLiteral;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;

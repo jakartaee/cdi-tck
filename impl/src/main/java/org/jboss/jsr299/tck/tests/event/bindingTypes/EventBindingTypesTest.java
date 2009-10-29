@@ -1,9 +1,9 @@
 package org.jboss.jsr299.tck.tests.event.bindingTypes;
 
 import javax.enterprise.event.Event;
-import javax.enterprise.inject.AnnotationLiteral;
-import javax.enterprise.inject.TypeLiteral;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
+import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;

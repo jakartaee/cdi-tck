@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.enterprise.event.Event;
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.Any;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
 class MiniBar

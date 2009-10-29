@@ -9,10 +9,10 @@ import java.lang.reflect.TypeVariable;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Event;
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;

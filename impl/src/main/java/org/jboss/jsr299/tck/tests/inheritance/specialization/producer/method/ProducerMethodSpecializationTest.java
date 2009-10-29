@@ -2,8 +2,8 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.producer.method;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.Any;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Named;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;

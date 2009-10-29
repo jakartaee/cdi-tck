@@ -20,9 +20,9 @@ package org.jboss.jsr299.tck.tests.lookup.dynamic;
 import java.util.Iterator;
 
 import javax.enterprise.inject.AmbiguousResolutionException;
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;

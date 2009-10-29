@@ -5,10 +5,10 @@ import java.lang.reflect.Type;
 import java.util.Set;
 
 import javax.enterprise.inject.AmbiguousResolutionException;
-import javax.enterprise.inject.TypeLiteral;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.util.TypeLiteral;
 
 
 public class OldSPIBridge

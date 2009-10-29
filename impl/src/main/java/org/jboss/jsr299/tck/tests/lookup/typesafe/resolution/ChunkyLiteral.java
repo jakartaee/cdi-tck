@@ -1,6 +1,6 @@
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
-import javax.enterprise.inject.AnnotationLiteral;
+import javax.enterprise.util.AnnotationLiteral;
 
 class ChunkyLiteral extends AnnotationLiteral<Chunky> implements Chunky
 {

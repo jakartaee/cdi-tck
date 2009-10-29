@@ -23,9 +23,9 @@ import java.util.HashSet;
 import java.util.List;
 
 import javax.decorator.Decorates;
-import javax.enterprise.inject.AnnotationLiteral;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Decorator;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
