@@ -16,8 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 
 /**
@@ -34,7 +35,7 @@ public class TimestampLogger
    
    private static boolean initializeCalled;
    
-   @Delegate
+   @Inject @Delegate
    private Logger logger;
    
    public void log(String message)

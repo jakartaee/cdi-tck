@@ -1,13 +1,15 @@
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 @Decorator
 class CatDecorator extends Cat
 {
-   @Delegate Cat bean;
+   @Inject @Delegate Cat bean;
 
+   @Override
    public String hello()
    {
       return bean.hello() + " world!";

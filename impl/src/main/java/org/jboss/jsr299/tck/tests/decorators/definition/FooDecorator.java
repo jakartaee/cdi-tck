@@ -17,8 +17,9 @@
 
 package org.jboss.jsr299.tck.tests.decorators.definition;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 /**
  * @author pmuir
@@ -33,6 +34,6 @@ public class FooDecorator extends AbstractFooDecorator implements Foo, Bar
 	 * 
 	 */
 	private static final long serialVersionUID = -2253839366401409666L;
-	@Delegate FooBar foobar;
+	@Inject @Delegate FooBar foobar;
 
 }

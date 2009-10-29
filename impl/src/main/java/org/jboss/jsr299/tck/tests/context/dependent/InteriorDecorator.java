@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PreDestroy;
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 @Decorator
 class InteriorDecorator 
 {
-   @Delegate @Room Interior interior;
+   @Inject @Delegate @Room Interior interior;
    
    private static List<InteriorDecorator> instances = new ArrayList<InteriorDecorator>();
    

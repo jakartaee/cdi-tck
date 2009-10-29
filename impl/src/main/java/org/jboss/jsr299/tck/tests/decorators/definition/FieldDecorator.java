@@ -16,8 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 /**
  * @author pmuir
@@ -27,6 +28,6 @@ import javax.decorator.Decorator;
 public class FieldDecorator implements Field
 {
 
-   @Delegate Field field;
+   @Inject @Delegate Field field;
 
 }

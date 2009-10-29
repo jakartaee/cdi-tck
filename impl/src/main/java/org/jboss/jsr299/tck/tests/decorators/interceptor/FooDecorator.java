@@ -17,14 +17,15 @@
 
 package org.jboss.jsr299.tck.tests.decorators.interceptor;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 @Decorator
 public class FooDecorator implements Foo {
     public static String NAME = "FooDecorator";
 
-    @Delegate Foo foo;
+    @Inject @Delegate Foo foo;
 
     public void doSomething() {
         CallOrder.addCaller(NAME);        

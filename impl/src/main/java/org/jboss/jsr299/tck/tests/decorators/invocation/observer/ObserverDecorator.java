@@ -16,8 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation.observer;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 
 /**
@@ -28,7 +29,7 @@ import javax.decorator.Decorator;
 public class ObserverDecorator
 {
    
-   @Delegate
+   @Inject @Delegate
    private Observer observer;
    
    public void observe(Foo foo)

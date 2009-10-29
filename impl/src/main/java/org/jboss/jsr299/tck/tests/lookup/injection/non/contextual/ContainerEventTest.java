@@ -72,7 +72,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateServletListenerAnnotatedType(ProcessInjectionTargetObserver.getListenerEvent().getAnnotatedType());
    }
 
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aad"),
       @SpecAssertion(section = "11.5.6", id = "abd"),
@@ -152,7 +152,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateServletListenerAnnotatedType(ProcessAnnotatedTypeObserver.getListenerEvent().getAnnotatedType());
    }
    
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "bf")
    public void testProcessAnnotatedTypeEventFiredForTagHandler() {
       assert ProcessAnnotatedTypeObserver.getTagHandlerEvent() != null;

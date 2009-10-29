@@ -1,11 +1,12 @@
 package org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingDecorator;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 @Decorator
 class MaarianhaminaDecorator implements MaarianHaminaLocal_Broken
 {
    
-   @Delegate MaarianHaminaLocal_Broken maarianHamina;
+   @Inject @Delegate MaarianHaminaLocal_Broken maarianHamina;
 }

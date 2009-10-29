@@ -2,13 +2,14 @@ package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
 import java.util.Date;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 @Decorator
 class TimestampLogger implements Logger
 {
-   @Delegate 
+   @Inject @Delegate 
    private Logger logger;
    
    private static Logger staticLogger;

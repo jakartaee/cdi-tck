@@ -16,8 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
@@ -59,7 +59,7 @@ public class FooDecorator2
       FooDecorator2.injectionPoint = null;
    }
    
-   @Delegate Foo foo;
+   @Inject @Delegate Foo foo;
    
    public void log(String message)
    {

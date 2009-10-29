@@ -16,8 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.inject.broken.delegateProducerMethod;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
 import javax.enterprise.inject.Produces;
 
 

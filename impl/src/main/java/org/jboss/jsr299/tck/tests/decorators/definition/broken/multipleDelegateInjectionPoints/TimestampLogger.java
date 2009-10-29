@@ -16,8 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.broken.multipleDelegateInjectionPoints;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 /**
  * @author pmuir
@@ -27,7 +28,7 @@ import javax.decorator.Decorator;
 public abstract class TimestampLogger implements Logger
 {
 
-   @Delegate Logger logger;
-   @Delegate Logger logger2;
+   @Inject @Delegate Logger logger;
+   @Inject @Delegate Logger logger2;
 
 }

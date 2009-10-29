@@ -2,8 +2,9 @@ package org.jboss.jsr299.tck.tests.decorators.invocation;
 
 import java.io.Serializable;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
 @Decorator
 public class PigStyDecorator implements PigSty, Serializable
@@ -20,7 +21,7 @@ public class PigStyDecorator implements PigSty, Serializable
       decoratorCalled = false;
    }
 
-   @Delegate
+   @Inject @Delegate
    transient PigSty pigSty;
 
    public void clean()
