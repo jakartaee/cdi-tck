@@ -206,6 +206,20 @@
                   (<ulink url="http://java.sun.com/javaee/6/docs/api/">http://java.sun.com/javaee/6/docs/api/</ulink>).
                </para>
             </listitem>
+            <listitem>
+               <para>
+                  <emphasis role="bold">JSR-330</emphasis> - CDI builds on JSR-330,
+                  and as such JSR-299 implementations must additionally pass the
+                  JSR-330 TCK.
+               </para>
+               <tip>
+                  <para>
+                     The TCK distribution includes <literal>weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar</literal>
+                     which contains two classes showing how the CDI RI passes the JSR-330
+                     TCK. The source for these classes is available from <ulink url="http://anonsvn.jboss.org/repos/weld/tags/1.0.0-CR2/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck/" />
+                  </para>
+               </tip>
+            </listitem>
          </itemizedlist>
       </section>
 
