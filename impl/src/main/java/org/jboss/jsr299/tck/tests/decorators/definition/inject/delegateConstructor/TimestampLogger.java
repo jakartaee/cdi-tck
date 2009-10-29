@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.inject.delegateConstructor;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 import javax.inject.Inject;
 
@@ -34,7 +34,7 @@ public class TimestampLogger
    private static Logger constructor;
    
    @Inject
-   public TimestampLogger(@Decorates Logger logger)
+   public TimestampLogger(@Delegate Logger logger)
    {
       constructor = logger;
    }

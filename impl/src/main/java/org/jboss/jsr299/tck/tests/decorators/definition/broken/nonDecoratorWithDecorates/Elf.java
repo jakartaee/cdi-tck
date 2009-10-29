@@ -1,8 +1,8 @@
 package org.jboss.jsr299.tck.tests.decorators.definition.broken.nonDecoratorWithDecorates;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 
 class Elf
 {
-   @Decorates ChristmasTree tree;
+   @Delegate ChristmasTree tree;
 }

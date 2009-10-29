@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.inject.delegateField;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 
 
@@ -30,7 +30,7 @@ public class TimestampLogger
    
    public static final String PREFIX = TimestampLogger.class.getSimpleName();
    
-   @Decorates
+   @Delegate
    private Logger instanceField;
    
    private static Logger field;

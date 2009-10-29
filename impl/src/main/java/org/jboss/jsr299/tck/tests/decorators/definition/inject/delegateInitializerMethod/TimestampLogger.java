@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.inject.delegateInitializerMethod;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 import javax.inject.Inject;
 
@@ -34,7 +34,7 @@ public class TimestampLogger
    private static Logger initializerMethod;
    
    @Inject
-   public void setLogger(@Decorates Logger logger)
+   public void setLogger(@Delegate Logger logger)
    {
       initializerMethod = logger;
    }

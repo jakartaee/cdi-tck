@@ -1,13 +1,13 @@
 package org.jboss.jsr299.tck.tests.deployment.lifecycle;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 import javax.inject.Inject;
 
 @Decorator
 class DataAccessAuthorizationDecorator implements DataAccess
 {
-   @Decorates
+   @Delegate
    DataAccess delegate;
 
    @Inject

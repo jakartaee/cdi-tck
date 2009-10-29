@@ -1,6 +1,6 @@
 package org.jboss.jsr299.tck.tests.interceptors.definition.broken.interceptorCanNotBeDecorator;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 import javax.interceptor.Interceptor;
 
@@ -8,5 +8,5 @@ import javax.interceptor.Interceptor;
 @Interceptor
 class InterceptingDecorator
 {
-   @Decorates Automobile automobile;
+   @Delegate Automobile automobile;
 }

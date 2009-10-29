@@ -2,7 +2,7 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPa
 
 import java.io.Serializable;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
@@ -11,7 +11,7 @@ import javax.inject.Inject;
 @Decorator
 public class CityDecorator implements CityInterface, Serializable
 {
-   @Decorates @Any CityInterface city;
+   @Delegate @Any CityInterface city;
    
    @Inject
    public CityDecorator(NonPassivating nonPassivating) {}

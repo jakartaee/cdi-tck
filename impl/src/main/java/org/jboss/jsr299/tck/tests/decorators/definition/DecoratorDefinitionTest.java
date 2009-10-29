@@ -22,7 +22,7 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.util.AnnotationLiteral;
@@ -105,7 +105,7 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test
       Decorator<?> decorator = decorators.get(0);
       assert decorator.getInjectionPoints().size() == 1;
       assert decorator.getInjectionPoints().iterator().next().getType().equals(Logger.class);
-      assert decorator.getInjectionPoints().iterator().next().getAnnotated().isAnnotationPresent(Decorates.class);
+      assert decorator.getInjectionPoints().iterator().next().getAnnotated().isAnnotationPresent(Delegate.class);
       assert decorator.getDelegateType().equals(Logger.class);
       assert decorator.getDelegateQualifiers().size() == 1;
       assert annotationSetMatches(decorator.getDelegateQualifiers(), Default.class);

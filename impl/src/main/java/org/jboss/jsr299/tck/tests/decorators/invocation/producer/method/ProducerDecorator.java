@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation.producer.method;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 
 
@@ -28,7 +28,7 @@ import javax.decorator.Decorator;
 public class ProducerDecorator
 {
    
-   @Decorates
+   @Delegate
    private Producer producer;
    
    public Foo produce()

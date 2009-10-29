@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.inject.broken.delegateProducerMethod;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 import javax.enterprise.inject.Produces;
 
@@ -30,7 +30,7 @@ public class TimestampLogger
 {
    
    @Produces
-   public String setLogger(@Decorates Logger logger)
+   public String setLogger(@Delegate Logger logger)
    {
       return "";
    }

@@ -1,12 +1,12 @@
 package org.jboss.jsr299.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 
 @Decorator
 class FooDecorator
 {
-   @Decorates Foo delegate;
+   @Delegate Foo delegate;
    
    public void bar()
    {

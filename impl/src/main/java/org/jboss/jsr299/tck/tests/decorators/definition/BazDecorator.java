@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 
 /**
@@ -27,6 +27,6 @@ import javax.decorator.Decorator;
 public class BazDecorator implements Baz 
 {
 
-   @Decorates Bazt bazt;
+   @Delegate Bazt bazt;
 
 }

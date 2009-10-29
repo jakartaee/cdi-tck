@@ -17,7 +17,7 @@
 
 package org.jboss.jsr299.tck.tests.decorators.definition;
 
-import javax.decorator.Decorates;
+import javax.decorator.Delegate;
 import javax.decorator.Decorator;
 
 /**
@@ -33,6 +33,6 @@ public class FooDecorator extends AbstractFooDecorator implements Foo, Bar
 	 * 
 	 */
 	private static final long serialVersionUID = -2253839366401409666L;
-	@Decorates FooBar foobar;
+	@Delegate FooBar foobar;
 
 }
