@@ -202,7 +202,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, nonBinding);
    }
 
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
          @SpecAssertion(section = "7.2", id = "a"),
          @SpecAssertion(section = "9.2", id = "a"),
