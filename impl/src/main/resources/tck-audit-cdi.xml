@@ -2559,7 +2559,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
         <text>Servlet Filter |init()| method called after injected fields</text>
       </assertion>
       <assertion id="br">
-        <text>Servle Filtert |init()| method called after Java EE resource injection</text>
+        <text>Servlet Filter |init()| method called after Java EE resource injection</text>
       </assertion>
     </group>
   </section>
