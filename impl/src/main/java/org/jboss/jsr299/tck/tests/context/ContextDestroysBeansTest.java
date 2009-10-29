@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 public class ContextDestroysBeansTest extends AbstractJSR299Test
 {
 
-   @Test(groups = { "contexts", "rewrite" })
+   @Test(groups = { "contexts", "broken" })
    @SpecAssertions( {
       @SpecAssertion(section = "6.2", id = "p"),
       @SpecAssertion(section = "6.3", id = "d")
@@ -32,7 +32,7 @@ public class ContextDestroysBeansTest extends AbstractJSR299Test
       MyContextual bean = new MyContextual(getCurrentManager());
       bean.setShouldReturnNullInstances(false);
       // TODO Remove use of this deprecated API
-      getCurrentManager().addBean(bean);
+      //getCurrentManager().addBean(bean);
 
       Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
       CreationalContext<MySessionBean> creationalContext = getCurrentManager().createCreationalContext(bean);

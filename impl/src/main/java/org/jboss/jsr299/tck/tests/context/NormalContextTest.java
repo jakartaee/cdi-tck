@@ -43,7 +43,7 @@ public class NormalContextTest extends AbstractJSR299Test
       assert fourth.getId() == 10;
    }
 
-   @Test(groups = { "contexts", "rewrite" })
+   @Test(groups = { "contexts", "broken" })
    @SpecAssertions( {
       @SpecAssertion(section = "6.2", id = "l")
    } )
@@ -52,7 +52,7 @@ public class NormalContextTest extends AbstractJSR299Test
       MyContextual bean = new MyContextual(getCurrentManager());
       bean.setShouldReturnNullInstances(false);
       // TODO Remove use of this deprecated API
-      getCurrentManager().addBean(bean);
+      //getCurrentManager().addBean(bean);
 
       CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
       MySessionBean newBean = getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext);
@@ -60,7 +60,7 @@ public class NormalContextTest extends AbstractJSR299Test
       assert bean.isCreateCalled();
    }
 
-   @Test(groups = { "contexts" , "rewrite"})
+   @Test(groups = { "contexts" , "broken"})
    @SpecAssertion(section = "6.2", id = "nb")
    public void testGetMayNotReturnNullUnlessContextualCreateReturnsNull()
    {
@@ -69,7 +69,7 @@ public class NormalContextTest extends AbstractJSR299Test
       MyContextual bean = new MyContextual(getCurrentManager());
       bean.setShouldReturnNullInstances(true);
       // TODO Remove use of this deprecated API
-      getCurrentManager().addBean(bean);
+      //getCurrentManager().addBean(bean);
 
       CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
       assert getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext) == null;

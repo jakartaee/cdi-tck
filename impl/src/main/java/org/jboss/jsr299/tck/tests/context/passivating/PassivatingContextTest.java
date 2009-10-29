@@ -98,17 +98,6 @@ public class PassivatingContextTest extends AbstractJSR299Test
       assert instance.getTheNumber() == 100;
    }
 
-   @SuppressWarnings("unchecked")
-   private <T> boolean testSerialize(Bean<T> bean) throws IOException, ClassNotFoundException
-   {
-      getCurrentManager().addBean(bean);
-      T instance = getCurrentManager().getContext(bean.getScope()).get(bean);
-      byte[] data = serialize(instance);
-      T resurrected = (T) deserialize(data);
-      assert resurrected != null;
-      return resurrected.toString().equals(instance.toString());
-   }
-
    @Test(groups = { "contexts", "passivation" })
    @SpecAssertion(section = "6.6.4", id = "aaba")
    public void testBeanWithNonSerializableImplementationInjectedIntoTransientFieldOK()
