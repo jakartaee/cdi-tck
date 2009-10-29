@@ -13,7 +13,7 @@
    <name>JSR-299 TCK Distribution - Weld Porting Package</name>
 
    <properties>
-      <weld.version>1.0.0-CR1</weld.version>
+      <weld.version>1.0.0-SNAPSHOT</weld.version>
    </properties>
 
    <dependencies>
@@ -23,6 +23,14 @@
          <version>${weld.version}</version>
          <optional>true</optional>
          <scope>compile</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.jboss.weld</groupId>
+         <artifactId>weld-inject-tck-runner</artifactId>
+         <version>${weld.version}</version>
+         <optional>true</optional>
+         <scope>compile</scope>
+         <type>test-jar</type>
       </dependency>
    </dependencies>
 
