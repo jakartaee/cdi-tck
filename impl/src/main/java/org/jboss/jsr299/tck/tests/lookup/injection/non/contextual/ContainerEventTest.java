@@ -65,7 +65,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       @SpecAssertion(section = "11.5.6", id = "aac"),
       @SpecAssertion(section = "11.5.6", id = "abc"),
       @SpecAssertion(section = "12.3", id = "de")})
-   //WELD-204
+   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForServletListener()
    {
       assert ProcessInjectionTargetObserver.getListenerEvent() != null;
@@ -88,7 +88,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       @SpecAssertion(section = "11.5.6", id = "aae"),
       @SpecAssertion(section = "11.5.6", id = "abe"),
       @SpecAssertion(section = "12.3", id = "dg")})
-   //WELD-204
+   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForTagLibraryListener()
    {
       assert ProcessInjectionTargetObserver.getTagLibraryListenerEvent() != null;
@@ -100,7 +100,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       @SpecAssertion(section = "11.5.6", id = "aah"),
       @SpecAssertion(section = "11.5.6", id = "abh"),
       @SpecAssertion(section = "12.3", id = "dj")})
-   //WELD-204
+   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForServlet()
    {
       assert ProcessInjectionTargetObserver.getServletEvent() != null;
@@ -112,7 +112,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       @SpecAssertion(section = "11.5.6", id = "aai"),
       @SpecAssertion(section = "11.5.6", id = "abi"),
       @SpecAssertion(section = "12.3", id = "dk")})
-   //WELD-204
+   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForFilter()
    {
       assert ProcessInjectionTargetObserver.getFilterEvent() != null;
@@ -121,7 +121,8 @@ public class ContainerEventTest extends AbstractJSR299Test
    
    @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "dd")
-      public void testProcessInjectionTargetEventFiredForJsfManagedBean()
+   // WELDINT-22
+   public void testProcessInjectionTargetEventFiredForJsfManagedBean()
    {
       assert ProcessInjectionTargetObserver.getJsfManagedBeanEvent() != null;
       validateJsfManagedBeanAnnotatedType(ProcessInjectionTargetObserver.getJsfManagedBeanEvent().getAnnotatedType());
@@ -133,7 +134,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       @SpecAssertion(section = "11.5.6", id = "aao"),
       @SpecAssertion(section = "11.5.6", id = "aan"),
       @SpecAssertion(section = "11.5.6", id = "aap")})
-   //WELD-204
+   // WELDINT-22
    public void testTypeOfProcessInjectionTargetParameter() {
       assert !ProcessInjectionTargetObserver.isStringObserved();
       assert ProcessInjectionTargetObserver.isTagHandlerSubTypeObserved();
@@ -143,8 +144,9 @@ public class ContainerEventTest extends AbstractJSR299Test
       assert !ProcessInjectionTargetObserver.isListenerSuperTypeObserved();
    }
    
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "be")
+   // WELDINT-23
    public void testProcessAnnotatedTypeEventFiredForServletListener() {
       assert ProcessAnnotatedTypeObserver.getListenerEvent() != null;
       validateServletListenerAnnotatedType(ProcessAnnotatedTypeObserver.getListenerEvent().getAnnotatedType());
@@ -159,12 +161,13 @@ public class ContainerEventTest extends AbstractJSR299Test
    
    @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "bg")
+   // WELDINT-23
    public void testProcessAnnotatedTypeEventFiredForTagLibraryListener() {
       assert ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent() != null;
       validateTagLibraryListenerAnnotatedType(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent().getAnnotatedType());
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "12.3", id = "bj")
    public void testProcessAnnotatedTypeEventFiredForServlet() {
       assert ProcessAnnotatedTypeObserver.getServletEvent() != null;
@@ -173,6 +176,7 @@ public class ContainerEventTest extends AbstractJSR299Test
    
    @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "bk")
+   // WELDINT-23
    public void testProcessAnnotatedTypeEventFiredForFilter() {
       assert ProcessAnnotatedTypeObserver.getFilterEvent() != null;
       validateFilterAnnotatedType(ProcessAnnotatedTypeObserver.getFilterEvent().getAnnotatedType());
@@ -180,6 +184,7 @@ public class ContainerEventTest extends AbstractJSR299Test
    
    @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "bd")
+   // WELDINT-23
    public void testProcessAnnotatedTypeEventFiredForJsfManagedBean() {
       assert ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent() != null;
       validateJsfManagedBeanAnnotatedType(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent().getAnnotatedType());
