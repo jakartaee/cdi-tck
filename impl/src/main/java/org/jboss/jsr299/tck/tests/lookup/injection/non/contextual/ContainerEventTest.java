@@ -157,28 +157,28 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateTagHandlerAnnotatedType(ProcessAnnotatedTypeObserver.getTagHandlerEvent().getAnnotatedType());
    }
    
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "bg")
    public void testProcessAnnotatedTypeEventFiredForTagLibraryListener() {
       assert ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent() != null;
       validateTagLibraryListenerAnnotatedType(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent().getAnnotatedType());
    }
    
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "bj")
    public void testProcessAnnotatedTypeEventFiredForServlet() {
       assert ProcessAnnotatedTypeObserver.getServletEvent() != null;
       validateServletAnnotatedType(ProcessAnnotatedTypeObserver.getServletEvent().getAnnotatedType());
    }
    
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "bk")
    public void testProcessAnnotatedTypeEventFiredForFilter() {
       assert ProcessAnnotatedTypeObserver.getFilterEvent() != null;
       validateFilterAnnotatedType(ProcessAnnotatedTypeObserver.getFilterEvent().getAnnotatedType());
    }
    
-   @Test
+   @Test(groups = "ri-broken")
    @SpecAssertion(section = "12.3", id = "bd")
    public void testProcessAnnotatedTypeEventFiredForJsfManagedBean() {
       assert ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent() != null;
