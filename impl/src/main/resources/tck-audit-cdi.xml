@@ -4469,7 +4469,7 @@ called first.</text>
       <text>An annotation member may be excluded from consideration using the @Nonbinding annotation.</text>
     </assertion>
 
-    <assertion id="ca">
+    <assertion id="ca" testable="false">
       <text>Array-valued or annotation-valued members of an interceptor binding type should be annotated |@Nonbinding| in a portable application. If an array-valued or annotation-valued member of an interceptor binding type is not annotated |@Nonbinding|, non-portable behavior results.</text>
     </assertion>
     
