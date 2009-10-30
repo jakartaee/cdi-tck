@@ -41,7 +41,6 @@ import org.testng.annotations.Test;
 public class ProcessObserverMethodEventTest extends AbstractJSR299Test
 {
    @Test
-   // Event resolution seems to be broken here
    @SpecAssertion(section = "11.5.9", id = "aaa")
    public void testProcessObserverMethodEventsSent()
    {

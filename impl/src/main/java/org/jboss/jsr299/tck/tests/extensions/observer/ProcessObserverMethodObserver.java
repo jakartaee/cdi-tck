@@ -15,7 +15,7 @@ public class ProcessObserverMethodObserver implements Extension
    private static AnnotatedMethod<?>   annotatedMethod;
    private static ObserverMethod<?> observerMethod;
    
-   public void observeObserverMethodForEventA(@Observes ProcessObserverMethod<EventAObserver, EventA> event)
+   public void observeObserverMethodForEventA(@Observes ProcessObserverMethod<EventA, EventAObserver> event)
    {
       eventTypes.add(event.getObserverMethod().getObservedType());
       annotatedMethod = event.getAnnotatedMethod();
