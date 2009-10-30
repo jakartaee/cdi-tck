@@ -1,1 +1,1 @@
-org.jboss.jsr299.tck.tests.context.ContextExtensions
+org.jboss.jsr299.tck.tests.context.AfterBeanDiscoveryObserver

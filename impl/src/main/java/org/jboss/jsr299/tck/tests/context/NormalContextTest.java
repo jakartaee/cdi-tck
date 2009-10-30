@@ -10,6 +10,8 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.IntegrationTest;
+import org.jboss.testharness.impl.packaging.Resource;
 import org.testng.annotations.Test;
 
 /**
@@ -20,6 +22,8 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @SpecVersion(spec="cdi", version="20091018")
+@IntegrationTest
+@Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
 public class NormalContextTest extends AbstractJSR299Test
 {
 
@@ -43,16 +47,14 @@ public class NormalContextTest extends AbstractJSR299Test
       assert fourth.getId() == 10;
    }
 
-   @Test(groups = { "contexts", "broken" })
+   @Test(groups = { "contexts" })
    @SpecAssertions( {
       @SpecAssertion(section = "6.2", id = "l")
    } )
    public void testGetWithCreationalContextReturnsNewInstance()
    {
-      MyContextual bean = new MyContextual(getCurrentManager());
+      MyContextual bean = AfterBeanDiscoveryObserver.getBean();
       bean.setShouldReturnNullInstances(false);
-      // TODO Remove use of this deprecated API
-      //getCurrentManager().addBean(bean);
 
       CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
       MySessionBean newBean = getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext);
@@ -60,16 +62,14 @@ public class NormalContextTest extends AbstractJSR299Test
       assert bean.isCreateCalled();
    }
 
-   @Test(groups = { "contexts" , "broken"})
+   @Test(groups = { "contexts" })
    @SpecAssertion(section = "6.2", id = "nb")
    public void testGetMayNotReturnNullUnlessContextualCreateReturnsNull()
    {
       // The case of no creational context is already tested where a null is
       // returned. Here we just test that the contextual create can return null.
-      MyContextual bean = new MyContextual(getCurrentManager());
+      MyContextual bean = AfterBeanDiscoveryObserver.getBean();
       bean.setShouldReturnNullInstances(true);
-      // TODO Remove use of this deprecated API
-      //getCurrentManager().addBean(bean);
 
       CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
       assert getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext) == null;
