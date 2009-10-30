@@ -33,6 +33,6 @@ public class NonBindingTypesWhenResolvingTest extends AbstractJSR299Test
    @SpecAssertion(section = "11.3.11", id = "e")
    public void testNonBindingTypeAnnotationWhenResolvingFails()
    {
-      Set<ObserverMethod<?, AnEventType>> resolvedObservers = getCurrentManager().resolveObserverMethods(new AnEventType(), new AnimalStereotypeAnnotationLiteral());
+      Set<ObserverMethod<AnEventType>> resolvedObservers = getCurrentManager().resolveObserverMethods(new AnEventType(), new AnimalStereotypeAnnotationLiteral());
    }
 }

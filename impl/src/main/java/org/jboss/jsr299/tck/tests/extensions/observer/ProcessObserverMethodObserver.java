@@ -13,7 +13,7 @@ public class ProcessObserverMethodObserver implements Extension
 {
    private static final HashSet<Type>  eventTypes = new HashSet<Type>();
    private static AnnotatedMethod<?>   annotatedMethod;
-   private static ObserverMethod<?, ?> observerMethod;
+   private static ObserverMethod<?> observerMethod;
    
    public void observeObserverMethodForEventA(@Observes ProcessObserverMethod<EventAObserver, EventA> event)
    {
@@ -32,7 +32,7 @@ public class ProcessObserverMethodObserver implements Extension
       return annotatedMethod;
    }
 
-   public static ObserverMethod<?, ?> getObserverMethod()
+   public static ObserverMethod<?> getObserverMethod()
    {
       return observerMethod;
    }

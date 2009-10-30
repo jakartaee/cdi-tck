@@ -29,7 +29,7 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
    public void testNonStaticObserverMethodNotInherited() throws Exception
    {
       Egg egg = new Egg();
-      Set<ObserverMethod<?, Egg>> observers = getCurrentManager().resolveObserverMethods(egg);
+      Set<ObserverMethod<Egg>> observers = getCurrentManager().resolveObserverMethods(egg);
       assert observers.size() == 1;
 
       // Reception the observer so we can confirm that it
@@ -44,7 +44,7 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
    public void testNonStaticObserverMethodNotIndirectlyInherited() throws Exception
    {
       StockPrice stockPrice = new StockPrice();
-      Set<ObserverMethod<?, StockPrice>> observers = getCurrentManager().resolveObserverMethods(stockPrice);
+      Set<ObserverMethod<StockPrice>> observers = getCurrentManager().resolveObserverMethods(stockPrice);
       assert observers.size() == 1;
 
       // Reception the observer so we can confirm that it
