@@ -1,7 +1,5 @@
 package org.jboss.jsr299.tck.tests.interceptors.definition.multipleBindings;
 
-import javax.enterprise.util.AnnotationLiteral;
-
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;

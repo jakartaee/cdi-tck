@@ -9,6 +9,7 @@ class MissileInterceptor
 {
    public static boolean intercepted = false;
    
+   
    @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
    {
       intercepted = true;

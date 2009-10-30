@@ -17,10 +17,7 @@
 
 package org.jboss.jsr299.tck.tests.event.observer.transactional;
 
-import java.lang.annotation.Annotation;
 import java.math.BigInteger;
-
-import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -44,10 +41,6 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091018")
 public class TransactionalObserversTest extends AbstractJSR299Test
 {
-
-   private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>()
-   {
-   };
    private PomeranianInterface dog = null;
    
    @Override

@@ -58,6 +58,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractJSR29
    public void testResolvingChecksTypeParameters()
    {
       assert getCurrentManager().resolveObserverMethods(new StringList()).size() == 1;
+      assert getCurrentManager().resolveObserverMethods(new IntegerList()).size() == 1;
       assert getCurrentManager().resolveObserverMethods(new CharacterList()).size() == 0;
    }
    

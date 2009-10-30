@@ -46,5 +46,7 @@ public class ResolvingChecksBindingTypeMembersTest extends AbstractJSR299Test
    {
       assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("first-observer")).size() == 1;
       assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("second-observer")).size() == 1;
+      assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("third-observer")).size() == 0;
+
    }
 }
