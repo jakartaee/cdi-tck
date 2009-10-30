@@ -149,10 +149,10 @@ public class BeanManagerTest extends AbstractJSR299Test
    @SpecAssertion(section = "11.3.13", id = "ad")
    public void testDetermineInterceptorBindingType()
    {
-      assert getCurrentManager().isInterceptorBindingType(Transactional.class);
-      assert !getCurrentManager().isInterceptorBindingType(Tame.class);
-      assert !getCurrentManager().isInterceptorBindingType(AnimalStereotype.class);
-      assert !getCurrentManager().isInterceptorBindingType(ApplicationScoped.class);
+      assert getCurrentManager().isInterceptorBinding(Transactional.class);
+      assert !getCurrentManager().isInterceptorBinding(Tame.class);
+      assert !getCurrentManager().isInterceptorBinding(AnimalStereotype.class);
+      assert !getCurrentManager().isInterceptorBinding(ApplicationScoped.class);
    }
    
    @Test(groups = { "rewrite"})
