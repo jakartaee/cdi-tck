@@ -52,9 +52,9 @@ public class ObserverTest extends AbstractJSR299Test
    @SpecAssertion(section = "11.1.3", id = "b")
    public void testGetBeanOnObserverMethod()
    {
-      Set<ObserverMethod<StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
+      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
       assert observers.size() == 1;
-      ObserverMethod<StockPrice> observerMethod = observers.iterator().next();
+      ObserverMethod<? super StockPrice> observerMethod = observers.iterator().next();
       assert observerMethod.getBeanClass().equals(StockWatcher.class);
    }
 
@@ -62,7 +62,7 @@ public class ObserverTest extends AbstractJSR299Test
    @SpecAssertion(section = "11.1.3", id = "c")
    public void testGetObservedTypeOnObserverMethod()
    {
-      Set<ObserverMethod<StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
+      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
       assert observers.size() == 1;
       ObserverMethod<?> observerMethod = observers.iterator().next();
       assert observerMethod.getObservedType().equals(StockPrice.class);
@@ -72,7 +72,7 @@ public class ObserverTest extends AbstractJSR299Test
    @SpecAssertion(section = "11.1.3", id = "c")
    public void testGetObservedBindingsOnObserverMethod()
    {
-      Set<ObserverMethod<StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
+      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
       assert observers.size() == 1;
       ObserverMethod<?> observerMethod = observers.iterator().next();
       assert observerMethod.getObservedQualifiers().size() == 1;
@@ -83,11 +83,11 @@ public class ObserverTest extends AbstractJSR299Test
    @SpecAssertion(section = "11.1.3", id = "d")
    public void testGetNotifyOnObserverMethod()
    {
-      Set<ObserverMethod<StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
+      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
       assert observers.size() == 1;
       assert observers.iterator().next().getReception().equals(Reception.ALWAYS);
 
-      Set<ObserverMethod<ConditionalEvent>> conditionalObservers = getCurrentManager().resolveObserverMethods(new ConditionalEvent());
+      Set<ObserverMethod<? super ConditionalEvent>> conditionalObservers = getCurrentManager().resolveObserverMethods(new ConditionalEvent());
       assert !conditionalObservers.isEmpty();
       assert conditionalObservers.iterator().next().getReception().equals(Reception.IF_EXISTS);
    }

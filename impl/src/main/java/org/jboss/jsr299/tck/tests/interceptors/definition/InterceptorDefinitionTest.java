@@ -78,8 +78,8 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
    public void testInterceptorBindingTypes()
    {
       Interceptor<?> interceptorBean = getTransactionalInterceptor();
-      assert interceptorBean.getInterceptorBindingTypes().size() == 1;
-      assert interceptorBean.getInterceptorBindingTypes().contains(new AnnotationLiteral<Transactional>(){});
+      assert interceptorBean.getInterceptorBindings().size() == 1;
+      assert interceptorBean.getInterceptorBindings().contains(new AnnotationLiteral<Transactional>(){});
    }
 
    @Test(groups="rewrite")
@@ -160,10 +160,10 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
             secureBinding
       );
       assert interceptors.size() == 2;
-      assert interceptors.get(0).getInterceptorBindingTypes().size() == 1;
-      assert interceptors.get(0).getInterceptorBindingTypes().contains(secureBinding);
-      assert interceptors.get(1).getInterceptorBindingTypes().size() == 1;
-      assert interceptors.get(1).getInterceptorBindingTypes().contains(transactionalBinding);
+      assert interceptors.get(0).getInterceptorBindings().size() == 1;
+      assert interceptors.get(0).getInterceptorBindings().contains(secureBinding);
+      assert interceptors.get(1).getInterceptorBindings().size() == 1;
+      assert interceptors.get(1).getInterceptorBindings().contains(transactionalBinding);
    }
 
    @Test(expectedExceptions = {IllegalArgumentException.class})
@@ -255,10 +255,10 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       assert interceptors.size() > 1;
       
       Interceptor<?> interceptorBean = interceptors.iterator().next();
-      assert interceptorBean.getInterceptorBindingTypes().size() == 1;
-      assert interceptorBean.getInterceptorBindingTypes().contains(new AnnotationLiteral<Logged>(){});
+      assert interceptorBean.getInterceptorBindings().size() == 1;
+      assert interceptorBean.getInterceptorBindings().contains(new AnnotationLiteral<Logged>(){});
 
-      Target target = (interceptorBean.getInterceptorBindingTypes().iterator().next()).annotationType().getAnnotation(Target.class);
+      Target target = (interceptorBean.getInterceptorBindings().iterator().next()).annotationType().getAnnotation(Target.class);
       List<ElementType> elements = Arrays.asList(target.value());
       assert elements.contains(ElementType.TYPE);
       assert elements.contains(ElementType.METHOD);
