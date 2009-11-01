@@ -183,9 +183,7 @@
       <profile>
          <id>tck-audit</id>
          <activation>
-            <property>
-               <name>tck-audit</name>
-            </property>
+            <jdk>1.6</jdk>
          </activation>
          <dependencies>
             <dependency>
@@ -203,25 +201,6 @@
                      <target>1.5</target>
                      <compilerArgument>-AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml</compilerArgument>
                   </configuration>
-               </plugin>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-enforcer-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <id>enforce-versions</id>
-                        <goals>
-                           <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                           <rules>
-                              <requireJavaVersion>
-                                 <version>1.6</version>
-                              </requireJavaVersion>
-                           </rules>
-                        </configuration>
-                     </execution>
-                  </executions>
                </plugin>
                <plugin>
                   <groupId>org.codehaus.mojo</groupId>
@@ -271,7 +250,6 @@
                   </executions>
                </plugin>
             </plugins>
-            <defaultGoal>compile</defaultGoal>
          </build>
       </profile>
 

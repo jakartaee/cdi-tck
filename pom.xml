@@ -322,17 +322,35 @@
             <module>doc/reference</module>
          </modules>
       </profile>
-
+      
       <profile>
-         <id>dist</id>
+         <id>verify-release</id>
          <activation>
             <property>
                <name>release</name>
             </property>
          </activation>
-         <modules>
-            <module>dist</module>
-         </modules>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId> 
+                  <artifactId>maven-enforcer-plugin</artifactId>
+                  <executions>
+                     <execution>
+                        <id>enforce-java-release</id>
+                        <goals>
+                           <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                           <requireJavaVersion>
+                              <version>1.6</version>
+                           </requireJavaVersion>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
       </profile>
 
    </profiles>
