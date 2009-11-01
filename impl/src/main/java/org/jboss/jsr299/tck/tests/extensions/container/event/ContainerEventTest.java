@@ -16,13 +16,13 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.container.event;
 
+import static javax.enterprise.inject.spi.SessionBeanType.STATEFUL;
+import static javax.enterprise.inject.spi.SessionBeanType.STATELESS;
+
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedType;
-
-import static javax.enterprise.inject.spi.SessionBeanType.STATELESS;
-import static javax.enterprise.inject.spi.SessionBeanType.STATEFUL;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -124,7 +124,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       @SpecAssertion(section="12.3", id="fb")})
    public void testProcessSessionBeanFiredForStatelessSessionBean() {
       assert ProcessBeanObserver.getProcessStatelessSessionBeanEvent() != null;
-      validateStatelessSessionBean(ProcessBeanObserver.getProcessStatelessSessionBeanEvent().getAnnotatedSessionBeanClass());
+      validateStatelessSessionBean(ProcessBeanObserver.getProcessStatelessSessionBeanEvent().getAnnotatedBeanClass());
    }
    
    @Test
@@ -134,7 +134,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       @SpecAssertion(section="12.3", id="g")})
       public void testProcessSessionBeanFiredForStatefulSessionBean() {
       assert ProcessBeanObserver.getProcessStatefulSessionBeanEvent() != null;
-      validateStatefulSessionBean(ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getAnnotatedSessionBeanClass());
+      validateStatefulSessionBean(ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getAnnotatedBeanClass());
    }
    
    @Test
