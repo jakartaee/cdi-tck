@@ -40,9 +40,9 @@ public class ResolveEventObserversTest extends AbstractJSR299Test
    @SpecAssertion(section = "10.4.2", id = "a")
    public void testMethodWithParameterAnnotatedWithObservesRegistersObserverMethod() throws SecurityException, NoSuchMethodException
    {
-      Set<ObserverMethod<Temperature>> temperatureObservers = getCurrentManager().resolveObserverMethods(new Temperature(0d));
+      Set<ObserverMethod<? super Temperature>> temperatureObservers = getCurrentManager().resolveObserverMethods(new Temperature(0d));
       assert temperatureObservers.size() == 1;
-      ObserverMethod<Temperature> temperatureObserver = temperatureObservers.iterator().next();
+      ObserverMethod<? super Temperature> temperatureObserver = temperatureObservers.iterator().next();
       assert temperatureObserver.getBeanClass().equals(AirConditioner.class);
       assert temperatureObserver.getObservedType().equals(Temperature.class);
       
@@ -103,12 +103,12 @@ public class ResolveEventObserversTest extends AbstractJSR299Test
    @SpecAssertion(section = "12.3", id = "o")
    public void testObserverMethodNotAutomaticallyRegisteredForDisabledBeans()
    {
-      Set<ObserverMethod<Ghost>> ghostObservers = getCurrentManager().resolveObserverMethods(new Ghost());
+      Set<ObserverMethod<? super Ghost>> ghostObservers = getCurrentManager().resolveObserverMethods(new Ghost());
       assert ghostObservers.size() == 0;
       
-      Set<ObserverMethod<String>> stringObservers = getCurrentManager().resolveObserverMethods(new String(), new AnnotationLiteral<Secret>() {});
+      Set<ObserverMethod<? super String>> stringObservers = getCurrentManager().resolveObserverMethods(new String(), new AnnotationLiteral<Secret>() {});
       assert stringObservers.size() == 1;
-      for (ObserverMethod<String> observer : stringObservers)
+      for (ObserverMethod<? super String> observer : stringObservers)
       {
          // an assertion error will be raised if an inappropriate observer is called
          observer.notify("fail if disabled observer invoked");

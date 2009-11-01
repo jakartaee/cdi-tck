@@ -29,7 +29,7 @@ class CustomInterceptorImplementation implements Interceptor<InterceptorClass>
       });
    }
 
-   public Set<Annotation> getInterceptorBindingTypes()
+   public Set<Annotation> getInterceptorBindings()
    {
       return Collections.unmodifiableSet(interceptorBindingTypes);
    }

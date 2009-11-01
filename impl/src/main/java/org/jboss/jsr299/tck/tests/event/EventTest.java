@@ -111,7 +111,7 @@ public class EventTest extends AbstractJSR299Test
    public void testNonStaticObserverMethodNotInherited()
    {
       Egg egg = new Egg();
-      Set<ObserverMethod<Egg>> observers = getCurrentManager().resolveObserverMethods(egg);
+      Set<ObserverMethod<? super Egg>> observers = getCurrentManager().resolveObserverMethods(egg);
       assert observers.size() == 1;
 
       // Reception the observer so we can confirm that it
@@ -129,7 +129,7 @@ public class EventTest extends AbstractJSR299Test
    public void testNonStaticObserverMethodNotIndirectlyInherited()
    {
       StockPrice price = new StockPrice();
-      Set<ObserverMethod<StockPrice>> observers = getCurrentManager().resolveObserverMethods(price);
+      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(price);
       assert observers.size() == 1;
 
       // Reception the observer so we can confirm that it
