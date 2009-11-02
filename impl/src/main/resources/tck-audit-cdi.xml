@@ -674,6 +674,10 @@ detects the problem and treats it as a definition error.</text>
     <assertion id="f">
       <text>A top-level Java class is not a managed bean if it is annotated with any of the EJB component-defining annotations</text>
     </assertion>
+    
+    <assertion id="g">
+      <text>A top-level Java class is not a managed bean if it implements |javax.enterprise.inject.spi.Extension|.</text>
+    </assertion>
 
     <assertion id="n">
       <text>A top-level Java class is not a managed bean if it is declared as an EJB bean class in |ejb-jar.xml|</text>
@@ -775,7 +779,7 @@ detects the problem and treats it as a definition error.</text>
 
   <section id="3.2" title="Session beans">
     <assertion id="aa" testable="false">
-      <text>A session bean is a bean that is implemented by a session bean with an EJB 3.x client view.  The basic lifecycle and semantics of an EJB session bean are defined by the EJB specification.</text>
+      <text>A session bean is a bean that is implemented by a session bean with an EJB 3.x client view.  The basic lifecycle and semantics of EJB session beans are defined by the EJB specification.</text>
       <note>This is a reference to the EJB specification</note>
     </assertion>
 
@@ -810,26 +814,25 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="i">
-      <text>If the session bean class is a generic type, it must have scope |@Dependent|. If a session bean with a parameterized bean class declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a
-definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If the session bean class is a generic type, it must have scope |@Dependent|. If a session bean with a parameterized bean class declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
   <section id="3.2.1" title="EJB remove methods of session beans">
     <assertion id="a">
-      <text>If a session bean is a stateful session bean, and the scope is |@Dependent|, the application may call any EJB remove method of an instance of the session bean.</text>
+      <text>If a session bean is a stateful session bean, and the scope is |@Dependent|, the application may call any EJB remove method of a contextual instance of the session bean.</text>
     </assertion>
 
     <assertion id="b">
-      <text>If a session bean is a stateful session bean, and the scope is not |@Dependent|, the application may not directly call any EJB remove method of any instance of the session bean.  If the application directly calls an EJB remove method of an instance of a session bean that is a stateful session bean and declares any scope other than |@Dependent|, an |UnsupportedOperationException| is thrown</text>
+      <text>If a session bean is a stateful session bean, and the scope is not |@Dependent|, the application may not directly call any EJB remove method of any instance of the session bean.  If the application directly calls an EJB remove method of any contextual instance of a session bean that is a stateful session bean and declares any scope other than |@Dependent|, an |UnsupportedOperationException| is thrown</text>
     </assertion>
 
     <assertion id="da">
-      <text>If the application directly calls an EJB remove method of an instance of a session bean that is a stateful session bean and has scope |@Dependent| then no parameters are passed to the method by the container.</text>
+      <text>If the application directly calls an EJB remove method of a contextual instance of a session bean that is a stateful session bean and has scope |@Dependent| then no parameters are passed to the method by the container.</text>
     </assertion>
 
     <assertion id="dba">
-      <text>If the application directly calls an EJB remove method of an instance of a session bean that is a stateful session bean and has scope |@Dependent| then the container ignores the instance instead of destroying it when |Contextual.destroy()| is called, as defined in Section 6.5, "Lifecycle of stateful session beans"</text>
+      <text>If the application directly calls an EJB remove method of a contextual instance of a session bean that is a stateful session bean and has scope |@Dependent| then the container ignores the instance instead of destroying it when |Contextual.destroy()| is called, as defined in Section 6.5, "Lifecycle of stateful session beans"</text>
     </assertion>
   </section>
 
@@ -887,7 +890,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
 
     <assertion id="da">
-      <text>If the bean class of X does not directly extend the bean class of another session bean, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If the bean class of X does not directly extend the bean class of another session bean, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
@@ -927,7 +930,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
 
     <assertion id="ha">
-      <text>If a producer method return type contains a wildcard type parameter the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a producer method return type contains a wildcard type parameter the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="iaa">
@@ -935,11 +938,11 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
     
     <assertion id="iab">
-      <text>If a producer method with a parameterized return type with a type variable declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a producer method with a parameterized return type with a type variable declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="ib">
-      <text>If a producer method return type is a type variable the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a producer method return type is a type variable the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="j">
@@ -995,7 +998,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
 
     <group>
-      <text>If a producer method is annotated |@Inject|, has a parameter annotated |@Disposes|, or has a parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a producer method is annotated |@Inject|, has a parameter annotated |@Disposes|, or has a parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error.</text>
       
       <assertion id="ca">
         <text>Test with a producer method annotated |@Inject|.</text>
@@ -1011,43 +1014,41 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </group>
 
     <assertion id="fa">
-      <text>If a non-static method of a session bean class is annotated |@Produces|, and the method is not a business method of the session bean, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a non-static method of a session bean class is annotated |@Produces|, and the method is not a business method of the session bean, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="ga">
-      <text>Interceptors ~and decorators~ may not declare producer methods. If an interceptor ~or decorator~ has a method annotated |@Produces|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Interceptors ~and decorators~ may not declare producer methods. If an interceptor ~or decorator~ has a method annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="gb">
-      <text>~Interceptors and~ decorators may not declare producer methods. If an ~interceptor or~ decorator has a method annotated |@Produces|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>~Interceptors and~ decorators may not declare producer methods. If an ~interceptor or~ decorator has a method annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
-  </section>
 
-  <section id="3.3.3" title="Producer method parameters">
-    <assertion id="b">
+    <assertion id="h">
       <text>A producer method may have any number of parameters.</text>
     </assertion>
 
-    <assertion id="c">
+    <assertion id="i">
       <text>All producer method parameters are injection points.</text>
     </assertion>
   </section>
 
-  <section id="3.3.4" title="Specializing a producer method">
+  <section id="3.3.3" title="Specializing a producer method">
     <assertion id="aa">
       <text>If a producer method X is annotated |@Specializes|, then it must be non-static and directly override another producer method Y. Then X directly specializes Y, as defined in Section 4.3 "Specialization".</text>
     </assertion>
 
     <assertion id="ba">
-      <text>If a producer method is static, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4 "Problems detected automatically by the container".</text>
+      <text>If a producer method is static, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="ca">
-      <text>If a producer method does not directly override another producer method, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4 "Problems detected automatically by the container".</text>
+      <text>If a producer method does not directly override another producer method, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="3.3.5" title="Disposer methods">
+  <section id="3.3.4" title="Disposer methods">
     <assertion id="aa">
       <text>A disposer method must be a non-abstract method of a managed bean class or session bean class.</text>
     </assertion>
@@ -1069,7 +1070,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
   </section>
 
-  <section id="3.3.6" title="Disposed parameter of a disposer method">
+  <section id="3.3.5" title="Disposed parameter of a disposer method">
     <assertion id="a">
       <text>Each disposer method must have exactly one disposed parameter, of the same type as the corresponding producer method return type.</text>
     </assertion>
@@ -1083,7 +1084,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
   </section>
 
-  <section id="3.3.7" title="Declaring a disposer method">
+  <section id="3.3.6" title="Declaring a disposer method">
     <assertion id="a">
       <text>A disposer method may be declared by annotating a parameter |@javax.enterprise.inject.Disposes|. That parameter is the disposed parameter</text>
     </assertion>
@@ -1093,33 +1094,35 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
 
     <assertion id="ba">
-  <text>If a method has more than one parameter annotated |@Disposes|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4 "Problems detected automatically by the container".</text>
+  <text>If a method has more than one parameter annotated |@Disposes|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="ca">
-      <text>If a disposal method is annotated |@Produces|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4 "Problems detected automatically by the container".</text>
+      <text>If a disposal method is annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="da">
-      <text>If a disposal method is annotated |@Inject|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4 "Problems detected automatically by the container".</text>
+      <text>If a disposal method is annotated |@Inject|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="ea">
-      <text>If a disposal method has a parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4 "Problems detected automatically by the container".</text>
+      <text>If a disposal method has a parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="fa">
-      <text>If a non-static method of a session bean class has a parameter annotated |@Disposes|, and the method is not a business method of the session bean, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4 "Problems detected automatically by the container".</text>
+      <text>If a non-static method of a session bean class has a parameter annotated |@Disposes|, and the method is not a business method of the session bean, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
-  </section>
+    
+    <assertion id="g">
+      <text>Interceptors and decorators may not declare disposer methods.  If an interceptor or decorator has a method annotated |@Disposes|, the container automatically detects the problem and treats it as a definition error.</text>
+    </assertion>
 
-  <section id="3.3.8" title="Disposer method parameters">
-    <assertion id="a">
+    <assertion id="h">
       <text>In addition to the disposed parameter, a disposer method may declare additional parameters, which may also specify qualifiers. These additional parameters are injection points.</text>
     </assertion>
   </section>
 
-  <section id="3.3.9" title="Disposer method resolution">
+  <section id="3.3.7" title="Disposer method resolution">
     <assertion id="aa">
       <text>When searching for disposer methods for a producer method, the container searches for disposer methods which are declared by the same bean class as the producer method, and for which the disposed parameter resolves to the producer method, according to the typesafe resolution algorithm defined in Section 5.3, "Typesafe resolution".</text>
     </assertion>
@@ -1133,7 +1136,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
   </section>
 
-  <section id="3.3.10" title="Default name for a producer method">
+  <section id="3.3.8" title="Default name for a producer method">
     <assertion id="a">
       <text>The default name for a producer method is the method name, unless the method follows the JavaBeans property getter naming convention, in which case the default name is the JavaBeans property name</text>
     </assertion>
@@ -1224,7 +1227,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
 
   <section id="3.4.2" title="Declaring a producer field">
     <assertion id="a">
-      <text>A producer field may be declared by annotating a field with the |@javax.enterprise.inject.Produces| annotation</text>
+      <text>A producer field may be declared by annotating a field with the |@javax.enterprise.inject.Produces| annotation.</text>
     </assertion>
 
     <assertion id="b">
@@ -1240,7 +1243,19 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
 
     <assertion id="f">
-      <text>A producer field may specify bindings.</text>
+      <text>A producer field may specify qualifiers.</text>
+    </assertion>
+    
+    <assertion id="g">
+      <text>If a producer field is annotated |@Inject|, the container automatically detects the problem and treats it as a definition error.</text>
+    </assertion>
+    
+    <assertion id="h">
+      <text>If a non-static field of a session bean class is annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
+    </assertion>
+    
+    <assertion id="i">
+      <text>Interceptors and decorators may not declare producer fields.  If an interceptor or decorator has a field annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
@@ -1376,14 +1391,12 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     <assertion id="ea">
       <text>If a bean constructor has a parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
     </assertion>
-  </section>
 
-  <section id="3.7.2" title="Bean constructor parameters">
-    <assertion id="b">
+    <assertion id="f">
       <text>A bean constructor may have any number of parameters.</text>
     </assertion>
 
-    <assertion id="c">
+    <assertion id="g">
       <text>All parameters of a bean constructor are injection points.</text>
     </assertion>
   </section>  
@@ -1409,13 +1422,6 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
       </assertion>
     </group>
 
-    <assertion id="ea">
-      <text>Injected fields are initialized by the container before initializer methods are called, and before the |@PostConstruct| callback occurs.</text>
-    </assertion>
-
-    <assertion id="h">
-      <text>If a field is a producer field, it is not an injected field</text>
-    </assertion>
   </section>
 
   <section id="3.8.1" title="Declaring an injected field">
@@ -1461,10 +1467,6 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
       <text>A bean class may declare multiple (or zero) initializer methods</text>
     </assertion>
 
-    <assertion id="ea">
-      <text>Initializer methods are called by the container after injected fields are initialized, and before the |@PostConstruct| callback occurs.</text>
-    </assertion>
-
     <assertion id="h" testable="false">
       <text>The application may call initializer methods directly, but then no parameters will be passed to the method by the container</text>
       <note>This is a statement of intent</note>
@@ -1492,21 +1494,18 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
       <text>If an initializer method has a parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
     </assertion>
 
-  </section>
-
-  <section id="3.9.2" title="Initializer method parameters">
-    <assertion id="aa">
+    <assertion id="e">
       <text>An initializer method may have any number of parameters.</text>
     </assertion>
 
-    <assertion id="b">
+    <assertion id="f">
       <text>All initializer method parameters are injection points.</text>
     </assertion>
   </section>
 
   <section id="3.10" title="The default qualifier at injection points">
     <assertion id="a">
-      <text>If an injection point declares no qualifier, the default binding |@Default| is assumed.</text>
+      <text>If an injection point declares no qualifier, the injection point has exactly one qualifier, the default qualifier |@Default|.</text>
     </assertion>
   </section>
   
@@ -1520,7 +1519,7 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
     </assertion>
   </section>
 
-  <section id="3.12" title="Beans with the @New qualifier">
+  <section id="3.12" title="@New qualified beans">
     <assertion id="d">
       <text>For each managed bean, a second bean exists which has the same bean class.</text>
     </assertion>
@@ -1605,8 +1604,16 @@ definition error, as defined in Section 12.4, "Problems detected automatically b
       <text>This second bean is not an alternative.</text>
     </assertion>
     
+    <assertion id="xc">
+      <text>This second bean is enabled, in the sense of Section 5.1.2, "Enabled and disabled beans", if and only if some other enabled bean has an injection point with the qualifier |@New(X.class)| where |X| is the bean class.</text>
+    </assertion>
+    
+    <assertion id="xd">
+      <text>This bean is called the |@New| qualified bean for the class |X|.</text>
+    </assertion>
+    
     <group>
-      <text>Note that this second bean exists, is enabled, and is available for injection whenever the bean class is in the application classpath, even if the first bean is disabled, as defined by Section 5.2.2, “Enabled and disabled beans” or is deployed out- side of a bean deployment archive, as defined in Section 12.1, “Bean deployment archives”, and is therefore not discovered during the bean discovery process defined in Chapter 12, Packaging and deployment.</text>
+      <text>Note that this second bean exists, and may be enabled and available for injection even if the first bean is disabled, as defined by Section 5.2.2, “Enabled and disabled beans” or if the bean class is deployed outside of a bean deployment archive, as defined in Section 12.1, “Bean deployment archives”, and is therefore not discovered during the bean discovery process defined in Chapter 12, Packaging and deployment. The container discovers |@New| qualified beans by inspecting injection points of other enabled beans.</text>
       <assertion id="ya">
         <text>Check that @New on a field injection point outside the BDA, but in the classpath causes a bean with qualifier @New and the given type to be created</text>
       </assertion>
