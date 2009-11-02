@@ -1,5 +1,5 @@
 <beans> 
   <interceptors>
-    <class>org.jboss.jsr299.tck.tests.interceptors.definition.custom.InterceptorClass</class>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.custom.SimpleInterceptorWithoutAnnotations</class>
   </interceptors>
 </beans>

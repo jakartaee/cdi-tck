@@ -16,8 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.custom;
 
-import javax.enterprise.inject.spi.InterceptionType;
-import javax.enterprise.util.AnnotationLiteral;
+import static javax.enterprise.inject.spi.InterceptionType.*;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -36,14 +35,62 @@ import org.testng.annotations.Test;
 public class CustomInterceptorTest extends AbstractJSR299Test
 {
    @Test(groups = "ri-broken")
+   @SpecAssertion(section = "9.5", id = "fa")
+   // WELD-238
+   public void testCustomPostConstructInterceptor()
+   {
+      assert !getCurrentManager().resolveInterceptors(POST_CONSTRUCT, new SecureLiteral(), new TransactionalLiteral()).isEmpty();
+      assert AfterBeanDiscoveryObserver.POST_CONSTRUCT_INTERCEPTOR.isGetInterceptorBindingsCalled();
+      assert AfterBeanDiscoveryObserver.POST_CONSTRUCT_INTERCEPTOR.isInterceptsCalled();
+   }
+   
+   @Test(groups = "ri-broken")
+   @SpecAssertion(section = "9.5", id = "fb")
+   // WELD-238
+   public void testCustomPreDestroyInterceptor()
+   {
+      assert !getCurrentManager().resolveInterceptors(PRE_DESTROY, new SecureLiteral(), new TransactionalLiteral()).isEmpty();
+      assert AfterBeanDiscoveryObserver.PRE_DESTROY_INTERCEPTOR.isGetInterceptorBindingsCalled();
+      assert AfterBeanDiscoveryObserver.PRE_DESTROY_INTERCEPTOR.isInterceptsCalled();
+   }
+   
+   @Test(groups = "ri-broken")
+   @SpecAssertion(section = "9.5", id = "fc")
+   // WELD-238
+   public void testCustomPostActivateInterceptor()
+   {
+      assert !getCurrentManager().resolveInterceptors(POST_ACTIVATE, new SecureLiteral(), new TransactionalLiteral()).isEmpty();
+      assert AfterBeanDiscoveryObserver.POST_ACTIVATE_INTERCEPTOR.isGetInterceptorBindingsCalled();
+      assert AfterBeanDiscoveryObserver.POST_ACTIVATE_INTERCEPTOR.isInterceptsCalled();
+   }
+   
+   @Test(groups = "ri-broken")
+   @SpecAssertion(section = "9.5", id = "fd")
+   // WELD-238
+   public void testCustomPrePassivateInterceptor()
+   {
+      assert !getCurrentManager().resolveInterceptors(PRE_PASSIVATE, new SecureLiteral(), new TransactionalLiteral()).isEmpty();
+      assert AfterBeanDiscoveryObserver.PRE_PASSIVATE_INTERCEPTOR.isGetInterceptorBindingsCalled();
+      assert AfterBeanDiscoveryObserver.PRE_PASSIVATE_INTERCEPTOR.isInterceptsCalled();
+   }
+   
+   @Test(groups = "ri-broken")
    @SpecAssertion(section = "9.5", id = "fe")
    // WELD-238
    public void testCustomAroundInvokeInterceptor()
    {
-      assert !getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Secure>()
-      {
-      }, new AnnotationLiteral<Transactional>()
-      {
-      }).isEmpty();
+      assert !getCurrentManager().resolveInterceptors(AROUND_INVOKE, new SecureLiteral(), new TransactionalLiteral()).isEmpty();
+      assert AfterBeanDiscoveryObserver.AROUND_INVOKE_INTERCEPTOR.isGetInterceptorBindingsCalled();
+      assert AfterBeanDiscoveryObserver.AROUND_INVOKE_INTERCEPTOR.isInterceptsCalled();
+   }
+   
+   @Test(groups = "ri-broken")
+   @SpecAssertion(section = "9.5", id = "ff")
+   // WELD-238
+   public void testCustomAroundTimeoutInterceptor()
+   {
+      assert !getCurrentManager().resolveInterceptors(AROUND_TIMEOUT, new SecureLiteral(), new TransactionalLiteral()).isEmpty();
+      assert AfterBeanDiscoveryObserver.AROUND_TIMEOUT_INTERCEPTOR.isGetInterceptorBindingsCalled();
+      assert AfterBeanDiscoveryObserver.AROUND_TIMEOUT_INTERCEPTOR.isInterceptsCalled();
    }
 }

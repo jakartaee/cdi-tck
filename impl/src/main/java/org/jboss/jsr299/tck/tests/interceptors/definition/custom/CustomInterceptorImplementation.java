@@ -14,24 +14,23 @@ import javax.enterprise.inject.spi.Interceptor;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.interceptor.InvocationContext;
 
-class CustomInterceptorImplementation implements Interceptor<InterceptorClass>
+class CustomInterceptorImplementation implements Interceptor<SimpleInterceptorWithoutAnnotations>
 {
 
    private Set<Annotation> interceptorBindingTypes = new HashSet<Annotation>();
+   private InterceptionType type;
+   private boolean getInterceptorBindingsCalled = false;
+   private boolean interceptsCalled = false;
 
-   public CustomInterceptorImplementation()
+   public CustomInterceptorImplementation(InterceptionType type)
    {
+      this.type = type;
       interceptorBindingTypes.add(new AnnotationLiteral<Secure>()
       {
       });
       interceptorBindingTypes.add(new AnnotationLiteral<Transactional>()
       {
       });
-   }
-
-   public Set<Annotation> getInterceptorBindings()
-   {
-      return Collections.unmodifiableSet(interceptorBindingTypes);
    }
 
    public Set<InjectionPoint> getInjectionPoints()
@@ -77,7 +76,7 @@ class CustomInterceptorImplementation implements Interceptor<InterceptorClass>
       return false;
    }
 
-   public Object intercept(InterceptionType type, InterceptorClass instance, InvocationContext ctx)
+   public Object intercept(InterceptionType type, SimpleInterceptorWithoutAnnotations instance, InvocationContext ctx)
    {
       try {
          return instance.intercept(ctx);
@@ -88,21 +87,39 @@ class CustomInterceptorImplementation implements Interceptor<InterceptorClass>
 
    public boolean intercepts(InterceptionType type)
    {
-      return type.equals(InterceptionType.AROUND_INVOKE);
+      interceptsCalled = true;
+      return this.type.equals(type);
    }
 
+   public Set<Annotation> getInterceptorBindings()
+   {
+      return Collections.unmodifiableSet(interceptorBindingTypes);
+   }
+   
    public Class<?> getBeanClass()
    {
-      return InterceptorClass.class;
+      return SimpleInterceptorWithoutAnnotations.class;
    }
 
-   public InterceptorClass create(CreationalContext<InterceptorClass> creationalContext)
+   public SimpleInterceptorWithoutAnnotations create(CreationalContext<SimpleInterceptorWithoutAnnotations> creationalContext)
    {
-      return new InterceptorClass();
+      return new SimpleInterceptorWithoutAnnotations();
    }
 
-   public void destroy(InterceptorClass instance, CreationalContext<InterceptorClass> creationalContext)
+   public void destroy(SimpleInterceptorWithoutAnnotations instance, CreationalContext<SimpleInterceptorWithoutAnnotations> creationalContext)
    {
       creationalContext.release();
+   }
+
+
+   public boolean isGetInterceptorBindingsCalled()
+   {
+      return getInterceptorBindingsCalled;
+   }
+
+
+   public boolean isInterceptsCalled()
+   {
+      return interceptsCalled;
    }
 }
