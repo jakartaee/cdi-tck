@@ -3,7 +3,7 @@
    <parent>
       <artifactId>jsr299-tck-parent</artifactId>
       <groupId>org.jboss.jsr299.tck</groupId>
-      <version>1.0.0-SNAPSHOT</version>
+      <version>1.0.0-CR5</version>
    </parent>
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.jboss.jsr299.tck</groupId>
