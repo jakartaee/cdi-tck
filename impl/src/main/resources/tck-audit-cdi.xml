@@ -1996,9 +1996,13 @@ detects the problem and treats it as a definition error.</text>
     <assertion id="k">
       <text>A bean X that specializes bean Y will have the same name as Y if Y has a name.</text>
     </assertion>
+    
+    <assertion id="l">
+      <text>X must have all bean types of Y.  If X does not support some bean type of Y, the container automatically detects the problem and treats it as a definition error.</text>
+    </assertion>
 
     <group>
-      <text>If X declares a name explicitly, using |@Named|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If Y has a name and X declares a name explicitly, using |@Named|, the container automatically detects the problem and treats it as a definition error.</text>
             
       <assertion id="la">
         <text>Test that a specializing producer method with a name throws a deployment exception.</text>
@@ -2012,9 +2016,9 @@ detects the problem and treats it as a definition error.</text>
         <text>Test that a specializing enterprise bean with a name throws a deployment exception.</text>
       </assertion>            
     </group>
-
-    <assertion id="m">
-      <text>X must have all the bean types of Y. If X does not support some bean type of Y, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+    
+    <assertion id="n">
+      <text>If an interceptor or decorator is annotated |@Specializes|, non-portable behavior results.</text>
     </assertion>
   </section>
 
