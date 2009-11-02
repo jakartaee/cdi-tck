@@ -42,7 +42,6 @@ import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.PassivationCapable;
-import javax.enterprise.inject.spi.InterceptionType;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Qualifier;
 
@@ -192,7 +191,7 @@ public class BeanManagerTest extends AbstractJSR299Test
    // Should also check a custom defined interceptor binding
    public void testGetMetaAnnotationsForInterceptorBindingType()
    {
-      Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingTypeDefinition(Transactional.class);
+      Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingDefinition(Transactional.class);
       assert metaAnnotations.size() == 4;
       assert metaAnnotations.contains(new AnnotationLiteral<Target>() {});
       assert metaAnnotations.contains(new AnnotationLiteral<Retention>() {});
