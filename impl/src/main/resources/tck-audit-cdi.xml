@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd"
     name="JSR-299: Contexts and Dependency Injection for Java Enterprise Edition"
     id="cdi"
-    version="20091018">
+    version="20091101">
 
   <section id="2" title="Concepts">
 
@@ -43,7 +43,7 @@
     </assertion>
 
     <assertion id="l">
-      <text>All beans have the bean type java.lang.Object</text>
+      <text>All beans have the bean type |java.lang.Object|.</text>
     </assertion>
 
   </section>
@@ -82,7 +82,7 @@
     </assertion>
 
     <assertion id="j">
-      <text>A bean type may be a primitive type. Primitive types are considered to be identical to their corresponding wrapper types in java.lang.</text>
+      <text>A bean type may be a primitive type. Primitive types are considered to be identical to their corresponding wrapper types in |java.lang|.</text>
     </assertion>
 
     <assertion id="k">
@@ -90,7 +90,7 @@
     </assertion>
 
     <assertion id="la">
-      <text>A type variable is not a legal bean type</text>
+      <text>A type variable is not a legal bean type.</text>
     </assertion>
 
     <assertion id="lb">
@@ -125,7 +125,7 @@
     </group>
     
     <group>
-      <text>If a bean class or producer method or field specifies a @BeanTypes annotation, and the value member specifies a class which does not correspond to a type in the unrestricted set of bean types of a bean, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a bean class or producer method or field specifies a |@BeanTypes| annotation, and the value member specifies a class which does not correspond to a type in the unrestricted set of bean types of a bean, the container automatically detects the problem and treats it as a definition error.</text>
       <assertion id="j">
         <text>Check managed bean</text>
       </assertion>
@@ -188,7 +188,7 @@
 
   <section id="2.3.3" title="Declaring the qualifiers of a bean">
     <group>
-      <text>A bean's qualifiers are declared by annotating the bean class or producer method or field with the qualifier types.</text>
+      <text>The qualifiers of a bean are declared by annotating the bean class or producer method or field with the qualifier types.</text>
     
       <assertion id="a">
         <text>Test by annotating a bean class.</text>
@@ -279,6 +279,10 @@
     <assertion id="ca">
       <text>There are five standard scope types defined by this specification, all defined in the package javax.enterprise.context. The |@Dependent| pseudo-scope is for dependent objects, as defined in Section 6.4, "Dependent pseudo-scope"</text>
     </assertion>
+    
+    <assertion id="e" testable="false">
+      <text>If an interceptor or decorator has any scope other than |@Dependent|, non-portable behavior results.</text>
+    </assertion>
   </section>
 
   <section id="2.4.2" title="Defining new scope types">
@@ -299,11 +303,11 @@
 
   <section id="2.4.3" title="Declaring the bean scope">
     <assertion id="a">
-      <text>The bean's scope is defined by annotating the bean class or producer method or field with a scope type.</text>
+      <text>The scope of a bean is defined by annotating the bean class or producer method or field with a scope type.</text>
     </assertion>
 
     <assertion id="ba">
-      <text>A bean class or producer method or field may specify at most one scope type annotation. If a bean class or producer method or field specifies multiple scope type annotations, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>A bean class or producer method or field may specify at most one scope type annotation. If a bean class or producer method or field specifies multiple scope type annotations, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="c">
@@ -360,7 +364,7 @@ detects the problem and treats it as a definition error, as defined in Section 1
     </group>
 
     <assertion id="d">
-    <text>If the |@Named| annotation does not specify the |value| member, the default EL name is assumed.</text>
+    <text>If the |@Named| annotation does not specify the |value| member, the EL name is defaulted.</text>
     </assertion>
   </section>
 
@@ -392,6 +396,10 @@ detects the problem and treats it as a definition error, as defined in Section 1
     <assertion id="a">
       <text>If |@Named| is not declared by the bean, nor by its stereotypes, a bean has no EL name.</text>
     </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>If an interceptor or decorator has a name, non-portable behavior results.</text>
+    </assertion>
   </section>
 
   <section id="2.6" title="Alternatives">
@@ -420,6 +428,11 @@ detects the problem and treats it as a definition error, as defined in Section 1
         <text>Test with a producer field.</text>
       </assertion>
     </group>
+    
+    <assertion id="e" testable="false">
+      <text>If an interceptor or decorator is an alternative, non-portable behavior results.</text>
+    </assertion>
+    
   </section>
 
   <section id="2.7" title="Stereotypes">
@@ -485,7 +498,7 @@ detects the problem and treats it as a definition error, as defined in Section 1
   <section id="2.7.1.1" title="Declaring the default scope for a stereotype">
 
     <group>
-      <text>A stereotype may declare at most one scope. If a stereotype declares more than one scope, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>The default scope of a stereotype is defined by annotating the stereotype with a scope type. A stereotype may declare at most one scope. If a stereotype declares more than one scope, the container automatically detects the problem and treats it as a definition error.</text>
     
       <assertion id="aa">
         <text>Test with one scope.</text>
@@ -499,6 +512,10 @@ detects the problem and treats it as a definition error, as defined in Section 1
   </section>
 
   <section id="2.7.1.2" title="Specifying interceptor bindings for a stereotype">
+    <assertion id="a0">
+      <text>The interceptor bindings of a stereotype are defined by annotating the stereotype with the interceptor binding types.</text>
+    </assertion>
+  
     <assertion id="a">
       <text>A stereotype may declare zero interceptor bindings.</text>
     </assertion>
@@ -518,7 +535,7 @@ detects the problem and treats it as a definition error, as defined in Section 1
     </assertion>
 
     <assertion id="aab">
-      <text>If a stereotype declares a non-empty |@Named| annotation, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a stereotype declares a non-empty |@Named| annotation, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="b" testable="false">
@@ -586,6 +603,32 @@ detects the problem and treats it as a definition error, as defined in Section 1
       <note>Tested by API signature test</note>
     </assertion>
   </section>
+  
+  <section id="2.8" title="Problems detected automatically by the container">
+    <assertion id="a" testable="false">
+      <text>When the application violates a rule defined by this specification, the container automatically detects the problem.  There are three kinds of problem - definition errors occur when a single bean definition violates the rules of this specification, deployment problems occur when there are problems resolving dependencies, or inconsistent specialization, in a particular deployment, and exceptions occur at runtime.</text>
+      <note>Generalization</note>
+    </assertion>
+    
+    <assertion id="b">
+      <text>Definition errors are developer errors.  They may be detected by tooling at development time, and are also detected by the container at initialization time.  If a definition error exists in a deployment, initialization will be aborted by the container.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>Deployment problems are detected by the container at initialization time.  If a deployment problem exists in a deployment, initialization will be aborted by the container.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>The container is permitted to define a non-portable mode, for use at development time, in which some definition errors and deployment problems do not cause application initialization to abort.</text>
+    </assertion>
+    
+    <assertion id="e">
+      <text>Exceptions represent problems that may not be detected until they actually occur at runtime.  All exceptions defined by this specification are unchecked exceptions.  All exceptions defined by this specification may be safely caught and handled by the application.</text>
+    </assertion>
+    
+    
+  
+  </section>
 
   <section id="3" title="Programming model">
 
@@ -593,7 +636,7 @@ detects the problem and treats it as a definition error, as defined in Section 1
 
   <section id="3.1" title="Managed beans">
     <assertion id="f0">
-      <text>If the bean class of a managed bean is annotated with both the |@Interceptor| and |@Decorator| stereotypes, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If the bean class of a managed bean is annotated with both the |@Interceptor| and |@Decorator| stereotypes, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="fa">
@@ -602,7 +645,7 @@ detects the problem and treats it as a definition error, as defined in Section 1
     </assertion>
 
     <assertion id="fba">
-      <text>If a managed bean with a public field declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a managed bean with a public field declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="g">
@@ -4108,6 +4151,10 @@ creates and returns a container-specific internal local reference to the session
       <text>Decorators may be associated with any managed bean that is not itself an interceptor or decorator or with any EJB session bean.</text>
       <note>Doesn't specify an error</note>
     </assertion>        
+    
+    <assertion id="b">
+      <text>A decorator instance is a dependent object of the object it decorates.</text>
+    </assertion>
   </section>
 
   <section id="8.1" title="Decorator beans">
@@ -4117,7 +4164,7 @@ creates and returns a container-specific internal local reference to the session
     </assertion>
 
     <assertion id="b">
-      <text>The set of decorated types of a decorator includes all interfaces implemented directly or indirectly by the bean class, except for |java.io.Serializable|.</text>
+      <text>The set of decorated types of a decorator includes all bean types of the managed bean which are Java interfaces, except for |java.io.Serializable|.</text>
     </assertion>
 
     <assertion id="c">
@@ -4145,24 +4192,23 @@ creates and returns a container-specific internal local reference to the session
 
   <section id="8.1.2" title="Decorator delegate injection points">
     <assertion id="a">
-      <text>All decorators have a delegate injection point.  A delegate injection point is an injection point of the bean class. The type and qualifiers of the injection point are called the delegate type and delegate qualifiers. The delegate injection point must be be declared by annotating the injection point with the annotation |@javax.decorator.Decorates|.</text>
+      <text>All decorators have a delegate injection point.  A delegate injection point is an injection point of the bean class. The type and qualifiers of the injection point are called the delegate type and delegate qualifiers. The decorator applies to beans that are assignable to the delegate injection point. The delegate injection point must be be declared by annotating the injection point with the annotation |@javax.decorator.Delegate|.</text>
     </assertion>
 
-    <assertion id="b">
-      <text>The decorator applies to any bean that is eligible for injection to the delegate injection point, according to the rules defined
-in Section 5.1, "Typesafe resolution algorithm".</text>
-    </assertion>
+    <group>
+      <text>A decorator must have exactly one delegate injection point. If a decorator has more than one delegate injection point, or does not have a delegate injection point, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      
+      <assertion id="ca">
+        <text>Test with more than one delegate injection point.</text>
+      </assertion>
 
-    <assertion id="ca">
-      <text>A decorator must have exactly one delegate injection point. If a decorator has more than one delegate injection point~, or does not have a delegate injection point,~ the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
-    </assertion>
-
-    <assertion id="cb">
-      <text>A decorator must have exactly one delegate injection point. If a decorator ~has more than one delegate injection point, or~ does not have a delegate injection point, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
-    </assertion>
+      <assertion id="cb">
+        <text>Test a decorator without a delegate injection point.</text>
+      </assertion>
+    </group>
     
     <group>
-      <text>The delegate injection point must be an injected field, initializer method parameter or bean constructor method parameter. If an injection point that is not an injected field, initializer method parameter or bean constructor method parameter is annotated |@Decorates|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>The delegate injection point must be an injected field, initializer method parameter or bean constructor method parameter. If an injection point that is not an injected field, initializer method parameter or bean constructor method parameter is annotated |@Delegate|, the container automatically detects the problem and treats it as a definition error.</text>
     
       <assertion id="cc">
         <text>Check an injected field is ok</text>
@@ -4183,29 +4229,25 @@ in Section 5.1, "Typesafe resolution algorithm".</text>
     </group>
     
     <assertion id="cg">
-      <text>If a bean class that is not a decorator has an injection point annotated |@Decorates|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
-    </assertion>
-
-    <assertion id="d">
-      <text>If a decorator applies to a managed bean, and the bean class is declared final, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
-    </assertion>
-
-    <assertion id="e">
-      <text>If a decorator applies to a managed bean with a non-static, non-private, final method, and the decorator also implements that method, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a bean class that is not a decorator has an injection point annotated |@Delegate|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="f">
-      <text>The container must inject a delegate object to the delegate injection point.  The delegate object implements the delegate type and delegates method invocations along the decorator stack.</text>
+      <text>The container must inject a delegate object to the delegate injection point.  The delegate object implements the delegate type and delegates method invocations to the remaining uninvoked decorators and eventually to the bean.  When the container calls a decorator during business method interception, the decorator may invoke any method of the delegate object.</text>
+    </assertion>
+    
+    <assertion id="g">
+      <text>If a decorator invokes the delegate object at any other time, the invoked method throws an |IllegalStateException|.</text>
     </assertion>
   </section>
 
   <section id="8.1.3" title="Decorated types of a decorator">
     <assertion id="a">
-      <text>The delegate type of a decorator must implement or extend every decorated type. If the delegate type does not implement or extend a decorated type of the decorator, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>The delegate type of a decorator must implement or extend every decorated type. If the delegate type does not implement or extend a decorated type of the decorator, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="ab">
-      <text>If a decorated type is a parameterized type and the delegate type does not have exactly the same type parameters as the decorated type, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a decorated type is a parameterized type and the delegate type does not have exactly the same type parameters as the decorated type, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="b">
@@ -4230,16 +4272,19 @@ in Section 5.1, "Typesafe resolution algorithm".</text>
       <text>The order of the decorator declarations determines the decorator ordering. Decorators which occur earlier in the list are called first.</text>
     </assertion>
     
-    <assertion id="ba">
-      <text>Each child |&lt;class&gt;| element must specify the name of a decorator bean class.  If there is no class with the specified name~, or if the class with the specified name is not a decorator bean class,~ the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
-    </assertion>
+    <group>
+      <text>Each child |&lt;class&gt;| element must specify the name of a decorator bean class.  If there is no class with the specified name, or if the class with the specified name is not a decorator bean class, the container automatically detects the problem and treats it as a deployment problem.</text>
+      <assertion id="ba">
+        <text>Test with a nonexistent class name.</text>
+      </assertion>
     
-    <assertion id="bb">
-      <text>Each child |&lt;class&gt;| element must specify the name of a decorator bean class.  If ~there is no class with the specified name, or if~ the class with the specified name is not a decorator bean class~,~ the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
-    </assertion>
+      <assertion id="bb">
+        <text>Test with a non-decorator class.</text>
+      </assertion>
+    </group>
     
     <assertion id="bc">
-      <text>If the same class is listed twice under the |&lt;decorators&gt;| element, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If the same class is listed twice under the |&lt;decorators&gt;| element, the container automatically detects the problem and treats it as a deployment problem.</text>
     </assertion>
 
     <assertion id="f">
@@ -4249,7 +4294,7 @@ in Section 5.1, "Typesafe resolution algorithm".</text>
 
   <section id="8.3" title="Decorator resolution">
     <assertion id="aa">
-      <text>The following procedure must be used by the container when resolving decorators for a certain bean - First, the container identifies the set of matching decorators for which the bean is eligible for injection to the delegate injection point according to the rules defined in Section 5.3, "Typesafe resolution", and for which the decorator is enabled in the bean deployment archive of the bean. Next, the container orders the matching decorators according to the decorator ordering specified in Section 8.2, "Decorator enablement and ordering".</text>
+      <text>The process of matching decorators to a certain bean is called decorator resolution.  A decorator is bound to a bean if the bean is assignable to the delegate injection point according to the rules defined in Section 5.3, "Typesafe resolution", and the decorator is enabled in the bean deployment archive of the bean. If a decorator matches a managed bean, and the managed bean class is declared final, the container automatically detects the problem and treats it as a deployment problem.</text>
     </assertion>
     
     <assertion id="b">
@@ -4257,17 +4302,9 @@ in Section 5.1, "Typesafe resolution algorithm".</text>
     </assertion>
   </section>
 
-  <section id="8.4" title="Decorator stack creation">
+  <section id="8.4" title="Decorator invocation">
     <assertion id="a">
-      <text>When a bean with decorators is created, the container must
-identify the decorators for the bean according to Section 8.3, "Decorator resolution", and for each decorator, obtain a contextual reference, as defined in Section 6.5.3, "Contextual reference for a bean", and build an ordered list of the decorator instances.</text>
-    </assertion>
-  </section>
-
-  <section id="8.5" title="Decorator invocation">
-    <assertion id="a">
-      <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and, after processing the interceptor stack, invokes decorators of the bean. The container searches for the first decorator in the decorator stack for the instance that implements the method that is being
-invoked as a business method.</text>
+      <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and, after processing all interceptors of the method, invokes decorators of the bean. The container searches for the first decorator of the instance that implements the method that is being invoked as a business method.</text>
     </assertion>
 
     <assertion id="b">
@@ -4279,7 +4316,7 @@ invoked as a business method.</text>
     </assertion>
 
     <assertion id="d">
-      <text>When any decorator is invoked by the container, it may in turn invoke a method of the delegate. The container intercepts the delegate invocation and searches for the first decorator in the decorator stack for the instance such that the decorator implements the method that is being invoked upon the delegate, and the decorator has not previously been invoked during this business method invocation.</text>
+      <text>When any decorator is invoked by the container, it may in turn invoke a method of the delegate. The container intercepts the delegate invocation and searches for the first decorator of the instance such that the decorator occurs after the decorator invoking the delegate, and the decorator implements the method that is being invoked upon the delegate.</text>
     </assertion>
 
     <assertion id="e">
