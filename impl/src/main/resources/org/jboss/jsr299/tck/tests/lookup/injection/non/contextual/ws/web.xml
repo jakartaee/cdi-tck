@@ -3,6 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>Dependency Injection Test</display-name>
+   
+   <listener>
+      <listener-class>org.jboss.testharness.impl.runner.servlet.HarnessServletListener</listener-class>
+   </listener>
 	<servlet>
 		<servlet-name>TestWebService</servlet-name>
 		<servlet-class>org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.SheepWSEndPoint</servlet-class>
