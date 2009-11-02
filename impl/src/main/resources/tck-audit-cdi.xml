@@ -330,7 +330,7 @@
 
     <assertion id="da">
       <text>If there are two different stereotypes declared by the bean that declare different default scopes, then there is no default scope and the bean must explicitly declare a scope. If it does not explicitly declare a scope, the container automatically
-detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="e">
@@ -649,7 +649,7 @@ detects the problem and treats it as a definition error, as defined in Section 1
     </assertion>
 
     <assertion id="g">
-      <text>If the managed bean class is a generic type, it must have scope |@Dependent|. If a managed bean with a parameterized bean class declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the  container".</text>
+      <text>If the managed bean class is a generic type, it must have scope |@Dependent|. If a managed bean with a parameterized bean class declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
@@ -747,7 +747,7 @@ detects the problem and treats it as a definition error, as defined in Section 1
     </group>
 
     <group>
-      <text>If the bean class of X does not directly extend the bean class of another managed bean, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>    
+      <text>If the bean class of X does not directly extend the bean class of another managed bean, the container automatically detects the problem and treats it as a definition error.</text>    
       
       <assertion id="da">
         <text>Test a specializing bean extending a non simple bean.</text>
@@ -788,7 +788,7 @@ detects the problem and treats it as a definition error, as defined in Section 1
     </assertion>
 
     <assertion id="da">
-      <text>If a session bean specifies an illegal scope, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a session bean specifies an illegal scope, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="e">
@@ -802,11 +802,11 @@ detects the problem and treats it as a definition error, as defined in Section 1
     </assertion>
 
     <assertion id="g">
-      <text>If the bean class of a session bean is annotated |@Interceptor|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If the bean class of a session bean is annotated |@Interceptor|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="h">
-      <text>If the bean class of a session bean is annotated |@Decorator|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If the bean class of a session bean is annotated |@Decorator|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="i">
@@ -4559,13 +4559,17 @@ called first.</text>
     </assertion>
   </section>
 
-  <section id="10.2" title="Observer resolution">
-    <assertion id="h">
-      <text>An observer method will be notified of an event if the observed event type it specifies is one of the event types of the event, and if all the observed event qualifiers it specifies are event qualifiers of the event.</text>
+  <section id="10.2" title="Observer resolution">   
+    <assertion id="a">
+      <text>The process of matching an event to its observer methods is called observer resolution.  The container considers event type and qualifiers when resolving observers.</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>Observer resolution usually occurs at runtime.</text>
     </assertion>
     
     <assertion id="i">
-      <text>When resolving observers of an event, the container identifies the set of observer methods which satisfy the following conditions: The event object must be assignable to the observer event type, taking type parameters into considersion, and for each observed event qualifier, the event qualifiers must contain a matching qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.inject.Nonbinding|.</text>
+      <text>An event is delivered to an observer method if the observer method belongs to an enabled bean, the event object is assignable to the observed event type, taking type parameters into consideration, the observer method has all the event qualifiers.  An observer method has an event qualifier if it has an observed event qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.Nonbinding|.  Also the event is not a container lifecycle event, as defined in Section 11.5 "Container lifecycle events", or the observer method belongs to an extension.</text>
     </assertion>
 
     <assertion id="j">
@@ -4630,7 +4634,7 @@ called first.</text>
     </assertion>
 
     <assertion id="d">
-      <text>Or, the application may specify qualifiers dynamically.</text>
+      <text>Or, the |@Any| qualifier may be used, allowing the application to specify qualifiers dynamically.</text>
     </assertion>
   </section>
 
@@ -4696,8 +4700,13 @@ dependencies".</text>
   </section>
 
   <section id="10.4" title="Observer methods">
+    <assertion id="a0" testable="false">
+      <text>An observer method allows the application to receive and respond to event notifications.</text>
+      <note>A general statement.</note>
+    </assertion>
+  
     <assertion id="aa">
-      <text>An observer method is a non-abstract method of a managed bean class or session bean class.</text>
+      <text>An observer method is a non-abstract method of a managed bean class or session bean class (or of an extension, as defined in Section 11.5, "Container lifecycle events").</text>
     </assertion>
     
     <assertion id="c">
@@ -4713,7 +4722,7 @@ dependencies".</text>
     </assertion>
 
     <assertion id="f">
-      <text>A bean may declare multiple observer methods.</text>
+      <text>A bean (or extension) may declare multiple observer methods.</text>
     </assertion>
   </section>
 
@@ -4726,13 +4735,16 @@ dependencies".</text>
       <text>If the event parameter does not explicitly declare any qualifier, the observer method observes events with no qualifier.</text>
     </assertion>
 
-    <assertion id="ca">
-      <text>The event parameter type may contain a type variable or ~wildcard~.</text>
-    </assertion>
+    <group>
+      <text>The event parameter type may contain a type variable or wildcard.</text>
+      <assertion id="ca">
+        <text>Test with a type variable.</text>
+      </assertion>
 
-    <assertion id="cb">
-      <text>The event parameter type may contain a ~type variable~ or wildcard.</text>
-    </assertion>
+      <assertion id="cb">
+        <text>Test with a wildcard.</text>
+      </assertion>
+    </group>
 
   </section>
 
@@ -4749,7 +4761,7 @@ dependencies".</text>
     </assertion>
 
     <assertion id="b">
-      <text>If a method has more than one parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a method has more than one parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="c">
@@ -4757,47 +4769,45 @@ dependencies".</text>
     </assertion>
 
     <assertion id="d">
-      <text>If an observer method is annotated |@Produces| the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If an observer method is annotated |@Produces| the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="e">
-      <text>If an observer method is annotated |@Inject| the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If an observer method is annotated |@Inject| the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="f">
-      <text>If an observer method is has a parameter annotated |@Disposes|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If an observer method is has a parameter annotated |@Disposes|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="g">
-      <text>If a non-static method of a session bean class has a parameter annotated |@Observes|, and the method is not a business method of the EJB, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a non-static method of a session bean class has a parameter annotated |@Observes|, and the method is not a business method of the EJB, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="h">
-      <text>Interceptors and decorators may not declare observer methods. If an interceptor or decorator has a method with a parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Interceptors and decorators may not declare observer methods. If an interceptor or decorator has a method with a parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
-  </section>
 
-  <section id="10.4.3" title="Observer method parameters">
     <assertion id="a">
       <text>In addition to the event parameter, observer methods may declare additional parameters, which may declare qualifiers. These additional parameters are injection points.</text>
     </assertion>
   </section>
 
-  <section id="10.4.4" title="Conditional observer methods">
+  <section id="10.4.3" title="Conditional observer methods">
     <assertion id="a">
       <text>A conditional observer method may be declared by specifying |receive=IF_EXISTS|.</text>
     </assertion>
     
     <assertion id="b">
-      <text>Beans with scope |@Dependent| may not have conditional observer methods. If a bean with scope |@Dependent| has an observer method declared |receive=IF_EXISTS|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Beans with scope |@Dependent| may not have conditional observer methods. If a bean with scope |@Dependent| has an observer method declared |receive=IF_EXISTS|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="c">
-      <text>The enumeration |javax.enterprise.event.Reception| identifies the supported values of |receive|.</text>
+      <text>The enumeration |javax.enterprise.event.Reception| identifies the possible values of |receive|.</text>
     </assertion>
   </section>
 
-  <section id="10.4.5" title="Transactional observer methods">
+  <section id="10.4.4" title="Transactional observer methods">
     <assertion id="a">
       <text>Transactional observer methods are observer methods which receive event notifications during the before or after completion phase of the transaction in which the event was fired. If no transaction is in progress when the event is fired, they are notified at the same time as other observers</text>
     </assertion>
@@ -4833,9 +4843,8 @@ dependencies".</text>
       <text>When an event is fired by the application, the container must determine the observers for that event according to the observer resolution defined by Section 10.2, "Observer resolution", then then for each observer method, either invoke the observer method immediately or register the observer method for later invocation during the transaction completion phase, using a JTA |Synchronization|.</text>
     </assertion>
 
-    <assertion id="b" testable="false">
-      <text>The order in which observers are called in not defined, and so portable applications should not rely upon the order in which observers are called.</text>
-      <note>Behavior is not defined.</note>
+    <assertion id="ba">
+      <text>The container calls observer methods as defined in Section 5.5.6, "Invocation of observer methods".</text>
     </assertion>
     
     <assertion id="bb">
@@ -4844,6 +4853,10 @@ dependencies".</text>
     
     <assertion id="bc">
       <text>If the observer method is a transactional observer method and there is currently a JTA transaction in progress, ~the container calls the observer method during the appropriate transaction completion phase.~  Otherwise, the container calls the observer immediately.</text>
+    </assertion>
+    
+    <assertion id="bcb">
+      <text>The order in which observer methods are called is not defined, and so portable applications should not rely upon the order in which observers are called.</text>
     </assertion>
     
     <assertion id="bd">
@@ -4865,11 +4878,11 @@ dependencies".</text>
     </assertion>
     
     <assertion id="cc">
-      <text>Observers may throw exceptions. ~If an observer method is a transactional observer method, any exception is caught and logged by the container.  Otherwise, the exception aborts processing of the event.  No other observer methods of that event will be called.~  The |fireEvent()| method rethrows the exception.  ~If the exception is a checked exception, it is wrapped and rethrown as an (unchecked) |ObserverException|~.</text>
+      <text>Observers may throw exceptions. ~If an observer method is a transactional observer method, any exception is caught and logged by the container.  Otherwise, the exception aborts processing of the event.  No other observer methods of that event will be called.~  The |BeanManager.fireEvent()| or |Event.fire()| method rethrows the exception.  ~If the exception is a checked exception, it is wrapped and rethrown as an (unchecked) |ObserverException|~.</text>
     </assertion>
     
     <assertion id="cd">
-      <text>Observers may throw exceptions. ~If an observer method is a transactional observer method, any exception is caught and logged by the container.  Otherwise, the exception aborts processing of the event.  No other observer methods of that event will be called.  The |fireEvent()| method rethrows the exception.~  If the exception is a checked exception, it is wrapped and rethrown as an (unchecked) |ObserverException|.</text>
+      <text>Observers may throw exceptions. ~If an observer method is a transactional observer method, any exception is caught and logged by the container.  Otherwise, the exception aborts processing of the event.  No other observer methods of that event will be called.  The |BeanManager.fireEvent()| or |Event.fire()| method rethrows the exception.~  If the exception is a checked exception, it is wrapped and rethrown as an (unchecked) |ObserverException|.</text>
     </assertion>
 
     <assertion id="f">
