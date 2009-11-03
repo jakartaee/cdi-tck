@@ -48,9 +48,8 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091018")
 public class AlternativeMetadataTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "11.4", id = "ha")
-   // WELD-200
    public void testGetBaseTypeUsedToDetermineTypeOfInjectionPoint() {
       // The base type of the fruit injection point is overridden to TropicalFruit
       assert GroceryWrapper.isGetBaseTypeOfFruitFieldUsed();
@@ -59,7 +58,6 @@ public class AlternativeMetadataTest extends AbstractJSR299Test
    
    @Test
    @SpecAssertion(section = "11.4", id = "ka")
-   // WELD-201
    public void testGetTypeClosureUsed() {
       assert GroceryWrapper.isGetTypeClosureUsed();
       // should be [Object, Grocery] instead of [Object, Shop, Grocery]
