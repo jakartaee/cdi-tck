@@ -49,9 +49,9 @@ import org.testng.annotations.Test;
 public class AlternativeMetadataTest extends AbstractJSR299Test
 {
    @Test(groups = "ri-broken")
-   @SpecAssertion(section = "11.4", id = "h")
+   @SpecAssertion(section = "11.4", id = "ha")
    // WELD-200
-   public void testGetBaseTypeUsedToDetermineTypeOfInjectionPoing() {
+   public void testGetBaseTypeUsedToDetermineTypeOfInjectionPoint() {
       // The base type of the fruit injection point is overridden to TropicalFruit
       assert GroceryWrapper.isGetBaseTypeOfFruitFieldUsed();
       assert getInstanceByType(Grocery.class, new AnyLiteral()).getFruit().getMetadata().getType().equals(TropicalFruit.class);

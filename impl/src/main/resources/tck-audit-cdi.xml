@@ -5418,8 +5418,28 @@ dependencies".</text>
     <group> 
       <text>The container must use the operations of |Annotated| and its subinterfaces to discover program element types and annotations, instead of directly calling the Java Reflection API. In particular, the container must call |Annotated.getBaseType()| to determine the type of an injection point, event parameter or disposed parameter, call |Annotated.getTypeClosure()| to determine the bean types of any kind of bean, call |Annotated.getAnnotations()| to determine the scope, qualifiers, stereotypes and interceptor bindings of a bean, call |Annotated.isAnnotationPresent()| and |Annotated.getAnnotation()| to read any bean annotations defined by this specification, and call |AnnotatedType.getConstructors()|, |AnnotatedType.getMethods()| and |AnnotatedType.getFields()| to determine the members of a bean class.</text>
       
-      <assertion id="h">
-         <text>Check that |getBaseType()| is used to determine the type of _an injection point_. The base type should be different from the orignal type specified in the class definition</text>
+      <assertion id="ha">
+         <text>Check that |getBaseType()| is used to determine the type of _a field injection point_. The base type should be different from the orignal type specified in the class definition</text>
+      </assertion>
+      
+      <assertion id="hb">
+         <text>Check that |getBaseType()| is used to determine the type of _an initializer method injection point_. The base type should be different from the orignal type specified in the class definition</text>
+      </assertion>
+      
+      <assertion id="hc">
+         <text>Check that |getBaseType()| is used to determine the type of _a constructor injection point_. The base type should be different from the orignal type specified in the class definition</text>
+      </assertion>
+      
+      <assertion id="hd">
+         <text>Check that |getBaseType()| is used to determine the type of _a producer method injection point_. The base type should be different from the orignal type specified in the class definition</text>
+      </assertion>
+      
+      <assertion id="he">
+         <text>Check that |getBaseType()| is used to determine the type of _a observer method injection point_. The base type should be different from the orignal type specified in the class definition</text>
+      </assertion>
+      
+      <assertion id="hf">
+         <text>Check that |getBaseType()| is used to determine the type of _a disposer method injection point_. The base type should be different from the orignal type specified in the class definition</text>
       </assertion>
       
       <assertion id="i">
