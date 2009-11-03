@@ -33,10 +33,11 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091018")
 public class ThrowExceptionInProcessBeanObserverTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
-   @SpecAssertion(section="11.5.8", id="hd")
-   //WELD-224
-   public void testProcessBeanObserverThrowsException() {
+   @Test(groups = "jboss-as-broken")
+   @SpecAssertion(section = "11.5.8", id = "hd")
+   // WELD-224
+   public void testProcessBeanObserverThrowsException()
+   {
       assert false;
    }
 }
