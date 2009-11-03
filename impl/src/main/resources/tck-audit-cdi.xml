@@ -2322,13 +2322,14 @@ detects the problem and treats it as a definition error.</text>
     <group>
       <text>All unresolvable ambiguous EL names are detected by the container when the application is initialized. Suppose two beans are both accessible to classes in a certain war, according to the class loading requirements of the Java EE platform and Java Servlet specifications. If each bean is either not an alternative, or is a selected alternative of the war, and either the two beans have the same EL name and the name is not resolvable, or the EL name of one bean is of the form |x.y|, where |y| is a valid bean EL name, and |x| is the EL name of the other bean, the container automatically detects the problem and treats it as a deployment problem.</text>
             
-    <assertion id="da">
-      <text>Test with two beans with the same EL name.</text>
-    </assertion>
+      <assertion id="da">
+         <text>Test with two beans with the same EL name.</text>
+       </assertion>
     
-    <assertion id="db">
-      <text>Test with with an EL name in the form |x.y|.</text>
-    </assertion>
+       <assertion id="db">
+         <text>Test with with an EL name in the form |x.y|.</text>
+       </assertion>
+	</group>    
   </section>
 
   <section id="5.4" title="Client proxies">
