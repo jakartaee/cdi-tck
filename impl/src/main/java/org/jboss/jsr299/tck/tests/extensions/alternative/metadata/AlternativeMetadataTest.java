@@ -57,7 +57,7 @@ public class AlternativeMetadataTest extends AbstractJSR299Test
       assert getInstanceByType(Grocery.class, new AnyLiteral()).getFruit().getMetadata().getType().equals(TropicalFruit.class);
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "11.4", id = "k")
    // WELD-201
    public void testGetTypeClosureUsed() {
