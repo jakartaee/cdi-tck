@@ -5450,8 +5450,20 @@ dependencies".</text>
          <text>Check that |getBaseType()| is used to determine the type of _disposed parameter_. The base type should be different from the orignal type specified in the class definition</text>
       </assertion>
       
-      <assertion id="k">
-         <text>Check that a |getTypeClosure()| is used to determine the bean types. The type closure should be different from the orignal type specified in the class definition.</text>
+      <assertion id="ka">
+         <text>Check that a |getTypeClosure()| is used to determine the bean types for a managed bean. The type closure should be different from the orignal type specified in the class definition.</text>
+      </assertion>
+      
+      <assertion id="kb">
+         <text>Check that a |getTypeClosure()| is used to determine the bean types for a session bean. The type closure should be different from the orignal type specified in the class definition.</text>
+      </assertion>
+      
+      <assertion id="kc">
+         <text>Check that a |getTypeClosure()| is used to determine the bean types for a producer field. The type closure should be different from the orignal type specified in the class definition.</text>
+      </assertion>
+      
+      <assertion id="kd">
+         <text>Check that a |getTypeClosure()| is used to determine the bean types for a producer method. The type closure should be different from the orignal type specified in the class definition.</text>
       </assertion>
 
       <assertion id="l">

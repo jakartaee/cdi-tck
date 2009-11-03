@@ -58,7 +58,7 @@ public class AlternativeMetadataTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "11.4", id = "k")
+   @SpecAssertion(section = "11.4", id = "ka")
    // WELD-201
    public void testGetTypeClosureUsed() {
       assert GroceryWrapper.isGetTypeClosureUsed();
