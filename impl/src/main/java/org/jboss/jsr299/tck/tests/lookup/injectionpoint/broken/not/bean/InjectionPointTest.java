@@ -36,7 +36,7 @@ public class InjectionPointTest extends AbstractJSR299Test
 {
    @Test(groups = "jboss-as-broken")
    @SpecAssertion(section = "5.6.9", id = "ga")
-   //WELD-228
+   //WELDINT-26
    public void testDefinitionErrorDetected() {
       assert false;
    }
