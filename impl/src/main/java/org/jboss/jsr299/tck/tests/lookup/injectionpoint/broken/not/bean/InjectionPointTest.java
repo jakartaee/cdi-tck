@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 @Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml")
 public class InjectionPointTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test(groups = "jboss-as-broken")
    @SpecAssertion(section = "5.6.9", id = "ga")
    //WELD-228
    public void testDefinitionErrorDetected() {
