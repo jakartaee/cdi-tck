@@ -2030,7 +2030,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.1" title="Inter-module accessibility in Java EE">
+  <section id="5.1" title="Modularity">
     <group>
       <text>Beans packaged in a certain Java EE module or library are available for injection, lookup and EL resolution to classes and JSP/JSF pages packaged in some other Java EE module or library if and only if the first module or library is required to be accessible to the other module or library by the Java EE platform specification.</text>
             
@@ -2046,32 +2046,17 @@ detects the problem and treats it as a definition error.</text>
         <text>Test with EL resolution.</text>
       </assertion>
     </group>
-
-    <assertion id="b">
-      <text>For a custom implementation of the |Bean| interface defined in Section 11.1, "The Bean interface", the container calls |getBeanClass()| to determine the bean class of the bean.</text>
-    </assertion>
     
-    <assertion id="c">
-      <text>For a custom implementation of |Bean|, defined in Section 11.2, "The Producer and InjectionTarget interfaces", the container calls |InjectionPoint.getMember()| and then |Member.getDeclaringClass()| to determine the class that declares an injection point.</text>
-    </assertion>
-
     <assertion id="d">
-      <text>For a custom implementation of |InjectionTarget|, defined in Section 11.2, "The Producer and InjectionTarget interfaces", the container calls |InjectionPoint.getMember()| and then |Member.getDeclaringClass()| to determine the class that declares an injection point.</text>
-    </assertion>
-
-  </section>
-
-  <section id="5.2" title="Alternative selection">
-    <assertion id="a">
-      <text>An alternative is never available for injection, lookup or EL resolution in a Java EE module or library that is not a bean deployment archive (a module or library with no |beans.xml| file).</text>
+      <text>An alternative is never available for injection, lookup or EL resolution in a Java EE module or library that is not a bean deployment archive (a module or library with no beans.xml| file.</text>
     </assertion>
     
-    <assertion id="b">
+    <assertion id="e">
       <text>Nor is an alternative available for injection, lookup or EL resolution in every bean deployment archive. An alternative must be explicitly selected in every bean deployment archive in which the alternative should be available for injection, lookup and EL resolution.</text>
     </assertion>
   </section>
   
-  <section id="5.2.1" title="Declaring selected alternatives for a bean deployment archive">
+  <section id="5.1.1" title="Declaring selected alternatives for a bean deployment archive">
     <assertion id="c">
       <text>By default, a bean deployment archive has no selected alternatives. An alternative must be explicitly declared using the &lt;alternatives&gt; element of the |beans.xml| file of the bean deployment archive.</text>
     </assertion>
@@ -2125,37 +2110,35 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
   
-  <section id="5.2.2" title="Enabled and disabled beans">
+  <section id="5.1.2" title="Enabled and disabled beans">
     <assertion id="a">
-      <text>A bean is said to be enabled if it is not a producer method or field of a disabled bean, and it is not specialized by any other enabled bean, and either it is not an alternative, or it is a selected alternative of at least one bean deployment archive.  Otherwise, the bean is said to be disabled.</text>
+      <text>A bean is said to be enabled if it is deployed in a bean deployment archive, as defined by Section 12.1, "Bean deployment archives", and it is not a producer method or field of a disabled bean, and it is not specialized by any other enabled bean, as defined in Section 4.3, "Specialization", and either it is not an alternative, or it is a selected alternative of at least one bean deployment archive. Otherwise, the bean is said to be disabled.</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>Section 3.12, "@New qualified beans" defines a special rule that determines whether a |@New| qualified bean is enabled or disabled. This rule applies as only to |@New| qualified beans, as an exception to the normal rule defined here.</text>
     </assertion>
   </section>
   
-  <section id="5.2.3" title="Inconsistent specialization">
+  <section id="5.1.3" title="Inconsistent specialization">
     <assertion id="a">
       <text>Suppose an enabled bean X specializes a second bean Y. If there is another enabled bean that specializes Y we say that inconsistent specialization exists. The container automatically detects inconsistent specialization and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
     </assertion>
   </section>
-
-  <section id="5.3" title="Typesafe resolution">  
-    <assertion id="a">
-      <text>A bean is eligible for injection into a given class if the bean is enabled, and the bean is either not an alternative, or is a selected alternative of the bean deployment archive of the given class, and in a Java EE or servlet container, the bean class is required to be accessible to the given class, according to the class loading requirements of the Java EE platform and Java Servlet specifications.</text>
-    </assertion>
   
-    <assertion id="hq">
-      <text>When determining the set of beans that are eligible for injection to an injection point, the container identifies the set of matching beans which are not _interceptors_ or decorators and which have a bean type that matches the required type.</text>
+  <section id="5.1.4" title="Inter-module injection">
+    <assertion id="a">
+      <text>A bean is available for injection in a certain Java EE module or library if the bean is enabled, the bean is either not an alternative, or the module or library is a bean deployment archive and the bean is a selected alternative of the bean deployment archive, and the bean class is required to be accessible to classes in the module or library, according to the class loading requirements of the Java EE platform and Java Servlet specifications.</text>
     </assertion>
     
-    <assertion id="hb">
-      <text>When determining the set of beans that are eligible for injection to an injection point, the container identifies the set of matching beans which are not interceptors or _decorators_ and which have a bean type that matches the required type.</text>
+    <assertion id="b">
+      <text>For a custom implementation of the |Bean| interface defined in Section 11.1, "The Bean interface, the container calls |getBeanClass()| to determine the bean class of the bean and |InjectionPoint.getMember()| and then |Member.getDeclaringClass()| to determine the class that declares an injection point.</text>
     </assertion>
-    
-    <assertion id="hc">
-      <text>When determining the set of beans that are eligible for injection to an injection point, the container identifies the set of matching beans which are not interceptors or decorators and which have a _bean type that matches the required type_.</text>
-    </assertion>
-    
+  </section>
+
+  <section id="5.2" title="Typesafe resolution">  
     <group>
-      <text>When determining the set of beans that are eligible for injection to an injection point, the container identifies the set of matching beans which are not interceptors or decorators and which have a bean type that matches the required type. For this purpose, primitive types are considered to match their corresponding wrapper types in |java.lang| and array types are considered to match only if their element types are identical. Parameterized and raw types are considered to match if they are identical or if the bean type is assignable to the required type, as defined in Section 5.3.3, "Assignability of raw and parameterized types".</text>
+      <text>A bean is assignable to a given injection point if the bean has a bean type that matches the required type.  For this purpose, primitive types are considered to match their corresponding wrapper types in |java.lang| and array types are considered to match only if their element types are identical. Parameterized and raw types are considered to match if they are identical or if the bean type is assignable to the required type, as defined in Section 5.2.3, "Assignability of raw and parameterized types".</text>
               
       <assertion id="i">
         <text>Test with a primitive type.</text>
@@ -2179,7 +2162,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
 
     <group>
-      <text>When determining the set of beans that are eligible for injection to an injection point, the container identifies the set of matching beans which are not interceptors or decorators and which have the required qualifiers. If no required qualifiers were explicitly specified, the container assumes the required binding |@Default|. The container narrows the set of matching beans to just those where for each required qualifier, the bean declares a matching qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.inject.NonBinding| (see Section 5.3.5, "Qualifier annotations with members").</text>
+      <text>A bean is assignable to a given injection point if the bean has all the required qualifiers.  If no required qualifiers were explicitly specified, the container assumes the required qualifier |@Default|. A bean has the required qualifier if it has a qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.inject.NonBinding|.</text>
             
       <assertion id="la">
         <text>Test with beans with required qualifiers.</text>
@@ -2199,11 +2182,11 @@ detects the problem and treats it as a definition error.</text>
     </group>
     
     <assertion id="n">
-      <text>When determining the set of beans that are eligible for injection to an injection point, the container identifies the set of matching beans which are eligible for injection into the class that declares the injection point.</text>
+      <text>A bean is eligible for injection to a certain injection point if it is available for injection in the Java EE module or library that contains the class that declares the injection point, and it is assignable to the injection point.</text>
     </assertion>
 
     <group>
-      <text>For a custom implementation of the |Bean| interface defined in Section 11.1, "The Bean interface", the container calls |getTypes()| and |getQualifiers()| to determine the bean types and bindings.</text>
+      <text>For a custom implementation of the |Bean| interface defined in Section 11.1, "The Bean interface", the container calls |getTypes()| and |getQualifiers()| to determine the bean types and qualifiers.</text>
             
       <assertion id="na">
         <text>Test |getTypes()| determines bean types.</text>
@@ -2215,18 +2198,18 @@ detects the problem and treats it as a definition error.</text>
     </group>
   </section>
 
-  <section id="5.3.1" title="Unsatisfied and ambiguous dependencies">
+  <section id="5.2.1" title="Unsatisfied and ambiguous dependencies">
     <assertion id="aa">
       <text>The container must validate all injection points of all enabled beans when the application is initialized to ensure that there are no unsatisfied or ambiguous dependencies. If an unsatisfied or ambiguous dependency exists, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
       <note>These need expanding out - one for each assertion that results in an exception in 5.7.1</note>
     </assertion>
 
     <assertion id="b">
-      <text>For a custom implementation of the Bean interface defined in Section 11.1, "The Bean interface", the container calls  |getInjectionPoints()| to determine the injection points of the bean.</text>
+      <text>For a custom implementation of the |Bean| interface defined in Section 11.1, "The Bean interface", the container calls  |getInjectionPoints()| to determine the set of injection points.</text>
     </assertion>
   </section>
   
-  <section id="5.3.2" title="Legal injection point types">
+  <section id="5.2.2" title="Legal injection point types">
     <assertion id="a">
       <text>Any legal bean type, as defined in Section 2.2.1, "Legal bean types" may be the required type of an injection point.</text>
     </assertion>
@@ -2236,11 +2219,11 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="c">
-      <text>If an injection point type is a type variable, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If an injection point type is a type variable, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>    
   </section>
 
-  <section id="5.3.3" title="Assignability of raw and parameterized types">
+  <section id="5.2.3" title="Assignability of raw and parameterized types">
     <assertion id="a">
       <text>A parameterized bean type is considered assignable to a raw required type if the raw types are identical and all type parameters of the bean type are either unbounded type variables or |java.lang.Object|.</text>
     </assertion>
@@ -2266,7 +2249,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.3.4" title="Primitive types and null values">
+  <section id="5.2.4" title="Primitive types and null values">
     <group>
       <text>If necessary, the container performs boxing or unboxing when it injects a value to a field or parameter of primitive or wrapper type.</text>
             
@@ -2288,7 +2271,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.3.5" title="Qualifier annotations with members">
+  <section id="5.2.5" title="Qualifier annotations with members">
     <assertion id="a" testable="false">
       <text>Qualifier types with members are supported</text>
       <note>A statement of intent</note>
@@ -2303,7 +2286,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.3.6" title="Multiple qualifiers">
+  <section id="5.2.6" title="Multiple qualifiers">
     <assertion id="a">
       <text>A bean class may declare multiple qualifiers.</text>
     </assertion>
@@ -2321,32 +2304,34 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.4" title="EL Name resolution">
-
-    <assertion id="baa">
-  <text>When resolving a bean by name, the container identifies the set of matching beans which have the given EL name, and are enabled, and are either not an alternative, or is a selected alternative of the war containing the JSP or JSF page with the EL expression, and are accessible to classes in the war containing the JSP or JSF page with the EL expression, according to the class loading requirements of the Java EE platform and Java Servlet specifications, and which are not a policy or an enabled policy of the war containing the JSP or JSF page with the EL expression.</text>
+  <section id="5.3" title="EL Name resolution">   
+    <assertion id="d">
+      <text>An EL name resolves to a bean if the bean has the given EL name, and the bean is available for injection in the war containing the JSP or JSF page with the EL expression.</text>
     </assertion>
 
     <assertion id="e">
-      <text>For a custom implementation of the Bean interface defined in Section 11.1, "The Bean interface", the container calls |getName()| to determine the bean EL name.</text>
+      <text>For a custom implementation of the |Bean| interface defined in Section 11.1, "The Bean interface", the container calls |getName()| to determine the bean EL name.</text>
     </assertion>
   </section>
 
-  <section id="5.4.1" title="Ambiguous EL names">
+  <section id="5.3.1" title="Ambiguous EL names">
     <assertion id="ca">
-      <text>An ambiguous EL name exists in an EL expression when there are multiple beans which match the given EL name.  When an ambiguous EL name exists, the container attempts to resolve the ambiguity - if any matching beans are alternatives, the container eliminates all matching beans that are not alternatives.If there is exactly one bean remaining, the container will select this bean, and the ambiguous name is called resolvable.</text>
+      <text>An ambiguous EL name exists in an EL expression when there are multiple beans which match the given EL name.  When an ambiguous EL name exists, the container attempts to resolve the ambiguity.  If any of the beans are alternatives, the container eliminates all beans that are not alternatives.  If there is exactly one bean remaining, the container will select this bean, and the ambiguous EL name is called resolvable.</text>
     </assertion>
 
+    <group>
+      <text>All unresolvable ambiguous EL names are detected by the container when the application is initialized. Suppose two beans are both accessible to classes in a certain war, according to the class loading requirements of the Java EE platform and Java Servlet specifications. If each bean is either not an alternative, or is a selected alternative of the war, and either the two beans have the same EL name and the name is not resolvable, or the EL name of one bean is of the form |x.y|, where |y| is a valid bean EL name, and |x| is the EL name of the other bean, the container automatically detects the problem and treats it as a deployment problem.</text>
+            
     <assertion id="da">
-      <text>All unresolvable ambiguous EL names are detected by the container when the application is initialized. Suppose two beans are both accessible to classes in a certain war, according to the class loading requirements of the Java EE platform and Java Servlet specifications. If each bean is either not an alternative, or is a selected alternative of the war, and either _the two beans have the same EL name and the name is not resolvable_, or the EL name of one bean is of the form x.y, where y is a valid bean EL name, and x is the EL name of the other bean, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Test with two beans with the same EL name.</text>
     </assertion>
     
     <assertion id="db">
-      <text>All unresolvable ambiguous EL names are detected by the container when the application is initialized. Suppose two beans are both accessible to classes in a certain war, according to the class loading requirements of the Java EE platform and Java Servlet specifications. If each bean is either not an alternative, or is a selected alternative of the war, and either the two beans have the same EL name and the name is not resolvable, _or the EL name of one bean is of the form x.y, where y is a valid bean EL name, and x is the EL name of the other bean_, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Test with with an EL name in the form |x.y|.</text>
     </assertion>
   </section>
 
-  <section id="5.5" title="Client proxies">
+  <section id="5.4" title="Client proxies">
     <assertion id="a" testable="false">
       <text>Client proxies are never required for a bean whose scope is a pseudo-scope such as |@Dependent|</text>
     </assertion>
@@ -2365,29 +2350,34 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.5.1" title="Unproxyable bean types">
+  <section id="5.4.1" title="Unproxyable bean types">
     <assertion id="aa">
-      <text>Classes which don't have a non-private constructor with no parameters cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Classes which don't have a non-private constructor with no parameters cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
     </assertion>
 
-    <assertion id="baa">
-      <text>Classes which are declared final ~or have final methods~ cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
-    </assertion>
+    <group>
+      <text>Classes which are declared final or have final methods cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
+      
+      <assertion id="baa">
+        <text>Test with a final class.</text>
+      </assertion>
 
-    <assertion id="bba">
-      <text>Classes which ~are declared final or ~have final methods cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
-    </assertion>
+      <assertion id="bba">
+        <text>Test with a class that has final methods.</text>
+      </assertion>
+    </group>
 
     <assertion id="ca">
-      <text>Primitive types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Primitive types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
     </assertion>
 
     <assertion id="da">
-      <text>Array types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Array types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
     </assertion>
+    
   </section>
 
-  <section id="5.5.2" title="Client proxy invocation">
+  <section id="5.4.2" title="Client proxy invocation">
     <assertion id="aa">
   <text>Every time a method of the bean is invoked upon a client proxy, the client proxy must obtain a contextual instance of the bean, as defined in Section 6.5.2, "Contextual instance of a bean", and invoke the method upon this instance.</text>
     </assertion>
@@ -2397,12 +2387,12 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="b" testable="false">
-      <text>The behavior of all methods declared by |java.lang.Object|, except for |toString()|, is undefined for a client proxy</text>
+      <text>The behavior of all methods declared by |java.lang.Object|, except for |toString()|, is undefined for a client proxy.</text>
     </assertion>
 
   </section>
 
-  <section id="5.6" title="Dependency injection">
+  <section id="5.5" title="Dependency injection">
     <assertion id="a">
       <text>The container is required to perform dependency injection whenever it creates a contextual instance of a session bean.</text>
     </assertion>
@@ -2451,44 +2441,19 @@ detects the problem and treats it as a definition error.</text>
     <assertion id="g">
       <text>The container interacts with instances of beans and other Java EE component classes supporting injection by calling methods and getting and setting the field values.</text>
     </assertion>
-  </section>
-
-  <section id="5.6.1" title="Injectable references">
-    <assertion id="aa">
-  <text>To obtain an injectable reference for an injection point, the container must identify a bean according to the rules defined in Section 5.3, "Typesafe resolution" and resolving ambiguities according to Section 5.3.1, "Unsatisfied and ambiguous dependencies", then obtain a contextual reference for this bean and the type of the injection point according to Section 6.5.3, "Contextual reference for a bean".</text>
-    </assertion>
-
-    <assertion id="g">
-      <text>For certain combinations of scopes, the container is permitted to optimize the above procedure by directly injecting a contextual instance of the bean, as defined in Section 6.5.2, "Contextual instance of a bean". If an incompletely initialized instance of the bean is registered with the current |CreationalContext|, as defined in Section
-6.1, "The Contextual interface", the container is permitted to directly inject this instance.  However, in performing these optimizations, the container must respect the rules of injected reference validity.</text>
+    
+    <assertion id="h">
+      <text>The object injected by the container may not be a direct reference to a contextual instance of the bean.  Instead, it is an injectable reference, as defined by Section 6.5.5, "Injectable references".</text>
     </assertion>
   </section>
-
-  <section id="5.6.2" title="Injected reference validity">
-    <assertion id="d">
-      <text>A reference to a bean injected into a field, bean constructor or initializer method is valid until the object into which it was injected is destroyed.</text>
-    </assertion>
-
-    <assertion id="e">
-      <text>A reference to a bean injected into a producer method is valid until the producer method bean instance that is being produced is destroyed.</text>
-    </assertion>
-
-    <assertion id="f">
-      <text>A reference to a bean injected into a disposer method or observer method is valid until the invocation of the method completes.</text>
-    </assertion>
-
-    <assertion id="g" testable="false">
-      <text>The application should not invoke a method of an invalid reference. If the application invokes a method of an invalid injected reference, the behavior is undefined.</text>
-    </assertion>
-  </section>
-
-  <section id="5.6.3" title="Injection using the bean constructor">
+  
+  <section id="5.5.1" title="Injection using the bean constructor">
     <assertion id="a">
       <text>When the container instantiates a managed bean with a constructor annotated |@Inject|, the container calls this constructor, passing an injectable reference to each parameter. If there is no constructor annotated |@Inject|, the container calls the constructor with no parameters.</text>
     </assertion>
   </section>
 
-  <section id="5.6.4" title="Injection of fields and initializer methods">
+  <section id="5.5.2" title="Injection of fields and initializer methods">
     <group>
       <text>When the container creates a new instance of a managed bean, session bean, or of any other Java EE component class supporting injection, the container must: Initialize the values of all injected fields. The container sets the value of each injected field to an injectable reference. Call all initializer methods, passing an injectable reference to each parameter.</text>
       <assertion id="aa">
@@ -2618,13 +2583,13 @@ detects the problem and treats it as a definition error.</text>
     </group>
   </section>
 
-  <section id="5.6.5" title="Destruction of dependent objects">
+  <section id="5.5.3" title="Destruction of dependent objects">
     <assertion id="a">
       <text>When the container destroys an instance of a bean or of any Java EE component class supporting injection, the container destroys all dependent objects, as defined in Section 6.4.2, "Dependent object destruction", after the |@PreDestroy| callback completes and after the servlet |destroy()| method is called.</text>
     </assertion>
   </section>
 
-  <section id="5.6.6" title="Invocation of producer or disposal methods">
+  <section id="5.5.4" title="Invocation of producer or disposal methods">
     <assertion id="a">
       <text>When the container calls a producer method, if the method is static, the container must invoke the method.</text>
     </assertion>
@@ -2646,7 +2611,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.6.7" title="Access to producer field values">
+  <section id="5.5.5" title="Access to producer field values">
     <assertion id="a">
       <text>When the container accesses the value of a producer field, if the producer field is static, the container must access the field value.</text>
     </assertion>
@@ -2656,7 +2621,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.6.8" title="Invocation of observer methods">
+  <section id="5.5.6" title="Invocation of observer methods">
     <assertion id="a">
       <text>When the container calls an observer method (defined in Section 10.4 "Observer methods"), if the observer method is static, the container must invoke the method.</text>
     </assertion>
@@ -2674,7 +2639,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.6.9" title="Injection point metadata">
+  <section id="5.5.7" title="Injection point metadata">
     <assertion id="aa">
   <text>The |javax.enterprise.inject.spi.InjectionPoint.getBean()| method returns the Bean object representing the bean that defines the injection point.  If the injection point does not belong to a bean, |getBean()| returns a null value.</text>
     </assertion>
@@ -2720,15 +2685,15 @@ detects the problem and treats it as a definition error.</text>
 	</assertion>
 
     <assertion id="f">
-      <text>If a bean that declares any scope other than |@Dependent| has an injection point of type |InjectionPoint| and binding |@Default|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a bean that declares any scope other than |@Dependent| has an injection point of type |InjectionPoint| and binding |@Default|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="ga">
-      <text>If a Java EE component class supporting injection that is not a bean has an injection point of type |InjectionPoint| and binding |@Default|, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a Java EE component class supporting injection that is not a bean has an injection point of type |InjectionPoint| and binding |@Default|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.7" title="Programmatic lookup">
+  <section id="5.6" title="Programmatic lookup">
     <assertion id="aa">
       <text>An instance of the |javax.enterprise.inject.Instance| interface may be injected.</text>
     </assertion>
@@ -2746,7 +2711,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.7.1" title="The Instance interface">
+  <section id="5.6.1" title="The Instance interface">
     <assertion id="aa">
       <text>The |Instance| interface provides a method for obtaining instances of beans with a specified combination of required type and qualifiers, and inherites the ability to iterate beans with that combination of required type and qualifiers from |java.lang.Iterable|.</text>
     </assertion>
@@ -2805,7 +2770,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.7.2" title="The built-in Instance">
+  <section id="5.6.2" title="The built-in Instance">
     <assertion id="a">
       <text>The container must provide a built-in bean with |Instance&lt;X&gt;| and |Provider&lt;X&gt;| for every legal bean type |x| in its set of bean types.</text>
     </assertion>
@@ -2831,28 +2796,8 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="5.7.3" title="Using AnnotationLiteral and TypeLiteral">
+  <section id="5.6.3" title="Using AnnotationLiteral and TypeLiteral">
 
-  </section>
-
-  <section id="5.8" title="Integration with Unified EL">
-    <assertion id="aaa">
-  <text>The container must provide a Unified EL ELResolver to the servlet engine ~and JSF implementation~ that resolves bean EL names using the rules of name resolution algorithm defined in Section 5.4 "EL name resolution" and resolving ambiguities according to Section 5.4.1, "Ambiguous EL names".</text>
-      <note>This is testable implicitly by trying to resolve using EL from a servlet</note>
-    </assertion>
-
-    <assertion id="aba">
-      <text>The container must provide a Unified EL |ELResolver| to the ~servlet engine~ and JSF implementation that resolves bean EL names using the rules of name resolution algorithm defined in Section 5.4 "EL name resolution" and resolving ambiguities according to Section 5.4.1, "Ambiguous EL names".</text>
-      <note>This is testable implicitly by trying to resolve using EL from a JSF view</note>
-    </assertion>
-
-    <assertion id="bb">
-      <text>If a name used in an EL expression does not resolve to any bean, the |ELResolver| must return a null value.</text>
-    </assertion>
-
-    <assertion id="bc">
-      <text>Otherwise, if a name used in an EL expression resolves to exactly one bean, the |ELResolver| must return a contextual instance of the bean, as defined in Section 6.5.2, "Contextual instance of a bean".</text>
-    </assertion>
   </section>
 
   <section id="6" title="Scopes and contexts">
