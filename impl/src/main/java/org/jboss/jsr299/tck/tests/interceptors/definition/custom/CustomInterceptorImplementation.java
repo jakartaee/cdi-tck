@@ -93,6 +93,7 @@ class CustomInterceptorImplementation implements Interceptor<SimpleInterceptorWi
 
    public Set<Annotation> getInterceptorBindings()
    {
+      getInterceptorBindingsCalled = true;
       return Collections.unmodifiableSet(interceptorBindingTypes);
    }
    
