@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class CustomInterceptorTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.5", id = "fa")
    // WELD-238
    public void testCustomPostConstructInterceptor()
@@ -44,7 +44,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test
       assert AfterBeanDiscoveryObserver.POST_CONSTRUCT_INTERCEPTOR.isInterceptsCalled();
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.5", id = "fb")
    // WELD-238
    public void testCustomPreDestroyInterceptor()
@@ -54,7 +54,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test
       assert AfterBeanDiscoveryObserver.PRE_DESTROY_INTERCEPTOR.isInterceptsCalled();
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.5", id = "fc")
    // WELD-238
    public void testCustomPostActivateInterceptor()
@@ -64,7 +64,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test
       assert AfterBeanDiscoveryObserver.POST_ACTIVATE_INTERCEPTOR.isInterceptsCalled();
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.5", id = "fd")
    // WELD-238
    public void testCustomPrePassivateInterceptor()
@@ -74,7 +74,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test
       assert AfterBeanDiscoveryObserver.PRE_PASSIVATE_INTERCEPTOR.isInterceptsCalled();
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.5", id = "fe")
    // WELD-238
    public void testCustomAroundInvokeInterceptor()
@@ -84,7 +84,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test
       assert AfterBeanDiscoveryObserver.AROUND_INVOKE_INTERCEPTOR.isInterceptsCalled();
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "9.5", id = "ff")
    // WELD-238
    public void testCustomAroundTimeoutInterceptor()
