@@ -33,10 +33,11 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091018")
 public class AddDefinitionErrorTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
-   @SpecAssertion(section="11.5.8", id="h")
-   //WELD-223
-   public void testAddDefinitionError() {
+   @Test(groups = "jboss-as-broken")
+   @SpecAssertion(section = "11.5.8", id = "h")
+   // WELD-223
+   public void testAddDefinitionError()
+   {
       assert false;
    }
 }
