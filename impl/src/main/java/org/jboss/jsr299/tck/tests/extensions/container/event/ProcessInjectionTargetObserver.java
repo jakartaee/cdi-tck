@@ -10,6 +10,7 @@ public class ProcessInjectionTargetObserver implements Extension
    private static ProcessInjectionTarget<Cow> statefulSessionBeanEvent = null;
    private static ProcessInjectionTarget<SheepInterceptor> sessionBeanInterceptorEvent = null;
    private static ProcessInjectionTarget<Farm> managedBeanEvent = null;
+   private static ProcessInjectionTarget<?> eventWithTypeVariable = null;
    
    private static int event1Observed = 0;
    private static int event2Observed = 0;
@@ -54,6 +55,11 @@ public class ProcessInjectionTargetObserver implements Extension
       event5Observed++;
    }
    
+   public <X> void processInjectionTarget(@Observes ProcessInjectionTarget<X> event)
+   {
+      eventWithTypeVariable = event;
+   } 
+   
    public static ProcessInjectionTarget<Sheep> getStatelessSessionBeanEvent()
    {
       return statelessSessionBeanEvent;
@@ -72,6 +78,11 @@ public class ProcessInjectionTargetObserver implements Extension
    public static ProcessInjectionTarget<Farm> getManagedBeanEvent()
    {
       return managedBeanEvent;
+   }
+   
+   public static ProcessInjectionTarget<?> getEventWithTypeVariable()
+   {
+      return eventWithTypeVariable;
    }
 
    public static int getEvent1Observed()

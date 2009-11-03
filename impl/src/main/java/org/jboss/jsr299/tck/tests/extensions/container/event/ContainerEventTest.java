@@ -92,6 +92,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       assert ProcessInjectionTargetObserver.getEvent3Observed() == 0;
       assert ProcessInjectionTargetObserver.getEvent4Observed() == 0;
       assert ProcessInjectionTargetObserver.getEvent5Observed() == 1;
+      assert ProcessInjectionTargetObserver.getEventWithTypeVariable() != null;
    }
 
    @Test
