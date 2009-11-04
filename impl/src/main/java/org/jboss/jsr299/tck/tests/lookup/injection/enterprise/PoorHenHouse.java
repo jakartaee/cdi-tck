@@ -5,10 +5,9 @@ import javax.inject.Inject;
 class PoorHenHouse extends HenHouse
 {
    protected boolean initializerCalledAfterSuperclassInjection = false;
-
+   
    @Inject
-   public void initialize()
-   {
+   public void initialize() {
       initializerCalledAfterSuperclassInjection = fox != null;
    }
 

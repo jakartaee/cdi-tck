@@ -1,9 +1,9 @@
 package org.jboss.jsr299.tck.tests.lookup.injection.enterprise;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 
-@Stateless
+@Stateful
 public class MegaPoorHenHouse extends PoorHenHouse implements MegaPoorHenHouseLocal
 {
    private boolean postConstructCalledAfterSuperclassInitializer = false;
@@ -23,6 +23,7 @@ public class MegaPoorHenHouse extends PoorHenHouse implements MegaPoorHenHouseLo
       return postConstructCalledAfterSuperclassInitializer;
    }
    
+   @Override
    public boolean isInitializerCalledAfterSuperclassInjection()
    {
       return initializerCalledAfterSuperclassInjection;
