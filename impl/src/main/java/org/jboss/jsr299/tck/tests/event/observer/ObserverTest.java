@@ -7,7 +7,6 @@ import javax.enterprise.event.Reception;
 import javax.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.literals.DefaultLiteral;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -75,8 +74,7 @@ public class ObserverTest extends AbstractJSR299Test
       Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
       assert observers.size() == 1;
       ObserverMethod<?> observerMethod = observers.iterator().next();
-      assert observerMethod.getObservedQualifiers().size() == 1;
-      assert observerMethod.getObservedQualifiers().contains(new DefaultLiteral());
+      assert observerMethod.getObservedQualifiers().isEmpty();
    }
 
    @Test(groups = { "events" })
