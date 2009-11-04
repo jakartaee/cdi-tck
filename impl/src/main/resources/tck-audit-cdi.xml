@@ -2958,35 +2958,43 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="b">
-      <text>When a bean is declared to have |@Dependent| scope, any injected instance of the bean is bound to the lifecycle of the bean, servlet or EJB into which it is injected.</text>
+      <text>When a bean is declared to have |@Dependent| scope, any instance of the bean injected into an object that is being created by the container is bound to the lifecycle of the newly created object.</text>
     </assertion>
 
     <assertion id="ca">
       <text>When a bean is declared to have |@Dependent| scope, when a unified EL expression in a JSF or JSP page that refers to the bean by its EL name is evaluated, at most one instance of the bean is instantiated.  This instance exists to service just a single evaluation of the EL expression.  It is reused if the bean EL name appears multiple times in the EL expression, but is never reused when the EL expression is evaluated again, or when another EL expression is evaluated.</text>
     </assertion>
 
-    <assertion id="da">
-      <text>When a bean is declared to have |@Dependent| scope, any instance of the bean that receives a producer method~, producer field, disposer method or observer method~ invocation exists to service that invocation only</text>
-    </assertion>
+    <group>
+      <text>When a bean is declared to have |@Dependent| scope, any instance of the bean that receives a producer method, producer field, disposer method or observer method invocation exists to service that invocation only</text>
+        
+      <assertion id="da">
+        <text>Test with a producer method.</text>
+      </assertion>
 
-    <assertion id="db">
-      <text>When a bean is declared to have |@Dependent| scope, any instance of the bean that receives a ~producer method,~ producer field~, disposer method or observer method~ invocation exists to service that invocation only</text>
-    </assertion>
+      <assertion id="db">
+        <text>Test with a producer field.</text>
+      </assertion>
 
-    <assertion id="dc">
-      <text>When a bean is declared to have |@Dependent| scope, any instance of the bean that receives a ~producer method, producer field,~ disposer method ~or observer method~ invocation exists to service that invocation only</text>
-    </assertion>
+      <assertion id="dc">
+        <text>Test with a disposer method.</text>
+      </assertion>
 
-    <assertion id="dd">
-      <text>When a bean is declared to have |@Dependent| scope, any instance of the bean that receives a ~producer method, producer field, disposer method or~ observer method invocation exists to service that invocation only</text>
+      <assertion id="dd">
+        <text>Test with an observer method.</text>
+      </assertion>
+    </group>
+    
+    <assertion id="dg">
+      <text>Any instance of the bean injected into method parameters of a disposer method or observer method exists to service the method invocation only (except for observer methods of container lifecycle events).</text>
     </assertion>
 
     <assertion id="e">
-      <text>Every invocation of the |get()| operation of the |Context| object for the |@Dependent| scope with a |CreationalContext| returns a new instance of the given bean</text>
+      <text>Every invocation of the |get()| operation of the |Context| object for the |@Dependent| scope with a |CreationalContext| returns a new instance of the given bean.</text>
     </assertion>
 
     <assertion id="f">
-      <text>Every invocation of the |get()| operation of the |Context| object for the |@Dependent| scope with no |CreationalContext| returns a null value</text>
+      <text>Every invocation of the |get()| operation of the |Context| object for the |@Dependent| scope with no |CreationalContext| returns a null value.</text>
     </assertion>
 
     <assertion id="g">
@@ -3031,7 +3039,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
-  <section id="6.4.2" title="Dependent object destruction">
+  <section id="6.4.2" title="Destruction of objects with scope @Dependent">
   
     <group>
       <text>The container must ensure that all dependent objects of a non-contextual instance of a bean or other Java EE component class are destroyed when the instance is destroyed by the container.</text>
@@ -3158,24 +3166,41 @@ detects the problem and treats it as a definition error.</text>
 
   <section id="6.5.4" title="Contextual reference validity">
     <assertion id="a">
-      <text>Any reference to a bean with a normal scope is valid as long as the application maintains a hard reference to it. However, it may only be invoked when the context associated with the normal scope is active. If it is invoked when the context is inactive, a |ContextNotActiveException| is thrown by the container.</text>
+      <text>Any reference to a bean with a normal scope is valid as long as the application maintains a hard reference to it.  However, it may only be invoked when the context associated with the normal scope is active.  If it is invoked when the context is inactive, a |ContextNotActiveException| is thrown by the container.</text>
     </assertion>
 
     <assertion id="b" testable="false">
-      <text>
-         Any reference to a bean with a pseudo-scope (such as |@Dependent|) is valid until the bean instance to which it refers is destroyed. It may be invoked even if the context associated with the pseudo-scope is not active. If the application invokes a method of a reference to an instance that has already been destroyed, the behavior is undefined.
-      </text>
+      <text>Any reference to a bean with a pseudo-scope (such as |@Dependent|) is valid until the bean instance to which it refers is destroyed. It may be invoked even if the context associated with the pseudo-scope is not active. If the application invokes a method of a reference to an instance that has already been destroyed, the behavior is undefined.</text>
       <note>Describes unspecified behavior</note>
+    </assertion>
+  </section>
+  
+  <section id="6.5.5" title="Injectable references">
+    <assertion id="a">
+      <text>From time to time, the container must obtain an injectable reference for an injection point.  The container must identify a bean according to the rules defined in Section 5.2, "Typesafe resolution" and resolving ambiguities according to Section 5.2.1, "Unsatisfied and ambiguous dependencies", then obtain a contextual reference for this bean and the type of the injection point according to Section 6.5.3, "Contextual reference for a bean".</text>
+    </assertion>
+    
+    <assertion id="b">
+      <text>For certain combinations of scopes, the container is permitted to optimize the procedure for obtaining an injectable reference for an injection point - the container is permitted to directly inject a contextual instance of the bean, as defined in Section 6.5.2, "Contextual instance of a bean", and if an incompletely initialized instance of the bean is registered with the current |CreationalContext|, as defined in Section 6.1, "The Contextual interface", the container is permitted to directly inject this instance.</text>
+    </assertion>
+  </section>
+  
+  <section id="6.5.6" title="Injectable reference validity">
+    <assertion id="a">
+      <text>Injectable references to a bean must respect the rules of contextual reference validity, with the following exceptions - a reference to a bean injected into a field, bean constructor or initializer method is only valid until the object into which it was injected is destroyed, a reference to a bean injected into a producer method is only valid until the producer method bean instance that is being produced is destroyed, and a reference to a bean injected into a disposer method or observer method is only valid until the invocation of the method completes.</text>
+    </assertion>
+    
+    <assertion id="b" testable="false">
+      <text>The application should not invoke a method of an invalid injected reference.  If the application invokes a method of an invalid injected reference, the behavior is undefined.</text>
+      <note>Behavior is undefined.</note>
     </assertion>
   </section>
 
   <section id="6.6" title="Passivation and passivating scopes">
     <assertion id="a" implied="true">
-      <text>Test passivation occurs</text>
+      <text>Test that passivation occurs.</text>
     </assertion>
   </section>
-
-  
 
   <section id="6.6.1" title="Passivation capable beans">
     <assertion id="a" testable="false">
@@ -3297,12 +3322,12 @@ detects the problem and treats it as a definition error.</text>
 
   <section id="6.6.4" title="Validation of passivation capable beans and dependencies">
     <assertion id="aaa">
-      <text>If a managed bean which declares a passivating scope is not passivation capable, then the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a managed bean which declares a passivating scope is not passivation capable, then the container automatically detects the problem and treats it as a deployment problem.</text>
       <note>Here we check the class, as interceptors and decorators are tested below</note>
     </assertion>
     
     <group>
-      <text>If a managed bean which declares a passivating scope has a non-transient injected field, bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>    
+      <text>If a managed bean which declares a passivating scope has a non-transient injected field, bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>    
       <assertion id="aaba">
         <text>Test with injected field.</text>
       </assertion>
@@ -3317,7 +3342,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
     
     <group>
-      <text>If a managed bean which declares a passivating scope has an interceptor or decorator with a non-transient injected field, bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a managed bean which declares a passivating scope has an interceptor or decorator with a non-transient injected field, bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>
     
       <assertion id="aac">
         <text>Test interceptor with injected field.</text>
@@ -3345,7 +3370,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
 
     <group>
-      <text>If a stateful session bean has a non-transient injected field, bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>    
+      <text>If a stateful session bean has a non-transient injected field, bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>    
       
       <assertion id="ba">
         <text>Test with an injected field.</text>
@@ -3362,7 +3387,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
     
     <group>
-      <text>If a stateful session bean has an interceptor or decorator with a non-transient injected field, bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a stateful session bean has an interceptor or decorator with a non-transient injected field, bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>
             
       <assertion id="bda">
         <text>Test an interceptor with an injected field.</text>
@@ -3390,7 +3415,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
 
     <group>
-      <text>If a producer method declares a passivating scope and the container is able to determine that it is not passivation capable by inspecting its return type, or has a parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a producer method declares a passivating scope and the container is able to determine that it is not passivation capable by inspecting its return type, or has a parameter that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>
             
       <assertion id="ca">
         <text>Test a producer method with a non passivation-capable return type.</text>
@@ -3402,8 +3427,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
 
     <assertion id="d">
-      <text>If a producer field declares a passivating scope and the container is able to determine that it is not passivation capable by inspecting its type, then the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4,
-"Problems detected automatically by the container".</text>
+      <text>If a producer field declares a passivating scope and the container is able to determine that it is not passivation capable by inspecting its type, then the container automatically detects the problem and treats it as a deployment problem.</text>
     </assertion>
 
     <group>
@@ -3451,7 +3475,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
 
     <group>
-      <text>If a bean which declares a passivating scope type, or any stateful session bean, has a decorator which is not a passivation capable dependency, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>    
+      <text>If a bean which declares a passivating scope type, or any stateful session bean, has a decorator which is not a passivation capable dependency, the container automatically detects the problem and treats it as a deployment problem.</text>    
       
       <assertion id="ha">
         <text>Test with a bean which declares a passivating scope type.</text>
@@ -3885,7 +3909,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
   
     <group>
-      <text>If, and only if, the invocation is a business method invocation it passes through the method interceptor and decorator stacks, and in the case of a session bean, it is subject to EJB services such a declarative transaction management, concurrency, security and asynchronicity, as defined by the EJB specification.</text>
+      <text>If, and only if, the invocation is a business method invocation it passes through method interceptors and decorators, and in the case of a session bean, it is subject to EJB services such a declarative transaction management, concurrency, security and asynchronicity, as defined by the EJB specification.</text>
       
       <assertion id="a">
         <text>Verify that a managed bean's business methods are intercepted</text>
@@ -4309,7 +4333,7 @@ creates and returns a container-specific internal local reference to the session
     </assertion>
 
     <assertion id="b">
-      <text>Interceptor bindings are transitive�an interceptor binding declared by an interceptor binding type is inherited by all beans and other interceptor binding types that declare that interceptor binding type.</text>
+      <text>Interceptor bindings are transitive - an interceptor binding declared by an interceptor binding type is inherited by all beans and other interceptor binding types that declare that interceptor binding type.</text>
     </assertion>
 
     <assertion id="c" testable="false">
@@ -4337,6 +4361,10 @@ creates and returns a container-specific internal local reference to the session
     <assertion id="a">
       <text>The interceptor bindings of an interceptor are specified by annotating the interceptor class with the binding types and the |@javax.interceptor.Interceptor| annotation.</text>
     </assertion>
+    
+    <assertion id="ab">
+      <text>An interceptor class may declare multiple interceptor bindings.</text>
+    </assertion>
 
     <assertion id="b">
       <text>If an interceptor does not declare an |@Interceptor| annotation, it must be bound to beans using |@Interceptors| or |ejb-jar.xml|.</text>
@@ -4355,6 +4383,18 @@ creates and returns a container-specific internal local reference to the session
     <assertion id="a">
       <text>An interceptor binding may be declared by annotating the bean class, or a method of the bean class, with the interceptor binding type.</text>
     </assertion>
+    
+    <assertion id="b">
+      <text>A bean class or method of a bean class may declare multiple interceptor bindings.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>If the bean class of a managed bean declares or inherits a class level interceptor binding or a stereotype with interceptor bindings, it must not be declared final, or have any non-static, non-private, final methods.  If a managed bean has a class-level interceptor binding and is declared final or has a non-static, non-private, final method, the container automatically detects the problem and treats it as a definition error.</text>
+    </assertion>
+    
+    <assertion id="d">
+      <text>If a non-static, non-private method of a bean class of a managed bean declares a method level interceptor binding, neither the method nor the bean class may be declared final.  If a non-static, non-private, final method of a managed bean has a method level interceptor binding, the container automatically detects the problem and treats it as a definition error.</text>
+    </assertion>
   </section>
 
   <section id="9.4" title="Interceptor enablement and ordering">
@@ -4369,7 +4409,7 @@ called first.</text>
     </assertion>
 
     <group>
-      <text>Each child |&lt;class&gt;| element must specify the name of an interceptor class.  If there is no class with the specified name, or if the class with the specified name is not an interceptor class, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Each child |&lt;class&gt;| element must specify the name of an interceptor class.  If there is no class with the specified name, or if the class with the specified name is not an interceptor class, the container automatically detects the problem and treats it as a deployment problem.</text>
 
       <assertion id="caa">
         <text>Test with a non-existant class.</text>
@@ -4381,7 +4421,7 @@ called first.</text>
     </group>
     
     <assertion id="cb">
-      <text>If the same class is listed twice under the |&lt;interceptors&gt;| element, the container automatically detects the problem and treats it as a deployment problem, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If the same class is listed twice under the |&lt;interceptors&gt;| element, the container automatically detects the problem and treats it as a deployment problem.</text>
     </assertion>
 
     <assertion id="f">
@@ -4395,12 +4435,12 @@ called first.</text>
 
   <section id="9.5" title="Interceptor resolution">
     <assertion id="a">
-      <text>For a lifecycle callback, the bean interceptor bindings include the interceptor bindings declared by the bean at the class level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively, and of stereotypes.
+      <text>For a lifecycle callback method, the interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively, and of stereotypes.
       </text>
     </assertion>
 
     <group>
-      <text>For a business method, or EJB timeout method, the bean interceptor bindings include the interceptor bindings declared by the bean at the class level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively, and of stereotypes, together with all interceptor bindings declared at the method level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively.</text>
+      <text>For a business method, or EJB timeout method, the bean interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively, and of stereotypes, together with all interceptor bindings declared at the method level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively.</text>
       <assertion id="ba">
          <text>Check a business method</text>
       </assertion>
@@ -4410,13 +4450,9 @@ called first.</text>
     </group>
     
     <assertion id="ca">
-      <text>First, the container identifies the set of matching enabled interceptors where, for each interceptor binding declared by the interceptor, there exists an interceptor binding in the set of bean interceptor bindings with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.inject.NonBinding| (see Section 9.5.2, "Interceptor binding types with members"), and the interceptor intercepts the given kind of lifecycle callback or business method, and the interceptor is enabled in the bean deployment archive of the bean.</text>
+      <text>An interceptor is bound to a method if the method has all the interceptor bindings of the interceptor.  A method has an interceptor binding of an interceptor if it has an interceptor binding with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.NonBinding|, and the interceptor intercepts the given kind of lifecycle callback or business method, and the interceptor is enabled in the bean deployment archive of the bean.</text>
     </assertion>
-
-    <assertion id="ea">
-      <text>Next, the container orders the matching interceptors according to the interceptor ordering specified in Section 9.4, "Interceptor enablement and ordering".</text>
-    </assertion>
-    
+   
     <group>
       <text>For a custom implementation of the Interceptor interface defined in Section 11.1.2, "The Interceptor interface", the container calls |getInterceptorBindings()| to determine the interceptor bindings of the interceptor and |intercepts()| to determine if the interceptor intercepts a given kind of lifecycle callback, EJB timeout or business method.</text>
       <assertion id="fa">
@@ -4443,7 +4479,7 @@ called first.</text>
 
   <section id="9.5.1" title="Interceptors with multiple bindings">
     <group>
-      <text>An interceptor class may specify multiple interceptor bindings, in which case the interceptor will be applied only to beans that declare all the bindings at the class level, and to methods of beans for which every binding appears at either the method or class level.</text>
+      <text>An interceptor class may specify multiple interceptor bindings.</text>
       <assertion id="a">
         <text>Test that the interceptor is applied to a bean with all of the bindings.</text>
       </assertion>
@@ -4468,7 +4504,7 @@ called first.</text>
     </assertion>
     
     <assertion id="d">
-      <text>If the set of interceptor bindings of a bean or interceptor, including bindings inherited from stereotypes and other interceptor bindings, has two instances of a certain interceptor binding type and the instances have different values of some annotation member, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If the set of interceptor bindings of a bean or interceptor, including bindings inherited from stereotypes and other interceptor bindings, has two instances of a certain interceptor binding type and the instances have different values of some annotation member, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
@@ -4913,7 +4949,7 @@ dependencies".</text>
     </assertion>
 
     <assertion id="g" testable="false">
-      <text>An application or portable extension may add support for new kinds of beans beyond those defined by the this specification (managed beans, session beans, producer methods and fields, resources and message destinations) by implementing |Bean| and registering beans with the container, using the mechanism defined in Section 11.5.2, "AfterBeanDiscovery event".</text>
+      <text>A portable extension may add support for new kinds of beans beyond those defined by the this specification (managed beans, session beans, producer methods and fields, resources and message destinations) by implementing |Bean| and registering beans with the container, using the mechanism defined in Section 11.5.2, "AfterBeanDiscovery event".</text>
     </assertion>
   </section>
 
@@ -4945,11 +4981,11 @@ dependencies".</text>
     </assertion>
 
     <assertion id="c">
-      <text>|intercepts()| returns |true| if the interceptor intercepts callbacks or business methods of the given type, and |false| otherwise.</text>
+      <text>|intercepts()| returns |true| if the interceptor intercepts the specified kind of lifecycle callback or method invocation, and |false| otherwise.</text>
     </assertion>
 
     <assertion id="d">
-      <text>|intercept()| invokes the specified kind of lifecycle callback or business method upon the given instance.</text>
+      <text>|intercept()| invokes the specified kind of lifecycle callback or method invocation interception upon the given instance of the interceptor.</text>
     </assertion>
 
     <assertion id="e">
@@ -4998,7 +5034,7 @@ dependencies".</text>
     </assertion>
 
     <group>
-      <text>For a |Producer| that represents a class, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no parameters otherwise, as defined in Section 5.6.3, "Injection using the bean constructor". and returns the resulting instance. If the class has interceptors, |produce()| is responsible for building the interceptor and decorator stacks for the instance.</text>
+      <text>For a |Producer| that represents a class, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no parameters otherwise, as defined in Section 5.6.3, "Injection using the bean constructor". and returns the resulting instance. If the class has interceptors, |produce()| is responsible for building the interceptors and decorators of the instance.</text>
       <assertion id="ba">
          <text>Test field injection occurs</text>
       </assertion>
@@ -5064,7 +5100,7 @@ dependencies".</text>
     </assertion>
     
     <assertion id="i">
-      <text>|inject()| performs dependency injection upon the given object. First, the container performs Java EE component environment injection according to the semantics required by the Java EE platform specification. Next, it sets the value of all injected fields, and then calls all initializer methods, as defined in Section 5.6.4, "Injection of fields and initializer methods".</text>
+      <text>|inject()| performs dependency injection upon the given object. The container performs Java EE component environment injection, according to the semantics required by the Java EE platform specification, sets the value of all injected fields, and calls all initializer methods, as defined in Section 5.6.4, "Injection of fields and initializer methods".</text>
     </assertion>
     
     <assertion id="j">
@@ -5156,7 +5192,7 @@ dependencies".</text>
 
   <section id="11.3.4" title="Obtaining a Bean by type">
     <assertion id="aa">
-      <text>The method |BeanManager.getBeans()| returns the set of beans which match the given required type and qualifiers and are accessible to the class into which the |BeanManager| was injected, or to the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of typesafe resolution defined in Section 5.3, "Typesafe resolution".</text>
+      <text>The method |BeanManager.getBeans()| returns the set of beans which have the given required type and qualifiers and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of typesafe resolution defined in Section 5.3, "Typesafe resolution".</text>
     </assertion>
 
     <assertion id="b">
@@ -5182,7 +5218,7 @@ dependencies".</text>
 
   <section id="11.3.5" title="Obtaining a Bean by name">
     <assertion id="aa">
-      <text>The method |BeanManager.getBeans()| which accepts a string returns the set of beans which match the given EL name and are accessible to the class into which the |BeanManager| was injected, or to the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of EL name resolution defined in Section 5.4, "EL name resolution".</text>
+      <text>The method |BeanManager.getBeans()| which accepts a string returns the set of beans which have the given EL name and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of EL name resolution defined in Section 5.4, "EL name resolution".</text>
     </assertion>
 
     <assertion id="b">
@@ -5561,7 +5597,7 @@ dependencies".</text>
     </assertion>
 
     <assertion id="b">
-      <text>Observers of these events must be service providers of the service |javax.enterprise.inject.spi.Extension| declared in |META-INF/services|.</text>
+      <text>Observer methods of these events must belong to extensions.  An extension is a service provider |javax.enterprise.inject.spi.Extension| declared in |META-INF/services|.</text>
     </assertion>
 
     <assertion id="c">
@@ -5569,7 +5605,7 @@ dependencies".</text>
     </assertion>
     
     <assertion id="d">
-      <text>Service providers may have observer methods, which may observe container initialization events and obtain an injected |BeanManager| reference.</text>
+      <text>The container instantiates a single instance of each extension at the beginning of the application initialization process and maintains a reference to it until the application shuts down.  The container delivers event notifications to this instance by calling its observer methods.</text>
     </assertion>
     
     <assertion id="e">
@@ -5686,7 +5722,7 @@ provider and all superclases and interfaces.</text>
 
   <section id="11.5.5" title="ProcessAnnotatedType event">
     <assertion id="a">
-      <text>The container must fire an event for each Java class it discovers, before it reads the declared annotations.  The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where |X| is the class.</text>
+      <text>The container must fire an event for each Java class it discovers in a bean deployment archive, before it reads the declared annotations. The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where |X| is the class.</text>
     </assertion>
 
     <assertion id="ba">
@@ -5712,7 +5748,7 @@ provider and all superclases and interfaces.</text>
 
   <section id="11.5.6" title="ProcessInjectionTarget event">
    <group>
-      <text>The container must fire an event for each managed bean, session bean, Java EE component class supporting injection, producer method or producer field it discovers.  The event object must be of type |javax.enterprise.inject.spi.ProcessInjectionTarget&lt;X&gt;|, where |X| is the managed bean class, session bean class or Java EE component class supporting injection.</text>
+      <text>The container must fire an event for every Java EE component class supporting injection that may be instantiated by the container at runtime, including every managed bean declared using |@ManagedBean|, EJB session or message-driven bean, enabled bean, enabled interceptor or enabled decorator.</text>
       <assertion id="aaa">
          <text>Test event is fired for a managed bean</text>
       </assertion>
@@ -5846,7 +5882,7 @@ provider and all superclases and interfaces.</text>
   
   <section id="11.5.7" title="ProcessProducer event">
     <group>
-      <text>The container must fire an event for each producer method or field, including resources.</text>
+      <text>The container must fire an event for each producer method or field of each enabled bean, including resources.</text>
       <assertion id="aa">
         <text>Test producer method</text>
       </assertion>
@@ -5913,7 +5949,7 @@ provider and all superclases and interfaces.</text>
 
   <section id="11.5.8" title="ProcessBean event">
     <assertion id="aa" testable="false">
-      <text>The container must fire an event for each bean it discovers, before registering the |Bean| object.  The event object in the package |javax.enterprise.inject.spi| depends upon what kind of bean was discovered.</text>
+      <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean deployment archive, before registering the |Bean| object.  No event is fired for any |@New| qualified bean, defined in Section 3.12, "@New qualified beans".</text>
       <note>Tested below</note>
     </assertion>
 
@@ -6032,7 +6068,7 @@ provider and all superclases and interfaces.</text>
 
   <section id="11.5.9" title="ProcessObserverMethod event">
     <assertion id="aaa">
-    <text>The container must fire an event for each observer method.  The event object must be of type |javax.enterprise.inject.spi.ProcessObserverMethod&lt;T, X&gt;| where |T| is the bean class of the bean that declares the observer method and |X| is the observed event type of the observer method.</text>
+    <text>The container must fire an event for each observer method of each enabled bean, before registering the |ObserverMethod| object.  The event object must be of type |javax.enterprise.inject.spi.ProcessObserverMethod&lt;T, X&gt;| where |T| is the bean class of the bean that declares the observer method and |X| is the observed event type of the observer method.</text>
     </assertion>
 
     <assertion id="aba">
@@ -6058,12 +6094,16 @@ provider and all superclases and interfaces.</text>
 
   <section id="12.1" title="Bean deployment archives">
     <assertion id="aa" testable="false">
-      <text>Bean classes must be deployed in bean deployment archives.</text>
+      <text>Bean classes of enabled beans must be deployed in bean deployment archives.</text>
     </assertion>
     
     <assertion id="a" testable="false">
-      <text>A library jar, EJB jar or rar archive is a bean deployment archive if it has a file named |beans.xml| in the |META-INF| directory. The |WEB-INF/classes| directory of a war is a bean deployment archive if there is a file named |beans.xml| in the |WEBINF| directory of the war. A directory in the JVM classpath is a bean deployment archive if it has a file named |beans.xml| in the |META-INF| directory.</text>
+      <text>A library jar, EJB jar, application client jar or rar archive is a bean deployment archive if it has a file named |beans.xml| in the |META-INF| directory. The |WEB-INF/classes| directory of a war is a bean deployment archive if there is a file named |beans.xml| in the |WEBINF| directory of the war. A directory in the JVM classpath is a bean deployment archive if it has a file named |beans.xml| in the |META-INF| directory.</text>
       <note>covered in bb*, bc*, bd*</note>
+    </assertion>
+
+    <assertion id="b" testable="false">
+      <text>The container is not required to support application client jar bean deployment archives.</text>
     </assertion>
 
     <assertion id="ba" testable="false">
@@ -6135,12 +6175,8 @@ provider and all superclases and interfaces.</text>
     </group>   
     
     <assertion id="be" testable="false">
-      <text>When searching for beans, the container considers any Java class in any bean deployment archive, and any |ejb-jar.xml| file in the metadata directory of any EJB bean deployment archive.</text>
+      <text>When searching for beans, the container considers any Java class in any bean deployment archive, any |ejb-jar.xml| file in the metadata directory of any EJB bean deployment archive, any Java class referenced by the |@New| qualifier of an injection point of another bean, and any interceptor or decorator class declared in the |beans.xml| file of any bean deployment archive.</text>
       <note>covered in bb*, bc*, bd*</note>
-    </assertion>
-    
-    <assertion id="ca">
-      <text>If a bean is deployed in an archive or directory that does not contain a file named |beans.xml| in the metadata directory, it will not be discovered by the container.</text>
     </assertion>
     
     <assertion id="d" testable="false">
@@ -6164,7 +6200,8 @@ provider and all superclases and interfaces.</text>
     </assertion>
 
     <group>
-      <text>Next, the container must perform bean discovery, and abort initialization of the application if any definition errors exist, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>Next, the container must perform bean discovery, and abort initialization of the application if any definition errors exist, as defined in Section 12.4, "Problems detected automatically by the container".  Additionally, for every Java EE component class supporting injection that may be instantiated by the container at runtime, the container must create an |InjectionTarget| for the class, as defined in 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type ProcessInjectionTarget, as defined in Section 11.5.6, "ProcessInjectionTarget event".</text>
+      
       <assertion id="da">
          <text>Check beans are discovered</text>
       </assertion>
@@ -6201,7 +6238,7 @@ provider and all superclases and interfaces.</text>
     </assertion>
 
     <group>
-      <text>For each Java class in any bean deployment archive, the container must create an |AnnotatedType| representing the class and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.5, "ProcessAnnotatedType event".</text>
+      <text>For each Java class or interface deployed in a bean deployment archive, the container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.5, "ProcessAnnotatedType event".</text>
       <assertion id="ba">
         <text>Check managed bean</text>  
       </assertion>
@@ -6238,7 +6275,7 @@ provider and all superclases and interfaces.</text>
     </group>
 
     <assertion id="c" testable="false">
-      <text>For each Java class in any bean deployment archive, the container must inspect the class metadata to determine if it is a bean or other Java EE component class supporting injection, or if it declares event mappings.</text>
+      <text>For each Java class in any bean deployment archive, the container must inspect the type metadata to determine if it is a bean or other Java EE component class supporting injection.</text>
       <note>No consequence</note>
     </assertion>
 
@@ -6285,7 +6322,7 @@ provider and all superclases and interfaces.</text>
     </group>
 
     <group>
-      <text>For each Java class in any bean deployment archive, the container must, if the class is a bean, create a |Bean| object that implements the rules defined in Section 7.3.1, "Lifecycle of managed beans", Section 7.3.2, "Lifecycle of stateful session beans" or Section 7.3.3, "Lifecycle of stateless session and singleton beans", and fire an event which is a subtype of |ProcessBean|, as defined in Section 11.5.8, "ProcessBean event".</text>
+      <text>For each Java class in any bean deployment archive, the container must, if the class is an enabled bean, interceptor or decorator, create a |Bean| object that implements the rules defined in Section 7.3.1, "Lifecycle of managed beans", Section 7.3.2, "Lifecycle of stateful session beans" or Section 7.3.3, "Lifecycle of stateless session and singleton beans", and fire an event which is a subtype of |ProcessBean|, as defined in Section 11.5.8, "ProcessBean event".</text>
       <assertion id="fa">
         <text>Check a managed bean</text>
       </assertion>
@@ -6294,12 +6331,8 @@ provider and all superclases and interfaces.</text>
       </assertion>
     </group>
     
-    <assertion id="g">
-      <text>For each session bean declared in |ejb-jar.xml| in each EJB bean deployment archive the container must create a |Bean| object that implements the rules defined in Section 7.3.2, "Lifecycle of stateful session beans" or Section 7.3.3, "Lifecycle of  stateless session and singleton beans", and fire an event of type |ProcessSessionBean|, as defined in Section 11.5.8, "ProcessBean event".</text>
-    </assertion>
-    
     <group>
-      <text>For each bean, the container must search the clas for producer methods and fields, including resources, and for each producer method or field create a |Producer|, as defined in Section 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type |ProcessProducer|, as defined in Section 11.5.7, "ProcessProducer event", and then create a |Bean| object that implements the rules defined in Section 7.3.4, "Lifecycle of  producer methods", Section 7.3.5, "Lifecycle of producer fields" or Section 7.3.6, "Lifecycle of resources", and fire an event which is a subtype of |ProcessBean|, as defined  in Section 11.5.8, "ProcessBean event".</text>
+      <text>For each enabled bean, the container must search the class for producer methods and fields, including resources, and for each producer method or field create a |Producer|, as defined in Section 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type |ProcessProducer|, as defined in Section 11.5.7, "ProcessProducer event", and then if the producer method or field is enabled, create a |Bean| object that implements the rules defined in Section 7.3.4, "Lifecycle of producer methods", Section 7.3.5, "Lifecycle of producer fields" or Section 7.3.6, "Lifecycle of resources", and fire an event which is a subtype of |ProcessBean|, as defined  in Section 11.5.8, "ProcessBean event".</text>
       <assertion id="ha">
         <text>
           Check a producer method
@@ -6314,7 +6347,7 @@ provider and all superclases and interfaces.</text>
     
     
     <assertion id="i">
-      <text>For each bean, the container must search the class for observer methods, and for each observer method create an |ObserverMethod| object, as defined in Section 11.1.3, "The ObserverMethod interface" and fire an event of type |ProcessObserverMethod|, as defined in Section 11.5.9, "ProcessObserverMethod event".</text>
+      <text>For each enabled bean, the container must search the class for observer methods, and for each observer method create an |ObserverMethod| object, as defined in Section 11.1.3, "The ObserverMethod interface" and fire an event of type |ProcessObserverMethod|, as defined in Section 11.5.9, "ProcessObserverMethod event".</text>
     </assertion>
 
     <group>
@@ -6346,32 +6379,25 @@ provider and all superclases and interfaces.</text>
     </assertion>
 
     <assertion id="o">
-      <text>For each observer method of an enabled bean, the container registers an instance of the |ObserverMethod| interface defined in Section 11.1.3, "The ObserverMethod interface".</text>
+      <text>For each observer method of every enabled bean, the container registers an instance of the |ObserverMethod| interface defined in Section 11.1.3, "The ObserverMethod interface".</text>
     </assertion>
   </section>
-
-  <section id="12.4" title="Problems detected automatically by the container">
+  
+  <section id="12.4" title="Integration with Unified EL">
     <assertion id="a">
-      <text>Definition errors may be detected by tooling at development time, and are also detected by the container at initialization time. If a definition error exists in a deployment, initialization will be aborted by the container.</text>
+      <text>The container must provide a Unified EL |ELResolver| to the servlet engine and JSF implementation that resolves bean EL names using the rules of name resolution defined in 5.3, "EL name resolution" and resolving ambiguities according to Section 5.3.1, "Ambiguous EL names".</text>
     </assertion>
-
+    
     <assertion id="b">
-      <text>Deployment problems are detected by the container at initialization time. If a deployment problem exists in a deployment, initialization will be aborted by the container.</text>
+      <text>If a name used in an EL expression resolves to more than one bean, the |ELResolver| must throw an |AmbiguousResolutionException|.</text>
     </assertion>
     
-    <assertion id="d" testable="false">
-      <text>The container is permitted to define a non-portable mode, for use at development time, in which some definition errors and deployment problems do not cause application initialization to abort.</text>
-      <note>Specifies undefined behavior</note>
+    <assertion id="c">
+      <text>If a name used in an EL expression does not resolve to any bean, the |ELResolver| must return a null value.</text>
     </assertion>
     
-    <assertion id="e" testable="false">
-      <text>Exceptions represent problems that may not be detected until they actually occur at runtime. All exceptions defined by this specification are unchecked exceptions.</text>
-      <note>Explanatory note</note>
-    </assertion>
-    
-    <assertion id="f" testable="false">
-      <text>All exceptions defined by this specification may be safely caught and handled by the application.</text>
-      <note>Explanatory note</note>
+    <assertion id="d">
+      <text>Otherwise, if a name used in an EL expression resolves to exactly one bean, the |ELResolver| must return a contextual instance of the bean, as defined in Section 6.5.2, "Contextual instance of a bean".</text>
     </assertion>
   </section>
 
