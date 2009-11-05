@@ -29,17 +29,17 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class SessionBeanInjectionTest extends AbstractJSR299Test
 {
 
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "5.6", id = "a"),
-      @SpecAssertion(section = "5.6.4", id = "aa"),
-      @SpecAssertion(section = "5.6.4", id = "ab"),
-      @SpecAssertion(section = "5.6.4", id = "ba"),
-      @SpecAssertion(section = "5.6.4", id = "be")
+      @SpecAssertion(section = "5.5", id = "a"),
+      @SpecAssertion(section = "5.5.2", id = "aa"),
+      @SpecAssertion(section = "5.5.2", id = "ab"),
+      @SpecAssertion(section = "5.5.2", id = "ba"),
+      @SpecAssertion(section = "5.5.2", id = "be")
    })
    public void testInjectionOnContextualSessionBean()
    {
@@ -48,9 +48,9 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test
 
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "5.6", id = "c"),
-      @SpecAssertion(section = "5.6.4", id = "ak"),
-      @SpecAssertion(section = "5.6.4", id = "al")
+      @SpecAssertion(section = "5.5", id = "c"),
+      @SpecAssertion(section = "5.5.2", id = "ak"),
+      @SpecAssertion(section = "5.5.2", id = "al")
    })
    public void testInjectionOnNonContextualSessionBean()
    {
@@ -59,9 +59,9 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test
 
    //@Test(groups = "jboss-as-broken")
    @SpecAssertions({
-      @SpecAssertion(section = "5.6", id = "ed"),
-      @SpecAssertion(section = "5.6.4", id = "ao"),
-      @SpecAssertion(section = "5.6.4", id = "ap")
+      @SpecAssertion(section = "5.5", id = "ed"),
+      @SpecAssertion(section = "5.5.2", id = "ao"),
+      @SpecAssertion(section = "5.5.2", id = "ap")
    })
    //JBAS-7046
    public void testInjectionOnEJBInterceptor()

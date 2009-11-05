@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Packaging(PackagingType.EAR)
 @ExpectedDeploymentException(DeploymentError.class)
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class EnterpriseBeanWithNonPassivatingBeanConstructorParameterInInterceptorTest extends AbstractJSR299Test
 {   
    @Test(groups = { "contexts", "passivation"})

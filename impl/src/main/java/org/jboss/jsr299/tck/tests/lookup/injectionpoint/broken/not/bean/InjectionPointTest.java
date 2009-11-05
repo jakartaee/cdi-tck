@@ -28,14 +28,14 @@ import org.jboss.testharness.impl.packaging.war.WarArtifactDescriptor;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 @ExpectedDeploymentException(DefinitionError.class)
 @IntegrationTest
 @Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml")
 public class InjectionPointTest extends AbstractJSR299Test
 {
    @Test(groups = "jboss-as-broken")
-   @SpecAssertion(section = "5.6.9", id = "ga")
+   @SpecAssertion(section = "5.5.7", id = "ga")
    //WELDINT-26
    public void testDefinitionErrorDetected() {
       assert false;

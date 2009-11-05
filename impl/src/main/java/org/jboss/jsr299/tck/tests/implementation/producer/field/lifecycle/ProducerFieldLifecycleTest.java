@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ProducerFieldLifecycleTest extends AbstractJSR299Test
 {
    private AnnotationLiteral<Null>   NULL_LITERAL   = new AnnotationLiteral<Null>()   {};
@@ -33,7 +33,7 @@ public class ProducerFieldLifecycleTest extends AbstractJSR299Test
 
    @Test(groups = { "producerField" })
    @SpecAssertions({
-      @SpecAssertion(section = "5.6.7", id = "a"),
+      @SpecAssertion(section = "5.5.5", id = "a"),
       @SpecAssertion(section = "3.4", id = "b")
    })
    public void testProducerStaticFieldBean()
@@ -44,7 +44,7 @@ public class ProducerFieldLifecycleTest extends AbstractJSR299Test
 
    @Test(groups = { "producerField" })
    @SpecAssertions({
-     @SpecAssertion(section = "5.6.7", id = "b"),
+     @SpecAssertion(section = "5.5.5", id = "b"),
      @SpecAssertion(section = "7.3.5", id = "ga")
    })
    public void testProducerFieldBeanCreate() throws Exception

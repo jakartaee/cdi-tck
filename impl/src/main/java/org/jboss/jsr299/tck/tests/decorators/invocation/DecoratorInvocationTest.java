@@ -30,15 +30,15 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class DecoratorInvocationTest extends AbstractJSR299Test
 {
 
    @Test
    @SpecAssertions({
-      @SpecAssertion(section="8.5", id="a"),
-      @SpecAssertion(section="8.5", id="c"),
-      @SpecAssertion(section="8.5", id="b"),
+      @SpecAssertion(section="8.4", id="a"),
+      @SpecAssertion(section="8.4", id="c"),
+      @SpecAssertion(section="8.4", id="b"),
       @SpecAssertion(section="8.1.3", id="d"),
       @SpecAssertion(section="8.1.2", id="f"),
       @SpecAssertion(section="8.1.2", id="b"),
@@ -57,10 +57,10 @@ public class DecoratorInvocationTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section="8.2", id="b"),
-      @SpecAssertion(section="8.5", id="d"),
-      @SpecAssertion(section="8.5", id="e"),
-      @SpecAssertion(section="8.5", id="f"),
-      @SpecAssertion(section="8.4", id="a"),
+      @SpecAssertion(section="8.4", id="d"),
+      @SpecAssertion(section="8.4", id="e"),
+      @SpecAssertion(section="8.4", id="f"),
+      //@SpecAssertion(section="8.4", id="a"),
       @SpecAssertion(section="8.1.3", id="d"),
       @SpecAssertion(section="8.1.2", id="f"),
       @SpecAssertion(section="8.1.2", id="b"),

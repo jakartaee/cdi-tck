@@ -26,12 +26,12 @@ import org.testng.annotations.Test;
 
 @Artifact
 @ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class NormalScopedBeanWithInjectionPoint extends AbstractJSR299Test
 {
 
    @Test(groups = { "injectionPoint"})
-   @SpecAssertion(section = "5.6.9", id = "f")
+   @SpecAssertion(section = "5.5.7", id = "f")
    public void testSessionScopedBeanWithInjectionPoint()
    {
       assert false;

@@ -30,12 +30,12 @@ import org.testng.annotations.Test;
 @Packaging(PackagingType.EAR)
 @IntegrationTest
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class SessionBeanPolicyTest extends AbstractJSR299Test
 {
 
    @Test(groups = { "policy"})
-   @SpecAssertion(section = "5.2.1", id = "eb")
+   @SpecAssertion(section = "5.1.1", id = "eb")
    public void testEnabledPolicyAvailable()
    {
       assert getBeans(EjbInterface.class).size() == 1;

@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 @Packaging(PackagingType.WAR)
 @IntegrationTest
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class InjectionOfResourceTest extends AbstractJSR299Test
 {
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })

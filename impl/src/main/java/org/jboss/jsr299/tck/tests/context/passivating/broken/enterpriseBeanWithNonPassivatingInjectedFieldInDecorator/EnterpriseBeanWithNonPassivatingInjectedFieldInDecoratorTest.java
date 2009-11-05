@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 @Artifact
 @Packaging(PackagingType.EAR)
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 @BeansXml("beans.xml")
 public class EnterpriseBeanWithNonPassivatingInjectedFieldInDecoratorTest extends AbstractJSR299Test
 {   

@@ -40,7 +40,7 @@ import org.testng.annotations.Test;
 @Packaging(PackagingType.EAR)
 @IntegrationTest
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class EjbInjectionTest extends AbstractJSR299Test
 {
    

@@ -26,11 +26,11 @@ import org.testng.annotations.Test;
 
 @Artifact
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class InconsistentSpecializationTest extends AbstractJSR299Test
 {
    @Test
-   @SpecAssertion(section = "5.2.3", id = "a")
+   @SpecAssertion(section = "5.1.3", id = "a")
    public void testInconsistentSpecialization() {
       assert false;
    }

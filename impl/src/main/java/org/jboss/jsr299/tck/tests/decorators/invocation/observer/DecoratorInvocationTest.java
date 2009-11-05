@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class DecoratorInvocationTest extends AbstractJSR299Test
 {
 

@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
 // We put Foo in the ejb jar, but Bar goes in the library
 @Classes({LibraryInEarTest.class, Foo.class})
 @Test
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 @IntegrationTest
 @Packaging(PackagingType.EAR)
 public class LibraryInEarTest extends AbstractJSR299Test

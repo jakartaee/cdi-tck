@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
   @Resource(destination="thunder.jspx", source="thunder.jsf"),
   @Resource(destination="lightening.jspx", source="lightening.jsf")
 })
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class LongRunningConversationPropagatedByFacesContextTest extends AbstractConversationTest
 {
    
