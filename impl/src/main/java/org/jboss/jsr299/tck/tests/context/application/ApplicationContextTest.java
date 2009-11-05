@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
   @Resource(destination=WarArtifactDescriptor.WEB_XML_DESTINATION, source="web.xml"),
   @Resource(destination="SimplePage.html", source="SimplePage.html")
 })
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ApplicationContextTest extends AbstractJSR299Test
 {
 

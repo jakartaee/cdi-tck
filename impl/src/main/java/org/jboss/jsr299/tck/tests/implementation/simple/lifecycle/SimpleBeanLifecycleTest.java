@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class SimpleBeanLifecycleTest extends AbstractJSR299Test
 {
    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>()
@@ -32,8 +32,8 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
 
    @Test(groups = "beanConstruction")
    @SpecAssertions({
-     @SpecAssertion(section = "3.7.2", id = "b"),
-     @SpecAssertion(section = "3.7.2", id = "c"),
+     @SpecAssertion(section = "3.7.1", id = "f"),
+     @SpecAssertion(section = "3.7.1", id = "g"),
      @SpecAssertion(section = "2.3.5", id = "d"),
      @SpecAssertion(section = "5.6.3", id = "a")
    })
@@ -75,7 +75,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
    }      
    
    @Test
-   @SpecAssertion(section = "3.7.2", id = "b")
+   @SpecAssertion(section = "3.7.1", id = "g")
    public void testQualifierTypeAnnotatedConstructor()
    {
       getInstanceByType(Duck.class);
@@ -243,7 +243,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
 
    @Test(groups = "beanLifecycle")
    @SpecAssertions({
-      @SpecAssertion(section = "5.6.5", id = "a")
+      @SpecAssertion(section = "5.5.3", id = "a")
    })
    public void testDependentsDestroyedAfterPreDestroy()
    {

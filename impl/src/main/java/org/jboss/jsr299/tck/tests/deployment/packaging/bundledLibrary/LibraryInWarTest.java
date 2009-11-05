@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
 // We put Foo in the ejb jar, but Bar goes in the library
 @Classes({LibraryInWarTest.class, Foo.class})
 @Test
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 @IntegrationTest
 public class LibraryInWarTest extends AbstractJSR299Test
 {

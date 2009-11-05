@@ -27,12 +27,12 @@ import org.testng.annotations.Test;
 
 @Artifact
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class DuplicateNamePrefixResolutionTest extends AbstractJSR299Test
 {
 
    @Test(groups = { "resolution", "el"})
-   @SpecAssertion(section = "5.4.1", id = "db")
+   @SpecAssertion(section = "5.3.1", id = "db")
    public void testDuplicateBeanNamePrefix()
    {
       assert false;

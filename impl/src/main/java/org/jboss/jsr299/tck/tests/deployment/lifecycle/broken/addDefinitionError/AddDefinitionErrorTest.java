@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 // Must be an integration test as it needs a resource copied to a folder
 @IntegrationTest
 @ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class AddDefinitionErrorTest extends AbstractJSR299Test
 {
    @Test(groups={"jboss-as-broken", "rewrite"})

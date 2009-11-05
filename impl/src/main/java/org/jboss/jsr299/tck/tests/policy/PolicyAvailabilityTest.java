@@ -33,15 +33,15 @@ import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class PolicyAvailabilityTest extends AbstractJSR299Test
 {
 
    @Test(groups = {"policy"})
    @SpecAssertions( { 
-      @SpecAssertion(section = "5.2", id = "b"), 
-      @SpecAssertion(section = "5.2.1", id = "c"),
-      @SpecAssertion(section = "5.2.1", id = "ea"),
+      @SpecAssertion(section = "5.1", id = "b"), 
+      @SpecAssertion(section = "5.1.1", id = "c"),
+      @SpecAssertion(section = "5.1.1", id = "ea"),
       @SpecAssertion(section = "2.6", id = "a"),
       @SpecAssertion(section = "2.6.1", id = "a"),
       @SpecAssertion(section = "12.3", id = "ka")
@@ -73,7 +73,7 @@ public class PolicyAvailabilityTest extends AbstractJSR299Test
 
    @Test(groups = {"policy"})
    @SpecAssertions({
-      @SpecAssertion(section = "5.2.1", id = "g"),
+      @SpecAssertion(section = "5.1.1", id = "g"),
       @SpecAssertion(section = "2.6.1", id = "b"),
       @SpecAssertion(section = "2.7", id = "aa"),
       @SpecAssertion(section = "2.7.1.4", id="a")
@@ -86,7 +86,7 @@ public class PolicyAvailabilityTest extends AbstractJSR299Test
    
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "5.2.1", id = "fa")
+      @SpecAssertion(section = "5.1.1", id = "fa")
       //@SpecAssertion(section = "2.6.1", id = "e") removed from spec
    })
    

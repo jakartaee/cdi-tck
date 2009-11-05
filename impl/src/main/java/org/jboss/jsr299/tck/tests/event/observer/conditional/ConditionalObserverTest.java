@@ -13,13 +13,13 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ConditionalObserverTest extends AbstractJSR299Test
 {
    @Test(groups = { "events" })
    @SpecAssertions( {
-      @SpecAssertion(section = "5.6.8", id = "baa"),
-      @SpecAssertion(section = "10.4.4", id = "a")
+      @SpecAssertion(section = "5.5.6", id = "baa"),
+      @SpecAssertion(section = "10.4.3", id = "a")
    } )
    public void testConditionalObserver()
    {
@@ -40,7 +40,7 @@ public class ConditionalObserverTest extends AbstractJSR299Test
    }
    
    @Test(groups = { "events" })
-   @SpecAssertion(section = "5.6.8", id = "baa")
+   @SpecAssertion(section = "5.5.6", id = "baa")
    public void testObserverMethodInvokedOnReturnedInstanceFromContext()
    {
       RecluseSpider spider = getInstanceByType(RecluseSpider.class);
@@ -51,7 +51,7 @@ public class ConditionalObserverTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "10.4.4", id = "c")
+   @SpecAssertion(section = "10.4.3", id = "c")
    public void testNotifyEnumerationContainsNotifyValues()
    {
       assert Reception.values().length == 2;

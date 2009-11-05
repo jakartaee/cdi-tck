@@ -31,12 +31,12 @@ import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class InterceptorNotResolvedTest extends AbstractJSR299Test
 {
 
    @Test(groups = { "resolution" })
-   @SpecAssertion(section = "5.3", id = "hq")
+   @SpecAssertion(section = "5.2", id = "hq")
    public void testInterceptorNotResolved() 
    {
       Set<Type> types = new HashSet<Type>();
