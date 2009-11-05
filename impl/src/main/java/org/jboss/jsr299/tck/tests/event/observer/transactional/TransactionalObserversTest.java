@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
 @Artifact
 @Packaging(PackagingType.EAR)
 @IntegrationTest
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class TransactionalObserversTest extends AbstractJSR299Test
 {
    private PomeranianInterface dog = null;
@@ -64,7 +64,7 @@ public class TransactionalObserversTest extends AbstractJSR299Test
 //   }
 
    @Test(groups = { "events", "integration" })
-   @SpecAssertion(section = "10.4.5", id = "a")
+   @SpecAssertion(section = "10.4.4", id = "a")
    public void testTransactionalObserverNotifiedImmediatelyWhenNoTransactionInProgress()
    {
       dog.setCorrectContext(false);
@@ -78,7 +78,7 @@ public class TransactionalObserversTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "events", "integration" })
-   @SpecAssertion(section = "10.4.5", id = "c")
+   @SpecAssertion(section = "10.4.4", id = "c")
    public void testAfterTransactionCompletionObserver() throws InterruptedException
    {
       dog.setCorrectContext(false);
@@ -91,7 +91,7 @@ public class TransactionalObserversTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "events", "integration" })
-   @SpecAssertion(section = "10.4.5", id = "d")
+   @SpecAssertion(section = "10.4.4", id = "d")
    public void testAfterTransactionSuccessObserver() throws InterruptedException
    {
       dog.setCorrectContext(false);
@@ -103,7 +103,7 @@ public class TransactionalObserversTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "events", "integration" })
-   @SpecAssertion(section = "10.4.5", id = "e")
+   @SpecAssertion(section = "10.4.4", id = "e")
    public void testAfterTransactionFailureObserver() throws Exception
    {
       dog.setCorrectContext(false);
@@ -126,8 +126,8 @@ public class TransactionalObserversTest extends AbstractJSR299Test
 
    @Test(groups = { "events", "integration" })
    @SpecAssertions( {
-      @SpecAssertion(section = "10.4.5", id = "b"),
-      @SpecAssertion(section = "10.4.5", id = "e") })
+      @SpecAssertion(section = "10.4.4", id = "b"),
+      @SpecAssertion(section = "10.4.4", id = "e") })
    public void testBeforeTransactionCompletionObserver()
    {
       dog.setCorrectContext(false);

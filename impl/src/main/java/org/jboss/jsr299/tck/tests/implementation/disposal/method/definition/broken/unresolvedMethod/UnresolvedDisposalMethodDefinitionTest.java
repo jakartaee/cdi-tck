@@ -12,11 +12,11 @@ import org.testng.annotations.Test;
 @Artifact
 @ExpectedDeploymentException(DefinitionError.class)
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class UnresolvedDisposalMethodDefinitionTest extends AbstractJSR299Test
 {
    @Test
-   @SpecAssertion(section = "3.3.9", id = "ca")
+   @SpecAssertion(section = "3.3.7", id = "ca")
    public void testUnresolvedDisposalMethod()
    {
       assert false;

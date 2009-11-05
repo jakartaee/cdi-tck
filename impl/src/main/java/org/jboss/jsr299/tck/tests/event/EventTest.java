@@ -22,13 +22,13 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class EventTest extends AbstractJSR299Test
 {
    @Test(groups = { "events" })
    @SpecAssertions( {
-      @SpecAssertion(section = "10.4.3", id = "a"),
-      @SpecAssertion(section = "5.6.8", id = "c"),
+      @SpecAssertion(section = "10.4.2", id = "i"),
+      @SpecAssertion(section = "5.5.6", id = "c"),
       @SpecAssertion(section = "2.3.5", id = "ca"),
       @SpecAssertion(section = "3.10", id = "a")
    })
@@ -44,7 +44,7 @@ public class EventTest extends AbstractJSR299Test
    @Test(groups = { "events" })
    @SpecAssertions({
       @SpecAssertion(section = "10.4", id = "c"),
-      @SpecAssertion(section = "5.6.8", id = "a")
+      @SpecAssertion(section = "5.5.6", id = "a")
    })
    public void testStaticObserverMethodInvoked()
    {
@@ -66,7 +66,7 @@ public class EventTest extends AbstractJSR299Test
    @SpecAssertions({
       //@SpecAssertion(section = "4.3.2", id = "d"),
       @SpecAssertion(section="4.3", id="cb"),
-      @SpecAssertion(section = "5.6.8", id = "baa")
+      @SpecAssertion(section = "5.5.6", id = "baa")
    })
    public void testObserverCalledOnMostSpecializedInstance()
    {

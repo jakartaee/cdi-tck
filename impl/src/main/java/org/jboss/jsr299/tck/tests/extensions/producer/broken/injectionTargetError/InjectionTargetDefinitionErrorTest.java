@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 // Must be an integration test as it needs a resource copied to a folder
 @IntegrationTest
 @ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class InjectionTargetDefinitionErrorTest extends AbstractJSR299Test
 {
 

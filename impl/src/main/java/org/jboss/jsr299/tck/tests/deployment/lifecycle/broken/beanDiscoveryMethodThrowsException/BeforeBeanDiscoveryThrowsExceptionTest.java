@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
 })
 @IntegrationTest
 @ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class BeforeBeanDiscoveryThrowsExceptionTest extends AbstractJSR299Test
 {
    

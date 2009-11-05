@@ -32,11 +32,11 @@ import org.testng.annotations.Test;
  * Tests for built-in Instance.
  */
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class BuiltinInstanceTest extends AbstractJSR299Test {
 
 	@Test
-	@SpecAssertion(section = "5.7.2", id = "d")
+	@SpecAssertion(section = "5.6.2", id = "d")
 	public void testScopeOfBuiltinInstance() 
 	{
 		Bean<Instance<Cow>> bean = getBeans(new TypeLiteral<Instance<Cow>>() {}).iterator().next();
@@ -44,7 +44,7 @@ public class BuiltinInstanceTest extends AbstractJSR299Test {
 	}
 	
 	@Test
-	@SpecAssertion(section = "5.7.2", id = "e")
+	@SpecAssertion(section = "5.6.2", id = "e")
 	public void testNameOfBuiltinInstance() 
 	{
 		Bean<Instance<Cow>> bean = getBeans(new TypeLiteral<Instance<Cow>>() {}).iterator().next();
@@ -53,8 +53,8 @@ public class BuiltinInstanceTest extends AbstractJSR299Test {
 	
 	@Test
 	@SpecAssertions({
-	   @SpecAssertion(section = "5.7.2", id = "a"),
-	   @SpecAssertion(section = "5.7.2", id = "f")
+	   @SpecAssertion(section = "5.6.2", id = "a"),
+	   @SpecAssertion(section = "5.6.2", id = "f")
    })
 	public void testInstanceProvidedForEveryLegalBeanType() 
 	{
@@ -65,7 +65,7 @@ public class BuiltinInstanceTest extends AbstractJSR299Test {
 	}
 	
 	@Test(groups = "ri-broken")
-	@SpecAssertion(section = "5.7.2", id = "g")
+	@SpecAssertion(section = "5.6.2", id = "g")
 	public void testInstanceIsPassivationCapable() throws Exception 
 	{
 	   Field field = getInstanceByType(Field.class);
