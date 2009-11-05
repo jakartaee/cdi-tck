@@ -11,12 +11,12 @@ import org.testng.annotations.Test;
 
 @Artifact
 @ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class SpecializesStaticMethodTest extends AbstractJSR299Test
 {
    
    @Test
-   @SpecAssertion(section="3.3.4", id = "ba")
+   @SpecAssertion(section="3.3.3", id = "ba")
    public void testSpecializedStaticMethod()
    {
       assert false;

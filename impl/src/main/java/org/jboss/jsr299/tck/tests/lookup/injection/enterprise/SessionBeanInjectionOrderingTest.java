@@ -28,12 +28,12 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec = "cdi", version = "20091018")
+@SpecVersion(spec = "cdi", version = "20091101")
 public class SessionBeanInjectionOrderingTest extends AbstractJSR299Test
 {
 
    @Test
-   @SpecAssertion(section = "5.6.4", id = "bb")
+   @SpecAssertion(section = "5.5.2", id = "bb")
    public void testInitializerCalledAfterFieldInjectionOfSuperclass()
    {
       MegaPoorHenHouseLocal house = getInstanceByType(MegaPoorHenHouseLocal.class);
@@ -41,14 +41,14 @@ public class SessionBeanInjectionOrderingTest extends AbstractJSR299Test
    }
 
    @Test(groups="ri-broken")
-   @SpecAssertion(section = "5.6.4", id = "bf")
+   @SpecAssertion(section = "5.5.2", id = "bf")
    public void testPostConstructCalledAfterInitializerOfSuperclass()
    {
       assert getInstanceByType(MegaPoorHenHouseLocal.class).isPostConstructCalledAfterSuperclassInitializer();
    }
 
    @Test(groups="ri-broken")
-   @SpecAssertion(section = "5.6.4", id = "bc")
+   @SpecAssertion(section = "5.5.2", id = "bc")
    public void testInitializerCalledAfterResourceInjection()
    {
       assert getInstanceByType(InjectedSessionBeanLocal.class).isInitializerCalledAfterResourceInjection();

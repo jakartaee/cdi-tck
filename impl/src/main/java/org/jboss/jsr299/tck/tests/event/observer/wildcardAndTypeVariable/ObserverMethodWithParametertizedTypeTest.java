@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  */
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ObserverMethodWithParametertizedTypeTest extends AbstractJSR299Test
 {
    @Test(groups = { "events"})

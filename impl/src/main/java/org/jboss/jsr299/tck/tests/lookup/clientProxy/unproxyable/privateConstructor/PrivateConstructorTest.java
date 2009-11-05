@@ -30,11 +30,11 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class PrivateConstructorTest extends AbstractJSR299Test
 {
    @Test
-   @SpecAssertion(section = "5.5.1", id = "aa")
+   @SpecAssertion(section = "5.4.1", id = "aa")
    public void testClassWithPrivateConstructor()
    {
       assert false;

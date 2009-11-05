@@ -46,7 +46,7 @@ import org.testng.annotations.Test;
    @Resource(source = "javax.enterprise.inject.spi.Extension", destination = "META-INF/services/javax.enterprise.inject.spi.Extension"),
    @Resource(source = "ejb-jar.xml", destination = "META-INF/ejb-jar.xml")})
 @IntegrationTest
-@SpecVersion(spec = "cdi", version = "20091018")
+@SpecVersion(spec = "cdi", version = "20091101")
 @Packaging(PackagingType.EAR)
 public class ContainerEventTest extends AbstractJSR299Test
 {

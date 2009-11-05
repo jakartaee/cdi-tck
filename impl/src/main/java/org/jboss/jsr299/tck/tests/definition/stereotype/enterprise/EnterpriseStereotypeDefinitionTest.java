@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @IntegrationTest
 @Artifact
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class EnterpriseStereotypeDefinitionTest extends AbstractJSR299Test
 {
    @Test

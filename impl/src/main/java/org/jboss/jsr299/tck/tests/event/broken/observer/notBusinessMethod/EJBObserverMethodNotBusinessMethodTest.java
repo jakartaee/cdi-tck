@@ -36,11 +36,12 @@ import org.testng.annotations.Test;
 @Artifact
 @Packaging(PackagingType.EAR)
 @ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class EJBObserverMethodNotBusinessMethodTest extends AbstractJSR299Test
 {
    @Test(groups = { "events" })
-   @SpecAssertions( { @SpecAssertion(section = "10.4", id = "d"), 
+   @SpecAssertions( { 
+      @SpecAssertion(section = "10.4", id = "d"), 
 	   @SpecAssertion(section = "10.4.2", id = "g") })
    public void testObserverMethodOnEnterpriseBeanNotBusinessMethodOrStaticFails()
    {

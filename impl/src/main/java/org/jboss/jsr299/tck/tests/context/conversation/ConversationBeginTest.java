@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
  * @author Nicklas Karlsson
  */
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ConversationBeginTest extends AbstractJSR299Test
 {
    

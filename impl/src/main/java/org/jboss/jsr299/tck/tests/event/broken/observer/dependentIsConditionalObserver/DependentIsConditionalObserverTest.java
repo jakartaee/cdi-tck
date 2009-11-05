@@ -10,12 +10,12 @@ import org.testng.annotations.Test;
 
 @Artifact
 @ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class DependentIsConditionalObserverTest extends AbstractJSR299Test
 {
    // WBRI-315
    @Test(groups = { "events" })
-   @SpecAssertion(section = "10.4.4", id = "b")
+   @SpecAssertion(section = "10.4.3", id = "b")
    public void testDependentBeanWithConditionalObserverMethodIsDefinitionError()
    {
       assert false;

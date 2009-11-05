@@ -16,13 +16,13 @@ import org.testng.annotations.Test;
 @ExpectedDeploymentException(DefinitionError.class)
 @IntegrationTest
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class DisposalMethodOnSessionBean extends AbstractJSR299Test
 {
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "3.3.5", id = "d"),
-      @SpecAssertion(section = "3.3.7", id = "fa")
+      @SpecAssertion(section = "3.3.4", id = "d"),
+      @SpecAssertion(section = "3.3.6", id = "fa")
    })
    public void testDisposalMethodNotBusinessOrStatic()
    {

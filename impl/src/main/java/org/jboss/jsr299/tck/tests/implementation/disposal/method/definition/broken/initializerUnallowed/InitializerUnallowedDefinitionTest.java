@@ -13,11 +13,11 @@ import org.testng.annotations.Test;
 @Artifact
 @ExpectedDeploymentException(DefinitionError.class)
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class InitializerUnallowedDefinitionTest extends AbstractJSR299Test
 {
    @Test
-   @SpecAssertion(section = "3.3.7", id = "da")
+   @SpecAssertion(section = "3.3.6", id = "da")
    public void testInitializerUnallowed()
    {
       assert false;

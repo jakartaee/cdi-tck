@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
   @Resource(destination="clouds.jspx", source="clouds.jsf"),
   @Resource(destination="/WEB-INF/faces-config.xml", source="faces-config.xml")
 })
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ManualCidPropagationTest extends AbstractConversationTest
 {
    

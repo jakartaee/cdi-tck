@@ -9,7 +9,7 @@ import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 @BeansXml("beans.xml")
 public class MultipleInterceptorBindingsTest extends AbstractJSR299Test
 {
