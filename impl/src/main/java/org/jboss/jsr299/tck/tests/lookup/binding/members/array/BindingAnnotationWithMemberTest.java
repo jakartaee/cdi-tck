@@ -26,12 +26,12 @@ import org.testng.annotations.Test;
 
 @Artifact
 @ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class BindingAnnotationWithMemberTest extends AbstractJSR299Test
 {
 
    @Test
-   @SpecAssertion(section = "5.3.5", id = "b")
+   @SpecAssertion(section = "5.2.5", id = "b")
    public void testArrayMemberWithoutNonBinding()
    {
       assert false;

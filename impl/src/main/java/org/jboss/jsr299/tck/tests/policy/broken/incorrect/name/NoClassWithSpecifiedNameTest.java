@@ -28,12 +28,12 @@ import org.testng.annotations.Test;
 @Artifact
 @BeansXml("beans.xml")
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class NoClassWithSpecifiedNameTest extends AbstractJSR299Test
 {
 
    @Test(groups = { "policy" })
-   @SpecAssertion(section="5.2.1", id="h")
+   @SpecAssertion(section="5.1.1", id="h")
    public void test()
    {
       assert false;

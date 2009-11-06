@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class DisposalMethodDefinitionTest extends AbstractJSR299Test
 {
    private static final Annotation DEADLIEST_LITERAL = new AnnotationLiteral<Deadliest>() {};
@@ -24,14 +24,14 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "2.3.5", id = "c"),
-      @SpecAssertion(section = "3.3.5", id = "b"),
-      @SpecAssertion(section = "3.3.5", id = "c"),
-      @SpecAssertion(section = "3.3.5", id = "e"),
-      @SpecAssertion(section = "3.3.6", id = "ba"),
-      @SpecAssertion(section = "3.3.7", id = "a"),
-      @SpecAssertion(section = "3.3.7", id = "b0"),
-      @SpecAssertion(section = "3.3.9", id = "aa"),
-      @SpecAssertion(section = "5.6.6", id = "b")
+      @SpecAssertion(section = "3.3.4", id = "b"),
+      @SpecAssertion(section = "3.3.4", id = "c"),
+      @SpecAssertion(section = "3.3.4", id = "e"),
+      @SpecAssertion(section = "3.3.5", id = "ba"),
+      @SpecAssertion(section = "3.3.6", id = "a"),
+      @SpecAssertion(section = "3.3.6", id = "b0"),
+      @SpecAssertion(section = "3.3.7", id = "aa"),
+      @SpecAssertion(section = "5.5.4", id = "b")
    })
    public void testBindingTypesAppliedToDisposalMethodParameters() throws Exception
    {
@@ -47,8 +47,8 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test
 
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "3.3.5", id = "aa"),
-      @SpecAssertion(section = "3.3.6", id = "ba")
+      @SpecAssertion(section = "3.3.4", id = "aa"),
+      @SpecAssertion(section = "3.3.5", id = "ba")
    })
    public void testDisposalMethodOnNonBean() throws Exception
    {
@@ -69,7 +69,7 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test
     */
    @Test(groups = { "disposalMethod" })
    @SpecAssertions({
-      @SpecAssertion(section = "3.3.8", id = "a"),
+      @SpecAssertion(section = "3.3.6", id = "h"),
       @SpecAssertion(section = "3.10", id = "a")
    })
    public void testDisposalMethodParametersGetInjected() throws Exception

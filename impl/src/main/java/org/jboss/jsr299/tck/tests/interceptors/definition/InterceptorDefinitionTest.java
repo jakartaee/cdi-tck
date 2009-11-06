@@ -47,7 +47,7 @@ import org.testng.annotations.Test;
  * @author Marius Bogoevici
  */
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 @BeansXml("beans.xml")
 public class InterceptorDefinitionTest extends AbstractJSR299Test
 {

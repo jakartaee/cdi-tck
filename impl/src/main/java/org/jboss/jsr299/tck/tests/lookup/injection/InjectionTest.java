@@ -10,11 +10,11 @@ import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class InjectionTest extends AbstractJSR299Test
 {
    @Test(groups = { "injection", "producerMethod" })
-   @SpecAssertion(section = "5.3.4", id = "aa")
+   @SpecAssertion(section = "5.2.4", id = "aa")
    public void testInjectionPerformsBoxingIfNecessary() throws Exception
    {
       assert getBeans(SpiderNest.class).size() == 1;
@@ -25,9 +25,9 @@ public class InjectionTest extends AbstractJSR299Test
    
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "5.3", id = "kc"),
-      @SpecAssertion(section = "5.6", id = "b"),
-      @SpecAssertion(section = "5.6.4", id = "ac")
+      @SpecAssertion(section = "5.2", id = "kc"),
+      @SpecAssertion(section = "5.5", id = "b"),
+      @SpecAssertion(section = "5.5.2", id = "ac")
    })
    public void testInjectionOfNamedBean()
    {

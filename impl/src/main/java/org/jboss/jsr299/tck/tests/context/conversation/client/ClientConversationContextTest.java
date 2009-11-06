@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
   @Resource(destination="/WEB-INF/faces-config.xml", source="faces-config.xml"),
   @Resource(destination="rain.jspx", source="rain.jsf")
 })
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ClientConversationContextTest extends AbstractConversationTest
 {
    

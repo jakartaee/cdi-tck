@@ -31,13 +31,13 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299Test
 {
 
    @Test(groups = { "resolution" })
    @SpecAssertions({
-      @SpecAssertion(section = "5.3.3", id = "a"),
+      @SpecAssertion(section = "5.2.3", id = "a"),
       @SpecAssertion(section = "2.2.1", id = "f"),
       @SpecAssertion(section = "2.2.1", id = "g")
    })
@@ -48,7 +48,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
    }
 
    @Test(groups= {"resolution"})
-   @SpecAssertion(section = "5.3.3", id = "b")
+   @SpecAssertion(section = "5.2.3", id = "b")
    public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithActualTypes()
    {
       assert getBeans(new TypeLiteral<Map<Integer, Integer>>(){}).size() == 2;
@@ -57,7 +57,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
 
    @Test(groups = { "resolution"})
    @SpecAssertions({
-      @SpecAssertion(section = "5.3.3", id = "c")})
+      @SpecAssertion(section = "5.2.3", id = "c")})
    public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcards()
    {
       assert getBeans(new TypeLiteral<HashMap<? extends Number, ? super Integer>>() {}).size() == 1;
@@ -66,7 +66,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
    
    @Test(groups = { "resolution"})
    @SpecAssertions({
-      @SpecAssertion(section = "5.3.2", id = "b")
+      @SpecAssertion(section = "5.2.2", id = "b")
    })
    public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcardsAtInjectionPoint()
    {
@@ -74,7 +74,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
    }
 
    @Test(groups = { "resolution" })
-   @SpecAssertion(section = "5.3.3", id = "d")
+   @SpecAssertion(section = "5.2.3", id = "d")
    public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards()
    {
       Set<Bean<Result<? extends Throwable, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Throwable, ? super Exception>>(){});
@@ -83,7 +83,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
    }
 
    @Test(groups = { "resolution" })
-   @SpecAssertion(section = "5.3.3", id = "e")
+   @SpecAssertion(section = "5.2.3", id = "e")
    public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithActualTypes()
    {
       Set<Bean<Result<Exception, Exception>>> beans = getBeans(new TypeLiteral<Result<Exception, Exception>>(){});
@@ -92,7 +92,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
    }
 
    @Test(groups = { "resolution" })
-   @SpecAssertion(section = "5.3.3", id = "f")
+   @SpecAssertion(section = "5.2.3", id = "f")
    public <T1 extends Exception, T2 extends Exception> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable()
    {
       Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>(){});

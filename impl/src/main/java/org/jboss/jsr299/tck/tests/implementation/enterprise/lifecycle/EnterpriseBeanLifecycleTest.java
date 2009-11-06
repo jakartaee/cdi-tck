@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
 @Artifact
 @Packaging(PackagingType.EAR)
 @IntegrationTest
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
 {
 
@@ -44,7 +44,6 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
    @SpecAssertions( {
       @SpecAssertion(section = "7.3.2", id = "aa"),
       @SpecAssertion(section = "7.3.2", id = "bb"),
-      //@SpecAssertion(section = "7.3.3", id = "b"),
       @SpecAssertion(section = "6.5.3", id = "b"),
       @SpecAssertion(section = "12.1", id="bba")
    })
@@ -148,7 +147,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "enterpriseBeans", "lifecycle", "integration" })
-   @SpecAssertion(section = "3.9.2", id = "b")
+   @SpecAssertion(section = "3.9.1", id = "f")
    public void testInitializerMethodsCalledWithCurrentParameterValues()
    {
       AlteStadt alteStadt = getInstanceByType(AlteStadt.class);
@@ -157,7 +156,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "enterpriseBeans", "lifecycle" })
-   @SpecAssertion(section = "5.6.5", id = "a")
+   @SpecAssertion(section = "5.5.3", id = "a")
    public void testDependentObjectsDestroyed()
    {
       Bean<UniStadt> uniStadtBean = getBeans(UniStadt.class).iterator().next();

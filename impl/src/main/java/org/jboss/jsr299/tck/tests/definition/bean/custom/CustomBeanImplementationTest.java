@@ -27,7 +27,7 @@ import org.jboss.testharness.impl.packaging.Resources;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 @Resources({
    @Resource(source="javax.enterprise.inject.spi.Extension", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
 })
@@ -37,8 +37,8 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
 
    @Test
    @SpecAssertions({ 
-      @SpecAssertion(section = "5.1", id = "b"), 
-      @SpecAssertion(section = "5.2.1", id = "k") 
+      //@SpecAssertion(section = "5.1", id = "b"), 
+      @SpecAssertion(section = "5.1.1", id = "k") 
    })
    public void testGetBeanClassCalled()
    {
@@ -46,7 +46,7 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "ri-broken" })
-   @SpecAssertion(section = "5.2.1", id = "k")
+   @SpecAssertion(section = "5.1.1", id = "k")
    // WBRI-328
    public void testGetStereotypesCalled()
    {
@@ -54,35 +54,35 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
    }
 
    @Test
-   @SpecAssertion(section = "5.2.1", id = "k")
+   @SpecAssertion(section = "5.1.1", id = "k")
    public void testIsPolicyCalled()
    {
       assert CatBean.bean.isPolicyCalled();
    }
 
    @Test
-   @SpecAssertion(section = "5.3", id = "na")
+   @SpecAssertion(section = "5.2", id = "na")
    public void testGetTypesCalled()
    {
       assert CatBean.bean.isGetTypesCalled();
    }
 
    @Test
-   @SpecAssertion(section = "5.3", id = "nb")
+   @SpecAssertion(section = "5.2", id = "nb")
    public void testGetBindingsCalled()
    {
       assert CatBean.bean.isGetBindingsCalled();
    }
 
    @Test
-   @SpecAssertion(section = "5.3.1", id = "b")
+   @SpecAssertion(section = "5.2.1", id = "b")
    public void testGetInjectionPointsCalled()
    {
       assert CatBean.bean.isGetInjectionPointsCalled();
    }
 
    @Test(groups = { "ri-broken" })
-   @SpecAssertion(section = "5.3.4", id = "ba")
+   @SpecAssertion(section = "5.2.4", id = "ba")
    // WBRI-328
    public void testIsNullableCalled()
    {
@@ -90,7 +90,7 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
    }
 
    @Test
-   @SpecAssertion(section = "5.4", id = "e")
+   @SpecAssertion(section = "5.3", id = "e")
    public void testGetNameCalled()
    {
       assert CatBean.bean.isGetNameCalled();

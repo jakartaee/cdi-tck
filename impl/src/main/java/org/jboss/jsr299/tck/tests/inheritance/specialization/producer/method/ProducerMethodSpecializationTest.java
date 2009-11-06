@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ProducerMethodSpecializationTest extends AbstractJSR299Test
 {
    
@@ -25,8 +25,8 @@ public class ProducerMethodSpecializationTest extends AbstractJSR299Test
 
    @Test
    @SpecAssertions({
-     @SpecAssertion(section = "5.6.6", id = "c"),
-     @SpecAssertion(section = "3.3.4", id = "aa")
+     @SpecAssertion(section = "5.5.4", id = "c"),
+     @SpecAssertion(section = "3.3.3", id = "aa")
    })
    public void testSpecializingBeanHasBindingsOfSpecializedAndSpecializingBean()
    {

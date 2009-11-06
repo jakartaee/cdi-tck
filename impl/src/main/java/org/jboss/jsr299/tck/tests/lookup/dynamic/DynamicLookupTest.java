@@ -40,12 +40,12 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  */
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class DynamicLookupTest extends AbstractJSR299Test
 {
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "5.7", id ="aa")
+      @SpecAssertion(section = "5.6", id ="aa")
    })
    public void testObtainsInjectsInstanceOfInstance()
    {
@@ -54,7 +54,7 @@ public class DynamicLookupTest extends AbstractJSR299Test
    }
    
    @Test(expectedExceptions = IllegalArgumentException.class)
-   @SpecAssertion(section = "5.7.1", id ="da")
+   @SpecAssertion(section = "5.6.1", id ="da")
    public void testDuplicateBindingsThrowsException()
    {
       ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
@@ -62,7 +62,7 @@ public class DynamicLookupTest extends AbstractJSR299Test
    }      
    
    @Test(expectedExceptions = IllegalArgumentException.class)
-   @SpecAssertion(section = "5.7.1", id = "e")
+   @SpecAssertion(section = "5.6.1", id = "e")
    public void testNonBindingThrowsException()
    {
       ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
@@ -71,12 +71,12 @@ public class DynamicLookupTest extends AbstractJSR299Test
    
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "5.7", id="ba"),
-      @SpecAssertion(section = "5.7", id ="ca"),
-      @SpecAssertion(section = "5.7.1", id ="aa"),
-      @SpecAssertion(section = "5.7.1", id ="ab"),
-      @SpecAssertion(section = "5.7.1", id="fa"),
-      @SpecAssertion(section = "5.7.1", id="fc")
+      @SpecAssertion(section = "5.6", id="ba"),
+      @SpecAssertion(section = "5.6", id ="ca"),
+      @SpecAssertion(section = "5.6.1", id ="aa"),
+      @SpecAssertion(section = "5.6.1", id ="ab"),
+      @SpecAssertion(section = "5.6.1", id="fa"),
+      @SpecAssertion(section = "5.6.1", id="fc")
    })
    public void testGetMethod() {
       // initial setup of contextual instance
@@ -88,14 +88,14 @@ public class DynamicLookupTest extends AbstractJSR299Test
    }
    
    @Test(expectedExceptions = UnsatisfiedResolutionException.class)
-   @SpecAssertion(section = "5.7.1", id = "fba")
+   @SpecAssertion(section = "5.6.1", id = "fba")
    public void testUnsatisfiedDependencyThrowsException()
    {
       getInstanceByType(ObtainsInstanceBean.class).getPaymentProcessor().select(RemotePaymentProcessor.class).get();
    }
    
    @Test(expectedExceptions = AmbiguousResolutionException.class)
-   @SpecAssertion(section = "5.7.1", id = "fbb")
+   @SpecAssertion(section = "5.6.1", id = "fbb")
    public void testAmbiguousDependencyThrowsException()
    {
       getInstanceByType(ObtainsInstanceBean.class).getAnyPaymentProcessor().get();      
@@ -103,10 +103,10 @@ public class DynamicLookupTest extends AbstractJSR299Test
    
    @Test
    @SpecAssertions({
-      @SpecAssertion(section="5.7.1", id="aa"),
-      @SpecAssertion(section="5.7.1", id="ba"),
-      @SpecAssertion(section="5.7.1", id="ja"),
-      @SpecAssertion(section="5.7.1", id="ka")
+      @SpecAssertion(section="5.6.1", id="aa"),
+      @SpecAssertion(section="5.6.1", id="ba"),
+      @SpecAssertion(section="5.6.1", id="ja"),
+      @SpecAssertion(section="5.6.1", id="ka")
    })
    public void testIteratorMethod()
    {
@@ -157,7 +157,7 @@ public class DynamicLookupTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "5.7.1", id = "l")
+   @SpecAssertion(section = "5.6.1", id = "l")
    public void testIsUnsatisfied()
    {
       ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
@@ -167,8 +167,8 @@ public class DynamicLookupTest extends AbstractJSR299Test
    
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "5.7", id = "da"),
-      @SpecAssertion(section = "5.7.1", id = "m")
+      @SpecAssertion(section = "5.6", id = "da"),
+      @SpecAssertion(section = "5.6.1", id = "m")
    })
    public void testIsAmbiguous()
    {

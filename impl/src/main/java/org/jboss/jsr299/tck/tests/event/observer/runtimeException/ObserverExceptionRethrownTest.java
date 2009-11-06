@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  */
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ObserverExceptionRethrownTest extends AbstractJSR299Test
 {
    @Test(groups = { "events" }, expectedExceptions = { TeaCupPomeranian.OversizedException.class })

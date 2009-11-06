@@ -30,13 +30,13 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ArrayTest extends AbstractJSR299Test
 {
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "5.5.1", id = "da"),
-      @SpecAssertion(section = "12.4", id = "b")
+      @SpecAssertion(section = "5.4.1", id = "da"),
+      @SpecAssertion(section = "2.8", id = "b")
    })
    public void testInjectionPointWithArrayType()
    {

@@ -11,12 +11,12 @@ import org.testng.annotations.Test;
 
 @Artifact
 @ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class IndirectOverrideTest extends AbstractJSR299Test
 {
    
    @Test
-   @SpecAssertion(section="3.3.4", id = "ca")
+   @SpecAssertion(section="3.3.3", id = "ca")
    public void testSpecializedMethodIndirectlyOverridesAnotherProducerMethod()
    {
       assert false;

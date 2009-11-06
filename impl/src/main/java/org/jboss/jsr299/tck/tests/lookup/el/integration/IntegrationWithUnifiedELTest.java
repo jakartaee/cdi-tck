@@ -35,11 +35,11 @@ import com.gargoylesoftware.htmlunit.WebClient;
    @Resource(destination = "WEB-INF/faces-config.xml", source = "faces-config.xml"), 
    @Resource(destination = "JSFTestPage.jsp", source = "JSFTestPage.jsp"),
    @Resource(destination = "JSPTestPage.jsp", source = "JSPTestPage.jsp")})
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class IntegrationWithUnifiedELTest extends AbstractJSR299Test
 {
    @Test(groups = {"el" } )
-   @SpecAssertion(section = "5.8", id = "aba")
+   @SpecAssertion(section = "12.4", id = "a")
    public void testELResolverRegisteredWithJsf() throws Exception
    {
       WebClient webclient = new WebClient();
@@ -48,7 +48,7 @@ public class IntegrationWithUnifiedELTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "el" } )
-   @SpecAssertion(section = "5.8", id = "aaa")
+   @SpecAssertion(section = "12.4", id = "a")
    public void testELResolverRegisteredWithServletContainer() throws Exception
    {
       WebClient webclient = new WebClient();

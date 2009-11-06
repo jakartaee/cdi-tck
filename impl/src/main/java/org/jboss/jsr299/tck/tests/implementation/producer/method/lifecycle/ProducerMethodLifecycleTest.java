@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ProducerMethodLifecycleTest extends AbstractJSR299Test
 {
    private AnnotationLiteral<Pet> PET_LITERAL = new AnnotationLiteral<Pet>() {};
@@ -73,8 +73,7 @@ public class ProducerMethodLifecycleTest extends AbstractJSR299Test
 
    @Test(groups = { "producerMethod" })
    @SpecAssertions({
-      //@SpecAssertion(section = "4.3.2", id = "ab"), removed from spec
-      @SpecAssertion(section = "5.6.6", id = "c"),
+      @SpecAssertion(section = "5.5.4", id = "c"),
       @SpecAssertion(section="4.3", id="cb")
    })
    public void testProducerMethodFromMostSpecializedBeanUsed()

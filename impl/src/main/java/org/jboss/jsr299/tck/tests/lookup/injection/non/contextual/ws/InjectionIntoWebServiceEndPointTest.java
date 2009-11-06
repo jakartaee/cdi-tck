@@ -31,7 +31,7 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest(runLocally = true)
 @Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
 {
    @WebServiceRef(wsdlLocation = "http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl")
@@ -39,9 +39,9 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
 
    @Test(groups = "jboss-as-broken")
    @SpecAssertions({
-      @SpecAssertion(section = "5.6", id = "ee"),
-      @SpecAssertion(section = "5.6.4", id = "aq"),
-      @SpecAssertion(section = "5.6.4", id = "ar")
+      @SpecAssertion(section = "5.5", id = "ee"),
+      @SpecAssertion(section = "5.5.2", id = "aq"),
+      @SpecAssertion(section = "5.5.2", id = "ar")
    })
    // JBAS-7046
    public void testInjectionIntoWebServiceEndpoint() throws Exception

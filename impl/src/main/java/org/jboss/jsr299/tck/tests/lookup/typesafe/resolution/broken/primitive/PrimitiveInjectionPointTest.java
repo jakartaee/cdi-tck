@@ -26,11 +26,11 @@ import org.testng.annotations.Test;
 
 @Artifact
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class PrimitiveInjectionPointTest extends AbstractJSR299Test
 {
    @Test(groups={"resolution", "producerMethod"})
-   @SpecAssertion(section="5.3.4", id="aa")
+   @SpecAssertion(section="5.2.4", id="aa")
    public void testPrimitiveInjectionPointResolvedToNonPrimitiveProducerMethod() {
       assert false;
    }

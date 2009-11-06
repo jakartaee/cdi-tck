@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 @ExpectedDeploymentException(DefinitionError.class)
 @Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
 @IntegrationTest
-@SpecVersion(spec = "cdi", version = "20091018")
+@SpecVersion(spec = "cdi", version = "20091101")
 public class AddDefinitionErrorTest extends AbstractJSR299Test
 {
    @Test(groups = "jboss-as-broken")

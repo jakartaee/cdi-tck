@@ -28,7 +28,7 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ResolutionByNameTest extends AbstractJSR299Test
 {
    
@@ -52,14 +52,14 @@ public class ResolutionByNameTest extends AbstractJSR299Test
    }
    
    @Test(groups={"el"})
-   @SpecAssertion(section="5.8", id="bb")
+   @SpecAssertion(section="12.4", id="c")
    public void testUnresolvedNameReturnsNull() {
       assert getCurrentManager().getELResolver().getValue(getCurrentConfiguration().getEl().createELContext(), null, "nonExistingTuna") == null;
    }
 
    @Test(groups = "el")
    @SpecAssertions({
-      @SpecAssertion(section="5.8", id="bc"),
+      @SpecAssertion(section="12.4", id="d"),
       @SpecAssertion(section="2.5", id="a")
    })
    public void testELResolverReturnsContextualInstance() {

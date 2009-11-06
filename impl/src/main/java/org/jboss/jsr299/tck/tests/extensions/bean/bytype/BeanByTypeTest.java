@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
  *
  */
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class BeanByTypeTest extends AbstractJSR299Test
 {
    @Test

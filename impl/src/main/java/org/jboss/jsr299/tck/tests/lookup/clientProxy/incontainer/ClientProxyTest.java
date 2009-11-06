@@ -30,11 +30,11 @@ import com.gargoylesoftware.htmlunit.WebClient;
 @Artifact
 @IntegrationTest(runLocally = true)
 @Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ClientProxyTest extends AbstractJSR299Test
 {
    @Test
-   @SpecAssertion(section = "5.5", id = "d")
+   @SpecAssertion(section = "5.4", id = "d")
    public void testInvocationIsProcessedOnCurrentInstance() throws Exception {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);

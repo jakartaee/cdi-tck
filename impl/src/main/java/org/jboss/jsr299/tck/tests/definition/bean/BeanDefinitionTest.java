@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
  * @author Pete Muir
  */
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class BeanDefinitionTest extends AbstractJSR299Test
 {
    
@@ -64,7 +64,7 @@ public class BeanDefinitionTest extends AbstractJSR299Test
    @Test(groups = "producerMethod")
    @SpecAssertions({
       @SpecAssertion(section = "2.2.1", id = "j"),
-      @SpecAssertion(section = "5.3.4", id = "ba"),
+      @SpecAssertion(section = "5.2.4", id = "ba"),
       @SpecAssertion(section = "11.1", id = "bd")
    })
    public void testIsNullable() throws Exception

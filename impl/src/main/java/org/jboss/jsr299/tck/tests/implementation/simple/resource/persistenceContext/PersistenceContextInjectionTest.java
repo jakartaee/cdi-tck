@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 @Resource(source = "persistence.xml", destination = "WEB-INF/classes/META-INF/persistence.xml")
 //@PersistenceXml("persistence.xml")
 @BeansXml("beans.xml")
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class PersistenceContextInjectionTest extends AbstractJSR299Test
 {
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })

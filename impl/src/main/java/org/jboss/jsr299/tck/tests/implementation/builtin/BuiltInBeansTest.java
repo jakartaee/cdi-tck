@@ -27,7 +27,7 @@ import org.testng.annotations.Test;
 @Artifact
 @Packaging(PackagingType.EAR)
 @IntegrationTest
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class BuiltInBeansTest extends AbstractJSR299Test
 {
 

@@ -29,11 +29,11 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ClientProxyTest extends AbstractJSR299Test
 {
    @Test
-   @SpecAssertion(section = "5.5", id = "b")
+   @SpecAssertion(section = "5.4", id = "b")
    public void testClientProxyUsedForNormalScope()
    {
       Tuna tuna = getInstanceByType(Tuna.class);
@@ -41,7 +41,7 @@ public class ClientProxyTest extends AbstractJSR299Test
    }
 
    @Test
-   @SpecAssertion(section = "5.5", id = "c")
+   @SpecAssertion(section = "5.4", id = "c")
    public void testSimpleBeanClientProxyIsSerializable() throws IOException, ClassNotFoundException
    {
       TunedTuna tuna = getInstanceByType(TunedTuna.class);
@@ -53,7 +53,7 @@ public class ClientProxyTest extends AbstractJSR299Test
    }
 
    @Test
-   @SpecAssertion(section = "5.5.2", id = "aa")
+   @SpecAssertion(section = "5.4.2", id = "aa")
    public void testClientProxyInvocation()
    {
       Bean<TunedTuna> tunaBean = getBeans(TunedTuna.class).iterator().next();
@@ -64,7 +64,7 @@ public class ClientProxyTest extends AbstractJSR299Test
    }
    @Test(expectedExceptions = { ContextNotActiveException.class, IllegalStateException.class })
    @SpecAssertions({
-      @SpecAssertion(section="5.5.2", id="ab"),
+      @SpecAssertion(section="5.4.2", id="ab"),
       @SpecAssertion(section = "6.5.4", id="a")
    })
    public void testInactiveScope() throws Exception
@@ -84,7 +84,7 @@ public class ClientProxyTest extends AbstractJSR299Test
    }
    
    @Test(groups = "ri-broken")
-   @SpecAssertion(section = "5.5", id = "d")
+   @SpecAssertion(section = "5.4", id = "d")
    //WELD-229
    public void testInvocationIsProcessedOnCurrentInstance() {
       // create new car

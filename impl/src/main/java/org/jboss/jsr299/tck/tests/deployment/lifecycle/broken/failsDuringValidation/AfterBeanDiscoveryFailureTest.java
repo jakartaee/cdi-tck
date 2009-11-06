@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @ExpectedDeploymentException(DeploymentError.class)
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class AfterBeanDiscoveryFailureTest extends AbstractJSR299Test
 {
    

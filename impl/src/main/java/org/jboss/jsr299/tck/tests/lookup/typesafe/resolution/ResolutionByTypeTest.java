@@ -37,7 +37,7 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="20091018")
+@SpecVersion(spec="cdi", version="20091101")
 public class ResolutionByTypeTest extends AbstractJSR299Test
 {
 
@@ -49,7 +49,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
    private static final Annotation WILD = new AnnotationLiteral<Wild>() {};
    
    @Test(groups = "resolution")
-   @SpecAssertion(section = "5.3", id = "lb")
+   @SpecAssertion(section = "5.2", id = "lb")
    public void testDefaultBindingTypeAssumed() throws Exception
    {
       Set<Bean<Tuna>> possibleTargets = getBeans(Tuna.class);
@@ -58,7 +58,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
    }
 
    @Test(groups = "resolution")
-   @SpecAssertion(section = "5.3", id = "hc")
+   @SpecAssertion(section = "5.2", id = "hc")
    public void testResolveByType() throws Exception
    {
 
@@ -94,11 +94,11 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
    @Test(groups = "injection")
    @SpecAssertions( { 
       @SpecAssertion(section = "2.3.4", id = "b"),
-      @SpecAssertion(section = "5.3", id = "lc"),
+      @SpecAssertion(section = "5.2", id = "lc"),
       @SpecAssertion(section = "2.3.3", id = "d"),
-      @SpecAssertion(section = "5.3", id = "la"),
-      @SpecAssertion(section = "5.3.6", id = "a"),
-      @SpecAssertion(section = "5.3.6", id = "d") })
+      @SpecAssertion(section = "5.2", id = "la"),
+      @SpecAssertion(section = "5.2.6", id = "a"),
+      @SpecAssertion(section = "5.2.6", id = "d") })
    public void testAllQualifiersSpecifiedForResolutionMustAppearOnBean()
    {
       assert getBeans(Animal.class, new ChunkyLiteral(), new AnnotationLiteral<Whitefish>()
@@ -132,7 +132,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
 
    @Test(groups = { "resolution" })
    @SpecAssertions( { 
-      @SpecAssertion(section = "5.3", id = "ka")
+      @SpecAssertion(section = "5.2", id = "ka")
    })
    public void testResolveByTypeWithTypeParameter() throws Exception
    {
@@ -143,7 +143,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
 
    @Test(groups = { "resolution", "producerMethod" })
    @SpecAssertions( {
-   	@SpecAssertion(section = "5.3", id = "j"),
+   	@SpecAssertion(section = "5.2", id = "j"),
    	@SpecAssertion(section="2.2.1", id = "i") } )
    public void testResolveByTypeWithArray() throws Exception
    {
@@ -152,11 +152,11 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
 
    @Test(groups = { "resolution" })
    @SpecAssertions( { 
-      @SpecAssertion(section = "5.3", id = "i"),
-      @SpecAssertion(section = "5.3.4", id = "aa"),
-      @SpecAssertion(section = "5.3.4", id = "ab"),
-      @SpecAssertion(section = "5.3.6", id = "b"),
-      @SpecAssertion(section = "5.3.6", id = "c") })
+      @SpecAssertion(section = "5.2", id = "i"),
+      @SpecAssertion(section = "5.2.4", id = "aa"),
+      @SpecAssertion(section = "5.2.4", id = "ab"),
+      @SpecAssertion(section = "5.2.6", id = "b"),
+      @SpecAssertion(section = "5.2.6", id = "c") })
    public void testResolveByTypeWithPrimitives()
    {
       assert getBeans(Double.class, new AnyLiteral()).size() == 2;
@@ -171,8 +171,8 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
    
    @Test(groups = "resolution")
    @SpecAssertions( {
-      @SpecAssertion(section = "5.3", id = "ld"),
-      @SpecAssertion(section = "5.3.5", id = "b")
+      @SpecAssertion(section = "5.2", id = "ld"),
+      @SpecAssertion(section = "5.2.5", id = "b")
    })
    public void testResolveByTypeWithNonBindingMembers() throws Exception
    {
@@ -203,7 +203,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "policy" })
-   @SpecAssertion(section = "5.2", id = "a")
+   @SpecAssertion(section = "5.1", id = "a")
    public void testPolicyNotAvailableInNonDeploymentArchive() throws Exception
    {
       Set<Bean<Spider>> spiders = getBeans(Spider.class);
