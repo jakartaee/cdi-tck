@@ -18,7 +18,7 @@
          </run>
       </groups>
       <packages>
-         <package name="org.jboss.jsr299.tck.tests" />
+         <package name="org.jboss.jsr299.tck.tests.*" />
       </packages>
    </test>
    
