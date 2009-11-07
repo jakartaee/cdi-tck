@@ -108,18 +108,15 @@ public class AlternativeMetadataTest extends AbstractJSR299Test
       assert getInstanceByType(Grocery.class, new AnyLiteral()).isConstructorWithParameterUsed();
    }
 
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "11.4", id = "t")
-   // WELD-219
    public void testPreviouslyNonInjectAnnotatedFieldIsInjected()
    {
       assert getInstanceByType(Grocery.class, new AnyLiteral()).isVegetablesInjected();
    }
 
    @SuppressWarnings("unchecked")
-   @Test(groups = "ri-broken")
    @SpecAssertion(section = "11.4", id = "u")
-   // WELD-219
    public void testExtraQualifierIsAppliedToInjectedField()
    {
       assert getInstanceByType(Grocery.class, new AnyLiteral()).getFruit() != null;
