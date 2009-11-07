@@ -42,7 +42,7 @@ public class CustomDecoratorTest extends AbstractJSR299Test
    public void testCustomImplementationOfDecoratorInterface()
    {
       assert getInstanceByType(Vehicle.class).start().equals("Bus started and decorated.");
-      assert getInstanceByType(Vehicle.class).start().equals("Bus stopped and decorated.");
+      assert getInstanceByType(Vehicle.class).stop().equals("Bus stopped and decorated.");
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDecoratedTypesCalled();
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateQualifiersCalled();
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateTypeCalled();
