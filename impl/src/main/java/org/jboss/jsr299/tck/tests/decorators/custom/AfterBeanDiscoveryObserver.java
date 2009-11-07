@@ -21,7 +21,7 @@ public class AfterBeanDiscoveryObserver implements Extension
       AnnotatedType<VehicleDecorator> type = beanManager.createAnnotatedType(VehicleDecorator.class);
       Set<AnnotatedField<? super VehicleDecorator>> annotatedFields = type.getFields();
       AnnotatedField<? super VehicleDecorator> annotatedField = annotatedFields.iterator().next();
-      decorator = new CustomDecoratorImplementation(annotatedField);
+      decorator = new CustomDecoratorImplementation(annotatedField, beanManager);
 
       event.addBean(decorator);
    }

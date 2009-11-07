@@ -6,7 +6,7 @@ import javax.inject.Inject;
 class VehicleDecorator implements Vehicle
 {
    @Inject @Delegate
-   private Vehicle delegate;
+   Vehicle delegate;
 
    public String start()
    {

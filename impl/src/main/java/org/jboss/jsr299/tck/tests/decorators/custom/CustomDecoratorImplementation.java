@@ -13,6 +13,7 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.InjectionPoint;
 
@@ -24,12 +25,16 @@ class CustomDecoratorImplementation implements Decorator<VehicleDecorator>
    private boolean getDelegateTypeCalled = false;
 
    private AnnotatedField<? super VehicleDecorator> annotatedField;
-   private Set<Type> decoratedTypes = new HashSet<Type>();
+   private Set<Type> decoratedTypes;
+   private Set<InjectionPoint> injectionPoints;
+   private BeanManager beanManager;
 
-   public CustomDecoratorImplementation(AnnotatedField<? super VehicleDecorator> annotatedField)
+   public CustomDecoratorImplementation(AnnotatedField<? super VehicleDecorator> annotatedField, BeanManager beanManager)
    {
       this.annotatedField = annotatedField;
-      decoratedTypes.add(Vehicle.class);
+      this.beanManager = beanManager;
+      decoratedTypes = Collections.singleton((Type) Vehicle.class);
+      injectionPoints = Collections.singleton((InjectionPoint) new CustomInjectionPoint());
    }
 
    public Set<Type> getDecoratedTypes()
@@ -57,53 +62,7 @@ class CustomDecoratorImplementation implements Decorator<VehicleDecorator>
 
    public Set<InjectionPoint> getInjectionPoints()
    {
-      InjectionPoint ip = new InjectionPoint()
-      {
-
-         public boolean isTransient()
-         {
-            return false;
-         }
-
-         public boolean isDelegate()
-         {
-            return true;
-         }
-
-         public Type getType()
-         {
-            return Bus.class;
-         }
-
-         public Set<Annotation> getQualifiers()
-         {
-            return Collections.emptySet();
-         }
-
-         public Member getMember()
-         {
-            try
-            {
-               return VehicleDecorator.class.getDeclaredField("delegate");
-            }
-            catch (Exception e)
-            {
-               throw new RuntimeException(e);
-            }
-         }
-
-         public Bean<?> getBean()
-         {
-            return AfterBeanDiscoveryObserver.getDecorator();
-         }
-
-         public Annotated getAnnotated()
-         {
-            return annotatedField;
-         }
-      };
-
-      return new HashSet<InjectionPoint>(Arrays.asList(ip));
+      return injectionPoints;
    }
 
    public String getName()
@@ -141,9 +100,11 @@ class CustomDecoratorImplementation implements Decorator<VehicleDecorator>
       return false;
    }
 
-   public VehicleDecorator create(CreationalContext<VehicleDecorator> arg0)
+   public VehicleDecorator create(CreationalContext<VehicleDecorator> ctx)
    {
-      return new VehicleDecorator();
+      VehicleDecorator decorator = new VehicleDecorator();
+      decorator.delegate = (Vehicle) beanManager.getInjectableReference(getInjectionPoints().iterator().next(), ctx);
+      return decorator;
    }
 
    public void destroy(VehicleDecorator arg0, CreationalContext<VehicleDecorator> arg1)
@@ -165,4 +126,50 @@ class CustomDecoratorImplementation implements Decorator<VehicleDecorator>
    {
       return getDelegateTypeCalled;
    }
+
+   class CustomInjectionPoint implements InjectionPoint
+   {
+
+      public boolean isTransient()
+      {
+         return false;
+      }
+
+      public boolean isDelegate()
+      {
+         return true;
+      }
+
+      public Type getType()
+      {
+         return Vehicle.class;
+      }
+
+      public Set<Annotation> getQualifiers()
+      {
+         return Collections.emptySet();
+      }
+
+      public Member getMember()
+      {
+         try
+         {
+            return VehicleDecorator.class.getDeclaredField("delegate");
+         }
+         catch (Exception e)
+         {
+            throw new RuntimeException(e);
+         }
+      }
+
+      public Bean<?> getBean()
+      {
+         return AfterBeanDiscoveryObserver.getDecorator();
+      }
+
+      public Annotated getAnnotated()
+      {
+         return annotatedField;
+      }
+   };
 }
