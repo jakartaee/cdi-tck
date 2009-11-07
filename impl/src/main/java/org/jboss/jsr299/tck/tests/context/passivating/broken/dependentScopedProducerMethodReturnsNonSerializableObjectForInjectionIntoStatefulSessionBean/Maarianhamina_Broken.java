@@ -11,6 +11,7 @@ public class Maarianhamina_Broken implements MaarianHaminaLocal_Broken
    @Inject @British Cow cow;
    
    @Remove
-   public void bye() {
-   }
+   public void bye() {}
+
+   public void ping() {}
 }

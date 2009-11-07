@@ -64,7 +64,7 @@ public class BuiltinInstanceTest extends AbstractJSR299Test {
 	   assert farm.getCow() != null;
 	}
 	
-	@Test(groups = "ri-broken")
+	@Test
 	@SpecAssertion(section = "5.6.2", id = "g")
 	public void testInstanceIsPassivationCapable() throws Exception 
 	{

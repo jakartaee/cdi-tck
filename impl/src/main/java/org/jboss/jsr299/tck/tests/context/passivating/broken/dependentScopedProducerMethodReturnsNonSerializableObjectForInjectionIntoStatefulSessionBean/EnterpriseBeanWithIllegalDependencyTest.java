@@ -6,7 +6,6 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Packaging;
 import org.jboss.testharness.impl.packaging.PackagingType;
@@ -15,7 +14,6 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest
 @Packaging(PackagingType.EAR)
-@ExpectedDeploymentException(IllegalProductException.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class EnterpriseBeanWithIllegalDependencyTest extends AbstractJSR299Test
 {
@@ -23,6 +21,15 @@ public class EnterpriseBeanWithIllegalDependencyTest extends AbstractJSR299Test
    @SpecAssertion(section = "6.6.4", id = "fa")
    public void test()
    {
+      try
+      {
+         getInstanceByType(MaarianHaminaLocal_Broken.class).ping();
+      }
+      catch (Throwable t) 
+      {
+         assert isThrowablePresent(IllegalProductException.class, t);
+         return;
+      }
       assert false;
    }
 }
