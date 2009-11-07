@@ -26,18 +26,21 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
+import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
 @SpecVersion(spec = "cdi", version = "20091101")
 @IntegrationTest
+@Extension("javax.enterprise.inject.spi.Extension")
 public class CustomDecoratorTest extends AbstractJSR299Test
 {
    @Test(groups = "ri-broken")
    @SpecAssertion(section = "8.3", id = "b")
    // WELD-269
-   public void testCustomImplementationOfDecoratorInterface() {
+   public void testCustomImplementationOfDecoratorInterface()
+   {
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDecoratedTypesCalled();
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateQualifiersCalled();
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateTypeCalled();
