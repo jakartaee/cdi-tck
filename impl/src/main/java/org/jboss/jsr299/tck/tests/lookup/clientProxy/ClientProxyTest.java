@@ -83,7 +83,7 @@ public class ClientProxyTest extends AbstractJSR299Test
       }
    }
    
-   @Test(groups = "ri-broken")
+   @Test(groups = "broken")
    @SpecAssertion(section = "5.4", id = "d")
    //WELD-229
    public void testInvocationIsProcessedOnCurrentInstance() {
