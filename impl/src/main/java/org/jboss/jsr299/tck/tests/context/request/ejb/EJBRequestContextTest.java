@@ -26,7 +26,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test
     * to any EJB message driven bean.
     */
    // WELD-12
-   @Test(groups = { "ri-broken", "contexts", "ejb3.1", "integration" })
+   @Test(groups = { "jboss-as-broken", "contexts", "ejb3.1", "integration" })
    @SpecAssertion(section = "6.7.1", id = "gc")
    public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception
    {
@@ -41,7 +41,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test
     * timeout or message delivery completes.
     */
    // WELD-12
-   @Test(groups = { "ri-broken", "contexts", "ejb3.1", "integration" })
+   @Test(groups = { "jboss-as-broken", "contexts", "ejb3.1", "integration" })
    @SpecAssertion(section = "6.7.1", id = "hc")
    public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception
    {
