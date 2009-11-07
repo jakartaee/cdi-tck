@@ -40,7 +40,7 @@ import org.testng.annotations.Test;
 public class AddingPassivatingScopeTest extends AbstractJSR299Test
 {
    
-   @Test(groups="ri-broken")
+   @Test(groups="jboss-as-broken")
    // WBRI-312
    @SpecAssertion(section="11.5.1", id="ac")
    public void testAddingScopeType()
