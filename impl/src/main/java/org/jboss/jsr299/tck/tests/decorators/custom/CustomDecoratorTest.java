@@ -41,12 +41,12 @@ public class CustomDecoratorTest extends AbstractJSR299Test
    // WELD-269
    public void testCustomImplementationOfDecoratorInterface()
    {
+      assert getInstanceByType(Vehicle.class).start().equals("Bus started and decorated.");
+      assert getInstanceByType(Vehicle.class).start().equals("Bus stopped and decorated.");
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDecoratedTypesCalled();
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateQualifiersCalled();
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateTypeCalled();
       assert !getCurrentManager().resolveDecorators(new HashSet<Type>(Arrays.asList(Vehicle.class))).isEmpty();
       assert !getCurrentManager().resolveDecorators(new HashSet<Type>(Arrays.asList(Bus.class))).isEmpty();
-      assert getInstanceByType(Vehicle.class).start().equals("Bus started and decorated.");
-      assert getInstanceByType(Vehicle.class).start().equals("Bus stopped and decorated.");
    }
 }
