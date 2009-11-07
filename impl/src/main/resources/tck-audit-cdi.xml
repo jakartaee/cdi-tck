@@ -4275,7 +4275,15 @@ creates and returns a container-specific internal local reference to the session
 
   <section id="8.3" title="Decorator resolution">
     <assertion id="aa">
-      <text>The process of matching decorators to a certain bean is called decorator resolution.  A decorator is bound to a bean if the bean is assignable to the delegate injection point according to the rules defined in Section 5.3, "Typesafe resolution", and the decorator is enabled in the bean deployment archive of the bean. If a decorator matches a managed bean, and the managed bean class is declared final, the container automatically detects the problem and treats it as a deployment problem.</text>
+      <text>The process of matching decorators to a certain bean is called decorator resolution.  A decorator is bound to a bean if the bean is assignable to the delegate injection point according to the rules defined in Section 5.3, "Typesafe resolution", and the decorator is enabled in the bean deployment archive of the bean.</text>
+    </assertion>
+    
+    <assertion id="ab">
+      <text>If a decorator matches a managed bean, and the managed bean class is declared final, the container automatically detects the problem and treats it as a deployment problem.</text>
+    </assertion>
+    
+    <assertion id="ac">
+      <text>If a decorator matches a managed bean with a non-static, non-private, final method, and the decorator also implements that method, the container automatically detects the problem and treats it as a deployment problem.</text>
     </assertion>
     
     <assertion id="b">

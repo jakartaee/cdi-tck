@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.decorators.definition.broken.finalBeanClass;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DefinitionError;
+import org.jboss.jsr299.tck.DeploymentError;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
@@ -30,17 +30,18 @@ import org.testng.annotations.Test;
  *
  */
 @Artifact
-@ExpectedDeploymentException(DefinitionError.class)
+@ExpectedDeploymentException(DeploymentError.class)
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class FinalBeanClassTest extends AbstractJSR299Test
 {
 
-   @Test
-   @SpecAssertion(section="8.1.2", id="d")
+   @Test(groups = "ri-broken")
+   @SpecAssertion(section="8.3", id="ab")
+   // WELD-272
    public void testAppliesToFinalManagedBeanClass()
    {
-
+      assert false;
    }
 
 }
