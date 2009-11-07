@@ -71,7 +71,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test
       assert !dogBean.getTypes().contains(Pitbull.class);
    }
 
-   @Test(groups = { "ejb 3.1", "ri-broken" })
+   @Test(groups = { "ejb 3.1", "jboss-as-broken" })
    @SpecAssertion(section = "3.2.2", id = "ba")
    // WBRI-231
    public void testEnterpriseBeanClassLocalView()
