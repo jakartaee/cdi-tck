@@ -25,7 +25,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test
     * bean, during any call to an EJB timeout method and during message delivery
     * to any EJB message driven bean.
     */
-   // WBRI-301
+   // WELD-12
    @Test(groups = { "ri-broken", "contexts", "ejb3.1", "integration" })
    @SpecAssertion(section = "6.7.1", id = "gc")
    public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception
@@ -40,7 +40,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test
     * The request context is destroyed after the remote method invocation,
     * timeout or message delivery completes.
     */
-   // WBRI-301
+   // WELD-12
    @Test(groups = { "ri-broken", "contexts", "ejb3.1", "integration" })
    @SpecAssertion(section = "6.7.1", id = "hc")
    public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception
