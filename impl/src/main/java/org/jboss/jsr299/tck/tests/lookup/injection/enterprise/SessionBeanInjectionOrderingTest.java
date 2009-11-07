@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 public class SessionBeanInjectionOrderingTest extends AbstractJSR299Test
 {
 
-   @Test
+   @Test(groups="ri-broken")
    @SpecAssertion(section = "5.5.2", id = "bb")
    public void testInitializerCalledAfterFieldInjectionOfSuperclass()
    {
@@ -47,7 +47,7 @@ public class SessionBeanInjectionOrderingTest extends AbstractJSR299Test
       assert getInstanceByType(MegaPoorHenHouseLocal.class).isPostConstructCalledAfterSuperclassInitializer();
    }
 
-   @Test(groups="ri-broken")
+   @Test
    @SpecAssertion(section = "5.5.2", id = "bc")
    public void testInitializerCalledAfterResourceInjection()
    {
