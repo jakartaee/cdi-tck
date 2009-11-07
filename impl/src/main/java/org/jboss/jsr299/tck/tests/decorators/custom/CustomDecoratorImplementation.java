@@ -23,10 +23,10 @@ class CustomDecoratorImplementation implements Decorator<VehicleDecorator>
    private boolean getDelegateQualifiersCalled = false;
    private boolean getDelegateTypeCalled = false;
 
-   private AnnotatedField<VehicleDecorator> annotatedField;
+   private AnnotatedField<? super VehicleDecorator> annotatedField;
    private Set<Type> decoratedTypes = new HashSet<Type>();
 
-   public CustomDecoratorImplementation(AnnotatedField<VehicleDecorator> annotatedField)
+   public CustomDecoratorImplementation(AnnotatedField<? super VehicleDecorator> annotatedField)
    {
       this.annotatedField = annotatedField;
       decoratedTypes.add(Vehicle.class);
