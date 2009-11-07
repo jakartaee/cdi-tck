@@ -17,6 +17,8 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.InjectionPoint;
 
+import org.jboss.jsr299.tck.literals.DefaultLiteral;
+
 class CustomDecoratorImplementation implements Decorator<VehicleDecorator>
 {
 
@@ -147,24 +149,17 @@ class CustomDecoratorImplementation implements Decorator<VehicleDecorator>
 
       public Set<Annotation> getQualifiers()
       {
-         return Collections.emptySet();
+         return Collections.singleton((Annotation) new DefaultLiteral());
       }
 
       public Member getMember()
       {
-         try
-         {
-            return VehicleDecorator.class.getDeclaredField("delegate");
-         }
-         catch (Exception e)
-         {
-            throw new RuntimeException(e);
-         }
+         return annotatedField.getJavaMember();
       }
 
       public Bean<?> getBean()
       {
-         return AfterBeanDiscoveryObserver.getDecorator();
+         return CustomDecoratorImplementation.this;
       }
 
       public Annotated getAnnotated()
