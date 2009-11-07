@@ -43,7 +43,7 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.PassivationCapable;
 import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Qualifier;
+import javax.interceptor.InterceptorBinding;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.RetentionLiteral;
@@ -185,18 +185,13 @@ public class BeanManagerTest extends AbstractJSR299Test
       });
    }
 
-   @Test(groups = {"ri-broken", "rewrite"})
+   @Test(groups = {"rewrite"})
    @SpecAssertion(section = "11.3.13", id = "af")
-   // WBRI-59
-   // Should also check a custom defined interceptor binding
    public void testGetMetaAnnotationsForInterceptorBindingType()
    {
       Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingDefinition(Transactional.class);
       assert metaAnnotations.size() == 4;
-      assert metaAnnotations.contains(new AnnotationLiteral<Target>() {});
-      assert metaAnnotations.contains(new AnnotationLiteral<Retention>() {});
-      assert metaAnnotations.contains(new AnnotationLiteral<Documented>() {});
-      assert metaAnnotations.contains(new AnnotationLiteral<Qualifier>() {});
+      assert annotationSetMatches(metaAnnotations, Target.class, Retention.class, Documented.class, InterceptorBinding.class);
    }
 
    @Test(groups = {"rewrite"})
