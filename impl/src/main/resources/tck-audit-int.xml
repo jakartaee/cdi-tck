@@ -109,9 +109,24 @@
       <text>Around-invoke methods may be defined on interceptor classes and the target class (or superclass).  However, only one around-invoke method may be present on a given class.</text>
     </assertion>
     
-    <assertion id="c">
+    <group>
       <text>Around-invoke methods can have |public|, |private|, |protected|, or |package| level access.  An around-invoke method must not be declared as |final| or |static|.</text>
-    </assertion>
+      <assertion id="ca">
+        <text>Test with a |public| method.</text>
+      </assertion>
+      
+      <assertion id="cb">
+        <text>Test with a |private| method.</text>
+      </assertion>
+      
+      <assertion id="cc">
+        <text>Test with a |protected| method.</text>
+      </assertion>
+      
+      <assertion id="cd">
+        <text>Test with a |package| method.</text>
+      </assertion>
+    </group>
     
     <assertion id="d">
       <text>Around-invoke methods have the following signature: |Object &lt;METHOD&gt;(InvocationContext) throws Exception|</text>
@@ -480,7 +495,7 @@
       <text>The |getTarget()| method returns the associated target instance.</text>
     </assertion>
     
-    <assertion id="e">
+    <assertion id="e" testable="false">
       <text>The |getTimer()| method returns the timer object associated with a timeout method invocation.</text>
     </assertion>
     
@@ -512,9 +527,15 @@
       <text>The |setParameters()| method modifies the parameters used for the target class method invocation.  Modifying the parameter value does not affect the determination of the method that is invoked on the target class. </text>
     </assertion>
     
-    <assertion id="l">
+    <group>
       <text>The parameter types must match the types for the target class method, and the number of parameters supplied must equal the number of parameters on the target class method, or an |IllegalArgumentException| is thrown.</text>
-    </assertion>
+      <assertion id = "la">
+      	<text>Test parameter types.</text>
+      </assertion>
+      <assertion id = "lb">
+      	<text>Test number of parameters.</text>
+      </assertion>
+    </group>
     
     <assertion id="m">
       <text>The |proceed()| method causes the invocation of the next interceptor method in the chain, or when called from the last |AroundInvoke| interceptor method, the target class method.</text>
