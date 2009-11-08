@@ -2195,11 +2195,11 @@ detects the problem and treats it as a definition error.</text>
     
     <group>
       <text>For a custom implementation of the |Bean| interface defined in Section 11.1, "The Bean interface, the container calls |getBeanClass()| to determine the bean class of the bean and |InjectionPoint.getMember()| and then |Member.getDeclaringClass()| to determine the class that declares an injection point.</text>
-      <assertion id="d">
+      <assertion id="q">
         <text>Check |Bean.getBeanClass()| is used to determine the bean class</text>
       </assertion>
       
-      <assertion id="e">
+      <assertion id="r">
         <text>Check |InjectionPoint.getMember().getDeclaringClass()| is used to determine the class declaring the injection point</text>
       </assertion>
     </group>
