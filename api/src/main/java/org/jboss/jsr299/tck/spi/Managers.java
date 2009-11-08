@@ -10,6 +10,9 @@ import org.jboss.testharness.api.DeploymentException;
  * The TCK porting package must provide an implementation of this interface
  * which is suitable for the target implementation.
  * 
+ * Managers also allows the TCK to report the state of the Container back to the
+ * TCK, by checking if a deployment problem has occurred, 
+ * 
  * @author Shane Bryzak
  */
 public interface Managers
@@ -25,7 +28,7 @@ public interface Managers
    public BeanManager getManager();
 
    /**
-    * Checks whether there is a definition error, as described in Section 12.4,
+    * Checks whether there is a definition error, as described in Section 2.8,
     * "Problems detected automatically by the container".
     * 
     * @param deploymentException the deployment exception context provided by
@@ -37,7 +40,7 @@ public interface Managers
    public boolean isDefinitionError(DeploymentException deploymentException);
 
    /**
-    * Checks whether there is a deployment error, as described in Section 12.4,
+    * Checks whether there is a deployment error, as described in Section 2.8,
     * "Problems detected automatically by the container".
     * 
     * @param deploymentException the deployment exception context provided by
