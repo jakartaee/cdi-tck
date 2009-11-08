@@ -104,4 +104,12 @@ public class InvocationContextTest extends AbstractJSR299Test
       assert Interceptor8.isContextDataOK();
       assert Interceptor9.isContextDataOK();
    }
+   
+   @Test
+   @SpecAssertion(section = "6", id = "n")
+   public void testBusinessMethodNotCalledWithoutProceedInvocation()
+   {
+      assert getInstanceByType(SimpleBean.class).echo("foo").equals("foo");
+      assert !SimpleBean.isEchoCalled();
+   }
 }

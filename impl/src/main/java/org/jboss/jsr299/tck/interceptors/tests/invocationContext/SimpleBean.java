@@ -5,6 +5,7 @@ import javax.interceptor.Interceptors;
 class SimpleBean
 {
    private int id = 0;
+   private static boolean echoCalled = false;
 
    @Interceptors(Interceptor1.class)
    public int getId()
@@ -55,5 +56,16 @@ class SimpleBean
    @Interceptors( { Interceptor8.class, Interceptor9.class })
    public void foo()
    {
+   }
+   
+   @Interceptors(Interceptor10.class)
+   public String echo(String s) {
+      echoCalled = true;
+      return s;
+   }
+
+   public static boolean isEchoCalled()
+   {
+      return echoCalled;
    }
 }
