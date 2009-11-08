@@ -81,6 +81,15 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
       assert beans.size() == 1;
       assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
    }
+   
+   @Test(groups = { "resolution" })
+   @SpecAssertion(section = "5.2.3", id = "db")
+   public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards2()
+   {
+      Set<Bean<Result<? extends Exception, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Exception, ? super Exception>>(){});
+      assert beans.size() == 1;
+      assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
+   }
 
    @Test(groups = { "resolution" })
    @SpecAssertion(section = "5.2.3", id = "e")

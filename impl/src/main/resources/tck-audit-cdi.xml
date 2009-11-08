@@ -4382,16 +4382,20 @@ creates and returns a container-specific internal local reference to the session
     </assertion>
   </section>
   
-  <section id="8.3.1">
+  <section id="8.3.1" title="Assignability of raw and parameterized types for delegate injection points">
     <group>
       <text>A raw bean type is considered assignable to a parameterized delegate type if the raw types are identical and all type parameters of the delegate type are either unbounded type variables or java.lang.Object.</text>
       
-      <assertion id="a">
+      <assertion id="ab">
         <text>Check all type parameters are unbounded type variables</text>    
       </assertion>
       
-      <assertion id="b">
+      <assertion id="ab">
         <text>Check all type parameters are Object</text>    
+      </assertion>
+      
+      <assertion id="ac">
+        <text>Check mix</text>    
       </assertion>
     </group>
     
