@@ -19,7 +19,7 @@ public class ObserverTest extends AbstractJSR299Test
 {
    @Test(groups = { "events" })
    @SpecAssertions( {
-      @SpecAssertion(section = "10.2", id = "h"),
+      @SpecAssertion(section = "10.2", id = "i"),
       @SpecAssertion(section = "10.5", id = "aa")
    })
    public void testObserverNotifiedWhenEventTypeAndAllBindingsMatch()

@@ -39,7 +39,7 @@ public class PolicyAvailabilityTest extends AbstractJSR299Test
 
    @Test(groups = {"policy"})
    @SpecAssertions( { 
-      @SpecAssertion(section = "5.1", id = "b"), 
+      @SpecAssertion(section = "5.1", id = "e"), 
       @SpecAssertion(section = "5.1.1", id = "c"),
       @SpecAssertion(section = "5.1.1", id = "ea"),
       @SpecAssertion(section = "2.6", id = "a"),

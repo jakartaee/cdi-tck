@@ -202,8 +202,9 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
       assert !classes.contains(Sole.class);
    }
 
-   @Test(groups = { "policy" })
-   @SpecAssertion(section = "5.1", id = "a")
+   @Test(groups = { "policy", "rewrite" })
+   // TODO Needs to be rewritten to use injection PLM
+   @SpecAssertion(section = "5.1.4", id = "i")
    public void testPolicyNotAvailableInNonDeploymentArchive() throws Exception
    {
       Set<Bean<Spider>> spiders = getBeans(Spider.class);

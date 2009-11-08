@@ -35,9 +35,9 @@ import org.testng.annotations.Test;
 public class DecoratorNotResolvedTest extends AbstractJSR299Test
 {
 
-   @Test(groups = { "resolution" })
-   @SpecAssertion(section = "5.2", id = "hb")
-   // WBRI-296
+   @Test(groups = { "resolution", "rewrite" })
+   @SpecAssertion(section = "5.1.4", id = "a")
+   // TODO PLM should check injection, not resolution
    public void testDecoratorNotResolved() 
    {
       Set<Type> types = new HashSet<Type>();

@@ -231,8 +231,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "2.3.5", id = "a"),
-      @SpecAssertion(section = "3.3.2", id = "i"),
-      @SpecAssertion(section = "3.3.3", id = "h")
+      @SpecAssertion(section = "3.3.2", id = "i")
    })
    public void testBindingTypesAppliedToProducerMethodParameters()
    {

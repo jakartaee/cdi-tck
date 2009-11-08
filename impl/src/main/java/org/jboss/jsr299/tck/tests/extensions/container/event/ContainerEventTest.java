@@ -131,8 +131,8 @@ public class ContainerEventTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section="11.5.8", id="c"),
-      @SpecAssertion(section="12.3", id="fb"),
-      @SpecAssertion(section="12.3", id="g")})
+      @SpecAssertion(section="12.3", id="fb")
+   })
       public void testProcessSessionBeanFiredForStatefulSessionBean() {
       assert ProcessBeanObserver.getProcessStatefulSessionBeanEvent() != null;
       validateStatefulSessionBean(ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getAnnotatedBeanClass());

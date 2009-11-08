@@ -15,8 +15,7 @@ public class InterceptorOrderTest extends AbstractJSR299Test
 {
    @Test
    @SpecAssertions({
-      @SpecAssertion(section = "9.4", id = "b"),
-      @SpecAssertion(section = "9.5", id = "ea")
+      @SpecAssertion(section = "9.4", id = "b")
    })
    public void testInterceptorsCalledInOrderDefinedByBeansXml()
    {

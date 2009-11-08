@@ -34,8 +34,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
    @SpecAssertions({
      @SpecAssertion(section = "3.7.1", id = "f"),
      @SpecAssertion(section = "3.7.1", id = "g"),
-     @SpecAssertion(section = "2.3.5", id = "d"),
-     @SpecAssertion(section = "5.6.3", id = "a")
+     @SpecAssertion(section = "2.3.5", id = "d")
    })
    public void testInjectionOfParametersIntoBeanConstructor()
    {

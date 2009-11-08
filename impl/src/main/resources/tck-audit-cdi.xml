@@ -2111,12 +2111,9 @@ detects the problem and treats it as a definition error.</text>
   </section>
   
   <section id="5.1.2" title="Enabled and disabled beans">
-    <assertion id="a">
+    <assertion id="a" testable="false">
       <text>A bean is said to be enabled if it is deployed in a bean deployment archive, as defined by Section 12.1, "Bean deployment archives", and it is not a producer method or field of a disabled bean, and it is not specialized by any other enabled bean, as defined in Section 4.3, "Specialization", and either it is not an alternative, or it is a selected alternative of at least one bean deployment archive. Otherwise, the bean is said to be disabled.</text>
-    </assertion>
-    
-    <assertion id="b">
-      <text>Section 3.12, "@New qualified beans" defines a special rule that determines whether a |@New| qualified bean is enabled or disabled. This rule applies as only to |@New| qualified beans, as an exception to the normal rule defined here.</text>
+      <note>Tested in 5.1.4</note>
     </assertion>
   </section>
   
@@ -2127,16 +2124,92 @@ detects the problem and treats it as a definition error.</text>
   </section>
   
   <section id="5.1.4" title="Inter-module injection">
-    <assertion id="a">
-      <text>A bean is available for injection in a certain Java EE module or library if the bean is enabled, the bean is either not an alternative, or the module or library is a bean deployment archive and the bean is a selected alternative of the bean deployment archive, and the bean class is required to be accessible to classes in the module or library, according to the class loading requirements of the Java EE platform and Java Servlet specifications.</text>
-    </assertion>
+    <group>
+      <text>A bean is available for injection in a certain Java EE module or library if the bean is not an interceptor or decorator, the bean is enabled, the bean is either not an alternative, or the module or library is a bean deployment archive and the bean is a selected alternative of the bean deployment archive, and the bean class is required to be accessible to classes in the module or library, according to the class loading requirements of the Java EE platform and Java Servlet specifications.</text>
+      
+      <assertion id="a">
+        <text>Check a decorator can not be injected</text>
+      </assertion>
+      
+      <assertion id="b">
+        <text>Check an interceptor can not be injected</text>
+      </assertion>
+      
+      <assertion id="c">
+        <text>Check an enabled managed bean can be injected</text> 
+      </assertion>
+      
+      <assertion id="d">
+        <text>Check an enabled session bean can be injected</text> 
+      </assertion>
+      
+      <assertion id="e">
+        <text>Check an enabled producer field can be injected</text> 
+      </assertion>
+      
+      <assertion id="f">
+        <text>Check an enabled producer method can be injected</text> 
+      </assertion>
+      
+      <assertion id="g">
+        <text>Check producer method of a disabled bean is not injectable</text> 
+      </assertion>
+      
+      <assertion id="h">
+        <text>Check producer field of a disabled bean is not injectable</text> 
+      </assertion>
+      
+      <assertion id="i">
+        <text>Check a disabled managed bean is not injectable</text> 
+      </assertion>
+      
+      <assertion id="j">
+        <text>Check a disabled session bean is not injectable</text> 
+      </assertion>
+      
+      <assertion id="k">
+        <text>Check a specialized session bean is not injectable</text> 
+      </assertion>
+      
+      <assertion id="l">
+        <text>Check a specialized managed bean is not injectable</text> 
+      </assertion>
+      
+      <assertion id="m">
+        <text>Check a specialized producer field is not injectable</text> 
+      </assertion>
+      
+      <assertion id="n">
+        <text>Check a specialized producer method is not injectable</text> 
+      </assertion>
+      
+      <assertion id="o">
+        <text>Check a selected alternative is injected for a managed bean</text> 
+      </assertion>
+      
+      <assertion id="p">
+        <text>Check a selected alternative is injected for a session bean</text> 
+      </assertion>
+      
+    </group>
     
-    <assertion id="b">
+    <group>
       <text>For a custom implementation of the |Bean| interface defined in Section 11.1, "The Bean interface, the container calls |getBeanClass()| to determine the bean class of the bean and |InjectionPoint.getMember()| and then |Member.getDeclaringClass()| to determine the class that declares an injection point.</text>
-    </assertion>
+      <assertion id="d">
+        <text>Check |Bean.getBeanClass()| is used to determine the bean class</text>
+      </assertion>
+      
+      <assertion id="e">
+        <text>Check |InjectionPoint.getMember().getDeclaringClass()| is used to determine the class declaring the injection point</text>
+      </assertion>
+    </group>
   </section>
 
-  <section id="5.2" title="Typesafe resolution">  
+  <section id="5.2" title="Typesafe resolution">
+  
+    <assertion id="hc" implied="true">
+      <text>Check multiple types resolve to a single getBeans()</text>
+    </assertion>  
     <group>
       <text>A bean is assignable to a given injection point if the bean has a bean type that matches the required type.  For this purpose, primitive types are considered to match their corresponding wrapper types in |java.lang| and array types are considered to match only if their element types are identical. Parameterized and raw types are considered to match if they are identical or if the bean type is assignable to the required type, as defined in Section 5.2.3, "Assignability of raw and parameterized types".</text>
               
@@ -2224,29 +2297,46 @@ detects the problem and treats it as a definition error.</text>
   </section>
 
   <section id="5.2.3" title="Assignability of raw and parameterized types">
-    <assertion id="a">
-      <text>A parameterized bean type is considered assignable to a raw required type if the raw types are identical and all type parameters of the bean type are either unbounded type variables or |java.lang.Object|.</text>
-    </assertion>
+  
+    <group>
+      <text>A parameterized bean type is considered assignable to a parameterized required type if they have identical raw type and for each parameter: the required type parameter and the bean type parameter are actual types with identical raw type, and, if the type is parameterized, the bean type parameter is assignable to the required type parameter according to these rules, or the required type parameter is a wildcard, the bean type parameter is an actual type and the actual type is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the required type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is assignable to or assignable from the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the required type parameter is an actual type, the bean type parameter is a type variable and the actual type is as- signable to the upper bound, if any, of the type variable, or the required type parameter and the bean type parameter are both type variables and the upper bound of the required type parameter is assignable to the upper bound, if any, of the bean type parameter.</text>
+      <assertion id="aa">
+        <text>Check all type parameters of the bean type and required type are unbounded type variables.</text>
+      </assertion>
+      
+      <assertion id="ab">
+        <text>Check all type parameters of the bean type and required type are |java.lang.Object|s.</text>
+      </assertion>
 
-    <assertion id="b">
-      <text>A parameterized bean type is considered assignable to a parameterized required type if they have identical raw type and for each parameter the required type parameter and the bean type parameter are actual types with identical raw type, and, if the type is parameterized, the bean type parameter is assignable to the required type according to these rules.</text>
-    </assertion>
+      <assertion id="ba">
+        <text>Check the required type parameter and the bean type parameter are actual types with identical raw type</text>
+      </assertion>
+      
+      <assertion id="bb">
+        <text>Check the required type parameter and the bean type parameter are actual types with identical raw type for nested type parameters</text>
+      </assertion>
+      
+      <assertion id="c">
+        <text>Check the required type parameter is a wildcard, the bean type parameter is an actual type and the actual type is assignable to the upper bound of the wildcard and assignable from the lower bound of the wildcard</text>
+      </assertion>
 
-    <assertion id="c">
-      <text>A parameterized bean type is considered assignable to a parameterized required type if they have identical raw type and for each parameter the required type parameter is a wildcard, the bean type parameter is an actual type and the actual type is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard.</text>
-    </assertion>
+      <assertion id="da">
+        <text>Check the required type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is _assignable to_ the upper bound of the wildcard and assignable from the lower bound of the wildcard</text>
+      </assertion>
+      
+      <assertion id="db">
+        <text>Check the required type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is _assignable from_ the upper bound of the wildcard and assignable from the lower bound of the wildcard</text>
+      </assertion>
 
-    <assertion id="d">
-    <text>A parameterized bean type is considered assignable to a parameterized required type if they have identical raw type and for each parameter the required type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard.</text>
-    </assertion>
+      <assertion id="e">
+        <text>Check the required type parameter is an actual type, the bean type parameter is a type variable and the actual type is assignable to the upper bound of the type variable</text>
+      </assertion>
 
-    <assertion id="e">
-      <text>A parameterized bean type is considered assignable to a parameterized required type if they have identical raw type and for each parameter the required type parameter is an actual type, the bean type parameter is a type variable and the actual type is assignable to the upper bound, if any, of the type variable.</text>
-    </assertion>
-
-    <assertion id="f">
-      <text>A parameterized bean type is considered assignable to a parameterized required type if they have identical raw type and for each parameter the required type parameter and the bean type parameter are both type variables and the upper bound of the required type parameter is assignable to the upper bound, if any, of the bean type parameter.</text>
-    </assertion>
+      <assertion id="f">
+        <text>Check the required type parameter and the bean type parameter are both type variables and the upper bound of the required type parameter is assignable to the upper bound of the bean type parameter.</text>
+      </assertion>
+    </group>
+  
   </section>
 
   <section id="5.2.4" title="Primitive types and null values">
@@ -4220,6 +4310,7 @@ creates and returns a container-specific internal local reference to the session
     <assertion id="g">
       <text>If a decorator invokes the delegate object at any other time, the invoked method throws an |IllegalStateException|.</text>
     </assertion>
+
   </section>
 
   <section id="8.1.3" title="Decorated types of a decorator">
@@ -4289,6 +4380,50 @@ creates and returns a container-specific internal local reference to the session
     <assertion id="b">
       <text>For a custom implementation of the Decorator interface defined in Section 11.1.1, "The Decorator interface", the container calls |getDelegateType()|, |getDelegateQualifiers()| and |getDecoratedTypes()| to determine the delegate type and qualifiers and decorated types of the decorator.</text>
     </assertion>
+  </section>
+  
+  <section id="8.3.1">
+    <group>
+      <text>A raw bean type is considered assignable to a parameterized delegate type if the raw types are identical and all type parameters of the delegate type are either unbounded type variables or java.lang.Object.</text>
+      
+      <assertion id="a">
+        <text>Check all type parameters are unbounded type variables</text>    
+      </assertion>
+      
+      <assertion id="b">
+        <text>Check all type parameters are Object</text>    
+      </assertion>
+    </group>
+    
+    <group>
+      <text>A parameterized bean type is considered assignable to a parameterized delegate type if they have identical raw type and for each parameter: the delegate type parameter and the bean type parameter are actual types with identical raw type, and, if the type is parameterized, the bean type parameter is assignable to the delegate type parameter according to these rules, or the delegate type parameter is a wildcard, the bean type parameter is an actual type and the actual type is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the delegate type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the delegate type parameter and the bean type parameter are both type variables and the upper bound of the bean type parameter is assignable to the upper bound, if any, of the delegate type parameter, or the delegate type parameter is a type variable, the bean type parameter is an actual type, and the actual type is as- signable to the upper bound, if any, of the type variable.</text>
+      
+      <assertion id="c">
+        <text>Check both have identical type parameters</text>
+      </assertion>
+      
+      <assertion id="d">
+        <text>Check nested identical type parameters</text>
+      </assertion>
+      
+      <assertion id="e">
+        <text>Check delegate type parameter is a wildcard, the bean type parameter is an actual type and the actual type is assignable to the upper bound of the wildcard and assignable from the lower bound of the wildcard</text>
+      </assertion>
+      
+      <assertion id="f">
+        <text>Check delegate type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is assignable to the upper bound of the wildcard and assignable from the lower bound of the wildcard</text>
+      </assertion>
+      
+      <assertion id="g">
+        <text>Check the delegate type parameter and the bean type parameter are both type variables and the upper bound of the bean type parameter is assignable to the upper bound of the delegate type parameter</text>
+      </assertion>
+      
+      <assertion id="h">
+        <text>Check the delegate type parameter is a type variable, the bean type parameter is an actual type, and the actual type is as- signable to the upper bound of the type variable</text>
+      </assertion>
+    </group>
+
+
   </section>
 
   <section id="8.4" title="Decorator invocation">
@@ -4561,12 +4696,14 @@ called first.</text>
   </section>
 
   <section id="10.2" title="Observer resolution">   
-    <assertion id="a">
+    <assertion id="a" testable="false">
       <text>The process of matching an event to its observer methods is called observer resolution.  The container considers event type and qualifiers when resolving observers.</text>
+      <note>Statement of intent</note>
     </assertion>
     
-    <assertion id="b">
+    <assertion id="b" testable="false">
       <text>Observer resolution usually occurs at runtime.</text>
+      <note>Describes non-portable behavior</note>
     </assertion>
     
     <assertion id="i">

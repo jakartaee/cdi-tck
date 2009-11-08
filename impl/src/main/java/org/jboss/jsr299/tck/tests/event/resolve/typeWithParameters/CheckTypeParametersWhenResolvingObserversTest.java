@@ -52,7 +52,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractJSR29
 
    @Test(groups = { "events" })
    @SpecAssertions({
-      @SpecAssertion(section = "10.4.1", id = "a"),
+      @SpecAssertion(section = "10.2.1", id = "b"),
       @SpecAssertion(section = "11.3.10", id = "a")
    })
    public void testResolvingChecksTypeParameters()
@@ -64,7 +64,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractJSR29
    
    @Test(groups = { "events" })
    @SpecAssertions({
-      @SpecAssertion(section = "10.2", id = "h"),
+      @SpecAssertion(section = "10.2.1", id = "a"),
       @SpecAssertion(section = "10.4", id = "aa")
       // FIXME also 10.3.1, which does not yet have spec assertions cataloged
    })

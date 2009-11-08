@@ -35,8 +35,9 @@ import org.testng.annotations.Test;
 public class InterceptorNotResolvedTest extends AbstractJSR299Test
 {
 
-   @Test(groups = { "resolution" })
-   @SpecAssertion(section = "5.2", id = "hq")
+   @Test(groups = { "resolution", "rewrite" })
+   // TODO PLM should check injection, not resolution
+   @SpecAssertion(section = "5.1.4", id = "b")
    public void testInterceptorNotResolved() 
    {
       Set<Type> types = new HashSet<Type>();

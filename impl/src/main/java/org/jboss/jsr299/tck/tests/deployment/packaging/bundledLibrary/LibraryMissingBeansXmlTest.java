@@ -56,7 +56,7 @@ public class LibraryMissingBeansXmlTest extends AbstractJSR299Test
 
    @Test(groups = {})
    @SpecAssertions({
-      @SpecAssertion(section = "12.1", id="ca")
+      @SpecAssertion(section = "12.1", id="bbc")
    })
    public void test()
    {
