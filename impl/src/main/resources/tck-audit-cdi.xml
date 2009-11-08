@@ -154,7 +154,7 @@
   <section id="2.3.1" title="Built-in qualifier types">
 
     <assertion id="a0">
-      <text>Every bean has the built-in binding |@Any|, even if it does not explicitly declare this binding, except for beans with the built-in binding |@New| defined in Section 3.11, "Beans with the @New binding".</text>
+      <text>Every bean has the built-in qualifier |@Any|, even if it does not explicitly declare this qualifier, except for beans with the built-in qualifier |@New| defined in Section 3.11, "Beans with the @New qualifier".</text>
     </assertion>
 
     <assertion id="aa">
@@ -177,7 +177,7 @@
     </assertion>
 
     <assertion id="ba">
-      <text>A binding type may be declared by specifying the |@javax.inject.Qualifier| meta-annotation.</text>
+      <text>A qualifier type may be declared by specifying the |@javax.inject.Qualifier| meta-annotation.</text>
     </assertion>
 
     <assertion id="d" testable="false">
@@ -994,7 +994,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="be">
-      <text>A producer method may specify a binding type</text>
+      <text>A producer method may specify a qualifier</text>
     </assertion>
 
     <group>
@@ -1076,7 +1076,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="ba">
-      <text>When searching for disposer methods for a producer method, the container considers the type and bindings of the disposed parameter. If a disposed parameter resolves to a producer method declared by the same bean class, according to the rules of typesafe resolution defined in Section 5.3 "Typesafe resolution", the container must call this method when destroying an instance returned by that producer method.</text>
+      <text>When searching for disposer methods for a producer method, the container considers the type and qualifiers of the disposed parameter. If a disposed parameter resolves to a producer method declared by the same bean class, according to the rules of typesafe resolution defined in Section 5.3 "Typesafe resolution", the container must call this method when destroying an instance returned by that producer method.</text>
     </assertion>
 
     <assertion id="da">
@@ -1337,23 +1337,23 @@ detects the problem and treats it as a definition error.</text>
 
   <section id="3.6" title="Additional built-in beans">
     <assertion id="a">
-      <text>A Java EE or embeddable EJB container must provide a bean with binding |@Default| and bean type |javax.transaction.UserTransaction|, allowing injection of a reference to the JTA |UserTransaction|.</text>
+      <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.transaction.UserTransaction|, allowing injection of a reference to the JTA |UserTransaction|.</text>
     </assertion>
 
     <assertion id="b">
-      <text>A Java EE or embeddable EJB container must provide a bean with binding |@Default| and bean type |javax.security.Principal|, allowing injection of a |Principal| representing the current caller identity.</text>
+      <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.security.Principal|, allowing injection of a |Principal| representing the current caller identity.</text>
     </assertion>
 
     <assertion id="c">
-      <text>A Java EE or embeddable EJB container must provide a bean with binding |@Default| and bean type |javax.validation.ValidationFactory|, allowing injection of the default Bean Validation |ValidationFactory|.</text>
+      <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.validation.ValidationFactory|, allowing injection of the default Bean Validation |ValidationFactory|.</text>
     </assertion>
 
     <assertion id="d">
-      <text>A Java EE or embeddable EJB container must provide a bean with binding |@Default| and bean type |javax.validation.Validator|, allowing injection of a |Validator| for the default Bean Validation |ValidationFactory|.</text>
+      <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.validation.Validator|, allowing injection of a |Validator| for the default Bean Validation |ValidationFactory|.</text>
     </assertion>
 
     <assertion id="e">
-      <text>If a Java EE component class has an injection point of type |UserTransaction| and binding |@Default|, and may not validly make use of the JTA |UserTransaction| according to the Java EE platform specification, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
+      <text>If a Java EE component class has an injection point of type |UserTransaction| and qualifier |@Default|, and may not validly make use of the JTA |UserTransaction| according to the Java EE platform specification, the container automatically detects the problem and treats it as a definition error, as defined in Section 12.4, "Problems detected automatically by the container".</text>
     </assertion>
   </section>
   
@@ -1573,7 +1573,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="r">
-      <text>This second bean has exactly one binding: |@javax.enterprise.inject.New(X.class)| where |x| is the bean class.</text>
+      <text>This second bean has exactly one qualifier: |@javax.enterprise.inject.New(X.class)| where |x| is the bean class.</text>
     </assertion>
 
     <assertion id="s">
@@ -1653,7 +1653,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
 
     <assertion id="z">
-      <text>When the binding |@New| is specified at an injection point and no |value| member is explicitly specified, the container defaults the |value| to the declared type of the injection point.</text>
+      <text>When the qualifier |@New| is specified at an injection point and no |value| member is explicitly specified, the container defaults the |value| to the declared type of the injection point.</text>
     </assertion>
   </section>
 
@@ -1825,7 +1825,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="k" testable="false">
-      <text>For annotations defined by the bean specification, _no built-in binding type is declared |@Inherited|_</text>
+      <text>For annotations defined by the bean specification, _no built-in qualifier type is declared |@Inherited|_</text>
       <note>sigtest</note>
     </assertion>
 
@@ -1967,7 +1967,7 @@ detects the problem and treats it as a definition error.</text>
 
   <section id="4.3" title="Specialization">
     <assertion id="a" testable="false">
-      <text>If two beans both support a certain bean type, and share at least one qualifier, then they are both eligible for injection to any injection point with that declared type and binding.</text>
+      <text>If two beans both support a certain bean type, and share at least one qualifier, then they are both eligible for injection to any injection point with that declared type and qualifier.</text>
     </assertion>
 
     <assertion id="ca">
@@ -2372,7 +2372,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="c" testable="false">
-      <text>Array-valued or annotation-valued members of a qualifier type must be annotated |@NonBinding| in a portable application. If an array-valued or annotation-valued member of a binding type is not annotated |@NonBinding|, non-portable behavior results.</text>
+      <text>Array-valued or annotation-valued members of a qualifier type must be annotated |@NonBinding| in a portable application. If an array-valued or annotation-valued member of a qualifier is not annotated |@NonBinding|, non-portable behavior results.</text>
     </assertion>
   </section>
 
@@ -2776,11 +2776,11 @@ detects the problem and treats it as a definition error.</text>
 	</assertion>
 
     <assertion id="f">
-      <text>If a bean that declares any scope other than |@Dependent| has an injection point of type |InjectionPoint| and binding |@Default|, the container automatically detects the problem and treats it as a definition error.</text>
+      <text>If a bean that declares any scope other than |@Dependent| has an injection point of type |InjectionPoint| and qualifier |@Default|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="ga">
-      <text>If a Java EE component class supporting injection that is not a bean has an injection point of type |InjectionPoint| and binding |@Default|, the container automatically detects the problem and treats it as a definition error.</text>
+      <text>If a Java EE component class supporting injection that is not a bean has an injection point of type |InjectionPoint| and qualifier |@Default|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
@@ -3250,7 +3250,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="d">
-      <text>The container must ensure that every injection point of type |InjectionPoint| and binding |@Default| of any dependent object instantiated during this process receives an instance of |InjectionPoint| representing the injection point into which the dependent object will be injected, or a null value if it is not being injected into any injection point.</text>
+      <text>The container must ensure that every injection point of type |InjectionPoint| and qualifier |@Default| of any dependent object instantiated during this process receives an instance of |InjectionPoint| representing the injection point into which the dependent object will be injected, or a null value if it is not being injected into any injection point.</text>
     </assertion>
   </section>
 
@@ -3863,7 +3863,7 @@ detects the problem and treats it as a definition error.</text>
   
   <section id="6.7.5" title="The Conversation interface">
     <group>
-      <text>The container provides a built-in bean with bean type |Conversation|, scope |@RequestScoped|, and binding |@Default|, named |javax.enterprise.context.conversation|.</text>      
+      <text>The container provides a built-in bean with bean type |Conversation|, scope |@RequestScoped|, and qualifier |@Default|, named |javax.enterprise.context.conversation|.</text>      
       <assertion id="iaa">
         <text>Test the bean type is correct.</text>
       </assertion>
@@ -3873,7 +3873,7 @@ detects the problem and treats it as a definition error.</text>
       </assertion>
 
       <assertion id="id">
-        <text>Test the binding type is correct.</text>
+        <text>Test the qualifier is correct.</text>
       </assertion>
 
       <assertion id="ie">
@@ -4737,9 +4737,9 @@ called first.</text>
     </assertion>
   </section>
 
-  <section id="10.2.2" title="Event binding types with members">
+  <section id="10.2.2" title="Event qualifier types with members">
     <assertion id="a">
-      <text>The qualifier type for an |Event| binding may have annotation members.</text>
+      <text>The qualifier type for an |Event| qualifier may have annotation members.</text>
     </assertion>
 
     <assertion id="b" testable="false">
@@ -4748,7 +4748,7 @@ called first.</text>
     </assertion>
   </section>
 
-  <section id="10.2.3" title="Multiple event bindings">
+  <section id="10.2.3" title="Multiple event qualifiers">
     <assertion id="a">
       <text>An event parameter may have multiple qualifiers.</text>
     </assertion>
@@ -4786,7 +4786,7 @@ called first.</text>
     </assertion>
     
     <assertion id="cb">qualifiers
-      <text>For an injected |Event|, the specified type is the type parameter specified at the injection point, and the specified qualifiers are the bindings specified at the injection point.</text>
+      <text>For an injected |Event|, the specified type is the type parameter specified at the injection point, and the specified qualifiers are the qualifiers specified at the injection point.</text>
     </assertion>
 
     <assertion id="eaa">
@@ -4798,7 +4798,7 @@ called first.</text>
     </assertion>
 
     <assertion id="eba">
-      <text>If two instances of the same binding type are passed to |select()|, an |IllegalArgumentException| is thrown.</text>
+      <text>If two instances of the same qualifier type are passed to |select()|, an |IllegalArgumentException| is thrown.</text>
     </assertion>
 
     <assertion id="ec">
@@ -5112,7 +5112,7 @@ dependencies".</text>
     </assertion>
 
     <assertion id="c">
-      <text>|getDelegateType()| and |getDelegateBindings()| return the delegate type and bindings of the decorator.</text>
+      <text>|getDelegateType()| and |getDelegateQualifiers()| return the delegate type and qualifiers of the decorator.</text>
     </assertion>
     
     <assertion id="d">
@@ -5156,7 +5156,7 @@ dependencies".</text>
     </assertion>
     
     <assertion id="c">
-      <text>|getObservedType()| and |getObservedBindings()| return the observed event type and bindings.</text>
+      <text>|getObservedType()| and |getObservedQualifiers()| return the observed event type and qualifiers.</text>
     </assertion>
     
     <assertion id="d">
@@ -5476,7 +5476,7 @@ dependencies".</text>
   
   <section id="11.3.12" title="Interceptor resolution">
     <assertion id="a">
-      <text>The method |BeanManager.resolveInterceptors()| returns the ordered list of interceptors for a set of interceptor bindings, as defined in Section 9.5, "Interceptor resolution".</text>
+      <text>The method |BeanManager.resolveInterceptors()| returns the ordered list of interceptors for a set of interceptor qualifiers, as defined in Section 9.5, "Interceptor resolution".</text>
     </assertion>
     
     <assertion id="b">
@@ -5758,7 +5758,7 @@ dependencies".</text>
     </assertion>
     
     <assertion id="e">
-      <text>For each service provider, the container must provide a bean of scope |@ApplicationScoped| and binding |@Default|, supporting injection of a reference to the service provider instance. The bean types of this bean include the class of the service
+      <text>For each service provider, the container must provide a bean of scope |@ApplicationScoped| and qualifier |@Default|, supporting injection of a reference to the service provider instance. The bean types of this bean include the class of the service
 provider and all superclases and interfaces.</text>
     </assertion>
   </section>
