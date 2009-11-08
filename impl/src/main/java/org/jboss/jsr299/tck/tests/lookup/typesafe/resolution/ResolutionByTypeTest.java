@@ -225,8 +225,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
       assert getBeans(Canary.class).size() == 1;
       Bean<Canary> bean = getUniqueBean(Canary.class);
       assert getBeans(Bird.class).isEmpty();
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(Canary.class);
+      assert typeSetMatches(bean.getTypes(), Canary.class, Object.class);
    }
    
    @Test
@@ -237,8 +236,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
       assert getBeans(Emu.class).isEmpty();
       assert getBeans(EUROPEAN_FLIGHTLESS_BIRD).isEmpty();
       Bean<FlightlessBird<Australian>> bean = getUniqueBean(AUSTRALIAN_FLIGHTLESS_BIRD);
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(AUSTRALIAN_FLIGHTLESS_BIRD.getType());
+      assert typeSetMatches(bean.getTypes(), AUSTRALIAN_FLIGHTLESS_BIRD.getType(), Object.class);
    }
    
    @Test
@@ -248,8 +246,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
       assert getBeans(Parrot.class).size() == 1;
       assert getBeans(Bird.class).isEmpty();
       Bean<Parrot> bean = getUniqueBean(Parrot.class);
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(Parrot.class);
+      assert typeSetMatches(bean.getTypes(), Parrot.class, Object.class);
    }
    
    @Test
@@ -259,8 +256,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
       assert getBeans(EUROPEAN_CAT, TAME).size() == 1;
       assert getBeans(DomesticCat.class, TAME).isEmpty();
       Bean<Cat<European>> bean = getUniqueBean(EUROPEAN_CAT, TAME);
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(EUROPEAN_CAT.getType());
+      assert typeSetMatches(bean.getTypes(), EUROPEAN_CAT.getType(), Object.class);
    }
    
    @Test
@@ -270,18 +266,16 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
       assert getBeans(AFRICAN_CAT, WILD).size() == 1;
       assert getBeans(Lion.class, WILD).isEmpty();
       Bean<Cat<African>> bean = getUniqueBean(AFRICAN_CAT, WILD);
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(AFRICAN_CAT.getType());
+      assert typeSetMatches(bean.getTypes(), AFRICAN_CAT.getType(), Object.class);
    }
    
    @Test
    @SpecAssertion(section = "2.2.2", id = "d")
-   public void testGeeBeanTypesOnProducerField()
+   public void testBeanTypesOnProducerField()
    {
       assert getBeans(Dove.class).size() == 1;
       assert getBeans(Bird.class).isEmpty();
       Bean<Dove> bean = getUniqueBean(Dove.class);
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(Dove.class);
+      assert typeSetMatches(bean.getTypes(), Dove.class, Object.class);
    }
 }

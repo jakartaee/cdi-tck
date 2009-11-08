@@ -39,8 +39,7 @@ public class EnterpriseResolutionByTypeTest extends AbstractJSR299Test
       assert getBeans(CapercaillieLocal.class).size() == 1;
       assert getBeans(ScottishBirdLocal.class).isEmpty();
       Bean<CapercaillieLocal> bean = getUniqueBean(CapercaillieLocal.class);
-      assert bean.getTypes().size() == 1;
-      assert bean.getTypes().iterator().next().equals(CapercaillieLocal.class);
+      assert rawTypeSetMatches(bean.getTypes(), CapercaillieLocal.class, Object.class);
    }
    
 }

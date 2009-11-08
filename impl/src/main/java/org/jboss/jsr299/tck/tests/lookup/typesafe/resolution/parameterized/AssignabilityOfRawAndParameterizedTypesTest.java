@@ -79,7 +79,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
    {
       Set<Bean<Result<? extends Throwable, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Throwable, ? super Exception>>(){});
       assert beans.size() == 1;
-      assert typeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
+      assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
    }
 
    @Test(groups = { "resolution" })
@@ -88,7 +88,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
    {
       Set<Bean<Result<Exception, Exception>>> beans = getBeans(new TypeLiteral<Result<Exception, Exception>>(){});
       assert beans.size() == 1;
-      assert typeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
+      assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
    }
 
    @Test(groups = { "resolution" })
@@ -97,7 +97,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
    {
       Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>(){});
       assert beans.size() == 1;
-      assert typeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
+      assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
    }
 
 }

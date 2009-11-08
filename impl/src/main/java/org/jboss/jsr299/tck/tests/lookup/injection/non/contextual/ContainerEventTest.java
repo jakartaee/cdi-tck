@@ -200,14 +200,14 @@ public class ContainerEventTest extends AbstractJSR299Test
    
    private void validateTagHandlerAnnotatedType(AnnotatedType<TestTagHandler> type) {
       assert type.getBaseType().equals(TestTagHandler.class);
-      assert typeSetMatches(type.getTypeClosure(), TestTagHandler.class, SimpleTagSupport.class, SimpleTag.class, JspTag.class);
+      assert rawTypeSetMatches(type.getTypeClosure(), TestTagHandler.class, SimpleTagSupport.class, SimpleTag.class, JspTag.class);
       assert type.getAnnotations().size() == 1;
       assert type.isAnnotationPresent(Any.class);
    }
    
    private void validateTagLibraryListenerAnnotatedType(AnnotatedType<TagLibraryListener> type) {
       assert type.getBaseType().equals(TagLibraryListener.class);
-      assert typeSetMatches(type.getTypeClosure(), TagLibraryListener.class, ServletContextListener.class, EventListener.class, Object.class);
+      assert rawTypeSetMatches(type.getTypeClosure(), TagLibraryListener.class, ServletContextListener.class, EventListener.class, Object.class);
       assert type.getFields().size() == 1;
       assert type.getFields().iterator().next().getJavaMember().getName().equals("sheep");
       assert type.getConstructors().size() == 1;
@@ -216,13 +216,13 @@ public class ContainerEventTest extends AbstractJSR299Test
    
    private void validateServletAnnotatedType(AnnotatedType<TestServlet> type) {
       assert type.getBaseType().equals(TestServlet.class);
-      assert typeSetMatches(type.getTypeClosure(), TestServlet.class, HttpServlet.class, GenericServlet.class, Servlet.class, ServletConfig.class, Object.class);
+      assert rawTypeSetMatches(type.getTypeClosure(), TestServlet.class, HttpServlet.class, GenericServlet.class, Servlet.class, ServletConfig.class, Object.class);
       assert type.getAnnotations().isEmpty();
    }
    
    private void validateFilterAnnotatedType(AnnotatedType<TestFilter> type) {
       assert type.getBaseType().equals(TestFilter.class);
-      assert typeSetMatches(type.getTypeClosure(), TestFilter.class, Filter.class, Object.class);
+      assert rawTypeSetMatches(type.getTypeClosure(), TestFilter.class, Filter.class, Object.class);
       assert type.getFields().size() == 2;
       assert type.getConstructors().size() == 1;
       assert type.getConstructors().iterator().next().getParameters().isEmpty();

@@ -92,7 +92,7 @@ public abstract class AbstractJSR299Test extends org.jboss.testharness.AbstractT
       return annotationTypeList.size() == 0;
    }
    
-   public boolean typeSetMatches(Set<Type> types, Class<?>... requiredTypes)
+   public boolean rawTypeSetMatches(Set<Type> types, Class<?>... requiredTypes)
    {
       List<Class<?>> typeList = new ArrayList<Class<?>>();
       typeList.addAll(Arrays.asList(requiredTypes));
@@ -108,6 +108,12 @@ public abstract class AbstractJSR299Test extends org.jboss.testharness.AbstractT
          }
       }
       return typeList.size() == 0;
+   }
+   
+   public boolean typeSetMatches(Set<Type> types, Type... requiredTypes)
+   {
+      List<Type> typeList = Arrays.asList(requiredTypes);
+      return types.containsAll(typeList);
    }
 
    public <T> Bean<T> getUniqueBean(Class<T> type, Annotation... bindings)
