@@ -6,7 +6,6 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="part-background.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="part-execution.xml"/>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="part-test-harness.xml" />
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="sigtest.xml" />  
 <!--
 vim: ts=3:sw=3:tw=80:set expandtab
 -->

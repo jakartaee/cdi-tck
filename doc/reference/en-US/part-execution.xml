@@ -12,6 +12,7 @@
          the test suite in Eclipse.
       </para>
    </partintro>
+   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="sigtest.xml" />
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="executing.xml" />
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="eclipse-running.xml" />
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="eclipse-debugging.xml" />
