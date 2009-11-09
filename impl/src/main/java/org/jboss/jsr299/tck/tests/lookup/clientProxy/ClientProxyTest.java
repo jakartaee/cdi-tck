@@ -19,6 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy;
 import java.io.IOException;
 
 import javax.enterprise.context.ContextNotActiveException;
+import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -56,12 +57,11 @@ public class ClientProxyTest extends AbstractJSR299Test
    @SpecAssertion(section = "5.4.2", id = "aa")
    public void testClientProxyInvocation()
    {
-      Bean<TunedTuna> tunaBean = getBeans(TunedTuna.class).iterator().next();
-      TunedTuna tuna = (TunedTuna) getCurrentManager().getReference(tunaBean, TunedTuna.class, getCurrentManager().createCreationalContext(tunaBean));
+      TunedTuna tuna = getInstanceByType(TunedTuna.class);
       assert getCurrentConfiguration().getBeans().isProxy(tuna);
       assert tuna.getState().equals("tuned");
-      // TODO expand this test
    }
+   
    @Test(expectedExceptions = { ContextNotActiveException.class, IllegalStateException.class })
    @SpecAssertions({
       @SpecAssertion(section="5.4.2", id="ab"),
@@ -81,25 +81,5 @@ public class ClientProxyTest extends AbstractJSR299Test
          // need to set request scope active again, some other tests will fail otherwise
          setContextActive(getCurrentConfiguration().getContexts().getRequestContext());
       }
-   }
-   
-   @Test(groups = "broken")
-   @SpecAssertion(section = "5.4", id = "d")
-   //WELD-229
-   public void testInvocationIsProcessedOnCurrentInstance() {
-      // create new car
-      getInstanceByType(Car.class).setMake("Honda");
-      // check that the car is injected
-      Garage garage = getInstanceByType(Garage.class);
-      assert garage.getMakeOfTheParkedCar().equals("Honda");
-      // destroy the request context
-      setContextInactive(getCurrentConfiguration().getContexts().getRequestContext());
-      setContextActive(getCurrentConfiguration().getContexts().getRequestContext());
-      // check that the old instance is not in the context anymore
-      // a new one should be created
-      assert getInstanceByType(Car.class).getMake().equals("unknown");
-      getInstanceByType(Car.class).setMake("Toyota");
-      // check that the invocation is processed by the current instance of injected bean
-      assert garage.getMakeOfTheParkedCar().equals("Toyota");
    }
 }
