@@ -147,6 +147,11 @@
                            <type>xml</type>
                            <classifier>audit-int</classifier>
                         </artifact>
+                        <artifact>
+                           <file>${basedir}/src/main/resources/cdi-api.sig</file>
+                           <type>sig</type>
+                           <classifier>sigtest</classifier>
+                        </artifact>
                      </artifacts>
                   </configuration>
                </execution>
@@ -158,7 +163,6 @@
             <executions>
                <execution>
                   <id>copy-in-container-dependencies</id>
-                  <phase>process-resources</phase>
                   <goals>
                      <goal>copy</goal>
                   </goals>
@@ -207,33 +211,13 @@
                   <artifactId>build-helper-maven-plugin</artifactId>
                   <executions>
                      <execution>
-                        <id>attach-artifacts</id>
+                        <id>attach-report-artifacts</id>
                         <phase>package</phase>
                         <goals>
                            <goal>attach-artifact</goal>
                         </goals>
                         <configuration>
                            <artifacts>
-                              <artifact>
-                                 <file>${basedir}/src/main/resources/tck-tests.xml</file>
-                                 <type>xml</type>
-                                 <classifier>suite</classifier>
-                              </artifact>
-                              <artifact>
-                                 <file>${basedir}/src/main/resources/tck-audit-cdi.xml</file>
-                                 <type>xml</type>
-                                 <classifier>audit-cdi</classifier>
-                              </artifact>
-                              <artifact>
-                                 <file>${basedir}/src/main/resources/tck-audit-mb.xml</file>
-                                 <type>xml</type>
-                                 <classifier>audit-mb</classifier>
-                              </artifact>
-                              <artifact>
-                                 <file>${basedir}/src/main/resources/tck-audit-int.xml</file>
-                                 <type>xml</type>
-                                 <classifier>audit-int</classifier>
-                              </artifact>
                               <artifact>
                                  <file>../target/coverage-cdi.html</file>
                                  <type>html</type>
