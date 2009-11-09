@@ -26,9 +26,8 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "int", version = "3.1.PFD")
 public class DefinitionTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "1", id= "a")
-   // WELD-276
    public void testInterceptorMethodDefinedOnTargetClass() {
       assert getInstanceByType(ClassWithAroundInvokeMethod.class).foo().equals("barbar");
    }

@@ -27,14 +27,13 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "int", version = "3.1.PFD")
 public class InvocationOrderTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.1", id = "c"),
       @SpecAssertion(section = "5.1", id = "d"),
       @SpecAssertion(section = "5.1", id = "e"),
       @SpecAssertion(section = "5.1", id = "f")
    })
-   // WELD-280
    public void testInvocationOrder() {
       getInstanceByType(LakeCargoShip.class);
       assert LakeCargoShip.getSequence() == 7;
