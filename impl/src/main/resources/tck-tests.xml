@@ -9,8 +9,6 @@
       </method-selectors>
       <groups>
          <run>
-            <exclude name="ri-broken" />
-            <exclude name="jboss-as-broken" />
             <exclude name="broken" />  
          </run>
       </groups>
