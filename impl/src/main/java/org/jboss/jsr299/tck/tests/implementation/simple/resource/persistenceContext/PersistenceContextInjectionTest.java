@@ -78,21 +78,6 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test
    
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
    @SpecAssertions( {
-      @SpecAssertion(section="7.3.6", id = "nb")
-   })
-   public void testDestructionOfPersistenceContext() throws Exception
-   {
-      Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
-      CreationalContext<ManagedBean> creationalContext = getCurrentManager().createCreationalContext(managedBean);
-      ManagedBean instance = managedBean.create(creationalContext);
-      EntityManager em = instance.getPersistenceContext();
-      assert em.isOpen();
-      managedBean.destroy(instance, creationalContext);
-      assert !em.isOpen();
-   }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertions( {
       @SpecAssertion(section = "7.3.6", id = "lc"),
       @SpecAssertion(section = "7.3.6", id = "mf")
    })
