@@ -93,7 +93,7 @@ public class PolicyAvailabilityTest extends AbstractJSR299Test
    public void testProducerPoliciesOnClass() throws Exception
    {
       assert getBeans(Sheep.class, new AnnotationLiteral<Wild>(){}).size() == 2;
-      assert getBeans(Sheep.class, new AnnotationLiteral<Tame>(){}).size() == 0;
+      assert getBeans(Sheep.class, new AnnotationLiteral<Tame>(){}).size() == 2;
    }
    
    @Test
@@ -104,6 +104,6 @@ public class PolicyAvailabilityTest extends AbstractJSR299Test
    public void testProducerPoliciesOnMethodAndField() throws Exception
    {
       assert getBeans(Cat.class, new AnnotationLiteral<Wild>(){}).size() == 2;
-      assert getBeans(Cat.class, new AnnotationLiteral<Tame>(){}).size() == 0;
+      assert getBeans(Cat.class, new AnnotationLiteral<Tame>(){}).size() == 2;
    }
 }
