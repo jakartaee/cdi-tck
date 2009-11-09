@@ -38,9 +38,8 @@ public class LifecycleCallbackInterceptorTest extends AbstractJSR299Test
       assert GoatInterceptor.isPostConstructInterceptorCalled();
    }
    
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "5", id = "a")
-   // WELD-279
    public void testPreDestroyInterceptor()
    {
       // create the instance

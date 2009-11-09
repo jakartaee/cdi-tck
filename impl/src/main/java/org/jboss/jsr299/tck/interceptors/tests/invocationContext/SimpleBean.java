@@ -2,6 +2,7 @@ package org.jboss.jsr299.tck.interceptors.tests.invocationContext;
 
 import javax.interceptor.Interceptors;
 
+@Interceptors(LifecycleCallbackInterceptor.class)
 class SimpleBean
 {
    private int id = 0;
@@ -57,9 +58,10 @@ class SimpleBean
    public void foo()
    {
    }
-   
+
    @Interceptors(Interceptor10.class)
-   public String echo(String s) {
+   public String echo(String s)
+   {
       echoCalled = true;
       return s;
    }

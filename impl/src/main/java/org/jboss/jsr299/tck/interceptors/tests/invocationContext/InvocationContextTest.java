@@ -52,34 +52,39 @@ public class InvocationContextTest extends AbstractJSR299Test
 
    @Test
    @SpecAssertion(section = "6", id = "g")
-   public void testGetMethodMethod()
+   public void testGetMethodForAroundInvokeInterceptorMethod()
    {
       assert getInstanceByType(SimpleBean.class).testGetMethod();
    }
+   
+   @Test
+   @SpecAssertion(section = "6", id = "h")
+   public void testGetMethodForLifecycleCallbackInterceptorMethod()
+   {
+      getInstanceByType(SimpleBean.class);
+      assert LifecycleCallbackInterceptor.isGetMethodReturnsNull();
+   }
 
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertions( { 
       @SpecAssertion(section = "6", id = "i"), 
       @SpecAssertion(section = "6", id = "j"), 
       @SpecAssertion(section = "6", id = "k")
    })
-   // WELD-275
    public void testMethodParameters()
    {
       assert getInstanceByType(SimpleBean.class).add(1, 2) == 5;
    }
 
-   @Test(expectedExceptions = IllegalArgumentException.class, groups = "ri-broken")
+   @Test(expectedExceptions = IllegalArgumentException.class)
    @SpecAssertion(section = "6", id = "la")
-   // WELD-275
    public void testIllegalNumberOfParameters()
    {
       getInstanceByType(SimpleBean.class).add2(1, 1);
    }
 
-   @Test(expectedExceptions = IllegalArgumentException.class, groups = "ri-broken")
+   @Test(expectedExceptions = IllegalArgumentException.class)
    @SpecAssertion(section = "6", id = "lb")
-   // WELD-275
    public void testIllegalTypeOfParameters()
    {
       assert getInstanceByType(SimpleBean.class).add3(1, 1) == 2;
