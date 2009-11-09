@@ -3031,7 +3031,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="p">
-      <text>The context object is responsible for destroying any contextual instance it creates by passing the instance to the |destroy()| method of the Contextual object representing the contextual type.</text>
+      <text>The context object is responsible for destroying any contextual instance it creates by passing the instance to the |destroy()| method of the |Contextual| object representing the contextual type.</text>
     </assertion>
 
     <assertion id="q">
@@ -3116,7 +3116,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
     
     <assertion id="dg">
-      <text>Any instance of the bean injected into method parameters of a disposer method or observer method exists to service the method invocation only (except for observer methods of container lifecycle events).</text>
+      <text>When a bean id declared to have |@Dependent| scope, any instance of the bean injected into method parameters of a disposer method or observer method exists to service the method invocation only (except for observer methods of container lifecycle events).</text>
     </assertion>
 
     <assertion id="e">
@@ -3278,11 +3278,11 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="a">
-      <text>If the bean has a normal scope and the given bean type cannot be proxied by the container, as defined in Section 5.5.1, "Unproxyable bean types", the container throws an |UnproxyableResolutionException|.</text>
+      <text>If the bean has a normal scope and the given bean type cannot be proxied by the container, as defined in Section 5.4.1, "Unproxyable bean types", the container throws an |UnproxyableResolutionException|.</text>
     </assertion>
 
     <assertion id="b">
-      <text>If the bean has a normal scope, then the contextual reference for the bean is a client proxy, as defined in Section 5.5, "Client proxies", created by the container, that implements the given bean type and all bean types of the bean which are Java interfaces.</text>
+      <text>If the bean has a normal scope, then the contextual reference for the bean is a client proxy, as defined in Section 5.4, "Client proxies", created by the container, that implements the given bean type and all bean types of the bean which are Java interfaces.</text>
     </assertion>
 
     <assertion id="c">
@@ -3355,7 +3355,7 @@ detects the problem and treats it as a definition error.</text>
     </group>
 
     <group>
-      <text>A producer method is passivation capable if and only if it never returns a value which is not passivation capable at runtime. A producer method with a primitive return type or a return type that implements or extends serializable is passivation capable. A producer method with a return type that is declared |final| and does not implement |Serializable| is not passivation capable.</text>
+      <text>A producer method is passivation capable if and only if it never returns a value which is not passivation capable at runtime. A producer method with a primitive return type or a return type that implements or extends |Serializable| is passivation capable. A producer method with a return type that is declared |final| and does not implement |Serializable| is not passivation capable.</text>
       
       <assertion id="caa">
         <text>Test that a producer method with a primitive return type is passivation capable.</text>
@@ -3863,7 +3863,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="m">
-      <text>The long-running conversation context associated with a request that results in a JSF redirect (via a navigation rule) is automatically propagated to the resulting non-faces request, and to any other subsequent request to the same URL. This is accomplished via use of a GET request parameter named cid containing the unique identifier of the conversation.</text>
+      <text>The long-running conversation context associated with a request that results in a JSF redirect (via a navigation rule) is automatically propagated to the resulting non-faces request, and to any other subsequent request to the same URL. This is accomplished via use of a GET request parameter named |cid| containing the unique identifier of the conversation.</text>
     </assertion>
 
     <assertion id="n">
@@ -3893,11 +3893,11 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="tb">
-  <text>If the propagated conversation cannot be restored, the container must associate the request with a new transient conversation and throw an exception of type |javax.context.NonexistentConversationException| from the restore view phase of the JSF lifecycle.  The application may handle this exception using the JSF |ExceptionHandler|.</text>
+  <text>If the propagated conversation cannot be restored, the container must associate the request with a new transient conversation and throw an exception of type |javax.enterprise.context.NonexistentConversationException| from the restore view phase of the JSF lifecycle.  The application may handle this exception using the JSF |ExceptionHandler|.</text>
     </assertion>    
 
     <assertion id="ua">
-  <text>The container ensures that a long-running conversation may be associated with at most one request at a time, by blocking or rejecting concurrent requests.  If the container rejects a request, it must associate the request with a new transient conversation and throw an exception of type |javax.context.BusyConversationException| from the restore view phase of the JSF lifecycle.  The application may handle this exception using the JSF |ExceptionHandler|.</text>
+  <text>The container ensures that a long-running conversation may be associated with at most one request at a time, by blocking or rejecting concurrent requests.  If the container rejects a request, it must associate the request with a new transient conversation and throw an exception of type |javax.enterprise.context.BusyConversationException| from the restore view phase of the JSF lifecycle.  The application may handle this exception using the JSF |ExceptionHandler|.</text>
     </assertion>
   </section>
   
@@ -3930,7 +3930,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="l">
-      <text>|getId()| returns the identifier of the current long-running conversation, or a null value of the current conversation is transient.</text>
+      <text>|getId()| returns the identifier of the current long-running conversation, or a null value if the current conversation is transient.</text>
     </assertion>
     
     <assertion id="m">
@@ -4074,11 +4074,11 @@ detects the problem and treats it as a definition error.</text>
 
   <section id="7.3.1" title="Lifecycle of managed beans">
     <assertion id="aa">
-      <text>When the |create()| method of the |Bean| object that represents a managed bean is called, the container obtains an instance of the bean, as defined by the Managed Beans specification, calling the bean constructor as defined by Section 5.6.3, "Injection using the bean constructor", and performing dependency injection as defined in Section 5.6.4, "Injection of fields and initializer methods".</text>
+      <text>When the |create()| method of the |Bean| object that represents a managed bean is called, the container obtains an instance of the bean, as defined by the Managed Beans specification, calling the bean constructor as defined by Section 5.5.1, "Injection using the bean constructor", and performing dependency injection as defined in Section 5.5.2, "Injection of fields and initializer methods".</text>
     </assertion>
     
     <assertion id="ba">
-      <text>When the |destroy()| method is called, the container destroys the instance, as defined by the Managed Beans specification, and any dependent objects, as defined in Section 5.6.5, "Destruction of dependent objects".</text>
+      <text>When the |destroy()| method is called, the container destroys the instance, as defined by the Managed Beans specification, and any dependent objects, as defined in Section 5.5.3, "Destruction of dependent objects".</text>
     </assertion>
   </section>
 
@@ -4113,7 +4113,7 @@ creates and returns a container-specific internal local reference to the session
 
   <section id="7.3.4" title="Lifecycle of producer methods">
     <assertion id="ea">
-      <text>When the create() method of a |Bean| object that represents a producer method is called, the container must invoke the producer method as defined by Section 5.6.6, "Invocation of producer or disposer methods". The return value of the producer method, after method interception completes, is the new contextual instance to be returned by |Bean.create()|.</text>
+      <text>When the create() method of a |Bean| object that represents a producer method is called, the container must invoke the producer method as defined by Section 5.5.4, "Invocation of producer or disposer methods". The return value of the producer method, after method interception completes, is the new contextual instance to be returned by |Bean.create()|.</text>
     </assertion>
 
     <assertion id="k">
@@ -4125,17 +4125,17 @@ creates and returns a container-specific internal local reference to the session
     </assertion>
 
     <assertion id="ma">
-      <text>When the |destroy()| method is called, and if there is a disposer method for this producer method, the container must invoke the disposer method as defined by Section 5.6.6, "Invocation of producer or disposer methods", passing the instance given to |destroy()| to the disposed parameter.</text>
+      <text>When the |destroy()| method is called, and if there is a disposer method for this producer method, the container must invoke the disposer method as defined by Section 5.5.4, "Invocation of producer or disposer methods", passing the instance given to |destroy()| to the disposed parameter.</text>
     </assertion>
 
     <assertion id="r">
-      <text>Finally, the container destroys dependent objects, as defined in Section 5.6.5, "Destruction of dependent objects".</text>
+      <text>Finally, the container destroys dependent objects, as defined in Section 5.5.3, "Destruction of dependent objects".</text>
     </assertion>
   </section>
 
   <section id="7.3.5" title="Lifecycle of producer fields">
     <assertion id="ga">
-      <text>When the |create()| method of a |Bean| object that represents a producer field is called, the container must access the producer field as defined by Section 5.6.7, "Access to producer field values" to obtain the current value of the field. The value of the producer field is the new contextual instance to be returned by |Bean.create()|.</text>
+      <text>When the |create()| method of a |Bean| object that represents a producer field is called, the container must access the producer field as defined by Section 5.5.5, "Access to producer field values" to obtain the current value of the field. The value of the producer field is the new contextual instance to be returned by |Bean.create()|.</text>
     </assertion>
 
     <assertion id="m">
