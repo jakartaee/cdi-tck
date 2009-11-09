@@ -40,7 +40,7 @@ public interface Managers
    public boolean isDefinitionError(DeploymentException deploymentException);
 
    /**
-    * Checks whether there is a deployment error, as described in Section 2.8,
+    * Checks whether there is a deployment problem, as described in Section 2.8,
     * "Problems detected automatically by the container".
     * 
     * @param deploymentException the deployment exception context provided by
@@ -49,6 +49,6 @@ public interface Managers
     *           error
     * @return true if there is a deployment error
     */
-   public boolean isDeploymentError(DeploymentException deploymentException);
+   public boolean isDeploymentProblem(DeploymentException deploymentException);
 
 }

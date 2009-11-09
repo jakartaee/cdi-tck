@@ -5,7 +5,7 @@ package org.jboss.jsr299.tck;
  * annotation of an @Artifact to detect a deployment error as described in
  * Section 12.4, "Problems detected automatically by the container".
  * 
- * @see org.jboss.jsr299.tck.spi.Managers#isDeploymentError(Throwable)
+ * @see org.jboss.jsr299.tck.spi.Managers#isDeploymentProblem(Throwable)
  */
 public class DeploymentError extends RuntimeException 
 {

@@ -173,7 +173,7 @@ public abstract class AbstractJSR299Test extends org.jboss.testharness.AbstractT
       {
          return new DeploymentException(deploymentException, new DefinitionError(deploymentException.getCause()));
       }
-      else if (getCurrentConfiguration().getManagers().isDeploymentError(deploymentException))
+      else if (getCurrentConfiguration().getManagers().isDeploymentProblem(deploymentException))
       {
          return new DeploymentException(deploymentException, new DeploymentError(deploymentException.getCause()));
       }
