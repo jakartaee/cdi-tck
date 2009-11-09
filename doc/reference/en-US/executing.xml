@@ -122,11 +122,17 @@
          project sets this value to the relative directory path
          <literal>target/jsr299-artifacts</literal>.
       </para>
+      
       <para>
-         You can read more about this feature in <xref linkend="dumping-test-artifacts" />.
+         However, if you are using Ant, you will be pleased to see the
+         <literal>lib/</literal>, containing all dependencies required
+         to run the TCK - just add every jar to your classpath. Further
+         if you are using Weld, and wish to use Weld's implementation of
+         the porting package, you should add every jar in <literal>weld/porting-package-lib</literal>
+         to your classpath.
       </para>
    </section>
-<!--
+   <!--
 vim: ts=3:sw=3:tw=80:set expandtab
 -->
 </chapter>
