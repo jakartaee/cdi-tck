@@ -4377,7 +4377,7 @@ creates and returns a container-specific internal local reference to the session
 
   <section id="8.2" title="Decorator enablement and ordering">
     <assertion id="a">
-    <text>By default, decorators are not enabled. A decorator must be explicitly enabled by listing its bean class under the |&lt;Decorators&gt;| element in |beans.xml| file of the bean deployment archive.</text>
+    <text>By default, decorators are not enabled. A decorator must be explicitly enabled by listing its bean class under the |&lt;decorators&gt;| element in |beans.xml| file of the bean archive.</text>
     </assertion>
 
     <assertion id="b">
@@ -4406,7 +4406,7 @@ creates and returns a container-specific internal local reference to the session
 
   <section id="8.3" title="Decorator resolution">
     <assertion id="aa">
-      <text>The process of matching decorators to a certain bean is called decorator resolution.  A decorator is bound to a bean if the bean is assignable to the delegate injection point according to the rules defined in Section 5.3, "Typesafe resolution", and the decorator is enabled in the bean deployment archive of the bean.</text>
+      <text>The process of matching decorators to a certain bean is called decorator resolution.  A decorator is bound to a bean if the bean is assignable to the delegate injection point according to the rules defined in Section 5.2, "Typesafe resolution", and the decorator is enabled in the bean archive containing the bean.</text>
     </assertion>
     
     <assertion id="ab">
@@ -4418,13 +4418,13 @@ creates and returns a container-specific internal local reference to the session
     </assertion>
     
     <assertion id="b">
-      <text>For a custom implementation of the Decorator interface defined in Section 11.1.1, "The Decorator interface", the container calls |getDelegateType()|, |getDelegateQualifiers()| and |getDecoratedTypes()| to determine the delegate type and qualifiers and decorated types of the decorator.</text>
+      <text>For a custom implementation of the |Decorator| interface defined in Section 11.1.1, "The Decorator interface", the container calls |getDelegateType()|, |getDelegateQualifiers()| and |getDecoratedTypes()| to determine the delegate type and qualifiers and decorated types of the decorator.</text>
     </assertion>
   </section>
   
   <section id="8.3.1" title="Assignability of raw and parameterized types for delegate injection points">
     <group>
-      <text>A raw bean type is considered assignable to a parameterized delegate type if the raw types are identical and all type parameters of the delegate type are either unbounded type variables or java.lang.Object.</text>
+      <text>A raw bean type is considered assignable to a parameterized delegate type if the raw types are identical and all type parameters of the delegate type are either unbounded type variables or |java.lang.Object|.</text>
       
       <assertion id="ab">
         <text>Check all type parameters are unbounded type variables</text>    
@@ -4440,7 +4440,7 @@ creates and returns a container-specific internal local reference to the session
     </group>
     
     <group>
-      <text>A parameterized bean type is considered assignable to a parameterized delegate type if they have identical raw type and for each parameter: the delegate type parameter and the bean type parameter are actual types with identical raw type, and, if the type is parameterized, the bean type parameter is assignable to the delegate type parameter according to these rules, or the delegate type parameter is a wildcard, the bean type parameter is an actual type and the actual type is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the delegate type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the delegate type parameter and the bean type parameter are both type variables and the upper bound of the bean type parameter is assignable to the upper bound, if any, of the delegate type parameter, or the delegate type parameter is a type variable, the bean type parameter is an actual type, and the actual type is as- signable to the upper bound, if any, of the type variable.</text>
+      <text>A parameterized bean type is considered assignable to a parameterized delegate type if they have identical raw type and for each parameter: the delegate type parameter and the bean type parameter are actual types with identical raw type, and, if the type is parameterized, the bean type parameter is assignable to the delegate type parameter according to these rules, or the delegate type parameter is a wildcard, the bean type parameter is an actual type and the actual type is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the delegate type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the delegate type parameter and the bean type parameter are both type variables and the upper bound of the bean type parameter is assignable to the upper bound, if any, of the delegate type parameter, or the delegate type parameter is a type variable, the bean type parameter is an actual type, and the actual type is assignable to the upper bound, if any, of the type variable.</text>
       
       <assertion id="c">
         <text>Check both have identical type parameters</text>
@@ -4557,8 +4557,8 @@ creates and returns a container-specific internal local reference to the session
       <text>If an interceptor does not declare an |@Interceptor| annotation, it must be bound to beans using |@Interceptors| or |ejb-jar.xml|.</text>
     </assertion>
 
-    <assertion id="c">
-      <text>All interceptors declared using |@Interceptor| must specify at least one interceptor binding. If an interceptor declared using |@Interceptor| does not declare any interceptor binding, the container automatically detects the problem and treats it as a definition error.</text>
+    <assertion id="c" testable="false">
+      <text>All interceptors declared using |@Interceptor| must specify at least one interceptor binding. If an interceptor declared using |@Interceptor| does not declare any interceptor binding, non-portable behavior results.</text>
     </assertion>
 
     <assertion id="d">
@@ -4586,8 +4586,7 @@ creates and returns a container-specific internal local reference to the session
 
   <section id="9.4" title="Interceptor enablement and ordering">
     <assertion id="a">
-      <text>By default, a bean deployment archive has no enabled interceptors bound via interceptor bindings. An interceptor must be explicitly enabled by listing
-its class under the |&lt;Interceptors&gt;| element of the |beans.xml| file for the bean deployment archive.</text>
+      <text>By default, a bean deployment archive has no enabled interceptors bound via interceptor bindings. An interceptor must be explicitly enabled by listing its class under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive.</text>
     </assertion>
 
     <assertion id="b">
@@ -4622,12 +4621,12 @@ called first.</text>
 
   <section id="9.5" title="Interceptor resolution">
     <assertion id="a">
-      <text>For a lifecycle callback method, the interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively, and of stereotypes.
+      <text>For a lifecycle callback method, the interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings and stereotypes.
       </text>
     </assertion>
 
     <group>
-      <text>For a business method, or EJB timeout method, the bean interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively, and of stereotypes, together with all interceptor bindings declared at the method level, including interceptor bindings declared as meta-annotations of other interceptor bindings, recursively.</text>
+      <text>For a business method, or EJB timeout method, the bean interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings and stereotypes, together with all interceptor bindings declared at the method level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings.</text>
       <assertion id="ba">
          <text>Check a business method</text>
       </assertion>
@@ -4637,7 +4636,7 @@ called first.</text>
     </group>
     
     <assertion id="ca">
-      <text>An interceptor is bound to a method if the method has all the interceptor bindings of the interceptor.  A method has an interceptor binding of an interceptor if it has an interceptor binding with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.NonBinding|, and the interceptor intercepts the given kind of lifecycle callback or business method, and the interceptor is enabled in the bean deployment archive of the bean.</text>
+      <text>An interceptor is bound to a method if the method has all the interceptor bindings of the interceptor.  A method has an interceptor binding of an interceptor if it has an interceptor binding with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.NonBinding|, and the interceptor intercepts the given kind of lifecycle callback or business method, and the interceptor is enabled in the bean archive containing the bean.</text>
     </assertion>
    
     <group>
@@ -4681,9 +4680,13 @@ called first.</text>
     <assertion id="a">
       <text>Interceptor binding types may have annotation members.</text>
     </assertion>
+    
+    <assertion id="ab">
+      <text>Annotation member values are compared using |equals()|.</text>
+    </assertion>
 
     <assertion id="b">
-      <text>An annotation member may be excluded from consideration using the @Nonbinding annotation.</text>
+      <text>An annotation member may be excluded from consideration using the |@Nonbinding| annotation.</text>
     </assertion>
 
     <assertion id="ca" testable="false">
