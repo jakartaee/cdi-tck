@@ -4610,9 +4610,19 @@ called first.</text>
       <text>If the same class is listed twice under the |&lt;interceptors&gt;| element, the container automatically detects the problem and treats it as a deployment problem.</text>
     </assertion>
 
-    <assertion id="f">
-      <text>Interceptors declared using |@Interceptors| or in |ejb-jar.xml| are called before interceptors declared using interceptor bindings.</text>
-    </assertion>
+     <group>
+        <text>Interceptors declared using |@Interceptors| or in |ejb-jar.xml| are called before interceptors declared
+           using interceptor bindings.
+        </text>
+
+        <assertion id="fa">
+           <text>Test with a managed bean</text>
+        </assertion>
+
+        <assertion id="fb">
+           <text>Test with session bean</text>
+        </assertion>
+     </group>
 
     <assertion id="g">
       <text>Interceptors are called before decorators.</text>

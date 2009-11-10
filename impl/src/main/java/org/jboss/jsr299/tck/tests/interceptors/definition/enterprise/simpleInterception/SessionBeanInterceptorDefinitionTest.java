@@ -1,4 +1,4 @@
-package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise;
+package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.simpleInterception;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;

@@ -29,7 +29,7 @@ public class InterceptorOrderTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "9.4", id = "f")
+   @SpecAssertion(section = "9.4", id = "fa")
    public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding()
    {
       TransactionalInterceptor.first = false;

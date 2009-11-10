@@ -1,7 +1,6 @@
-package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise;
+package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.simpleInterception;
 
 import javax.ejb.Stateful;
-import javax.interceptor.Interceptors;
 
 @Stateful
 @Airborne

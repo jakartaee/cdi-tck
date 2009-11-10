@@ -1,4 +1,4 @@
-package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise;
+package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.simpleInterception;
 
 import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
