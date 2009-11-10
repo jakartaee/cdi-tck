@@ -5129,11 +5129,11 @@ dependencies".</text>
     </assertion>
 
     <assertion id="bd">
-      <text>|isNullable()| must return |true| if the method |create()| sometimes returns a |null| value, and |false| otherwise, as defined in Section 5.3.4, "Primitive types and null values".</text>
+      <text>|isNullable()| must return |true| if the method |create()| sometimes returns a |null| value, and |false| otherwise, as defined in Section 5.2.4, "Primitive types and null values".</text>
     </assertion>
 
     <assertion id="c">
-      <text>|getInjectionPoints()| returns a set of |InjectionPoint| objects, defined in Section 5.6.9, "Injection point metadata", representing injection points of the bean, that will be validated by the container at initialization time.</text>
+      <text>|getInjectionPoints()| returns a set of |InjectionPoint| objects, defined in Section 5.5.7, "Injection point metadata", representing injection points of the bean, that will be validated by the container at initialization time.</text>
     </assertion>
     
     <assertion id="f">
@@ -5141,7 +5141,7 @@ dependencies".</text>
     </assertion>
 
     <assertion id="g" testable="false">
-      <text>A portable extension may add support for new kinds of beans beyond those defined by the this specification (managed beans, session beans, producer methods and fields, resources and message destinations) by implementing |Bean| and registering beans with the container, using the mechanism defined in Section 11.5.2, "AfterBeanDiscovery event".</text>
+      <text>A portable extension may add support for new kinds of beans beyond those defined by the this specification (managed beans, session beans, producer methods, producer fields and resources) by implementing |Bean| and registering beans with the container, using the mechanism defined in Section 11.5.2, "AfterBeanDiscovery event".</text>
     </assertion>
   </section>
 
@@ -5169,7 +5169,7 @@ dependencies".</text>
     </assertion>
 
     <assertion id="b">
-      <text>|getInterceptorBindingTypes()| returns the interceptor bindings of the interceptor.</text>
+      <text>|getInterceptorBindings()| returns the interceptor bindings of the interceptor.</text>
     </assertion>
 
     <assertion id="c">
@@ -5195,7 +5195,7 @@ dependencies".</text>
     </assertion>
     
     <assertion id="b">
-      <text>|getBean()| returns the bean with the observer method.</text>
+      <text>|getBeanClass()| returns the bean class of the bean that declares the observer method.</text>
     </assertion>
     
     <assertion id="c">
@@ -5211,7 +5211,7 @@ dependencies".</text>
     </assertion>
     
     <assertion id="f">
-      <text>|notify()| calls the observer method, as defined in Section 5.6.8 "Invocation of observer methods".</text>
+      <text>|notify()| calls the observer method, as defined in Section 5.5.6 "Invocation of observer methods".</text>
     </assertion>
     
     <assertion id="ga">
@@ -5226,7 +5226,7 @@ dependencies".</text>
     </assertion>
 
     <group>
-      <text>For a |Producer| that represents a class, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no parameters otherwise, as defined in Section 5.6.3, "Injection using the bean constructor". and returns the resulting instance. If the class has interceptors, |produce()| is responsible for building the interceptors and decorators of the instance.</text>
+      <text>For a |Producer| that represents a class, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no parameters otherwise, as defined in Section 5.5.1, "Injection using the bean constructor". and returns the resulting instance. If the class has interceptors, |produce()| is responsible for building the interceptors and decorators of the instance.</text>
       <assertion id="ba">
          <text>Test field injection occurs</text>
       </assertion>
@@ -5249,20 +5249,24 @@ dependencies".</text>
       <text>For a |Producer| that represents a class, |dispose()| does nothing.</text>
     </assertion>
     
-    <assertion id="da">
-      <text>For a |Producer| that represents a class, |getInjectionPoints()| returns a set of |InjectionPoint| objects representing all _injected fields_, bean constructor parameters and initializer method parameters.</text>
-    </assertion>
-    
-    <assertion id="db">
-      <text>For a |Producer| that represents a class, |getInjectionPoints()| returns a set of |InjectionPoint| objects representing all injected fields, _bean constructor parameters_ and initializer method parameters.</text>
-    </assertion>
-    
-    <assertion id="dc">
-      <text>For a |Producer| that represents a class, |getInjectionPoints()| returns a set of |InjectionPoint| objects representing all injected fields, bean constructor parameters and _initializer method parameters_.</text>
-    </assertion>
+    <group>
+      <text>For a |Producer| that represents a class, |getInjectionPoints()| returns a set of |InjectionPoint| objects representing all injected fields, bean constructor parameters and initializer method parameters.</text>
+            
+      <assertion id="da">
+        <text>Test injected fields.</text>
+      </assertion>
+      
+      <assertion id="db">
+        <text>Test bean constructor parameters.</text>
+      </assertion>
+      
+      <assertion id="dc">
+        <text>Test initializer method parameters.</text>
+      </assertion>
+    </group>
     
     <group>
-      <text>For a |Producer| that represents a producer method or field, |produce()| calls the producer method on, or accesses the producer field of, a contextual instance of the bean that declares the producer method, as defined in Section 5.6.6, "Invocation of producer or disposer methods".</text>
+      <text>For a |Producer| that represents a producer method or field, |produce()| calls the producer method on, or accesses the producer field of, a contextual instance of the bean that declares the producer method, as defined in Section 5.5.4, "Invocation of producer or disposer methods".</text>
 
       <assertion id="eaa">
         <text>Test with producer method.</text>
@@ -5274,7 +5278,7 @@ dependencies".</text>
     </group>
     
     <group>
-      <text>For a Producer that represents a producer method or field, |dispose()| calls the disposer method, if any, on a contextual instance of the bean that declares the disposer method, as defined in Section 5.6.6, "Invocation of producer or disposer methods", or performs any additional required cleanup, if any, to destroy state associated with a resource.</text>
+      <text>For a Producer that represents a producer method or field, |dispose()| calls the disposer method, if any, on a contextual instance of the bean that declares the disposer method, as defined in Section 5.5.4, "Invocation of producer or disposer methods", or performs any additional required cleanup, if any, to destroy state associated with a resource.</text>
           
       <assertion id="faa">
         <text>Test with producer method.</text>
@@ -5292,7 +5296,7 @@ dependencies".</text>
     </assertion>
     
     <assertion id="i">
-      <text>|inject()| performs dependency injection upon the given object. The container performs Java EE component environment injection, according to the semantics required by the Java EE platform specification, sets the value of all injected fields, and calls all initializer methods, as defined in Section 5.6.4, "Injection of fields and initializer methods".</text>
+      <text>|inject()| performs dependency injection upon the given object. The container performs Java EE component environment injection, according to the semantics required by the Java EE platform specification, sets the value of all injected fields, and calls all initializer methods, as defined in Section 5.5.2, "Injection of fields and initializer methods".</text>
     </assertion>
     
     <assertion id="j">
@@ -5345,13 +5349,21 @@ dependencies".</text>
     </assertion>
 
     <assertion id="b">
-      <text>The first parameter is the |Bean| object representing the bean. The second parameter represents the bean type that must be implemented by any client proxy that is returned.</text>
+      <text>The first parameter is the |Bean| object representing the bean. The second parameter represents the bean type that must be implemented by any client proxy that is returned.  The third parameter is an instance of |CreationalContext| that may be used to destroy any object with scope |@Dependent| that is created.</text>
+    </assertion>
+    
+    <assertion id="c">
+      <text>If the given type is not a bean type of the given bean, an |IllegalArgumentException| is thrown.</text>
     </assertion>
   </section>
 
   <section id="11.3.2" title="Obtaining an injectable reference">
     <assertion id="a">
-      <text>The method |BeanManager.getInjectableReference()| returns an injectable reference for a given injection point, as defined in Section 5.6.1, "Injectable references".</text>
+      <text>The method |BeanManager.getInjectableReference()| returns an injectable reference for a given injection point, as defined in Section 6.5.5, "Injectable references".</text>
+    </assertion>
+    
+    <assertion id="ab">
+      <text>The first parameter represents the target injection point.  The second parameter is an instance of |CreationalContext| that may be used to destroy any object with scope |@Dependent| that is created.</text>
     </assertion>
     
     <assertion id="b">
@@ -5384,7 +5396,7 @@ dependencies".</text>
 
   <section id="11.3.4" title="Obtaining a Bean by type">
     <assertion id="aa">
-      <text>The method |BeanManager.getBeans()| returns the set of beans which have the given required type and qualifiers and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of typesafe resolution defined in Section 5.3, "Typesafe resolution".</text>
+      <text>The method |BeanManager.getBeans()| returns the set of beans which have the given required type and qualifiers and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of typesafe resolution defined in Section 5.2, "Typesafe resolution".</text>
     </assertion>
 
     <assertion id="b">
@@ -5410,7 +5422,7 @@ dependencies".</text>
 
   <section id="11.3.5" title="Obtaining a Bean by name">
     <assertion id="aa">
-      <text>The method |BeanManager.getBeans()| which accepts a string returns the set of beans which have the given EL name and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of EL name resolution defined in Section 5.4, "EL name resolution".</text>
+      <text>The method |BeanManager.getBeans()| which accepts a string returns the set of beans which have the given EL name and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of EL name resolution defined in Section 5.3, "EL name resolution".</text>
     </assertion>
 
     <assertion id="b">
@@ -5420,13 +5432,13 @@ dependencies".</text>
   
   <section id="11.3.6" title="Obtaining a passivation capable bean by identifier">
     <assertion id="a">
-      <text>The method |BeanManager.getPassivationCapableBean()| returns the |PassivationCapableBean| with the given identifier.</text>
+      <text>The method |BeanManager.getPassivationCapableBean()| returns the |PassivationCapable| bean with the given identifier (see Section 6.6.1, "Passivation capable beans").</text>
     </assertion>
   </section>
   
   <section id="11.3.7" title="Resolving an ambiguous dependency">
     <assertion id="a">
-      <text>The method |BeanManager.resolve()| applies the ambiguous dependency resolution rules defined in Section 5.3.1, "Unsatisfied and ambiguous dependencies" to a set of |Bean|s.</text>
+      <text>The method |BeanManager.resolve()| applies the ambiguous dependency resolution rules defined in Section 5.2.1, "Unsatisfied and ambiguous dependencies" to a set of |Bean|s.</text>
     </assertion>
     
     <assertion id="b">
@@ -5434,13 +5446,13 @@ dependencies".</text>
     </assertion>
   </section>
   
-  <section id="11.3.8" title="Validating a dependency">
+  <section id="11.3.8" title="Validating an injection point">
     <assertion id="a">
-      <text>The |BeanManager.validate()| operation validates a dependency.</text>
+      <text>The |BeanManager.validate()| operation validates an injection point and throws an |InjectionException| if there is a deployment problem (for example, an unsatisfied or unresolvable ambiguous dependency) associated with the injection point.</text>
       <note>Statement of intent</note>
     </assertion>
 
-    <assertion id="b">
+    <assertion id="a">
       <text>The method |validate()| validates the dependency and throws an |InjectionException| if there is a deployment problem (for example, an unsatisfied or unresolvable ambiguous dependency) associated with the injection point.</text>
     </assertion>
   </section>
@@ -5465,12 +5477,7 @@ dependencies".</text>
     <assertion id="e">
       <text>If an instance of an annotation that is not a qualifier type is given, an |IllegalArgumentException| is thrown.</text>
     </assertion>
-    
-    <assertion id="f" testable="false">
-      <text>If an instance of |javax.enterprise.inject.New| is passed to |getBeans()|, non-portable behavior results. Portable applications should not pass qualifiers of type |@New| to |getBeans()|.</text>
-      <note>Describes non-portable behavior</note>
-   </assertion>
-    
+        
   </section>
   
   <section id="11.3.10" title="Observer method resolution">
@@ -5497,7 +5504,7 @@ dependencies".</text>
   
   <section id="11.3.11" title="Decorator resolution">
     <assertion id="a">
-      <text>The method |BeanManager.resolveDecorators()| returns the ordered list of decorators for a set of bean types and a set of qualifiers, as defined in Section 8.3, "Decorator resolution".</text>
+      <text>The method |BeanManager.resolveDecorators()| returns the ordered list of decorators for a set of bean types and a set of qualifiers which are enabled in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, as defined in Section 8.3, "Decorator resolution".</text>
     </assertion>
     
     <assertion id="b">
@@ -5519,7 +5526,7 @@ dependencies".</text>
   
   <section id="11.3.12" title="Interceptor resolution">
     <assertion id="a">
-      <text>The method |BeanManager.resolveInterceptors()| returns the ordered list of interceptors for a set of interceptor qualifiers, as defined in Section 9.5, "Interceptor resolution".</text>
+      <text>The method |BeanManager.resolveInterceptors()| returns the ordered list of interceptors for a set of interceptor bindings and a type of interception which are enabled in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, as defined in Section 9.5, "Interceptor resolution".</text>
     </assertion>
     
     <assertion id="b">
@@ -5577,7 +5584,7 @@ dependencies".</text>
   
   <section id="11.3.15" title="Obtaining the ELResolver">
     <assertion id="a">
-      <text>The method |BeanManager.getELResolver()| returns the |javax.el.ELResolver| specified in Section 5.8, "Integration with Unified EL".</text>
+      <text>The method |BeanManager.getELResolver()| returns the |javax.el.ELResolver| specified in Section 12.4, "Integration with Unified EL".</text>
     </assertion>
   </section>
   
@@ -5593,7 +5600,7 @@ dependencies".</text>
   
   <section id="11.3.17" title="Obtaining an AnnotatedType for a class">
     <assertion id="a">
-      <text>The method |BeanManager.createAnnotatedType()| returns an |AnnotatedType| for the given Java class.</text>
+      <text>The method |BeanManager.createAnnotatedType()| returns an |AnnotatedType| that may be used to read the annotations of a given Java class or interface.</text>
     </assertion>
   </section>
   
@@ -5640,7 +5647,7 @@ dependencies".</text>
     </assertion>
     
     <assertion id="g">
-      <text>|isAnnotationPresent()| returns true if the program element has an annotation of the given annotation type, or false otherwise.</text>
+      <text>|isAnnotationPresent()| returns |true| if the program element has an annotation of the given annotation type, or |false| otherwise.</text>
     </assertion>
     
     <group> 
@@ -5789,20 +5796,19 @@ dependencies".</text>
     </assertion>
 
     <assertion id="b">
-      <text>Observer methods of these events must belong to extensions.  An extension is a service provider |javax.enterprise.inject.spi.Extension| declared in |META-INF/services|.</text>
-    </assertion>
-
-    <assertion id="c">
-      <text>The container instantiates a single instance of each service provider at the beginning of the application initialization process and maintains a reference to it until the application shuts down.</text>
+      <text>Observer methods of these events must belong to extensions.  An extension is a service provider of the service |javax.enterprise.inject.spi.Extension| declared in |META-INF/services|.</text>
     </assertion>
     
+    <assertion id="bb">
+      <text>Service providers may have observer methods, which may observer any event, including any container lifecycle event, and obtain an injected |BeanManager| reference.</text>
+    </assertion>
+       
     <assertion id="d">
       <text>The container instantiates a single instance of each extension at the beginning of the application initialization process and maintains a reference to it until the application shuts down.  The container delivers event notifications to this instance by calling its observer methods.</text>
     </assertion>
     
     <assertion id="e">
-      <text>For each service provider, the container must provide a bean of scope |@ApplicationScoped| and qualifier |@Default|, supporting injection of a reference to the service provider instance. The bean types of this bean include the class of the service
-provider and all superclases and interfaces.</text>
+      <text>For each service provider, the container must provide a bean of scope |@ApplicationScoped| and qualifier |@Default|, supporting injection of a reference to the service provider instance. The bean types of this bean include the class of the service provider and all superclases and interfaces.</text>
     </assertion>
   </section>
 
@@ -5838,7 +5844,7 @@ provider and all superclases and interfaces.</text>
 
   <section id="11.5.2" title="AfterBeanDiscovery event">
     <assertion id="a">
-      <text>The container must fire a second event when it has fully completed the bean discovery process, validated that there are no definition errors relating to the discovered beans, and registered |Bean| and |Observer| objects for the discovered beans, but before detecting deployment problems.  The event object must be of type |javax.enterprise.inject.spi.AfterBeanDiscovery|.</text>
+      <text>The container must fire a second event when it has fully completed the bean discovery process, validated that there are no definition errors relating to the discovered beans, and registered |Bean| and |ObserverMethod| objects for the discovered beans, but before detecting deployment problems.  The event object must be of type |javax.enterprise.inject.spi.AfterBeanDiscovery|.</text>
     </assertion>
     
     <assertion id="ca">
@@ -5876,7 +5882,11 @@ provider and all superclases and interfaces.</text>
     </group>
     
     <assertion id="f">
-      <text>|addContext()| registers a custom |Context| object with the container. A portable extension may take advantage of this event to register beans, interceptors, decorators, observer methods and custom context objects with the container.</text>
+      <text>|addContext()| registers a custom |Context| object with the container.</text>
+    </assertion>
+    
+    <assertion id="fb">
+      <text>A portable extension may take advantage of this event to register beans, interceptors, decorators, observer methods and custom context objects with the container.</text>
     </assertion>
     
     <assertion id="g">
@@ -5914,7 +5924,7 @@ provider and all superclases and interfaces.</text>
 
   <section id="11.5.5" title="ProcessAnnotatedType event">
     <assertion id="a">
-      <text>The container must fire an event for each Java class it discovers in a bean deployment archive, before it reads the declared annotations. The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where |X| is the class.</text>
+      <text>The container must fire an event for each Java class it discovers in a bean archive, before it reads the declared annotations. The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where |X| is the class.</text>
     </assertion>
 
     <assertion id="ba">
@@ -5997,6 +6007,10 @@ provider and all superclases and interfaces.</text>
       </assertion>
     </group>
     
+    <assertion id="aaz">
+      <text>The event object must be of type |javax.enterprise.inject.spi.ProcessInjectionTarget&lt;X&gt;|, where |x| is the managed bean class, session bean class or Java EE component class supporting injection.</text>
+    </assertion>
+    
     <group>
       <text>|getAnnotatedType()| returns the |AnnotatedType| representing the managed bean class, session bean or other Java EE component class supporting injection.</text>
       <assertion id="aba">
@@ -6027,6 +6041,10 @@ provider and all superclases and interfaces.</text>
         <text>Test type for a filter</text>
       </assertion>
     </group>
+    
+    <assertion id="ba">
+      <text>|getInjectionTarget()| returns the |InjectionTarget| object that will be used by the container to perform injection.</text>
+    </assertion>
     
     <assertion id="bb">
       <text>|setInjectionTarget()| replaces the |InjectionTarget|.</text>
@@ -6141,7 +6159,7 @@ provider and all superclases and interfaces.</text>
 
   <section id="11.5.8" title="ProcessBean event">
     <assertion id="aa" testable="false">
-      <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean deployment archive, before registering the |Bean| object.  No event is fired for any |@New| qualified bean, defined in Section 3.12, "@New qualified beans".</text>
+      <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean archive, before registering the |Bean| object.  No event is fired for any |@New| qualified bean, defined in Section 3.12, "@New qualified beans".</text>
       <note>Tested below</note>
     </assertion>
 
@@ -6213,7 +6231,6 @@ provider and all superclases and interfaces.</text>
       </assertion>
     </group>
     
-
     <assertion id="h">
       <text>|addDefinitionError()| registers a definition error with the container, causing the container to abort deployment after bean discovery is complete.</text>
     </assertion>

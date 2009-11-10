@@ -97,10 +97,7 @@ public class BeanManagerTest extends AbstractJSR299Test
    }
    
    @Test(expectedExceptions = InjectionException.class)
-   @SpecAssertions({
-      @SpecAssertion(section = "11.3.8", id = "a"),
-      @SpecAssertion(section = "11.3.8", id = "b")
-   })
+   @SpecAssertion(section = "11.3.8", id = "a")
    public void testValidateThrowsException()
    {
       DogHouse dogHouse = getInstanceByType(DogHouse.class);
