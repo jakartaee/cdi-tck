@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.extensions.container.event.broken.processBeanObserverRegistersException;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DefinitionError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
@@ -27,15 +27,14 @@ import org.jboss.testharness.impl.packaging.Resource;
 import org.testng.annotations.Test;
 
 @Artifact
-@ExpectedDeploymentException(DefinitionError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
 @IntegrationTest
 @SpecVersion(spec = "cdi", version = "20091101")
 public class AddDefinitionErrorTest extends AbstractJSR299Test
 {
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "11.5.8", id = "h")
-   // WELD-223
    public void testAddDefinitionError()
    {
       assert false;

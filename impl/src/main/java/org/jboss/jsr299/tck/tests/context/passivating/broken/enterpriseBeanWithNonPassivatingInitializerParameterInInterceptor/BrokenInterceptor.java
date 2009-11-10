@@ -3,9 +3,9 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWith
 import java.io.Serializable;
 
 import javax.inject.Inject;
+import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-import javax.interceptor.AroundInvoke;
 
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 

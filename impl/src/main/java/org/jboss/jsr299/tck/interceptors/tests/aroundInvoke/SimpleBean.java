@@ -2,8 +2,6 @@ package org.jboss.jsr299.tck.interceptors.tests.aroundInvoke;
 
 import javax.interceptor.Interceptors;
 
-import org.jboss.jsr299.tck.interceptors.tests.aroundInvoke.PackagePrivateInterceptor;
-
 
 class SimpleBean
 {

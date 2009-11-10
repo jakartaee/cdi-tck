@@ -1,8 +1,8 @@
 package org.jboss.jsr299.tck.tests.event.observer.conditional;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Reception;
 import javax.enterprise.event.Observes;
+import javax.enterprise.event.Reception;
 
 /**
  * Simple web bean that conditionally listens to events.

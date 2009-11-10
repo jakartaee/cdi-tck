@@ -18,7 +18,7 @@
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.exceptionInAfterBeanValidationObserver;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  */
 @Artifact
-@ExpectedDeploymentException(DeploymentError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class AfterDeploymentValidationObserverExecutionFailureTest extends AbstractJSR299Test
 {

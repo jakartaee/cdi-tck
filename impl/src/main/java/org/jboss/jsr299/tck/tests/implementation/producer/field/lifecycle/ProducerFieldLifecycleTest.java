@@ -1,10 +1,9 @@
 package org.jboss.jsr299.tck.tests.implementation.producer.field.lifecycle;
 
+import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.IllegalProductException;
 import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.util.AnnotationLiteral;
-import javax.enterprise.context.spi.CreationalContext;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;

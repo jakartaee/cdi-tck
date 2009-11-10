@@ -1,7 +1,7 @@
 package org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPassivatingInjectedField;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
@@ -10,7 +10,7 @@ import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 @Artifact
-@ExpectedDeploymentException(DeploymentError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 @BeansXml("beans.xml")
 public class DecoratorWithNonPassivatingInjectedFieldTest extends AbstractJSR299Test

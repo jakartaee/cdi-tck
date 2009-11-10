@@ -1,9 +1,15 @@
 package org.jboss.jsr299.tck.tests.interceptors.definition.custom;
 
+import static javax.enterprise.inject.spi.InterceptionType.AROUND_INVOKE;
+import static javax.enterprise.inject.spi.InterceptionType.AROUND_TIMEOUT;
+import static javax.enterprise.inject.spi.InterceptionType.POST_ACTIVATE;
+import static javax.enterprise.inject.spi.InterceptionType.POST_CONSTRUCT;
+import static javax.enterprise.inject.spi.InterceptionType.PRE_DESTROY;
+import static javax.enterprise.inject.spi.InterceptionType.PRE_PASSIVATE;
+
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
-import static javax.enterprise.inject.spi.InterceptionType.*;
 
 
 public class AfterBeanDiscoveryObserver implements Extension

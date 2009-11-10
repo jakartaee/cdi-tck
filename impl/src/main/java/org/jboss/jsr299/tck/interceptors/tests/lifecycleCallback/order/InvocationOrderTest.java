@@ -27,7 +27,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "int", version = "3.1.PFD")
 public class InvocationOrderTest extends AbstractJSR299Test
 {
-   @Test
+   @Test(groups="ri-broken")
    @SpecAssertions({
       @SpecAssertion(section = "5.1", id = "c"),
       @SpecAssertion(section = "5.1", id = "d"),

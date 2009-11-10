@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.event.broken.inject.withoutType;
 
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DefinitionError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.testng.annotations.Test;
@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  */
 @Artifact
-@ExpectedDeploymentException(DefinitionError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 public class EventInjectionWithoutTypeTest extends AbstractJSR299Test
 {
    @Test(groups = { "events" })

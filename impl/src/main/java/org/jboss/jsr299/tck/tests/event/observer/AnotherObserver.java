@@ -1,8 +1,8 @@
 package org.jboss.jsr299.tck.tests.event.observer;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Reception;
 import javax.enterprise.event.Observes;
+import javax.enterprise.event.Reception;
 
 @RequestScoped
 class AnotherObserver

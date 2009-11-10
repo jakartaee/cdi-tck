@@ -2,7 +2,6 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.lifecycle;
 
 import java.util.Set;
 
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.CreationException;
 import javax.enterprise.inject.IllegalProductException;

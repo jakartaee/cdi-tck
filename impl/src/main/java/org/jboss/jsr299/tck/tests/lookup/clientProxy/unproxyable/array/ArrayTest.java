@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.array;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
  * Test for problem detection of array injection.
  */
 @Artifact
-@ExpectedDeploymentException(DeploymentError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class ArrayTest extends AbstractJSR299Test
 {

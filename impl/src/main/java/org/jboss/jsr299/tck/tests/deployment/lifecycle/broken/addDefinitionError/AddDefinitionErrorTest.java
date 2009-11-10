@@ -1,7 +1,7 @@
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.addDefinitionError;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DefinitionError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 })
 // Must be an integration test as it needs a resource copied to a folder
 @IntegrationTest
-@ExpectedDeploymentException(DefinitionError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class AddDefinitionErrorTest extends AbstractJSR299Test
 {

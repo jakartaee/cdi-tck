@@ -1,7 +1,7 @@
 package org.jboss.jsr299.tck.tests.context.passivating.broken.finalProducerFieldNotPassivationCapable;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 @Artifact
 @Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")
-@ExpectedDeploymentException(DeploymentError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 public class NonPassivationCapableProducerFieldTest extends AbstractJSR299Test
 {
    @Test(groups = { "passivation", "ri-wrong-cause" })

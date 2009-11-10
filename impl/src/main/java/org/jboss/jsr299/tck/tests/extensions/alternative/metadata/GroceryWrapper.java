@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Reception;
 import javax.enterprise.event.Observes;
+import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.AnnotatedConstructor;

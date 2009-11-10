@@ -1,7 +1,7 @@
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.broken.methodOnSessionBean;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DefinitionError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -13,7 +13,7 @@ import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
 @Artifact
-@ExpectedDeploymentException(DefinitionError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @IntegrationTest
 @Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")

@@ -1,9 +1,6 @@
 package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
-import java.io.Serializable;
-
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Produces;

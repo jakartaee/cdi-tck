@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.beanDiscoveryMethodThrowsException;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DefinitionError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
@@ -35,13 +35,12 @@ import org.testng.annotations.Test;
    @Resource(source="javax.enterprise.inject.spi.Extension", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
 })
 @IntegrationTest
-@ExpectedDeploymentException(DefinitionError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class BeforeBeanDiscoveryThrowsExceptionTest extends AbstractJSR299Test
 {
    
-   @Test(groups="jboss-as-broken")
-   // WBRI-312
+   @Test
    @SpecAssertion(section="11.5.1", id="ag")
    public void testThrowsException()
    {

@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.decorators.definition.inject.broken.delegateProducerMethod;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DefinitionError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
 @Artifact
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
-@ExpectedDeploymentException(DefinitionError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 public class DelegateInjectionPointTest extends AbstractJSR299Test
 {
 

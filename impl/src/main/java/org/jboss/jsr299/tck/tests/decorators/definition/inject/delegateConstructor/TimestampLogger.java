@@ -16,8 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.inject.delegateConstructor;
 
-import javax.decorator.Delegate;
 import javax.decorator.Decorator;
+import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 

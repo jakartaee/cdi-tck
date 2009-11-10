@@ -2,8 +2,6 @@ package org.jboss.jsr299.tck.spi;
 
 import javax.enterprise.inject.spi.BeanManager;
 
-import org.jboss.testharness.api.DeploymentException;
-
 /**
  * This interface provides operations relating to a Manager.
  * 
@@ -26,29 +24,5 @@ public interface Managers
     * @return the Manager
     */
    public BeanManager getManager();
-
-   /**
-    * Checks whether there is a definition error, as described in Section 2.8,
-    * "Problems detected automatically by the container".
-    * 
-    * @param deploymentException the deployment exception context provided by
-    *           the deployment which is in error. The deployment is not required
-    *           to provide a deploymentException, even if the deployment is in
-    *           error
-    * @return true if there is a definition error
-    */
-   public boolean isDefinitionError(DeploymentException deploymentException);
-
-   /**
-    * Checks whether there is a deployment problem, as described in Section 2.8,
-    * "Problems detected automatically by the container".
-    * 
-    * @param deploymentException the deployment exception context provided by
-    *           the deployment which is in error. The deployment is not required
-    *           to provide a deploymentException, even if the deployment is in
-    *           error
-    * @return true if there is a deployment error
-    */
-   public boolean isDeploymentProblem(DeploymentException deploymentException);
 
 }

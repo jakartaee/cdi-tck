@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.policy.broken.same.type.twice;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
@@ -27,7 +27,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
-@ExpectedDeploymentException(DeploymentError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class SameTypeListedTwiceTest extends AbstractJSR299Test
 {

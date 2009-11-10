@@ -7,7 +7,7 @@ package org.jboss.jsr299.tck;
  * 
  * @see org.jboss.jsr299.tck.spi.Managers#isDefinitionError(Throwable)
  */
-public class DefinitionError extends RuntimeException 
+public class DeploymentFailure extends RuntimeException 
 {
 
    /**
@@ -15,22 +15,22 @@ public class DefinitionError extends RuntimeException
 	 */
 	private static final long serialVersionUID = 3544233876045340712L;
 
-public DefinitionError()
+public DeploymentFailure()
    {
       super();
    }
 
-   public DefinitionError(String message, Throwable cause)
+   public DeploymentFailure(String message, Throwable cause)
    {
       super(message, cause);
    }
 
-   public DefinitionError(String message)
+   public DeploymentFailure(String message)
    {
       super(message);
    }
 
-   public DefinitionError(Throwable cause)
+   public DeploymentFailure(Throwable cause)
    {
       super(cause);
    }

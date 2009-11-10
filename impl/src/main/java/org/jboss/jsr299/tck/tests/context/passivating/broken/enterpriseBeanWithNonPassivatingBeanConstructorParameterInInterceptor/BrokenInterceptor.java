@@ -1,10 +1,11 @@
 package org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingBeanConstructorParameterInInterceptor;
 
+import java.io.Serializable;
+
+import javax.inject.Inject;
+import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-import javax.interceptor.AroundInvoke;
-import javax.inject.Inject;
-import java.io.Serializable;
 
 @Interceptor @CityBinding
 class BrokenInterceptor implements Serializable

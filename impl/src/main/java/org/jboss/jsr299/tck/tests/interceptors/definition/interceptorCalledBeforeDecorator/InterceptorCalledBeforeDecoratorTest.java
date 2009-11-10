@@ -5,7 +5,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
-
 import org.testng.annotations.Test;
 
 @Artifact

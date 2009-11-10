@@ -8,8 +8,6 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-import org.jboss.jsr299.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
-
 public class AnnotatedTypeWrapper<X> extends AnnotatedWrapper implements AnnotatedType<X>
 {
    private AnnotatedType<X> delegate;

@@ -1,7 +1,7 @@
 package org.jboss.jsr299.tck.tests.event.broken.observer.dependentIsConditionalObserver;
 
-import javax.enterprise.event.Reception;
 import javax.enterprise.event.Observes;
+import javax.enterprise.event.Reception;
 
 class AlarmSystem
 {

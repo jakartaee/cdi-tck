@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint.broken.not.bean;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DefinitionError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 
 @Artifact
 @SpecVersion(spec="cdi", version="20091101")
-@ExpectedDeploymentException(DefinitionError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @IntegrationTest
 @Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml")
 public class InjectionPointTest extends AbstractJSR299Test

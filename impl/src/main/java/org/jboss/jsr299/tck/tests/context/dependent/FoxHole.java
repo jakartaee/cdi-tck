@@ -1,6 +1,5 @@
 package org.jboss.jsr299.tck.tests.context.dependent;
 
-import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 class FoxHole

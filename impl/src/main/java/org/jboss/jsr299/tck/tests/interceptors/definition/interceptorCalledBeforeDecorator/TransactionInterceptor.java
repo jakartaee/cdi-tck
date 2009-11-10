@@ -1,7 +1,6 @@
 package org.jboss.jsr299.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator;
 
 import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 public class TransactionInterceptor

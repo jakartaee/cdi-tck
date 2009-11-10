@@ -22,6 +22,7 @@ import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.jsr299.tck.api.JSR299Configuration;
 import org.jboss.jsr299.tck.impl.OldSPIBridge;
+import org.jboss.testharness.ExpectedException;
 import org.jboss.testharness.api.DeploymentException;
 import org.jboss.testharness.impl.ConfigurationFactory;
 
@@ -169,17 +170,13 @@ public abstract class AbstractJSR299Test extends org.jboss.testharness.AbstractT
    @Override
    protected DeploymentException handleDeploymentFailure(DeploymentException deploymentException)
    {
-      if (getCurrentConfiguration().getManagers().isDefinitionError(deploymentException))
+      if (deploymentException.getCause().getClass().equals(ExpectedException.class))
       {
-         return new DeploymentException(deploymentException, new DefinitionError(deploymentException.getCause()));
-      }
-      else if (getCurrentConfiguration().getManagers().isDeploymentProblem(deploymentException))
-      {
-         return new DeploymentException(deploymentException, new DeploymentError(deploymentException.getCause()));
+         return new DeploymentException(deploymentException, deploymentException.getCause());
       }
       else
       {
-         return deploymentException;
+         return new DeploymentException(deploymentException, new DeploymentFailure());
       }
    }
 }

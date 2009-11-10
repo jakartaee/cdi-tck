@@ -3,7 +3,6 @@ package org.jboss.jsr299.tck.tests.context.dependent;
 import javax.annotation.PreDestroy;
 
 import org.jboss.jsr299.tck.api.JSR299Configuration;
-import org.jboss.jsr299.tck.impl.JSR299ConfigurationImpl;
 import org.jboss.testharness.impl.ConfigurationFactory;
 
 class Tarantula extends Spider implements DeadlySpider

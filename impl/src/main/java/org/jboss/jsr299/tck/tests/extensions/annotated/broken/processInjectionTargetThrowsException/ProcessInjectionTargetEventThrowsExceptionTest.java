@@ -18,7 +18,7 @@
 package org.jboss.jsr299.tck.tests.extensions.annotated.broken.processInjectionTargetThrowsException;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentError;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  *
  */
 @Artifact
-@ExpectedDeploymentException(DeploymentError.class)
+@ExpectedDeploymentException(DeploymentFailure.class)
 @Resources({
    @Resource(source="javax.enterprise.inject.spi.Extension", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
 })
@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091101")
 public class ProcessInjectionTargetEventThrowsExceptionTest extends AbstractJSR299Test
 {
-   @Test(groups="jboss-as-broken")
+   @Test
    @SpecAssertion(section = "11.5.6", id = "f")
    public void testProcessInjectionTargetEventThrowsExceptionNotOk()
    {
