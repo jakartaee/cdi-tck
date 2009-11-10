@@ -1,0 +1,5 @@
+<beans>
+  <interceptors>
+    <class>org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.nonContextualReference.MissileInterceptor</class>
+  </interceptors>
+</beans>

@@ -4066,6 +4066,11 @@ detects the problem and treats it as a definition error.</text>
     <assertion id="g">
       <text>If the invocation is not a business method invocation, it is treated as a normal Java method call and is not intercepted by the container.</text>
     </assertion>
+
+    <assertion id="h" implied="true">
+      <text>Verify that a non-contextual session bean reference is intercepted</text> 
+    </assertion>
+
   </section>
   
   <section id="7.3" title="Lifecycle of contextual instances">

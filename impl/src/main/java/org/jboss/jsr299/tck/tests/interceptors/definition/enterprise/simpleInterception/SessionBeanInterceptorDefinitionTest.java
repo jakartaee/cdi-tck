@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class SessionBeanInterceptorDefinitionTest extends AbstractJSR299Test
 {
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "7.2", id = "c")
    public void testSessionBeanIsIntercepted()
    {
