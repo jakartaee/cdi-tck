@@ -57,6 +57,18 @@
       </assertion>
     </group>
     
+    <assertion id="ka">
+      <text>An interceptor implementation is not required to support the deployment descriptor approach to specifying interceptor metadata.</text>
+    </assertion>
+    
+    <assertion id="kb">
+      <text>The |@Interceptor| annotation may be used to explicitly designate a class as an interceptor class.  Support for this annotation is not required.</text>
+    </assertion>
+    
+    <assertion id="kc">
+      <text>The |@InterceptorBinding| annotation specifies that an annotation type is an interceptor binding type.  Support for this annotation is not required.</text>
+    </assertion>
+    
     <assertion id="l" testable="false">
       <text>Default interceptors may be defined using the deployment descriptor.</text>
     </assertion>
