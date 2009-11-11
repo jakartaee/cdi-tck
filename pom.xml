@@ -87,7 +87,7 @@
       <servlet.api.version>2.5</servlet.api.version>
       <jsp.api.version>2.1</jsp.api.version>
       <jstl.api.version>1.2</jstl.api.version>
-      <jta.api.version>1.0.1B</jta.api.version>
+      <jta.api.version>1.1</jta.api.version>
       <jms.api.version>1.1</jms.api.version>
       <uel.api.version>2.1.2-b04</uel.api.version>
       <jsf.api.version>1.2_13</jsf.api.version>
