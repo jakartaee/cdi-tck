@@ -108,17 +108,17 @@ CLSS public abstract interface !annotation java.lang.annotation.Target
 intf java.lang.annotation.Annotation
 meth public abstract java.lang.annotation.ElementType[] value()
 
-CLSS public abstract interface !annotation javax.decorator.Decorates
- anno 0 java.lang.annotation.Documented()
- anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
- anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[FIELD, PARAMETER])
-intf java.lang.annotation.Annotation
-
 CLSS public abstract interface !annotation javax.decorator.Decorator
  anno 0 java.lang.annotation.Documented()
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE])
- anno 0 javax.enterprise.inject.stereotype.Stereotype()
+ anno 0 javax.enterprise.inject.Stereotype()
+intf java.lang.annotation.Annotation
+
+CLSS public abstract interface !annotation javax.decorator.Delegate
+ anno 0 java.lang.annotation.Documented()
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[FIELD, PARAMETER])
 intf java.lang.annotation.Annotation
 
 CLSS public abstract interface !annotation javax.enterprise.context.ApplicationScoped
@@ -154,7 +154,6 @@ supr javax.enterprise.context.ContextException
 hfds serialVersionUID
 
 CLSS public abstract interface javax.enterprise.context.Conversation
-meth public abstract boolean isLongRunning()
 meth public abstract boolean isTransient()
 meth public abstract java.lang.String getId()
 meth public abstract long getTimeout()
@@ -225,16 +224,9 @@ meth public abstract void release()
 
 CLSS public abstract interface javax.enterprise.event.Event<%0 extends java.lang.Object>
 meth public abstract !varargs <%0 extends {javax.enterprise.event.Event%0}> javax.enterprise.event.Event<{%%0}> select(java.lang.Class<{%%0}>,java.lang.annotation.Annotation[])
-meth public abstract !varargs <%0 extends {javax.enterprise.event.Event%0}> javax.enterprise.event.Event<{%%0}> select(javax.enterprise.inject.TypeLiteral<{%%0}>,java.lang.annotation.Annotation[])
+meth public abstract !varargs <%0 extends {javax.enterprise.event.Event%0}> javax.enterprise.event.Event<{%%0}> select(javax.enterprise.util.TypeLiteral<{%%0}>,java.lang.annotation.Annotation[])
 meth public abstract !varargs javax.enterprise.event.Event<{javax.enterprise.event.Event%0}> select(java.lang.annotation.Annotation[])
 meth public abstract void fire({javax.enterprise.event.Event%0})
-
-CLSS public final !enum javax.enterprise.event.Notify
-fld public final static javax.enterprise.event.Notify ALWAYS
-fld public final static javax.enterprise.event.Notify IF_EXISTS
-meth public static javax.enterprise.event.Notify valueOf(java.lang.String)
-meth public static javax.enterprise.event.Notify[] values()
-supr java.lang.Enum<javax.enterprise.event.Notify>
 
 CLSS public javax.enterprise.event.ObserverException
 cons public ObserverException()
@@ -249,8 +241,15 @@ CLSS public abstract interface !annotation javax.enterprise.event.Observes
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[PARAMETER])
 intf java.lang.annotation.Annotation
-meth public abstract !hasdefault javax.enterprise.event.Notify notifyObserver()
+meth public abstract !hasdefault javax.enterprise.event.Reception notifyObserver()
 meth public abstract !hasdefault javax.enterprise.event.TransactionPhase during()
+
+CLSS public final !enum javax.enterprise.event.Reception
+fld public final static javax.enterprise.event.Reception ALWAYS
+fld public final static javax.enterprise.event.Reception IF_EXISTS
+meth public static javax.enterprise.event.Reception valueOf(java.lang.String)
+meth public static javax.enterprise.event.Reception[] values()
+supr java.lang.Enum<javax.enterprise.event.Reception>
 
 CLSS public final !enum javax.enterprise.event.TransactionPhase
 fld public final static javax.enterprise.event.TransactionPhase AFTER_COMPLETION
@@ -275,16 +274,6 @@ cons public AmbiguousResolutionException(java.lang.String,java.lang.Throwable)
 cons public AmbiguousResolutionException(java.lang.Throwable)
 supr javax.enterprise.inject.ResolutionException
 hfds serialVersionUID
-
-CLSS public abstract javax.enterprise.inject.AnnotationLiteral<%0 extends java.lang.annotation.Annotation>
-cons protected AnnotationLiteral()
-intf java.lang.annotation.Annotation
-meth public boolean equals(java.lang.Object)
-meth public int hashCode()
-meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
-meth public java.lang.String toString()
-supr java.lang.Object
-hfds annotationType,members
 
 CLSS public abstract interface !annotation javax.enterprise.inject.Any
  anno 0 java.lang.annotation.Documented()
@@ -334,11 +323,19 @@ CLSS public abstract interface javax.enterprise.inject.Instance<%0 extends java.
 intf java.lang.Iterable<{javax.enterprise.inject.Instance%0}>
 intf javax.inject.Provider<{javax.enterprise.inject.Instance%0}>
 meth public abstract !varargs <%0 extends {javax.enterprise.inject.Instance%0}> javax.enterprise.inject.Instance<{%%0}> select(java.lang.Class<{%%0}>,java.lang.annotation.Annotation[])
-meth public abstract !varargs <%0 extends {javax.enterprise.inject.Instance%0}> javax.enterprise.inject.Instance<{%%0}> select(javax.enterprise.inject.TypeLiteral<{%%0}>,java.lang.annotation.Annotation[])
+meth public abstract !varargs <%0 extends {javax.enterprise.inject.Instance%0}> javax.enterprise.inject.Instance<{%%0}> select(javax.enterprise.util.TypeLiteral<{%%0}>,java.lang.annotation.Annotation[])
 meth public abstract !varargs javax.enterprise.inject.Instance<{javax.enterprise.inject.Instance%0}> select(java.lang.annotation.Annotation[])
-meth public abstract !varargs {javax.enterprise.inject.Instance%0} get(java.lang.annotation.Annotation[])
 meth public abstract boolean isAmbiguous()
 meth public abstract boolean isUnsatisfied()
+
+CLSS public abstract interface !annotation javax.enterprise.inject.Model
+ anno 0 java.lang.annotation.Documented()
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE, METHOD, FIELD])
+ anno 0 javax.enterprise.context.RequestScoped()
+ anno 0 javax.enterprise.inject.Stereotype()
+ anno 0 javax.inject.Named(java.lang.String value="")
+intf java.lang.annotation.Annotation
 
 CLSS public abstract interface !annotation javax.enterprise.inject.New
  anno 0 java.lang.annotation.Documented()
@@ -347,11 +344,6 @@ CLSS public abstract interface !annotation javax.enterprise.inject.New
  anno 0 javax.inject.Qualifier()
 intf java.lang.annotation.Annotation
 meth public abstract !hasdefault java.lang.Class<?> value()
-
-CLSS public abstract interface !annotation javax.enterprise.inject.Nonbinding
- anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
- anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[METHOD])
-intf java.lang.annotation.Annotation
 
 CLSS public abstract interface !annotation javax.enterprise.inject.Produces
  anno 0 java.lang.annotation.Documented()
@@ -373,12 +365,18 @@ CLSS public abstract interface !annotation javax.enterprise.inject.Specializes
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE, METHOD])
 intf java.lang.annotation.Annotation
 
-CLSS public abstract javax.enterprise.inject.TypeLiteral<%0 extends java.lang.Object>
-cons protected TypeLiteral()
-meth public final java.lang.Class<{javax.enterprise.inject.TypeLiteral%0}> getRawType()
-meth public final java.lang.reflect.Type getType()
-supr java.lang.Object
-hfds actualType
+CLSS public abstract interface !annotation javax.enterprise.inject.Stereotype
+ anno 0 java.lang.annotation.Documented()
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[ANNOTATION_TYPE])
+intf java.lang.annotation.Annotation
+
+CLSS public abstract interface !annotation javax.enterprise.inject.Typed
+ anno 0 java.lang.annotation.Documented()
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[FIELD, METHOD, TYPE])
+intf java.lang.annotation.Annotation
+meth public abstract !hasdefault java.lang.Class<?>[] value()
 
 CLSS public javax.enterprise.inject.UnproxyableResolutionException
 cons public UnproxyableResolutionException()
@@ -400,7 +398,7 @@ CLSS public abstract interface javax.enterprise.inject.spi.AfterBeanDiscovery
 meth public abstract void addBean(javax.enterprise.inject.spi.Bean<?>)
 meth public abstract void addContext(javax.enterprise.context.spi.Context)
 meth public abstract void addDefinitionError(java.lang.Throwable)
-meth public abstract void addObserverMethod(javax.enterprise.inject.spi.ObserverMethod<?,?>)
+meth public abstract void addObserverMethod(javax.enterprise.inject.spi.ObserverMethod<?>)
 
 CLSS public abstract interface javax.enterprise.inject.spi.AfterDeploymentValidation
 meth public abstract void addDeploymentProblem(java.lang.Throwable)
@@ -459,17 +457,16 @@ meth public abstract java.util.Set<java.lang.reflect.Type> getTypes()
 meth public abstract java.util.Set<javax.enterprise.inject.spi.InjectionPoint> getInjectionPoints()
 
 CLSS public abstract interface javax.enterprise.inject.spi.BeanManager
-meth public abstract !varargs <%0 extends java.lang.Object> java.util.Set<javax.enterprise.inject.spi.ObserverMethod<?,{%%0}>> resolveObserverMethods({%%0},java.lang.annotation.Annotation[])
+meth public abstract !varargs <%0 extends java.lang.Object> java.util.Set<javax.enterprise.inject.spi.ObserverMethod<? super {%%0}>> resolveObserverMethods({%%0},java.lang.annotation.Annotation[])
 meth public abstract !varargs java.util.List<javax.enterprise.inject.spi.Decorator<?>> resolveDecorators(java.util.Set<java.lang.reflect.Type>,java.lang.annotation.Annotation[])
 meth public abstract !varargs java.util.List<javax.enterprise.inject.spi.Interceptor<?>> resolveInterceptors(javax.enterprise.inject.spi.InterceptionType,java.lang.annotation.Annotation[])
 meth public abstract !varargs java.util.Set<javax.enterprise.inject.spi.Bean<?>> getBeans(java.lang.reflect.Type,java.lang.annotation.Annotation[])
 meth public abstract !varargs void fireEvent(java.lang.Object,java.lang.annotation.Annotation[])
 meth public abstract <%0 extends java.lang.Object> javax.enterprise.context.spi.CreationalContext<{%%0}> createCreationalContext(javax.enterprise.context.spi.Contextual<{%%0}>)
 meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.AnnotatedType<{%%0}> createAnnotatedType(java.lang.Class<{%%0}>)
-meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.Bean<? extends {%%0}> getMostSpecializedBean(javax.enterprise.inject.spi.Bean<{%%0}>)
 meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.Bean<? extends {%%0}> resolve(java.util.Set<javax.enterprise.inject.spi.Bean<? extends {%%0}>>)
 meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.InjectionTarget<{%%0}> createInjectionTarget(javax.enterprise.inject.spi.AnnotatedType<{%%0}>)
-meth public abstract boolean isInterceptorBindingType(java.lang.Class<? extends java.lang.annotation.Annotation>)
+meth public abstract boolean isInterceptorBinding(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract boolean isNormalScope(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract boolean isPassivatingScope(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract boolean isQualifier(java.lang.Class<? extends java.lang.annotation.Annotation>)
@@ -477,21 +474,19 @@ meth public abstract boolean isScope(java.lang.Class<? extends java.lang.annotat
 meth public abstract boolean isStereotype(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract java.lang.Object getInjectableReference(javax.enterprise.inject.spi.InjectionPoint,javax.enterprise.context.spi.CreationalContext<?>)
 meth public abstract java.lang.Object getReference(javax.enterprise.inject.spi.Bean<?>,java.lang.reflect.Type,javax.enterprise.context.spi.CreationalContext<?>)
-meth public abstract java.util.Set<java.lang.annotation.Annotation> getInterceptorBindingTypeDefinition(java.lang.Class<? extends java.lang.annotation.Annotation>)
+meth public abstract java.util.Set<java.lang.annotation.Annotation> getInterceptorBindingDefinition(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract java.util.Set<java.lang.annotation.Annotation> getStereotypeDefinition(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract java.util.Set<javax.enterprise.inject.spi.Bean<?>> getBeans(java.lang.String)
 meth public abstract javax.el.ELResolver getELResolver()
 meth public abstract javax.el.ExpressionFactory wrapExpressionFactory(javax.el.ExpressionFactory)
 meth public abstract javax.enterprise.context.spi.Context getContext(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract javax.enterprise.inject.spi.Bean<?> getPassivationCapableBean(java.lang.String)
-meth public abstract void addBean(javax.enterprise.inject.spi.Bean<?>)
- anno 0 java.lang.Deprecated()
 meth public abstract void validate(javax.enterprise.inject.spi.InjectionPoint)
 
 CLSS public abstract interface javax.enterprise.inject.spi.BeforeBeanDiscovery
 meth public abstract !varargs void addStereotype(java.lang.Class<? extends java.lang.annotation.Annotation>,java.lang.annotation.Annotation[])
 meth public abstract void addAnnotatedType(javax.enterprise.inject.spi.AnnotatedType<?>)
-meth public abstract void addInterceptorBindingType(java.lang.Class<? extends java.lang.annotation.Annotation>)
+meth public abstract void addInterceptorBinding(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract void addQualifier(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract void addScope(java.lang.Class<? extends java.lang.annotation.Annotation>,boolean,boolean)
 
@@ -535,15 +530,15 @@ CLSS public abstract interface javax.enterprise.inject.spi.Interceptor<%0 extend
 intf javax.enterprise.inject.spi.Bean<{javax.enterprise.inject.spi.Interceptor%0}>
 meth public abstract boolean intercepts(javax.enterprise.inject.spi.InterceptionType)
 meth public abstract java.lang.Object intercept(javax.enterprise.inject.spi.InterceptionType,{javax.enterprise.inject.spi.Interceptor%0},javax.interceptor.InvocationContext)
-meth public abstract java.util.Set<java.lang.annotation.Annotation> getInterceptorBindingTypes()
+meth public abstract java.util.Set<java.lang.annotation.Annotation> getInterceptorBindings()
 
-CLSS public abstract interface javax.enterprise.inject.spi.ObserverMethod<%0 extends java.lang.Object, %1 extends java.lang.Object>
+CLSS public abstract interface javax.enterprise.inject.spi.ObserverMethod<%0 extends java.lang.Object>
+meth public abstract java.lang.Class<?> getBeanClass()
 meth public abstract java.lang.reflect.Type getObservedType()
 meth public abstract java.util.Set<java.lang.annotation.Annotation> getObservedQualifiers()
-meth public abstract javax.enterprise.event.Notify getNotify()
+meth public abstract javax.enterprise.event.Reception getReception()
 meth public abstract javax.enterprise.event.TransactionPhase getTransactionPhase()
-meth public abstract javax.enterprise.inject.spi.Bean<{javax.enterprise.inject.spi.ObserverMethod%0}> getBean()
-meth public abstract void notify({javax.enterprise.inject.spi.ObserverMethod%1})
+meth public abstract void notify({javax.enterprise.inject.spi.ObserverMethod%0})
 
 CLSS public abstract interface javax.enterprise.inject.spi.PassivationCapable
 meth public abstract java.lang.String getId()
@@ -569,13 +564,8 @@ intf javax.enterprise.inject.spi.ProcessBean<{javax.enterprise.inject.spi.Proces
 meth public abstract javax.enterprise.inject.spi.AnnotatedType<{javax.enterprise.inject.spi.ProcessManagedBean%0}> getAnnotatedBeanClass()
 
 CLSS public abstract interface javax.enterprise.inject.spi.ProcessObserverMethod<%0 extends java.lang.Object, %1 extends java.lang.Object>
-meth public abstract javax.enterprise.inject.spi.AnnotatedMethod<{javax.enterprise.inject.spi.ProcessObserverMethod%0}> getAnnotatedMethod()
-meth public abstract javax.enterprise.inject.spi.ObserverMethod<{javax.enterprise.inject.spi.ProcessObserverMethod%0},{javax.enterprise.inject.spi.ProcessObserverMethod%1}> getObserverMethod()
-meth public abstract void addDefinitionError(java.lang.Throwable)
-
-CLSS public abstract interface javax.enterprise.inject.spi.ProcessProcessObserverMethod<%0 extends java.lang.Object, %1 extends java.lang.Object>
-meth public abstract javax.enterprise.inject.spi.AnnotatedMethod<{javax.enterprise.inject.spi.ProcessProcessObserverMethod%0}> getAnnotatedMethod()
-meth public abstract javax.enterprise.inject.spi.ObserverMethod<{javax.enterprise.inject.spi.ProcessProcessObserverMethod%0},{javax.enterprise.inject.spi.ProcessProcessObserverMethod%1}> getObserverMethod()
+meth public abstract javax.enterprise.inject.spi.AnnotatedMethod<{javax.enterprise.inject.spi.ProcessObserverMethod%1}> getAnnotatedMethod()
+meth public abstract javax.enterprise.inject.spi.ObserverMethod<{javax.enterprise.inject.spi.ProcessObserverMethod%0}> getObserverMethod()
 meth public abstract void addDefinitionError(java.lang.Throwable)
 
 CLSS public abstract interface javax.enterprise.inject.spi.ProcessProducer<%0 extends java.lang.Object, %1 extends java.lang.Object>
@@ -596,7 +586,6 @@ meth public abstract javax.enterprise.inject.spi.AnnotatedParameter<{javax.enter
 CLSS public abstract interface javax.enterprise.inject.spi.ProcessSessionBean<%0 extends java.lang.Object>
 intf javax.enterprise.inject.spi.ProcessManagedBean<java.lang.Object>
 meth public abstract java.lang.String getEjbName()
-meth public abstract javax.enterprise.inject.spi.AnnotatedType<{javax.enterprise.inject.spi.ProcessSessionBean%0}> getAnnotatedSessionBeanClass()
 meth public abstract javax.enterprise.inject.spi.SessionBeanType getSessionBeanType()
 
 CLSS public abstract interface javax.enterprise.inject.spi.Producer<%0 extends java.lang.Object>
@@ -612,19 +601,32 @@ meth public static javax.enterprise.inject.spi.SessionBeanType valueOf(java.lang
 meth public static javax.enterprise.inject.spi.SessionBeanType[] values()
 supr java.lang.Enum<javax.enterprise.inject.spi.SessionBeanType>
 
-CLSS public abstract interface !annotation javax.enterprise.inject.stereotype.Model
+CLSS public abstract javax.enterprise.util.AnnotationLiteral<%0 extends java.lang.annotation.Annotation>
+cons protected AnnotationLiteral()
+intf java.io.Serializable
+intf java.lang.annotation.Annotation
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
+supr java.lang.Object
+hfds annotationType,members
+
+CLSS public abstract interface !annotation javax.enterprise.util.Nonbinding
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
- anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE, METHOD, FIELD])
- anno 0 javax.enterprise.context.RequestScoped()
- anno 0 javax.enterprise.inject.stereotype.Stereotype()
- anno 0 javax.inject.Named(java.lang.String value="")
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[METHOD])
 intf java.lang.annotation.Annotation
 
-CLSS public abstract interface !annotation javax.enterprise.inject.stereotype.Stereotype
- anno 0 java.lang.annotation.Documented()
- anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
- anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[ANNOTATION_TYPE])
-intf java.lang.annotation.Annotation
+CLSS public abstract javax.enterprise.util.TypeLiteral<%0 extends java.lang.Object>
+cons protected TypeLiteral()
+intf java.io.Serializable
+meth public boolean equals(java.lang.Object)
+meth public final java.lang.Class<{javax.enterprise.util.TypeLiteral%0}> getRawType()
+meth public final java.lang.reflect.Type getType()
+meth public int hashCode()
+meth public java.lang.String toString()
+supr java.lang.Object
+hfds actualType
 
 CLSS public abstract interface !annotation javax.inject.Named
  anno 0 java.lang.annotation.Documented()
