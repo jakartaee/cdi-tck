@@ -54,7 +54,7 @@
       <title>How these challenges are submitted?</title>
       <para>
          To submit a challenge, a new issue should be created in the <ulink
-         url="https://jira.jboss.org/jira/browse/WBTCK">WBTCK project</ulink>
+         url="https://jira.jboss.org/jira/browse/CDITCK">CDITCK project</ulink>
          of the JBoss JIRA using the Issue Type: Bug. The appellant should
          complete the Summary, Component (TCK Appeal), Environment and
          Description Field only. Any communication regarding the issue should
@@ -85,7 +85,7 @@
       </para>
       <para>
          The current TCK Project Lead is listed on the <ulink
-         url="https://jira.jboss.org/jira/browse/WBTCK">WBTCK Project Summary
+         url="https://jira.jboss.org/jira/browse/CDITCK">CDITCK Project Summary
          Page</ulink> on the JBoss JIRA.
       </para>
    </section>
