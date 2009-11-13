@@ -49,6 +49,7 @@ public class LibraryInWarTest extends AbstractJSR299Test
    @Override
    protected TCKArtifact postCreate(TCKArtifact artifact) throws IOException
    {
+      super.postCreate(artifact);
       ArtifactDescriptor library = new ArtifactDescriptor(LibraryInWarTest.class);
       library.getClasses().add(Bar.class);
       library.getResources().add(new ResourceDescriptorImpl(JSR299ArtifactDescriptor.BEANS_XML_DESTINATION, JSR299ArtifactDescriptor.STANDARD_BEANS_XML_FILE_NAME));

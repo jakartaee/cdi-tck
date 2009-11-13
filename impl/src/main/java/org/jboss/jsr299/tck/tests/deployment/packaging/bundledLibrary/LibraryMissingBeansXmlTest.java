@@ -48,6 +48,7 @@ public class LibraryMissingBeansXmlTest extends AbstractJSR299Test
    @Override
    protected TCKArtifact postCreate(TCKArtifact artifact) throws IOException
    {
+      super.postCreate(artifact);
       ArtifactDescriptor library = new ArtifactDescriptor(LibraryMissingBeansXmlTest.class);
       library.getClasses().add(Bar.class);
       artifact.getLibraries().add(new ResourceDescriptorImpl("cdi-tck-beans.jar", library.getJarAsStream()));
