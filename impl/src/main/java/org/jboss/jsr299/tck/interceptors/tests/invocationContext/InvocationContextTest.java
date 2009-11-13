@@ -43,7 +43,7 @@ public class InvocationContextTest extends AbstractJSR299Test
       assert Interceptor1.isGetTargetOK();
    }
 
-   @Test
+   @Test(groups="jboss-as-broken")
    @SpecAssertion(section = "6", id = "f")
    public void testGetTimerMethod()
    {
