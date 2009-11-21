@@ -303,11 +303,11 @@
    </build>
 
    <scm>
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/trunk</connection>
+      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0</connection>
       <developerConnection>
-         scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk
+         scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0
       </developerConnection>
-      <url>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk</url>
+      <url>https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0</url>
    </scm>
 
    <profiles>
