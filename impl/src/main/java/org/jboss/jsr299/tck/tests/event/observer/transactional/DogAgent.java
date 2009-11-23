@@ -3,7 +3,6 @@ package org.jboss.jsr299.tck.tests.event.observer.transactional;
 import static javax.ejb.TransactionManagementType.BEAN;
 
 import javax.annotation.Resource;
-import javax.annotation.security.RunAs;
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -15,7 +14,6 @@ import javax.transaction.UserTransaction;
 
 @Stateless
 @TransactionManagement(BEAN)
-@RunAs("Bubba")
 @Named
 @Default
 public class DogAgent implements Agent
