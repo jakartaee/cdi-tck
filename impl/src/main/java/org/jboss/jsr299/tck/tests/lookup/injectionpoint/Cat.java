@@ -4,7 +4,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
-class Cat
+class Cat implements Animal
 {
    @Inject private InjectionPoint injectionPoint;
    

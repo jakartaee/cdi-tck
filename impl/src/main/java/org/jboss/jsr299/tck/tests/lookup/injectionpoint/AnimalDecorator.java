@@ -5,13 +5,12 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-class CatDecorator extends Cat
-{
-   @Inject @Delegate Cat bean;
+class AnimalDecorator implements Animal {
+	
+	@Inject	@Delegate
+	private Animal bean;
 
-   @Override
-   public String hello()
-   {
-      return bean.hello() + " world!";
-   }
+	public String hello() {
+		return bean.hello() + " world!";
+	}
 }

@@ -5,11 +5,10 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-class CatDecorator extends Cat
+class AnimalDecorator implements Animal
 {
-   @Inject @Delegate Cat bean;
+   @Inject @Delegate Animal bean;
 
-   @Override
    public String hello()
    {
       return bean.hello() + " world!";
