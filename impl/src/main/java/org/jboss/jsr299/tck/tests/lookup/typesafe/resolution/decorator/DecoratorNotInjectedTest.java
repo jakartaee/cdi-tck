@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 public class DecoratorNotInjectedTest extends AbstractJSR299Test
 {
 
-   @Test(groups = { "resolution" })
+   @Test(groups = { "injection" })
    @SpecAssertion(section = "5.1.4", id = "a")
    public void testDecoratorNotResolved() 
    {
