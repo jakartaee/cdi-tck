@@ -6,7 +6,7 @@ public class DomesticCat extends Cat<European>
    
    public DomesticCat(String name)
    {
-      // TODO Auto-generated constructor stub
+      super(name);
    }
 
 }
