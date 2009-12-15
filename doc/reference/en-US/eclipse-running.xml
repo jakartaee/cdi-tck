@@ -41,7 +41,7 @@
          You should also import the Weld projects if you want to debug into
          that code, which is covered later.
       </para>
-      <tip>
+      <note>
          <para>
             If you choose to use the Maven 2 Eclipse plugin
             (<literal>maven-eclipse-plugin</literal>), you should execute the
@@ -51,7 +51,7 @@
 mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs
 cd ../weld
 mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs]]></programlisting>
-      </tip>
+      </note>
    </section>
    <section>
       <title>Readying the Eclipse workspace</title>

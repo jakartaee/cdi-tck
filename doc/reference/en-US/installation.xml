@@ -109,7 +109,7 @@
          each test method in the class.
       </para>
 
-      <tip id="tck-in-jboss-as">
+      <note id="tck-in-jboss-as">
          <title>
             Running the TCK against the CDI RI (Weld) and JBoss AS
          </title>
@@ -189,7 +189,7 @@ mvn test -Dincontainer]]></programlisting>
             </listitem>
          </itemizedlist>
 
-      </tip>
+      </note>
    </section>
    <section id="eclipse-plugins">
       <title>Eclipse Plugins</title>
