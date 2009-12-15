@@ -143,7 +143,7 @@ public class InjectionPointTest extends AbstractJSR299Test
       FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
       BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
       assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedField;
+      assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedField<?>;
       assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated().isAnnotationPresent(AnimalStereotype.class);
    }
 
@@ -155,7 +155,7 @@ public class InjectionPointTest extends AbstractJSR299Test
       MethodInjectionPointBean beanWithInjectedBean = getInstanceByType(MethodInjectionPointBean.class);
       BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
       assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedParameter;
+      assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedParameter<?>;
       assert annotationSetMatches(beanWithInjectionPoint.getInjectedMetadata().getQualifiers(), Default.class);
    }
 

@@ -16,35 +16,26 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.decorator;
 
-import java.lang.reflect.Type;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.enterprise.inject.spi.Bean;
-
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.DeploymentFailure;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 @Artifact
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
-public class DecoratorNotResolvedTest extends AbstractJSR299Test
+@ExpectedDeploymentException(DeploymentFailure.class)
+public class DecoratorNotInjectedTest extends AbstractJSR299Test
 {
 
-   @Test(groups = { "resolution", "rewrite" })
+   @Test(groups = { "injection" })
    @SpecAssertion(section = "5.1.4", id = "a")
-   // TODO PLM should check injection, not resolution
    public void testDecoratorNotResolved() 
    {
-      Set<Type> types = new HashSet<Type>();
-      for (Bean<Cat> bean : getBeans(Cat.class)) {
-         types.addAll(bean.getTypes());
-      }
-      assert !types.contains(CatDecorator.class);
-      assert getInstanceByType(Cat.class) != null;
+	   assert false;
    }
 }
