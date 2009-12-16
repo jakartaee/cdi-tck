@@ -9,7 +9,7 @@ import javax.interceptor.InvocationContext;
 public class KokkolaInterceptor implements Serializable
 {
    @AroundInvoke
-   public Object intercept(InvocationContext context)
+   public Object intercept(InvocationContext context) throws Exception
    {
       // do nothing
       return null;
