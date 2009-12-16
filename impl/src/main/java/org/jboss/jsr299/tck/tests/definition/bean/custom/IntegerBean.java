@@ -2,6 +2,7 @@ package org.jboss.jsr299.tck.tests.definition.bean.custom;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,57 +16,78 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
-public class CatBean implements Bean<Cat>, Extension
+public class IntegerBean implements Bean<Integer>, Extension
 {
-   public static final CatBean bean = new CatBean();
    
-   private boolean getBindingsCalled = false;
+   public static final IntegerBean bean = new IntegerBean();
+   
+   private boolean getQualifiersCalled = false;
    private boolean getInjectionPointsCalled = false;
    private boolean getNameCalled = false;
-   private boolean getScopeTypeCalled = false;
+   private boolean getScopeCalled = false;
    private boolean getTypesCalled = false;
-   private boolean isPolicyCalled = false;
+   private boolean isAlternativeCalled = false;
    private boolean isSerializableCalled = false;
    private boolean isNullableCalled = false;
    private boolean isGetBeanClassCalled = false;
    private boolean getStereotypesCalled = false;
    
-
-   @SuppressWarnings("serial")
-   public Set<Annotation> getQualifiers()
+   public Class<?> getBeanClass()
    {
-      getBindingsCalled = true;
-      return new HashSet<Annotation>(){{ add(new DefaultLiteral());}};
+      isGetBeanClassCalled = true;
+      return Integer.class;
    }
 
    public Set<InjectionPoint> getInjectionPoints()
    {
       getInjectionPointsCalled = true;
-      return new HashSet<InjectionPoint>();
+      return Collections.emptySet();
    }
 
    public String getName()
    {
       getNameCalled = true;
-      return "cat";
+      return "one";
    }
-   
-   public Set<Class<? extends Annotation>> getStereotypes() {
-      getStereotypesCalled = true;
-      return new HashSet<Class<? extends Annotation>>();
+
+   @SuppressWarnings("serial")
+   public Set<Annotation> getQualifiers()
+   {
+      getQualifiersCalled = true;
+      return new HashSet<Annotation>() {
+         {
+            add(new DefaultLiteral());
+         }
+      };
    }
 
    public Class<? extends Annotation> getScope()
    {
-      getScopeTypeCalled = true;
+      getScopeCalled = true;
       return Dependent.class;
    }
 
-   @SuppressWarnings("serial")
+   public Set<Class<? extends Annotation>> getStereotypes()
+   {
+      getStereotypesCalled = true;
+      return Collections.emptySet();
+   }
+
    public Set<Type> getTypes()
    {
+      HashSet<Type> types = new HashSet<Type>();
+      types.add(Object.class);
+      types.add(Number.class);
+      types.add(Integer.class);
+      
       getTypesCalled = true;
-      return new HashSet<Type>() {{ add(Cat.class); add(Object.class); }};
+      return types;
+   }
+
+   public boolean isAlternative()
+   {
+      isAlternativeCalled = true;
+      return false;
    }
 
    public boolean isNullable()
@@ -74,37 +96,19 @@ public class CatBean implements Bean<Cat>, Extension
       return false;
    }
 
-   public boolean isSerializable()
+   public Integer create(CreationalContext<Integer> creationalContext)
    {
-      isSerializableCalled = true;
-      return false;
-   }
-   
-   public Class<?> getBeanClass()
-   {
-      isGetBeanClassCalled = true;
-      return Cat.class;
-   }
-   
-   public boolean isAlternative()
-   {
-      isPolicyCalled = true;
-      return false;
+      return new Integer(1);
    }
 
-   public Cat create(CreationalContext<Cat> creationalContext)
-   {
-      return new Cat("kitty");
-   }
-
-   public void destroy(Cat instance, CreationalContext<Cat> creationalContext)
+   public void destroy(Integer instance, CreationalContext<Integer> creationalContext)
    {
       creationalContext.release();
    }
 
-   public boolean isGetBindingsCalled()
+   public boolean isGetQualifiersCalled()
    {
-      return getBindingsCalled;
+      return getQualifiersCalled;
    }
 
    public boolean isGetInjectionPointsCalled()
@@ -117,9 +121,9 @@ public class CatBean implements Bean<Cat>, Extension
       return getNameCalled;
    }
 
-   public boolean isGetScopeTypeCalled()
+   public boolean isGetScopeCalled()
    {
-      return getScopeTypeCalled;
+      return getScopeCalled;
    }
 
    public boolean isGetTypesCalled()
@@ -127,9 +131,9 @@ public class CatBean implements Bean<Cat>, Extension
       return getTypesCalled;
    }
 
-   public boolean isPolicyCalled()
+   public boolean isAlternativeCalled()
    {
-      return isPolicyCalled;
+      return isAlternativeCalled;
    }
 
    public boolean isSerializableCalled()
@@ -141,22 +145,17 @@ public class CatBean implements Bean<Cat>, Extension
    {
       return isNullableCalled;
    }
-   
-   public static CatBean getBean()
-   {
-      return bean;
-   }
 
    public boolean isGetBeanClassCalled()
    {
       return isGetBeanClassCalled;
    }
-   
+
    public boolean isGetStereotypesCalled()
    {
       return getStereotypesCalled;
    }
-
+   
    public void afterDiscovery(@Observes AfterBeanDiscovery event) {
       event.addBean(bean);
    }

@@ -5,5 +5,5 @@ import javax.inject.Inject;
 class House
 {
    @SuppressWarnings("unused")
-   @Inject private Cat cat;
+   @Inject private int one;
 }

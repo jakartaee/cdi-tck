@@ -1,0 +1,5 @@
+<beans>
+	<alternatives>
+		 <stereotype>org.jboss.jsr299.tck.tests.definition.bean.custom.AlternativeStereotype</stereotype>
+	</alternatives>
+</beans>
