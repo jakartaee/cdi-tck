@@ -42,7 +42,7 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
    })
    public void testGetBeanClassCalled()
    {
-      assert CatBean.bean.isGetBeanClassCalled();
+      assert IntegerBean.bean.isGetBeanClassCalled();
    }
 
    @Test(groups = { "ri-broken" })
@@ -50,56 +50,55 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
    // WBRI-328
    public void testGetStereotypesCalled()
    {
-      assert CatBean.bean.isGetStereotypesCalled();
+      assert IntegerBean.bean.isGetStereotypesCalled();
    }
 
    @Test
    @SpecAssertion(section = "5.1.1", id = "k")
    public void testIsPolicyCalled()
    {
-      assert CatBean.bean.isPolicyCalled();
+      assert IntegerBean.bean.isAlternativeCalled();
    }
 
    @Test
    @SpecAssertion(section = "5.2", id = "na")
    public void testGetTypesCalled()
    {
-      assert CatBean.bean.isGetTypesCalled();
+      assert IntegerBean.bean.isGetTypesCalled();
    }
 
    @Test
    @SpecAssertion(section = "5.2", id = "nb")
    public void testGetBindingsCalled()
    {
-      assert CatBean.bean.isGetBindingsCalled();
+      assert IntegerBean.bean.isGetQualifiersCalled();
    }
 
    @Test
    @SpecAssertion(section = "5.2.1", id = "b")
    public void testGetInjectionPointsCalled()
    {
-      assert CatBean.bean.isGetInjectionPointsCalled();
+      assert IntegerBean.bean.isGetInjectionPointsCalled();
    }
 
-   @Test(groups = { "ri-broken" })
+   @Test
    @SpecAssertion(section = "5.2.4", id = "ba")
-   // WBRI-328
    public void testIsNullableCalled()
    {
-      assert CatBean.bean.isNullableCalled();
+      assert IntegerBean.bean.isNullableCalled();
    }
 
    @Test
    @SpecAssertion(section = "5.3", id = "e")
    public void testGetNameCalled()
    {
-      assert CatBean.bean.isGetNameCalled();
+      assert IntegerBean.bean.isGetNameCalled();
    }
 
    @Test
    @SpecAssertion(section = "6.5.2", id = "e")
    public void testGetScopeTypeCalled()
    {
-      assert CatBean.bean.isGetScopeTypeCalled();
+      assert IntegerBean.bean.isGetScopeCalled();
    }
 }
