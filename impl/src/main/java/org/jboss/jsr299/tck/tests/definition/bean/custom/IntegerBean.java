@@ -69,8 +69,10 @@ public class IntegerBean implements Bean<Integer>, Extension
 
    public Set<Class<? extends Annotation>> getStereotypes()
    {
+      HashSet<Class<? extends Annotation>> stereotypes = new HashSet<Class<? extends Annotation>>();
+      stereotypes.add(AlternativeStereotype.class);
       getStereotypesCalled = true;
-      return Collections.emptySet();
+      return stereotypes;
    }
 
    public Set<Type> getTypes()
@@ -87,7 +89,7 @@ public class IntegerBean implements Bean<Integer>, Extension
    public boolean isAlternative()
    {
       isAlternativeCalled = true;
-      return false;
+      return true;
    }
 
    public boolean isNullable()
