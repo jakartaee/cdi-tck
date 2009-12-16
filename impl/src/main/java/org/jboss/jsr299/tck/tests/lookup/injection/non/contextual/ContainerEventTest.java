@@ -19,6 +19,8 @@ package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual;
 import java.util.EventListener;
 
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.spi.AnnotatedField;
+import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.inject.Inject;
 import javax.servlet.Filter;
@@ -72,7 +74,7 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateServletListenerAnnotatedType(ProcessInjectionTargetObserver.getListenerEvent().getAnnotatedType());
    }
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aad"),
       @SpecAssertion(section = "11.5.6", id = "abd"),
@@ -119,9 +121,8 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateFilterAnnotatedType(ProcessInjectionTargetObserver.getFilterEvent().getAnnotatedType());
    }
    
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "12.3", id = "dd")
-   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForJsfManagedBean()
    {
       assert ProcessInjectionTargetObserver.getJsfManagedBeanEvent() != null;
@@ -144,24 +145,22 @@ public class ContainerEventTest extends AbstractJSR299Test
       assert !ProcessInjectionTargetObserver.isListenerSuperTypeObserved();
    }
    
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "12.3", id = "be")
-   // WELDINT-23
    public void testProcessAnnotatedTypeEventFiredForServletListener() {
       assert ProcessAnnotatedTypeObserver.getListenerEvent() != null;
       validateServletListenerAnnotatedType(ProcessAnnotatedTypeObserver.getListenerEvent().getAnnotatedType());
    }
    
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "12.3", id = "bf")
    public void testProcessAnnotatedTypeEventFiredForTagHandler() {
       assert ProcessAnnotatedTypeObserver.getTagHandlerEvent() != null;
       validateTagHandlerAnnotatedType(ProcessAnnotatedTypeObserver.getTagHandlerEvent().getAnnotatedType());
    }
    
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "12.3", id = "bg")
-   // WELDINT-23
    public void testProcessAnnotatedTypeEventFiredForTagLibraryListener() {
       assert ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent() != null;
       validateTagLibraryListenerAnnotatedType(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent().getAnnotatedType());
@@ -174,17 +173,15 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateServletAnnotatedType(ProcessAnnotatedTypeObserver.getServletEvent().getAnnotatedType());
    }
    
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "12.3", id = "bk")
-   // WELDINT-23
    public void testProcessAnnotatedTypeEventFiredForFilter() {
       assert ProcessAnnotatedTypeObserver.getFilterEvent() != null;
       validateFilterAnnotatedType(ProcessAnnotatedTypeObserver.getFilterEvent().getAnnotatedType());
    }
    
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "12.3", id = "bd")
-   // WELDINT-23
    public void testProcessAnnotatedTypeEventFiredForJsfManagedBean() {
       assert ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent() != null;
       validateJsfManagedBeanAnnotatedType(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent().getAnnotatedType());
@@ -193,9 +190,19 @@ public class ContainerEventTest extends AbstractJSR299Test
    private void validateServletListenerAnnotatedType(AnnotatedType<TestListener> type) {
       assert type.getBaseType().equals(TestListener.class);
       assert type.getAnnotations().isEmpty();
-      assert type.getMethods().size() == 2;
-      assert type.getFields().iterator().next().isAnnotationPresent(Inject.class);
-      assert type.getAnnotations().isEmpty();
+      assert type.getFields().size() == 2;
+      assert type.getMethods().size() == 3;
+      
+      int initializers = 0;
+      for (AnnotatedMethod<?> method : type.getMethods()) {
+         assert method.getParameters().size() == 1;
+         assert method.getBaseType().equals(void.class);
+         if (method.isAnnotationPresent(Inject.class))
+         {
+            initializers++;
+         }
+      }
+      assert initializers == 1;
    }
    
    private void validateTagHandlerAnnotatedType(AnnotatedType<TestTagHandler> type) {
@@ -208,10 +215,9 @@ public class ContainerEventTest extends AbstractJSR299Test
    private void validateTagLibraryListenerAnnotatedType(AnnotatedType<TagLibraryListener> type) {
       assert type.getBaseType().equals(TagLibraryListener.class);
       assert rawTypeSetMatches(type.getTypeClosure(), TagLibraryListener.class, ServletContextListener.class, EventListener.class, Object.class);
-      assert type.getFields().size() == 1;
-      assert type.getFields().iterator().next().getJavaMember().getName().equals("sheep");
+      assert type.getFields().size() == 2;
       assert type.getConstructors().size() == 1;
-      assert type.getMethods().size() == 2;
+      assert type.getMethods().size() == 3;
    }
    
    private void validateServletAnnotatedType(AnnotatedType<TestServlet> type) {
@@ -223,17 +229,32 @@ public class ContainerEventTest extends AbstractJSR299Test
    private void validateFilterAnnotatedType(AnnotatedType<TestFilter> type) {
       assert type.getBaseType().equals(TestFilter.class);
       assert rawTypeSetMatches(type.getTypeClosure(), TestFilter.class, Filter.class, Object.class);
-      assert type.getFields().size() == 2;
+      assert type.getFields().size() == 4;
       assert type.getConstructors().size() == 1;
       assert type.getConstructors().iterator().next().getParameters().isEmpty();
-      assert type.getMethods().size() == 3;
+      assert type.getMethods().size() == 4;
    }
    
-   private void validateJsfManagedBeanAnnotatedType(AnnotatedType<Farm> type) {
-      assert type.getFields().size() == 1;
-      assert type.getFields().iterator().next().getJavaMember().getName().equals("sheep");
-      assert type.getFields().iterator().next().isAnnotationPresent(Inject.class);
-      assert type.getMethods().size() == 1;
-      assert type.getMethods().iterator().next().getBaseType().equals(boolean.class);
+   private void validateJsfManagedBeanAnnotatedType(AnnotatedType<Farm> type)
+   {
+      assert type.getFields().size() == 2;
+      for (AnnotatedField<?> field : type.getFields())
+      {
+         if (field.getJavaMember().getName().equals("sheep"))
+         {
+            assert field.isAnnotationPresent(Inject.class);
+            assert !field.isStatic();
+         }
+         else if (field.getJavaMember().getName().equals("initializerCalled"))
+         {
+            assert !field.isStatic();
+            assert field.getBaseType().equals(boolean.class);
+         }
+         else
+         {
+            assert false; // there is no other field
+         }
+      }
+      assert type.getMethods().size() == 3;
    }
 }
