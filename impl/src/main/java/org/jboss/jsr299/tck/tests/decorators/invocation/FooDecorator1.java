@@ -26,7 +26,7 @@ import javax.inject.Inject;
  *
  */
 @Decorator
-public class FooDecorator1
+public class FooDecorator1 implements Foo
 {
    
    private static InjectionPoint injectionPoint;
