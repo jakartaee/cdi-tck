@@ -38,6 +38,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test
    
    @Test(groups = { "new", "jboss-as-broken" })
    @SpecAssertion(section = "3.7.1", id = "ab")
+   // WELD-357
    public void testConstructorAnnotatedInjectCalled()
    {
       ExplicitConstructor bean = getInstanceByType(ExplicitConstructor.class);
