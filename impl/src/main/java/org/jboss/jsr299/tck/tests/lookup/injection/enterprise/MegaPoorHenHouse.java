@@ -7,14 +7,15 @@ import javax.ejb.Stateful;
 public class MegaPoorHenHouse extends PoorHenHouse implements MegaPoorHenHouseLocal
 {
    private boolean postConstructCalledAfterSuperclassInitializer = false;
-   
+
    public Fox getFox()
    {
       return fox;
    }
-   
+
    @PostConstruct
-   public void postConstruct() {
+   public void postConstruct()
+   {
       postConstructCalledAfterSuperclassInitializer = initializerCalledAfterSuperclassInjection;
    }
 
@@ -22,7 +23,7 @@ public class MegaPoorHenHouse extends PoorHenHouse implements MegaPoorHenHouseLo
    {
       return postConstructCalledAfterSuperclassInitializer;
    }
-   
+
    @Override
    public boolean isInitializerCalledAfterSuperclassInjection()
    {
