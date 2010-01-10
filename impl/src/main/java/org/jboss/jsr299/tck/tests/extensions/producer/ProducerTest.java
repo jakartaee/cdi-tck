@@ -250,4 +250,5 @@ public class ProducerTest extends AbstractJSR299Test
       assert ProducerProcessor.getDogAnnotatedType() != null;
       assert ProducerProcessor.getDogAnnotatedType().getBaseType().equals(Dog.class);
    }
+   
 }

@@ -1,6 +1,7 @@
 package org.jboss.jsr299.tck.tests.extensions.container.event;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
@@ -10,6 +11,14 @@ public class ProcessAnnotatedTypeObserver implements Extension
    private static ProcessAnnotatedType<Cow> statefulSessionBeanEvent = null;
    private static ProcessAnnotatedType<SheepInterceptor> sessionBeanInterceptorEvent = null;
    private static ProcessAnnotatedType<Farm> managedBeanEvent = null;
+   
+   public void cleanup(@Observes BeforeShutdown shutdown)
+   {
+      statefulSessionBeanEvent = null;
+      statelessSessionBeanEvent = null;
+      sessionBeanInterceptorEvent = null;
+      managedBeanEvent = null;
+   }
    
    public void observeStatelessSessionBean(@Observes ProcessAnnotatedType<Sheep> event) {
       statelessSessionBeanEvent = event;

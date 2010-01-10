@@ -60,4 +60,5 @@ public class ProcessObserverMethodEventTest extends AbstractJSR299Test
    {
       assert ProcessObserverMethodObserver.getObserverMethod().getObservedType().equals(EventA.class);
    }
+   
 }
