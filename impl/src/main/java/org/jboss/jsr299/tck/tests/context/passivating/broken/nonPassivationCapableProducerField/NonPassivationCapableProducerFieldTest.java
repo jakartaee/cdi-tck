@@ -21,11 +21,10 @@ import org.testng.annotations.Test;
 @ExpectedDeploymentException(DeploymentFailure.class)
 public class NonPassivationCapableProducerFieldTest extends AbstractJSR299Test
 {
-   @Test(groups = { "passivation", "ri-wrong-cause" })
+   @Test(groups = { "passivation" })
    @SpecAssertions({
      @SpecAssertion(section = "6.6.4", id = "d")
    })
-   // TODO RI is erroring, but for the wrong reason
    public void testNonPassivationCapableProducerFieldNotOk()
    {
       assert false;
