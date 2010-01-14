@@ -287,6 +287,13 @@
          </build>
       </profile>
       
- </profiles>   
+   </profiles>   
+
+   <scm>    
+      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/interceptor</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/interceptor</developerConnection>
+      <url>https://svn.jboss.org/repos/weld/cdi-tck/trunk/interceptor</url>
+   </scm>
+
 
 </project>

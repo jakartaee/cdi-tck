@@ -287,6 +287,13 @@
          </build>
       </profile>
       
- </profiles>   
+   </profiles>   
+ 
+   <scm>    
+      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/xml</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/xml</developerConnection>
+      <url>https://svn.jboss.org/repos/weld/cdi-tck/trunk/xml</url>
+   </scm>
+
 
 </project>

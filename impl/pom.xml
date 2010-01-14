@@ -295,4 +295,11 @@
 
    </profiles>
 
+   <scm>    
+      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/impl</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/impl</developerConnection>
+      <url>https://svn.jboss.org/repos/weld/cdi-tck/trunk/impl</url>
+   </scm>
+
+
 </project>
