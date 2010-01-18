@@ -87,7 +87,6 @@ public class PolicyAvailabilityTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.1.1", id = "fa")
-      //@SpecAssertion(section = "2.6.1", id = "e") removed from spec
    })
    
    public void testProducerPoliciesOnClass() throws Exception
