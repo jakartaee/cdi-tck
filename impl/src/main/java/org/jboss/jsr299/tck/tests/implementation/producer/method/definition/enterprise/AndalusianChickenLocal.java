@@ -3,7 +3,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.definition.ent
 import javax.ejb.Local;
 
 @Local
-public interface AndalusianChickenLocal
+public interface AndalusianChickenLocal extends ChickenLocal
 {
 
 }
