@@ -46,14 +46,6 @@ public class SimpleBeanDefinitionTest extends AbstractJSR299Test
       assert getBeans(Car.class).size() == 0;
    }
 
-   @Test(groups = "broken")
-   // TODO The bean will be discovered, just not as a managed bean. This test is doesn't check that *at all*
-   @SpecAssertion(section="3.1.1", id="f")
-   public void testClassesImplementingEnterpriseBeanInterfaceNotDiscoveredAsSimpleBean()
-   {
-      assert getBeans(MockEnterpriseBean.class).size() == 0;
-   }
-
    @Test
    @SpecAssertion(section="3.1.1", id="p")
    public void testSimpleBeanOnlyIfConstructorParameterless()
