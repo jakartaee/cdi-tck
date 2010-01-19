@@ -102,7 +102,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
          }
       }
       
-      assert bean != null;
+      assert bean == null;
       assert specializedBean != null;
       assert specializedBean.getBeanClass().getSuperclass().equals(Lion.class);
    }
