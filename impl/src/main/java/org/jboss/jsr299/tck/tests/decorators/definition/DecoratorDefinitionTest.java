@@ -61,7 +61,7 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test
       boolean implementsInterface = false;
       for (Class<?> interfaze : decorators.get(0).getClass().getInterfaces())
       {
-         if (interfaze.equals(Decorator.class))
+         if (Decorator.class.isAssignableFrom(interfaze))
          {
             implementsInterface = true;
             break;
