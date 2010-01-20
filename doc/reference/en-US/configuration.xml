@@ -166,6 +166,20 @@
       </para>
 
    </section>
+   
+   <section>
+      <title>Using the CDI TCK with the Java EE Web Profile</title>
+      <para>
+         You can configure the CDI TCK to just run tests appropriate to the Java EE
+         Web Profile by adding the <literal>WebProfileMethodSelector</literal> to
+         TestNG XML configuration file:
+      </para>
+      <programlisting><![CDATA[<method-selectors>
+   <method-selector>
+      <selector-class name="org.jboss.jsr299.tck.impl.WebProfileMethodSelector" />
+   </method-selector>
+</method-selectors>]]></programlisting>
+   </section>
 
    <section>
       <title>Configuring TestNG to execute the TCK</title>
@@ -180,7 +194,7 @@
          The
          <literal>tck-tests.xml</literal>
          artifact provided in the TCK distribution must be run by TestNG 5.9
-         (described by the TestNG documenation as "with a
+         (described by the TestNG documentation as "with a
          <literal>testng.xml</literal>
          file") unmodified for an implementation to pass the TCK. This file also
          allows tests to be excluded from a run:
