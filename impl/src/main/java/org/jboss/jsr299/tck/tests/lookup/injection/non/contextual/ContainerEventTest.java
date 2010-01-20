@@ -41,7 +41,7 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Resource;
 import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WarArtifactDescriptor;
+import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 /**
@@ -52,13 +52,13 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @Resources( { 
-   @Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml"),
    @Resource(destination = "WEB-INF/faces-config.xml", source = "faces-config.xml"),
    @Resource(destination = "WEB-INF/TestLibrary.tld", source = "TestLibrary.tld"),
    @Resource(destination = "TagPage.jsp", source = "TagPage.jsp"),
    @Resource(destination = "ManagedBeanTestPage.jsp", source = "ManagedBeanTestPage.jsp"),
    @Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension") })
 @IntegrationTest
+@WebXml("web.xml")
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractJSR299Test
 {

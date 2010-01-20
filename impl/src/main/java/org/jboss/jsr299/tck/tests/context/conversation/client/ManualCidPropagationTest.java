@@ -7,7 +7,7 @@ import org.jboss.testharness.impl.packaging.Classes;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Resource;
 import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WarArtifactDescriptor;
+import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -23,12 +23,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 @Classes({Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class, CloudController.class})
 @IntegrationTest(runLocally=true)
 @Resources({
-  @Resource(destination=WarArtifactDescriptor.WEB_XML_DESTINATION, source="web.xml"),
   @Resource(destination="cloud.jspx", source="cloud.jsf"),
   @Resource(destination="storm.jspx", source="storm.jsf"),
   @Resource(destination="clouds.jspx", source="clouds.jsf"),
   @Resource(destination="/WEB-INF/faces-config.xml", source="faces-config.xml")
 })
+@WebXml("web.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class ManualCidPropagationTest extends AbstractConversationTest
 {
