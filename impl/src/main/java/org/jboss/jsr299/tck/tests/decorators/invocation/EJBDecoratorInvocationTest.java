@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
 public class EJBDecoratorInvocationTest extends AbstractJSR299Test
 {
    
-   @Test(groups="ri-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section="7.2", id="d")
    })

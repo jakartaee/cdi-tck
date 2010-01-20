@@ -7,13 +7,9 @@
             <selector-class name="org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector" />
          </method-selector>
       </method-selectors>
-      <groups>
-         <run>
-            <exclude name="broken" />  
-         </run>
-      </groups>
       <packages>
          <package name="org.jboss.jsr299.tck.tests.*" />
+         <package name="org.jboss.jsr299.tck.interceptors.tests.*" />
       </packages>
    </test>
    

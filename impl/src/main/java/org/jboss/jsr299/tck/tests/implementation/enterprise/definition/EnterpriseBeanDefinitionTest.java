@@ -36,7 +36,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test
    }
    
    
-   @Test(groups = { "new", "jboss-as-broken" })
+   @Test(groups = { "new" })
    @SpecAssertion(section = "3.7.1", id = "ab")
    public void testConstructorAnnotatedInjectCalled()
    {
@@ -71,9 +71,8 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test
       assert !dogBean.getTypes().contains(Pitbull.class);
    }
 
-   @Test(groups = { "ejb 3.1", "jboss-as-broken" })
+   @Test(groups = { "ejb 3.1" })
    @SpecAssertion(section = "3.2.2", id = "ba")
-   // WBRI-231
    public void testEnterpriseBeanClassLocalView()
    {
       //TODO We need a 3.1 compliant container for this test

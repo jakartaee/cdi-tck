@@ -60,7 +60,7 @@ public class LibraryInEarTest extends AbstractJSR299Test
       return artifact;
    }
 
-   @Test(groups = {"jboss-as-broken"})
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "12.1", id="bbb")
    })

@@ -20,8 +20,10 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091101")
 public class EJBApplicationContextTest extends AbstractJSR299Test
 {
-   @Test(groups = { "rewrite", "contexts", "webservice", "integration", "jboss-as-broken" })
+   
+   @Test(groups = { "rewrite", "contexts", "webservice", "integration", "broken" })
    @SpecAssertion(section = "6.7.3", id = "b")
+   // CDITCK-60
    public void testApplicationScopeActiveDuringWebServiceInvocation()
    {
       //TODO This test might work better with a separate client over HTTP

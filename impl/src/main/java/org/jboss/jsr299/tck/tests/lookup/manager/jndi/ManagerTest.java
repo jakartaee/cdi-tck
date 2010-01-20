@@ -11,12 +11,11 @@ import org.testng.annotations.Test;
 
 @Artifact
 @IntegrationTest
-@SpecVersion(spec="cdi", version="20091101")
+@SpecVersion(spec = "cdi", version = "20091101")
 public class ManagerTest extends AbstractJSR299Test
 {
-   @Test(groups = { "manager", "ejb3", "integration", "jboss-as-broken" })
+   @Test(groups = { "manager", "ejb3", "integration"})
    @SpecAssertion(section = "11.3", id = "da")
-   // Requires new injection framework carlo is working on I think PLM
    public void testManagerLookupInJndi() throws Exception
    {
       BeanManager beanManager = getInstanceByType(JndiBeanManagerInjected.class).getManagerFromJndi();
