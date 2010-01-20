@@ -50,19 +50,6 @@ public class TransactionalObserversTest extends AbstractJSR299Test
       dog = (PomeranianInterface) getInstanceByName("Teddy");
    }
 
-//   @AfterMethod(alwaysRun = true)
-//   public void teardownTest()
-//   {
-//      try
-//      {
-//         dog.removeSessionBean();
-//      }
-//      catch (Exception e)
-//      {
-//         // Not important since the bean is now gone one way or the other
-//      }
-//   }
-
    @Test(groups = { "events", "integration" })
    @SpecAssertion(section = "10.4.4", id = "a")
    public void testTransactionalObserverNotifiedImmediatelyWhenNoTransactionInProgress()
@@ -73,8 +60,6 @@ public class TransactionalObserversTest extends AbstractJSR299Test
       assert dogAgent != null;
       dogAgent.sendOutsideTransaction(BigInteger.TEN);
       assert dog.isCorrectTransactionState();
-      // TODO Fix the security contexts
-      // assert dog.isCorrectContext();
    }
 
    @Test(groups = { "events", "integration" })
@@ -135,8 +120,6 @@ public class TransactionalObserversTest extends AbstractJSR299Test
       Agent dogAgent = getInstanceByType(Agent.class);
       dogAgent.sendInTransaction(new RuntimeException("test event"));
       assert dog.isCorrectTransactionState();
-      // TODO Fix the security contexts
-      // assert dog.isCorrectContext();
    }
 
    @Test(groups = { "events", "integration" })
