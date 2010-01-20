@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 class FunnelWeaverSpiderConsumer
 {
-   @Inject
+   @Inject @Spidery
    private FunnelWeaver<Spider> injectedSpider;
 
    public FunnelWeaver<Spider> getInjectedSpider()
