@@ -6,6 +6,10 @@
          <method-selector>
             <selector-class name="org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector" />
          </method-selector>
+         <!-- Uncomment if you want to run the TCK against a web profile impl -->
+         <!-- <method-selector>
+            <selector-class name="org.jboss.jsr299.tck.impl.WebProfileMethodSelector" />
+         </method-selector>-->
       </method-selectors>
       <packages>
          <package name="org.jboss.jsr299.tck.tests.*" />

@@ -39,7 +39,7 @@ public class WebProfileMethodSelector implements IMethodSelector
    
    private boolean isFullProfileOnly(String[] groups)
    {
-      return Arrays.asList(groups).contains("javaee-full");
+      return Arrays.asList(groups).contains("javaee-full-only");
    }
 
 }
