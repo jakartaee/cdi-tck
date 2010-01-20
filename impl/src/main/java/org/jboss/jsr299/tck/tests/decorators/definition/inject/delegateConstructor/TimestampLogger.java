@@ -26,7 +26,7 @@ import javax.inject.Inject;
  *
  */
 @Decorator
-public class TimestampLogger
+public class TimestampLogger implements Logger
 {
    
    public static final String PREFIX = TimestampLogger.class.getSimpleName();

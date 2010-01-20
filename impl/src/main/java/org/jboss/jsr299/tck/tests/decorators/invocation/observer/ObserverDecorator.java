@@ -26,7 +26,7 @@ import javax.inject.Inject;
  *
  */
 @Decorator
-public class ObserverDecorator
+public class ObserverDecorator implements Observer
 {
    
    @Inject @Delegate

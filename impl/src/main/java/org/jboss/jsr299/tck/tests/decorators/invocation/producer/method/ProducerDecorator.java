@@ -26,7 +26,7 @@ import javax.inject.Inject;
  *
  */
 @Decorator
-public class ProducerDecorator
+public class ProducerDecorator implements Producer
 {
    
    @Inject @Delegate
