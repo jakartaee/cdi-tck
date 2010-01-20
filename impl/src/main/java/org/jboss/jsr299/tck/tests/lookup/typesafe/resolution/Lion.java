@@ -5,7 +5,7 @@ public class Lion extends Cat<African>
    
    public Lion(String name)
    {
-      // TODO Auto-generated constructor stub
+      super(name);
    }
 
 }

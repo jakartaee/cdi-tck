@@ -28,7 +28,7 @@ class SpiderProducer
    
    @Produces public FunnelWeaver<Spider> getFunnelWeaverSpider()
    {
-      return new FunnelWeaver<Spider>();
+      return new FunnelWeaver<Spider>("Weaver");
    }
 
    @Produces public Animal makeASpider()
