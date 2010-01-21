@@ -21,18 +21,6 @@ import org.testng.annotations.Test;
 public class EJBApplicationContextTest extends AbstractJSR299Test
 {
    
-   @Test(groups = { "rewrite", "contexts", "webservice", "integration", "broken" })
-   @SpecAssertion(section = "6.7.3", id = "b")
-   // CDITCK-60
-   public void testApplicationScopeActiveDuringWebServiceInvocation()
-   {
-      //TODO This test might work better with a separate client over HTTP
-      FeederService birdFeeder = getInstanceByType(FeederService.class);
-      Bird bird = getInstanceByType(Bird.class);
-      bird.eat();
-      assert birdFeeder.adequateFood();
-   }
-
    @Test(groups = { "contexts", "ejb3", "integration" })
    @SpecAssertion(section = "6.7.3", id = "dc")
    public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception
