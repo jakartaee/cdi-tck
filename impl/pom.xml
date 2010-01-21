@@ -296,9 +296,9 @@
    </profiles>
 
    <scm>    
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/impl</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/impl</developerConnection>
-      <url>https://svn.jboss.org/repos/weld/cdi-tck/trunk/impl</url>
+      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/impl</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/impl</developerConnection>
+      <url>https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/impl</url>
    </scm>
 
 

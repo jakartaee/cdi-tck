@@ -290,8 +290,8 @@
    </profiles>   
 
    <scm>    
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/interceptor</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/interceptor</developerConnection>
+      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/interceptor</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/interceptor</developerConnection>
       <url>https://svn.jboss.org/repos/weld/cdi-tck/trunk/interceptor</url>
    </scm>
 

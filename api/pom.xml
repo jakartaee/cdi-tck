@@ -68,9 +68,9 @@ limitations under the License.
    </build>
 
    <scm>
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/api</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/api</developerConnection>
-      <url>https://svn.jboss.org/repos/weld/cdi-tck/trunk/api</url>
+      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/api</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/api</developerConnection>
+      <url>https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/api</url>
    </scm>
 
 </project>
