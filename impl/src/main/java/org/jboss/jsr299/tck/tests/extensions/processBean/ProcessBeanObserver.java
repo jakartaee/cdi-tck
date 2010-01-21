@@ -1,6 +1,7 @@
 package org.jboss.jsr299.tck.tests.extensions.processBean;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessManagedBean;
@@ -20,6 +21,14 @@ public class ProcessBeanObserver implements Extension
    private static int elephantProcessBeanCount;
    private static ProcessProducerField<ChickenHutch, Chicken> chickenProcessProducerField;
    private static int chickenHutchProcessBeanCount;
+   
+   public void cleanup(@Observes BeforeShutdown shutdown)
+   {
+      catProcessManagedBean = null;
+      cowProcessProducerMethod = null;
+      elephantProcessSessionBean = null;
+      chickenProcessProducerField = null;
+   }
 
    public void observeCatManagedBean(@Observes ProcessManagedBean<Cat> event)
    {

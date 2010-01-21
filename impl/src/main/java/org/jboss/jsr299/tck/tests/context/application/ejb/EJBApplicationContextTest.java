@@ -20,6 +20,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091101")
 public class EJBApplicationContextTest extends AbstractJSR299Test
 {
+   
    @Test(groups = { "contexts", "ejb3", "integration" })
    @SpecAssertion(section = "6.7.3", id = "dc")
    public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception

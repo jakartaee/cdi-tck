@@ -1,0 +1,234 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="JSR-299 TCK with confirmed test challenges excluded" verbose="0">
+   <test name="JSR-299 TCK">
+       <method-selectors>
+           <method-selector>
+               <selector-class name="org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector"/>
+           </method-selector>
+       </method-selectors>
+       <groups>
+           <run>
+               <!-- Don't require licensees to pass tests which are known not working. Confirmed correct -->
+               <exclude name="broken"/>
+           </run>
+       </groups>
+       <packages>
+           <!--
+             - To run a single package, specify its name here,
+             - uncomment the exclude classes for it below (if any)
+             - and comment the exclude classes for all other 
+             - packages to avoid accidental inclusions.
+             -->
+           <package name="org.jboss.jsr299.tck.tests.*"/>
+       </packages>
+       <!-- Excludes list -->
+       <classes>
+           <!--  
+             - Definition: CDITCK-57. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.definition.bean.custom.CustomBeanImplementationTest">
+               <methods>
+                   <exclude name="testGetStereotypesCalled"/>
+                   <exclude name="testIsNullableCalled"/>
+               </methods>
+           </class>
+           <!-- 
+             - Context: CDITCK-59. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.context.passivating.PassivatingContextTest">
+               <methods>
+                   <exclude name="testInjectionOfDependentPrimitiveProductIntoNormalBean"/>
+                   <exclude name="testInjectionOfDependentSerializableProductIntoNormalBean"/>
+                   <exclude name="testNonSerializableProducerFieldDeclaredPassivatingThrowsIllegalProductException"/>
+                   <exclude name="testPassivatingScopeProducerMethodReturnsUnserializableObjectNotOk"/>
+               </methods>
+           </class>
+           <!-- 
+             - Context: CDITCK-60. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.context.application.ejb.ApplicationContextSharedTest">
+               <methods>
+                   <exclude name="testApplicationContextShared"/>
+               </methods>
+           </class>
+           <class name="org.jboss.jsr299.tck.tests.context.application.ejb.EJBApplicationContextTest">
+               <methods>
+                   <exclude name="testApplicationScopeActiveDuringCallToEjbTimeoutMethod"/>
+                   <exclude name="testApplicationScopeActiveDuringWebServiceInvocation"/>
+               </methods>
+           </class>     
+           <!--
+             - Context: CDITCK-59. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.remove.EnterpriseBeanRemoveMethodTest">
+               <methods>
+                   <exclude name="testApplicationMayCallAnyRemoveMethodOnDependentScopedSessionEnterpriseBeans"/>
+                   <exclude name="testApplicationMayCallRemoveMethodOnDependentScopedSessionEnterpriseBeansButNoParametersArePassed"/>
+               </methods>
+           </class>
+           <!--
+             - Deployment: CDITCK-61. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.deployment.packaging.installedLibrary.WarInstalledLibraryTest">
+               <methods>
+                   <exclude name="test"/>
+               </methods>
+           </class>
+           <class name="org.jboss.jsr299.tck.tests.deployment.packaging.installedLibrary.EarInstalledLibraryTest">
+               <methods>
+                   <exclude name="test"/>
+               </methods>
+           </class>
+           <!--
+             - Deployment: CDITCK-56. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary.LibraryInEarTest">
+               <methods>
+                   <exclude name="test"/>
+               </methods>
+           </class>
+           <class name="org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.failsDuringBeanDiscovery.DeploymentFailureTest">
+               <methods>
+                   <exclude name="testDeploymentFailsBeforeNotifyingObserversAfterBeanDiscovery"/>
+               </methods>
+           </class>
+           <!--
+             - Implementation: CDITCK-56. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.implementation.simple.definition.SimpleBeanDefinitionTest">
+               <methods>
+                   <exclude name="testAbstractClassDeclaredInJavaNotDiscovered"/>
+                   <exclude name="testDependentScopedBeanCanHavePublicField"/>
+                   <exclude name="testEmptyConstructorUsed"/>
+                   <exclude name="testInitializerAnnotatedConstructor"/>
+                   <exclude name="testInitializerAnnotatedConstructorUsedOverEmptyConstuctor"/>
+                   <exclude name="testInterfaceNotDiscoveredAsSimpleBean"/>
+                   <exclude name="testSimpleBeanOnlyIfConstructorIsInitializer"/>
+                   <exclude name="testSimpleBeanOnlyIfConstructorParameterless"/>
+                   <exclude name="testStaticInnerClassDeclaredInJavaAllowed"/>
+                   <exclude name="testNonStaticInnerClassDeclaredInJavaNotDiscovered"/>
+               </methods>
+           </class>
+           <!--
+             - Implementation: CDITCK-59. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.remove.EnterpriseBeanRemoveMethodTest">
+               <methods>
+                   <exclude name="testApplicationMayCallAnyRemoveMethodOnDependentScopedSessionEnterpriseBeans"/>
+                   <exclude name="testApplicationMayCallRemoveMethodOnDependentScopedSessionEnterpriseBeansButNoParametersArePassed"/>
+               </methods>
+           </class>            
+           <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.lifecycle.EnterpriseBeanLifecycleTest">
+               <methods>
+                   <exclude name="testCreateSFSB"/>
+                   <exclude name="testCreateSLSB"/>
+                   <exclude name="testDestroyRemovesSFSB"/>
+                   <exclude name="testRemovedEjbIgnored"/>
+                   <exclude name="testSerializeSFSB"/>
+               </methods>
+           </class>
+           <!-- 
+             - Implementation: CDITCK-79. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.implementation.producer.method.definition.enterprise.EnterpriseProducerMethodDefinitionTest">
+               <methods>
+                   <exclude name="testNonStaticProducerMethodInheritedBySpecializingSubclass"/>
+                   <exclude name="testNonStaticProducerMethodNotInherited"/>
+               </methods>
+           </class>
+           <!-- 
+             - Implementation: CDITCK-80. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.implementation.simple.resource.persistenceContext.PersistenceContextDesctructionTest">
+               <methods>
+                   <exclude name="testDestructionOfPersistenceContext"/>
+               </methods>               
+           </class>
+           <!--  
+             - Lookup: CDITCK-70.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ContainerEventTest">
+               <methods>
+                   <exclude name="testProcessAnnotatedTypeEventFiredForFilter"/>
+                   <exclude name="testProcessAnnotatedTypeEventFiredForJsfManagedBean"/>
+                   <exclude name="testProcessAnnotatedTypeEventFiredForServlet"/>
+                   <exclude name="testProcessAnnotatedTypeEventFiredForServletListener"/>
+                   <exclude name="testProcessAnnotatedTypeEventFiredForTagHandler"/>       
+                   <exclude name="testProcessAnnotatedTypeEventFiredForTagLibraryListener"/>
+                   <exclude name="testProcessInjectionTargetEventFiredForJsfManagedBean"/>
+                   <exclude name="testProcessInjectionTargetEventFiredForServletListener"/>
+                   <exclude name="testProcessInjectionTargetEventFiredForTagLibraryListener"/>
+               </methods>
+           </class>
+           <!--  
+             - Lookup: CDITCK-76.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest">
+               <methods>
+                   <exclude name="testInjectionIntoWebServiceEndpoint"/>
+               </methods>
+           </class>
+           <!--  
+             - Lookup: CDITCK-77.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ContainerEventTest">
+               <methods>
+                   <exclude name="testProcessInjectionTargetEventFiredForFilter"/>
+               </methods>
+           </class>
+           <!--
+             - Event: CDITCK-74. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.event.observer.enterprise.EnterpriseEventInheritenceTest">
+               <methods>
+                   <exclude name="testNonStaticObserverMethodNotIndirectlyInherited"/>
+                   <exclude name="testNonStaticObserverMethodNotInherited"/>
+               </methods>
+           </class>            
+           <!--
+             - Event: CDITCK-68. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.extensions.observer.broken.definitionError.ProcessObserverMethodErrorTest">
+               <methods>
+                   <exclude name="testAddDefinitionError"/>
+               </methods>
+           </class>            
+           <class name="org.jboss.jsr299.tck.tests.extensions.observer.broken.exception.ProcessObserverMethodExceptionTest">
+               <methods>
+                   <exclude name="testExceptionIsDefinitionError"/>
+               </methods>
+           </class>            
+           <!--
+             - Event: CDITCK-75. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.event.observer.transactional.TransactionalObserversTest">
+               <methods>
+                   <exclude name="testAfterTransactionCompletionObserver"/>
+                   <exclude name="testAfterTransactionFailureObserver"/>
+                   <exclude name="testAfterTransactionSuccessObserver"/>
+                   <exclude name="testAfterTransactionCompletionObserver"/>
+                   <exclude name="testObserverCanSetRollbackOnlyOnTransaction"/>
+                   <exclude name="testTransactionalObserverNotifiedImmediatelyWhenNoTransactionInProgress"/>
+               </methods>
+           </class> 
+           <!-- 
+             - Extensions: CDITCK-78. Confirmed.
+             -->
+           <class name="org.jboss.jsr299.tck.tests.extensions.container.event.ContainerEventTest">
+               <methods>
+                   <exclude name="testProcessInjectionTargetFiredForSessionBean"/>
+                   <exclude name="testProcessManagedBeanFired"/>
+                   <exclude name="testGetSessionBeanType"/>
+                   <exclude name="testProcessAnnotatedTypeFiredForSessionBean"/>
+                   <exclude name="testProcessSessionBeanFiredForStatelessSessionBean"/>
+                   <exclude name="testTypeOfProcessInjectionTargetParameter"/>
+                   <exclude name="testProcessInjectionTargetFiredForSessionBeanInterceptor"/>
+                   <exclude name="testProcessSessionBeanFiredForStatefulSessionBean"/>
+                   <exclude name="testGetEJBName"/>
+                   <exclude name="testProcessInjectionTargetFiredForManagedBean"/>
+                   <exclude name="testProcessAnnotatedTypeFiredForSessionBeanInterceptor"/>
+               </methods>
+           </class>
+       </classes>
+   </test>
+</suite>

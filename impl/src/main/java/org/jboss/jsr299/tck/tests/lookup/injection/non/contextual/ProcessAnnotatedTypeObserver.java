@@ -1,6 +1,7 @@
 package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
@@ -12,6 +13,16 @@ public class ProcessAnnotatedTypeObserver implements Extension
    private static ProcessAnnotatedType<TagLibraryListener> tagLibraryListenerEvent = null; 
    private static ProcessAnnotatedType<TestTagHandler> tagHandlerEvent = null;
    private static ProcessAnnotatedType<Farm> jsfManagedBeanEvent = null;
+   
+   public void cleanup(@Observes BeforeShutdown shutdown)
+   {
+      servletEvent = null;
+      listenerEvent = null;
+      filterEvent = null;
+      tagLibraryListenerEvent = null;
+      tagHandlerEvent = null;
+      jsfManagedBeanEvent = null;
+   }
    
    public void observeServlet(@Observes ProcessAnnotatedType<TestServlet> event) {
       servletEvent = event;

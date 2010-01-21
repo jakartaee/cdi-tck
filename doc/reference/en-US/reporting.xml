@@ -73,7 +73,7 @@
          so we'll start there.
       </para>
       <section>
-         <title>CDK TCK Assertions</title>
+         <title>CDI TCK Assertions</title>
          <para>
             The CDI TCK developers have analyzed the JSR-299 specification
             document and identified the assertions that are present in each
@@ -377,7 +377,7 @@ Tests run: 441, Failures: 0, Errors: 0, Skipped: 0]]></programlisting>
             <title>Test Results in the TestNG Plugin View</title>
 
             <para>
-               Aftering running a test in Eclipse, as described in <xhref
+               After running a test in Eclipse, as described in <xref
                linkend="eclipse-standalone"/> and <xref
                linkend="eclipse-in-container"/>, the test results are displayed
                in the TestNG plugin view, as shown below.

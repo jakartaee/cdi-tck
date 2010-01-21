@@ -114,7 +114,7 @@ public abstract class AbstractJSR299Test extends org.jboss.testharness.AbstractT
    public boolean typeSetMatches(Set<Type> types, Type... requiredTypes)
    {
       List<Type> typeList = Arrays.asList(requiredTypes);
-      return requiredTypes.length == types.size() && types.containsAll(typeList);
+      return types.containsAll(typeList);
    }
 
    public <T> Bean<T> getUniqueBean(Class<T> type, Annotation... bindings)

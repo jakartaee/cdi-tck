@@ -57,13 +57,12 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test
       assert getInstanceByType(InjectedSessionBeanLocal.class).getFarm().isInjectionPerformedCorrectly();
    }
 
-   //@Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "ed"),
       @SpecAssertion(section = "5.5.2", id = "ao"),
       @SpecAssertion(section = "5.5.2", id = "ap")
    })
-   //JBAS-7046
    public void testInjectionOnEJBInterceptor()
    {
       // Test interceptor that intercepts contextual Session Bean

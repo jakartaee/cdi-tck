@@ -2,8 +2,9 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.addDeploymentProb
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
+import javax.enterprise.inject.spi.Extension;
 
-class BeanDiscoveryObserver
+public class BeanDiscoveryObserver implements Extension
 {
    private static int invocationCount = 0;
    

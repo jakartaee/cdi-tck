@@ -224,7 +224,7 @@ public class InjectionPointTest extends AbstractJSR299Test
    {
       assert !getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata().isDelegate();
 
-      Cat cat = getInstanceByType(Cat.class, new DefaultLiteral());
+      Cat cat = getInstanceByType(Cattery.class).getCat();
       assert cat.hello().equals("hello world!");
       assert cat.getBeanManager() != null;
       assert cat.getInjectionPoint() != null;

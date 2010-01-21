@@ -4431,7 +4431,7 @@ creates and returns a container-specific internal local reference to the session
     <group>
       <text>A raw bean type is considered assignable to a parameterized delegate type if the raw types are identical and all type parameters of the delegate type are either unbounded type variables or |java.lang.Object|.</text>
       
-      <assertion id="ab">
+      <assertion id="aa">
         <text>Check all type parameters are unbounded type variables</text>    
       </assertion>
       

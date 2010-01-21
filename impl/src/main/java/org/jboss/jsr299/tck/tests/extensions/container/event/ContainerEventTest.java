@@ -32,61 +32,55 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Packaging;
 import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
+import org.jboss.testharness.impl.packaging.ear.EjbJarXml;
+import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
- * Tests for ProcessAnnotatedType, ProcessBean and ProcessInjectionTarget events.
+ * Tests for ProcessAnnotatedType, ProcessBean and ProcessInjectionTarget
+ * events.
+ * 
  * @author Jozef Hartinger
- *
+ * 
  */
 @Artifact
-@Resources({
-   @Resource(source = "javax.enterprise.inject.spi.Extension", destination = "META-INF/services/javax.enterprise.inject.spi.Extension"),
-   @Resource(source = "ejb-jar.xml", destination = "META-INF/ejb-jar.xml")})
+@EjbJarXml("ejb-jar.xml")
 @IntegrationTest
 @SpecVersion(spec = "cdi", version = "20091101")
+@Extension("javax.enterprise.inject.spi.Extension")
 @Packaging(PackagingType.EAR)
 public class ContainerEventTest extends AbstractJSR299Test
 {
    @Test
-   @SpecAssertions({
-   @SpecAssertion(section = "12.3", id = "ba"),
-   @SpecAssertion(section = "11.5.6", id = "aaa")})
-   public void testProcessInjectionTargetFiredForManagedBean() {
+   @SpecAssertions( { @SpecAssertion(section = "12.3", id = "ba"), @SpecAssertion(section = "11.5.6", id = "aaa") })
+   public void testProcessInjectionTargetFiredForManagedBean()
+   {
       assert ProcessInjectionTargetObserver.getManagedBeanEvent() != null;
       validateManagedBean(ProcessInjectionTargetObserver.getManagedBeanEvent().getAnnotatedType());
    }
-   
+
    @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.6", id = "aab"),
-      @SpecAssertion(section = "11.5.6", id = "abb"),
-      @SpecAssertion(section = "12.3", id = "db")})
-   public void testProcessInjectionTargetFiredForSessionBean() {
+   @SpecAssertions( { @SpecAssertion(section = "11.5.6", id = "aab"), @SpecAssertion(section = "11.5.6", id = "abb"), @SpecAssertion(section = "12.3", id = "db") })
+   public void testProcessInjectionTargetFiredForSessionBean()
+   {
       assert ProcessInjectionTargetObserver.getStatelessSessionBeanEvent() != null;
       assert ProcessInjectionTargetObserver.getStatefulSessionBeanEvent() != null;
       validateStatelessSessionBean(ProcessInjectionTargetObserver.getStatelessSessionBeanEvent().getAnnotatedType());
       validateStatefulSessionBean(ProcessInjectionTargetObserver.getStatefulSessionBeanEvent().getAnnotatedType());
    }
-   
+
    @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.6", id = "aaf"),
-      @SpecAssertion(section = "11.5.6", id = "abf"),
-      @SpecAssertion(section = "12.3", id = "dh")})
-   public void testProcessInjectionTargetFiredForSessionBeanInterceptor() {
+   @SpecAssertions( { @SpecAssertion(section = "11.5.6", id = "aaf"), @SpecAssertion(section = "11.5.6", id = "abf"), @SpecAssertion(section = "12.3", id = "dh") })
+   public void testProcessInjectionTargetFiredForSessionBeanInterceptor()
+   {
       assert ProcessInjectionTargetObserver.getSessionBeanInterceptorEvent() != null;
       validateSessionBeanInterceptor(ProcessInjectionTargetObserver.getSessionBeanInterceptorEvent().getAnnotatedType());
    }
-   
+
    @Test
-   @SpecAssertions({
-      @SpecAssertion(section="11.5.6", id="aal"),
-      @SpecAssertion(section="11.5.6", id="aam")
-   })
-   public void testTypeOfProcessInjectionTargetParameter() {
+   @SpecAssertions( { @SpecAssertion(section = "11.5.6", id = "aal"), @SpecAssertion(section = "11.5.6", id = "aam") })
+   public void testTypeOfProcessInjectionTargetParameter()
+   {
       assert ProcessInjectionTargetObserver.getEvent1Observed() == 0;
       assert ProcessInjectionTargetObserver.getEvent2Observed() == 0;
       assert ProcessInjectionTargetObserver.getEvent3Observed() == 0;
@@ -96,21 +90,23 @@ public class ContainerEventTest extends AbstractJSR299Test
    }
 
    @Test
-   @SpecAssertion(section = "12.3", id= "bb")
-   public void testProcessAnnotatedTypeFiredForSessionBean() {
+   @SpecAssertion(section = "12.3", id = "bb")
+   public void testProcessAnnotatedTypeFiredForSessionBean()
+   {
       assert ProcessAnnotatedTypeObserver.getStatelessSessionBeanEvent() != null;
       assert ProcessAnnotatedTypeObserver.getStatefulSessionBeanEvent() != null;
       validateStatelessSessionBean(ProcessAnnotatedTypeObserver.getStatelessSessionBeanEvent().getAnnotatedType());
       validateStatefulSessionBean(ProcessAnnotatedTypeObserver.getStatefulSessionBeanEvent().getAnnotatedType());
    }
-   
+
    @Test
-   @SpecAssertion(section = "12.3", id= "bh")
-   public void testProcessAnnotatedTypeFiredForSessionBeanInterceptor() {
+   @SpecAssertion(section = "12.3", id = "bh")
+   public void testProcessAnnotatedTypeFiredForSessionBeanInterceptor()
+   {
       assert ProcessAnnotatedTypeObserver.getSessionBeanInterceptorEvent() != null;
       validateSessionBeanInterceptor(ProcessAnnotatedTypeObserver.getSessionBeanInterceptorEvent().getAnnotatedType());
    }
-   
+
    @Test
    @SpecAssertion(section = "11.5.8", id = "ba")
    public void testProcessManagedBeanFired()
@@ -118,62 +114,66 @@ public class ContainerEventTest extends AbstractJSR299Test
       assert ProcessBeanObserver.getProcessManagedBeanEvent() != null;
       validateManagedBean(ProcessBeanObserver.getProcessManagedBeanEvent().getAnnotatedBeanClass());
    }
-   
+
    @Test
-   @SpecAssertions({
-      @SpecAssertion(section="11.5.8", id="c"),
-      @SpecAssertion(section="12.3", id="fb")})
-   public void testProcessSessionBeanFiredForStatelessSessionBean() {
+   @SpecAssertions( { @SpecAssertion(section = "11.5.8", id = "c"), @SpecAssertion(section = "12.3", id = "fb") })
+   public void testProcessSessionBeanFiredForStatelessSessionBean()
+   {
       assert ProcessBeanObserver.getProcessStatelessSessionBeanEvent() != null;
       validateStatelessSessionBean(ProcessBeanObserver.getProcessStatelessSessionBeanEvent().getAnnotatedBeanClass());
    }
-   
+
    @Test
-   @SpecAssertions({
-      @SpecAssertion(section="11.5.8", id="c"),
-      @SpecAssertion(section="12.3", id="fb")
-   })
-      public void testProcessSessionBeanFiredForStatefulSessionBean() {
+   @SpecAssertions( { @SpecAssertion(section = "11.5.8", id = "c"), @SpecAssertion(section = "12.3", id = "fb") })
+   public void testProcessSessionBeanFiredForStatefulSessionBean()
+   {
       assert ProcessBeanObserver.getProcessStatefulSessionBeanEvent() != null;
       validateStatefulSessionBean(ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getAnnotatedBeanClass());
    }
-   
+
    @Test
-   @SpecAssertion(section="11.5.8", id="hb")
-   public void testGetEJBName() {
+   @SpecAssertion(section = "11.5.8", id = "hb")
+   public void testGetEJBName()
+   {
       assert ProcessBeanObserver.getProcessStatelessSessionBeanEvent().getEjbName().equals("sheep");
       assert ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getEjbName().equals("cow");
    }
-   
+
    @Test
-   @SpecAssertion(section="11.5.8", id="hc")
-   public void testGetSessionBeanType() {
+   @SpecAssertion(section = "11.5.8", id = "hc")
+   public void testGetSessionBeanType()
+   {
       assert ProcessBeanObserver.getProcessStatelessSessionBeanEvent().getSessionBeanType().equals(STATELESS);
       assert ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getSessionBeanType().equals(STATEFUL);
    }
-   
-   private void validateStatelessSessionBean(Annotated type) {
+
+   private void validateStatelessSessionBean(Annotated type)
+   {
       assert type.getBaseType().equals(Sheep.class);
       assert rawTypeSetMatches(type.getTypeClosure(), Sheep.class, SheepLocal.class, Object.class);
       assert type.getAnnotations().size() == 2;
-      assert annotationSetMatches(type.getAnnotations(), Tame.class, Stateless.class); //TODO Check
+      assert annotationSetMatches(type.getAnnotations(), Tame.class, Stateless.class); // TODO
+                                                                                       // Check
    }
-   
-   private void validateStatefulSessionBean(Annotated type) {
+
+   private void validateStatefulSessionBean(Annotated type)
+   {
       assert type.getBaseType().equals(Cow.class);
       assert rawTypeSetMatches(type.getTypeClosure(), Cow.class, CowLocal.class, Object.class);
       assert type.getAnnotations().size() == 0;
    }
-   
-   private void validateSessionBeanInterceptor(AnnotatedType<SheepInterceptor> type) {
+
+   private void validateSessionBeanInterceptor(AnnotatedType<SheepInterceptor> type)
+   {
       assert type.getBaseType().equals(SheepInterceptor.class);
       assert rawTypeSetMatches(type.getTypeClosure(), SheepInterceptor.class, Object.class);
       assert type.getAnnotations().size() == 0;
       assert type.getFields().size() == 0;
       assert type.getMethods().size() == 1;
    }
-   
-   private void validateManagedBean(AnnotatedType<Farm> type) {
+
+   private void validateManagedBean(AnnotatedType<Farm> type)
+   {
       assert type.getBaseType().equals(Farm.class);
       assert rawTypeSetMatches(type.getTypeClosure(), Farm.class, Object.class);
       assert type.getFields().size() == 1;
@@ -181,4 +181,5 @@ public class ContainerEventTest extends AbstractJSR299Test
       assert type.getMethods().size() == 1;
       assert type.getMethods().iterator().next().isAnnotationPresent(Produces.class);
    }
+
 }

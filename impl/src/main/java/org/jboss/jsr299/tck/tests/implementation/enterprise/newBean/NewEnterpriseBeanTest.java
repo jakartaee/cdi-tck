@@ -25,7 +25,6 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091101")
 public class NewEnterpriseBeanTest extends AbstractJSR299Test
 {
-   private Bean<WrappedEnterpriseBeanLocal> newEnterpriseBean;
    
    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {};
    
@@ -35,7 +34,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test
    {
       Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, WrappedEnterpriseBeanLocal.NEW);
       assert beans.size() == 1;
-      newEnterpriseBean = beans.iterator().next();
+      Bean<WrappedEnterpriseBeanLocal> newEnterpriseBean = beans.iterator().next();
       assert Dependent.class.equals(newEnterpriseBean.getScope());
    }
 
@@ -45,7 +44,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test
    {
       Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, WrappedEnterpriseBeanLocal.NEW);
       assert beans.size() == 1;
-      newEnterpriseBean = beans.iterator().next();
+      Bean<WrappedEnterpriseBeanLocal> newEnterpriseBean = beans.iterator().next();
       assert newEnterpriseBean.getQualifiers().size() == 1;
       assert newEnterpriseBean.getQualifiers().iterator().next().annotationType().equals(New.class);
    }
@@ -56,7 +55,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test
    {
       Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, WrappedEnterpriseBeanLocal.NEW);
       assert beans.size() == 1;
-      newEnterpriseBean = beans.iterator().next();
+      Bean<WrappedEnterpriseBeanLocal> newEnterpriseBean = beans.iterator().next();
       assert newEnterpriseBean.getName() == null;
    }
 

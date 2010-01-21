@@ -36,9 +36,8 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test
    }
    
    
-   @Test(groups = { "new", "jboss-as-broken" })
+   @Test(groups = { "new" })
    @SpecAssertion(section = "3.7.1", id = "ab")
-   // WELD-357
    public void testConstructorAnnotatedInjectCalled()
    {
       ExplicitConstructor bean = getInstanceByType(ExplicitConstructor.class);
@@ -76,6 +75,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test
    @SpecAssertion(section = "3.2.2", id = "ba")
    public void testEnterpriseBeanClassLocalView()
    {
+      //TODO We need a 3.1 compliant container for this test
       Bean<Retriever> dogBean = getBeans(Retriever.class).iterator().next();
       assert dogBean.getTypes().contains(Retriever.class);
    }

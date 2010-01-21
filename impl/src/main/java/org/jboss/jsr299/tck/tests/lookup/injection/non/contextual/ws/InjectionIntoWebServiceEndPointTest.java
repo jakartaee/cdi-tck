@@ -24,20 +24,19 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.war.WarArtifactDescriptor;
+import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 @Artifact
 @IntegrationTest(runLocally = true)
-@Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml")
 @SpecVersion(spec="cdi", version="20091101")
+@WebXml("web.xml")
 public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
 {
    @WebServiceRef(wsdlLocation = "http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl")
    SheepWSEndPointService service;
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "ee"),
       @SpecAssertion(section = "5.5.2", id = "aq"),

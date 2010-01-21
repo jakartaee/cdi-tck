@@ -23,21 +23,20 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.war.WarArtifactDescriptor;
+import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 @Artifact
-@SpecVersion(spec="cdi", version="20091101")
+@SpecVersion(spec = "cdi", version = "20091101")
 @ExpectedDeploymentException(DeploymentFailure.class)
 @IntegrationTest
-@Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml")
+@WebXml("web.xml")
 public class InjectionPointTest extends AbstractJSR299Test
 {
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "5.5.7", id = "ga")
-   //WELDINT-26
-   public void testDefinitionErrorDetected() {
+   public void testDefinitionErrorDetected()
+   {
       assert false;
    }
 }

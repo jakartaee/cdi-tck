@@ -87,13 +87,12 @@ public class PolicyAvailabilityTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.1.1", id = "fa")
-      //@SpecAssertion(section = "2.6.1", id = "e") removed from spec
    })
    
    public void testProducerPoliciesOnClass() throws Exception
    {
       assert getBeans(Sheep.class, new AnnotationLiteral<Wild>(){}).size() == 2;
-      assert getBeans(Sheep.class, new AnnotationLiteral<Tame>(){}).size() == 2;
+      assert getBeans(Sheep.class, new AnnotationLiteral<Tame>(){}).size() == 0;
    }
    
    @Test
@@ -104,6 +103,6 @@ public class PolicyAvailabilityTest extends AbstractJSR299Test
    public void testProducerPoliciesOnMethodAndField() throws Exception
    {
       assert getBeans(Cat.class, new AnnotationLiteral<Wild>(){}).size() == 2;
-      assert getBeans(Cat.class, new AnnotationLiteral<Tame>(){}).size() == 2;
+      assert getBeans(Cat.class, new AnnotationLiteral<Tame>(){}).size() == 0;
    }
 }

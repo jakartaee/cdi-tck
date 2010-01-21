@@ -21,12 +21,11 @@ import org.testng.annotations.Test;
 @ExpectedDeploymentException(DeploymentFailure.class)
 public class NonPassivationCapableProducerMethodTest extends AbstractJSR299Test
 {
-   @Test(groups = { "passivation", "ri-wrong-cause" })
+   @Test(groups = { "passivation" })
    @SpecAssertions({
      @SpecAssertion(section = "6.6.1", id = "cb"),
      @SpecAssertion(section = "6.6.4", id = "ca")
    })
-   // TODO Test passes, but with wrong exception
    public void testNonPassivationCapableProducerMethodNotOk()
    {
       assert false;

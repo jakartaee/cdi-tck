@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091101")
 public class SingletonWithRequestScopeTest extends AbstractJSR299Test
 {
-   @Test(groups = { "jboss-as-broken" })
+   @Test
    @SpecAssertion(section = "3.2", id = "da")
    public void testSingletonWithRequestScopeFails()
    {

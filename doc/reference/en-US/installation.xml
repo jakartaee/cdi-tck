@@ -109,27 +109,25 @@
          each test method in the class.
       </para>
 
-      <tip id="tck-in-jboss-as">
+      <note id="tck-in-jboss-as">
          <title>
             Running the TCK against the CDI RI (Weld) and JBoss AS
          </title>
 
          <para>
-            Weld is built as a modular library, and as such can be
-            retro-fitted to Java EE 5 products as required. JBoss AS 5.2 and
+            JBoss AS 6.0.0 M1 and
             above releases bundle Weld. To run the TCK with JBoss AS, you must
-            use JBoss AS 5.2 or above.
+            use JBoss AS 6.0.0.M1 or above.
          </para>
 
          <para>
-            To install JBoss AS 5.2 and update to the latest 
-            release: 
+            To install JBoss AS 6: 
          </para>
 
          <itemizedlist>
             <listitem>
                <para>
-                  First, you should download JBoss AS 5.2 from the JBoss AS
+                  First, you should download JBoss AS 6 from the JBoss AS
                   <ulink url="http://jboss.org/jbossas/downloads">project page</ulink>.
                </para>
             </listitem>
@@ -157,15 +155,15 @@
          </itemizedlist>
 
          <para>
-            The CDI TCK includes a TCK runner that executes the TCK using Web
-            Beans as the CDI implementation and JBoss AS as the Java EE runtime.
+            The CDI TCK includes a TCK runner that executes the TCK using Weld
+            as the CDI implementation and JBoss AS as the Java EE runtime.
             To run the tck:
          </para>
 
          <itemizedlist>
             <listitem>
                <para>
-                  You need to install Maven. You can find documention on how to
+                  You need to install Maven 2.0.10. You can find documention on how to
                   install Maven 2 in the
                   <ulink
                      url="http://www.sonatype.com/books/maven-book/reference/installation-sect-maven-install.html">Maven: The Definitive Guide</ulink>
@@ -189,7 +187,7 @@ mvn test -Dincontainer]]></programlisting>
             </listitem>
          </itemizedlist>
 
-      </tip>
+      </note>
    </section>
    <section id="eclipse-plugins">
       <title>Eclipse Plugins</title>

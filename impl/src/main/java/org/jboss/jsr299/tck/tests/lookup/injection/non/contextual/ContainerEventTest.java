@@ -41,7 +41,7 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Resource;
 import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WarArtifactDescriptor;
+import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 /**
@@ -52,22 +52,21 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @Resources( { 
-   @Resource(destination = WarArtifactDescriptor.WEB_XML_DESTINATION, source = "web.xml"),
    @Resource(destination = "WEB-INF/faces-config.xml", source = "faces-config.xml"),
    @Resource(destination = "WEB-INF/TestLibrary.tld", source = "TestLibrary.tld"),
    @Resource(destination = "TagPage.jsp", source = "TagPage.jsp"),
    @Resource(destination = "ManagedBeanTestPage.jsp", source = "ManagedBeanTestPage.jsp"),
    @Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension") })
 @IntegrationTest
+@WebXml("web.xml")
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractJSR299Test
 {
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aac"),
       @SpecAssertion(section = "11.5.6", id = "abc"),
       @SpecAssertion(section = "12.3", id = "de")})
-   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForServletListener()
    {
       assert ProcessInjectionTargetObserver.getListenerEvent() != null;
@@ -85,36 +84,33 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateTagHandlerAnnotatedType(ProcessInjectionTargetObserver.getTagHandlerEvent().getAnnotatedType());
    }
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aae"),
       @SpecAssertion(section = "11.5.6", id = "abe"),
       @SpecAssertion(section = "12.3", id = "dg")})
-   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForTagLibraryListener()
    {
       assert ProcessInjectionTargetObserver.getTagLibraryListenerEvent() != null;
       validateTagLibraryListenerAnnotatedType(ProcessInjectionTargetObserver.getTagLibraryListenerEvent().getAnnotatedType());
    }
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aah"),
       @SpecAssertion(section = "11.5.6", id = "abh"),
       @SpecAssertion(section = "12.3", id = "dj")})
-   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForServlet()
    {
       assert ProcessInjectionTargetObserver.getServletEvent() != null;
       validateServletAnnotatedType(ProcessInjectionTargetObserver.getServletEvent().getAnnotatedType());
    }
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aai"),
       @SpecAssertion(section = "11.5.6", id = "abi"),
       @SpecAssertion(section = "12.3", id = "dk")})
-   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForFilter()
    {
       assert ProcessInjectionTargetObserver.getFilterEvent() != null;
@@ -129,13 +125,12 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateJsfManagedBeanAnnotatedType(ProcessInjectionTargetObserver.getJsfManagedBeanEvent().getAnnotatedType());
    }
    
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aas"),
       @SpecAssertion(section = "11.5.6", id = "aao"),
       @SpecAssertion(section = "11.5.6", id = "aan"),
       @SpecAssertion(section = "11.5.6", id = "aap")})
-   // WELDINT-22
    public void testTypeOfProcessInjectionTargetParameter() {
       assert !ProcessInjectionTargetObserver.isStringObserved();
       assert ProcessInjectionTargetObserver.isTagHandlerSubTypeObserved();

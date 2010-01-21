@@ -24,8 +24,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
+import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
@@ -36,15 +35,13 @@ import org.testng.annotations.Test;
  */
 @Artifact
 @ExpectedDeploymentException(DeploymentFailure.class)
-@Resources({
-   @Resource(source="javax.enterprise.inject.spi.Extension", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
-})
+@Extension("javax.enterprise.inject.spi.Extension")
 @IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
 public class ProcessObserverMethodErrorTest extends AbstractJSR299Test
 {
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "11.5.9", id = "da")
    public void testAddDefinitionError()
    {

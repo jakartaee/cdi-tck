@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class PassivationCapableBeanWithNonPassivatingInterceptorTest extends AbstractJSR299Test
 {
-   @Test(groups = { "contexts", "passivation", "ri-broken" })
+   @Test(groups = { "contexts", "passivation" })
    @SpecAssertion(section = "6.6.4", id = "aac")
    public void testPassivationCapableBeanWithNonPassivatingInterceptorFails()
    {

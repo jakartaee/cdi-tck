@@ -6,24 +6,22 @@
       <surname>King</surname>
       <affiliation>
          <jobtitle>JSR-299: Contexts and Dependency Injection (CDI) for Java EE
-            specification lead</jobtitle>
-         <orgname>Red Hat Inc.</orgname>
+            specification lead (Red Hat, Inc.)</jobtitle>
+         <shortaffil></shortaffil>
       </affiliation>
    </author>
    <author>
       <firstname>Pete</firstname>
       <surname>Muir</surname>
       <affiliation>
-         <jobtitle>CDI TCK lead</jobtitle>
-         <orgname>Red Hat Inc.</orgname>
+         <jobtitle>CDI TCK lead (Red Hat, Inc.)</jobtitle>
       </affiliation>
    </author>
    <author>
       <firstname>Dan</firstname>
       <surname>Allen</surname>
       <affiliation>
-         <jobtitle>CDI TCK developer</jobtitle>
-         <orgname>Red Hat Inc.</orgname>
+         <jobtitle>CDI TCK developer (Red Hat, Inc.)</jobtitle>
       </affiliation>
    </author>
 <!--

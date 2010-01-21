@@ -173,7 +173,7 @@
             <listitem>
                <para>
                   <emphasis role="bold">JBoss Test Harness</emphasis>
-                  - The CDI TCK requires version 1.0.0 of the JBoss Test
+                  - The CDI TCK requires version 1.1.0-CR3 of the JBoss Test
                   Harness. The Harness is based on TestNG 5.x 
                   (<ulink url="http://testng.org">http://testng.org</ulink>).
                   You can read more about the harness in

@@ -3,6 +3,7 @@ package org.jboss.jsr299.tck.tests.context.dependent;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Dependent
@@ -10,15 +11,17 @@ import javax.inject.Named;
 @Default
 public class SensitiveFox
 {
-   private static BeanManager beanManager;
+   private final BeanManager beanManager;
 
    private boolean dependentContextActiveDuringCreate = false;
    
    private static boolean dependentContextActiveDuringEval = false;
 
-   public SensitiveFox()
+   @Inject
+   public SensitiveFox(BeanManager beanManager)
    {
       dependentContextActiveDuringCreate = beanManager.getContext(Dependent.class).isActive();
+      this.beanManager = beanManager;
    }
 
    public String getName()
@@ -38,11 +41,6 @@ public class SensitiveFox
    public static boolean isDependentContextActiveDuringEval()
    {
       return dependentContextActiveDuringEval;
-   }
-
-   public static void setManager(BeanManager beanManager)
-   {
-      SensitiveFox.beanManager = beanManager;
    }
 
 }
