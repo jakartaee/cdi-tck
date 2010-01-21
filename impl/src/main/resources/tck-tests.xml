@@ -1,20 +1,60 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="JSR-299 TCK" verbose="0"  >
-   <test name="JSR-299 TCK">
+<!-- JSR-299 TCK TestNG configuration for Weld -->
+
+<suite name="Weld / JBoss AS run of CDI TCK" verbose="0"  >
+   <test name="CDI TCK">
       <method-selectors>
          <method-selector>
             <selector-class name="org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector" />
          </method-selector>
-         <!-- Uncomment if you want to run the TCK against a web profile impl -->
-         <!-- <method-selector>
-            <selector-class name="org.jboss.jsr299.tck.impl.WebProfileMethodSelector" />
-         </method-selector>-->
       </method-selectors>
       <packages>
          <package name="org.jboss.jsr299.tck.tests.*" />
          <package name="org.jboss.jsr299.tck.interceptors.tests.*" />
       </packages>
+      <classes>
+         
+         <!-- Issues in Weld (the RI) -->
+         
+         <!-- WELD-393 -->
+         <class name="org.jboss.jsr299.tck.interceptors.tests.definition.DefinitionTest">
+            <methods>
+               <exclude name="testInterceptorMethodDefinedOnTargetClass" />
+            </methods>
+         </class>
+         
+         <!-- WELD-390 -->
+         <class name="org.jboss.jsr299.tck.interceptors.tests.lifecycleCallback.order.InvocationOrderTest">
+            <methods>
+               <exclude name="testInvocationOrder" />
+            </methods>
+         </class>
+         <!-- WELD-269 -->
+         <class name="org.jboss.jsr299.tck.tests.decorators.custom.CustomDecoratorTest">
+            <methods>
+               <exclude name="testCustomImplementationOfDecoratorInterface" />
+            </methods>
+         </class>
+         <!-- WELD-272 -->
+         <class name="org.jboss.jsr299.tck.tests.decorators.definition.broken.finalBeanClass.FinalBeanClassTest">
+            <methods>
+               <exclude name="testAppliesToFinalManagedBeanClass" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.decorators.definition.broken.finalBeanMethod.FinalBeanMethodTest">
+            <methods>
+               <exclude name="testAppliesToFinalMethodOnManagedBeanClass" />
+            </methods>
+         </class>
+         <!-- WELD-377 -->
+         <class name="org.jboss.jsr299.tck.tests.decorators.invocation.EJBDecoratorInvocationTest">
+            <methods>
+               <exclude name="testEJBDecoratorInvocation" />
+            </methods>
+         </class>
+                  
+      </classes>
    </test>
    
 </suite>
