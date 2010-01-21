@@ -3,7 +3,7 @@
    <parent>
       <artifactId>jsr299-tck-parent</artifactId>
       <groupId>org.jboss.jsr299.tck</groupId>
-      <version>1.0.1-CR1</version>
+      <version>1.0.1-SNAPSHOT</version>
    </parent>
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.jboss.jsr299.tck</groupId>
@@ -296,9 +296,9 @@
    </profiles>
 
    <scm>    
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.1-CR1/impl</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.1-CR1/impl</developerConnection>
-      <url>https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.1-CR1/impl</url>
+      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/impl</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/impl</developerConnection>
+      <url>https://svn.jboss.org/repos/weld/cdi-tck/trunk/impl</url>
    </scm>
 
 
