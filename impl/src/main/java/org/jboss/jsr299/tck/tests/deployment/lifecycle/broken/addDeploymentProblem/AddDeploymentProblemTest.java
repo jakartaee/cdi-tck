@@ -23,6 +23,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
+import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
@@ -34,26 +35,16 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  */
 @Artifact
+@Extension(value="javax.enterprise.inject.spi.Extension")
 @ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class AddDeploymentProblemTest extends AbstractJSR299Test
 {
-   @Test(groups={"rewrite", "jboss-as-broken"})
-   // TODO Needs Extension stuff adding
-   // WBRI-312
+   @Test(groups={"rewrite"})
    @SpecAssertion(section = "11.5.3", id = "b")
    public void testObserverDeploymentProblemTreatedAsDeploymentError()
    {
       assert false;
    }
-
-   // FIXME need to communicate state of container at the time of failure
-   //   @Override
-   //   @AfterClass(alwaysRun = true, groups = "scaffold")
-   //   public void afterClass() throws Exception
-   //   {
-   //      super.afterClass();
-   //      assert BeanDiscoveryObserver.getInvocationCount() == 2 : "All AfterDeploymentValidation observer methods should have been called";
-   //   }
 
 }

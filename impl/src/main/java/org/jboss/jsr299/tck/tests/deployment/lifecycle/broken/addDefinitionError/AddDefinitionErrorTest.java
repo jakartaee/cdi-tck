@@ -45,8 +45,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091101")
 public class AddDefinitionErrorTest extends AbstractJSR299Test
 {
-   @Test(groups={"jboss-as-broken", "rewrite"})
-   // WBRI-312
+   @Test(groups={"rewrite"})
    @SpecAssertions({
       @SpecAssertion(section = "11.5.2", id = "ca"),
       @SpecAssertion(section = "12.2", id = "c")
@@ -55,13 +54,5 @@ public class AddDefinitionErrorTest extends AbstractJSR299Test
    {
       assert false;
    }
-   
-   // FIXME need to communicate state of container at the time of failure
-   //   @Override
-   //   @AfterClass(alwaysRun = true, groups = "scaffold")
-   //   public void afterClass() throws Exception
-   //   {
-   //      super.afterClass();
-   //      assert BeanDiscoveryObserver.getInvocationCount() == 2 : "All AfterBeanDiscovery observer methods should have been called";
-   //   }
+
 }

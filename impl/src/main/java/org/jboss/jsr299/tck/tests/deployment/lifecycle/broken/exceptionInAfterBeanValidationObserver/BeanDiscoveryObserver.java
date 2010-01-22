@@ -18,8 +18,9 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.exceptionInAfterB
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
+import javax.enterprise.inject.spi.Extension;
 
-class BeanDiscoveryObserver
+public class BeanDiscoveryObserver implements Extension
 {
    public void afterDeploymentValidation(@Observes AfterDeploymentValidation event)
    {

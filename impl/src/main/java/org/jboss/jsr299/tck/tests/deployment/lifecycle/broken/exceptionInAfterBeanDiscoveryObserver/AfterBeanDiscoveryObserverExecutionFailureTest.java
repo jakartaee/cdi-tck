@@ -22,6 +22,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
+import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
@@ -34,11 +35,10 @@ import org.testng.annotations.Test;
 @Artifact
 @ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
+@Extension(value="javax.enterprise.inject.spi.Extension")
 public class AfterBeanDiscoveryObserverExecutionFailureTest extends AbstractJSR299Test
 {
-   @Test(groups={"jboss-as-broken", "rewrite"})
-   //TODO Needs Extension stuff adding
-   // WBRI-312
+   @Test(groups={"rewrite"})
    @SpecAssertion(section = "11.5.2", id = "g")
    public void testObserverFailureTreatedAsDefinitionError()
    {
