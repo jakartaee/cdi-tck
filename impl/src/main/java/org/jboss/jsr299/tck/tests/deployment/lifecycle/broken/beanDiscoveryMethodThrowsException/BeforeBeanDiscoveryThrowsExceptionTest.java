@@ -23,17 +23,14 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
+import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
  * @author pmuir
  */
 @Artifact
-@Resources({
-   @Resource(source="javax.enterprise.inject.spi.Extension", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
-})
+@Extension("javax.enterprise.inject.spi.Extension")
 @IntegrationTest
 @ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")

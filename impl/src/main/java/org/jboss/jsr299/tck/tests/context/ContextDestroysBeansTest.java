@@ -26,7 +26,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
+import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
-@Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
+@Extension("javax.enterprise.inject.spi.Extension")
 public class ContextDestroysBeansTest extends AbstractJSR299Test
 {
 
