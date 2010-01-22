@@ -44,7 +44,7 @@ public class ResolutionByNameTest extends AbstractJSR299Test
    {
       // Cod, Plaice and AlaskaPlaice are named "whitefish" - Cod is a not-enabled policy, AlaskaPlaice specializes Plaice
       Set<Bean<?>> beans = getCurrentManager().getBeans("whitefish");
-      assert beans.size() == 2;
+      assert beans.size() == 1;
       assert getCurrentManager().resolve(beans).getTypes().contains(AlaskaPlaice.class);
       // Both Salmon and Sole are named "fish" - Sole is an enabled policy
       beans = getCurrentManager().getBeans("fish");
