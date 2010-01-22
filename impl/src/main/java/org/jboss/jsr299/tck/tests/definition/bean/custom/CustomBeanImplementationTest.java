@@ -38,8 +38,7 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
 {
 
    @Test
-   @SpecAssertions({ 
-      //@SpecAssertion(section = "5.1", id = "b"), 
+   @SpecAssertions({  
       @SpecAssertion(section = "5.1.1", id = "k") 
    })
    public void testGetBeanClassCalled()
@@ -47,9 +46,8 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
       assert IntegerBean.bean.isGetBeanClassCalled();
    }
 
-   @Test(groups = { "ri-broken" })
+   @Test
    @SpecAssertion(section = "5.1.1", id = "k")
-   // WBRI-328
    public void testGetStereotypesCalled()
    {
       assert IntegerBean.bean.isGetStereotypesCalled();
