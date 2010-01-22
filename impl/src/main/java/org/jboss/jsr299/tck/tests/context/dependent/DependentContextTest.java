@@ -189,9 +189,8 @@ public class DependentContextTest extends AbstractJSR299Test
    })
    public void testContextIsActiveWhenInvokingProducerMethod()
    {
-      Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class).iterator().next();
-      CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
-      Tarantula tarantula = tarantulaBean.create(creationalContext);
+      SpiderProducer.reset();
+      Tarantula tarantula = getInstanceByType(Tarantula.class,PET_LITERAL);
       assert tarantula != null;
       assert SpiderProducer.isDependentContextActive();
       SpiderProducer.reset();
@@ -205,6 +204,7 @@ public class DependentContextTest extends AbstractJSR299Test
       Tarantula.reset();
       getInstanceByType(Tarantula.class,TAME_LITERAL);
       assert Tarantula.isDependentContextActive();
+      SpiderProducer.reset();
    }
 
    @Test(groups = { "contexts", "disposalMethod" })
