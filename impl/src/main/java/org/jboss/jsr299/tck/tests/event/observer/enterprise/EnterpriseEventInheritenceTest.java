@@ -52,7 +52,7 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
       // is a method only on Farmer, and not LazyFarmer
       observers.iterator().next().notify(egg);
       assert egg.getClassesVisited().size() == 1;
-      assert egg.getClassesVisited().iterator().next().equals(Farmer.class);
+      assert FarmerLocal.class.isAssignableFrom(egg.getClassesVisited().iterator().next());
    }
    
    @Test(groups = { "events", "inheritance" })
@@ -67,6 +67,6 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
       // is a method only on StockWatcher, and not IndirectStockWatcher
       observers.iterator().next().notify(stockPrice);
       assert stockPrice.getClassesVisited().size() == 1;
-      assert stockPrice.getClassesVisited().iterator().next().equals(StockWatcher.class);
+      assert StockWatcherLocal.class.isAssignableFrom(stockPrice.getClassesVisited().iterator().next());
    }
 }
