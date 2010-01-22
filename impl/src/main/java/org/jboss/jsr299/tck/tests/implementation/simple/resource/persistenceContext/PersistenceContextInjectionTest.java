@@ -30,7 +30,7 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Packaging;
 import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.Resource;
+import org.jboss.testharness.impl.packaging.ear.PersistenceXml;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
@@ -42,8 +42,7 @@ import org.testng.annotations.Test;
 @Artifact
 @Packaging(PackagingType.WAR)
 @IntegrationTest
-@Resource(source = "persistence.xml", destination = "WEB-INF/classes/META-INF/persistence.xml")
-//@PersistenceXml("persistence.xml")
+@PersistenceXml("persistence.xml")
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class PersistenceContextInjectionTest extends AbstractJSR299Test

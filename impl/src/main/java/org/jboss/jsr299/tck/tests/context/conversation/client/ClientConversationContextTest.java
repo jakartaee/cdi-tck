@@ -24,7 +24,7 @@ import org.jboss.testharness.impl.packaging.Classes;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Resource;
 import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WarArtifactDescriptor;
+import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -41,7 +41,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 @Classes({Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class, CloudController.class})
 @IntegrationTest(runLocally=true)
 @Resources({
-  @Resource(destination=WarArtifactDescriptor.WEB_XML_DESTINATION, source="web.xml"),
   @Resource(destination="home.jspx", source="home.jsf"),
   @Resource(destination="cloud.jspx", source="cloud.jsf"),
   @Resource(destination="clouds.jspx", source="clouds.jsf"),
@@ -49,6 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
   @Resource(destination="/WEB-INF/faces-config.xml", source="faces-config.xml"),
   @Resource(destination="rain.jspx", source="rain.jsf")
 })
+@WebXml("web.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class ClientConversationContextTest extends AbstractConversationTest
 {

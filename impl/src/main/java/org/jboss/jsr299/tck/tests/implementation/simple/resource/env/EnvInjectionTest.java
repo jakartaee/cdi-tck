@@ -28,8 +28,8 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Packaging;
 import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.Resource;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
+import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 /**
@@ -40,9 +40,9 @@ import org.testng.annotations.Test;
 @Artifact
 @Packaging(PackagingType.WAR)
 @IntegrationTest
-@Resource(source="web.xml", destination="/WEB-INF/web.xml")
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
+@WebXml("web.xml")
 public class EnvInjectionTest extends AbstractJSR299Test
 {
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })

@@ -23,7 +23,7 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Resource;
 import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WarArtifactDescriptor;
+import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.TextPage;
@@ -32,9 +32,9 @@ import com.gargoylesoftware.htmlunit.WebClient;
 @Artifact
 @IntegrationTest(runLocally=true)
 @Resources({
-  @Resource(destination=WarArtifactDescriptor.WEB_XML_DESTINATION, source="web.xml"),
   @Resource(destination="SimplePage.html", source="SimplePage.html")
 })
+@WebXml("web.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class SessionContextTest extends AbstractJSR299Test
 {
