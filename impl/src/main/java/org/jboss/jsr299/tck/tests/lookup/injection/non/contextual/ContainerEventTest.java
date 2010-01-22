@@ -62,12 +62,11 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractJSR299Test
 {
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aac"),
       @SpecAssertion(section = "11.5.6", id = "abc"),
       @SpecAssertion(section = "12.3", id = "de")})
-   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForServletListener()
    {
       assert ProcessInjectionTargetObserver.getListenerEvent() != null;
@@ -85,36 +84,33 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateTagHandlerAnnotatedType(ProcessInjectionTargetObserver.getTagHandlerEvent().getAnnotatedType());
    }
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aae"),
       @SpecAssertion(section = "11.5.6", id = "abe"),
       @SpecAssertion(section = "12.3", id = "dg")})
-   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForTagLibraryListener()
    {
       assert ProcessInjectionTargetObserver.getTagLibraryListenerEvent() != null;
       validateTagLibraryListenerAnnotatedType(ProcessInjectionTargetObserver.getTagLibraryListenerEvent().getAnnotatedType());
    }
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aah"),
       @SpecAssertion(section = "11.5.6", id = "abh"),
       @SpecAssertion(section = "12.3", id = "dj")})
-   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForServlet()
    {
       assert ProcessInjectionTargetObserver.getServletEvent() != null;
       validateServletAnnotatedType(ProcessInjectionTargetObserver.getServletEvent().getAnnotatedType());
    }
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aai"),
       @SpecAssertion(section = "11.5.6", id = "abi"),
       @SpecAssertion(section = "12.3", id = "dk")})
-   // WELDINT-22
    public void testProcessInjectionTargetEventFiredForFilter()
    {
       assert ProcessInjectionTargetObserver.getFilterEvent() != null;
@@ -129,13 +125,12 @@ public class ContainerEventTest extends AbstractJSR299Test
       validateJsfManagedBeanAnnotatedType(ProcessInjectionTargetObserver.getJsfManagedBeanEvent().getAnnotatedType());
    }
    
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aas"),
       @SpecAssertion(section = "11.5.6", id = "aao"),
       @SpecAssertion(section = "11.5.6", id = "aan"),
       @SpecAssertion(section = "11.5.6", id = "aap")})
-   // WELDINT-22
    public void testTypeOfProcessInjectionTargetParameter() {
       assert !ProcessInjectionTargetObserver.isStringObserved();
       assert ProcessInjectionTargetObserver.isTagHandlerSubTypeObserved();

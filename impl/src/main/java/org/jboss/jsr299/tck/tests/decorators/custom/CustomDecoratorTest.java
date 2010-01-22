@@ -36,9 +36,8 @@ import org.testng.annotations.Test;
 @Extension("javax.enterprise.inject.spi.Extension")
 public class CustomDecoratorTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "8.3", id = "b")
-   // WELD-269
    public void testCustomImplementationOfDecoratorInterface()
    {
       assert getInstanceByType(Vehicle.class).start().equals("Bus started and decorated.");

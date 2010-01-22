@@ -36,9 +36,8 @@ import org.testng.annotations.Test;
 public class FinalBeanMethodTest extends AbstractJSR299Test
 {
 
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section="8.3", id="ac")
-   // WELD-272
    public void testAppliesToFinalMethodOnManagedBeanClass()
    {
       assert false;

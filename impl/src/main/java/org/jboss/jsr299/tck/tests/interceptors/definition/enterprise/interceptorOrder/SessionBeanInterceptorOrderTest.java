@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class SessionBeanInterceptorOrderTest extends AbstractJSR299Test
 {
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertion(section = "9.4", id = "fb")
    public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding()
    {

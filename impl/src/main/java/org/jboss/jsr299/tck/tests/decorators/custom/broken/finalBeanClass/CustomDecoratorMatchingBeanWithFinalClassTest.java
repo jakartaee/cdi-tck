@@ -35,9 +35,8 @@ import org.testng.annotations.Test;
 @ExpectedDeploymentException(DeploymentFailure.class)
 public class CustomDecoratorMatchingBeanWithFinalClassTest extends AbstractJSR299Test
 {
-   @Test(groups = "ri-broken")
+   @Test
    @SpecAssertion(section = "8.3", id = "ab")
-   // WELD-274
    public void testCustomDecoratorDecoratingFinalBean()
    {
       assert false;

@@ -37,7 +37,7 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
    @WebServiceRef(wsdlLocation = "http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl")
    SheepWSEndPointService service;
 
-   @Test(groups = "jboss-as-broken")
+   @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "ee"),
       @SpecAssertion(section = "5.5.2", id = "aq"),
