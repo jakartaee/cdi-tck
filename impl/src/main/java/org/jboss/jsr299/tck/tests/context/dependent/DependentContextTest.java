@@ -129,6 +129,7 @@ public class DependentContextTest extends AbstractJSR299Test
       tarantulaBean.destroy(tarantula, creationalContext);
       assert SpiderProducer.getInstanceUsedForDisposal() != null;
       assert SpiderProducer.getInstanceUsedForDisposal() != spiderProducer;
+      SpiderProducer.reset();
    }
 
    @Test(groups = { "contexts", "observerMethod" })
@@ -193,6 +194,7 @@ public class DependentContextTest extends AbstractJSR299Test
       Tarantula tarantula = tarantulaBean.create(creationalContext);
       assert tarantula != null;
       assert SpiderProducer.isDependentContextActive();
+      SpiderProducer.reset();
    }
 
    @Test(groups = { "contexts", "producerField"})
@@ -219,6 +221,7 @@ public class DependentContextTest extends AbstractJSR299Test
       SpiderProducer.reset();
       tarantulaBean.destroy(tarantula, creationalContext);
       assert SpiderProducer.isDependentContextActive();
+      SpiderProducer.reset();
    }
 
    @Test(groups = { "contexts", "observerMethod" })
@@ -233,7 +236,6 @@ public class DependentContextTest extends AbstractJSR299Test
    @SpecAssertion(section = "6.4", id = "g") // Dependent context is now always active
    public void testContextIsActiveWhenEvaluatingElExpression()
    {
-      SensitiveFox.setManager(getCurrentManager());
       String foxName = getCurrentConfiguration().getEl().evaluateMethodExpression("#{sensitiveFox.getName}", String.class, new Class[0], new Object[0]);
       assert foxName != null;
       assert SensitiveFox.isDependentContextActiveDuringEval();
@@ -243,7 +245,6 @@ public class DependentContextTest extends AbstractJSR299Test
    @SpecAssertion(section = "6.4", id = "g") // Dependent context is now always active
    public void testContextIsActiveDuringBeanCreation()
    {
-      SensitiveFox.setManager(getCurrentManager());
       SensitiveFox fox1 = getInstanceByType(SensitiveFox.class);
       assert fox1 != null;
       assert fox1.isDependentContextActiveDuringCreate();
@@ -343,6 +344,7 @@ public class DependentContextTest extends AbstractJSR299Test
       spiderInstance.ping();
       assert SpiderProducer.isDestroyed();
       assert Tarantula.isDestroyed();
+      SpiderProducer.reset();
    }
 
    @Test(groups = { "contexts", "producerField" })
@@ -376,6 +378,7 @@ public class DependentContextTest extends AbstractJSR299Test
       tarantulaBean.destroy(tarantula, creationalContext);
       assert SpiderProducer.isDestroyed();
       assert Fox.isDestroyed();
+      SpiderProducer.reset();
    }
 
    @Test(groups = { "contexts", "observerMethod" })
