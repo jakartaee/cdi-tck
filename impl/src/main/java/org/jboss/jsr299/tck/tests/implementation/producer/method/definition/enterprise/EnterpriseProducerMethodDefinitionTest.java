@@ -43,7 +43,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test
    public void testNonStaticProducerMethodInheritedBySpecializingSubclass()
    {
       assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {}).size() == 1;
-      assert getInstanceByType(Egg.class,new AnnotationLiteral<Yummy>() {}).getMother().getClass().equals(AndalusianChicken.class);
+      assert getInstanceByType(Egg.class,new AnnotationLiteral<Yummy>() {}).getMother() instanceof AndalusianChickenLocal;
    }
    
    @Test
@@ -51,7 +51,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test
    public void testNonStaticProducerMethodNotInherited()
    {
       assert getBeans(Apple.class, new AnnotationLiteral<Yummy>() {}).size() == 1;
-      assert getInstanceByType(Apple.class,new AnnotationLiteral<Yummy>() {}).getTree().getClass().equals(AppleTree.class);      
+      assert getInstanceByType(Apple.class,new AnnotationLiteral<Yummy>() {}).getTree() instanceof AppleTreeLocal;      
    }
    
    @Test
