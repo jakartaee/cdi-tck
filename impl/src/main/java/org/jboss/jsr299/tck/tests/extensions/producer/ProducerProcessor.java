@@ -23,6 +23,7 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.InjectionTarget;
@@ -38,6 +39,15 @@ public class ProducerProcessor implements Extension
    private static InjectionTarget<Dog> dogInjectionTarget;
    private static AnnotatedType<Dog> dogAnnotatedType;
    private static boolean overriddenCowProducerCalled;
+   
+   public void cleanup(@Observes BeforeShutdown shutdown)
+   {
+      catInjectionTarget = null;
+      noisyDogProducer = null;
+      quietDogProducer = null;
+      dogInjectionTarget = null;
+      dogAnnotatedType = null;
+   }
 
    public void processDogProducerProducer(@Observes ProcessProducer<DogProducer, Dog> producerEvent)
    {

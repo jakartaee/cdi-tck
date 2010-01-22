@@ -17,6 +17,7 @@
 package org.jboss.jsr299.tck.tests.extensions.container.event;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 
@@ -33,6 +34,15 @@ public class ProcessInjectionTargetObserver implements Extension
    private static int event3Observed = 0;
    private static int event4Observed = 0;
    private static int event5Observed = 0;
+   
+   public void cleanup(@Observes BeforeShutdown shutdown)
+   {
+      statefulSessionBeanEvent = null;
+      statelessSessionBeanEvent = null;
+      sessionBeanInterceptorEvent = null;
+      managedBeanEvent = null;
+      eventWithTypeVariable = null;
+   }
 
    
    public void observeStatelessSessionBean(@Observes ProcessInjectionTarget<Sheep> event) {

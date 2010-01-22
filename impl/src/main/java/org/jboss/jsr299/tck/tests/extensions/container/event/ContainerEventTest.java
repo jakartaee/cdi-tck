@@ -181,4 +181,5 @@ public class ContainerEventTest extends AbstractJSR299Test
       assert type.getMethods().size() == 1;
       assert type.getMethods().iterator().next().isAnnotationPresent(Produces.class);
    }
+   
 }
