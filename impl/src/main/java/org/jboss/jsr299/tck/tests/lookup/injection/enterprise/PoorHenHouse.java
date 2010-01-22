@@ -18,12 +18,13 @@ package org.jboss.jsr299.tck.tests.lookup.injection.enterprise;
 
 import javax.inject.Inject;
 
-class PoorHenHouse extends HenHouse
+public class PoorHenHouse extends HenHouse
 {
    protected boolean initializerCalledAfterSuperclassInjection = false;
-   
+
    @Inject
-   public void initialize() {
+   public void initialize()
+   {
       initializerCalledAfterSuperclassInjection = fox != null;
    }
 
