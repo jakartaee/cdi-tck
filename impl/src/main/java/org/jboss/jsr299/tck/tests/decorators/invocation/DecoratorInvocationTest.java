@@ -79,6 +79,9 @@ public class DecoratorInvocationTest extends AbstractJSR299Test
       assert FooImpl.getMessage().equals(CowShed.MESSAGE + FooDecorator1.SUFFIX + FooDecorator2.SUFFIX);
       assert FooImpl.getInjectionPoint().getBean().getBeanClass().equals(FooDecorator2.class);
       assert FooImpl.getInjectionPoint().isDelegate();
+      FooDecorator1.reset();
+      FooDecorator2.reset();
+      FooImpl.reset();
    }
 
 }
