@@ -36,6 +36,7 @@ public class InvocationOrderTest extends AbstractJSR299Test
    })
    public void testInvocationOrder() {
       getInstanceByType(LakeCargoShip.class);
+      int s = LakeCargoShip.getSequence();
       assert LakeCargoShip.getSequence() == 7;
    }
 }
