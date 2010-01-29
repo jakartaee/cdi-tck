@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.interceptors.tests.lifecycleCallback.order;
 import javax.annotation.PostConstruct;
 import javax.interceptor.Interceptors;
 
-@Interceptors( { Interceptor1.class, Interceptor2.class, Interceptor3.class, Interceptor4.class })
+@Interceptors( { Interceptor1.class, Interceptor4.class })
 class LakeCargoShip extends CargoShip
 {
    // Every interceptor sets this property to a certain value.
