@@ -23,7 +23,7 @@ public class TransactionInterceptor
 {
    @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
    {
-      if (!Foo.decoratorCalledFirst) Foo.interceptorCalledFirst = true;
+      if (!FooImpl.decoratorCalledFirst) FooImpl.interceptorCalledFirst = true;
       
       return ctx.proceed();
    }

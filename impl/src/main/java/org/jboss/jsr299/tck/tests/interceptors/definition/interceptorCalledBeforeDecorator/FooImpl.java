@@ -16,29 +16,13 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator;
 
-import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
-import org.testng.annotations.Test;
+import javax.interceptor.Interceptors;
 
-@Artifact
-@SpecVersion(spec="cdi", version="20091101")
-@BeansXml("beans.xml")
-public class InterceptorCalledBeforeDecoratorTest extends AbstractJSR299Test
+@Interceptors(TransactionInterceptor.class)
+class FooImpl implements Foo
 {
-   @Test
-   @SpecAssertion(section = "9.4", id = "g")
-   public void testInterceptorCalledBeforeDecorator()
-   {
-      FooImpl.interceptorCalledFirst = false;
-      FooImpl.decoratorCalledFirst = false;
-      
-      Foo foo = getInstanceByType(Foo.class);
-      foo.bar();
-      
-      assert FooImpl.interceptorCalledFirst;
-      assert !FooImpl.decoratorCalledFirst;
-   }
+   public static boolean interceptorCalledFirst;
+   public static boolean decoratorCalledFirst;
+   
+   public void bar() {}
 }
