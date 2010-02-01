@@ -32,13 +32,13 @@ public class InterceptorCalledBeforeDecoratorTest extends AbstractJSR299Test
    @SpecAssertion(section = "9.4", id = "g")
    public void testInterceptorCalledBeforeDecorator()
    {
-      Foo.interceptorCalledFirst = false;
-      Foo.decoratorCalledFirst = false;
+      FooImpl.interceptorCalledFirst = false;
+      FooImpl.decoratorCalledFirst = false;
       
       Foo foo = getInstanceByType(Foo.class);
       foo.bar();
       
-      assert Foo.interceptorCalledFirst;
-      assert !Foo.decoratorCalledFirst;
+      assert FooImpl.interceptorCalledFirst;
+      assert !FooImpl.decoratorCalledFirst;
    }
 }
