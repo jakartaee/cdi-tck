@@ -32,7 +32,15 @@ public class WebProfileMethodSelector implements IMethodSelector
 
    public boolean includeMethod(IMethodSelectorContext ctx, ITestNGMethod method, boolean isTestMethod)
    {
-      return isWar(method.getMethod().getDeclaringClass()) && !isFullProfileOnly(method.getGroups());
+      if (isWar(method.getMethod().getDeclaringClass()) && !isFullProfileOnly(method.getGroups()))
+      {
+         return true;
+      }
+      else
+      {
+         ctx.setStopped(true);
+         return false;
+      }
    }
 
    public void setTestMethods(List<ITestNGMethod> arg0)
