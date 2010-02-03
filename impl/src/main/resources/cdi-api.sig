@@ -164,6 +164,7 @@ meth public abstract void setTimeout(long)
 
 CLSS public abstract interface !annotation javax.enterprise.context.ConversationScoped
  anno 0 java.lang.annotation.Documented()
+ anno 0 java.lang.annotation.Inherited()
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE, METHOD, FIELD])
  anno 0 javax.enterprise.context.NormalScope(boolean passivating=true)
@@ -486,7 +487,7 @@ meth public abstract void validate(javax.enterprise.inject.spi.InjectionPoint)
 CLSS public abstract interface javax.enterprise.inject.spi.BeforeBeanDiscovery
 meth public abstract !varargs void addStereotype(java.lang.Class<? extends java.lang.annotation.Annotation>,java.lang.annotation.Annotation[])
 meth public abstract void addAnnotatedType(javax.enterprise.inject.spi.AnnotatedType<?>)
-meth public abstract void addInterceptorBinding(java.lang.Class<? extends java.lang.annotation.Annotation>)
+meth public abstract !varargs void addInterceptorBinding(java.lang.Class<? extends java.lang.annotation.Annotation>,java.lang.annotation.Annotation[])
 meth public abstract void addQualifier(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract void addScope(java.lang.Class<? extends java.lang.annotation.Annotation>,boolean,boolean)
 
