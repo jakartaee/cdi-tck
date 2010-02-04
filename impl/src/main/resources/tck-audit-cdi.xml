@@ -2471,7 +2471,7 @@ detects the problem and treats it as a definition error.</text>
       <text>The container must guarantee that when any valid injected reference to a bean of normal scope is invoked, the invocation is always processed by the current instance of the injected bean.</text>
     </assertion>
     
-    <assertion id="e">
+    <assertion id="e" testable="false">
       <text>Client proxies may be shared between multiple injection points.</text>
     </assertion>
   </section>
@@ -2574,9 +2574,21 @@ detects the problem and treats it as a definition error.</text>
   </section>
   
   <section id="5.5.1" title="Injection using the bean constructor">
-    <assertion id="a">
-      <text>When the container instantiates a managed bean or session bean with a constructor annotated |@Inject|, the container calls this constructor, passing an injectable reference to each parameter. If there is no constructor annotated |@Inject|, the container calls the constructor with no parameters.</text>
+    <group>
+  		<text>When the container instantiates a managed bean or session bean with a constructor annotated |@Inject|, the container calls this constructor, passing an injectable reference to each parameter. If there is no constructor annotated |@Inject|, the container calls the constructor with no parameters.</text>
+    <assertion id="aa">
+    	<text>Test managed bean with a constructor annotated |@Inject|.</text>
     </assertion>
+    <assertion id="ab">
+    	<text>Test session bean with a constructor annotated |@Inject|.</text>
+    </assertion>
+    <assertion id="ba">
+    	<text>Test constructor with no parameters is used for a managed bean</text>
+    </assertion>
+    <assertion id="bb">
+    	<text>Test constructor with no parameters is used for a session bean</text>
+    </assertion>
+    </group>
   </section>
 
   <section id="5.5.2" title="Injection of fields and initializer methods">
