@@ -51,4 +51,11 @@ public class ResolutionByNameTest extends AbstractJSR299Test
       assert beans.size() == 2;
       assert getCurrentManager().resolve(beans).getTypes().contains(Sole.class);
    }
+   
+   @Test
+   @SpecAssertion(section = "3.11", id = "a")
+   public void testFieldNameUsedAsBeanName()
+   {
+      assert getInstanceByType(FishingNet.class).isCarpInjected();
+   }
 }

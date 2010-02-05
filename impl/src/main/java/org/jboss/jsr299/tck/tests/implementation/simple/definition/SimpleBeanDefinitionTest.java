@@ -61,6 +61,13 @@ public class SimpleBeanDefinitionTest extends AbstractJSR299Test
    {
       assert getBeans(Car.class).size() == 0;
    }
+   
+   @Test
+   @SpecAssertion(section = "3.1.1", id = "g")
+   public void testExtensionNotDiscoveredAsSimpleBean()
+   {
+      assert getBeans(SimpleExtension.class).size() == 0;
+   }
 
    @Test
    @SpecAssertion(section="3.1.1", id="p")
@@ -91,7 +98,8 @@ public class SimpleBeanDefinitionTest extends AbstractJSR299Test
    @SpecAssertions({
       @SpecAssertion(section = "3.7.1", id = "ba"),
       @SpecAssertion(section = "3.1.3", id = "a"),
-      @SpecAssertion(section = "3.7", id = "a")
+      @SpecAssertion(section = "3.7", id = "a"),
+      @SpecAssertion(section = "5.5.1", id = "ba")
    })
    public void testEmptyConstructorUsed()
    {
@@ -101,7 +109,10 @@ public class SimpleBeanDefinitionTest extends AbstractJSR299Test
    }
 
    @Test
-   @SpecAssertion(section = "3.7.1", id = "aa")
+   @SpecAssertions({
+      @SpecAssertion(section = "3.7.1", id = "aa"),
+      @SpecAssertion(section = "5.5.1", id = "aa")
+   })
    public void testInitializerAnnotatedConstructorUsedOverEmptyConstuctor() throws Exception
    {
       getInstanceByType(Turkey.class);

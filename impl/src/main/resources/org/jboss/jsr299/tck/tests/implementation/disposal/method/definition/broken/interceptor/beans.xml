@@ -1,0 +1,5 @@
+<beans> 
+	<interceptors>
+		<class>org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.broken.interceptor.SimpleInterceptor_Broken</class>
+	</interceptors>
+</beans>

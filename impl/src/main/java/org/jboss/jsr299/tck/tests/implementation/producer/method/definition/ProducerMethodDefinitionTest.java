@@ -17,6 +17,7 @@
 package org.jboss.jsr299.tck.tests.implementation.producer.method.definition;
 
 import java.lang.annotation.Annotation;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
@@ -270,5 +271,14 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test
    {
       getInstanceByType(Pollen.class, new AnnotationLiteral<Yummy>() {}).ping();
       assert false;
+   }
+   
+   @Test
+   @SpecAssertion(section = "3.3", id = "iaa")
+   //WELD-426
+   public void testTypeVariableReturnType()
+   {
+      // should be created by SpiderListProducer
+      assert getBeans(new TypeLiteral<List<Spider>>(){}).size() == 1;
    }
 }

@@ -179,8 +179,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
       @SpecAssertion(section = "7.3.1", id = "aa"),
       @SpecAssertion(section = "3.8.1", id = "aa"),
       @SpecAssertion(section="2.3.4", id="a"),
-      @SpecAssertion(section="3.8", id="aa"),
-      @SpecAssertion(section="3.8", id="ab"),
+      @SpecAssertion(section="3.8", id="a"),
       @SpecAssertion(section="12.1", id="bca")
    })
    public void testCreateInjectsFieldsDeclaredInJava()

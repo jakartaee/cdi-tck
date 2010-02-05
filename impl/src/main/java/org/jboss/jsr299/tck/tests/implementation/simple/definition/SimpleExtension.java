@@ -14,17 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.parameterizedTypeWithTypeParameter2;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
+package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
-public class TProducer
+import javax.enterprise.inject.spi.Extension;
+
+public class SimpleExtension implements Extension
 {
-   @Produces
-   public <T> T create(InjectionPoint point)
-   {
-       return null;
-   } 
-}
 
+}

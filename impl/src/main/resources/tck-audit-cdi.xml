@@ -721,7 +721,7 @@ detects the problem and treats it as a definition error.</text>
       <text>A managed bean with a constructor that takes no parameters does not require any special annotations</text>
     </assertion>
     
-    <assertion id="ab">
+    <assertion id="ab" testable="false">
       <text>If the managed bean does not have a constructor that takes no parameters, it must have a constructor annotated |@Inject|.  No additional special annotations are required.</text>
     </assertion>
 
@@ -1130,8 +1130,12 @@ detects the problem and treats it as a definition error.</text>
       <text>If a non-static method of a session bean class has a parameter annotated |@Disposes|, and the method is not a business method of the session bean, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
     
-    <assertion id="g">
-      <text>Interceptors and decorators may not declare disposer methods.  If an interceptor or decorator has a method annotated |@Disposes|, the container automatically detects the problem and treats it as a definition error.</text>
+    <assertion id="ga">
+      <text>Interceptors ~and decorators~ may not declare disposer methods.  If an interceptor ~or decorator~ has a method annotated |@Disposes|, the container automatically detects the problem and treats it as a definition error.</text>
+    </assertion>
+    
+    <assertion id="gb">
+      <text>~Interceptors and ~decorators may not declare disposer methods.  If ~an interceptor or~ decorator has a method annotated |@Disposes|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
 
     <assertion id="h">
@@ -1271,8 +1275,12 @@ detects the problem and treats it as a definition error.</text>
       <text>If a non-static field of a session bean class is annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
     
-    <assertion id="i">
-      <text>Interceptors and decorators may not declare producer fields.  If an interceptor or decorator has a field annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
+    <assertion id="ia">
+      <text>Interceptors ~and decorators~ may not declare producer fields.  If an interceptor ~or decorator~ has a field annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
+    </assertion>
+    
+    <assertion id="ib">
+      <text>Interceptors ~and decorators~ may not declare producer fields.  If ~an interceptor or~ decorator has a field annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
     </assertion>
   </section>
 
@@ -1428,21 +1436,12 @@ detects the problem and treats it as a definition error.</text>
   <section id="3.8" title="Injected fields">
     <group>
       <text>An injected field is a non-static, non-final field of a bean class, or of any Java EE component class supporting injection.</text>
-    
-      <assertion id="aa">
-        <text>Test a non-static field in a bean class.</text>
+      <assertion id="a">
+        <text>Test a bean class.</text>
       </assertion>
 
-      <assertion id="ab">
-        <text>Test a non-final field in a bean class.</text>
-      </assertion>
-
-      <assertion id="ba">
-        <text>Test a non-static field in a Java EE component class.</text>
-      </assertion>
-
-      <assertion id="bb">
-        <text>Test a non-final field in a Java EE component class.</text>
+      <assertion id="b">
+        <text>Test a Java EE component class.</text>
       </assertion>
     </group>
 
@@ -1462,20 +1461,12 @@ detects the problem and treats it as a definition error.</text>
     <group>
       <text>An initializer method is a non-abstract, non-static method of a bean class, or of any Java EE component class supporting injection.</text>
 
-      <assertion id="aaa">
-        <text>Test with a non-abstract method of a bean-class.</text>
+      <assertion id="a">
+        <text>Test a bean-class.</text>
       </assertion>
     
-      <assertion id="aa">
-        <text>Test with a non-static method of a bean class.</text>
-      </assertion>
-      
-      <assertion id="caa">
-        <text>Test with a non-abstract method of a Java EE component class.</text>
-      </assertion>
-      
-      <assertion id="ca">
-        <text>Test with a non-static method of a Java EE component class.</text>
+      <assertion id="b">
+        <text>Test a Java EE component class.</text>
       </assertion>
     </group>
 
@@ -1632,7 +1623,7 @@ detects the problem and treats it as a definition error.</text>
       <text>This second bean is enabled, in the sense of Section 5.1.2, "Enabled and disabled beans", if and only if some other enabled bean has an injection point with the qualifier |@New(X.class)| where |X| is the bean class.</text>
     </assertion>
     
-    <assertion id="xd">
+    <assertion id="xd" testable="false">
       <text>This bean is called the |@New| qualified bean for the class |X|.</text>
     </assertion>
     

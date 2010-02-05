@@ -298,6 +298,21 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
       assert AtomicInterceptor.intercepted;
       assert MissileInterceptor.intercepted;
    }
+   
+   @Test
+   @SpecAssertion(section = "3.9", id = "f")
+   public void testInitializerMethodNotIntercepter()
+   {
+      MissileInterceptor.intercepted = false;
+      
+      Submarine submarine = getInstanceByType(Submarine.class);
+      
+      assert !MissileInterceptor.intercepted;
+      
+      assert submarine.isInjected(); // this call is intercepted
+      
+      assert MissileInterceptor.intercepted;
+   }
 
    private Interceptor<?> getTransactionalInterceptor()
    {

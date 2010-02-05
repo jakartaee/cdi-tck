@@ -45,7 +45,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    @SpecAssertions( { 
       @SpecAssertion(section = "5.5", id = "ef"), 
       @SpecAssertion(section = "5.5.2", id = "ae"),
-      @SpecAssertion(section = "5.5.2", id = "bn")
+      @SpecAssertion(section = "5.5.2", id = "bn"),
+      @SpecAssertion(section = "3.8", id = "b")
    })
    public void testInjectionIntoServlet() throws Exception
    {
@@ -57,7 +58,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5.2", id = "af"),
-      @SpecAssertion(section = "5.5.2", id = "bm")
+      @SpecAssertion(section = "5.5.2", id = "bm"),
+      @SpecAssertion(section = "3.9", id = "b")
    })
    public void testServletInitializerMethodCalled() throws Exception
    {
@@ -70,7 +72,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    @SpecAssertions( { 
       @SpecAssertion(section = "5.5", id = "eg"), 
       @SpecAssertion(section = "5.5.2", id = "ag"),
-      @SpecAssertion(section = "5.5.2", id = "bq")
+      @SpecAssertion(section = "5.5.2", id = "bq"),
+      @SpecAssertion(section = "3.8", id = "b")
       })
    public void testInjectionIntoFilter() throws Exception
    {
@@ -82,7 +85,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5.2", id = "ah"),
-      @SpecAssertion(section = "5.5.2", id = "bp")
+      @SpecAssertion(section = "5.5.2", id = "bp"),
+      @SpecAssertion(section = "3.9", id = "b")
    })
    public void testFilterInitializerMethodCalled() throws Exception
    {
@@ -94,7 +98,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "ea"),
-      @SpecAssertion(section = "5.5.2", id = "ai")
+      @SpecAssertion(section = "5.5.2", id = "ai"),
+      @SpecAssertion(section = "3.8", id = "b")
    })
    public void testInjectionIntoServletListener() throws Exception
    {
@@ -104,7 +109,10 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "5.5.2", id = "aj")
+   @SpecAssertions({
+      @SpecAssertion(section = "5.5.2", id = "aj"),
+      @SpecAssertion(section = "3.9", id = "b")
+   })
    public void testServletListenerInitializerMethodCalled() throws Exception
    {
       WebClient webClient = new WebClient();
@@ -116,7 +124,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "eb"),
       @SpecAssertion(section = "5.5.2", id = "am"),
-      @SpecAssertion(section = "5.5.2", id = "an")
+      @SpecAssertion(section = "5.5.2", id = "an"),
+      @SpecAssertion(section = "3.8", id = "b")
    })
    public void testInjectionIntoTagHandler() throws Exception
    {
@@ -131,7 +140,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "ec"),
-      @SpecAssertion(section = "5.5.2", id="as")
+      @SpecAssertion(section = "5.5.2", id="as"),
+      @SpecAssertion(section = "3.8", id = "b")
    })
    public void testInjectionIntoTagLibraryListener() throws Exception
    {
@@ -141,7 +151,10 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "5.5.2", id="at")
+   @SpecAssertions({
+      @SpecAssertion(section = "5.5.2", id="at"),
+      @SpecAssertion(section = "3.9", id = "b")
+   })
    public void testTagLibraryListenerInitializerMethodCalled() throws Exception
    {
       WebClient webClient = new WebClient();
@@ -153,7 +166,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "d"),
       @SpecAssertion(section = "5.5.2", id = "au"),
-      @SpecAssertion(section = "5.5.2", id = "av")
+      @SpecAssertion(section = "5.5.2", id = "av"),
+      @SpecAssertion(section = "3.8", id = "b")
    })
    public void testInjectionIntoJSFManagedBean() throws Exception
    {
