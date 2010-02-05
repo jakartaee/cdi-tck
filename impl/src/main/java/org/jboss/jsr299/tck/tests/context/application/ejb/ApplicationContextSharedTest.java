@@ -45,7 +45,7 @@ public class ApplicationContextSharedTest extends AbstractJSR299Test
       FMS flightManagementSystem = getInstanceByType(FMS.class);
       flightManagementSystem.climb();
       flightManagementSystem.descend();
-      Thread.sleep(250);
+      Thread.sleep(350);
       assert flightManagementSystem.isSameBean();
    }
 
