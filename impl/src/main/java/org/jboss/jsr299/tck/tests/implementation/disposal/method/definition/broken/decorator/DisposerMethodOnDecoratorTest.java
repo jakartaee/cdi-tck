@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
 public class DisposerMethodOnDecoratorTest extends AbstractJSR299Test
 {
    @Test
-   @SpecAssertion(section = "3.3.2", id = "gb")
+   @SpecAssertion(section = "3.3.6", id = "gb")
    //WELD-424
    public void testDisposerMethodNotAllowedOnDecorator()
    {
