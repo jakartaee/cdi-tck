@@ -21,6 +21,7 @@ import java.io.Serializable;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Default;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -33,6 +34,10 @@ public class InitializerSimpleBean implements Serializable, InitializerSimpleBea
    private static final long serialVersionUID = 1L;
    private static int        initializerCalls = 0;
 
+   @SuppressWarnings("unused")
+   @Inject
+   private BeanManager beanManager;
+   
    @Inject
    public void initializer()
    {

@@ -97,7 +97,8 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test
 
    @Test
    @SpecAssertions({
-      @SpecAssertion(section="3.12", id = "j")
+      @SpecAssertion(section="3.12", id = "j"),
+      @SpecAssertion(section="3.12", id = "k")
    })
    public void testForEachEnterpriseBeanANewBeanExists()
    {
@@ -112,6 +113,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test
       assert newOrderBean.getQualifiers().iterator().next().annotationType().equals(New.class);
       
       assert orderBean.getTypes().equals(newOrderBean.getTypes());
+      assert orderBean.getBeanClass().equals(newOrderBean.getBeanClass());
       
       Bean<LionLocal> lionBean = getBeans(LionLocal.class, TAME_LITERAL).iterator().next();
       Bean<LionLocal> newLionBean = getBeans(LionLocal.class, LionLocal.NEW).iterator().next();
@@ -125,5 +127,16 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test
       assert newLionBean.getQualifiers().iterator().next().annotationType().equals(New.class);
       
       assert lionBean.getTypes().equals(newLionBean.getTypes());
+      assert lionBean.getBeanClass().equals(newLionBean.getBeanClass());
+   }
+   
+   @Test(groups = { "new" })
+   @SpecAssertion(section = "3.12", id = "h")
+   public void testNewBeanHasSameInjectedFields()
+   {
+      Bean<InitializerSimpleBeanLocal> simpleBean = getBeans(InitializerSimpleBeanLocal.class).iterator().next();
+      Bean<InitializerSimpleBeanLocal> newSimpleBean = getBeans(InitializerSimpleBeanLocal.class, InitializerSimpleBeanLocal.NEW).iterator().next();
+      assert !newSimpleBean.getInjectionPoints().isEmpty();
+      assert simpleBean.getInjectionPoints().equals(newSimpleBean.getInjectionPoints());
    }
 }

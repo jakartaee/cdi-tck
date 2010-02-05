@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.newSimpleBean;
 
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,10 +41,12 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 @Artifact
 @SpecVersion(spec="cdi", version="20091101")
+@BeansXml("beans.xml")
 public class NewSimpleBeanTest extends AbstractJSR299Test
 {
 
@@ -204,24 +207,46 @@ public class NewSimpleBeanTest extends AbstractJSR299Test
    @SpecAssertion(section = "3.12", id = "d")
    public void testForEachSimpleBeanANewBeanExists()
    {
-      assert getCurrentManager().getBeans(Order.class).size() == 1;
-      assert getCurrentManager().getBeans(Order.class).iterator().next().getQualifiers().size() == 2;
-      assert getCurrentManager().getBeans(Order.class).iterator().next().getQualifiers().contains(new DefaultLiteral());
+      assert getBeans(Order.class).size() == 1;
+      assert getUniqueBean(Order.class).getQualifiers().size() == 2;
+      assert getUniqueBean(Order.class).getQualifiers().contains(new DefaultLiteral());
 
       assert getBeans(Order.class, Order.NEW).size() == 1;
-      assert getBeans(Order.class, Order.NEW).iterator().next().getQualifiers().size() == 1;
-      assert getBeans(Order.class, Order.NEW).iterator().next().getQualifiers().iterator().next().annotationType().equals(New.class);
+      assert getUniqueBean(Order.class, Order.NEW).getQualifiers().size() == 1;
+      assert getUniqueBean(Order.class, Order.NEW).getQualifiers().iterator().next().annotationType().equals(New.class);
 
-      assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).size() == 1;
-      assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().size() == 2;
-      assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().contains(TAME_LITERAL);
-      assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().contains(new AnyLiteral());
+      assert getBeans(Lion.class, TAME_LITERAL).size() == 1;
+      assert getUniqueBean(Lion.class, TAME_LITERAL).getQualifiers().size() == 2;
+      assert getUniqueBean(Lion.class, TAME_LITERAL).getQualifiers().contains(TAME_LITERAL);
+      assert getUniqueBean(Lion.class, TAME_LITERAL).getQualifiers().contains(new AnyLiteral());
 
       assert getBeans(Lion.class, Lion.NEW).size() == 1;
-      assert getBeans(Lion.class, Lion.NEW).iterator().next().getQualifiers().size() == 1;
-      assert getBeans(Lion.class, Lion.NEW).iterator().next().getQualifiers().iterator().next().annotationType().equals(New.class);
+      assert getUniqueBean(Lion.class, Lion.NEW).getQualifiers().size() == 1;
+      assert annotationSetMatches(getUniqueBean(Lion.class, Lion.NEW).getQualifiers(), New.class);
    }
-
+   
+   @Test(groups = { "new" })
+   @SpecAssertion(section = "3.12", id = "d")
+   public void testNewBeanHasSameBeanClass()
+   {
+      assert getUniqueBean(Order.class).getBeanClass().equals(Order.class);
+      assert getUniqueBean(Order.class, Order.NEW).getBeanClass().equals(Order.class);
+      
+      assert getUniqueBean(Lion.class, TAME_LITERAL).getBeanClass().equals(Lion.class);
+      assert getUniqueBean(Lion.class, Lion.NEW).getBeanClass().equals(Lion.class);
+   }
+   
+   @Test(groups = { "new" })
+   @SpecAssertion(section = "3.12", id = "e")
+   public void testNewBeanHasSameBeanTypes()
+   {
+      assert typeSetMatches(getUniqueBean(Order.class).getTypes(), Order.class, Serializable.class, Object.class);
+      assert typeSetMatches(getUniqueBean(Order.class, Order.NEW).getTypes(), Order.class, Serializable.class, Object.class);
+      
+      assert typeSetMatches(getUniqueBean(Lion.class, TAME_LITERAL).getTypes(), Lion.class, Object.class);
+      assert typeSetMatches(getUniqueBean(Lion.class, Lion.NEW).getTypes(), Lion.class, Object.class);
+   }
+   
    @Test(groups = { "new" })
    @SpecAssertion(section = "3.12", id = "f")
    public void testNewBeanHasSameConstructor()
@@ -253,6 +278,22 @@ public class NewSimpleBeanTest extends AbstractJSR299Test
       Bean<InitializerSimpleBean> newSimpleBean = getBeans(InitializerSimpleBean.class, InitializerSimpleBean.NEW).iterator().next();
       assert !newSimpleBean.getInjectionPoints().isEmpty();
       assert simpleBean.getInjectionPoints().equals(newSimpleBean.getInjectionPoints());
+   }
+   
+   @Test(groups = { "new" })
+   @SpecAssertion(section = "3.12", id = "i")
+   public void testNewBeanHasSameInterceptorBindings()
+   {
+      assert getInstanceByType(Order.class).foo();
+      assert getInstanceByType(Order.class, Order.NEW).foo();
+   }
+   
+   @Test(groups = { "new" })
+   @SpecAssertion(section = "3.12", id = "xb")
+   public void testNewBeanIsNotAlternative()
+   {
+      assert getUniqueBean(Tiger.class).isAlternative();
+      assert !getUniqueBean(Tiger.class, Tiger.NEW).isAlternative();
    }
    
    @Test

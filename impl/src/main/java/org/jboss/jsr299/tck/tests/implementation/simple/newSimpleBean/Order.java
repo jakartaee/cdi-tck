@@ -22,6 +22,8 @@ import javax.enterprise.inject.New;
 
 import org.jboss.jsr299.tck.literals.NewLiteral;
 
+@Secure
+@Transactional
 class Order implements Serializable
 {
 
@@ -37,5 +39,10 @@ class Order implements Serializable
    
    private static final long serialVersionUID = 1L;
    public static boolean     constructed      = true;
+   
+   public boolean foo()
+   {
+      return false;
+   }
 
 }
