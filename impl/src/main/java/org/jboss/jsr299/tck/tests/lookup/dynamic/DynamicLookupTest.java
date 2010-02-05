@@ -176,4 +176,18 @@ public class DynamicLookupTest extends AbstractJSR299Test
       assert injectionPoint.getAnyPaymentProcessor().isAmbiguous();
       assert !injectionPoint.getPaymentProcessor().isAmbiguous();
    }
+   
+   @Test
+   @SpecAssertion(section = "5.6", id = "e")
+   public void testNewBean()
+   {
+      assert getInstanceByType(ObtainsNewInstanceBean.class).getNpe().get() != null;
+   }
+   
+   @Test
+   @SpecAssertion(section = "3.12", id = "xc")
+   public void testNewBeanNotEnabledWithouInjectionPoint()
+   {
+      assert getInstanceByType(ObtainsNewInstanceBean.class).getIae().isUnsatisfied();
+   }
 }
