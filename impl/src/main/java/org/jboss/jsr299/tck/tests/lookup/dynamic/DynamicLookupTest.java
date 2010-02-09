@@ -17,12 +17,15 @@
 package org.jboss.jsr299.tck.tests.lookup.dynamic;
 
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.util.AnnotationLiteral;
+import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
@@ -106,7 +109,8 @@ public class DynamicLookupTest extends AbstractJSR299Test
       @SpecAssertion(section="5.6.1", id="aa"),
       @SpecAssertion(section="5.6.1", id="ba"),
       @SpecAssertion(section="5.6.1", id="ja"),
-      @SpecAssertion(section="5.6.1", id="ka")
+      @SpecAssertion(section="5.6.1", id="ka"),
+      @SpecAssertion(section="5.6.3", id="a")
    })
    public void testIteratorMethod()
    {
@@ -178,10 +182,15 @@ public class DynamicLookupTest extends AbstractJSR299Test
    }
    
    @Test
-   @SpecAssertion(section = "5.6", id = "e")
+   @SpecAssertions({
+      @SpecAssertion(section = "5.6", id = "e"),
+      @SpecAssertion(section = "5.6.3", id = "b")
+   })
+   @SuppressWarnings("serial")
    public void testNewBean()
    {
-      assert getInstanceByType(ObtainsNewInstanceBean.class).getNpe().get() != null;
+      Instance<List<String>> instance = getInstanceByType(ObtainsNewInstanceBean.class).getStrings();
+      assert instance.select(new TypeLiteral<ArrayList<String>>(){}).get() instanceof ArrayList<?>;
    }
    
    @Test

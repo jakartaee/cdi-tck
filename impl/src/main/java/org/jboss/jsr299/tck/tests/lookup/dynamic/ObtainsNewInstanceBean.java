@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dynamic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.New;
 import javax.inject.Inject;
@@ -24,12 +27,12 @@ import org.jboss.jsr299.tck.literals.NewLiteral;
 
 public class ObtainsNewInstanceBean
 {
-   @Inject @New(NullPointerException.class) Instance<NullPointerException> npe;
+   @Inject @New(ArrayList.class) Instance<List<String>> strings;
    @Inject Instance<IllegalArgumentException> iae;
 
-   public Instance<NullPointerException> getNpe()
+   public Instance<List<String>> getStrings()
    {
-      return npe;
+      return strings;
    }
 
    public Instance<IllegalArgumentException> getIae()
