@@ -1,0 +1,5 @@
+<beans> 
+   <decorators>
+      <class>org.jboss.jsr299.tck.tests.decorators.definition.broken.parameterizedTypesWithDifferentTypeParameters.RadioDecorator</class>
+   </decorators>
+</beans>

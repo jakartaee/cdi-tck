@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.decorators.definition.broken.notAllDecoratedTypesImplemented;
+package org.jboss.jsr299.tck.tests.decorators.definition.broken.parameterizedTypesWithDifferentTypeParameters;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.DeploymentFailure;
@@ -33,14 +33,13 @@ import org.testng.annotations.Test;
 @ExpectedDeploymentException(DeploymentFailure.class)
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
-public class NotAllDecoratedTypesImplementedTest extends AbstractJSR299Test
+public class DifferentTypeParametersTest extends AbstractJSR299Test
 {
 
    @Test
-   @SpecAssertion(section="8.1.3", id="a")
-   public void testNotAllDecoratedTypesImplemented()
+   @SpecAssertion(section="8.1.3", id="ab")
+   public void testTypeParametersOnDecoratedTypeAndDelegateTypeDoNotMatch()
    {
       assert false;
    }
-
 }
