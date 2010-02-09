@@ -46,6 +46,6 @@ public class CustomDecoratorTest extends AbstractJSR299Test
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateQualifiersCalled();
       assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateTypeCalled();
       assert !getCurrentManager().resolveDecorators(new HashSet<Type>(Arrays.asList(Vehicle.class))).isEmpty();
-      assert !getCurrentManager().resolveDecorators(new HashSet<Type>(Arrays.asList(Bus.class))).isEmpty();
+      assert !getCurrentManager().resolveDecorators(new HashSet<Type>(Arrays.asList(Vehicle.class, Bus.class))).isEmpty();
    }
 }
