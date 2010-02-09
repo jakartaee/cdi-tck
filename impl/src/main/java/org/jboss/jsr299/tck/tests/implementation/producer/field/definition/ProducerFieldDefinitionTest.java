@@ -17,11 +17,13 @@
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
 import java.lang.annotation.Annotation;
+import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
+import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
@@ -212,5 +214,14 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test
    public void testNonStaticProducerFieldNotIndirectlyInherited()
    {
       assert !(getInstanceByType(Egg.class,FOO_LITERAL).getMother() instanceof LameInfertileChicken);
+   }
+   
+   @SuppressWarnings("serial")
+   @Test(groups = "producerField")
+   @SpecAssertion(section = "3.4", id = "fb")
+   //WELD-431
+   public void testProducerFieldWithTypeVariable()
+   {
+      assert (getInstanceByType(new TypeLiteral<List<Spider>>(){})) != null;
    }
 }
