@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 public class EnterpriseBeanWithIllegalDependencyTest extends AbstractJSR299Test
 {
    @Test(groups = { "contexts", "passivation", "integration"})
-   @SpecAssertion(section = "6.6.4", id = "fa")
+   @SpecAssertion(section = "6.6.4", id = "fab")
    public void test()
    {
       try

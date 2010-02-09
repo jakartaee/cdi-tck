@@ -36,7 +36,8 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
 
    @Test
    @SpecAssertions({  
-      @SpecAssertion(section = "5.1.1", id = "k") 
+      @SpecAssertion(section = "5.1.1", id = "k"), 
+      @SpecAssertion(section = "5.1.4", id = "q") 
    })
    public void testGetBeanClassCalled()
    {
@@ -72,7 +73,10 @@ public class CustomBeanImplementationTest extends AbstractJSR299Test
    }
 
    @Test
-   @SpecAssertion(section = "5.2.1", id = "b")
+   @SpecAssertions({
+      @SpecAssertion(section = "5.2.1", id = "b"),
+      @SpecAssertion(section = "6.6.4", id = "ga")
+   })
    public void testGetInjectionPointsCalled()
    {
       assert IntegerBean.bean.isGetInjectionPointsCalled();

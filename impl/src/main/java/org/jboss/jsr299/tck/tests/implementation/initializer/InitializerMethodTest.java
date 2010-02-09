@@ -34,7 +34,8 @@ public class InitializerMethodTest extends AbstractJSR299Test
    @Test(groups = { "initializerMethod" })
    @SpecAssertions({
       @SpecAssertion(section = "3.9.1", id = "f"),
-      @SpecAssertion(section = "2.3.5", id = "b")
+      @SpecAssertion(section = "2.3.5", id = "b"),
+      @SpecAssertion(section = "3.9", id = "a")
    })
    public void testBindingTypeOnInitializerParameter()
    {

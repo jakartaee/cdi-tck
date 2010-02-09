@@ -3237,7 +3237,7 @@ detects the problem and treats it as a definition error.</text>
       <text>Suppose a Unified EL expression in a JSF or JSP page refers to a bean with scope |@Dependent| by its EL name.  Each time the EL expression is evaluated the bean is instantiated at most once, and the resulting instance is reused for every appearance of the EL name, and the resulting instance is destroyed when the evaluation completes.</text>
     </assertion>
     
-    <assertion id="b">
+    <assertion id="b" testable="false">
       <text>Portable extensions that integrate with the container via Unified EL should also ensure that these rules are enforced.</text>
     </assertion>
   </section>
