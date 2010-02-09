@@ -36,6 +36,7 @@ import org.testng.annotations.Test;
 @Extension("javax.enterprise.inject.spi.Extension")
 public class CustomDecoratorTest extends AbstractJSR299Test
 {
+   @SuppressWarnings("unchecked")
    @Test
    @SpecAssertion(section = "8.3", id = "b")
    public void testCustomImplementationOfDecoratorInterface()
