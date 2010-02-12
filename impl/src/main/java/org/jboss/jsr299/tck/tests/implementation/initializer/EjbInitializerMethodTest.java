@@ -41,6 +41,6 @@ public class EjbInitializerMethodTest extends AbstractJSR299Test
    {
       AndalusianChicken.nonBusinessMethodCalled = false;
       getInstanceByType(LocalChicken.class).cluck();
-      assert AndalusianChicken.nonBusinessMethodCalled = true;
+      assert AndalusianChicken.nonBusinessMethodCalled;
    }
 }
