@@ -155,7 +155,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
       assert fishPond.goldfish instanceof Goldfish;
       assert fishPond.goose != null;
       assert fishPond.salmon != null;
-      assert fishPond.postConstructCalled = true; // required by Managed Bean specification
+      assert fishPond.postConstructCalled; // required by Managed Bean specification
    }
       
    @Test(groups = {"beanLifecycle"})
