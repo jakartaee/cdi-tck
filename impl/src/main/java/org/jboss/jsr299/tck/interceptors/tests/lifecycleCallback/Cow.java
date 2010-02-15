@@ -18,10 +18,12 @@ package org.jboss.jsr299.tck.interceptors.tests.lifecycleCallback;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.enterprise.context.RequestScoped;
 import javax.interceptor.Interceptors;
 
 @Interceptors(AnimalInterceptor.class)
-class Goat
+@RequestScoped
+class Cow
 {
    private static boolean postConstructInterceptorCalled = false;
    private static boolean preDestroyInterceptorCalled = false;

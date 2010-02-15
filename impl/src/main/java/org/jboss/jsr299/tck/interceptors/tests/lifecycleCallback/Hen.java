@@ -18,47 +18,33 @@ package org.jboss.jsr299.tck.interceptors.tests.lifecycleCallback;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import javax.enterprise.context.ApplicationScoped;
+import javax.interceptor.Interceptors;
 
-class GoatInterceptor
+@Interceptors(AnimalInterceptor.class)
+@ApplicationScoped
+class Hen
 {
    private static boolean postConstructInterceptorCalled = false;
    private static boolean preDestroyInterceptorCalled = false;
 
    @PostConstruct
-   public void postConstruct(InvocationContext ctx)
+   public void postConstruct()
    {
       postConstructInterceptorCalled = true;
-      try
-      {
-         ctx.proceed();
-      }
-      catch (Exception e)
-      {
-         throw new RuntimeException(e);
-      }
    }
    
-   @AroundInvoke
-   public Object intercept(InvocationContext ctx) throws Exception {
-      return ctx.proceed() + ctx.getParameters()[0].toString();
+   public String echo(String message)
+   {
+      return message;
    }
    
    @PreDestroy
-   public void preDestroy(InvocationContext ctx)
+   public void preDestroy()
    {
       preDestroyInterceptorCalled = true;
-      try
-      {
-         ctx.proceed();
-      }
-      catch (Exception e)
-      {
-         throw new RuntimeException(e);
-      }
    }
-   
+
    public static boolean isPostConstructInterceptorCalled()
    {
       return postConstructInterceptorCalled;
