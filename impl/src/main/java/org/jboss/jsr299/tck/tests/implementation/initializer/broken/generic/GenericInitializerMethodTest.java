@@ -32,7 +32,6 @@ public class GenericInitializerMethodTest extends AbstractJSR299Test
 {
    @Test(groups = "ri-broken")
    @SpecAssertion(section = "3.9.1", id = "ab")
-   //WELD-425
    public void testGenericInitializerMethodNotAllowed()
    {
       assert false;
