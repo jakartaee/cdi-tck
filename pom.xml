@@ -89,7 +89,7 @@
       <jstl.api.version>1.2</jstl.api.version>
       <jta.api.version>1.1</jta.api.version>
       <jms.api.version>1.1</jms.api.version>
-      <uel.api.version>2.1.2-b04</uel.api.version>
+      <uel.api.version>2.2</uel.api.version>
       <jsf.api.version>1.2_13</jsf.api.version>
       <jaxws.api.version>2.1</jaxws.api.version>
       <interceptor.api.version>1.1</interceptor.api.version>
