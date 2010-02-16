@@ -36,7 +36,6 @@ public class InjectAnnotatedProducerFieldTest extends AbstractJSR299Test
       @SpecAssertion(section = "3.4.2", id = "g"),
       @SpecAssertion(section = "3.8.1", id = "b")
    })
-   //WELD-421
    public void testInjectAnnotatedProducerFieldNotAllowed()
    {
       assert false;
