@@ -32,7 +32,6 @@ public class NonStaticFieldOfSessionBeanTest extends AbstractJSR299Test
 {
    @Test
    @SpecAssertion(section = "3.4.2", id = "h")
-   //WELD-432
    public void testNonStaticFieldOfSessionBeanCannotBeProducerField()
    {
       assert false;
