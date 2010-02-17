@@ -275,7 +275,6 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test
    
    @Test
    @SpecAssertion(section = "3.3", id = "iaa")
-   //WELD-426
    public void testTypeVariableReturnType()
    {
       // should be created by SpiderListProducer

@@ -23,10 +23,6 @@ import javax.enterprise.inject.Produces;
 
 public class GeneralListProducer<T>
 {
-   public GeneralListProducer(String name)
-   {
-      
-   }
    
    @Produces
    public List<T> create()

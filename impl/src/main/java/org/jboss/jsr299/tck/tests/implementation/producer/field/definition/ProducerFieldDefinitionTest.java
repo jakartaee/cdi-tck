@@ -219,7 +219,6 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test
    @SuppressWarnings("serial")
    @Test(groups = "producerField")
    @SpecAssertion(section = "3.4", id = "fb")
-   //WELD-431
    public void testProducerFieldWithTypeVariable()
    {
       assert (getInstanceByType(new TypeLiteral<List<Spider>>(){})) != null;

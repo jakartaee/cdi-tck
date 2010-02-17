@@ -32,7 +32,6 @@ public class ParameterizedReturnTypeWithTypeVariableTest extends AbstractJSR299T
 {   
    @Test
    @SpecAssertion(section = "3.3", id = "iab")
-   //WELD-428
    public void testNonDependentScopedProducerMethodWithParameterizedTypeWithTypeVariable()
    {
       assert false;
