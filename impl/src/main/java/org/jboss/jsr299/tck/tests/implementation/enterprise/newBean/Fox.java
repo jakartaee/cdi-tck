@@ -26,7 +26,7 @@ import javax.enterprise.inject.Produces;
 public class Fox implements FoxLocal
 {
    @Produces @Tame
-   private Den den = new Den("FoxDen");
+   private static Den den = new Den("FoxDen");
    
    private int nextLitterSize;
    
