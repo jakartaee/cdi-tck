@@ -14,6 +14,18 @@
          <package name="org.jboss.jsr299.tck.interceptors.tests.*" />
       </packages>
       <classes>
+      
+         <!-- CDITCK-108 -->
+         <class name="org.jboss.jsr299.tck.tests.context.application.ejb.EJBApplicationContextTest">
+            <methods>
+               <exclude name="testApplicationScopeActiveDuringCallToEjbTimeoutMethod" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.context.application.ejb.ApplicationContextSharedTest">
+            <methods>
+               <exclude name="testApplicationContextShared" />
+            </methods>
+         </class>
          
          <!-- Issues in Weld (the RI) -->
          
