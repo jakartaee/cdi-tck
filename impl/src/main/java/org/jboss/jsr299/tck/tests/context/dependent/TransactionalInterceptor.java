@@ -34,9 +34,14 @@ class TransactionalInterceptor
       return ctx.proceed();
    }
 
-   @PreDestroy public void destroy(InvocationContext ctx) throws Exception
+   @PreDestroy public void destroy(InvocationContext ctx)
    {
       destroyed = true;
-      ctx.proceed();
+       try {
+           ctx.proceed();
+       } catch (Exception e) {
+           // catch and wrap
+           throw new RuntimeException(e);
+       }
    }
 }
