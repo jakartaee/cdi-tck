@@ -21,13 +21,10 @@ import javax.inject.Named;
 
 public class Foo
 {
-   public Foo(Bar bar)
-   {
-   }
    
    @Produces
-   public Foo produceFoo(@Named Bar bar)
+   public Baz produceFoo(@Named Bar bar)
    {
-      return new Foo(bar);
+      return new Baz("");
    }
 }

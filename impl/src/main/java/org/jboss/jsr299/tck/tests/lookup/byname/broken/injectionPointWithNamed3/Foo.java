@@ -14,14 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.byname.broken.injectionPointWithNamed2;
+package org.jboss.jsr299.tck.tests.lookup.byname.broken.injectionPointWithNamed3;
 
-import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 public class Foo
 {
-   public void observe(@Observes Bar bar, @Named Bar bar1)
+   @Inject
+   public void initialize(@Named Bar bar)
    {
       
    }
