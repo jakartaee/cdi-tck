@@ -95,7 +95,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test
    @SpecAssertion(section = "3.2.2", id = "ba")
    public void testEnterpriseBeanClassLocalView()
    {
-      Bean<Retriever> dogBean = getBeans(Retriever.class).iterator().next();
+      Bean<Retriever> dogBean = getUniqueBean(Retriever.class);
       assert dogBean.getTypes().contains(Retriever.class);
    }
 

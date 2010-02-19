@@ -16,15 +16,15 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.definition;
 
+import javax.ejb.Stateful;
+
 
 
 /**
  * @author pmuir
  *
  */
-// TODO Enable when we support EJB 3.1
-//@Stateful
-//@LocalBean
+@Stateful
 public class Retriever
 {
 
