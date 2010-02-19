@@ -23,7 +23,7 @@ import javax.interceptor.Interceptors;
 
 @Interceptors(AnimalInterceptor.class)
 @ApplicationScoped
-class Hen
+class Hen extends Animal
 {
    private static boolean postConstructInterceptorCalled = false;
    private static boolean preDestroyInterceptorCalled = false;

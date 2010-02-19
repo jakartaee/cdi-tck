@@ -31,16 +31,15 @@ public class LifecycleCallbackInterceptorTest extends AbstractJSR299Test
 {
    @Test
    @SpecAssertion(section = "5", id = "a")
-   // WELD-436
    public void testPostConstructInterceptor()
    {
       getInstanceByType(Goat.class);
       assert Goat.isPostConstructInterceptorCalled();
       assert AnimalInterceptor.isPostConstructInterceptorCalled(Goat.class);
-      getInstanceByType(Hen.class);
+      getInstanceByType(Hen.class).toString();
       assert Hen.isPostConstructInterceptorCalled();
       assert AnimalInterceptor.isPostConstructInterceptorCalled(Hen.class);
-      getInstanceByType(Cow.class);
+      getInstanceByType(Cow.class).toString();
       assert Cow.isPostConstructInterceptorCalled();
       assert AnimalInterceptor.isPostConstructInterceptorCalled(Cow.class);
    }
@@ -56,17 +55,18 @@ public class LifecycleCallbackInterceptorTest extends AbstractJSR299Test
       createAndDestroyInstance(Hen.class);
       assert Hen.isPreDestroyInterceptorCalled();
       assert AnimalInterceptor.isPreDestroyInterceptorCalled(Hen.class);
-      createAndDestroyInstance(Hen.class);
-      assert Hen.isPreDestroyInterceptorCalled();
-      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Hen.class);
+      createAndDestroyInstance(Cow.class);
+      assert Cow.isPreDestroyInterceptorCalled();
+      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Cow.class);
    }
 
    @SuppressWarnings("unchecked")
-   private <T> void createAndDestroyInstance(Class<T> clazz)
+   private <T extends Animal> void createAndDestroyInstance(Class<T> clazz)
    {
-      Bean<T> bean = getBeans(clazz).iterator().next();
+      Bean<T> bean = getUniqueBean(clazz);
       CreationalContext<T> ctx = getCurrentManager().createCreationalContext(bean);
       T instance = (T) getCurrentManager().getReference(bean, clazz, ctx);
+      instance.foo(); // invoke method so that the instance is actually created
       // destroy the instance
       bean.destroy(instance, ctx);
    }

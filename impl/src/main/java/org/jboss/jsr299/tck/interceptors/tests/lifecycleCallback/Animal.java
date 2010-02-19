@@ -16,42 +16,10 @@
  */
 package org.jboss.jsr299.tck.interceptors.tests.lifecycleCallback;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.RequestScoped;
-import javax.interceptor.Interceptors;
-
-@Interceptors(AnimalInterceptor.class)
-@RequestScoped
-class Cow extends Animal
+public abstract class Animal
 {
-   private static boolean postConstructInterceptorCalled = false;
-   private static boolean preDestroyInterceptorCalled = false;
-
-   @PostConstruct
-   public void postConstruct()
+   void foo()
    {
-      postConstructInterceptorCalled = true;
-   }
-
-   public String echo(String message)
-   {
-      return message;
-   }
-
-   @PreDestroy
-   public void preDestroy()
-   {
-      preDestroyInterceptorCalled = true;
-   }
-
-   public static boolean isPostConstructInterceptorCalled()
-   {
-      return postConstructInterceptorCalled;
-   }
-
-   public static boolean isPreDestroyInterceptorCalled()
-   {
-      return preDestroyInterceptorCalled;
+      
    }
 }

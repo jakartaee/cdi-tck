@@ -21,7 +21,7 @@ import javax.annotation.PreDestroy;
 import javax.interceptor.Interceptors;
 
 @Interceptors(AnimalInterceptor.class)
-class Goat
+class Goat extends Animal
 {
    private static boolean postConstructInterceptorCalled = false;
    private static boolean preDestroyInterceptorCalled = false;
