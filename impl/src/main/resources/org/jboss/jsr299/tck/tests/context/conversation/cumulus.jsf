@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3c.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+	<jsp:directive.page contentType="text/html" />
+	<html>
+	<head>
+	</head>
+	<body>
+	<f:view>
+		<h:form id="form">
+			<h:panelGrid columns="1">
+				<h:outputText value="Cumulus humilis"
+					rendered="#{cumulus.conversationIdentifiedByCustomIdentifier}" />
+				<h:outputText value="Cumulus congestus"
+					rendered="#{not cumulus.conversationIdentifierNull}" />
+				<h:outputText value="Cumulonimbus"
+					rendered="#{cumulus.conversationTimeoutSetProperly}" />
+				<h:outputText value="Stratocumulus"
+					rendered="#{cumulus.conversationHasDefaultTimeout}" />
+				<h:commandButton action="#{cumulus.beginConversation}"
+					value="Begin conversation" id="beginConversationButton" />
+				<h:commandButton
+					action="#{cumulus.beginConversationIdentifiedByCustomIdentifier}"
+					value="Begin conversation identified by custom identifier"
+					id="beginConversationIdentifiedByCustomIdentifier" />
+				<h:commandButton
+					action="#{cumulus.beginConversationAndSwallowException}"
+					value="Begin conversation and swallow exception"
+					id="beginConversationAndSwallowException" />
+				<h:commandButton
+					action="#{cumulus.beginConversationAndSetTimeout}"
+					value="Begin conversation and set timeout"
+					id="beginConversationAndSetTimeout" />
+				<h:commandButton action="#{cumulus.endConversation}"
+					value="End conversation" id="endConversationButton" />
+				<h:commandButton
+					action="#{cumulus.endConversationAndSwallowException}"
+					value="End conversation and swallow exception"
+					id="endConversationAndSwallowException" />
+			</h:panelGrid>
+		</h:form>
+	</f:view>
+	</body>
+	</html>
+</jsp:root>
+

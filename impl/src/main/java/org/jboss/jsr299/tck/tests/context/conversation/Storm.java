@@ -14,62 +14,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.context.conversation.client;
+package org.jboss.jsr299.tck.tests.context.conversation;
 
 import java.io.Serializable;
 
-import javax.annotation.PreDestroy;
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.inject.Named;
 
-@Named @Default
+@Named
 @ConversationScoped
-public class Cloud implements Serializable
+public class Storm implements Serializable
 {
+   
    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 5765109971012677278L;
+	private static final long serialVersionUID = -1513633490356967202L;
 
-	public static final String NAME = Cloud.class.getName() + ".Pete";
+	@Inject Conversation conversation;
    
-   public static final String RAINED_HEADER_NAME = Cloud.class.getName() + ".rained";
+   private String strength;
    
-   private static boolean destroyed = false;
-
-   private boolean rained;
-   
-   @PreDestroy
-   public void destroy()
+   public String thunder()
    {
-      destroyed = true;
+      return "thunder";
    }
    
-   public static boolean isDestroyed()
+   public String lightening()
    {
-      return destroyed;
+      return "lightening";
    }
    
-   public static void setDestroyed(boolean destroyed)
+   public void beginConversation()
    {
-      Cloud.destroyed = destroyed;
+      conversation.begin();
    }
    
-   public String getName()
+   public String getStrength()
    {
-      return NAME;
+      return strength;
    }
    
-   public void rain()
+   public void setStrength(String strength)
    {
-      rained = true;
-      System.out.println("rain!");
-   }
-   
-   public boolean isRained()
-   {
-      return rained;
+      this.strength = strength;
    }
    
 }

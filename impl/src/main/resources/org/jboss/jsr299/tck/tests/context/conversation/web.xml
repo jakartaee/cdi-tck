@@ -27,7 +27,7 @@
    
    <servlet>
       <servlet-name>Conversation Status Servlet</servlet-name>
-      <servlet-class>org.jboss.jsr299.tck.tests.context.conversation.client.ConversationStatusServlet</servlet-class>
+      <servlet-class>org.jboss.jsr299.tck.tests.context.conversation.ConversationStatusServlet</servlet-class>
    </servlet>
    
    <servlet-mapping>
