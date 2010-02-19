@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.context.conversation.client;
+package org.jboss.jsr299.tck.tests.context.conversation;
 
 import javax.enterprise.context.ContextNotActiveException;
 import javax.enterprise.context.Conversation;
