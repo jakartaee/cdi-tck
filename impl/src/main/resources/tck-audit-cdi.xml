@@ -3893,7 +3893,7 @@ detects the problem and treats it as a definition error.</text>
     </assertion>
     
     <assertion id="tb">
-  <text>If the propagated conversation cannot be restored, the container must associate the request with a new transient conversation and throw an exception of type |javax.enterprise.context.NonexistentConversationException| from the restore view phase of the JSF lifecycle.  The application may handle this exception using the JSF |ExceptionHandler|.</text>
+     <text>If the propagated conversation cannot be restored, the container must associate the request with a new transient conversation and throw an exception of type |javax.enterprise.context.NonexistentConversationException| from the restore view phase of the JSF lifecycle.  The application may handle this exception using the JSF |ExceptionHandler|.</text>
     </assertion>    
 
     <assertion id="ua">
