@@ -27,7 +27,6 @@ import org.jboss.testharness.impl.packaging.Resources;
 import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
@@ -56,17 +55,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 public class ClientConversationContextTest extends AbstractConversationTest
 {
    
-   private WebClient client;
-   
-   
-   @Override
-   public void beforeMethod()
-   {
-      super.beforeMethod();
-      client = new WebClient();
-   }
-
-   
    @Test(groups = { "contexts"})
    @SpecAssertions({
       @SpecAssertion(section = "6.7.4", id = "hb"),
@@ -74,6 +62,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    })
    public void testConversationIdSetByContainerIsUnique() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage storm = client.getPage(getPath("/storm.jsf"));
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
       storm = beginConversationButton.click();
@@ -94,6 +83,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    // TODO this test doesn't verify that the conversation context itself is destroyed
    public void testTransientConversationInstancesDestroyedAtRequestEnd() throws Exception
    {
+      WebClient client = new WebClient();
       resetCloud(client);
       HtmlPage page = client.getPage(getPath("/cloud.jsf"));
       assert !isLongRunning(page);
@@ -104,6 +94,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    @SpecAssertion(section = "6.7.4", id = "k")
    public void testLongRunningConversationInstancesNotDestroyedAtRequestEnd() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage storm = client.getPage(getPath("/storm.jsf"));
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
       storm = beginConversationButton.click();
@@ -118,6 +109,8 @@ public class ClientConversationContextTest extends AbstractConversationTest
    @SpecAssertion(section = "6.7.4", id = "p")
    public void testConversationsDontCrossSessionBoundary1() throws Exception
    {
+      WebClient client = new WebClient();
+      client.setThrowExceptionOnFailingStatusCode(false);
       // Load the page
       HtmlPage rain = client.getPage(getPath("/rain.jsf"));
       
@@ -146,6 +139,8 @@ public class ClientConversationContextTest extends AbstractConversationTest
    @SpecAssertion(section = "6.7.4", id = "p")
    public void testConversationsDontCrossSessionBoundary2() throws Exception
    {
+      WebClient client = new WebClient();
+      
       // Load the page
       HtmlPage rain = client.getPage(getPath("/rain.jsf"));
       
@@ -163,8 +158,9 @@ public class ClientConversationContextTest extends AbstractConversationTest
       assert hasRained(rain);
       
       // Create a new web client and load the page
-      client = new WebClient();
-      rain = client.getPage(getPath("/rain.jsf", cid));
+      WebClient client2 = new WebClient();
+      client2.setThrowExceptionOnFailingStatusCode(false);
+      rain = client2.getPage(getPath("/rain.jsf", cid));
       assert !hasRained(rain);
    }
    
@@ -172,24 +168,17 @@ public class ClientConversationContextTest extends AbstractConversationTest
    @SpecAssertion(section = "6.7.4", id = "a")
    public void testConversationActiveDuringNonFacesRequest() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/cloud.jsf"));
       HtmlSpan span = getFirstMatchingElement(page, HtmlSpan.class, "cloudName");
       assert span.getTextContent().equals(Cloud.NAME);
    }
    
    @Test(groups = { "contexts" })
-   @SpecAssertion(section = "6.7.4", id = "tb")
-   public void testConversationPropagationToNonExistentConversationLeadsToTransientConversation() throws Exception
-   {
-      Page page = client.getPage(getPath("/cloud.jsf", "org.jboss.jsr299"));
-      assert !isLongRunning(page);
-      assert !getCid(page).equals("org.jboss.jsr299");
-   }
-   
-   @Test(groups = { "contexts" })
    @SpecAssertion(section = "6.7.4", id = "f")
    public void testConversationBeginMakesConversationLongRunning() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
       assert !isLongRunning(page);
       
@@ -203,6 +192,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    @SpecAssertion(section = "6.7.5", id = "r")
    public void testBeginAlreadyLongRunningConversationThrowsException() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
       assert !isLongRunning(page);
       
@@ -225,6 +215,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    })
    public void testConversationEndMakesConversationTransient() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
       assert !isLongRunning(page);
       
@@ -243,6 +234,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    @SpecAssertion(section = "6.7.5", id = "q")
    public void testEndTransientConversationThrowsException() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
       assert !isLongRunning(page);
       
@@ -259,6 +251,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    })
    public void testBeanWithRequestScope() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/builtin.jsf"));
       assert page.getBody().getTextContent().contains("Correct scope: true");
    }
@@ -267,6 +260,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    @SpecAssertion(section = "6.7.5", id = "id")
    public void testBeanWithDefaultQualifier() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/builtin.jsf"));
       assert page.getBody().getTextContent().contains("Correct qualifier: true");
    }
@@ -275,6 +269,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    @SpecAssertion(section = "6.7.5", id = "ie")
    public void testBeanWithNameJavaxEnterpriseContextConversation() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/builtin.jsf"));
       assert page.getBody().getTextContent().contains("Correct name: true");
    }
@@ -286,6 +281,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    })
    public void testTransientConversationHasNullId() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/builtin.jsf"));
       assert page.getBody().getTextContent().contains("Default conversation has null id: true");
    }
@@ -297,6 +293,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    })
    public void testConversationIdMayBeSetByApplication() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
       assert !isLongRunning(page);
       
@@ -315,6 +312,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    })
    public void testConversationIdMayBeSetByContainer() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
       assert !isLongRunning(page);
       
@@ -333,6 +331,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    })
    public void testSetConversationTimeoutOverride() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
       assert !isLongRunning(page);
    
@@ -346,6 +345,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    @SpecAssertion(section = "6.7.5", id = "m")
    public void testConversationHasDefaultTimeout() throws Exception
    {
+      WebClient client = new WebClient();
       HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
       assert !isLongRunning(page);
       
