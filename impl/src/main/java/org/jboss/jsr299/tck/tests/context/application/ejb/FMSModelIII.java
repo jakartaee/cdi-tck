@@ -40,28 +40,45 @@ public class FMSModelIII implements FMS
    @Inject
    private Instance<SimpleApplicationBean> simpleApplicationBeanInstance;
 
-   private static boolean applicationScopeActive = false;
-   private static double beanId = 0.0d;
-   private static boolean sameBean = false;
+   private static volatile boolean applicationScopeActive = false;
+   private static volatile double beanId = 0.0d;
+   private static volatile boolean sameBean = false;
+   
+   private static volatile int climbState;
+   private static volatile int descendState;
 
-   public void climb()
+   public void climb() throws Exception
    {
+      climbState = 0;
       timerService.createTimer(200, "Climb command timeout");
+      long timestamp = System.currentTimeMillis();
+      // Wait for the timer
+      while (climbState == 0)
+      {
+         // but don't wait more than 10s so we don't just hang!
+         if (System.currentTimeMillis() > timestamp + 10000)
+         {
+            return;
+         }
+         Thread.sleep(1);
+      }
    }
 
-   public void descend()
+   public void descend() throws Exception
    {
+      descendState = 0;
       timerService.createTimer(100, "Descend command timeout");
-      beanId = 0.0d;
-      sameBean = false;
-   }
-
-   public void turnLeft()
-   {
-   }
-
-   public void turnRight()
-   {
+      long timestamp = System.currentTimeMillis();
+      // Wait for the timer
+      while (descendState == 0)
+      {
+         // but don't wait more than 10s so we don't just hang!
+         if (System.currentTimeMillis() > timestamp + 10000)
+         {
+            return;
+         }
+         Thread.sleep(1);
+      }
    }
 
    @Timeout
@@ -82,16 +99,13 @@ public class FMSModelIII implements FMS
             beanId = simpleApplicationBeanInstance.get().getId();
          }
       }
+      climbState = 1;
+      descendState = 1;
    }
 
    public boolean isApplicationScopeActive()
    {
       return applicationScopeActive;
-   }
-
-   public void setApplicationScopeActive(boolean applicationScopeActive)
-   {
-      FMSModelIII.applicationScopeActive = applicationScopeActive;
    }
 
    public boolean isSameBean()

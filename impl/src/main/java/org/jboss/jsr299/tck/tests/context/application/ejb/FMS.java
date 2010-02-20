@@ -21,17 +21,13 @@ import javax.ejb.Local;
 @Local
 public interface FMS
 {
-   public void turnLeft();
    
-   public void turnRight();
+   public void climb() throws Exception;
    
-   public void climb();
-   
-   public void descend();
-   
-   public boolean isApplicationScopeActive();
-
-   public void setApplicationScopeActive(boolean applicationScopeActive);
+   public void descend() throws Exception;
    
    public boolean isSameBean();
+   
+   public boolean isApplicationScopeActive();
+   
 }

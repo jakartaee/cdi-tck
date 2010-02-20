@@ -38,7 +38,6 @@ public class ApplicationContextSharedTest extends AbstractJSR299Test
 {
 
    @Test(groups = { "contexts", "ejb3", "integration", "rewrite" })
-   // TODO Needs to test *all* uses of app context are shared, not each type individually
    @SpecAssertion(section = "6.7.3", id = "e")
    public void testApplicationContextShared() throws Exception
    {
@@ -47,6 +46,16 @@ public class ApplicationContextSharedTest extends AbstractJSR299Test
       flightManagementSystem.descend();
       Thread.sleep(250);
       assert flightManagementSystem.isSameBean();
+   }
+   
+   @Test(groups = { "contexts", "ejb3", "integration" })
+   @SpecAssertion(section = "6.7.3", id = "dc")
+   public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception
+   {
+      FMS flightManagementSystem = getInstanceByType(FMS.class);
+      flightManagementSystem.climb();
+      Thread.sleep(250);
+      assert flightManagementSystem.isApplicationScopeActive();
    }
 
 }
