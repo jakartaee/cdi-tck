@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.context.passivating;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-class SerializableCityConsumer
+public class SerializableCityConsumer
 {
 
    @Sleeping SerializableCity city;
