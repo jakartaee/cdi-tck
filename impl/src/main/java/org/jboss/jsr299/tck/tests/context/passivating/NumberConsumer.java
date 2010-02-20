@@ -20,7 +20,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 @RequestScoped
-class NumberConsumer
+public class NumberConsumer
 {
    
    @Inject int number;

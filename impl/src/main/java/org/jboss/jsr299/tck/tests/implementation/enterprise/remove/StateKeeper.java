@@ -21,13 +21,13 @@ import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-class StateKeeper implements Serializable
+public class StateKeeper implements Serializable
 {
    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -7168331316716402245L;
-private boolean removeCalled  = false;
+   private static final long serialVersionUID = -7168331316716402245L;
+   private boolean removeCalled = false;
    private boolean beanDestroyed = false;
 
    public boolean isRemoveCalled()
