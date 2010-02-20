@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.interceptors.tests.lifecycleCallback.order;
 import javax.annotation.PostConstruct;
 import javax.interceptor.InvocationContext;
 
-class Interceptor4
+class Interceptor4 extends Interceptor3
 {
    @PostConstruct
    void postConstruct(InvocationContext ctx)
