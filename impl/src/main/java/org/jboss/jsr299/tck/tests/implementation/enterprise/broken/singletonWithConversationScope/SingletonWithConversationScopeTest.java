@@ -25,11 +25,13 @@ import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.jboss.testharness.impl.packaging.Packaging;
 import org.jboss.testharness.impl.packaging.PackagingType;
+import org.jboss.testharness.impl.packaging.ear.EjbJarXml;
 import org.testng.annotations.Test;
 
 @ExpectedDeploymentException(DeploymentFailure.class)
 @Artifact
 @Packaging(PackagingType.EAR)
+@EjbJarXml("ejb-jar.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class SingletonWithConversationScopeTest extends AbstractJSR299Test
 {
