@@ -4,7 +4,7 @@
    <groupId>org.jboss.jsr299.tck</groupId>
    <artifactId>jsr299-tck-parent</artifactId>
    <packaging>pom</packaging>
-   <version>1.0.1-SNAPSHOT</version>
+   <version>1.0.1-Final</version>
    <name>CDI TCK</name>
 
    <parent>
@@ -78,7 +78,7 @@
       <jboss.test.harness.version>1.1.0-CR5</jboss.test.harness.version>
       <testng.version>5.10</testng.version>
       <jsr250.api.version>1.0</jsr250.api.version>
-      <cdi.api.version>1.0</cdi.api.version>
+      <cdi.api.version>1.0-SP1</cdi.api.version>
       <atinject.api.version>1</atinject.api.version>
       <ejb.api.version>3.1.0</ejb.api.version>
       <jsr250.api.version>1.0</jsr250.api.version>
@@ -303,9 +303,9 @@
    </build>
 
    <scm>
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0</developerConnection>
-      <url>https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0</url>
+      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.1-Final</connection>
+      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.1-Final</developerConnection>
+      <url>https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.1-Final</url>
    </scm>
 
    <profiles>
