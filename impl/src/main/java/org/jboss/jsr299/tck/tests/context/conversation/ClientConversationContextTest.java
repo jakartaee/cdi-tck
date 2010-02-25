@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Dan Allen
  */
 @Artifact(addCurrentPackage=false)
-@Classes({Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class, CloudController.class, Cumulus.class, BuiltInConversation.class})
+@Classes({Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class, CloudController.class, Cumulus.class, BuiltInConversation.class, OutermostFilter.class})
 @IntegrationTest(runLocally=true)
 @Resources({
   @Resource(destination="home.jspx", source="home.jsf"),
@@ -322,6 +322,17 @@ public class ClientConversationContextTest extends AbstractConversationTest
       assert isLongRunning(page);
       assert getCid(page) != null;
       assert page.getBody().getTextContent().contains("Cumulus congestus");
+   }
+   
+   @Test(groups = { "contexts" })
+   @SpecAssertion(section = "6.7.4", id = "tb")
+   public void testNonexistentConversationExceptionThrown() throws Exception
+   {
+      WebClient client = new WebClient();
+      HtmlPage page = client.getPage(getPath("/cumulus.jsf?cid=foo"));
+      
+      assert page.getBody().getTextContent().contains("NonexistentConversationException thrown properly");
+      assert page.getBody().getTextContent().contains("Conversation.isTransient: true");
    }
    
    @Test
