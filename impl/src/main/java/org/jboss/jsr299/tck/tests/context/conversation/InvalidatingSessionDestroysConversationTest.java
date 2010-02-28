@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Nicklas Karlsson
  */
 @Artifact(addCurrentPackage=false)
-@Classes({Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class, CloudController.class})
+@Classes({Storm.class, ConversationTestPhaseListener.class, OutermostFilter.class, ConversationStatusServlet.class, Cloud.class, CloudController.class})
 @IntegrationTest(runLocally=true)
 @Resources({
   @Resource(destination="WEB-INF/faces-config.xml", source="faces-config.xml"),
