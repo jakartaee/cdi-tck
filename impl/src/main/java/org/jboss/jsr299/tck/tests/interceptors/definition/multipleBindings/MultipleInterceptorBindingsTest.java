@@ -32,7 +32,9 @@ public class MultipleInterceptorBindingsTest extends AbstractJSR299Test
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "9.5.1", id = "a"),
-      @SpecAssertion(section = "9.5", id = "ca")
+      @SpecAssertion(section = "9.5", id = "ca"),
+      @SpecAssertion(section = "9.2", id = "ab"),
+      @SpecAssertion(section = "9.3", id = "ba")
    })
    public void testInterceptorAppliedToBeanWithAllBindings()
    {
@@ -55,4 +57,20 @@ public class MultipleInterceptorBindingsTest extends AbstractJSR299Test
       
       assert !MissileInterceptor.intercepted;
    }
+   
+   @Test
+   @SpecAssertion(section = "9.3", id = "bb")
+   public void testMultipleInterceptorsOnMethod()
+   {
+      LockInterceptor.intercepted = false;
+      
+      GuidedMissile bullet = getInstanceByType(GuidedMissile.class);
+      
+      bullet.fire();
+      assert !LockInterceptor.intercepted;
+      
+      bullet.lockAndFire();
+      assert LockInterceptor.intercepted;
+   }
+  
 }

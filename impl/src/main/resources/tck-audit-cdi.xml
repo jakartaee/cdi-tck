@@ -4579,17 +4579,47 @@ creates and returns a container-specific internal local reference to the session
       <text>An interceptor binding may be declared by annotating the bean class, or a method of the bean class, with the interceptor binding type.</text>
     </assertion>
     
-    <assertion id="b">
+    <group>
       <text>A bean class or method of a bean class may declare multiple interceptor bindings.</text>
-    </assertion>
+      <assertion id="ba">
+        <text>A bean class may declare multiple interceptor bindings.</text>
+      </assertion>
+      <assertion id="bb">
+        <text>A method of a bean class may declare multiple interceptor bindings.</text>
+      </assertion>
+    </group>
     
-    <assertion id="c">
+    <group>
       <text>If the bean class of a managed bean declares or inherits a class level interceptor binding or a stereotype with interceptor bindings, it must not be declared final, or have any non-static, non-private, final methods.  If a managed bean has a class-level interceptor binding and is declared final or has a non-static, non-private, final method, the container automatically detects the problem and treats it as a definition error.</text>
-    </assertion>
+      <assertion id="ca">
+	      <text>If the bean class of a managed bean declares a class level interceptor binding, it must not be declared final.</text>
+      </assertion>
+      <assertion id="cb">
+	      <text>If the bean class of a managed bean declares a class level interceptor binding, it must not have any non-static, non-private, final methods.</text>
+      </assertion>
+      <assertion id="cc">
+	      <text>If the bean class of a managed bean inherits a class level interceptor binding, it must not be declared final.</text>
+      </assertion>
+      <assertion id="cd">
+	      <text>If the bean class of a managed bean inherits a class level interceptor binding, it must not have any non-static, non-private, final methods.</text>
+      </assertion>
+      <assertion id="ce">
+	      <text>If the bean class of a managed bean inherits a stereotype with interceptor bindings, it must not be declared final.</text>
+      </assertion>
+      <assertion id="cf">
+	      <text>If the bean class of a managed bean inherits a stereotype with interceptor bindings, it must not have any non-static, non-private, final methods.</text>
+      </assertion>
+    </group>
     
-    <assertion id="d">
+    <group>
       <text>If a non-static, non-private method of a bean class of a managed bean declares a method level interceptor binding, neither the method nor the bean class may be declared final.  If a non-static, non-private, final method of a managed bean has a method level interceptor binding, the container automatically detects the problem and treats it as a definition error.</text>
-    </assertion>
+      <assertion id="da">
+	      <text>If a non-static, non-private method of a bean class of a managed bean declares a method level interceptor binding, the bean class may not be declared final.</text>
+      </assertion>
+      <assertion id="db">
+	      <text>If a non-static, non-private method of a bean class of a managed bean declares a method level interceptor binding, the method may not be declared final.</text>
+      </assertion>
+    </group>
   </section>
 
   <section id="9.4" title="Interceptor enablement and ordering">
