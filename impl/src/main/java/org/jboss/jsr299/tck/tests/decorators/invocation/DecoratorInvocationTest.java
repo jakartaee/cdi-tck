@@ -55,7 +55,6 @@ public class DecoratorInvocationTest extends AbstractJSR299Test
    
    @Test
    @SpecAssertions({
-      @SpecAssertion(section="8.2", id="b"),
       @SpecAssertion(section="8.4", id="d"),
       @SpecAssertion(section="8.4", id="e"),
       @SpecAssertion(section="8.4", id="f"),
