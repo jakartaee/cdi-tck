@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.tests.decorators.resolution.BarDecorator;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
