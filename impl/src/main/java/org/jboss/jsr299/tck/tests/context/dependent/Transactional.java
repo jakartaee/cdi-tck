@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD})
+@Target( { TYPE})
 @Retention(RUNTIME)
 @Documented
 @InterceptorBinding
