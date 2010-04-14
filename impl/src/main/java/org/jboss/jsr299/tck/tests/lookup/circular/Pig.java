@@ -17,10 +17,10 @@
 package org.jboss.jsr299.tck.tests.lookup.circular;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
-@ApplicationScoped
+@SessionScoped
 class Pig
 {
    
