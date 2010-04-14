@@ -23,6 +23,6 @@ import javax.enterprise.inject.spi.BeanManager;
 class ResourceProducer
 {
    @Produces @Another 
-   @Resource(mappedName = "java:app/BeanManager") 
+   @Resource(mappedName = "java:comp/BeanManager") 
    private BeanManager manager;
 }
