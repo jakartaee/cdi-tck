@@ -404,16 +404,14 @@ public class DependentContextTest extends AbstractJSR299Test
       Bean<Interior> roomBean = getBeans(Interior.class, new RoomBinding()).iterator().next();
       
       CreationalContext<Interior> roomCreationalContext = getCurrentManager().createCreationalContext(roomBean);
-      
-      Interior room = roomBean.create(roomCreationalContext);
+      Interior room = (Interior) getCurrentManager().getReference(roomBean, Interior.class, roomCreationalContext);
       
       InteriorDecorator.reset();
       
       room.foo();
       
       assert InteriorDecorator.getInstances().size() == 1;
-      
-      roomBean.destroy(room, roomCreationalContext);
+      roomCreationalContext.release();
       assert InteriorDecorator.isDestroyed();
    }
    
@@ -427,12 +425,12 @@ public class DependentContextTest extends AbstractJSR299Test
       Bean<AccountTransaction> bean = getBeans(AccountTransaction.class).iterator().next();
       CreationalContext<AccountTransaction> ctx = getCurrentManager().createCreationalContext(bean);
             
-      AccountTransaction trans = bean.create(ctx);
+      AccountTransaction trans = (AccountTransaction) getCurrentManager().getReference(bean, AccountTransaction.class, ctx);
       trans.execute();
       
       assert TransactionalInterceptor.intercepted;
       
-      bean.destroy(trans, ctx);
+      ctx.release();
       
       assert TransactionalInterceptor.destroyed;      
    }

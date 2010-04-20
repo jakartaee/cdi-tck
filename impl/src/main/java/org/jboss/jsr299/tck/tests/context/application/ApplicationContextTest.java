@@ -102,4 +102,22 @@ public class ApplicationContextTest extends AbstractJSR299Test
       assert Double.parseDouble(secondRequestResult.getContent()) == Double.parseDouble(firstRequestResult.getContent());
    }
 
+   @Test(groups = { "contexts", "integration", "broken" })
+   // CDITCK-96
+   @SpecAssertion(section = "6.7.3", id = "e")
+   public void testApplicationContextSharedBetweenJaxRsRequests() throws Exception
+   {
+      WebClient webClient = new WebClient();
+      webClient.setThrowExceptionOnFailingStatusCode(true);
+      //FIXME:  fix the path if this is not correct
+      TextPage firstRequestResult = webClient.getPage(getContextPath() + "jaxrs/application-id");
+      assert firstRequestResult.getContent() != null;
+      assert Double.parseDouble(firstRequestResult.getContent()) != 0;
+      // Make a second request and make sure the same context is used
+      TextPage secondRequestResult = webClient.getPage(getContextPath() + "jaxrs/application-id");
+      assert secondRequestResult.getContent() != null;
+      // should be same random number
+      assert Double.parseDouble(secondRequestResult.getContent()) == Double.parseDouble(firstRequestResult.getContent());
+   }
+
 }

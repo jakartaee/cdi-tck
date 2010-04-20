@@ -35,6 +35,11 @@
       <servlet-name>applicationIntrospector</servlet-name>
       <servlet-class>org.jboss.jsr299.tck.tests.context.application.IntrospectApplication</servlet-class>
    </servlet>
+   <servlet>
+      <display-name>JAX-RS Application</display-name>
+      <servlet-name>jaxrsApplication</servlet-name>
+      <servlet-class>org.jboss.jsr299.tck.tests.context.application.JaxrsApplication</servlet-class>
+   </servlet>
    <servlet-mapping>
       <servlet-name>TestServlet</servlet-name>
       <url-pattern>/TestServlet</url-pattern>
@@ -42,6 +47,10 @@
    <servlet-mapping>
       <servlet-name>applicationIntrospector</servlet-name>
       <url-pattern>/IntrospectApplication</url-pattern>
+   </servlet-mapping>
+   <servlet-mapping>
+      <servlet-name>jaxrsApplication</servlet-name>
+      <url-pattern>/jaxrs</url-pattern>
    </servlet-mapping>
    <session-config>
       <session-timeout>10</session-timeout>

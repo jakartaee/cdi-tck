@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2008, Red Hat, Inc. and/or its affiliates, and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,21 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPassivatingBeanConstructor;
 
-import java.io.Serializable;
+package org.jboss.jsr299.tck.tests.context.application;
 
-import javax.enterprise.context.SessionScoped;
+import java.util.HashSet;
+import java.util.Set;
 
-@SessionScoped
-class UnderwaterCity implements CityInterface, Serializable
+import javax.ws.rs.core.Application;
+
+
+/**
+ * Portable configuration for JAX-RS.  This class must be used in the web.xml
+ * as a servlet in order to activate the JAX-RS resources.
+ * 
+ * @author David Allen
+ *
+ */
+public class JaxrsApplication extends Application
 {
 
-   private static final long serialVersionUID = 3226222322140685248L;
-
-   public void foo()
+   @Override
+   public Set<Class<?>> getClasses()
    {
-      
+      HashSet<Class<?>> set = new HashSet<Class<?>>();
+      set.add(ApplicationResource.class);
+      return set;
    }
 
 }

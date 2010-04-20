@@ -41,7 +41,6 @@ import javax.enterprise.inject.Stereotype;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
-import javax.enterprise.inject.spi.PassivationCapable;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.interceptor.InterceptorBinding;
 
@@ -49,9 +48,9 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.RetentionLiteral;
 import org.jboss.jsr299.tck.literals.TargetLiteral;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
@@ -62,20 +61,10 @@ import org.testng.annotations.Test;
  *
  */
 @Artifact
+@Extension("javax.enterprise.inject.spi.Extension")
 @SpecVersion(spec="cdi", version="20091101")
 public class BeanManagerTest extends AbstractJSR299Test
 {
-   @Test
-   @SpecAssertion(section = "11.3.6", id = "a")
-   public void testGetPassivationCapableBeanById()
-   {
-      Bean<?> bean = getCurrentManager().getBeans(Cow.class).iterator().next();
-      assert PassivationCapable.class.isAssignableFrom(bean.getClass());
-      PassivationCapable passivationCapable = (PassivationCapable) bean;
-      Bean<?> passivatingBean = getCurrentManager().getPassivationCapableBean(passivationCapable.getId());
-      assert bean == passivatingBean;
-   }
-
    @Test
    @SpecAssertion(section = "11.3.7", id = "a")
    public void testAmbiguousDependencyResolved()

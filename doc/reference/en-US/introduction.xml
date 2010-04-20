@@ -235,7 +235,7 @@
             </listitem>
             <listitem>
                <para>
-                  <emphasis role="bold">TestNG 5.9</emphasis>, the testing
+                  <emphasis role="bold">TestNG 5.10</emphasis>, the testing
                   framework on which the JBoss Test Harness is based and which
                   provides the extension points for selecting an executing the
                   tests in the test suite.

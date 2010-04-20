@@ -24,6 +24,8 @@ import javax.enterprise.context.RequestScoped;
 class UnderwaterCity implements CityInterface, Serializable
 {
 
+   private static final long serialVersionUID = 7753204334538945451L;
+
    public void foo()
    {
       

@@ -96,6 +96,7 @@
       <jws.api.version>1.0-MR1</jws.api.version>
       <apache.httpclient.version>3.1</apache.httpclient.version>
       <htmlunit.version>2.4</htmlunit.version>
+      <resteasy.version>2.0-beta-1</resteasy.version>
    </properties>
 
    <!-- Dependency management -->
@@ -194,6 +195,12 @@
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
             <version>${jaxws.api.version}</version>
+         </dependency>
+
+         <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>jaxrs-api</artifactId>
+            <version>${resteasy.version}</version>
          </dependency>
 
          <dependency>

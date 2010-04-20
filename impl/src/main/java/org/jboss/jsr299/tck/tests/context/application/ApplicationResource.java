@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2008, Red Hat, Inc. and/or its affiliates, and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,26 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPassivatingBeanConstructor;
 
-import java.io.Serializable;
+package org.jboss.jsr299.tck.tests.context.application;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.enterprise.inject.Any;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
-@Decorator
-public class CityDecorator implements CityInterface, Serializable
+/**
+ * RESTful web service which returns a value from an application scoped bean.
+ * 
+ * @author David Allen
+ *
+ */
+@Path("/application-id")
+public class ApplicationResource
 {
-   private static final long serialVersionUID = 7666849923138796340L;
-   @Inject @Delegate @Any CityInterface city;
-   
    @Inject
-   public CityDecorator(NonPassivating nonPassivating) {}
-   
-   public void foo()
+   private BeanManager jsr299Manager;
+
+   @GET @Produces("text/plain")
+   public String getValue()
    {
-      city.foo();      
+      SimpleApplicationBean aBean = org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(jsr299Manager,SimpleApplicationBean.class);
+      return Double.toString(aBean.getId());
    }
 }
