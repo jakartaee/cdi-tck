@@ -31,9 +31,10 @@ public class CircularDependencyTest extends AbstractJSR299Test
    @SpecAssertion(section="5", id="b")
    public void testCircularInjectionOnTwoNormalBeans() throws Exception
    {
-      getInstanceByType(Pig.class).getName();
-      assert Pig.success;
-      assert Food.success;
+      Pig pig = getInstanceByType(Pig.class);
+      Food food = getInstanceByType(Food.class);
+      assert pig.getNameOfFood().equals(food.getName());
+      assert food.getNameOfPig().equals(pig.getName());
    }
    
    @Test

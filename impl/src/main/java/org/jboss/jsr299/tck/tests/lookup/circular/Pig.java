@@ -16,35 +16,26 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.circular;
 
-import javax.annotation.PostConstruct;
+import java.io.Serializable;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-class Pig
+class Pig implements Serializable
 {
    
-   public static boolean success;
-   
+   private static final long serialVersionUID = 2445308247858178311L;
+
    @Inject Food food;
-   
-   public Pig()
-   {
-      success = false;
-   }
-   
-   @PostConstruct
-   public void postConstruct()
-   {
-      if (food.getName().equals("food"))
-      {
-         success = true;
-      }
-   }
    
    public String getName()
    {
       return "john";
    }
    
+   public String getNameOfFood()
+   {
+      return food.getName();
+   }
 }
