@@ -12,8 +12,8 @@
    <para>
       The CDI TCK is built atop the JBoss Test Harness, a portable and
       configurable automated test suite for authoring unit and integration tests
-      in a Java EE environment. The CDI TCK 1.0.0 uses the JBoss Test Harness
-      version 1.0.0 to execute the test suite.
+      in a Java EE environment. The CDI TCK 1.0.2CR1 uses the JBoss Test Harness
+      version 1.1.0CR6 to execute the test suite.
    </para>
 
    <para>

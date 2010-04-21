@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,  
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -41,7 +41,6 @@ import javax.enterprise.inject.Stereotype;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
-import javax.enterprise.inject.spi.PassivationCapable;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.interceptor.InterceptorBinding;
 
@@ -49,9 +48,9 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.RetentionLiteral;
 import org.jboss.jsr299.tck.literals.TargetLiteral;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
@@ -62,20 +61,10 @@ import org.testng.annotations.Test;
  *
  */
 @Artifact
+@Extension("javax.enterprise.inject.spi.Extension")
 @SpecVersion(spec="cdi", version="20091101")
 public class BeanManagerTest extends AbstractJSR299Test
 {
-   @Test
-   @SpecAssertion(section = "11.3.6", id = "a")
-   public void testGetPassivationCapableBeanById()
-   {
-      Bean<?> bean = getCurrentManager().getBeans(Cow.class).iterator().next();
-      assert PassivationCapable.class.isAssignableFrom(bean.getClass());
-      PassivationCapable passivationCapable = (PassivationCapable) bean;
-      Bean<?> passivatingBean = getCurrentManager().getPassivationCapableBean(passivationCapable.getId());
-      assert bean == passivatingBean;
-   }
-
    @Test
    @SpecAssertion(section = "11.3.7", id = "a")
    public void testAmbiguousDependencyResolved()

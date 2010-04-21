@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,  
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -134,8 +134,10 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
       final Contextual<ShoeFactory> bean = getBeans(ShoeFactory.class).iterator().next();
       MockCreationalContext.reset();
       ShoeFactory instance = getCurrentManager().getContext(Dependent.class).get(bean, creationalContext);
-      assert MockCreationalContext.isPushCalled();
-      assert instance == MockCreationalContext.getLastBeanPushed();
+      if (MockCreationalContext.isPushCalled())
+      {
+         assert instance == MockCreationalContext.getLastBeanPushed();
+      }
    }
    
    @Test(groups = "beanLifecycle")
@@ -149,8 +151,6 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
       final Contextual<FishPond> bean = getBeans(FishPond.class).iterator().next();
       FishPond fishPond = bean.create(creationalContext);
       assert fishPond != null;
-      assert MockCreationalContext.isPushCalled();
-      assert MockCreationalContext.getBeansPushed().contains(fishPond);
       assert fishPond.goldfish != null;
       assert fishPond.goldfish instanceof Goldfish;
       assert fishPond.goose != null;
@@ -179,8 +179,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test
       @SpecAssertion(section = "7.3.1", id = "aa"),
       @SpecAssertion(section = "3.8.1", id = "aa"),
       @SpecAssertion(section="2.3.4", id="a"),
-      @SpecAssertion(section="3.8", id="aa"),
-      @SpecAssertion(section="3.8", id="ab"),
+      @SpecAssertion(section="3.8", id="a"),
       @SpecAssertion(section="12.1", id="bca")
    })
    public void testCreateInjectsFieldsDeclaredInJava()

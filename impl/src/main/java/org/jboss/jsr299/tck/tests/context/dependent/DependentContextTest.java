@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,  
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -411,16 +411,14 @@ public class DependentContextTest extends AbstractJSR299Test
       Bean<Interior> roomBean = getBeans(Interior.class, new RoomBinding()).iterator().next();
       
       CreationalContext<Interior> roomCreationalContext = getCurrentManager().createCreationalContext(roomBean);
-      
-      Interior room = roomBean.create(roomCreationalContext);
+      Interior room = (Interior) getCurrentManager().getReference(roomBean, Interior.class, roomCreationalContext);
       
       InteriorDecorator.reset();
       
       room.foo();
       
       assert InteriorDecorator.getInstances().size() == 1;
-      
-      roomBean.destroy(room, roomCreationalContext);
+      roomCreationalContext.release();
       assert InteriorDecorator.isDestroyed();
    }
    
@@ -434,12 +432,12 @@ public class DependentContextTest extends AbstractJSR299Test
       Bean<AccountTransaction> bean = getBeans(AccountTransaction.class).iterator().next();
       CreationalContext<AccountTransaction> ctx = getCurrentManager().createCreationalContext(bean);
             
-      AccountTransaction trans = bean.create(ctx);
+      AccountTransaction trans = (AccountTransaction) getCurrentManager().getReference(bean, AccountTransaction.class, ctx);
       trans.execute();
       
       assert TransactionalInterceptor.intercepted;
       
-      bean.destroy(trans, ctx);
+      ctx.release();
       
       assert TransactionalInterceptor.destroyed;      
    }

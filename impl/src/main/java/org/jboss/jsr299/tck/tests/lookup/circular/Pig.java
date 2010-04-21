@@ -9,42 +9,33 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,  
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.jsr299.tck.tests.lookup.circular;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import java.io.Serializable;
+
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
-@ApplicationScoped
-class Pig
+@SessionScoped
+class Pig implements Serializable
 {
    
-   public static boolean success;
-   
+   private static final long serialVersionUID = 2445308247858178311L;
+
    @Inject Food food;
-   
-   public Pig()
-   {
-      success = false;
-   }
-   
-   @PostConstruct
-   public void postConstruct()
-   {
-      if (food.getName().equals("food"))
-      {
-         success = true;
-      }
-   }
    
    public String getName()
    {
       return "john";
    }
    
+   public String getNameOfFood()
+   {
+      return food.getName();
+   }
 }
