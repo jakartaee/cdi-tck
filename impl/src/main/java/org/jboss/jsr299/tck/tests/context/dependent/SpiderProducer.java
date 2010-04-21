@@ -33,7 +33,7 @@ class SpiderProducer
    private static SpiderProducer instanceUsedForDisposal = null;
 
 
-   @Produces @Pet public Tarantula produceTarantula(Tarantula spider)
+   @Produces @Pet public Tarantula produceTarantula(Tarantula spider, DomesticationKit domesticationKit)
    {
       dependentContextActive = beanManager.getContext(Dependent.class).isActive();
       return spider;
