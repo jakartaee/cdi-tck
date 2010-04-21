@@ -334,16 +334,23 @@ public class DependentContextTest extends AbstractJSR299Test
       @SpecAssertion(section = "6.4.2", id = "ddd"),
       @SpecAssertion(section = "6.4.1", id="h")
    })
-   
    public void testDependentsDestroyedWhenProducerMethodCompletes()
    {
-      // Reset the test class
+      // Reset the test classes
       SpiderProducer.reset();
       Tarantula.reset();
-      Tarantula spiderInstance = getInstanceByType(Tarantula.class, PET_LITERAL);
-      spiderInstance.ping();
+      DomesticationKit.reset();
+      
+      Bean<Tarantula> tarantulaBean = getUniqueBean(Tarantula.class, PET_LITERAL);
+      CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
+      Tarantula tarantula = (Tarantula) getCurrentManager().getReference(tarantulaBean, Tarantula.class, creationalContext);
+      tarantula.ping();
+      // contextual instance created to receive a producer method invocation
+      // is destroyed when the invocation completes
       assert SpiderProducer.isDestroyed();
-      assert Tarantula.isDestroyed();
+      // DomesticationKit instance is a dependent object of the Tarantula instance
+      tarantulaBean.destroy(tarantula, creationalContext);
+      assert DomesticationKit.isDestroyed();
       SpiderProducer.reset();
    }
 
