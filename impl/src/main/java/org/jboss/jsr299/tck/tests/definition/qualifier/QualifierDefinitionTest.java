@@ -58,8 +58,9 @@ public class QualifierDefinitionTest extends AbstractJSR299Test
    public void testDefaultQualifierForInjectionPoint()
    {
       Bean<Order> order = getBeans(Order.class).iterator().next();
+      assert order.getInjectionPoints().size() == 1;
       InjectionPoint injectionPoint = order.getInjectionPoints().iterator().next();
-      assert injectionPoint.getBean().getQualifiers().contains(new DefaultLiteral());
+      assert injectionPoint.getQualifiers().contains(new DefaultLiteral());
    }
    
    @Test
