@@ -14,21 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPassivatingInitializerMethod;
+package org.jboss.jsr299.tck.tests.extensions.beanManager;
 
-import java.io.Serializable;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AfterBeanDiscovery;
+import javax.enterprise.inject.spi.Extension;
 
-import javax.enterprise.context.SessionScoped;
-
-@SessionScoped
-class UnderwaterCity implements CityInterface, Serializable
+public class AfterBeanDiscoveryObserver implements Extension
 {
-
-   private static final long serialVersionUID = 7753204334538945451L;
-
-   public void foo()
+   
+   public void addABean(@Observes AfterBeanDiscovery afterBeanDiscovery)
    {
-      
+      afterBeanDiscovery.addBean(new CowBean());
    }
 
 }
