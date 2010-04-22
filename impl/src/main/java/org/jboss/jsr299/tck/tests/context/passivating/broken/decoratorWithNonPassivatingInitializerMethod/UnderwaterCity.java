@@ -18,9 +18,9 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPa
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 
-@RequestScoped
+@SessionScoped
 class UnderwaterCity implements CityInterface, Serializable
 {
 
