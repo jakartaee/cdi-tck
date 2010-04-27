@@ -84,10 +84,9 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
       
       // Verify that the instance returned is a proxy by checking for all local interfaces
       assert getCurrentConfiguration().getBeans().isProxy(stadtInstance);
-      Set<Class> interfaces = new HashSet<Class>(Arrays.asList(stadtInstance.getClass().getInterfaces()));
-      assert interfaces.contains(KleinStadt.class);
-      assert interfaces.contains(SchoeneStadt.class);
-      assert interfaces.contains(Serializable.class);
+      assert stadtInstance instanceof KleinStadt;
+      assert stadtInstance instanceof SchoeneStadt;
+      assert stadtInstance instanceof Serializable;
    }
    
    @Test(groups = { "enterpriseBeans", "clientProxy", "lifecycle", "integration" })
@@ -157,9 +156,8 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
       assert stadtInstance != null : "Expected instance to be created by container";
 
       // Verify that the instance returned is a proxy by checking for all local interfaces
-      Set<Class> interfaces = new HashSet<Class>(Arrays.asList(stadtInstance.getClass().getInterfaces()));
-      assert interfaces.contains(NeueStadt.class);
-      assert interfaces.contains(GeschichtslosStadt.class);
+      assert stadtInstance instanceof NeueStadt;
+      assert stadtInstance instanceof GeschichtslosStadt;
    }
 
    @Test(groups = { "enterpriseBeans", "lifecycle", "integration" })
