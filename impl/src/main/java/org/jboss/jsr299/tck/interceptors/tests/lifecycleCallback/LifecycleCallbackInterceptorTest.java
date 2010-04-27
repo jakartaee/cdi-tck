@@ -35,13 +35,13 @@ public class LifecycleCallbackInterceptorTest extends AbstractJSR299Test
    {
       getInstanceByType(Goat.class);
       assert Goat.isPostConstructInterceptorCalled();
-      assert AnimalInterceptor.isPostConstructInterceptorCalled(Goat.class);
+      assert AnimalInterceptor.isPostConstructInterceptorCalled(Goat.GOAT);
       getInstanceByType(Hen.class).toString();
       assert Hen.isPostConstructInterceptorCalled();
-      assert AnimalInterceptor.isPostConstructInterceptorCalled(Hen.class);
+      assert AnimalInterceptor.isPostConstructInterceptorCalled(Hen.HEN);
       getInstanceByType(Cow.class).toString();
       assert Cow.isPostConstructInterceptorCalled();
-      assert AnimalInterceptor.isPostConstructInterceptorCalled(Cow.class);
+      assert AnimalInterceptor.isPostConstructInterceptorCalled(Cow.COW);
    }
 
    @Test
@@ -51,13 +51,13 @@ public class LifecycleCallbackInterceptorTest extends AbstractJSR299Test
    {
       createAndDestroyInstance(Goat.class);
       assert Goat.isPreDestroyInterceptorCalled();
-      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Goat.class);
+      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Goat.GOAT);
       createAndDestroyInstance(Hen.class);
       assert Hen.isPreDestroyInterceptorCalled();
-      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Hen.class);
+      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Hen.HEN);
       createAndDestroyInstance(Cow.class);
       assert Cow.isPreDestroyInterceptorCalled();
-      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Cow.class);
+      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Cow.COW);
    }
 
    @SuppressWarnings("unchecked")

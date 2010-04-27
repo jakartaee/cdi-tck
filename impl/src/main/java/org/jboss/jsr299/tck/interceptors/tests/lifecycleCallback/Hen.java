@@ -25,6 +25,8 @@ import javax.interceptor.Interceptors;
 @ApplicationScoped
 class Hen extends Animal
 {
+   protected static final String HEN = "Hen";
+
    private static boolean postConstructInterceptorCalled = false;
    private static boolean preDestroyInterceptorCalled = false;
 
@@ -53,5 +55,11 @@ class Hen extends Animal
    public static boolean isPreDestroyInterceptorCalled()
    {
       return preDestroyInterceptorCalled;
+   }
+
+   @Override
+   public String getAnimalType()
+   {
+      return HEN;
    }
 }

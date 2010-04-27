@@ -26,13 +26,13 @@ import javax.interceptor.InvocationContext;
 
 class AnimalInterceptor
 {
-   private static Set<Class<?>> postConstructInterceptorCalledFor = new HashSet<Class<?>>();
-   private static Set<Class<?>> preDestroyInterceptorCalledFor = new HashSet<Class<?>>();
+   private static Set<String> postConstructInterceptorCalledFor = new HashSet<String>();
+   private static Set<String> preDestroyInterceptorCalledFor = new HashSet<String>();
 
    @PostConstruct
    public void postConstruct(InvocationContext ctx)
    {
-      postConstructInterceptorCalledFor.add(ctx.getTarget().getClass());
+      postConstructInterceptorCalledFor.add(((Animal) ctx.getTarget()).getAnimalType());
       try
       {
          ctx.proceed();
@@ -59,7 +59,7 @@ class AnimalInterceptor
    @PreDestroy
    public void preDestroy(InvocationContext ctx)
    {
-      preDestroyInterceptorCalledFor.add(ctx.getTarget().getClass());
+      preDestroyInterceptorCalledFor.add(((Animal) ctx.getTarget()).getAnimalType());
       try
       {
          ctx.proceed();
@@ -70,13 +70,13 @@ class AnimalInterceptor
       }
    }
 
-   public static boolean isPostConstructInterceptorCalled(Class<?> clazz)
+   public static boolean isPostConstructInterceptorCalled(String animalType)
    {
-      return postConstructInterceptorCalledFor.contains(clazz);
+      return postConstructInterceptorCalledFor.contains(animalType);
    }
 
-   public static boolean isPreDestroyInterceptorCalled(Class<?> clazz)
+   public static boolean isPreDestroyInterceptorCalled(String animalType)
    {
-      return preDestroyInterceptorCalledFor.contains(clazz);
+      return preDestroyInterceptorCalledFor.contains(animalType);
    }
 }
