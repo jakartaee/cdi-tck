@@ -1,0 +1,142 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<!-- CDI TCK Excludes for latest released TCK (currently 1.0.1 Final) -->
+
+<suite name="CDI TCK" verbose="0"  >
+   <test name="CDI TCK">
+      <method-selectors>
+         <method-selector>
+            <selector-class name="org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector" />
+         </method-selector>
+      </method-selectors>
+      <packages>
+         <package name="org.jboss.jsr299.tck.tests.*" />
+         <package name="org.jboss.jsr299.tck.interceptors.tests.*" />
+      </packages>
+      <classes>
+         <!-- Issues in the TCK -->
+         
+         <!-- CDITCK-141 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.simple.resource.resource.InjectionOfResourceTest">
+            <methods>
+               <exclude name="testInjectionOfResource" />
+               <exclude name="testProduceResourceProxy" />
+               <exclude name="testPassivatingResource" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-135 -->
+         <class name="org.jboss.jsr299.tck.tests.context.dependent.TransactionalInterceptor">
+            <methods>
+               <exclude name="testDependentScopedInterceptorsAreDependentObjectsOfBean" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-140 -->
+         <!-- CDITCK-145 -->
+         <class name="org.jboss.jsr299.tck.tests.lookup.circular.CircularDependencyTest">
+            <methods>
+               <exclude name="testCircularInjectionOnTwoNormalBeans" />
+               <exclude name="testCircularInjectionOnOneNormalAndOneDependentBean" />
+               <exclude name="testCircularInjectionOnOneDependentAndOneNormalBean" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-120 -->
+         <class name="org.jboss.jsr299.tck.tests.context.dependent.DependentContextTest">
+            <methods>   
+               <exclude name="testDependentScopedDecoratorsAreDependentObjectsOfBean" />
+               <exclude name="testDependentScopedInterceptorsAreDependentObjectsOfBean" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-136 -->
+         <class name="org.jboss.jsr299.tck.tests.definition.qualifier.QualifierDefinitionTest">
+            <methods>
+               <exclude name="testDefaultQualifierForInjectionPoint" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-134 -->
+         <class name="org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPassivatingBeanConstructor.DecoratorWithNonPassivatingBeanConstructorTest">
+            <methods>
+               <exclude name="testPassivationCapableBeanWithNonPassivatingDecoratorBeanConstructorFails" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPassivatingInitializerMethod.DecoratorWithNonPassivatingInitializerMethodTest">
+            <methods>
+               <exclude name="testPassivationCapableBeanWithNonPassivatingInitializerInDecoratorFails" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPassivatingInjectedField.DecoratorWithNonPassivatingInjectedFieldTest">
+            <methods>
+               <exclude name="testPassivationCapableBeanWithNonPassivatingDecoratorInjectedFieldFails" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-143 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.simple.lifecycle.SimpleBeanLifecycleTest">
+            <methods>
+               <exclude name="testCreateReturnsSameBeanPushed" />
+               <exclude name="testBeanCreateInjectsDependenciesAndInvokesInitializerToInstantiateInstance" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-142 -->
+         <class name="org.jboss.jsr299.tck.tests.context.dependent.DependentContextTest">
+            <methods>
+               <exclude name="testDependentsDestroyedWhenProducerMethodCompletes" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-121 -->
+         <class name="org.jboss.jsr299.tck.tests.extensions.beanManager.BeanManagerTest">
+            <methods>
+               <exclude name="testGetPassivationCapableBeanById" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-152 -->
+         <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest">
+            <methods>
+               <exclude name="testInjectionIntoWebServiceEndpoint" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-159 -->
+         <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.InjectionIntoNonContextualComponentTest">
+            <methods>
+               <exclude name="testInjectionIntoJSFManagedBean" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-149 -->
+         <class name="org.jboss.jsr299.tck.tests.context.NormalContextTest">
+            <methods>
+               <exclude name="testGetMayNotReturnNullUnlessContextualCreateReturnsNull" />
+               <exclude name="testGetReturnsExistingInstance" />
+               <exclude name="testGetWithCreationalContextReturnsNewInstance" />
+               <exclude name="testSameNormalScopeBeanInjectedEverywhere" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-150 -->
+         <class name="org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary.LibraryInEarTest">
+            <methods>
+               <exclude name="test" />
+            </methods>
+         </class>
+                  
+         <!-- Issues in Weld (the RI) -->
+
+         <!-- WELD-401 -->
+         <class name="org.jboss.jsr299.tck.tests.event.broken.observer.notBusinessMethod.EJBObserverMethodNotBusinessMethodTest">
+            <methods>
+               <exclude name="testObserverMethodOnEnterpriseBeanNotBusinessMethodOrStaticFails" />
+            </methods>
+         </class>
+                  
+      </classes>
+   </test>
+   
+</suite>
