@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<!-- JSR-299 TCK TestNG configuration for Weld -->
+<!-- CDI TCK Excludes for current 1.0 branch -->
 
-<suite name="Weld / JBoss AS run of CDI TCK" verbose="0"  >
+<suite name="CDI TCK" verbose="0"  >
    <test name="CDI TCK">
       <method-selectors>
          <method-selector>
