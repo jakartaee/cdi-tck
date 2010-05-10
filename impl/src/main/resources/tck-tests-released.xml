@@ -134,6 +134,12 @@
             </methods>
          </class>
                   
+         <!-- CDITCK-139 -->
+         <class name="org.jboss.jsr299.tck.tests.decorators.resolution.DecoratorResolutionTest">
+            <methods>
+               <exclude name="testDelegateTypeVariableBeanTypeVariable" />
+            </methods>
+         </class>
                   
                   
          <!-- Issues in Weld (the RI) -->
