@@ -140,6 +140,20 @@
                <exclude name="testDelegateTypeVariableBeanTypeVariable" />
             </methods>
          </class>
+         
+         <!-- CDITCK-155 -->
+         <class name="org.jboss.jsr299.tck.tests.context.request.ejb.EJBRequestContextTest">
+            <methods>
+               <exclude name="testRequestScopeDestroyedAfterCallToEjbTimeoutMethod" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-156 -->
+         <class name="org.jboss.jsr299.tck.tests.context.application.ejb.ApplicationContextSharedTest">
+            <methods>
+               <exclude name="testApplicationContextShared" />
+            </methods>
+         </class>
                   
                   
          <!-- Issues in Weld (the RI) -->
