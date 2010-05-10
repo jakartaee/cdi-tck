@@ -126,6 +126,15 @@
                <exclude name="test" />
             </methods>
          </class>
+         
+         <!-- CDITCK-153 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.producer.method.definition.enterprise.EnterpriseProducerMethodDefinitionTest">
+            <methods>
+               <exclude name="testNonStaticProducerMethodInheritedBySpecializingSubclass" />
+            </methods>
+         </class>
+                  
+                  
                   
          <!-- Issues in Weld (the RI) -->
 
