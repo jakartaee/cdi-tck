@@ -154,6 +154,13 @@
                <exclude name="testApplicationContextShared" />
             </methods>
          </class>
+         
+         <!-- CDITCK-160 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.NewEnterpriseBeanICTest">
+            <methods>
+               <exclude name="testNewBeanHasSameConstructor" />
+            </methods>
+         </class>
                   
                   
          <!-- Issues in Weld (the RI) -->
