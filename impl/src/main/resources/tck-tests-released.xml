@@ -168,6 +168,13 @@
                <exclude name="testNewBeanHasSameConstructor" />
             </methods>
          </class>
+         
+         <!-- CDITCK-161 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.definition.EnterpriseBeanDefinitionTest">
+            <methods>
+               <exclude name="testConstructorAnnotatedInjectCalled" />
+            </methods>
+         </class>
                   
                   
          <!-- Issues in Weld (the RI) -->
