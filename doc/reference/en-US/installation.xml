@@ -72,7 +72,7 @@
          </listitem>
          <listitem>
             <para>
-               Java EE 6 preview or better (e.g., JBoss AS 5.2.x or GlassFish V3)
+               Java EE 6 preview or better (e.g., JBoss AS 6.0.x or GlassFish V3)
             </para>
          </listitem>
       </itemizedlist>
@@ -150,9 +150,9 @@
                   Create a file called <literal>local.build.properties</literal>
                   in <literal>weld/jboss-as</literal> and make sure the
                   <literal>jboss.home</literal>
-                  property references a JBoss AS 5.2 installation:
+                  property references a JBoss AS 6.0 installation:
                </para>
-               <programlisting>jboss.home=/path/to/jboss-as-5.2</programlisting>
+               <programlisting>jboss.home=/path/to/jboss-as-6.0</programlisting>
             </listitem>
          </itemizedlist>
 
