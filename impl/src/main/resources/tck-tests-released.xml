@@ -183,6 +183,14 @@
                <exclude name="testPassivatingResource" />
             </methods>
          </class>
+         
+         <!-- CDITCK-163 -->
+         <class name="org.jboss.jsr299.tck.tests.context.session.SessionContextTest">
+            <methods>
+               <exclude name="testSessionContextDestroyedWhenHttpSessionInvalidated" />
+               <exclude name="testSessionContextDestroyedWhenHttpSessionTimesOut" />
+            </methods>
+         </class>
                   
          <!-- Issues in Weld (the RI) -->
 

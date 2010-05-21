@@ -41,7 +41,7 @@ public class IntrospectSession extends HttpServlet
    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
    {
       resp.setContentType("text/text");
-      resp.getWriter().print(aBean.hashCode());
+      resp.getWriter().print(aBean.getTimestamp());
    }
 
 }
