@@ -84,9 +84,10 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
       
       // Verify that the instance returned is a proxy by checking for all local interfaces
       assert getCurrentConfiguration().getBeans().isProxy(stadtInstance);
-      assert stadtInstance instanceof KleinStadt;
-      assert stadtInstance instanceof SchoeneStadt;
-      assert stadtInstance instanceof Serializable;
+      Set<Class> interfaces = new HashSet<Class>(Arrays.asList(stadtInstance.getClass().getInterfaces()));
+      assert interfaces.contains(KleinStadt.class);
+      assert interfaces.contains(SchoeneStadt.class);
+      assert interfaces.contains(Serializable.class);
    }
    
    @Test(groups = { "enterpriseBeans", "clientProxy", "lifecycle", "integration" })
