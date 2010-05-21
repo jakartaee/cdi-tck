@@ -42,12 +42,9 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test
    @SpecAssertion(section = "3.12", id = "l")
    public void testNewBeanHasSameConstructor()
    {
-      ExplicitConstructor bean = getInstanceByType(ExplicitConstructor.class);
-      bean.setConstructorCalls(0);
       ExplicitConstructor newBean = getInstanceByType(ExplicitConstructor.class, ExplicitConstructorSessionBean.NEW);
-      assert bean != newBean;
-      assert bean.getConstructorCalls() == 1;
-      assert bean.getInjectedSimpleBean() != null;
+      assert newBean.getConstructorCalls() == 1;
+      assert newBean.getInjectedSimpleBean() != null;
    }
 
    @Test(groups = { "new" })
