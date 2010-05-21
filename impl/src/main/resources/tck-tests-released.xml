@@ -180,7 +180,7 @@
          <class name="org.jboss.jsr299.tck.tests.implementation.simple.resource.resource.InjectionOfResourceTest">
             <methods>
                <exclude name="testInjectionOfResource" />
-               <exclude name="testPassivatingResource" />
+               <exclude name="testProduceResourceProxy" />
             </methods>
          </class>
          
