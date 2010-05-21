@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.circular;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -33,18 +32,14 @@ class Petrol
       success = false;
    }
    
-   @PostConstruct
-   public void postConstruct()
-   {
-      if (car.getName().equals("herbie"))
-      {
-         success = true;
-      }
-   }
-   
    public String getName()
    {
       return "petrol";
+   }
+   
+   public String getNameOfCar()
+   {
+      return car.getName();
    }
    
 }

@@ -41,19 +41,10 @@ public class CircularDependencyTest extends AbstractJSR299Test
    @SpecAssertion(section="5", id="b")
    public void testCircularInjectionOnOneNormalAndOneDependentBean() throws Exception
    {
-      
-      getInstanceByType(Car.class).getName();
-      assert Petrol.success;
-      assert Car.success;
-   }
-   
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testCircularInjectionOnOneDependentAndOneNormalBean() throws Exception
-   {
-      getInstanceByType(Petrol.class).getName();
-      assert Petrol.success;
-      assert Car.success;
+      Petrol petrol = getInstanceByType(Petrol.class);
+      Car car = getInstanceByType(Car.class);
+      assert petrol.getNameOfCar().equals(car.getName());
+      assert car.getNameOfPetrol().equals(petrol.getName());
    }
    
    
