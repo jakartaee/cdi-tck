@@ -27,6 +27,17 @@ class SimpleSessionBean implements Serializable
 
    private static final long serialVersionUID = 1L;
    private static boolean beanDestroyed = false;
+   private final long timestamp;
+   
+   public SimpleSessionBean()
+   {
+      this.timestamp = System.currentTimeMillis();
+   }
+   
+   public long getTimestamp()
+   {
+      return timestamp;
+   }
    
    @PreDestroy
    public void destroyBean()

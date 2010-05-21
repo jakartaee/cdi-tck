@@ -44,7 +44,7 @@ public class IntrospectSession extends HttpServlet
    {
       resp.setContentType("text/text");
       SimpleSessionBean aBean = org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(jsr299Manager,SimpleSessionBean.class);
-      resp.getWriter().print(aBean.hashCode());
+      resp.getWriter().print(aBean.getTimestamp());
    }
 
 }
