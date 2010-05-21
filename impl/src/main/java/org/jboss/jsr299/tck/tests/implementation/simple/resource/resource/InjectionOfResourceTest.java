@@ -47,7 +47,6 @@ public class InjectionOfResourceTest extends AbstractJSR299Test
       CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
       ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
       assert managedBean.getBeanManager() != null : "@Another Manager not found";
-      assert managedBean.getBeanManager().equals(getCurrentManager()): "Wrong manager found";
    }
    
    @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
@@ -62,7 +61,6 @@ public class InjectionOfResourceTest extends AbstractJSR299Test
       CreationalContext<BeanManager> beanManagerCc = getCurrentManager().createCreationalContext(beanManagerBean);
       BeanManager beanManager = beanManagerBean.create(beanManagerCc);
       assert beanManager != null;
-      assert beanManager.equals(getCurrentManager());
    }
    
    @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })

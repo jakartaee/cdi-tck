@@ -175,7 +175,14 @@
                <exclude name="testConstructorAnnotatedInjectCalled" />
             </methods>
          </class>
-                  
+         
+         <!-- CDITCK-162 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.simple.resource.resource.InjectionOfResourceTest">
+            <methods>
+               <exclude name="testInjectionOfResource" />
+               <exclude name="testPassivatingResource" />
+            </methods>
+         </class>
                   
          <!-- Issues in Weld (the RI) -->
 
