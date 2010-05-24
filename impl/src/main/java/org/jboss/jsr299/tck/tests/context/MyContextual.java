@@ -29,8 +29,9 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.enterprise.inject.spi.PassivationCapable;
 
-class MyContextual implements Bean<MySessionBean>
+class MyContextual implements Bean<MySessionBean>, PassivationCapable
 {
    private boolean createCalled = false;
    private boolean destroyCalled = false;
@@ -113,6 +114,11 @@ class MyContextual implements Bean<MySessionBean>
    public Set<Class<? extends Annotation>> getStereotypes()
    {
       return Collections.emptySet();
+   }
+
+   public String getId()
+   {
+      return "org.jboss.jsr299.tck.tests.context.myContextual";
    }
 
 }
