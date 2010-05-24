@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
 @Artifact
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
-public class DecoratorResolutionTest<T, C extends Cow> extends AbstractJSR299Test
+public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> extends AbstractJSR299Test
 {
    
    private final TypeLiteral<Bar<T>> BAR_TYPE_VARIABLE_LITERAL = new TypeLiteral<Bar<T>>() {};
@@ -52,7 +52,7 @@ public class DecoratorResolutionTest<T, C extends Cow> extends AbstractJSR299Tes
    private final TypeLiteral<Qux<List<String>>> QUX_STRING_LIST_LITERAL = new TypeLiteral<Qux<List<String>>>() {};
    private final TypeLiteral<Grault<Integer>> GRAULT_INTEGER_LITERAL = new TypeLiteral<Grault<Integer>>() {};
    private final TypeLiteral<Corge<C, C>> CORGE_TYPE_VARIABLE_EXTENDS_COW_LITERAL = new TypeLiteral<Corge<C, C>>(){};
-   private final TypeLiteral<Garply<? extends FresianCow>> GARPLY_EXTENDS_FRESIAN_COW_LITERAL = new TypeLiteral<Garply<? extends FresianCow>>() {};
+   private final TypeLiteral<Garply<F>> GARPLY_EXTENDS_FRESIAN_COW_LITERAL = new TypeLiteral<Garply<F>>() {};
    private final TypeLiteral<Garply<Cow>> GARPLY_COW_LITERAL = new TypeLiteral<Garply<Cow>>() {};
    
    private static boolean decoratorCollectionMatches(Collection<Decorator<?>> decorators, Class<?>... types)
