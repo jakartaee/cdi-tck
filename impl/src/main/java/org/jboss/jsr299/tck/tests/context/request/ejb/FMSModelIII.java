@@ -42,12 +42,12 @@ public class FMSModelIII implements FMS
    
    @Inject Instance<SimpleRequestBean> simpleRequestBean;
 
-   private static boolean requestScopeActive = false;
-   private static double beanId = 0.0d;
-   private static boolean sameBean = false;
+   private static volatile boolean requestScopeActive = false;
+   private static volatile double beanId = 0.0d;
+   private static volatile boolean sameBean = false;
    
-   private static boolean climbed;
-   private static boolean descended;
+   private static volatile boolean climbed;
+   private static volatile boolean descended;
 
    public void climb()
    {
@@ -57,9 +57,6 @@ public class FMSModelIII implements FMS
    public void descend()
    {
       timerService.createTimer(100, DESCEND_COMMAND);
-      // Resets
-      beanId = 0.0d;
-      sameBean = false;
    }
 
    @Timeout
