@@ -22,6 +22,7 @@ import javax.ejb.Timeout;
 import javax.ejb.Timer;
 import javax.ejb.TimerService;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
@@ -29,53 +30,62 @@ import javax.inject.Inject;
 public class FMSModelIII implements FMS
 {
    private static final long serialVersionUID = 1L;
+   
+   private static final String CLIMB_COMMAND = "ClimbCommand";
+   private static final String DESCEND_COMMAND = "DescendCommand";
 
    @Resource
    private TimerService timerService;
    
    @Inject
    private BeanManager beanManager;
+   
+   @Inject Instance<SimpleRequestBean> simpleRequestBean;
 
    private static boolean requestScopeActive = false;
    private static double beanId = 0.0d;
    private static boolean sameBean = false;
+   
+   private static boolean climbed;
+   private static boolean descended;
 
    public void climb()
    {
-      timerService.createTimer(200, "Climb command timeout");
+      timerService.createTimer(200, CLIMB_COMMAND);
    }
 
    public void descend()
    {
-      timerService.createTimer(100, "Descend command timeout");
+      timerService.createTimer(100, DESCEND_COMMAND);
+      // Resets
       beanId = 0.0d;
       sameBean = false;
-   }
-
-   public void turnLeft()
-   {
-   }
-
-   public void turnRight()
-   {
    }
 
    @Timeout
    public void timeout(Timer timer)
    {
+      if (timer.getInfo().equals(CLIMB_COMMAND))
+      {
+         climbed = true;
+      }
+      if (timer.getInfo().equals(DESCEND_COMMAND))
+      {
+         descended = true;
+      }
       if (beanManager.getContext(RequestScoped.class).isActive())
       {
          requestScopeActive = true;
          if (beanId > 0.0)
          {
-            if (beanId == org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(beanManager,SimpleRequestBean.class).getId())
+            if (beanId == simpleRequestBean.get().getId())
             {
                sameBean = true;
             }
          }
          else
          {
-            beanId = org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(beanManager,SimpleRequestBean.class).getId();
+            beanId = simpleRequestBean.get().getId();
          }
       }
    }
@@ -84,15 +94,29 @@ public class FMSModelIII implements FMS
    {
       return requestScopeActive;
    }
-
-   public void setRequestScopeActive(boolean requestScopeActive)
+   
+   public static void reset()
    {
-      FMSModelIII.requestScopeActive = requestScopeActive;
+      beanId = 0.0d;
+      climbed = false;
+      descended = false;
+      requestScopeActive = false;
+      sameBean = false;
    }
 
    public boolean isSameBean()
    {
       return sameBean;
+   }
+   
+   public static boolean isClimbed()
+   {
+      return climbed;
+   }
+   
+   public static boolean isDescended()
+   {
+      return descended;
    }
 
 }

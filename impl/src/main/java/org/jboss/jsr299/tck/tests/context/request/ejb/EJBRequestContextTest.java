@@ -45,10 +45,19 @@ public class EJBRequestContextTest extends AbstractJSR299Test
    @SpecAssertion(section = "6.7.1", id = "gc")
    public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception
    {
+      FMSModelIII.reset();
       FMS flightManagementSystem = getInstanceByType(FMS.class);
       flightManagementSystem.climb();
-      Thread.sleep(250);
+      waitForClimbed();
       assert flightManagementSystem.isRequestScopeActive();
+   }
+   
+   private void waitForClimbed() throws Exception
+   {
+      for (int i = 0; !FMSModelIII.isClimbed() && i < 2000; i++)
+      {
+         Thread.sleep(10);
+      }
    }
 
    /**
@@ -59,12 +68,22 @@ public class EJBRequestContextTest extends AbstractJSR299Test
    @SpecAssertion(section = "6.7.1", id = "hc")
    public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception
    {
+      FMSModelIII.reset();
       FMS flightManagementSystem = getInstanceByType(FMS.class);
       flightManagementSystem.climb();
+      waitForClimbed();
       flightManagementSystem.descend();
-      Thread.sleep(250);
+      waitForDescended();
       assert !flightManagementSystem.isSameBean();
       assert SimpleRequestBean.isBeanDestroyed();
+   }
+   
+   private void waitForDescended() throws Exception
+   {
+      for (int i = 0; !FMSModelIII.isDescended() && i < 2000; i++)
+      {
+         Thread.sleep(10);
+      }
    }
 
 }
