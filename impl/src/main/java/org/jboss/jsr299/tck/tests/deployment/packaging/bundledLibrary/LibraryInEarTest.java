@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  */
 @Artifact(addCurrentPackage=false)
 // We put Foo in the ejb jar, but Bar goes in the library
-@Classes({LibraryInEarTest.class, Foo.class})
+@Classes({LibraryInEarTest.class, Foo.class, Baz.class, BazLocal.class})
 @Test
 @SpecVersion(spec="cdi", version="20091101")
 @IntegrationTest
@@ -68,5 +68,6 @@ public class LibraryInEarTest extends AbstractJSR299Test
    {
       assert getCurrentManager().getBeans(Foo.class).size() == 1;
       assert getCurrentManager().getBeans(Bar.class).size() == 1;
+      assert getCurrentManager().getBeans(BazLocal.class).size() == 1;
    }
 }
