@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
 @Artifact
 @IntegrationTest
 @Packaging(PackagingType.EAR)
-@SpecVersion(spec="cdi", version="20091101")
+@SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextSharedTest extends AbstractJSR299Test
 {
 
@@ -41,21 +41,39 @@ public class ApplicationContextSharedTest extends AbstractJSR299Test
    @SpecAssertion(section = "6.7.3", id = "e")
    public void testApplicationContextShared() throws Exception
    {
+      FMSModelIII.reset();
       FMS flightManagementSystem = getInstanceByType(FMS.class);
       flightManagementSystem.climb();
+      waitForClimbed();
       flightManagementSystem.descend();
-      Thread.sleep(350);
+      waitForDescended();
       assert flightManagementSystem.isSameBean();
    }
-   
+
+   private void waitForClimbed() throws Exception
+   {
+      for (int i = 0; !FMSModelIII.isClimbed() && i < 2000; i++)
+      {
+         Thread.sleep(10);
+      }
+   }
+
    @Test(groups = { "contexts", "ejb3", "integration" })
    @SpecAssertion(section = "6.7.3", id = "dc")
    public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception
    {
       FMS flightManagementSystem = getInstanceByType(FMS.class);
       flightManagementSystem.climb();
-      Thread.sleep(250);
+      waitForClimbed();
       assert flightManagementSystem.isApplicationScopeActive();
+   }
+
+   private void waitForDescended() throws Exception
+   {
+      for (int i = 0; !FMSModelIII.isDescended() && i < 2000; i++)
+      {
+         Thread.sleep(10);
+      }
    }
 
 }
