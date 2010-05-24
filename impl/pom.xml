@@ -228,6 +228,11 @@
                                  <type>html</type>
                                  <classifier>coverage-mb</classifier>
                               </artifact>
+                              <artifact>
+                                 <file>../target/coverage-int.html</file>
+                                 <type>html</type>
+                                 <classifier>coverage-int</classifier>
+                              </artifact>
                            </artifacts>
                         </configuration>
                      </execution>
