@@ -30,6 +30,9 @@ import javax.inject.Inject;
 public class FMSModelIII implements FMS
 {
    private static final long serialVersionUID = 1L;
+   
+   private static final String CLIMB_COMMAND = "ClimbCommand";
+   private static final String DESCEND_COMMAND = "DescendCommand";
 
    @Resource
    private TimerService timerService;
@@ -44,46 +47,30 @@ public class FMSModelIII implements FMS
    private static volatile double beanId = 0.0d;
    private static volatile boolean sameBean = false;
    
-   private static volatile int climbState;
-   private static volatile int descendState;
+   private static boolean climbed;
+   private static boolean descended;
 
    public void climb() throws Exception
    {
-      climbState = 0;
-      timerService.createTimer(200, "Climb command timeout");
-      long timestamp = System.currentTimeMillis();
-      // Wait for the timer
-      while (climbState == 0)
-      {
-         // but don't wait more than 10s so we don't just hang!
-         if (System.currentTimeMillis() > timestamp + 10000)
-         {
-            return;
-         }
-         Thread.sleep(1);
-      }
+      timerService.createTimer(200, CLIMB_COMMAND);
    }
 
    public void descend() throws Exception
    {
-      descendState = 0;
-      timerService.createTimer(100, "Descend command timeout");
-      long timestamp = System.currentTimeMillis();
-      // Wait for the timer
-      while (descendState == 0)
-      {
-         // but don't wait more than 10s so we don't just hang!
-         if (System.currentTimeMillis() > timestamp + 10000)
-         {
-            return;
-         }
-         Thread.sleep(1);
-      }
+      timerService.createTimer(100, DESCEND_COMMAND);
    }
 
    @Timeout
    public void timeout(Timer timer)
    {
+      if (timer.getInfo().equals(CLIMB_COMMAND))
+      {
+         climbed = true;
+      }
+      if (timer.getInfo().equals(DESCEND_COMMAND))
+      {
+         descended = true;
+      }
       if (beanManager.getContext(ApplicationScoped.class).isActive())
       {
          applicationScopeActive = true;
@@ -99,8 +86,6 @@ public class FMSModelIII implements FMS
             beanId = simpleApplicationBeanInstance.get().getId();
          }
       }
-      climbState = 1;
-      descendState = 1;
    }
 
    public boolean isApplicationScopeActive()
@@ -111,6 +96,25 @@ public class FMSModelIII implements FMS
    public boolean isSameBean()
    {
       return sameBean;
+   }
+   
+   public static boolean isClimbed()
+   {
+      return climbed;
+   }
+   
+   public static boolean isDescended()
+   {
+      return descended;
+   }
+   
+   public static void reset()
+   {
+      beanId = 0.0d;
+      climbed = false;
+      descended = false;
+      applicationScopeActive = false;
+      sameBean = false;
    }
 
 }
