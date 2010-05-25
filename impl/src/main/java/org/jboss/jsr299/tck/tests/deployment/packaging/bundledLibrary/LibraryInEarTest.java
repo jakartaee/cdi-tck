@@ -18,14 +18,15 @@
 package org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary.libraryBeans.Bar;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.ArtifactDescriptor;
-import org.jboss.testharness.impl.packaging.Classes;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Packaging;
 import org.jboss.testharness.impl.packaging.PackagingType;
@@ -39,9 +40,7 @@ import org.testng.annotations.Test;
  * 
  * @author David Allen
  */
-@Artifact(addCurrentPackage=false)
-// We put Foo in the ejb jar, but Bar goes in the library
-@Classes({LibraryInEarTest.class, Foo.class, Baz.class, BazLocal.class})
+@Artifact
 @Test
 @SpecVersion(spec="cdi", version="20091101")
 @IntegrationTest
@@ -54,7 +53,7 @@ public class LibraryInEarTest extends AbstractJSR299Test
    {
       super.postCreate(artifact);
       ArtifactDescriptor library = new ArtifactDescriptor(LibraryInEarTest.class);
-      library.getClasses().add(Bar.class);
+      library.getClasses().addAll(Arrays.asList(Bar.class));
       library.getResources().add(new ResourceDescriptorImpl(JSR299ArtifactDescriptor.BEANS_XML_DESTINATION, JSR299ArtifactDescriptor.STANDARD_BEANS_XML_FILE_NAME));
       artifact.getLibraries().add(new ResourceDescriptorImpl("cdi-tck-beans.jar", library.getJarAsStream()));
       return artifact;

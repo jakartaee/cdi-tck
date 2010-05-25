@@ -20,6 +20,7 @@ package org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary;
 import java.io.IOException;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary.libraryBeans.Bar;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
