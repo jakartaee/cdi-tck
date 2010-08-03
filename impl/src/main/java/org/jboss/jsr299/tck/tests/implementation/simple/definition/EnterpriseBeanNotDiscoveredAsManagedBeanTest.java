@@ -21,6 +21,8 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
+import org.jboss.testharness.impl.packaging.Resource;
+import org.jboss.testharness.impl.packaging.Resources;
 import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
@@ -28,6 +30,9 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091101")
 @Extension("javax.enterprise.inject.spi.Extension")
 @IntegrationTest
+@Resources({ 
+   @Resource(destination="/WEB-INF/faces-config.xml", source="faces-config.xml")
+})
 public class EnterpriseBeanNotDiscoveredAsManagedBeanTest extends AbstractJSR299Test
 {
 
