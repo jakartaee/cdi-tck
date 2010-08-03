@@ -1,6 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<!-- CDI TCK Excludes for latest released TCK (currently 1.0.1 Final) -->
+<!-- CDI TCK Excludes for latest released TCK (currently 1.0.1 Final)
+-->
 
 <suite name="CDI TCK" verbose="0"  >
    <test name="CDI TCK">
@@ -152,6 +153,7 @@
          <class name="org.jboss.jsr299.tck.tests.context.application.ejb.ApplicationContextSharedTest">
             <methods>
                <exclude name="testApplicationContextShared" />
+               <exclude name="testApplicationScopeActiveDuringCallToEjbTimeoutMethod" />
             </methods>
          </class>
          
@@ -189,6 +191,84 @@
             <methods>
                <exclude name="testSessionContextDestroyedWhenHttpSessionInvalidated" />
                <exclude name="testSessionContextDestroyedWhenHttpSessionTimesOut" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-164 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.NewEnterpriseBeanTest">
+            <methods>
+               <exclude name="testForEachEnterpriseBeanANewBeanExists" />
+               <exclude name="testNewBeanHasNoBeanELName" />
+               <exclude name="testNewBeanHasNoObservers" />
+               <exclude name="testNewBeanHasNoStereotypes" />
+               <exclude name="testNewBeanIsDependentScoped" />
+               <exclude name="testNewBeanIsHasOnlyNewBinding" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.NewEnterpriseBeanICTest">
+            <methods>
+               <exclude name="testNewBeanHasNoDisposalMethods" />
+               <exclude name="testNewBeanHasNoProducerMethods" />
+               <exclude name="testNewBeanHasSameConstructor" />
+               <exclude name="testNewBeanHasSameInitializers" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-165 -->
+         <class name="org.jboss.jsr299.tck.tests.context.NormalContextTest">
+            <methods>
+               <exclude name="testSameNormalScopeBeanInjectedEverywhere" />
+            </methods>
+         </class>
+          
+         <!-- CDITCK-168 -->
+         <class name="org.jboss.jsr299.tck.tests.extensions.processBean.ProcessBeanTest">
+            <methods>
+               <exclude name="testProcessProducerFieldEvent" />
+               <exclude name="testProcessProducerMethodEvent" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.extensions.processBean.ProcessSessionBeanTest">
+            <methods>
+               <exclude name="testProcessSessionBeanEvent" />   
+            </methods>
+         </class>
+         
+         <!-- CDITCK-169 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.simple.resource.persistenceContext.PersistenceContextInjectionTest">
+            <methods>
+               <exclude name="testInjectionOfPersistenceContext" />
+               <exclude name="testInjectionOfPersistenceUnit" />
+               <exclude name="testPassivationOfPersistenceContext" />
+               <exclude name="testPassivationOfPersistenceUnit" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-170 -->
+         <class name="org.jboss.jsr299.tck.tests.event.observer.transactional.TransactionalObserversTest">
+            <methods>
+               <exclude name="testObserverCanSetRollbackOnlyOnTransaction" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-171 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.simple.definition.SimpleBeanDefinitionTest">
+            <methods>
+               <exclude name="testAbstractClassDeclaredInJavaNotDiscovered" />
+               <exclude name="testDependentScopedBeanCanHavePublicField" />
+               <exclude name="testInitializerAnnotatedConstructor" />
+               <exclude name="testInitializerAnnotatedConstructorUsedOverEmptyConstuctor" />
+               <exclude name="testInterfaceNotDiscoveredAsSimpleBean" />
+               <exclude name="testNonStaticInnerClassDeclaredInJavaNotDiscovered" />
+               <exclude name="testSimpleBeanOnlyIfConstructorIsInitializer" />
+               <exclude name="testSimpleBeanOnlyIfConstructorParameterless" />
+               <exclude name="testStaticInnerClassDeclaredInJavaAllowed" />
+               <exclude name="testEmptyConstructorUsed" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.implementation.simple.definition.EnterpriseBeanNotDiscoveredAsManagedBeanTest">
+            <methods>
+               <exclude name="testClassesImplementingEnterpriseBeanInterfaceNotDiscoveredAsSimpleBean" />
             </methods>
          </class>
                   
