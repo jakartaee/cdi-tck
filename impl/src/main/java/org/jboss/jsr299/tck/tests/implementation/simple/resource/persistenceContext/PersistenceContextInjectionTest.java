@@ -55,11 +55,10 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test
    })
    public void testInjectionOfPersistenceContext()
    {
-      Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
-      CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
-      ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
+      ServiceBean serviceBean = getInstanceByType(ServiceBean.class);
+      ManagedBean managedBean = serviceBean.getManagedBean();
       assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
-      assert managedBean.getPersistenceContext().isOpen() : "Persistence context not open injected into bean";
+      assert serviceBean.validateEntityManager();
    }
    
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
@@ -88,7 +87,7 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test
       ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
       managedBean = (ManagedBean) deserialize(serialize(managedBean));
       assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
-      assert managedBean.getPersistenceContext().isOpen() : "Persistence context not open injected into bean";
+      assert managedBean.getPersistenceContext().getDelegate() != null : "Persistence context not deserialized correctly";
    }
    
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })

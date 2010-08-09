@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-class ManagedBean implements Serializable
+public class ManagedBean implements Serializable
 {
    @Inject @Database 
    private EntityManager persistenceContext;
