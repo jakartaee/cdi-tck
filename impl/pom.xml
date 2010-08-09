@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <parent>
       <artifactId>jsr299-tck-parent</artifactId>
       <groupId>org.jboss.jsr299.tck</groupId>
@@ -65,9 +66,13 @@
          <artifactId>jboss-ejb3-api</artifactId>
       </dependency>
 
+      <!--
+         TODO replace with javax.interceptor:interceptor-api:3.1 once
+         the JCP/Sun publish this
+      -->
       <dependency>
-         <groupId>org.jboss.interceptor</groupId>
-         <artifactId>jboss-interceptor-api</artifactId>
+         <groupId>org.jboss.spec.javax.interceptor</groupId>
+         <artifactId>jboss-interceptors-api_1.1_spec</artifactId>
       </dependency>
 
       <dependency>
@@ -300,7 +305,7 @@
 
    </profiles>
 
-   <scm>    
+   <scm>
       <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/impl</connection>
       <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/impl</developerConnection>
       <url>https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/impl</url>
