@@ -60,7 +60,6 @@ public class ProcessBeanObserver implements Extension
    public void observeElephantSessionBean(@Observes ProcessSessionBean<Elephant> event)
    {
       ProcessBeanObserver.elephantProcessSessionBean = event;
-      ProcessBeanObserver.elephantProcessBeanCount++;
    }
    
    public void observeElephantBean(@Observes ProcessBean<Elephant> event)
@@ -73,7 +72,7 @@ public class ProcessBeanObserver implements Extension
       ProcessBeanObserver.cowProcessProducerMethod = event;
    }
    
-   public void observeCowProccesBean(@Observes ProcessBean<Cowshed> event)
+   public void observeCowShedProccesBean(@Observes ProcessBean<Cowshed> event)
    {
       ProcessBeanObserver.cowShedProcessBeanCount++;
    }
@@ -83,7 +82,7 @@ public class ProcessBeanObserver implements Extension
       ProcessBeanObserver.chickenProcessProducerField = event;
    }
    
-   public void observeChickenProccesBean(@Observes ProcessBean<ChickenHutch> event)
+   public void observeChickenHutchProccesBean(@Observes ProcessBean<ChickenHutch> event)
    {
       ProcessBeanObserver.chickenHutchProcessBeanCount++;
    }

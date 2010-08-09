@@ -60,7 +60,7 @@ public class ProcessSessionBeanTest extends AbstractJSR299Test
    public void testProcessSessionBeanEvent()
    {
       assert ProcessBeanObserver.getElephantProcessSessionBean().getBean().getBeanClass().equals(Elephant.class);
-      assert ProcessBeanObserver.getElephantProcessBeanCount() == 2;
+      assert ProcessBeanObserver.getElephantProcessBeanCount() == 0;
       assert ProcessBeanObserver.getElephantProcessSessionBean().getEjbName().equals("Rosie");
       assert ProcessBeanObserver.getElephantProcessSessionBean().getSessionBeanType().equals(SessionBeanType.STATELESS);
       assert ProcessBeanObserver.getElephantProcessSessionBean().getAnnotated() instanceof AnnotatedType<?>;
