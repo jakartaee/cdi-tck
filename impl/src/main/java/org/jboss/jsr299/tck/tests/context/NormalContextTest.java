@@ -100,6 +100,8 @@ public class NormalContextTest extends AbstractJSR299Test
    {
       SimpleBeanA instanceOfA = getInstanceByType(SimpleBeanA.class);
       SimpleBeanB instanceOfB = getInstanceByType(SimpleBeanB.class);
-      assert instanceOfA.getZ() == instanceOfB.getZ();
+      instanceOfA.getZ().setName("Ben");
+      assert instanceOfA.getZ().getName().equals("Ben");
+      assert instanceOfB.getZ().getName().equals("Ben");
    }
 }
