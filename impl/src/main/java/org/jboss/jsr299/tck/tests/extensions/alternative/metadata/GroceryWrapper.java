@@ -146,7 +146,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery>
                   return TransactionPhase.IN_PROGRESS;
                }
 
-               public Reception notifyObserver()
+               public Reception receive()
                {
                   return Reception.ALWAYS;
                }

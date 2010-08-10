@@ -21,7 +21,7 @@ import javax.enterprise.event.Reception;
 
 class AlarmSystem
 {
-   public void onBreakInAttempt(@Observes(notifyObserver = Reception.IF_EXISTS) BreakIn breakIn)
+   public void onBreakInAttempt(@Observes(receive = Reception.IF_EXISTS) BreakIn breakIn)
    {
       assert false;
    }
