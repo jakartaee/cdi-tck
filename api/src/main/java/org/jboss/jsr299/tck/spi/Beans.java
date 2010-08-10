@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.spi;
 
+import java.io.IOException;
+
 /**
  * Provides Bean related operations.
  * 
@@ -41,5 +43,21 @@ public interface Beans
     * @return true if the object is a proxy
     */
    public boolean isProxy(Object instance);
+
+   /**
+    * Serializes the object tree starting with the bean instance provided.
+    *
+    * @param instance The bean instance to serialize
+    * @return the serialized byte array of the bean instance
+    */
+   public byte[] serialize(Object instance) throws IOException;
+
+   /**
+    * Deserializes a bean instance from the given serialized bytes.
+    *
+    * @param bytes The serialized byte stream of a bean instance
+    * @return the serialized byte array of the bean instance
+    */
+   public Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException;
    
 }
