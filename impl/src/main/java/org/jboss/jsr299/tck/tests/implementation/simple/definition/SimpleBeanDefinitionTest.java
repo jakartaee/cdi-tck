@@ -23,10 +23,15 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.Resource;
+import org.jboss.testharness.impl.packaging.Resources;
 import org.testng.annotations.Test;
 
 @Artifact
 @SpecVersion(spec="cdi", version="20091101")
+@Resources({ 
+   @Resource(destination="/WEB-INF/faces-config.xml", source="faces-config.xml")
+})
 public class SimpleBeanDefinitionTest extends AbstractJSR299Test
 {
 
