@@ -16,43 +16,6 @@
       <classes>
          <!-- Issues in the TCK -->
          
-         <!-- CDITCK-165 -->
-         <class name="org.jboss.jsr299.tck.tests.context.NormalContextTest">
-            <methods>
-               <exclude name="testSameNormalScopeBeanInjectedEverywhere" />
-            </methods>
-         </class>
-         
-         <!-- CDITCK-168 -->
-         <class name="org.jboss.jsr299.tck.tests.extensions.processBean.ProcessBeanTest">
-            <methods>
-               <exclude name="testProcessProducerFieldEvent" />
-               <exclude name="testProcessProducerMethodEvent" />
-            </methods>
-         </class>
-         <class name="org.jboss.jsr299.tck.tests.extensions.processBean.ProcessSessionBeanTest">
-            <methods>
-               <exclude name="testProcessSessionBeanEvent" />   
-            </methods>
-         </class>
-         
-         <!-- CDITCK-169 -->
-         <class name="org.jboss.jsr299.tck.tests.implementation.simple.resource.persistenceContext.PersistenceContextInjectionTest">
-            <methods>
-               <exclude name="testInjectionOfPersistenceContext" />
-               <exclude name="testInjectionOfPersistenceUnit" />
-               <exclude name="testPassivationOfPersistenceContext" />
-               <exclude name="testPassivationOfPersistenceUnit" />
-            </methods>
-         </class>
-         
-         <!-- CDITCK-170 -->
-         <class name="org.jboss.jsr299.tck.tests.event.observer.transactional.TransactionalObserversTest">
-            <methods>
-               <exclude name="testObserverCanSetRollbackOnlyOnTransaction" />
-            </methods>
-         </class>
-         
          <!-- Issues in Weld (the RI) -->
 
          <!-- WELD-401 -->
