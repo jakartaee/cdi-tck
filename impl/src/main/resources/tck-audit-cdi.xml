@@ -5010,22 +5010,27 @@ dependencies".</text>
   <section id="10.4.4" title="Transactional observer methods">
     <assertion id="a">
       <text>Transactional observer methods are observer methods which receive event notifications during the before or after completion phase of the transaction in which the event was fired. If no transaction is in progress when the event is fired, they are notified at the same time as other observers</text>
+      <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
     </assertion>
 
     <assertion id="b">
       <text>A before completion observer method is called during the before completion phase of the transaction</text>
+      <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
     </assertion>
 
     <assertion id="c">
       <text>An after completion observer method is called during the after completion phase of the transaction</text>
+      <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
     </assertion>
 
     <assertion id="d">
       <text>An after success observer method is called during the after completion phase of the transaction, only when the transaction completes successfully</text>
+      <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
     </assertion>
 
     <assertion id="e">
       <text>An after failure observer method is called during the after completion phase of the transaction, only when the transaction fails</text>
+      <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
     </assertion>
     
     <assertion id="f" testable="false">
@@ -5049,10 +5054,12 @@ dependencies".</text>
     
     <assertion id="bb">
       <text>If the observer method is a transactional observer method and there is currently a JTA transaction in progress, the container calls the observer method during the appropriate transaction completion phase.  ~Otherwise, the container calls the observer immediately.~</text>
+      <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
     </assertion>
     
     <assertion id="bc">
       <text>If the observer method is a transactional observer method and there is currently a JTA transaction in progress, ~the container calls the observer method during the appropriate transaction completion phase.~  Otherwise, the container calls the observer immediately.</text>
+      <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
     </assertion>
     
     <assertion id="bcb">
@@ -5061,6 +5068,7 @@ dependencies".</text>
     
     <assertion id="bd">
       <text>Any observer method called before completion of a transaction may call |setRollbackOnly()| to force a transaction rollback.</text>
+      <note>Unverifiable since an observer method cannot access the transaction being committed</note>
     </assertion>
     
     <assertion id="bd" testable="false">
