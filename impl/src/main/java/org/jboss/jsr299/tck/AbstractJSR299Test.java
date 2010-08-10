@@ -51,16 +51,12 @@ public abstract class AbstractJSR299Test extends org.jboss.testharness.AbstractT
 
    protected byte[] serialize(Object instance) throws IOException
    {
-      ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-      ObjectOutputStream out = new ObjectOutputStream(bytes);
-      out.writeObject(instance);
-      return bytes.toByteArray();
+      return getCurrentConfiguration().getBeans().serialize(instance);
    }
 
    protected Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException
    {
-      ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bytes));
-      return in.readObject();
+      return getCurrentConfiguration().getBeans().deserialize(bytes);
    }
 
    protected void setContextActive(Context context)
