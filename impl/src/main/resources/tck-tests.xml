@@ -74,6 +74,20 @@
             </methods>
          </class>
          
+         <!-- CDITCK-178 -->
+         <class name="org.jboss.jsr299.tck.tests.decorators.definition.DecoratorDefinitionTest">
+            <methods>
+               <exclude name="testDecoratedTypes" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-179 -->
+         <class name="org.jboss.weld.tests.interceptors.passivation.PassivationActivationTest">
+            <methods>
+               <exclude name="testPassivationAndActivation"/>
+            </methods>
+         </class>
+         
          <!-- Issues in Weld (the RI) -->
 
          <!-- WELD-401 -->
