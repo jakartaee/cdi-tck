@@ -343,6 +343,14 @@
                <exclude name="testPassivationAndActivation"/>
             </methods>
          </class>
+         
+         <!-- CDITCK-180 -->
+         <class name="org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.EnterpriseBeanSpecializationTest">
+            <methods>
+               <exclude name="testSpecializingBeanHasBindingsOfSpecializedAndSpecializingBean" />
+               <exclude name="testSpecializingBeanHasNameOfSpecializedBean" />
+            </methods>
+         </class>
                   
          <!-- Issues in Weld (the RI) -->
 
