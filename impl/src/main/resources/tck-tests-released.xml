@@ -384,6 +384,13 @@
                <exclude name="testEnabledPolicyAvailable" />
             </methods>
          </class>
+         
+         <!-- CDITCK-183 -->
+         <class name="org.jboss.jsr299.tck.tests.context.DestroyedInstanceReturnedByGetTest">
+            <methods>
+               <exclude name="testDestroyedInstanceMustNotBeReturnedByGet" />
+            </methods>
+         </class>
                   
          <!-- Issues in Weld (the RI) -->
 
