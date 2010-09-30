@@ -16,6 +16,20 @@
       <classes>
          <!-- Issues in the TCK -->
          
+         <!-- CDITCK-137 -->
+         <class name="org.jboss.jsr299.tck.tests.decorators.invocation.testChainedDecoratorInvocation.DecoratorInvocationTest">
+            <methods>
+               <exclude name="testChainedDecoratorInvocation" />
+            </methods>
+         </class>
+         
+         <!-- CDITCK-138 -->
+         <class name="org.jboss.jsr299.tck.tests.lookup.injectionpoint.InjectionPointTest">
+            <methods>
+               <exclude name="testIsDelegateMethod" />
+            </methods>
+         </class>
+         
          <!-- CDITCK-174 -->
          <class name="org.jboss.jsr299.tck.tests.extensions.observer.ProcessObserverMethodEventTest">
             <methods>
