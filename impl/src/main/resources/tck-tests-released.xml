@@ -351,13 +351,6 @@
             </methods>
          </class>
          
-         <!-- CDITCK-179 -->
-         <class name="org.jboss.weld.tests.interceptors.passivation.PassivationActivationTest">
-            <methods>
-               <exclude name="testPassivationAndActivation"/>
-            </methods>
-         </class>
-         
          <!-- CDITCK-180 -->
          <class name="org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.EnterpriseBeanSpecializationTest">
             <methods>
