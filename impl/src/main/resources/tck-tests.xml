@@ -129,6 +129,14 @@
             </methods>
          </class>
          
+         <!-- CDITCK-185 -->
+         <class name="org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.EnterpriseBeanSpecializationTest">
+            <methods>
+               <exclude name="testSpecializingBeanHasBindingsOfSpecializedAndSpecializingBean" />
+               <exclude name="testSpecializingBeanHasNameOfSpecializedBean"/>
+            </methods>
+         </class>
+         
          <!-- Issues in Weld (the RI) -->
 
          <!-- WELD-401 -->
