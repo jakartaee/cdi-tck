@@ -17,7 +17,7 @@
          <!-- Issues in the TCK -->
          
          <!-- CDITCK-137 -->
-         <class name="org.jboss.jsr299.tck.tests.decorators.invocation.testChainedDecoratorInvocation.DecoratorInvocationTest">
+         <class name="org.jboss.jsr299.tck.tests.decorators.invocation.DecoratorInvocationTest">
             <methods>
                <exclude name="testChainedDecoratorInvocation" />
             </methods>
