@@ -137,6 +137,51 @@
             </methods>
          </class>
          
+         <!-- CDITCK-184 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.definition.EnterpriseBeanDefinitionTest">
+            <methods>
+               <exclude name="testBeanTypesAreLocalInterfacesWithoutWildcardTypesOrTypeVariablesWithSuperInterfaces" />
+               <exclude name="testRemoteInterfacesAreNotInAPITypes" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.context.passivating.PassivatingContextTest">
+            <methods>
+               <exclude name="testInjectionOfDependentPrimitiveProductIntoNormalBean" />
+               <exclude name="testBeanWithNonSerializableImplementationInjectedIntoTransientFieldOK" />
+               <exclude name="testInjectionOfDependentSerializableProductIntoNormalBean" />
+               <exclude name="testManagedBeanWithSerializableDecoratorOK" />
+               <exclude name="testManagedBeanWithSerializableImplementationClassOK" />
+               <exclude name="testManagedBeanWithSerializableInterceptorClassOK" />
+               <exclude name="testNonSerializableProducerFieldDeclaredPassivatingThrowsIllegalProductException" />
+               <exclude name="testPassivatingScopeProducerMethodReturnsUnserializableObjectNotOk" />
+               <exclude name="testPassivationCapableProducerFieldIsOK" />
+               <exclude name="testPassivationCapableProducerMethodIsOK" />
+               <exclude name="testPassivationOccurs" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.broken.singletonWithRequestScope.SingletonWithRequestScopeTest">
+            <methods>
+               <exclude name="testSingletonWithRequestScopeFails" />
+               <exclude name="testStatelessWithRequestScopeFails" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.broken.singletonWithSessionScope.SingletonWithSessionScopeTest">
+            <methods>
+               <exclude name="testSingletonWithSessionScopeFails" />
+               <exclude name="testStatelessWithSessionScopeFails" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.extendejb.SpecializingBeanExtendsEnterpriseBeanTest">
+            <methods>
+               <exclude name="testSpecializingClassDirectlyExtendsEnterpriseBean" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.broken.directlyExtendsSimpleBean.DirectlyExtendsSimpleBeanTest">
+            <methods>
+               <exclude name="testSpecializingClassDirectlyExtendsSimpleBean" />
+            </methods>
+         </class>
+         
          <!-- Issues in Weld (the RI) -->
 
          <!-- WELD-401 -->
