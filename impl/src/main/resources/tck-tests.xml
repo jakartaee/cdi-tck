@@ -162,12 +162,20 @@
          <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.broken.singletonWithRequestScope.SingletonWithRequestScopeTest">
             <methods>
                <exclude name="testSingletonWithRequestScopeFails" />
-               <exclude name="testStatelessWithRequestScopeFails" />
             </methods>
          </class>
          <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.broken.singletonWithSessionScope.SingletonWithSessionScopeTest">
             <methods>
                <exclude name="testSingletonWithSessionScopeFails" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessWithRequestScope.StatelessWithRequestScopeTest">
+            <methods>
+               <exclude name="testStatelessWithRequestScopeFails" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessWithSessionScope.StatelessWithSessionScopeTest">
+            <methods>
                <exclude name="testStatelessWithSessionScopeFails" />
             </methods>
          </class>
