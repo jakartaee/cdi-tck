@@ -422,7 +422,7 @@
                <exclude name="testStatelessWithRequestScopeFails" />
             </methods>
          </class>
-         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessWithSessionScope.StatelessWithSessionScopeTest">
+         <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessWithApplicationScope.StatelessWithApplicationScopeTest">
             <methods>
                <exclude name="testStatelessWithSessionScopeFails" />
             </methods>
