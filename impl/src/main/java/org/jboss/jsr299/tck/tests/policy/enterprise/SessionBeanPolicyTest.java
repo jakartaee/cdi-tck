@@ -27,7 +27,7 @@ import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 @Artifact
-@Packaging(PackagingType.EAR)
+@Packaging(PackagingType.WAR)
 @IntegrationTest
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
