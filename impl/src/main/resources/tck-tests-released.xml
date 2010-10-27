@@ -445,6 +445,25 @@
                <exclude name="testSpecializingBeanHasNameOfSpecializedBean"/>
             </methods>
          </class>
+         
+         <!-- CDITCK-187 -->
+         <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ContainerEventTest">
+            <methods>
+               <exclude name="testProcessAnnotatedTypeEventFiredForFilter" />
+               <exclude name="testProcessAnnotatedTypeEventFiredForJsfManagedBean" />
+               <exclude name="testProcessAnnotatedTypeEventFiredForServlet" />
+               <exclude name="testProcessAnnotatedTypeEventFiredForServletListener" />
+               <exclude name="testProcessAnnotatedTypeEventFiredForTagHandler" />
+               <exclude name="testProcessAnnotatedTypeEventFiredForTagLibraryListener" />
+               <exclude name="testProcessInjectionTargetEventFiredForFilter" />
+               <exclude name="testProcessInjectionTargetEventFiredForJsfManagedBean" />
+               <exclude name="testProcessInjectionTargetEventFiredForServlet" />
+               <exclude name="testProcessInjectionTargetEventFiredForServletListener" />
+               <exclude name="testProcessInjectionTargetEventFiredForTagHandler" />
+               <exclude name="testProcessInjectionTargetEventFiredForTagLibraryListener" />
+               <exclude name="testTypeOfProcessInjectionTargetParameter" />
+            </methods>
+         </class>
                   
          <!-- Issues in Weld (the RI) -->
 

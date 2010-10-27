@@ -33,7 +33,7 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>JBoss Test Harness Test Runner</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
