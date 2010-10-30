@@ -16,13 +16,6 @@
       <classes>
          <!-- Issues in the TCK -->
          
-         <!-- CDITCK-178 -->
-         <class name="org.jboss.jsr299.tck.tests.decorators.definition.DecoratorDefinitionTest">
-            <methods>
-               <exclude name="testDecoratedTypes" />
-            </methods>
-         </class>
-         
          <!-- CDITCK-180 -->
          <class name="org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.EnterpriseBeanSpecializationTest">
             <methods>
