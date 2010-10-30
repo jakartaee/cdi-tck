@@ -70,14 +70,8 @@ public class DecoratorInvocationTest extends AbstractJSR299Test
       FooImpl.reset();
       getInstanceByType(CowShed.class).washDown();
       assert FooDecorator1.getMessage().equals(CowShed.MESSAGE);
-      assert FooDecorator1.getInjectionPoint().getBean().getBeanClass().equals(CowShed.class);
-      assert !FooDecorator1.getInjectionPoint().isDelegate();
       assert FooDecorator2.getMessage().equals(CowShed.MESSAGE + FooDecorator1.SUFFIX);
-      assert FooDecorator2.getInjectionPoint().getBean().getBeanClass().equals(FooDecorator1.class);
-      assert FooDecorator2.getInjectionPoint().isDelegate();
       assert FooImpl.getMessage().equals(CowShed.MESSAGE + FooDecorator1.SUFFIX + FooDecorator2.SUFFIX);
-      assert FooImpl.getInjectionPoint().getBean().getBeanClass().equals(FooDecorator2.class);
-      assert FooImpl.getInjectionPoint().isDelegate();
       FooDecorator1.reset();
       FooDecorator2.reset();
       FooImpl.reset();

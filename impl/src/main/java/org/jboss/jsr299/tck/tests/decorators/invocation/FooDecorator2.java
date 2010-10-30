@@ -18,7 +18,6 @@ package org.jboss.jsr299.tck.tests.decorators.invocation;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
-import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
 /**
@@ -28,15 +27,6 @@ import javax.inject.Inject;
 @Decorator
 public class FooDecorator2 implements Foo
 {
-   
-   private static InjectionPoint injectionPoint;
-   
-   @Inject InjectionPoint ip;
-   
-   public static InjectionPoint getInjectionPoint()
-   {
-      return injectionPoint;
-   }
    
    public static final String SUFFIX = "fooDecorator2";
    
@@ -56,7 +46,6 @@ public class FooDecorator2 implements Foo
    public static void reset()
    {
       FooDecorator2.message = null;
-      FooDecorator2.injectionPoint = null;
    }
    
    @Inject @Delegate Foo foo;
@@ -65,7 +54,6 @@ public class FooDecorator2 implements Foo
    {
       FooDecorator2.message = message;
       foo.log(message + SUFFIX);
-      injectionPoint = ip;
    }
 
 }
