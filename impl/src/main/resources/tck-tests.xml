@@ -16,13 +16,6 @@
       <classes>
          <!-- Issues in the TCK -->
          
-         <!-- CDITCK-182 -->
-         <class name="org.jboss.jsr299.tck.tests.policy.enterprise.SessionBeanPolicyTest">
-            <methods>
-               <exclude name="testEnabledPolicyAvailable" />
-            </methods>
-         </class>
-         
          <!-- CDITCK-183 -->
          <class name="org.jboss.jsr299.tck.tests.context.DestroyedInstanceReturnedByGetTest">
             <methods>
