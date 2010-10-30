@@ -81,13 +81,6 @@
             </methods>
          </class>
          
-         <!-- CDITCK-177 -->
-         <class name="org.jboss.jsr299.tck.tests.implementation.simple.definition.EnterpriseBeanNotDiscoveredAsManagedBeanTest">
-            <methods>
-               <exclude name="testClassesImplementingEnterpriseBeanInterfaceNotDiscoveredAsSimpleBean" />
-            </methods>
-         </class>
-         
          <!-- CDITCK-178 -->
          <class name="org.jboss.jsr299.tck.tests.decorators.definition.DecoratorDefinitionTest">
             <methods>
