@@ -30,7 +30,7 @@ class AnotherObserver
       wasNotified = true;
    }
    
-   void conditionalObserve(@Observes(receive = Reception.IF_EXISTS) ConditionalEvent e)
+   void conditionalObserve(@Observes(notifyObserver = Reception.IF_EXISTS) ConditionalEvent e)
    {
    }
 }

@@ -31,7 +31,7 @@ class RecluseSpider
    private boolean instanceNotified = false;
    private Web web;
    
-   public void observe(@Observes(receive = Reception.IF_EXISTS) ConditionalEvent someEvent)
+   public void observe(@Observes(notifyObserver = Reception.IF_EXISTS) ConditionalEvent someEvent)
    {
       notified = true;
       instanceNotified = true;

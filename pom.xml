@@ -78,7 +78,8 @@
       <jboss.test.harness.version>1.1.0-CR6</jboss.test.harness.version>
       <testng.version>5.10</testng.version>
       <jsr250.api.version>1.0</jsr250.api.version>
-      <cdi.api.version>1.0-SP2</cdi.api.version>
+      <cdi.api.version>1.0-SP3
+</cdi.api.version>
       <atinject.api.version>1</atinject.api.version>
       <ejb.api.version>3.1.0</ejb.api.version>
       <jsr250.api.version>1.0</jsr250.api.version>
