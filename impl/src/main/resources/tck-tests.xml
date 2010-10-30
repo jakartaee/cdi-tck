@@ -16,13 +16,6 @@
       <classes>
          <!-- Issues in the TCK -->
          
-         <!-- CDITCK-183 -->
-         <class name="org.jboss.jsr299.tck.tests.context.DestroyedInstanceReturnedByGetTest">
-            <methods>
-               <exclude name="testDestroyedInstanceMustNotBeReturnedByGet" />
-            </methods>
-         </class>
-         
          <!-- CDITCK-185 -->
          <class name="org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.EnterpriseBeanSpecializationTest">
             <methods>
