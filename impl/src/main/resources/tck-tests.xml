@@ -16,18 +16,6 @@
       <classes>
          <!-- Issues in the TCK -->
          
-         <!-- CDITCK-181 -->
-         <class name="org.jboss.jsr299.tck.tests.lookup.clientProxy.ClientProxyTest">
-            <methods>
-               <exclude name="testInactiveScope" />
-            </methods>
-         </class>
-         <class name="org.jboss.jsr299.tck.tests.event.EventTest">
-            <methods>
-               <exclude name="testStaticObserverMethodInvoked" />
-            </methods>
-         </class>
-         
          <!-- CDITCK-182 -->
          <class name="org.jboss.jsr299.tck.tests.policy.enterprise.SessionBeanPolicyTest">
             <methods>
