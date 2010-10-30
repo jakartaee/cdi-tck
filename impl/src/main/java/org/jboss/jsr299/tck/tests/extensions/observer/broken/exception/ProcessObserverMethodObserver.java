@@ -22,7 +22,7 @@ import javax.enterprise.inject.spi.ProcessObserverMethod;
 
 class ProcessObserverMethodObserver implements Extension
 {
-   public void observeObserverMethodForEventC(@Observes ProcessObserverMethod<EventC, ?> event)
+   public void observeObserverMethodForEventC(@Observes ProcessObserverMethod<?, EventC> event)
    {
       throw new RuntimeException("Definition error for EventC");
    }
