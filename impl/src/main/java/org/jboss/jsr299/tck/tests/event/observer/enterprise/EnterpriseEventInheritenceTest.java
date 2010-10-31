@@ -16,10 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.enterprise;
 
-import java.util.Set;
-
-import javax.enterprise.inject.spi.ObserverMethod;
-
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -45,9 +41,7 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
    public void testNonStaticObserverMethodInherited() throws Exception
    {
       Egg egg = new Egg();
-      Set<ObserverMethod<? super Egg>> observers = getCurrentManager().resolveObserverMethods(egg);
-
-      observers.iterator().next().notify(egg);
+      getCurrentManager().fireEvent(egg);
       assert typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class);
    }
    
@@ -56,9 +50,7 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
    public void testNonStaticObserverMethodIndirectlyInherited() throws Exception
    {
       StockPrice stockPrice = new StockPrice();
-      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(stockPrice);
-
-      observers.iterator().next().notify(stockPrice);
+      getCurrentManager().fireEvent(stockPrice);
       assert typeSetMatches(stockPrice.getClassesVisited(), StockWatcher.class, IndirectStockWatcher.class, IntermediateStockWatcher.class);
    }
 }

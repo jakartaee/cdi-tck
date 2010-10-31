@@ -17,11 +17,9 @@
 package org.jboss.jsr299.tck.tests.event;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.event.TransactionPhase;
-import javax.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -129,9 +127,7 @@ public class EventTest extends AbstractJSR299Test
    public void testNonStaticObserverMethodInherited()
    {
       Egg egg = new Egg();
-      Set<ObserverMethod<? super Egg>> observers = getCurrentManager().resolveObserverMethods(egg);
-      
-      observers.iterator().next().notify(egg);
+      getCurrentManager().fireEvent(egg);
       assert typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class);
    }
    
@@ -143,9 +139,7 @@ public class EventTest extends AbstractJSR299Test
    public void testNonStaticObserverMethodIndirectlyInherited()
    {
       StockPrice price = new StockPrice();
-      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(price);
-
-      observers.iterator().next().notify(price);
+      getCurrentManager().fireEvent(price);
       assert typeSetMatches(price.getClassesVisited(), StockWatcher.class, IntermediateStockWatcher.class, IndirectStockWatcher.class);
    }
 
