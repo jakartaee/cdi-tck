@@ -21,7 +21,7 @@ import javax.enterprise.context.RequestScoped;
 
 @Singleton
 @RequestScoped
-class Greyhound_Broken
+public class Greyhound_Broken
 {
 
 }

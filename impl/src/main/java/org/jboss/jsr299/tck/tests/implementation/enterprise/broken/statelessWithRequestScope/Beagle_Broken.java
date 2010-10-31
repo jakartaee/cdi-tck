@@ -21,7 +21,7 @@ import javax.enterprise.context.RequestScoped;
 
 @Stateless
 @RequestScoped
-class Beagle_Broken implements BeagleLocal_Broken
+public class Beagle_Broken implements BeagleLocal_Broken
 {
 
 }

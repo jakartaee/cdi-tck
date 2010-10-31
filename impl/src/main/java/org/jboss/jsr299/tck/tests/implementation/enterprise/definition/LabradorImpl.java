@@ -21,6 +21,6 @@ import javax.enterprise.context.Dependent;
 
 @Singleton
 @Dependent
-class LabradorImpl implements Labrador
+public class LabradorImpl implements Labrador
 {
 }

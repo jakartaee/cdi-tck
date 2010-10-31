@@ -21,7 +21,7 @@ import javax.enterprise.context.SessionScoped;
 
 @Stateless
 @SessionScoped
-class Bullmastiff_Broken implements BullmastiffLocal_Broken
+public class Bullmastiff_Broken implements BullmastiffLocal_Broken
 {
 
 }

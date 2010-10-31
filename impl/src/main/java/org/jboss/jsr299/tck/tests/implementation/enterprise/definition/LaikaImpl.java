@@ -22,7 +22,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 @Singleton
 @ApplicationScoped
-class LaikaImpl implements Laika
+public class LaikaImpl implements Laika
 {
 
    @Remove

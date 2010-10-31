@@ -23,7 +23,7 @@ import javax.enterprise.context.SessionScoped;
 
 @Singleton
 @SessionScoped
-class IrishTerrier_Broken implements Serializable
+public class IrishTerrier_Broken implements Serializable
 {
 
 	/**

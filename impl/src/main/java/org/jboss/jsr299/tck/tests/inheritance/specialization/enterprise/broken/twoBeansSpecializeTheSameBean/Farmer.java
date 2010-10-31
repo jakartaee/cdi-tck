@@ -22,7 +22,7 @@ import javax.inject.Named;
 @Landowner
 @Named
 @Stateful
-class Farmer implements FarmerInterface
+public class Farmer implements FarmerInterface
 {
    public String getClassName()
    {

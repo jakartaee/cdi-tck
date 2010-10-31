@@ -21,7 +21,7 @@ import javax.ejb.Stateful;
 
 @Tame
 @Stateful
-class Lion implements LionLocal
+public class Lion implements LionLocal
 {
    
    @Remove
