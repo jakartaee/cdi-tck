@@ -16,16 +16,13 @@
  */
 package org.jboss.jsr299.tck;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -123,7 +120,7 @@ public abstract class AbstractJSR299Test extends org.jboss.testharness.AbstractT
       return typeList.size() == 0;
    }
    
-   public boolean typeSetMatches(Set<Type> types, Type... requiredTypes)
+   public boolean typeSetMatches(Collection<? extends Type> types, Type... requiredTypes)
    {
       List<Type> typeList = Arrays.asList(requiredTypes);
       return types.containsAll(typeList);

@@ -126,17 +126,13 @@ public class EventTest extends AbstractJSR299Test
     */
    @Test(groups = { "events", "inheritance" })
    @SpecAssertion(section = "4.2", id = "dc")
-   public void testNonStaticObserverMethodNotInherited()
+   public void testNonStaticObserverMethodInherited()
    {
       Egg egg = new Egg();
       Set<ObserverMethod<? super Egg>> observers = getCurrentManager().resolveObserverMethods(egg);
-      assert observers.size() == 1;
-
-      // Reception the observer so we can confirm that it
-      // is a method only on Farmer, and not LazyFarmer
+      
       observers.iterator().next().notify(egg);
-      assert egg.getClassesVisited().size() == 1;
-      assert egg.getClassesVisited().iterator().next().equals(Farmer.class);
+      assert typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class);
    }
    
    @Test(groups = { "events", "inheritance" })
@@ -144,18 +140,13 @@ public class EventTest extends AbstractJSR299Test
       @SpecAssertion(section = "4.2", id = "di"),
       @SpecAssertion(section = "11.1.3", id = "f")
    })
-   public void testNonStaticObserverMethodNotIndirectlyInherited()
+   public void testNonStaticObserverMethodIndirectlyInherited()
    {
       StockPrice price = new StockPrice();
       Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(price);
-      assert observers.size() == 1;
 
-      // Reception the observer so we can confirm that it
-      // is a method only on StockWatcher, and not IntermediateStockWatcher
-      // or IndirectStockWatcher
       observers.iterator().next().notify(price);
-      assert price.getClassesVisited().size() == 1;
-      assert price.getClassesVisited().iterator().next().equals(StockWatcher.class);
+      assert typeSetMatches(price.getClassesVisited(), StockWatcher.class, IntermediateStockWatcher.class, IndirectStockWatcher.class);
    }
 
    @Test(groups = { "events" })

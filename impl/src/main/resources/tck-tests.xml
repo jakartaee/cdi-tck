@@ -16,13 +16,6 @@
       <classes>
          <!-- Issues in the TCK -->
          
-         <!-- CDITCK-186 -->
-         <class name="org.jboss.jsr299.tck.tests.event.EventTest">
-            <methods>
-               <exclude name="testNonStaticObserverMethodNotIndirectlyInherited" />
-            </methods>
-         </class>
-         
          <!-- Issues in Weld (the RI) -->
 
          <!-- WELD-401 -->

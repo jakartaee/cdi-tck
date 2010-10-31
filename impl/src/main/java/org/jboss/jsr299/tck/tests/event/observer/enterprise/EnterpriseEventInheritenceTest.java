@@ -42,31 +42,23 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
 {
    @Test(groups = { "events", "inheritance" })
    @SpecAssertion(section = "4.2", id = "df")
-   public void testNonStaticObserverMethodNotInherited() throws Exception
+   public void testNonStaticObserverMethodInherited() throws Exception
    {
       Egg egg = new Egg();
       Set<ObserverMethod<? super Egg>> observers = getCurrentManager().resolveObserverMethods(egg);
-      assert observers.size() == 1;
 
-      // Reception the observer so we can confirm that it
-      // is a method only on Farmer, and not LazyFarmer
       observers.iterator().next().notify(egg);
-      assert egg.getClassesVisited().size() == 1;
-      assert FarmerLocal.class.isAssignableFrom(egg.getClassesVisited().iterator().next());
+      assert typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class);
    }
    
    @Test(groups = { "events", "inheritance" })
    @SpecAssertion(section = "4.2", id = "dl")
-   public void testNonStaticObserverMethodNotIndirectlyInherited() throws Exception
+   public void testNonStaticObserverMethodIndirectlyInherited() throws Exception
    {
       StockPrice stockPrice = new StockPrice();
       Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(stockPrice);
-      assert observers.size() == 1;
 
-      // Reception the observer so we can confirm that it
-      // is a method only on StockWatcher, and not IndirectStockWatcher
       observers.iterator().next().notify(stockPrice);
-      assert stockPrice.getClassesVisited().size() == 1;
-      assert StockWatcherLocal.class.isAssignableFrom(stockPrice.getClassesVisited().iterator().next());
+      assert typeSetMatches(stockPrice.getClassesVisited(), StockWatcher.class, IndirectStockWatcher.class, IntermediateStockWatcher.class);
    }
 }
