@@ -16,6 +16,14 @@
       <classes>
          <!-- Issues in the TCK -->
 
+         <!-- CDITCK-187 -->
+         <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.InjectionIntoNonContextualComponentTest">
+            <methods>
+               <exclude name="testInjectionIntoTagHandler" />
+               <exclude name="testInjectionIntoJSFManagedBean" />
+            </methods>
+         </class>
+
          <!-- CDITCK-190 -->
          <class name="org.jboss.jsr299.tck.tests.event.observer.enterprise.EnterpriseEventInheritenceTest">
             <methods>
@@ -23,7 +31,7 @@
                <exclude name="testNonStaticObserverMethodIndirectlyInherited" />
             </methods>
          </class>
-         
+
          <!-- Issues in Weld (the RI) -->
 
          <!-- WELD-401 -->
