@@ -120,6 +120,13 @@
                <exclude name="testSameNormalScopeBeanInjectedEverywhere" />
             </methods>
          </class>
+         <class name="org.jboss.jsr299.tck.tests.context.ContextTest">
+            <methods>
+               <exclude name="testBuiltInContexts" />
+               <exclude name="testGetContextWithNoRegisteredContextsFails" />
+               <exclude name="testGetContextWithTooManyActiveContextsFails" />
+            </methods>
+         </class>
          
          <!-- CDITCK-150 -->
          <class name="org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary.LibraryInEarTest">
