@@ -23,6 +23,13 @@
                <exclude name="testInjectionIntoJSFManagedBean" />
             </methods>
          </class>
+         
+         <!-- CDITCK-189 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.simple.resource.persistenceContext.PersistenceContextInjectionTest">
+            <methods>
+               <exclude name="testBeanTypesAndBindingTypesOfPersistenceContext" />
+            </methods>
+         </class>
 
          <!-- Issues in Weld (the RI) -->
 
