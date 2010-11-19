@@ -484,14 +484,20 @@
                <exclude name="testProcessInjectionTargetEventFiredForTagLibraryListener" />
                <exclude name="testTypeOfProcessInjectionTargetParameter" />
             </methods>
-         </class>
+         </class> 
          
          <!-- CDITCK-189 -->
          <class name="org.jboss.jsr299.tck.tests.implementation.simple.resource.persistenceContext.PersistenceContextInjectionTest">
             <methods>
                <exclude name="testBeanTypesAndBindingTypesOfPersistenceContext" />
+               <exclude name="testInjectionOfPersistenceContext" />
+               <exclude name="testInjectionOfPersistenceUnit" />
+               <exclude name="testPassivationOfPersistenceContext" />
+               <exclude name="testPassivationOfPersistenceUnit" />
             </methods>
          </class>
+         
+         
                   
          <!-- Issues in Weld (the RI) -->
 
