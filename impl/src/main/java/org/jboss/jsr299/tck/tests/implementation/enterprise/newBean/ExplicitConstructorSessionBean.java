@@ -38,6 +38,8 @@ public class ExplicitConstructorSessionBean implements ExplicitConstructor
       }
    };
    
+   public ExplicitConstructorSessionBean(){}
+   
    @Inject
    public ExplicitConstructorSessionBean(SimpleBean bean)
    {
