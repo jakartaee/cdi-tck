@@ -217,17 +217,4 @@ public class InjectionPointTest extends AbstractJSR299Test
       assert !ip1.isTransient();
       assert ip2.isTransient();
    }
-
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id="dba")
-   public void testIsDelegate()
-   {
-      assert !getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata().isDelegate();
-
-      Cat cat = getInstanceByType(Cattery.class).getCat();
-      assert cat.hello().equals("hello world!");
-      assert cat.getBeanManager() != null;
-      assert cat.getInjectionPoint() != null;
-      assert cat.getInjectionPoint().isDelegate();
-   }
 }
