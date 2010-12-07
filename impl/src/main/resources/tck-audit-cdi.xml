@@ -1851,133 +1851,193 @@ detects the problem and treats it as a definition error.</text>
 
   </section>
 
-  <section id="4.2" title="Inheritance of member-level metadata">
+  <section id="4.2" title="Inheritance of member-level metadata">  
+  
+    <group>
+      <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean or session bean Y. If X declares an injected field x then Y inherits x.</text>
+	    
+      <assertion id="aa">
+        <text>Check managed bean X _directly_ extends managed bean Y</text>
+      </assertion>
 
-    <assertion id="aa">
-      <text>For class X which is extended _directly_ by the bean class of a _managed_ bean Y, if X declares an injected field x then Y inherits x.</text>
-    </assertion>
+      <assertion id="ac">
+        <text>Check managed bean X _indirectly_ extends managed bean Y</text>
+      </assertion>
+	
+      <assertion id="ab">
+        <text>Check session bean X _directly_ extends session bean Y</text>
+      </assertion>
 
-    <assertion id="ab">
-      <text>For class X which is extended _directly_ by the bean class of a _session_ bean Y, if X declares an injected field x then Y inherits x.</text>
-    </assertion>
+      <assertion id="ad">
+        <text>Check session bean X _indirectly_ extends session bean Y</text>
+      </assertion>
+  	</group>
 
-    <assertion id="ac">
-      <text>For class X which is extended _indirectly_ by the bean class of a _managed_ bean Y, if X declares an injected field x then Y inherits x.</text>
-    </assertion>
+	<group>
+      <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean or session bean Y. If X declares an initializer, non-static observer, @PostConstruct or @PreDestroy method x() then Y inherits x() if and only if neither Y nor any intermediate class that is a subclass of X and a superclass of Y overrides the method x().</text>
+	    
+      <assertion id="baa">
+        <text>Check managed bean X _directly_ extends managed bean Y with _|@PostConstruct|_</text>
+      </assertion>
+	
+      <assertion id="bab">
+        <text>Check session bean X _directly_ extends session bean Y with _|@PostConstruct|_</text>
+      </assertion>
 
-    <assertion id="ad">
-      <text>For class X which is extended _indirectly_ by the bean class of a _session_ bean Y, if X declares an injected field x then Y inherits x.</text>
-    </assertion>
+      <assertion id="bac">
+        <text>Check managed bean X _indirectly_ extends managed bean Y with _|@PostConstruct|_</text>
+      </assertion>
+	
+      <assertion id="bad">
+        <text>Check session bean X _indirectly_ extends session bean Y with _|@PostConstruct|_</text>
+      </assertion>
+	
+      <assertion id="bba">
+        <text>Check managed bean X _directly_ extends managed bean Y with _|@PostDestroy|_</text>
+      </assertion>
 
-    <assertion id="baa">
-      <text>For class X which is extended _directly_ by the bean class of a _managed_ bean Y, if X declares a _|@PostConstruct|_ method x() then Y inherits x() if and only if Y does not override the method x()</text>
-    </assertion>
+      <assertion id="bbb">
+        <text>Check session bean X _directly_ extends session bean Y with _|@PostDestroy|_</text>
+      </assertion>
+	
+      <assertion id="bbc">
+        <text>Check managed bean X _indirectly_ extends managed bean Y with _|@PostDestroy|_</text>
+      </assertion>
 
-    <assertion id="bab">
-      <text>For class X which is extended _directly_ by the bean class of a _session_ bean Y, if X declares a _|@PostConstruct|_ method x() then Y inherits x() if and only if Y does not override the method x()</text>
-    </assertion>
+      <assertion id="bbd">
+        <text>Check session bean X _indirectly_ extends session bean Y with _|@PostDestroy|_</text>
+      </assertion>
+    
+      <assertion id="dc">
+   	    <text>Check managed bean X _directly_ extends managed bean Y with a _non-static observer method_</text>
+      </assertion>
 
-    <assertion id="bac">
-      <text>For class X which is extended _indirectly_ by the bean class of a _managed_ bean Y, if X declares a _|@PostConstruct|_ method x() then Y inherits x() if and only if neither Y nor any intermediate class that is a subclass of X and a superclass of Y overrides the method x()</text>
-    </assertion>
+      <assertion id="df">
+        <text>Check session bean X _directly_ extends session bean Y with a _non-static observer method_</text>
+      </assertion>
+    	
+      <assertion id="di">
+        <text>Check managed bean X _indirectly_ extends managed bean Y with a _non-static observer method_</text>
+      </assertion>
+      
+      <assertion id="dl">
+        <text>Check session bean X _indirectly_ extends session bean Y with a _non-static observer method_</text>
+      </assertion>
+      
+      <assertion id="dm">
+        <text>Check managed bean X _directly_ extends managed bean Y with a _initializer method_</text>
+      </assertion>
 
-    <assertion id="bad">
-      <text>For class X which is extended _indirectly_ by the bean class of a _session_ bean Y, if X declares a _|@PostConstruct|_ method x() then Y inherits x() if and only if neither Y nor any intermediate class that is a subclass of X and a superclass of Y overrides the method x()</text>
-    </assertion>
+      <assertion id="dn">
+        <text>Check session bean X _directly_ extends session bean Y with a _initializer method_</text>
+      </assertion>
+      
+      <assertion id="do">
+        <text>Check managed bean X _indirectly_ extends managed bean Y with a _initializer method_</text>
+      </assertion>
+      
+      <assertion id="dp">
+        <text>Check session bean X _indirectly_ extends session bean Y with a _initializer method_</text>
+      </assertion>
+    
+    </group>
+    
+    <group>
+      <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean or session bean Y. If X declares a non-static method x() annotated with an interceptor binding type Z then Y inherits the binding if and only if neither Y nor any intermediate class that is a subclass of X and a superclass of Y overrides the method x().</text>
+      
+      <assertion id="ka">
+   	    <text>Check managed bean X _directly_ extends managed bean Y</text>
+      </assertion>
 
-    <assertion id="bba">
-      <text>For class X which is extended _directly_ by the bean class of a _managed_ bean Y, if X declares a _|@PreDestroy|_ method x() then Y inherits x() if and only if Y does not override the method x()</text>
-    </assertion>
+      <assertion id="kb">
+        <text>Check session bean X _directly_ extends session bean Y</text>
+      </assertion>
+    	
+      <assertion id="kc">
+        <text>Check managed bean X _indirectly_ extends managed bean Y</text>
+      </assertion>
+      
+      <assertion id="kd">
+        <text>Check session bean X _indirectly_ extends session bean Y</text>
+      </assertion>
+    </group>
+    
+    <group>
+      <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean or session bean Y .If X declares a non-static producer or disposer method x() then Y does not inherit this method.</text>
+      
+      <assertion id="da">
+        <text>Check managed bean X _directly_ extends managed bean Y with a _non-static producer method_</text>
+      </assertion>
 
-    <assertion id="bbb">
-      <text>For class X which is extended _directly_ by the bean class of a _session_ bean Y, if X declares a _|@PreDestroy|_ method x() then Y inherits x() if and only if Y does not override the method x()</text>
-    </assertion>
+      <assertion id="db">
+        <text>Check managed bean X _directly_ extends managed bean Y with a _non-static disposer method_</text>
+      </assertion>
 
-    <assertion id="bbc">
-      <text>For class X which is extended _indirectly_ by the bean class of a _managed_ bean Y, if X declares a _|@PreDestroy|_ method x() then Y inherits x() if and only if neither Y nor any intermediate class that is a subclass of X and a superclass of Y overrides the method x()</text>
-    </assertion>
+      <assertion id="dd">
+        <text>Check session bean X _directly_ extends session bean Y with a _non-static producer method_</text>
+      </assertion>
 
-    <assertion id="bbd">
-      <text>For class X which is extended _indirectly_ by the bean class of a _session_ bean Y, if X declares a _|@PreDestroy|_ method x() then Y inherits x() if and only if neither Y nor any intermediate class that is a subclass of X and a superclass of Y overrides the method x()</text>
-    </assertion>
+      <assertion id="de">
+        <text>Check session bean X _directly_ extends session bean Y with a _non-static disposer method_</text>
+      </assertion>
 
-    <assertion id="da">
-      <text>For class X which is extended _directly_ by the bean class of a _managed_ bean Y, if X declares a _non-static producer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
+      <assertion id="dg">
+        <text>Check managed bean X _indirectly_ extends managed bean Y with a _non-static producer method_</text>
+      </assertion>
 
-    <assertion id="db">
-      <text>For class X which is extended _directly_ by the bean class of a _managed_ bean Y, if X declares a _non-static disposer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
+      <assertion id="dh">
+        <text>Check managed bean X _indirectly_ extends managed bean Y with a _non-static disposer method_</text>
+      </assertion>
 
-    <assertion id="dc">
-      <text>For class X which is extended _directly_ by the bean class of a _managed_ bean Y, if X declares a _non-static observer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
+      <assertion id="dj">
+        <text>Check session bean X _indirectly_ extends session bean Y with a _non-static producer method_</text>
+      </assertion>
 
-    <assertion id="dd">
-      <text>For class X which is extended _directly_ by the bean class of a _session_ bean Y, if X declares a _non-static producer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
+      <assertion id="dk">
+        <text>Check session bean X _indirectly_ extends session bean Y with a _non-static disposer method_</text>
+      </assertion>
+      
+    </group>
+    
+    <group>
+      <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean or session bean Y. If X declares a non-static producer field x then Y does not inherit this field.</text>
+      
+      <assertion id="ea">
+   	    <text>Check managed bean X _directly_ extends managed bean Y</text>
+        <note>We don't test session beans, as they can't have non-static producer fields</note>
+      </assertion>
 
-    <assertion id="de">
-      <text>For class X which is extended _directly_ by the bean class of a _session_ bean Y, if X declares a _non-static disposer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
+      <assertion id="ec">
+   	    <text>Check managed bean X _indirectly_ extends managed bean Y</text>
+        <note>We don't test session beans, as they can't have non-static producer fields</note>
+      </assertion>
+      
+    </group>
+    
+    <group>
+      <text>If X is a generic type, and an injection point, producer method, producer field, disposer method or observer method declared by X is inherited by Y, and the declared type of the injection point, producer method, producer field, disposed para- meter or event parameter contains type variables declared by X, the type of the injection point, producer method, producer field, disposed parameter or event parameter inherited in Y is the declared type, after substitution of actual type arguments declared by Y or any intermediate class that is a subclass of X and a superclass of Y.</text>
+      
+      <assertion id="f">
+        <text>Check injection point</text>
+      </assertion>
 
-    <assertion id="df">
-      <text>For class X which is extended _directly_ by the bean class of a _session_ bean Y, if X declares a _non-static observer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
+      <assertion id="g">
+        <text>Check producer method</text>
+      </assertion>
 
-    <assertion id="dg">
-      <text>For class X which is extended _indirectly_ by the bean class of a _managed_ bean Y, if X declares a _non-static producer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
+      <assertion id="h">
+        <text>Check producer field</text>
+      </assertion>
 
-    <assertion id="dh">
-      <text>For class X which is extended _indirectly_ by the bean class of a _managed_ bean Y, if X declares a _non-static disposer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
+      <assertion id="i">
+        <text>Check disposer method</text>
+      </assertion>
 
-    <assertion id="di">
-      <text>For class X which is extended _indirectly_ by the bean class of a _managed_ bean Y, if X declares a _non-static observer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
+      <assertion id="j">
+        <text>check observer method</text>
+      </assertion>
+    </group>
 
-    <assertion id="dj">
-      <text>For class X which is extended _indirectly_ by the bean class of a _session_ bean Y, if X declares a _non-static producer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
-
-    <assertion id="dk">
-      <text>For class X which is extended _indirectly_ by the bean class of a _session_ bean Y, if X declares a _non-static disposer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
-
-    <assertion id="dl">
-      <text>For class X which is extended _indirectly_ by the bean class of a _session_ bean Y, if X declares a _non-static observer method_ x() then Y does not inherit this method unless Y is explicitly declared to specialize X</text>
-    </assertion>
-
-    <assertion id="ea">
-      <text>For class X which is extended _directly_ by the bean class of a _managed_ bean Y, if X declares a _non-static producer field_ x then Y does not inherit this field unless Y is explicitly declared to specialize X.</text>
-      <note>We don't test session beans, as they can't have non-static producer fields</note>
-    </assertion>
-
-    <assertion id="ec">
-      <text>For class X which is extended _indirectly_ by the bean class of a _managed_ bean Y, if X declares a _non-static producer field_ x then Y does not inherit this field unless Y is explicitly declared to specialize X.</text>
-      <note>We don't test session beans, as they can't have non-static producer fields</note>
-    </assertion>
-
-    <assertion id="f">
-      <text>If X is a generic type, and an injection point declared by X is inherited by Y, and the declared type of the injection point contains type variables declared by X, the type of the injection point inherited in Y is the declared type, after substitution of actual type arguments declared by Y or any intermediate class that is a subclass of X and a superclass of Y.</text>
-    </assertion>
-
-    <assertion id="g">
-      <text>If X is a generic type, and a producer method declared by X is inherited by Y, and the declared type of the producer method contains type variables declared by X, the type of the producer method inherited in Y is the declared type, after substitution of actual type arguments declared by Y or any intermediate class that is a subclass of X and a superclass of Y.</text>
-    </assertion>
-
-    <assertion id="h">
-      <text>If X is a generic type, and a producer field declared by X is inherited by Y, and the declared type of the producer field contains type variables declared by X, the type of the producer field inherited in Y is the declared type, after substitution of actual type arguments declared by Y or any intermediate class that is a subclass of X and a superclass of Y.</text>
-    </assertion>
-
-    <assertion id="i">
-      <text>If X is a generic type, and a disposer method declared by X is inherited by Y, and the declared type of the disposed parameter contains type variables declared by X, the type of the disposed parameter inherited in Y is the declared type, after substitution of actual type arguments declared by Y or any intermediate class that is a subclass of X and a superclass of Y.</text>
-    </assertion>
-
-    <assertion id="j">
-      <text>If X is a generic type, and an observer method declared by X is inherited by Y, and the declared type of the event parameter contains type variables declared by X, the type of the event parameter inherited in Y is the declared type, after substitution of actual type arguments declared by Y or any intermediate class that is a subclass of X and a superclass of Y.</text>
-    </assertion>
   </section>
 
   <section id="4.3" title="Specialization">
