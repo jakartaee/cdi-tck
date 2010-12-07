@@ -30,6 +30,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
 import org.jboss.testharness.impl.packaging.Packaging;
 import org.jboss.testharness.impl.packaging.PackagingType;
+import org.jboss.testharness.impl.packaging.ear.EjbJarXml;
 import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
@@ -37,6 +38,7 @@ import org.testng.annotations.Test;
 @Packaging(PackagingType.EAR)
 @BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
+@EjbJarXml("ejb-jar.xml")
 public class EnterpriseBeanSpecializationTest extends AbstractJSR299Test
 {
    
