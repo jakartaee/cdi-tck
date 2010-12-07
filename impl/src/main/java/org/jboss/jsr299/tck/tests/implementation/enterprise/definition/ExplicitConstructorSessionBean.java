@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.definition;
 
+import javax.ejb.Singleton;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.New;
 import javax.inject.Inject;
@@ -37,6 +38,8 @@ public class ExplicitConstructorSessionBean implements ExplicitConstructor
          return ExplicitConstructorSessionBean.class;
       }
    };
+   
+   public ExplicitConstructorSessionBean() {}
    
    @Inject
    public ExplicitConstructorSessionBean(SimpleBean bean)
