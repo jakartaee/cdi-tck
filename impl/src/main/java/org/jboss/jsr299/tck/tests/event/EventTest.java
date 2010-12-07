@@ -55,7 +55,7 @@ public class EventTest extends AbstractJSR299Test
 
    /**
     * FIXME the spec doesn't follow this exactly because technically it isn't supposed to use
-    * the bean resolution alorithm to obtain the instance, which it does.
+    * the bean resolution algorithm to obtain the instance, which it does.
     */
    @Test(groups = { "events" })
    @SpecAssertions({
