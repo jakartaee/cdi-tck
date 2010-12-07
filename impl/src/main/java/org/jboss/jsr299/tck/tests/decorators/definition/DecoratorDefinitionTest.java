@@ -83,11 +83,11 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test
    {
       List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(FooBar.TYPES);
       assert decorators.size() == 1;
-      assert decorators.get(0).getDecoratedTypes().size() == 3;
+      assert decorators.get(0).getDecoratedTypes().size() == 4;
       assert decorators.get(0).getDecoratedTypes().contains(Foo.class);
       assert decorators.get(0).getDecoratedTypes().contains(Bar.class);
       assert decorators.get(0).getDecoratedTypes().contains(Baz.class);
-      assert !decorators.get(0).getDecoratedTypes().contains(Boo.class);
+      assert decorators.get(0).getDecoratedTypes().contains(Boo.class);
       assert !decorators.get(0).getDecoratedTypes().contains(Serializable.class);
       assert !decorators.get(0).getDecoratedTypes().contains(FooDecorator.class);
       assert !decorators.get(0).getDecoratedTypes().contains(AbstractFooDecorator.class);
