@@ -16,8 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
 
 /**
  * @author pmuir
@@ -25,23 +23,6 @@ import javax.inject.Inject;
  */
 public class FooImpl implements Foo
 {
-   
-   private static InjectionPoint injectionPoint;
-   
-   public FooImpl()
-   {
-   }
-   
-   @Inject
-   public FooImpl(InjectionPoint injectionPoint)
-   {
-      FooImpl.injectionPoint = injectionPoint;
-   }
-   
-   public static InjectionPoint getInjectionPoint()
-   {
-      return injectionPoint;
-   }
    
    private static String message;
    
@@ -59,7 +40,6 @@ public class FooImpl implements Foo
    public static void reset()
    {
       FooImpl.message = null;
-      FooImpl.injectionPoint = null;
    }
    
    public void log(String message)
