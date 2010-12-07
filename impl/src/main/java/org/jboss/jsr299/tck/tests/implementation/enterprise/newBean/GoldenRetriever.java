@@ -23,7 +23,7 @@ import javax.enterprise.event.Observes;
 
 @Stateful
 @RequestScoped
-class GoldenRetriever implements GoldenRetrieverLocal
+public class GoldenRetriever implements GoldenRetrieverLocal
 {
    @Remove
    public void bye(Object something) {

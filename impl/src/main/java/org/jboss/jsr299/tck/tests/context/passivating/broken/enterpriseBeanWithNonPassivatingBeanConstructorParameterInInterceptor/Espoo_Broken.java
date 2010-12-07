@@ -23,7 +23,7 @@ import javax.enterprise.context.SessionScoped;
 @Stateful
 @SessionScoped
 @CityBinding
-class Espoo_Broken implements EspooLocal_Broken
+public class Espoo_Broken implements EspooLocal_Broken
 {  
    @Remove
    public void bye() {

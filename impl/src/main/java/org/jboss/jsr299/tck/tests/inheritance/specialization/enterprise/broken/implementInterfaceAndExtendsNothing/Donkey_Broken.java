@@ -21,7 +21,7 @@ import javax.enterprise.inject.Specializes;
 
 @Specializes
 @Stateful
-class Donkey_Broken implements Animal
+public class Donkey_Broken implements Animal
 {
 
 }

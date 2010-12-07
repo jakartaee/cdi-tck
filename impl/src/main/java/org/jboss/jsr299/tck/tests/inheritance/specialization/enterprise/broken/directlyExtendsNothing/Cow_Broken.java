@@ -21,7 +21,7 @@ import javax.enterprise.inject.Specializes;
 
 @Specializes
 @Stateful
-class Cow_Broken implements CowLocal_Broken
+public class Cow_Broken implements CowLocal_Broken
 {
 
 }

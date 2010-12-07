@@ -21,7 +21,7 @@ import javax.enterprise.inject.Alternative;
 
 @Stateless
 @Alternative
-class NotEnabledEjb implements DisabledEjbInterface
+public class NotEnabledEjb implements DisabledEjbInterface
 {
    public String hello() {
       return "Hi!";

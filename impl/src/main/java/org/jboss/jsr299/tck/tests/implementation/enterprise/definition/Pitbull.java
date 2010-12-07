@@ -25,7 +25,7 @@ import javax.inject.Named;
 @Stateful
 @ApplicationScoped
 @Named @Default
-class Pitbull extends Dog implements PitbullLocal, DogLocal, DogRemote
+public class Pitbull extends Dog implements PitbullLocal, DogLocal, DogRemote
 {
    
    public static boolean destructorCalled = false;

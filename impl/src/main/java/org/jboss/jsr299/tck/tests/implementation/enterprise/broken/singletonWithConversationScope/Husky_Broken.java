@@ -22,7 +22,7 @@ import javax.enterprise.context.ConversationScoped;
 
 @Singleton
 @ConversationScoped
-class Husky_Broken
+public class Husky_Broken
 {
 
 }

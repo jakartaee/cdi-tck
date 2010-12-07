@@ -20,7 +20,7 @@ import javax.ejb.Stateless;
 
 @Stateless
 @Skinny
-class SkinnyHairlessCat extends HairlessCat implements SkinnyHairlessCatLocal
+public class SkinnyHairlessCat extends HairlessCat implements SkinnyHairlessCatLocal
 {
 
 }

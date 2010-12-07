@@ -22,7 +22,7 @@ import javax.inject.Named;
 
 @Stateless
 @Named("Monkey") @Default
-class Monkey implements MonkeyLocal
+public class Monkey implements MonkeyLocal
 {
 
 }

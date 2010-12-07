@@ -21,7 +21,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 @Stateless
 @ApplicationScoped
-class Dachshund_Broken implements DachshundLocal_Broken
+public class Dachshund_Broken implements DachshundLocal_Broken
 {
 
 }

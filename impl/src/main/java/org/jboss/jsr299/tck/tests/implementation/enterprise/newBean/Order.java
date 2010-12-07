@@ -20,7 +20,7 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 
 @Stateful
-class Order implements OrderLocal
+public class Order implements OrderLocal
 {
    
    @Remove

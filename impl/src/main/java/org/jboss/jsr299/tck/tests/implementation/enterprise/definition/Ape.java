@@ -20,7 +20,7 @@ import javax.ejb.Stateless;
 
 @Stateless
 @Tame
-class Ape implements ApeLocal
+public class Ape implements ApeLocal
 {
 
 }

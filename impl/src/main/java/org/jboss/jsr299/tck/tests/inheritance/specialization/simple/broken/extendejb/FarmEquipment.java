@@ -22,7 +22,7 @@ import javax.inject.Named;
 
 @Named("plough")
 @Stateful
-class FarmEquipment implements FarmEquipmentLocal
+public class FarmEquipment implements FarmEquipmentLocal
 {
 
 }

@@ -21,7 +21,7 @@ import javax.enterprise.context.ConversationScoped;
 
 @Stateless
 @ConversationScoped
-class Boxer_Broken implements BoxerLocal_Broken
+public class Boxer_Broken implements BoxerLocal_Broken
 {
 
 }

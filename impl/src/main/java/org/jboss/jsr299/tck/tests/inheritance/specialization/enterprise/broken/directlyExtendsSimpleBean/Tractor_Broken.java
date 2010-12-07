@@ -21,7 +21,7 @@ import javax.enterprise.inject.Specializes;
 
 @Specializes
 @Stateful
-class Tractor_Broken extends FarmEquipment implements TractorLocal
+public class Tractor_Broken extends FarmEquipment implements TractorLocal
 {
 
 }
