@@ -19,6 +19,7 @@ package org.jboss.jsr299.tck.tests.event;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.enterprise.context.spi.Context;
 import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.spi.ObserverMethod;
 
@@ -64,9 +65,10 @@ public class EventTest extends AbstractJSR299Test
    })
    public void testStaticObserverMethodInvoked()
    {
+      Context requestContext = getCurrentConfiguration().getContexts().getRequestContext();
       try
       {
-         getCurrentConfiguration().getContexts().setInactive(getCurrentConfiguration().getContexts().getRequestContext());
+         getCurrentConfiguration().getContexts().setInactive(requestContext);
          StaticObserver.reset();
          getCurrentManager().fireEvent(new Delivery());
          assert StaticObserver.isDeliveryReceived();
@@ -74,7 +76,7 @@ public class EventTest extends AbstractJSR299Test
       }
       finally
       {
-         getCurrentConfiguration().getContexts().setActive(getCurrentConfiguration().getContexts().getRequestContext());
+         getCurrentConfiguration().getContexts().setActive(requestContext);
       }
    }
 

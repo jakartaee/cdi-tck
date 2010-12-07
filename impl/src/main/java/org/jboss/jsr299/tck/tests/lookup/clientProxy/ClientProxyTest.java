@@ -19,8 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy;
 import java.io.IOException;
 
 import javax.enterprise.context.ContextNotActiveException;
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.context.spi.Context;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -70,7 +69,8 @@ public class ClientProxyTest extends AbstractJSR299Test
    public void testInactiveScope() throws Exception
    {
       assert getCurrentConfiguration().getContexts().getRequestContext().isActive();
-      setContextInactive(getCurrentConfiguration().getContexts().getRequestContext());
+      Context ctx = getCurrentConfiguration().getContexts().getRequestContext();
+      setContextInactive(ctx);
       assert !getCurrentConfiguration().getContexts().getRequestContext().isActive();
       try
       {
@@ -79,7 +79,7 @@ public class ClientProxyTest extends AbstractJSR299Test
       finally
       {
          // need to set request scope active again, some other tests will fail otherwise
-         setContextActive(getCurrentConfiguration().getContexts().getRequestContext());
+         setContextActive(ctx);
       }
    }
 }
