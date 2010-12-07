@@ -206,7 +206,7 @@
       </para>
       <para>
          The
-         <literal>tck-tests.xml</literal>
+         <literal>artifacts/jsr299-tck-impl-suite.xml</literal>
          artifact provided in the TCK distribution must be run by TestNG 5.9
          (described by the TestNG documentation as "with a
          <literal>testng.xml</literal>
