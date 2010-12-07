@@ -18,6 +18,7 @@ package org.jboss.jsr299.tck.tests.context;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
@@ -44,10 +45,11 @@ public class DestroyedInstanceReturnedByGetTest extends AbstractJSR299Test
       CreationalContext<MySessionBean> sessionCreationalContext = getCurrentManager().createCreationalContext(mySessionBean);
       MySessionBean beanInstance = mySessionBean.create(sessionCreationalContext);
       assert beanInstance != null;
-      destroyContext(getCurrentManager().getContext(SessionScoped.class));
-      setContextActive(getCurrentManager().getContext(SessionScoped.class));
+      Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
+      destroyContext(sessionContext);
+      setContextActive(sessionContext);
       
-      beanInstance = getCurrentManager().getContext(SessionScoped.class).get(mySessionBean);
+      beanInstance = sessionContext.get(mySessionBean);
       assert beanInstance == null;
       
       Bean<MyApplicationBean> myApplicationBean = getBeans(MyApplicationBean.class).iterator().next();
@@ -55,10 +57,11 @@ public class DestroyedInstanceReturnedByGetTest extends AbstractJSR299Test
 
       MyApplicationBean myApplicationBeanInstance = myApplicationBean.create(applicationCreationalContext);
       assert myApplicationBeanInstance != null;
-      destroyContext(getCurrentManager().getContext(ApplicationScoped.class));
-      setContextActive(getCurrentManager().getContext(ApplicationScoped.class));
+      Context applicationContext = getCurrentManager().getContext(ApplicationScoped.class); 
+      destroyContext(applicationContext);
+      setContextActive(applicationContext);
 
-      myApplicationBeanInstance = getCurrentManager().getContext(ApplicationScoped.class).get(myApplicationBean);
+      myApplicationBeanInstance = applicationContext.get(myApplicationBean);
       assert myApplicationBeanInstance == null;
    }
    
