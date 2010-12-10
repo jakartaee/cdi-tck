@@ -27,6 +27,7 @@ import org.jboss.testharness.impl.packaging.Resources;
 import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSpan;
@@ -324,15 +325,12 @@ public class ClientConversationContextTest extends AbstractConversationTest
       assert page.getBody().getTextContent().contains("Cumulus congestus");
    }
    
-   @Test(groups = { "contexts" })
+   @Test(groups = { "contexts" }, expectedExceptions=FailingHttpStatusCodeException.class)
    @SpecAssertion(section = "6.7.4", id = "tb")
    public void testNonexistentConversationExceptionThrown() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("cumulus.jsf?cid=foo"));
-      
-      assert page.getBody().getTextContent().contains("NonexistentConversationException thrown properly");
-      assert page.getBody().getTextContent().contains("Conversation.isTransient: true");
+      client.getPage(getPath("cumulus.jsf", "foo"));
    }
    
    @Test
