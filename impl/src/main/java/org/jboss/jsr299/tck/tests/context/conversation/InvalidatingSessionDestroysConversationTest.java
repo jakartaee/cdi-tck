@@ -51,7 +51,7 @@ public class InvalidatingSessionDestroysConversationTest extends AbstractConvers
    {
       WebClient webClient = new WebClient();
       resetCloud(webClient);
-      webClient.getPage(getPath("/clouds.jsf"));
+      webClient.getPage(getPath("clouds.jsf"));
       assert !isCloudDestroyed(webClient);
       invalidateSession(webClient);
       assert isCloudDestroyed(webClient);

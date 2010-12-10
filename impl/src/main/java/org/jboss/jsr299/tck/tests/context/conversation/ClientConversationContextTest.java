@@ -63,13 +63,13 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testConversationIdSetByContainerIsUnique() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage storm = client.getPage(getPath("/storm.jsf"));
+      HtmlPage storm = client.getPage(getPath("storm.jsf"));
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
       storm = beginConversationButton.click();
       
       String c1 = getCid(storm);
       
-      storm = client.getPage(getPath("/storm.jsf"));
+      storm = client.getPage(getPath("storm.jsf"));
       beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
       storm = beginConversationButton.click();
       
@@ -85,7 +85,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    {
       WebClient client = new WebClient();
       resetCloud(client);
-      HtmlPage page = client.getPage(getPath("/cloud.jsf"));
+      HtmlPage page = client.getPage(getPath("cloud.jsf"));
       assert !isLongRunning(page);
       assert isCloudDestroyed(client);
    }
@@ -95,13 +95,13 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testLongRunningConversationInstancesNotDestroyedAtRequestEnd() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage storm = client.getPage(getPath("/storm.jsf"));
+      HtmlPage storm = client.getPage(getPath("storm.jsf"));
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
       storm = beginConversationButton.click();
       
       resetCloud(client);
       
-      client.getPage(getPath("/cloud.jsf", getCid(storm)));
+      client.getPage(getPath("cloud.jsf", getCid(storm)));
       assert !isCloudDestroyed(client);
    }
    
@@ -112,7 +112,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
       WebClient client = new WebClient();
       client.setThrowExceptionOnFailingStatusCode(false);
       // Load the page
-      HtmlPage rain = client.getPage(getPath("/rain.jsf"));
+      HtmlPage rain = client.getPage(getPath("rain.jsf"));
       
       // begin a conversation
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(rain, HtmlSubmitInput.class, "beginConversationButton");
@@ -124,14 +124,14 @@ public class ClientConversationContextTest extends AbstractConversationTest
       rain = rainButton.click();
       
       // Re-request the page, inside the conversation and check it has rained
-      rain = client.getPage(getPath("/rain.jsf", cid));
+      rain = client.getPage(getPath("rain.jsf", cid));
       assert hasRained(rain);
       
       // Invalidate the session, invalidate the conversation-scoped cloud
       invalidateSession(client);
       
       // Re-request the page, check it hasn't rained
-      rain = client.getPage(getPath("/rain.jsf", cid));
+      rain = client.getPage(getPath("rain.jsf", cid));
       assert !hasRained(rain);
    }
    
@@ -142,7 +142,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
       WebClient client = new WebClient();
       
       // Load the page
-      HtmlPage rain = client.getPage(getPath("/rain.jsf"));
+      HtmlPage rain = client.getPage(getPath("rain.jsf"));
       
       // begin a conversation
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(rain, HtmlSubmitInput.class, "beginConversationButton");
@@ -154,13 +154,13 @@ public class ClientConversationContextTest extends AbstractConversationTest
       rain = rainButton.click();
       
       // Re-request the page, inside the conversation and check it has rained
-      rain = client.getPage(getPath("/rain.jsf", cid));
+      rain = client.getPage(getPath("rain.jsf", cid));
       assert hasRained(rain);
       
       // Create a new web client and load the page
       WebClient client2 = new WebClient();
       client2.setThrowExceptionOnFailingStatusCode(false);
-      rain = client2.getPage(getPath("/rain.jsf", cid));
+      rain = client2.getPage(getPath("rain.jsf", cid));
       assert !hasRained(rain);
    }
    
@@ -169,7 +169,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testConversationActiveDuringNonFacesRequest() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cloud.jsf"));
+      HtmlPage page = client.getPage(getPath("cloud.jsf"));
       HtmlSpan span = getFirstMatchingElement(page, HtmlSpan.class, "cloudName");
       assert span.getTextContent().equals(Cloud.NAME);
    }
@@ -179,7 +179,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testConversationBeginMakesConversationLongRunning() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
+      HtmlPage page = client.getPage(getPath("cumulus.jsf"));
       assert !isLongRunning(page);
       
       // begin a conversation
@@ -193,7 +193,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testBeginAlreadyLongRunningConversationThrowsException() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
+      HtmlPage page = client.getPage(getPath("cumulus.jsf"));
       assert !isLongRunning(page);
       
       // begin a conversation
@@ -216,7 +216,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testConversationEndMakesConversationTransient() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
+      HtmlPage page = client.getPage(getPath("cumulus.jsf"));
       assert !isLongRunning(page);
       
       // begin a conversation
@@ -235,7 +235,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testEndTransientConversationThrowsException() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
+      HtmlPage page = client.getPage(getPath("cumulus.jsf"));
       assert !isLongRunning(page);
       
       // try ending a transient conversation
@@ -252,7 +252,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testBeanWithRequestScope() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/builtin.jsf"));
+      HtmlPage page = client.getPage(getPath("builtin.jsf"));
       assert page.getBody().getTextContent().contains("Correct scope: true");
    }
    
@@ -261,7 +261,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testBeanWithDefaultQualifier() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/builtin.jsf"));
+      HtmlPage page = client.getPage(getPath("builtin.jsf"));
       assert page.getBody().getTextContent().contains("Correct qualifier: true");
    }
    
@@ -270,7 +270,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testBeanWithNameJavaxEnterpriseContextConversation() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/builtin.jsf"));
+      HtmlPage page = client.getPage(getPath("builtin.jsf"));
       assert page.getBody().getTextContent().contains("Correct name: true");
    }
    
@@ -282,7 +282,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testTransientConversationHasNullId() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/builtin.jsf"));
+      HtmlPage page = client.getPage(getPath("builtin.jsf"));
       assert page.getBody().getTextContent().contains("Default conversation has null id: true");
    }
    
@@ -294,7 +294,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testConversationIdMayBeSetByApplication() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
+      HtmlPage page = client.getPage(getPath("cumulus.jsf"));
       assert !isLongRunning(page);
       
       // begin a conversation
@@ -313,7 +313,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testConversationIdMayBeSetByContainer() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
+      HtmlPage page = client.getPage(getPath("cumulus.jsf"));
       assert !isLongRunning(page);
       
       // begin a conversation
@@ -329,7 +329,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testNonexistentConversationExceptionThrown() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cumulus.jsf?cid=foo"));
+      HtmlPage page = client.getPage(getPath("cumulus.jsf?cid=foo"));
       
       assert page.getBody().getTextContent().contains("NonexistentConversationException thrown properly");
       assert page.getBody().getTextContent().contains("Conversation.isTransient: true");
@@ -343,7 +343,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testSetConversationTimeoutOverride() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
+      HtmlPage page = client.getPage(getPath("cumulus.jsf"));
       assert !isLongRunning(page);
    
       // begin a conversation and set a custom timeout
@@ -357,7 +357,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
    public void testConversationHasDefaultTimeout() throws Exception
    {
       WebClient client = new WebClient();
-      HtmlPage page = client.getPage(getPath("/cumulus.jsf"));
+      HtmlPage page = client.getPage(getPath("cumulus.jsf"));
       assert !isLongRunning(page);
       
       // begin a conversation
