@@ -28,7 +28,7 @@ import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 @Artifact
-@IntegrationTest(runLocally = true)
+@IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
 @WebXml("web.xml")
 public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
@@ -47,6 +47,6 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
    {
       service = new SheepWSEndPointService();
       SheepWS ws = service.getSheepWSPort();
-      assert ws.isSheepInjected();
+      assert ws.testSheepInjected();
    }
 }
