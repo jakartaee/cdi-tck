@@ -20,32 +20,19 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Default;
-import javax.enterprise.inject.New;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.jboss.jsr299.tck.literals.NewLiteral;
 
 @SessionScoped
 @Named("Charlie") @Default
 class InitializerSimpleBean implements Serializable
 {
    
-   public static final New NEW = new NewLiteral()
-   {
-      
-      public Class<?> value()
-      {
-         return InitializerSimpleBean.class;
-      }
-      
-   };
-   
    private static final long serialVersionUID = 1L;
-   private static int        initializerCalls = 0;
+   private static int initializerCalls = 0;
 
    @Inject
-   protected Order           order;
+   protected Order order;
 
    @Inject
    public void initializer()
@@ -56,6 +43,11 @@ class InitializerSimpleBean implements Serializable
    public void businessMethod()
    {
       
+   }
+   
+   public Order getOrder()
+   {
+      return order;
    }
 
    public static int getInitializerCalls()
