@@ -61,7 +61,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
    public void testConversationPropagated() throws Exception
    {
       WebClient webClient = new WebClient();
-      HtmlPage storm = webClient.getPage(getPath("/storm.jsf"));
+      HtmlPage storm = webClient.getPage(getPath("storm.jsf"));
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
       storm = beginConversationButton.click();
       HtmlTextInput stormStrength = getFirstMatchingElement(storm, HtmlTextInput.class, "stormStrength");
@@ -79,7 +79,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
    public void testConversationPropagatedOverRedirect() throws Exception
    {
       WebClient webClient = new WebClient();
-      HtmlPage storm = webClient.getPage(getPath("/storm.jsf"));
+      HtmlPage storm = webClient.getPage(getPath("storm.jsf"));
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
       storm = beginConversationButton.click();
       HtmlTextInput stormStrength = getFirstMatchingElement(storm, HtmlTextInput.class, "stormStrength");

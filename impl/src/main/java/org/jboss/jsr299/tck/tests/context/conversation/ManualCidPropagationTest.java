@@ -54,13 +54,13 @@ public class ManualCidPropagationTest extends AbstractConversationTest
    public void testManualCidPropagation() throws Exception
    {
       WebClient webClient = new WebClient();
-      HtmlPage storm = webClient.getPage(getPath("/storm.jsf"));
+      HtmlPage storm = webClient.getPage(getPath("storm.jsf"));
       HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
       storm = beginConversationButton.click();
       
       String c1 = getCid(storm);
       
-      HtmlPage cloud = webClient.getPage(getPath("/cloud.jsf", c1));
+      HtmlPage cloud = webClient.getPage(getPath("cloud.jsf", c1));
       
       String c2 = getCid(cloud);
       
