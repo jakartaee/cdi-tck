@@ -112,35 +112,13 @@ public class NewSimpleBeanTest extends AbstractJSR299Test
    
    @Test(groups = { "new" })
    @SpecAssertions({
-      @SpecAssertion(section = "3.12", id = "p")
+      
    })
    public void testNewBeanIsDependentScoped()
    {
-      Set<Bean<ExplicitContructorSimpleBean>> beans = getBeans(ExplicitContructorSimpleBean.class, ExplicitContructorSimpleBean.NEW);
-      assert beans.size() == 1;
-      Bean<ExplicitContructorSimpleBean> newSimpleBean = beans.iterator().next();
-      assert Dependent.class.equals(newSimpleBean.getScope());
-   }
-
-   @Test(groups = { "new" })
-   @SpecAssertion(section = "3.12", id = "r")
-   public void testNewBeanHasOnlyNewBinding()
-   {
-      Set<Bean<ExplicitContructorSimpleBean>> beans = getBeans(ExplicitContructorSimpleBean.class, ExplicitContructorSimpleBean.NEW);
-      assert beans.size() == 1;
-      Bean<ExplicitContructorSimpleBean> newSimpleBean = beans.iterator().next();
-      assert newSimpleBean.getQualifiers().size() == 1;
-      assert newSimpleBean.getQualifiers().iterator().next().annotationType().equals(New.class);
-   }
-
-   @Test(groups = { "new" })
-   @SpecAssertion(section = "3.12", id = "s")
-   public void testNewBeanHasNoBeanELName()
-   {
-      Set<Bean<ExplicitContructorSimpleBean>> beans = getBeans(ExplicitContructorSimpleBean.class, ExplicitContructorSimpleBean.NEW);
-      assert beans.size() == 1;
-      Bean<ExplicitContructorSimpleBean> newSimpleBean = beans.iterator().next();
-      assert newSimpleBean.getName() == null;
+      FoxRun foxRun = getInstanceByType(FoxRun.class);
+      foxRun.getNewFox().setDen(new Den("TheLarches"));
+      assert !foxRun.getNewFox().getDen().getName().equals(foxRun.getNewFox2().getDen().getName());
    }
 
    @Test(groups = { "new" })
@@ -150,9 +128,10 @@ public class NewSimpleBeanTest extends AbstractJSR299Test
       Bean<Fox> foxBean = getBeans(Fox.class).iterator().next();
       assert foxBean.getScope().equals(RequestScoped.class);
       assert foxBean.getName().equals("fox");
-      Bean<Fox> newFoxBean = getBeans(Fox.class, Fox.NEW).iterator().next();
-      assert newFoxBean.getScope().equals(Dependent.class);
-      assert newFoxBean.getName() == null;
+      Fox newFox1 = getInstanceByType(FoxRun.class).getNewFox();
+      Fox newFox2 = getInstanceByType(FoxRun.class).getNewFox();
+      newFox1.setDen(new Den("TheElms"));
+      assert newFox2.getDen().getName() != "TheElms";
    }
 
    @Test(groups = { "new" })
@@ -167,37 +146,34 @@ public class NewSimpleBeanTest extends AbstractJSR299Test
    @SpecAssertion(section = "3.12", id = "w")
    public void testNewBeanHasNoProducerFields() throws Exception
    {
-      Fox fox = getInstanceByType(Fox.class);
-      Fox newFox = getInstanceByType(Fox.class, Fox.NEW);
-      newFox.setDen(new Den("NewFoxDen"));
+      FoxRun foxRun = getInstanceByType(FoxRun.class);
+      foxRun.getNewFox().setDen(new Den("NewFoxDen"));
       Den theOnlyDen = getInstanceByType(Den.class);
-      assert theOnlyDen.getName().equals(fox.getDen().getName());
+      assert theOnlyDen.getName().equals(foxRun.getFox().getDen().getName());
    }
 
    @Test(groups = { "new" })
    @SpecAssertion(section = "3.12", id = "v")
    public void testNewBeanHasNoProducerMethods() throws Exception
    {
-      Fox fox = getInstanceByType(Fox.class);
-      Fox newFox = getInstanceByType(Fox.class, Fox.NEW);
-      fox.setNextLitterSize(3);
-      newFox.setNextLitterSize(5);
+      FoxRun foxRun = getInstanceByType(FoxRun.class);
+      foxRun.getFox().setNextLitterSize(3);
+      foxRun.getNewFox().setNextLitterSize(5);
       Litter theOnlyLitter = getInstanceByType(Litter.class);
-      assert theOnlyLitter.getQuantity() == fox.getNextLitterSize();
+      assert theOnlyLitter.getQuantity() == foxRun.getFox().getNextLitterSize();
    }
 
    @Test(groups = { "new" })
    @SpecAssertion(section = "3.12", id = "x")
    public void testNewBeanHasNoDisposerMethods() throws Exception
    {
-      Fox fox = getInstanceByType(Fox.class);
-      Fox newFox = getInstanceByType(Fox.class, Fox.NEW);
+      FoxRun foxRun = getInstanceByType(FoxRun.class);
       Bean<Litter> litterBean = getBeans(Litter.class).iterator().next();
       CreationalContext<Litter> creationalContext = getCurrentManager().createCreationalContext(litterBean);
       Litter litter = getInstanceByType(Litter.class);
       litterBean.destroy(litter, creationalContext);
-      assert fox.isLitterDisposed();
-      assert !newFox.isLitterDisposed();
+      assert foxRun.getFox().isLitterDisposed();
+      assert !foxRun.getNewFox().isLitterDisposed();
    }
 
    @Test
@@ -208,18 +184,14 @@ public class NewSimpleBeanTest extends AbstractJSR299Test
       assert getCurrentManager().getBeans(Order.class).iterator().next().getQualifiers().size() == 2;
       assert getCurrentManager().getBeans(Order.class).iterator().next().getQualifiers().contains(new DefaultLiteral());
 
-      assert getBeans(Order.class, Order.NEW).size() == 1;
-      assert getBeans(Order.class, Order.NEW).iterator().next().getQualifiers().size() == 1;
-      assert getBeans(Order.class, Order.NEW).iterator().next().getQualifiers().iterator().next().annotationType().equals(New.class);
+      assert getInstanceByType(Shop.class).getNewOrder() != null;
 
       assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).size() == 1;
       assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().size() == 2;
       assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().contains(TAME_LITERAL);
       assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().contains(new AnyLiteral());
 
-      assert getBeans(Lion.class, Lion.NEW).size() == 1;
-      assert getBeans(Lion.class, Lion.NEW).iterator().next().getQualifiers().size() == 1;
-      assert getBeans(Lion.class, Lion.NEW).iterator().next().getQualifiers().iterator().next().annotationType().equals(New.class);
+      assert getInstanceByType(LionCage.class).getNewLion() != null;
    }
 
    @Test(groups = { "new" })
@@ -227,10 +199,12 @@ public class NewSimpleBeanTest extends AbstractJSR299Test
    public void testNewBeanHasSameConstructor()
    {
       ExplicitContructorSimpleBean.setConstructorCalls(0);
-      ExplicitContructorSimpleBean bean = getInstanceByType(ExplicitContructorSimpleBean.class);
-      ExplicitContructorSimpleBean newBean = getInstanceByType(ExplicitContructorSimpleBean.class, ExplicitContructorSimpleBean.NEW);
-      assert bean != newBean;
-      assert ExplicitContructorSimpleBean.getConstructorCalls() == 2;
+      Consumer consumer = getInstanceByType(Consumer.class);
+      // Make sure all deps are initialized, even if deps are lazily init'd
+      consumer.getExplicitConstructorBean().ping();
+      consumer.getNewExplicitConstructorBean().ping();
+      int calls = ExplicitContructorSimpleBean.getConstructorCalls(); 
+      assert calls == 2;
    }
 
    @Test(groups = { "new" })
@@ -238,21 +212,19 @@ public class NewSimpleBeanTest extends AbstractJSR299Test
    public void testNewBeanHasSameInitializers()
    {
       InitializerSimpleBean.setInitializerCalls(0);
-      InitializerSimpleBean bean = getInstanceByType(InitializerSimpleBean.class);
-      bean.businessMethod();  // Cause proxy to initialize the bean
-      InitializerSimpleBean newBean = getInstanceByType(InitializerSimpleBean.class, InitializerSimpleBean.NEW);
-      assert bean != newBean;
-      assert InitializerSimpleBean.getInitializerCalls() == 2;
+      Consumer consumer = getInstanceByType(Consumer.class);
+      consumer.getInitializerSimpleBean().businessMethod();  // Cause proxy to initialize the bean
+      consumer.getNewInitializerSimpleBean().businessMethod();
+      int calls = InitializerSimpleBean.getInitializerCalls();
+      assert calls == 2;
    }
 
    @Test(groups = { "new" })
    @SpecAssertion(section = "3.12", id = "h")
    public void testNewBeanHasSameInjectedFields()
    {
-      Bean<InitializerSimpleBean> simpleBean = getBeans(InitializerSimpleBean.class).iterator().next();
-      Bean<InitializerSimpleBean> newSimpleBean = getBeans(InitializerSimpleBean.class, InitializerSimpleBean.NEW).iterator().next();
-      assert !newSimpleBean.getInjectionPoints().isEmpty();
-      assert simpleBean.getInjectionPoints().equals(newSimpleBean.getInjectionPoints());
+      Consumer consumer = getInstanceByType(Consumer.class);
+      assert consumer.getNewInitializerSimpleBean().getOrder() != null;
    }
    
    @Test

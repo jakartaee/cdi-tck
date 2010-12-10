@@ -62,24 +62,6 @@ public class QualifierDefinitionTest extends AbstractJSR299Test
       InjectionPoint injectionPoint = order.getInjectionPoints().iterator().next();
       assert injectionPoint.getQualifiers().contains(new DefaultLiteral());
    }
-   
-   @Test
-   @SpecAssertion(section = "2.3.1", id = "a0")
-   public void testNewQualifierAndAnyBindingMutualExclusive()
-   {
-      New newOrderProcessor = new NewLiteral()
-      {
-         
-         public Class<?> value()
-         {
-            return OrderProcessor.class;
-         }
-      };
-      assert getBeans(OrderProcessor.class, newOrderProcessor).size() == 1;
-      Bean<OrderProcessor> order = getBeans(OrderProcessor.class, newOrderProcessor).iterator().next();
-      assert order.getQualifiers().size() == 1;
-      assert order.getQualifiers().iterator().next().equals(newOrderProcessor);
-   }
 
    @Test(groups = { "annotationDefinition", "rewrite" })
    @SpecAssertion(section = "2.3.2", id = "ba")
