@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
    @Resource(destination = "TagPage.jsp", source = "TagPage.jsp"),
    @Resource(destination = "ManagedBeanTestPage.jsp", source = "ManagedBeanTestPage.jsp")})
 @SpecVersion(spec="cdi", version="20091101")
-@WebXml("web.xml")
+@WebXml("web2.xml")
 public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
 {
    @Test
