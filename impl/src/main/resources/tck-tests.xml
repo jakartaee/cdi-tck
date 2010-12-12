@@ -16,41 +16,6 @@
       <classes>
          <!-- Issues in the TCK -->
 
-         <!-- CDITCK-187 -->
-         <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.InjectionIntoNonContextualComponentTest">
-            <methods>
-               <exclude name="testInjectionIntoTagHandler" />
-               <exclude name="testInjectionIntoJSFManagedBean" />
-            </methods>
-         </class>
-         
-         <!-- CDITCK-189 -->
-         <class name="org.jboss.jsr299.tck.tests.implementation.simple.resource.persistenceContext.PersistenceContextInjectionTest">
-            <methods>
-               <exclude name="testBeanTypesAndBindingTypesOfPersistenceContext" />
-               <exclude name="testInjectionOfPersistenceContext" />
-               <exclude name="testInjectionOfPersistenceUnit" />
-               <exclude name="testPassivationOfPersistenceContext" />
-               <exclude name="testPassivationOfPersistenceUnit" />
-            </methods>
-         </class>
-         
-         <!-- CDITCK-194 -->
-         <class name="org.jboss.jsr299.tck.tests.decorators.definition.DecoratorDefinitionTest">
-            <methods>
-               <exclude name="testDecoratedTypes" />
-               <exclude name="testDecoratorDoesNotImplementDelegateType" />
-               <exclude name="testDecoratorIsManagedBean" />
-               <exclude name="testDecoratorOrdering" />
-               <exclude name="testDelegateInjectionPoint" />
-               <exclude name="testDuplicateBindingsOnResolveDecoratorsFails" />
-               <exclude name="testEmptyTypeSetOnResolveDecoratorsFails" />
-               <exclude name="testInstanceOfDecoratorForEachEnabled" />
-               <exclude name="testNonBindingsOnResolveDecoratorsFails" />
-               <exclude name="testNonEnabledDecoratorNotResolved" />               
-            </methods>
-         </class>
-
          <!-- Issues in Weld (the RI) -->
 
          <!-- WELD-401 -->
