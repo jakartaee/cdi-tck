@@ -325,14 +325,6 @@ public class ClientConversationContextTest extends AbstractConversationTest
       assert page.getBody().getTextContent().contains("Cumulus congestus");
    }
    
-   @Test(groups = { "contexts" }, expectedExceptions=FailingHttpStatusCodeException.class)
-   @SpecAssertion(section = "6.7.4", id = "tb")
-   public void testNonexistentConversationExceptionThrown() throws Exception
-   {
-      WebClient client = new WebClient();
-      client.getPage(getPath("cumulus.jsf", "foo"));
-   }
-   
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "6.7.5", id = "m"),
