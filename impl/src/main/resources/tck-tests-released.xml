@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<!-- CDI TCK Excludes for latest released TCK (currently 1.0.1 Final)
+<!-- 
+   CDI TCK Excludes for latest released TCK (currently 1.0.2 SP1)
+   
+   This is the official exclude list for the CDI TCK.
 -->
 
 <suite name="CDI TCK" verbose="0"  >
