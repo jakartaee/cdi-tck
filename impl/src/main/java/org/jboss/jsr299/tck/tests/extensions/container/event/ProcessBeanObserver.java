@@ -29,8 +29,8 @@ public class ProcessBeanObserver implements Extension
    private static ProcessManagedBean<Farm> processManagedBeanEvent = null;
    private static ProcessSessionBean<Sheep> processStatelessSessionBeanEvent = null;
    private static ProcessSessionBean<Cow> processStatefulSessionBeanEvent = null;
-   private static ProcessProducerField<Milk, Farm> processProducerFieldEvent = null;
-   private static ProcessProducerMethod<Cheese, Farm> processProducerMethodEvent = null;
+   private static ProcessProducerField<Farm, Milk> processProducerFieldEvent = null;
+   private static ProcessProducerMethod<Farm, Cheese> processProducerMethodEvent = null;
    
    public void cleanup(@Observes BeforeShutdown shutdown)
    {
@@ -53,15 +53,15 @@ public class ProcessBeanObserver implements Extension
       processStatefulSessionBeanEvent = event;
    }
    
-   public void observeProcessProduceField(@Observes ProcessProducerField<Milk, Farm> event) {
+   public void observeProcessProduceField(@Observes ProcessProducerField<Farm, Milk> event) {
       processProducerFieldEvent = event;
    }
    
-   public void observeProcessProduceMethod(@Observes ProcessProducerMethod<Cheese, Farm> event) {
+   public void observeProcessProduceMethod(@Observes ProcessProducerMethod<Farm, Cheese> event) {
       processProducerMethodEvent = event;
    }
    
-   public static ProcessProducerField<Milk, Farm> getProcessProducerFieldEvent()
+   public static ProcessProducerField<Farm, Milk> getProcessProducerFieldEvent()
    {
       return processProducerFieldEvent;
    }
@@ -81,7 +81,7 @@ public class ProcessBeanObserver implements Extension
       return processStatefulSessionBeanEvent;
    }
 
-   public static ProcessProducerMethod<Cheese, Farm> getProcessProducerMethodEvent()
+   public static ProcessProducerMethod<Farm, Cheese> getProcessProducerMethodEvent()
    {
       return processProducerMethodEvent;
    }
