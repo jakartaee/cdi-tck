@@ -21,5 +21,9 @@ import javax.enterprise.event.Observes;
 
 public @Local interface FarmerLocal
 {
+   
    void observeEggLaying(@Observes Egg egg);
+   
+   public String getName();
+   
 }

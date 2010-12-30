@@ -25,5 +25,10 @@ public @Stateful class StockWatcher implements StockWatcherLocal
    {
       price.recordVisit(this);
    }
+   
+   public String getName()
+   {
+      return StockWatcher.class.getSimpleName();
+   }
 
 }

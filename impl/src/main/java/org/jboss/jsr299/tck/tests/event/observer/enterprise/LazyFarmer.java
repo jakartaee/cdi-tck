@@ -20,4 +20,11 @@ import javax.ejb.Stateful;
 
 public @Stateful class LazyFarmer extends Farmer implements LazyFarmerLocal,FarmerLocal
 {
+   
+   @Override
+   public String getName()
+   {
+      return LazyFarmer.class.getSimpleName();
+   }
+   
 }

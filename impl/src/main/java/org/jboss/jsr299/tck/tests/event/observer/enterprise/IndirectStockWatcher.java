@@ -20,4 +20,11 @@ import javax.ejb.Stateful;
 
 public @Stateful class IndirectStockWatcher extends IntermediateStockWatcher implements IndirectStockWatcherLocal,StockWatcherLocal
 {
+   
+   @Override
+   public String getName()
+   {
+      return IndirectStockWatcher.class.getSimpleName();
+   }
+   
 }
