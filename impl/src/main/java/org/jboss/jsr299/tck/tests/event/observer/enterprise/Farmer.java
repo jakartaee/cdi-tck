@@ -25,5 +25,10 @@ public @Stateful class Farmer implements FarmerLocal
    {
       egg.recordVisit(this);
    }
+   
+   public String getName()
+   {
+      return Farmer.class.getSimpleName();
+   }
 
 }

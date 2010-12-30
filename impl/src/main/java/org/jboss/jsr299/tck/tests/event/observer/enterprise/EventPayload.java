@@ -19,17 +19,17 @@ package org.jboss.jsr299.tck.tests.event.observer.enterprise;
 import java.util.ArrayList;
 import java.util.List;
 
-class EventPayload
+abstract class EventPayload
 {
-   private List<Class<?>> classesVisited = new ArrayList<Class<?>>();
+   private List<String> visited = new ArrayList<String>();
    
-   public List<Class<?>> getClassesVisited()
+   public List<String> getVisited()
    {
-      return classesVisited;
+      return visited;
    }
    
-   public void recordVisit(Object o)
+   public void recordVisit(String name)
    {
-      classesVisited.add(o.getClass());
+      visited.add(name);
    }
 }

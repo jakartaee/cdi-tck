@@ -18,4 +18,10 @@ package org.jboss.jsr299.tck.tests.event.observer.enterprise;
 
 class StockPrice extends EventPayload
 {
+   
+   public void recordVisit(StockWatcherLocal stockWatcher)
+   {
+      recordVisit(stockWatcher.getName());
+   }
+   
 }

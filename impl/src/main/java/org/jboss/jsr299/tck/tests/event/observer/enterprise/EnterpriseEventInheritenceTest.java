@@ -42,7 +42,9 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
    {
       Egg egg = new Egg();
       getCurrentManager().fireEvent(egg);
-      assert typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class);
+      assert egg.getVisited().size() == 2;
+      assert egg.getVisited().contains(Farmer.class.getSimpleName());
+      assert egg.getVisited().contains(LazyFarmer.class.getSimpleName());
    }
    
    @Test(groups = { "events", "inheritance" })
@@ -51,6 +53,9 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
    {
       StockPrice stockPrice = new StockPrice();
       getCurrentManager().fireEvent(stockPrice);
-      assert typeSetMatches(stockPrice.getClassesVisited(), StockWatcher.class, IndirectStockWatcher.class, IntermediateStockWatcher.class);
+      assert stockPrice.getVisited().size() == 3;
+      assert stockPrice.getVisited().contains(StockWatcher.class.getSimpleName());
+      assert stockPrice.getVisited().contains(IntermediateStockWatcher.class.getSimpleName());
+      assert stockPrice.getVisited().contains(IndirectStockWatcher.class.getSimpleName());
    }
 }

@@ -22,4 +22,7 @@ import javax.enterprise.event.Observes;
 public @Local interface StockWatcherLocal
 {
    void observeStockPrice(@Observes StockPrice price);
+   
+   String getName();
+   
 }
