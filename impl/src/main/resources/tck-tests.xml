@@ -17,13 +17,6 @@
          <!-- Issues in the TCK -->
 
          <!-- Issues in Weld (the RI) -->
-
-         <!-- WELD-401 -->
-         <class name="org.jboss.jsr299.tck.tests.event.broken.observer.notBusinessMethod.EJBObserverMethodNotBusinessMethodTest">
-            <methods>
-               <exclude name="testObserverMethodOnEnterpriseBeanNotBusinessMethodOrStaticFails" />
-            </methods>
-         </class>
                   
       </classes>
    </test>
