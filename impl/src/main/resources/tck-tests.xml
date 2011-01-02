@@ -15,6 +15,13 @@
       </packages>
       <classes>
          <!-- Issues in the TCK -->
+         
+         <!-- CDITCK-201 -->
+         <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest">
+            <methods>
+               <exclude name="testInjectionIntoWebServiceEndpoint" />
+            </methods>
+         </class>
 
          <!-- Issues in Weld (the RI) -->
                   
