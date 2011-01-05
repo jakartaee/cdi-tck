@@ -16,30 +16,27 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws;
 
-import javax.xml.ws.WebServiceRef;
-
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.jboss.testharness.impl.packaging.Artifact;
+import org.jboss.testharness.impl.packaging.Classes;
 import org.jboss.testharness.impl.packaging.IntegrationTest;
 import org.jboss.testharness.impl.packaging.Packaging;
 import org.jboss.testharness.impl.packaging.PackagingType;
 import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
-@Artifact
-@Packaging(PackagingType.EAR)
-@IntegrationTest
+@Artifact(addCurrentPackage = false)
+@Packaging(PackagingType.WAR)
+@IntegrationTest(runLocally = true)
 @SpecVersion(spec="cdi", version="20091101")
 @WebXml("web.xml")
+@Classes({ Sheep.class, SheepWSEndPoint.class })
 public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
 {
-   @WebServiceRef(wsdlLocation = "http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl")
-   SheepWSEndPointService service;
-
-   @Test
+   @Test(groups = "javaee-full-only")
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "ee"),
       @SpecAssertion(section = "5.5.2", id = "aq"),
@@ -48,8 +45,8 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
    // JBAS-7046
    public void testInjectionIntoWebServiceEndpoint() throws Exception
    {
-      service = new SheepWSEndPointService();
+      SheepWSEndPointService service = new SheepWSEndPointService();
       SheepWS ws = service.getSheepWSPort();
-      assert ws.testSheepInjected();
+      assert ws.isSheepInjected();
    }
 }
