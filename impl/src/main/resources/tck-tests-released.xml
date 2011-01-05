@@ -28,13 +28,6 @@
             </methods>
          </class>
          
-         <!-- CDITCK-201 -->
-         <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest">
-            <methods>
-               <exclude name="testInjectionIntoWebServiceEndpoint" />
-            </methods>
-         </class>
-         
          <!-- CDITCK-200 -->
          <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest">
             <methods>

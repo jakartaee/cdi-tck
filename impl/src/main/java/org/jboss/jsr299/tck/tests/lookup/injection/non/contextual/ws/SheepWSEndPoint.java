@@ -33,7 +33,7 @@ public class SheepWSEndPoint
    }
    
    @WebMethod
-   public boolean testSheepInjected() {
+   public boolean isSheepInjected() {
       return (sheep != null) && initializerCalled;
    }
 }

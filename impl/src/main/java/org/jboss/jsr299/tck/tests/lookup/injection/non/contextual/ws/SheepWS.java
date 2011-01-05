@@ -41,6 +41,6 @@ public interface SheepWS {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "isSheepInjected", targetNamespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", className = "org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.IsSheepInjected")
     @ResponseWrapper(localName = "isSheepInjectedResponse", targetNamespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", className = "org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.IsSheepInjectedResponse")
-    public boolean testSheepInjected();
+    public boolean isSheepInjected();
 
 }
