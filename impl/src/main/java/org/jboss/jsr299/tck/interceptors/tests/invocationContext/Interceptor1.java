@@ -27,7 +27,7 @@ class Interceptor1
    public Object aroundInvoke(InvocationContext ctx) throws Exception
    {
       SimpleBean target = (SimpleBean) ctx.getTarget();
-      int id1 = target.id;
+      int id1 = target.getId();
       int id2 = (Integer) ctx.proceed();
 
       if (id1 == id2)

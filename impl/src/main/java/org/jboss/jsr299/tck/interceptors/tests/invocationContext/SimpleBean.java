@@ -21,7 +21,7 @@ import javax.interceptor.Interceptors;
 @Interceptors(LifecycleCallbackInterceptor.class)
 class SimpleBean
 {
-   int id = 0;
+   private int id = 0;
    private static boolean echoCalled = false;
 
    @Interceptors(Interceptor1.class)
