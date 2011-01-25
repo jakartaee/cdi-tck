@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <!-- 
-   CDI TCK Excludes for latest released TCK (currently 1.0.2 SP1)
+   CDI TCK Excludes for latest released TCK (currently 1.0.4 SP1)
    
    This is the official exclude list for the CDI TCK.
 -->
@@ -20,55 +20,8 @@
       <classes>
          <!-- Issues in the TCK -->
          
-         <!-- CDITCK-202 -->
-         <class name="org.jboss.jsr299.tck.tests.event.observer.enterprise.EnterpriseEventInheritenceTest">
-            <methods>
-               <exclude name="testNonStaticObserverMethodInherited" />
-               <exclude name="testNonStaticObserverMethodIndirectlyInherited" />
-            </methods>
-         </class>
-         
-         <!-- CDITCK-200 -->
-         <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest">
-            <methods>
-               <exclude name="testInjectionIntoWebServiceEndpoint" />
-            </methods>
-         </class>
-         
-         <!-- CDITCK-199 -->
-         <class name="org.jboss.jsr299.tck.tests.extensions.processBean.ProcessBeanTest">
-            <methods>
-               <exclude name="testProcessProducerFieldEvent" />
-               <exclude name="testProcessProducerMethodEvent" />
-            </methods>
-         </class>
-         <class name="org.jboss.jsr299.tck.tests.extensions.observer.ProcessObserverMethodEventTest">
-            <methods>
-               <exclude name="testGetAnnotatedMethod" />
-               <exclude name="testGetObserverMethod" />
-               <exclude name="testProcessObserverMethodEventsSent" />
-            </methods>
-         </class>
-         <class name="org.jboss.jsr299.tck.tests.extensions.observer.broken.definitionError.ProcessObserverMethodErrorTest">
-            <methods>
-               <exclude name="testAddDefinitionError" />
-            </methods>
-         </class>
-         <class name="org.jboss.jsr299.tck.tests.extensions.observer.broken.exception.ProcessObserverMethodExceptionTest">
-            <methods>
-               <exclude name="testExceptionIsDefinitionError" />
-            </methods>
-         </class>
-                  
          <!-- Issues in Weld (the RI) -->
 
-         <!-- WELD-401 -->
-         <class name="org.jboss.jsr299.tck.tests.event.broken.observer.notBusinessMethod.EJBObserverMethodNotBusinessMethodTest">
-            <methods>
-               <exclude name="testObserverMethodOnEnterpriseBeanNotBusinessMethodOrStaticFails" />
-            </methods>
-         </class>
-                  
       </classes>
    </test>
    
