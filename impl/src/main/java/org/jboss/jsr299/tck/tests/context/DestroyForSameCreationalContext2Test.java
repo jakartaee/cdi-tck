@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.context;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
@@ -46,7 +45,6 @@ public class DestroyForSameCreationalContext2Test extends AbstractJSR299Test
       // Note that this is an indirect effect
       Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
       Context requestContext = getCurrentManager().getContext(RequestScoped.class);
-      Context appContext = getCurrentManager().getContext(ApplicationScoped.class);
       
       // We also test this directly using a custom contextual, and ensuring that the same contextual is passed to both methods
       DummyContextual contextual = new DummyContextual();
@@ -55,12 +53,7 @@ public class DestroyForSameCreationalContext2Test extends AbstractJSR299Test
       destroyContext(sessionContext);
       assert contextual.getCreationalContextPassedToCreate() == contextual.getCreationalContextPassedToDestroy();
       
-      // Do it for other contexts
-      contextual = new DummyContextual();
-      appContext.get(contextual, getCurrentManager().createCreationalContext(contextual));
-      destroyContext(appContext);
-      assert contextual.getCreationalContextPassedToCreate() == contextual.getCreationalContextPassedToDestroy();
-      
+      // Also test the request context
       contextual = new DummyContextual();
       requestContext.get(contextual, getCurrentManager().createCreationalContext(contextual));
       destroyContext(requestContext);
