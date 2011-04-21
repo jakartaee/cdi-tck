@@ -1,28 +1,123 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<!-- 
-   CDI TCK Excludes for latest released TCK (currently 1.0.4 SP1)
-   
-   This is the official exclude list for the CDI TCK.
--->
+<!-- CDI TCK Excludes for latest released TCK (currently 1.0.4 SP1) This is the official exclude list for the CDI TCK. -->
 
-<suite name="CDI TCK" verbose="0"  >
-   <test name="CDI TCK">
-      <method-selectors>
-         <method-selector>
-            <selector-class name="org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector" />
-         </method-selector>
-      </method-selectors>
-      <packages>
-         <package name="org.jboss.jsr299.tck.tests.*" />
-         <package name="org.jboss.jsr299.tck.interceptors.tests.*" />
-      </packages>
-      <classes>
-         <!-- Issues in the TCK -->
-         
-         <!-- Issues in Weld (the RI) -->
+<suite name="CDI TCK" verbose="0">
+    <test name="CDI TCK">
+        <method-selectors>
+            <method-selector>
+                <selector-class name="org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector" />
+            </method-selector>
+        </method-selectors>
+        <packages>
+            <package name="org.jboss.jsr299.tck.tests.*" />
+            <package name="org.jboss.jsr299.tck.interceptors.tests.*" />
+        </packages>
 
-      </classes>
-   </test>
-   
+        <classes>
+            <!-- Issues in the TCK -->
+
+            <!-- CDITCK-210 -->
+            <class name="org.jboss.jsr299.tck.tests.context.dependent.ejb.DependentContextEjbTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInjectedFieldInInterceptor.EnterpriseBeanWithNonPassivatingInjectedFieldInInterceptorTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonSerializableIntializerMethod.EnterpriseBeanWithNonSerializableIntializerMethodTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingBeanConstructorParameterInInterceptor.EnterpriseBeanWithNonPassivatingBeanConstructorParameterInInterceptorTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInitializerParameterInInterceptor.EnterpriseBeanWithNonPassivatingInitializerParameterInInterceptorTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingDecorator.EnterpriseBeanWithNonPassivatingDecoratorTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInitializerInDecorator.EnterpriseBeanWithNonPassivatingInitializerInDecoratorTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.dependentScopedProducerFieldReturnsNonSerializableObjectForInjectionIntoStatefulSessionBean.EnterpriseBeanWithIllegalDependencyTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingConstructorFieldInDecorator.EnterpriseBeanWithNonPassivatingFieldInDecoratorTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.dependentScopedProducerMethodReturnsNonSerializableObjectForInjectionIntoStatefulSessionBean.EnterpriseBeanWithIllegalDependencyTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.unserializableSimpleInjectedIntoPassivatingEnterpriseBean.UnserializableSimpleInjectedIntoPassivatingEnterpriseBeanTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class
+                name="org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInjectedFieldInDecorator.EnterpriseBeanWithNonPassivatingInjectedFieldInDecoratorTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class name="org.jboss.jsr299.tck.tests.context.passivating.PassivatingContextTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.definition.EnterpriseBeanDefinitionTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.definition.EnterpriseBeanViaXmlTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.NewEnterpriseBeanICTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+            <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.NewEnterpriseBeanTest">
+                <methods>
+                    <exclude name=".*" />
+                </methods>
+            </class>
+
+            <!-- Issues in Weld (the RI) -->
+
+        </classes>
+    </test>
+
 </suite>
