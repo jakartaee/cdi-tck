@@ -21,7 +21,8 @@ import javax.ejb.Local;
 @Local
 public interface FoxRunLocal
 {
-   
+
    public FoxLocal getFox();
-   
+
+   void remove();
 }

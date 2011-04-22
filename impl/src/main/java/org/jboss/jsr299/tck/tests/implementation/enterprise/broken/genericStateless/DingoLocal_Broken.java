@@ -21,5 +21,5 @@ import javax.ejb.Local;
 @Local
 public interface DingoLocal_Broken<T>
 {
-
+    void remove();
 }

@@ -24,6 +24,7 @@ import org.jboss.jsr299.tck.literals.NewLiteral;
 @Local
 public interface WrappedEnterpriseBeanLocal
 {
+   void bye();
    
    public static final New NEW = new NewLiteral()
    {

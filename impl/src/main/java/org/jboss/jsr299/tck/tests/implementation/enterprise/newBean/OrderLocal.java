@@ -24,6 +24,7 @@ import org.jboss.jsr299.tck.literals.NewLiteral;
 @Local
 public interface OrderLocal
 {
+   void remove();
    
    public static final New NEW = new NewLiteral()
    {
