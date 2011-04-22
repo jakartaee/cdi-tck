@@ -24,4 +24,6 @@ public interface MaarianHaminaLocal_Broken
 
    void ping();
    
+   void bye();
+   
 }

@@ -5,5 +5,5 @@ import javax.ejb.Local;
 @Local
 public interface Laika
 {
-
+   void remove();
 }

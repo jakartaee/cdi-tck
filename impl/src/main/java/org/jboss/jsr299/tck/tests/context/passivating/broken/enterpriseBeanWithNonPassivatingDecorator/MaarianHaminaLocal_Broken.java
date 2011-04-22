@@ -21,5 +21,5 @@ import javax.ejb.Local;
 @Local
 public interface MaarianHaminaLocal_Broken
 {
-   
+   void bye();
 }
