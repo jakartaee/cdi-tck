@@ -17,6 +17,13 @@
          <!-- Issues in the TCK -->
 
          <!-- Issues in Weld (the RI) -->
+         
+         <!-- CDITCK-212 -->
+         <class name="org.jboss.jsr299.tck.tests.context.DestroyedInstanceReturnedByGetTest">
+            <methods>
+               <exclude name="testDestroyedInstanceMustNotBeReturnedByGet" />
+            </methods>
+         </class>
                   
       </classes>
    </test>
