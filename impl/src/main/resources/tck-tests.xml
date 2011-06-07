@@ -15,8 +15,6 @@
       </packages>
       <classes>
          <!-- Issues in the TCK -->
-
-         <!-- Issues in Weld (the RI) -->
          
          <!-- CDITCK-212 -->
          <class name="org.jboss.jsr299.tck.tests.context.DestroyedInstanceReturnedByGetTest">
@@ -24,6 +22,27 @@
                <exclude name="testDestroyedInstanceMustNotBeReturnedByGet" />
             </methods>
          </class>
+         
+         <!-- CDITCK-213 -->  
+         <class name="org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.interceptorOrder.SessionBeanInterceptorOrderTest.">
+            <methods>
+               <exclude name="" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.nonContextualReference.SessionBeanInterceptorOnNonContextualEjbReferenceTest">
+            <methods>
+               <exclude name="testNonContextualSessionBeanReferenceIsIntercepted" />
+            </methods>
+         </class>
+         <class name="org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.simpleInterception.SessionBeanInterceptorDefinitionTest">
+            <methods>
+               <exclude name="testSessionBeanIsIntercepted" />
+            </methods>
+         </class>  
+
+         <!-- Issues in Weld (the RI) -->
+         
+         
                   
       </classes>
    </test>
