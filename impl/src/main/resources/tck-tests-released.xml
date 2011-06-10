@@ -123,9 +123,9 @@
             </class>
             
             <!-- CDITCK-213 -->  
-            <class name="org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.interceptorOrder.SessionBeanInterceptorOrderTest.">
+            <class name="org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.interceptorOrder.SessionBeanInterceptorOrderTest">
                <methods>
-                  <exclude name="" />
+                  <exclude name="testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding" />
                </methods>
             </class>
             <class name="org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.nonContextualReference.SessionBeanInterceptorOnNonContextualEjbReferenceTest">
