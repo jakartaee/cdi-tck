@@ -39,6 +39,13 @@
                <exclude name="testSessionBeanIsIntercepted" />
             </methods>
          </class>  
+         
+         <!-- CDITCK-219 -->
+            <class name="org.jboss.jsr299.tck.tests.context.session.SessionContextTest">
+               <methods>
+                  <exclude name="testSessionContextDestroyedWhenHttpSessionTimesOut" />
+               </methods>
+            </class> 
 
          <!-- CDITCK-217 -->
          <class name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest">
