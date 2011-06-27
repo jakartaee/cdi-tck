@@ -53,6 +53,13 @@
                <exclude name="testInjectionIntoWebServiceEndpoint"/>
             </methods>
          </class> 
+         
+         <!-- CDITCK-220 -->
+         <class name="org.jboss.jsr299.tck.tests.implementation.builtin.BuiltInBeansTest">
+             <methods>
+                 <exclude name="testUserTransactionBean" />
+             </methods>
+         </class>
 
          <!-- Issues in Weld (the RI) -->
          
