@@ -159,6 +159,13 @@
                     <exclude name="testUserTransactionBean" />
                 </methods>
             </class>
+            
+            <!-- CDITCK-223 -->
+            <class name="org.jboss.jsr299.tck.tests.implementation.enterprise.lifecycle.EnterpriseBeanLifecycleTest">
+               <methods>
+                  <exclude name="testCreateSFSB" />
+               </methods>
+            </class>
 
             <!-- Issues in Weld (the RI) -->
 
