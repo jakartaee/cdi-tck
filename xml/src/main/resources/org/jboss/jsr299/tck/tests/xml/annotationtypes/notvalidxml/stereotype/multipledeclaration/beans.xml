@@ -1,9 +1,0 @@
-<Beans xmlns="urn:java:ee"
-	xmlns:dd="urn:java:org.jboss.jsr299.tck.tests.xml.annotationtypes.notvalidxml.foo">
-	<dd:TestStereotype>
-		<Stereotype />
-	</dd:TestStereotype>
-	<dd:TestStereotype>
-		<Stereotype />
-	</dd:TestStereotype>
-</Beans>

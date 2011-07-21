@@ -1,7 +1,0 @@
-<Beans xmlns="urn:java:ee">
-	<Deploy>
-		<Standard />
-		<Production />
-	</Deploy>
-	<me:NotDeclared />
-</Beans>

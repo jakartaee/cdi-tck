@@ -1,8 +1,0 @@
-<Beans xmlns="urn:java:ee"
-       xmlns:test="urn:java:org.jboss.jsr299.tck.tests.xml.namespace.aggregation"> 
-   <Deploy>
-      <Standard />
-      <Production />
-      <test:AnotherDeploymentType />
-   </Deploy>
-</Beans>
