@@ -156,6 +156,11 @@
                            <type>sig</type>
                            <classifier>sigtest</classifier>
                         </artifact>
+                        <artifact>
+                           <file>${basedir}/src/main/resources/cdi-api-jdk7.sig</file>
+                           <type>sig</type>
+                           <classifier>sigtest</classifier>
+                        </artifact>
                      </artifacts>
                   </configuration>
                </execution>
