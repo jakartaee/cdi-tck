@@ -159,7 +159,7 @@
                         <artifact>
                            <file>${basedir}/src/main/resources/cdi-api-jdk7.sig</file>
                            <type>sig</type>
-                           <classifier>sigtest</classifier>
+                           <classifier>sigtest-jdk7</classifier>
                         </artifact>
                      </artifacts>
                   </configuration>
