@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<chapter id="test-harness-configuration">
+   <title>Configuration</title>
+   <para>
+      This chapter lays out how to configure the JBoss Test Harness by
+      specifying the API implementation classes, defining the target container
+      connection information, and various other switches. Finally, a detailed
+      account of how the JBoss Test Harness negotiates the execution of the
+      tests in the container is given.
+   </para>
+   <section id="test-harness-properties">
+      <title>JBoss Test Harness Properties</title>
+      <para>
+         The JBoss Test Harness allows the test suite to be launched in a
+         pluggable fashion. In order to execute a test suite, the JBoss Test
+         Harness must be configured by specifying implementations of the test
+         launcher and container APIs.
+      </para>
+      <para>
+         System properties and/or the resource
+         <code>META-INF/jboss-test-harness.properties</code>,
+         a Java properties file, are used to configure the JBoss Test Harness.
+         The bootstrap configuration builder looks to the property
+         <literal>org.jboss.testharness.api.ConfigurationBuilder</literal>,
+         the first property listed in table 3.1, for the fully qualified class
+         name (FQCN) of a concrete configuration builder implementation to get
+         started. This implementation loads the remaining configuration settings
+         and produces a JBoss Test Harness configuration.
+      </para>
+      <para>
+         For you convenience, the default configuration builder implementation
+         <literal>org.jboss.testharness.impl.PropertiesBasedConfigurationBuilder
+         </literal> is provided, which collates all the JBoss Test Harness
+         configuration settings from system and Java properties. It does so by
+         aggregating the system properties with the properties defined in the
+         META-INF/jboss-test-harness.properties resource in any classpath entry
+         under a single properties map, allowing you to partition the
+         configuration settings as needed.
+      </para>
+      <para>
+         A complete list of configuration properties for the JBoss Test
+         Harness
+         has been itemized in
+         <xref linkend="test-harness-properties-list" />,
+         accompanied by the default value (if any) and a description for each
+         property.
+      </para>
+      <table frame="all" id="test-harness-properties-list" title="Test Harness Configuration Properties">
+         <title>JBoss Test Harness Configuration Properties</title>
+         <tgroup cols="2">
+            <colspec colnum="1" colname="property" colwidth="5*" />
+            <colspec colnum="2" colname="description" colwidth="2*" />
+            <thead>
+               <row>
+                  <entry>Property = Default Value</entry>
+                  <entry>Description</entry>
+               </row>
+            </thead>
+            <tbody>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.api.ConfigurationBuilder=
+                     </literal>
+                     <literal>org.jboss.testharness.impl.PropertiesBasedConfigurationBuilder
+                     </literal>
+                  </entry>
+                  <entry>
+                     The configuration bootstrap class for the JBoss Test
+                     Harness.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.testPackage=</literal>
+                  </entry>
+                  <entry>
+                     The top-level Java package containing classes to be
+                     tested. Used to determine which artifacts to dump to disk
+                     only; not used during running of a suite.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.libraryDirectory=</literal>
+                  </entry>
+                  <entry>
+                     Directory containing extra JARs which should be deployed
+                     in
+                     the artifact (for example in
+                     <literal>WEB-INF/lib</literal>.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.standalone=true</literal>
+                  </entry>
+                  <entry>
+                     Tests are run using standalone mode if true or using
+                     in-container mode if false.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.runIntegrationTests=false
+                     </literal>
+                  </entry>
+                  <entry>
+                     If true, integration tests are run. In-container mode
+                     must be activated.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.spi.Containers=</literal>
+                  </entry>
+                  <entry>
+                     The deployment implementation for setting up and
+                     tearing down the container and deploying and undeploying
+                     in-container tests.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.host=localhost:8080
+                     </literal>
+                  </entry>
+                  <entry>
+                     The host and port on which the container is running.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.connectDelay=5000</literal>
+                  </entry>
+                  <entry>
+                     The timeout (ms) when attempting to connect to the
+                     container (e.g. via http).
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.api.TestLauncher=</literal>
+                  </entry>
+                  <entry>
+                     The in-container test launcher, the built in
+                     <literal>org.jboss.testharness.impl.runner.servlet.ServletTestLauncher
+                     </literal>
+                     is provided and suitable for any Servlet environment.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.container.\</literal>
+                     <literal>deploymentExceptionTransformer=</literal>
+                  </entry>
+                  <entry>
+                     Provides an interception feature for deployment
+                     exceptions,
+                     allowing them to be inspected and altered before
+                     reporting
+                     to the test harness for validation by the test
+                     case.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.container.forceRestart=false
+                     </literal>
+                  </entry>
+                  <entry>
+                     Whether the container should be restarted before the
+                     tests are executed.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.container.extraConfigurationDir=
+                     </literal>
+                  </entry>
+                  <entry>
+                     A directory containing a
+                     <literal>build.properties</literal>
+                     or
+                     <literal>local.build.properties</literal>
+                     files that define additional properties. Can be used to
+                     provide runtime specific properties.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.spi.StandaloneContainers=
+                     </literal>
+                  </entry>
+                  <entry>
+                     The container implementation for executing standalone
+                     tests.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>dumpArtifacts=false</literal>
+                  </entry>
+                  <entry>
+                     Whether the test artifacts should be written to disk
+                     for inspection.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.testharness.outputDirectory=</literal>
+                     <literal>%java.io.tmpdir%/jsr-299-tck/</literal>
+                  </entry>
+                  <entry>
+                     Directory where test artifacts will be written to disk, if
+                     <literal>dumpArtifacts</literal>
+                     is true.
+                  </entry>
+               </row>
+            </tbody>
+         </tgroup>
+      </table>
+   </section>
+</chapter>

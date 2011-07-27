@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<chapter id="test-harness-introduction">
+   <title>Introduction (JBoss Test Harness)</title>
+
+   <para>
+      This chapter explains the purpose of the test harness and describes
+      its key features.
+   </para>
+   <para>
+      The JBoss Test Harness is a testing framework based on TestNG that
+      provides a series of extensions that allow runtime packaging and
+      deployment of Java EE artifacts (EAR or WAR) for in-container testing.
+      It's important to note that the JBoss Test Harness has no relation with,
+      or dependency on, the JBoss Application Server (JBoss AS).
+   </para>
+   <note>
+      <para>
+         You'll often see the term
+         <emphasis role="italic">in-container</emphasis>
+         used in this reference guide. This term refers to running the test
+         suite in any of the aforementioned environments, whilst
+         <emphasis role="italic">standalone</emphasis>
+         refers to running the tests outside the container via an
+         implementation-specific standalone bootstrap. The standalone mode only
+         runs those tests which the CDI RI can run without deployment in a Java
+         EE container.
+      </para>
+   </note>
+   <para>
+      The last thing Java developers want is yet another testing framework to
+      make their life more complicated. That's why the JBoss Test Harness is
+      built entirely upon TestNG. TestNG is one of two prominent test
+      frameworks for Java (the other being JUnit). Furthermore, what developers
+      want is a good integration with their Integrated Development Environment
+      (IDE). These days, if a tool doesn't have an IDE plugin, then it won't
+      get the attention it deserves. TestNG plugins are available for all major
+      IDEs and build tools (Ant and Maven 2). Again, a motivating factor for
+      extending TestNG.
+   </para>
+   <para>
+      Because it leverages the existing TestNG ecosystem, there is no need for
+      a special test launcher for the JBoss Test Harness. You simply use the
+      IDE or build tool of your choice (so long as it has TestNG support). You
+      also get reporting and debugging for free (various reporting plugins are
+      provided for TestNG).
+   </para>
+   <para>
+      You can read more about TestNG at
+      <ulink url="http://testng.org/doc/documentation-main.html">testng.org</ulink>.
+   </para>
+   <para>
+      The JBoss Test Harness supports the following features:
+   </para>
+   <itemizedlist>
+      <listitem>
+         <para>
+            Test activation via any method supported by the TestNG
+            configuration descriptor (package, group, class)
+         </para>
+      </listitem>
+      <listitem>
+         <para>
+            Exclusion of in-container tests in standalone mode
+         </para>
+      </listitem>
+      <listitem>
+         <para>
+            Exclusion of individual tests labeled as under investigation
+         </para>
+      </listitem>
+      <listitem>
+         <para>
+            Integration with any TestNG plugin (Eclipse, IntelliJ, Ant, Maven)
+         </para>
+      </listitem>
+      <listitem>
+         <para>
+            Automated reporting capability as provided by TestNG
+         </para>
+      </listitem>
+      <listitem>
+         <para>
+            Standalone and in-container test mode
+         </para>
+      </listitem>
+      <listitem>
+         <para>
+            Container pluggability
+         </para>
+      </listitem>
+      <listitem>
+         <para>
+            Declarative packaging of additional resources and classes in
+            artifact
+         </para>
+      </listitem>
+      <listitem>
+         <para>
+            Declarative deployment exception trapping
+         </para>
+      </listitem>
+      <listitem>
+         <para>
+            Artifact dumping for failure and packaging analysis
+         </para>
+      </listitem>
+   </itemizedlist>
+   <para>
+      A test is designated by a method annotated with
+      <literal>@org.testng.annotations.Test</literal>
+      in a class which extends
+      <literal>org.jboss.testharness.AbstractTest</literal>
+      and is annotated with
+      <literal>@org.jboss.testharness.impl.packaging.Artifact</literal>.
+   </para>
+   <note>
+      <para>
+         Test suites may often choose to extend <literal>AbstractTest</literal>
+         and require tests to extend that base class. In fact, both the CDI TCK
+         and the Bean Validation TCK provide base classes that extend
+         <literal>AbstractTest</literal> to provide functionality specific to
+         the needs of the TCK.
+      </para>
+   </note>
+   <para>
+      The
+      <literal>@Test</literal>
+      annotation is provided by TestNG, the
+      <literal>@Artifact</literal>
+      annotation is provided by the JBoss Test Harness and the
+      <literal>AbstractTest</literal>
+      is part of the JBoss Test Harness. There is a one-to-one mapping between a
+      TestNG test class and an artifact. The packaging type is defined by the
+      <literal>@org.jboss.testharness.impl.packaging.Packaging</literal>
+      annotation on the test class, defaulting to a WAR if not specified.
+   </para>
+   <para>
+      Prior to executing the tests for a given class, the JBoss Test Harness
+      packages the class as a deployable artifact (EAR or WAR), along with any
+      extra resources specified, and deploys the artifact to the container. The
+      harness provides test execution and result reporting via HTTP
+      communication to a simple Servlet using a thin layer over the TestNG test
+      launcher. The test harness can also catch and enforce expected deployment
+      exceptions. This setup and tear down activity is provided by the super
+      class
+      <literal>org.jboss.testharness.AbstractTest</literal>,
+      which all test classes must extend (directly or indirectly).
+   </para>
+   <para>
+      If the annotation
+      <literal>@org.jboss.testharness.impl.packaging.IntegrationTest
+      </literal>
+      is not present on the test class, then it means the test class can be
+      executed in standalone mode. In standalone mode, the deployable artifact
+      is assembled on the local classpath and the tests execute in the same JVM
+      as the launcher, just as though it were a regular TestNG test case. The
+      standalone mode is provided for convenience and efficiency, allowing you
+      the speed of mock-based testing and the confidence of an in-container test,
+      using the same test objects and tests.
+   </para>
+   
+      <section id="in-container-communication">
+      <title>Negotiating the execution of an in-container test</title>
+      <para>
+         The basic procedure of an in-container test is as follows. The JBoss
+         Test Harness produces a deployable artifact from an
+         <literal>@Artifact</literal>
+         test class and any declared dependent classes, descriptors or other
+         resources. Then it deploys the artifact to the container using the
+         <literal>Containers</literal>
+         SPI, negotiates with the container to execute the test and return the
+         result and, finally, undeploys the artifact. TestNG collects the results
+         of all the tests run in the typical way and produces a report.
+      </para>
+      <graphic fileref="images/in-container-execution.png" align="center" />
+      <para>
+         The question is, how does the JBoss Test Harness negotiate with the
+         container to execute the test when TestNG is being invoked locally?
+         Technially the mechanism is pluggable, but JBoss Test Harness provides
+         a default implementation that uses HTTP communication that you will
+         likely use. Here's how the default implementation works.
+      </para>
+      <para>
+         The artifact generator bundles and registers (in the web.xml
+         descriptor) an
+         <literal>HttpServlet</literal>,
+         <literal>org.jboss.testharness.impl.runner.servlet.ServletTestRunner</literal>,
+         that responds to test execution GET requests. TestNG running on the
+         client side delegates to a test launcher (more on that in a moment)
+         which originates these text execution requests to transfer control to
+         the container JVM. The name of the test method to be executed is
+         specified in a request query parameter named
+         <literal>methodName</literal>.
+      </para>
+      <para>
+         When the test execution request is received, the servlet delegates to
+         an instance of
+         <literal>org.jboss.testharness.impl.runner.TestRunner</literal>,
+         passing it the name of the test method.
+         <literal>TestRunner</literal>
+         reads the name of the test class from the resource
+         META-INF/jboss-test-harness.properties, which is bundled in the
+         artifact by the artifact generator. It then combines the class name
+         and the method name to produce a TestNG test suite and runs the suite
+         (within the context of the container).
+      </para>
+      <para>
+         TestNG returns the results of the run as an
+         <literal>ITestResult</literal>
+         object.
+         <literal>ServletTestRunner</literal>
+         translates this object into a
+         <literal>org.jboss.testharness.api.TestResult</literal>
+         and passes it back to the test launcher on the client side by encoding
+         the translated object into the response. The object gets encoded as
+         either html or a serialized object, depending on the value of the
+         <literal>outputMode</literal>
+         request parameter that was passed to the servlet. Once the result has
+         been transfered to the client-side TestNG, TestNG wraps up the run of
+         the test as though it had been executed in the same JVM.
+      </para>
+      <para>
+         There's one piece missing. How does TestNG on the client side know to
+         submit a request to the
+         <literal>ServletTestRunner</literal>
+         servlet to get TestNG to execute the test in the container JVM? That's
+         the role of the test launcher.
+      </para>
+      <para>
+         The test launcher is the API that allows test suite to launch the test
+         in a pluggable fashion.
+         <literal>AbstractTest</literal>,
+         the super class of
+         <literal>AbtractJSR299Test</literal>,
+         implements
+         <literal>IHookable</literal>,
+         a TestNG interface which allows the execution of the test method to
+         be intercepted. Using that mechanism, <literal>AbstractTest</literal> delegates execution
+         of the test method (a method annotated with
+         <literal>@Test</literal>
+         in an
+         <literal>@Artifact</literal>
+         class) to an implementation of
+         <literal>org.jboss.testharness.api.TestLauncher</literal>
+         if the tests are being executed in-container. As you might anticipate,
+         the implementation is specified using a property with the same name as
+         the interface in a META-INF/jboss-test-launcher.properties resource.
+         The JBoss Test Harness provides a default implementation,
+         <literal>org.jboss.testharness.impl.runner.servlet.ServletTestLauncher</literal>,
+         that hooks into the HTTP communication infrastructure described
+         above. It invokes the
+         <literal>ServletTestRunner</literal>
+         servlet for each method annotated with
+         <literal>@Test</literal>
+         in the
+         <literal>@Artifact</literal>
+         that is not otherwise disabled.
+      </para>
+      <para>
+         If you wish to implement the runner yourself, you must return a
+         <literal>TestResult</literal> as a result of executing the method in
+         the container. You must also ensure that any exception which occurs
+         during deployment is wrapped as a
+         <literal>org.jboss.testharness.api.DeploymentException</literal>, and
+         that any communication problem is rethrown as an
+         <literal>IOException</literal>.  The deployment exception may be
+         transformed by an implementation of the
+         <literal>org.jboss.testharness.api.DeploymentExceptionTransformer
+         </literal> interface, which is specified using the
+         <literal>org.jboss.testharness.container.deploymentExceptionTransformer
+         </literal> property. The default implementation passes on the original
+         exception unchanged. The implementation for JBoss AS used with the CDI
+         TCK, on the other hand, deciphers the exception thrown by the JBoss
+         deployer and converts it to one of the catagory exceptions defined in
+         the CDI TCK API.
+      </para>
+      <para>
+         So in short, JBoss Test Harness takes care of all the interfaces you
+         need to execute tests in-container except for the implementation of
+         the <literal>Containers</literal> SPI. That is, unless you are
+         deploying to one of the containers supported by the JBoss Test Harness.
+      </para>
+   </section>
+</chapter>
