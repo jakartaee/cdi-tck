@@ -4,7 +4,7 @@
    <groupId>org.jboss.jsr299.tck</groupId>
    <artifactId>jsr299-tck-parent</artifactId>
    <packaging>pom</packaging>
-   <version>1.0.4.SP1</version>
+   <version>1.0.4-SNAPSHOT</version>
    <name>CDI TCK</name>
 
    <parent>
@@ -273,12 +273,12 @@
          </plugins>
       </pluginManagement>
    </build>
-
+   
    <scm>
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.4.SP1</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.4.SP1</developerConnection>
-      <url>https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.4.SP1</url>
-   </scm>
+       <connection>scm:git:git://github.com/jboss/cditck.git</connection>
+       <developerConnection>scm:git:git@github.com:jboss/cditck.git</developerConnection>
+       <url>https://github.com/jboss/cditck</url>
+    </scm>
 
    <profiles>
       <profile>

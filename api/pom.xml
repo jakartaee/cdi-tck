@@ -23,7 +23,7 @@ limitations under the License.
 	<parent>
 		<groupId>org.jboss.jsr299.tck</groupId>
 		<artifactId>jsr299-tck-parent</artifactId>
-		<version>1.0.4.SP1</version>
+		<version>1.0.4-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.jboss.jsr299.tck</groupId>
@@ -67,10 +67,10 @@ limitations under the License.
       </plugins>
    </build>
 
-   <scm>
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.4.SP1/api</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.4.SP1/api</developerConnection>
-      <url>https://svn.jboss.org/repos/weld/cdi-tck/tags/1.0.4.SP1/api</url>
-   </scm>
+    <scm>
+       <connection>scm:git:git://github.com/jboss/cditck.git</connection>
+       <developerConnection>scm:git:git@github.com:jboss/cditck.git</developerConnection>
+       <url>https://github.com/jboss/cditck</url>
+    </scm>
 
 </project>
