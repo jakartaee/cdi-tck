@@ -4,7 +4,7 @@
    <groupId>org.jboss.jsr299.tck</groupId>
    <artifactId>jsr299-tck-parent</artifactId>
    <packaging>pom</packaging>
-   <version>1.0.4-SNAPSHOT</version>
+   <version>1.0.4.SP3</version>
    <name>CDI TCK</name>
 
    <parent>
