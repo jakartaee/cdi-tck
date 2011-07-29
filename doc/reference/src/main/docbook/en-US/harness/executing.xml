@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
+<chapter id="executing-test-harness">
+   <title>Executing a Test Suite</title>
+   <para>
+      This chapter explains how to execute and debug a test suite built using
+      the JBoss Test Harness.
+   </para>
+   <section id="test-suite-runner">
+      <title>Building a test suite runner using Maven 2</title>
+      <para>
+         The test suite runner project is the magic that makes everything come
+         together and allows you to execute the test suite. If you fully
+         understand how the JBoss Test Harness functions, and have a good grasp
+         on Maven 2, then it's not to difficult to understand how the test suite
+         runner project works. Regardless of your background, this guide covers
+         what you need to know to get up and running by studying the test suite
+         runner used to run the CDI TCK against the CDI RI, Weld.
+      </para>
+      <para>
+         The TCK runner for the Weld can be found in the jboss-tck-runner
+         directory in the Weld distribution. The dependencies of the TCK
+         runner project for Weld are listed in
+         <xref linkend="tck-runner-dependencies" />. You must also pull in
+         the transitve dependencies of these projects.
+      </para>
+      <table frame="all" id="tck-runner-dependencies" title="CDI TCK Runner dependencies">
+         <title>Weld JBoss TCK Runner Dependencies</title>
+         <tgroup cols="3">
+            <colspec colname="c1" />
+            <colspec colname="c2" />
+            <colspec colname="c3" />
+            <thead>
+               <row>
+                  <entry>Group ID</entry>
+                  <entry>Artifact ID</entry>
+                  <entry>Version</entry>
+               </row>
+            </thead>
+            <tbody>
+               <row>
+                  <entry>javax.enterprise</entry>
+                  <entry>cdi-api</entry>
+                  <entry>1.0.X-Q</entry>
+               </row>
+               <row>
+                  <entry>org.jboss.jsr299.tck</entry>
+                  <entry>jsr299-tck-api</entry>
+                  <entry>1.0.X-Q</entry>
+               </row>
+               <row>
+                  <entry>org.jboss.jsr299.tck</entry>
+                  <entry>jsr299-tck-impl</entry>
+                  <entry>1.0.X-Q</entry>
+               </row>
+               <row>
+                  <entry>org.jboss.weld</entry>
+                  <entry>weld-core</entry>
+                  <entry>1.Y.Z-R</entry>
+               </row>
+               <row>
+                  <entry>org.jboss.weld</entry>
+                  <entry>weld-porting-package</entry>
+                  <entry>1.Y.Z-R</entry>
+               </row>
+               <row>
+                  <entry>org.testng</entry>
+                  <entry>testng (classifier: jdk15)</entry>
+                  <entry>5.10</entry>
+               </row>
+               <row>
+                  <entry>org.jboss.test-harness</entry>
+                  <entry>jboss-test-harness-jboss-as-52</entry>
+                  <entry>1.1.0-CR2</entry>
+               </row>
+            </tbody>
+         </tgroup>
+      </table>
+      <para>
+         You can find all of the CDI API and TCK in Maven Central and JBoss Test Harness in the <ulink
+         url="http://repository.jboss.org/nexus/content/groups/public/">JBoss Maven
+         repository</ulink>.
+      </para>
+      <para>
+         You should substitute the weld-core and weld-porting-package
+         artifacts from table 2.2.3 with your own artifacts. You'll also need to
+         replace the jboss-test-harness-jboss-as-52 artifact if you are not
+         testing your implementation on JBoss AS 6.0. The
+         jboss-test-harness-jboss-as-52 artifact contains implementations of the
+         <literal>Containers</literal>
+         SPI for the JBoss Test Harness for JBoss AS 6.0.
+      </para>
+      <note>
+         <para>
+            When running the test suite in the in-container mode, the tests
+            will run against libraries installed into the container. In this
+            project, Weld is only declared as a Maven dependency for when
+            the TCK test suite is being executed in standalone mode.
+         </para>
+      </note>
+
+      <programlisting role="xml"><![CDATA[<plugin>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-dependency-plugin</artifactId>
+  <executions>
+    <execution>
+      <id>copy</id>
+      <phase>process-resources</phase>
+      <goals>
+        <goal>copy</goal>
+      </goals>
+      <configuration>
+        <stripVersion>true</stripVersion>
+        <artifactItems>
+          <artifactItem>
+            <groupId>org.jboss.jsr299.tck</groupId>
+            <artifactId>jsr299-tck-impl</artifactId>
+            <type>xml</type>
+            <classifier>suite</classifier>
+            <overWrite>true</overWrite>
+          </artifactItem>
+          <artifactItem>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>
+              weld-porting-package
+            </artifactId>
+            <overWrite>true</overWrite>
+            <outputDirectory>
+              ${project.build.directory}/dependency/lib
+            </outputDirectory>
+          </artifactItem>
+          <artifactItem>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-core-test</artifactId>
+            <overWrite>true</overWrite>
+            <outputDirectory>
+              ${project.build.directory}/dependency/lib
+            </outputDirectory>
+          </artifactItem>
+          <artifactItem>
+            <groupId>javax.el</groupId>
+            <artifactId>el-ri</artifactId>
+            <overWrite>true</overWrite>
+            <outputDirectory>
+              ${project.build.directory}/dependency/lib
+            </outputDirectory>
+            </artifactItem>
+          </artifactItems>
+       </configuration>
+     </execution>
+   </executions>
+</plugin>]]></programlisting>
+      <para>
+         The target folder for the copies of the dependencies (i.e., the JAR
+         files) is declared as the JBoss Test Harness library directory; this
+         results in these libraries being added to the test artifact using the
+         following property assignment:
+      </para>
+      <programlisting>org.jboss.testharness.libraryDirectory=target/dependency/lib</programlisting>
+      <para>
+         We also copy the test suite configuration from the
+         local Maven
+         repository (groupId=org.jboss.jsr299.tck,
+         artifactId=jsr299-tck-impl,
+         classifier=suite, type=xml,
+         version=1.0.0-SNAPSHOT) to a local
+         repository as the TestNG Maven
+         plugin expects a local file.
+      </para>
+      <para>
+         The TCK is executed using the Maven TestNG plugin. Maven 2 profiles are
+         used to control the properties that are set at the time of the
+         execution. For instance, the
+         <literal>incontainer</literal>
+         profile enables integration tests and disables standalone mode,
+         changing the default settings.
+      </para>
+      <para>
+         The jboss-tck-runner project also defines the JBoss Test Harness
+         extra configuration directory using the following property:
+      </para>
+      <programlisting>org.jboss.testharness.container.extraConfigurationDir=../jboss-as</programlisting>
+      <para>
+         The JBoss Test Harness looks in this directory for either a
+         build.properties or local.build.properties file that declares
+         additional configuration properties. In particular, the JBoss AS
+         Containers implementation looks here to find the
+         <literal>jboss.home</literal> property so it knows where the scripts
+         are located to start and stop JBoss AS.
+      </para>
+   </section>
+
+   <section id="dumping-test-artifacts">
+      <title>Dumping the Test Artifacts to Disk</title>
+      <para>
+         As you have learned, when the test suite is executing using
+         in-container mode, each test class is packaged as a deployable artifact
+         and deployed to the container. The test is then executed within the
+         context of the deployed application. This leaves room for errors in
+         packaging. When investigating a test failure, it's helpful to be able
+         to inspect the artifact after it is generated. The JBoss Test Harness
+         can accommodate this type of inspection by "dumping" the generated
+         artifact to disk.
+      </para>
+      <para>
+         If you want to write the artifacts to disk, and avoid executing the
+         test suite, you can simply execute the main method of the class
+         <literal>org.jboss.testharness.api.TCK</literal>.
+         For example you could use a Maven profile that is activated when the
+         <literal>dumpArtifacts</literal>
+         command line property is defined:
+      </para>
+      <programlisting>mvn test-compile -DdumpArtifacts</programlisting>
+      <para>
+         The output directory where the artifacts are written is defined by the
+         property
+         <literal>org.jboss.testharness.outputDirectory</literal>.
+      </para>
+      <para>
+         Once the artifact is written to disk, you have an option of manually
+         deploying it to the container. You can execute the tests in the artfact
+         by requesting the context path of the application in the browser. If
+         you want to execute an individual test method, specify the method name
+         in the
+         <literal>methodName</literal>
+         request parameter (e.g., ?methodName=testMethodName).
+      </para>
+   </section>
+</chapter>
