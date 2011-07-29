@@ -61,9 +61,9 @@
    </build>
 
    <scm>
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/trunk</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk</developerConnection>
-     <url>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/trunk/jsr299-tck-reference-guide</url>
-  </scm>
+       <connection>scm:git:git://github.com/jboss/cditck.git</connection>
+       <developerConnection>scm:git:git@github.com:jboss/cditck.git</developerConnection>
+       <url>https://github.com/jboss/cditck</url>
+   </scm>
 
 </project>
