@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.privateConstru
 
 import javax.inject.Inject;
 
-class InjectionPointBean
+public class InjectionPointBean
 {
    @Inject Unproxyable_Broken foo;
 }

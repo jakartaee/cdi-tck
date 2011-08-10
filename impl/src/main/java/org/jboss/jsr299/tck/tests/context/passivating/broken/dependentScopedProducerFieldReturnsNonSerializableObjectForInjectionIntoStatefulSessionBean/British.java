@@ -31,7 +31,7 @@ import javax.inject.Qualifier;
 @Qualifier
 @Target( { FIELD, PARAMETER, METHOD, TYPE })
 @Retention(RUNTIME)
-@interface British
+public @interface British
 {
 
 }

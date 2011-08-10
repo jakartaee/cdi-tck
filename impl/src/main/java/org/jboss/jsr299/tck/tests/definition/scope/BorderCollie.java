@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.definition.scope;
 
-class BorderCollie extends Dog
+public class BorderCollie extends Dog
 {
    
 }

@@ -16,6 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.event;
 
-class StockPrice extends EventPayload
+public class StockPrice extends EventPayload
 {
 }

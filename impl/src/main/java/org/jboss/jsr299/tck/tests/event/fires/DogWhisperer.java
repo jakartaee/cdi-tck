@@ -20,7 +20,7 @@ import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
-class DogWhisperer
+public class DogWhisperer
 {
    @Inject @Any @Tame @Role("Master") 
    Event<TamingCommand> tamingEvent;

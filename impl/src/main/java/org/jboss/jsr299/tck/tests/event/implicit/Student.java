@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.event.implicit;
 
-class Student
+public class Student
 {
    private String name;
    

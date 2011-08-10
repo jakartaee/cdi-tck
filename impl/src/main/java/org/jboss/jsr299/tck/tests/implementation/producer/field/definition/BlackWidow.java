@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
-class BlackWidow extends Spider implements DeadlySpider
+public class BlackWidow extends Spider implements DeadlySpider
 {
    public void bite()
    {

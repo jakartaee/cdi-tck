@@ -20,7 +20,7 @@ import javax.enterprise.inject.Specializes;
 
 
 @Specializes @Lazy
-class LazyFarmer extends Farmer
+public class LazyFarmer extends Farmer
 {
    
    @Override

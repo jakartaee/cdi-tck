@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
 import javax.enterprise.inject.Produces;
 
-class SpiderProducer
+public class SpiderProducer
 {
    
    private static Spider[] ALL_SPIDERS = { new Tarantula(), new LadybirdSpider(), new DaddyLongLegs() };

@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
-class ManagedBean implements Serializable
+public class ManagedBean implements Serializable
 {
    @Inject @Another
    private BeanManager beanManager;

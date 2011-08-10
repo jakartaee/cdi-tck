@@ -25,7 +25,7 @@ import java.util.Set;
 
 import javax.enterprise.inject.spi.Annotated;
 
-class AnnotatedWrapper implements Annotated
+public class AnnotatedWrapper implements Annotated
 {
    
    private Annotated delegate;

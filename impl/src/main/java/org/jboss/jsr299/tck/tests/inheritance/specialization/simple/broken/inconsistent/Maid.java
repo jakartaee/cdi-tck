@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.inco
 import javax.enterprise.inject.Specializes;
 
 @Specializes
-class Maid extends Employee
+public class Maid extends Employee
 {
 
 }

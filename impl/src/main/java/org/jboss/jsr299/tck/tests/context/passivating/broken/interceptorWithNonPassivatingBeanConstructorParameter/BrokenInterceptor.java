@@ -26,7 +26,7 @@ import javax.interceptor.InvocationContext;
 
 @Interceptor
 @BakedBinding
-class BrokenInterceptor implements Serializable
+public class BrokenInterceptor implements Serializable
 {
    @Inject
    public BrokenInterceptor(@Default UnserializableManagedBean violation)

@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.custom;
 
-interface Vehicle
+public interface Vehicle
 {
    String start();
    String stop();

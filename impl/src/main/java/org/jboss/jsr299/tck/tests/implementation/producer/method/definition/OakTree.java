@@ -20,7 +20,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
-class OakTree
+public class OakTree
 {
    @Produces @Dependent public Acorn growAcorn()
    {

@@ -20,7 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
-class FishPond
+public class FishPond
 {
    public boolean postConstructCalled;
    

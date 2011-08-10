@@ -27,7 +27,7 @@ import javax.enterprise.inject.Stereotype;
 @Stereotype
 @Target( { TYPE })
 @Retention(RUNTIME)
-@interface RequestScopedAnimalStereotype
+public @interface RequestScopedAnimalStereotype
 {
 
 }

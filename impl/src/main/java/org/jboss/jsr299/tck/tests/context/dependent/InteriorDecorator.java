@@ -25,7 +25,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-class InteriorDecorator implements Interior
+public class InteriorDecorator implements Interior
 {
    @Inject @Delegate @Room Interior interior;
    

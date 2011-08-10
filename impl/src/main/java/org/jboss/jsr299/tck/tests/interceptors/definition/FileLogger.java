@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Logged @Interceptor
-class FileLogger
+public class FileLogger
 {
    public static boolean intercepted = false;
 

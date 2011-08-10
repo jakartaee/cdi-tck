@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-class Car implements Serializable
+public class Car implements Serializable
 {
    private static final long serialVersionUID = -5928715726257481259L;
    private String make = "unknown";

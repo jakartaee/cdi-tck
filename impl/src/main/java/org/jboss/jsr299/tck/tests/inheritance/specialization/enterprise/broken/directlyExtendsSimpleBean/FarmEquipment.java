@@ -20,7 +20,7 @@ import javax.inject.Named;
 
 
 @Named("plough")
-class FarmEquipment 
+public class FarmEquipment 
 {
 
 }

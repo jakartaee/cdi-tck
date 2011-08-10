@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition;
 
 import javax.enterprise.inject.Disposes;
 
-class DisposalNonBean
+public class DisposalNonBean
 {
    private static boolean spiderDestroyed = false;
    

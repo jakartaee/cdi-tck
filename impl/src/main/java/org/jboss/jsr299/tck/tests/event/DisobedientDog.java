@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.event;
 
-class DisobedientDog
+public class DisobedientDog
 {
 
 }

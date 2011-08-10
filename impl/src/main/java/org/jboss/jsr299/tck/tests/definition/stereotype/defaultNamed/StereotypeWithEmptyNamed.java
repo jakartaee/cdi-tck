@@ -29,7 +29,7 @@ import javax.inject.Named;
 @Target( { TYPE })
 @Retention(RUNTIME)
 @Named
-@interface StereotypeWithEmptyNamed
+public @interface StereotypeWithEmptyNamed
 {
 
 }

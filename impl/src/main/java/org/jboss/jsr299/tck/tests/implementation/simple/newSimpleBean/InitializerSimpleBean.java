@@ -25,7 +25,7 @@ import javax.inject.Named;
 
 @SessionScoped
 @Named("Charlie") @Default
-class InitializerSimpleBean implements Serializable
+public class InitializerSimpleBean implements Serializable
 {
    
    private static final long serialVersionUID = 1L;

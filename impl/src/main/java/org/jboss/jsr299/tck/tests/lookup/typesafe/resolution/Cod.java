@@ -21,7 +21,7 @@ import javax.inject.Named;
 @Whitefish
 @Chunky(realChunky=true)
 @Named("whitefish")
-class Cod implements ScottishFish
+public class Cod implements ScottishFish
 {
 
 }

@@ -23,7 +23,7 @@ import javax.inject.Named;
 @RequestScoped
 @Named
 @Alternative
-class Dog
+public class Dog
 {
 
 }

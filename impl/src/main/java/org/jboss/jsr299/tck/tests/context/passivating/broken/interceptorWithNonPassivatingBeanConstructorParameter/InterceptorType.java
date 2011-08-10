@@ -28,7 +28,7 @@ import javax.interceptor.InterceptorBinding;
 @Target({TYPE, METHOD})
 @Retention(RUNTIME)
 @InterceptorBinding
-@interface InterceptorType
+public @interface InterceptorType
 {
 
 }

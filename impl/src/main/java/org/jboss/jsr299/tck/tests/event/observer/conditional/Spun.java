@@ -32,6 +32,6 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-@interface Spun
+public @interface Spun
 {
 }

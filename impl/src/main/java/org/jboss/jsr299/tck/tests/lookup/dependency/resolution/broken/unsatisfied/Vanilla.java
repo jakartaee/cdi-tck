@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.lookup.dependency.resolution.broken.unsatisfied;
 
 
-class Vanilla
+public class Vanilla
 {
 
 }

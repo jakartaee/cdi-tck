@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.parameterized;
 
 import java.util.HashMap;
 
-class IntegerHashMap extends HashMap<Integer, Integer>{
+public class IntegerHashMap extends HashMap<Integer, Integer>{
 
 	private static final long serialVersionUID = 1L;
 }

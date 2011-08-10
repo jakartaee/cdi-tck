@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 
 import javax.annotation.PreDestroy;
 
-class Salmon
+public class Salmon
 {
    private static boolean beanDestroyed = false;
    

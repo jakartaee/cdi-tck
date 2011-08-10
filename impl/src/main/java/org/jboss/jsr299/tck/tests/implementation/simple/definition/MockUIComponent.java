@@ -29,7 +29,7 @@ import javax.faces.event.FacesEvent;
 import javax.faces.event.FacesListener;
 import javax.faces.render.Renderer;
 
-class MockUIComponent extends UIComponent
+public class MockUIComponent extends UIComponent
 {
    
    @Override

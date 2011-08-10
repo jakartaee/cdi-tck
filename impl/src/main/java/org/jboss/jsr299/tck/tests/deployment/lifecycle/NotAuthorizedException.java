@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.lifecycle;
 
-class NotAuthorizedException extends RuntimeException
+public class NotAuthorizedException extends RuntimeException
 {
    private static final long serialVersionUID = 1L;
 

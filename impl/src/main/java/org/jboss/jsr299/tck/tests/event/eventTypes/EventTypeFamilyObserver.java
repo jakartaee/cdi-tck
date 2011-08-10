@@ -24,7 +24,7 @@ import javax.enterprise.event.Observes;
  * 
  * @author David Allen
  */
-class EventTypeFamilyObserver
+public class EventTypeFamilyObserver
 {
    private static int objectEventQuantity = 0;
    private static int generalEventQuantity = 0;

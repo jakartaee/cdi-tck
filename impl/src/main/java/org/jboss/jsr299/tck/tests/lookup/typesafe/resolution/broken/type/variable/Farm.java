@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.broken.type.variab
 import javax.inject.Inject;
 
 @SuppressWarnings("unused")
-class Farm
+public class Farm
 {
    @Inject
    public <T extends Animal> void setAnimal(T animal)

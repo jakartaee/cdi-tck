@@ -22,7 +22,7 @@ import javax.enterprise.inject.Default;
 import javax.inject.Named;
 
 @Dependent @Named @Default
-class Fox
+public class Fox
 {
    
    private static boolean destroyed = false;

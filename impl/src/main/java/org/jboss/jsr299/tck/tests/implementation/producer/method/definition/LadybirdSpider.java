@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-class LadybirdSpider extends Spider implements Serializable
+public class LadybirdSpider extends Spider implements Serializable
 {
 
    /**

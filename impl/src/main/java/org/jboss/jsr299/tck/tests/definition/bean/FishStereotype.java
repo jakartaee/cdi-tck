@@ -31,7 +31,7 @@ import javax.inject.Named;
 @Retention(RUNTIME)
 @ApplicationScoped
 @Named
-@interface FishStereotype
+public @interface FishStereotype
 {
 
 }

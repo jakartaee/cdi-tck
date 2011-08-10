@@ -24,7 +24,7 @@ import javax.inject.Inject;
  * @author David Allen
  * 
  */
-class ConstructorInjectionPointBean
+public class ConstructorInjectionPointBean
 {
    private BeanWithInjectionPointMetadata injectedBean;
 

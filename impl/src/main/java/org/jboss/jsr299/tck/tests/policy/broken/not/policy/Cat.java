@@ -21,7 +21,7 @@ import javax.inject.Named;
 
 @RequestScoped
 @Named
-class Cat
+public class Cat
 {
 
 }

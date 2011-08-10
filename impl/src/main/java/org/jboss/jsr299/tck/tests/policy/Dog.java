@@ -20,7 +20,7 @@ import javax.inject.Named;
 
 @NotEnabledPolicyStereotype
 @Named
-class Dog implements Animal
+public class Dog implements Animal
 {
 
 }

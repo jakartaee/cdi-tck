@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named("foxRun") @Default
-class FoxRun
+public class FoxRun
 {   
    private static boolean destroyed = false;
 

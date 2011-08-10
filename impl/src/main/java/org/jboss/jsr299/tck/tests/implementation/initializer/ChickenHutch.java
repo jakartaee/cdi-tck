@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.initializer;
 
 import javax.inject.Inject;
 
-class ChickenHutch
+public class ChickenHutch
 {
    
    public Fox fox;

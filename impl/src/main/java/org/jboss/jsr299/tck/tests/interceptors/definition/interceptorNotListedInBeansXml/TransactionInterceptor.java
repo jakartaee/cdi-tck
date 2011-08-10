@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Transactional @Interceptor
-class TransactionInterceptor
+public class TransactionInterceptor
 {
    public static boolean invoked = false;
    

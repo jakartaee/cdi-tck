@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.passivatingProduce
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 
-class Peraseinajoki extends City
+public class Peraseinajoki extends City
 {
 
    @Produces @SessionScoped

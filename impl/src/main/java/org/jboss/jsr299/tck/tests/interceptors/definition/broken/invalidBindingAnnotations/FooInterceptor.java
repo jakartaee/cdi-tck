@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @FooBinding("abc") @Interceptor
-class FooInterceptor
+public class FooInterceptor
 {
    @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
    {

@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.context.dependent;
 import javax.annotation.PreDestroy;
 import javax.enterprise.inject.Produces;
 
-class OtherSpiderProducer
+public class OtherSpiderProducer
 {
    private static boolean destroyed = false;
    

@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
 
-class OuterClass
+public class OuterClass
 {
 
    class InnerClass_NotBean

@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Interceptor @MissileBinding
-class MissileInterceptor
+public class MissileInterceptor
 {
    public static boolean intercepted = false;
    

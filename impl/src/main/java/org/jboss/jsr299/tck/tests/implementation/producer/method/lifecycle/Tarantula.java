@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.lifecycle;
 
-class Tarantula extends Spider implements DeadlySpider
+public class Tarantula extends Spider implements DeadlySpider
 {
    private final String value;
    private static int numberCreated = 0;

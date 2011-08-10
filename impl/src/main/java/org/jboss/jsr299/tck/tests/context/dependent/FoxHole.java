@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.context.dependent;
 
 import javax.inject.Inject;
 
-class FoxHole
+public class FoxHole
 {
    @Inject public Fox fox;
    

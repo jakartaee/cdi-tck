@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Atomic @Interceptor
-class AtomicInterceptor
+public class AtomicInterceptor
 {
    public static boolean intercepted = false;
    

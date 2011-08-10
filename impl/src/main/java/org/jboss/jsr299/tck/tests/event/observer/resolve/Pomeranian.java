@@ -20,7 +20,7 @@ import javax.enterprise.event.Observes;
 import javax.inject.Named;
 
 @Named("Teddy")
-class Pomeranian
+public class Pomeranian
 {
    public static Thread notificationThread;
    

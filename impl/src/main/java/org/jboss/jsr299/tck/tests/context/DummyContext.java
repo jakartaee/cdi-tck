@@ -22,7 +22,7 @@ import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.Contextual;
 import javax.enterprise.context.spi.CreationalContext;
 
-class DummyContext implements Context
+public class DummyContext implements Context
 {
    public <T> T get(Contextual<T> bean, CreationalContext<T> creationalContext)
    {

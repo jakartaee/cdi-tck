@@ -20,7 +20,7 @@ import javax.enterprise.inject.Default;
 import javax.inject.Named;
 
 @Named @Default
-class Haddock implements Animal
+public class Haddock implements Animal
 {
 
 }

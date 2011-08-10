@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-class SpiderProducer
+public class SpiderProducer
 {
    private static boolean tameSpiderDestroyed = false;
    private static boolean deadliestSpiderDestroyed = false;

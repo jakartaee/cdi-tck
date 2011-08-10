@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 
 import javax.inject.Inject;
 
-class TunaFarm
+public class TunaFarm
 {
 
    @SuppressWarnings("unused")

@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
-class Turkey
+public class Turkey
 {
    
    @Produces public static String foo = "foo";

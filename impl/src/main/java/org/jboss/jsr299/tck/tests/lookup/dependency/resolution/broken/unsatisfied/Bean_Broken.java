@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.dependency.resolution.broken.unsatisfi
 import javax.inject.Inject;
 
 @SuppressWarnings("unused")
-class Bean_Broken
+public class Bean_Broken
 {
 
    @Inject @Small

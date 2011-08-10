@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.event.implicit;
 
-class CourseFullEvent
+public class CourseFullEvent
 {
    private Course course;
 

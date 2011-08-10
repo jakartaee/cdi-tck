@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 @SuppressWarnings("unused")
 @RequestScoped
-class Cat_Broken {
+public class Cat_Broken {
 
 	@Inject private InjectionPoint ip;
 	

@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.definition;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-class NonBeanWithStaticProducerMethod
+public class NonBeanWithStaticProducerMethod
 {
    public NonBeanWithStaticProducerMethod(String someString)
    {

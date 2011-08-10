@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.injection;
 
 import javax.inject.Inject;
 
-class FoxRun
+public class FoxRun
 {
    
    @Inject

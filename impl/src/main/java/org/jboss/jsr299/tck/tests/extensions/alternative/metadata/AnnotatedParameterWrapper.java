@@ -21,7 +21,7 @@ import java.lang.annotation.Annotation;
 import javax.enterprise.inject.spi.AnnotatedCallable;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 
-class AnnotatedParameterWrapper<X> extends AnnotatedWrapper implements AnnotatedParameter<X>
+public class AnnotatedParameterWrapper<X> extends AnnotatedWrapper implements AnnotatedParameter<X>
 {
    private AnnotatedParameter<X> delegate;
    

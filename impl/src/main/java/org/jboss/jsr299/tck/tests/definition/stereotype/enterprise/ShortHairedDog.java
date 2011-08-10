@@ -22,7 +22,7 @@ import javax.enterprise.context.SessionScoped;
 
 @AnimalStereotype
 @SessionScoped
-class ShortHairedDog implements Animal, Serializable
+public class ShortHairedDog implements Animal, Serializable
 {
 
 	/**

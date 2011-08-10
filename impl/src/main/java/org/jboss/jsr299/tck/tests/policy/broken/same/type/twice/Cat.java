@@ -21,7 +21,7 @@ import javax.enterprise.inject.Alternative;
 
 @RequestScoped
 @Alternative
-class Cat
+public class Cat
 {
 
 }

@@ -31,7 +31,7 @@ import javax.interceptor.InterceptorBinding;
 @Documented
 @MissileBinding
 @InterceptorBinding
-@interface Atomic
+public @interface Atomic
 {
 
 }

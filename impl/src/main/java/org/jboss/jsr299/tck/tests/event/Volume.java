@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.event;
 
-class Volume
+public class Volume
 {
 
 }

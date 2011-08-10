@@ -23,7 +23,7 @@ import javax.interceptor.Interceptor;
 
 @Decorator
 @Interceptor
-class InterceptingDecorator
+public class InterceptingDecorator
 {
    @Inject @Delegate Automobile automobile;
 }

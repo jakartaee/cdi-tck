@@ -22,7 +22,7 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.InjectionTarget;
 
-class CheckableInjectionTarget<T> implements InjectionTarget<T>
+public class CheckableInjectionTarget<T> implements InjectionTarget<T>
 {
    private InjectionTarget<T> wrappedInjectionTarget;
    private static boolean injectCalled;

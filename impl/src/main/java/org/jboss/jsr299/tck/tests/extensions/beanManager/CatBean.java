@@ -31,7 +31,7 @@ import javax.enterprise.inject.spi.PassivationCapable;
 
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
-class CatBean implements Bean<Cat>, PassivationCapable
+public class CatBean implements Bean<Cat>, PassivationCapable
 {
    public static final CatBean bean = new CatBean();
    

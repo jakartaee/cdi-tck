@@ -20,7 +20,7 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.Specializes;
 import javax.inject.Named;
 
-class HighSchool_Broken extends School
+public class HighSchool_Broken extends School
 {
    @Override @Produces @Specializes@Named
    public Pupil getStarPupil()

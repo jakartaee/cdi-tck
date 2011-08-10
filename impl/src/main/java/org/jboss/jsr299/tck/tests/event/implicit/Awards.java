@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.event.implicit;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 
-class Awards
+public class Awards
 {
    private @Any @Honors Event<AwardEvent> honorsAwardEvent;
    

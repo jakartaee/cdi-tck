@@ -20,7 +20,7 @@ import javax.enterprise.context.RequestScoped;
 
 @ApplicationScopedHornedMammalStereotype
 @RequestScoped
-class Springbok implements Animal
+public class Springbok implements Animal
 {
    
 }

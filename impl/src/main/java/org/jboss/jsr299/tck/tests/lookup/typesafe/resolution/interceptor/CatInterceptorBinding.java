@@ -30,6 +30,6 @@ import javax.interceptor.InterceptorBinding;
 @InterceptorBinding
 @Target( { TYPE, METHOD })
 @Retention(RUNTIME)
-@interface CatInterceptorBinding
+public @interface CatInterceptorBinding
 {
 }

@@ -23,7 +23,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 @ApplicationScoped
-class ApplicationHorseStable
+public class ApplicationHorseStable
 {
    @Inject
    private BeanManager beanManager;

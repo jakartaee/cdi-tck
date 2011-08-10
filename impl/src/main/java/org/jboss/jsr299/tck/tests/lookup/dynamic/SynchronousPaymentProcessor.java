@@ -16,6 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dynamic;
 
-interface SynchronousPaymentProcessor extends PaymentProcessor
+public interface SynchronousPaymentProcessor extends PaymentProcessor
 {
 }

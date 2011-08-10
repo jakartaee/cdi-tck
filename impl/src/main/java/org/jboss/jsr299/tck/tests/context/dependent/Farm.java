@@ -20,7 +20,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 @RequestScoped
-class Farm
+public class Farm
 {
    
    @Inject Stable stable;

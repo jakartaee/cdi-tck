@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.newSimpleBean;
 
-class Litter
+public class Litter
 {
    private int quantity;
    

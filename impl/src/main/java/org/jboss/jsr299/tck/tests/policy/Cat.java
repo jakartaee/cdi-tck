@@ -21,7 +21,7 @@ import javax.inject.Named;
 
 @EnabledPolicyStereotype
 @Named @Default
-class Cat implements Animal
+public class Cat implements Animal
 {
 
 }

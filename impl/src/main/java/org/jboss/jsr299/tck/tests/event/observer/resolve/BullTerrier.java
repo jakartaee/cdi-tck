@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.event.observer.resolve;
 
 import javax.enterprise.event.Observes;
 
-class BullTerrier
+public class BullTerrier
 {
    private static boolean multiBindingEventObserved = false;
    private static boolean singleBindingEventObserved = false;

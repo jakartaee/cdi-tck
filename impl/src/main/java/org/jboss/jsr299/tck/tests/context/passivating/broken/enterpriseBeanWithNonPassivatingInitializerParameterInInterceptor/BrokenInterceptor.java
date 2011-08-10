@@ -27,7 +27,7 @@ import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 
 @Interceptor @City
 @BeansXml("beans.xml")
-class BrokenInterceptor implements Serializable
+public class BrokenInterceptor implements Serializable
 {
    @Inject
    public void init(District district) {}

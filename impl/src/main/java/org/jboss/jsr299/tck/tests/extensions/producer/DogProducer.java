@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.extensions.producer;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-class DogProducer
+public class DogProducer
 {
    public static final String QUIET_DOG_COLOR = "Black";
    public static final String NOISY_DOG_COLOR = "White";

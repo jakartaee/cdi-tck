@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
 
-class Donkey
+public class Donkey
 {
    
    public static boolean constructedCorrectly = false;

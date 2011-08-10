@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.interceptors.definition;
 import javax.inject.Inject;
 
 @MissileBinding
-class Missile
+public class Missile
 {
    @Inject
    private Warhead warhead;

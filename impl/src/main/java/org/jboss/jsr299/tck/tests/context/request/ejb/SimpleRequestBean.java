@@ -20,7 +20,7 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-class SimpleRequestBean
+public class SimpleRequestBean
 {
    private double id = Math.random();
    private static boolean beanDestroyed = false;

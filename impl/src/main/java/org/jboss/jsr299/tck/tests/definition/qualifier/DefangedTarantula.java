@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
-class DefangedTarantula extends Tarantula
+public class DefangedTarantula extends Tarantula
 {
 
 	/**

@@ -21,7 +21,7 @@ import javax.enterprise.context.RequestScoped;
 @FishStereotype
 @AnimalStereotype
 @RequestScoped
-class ComplicatedTuna implements Animal
+public class ComplicatedTuna implements Animal
 {
 
 }

@@ -25,7 +25,7 @@ import javax.inject.Inject;
 @SuppressWarnings( "unused" )
 @ApplicationScoped
 @Expensive
-class Grocery implements Shop
+public class Grocery implements Shop
 {
    private Vegetables vegetables;
    @Inject

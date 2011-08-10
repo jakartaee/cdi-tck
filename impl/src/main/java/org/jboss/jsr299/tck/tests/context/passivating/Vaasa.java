@@ -23,7 +23,7 @@ import javax.inject.Inject;
 
 @SuppressWarnings("serial")
 @SessionScoped
-class Vaasa implements Serializable
+public class Vaasa implements Serializable
 {
    @SuppressWarnings("unused")
    @Inject private HelsinkiLocal ejb;

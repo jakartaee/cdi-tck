@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.finalMethod;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-class Tuna_Broken
+public class Tuna_Broken
 {
    public final String getFoo() { return null; } 
 }

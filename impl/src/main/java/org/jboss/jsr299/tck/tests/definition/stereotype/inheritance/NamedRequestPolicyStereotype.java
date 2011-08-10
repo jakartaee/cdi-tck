@@ -34,7 +34,7 @@ import javax.enterprise.inject.Stereotype;
 @Retention(RUNTIME)
 @Alternative
 @Inherited
-@interface NamedRequestPolicyStereotype
+public @interface NamedRequestPolicyStereotype
 {
 
 }

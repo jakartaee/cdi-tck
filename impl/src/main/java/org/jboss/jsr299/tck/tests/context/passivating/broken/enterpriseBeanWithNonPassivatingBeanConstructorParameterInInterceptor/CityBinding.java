@@ -30,7 +30,7 @@ import javax.interceptor.InterceptorBinding;
 @Dependent
 @Target({TYPE, METHOD})
 @Retention(RUNTIME)
-@interface CityBinding
+public @interface CityBinding
 {
 
 }

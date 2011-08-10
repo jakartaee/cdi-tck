@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dependency.resolution.broken.ambiguous;
 
-class Sheep implements Animal
+public class Sheep implements Animal
 {
 
 }

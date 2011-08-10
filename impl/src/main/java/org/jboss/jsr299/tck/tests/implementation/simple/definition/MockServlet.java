@@ -24,7 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-class MockServlet implements Servlet
+public class MockServlet implements Servlet
 {
 
    public void destroy()

@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
 @Target( { TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
-@interface NonBinding
+public @interface NonBinding
 {
 
 }

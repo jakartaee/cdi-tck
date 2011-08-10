@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-class MyApplicationBean implements Serializable
+public class MyApplicationBean implements Serializable
 {
 
    /**

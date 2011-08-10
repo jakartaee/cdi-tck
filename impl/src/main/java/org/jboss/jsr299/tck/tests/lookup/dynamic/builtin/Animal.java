@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dynamic.builtin;
 
-interface Animal
+public interface Animal
 {
 
 }

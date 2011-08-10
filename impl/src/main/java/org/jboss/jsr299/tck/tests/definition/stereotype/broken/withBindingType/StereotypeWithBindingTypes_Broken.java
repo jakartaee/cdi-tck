@@ -28,6 +28,6 @@ import javax.enterprise.inject.Stereotype;
 @Target( { TYPE })
 @Retention(RUNTIME)
 @Asynchronous
-@interface StereotypeWithBindingTypes_Broken
+public @interface StereotypeWithBindingTypes_Broken
 {
 }

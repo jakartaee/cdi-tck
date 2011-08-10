@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
-interface Animal
+public interface Animal
 {
 	String hello();
 }

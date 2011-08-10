@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy;
 import javax.enterprise.context.Dependent;
 
 @Dependent
-class Fox
+public class Fox
 {
    
    public String getName()

@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.event.observer;
 
 import javax.enterprise.event.Observes;
 
-class StockWatcher
+public class StockWatcher
 {
    private static Class<?> observerClazz;
    

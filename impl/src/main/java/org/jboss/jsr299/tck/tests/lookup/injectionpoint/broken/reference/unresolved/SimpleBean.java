@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint.broken.reference.unresolved;
 
 
-class SimpleBean
+public class SimpleBean
 {
    private InjectedBean injectedBean;
 

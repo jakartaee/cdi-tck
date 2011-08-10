@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 
 @SessionScoped @BakedBinding
-class BakedBean implements Serializable
+public class BakedBean implements Serializable
 {
    void bake() {}
 }

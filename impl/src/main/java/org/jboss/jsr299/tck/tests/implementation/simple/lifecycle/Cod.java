@@ -20,7 +20,7 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-class Cod
+public class Cod
 {
    @PreDestroy
    public void destroyWithProblem()

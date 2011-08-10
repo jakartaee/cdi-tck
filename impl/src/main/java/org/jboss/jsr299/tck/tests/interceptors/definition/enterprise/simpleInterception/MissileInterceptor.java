@@ -23,7 +23,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Interceptor @Airborne
-class MissileInterceptor implements Serializable
+public class MissileInterceptor implements Serializable
 {
    public static boolean intercepted = false;
    

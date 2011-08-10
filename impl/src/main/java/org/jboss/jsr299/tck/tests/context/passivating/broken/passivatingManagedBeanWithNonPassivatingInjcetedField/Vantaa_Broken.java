@@ -22,7 +22,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-class Vantaa_Broken implements Serializable
+public class Vantaa_Broken implements Serializable
 {
    private static final long serialVersionUID = -1686562136639336613L;
    

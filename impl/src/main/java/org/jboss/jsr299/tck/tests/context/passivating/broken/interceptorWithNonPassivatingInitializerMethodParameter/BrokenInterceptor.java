@@ -22,7 +22,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Interceptor @InterceptorType
-class BrokenInterceptor
+public class BrokenInterceptor
 {    
    @Inject
    public void init(Violation violation) {}

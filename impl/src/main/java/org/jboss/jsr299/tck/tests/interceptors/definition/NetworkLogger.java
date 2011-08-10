@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Logged @Interceptor
-class NetworkLogger
+public class NetworkLogger
 {
    public static boolean intercepted = false;
 

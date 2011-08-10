@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.custom;
 
-class Bus implements Vehicle
+public class Bus implements Vehicle
 {
 
    public String start()

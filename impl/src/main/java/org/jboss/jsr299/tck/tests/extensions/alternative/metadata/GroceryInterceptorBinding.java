@@ -28,7 +28,7 @@ import javax.interceptor.InterceptorBinding;
 @InterceptorBinding
 @Target({TYPE, METHOD})
 @Retention(RUNTIME)
-@interface GroceryInterceptorBinding
+public @interface GroceryInterceptorBinding
 {
 
 }

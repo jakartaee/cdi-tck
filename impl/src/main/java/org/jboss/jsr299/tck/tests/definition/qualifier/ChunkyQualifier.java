@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.definition.qualifier;
 
 import javax.enterprise.util.AnnotationLiteral;
 
-class ChunkyQualifier extends AnnotationLiteral<Chunky> implements Chunky
+public class ChunkyQualifier extends AnnotationLiteral<Chunky> implements Chunky
 {
    private boolean chunky;
 

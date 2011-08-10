@@ -16,6 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.resolve;
 
-class BatteryEvent
+public class BatteryEvent
 {
 }

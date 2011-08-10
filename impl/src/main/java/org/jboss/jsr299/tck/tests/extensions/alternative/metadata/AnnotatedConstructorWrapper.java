@@ -24,7 +24,7 @@ import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-class AnnotatedConstructorWrapper<X> extends AnnotatedWrapper implements AnnotatedConstructor<X>
+public class AnnotatedConstructorWrapper<X> extends AnnotatedWrapper implements AnnotatedConstructor<X>
 {
    
    private AnnotatedConstructor<X> delegate;

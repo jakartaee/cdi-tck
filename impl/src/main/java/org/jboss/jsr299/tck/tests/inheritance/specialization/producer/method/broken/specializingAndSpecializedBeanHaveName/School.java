@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.producer.method.br
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
-class School
+public class School
 {
    
    @Produces @Named("bestPupil")

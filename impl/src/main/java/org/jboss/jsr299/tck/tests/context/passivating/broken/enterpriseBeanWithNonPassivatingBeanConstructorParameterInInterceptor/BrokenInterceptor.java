@@ -24,7 +24,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Interceptor @CityBinding
-class BrokenInterceptor implements Serializable
+public class BrokenInterceptor implements Serializable
 {
    @Inject
    public BrokenInterceptor(District district) {}

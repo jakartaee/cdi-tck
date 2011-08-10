@@ -30,6 +30,6 @@ import javax.enterprise.inject.Stereotype;
 @Alternative
 @Target( { TYPE, METHOD })
 @Retention(RUNTIME)
-@interface NotEnabled
+public @interface NotEnabled
 {
 }

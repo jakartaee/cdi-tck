@@ -22,7 +22,7 @@ import javax.enterprise.context.SessionScoped;
 
 @SuppressWarnings("serial")
 @SessionScoped
-class Jyvaskyla implements Serializable
+public class Jyvaskyla implements Serializable
 {
 
 }

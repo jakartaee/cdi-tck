@@ -41,7 +41,7 @@ import javax.inject.Named;
 @Retention(RUNTIME)
 @RequestScoped
 @Named
-@interface SpiderStereotype
+public @interface SpiderStereotype
 {
 
 }

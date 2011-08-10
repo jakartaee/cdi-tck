@@ -28,6 +28,6 @@ import javax.inject.Qualifier;
 @Target( { FIELD, PARAMETER })
 @Qualifier
 @Retention(RetentionPolicy.CLASS)
-@interface NonRuntimeBindingType
+public @interface NonRuntimeBindingType
 {
 }

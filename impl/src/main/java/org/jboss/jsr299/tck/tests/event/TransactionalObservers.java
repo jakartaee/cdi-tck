@@ -23,7 +23,7 @@ import static javax.enterprise.event.TransactionPhase.BEFORE_COMPLETION;
 
 import javax.enterprise.event.Observes;
 
-class TransactionalObservers
+public class TransactionalObservers
 {
    public void train(@Observes(during=BEFORE_COMPLETION) DisobedientDog dog)
    {

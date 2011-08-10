@@ -31,7 +31,7 @@ import javax.interceptor.InterceptorBinding;
 @Retention(RUNTIME)
 @Documented
 @InterceptorBinding
-@interface VehicleCountInterceptorBinding
+public @interface VehicleCountInterceptorBinding
 {
    @Nonbinding
    String comment();

@@ -20,7 +20,7 @@ import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 
 
-class OrangeCheekedWaxbill
+public class OrangeCheekedWaxbill
 {
    @Any @Role("Admin") @Tame
    protected Event<String> simpleEvent;

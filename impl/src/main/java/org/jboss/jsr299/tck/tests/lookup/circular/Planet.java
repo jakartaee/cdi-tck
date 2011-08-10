@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.circular;
 import javax.inject.Inject;
 
 @SuppressWarnings("unused")
-class Planet
+public class Planet
 {
    
    private Space space;

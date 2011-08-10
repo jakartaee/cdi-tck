@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dynamic.builtin;
 
-class Cow extends AbstractAnimal
+public class Cow extends AbstractAnimal
 {
 
 }

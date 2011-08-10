@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition;
 
-class DefangedTarantula extends Tarantula
+public class DefangedTarantula extends Tarantula
 {
    private int deaths;
    

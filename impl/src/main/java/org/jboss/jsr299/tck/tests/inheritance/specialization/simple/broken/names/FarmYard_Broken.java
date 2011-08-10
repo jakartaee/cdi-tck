@@ -21,7 +21,7 @@ import javax.inject.Named;
 
 @Specializes
 @Named
-class FarmYard_Broken extends Yard
+public class FarmYard_Broken extends Yard
 {
    
 }

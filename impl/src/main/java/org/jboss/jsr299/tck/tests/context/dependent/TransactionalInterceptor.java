@@ -23,7 +23,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Dependent @Transactional @Interceptor 
-class TransactionalInterceptor
+public class TransactionalInterceptor
 {
    public static boolean destroyed = false;
    public static boolean intercepted = false;

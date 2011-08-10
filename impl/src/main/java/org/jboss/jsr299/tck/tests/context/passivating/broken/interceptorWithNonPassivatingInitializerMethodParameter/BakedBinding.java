@@ -31,7 +31,7 @@ import javax.interceptor.InterceptorBinding;
 @InterceptorType
 @Target({TYPE, METHOD})
 @Retention(RUNTIME)
-@interface BakedBinding
+public @interface BakedBinding
 {
 
 }

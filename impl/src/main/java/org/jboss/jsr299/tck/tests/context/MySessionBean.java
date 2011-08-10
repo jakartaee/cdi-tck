@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 
 @SessionScoped
-class MySessionBean implements Serializable
+public class MySessionBean implements Serializable
 {
    private static final long serialVersionUID = 1L;
    

@@ -22,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
-class ResourceProducer
+public class ResourceProducer
 {
    @Produces @Database @PersistenceUnit 
    private EntityManagerFactory persistenceUnit;

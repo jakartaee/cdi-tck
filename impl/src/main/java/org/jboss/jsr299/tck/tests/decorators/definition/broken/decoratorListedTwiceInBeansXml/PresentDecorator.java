@@ -21,7 +21,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-class PresentDecorator
+public class PresentDecorator
 {
    @Inject @Delegate Present present;
 }

@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.broken.
 import javax.ejb.Local;
 
 @Local
-interface TractorLocal
+public interface TractorLocal
 {
    
 }

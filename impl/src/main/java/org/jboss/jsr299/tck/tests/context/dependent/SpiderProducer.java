@@ -23,7 +23,7 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
-class SpiderProducer
+public class SpiderProducer
 {
    @Inject
    private BeanManager beanManager;

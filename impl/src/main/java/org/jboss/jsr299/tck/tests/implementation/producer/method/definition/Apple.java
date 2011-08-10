@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.definition;
 
-class Apple
+public class Apple
 {
    private AppleTree tree;
    

@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.lifecycle;
 
-class RoemerPassage
+public class RoemerPassage
 {
    public final static String name = "RoemerPassage";
    

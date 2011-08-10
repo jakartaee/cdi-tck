@@ -28,7 +28,7 @@ import javax.inject.Inject;
  * 
  */
 @RequestScoped
-class TransientFieldInjectionPointBean
+public class TransientFieldInjectionPointBean
 {
    @Inject @AnimalStereotype
    private transient BeanWithInjectionPointMetadata injectedBean;

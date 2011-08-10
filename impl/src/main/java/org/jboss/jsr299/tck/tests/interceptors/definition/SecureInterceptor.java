@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Secure @Interceptor
-class SecureInterceptor
+public class SecureInterceptor
 {
    @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
    {

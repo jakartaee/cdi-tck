@@ -22,7 +22,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-class Loviisa_Broken extends City implements Serializable
+public class Loviisa_Broken extends City implements Serializable
 {
    private static final long serialVersionUID = -2866858442948392508L;
 

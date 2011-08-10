@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Transactional @Interceptor
-class TransactionalInterceptor
+public class TransactionalInterceptor
 {
    public static boolean first = false;
    
