@@ -21,7 +21,7 @@ import javax.enterprise.context.Dependent;
 @AnimalStereotype
 @FishStereotype
 @Dependent
-class Pollock implements Animal
+public class Pollock implements Animal
 {
    
 }

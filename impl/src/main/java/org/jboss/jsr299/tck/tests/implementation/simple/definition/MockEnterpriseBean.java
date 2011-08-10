@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
 import javax.ejb.EnterpriseBean;
 
-class MockEnterpriseBean implements EnterpriseBean
+public class MockEnterpriseBean implements EnterpriseBean
 {
 
 	/**

@@ -21,7 +21,7 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 
-class Dog
+public class Dog
 {
    private static boolean     constructorCalled = false;
    private static boolean     postConstructCalled;

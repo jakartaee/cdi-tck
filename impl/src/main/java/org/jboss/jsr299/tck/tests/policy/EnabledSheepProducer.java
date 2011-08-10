@@ -20,7 +20,7 @@ import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 
 @Alternative
-class EnabledSheepProducer
+public class EnabledSheepProducer
 {
    @Produces @Wild
    public static final Sheep sheep = new Sheep();

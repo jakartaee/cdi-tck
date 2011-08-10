@@ -21,7 +21,7 @@ import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
 @AnimalStereotype
-class Fox
+public class Fox
 {
    
    @Produces

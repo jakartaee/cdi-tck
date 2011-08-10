@@ -20,7 +20,7 @@ import javax.ejb.Remove;
 import javax.enterprise.context.SessionScoped;
 
 @SessionScoped
-class Maarianhamina_Broken
+public class Maarianhamina_Broken
 {  
    @Remove
    public void bye() {

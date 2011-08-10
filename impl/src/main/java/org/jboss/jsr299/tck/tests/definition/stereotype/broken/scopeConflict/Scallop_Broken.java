@@ -23,7 +23,7 @@ package org.jboss.jsr299.tck.tests.definition.stereotype.broken.scopeConflict;
  */
 @AnimalStereotype
 @FishStereotype
-class Scallop_Broken
+public class Scallop_Broken
 {
    
 }

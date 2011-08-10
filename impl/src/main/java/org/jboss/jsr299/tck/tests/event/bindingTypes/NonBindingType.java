@@ -25,6 +25,6 @@ import java.lang.annotation.Target;
 
 @Target( { FIELD, PARAMETER })
 @Retention(RUNTIME)
-@interface NonBindingType
+public @interface NonBindingType
 {
 }

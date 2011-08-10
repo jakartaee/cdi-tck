@@ -31,6 +31,6 @@ import javax.enterprise.inject.Stereotype;
 @Documented
 @Stereotype
 @Logged
-@interface Loggable {
+public @interface Loggable {
 
 }

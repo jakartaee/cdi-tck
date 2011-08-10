@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.producer;
 
-class Bird
+public class Bird
 {
 
 }

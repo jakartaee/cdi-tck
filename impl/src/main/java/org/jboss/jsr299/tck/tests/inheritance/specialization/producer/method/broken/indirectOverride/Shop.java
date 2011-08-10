@@ -20,7 +20,7 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
 
-class Shop
+public class Shop
 {
    
    @Produces @Expensive @Named

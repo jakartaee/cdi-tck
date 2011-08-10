@@ -35,7 +35,7 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
-class CustomDecoratorImplementation implements Decorator<VehicleDecorator>
+public class CustomDecoratorImplementation implements Decorator<VehicleDecorator>
 {
 
    private boolean getDecoratedTypesCalled = false;

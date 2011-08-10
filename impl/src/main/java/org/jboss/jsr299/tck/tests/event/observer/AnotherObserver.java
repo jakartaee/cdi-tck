@@ -21,7 +21,7 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 
 @RequestScoped
-class AnotherObserver
+public class AnotherObserver
 {
    static boolean wasNotified = false;
 

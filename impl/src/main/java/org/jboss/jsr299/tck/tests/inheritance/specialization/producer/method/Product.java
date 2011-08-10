@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.producer.method;
 
-class Product
+public class Product
 {
    
 }

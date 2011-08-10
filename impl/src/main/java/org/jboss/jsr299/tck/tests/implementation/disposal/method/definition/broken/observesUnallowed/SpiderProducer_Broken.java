@@ -20,7 +20,7 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-class SpiderProducer_Broken
+public class SpiderProducer_Broken
 {
 
    @Produces

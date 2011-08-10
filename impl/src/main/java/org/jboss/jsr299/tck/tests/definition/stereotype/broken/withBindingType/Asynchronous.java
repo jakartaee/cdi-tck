@@ -31,6 +31,6 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-@interface Asynchronous
+public @interface Asynchronous
 {
 }

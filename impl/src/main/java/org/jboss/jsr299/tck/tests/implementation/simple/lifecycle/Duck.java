@@ -20,7 +20,7 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
 
-class Duck
+public class Duck
 {
    
    @Produces public static String foo = "foo";

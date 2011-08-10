@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.initializer.broken.parameterAn
 import javax.enterprise.inject.Disposes;
 import javax.inject.Inject;
 
-class Capercaillie_Broken
+public class Capercaillie_Broken
 {
    
    @Inject

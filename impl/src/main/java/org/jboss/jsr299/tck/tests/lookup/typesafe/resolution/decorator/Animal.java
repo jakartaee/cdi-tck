@@ -16,6 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.decorator;
 
-interface Animal {
+public interface Animal {
 	String hello();
 }

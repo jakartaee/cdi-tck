@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.extensions.container.event;
 
 import javax.enterprise.inject.Produces;
 
-class Farm
+public class Farm
 {
    @SuppressWarnings("unused")
    @Produces

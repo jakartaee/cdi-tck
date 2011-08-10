@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.context.dependent;
 
 import javax.annotation.PreDestroy;
 
-class Horse
+public class Horse
 {
    
    public static boolean destroyed;

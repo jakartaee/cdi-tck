@@ -32,7 +32,7 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-@interface PayBy
+public @interface PayBy
 {
    public static enum PaymentMethod { CASH, CHEQUE, CREDIT_CARD };
    

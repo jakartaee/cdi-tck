@@ -24,7 +24,7 @@ import org.jboss.jsr299.tck.tests.interceptors.definition.member.AnimalCountInte
 
 @Interceptor
 @AnimalCountInterceptorBinding(Operation.INCREASE)
-class IncreasingInterceptor
+public class IncreasingInterceptor
 {
    private static boolean intercepted = false;
 

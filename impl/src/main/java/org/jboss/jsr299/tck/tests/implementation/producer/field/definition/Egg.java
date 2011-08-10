@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
-class Egg
+public class Egg
 {
    
    private final Chicken mother;

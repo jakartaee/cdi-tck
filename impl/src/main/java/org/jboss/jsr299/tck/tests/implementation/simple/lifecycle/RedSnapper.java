@@ -20,7 +20,7 @@ import javax.enterprise.context.RequestScoped;
 
 @FishStereotype
 @RequestScoped
-class RedSnapper implements Animal
+public class RedSnapper implements Animal
 {
    
    private boolean touched;

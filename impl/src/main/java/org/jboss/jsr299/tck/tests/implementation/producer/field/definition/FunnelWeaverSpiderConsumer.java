@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
 import javax.inject.Inject;
 
-class FunnelWeaverSpiderConsumer
+public class FunnelWeaverSpiderConsumer
 {
    @Inject @Spidery
    private FunnelWeaver<Spider> injectedSpider;

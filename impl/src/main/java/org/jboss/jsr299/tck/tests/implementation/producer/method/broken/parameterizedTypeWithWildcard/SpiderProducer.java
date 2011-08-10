@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.paramet
 
 import javax.enterprise.inject.Produces;
 
-class SpiderProducer
+public class SpiderProducer
 {
    
    @Produces public FunnelWeaver<?> getFunnelWeaver()

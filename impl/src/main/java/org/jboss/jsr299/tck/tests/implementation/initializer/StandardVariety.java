@@ -30,7 +30,7 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Target({TYPE, METHOD, FIELD, PARAMETER})
 @Qualifier
-@interface StandardVariety
+public @interface StandardVariety
 {
 
 }

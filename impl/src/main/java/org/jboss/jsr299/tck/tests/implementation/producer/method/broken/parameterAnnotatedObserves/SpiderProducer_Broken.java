@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.paramet
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 
-class SpiderProducer_Broken
+public class SpiderProducer_Broken
 {
    
    @Produces

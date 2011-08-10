@@ -32,7 +32,7 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-@interface ClovenHoved
+public @interface ClovenHoved
 {
 
 }

@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped 
-class Monitor implements Serializable
+public class Monitor implements Serializable
 {
    /**
 	 * 

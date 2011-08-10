@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dependency.resolution.broken.ambiguous;
 
-interface Animal
+public interface Animal
 {
 
 }

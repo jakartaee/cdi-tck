@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.event.observer.resolve;
 import javax.enterprise.util.AnnotationLiteral;
 
 
-class RoleBinding extends AnnotationLiteral<Role> implements Role
+public class RoleBinding extends AnnotationLiteral<Role> implements Role
 {
    private String value = null;
 

@@ -21,7 +21,7 @@ import javax.inject.Named;
 
 @Landowner
 @Named
-class Farmer
+public class Farmer
 {
    
    public String getClassName()

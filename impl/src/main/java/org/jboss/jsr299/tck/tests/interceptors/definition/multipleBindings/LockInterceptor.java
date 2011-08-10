@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Interceptor @Slow @Deadly
-class LockInterceptor
+public class LockInterceptor
 {
    public static boolean intercepted = false;
    

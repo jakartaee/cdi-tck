@@ -23,7 +23,7 @@ import javax.inject.Inject;
 
 @SuppressWarnings("serial")
 @SessionScoped
-class Joensuu implements Serializable
+public class Joensuu implements Serializable
 {
    @SuppressWarnings("unused")
    @Inject

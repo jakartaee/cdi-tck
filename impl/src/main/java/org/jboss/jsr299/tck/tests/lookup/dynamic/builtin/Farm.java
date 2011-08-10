@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.dynamic.builtin;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
-class Farm extends AbstractAnimal
+public class Farm extends AbstractAnimal
 {
    @Inject
    private Instance<Animal> animal;

@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
 import javax.enterprise.inject.Produces;
 
-class NumberProducer
+public class NumberProducer
 {
 
    @Produces @Min @Number

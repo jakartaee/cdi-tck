@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.decorators.definition.broken.nonDecoratorWith
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
-class Elf
+public class Elf
 {
    @Inject @Delegate ChristmasTree tree;
 }

@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.circular;
 
 import javax.inject.Inject;
 
-class Car
+public class Car
 {
    
    public static boolean success;

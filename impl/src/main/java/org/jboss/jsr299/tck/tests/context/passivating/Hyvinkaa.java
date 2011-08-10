@@ -23,7 +23,7 @@ import javax.inject.Inject;
 
 @SuppressWarnings("serial")
 @SessionScoped
-class Hyvinkaa implements Serializable
+public class Hyvinkaa implements Serializable
 {
    @SuppressWarnings("unused")
    @Inject

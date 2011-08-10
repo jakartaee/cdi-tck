@@ -30,6 +30,6 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-@interface Wild
+public @interface Wild
 {
 }

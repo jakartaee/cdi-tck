@@ -20,7 +20,7 @@ import java.util.List;
 
 import javax.enterprise.event.Observes;
 
-class WildBostonTerrier
+public class WildBostonTerrier
 {
    
    public static boolean observed;

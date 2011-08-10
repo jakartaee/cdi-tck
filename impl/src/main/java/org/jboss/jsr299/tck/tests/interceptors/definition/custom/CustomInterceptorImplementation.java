@@ -30,7 +30,7 @@ import javax.enterprise.inject.spi.Interceptor;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.interceptor.InvocationContext;
 
-class CustomInterceptorImplementation implements Interceptor<SimpleInterceptorWithoutAnnotations>
+public class CustomInterceptorImplementation implements Interceptor<SimpleInterceptorWithoutAnnotations>
 {
 
    private Set<Annotation> interceptorBindingTypes = new HashSet<Annotation>();

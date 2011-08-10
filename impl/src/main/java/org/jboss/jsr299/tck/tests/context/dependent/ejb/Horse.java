@@ -20,7 +20,7 @@ import java.io.Serializable;
 
 import javax.annotation.PreDestroy;
 
-class Horse implements Serializable
+public class Horse implements Serializable
 {
    
    /**

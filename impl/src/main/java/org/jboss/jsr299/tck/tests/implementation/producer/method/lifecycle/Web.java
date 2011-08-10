@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.lifecycle;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-class Web
+public class Web
 {
    private Boolean destroyed;
    

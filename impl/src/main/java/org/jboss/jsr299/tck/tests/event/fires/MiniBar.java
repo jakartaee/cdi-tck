@@ -24,7 +24,7 @@ import javax.enterprise.inject.Any;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
-class MiniBar
+public class MiniBar
 {
    private Set<Item> items = new HashSet<Item>();
    

@@ -32,7 +32,7 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-@interface SelfConsumingNormal1
+public @interface SelfConsumingNormal1
 {
 
 }

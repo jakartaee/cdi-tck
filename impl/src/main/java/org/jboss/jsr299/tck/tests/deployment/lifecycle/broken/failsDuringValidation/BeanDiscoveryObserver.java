@@ -20,7 +20,7 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
 
-class BeanDiscoveryObserver
+public class BeanDiscoveryObserver
 {
    private static boolean afterBeanDiscovery;
    

@@ -23,7 +23,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-class TimestampLogger implements Logger
+public class TimestampLogger implements Logger
 {
    @Inject @Delegate 
    private Logger logger;

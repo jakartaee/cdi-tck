@@ -25,7 +25,7 @@ import javax.inject.Named;
 
 @SessionScoped
 @Named("Fred") @Default
-class ExplicitContructorSimpleBean implements Serializable
+public class ExplicitContructorSimpleBean implements Serializable
 {
    private static final long serialVersionUID = 1L;
    private static int constructorCalls = 0;

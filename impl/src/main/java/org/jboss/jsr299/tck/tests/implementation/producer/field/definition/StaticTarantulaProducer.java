@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
 import javax.enterprise.inject.Produces;
 
-class StaticTarantulaProducer
+public class StaticTarantulaProducer
 {
    @Produces @SpiderStereotype @Static public static Tarantula produceTarantula = new Tarantula();
 

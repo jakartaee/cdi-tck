@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
-class FunnelWeaver<T>
+public class FunnelWeaver<T>
 {
    
 }

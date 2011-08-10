@@ -20,7 +20,7 @@ import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
 @FishILike
-class SeaBass implements Animal
+public class SeaBass implements Animal
 {
 
 }

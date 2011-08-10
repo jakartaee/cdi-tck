@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.extensions.beanManager;
 
 import javax.inject.Inject;
 
-class DogHouse
+public class DogHouse
 {
    @Inject
    private Terrier dog;

@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition.dependentWit
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-class Leopard_Broken
+public class Leopard_Broken
 {
    
    public String name = "pete";

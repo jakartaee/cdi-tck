@@ -22,7 +22,7 @@ import org.jboss.jsr299.tck.tests.lookup.dynamic.PayBy.PaymentMethod;
 
 @ApplicationScoped
 @PayBy(PaymentMethod.CREDIT_CARD)
-class RemotePaymentProcessor implements AsynchronousPaymentProcessor
+public class RemotePaymentProcessor implements AsynchronousPaymentProcessor
 {
    private int value = 0;
 

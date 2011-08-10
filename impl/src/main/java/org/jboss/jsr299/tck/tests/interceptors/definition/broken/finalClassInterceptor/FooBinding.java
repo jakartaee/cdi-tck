@@ -30,6 +30,6 @@ import javax.interceptor.InterceptorBinding;
 @Retention(RUNTIME)
 @Documented
 @InterceptorBinding
-@interface FooBinding
+public @interface FooBinding
 {
 }

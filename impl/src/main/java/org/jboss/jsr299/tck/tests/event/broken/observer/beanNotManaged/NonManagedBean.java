@@ -26,7 +26,7 @@ import javax.enterprise.inject.Any;
  * 
  * @author David Allen
  */
-class NonManagedBean
+public class NonManagedBean
 {
    public NonManagedBean(String name)
    {

@@ -23,7 +23,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 @Specializes 
-class PreferredSpiderProducer extends SpiderProducer
+public class PreferredSpiderProducer extends SpiderProducer
 {
    @Inject private Web web;
    private static Web injectedWeb;

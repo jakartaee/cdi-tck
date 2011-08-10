@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
-class OtherSpiderProducer
+public class OtherSpiderProducer
 {
    
    public static final BlackWidow BLACK_WIDOW = new BlackWidow();

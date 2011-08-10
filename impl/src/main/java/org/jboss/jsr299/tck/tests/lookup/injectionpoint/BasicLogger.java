@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
 
-class BasicLogger implements Logger
+public class BasicLogger implements Logger
 {
    
    private static String message;

@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.extensions.producer;
 
 import javax.inject.Inject;
 
-class Cat
+public class Cat
 {
    private static boolean constructorCalled;
    private static boolean initializerCalled;

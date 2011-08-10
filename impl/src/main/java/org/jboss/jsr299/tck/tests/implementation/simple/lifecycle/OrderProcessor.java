@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-class OrderProcessor
+public class OrderProcessor
 {
    
    public static boolean postConstructCalled = false;

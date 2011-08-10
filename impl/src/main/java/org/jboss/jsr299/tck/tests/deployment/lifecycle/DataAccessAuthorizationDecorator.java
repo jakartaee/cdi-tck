@@ -21,7 +21,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-class DataAccessAuthorizationDecorator implements DataAccess
+public class DataAccessAuthorizationDecorator implements DataAccess
 {
    @Inject @Delegate
    DataAccess delegate;

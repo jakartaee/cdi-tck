@@ -20,7 +20,7 @@ import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
-class Registration
+public class Registration
 {
    @Inject @Any private Event<StudentRegisteredEvent> studentRegisteredEvent;
    

@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.context.application;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-class Result
+public class Result
 {
    private boolean applicationScopeActiveForServletContextListener = false;
    private boolean applicationScopeActiveForHttpSessionListener = false;

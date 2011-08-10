@@ -35,7 +35,7 @@ import javax.inject.Named;
 @RequestScoped
 @Named
 @Inherited
-@interface AnimalStereotype
+public @interface AnimalStereotype
 {
 
 }

@@ -23,7 +23,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 @Dependent
-class HorseStable
+public class HorseStable
 {
    private static boolean dependentContextActive = false;
    private static HorseStable instanceThatObservedEvent = null;

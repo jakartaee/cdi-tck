@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.finalMethod;
 
 import javax.inject.Inject;
 
-class FishFarm
+public class FishFarm
 {
    @Inject Tuna_Broken tuna;
 }

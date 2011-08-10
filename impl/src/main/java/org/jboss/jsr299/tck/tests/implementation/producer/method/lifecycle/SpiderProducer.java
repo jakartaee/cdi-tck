@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.lifecycle;
 
 import javax.enterprise.inject.Produces;
 
-class SpiderProducer
+public class SpiderProducer
 {
    private static Tarantula tarantulaCreated;
    private static boolean tarantulaDestroyed;

@@ -21,7 +21,7 @@ import javax.annotation.PreDestroy;
 import org.jboss.jsr299.tck.api.JSR299Configuration;
 import org.jboss.testharness.impl.ConfigurationFactory;
 
-class Tarantula extends Spider implements DeadlySpider
+public class Tarantula extends Spider implements DeadlySpider
 {
 
    private static boolean destroyed;

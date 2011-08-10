@@ -19,6 +19,6 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.broken.
 import javax.ejb.Local;
 
 @Local
-interface FarmerInterface
+public interface FarmerInterface
 {
 }

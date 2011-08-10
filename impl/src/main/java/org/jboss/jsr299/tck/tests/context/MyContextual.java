@@ -31,7 +31,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.PassivationCapable;
 
-class MyContextual implements Bean<MySessionBean>, PassivationCapable
+public class MyContextual implements Bean<MySessionBean>, PassivationCapable
 {
    private boolean createCalled = false;
    private boolean destroyCalled = false;

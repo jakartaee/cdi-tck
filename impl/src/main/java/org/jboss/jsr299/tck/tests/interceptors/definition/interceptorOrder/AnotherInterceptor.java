@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.interceptorOrder;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class AnotherInterceptor
+public class AnotherInterceptor
 {
    public static boolean first = false;
    

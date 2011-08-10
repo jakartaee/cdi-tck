@@ -27,7 +27,7 @@ import javax.enterprise.inject.Stereotype;
 @Stereotype
 @Target( { TYPE })
 @Retention(RUNTIME)
-@interface HornedMammalStereotype
+public @interface HornedMammalStereotype
 {
 
 }

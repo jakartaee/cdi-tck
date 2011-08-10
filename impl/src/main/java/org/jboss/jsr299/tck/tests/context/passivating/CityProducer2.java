@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.context.passivating;
 
 import javax.enterprise.inject.Produces;
 
-class CityProducer2
+public class CityProducer2
 {
    @Produces @Big
    public Violation create()

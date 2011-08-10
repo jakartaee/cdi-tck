@@ -31,8 +31,7 @@ import javax.enterprise.inject.Stereotype;
 @Retention(RUNTIME)
 @Documented
 @FooBinding("abc")
-public @Stereotype
-@interface FooStereotype
+public @Stereotype @interface FooStereotype
 {
 
 }

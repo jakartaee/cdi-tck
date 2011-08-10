@@ -31,7 +31,7 @@ import javax.enterprise.inject.Stereotype;
 @Target( { TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @RequestScoped
-@interface FishStereotype
+public @interface FishStereotype
 {
 
 }

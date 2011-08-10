@@ -21,7 +21,7 @@ import javax.inject.Inject;
 
 @ApplicationScoped
 @SuppressWarnings("unused")
-class Bird
+public class Bird
 {
    
    private Air air;

@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.failsDuringBeanDi
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 
-class BeanDiscoveryObserver
+public class BeanDiscoveryObserver
 {
    public void afterBeanDiscovery(@Observes AfterBeanDiscovery event)
    {

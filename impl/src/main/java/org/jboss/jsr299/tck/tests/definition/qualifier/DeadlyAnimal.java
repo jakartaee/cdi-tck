@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
-interface DeadlyAnimal
+public interface DeadlyAnimal
 {
 
 }

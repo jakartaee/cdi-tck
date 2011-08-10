@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.extensions.annotated.broken.processInjectionTargetThrowsException;
 
 
-class Dog
+public class Dog
 {
    
 }

@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.interceptorWithNon
 
 import javax.enterprise.inject.Produces;
 
-class ViolationProducer
+public class ViolationProducer
 {
    public final @Produces Violation getViolation() { return new Violation(null); } 
 }

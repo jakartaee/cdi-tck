@@ -22,7 +22,7 @@ import javax.interceptor.InvocationContext;
 
 @Interceptor
 @VehicleCountInterceptorBinding(comment = "bar")
-class VehicleCountInterceptor
+public class VehicleCountInterceptor
 {
    private static boolean intercepted = false;
 

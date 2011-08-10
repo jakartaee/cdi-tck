@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 
-class BookOrderProcessor extends OrderProcessor
+public class BookOrderProcessor extends OrderProcessor
 {
    
    @Override

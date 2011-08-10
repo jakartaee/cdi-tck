@@ -25,7 +25,7 @@ import javax.inject.Inject;
  * @author David Allen
  * 
  */
-class BeanWithInjectionPointMetadata
+public class BeanWithInjectionPointMetadata
 {
    @Inject
    private InjectionPoint injectedMetadata;

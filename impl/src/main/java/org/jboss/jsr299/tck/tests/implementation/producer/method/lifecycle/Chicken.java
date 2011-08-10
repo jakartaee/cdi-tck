@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.lifecycle;
 
 import javax.enterprise.inject.Produces;
 
-class Chicken
+public class Chicken
 {
    private static Egg egg = new Egg();
    

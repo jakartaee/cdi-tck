@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.context.dependent;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
-class Stable
+public class Stable
 {
    
    @Inject Horse horse;

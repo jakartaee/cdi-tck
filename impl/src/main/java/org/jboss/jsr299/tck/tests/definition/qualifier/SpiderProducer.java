@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.definition.qualifier;
 
 import javax.enterprise.inject.Produces;
 
-class SpiderProducer
+public class SpiderProducer
 {
    
    @Produces @Tame public Tarantula produceTameTarantula()

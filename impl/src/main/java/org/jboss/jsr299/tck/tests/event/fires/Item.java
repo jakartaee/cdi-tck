@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.event.fires;
 
-class Item
+public class Item
 {
    private String name;
    

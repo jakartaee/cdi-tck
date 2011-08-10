@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.name
 import javax.inject.Named;
 
 @Named("backyard")
-class Yard
+public class Yard
 {
    
 }

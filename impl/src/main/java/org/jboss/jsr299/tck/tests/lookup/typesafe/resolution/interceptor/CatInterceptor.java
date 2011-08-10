@@ -22,7 +22,7 @@ import javax.interceptor.InvocationContext;
 
 @Interceptor
 @CatInterceptorBinding
-class CatInterceptor extends Cat
+public class CatInterceptor extends Cat
 {
 
    @AroundInvoke

@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
-class Sheep
+public class Sheep
 {
    
    public static boolean constructedCorrectly = false;

@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.container.event;
 
-class Food
+public class Food
 {
    @SuppressWarnings("unused")
    private boolean fresh;

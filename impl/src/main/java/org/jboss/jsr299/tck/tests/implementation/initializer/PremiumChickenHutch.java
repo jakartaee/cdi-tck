@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.initializer;
 
 import javax.inject.Inject;
 
-class PremiumChickenHutch
+public class PremiumChickenHutch
 {
    private ChickenInterface chicken;
 

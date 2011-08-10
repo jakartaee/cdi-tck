@@ -33,7 +33,7 @@ import javax.inject.Named;
 @Retention(RUNTIME)
 @RequestScoped
 @Named
-@interface AnimalStereotype
+public @interface AnimalStereotype
 {
 
 }

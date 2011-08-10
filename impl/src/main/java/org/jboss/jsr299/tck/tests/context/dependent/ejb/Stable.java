@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
-class Stable implements Serializable
+public class Stable implements Serializable
 {
    
    /**

@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition;
 
-class Warhead
+public class Warhead
 {
 
 }

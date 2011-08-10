@@ -25,7 +25,7 @@ import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
-class InjectionPointDecorator implements InjectionPoint
+public class InjectionPointDecorator implements InjectionPoint
 {
    private final InjectionPoint injectionPoint;
    

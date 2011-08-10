@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
 import javax.inject.Inject;
 
-class LoggerConsumer
+public class LoggerConsumer
 {
    @Inject
    private Logger logger;

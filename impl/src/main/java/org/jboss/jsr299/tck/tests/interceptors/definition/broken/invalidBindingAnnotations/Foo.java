@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.broken.invalidBinding
 
 @FooStereotype
 @FooBinding("def")
-class Foo
+public class Foo
 {
 
 }

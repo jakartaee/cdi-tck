@@ -31,7 +31,7 @@ import javax.enterprise.context.NormalScope;
 @Retention(RUNTIME)
 @Documented
 @NormalScope
-@interface NotInheritedScope
+public @interface NotInheritedScope
 {
    
 }

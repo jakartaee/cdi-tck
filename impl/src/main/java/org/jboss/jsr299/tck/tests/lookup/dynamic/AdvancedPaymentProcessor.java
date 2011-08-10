@@ -22,7 +22,7 @@ import org.jboss.jsr299.tck.tests.lookup.dynamic.PayBy.PaymentMethod;
 
 @PayBy(PaymentMethod.CHEQUE)
 @ApplicationScoped
-class AdvancedPaymentProcessor implements AsynchronousPaymentProcessor
+public class AdvancedPaymentProcessor implements AsynchronousPaymentProcessor
 {
    private int value = 0;
 

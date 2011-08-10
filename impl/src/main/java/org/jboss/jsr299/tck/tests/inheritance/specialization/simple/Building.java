@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.simple;
 
 import javax.enterprise.inject.Produces;
 
-class Building
+public class Building
 {
    
    protected String getClassName()

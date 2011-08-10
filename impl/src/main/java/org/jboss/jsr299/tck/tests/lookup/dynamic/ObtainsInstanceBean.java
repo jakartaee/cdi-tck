@@ -22,7 +22,7 @@ import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
-class ObtainsInstanceBean
+public class ObtainsInstanceBean
 {
    @Inject @PayBy(CHEQUE) Instance<AsynchronousPaymentProcessor> paymentProcessor;
    @Inject @Any Instance<PaymentProcessor> anyPaymentProcessor;

@@ -25,7 +25,7 @@ import javax.inject.Inject;
 
 @SuppressWarnings("serial")
 @Decorator
-class CityDecorator implements CityInterface, Serializable
+public class CityDecorator implements CityInterface, Serializable
 {
    @Inject @Delegate @Any CityInterface city;
    

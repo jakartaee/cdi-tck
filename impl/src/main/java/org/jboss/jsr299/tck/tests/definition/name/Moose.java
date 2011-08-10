@@ -20,7 +20,7 @@ import javax.enterprise.inject.Default;
 import javax.inject.Named;
 
 @Named("aMoose") @Default
-class Moose implements Animal
+public class Moose implements Animal
 {
 
 }

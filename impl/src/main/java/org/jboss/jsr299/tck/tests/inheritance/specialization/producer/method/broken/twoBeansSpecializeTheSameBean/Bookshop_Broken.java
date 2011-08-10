@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.producer.method.br
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.Specializes;
 
-class Bookshop_Broken extends Shop
+public class Bookshop_Broken extends Shop
 {
    @Override @Specializes @Produces
    public Product getExpensiveGift()

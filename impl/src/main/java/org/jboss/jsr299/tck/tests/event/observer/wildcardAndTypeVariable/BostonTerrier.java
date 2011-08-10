@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.event.observer.wildcardAndTypeVariable;
 
 import javax.enterprise.event.Observes;
 
-class BostonTerrier
+public class BostonTerrier
 {
    
    public static boolean observed;

@@ -25,7 +25,7 @@ import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements AnnotatedMethod<X>
+public class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements AnnotatedMethod<X>
 {
 
    private AnnotatedMethod<X> delegate;

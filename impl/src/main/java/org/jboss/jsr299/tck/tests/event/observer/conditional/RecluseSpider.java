@@ -25,7 +25,7 @@ import javax.enterprise.event.Reception;
  *
  */
 @RequestScoped
-class RecluseSpider
+public class RecluseSpider
 {
    private static boolean notified = false;
    private boolean instanceNotified = false;

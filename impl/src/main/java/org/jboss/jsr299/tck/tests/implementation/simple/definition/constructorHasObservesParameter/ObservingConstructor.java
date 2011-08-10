@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition.constructorH
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-class ObservingConstructor
+public class ObservingConstructor
 {
 
    @Inject

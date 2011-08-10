@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.policy;
 import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 
-class CatProducer
+public class CatProducer
 {
    
    @Produces @Wild

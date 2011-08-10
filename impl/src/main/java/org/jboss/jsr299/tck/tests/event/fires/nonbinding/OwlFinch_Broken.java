@@ -21,7 +21,7 @@ import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 
-class OwlFinch_Broken
+public class OwlFinch_Broken
 {
    @Inject @Any
    private Event<String> simpleEvent;

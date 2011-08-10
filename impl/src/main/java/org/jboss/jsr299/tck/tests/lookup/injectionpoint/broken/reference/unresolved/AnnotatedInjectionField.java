@@ -25,7 +25,7 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.InjectionPoint;
 
-class AnnotatedInjectionField implements AnnotatedField<InjectedBean>
+public class AnnotatedInjectionField implements AnnotatedField<InjectedBean>
 {
 
    private final InjectionPoint injectionPoint;

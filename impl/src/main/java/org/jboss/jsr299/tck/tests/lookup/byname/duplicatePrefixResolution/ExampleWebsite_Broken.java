@@ -20,7 +20,7 @@ package org.jboss.jsr299.tck.tests.lookup.byname.duplicatePrefixResolution;
 import javax.inject.Named;
 
 @Named("example.com")
-class ExampleWebsite_Broken
+public class ExampleWebsite_Broken
 {
 
 }

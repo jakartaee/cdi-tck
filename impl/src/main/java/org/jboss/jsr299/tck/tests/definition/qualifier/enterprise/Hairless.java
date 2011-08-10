@@ -34,7 +34,7 @@ import javax.inject.Qualifier;
 @Documented
 @Qualifier
 @Inherited 
-@interface Hairless
+public @interface Hairless
 {
 
 }

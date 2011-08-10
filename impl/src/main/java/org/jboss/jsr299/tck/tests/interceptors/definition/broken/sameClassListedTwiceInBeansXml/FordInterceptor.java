@@ -21,7 +21,7 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Interceptor @Transactional
-class FordInterceptor
+public class FordInterceptor
 {
    @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
    {

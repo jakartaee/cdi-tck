@@ -22,6 +22,6 @@ package org.jboss.jsr299.tck.tests.event.eventTypes;
  * 
  * @author David Allen
  */
-class ComplexEvent extends AbstractEvent implements GeneralEvent
+public class ComplexEvent extends AbstractEvent implements GeneralEvent
 {
 }

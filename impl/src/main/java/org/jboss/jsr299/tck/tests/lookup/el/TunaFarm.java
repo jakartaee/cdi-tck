@@ -20,7 +20,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-class TunaFarm
+public class TunaFarm
 {
 
    @SuppressWarnings("unused")

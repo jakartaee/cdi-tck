@@ -33,7 +33,7 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-@interface Expensive
+public @interface Expensive
 {
    
    boolean veryExpensive();

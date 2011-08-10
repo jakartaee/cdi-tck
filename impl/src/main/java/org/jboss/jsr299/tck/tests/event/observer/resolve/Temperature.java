@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.resolve;
 
-class Temperature
+public class Temperature
 {
    private double degrees;
 

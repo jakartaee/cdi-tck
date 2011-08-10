@@ -21,7 +21,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-class AnimalDecorator implements Animal {
+public class AnimalDecorator implements Animal {
 	
 	@Inject	@Delegate
 	private Animal bean;

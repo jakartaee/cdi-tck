@@ -33,7 +33,7 @@ import javax.inject.Named;
 @Retention(RUNTIME)
 @Named
 @Inherited
-@interface NamedStereotype
+public @interface NamedStereotype
 {
 
 }

@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.event;
 
 import javax.enterprise.event.Observes;
 
-class StockWatcher
+public class StockWatcher
 {
    
    public void observeStockPrice(@Observes StockPrice price)

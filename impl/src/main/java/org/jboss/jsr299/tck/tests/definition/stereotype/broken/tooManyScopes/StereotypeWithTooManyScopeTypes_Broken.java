@@ -31,6 +31,6 @@ import javax.enterprise.inject.Stereotype;
 @Retention(RUNTIME)
 @ApplicationScoped
 @RequestScoped
-@interface StereotypeWithTooManyScopeTypes_Broken
+public @interface StereotypeWithTooManyScopeTypes_Broken
 {
 }

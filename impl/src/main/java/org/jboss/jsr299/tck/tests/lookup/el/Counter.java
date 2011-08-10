@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.el;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-class Counter
+public class Counter
 {
    private int count = 0;
    

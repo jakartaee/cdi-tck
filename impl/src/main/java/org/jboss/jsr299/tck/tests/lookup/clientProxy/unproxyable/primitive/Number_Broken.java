@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.primitive;
 
 import javax.inject.Inject;
 
-class Number_Broken
+public class Number_Broken
 {
    
    @SuppressWarnings("unused")

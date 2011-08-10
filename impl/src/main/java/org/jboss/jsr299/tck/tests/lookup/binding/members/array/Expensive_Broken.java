@@ -30,6 +30,6 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RUNTIME)
 @Target( { METHOD, FIELD, PARAMETER, TYPE })
-@interface Expensive_Broken {
+public @interface Expensive_Broken {
 	String[] prices();
 }

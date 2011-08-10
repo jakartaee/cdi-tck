@@ -22,7 +22,7 @@ import java.lang.reflect.Field;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-class AnnotatedFieldWrapper<X> extends AnnotatedWrapper implements AnnotatedField<X>
+public class AnnotatedFieldWrapper<X> extends AnnotatedWrapper implements AnnotatedField<X>
 {
    
    private AnnotatedField<X> delegate;

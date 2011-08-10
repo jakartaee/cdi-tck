@@ -32,7 +32,7 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-@interface Chunky
+public @interface Chunky
 {
    
    boolean realChunky();

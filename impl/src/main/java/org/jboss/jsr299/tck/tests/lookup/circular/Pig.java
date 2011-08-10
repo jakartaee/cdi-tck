@@ -22,7 +22,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-class Pig implements Serializable
+public class Pig implements Serializable
 {
    
    private static final long serialVersionUID = 2445308247858178311L;

@@ -20,7 +20,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-class Petrol
+public class Petrol
 {
    
    public static boolean success;

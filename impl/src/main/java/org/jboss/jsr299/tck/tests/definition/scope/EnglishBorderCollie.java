@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.definition.scope;
 
-class EnglishBorderCollie extends BorderCollie
+public class EnglishBorderCollie extends BorderCollie
 {
 
 }

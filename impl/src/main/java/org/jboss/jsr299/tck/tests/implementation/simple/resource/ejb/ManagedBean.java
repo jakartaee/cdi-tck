@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.inject.Inject;
 
 
-class ManagedBean implements Serializable
+public class ManagedBean implements Serializable
 {
    @Inject @Lazy 
    private BeanRemote myEjb;

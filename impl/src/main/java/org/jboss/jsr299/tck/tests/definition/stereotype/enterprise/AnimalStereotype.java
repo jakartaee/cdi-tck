@@ -33,7 +33,7 @@ import javax.enterprise.inject.Stereotype;
 @Retention(RUNTIME)
 @RequestScoped
 @Inherited
-@interface AnimalStereotype
+public @interface AnimalStereotype
 {
 
 }

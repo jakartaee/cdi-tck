@@ -22,7 +22,7 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
 
 @SessionScoped
-class SimpleSessionBean implements Serializable
+public class SimpleSessionBean implements Serializable
 {
 
    private static final long serialVersionUID = 1L;

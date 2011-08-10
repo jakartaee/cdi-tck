@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple;
 
-class Waste
+public class Waste
 {
    
    private String from;

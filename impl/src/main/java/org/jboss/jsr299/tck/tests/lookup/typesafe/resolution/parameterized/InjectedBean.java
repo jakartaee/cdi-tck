@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
-class InjectedBean
+public class InjectedBean
 {
    @Inject
    private HashMap<? extends Number, ? super Integer> map;

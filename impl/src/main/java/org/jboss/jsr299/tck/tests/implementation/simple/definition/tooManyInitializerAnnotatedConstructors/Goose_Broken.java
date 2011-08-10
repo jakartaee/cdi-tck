@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition.tooManyIniti
 
 import javax.inject.Inject;
 
-class Goose_Broken
+public class Goose_Broken
 {
    
    @Inject

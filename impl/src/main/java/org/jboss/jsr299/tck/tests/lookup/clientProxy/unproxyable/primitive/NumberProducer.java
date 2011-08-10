@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.primitive;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
-class NumberProducer
+public class NumberProducer
 {
 
    @Produces

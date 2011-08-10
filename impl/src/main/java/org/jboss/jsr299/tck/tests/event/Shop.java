@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.event;
 
 import javax.enterprise.event.Observes;
 
-class Shop
+public class Shop
 {
    
    public static String deliveryObservedBy = null;

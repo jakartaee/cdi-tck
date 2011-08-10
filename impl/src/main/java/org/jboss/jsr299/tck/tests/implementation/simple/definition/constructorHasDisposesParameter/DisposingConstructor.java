@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition.constructorH
 import javax.enterprise.inject.Disposes;
 import javax.inject.Inject;
 
-class DisposingConstructor
+public class DisposingConstructor
 {
    @Inject
    public DisposingConstructor(@Disposes Duck duck)

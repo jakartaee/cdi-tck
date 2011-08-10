@@ -16,5 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.parameterized;
 
-class Dao<T1, T2> {
+public class Dao<T1, T2> {
 }
