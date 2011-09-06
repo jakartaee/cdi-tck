@@ -16,15 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer.notBusinessMethod;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
 /**
@@ -32,19 +31,26 @@ import org.testng.annotations.Test;
  * static method of the class.
  * 
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
-@Packaging(PackagingType.EAR)
-@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class EJBObserverMethodNotBusinessMethodTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EJBObserverMethodNotBusinessMethodTest.class)
+            .build();
+    }
+    
    @Test(groups = { "events" })
    @SpecAssertions( { 
       @SpecAssertion(section = "10.4", id = "d"), 
 	   @SpecAssertion(section = "10.4.2", id = "g") })
    public void testObserverMethodOnEnterpriseBeanNotBusinessMethodOrStaticFails()
    {
-      assert false;
    }
 }

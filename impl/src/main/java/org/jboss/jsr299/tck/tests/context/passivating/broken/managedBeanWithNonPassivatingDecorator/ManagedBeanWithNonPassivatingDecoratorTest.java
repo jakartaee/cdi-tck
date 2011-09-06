@@ -16,28 +16,32 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.managedBeanWithNonPassivatingDecorator;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-@Artifact
-@Packaging(PackagingType.EAR)
-@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
-@BeansXml("beans.xml")
 public class ManagedBeanWithNonPassivatingDecoratorTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(ManagedBeanWithNonPassivatingDecoratorTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
+    
    @Test(groups = { "contexts", "passivation", "integration"})
    @SpecAssertion(section = "6.6.4", id = "ha")
    public void testManagedBeanWithNonPassivatingDecoratorFails()
    {
-      assert false;
    }
 }

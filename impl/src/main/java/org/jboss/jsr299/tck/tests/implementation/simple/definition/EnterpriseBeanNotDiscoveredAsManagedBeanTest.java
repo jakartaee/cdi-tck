@@ -1,25 +1,28 @@
 package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
-@Extension("javax.enterprise.inject.spi.Extension")
-@IntegrationTest
-@Resources({ 
-   @Resource(destination="/WEB-INF/faces-config.xml", source="faces-config.xml")
-})
 public class EnterpriseBeanNotDiscoveredAsManagedBeanTest extends AbstractJSR299Test
 {
 
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(EnterpriseBeanNotDiscoveredAsManagedBeanTest.class)
+           .withExtension("javax.enterprise.inject.spi.Extension")
+           // Originally with faces-config.xml however this resource does not exist in /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/implementation/simple/definition
+           // .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
+           .build();
+   }
+    
    @Test
    @SpecAssertion(section="3.1.1", id="f")
    public void testClassesImplementingEnterpriseBeanInterfaceNotDiscoveredAsSimpleBean()

@@ -16,32 +16,38 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.passivatingScope;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.normalScope.AddingNormalScopeTest;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
  * @author pmuir
+ * @author Martin Kouba
  */
-@Artifact
-@Extension("javax.enterprise.inject.spi.Extension")
-@IntegrationTest 
-@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class AddingPassivatingScopeTest extends AbstractJSR299Test
 {
    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(AddingNormalScopeTest.class)
+            .withExtension("javax.enterprise.inject.spi.Extension")
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section="11.5.1", id="ac")
    public void testAddingScopeType()
    {
-      assert false;
    }
 
 }

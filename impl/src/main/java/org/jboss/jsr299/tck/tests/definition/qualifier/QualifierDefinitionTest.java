@@ -19,24 +19,32 @@ package org.jboss.jsr299.tck.tests.definition.qualifier;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-import javax.enterprise.inject.New;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
-import org.jboss.jsr299.tck.literals.NewLiteral;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class QualifierDefinitionTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(QualifierDefinitionTest.class)
+            .build();
+    }
+    
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "2.3.1", id = "a0"),

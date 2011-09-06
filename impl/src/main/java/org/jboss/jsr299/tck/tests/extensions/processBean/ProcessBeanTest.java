@@ -20,28 +20,33 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
  * Producer extension tests.
  * 
  * @author David Allen
- *
+ * @author Martin Kouba
  */
-@Artifact
-@Extension("javax.enterprise.inject.spi.Extension")
-// Must be an integration test as it needs a resource copied to a folder
-@IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
 public class ProcessBeanTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(ProcessBeanTest.class)
+            .withExtension("javax.enterprise.inject.spi.Extension")
+            .build();
+    }
    
    @Test
    @SpecAssertions({

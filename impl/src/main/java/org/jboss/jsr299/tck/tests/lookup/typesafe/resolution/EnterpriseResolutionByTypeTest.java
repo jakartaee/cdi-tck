@@ -18,19 +18,25 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
 import javax.enterprise.inject.spi.Bean;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
-@Packaging(PackagingType.EAR)
 public class EnterpriseResolutionByTypeTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EnterpriseResolutionByTypeTest.class)
+            .build();
+    }
    
    @Test
    @SpecAssertion(section = "2.2.2", id = "b")

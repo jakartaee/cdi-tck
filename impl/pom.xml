@@ -23,16 +23,15 @@
          <groupId>org.jboss.jsr299.tck</groupId>
          <artifactId>jsr299-tck-api</artifactId>
       </dependency>
-
-      <dependency>
-         <groupId>org.jboss.test-harness</groupId>
-         <artifactId>jboss-test-harness</artifactId>
-      </dependency>
+      
+       <dependency>
+		   <groupId>org.jboss.arquillian.testng</groupId>
+		   <artifactId>arquillian-testng-container</artifactId>
+		</dependency>
 
       <dependency>
          <groupId>org.testng</groupId>
          <artifactId>testng</artifactId>
-         <classifier>jdk15</classifier>
       </dependency>
 
       <dependency>
@@ -113,8 +112,8 @@
       <dependency>
          <groupId>org.jboss.resteasy</groupId>
          <artifactId>jaxrs-api</artifactId>
-      </dependency>
-
+      </dependency>		
+      
    </dependencies>
 
    <build>
@@ -162,7 +161,8 @@
                </execution>
             </executions>
          </plugin>
-         <plugin>
+         <!-- TODO do we really need this plugin? -->
+         <!-- plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
             <executions>
@@ -184,7 +184,7 @@
                   </configuration>
                </execution>
             </executions>
-         </plugin>
+         </plugin-->
       </plugins>
    </build>
 
@@ -252,7 +252,8 @@
          </build>
       </profile>
 
-      <profile>
+      <!-- TODO dumping artifacts not available right now -->
+      <!-- profile>
          <id>write-artifacts-to-disk</id>
          <activation>
             <property>
@@ -293,8 +294,8 @@
                </plugin>
             </plugins>
          </build>
-      </profile>
-
+      </profile-->
+      
       <profile>
          <id>javax.xml.ws</id>
          <activation>
@@ -307,7 +308,7 @@
             </dependency>
          </dependencies>
       </profile>
-
+      
    </profiles>
 
 </project>

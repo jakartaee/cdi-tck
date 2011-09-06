@@ -26,8 +26,8 @@ import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jboss.jsr299.tck.api.JSR299Configuration;
+import org.jboss.jsr299.tck.impl.ConfigurationFactory;
 import org.jboss.jsr299.tck.impl.OldSPIBridge;
-import org.jboss.testharness.impl.ConfigurationFactory;
 
 public class ConversationTestPhaseListener implements PhaseListener
 {
@@ -47,7 +47,7 @@ public class ConversationTestPhaseListener implements PhaseListener
 
    public void beforePhase(PhaseEvent event)
    {
-      JSR299Configuration configuration = ConfigurationFactory.get(JSR299Configuration.class);
+	   JSR299Configuration configuration = ConfigurationFactory.get();
       if (event.getPhaseId().equals(PhaseId.APPLY_REQUEST_VALUES))
       {
          try

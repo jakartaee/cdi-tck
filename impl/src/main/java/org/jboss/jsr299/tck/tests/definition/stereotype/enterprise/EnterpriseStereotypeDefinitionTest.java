@@ -19,21 +19,26 @@ package org.jboss.jsr299.tck.tests.definition.stereotype.enterprise;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
-@IntegrationTest
-@Artifact
-@Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")
 public class EnterpriseStereotypeDefinitionTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EnterpriseStereotypeDefinitionTest.class)
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section = "4.1", id = "am")
    public void testStereotypeDeclaredInheritedIsInherited() throws Exception

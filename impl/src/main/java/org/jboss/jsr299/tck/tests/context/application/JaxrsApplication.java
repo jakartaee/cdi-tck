@@ -33,7 +33,7 @@ import javax.ws.rs.core.Application;
 public class JaxrsApplication extends Application
 {
 
-   @Override
+@Override
    public Set<Class<?>> getClasses()
    {
       HashSet<Class<?>> set = new HashSet<Class<?>>();

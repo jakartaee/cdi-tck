@@ -17,24 +17,27 @@
 
 package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.nonContextualReference;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-
-@IntegrationTest
-@Artifact
-@Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")
-@BeansXml("beans.xml")
 public class SessionBeanInterceptorOnNonContextualEjbReferenceTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(SessionBeanInterceptorOnNonContextualEjbReferenceTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section = "7.2", id = "h")
    public void testNonContextualSessionBeanReferenceIsIntercepted()

@@ -16,35 +16,44 @@
  */
 package org.jboss.jsr299.tck.tests.context.session;
 
+import java.net.URL;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
-@Artifact
-@IntegrationTest(runLocally=true)
-@Resources({
-  @Resource(destination="SimplePage.html", source="SimplePage.html")
-})
-@WebXml("web.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class SessionContextTest extends AbstractJSR299Test
 {
+    
+    @ArquillianResource
+    private URL contextPath;
+    
+    @Deployment(testable=false)
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(SessionContextTest.class)
+            .withWebResource("SimplePage.html", "SimplePage.html")
+            .withWebXml("web.xml")
+            .build();
+    }
+    
    @Test(groups = { "contexts", "servlet", "integration" })
    @SpecAssertion(section = "6.7.2", id = "aa")
    public void testSessionScopeActiveDuringServiceMethod() throws Exception
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "serviceMethodTest");
+      webClient.getPage(contextPath + "serviceMethodTest");
    }
 
    @Test(groups = { "contexts", "servlet", "integration" })
@@ -53,7 +62,7 @@ public class SessionContextTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "SimplePage.html");
+      webClient.getPage(contextPath + "SimplePage.html");
    }
 
    @Test(groups = { "contexts", "servlet", "integration" })
@@ -62,11 +71,11 @@ public class SessionContextTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      TextPage firstRequestResult = webClient.getPage(getContextPath() + "IntrospectSession");
+      TextPage firstRequestResult = webClient.getPage(contextPath + "IntrospectSession");
       assert firstRequestResult.getContent() != null;
       assert Long.parseLong(firstRequestResult.getContent()) != 0;
       // Make a second request and make sure the same context is used
-      TextPage secondRequestResult = webClient.getPage(getContextPath() + "IntrospectSession");
+      TextPage secondRequestResult = webClient.getPage(contextPath + "IntrospectSession");
       assert secondRequestResult.getContent() != null;
       assert Long.parseLong(secondRequestResult.getContent()) == Long.parseLong(firstRequestResult.getContent());
    }
@@ -77,18 +86,18 @@ public class SessionContextTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      TextPage firstRequestResult = webClient.getPage(getContextPath() + "IntrospectSession");
+      TextPage firstRequestResult = webClient.getPage(contextPath + "IntrospectSession");
       assert firstRequestResult.getContent() != null;
       assert Long.parseLong(firstRequestResult.getContent()) != 0;
-      webClient.getPage(getContextPath() + "InvalidateSession");
+      webClient.getPage(contextPath + "InvalidateSession");
       // Make a second request and make sure the same context is not there
-      TextPage secondRequestResult = webClient.getPage(getContextPath() + "IntrospectSession");
+      TextPage secondRequestResult = webClient.getPage(contextPath + "IntrospectSession");
       assert secondRequestResult.getContent() != null;
       assert Long.parseLong(secondRequestResult.getContent()) != Long.parseLong(firstRequestResult.getContent());
       
       // As final confirmation that the context was destroyed, check that its beans
       // were also destroyed.
-      TextPage beanDestructionResult = webClient.getPage(getContextPath() + "InvalidateSession?isBeanDestroyed");
+      TextPage beanDestructionResult = webClient.getPage(contextPath + "InvalidateSession?isBeanDestroyed");
       assert Boolean.parseBoolean(beanDestructionResult.getContent());
    }
    
@@ -98,19 +107,19 @@ public class SessionContextTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      TextPage firstRequestResult = webClient.getPage(getContextPath() + "IntrospectSession");
+      TextPage firstRequestResult = webClient.getPage(contextPath + "IntrospectSession");
       assert firstRequestResult.getContent() != null;
       assert Long.parseLong(firstRequestResult.getContent()) != 0;
-      webClient.getPage(getContextPath() + "InvalidateSession?timeout=1");
+      webClient.getPage(contextPath + "InvalidateSession?timeout=1");
       Thread.sleep(1500);
       // Make a second request and make sure the same context is not there
-      TextPage secondRequestResult = webClient.getPage(getContextPath() + "IntrospectSession");
+      TextPage secondRequestResult = webClient.getPage(contextPath + "IntrospectSession");
       assert secondRequestResult.getContent() != null;
       assert Long.parseLong(secondRequestResult.getContent()) != Long.parseLong(firstRequestResult.getContent());
       
       // As final confirmation that the context was destroyed, check that its beans
       // were also destroyed.
-      TextPage beanDestructionResult = webClient.getPage(getContextPath() + "InvalidateSession?isBeanDestroyed");
+      TextPage beanDestructionResult = webClient.getPage(contextPath + "InvalidateSession?isBeanDestroyed");
       assert Boolean.parseBoolean(beanDestructionResult.getContent());
    }
 

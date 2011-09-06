@@ -16,27 +16,35 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.privateConstructor;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.testng.annotations.Test;
 
 
 /**
  * Test for problem detection of unproxyable bean with private constructor.
  */
-@Artifact
-@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class PrivateConstructorTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(PrivateConstructorTest.class)
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section = "5.4.1", id = "aa")
    public void testClassWithPrivateConstructor()
    {
-      assert false;
    }
 }

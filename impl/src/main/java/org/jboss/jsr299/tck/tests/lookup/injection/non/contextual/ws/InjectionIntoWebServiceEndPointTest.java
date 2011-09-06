@@ -16,26 +16,32 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.Classes;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
-@Artifact(addCurrentPackage = false)
-@Packaging(PackagingType.WAR)
-@IntegrationTest(runLocally = true)
+/**
+ * FIXME invalid WSDL location  
+ */
 @SpecVersion(spec="cdi", version="20091101")
-@WebXml("web.xml")
-@Classes({ Sheep.class, SheepWSEndPoint.class })
 public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
 {
+    
+   @Deployment(testable=false)
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClass(InjectionIntoWebServiceEndPointTest.class)
+           .withClasses(Sheep.class, SheepWSEndPoint.class)
+           .withWebXml("web.xml")
+           .build();
+   }
+    
    @Test(groups = "javaee-full-only")
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "ee"),

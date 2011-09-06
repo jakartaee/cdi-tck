@@ -33,15 +33,13 @@ import javax.servlet.jsp.tagext.JspTag;
 import javax.servlet.jsp.tagext.SimpleTag;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 /**
@@ -50,18 +48,24 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  *
  */
-@Artifact
-@Resources( { 
-   @Resource(destination = "WEB-INF/faces-config.xml", source = "faces-config.xml"),
-   @Resource(destination = "WEB-INF/TestLibrary.tld", source = "TestLibrary.tld"),
-   @Resource(destination = "TagPage.jsp", source = "TagPage.jsp"),
-   @Resource(destination = "ManagedBeanTestPage.jsp", source = "ManagedBeanTestPage.jsp"),
-   @Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension") })
-@IntegrationTest
-@WebXml("web.xml")
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(ContainerEventTest.class)
+           .withWebXml("web.xml")
+           .withExtension("javax.enterprise.inject.spi.Extension")
+           .withWebResource("ManagedBeanTestPage.jsp", "ManagedBeanTestPage.jsp")
+           .withWebResource("TagPage.jsp", "TagPage.jsp")
+           .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
+           .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld")
+           .build();
+    }    
+    
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.5.6", id = "aac"),

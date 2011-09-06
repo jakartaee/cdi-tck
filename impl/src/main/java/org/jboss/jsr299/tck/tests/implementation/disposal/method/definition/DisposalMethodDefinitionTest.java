@@ -22,21 +22,29 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-@Artifact
-@BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class DisposalMethodDefinitionTest extends AbstractJSR299Test
 {
    private static final Annotation DEADLIEST_LITERAL = new AnnotationLiteral<Deadliest>() {};
 
+   @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(DisposalMethodDefinitionTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
+   
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "2.3.5", id = "c"),

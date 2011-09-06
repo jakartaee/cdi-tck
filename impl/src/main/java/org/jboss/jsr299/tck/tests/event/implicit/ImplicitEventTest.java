@@ -23,12 +23,14 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Event;
 import javax.enterprise.util.TypeLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 /**
@@ -36,14 +38,22 @@ import org.testng.annotations.Test;
  * and verify its composition.
  * 
  * @author Dan Allen
+ * @author Martin Kouba
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class ImplicitEventTest extends AbstractJSR299Test
 {
    private static final TypeLiteral<Event<StudentRegisteredEvent>> STUDENT_REGISTERED_EVENT_LITERAL = new TypeLiteral<Event<StudentRegisteredEvent>>() {};
    private static final TypeLiteral<Event<CourseFullEvent>> COURSE_FULL_EVENT_LITERAL = new TypeLiteral<Event<CourseFullEvent>>() {};
    private static final TypeLiteral<Event<AwardEvent>> AWARD_EVENT_LITERAL = new TypeLiteral<Event<AwardEvent>>() {};
+   
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(ImplicitEventTest.class)
+           .build();
+   }
    
    @Test(groups = "events")
    @SpecAssertion(section = "10.3.2", id = "a")

@@ -17,10 +17,11 @@
 package org.jboss.jsr299.tck.tests.event.broken.inject.withoutType;
 
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
 
 /**
@@ -28,16 +29,24 @@ import org.testng.annotations.Test;
  * {@link @Any} has a type parameter for the actual type of event.
  * 
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
-@ExpectedDeploymentException(DeploymentFailure.class)
 public class EventInjectionWithoutTypeTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(EventInjectionWithoutTypeTest.class)
+            .build();
+    }
+    
    @Test(groups = { "events" })
    // FIXME need spec assertion, probably in the section that defines the Event interface
    public void testAnyAnnotationOnEventInjectionPointWithoutTypeParameterFails()
    {
-      assert false;
    }
 
 }

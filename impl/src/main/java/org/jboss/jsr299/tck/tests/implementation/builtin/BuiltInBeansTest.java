@@ -24,29 +24,33 @@ import javax.transaction.UserTransaction;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
 /**
  * Section 3.6
  * 
  * @author Pete Muir
- * 
+ * @author Martin Kouba
  */
-@Artifact
-@Packaging(PackagingType.EAR)
-@IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
 public class BuiltInBeansTest extends AbstractJSR299Test
 {
 
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(BuiltInBeansTest.class)
+            .build();
+    }
+    
    @Test
    @SpecAssertions({
       @SpecAssertion(section="3.6", id="a")

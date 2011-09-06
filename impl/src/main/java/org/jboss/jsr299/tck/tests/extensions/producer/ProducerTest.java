@@ -23,31 +23,34 @@ import javax.enterprise.inject.spi.InjectionTarget;
 import javax.enterprise.inject.spi.Producer;
 import javax.enterprise.util.AnnotationLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
 import org.testng.annotations.Test;
 
 /**
  * Producer extension tests.
  * 
  * @author David Allen
- *
+ * @author Martin Kouba
  */
-@Artifact
-@Resources({
-   @Resource(source="javax.enterprise.inject.spi.Extension", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
-})
-// Must be an integration test as it needs a resource copied to a folder
-@IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
 public class ProducerTest extends AbstractJSR299Test
 {
+
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(ProducerTest.class)
+            .withExtension("javax.enterprise.inject.spi.Extension")
+            .build();
+    }
+    
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "11.2", id = "ba"),

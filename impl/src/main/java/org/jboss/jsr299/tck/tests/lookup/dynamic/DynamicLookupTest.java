@@ -27,13 +27,15 @@ import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 /**
@@ -42,10 +44,18 @@ import org.testng.annotations.Test;
  * @author Shane Bryzak
  * @author Jozef Hartinger
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class DynamicLookupTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(DynamicLookupTest.class)
+           .build();
+   }
+    
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.6", id ="aa")

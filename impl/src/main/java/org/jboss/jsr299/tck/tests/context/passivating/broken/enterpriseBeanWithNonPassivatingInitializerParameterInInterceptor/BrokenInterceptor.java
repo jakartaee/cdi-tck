@@ -23,10 +23,8 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
-
-@Interceptor @City
-@BeansXml("beans.xml")
+@Interceptor 
+@City
 class BrokenInterceptor implements Serializable
 {
    @Inject

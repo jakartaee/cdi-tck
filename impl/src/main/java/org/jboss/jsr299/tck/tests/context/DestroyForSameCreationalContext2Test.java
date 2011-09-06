@@ -20,10 +20,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 /**
@@ -31,11 +33,19 @@ import org.testng.annotations.Test;
  * @author Nicklas Karlsson
  * @author Pete Muir
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class DestroyForSameCreationalContext2Test extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(DestroyForSameCreationalContext2Test.class)
+            .build();
+    }
    
    @Test
    @SpecAssertion(section = "6.2", id = "r")

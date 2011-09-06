@@ -24,16 +24,13 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedType;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.ear.EjbJarXml;
-import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
@@ -41,16 +38,22 @@ import org.testng.annotations.Test;
  * events.
  * 
  * @author Jozef Hartinger
- * 
+ * @author Martin Kouba
  */
-@Artifact
-@EjbJarXml("ejb-jar.xml")
-@IntegrationTest
 @SpecVersion(spec = "cdi", version = "20091101")
-@Extension("javax.enterprise.inject.spi.Extension")
-@Packaging(PackagingType.EAR)
 public class ContainerEventTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(ContainerEventTest.class)
+            .withExtension("javax.enterprise.inject.spi.Extension")
+            .withEjbJarXml("ejb-jar.xml")
+            .build();
+    }
+    
    @Test
    @SpecAssertions( { @SpecAssertion(section = "12.3", id = "ba"), @SpecAssertion(section = "11.5.6", id = "aaa") })
    public void testProcessInjectionTargetFiredForManagedBean()

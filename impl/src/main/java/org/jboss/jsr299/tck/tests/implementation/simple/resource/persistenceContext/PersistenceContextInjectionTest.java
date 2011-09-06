@@ -22,31 +22,35 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.persistence.EntityManager;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.ear.PersistenceXml;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 /**
  * Injection of persistence related objects.
  *
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
-@Packaging(PackagingType.WAR)
-@IntegrationTest
-@PersistenceXml("persistence.xml")
-@BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class PersistenceContextInjectionTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(PersistenceContextInjectionTest.class)
+            .withBeansXml("beans.xml")
+            .withPersistenceXml("persistence.xml")
+            .build();
+    }
+    
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
    @SpecAssertions( {
       @SpecAssertion(section = "3.5.1", id = "cc"),

@@ -16,27 +16,33 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.nonPassivationCapableProducerMethod;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
 /**
  * 
  * @author Shane Bryzak
  */
-@Artifact
-@Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")
-@ExpectedDeploymentException(DeploymentFailure.class)
 public class NonPassivationCapableProducerMethodTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(NonPassivationCapableProducerMethodTest.class)
+            .build();
+    }
+    
    @Test(groups = { "passivation" })
    @SpecAssertions({
      @SpecAssertion(section = "6.6.1", id = "cb"),
@@ -44,6 +50,5 @@ public class NonPassivationCapableProducerMethodTest extends AbstractJSR299Test
    })
    public void testNonPassivationCapableProducerMethodNotOk()
    {
-      assert false;
    }
 }

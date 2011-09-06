@@ -16,9 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.context.conversation;
 
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -28,6 +30,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public abstract class AbstractConversationTest extends AbstractJSR299Test
 {
+    
+    @ArquillianResource
+    protected URL contextPath;
    
    public static final String CID_REQUEST_PARAMETER_NAME = "cid";
    
@@ -53,17 +58,17 @@ public abstract class AbstractConversationTest extends AbstractJSR299Test
    
    protected String getConversationStatusPath(String method)
    {
-      return super.getContextPath() + "conversation-status?method=" + method;
+      return contextPath + "conversation-status?method=" + method;
    }
    
    protected String getPath(String viewId)
    {
-      return getContextPath() + viewId;
+      return contextPath + viewId;
    }
    
    protected String getPath(String viewId, String cid)
    {
-      return getContextPath() + viewId + "?" + CID_REQUEST_PARAMETER_NAME + "=" + cid;
+      return contextPath + viewId + "?" + CID_REQUEST_PARAMETER_NAME + "=" + cid;
    }
    
    protected <T> Set<T> getElements(HtmlElement rootElement, Class<T> elementClass)
