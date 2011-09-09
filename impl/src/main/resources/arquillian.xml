@@ -11,7 +11,7 @@
 
 	<container qualifier="jboss7" default="true">
 		<configuration>
-			<!-- property name="javaVmArguments">-Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n</property-->
+			<!-- property name="javaVmArguments">-enableassertions -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=n</property-->
 			<property name="javaVmArguments">-enableassertions</property>
 		</configuration>
 		<protocol type="Servlet 3.0">

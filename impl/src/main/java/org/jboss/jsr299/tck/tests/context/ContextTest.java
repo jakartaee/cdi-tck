@@ -45,7 +45,7 @@ public class ContextTest extends AbstractJSR299Test
             .build();
     }
     
-   @Test(expectedExceptions = { ContextNotActiveException.class }, groups = { "manager" })
+   @Test(expectedExceptions = { IllegalStateException.class }, groups = { "manager" })
    @SpecAssertion(section = "6.5.1", id = "b")
    public void testGetContextWithTooManyActiveContextsFails()
    {

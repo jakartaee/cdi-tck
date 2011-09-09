@@ -25,8 +25,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -43,9 +43,9 @@ public class ProducerTest extends AbstractJSR299Test
 {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
+    public static WebArchive createTestArchive() 
 	{
-        return new EnterpriseArchiveBuilder()
+        return new WebArchiveBuilder()
             .withTestClassPackage(ProducerTest.class)
             .withExtension("javax.enterprise.inject.spi.Extension")
             .build();

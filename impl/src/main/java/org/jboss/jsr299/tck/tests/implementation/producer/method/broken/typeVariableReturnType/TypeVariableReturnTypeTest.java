@@ -47,7 +47,6 @@ public class TypeVariableReturnTypeTest extends AbstractJSR299Test
    })
    public void testTypeVariableNotAllowed()
    {
-      assert false;
    }
 
 }

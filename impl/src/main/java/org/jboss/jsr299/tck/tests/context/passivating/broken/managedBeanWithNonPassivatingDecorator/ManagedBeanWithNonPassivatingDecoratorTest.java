@@ -19,8 +19,8 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.managedBeanWithNon
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -31,9 +31,10 @@ public class ManagedBeanWithNonPassivatingDecoratorTest extends AbstractJSR299Te
     
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
+    public static WebArchive createTestArchive() 
 	{
-        return new EnterpriseArchiveBuilder()
+        //  Originally EAR but no enterprise feature used
+        return new WebArchiveBuilder()
             .withTestClassPackage(ManagedBeanWithNonPassivatingDecoratorTest.class)
             .withBeansXml("beans.xml")
             .build();

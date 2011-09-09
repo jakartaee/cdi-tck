@@ -87,6 +87,12 @@ public class BuiltInBeansTest extends AbstractJSR299Test
       defaultValidator.getConstraintsForClass(BuiltInBeansTest.class);
    }
    
+   /**
+    * FIXME in jbossas7 web profile login-module is disabled 
+    * 
+    * @throws SystemException
+    * @throws LoginException
+    */
    @Test(groups="rewrite")
    // PLM We should check the Principal somehow
    @SpecAssertions({

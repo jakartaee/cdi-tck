@@ -19,8 +19,8 @@ package org.jboss.jsr299.tck.tests.extensions.producer.broken.injectionTargetErr
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -28,9 +28,6 @@ import org.testng.annotations.Test;
 
 /**
  * Test for adding a definition error via the ProcessInjectionTarget event.
- * 
- * TODO check extension destination
- * WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension
  * 
  * @author David Allen
  * @author Martin Kouba
@@ -41,9 +38,10 @@ public class InjectionTargetDefinitionErrorTest extends AbstractJSR299Test
     
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
+    public static WebArchive createTestArchive() 
 	{
-        return new EnterpriseArchiveBuilder()
+        //  Originally EAR but no enterprise feature used
+        return new WebArchiveBuilder()
             .withTestClassPackage(InjectionTargetDefinitionErrorTest.class)
             .withExtension("javax.enterprise.inject.spi.Extension")
             .build();
