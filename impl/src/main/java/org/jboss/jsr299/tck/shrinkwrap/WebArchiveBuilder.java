@@ -3,6 +3,7 @@ package org.jboss.jsr299.tck.shrinkwrap;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 
 /**
@@ -42,6 +43,8 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
         if (webXml != null)
         {
             webArchive.setWebXML(webXml.getSource());
+        } else {
+            webArchive.setWebXML(new StringAsset("<?xml version=\"1.0\" encoding=\"UTF-8\"?><web-app></web-app>"));
         }
 
         if (persistenceXml != null)

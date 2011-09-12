@@ -81,7 +81,10 @@ public class ProcessBeanTest extends AbstractJSR299Test
       assert ProcessBeanObserver.getCowProcessProducerMethod().getBean().getBeanClass().equals(Cowshed.class);
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getBaseType().equals(Cow.class);
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getDeclaringType().getBaseType().equals(Cowshed.class);
-      assert ProcessBeanObserver.getCowShedProcessBeanCount() == 1;
+      // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and ProcessProducerMethod
+      // https://issues.jboss.org/browse/CDITCK-168
+      // https://issues.jboss.org/browse/WELD-586
+      assert ProcessBeanObserver.getCowShedProcessBeanCount() == 2;
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotated() instanceof AnnotatedMethod<?>;
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getJavaMember().getName().equals("getDaisy");
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getJavaMember().getDeclaringClass().equals(Cowshed.class);
@@ -104,7 +107,10 @@ public class ProcessBeanTest extends AbstractJSR299Test
       assert ProcessBeanObserver.getChickenProcessProducerField().getBean().getBeanClass().equals(ChickenHutch.class);
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getBaseType().equals(Chicken.class);
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getDeclaringType().getBaseType().equals(ChickenHutch.class);
-      assert ProcessBeanObserver.getChickenHutchProcessBeanCount() == 1;
+      // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and ProcessProducerMethod
+      // https://issues.jboss.org/browse/CDITCK-168
+      // https://issues.jboss.org/browse/WELD-586
+      assert ProcessBeanObserver.getChickenHutchProcessBeanCount() == 2;
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotated() instanceof AnnotatedField<?>;
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getJavaMember().getName().equals("chicken");
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getJavaMember().getDeclaringClass().equals(ChickenHutch.class);

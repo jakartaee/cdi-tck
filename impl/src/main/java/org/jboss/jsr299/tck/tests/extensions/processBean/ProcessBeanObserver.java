@@ -29,13 +29,16 @@ public class ProcessBeanObserver implements Extension
 {
    private static ProcessManagedBean<Cat> catProcessManagedBean;
    private static int catProcessBeanCount;
-   
-   private static ProcessProducerMethod<Cowshed, Cow> cowProcessProducerMethod;
+
+   // https://issues.jboss.org/browse/WELD-586
+   private static ProcessProducerMethod<Cow, Cowshed> cowProcessProducerMethod;
    private static int cowShedProcessBeanCount;
    
    private static ProcessSessionBean<Elephant> elephantProcessSessionBean;
    private static int elephantProcessBeanCount;
-   private static ProcessProducerField<ChickenHutch, Chicken> chickenProcessProducerField;
+
+   // https://issues.jboss.org/browse/WELD-586
+   private static ProcessProducerField<Chicken, ChickenHutch> chickenProcessProducerField;
    private static int chickenHutchProcessBeanCount;
    
    public void cleanup(@Observes BeforeShutdown shutdown)
@@ -67,7 +70,12 @@ public class ProcessBeanObserver implements Extension
       ProcessBeanObserver.elephantProcessBeanCount++;
    }
    
-   public void observeCowProcessProducerMethod(@Observes ProcessProducerMethod<Cowshed, Cow> event)
+   /**
+    * https://issues.jboss.org/browse/WELD-586
+    *     
+    * @param event
+    */
+   public void observeCowProcessProducerMethod(@Observes ProcessProducerMethod<Cow, Cowshed> event)
    {
       ProcessBeanObserver.cowProcessProducerMethod = event;
    }
@@ -77,7 +85,12 @@ public class ProcessBeanObserver implements Extension
       ProcessBeanObserver.cowShedProcessBeanCount++;
    }
    
-   public void observeChickenProcessProducerField(@Observes ProcessProducerField<ChickenHutch, Chicken> event)
+   /**
+    * https://issues.jboss.org/browse/WELD-586
+    * 
+    * @param event
+    */
+   public void observeChickenProcessProducerField(@Observes ProcessProducerField<Chicken, ChickenHutch> event)
    {
       ProcessBeanObserver.chickenProcessProducerField = event;
    }
@@ -92,7 +105,7 @@ public class ProcessBeanObserver implements Extension
       return catProcessManagedBean;
    }
    
-   public static ProcessProducerMethod<Cowshed, Cow> getCowProcessProducerMethod()
+   public static ProcessProducerMethod<Cow, Cowshed> getCowProcessProducerMethod()
    {
       return cowProcessProducerMethod;
    }
@@ -122,7 +135,11 @@ public class ProcessBeanObserver implements Extension
       return chickenHutchProcessBeanCount;
    }
    
-   public static ProcessProducerField<ChickenHutch, Chicken> getChickenProcessProducerField()
+   /**
+    * https://issues.jboss.org/browse/WELD-586 
+    * @return
+    */
+   public static ProcessProducerField<Chicken, ChickenHutch> getChickenProcessProducerField()
    {
       return chickenProcessProducerField;
    }

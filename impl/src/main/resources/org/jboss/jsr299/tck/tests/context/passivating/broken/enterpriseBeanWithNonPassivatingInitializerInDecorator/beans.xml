@@ -1,5 +1,5 @@
 <beans> 
    <decorators>
-      <decorator>org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInitializerInDecorator.BrokenDecorator</decorator>
+      <class>org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInitializerInDecorator.BrokenDecorator</class>
    </decorators>
 </beans>

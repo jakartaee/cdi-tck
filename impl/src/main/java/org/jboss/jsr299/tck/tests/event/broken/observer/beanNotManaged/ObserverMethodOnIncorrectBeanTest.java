@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.event.broken.observer.beanNotManaged;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -36,7 +35,6 @@ import org.testng.annotations.Test;
 public class ObserverMethodOnIncorrectBeanTest extends AbstractJSR299Test
 {
     
-    @ShouldThrowException(Exception.class)
     @Deployment
     public static WebArchive createTestArchive() 
 	{
@@ -49,7 +47,6 @@ public class ObserverMethodOnIncorrectBeanTest extends AbstractJSR299Test
    @SpecAssertion(section = "10.4", id = "aa")
    public void testObserverMethodNotOnManagedOrSessionBeanFails()
    {
-       // TODO check assertion
       assert getCurrentManager().resolveObserverMethods(new String()).isEmpty();
    }
 }

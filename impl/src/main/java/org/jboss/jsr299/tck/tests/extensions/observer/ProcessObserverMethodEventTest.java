@@ -28,8 +28,6 @@ import org.testng.annotations.Test;
 /**
  * Tests for the extensions provided by the ProcessObserverMethod events.
  * 
- * FIXME inverted generic type parameters on ProcessObserverMethod
- * 
  * @author David Allen
  * @author Martin Kouba
  */
