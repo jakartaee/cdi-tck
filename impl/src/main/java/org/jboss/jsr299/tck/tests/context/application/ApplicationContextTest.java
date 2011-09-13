@@ -117,7 +117,6 @@ public class ApplicationContextTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      //FIXME:  fix the path if this is not correct
       TextPage firstRequestResult = webClient.getPage(contextPath + "jaxrs/application-id");
       assert firstRequestResult.getContent() != null;
       assert Double.parseDouble(firstRequestResult.getContent()) != 0;

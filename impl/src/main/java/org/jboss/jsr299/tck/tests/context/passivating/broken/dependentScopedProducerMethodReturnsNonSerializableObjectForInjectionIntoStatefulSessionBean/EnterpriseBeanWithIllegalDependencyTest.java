@@ -38,19 +38,19 @@ public class EnterpriseBeanWithIllegalDependencyTest extends AbstractJSR299Test
             .build();
     }
     
-   @Test(groups = { "contexts", "passivation", "integration"}, expectedExceptions={IllegalProductException.class})
+   @Test(groups = { "contexts", "passivation", "integration"})
    @SpecAssertion(section = "6.6.4", id = "fab")
    public void test()
    {
-      // try
-      // {
+       try
+       {
          getInstanceByType(MaarianHaminaLocal_Broken.class).ping();
-      // }
-      // catch (Throwable t) 
-      // {
-       //  assert isThrowablePresent(IllegalProductException.class, t);
-       //  return;
-      // }
-      // assert false;
+       }
+       catch (Throwable t) 
+       {
+         assert isThrowablePresent(IllegalProductException.class, t);
+         return;
+       }
+       assert false;
    }
 }

@@ -17,15 +17,12 @@
 package org.jboss.jsr299.tck.tests.lookup.dynamic;
 
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.util.AnnotationLiteral;
-import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -66,20 +63,38 @@ public class DynamicLookupTest extends AbstractJSR299Test
       assert injectionPoint.getPaymentProcessor() != null;
    }
    
-   @Test(expectedExceptions = IllegalArgumentException.class)
+   @Test
    @SpecAssertion(section = "5.6.1", id ="da")
    public void testDuplicateBindingsThrowsException()
    {
-      ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
-      injectionPoint.getAnyPaymentProcessor().select(new DefaultLiteral(), new DefaultLiteral());      
+       try
+       {
+           ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
+           injectionPoint.getAnyPaymentProcessor().select(new DefaultLiteral(), new DefaultLiteral());
+       }
+       catch (Throwable t) 
+       {
+         assert isThrowablePresent(IllegalArgumentException.class, t);
+         return;
+      }
+       assert false;
    }      
    
-   @Test(expectedExceptions = IllegalArgumentException.class)
+   @Test
    @SpecAssertion(section = "5.6.1", id = "e")
    public void testNonBindingThrowsException()
    {
-      ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
-      injectionPoint.getAnyPaymentProcessor().select(new AnnotationLiteral<NonBinding>(){});      
+       try
+       {
+           ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
+           injectionPoint.getAnyPaymentProcessor().select(new AnnotationLiteral<NonBinding>(){});      
+       }
+       catch (Throwable t) 
+       {
+         assert isThrowablePresent(IllegalArgumentException.class, t);
+         return;
+      }
+       assert false;
    }
    
    @Test
@@ -100,18 +115,36 @@ public class DynamicLookupTest extends AbstractJSR299Test
       assert instance.get().getValue() == 10;
    }
    
-   @Test(expectedExceptions = UnsatisfiedResolutionException.class)
+   @Test
    @SpecAssertion(section = "5.6.1", id = "fba")
    public void testUnsatisfiedDependencyThrowsException()
    {
-      getInstanceByType(ObtainsInstanceBean.class).getPaymentProcessor().select(RemotePaymentProcessor.class).get();
+       try
+       {
+           getInstanceByType(ObtainsInstanceBean.class).getPaymentProcessor().select(RemotePaymentProcessor.class).get();
+       }
+       catch (Throwable t) 
+       {
+         assert isThrowablePresent(UnsatisfiedResolutionException.class, t);
+         return;
+      }
+       assert false;
    }
    
-   @Test(expectedExceptions = AmbiguousResolutionException.class)
+   @Test
    @SpecAssertion(section = "5.6.1", id = "fbb")
    public void testAmbiguousDependencyThrowsException()
    {
-      getInstanceByType(ObtainsInstanceBean.class).getAnyPaymentProcessor().get();      
+       try
+       {      
+           getInstanceByType(ObtainsInstanceBean.class).getAnyPaymentProcessor().get();
+       }
+       catch (Throwable t) 
+       {
+         assert isThrowablePresent(AmbiguousResolutionException.class, t);
+         return;
+      }
+       assert false;
    }
    
    @Test
@@ -199,8 +232,11 @@ public class DynamicLookupTest extends AbstractJSR299Test
    @SuppressWarnings("serial")
    public void testNewBean()
    {
-      Instance<List<String>> instance = getInstanceByType(ObtainsNewInstanceBean.class).getStrings();
-      assert instance.select(new TypeLiteral<ArrayList<String>>(){}).get() instanceof ArrayList<?>;
+      // Instance<List<String>> instance = getInstanceByType(ObtainsNewInstanceBean.class).getStrings();
+       // assert instance.select(new TypeLiteral<ArrayList<String>>(){}).get() instanceof ArrayList<?>;
+       String instance = getInstanceByType(ObtainsNewInstanceBean.class).getString();
+       assert instance != null && instance instanceof String;
+       getInstanceByType(ObtainsNewInstanceBean.class).getMap();
    }
    
    @Test

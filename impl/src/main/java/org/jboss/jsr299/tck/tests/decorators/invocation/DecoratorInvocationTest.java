@@ -85,12 +85,21 @@ public class DecoratorInvocationTest extends AbstractJSR299Test
       FooImpl.reset();
    }
 
-   @Test(expectedExceptions = IllegalStateException.class)
+   @Test
    @SpecAssertion(section="8.1.2", id="g")
-   //WELD-430
+   // WELD-430
    public void testDecoratorInvokesDelegateMethodOutsideOfBusinessMethodInterception()
    {
       assert getInstanceByType(Bar.class).foo();
-      BarDecorator.invokeFooOutsideOfBusinessMethodInterception();
+      try
+      {
+          BarDecorator.invokeFooOutsideOfBusinessMethodInterception();
+      }
+      catch (Throwable t) 
+      {
+        assert isThrowablePresent(IllegalStateException.class, t);
+        return;
+     }
+     assert false;
    }
 }

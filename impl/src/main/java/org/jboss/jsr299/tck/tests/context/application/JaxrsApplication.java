@@ -20,6 +20,7 @@ package org.jboss.jsr299.tck.tests.context.application;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 
@@ -30,6 +31,7 @@ import javax.ws.rs.core.Application;
  * @author David Allen
  *
  */
+@ApplicationPath("/jaxrs")
 public class JaxrsApplication extends Application
 {
 

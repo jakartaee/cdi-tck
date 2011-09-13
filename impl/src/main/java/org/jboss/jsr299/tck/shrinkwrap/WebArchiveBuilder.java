@@ -49,7 +49,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
 
         if (persistenceXml != null)
         {
-            webArchive.addAsWebInfResource(persistenceXml.getSource(), "persistence.xml");
+            webArchive.addAsResource(persistenceXml.getSource(), "META-INF/persistence.xml");
         }
 
         if (webResources != null)

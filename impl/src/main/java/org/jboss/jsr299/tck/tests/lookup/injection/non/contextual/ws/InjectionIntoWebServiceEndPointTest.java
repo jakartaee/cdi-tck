@@ -1,4 +1,4 @@
-/*
+ /*
  * JBoss, Home of Professional Open Source
  * Copyright 2010, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
@@ -16,7 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws;
 
+import java.net.URL;
+
+import javax.xml.namespace.QName;
+
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -26,18 +31,23 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * FIXME invalid WSDL location  
+ * FIXME
+ * 1. Needs javaee-full profile
+ * 2. Injection not working (use serverConfig property in arquillian.xml)
  */
 @SpecVersion(spec="cdi", version="20091101")
 public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
 {
     
+    @ArquillianResource
+    protected URL contextPath;
+    
    @Deployment(testable=false)
    public static WebArchive createTestArchive() 
 	{
        return new WebArchiveBuilder()
-           .withTestClass(InjectionIntoWebServiceEndPointTest.class)
-           .withClasses(Sheep.class, SheepWSEndPoint.class)
+           .withTestClassPackage(InjectionIntoWebServiceEndPointTest.class)
+           //.withClasses(Sheep.class, SheepWSEndPoint.class)
            .withWebXml("web.xml")
            .build();
    }
@@ -51,7 +61,9 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
    // JBAS-7046
    public void testInjectionIntoWebServiceEndpoint() throws Exception
    {
-      SheepWSEndPointService service = new SheepWSEndPointService();
+      URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
+        SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(
+                "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWS"));
       SheepWS ws = service.getSheepWSPort();
       assert ws.isSheepInjected();
    }
