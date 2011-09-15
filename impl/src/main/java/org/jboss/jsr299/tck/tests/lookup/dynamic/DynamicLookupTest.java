@@ -232,7 +232,8 @@ public class DynamicLookupTest extends AbstractJSR299Test
    @SuppressWarnings("serial")
    public void testNewBean()
    {
-      // Instance<List<String>> instance = getInstanceByType(ObtainsNewInstanceBean.class).getStrings();
+       // TODO check possible weld bug  
+       // Instance<List<String>> instance = getInstanceByType(ObtainsNewInstanceBean.class).getStrings();
        // assert instance.select(new TypeLiteral<ArrayList<String>>(){}).get() instanceof ArrayList<?>;
        String instance = getInstanceByType(ObtainsNewInstanceBean.class).getString();
        assert instance != null && instance instanceof String;

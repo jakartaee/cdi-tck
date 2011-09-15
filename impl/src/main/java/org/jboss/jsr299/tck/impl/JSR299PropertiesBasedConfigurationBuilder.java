@@ -80,8 +80,9 @@ public class JSR299PropertiesBasedConfigurationBuilder
             jsr299Configuration.setContexts(contextsInstance);
         }
 
+        // We only need library dir in minimal mode while creating test archive
         jsr299Configuration
-                .setLibraryDirectory(getStringValue(JSR299Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, true));
+                .setLibraryDirectory(getStringValue(JSR299Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, minimal));
         return this;
     }
 
