@@ -16,10 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer8;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 
 /**
  * Tests an asynchronous observer method that is also a
@@ -28,16 +29,24 @@ import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
  * Spec version: 20090519
  * 
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
-@ExpectedDeploymentException(DeploymentFailure.class)
 public class AsynchronousBeforeCompletionObserverTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(AsynchronousBeforeCompletionObserverTest.class)
+            .build();
+    }
+    
 //   @Test(groups = { "events" })
 //   @SpecAssertion(section = "10.5.6", id = "b")
 // Asynchronous events are not specified now
    public void testAsynchronousObserverAsBeforeCompletionObserverFails()
    {
-      assert false;
    }
 }

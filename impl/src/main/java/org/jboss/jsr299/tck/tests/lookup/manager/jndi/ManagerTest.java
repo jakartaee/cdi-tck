@@ -18,23 +18,27 @@ package org.jboss.jsr299.tck.tests.lookup.manager.jndi;
 
 import javax.enterprise.inject.spi.BeanManager;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.Classes;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
-@Artifact
-@Classes(JndiBeanManagerInjected.class)
-@IntegrationTest
 @SpecVersion(spec = "cdi", version = "20091101")
-@Packaging(PackagingType.WAR)
 public class ManagerTest extends AbstractJSR299Test
 {
+    
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClass(ManagerTest.class)
+           .withClasses(ManagerTest.class, JndiBeanManagerInjected.class)
+           .build();
+   }
+    
    @Test(groups = { "manager", "ejb3", "integration" })
    @SpecAssertion(section = "11.3", id = "da")
    public void testManagerLookupInJndi() throws Exception

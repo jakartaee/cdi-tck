@@ -16,13 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.context.application.ejb;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
 /**
@@ -30,14 +29,19 @@ import org.testng.annotations.Test;
  * 
  * @author David Allen
  */
-@Artifact
-@IntegrationTest
-@Packaging(PackagingType.EAR)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextSharedTest extends AbstractJSR299Test
 {
 
-   @Test(groups = { "contexts", "ejb3", "integration", "rewrite" })
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(ApplicationContextSharedTest.class)
+            .build();
+    }
+    
+   @Test(groups = { "contexts", "ejb3", "integration", "rewrite", "javaee-full-only" })
    @SpecAssertion(section = "6.7.3", id = "e")
    public void testApplicationContextShared() throws Exception
    {
@@ -58,7 +62,7 @@ public class ApplicationContextSharedTest extends AbstractJSR299Test
       }
    }
 
-   @Test(groups = { "contexts", "ejb3", "integration" })
+   @Test(groups = { "contexts", "ejb3", "integration", "javaee-full-only" })
    @SpecAssertion(section = "6.7.3", id = "dc")
    public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception
    {

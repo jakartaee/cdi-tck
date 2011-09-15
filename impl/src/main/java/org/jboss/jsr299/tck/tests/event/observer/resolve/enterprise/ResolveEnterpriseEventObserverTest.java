@@ -16,16 +16,26 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.resolve.enterprise;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class ResolveEnterpriseEventObserverTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(ResolveEnterpriseEventObserverTest.class)
+            .build();
+    }
+    
    @Test(groups = { "events", "ejb" })
    @SpecAssertion(section = "10.4", id = "d")
    public void testObserverMethodOnEnterpriseBeanIsBusinessMethodOrStatic()

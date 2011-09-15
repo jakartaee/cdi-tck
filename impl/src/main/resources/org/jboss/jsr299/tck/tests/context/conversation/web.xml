@@ -44,10 +44,6 @@
       <servlet-name>Conversation Status Servlet</servlet-name>
       <url-pattern>/conversation-status</url-pattern>
    </servlet-mapping>
-   
-   <listener>
-      <listener-class>org.jboss.testharness.impl.runner.servlet.HarnessServletListener</listener-class>
-   </listener>
 
    <session-config>
       <session-timeout>10</session-timeout>

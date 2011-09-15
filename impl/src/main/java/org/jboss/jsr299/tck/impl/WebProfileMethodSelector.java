@@ -3,12 +3,13 @@ package org.jboss.jsr299.tck.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.IMethodSelector;
 import org.testng.IMethodSelectorContext;
 import org.testng.ITestNGMethod;
 
+/**
+ * 
+ */
 public class WebProfileMethodSelector implements IMethodSelector
 {
 
@@ -16,7 +17,7 @@ public class WebProfileMethodSelector implements IMethodSelector
 
    public boolean includeMethod(IMethodSelectorContext ctx, ITestNGMethod method, boolean isTestMethod)
    {
-      if (isWar(method.getMethod().getDeclaringClass()) && !isFullProfileOnly(method.getGroups()))
+      if (!isFullProfileOnly(method.getGroups()))
       {
          return true;
       }
@@ -30,19 +31,6 @@ public class WebProfileMethodSelector implements IMethodSelector
    public void setTestMethods(List<ITestNGMethod> arg0)
    {
       // No-op, not needed
-   }
-   
-   private static boolean isWar(Class<?> declaringClass)
-   {
-      if (declaringClass.isAnnotationPresent(Packaging.class))
-      {
-         return declaringClass.getAnnotation(Packaging.class).value().equals(PackagingType.WAR);
-      }
-      else
-      {
-         // WAR is default
-         return true;
-      }
    }
    
    private boolean isFullProfileOnly(String[] groups)

@@ -17,29 +17,33 @@
 package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.broken.sameName;
 
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-@Artifact
-@ExpectedDeploymentException(DeploymentFailure.class)
-@Packaging(PackagingType.EAR)
-@BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class SameNameTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(SameNameTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section = "4.3.1", id = "lc")
    public void testSpecializingAndSpecializedBeanHasName()
    {
-      assert false;
    }
    
 }

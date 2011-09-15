@@ -8,17 +8,9 @@
       <servlet-class>org.jboss.jsr299.tck.tests.lookup.clientProxy.incontainer.TestServlet</servlet-class>
       <load-on-startup>1</load-on-startup>
    </servlet>
-   <servlet>
-      <servlet-name>JBoss Test Harness Test Runner</servlet-name>
-      <servlet-class>org.jboss.testharness.impl.runner.servlet.ServletTestRunner</servlet-class>
-   </servlet>
    <servlet-mapping>
       <servlet-name>TestServlet</servlet-name>
       <url-pattern>/Test/*</url-pattern>
-   </servlet-mapping>
-   <servlet-mapping>
-      <servlet-name>JBoss Test Harness Test Runner</servlet-name>
-      <url-pattern>/</url-pattern>
    </servlet-mapping>
    <session-config>
       <session-timeout>10</session-timeout>

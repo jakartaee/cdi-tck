@@ -16,28 +16,36 @@
  */
 package org.jboss.jsr299.tck.tests.context.request;
 
+import java.net.URL;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
-@Artifact
-@IntegrationTest(runLocally=true)
-@Resources({
-  @Resource(destination="SimplePage.html", source="SimplePage.html")
-})
-@WebXml("web.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class RequestContextTest extends AbstractJSR299Test
 {
+    
+    @ArquillianResource
+    private URL contextPath;
+    
+    @Deployment(testable=false)
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(RequestContextTest.class)
+            .withWebResource("SimplePage.html", "SimplePage.html")
+            .withWebXml("web.xml")
+            .build();
+    }
 
    /**
     * The request scope is active during the service() method of any Servlet in
@@ -49,7 +57,7 @@ public class RequestContextTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "serviceMethodTest");
+      webClient.getPage(contextPath + "serviceMethodTest");
    }
 
    /**
@@ -62,7 +70,7 @@ public class RequestContextTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "SimplePage.html");
+      webClient.getPage(contextPath + "SimplePage.html");
    }
 
    /**
@@ -76,17 +84,17 @@ public class RequestContextTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      TextPage firstRequestResult = webClient.getPage(getContextPath() + "IntrospectRequest");
+      TextPage firstRequestResult = webClient.getPage(contextPath + "IntrospectRequest");
       assert firstRequestResult.getContent() != null;
       assert Double.parseDouble(firstRequestResult.getContent()) != 0;
       // Make a second request and make sure the same context is not there
-      TextPage secondRequestResult = webClient.getPage(getContextPath() + "IntrospectRequest");
+      TextPage secondRequestResult = webClient.getPage(contextPath + "IntrospectRequest");
       assert secondRequestResult.getContent() != null;
       assert Double.parseDouble(secondRequestResult.getContent()) != Double.parseDouble(firstRequestResult.getContent());
       
       // As final confirmation that the context was destroyed, check that its beans
       // were also destroyed.
-//      TextPage beanDestructionResult = webClient.getPage(getContextPath() + "InvalidateSession?isBeanDestroyed");
+//      TextPage beanDestructionResult = webClient.getPage(contextPath + "InvalidateSession?isBeanDestroyed");
 //      assert Boolean.parseBoolean(beanDestructionResult.getContent());
    }
 

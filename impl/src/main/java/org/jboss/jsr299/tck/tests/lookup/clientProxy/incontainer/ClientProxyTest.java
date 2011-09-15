@@ -16,31 +16,44 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.clientProxy.incontainer;
 
+import java.net.URL;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 
-@Artifact
-@IntegrationTest(runLocally = true)
 @SpecVersion(spec="cdi", version="20091101")
-@WebXml("web.xml")
 public class ClientProxyTest extends AbstractJSR299Test
 {
+    
+    @ArquillianResource
+    private URL contextPath;
+    
+    @Deployment(testable=false)
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(ClientProxyTest.class)
+            .withWebXml("web.xml")
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section = "5.4", id = "d")
    public void testInvocationIsProcessedOnCurrentInstance() throws Exception {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
       String response;
-      response = webClient.getPage(getContextPath() + "Test/Garage?make=Honda").getWebResponse().getContentAsString();
+      response = webClient.getPage(contextPath + "Test/Garage?make=Honda").getWebResponse().getContentAsString();
       assert response.contains("Honda");
-      response = webClient.getPage(getContextPath() + "Test/Garage?make=Toyota").getWebResponse().getContentAsString();
+      response = webClient.getPage(contextPath + "Test/Garage?make=Toyota").getWebResponse().getContentAsString();
       assert response.contains("Toyota");
    }
 }

@@ -17,13 +17,14 @@
 
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.failsDuringValidation;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.testng.annotations.Test;
 
 /**
@@ -33,14 +34,21 @@ import org.testng.annotations.Test;
  * 
  * @author David Allen
  * @author Dan Allen
+ * @author Martin Kouba
  */
-@Artifact
-@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class AfterBeanDiscoveryFailureTest extends AbstractJSR299Test
 {
-   
-   // TODO make this an integration test using Extension
+
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(AfterBeanDiscoveryFailureTest.class)
+            .withExtension("javax.enterprise.inject.spi.Extension")
+            .build();
+    }
    
    @Test(groups={"rewrite"} )
    @SpecAssertions({
@@ -51,7 +59,6 @@ public class AfterBeanDiscoveryFailureTest extends AbstractJSR299Test
    // WBRI-312
    public void testDeploymentFailsDuringValidation()
    {
-      assert false;
    }
 
    // FIXME need to communicate state of container at the time of failure

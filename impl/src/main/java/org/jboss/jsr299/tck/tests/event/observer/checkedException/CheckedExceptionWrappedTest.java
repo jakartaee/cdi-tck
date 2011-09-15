@@ -18,10 +18,12 @@ package org.jboss.jsr299.tck.tests.event.observer.checkedException;
 
 import javax.enterprise.event.ObserverException;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 /**
@@ -29,11 +31,20 @@ import org.testng.annotations.Test;
  * observer is wrapped and thrown.
  * 
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class CheckedExceptionWrappedTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(CheckedExceptionWrappedTest.class)
+            .build();
+    }
+    
    @Test(groups = { "events" }, expectedExceptions = { ObserverException.class })
    @SpecAssertion(section = "10.5", id = "cd")
    public void testNonTransactionalObserverThrowsCheckedExceptionIsWrappedAndRethrown()

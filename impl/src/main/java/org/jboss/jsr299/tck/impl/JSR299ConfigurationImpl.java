@@ -23,9 +23,14 @@ import org.jboss.jsr299.tck.spi.Beans;
 import org.jboss.jsr299.tck.spi.Contexts;
 import org.jboss.jsr299.tck.spi.EL;
 import org.jboss.jsr299.tck.spi.Managers;
-import org.jboss.testharness.impl.ConfigurationImpl;
 
-public class JSR299ConfigurationImpl extends ConfigurationImpl implements JSR299Configuration
+/**
+ * JSR299 configuration implementation. 
+ * 
+ * @author Pete Muir
+ * @author Martin Kouba
+ */
+public class JSR299ConfigurationImpl implements JSR299Configuration
 {
    
    public static final String INTEGRATION_TEST_PACKAGE_NAME = "org.jboss.jsr299.tck.integration";
@@ -35,6 +40,7 @@ public class JSR299ConfigurationImpl extends ConfigurationImpl implements JSR299
    private Contexts<? extends Context> contexts;
    private Managers managers;
    private EL el;
+   private String libraryDirectory;
    
    protected JSR299ConfigurationImpl()
    {
@@ -89,7 +95,15 @@ public class JSR299ConfigurationImpl extends ConfigurationImpl implements JSR299
    {
       this.el = el;
    }
-   
+
+    public String getLibraryDirectory() {
+        return libraryDirectory;
+    }
+    
+    public void setLibraryDirectory(String libraryDirectory) {
+        this.libraryDirectory = libraryDirectory;
+    }
+
    @Override
    public String toString()
    {
@@ -97,12 +111,11 @@ public class JSR299ConfigurationImpl extends ConfigurationImpl implements JSR299
       configuration.append("JSR 299 TCK Configuration\n");
       configuration.append("-----------------\n");
       configuration.append("\tBeans: ").append(getBeans()).append("\n");
-      configuration.append("\tContainers: ").append(getContainers()).append("\n");
       configuration.append("\tContexts: ").append(getContexts()).append("\n");
       configuration.append("\tEL: ").append(getEl()).append("\n");
       configuration.append("\tManagers: ").append(getManagers()).append("\n");
+      configuration.append("\tLibrary dir: ").append(getLibraryDirectory()).append("\n");
       configuration.append("\n");
-      configuration.append(super.toString());
       return configuration.toString();
    }
    

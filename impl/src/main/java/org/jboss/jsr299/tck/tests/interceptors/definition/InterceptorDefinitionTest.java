@@ -31,12 +31,13 @@ import javax.enterprise.inject.spi.InterceptionType;
 import javax.enterprise.inject.spi.Interceptor;
 import javax.enterprise.util.AnnotationLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 /**
@@ -45,12 +46,21 @@ import org.testng.annotations.Test;
  *
  * @author David Allen
  * @author Marius Bogoevici
+ * @author Martin Kouba
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
-@BeansXml("beans.xml")
 public class InterceptorDefinitionTest extends AbstractJSR299Test
 {
+    
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(InterceptorDefinitionTest.class)
+           .withBeansXml("beans.xml")
+           .build();
+   }
+    
    @Test
    @SpecAssertions({
          @SpecAssertion(section = "11.1.2", id = "a")

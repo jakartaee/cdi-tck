@@ -17,19 +17,14 @@
 
 package org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary;
 
-import java.io.IOException;
-
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary.libraryBeans.Bar;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ArtifactDescriptor;
-import org.jboss.testharness.impl.packaging.Classes;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.ResourceDescriptorImpl;
-import org.jboss.testharness.impl.packaging.TCKArtifact;
 import org.testng.annotations.Test;
 
 /**
@@ -37,23 +32,19 @@ import org.testng.annotations.Test;
  * 
  * @author David Allen
  */
-@Artifact(addCurrentPackage=false)
-// We put Foo in the ejb jar, but Bar goes in the library
-@Classes({LibraryMissingBeansXmlTest.class, Foo.class})
-@Test
 @SpecVersion(spec="cdi", version="20091101")
-@IntegrationTest
 public class LibraryMissingBeansXmlTest extends AbstractJSR299Test
 {
-   
-   @Override
-   protected TCKArtifact postCreate(TCKArtifact artifact) throws IOException
-   {
-      super.postCreate(artifact);
-      ArtifactDescriptor library = new ArtifactDescriptor(LibraryMissingBeansXmlTest.class);
-      library.getClasses().add(Bar.class);
-      artifact.getLibraries().add(new ResourceDescriptorImpl("cdi-tck-beans.jar", library.getJarAsStream()));
-      return artifact;
+    
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       // We put Foo in test archive, but Bar goes in the library
+       return new WebArchiveBuilder()
+           .withTestClass(LibraryMissingBeansXmlTest.class)
+           .withClasses(LibraryMissingBeansXmlTest.class, Foo.class)
+           .withBeanLibrary(true, Bar.class)
+           .build();
    }
 
    @Test(groups = {})
