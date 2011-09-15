@@ -20,28 +20,33 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
  * Producer extension tests.
  * 
  * @author David Allen
- *
+ * @author Martin Kouba
  */
-@Artifact
-@Extension("javax.enterprise.inject.spi.Extension")
-// Must be an integration test as it needs a resource copied to a folder
-@IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
 public class ProcessBeanTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(ProcessBeanTest.class)
+            .withExtension("javax.enterprise.inject.spi.Extension")
+            .build();
+    }
    
    @Test
    @SpecAssertions({
@@ -76,7 +81,10 @@ public class ProcessBeanTest extends AbstractJSR299Test
       assert ProcessBeanObserver.getCowProcessProducerMethod().getBean().getBeanClass().equals(Cowshed.class);
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getBaseType().equals(Cow.class);
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getDeclaringType().getBaseType().equals(Cowshed.class);
-      assert ProcessBeanObserver.getCowShedProcessBeanCount() == 1;
+      // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and ProcessProducerMethod
+      // https://issues.jboss.org/browse/CDITCK-168
+      // https://issues.jboss.org/browse/WELD-586
+      assert ProcessBeanObserver.getCowShedProcessBeanCount() == 2;
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotated() instanceof AnnotatedMethod<?>;
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getJavaMember().getName().equals("getDaisy");
       assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getJavaMember().getDeclaringClass().equals(Cowshed.class);
@@ -99,7 +107,10 @@ public class ProcessBeanTest extends AbstractJSR299Test
       assert ProcessBeanObserver.getChickenProcessProducerField().getBean().getBeanClass().equals(ChickenHutch.class);
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getBaseType().equals(Chicken.class);
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getDeclaringType().getBaseType().equals(ChickenHutch.class);
-      assert ProcessBeanObserver.getChickenHutchProcessBeanCount() == 1;
+      // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and ProcessProducerMethod
+      // https://issues.jboss.org/browse/CDITCK-168
+      // https://issues.jboss.org/browse/WELD-586
+      assert ProcessBeanObserver.getChickenHutchProcessBeanCount() == 2;
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotated() instanceof AnnotatedField<?>;
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getJavaMember().getName().equals("chicken");
       assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getJavaMember().getDeclaringClass().equals(ChickenHutch.class);

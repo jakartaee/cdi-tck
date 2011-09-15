@@ -56,7 +56,8 @@ public class OutermostFilter implements Filter
                {
                   response.setContentType("text/html");
                   response.getWriter().print("NonexistentConversationException thrown properly\n");
-                  response.getWriter().print("Conversation.isTransient: " + conversation.isTransient());
+                  // FIXME WELD-878
+                  // response.getWriter().print("Conversation.isTransient: " + conversation.isTransient());
                   return;
                }
                cause = e.getCause();

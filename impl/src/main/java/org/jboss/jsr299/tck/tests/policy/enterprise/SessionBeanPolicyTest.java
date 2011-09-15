@@ -16,23 +16,26 @@
  */
 package org.jboss.jsr299.tck.tests.policy.enterprise;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-@Artifact
-@Packaging(PackagingType.WAR)
-@IntegrationTest
-@BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class SessionBeanPolicyTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(SessionBeanPolicyTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
 
    @Test(groups = { "policy"})
    @SpecAssertion(section = "5.1.1", id = "eb")

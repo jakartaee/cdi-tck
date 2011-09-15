@@ -16,34 +16,44 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.el.integration;
 
+import java.net.URL;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 
-@Artifact
-@IntegrationTest(runLocally = true)
-@Resources( { 
-   @Resource(destination = "WEB-INF/faces-config.xml", source = "faces-config.xml"), 
-   @Resource(destination = "JSFTestPage.jsp", source = "JSFTestPage.jsp"),
-   @Resource(destination = "JSPTestPage.jsp", source = "JSPTestPage.jsp")})
 @SpecVersion(spec="cdi", version="20091101")
-@WebXml("web.xml")
 public class IntegrationWithUnifiedELTest extends AbstractJSR299Test
 {
+    
+    @ArquillianResource
+    private URL contextPath;
+    
+    @Deployment(testable=false)
+    public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(IntegrationWithUnifiedELTest.class)
+           .withWebXml("web.xml")
+            .withWebResource("JSFTestPage.jsp", "JSFTestPage.jsp")
+            .withWebResource("JSPTestPage.jsp", "JSPTestPage.jsp")
+            .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
+           .build();
+    }
+    
    @Test(groups = {"el" } )
    @SpecAssertion(section = "12.4", id = "a")
    public void testELResolverRegisteredWithJsf() throws Exception
    {
       WebClient webclient = new WebClient();
-      String content = webclient.getPage(getContextPath() + "JSFTestPage.jsf").getWebResponse().getContentAsString();
+      String content = webclient.getPage(contextPath + "JSFTestPage.jsf").getWebResponse().getContentAsString();
       assert content.contains("Dolly");
    }
 
@@ -52,7 +62,7 @@ public class IntegrationWithUnifiedELTest extends AbstractJSR299Test
    public void testELResolverRegisteredWithServletContainer() throws Exception
    {
       WebClient webclient = new WebClient();
-      String content = webclient.getPage(getContextPath() + "JSPTestPage.jsp").getWebResponse().getContentAsString();
+      String content = webclient.getPage(contextPath + "JSPTestPage.jsp").getWebResponse().getContentAsString();
       assert content.contains("Dolly");
    }
 }

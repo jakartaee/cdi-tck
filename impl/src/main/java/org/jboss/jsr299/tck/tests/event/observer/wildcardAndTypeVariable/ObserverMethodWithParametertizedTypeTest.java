@@ -21,23 +21,33 @@ package org.jboss.jsr299.tck.tests.event.observer.wildcardAndTypeVariable;
 
 import java.util.List;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 /**
  * Tests an observer method defined to observe an event type which
  * is generic and a type variable
  * 
- * 
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class ObserverMethodWithParametertizedTypeTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(ObserverMethodWithParametertizedTypeTest.class)
+            .build();
+    }
+    
    @Test(groups = { "events"})
    @SpecAssertion(section = "10.4.1", id = "cb")
    public void testObserverMethodCanObserveTypeVariable()

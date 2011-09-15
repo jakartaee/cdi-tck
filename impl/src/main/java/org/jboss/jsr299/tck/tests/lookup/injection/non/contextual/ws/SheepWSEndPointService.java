@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
-import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
 import javax.xml.ws.WebServiceFeature;
 
@@ -34,7 +33,8 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.1
  * 
  */
-@WebServiceClient(name = "SheepWSEndPointService", targetNamespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", wsdlLocation = "http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl")
+@WebServiceClient(name = "SheepWSEndPointService", targetNamespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/")
+// @WebServiceClient(name = "SheepWSEndPointService", targetNamespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", wsdlLocation = "http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl")
 public class SheepWSEndPointService
     extends Service
 {
@@ -59,17 +59,17 @@ public class SheepWSEndPointService
         super(wsdlLocation, serviceName);
     }
 
-    public SheepWSEndPointService() {
-        super(SHEEPWSENDPOINTSERVICE_WSDL_LOCATION, new QName("http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWSEndPointService"));
-    }
+//    public SheepWSEndPointService() {
+//        super(SHEEPWSENDPOINTSERVICE_WSDL_LOCATION, new QName("http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWSEndPointService"));
+//    }
 
-    @WebEndpoint(name = "SheepWSPort")
+    // @WebEndpoint(name = "SheepWSPort")
     public SheepWS getSheepWSPort() {
-        return super.getPort(new QName("http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWSPort"), SheepWS.class);
+        return super.getPort(new QName("http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWSEndPointPort"), SheepWS.class);
     }
 
-    @WebEndpoint(name = "SheepWSPort")
+    // @WebEndpoint(name = "SheepWSPort")
     public SheepWS getSheepWSPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWSPort"), SheepWS.class, features);
+        return super.getPort(new QName("http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWSEndPointPort"), SheepWS.class, features);
     }
 }

@@ -24,6 +24,9 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
+/**
+ * TODO check if possible to remove - not used in TCK 
+ */
 public abstract class ForwardingBean<T> implements Bean<T>
 {
    

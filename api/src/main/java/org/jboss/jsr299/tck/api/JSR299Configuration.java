@@ -22,13 +22,12 @@ import org.jboss.jsr299.tck.spi.Beans;
 import org.jboss.jsr299.tck.spi.Contexts;
 import org.jboss.jsr299.tck.spi.EL;
 import org.jboss.jsr299.tck.spi.Managers;
-import org.jboss.testharness.api.Configuration;
 
 /**
  * The configuration of the TCK.
  * 
  * The TCK may be configured using system properties or placed in a properties
- * file called META-INF/web-beans-tck.properties.
+ * file called META-INF/cdi-tck.properties.
  * 
  * Porting package property names are the FQCN of the SPI class. Other property
  * names (one for each non-porting package SPI configuration option) are
@@ -37,10 +36,13 @@ import org.jboss.testharness.api.Configuration;
  * The TCK may also be configured programatically through this interface
  * 
  * @author Pete Muir
- *
+ * @author Martin Kouba
  */
-public interface JSR299Configuration extends Configuration
+public interface JSR299Configuration
 {
+    
+    public static final String LIBRARY_DIRECTORY_PROPERTY_NAME = "org.jboss.jsr299.tck.libraryDirectory";
+    
    /**
     * The implementation of {@link Beans} in use.
     */
@@ -68,5 +70,16 @@ public interface JSR299Configuration extends Configuration
     * The implementation of {@link EL} in use.
     */
    public EL getEl();
+   
+   /**
+    * The TCK allows additional libraries to be put in the deployed test
+    * artifacts (for example the porting package for the implementation). Any
+    * jars in this directory will be added to the deployed artifact.
+    * 
+    * By default no directory is used.
+    */
+   public String getLibraryDirectory();
+   
+   public void setLibraryDirectory(String libraryDir);
    
 }

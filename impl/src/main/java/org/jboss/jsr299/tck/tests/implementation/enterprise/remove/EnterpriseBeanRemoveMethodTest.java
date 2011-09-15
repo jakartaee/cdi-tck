@@ -16,29 +16,32 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.remove;
 
-import static org.jboss.testharness.impl.packaging.PackagingType.EAR;
-
 import javax.enterprise.inject.spi.Bean;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
 import org.testng.annotations.Test;
 
 /**
  *
  * @author Nicklas Karlsson
  */
-@Artifact
-@Packaging(EAR)
-@IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
 public class EnterpriseBeanRemoveMethodTest extends AbstractJSR299Test
 {
    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EnterpriseBeanRemoveMethodTest.class)
+            .build();
+    }
+    
    @Test(groups = { "enterpriseBeans", "removeMethod", "lifecycle" })
    @SpecAssertion(section = "3.2.1", id = "a")
    public void testApplicationMayCallAnyRemoveMethodOnDependentScopedSessionEnterpriseBeans() throws Exception

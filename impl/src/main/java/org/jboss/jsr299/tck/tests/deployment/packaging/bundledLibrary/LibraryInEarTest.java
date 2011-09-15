@@ -17,48 +17,35 @@
 
 package org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary;
 
-import java.io.IOException;
-import java.util.Arrays;
-
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary.libraryBeans.Bar;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ArtifactDescriptor;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.ResourceDescriptorImpl;
-import org.jboss.testharness.impl.packaging.TCKArtifact;
-import org.jboss.testharness.impl.packaging.jsr299.JSR299ArtifactDescriptor;
 import org.testng.annotations.Test;
 
 /**
  * Tests related to the final deployment phase of the lifecycle.
  * 
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
-@Test
 @SpecVersion(spec="cdi", version="20091101")
-@IntegrationTest
-@Packaging(PackagingType.EAR)
 public class LibraryInEarTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(LibraryInEarTest.class)
+            .withBeanLibrary(Bar.class)
+            .build();
+    }
    
-   @Override
-   protected TCKArtifact postCreate(TCKArtifact artifact) throws IOException
-   {
-      super.postCreate(artifact);
-      ArtifactDescriptor library = new ArtifactDescriptor(LibraryInEarTest.class);
-      library.getClasses().addAll(Arrays.asList(Bar.class));
-      library.getResources().add(new ResourceDescriptorImpl(JSR299ArtifactDescriptor.BEANS_XML_DESTINATION, JSR299ArtifactDescriptor.STANDARD_BEANS_XML_FILE_NAME));
-      artifact.getLibraries().add(new ResourceDescriptorImpl("cdi-tck-beans.jar", library.getJarAsStream()));
-      return artifact;
-   }
-
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "12.1", id="bbb")

@@ -25,24 +25,30 @@ import javax.enterprise.inject.New;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
-@Artifact
-@Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")
 public class NewEnterpriseBeanTest extends AbstractJSR299Test
 {
    
    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {};
+  
+   @Deployment
+   public static EnterpriseArchive createTestArchive() 
+	{
+       return new EnterpriseArchiveBuilder()
+           .withTestClassPackage(NewEnterpriseBeanTest.class)
+           .build();
+   }
    
    @Test(groups = { "new" })
    @SpecAssertion(section = "3.12", id = "p")

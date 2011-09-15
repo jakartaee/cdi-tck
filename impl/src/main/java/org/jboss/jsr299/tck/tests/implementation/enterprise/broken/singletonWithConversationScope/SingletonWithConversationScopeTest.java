@@ -17,29 +17,33 @@
 package org.jboss.jsr299.tck.tests.implementation.enterprise.broken.singletonWithConversationScope;
 
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.ear.EjbJarXml;
 import org.testng.annotations.Test;
 
-@ExpectedDeploymentException(DeploymentFailure.class)
-@Artifact
-@Packaging(PackagingType.EAR)
-@EjbJarXml("ejb-jar.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class SingletonWithConversationScopeTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(SingletonWithConversationScopeTest.class)
+            .withEjbJarXml("ejb-jar.xml")
+            .build();
+    }
+    
    @Test(groups = { "enterpriseBeans" })
    @SpecAssertion(section = "3.2", id = "da")
    public void testSingletonWithConversationScopeFails()
    {
-      assert false;
    }
    
 }

@@ -26,20 +26,19 @@ import java.util.Set;
 import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.util.TypeLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 /**
  * @author pmuir
- *
+ * @author Martin Kouba
  */
-@Artifact
-@BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> extends AbstractJSR299Test
 {
@@ -54,6 +53,15 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
    private final TypeLiteral<Corge<C, C>> CORGE_TYPE_VARIABLE_EXTENDS_COW_LITERAL = new TypeLiteral<Corge<C, C>>(){};
    private final TypeLiteral<Garply<F>> GARPLY_EXTENDS_FRESIAN_COW_LITERAL = new TypeLiteral<Garply<F>>() {};
    private final TypeLiteral<Garply<Cow>> GARPLY_COW_LITERAL = new TypeLiteral<Garply<Cow>>() {};
+   
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(DecoratorResolutionTest.class)
+           .withBeansXml("beans.xml")
+           .build();
+   }
    
    private static boolean decoratorCollectionMatches(Collection<Decorator<?>> decorators, Class<?>... types)
    {

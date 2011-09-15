@@ -16,23 +16,27 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.enterprise;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
-@Artifact
-@IntegrationTest
-@Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")
 public class SessionBeanInjectionTest extends AbstractJSR299Test
 {
 
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(SessionBeanInjectionTest.class)
+            .build();
+    }
+    
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "5.5", id = "a"),

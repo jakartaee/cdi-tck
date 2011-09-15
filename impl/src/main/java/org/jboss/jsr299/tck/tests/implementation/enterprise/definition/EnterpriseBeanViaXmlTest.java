@@ -19,15 +19,13 @@ package org.jboss.jsr299.tck.tests.implementation.enterprise.definition;
 
 import javax.enterprise.inject.spi.Bean;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.ear.EjbJarXml;
 import org.testng.annotations.Test;
 
 /**
@@ -35,13 +33,18 @@ import org.testng.annotations.Test;
  * 
  * @author David Allen
  */
-@Artifact
-@Packaging(PackagingType.EAR)
-@IntegrationTest
-@EjbJarXml("ejb-jar.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class EnterpriseBeanViaXmlTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EnterpriseBeanViaXmlTest.class)
+            .withEjbJarXml("ejb-jar.xml")
+            .build();
+    }
 
    @Test(groups = { "enterpriseBeans", "ejbjarxml" })
    @SpecAssertions( { 

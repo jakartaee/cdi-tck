@@ -23,22 +23,28 @@ import static javax.enterprise.inject.spi.InterceptionType.POST_CONSTRUCT;
 import static javax.enterprise.inject.spi.InterceptionType.PRE_DESTROY;
 import static javax.enterprise.inject.spi.InterceptionType.PRE_PASSIVATE;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-@Artifact
 @SpecVersion(spec = "cdi", version = "20091101")
-@Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
-@IntegrationTest
-@BeansXml("beans.xml")
 public class CustomInterceptorTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(CustomInterceptorTest.class)
+           .withBeansXml("beans.xml")
+           .withExtension("javax.enterprise.inject.spi.Extension")
+           .build();
+   }
+    
    @Test
    @SpecAssertion(section = "9.5", id = "fa")
    // WELD-238

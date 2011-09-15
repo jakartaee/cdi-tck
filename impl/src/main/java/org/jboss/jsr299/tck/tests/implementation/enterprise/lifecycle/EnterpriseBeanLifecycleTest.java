@@ -27,14 +27,13 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
 /**
@@ -48,13 +47,19 @@ import org.testng.annotations.Test;
  * 
  * @author Nicklas Karlsson
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
-@Packaging(PackagingType.EAR)
-@IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
 public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EnterpriseBeanLifecycleTest.class)
+            .build();
+    }
 
    @Test(groups = {"enterpriseBeans", "clientProxy", "lifecycle", "integration" })
    @SpecAssertions( {
@@ -96,6 +101,11 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test
    })
    public void testSerializeSFSB() throws Exception
    {
+       // SFSBs in AS 7.0.1 do not support passivation yet
+       // may also be related to
+       // https://issues.jboss.org/browse/AS7-799 
+       // https://issues.jboss.org/browse/AS7-1490
+       
       KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {});
 
       byte[] bytes = serialize(stadtInstance);

@@ -23,24 +23,34 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 /**
  * This test class should be used for common assertions about managed beans (not session beans)
  * 
  * @author Pete Muir
+ * @author Martin Kouba
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class BeanDefinitionTest extends AbstractJSR299Test
 {
    
    private static Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {};
+   
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(BeanDefinitionTest.class)
+           .build();
+   }
    
    // TODO This should actually somehow test the reverse as well - that the container
    // throws a definition exception if any of these occur

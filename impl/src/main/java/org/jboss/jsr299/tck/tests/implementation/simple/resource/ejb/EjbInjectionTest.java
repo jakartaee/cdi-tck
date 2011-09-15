@@ -20,15 +20,13 @@ package org.jboss.jsr299.tck.tests.implementation.simple.resource.ejb;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 /**
@@ -36,14 +34,19 @@ import org.testng.annotations.Test;
  * 
  * @author David Allen
  */
-@Artifact
-@Packaging(PackagingType.EAR)
-@IntegrationTest
-@BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class EjbInjectionTest extends AbstractJSR299Test
 {
    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EjbInjectionTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
+    
    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
    @SpecAssertions({
       @SpecAssertion(section = "3.5.1", id = "ee"),

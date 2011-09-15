@@ -27,16 +27,17 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class ResolutionByTypeTest extends AbstractJSR299Test
 {
@@ -47,6 +48,14 @@ public class ResolutionByTypeTest extends AbstractJSR299Test
    private static final TypeLiteral<Cat<African>> AFRICAN_CAT = new TypeLiteral<Cat<African>>() {};
    private static final Annotation TAME = new AnnotationLiteral<Tame>() {};
    private static final Annotation WILD = new AnnotationLiteral<Wild>() {};
+   
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(ResolutionByTypeTest.class)
+           .build();
+   }
    
    @Test(groups = "resolution")
    @SpecAssertion(section = "5.2", id = "lb")

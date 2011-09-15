@@ -16,30 +16,31 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-
-@Artifact
-@ExpectedDeploymentException(DeploymentFailure.class)
-@IntegrationTest
-@BeansXml("beans.xml")
-@Packaging(PackagingType.EAR)
 public class FinalMethodMethodLevelInterceptorTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(FinalMethodClassLevelInterceptorTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section = "9.3", id = "db")
    public void testFinalMethodWithMethodLevelInterceptor() throws Exception
    {
-      assert false;
 /*      MissileInterceptor.intercepted = false;
       
       FinalMethodMethodLevelMissileLocal missile = getInstanceByType(FinalMethodMethodLevelMissileLocal.class);      

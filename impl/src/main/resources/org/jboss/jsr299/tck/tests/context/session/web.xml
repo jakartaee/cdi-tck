@@ -13,10 +13,7 @@
       <filter-name>filterTest</filter-name>
       <url-pattern>/SimplePage.html</url-pattern>
    </filter-mapping>
-   <listener>
-      <listener-class>org.jboss.testharness.impl.runner.servlet.HarnessServletListener</listener-class>
-   </listener>
-   <servlet>
+  <servlet>
       <display-name>serviceMethod</display-name>
       <servlet-name>service</servlet-name>
       <servlet-class>org.jboss.jsr299.tck.tests.context.session.ServiceMethodServlet</servlet-class>

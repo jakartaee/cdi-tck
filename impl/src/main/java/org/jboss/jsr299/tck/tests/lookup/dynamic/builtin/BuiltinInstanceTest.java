@@ -21,20 +21,29 @@ import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.TypeLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 /**
  * Tests for built-in Instance.
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class BuiltinInstanceTest extends AbstractJSR299Test {
 
+    @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(BuiltinInstanceTest.class)
+           .build();
+   }
+    
 	@Test
 	@SpecAssertion(section = "5.6.2", id = "d")
 	public void testScopeOfBuiltinInstance() 

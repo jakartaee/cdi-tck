@@ -17,33 +17,36 @@
 
 package org.jboss.jsr299.tck.tests.extensions.annotated.broken.processInjectionTargetThrowsException;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
  * Tests that an exception thrown by a ProcessAnnotatedType event observer
  * is treated as a deployment error
- * 
- *
  */
-@Artifact
-@ExpectedDeploymentException(DeploymentFailure.class)
-@Extension("javax.enterprise.inject.spi.Extension")
-@IntegrationTest
 @SpecVersion(spec="cdi", version="20091101")
 public class ProcessInjectionTargetEventThrowsExceptionTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(ProcessInjectionTargetEventThrowsExceptionTest.class)
+            .withExtension("javax.enterprise.inject.spi.Extension")
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section = "11.5.6", id = "f")
    public void testProcessInjectionTargetEventThrowsExceptionNotOk()
    {
-      assert false;
    }
 }

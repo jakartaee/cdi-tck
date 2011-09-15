@@ -16,15 +16,24 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
-@Artifact
 public class CreationalContextForNonContextualTest extends AbstractJSR299Test
 {
    
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(CreationalContextForNonContextualTest.class)
+           .build();
+   }
+    
    @Test
    @SpecAssertion(section = "11.3.3", id = "b")
    public void testCreationalContext()

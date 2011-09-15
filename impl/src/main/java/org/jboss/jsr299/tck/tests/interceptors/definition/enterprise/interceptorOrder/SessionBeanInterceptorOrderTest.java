@@ -16,24 +16,27 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.interceptorOrder;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-
-@IntegrationTest
-@Artifact
-@Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")
-@BeansXml("beans.xml")
 public class SessionBeanInterceptorOrderTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(SessionBeanInterceptorOrderTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section = "9.4", id = "fb")
    public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding()

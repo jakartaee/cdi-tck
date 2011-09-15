@@ -24,19 +24,28 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.enterprise.util.AnnotationLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class ResolveEventObserversTest extends AbstractJSR299Test
 {
    private static final String BEAN_MANAGER_RESOLVE_OBSERVERS_METHOD_NAME = "resolveObserverMethods";
-
+   
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(ResolveEventObserversTest.class)
+           .build();
+   }
+   
    @Test(groups = { "events" })
    @SpecAssertion(section = "10.4", id = "e")
    public void testMultipleObserverMethodsForSameEventPermissible()
