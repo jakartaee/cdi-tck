@@ -16,18 +16,27 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.two;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.broken.twoBeansSpecializeTheSameBean.TwoBeansSpecializeTheSameBeanTest;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 
-@Artifact
-@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091018")
 public class TwoSpecializingBeansForOneSpecializedTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(TwoSpecializingBeansForOneSpecializedTest.class)
+            .build();
+    }
+    
    /**
     * This is for managed beans
     * 
@@ -39,7 +48,6 @@ public class TwoSpecializingBeansForOneSpecializedTest extends AbstractJSR299Tes
    //@SpecAssertion(section="4.3.3", id = "c") section removed from spec
    public void testTwoBeansSpecializeTheSameBean()
    {
-      assert false;
    }
 
 }

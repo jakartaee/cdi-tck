@@ -21,31 +21,36 @@ import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
-import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
  * This test class contains tests for adding meta data using extensions.
  * 
  * @author Jozef Hartinger
- * 
+ * @author Martin Kouba
  */
-
-@Artifact
-@BeansXml("beans.xml")
-@Extension("javax.enterprise.inject.spi.Extension")
-@IntegrationTest
 @SpecVersion(spec = "cdi", version = "20091101")
 public class AlternativeMetadataTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(AlternativeMetadataTest.class)
+            .withBeansXml("beans.xml")
+            .withExtension("javax.enterprise.inject.spi.Extension")
+            .build();
+    }
+    
    @Test
    @SpecAssertion(section = "11.4", id = "ha")
    public void testGetBaseTypeUsedToDetermineTypeOfInjectionPoint()

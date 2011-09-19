@@ -16,26 +16,35 @@
  */
 package org.jboss.jsr299.tck.tests.definition.stereotype.broken.scopeConflict;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.DeploymentFailure;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.ExpectedDeploymentException;
 import org.testng.annotations.Test;
 
-@Artifact
-@ExpectedDeploymentException(DeploymentFailure.class)
 @SpecVersion(spec="cdi", version="20091101")
 public class IncompatibleStereotypesTest extends AbstractJSR299Test
 {
+    
+    @ShouldThrowException(Exception.class)
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+         return new WebArchiveBuilder()
+ 
+             .withTestClassPackage(IncompatibleStereotypesTest.class)
+             .build();
+    }
+    
    @Test
    @SpecAssertions( { 
       @SpecAssertion(section = "2.4.4", id = "da") 
    })
    public void testMultipleIncompatibleScopeStereotypes()
    {
-      assert false;
    }
 }

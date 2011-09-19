@@ -23,27 +23,32 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Named;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.ear.EjbJarXml;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-@Artifact
-@Packaging(PackagingType.EAR)
-@BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
-@EjbJarXml("ejb-jar.xml")
 public class EnterpriseBeanSpecializationTest extends AbstractJSR299Test
 {
    
    private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {};
 
+   @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EnterpriseBeanSpecializationTest.class)
+            .withBeansXml("beans.xml")
+            // Originally with ejb-jar.xml however this resource does not exist in /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/inheritance/specialization/enterprise
+            // .withEjbJarXml("ejb-jar.xml")
+            .build();
+    }
+   
    @Test
    @SpecAssertions({
      @SpecAssertion(section = "4.3.1", id = "j"),

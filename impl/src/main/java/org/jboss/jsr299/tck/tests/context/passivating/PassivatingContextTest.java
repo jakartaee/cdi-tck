@@ -25,28 +25,34 @@ import javax.enterprise.context.spi.Context;
 import javax.enterprise.inject.IllegalProductException;
 import javax.enterprise.inject.spi.Bean;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 /**
  * 
  * @author Nicklas Karlsson
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
-@BeansXml("beans.xml")
-@Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")
 public class PassivatingContextTest extends AbstractJSR299Test
 {
-   
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(PassivatingContextTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
+    
    @Test(groups = { "contexts", "passivation", "rewrite" })
    @SpecAssertion(section = "6.6.1", id = "ba")
    public void testManagedBeanWithSerializableImplementationClassOK()

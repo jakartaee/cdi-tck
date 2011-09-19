@@ -19,21 +19,32 @@ package org.jboss.jsr299.tck.tests.event.select;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 /**
  * These tests verify the behavior of the Event#select() method.
  * 
  * @author Dan Allen
+ * @author Martin Kouba
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class SelectEventTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(SelectEventTest.class)
+            .build();
+    }
+    
    @Test(groups = "events")
    @SpecAssertion(section = "10.3.1", id = "eaa")
    public void testEventSelectReturnsEventOfSameType()

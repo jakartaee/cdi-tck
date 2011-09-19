@@ -16,26 +16,32 @@
  */
 package org.jboss.jsr299.tck.tests.context.request.ejb;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
 import org.testng.annotations.Test;
 
 /**
  * EJB and related tests with the built-in request context.
  * 
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
-@IntegrationTest
-@Packaging(PackagingType.EAR)
 @SpecVersion(spec="cdi", version="20091101")
 public class EJBRequestContextTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EJBRequestContextTest.class)
+            .build();
+    }
+    
    /**
     * The request scope is active during any remote method invocation of any EJB
     * bean, during any call to an EJB timeout method and during message delivery

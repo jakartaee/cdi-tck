@@ -17,11 +17,11 @@
 package org.jboss.jsr299.tck;
 
 /**
+ * Not in use since arquillian migration.
+ * 
  * A category exception which can be declared in the @ExpectedDeploymentException
  * annotation of an @Artifact to detect a definition error as described in
  * Section 12.4, "Problems detected automatically by the container".
- * 
- * @see org.jboss.jsr299.tck.spi.Managers#isDefinitionError(Throwable)
  */
 public class DeploymentFailure extends RuntimeException 
 {

@@ -17,32 +17,35 @@
 
 package org.jboss.jsr299.tck.tests.deployment.lifecycle;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 /**
  * Tests related to the final deployment phase of the lifecycle.
  * 
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
-@Test
 @SpecVersion(spec="cdi", version="20091101")
-@BeansXml("beans.xml")
-@Resources({
-   @Resource(source="javax.enterprise.inject.spi.Extension.DeploymentTest", destination="WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
-})
-@IntegrationTest
 public class DeploymentTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(DeploymentTest.class)
+            .withBeansXml("beans.xml")
+            .withExtension("javax.enterprise.inject.spi.Extension.DeploymentTest")
+            .build();
+    }
+    
    @Test(groups="rewrite")
    @SpecAssertions({
       @SpecAssertion(section = "11.5.2", id = "a"),

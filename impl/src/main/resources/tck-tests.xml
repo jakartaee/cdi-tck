@@ -2,7 +2,8 @@
 
 <!-- JSR-299 TCK TestNG configuration for Weld -->
 
-<suite name="Weld / JBoss AS run of CDI TCK" verbose="0"  >
+<suite name="Weld / JBoss AS run of CDI TCK" verbose="0" configfailurepolicy="continue">
+   
    <test name="CDI TCK">
       <method-selectors>
          <method-selector>
@@ -16,13 +17,9 @@
       <classes>
       
          <!-- CDITCK-108 -->
-         <class name="org.jboss.jsr299.tck.tests.context.application.ejb.EJBApplicationContextTest">
-            <methods>
-               <exclude name="testApplicationScopeActiveDuringCallToEjbTimeoutMethod" />
-            </methods>
-         </class>
          <class name="org.jboss.jsr299.tck.tests.context.application.ejb.ApplicationContextSharedTest">
             <methods>
+               <exclude name="testApplicationScopeActiveDuringCallToEjbTimeoutMethod" />
                <exclude name="testApplicationContextShared" />
             </methods>
          </class>

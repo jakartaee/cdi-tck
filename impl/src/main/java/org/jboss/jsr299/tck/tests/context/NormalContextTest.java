@@ -20,14 +20,14 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.impl.MockCreationalContext;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.jsr299.Extension;
 import org.testng.annotations.Test;
 
 /**
@@ -35,13 +35,20 @@ import org.testng.annotations.Test;
  * @author Nicklas Karlsson
  * @author Pete Muir
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
-@IntegrationTest
-@Extension("javax.enterprise.inject.spi.Extension")
 public class NormalContextTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(NormalContextTest.class)
+            .withExtension("javax.enterprise.inject.spi.Extension")
+            .build();
+    }
 
    @Test(groups = { "contexts" })
    @SpecAssertions( {

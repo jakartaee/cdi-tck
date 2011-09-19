@@ -38,7 +38,12 @@ public class ProcessObserverMethodObserver implements Extension
       observerMethod = null;
    }
    
-   public void observeObserverMethodForEventA(@Observes ProcessObserverMethod<EventAObserver, EventA> event)
+   /**
+    * https://issues.jboss.org/browse/CDI-88
+    * 
+    * @param event
+    */
+   public void observeObserverMethodForEventA(@Observes ProcessObserverMethod<EventA, EventAObserver> event)
    {
       eventTypes.add(event.getObserverMethod().getObservedType());
       annotatedMethod = event.getAnnotatedMethod();

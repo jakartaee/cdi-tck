@@ -16,28 +16,31 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Packaging;
-import org.jboss.testharness.impl.packaging.PackagingType;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
 /**
  * @author pmuir
- *
+ * @author Martin Kouba
  */
-@Artifact
-@BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
-@Packaging(PackagingType.EAR)
-@IntegrationTest
 public class EJBDecoratorInvocationTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static EnterpriseArchive createTestArchive() 
+	{
+        return new EnterpriseArchiveBuilder()
+            .withTestClassPackage(EJBDecoratorInvocationTest.class)
+            .withBeansXml("beans.xml")
+            .build();
+    }
    
    @Test
    @SpecAssertions({

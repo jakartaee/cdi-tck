@@ -25,25 +25,34 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.jsr299.BeansXml;
 import org.testng.annotations.Test;
 
-@Artifact
-@BeansXml("beans.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class ProducerFieldDefinitionTest extends AbstractJSR299Test
 {   
+    
    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {};
    private static final Annotation PET_LITERAL = new AnnotationLiteral<Pet>() {};
    private static final Annotation FOO_LITERAL = new AnnotationLiteral<Foo>() {};
    private static final Annotation STATIC_LITERAL = new AnnotationLiteral<Static>() {};
 
+   @Deployment
+   public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(ProducerFieldDefinitionTest.class)
+           .withBeansXml("beans.xml")
+           .build();
+   }
+   
    @Test(groups = "producerField")
    @SpecAssertion(section = "3.4", id = "fa")
    public void testParameterizedReturnType() throws Exception

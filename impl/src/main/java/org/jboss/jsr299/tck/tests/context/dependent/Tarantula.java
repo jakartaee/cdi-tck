@@ -18,8 +18,7 @@ package org.jboss.jsr299.tck.tests.context.dependent;
 
 import javax.annotation.PreDestroy;
 
-import org.jboss.jsr299.tck.api.JSR299Configuration;
-import org.jboss.testharness.impl.ConfigurationFactory;
+import org.jboss.jsr299.tck.impl.ConfigurationFactory;
 
 public class Tarantula extends Spider implements DeadlySpider
 {
@@ -30,7 +29,7 @@ public class Tarantula extends Spider implements DeadlySpider
    
    public Tarantula()
    {
-      dependentContextActive = ConfigurationFactory.get(JSR299Configuration.class).getContexts().getDependentContext().isActive();
+      dependentContextActive = ConfigurationFactory.get().getContexts().getDependentContext().isActive();
    }
    
    @PreDestroy

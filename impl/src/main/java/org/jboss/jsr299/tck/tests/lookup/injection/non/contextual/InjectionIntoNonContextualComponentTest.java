@@ -16,31 +16,42 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual;
 
+import java.net.URL;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
-@Artifact
-@IntegrationTest(runLocally = true)
-@Resources( { 
-   @Resource(destination = "WEB-INF/faces-config.xml", source = "faces-config.xml"),
-   @Resource(destination = "WEB-INF/TestLibrary.tld", source = "TestLibrary.tld"), 
-   @Resource(destination = "TagPage.jsp", source = "TagPage.jsp"),
-   @Resource(destination = "ManagedBeanTestPage.jsp", source = "ManagedBeanTestPage.jsp")})
 @SpecVersion(spec="cdi", version="20091101")
-@WebXml("web2.xml")
 public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
 {
+    
+    @ArquillianResource
+    private URL contextPath;
+    
+    @Deployment(testable=false)
+    public static WebArchive createTestArchive() 
+	{
+       return new WebArchiveBuilder()
+           .withTestClassPackage(InjectionIntoNonContextualComponentTest.class)
+           .withWebXml("web2.xml")
+           .withExtension("javax.enterprise.inject.spi.Extension")
+           .withWebResource("ManagedBeanTestPage.jsp", "ManagedBeanTestPage.jsp")
+           .withWebResource("TagPage.jsp", "TagPage.jsp")
+           .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
+           .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld")
+           .build();
+    }    
+    
    @Test
    @SpecAssertions( { 
       @SpecAssertion(section = "5.5", id = "ef"), 
@@ -52,7 +63,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "Test/Servlet?test=injection");
+      webClient.getPage(contextPath + "Test/Servlet?test=injection");
    }
    
    @Test
@@ -65,7 +76,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "Test/Servlet?test=initializer");
+      webClient.getPage(contextPath + "Test/Servlet?test=initializer");
    }
 
    @Test
@@ -79,7 +90,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "TestFilter?test=injection");
+      webClient.getPage(contextPath + "TestFilter?test=injection");
    }
    
    @Test
@@ -92,7 +103,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "TestFilter?test=initializer");
+      webClient.getPage(contextPath + "TestFilter?test=initializer");
    }
 
    @Test
@@ -105,7 +116,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "Test/ServletListener?test=injection");
+      webClient.getPage(contextPath + "Test/ServletListener?test=injection");
    }
    
    @Test
@@ -117,7 +128,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "Test/ServletListener?test=initializer");
+      webClient.getPage(contextPath + "Test/ServletListener?test=initializer");
    }
 
    @Test
@@ -131,7 +142,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(false);
-      WebResponse response = webClient.getPage(getContextPath() + "TagPage.jsp").getWebResponse();
+      WebResponse response = webClient.getPage(contextPath + "TagPage.jsp").getWebResponse();
       assert response.getStatusCode() == 200;
       assert response.getContentAsString().contains(TestTagHandler.INJECTION_SUCCESS);
       assert response.getContentAsString().contains(TestTagHandler.INITIALIZER_SUCCESS);
@@ -147,7 +158,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "Test/TagLibraryListener?test=injection");
+      webClient.getPage(contextPath + "Test/TagLibraryListener?test=injection");
    }
    
    @Test
@@ -159,7 +170,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webClient = new WebClient();
       webClient.setThrowExceptionOnFailingStatusCode(true);
-      webClient.getPage(getContextPath() + "Test/TagLibraryListener?test=initializer");
+      webClient.getPage(contextPath + "Test/TagLibraryListener?test=initializer");
    }
    
    @Test
@@ -173,7 +184,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractJSR299Test
    {
       WebClient webclient = new WebClient();
       webclient.setThrowExceptionOnFailingStatusCode(true);
-      String content = webclient.getPage(getContextPath() + "ManagedBeanTestPage.jsf").getWebResponse().getContentAsString();
+      String content = webclient.getPage(contextPath + "ManagedBeanTestPage.jsf").getWebResponse().getContentAsString();
       assert content.contains("Injection works");
       assert content.contains("Initializer works");
    }

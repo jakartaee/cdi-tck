@@ -16,10 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer.beanNotManaged;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
 import org.testng.annotations.Test;
 
 /**
@@ -27,11 +29,20 @@ import org.testng.annotations.Test;
  * or a session bean.
  * 
  * @author David Allen
+ * @author Martin Kouba
  */
-@Artifact
 @SpecVersion(spec="cdi", version="20091101")
 public class ObserverMethodOnIncorrectBeanTest extends AbstractJSR299Test
 {
+    
+    @Deployment
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClassPackage(ObserverMethodOnIncorrectBeanTest.class)
+            .build();
+    }
+    
    @Test(groups = { "events" })
    @SpecAssertion(section = "10.4", id = "aa")
    public void testObserverMethodNotOnManagedOrSessionBeanFails()

@@ -16,33 +16,36 @@
  */
 package org.jboss.jsr299.tck.tests.context.conversation;
 
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.jboss.testharness.impl.packaging.Artifact;
-import org.jboss.testharness.impl.packaging.Classes;
-import org.jboss.testharness.impl.packaging.IntegrationTest;
-import org.jboss.testharness.impl.packaging.Resource;
-import org.jboss.testharness.impl.packaging.Resources;
-import org.jboss.testharness.impl.packaging.war.WebXml;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * @author Nicklas Karlsson
+ * @author Martin Kouba
  */
-@Artifact(addCurrentPackage=false)
-@Classes({Storm.class, ConversationTestPhaseListener.class, OutermostFilter.class, ConversationStatusServlet.class, Cloud.class, CloudController.class})
-@IntegrationTest(runLocally=true)
-@Resources({
-  @Resource(destination="WEB-INF/faces-config.xml", source="faces-config.xml"),
-  @Resource(destination="clouds.jspx", source="clouds.jsf"),
-  @Resource(destination="cloud.jspx", source="cloud.jsf")
-})
-@WebXml("web.xml")
 @SpecVersion(spec="cdi", version="20091101")
 public class InvalidatingSessionDestroysConversationTest extends AbstractConversationTest
 {
+    
+    @Deployment(testable=false)
+    public static WebArchive createTestArchive() 
+	{
+        return new WebArchiveBuilder()
+            .withTestClass(InvalidatingSessionDestroysConversationTest.class)
+            .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
+                        CloudController.class, OutermostFilter.class)
+            .withWebResource("cloud.jsf", "cloud.jspx")
+            .withWebResource("clouds.jsf", "clouds.jspx")
+            .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
+            .withWebXml("web.xml")
+            .build();
+    }
    
    @Test(groups = { "contexts" })
    @SpecAssertion(section = "6.7.4", id = "qa")

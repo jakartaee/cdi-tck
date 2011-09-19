@@ -16,8 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dynamic;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.New;
@@ -27,13 +27,26 @@ import org.jboss.jsr299.tck.literals.NewLiteral;
 
 public class ObtainsNewInstanceBean
 {
-   @Inject @New(ArrayList.class) Instance<List<String>> strings;
+    @Inject @New(HashMap.class) Map<String, String> map;
+    @Inject @New String string;
+   //@Inject @New(ArrayList.class) Instance<List<String>> strings;
    @Inject Instance<IllegalArgumentException> iae;
 
-   public Instance<List<String>> getStrings()
-   {
-      return strings;
-   }
+    public String getString()
+    {
+        return string;
+    }
+
+    public Map getMap() 
+    {
+        return map;
+        //return map.select(new TypeLiteral<HashMap<String, String>>(){}).get();
+    }
+    
+//   public Instance<List<String>> getStrings()
+//   {
+//      return strings;
+//   }
 
    public Instance<IllegalArgumentException> getIae()
    {
