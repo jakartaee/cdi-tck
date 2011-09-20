@@ -42,27 +42,29 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 {
     private boolean isAsClientMode = false;
 
-    private Class<?> testClazz;
+    private Class<?> testClazz = null;
 
-    protected ResourceDescriptor beansXml;
+    protected ResourceDescriptor beansXml = null;
 
-    protected ResourceDescriptor webXml;
+    protected ResourceDescriptor webXml = null;
 
-    protected ResourceDescriptor persistenceXml;
+    protected ResourceDescriptor persistenceXml = null;
 
-    protected List<ResourceDescriptor> manifestResources;
+    protected List<ResourceDescriptor> manifestResources = null;
 
-    protected List<ResourceDescriptor> resources;
+    protected List<ResourceDescriptor> resources = null;
 
-    protected List<ResourceDescriptor> webResources;
+    protected List<ResourceDescriptor> webResources = null;
 
-    protected List<String> packages;
+    protected List<String> packages = null;
 
-    protected List<String> classes;
+    protected List<String> classes = null;
 
-    protected List<File> libraries;
+    protected List<String> excludedClasses = null;
 
-    protected List<BeanLibraryDescriptor> beanLibraries;
+    protected List<File> libraries = null;
+
+    protected List<BeanLibraryDescriptor> beanLibraries = null;
 
     /**
      * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}
@@ -96,7 +98,10 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     public T withClass(Class<?> clazz)
     {
-        withClass(clazz.getName());
+        if (this.classes == null)
+            this.classes = new ArrayList<String>();
+
+        this.classes.add(clazz.getName());
         return self();
     }
 
@@ -111,18 +116,43 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         for (Class<?> clazz : classes)
         {
-            withClass(clazz.getName());
+            withClass(clazz);
         }
         return self();
     }
 
-    private void withClass(String clazzName)
+    /**
+     * Specified class must be excluded from final archive unless also added via {@link #withClass(Class)} or
+     * {@link #withClasses(Class...)}. Useful for exluding some classes from package added via {@link #withPackage(Package)}.
+     * 
+     * @param clazz
+     * @return self
+     */
+    public T withExcludedClass(Class<?> clazz)
+    {
+        if (this.excludedClasses == null)
+            this.excludedClasses = new ArrayList<String>();
+
+        this.excludedClasses.add(clazz.getName());
+        return self();
+    }
+
+    /**
+     * Specified classes must be excluded from final archive unless also added via {@link #withClass(Class)} or
+     * {@link #withClasses(Class...)}. Useful for exluding some classes from package added via {@link #withPackage(Package)}.
+     * 
+     * 
+     * @param classes
+     * @return self
+     */
+    public T withExcludedClasses(Class<?>... classes)
     {
 
-        if (this.classes == null)
-            this.classes = new ArrayList<String>();
-
-        this.classes.add(clazzName);
+        for (Class<?> clazz : classes)
+        {
+            withExcludedClass(clazz);
+        }
+        return self();
     }
 
     /**
@@ -421,11 +451,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected abstract A buildInternal();
 
     /**
-     * Process packages. If in as-client mode, filter test class.
+     * Process packages. Exclude classes specified via {@link #withExcludedClass(Class)}. If in as-client mode, filter test
+     * class.
      * 
      * @param archive
      */
-    protected void processPackages(ClassContainer<?> archive)
+    protected void processPackages(final ClassContainer<?> archive)
     {
 
         if (packages == null)
@@ -434,33 +465,28 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         for (String pack : packages)
         {
 
-            if (isAsClientMode())
+            final URLPackageScanner.Callback callback = new URLPackageScanner.Callback()
             {
-                ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-
-                if (classLoader == null)
+                @Override
+                public void classFound(String className)
                 {
-                    classLoader = getClass().getClassLoader();
+                    if ((isAsClientMode() && testClazz.getName().equals(className))
+                            || (excludedClasses != null && excludedClasses.contains(className)))
+                        return;
+
+                    archive.addClass(className);
                 }
+            };
 
-                final URLPackageScanner.Callback callback = new URLPackageScanner.Callback()
-                {
-                    @Override
-                    public void classFound(String className)
-                    {
-                        if (testClazz.getName().equals(className))
-                            return;
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
-                        withClass(className);
-                    }
-                };
-                final URLPackageScanner scanner = URLPackageScanner.newInstance(false, classLoader, callback, pack);
-                scanner.scanPackage();
-
-            } else
+            if (classLoader == null)
             {
-                archive.addPackage(pack);
+                classLoader = getClass().getClassLoader();
             }
+
+            final URLPackageScanner scanner = URLPackageScanner.newInstance(false, classLoader, callback, pack);
+            scanner.scanPackage();
         }
     }
 
@@ -646,7 +672,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Descriptor of separate bean library.
+     * Descriptor of separate bean archive. Its possible to omit beans.xml - degrading this to ordinary library.
      * 
      * @author Martin Kouba
      */
