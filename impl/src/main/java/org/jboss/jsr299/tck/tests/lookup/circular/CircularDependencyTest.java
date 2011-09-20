@@ -82,7 +82,8 @@ public class CircularDependencyTest extends AbstractJSR299Test
    @SpecAssertion(section="5", id="b")
    public void testNormalSelfConsumingProducer() throws Exception
    {
-      getInstanceByType(Violation.class).ping();
+       // TODO Not quite sure what this code tests 
+       getInstanceByType(Violation.class).ping();
    }
    
    @Test

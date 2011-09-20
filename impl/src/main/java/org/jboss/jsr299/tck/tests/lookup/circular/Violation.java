@@ -23,9 +23,23 @@ public class Violation implements Serializable
    
    private static final long serialVersionUID = 1L;
 
+   private String producer;
+   
+   public Violation() {
+   }
+
+   public Violation(String producer) {
+       this.producer = producer;
+   }
+   
    public void ping()
    {
       
    }
+
+    public String getProducer()
+    {
+        return producer;
+    }
    
 }
