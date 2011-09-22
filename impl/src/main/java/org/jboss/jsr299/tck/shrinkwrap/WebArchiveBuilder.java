@@ -7,7 +7,8 @@ import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 
 /**
- * Shrinkwrap web archive builder for JSR299 TCK arquillian test.
+ * Shrinkwrap web archive builder for JSR299 TCK arquillian test. This builder is intended to provide basic functionality
+ * covering common TCK needs. Use shrinkwrap API to adapt archive to advanced scenarios.
  * 
  * @author Martin Kouba
  */

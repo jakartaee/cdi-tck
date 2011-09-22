@@ -7,15 +7,19 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 
 /**
- * Shrinkwrap enterprise archive builderf for JSR299 TCK arquillian test.
- * 
- * Use enterprise archive while:
+ * Shrinkwrap enterprise archive builder for JSR299 TCK arquillian test. This builder is intended to provide basic functionality
+ * covering common TCK needs. Use shrinkwrap API to adapt archive to advanced scenarios.
+ * <p>
+ * Test classes are added to EJB module. Web module is not supported yet. The <code>application.xml</code> descriptor is not
+ * supported as it is no longer required (Java EE 5, Java EE 6).
+ * </p>
+ * <p>
+ * Use enterprise in TCK tests archive only while:
+ * </p>
  * <ul>
  * <li>explicitly testing EAR structure</li>
  * <li>testing Java EE full profile (e.g. EJB timer service, MDBs)</li>
  * </ul>
- * 
- * Web module is not supported yet.
  * 
  * @author Martin Kouba
  */
