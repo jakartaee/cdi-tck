@@ -40,7 +40,7 @@ public class ManualCidPropagationTest extends AbstractConversationTest
     public static WebArchive createTestArchive() 
 	{
         return new WebArchiveBuilder()
-            .withTestClass(ManualCidPropagationTest.class)
+            .withTestClassDefinition(ManualCidPropagationTest.class)
             .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
                         CloudController.class, OutermostFilter.class)
             .withWebResource("cloud.jsf", "cloud.jspx")

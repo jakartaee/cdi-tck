@@ -37,7 +37,7 @@ public class InvalidatingSessionDestroysConversationTest extends AbstractConvers
     public static WebArchive createTestArchive() 
 	{
         return new WebArchiveBuilder()
-            .withTestClass(InvalidatingSessionDestroysConversationTest.class)
+            .withTestClassDefinition(InvalidatingSessionDestroysConversationTest.class)
             .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
                         CloudController.class, OutermostFilter.class)
             .withWebResource("cloud.jsf", "cloud.jspx")

@@ -44,7 +44,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
    public static WebArchive createTestArchive() 
 	{
        return new WebArchiveBuilder()
-           .withTestClass(LongRunningConversationPropagatedByFacesContextTest.class)
+           .withTestClassDefinition(LongRunningConversationPropagatedByFacesContextTest.class)
            .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
                        OutermostFilter.class)
            .withWebResource("storm.jsf", "storm.jspx")

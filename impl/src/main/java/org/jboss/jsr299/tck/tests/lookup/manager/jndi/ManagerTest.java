@@ -35,7 +35,7 @@ public class ManagerTest extends AbstractJSR299Test
 	{
        return new WebArchiveBuilder()
            .withTestClass(ManagerTest.class)
-           .withClasses(ManagerTest.class, JndiBeanManagerInjected.class)
+           .withClasses(JndiBeanManagerInjected.class)
            .build();
    }
     

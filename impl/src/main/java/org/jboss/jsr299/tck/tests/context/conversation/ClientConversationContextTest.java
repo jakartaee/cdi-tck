@@ -42,7 +42,7 @@ public class ClientConversationContextTest extends AbstractConversationTest
     public static WebArchive createTestArchive() 
 	{
         return new WebArchiveBuilder()
-            .withTestClass(ClientConversationContextTest.class)
+            .withTestClassDefinition(ClientConversationContextTest.class)
             .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
                         CloudController.class, OutermostFilter.class, Cumulus.class, BuiltInConversation.class)
             .withWebResource("home.jsf", "home.jspx")

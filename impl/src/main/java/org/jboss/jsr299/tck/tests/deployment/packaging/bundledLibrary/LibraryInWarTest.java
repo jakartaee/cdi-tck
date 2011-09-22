@@ -37,12 +37,12 @@ import org.testng.annotations.Test;
 public class LibraryInWarTest extends AbstractJSR299Test
 {
     
-        @Deployment
+    @Deployment
     public static WebArchive createTestArchive() 
 	{
         return new WebArchiveBuilder()
             .withTestClass(LibraryInWarTest.class)
-            .withClasses(LibraryInWarTest.class, Foo.class)
+            .withClasses(Foo.class)
             .withBeanLibrary(Bar.class)
             .build();
     }

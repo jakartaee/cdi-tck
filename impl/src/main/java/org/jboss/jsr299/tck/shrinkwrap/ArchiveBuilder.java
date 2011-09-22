@@ -91,7 +91,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add a class definition.
+     * Add class to archive.
      * 
      * @param clazz
      * @return self
@@ -106,7 +106,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add class definitions.
+     * Add classes to archive.
      * 
      * @param classes
      * @return self
@@ -156,27 +156,38 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add all classes in the test class package.
+     * Add all classes in the test class package to archive and set test class definition for configuration purpose.
      * 
      * @param testClazz
      * @return self
      */
     public T withTestClassPackage(Class<?> testClazz)
     {
-        return withTestClass(testClazz).withPackage(testClazz.getPackage());
+        return withTestClassDefinition(testClazz).withPackage(testClazz.getPackage());
     }
-
+    
     /**
-     * Builder will use test class for configuration purpose but will not add it to final archive.
+     * Add test class to archive and set test class definition for configuration purpose.
      * 
-     * @param test
+     * @param testClazz
      * @return self
      */
     public T withTestClass(Class<?> testClazz)
     {
+        return withTestClassDefinition(testClazz).withClass(testClazz);
+    }
+
+    /**
+     * Set test class definition for configuration purpose.  Do not add it to final archive.
+     * 
+     * @param test
+     * @return self
+     */
+    public T withTestClassDefinition(Class<?> testClazz)
+    {
 
         if (this.testClazz != null)
-            throw new IllegalStateException("Cannot set more than one test class!");
+            throw new IllegalStateException("Cannot set more than one test class definition!");
 
         this.testClazz = testClazz;
         return self();

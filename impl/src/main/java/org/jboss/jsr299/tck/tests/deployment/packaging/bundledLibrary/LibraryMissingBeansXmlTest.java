@@ -42,7 +42,7 @@ public class LibraryMissingBeansXmlTest extends AbstractJSR299Test
        // We put Foo in test archive, but Bar goes in the library
        return new WebArchiveBuilder()
            .withTestClass(LibraryMissingBeansXmlTest.class)
-           .withClasses(LibraryMissingBeansXmlTest.class, Foo.class)
+           .withClasses(Foo.class)
            .withBeanLibrary(true, Bar.class)
            .build();
    }

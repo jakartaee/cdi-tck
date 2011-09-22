@@ -35,7 +35,7 @@ public class ManagerTestEar extends AbstractJSR299Test
 	{
         return new EnterpriseArchiveBuilder()
             .withTestClass(ManagerTestEar.class)
-            .withClasses(ManagerTestEar.class, JndiBeanManagerInjected.class, Dummy.class)
+            .withClasses(JndiBeanManagerInjected.class, Dummy.class)
             .build();
     }
     
