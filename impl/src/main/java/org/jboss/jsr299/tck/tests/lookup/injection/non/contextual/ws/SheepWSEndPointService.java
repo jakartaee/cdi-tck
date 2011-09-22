@@ -17,9 +17,7 @@
 
 package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws;
 
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Logger;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -34,34 +32,13 @@ import javax.xml.ws.WebServiceFeature;
  * 
  */
 @WebServiceClient(name = "SheepWSEndPointService", targetNamespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/")
-// @WebServiceClient(name = "SheepWSEndPointService", targetNamespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", wsdlLocation = "http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl")
 public class SheepWSEndPointService
     extends Service
 {
 
-    private final static URL SHEEPWSENDPOINTSERVICE_WSDL_LOCATION;
-    private final static Logger logger = Logger.getLogger(org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.SheepWSEndPointService.class.getName());
-
-    static {
-        URL url = null;
-        try {
-            URL baseUrl;
-            baseUrl = org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.SheepWSEndPointService.class.getResource(".");
-            url = new URL(baseUrl, "http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl");
-        } catch (MalformedURLException e) {
-            logger.warning("Failed to create URL for the wsdl Location: 'http://localhost:8080/org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest/TestWebService?wsdl', retrying as a local file");
-            logger.warning(e.getMessage());
-        }
-        SHEEPWSENDPOINTSERVICE_WSDL_LOCATION = url;
-    }
-
     public SheepWSEndPointService(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
-
-//    public SheepWSEndPointService() {
-//        super(SHEEPWSENDPOINTSERVICE_WSDL_LOCATION, new QName("http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWSEndPointService"));
-//    }
 
     // @WebEndpoint(name = "SheepWSPort")
     public SheepWS getSheepWSPort() {

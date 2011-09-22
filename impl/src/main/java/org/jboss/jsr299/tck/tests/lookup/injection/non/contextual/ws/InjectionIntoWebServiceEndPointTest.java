@@ -31,7 +31,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * FIXME
  * 1. Needs javaee-full profile
  * 2. Injection not working (use serverConfig property in arquillian.xml)
  */
@@ -62,7 +61,7 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
    public void testInjectionIntoWebServiceEndpoint() throws Exception
    {
       URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
-        SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(
+      SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(
                 "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWS"));
       SheepWS ws = service.getSheepWSPort();
       assert ws.isSheepInjected();
