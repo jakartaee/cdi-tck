@@ -33,7 +33,8 @@ public class FinalMethodClassLevelInterceptorTest extends AbstractJSR299Test
     public static EnterpriseArchive createTestArchive() 
 	{
         return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(FinalMethodClassLevelInterceptorTest.class)
+            .withTestClassDefinition(FinalMethodClassLevelInterceptorTest.class)
+            .withClasses(FooBinding.class, MissileInterceptor.class, FinalMethodClassLevelMissile.class, FinalMethodClassLevelMissileLocal.class)
             .withBeansXml("beans.xml")
             .build();
     }
@@ -43,11 +44,5 @@ public class FinalMethodClassLevelInterceptorTest extends AbstractJSR299Test
    @SpecAssertion(section = "9.3", id = "cb")
    public void testFinalMethodWithClassLevelInterceptor() throws Exception
    {
-/*      MissileInterceptor.intercepted = false;
-      
-      FinalMethodMissileLocal missile = getInstanceByType(FinalMethodMissileLocal.class);      
-      missile.fire();
-      
-      assert MissileInterceptor.intercepted;*/
    }
 }
