@@ -16,13 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.broken.enabledDecoratorIsNotDecorator;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
-public abstract class TimestampLogger implements Logger
-{
-
+public abstract class TimestampLogger implements Logger {
 
 }

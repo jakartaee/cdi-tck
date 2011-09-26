@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.event.bindingTypes;
 
-public class Animal
-{
+public class Animal {
 }

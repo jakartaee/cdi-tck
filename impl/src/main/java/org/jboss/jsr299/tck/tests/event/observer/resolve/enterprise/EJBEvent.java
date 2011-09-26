@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.resolve.enterprise;
 
-public class EJBEvent
-{
+public class EJBEvent {
 
 }

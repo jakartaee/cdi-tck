@@ -16,17 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.newSimpleBean;
 
-public class Litter
-{
-   private int quantity;
-   
-   public Litter(int quantity)
-   {
-      this.quantity = quantity;
-   }
+public class Litter {
+    private int quantity;
 
-   public int getQuantity()
-   {
-      return quantity;
-   }
+    public Litter(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }

@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessDec
 import javax.ejb.Local;
 
 @Local
-public interface BulldogLocal_Broken
-{
+public interface BulldogLocal_Broken {
 
 }

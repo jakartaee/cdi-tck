@@ -20,18 +20,17 @@ import javax.inject.Inject;
 import javax.jws.WebService;
 
 @WebService(endpointInterface = "org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.SheepWS", serviceName = "SheepWS")
-public class SheepWSEndPoint implements SheepWS
-{
-   @Inject
-   private Sheep sheep;
-   private boolean initializerCalled = false;
-   
-   @Inject
-   public void initialize(Sheep sheep) {
-      initializerCalled = sheep != null;
-   }
-   
-   public boolean isSheepInjected() {
-      return (sheep != null) && initializerCalled;
-   }
+public class SheepWSEndPoint implements SheepWS {
+    @Inject
+    private Sheep sheep;
+    private boolean initializerCalled = false;
+
+    @Inject
+    public void initialize(Sheep sheep) {
+        initializerCalled = sheep != null;
+    }
+
+    public boolean isSheepInjected() {
+        return (sheep != null) && initializerCalled;
+    }
 }

@@ -20,13 +20,14 @@ import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 
 @Alternative
-public class NotEnabledSheepProducer
-{
-   @Produces @Tame
-   public static final Sheep sheep = new Sheep();
-   
-   @Produces @Tame
-   public Sheep produce() {
-      return sheep;
-   }
+public class NotEnabledSheepProducer {
+    @Produces
+    @Tame
+    public static final Sheep sheep = new Sheep();
+
+    @Produces
+    @Tame
+    public Sheep produce() {
+        return sheep;
+    }
 }

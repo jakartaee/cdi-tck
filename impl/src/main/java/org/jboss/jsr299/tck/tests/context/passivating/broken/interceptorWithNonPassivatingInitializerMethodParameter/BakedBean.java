@@ -18,8 +18,8 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.interceptorWithNon
 
 import javax.enterprise.context.SessionScoped;
 
-@SessionScoped @BakedBinding
-public class BakedBean
-{
+@SessionScoped
+@BakedBinding
+public class BakedBean {
 
 }

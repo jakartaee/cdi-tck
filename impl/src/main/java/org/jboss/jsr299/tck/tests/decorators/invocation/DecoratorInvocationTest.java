@@ -29,77 +29,57 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class DecoratorInvocationTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DecoratorInvocationTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DecoratorInvocationTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DecoratorInvocationTest.class).withBeansXml("beans.xml").build();
     }
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="8.4", id="a"),
-      @SpecAssertion(section="8.4", id="c"),
-      @SpecAssertion(section="8.4", id="b"),
-      @SpecAssertion(section="8.1.3", id="d"),
-      @SpecAssertion(section="8.1.2", id="f"),
-      @SpecAssertion(section="7.2", id="b")
-   })
-   public void testDecoratorInvocation()
-   {
-      TimestampLogger.reset();
-      MockLogger.reset();
-      getInstanceByType(CowShed.class).milk();
-      assert TimestampLogger.getMessage().equals(CowShed.MESSAGE);
-      assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + CowShed.MESSAGE);
-      assert MockLogger.isInitializeCalled();
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="8.4", id="d"),
-      @SpecAssertion(section="8.4", id="e"),
-      @SpecAssertion(section="8.4", id="f"),
-      //@SpecAssertion(section="8.4", id="a"),
-      @SpecAssertion(section="8.1.3", id="d"),
-      @SpecAssertion(section="8.1.2", id="f"),
-      @SpecAssertion(section="7.2", id="kb")
-   })
-   public void testChainedDecoratorInvocation()
-   {
-      FooDecorator1.reset();
-      FooDecorator2.reset();
-      FooImpl.reset();
-      getInstanceByType(CowShed.class).washDown();
-      assert FooDecorator1.getMessage().equals(CowShed.MESSAGE);
-      assert FooDecorator2.getMessage().equals(CowShed.MESSAGE + FooDecorator1.SUFFIX);
-      assert FooImpl.getMessage().equals(CowShed.MESSAGE + FooDecorator1.SUFFIX + FooDecorator2.SUFFIX);
-      FooDecorator1.reset();
-      FooDecorator2.reset();
-      FooImpl.reset();
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "a"), @SpecAssertion(section = "8.4", id = "c"),
+            @SpecAssertion(section = "8.4", id = "b"), @SpecAssertion(section = "8.1.3", id = "d"),
+            @SpecAssertion(section = "8.1.2", id = "f"), @SpecAssertion(section = "7.2", id = "b") })
+    public void testDecoratorInvocation() {
+        TimestampLogger.reset();
+        MockLogger.reset();
+        getInstanceByType(CowShed.class).milk();
+        assert TimestampLogger.getMessage().equals(CowShed.MESSAGE);
+        assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + CowShed.MESSAGE);
+        assert MockLogger.isInitializeCalled();
+    }
 
-   @Test
-   @SpecAssertion(section="8.1.2", id="g")
-   // WELD-430
-   public void testDecoratorInvokesDelegateMethodOutsideOfBusinessMethodInterception()
-   {
-      assert getInstanceByType(Bar.class).foo();
-      try
-      {
-          BarDecorator.invokeFooOutsideOfBusinessMethodInterception();
-      }
-      catch (Throwable t) 
-      {
-        assert isThrowablePresent(IllegalStateException.class, t);
-        return;
-     }
-     assert false;
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "d"), @SpecAssertion(section = "8.4", id = "e"),
+            @SpecAssertion(section = "8.4", id = "f"),
+            // @SpecAssertion(section="8.4", id="a"),
+            @SpecAssertion(section = "8.1.3", id = "d"), @SpecAssertion(section = "8.1.2", id = "f"),
+            @SpecAssertion(section = "7.2", id = "kb") })
+    public void testChainedDecoratorInvocation() {
+        FooDecorator1.reset();
+        FooDecorator2.reset();
+        FooImpl.reset();
+        getInstanceByType(CowShed.class).washDown();
+        assert FooDecorator1.getMessage().equals(CowShed.MESSAGE);
+        assert FooDecorator2.getMessage().equals(CowShed.MESSAGE + FooDecorator1.SUFFIX);
+        assert FooImpl.getMessage().equals(CowShed.MESSAGE + FooDecorator1.SUFFIX + FooDecorator2.SUFFIX);
+        FooDecorator1.reset();
+        FooDecorator2.reset();
+        FooImpl.reset();
+    }
+
+    @Test
+    @SpecAssertion(section = "8.1.2", id = "g")
+    // WELD-430
+    public void testDecoratorInvokesDelegateMethodOutsideOfBusinessMethodInterception() {
+        assert getInstanceByType(Bar.class).foo();
+        try {
+            BarDecorator.invokeFooOutsideOfBusinessMethodInterception();
+        } catch (Throwable t) {
+            assert isThrowablePresent(IllegalStateException.class, t);
+            return;
+        }
+        assert false;
+    }
 }

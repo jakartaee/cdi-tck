@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.custom.broken.finalBeanClass;
 
-public interface Vehicle
-{
-   void start();
+public interface Vehicle {
+    void start();
 }

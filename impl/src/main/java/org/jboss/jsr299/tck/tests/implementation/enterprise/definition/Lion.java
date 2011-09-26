@@ -21,7 +21,6 @@ import javax.enterprise.context.RequestScoped;
 
 @Stateful
 @RequestScoped
-public class Lion implements LionLocal
-{
+public class Lion implements LionLocal {
 
 }

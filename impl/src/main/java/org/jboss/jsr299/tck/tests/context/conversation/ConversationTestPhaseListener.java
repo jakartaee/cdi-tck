@@ -29,52 +29,46 @@ import org.jboss.jsr299.tck.api.JSR299Configuration;
 import org.jboss.jsr299.tck.impl.ConfigurationFactory;
 import org.jboss.jsr299.tck.impl.OldSPIBridge;
 
-public class ConversationTestPhaseListener implements PhaseListener
-{
+public class ConversationTestPhaseListener implements PhaseListener {
 
-   /**
+    /**
 	 * 
 	 */
-   private static final long serialVersionUID = 1197355854770726526L;
+    private static final long serialVersionUID = 1197355854770726526L;
 
-   public static final String ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME = "org.jboss.jsr299.tck.activeBeforeApplyRequestValues";
+    public static final String ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME = "org.jboss.jsr299.tck.activeBeforeApplyRequestValues";
 
-   private boolean activeBeforeApplyRequestValues;
+    private boolean activeBeforeApplyRequestValues;
 
-   public void afterPhase(PhaseEvent event)
-   {
-   }
+    public void afterPhase(PhaseEvent event) {
+    }
 
-   public void beforePhase(PhaseEvent event)
-   {
-	   JSR299Configuration configuration = ConfigurationFactory.get();
-      if (event.getPhaseId().equals(PhaseId.APPLY_REQUEST_VALUES))
-      {
-         try
-         {
-            configuration.getManagers().getManager().getContext(ConversationScoped.class);
-            activeBeforeApplyRequestValues = true;
-         }
-         catch (ContextNotActiveException e)
-         {
-            activeBeforeApplyRequestValues = false;
-         }
-      }
-      if (event.getPhaseId().equals(PhaseId.RENDER_RESPONSE))
-      {
-         BeanManager beanManager = configuration.getManagers().getManager();
-         Conversation conversation = OldSPIBridge.getInstanceByType(beanManager, Conversation.class);
-         HttpServletResponse response = (HttpServletResponse) event.getFacesContext().getExternalContext().getResponse();
-         response.addHeader(AbstractConversationTest.CID_HEADER_NAME, conversation.getId() == null ? " null" : conversation.getId());
-         response.addHeader(AbstractConversationTest.LONG_RUNNING_HEADER_NAME, String.valueOf(!conversation.isTransient()));
-         response.addHeader(Cloud.RAINED_HEADER_NAME, new Boolean(OldSPIBridge.getInstanceByType(beanManager, Cloud.class).isRained()).toString());
-         response.addHeader(ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME, new Boolean(activeBeforeApplyRequestValues).toString());
-      }
-   }
+    public void beforePhase(PhaseEvent event) {
+        JSR299Configuration configuration = ConfigurationFactory.get();
+        if (event.getPhaseId().equals(PhaseId.APPLY_REQUEST_VALUES)) {
+            try {
+                configuration.getManagers().getManager().getContext(ConversationScoped.class);
+                activeBeforeApplyRequestValues = true;
+            } catch (ContextNotActiveException e) {
+                activeBeforeApplyRequestValues = false;
+            }
+        }
+        if (event.getPhaseId().equals(PhaseId.RENDER_RESPONSE)) {
+            BeanManager beanManager = configuration.getManagers().getManager();
+            Conversation conversation = OldSPIBridge.getInstanceByType(beanManager, Conversation.class);
+            HttpServletResponse response = (HttpServletResponse) event.getFacesContext().getExternalContext().getResponse();
+            response.addHeader(AbstractConversationTest.CID_HEADER_NAME,
+                    conversation.getId() == null ? " null" : conversation.getId());
+            response.addHeader(AbstractConversationTest.LONG_RUNNING_HEADER_NAME, String.valueOf(!conversation.isTransient()));
+            response.addHeader(Cloud.RAINED_HEADER_NAME, new Boolean(OldSPIBridge.getInstanceByType(beanManager, Cloud.class)
+                    .isRained()).toString());
+            response.addHeader(ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME,
+                    new Boolean(activeBeforeApplyRequestValues).toString());
+        }
+    }
 
-   public PhaseId getPhaseId()
-   {
-      return PhaseId.ANY_PHASE;
-   }
+    public PhaseId getPhaseId() {
+        return PhaseId.ANY_PHASE;
+    }
 
 }

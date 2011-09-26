@@ -28,8 +28,7 @@ import javax.interceptor.InterceptorBinding;
 
 @Documented
 @Retention(RUNTIME)
-@Target({METHOD, TYPE})
+@Target({ METHOD, TYPE })
 @InterceptorBinding
-public @interface City
-{
+public @interface City {
 }

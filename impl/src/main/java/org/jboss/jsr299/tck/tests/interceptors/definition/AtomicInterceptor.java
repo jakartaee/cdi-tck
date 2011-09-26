@@ -20,14 +20,14 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Atomic @Interceptor
-public class AtomicInterceptor
-{
-   public static boolean intercepted = false;
-   
-   @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
-   {
-      intercepted = true;
-      return ctx.proceed();
-   }
+@Atomic
+@Interceptor
+public class AtomicInterceptor {
+    public static boolean intercepted = false;
+
+    @AroundInvoke
+    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
+        intercepted = true;
+        return ctx.proceed();
+    }
 }

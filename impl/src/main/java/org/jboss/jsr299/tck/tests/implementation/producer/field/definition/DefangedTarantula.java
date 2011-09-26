@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
-public class DefangedTarantula extends Tarantula
-{
+public class DefangedTarantula extends Tarantula {
 
 }

@@ -16,8 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
-
-public interface ScottishFish extends Animal
-{
+public interface ScottishFish extends Animal {
 
 }

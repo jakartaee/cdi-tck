@@ -27,15 +27,15 @@ import javax.inject.Inject;
  * @author David Allen
  * 
  */
-public class NullSpiderConsumerForBrokenProducer implements Serializable
-{
-   private static final long serialVersionUID = 1L;
+public class NullSpiderConsumerForBrokenProducer implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-   @Inject @Null @Broken
-   private BlackWidow injectedSpider;
+    @Inject
+    @Null
+    @Broken
+    private BlackWidow injectedSpider;
 
-   public BlackWidow getInjectedSpider()
-   {
-      return injectedSpider;
-   }
+    public BlackWidow getInjectedSpider() {
+        return injectedSpider;
+    }
 }

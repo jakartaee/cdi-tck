@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple;
 
-public class Egg
-{
-   
+public class Egg {
+
 }

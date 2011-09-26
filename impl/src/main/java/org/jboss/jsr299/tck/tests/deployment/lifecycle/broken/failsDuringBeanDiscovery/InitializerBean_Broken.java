@@ -19,10 +19,8 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.failsDuringBeanDi
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-public class InitializerBean_Broken
-{
-   @Inject
-   public void initialize(@Observes String string)
-   {
-   }
+public class InitializerBean_Broken {
+    @Inject
+    public void initialize(@Observes String string) {
+    }
 }

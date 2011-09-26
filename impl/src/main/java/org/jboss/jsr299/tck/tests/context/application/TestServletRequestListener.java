@@ -22,22 +22,19 @@ import javax.inject.Inject;
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 
-public class TestServletRequestListener implements ServletRequestListener
-{
+public class TestServletRequestListener implements ServletRequestListener {
 
-   @Inject
-   private BeanManager manager;
-   @Inject
-   private Result result;
+    @Inject
+    private BeanManager manager;
+    @Inject
+    private Result result;
 
-   public void requestDestroyed(ServletRequestEvent sre)
-   {
-   }
+    public void requestDestroyed(ServletRequestEvent sre) {
+    }
 
-   public void requestInitialized(ServletRequestEvent sre)
-   {
-      boolean result = manager.getContext(ApplicationScoped.class).isActive();
-      this.result.setApplicationScopeActiveForServletRequestListener(result);
-   }
+    public void requestInitialized(ServletRequestEvent sre) {
+        boolean result = manager.getContext(ApplicationScoped.class).isActive();
+        this.result.setApplicationScopeActiveForServletRequestListener(result);
+    }
 
 }

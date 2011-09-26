@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessInt
 import javax.ejb.Local;
 
 @Local
-public interface DalmatianLocal_Broken
-{
-   void foo();
+public interface DalmatianLocal_Broken {
+    void foo();
 }

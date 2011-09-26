@@ -22,26 +22,22 @@ import javax.annotation.PostConstruct;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor @BusinessMethodBinding
-public class LifecycleInterceptor implements Serializable
-{
-   public static boolean intercepted = false;
+@Interceptor
+@BusinessMethodBinding
+public class LifecycleInterceptor implements Serializable {
+    public static boolean intercepted = false;
 
-   @PostConstruct
-   public void postConstruct(InvocationContext ctx) {
-      intercepted = true;
-      try
-      {
-         ctx.proceed();
-      }
-      catch (Exception e)
-      {
-         throw new RuntimeException();
-      }      
-   }
-   
-   public static boolean isIntercepted()
-   {
-      return intercepted;
-   }
+    @PostConstruct
+    public void postConstruct(InvocationContext ctx) {
+        intercepted = true;
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    public static boolean isIntercepted() {
+        return intercepted;
+    }
 }

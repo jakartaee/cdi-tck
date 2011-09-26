@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.policy;
 
-public class Sheep
-{
+public class Sheep {
 
 }

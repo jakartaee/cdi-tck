@@ -16,9 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
-@Expensive(cost=60, veryExpensive=true)
+@Expensive(cost = 60, veryExpensive = true)
 @Whitefish
-public class RoundWhitefish implements Animal
-{
-   
+public class RoundWhitefish implements Animal {
+
 }

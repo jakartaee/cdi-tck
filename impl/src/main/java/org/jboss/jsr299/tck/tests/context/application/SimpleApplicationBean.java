@@ -19,12 +19,10 @@ package org.jboss.jsr299.tck.tests.context.application;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class SimpleApplicationBean
-{
-   private double id = Math.random();
+public class SimpleApplicationBean {
+    private double id = Math.random();
 
-   public double getId()
-   {
-      return id;
-   }
+    public double getId() {
+        return id;
+    }
 }

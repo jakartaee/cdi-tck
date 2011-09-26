@@ -28,6 +28,5 @@ import javax.enterprise.inject.Stereotype;
 @Stereotype
 @Target(TYPE)
 @Retention(RUNTIME)
-public @interface AlternativeStereotype
-{
+public @interface AlternativeStereotype {
 }

@@ -1,4 +1,4 @@
- /*
+/*
  * JBoss, Home of Professional Open Source
  * Copyright 2010, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
@@ -31,38 +31,29 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 1. Needs javaee-full profile (use serverConfig property in arquillian.xml)
- * 2. Injection not working - AS7-1903
+ * 1. Needs javaee-full profile (use serverConfig property in arquillian.xml) 2. Injection not working - AS7-1903
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test {
+
     @ArquillianResource
     protected URL contextPath;
-    
-   @Deployment(testable=false)
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(InjectionIntoWebServiceEndPointTest.class)
-           //.withClasses(Sheep.class, SheepWSEndPoint.class)
-           .withWebXml("web.xml")
-           .build();
-   }
-    
-   @Test(groups = "javaee-full-only")
-   @SpecAssertions({
-      @SpecAssertion(section = "5.5", id = "ee"),
-      @SpecAssertion(section = "5.5.2", id = "aq"),
-      @SpecAssertion(section = "5.5.2", id = "ar")
-   })
-   public void testInjectionIntoWebServiceEndpoint() throws Exception
-   {
-      URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
-      SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(
+
+    @Deployment(testable = false)
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InjectionIntoWebServiceEndPointTest.class)
+        // .withClasses(Sheep.class, SheepWSEndPoint.class)
+                .withWebXml("web.xml").build();
+    }
+
+    @Test(groups = "javaee-full-only")
+    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ee"), @SpecAssertion(section = "5.5.2", id = "aq"),
+            @SpecAssertion(section = "5.5.2", id = "ar") })
+    public void testInjectionIntoWebServiceEndpoint() throws Exception {
+        URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
+        SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(
                 "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWS"));
-      SheepWS ws = service.getSheepWSPort();
-      assert ws.isSheepInjected();
-   }
+        SheepWS ws = service.getSheepWSPort();
+        assert ws.isSheepInjected();
+    }
 }

@@ -25,9 +25,11 @@ import javax.inject.Inject;
 public class FooDecorator implements Foo {
     public static String NAME = "FooDecorator";
 
-    @Inject @Delegate Foo foo;
+    @Inject
+    @Delegate
+    Foo foo;
 
     public void doSomething() {
-        CallOrder.addCaller(NAME);        
+        CallOrder.addCaller(NAME);
     }
 }

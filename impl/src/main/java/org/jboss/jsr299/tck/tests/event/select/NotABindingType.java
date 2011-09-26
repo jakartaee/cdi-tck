@@ -26,9 +26,8 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-@Target( { TYPE, METHOD, PARAMETER, FIELD })
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
-public @interface NotABindingType
-{
+public @interface NotABindingType {
 }

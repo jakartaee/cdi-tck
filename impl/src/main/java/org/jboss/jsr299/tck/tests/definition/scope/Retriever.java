@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.definition.scope;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class Retriever extends Dog
-{
-   
+public class Retriever extends Dog {
+
 }

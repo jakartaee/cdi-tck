@@ -18,9 +18,8 @@ package org.jboss.jsr299.tck.tests.decorators.definition.broken.notAllDecoratedT
 
 /**
  * @author pmuir
- *
+ * 
  */
-public interface EnhancedLogger
-{
+public interface EnhancedLogger {
 
 }

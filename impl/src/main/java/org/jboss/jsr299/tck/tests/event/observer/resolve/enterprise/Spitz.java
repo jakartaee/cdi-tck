@@ -20,13 +20,10 @@ import javax.ejb.Stateful;
 import javax.enterprise.event.Observes;
 
 @Stateful
-public class Spitz implements PomeranianInterface
-{
-   public void observeSimpleEvent(@Observes EJBEvent someEvent)
-   {
-   }
+public class Spitz implements PomeranianInterface {
+    public void observeSimpleEvent(@Observes EJBEvent someEvent) {
+    }
 
-   public static void staticallyObserveEvent(@Observes EJBEvent someEvent)
-   {
-   }
+    public static void staticallyObserveEvent(@Observes EJBEvent someEvent) {
+    }
 }

@@ -20,11 +20,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 @RequestScoped
-public class NumberConsumer
-{
-   
-   @Inject int number;
-   
-   public void ping(){};
-   
+public class NumberConsumer {
+
+    @Inject
+    int number;
+
+    public void ping() {
+    };
+
 }

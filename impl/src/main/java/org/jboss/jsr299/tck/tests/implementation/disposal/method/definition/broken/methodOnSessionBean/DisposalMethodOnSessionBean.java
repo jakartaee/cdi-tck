@@ -27,28 +27,20 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * TODO should be renamed to  DisposalMethodOnSessionBeanTest in order to confirm TCK convention
+ * TODO should be renamed to DisposalMethodOnSessionBeanTest in order to confirm TCK convention
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class DisposalMethodOnSessionBean extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DisposalMethodOnSessionBean extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(DisposalMethodOnSessionBean.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(DisposalMethodOnSessionBean.class).build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "3.3.4", id = "d"),
-      @SpecAssertion(section = "3.3.6", id = "fa")
-   })
-   public void testDisposalMethodNotBusinessOrStatic()
-   {
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.3.4", id = "d"), @SpecAssertion(section = "3.3.6", id = "fa") })
+    public void testDisposalMethodNotBusinessOrStatic() {
+    }
 
 }

@@ -24,15 +24,14 @@ import javax.inject.Named;
 
 @Stateful
 @ApplicationScoped
-@Named @Default
-public class Pitbull extends Dog implements PitbullLocal, DogLocal, DogRemote
-{
-   
-   public static boolean destructorCalled = false;
+@Named
+@Default
+public class Pitbull extends Dog implements PitbullLocal, DogLocal, DogRemote {
 
-   @Remove
-   public void bye() 
-   {
-      destructorCalled = true;
-   }
+    public static boolean destructorCalled = false;
+
+    @Remove
+    public void bye() {
+        destructorCalled = true;
+    }
 }

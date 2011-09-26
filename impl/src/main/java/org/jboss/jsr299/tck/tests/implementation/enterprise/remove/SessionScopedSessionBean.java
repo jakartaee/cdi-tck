@@ -22,12 +22,10 @@ import javax.enterprise.context.SessionScoped;
 
 @Stateful
 @SessionScoped
-public class SessionScopedSessionBean implements SessionScopedSessionInterface
-{
-   
-   @Remove
-   public void remove()
-   {
-   }
+public class SessionScopedSessionBean implements SessionScopedSessionInterface {
+
+    @Remove
+    public void remove() {
+    }
 
 }

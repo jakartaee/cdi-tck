@@ -25,9 +25,8 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-@Target( { FIELD, PARAMETER })
+@Target({ FIELD, PARAMETER })
 @Qualifier
 @Retention(RetentionPolicy.CLASS)
-public @interface NonRuntimeBindingType
-{
+public @interface NonRuntimeBindingType {
 }

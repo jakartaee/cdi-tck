@@ -20,7 +20,6 @@ import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
 @Tame
-public class ClassD extends AbstractC implements InterfaceB
-{
+public class ClassD extends AbstractC implements InterfaceB {
 
 }

@@ -24,6 +24,7 @@ import javax.inject.Inject;
 @RequestScoped
 public class Cat_Broken {
 
-	@Inject private InjectionPoint ip;
-	
+    @Inject
+    private InjectionPoint ip;
+
 }

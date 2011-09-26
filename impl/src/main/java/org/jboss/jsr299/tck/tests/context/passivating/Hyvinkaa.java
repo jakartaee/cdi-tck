@@ -23,9 +23,8 @@ import javax.inject.Inject;
 
 @SuppressWarnings("serial")
 @SessionScoped
-public class Hyvinkaa implements Serializable
-{
-   @SuppressWarnings("unused")
-   @Inject
-   private transient Violation reference;
+public class Hyvinkaa implements Serializable {
+    @SuppressWarnings("unused")
+    @Inject
+    private transient Violation reference;
 }

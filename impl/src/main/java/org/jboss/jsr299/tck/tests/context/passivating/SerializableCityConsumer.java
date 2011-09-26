@@ -19,13 +19,12 @@ package org.jboss.jsr299.tck.tests.context.passivating;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-public class SerializableCityConsumer
-{
+public class SerializableCityConsumer {
 
-   @Sleeping SerializableCity city;
+    @Sleeping
+    SerializableCity city;
 
-   public void ping()
-   {
-   };
+    public void ping() {
+    };
 
 }

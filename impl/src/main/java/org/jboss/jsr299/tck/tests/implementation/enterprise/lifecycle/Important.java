@@ -32,7 +32,7 @@ import javax.inject.Qualifier;
 /**
  * @author Dan Allen
  */
-@Target( { TYPE, METHOD, PARAMETER, FIELD })
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
 @Qualifier

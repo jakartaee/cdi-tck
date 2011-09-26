@@ -22,18 +22,19 @@ import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
-public class ObtainsInstanceBean
-{
-   @Inject @PayBy(CHEQUE) Instance<AsynchronousPaymentProcessor> paymentProcessor;
-   @Inject @Any Instance<PaymentProcessor> anyPaymentProcessor;
-   
-   public Instance<AsynchronousPaymentProcessor> getPaymentProcessor()
-   {
-      return paymentProcessor;
-   }
+public class ObtainsInstanceBean {
+    @Inject
+    @PayBy(CHEQUE)
+    Instance<AsynchronousPaymentProcessor> paymentProcessor;
+    @Inject
+    @Any
+    Instance<PaymentProcessor> anyPaymentProcessor;
 
-   public Instance<PaymentProcessor> getAnyPaymentProcessor()
-   {
-      return anyPaymentProcessor;
-   }
+    public Instance<AsynchronousPaymentProcessor> getPaymentProcessor() {
+        return paymentProcessor;
+    }
+
+    public Instance<PaymentProcessor> getAnyPaymentProcessor() {
+        return anyPaymentProcessor;
+    }
 }

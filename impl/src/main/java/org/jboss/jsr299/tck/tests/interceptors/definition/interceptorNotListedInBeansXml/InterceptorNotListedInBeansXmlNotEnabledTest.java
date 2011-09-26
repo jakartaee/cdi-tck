@@ -24,28 +24,23 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class InterceptorNotListedInBeansXmlNotEnabledTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InterceptorNotListedInBeansXmlNotEnabledTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InterceptorNotListedInBeansXmlNotEnabledTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InterceptorNotListedInBeansXmlNotEnabledTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "9.4", id = "a")
-   public void testInterceptorNotListedInBeansXmlNotInvoked()
-   {
-      TransactionInterceptor.invoked = false;
-      
-      AccountHolder accountHolder = getInstanceByType(AccountHolder.class);
-      accountHolder.transfer(0);
-      
-      assert !TransactionInterceptor.invoked;
-   }
+
+    @Test
+    @SpecAssertion(section = "9.4", id = "a")
+    public void testInterceptorNotListedInBeansXmlNotInvoked() {
+        TransactionInterceptor.invoked = false;
+
+        AccountHolder accountHolder = getInstanceByType(AccountHolder.class);
+        accountHolder.transfer(0);
+
+        assert !TransactionInterceptor.invoked;
+    }
 }

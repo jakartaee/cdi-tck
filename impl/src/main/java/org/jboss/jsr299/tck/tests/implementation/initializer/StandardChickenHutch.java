@@ -18,19 +18,16 @@ package org.jboss.jsr299.tck.tests.implementation.initializer;
 
 import javax.inject.Inject;
 
-public class StandardChickenHutch
-{
-   private ChickenInterface chicken;
+public class StandardChickenHutch {
+    private ChickenInterface chicken;
 
-   @Inject
-   public void setChicken(@StandardVariety ChickenInterface chicken)
-   {
-      this.chicken = chicken;
-   }
+    @Inject
+    public void setChicken(@StandardVariety ChickenInterface chicken) {
+        this.chicken = chicken;
+    }
 
-   public ChickenInterface getChicken()
-   {
-      return chicken;
-   }
-   
+    public ChickenInterface getChicken() {
+        return chicken;
+    }
+
 }

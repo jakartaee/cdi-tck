@@ -21,20 +21,18 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 /**
- * Test bean to inject another bean which uses injection point metadata in a
- * field
+ * Test bean to inject another bean which uses injection point metadata in a field
  * 
  * @author David Allen
  * 
  */
 @RequestScoped
-public class FieldInjectionPointBean
-{
-   @Inject @AnimalStereotype 
-   private BeanWithInjectionPointMetadata injectedBean;
+public class FieldInjectionPointBean {
+    @Inject
+    @AnimalStereotype
+    private BeanWithInjectionPointMetadata injectedBean;
 
-   public BeanWithInjectionPointMetadata getInjectedBean()
-   {
-      return injectedBean;
-   }
+    public BeanWithInjectionPointMetadata getInjectedBean() {
+        return injectedBean;
+    }
 }

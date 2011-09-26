@@ -16,10 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
-public class ScottishFishFarmer extends Farmer<ScottishFish>
-{
-   ScottishFishFarmer()
-   {
-      super("ScottishFishFarmer");
-   }
+public class ScottishFishFarmer extends Farmer<ScottishFish> {
+    ScottishFishFarmer() {
+        super("ScottishFishFarmer");
+    }
 }

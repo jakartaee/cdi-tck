@@ -18,7 +18,7 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.array;
 
 import javax.inject.Inject;
 
-public class InjectionPointBean_Broken
-{ 
-   @Inject String[] array;
+public class InjectionPointBean_Broken {
+    @Inject
+    String[] array;
 }

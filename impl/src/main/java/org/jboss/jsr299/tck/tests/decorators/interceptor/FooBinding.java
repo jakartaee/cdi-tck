@@ -25,9 +25,9 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-@Inherited 
-@InterceptorBinding 
-@Target(ElementType.TYPE) 
+@Inherited
+@InterceptorBinding
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FooBinding {
 

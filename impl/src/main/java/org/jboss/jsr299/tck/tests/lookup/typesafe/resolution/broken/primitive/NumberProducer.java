@@ -18,11 +18,9 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.broken.primitive;
 
 import javax.enterprise.inject.Produces;
 
-public class NumberProducer
-{
-   @Produces
-   public Integer getNumber()
-   {
-      return null;
-   }
+public class NumberProducer {
+    @Produces
+    public Integer getNumber() {
+        return null;
+    }
 }

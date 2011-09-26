@@ -18,13 +18,12 @@ package org.jboss.jsr299.tck.tests.lookup.injection;
 
 import javax.inject.Inject;
 
-public class FoxRun
-{
-   
-   @Inject
-   public Fox fox;
-   
-   @Inject
-   public Fox anotherFox;
-   
+public class FoxRun {
+
+    @Inject
+    public Fox fox;
+
+    @Inject
+    public Fox anotherFox;
+
 }

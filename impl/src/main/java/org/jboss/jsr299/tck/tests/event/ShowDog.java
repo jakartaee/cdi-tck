@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.event;
 
-public class ShowDog
-{
+public class ShowDog {
 
 }

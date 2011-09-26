@@ -25,41 +25,32 @@ import javax.persistence.EntityManager;
  * @author Marius Bogoevici
  */
 @Stateless
-public class ServiceBeanImpl implements ServiceBean
-{
-   @Inject
-   ManagedBean managedBean;
+public class ServiceBeanImpl implements ServiceBean {
+    @Inject
+    ManagedBean managedBean;
 
-   public ManagedBean getManagedBean()
-   {
-      return managedBean;
-   }
+    public ManagedBean getManagedBean() {
+        return managedBean;
+    }
 
-   public boolean validateEntityManager()
-   {
-      boolean entityManagerValid = true;
-      EntityManager entityManager = managedBean.getPersistenceContext();
-      assert entityManager != null;
-      Object delegate = entityManager.getDelegate();
-      assert delegate != null;
-      try
-      {
-         entityManager.getTransaction();
-         entityManagerValid = false;
-      }
-      catch (IllegalStateException e)
-      {
-         // an IllegalStateException is the expected result if this is a JTA entityManager
-      }
-      try
-      {
-         entityManager.close();
-         entityManagerValid = false;
-      }
-      catch (IllegalStateException e)
-      {
-         // an IllegalStateException is the expected result if the entityManager is container-managed
-      }
-      return entityManagerValid;
-   }
+    public boolean validateEntityManager() {
+        boolean entityManagerValid = true;
+        EntityManager entityManager = managedBean.getPersistenceContext();
+        assert entityManager != null;
+        Object delegate = entityManager.getDelegate();
+        assert delegate != null;
+        try {
+            entityManager.getTransaction();
+            entityManagerValid = false;
+        } catch (IllegalStateException e) {
+            // an IllegalStateException is the expected result if this is a JTA entityManager
+        }
+        try {
+            entityManager.close();
+            entityManagerValid = false;
+        } catch (IllegalStateException e) {
+            // an IllegalStateException is the expected result if the entityManager is container-managed
+        }
+        return entityManagerValid;
+    }
 }

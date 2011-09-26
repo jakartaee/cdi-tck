@@ -24,18 +24,15 @@ import javax.inject.Inject;
  * @author David Allen
  * 
  */
-public class ConstructorInjectionPointBean
-{
-   private BeanWithInjectionPointMetadata injectedBean;
+public class ConstructorInjectionPointBean {
+    private BeanWithInjectionPointMetadata injectedBean;
 
-   @Inject
-   public ConstructorInjectionPointBean(BeanWithInjectionPointMetadata injectedBean)
-   {
-      this.injectedBean = injectedBean;
-   }
-   
-   public BeanWithInjectionPointMetadata getInjectedBean()
-   {
-      return injectedBean;
-   }
+    @Inject
+    public ConstructorInjectionPointBean(BeanWithInjectionPointMetadata injectedBean) {
+        this.injectedBean = injectedBean;
+    }
+
+    public BeanWithInjectionPointMetadata getInjectedBean() {
+        return injectedBean;
+    }
 }

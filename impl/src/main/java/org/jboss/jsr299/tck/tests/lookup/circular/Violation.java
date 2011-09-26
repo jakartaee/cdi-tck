@@ -18,28 +18,25 @@ package org.jboss.jsr299.tck.tests.lookup.circular;
 
 import java.io.Serializable;
 
-public class Violation implements Serializable
-{
-   
-   private static final long serialVersionUID = 1L;
+public class Violation implements Serializable {
 
-   private String producer;
-   
-   public Violation() {
-   }
+    private static final long serialVersionUID = 1L;
 
-   public Violation(String producer) {
-       this.producer = producer;
-   }
-   
-   public void ping()
-   {
-      
-   }
+    private String producer;
 
-    public String getProducer()
-    {
+    public Violation() {
+    }
+
+    public Violation(String producer) {
+        this.producer = producer;
+    }
+
+    public void ping() {
+
+    }
+
+    public String getProducer() {
         return producer;
     }
-   
+
 }

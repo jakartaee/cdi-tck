@@ -21,13 +21,12 @@ import java.io.Serializable;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
-public class ManagedBean implements Serializable
-{
-   @Inject @Another
-   private BeanManager beanManager;
+public class ManagedBean implements Serializable {
+    @Inject
+    @Another
+    private BeanManager beanManager;
 
-   public BeanManager getBeanManager()
-   {
-      return beanManager;
-   }
+    public BeanManager getBeanManager() {
+        return beanManager;
+    }
 }

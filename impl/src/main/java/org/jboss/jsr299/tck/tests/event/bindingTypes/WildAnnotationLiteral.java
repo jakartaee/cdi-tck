@@ -18,6 +18,5 @@ package org.jboss.jsr299.tck.tests.event.bindingTypes;
 
 import javax.enterprise.util.AnnotationLiteral;
 
-public class WildAnnotationLiteral extends AnnotationLiteral<Wild> implements Wild
-{
+public class WildAnnotationLiteral extends AnnotationLiteral<Wild> implements Wild {
 }

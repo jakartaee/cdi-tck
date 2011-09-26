@@ -18,15 +18,13 @@ package org.jboss.jsr299.tck.tests.lookup.injection;
 
 import javax.inject.Inject;
 
-public class SpiderNest
-{
-   
-   public Integer numberOfSpiders;
-   
-   @Inject
-   public SpiderNest(Integer numberOfSpiders)
-   {
-      this.numberOfSpiders = numberOfSpiders; 
-   }
-   
+public class SpiderNest {
+
+    public Integer numberOfSpiders;
+
+    @Inject
+    public SpiderNest(Integer numberOfSpiders) {
+        this.numberOfSpiders = numberOfSpiders;
+    }
+
 }

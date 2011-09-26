@@ -26,29 +26,25 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
-public class AfterBeanDiscoveryObserver implements Extension
-{
+public class AfterBeanDiscoveryObserver implements Extension {
 
-   private static CustomDecoratorImplementation decorator;
+    private static CustomDecoratorImplementation decorator;
 
-   @SuppressWarnings("unchecked")
-   public void addInterceptors(@Observes AfterBeanDiscovery event,BeanManager beanManager)
-   {
-      AnnotatedType<VehicleDecorator> type = beanManager.createAnnotatedType(VehicleDecorator.class);
-      Set<AnnotatedField<? super VehicleDecorator>> annotatedFields = type.getFields();
-      AnnotatedField<? super VehicleDecorator> annotatedField = annotatedFields.iterator().next();
-      decorator = new CustomDecoratorImplementation(annotatedField, beanManager);
+    @SuppressWarnings("unchecked")
+    public void addInterceptors(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
+        AnnotatedType<VehicleDecorator> type = beanManager.createAnnotatedType(VehicleDecorator.class);
+        Set<AnnotatedField<? super VehicleDecorator>> annotatedFields = type.getFields();
+        AnnotatedField<? super VehicleDecorator> annotatedField = annotatedFields.iterator().next();
+        decorator = new CustomDecoratorImplementation(annotatedField, beanManager);
 
-      event.addBean(decorator);
-   }
-   
-   public void vetoVehicleDecorator(@Observes ProcessAnnotatedType<VehicleDecorator> event)
-   {
-      event.veto();
-   }
+        event.addBean(decorator);
+    }
 
-   public static CustomDecoratorImplementation getDecorator()
-   {
-      return decorator;
-   }
+    public void vetoVehicleDecorator(@Observes ProcessAnnotatedType<VehicleDecorator> event) {
+        event.veto();
+    }
+
+    public static CustomDecoratorImplementation getDecorator() {
+        return decorator;
+    }
 }

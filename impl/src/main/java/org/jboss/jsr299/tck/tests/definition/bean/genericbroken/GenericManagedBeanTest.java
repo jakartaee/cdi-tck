@@ -25,23 +25,17 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class GenericManagedBeanTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class GenericManagedBeanTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(GenericManagedBeanTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(GenericManagedBeanTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "3.1", id = "g")
-   public void testNonDependentGenericManagedBeanNotOk() throws Exception
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "3.1", id = "g")
+    public void testNonDependentGenericManagedBeanNotOk() throws Exception {
+    }
 }

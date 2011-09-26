@@ -23,30 +23,24 @@ import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 
 /**
- * Tests an asynchronous observer method that is also a
- * transactional observer for the before completion phase.
+ * Tests an asynchronous observer method that is also a transactional observer for the before completion phase.
  * 
  * Spec version: 20090519
  * 
  * @author David Allen
  * @author Martin Kouba
  */
-public class AsynchronousBeforeCompletionObserverTest extends AbstractJSR299Test
-{
-    
+public class AsynchronousBeforeCompletionObserverTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(AsynchronousBeforeCompletionObserverTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(AsynchronousBeforeCompletionObserverTest.class).build();
     }
-    
-//   @Test(groups = { "events" })
-//   @SpecAssertion(section = "10.5.6", id = "b")
-// Asynchronous events are not specified now
-   public void testAsynchronousObserverAsBeforeCompletionObserverFails()
-   {
-   }
+
+    // @Test(groups = { "events" })
+    // @SpecAssertion(section = "10.5.6", id = "b")
+    // Asynchronous events are not specified now
+    public void testAsynchronousObserverAsBeforeCompletionObserverFails() {
+    }
 }

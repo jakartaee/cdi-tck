@@ -26,11 +26,10 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE})
+@Target({ TYPE })
 @Retention(RUNTIME)
 @Documented
 @InterceptorBinding
-public @interface Transactional
-{
+public @interface Transactional {
 
 }

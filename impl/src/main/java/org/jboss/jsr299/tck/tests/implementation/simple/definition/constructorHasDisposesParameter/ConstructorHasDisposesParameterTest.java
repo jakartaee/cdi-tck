@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.definition.constructorHasDisposesParameter;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -27,27 +26,19 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ConstructorHasDisposesParameterTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ConstructorHasDisposesParameterTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ConstructorHasDisposesParameterTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ConstructorHasDisposesParameterTest.class).build();
     }
-    
-   @Test(groups = { "disposalMethod" })
-   @SpecAssertions({
-      @SpecAssertion(section = "3.7.1", id = "da"),
-      @SpecAssertion(section = "12.2", id="db"),
-      @SpecAssertion(section = "12.4", id= "a")
-   })
-   public void testConstructorHasDisposesParameter() throws Exception
-   {
-   }
-   
+
+    @Test(groups = { "disposalMethod" })
+    @SpecAssertions({ @SpecAssertion(section = "3.7.1", id = "da"), @SpecAssertion(section = "12.2", id = "db"),
+            @SpecAssertion(section = "12.4", id = "a") })
+    public void testConstructorHasDisposesParameter() throws Exception {
+    }
+
 }

@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.finalClass;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-final class Tuna_Broken
-{
+final class Tuna_Broken {
 
 }

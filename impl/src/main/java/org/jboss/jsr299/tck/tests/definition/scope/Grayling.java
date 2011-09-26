@@ -18,7 +18,6 @@ package org.jboss.jsr299.tck.tests.definition.scope;
 
 @RiverFishStereotype
 @FishStereotype
-public class Grayling implements Animal
-{
-   
+public class Grayling implements Animal {
+
 }

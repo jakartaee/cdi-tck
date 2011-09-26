@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.broken.type.variable;
 
-public class Sheep implements Animal
-{
+public class Sheep implements Animal {
 
 }

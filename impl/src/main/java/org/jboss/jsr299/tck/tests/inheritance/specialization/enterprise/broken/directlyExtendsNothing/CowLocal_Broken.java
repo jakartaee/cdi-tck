@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.broken.
 import javax.ejb.Local;
 
 @Local
-public interface CowLocal_Broken
-{
-   
+public interface CowLocal_Broken {
+
 }

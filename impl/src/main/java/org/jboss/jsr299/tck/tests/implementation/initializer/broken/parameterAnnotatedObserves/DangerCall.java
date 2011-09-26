@@ -16,8 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.initializer.broken.parameterAnnotatedObserves;
 
-
-public class DangerCall
-{
+public class DangerCall {
 
 }

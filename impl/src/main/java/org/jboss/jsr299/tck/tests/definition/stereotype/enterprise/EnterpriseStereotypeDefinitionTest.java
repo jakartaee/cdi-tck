@@ -27,57 +27,47 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseStereotypeDefinitionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseStereotypeDefinitionTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseStereotypeDefinitionTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseStereotypeDefinitionTest.class).build();
     }
-    
-   @Test
-   @SpecAssertion(section = "4.1", id = "am")
-   public void testStereotypeDeclaredInheritedIsInherited() throws Exception
-   {
-      assert getBeans(BorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "ama")
-   public void testStereotypeNotDeclaredInheritedIsNotInherited() throws Exception
-   {
-      assert !getBeans(BarracudaLocal.class).iterator().next().getScope().equals(RequestScoped.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "aq")
-   public void testStereotypeDeclaredInheritedIsIndirectlyInherited()
-   {
-      assert getBeans(EnglishBorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "aqa")
-   public void testStereotypeNotDeclaredInheritedIsNotIndirectlyInherited()
-   {
-      assert !getBeans(TameBarracudaLocal.class).iterator().next().getScope().equals(RequestScoped.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "hhj")
-   public void testStereotypeScopeIsOverriddenByInheritedScope()
-   {
-      assert getBeans(ChihuahuaLocal.class).iterator().next().getScope().equals(SessionScoped.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "hhk")
-   public void testStereotypeScopeIsOverriddenByIndirectlyInheritedScope()
-   {
-      assert getBeans(MexicanChihuahuaLocal.class).iterator().next().getScope().equals(SessionScoped.class);
-   }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "am")
+    public void testStereotypeDeclaredInheritedIsInherited() throws Exception {
+        assert getBeans(BorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "ama")
+    public void testStereotypeNotDeclaredInheritedIsNotInherited() throws Exception {
+        assert !getBeans(BarracudaLocal.class).iterator().next().getScope().equals(RequestScoped.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "aq")
+    public void testStereotypeDeclaredInheritedIsIndirectlyInherited() {
+        assert getBeans(EnglishBorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "aqa")
+    public void testStereotypeNotDeclaredInheritedIsNotIndirectlyInherited() {
+        assert !getBeans(TameBarracudaLocal.class).iterator().next().getScope().equals(RequestScoped.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "hhj")
+    public void testStereotypeScopeIsOverriddenByInheritedScope() {
+        assert getBeans(ChihuahuaLocal.class).iterator().next().getScope().equals(SessionScoped.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "hhk")
+    public void testStereotypeScopeIsOverriddenByIndirectlyInheritedScope() {
+        assert getBeans(MexicanChihuahuaLocal.class).iterator().next().getScope().equals(SessionScoped.class);
+    }
 }

@@ -20,7 +20,7 @@ import javax.ejb.Stateful;
 
 @Stateful
 @Airborne
-public class Missile implements MissileLocal
-{
-   public void fire() {}
+public class Missile implements MissileLocal {
+    public void fire() {
+    }
 }

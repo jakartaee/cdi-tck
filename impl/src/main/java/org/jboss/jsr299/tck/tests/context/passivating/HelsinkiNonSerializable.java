@@ -19,12 +19,10 @@ package org.jboss.jsr299.tck.tests.context.passivating;
 import javax.enterprise.inject.Alternative;
 
 @Alternative
-public class HelsinkiNonSerializable
-{
-   
-   public void ping()
-   {
-      
-   }
+public class HelsinkiNonSerializable {
+
+    public void ping() {
+
+    }
 
 }

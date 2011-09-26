@@ -21,14 +21,16 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
 /**
- * Bean with a producer field that always returns null and is not
- * in Dependent context (the produced result)
+ * Bean with a producer field that always returns null and is not in Dependent context (the produced result)
  * 
  * @author David Allen
- *
+ * 
  */
-public class NullSpiderProducer_Broken
-{
-   @Produces @RequestScoped @Null @Broken public BlackWidow produceBlackWidow = null;
+public class NullSpiderProducer_Broken {
+    @Produces
+    @RequestScoped
+    @Null
+    @Broken
+    public BlackWidow produceBlackWidow = null;
 
 }

@@ -29,75 +29,58 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class CheckTypeParametersWhenResolvingObserversTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class CheckTypeParametersWhenResolvingObserversTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(CheckTypeParametersWhenResolvingObserversTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(CheckTypeParametersWhenResolvingObserversTest.class).build();
     }
-    
-   public static class CharacterList extends ArrayList<Character>
-   {
-      private static final long serialVersionUID = 1L;
-   }
-   
-   public static class StringList extends ArrayList<String>
-   {
-      private static final long serialVersionUID = 1L;
-   }
-   
-   public static class IntegerList extends ArrayList<Integer>
-   {
-      private static final long serialVersionUID = 1L;
-   }
-   
-   public static class StringListObserver
-   {
-      public boolean wasNotified = false;
 
-      public void observer(@Observes ArrayList<String> event)
-      {
-         wasNotified = true;
-      }
-   }
+    public static class CharacterList extends ArrayList<Character> {
+        private static final long serialVersionUID = 1L;
+    }
 
-   public static class IntegerListObserver
-   {
-      public boolean wasNotified = false;
+    public static class StringList extends ArrayList<String> {
+        private static final long serialVersionUID = 1L;
+    }
 
-      public void observer(@Observes ArrayList<Integer> event)
-      {
-         wasNotified = true;
-      }
-   }
+    public static class IntegerList extends ArrayList<Integer> {
+        private static final long serialVersionUID = 1L;
+    }
 
-   @Test(groups = { "events" })
-   @SpecAssertions({
-      @SpecAssertion(section = "10.2.1", id = "b"),
-      @SpecAssertion(section = "11.3.10", id = "a")
-   })
-   public void testResolvingChecksTypeParameters()
-   {
-      assert getCurrentManager().resolveObserverMethods(new StringList()).size() == 1;
-      assert getCurrentManager().resolveObserverMethods(new IntegerList()).size() == 1;
-      assert getCurrentManager().resolveObserverMethods(new CharacterList()).size() == 0;
-   }
-   
-   @Test(groups = { "events" })
-   @SpecAssertions({
-      @SpecAssertion(section = "10.2.1", id = "a"),
-      @SpecAssertion(section = "10.4", id = "aa")
-      // FIXME also 10.3.1, which does not yet have spec assertions cataloged
-   })
-   public void testResolvingChecksTypeParametersOnObservesMethod()
-   {
-      Foo<String> fooEvent = new Foo<String>() {};
-      getCurrentManager().fireEvent(fooEvent);
-      assert fooEvent.isObserved();
-   }
+    public static class StringListObserver {
+        public boolean wasNotified = false;
+
+        public void observer(@Observes ArrayList<String> event) {
+            wasNotified = true;
+        }
+    }
+
+    public static class IntegerListObserver {
+        public boolean wasNotified = false;
+
+        public void observer(@Observes ArrayList<Integer> event) {
+            wasNotified = true;
+        }
+    }
+
+    @Test(groups = { "events" })
+    @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "b"), @SpecAssertion(section = "11.3.10", id = "a") })
+    public void testResolvingChecksTypeParameters() {
+        assert getCurrentManager().resolveObserverMethods(new StringList()).size() == 1;
+        assert getCurrentManager().resolveObserverMethods(new IntegerList()).size() == 1;
+        assert getCurrentManager().resolveObserverMethods(new CharacterList()).size() == 0;
+    }
+
+    @Test(groups = { "events" })
+    @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "a"), @SpecAssertion(section = "10.4", id = "aa")
+    // FIXME also 10.3.1, which does not yet have spec assertions cataloged
+    })
+    public void testResolvingChecksTypeParametersOnObservesMethod() {
+        Foo<String> fooEvent = new Foo<String>() {
+        };
+        getCurrentManager().fireEvent(fooEvent);
+        assert fooEvent.isObserved();
+    }
 }

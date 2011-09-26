@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
-public class InfertileChicken extends Chicken
-{
-   
+public class InfertileChicken extends Chicken {
+
 }

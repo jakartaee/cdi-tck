@@ -20,14 +20,13 @@ import javax.ejb.Local;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Local
-public interface PigSty
-{
-   
-   public static final String MESSAGE = "smelly work!";
+public interface PigSty {
 
-   public void clean();
+    public static final String MESSAGE = "smelly work!";
+
+    public void clean();
 
 }

@@ -27,11 +27,9 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-
 @Qualifier
-@Target( { FIELD, PARAMETER, METHOD, TYPE })
+@Target({ FIELD, PARAMETER, METHOD, TYPE })
 @Retention(RUNTIME)
-public @interface British
-{
+public @interface British {
 
 }

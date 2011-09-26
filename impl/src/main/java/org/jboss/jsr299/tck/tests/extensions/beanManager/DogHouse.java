@@ -18,13 +18,11 @@ package org.jboss.jsr299.tck.tests.extensions.beanManager;
 
 import javax.inject.Inject;
 
-public class DogHouse
-{
-   @Inject
-   private Terrier dog;
+public class DogHouse {
+    @Inject
+    private Terrier dog;
 
-   public Terrier getDog()
-   {
-      return dog;
-   }
+    public Terrier getDog() {
+        return dog;
+    }
 }

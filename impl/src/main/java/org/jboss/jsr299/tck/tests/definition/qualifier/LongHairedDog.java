@@ -16,8 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
-@Hairy(clipped=false)
-public class LongHairedDog
-{
-   
+@Hairy(clipped = false)
+public class LongHairedDog {
+
 }

@@ -16,10 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.custom.broken.finalBeanClass;
 
-final class Bus implements Vehicle
-{
+final class Bus implements Vehicle {
 
-   public void start()
-   {
-   }
+    public void start() {
+    }
 }

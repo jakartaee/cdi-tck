@@ -23,20 +23,17 @@ import javax.inject.Inject;
  * Test bean to inject a bean using injection point metadata into a constructor
  * 
  * @author David Allen
- *
+ * 
  */
-public class MethodInjectionPointBean
-{
-   private BeanWithInjectionPointMetadata injectedBean;
+public class MethodInjectionPointBean {
+    private BeanWithInjectionPointMetadata injectedBean;
 
-   @Inject
-   public void methodWithInjectedMetadata(BeanWithInjectionPointMetadata injectedBean)
-   {
-      this.injectedBean = injectedBean;
-   }
-   
-   public BeanWithInjectionPointMetadata getInjectedBean()
-   {
-      return injectedBean;
-   }
+    @Inject
+    public void methodWithInjectedMetadata(BeanWithInjectionPointMetadata injectedBean) {
+        this.injectedBean = injectedBean;
+    }
+
+    public BeanWithInjectionPointMetadata getInjectedBean() {
+        return injectedBean;
+    }
 }

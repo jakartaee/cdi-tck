@@ -16,12 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 
-public class Van_Broken
-{
-   
-   public Van_Broken()
-   {
-      throw new FooException();
-   }
-   
+public class Van_Broken {
+
+    public Van_Broken() {
+        throw new FooException();
+    }
+
 }

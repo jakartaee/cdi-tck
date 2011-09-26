@@ -25,11 +25,10 @@ import static java.lang.annotation.ElementType.METHOD;
 
 import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD})
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented
 @InterceptorBinding
-public @interface Airborne
-{
+public @interface Airborne {
 
 }

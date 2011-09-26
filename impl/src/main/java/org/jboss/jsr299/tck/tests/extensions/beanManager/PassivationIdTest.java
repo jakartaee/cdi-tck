@@ -28,30 +28,24 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests retrieving beans with the BeanManager by the ID for a passivation-capable
- * bean.
+ * Tests retrieving beans with the BeanManager by the ID for a passivation-capable bean.
  * 
  * @author David Allen
- *
+ * 
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class PassivationIdTest extends AbstractJSR299Test
-{
-    
-   @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(PassivationIdTest.class)
-           .withExtension("javax.enterprise.inject.spi.Extension")
-           .build();
-   }
-    
-   @Test
-   @SpecAssertion(section = "11.3.6", id = "a")
-   public void testGetPassivationCapableBeanById()
-   {
-      Bean<?> passivatingBean = getCurrentManager().getPassivationCapableBean(CowBean.PASSIVATION_ID);
-      assert passivatingBean.getBeanClass().equals(Cow.class);
-   }
+@SpecVersion(spec = "cdi", version = "20091101")
+public class PassivationIdTest extends AbstractJSR299Test {
+
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(PassivationIdTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
+    }
+
+    @Test
+    @SpecAssertion(section = "11.3.6", id = "a")
+    public void testGetPassivationCapableBeanById() {
+        Bean<?> passivatingBean = getCurrentManager().getPassivationCapableBean(CowBean.PASSIVATION_ID);
+        assert passivatingBean.getBeanClass().equals(Cow.class);
+    }
 }

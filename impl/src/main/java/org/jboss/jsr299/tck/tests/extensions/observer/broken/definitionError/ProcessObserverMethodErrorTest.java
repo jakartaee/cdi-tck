@@ -32,24 +32,19 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ProcessObserverMethodErrorTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ProcessObserverMethodErrorTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ProcessObserverMethodErrorTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ProcessObserverMethodErrorTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "11.5.9", id = "da")
-   public void testAddDefinitionError()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "11.5.9", id = "da")
+    public void testAddDefinitionError() {
+    }
 
 }

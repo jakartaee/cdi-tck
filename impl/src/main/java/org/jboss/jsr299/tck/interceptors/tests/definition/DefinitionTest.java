@@ -25,20 +25,16 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "3.1.PFD")
-public class DefinitionTest extends AbstractJSR299Test
-{
-    
+public class DefinitionTest extends AbstractJSR299Test {
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DefinitionTest.class)
-            .build();
+        return new WebArchiveBuilder().withTestClassPackage(DefinitionTest.class).build();
     }
-    
-   @Test
-   @SpecAssertion(section = "1", id = "a")
-   public void testInterceptorMethodDefinedOnTargetClass()
-   {
-      assert getInstanceByType(ClassWithAroundInvokeMethod.class).foo().equals("barbar");
-   }
+
+    @Test
+    @SpecAssertion(section = "1", id = "a")
+    public void testInterceptorMethodDefinedOnTargetClass() {
+        assert getInstanceByType(ClassWithAroundInvokeMethod.class).foo().equals("barbar");
+    }
 }

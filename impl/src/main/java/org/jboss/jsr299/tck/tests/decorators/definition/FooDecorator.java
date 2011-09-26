@@ -23,17 +23,18 @@ import javax.inject.Inject;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
 @Meta
-public class FooDecorator extends AbstractFooDecorator implements Foo, Bar
-{
+public class FooDecorator extends AbstractFooDecorator implements Foo, Bar {
 
-   /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -2253839366401409666L;
-	@Inject @Delegate FooBar foobar;
+    private static final long serialVersionUID = -2253839366401409666L;
+    @Inject
+    @Delegate
+    FooBar foobar;
 
 }

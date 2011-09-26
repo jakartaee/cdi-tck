@@ -16,9 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.decorator;
 
-public class Cat implements Animal
-{
-   public String hello() {
-      return "hello";
-   }
+public class Cat implements Animal {
+    public String hello() {
+        return "hello";
+    }
 }

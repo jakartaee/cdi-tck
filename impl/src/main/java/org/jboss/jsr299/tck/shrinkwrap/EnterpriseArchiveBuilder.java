@@ -23,18 +23,15 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
  * 
  * @author Martin Kouba
  */
-public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBuilder, EnterpriseArchive>
-{
+public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBuilder, EnterpriseArchive> {
 
     @Override
-    public EnterpriseArchiveBuilder self()
-    {
+    public EnterpriseArchiveBuilder self() {
         return this;
     }
 
     @Override
-    public EnterpriseArchive buildInternal()
-    {
+    public EnterpriseArchive buildInternal() {
         EnterpriseArchive enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, "test.ear");
 
         // EJB module - contains test package
@@ -47,11 +44,9 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         processLibraries(enterpriseArchive);
 
         // Add beans.xml to META-INF
-        if (beansXml != null)
-        {
+        if (beansXml != null) {
             ejbArchive.addAsManifestResource(beansXml.getSource(), beansXml.getTarget());
-        } else
-        {
+        } else {
             ejbArchive.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
         }
 

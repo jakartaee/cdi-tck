@@ -23,53 +23,46 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
-public class SpiderProducer
-{
-   @Inject
-   private BeanManager beanManager;
-   
-   private static boolean dependentContextActive = false;
-   private static boolean destroyed = false;
-   private static SpiderProducer instanceUsedForDisposal = null;
+public class SpiderProducer {
+    @Inject
+    private BeanManager beanManager;
 
+    private static boolean dependentContextActive = false;
+    private static boolean destroyed = false;
+    private static SpiderProducer instanceUsedForDisposal = null;
 
-   @Produces @Pet public Tarantula produceTarantula(Tarantula spider, DomesticationKit domesticationKit)
-   {
-      dependentContextActive = beanManager.getContext(Dependent.class).isActive();
-      return spider;
-   }
+    @Produces
+    @Pet
+    public Tarantula produceTarantula(Tarantula spider, DomesticationKit domesticationKit) {
+        dependentContextActive = beanManager.getContext(Dependent.class).isActive();
+        return spider;
+    }
 
-   public void disposeTarantula(@Disposes @Pet Tarantula tarantula, Fox fox)
-   {
-      dependentContextActive = beanManager.getContext(Dependent.class).isActive();
-      instanceUsedForDisposal = this;
-   }
+    public void disposeTarantula(@Disposes @Pet Tarantula tarantula, Fox fox) {
+        dependentContextActive = beanManager.getContext(Dependent.class).isActive();
+        instanceUsedForDisposal = this;
+    }
 
-   public static boolean isDependentContextActive()
-   {
-      return dependentContextActive;
-   }
+    public static boolean isDependentContextActive() {
+        return dependentContextActive;
+    }
 
-   public static SpiderProducer getInstanceUsedForDisposal()
-   {
-      return instanceUsedForDisposal;
-   }
-   
-   public static boolean isDestroyed()
-   {
-      return destroyed;
-   }
+    public static SpiderProducer getInstanceUsedForDisposal() {
+        return instanceUsedForDisposal;
+    }
 
-   public static void reset()
-   {
-     destroyed = false;
-     dependentContextActive = false;
-     instanceUsedForDisposal = null;
-   }
-   
-   @PreDestroy
-   public void destroy()
-   {
-      destroyed = true;
-   }
+    public static boolean isDestroyed() {
+        return destroyed;
+    }
+
+    public static void reset() {
+        destroyed = false;
+        dependentContextActive = false;
+        instanceUsedForDisposal = null;
+    }
+
+    @PreDestroy
+    public void destroy() {
+        destroyed = true;
+    }
 }

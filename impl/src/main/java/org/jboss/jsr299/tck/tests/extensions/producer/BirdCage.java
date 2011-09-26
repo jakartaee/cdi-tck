@@ -18,8 +18,7 @@ package org.jboss.jsr299.tck.tests.extensions.producer;
 
 import javax.inject.Inject;
 
-public class BirdCage
-{
-   @Inject
-   protected Bird bird;
+public class BirdCage {
+    @Inject
+    protected Bird bird;
 }

@@ -20,49 +20,43 @@ import javax.inject.Inject;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class MockLogger implements Logger
-{
+public class MockLogger implements Logger {
 
-   @Inject
-   public void initialize()
-   {
-      initializeCalled = true;
-   }
-   
-   private static String message = "";
-   
-   private static boolean initializeCalled;
+    @Inject
+    public void initialize() {
+        initializeCalled = true;
+    }
 
-   public void log(String string)
-   {
-      message = string;
-   }
+    private static String message = "";
 
-   /**
-    * @return the log
-    */
-   public static String getMessage()
-   {
-      return message;
-   }
-   
-   /**
-    * @param log the log to set
-    */
-   public static void reset()
-   {
-      MockLogger.message = null;
-      initializeCalled = false;
-   }
-   
-   /**
-    * @return the initializeCalled
-    */
-   public static boolean isInitializeCalled()
-   {
-      return initializeCalled;
-   }
+    private static boolean initializeCalled;
+
+    public void log(String string) {
+        message = string;
+    }
+
+    /**
+     * @return the log
+     */
+    public static String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param log the log to set
+     */
+    public static void reset() {
+        MockLogger.message = null;
+        initializeCalled = false;
+    }
+
+    /**
+     * @return the initializeCalled
+     */
+    public static boolean isInitializeCalled() {
+        return initializeCalled;
+    }
 
 }

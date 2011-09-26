@@ -22,28 +22,25 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
-public class Farm
-{
-   
-   public Date founded;
-   public Date closed;
-   public int initialStaff;
-   public String location;
-   
-   @Inject
-   FarmOffice farmOffice;
-   
-   @PostConstruct
-   protected void postConstruct() 
-   {
-      founded = new Date();
-      initialStaff = farmOffice.noOfStaff;
-   }
-   
-   @PreDestroy
-   protected void preDestroy() 
-   {
-      closed = new Date();
-   }
-   
+public class Farm {
+
+    public Date founded;
+    public Date closed;
+    public int initialStaff;
+    public String location;
+
+    @Inject
+    FarmOffice farmOffice;
+
+    @PostConstruct
+    protected void postConstruct() {
+        founded = new Date();
+        initialStaff = farmOffice.noOfStaff;
+    }
+
+    @PreDestroy
+    protected void preDestroy() {
+        closed = new Date();
+    }
+
 }

@@ -16,12 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.lifecycle;
 
-public class User
-{
+public class User {
 
-   public boolean hasPermission(String action, Class<?> type, Object id)
-   {
-      return false;
-   }
+    public boolean hasPermission(String action, Class<?> type, Object id) {
+        return false;
+    }
 
 }

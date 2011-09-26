@@ -24,39 +24,34 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @SessionScoped
-@Named("Charlie") @Default
-public class InitializerSimpleBean implements Serializable
-{
-   
-   private static final long serialVersionUID = 1L;
-   private static int initializerCalls = 0;
+@Named("Charlie")
+@Default
+public class InitializerSimpleBean implements Serializable {
 
-   @Inject
-   protected Order order;
+    private static final long serialVersionUID = 1L;
+    private static int initializerCalls = 0;
 
-   @Inject
-   public void initializer()
-   {
-      initializerCalls++;
-   }
+    @Inject
+    protected Order order;
 
-   public void businessMethod()
-   {
-      
-   }
-   
-   public Order getOrder()
-   {
-      return order;
-   }
+    @Inject
+    public void initializer() {
+        initializerCalls++;
+    }
 
-   public static int getInitializerCalls()
-   {
-      return initializerCalls;
-   }
+    public void businessMethod() {
 
-   public static void setInitializerCalls(int initializerCalls)
-   {
-      InitializerSimpleBean.initializerCalls = initializerCalls;
-   }
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public static int getInitializerCalls() {
+        return initializerCalls;
+    }
+
+    public static void setInitializerCalls(int initializerCalls) {
+        InitializerSimpleBean.initializerCalls = initializerCalls;
+    }
 }

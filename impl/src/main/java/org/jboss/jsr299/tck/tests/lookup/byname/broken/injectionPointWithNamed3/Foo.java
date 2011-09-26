@@ -19,11 +19,9 @@ package org.jboss.jsr299.tck.tests.lookup.byname.broken.injectionPointWithNamed3
 import javax.inject.Inject;
 import javax.inject.Named;
 
-public class Foo
-{
-   @Inject
-   public void initialize(@Named Bar bar)
-   {
-      
-   }
+public class Foo {
+    @Inject
+    public void initialize(@Named Bar bar) {
+
+    }
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.observer.broken.exception;
 
-public class EventC
-{
+public class EventC {
 
 }

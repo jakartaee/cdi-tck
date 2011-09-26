@@ -24,9 +24,8 @@ import javax.interceptor.Interceptors;
 @Stateful
 @SessionScoped
 @Interceptors(BrokenDecorator.class)
-public class Espoo_Broken implements EspooLocal_Broken
-{  
-   @Remove
-   public void bye() {
-   }
+public class Espoo_Broken implements EspooLocal_Broken {
+    @Remove
+    public void bye() {
+    }
 }

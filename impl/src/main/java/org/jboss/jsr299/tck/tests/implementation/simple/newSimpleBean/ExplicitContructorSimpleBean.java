@@ -24,35 +24,31 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @SessionScoped
-@Named("Fred") @Default
-public class ExplicitContructorSimpleBean implements Serializable
-{
-   private static final long serialVersionUID = 1L;
-   private static int constructorCalls = 0;
-   
-   public ExplicitContructorSimpleBean() {
-      
-   }
-   
-   @Inject
-   public ExplicitContructorSimpleBean(Shop shop)
-   {
-      constructorCalls++;
-   }
-   
-   public void ping()
-   {
-      
-   }
+@Named("Fred")
+@Default
+public class ExplicitContructorSimpleBean implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private static int constructorCalls = 0;
 
-   public static int getConstructorCalls()
-   {
-      return constructorCalls;
-   }
+    public ExplicitContructorSimpleBean() {
 
-   public static void setConstructorCalls(int constructorCalls)
-   {
-      ExplicitContructorSimpleBean.constructorCalls = constructorCalls;
-   }
+    }
+
+    @Inject
+    public ExplicitContructorSimpleBean(Shop shop) {
+        constructorCalls++;
+    }
+
+    public void ping() {
+
+    }
+
+    public static int getConstructorCalls() {
+        return constructorCalls;
+    }
+
+    public static void setConstructorCalls(int constructorCalls) {
+        ExplicitContructorSimpleBean.constructorCalls = constructorCalls;
+    }
 
 }

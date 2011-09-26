@@ -31,34 +31,27 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests a custom injection point that resolves to two different bean instances
- * which should always result in an exception.
+ * Tests a custom injection point that resolves to two different bean instances which should always result in an exception.
  * 
  * @author David Allen
- *
+ * 
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class AmbiguousInjectableReferenceTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class AmbiguousInjectableReferenceTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(AmbiguousInjectableReferenceTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(AmbiguousInjectableReferenceTest.class).build();
     }
-    
-   @SuppressWarnings("unchecked")
-   @Test(expectedExceptions = AmbiguousResolutionException.class)
-   @SpecAssertions({
-      @SpecAssertion(section = "11.3.2", id = "bc")
-   })
-   public void testUnsatisfiedReference()
-   {
-      Bean<SimpleBean> bean = this.getBeans(SimpleBean.class).iterator().next();
-      AmbiguousInjectionPoint injectionPoint = new AmbiguousInjectionPoint(bean);
-      CreationalContext<SimpleBean> creationalContext = getCurrentManager().createCreationalContext((Bean<SimpleBean>)injectionPoint.getBean());
-      getCurrentManager().getInjectableReference(injectionPoint, creationalContext);
-   }
+
+    @SuppressWarnings("unchecked")
+    @Test(expectedExceptions = AmbiguousResolutionException.class)
+    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "bc") })
+    public void testUnsatisfiedReference() {
+        Bean<SimpleBean> bean = this.getBeans(SimpleBean.class).iterator().next();
+        AmbiguousInjectionPoint injectionPoint = new AmbiguousInjectionPoint(bean);
+        CreationalContext<SimpleBean> creationalContext = getCurrentManager().createCreationalContext(
+                (Bean<SimpleBean>) injectionPoint.getBean());
+        getCurrentManager().getInjectableReference(injectionPoint, creationalContext);
+    }
 }

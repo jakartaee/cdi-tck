@@ -19,15 +19,14 @@ package org.jboss.jsr299.tck.tests.context.application.ejb;
 import javax.ejb.Local;
 
 @Local
-public interface FMS
-{
-   
-   public void climb() throws Exception;
-   
-   public void descend() throws Exception;
-   
-   public boolean isSameBean();
-   
-   public boolean isApplicationScopeActive();
-   
+public interface FMS {
+
+    public void climb() throws Exception;
+
+    public void descend() throws Exception;
+
+    public boolean isSameBean();
+
+    public boolean isApplicationScopeActive();
+
 }

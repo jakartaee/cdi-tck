@@ -22,21 +22,21 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
-public class Generator implements Serializable
-{
-   
-   private static final long serialVersionUID = -7213673465118041882L;
-   
-   private int number = 100;
-   
-   @Produces int getNumber()
-   {
-      return number;
-   }
-   
-   @Produces @Sleeping SerializableCity getCity()
-   {
-      return new SerializableCity();
-   }
+public class Generator implements Serializable {
+
+    private static final long serialVersionUID = -7213673465118041882L;
+
+    private int number = 100;
+
+    @Produces
+    int getNumber() {
+        return number;
+    }
+
+    @Produces
+    @Sleeping
+    SerializableCity getCity() {
+        return new SerializableCity();
+    }
 
 }

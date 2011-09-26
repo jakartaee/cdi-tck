@@ -22,13 +22,16 @@ import javax.inject.Inject;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
-public abstract class TimestampLogger implements Logger
-{
+public abstract class TimestampLogger implements Logger {
 
-   @Inject @Delegate Logger logger;
-   @Inject @Delegate Logger logger2;
+    @Inject
+    @Delegate
+    Logger logger;
+    @Inject
+    @Delegate
+    Logger logger2;
 
 }

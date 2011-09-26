@@ -23,9 +23,8 @@ import javax.ejb.Local;
  * @author Marius Bogoevici
  */
 @Local
-public interface ServiceBean
-{
-   public boolean validateEntityManager();
+public interface ServiceBean {
+    public boolean validateEntityManager();
 
-   public ManagedBean getManagedBean();
+    public ManagedBean getManagedBean();
 }

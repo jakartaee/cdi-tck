@@ -23,9 +23,8 @@ import java.util.Set;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Field
-{
-   public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(Field.class));
+public interface Field {
+    public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(Field.class));
 }

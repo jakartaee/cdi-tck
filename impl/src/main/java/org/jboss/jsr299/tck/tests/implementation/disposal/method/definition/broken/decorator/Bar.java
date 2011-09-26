@@ -18,17 +18,14 @@ package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.bro
 
 import javax.enterprise.inject.Produces;
 
-public class Bar implements Foo
-{
+public class Bar implements Foo {
 
-   public boolean foo()
-   {
-      return false;
-   }
-   
-   @Produces
-   public Integer produce()
-   {
-      return 0;
-   }
+    public boolean foo() {
+        return false;
+    }
+
+    @Produces
+    public Integer produce() {
+        return 0;
+    }
 }

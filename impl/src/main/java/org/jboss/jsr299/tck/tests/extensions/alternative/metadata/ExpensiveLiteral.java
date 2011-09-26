@@ -18,6 +18,5 @@ package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import javax.enterprise.util.AnnotationLiteral;
 
-public class ExpensiveLiteral extends AnnotationLiteral<Expensive> implements Expensive
-{
+public class ExpensiveLiteral extends AnnotationLiteral<Expensive> implements Expensive {
 }

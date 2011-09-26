@@ -30,38 +30,32 @@ import org.testng.annotations.Test;
  * @author Shane Bryzak
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseEventInheritenceTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseEventInheritenceTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseEventInheritenceTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseEventInheritenceTest.class).build();
     }
-    
-   @Test(groups = { "events", "inheritance" })
-   @SpecAssertion(section = "4.2", id = "df")
-   public void testNonStaticObserverMethodInherited() throws Exception
-   {
-      Egg egg = new Egg();
-      getCurrentManager().fireEvent(egg);
-      assert egg.getVisited().size() == 2;
-      assert egg.getVisited().contains(Farmer.class.getSimpleName());
-      assert egg.getVisited().contains(LazyFarmer.class.getSimpleName());
-   }
-   
-   @Test(groups = { "events", "inheritance" })
-   @SpecAssertion(section = "4.2", id = "dl")
-   public void testNonStaticObserverMethodIndirectlyInherited() throws Exception
-   {
-      StockPrice stockPrice = new StockPrice();
-      getCurrentManager().fireEvent(stockPrice);
-      assert stockPrice.getVisited().size() == 3;
-      assert stockPrice.getVisited().contains(StockWatcher.class.getSimpleName());
-      assert stockPrice.getVisited().contains(IntermediateStockWatcher.class.getSimpleName());
-      assert stockPrice.getVisited().contains(IndirectStockWatcher.class.getSimpleName());
-   }
+
+    @Test(groups = { "events", "inheritance" })
+    @SpecAssertion(section = "4.2", id = "df")
+    public void testNonStaticObserverMethodInherited() throws Exception {
+        Egg egg = new Egg();
+        getCurrentManager().fireEvent(egg);
+        assert egg.getVisited().size() == 2;
+        assert egg.getVisited().contains(Farmer.class.getSimpleName());
+        assert egg.getVisited().contains(LazyFarmer.class.getSimpleName());
+    }
+
+    @Test(groups = { "events", "inheritance" })
+    @SpecAssertion(section = "4.2", id = "dl")
+    public void testNonStaticObserverMethodIndirectlyInherited() throws Exception {
+        StockPrice stockPrice = new StockPrice();
+        getCurrentManager().fireEvent(stockPrice);
+        assert stockPrice.getVisited().size() == 3;
+        assert stockPrice.getVisited().contains(StockWatcher.class.getSimpleName());
+        assert stockPrice.getVisited().contains(IntermediateStockWatcher.class.getSimpleName());
+        assert stockPrice.getVisited().contains(IndirectStockWatcher.class.getSimpleName());
+    }
 }

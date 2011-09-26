@@ -18,10 +18,9 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.normalScope;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @EpochScoped
-public final class RomanEmpire
-{
+public final class RomanEmpire {
 
 }

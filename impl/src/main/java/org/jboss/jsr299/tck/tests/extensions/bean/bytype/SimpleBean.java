@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.bean.bytype;
 
-public class SimpleBean
-{
+public class SimpleBean {
 
 }

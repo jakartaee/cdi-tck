@@ -32,26 +32,19 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class InjectionTargetDefinitionErrorTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InjectionTargetDefinitionErrorTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        //  Originally EAR but no enterprise feature used
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InjectionTargetDefinitionErrorTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        // Originally EAR but no enterprise feature used
+        return new WebArchiveBuilder().withTestClassPackage(InjectionTargetDefinitionErrorTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.6", id = "da")
-   })
-   public void testAddingDefinitionError()
-   {
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "da") })
+    public void testAddingDefinitionError() {
+    }
 }

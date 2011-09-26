@@ -34,40 +34,29 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ProcessSessionBeanTest extends AbstractJSR299Test
-{
-   
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ProcessSessionBeanTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(ProcessSessionBeanTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(ProcessSessionBeanTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.8", id = "c"),
-      @SpecAssertion(section = "11.5.8", id = "edb"),
-      @SpecAssertion(section = "11.5.8", id = "efb"),
-      @SpecAssertion(section = "11.5.8", id = "fb"),
-      @SpecAssertion(section = "11.5.8", id = "hb"),
-      @SpecAssertion(section = "11.5.8", id = "hc"),
-      @SpecAssertion(section = "11.5.8", id = "m"),
-      @SpecAssertion(section = "11.5.8", id = "k"),
-      @SpecAssertion(section = "12.3", id = "fb")
-   })
-   public void testProcessSessionBeanEvent()
-   {
-      assert ProcessBeanObserver.getElephantProcessSessionBean().getBean().getBeanClass().equals(Elephant.class);
-      assert ProcessBeanObserver.getElephantProcessBeanCount() == 0;
-      assert ProcessBeanObserver.getElephantProcessSessionBean().getEjbName().equals("Rosie");
-      assert ProcessBeanObserver.getElephantProcessSessionBean().getSessionBeanType().equals(SessionBeanType.STATELESS);
-      assert ProcessBeanObserver.getElephantProcessSessionBean().getAnnotated() instanceof AnnotatedType<?>;
-      assert ProcessBeanObserver.getElephantProcessSessionBean().getAnnotatedBeanClass().getBaseType().equals(Elephant.class);
-      assert ProcessBeanObserver.getElephantProcessSessionBean().getAnnotatedBeanClass().getBaseType().equals(Elephant.class);
-   }
-   
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "c"), @SpecAssertion(section = "11.5.8", id = "edb"),
+            @SpecAssertion(section = "11.5.8", id = "efb"), @SpecAssertion(section = "11.5.8", id = "fb"),
+            @SpecAssertion(section = "11.5.8", id = "hb"), @SpecAssertion(section = "11.5.8", id = "hc"),
+            @SpecAssertion(section = "11.5.8", id = "m"), @SpecAssertion(section = "11.5.8", id = "k"),
+            @SpecAssertion(section = "12.3", id = "fb") })
+    public void testProcessSessionBeanEvent() {
+        assert ProcessBeanObserver.getElephantProcessSessionBean().getBean().getBeanClass().equals(Elephant.class);
+        assert ProcessBeanObserver.getElephantProcessBeanCount() == 0;
+        assert ProcessBeanObserver.getElephantProcessSessionBean().getEjbName().equals("Rosie");
+        assert ProcessBeanObserver.getElephantProcessSessionBean().getSessionBeanType().equals(SessionBeanType.STATELESS);
+        assert ProcessBeanObserver.getElephantProcessSessionBean().getAnnotated() instanceof AnnotatedType<?>;
+        assert ProcessBeanObserver.getElephantProcessSessionBean().getAnnotatedBeanClass().getBaseType().equals(Elephant.class);
+        assert ProcessBeanObserver.getElephantProcessSessionBean().getAnnotatedBeanClass().getBaseType().equals(Elephant.class);
+    }
+
 }

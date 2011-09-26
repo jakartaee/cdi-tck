@@ -39,136 +39,116 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> extends AbstractJSR299Test
-{
-   
-   private final TypeLiteral<Bar<T>> BAR_TYPE_VARIABLE_LITERAL = new TypeLiteral<Bar<T>>() {};
-   private final TypeLiteral<Baz<T>> BAZ_TYPE_VARIABLE_LITERAL = new TypeLiteral<Baz<T>>() {};
-   private final TypeLiteral<Foo<T>> FOO_TYPE_VARIABLE_LITERAL = new TypeLiteral<Foo<T>>() {};
-   private final TypeLiteral<Foo<Object>> FOO_OBJECT_LITERAL = new TypeLiteral<Foo<Object>>() {};
-   private final TypeLiteral<Qux<String>> QUX_STRING_LITERAL = new TypeLiteral<Qux<String>>() {};
-   private final TypeLiteral<Qux<List<String>>> QUX_STRING_LIST_LITERAL = new TypeLiteral<Qux<List<String>>>() {};
-   private final TypeLiteral<Grault<Integer>> GRAULT_INTEGER_LITERAL = new TypeLiteral<Grault<Integer>>() {};
-   private final TypeLiteral<Corge<C, C>> CORGE_TYPE_VARIABLE_EXTENDS_COW_LITERAL = new TypeLiteral<Corge<C, C>>(){};
-   private final TypeLiteral<Garply<F>> GARPLY_EXTENDS_FRESIAN_COW_LITERAL = new TypeLiteral<Garply<F>>() {};
-   private final TypeLiteral<Garply<Cow>> GARPLY_COW_LITERAL = new TypeLiteral<Garply<Cow>>() {};
-   
-   @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(DecoratorResolutionTest.class)
-           .withBeansXml("beans.xml")
-           .build();
-   }
-   
-   private static boolean decoratorCollectionMatches(Collection<Decorator<?>> decorators, Class<?>... types)
-   {
-      Set<Class<?>> typeSet = new HashSet<Class<?>>(Arrays.asList(types));
-      for (Decorator<?> decorator : decorators)
-      {
-         typeSet.remove(decorator.getBeanClass());
-      }
-      return typeSet.isEmpty();
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "8.3.1", id="aa")
-   })
-   
-   public void testUnboundedTypeVariables()
-   {
-      List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(BAR_TYPE_VARIABLE_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators, BarDecorator.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "8.3.1", id="ab")
-   })
-   
-   public void testObject()
-   {
-      List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(BAZ_TYPE_VARIABLE_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators, BazDecorator.class);
-   }
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> extends AbstractJSR299Test {
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "8.3.1", id="ac")
-   })
-   
-   public void testUnboundedTypeVariablesAndObject()
-   {
-      List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(FOO_TYPE_VARIABLE_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators, FooDecorator.class, FooObjectDecorator.class);
-      List<Decorator<?>> decorators1 = getCurrentManager().resolveDecorators(Collections.singleton(FOO_OBJECT_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators1, FooDecorator.class, FooObjectDecorator.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "8.3.1", id="c")
-   })
-   
-   public void testIdenticalTypeParamerters()
-   {
-      List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(QUX_STRING_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators, QuxDecorator.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "8.3.1", id="d")
-   })
-   
-   public void testNestedIdenticalTypeParamerters()
-   {
-      List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(QUX_STRING_LIST_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators, QuxListDecorator.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "8.3.1", id="e")
-   })
-   public void testDelegateWildcardBeanActualType()
-   {
-      List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(GRAULT_INTEGER_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators, GraultExtendsDecorator.class, GraultSuperDecorator.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "8.3.1", id="f")
-   })
-   public void testDelegateWildcardBeanTypeVariable()
-   {
-      List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(CORGE_TYPE_VARIABLE_EXTENDS_COW_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators, CorgeDecorator.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "8.3.1", id="g")
-   })
-   public void testDelegateTypeVariableBeanTypeVariable()
-   {
-      List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(GARPLY_EXTENDS_FRESIAN_COW_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators, GarplyDecorator.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "8.3.1", id="h")
-   })
-   public void testDelegateTypeVariableBeanActualType()
-   {
-      List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(GARPLY_COW_LITERAL.getType()));
-      assert decoratorCollectionMatches(decorators, GarplyDecorator.class);
-   }
-   
-   
+    private final TypeLiteral<Bar<T>> BAR_TYPE_VARIABLE_LITERAL = new TypeLiteral<Bar<T>>() {
+    };
+    private final TypeLiteral<Baz<T>> BAZ_TYPE_VARIABLE_LITERAL = new TypeLiteral<Baz<T>>() {
+    };
+    private final TypeLiteral<Foo<T>> FOO_TYPE_VARIABLE_LITERAL = new TypeLiteral<Foo<T>>() {
+    };
+    private final TypeLiteral<Foo<Object>> FOO_OBJECT_LITERAL = new TypeLiteral<Foo<Object>>() {
+    };
+    private final TypeLiteral<Qux<String>> QUX_STRING_LITERAL = new TypeLiteral<Qux<String>>() {
+    };
+    private final TypeLiteral<Qux<List<String>>> QUX_STRING_LIST_LITERAL = new TypeLiteral<Qux<List<String>>>() {
+    };
+    private final TypeLiteral<Grault<Integer>> GRAULT_INTEGER_LITERAL = new TypeLiteral<Grault<Integer>>() {
+    };
+    private final TypeLiteral<Corge<C, C>> CORGE_TYPE_VARIABLE_EXTENDS_COW_LITERAL = new TypeLiteral<Corge<C, C>>() {
+    };
+    private final TypeLiteral<Garply<F>> GARPLY_EXTENDS_FRESIAN_COW_LITERAL = new TypeLiteral<Garply<F>>() {
+    };
+    private final TypeLiteral<Garply<Cow>> GARPLY_COW_LITERAL = new TypeLiteral<Garply<Cow>>() {
+    };
+
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DecoratorResolutionTest.class).withBeansXml("beans.xml").build();
+    }
+
+    private static boolean decoratorCollectionMatches(Collection<Decorator<?>> decorators, Class<?>... types) {
+        Set<Class<?>> typeSet = new HashSet<Class<?>>(Arrays.asList(types));
+        for (Decorator<?> decorator : decorators) {
+            typeSet.remove(decorator.getBeanClass());
+        }
+        return typeSet.isEmpty();
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "aa") })
+    public void testUnboundedTypeVariables() {
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.singleton(BAR_TYPE_VARIABLE_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators, BarDecorator.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "ab") })
+    public void testObject() {
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.singleton(BAZ_TYPE_VARIABLE_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators, BazDecorator.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "ac") })
+    public void testUnboundedTypeVariablesAndObject() {
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.singleton(FOO_TYPE_VARIABLE_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators, FooDecorator.class, FooObjectDecorator.class);
+        List<Decorator<?>> decorators1 = getCurrentManager().resolveDecorators(
+                Collections.singleton(FOO_OBJECT_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators1, FooDecorator.class, FooObjectDecorator.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "c") })
+    public void testIdenticalTypeParamerters() {
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.singleton(QUX_STRING_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators, QuxDecorator.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "d") })
+    public void testNestedIdenticalTypeParamerters() {
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.singleton(QUX_STRING_LIST_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators, QuxListDecorator.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "e") })
+    public void testDelegateWildcardBeanActualType() {
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.singleton(GRAULT_INTEGER_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators, GraultExtendsDecorator.class, GraultSuperDecorator.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "f") })
+    public void testDelegateWildcardBeanTypeVariable() {
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.singleton(CORGE_TYPE_VARIABLE_EXTENDS_COW_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators, CorgeDecorator.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "g") })
+    public void testDelegateTypeVariableBeanTypeVariable() {
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.singleton(GARPLY_EXTENDS_FRESIAN_COW_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators, GarplyDecorator.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "h") })
+    public void testDelegateTypeVariableBeanActualType() {
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.singleton(GARPLY_COW_LITERAL.getType()));
+        assert decoratorCollectionMatches(decorators, GarplyDecorator.class);
+    }
+
 }

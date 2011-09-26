@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessWit
 import javax.ejb.Local;
 
 @Local
-public interface BeagleLocal_Broken
-{
-   
+public interface BeagleLocal_Broken {
+
 }

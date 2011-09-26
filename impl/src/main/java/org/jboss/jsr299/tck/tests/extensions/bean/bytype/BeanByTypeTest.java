@@ -40,84 +40,60 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class BeanByTypeTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class BeanByTypeTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(BeanByTypeTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(BeanByTypeTest.class).build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.3.4", id = "aa"),
-      @SpecAssertion(section = "11.3.4", id = "b")
-   })
-   public void testGetBeans()
-   {
-      Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
-      assert beans.size() == 1;
-      assert beans.iterator().next().getBeanClass().equals(SimpleBean.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.3.4", id = "c")
-   })
-   public void testNoBindingImpliesCurrent()
-   {
-      Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
-      assert beans.size() == 1;
-      assert beans.iterator().next().getQualifiers().contains(new DefaultLiteral());
-   }
 
-   @Test(expectedExceptions = IllegalArgumentException.class)
-   @SpecAssertions({
-      @SpecAssertion(section = "11.3.4", id = "da")
-   })
-   public void testTypeVariable()
-   {
-      TypeVariable<?> t = new TypeVariable<GenericDeclaration>()
-      {
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "aa"), @SpecAssertion(section = "11.3.4", id = "b") })
+    public void testGetBeans() {
+        Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
+        assert beans.size() == 1;
+        assert beans.iterator().next().getBeanClass().equals(SimpleBean.class);
+    }
 
-         public Type[] getBounds()
-         {
-            return new Type[0];
-         }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "c") })
+    public void testNoBindingImpliesCurrent() {
+        Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
+        assert beans.size() == 1;
+        assert beans.iterator().next().getQualifiers().contains(new DefaultLiteral());
+    }
 
-         public GenericDeclaration getGenericDeclaration()
-         {
-            return null;
-         }
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "da") })
+    public void testTypeVariable() {
+        TypeVariable<?> t = new TypeVariable<GenericDeclaration>() {
 
-         public String getName()
-         {
-            return ""; 
-         }
-      };
-      getCurrentManager().getBeans(t);
-   }
-   
-   @Test(expectedExceptions = IllegalArgumentException.class)
-   @SpecAssertions({
-      @SpecAssertion(section = "11.3.4", id = "e")
-   })
-   public void testSameBindingTwice()
-   {
-      getCurrentManager().getBeans(SimpleBean.class, new TameLiteral(), new TameLiteral());
-   }
+            public Type[] getBounds() {
+                return new Type[0];
+            }
 
-   @Test(expectedExceptions = IllegalArgumentException.class)
-   @SpecAssertions({
-      @SpecAssertion(section = "11.3.4", id = "f")
-   })
-   public void testNonBindingType()
-   {
-      getCurrentManager().getBeans(SimpleBean.class, new NonBindingTypeLiteral());
-   }
+            public GenericDeclaration getGenericDeclaration() {
+                return null;
+            }
+
+            public String getName() {
+                return "";
+            }
+        };
+        getCurrentManager().getBeans(t);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "e") })
+    public void testSameBindingTwice() {
+        getCurrentManager().getBeans(SimpleBean.class, new TameLiteral(), new TameLiteral());
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "f") })
+    public void testNonBindingType() {
+        getCurrentManager().getBeans(SimpleBean.class, new NonBindingTypeLiteral());
+    }
 
 }

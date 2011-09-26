@@ -16,9 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.event.resolve.typeWithParameters;
 
-public class UnusedEventType
-{
-   public UnusedEventType(String name)
-   {
-   }
+public class UnusedEventType {
+    public UnusedEventType(String name) {
+    }
 }

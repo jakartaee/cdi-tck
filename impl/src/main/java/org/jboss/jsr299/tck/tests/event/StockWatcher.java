@@ -18,11 +18,9 @@ package org.jboss.jsr299.tck.tests.event;
 
 import javax.enterprise.event.Observes;
 
-public class StockWatcher
-{
-   
-   public void observeStockPrice(@Observes StockPrice price)
-   {
-      price.recordVisit(this);
-   }
+public class StockWatcher {
+
+    public void observeStockPrice(@Observes StockPrice price) {
+        price.recordVisit(this);
+    }
 }

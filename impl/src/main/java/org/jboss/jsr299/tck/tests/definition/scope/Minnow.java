@@ -20,7 +20,6 @@ import javax.enterprise.context.RequestScoped;
 
 @RiverFishStereotype
 @RequestScoped
-public class Minnow implements Animal
-{
-   
+public class Minnow implements Animal {
+
 }

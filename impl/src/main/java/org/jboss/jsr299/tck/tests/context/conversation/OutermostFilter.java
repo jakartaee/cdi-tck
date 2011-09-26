@@ -28,51 +28,39 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-public class OutermostFilter implements Filter
-{
-   @Inject 
-   private Conversation conversation;
-   
+public class OutermostFilter implements Filter {
+    @Inject
+    private Conversation conversation;
 
-   public void destroy()
-   {
-   }
+    public void destroy() {
+    }
 
-   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
-   {
-      if ("foo".equals(request.getParameter("cid")))
-      {
-         try
-         {
-            chain.doFilter(request, response);
-            throw new RuntimeException("Expected exception not thrown");
-         }
-         catch (ServletException e)
-         {
-            Throwable cause = e.getCause();
-            while (cause != null)
-            {
-               if (e.getCause() instanceof NonexistentConversationException)
-               {
-                  response.setContentType("text/html");
-                  response.getWriter().print("NonexistentConversationException thrown properly\n");
-                  // FIXME WELD-878
-                  // response.getWriter().print("Conversation.isTransient: " + conversation.isTransient());
-                  return;
-               }
-               cause = e.getCause();
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+            ServletException {
+        if ("foo".equals(request.getParameter("cid"))) {
+            try {
+                chain.doFilter(request, response);
+                throw new RuntimeException("Expected exception not thrown");
+            } catch (ServletException e) {
+                Throwable cause = e.getCause();
+                while (cause != null) {
+                    if (e.getCause() instanceof NonexistentConversationException) {
+                        response.setContentType("text/html");
+                        response.getWriter().print("NonexistentConversationException thrown properly\n");
+                        // FIXME WELD-878
+                        // response.getWriter().print("Conversation.isTransient: " + conversation.isTransient());
+                        return;
+                    }
+                    cause = e.getCause();
+                }
+                throw new RuntimeException("Unexpected exception thrown");
             }
-            throw new RuntimeException("Unexpected exception thrown");
-         }
-      }
-      else
-      {
-         chain.doFilter(request, response);
-      }
-   }
+        } else {
+            chain.doFilter(request, response);
+        }
+    }
 
-   public void init(FilterConfig filterConfig) throws ServletException
-   {
-   }
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
 }

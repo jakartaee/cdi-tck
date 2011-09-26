@@ -21,10 +21,9 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServlet;
 
 @SuppressWarnings("serial")
-public class TestServlet_Broken extends HttpServlet
-{
-   @SuppressWarnings("unused")
-   @Inject
-   private InjectionPoint ip;
+public class TestServlet_Broken extends HttpServlet {
+    @SuppressWarnings("unused")
+    @Inject
+    private InjectionPoint ip;
 
 }

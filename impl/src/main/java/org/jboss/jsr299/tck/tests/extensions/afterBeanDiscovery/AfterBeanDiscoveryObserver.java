@@ -34,85 +34,69 @@ import javax.enterprise.inject.spi.ProcessBean;
 
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
-public class AfterBeanDiscoveryObserver implements Extension
-{
-   
-   private static boolean processBeanFiredForCockatooBean;
-   
-   public static boolean isProcessBeanFiredForCockatooBean()
-   {
-      return processBeanFiredForCockatooBean;
-   }
-   
-   public void observeProcessBean(@Observes ProcessBean<Cockatoo> event)
-   {
-      AfterBeanDiscoveryObserver.processBeanFiredForCockatooBean = true;
-      assert event.getBean().getName().equals("cockatoo");
-   }
-   
-   public void addABean(@Observes AfterBeanDiscovery afterBeanDiscovery)
-   {
-      afterBeanDiscovery.addBean(new Bean<Cockatoo>()
-      {
-         
-         private final Set<Annotation> qualifiers = new HashSet<Annotation>(Arrays.asList(new DefaultLiteral()));
-         private final Set<Type> types = new HashSet<Type>(Arrays.<Type>asList(Cockatoo.class));
+public class AfterBeanDiscoveryObserver implements Extension {
 
-         public Class<?> getBeanClass()
-         {
-            return Cockatoo.class;
-         }
+    private static boolean processBeanFiredForCockatooBean;
 
-         public Set<InjectionPoint> getInjectionPoints()
-         {
-            return Collections.emptySet();
-         }
+    public static boolean isProcessBeanFiredForCockatooBean() {
+        return processBeanFiredForCockatooBean;
+    }
 
-         public String getName()
-         {
-            return "cockatoo";
-         }
+    public void observeProcessBean(@Observes ProcessBean<Cockatoo> event) {
+        AfterBeanDiscoveryObserver.processBeanFiredForCockatooBean = true;
+        assert event.getBean().getName().equals("cockatoo");
+    }
 
-         public Set<Annotation> getQualifiers()
-         {
-            return qualifiers;
-         }
+    public void addABean(@Observes AfterBeanDiscovery afterBeanDiscovery) {
+        afterBeanDiscovery.addBean(new Bean<Cockatoo>() {
 
-         public Class<? extends Annotation> getScope()
-         {
-            return Dependent.class;
-         }
+            private final Set<Annotation> qualifiers = new HashSet<Annotation>(Arrays.asList(new DefaultLiteral()));
+            private final Set<Type> types = new HashSet<Type>(Arrays.<Type> asList(Cockatoo.class));
 
-         public Set<Class<? extends Annotation>> getStereotypes()
-         {
-            return Collections.emptySet();
-         }
+            public Class<?> getBeanClass() {
+                return Cockatoo.class;
+            }
 
-         public Set<Type> getTypes()
-         {
-            return types;
-         }
+            public Set<InjectionPoint> getInjectionPoints() {
+                return Collections.emptySet();
+            }
 
-         public boolean isAlternative()
-         {
-            return false;
-         }
+            public String getName() {
+                return "cockatoo";
+            }
 
-         public boolean isNullable()
-         {
-            return true;
-         }
+            public Set<Annotation> getQualifiers() {
+                return qualifiers;
+            }
 
-         public Cockatoo create(CreationalContext<Cockatoo> creationalContext)
-         {
-            return new Cockatoo("Billy");
-         }
+            public Class<? extends Annotation> getScope() {
+                return Dependent.class;
+            }
 
-         public void destroy(Cockatoo instance, CreationalContext<Cockatoo> creationalContext)
-         {
-            // No-op
-         }
-      });
-   }
+            public Set<Class<? extends Annotation>> getStereotypes() {
+                return Collections.emptySet();
+            }
+
+            public Set<Type> getTypes() {
+                return types;
+            }
+
+            public boolean isAlternative() {
+                return false;
+            }
+
+            public boolean isNullable() {
+                return true;
+            }
+
+            public Cockatoo create(CreationalContext<Cockatoo> creationalContext) {
+                return new Cockatoo("Billy");
+            }
+
+            public void destroy(Cockatoo instance, CreationalContext<Cockatoo> creationalContext) {
+                // No-op
+            }
+        });
+    }
 
 }

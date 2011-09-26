@@ -20,11 +20,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 @RequestScoped
-public class Farm
-{
-   
-   @Inject Stable stable;
-   
-   public void open() {};
-   
+public class Farm {
+
+    @Inject
+    Stable stable;
+
+    public void open() {
+    };
+
 }

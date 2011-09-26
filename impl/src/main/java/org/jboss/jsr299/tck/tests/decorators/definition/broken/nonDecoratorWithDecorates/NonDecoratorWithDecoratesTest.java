@@ -30,22 +30,17 @@ import org.testng.annotations.Test;
  * @author Shane Bryzak
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class NonDecoratorWithDecoratesTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class NonDecoratorWithDecoratesTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(NonDecoratorWithDecoratesTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(NonDecoratorWithDecoratesTest.class).build();
     }
-    
-   @Test
-   @SpecAssertion(section="8.1.2", id="cg")
-   public void testNonDecoratorWithDecoratesAnnotationNotOK()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "8.1.2", id = "cg")
+    public void testNonDecoratorWithDecoratesAnnotationNotOK() {
+    }
 }

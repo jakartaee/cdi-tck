@@ -17,10 +17,8 @@
 package org.jboss.jsr299.tck.tests.context.dependent;
 
 @Room
-public class InteriorRoom implements Interior 
-{
-   public void foo()
-   {
-      
-   }
+public class InteriorRoom implements Interior {
+    public void foo() {
+
+    }
 }

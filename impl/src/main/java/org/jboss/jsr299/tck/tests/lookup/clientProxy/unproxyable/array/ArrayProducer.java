@@ -19,13 +19,12 @@ package org.jboss.jsr299.tck.tests.lookup.clientProxy.unproxyable.array;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
-public class ArrayProducer
-{
-   
-   @Produces @RequestScoped
-   public String[] produce()
-   {
-      return new String[0];
-   }
+public class ArrayProducer {
+
+    @Produces
+    @RequestScoped
+    public String[] produce() {
+        return new String[0];
+    }
 
 }

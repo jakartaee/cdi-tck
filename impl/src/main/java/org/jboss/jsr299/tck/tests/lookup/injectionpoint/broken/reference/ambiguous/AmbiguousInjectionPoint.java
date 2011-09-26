@@ -30,52 +30,43 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
-public class AmbiguousInjectionPoint implements InjectionPoint
-{
-   private final Bean<SimpleBean> bean;
-   private final Set<Annotation> bindings = new HashSet<Annotation>();
+public class AmbiguousInjectionPoint implements InjectionPoint {
+    private final Bean<SimpleBean> bean;
+    private final Set<Annotation> bindings = new HashSet<Annotation>();
 
-   public AmbiguousInjectionPoint(Bean<SimpleBean> bean)
-   {
-      this.bean = bean;
-      bindings.add(new DefaultLiteral());
-      bindings.add(new AnyLiteral());
-   }
+    public AmbiguousInjectionPoint(Bean<SimpleBean> bean) {
+        this.bean = bean;
+        bindings.add(new DefaultLiteral());
+        bindings.add(new AnyLiteral());
+    }
 
-   public Annotated getAnnotated()
-   {
-      return new AnnotatedInjectionField(this);
-   }
+    public Annotated getAnnotated() {
+        return new AnnotatedInjectionField(this);
+    }
 
-   public Bean<?> getBean()
-   {
-      return bean;
-   }
+    public Bean<?> getBean() {
+        return bean;
+    }
 
-   public Set<Annotation> getQualifiers()
-   {
-      return bindings;
-   }
+    public Set<Annotation> getQualifiers() {
+        return bindings;
+    }
 
-   @SuppressWarnings("unchecked")
-   public Member getMember()
-   {
-      return ((AnnotatedField<SimpleBean>)getAnnotated()).getJavaMember();
-   }
+    @SuppressWarnings("unchecked")
+    public Member getMember() {
+        return ((AnnotatedField<SimpleBean>) getAnnotated()).getJavaMember();
+    }
 
-   public Type getType()
-   {
-      return InjectedBean.class;
-   }
+    public Type getType() {
+        return InjectedBean.class;
+    }
 
-   public boolean isDelegate()
-   {
-      return false;
-   }
+    public boolean isDelegate() {
+        return false;
+    }
 
-   public boolean isTransient()
-   {
-      return false;
-   }
+    public boolean isTransient() {
+        return false;
+    }
 
 }

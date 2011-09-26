@@ -20,12 +20,10 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 
-public class InjectionTargetProcessor implements Extension
-{
-   
-   public void processDogInjectionTarget(@Observes ProcessInjectionTarget<Dog> injectionTargetEvent)
-   {
-      throw new RuntimeException();
-   }
-   
+public class InjectionTargetProcessor implements Extension {
+
+    public void processDogInjectionTarget(@Observes ProcessInjectionTarget<Dog> injectionTargetEvent) {
+        throw new RuntimeException();
+    }
+
 }

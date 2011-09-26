@@ -19,13 +19,11 @@ package org.jboss.jsr299.tck.tests.implementation.initializer.broken.parameterAn
 import javax.enterprise.inject.Disposes;
 import javax.inject.Inject;
 
-public class Capercaillie_Broken
-{
-   
-   @Inject
-   public void setName(String name, @Disposes ChickenHutch chickenHutch)
-   {
-      // No-op
-   }
-   
+public class Capercaillie_Broken {
+
+    @Inject
+    public void setName(String name, @Disposes ChickenHutch chickenHutch) {
+        // No-op
+    }
+
 }

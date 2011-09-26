@@ -26,23 +26,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DuplicateNameResolutionTest extends AbstractJSR299Test
-{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DuplicateNameResolutionTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DuplicateNameResolutionTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DuplicateNameResolutionTest.class).build();
     }
-    
-   @Test(groups = { "resolution", "el"})
-   @SpecAssertion(section = "5.3.1", id = "da")
-   public void testDuplicateNamedBeans() throws Exception
-   {
-   }
+
+    @Test(groups = { "resolution", "el" })
+    @SpecAssertion(section = "5.3.1", id = "da")
+    public void testDuplicateNamedBeans() throws Exception {
+    }
 
 }

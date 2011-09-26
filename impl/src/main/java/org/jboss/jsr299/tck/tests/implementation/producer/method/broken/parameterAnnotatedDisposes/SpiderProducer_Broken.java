@@ -19,13 +19,11 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.paramet
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-public class SpiderProducer_Broken
-{
-   
-   @Produces
-   public String dispose(@Disposes String foo)
-   {
-      return "foo";
-   }
-   
+public class SpiderProducer_Broken {
+
+    @Produces
+    public String dispose(@Disposes String foo) {
+        return "foo";
+    }
+
 }

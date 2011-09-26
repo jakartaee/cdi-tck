@@ -20,15 +20,14 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor 
+@Interceptor
 @FooBinding
 public class FooInterceptor {
     public static String NAME = "FooInterceptor";
-    
-    @AroundInvoke 
-    public Object interceptMe(InvocationContext ctx) throws Exception
-    {
-       CallOrder.addCaller(NAME);        
-       return ctx.proceed();
+
+    @AroundInvoke
+    public Object interceptMe(InvocationContext ctx) throws Exception {
+        CallOrder.addCaller(NAME);
+        return ctx.proceed();
     }
 }

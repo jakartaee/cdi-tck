@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
-public interface DeadlySpider extends DeadlyAnimal
-{
+public interface DeadlySpider extends DeadlyAnimal {
 
 }

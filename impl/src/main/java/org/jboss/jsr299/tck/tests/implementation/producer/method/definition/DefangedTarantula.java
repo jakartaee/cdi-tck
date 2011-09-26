@@ -16,14 +16,15 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.definition;
 
-public class DefangedTarantula extends Tarantula
-{
-   private int deaths;
-   
-   public DefangedTarantula(int deaths)
-   {
-      this.deaths = deaths;
-   }
+public class DefangedTarantula extends Tarantula {
+    private int deaths;
 
-   @Override public int getDeathsCaused() { return deaths; }
+    public DefangedTarantula(int deaths) {
+        this.deaths = deaths;
+    }
+
+    @Override
+    public int getDeathsCaused() {
+        return deaths;
+    }
 }

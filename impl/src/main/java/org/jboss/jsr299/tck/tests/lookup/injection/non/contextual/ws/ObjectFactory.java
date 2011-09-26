@@ -25,8 +25,10 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _IsSheepInjected_QNAME = new QName("http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "isSheepInjected");
-    private final static QName _IsSheepInjectedResponse_QNAME = new QName("http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "isSheepInjectedResponse");
+    private final static QName _IsSheepInjected_QNAME = new QName(
+            "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "isSheepInjected");
+    private final static QName _IsSheepInjectedResponse_QNAME = new QName(
+            "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "isSheepInjectedResponse");
 
     public ObjectFactory() {
     }
@@ -46,6 +48,7 @@ public class ObjectFactory {
 
     @XmlElementDecl(namespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", name = "isSheepInjectedResponse")
     public JAXBElement<IsSheepInjectedResponse> createIsSheepInjectedResponse(IsSheepInjectedResponse value) {
-        return new JAXBElement<IsSheepInjectedResponse>(_IsSheepInjectedResponse_QNAME, IsSheepInjectedResponse.class, null, value);
+        return new JAXBElement<IsSheepInjectedResponse>(_IsSheepInjectedResponse_QNAME, IsSheepInjectedResponse.class, null,
+                value);
     }
 }

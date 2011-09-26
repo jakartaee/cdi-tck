@@ -19,13 +19,12 @@ package org.jboss.jsr299.tck.tests.lookup.byname;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-public class FishingNet
-{
-   @Inject @Named
-   private Animal carp;
-   
-   public boolean isCarpInjected()
-   {
-      return (carp != null) && (carp instanceof Carp);
-   }
+public class FishingNet {
+    @Inject
+    @Named
+    private Animal carp;
+
+    public boolean isCarpInjected() {
+        return (carp != null) && (carp instanceof Carp);
+    }
 }

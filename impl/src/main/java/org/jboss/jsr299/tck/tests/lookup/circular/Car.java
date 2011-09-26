@@ -18,26 +18,23 @@ package org.jboss.jsr299.tck.tests.lookup.circular;
 
 import javax.inject.Inject;
 
-public class Car
-{
-   
-   public static boolean success;
-   
-   @Inject Petrol petrol;
-   
-   public Car()
-   {
-      success = false;
-   }
-   
-   public String getName()
-   {
-      return "herbie";
-   }
-   
-   public String getNameOfPetrol()
-   {
-      return petrol.getName();
-   }
-   
+public class Car {
+
+    public static boolean success;
+
+    @Inject
+    Petrol petrol;
+
+    public Car() {
+        success = false;
+    }
+
+    public String getName() {
+        return "herbie";
+    }
+
+    public String getNameOfPetrol() {
+        return petrol.getName();
+    }
+
 }

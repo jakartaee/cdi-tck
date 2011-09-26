@@ -20,22 +20,18 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 @Stateless
-public class AndalusianChicken implements LocalChicken
-{
-   
-   public static boolean nonBusinessMethodCalled = false;
+public class AndalusianChicken implements LocalChicken {
 
-   public void firstBusinessMethod()
-   {
-   }
+    public static boolean nonBusinessMethodCalled = false;
 
-   @Inject
-   public void nonBusinessMethod()
-   {
-      nonBusinessMethodCalled = true;
-   }
-   
-   public void cluck()
-   {
-   }
+    public void firstBusinessMethod() {
+    }
+
+    @Inject
+    public void nonBusinessMethod() {
+        nonBusinessMethodCalled = true;
+    }
+
+    public void cluck() {
+    }
 }

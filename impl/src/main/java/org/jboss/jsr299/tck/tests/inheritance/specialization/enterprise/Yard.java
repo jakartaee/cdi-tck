@@ -21,7 +21,6 @@ import javax.inject.Named;
 
 @Named("backyard")
 @Stateful
-public class Yard implements YardInterface
-{
-   
+public class Yard implements YardInterface {
+
 }

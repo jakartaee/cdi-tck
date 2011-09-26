@@ -21,13 +21,11 @@ import javax.ejb.Stateful;
 
 @Tame
 @Stateful
-public class Lion implements LionLocal
-{
-   
-   @Remove
-   public void remove()
-   {
-      
-   }
-   
+public class Lion implements LionLocal {
+
+    @Remove
+    public void remove() {
+
+    }
+
 }

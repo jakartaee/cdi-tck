@@ -31,34 +31,28 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet used just to test context during service method.
  * 
  * @author David Allen
- *
+ * 
  */
-public class ServiceMethodServlet extends HttpServlet
-{
+public class ServiceMethodServlet extends HttpServlet {
 
-   private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-   @Inject
-   private BeanManager jsr299Manager;
+    @Inject
+    private BeanManager jsr299Manager;
 
-   @Override
-   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-   {
-      if (!jsr299Manager.getContext(SessionScoped.class).isActive())
-      {
-         throw new ServletException("Session is not active");
-      }
-      else
-      {
-         super.service(req, resp);
-      }
-   }
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (!jsr299Manager.getContext(SessionScoped.class).isActive()) {
+            throw new ServletException("Session is not active");
+        } else {
+            super.service(req, resp);
+        }
+    }
 
-   @Override
-   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-   {
-      resp.setContentType("text/text");
-      resp.getWriter().println("It worked!");
-   }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/text");
+        resp.getWriter().println("It worked!");
+    }
 
 }

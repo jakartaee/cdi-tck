@@ -16,10 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.noextend3;
 
-public class Mammal
-{
-   public Mammal(String type)
-   {
-      
-   }
+public class Mammal {
+    public Mammal(String type) {
+
+    }
 }

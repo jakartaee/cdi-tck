@@ -20,20 +20,21 @@ import javax.inject.Inject;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class CowShed
-{
+public class CowShed {
 
-   @Inject Logger logger;
+    @Inject
+    Logger logger;
 
-   @Inject Foo foo;
+    @Inject
+    Foo foo;
 
-   @Inject Bar bar;
+    @Inject
+    Bar bar;
 
-   public void milk()
-   {
-      logger.log("milked");
-   }
+    public void milk() {
+        logger.log("milked");
+    }
 
 }

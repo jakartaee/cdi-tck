@@ -25,23 +25,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class InvalidInterceptorBindingAnnotationsTest extends AbstractJSR299Test 
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InvalidInterceptorBindingAnnotationsTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InvalidInterceptorBindingAnnotationsTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InvalidInterceptorBindingAnnotationsTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "9.5.2", id = "d")
-   public void testInterceptorBindingsWithConflictingAnnotationMembersNotOk()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "9.5.2", id = "d")
+    public void testInterceptorBindingsWithConflictingAnnotationMembersNotOk() {
+    }
 }

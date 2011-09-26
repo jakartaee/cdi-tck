@@ -18,10 +18,9 @@ package org.jboss.jsr299.tck.tests.definition.qualifier;
 
 import javax.inject.Inject;
 
+public class Barn {
+    @Inject
+    @Tame
+    public Tarantula petSpider;
 
-public class Barn
-{   
-   @Inject @Tame
-   public Tarantula petSpider;
-   
 }

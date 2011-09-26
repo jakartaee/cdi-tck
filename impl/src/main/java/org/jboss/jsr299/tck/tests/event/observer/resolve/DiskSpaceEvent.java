@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.resolve;
 
-public class DiskSpaceEvent
-{
+public class DiskSpaceEvent {
 }

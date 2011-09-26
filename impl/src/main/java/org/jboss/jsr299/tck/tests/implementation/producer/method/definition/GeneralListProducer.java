@@ -21,13 +21,10 @@ import java.util.List;
 
 import javax.enterprise.inject.Produces;
 
-public class GeneralListProducer<T>
-{
-   
-   @Produces
-   public List<T> create()
-   {
-       return new ArrayList<T>();
-   } 
-}
+public class GeneralListProducer<T> {
 
+    @Produces
+    public List<T> create() {
+        return new ArrayList<T>();
+    }
+}

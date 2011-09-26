@@ -22,21 +22,18 @@ import javax.inject.Inject;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public class TestServletContextListener implements ServletContextListener
-{
-   @Inject
-   private BeanManager manager;
-   @Inject
-   private Result result;
-   
-   public void contextDestroyed(ServletContextEvent sce)
-   {
-   }
+public class TestServletContextListener implements ServletContextListener {
+    @Inject
+    private BeanManager manager;
+    @Inject
+    private Result result;
 
-   public void contextInitialized(ServletContextEvent sce)
-   {
-      boolean result = manager.getContext(ApplicationScoped.class).isActive();
-      this.result.setApplicationScopeActiveForServletContextListener(result);
-   }
+    public void contextDestroyed(ServletContextEvent sce) {
+    }
+
+    public void contextInitialized(ServletContextEvent sce) {
+        boolean result = manager.getContext(ApplicationScoped.class).isActive();
+        this.result.setApplicationScopeActiveForServletContextListener(result);
+    }
 
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
-public class ShetlandPony extends Horse
-{
-   
+public class ShetlandPony extends Horse {
+
 }

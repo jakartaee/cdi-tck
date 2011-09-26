@@ -27,42 +27,39 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-public class TestFilter implements Filter
-{
+public class TestFilter implements Filter {
 
-   @Inject
-   private Sheep sheep;
-   private boolean injectionPerformedCorrectly = false;
-   private boolean initializerCalled = false;
-   private boolean initCalledAfterInitializer = false;
+    @Inject
+    private Sheep sheep;
+    private boolean injectionPerformedCorrectly = false;
+    private boolean initializerCalled = false;
+    private boolean initCalledAfterInitializer = false;
 
-   @Inject
-   public void initialize(Sheep sheep) {
-      initializerCalled = sheep != null;
-   }
-   
-   public void destroy()
-   {
-   }
+    @Inject
+    public void initialize(Sheep sheep) {
+        initializerCalled = sheep != null;
+    }
 
-   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
-   {
-      HttpServletResponse resp = (HttpServletResponse) response;
-      
-      if (request.getParameter("test").equals("injection")) {
-         // Return 200 if injection into Filter occurred, 500 otherwise
-         resp.setStatus(injectionPerformedCorrectly ? 200 : 500);
-      } else if (request.getParameter("test").equals("initializer")) {
-         // Return 200 if initializer was called, 500 otherwise
-         resp.setStatus(initCalledAfterInitializer ? 200 : 500);
-      } else {
-         resp.setStatus(404);
-      }
-   }
+    public void destroy() {
+    }
 
-   public void init(FilterConfig filterConfig) throws ServletException
-   {
-      injectionPerformedCorrectly = sheep != null;
-      initCalledAfterInitializer = initializerCalled;
-   }
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+            ServletException {
+        HttpServletResponse resp = (HttpServletResponse) response;
+
+        if (request.getParameter("test").equals("injection")) {
+            // Return 200 if injection into Filter occurred, 500 otherwise
+            resp.setStatus(injectionPerformedCorrectly ? 200 : 500);
+        } else if (request.getParameter("test").equals("initializer")) {
+            // Return 200 if initializer was called, 500 otherwise
+            resp.setStatus(initCalledAfterInitializer ? 200 : 500);
+        } else {
+            resp.setStatus(404);
+        }
+    }
+
+    public void init(FilterConfig filterConfig) throws ServletException {
+        injectionPerformedCorrectly = sheep != null;
+        initCalledAfterInitializer = initializerCalled;
+    }
 }

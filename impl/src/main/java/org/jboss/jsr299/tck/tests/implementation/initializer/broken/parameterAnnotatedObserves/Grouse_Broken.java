@@ -19,14 +19,11 @@ package org.jboss.jsr299.tck.tests.implementation.initializer.broken.parameterAn
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+public class Grouse_Broken {
 
-public class Grouse_Broken
-{
-   
-   @Inject
-   public void setName(String name, @Observes DangerCall dangerCall)
-   {
-      // No-op
-   }
-   
+    @Inject
+    public void setName(String name, @Observes DangerCall dangerCall) {
+        // No-op
+    }
+
 }

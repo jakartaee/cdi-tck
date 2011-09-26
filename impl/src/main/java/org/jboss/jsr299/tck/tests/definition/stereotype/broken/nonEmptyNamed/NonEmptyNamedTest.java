@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.definition.stereotype.broken.nonEmptyNamed;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -27,27 +26,20 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class NonEmptyNamedTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class NonEmptyNamedTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-         return new WebArchiveBuilder()
- 
-             .withTestClassPackage(NonEmptyNamedTest.class)
-             .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder()
+
+        .withTestClassPackage(NonEmptyNamedTest.class).build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "2.7.1.3", id = "aab"),
-      @SpecAssertion(section = "2.5.2", id = "e")
-   })
-   public void testStereotypeWithNonEmptyNamed()
-   {
-   }
-   
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "aab"), @SpecAssertion(section = "2.5.2", id = "e") })
+    public void testStereotypeWithNonEmptyNamed() {
+    }
+
 }

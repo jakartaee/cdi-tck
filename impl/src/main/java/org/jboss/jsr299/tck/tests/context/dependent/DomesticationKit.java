@@ -18,23 +18,19 @@ package org.jboss.jsr299.tck.tests.context.dependent;
 
 import javax.annotation.PreDestroy;
 
-public class DomesticationKit
-{
-   private static boolean destroyed = false;
-   
-   @PreDestroy
-   public void preDestroy()
-   {
-      destroyed = true;
-   }
-   
-   public static boolean isDestroyed()
-   {
-      return destroyed;
-   }
-   
-   public static void reset()
-   {
-      destroyed = false;
-   }
+public class DomesticationKit {
+    private static boolean destroyed = false;
+
+    @PreDestroy
+    public void preDestroy() {
+        destroyed = true;
+    }
+
+    public static boolean isDestroyed() {
+        return destroyed;
+    }
+
+    public static void reset() {
+        destroyed = false;
+    }
 }

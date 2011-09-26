@@ -20,15 +20,13 @@ import java.io.Serializable;
 
 @Secure
 @Transactional
-public class Order implements Serializable
-{
-   
-   private static final long serialVersionUID = 1L;
-   public static boolean     constructed      = true;
-   
-   public boolean foo()
-   {
-      return false;
-   }
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    public static boolean constructed = true;
+
+    public boolean foo() {
+        return false;
+    }
 
 }

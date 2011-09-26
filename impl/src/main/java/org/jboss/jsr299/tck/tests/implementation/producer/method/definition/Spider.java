@@ -16,8 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.definition;
 
-
-public class Spider implements Animal
-{
+public class Spider implements Animal {
 
 }

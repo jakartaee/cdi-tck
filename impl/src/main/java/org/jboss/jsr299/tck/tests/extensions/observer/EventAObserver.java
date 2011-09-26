@@ -18,10 +18,8 @@ package org.jboss.jsr299.tck.tests.extensions.observer;
 
 import javax.enterprise.event.Observes;
 
-public class EventAObserver
-{
-   public void observeEvent(@Observes EventA event)
-   {
-      
-   }
+public class EventAObserver {
+    public void observeEvent(@Observes EventA event) {
+
+    }
 }

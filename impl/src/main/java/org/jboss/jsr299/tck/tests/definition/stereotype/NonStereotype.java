@@ -22,9 +22,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-@Target( { TYPE })
+@Target({ TYPE })
 @Retention(RUNTIME)
-public @interface NonStereotype
-{
+public @interface NonStereotype {
 
 }

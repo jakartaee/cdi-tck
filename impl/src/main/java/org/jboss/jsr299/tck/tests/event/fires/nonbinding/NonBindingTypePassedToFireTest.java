@@ -24,23 +24,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class NonBindingTypePassedToFireTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class NonBindingTypePassedToFireTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(NonBindingTypePassedToFireTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(NonBindingTypePassedToFireTest.class).build();
     }
-    
-   @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
-   @SpecAssertion(section = "11.3.9", id = "e")
-   public void testExceptionThrownIfNonBindingTypePassedToFire() throws Exception
-   {
-      OwlFinch_Broken bean = getInstanceByType(OwlFinch_Broken.class);
-      bean.methodThatFiresEvent();
-   }
+
+    @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
+    @SpecAssertion(section = "11.3.9", id = "e")
+    public void testExceptionThrownIfNonBindingTypePassedToFire() throws Exception {
+        OwlFinch_Broken bean = getInstanceByType(OwlFinch_Broken.class);
+        bean.methodThatFiresEvent();
+    }
 }

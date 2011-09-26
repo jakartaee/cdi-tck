@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer;
 
-public class AnEventType
-{
+public class AnEventType {
 }

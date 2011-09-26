@@ -16,8 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
-@Hairy(clipped=true)
-public class ClippedBorderCollie extends BorderCollie
-{
-   
+@Hairy(clipped = true)
+public class ClippedBorderCollie extends BorderCollie {
+
 }

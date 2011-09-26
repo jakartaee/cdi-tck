@@ -21,6 +21,5 @@ import javax.enterprise.context.ApplicationScoped;
 
 @Singleton
 @ApplicationScoped
-public class Laika
-{
+public class Laika {
 }

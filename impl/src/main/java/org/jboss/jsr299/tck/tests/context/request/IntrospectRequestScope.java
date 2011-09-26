@@ -25,19 +25,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class IntrospectRequestScope extends HttpServlet
-{
-   private static final long serialVersionUID = 1L;
+public class IntrospectRequestScope extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
-   @Inject
-   private BeanManager jsr299Manager;
+    @Inject
+    private BeanManager jsr299Manager;
 
-   @Override
-   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-   {
-      resp.setContentType("text/text");
-      SimpleRequestBean aBean = org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(jsr299Manager,SimpleRequestBean.class);
-      resp.getWriter().print(aBean.getId());
-   }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/text");
+        SimpleRequestBean aBean = org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(jsr299Manager,
+                SimpleRequestBean.class);
+        resp.getWriter().print(aBean.getId());
+    }
 
 }

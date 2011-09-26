@@ -18,25 +18,21 @@ package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual;
 
 import javax.inject.Inject;
 
-public class Farm
-{
-   @Inject
-   private Sheep sheep;
-   private boolean initializerCalled = false;
+public class Farm {
+    @Inject
+    private Sheep sheep;
+    private boolean initializerCalled = false;
 
-   @Inject
-   public void initialize(Sheep sheep)
-   {
-      initializerCalled = sheep != null;
-   }
+    @Inject
+    public void initialize(Sheep sheep) {
+        initializerCalled = sheep != null;
+    }
 
-   public boolean isInitializerCalled()
-   {
-      return initializerCalled;
-   }
+    public boolean isInitializerCalled() {
+        return initializerCalled;
+    }
 
-   public boolean isSheepInjected()
-   {
-      return sheep != null;
-   }
+    public boolean isSheepInjected() {
+        return sheep != null;
+    }
 }

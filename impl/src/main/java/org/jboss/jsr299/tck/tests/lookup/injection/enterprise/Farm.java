@@ -22,34 +22,29 @@ import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
 @Stateless
-public class Farm implements FarmLocal
-{
-   @Inject
-   private Sheep sheepField;
+public class Farm implements FarmLocal {
+    @Inject
+    private Sheep sheepField;
 
-   private boolean initializerCalledAfterInjection = false;
-   private boolean injectionPerformedCorrectly = false;
+    private boolean initializerCalledAfterInjection = false;
+    private boolean injectionPerformedCorrectly = false;
 
-   @Inject
-   public void initialize(Sheep sheep)
-   {
-      initializerCalledAfterInjection = (sheepField != null) && (sheep != null);
-   }
+    @Inject
+    public void initialize(Sheep sheep) {
+        initializerCalledAfterInjection = (sheepField != null) && (sheep != null);
+    }
 
-   @Interceptors(FarmInterceptor.class)
-   public int getAnimalCount()
-   {
-      return 1;
-   }
+    @Interceptors(FarmInterceptor.class)
+    public int getAnimalCount() {
+        return 1;
+    }
 
-   @PostConstruct
-   public void postConstruct()
-   {
-      injectionPerformedCorrectly = initializerCalledAfterInjection;
-   }
+    @PostConstruct
+    public void postConstruct() {
+        injectionPerformedCorrectly = initializerCalledAfterInjection;
+    }
 
-   public boolean isInjectionPerformedCorrectly()
-   {
-      return injectionPerformedCorrectly;
-   }
+    public boolean isInjectionPerformedCorrectly() {
+        return injectionPerformedCorrectly;
+    }
 }

@@ -20,18 +20,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class Foo
-{
-   private List<?> injectedList;
-   
-   @Inject
-   public <T> void init(List<T> list)
-   {
-      injectedList = list;
-   }
+public class Foo {
+    private List<?> injectedList;
 
-   public List<?> getInjectedList()
-   {
-      return injectedList;
-   }
+    @Inject
+    public <T> void init(List<T> list) {
+        injectedList = list;
+    }
+
+    public List<?> getInjectedList() {
+        return injectedList;
+    }
 }

@@ -23,7 +23,6 @@ import javax.inject.Named;
 @Specializes
 @Stateful
 @Named
-public class FarmYard_Broken extends Yard
-{
-   
+public class FarmYard_Broken extends Yard {
+
 }

@@ -20,13 +20,11 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 
 @Stateful
-public class Order implements OrderLocal
-{
-   
-   @Remove
-   public void remove()
-   {
-      
-   }
+public class Order implements OrderLocal {
+
+    @Remove
+    public void remove() {
+
+    }
 
 }

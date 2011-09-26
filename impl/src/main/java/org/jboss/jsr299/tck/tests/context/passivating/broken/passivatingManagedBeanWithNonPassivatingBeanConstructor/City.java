@@ -16,9 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.passivatingManagedBeanWithNonPassivatingBeanConstructor;
 
-public class City
-{
-   public void ping() {
-      
-   }
+public class City {
+    public void ping() {
+
+    }
 }

@@ -22,19 +22,16 @@ import javax.interceptor.InvocationContext;
 
 @Interceptor
 @VehicleCountInterceptorBinding(comment = "bar")
-public class VehicleCountInterceptor
-{
-   private static boolean intercepted = false;
+public class VehicleCountInterceptor {
+    private static boolean intercepted = false;
 
-   @AroundInvoke
-   public Object aroundInvoke(InvocationContext ctx) throws Exception
-   {
-      intercepted = true;
-      return ((Integer) ctx.proceed()) + 10;
-   }
+    @AroundInvoke
+    public Object aroundInvoke(InvocationContext ctx) throws Exception {
+        intercepted = true;
+        return ((Integer) ctx.proceed()) + 10;
+    }
 
-   public static boolean isIntercepted()
-   {
-      return intercepted;
-   }
+    public static boolean isIntercepted() {
+        return intercepted;
+    }
 }

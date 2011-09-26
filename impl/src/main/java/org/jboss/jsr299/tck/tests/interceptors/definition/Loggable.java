@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 
 import javax.enterprise.inject.Stereotype;
 
-@Target( { TYPE, METHOD })
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented
 @Stereotype

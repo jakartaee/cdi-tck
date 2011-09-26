@@ -16,12 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
-public class DefangedTarantula extends Tarantula
-{
+public class DefangedTarantula extends Tarantula {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 4125502808853107948L;
+    private static final long serialVersionUID = 4125502808853107948L;
 
 }

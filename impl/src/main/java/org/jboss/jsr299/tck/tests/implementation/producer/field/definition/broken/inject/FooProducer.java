@@ -19,10 +19,9 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.definition.brok
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
-public class FooProducer
-{
-   @SuppressWarnings("unused")
-   @Produces
-   @Inject
-   private String foo = "foo";
+public class FooProducer {
+    @SuppressWarnings("unused")
+    @Produces
+    @Inject
+    private String foo = "foo";
 }

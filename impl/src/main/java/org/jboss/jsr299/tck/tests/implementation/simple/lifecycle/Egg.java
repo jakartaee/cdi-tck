@@ -18,23 +18,19 @@ package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 
 import javax.annotation.PreDestroy;
 
-public class Egg
-{
-   private static boolean eggDestroyed = false;
-   
-   public Egg()
-   {
-      eggDestroyed = false;
-   }
+public class Egg {
+    private static boolean eggDestroyed = false;
 
-   @PreDestroy
-   public void destroy()
-   {
-      eggDestroyed = true;
-   }
+    public Egg() {
+        eggDestroyed = false;
+    }
 
-   public static boolean isEggDestroyed()
-   {
-      return eggDestroyed;
-   }
+    @PreDestroy
+    public void destroy() {
+        eggDestroyed = true;
+    }
+
+    public static boolean isEggDestroyed() {
+        return eggDestroyed;
+    }
 }

@@ -21,7 +21,6 @@ package org.jboss.jsr299.tck.tests.lookup.binding.members.annotation;
  * 
  */
 @Expensive_Broken(member = @SimpleAnnotation)
-public class Watch
-{
+public class Watch {
 
 }

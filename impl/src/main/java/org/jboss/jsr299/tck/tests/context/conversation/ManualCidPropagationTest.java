@@ -32,42 +32,36 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Dan Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ManualCidPropagationTest extends AbstractConversationTest
-{
-    
-    @Deployment(testable=false)
-    public static WebArchive createTestArchive() 
-	{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ManualCidPropagationTest extends AbstractConversationTest {
+
+    @Deployment(testable = false)
+    public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-            .withTestClassDefinition(ManualCidPropagationTest.class)
-            .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
-                        CloudController.class, OutermostFilter.class)
-            .withWebResource("cloud.jsf", "cloud.jspx")
-            .withWebResource("storm.jsf", "storm.jspx")
-            .withWebResource("clouds.jsf", "clouds.jspx")
-            .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
-            .withWebXml("web.xml")
-            .build();
+                .withTestClassDefinition(ManualCidPropagationTest.class)
+                .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
+                        CloudController.class, OutermostFilter.class).withWebResource("cloud.jsf", "cloud.jspx")
+                .withWebResource("storm.jsf", "storm.jspx").withWebResource("clouds.jsf", "clouds.jspx")
+                .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
     }
-   
-   @Test(groups = { "contexts" })
-   @SpecAssertion(section = "6.7.4", id = "n")
-   public void testManualCidPropagation() throws Exception
-   {
-      WebClient webClient = new WebClient();
-      HtmlPage storm = webClient.getPage(getPath("storm.jsf"));
-      HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class, "beginConversationButton");
-      storm = beginConversationButton.click();
-      
-      String c1 = getCid(storm);
-      
-      HtmlPage cloud = webClient.getPage(getPath("cloud.jsf", c1));
-      
-      String c2 = getCid(cloud);
-      
-      assert isLongRunning(cloud);
-      assert c1.equals(c2);
-   }
-   
+
+    @Test(groups = { "contexts" })
+    @SpecAssertion(section = "6.7.4", id = "n")
+    public void testManualCidPropagation() throws Exception {
+        WebClient webClient = new WebClient();
+        HtmlPage storm = webClient.getPage(getPath("storm.jsf"));
+        HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class,
+                "beginConversationButton");
+        storm = beginConversationButton.click();
+
+        String c1 = getCid(storm);
+
+        HtmlPage cloud = webClient.getPage(getPath("cloud.jsf", c1));
+
+        String c2 = getCid(cloud);
+
+        assert isLongRunning(cloud);
+        assert c1.equals(c2);
+    }
+
 }

@@ -31,48 +31,41 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DestroyedInstanceReturnedByGetTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DestroyedInstanceReturnedByGetTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DestroyedInstanceReturnedByGetTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DestroyedInstanceReturnedByGetTest.class).build();
     }
-    
-   @Test(groups = { "contexts" })
-   @SpecAssertions({
-      @SpecAssertion(section = "6.2", id = "q"),
-      @SpecAssertion(section = "11.1", id = "aa")
-   })
-   public void testDestroyedInstanceMustNotBeReturnedByGet()
-   {
-      assert getBeans(MySessionBean.class).size() == 1;
-      Bean<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
-      CreationalContext<MySessionBean> sessionCreationalContext = getCurrentManager().createCreationalContext(mySessionBean);
-      MySessionBean beanInstance = mySessionBean.create(sessionCreationalContext);
-      assert beanInstance != null;
-      Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
-      destroyContext(sessionContext);
-      setContextActive(sessionContext);
-      
-      beanInstance = sessionContext.get(mySessionBean);
-      assert beanInstance == null;
-      
-      Bean<MyApplicationBean> myApplicationBean = getBeans(MyApplicationBean.class).iterator().next();
-      CreationalContext<MyApplicationBean> applicationCreationalContext = getCurrentManager().createCreationalContext(myApplicationBean);
 
-      MyApplicationBean myApplicationBeanInstance = myApplicationBean.create(applicationCreationalContext);
-      assert myApplicationBeanInstance != null;
-      Context applicationContext = getCurrentManager().getContext(ApplicationScoped.class); 
-      destroyContext(applicationContext);
-      setContextActive(applicationContext);
+    @Test(groups = { "contexts" })
+    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "q"), @SpecAssertion(section = "11.1", id = "aa") })
+    public void testDestroyedInstanceMustNotBeReturnedByGet() {
+        assert getBeans(MySessionBean.class).size() == 1;
+        Bean<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
+        CreationalContext<MySessionBean> sessionCreationalContext = getCurrentManager().createCreationalContext(mySessionBean);
+        MySessionBean beanInstance = mySessionBean.create(sessionCreationalContext);
+        assert beanInstance != null;
+        Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
+        destroyContext(sessionContext);
+        setContextActive(sessionContext);
 
-      myApplicationBeanInstance = applicationContext.get(myApplicationBean);
-      assert myApplicationBeanInstance == null;
-   }
-   
+        beanInstance = sessionContext.get(mySessionBean);
+        assert beanInstance == null;
+
+        Bean<MyApplicationBean> myApplicationBean = getBeans(MyApplicationBean.class).iterator().next();
+        CreationalContext<MyApplicationBean> applicationCreationalContext = getCurrentManager().createCreationalContext(
+                myApplicationBean);
+
+        MyApplicationBean myApplicationBeanInstance = myApplicationBean.create(applicationCreationalContext);
+        assert myApplicationBeanInstance != null;
+        Context applicationContext = getCurrentManager().getContext(ApplicationScoped.class);
+        destroyContext(applicationContext);
+        setContextActive(applicationContext);
+
+        myApplicationBeanInstance = applicationContext.get(myApplicationBean);
+        assert myApplicationBeanInstance == null;
+    }
+
 }

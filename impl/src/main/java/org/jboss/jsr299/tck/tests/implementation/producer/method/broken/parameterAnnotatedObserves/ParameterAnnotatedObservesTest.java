@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.parameterAnnotatedObserves;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -26,23 +25,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ParameterAnnotatedObservesTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ParameterAnnotatedObservesTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ParameterAnnotatedObservesTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ParameterAnnotatedObservesTest.class).build();
     }
-    
-   @Test(groups = "producerMethod")
-   @SpecAssertion(section = "3.3.2", id = "ea")
-   public void testProducerMethodWithParameterAnnotatedObserves() throws Exception
-   {
-   }
-   
+
+    @Test(groups = "producerMethod")
+    @SpecAssertion(section = "3.3.2", id = "ea")
+    public void testProducerMethodWithParameterAnnotatedObserves() throws Exception {
+    }
+
 }

@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.enterprise.broken.genericState
 import javax.ejb.Local;
 
 @Local
-public interface DingoLocal_Broken<T>
-{
+public interface DingoLocal_Broken<T> {
     void remove();
 }

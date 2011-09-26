@@ -27,10 +27,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Stereotype;
 
 @Stereotype
-@Target( { TYPE, METHOD })
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @RequestScoped
-public @interface Mock
-{
+public @interface Mock {
 
 }

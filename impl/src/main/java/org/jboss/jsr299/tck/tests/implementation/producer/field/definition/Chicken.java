@@ -18,11 +18,10 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
 import javax.enterprise.inject.Produces;
 
+public class Chicken {
 
-public class Chicken
-{
-   
-   @Produces @Foo
-   private Egg egg = new Egg(this);
-   
+    @Produces
+    @Foo
+    private Egg egg = new Egg(this);
+
 }

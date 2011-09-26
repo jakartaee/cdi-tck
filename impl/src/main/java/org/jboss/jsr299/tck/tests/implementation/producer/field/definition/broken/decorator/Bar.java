@@ -16,12 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition.broken.decorator;
 
-public class Bar implements Foo
-{
+public class Bar implements Foo {
 
-   public boolean foo()
-   {
-      return false;
-   }
+    public boolean foo() {
+        return false;
+    }
 
 }

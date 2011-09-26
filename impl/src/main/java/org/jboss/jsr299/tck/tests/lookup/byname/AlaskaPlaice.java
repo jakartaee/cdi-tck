@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.lookup.byname;
 import javax.enterprise.inject.Specializes;
 
 @Specializes
-public class AlaskaPlaice extends Plaice
-{
+public class AlaskaPlaice extends Plaice {
 
 }

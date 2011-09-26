@@ -21,16 +21,16 @@ import javax.inject.Inject;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class NewLionConsumer
-{
-   
-   @Inject @New Lion lion;
-   
-   public Lion getLion()
-   {
-      return lion;
-   }
+public class NewLionConsumer {
+
+    @Inject
+    @New
+    Lion lion;
+
+    public Lion getLion() {
+        return lion;
+    }
 
 }

@@ -24,23 +24,19 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.testng.annotations.Test;
 
-public class FinalMethodMethodLevelInterceptorTest extends AbstractJSR299Test
-{
-    
+public class FinalMethodMethodLevelInterceptorTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
+    public static EnterpriseArchive createTestArchive() {
         return new EnterpriseArchiveBuilder()
-            .withTestClassDefinition(FinalMethodMethodLevelInterceptorTest.class)
-            .withClasses(FooBinding.class, MissileInterceptor.class, FinalMethodMethodLevelMissile.class, FinalMethodMethodLevelMissileLocal.class)
-            .withBeansXml("beans.xml")
-            .build();
+                .withTestClassDefinition(FinalMethodMethodLevelInterceptorTest.class)
+                .withClasses(FooBinding.class, MissileInterceptor.class, FinalMethodMethodLevelMissile.class,
+                        FinalMethodMethodLevelMissileLocal.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "9.3", id = "db")
-   public void testFinalMethodWithMethodLevelInterceptor() throws Exception
-   { 
-   }
+
+    @Test
+    @SpecAssertion(section = "9.3", id = "db")
+    public void testFinalMethodWithMethodLevelInterceptor() throws Exception {
+    }
 }

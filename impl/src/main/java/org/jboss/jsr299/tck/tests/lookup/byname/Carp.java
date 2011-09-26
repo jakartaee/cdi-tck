@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.lookup.byname;
 import javax.inject.Named;
 
 @Named
-public class Carp implements Animal
-{
+public class Carp implements Animal {
 
 }

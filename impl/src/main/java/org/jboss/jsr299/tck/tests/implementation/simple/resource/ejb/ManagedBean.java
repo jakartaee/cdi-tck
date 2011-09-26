@@ -20,15 +20,13 @@ import java.io.Serializable;
 
 import javax.inject.Inject;
 
+public class ManagedBean implements Serializable {
+    @Inject
+    @Lazy
+    private BeanRemote myEjb;
 
-public class ManagedBean implements Serializable
-{
-   @Inject @Lazy 
-   private BeanRemote myEjb;
-   
-   public BeanRemote getMyEjb()
-   {
-      return myEjb;
-   }
+    public BeanRemote getMyEjb() {
+        return myEjb;
+    }
 
 }

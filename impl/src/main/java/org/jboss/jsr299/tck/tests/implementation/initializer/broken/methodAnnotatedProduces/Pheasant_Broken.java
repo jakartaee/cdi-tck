@@ -19,14 +19,12 @@ package org.jboss.jsr299.tck.tests.implementation.initializer.broken.methodAnnot
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
-public class Pheasant_Broken
-{
- 
-   @Inject
-   @Produces
-   public void setName(String name)
-   {
-      // No-op
-   }
-   
+public class Pheasant_Broken {
+
+    @Inject
+    @Produces
+    public void setName(String name) {
+        // No-op
+    }
+
 }

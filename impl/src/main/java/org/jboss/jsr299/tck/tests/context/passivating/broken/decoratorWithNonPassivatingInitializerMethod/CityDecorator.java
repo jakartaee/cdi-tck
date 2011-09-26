@@ -25,15 +25,17 @@ import javax.inject.Inject;
 
 @SuppressWarnings("serial")
 @Decorator
-public class CityDecorator implements CityInterface, Serializable
-{
-   @Inject @Delegate @Any CityInterface city;
-   
-   @Inject
-   public void init(NonPassivating nonPassivating) {}
-   
-   public void foo()
-   {
-      city.foo();      
-   }
+public class CityDecorator implements CityInterface, Serializable {
+    @Inject
+    @Delegate
+    @Any
+    CityInterface city;
+
+    @Inject
+    public void init(NonPassivating nonPassivating) {
+    }
+
+    public void foo() {
+        city.foo();
+    }
 }

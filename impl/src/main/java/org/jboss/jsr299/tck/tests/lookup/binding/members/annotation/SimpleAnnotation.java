@@ -24,4 +24,5 @@ import java.lang.annotation.Target;
 
 @Retention(RUNTIME)
 @Target(TYPE)
-public @interface SimpleAnnotation {}
+public @interface SimpleAnnotation {
+}

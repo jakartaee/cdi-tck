@@ -19,17 +19,14 @@ package org.jboss.jsr299.tck.tests.lookup.el.integration;
 import javax.inject.Named;
 
 @Named
-public class Sheep
-{
-   private String name = "Dolly";
+public class Sheep {
+    private String name = "Dolly";
 
-   public String getName()
-   {
-      return name;
-   }
+    public String getName() {
+        return name;
+    }
 
-   public void setName(String name)
-   {
-      this.name = name;
-   }
+    public void setName(String name) {
+        this.name = name;
+    }
 }

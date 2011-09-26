@@ -37,78 +37,64 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class NormalContextTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class NormalContextTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(NormalContextTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(NormalContextTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-   @Test(groups = { "contexts" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "6.2", id = "j"),
-      @SpecAssertion(section = "6.2", id = "l"),
-      @SpecAssertion(section = "6.3", id = "c")
-   } )
-   public void testGetReturnsExistingInstance()
-   {
-      Bean<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
-      CreationalContext<MySessionBean> creationalContext = getCurrentManager().createCreationalContext(mySessionBean);
-      MySessionBean first = getCurrentManager().getContext(SessionScoped.class).get(mySessionBean, creationalContext);
-      first.setId(10);
-      MySessionBean second = getCurrentManager().getContext(SessionScoped.class).get(mySessionBean, creationalContext);
-      assert second.getId() == 10;
-      MySessionBean third = getCurrentManager().getContext(SessionScoped.class).get(mySessionBean);
-      assert third.getId() == 10;
-      MySessionBean fourth = getCurrentManager().getContext(SessionScoped.class).get(mySessionBean, getCurrentManager().createCreationalContext(mySessionBean));
-      assert fourth.getId() == 10;
-   }
+    @Test(groups = { "contexts" })
+    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "j"), @SpecAssertion(section = "6.2", id = "l"),
+            @SpecAssertion(section = "6.3", id = "c") })
+    public void testGetReturnsExistingInstance() {
+        Bean<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
+        CreationalContext<MySessionBean> creationalContext = getCurrentManager().createCreationalContext(mySessionBean);
+        MySessionBean first = getCurrentManager().getContext(SessionScoped.class).get(mySessionBean, creationalContext);
+        first.setId(10);
+        MySessionBean second = getCurrentManager().getContext(SessionScoped.class).get(mySessionBean, creationalContext);
+        assert second.getId() == 10;
+        MySessionBean third = getCurrentManager().getContext(SessionScoped.class).get(mySessionBean);
+        assert third.getId() == 10;
+        MySessionBean fourth = getCurrentManager().getContext(SessionScoped.class).get(mySessionBean,
+                getCurrentManager().createCreationalContext(mySessionBean));
+        assert fourth.getId() == 10;
+    }
 
-   @Test(groups = { "contexts" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "6.2", id = "l")
-   } )
-   public void testGetWithCreationalContextReturnsNewInstance()
-   {
-      MyContextual bean = AfterBeanDiscoveryObserver.getBean();
-      bean.setShouldReturnNullInstances(false);
+    @Test(groups = { "contexts" })
+    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "l") })
+    public void testGetWithCreationalContextReturnsNewInstance() {
+        MyContextual bean = AfterBeanDiscoveryObserver.getBean();
+        bean.setShouldReturnNullInstances(false);
 
-      CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
-      MySessionBean newBean = getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext);
-      assert newBean != null;
-      assert bean.isCreateCalled();
-   }
+        CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
+        MySessionBean newBean = getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext);
+        assert newBean != null;
+        assert bean.isCreateCalled();
+    }
 
-   @Test(groups = { "contexts" })
-   @SpecAssertion(section = "6.2", id = "nb")
-   public void testGetMayNotReturnNullUnlessContextualCreateReturnsNull()
-   {
-      // The case of no creational context is already tested where a null is
-      // returned. Here we just test that the contextual create can return null.
-      MyContextual bean = AfterBeanDiscoveryObserver.getBean();
-      bean.setShouldReturnNullInstances(true);
+    @Test(groups = { "contexts" })
+    @SpecAssertion(section = "6.2", id = "nb")
+    public void testGetMayNotReturnNullUnlessContextualCreateReturnsNull() {
+        // The case of no creational context is already tested where a null is
+        // returned. Here we just test that the contextual create can return null.
+        MyContextual bean = AfterBeanDiscoveryObserver.getBean();
+        bean.setShouldReturnNullInstances(true);
 
-      CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
-      assert getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext) == null;
-      assert bean.isCreateCalled();
-   }
-   
-   @Test(groups = { "contexts" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "6.3", id = "e")
-   })
-   public void testSameNormalScopeBeanInjectedEverywhere()
-   {
-      SimpleBeanA instanceOfA = getInstanceByType(SimpleBeanA.class);
-      SimpleBeanB instanceOfB = getInstanceByType(SimpleBeanB.class);
-      instanceOfA.getZ().setName("Ben");
-      assert instanceOfA.getZ().getName().equals("Ben");
-      assert instanceOfB.getZ().getName().equals("Ben");
-   }
+        CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
+        assert getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext) == null;
+        assert bean.isCreateCalled();
+    }
+
+    @Test(groups = { "contexts" })
+    @SpecAssertions({ @SpecAssertion(section = "6.3", id = "e") })
+    public void testSameNormalScopeBeanInjectedEverywhere() {
+        SimpleBeanA instanceOfA = getInstanceByType(SimpleBeanA.class);
+        SimpleBeanB instanceOfB = getInstanceByType(SimpleBeanB.class);
+        instanceOfA.getZ().setName("Ben");
+        assert instanceOfA.getZ().getName().equals("Ben");
+        assert instanceOfB.getZ().getName().equals("Ben");
+    }
 }

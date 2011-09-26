@@ -24,12 +24,10 @@ import javax.enterprise.inject.spi.Extension;
  * @author pmuir
  * 
  */
-public class BeforeBeanDiscoveryObserver implements Extension
-{
+public class BeforeBeanDiscoveryObserver implements Extension {
 
-   public void observe(@Observes BeforeBeanDiscovery beforeBeanDiscovery)
-   {
-      beforeBeanDiscovery.addScope(EpochScoped.class, true, false);
-   }
+    public void observe(@Observes BeforeBeanDiscovery beforeBeanDiscovery) {
+        beforeBeanDiscovery.addScope(EpochScoped.class, true, false);
+    }
 
 }

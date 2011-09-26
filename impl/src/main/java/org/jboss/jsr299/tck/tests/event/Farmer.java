@@ -18,12 +18,10 @@ package org.jboss.jsr299.tck.tests.event;
 
 import javax.enterprise.event.Observes;
 
-public class Farmer
-{
-   
-   public void observeEggLaying(@Observes Egg egg)
-   {
-      egg.recordVisit(this);
-   }
-   
+public class Farmer {
+
+    public void observeEggLaying(@Observes Egg egg) {
+        egg.recordVisit(this);
+    }
+
 }

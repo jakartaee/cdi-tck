@@ -20,19 +20,17 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Named;
 
-@Named @Default
+@Named
+@Default
 @RequestScoped
-public class Salmon
-{
-   private int age = 0;
+public class Salmon {
+    private int age = 0;
 
-   public int getAge()
-   {
-      return age;
-   }
+    public int getAge() {
+        return age;
+    }
 
-   public void setAge(int age)
-   {
-      this.age = age;
-   }
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

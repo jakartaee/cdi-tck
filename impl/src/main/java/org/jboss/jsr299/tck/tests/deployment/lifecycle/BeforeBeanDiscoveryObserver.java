@@ -24,32 +24,28 @@ import javax.enterprise.inject.spi.Extension;
  * @author pmuir
  * 
  */
-public class BeforeBeanDiscoveryObserver implements Extension
-{
+public class BeforeBeanDiscoveryObserver implements Extension {
 
-   private static boolean observed;
+    private static boolean observed;
 
-   /**
-    * @return the observed
-    */
-   public static boolean isObserved()
-   {
-      return observed;
-   }
+    /**
+     * @return the observed
+     */
+    public static boolean isObserved() {
+        return observed;
+    }
 
-   /**
-    * @param observed the observed to set
-    */
-   public static void setObserved(boolean observed)
-   {
-      BeforeBeanDiscoveryObserver.observed = observed;
-   }
+    /**
+     * @param observed the observed to set
+     */
+    public static void setObserved(boolean observed) {
+        BeforeBeanDiscoveryObserver.observed = observed;
+    }
 
-   public void observe(@Observes BeforeBeanDiscovery beforeBeanDiscovery)
-   {
-      setObserved(true);
-      beforeBeanDiscovery.addQualifier(Tame.class);
-      beforeBeanDiscovery.addScope(EpochScoped.class, false, false);
-   }
+    public void observe(@Observes BeforeBeanDiscovery beforeBeanDiscovery) {
+        setObserved(true);
+        beforeBeanDiscovery.addQualifier(Tame.class);
+        beforeBeanDiscovery.addScope(EpochScoped.class, false, false);
+    }
 
 }

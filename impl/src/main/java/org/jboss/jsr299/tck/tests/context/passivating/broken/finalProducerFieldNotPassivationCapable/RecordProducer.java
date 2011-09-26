@@ -19,7 +19,8 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.finalProducerField
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
-public class RecordProducer
-{
-   public @RequestScoped @Produces Broken_Record record = new Broken_Record();
+public class RecordProducer {
+    public @RequestScoped
+    @Produces
+    Broken_Record record = new Broken_Record();
 }

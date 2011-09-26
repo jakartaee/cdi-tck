@@ -25,55 +25,47 @@ import java.util.Set;
 
 import javax.enterprise.inject.spi.Annotated;
 
-public class AnnotatedWrapper implements Annotated
-{
-   
-   private Annotated delegate;
-   private Set<Annotation> annotations;
-   
-   public AnnotatedWrapper(Annotated delegate, boolean keepOriginalAnnotations, Annotation... annotations)
-   {
-      this.delegate = delegate;
-      this.annotations = new HashSet<Annotation>(Arrays.asList(annotations));
-      if (keepOriginalAnnotations) 
-      {
-         this.annotations.addAll(delegate.getAnnotations());
-      }
-   }
+public class AnnotatedWrapper implements Annotated {
 
-   @SuppressWarnings("unchecked")
-   public <T extends Annotation> T getAnnotation(Class<T> arg0)
-   {
-      for (Annotation annotation : annotations) {
-         if (arg0.isAssignableFrom(annotation.annotationType())) {
-            return (T) annotation;
-         }
-      }
-      return null;
-   }
+    private Annotated delegate;
+    private Set<Annotation> annotations;
 
-   public Set<Annotation> getAnnotations()
-   {
-         return Collections.unmodifiableSet(annotations);
-   }
+    public AnnotatedWrapper(Annotated delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
+        this.delegate = delegate;
+        this.annotations = new HashSet<Annotation>(Arrays.asList(annotations));
+        if (keepOriginalAnnotations) {
+            this.annotations.addAll(delegate.getAnnotations());
+        }
+    }
 
-   public Type getBaseType()
-   {
-      return delegate.getBaseType();
-   }
+    @SuppressWarnings("unchecked")
+    public <T extends Annotation> T getAnnotation(Class<T> arg0) {
+        for (Annotation annotation : annotations) {
+            if (arg0.isAssignableFrom(annotation.annotationType())) {
+                return (T) annotation;
+            }
+        }
+        return null;
+    }
 
-   public Set<Type> getTypeClosure()
-   {
-      return delegate.getTypeClosure();
-   }
+    public Set<Annotation> getAnnotations() {
+        return Collections.unmodifiableSet(annotations);
+    }
 
-   public boolean isAnnotationPresent(Class<? extends Annotation> arg0)
-   {
-      for (Annotation annotation : annotations) {
-         if (arg0.isAssignableFrom(annotation.annotationType())) {
-            return true;
-         }
-      }
-      return false;
-   }
+    public Type getBaseType() {
+        return delegate.getBaseType();
+    }
+
+    public Set<Type> getTypeClosure() {
+        return delegate.getTypeClosure();
+    }
+
+    public boolean isAnnotationPresent(Class<? extends Annotation> arg0) {
+        for (Annotation annotation : annotations) {
+            if (arg0.isAssignableFrom(annotation.annotationType())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

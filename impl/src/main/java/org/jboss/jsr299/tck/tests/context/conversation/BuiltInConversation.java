@@ -31,48 +31,39 @@ import javax.inject.Named;
 
 @ConversationScoped
 @Named("builtin")
-public class BuiltInConversation implements Serializable
-{
-   private static final long serialVersionUID = 1L;
-   @Inject
-   private BeanManager manager;
-   @Inject
-   private Conversation conversation;
-   
-   public boolean isScopeCorrect()
-   {
-      return getConversationBean().getScope().equals(RequestScoped.class);
-   }
-   
-   public boolean isQualifierCorrect()
-   {
-      for (Annotation qualifier : getConversationBean().getQualifiers())
-      {
-         if (qualifier.annotationType().equals(Default.class))
-         {
-            return true;
-         }
-      }
-      return false;
-   }
-   
-   public boolean isNameCorrect()
-   {
-      return getConversationBean().getName().equals("javax.enterprise.context.conversation");
-   }
-   
-   public boolean isDefaultConversationHasNullId()
-   {
-      return conversation.isTransient() && conversation.getId() == null;
-   }
-   
-   private Bean<?> getConversationBean()
-   {
-      Set<Bean<?>> beans = manager.getBeans(Conversation.class);
-      if (beans.size() != 1)
-      {
-         throw new RuntimeException("Multiple beans found for Conversation class.");
-      }
-      return beans.iterator().next();
-   }
+public class BuiltInConversation implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Inject
+    private BeanManager manager;
+    @Inject
+    private Conversation conversation;
+
+    public boolean isScopeCorrect() {
+        return getConversationBean().getScope().equals(RequestScoped.class);
+    }
+
+    public boolean isQualifierCorrect() {
+        for (Annotation qualifier : getConversationBean().getQualifiers()) {
+            if (qualifier.annotationType().equals(Default.class)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isNameCorrect() {
+        return getConversationBean().getName().equals("javax.enterprise.context.conversation");
+    }
+
+    public boolean isDefaultConversationHasNullId() {
+        return conversation.isTransient() && conversation.getId() == null;
+    }
+
+    private Bean<?> getConversationBean() {
+        Set<Bean<?>> beans = manager.getBeans(Conversation.class);
+        if (beans.size() != 1) {
+            throw new RuntimeException("Multiple beans found for Conversation class.");
+        }
+        return beans.iterator().next();
+    }
 }

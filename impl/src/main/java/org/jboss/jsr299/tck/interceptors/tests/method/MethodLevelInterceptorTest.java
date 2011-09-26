@@ -26,37 +26,29 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "3.1.PFD")
-public class MethodLevelInterceptorTest extends AbstractJSR299Test
-{
-    
+public class MethodLevelInterceptorTest extends AbstractJSR299Test {
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-            .withTestClassPackage(MethodLevelInterceptorTest.class)
-            .build();
+        return new WebArchiveBuilder().withTestClassPackage(MethodLevelInterceptorTest.class).build();
     }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "3", id = "ca"),
-      @SpecAssertion(section = "8", id = "a"),
-      @SpecAssertion(section = "8", id = "d"),
-      @SpecAssertion(section = "8", id = "g"),
-      @SpecAssertion(section = "8", id = "h")
-   })
-   public void testInterceptorCanBeAppliedToMoreThanOneMethod()
-   {
-      Fish fish = getInstanceByType(Fish.class);
-      assert fish.foo().equals("Intercepted bar");
-      assert fish.ping().equals("Intercepted pong");
-      assert fish.getName().equals("Salmon");
-      assert FishInterceptor.getInstanceCount() == 1;
-   }
-   
-   @Test
-   @SpecAssertion(section = "8", id = "j")
-   public void testExcludeClassInterceptors() {
-      assert getInstanceByType(Dog.class).foo().equals("Intercepted bar");
-      assert getInstanceByType(Dog.class).ping().equals("pong");
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3", id = "ca"), @SpecAssertion(section = "8", id = "a"),
+            @SpecAssertion(section = "8", id = "d"), @SpecAssertion(section = "8", id = "g"),
+            @SpecAssertion(section = "8", id = "h") })
+    public void testInterceptorCanBeAppliedToMoreThanOneMethod() {
+        Fish fish = getInstanceByType(Fish.class);
+        assert fish.foo().equals("Intercepted bar");
+        assert fish.ping().equals("Intercepted pong");
+        assert fish.getName().equals("Salmon");
+        assert FishInterceptor.getInstanceCount() == 1;
+    }
+
+    @Test
+    @SpecAssertion(section = "8", id = "j")
+    public void testExcludeClassInterceptors() {
+        assert getInstanceByType(Dog.class).foo().equals("Intercepted bar");
+        assert getInstanceByType(Dog.class).ping().equals("pong");
+    }
 }

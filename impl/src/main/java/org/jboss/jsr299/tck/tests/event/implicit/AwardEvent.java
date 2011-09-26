@@ -16,17 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.event.implicit;
 
-public class AwardEvent
-{
-   private Student student;
+public class AwardEvent {
+    private Student student;
 
-   public AwardEvent(Student student)
-   {
-      this.student = student;
-   }
-   
-   public Student getStudent()
-   {
-      return student;
-   }
+    public AwardEvent(Student student) {
+        this.student = student;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
 }

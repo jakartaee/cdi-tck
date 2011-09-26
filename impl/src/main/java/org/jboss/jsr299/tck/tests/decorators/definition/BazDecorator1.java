@@ -22,12 +22,13 @@ import javax.inject.Inject;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
-public class BazDecorator1 implements Baz 
-{
+public class BazDecorator1 implements Baz {
 
-   @Inject @Delegate Bazt bazt;
+    @Inject
+    @Delegate
+    Bazt bazt;
 
 }

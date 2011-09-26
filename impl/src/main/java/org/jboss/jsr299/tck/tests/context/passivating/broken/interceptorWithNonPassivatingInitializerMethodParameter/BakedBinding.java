@@ -29,9 +29,8 @@ import javax.interceptor.InterceptorBinding;
 @Inherited
 @InterceptorBinding
 @InterceptorType
-@Target({TYPE, METHOD})
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
-public @interface BakedBinding
-{
+public @interface BakedBinding {
 
 }

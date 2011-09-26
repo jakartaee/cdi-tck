@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.definition.stereotype;
 
 @AnotherStereotype
-public class Horse
-{
-   
+public class Horse {
+
 }

@@ -29,24 +29,19 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class MultipleDelegateInjectionPointsTest extends AbstractJSR299Test
-{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class MultipleDelegateInjectionPointsTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(MultipleDelegateInjectionPointsTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(MultipleDelegateInjectionPointsTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section="8.1.2", id="ca")
-   public void testMultipleDelegateInjectionPoints()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "8.1.2", id = "ca")
+    public void testMultipleDelegateInjectionPoints() {
+    }
 
 }

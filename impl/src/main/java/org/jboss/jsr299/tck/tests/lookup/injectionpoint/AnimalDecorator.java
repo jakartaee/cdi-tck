@@ -22,11 +22,12 @@ import javax.inject.Inject;
 
 @Decorator
 public class AnimalDecorator implements Animal {
-	
-	@Inject	@Delegate
-	private Animal bean;
 
-	public String hello() {
-		return bean.hello() + " world!";
-	}
+    @Inject
+    @Delegate
+    private Animal bean;
+
+    public String hello() {
+        return bean.hello() + " world!";
+    }
 }

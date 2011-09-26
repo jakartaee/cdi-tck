@@ -21,17 +21,15 @@ import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class LadybirdSpider extends Spider implements Serializable
-{
+public class LadybirdSpider extends Spider implements Serializable {
 
-   /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 3406592573483935477L;
+    private static final long serialVersionUID = 3406592573483935477L;
 
-public void spinWeb()
-   {
-      
-   }
-   
+    public void spinWeb() {
+
+    }
+
 }

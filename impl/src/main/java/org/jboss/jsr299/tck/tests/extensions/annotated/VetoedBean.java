@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.annotated;
 
-public class VetoedBean
-{
+public class VetoedBean {
 
 }

@@ -30,26 +30,18 @@ import org.testng.annotations.Test;
  * 
  * @author Shane Bryzak
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class NonPassivationCapableProducerMethodTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class NonPassivationCapableProducerMethodTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
+    public static WebArchive createTestArchive() {
         // Originally EAR but no enterprise feature used
-        return new WebArchiveBuilder()
-            .withTestClassPackage(NonPassivationCapableProducerMethodTest.class)
-            .build();
+        return new WebArchiveBuilder().withTestClassPackage(NonPassivationCapableProducerMethodTest.class).build();
     }
-    
-   @Test(groups = { "passivation" })
-   @SpecAssertions({
-     @SpecAssertion(section = "6.6.1", id = "cb"),
-     @SpecAssertion(section = "6.6.4", id = "ca")
-   })
-   public void testNonPassivationCapableProducerMethodNotOk()
-   {
-   }
+
+    @Test(groups = { "passivation" })
+    @SpecAssertions({ @SpecAssertion(section = "6.6.1", id = "cb"), @SpecAssertion(section = "6.6.4", id = "ca") })
+    public void testNonPassivationCapableProducerMethodNotOk() {
+    }
 }

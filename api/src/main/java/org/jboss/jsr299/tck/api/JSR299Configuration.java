@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -25,61 +25,57 @@ import org.jboss.jsr299.tck.spi.Managers;
 
 /**
  * The configuration of the TCK.
- * 
- * The TCK may be configured using system properties or placed in a properties
- * file called META-INF/cdi-tck.properties.
- * 
- * Porting package property names are the FQCN of the SPI class. Other property
- * names (one for each non-porting package SPI configuration option) are
- * specified here. The defaults are also listed here.
- * 
+ *
+ * The TCK may be configured using system properties or placed in a properties file called META-INF/cdi-tck.properties.
+ *
+ * Porting package property names are the FQCN of the SPI class. Other property names (one for each non-porting package SPI
+ * configuration option) are specified here. The defaults are also listed here.
+ *
  * The TCK may also be configured programatically through this interface
- * 
+ *
  * @author Pete Muir
  * @author Martin Kouba
  */
-public interface JSR299Configuration
-{
-    
+public interface JSR299Configuration {
+
     public static final String LIBRARY_DIRECTORY_PROPERTY_NAME = "org.jboss.jsr299.tck.libraryDirectory";
-    
-   /**
-    * The implementation of {@link Beans} in use.
-    */
-   public Beans getBeans();
-   
-   /**
-    * The implementation of {@link Contexts} in use.
-    */
-   public <T extends Context> Contexts<T> getContexts();
-   
-   /**
-    * The implementation of {@link Managers} in use.
-    */
-   public Managers getManagers();
 
-   public void setBeans(Beans beans);
+    /**
+     * The implementation of {@link Beans} in use.
+     */
+    public Beans getBeans();
 
-   public <T extends Context> void setContexts(Contexts<T> contexts);
+    /**
+     * The implementation of {@link Contexts} in use.
+     */
+    public <T extends Context> Contexts<T> getContexts();
 
-   public void setManagers(Managers managers);
+    /**
+     * The implementation of {@link Managers} in use.
+     */
+    public Managers getManagers();
 
-   public void setEl(EL el);
-   
-   /**
-    * The implementation of {@link EL} in use.
-    */
-   public EL getEl();
-   
-   /**
-    * The TCK allows additional libraries to be put in the deployed test
-    * artifacts (for example the porting package for the implementation). Any
-    * jars in this directory will be added to the deployed artifact.
-    * 
-    * By default no directory is used.
-    */
-   public String getLibraryDirectory();
-   
-   public void setLibraryDirectory(String libraryDir);
-   
+    public void setBeans(Beans beans);
+
+    public <T extends Context> void setContexts(Contexts<T> contexts);
+
+    public void setManagers(Managers managers);
+
+    public void setEl(EL el);
+
+    /**
+     * The implementation of {@link EL} in use.
+     */
+    public EL getEl();
+
+    /**
+     * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the
+     * implementation). Any jars in this directory will be added to the deployed artifact.
+     *
+     * By default no directory is used.
+     */
+    public String getLibraryDirectory();
+
+    public void setLibraryDirectory(String libraryDir);
+
 }

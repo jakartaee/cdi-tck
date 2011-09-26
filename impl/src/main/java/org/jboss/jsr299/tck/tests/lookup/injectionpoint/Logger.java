@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
-public interface Logger
-{
-   public void log(String message);
+public interface Logger {
+    public void log(String message);
 }

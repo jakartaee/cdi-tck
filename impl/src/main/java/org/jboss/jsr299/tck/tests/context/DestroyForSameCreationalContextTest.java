@@ -37,36 +37,31 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class DestroyForSameCreationalContextTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DestroyForSameCreationalContextTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DestroyForSameCreationalContextTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DestroyForSameCreationalContextTest.class).build();
     }
-   
-   @Test
-   @SpecAssertion(section = "6.2", id = "r")
-   public void testDestroyForSameCreationalContextOnly()
-   {
-      // Check that the mock cc is called (via cc.release()) when we request a context destroyed
-      // Note that this is an indirect effect
-      Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
-      
-      Bean<AnotherSessionBean> sessionBean = getBeans(AnotherSessionBean.class).iterator().next();
-      
-      MockCreationalContext.reset();
-      CreationalContext<AnotherSessionBean> creationalContext = new MockCreationalContext<AnotherSessionBean>();
-      AnotherSessionBean instance = sessionContext.get(sessionBean, creationalContext);
-      instance.ping();
-      
-      destroyContext(sessionContext);
-      assert MockCreationalContext.isReleaseCalled();
-            
-   }
-   
+
+    @Test
+    @SpecAssertion(section = "6.2", id = "r")
+    public void testDestroyForSameCreationalContextOnly() {
+        // Check that the mock cc is called (via cc.release()) when we request a context destroyed
+        // Note that this is an indirect effect
+        Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
+
+        Bean<AnotherSessionBean> sessionBean = getBeans(AnotherSessionBean.class).iterator().next();
+
+        MockCreationalContext.reset();
+        CreationalContext<AnotherSessionBean> creationalContext = new MockCreationalContext<AnotherSessionBean>();
+        AnotherSessionBean instance = sessionContext.get(sessionBean, creationalContext);
+        instance.ping();
+
+        destroyContext(sessionContext);
+        assert MockCreationalContext.isReleaseCalled();
+
+    }
+
 }

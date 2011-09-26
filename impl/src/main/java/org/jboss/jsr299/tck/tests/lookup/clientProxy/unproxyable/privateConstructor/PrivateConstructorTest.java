@@ -25,26 +25,20 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-
 /**
  * Test for problem detection of unproxyable bean with private constructor.
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class PrivateConstructorTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class PrivateConstructorTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(PrivateConstructorTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(PrivateConstructorTest.class).build();
     }
-    
-   @Test
-   @SpecAssertion(section = "5.4.1", id = "aa")
-   public void testClassWithPrivateConstructor()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "5.4.1", id = "aa")
+    public void testClassWithPrivateConstructor() {
+    }
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.broken.parameterizedTypesWithDifferentTypeParameters;
 
-public interface Radio<T1, T2>
-{
+public interface Radio<T1, T2> {
 
 }

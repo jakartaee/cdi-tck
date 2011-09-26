@@ -19,10 +19,8 @@ package org.jboss.jsr299.tck.tests.implementation.enterprise.broken.singletonWit
 import javax.ejb.Singleton;
 import javax.enterprise.context.ConversationScoped;
 
-
 @Singleton
 @ConversationScoped
-public class Husky_Broken
-{
+public class Husky_Broken {
 
 }

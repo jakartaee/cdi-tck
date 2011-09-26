@@ -31,36 +31,29 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class GetFromContextualTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class GetFromContextualTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(GetFromContextualTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(GetFromContextualTest.class).build();
     }
-    
-   @Test(groups = { "contexts" })
-   @SpecAssertions({
-      @SpecAssertion(section = "6.2", id = "o")
-   })
-   public void testGetMayNotCreateNewInstanceUnlessCreationalContextGiven()
-   {
-      Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
-      assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean) == null;
 
-      Contextual<MyApplicationBean> myApplicationBean = getBeans(MyApplicationBean.class).iterator().next();
-      assert getCurrentManager().getContext(ApplicationScoped.class).get(myApplicationBean) == null;
+    @Test(groups = { "contexts" })
+    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "o") })
+    public void testGetMayNotCreateNewInstanceUnlessCreationalContextGiven() {
+        Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
+        assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean) == null;
 
-      // Now try same operation with a CreationalContext
-      CreationalContext<MySessionBean> myCreationalContext = new MockCreationalContext<MySessionBean>();
-      assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean, myCreationalContext) != null;
+        Contextual<MyApplicationBean> myApplicationBean = getBeans(MyApplicationBean.class).iterator().next();
+        assert getCurrentManager().getContext(ApplicationScoped.class).get(myApplicationBean) == null;
 
-      CreationalContext<MyApplicationBean> myOtherCreationalContext = new MockCreationalContext<MyApplicationBean>();
-      assert getCurrentManager().getContext(ApplicationScoped.class).get(myApplicationBean, myOtherCreationalContext) != null;
-   }
-   
+        // Now try same operation with a CreationalContext
+        CreationalContext<MySessionBean> myCreationalContext = new MockCreationalContext<MySessionBean>();
+        assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean, myCreationalContext) != null;
+
+        CreationalContext<MyApplicationBean> myOtherCreationalContext = new MockCreationalContext<MyApplicationBean>();
+        assert getCurrentManager().getContext(ApplicationScoped.class).get(myApplicationBean, myOtherCreationalContext) != null;
+    }
+
 }

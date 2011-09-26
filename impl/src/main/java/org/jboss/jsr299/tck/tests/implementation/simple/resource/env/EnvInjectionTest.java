@@ -34,43 +34,34 @@ import org.testng.annotations.Test;
  * 
  * @author Dan Allen
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class EnvInjectionTest extends AbstractJSR299Test
-{
-    
-   @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(EnvInjectionTest.class)
-           .withBeansXml("beans.xml")
-           .withWebXml("web.xml")
-           .build();
-   }
-    
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertion(section = "3.5.1", id = "bb")
-   public void testInjectionOfEnv()
-   {
-      Bean<GreetingBean> greetingBean = getBeans(GreetingBean.class).iterator().next();
-      CreationalContext<GreetingBean> greetingBeanCc = getCurrentManager().createCreationalContext(greetingBean);
-      GreetingBean instance = greetingBean.create(greetingBeanCc);
-      assert instance.greet() != null;
-      assert instance.greet().equals("Hello there my friend");
-   }
-   
-   @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
-   @SpecAssertions({
-      @SpecAssertion(section = "7.3.6", id = "la"),
-      @SpecAssertion(section = "7.3.6", id = "ma"),
-      @SpecAssertion(section = "7.3.6", id = "o")
-   })
-   public void testProduceEnvProxy()
-   {
-      Bean<String> greetingEnvBean = getBeans(String.class, new AnnotationLiteral<Greeting>() {}).iterator().next();
-      CreationalContext<String> greetingEnvCc = getCurrentManager().createCreationalContext(greetingEnvBean);
-      String greeting = greetingEnvBean.create(greetingEnvCc);
-      assert greeting != null;
-      assert greeting.equals("Hello there my friend");
-   }
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnvInjectionTest extends AbstractJSR299Test {
+
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EnvInjectionTest.class).withBeansXml("beans.xml")
+                .withWebXml("web.xml").build();
+    }
+
+    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @SpecAssertion(section = "3.5.1", id = "bb")
+    public void testInjectionOfEnv() {
+        Bean<GreetingBean> greetingBean = getBeans(GreetingBean.class).iterator().next();
+        CreationalContext<GreetingBean> greetingBeanCc = getCurrentManager().createCreationalContext(greetingBean);
+        GreetingBean instance = greetingBean.create(greetingBeanCc);
+        assert instance.greet() != null;
+        assert instance.greet().equals("Hello there my friend");
+    }
+
+    @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "la"), @SpecAssertion(section = "7.3.6", id = "ma"),
+            @SpecAssertion(section = "7.3.6", id = "o") })
+    public void testProduceEnvProxy() {
+        Bean<String> greetingEnvBean = getBeans(String.class, new AnnotationLiteral<Greeting>() {
+        }).iterator().next();
+        CreationalContext<String> greetingEnvCc = getCurrentManager().createCreationalContext(greetingEnvBean);
+        String greeting = greetingEnvBean.create(greetingEnvCc);
+        assert greeting != null;
+        assert greeting.equals("Hello there my friend");
+    }
 }

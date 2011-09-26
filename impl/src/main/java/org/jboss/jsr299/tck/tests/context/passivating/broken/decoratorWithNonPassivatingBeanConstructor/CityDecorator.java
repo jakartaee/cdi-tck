@@ -24,16 +24,18 @@ import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 @Decorator
-public class CityDecorator implements CityInterface, Serializable
-{
-   private static final long serialVersionUID = 7666849923138796340L;
-   @Inject @Delegate @Any CityInterface city;
-   
-   @Inject
-   public CityDecorator(NonPassivating nonPassivating) {}
-   
-   public void foo()
-   {
-      city.foo();      
-   }
+public class CityDecorator implements CityInterface, Serializable {
+    private static final long serialVersionUID = 7666849923138796340L;
+    @Inject
+    @Delegate
+    @Any
+    CityInterface city;
+
+    @Inject
+    public CityDecorator(NonPassivating nonPassivating) {
+    }
+
+    public void foo() {
+        city.foo();
+    }
 }

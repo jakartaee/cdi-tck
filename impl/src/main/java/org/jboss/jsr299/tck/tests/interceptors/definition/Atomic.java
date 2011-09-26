@@ -26,12 +26,11 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD })
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented
 @MissileBinding
 @InterceptorBinding
-public @interface Atomic
-{
+public @interface Atomic {
 
 }

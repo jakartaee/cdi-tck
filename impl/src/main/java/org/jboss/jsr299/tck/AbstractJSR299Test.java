@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -42,7 +42,7 @@ import org.jboss.jsr299.tck.impl.OldSPIBridge;
  * Abstract JSR299 TCK test.
  */
 public abstract class AbstractJSR299Test extends Arquillian {
-    
+
     protected BeanManager getCurrentManager() {
         return getCurrentConfiguration().getManagers().getManager();
     }
@@ -158,16 +158,12 @@ public abstract class AbstractJSR299Test extends Arquillian {
      * @return <code>true</code> if throwable type is assignable from specified throwable or any cause in stack (works
      *         recursively), <code>false</code> otherwise
      */
-    protected boolean isThrowablePresent(Class<? extends Throwable> throwableType, Throwable throwable)
-    {
-        if (throwable == null)
-        {
+    protected boolean isThrowablePresent(Class<? extends Throwable> throwableType, Throwable throwable) {
+        if (throwable == null) {
             return false;
-        } else if (throwableType.isAssignableFrom(throwable.getClass()))
-        {
+        } else if (throwableType.isAssignableFrom(throwable.getClass())) {
             return true;
-        } else
-        {
+        } else {
             return isThrowablePresent(throwableType, throwable.getCause());
         }
     }

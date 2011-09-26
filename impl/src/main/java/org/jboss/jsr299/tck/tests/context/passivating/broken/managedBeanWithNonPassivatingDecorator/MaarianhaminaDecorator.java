@@ -21,7 +21,8 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class MaarianhaminaDecorator 
-{   
-   @Inject @Delegate Maarianhamina_Broken maarianHamina;
+public class MaarianhaminaDecorator {
+    @Inject
+    @Delegate
+    Maarianhamina_Broken maarianHamina;
 }

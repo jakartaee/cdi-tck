@@ -30,11 +30,10 @@ import javax.enterprise.inject.Stereotype;
 
 @Stereotype
 @NamedStereotype
-@Target( { TYPE, METHOD, FIELD })
+@Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @RequestScoped
 @Inherited
-public @interface NamedRequestStereotype
-{
+public @interface NamedRequestStereotype {
 
 }

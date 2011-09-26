@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.initializer;
 
-public interface ChickenInterface
-{
-   public String getName();
+public interface ChickenInterface {
+    public String getName();
 }

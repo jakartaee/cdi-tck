@@ -16,5 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.parameterized;
 
-public class ObjectDao extends Dao<Object, Object>{
+public class ObjectDao extends Dao<Object, Object> {
 }

@@ -20,13 +20,11 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
 @Cheap
-public class TropicalFruit implements Fruit
-{
-   @Inject
-   private InjectionPoint metadata;
+public class TropicalFruit implements Fruit {
+    @Inject
+    private InjectionPoint metadata;
 
-   public InjectionPoint getMetadata()
-   {
-      return metadata;
-   }
+    public InjectionPoint getMetadata() {
+        return metadata;
+    }
 }

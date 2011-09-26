@@ -17,12 +17,10 @@
 package org.jboss.jsr299.tck.tests.implementation.initializer;
 
 @StandardVariety
-public class StandardChicken implements ChickenInterface
-{
+public class StandardChicken implements ChickenInterface {
 
-   public String getName()
-   {
-      return "Standard";
-   }
+    public String getName() {
+        return "Standard";
+    }
 
 }

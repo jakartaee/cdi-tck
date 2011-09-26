@@ -21,7 +21,6 @@ import javax.inject.Named;
 
 @Named("whitefish")
 @Alternative
-public class Cod implements Animal
-{
+public class Cod implements Animal {
 
 }

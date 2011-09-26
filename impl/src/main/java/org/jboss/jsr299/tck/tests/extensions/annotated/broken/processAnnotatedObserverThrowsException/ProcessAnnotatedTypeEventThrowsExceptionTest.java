@@ -27,26 +27,20 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests that an exception thrown by a ProcessAnnotatedType event observer
- * is treated as a deployment error
+ * Tests that an exception thrown by a ProcessAnnotatedType event observer is treated as a deployment error
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ProcessAnnotatedTypeEventThrowsExceptionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ProcessAnnotatedTypeEventThrowsExceptionTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ProcessAnnotatedTypeEventThrowsExceptionTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ProcessAnnotatedTypeEventThrowsExceptionTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "11.5.5", id = "e")
-   public void testProcessAnnotatedTypeEventThrowsExceptionNotOk()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "11.5.5", id = "e")
+    public void testProcessAnnotatedTypeEventThrowsExceptionNotOk() {
+    }
 }

@@ -16,12 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.lifecycle;
 
-public class RoemerPassage
-{
-   public final static String name = "RoemerPassage";
-   
-   public String getName()
-   {
-      return name;
-   }
+public class RoemerPassage {
+    public final static String name = "RoemerPassage";
+
+    public String getName() {
+        return name;
+    }
 }

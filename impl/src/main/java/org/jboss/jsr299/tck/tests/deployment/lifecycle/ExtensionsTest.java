@@ -32,48 +32,38 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ExtensionsTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ExtensionsTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ExtensionsTest.class)
-            .withBeansXml("beans.xml")
-            .withExtension("javax.enterprise.inject.spi.Extension.ExtensionsTest")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ExtensionsTest.class).withBeansXml("beans.xml")
+                .withExtension("javax.enterprise.inject.spi.Extension.ExtensionsTest").build();
     }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="11.5.1", id="a"),
-      @SpecAssertion(section="12.2", id="b"),
-      @SpecAssertion(section="12.2", id="c")
-   })
-   public void testBeforeBeanDiscoveryEventIsCalled()
-   {
-      assert BeforeBeanDiscoveryObserver.isObserved();
-   }
-   
-   @Test
-   @SpecAssertion(section="11.5.1", id="ab")
-   public void testAddingBindingType()
-   {
-      assert BeforeBeanDiscoveryObserver.isObserved();
-      assert getBeans(Alligator.class).size() == 0;
-      assert getBeans(Alligator.class, new AnnotationLiteral<Tame>() {}).size() == 1;
-   }
-   
-   @Test
-   @SpecAssertion(section="11.5.1", id="ac")
-   public void testAddingScopeType()
-   {
-      assert BeforeBeanDiscoveryObserver.isObserved();
-      assert getBeans(RomanEmpire.class).size() == 1;
-      Bean<RomanEmpire> bean = getBeans(RomanEmpire.class).iterator().next();
-      assert bean.getScope().equals(EpochScoped.class);
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.1", id = "a"), @SpecAssertion(section = "12.2", id = "b"),
+            @SpecAssertion(section = "12.2", id = "c") })
+    public void testBeforeBeanDiscoveryEventIsCalled() {
+        assert BeforeBeanDiscoveryObserver.isObserved();
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.1", id = "ab")
+    public void testAddingBindingType() {
+        assert BeforeBeanDiscoveryObserver.isObserved();
+        assert getBeans(Alligator.class).size() == 0;
+        assert getBeans(Alligator.class, new AnnotationLiteral<Tame>() {
+        }).size() == 1;
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.1", id = "ac")
+    public void testAddingScopeType() {
+        assert BeforeBeanDiscoveryObserver.isObserved();
+        assert getBeans(RomanEmpire.class).size() == 1;
+        Bean<RomanEmpire> bean = getBeans(RomanEmpire.class).iterator().next();
+        assert bean.getScope().equals(EpochScoped.class);
+    }
 
 }

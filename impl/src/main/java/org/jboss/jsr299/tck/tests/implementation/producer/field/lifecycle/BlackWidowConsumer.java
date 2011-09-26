@@ -19,21 +19,18 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.lifecycle;
 
 import javax.inject.Inject;
 
-
 /**
- * This simple bean contains an injection point to receive the value of a
- * producer field in another bean.
+ * This simple bean contains an injection point to receive the value of a producer field in another bean.
  * 
  * @author David Allen
  * 
  */
-public class BlackWidowConsumer
-{
-   @Inject @Tame
-   private BlackWidow injectedSpider;
+public class BlackWidowConsumer {
+    @Inject
+    @Tame
+    private BlackWidow injectedSpider;
 
-   public BlackWidow getInjectedSpider()
-   {
-      return injectedSpider;
-   }
+    public BlackWidow getInjectedSpider() {
+        return injectedSpider;
+    }
 }

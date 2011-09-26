@@ -17,11 +17,10 @@
 package org.jboss.jsr299.tck.tests.event.eventTypes;
 
 /**
- * Abstract level of event hierarchy used to test firing a concrete type and
- * observing each of the event types associated with that concrete type.
+ * Abstract level of event hierarchy used to test firing a concrete type and observing each of the event types associated with
+ * that concrete type.
  * 
  * @author David Allen
  */
-abstract class AbstractEvent implements GeneralEvent
-{
+abstract class AbstractEvent implements GeneralEvent {
 }

@@ -20,29 +20,24 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateful;
 
 @Stateful
-public class MegaPoorHenHouse extends PoorHenHouse implements MegaPoorHenHouseLocal
-{
-   private boolean postConstructCalledAfterSuperclassInitializer = false;
+public class MegaPoorHenHouse extends PoorHenHouse implements MegaPoorHenHouseLocal {
+    private boolean postConstructCalledAfterSuperclassInitializer = false;
 
-   public Fox getFox()
-   {
-      return fox;
-   }
+    public Fox getFox() {
+        return fox;
+    }
 
-   @PostConstruct
-   public void postConstruct()
-   {
-      postConstructCalledAfterSuperclassInitializer = initializerCalledAfterSuperclassInjection;
-   }
+    @PostConstruct
+    public void postConstruct() {
+        postConstructCalledAfterSuperclassInitializer = initializerCalledAfterSuperclassInjection;
+    }
 
-   public boolean isPostConstructCalledAfterSuperclassInitializer()
-   {
-      return postConstructCalledAfterSuperclassInitializer;
-   }
+    public boolean isPostConstructCalledAfterSuperclassInitializer() {
+        return postConstructCalledAfterSuperclassInitializer;
+    }
 
-   @Override
-   public boolean isInitializerCalledAfterSuperclassInjection()
-   {
-      return initializerCalledAfterSuperclassInjection;
-   }
+    @Override
+    public boolean isInitializerCalledAfterSuperclassInjection() {
+        return initializerCalledAfterSuperclassInjection;
+    }
 }

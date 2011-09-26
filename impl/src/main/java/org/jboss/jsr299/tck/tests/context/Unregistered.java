@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.context;
 
-public @interface Unregistered
-{
+public @interface Unregistered {
 }

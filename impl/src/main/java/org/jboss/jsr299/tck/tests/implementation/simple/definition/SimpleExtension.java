@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
 import javax.enterprise.inject.spi.Extension;
 
-public class SimpleExtension implements Extension
-{
+public class SimpleExtension implements Extension {
 
 }

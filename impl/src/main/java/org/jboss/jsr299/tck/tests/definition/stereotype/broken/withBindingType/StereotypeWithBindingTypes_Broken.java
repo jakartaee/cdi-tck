@@ -25,9 +25,8 @@ import java.lang.annotation.Target;
 import javax.enterprise.inject.Stereotype;
 
 @Stereotype
-@Target( { TYPE })
+@Target({ TYPE })
 @Retention(RUNTIME)
 @Asynchronous
-public @interface StereotypeWithBindingTypes_Broken
-{
+public @interface StereotypeWithBindingTypes_Broken {
 }

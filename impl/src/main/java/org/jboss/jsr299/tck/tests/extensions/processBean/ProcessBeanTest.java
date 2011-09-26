@@ -35,85 +35,74 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ProcessBeanTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ProcessBeanTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ProcessBeanTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ProcessBeanTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.8", id = "ba"),
-      @SpecAssertion(section = "11.5.8", id = "eda"),
-      @SpecAssertion(section = "11.5.8", id = "efa"),
-      @SpecAssertion(section = "11.5.8", id = "fa"),
-      @SpecAssertion(section = "11.5.8", id = "l"),
-      @SpecAssertion(section = "12.3", id = "fa")
-   })
-   public void testProcessBeanEvent()
-   {
-      assert ProcessBeanObserver.getCatProcessManagedBean().getBean().getBeanClass().equals(Cat.class);
-      assert ProcessBeanObserver.getCatProcessBeanCount() == 2;
-      assert ProcessBeanObserver.getCatProcessManagedBean().getAnnotated() instanceof AnnotatedType<?>;
-      assert ProcessBeanObserver.getCatProcessManagedBean().getAnnotatedBeanClass().getBaseType().equals(Cat.class);
-   }
-   
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.8", id = "eaa"),
-      @SpecAssertion(section = "11.5.8", id = "edc"),
-      @SpecAssertion(section = "11.5.8", id = "efc"),
-      @SpecAssertion(section = "11.5.8", id = "fc"),
-      @SpecAssertion(section = "11.5.8", id = "i"),
-      @SpecAssertion(section = "11.5.8", id = "j"),
-      @SpecAssertion(section = "12.3", id = "ha")
-   })
-   @Test
-   public void testProcessProducerMethodEvent()
-   {
-      assert ProcessBeanObserver.getCowProcessProducerMethod().getBean().getTypes().contains(Cow.class);
-      assert ProcessBeanObserver.getCowProcessProducerMethod().getBean().getBeanClass().equals(Cowshed.class);
-      assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getBaseType().equals(Cow.class);
-      assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getDeclaringType().getBaseType().equals(Cowshed.class);
-      // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and ProcessProducerMethod
-      // https://issues.jboss.org/browse/CDITCK-168
-      // https://issues.jboss.org/browse/WELD-586
-      assert ProcessBeanObserver.getCowShedProcessBeanCount() == 2;
-      assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotated() instanceof AnnotatedMethod<?>;
-      assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getJavaMember().getName().equals("getDaisy");
-      assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getJavaMember().getDeclaringClass().equals(Cowshed.class);
-      assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedDisposedParameter().getDeclaringCallable().getJavaMember().getName().equals("disposeOfDaisy");
-      assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedDisposedParameter().getDeclaringCallable().getJavaMember().getDeclaringClass().equals(Cowshed.class);
-   }
-   
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.8", id = "eb"),
-      @SpecAssertion(section = "11.5.8", id = "edd"),
-      @SpecAssertion(section = "11.5.8", id = "efd"),
-      @SpecAssertion(section = "11.5.8", id = "fd"),
-      @SpecAssertion(section = "11.5.8", id = "n"),
-      @SpecAssertion(section = "12.3", id = "hb")
-   })
-   @Test
-   public void testProcessProducerFieldEvent()
-   {
-      assert ProcessBeanObserver.getChickenProcessProducerField().getBean().getTypes().contains(Chicken.class);
-      assert ProcessBeanObserver.getChickenProcessProducerField().getBean().getBeanClass().equals(ChickenHutch.class);
-      assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getBaseType().equals(Chicken.class);
-      assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getDeclaringType().getBaseType().equals(ChickenHutch.class);
-      // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and ProcessProducerMethod
-      // https://issues.jboss.org/browse/CDITCK-168
-      // https://issues.jboss.org/browse/WELD-586
-      assert ProcessBeanObserver.getChickenHutchProcessBeanCount() == 2;
-      assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotated() instanceof AnnotatedField<?>;
-      assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getJavaMember().getName().equals("chicken");
-      assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getJavaMember().getDeclaringClass().equals(ChickenHutch.class);
-   }
-   
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "ba"), @SpecAssertion(section = "11.5.8", id = "eda"),
+            @SpecAssertion(section = "11.5.8", id = "efa"), @SpecAssertion(section = "11.5.8", id = "fa"),
+            @SpecAssertion(section = "11.5.8", id = "l"), @SpecAssertion(section = "12.3", id = "fa") })
+    public void testProcessBeanEvent() {
+        assert ProcessBeanObserver.getCatProcessManagedBean().getBean().getBeanClass().equals(Cat.class);
+        assert ProcessBeanObserver.getCatProcessBeanCount() == 2;
+        assert ProcessBeanObserver.getCatProcessManagedBean().getAnnotated() instanceof AnnotatedType<?>;
+        assert ProcessBeanObserver.getCatProcessManagedBean().getAnnotatedBeanClass().getBaseType().equals(Cat.class);
+    }
+
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "eaa"), @SpecAssertion(section = "11.5.8", id = "edc"),
+            @SpecAssertion(section = "11.5.8", id = "efc"), @SpecAssertion(section = "11.5.8", id = "fc"),
+            @SpecAssertion(section = "11.5.8", id = "i"), @SpecAssertion(section = "11.5.8", id = "j"),
+            @SpecAssertion(section = "12.3", id = "ha") })
+    @Test
+    public void testProcessProducerMethodEvent() {
+        assert ProcessBeanObserver.getCowProcessProducerMethod().getBean().getTypes().contains(Cow.class);
+        assert ProcessBeanObserver.getCowProcessProducerMethod().getBean().getBeanClass().equals(Cowshed.class);
+        assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getBaseType().equals(Cow.class);
+        assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getDeclaringType().getBaseType()
+                .equals(Cowshed.class);
+        // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and
+        // ProcessProducerMethod
+        // https://issues.jboss.org/browse/CDITCK-168
+        // https://issues.jboss.org/browse/WELD-586
+        assert ProcessBeanObserver.getCowShedProcessBeanCount() == 2;
+        assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotated() instanceof AnnotatedMethod<?>;
+        assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getJavaMember().getName()
+                .equals("getDaisy");
+        assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedProducerMethod().getJavaMember()
+                .getDeclaringClass().equals(Cowshed.class);
+        assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedDisposedParameter().getDeclaringCallable()
+                .getJavaMember().getName().equals("disposeOfDaisy");
+        assert ProcessBeanObserver.getCowProcessProducerMethod().getAnnotatedDisposedParameter().getDeclaringCallable()
+                .getJavaMember().getDeclaringClass().equals(Cowshed.class);
+    }
+
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "eb"), @SpecAssertion(section = "11.5.8", id = "edd"),
+            @SpecAssertion(section = "11.5.8", id = "efd"), @SpecAssertion(section = "11.5.8", id = "fd"),
+            @SpecAssertion(section = "11.5.8", id = "n"), @SpecAssertion(section = "12.3", id = "hb") })
+    @Test
+    public void testProcessProducerFieldEvent() {
+        assert ProcessBeanObserver.getChickenProcessProducerField().getBean().getTypes().contains(Chicken.class);
+        assert ProcessBeanObserver.getChickenProcessProducerField().getBean().getBeanClass().equals(ChickenHutch.class);
+        assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getBaseType()
+                .equals(Chicken.class);
+        assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getDeclaringType()
+                .getBaseType().equals(ChickenHutch.class);
+        // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and
+        // ProcessProducerMethod
+        // https://issues.jboss.org/browse/CDITCK-168
+        // https://issues.jboss.org/browse/WELD-586
+        assert ProcessBeanObserver.getChickenHutchProcessBeanCount() == 2;
+        assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotated() instanceof AnnotatedField<?>;
+        assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getJavaMember().getName()
+                .equals("chicken");
+        assert ProcessBeanObserver.getChickenProcessProducerField().getAnnotatedProducerField().getJavaMember()
+                .getDeclaringClass().equals(ChickenHutch.class);
+    }
+
 }

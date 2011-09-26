@@ -23,14 +23,13 @@ import javax.security.auth.login.LoginException;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Local
-public interface PrincipalInjectedBeanLocal
-{
-   
-   public Principal getPrincipal();
-   
-   public void login() throws LoginException;
+public interface PrincipalInjectedBeanLocal {
+
+    public Principal getPrincipal();
+
+    public void login() throws LoginException;
 
 }

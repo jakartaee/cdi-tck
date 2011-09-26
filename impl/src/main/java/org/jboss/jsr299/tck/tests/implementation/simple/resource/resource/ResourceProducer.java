@@ -20,9 +20,9 @@ import javax.annotation.Resource;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 
-public class ResourceProducer
-{
-   @Produces @Another 
-   @Resource(mappedName = "java:comp/BeanManager") 
-   private BeanManager manager;
+public class ResourceProducer {
+    @Produces
+    @Another
+    @Resource(mappedName = "java:comp/BeanManager")
+    private BeanManager manager;
 }

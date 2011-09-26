@@ -18,29 +18,25 @@ package org.jboss.jsr299.tck.tests.decorators.definition.inject.delegateField;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class MockLogger implements Logger
-{
+public class MockLogger implements Logger {
 
-   private static String message = "";
+    private static String message = "";
 
-   public void log(String string)
-   {
-      message = string;
-   }
+    public void log(String string) {
+        message = string;
+    }
 
-   public static void reset()
-   {
-      message = null;
-   }
-   
-   /**
-    * @return the message
-    */
-   public static String getMessage()
-   {
-      return message;
-   }
+    public static void reset() {
+        message = null;
+    }
+
+    /**
+     * @return the message
+     */
+    public static String getMessage() {
+        return message;
+    }
 
 }

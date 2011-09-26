@@ -16,14 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.beanManager;
 
-public class Cat
-{
-   
-   @SuppressWarnings("unused")
-   private String name;
+public class Cat {
 
-   public Cat(String name)
-   {
-      this.name = name;
-   }
+    @SuppressWarnings("unused")
+    private String name;
+
+    public Cat(String name) {
+        this.name = name;
+    }
 }

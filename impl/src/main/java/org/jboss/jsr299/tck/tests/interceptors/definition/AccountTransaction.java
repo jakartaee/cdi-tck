@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.interceptors.definition;
 
 @Logged
-public class AccountTransaction
-{
-   public void transfer() {}
+public class AccountTransaction {
+    public void transfer() {
+    }
 }

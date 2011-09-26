@@ -19,18 +19,15 @@ package org.jboss.jsr299.tck.tests.interceptors.definition;
 import javax.inject.Inject;
 
 @MissileBinding
-public class Submarine
-{
-   private Warhead warhead;
-   
-   @Inject
-   public void init(Warhead warhead)
-   {
-      this.warhead = warhead;
-   }
-   
-   public boolean isInjected()
-   {
-      return warhead != null;
-   }
+public class Submarine {
+    private Warhead warhead;
+
+    @Inject
+    public void init(Warhead warhead) {
+        this.warhead = warhead;
+    }
+
+    public boolean isInjected() {
+        return warhead != null;
+    }
 }

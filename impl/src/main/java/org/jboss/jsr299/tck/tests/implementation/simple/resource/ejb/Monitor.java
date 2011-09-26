@@ -20,22 +20,19 @@ import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
 
-@RequestScoped 
-public class Monitor implements Serializable
-{
-   /**
+@RequestScoped
+public class Monitor implements Serializable {
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 4495864336368063408L;
-	private boolean remoteEjbDestroyed = false;
-   
-   public void remoteEjbDestroyed()
-   {
-      remoteEjbDestroyed = true;
-   }
-   
-   public boolean isRemoteEjbDestroyed()
-   {
-      return remoteEjbDestroyed;
-   }
+    private static final long serialVersionUID = 4495864336368063408L;
+    private boolean remoteEjbDestroyed = false;
+
+    public void remoteEjbDestroyed() {
+        remoteEjbDestroyed = true;
+    }
+
+    public boolean isRemoteEjbDestroyed() {
+        return remoteEjbDestroyed;
+    }
 }

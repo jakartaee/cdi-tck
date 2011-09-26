@@ -28,49 +28,41 @@ import javax.transaction.UserTransaction;
 
 @Stateful
 @TransactionManagement(TransactionManagementType.BEAN)
-public class Bean implements BeanRemote
-{
-   private int knocks = 0;
-   
-   private @Inject Monitor monitor;
-   
-   private @Resource UserTransaction transaction;
-   
-   public String knockKnock()
-   {
-      knocks++;
-      return "We're home";
-   }
-   
-   public int getKnocks()
-   {
-      return knocks;
-   }
-   
-   public boolean isUserTransactionInjected()
-   {
-      try
-      {
-         if (transaction != null)
-         {
-            transaction.getStatus();
-            return true;
-         }
-      }
-      catch (SystemException e)
-      {
-      }
-      return false;
-   }
+public class Bean implements BeanRemote {
+    private int knocks = 0;
 
-   @PreDestroy 
-   public void cleanup()
-   {
-      monitor.remoteEjbDestroyed();
-   }
+    private @Inject
+    Monitor monitor;
 
-   @Remove
-   public void dispose()
-   {
-   }
+    private @Resource
+    UserTransaction transaction;
+
+    public String knockKnock() {
+        knocks++;
+        return "We're home";
+    }
+
+    public int getKnocks() {
+        return knocks;
+    }
+
+    public boolean isUserTransactionInjected() {
+        try {
+            if (transaction != null) {
+                transaction.getStatus();
+                return true;
+            }
+        } catch (SystemException e) {
+        }
+        return false;
+    }
+
+    @PreDestroy
+    public void cleanup() {
+        monitor.remoteEjbDestroyed();
+    }
+
+    @Remove
+    public void dispose() {
+    }
 }

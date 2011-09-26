@@ -20,29 +20,23 @@ import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-public class FarmInterceptor
-{
+public class FarmInterceptor {
 
-   @Inject
-   private Sheep sheep;
-   private boolean initializerCalled = false;
+    @Inject
+    private Sheep sheep;
+    private boolean initializerCalled = false;
 
-   @Inject
-   public void initialize(Sheep sheep)
-   {
-      initializerCalled = sheep != null;
-   }
+    @Inject
+    public void initialize(Sheep sheep) {
+        initializerCalled = sheep != null;
+    }
 
-   @AroundInvoke
-   public Object intercept(InvocationContext invocation) throws Exception
-   {
-      if ((sheep != null) && initializerCalled)
-      {
-         return (Integer) invocation.proceed() + 1;
-      }
-      else
-      {
-         throw new RuntimeException("Sheep not injected.");
-      }
-   }
+    @AroundInvoke
+    public Object intercept(InvocationContext invocation) throws Exception {
+        if ((sheep != null) && initializerCalled) {
+            return (Integer) invocation.proceed() + 1;
+        } else {
+            throw new RuntimeException("Sheep not injected.");
+        }
+    }
 }

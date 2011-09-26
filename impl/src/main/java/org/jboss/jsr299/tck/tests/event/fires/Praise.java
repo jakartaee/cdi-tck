@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.event.fires;
 
-public class Praise
-{
+public class Praise {
 }

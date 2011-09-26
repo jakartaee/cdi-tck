@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.inco
 import javax.enterprise.inject.Specializes;
 
 @Specializes
-public class Manager extends Employee
-{
+public class Manager extends Employee {
 
 }

@@ -24,30 +24,25 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class InterceptorCalledBeforeDecoratorTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InterceptorCalledBeforeDecoratorTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InterceptorCalledBeforeDecoratorTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InterceptorCalledBeforeDecoratorTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "9.4", id = "g")
-   public void testInterceptorCalledBeforeDecorator()
-   {
-      FooImpl.interceptorCalledFirst = false;
-      FooImpl.decoratorCalledFirst = false;
-      
-      Foo foo = getInstanceByType(Foo.class);
-      foo.bar();
-      
-      assert FooImpl.interceptorCalledFirst;
-      assert !FooImpl.decoratorCalledFirst;
-   }
+
+    @Test
+    @SpecAssertion(section = "9.4", id = "g")
+    public void testInterceptorCalledBeforeDecorator() {
+        FooImpl.interceptorCalledFirst = false;
+        FooImpl.decoratorCalledFirst = false;
+
+        Foo foo = getInstanceByType(Foo.class);
+        foo.bar();
+
+        assert FooImpl.interceptorCalledFirst;
+        assert !FooImpl.decoratorCalledFirst;
+    }
 }

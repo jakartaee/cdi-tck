@@ -29,24 +29,19 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class BeforeBeanDiscoveryThrowsExceptionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class BeforeBeanDiscoveryThrowsExceptionTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(BeforeBeanDiscoveryThrowsExceptionTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(BeforeBeanDiscoveryThrowsExceptionTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-   
-   @Test
-   @SpecAssertion(section="11.5.1", id="ag")
-   public void testThrowsException()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "11.5.1", id = "ag")
+    public void testThrowsException() {
+    }
 
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.context.dependent;
 
-public interface DeadlyAnimal
-{
+public interface DeadlyAnimal {
 
 }

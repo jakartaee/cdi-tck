@@ -21,54 +21,45 @@ import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
 @AnimalStereotype
-public class Fox
-{
-   
-   @Produces
-   private Den den = new Den("FoxDen");
-   
-   private int nextLitterSize;
-   
-   private boolean litterDisposed = false;
-   
-   public void observeEvent(@Observes String event)
-   {
-      
-   }
+public class Fox {
 
-   public Den getDen()
-   {
-      return den;
-   }
+    @Produces
+    private Den den = new Den("FoxDen");
 
-   public void setDen(Den den)
-   {
-      this.den = den;
-   }
+    private int nextLitterSize;
 
-   public int getNextLitterSize()
-   {
-      return nextLitterSize;
-   }
+    private boolean litterDisposed = false;
 
-   public void setNextLitterSize(int nextLitterSize)
-   {
-      this.nextLitterSize = nextLitterSize;
-   }
-   
-   @Produces
-   public Litter produceLitter()
-   {
-      return new Litter(nextLitterSize);
-   }
-   
-   public void disposeLitter(@Disposes Litter litter)
-   {
-      this.litterDisposed = true;
-   }
+    public void observeEvent(@Observes String event) {
 
-   public boolean isLitterDisposed()
-   {
-      return litterDisposed;
-   }
+    }
+
+    public Den getDen() {
+        return den;
+    }
+
+    public void setDen(Den den) {
+        this.den = den;
+    }
+
+    public int getNextLitterSize() {
+        return nextLitterSize;
+    }
+
+    public void setNextLitterSize(int nextLitterSize) {
+        this.nextLitterSize = nextLitterSize;
+    }
+
+    @Produces
+    public Litter produceLitter() {
+        return new Litter(nextLitterSize);
+    }
+
+    public void disposeLitter(@Disposes Litter litter) {
+        this.litterDisposed = true;
+    }
+
+    public boolean isLitterDisposed() {
+        return litterDisposed;
+    }
 }

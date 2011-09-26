@@ -21,10 +21,10 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class GraultExtendsDecorator
-{
-   
-   @Inject @Delegate
-   private Grault<? extends Number> grault;
+public class GraultExtendsDecorator {
+
+    @Inject
+    @Delegate
+    private Grault<? extends Number> grault;
 
 }

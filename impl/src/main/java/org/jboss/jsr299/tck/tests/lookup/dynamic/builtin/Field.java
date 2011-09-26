@@ -21,14 +21,13 @@ import java.io.Serializable;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
-public class Field implements Serializable
-{
-   
-   @Inject private Instance<Cow> instance;
-   
-   public Instance<Cow> getInstance()
-   {
-      return instance;
-   }
+public class Field implements Serializable {
+
+    @Inject
+    private Instance<Cow> instance;
+
+    public Instance<Cow> getInstance() {
+        return instance;
+    }
 
 }

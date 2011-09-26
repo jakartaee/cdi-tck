@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.broken.directlyExtendsSimpleBean;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -26,23 +25,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DirectlyExtendsSimpleBeanTest extends AbstractJSR299Test
-{
-   
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DirectlyExtendsSimpleBeanTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(DirectlyExtendsSimpleBeanTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(DirectlyExtendsSimpleBeanTest.class).build();
     }
-    
-   @Test(groups={"specialization"}) 
-   @SpecAssertion(section="3.2.4", id = "da")
-   public void testSpecializingClassDirectlyExtendsSimpleBean()
-   {
-   }
-   
+
+    @Test(groups = { "specialization" })
+    @SpecAssertion(section = "3.2.4", id = "da")
+    public void testSpecializingClassDirectlyExtendsSimpleBean() {
+    }
+
 }

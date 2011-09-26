@@ -29,7 +29,6 @@ import javax.inject.Named;
 @Retention(RUNTIME)
 @Stereotype
 @Named
-public @interface NamedStereotype
-{
+public @interface NamedStereotype {
 
 }

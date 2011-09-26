@@ -19,9 +19,8 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 import javax.inject.Named;
 
 @Whitefish
-@Chunky(realChunky=true)
+@Chunky(realChunky = true)
 @Named("whitefish")
-public class Cod implements ScottishFish
-{
+public class Cod implements ScottishFish {
 
 }

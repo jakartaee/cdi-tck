@@ -7,11 +7,9 @@ import javax.interceptor.InvocationContext;
 @Interceptor
 @Secure
 @Transactional
-public class OrderInterceptor
-{
-   @AroundInvoke
-   public Object intercept(InvocationContext ctx) throws Exception
-   {
-      return true;
-   }
+public class OrderInterceptor {
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
+        return true;
+    }
 }

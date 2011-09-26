@@ -22,15 +22,14 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-public class SimpleBeanA implements Serializable
-{
-   private static final long serialVersionUID = 1L;
+public class SimpleBeanA implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-   @Inject @SessionScoped
-   private SimpleBeanZ z;
+    @Inject
+    @SessionScoped
+    private SimpleBeanZ z;
 
-   public SimpleBeanZ getZ()
-   {
-      return z;
-   }
+    public SimpleBeanZ getZ() {
+        return z;
+    }
 }

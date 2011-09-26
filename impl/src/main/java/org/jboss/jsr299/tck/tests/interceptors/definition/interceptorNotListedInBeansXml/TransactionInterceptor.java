@@ -20,14 +20,14 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Transactional @Interceptor
-public class TransactionInterceptor
-{
-   public static boolean invoked = false;
-   
-   @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
-   {
-      invoked = true;
-      return ctx.proceed();
-   }
+@Transactional
+@Interceptor
+public class TransactionInterceptor {
+    public static boolean invoked = false;
+
+    @AroundInvoke
+    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
+        invoked = true;
+        return ctx.proceed();
+    }
 }

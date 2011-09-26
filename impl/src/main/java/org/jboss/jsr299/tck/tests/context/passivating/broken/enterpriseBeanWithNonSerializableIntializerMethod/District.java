@@ -19,12 +19,10 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWith
 import javax.enterprise.context.Dependent;
 
 @Dependent
-public class District
-{
-   
-   public void ping()
-   {
-      
-   }
+public class District {
+
+    public void ping() {
+
+    }
 
 }

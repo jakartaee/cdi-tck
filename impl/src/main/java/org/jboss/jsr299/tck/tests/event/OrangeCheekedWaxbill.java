@@ -19,10 +19,10 @@ package org.jboss.jsr299.tck.tests.event;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 
-
-public class OrangeCheekedWaxbill
-{
-   @Any @Role("Admin") @Tame
-   protected Event<String> simpleEvent;
+public class OrangeCheekedWaxbill {
+    @Any
+    @Role("Admin")
+    @Tame
+    protected Event<String> simpleEvent;
 
 }

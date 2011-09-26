@@ -19,9 +19,8 @@ package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.bro
 import javax.ejb.Local;
 
 @Local
-public interface AppleTreeLocal
-{
-   
-   public Apple getApple();
-   
+public interface AppleTreeLocal {
+
+    public Apple getApple();
+
 }

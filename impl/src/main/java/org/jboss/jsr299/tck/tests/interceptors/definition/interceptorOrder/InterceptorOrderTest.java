@@ -25,44 +25,35 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class InterceptorOrderTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InterceptorOrderTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InterceptorOrderTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InterceptorOrderTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "9.4", id = "b")
-   })
-   public void testInterceptorsCalledInOrderDefinedByBeansXml()
-   {
-      FirstInterceptor.calledFirst = false;
-      SecondInterceptor.calledFirst = false;
-      
-      Foo foo = getInstanceByType(Foo.class);
-      foo.bar();
-      
-      assert SecondInterceptor.calledFirst;
-   }
-   
-   @Test
-   @SpecAssertion(section = "9.4", id = "fa")
-   public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding()
-   {
-      TransactionalInterceptor.first = false;
-      AnotherInterceptor.first = false;
-      
-      AccountTransaction transaction = getInstanceByType(AccountTransaction.class);
-      transaction.execute();
-      
-      assert AnotherInterceptor.first;
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "b") })
+    public void testInterceptorsCalledInOrderDefinedByBeansXml() {
+        FirstInterceptor.calledFirst = false;
+        SecondInterceptor.calledFirst = false;
+
+        Foo foo = getInstanceByType(Foo.class);
+        foo.bar();
+
+        assert SecondInterceptor.calledFirst;
+    }
+
+    @Test
+    @SpecAssertion(section = "9.4", id = "fa")
+    public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding() {
+        TransactionalInterceptor.first = false;
+        AnotherInterceptor.first = false;
+
+        AccountTransaction transaction = getInstanceByType(AccountTransaction.class);
+        transaction.execute();
+
+        assert AnotherInterceptor.first;
+    }
 }

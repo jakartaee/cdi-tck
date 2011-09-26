@@ -26,53 +26,42 @@ import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.login.LoginException;
 import javax.security.auth.spi.LoginModule;
 
-public class MockLoginModule implements LoginModule
-{      
-   
-   protected Set<String> roles = new HashSet<String>();
-   
-   protected Subject subject;
-   protected Map<String,?> options;
-   protected CallbackHandler callbackHandler;
-   
-   public MockLoginModule()
-   {
-   }
-   
-   public boolean abort() throws LoginException
-   {
-      return true;
-   }
+public class MockLoginModule implements LoginModule {
 
-   public boolean commit() throws LoginException
-   {
-      subject.getPrincipals().add(new Principal()
-      {
-         
-         public String getName()
-         {
-            return "default";
-         }
-      });
-      return true;
-   }
+    protected Set<String> roles = new HashSet<String>();
 
-   public void initialize(Subject subject, CallbackHandler callbackHandler,
-         Map<String, ?> sharedState, Map<String, ?> options)
-   {
-      this.subject = subject;
-      this.options = options;
-      this.callbackHandler = callbackHandler;
-   }
+    protected Subject subject;
+    protected Map<String, ?> options;
+    protected CallbackHandler callbackHandler;
 
-   public boolean login() 
-      throws LoginException
-   {
-      return true;
-   }
+    public MockLoginModule() {
+    }
 
-   public boolean logout() throws LoginException
-   {
-      return true;
-   }
+    public boolean abort() throws LoginException {
+        return true;
+    }
+
+    public boolean commit() throws LoginException {
+        subject.getPrincipals().add(new Principal() {
+
+            public String getName() {
+                return "default";
+            }
+        });
+        return true;
+    }
+
+    public void initialize(Subject subject, CallbackHandler callbackHandler, Map<String, ?> sharedState, Map<String, ?> options) {
+        this.subject = subject;
+        this.options = options;
+        this.callbackHandler = callbackHandler;
+    }
+
+    public boolean login() throws LoginException {
+        return true;
+    }
+
+    public boolean logout() throws LoginException {
+        return true;
+    }
 }

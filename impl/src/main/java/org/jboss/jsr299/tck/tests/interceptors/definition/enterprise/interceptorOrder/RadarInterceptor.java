@@ -22,15 +22,14 @@ import java.io.Serializable;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-public class RadarInterceptor implements Serializable
-{
-   public static boolean intercepted = false;
-   public static boolean interceptedFirst = false;
+public class RadarInterceptor implements Serializable {
+    public static boolean intercepted = false;
+    public static boolean interceptedFirst = false;
 
-   @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
-   {
-      intercepted = true;
-      interceptedFirst = !MissileInterceptor.intercepted;
-      return ctx.proceed();
-   }
+    @AroundInvoke
+    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
+        intercepted = true;
+        interceptedFirst = !MissileInterceptor.intercepted;
+        return ctx.proceed();
+    }
 }

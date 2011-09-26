@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.definition.qualifier.enterprise;
 
 @Hairless
-public class HairlessCat
-{
+public class HairlessCat {
 
 }

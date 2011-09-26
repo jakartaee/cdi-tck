@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.extensions.bean.bytype;
 
 @Tame
-public class DerivedBean extends SimpleBean
-{
+public class DerivedBean extends SimpleBean {
 
 }

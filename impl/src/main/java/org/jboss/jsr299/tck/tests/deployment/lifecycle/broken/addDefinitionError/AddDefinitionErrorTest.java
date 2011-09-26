@@ -27,35 +27,26 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests that any definition error added by an observer of the AfterBeanDiscovery
- * event results in a definition error.
+ * Tests that any definition error added by an observer of the AfterBeanDiscovery event results in a definition error.
  * 
  * @author David Allen
  * @author Dan Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class AddDefinitionErrorTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class AddDefinitionErrorTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
+    public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
 
-            .withTestClassPackage(AddDefinitionErrorTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+        .withTestClassPackage(AddDefinitionErrorTest.class).withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test(groups={"rewrite"})
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.2", id = "ca"),
-      @SpecAssertion(section = "12.2", id = "c")
-   })
-   public void testObserverDefinitionErrorTreatedAsDefinitionError()
-   {
-   }
+
+    @Test(groups = { "rewrite" })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "ca"), @SpecAssertion(section = "12.2", id = "c") })
+    public void testObserverDefinitionErrorTreatedAsDefinitionError() {
+    }
 
 }

@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.definition;
 import javax.enterprise.inject.Specializes;
 
 @Specializes
-public class AndalusianChicken extends Chicken
-{
+public class AndalusianChicken extends Chicken {
 
 }

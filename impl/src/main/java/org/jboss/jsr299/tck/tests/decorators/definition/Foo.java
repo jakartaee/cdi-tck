@@ -24,11 +24,10 @@ import java.util.Set;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Foo extends Baz, Serializable
-{
+public interface Foo extends Baz, Serializable {
 
-   public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(Foo.class));
+    public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(Foo.class));
 
 }

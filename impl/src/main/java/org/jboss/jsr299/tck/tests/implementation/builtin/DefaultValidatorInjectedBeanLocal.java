@@ -21,12 +21,11 @@ import javax.validation.Validator;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Local
-public interface DefaultValidatorInjectedBeanLocal
-{
-   
-   public Validator getDefaultValidator();
+public interface DefaultValidatorInjectedBeanLocal {
+
+    public Validator getDefaultValidator();
 
 }

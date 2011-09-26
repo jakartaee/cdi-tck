@@ -16,17 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.event.implicit;
 
-public class CourseFullEvent
-{
-   private Course course;
+public class CourseFullEvent {
+    private Course course;
 
-   public CourseFullEvent(Course course)
-   {
-      this.course = course;
-   }
-   
-   public Course getCourse()
-   {
-      return course;
-   }
+    public CourseFullEvent(Course course) {
+        this.course = course;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
 }

@@ -22,25 +22,20 @@ import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.Contextual;
 import javax.enterprise.context.spi.CreationalContext;
 
-public class DummyContext implements Context
-{
-   public <T> T get(Contextual<T> bean, CreationalContext<T> creationalContext)
-   {
-      throw new UnsupportedOperationException();
-   }
+public class DummyContext implements Context {
+    public <T> T get(Contextual<T> bean, CreationalContext<T> creationalContext) {
+        throw new UnsupportedOperationException();
+    }
 
-   public <T> T get(Contextual<T> contextual)
-   {
-      return get(contextual, null);
-   }
+    public <T> T get(Contextual<T> contextual) {
+        return get(contextual, null);
+    }
 
-   public Class<? extends Annotation> getScope()
-   {
-      return DummyScoped.class;
-   }
+    public Class<? extends Annotation> getScope() {
+        return DummyScoped.class;
+    }
 
-   public boolean isActive()
-   {
-      return true;
-   }
+    public boolean isActive() {
+        return true;
+    }
 }

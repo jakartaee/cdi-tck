@@ -16,20 +16,17 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple;
 
-public class Waste
-{
-   
-   private String from;
+public class Waste {
 
-   public String getFrom()
-   {
-      return from;
-   }
+    private String from;
 
-   public Waste(String from)
-   {
-      super();
-      this.from = from;
-   }
-   
+    public String getFrom() {
+        return from;
+    }
+
+    public Waste(String from) {
+        super();
+        this.from = from;
+    }
+
 }

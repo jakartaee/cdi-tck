@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.producer;
 
-public class CatFoodDish
-{
+public class CatFoodDish {
 
 }

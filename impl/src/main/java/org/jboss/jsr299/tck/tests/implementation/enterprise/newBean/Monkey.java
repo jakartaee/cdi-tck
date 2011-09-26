@@ -20,7 +20,6 @@ import javax.ejb.Stateful;
 
 @Stateful
 @AnimalStereotype
-public class Monkey implements MonkeyLocal
-{
+public class Monkey implements MonkeyLocal {
 
 }

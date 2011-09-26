@@ -20,13 +20,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class Garage
-{
-   @Inject
-   private Car car;
+public class Garage {
+    @Inject
+    private Car car;
 
-   public String getMakeOfTheParkedCar()
-   {
-      return car.getMake();
-   }
+    public String getMakeOfTheParkedCar() {
+        return car.getMake();
+    }
 }

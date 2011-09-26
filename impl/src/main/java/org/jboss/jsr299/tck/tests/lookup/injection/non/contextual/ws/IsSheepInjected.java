@@ -25,5 +25,4 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "isSheepInjected")
 public class IsSheepInjected {
 
-
 }

@@ -22,26 +22,27 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Dependent @Transactional @Interceptor 
-public class TransactionalInterceptor
-{
-   public static boolean destroyed = false;
-   public static boolean intercepted = false;
-   
-   @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
-   {
-      intercepted = true;
-      return ctx.proceed();
-   }
+@Dependent
+@Transactional
+@Interceptor
+public class TransactionalInterceptor {
+    public static boolean destroyed = false;
+    public static boolean intercepted = false;
 
-   @PreDestroy public void destroy(InvocationContext ctx)
-   {
-      destroyed = true;
-       try {
-           ctx.proceed();
-       } catch (Exception e) {
-           // catch and wrap
-           throw new RuntimeException(e);
-       }
-   }
+    @AroundInvoke
+    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
+        intercepted = true;
+        return ctx.proceed();
+    }
+
+    @PreDestroy
+    public void destroy(InvocationContext ctx) {
+        destroyed = true;
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            // catch and wrap
+            throw new RuntimeException(e);
+        }
+    }
 }

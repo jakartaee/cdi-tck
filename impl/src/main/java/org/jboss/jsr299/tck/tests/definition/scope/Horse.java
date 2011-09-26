@@ -16,9 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.definition.scope;
 
-
 @AnotherScope
-public class Horse
-{
-   
+public class Horse {
+
 }

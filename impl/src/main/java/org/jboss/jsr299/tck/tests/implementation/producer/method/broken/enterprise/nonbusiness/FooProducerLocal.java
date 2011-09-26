@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.enterpr
 import javax.ejb.Local;
 
 @Local
-public interface FooProducerLocal
-{
+public interface FooProducerLocal {
 
 }

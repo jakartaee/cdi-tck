@@ -16,20 +16,16 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
+public class Donkey {
 
-public class Donkey
-{
-   
-   public static boolean constructedCorrectly = false;
-   
-   public Donkey()
-   {
-      constructedCorrectly = true;
-   }
-   
-   public Donkey(String foo)
-   {
-      
-   }
+    public static boolean constructedCorrectly = false;
+
+    public Donkey() {
+        constructedCorrectly = true;
+    }
+
+    public Donkey(String foo) {
+
+    }
 
 }

@@ -30,21 +30,20 @@ import javax.servlet.http.HttpServletResponse;
  * Used to process requests to check which session context is in use.
  * 
  * @author David Allen
- *
+ * 
  */
-public class IntrospectSession extends HttpServlet
-{
-   private static final long serialVersionUID = 1L;
+public class IntrospectSession extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
-   @Inject
-   private BeanManager jsr299Manager;
+    @Inject
+    private BeanManager jsr299Manager;
 
-   @Override
-   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-   {
-      resp.setContentType("text/text");
-      SimpleSessionBean aBean = org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(jsr299Manager,SimpleSessionBean.class);
-      resp.getWriter().print(aBean.getTimestamp());
-   }
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/text");
+        SimpleSessionBean aBean = org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(jsr299Manager,
+                SimpleSessionBean.class);
+        resp.getWriter().print(aBean.getTimestamp());
+    }
 
 }

@@ -40,8 +40,7 @@ import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
  * 
  * @author Martin Kouba
  */
-public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends Archive<A>>
-{
+public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends Archive<A>> {
     private boolean isAsClientMode = false;
 
     private Class<?> testClazz = null;
@@ -74,8 +73,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param beansXml
      * @return self
      */
-    public T withBeansXml(String beansXml)
-    {
+    public T withBeansXml(String beansXml) {
         this.beansXml = new ResourceDescriptor(beansXml, "beans.xml");
         return self();
     }
@@ -87,8 +85,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param extension
      * @return self
      */
-    public T withExtension(String extension)
-    {
+    public T withExtension(String extension) {
         return withManifestResource(extension, "services/javax.enterprise.inject.spi.Extension", true);
     }
 
@@ -98,8 +95,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param clazz
      * @return self
      */
-    public T withClass(Class<?> clazz)
-    {
+    public T withClass(Class<?> clazz) {
         if (this.classes == null)
             this.classes = new ArrayList<String>();
 
@@ -113,11 +109,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param classes
      * @return self
      */
-    public T withClasses(Class<?>... classes)
-    {
+    public T withClasses(Class<?>... classes) {
 
-        for (Class<?> clazz : classes)
-        {
+        for (Class<?> clazz : classes) {
             withClass(clazz);
         }
         return self();
@@ -130,8 +124,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param clazz
      * @return self
      */
-    public T withExcludedClass(Class<?> clazz)
-    {
+    public T withExcludedClass(Class<?> clazz) {
         if (this.excludedClasses == null)
             this.excludedClasses = new ArrayList<String>();
 
@@ -147,11 +140,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param classes
      * @return self
      */
-    public T withExcludedClasses(Class<?>... classes)
-    {
+    public T withExcludedClasses(Class<?>... classes) {
 
-        for (Class<?> clazz : classes)
-        {
+        for (Class<?> clazz : classes) {
             withExcludedClass(clazz);
         }
         return self();
@@ -163,8 +154,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param testClazz
      * @return self
      */
-    public T withTestClassPackage(Class<?> testClazz)
-    {
+    public T withTestClassPackage(Class<?> testClazz) {
         return withTestClassDefinition(testClazz).withPackage(testClazz.getPackage());
     }
 
@@ -174,8 +164,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param testClazz
      * @return self
      */
-    public T withTestClass(Class<?> testClazz)
-    {
+    public T withTestClass(Class<?> testClazz) {
         return withTestClassDefinition(testClazz).withClass(testClazz);
     }
 
@@ -185,8 +174,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param test
      * @return self
      */
-    public T withTestClassDefinition(Class<?> testClazz)
-    {
+    public T withTestClassDefinition(Class<?> testClazz) {
 
         if (this.testClazz != null)
             throw new IllegalStateException("Cannot set more than one test class definition!");
@@ -202,8 +190,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param isTestPackage
      * @return self
      */
-    private T withPackage(Package pack)
-    {
+    private T withPackage(Package pack) {
 
         if (this.packages == null)
             this.packages = new ArrayList<String>();
@@ -218,8 +205,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param source
      * @return self
      */
-    public T withManifestResource(String source)
-    {
+    public T withManifestResource(String source) {
         return withManifestResource(source, null, true);
     }
 
@@ -230,8 +216,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param useTestPackageToLocateSource
      * @return self
      */
-    public T withManifestResource(String source, boolean useTestPackageToLocateSource)
-    {
+    public T withManifestResource(String source, boolean useTestPackageToLocateSource) {
         return withManifestResource(source, null, useTestPackageToLocateSource);
     }
 
@@ -243,8 +228,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param useTestPackageToLocateSource
      * @return self
      */
-    public T withManifestResource(String source, String target, boolean useTestPackageToLocateSource)
-    {
+    public T withManifestResource(String source, String target, boolean useTestPackageToLocateSource) {
 
         if (this.manifestResources == null)
             this.manifestResources = new ArrayList<ResourceDescriptor>();
@@ -259,8 +243,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param source
      * @return self
      */
-    public T withResource(String source)
-    {
+    public T withResource(String source) {
         return withResource(source, null, true);
     }
 
@@ -271,8 +254,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param useTestPackageToLocateSource
      * @return self
      */
-    public T withResource(String source, boolean useTestPackageToLocateSource)
-    {
+    public T withResource(String source, boolean useTestPackageToLocateSource) {
         return withResource(source, null, useTestPackageToLocateSource);
     }
 
@@ -284,8 +266,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param useTestPackageToLocateSource
      * @return self
      */
-    public T withResource(String source, String target, boolean useTestPackageToLocateSource)
-    {
+    public T withResource(String source, String target, boolean useTestPackageToLocateSource) {
 
         if (this.resources == null)
             this.resources = new ArrayList<ResourceDescriptor>();
@@ -300,8 +281,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param source
      * @return self
      */
-    public T withWebResource(String source)
-    {
+    public T withWebResource(String source) {
         return withWebResource(source, null, true);
     }
 
@@ -312,8 +292,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param target
      * @return self
      */
-    public T withWebResource(String source, String target)
-    {
+    public T withWebResource(String source, String target) {
         return withWebResource(source, target, true);
     }
 
@@ -324,8 +303,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param useTestPackageToLocateSource
      * @return self
      */
-    public T withWebResource(String source, boolean useTestPackageToLocateSource)
-    {
+    public T withWebResource(String source, boolean useTestPackageToLocateSource) {
         return withWebResource(source, null, useTestPackageToLocateSource);
     }
 
@@ -335,8 +313,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param source
      * @return
      */
-    public T withWebResource(String source, String target, boolean useTestPackageToLocateSource)
-    {
+    public T withWebResource(String source, String target, boolean useTestPackageToLocateSource) {
 
         if (this.webResources == null)
             this.webResources = new ArrayList<ResourceDescriptor>();
@@ -351,8 +328,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param ejbJarXml
      * @return
      */
-    public T withEjbJarXml(String ejbJarXml)
-    {
+    public T withEjbJarXml(String ejbJarXml) {
         return withManifestResource(ejbJarXml, "ejb-jar.xml", true);
     }
 
@@ -362,8 +338,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param webXml
      * @return
      */
-    public T withWebXml(String webXml)
-    {
+    public T withWebXml(String webXml) {
         this.webXml = new ResourceDescriptor(webXml);
         return self();
     }
@@ -374,8 +349,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param persistenceXml
      * @return
      */
-    public T withPersistenceXml(String persistenceXml)
-    {
+    public T withPersistenceXml(String persistenceXml) {
         this.persistenceXml = new ResourceDescriptor(persistenceXml);
         return self();
     }
@@ -386,8 +360,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param library
      * @return
      */
-    public T withLibrary(File library)
-    {
+    public T withLibrary(File library) {
 
         if (this.libraries == null)
             this.libraries = new ArrayList<File>();
@@ -402,8 +375,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param beanClasses
      * @return
      */
-    public T withBeanLibrary(Class<?>... beanClasses)
-    {
+    public T withBeanLibrary(Class<?>... beanClasses) {
         return withBeanLibrary(false, beanClasses);
     }
 
@@ -414,8 +386,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param beanClasses
      * @return
      */
-    public T withBeanLibrary(boolean omitBeansXml, Class<?>... beanClasses)
-    {
+    public T withBeanLibrary(boolean omitBeansXml, Class<?>... beanClasses) {
 
         if (beanLibraries == null)
             beanLibraries = new ArrayList<BeanLibraryDescriptor>();
@@ -432,8 +403,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * @return shrinkwrap archive
      */
-    public A build()
-    {
+    public A build() {
         if (testClazz == null)
             throw new IllegalStateException("Test class must be set!");
 
@@ -451,8 +421,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         withPackage(AnyLiteral.class.getPackage());
         addDefaultLibraries();
 
-        if (!isAsClientMode)
-        {
+        if (!isAsClientMode) {
             withClass(AbstractJSR299Test.class);
         }
         return buildInternal();
@@ -469,20 +438,16 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @param archive
      */
-    protected void processPackages(final ClassContainer<?> archive)
-    {
+    protected void processPackages(final ClassContainer<?> archive) {
 
         if (packages == null)
             return;
 
-        for (String pack : packages)
-        {
+        for (String pack : packages) {
 
-            final URLPackageScanner.Callback callback = new URLPackageScanner.Callback()
-            {
+            final URLPackageScanner.Callback callback = new URLPackageScanner.Callback() {
                 @Override
-                public void classFound(String className)
-                {
+                public void classFound(String className) {
                     if ((isAsClientMode() && testClazz.getName().equals(className))
                             || (excludedClasses != null && excludedClasses.contains(className)))
                         return;
@@ -493,8 +458,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
-            if (classLoader == null)
-            {
+            if (classLoader == null) {
                 classLoader = getClass().getClassLoader();
             }
 
@@ -508,14 +472,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @param archive
      */
-    protected void processClasses(ClassContainer<?> archive)
-    {
+    protected void processClasses(ClassContainer<?> archive) {
 
         if (classes == null)
             return;
 
-        for (String clazz : classes)
-        {
+        for (String clazz : classes) {
             archive.addClass(clazz);
         }
     }
@@ -525,38 +487,29 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @param archive
      */
-    protected void processLibraries(LibraryContainer<?> archive)
-    {
+    protected void processLibraries(LibraryContainer<?> archive) {
 
         // File libraries
-        if (libraries != null)
-        {
-            for (File library : libraries)
-            {
+        if (libraries != null) {
+            for (File library : libraries) {
                 archive.addAsLibrary(library);
             }
         }
 
         // Bean libraries
-        if (beanLibraries != null)
-        {
+        if (beanLibraries != null) {
 
-            for (BeanLibraryDescriptor descriptor : beanLibraries)
-            {
+            for (BeanLibraryDescriptor descriptor : beanLibraries) {
 
                 JavaArchive beanLibrary = ShrinkWrap.create(JavaArchive.class);
-                for (Class<?> beanClazz : descriptor.getBeanClasses())
-                {
+                for (Class<?> beanClazz : descriptor.getBeanClasses()) {
                     beanLibrary.addClass(beanClazz);
                 }
-                if (!descriptor.isOmitBeanXml())
-                {
+                if (!descriptor.isOmitBeanXml()) {
 
-                    if (descriptor.getBeansXml() == null)
-                    {
+                    if (descriptor.getBeansXml() == null) {
                         beanLibrary.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
-                    } else
-                    {
+                    } else {
                         beanLibrary.addAsManifestResource(descriptor.getBeansXml().getSource(), descriptor.getBeansXml()
                                 .getTarget());
                     }
@@ -571,19 +524,15 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @param archive
      */
-    protected void processResources(ResourceContainer<?> archive)
-    {
+    protected void processResources(ResourceContainer<?> archive) {
 
         if (resources == null)
             return;
 
-        for (ResourceDescriptor resource : resources)
-        {
-            if (resource.getTarget() == null)
-            {
+        for (ResourceDescriptor resource : resources) {
+            if (resource.getTarget() == null) {
                 archive.addAsResource(resource.getSource());
-            } else
-            {
+            } else {
                 archive.addAsResource(resource.getSource(), resource.getTarget());
             }
         }
@@ -594,19 +543,15 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @param archive
      */
-    protected void processManifestResources(ManifestContainer<?> archive)
-    {
+    protected void processManifestResources(ManifestContainer<?> archive) {
 
         if (manifestResources == null)
             return;
 
-        for (ResourceDescriptor resource : manifestResources)
-        {
-            if (resource.getTarget() == null)
-            {
+        for (ResourceDescriptor resource : manifestResources) {
+            if (resource.getTarget() == null) {
                 archive.addAsManifestResource(resource.getSource());
-            } else
-            {
+            } else {
                 archive.addAsManifestResource(resource.getSource(), resource.getTarget());
             }
         }
@@ -616,21 +561,16 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * Add default libraries from lib directory specified with <code>org.jboss.jsr299.tck.libraryDirectory</code> property in
      * <b>cdi-tck.properties</b>.
      */
-    private void addDefaultLibraries()
-    {
+    private void addDefaultLibraries() {
 
         File directory = new File(ConfigurationFactory.get(true).getLibraryDirectory());
 
-        if (directory.isDirectory())
-        {
-            for (File file : directory.listFiles(new FilenameFilter()
-            {
-                public boolean accept(File dir, String name)
-                {
+        if (directory.isDirectory()) {
+            for (File file : directory.listFiles(new FilenameFilter() {
+                public boolean accept(File dir, String name) {
                     return name.endsWith(".jar");
                 }
-            }))
-            {
+            })) {
                 withLibrary(file);
             }
         }
@@ -641,8 +581,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @author Martin Kouba
      */
-    protected class ResourceDescriptor
-    {
+    protected class ResourceDescriptor {
 
         private String source;
 
@@ -650,39 +589,33 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         private boolean useTestPackageToLocateSource = true;
 
-        public ResourceDescriptor(String source)
-        {
+        public ResourceDescriptor(String source) {
             super();
             this.source = source;
         }
 
-        public ResourceDescriptor(String source, String target)
-        {
+        public ResourceDescriptor(String source, String target) {
             super();
             this.source = source;
             this.target = target;
         }
 
-        public ResourceDescriptor(String source, String target, boolean useTestPackageToLocateSource)
-        {
+        public ResourceDescriptor(String source, String target, boolean useTestPackageToLocateSource) {
             super();
             this.source = source;
             this.target = target;
             this.useTestPackageToLocateSource = useTestPackageToLocateSource;
         }
 
-        public String getSource()
-        {
+        public String getSource() {
             return useTestPackageToLocateSource ? getTestPackagePath() + source : source;
         }
 
-        public String getPlainSource()
-        {
+        public String getPlainSource() {
             return source;
         }
 
-        public String getTarget()
-        {
+        public String getTarget() {
             return target;
         }
 
@@ -693,8 +626,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @author Martin Kouba
      */
-    protected class BeanLibraryDescriptor
-    {
+    protected class BeanLibraryDescriptor {
 
         private List<Class<?>> beanClasses;
 
@@ -702,38 +634,32 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         private boolean omitBeanXml;
 
-        public BeanLibraryDescriptor(ResourceDescriptor beansXml, Class<?>... classes)
-        {
+        public BeanLibraryDescriptor(ResourceDescriptor beansXml, Class<?>... classes) {
             super();
             this.beansXml = beansXml;
             this.beanClasses = Arrays.asList(classes);
         }
 
-        public BeanLibraryDescriptor(boolean omitBeanXml, Class<?>... classes)
-        {
+        public BeanLibraryDescriptor(boolean omitBeanXml, Class<?>... classes) {
             super();
             this.omitBeanXml = omitBeanXml;
             this.beanClasses = Arrays.asList(classes);
         }
 
-        public List<Class<?>> getBeanClasses()
-        {
+        public List<Class<?>> getBeanClasses() {
             return beanClasses;
         }
 
-        public ResourceDescriptor getBeansXml()
-        {
+        public ResourceDescriptor getBeansXml() {
             return beansXml;
         }
 
-        public boolean isOmitBeanXml()
-        {
+        public boolean isOmitBeanXml() {
             return omitBeanXml;
         }
     }
 
-    private String getTestPackagePath()
-    {
+    private String getTestPackagePath() {
         return this.testClazz.getPackage().getName().replace('.', '/').concat("/");
     }
 
@@ -741,8 +667,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @return <code>true</code> if building as-client mode archive (no test infrastructure), <code>false</code> otherwise
      */
-    protected boolean isAsClientMode()
-    {
+    protected boolean isAsClientMode() {
         return isAsClientMode;
     }
 
@@ -750,20 +675,15 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * Find deployment method on test class definition and set to as-client mode if {@link Deployment#testable()} false or
      * {@link ShouldThrowException} is present.
      */
-    private void resolveAsClientMode()
-    {
+    private void resolveAsClientMode() {
 
-        for (Method method : testClazz.getMethods())
-        {
+        for (Method method : testClazz.getMethods()) {
 
-            if (method.isAnnotationPresent(Deployment.class))
-            {
+            if (method.isAnnotationPresent(Deployment.class)) {
 
-                if (method.isAnnotationPresent(ShouldThrowException.class))
-                {
+                if (method.isAnnotationPresent(ShouldThrowException.class)) {
                     this.isAsClientMode = true;
-                } else if (!method.getAnnotation(Deployment.class).testable())
-                {
+                } else if (!method.getAnnotation(Deployment.class).testable()) {
                     this.isAsClientMode = true;
                 }
                 break;

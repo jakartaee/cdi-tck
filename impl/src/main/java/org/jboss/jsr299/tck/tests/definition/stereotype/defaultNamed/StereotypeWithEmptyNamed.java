@@ -26,10 +26,9 @@ import javax.enterprise.inject.Stereotype;
 import javax.inject.Named;
 
 @Stereotype
-@Target( { TYPE })
+@Target({ TYPE })
 @Retention(RUNTIME)
 @Named
-public @interface StereotypeWithEmptyNamed
-{
+public @interface StereotypeWithEmptyNamed {
 
 }

@@ -16,35 +16,30 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
-public class FooImpl implements Foo
-{
-   
-   private static String message;
-   
-   /**
-    * @return the message
-    */
-   public static String getMessage()
-   {
-      return message;
-   }
-   
-   /**
-    * @param message the message to set
-    */
-   public static void reset()
-   {
-      FooImpl.message = null;
-   }
-   
-   public void log(String message)
-   {
-      FooImpl.message = message;
-   }
+public class FooImpl implements Foo {
+
+    private static String message;
+
+    /**
+     * @return the message
+     */
+    public static String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public static void reset() {
+        FooImpl.message = null;
+    }
+
+    public void log(String message) {
+        FooImpl.message = message;
+    }
 
 }

@@ -22,20 +22,17 @@ import java.util.Map;
 import javax.enterprise.inject.New;
 import javax.inject.Inject;
 
-public class Hippogriff
-{
-   
-   private Map<String, String> homes;
+public class Hippogriff {
 
-   @Inject
-   public Hippogriff(@New HashMap<String, String> homes)
-   {
-      this.homes = homes;
-   }
-   
-   public Map<String, String> getHomes()
-   {
-      return homes;
-   }
+    private Map<String, String> homes;
+
+    @Inject
+    public Hippogriff(@New HashMap<String, String> homes) {
+        this.homes = homes;
+    }
+
+    public Map<String, String> getHomes() {
+        return homes;
+    }
 
 }

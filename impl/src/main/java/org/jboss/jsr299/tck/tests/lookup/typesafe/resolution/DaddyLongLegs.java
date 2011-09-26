@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 import javax.enterprise.inject.Alternative;
 
 @Alternative
-public class DaddyLongLegs extends Spider
-{
+public class DaddyLongLegs extends Spider {
 
 }

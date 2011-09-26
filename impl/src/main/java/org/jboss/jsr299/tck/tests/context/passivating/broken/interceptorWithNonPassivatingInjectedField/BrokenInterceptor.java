@@ -21,14 +21,14 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor @InterceptorType
-public class BrokenInterceptor
-{       
-   @Inject Violation violation;
-   
-   @AroundInvoke 
-   public Object invoke(InvocationContext ctx) throws Exception
-   {
-      return ctx.proceed();
-   }   
+@Interceptor
+@InterceptorType
+public class BrokenInterceptor {
+    @Inject
+    Violation violation;
+
+    @AroundInvoke
+    public Object invoke(InvocationContext ctx) throws Exception {
+        return ctx.proceed();
+    }
 }

@@ -21,7 +21,6 @@ import javax.enterprise.inject.Specializes;
 
 @Stateful
 @Specializes
-public class AndalusianChicken extends Chicken implements AndalusianChickenLocal, ChickenLocal
-{
+public class AndalusianChicken extends Chicken implements AndalusianChickenLocal, ChickenLocal {
 
 }

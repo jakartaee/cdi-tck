@@ -16,14 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation.observer;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Observer
-{
-   
-   public void observe(Foo foo);
+public interface Observer {
+
+    public void observe(Foo foo);
 
 }

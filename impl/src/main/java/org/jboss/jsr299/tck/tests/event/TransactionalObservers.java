@@ -23,22 +23,17 @@ import static javax.enterprise.event.TransactionPhase.BEFORE_COMPLETION;
 
 import javax.enterprise.event.Observes;
 
-public class TransactionalObservers
-{
-   public void train(@Observes(during=BEFORE_COMPLETION) DisobedientDog dog)
-   {
-   }
+public class TransactionalObservers {
+    public void train(@Observes(during = BEFORE_COMPLETION) DisobedientDog dog) {
+    }
 
-   public void trainNewTricks(@Observes(during=AFTER_COMPLETION) ShowDog dog)
-   {
-   }
+    public void trainNewTricks(@Observes(during = AFTER_COMPLETION) ShowDog dog) {
+    }
 
-   public void trainCompanion(@Observes(during=AFTER_FAILURE) SmallDog dog)
-   {
-   }
+    public void trainCompanion(@Observes(during = AFTER_FAILURE) SmallDog dog) {
+    }
 
-   public void trainSightSeeing(@Observes(during=AFTER_SUCCESS) LargeDog dog)
-   {
-   }
+    public void trainSightSeeing(@Observes(during = AFTER_SUCCESS) LargeDog dog) {
+    }
 
 }

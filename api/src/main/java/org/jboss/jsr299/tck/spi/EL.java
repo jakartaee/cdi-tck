@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,37 +20,37 @@ import javax.el.ELContext;
 
 /**
  * This interface provides operations relating to EL.
- * 
- * The TCK porting package must provide an implementation of this interface which is 
- * suitable for the target Web Beans implementation. 
- * 
+ *
+ * The TCK porting package must provide an implementation of this interface which is suitable for the target Web Beans
+ * implementation.
+ *
  * @author Pete Muir
  */
-public interface EL
-{
-   
-   public static final String PROPERTY_NAME  = EL.class.getName();
-   
-   /**
-    * 
-    * 
-    * @param <T>
-    * @param expression
-    * @param expectedType
-    * @return
-    */
-   public <T> T evaluateValueExpression(String expression, Class<T> expectedType);
-   
-   /**
-    * 
-    * @param <T>
-    * @param expression
-    * @param expectedType
-    * @param expectedParamTypes
-    * @return
-    */
-   public <T> T evaluateMethodExpression(String expression, Class<T> expectedType, Class<?>[] expectedParamTypes, Object[] expectedParams);
-   
-   public ELContext createELContext();
-   
+public interface EL {
+
+    public static final String PROPERTY_NAME = EL.class.getName();
+
+    /**
+     *
+     *
+     * @param <T>
+     * @param expression
+     * @param expectedType
+     * @return
+     */
+    public <T> T evaluateValueExpression(String expression, Class<T> expectedType);
+
+    /**
+     *
+     * @param <T>
+     * @param expression
+     * @param expectedType
+     * @param expectedParamTypes
+     * @return
+     */
+    public <T> T evaluateMethodExpression(String expression, Class<T> expectedType, Class<?>[] expectedParamTypes,
+            Object[] expectedParams);
+
+    public ELContext createELContext();
+
 }

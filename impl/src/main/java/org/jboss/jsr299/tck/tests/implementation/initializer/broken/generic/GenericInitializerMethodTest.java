@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.initializer.broken.generic;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -26,22 +25,17 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class GenericInitializerMethodTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class GenericInitializerMethodTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(GenericInitializerMethodTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(GenericInitializerMethodTest.class).build();
     }
-    
-   @Test(groups = "ri-broken")
-   @SpecAssertion(section = "3.9.1", id = "ab")
-   public void testGenericInitializerMethodNotAllowed()
-   {
-   }
+
+    @Test(groups = "ri-broken")
+    @SpecAssertion(section = "3.9.1", id = "ab")
+    public void testGenericInitializerMethodNotAllowed() {
+    }
 }

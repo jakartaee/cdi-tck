@@ -23,15 +23,15 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor @CityBinding
-public class BrokenInterceptor implements Serializable
-{
-   @Inject
-   public BrokenInterceptor(District district) {}
+@Interceptor
+@CityBinding
+public class BrokenInterceptor implements Serializable {
+    @Inject
+    public BrokenInterceptor(District district) {
+    }
 
-   @AroundInvoke
-   public Object intercept(InvocationContext ctx) throws Exception
-   {
-      return ctx.proceed();
-   }
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
+        return ctx.proceed();
+    }
 }

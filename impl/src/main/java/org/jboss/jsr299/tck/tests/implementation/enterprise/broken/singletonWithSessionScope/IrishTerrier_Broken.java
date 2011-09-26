@@ -23,12 +23,11 @@ import javax.enterprise.context.SessionScoped;
 
 @Singleton
 @SessionScoped
-public class IrishTerrier_Broken implements Serializable
-{
+public class IrishTerrier_Broken implements Serializable {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -1628520203303413522L;
+    private static final long serialVersionUID = -1628520203303413522L;
 
 }

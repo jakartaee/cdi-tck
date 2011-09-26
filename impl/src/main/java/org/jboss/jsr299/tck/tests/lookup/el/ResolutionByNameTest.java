@@ -29,51 +29,44 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ResolutionByNameTest extends AbstractJSR299Test
-{
-   
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ResolutionByNameTest extends AbstractJSR299Test {
+
     @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(ResolutionByNameTest.class)
-           .build();
-   }
-    
-   @Test
-   @SpecAssertion(section="6.4.3", id="a")
-   public void testQualifiedNameLookup()
-   {
-      assert getCurrentConfiguration().getEl().evaluateValueExpression("#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class);
-      assert getInstanceByType(Counter.class).getCount() == 1;
-   }
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ResolutionByNameTest.class).build();
+    }
 
-   @Test(groups = "beanLifecycle")
-   @SpecAssertion(section = "6.5.2", id = "a")
-   public void testContextCreatesNewInstanceForInjection()
-   {
-      Context requestContext = getCurrentManager().getContext(RequestScoped.class);
-      Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
-      assert requestContext.get(tunaBean) == null;
-      TunaFarm tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression("#{tunaFarm}", TunaFarm.class);
-      assert tunaFarm.tuna != null;
-   }
-   
-   @Test(groups={"el"})
-   @SpecAssertion(section="12.4", id="c")
-   public void testUnresolvedNameReturnsNull() {
-      assert getCurrentManager().getELResolver().getValue(getCurrentConfiguration().getEl().createELContext(), null, "nonExistingTuna") == null;
-   }
+    @Test
+    @SpecAssertion(section = "6.4.3", id = "a")
+    public void testQualifiedNameLookup() {
+        assert getCurrentConfiguration().getEl().evaluateValueExpression(
+                "#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class);
+        assert getInstanceByType(Counter.class).getCount() == 1;
+    }
 
-   @Test(groups = "el")
-   @SpecAssertions({
-      @SpecAssertion(section="12.4", id="d"),
-      @SpecAssertion(section="2.5", id="a")
-   })
-   public void testELResolverReturnsContextualInstance() {
-      Salmon salmon = getInstanceByType(Salmon.class);
-      salmon.setAge(3);
-      assert getCurrentConfiguration().getEl().evaluateValueExpression("#{salmon.age}", Integer.class) == 3;
-   }
+    @Test(groups = "beanLifecycle")
+    @SpecAssertion(section = "6.5.2", id = "a")
+    public void testContextCreatesNewInstanceForInjection() {
+        Context requestContext = getCurrentManager().getContext(RequestScoped.class);
+        Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
+        assert requestContext.get(tunaBean) == null;
+        TunaFarm tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression("#{tunaFarm}", TunaFarm.class);
+        assert tunaFarm.tuna != null;
+    }
+
+    @Test(groups = { "el" })
+    @SpecAssertion(section = "12.4", id = "c")
+    public void testUnresolvedNameReturnsNull() {
+        assert getCurrentManager().getELResolver().getValue(getCurrentConfiguration().getEl().createELContext(), null,
+                "nonExistingTuna") == null;
+    }
+
+    @Test(groups = "el")
+    @SpecAssertions({ @SpecAssertion(section = "12.4", id = "d"), @SpecAssertion(section = "2.5", id = "a") })
+    public void testELResolverReturnsContextualInstance() {
+        Salmon salmon = getInstanceByType(Salmon.class);
+        salmon.setAge(3);
+        assert getCurrentConfiguration().getEl().evaluateValueExpression("#{salmon.age}", Integer.class) == 3;
+    }
 }

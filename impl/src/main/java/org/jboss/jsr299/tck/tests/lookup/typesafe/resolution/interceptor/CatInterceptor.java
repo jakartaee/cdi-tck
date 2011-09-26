@@ -22,11 +22,10 @@ import javax.interceptor.InvocationContext;
 
 @Interceptor
 @CatInterceptorBinding
-public class CatInterceptor extends Cat
-{
+public class CatInterceptor extends Cat {
 
-   @AroundInvoke
-   public Object intercept(InvocationContext ctx) throws Exception {
-      return ctx.proceed();
-   }
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
+        return ctx.proceed();
+    }
 }

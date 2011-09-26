@@ -26,26 +26,18 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ParameterizedTypeWithWildcardTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ParameterizedTypeWithWildcardTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ParameterizedTypeWithWildcardTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ParameterizedTypeWithWildcardTest.class).build();
     }
-  
-   @Test(groups = "producerMethod")
-   @SpecAssertions({
-      @SpecAssertion(section = "3.3", id = "ha"),
-      @SpecAssertion(section = "2.2.1", id="lb")
-   })
-   public void testParameterizedReturnTypeWithWildcard() throws Exception
-   {
-   }
-   
+
+    @Test(groups = "producerMethod")
+    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "ha"), @SpecAssertion(section = "2.2.1", id = "lb") })
+    public void testParameterizedReturnTypeWithWildcard() throws Exception {
+    }
+
 }

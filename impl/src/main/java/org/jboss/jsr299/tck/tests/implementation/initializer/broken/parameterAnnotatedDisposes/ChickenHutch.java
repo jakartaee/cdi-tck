@@ -16,8 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.initializer.broken.parameterAnnotatedDisposes;
 
+public class ChickenHutch {
 
-public class ChickenHutch
-{
-   
 }

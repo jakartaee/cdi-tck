@@ -32,34 +32,25 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class DecoratorInvocationTest extends AbstractJSR299Test
-{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DecoratorInvocationTest extends AbstractJSR299Test {
 
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DecoratorInvocationTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DecoratorInvocationTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="7.2", id="ib"),
-      @SpecAssertion(section="7.2", id="id")
-   })
-   public void testDecoratorInvocation()
-   {
-      ProducerDecorator.reset();
-      ProducerImpl.reset();
-      Bean<Foo> bean = (Bean<Foo>) getCurrentManager().resolve(getCurrentManager().getBeans(Foo.class));
-      CreationalContext<Foo> creationalContext = getCurrentManager().createCreationalContext(bean);
-      Foo foo = bean.create(creationalContext);
-      assert foo.getFoo().equals("foo!!!");
-      bean.destroy(foo, creationalContext);
-      assert ProducerImpl.isDisposedCorrectly();
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "ib"), @SpecAssertion(section = "7.2", id = "id") })
+    public void testDecoratorInvocation() {
+        ProducerDecorator.reset();
+        ProducerImpl.reset();
+        Bean<Foo> bean = (Bean<Foo>) getCurrentManager().resolve(getCurrentManager().getBeans(Foo.class));
+        CreationalContext<Foo> creationalContext = getCurrentManager().createCreationalContext(bean);
+        Foo foo = bean.create(creationalContext);
+        assert foo.getFoo().equals("foo!!!");
+        bean.destroy(foo, creationalContext);
+        assert ProducerImpl.isDisposedCorrectly();
+    }
 
 }

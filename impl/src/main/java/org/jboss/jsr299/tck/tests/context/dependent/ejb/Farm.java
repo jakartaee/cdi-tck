@@ -21,22 +21,21 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
+@RequestScoped
+@Stateful
+public class Farm implements FarmLocal {
 
-@RequestScoped @Stateful
-public class Farm implements FarmLocal
-{
-   
-   public static boolean destroyed;
-   
-   @Inject Stable stable;
-   
-   public void open() {}
-   
-   
-   @PreDestroy
-   public void preDestroy()
-   {
-      Farm.destroyed = true;
-   }
-   
+    public static boolean destroyed;
+
+    @Inject
+    Stable stable;
+
+    public void open() {
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        Farm.destroyed = true;
+    }
+
 }

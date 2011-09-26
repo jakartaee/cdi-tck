@@ -19,12 +19,10 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition.constructorH
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-public class ObservingConstructor
-{
+public class ObservingConstructor {
 
-   @Inject
-   public ObservingConstructor(@Observes Duck duck)
-   {
-      
-   }
+    @Inject
+    public ObservingConstructor(@Observes Duck duck) {
+
+    }
 }

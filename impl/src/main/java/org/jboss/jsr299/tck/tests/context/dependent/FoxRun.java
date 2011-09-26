@@ -21,31 +21,28 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@Named("foxRun") @Default
-public class FoxRun
-{   
-   private static boolean destroyed = false;
+@Named("foxRun")
+@Default
+public class FoxRun {
+    private static boolean destroyed = false;
 
-   @Inject
-   public Fox fox;
-   
-   @Inject
-   public Fox anotherFox;
-   
-   @PreDestroy
-   public void destroy()
-   {
-      destroyed = true;
-   }
-   
-   public static void setDestroyed(boolean destroyed)
-   {
-      FoxRun.destroyed = destroyed;
-   }
-   
-   public static boolean isDestroyed()
-   {
-      return destroyed;
-   }
-   
+    @Inject
+    public Fox fox;
+
+    @Inject
+    public Fox anotherFox;
+
+    @PreDestroy
+    public void destroy() {
+        destroyed = true;
+    }
+
+    public static void setDestroyed(boolean destroyed) {
+        FoxRun.destroyed = destroyed;
+    }
+
+    public static boolean isDestroyed() {
+        return destroyed;
+    }
+
 }

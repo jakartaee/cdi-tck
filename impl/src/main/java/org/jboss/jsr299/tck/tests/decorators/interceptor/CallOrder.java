@@ -21,15 +21,15 @@ import java.util.List;
 
 public class CallOrder {
     private static List<String> callers = new ArrayList<String>();
-    
+
     public static void resetCallers() {
         callers = new ArrayList<String>();
     }
-    
+
     public static void addCaller(String caller) {
         callers.add(caller);
     }
-    
+
     public static List<String> callers() {
         return callers;
     }

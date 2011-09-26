@@ -24,31 +24,26 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 @Stateful
-public class DependentSessionBean implements DependentSessionInterface
-{
-   @Inject
-   private StateKeeper stateKeeper;
+public class DependentSessionBean implements DependentSessionInterface {
+    @Inject
+    private StateKeeper stateKeeper;
 
-   @Remove
-   public void remove()
-   {
-      stateKeeper.setRemoveCalled(true);
-   }
+    @Remove
+    public void remove() {
+        stateKeeper.setRemoveCalled(true);
+    }
 
-   @Remove
-   public void anotherRemoveWithParameters(String reason, @Default BeanManager manager)
-   {
-      stateKeeper.setRemoveCalled(true);
-      assert manager == null;
-   }
+    @Remove
+    public void anotherRemoveWithParameters(String reason, @Default BeanManager manager) {
+        stateKeeper.setRemoveCalled(true);
+        assert manager == null;
+    }
 
-   @PreDestroy
-   public void markDestroyed()
-   {
-      stateKeeper.setBeanDestroyed(true);
-   }
+    @PreDestroy
+    public void markDestroyed() {
+        stateKeeper.setBeanDestroyed(true);
+    }
 
-   public void businessMethod()
-   {
-   }
+    public void businessMethod() {
+    }
 }

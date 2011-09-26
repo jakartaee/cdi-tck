@@ -26,23 +26,17 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "3.1.PFD")
-public class ExceptionTest extends AbstractJSR299Test
-{
-    
+public class ExceptionTest extends AbstractJSR299Test {
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ExceptionTest.class)
-            .build();
+        return new WebArchiveBuilder().withTestClassPackage(ExceptionTest.class).build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "3.2", id= "a"),
-      @SpecAssertion(section = "3.2", id= "b"),
-      @SpecAssertion(section = "3.2", id= "d")
-   })
-   public void testInvocationOrder() {
-      assert getInstanceByType(SimpleBean.class).foo();
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.2", id = "a"), @SpecAssertion(section = "3.2", id = "b"),
+            @SpecAssertion(section = "3.2", id = "d") })
+    public void testInvocationOrder() {
+        assert getInstanceByType(SimpleBean.class).foo();
+    }
 }

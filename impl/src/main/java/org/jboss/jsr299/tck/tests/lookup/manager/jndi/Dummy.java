@@ -11,7 +11,6 @@ import javax.ejb.Stateless;
  * @author Martin Kouba
  */
 @Stateless
-public class Dummy
-{
+public class Dummy {
 
 }

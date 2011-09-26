@@ -21,10 +21,10 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class FooDecorator<T>
-{
-   
-   @Inject @Delegate
-   private Foo<T> foo;
+public class FooDecorator<T> {
+
+    @Inject
+    @Delegate
+    private Foo<T> foo;
 
 }

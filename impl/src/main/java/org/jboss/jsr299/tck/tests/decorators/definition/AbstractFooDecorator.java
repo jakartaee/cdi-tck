@@ -18,9 +18,8 @@ package org.jboss.jsr299.tck.tests.decorators.definition;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class AbstractFooDecorator implements Boo
-{
+public class AbstractFooDecorator implements Boo {
 
 }

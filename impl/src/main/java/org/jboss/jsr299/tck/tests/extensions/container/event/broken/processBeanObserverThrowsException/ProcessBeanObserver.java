@@ -20,9 +20,8 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBean;
 
-public class ProcessBeanObserver implements Extension
-{
-   public void observe(@Observes ProcessBean<Sheep> event) {
-      throw new RuntimeException();
-   }
+public class ProcessBeanObserver implements Extension {
+    public void observe(@Observes ProcessBean<Sheep> event) {
+        throw new RuntimeException();
+    }
 }

@@ -22,10 +22,9 @@ import javax.enterprise.context.SessionScoped;
 
 @Stateful
 @SessionScoped
-public class Turku implements TurkuLocal
-{
-   @Remove
-   public void bye() {
-      
-   }
+public class Turku implements TurkuLocal {
+    @Remove
+    public void bye() {
+
+    }
 }

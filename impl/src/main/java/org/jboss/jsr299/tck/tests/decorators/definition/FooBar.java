@@ -23,11 +23,10 @@ import java.util.Set;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public interface FooBar extends Foo, Bar, Boo
-{
+public interface FooBar extends Foo, Bar, Boo {
 
-   public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(FooBar.class));
+    public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(FooBar.class));
 
 }

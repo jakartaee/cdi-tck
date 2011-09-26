@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.event.implicit;
 
-public class Course
-{
+public class Course {
 }

@@ -21,25 +21,22 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class BarDecorator implements Bar
-{
-   private static BarDecorator decorator;
-   
-   public BarDecorator()
-   {
-      decorator = this;
-   }
+public class BarDecorator implements Bar {
+    private static BarDecorator decorator;
 
-   @Inject @Delegate
-   private Bar delegate;
+    public BarDecorator() {
+        decorator = this;
+    }
 
-   public boolean foo()
-   {
-      return ! delegate.foo();
-   }
-   
-   public static void invokeFooOutsideOfBusinessMethodInterception()
-   {
-      decorator.foo();
-   }
+    @Inject
+    @Delegate
+    private Bar delegate;
+
+    public boolean foo() {
+        return !delegate.foo();
+    }
+
+    public static void invokeFooOutsideOfBusinessMethodInterception() {
+        decorator.foo();
+    }
 }

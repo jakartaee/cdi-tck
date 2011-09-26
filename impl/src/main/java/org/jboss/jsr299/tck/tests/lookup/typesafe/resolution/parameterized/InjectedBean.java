@@ -20,13 +20,11 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
-public class InjectedBean
-{
-   @Inject
-   private HashMap<? extends Number, ? super Integer> map;
+public class InjectedBean {
+    @Inject
+    private HashMap<? extends Number, ? super Integer> map;
 
-   public HashMap<? extends Number, ? super Integer> getMap()
-   {
-      return map;
-   }
+    public HashMap<? extends Number, ? super Integer> getMap() {
+        return map;
+    }
 }

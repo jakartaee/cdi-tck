@@ -26,29 +26,20 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "3.1.PFD")
-public class InvocationOrderTest extends AbstractJSR299Test
-{
-    
+public class InvocationOrderTest extends AbstractJSR299Test {
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InvocationOrderTest.class)
-            .build();
+        return new WebArchiveBuilder().withTestClassPackage(InvocationOrderTest.class).build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "1", id = "i"),
-      @SpecAssertion(section = "3", id= "b"),
-      @SpecAssertion(section = "3.1", id= "c"),
-      @SpecAssertion(section = "3.1", id= "d"),
-      @SpecAssertion(section = "3.1", id= "e"),
-      @SpecAssertion(section = "3.1", id= "f"),
-      @SpecAssertion(section = "3.1", id= "g"),
-      @SpecAssertion(section = "8", id = "e")
-   })
-   public void testInvocationOrder() {
-      assert getInstanceByType(Tram.class).getId() == 8;
-      assert !Interceptor1.isOverridenMethodCalled();
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "1", id = "i"), @SpecAssertion(section = "3", id = "b"),
+            @SpecAssertion(section = "3.1", id = "c"), @SpecAssertion(section = "3.1", id = "d"),
+            @SpecAssertion(section = "3.1", id = "e"), @SpecAssertion(section = "3.1", id = "f"),
+            @SpecAssertion(section = "3.1", id = "g"), @SpecAssertion(section = "8", id = "e") })
+    public void testInvocationOrder() {
+        assert getInstanceByType(Tram.class).getId() == 8;
+        assert !Interceptor1.isOverridenMethodCalled();
+    }
 }

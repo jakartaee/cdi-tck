@@ -19,10 +19,10 @@ package org.jboss.jsr299.tck.tests.context.passivating;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 
-public class TelevisionProducer
-{
-   @Produces @SessionScoped Television getTelevision()
-   {
-      return new Television();
-   }
+public class TelevisionProducer {
+    @Produces
+    @SessionScoped
+    Television getTelevision() {
+        return new Television();
+    }
 }

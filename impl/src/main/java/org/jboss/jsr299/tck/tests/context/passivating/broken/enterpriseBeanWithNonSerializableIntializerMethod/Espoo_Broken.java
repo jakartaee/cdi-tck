@@ -23,12 +23,11 @@ import javax.inject.Inject;
 
 @Stateful
 @SessionScoped
-public class Espoo_Broken implements EspooLocal_Broken
-{
-   @Inject
-   District district;
-   
-   @Remove
-   public void bye() {
-   }
+public class Espoo_Broken implements EspooLocal_Broken {
+    @Inject
+    District district;
+
+    @Remove
+    public void bye() {
+    }
 }

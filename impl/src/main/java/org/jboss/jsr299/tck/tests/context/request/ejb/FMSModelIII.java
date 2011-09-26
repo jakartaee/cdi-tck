@@ -27,93 +27,78 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 @Stateless
-public class FMSModelIII implements FMS
-{
-   private static final long serialVersionUID = 1L;
-   
-   private static final String CLIMB_COMMAND = "ClimbCommand";
-   private static final String DESCEND_COMMAND = "DescendCommand";
+public class FMSModelIII implements FMS {
+    private static final long serialVersionUID = 1L;
 
-   @Resource
-   private TimerService timerService;
-   
-   @Inject
-   private BeanManager beanManager;
-   
-   @Inject Instance<SimpleRequestBean> simpleRequestBean;
+    private static final String CLIMB_COMMAND = "ClimbCommand";
+    private static final String DESCEND_COMMAND = "DescendCommand";
 
-   private static volatile boolean requestScopeActive = false;
-   private static volatile double beanId = 0.0d;
-   private static volatile boolean sameBean = false;
-   
-   private static volatile boolean climbed;
-   private static volatile boolean descended;
+    @Resource
+    private TimerService timerService;
 
-   public void climb()
-   {
-      timerService.createTimer(200, CLIMB_COMMAND);
-   }
+    @Inject
+    private BeanManager beanManager;
 
-   public void descend()
-   {
-      timerService.createTimer(100, DESCEND_COMMAND);
-   }
+    @Inject
+    Instance<SimpleRequestBean> simpleRequestBean;
 
-   @Timeout
-   public void timeout(Timer timer)
-   {
-      if (timer.getInfo().equals(CLIMB_COMMAND))
-      {
-         climbed = true;
-      }
-      if (timer.getInfo().equals(DESCEND_COMMAND))
-      {
-         descended = true;
-      }
-      if (beanManager.getContext(RequestScoped.class).isActive())
-      {
-         requestScopeActive = true;
-         if (beanId > 0.0)
-         {
-            if (beanId == simpleRequestBean.get().getId())
-            {
-               sameBean = true;
+    private static volatile boolean requestScopeActive = false;
+    private static volatile double beanId = 0.0d;
+    private static volatile boolean sameBean = false;
+
+    private static volatile boolean climbed;
+    private static volatile boolean descended;
+
+    public void climb() {
+        timerService.createTimer(200, CLIMB_COMMAND);
+    }
+
+    public void descend() {
+        timerService.createTimer(100, DESCEND_COMMAND);
+    }
+
+    @Timeout
+    public void timeout(Timer timer) {
+        if (timer.getInfo().equals(CLIMB_COMMAND)) {
+            climbed = true;
+        }
+        if (timer.getInfo().equals(DESCEND_COMMAND)) {
+            descended = true;
+        }
+        if (beanManager.getContext(RequestScoped.class).isActive()) {
+            requestScopeActive = true;
+            if (beanId > 0.0) {
+                if (beanId == simpleRequestBean.get().getId()) {
+                    sameBean = true;
+                }
+            } else {
+                beanId = simpleRequestBean.get().getId();
             }
-         }
-         else
-         {
-            beanId = simpleRequestBean.get().getId();
-         }
-      }
-   }
+        }
+    }
 
-   public boolean isRequestScopeActive()
-   {
-      return requestScopeActive;
-   }
-   
-   public static void reset()
-   {
-      beanId = 0.0d;
-      climbed = false;
-      descended = false;
-      requestScopeActive = false;
-      sameBean = false;
-   }
+    public boolean isRequestScopeActive() {
+        return requestScopeActive;
+    }
 
-   public boolean isSameBean()
-   {
-      return sameBean;
-   }
-   
-   public static boolean isClimbed()
-   {
-      return climbed;
-   }
-   
-   public static boolean isDescended()
-   {
-      return descended;
-   }
+    public static void reset() {
+        beanId = 0.0d;
+        climbed = false;
+        descended = false;
+        requestScopeActive = false;
+        sameBean = false;
+    }
+
+    public boolean isSameBean() {
+        return sameBean;
+    }
+
+    public static boolean isClimbed() {
+        return climbed;
+    }
+
+    public static boolean isDescended() {
+        return descended;
+    }
 
 }

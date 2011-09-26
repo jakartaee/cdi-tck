@@ -26,23 +26,17 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class CustomDecoratorMatchingBeanWithFinalClassTest extends AbstractJSR299Test
-{
-    
+public class CustomDecoratorMatchingBeanWithFinalClassTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(CustomDecoratorMatchingBeanWithFinalClassTest.class)
-            .withBeansXml("beans.xml")
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(CustomDecoratorMatchingBeanWithFinalClassTest.class)
+                .withBeansXml("beans.xml").withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "8.3", id = "ab")
-   public void testCustomDecoratorDecoratingFinalBean()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "8.3", id = "ab")
+    public void testCustomDecoratorDecoratingFinalBean() {
+    }
 }

@@ -21,8 +21,8 @@ import javax.enterprise.inject.Default;
 import javax.inject.Named;
 
 @Stateless
-@Named("Monkey") @Default
-public class Monkey implements MonkeyLocal
-{
+@Named("Monkey")
+@Default
+public class Monkey implements MonkeyLocal {
 
 }

@@ -21,11 +21,9 @@ import javax.interceptor.Interceptor;
 
 @Stateless
 @Interceptor
-public class Dalmatian_Broken implements DalmatianLocal_Broken
-{
+public class Dalmatian_Broken implements DalmatianLocal_Broken {
 
-   public void foo()
-   {
-   }
+    public void foo() {
+    }
 
 }

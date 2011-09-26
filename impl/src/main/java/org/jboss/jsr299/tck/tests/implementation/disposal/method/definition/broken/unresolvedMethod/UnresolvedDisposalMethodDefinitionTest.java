@@ -25,24 +25,19 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class UnresolvedDisposalMethodDefinitionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class UnresolvedDisposalMethodDefinitionTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
+    public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
 
-            .withTestClassPackage(UnresolvedDisposalMethodDefinitionTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+        .withTestClassPackage(UnresolvedDisposalMethodDefinitionTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "3.3.7", id = "ca")
-   public void testUnresolvedDisposalMethod()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "3.3.7", id = "ca")
+    public void testUnresolvedDisposalMethod() {
+    }
 }

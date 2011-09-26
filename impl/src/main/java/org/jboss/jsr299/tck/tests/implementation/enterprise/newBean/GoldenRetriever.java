@@ -23,15 +23,13 @@ import javax.enterprise.event.Observes;
 
 @Stateful
 @RequestScoped
-public class GoldenRetriever implements GoldenRetrieverLocal
-{
-   @Remove
-   public void bye(Object something) {
-      
-   }
+public class GoldenRetriever implements GoldenRetrieverLocal {
+    @Remove
+    public void bye(Object something) {
 
-   public void anObserverMethod(@Observes String event)
-   {
-      
-   }
+    }
+
+    public void anObserverMethod(@Observes String event) {
+
+    }
 }

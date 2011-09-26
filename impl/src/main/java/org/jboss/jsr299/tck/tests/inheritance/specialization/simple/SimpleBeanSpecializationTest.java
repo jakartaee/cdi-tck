@@ -32,57 +32,43 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class SimpleBeanSpecializationTest extends AbstractJSR299Test
-{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class SimpleBeanSpecializationTest extends AbstractJSR299Test {
 
-   private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {};
+    private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {
+    };
 
-   @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(SimpleBeanSpecializationTest.class)
-           .withBeansXml("beans.xml")
-           .build();
-   }
-   
-   @SuppressWarnings("unchecked")
-   @Test
-   @SpecAssertions( { 
-      @SpecAssertion(section = "4.3.1", id = "ia"),
-      @SpecAssertion(section = "4.3.1", id = "ib"),
-      @SpecAssertion(section = "4.3.1", id = "j"), 
-      @SpecAssertion(section = "3.1.4", id = "aa") 
-   })
-   public void testSpecializingBeanHasQualifiersOfSpecializedAndSpecializingBean()
-   {
-      assert getBeans(LazyFarmer.class, LANDOWNER_LITERAL).size() == 1;
-      Bean<?> bean = getBeans(LazyFarmer.class, LANDOWNER_LITERAL).iterator().next();
-      assert bean.getTypes().contains(Farmer.class);
-      assert bean.getQualifiers().size() == 4;
-      assert annotationSetMatches(bean.getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class);
-   }
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(SimpleBeanSpecializationTest.class).withBeansXml("beans.xml")
+                .build();
+    }
 
-   @Test
-   @SpecAssertions( { 
-      @SpecAssertion(section = "4.3.1", id = "k"), 
-      @SpecAssertion(section = "3.1.4", id = "ab") 
-   })
-   public void testSpecializingBeanHasNameOfSpecializedBean()
-   {
-      assert getBeans(LazyFarmer.class, LANDOWNER_LITERAL).size() == 1;
-      assert "farmer".equals(getBeans(LazyFarmer.class, LANDOWNER_LITERAL).iterator().next().getName());
-   }
+    @SuppressWarnings("unchecked")
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia"), @SpecAssertion(section = "4.3.1", id = "ib"),
+            @SpecAssertion(section = "4.3.1", id = "j"), @SpecAssertion(section = "3.1.4", id = "aa") })
+    public void testSpecializingBeanHasQualifiersOfSpecializedAndSpecializingBean() {
+        assert getBeans(LazyFarmer.class, LANDOWNER_LITERAL).size() == 1;
+        Bean<?> bean = getBeans(LazyFarmer.class, LANDOWNER_LITERAL).iterator().next();
+        assert bean.getTypes().contains(Farmer.class);
+        assert bean.getQualifiers().size() == 4;
+        assert annotationSetMatches(bean.getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class);
+    }
 
-   @Test
-   @SpecAssertions( { 
-     // @SpecAssertion(section = "4.3.2", id = "ab"), removed from spec
-      @SpecAssertion(section="4.3", id="cb")
-   })
-   public void testProducerMethodOnSpecializedBeanCalledOnSpecializingBean()
-   {
-      assert getBeans(Waste.class).size() == 1;
-      assert getInstanceByType(Waste.class).getFrom().equals(Office.class.getName());
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "k"), @SpecAssertion(section = "3.1.4", id = "ab") })
+    public void testSpecializingBeanHasNameOfSpecializedBean() {
+        assert getBeans(LazyFarmer.class, LANDOWNER_LITERAL).size() == 1;
+        assert "farmer".equals(getBeans(LazyFarmer.class, LANDOWNER_LITERAL).iterator().next().getName());
+    }
+
+    @Test
+    @SpecAssertions({
+    // @SpecAssertion(section = "4.3.2", id = "ab"), removed from spec
+    @SpecAssertion(section = "4.3", id = "cb") })
+    public void testProducerMethodOnSpecializedBeanCalledOnSpecializingBean() {
+        assert getBeans(Waste.class).size() == 1;
+        assert getInstanceByType(Waste.class).getFrom().equals(Office.class.getName());
+    }
 }

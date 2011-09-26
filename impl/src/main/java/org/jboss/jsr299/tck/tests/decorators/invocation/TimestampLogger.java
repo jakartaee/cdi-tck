@@ -20,59 +20,52 @@ import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
-public class TimestampLogger implements Logger
-{
-   
-   public static final String PREFIX = TimestampLogger.class.getSimpleName();
-   
-   private static String message;
-   
-   private static boolean initializeCalled;
-   
-   @Inject @Delegate
-   private Logger logger;
-   
-   public void log(String message)
-   {
-      TimestampLogger.message = message;
-      logger.log(PREFIX + message);
-   }
-   
-   public void initialize()
-   {
-      initializeCalled = true;
-   }
-   
-   /**
-    * @return the message
-    */
-   public static String getMessage()
-   {
-      return message;
-   }
-   
-   /**
-    * @param message the message to set
-    */
-   public static void reset()
-   {
-      TimestampLogger.message = null;
-      initializeCalled = false;
-   }
-   
-   /**
-    * @return the initializeCalled
-    */
-   public static boolean isInitializeCalled()
-   {
-      return initializeCalled;
-   }
+public class TimestampLogger implements Logger {
 
+    public static final String PREFIX = TimestampLogger.class.getSimpleName();
+
+    private static String message;
+
+    private static boolean initializeCalled;
+
+    @Inject
+    @Delegate
+    private Logger logger;
+
+    public void log(String message) {
+        TimestampLogger.message = message;
+        logger.log(PREFIX + message);
+    }
+
+    public void initialize() {
+        initializeCalled = true;
+    }
+
+    /**
+     * @return the message
+     */
+    public static String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public static void reset() {
+        TimestampLogger.message = null;
+        initializeCalled = false;
+    }
+
+    /**
+     * @return the initializeCalled
+     */
+    public static boolean isInitializeCalled() {
+        return initializeCalled;
+    }
 
 }

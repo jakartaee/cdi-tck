@@ -20,14 +20,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class TunaFarm
-{
+public class TunaFarm {
 
-   @SuppressWarnings("unused")
-   @Inject
-   public Tuna tuna;
-   
-   public Tuna notInjectedTuna = new Tuna();
+    @SuppressWarnings("unused")
+    @Inject
+    public Tuna tuna;
 
-   
+    public Tuna notInjectedTuna = new Tuna();
+
 }

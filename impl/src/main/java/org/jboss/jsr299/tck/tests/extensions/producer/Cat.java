@@ -18,48 +18,41 @@ package org.jboss.jsr299.tck.tests.extensions.producer;
 
 import javax.inject.Inject;
 
-public class Cat
-{
-   private static boolean constructorCalled;
-   private static boolean initializerCalled;
-   
-   @Inject
-   protected CatFoodDish foodDish;
-   
-   private Bird bird;
-   
-   @Inject
-   public Cat(LitterBox litterBox)
-   {
-      assert litterBox != null;
-      constructorCalled = true;
-   }
-   
-   @Inject
-   public void setBird(Bird bird)
-   {
-      assert bird != null;
-      initializerCalled = true;
-   }
+public class Cat {
+    private static boolean constructorCalled;
+    private static boolean initializerCalled;
 
-   public static boolean isConstructorCalled()
-   {
-      return constructorCalled;
-   }
-   
-   public static boolean isInitializerCalled()
-   {
-      return initializerCalled;
-   }
+    @Inject
+    protected CatFoodDish foodDish;
 
-   public static void reset()
-   {
-      Cat.constructorCalled = false;
-      Cat.initializerCalled = false;
-   }
-   
-   public void ping()
-   {
-      
-   }
+    private Bird bird;
+
+    @Inject
+    public Cat(LitterBox litterBox) {
+        assert litterBox != null;
+        constructorCalled = true;
+    }
+
+    @Inject
+    public void setBird(Bird bird) {
+        assert bird != null;
+        initializerCalled = true;
+    }
+
+    public static boolean isConstructorCalled() {
+        return constructorCalled;
+    }
+
+    public static boolean isInitializerCalled() {
+        return initializerCalled;
+    }
+
+    public static void reset() {
+        Cat.constructorCalled = false;
+        Cat.initializerCalled = false;
+    }
+
+    public void ping() {
+
+    }
 }

@@ -27,113 +27,89 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class SimpleBeanDefinitionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class SimpleBeanDefinitionTest extends AbstractJSR299Test {
+
     @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(SimpleBeanDefinitionTest.class)
-           // Originally with faces-config.xml however this resource does not exist in /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/implementation/simple/definition
-           // .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
-           .build();
-   }
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(SimpleBeanDefinitionTest.class)
+        // Originally with faces-config.xml however this resource does not exist in
+        // /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/implementation/simple/definition
+        // .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
+                .build();
+    }
 
-   @Test
-   @SpecAssertion(section = "3.1.1", id = "ca")
-   public void testAbstractClassDeclaredInJavaNotDiscovered()
-   {
-      assert getBeans(Cow_NotBean.class).size() == 0;
-   }
+    @Test
+    @SpecAssertion(section = "3.1.1", id = "ca")
+    public void testAbstractClassDeclaredInJavaNotDiscovered() {
+        assert getBeans(Cow_NotBean.class).size() == 0;
+    }
 
-   @Test(groups = "innerClass")
-   @SpecAssertions({
-      @SpecAssertion(section = "3.1.1", id = "ba")
-   })
-   public void testStaticInnerClassDeclaredInJavaAllowed()
-   {
-      assert getBeans(StaticInnerClass.class).size() == 1;
-   }
+    @Test(groups = "innerClass")
+    @SpecAssertions({ @SpecAssertion(section = "3.1.1", id = "ba") })
+    public void testStaticInnerClassDeclaredInJavaAllowed() {
+        assert getBeans(StaticInnerClass.class).size() == 1;
+    }
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "3.1.1", id = "b")
-   })
-   public void testNonStaticInnerClassDeclaredInJavaNotDiscovered()
-   {
-      assert getBeans(InnerClass_NotBean.class).size() == 0;
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.1.1", id = "b") })
+    public void testNonStaticInnerClassDeclaredInJavaNotDiscovered() {
+        assert getBeans(InnerClass_NotBean.class).size() == 0;
+    }
 
-   @Test
-   @SpecAssertion(section = "3.1.1", id = "cb")
-   public void testInterfaceNotDiscoveredAsSimpleBean()
-   {
-      assert getBeans(Car.class).size() == 0;
-   }
-   
-   @Test
-   @SpecAssertion(section = "3.1.1", id = "g")
-   public void testExtensionNotDiscoveredAsSimpleBean()
-   {
-      assert getBeans(SimpleExtension.class).size() == 0;
-   }
+    @Test
+    @SpecAssertion(section = "3.1.1", id = "cb")
+    public void testInterfaceNotDiscoveredAsSimpleBean() {
+        assert getBeans(Car.class).size() == 0;
+    }
 
-   @Test
-   @SpecAssertion(section="3.1.1", id="p")
-   public void testSimpleBeanOnlyIfConstructorParameterless()
-   {
-      assert getBeans(Antelope_NotBean.class).isEmpty();
-      assert !getBeans(Donkey.class).isEmpty();
-   }
+    @Test
+    @SpecAssertion(section = "3.1.1", id = "g")
+    public void testExtensionNotDiscoveredAsSimpleBean() {
+        assert getBeans(SimpleExtension.class).size() == 0;
+    }
 
-   @Test
-   @SpecAssertion(section="3.1.1", id="q")
-   public void testSimpleBeanOnlyIfConstructorIsInitializer()
-   {
-      assert getBeans(Antelope_NotBean.class).isEmpty();
-      assert !getBeans(Sheep.class).isEmpty();
-   }
+    @Test
+    @SpecAssertion(section = "3.1.1", id = "p")
+    public void testSimpleBeanOnlyIfConstructorParameterless() {
+        assert getBeans(Antelope_NotBean.class).isEmpty();
+        assert !getBeans(Donkey.class).isEmpty();
+    }
 
-   @Test
-   @SpecAssertion(section = "3.7.1", id = "aa")
-   public void testInitializerAnnotatedConstructor() throws Exception
-   {
-      Sheep.constructedCorrectly = false;
-      getInstanceByType(Sheep.class);
-      assert Sheep.constructedCorrectly;
-   }
+    @Test
+    @SpecAssertion(section = "3.1.1", id = "q")
+    public void testSimpleBeanOnlyIfConstructorIsInitializer() {
+        assert getBeans(Antelope_NotBean.class).isEmpty();
+        assert !getBeans(Sheep.class).isEmpty();
+    }
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "3.7.1", id = "ba"),
-      @SpecAssertion(section = "3.1.3", id = "a"),
-      @SpecAssertion(section = "3.7", id = "a"),
-      @SpecAssertion(section = "5.5.1", id = "ba")
-   })
-   public void testEmptyConstructorUsed()
-   {
-      Donkey.constructedCorrectly = false;
-      getInstanceByType(Donkey.class);
-      assert Donkey.constructedCorrectly;
-   }
+    @Test
+    @SpecAssertion(section = "3.7.1", id = "aa")
+    public void testInitializerAnnotatedConstructor() throws Exception {
+        Sheep.constructedCorrectly = false;
+        getInstanceByType(Sheep.class);
+        assert Sheep.constructedCorrectly;
+    }
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "3.7.1", id = "aa"),
-      @SpecAssertion(section = "5.5.1", id = "aa")
-   })
-   public void testInitializerAnnotatedConstructorUsedOverEmptyConstuctor() throws Exception
-   {
-      getInstanceByType(Turkey.class);
-      assert Turkey.constructedCorrectly;
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.7.1", id = "ba"), @SpecAssertion(section = "3.1.3", id = "a"),
+            @SpecAssertion(section = "3.7", id = "a"), @SpecAssertion(section = "5.5.1", id = "ba") })
+    public void testEmptyConstructorUsed() {
+        Donkey.constructedCorrectly = false;
+        getInstanceByType(Donkey.class);
+        assert Donkey.constructedCorrectly;
+    }
 
-   @Test
-   @SpecAssertion(section = "3.1", id = "fa")
-   public void testDependentScopedBeanCanHavePublicField() throws Exception
-   {
-      assert getInstanceByType(Tiger.class).name.equals("pete");
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.7.1", id = "aa"), @SpecAssertion(section = "5.5.1", id = "aa") })
+    public void testInitializerAnnotatedConstructorUsedOverEmptyConstuctor() throws Exception {
+        getInstanceByType(Turkey.class);
+        assert Turkey.constructedCorrectly;
+    }
+
+    @Test
+    @SpecAssertion(section = "3.1", id = "fa")
+    public void testDependentScopedBeanCanHavePublicField() throws Exception {
+        assert getInstanceByType(Tiger.class).name.equals("pete");
+    }
 }

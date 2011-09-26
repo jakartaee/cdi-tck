@@ -23,15 +23,13 @@ import javax.interceptor.InvocationContext;
 
 @Interceptor
 @Secure
-public class SimpleInterceptor_Broken
-{
-   @AroundInvoke
-   public Object intercept(InvocationContext ctx) throws Exception
-   {
-      return ctx.proceed();
-   }
-   
-   @SuppressWarnings("unused")
-   @Produces
-   private Integer zero = 0;
+public class SimpleInterceptor_Broken {
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
+        return ctx.proceed();
+    }
+
+    @SuppressWarnings("unused")
+    @Produces
+    private Integer zero = 0;
 }

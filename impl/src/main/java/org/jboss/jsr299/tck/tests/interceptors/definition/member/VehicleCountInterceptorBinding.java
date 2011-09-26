@@ -27,12 +27,11 @@ import java.lang.annotation.Target;
 import javax.enterprise.util.Nonbinding;
 import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD })
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented
 @InterceptorBinding
-public @interface VehicleCountInterceptorBinding
-{
-   @Nonbinding
-   String comment();
+public @interface VehicleCountInterceptorBinding {
+    @Nonbinding
+    String comment();
 }

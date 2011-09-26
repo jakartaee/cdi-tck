@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
-public interface Bar
-{
-   boolean foo();
+public interface Bar {
+    boolean foo();
 }

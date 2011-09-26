@@ -18,10 +18,9 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Tame
-public class Alligator
-{
+public class Alligator {
 
 }

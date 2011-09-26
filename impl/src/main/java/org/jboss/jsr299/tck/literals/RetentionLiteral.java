@@ -22,9 +22,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public abstract class RetentionLiteral extends AnnotationLiteral<Retention> implements Retention
-{
+public abstract class RetentionLiteral extends AnnotationLiteral<Retention> implements Retention {
 
 }

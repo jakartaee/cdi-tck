@@ -24,12 +24,13 @@ import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 @Decorator
-public class CityDecorator implements CityInterface, Serializable
-{
-   @Inject @Delegate @Any CityInterface city; 
-   
-   public void foo()
-   {
-      city.foo();      
-   }
+public class CityDecorator implements CityInterface, Serializable {
+    @Inject
+    @Delegate
+    @Any
+    CityInterface city;
+
+    public void foo() {
+        city.foo();
+    }
 }

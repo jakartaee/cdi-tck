@@ -21,13 +21,16 @@ import javax.ejb.Stateful;
 import javax.inject.Inject;
 
 @Stateful
-public class Maarianhamina_Broken implements MaarianHaminaLocal_Broken
-{
-   @SuppressWarnings("unused")
-   @Inject @British Cow cow;
-   
-   @Remove
-   public void bye() {}
+public class Maarianhamina_Broken implements MaarianHaminaLocal_Broken {
+    @SuppressWarnings("unused")
+    @Inject
+    @British
+    Cow cow;
 
-   public void ping() {}
+    @Remove
+    public void bye() {
+    }
+
+    public void ping() {
+    }
 }

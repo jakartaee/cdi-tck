@@ -29,35 +29,30 @@ import javax.enterprise.inject.New;
 import javax.enterprise.inject.Produces;
 
 @RequestScoped
-public class Bestiary
-{
-   
-   private Set<String> possibleNames;
-   private Set<String> knightsWhichKilledTheDragons;
-   
-   @Produces Collection<Dragon> getDragons(@New ArrayList<Dragon> dragons)
-   {
-      return dragons;
-   }
-   
-   public void observeBirth(@Observes Griffin griffin, @New TreeSet<String> possibleNames)
-   {
-      this.possibleNames = possibleNames;
-   }
-   
-   public void destroyDragons(@Disposes Collection<Dragon> dragons, @New LinkedHashSet<String> knights)
-   {
-      this.knightsWhichKilledTheDragons = knights;
-   }
-   
-   public Set<String> getPossibleNames()
-   {
-      return possibleNames;
-   }
-   
-   public Set<String> getKnightsWhichKilledTheDragons()
-   {
-      return knightsWhichKilledTheDragons;
-   }
+public class Bestiary {
+
+    private Set<String> possibleNames;
+    private Set<String> knightsWhichKilledTheDragons;
+
+    @Produces
+    Collection<Dragon> getDragons(@New ArrayList<Dragon> dragons) {
+        return dragons;
+    }
+
+    public void observeBirth(@Observes Griffin griffin, @New TreeSet<String> possibleNames) {
+        this.possibleNames = possibleNames;
+    }
+
+    public void destroyDragons(@Disposes Collection<Dragon> dragons, @New LinkedHashSet<String> knights) {
+        this.knightsWhichKilledTheDragons = knights;
+    }
+
+    public Set<String> getPossibleNames() {
+        return possibleNames;
+    }
+
+    public Set<String> getKnightsWhichKilledTheDragons() {
+        return knightsWhichKilledTheDragons;
+    }
 
 }

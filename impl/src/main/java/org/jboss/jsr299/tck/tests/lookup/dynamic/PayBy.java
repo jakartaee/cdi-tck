@@ -28,13 +28,14 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-@Target( { TYPE, METHOD, PARAMETER, FIELD })
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-public @interface PayBy
-{
-   public static enum PaymentMethod { CASH, CHEQUE, CREDIT_CARD };
-   
-   PaymentMethod value();
+public @interface PayBy {
+    public static enum PaymentMethod {
+        CASH, CHEQUE, CREDIT_CARD
+    };
+
+    PaymentMethod value();
 }

@@ -20,22 +20,19 @@ import javax.enterprise.context.RequestScoped;
 
 @FishStereotype
 @RequestScoped
-public class RedSnapper implements Animal
-{
-   
-   private boolean touched;
-   
-   public void ping()
-   {
-      this.touched = true;
-   }
-   
-   /**
-    * @return the touched
-    */
-   public boolean isTouched()
-   {
-      return touched;
-   }
-   
+public class RedSnapper implements Animal {
+
+    private boolean touched;
+
+    public void ping() {
+        this.touched = true;
+    }
+
+    /**
+     * @return the touched
+     */
+    public boolean isTouched() {
+        return touched;
+    }
+
 }

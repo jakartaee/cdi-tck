@@ -25,98 +25,85 @@ import org.jboss.jsr299.tck.spi.EL;
 import org.jboss.jsr299.tck.spi.Managers;
 
 /**
- * JSR299 configuration implementation. 
+ * JSR299 configuration implementation.
  * 
  * @author Pete Muir
  * @author Martin Kouba
  */
-public class JSR299ConfigurationImpl implements JSR299Configuration
-{
-   
-   public static final String INTEGRATION_TEST_PACKAGE_NAME = "org.jboss.jsr299.tck.integration";
-   public static final String UNIT_TEST_PACKAGE_NAME = "org.jboss.jsr299.tck.unit";
- 
-   private Beans beans;
-   private Contexts<? extends Context> contexts;
-   private Managers managers;
-   private EL el;
-   private String libraryDirectory;
-   
-   protected JSR299ConfigurationImpl()
-   {
-   }
-   
-   public JSR299ConfigurationImpl(JSR299Configuration configuration)
-   {
-      this.beans = configuration.getBeans();
-      this.contexts = configuration.getContexts();
-      this.managers = configuration.getManagers();
-      this.el = configuration.getEl();
-   }
+public class JSR299ConfigurationImpl implements JSR299Configuration {
 
- 
-   public Beans getBeans()
-   {
-      return beans;
-   }
+    public static final String INTEGRATION_TEST_PACKAGE_NAME = "org.jboss.jsr299.tck.integration";
+    public static final String UNIT_TEST_PACKAGE_NAME = "org.jboss.jsr299.tck.unit";
 
-   public void setBeans(Beans beans)
-   {
-      this.beans = beans;
-   }
+    private Beans beans;
+    private Contexts<? extends Context> contexts;
+    private Managers managers;
+    private EL el;
+    private String libraryDirectory;
 
-   @SuppressWarnings("unchecked")
-   public <T extends Context> Contexts<T> getContexts()
-   {
-      return (Contexts<T>) contexts;
-   }
+    protected JSR299ConfigurationImpl() {
+    }
 
-   public <T extends Context> void setContexts(Contexts<T> contexts)
-   {
-      this.contexts = contexts;
-   }
+    public JSR299ConfigurationImpl(JSR299Configuration configuration) {
+        this.beans = configuration.getBeans();
+        this.contexts = configuration.getContexts();
+        this.managers = configuration.getManagers();
+        this.el = configuration.getEl();
+    }
 
-   public Managers getManagers()
-   {
-      return managers;
-   }
+    public Beans getBeans() {
+        return beans;
+    }
 
-   public void setManagers(Managers managers)
-   {
-      this.managers = managers;
-   }
+    public void setBeans(Beans beans) {
+        this.beans = beans;
+    }
 
-   public EL getEl()
-   {
-      return el;
-   }
-   
-   public void setEl(EL el)
-   {
-      this.el = el;
-   }
+    @SuppressWarnings("unchecked")
+    public <T extends Context> Contexts<T> getContexts() {
+        return (Contexts<T>) contexts;
+    }
+
+    public <T extends Context> void setContexts(Contexts<T> contexts) {
+        this.contexts = contexts;
+    }
+
+    public Managers getManagers() {
+        return managers;
+    }
+
+    public void setManagers(Managers managers) {
+        this.managers = managers;
+    }
+
+    public EL getEl() {
+        return el;
+    }
+
+    public void setEl(EL el) {
+        this.el = el;
+    }
 
     public String getLibraryDirectory() {
         return libraryDirectory;
     }
-    
+
     public void setLibraryDirectory(String libraryDirectory) {
         this.libraryDirectory = libraryDirectory;
     }
 
-   @Override
-   public String toString()
-   {
-      StringBuilder configuration = new StringBuilder();
-      configuration.append("JSR 299 TCK Configuration\n");
-      configuration.append("-----------------\n");
-      configuration.append("\tBeans: ").append(getBeans()).append("\n");
-      configuration.append("\tContexts: ").append(getContexts()).append("\n");
-      configuration.append("\tEL: ").append(getEl()).append("\n");
-      configuration.append("\tManagers: ").append(getManagers()).append("\n");
-      configuration.append("\tLibrary dir: ").append(getLibraryDirectory()).append("\n");
-      configuration.append("\n");
-      return configuration.toString();
-   }
-   
+    @Override
+    public String toString() {
+        StringBuilder configuration = new StringBuilder();
+        configuration.append("JSR 299 TCK Configuration\n");
+        configuration.append("-----------------\n");
+        configuration.append("\tBeans: ").append(getBeans()).append("\n");
+        configuration.append("\tContexts: ").append(getContexts()).append("\n");
+        configuration.append("\tEL: ").append(getEl()).append("\n");
+        configuration.append("\tManagers: ").append(getManagers()).append("\n");
+        configuration.append("\tLibrary dir: ").append(getLibraryDirectory()).append("\n");
+        configuration.append("\n");
+        return configuration.toString();
+    }
+
 }

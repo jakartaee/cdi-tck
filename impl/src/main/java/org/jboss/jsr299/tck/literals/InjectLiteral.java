@@ -24,4 +24,5 @@ import javax.inject.Inject;
  * 
  * @author Pete Muir
  */
-public class InjectLiteral extends AnnotationLiteral<Inject> implements Inject {}
+public class InjectLiteral extends AnnotationLiteral<Inject> implements Inject {
+}

@@ -19,9 +19,8 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition.dependentWit
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-public class Leopard_Broken
-{
-   
-   public String name = "pete";
-   
+public class Leopard_Broken {
+
+    public String name = "pete";
+
 }

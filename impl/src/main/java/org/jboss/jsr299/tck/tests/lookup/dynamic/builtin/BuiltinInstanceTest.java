@@ -33,55 +33,47 @@ import org.testng.annotations.Test;
 /**
  * Tests for built-in Instance.
  */
-@SpecVersion(spec="cdi", version="20091101")
+@SpecVersion(spec = "cdi", version = "20091101")
 public class BuiltinInstanceTest extends AbstractJSR299Test {
 
     @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(BuiltinInstanceTest.class)
-           .build();
-   }
-    
-	@Test
-	@SpecAssertion(section = "5.6.2", id = "d")
-	public void testScopeOfBuiltinInstance() 
-	{
-		Bean<Instance<Cow>> bean = getBeans(new TypeLiteral<Instance<Cow>>() {}).iterator().next();
-		assert Dependent.class.equals(bean.getScope());
-	}
-	
-	@Test
-	@SpecAssertion(section = "5.6.2", id = "e")
-	public void testNameOfBuiltinInstance() 
-	{
-		Bean<Instance<Cow>> bean = getBeans(new TypeLiteral<Instance<Cow>>() {}).iterator().next();
-		assert bean.getName() == null;
-	}
-	
-	@Test
-	@SpecAssertions({
-	   @SpecAssertion(section = "5.6.2", id = "a"),
-	   @SpecAssertion(section = "5.6.2", id = "f")
-   })
-	public void testInstanceProvidedForEveryLegalBeanType() 
-	{
-	   Farm farm = getInstanceByType(Farm.class);
-	   assert farm.getAnimal() != null;
-	   assert farm.getAbstractAnimal() != null;
-	   assert farm.getCow() != null;
-	}
-	
-	@Test
-	@SpecAssertion(section = "5.6.2", id = "g")
-	public void testInstanceIsPassivationCapable() throws Exception 
-	{
-	   Field field = getInstanceByType(Field.class);
-	   Object object = deserialize(serialize(field));
-	   assert field.getInstance().get() instanceof Cow;
-	   assert object instanceof Field;
-	   Field field2 = (Field) object;
-	   assert field2.getInstance().get() instanceof Cow;
-	}
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(BuiltinInstanceTest.class).build();
+    }
+
+    @Test
+    @SpecAssertion(section = "5.6.2", id = "d")
+    public void testScopeOfBuiltinInstance() {
+        Bean<Instance<Cow>> bean = getBeans(new TypeLiteral<Instance<Cow>>() {
+        }).iterator().next();
+        assert Dependent.class.equals(bean.getScope());
+    }
+
+    @Test
+    @SpecAssertion(section = "5.6.2", id = "e")
+    public void testNameOfBuiltinInstance() {
+        Bean<Instance<Cow>> bean = getBeans(new TypeLiteral<Instance<Cow>>() {
+        }).iterator().next();
+        assert bean.getName() == null;
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.6.2", id = "a"), @SpecAssertion(section = "5.6.2", id = "f") })
+    public void testInstanceProvidedForEveryLegalBeanType() {
+        Farm farm = getInstanceByType(Farm.class);
+        assert farm.getAnimal() != null;
+        assert farm.getAbstractAnimal() != null;
+        assert farm.getCow() != null;
+    }
+
+    @Test
+    @SpecAssertion(section = "5.6.2", id = "g")
+    public void testInstanceIsPassivationCapable() throws Exception {
+        Field field = getInstanceByType(Field.class);
+        Object object = deserialize(serialize(field));
+        assert field.getInstance().get() instanceof Cow;
+        assert object instanceof Field;
+        Field field2 = (Field) object;
+        assert field2.getInstance().get() instanceof Cow;
+    }
 }

@@ -19,16 +19,13 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise;
 import javax.ejb.Stateful;
 import javax.inject.Named;
 
-
 @Landowner
 @Named
 @Stateful
-public class Farmer implements FarmerLocal
-{
-   
-   public String getClassName()
-   {
-      return Farmer.class.getName();
-   }
-   
+public class Farmer implements FarmerLocal {
+
+    public String getClassName() {
+        return Farmer.class.getName();
+    }
+
 }

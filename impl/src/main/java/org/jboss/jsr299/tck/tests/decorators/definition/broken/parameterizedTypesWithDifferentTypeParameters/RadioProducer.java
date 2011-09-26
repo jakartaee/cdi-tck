@@ -22,10 +22,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
 @RequestScoped
-public class RadioProducer
-{
-   @Produces
-   Radio<String, List<Integer>> radio = new Radio<String, List<Integer>>()
-   {
-   };
+public class RadioProducer {
+    @Produces
+    Radio<String, List<Integer>> radio = new Radio<String, List<Integer>>() {
+    };
 }

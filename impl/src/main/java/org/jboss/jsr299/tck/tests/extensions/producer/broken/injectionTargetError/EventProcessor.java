@@ -20,12 +20,10 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 
-public class EventProcessor implements Extension
-{
-   public void processDogInjectionTarget(@Observes ProcessInjectionTarget<Dog> injectionTargetEvent)
-   {
-      // Add an exception as a definition error
-      injectionTargetEvent.addDefinitionError(new RuntimeException("Should abort processing after bean discovery"));
-   }
+public class EventProcessor implements Extension {
+    public void processDogInjectionTarget(@Observes ProcessInjectionTarget<Dog> injectionTargetEvent) {
+        // Add an exception as a definition error
+        injectionTargetEvent.addDefinitionError(new RuntimeException("Should abort processing after bean discovery"));
+    }
 
 }

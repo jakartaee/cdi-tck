@@ -25,23 +25,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ParameterAnnotatedObservesTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ParameterAnnotatedObservesTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ParameterAnnotatedObservesTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ParameterAnnotatedObservesTest.class).build();
     }
-    
-   @Test(groups = "initializerMethod")
-   @SpecAssertion(section = "3.9.1", id = "da")
-   public void testInitializerMethodHasParameterAnnotatedObserves()
-   {
-   }
-   
+
+    @Test(groups = "initializerMethod")
+    @SpecAssertion(section = "3.9.1", id = "da")
+    public void testInitializerMethodHasParameterAnnotatedObserves() {
+    }
+
 }

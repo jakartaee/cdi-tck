@@ -20,7 +20,6 @@ import javax.enterprise.context.RequestScoped;
 
 @RequestScopedAnimalStereotype
 @RequestScoped
-public class Goldfish implements Animal
-{
+public class Goldfish implements Animal {
 
 }

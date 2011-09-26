@@ -26,31 +26,23 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseBeanWithIllegalDependencyTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseBeanWithIllegalDependencyTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseBeanWithIllegalDependencyTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanWithIllegalDependencyTest.class).build();
     }
-    
-   @Test(groups = { "contexts", "passivation", "integration"})
-   @SpecAssertion(section = "6.6.4", id = "fbb")
-   public void test()
-   {
-       try
-       {
-         getInstanceByType(MaarianHaminaLocal_Broken.class).ping();
-       }
-       catch (Throwable t) 
-       {
-         assert isThrowablePresent(IllegalProductException.class, t);
-         return;
-      }
-      assert false;
-   }
+
+    @Test(groups = { "contexts", "passivation", "integration" })
+    @SpecAssertion(section = "6.6.4", id = "fbb")
+    public void test() {
+        try {
+            getInstanceByType(MaarianHaminaLocal_Broken.class).ping();
+        } catch (Throwable t) {
+            assert isThrowablePresent(IllegalProductException.class, t);
+            return;
+        }
+        assert false;
+    }
 }

@@ -33,28 +33,20 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class LibraryInEarTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class LibraryInEarTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClass(LibraryInEarTest.class)
-            .withClasses(Baz.class, BazLocal.class, Foo.class)
-            .withBeanLibrary(Bar.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClass(LibraryInEarTest.class)
+                .withClasses(Baz.class, BazLocal.class, Foo.class).withBeanLibrary(Bar.class).build();
     }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "12.1", id="bbb")
-   })
-   public void test()
-   {
-      assert getCurrentManager().getBeans(Foo.class).size() == 1;
-      assert getCurrentManager().getBeans(Bar.class).size() == 1;
-      assert getCurrentManager().getBeans(BazLocal.class).size() == 1;
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbb") })
+    public void test() {
+        assert getCurrentManager().getBeans(Foo.class).size() == 1;
+        assert getCurrentManager().getBeans(Bar.class).size() == 1;
+        assert getCurrentManager().getBeans(BazLocal.class).size() == 1;
+    }
 }

@@ -16,14 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
-public class Spider implements Animal
-{
+public class Spider implements Animal {
 
-   private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-   public void layEggs()
-   {
-      
-   }
-   
+    public void layEggs() {
+
+    }
+
 }

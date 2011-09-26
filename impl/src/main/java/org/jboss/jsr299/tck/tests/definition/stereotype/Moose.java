@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.definition.stereotype;
 
 @AnimalStereotype
-public class Moose implements Animal
-{
-   
+public class Moose implements Animal {
+
 }

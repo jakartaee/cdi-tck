@@ -29,41 +29,31 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ResolutionByNameTest extends AbstractJSR299Test
-{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ResolutionByNameTest extends AbstractJSR299Test {
 
-   @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(ResolutionByNameTest.class)
-           .withBeansXml("beans.xml")
-           .build();
-   }
-    
-   @Test(groups = { "resolution"})
-   @SpecAssertions({
-      @SpecAssertion(section = "5.3.1", id = "ca"),
-      @SpecAssertion(section = "11.3.5", id = "aa"),
-      @SpecAssertion(section = "11.3.5", id = "b")
-   })
-   public void testAmbiguousELNamesResolved() throws Exception
-   {
-      // Cod, Plaice and AlaskaPlaice are named "whitefish" - Cod is a not-enabled policy, AlaskaPlaice specializes Plaice
-      Set<Bean<?>> beans = getCurrentManager().getBeans("whitefish");
-      assert beans.size() == 1;
-      assert getCurrentManager().resolve(beans).getTypes().contains(AlaskaPlaice.class);
-      // Both Salmon and Sole are named "fish" - Sole is an enabled policy
-      beans = getCurrentManager().getBeans("fish");
-      assert beans.size() == 2;
-      assert getCurrentManager().resolve(beans).getTypes().contains(Sole.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "3.11", id = "a")
-   public void testFieldNameUsedAsBeanName()
-   {
-      assert getInstanceByType(FishingNet.class).isCarpInjected();
-   }
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ResolutionByNameTest.class).withBeansXml("beans.xml").build();
+    }
+
+    @Test(groups = { "resolution" })
+    @SpecAssertions({ @SpecAssertion(section = "5.3.1", id = "ca"), @SpecAssertion(section = "11.3.5", id = "aa"),
+            @SpecAssertion(section = "11.3.5", id = "b") })
+    public void testAmbiguousELNamesResolved() throws Exception {
+        // Cod, Plaice and AlaskaPlaice are named "whitefish" - Cod is a not-enabled policy, AlaskaPlaice specializes Plaice
+        Set<Bean<?>> beans = getCurrentManager().getBeans("whitefish");
+        assert beans.size() == 1;
+        assert getCurrentManager().resolve(beans).getTypes().contains(AlaskaPlaice.class);
+        // Both Salmon and Sole are named "fish" - Sole is an enabled policy
+        beans = getCurrentManager().getBeans("fish");
+        assert beans.size() == 2;
+        assert getCurrentManager().resolve(beans).getTypes().contains(Sole.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "3.11", id = "a")
+    public void testFieldNameUsedAsBeanName() {
+        assert getInstanceByType(FishingNet.class).isCarpInjected();
+    }
 }

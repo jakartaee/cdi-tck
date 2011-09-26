@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise;
 
-public interface Animal
-{
+public interface Animal {
 
 }

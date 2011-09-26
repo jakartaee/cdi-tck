@@ -55,176 +55,157 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Mostly tests for extensions specified in chapter 11 of the specification
- * and not already tested elsewhere.
+ * Mostly tests for extensions specified in chapter 11 of the specification and not already tested elsewhere.
  * 
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class BeanManagerTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class BeanManagerTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(BeanManagerTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(BeanManagerTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "11.3.7", id = "a")
-   public void testAmbiguousDependencyResolved()
-   {
-      Set<Bean<?>> beans = new HashSet<Bean<?>>();
-      beans.addAll(getCurrentManager().getBeans(SimpleBean.class));
-      beans.addAll(getCurrentManager().getBeans(DerivedBean.class));
-      getCurrentManager().resolve(beans);
-   }
-   
-   @Test(expectedExceptions = AmbiguousResolutionException.class)
-   @SpecAssertion(section = "11.3.7", id = "b")
-   public void testAmbiguousDependencyNotResolved()
-   {
-      Set<Bean<?>> beans = new HashSet<Bean<?>>();
-      beans.addAll(getCurrentManager().getBeans(Dog.class));
-      beans.addAll(getCurrentManager().getBeans(Terrier.class));
-      getCurrentManager().resolve(beans);
-   }
-   
-   @Test(expectedExceptions = InjectionException.class)
-   @SpecAssertion(section = "11.3.8", id = "a")
-   public void testValidateThrowsException()
-   {
-      DogHouse dogHouse = getInstanceByType(DogHouse.class);
-      InjectionPoint injectionPoint = new InjectionPointDecorator(dogHouse.getDog().getInjectedMetadata());
-      // Wrap the injection point to change the type to a more generalized class
-      getCurrentManager().validate(injectionPoint);
-   }
-   
-   @Test(groups="rewrite")
-   @SpecAssertion(section = "11.3.13", id = "aa")
-   // Should also check a custom bindingtype
-   public void testDetermineBindingType()
-   {
-      assert getCurrentManager().isQualifier(Tame.class);
-      assert !getCurrentManager().isQualifier(AnimalStereotype.class);
-      assert !getCurrentManager().isQualifier(ApplicationScoped.class);
-      assert !getCurrentManager().isQualifier(Transactional.class);
-   }
-   
-   @Test(groups="rewrite")
-   // Should also check a custom scope
-   @SpecAssertion(section = "11.3.13", id = "ab")
-   public void testDetermineScopeType()
-   {
-      assert getCurrentManager().isScope(ApplicationScoped.class);
-      assert !getCurrentManager().isScope(Tame.class);
-      assert !getCurrentManager().isScope(AnimalStereotype.class);
-      assert !getCurrentManager().isScope(Transactional.class);
-   }
-   
-   @Test(groups="rewrite")
-   @SpecAssertion(section = "11.3.13", id = "ac")
-   // Should also check a custom stereotype
-   public void testDetermineStereotype()
-   {
-      assert getCurrentManager().isStereotype(AnimalStereotype.class);
-      assert !getCurrentManager().isStereotype(Tame.class);
-      assert !getCurrentManager().isStereotype(ApplicationScoped.class);
-      assert !getCurrentManager().isStereotype(Transactional.class);
-   }
-   
-   @Test(groups="rewrite")
-   // WBRI-59
-   // Should also check a custom interceptor binding type
-   @SpecAssertion(section = "11.3.13", id = "ad")
-   public void testDetermineInterceptorBindingType()
-   {
-      assert getCurrentManager().isInterceptorBinding(Transactional.class);
-      assert !getCurrentManager().isInterceptorBinding(Tame.class);
-      assert !getCurrentManager().isInterceptorBinding(AnimalStereotype.class);
-      assert !getCurrentManager().isInterceptorBinding(ApplicationScoped.class);
-   }
-   
-   @Test(groups = { "rewrite"})
-   @SpecAssertion(section = "11.3.13", id = "ae")
-   // Should also check a custom sterotype
-   public void testGetMetaAnnotationsForStereotype()
-   {
-      Set<Annotation> stereotypeAnnotations = getCurrentManager().getStereotypeDefinition(AnimalStereotype.class);
-      assert stereotypeAnnotations.size() == 5;
-      assert stereotypeAnnotations.contains(new AnnotationLiteral<Stereotype>() {});
-      assert stereotypeAnnotations.contains(new AnnotationLiteral<RequestScoped>() {});
-      assert stereotypeAnnotations.contains(new AnnotationLiteral<Inherited>() {});
-      assert stereotypeAnnotations.contains(new RetentionLiteral()
-      {
-         
-         public RetentionPolicy value()
-         {
-            return RetentionPolicy.RUNTIME;
-         }
-         
-      });
-      assert stereotypeAnnotations.contains(new TargetLiteral()
-      {
-         
-         public ElementType[] value()
-         {
-            ElementType[] value = {TYPE, METHOD, FIELD};
-            return value;
-         }
-         
-      });
-   }
 
-   @Test(groups = {"rewrite"})
-   @SpecAssertion(section = "11.3.13", id = "af")
-   public void testGetMetaAnnotationsForInterceptorBindingType()
-   {
-      Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingDefinition(Transactional.class);
-      assert metaAnnotations.size() == 4;
-      assert annotationSetMatches(metaAnnotations, Target.class, Retention.class, Documented.class, InterceptorBinding.class);
-   }
+    @Test
+    @SpecAssertion(section = "11.3.7", id = "a")
+    public void testAmbiguousDependencyResolved() {
+        Set<Bean<?>> beans = new HashSet<Bean<?>>();
+        beans.addAll(getCurrentManager().getBeans(SimpleBean.class));
+        beans.addAll(getCurrentManager().getBeans(DerivedBean.class));
+        getCurrentManager().resolve(beans);
+    }
 
-   @Test(groups = {"rewrite"})
-   @SpecAssertion(section = "11.3.13", id = "ag")
-   // Should also check a custom defined scope
-   public void testgetScope()
-   {
-      assert getCurrentManager().isNormalScope(RequestScoped.class);
-      assert !getCurrentManager().isPassivatingScope(RequestScoped.class);
-      
-      assert getCurrentManager().isNormalScope(SessionScoped.class);
-      assert getCurrentManager().isPassivatingScope(SessionScoped.class);
-   }
+    @Test(expectedExceptions = AmbiguousResolutionException.class)
+    @SpecAssertion(section = "11.3.7", id = "b")
+    public void testAmbiguousDependencyNotResolved() {
+        Set<Bean<?>> beans = new HashSet<Bean<?>>();
+        beans.addAll(getCurrentManager().getBeans(Dog.class));
+        beans.addAll(getCurrentManager().getBeans(Terrier.class));
+        getCurrentManager().resolve(beans);
+    }
 
-   @Test
-   @SpecAssertion(section = "11.3.15", id = "a")
-   public void testGetELResolver()
-   {
-      assert getCurrentManager().getELResolver() != null;
-   }
+    @Test(expectedExceptions = InjectionException.class)
+    @SpecAssertion(section = "11.3.8", id = "a")
+    public void testValidateThrowsException() {
+        DogHouse dogHouse = getInstanceByType(DogHouse.class);
+        InjectionPoint injectionPoint = new InjectionPointDecorator(dogHouse.getDog().getInjectedMetadata());
+        // Wrap the injection point to change the type to a more generalized class
+        getCurrentManager().validate(injectionPoint);
+    }
 
-   @Test
-   @SpecAssertion(section = "11.3.17", id = "a")
-   public void testObtainingAnnotatedType()
-   {
-      AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
-      assert annotatedType.isAnnotationPresent(Specializes.class);
-      assert annotatedType.isAnnotationPresent(Tame.class);
-      assert annotatedType.getFields().size() == 1;
-      assert annotatedType.getMethods().isEmpty();
-      assert annotatedType.getTypeClosure().size() == 3;
-   }
+    @Test(groups = "rewrite")
+    @SpecAssertion(section = "11.3.13", id = "aa")
+    // Should also check a custom bindingtype
+    public void testDetermineBindingType() {
+        assert getCurrentManager().isQualifier(Tame.class);
+        assert !getCurrentManager().isQualifier(AnimalStereotype.class);
+        assert !getCurrentManager().isQualifier(ApplicationScoped.class);
+        assert !getCurrentManager().isQualifier(Transactional.class);
+    }
 
-   @Test
-   @SpecAssertion(section = "11.3.18", id = "aa")
-   public void testObtainingInjectionTarget()
-   {
-      AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
-      assert getCurrentManager().createInjectionTarget(annotatedType) != null;
-   }
+    @Test(groups = "rewrite")
+    // Should also check a custom scope
+    @SpecAssertion(section = "11.3.13", id = "ab")
+    public void testDetermineScopeType() {
+        assert getCurrentManager().isScope(ApplicationScoped.class);
+        assert !getCurrentManager().isScope(Tame.class);
+        assert !getCurrentManager().isScope(AnimalStereotype.class);
+        assert !getCurrentManager().isScope(Transactional.class);
+    }
+
+    @Test(groups = "rewrite")
+    @SpecAssertion(section = "11.3.13", id = "ac")
+    // Should also check a custom stereotype
+    public void testDetermineStereotype() {
+        assert getCurrentManager().isStereotype(AnimalStereotype.class);
+        assert !getCurrentManager().isStereotype(Tame.class);
+        assert !getCurrentManager().isStereotype(ApplicationScoped.class);
+        assert !getCurrentManager().isStereotype(Transactional.class);
+    }
+
+    @Test(groups = "rewrite")
+    // WBRI-59
+    // Should also check a custom interceptor binding type
+    @SpecAssertion(section = "11.3.13", id = "ad")
+    public void testDetermineInterceptorBindingType() {
+        assert getCurrentManager().isInterceptorBinding(Transactional.class);
+        assert !getCurrentManager().isInterceptorBinding(Tame.class);
+        assert !getCurrentManager().isInterceptorBinding(AnimalStereotype.class);
+        assert !getCurrentManager().isInterceptorBinding(ApplicationScoped.class);
+    }
+
+    @Test(groups = { "rewrite" })
+    @SpecAssertion(section = "11.3.13", id = "ae")
+    // Should also check a custom sterotype
+    public void testGetMetaAnnotationsForStereotype() {
+        Set<Annotation> stereotypeAnnotations = getCurrentManager().getStereotypeDefinition(AnimalStereotype.class);
+        assert stereotypeAnnotations.size() == 5;
+        assert stereotypeAnnotations.contains(new AnnotationLiteral<Stereotype>() {
+        });
+        assert stereotypeAnnotations.contains(new AnnotationLiteral<RequestScoped>() {
+        });
+        assert stereotypeAnnotations.contains(new AnnotationLiteral<Inherited>() {
+        });
+        assert stereotypeAnnotations.contains(new RetentionLiteral() {
+
+            public RetentionPolicy value() {
+                return RetentionPolicy.RUNTIME;
+            }
+
+        });
+        assert stereotypeAnnotations.contains(new TargetLiteral() {
+
+            public ElementType[] value() {
+                ElementType[] value = { TYPE, METHOD, FIELD };
+                return value;
+            }
+
+        });
+    }
+
+    @Test(groups = { "rewrite" })
+    @SpecAssertion(section = "11.3.13", id = "af")
+    public void testGetMetaAnnotationsForInterceptorBindingType() {
+        Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingDefinition(Transactional.class);
+        assert metaAnnotations.size() == 4;
+        assert annotationSetMatches(metaAnnotations, Target.class, Retention.class, Documented.class, InterceptorBinding.class);
+    }
+
+    @Test(groups = { "rewrite" })
+    @SpecAssertion(section = "11.3.13", id = "ag")
+    // Should also check a custom defined scope
+    public void testgetScope() {
+        assert getCurrentManager().isNormalScope(RequestScoped.class);
+        assert !getCurrentManager().isPassivatingScope(RequestScoped.class);
+
+        assert getCurrentManager().isNormalScope(SessionScoped.class);
+        assert getCurrentManager().isPassivatingScope(SessionScoped.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "11.3.15", id = "a")
+    public void testGetELResolver() {
+        assert getCurrentManager().getELResolver() != null;
+    }
+
+    @Test
+    @SpecAssertion(section = "11.3.17", id = "a")
+    public void testObtainingAnnotatedType() {
+        AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
+        assert annotatedType.isAnnotationPresent(Specializes.class);
+        assert annotatedType.isAnnotationPresent(Tame.class);
+        assert annotatedType.getFields().size() == 1;
+        assert annotatedType.getMethods().isEmpty();
+        assert annotatedType.getTypeClosure().size() == 3;
+    }
+
+    @Test
+    @SpecAssertion(section = "11.3.18", id = "aa")
+    public void testObtainingInjectionTarget() {
+        AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
+        assert getCurrentManager().createInjectionTarget(annotatedType) != null;
+    }
 }

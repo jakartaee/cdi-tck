@@ -29,11 +29,10 @@ import javax.enterprise.inject.Stereotype;
 import javax.inject.Named;
 
 @Stereotype
-@Target( { TYPE, METHOD, FIELD })
+@Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @Named
 @Inherited
-public @interface NamedStereotype
-{
+public @interface NamedStereotype {
 
 }

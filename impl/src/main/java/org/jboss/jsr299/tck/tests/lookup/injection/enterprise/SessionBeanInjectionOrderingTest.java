@@ -25,36 +25,29 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class SessionBeanInjectionOrderingTest extends AbstractJSR299Test
-{
-    
+public class SessionBeanInjectionOrderingTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(SessionBeanInjectionOrderingTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(SessionBeanInjectionOrderingTest.class).build();
     }
 
-   @Test
-   @SpecAssertion(section = "5.5.2", id = "bb")
-   public void testInitializerCalledAfterFieldInjectionOfSuperclass()
-   {
-      MegaPoorHenHouseLocal house = getInstanceByType(MegaPoorHenHouseLocal.class);
-      assert house.isInitializerCalledAfterSuperclassInjection();
-   }
+    @Test
+    @SpecAssertion(section = "5.5.2", id = "bb")
+    public void testInitializerCalledAfterFieldInjectionOfSuperclass() {
+        MegaPoorHenHouseLocal house = getInstanceByType(MegaPoorHenHouseLocal.class);
+        assert house.isInitializerCalledAfterSuperclassInjection();
+    }
 
-   @Test
-   @SpecAssertion(section = "5.5.2", id = "bf")
-   public void testPostConstructCalledAfterInitializerOfSuperclass()
-   {
-      assert getInstanceByType(MegaPoorHenHouseLocal.class).isPostConstructCalledAfterSuperclassInitializer();
-   }
+    @Test
+    @SpecAssertion(section = "5.5.2", id = "bf")
+    public void testPostConstructCalledAfterInitializerOfSuperclass() {
+        assert getInstanceByType(MegaPoorHenHouseLocal.class).isPostConstructCalledAfterSuperclassInitializer();
+    }
 
-   @Test
-   @SpecAssertion(section = "5.5.2", id = "bc")
-   public void testInitializerCalledAfterResourceInjection()
-   {
-      assert getInstanceByType(InjectedSessionBeanLocal.class).isInitializerCalledAfterResourceInjection();
-   }
+    @Test
+    @SpecAssertion(section = "5.5.2", id = "bc")
+    public void testInitializerCalledAfterResourceInjection() {
+        assert getInstanceByType(InjectedSessionBeanLocal.class).isInitializerCalledAfterResourceInjection();
+    }
 }

@@ -18,19 +18,18 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
 import javax.enterprise.inject.Produces;
 
-public class SpiderProducer
-{
-   
-   private static Spider[] ALL_SPIDERS = { new Tarantula(), new LadybirdSpider(), new DaddyLongLegs() };
-   
-   @Produces public Spider[] getSpiders()
-   {
-      return ALL_SPIDERS;
-   }
-   
-   @Produces public String[] getStrings()
-   {
-      return new String[0];
-   }
-   
+public class SpiderProducer {
+
+    private static Spider[] ALL_SPIDERS = { new Tarantula(), new LadybirdSpider(), new DaddyLongLegs() };
+
+    @Produces
+    public Spider[] getSpiders() {
+        return ALL_SPIDERS;
+    }
+
+    @Produces
+    public String[] getStrings() {
+        return new String[0];
+    }
+
 }

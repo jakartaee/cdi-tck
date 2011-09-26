@@ -20,7 +20,7 @@ import javax.interceptor.Interceptors;
 
 @Transactional
 @Interceptors(AnotherInterceptor.class)
-public class AccountTransaction
-{
-   public void execute() {}
+public class AccountTransaction {
+    public void execute() {
+    }
 }

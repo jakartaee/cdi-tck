@@ -22,12 +22,11 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-public class Salo_Broken extends City implements Serializable
-{
-   private static final long serialVersionUID = 5500591077418621816L;
-   
-   @SuppressWarnings("unused")
-   @Inject
-   private transient Violation reference;
-   
+public class Salo_Broken extends City implements Serializable {
+    private static final long serialVersionUID = 5500591077418621816L;
+
+    @SuppressWarnings("unused")
+    @Inject
+    private transient Violation reference;
+
 }

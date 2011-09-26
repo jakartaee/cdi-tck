@@ -19,14 +19,13 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.producer.method.br
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
+public class Shop {
 
-public class Shop
-{
-   
-   @Produces @Expensive @Named
-   public Product getExpensiveGift()
-   {
-      return new Product();
-   }
-   
+    @Produces
+    @Expensive
+    @Named
+    public Product getExpensiveGift() {
+        return new Product();
+    }
+
 }

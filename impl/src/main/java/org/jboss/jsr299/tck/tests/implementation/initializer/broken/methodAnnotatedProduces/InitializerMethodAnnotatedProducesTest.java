@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.initializer.broken.methodAnnotatedProduces;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -27,24 +26,18 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class InitializerMethodAnnotatedProducesTest extends AbstractJSR299Test
-{
-   
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InitializerMethodAnnotatedProducesTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InitializerMethodAnnotatedProducesTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InitializerMethodAnnotatedProducesTest.class).build();
     }
-    
-   @Test(groups = "initializerMethod")
-   @SpecAssertions( { @SpecAssertion(section = "3.9.1", id = "ba"), 
-	   @SpecAssertion(section = "3.3.2", id = "ca") })
-   public void testInitializerMethodAnnotatedProduces()
-   {
-   }
-   
+
+    @Test(groups = "initializerMethod")
+    @SpecAssertions({ @SpecAssertion(section = "3.9.1", id = "ba"), @SpecAssertion(section = "3.3.2", id = "ca") })
+    public void testInitializerMethodAnnotatedProduces() {
+    }
+
 }

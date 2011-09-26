@@ -22,10 +22,8 @@ import javax.inject.Named;
 @Landowner
 @Named
 @Stateful
-public class Farmer implements FarmerInterface
-{
-   public String getClassName()
-   {
-      return Farmer.class.getName();
-   }
+public class Farmer implements FarmerInterface {
+    public String getClassName() {
+        return Farmer.class.getName();
+    }
 }

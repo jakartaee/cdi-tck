@@ -18,8 +18,7 @@ package org.jboss.jsr299.tck.tests.extensions.annotated;
 
 import javax.inject.Inject;
 
-public class DogHouse
-{
-   @Inject
-   protected Dog dog;
+public class DogHouse {
+    @Inject
+    protected Dog dog;
 }

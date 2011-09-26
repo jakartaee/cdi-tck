@@ -22,17 +22,14 @@ import javax.enterprise.inject.New;
 import org.jboss.jsr299.tck.literals.NewLiteral;
 
 @Local
-public interface WrappedEnterpriseBeanLocal
-{
-   void bye();
-   
-   public static final New NEW = new NewLiteral()
-   {
-      
-      public Class<?> value()
-      {
-         return WrappedEnterpriseBean.class;
-      }
-   };
-   
+public interface WrappedEnterpriseBeanLocal {
+    void bye();
+
+    public static final New NEW = new NewLiteral() {
+
+        public Class<?> value() {
+            return WrappedEnterpriseBean.class;
+        }
+    };
+
 }

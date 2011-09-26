@@ -25,47 +25,38 @@ import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
-public class InjectionPointDecorator implements InjectionPoint
-{
-   private final InjectionPoint injectionPoint;
-   
-   public InjectionPointDecorator(InjectionPoint injectionPoint)
-   {
-      this.injectionPoint = injectionPoint;
-   }
+public class InjectionPointDecorator implements InjectionPoint {
+    private final InjectionPoint injectionPoint;
 
-   public Annotated getAnnotated()
-   {
-      return injectionPoint.getAnnotated();
-   }
+    public InjectionPointDecorator(InjectionPoint injectionPoint) {
+        this.injectionPoint = injectionPoint;
+    }
 
-   public Bean<?> getBean()
-   {
-      return injectionPoint.getBean();
-   }
+    public Annotated getAnnotated() {
+        return injectionPoint.getAnnotated();
+    }
 
-   public Set<Annotation> getQualifiers()
-   {
-      return injectionPoint.getQualifiers();
-   }
+    public Bean<?> getBean() {
+        return injectionPoint.getBean();
+    }
 
-   public Member getMember()
-   {
-      return injectionPoint.getMember();
-   }
+    public Set<Annotation> getQualifiers() {
+        return injectionPoint.getQualifiers();
+    }
 
-   public Type getType()
-   {
-      return Dog.class;
-   }
+    public Member getMember() {
+        return injectionPoint.getMember();
+    }
 
-   public boolean isDelegate()
-   {
-      return injectionPoint.isDelegate();
-   }
+    public Type getType() {
+        return Dog.class;
+    }
 
-   public boolean isTransient()
-   {
-      return injectionPoint.isTransient();
-   }
+    public boolean isDelegate() {
+        return injectionPoint.isDelegate();
+    }
+
+    public boolean isTransient() {
+        return injectionPoint.isTransient();
+    }
 }

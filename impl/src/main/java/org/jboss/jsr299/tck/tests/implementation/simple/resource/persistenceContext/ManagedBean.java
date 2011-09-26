@@ -22,22 +22,21 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class ManagedBean implements Serializable
-{
-   @Inject @Database 
-   private EntityManager persistenceContext;
+public class ManagedBean implements Serializable {
+    @Inject
+    @Database
+    private EntityManager persistenceContext;
 
-   @Inject @Database
-   private EntityManagerFactory persistenceUnit;
+    @Inject
+    @Database
+    private EntityManagerFactory persistenceUnit;
 
-   public EntityManager getPersistenceContext()
-   {
-      return persistenceContext;
-   }
+    public EntityManager getPersistenceContext() {
+        return persistenceContext;
+    }
 
-   public EntityManagerFactory getPersistenceUnit()
-   {
-      return persistenceUnit;
-   }
+    public EntityManagerFactory getPersistenceUnit() {
+        return persistenceUnit;
+    }
 
 }

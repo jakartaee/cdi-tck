@@ -45,184 +45,163 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Jozef Hartinger
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class InjectionPointTest extends AbstractJSR299Test
-{
-    
-   @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(InjectionPointTest.class)
-           .withBeansXml("beans.xml")
-           .build();
-   }
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InjectionPointTest extends AbstractJSR299Test {
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertions({
-      @SpecAssertion(section = "6.5.3", id="d"),
-      @SpecAssertion(section = "5.5.7", id = "aa")
-   })
-   public void testGetBean()
-   {
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InjectionPointTest.class).withBeansXml("beans.xml").build();
+    }
 
-      // Get an instance of the bean which has another bean injected into it
-      FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertions({ @SpecAssertion(section = "6.5.3", id = "d"), @SpecAssertion(section = "5.5.7", id = "aa") })
+    public void testGetBean() {
 
-      Set<Bean<FieldInjectionPointBean>> resolvedBeans = getBeans(FieldInjectionPointBean.class);
-      assert resolvedBeans.size() == 1;
-      assert beanWithInjectionPoint.getInjectedMetadata().getBean().equals(resolvedBeans.iterator().next());
-   }
+        // Get an instance of the bean which has another bean injected into it
+        FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "ba")
-   public void testGetType()
-   {
-      // Get an instance of the bean which has another bean injected into it
-      FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
-   }
+        Set<Bean<FieldInjectionPointBean>> resolvedBeans = getBeans(FieldInjectionPointBean.class);
+        assert resolvedBeans.size() == 1;
+        assert beanWithInjectionPoint.getInjectedMetadata().getBean().equals(resolvedBeans.iterator().next());
+    }
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "bc")
-   public void testGetBindingTypes()
-   {
-      // Get an instance of the bean which has another bean injected into it
-      FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      Set<Annotation> bindingTypes = beanWithInjectionPoint.getInjectedMetadata().getQualifiers();
-      assert bindingTypes.size() == 1;
-      assert Default.class.isAssignableFrom(bindingTypes.iterator().next().annotationType());
-   }
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "ba")
+    public void testGetType() {
+        // Get an instance of the bean which has another bean injected into it
+        FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
+        assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
+    }
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "ca")
-   public void testGetMemberField()
-   {
-      // Get an instance of the bean which has another bean injected into it
-      FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert Field.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getMember().getClass());
-   }
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "bc")
+    public void testGetBindingTypes() {
+        // Get an instance of the bean which has another bean injected into it
+        FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
+        Set<Annotation> bindingTypes = beanWithInjectionPoint.getInjectedMetadata().getQualifiers();
+        assert bindingTypes.size() == 1;
+        assert Default.class.isAssignableFrom(bindingTypes.iterator().next().annotationType());
+    }
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "cb")
-   public void testGetMemberMethod()
-   {
-      // Get an instance of the bean which has another bean injected into it
-      MethodInjectionPointBean beanWithInjectedBean = getInstanceByType(MethodInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert Method.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getMember().getClass());
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "ca")
+    public void testGetMemberField() {
+        // Get an instance of the bean which has another bean injected into it
+        FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
+        assert Field.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getMember().getClass());
+    }
 
-      // Since the type and bindings must correspond to the parameter, check
-      // them
-      assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
-      assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
-   }
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "cb")
+    public void testGetMemberMethod() {
+        // Get an instance of the bean which has another bean injected into it
+        MethodInjectionPointBean beanWithInjectedBean = getInstanceByType(MethodInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
+        assert Method.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getMember().getClass());
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "cc")
-   public void testGetMemberConstructor()
-   {
-      // Get an instance of the bean which has another bean injected into it
-      ConstructorInjectionPointBean beanWithInjectedBean = getInstanceByType(ConstructorInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert Constructor.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getMember().getClass());
+        // Since the type and bindings must correspond to the parameter, check
+        // them
+        assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
+        assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
+    }
 
-      // Since the type and bindings must correspond to the parameter, check
-      // them
-      assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
-      assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
-   }
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "cc")
+    public void testGetMemberConstructor() {
+        // Get an instance of the bean which has another bean injected into it
+        ConstructorInjectionPointBean beanWithInjectedBean = getInstanceByType(ConstructorInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
+        assert Constructor.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getMember().getClass());
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "daa")
-   public void testGetAnnotatedField()
-   {
-      // Get an instance of the bean which has another bean injected into it
-      FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedField<?>;
-      assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated().isAnnotationPresent(AnimalStereotype.class);
-   }
+        // Since the type and bindings must correspond to the parameter, check
+        // them
+        assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
+        assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
+    }
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "daa")
-   public void testGetAnnotatedParameter()
-   {
-      // Get an instance of the bean which has another bean injected into it
-      MethodInjectionPointBean beanWithInjectedBean = getInstanceByType(MethodInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedParameter<?>;
-      assert annotationSetMatches(beanWithInjectionPoint.getInjectedMetadata().getQualifiers(), Default.class);
-   }
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "daa")
+    public void testGetAnnotatedField() {
+        // Get an instance of the bean which has another bean injected into it
+        FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
+        assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedField<?>;
+        assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated().isAnnotationPresent(AnimalStereotype.class);
+    }
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "ea")
-   public void testDependentScope()
-   {
-      assert getBeans(InjectionPoint.class).size() == 1;
-      assert getBeans(InjectionPoint.class).iterator().next().getScope().equals(Dependent.class);
-   }
-   
-   @Test(groups = { "injectionPoint"})
-   @SpecAssertion(section = "5.5.7", id = "eb")
-   public void testPassivationCapability() throws Exception
-   {
-      InjectionPoint ip1 = getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
-      InjectionPoint ip2 = getInstanceByType(MethodInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
-      InjectionPoint ip3 = getInstanceByType(ConstructorInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
-      
-      ip1 = (InjectionPoint) deserialize(serialize(ip1));
-      ip2 = (InjectionPoint) deserialize(serialize(ip2));
-      ip3 = (InjectionPoint) deserialize(serialize(ip3));
-      
-      assert ip1.getType().equals(BeanWithInjectionPointMetadata.class);
-      assert ip2.getType().equals(BeanWithInjectionPointMetadata.class);
-      assert ip3.getType().equals(BeanWithInjectionPointMetadata.class);
-   }
-   
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "ea")
-   public void testApiTypeInjectionPoint()
-   {
-      // Get an instance of the bean which has another bean injected into it
-      FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert InjectionPoint.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getClass());
-   }
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "daa")
+    public void testGetAnnotatedParameter() {
+        // Get an instance of the bean which has another bean injected into it
+        MethodInjectionPointBean beanWithInjectedBean = getInstanceByType(MethodInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
+        assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedParameter<?>;
+        assert annotationSetMatches(beanWithInjectionPoint.getInjectedMetadata().getQualifiers(), Default.class);
+    }
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "ea")
-   public void testCurrentBinding()
-   {
-      // Get an instance of the bean which has another bean injected into it
-      FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
-      BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
-      assert beanWithInjectionPoint.getInjectedMetadata() != null;
-      assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
-   }
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "ea")
+    public void testDependentScope() {
+        assert getBeans(InjectionPoint.class).size() == 1;
+        assert getBeans(InjectionPoint.class).iterator().next().getScope().equals(Dependent.class);
+    }
 
-   @Test(groups = { "injectionPoint" })
-   @SpecAssertion(section = "5.5.7", id = "dca")
-   public void testIsTransient()
-   {
-      FieldInjectionPointBean bean1 = getInstanceByType(FieldInjectionPointBean.class);
-      TransientFieldInjectionPointBean bean2 = getInstanceByType(TransientFieldInjectionPointBean.class);
-      InjectionPoint ip1 = bean1.getInjectedBean().getInjectedMetadata();
-      InjectionPoint ip2 = bean2.getInjectedBean().getInjectedMetadata();
-      assert !ip1.isTransient();
-      assert ip2.isTransient();
-   }
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "eb")
+    public void testPassivationCapability() throws Exception {
+        InjectionPoint ip1 = getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
+        InjectionPoint ip2 = getInstanceByType(MethodInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
+        InjectionPoint ip3 = getInstanceByType(ConstructorInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
+
+        ip1 = (InjectionPoint) deserialize(serialize(ip1));
+        ip2 = (InjectionPoint) deserialize(serialize(ip2));
+        ip3 = (InjectionPoint) deserialize(serialize(ip3));
+
+        assert ip1.getType().equals(BeanWithInjectionPointMetadata.class);
+        assert ip2.getType().equals(BeanWithInjectionPointMetadata.class);
+        assert ip3.getType().equals(BeanWithInjectionPointMetadata.class);
+    }
+
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "ea")
+    public void testApiTypeInjectionPoint() {
+        // Get an instance of the bean which has another bean injected into it
+        FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
+        assert InjectionPoint.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getClass());
+    }
+
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "ea")
+    public void testCurrentBinding() {
+        // Get an instance of the bean which has another bean injected into it
+        FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
+        BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
+        assert beanWithInjectionPoint.getInjectedMetadata() != null;
+        assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
+    }
+
+    @Test(groups = { "injectionPoint" })
+    @SpecAssertion(section = "5.5.7", id = "dca")
+    public void testIsTransient() {
+        FieldInjectionPointBean bean1 = getInstanceByType(FieldInjectionPointBean.class);
+        TransientFieldInjectionPointBean bean2 = getInstanceByType(TransientFieldInjectionPointBean.class);
+        InjectionPoint ip1 = bean1.getInjectedBean().getInjectedMetadata();
+        InjectionPoint ip2 = bean2.getInjectedBean().getInjectedMetadata();
+        assert !ip1.isTransient();
+        assert ip2.isTransient();
+    }
 }

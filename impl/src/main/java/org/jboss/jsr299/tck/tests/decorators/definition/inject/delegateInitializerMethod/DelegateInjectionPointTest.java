@@ -29,30 +29,22 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class DelegateInjectionPointTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DelegateInjectionPointTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DelegateInjectionPointTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DelegateInjectionPointTest.class).withBeansXml("beans.xml").build();
     }
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="8.1.2", id="cd")
-   })
-   public void testDecoratorDelegateInjectionPoints()
-   {
-      TimestampLogger.reset();
-      MockLogger.reset();
-      getInstanceByType(CowShed.class).milk();
-      assert TimestampLogger.getInitializerMethod() != null;
-      assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + CowShed.MESSAGE);
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.1.2", id = "cd") })
+    public void testDecoratorDelegateInjectionPoints() {
+        TimestampLogger.reset();
+        MockLogger.reset();
+        getInstanceByType(CowShed.class).milk();
+        assert TimestampLogger.getInitializerMethod() != null;
+        assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + CowShed.MESSAGE);
+    }
 
 }

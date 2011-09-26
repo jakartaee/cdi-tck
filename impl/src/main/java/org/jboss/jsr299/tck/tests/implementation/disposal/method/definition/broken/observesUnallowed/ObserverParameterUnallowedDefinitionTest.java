@@ -25,25 +25,20 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ObserverParameterUnallowedDefinitionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ObserverParameterUnallowedDefinitionTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
+    public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
 
-            .withTestClassPackage(ObserverParameterUnallowedDefinitionTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+        .withTestClassPackage(ObserverParameterUnallowedDefinitionTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "3.3.6", id = "ea")
-   public void testObserverParameterUnallowed()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "3.3.6", id = "ea")
+    public void testObserverParameterUnallowed() {
+    }
 
 }

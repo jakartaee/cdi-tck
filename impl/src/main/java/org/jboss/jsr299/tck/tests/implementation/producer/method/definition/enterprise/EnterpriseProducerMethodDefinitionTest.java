@@ -29,41 +29,38 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test
-{
-    
-    @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseProducerMethodDefinitionTest.class)
-            .withBeansXml("beans.xml")
-            .build();
-    }
-    
-   @Test
-   @SpecAssertion(section = "4.2", id = "dd")
-   public void testNonStaticProducerMethodInheritedBySpecializingSubclass()
-   {
-      assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {}).size() == 1;
-      assert getInstanceByType(Egg.class,new AnnotationLiteral<Yummy>() {}).getMother() instanceof AndalusianChickenLocal;
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.2", id = "dd")
-   public void testNonStaticProducerMethodNotInherited()
-   {
-      assert getBeans(Apple.class, new AnnotationLiteral<Yummy>() {}).size() == 1;
-      assert getInstanceByType(Apple.class,new AnnotationLiteral<Yummy>() {}).getTree() instanceof AppleTreeLocal;      
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.2", id = "dj")
-   public void testNonStaticProducerMethodNotIndirectlyInherited()
-   {
-      Set<Bean<Pear>> beans = getBeans(Pear.class, new AnnotationLiteral<Yummy>() {});
-      assert beans.size() == 2;
-   }   
-}
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test {
 
+    @Deployment
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseProducerMethodDefinitionTest.class)
+                .withBeansXml("beans.xml").build();
+    }
+
+    @Test
+    @SpecAssertion(section = "4.2", id = "dd")
+    public void testNonStaticProducerMethodInheritedBySpecializingSubclass() {
+        assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
+        }).size() == 1;
+        assert getInstanceByType(Egg.class, new AnnotationLiteral<Yummy>() {
+        }).getMother() instanceof AndalusianChickenLocal;
+    }
+
+    @Test
+    @SpecAssertion(section = "4.2", id = "dd")
+    public void testNonStaticProducerMethodNotInherited() {
+        assert getBeans(Apple.class, new AnnotationLiteral<Yummy>() {
+        }).size() == 1;
+        assert getInstanceByType(Apple.class, new AnnotationLiteral<Yummy>() {
+        }).getTree() instanceof AppleTreeLocal;
+    }
+
+    @Test
+    @SpecAssertion(section = "4.2", id = "dj")
+    public void testNonStaticProducerMethodNotIndirectlyInherited() {
+        Set<Bean<Pear>> beans = getBeans(Pear.class, new AnnotationLiteral<Yummy>() {
+        });
+        assert beans.size() == 2;
+    }
+}

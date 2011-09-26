@@ -25,13 +25,11 @@ import javax.inject.Inject;
  * @author David Allen
  * 
  */
-public class BeanWithInjectionPointMetadata
-{
-   @Inject
-   private InjectionPoint injectedMetadata;
+public class BeanWithInjectionPointMetadata {
+    @Inject
+    private InjectionPoint injectedMetadata;
 
-   public InjectionPoint getInjectedMetadata()
-   {
-      return injectedMetadata;
-   }
+    public InjectionPoint getInjectedMetadata() {
+        return injectedMetadata;
+    }
 }

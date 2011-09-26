@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.nonPassivationCapableManagedBeanHasPassivatingScope;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -32,22 +31,17 @@ import org.testng.annotations.Test;
  * @author David Allen
  * 
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class NonPassivationManagedBeanHasPassivatingScopeTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class NonPassivationManagedBeanHasPassivatingScopeTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(NonPassivationManagedBeanHasPassivatingScopeTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(NonPassivationManagedBeanHasPassivatingScopeTest.class).build();
     }
-    
-   @Test(groups = { "contexts", "passivation" })
-   @SpecAssertion(section = "6.6.4", id = "aaa")
-   public void testSimpleWebBeanWithNonSerializableImplementationClassFails()
-   {
-   }
+
+    @Test(groups = { "contexts", "passivation" })
+    @SpecAssertion(section = "6.6.4", id = "aaa")
+    public void testSimpleWebBeanWithNonSerializableImplementationClassFails() {
+    }
 }

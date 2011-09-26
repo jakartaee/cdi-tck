@@ -39,8 +39,7 @@ import org.jboss.jsr299.tck.spi.Managers;
  * Mostly based on jboss-test-harness code from <code>org.jboss.testharness.impl.PropertiesBasedConfigurationBuilder</code> and
  * <code>org.jboss.testharness.properties.PropertiesManager</code>.
  */
-public class JSR299PropertiesBasedConfigurationBuilder
-{
+public class JSR299PropertiesBasedConfigurationBuilder {
 
     public static final String RESOURCE_BUNDLE = "META-INF/cdi-tck.properties";
 
@@ -49,16 +48,14 @@ public class JSR299PropertiesBasedConfigurationBuilder
     /**
      * 
      */
-    public JSR299PropertiesBasedConfigurationBuilder()
-    {
+    public JSR299PropertiesBasedConfigurationBuilder() {
         jsr299Configuration = new JSR299ConfigurationImpl();
     }
 
     /**
      * @return built configuration
      */
-    public JSR299Configuration getJsr299Configuration()
-    {
+    public JSR299Configuration getJsr299Configuration() {
         return jsr299Configuration;
     }
 
@@ -66,11 +63,9 @@ public class JSR299PropertiesBasedConfigurationBuilder
      * @param minimal Minimal initialization includes simple properties only (no SPI instances)
      * @return initialized self
      */
-    public JSR299PropertiesBasedConfigurationBuilder init(boolean minimal)
-    {
+    public JSR299PropertiesBasedConfigurationBuilder init(boolean minimal) {
 
-        if (!minimal)
-        {
+        if (!minimal) {
             jsr299Configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, true));
             jsr299Configuration.setManagers(getInstanceValue(Managers.PROPERTY_NAME, Managers.class, true));
             jsr299Configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, true));
@@ -81,8 +76,8 @@ public class JSR299PropertiesBasedConfigurationBuilder
         }
 
         // We only need library dir in minimal mode while creating test archive
-        jsr299Configuration
-                .setLibraryDirectory(getStringValue(JSR299Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, minimal));
+        jsr299Configuration.setLibraryDirectory(getStringValue(JSR299Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null,
+                minimal));
         return this;
     }
 
@@ -94,8 +89,7 @@ public class JSR299PropertiesBasedConfigurationBuilder
      * @param key The key to search for
      * @return A list of possible values. An empty list is returned if there are no matches.
      */
-    public Set<String> getPropertyValues(String key)
-    {
+    public Set<String> getPropertyValues(String key) {
         Set<String> values = new HashSet<String>();
         addPropertiesFromSystem(key, values);
         addPropertiesFromResourceBundle(key, values);
@@ -109,24 +103,18 @@ public class JSR299PropertiesBasedConfigurationBuilder
      * @param required
      * @return
      */
-    public String getStringValue(String propertyName, String defaultValue, boolean required)
-    {
+    public String getStringValue(String propertyName, String defaultValue, boolean required) {
         Set<String> values = getPropertyValues(propertyName);
-        if (values.size() == 0)
-        {
-            if (required)
-            {
+        if (values.size() == 0) {
+            if (required) {
                 throw new IllegalArgumentException("Cannot find required property " + propertyName
                         + ", check that it is specified");
-            } else
-            {
+            } else {
                 return defaultValue;
             }
-        } else if (values.size() > 1)
-        {
+        } else if (values.size() > 1) {
             throw new IllegalArgumentException("More than one value given for " + propertyName + ", not sure which one to use!");
-        } else
-        {
+        } else {
             return values.iterator().next();
         }
     }
@@ -137,8 +125,7 @@ public class JSR299PropertiesBasedConfigurationBuilder
      * @param key The key to match
      * @param values The currently found values
      */
-    private void addPropertiesFromSystem(String key, Set<String> values)
-    {
+    private void addPropertiesFromSystem(String key, Set<String> values) {
         addProperty(key, System.getProperty(key), values);
     }
 
@@ -148,35 +135,28 @@ public class JSR299PropertiesBasedConfigurationBuilder
      * @param key The key to match
      * @param values The currently found values
      */
-    private void addPropertiesFromResourceBundle(String key, Set<String> values)
-    {
-        try
-        {
+    private void addPropertiesFromResourceBundle(String key, Set<String> values) {
+        try {
 
-            for (Enumeration<URL> e = getResources(RESOURCE_BUNDLE); e.hasMoreElements();)
-            {
+            for (Enumeration<URL> e = getResources(RESOURCE_BUNDLE); e.hasMoreElements();) {
 
                 URL url = e.nextElement();
                 Properties properties = new Properties();
                 InputStream propertyStream = url.openStream();
 
-                try
-                {
+                try {
 
                     properties.load(propertyStream);
                     addProperty(key, properties.getProperty(key), values);
 
-                } finally
-                {
-                    if (propertyStream != null)
-                    {
+                } finally {
+                    if (propertyStream != null) {
                         propertyStream.close();
                     }
                 }
             }
 
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             // No-op, file is optional
         }
     }
@@ -188,10 +168,8 @@ public class JSR299PropertiesBasedConfigurationBuilder
      * @param value The value of the property
      * @param values The currently found values
      */
-    private void addProperty(String key, String value, Set<String> values)
-    {
-        if (value != null)
-        {
+    private void addProperty(String key, String value, Set<String> values) {
+        if (value != null) {
             values.add(value);
         }
     }
@@ -202,14 +180,11 @@ public class JSR299PropertiesBasedConfigurationBuilder
      * @return
      * @throws IOException
      */
-    public Enumeration<URL> getResources(String name) throws IOException
-    {
+    public Enumeration<URL> getResources(String name) throws IOException {
 
-        if (Thread.currentThread().getContextClassLoader() != null)
-        {
+        if (Thread.currentThread().getContextClassLoader() != null) {
             return Thread.currentThread().getContextClassLoader().getResources(name);
-        } else
-        {
+        } else {
             return getClass().getClassLoader().getResources(name);
         }
     }
@@ -222,28 +197,22 @@ public class JSR299PropertiesBasedConfigurationBuilder
      * @param required
      * @return
      */
-    protected <T> T getInstanceValue(String propertyName, Class<T> expectedType, boolean required)
-    {
+    protected <T> T getInstanceValue(String propertyName, Class<T> expectedType, boolean required) {
 
         T instance = null;
 
         Class<T> clazz = getClassValue(propertyName, expectedType, required);
-        if (clazz != null)
-        {
-            try
-            {
+        if (clazz != null) {
+            try {
                 instance = clazz.newInstance();
-            } catch (InstantiationException e)
-            {
+            } catch (InstantiationException e) {
                 throw new IllegalStateException("Error instantiating " + clazz + " specified by " + propertyName, e);
-            } catch (IllegalAccessException e)
-            {
+            } catch (IllegalAccessException e) {
                 throw new IllegalStateException("Error instantiating " + clazz + " specified by " + propertyName, e);
             }
         }
 
-        if (instance instanceof ConfigurationDependent)
-        {
+        if (instance instanceof ConfigurationDependent) {
             ((ConfigurationDependent) instance).setConfiguration(jsr299Configuration);
         }
         return instance;
@@ -258,46 +227,35 @@ public class JSR299PropertiesBasedConfigurationBuilder
      * @return
      */
     @SuppressWarnings("unchecked")
-    protected <T> Class<T> getClassValue(String propertyName, Class<T> expectedType, boolean required)
-    {
+    protected <T> Class<T> getClassValue(String propertyName, Class<T> expectedType, boolean required) {
 
         Set<Class<T>> classes = new HashSet<Class<T>>();
 
-        for (String className : getPropertyValues(propertyName))
-        {
-            try
-            {
+        for (String className : getPropertyValues(propertyName)) {
+            try {
 
-                if (Thread.currentThread().getContextClassLoader() != null)
-                {
+                if (Thread.currentThread().getContextClassLoader() != null) {
                     classes.add((Class<T>) Thread.currentThread().getContextClassLoader().loadClass(className));
-                } else
-                {
+                } else {
                     classes.add((Class<T>) Class.forName(className));
                 }
 
-            } catch (ClassNotFoundException e)
-            {
+            } catch (ClassNotFoundException e) {
                 throw new IllegalArgumentException("Implementation class not found");
             }
         }
 
-        if (classes.size() == 0)
-        {
-            if (required)
-            {
+        if (classes.size() == 0) {
+            if (required) {
                 throw new IllegalArgumentException("Cannot find any implementations of " + expectedType.getSimpleName()
                         + ", check that " + propertyName + " is specified");
-            } else
-            {
+            } else {
                 return null;
             }
-        } else if (classes.size() > 1)
-        {
+        } else if (classes.size() > 1) {
             throw new IllegalArgumentException("More than one implementation of " + expectedType.getSimpleName()
                     + " specified by " + propertyName + ", not sure which one to use!");
-        } else
-        {
+        } else {
             return classes.iterator().next();
         }
     }

@@ -20,45 +20,38 @@ import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
-public class TimestampLogger implements Logger
-{
-   
-   public static final String PREFIX = TimestampLogger.class.getSimpleName();
-   
-   private static Logger constructor;
-   
-   @Inject
-   public TimestampLogger(@Delegate Logger logger)
-   {
-      constructor = logger;
-   }
-   
-   public void log(String message)
-   {
-      constructor.log(PREFIX + message);
-   }
-   
-   /**
-    * @return the constructor
-    */
-   public static Logger getConstructor()
-   {
-      return constructor;
-   }
-   
-   /**
-    * @param message the message to set
-    */
-   public static void reset()
-   {
-      constructor = null;
-   }
+public class TimestampLogger implements Logger {
 
+    public static final String PREFIX = TimestampLogger.class.getSimpleName();
+
+    private static Logger constructor;
+
+    @Inject
+    public TimestampLogger(@Delegate Logger logger) {
+        constructor = logger;
+    }
+
+    public void log(String message) {
+        constructor.log(PREFIX + message);
+    }
+
+    /**
+     * @return the constructor
+     */
+    public static Logger getConstructor() {
+        return constructor;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public static void reset() {
+        constructor = null;
+    }
 
 }

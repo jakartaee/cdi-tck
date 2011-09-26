@@ -25,61 +25,50 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class MultipleInterceptorBindingsTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class MultipleInterceptorBindingsTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(MultipleInterceptorBindingsTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(MultipleInterceptorBindingsTest.class).withBeansXml("beans.xml")
+                .build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "9.5.1", id = "a"),
-      @SpecAssertion(section = "9.5", id = "ca"),
-      @SpecAssertion(section = "9.2", id = "ab"),
-      @SpecAssertion(section = "9.3", id = "ba")
-   })
-   public void testInterceptorAppliedToBeanWithAllBindings()
-   {
-      MissileInterceptor.intercepted = false;
-      
-      Missile missile = getInstanceByType(FastAndDeadlyMissile.class);
-      missile.fire();
-      
-      assert MissileInterceptor.intercepted;
-   }
-   
-   @Test
-   @SpecAssertion(section = "9.5.1", id = "b")
-   public void testInterceptorNotAppliedToBeanWithSomeBindings()
-   {
-      MissileInterceptor.intercepted = false;
-      
-      Missile missile = getInstanceByType(SlowMissile.class);      
-      missile.fire();
-      
-      assert !MissileInterceptor.intercepted;
-   }
-   
-   @Test
-   @SpecAssertion(section = "9.3", id = "bb")
-   public void testMultipleInterceptorsOnMethod()
-   {
-      LockInterceptor.intercepted = false;
-      
-      GuidedMissile bullet = getInstanceByType(GuidedMissile.class);
-      
-      bullet.fire();
-      assert !LockInterceptor.intercepted;
-      
-      bullet.lockAndFire();
-      assert LockInterceptor.intercepted;
-   }
-  
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "9.5.1", id = "a"), @SpecAssertion(section = "9.5", id = "ca"),
+            @SpecAssertion(section = "9.2", id = "ab"), @SpecAssertion(section = "9.3", id = "ba") })
+    public void testInterceptorAppliedToBeanWithAllBindings() {
+        MissileInterceptor.intercepted = false;
+
+        Missile missile = getInstanceByType(FastAndDeadlyMissile.class);
+        missile.fire();
+
+        assert MissileInterceptor.intercepted;
+    }
+
+    @Test
+    @SpecAssertion(section = "9.5.1", id = "b")
+    public void testInterceptorNotAppliedToBeanWithSomeBindings() {
+        MissileInterceptor.intercepted = false;
+
+        Missile missile = getInstanceByType(SlowMissile.class);
+        missile.fire();
+
+        assert !MissileInterceptor.intercepted;
+    }
+
+    @Test
+    @SpecAssertion(section = "9.3", id = "bb")
+    public void testMultipleInterceptorsOnMethod() {
+        LockInterceptor.intercepted = false;
+
+        GuidedMissile bullet = getInstanceByType(GuidedMissile.class);
+
+        bullet.fire();
+        assert !LockInterceptor.intercepted;
+
+        bullet.lockAndFire();
+        assert LockInterceptor.intercepted;
+    }
+
 }

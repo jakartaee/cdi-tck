@@ -20,20 +20,16 @@ import javax.enterprise.event.Observes;
 import javax.inject.Named;
 
 @Named("Teddy")
-public class Pomeranian
-{
-   public static Thread notificationThread;
-   
-   public void observeSimpleEvent(@Observes SimpleEventType someEvent)
-   {
-      notificationThread = Thread.currentThread();
-   }
-   
-   public void observerTameSimpleEvent(@Observes @Tame SimpleEventType someEvent)
-   {
-   }
+public class Pomeranian {
+    public static Thread notificationThread;
 
-   public static void staticallyObserveEvent(@Observes SimpleEventType someEvent)
-   {
-   }
+    public void observeSimpleEvent(@Observes SimpleEventType someEvent) {
+        notificationThread = Thread.currentThread();
+    }
+
+    public void observerTameSimpleEvent(@Observes @Tame SimpleEventType someEvent) {
+    }
+
+    public static void staticallyObserveEvent(@Observes SimpleEventType someEvent) {
+    }
 }

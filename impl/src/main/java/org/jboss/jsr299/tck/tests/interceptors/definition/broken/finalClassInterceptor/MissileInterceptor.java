@@ -22,15 +22,14 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor @FooBinding
-public class MissileInterceptor implements Serializable
-{
-   public static boolean intercepted = false;
-   
-   
-   @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
-   {
-      intercepted = true;
-      return ctx.proceed();
-   }
+@Interceptor
+@FooBinding
+public class MissileInterceptor implements Serializable {
+    public static boolean intercepted = false;
+
+    @AroundInvoke
+    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
+        intercepted = true;
+        return ctx.proceed();
+    }
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.dependentScopedProducerFieldReturnsNonSerializableObjectForInjectionIntoStatefulSessionBean;
 
-public class Cow
-{
+public class Cow {
 
 }

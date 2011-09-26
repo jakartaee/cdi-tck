@@ -19,24 +19,27 @@ package org.jboss.jsr299.tck.tests.policy;
 import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 
-public class CatProducer
-{
-   
-   @Produces @Wild
-   public static final Cat wildCat = new Cat();
-   
-   @Produces @Tame
-   @Alternative
-   public static final Cat cat = new Cat();
-   
-   @Produces @Wild
-   public Cat produceWildCat() {
-      return cat;
-   }
-   
-   @Produces @Tame
-   @Alternative
-   public Cat produce() {
-      return cat;
-   }
+public class CatProducer {
+
+    @Produces
+    @Wild
+    public static final Cat wildCat = new Cat();
+
+    @Produces
+    @Tame
+    @Alternative
+    public static final Cat cat = new Cat();
+
+    @Produces
+    @Wild
+    public Cat produceWildCat() {
+        return cat;
+    }
+
+    @Produces
+    @Tame
+    @Alternative
+    public Cat produce() {
+        return cat;
+    }
 }

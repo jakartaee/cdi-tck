@@ -19,19 +19,16 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.definition;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-public class NonBeanWithStaticProducerMethod
-{
-   public NonBeanWithStaticProducerMethod(String someString)
-   {
-      
-   }
+public class NonBeanWithStaticProducerMethod {
+    public NonBeanWithStaticProducerMethod(String someString) {
 
-   @Produces public static Cherry getCherry()
-   {
-      return new Cherry("Marischino");
-   }
-   
-   public static void destroyString(@Disposes Cherry someCherry)
-   {
-   }
+    }
+
+    @Produces
+    public static Cherry getCherry() {
+        return new Cherry("Marischino");
+    }
+
+    public static void destroyString(@Disposes Cherry someCherry) {
+    }
 }

@@ -29,33 +29,28 @@ import javax.inject.Named;
 @SessionScoped
 @Named("Charlie")
 @Default
-public class InitializerSimpleBean implements Serializable, InitializerSimpleBeanLocal
-{
-   private static final long serialVersionUID = 1L;
-   private static int        initializerCalls = 0;
+public class InitializerSimpleBean implements Serializable, InitializerSimpleBeanLocal {
+    private static final long serialVersionUID = 1L;
+    private static int initializerCalls = 0;
 
-   @SuppressWarnings("unused")
-   @Inject
-   private BeanManager beanManager;
-   
-   @Inject
-   public void initializer()
-   {
-      initializerCalls++;
-   }
+    @SuppressWarnings("unused")
+    @Inject
+    private BeanManager beanManager;
 
-   public void businessMethod()
-   {
-      
-   }
+    @Inject
+    public void initializer() {
+        initializerCalls++;
+    }
 
-   public int getInitializerCalls()
-   {
-      return initializerCalls;
-   }
+    public void businessMethod() {
 
-   public void setInitializerCalls(int initializerCalls)
-   {
-      InitializerSimpleBean.initializerCalls = initializerCalls;
-   }
+    }
+
+    public int getInitializerCalls() {
+        return initializerCalls;
+    }
+
+    public void setInitializerCalls(int initializerCalls) {
+        InitializerSimpleBean.initializerCalls = initializerCalls;
+    }
 }

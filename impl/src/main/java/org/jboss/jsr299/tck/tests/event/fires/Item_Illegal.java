@@ -16,12 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.event.fires;
 
-public class Item_Illegal<T> extends Item
-{
-   
-   public Item_Illegal(String name, double price)
-   {
-      super(name, price);
-   }
-   
+public class Item_Illegal<T> extends Item {
+
+    public Item_Illegal(String name, double price) {
+        super(name, price);
+    }
+
 }

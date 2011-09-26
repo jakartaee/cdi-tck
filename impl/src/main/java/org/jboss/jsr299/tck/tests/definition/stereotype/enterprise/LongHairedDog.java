@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.definition.stereotype.enterprise;
 
 @AnimalStereotype
-public class LongHairedDog implements Animal
-{
-   
+public class LongHairedDog implements Animal {
+
 }

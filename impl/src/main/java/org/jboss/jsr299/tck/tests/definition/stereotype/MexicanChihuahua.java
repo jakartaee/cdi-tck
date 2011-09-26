@@ -16,12 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.definition.stereotype;
 
-public class MexicanChihuahua extends Chihuahua
-{
+public class MexicanChihuahua extends Chihuahua {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 6596918293280396284L;
+    private static final long serialVersionUID = 6596918293280396284L;
 
 }

@@ -18,14 +18,11 @@ package org.jboss.jsr299.tck.tests.implementation.enterprise.definition;
 
 import javax.ejb.Stateful;
 
-
-
 /**
  * @author pmuir
- *
+ * 
  */
 @Stateful
-public class Retriever
-{
+public class Retriever {
 
 }

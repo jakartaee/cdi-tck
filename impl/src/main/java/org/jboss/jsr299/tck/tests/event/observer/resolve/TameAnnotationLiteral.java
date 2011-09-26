@@ -18,7 +18,6 @@ package org.jboss.jsr299.tck.tests.event.observer.resolve;
 
 import javax.enterprise.util.AnnotationLiteral;
 
-public class TameAnnotationLiteral extends AnnotationLiteral<Tame> implements Tame
-{
+public class TameAnnotationLiteral extends AnnotationLiteral<Tame> implements Tame {
 
 }

@@ -18,8 +18,8 @@ package org.jboss.jsr299.tck.tests.extensions.beanManager;
 
 import javax.enterprise.inject.Specializes;
 
-@Specializes @Tame
-public class DerivedBean extends SimpleBean
-{
-   protected int simpleField;
+@Specializes
+@Tame
+public class DerivedBean extends SimpleBean {
+    protected int simpleField;
 }

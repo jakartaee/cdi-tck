@@ -20,13 +20,12 @@ import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-public class BrokenInterceptor
-{
-   @Inject District district;
+public class BrokenInterceptor {
+    @Inject
+    District district;
 
-   @AroundInvoke
-   public Object intercept(InvocationContext ctx) throws Exception
-   {
-      return ctx.proceed();
-   }
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
+        return ctx.proceed();
+    }
 }

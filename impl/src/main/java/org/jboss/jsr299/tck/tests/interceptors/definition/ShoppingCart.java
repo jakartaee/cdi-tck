@@ -16,11 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition;
 
-@Transactional @Secure
-public class ShoppingCart
-{
-   public void placeOrder()
-   {
-      
-   }
+@Transactional
+@Secure
+public class ShoppingCart {
+    public void placeOrder() {
+
+    }
 }

@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.noex
 import javax.enterprise.inject.Specializes;
 
 @Specializes
-public class Donkey_Broken implements Animal
-{
+public class Donkey_Broken implements Animal {
 
 }

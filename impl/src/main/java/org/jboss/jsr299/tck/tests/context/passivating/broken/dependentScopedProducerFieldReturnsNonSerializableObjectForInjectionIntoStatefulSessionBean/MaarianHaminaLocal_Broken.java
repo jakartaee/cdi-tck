@@ -19,11 +19,10 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.dependentScopedPro
 import javax.ejb.Local;
 
 @Local
-public interface MaarianHaminaLocal_Broken
-{
+public interface MaarianHaminaLocal_Broken {
 
-   void ping();
-   
-   void bye();
-   
+    void ping();
+
+    void bye();
+
 }

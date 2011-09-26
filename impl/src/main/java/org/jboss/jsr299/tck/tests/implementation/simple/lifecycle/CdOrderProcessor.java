@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 
-public class CdOrderProcessor extends OrderProcessor
-{
-   
+public class CdOrderProcessor extends OrderProcessor {
+
 }

@@ -16,20 +16,16 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
+public class BasicLogger implements Logger {
 
-public class BasicLogger implements Logger
-{
-   
-   private static String message;
+    private static String message;
 
-   public String getMessage()
-   {
-      return message;
-   }
+    public String getMessage() {
+        return message;
+    }
 
-   public void log(String message)
-   {
-      BasicLogger.message = message;
-   }
+    public void log(String message) {
+        BasicLogger.message = message;
+    }
 
 }

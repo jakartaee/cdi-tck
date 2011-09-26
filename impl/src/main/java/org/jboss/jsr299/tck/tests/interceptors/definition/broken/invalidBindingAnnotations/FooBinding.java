@@ -28,11 +28,10 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD, PARAMETER, FIELD })
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
 @InterceptorBinding
-public @interface FooBinding
-{
-   String value(); 
+public @interface FooBinding {
+    String value();
 }

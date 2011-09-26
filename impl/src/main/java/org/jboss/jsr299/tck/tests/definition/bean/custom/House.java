@@ -18,8 +18,8 @@ package org.jboss.jsr299.tck.tests.definition.bean.custom;
 
 import javax.inject.Inject;
 
-public class House
-{
-   @SuppressWarnings("unused")
-   @Inject private int one;
+public class House {
+    @SuppressWarnings("unused")
+    @Inject
+    private int one;
 }

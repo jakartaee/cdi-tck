@@ -32,28 +32,20 @@ import org.testng.annotations.Test;
  * 
  * @author David Allen
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class LibraryMissingBeansXmlTest extends AbstractJSR299Test
-{
-    
-   @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       // We put Foo in test archive, but Bar goes in the library
-       return new WebArchiveBuilder()
-           .withTestClass(LibraryMissingBeansXmlTest.class)
-           .withClasses(Foo.class)
-           .withBeanLibrary(true, Bar.class)
-           .build();
-   }
+@SpecVersion(spec = "cdi", version = "20091101")
+public class LibraryMissingBeansXmlTest extends AbstractJSR299Test {
 
-   @Test(groups = {})
-   @SpecAssertions({
-      @SpecAssertion(section = "12.1", id="bbc")
-   })
-   public void test()
-   {
-      assert getCurrentManager().getBeans(Foo.class).size() == 1;
-      assert getCurrentManager().getBeans(Bar.class).isEmpty();
-   }
+    @Deployment
+    public static WebArchive createTestArchive() {
+        // We put Foo in test archive, but Bar goes in the library
+        return new WebArchiveBuilder().withTestClass(LibraryMissingBeansXmlTest.class).withClasses(Foo.class)
+                .withBeanLibrary(true, Bar.class).build();
+    }
+
+    @Test(groups = {})
+    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbc") })
+    public void test() {
+        assert getCurrentManager().getBeans(Foo.class).size() == 1;
+        assert getCurrentManager().getBeans(Bar.class).isEmpty();
+    }
 }

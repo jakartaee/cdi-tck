@@ -23,48 +23,41 @@ import javax.inject.Inject;
 import org.jboss.jsr299.tck.literals.NewLiteral;
 
 @Stateless
-public class ExplicitConstructorSessionBean implements ExplicitConstructor
-{
+public class ExplicitConstructorSessionBean implements ExplicitConstructor {
 
-   private static int constructorCalls = 0;
-   private static SimpleBean injectedSimpleBean;
-   
-   public static final New NEW = new NewLiteral()
-   {
-      
-      public Class<?> value()
-      {
-         return ExplicitConstructorSessionBean.class;
-      }
-   };
-   
-   public ExplicitConstructorSessionBean(){}
-   
-   @Inject
-   public ExplicitConstructorSessionBean(SimpleBean bean)
-   {
-      constructorCalls++;
-      injectedSimpleBean = bean;
-   }
+    private static int constructorCalls = 0;
+    private static SimpleBean injectedSimpleBean;
 
-   public int getConstructorCalls()
-   {
-      return constructorCalls;
-   }
+    public static final New NEW = new NewLiteral() {
 
-   public void setConstructorCalls(int numCalls)
-   {
-      constructorCalls = numCalls;
-   }
+        public Class<?> value() {
+            return ExplicitConstructorSessionBean.class;
+        }
+    };
 
-   public SimpleBean getInjectedSimpleBean()
-   {
-      return injectedSimpleBean;
-   }
+    public ExplicitConstructorSessionBean() {
+    }
 
-   public void setInjectedSimpleBean(SimpleBean injectedSimpleBean)
-   {
-      ExplicitConstructorSessionBean.injectedSimpleBean = injectedSimpleBean;
-   }
+    @Inject
+    public ExplicitConstructorSessionBean(SimpleBean bean) {
+        constructorCalls++;
+        injectedSimpleBean = bean;
+    }
+
+    public int getConstructorCalls() {
+        return constructorCalls;
+    }
+
+    public void setConstructorCalls(int numCalls) {
+        constructorCalls = numCalls;
+    }
+
+    public SimpleBean getInjectedSimpleBean() {
+        return injectedSimpleBean;
+    }
+
+    public void setInjectedSimpleBean(SimpleBean injectedSimpleBean) {
+        ExplicitConstructorSessionBean.injectedSimpleBean = injectedSimpleBean;
+    }
 
 }

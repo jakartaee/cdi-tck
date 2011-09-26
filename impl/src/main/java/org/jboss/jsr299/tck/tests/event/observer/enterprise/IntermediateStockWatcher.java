@@ -16,12 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.enterprise;
 
-public class IntermediateStockWatcher extends StockWatcher
-{
-   
-   @Override
-   public String getName()
-   {
-      return IntermediateStockWatcher.class.getSimpleName();
-   }
+public class IntermediateStockWatcher extends StockWatcher {
+
+    @Override
+    public String getName() {
+        return IntermediateStockWatcher.class.getSimpleName();
+    }
 }

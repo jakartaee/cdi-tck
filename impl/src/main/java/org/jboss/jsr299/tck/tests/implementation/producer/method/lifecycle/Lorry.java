@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.lifecycle;
 
-public class Lorry
-{
-   
+public class Lorry {
+
 }

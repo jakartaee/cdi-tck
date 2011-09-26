@@ -28,11 +28,10 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-@Target( { FIELD, PARAMETER, METHOD, TYPE })
+@Target({ FIELD, PARAMETER, METHOD, TYPE })
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-public @interface Synchronous
-{
+public @interface Synchronous {
 
 }

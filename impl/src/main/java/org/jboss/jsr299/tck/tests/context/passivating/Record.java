@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.context.passivating;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Record implements Serializable
-{
+public class Record implements Serializable {
 
 }

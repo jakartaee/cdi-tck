@@ -21,8 +21,8 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
-public class Foo<T>
-{
-   @Produces @RequestScoped
-   List<T> foo = null;
+public class Foo<T> {
+    @Produces
+    @RequestScoped
+    List<T> foo = null;
 }

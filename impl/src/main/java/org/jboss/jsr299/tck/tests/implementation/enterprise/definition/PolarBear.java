@@ -20,7 +20,6 @@ import javax.ejb.Stateful;
 
 @Stateful
 @Polar
-public class PolarBear implements PolarBearLocal
-{
+public class PolarBear implements PolarBearLocal {
 
 }

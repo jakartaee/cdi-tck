@@ -20,7 +20,6 @@ import javax.ejb.Local;
 import javax.enterprise.event.Observes;
 
 @Local
-public interface PomeranianInterface
-{
-   public void observeSimpleEvent(@Observes EJBEvent someEvent);
+public interface PomeranianInterface {
+    public void observeSimpleEvent(@Observes EJBEvent someEvent);
 }

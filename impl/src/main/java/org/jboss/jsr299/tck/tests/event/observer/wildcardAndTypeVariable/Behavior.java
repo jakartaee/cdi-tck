@@ -18,9 +18,8 @@ package org.jboss.jsr299.tck.tests.event.observer.wildcardAndTypeVariable;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Behavior
-{
+public interface Behavior {
 
 }

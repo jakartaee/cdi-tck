@@ -23,15 +23,13 @@ import javax.enterprise.inject.Produces;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class MapProducer
-{
+public class MapProducer {
 
-   @Produces
-   public Map<Integer, Integer> produceMap()
-   {
-      return new HashMap<Integer, Integer>();
-   }
-   
+    @Produces
+    public Map<Integer, Integer> produceMap() {
+        return new HashMap<Integer, Integer>();
+    }
+
 }

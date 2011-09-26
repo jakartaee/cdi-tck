@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.definition.ent
 import javax.ejb.Local;
 
 @Local
-public interface PearTreeLocal
-{
-   Pear produceLightYellowPear();
+public interface PearTreeLocal {
+    Pear produceLightYellowPear();
 }

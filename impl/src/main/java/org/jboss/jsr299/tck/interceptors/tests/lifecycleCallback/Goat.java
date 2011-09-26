@@ -21,44 +21,36 @@ import javax.annotation.PreDestroy;
 import javax.interceptor.Interceptors;
 
 @Interceptors(AnimalInterceptor.class)
-class Goat extends Animal
-{
-   protected static final String GOAT = "Goat";
+class Goat extends Animal {
+    protected static final String GOAT = "Goat";
 
-   private static boolean postConstructInterceptorCalled = false;
-   private static boolean preDestroyInterceptorCalled = false;
+    private static boolean postConstructInterceptorCalled = false;
+    private static boolean preDestroyInterceptorCalled = false;
 
+    @PostConstruct
+    public void postConstruct() {
+        postConstructInterceptorCalled = true;
+    }
 
-   @PostConstruct
-   public void postConstruct()
-   {
-      postConstructInterceptorCalled = true;
-   }
+    public String echo(String message) {
+        return message;
+    }
 
-   public String echo(String message)
-   {
-      return message;
-   }
+    @PreDestroy
+    public void preDestroy() {
+        preDestroyInterceptorCalled = true;
+    }
 
-   @PreDestroy
-   public void preDestroy()
-   {
-      preDestroyInterceptorCalled = true;
-   }
+    public static boolean isPostConstructInterceptorCalled() {
+        return postConstructInterceptorCalled;
+    }
 
-   public static boolean isPostConstructInterceptorCalled()
-   {
-      return postConstructInterceptorCalled;
-   }
+    public static boolean isPreDestroyInterceptorCalled() {
+        return preDestroyInterceptorCalled;
+    }
 
-   public static boolean isPreDestroyInterceptorCalled()
-   {
-      return preDestroyInterceptorCalled;
-   }
-
-   @Override
-   public String getAnimalType()
-   {
-      return GOAT;
-   }
+    @Override
+    public String getAnimalType() {
+        return GOAT;
+    }
 }

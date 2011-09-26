@@ -36,38 +36,30 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ContextDestroysBeansTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ContextDestroysBeansTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ContextDestroysBeansTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ContextDestroysBeansTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-   @Test(groups = { "contexts" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "6.2", id = "p"),
-      @SpecAssertion(section = "6.3", id = "d")
-   })
-   public void testContextDestroysBeansWhenDestroyed()
-   {
-      MyContextual bean = AfterBeanDiscoveryObserver.getBean();
-      bean.setShouldReturnNullInstances(false);
+    @Test(groups = { "contexts" })
+    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "p"), @SpecAssertion(section = "6.3", id = "d") })
+    public void testContextDestroysBeansWhenDestroyed() {
+        MyContextual bean = AfterBeanDiscoveryObserver.getBean();
+        bean.setShouldReturnNullInstances(false);
 
-      Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
-      CreationalContext<MySessionBean> creationalContext = getCurrentManager().createCreationalContext(bean);
-      MySessionBean instance = sessionContext.get(bean, creationalContext);
-      instance.ping();
-      assert instance != null;
-      assert bean.isCreateCalled();
-      
-      destroyContext(sessionContext);
-      assert bean.isDestroyCalled();
-   }
-   
+        Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
+        CreationalContext<MySessionBean> creationalContext = getCurrentManager().createCreationalContext(bean);
+        MySessionBean instance = sessionContext.get(bean, creationalContext);
+        instance.ping();
+        assert instance != null;
+        assert bean.isCreateCalled();
+
+        destroyContext(sessionContext);
+        assert bean.isDestroyCalled();
+    }
+
 }

@@ -24,12 +24,10 @@ import javax.enterprise.inject.spi.Extension;
  * @author pmuir
  * 
  */
-public class BeforeBeanDiscoveryObserver implements Extension
-{
+public class BeforeBeanDiscoveryObserver implements Extension {
 
-   public void observe(@Observes BeforeBeanDiscovery beforeBeanDiscovery)
-   {
-      throw new RuntimeException();
-   }
+    public void observe(@Observes BeforeBeanDiscovery beforeBeanDiscovery) {
+        throw new RuntimeException();
+    }
 
 }

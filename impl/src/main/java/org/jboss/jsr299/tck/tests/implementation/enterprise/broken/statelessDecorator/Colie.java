@@ -16,9 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessDecorator;
 
-public class Colie implements Dog
-{
-   public void foo()
-   {
-   }
+public class Colie implements Dog {
+    public void foo() {
+    }
 }

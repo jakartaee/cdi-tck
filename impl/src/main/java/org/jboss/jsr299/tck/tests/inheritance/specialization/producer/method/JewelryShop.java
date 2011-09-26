@@ -19,12 +19,13 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.producer.method;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.Specializes;
 
-public class JewelryShop extends Shop
-{
-   @Override @Produces @Specializes @Sparkly
-   public Necklace getExpensiveGift()
-   {
-      return new Necklace();
-   }
-   
+public class JewelryShop extends Shop {
+    @Override
+    @Produces
+    @Specializes
+    @Sparkly
+    public Necklace getExpensiveGift() {
+        return new Necklace();
+    }
+
 }

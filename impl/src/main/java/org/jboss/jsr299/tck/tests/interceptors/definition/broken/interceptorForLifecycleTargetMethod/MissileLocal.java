@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.broken.interceptorFor
 import javax.ejb.Local;
 
 @Local
-public interface MissileLocal
-{
-   void fire();
+public interface MissileLocal {
+    void fire();
 }

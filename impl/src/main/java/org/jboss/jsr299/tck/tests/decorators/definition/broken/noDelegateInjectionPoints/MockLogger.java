@@ -18,24 +18,21 @@ package org.jboss.jsr299.tck.tests.decorators.definition.broken.noDelegateInject
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class MockLogger implements Logger
-{
+public class MockLogger implements Logger {
 
-   private static String log = "";
+    private static String log = "";
 
-   public void log(String string)
-   {
-      log += string;
-   }
+    public void log(String string) {
+        log += string;
+    }
 
-   /**
-    * @return the log
-    */
-   public static String getLog()
-   {
-      return log;
-   }
+    /**
+     * @return the log
+     */
+    public static String getLog() {
+        return log;
+    }
 
 }

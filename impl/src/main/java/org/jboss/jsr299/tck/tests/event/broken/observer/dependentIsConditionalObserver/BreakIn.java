@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer.dependentIsConditionalObserver;
 
-public class BreakIn
-{
+public class BreakIn {
 
 }

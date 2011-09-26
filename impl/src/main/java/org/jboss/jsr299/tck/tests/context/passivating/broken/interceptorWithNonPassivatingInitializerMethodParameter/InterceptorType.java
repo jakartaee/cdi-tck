@@ -25,9 +25,9 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.Interceptor;
 
-@Target({TYPE, METHOD})
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
-@Interceptor @interface InterceptorType
-{
+@Interceptor
+@interface InterceptorType {
 
 }

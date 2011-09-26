@@ -29,36 +29,29 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class NonBindingTypesWhenResolvingTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class NonBindingTypesWhenResolvingTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(NonBindingTypesWhenResolvingTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(NonBindingTypesWhenResolvingTest.class).build();
     }
-    
-   public static class AnEventType
-   {
-   }
 
-   public static class AnObserver
-   {
-      public boolean wasNotified = false;
+    public static class AnEventType {
+    }
 
-      public void observer(@Observes AnEventType event)
-      {
-         wasNotified = true;
-      }
-   }
+    public static class AnObserver {
+        public boolean wasNotified = false;
 
-   @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
-   @SpecAssertion(section = "11.3.11", id = "e")
-   public void testNonBindingTypeAnnotationWhenResolvingFails()
-   {
-      Set<ObserverMethod<? super AnEventType>> resolvedObservers = getCurrentManager().resolveObserverMethods(new AnEventType(), new AnimalStereotypeAnnotationLiteral());
-   }
+        public void observer(@Observes AnEventType event) {
+            wasNotified = true;
+        }
+    }
+
+    @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
+    @SpecAssertion(section = "11.3.11", id = "e")
+    public void testNonBindingTypeAnnotationWhenResolvingFails() {
+        Set<ObserverMethod<? super AnEventType>> resolvedObservers = getCurrentManager().resolveObserverMethods(
+                new AnEventType(), new AnimalStereotypeAnnotationLiteral());
+    }
 }

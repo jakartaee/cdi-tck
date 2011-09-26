@@ -16,12 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
-public class Bread
-{
-   @SuppressWarnings("unused")
-   private boolean fresh;
-   
-   public Bread(boolean fresh) {
-      this.fresh = fresh;
-   }
+public class Bread {
+    @SuppressWarnings("unused")
+    private boolean fresh;
+
+    public Bread(boolean fresh) {
+        this.fresh = fresh;
+    }
 }

@@ -18,9 +18,8 @@ package org.jboss.jsr299.tck.tests.definition.bean;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class Horse
-{
+public class Horse {
 
 }

@@ -20,11 +20,9 @@ import javax.annotation.PostConstruct;
 import javax.interceptor.Interceptors;
 
 @Interceptors(GoatInterceptor.class)
-class Goat
-{
-   @PostConstruct
-   public void postConstruct()
-   {
-      throw new IllegalStateException();
-   }
+class Goat {
+    @PostConstruct
+    public void postConstruct() {
+        throw new IllegalStateException();
+    }
 }

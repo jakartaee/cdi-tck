@@ -19,14 +19,12 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.producer.method.br
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
-public class School
-{
-   
-   @Produces @Named("bestPupil")
-   public Pupil getStarPupil()
-   {
-      return new Pupil();
-   }
-    
-   
+public class School {
+
+    @Produces
+    @Named("bestPupil")
+    public Pupil getStarPupil() {
+        return new Pupil();
+    }
+
 }

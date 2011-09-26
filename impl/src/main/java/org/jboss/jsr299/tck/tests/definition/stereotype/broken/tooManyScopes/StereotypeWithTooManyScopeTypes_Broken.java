@@ -27,10 +27,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Stereotype;
 
 @Stereotype
-@Target( { TYPE })
+@Target({ TYPE })
 @Retention(RUNTIME)
 @ApplicationScoped
 @RequestScoped
-public @interface StereotypeWithTooManyScopeTypes_Broken
-{
+public @interface StereotypeWithTooManyScopeTypes_Broken {
 }

@@ -18,14 +18,12 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.nonContext
 
 import javax.ejb.EJB;
 
-public class Cruiser implements Ship
-{
+public class Cruiser implements Ship {
 
-   @EJB
-   MissileLocal missile;
+    @EJB
+    MissileLocal missile;
 
-   public void defend()
-   {
-      missile.fire();
-   }
+    public void defend() {
+        missile.fire();
+    }
 }

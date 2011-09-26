@@ -26,26 +26,21 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseResolutionByTypeTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseResolutionByTypeTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseResolutionByTypeTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseResolutionByTypeTest.class).build();
     }
-   
-   @Test
-   @SpecAssertion(section = "2.2.2", id = "b")
-   public void testBeanTypesOnSessionBean()
-   {
-      assert getBeans(CapercaillieLocal.class).size() == 1;
-      assert getBeans(ScottishBirdLocal.class).isEmpty();
-      Bean<CapercaillieLocal> bean = getUniqueBean(CapercaillieLocal.class);
-      assert rawTypeSetMatches(bean.getTypes(), CapercaillieLocal.class, Object.class);
-   }
-   
+
+    @Test
+    @SpecAssertion(section = "2.2.2", id = "b")
+    public void testBeanTypesOnSessionBean() {
+        assert getBeans(CapercaillieLocal.class).size() == 1;
+        assert getBeans(ScottishBirdLocal.class).isEmpty();
+        Bean<CapercaillieLocal> bean = getUniqueBean(CapercaillieLocal.class);
+        assert rawTypeSetMatches(bean.getTypes(), CapercaillieLocal.class, Object.class);
+    }
+
 }

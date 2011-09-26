@@ -18,8 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.lifecycle;
 
 import javax.enterprise.inject.Produces;
 
-public class BrownRecluseProducer
-{
-   @Produces
-   protected BrownRecluse spider = new BrownRecluse(5);
+public class BrownRecluseProducer {
+    @Produces
+    protected BrownRecluse spider = new BrownRecluse(5);
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.conditional;
 
-public class ConditionalEvent
-{
+public class ConditionalEvent {
 
 }

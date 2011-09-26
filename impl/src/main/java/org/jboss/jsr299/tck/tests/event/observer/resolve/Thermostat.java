@@ -16,9 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.resolve;
 
-public class Thermostat
-{
-   public void notifyTemperatureChanged(Temperature temperature)
-   {
-   }
+public class Thermostat {
+    public void notifyTemperatureChanged(Temperature temperature) {
+    }
 }

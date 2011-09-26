@@ -17,11 +17,9 @@
 package org.jboss.jsr299.tck.tests.event.eventTypes;
 
 /**
- * An event type with a class/interface hierarchy complex enough to test
- * observing all event types.
+ * An event type with a class/interface hierarchy complex enough to test observing all event types.
  * 
  * @author David Allen
  */
-public class ComplexEvent extends AbstractEvent implements GeneralEvent
-{
+public class ComplexEvent extends AbstractEvent implements GeneralEvent {
 }

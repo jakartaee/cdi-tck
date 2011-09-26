@@ -20,8 +20,9 @@ import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 
-@SessionScoped @BakedBinding
-public class BakedBean implements Serializable
-{
-  void bake() {}
+@SessionScoped
+@BakedBinding
+public class BakedBean implements Serializable {
+    void bake() {
+    }
 }

@@ -21,14 +21,12 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 
 @SessionScoped
-public class UnderwaterCity implements CityInterface, Serializable
-{
+public class UnderwaterCity implements CityInterface, Serializable {
 
-   private static final long serialVersionUID = 1877770475170392128L;
+    private static final long serialVersionUID = 1877770475170392128L;
 
-   public void foo()
-   {
-      
-   }
+    public void foo() {
+
+    }
 
 }

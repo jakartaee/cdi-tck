@@ -28,53 +28,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet used to test application context during service method and also for reporting
- * test results of testing the context during a method invocation on ServletContextListener,
- * HttpSessionListener and ServlerRequestListener.
+ * Servlet used to test application context during service method and also for reporting test results of testing the context
+ * during a method invocation on ServletContextListener, HttpSessionListener and ServlerRequestListener.
  * 
  * @author David Allen
- *
+ * 
  */
-public class TestServlet extends HttpServlet
-{
+public class TestServlet extends HttpServlet {
 
-   private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-   @Inject
-   private BeanManager jsr299Manager;
-   @Inject
-   private Result result;
+    @Inject
+    private BeanManager jsr299Manager;
+    @Inject
+    private Result result;
 
-   @Override
-   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
-   {
-      if ("servlet".equals(req.getParameter("test"))) {
-         if (jsr299Manager.getContext(ApplicationScoped.class).isActive()) {
-            resp.setStatus(200);
-         } else {
-            resp.setStatus(500);
-         }
-      } else if ("servletContextListener".equals(req.getParameter("test"))) {
-         testServletContextListener(req, resp);
-      } else if ("httpSessionListener".equals(req.getParameter("test"))) {
-         testHttpSessionListener(req, resp);
-      } else if ("servletRequestListener".equals(req.getParameter("test"))) {
-         testServletRequestListener(req, resp);
-      } else {
-         resp.setStatus(404);
-      }
-   }
-   
-   private void testServletContextListener(HttpServletRequest req, HttpServletResponse resp) {
-      resp.setStatus((result.isApplicationScopeActiveForServletContextListener()) ? 200 : 500);
-   }
-   
-   private void testHttpSessionListener(HttpServletRequest req, HttpServletResponse resp) {
-      req.getSession().setAttribute("foo", "bar");
-      resp.setStatus((result.isApplicationScopeActiveForHttpSessionListener()) ? 200 : 500);
-   }
-   
-   private void testServletRequestListener(HttpServletRequest req, HttpServletResponse resp) {
-      resp.setStatus((result.isApplicationScopeActiveForServletRequestListener()) ? 200 : 500);
-   }
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if ("servlet".equals(req.getParameter("test"))) {
+            if (jsr299Manager.getContext(ApplicationScoped.class).isActive()) {
+                resp.setStatus(200);
+            } else {
+                resp.setStatus(500);
+            }
+        } else if ("servletContextListener".equals(req.getParameter("test"))) {
+            testServletContextListener(req, resp);
+        } else if ("httpSessionListener".equals(req.getParameter("test"))) {
+            testHttpSessionListener(req, resp);
+        } else if ("servletRequestListener".equals(req.getParameter("test"))) {
+            testServletRequestListener(req, resp);
+        } else {
+            resp.setStatus(404);
+        }
+    }
+
+    private void testServletContextListener(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setStatus((result.isApplicationScopeActiveForServletContextListener()) ? 200 : 500);
+    }
+
+    private void testHttpSessionListener(HttpServletRequest req, HttpServletResponse resp) {
+        req.getSession().setAttribute("foo", "bar");
+        resp.setStatus((result.isApplicationScopeActiveForHttpSessionListener()) ? 200 : 500);
+    }
+
+    private void testServletRequestListener(HttpServletRequest req, HttpServletResponse resp) {
+        resp.setStatus((result.isApplicationScopeActiveForServletRequestListener()) ? 200 : 500);
+    }
 }

@@ -22,15 +22,13 @@ import javax.naming.NamingException;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class JndiBeanManagerInjected
-{
-   
-   public BeanManager getManagerFromJndi() throws NamingException
-   {
-      InitialContext ctx = new InitialContext();
-      return (BeanManager) ctx.lookup("java:comp/BeanManager");
-   }
+public class JndiBeanManagerInjected {
+
+    public BeanManager getManagerFromJndi() throws NamingException {
+        InitialContext ctx = new InitialContext();
+        return (BeanManager) ctx.lookup("java:comp/BeanManager");
+    }
 
 }

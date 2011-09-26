@@ -23,44 +23,36 @@ import javax.interceptor.Interceptors;
 
 @Interceptors(AnimalInterceptor.class)
 @RequestScoped
-class Cow extends Animal
-{
-   protected static final String COW = "Cow";
-   
-   private static boolean postConstructInterceptorCalled = false;
-   private static boolean preDestroyInterceptorCalled = false;
+class Cow extends Animal {
+    protected static final String COW = "Cow";
 
+    private static boolean postConstructInterceptorCalled = false;
+    private static boolean preDestroyInterceptorCalled = false;
 
-   @PostConstruct
-   public void postConstruct()
-   {
-      postConstructInterceptorCalled = true;
-   }
+    @PostConstruct
+    public void postConstruct() {
+        postConstructInterceptorCalled = true;
+    }
 
-   public String echo(String message)
-   {
-      return message;
-   }
+    public String echo(String message) {
+        return message;
+    }
 
-   @PreDestroy
-   public void preDestroy()
-   {
-      preDestroyInterceptorCalled = true;
-   }
+    @PreDestroy
+    public void preDestroy() {
+        preDestroyInterceptorCalled = true;
+    }
 
-   public static boolean isPostConstructInterceptorCalled()
-   {
-      return postConstructInterceptorCalled;
-   }
+    public static boolean isPostConstructInterceptorCalled() {
+        return postConstructInterceptorCalled;
+    }
 
-   public static boolean isPreDestroyInterceptorCalled()
-   {
-      return preDestroyInterceptorCalled;
-   }
+    public static boolean isPreDestroyInterceptorCalled() {
+        return preDestroyInterceptorCalled;
+    }
 
-   @Override
-   public String getAnimalType()
-   {
-      return COW;
-   }
+    @Override
+    public String getAnimalType() {
+        return COW;
+    }
 }

@@ -22,36 +22,30 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
 
 @SessionScoped
-public class SimpleSessionBean implements Serializable
-{
+public class SimpleSessionBean implements Serializable {
 
-   private static final long serialVersionUID = 1L;
-   private static boolean beanDestroyed = false;
-   private final long timestamp;
-   
-   public SimpleSessionBean()
-   {
-      this.timestamp = System.currentTimeMillis();
-   }
-   
-   public long getTimestamp()
-   {
-      return timestamp;
-   }
-   
-   @PreDestroy
-   public void destroyBean()
-   {
-      beanDestroyed = true;
-   }
+    private static final long serialVersionUID = 1L;
+    private static boolean beanDestroyed = false;
+    private final long timestamp;
 
-   public static boolean isBeanDestroyed()
-   {
-      return beanDestroyed;
-   }
+    public SimpleSessionBean() {
+        this.timestamp = System.currentTimeMillis();
+    }
 
-   public static void setBeanDestroyed(boolean beanDestroyed)
-   {
-      SimpleSessionBean.beanDestroyed = beanDestroyed;
-   }
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    @PreDestroy
+    public void destroyBean() {
+        beanDestroyed = true;
+    }
+
+    public static boolean isBeanDestroyed() {
+        return beanDestroyed;
+    }
+
+    public static void setBeanDestroyed(boolean beanDestroyed) {
+        SimpleSessionBean.beanDestroyed = beanDestroyed;
+    }
 }

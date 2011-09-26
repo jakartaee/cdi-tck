@@ -24,78 +24,65 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class CircularDependencyTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class CircularDependencyTest extends AbstractJSR299Test {
+
     @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(CircularDependencyTest.class)
-           .build();
-   }
-  
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testCircularInjectionOnTwoNormalBeans() throws Exception
-   {
-      Pig pig = getInstanceByType(Pig.class);
-      Food food = getInstanceByType(Food.class);
-      assert pig.getNameOfFood().equals(food.getName());
-      assert food.getNameOfPig().equals(pig.getName());
-   }
-   
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testCircularInjectionOnOneNormalAndOneDependentBean() throws Exception
-   {
-      Petrol petrol = getInstanceByType(Petrol.class);
-      Car car = getInstanceByType(Car.class);
-      assert petrol.getNameOfCar().equals(car.getName());
-      assert car.getNameOfPetrol().equals(petrol.getName());
-   }
-   
-   
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testNormalProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception
-   {
-      getInstanceByType(NormalSelfConsumingNormalProducer.class).ping();
-   }
-   
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testNormalProducerMethodDeclaredOnDependentBeanWhichInjectsProducedBean() throws Exception
-   {
-      getInstanceByType(DependentSelfConsumingNormalProducer.class).ping();
-   }
-   
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testDependentProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception
-   {
-      getInstanceByType(NormalSelfConsumingDependentProducer.class).ping();
-   }
-   
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testNormalCircularConstructors() throws Exception
-   {
-      assert getInstanceByType(Bird.class) != null;
-   }
-   
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testNormalAndDependentCircularConstructors() throws Exception
-   {      
-      assert getInstanceByType(Planet.class) != null;
-   }
-   
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testSelfConsumingConstructorsOnNormalBean() throws Exception
-   {      
-      assert getInstanceByType(House.class) != null;
-   }
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(CircularDependencyTest.class).build();
+    }
+
+    @Test
+    @SpecAssertion(section = "5", id = "b")
+    public void testCircularInjectionOnTwoNormalBeans() throws Exception {
+        Pig pig = getInstanceByType(Pig.class);
+        Food food = getInstanceByType(Food.class);
+        assert pig.getNameOfFood().equals(food.getName());
+        assert food.getNameOfPig().equals(pig.getName());
+    }
+
+    @Test
+    @SpecAssertion(section = "5", id = "b")
+    public void testCircularInjectionOnOneNormalAndOneDependentBean() throws Exception {
+        Petrol petrol = getInstanceByType(Petrol.class);
+        Car car = getInstanceByType(Car.class);
+        assert petrol.getNameOfCar().equals(car.getName());
+        assert car.getNameOfPetrol().equals(petrol.getName());
+    }
+
+    @Test
+    @SpecAssertion(section = "5", id = "b")
+    public void testNormalProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception {
+        getInstanceByType(NormalSelfConsumingNormalProducer.class).ping();
+    }
+
+    @Test
+    @SpecAssertion(section = "5", id = "b")
+    public void testNormalProducerMethodDeclaredOnDependentBeanWhichInjectsProducedBean() throws Exception {
+        getInstanceByType(DependentSelfConsumingNormalProducer.class).ping();
+    }
+
+    @Test
+    @SpecAssertion(section = "5", id = "b")
+    public void testDependentProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception {
+        getInstanceByType(NormalSelfConsumingDependentProducer.class).ping();
+    }
+
+    @Test
+    @SpecAssertion(section = "5", id = "b")
+    public void testNormalCircularConstructors() throws Exception {
+        assert getInstanceByType(Bird.class) != null;
+    }
+
+    @Test
+    @SpecAssertion(section = "5", id = "b")
+    public void testNormalAndDependentCircularConstructors() throws Exception {
+        assert getInstanceByType(Planet.class) != null;
+    }
+
+    @Test
+    @SpecAssertion(section = "5", id = "b")
+    public void testSelfConsumingConstructorsOnNormalBean() throws Exception {
+        assert getInstanceByType(House.class) != null;
+    }
 }

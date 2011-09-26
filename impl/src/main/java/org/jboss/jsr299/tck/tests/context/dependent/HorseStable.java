@@ -23,48 +23,40 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 @Dependent
-public class HorseStable
-{
-   private static boolean dependentContextActive = false;
-   private static HorseStable instanceThatObservedEvent = null;
-   private static boolean destroyed = false;
+public class HorseStable {
+    private static boolean dependentContextActive = false;
+    private static HorseStable instanceThatObservedEvent = null;
+    private static boolean destroyed = false;
 
-   @Inject
-   public HorseStable(BeanManager beanManager)
-   {
-      dependentContextActive = beanManager.getContext(Dependent.class).isActive();
-   }
+    @Inject
+    public HorseStable(BeanManager beanManager) {
+        dependentContextActive = beanManager.getContext(Dependent.class).isActive();
+    }
 
-   public void horseEntered(@Observes HorseInStableEvent horseEvent, Fox fox)
-   {
-      instanceThatObservedEvent = this;
-   }
-   
-   @PreDestroy
-   public void destroy()
-   {
-      destroyed = true;
-   }
+    public void horseEntered(@Observes HorseInStableEvent horseEvent, Fox fox) {
+        instanceThatObservedEvent = this;
+    }
 
-   public static boolean isDependentContextActive()
-   {
-      return dependentContextActive;
-   }
+    @PreDestroy
+    public void destroy() {
+        destroyed = true;
+    }
 
-   public static void reset()
-   {
-      HorseStable.dependentContextActive = false;
-      instanceThatObservedEvent = null;
-      destroyed = false;
-   }
+    public static boolean isDependentContextActive() {
+        return dependentContextActive;
+    }
 
-   public static HorseStable getInstanceThatObservedEvent()
-   {
-      return instanceThatObservedEvent;
-   }
-   
-   public static boolean isDestroyed()
-   {
-      return destroyed;
-   }
+    public static void reset() {
+        HorseStable.dependentContextActive = false;
+        instanceThatObservedEvent = null;
+        destroyed = false;
+    }
+
+    public static HorseStable getInstanceThatObservedEvent() {
+        return instanceThatObservedEvent;
+    }
+
+    public static boolean isDestroyed() {
+        return destroyed;
+    }
 }

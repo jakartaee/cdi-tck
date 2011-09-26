@@ -20,15 +20,14 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class Space
-{
-   
-   // For serialization
-   public Space() {}
-   
-   @Inject
-   public Space(Planet planet)
-   {
-   }
-   
+public class Space {
+
+    // For serialization
+    public Space() {
+    }
+
+    @Inject
+    public Space(Planet planet) {
+    }
+
 }

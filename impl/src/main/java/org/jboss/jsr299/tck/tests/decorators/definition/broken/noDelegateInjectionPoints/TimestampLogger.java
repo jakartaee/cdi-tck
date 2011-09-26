@@ -20,11 +20,9 @@ import javax.decorator.Decorator;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
-public abstract class TimestampLogger implements Logger
-{
-
+public abstract class TimestampLogger implements Logger {
 
 }

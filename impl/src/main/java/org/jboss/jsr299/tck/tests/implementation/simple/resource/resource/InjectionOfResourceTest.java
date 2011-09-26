@@ -30,53 +30,41 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class InjectionOfResourceTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InjectionOfResourceTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InjectionOfResourceTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InjectionOfResourceTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertion(section = "3.5.1", id = "bb")
-   public void testInjectionOfResource()
-   {
-      Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
-      CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
-      ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
-      assert managedBean.getBeanManager() != null : "@Another Manager not found";
-   }
-   
-   @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
-   @SpecAssertions({
-      @SpecAssertion(section = "7.3.6", id = "la"),
-      @SpecAssertion(section = "7.3.6", id = "ma"),
-      @SpecAssertion(section = "7.3.6", id = "o")
-   })
-   public void testProduceResourceProxy()
-   {
-      Bean<BeanManager> beanManagerBean = getBeans(BeanManager.class, new AnnotationLiteral<Another>() {}).iterator().next();
-      CreationalContext<BeanManager> beanManagerCc = getCurrentManager().createCreationalContext(beanManagerBean);
-      BeanManager beanManager = beanManagerBean.create(beanManagerCc);
-      assert beanManager != null;
-   }
-   
-   @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
-   @SpecAssertions({
-      @SpecAssertion(section = "7.3.6", id = "mb")
-   })
-   public void testPassivatingResource() throws Exception
-   {
-      Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
-      CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
-      ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
-      managedBean = (ManagedBean) deserialize(serialize(managedBean));
-      assert managedBean.getBeanManager() != null;
-   }
+
+    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @SpecAssertion(section = "3.5.1", id = "bb")
+    public void testInjectionOfResource() {
+        Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
+        CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
+        ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
+        assert managedBean.getBeanManager() != null : "@Another Manager not found";
+    }
+
+    @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "la"), @SpecAssertion(section = "7.3.6", id = "ma"),
+            @SpecAssertion(section = "7.3.6", id = "o") })
+    public void testProduceResourceProxy() {
+        Bean<BeanManager> beanManagerBean = getBeans(BeanManager.class, new AnnotationLiteral<Another>() {
+        }).iterator().next();
+        CreationalContext<BeanManager> beanManagerCc = getCurrentManager().createCreationalContext(beanManagerBean);
+        BeanManager beanManager = beanManagerBean.create(beanManagerCc);
+        assert beanManager != null;
+    }
+
+    @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "mb") })
+    public void testPassivatingResource() throws Exception {
+        Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
+        CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
+        ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
+        managedBean = (ManagedBean) deserialize(serialize(managedBean));
+        assert managedBean.getBeanManager() != null;
+    }
 }

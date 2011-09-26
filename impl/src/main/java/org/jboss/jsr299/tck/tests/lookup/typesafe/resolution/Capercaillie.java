@@ -21,7 +21,6 @@ import javax.enterprise.inject.Typed;
 
 @Stateless
 @Typed(CapercaillieLocal.class)
-public class Capercaillie implements CapercaillieLocal
-{
+public class Capercaillie implements CapercaillieLocal {
 
 }

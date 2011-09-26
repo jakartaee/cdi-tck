@@ -21,10 +21,10 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class QuxDecorator
-{
-   
-   @Inject @Delegate
-   private Qux<String> qux;
+public class QuxDecorator {
+
+    @Inject
+    @Delegate
+    private Qux<String> qux;
 
 }

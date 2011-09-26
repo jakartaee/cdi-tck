@@ -18,15 +18,12 @@ package org.jboss.jsr299.tck.tests.extensions.producer;
 
 import javax.enterprise.context.spi.CreationalContext;
 
-public class CreationalContextImpl<T> implements CreationalContext<T>
-{
+public class CreationalContextImpl<T> implements CreationalContext<T> {
 
-   public void push(T incompleteInstance)
-   {
-   }
+    public void push(T incompleteInstance) {
+    }
 
-   public void release()
-   {
-   }
+    public void release() {
+    }
 
 }

@@ -16,10 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.interceptor;
 
-public class Cat
-{
-   @CatInterceptorBinding
-   public String hello() {
-      return "hello";
-   }
+public class Cat {
+    @CatInterceptorBinding
+    public String hello() {
+        return "hello";
+    }
 }

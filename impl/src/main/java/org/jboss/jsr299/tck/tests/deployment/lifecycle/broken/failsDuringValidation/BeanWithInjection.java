@@ -18,8 +18,7 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.failsDuringValida
 
 import javax.inject.Inject;
 
-
-public class BeanWithInjection
-{
-   @Inject protected NotABean pretendBean;
+public class BeanWithInjection {
+    @Inject
+    protected NotABean pretendBean;
 }

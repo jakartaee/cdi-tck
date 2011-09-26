@@ -20,19 +20,15 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 
 /**
- * This class is not a bean since it does not have a default constructor
- * nor does it have a constructor annotated with {@link @Inject}.
- * As such, an observer method is not detected on this class.
+ * This class is not a bean since it does not have a default constructor nor does it have a constructor annotated with {@link
+ * @Inject}. As such, an observer method is not detected on this class.
  * 
  * @author David Allen
  */
-public class NonManagedBean
-{
-   public NonManagedBean(String name)
-   {
-   }
+public class NonManagedBean {
+    public NonManagedBean(String name) {
+    }
 
-   public void observe(@Observes @Any String event)
-   {
-   }
+    public void observe(@Observes @Any String event) {
+    }
 }

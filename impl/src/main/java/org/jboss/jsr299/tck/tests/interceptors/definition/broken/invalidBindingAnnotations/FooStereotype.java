@@ -27,11 +27,11 @@ import java.lang.annotation.Target;
 
 import javax.enterprise.inject.Stereotype;
 
-@Target( { TYPE, METHOD, FIELD })
+@Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @Documented
 @FooBinding("abc")
-public @Stereotype @interface FooStereotype
-{
+public @Stereotype
+@interface FooStereotype {
 
 }

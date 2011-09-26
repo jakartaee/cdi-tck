@@ -25,24 +25,20 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseBeanWithNonPassivatingInitializerInDecoratorTest extends AbstractJSR299Test
-{   
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseBeanWithNonPassivatingInitializerInDecoratorTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
+    public static EnterpriseArchive createTestArchive() {
         return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseBeanWithNonPassivatingInitializerInDecoratorTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+                .withTestClassPackage(EnterpriseBeanWithNonPassivatingInitializerInDecoratorTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test(groups = { "contexts", "passivation" })
-   @SpecAssertion(section = "6.6.4", id = "bdf")
-   public void testSessionBeanWithNonPassivatingInitializerFieldInDecoratorFails()
-   {
-   }
-   
+
+    @Test(groups = { "contexts", "passivation" })
+    @SpecAssertion(section = "6.6.4", id = "bdf")
+    public void testSessionBeanWithNonPassivatingInitializerFieldInDecoratorFails() {
+    }
+
 }

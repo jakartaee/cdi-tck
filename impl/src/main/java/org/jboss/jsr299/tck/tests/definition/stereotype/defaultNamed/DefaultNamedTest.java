@@ -25,27 +25,19 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DefaultNamedTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DefaultNamedTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-         return new WebArchiveBuilder()
-             .withTestClassPackage(DefaultNamedTest.class)
-             .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DefaultNamedTest.class).build();
     }
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "2.7.1.3", id = "aaa"),
-      @SpecAssertion(section = "2.5.2", id = "e")
-   })
-   public void testStereotypeWithEmptyNamed()
-   {
-      assert getBeans(FallowDeer.class).size() == 1;
-      assert "fallowDeer".equals(getBeans(FallowDeer.class).iterator().next().getName());
-   }
-   
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "aaa"), @SpecAssertion(section = "2.5.2", id = "e") })
+    public void testStereotypeWithEmptyNamed() {
+        assert getBeans(FallowDeer.class).size() == 1;
+        assert "fallowDeer".equals(getBeans(FallowDeer.class).iterator().next().getName());
+    }
+
 }

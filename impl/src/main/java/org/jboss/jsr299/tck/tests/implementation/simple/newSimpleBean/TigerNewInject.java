@@ -9,8 +9,7 @@ import javax.inject.Inject;
  * @author Martin Kouba
  * @see Tiger
  */
-public class TigerNewInject
-{
+public class TigerNewInject {
 
     @Inject
     @New

@@ -20,16 +20,13 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-public class Cod
-{
-   @PreDestroy
-   public void destroyWithProblem()
-   {
-      throw new RuntimeException("Some error");
-   }
+public class Cod {
+    @PreDestroy
+    public void destroyWithProblem() {
+        throw new RuntimeException("Some error");
+    }
 
-   public void ping()
-   {
-      
-   }
+    public void ping() {
+
+    }
 }

@@ -18,23 +18,19 @@ package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 
 import javax.annotation.PreDestroy;
 
-public class Salmon
-{
-   private static boolean beanDestroyed = false;
-   
-   public Salmon()
-   {
-      beanDestroyed = false;
-   }
-   
-   @PreDestroy
-   public void destroy()
-   {
-      beanDestroyed = true;
-   }
+public class Salmon {
+    private static boolean beanDestroyed = false;
 
-   public static boolean isBeanDestroyed()
-   {
-      return beanDestroyed;
-   }
+    public Salmon() {
+        beanDestroyed = false;
+    }
+
+    @PreDestroy
+    public void destroy() {
+        beanDestroyed = true;
+    }
+
+    public static boolean isBeanDestroyed() {
+        return beanDestroyed;
+    }
 }

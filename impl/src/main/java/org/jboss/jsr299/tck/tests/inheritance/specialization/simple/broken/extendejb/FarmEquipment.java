@@ -19,10 +19,8 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.exte
 import javax.ejb.Stateful;
 import javax.inject.Named;
 
-
 @Named("plough")
 @Stateful
-public class FarmEquipment implements FarmEquipmentLocal
-{
+public class FarmEquipment implements FarmEquipmentLocal {
 
 }

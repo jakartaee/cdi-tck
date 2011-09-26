@@ -25,79 +25,62 @@ import javax.inject.Named;
 
 @ConversationScoped
 @Named
-public class Cumulus implements Serializable
-{
-   private static final long serialVersionUID = 1L;
-   private static final int timeout = 15000;
-   private static final String customCid = "humilis";
-   
-   @Inject
-   private Conversation conversation;
+public class Cumulus implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private static final int timeout = 15000;
+    private static final String customCid = "humilis";
 
-   public void beginConversation()
-   {
-      conversation.begin();
-   }
-   
-   public void beginConversationIdentifiedByCustomIdentifier()
-   {
-      conversation.begin(customCid);
-   }
+    @Inject
+    private Conversation conversation;
 
-   public String beginConversationAndSwallowException()
-   {
-      try
-      {
-         conversation.begin();
-         return "error";
-      }
-      catch (IllegalStateException e)
-      {
-         return "home";
-      }
-   }
-   
-   public void beginConversationAndSetTimeout()
-   {
-      conversation.begin();
-      conversation.setTimeout(timeout);
-   }
+    public void beginConversation() {
+        conversation.begin();
+    }
 
-   public void endConversation()
-   {
-      conversation.end();
-   }
+    public void beginConversationIdentifiedByCustomIdentifier() {
+        conversation.begin(customCid);
+    }
 
-   public String endConversationAndSwallowException()
-   {
-      try
-      {
-         conversation.end();
-         return "error";
-      }
-      catch (IllegalStateException e)
-      {
-         return "home";
-      }
-   }
-   
-   public boolean isConversationIdentifiedByCustomIdentifier()
-   {
-      return !conversation.isTransient() && conversation.getId().equals(customCid);
-   }
-   
-   public boolean isConversationIdentifierNull()
-   {
-      return conversation.getId() == null;
-   }
-   
-   public boolean isConversationTimeoutSetProperly()
-   {
-      return conversation.getTimeout() == timeout;
-   }
-   
-   public boolean isConversationHasDefaultTimeout()
-   {
-      return conversation.getTimeout() > 0;
-   }
+    public String beginConversationAndSwallowException() {
+        try {
+            conversation.begin();
+            return "error";
+        } catch (IllegalStateException e) {
+            return "home";
+        }
+    }
+
+    public void beginConversationAndSetTimeout() {
+        conversation.begin();
+        conversation.setTimeout(timeout);
+    }
+
+    public void endConversation() {
+        conversation.end();
+    }
+
+    public String endConversationAndSwallowException() {
+        try {
+            conversation.end();
+            return "error";
+        } catch (IllegalStateException e) {
+            return "home";
+        }
+    }
+
+    public boolean isConversationIdentifiedByCustomIdentifier() {
+        return !conversation.isTransient() && conversation.getId().equals(customCid);
+    }
+
+    public boolean isConversationIdentifierNull() {
+        return conversation.getId() == null;
+    }
+
+    public boolean isConversationTimeoutSetProperly() {
+        return conversation.getTimeout() == timeout;
+    }
+
+    public boolean isConversationHasDefaultTimeout() {
+        return conversation.getTimeout() > 0;
+    }
 }

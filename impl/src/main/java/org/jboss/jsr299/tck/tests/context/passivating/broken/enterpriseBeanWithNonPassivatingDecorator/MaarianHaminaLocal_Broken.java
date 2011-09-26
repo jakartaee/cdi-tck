@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWith
 import javax.ejb.Local;
 
 @Local
-public interface MaarianHaminaLocal_Broken
-{
-   void bye();
+public interface MaarianHaminaLocal_Broken {
+    void bye();
 }

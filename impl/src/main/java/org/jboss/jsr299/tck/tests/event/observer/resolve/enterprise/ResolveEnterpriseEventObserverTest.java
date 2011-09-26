@@ -24,22 +24,17 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ResolveEnterpriseEventObserverTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ResolveEnterpriseEventObserverTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(ResolveEnterpriseEventObserverTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(ResolveEnterpriseEventObserverTest.class).build();
     }
-    
-   @Test(groups = { "events", "ejb" })
-   @SpecAssertion(section = "10.4", id = "d")
-   public void testObserverMethodOnEnterpriseBeanIsBusinessMethodOrStatic()
-   {
-      assert getCurrentManager().resolveObserverMethods(new EJBEvent()).size() == 2;
-   }
+
+    @Test(groups = { "events", "ejb" })
+    @SpecAssertion(section = "10.4", id = "d")
+    public void testObserverMethodOnEnterpriseBeanIsBusinessMethodOrStatic() {
+        assert getCurrentManager().resolveObserverMethods(new EJBEvent()).size() == 2;
+    }
 }

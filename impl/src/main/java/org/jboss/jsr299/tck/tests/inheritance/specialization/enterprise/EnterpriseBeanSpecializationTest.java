@@ -32,45 +32,39 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseBeanSpecializationTest extends AbstractJSR299Test
-{
-   
-   private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {};
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseBeanSpecializationTest extends AbstractJSR299Test {
 
-   @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseBeanSpecializationTest.class)
-            .withBeansXml("beans.xml")
-            // Originally with ejb-jar.xml however this resource does not exist in /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/inheritance/specialization/enterprise
-            // .withEjbJarXml("ejb-jar.xml")
-            .build();
+    private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {
+    };
+
+    @Deployment
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanSpecializationTest.class)
+                .withBeansXml("beans.xml")
+                // Originally with ejb-jar.xml however this resource does not exist in
+                // /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/inheritance/specialization/enterprise
+                // .withEjbJarXml("ejb-jar.xml")
+                .build();
     }
-   
-   @Test
-   @SpecAssertions({
-     @SpecAssertion(section = "4.3.1", id = "j"),
-     @SpecAssertion(section = "3.2.4", id = "aa")
-   })
-   public void testSpecializingBeanHasBindingsOfSpecializedAndSpecializingBean()
-   {
-      assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).size() == 1;
-      Bean<LazyFarmerLocal> bean = getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next();
-      assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getTypes().contains(FarmerLocal.class);
-      assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getQualifiers().size() == 4;
-      assert annotationSetMatches( getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-     @SpecAssertion(section = "4.3.1", id = "k")
-   })
-   public void testSpecializingBeanHasNameOfSpecializedBean()
-   {
-      assert getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).size() == 1;
-      assert getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getName().equals("farmer");
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "j"), @SpecAssertion(section = "3.2.4", id = "aa") })
+    public void testSpecializingBeanHasBindingsOfSpecializedAndSpecializingBean() {
+        assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).size() == 1;
+        Bean<LazyFarmerLocal> bean = getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next();
+        assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getTypes()
+                .contains(FarmerLocal.class);
+        assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getQualifiers().size() == 4;
+        assert annotationSetMatches(getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next()
+                .getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "k") })
+    public void testSpecializingBeanHasNameOfSpecializedBean() {
+        assert getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).size() == 1;
+        assert getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getName().equals("farmer");
+    }
 
 }

@@ -31,38 +31,32 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ProcessObserverMethodEventTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ProcessObserverMethodEventTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ProcessObserverMethodEventTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ProcessObserverMethodEventTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "11.5.9", id = "aaa")
-   public void testProcessObserverMethodEventsSent()
-   {
-      assert ProcessObserverMethodObserver.getEventtypes().contains(EventA.class);
-   }
 
-   @Test
-   @SpecAssertion(section = "11.5.9", id = "aba")
-   public void testGetAnnotatedMethod()
-   {
-      assert ProcessObserverMethodObserver.getAnnotatedMethod().getParameters().iterator().next().getBaseType().equals(EventA.class);
-   }
+    @Test
+    @SpecAssertion(section = "11.5.9", id = "aaa")
+    public void testProcessObserverMethodEventsSent() {
+        assert ProcessObserverMethodObserver.getEventtypes().contains(EventA.class);
+    }
 
-   @Test
-   @SpecAssertion(section = "11.5.9", id = "ba")
-   public void testGetObserverMethod()
-   {
-      assert ProcessObserverMethodObserver.getObserverMethod().getObservedType().equals(EventA.class);
-   }
-   
+    @Test
+    @SpecAssertion(section = "11.5.9", id = "aba")
+    public void testGetAnnotatedMethod() {
+        assert ProcessObserverMethodObserver.getAnnotatedMethod().getParameters().iterator().next().getBaseType()
+                .equals(EventA.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.9", id = "ba")
+    public void testGetObserverMethod() {
+        assert ProcessObserverMethodObserver.getObserverMethod().getObservedType().equals(EventA.class);
+    }
+
 }

@@ -27,28 +27,22 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseProducerFieldDefinitionTest extends AbstractJSR299Test
-{
-   
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseProducerFieldDefinitionTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseProducerFieldDefinitionTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseProducerFieldDefinitionTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "3.4", id = "ab"),
-      @SpecAssertion(section = "3.4", id = "ca")
-   })
-   public void testStaticProducerField()
-   {
-      assert getInstanceByType(Egg.class, new AnnotationLiteral<Foo>() {}) != null;
-      assert getInstanceByType(Egg.class, new AnnotationLiteral<Foo>() {}).getSize() == Chicken.SIZE;
-   }
-   
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.4", id = "ab"), @SpecAssertion(section = "3.4", id = "ca") })
+    public void testStaticProducerField() {
+        assert getInstanceByType(Egg.class, new AnnotationLiteral<Foo>() {
+        }) != null;
+        assert getInstanceByType(Egg.class, new AnnotationLiteral<Foo>() {
+        }).getSize() == Chicken.SIZE;
+    }
+
 }

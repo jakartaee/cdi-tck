@@ -23,63 +23,69 @@ import javax.enterprise.inject.Produces;
 
 @Stateful
 @SessionScoped
-public class Fox implements FoxLocal
-{
-   @Produces @Tame
-   private static Den den = new Den("FoxDen");
-   
-   private int nextLitterSize;
-   
-   private boolean litterDisposed = false;
-   
-   /* (non-Javadoc)
-    * @see org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#getDen()
-    */
-   public Den getDen()
-   {
-      return den;
-   }
+public class Fox implements FoxLocal {
+    @Produces
+    @Tame
+    private static Den den = new Den("FoxDen");
 
-   /* (non-Javadoc)
-    * @see org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#setDen(org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.Den)
-    */
-   public void setDen(Den den)
-   {
-      this.den = den;
-   }
+    private int nextLitterSize;
 
-   /* (non-Javadoc)
-    * @see org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#getNextLitterSize()
-    */
-   public int getNextLitterSize()
-   {
-      return nextLitterSize;
-   }
+    private boolean litterDisposed = false;
 
-   /* (non-Javadoc)
-    * @see org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#setNextLitterSize(int)
-    */
-   public void setNextLitterSize(int nextLitterSize)
-   {
-      this.nextLitterSize = nextLitterSize;
-   }
-   
-   @Produces @Tame
-   public Litter produceLitter()
-   {
-      return new Litter(nextLitterSize);
-   }
-   
-   public void disposeLitter(@Disposes @Tame Litter litter)
-   {
-      this.litterDisposed = true;
-   }
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#getDen()
+     */
+    public Den getDen() {
+        return den;
+    }
 
-   /* (non-Javadoc)
-    * @see org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#isLitterDisposed()
-    */
-   public boolean isLitterDisposed()
-   {
-      return litterDisposed;
-   }
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#setDen(org.jboss.jsr299.tck.tests.implementation
+     * .enterprise.newBean.Den)
+     */
+    public void setDen(Den den) {
+        this.den = den;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#getNextLitterSize()
+     */
+    public int getNextLitterSize() {
+        return nextLitterSize;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#setNextLitterSize(int)
+     */
+    public void setNextLitterSize(int nextLitterSize) {
+        this.nextLitterSize = nextLitterSize;
+    }
+
+    @Produces
+    @Tame
+    public Litter produceLitter() {
+        return new Litter(nextLitterSize);
+    }
+
+    public void disposeLitter(@Disposes @Tame Litter litter) {
+        this.litterDisposed = true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.jboss.jsr299.tck.tests.implementation.enterprise.newBean.FoxLocal#isLitterDisposed()
+     */
+    public boolean isLitterDisposed() {
+        return litterDisposed;
+    }
 }

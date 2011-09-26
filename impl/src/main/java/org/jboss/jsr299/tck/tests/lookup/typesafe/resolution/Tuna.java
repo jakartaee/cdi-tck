@@ -19,12 +19,10 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-public class Tuna
-{
-   
-   public String getName()
-   {
-      return "Ophir";
-   }
+public class Tuna {
+
+    public String getName() {
+        return "Ophir";
+    }
 
 }

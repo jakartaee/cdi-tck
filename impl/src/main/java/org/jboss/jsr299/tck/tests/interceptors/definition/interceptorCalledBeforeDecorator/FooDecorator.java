@@ -21,14 +21,15 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class FooDecorator implements Foo
-{
-   @Inject @Delegate Foo delegate;
-   
-   public void bar()
-   {
-      if (!FooImpl.interceptorCalledFirst) FooImpl.decoratorCalledFirst = true;
-      
-      delegate.bar();
-   }
+public class FooDecorator implements Foo {
+    @Inject
+    @Delegate
+    Foo delegate;
+
+    public void bar() {
+        if (!FooImpl.interceptorCalledFirst)
+            FooImpl.decoratorCalledFirst = true;
+
+        delegate.bar();
+    }
 }

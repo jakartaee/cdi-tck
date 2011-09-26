@@ -22,17 +22,16 @@ import javax.validation.ValidatorFactory;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Stateful
-public class DefaultValidatorFactoryInjectedBean implements DefaultValidatorFactoryInjectedBeanLocal
-{
+public class DefaultValidatorFactoryInjectedBean implements DefaultValidatorFactoryInjectedBeanLocal {
 
-   @Inject transient ValidatorFactory defaultValidatorFactory;
-   
-   public ValidatorFactory getDefaultValidatorFactory()
-   {
-      return defaultValidatorFactory;
-   }
+    @Inject
+    transient ValidatorFactory defaultValidatorFactory;
+
+    public ValidatorFactory getDefaultValidatorFactory() {
+        return defaultValidatorFactory;
+    }
 
 }

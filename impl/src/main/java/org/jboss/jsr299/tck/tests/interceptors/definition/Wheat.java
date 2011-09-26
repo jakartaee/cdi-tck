@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition;
 
-public class Wheat
-{
-   public Wheat(String type) {}
+public class Wheat {
+    public Wheat(String type) {
+    }
 }

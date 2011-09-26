@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.definition.stereotype;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-public class Goldfish implements Animal
-{
-   
+public class Goldfish implements Animal {
+
 }

@@ -25,61 +25,48 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.InjectionPoint;
 
-public class AnnotatedInjectionField implements AnnotatedField<InjectedBean>
-{
+public class AnnotatedInjectionField implements AnnotatedField<InjectedBean> {
 
-   private final InjectionPoint injectionPoint;
+    private final InjectionPoint injectionPoint;
 
-   public AnnotatedInjectionField(InjectionPoint injectionPoint)
-   {
-      this.injectionPoint = injectionPoint;
-   }
+    public AnnotatedInjectionField(InjectionPoint injectionPoint) {
+        this.injectionPoint = injectionPoint;
+    }
 
-   public Field getJavaMember()
-   {
-      try
-      {
-         return SimpleBean.class.getDeclaredField("injectedBean");
-      }
-      catch (Exception e)
-      {
-         throw new RuntimeException("Failed to get field for injectedBean", e);
-      }
-   }
+    public Field getJavaMember() {
+        try {
+            return SimpleBean.class.getDeclaredField("injectedBean");
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to get field for injectedBean", e);
+        }
+    }
 
-   public AnnotatedType<InjectedBean> getDeclaringType()
-   {
-      return null;
-   }
+    public AnnotatedType<InjectedBean> getDeclaringType() {
+        return null;
+    }
 
-   public boolean isStatic()
-   {
-      return false;
-   }
+    public boolean isStatic() {
+        return false;
+    }
 
-   public <T extends Annotation> T getAnnotation(Class<T> annotationType)
-   {
-      return null;
-   }
+    public <T extends Annotation> T getAnnotation(Class<T> annotationType) {
+        return null;
+    }
 
-   public Set<Annotation> getAnnotations()
-   {
-      return null;
-   }
+    public Set<Annotation> getAnnotations() {
+        return null;
+    }
 
-   public Type getBaseType()
-   {
-      return InjectedBean.class;
-   }
+    public Type getBaseType() {
+        return InjectedBean.class;
+    }
 
-   public Set<Type> getTypeClosure()
-   {
-      return null;
-   }
+    public Set<Type> getTypeClosure() {
+        return null;
+    }
 
-   public boolean isAnnotationPresent(Class<? extends Annotation> annotationType)
-   {
-      return false;
-   }
+    public boolean isAnnotationPresent(Class<? extends Annotation> annotationType) {
+        return false;
+    }
 
 }

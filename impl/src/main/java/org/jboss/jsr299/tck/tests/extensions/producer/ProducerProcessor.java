@@ -31,111 +31,90 @@ import javax.enterprise.inject.spi.ProcessInjectionTarget;
 import javax.enterprise.inject.spi.ProcessProducer;
 import javax.enterprise.inject.spi.Producer;
 
-public class ProducerProcessor implements Extension
-{
-   private static InjectionTarget<Cat> catInjectionTarget;
-   private static Producer<Dog> noisyDogProducer;
-   private static Producer<Dog> quietDogProducer;
-   private static InjectionTarget<Dog> dogInjectionTarget;
-   private static AnnotatedType<Dog> dogAnnotatedType;
-   private static boolean overriddenCowProducerCalled;
-   
-   public void cleanup(@Observes BeforeShutdown shutdown)
-   {
-      catInjectionTarget = null;
-      noisyDogProducer = null;
-      quietDogProducer = null;
-      dogInjectionTarget = null;
-      dogAnnotatedType = null;
-   }
+public class ProducerProcessor implements Extension {
+    private static InjectionTarget<Cat> catInjectionTarget;
+    private static Producer<Dog> noisyDogProducer;
+    private static Producer<Dog> quietDogProducer;
+    private static InjectionTarget<Dog> dogInjectionTarget;
+    private static AnnotatedType<Dog> dogAnnotatedType;
+    private static boolean overriddenCowProducerCalled;
 
-   public void processDogProducerProducer(@Observes ProcessProducer<DogProducer, Dog> producerEvent)
-   {
-      if (producerEvent.getAnnotatedMember().isAnnotationPresent(Noisy.class))
-      {
-         noisyDogProducer = producerEvent.getProducer();
-         assert producerEvent.getAnnotatedMember() instanceof AnnotatedMethod<?>;
-      }
-      else if (producerEvent.getAnnotatedMember().isAnnotationPresent(Quiet.class))
-      {
-         quietDogProducer = producerEvent.getProducer();
-         assert producerEvent.getAnnotatedMember() instanceof AnnotatedField<?>;
-      }
-   }
+    public void cleanup(@Observes BeforeShutdown shutdown) {
+        catInjectionTarget = null;
+        noisyDogProducer = null;
+        quietDogProducer = null;
+        dogInjectionTarget = null;
+        dogAnnotatedType = null;
+    }
 
-   public void processCatProducer(@Observes ProcessInjectionTarget<Cat> event)
-   {
-      catInjectionTarget = event.getInjectionTarget();
-   }
+    public void processDogProducerProducer(@Observes ProcessProducer<DogProducer, Dog> producerEvent) {
+        if (producerEvent.getAnnotatedMember().isAnnotationPresent(Noisy.class)) {
+            noisyDogProducer = producerEvent.getProducer();
+            assert producerEvent.getAnnotatedMember() instanceof AnnotatedMethod<?>;
+        } else if (producerEvent.getAnnotatedMember().isAnnotationPresent(Quiet.class)) {
+            quietDogProducer = producerEvent.getProducer();
+            assert producerEvent.getAnnotatedMember() instanceof AnnotatedField<?>;
+        }
+    }
 
-   public void processDogInjectionTarget(@Observes ProcessInjectionTarget<Dog> injectionTargetEvent)
-   {
-      // There a couple, but it does not matter which one is used for the tests
-      dogInjectionTarget = injectionTargetEvent.getInjectionTarget();
-      dogAnnotatedType = injectionTargetEvent.getAnnotatedType();
-   }
-   
-   public void processCowProducer(@Observes ProcessProducer<CowProducer, Cow> event)
-   {
-      final Producer<Cow> producer = event.getProducer();
-      event.setProducer(new Producer<Cow>()
-      {
+    public void processCatProducer(@Observes ProcessInjectionTarget<Cat> event) {
+        catInjectionTarget = event.getInjectionTarget();
+    }
 
-         public void dispose(Cow instance)
-         {
-            producer.dispose(instance);
-         }
+    public void processDogInjectionTarget(@Observes ProcessInjectionTarget<Dog> injectionTargetEvent) {
+        // There a couple, but it does not matter which one is used for the tests
+        dogInjectionTarget = injectionTargetEvent.getInjectionTarget();
+        dogAnnotatedType = injectionTargetEvent.getAnnotatedType();
+    }
 
-         public Set<InjectionPoint> getInjectionPoints()
-         {
-            return producer.getInjectionPoints();
-         }
+    public void processCowProducer(@Observes ProcessProducer<CowProducer, Cow> event) {
+        final Producer<Cow> producer = event.getProducer();
+        event.setProducer(new Producer<Cow>() {
 
-         public Cow produce(CreationalContext<Cow> ctx)
-         {
-            overriddenCowProducerCalled = true;
-            return producer.produce(ctx);
-         }
-      });
-   }
-   
-   public void processBirdCage(@Observes ProcessInjectionTarget<BirdCage> event)
-   {
-      event.setInjectionTarget(new CheckableInjectionTarget(event.getInjectionTarget()));
-   }
+            public void dispose(Cow instance) {
+                producer.dispose(instance);
+            }
 
-   public static Producer<Dog> getNoisyDogProducer()
-   {
-      return noisyDogProducer;
-   }
+            public Set<InjectionPoint> getInjectionPoints() {
+                return producer.getInjectionPoints();
+            }
 
-   public static Producer<Dog> getQuietDogProducer()
-   {
-      return quietDogProducer;
-   }
+            public Cow produce(CreationalContext<Cow> ctx) {
+                overriddenCowProducerCalled = true;
+                return producer.produce(ctx);
+            }
+        });
+    }
 
-   public static InjectionTarget<Cat> getCatInjectionTarget()
-   {
-      return catInjectionTarget;
-   }
+    public void processBirdCage(@Observes ProcessInjectionTarget<BirdCage> event) {
+        event.setInjectionTarget(new CheckableInjectionTarget(event.getInjectionTarget()));
+    }
 
-   public static InjectionTarget<Dog> getDogInjectionTarget()
-   {
-      return dogInjectionTarget;
-   }
+    public static Producer<Dog> getNoisyDogProducer() {
+        return noisyDogProducer;
+    }
 
-   public static AnnotatedType<Dog> getDogAnnotatedType()
-   {
-      return dogAnnotatedType;
-   }
-   
-   public static void reset()
-   {
-      overriddenCowProducerCalled = false;
-   }
-   
-   public static boolean isOverriddenCowProducerCalled()
-   {
-      return overriddenCowProducerCalled;
-   }
+    public static Producer<Dog> getQuietDogProducer() {
+        return quietDogProducer;
+    }
+
+    public static InjectionTarget<Cat> getCatInjectionTarget() {
+        return catInjectionTarget;
+    }
+
+    public static InjectionTarget<Dog> getDogInjectionTarget() {
+        return dogInjectionTarget;
+    }
+
+    public static AnnotatedType<Dog> getDogAnnotatedType() {
+        return dogAnnotatedType;
+    }
+
+    public static void reset() {
+        overriddenCowProducerCalled = false;
+    }
+
+    public static boolean isOverriddenCowProducerCalled() {
+        return overriddenCowProducerCalled;
+    }
 }

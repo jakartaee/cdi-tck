@@ -16,16 +16,15 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.multipleBindings;
 
-public class GuidedMissile implements Missile
-{
-   @Slow @Deadly
-   public void lockAndFire()
-   {
-   }
-   
-   @Fast @Deadly
-   public void fire()
-   {
-   }
+public class GuidedMissile implements Missile {
+    @Slow
+    @Deadly
+    public void lockAndFire() {
+    }
+
+    @Fast
+    @Deadly
+    public void fire() {
+    }
 
 }

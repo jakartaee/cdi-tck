@@ -16,10 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer.beanNotManaged;
 
-public class ConcreteBean extends AbstractBean
-{
-   @Override
-   public void observer(String event)
-   {
-   }
+public class ConcreteBean extends AbstractBean {
+    @Override
+    public void observer(String event) {
+    }
 }

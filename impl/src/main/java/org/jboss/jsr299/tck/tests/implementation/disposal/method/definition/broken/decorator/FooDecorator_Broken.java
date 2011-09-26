@@ -22,17 +22,15 @@ import javax.enterprise.inject.Disposes;
 import javax.inject.Inject;
 
 @Decorator
-public class FooDecorator_Broken implements Foo
-{
-   @Inject @Delegate
-   private Foo delegate;
-   
-   public boolean foo()
-   {
-      return !delegate.foo();
-   }
+public class FooDecorator_Broken implements Foo {
+    @Inject
+    @Delegate
+    private Foo delegate;
 
-   public void dispose(@Disposes Integer zero)
-   {
-   }
+    public boolean foo() {
+        return !delegate.foo();
+    }
+
+    public void dispose(@Disposes Integer zero) {
+    }
 }

@@ -27,30 +27,24 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests event observer throwing exception causes container to produce
- * a definition error.
+ * Tests event observer throwing exception causes container to produce a definition error.
  * 
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ProcessObserverMethodExceptionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ProcessObserverMethodExceptionTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ProcessObserverMethodExceptionTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ProcessObserverMethodExceptionTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-   @Test
-   @SpecAssertion(section = "11.5.9", id = "db")
-   public void testExceptionIsDefinitionError()
-   {
-   }
+    @Test
+    @SpecAssertion(section = "11.5.9", id = "db")
+    public void testExceptionIsDefinitionError() {
+    }
 
 }

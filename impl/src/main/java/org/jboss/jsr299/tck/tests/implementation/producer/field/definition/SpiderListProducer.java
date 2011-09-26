@@ -21,8 +21,7 @@ import java.util.ArrayList;
 
 import javax.enterprise.inject.Produces;
 
-public class SpiderListProducer<T extends Spider>
-{
-   @Produces
-   List<T> spiders = new ArrayList<T>();
+public class SpiderListProducer<T extends Spider> {
+    @Produces
+    List<T> spiders = new ArrayList<T>();
 }

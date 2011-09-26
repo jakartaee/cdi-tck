@@ -19,10 +19,11 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.lifecycle;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
-public class Lays
-{
-   public @Produces @Null @RequestScoped PotatoChip makeChip()
-   {       
-      return null;
-   }
+public class Lays {
+    public @Produces
+    @Null
+    @RequestScoped
+    PotatoChip makeChip() {
+        return null;
+    }
 }

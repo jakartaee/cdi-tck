@@ -21,15 +21,14 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.Specializes;
 
 /**
- * This bean contains a producer field and specializes another bean
- * which has the same producer field.
+ * This bean contains a producer field and specializes another bean which has the same producer field.
  * 
  * @author David Allen
- *
+ * 
  */
 @Specializes
-public class SpecializedTarantulaProducer extends TarantulaProducer
-{
-   @Produces public Tarantula produceTarantula = new DefangedTarantula();
+public class SpecializedTarantulaProducer extends TarantulaProducer {
+    @Produces
+    public Tarantula produceTarantula = new DefangedTarantula();
 
 }

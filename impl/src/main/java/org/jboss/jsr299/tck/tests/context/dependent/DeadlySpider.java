@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.context.dependent;
 
-public interface DeadlySpider extends DeadlyAnimal
-{
+public interface DeadlySpider extends DeadlyAnimal {
 
 }

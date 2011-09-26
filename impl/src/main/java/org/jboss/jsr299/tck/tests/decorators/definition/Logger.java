@@ -23,13 +23,12 @@ import java.util.Set;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Logger
-{
+public interface Logger {
 
-   public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(Logger.class));
+    public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(Logger.class));
 
-   public void log(String string);
+    public void log(String string);
 
 }

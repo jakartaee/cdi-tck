@@ -16,9 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.definition.name;
 
-
 @RiverFishStereotype
-public class Minnow implements Animal
-{
-   
+public class Minnow implements Animal {
+
 }

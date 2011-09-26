@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.simpleInte
 import javax.ejb.Local;
 
 @Local
-public interface MissileLocal
-{
-   void fire();
+public interface MissileLocal {
+    void fire();
 }

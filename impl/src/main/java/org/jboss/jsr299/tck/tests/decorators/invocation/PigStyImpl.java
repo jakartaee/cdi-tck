@@ -21,31 +21,27 @@ import javax.inject.Inject;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Stateful
-public class PigStyImpl implements PigSty
-{
-   
-   @Inject
-   private Pig pig;
-   
-   private static boolean BEAN_CALLED; 
-   
-   public void clean()
-   {
-      BEAN_CALLED = true;
-      assert pig instanceof Pig;
-   }
-   
-   public static boolean isBeanCalled()
-   {
-      return BEAN_CALLED;
-   }
-   
-   public static void reset()
-   {
-      BEAN_CALLED = false;
-   }
+public class PigStyImpl implements PigSty {
+
+    @Inject
+    private Pig pig;
+
+    private static boolean BEAN_CALLED;
+
+    public void clean() {
+        BEAN_CALLED = true;
+        assert pig instanceof Pig;
+    }
+
+    public static boolean isBeanCalled() {
+        return BEAN_CALLED;
+    }
+
+    public static void reset() {
+        BEAN_CALLED = false;
+    }
 
 }

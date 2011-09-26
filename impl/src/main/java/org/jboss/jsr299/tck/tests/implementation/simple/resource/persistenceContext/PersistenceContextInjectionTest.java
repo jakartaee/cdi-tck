@@ -33,93 +33,71 @@ import org.testng.annotations.Test;
 
 /**
  * Injection of persistence related objects.
- *
+ * 
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class PersistenceContextInjectionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class PersistenceContextInjectionTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(PersistenceContextInjectionTest.class)
-            .withBeansXml("beans.xml")
-            .withPersistenceXml("persistence.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(PersistenceContextInjectionTest.class).withBeansXml("beans.xml")
+                .withPersistenceXml("persistence.xml").build();
     }
-    
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "3.5.1", id = "cc"),
-      @SpecAssertion(section = "7.3.6", id = "lb"),
-      @SpecAssertion(section = "7.3.6", id = "mc")
-   })
-   public void testInjectionOfPersistenceContext()
-   {
-      ServiceBean serviceBean = getInstanceByType(ServiceBean.class);
-      ManagedBean managedBean = serviceBean.getManagedBean();
-      assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
-      assert serviceBean.validateEntityManager();
-   }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "3.5.1", id = "dd"),
-      @SpecAssertion(section = "7.3.6", id = "lc"),
-      @SpecAssertion(section = "7.3.6", id = "me")
-   })
-   public void testInjectionOfPersistenceUnit()
-   {
-      Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
-      CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
-      ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
-      assert managedBean.getPersistenceUnit() != null : "Persistence unit was not injected into bean";
-      assert managedBean.getPersistenceUnit().isOpen() : "Persistence unit not open injected into bean";
-   }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "7.3.6", id = "md")
-   })
-   public void testPassivationOfPersistenceContext() throws Exception
-   {
-      Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
-      CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
-      ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
-      managedBean = (ManagedBean) deserialize(serialize(managedBean));
-      assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
-      assert managedBean.getPersistenceContext().getDelegate() != null : "Persistence context not deserialized correctly";
-   }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "7.3.6", id = "lc"),
-      @SpecAssertion(section = "7.3.6", id = "mf")
-   })
-   public void testPassivationOfPersistenceUnit() throws Exception
-   {
-      Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
-      CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
-      ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
-      managedBean = (ManagedBean) deserialize(serialize(managedBean));
-      assert managedBean.getPersistenceUnit() != null : "Persistence unit was not injected into bean";
-      assert managedBean.getPersistenceUnit().isOpen() : "Persistence unit not open injected into bean";
-   }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "3.5.1", id = "hh")
-   })
-   public void testBeanTypesAndBindingTypesOfPersistenceContext()
-   {
-      Bean<EntityManager> managedBeanBean = getBeans(EntityManager.class, new AnnotationLiteral<Database>() {}).iterator().next();
-      assert managedBeanBean.getTypes().size() == 2;
-      assert managedBeanBean.getTypes().contains(Object.class);
-      assert managedBeanBean.getTypes().contains(EntityManager.class);
-      assert managedBeanBean.getQualifiers().size() == 2;
-      assert annotationSetMatches(managedBeanBean.getQualifiers(), Any.class, Database.class);
-   }
+
+    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "cc"), @SpecAssertion(section = "7.3.6", id = "lb"),
+            @SpecAssertion(section = "7.3.6", id = "mc") })
+    public void testInjectionOfPersistenceContext() {
+        ServiceBean serviceBean = getInstanceByType(ServiceBean.class);
+        ManagedBean managedBean = serviceBean.getManagedBean();
+        assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
+        assert serviceBean.validateEntityManager();
+    }
+
+    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "dd"), @SpecAssertion(section = "7.3.6", id = "lc"),
+            @SpecAssertion(section = "7.3.6", id = "me") })
+    public void testInjectionOfPersistenceUnit() {
+        Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
+        CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
+        ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
+        assert managedBean.getPersistenceUnit() != null : "Persistence unit was not injected into bean";
+        assert managedBean.getPersistenceUnit().isOpen() : "Persistence unit not open injected into bean";
+    }
+
+    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "md") })
+    public void testPassivationOfPersistenceContext() throws Exception {
+        Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
+        CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
+        ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
+        managedBean = (ManagedBean) deserialize(serialize(managedBean));
+        assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
+        assert managedBean.getPersistenceContext().getDelegate() != null : "Persistence context not deserialized correctly";
+    }
+
+    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "lc"), @SpecAssertion(section = "7.3.6", id = "mf") })
+    public void testPassivationOfPersistenceUnit() throws Exception {
+        Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
+        CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
+        ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
+        managedBean = (ManagedBean) deserialize(serialize(managedBean));
+        assert managedBean.getPersistenceUnit() != null : "Persistence unit was not injected into bean";
+        assert managedBean.getPersistenceUnit().isOpen() : "Persistence unit not open injected into bean";
+    }
+
+    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "hh") })
+    public void testBeanTypesAndBindingTypesOfPersistenceContext() {
+        Bean<EntityManager> managedBeanBean = getBeans(EntityManager.class, new AnnotationLiteral<Database>() {
+        }).iterator().next();
+        assert managedBeanBean.getTypes().size() == 2;
+        assert managedBeanBean.getTypes().contains(Object.class);
+        assert managedBeanBean.getTypes().contains(EntityManager.class);
+        assert managedBeanBean.getQualifiers().size() == 2;
+        assert annotationSetMatches(managedBeanBean.getQualifiers(), Any.class, Database.class);
+    }
 }

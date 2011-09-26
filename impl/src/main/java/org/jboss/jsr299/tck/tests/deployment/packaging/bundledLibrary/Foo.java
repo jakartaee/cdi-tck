@@ -18,9 +18,8 @@ package org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class Foo
-{
+public class Foo {
 
 }

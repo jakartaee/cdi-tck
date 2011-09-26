@@ -26,15 +26,14 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD })
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented
 @InterceptorBinding
-public @interface AnimalCountInterceptorBinding
-{
-   Operation value();
-   
-   enum Operation {
-      INCREASE, DECREASE
-   }
+public @interface AnimalCountInterceptorBinding {
+    Operation value();
+
+    enum Operation {
+        INCREASE, DECREASE
+    }
 }

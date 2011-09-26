@@ -39,71 +39,56 @@ import org.testng.annotations.Test;
  * @author Pete Muir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class BuiltInBeansTest extends AbstractJSR299Test
-{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class BuiltInBeansTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(BuiltInBeansTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(BuiltInBeansTest.class).build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="3.6", id="a")
-   })
-   public void testUserTransactionBean() throws SystemException
-   {
-      UserTransaction userTransaction = getInstanceByType(UserTransactionInjectedBeanLocal.class).getUserTransaction(); 
-      assert userTransaction != null;
-      // Check that the UserTransaction is at least queryable
-      userTransaction.getStatus();
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="3.6", id="c")
-   })
-   public void testDefaultValidatorFactoryBean() throws SystemException
-   {
-      ValidatorFactory defaultValidatorFactory = getInstanceByType(DefaultValidatorFactoryInjectedBeanLocal.class).getDefaultValidatorFactory(); 
-      assert defaultValidatorFactory != null;
-      // Check that the ValidatorFactory is at least queryable
-      defaultValidatorFactory.getValidator();
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="3.6", id="d")
-   })
-   public void testDefaultValidatorBean() throws SystemException
-   {
-      Validator defaultValidator = getInstanceByType(DefaultValidatorInjectedBeanLocal.class).getDefaultValidator(); 
-      assert defaultValidator != null;
-      // Check that the ValidatorFactory is at least queryable
-      defaultValidator.getConstraintsForClass(BuiltInBeansTest.class);
-   }
-   
-   /**
-    * FIXME in jbossas7 web profile login-module is disabled 
-    * 
-    * @throws SystemException
-    * @throws LoginException
-    */
-   @Test(groups="rewrite")
-   // PLM We should check the Principal somehow
-   @SpecAssertions({
-      @SpecAssertion(section="3.6", id="b")
-   })
-   public void testPrincipalBean() throws SystemException, LoginException
-   {
-      PrincipalInjectedBeanLocal instance = getInstanceByType(PrincipalInjectedBeanLocal.class);
-      instance.login();
-      Principal principal = instance.getPrincipal();
-      // Not much we can check on the Princiapl easily
-   }
-   
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.6", id = "a") })
+    public void testUserTransactionBean() throws SystemException {
+        UserTransaction userTransaction = getInstanceByType(UserTransactionInjectedBeanLocal.class).getUserTransaction();
+        assert userTransaction != null;
+        // Check that the UserTransaction is at least queryable
+        userTransaction.getStatus();
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.6", id = "c") })
+    public void testDefaultValidatorFactoryBean() throws SystemException {
+        ValidatorFactory defaultValidatorFactory = getInstanceByType(DefaultValidatorFactoryInjectedBeanLocal.class)
+                .getDefaultValidatorFactory();
+        assert defaultValidatorFactory != null;
+        // Check that the ValidatorFactory is at least queryable
+        defaultValidatorFactory.getValidator();
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.6", id = "d") })
+    public void testDefaultValidatorBean() throws SystemException {
+        Validator defaultValidator = getInstanceByType(DefaultValidatorInjectedBeanLocal.class).getDefaultValidator();
+        assert defaultValidator != null;
+        // Check that the ValidatorFactory is at least queryable
+        defaultValidator.getConstraintsForClass(BuiltInBeansTest.class);
+    }
+
+    /**
+     * FIXME in jbossas7 web profile login-module is disabled
+     * 
+     * @throws SystemException
+     * @throws LoginException
+     */
+    @Test(groups = "rewrite")
+    // PLM We should check the Principal somehow
+    @SpecAssertions({ @SpecAssertion(section = "3.6", id = "b") })
+    public void testPrincipalBean() throws SystemException, LoginException {
+        PrincipalInjectedBeanLocal instance = getInstanceByType(PrincipalInjectedBeanLocal.class);
+        instance.login();
+        Principal principal = instance.getPrincipal();
+        // Not much we can check on the Princiapl easily
+    }
+
 }

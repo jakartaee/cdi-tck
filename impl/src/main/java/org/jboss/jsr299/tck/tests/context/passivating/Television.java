@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.context.passivating;
 import javax.enterprise.inject.Alternative;
 
 @Alternative
-public class Television
-{
-   public void turnOn() {}
+public class Television {
+    public void turnOn() {
+    }
 }

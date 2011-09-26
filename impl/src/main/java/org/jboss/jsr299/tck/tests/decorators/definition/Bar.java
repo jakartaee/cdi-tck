@@ -18,9 +18,8 @@ package org.jboss.jsr299.tck.tests.decorators.definition;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Bar
-{
+public interface Bar {
 
 }

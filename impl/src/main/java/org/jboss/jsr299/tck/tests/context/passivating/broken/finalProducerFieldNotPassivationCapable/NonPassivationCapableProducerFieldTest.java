@@ -30,25 +30,18 @@ import org.testng.annotations.Test;
  * 
  * @author Shane Bryzak
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class NonPassivationCapableProducerFieldTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class NonPassivationCapableProducerFieldTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        //  Originally EAR but no enterprise feature used
-        return new WebArchiveBuilder()
-            .withTestClassPackage(NonPassivationCapableProducerFieldTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        // Originally EAR but no enterprise feature used
+        return new WebArchiveBuilder().withTestClassPackage(NonPassivationCapableProducerFieldTest.class).build();
     }
-    
-   @Test(groups = { "passivation" })
-   @SpecAssertions({
-     @SpecAssertion(section = "6.6.1", id = "db")
-   })
-   public void testNonPassivationCapableProducerFieldNotOk()
-   {
-   }
+
+    @Test(groups = { "passivation" })
+    @SpecAssertions({ @SpecAssertion(section = "6.6.1", id = "db") })
+    public void testNonPassivationCapableProducerFieldNotOk() {
+    }
 }

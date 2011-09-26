@@ -26,37 +26,29 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ChecksEventTypeWhenResolvingTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ChecksEventTypeWhenResolvingTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ChecksEventTypeWhenResolvingTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ChecksEventTypeWhenResolvingTest.class).build();
     }
-    
-   public static class AnEventType
-   {
-   }
 
-   public static class AnObserver
-   {
-      public boolean wasNotified = false;
+    public static class AnEventType {
+    }
 
-      public void observes(@Observes AnEventType event)
-      {
-         wasNotified = true;
-      }
-   }
+    public static class AnObserver {
+        public boolean wasNotified = false;
 
-   @Test(groups = { "events" })
-   @SpecAssertion(section = "10.4.1", id = "a")
-   public void testResolvingChecksEventType()
-   {
-      assert !getCurrentManager().resolveObserverMethods(new AnEventType()).isEmpty();
-      assert getCurrentManager().resolveObserverMethods(new UnusedEventType("name")).isEmpty();
-   }
+        public void observes(@Observes AnEventType event) {
+            wasNotified = true;
+        }
+    }
+
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "10.4.1", id = "a")
+    public void testResolvingChecksEventType() {
+        assert !getCurrentManager().resolveObserverMethods(new AnEventType()).isEmpty();
+        assert getCurrentManager().resolveObserverMethods(new UnusedEventType("name")).isEmpty();
+    }
 }

@@ -27,94 +27,78 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 @Stateless
-public class FMSModelIII implements FMS
-{
-   private static final long serialVersionUID = 1L;
-   
-   private static final String CLIMB_COMMAND = "ClimbCommand";
-   private static final String DESCEND_COMMAND = "DescendCommand";
+public class FMSModelIII implements FMS {
+    private static final long serialVersionUID = 1L;
 
-   @Resource
-   private TimerService timerService;
-   
-   @Inject
-   private BeanManager beanManager;
-   
-   @Inject
-   private Instance<SimpleApplicationBean> simpleApplicationBeanInstance;
+    private static final String CLIMB_COMMAND = "ClimbCommand";
+    private static final String DESCEND_COMMAND = "DescendCommand";
 
-   private static volatile boolean applicationScopeActive = false;
-   private static volatile double beanId = 0.0d;
-   private static volatile boolean sameBean = false;
-   
-   private static boolean climbed;
-   private static boolean descended;
+    @Resource
+    private TimerService timerService;
 
-   public void climb() throws Exception
-   {
-      timerService.createTimer(200, CLIMB_COMMAND);
-   }
+    @Inject
+    private BeanManager beanManager;
 
-   public void descend() throws Exception
-   {
-      timerService.createTimer(100, DESCEND_COMMAND);
-   }
+    @Inject
+    private Instance<SimpleApplicationBean> simpleApplicationBeanInstance;
 
-   @Timeout
-   public void timeout(Timer timer)
-   {
-      if (timer.getInfo().equals(CLIMB_COMMAND))
-      {
-         climbed = true;
-      }
-      if (timer.getInfo().equals(DESCEND_COMMAND))
-      {
-         descended = true;
-      }
-      if (beanManager.getContext(ApplicationScoped.class).isActive())
-      {
-         applicationScopeActive = true;
-         if (beanId > 0.0)
-         {
-            if (beanId == simpleApplicationBeanInstance.get().getId())
-            {
-               sameBean = true;
+    private static volatile boolean applicationScopeActive = false;
+    private static volatile double beanId = 0.0d;
+    private static volatile boolean sameBean = false;
+
+    private static boolean climbed;
+    private static boolean descended;
+
+    public void climb() throws Exception {
+        timerService.createTimer(200, CLIMB_COMMAND);
+    }
+
+    public void descend() throws Exception {
+        timerService.createTimer(100, DESCEND_COMMAND);
+    }
+
+    @Timeout
+    public void timeout(Timer timer) {
+        if (timer.getInfo().equals(CLIMB_COMMAND)) {
+            climbed = true;
+        }
+        if (timer.getInfo().equals(DESCEND_COMMAND)) {
+            descended = true;
+        }
+        if (beanManager.getContext(ApplicationScoped.class).isActive()) {
+            applicationScopeActive = true;
+            if (beanId > 0.0) {
+                if (beanId == simpleApplicationBeanInstance.get().getId()) {
+                    sameBean = true;
+                }
+            } else {
+                beanId = simpleApplicationBeanInstance.get().getId();
             }
-         }
-         else
-         {
-            beanId = simpleApplicationBeanInstance.get().getId();
-         }
-      }
-   }
+        }
+    }
 
-   public boolean isApplicationScopeActive()
-   {
-      return applicationScopeActive;
-   }
+    public boolean isApplicationScopeActive() {
+        return applicationScopeActive;
+    }
 
-   public boolean isSameBean()
-   {
-      return sameBean;
-   }
-   
-   public static boolean isClimbed()
-   {
-      return climbed;
-   }
-   
-   public static boolean isDescended()
-   {
-      return descended;
-   }
-   
-   public static void reset()
-   {
-      beanId = 0.0d;
-      climbed = false;
-      descended = false;
-      applicationScopeActive = false;
-      sameBean = false;
-   }
+    public boolean isSameBean() {
+        return sameBean;
+    }
+
+    public static boolean isClimbed() {
+        return climbed;
+    }
+
+    public static boolean isDescended() {
+        return descended;
+    }
+
+    public static void reset() {
+        beanId = 0.0d;
+        climbed = false;
+        descended = false;
+        applicationScopeActive = false;
+        sameBean = false;
+    }
 
 }

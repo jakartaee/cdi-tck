@@ -18,6 +18,5 @@ package org.jboss.jsr299.tck.tests.event.resolve.binding;
 
 import javax.enterprise.util.AnnotationLiteral;
 
-public class BindingTypeABinding extends AnnotationLiteral<BindingTypeA> implements BindingTypeA
-{
+public class BindingTypeABinding extends AnnotationLiteral<BindingTypeA> implements BindingTypeA {
 }

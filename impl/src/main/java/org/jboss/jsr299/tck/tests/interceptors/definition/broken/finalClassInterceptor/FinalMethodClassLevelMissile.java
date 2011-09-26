@@ -20,9 +20,10 @@ import javax.ejb.Stateful;
 
 @Stateful
 @FooBinding
-public class FinalMethodClassLevelMissile implements FinalMethodClassLevelMissileLocal
-{
-   public void fire() {}
-   
-   public final void finalManeuver() {}
+public class FinalMethodClassLevelMissile implements FinalMethodClassLevelMissileLocal {
+    public void fire() {
+    }
+
+    public final void finalManeuver() {
+    }
 }

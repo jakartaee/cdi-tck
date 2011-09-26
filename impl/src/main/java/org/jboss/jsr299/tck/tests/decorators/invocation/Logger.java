@@ -16,16 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Logger
-{
+public interface Logger {
 
-   public void log(String string);
-   
-   public void initialize();
+    public void log(String string);
+
+    public void initialize();
 
 }

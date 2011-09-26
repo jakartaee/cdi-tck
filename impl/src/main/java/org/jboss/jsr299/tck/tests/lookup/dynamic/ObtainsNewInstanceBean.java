@@ -25,37 +25,36 @@ import javax.inject.Inject;
 
 import org.jboss.jsr299.tck.literals.NewLiteral;
 
-public class ObtainsNewInstanceBean
-{
-    @Inject @New(HashMap.class) Map<String, String> map;
-    @Inject @New String string;
-   //@Inject @New(ArrayList.class) Instance<List<String>> strings;
-   @Inject Instance<IllegalArgumentException> iae;
+public class ObtainsNewInstanceBean {
+    @Inject
+    @New(HashMap.class)
+    Map<String, String> map;
+    @Inject
+    @New
+    String string;
+    // @Inject @New(ArrayList.class) Instance<List<String>> strings;
+    @Inject
+    Instance<IllegalArgumentException> iae;
 
-    public String getString()
-    {
+    public String getString() {
         return string;
     }
 
-    public Map getMap() 
-    {
+    public Map getMap() {
         return map;
-        //return map.select(new TypeLiteral<HashMap<String, String>>(){}).get();
+        // return map.select(new TypeLiteral<HashMap<String, String>>(){}).get();
     }
-    
-//   public Instance<List<String>> getStrings()
-//   {
-//      return strings;
-//   }
 
-   public Instance<IllegalArgumentException> getIae()
-   {
-      return iae.select(new NewLiteral()
-      {
-         public Class<?> value()
-         {
-            return IllegalArgumentException.class;
-         }
-      });
-   }
+    // public Instance<List<String>> getStrings()
+    // {
+    // return strings;
+    // }
+
+    public Instance<IllegalArgumentException> getIae() {
+        return iae.select(new NewLiteral() {
+            public Class<?> value() {
+                return IllegalArgumentException.class;
+            }
+        });
+    }
 }

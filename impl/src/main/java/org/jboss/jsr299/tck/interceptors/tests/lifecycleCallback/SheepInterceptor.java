@@ -20,31 +20,26 @@ import javax.annotation.PostConstruct;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class SheepInterceptor
-{
-   private static boolean postConstructCalled = false;
-   private static boolean aroundInvokeCalled = false;
-   
-   @PostConstruct
-   public void postConstruct()
-   {
-      postConstructCalled = true;
-   }
-   
-   @AroundInvoke
-   public Object aroundInvoke(InvocationContext ctx) throws Exception
-   {
-      aroundInvokeCalled = true;
-      return ctx.proceed();
-   }
+class SheepInterceptor {
+    private static boolean postConstructCalled = false;
+    private static boolean aroundInvokeCalled = false;
 
-   public static boolean isPostConstructCalled()
-   {
-      return postConstructCalled;
-   }
+    @PostConstruct
+    public void postConstruct() {
+        postConstructCalled = true;
+    }
 
-   public static boolean isAroundInvokeCalled()
-   {
-      return aroundInvokeCalled;
-   }
+    @AroundInvoke
+    public Object aroundInvoke(InvocationContext ctx) throws Exception {
+        aroundInvokeCalled = true;
+        return ctx.proceed();
+    }
+
+    public static boolean isPostConstructCalled() {
+        return postConstructCalled;
+    }
+
+    public static boolean isAroundInvokeCalled() {
+        return aroundInvokeCalled;
+    }
 }

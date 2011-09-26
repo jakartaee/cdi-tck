@@ -24,7 +24,6 @@ import javax.interceptor.Interceptors;
 @SuppressWarnings("serial")
 @SessionScoped
 @Interceptors(KokkolaInterceptor.class)
-public class Kokkola implements Serializable
-{
+public class Kokkola implements Serializable {
 
 }

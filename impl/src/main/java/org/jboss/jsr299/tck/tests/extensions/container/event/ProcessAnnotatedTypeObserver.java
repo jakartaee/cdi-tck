@@ -21,54 +21,48 @@ import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
-public class ProcessAnnotatedTypeObserver implements Extension
-{
-   private static ProcessAnnotatedType<Sheep> statelessSessionBeanEvent = null;
-   private static ProcessAnnotatedType<Cow> statefulSessionBeanEvent = null;
-   private static ProcessAnnotatedType<SheepInterceptor> sessionBeanInterceptorEvent = null;
-   private static ProcessAnnotatedType<Farm> managedBeanEvent = null;
-   
-   public void cleanup(@Observes BeforeShutdown shutdown)
-   {
-      statefulSessionBeanEvent = null;
-      statelessSessionBeanEvent = null;
-      sessionBeanInterceptorEvent = null;
-      managedBeanEvent = null;
-   }
-   
-   public void observeStatelessSessionBean(@Observes ProcessAnnotatedType<Sheep> event) {
-      statelessSessionBeanEvent = event;
-   }
-   
-   public void observeStatefulSessionBean(@Observes ProcessAnnotatedType<Cow> event) {
-      statefulSessionBeanEvent = event;
-   }
-   
-   public void observeSessionBeanInterceptor(@Observes ProcessAnnotatedType<SheepInterceptor> event) {
-      sessionBeanInterceptorEvent = event;
-   }
-   
-   public void observeManagedBean(@Observes ProcessAnnotatedType<Farm> event) {
-      managedBeanEvent = event;
-   }
+public class ProcessAnnotatedTypeObserver implements Extension {
+    private static ProcessAnnotatedType<Sheep> statelessSessionBeanEvent = null;
+    private static ProcessAnnotatedType<Cow> statefulSessionBeanEvent = null;
+    private static ProcessAnnotatedType<SheepInterceptor> sessionBeanInterceptorEvent = null;
+    private static ProcessAnnotatedType<Farm> managedBeanEvent = null;
 
-   public static ProcessAnnotatedType<Sheep> getStatelessSessionBeanEvent()
-   {
-      return statelessSessionBeanEvent;
-   }
+    public void cleanup(@Observes BeforeShutdown shutdown) {
+        statefulSessionBeanEvent = null;
+        statelessSessionBeanEvent = null;
+        sessionBeanInterceptorEvent = null;
+        managedBeanEvent = null;
+    }
 
-   public static ProcessAnnotatedType<Cow> getStatefulSessionBeanEvent()
-   {
-      return statefulSessionBeanEvent;
-   }
+    public void observeStatelessSessionBean(@Observes ProcessAnnotatedType<Sheep> event) {
+        statelessSessionBeanEvent = event;
+    }
 
-   public static ProcessAnnotatedType<SheepInterceptor> getSessionBeanInterceptorEvent()
-   {
-      return sessionBeanInterceptorEvent;
-   }
+    public void observeStatefulSessionBean(@Observes ProcessAnnotatedType<Cow> event) {
+        statefulSessionBeanEvent = event;
+    }
 
-   public static ProcessAnnotatedType<Farm> getManagedBeanEvent()
-   {
-      return managedBeanEvent;
-   }
+    public void observeSessionBeanInterceptor(@Observes ProcessAnnotatedType<SheepInterceptor> event) {
+        sessionBeanInterceptorEvent = event;
+    }
+
+    public void observeManagedBean(@Observes ProcessAnnotatedType<Farm> event) {
+        managedBeanEvent = event;
+    }
+
+    public static ProcessAnnotatedType<Sheep> getStatelessSessionBeanEvent() {
+        return statelessSessionBeanEvent;
+    }
+
+    public static ProcessAnnotatedType<Cow> getStatefulSessionBeanEvent() {
+        return statefulSessionBeanEvent;
+    }
+
+    public static ProcessAnnotatedType<SheepInterceptor> getSessionBeanInterceptorEvent() {
+        return sessionBeanInterceptorEvent;
+    }
+
+    public static ProcessAnnotatedType<Farm> getManagedBeanEvent() {
+        return managedBeanEvent;
+    }
 }

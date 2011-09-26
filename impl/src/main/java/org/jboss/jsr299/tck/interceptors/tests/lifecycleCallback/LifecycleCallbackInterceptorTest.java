@@ -28,103 +28,91 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "3.1.PFD")
-public class LifecycleCallbackInterceptorTest extends AbstractJSR299Test
-{
-    
+public class LifecycleCallbackInterceptorTest extends AbstractJSR299Test {
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-            .withTestClassPackage(LifecycleCallbackInterceptorTest.class)
-            .build();
+        return new WebArchiveBuilder().withTestClassPackage(LifecycleCallbackInterceptorTest.class).build();
     }
-    
-   @Test
-   @SpecAssertion(section = "5", id = "a")
-   public void testPostConstructInterceptor()
-   {
-      getInstanceByType(Goat.class);
-      assert Goat.isPostConstructInterceptorCalled();
-      assert AnimalInterceptor.isPostConstructInterceptorCalled(Goat.GOAT);
-      getInstanceByType(Hen.class).toString();
-      assert Hen.isPostConstructInterceptorCalled();
-      assert AnimalInterceptor.isPostConstructInterceptorCalled(Hen.HEN);
-      getInstanceByType(Cow.class).toString();
-      assert Cow.isPostConstructInterceptorCalled();
-      assert AnimalInterceptor.isPostConstructInterceptorCalled(Cow.COW);
-   }
 
-   @Test
-   @SpecAssertion(section = "5", id = "a")
-   // WELD-436
-   public void testPreDestroyInterceptor()
-   {
-      createAndDestroyInstance(Goat.class);
-      assert Goat.isPreDestroyInterceptorCalled();
-      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Goat.GOAT);
-      createAndDestroyInstance(Hen.class);
-      assert Hen.isPreDestroyInterceptorCalled();
-      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Hen.HEN);
-      createAndDestroyInstance(Cow.class);
-      assert Cow.isPreDestroyInterceptorCalled();
-      assert AnimalInterceptor.isPreDestroyInterceptorCalled(Cow.COW);
-   }
+    @Test
+    @SpecAssertion(section = "5", id = "a")
+    public void testPostConstructInterceptor() {
+        getInstanceByType(Goat.class);
+        assert Goat.isPostConstructInterceptorCalled();
+        assert AnimalInterceptor.isPostConstructInterceptorCalled(Goat.GOAT);
+        getInstanceByType(Hen.class).toString();
+        assert Hen.isPostConstructInterceptorCalled();
+        assert AnimalInterceptor.isPostConstructInterceptorCalled(Hen.HEN);
+        getInstanceByType(Cow.class).toString();
+        assert Cow.isPostConstructInterceptorCalled();
+        assert AnimalInterceptor.isPostConstructInterceptorCalled(Cow.COW);
+    }
 
-   @SuppressWarnings("unchecked")
-   private <T extends Animal> void createAndDestroyInstance(Class<T> clazz)
-   {
-      Bean<T> bean = getUniqueBean(clazz);
-      CreationalContext<T> ctx = getCurrentManager().createCreationalContext(bean);
-      T instance = (T) getCurrentManager().getReference(bean, clazz, ctx);
-      instance.foo(); // invoke method so that the instance is actually created
-      // destroy the instance
-      bean.destroy(instance, ctx);
-   }
+    @Test
+    @SpecAssertion(section = "5", id = "a")
+    // WELD-436
+    public void testPreDestroyInterceptor() {
+        createAndDestroyInstance(Goat.class);
+        assert Goat.isPreDestroyInterceptorCalled();
+        assert AnimalInterceptor.isPreDestroyInterceptorCalled(Goat.GOAT);
+        createAndDestroyInstance(Hen.class);
+        assert Hen.isPreDestroyInterceptorCalled();
+        assert AnimalInterceptor.isPreDestroyInterceptorCalled(Hen.HEN);
+        createAndDestroyInstance(Cow.class);
+        assert Cow.isPreDestroyInterceptorCalled();
+        assert AnimalInterceptor.isPreDestroyInterceptorCalled(Cow.COW);
+    }
 
-   @Test
-   @SpecAssertion(section = "5", id = "c")
-   public void testAroundInvokeAndLifeCycleCallbackInterceptorsCanBeDefinedOnTheSameClass()
-   {
-      assert getInstanceByType(Goat.class).echo("foo").equals("foofoo");
-   }
+    @SuppressWarnings("unchecked")
+    private <T extends Animal> void createAndDestroyInstance(Class<T> clazz) {
+        Bean<T> bean = getUniqueBean(clazz);
+        CreationalContext<T> ctx = getCurrentManager().createCreationalContext(bean);
+        T instance = (T) getCurrentManager().getReference(bean, clazz, ctx);
+        instance.foo(); // invoke method so that the instance is actually created
+        // destroy the instance
+        bean.destroy(instance, ctx);
+    }
 
-   @Test
-   @SpecAssertion(section = "5", id = "j")
-   public void testPublicLifecycleInterceptorMethod()
-   {
-      getInstanceByType(Chicken.class);
-      assert PublicLifecycleInterceptor.isIntercepted();
-   }
+    @Test
+    @SpecAssertion(section = "5", id = "c")
+    public void testAroundInvokeAndLifeCycleCallbackInterceptorsCanBeDefinedOnTheSameClass() {
+        assert getInstanceByType(Goat.class).echo("foo").equals("foofoo");
+    }
 
-   @Test
-   @SpecAssertion(section = "5", id = "k")
-   public void testProtectedLifecycleInterceptorMethod()
-   {
-      getInstanceByType(Chicken.class);
-      assert ProtectedLifecycleInterceptor.isIntercepted();
-   }
+    @Test
+    @SpecAssertion(section = "5", id = "j")
+    public void testPublicLifecycleInterceptorMethod() {
+        getInstanceByType(Chicken.class);
+        assert PublicLifecycleInterceptor.isIntercepted();
+    }
 
-   @Test
-   @SpecAssertion(section = "5", id = "l")
-   public void testPrivateLifecycleInterceptorMethod()
-   {
-      getInstanceByType(Chicken.class);
-      assert PrivateLifecycleInterceptor.isIntercepted();
-   }
+    @Test
+    @SpecAssertion(section = "5", id = "k")
+    public void testProtectedLifecycleInterceptorMethod() {
+        getInstanceByType(Chicken.class);
+        assert ProtectedLifecycleInterceptor.isIntercepted();
+    }
 
-   @Test
-   @SpecAssertion(section = "5", id = "m")
-   public void testPackagePrivateLifecycleInterceptorMethod()
-   {
-      getInstanceByType(Chicken.class);
-      assert PackagePrivateLifecycleInterceptor.isIntercepted();
-   }
+    @Test
+    @SpecAssertion(section = "5", id = "l")
+    public void testPrivateLifecycleInterceptorMethod() {
+        getInstanceByType(Chicken.class);
+        assert PrivateLifecycleInterceptor.isIntercepted();
+    }
 
-   @Test
-   @SpecAssertion(section = "8", id = "c")
-   public void testLifeCycleCallbackInterceptorNotInvokedForMethodLevelInterceptor()
-   {
-      assert getInstanceByType(Sheep.class).foo().equals("bar");
-      assert SheepInterceptor.isAroundInvokeCalled();
-      assert !SheepInterceptor.isPostConstructCalled();
-   }
+    @Test
+    @SpecAssertion(section = "5", id = "m")
+    public void testPackagePrivateLifecycleInterceptorMethod() {
+        getInstanceByType(Chicken.class);
+        assert PackagePrivateLifecycleInterceptor.isIntercepted();
+    }
+
+    @Test
+    @SpecAssertion(section = "8", id = "c")
+    public void testLifeCycleCallbackInterceptorNotInvokedForMethodLevelInterceptor() {
+        assert getInstanceByType(Sheep.class).foo().equals("bar");
+        assert SheepInterceptor.isAroundInvokeCalled();
+        assert !SheepInterceptor.isPostConstructCalled();
+    }
 }

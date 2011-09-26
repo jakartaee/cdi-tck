@@ -28,51 +28,45 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DependentContextEjbTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DependentContextEjbTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(DependentContextEjbTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(DependentContextEjbTest.class).build();
     }
 
-   @Test(groups = { "contexts", "ejb3", "integration"})
-   @SpecAssertion(section = "6.4.2", id = "aaab")
-   public void testDestroyingEjbDestroysDependents() throws Exception
-   {
-      assert getBeans(HouseLocal.class).size() == 1;
-      Bean<HouseLocal> bean = getBeans(HouseLocal.class).iterator().next();
-      CreationalContext<HouseLocal> creationalContext = getCurrentManager().createCreationalContext(bean);
-      HouseLocal instance = bean.create(creationalContext);
-      instance.open().getTable().lay();
-      Room.destroyed = false;
-      Table.destroyed = false;
-      House.destroyed = false;
-      bean.destroy(instance, creationalContext);
-      assert House.destroyed;
-      assert Room.destroyed;
-      assert Table.destroyed;
-   }
-   
-   @Test(groups = { "contexts", "ejb3", "integration"})
-   @SpecAssertion(section = "6.4.2", id = "aaab")
-   public void testDestroyingEjbDestroysDependentSimples() throws Exception
-   {
-      assert getBeans(FarmLocal.class).size() == 1;
-      Bean<FarmLocal> farmBean = getBeans(FarmLocal.class).iterator().next();
-      CreationalContext<FarmLocal> creationalContext = getCurrentManager().createCreationalContext(farmBean);
-      FarmLocal farm = farmBean.create(creationalContext);
-      Horse.destroyed = false;
-      Stable.destroyed = false;
-      Farm.destroyed = false;
-      farmBean.destroy(farm, creationalContext);
-      assert Farm.destroyed;
-      assert Horse.destroyed;
-      assert Stable.destroyed;
+    @Test(groups = { "contexts", "ejb3", "integration" })
+    @SpecAssertion(section = "6.4.2", id = "aaab")
+    public void testDestroyingEjbDestroysDependents() throws Exception {
+        assert getBeans(HouseLocal.class).size() == 1;
+        Bean<HouseLocal> bean = getBeans(HouseLocal.class).iterator().next();
+        CreationalContext<HouseLocal> creationalContext = getCurrentManager().createCreationalContext(bean);
+        HouseLocal instance = bean.create(creationalContext);
+        instance.open().getTable().lay();
+        Room.destroyed = false;
+        Table.destroyed = false;
+        House.destroyed = false;
+        bean.destroy(instance, creationalContext);
+        assert House.destroyed;
+        assert Room.destroyed;
+        assert Table.destroyed;
+    }
+
+    @Test(groups = { "contexts", "ejb3", "integration" })
+    @SpecAssertion(section = "6.4.2", id = "aaab")
+    public void testDestroyingEjbDestroysDependentSimples() throws Exception {
+        assert getBeans(FarmLocal.class).size() == 1;
+        Bean<FarmLocal> farmBean = getBeans(FarmLocal.class).iterator().next();
+        CreationalContext<FarmLocal> creationalContext = getCurrentManager().createCreationalContext(farmBean);
+        FarmLocal farm = farmBean.create(creationalContext);
+        Horse.destroyed = false;
+        Stable.destroyed = false;
+        Farm.destroyed = false;
+        farmBean.destroy(farm, creationalContext);
+        assert Farm.destroyed;
+        assert Horse.destroyed;
+        assert Stable.destroyed;
     }
 
 }

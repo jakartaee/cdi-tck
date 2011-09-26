@@ -32,52 +32,41 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ContextTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ContextTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ContextTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ContextTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test(expectedExceptions = { IllegalStateException.class }, groups = { "manager" })
-   @SpecAssertion(section = "6.5.1", id = "b")
-   public void testGetContextWithTooManyActiveContextsFails()
-   {
-      getCurrentManager().getContext(DummyScoped.class);
-   }
 
-   @Test(expectedExceptions = { ContextNotActiveException.class }, groups = { "manager" })
-   @SpecAssertion(section = "6.5.1", id = "a")
-   public void testGetContextWithNoRegisteredContextsFails()
-   {
-      getCurrentManager().getContext(Unregistered.class);
-   }
+    @Test(expectedExceptions = { IllegalStateException.class }, groups = { "manager" })
+    @SpecAssertion(section = "6.5.1", id = "b")
+    public void testGetContextWithTooManyActiveContextsFails() {
+        getCurrentManager().getContext(DummyScoped.class);
+    }
 
-   @Test(groups = { "contexts" })
-   @SpecAssertions({
-      @SpecAssertion(section = "2.4.1", id = "aa"),
-      @SpecAssertion(section = "2.4.1", id = "ab"),
-      @SpecAssertion(section = "2.4.1", id = "ac"),
-      @SpecAssertion(section = "2.4.1", id = "ca"),
-      @SpecAssertion(section = "11.3.14", id = "a")
-   })
-   public void testBuiltInContexts()
-   {
-      Context context = getCurrentManager().getContext(Dependent.class);
-      assert context != null;
-      context = getCurrentManager().getContext(RequestScoped.class);
-      assert context != null;
-      context = getCurrentManager().getContext(SessionScoped.class);
-      assert context != null;
-      context = getCurrentManager().getContext(ApplicationScoped.class);
-      assert context != null;
-      // Can't test conversations here, they are only available for a JSF 
-      // request. Standalone container only simulates a servlet request 
-   }
+    @Test(expectedExceptions = { ContextNotActiveException.class }, groups = { "manager" })
+    @SpecAssertion(section = "6.5.1", id = "a")
+    public void testGetContextWithNoRegisteredContextsFails() {
+        getCurrentManager().getContext(Unregistered.class);
+    }
+
+    @Test(groups = { "contexts" })
+    @SpecAssertions({ @SpecAssertion(section = "2.4.1", id = "aa"), @SpecAssertion(section = "2.4.1", id = "ab"),
+            @SpecAssertion(section = "2.4.1", id = "ac"), @SpecAssertion(section = "2.4.1", id = "ca"),
+            @SpecAssertion(section = "11.3.14", id = "a") })
+    public void testBuiltInContexts() {
+        Context context = getCurrentManager().getContext(Dependent.class);
+        assert context != null;
+        context = getCurrentManager().getContext(RequestScoped.class);
+        assert context != null;
+        context = getCurrentManager().getContext(SessionScoped.class);
+        assert context != null;
+        context = getCurrentManager().getContext(ApplicationScoped.class);
+        assert context != null;
+        // Can't test conversations here, they are only available for a JSF
+        // request. Standalone container only simulates a servlet request
+    }
 }

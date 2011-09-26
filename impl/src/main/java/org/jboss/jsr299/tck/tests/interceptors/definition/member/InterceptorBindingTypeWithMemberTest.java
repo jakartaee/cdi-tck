@@ -30,33 +30,29 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class InterceptorBindingTypeWithMemberTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InterceptorBindingTypeWithMemberTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InterceptorBindingTypeWithMemberTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InterceptorBindingTypeWithMemberTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "9.5.2", id = "a")
-   public void testInterceptorBindingTypeWithMember() {
-      Farm farm = getInstanceByType(Farm.class);
-      assert farm.getAnimalCount() == 20;
-      assert IncreasingInterceptor.isIntercepted();
-      assert !DecreasingInterceptor.isIntercepted();
-   }
-   
-   @Test
-   @SpecAssertion(section = "9.5.2", id = "b")
-   public void testInterceptorBindingTypeWithNonBindingMember() {
-      Farm farm = getInstanceByType(Farm.class);
-      assert farm.getVehicleCount() == 20;
-      assert VehicleCountInterceptor.isIntercepted();
-   }
+
+    @Test
+    @SpecAssertion(section = "9.5.2", id = "a")
+    public void testInterceptorBindingTypeWithMember() {
+        Farm farm = getInstanceByType(Farm.class);
+        assert farm.getAnimalCount() == 20;
+        assert IncreasingInterceptor.isIntercepted();
+        assert !DecreasingInterceptor.isIntercepted();
+    }
+
+    @Test
+    @SpecAssertion(section = "9.5.2", id = "b")
+    public void testInterceptorBindingTypeWithNonBindingMember() {
+        Farm farm = getInstanceByType(Farm.class);
+        assert farm.getVehicleCount() == 20;
+        assert VehicleCountInterceptor.isIntercepted();
+    }
 }

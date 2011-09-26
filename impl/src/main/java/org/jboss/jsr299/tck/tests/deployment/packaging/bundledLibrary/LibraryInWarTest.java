@@ -33,27 +33,19 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class LibraryInWarTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class LibraryInWarTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClass(LibraryInWarTest.class)
-            .withClasses(Foo.class)
-            .withBeanLibrary(Bar.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClass(LibraryInWarTest.class).withClasses(Foo.class).withBeanLibrary(Bar.class)
+                .build();
     }
 
-   @Test(groups = {})
-   @SpecAssertions({
-      @SpecAssertion(section = "12.1", id="bcb")
-   })
-   public void test()
-   {
-      assert getCurrentManager().getBeans(Foo.class).size() == 1;
-      assert getCurrentManager().getBeans(Bar.class).size() == 1;
-   }
+    @Test(groups = {})
+    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bcb") })
+    public void test() {
+        assert getCurrentManager().getBeans(Foo.class).size() == 1;
+        assert getCurrentManager().getBeans(Bar.class).size() == 1;
+    }
 }

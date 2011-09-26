@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.newBean;
 
-public class SimpleBean
-{
+public class SimpleBean {
 
 }

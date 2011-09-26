@@ -20,10 +20,11 @@ import javax.ejb.Stateful;
 import javax.enterprise.inject.Produces;
 
 @Stateful
-public class LightYellowPearTree extends YellowPearTree implements LightYellowPearTreeLocal
-{
-   @Produces @Yummy @LightYellow public Pear produceLightYellowPear()
-   {
-      return new Pear("lightYellow");
-   }
+public class LightYellowPearTree extends YellowPearTree implements LightYellowPearTreeLocal {
+    @Produces
+    @Yummy
+    @LightYellow
+    public Pear produceLightYellowPear() {
+        return new Pear("lightYellow");
+    }
 }

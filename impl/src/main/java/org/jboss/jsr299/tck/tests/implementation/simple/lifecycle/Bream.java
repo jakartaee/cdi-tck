@@ -21,7 +21,6 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 
 @SessionScoped
-public class Bream implements Serializable
-{
+public class Bream implements Serializable {
 
 }

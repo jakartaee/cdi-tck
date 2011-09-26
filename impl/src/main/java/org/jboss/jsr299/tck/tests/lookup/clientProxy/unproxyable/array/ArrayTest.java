@@ -29,25 +29,17 @@ import org.testng.annotations.Test;
 /**
  * Test for problem detection of array injection.
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ArrayTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ArrayTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ArrayTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ArrayTest.class).build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "5.4.1", id = "da"),
-      @SpecAssertion(section = "2.8", id = "b")
-   })
-   public void testInjectionPointWithArrayType()
-   {
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.4.1", id = "da"), @SpecAssertion(section = "2.8", id = "b") })
+    public void testInjectionPointWithArrayType() {
+    }
 }

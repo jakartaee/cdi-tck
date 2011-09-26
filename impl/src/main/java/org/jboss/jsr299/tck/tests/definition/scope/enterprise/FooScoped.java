@@ -27,11 +27,10 @@ import java.lang.annotation.Target;
 
 import javax.enterprise.context.NormalScope;
 
-@Target( { TYPE, METHOD, FIELD })
+@Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @Documented
 @NormalScope
-public @interface FooScoped
-{
+public @interface FooScoped {
 
 }

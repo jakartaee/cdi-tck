@@ -27,102 +27,84 @@ import org.testng.annotations.Test;
 
 /**
  * Tests for the InvocationContext implementation
+ * 
  * @author Jozef Hartinger
- *
+ * 
  */
 @SpecVersion(spec = "int", version = "3.1.PFD")
-public class InvocationContextTest extends AbstractJSR299Test
-{
-    
+public class InvocationContextTest extends AbstractJSR299Test {
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InvocationContextTest.class)
-            .build();
+        return new WebArchiveBuilder().withTestClassPackage(InvocationContextTest.class).build();
     }
-    
-   @Test
-   @SpecAssertion(section = "6", id = "d")
-   public void testGetTargetMethod()
-   {
-      SimpleBean instance = getInstanceByType(SimpleBean.class);
-      instance.setId(10);
-      assert instance.getId() == 10;
-      assert Interceptor1.isGetTargetOK();
-   }
 
-   @Test
-   @SpecAssertion(section = "6", id = "f")
-   public void testGetTimerMethod()
-   {
-      assert getInstanceByType(SimpleBean.class).testGetTimer();
-   }
+    @Test
+    @SpecAssertion(section = "6", id = "d")
+    public void testGetTargetMethod() {
+        SimpleBean instance = getInstanceByType(SimpleBean.class);
+        instance.setId(10);
+        assert instance.getId() == 10;
+        assert Interceptor1.isGetTargetOK();
+    }
 
-   @Test
-   @SpecAssertion(section = "6", id = "g")
-   public void testGetMethodForAroundInvokeInterceptorMethod()
-   {
-      assert getInstanceByType(SimpleBean.class).testGetMethod();
-   }
-   
-   @Test
-   @SpecAssertion(section = "6", id = "h")
-   public void testGetMethodForLifecycleCallbackInterceptorMethod()
-   {
-      getInstanceByType(SimpleBean.class);
-      assert LifecycleCallbackInterceptor.isGetMethodReturnsNull();
-   }
+    @Test
+    @SpecAssertion(section = "6", id = "f")
+    public void testGetTimerMethod() {
+        assert getInstanceByType(SimpleBean.class).testGetTimer();
+    }
 
-   @Test
-   @SpecAssertions( { 
-      @SpecAssertion(section = "6", id = "i"), 
-      @SpecAssertion(section = "6", id = "j"), 
-      @SpecAssertion(section = "6", id = "k")
-   })
-   public void testMethodParameters()
-   {
-      assert getInstanceByType(SimpleBean.class).add(1, 2) == 5;
-   }
+    @Test
+    @SpecAssertion(section = "6", id = "g")
+    public void testGetMethodForAroundInvokeInterceptorMethod() {
+        assert getInstanceByType(SimpleBean.class).testGetMethod();
+    }
 
-   @Test(expectedExceptions = IllegalArgumentException.class)
-   @SpecAssertion(section = "6", id = "la")
-   public void testIllegalNumberOfParameters()
-   {
-      getInstanceByType(SimpleBean.class).add2(1, 1);
-   }
+    @Test
+    @SpecAssertion(section = "6", id = "h")
+    public void testGetMethodForLifecycleCallbackInterceptorMethod() {
+        getInstanceByType(SimpleBean.class);
+        assert LifecycleCallbackInterceptor.isGetMethodReturnsNull();
+    }
 
-   @Test(expectedExceptions = IllegalArgumentException.class)
-   @SpecAssertion(section = "6", id = "lb")
-   public void testIllegalTypeOfParameters()
-   {
-      assert getInstanceByType(SimpleBean.class).add3(1, 1) == 2;
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "6", id = "i"), @SpecAssertion(section = "6", id = "j"),
+            @SpecAssertion(section = "6", id = "k") })
+    public void testMethodParameters() {
+        assert getInstanceByType(SimpleBean.class).add(1, 2) == 5;
+    }
 
-   @Test
-   @SpecAssertion(section = "6", id = "o")
-   public void testProceedReturnsNullForVoidMethod()
-   {
-      getInstanceByType(SimpleBean.class).voidMethod();
-      assert Interceptor7.isProceedReturnsNull();
-   }
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    @SpecAssertion(section = "6", id = "la")
+    public void testIllegalNumberOfParameters() {
+        getInstanceByType(SimpleBean.class).add2(1, 1);
+    }
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "1", id = "d"),
-      @SpecAssertion(section = "6", id = "a")
-   })
-   public void testContextData()
-   {
-      getInstanceByType(SimpleBean.class).foo();
-      assert Interceptor8.isContextDataOK();
-      assert Interceptor9.isContextDataOK();
-   }
-   
-   @Test
-   @SpecAssertion(section = "6", id = "n")
-   public void testBusinessMethodNotCalledWithoutProceedInvocation()
-   {
-      assert getInstanceByType(SimpleBean.class).echo("foo").equals("foo");
-      assert !SimpleBean.isEchoCalled();
-   }
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    @SpecAssertion(section = "6", id = "lb")
+    public void testIllegalTypeOfParameters() {
+        assert getInstanceByType(SimpleBean.class).add3(1, 1) == 2;
+    }
+
+    @Test
+    @SpecAssertion(section = "6", id = "o")
+    public void testProceedReturnsNullForVoidMethod() {
+        getInstanceByType(SimpleBean.class).voidMethod();
+        assert Interceptor7.isProceedReturnsNull();
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "1", id = "d"), @SpecAssertion(section = "6", id = "a") })
+    public void testContextData() {
+        getInstanceByType(SimpleBean.class).foo();
+        assert Interceptor8.isContextDataOK();
+        assert Interceptor9.isContextDataOK();
+    }
+
+    @Test
+    @SpecAssertion(section = "6", id = "n")
+    public void testBusinessMethodNotCalledWithoutProceedInvocation() {
+        assert getInstanceByType(SimpleBean.class).echo("foo").equals("foo");
+        assert !SimpleBean.isEchoCalled();
+    }
 }

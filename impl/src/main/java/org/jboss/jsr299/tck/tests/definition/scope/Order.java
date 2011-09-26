@@ -16,8 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.definition.scope;
 
-
-public class Order
-{
+public class Order {
 
 }

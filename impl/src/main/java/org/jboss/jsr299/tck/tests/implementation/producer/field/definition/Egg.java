@@ -16,20 +16,17 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
-public class Egg
-{
-   
-   private final Chicken mother;
+public class Egg {
 
-   public Egg(Chicken mother)
-   {
-      super();
-      this.mother = mother;
-   }
-   
-   public Chicken getMother()
-   {
-      return mother;
-   }
-   
+    private final Chicken mother;
+
+    public Egg(Chicken mother) {
+        super();
+        this.mother = mother;
+    }
+
+    public Chicken getMother() {
+        return mother;
+    }
+
 }

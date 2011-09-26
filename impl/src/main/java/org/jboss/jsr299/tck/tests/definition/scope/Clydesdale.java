@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.definition.scope;
 
-public class Clydesdale extends Horse
-{
+public class Clydesdale extends Horse {
 
 }

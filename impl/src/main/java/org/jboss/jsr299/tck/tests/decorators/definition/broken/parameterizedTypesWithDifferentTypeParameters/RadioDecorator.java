@@ -23,8 +23,8 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class RadioDecorator implements Radio<String, List<Number>>
-{
-   @Inject @Delegate
-   Radio<String, List<Integer>> delegate;
+public class RadioDecorator implements Radio<String, List<Number>> {
+    @Inject
+    @Delegate
+    Radio<String, List<Integer>> delegate;
 }

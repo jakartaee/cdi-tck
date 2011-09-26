@@ -22,12 +22,13 @@ import javax.inject.Inject;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
-public class FieldDecorator implements Field
-{
+public class FieldDecorator implements Field {
 
-   @Inject @Delegate Field field;
+    @Inject
+    @Delegate
+    Field field;
 
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessDecorator;
 
-public interface Dog extends BulldogLocal_Broken
-{
-   void foo();
+public interface Dog extends BulldogLocal_Broken {
+    void foo();
 }

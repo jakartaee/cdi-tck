@@ -27,36 +27,28 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DecoratorAndInterceptorTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DecoratorAndInterceptorTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DecoratorAndInterceptorTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DecoratorAndInterceptorTest.class).withBeansXml("beans.xml")
+                .build();
     }
-    
-   @Test
-   @SpecAssertions
-   ({
-      @SpecAssertion(section = "8.2", id = "f")
-   })
-   public void testInterceptorCalledBeforeDecorator()
-   {
-       CallOrder.resetCallers();
-       Foo foo = getInstanceByType(Foo.class);
-       
-       foo.doSomething();
-       
-       List<String> callers = CallOrder.callers();
-          
-       assert callers.size() == 2;
-       assert callers.get(0).equals(FooInterceptor.NAME);
-       assert callers.get(1).equals(FooDecorator.NAME);
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.2", id = "f") })
+    public void testInterceptorCalledBeforeDecorator() {
+        CallOrder.resetCallers();
+        Foo foo = getInstanceByType(Foo.class);
+
+        foo.doSomething();
+
+        List<String> callers = CallOrder.callers();
+
+        assert callers.size() == 2;
+        assert callers.get(0).equals(FooInterceptor.NAME);
+        assert callers.get(1).equals(FooDecorator.NAME);
+    }
 
 }

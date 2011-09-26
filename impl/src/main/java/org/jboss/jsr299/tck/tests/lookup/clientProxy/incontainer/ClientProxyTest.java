@@ -29,31 +29,26 @@ import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ClientProxyTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ClientProxyTest extends AbstractJSR299Test {
+
     @ArquillianResource
     private URL contextPath;
-    
-    @Deployment(testable=false)
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ClientProxyTest.class)
-            .withWebXml("web.xml")
-            .build();
+
+    @Deployment(testable = false)
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ClientProxyTest.class).withWebXml("web.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "5.4", id = "d")
-   public void testInvocationIsProcessedOnCurrentInstance() throws Exception {
-      WebClient webClient = new WebClient();
-      webClient.setThrowExceptionOnFailingStatusCode(true);
-      String response;
-      response = webClient.getPage(contextPath + "Test/Garage?make=Honda").getWebResponse().getContentAsString();
-      assert response.contains("Honda");
-      response = webClient.getPage(contextPath + "Test/Garage?make=Toyota").getWebResponse().getContentAsString();
-      assert response.contains("Toyota");
-   }
+
+    @Test
+    @SpecAssertion(section = "5.4", id = "d")
+    public void testInvocationIsProcessedOnCurrentInstance() throws Exception {
+        WebClient webClient = new WebClient();
+        webClient.setThrowExceptionOnFailingStatusCode(true);
+        String response;
+        response = webClient.getPage(contextPath + "Test/Garage?make=Honda").getWebResponse().getContentAsString();
+        assert response.contains("Honda");
+        response = webClient.getPage(contextPath + "Test/Garage?make=Toyota").getWebResponse().getContentAsString();
+        assert response.contains("Toyota");
+    }
 }

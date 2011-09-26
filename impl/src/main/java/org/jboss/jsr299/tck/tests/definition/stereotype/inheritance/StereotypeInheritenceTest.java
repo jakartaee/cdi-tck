@@ -34,32 +34,23 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class StereotypeInheritenceTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class StereotypeInheritenceTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-         return new WebArchiveBuilder()
-             .withTestClassPackage(StereotypeInheritenceTest.class)
-             .withBeansXml("beans.xml")
-             .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(StereotypeInheritenceTest.class).withBeansXml("beans.xml").build();
     }
-   
-   @Test
-   @SpecAssertions( {
-      @SpecAssertion(section = "2.7.1.5", id = "a"), 
-      @SpecAssertion(section = "2.7.1.5", id = "b") 
-   })
-   public void testInheritence()
-   {
-      Set<Bean<Horse>> beans = getBeans(Horse.class);
-      assert beans.size() == 1;
-      Bean<Horse> bean = beans.iterator().next();
-      assert bean.getScope().equals(RequestScoped.class);
-      assert bean.isAlternative();
-      assert bean.getName().equals("horse");
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "2.7.1.5", id = "a"), @SpecAssertion(section = "2.7.1.5", id = "b") })
+    public void testInheritence() {
+        Set<Bean<Horse>> beans = getBeans(Horse.class);
+        assert beans.size() == 1;
+        Bean<Horse> bean = beans.iterator().next();
+        assert bean.getScope().equals(RequestScoped.class);
+        assert bean.isAlternative();
+        assert bean.getName().equals("horse");
+    }
 
 }

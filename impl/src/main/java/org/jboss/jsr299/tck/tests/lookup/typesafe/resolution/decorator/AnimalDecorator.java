@@ -21,12 +21,12 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class AnimalDecorator implements Animal
-{
-   @Inject @Delegate Animal bean;
+public class AnimalDecorator implements Animal {
+    @Inject
+    @Delegate
+    Animal bean;
 
-   public String hello()
-   {
-      return bean.hello() + " world!";
-   }
+    public String hello() {
+        return bean.hello() + " world!";
+    }
 }

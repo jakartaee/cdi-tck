@@ -30,53 +30,44 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
-public class UnsatisfiedInjectionPoint implements InjectionPoint
-{
+public class UnsatisfiedInjectionPoint implements InjectionPoint {
 
-   private final Bean<SimpleBean> bean;
-   private final Set<Annotation> bindings = new HashSet<Annotation>();
-   
-   public UnsatisfiedInjectionPoint(Bean<SimpleBean> beanWithInjectionPoint)
-   {
-      this.bean = beanWithInjectionPoint;
-      bindings.add(new DefaultLiteral());
-      bindings.add(new AnyLiteral());
-   }
+    private final Bean<SimpleBean> bean;
+    private final Set<Annotation> bindings = new HashSet<Annotation>();
 
-   public Annotated getAnnotated()
-   {
-      return new AnnotatedInjectionField(this);
-   }
+    public UnsatisfiedInjectionPoint(Bean<SimpleBean> beanWithInjectionPoint) {
+        this.bean = beanWithInjectionPoint;
+        bindings.add(new DefaultLiteral());
+        bindings.add(new AnyLiteral());
+    }
 
-   public Bean<?> getBean()
-   {
-      return bean;
-   }
+    public Annotated getAnnotated() {
+        return new AnnotatedInjectionField(this);
+    }
 
-   public Set<Annotation> getQualifiers()
-   {
-      return bindings;
-   }
+    public Bean<?> getBean() {
+        return bean;
+    }
 
-   @SuppressWarnings("unchecked")
-   public Member getMember()
-   {
-      return ((AnnotatedField<SimpleBean>)getAnnotated()).getJavaMember();
-   }
+    public Set<Annotation> getQualifiers() {
+        return bindings;
+    }
 
-   public Type getType()
-   {
-      return InjectedBean.class;
-   }
+    @SuppressWarnings("unchecked")
+    public Member getMember() {
+        return ((AnnotatedField<SimpleBean>) getAnnotated()).getJavaMember();
+    }
 
-   public boolean isDelegate()
-   {
-      return false;
-   }
+    public Type getType() {
+        return InjectedBean.class;
+    }
 
-   public boolean isTransient()
-   {
-      return false;
-   }
+    public boolean isDelegate() {
+        return false;
+    }
+
+    public boolean isTransient() {
+        return false;
+    }
 
 }

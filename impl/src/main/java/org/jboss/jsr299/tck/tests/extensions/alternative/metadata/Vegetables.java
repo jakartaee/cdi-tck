@@ -18,7 +18,6 @@ package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 import java.io.Serializable;
 
-public class Vegetables implements Serializable
-{
+public class Vegetables implements Serializable {
 
 }

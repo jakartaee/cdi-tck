@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
 @Cheap
-public class Water
-{
+public class Water {
 
 }

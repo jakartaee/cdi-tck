@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -25,72 +25,59 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 /**
- * TODO check if possible to remove - not used in TCK 
+ * TODO check if possible to remove - not used in TCK
  */
-public abstract class ForwardingBean<T> implements Bean<T>
-{
-   
-   protected ForwardingBean()
-   {
-   }
+public abstract class ForwardingBean<T> implements Bean<T> {
 
-   protected abstract Bean<T> delegate();
+    protected ForwardingBean() {
+    }
 
-   public Set<Annotation> getQualifiers()
-   {
-      return delegate().getQualifiers();
-   }
+    protected abstract Bean<T> delegate();
 
-   public Set<InjectionPoint> getInjectionPoints()
-   {
-      return delegate().getInjectionPoints();
-   }
+    public Set<Annotation> getQualifiers() {
+        return delegate().getQualifiers();
+    }
 
-   public String getName()
-   {
-      return delegate().getName();
-   }
+    public Set<InjectionPoint> getInjectionPoints() {
+        return delegate().getInjectionPoints();
+    }
 
-   public Class<? extends Annotation> getScope()
-   {
-      return delegate().getScope();
-   }
+    public String getName() {
+        return delegate().getName();
+    }
 
-   public Set<Type> getTypes()
-   {
-      return delegate().getTypes();
-   }
+    public Class<? extends Annotation> getScope() {
+        return delegate().getScope();
+    }
 
-   public boolean isNullable()
-   {
-      return delegate().isNullable();
-   }
+    public Set<Type> getTypes() {
+        return delegate().getTypes();
+    }
 
-   public T create(CreationalContext<T> creationalContext)
-   {
-      return delegate().create(creationalContext);
-   }
+    public boolean isNullable() {
+        return delegate().isNullable();
+    }
 
-   public void destroy(T instance, CreationalContext<T> creationalContext)
-   {
-      delegate().destroy(instance, creationalContext);
-   }
-   
-   @Override
-   public boolean equals(Object obj)
-   {
-      return delegate().equals(obj);
-   }
-   
-   @Override
-   public String toString()
-   {
-      return delegate().toString();
-   }
-   
-   @Override
-   public int hashCode()
-   {
-      return delegate().hashCode();
-   }
+    public T create(CreationalContext<T> creationalContext) {
+        return delegate().create(creationalContext);
+    }
+
+    public void destroy(T instance, CreationalContext<T> creationalContext) {
+        delegate().destroy(instance, creationalContext);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return delegate().equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return delegate().toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return delegate().hashCode();
+    }
 }

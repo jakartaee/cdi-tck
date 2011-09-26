@@ -19,12 +19,12 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.interceptorCalledBefo
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-public class TransactionInterceptor
-{
-   @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
-   {
-      if (!FooImpl.decoratorCalledFirst) FooImpl.interceptorCalledFirst = true;
-      
-      return ctx.proceed();
-   }
+public class TransactionInterceptor {
+    @AroundInvoke
+    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
+        if (!FooImpl.decoratorCalledFirst)
+            FooImpl.interceptorCalledFirst = true;
+
+        return ctx.proceed();
+    }
 }

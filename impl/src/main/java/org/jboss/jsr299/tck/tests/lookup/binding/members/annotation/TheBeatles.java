@@ -18,12 +18,11 @@ package org.jboss.jsr299.tck.tests.lookup.binding.members.annotation;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class TheBeatles
-{
-   
-   @Expensive_Broken(member = @SimpleAnnotation) Watch watch;
-   
+public class TheBeatles {
+
+    @Expensive_Broken(member = @SimpleAnnotation)
+    Watch watch;
 
 }

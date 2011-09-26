@@ -22,17 +22,14 @@ import javax.enterprise.inject.New;
 import org.jboss.jsr299.tck.literals.NewLiteral;
 
 @Local
-public interface LionLocal
-{
-   void remove();
-   
-   public static final New NEW = new NewLiteral()
-   {
-      
-      public Class<?> value()
-      {
-         return Lion.class;
-      }
-   };
-   
+public interface LionLocal {
+    void remove();
+
+    public static final New NEW = new NewLiteral() {
+
+        public Class<?> value() {
+            return Lion.class;
+        }
+    };
+
 }

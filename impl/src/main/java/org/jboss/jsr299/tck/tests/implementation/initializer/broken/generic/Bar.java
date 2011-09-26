@@ -21,11 +21,9 @@ import java.util.List;
 
 import javax.enterprise.inject.Produces;
 
-public class Bar
-{
-   @Produces
-   public List<Integer> produceInts()
-   {
-      return Collections.emptyList();
-   }
+public class Bar {
+    @Produces
+    public List<Integer> produceInts() {
+        return Collections.emptyList();
+    }
 }

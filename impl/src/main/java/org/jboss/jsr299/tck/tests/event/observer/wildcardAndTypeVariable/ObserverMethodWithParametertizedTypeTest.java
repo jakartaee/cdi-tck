@@ -17,8 +17,6 @@
 
 package org.jboss.jsr299.tck.tests.event.observer.wildcardAndTypeVariable;
 
-
-
 import java.util.List;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -30,43 +28,37 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests an observer method defined to observe an event type which
- * is generic and a type variable
+ * Tests an observer method defined to observe an event type which is generic and a type variable
  * 
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ObserverMethodWithParametertizedTypeTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ObserverMethodWithParametertizedTypeTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ObserverMethodWithParametertizedTypeTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ObserverMethodWithParametertizedTypeTest.class).build();
     }
-    
-   @Test(groups = { "events"})
-   @SpecAssertion(section = "10.4.1", id = "cb")
-   public void testObserverMethodCanObserveTypeVariable()
-   {
-      BostonTerrier.observed = false;
-      Behavior event = new Behavior() {};
-      getCurrentManager().fireEvent(event);
-      assert BostonTerrier.observed;
-   }
-   
-   @Test(groups = { "events" })
-   @SpecAssertion(section = "10.4.1", id = "ca")
-   public void testObserverMethodCanObserveWildcardType()
-   {
-      WildBostonTerrier.observed = false;
-      // TODO Not sure if this should match a wildcard event, I think it should as ? is an upper bound of all types PLM
-      List<Object> event = new ObjectList();
-      getCurrentManager().fireEvent(event);
-      assert WildBostonTerrier.observed;
-   }
+
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "10.4.1", id = "cb")
+    public void testObserverMethodCanObserveTypeVariable() {
+        BostonTerrier.observed = false;
+        Behavior event = new Behavior() {
+        };
+        getCurrentManager().fireEvent(event);
+        assert BostonTerrier.observed;
+    }
+
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "10.4.1", id = "ca")
+    public void testObserverMethodCanObserveWildcardType() {
+        WildBostonTerrier.observed = false;
+        // TODO Not sure if this should match a wildcard event, I think it should as ? is an upper bound of all types PLM
+        List<Object> event = new ObjectList();
+        getCurrentManager().fireEvent(event);
+        assert WildBostonTerrier.observed;
+    }
 
 }

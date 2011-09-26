@@ -20,7 +20,7 @@ package org.jboss.jsr299.tck.tests.decorators.interceptor;
 public class FooStuff implements Foo {
 
     public void doSomething() {
-              
+
     }
 
 }

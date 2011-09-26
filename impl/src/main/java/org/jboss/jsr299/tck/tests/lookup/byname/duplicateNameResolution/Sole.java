@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.lookup.byname.duplicateNameResolution;
 import javax.inject.Named;
 
 @Named("whitefish")
-public class Sole
-{
+public class Sole {
 
 }

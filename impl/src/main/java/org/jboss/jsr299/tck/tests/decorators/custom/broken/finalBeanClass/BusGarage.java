@@ -18,13 +18,11 @@ package org.jboss.jsr299.tck.tests.decorators.custom.broken.finalBeanClass;
 
 import javax.inject.Inject;
 
-public class BusGarage
-{
-   @Inject
-   private Bus bus;
+public class BusGarage {
+    @Inject
+    private Bus bus;
 
-   public Bus getBus()
-   {
-      return bus;
-   }
+    public Bus getBus() {
+        return bus;
+    }
 }

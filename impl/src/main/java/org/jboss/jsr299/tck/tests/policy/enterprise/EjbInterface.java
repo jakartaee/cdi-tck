@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.policy.enterprise;
 import javax.ejb.Local;
 
 @Local
-public interface EjbInterface
-{
-   String hello();
+public interface EjbInterface {
+    String hello();
 }

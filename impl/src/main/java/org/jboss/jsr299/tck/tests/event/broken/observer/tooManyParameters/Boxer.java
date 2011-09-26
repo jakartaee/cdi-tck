@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer.tooManyParameters;
 
-public class Boxer
-{
+public class Boxer {
 }

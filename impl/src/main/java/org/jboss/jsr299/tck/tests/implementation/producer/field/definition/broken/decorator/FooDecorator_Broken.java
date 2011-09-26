@@ -22,17 +22,16 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
 @Decorator
-public class FooDecorator_Broken implements Foo
-{
-   @Inject @Delegate
-   private Foo delegate;
-   
-   public boolean foo()
-   {
-      return !delegate.foo();
-   }
+public class FooDecorator_Broken implements Foo {
+    @Inject
+    @Delegate
+    private Foo delegate;
 
-   @SuppressWarnings("unused")
-   @Produces
-   private Integer zero = 0;
+    public boolean foo() {
+        return !delegate.foo();
+    }
+
+    @SuppressWarnings("unused")
+    @Produces
+    private Integer zero = 0;
 }

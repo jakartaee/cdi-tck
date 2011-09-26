@@ -17,7 +17,6 @@
 
 package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.decorator;
 
-public interface Foo
-{
-   boolean foo();
+public interface Foo {
+    boolean foo();
 }

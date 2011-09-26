@@ -21,7 +21,6 @@ import javax.enterprise.inject.Alternative;
 
 @Alternative
 @RequestScoped
-public class Chicken implements Animal
-{
+public class Chicken implements Animal {
 
 }

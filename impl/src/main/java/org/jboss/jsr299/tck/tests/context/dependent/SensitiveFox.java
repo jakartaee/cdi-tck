@@ -25,38 +25,32 @@ import javax.inject.Named;
 @Dependent
 @Named
 @Default
-public class SensitiveFox
-{
-   private final BeanManager beanManager;
+public class SensitiveFox {
+    private final BeanManager beanManager;
 
-   private boolean dependentContextActiveDuringCreate = false;
-   
-   private static boolean dependentContextActiveDuringEval = false;
+    private boolean dependentContextActiveDuringCreate = false;
 
-   @Inject
-   public SensitiveFox(BeanManager beanManager)
-   {
-      dependentContextActiveDuringCreate = beanManager.getContext(Dependent.class).isActive();
-      this.beanManager = beanManager;
-   }
+    private static boolean dependentContextActiveDuringEval = false;
 
-   public String getName()
-   {
-      if (beanManager.getContext(Dependent.class).isActive())
-      {
-         dependentContextActiveDuringEval = true;
-      }
-      return "gavin";
-   }
+    @Inject
+    public SensitiveFox(BeanManager beanManager) {
+        dependentContextActiveDuringCreate = beanManager.getContext(Dependent.class).isActive();
+        this.beanManager = beanManager;
+    }
 
-   public boolean isDependentContextActiveDuringCreate()
-   {
-      return dependentContextActiveDuringCreate;
-   }
+    public String getName() {
+        if (beanManager.getContext(Dependent.class).isActive()) {
+            dependentContextActiveDuringEval = true;
+        }
+        return "gavin";
+    }
 
-   public static boolean isDependentContextActiveDuringEval()
-   {
-      return dependentContextActiveDuringEval;
-   }
+    public boolean isDependentContextActiveDuringCreate() {
+        return dependentContextActiveDuringCreate;
+    }
+
+    public static boolean isDependentContextActiveDuringEval() {
+        return dependentContextActiveDuringEval;
+    }
 
 }

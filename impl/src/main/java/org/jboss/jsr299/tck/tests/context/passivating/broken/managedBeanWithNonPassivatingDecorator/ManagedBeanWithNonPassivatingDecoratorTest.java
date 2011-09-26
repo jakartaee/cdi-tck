@@ -25,24 +25,19 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ManagedBeanWithNonPassivatingDecoratorTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ManagedBeanWithNonPassivatingDecoratorTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        //  Originally EAR but no enterprise feature used
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ManagedBeanWithNonPassivatingDecoratorTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        // Originally EAR but no enterprise feature used
+        return new WebArchiveBuilder().withTestClassPackage(ManagedBeanWithNonPassivatingDecoratorTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test(groups = { "contexts", "passivation", "integration"})
-   @SpecAssertion(section = "6.6.4", id = "ha")
-   public void testManagedBeanWithNonPassivatingDecoratorFails()
-   {
-   }
+
+    @Test(groups = { "contexts", "passivation", "integration" })
+    @SpecAssertion(section = "6.6.4", id = "ha")
+    public void testManagedBeanWithNonPassivatingDecoratorFails() {
+    }
 }

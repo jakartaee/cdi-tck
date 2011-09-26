@@ -26,19 +26,17 @@ import javax.ws.rs.Produces;
  * RESTful web service which returns a value from an application scoped bean.
  * 
  * @author David Allen
- *
+ * 
  */
 @Path("/application-id")
-public class ApplicationResource
-{
-    
+public class ApplicationResource {
+
     @Inject
     SimpleApplicationBean simpleApplicationBean;
 
-   @GET
-   @Produces("text/plain")
-   public String getValue()
-   {
-      return Double.toString(simpleApplicationBean.getId());
-   }
+    @GET
+    @Produces("text/plain")
+    public String getValue() {
+        return Double.toString(simpleApplicationBean.getId());
+    }
 }

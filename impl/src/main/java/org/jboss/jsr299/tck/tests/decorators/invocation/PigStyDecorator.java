@@ -23,27 +23,24 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class PigStyDecorator implements PigSty, Serializable
-{
-   private static boolean decoratorCalled = false;
-   
-   public static boolean isDecoratorCalled()
-   {
-      return decoratorCalled;
-   }
-   
-   public static void reset()
-   {
-      decoratorCalled = false;
-   }
+public class PigStyDecorator implements PigSty, Serializable {
+    private static boolean decoratorCalled = false;
 
-   @Inject @Delegate
-   transient PigSty pigSty;
+    public static boolean isDecoratorCalled() {
+        return decoratorCalled;
+    }
 
-   public void clean()
-   {
-      decoratorCalled = true;
-      pigSty.clean();
-   }
+    public static void reset() {
+        decoratorCalled = false;
+    }
+
+    @Inject
+    @Delegate
+    transient PigSty pigSty;
+
+    public void clean() {
+        decoratorCalled = true;
+        pigSty.clean();
+    }
 
 }

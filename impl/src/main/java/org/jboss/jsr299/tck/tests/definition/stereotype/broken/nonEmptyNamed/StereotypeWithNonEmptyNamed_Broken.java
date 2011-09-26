@@ -26,9 +26,8 @@ import javax.enterprise.inject.Stereotype;
 import javax.inject.Named;
 
 @Stereotype
-@Target( { TYPE })
+@Target({ TYPE })
 @Retention(RUNTIME)
 @Named("foo")
-public @interface StereotypeWithNonEmptyNamed_Broken
-{
+public @interface StereotypeWithNonEmptyNamed_Broken {
 }

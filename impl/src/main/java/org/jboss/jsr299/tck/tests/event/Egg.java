@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.event;
 
-public class Egg extends EventPayload
-{
+public class Egg extends EventPayload {
 }

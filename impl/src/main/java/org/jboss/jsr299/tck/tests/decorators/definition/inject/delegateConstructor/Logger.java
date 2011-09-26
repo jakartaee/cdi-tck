@@ -16,14 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.inject.delegateConstructor;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Logger
-{
+public interface Logger {
 
-   public void log(String string);
+    public void log(String string);
 
 }

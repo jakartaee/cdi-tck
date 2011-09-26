@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.broken.producesUnallowed;
 
-public class Spider
-{
+public class Spider {
 }

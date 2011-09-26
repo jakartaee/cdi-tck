@@ -16,9 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.interceptorOrder;
 
-
 @Secure
-public class Foo
-{
-   public void bar() {}
+public class Foo {
+    public void bar() {
+    }
 }

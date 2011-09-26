@@ -26,26 +26,19 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "3.1.PFD")
-public class InvocationOrderTest extends AbstractJSR299Test
-{
-    
+public class InvocationOrderTest extends AbstractJSR299Test {
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InvocationOrderTest.class)
-            .build();
+        return new WebArchiveBuilder().withTestClassPackage(InvocationOrderTest.class).build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "5.1", id = "c"),
-      @SpecAssertion(section = "5.1", id = "d"),
-      @SpecAssertion(section = "5.1", id = "e"),
-      @SpecAssertion(section = "5.1", id = "f")
-   })
-   public void testInvocationOrder() {
-      getInstanceByType(LakeCargoShip.class);
-      int s = LakeCargoShip.getSequence();
-      assert LakeCargoShip.getSequence() == 7;
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.1", id = "c"), @SpecAssertion(section = "5.1", id = "d"),
+            @SpecAssertion(section = "5.1", id = "e"), @SpecAssertion(section = "5.1", id = "f") })
+    public void testInvocationOrder() {
+        getInstanceByType(LakeCargoShip.class);
+        int s = LakeCargoShip.getSequence();
+        assert LakeCargoShip.getSequence() == 7;
+    }
 }

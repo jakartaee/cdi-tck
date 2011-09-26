@@ -16,16 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
-public class Yogurt
-{
-   private TropicalFruit fruit;
-   
-   public Yogurt(TropicalFruit fruit) {
-      this.fruit = fruit;
-   }
+public class Yogurt {
+    private TropicalFruit fruit;
 
-   public TropicalFruit getFruit()
-   {
-      return fruit;
-   }
+    public Yogurt(TropicalFruit fruit) {
+        this.fruit = fruit;
+    }
+
+    public TropicalFruit getFruit() {
+        return fruit;
+    }
 }

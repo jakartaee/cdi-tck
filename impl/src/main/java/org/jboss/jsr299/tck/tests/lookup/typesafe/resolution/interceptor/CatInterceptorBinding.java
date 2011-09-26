@@ -28,8 +28,7 @@ import javax.interceptor.InterceptorBinding;
 
 @Inherited
 @InterceptorBinding
-@Target( { TYPE, METHOD })
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
-public @interface CatInterceptorBinding
-{
+public @interface CatInterceptorBinding {
 }

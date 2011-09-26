@@ -20,8 +20,8 @@ import javax.enterprise.inject.Default;
 import javax.inject.Named;
 
 @EnabledPolicyStereotype
-@Named @Default
-public class Cat implements Animal
-{
+@Named
+@Default
+public class Cat implements Animal {
 
 }

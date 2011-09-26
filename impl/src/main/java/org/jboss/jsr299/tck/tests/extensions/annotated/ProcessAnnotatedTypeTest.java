@@ -33,58 +33,44 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ProcessAnnotatedTypeTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ProcessAnnotatedTypeTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ProcessAnnotatedTypeTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ProcessAnnotatedTypeTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.5", id = "a"),
-      @SpecAssertion(section = "12.3", id = "ba")
-   })
-   public void testProcessAnnotatedTypeEventsSent()
-   {
-      // Randomly test some of the classes and interfaces that should have
-      // been discovered and sent via the event
-      assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(AbstractC.class);
-      assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(ClassD.class);
-      assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Dog.class);
-      assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(InterfaceA.class);
-      //assert !ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Tame.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.5.5", id = "ba")
-   public void testGetAnnotatedType()
-   {
-      assert ProcessAnnotatedTypeObserver.getDogAnnotatedType().getBaseType().equals(Dog.class);
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.5", id = "bb"),
-      @SpecAssertion(section = "11.5.5", id = "ca")
-   })
-   public void testSetAnnotatedType()
-   {
-      assert TestAnnotatedType.isGetConstructorsUsed();
-      assert TestAnnotatedType.isGetFieldsUsed();
-      assert TestAnnotatedType.isGetMethodsUsed();
-   }
-   
-   @Test
-   @SpecAssertion(section = "11.5.5", id = "bc")
-   public void testVeto()
-   {
-      assert getCurrentManager().getBeans(VetoedBean.class).isEmpty();
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.5", id = "a"), @SpecAssertion(section = "12.3", id = "ba") })
+    public void testProcessAnnotatedTypeEventsSent() {
+        // Randomly test some of the classes and interfaces that should have
+        // been discovered and sent via the event
+        assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(AbstractC.class);
+        assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(ClassD.class);
+        assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Dog.class);
+        assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(InterfaceA.class);
+        // assert !ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Tame.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.5", id = "ba")
+    public void testGetAnnotatedType() {
+        assert ProcessAnnotatedTypeObserver.getDogAnnotatedType().getBaseType().equals(Dog.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.5", id = "bb"), @SpecAssertion(section = "11.5.5", id = "ca") })
+    public void testSetAnnotatedType() {
+        assert TestAnnotatedType.isGetConstructorsUsed();
+        assert TestAnnotatedType.isGetFieldsUsed();
+        assert TestAnnotatedType.isGetMethodsUsed();
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.5", id = "bc")
+    public void testVeto() {
+        assert getCurrentManager().getBeans(VetoedBean.class).isEmpty();
+    }
 }

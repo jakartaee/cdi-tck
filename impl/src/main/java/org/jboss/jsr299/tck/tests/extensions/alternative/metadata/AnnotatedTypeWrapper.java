@@ -24,33 +24,27 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-public class AnnotatedTypeWrapper<X> extends AnnotatedWrapper implements AnnotatedType<X>
-{
-   private AnnotatedType<X> delegate;
-   
-   public AnnotatedTypeWrapper(AnnotatedType<X> delegate, boolean keepOriginalAnnotations, Annotation...annotations)
-   {
-      super(delegate, keepOriginalAnnotations, annotations);
-      this.delegate = delegate;
-   }
+public class AnnotatedTypeWrapper<X> extends AnnotatedWrapper implements AnnotatedType<X> {
+    private AnnotatedType<X> delegate;
 
-   public Set<AnnotatedConstructor<X>> getConstructors()
-   {
-      return delegate.getConstructors();
-   }
+    public AnnotatedTypeWrapper(AnnotatedType<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
+        super(delegate, keepOriginalAnnotations, annotations);
+        this.delegate = delegate;
+    }
 
-   public Set<AnnotatedField<? super X>> getFields()
-   {
-      return delegate.getFields();
-   }
+    public Set<AnnotatedConstructor<X>> getConstructors() {
+        return delegate.getConstructors();
+    }
 
-   public Class<X> getJavaClass()
-   {
-      return delegate.getJavaClass();
-   }
+    public Set<AnnotatedField<? super X>> getFields() {
+        return delegate.getFields();
+    }
 
-   public Set<AnnotatedMethod<? super X>> getMethods()
-   {
-      return delegate.getMethods();
-   }
+    public Class<X> getJavaClass() {
+        return delegate.getJavaClass();
+    }
+
+    public Set<AnnotatedMethod<? super X>> getMethods() {
+        return delegate.getMethods();
+    }
 }

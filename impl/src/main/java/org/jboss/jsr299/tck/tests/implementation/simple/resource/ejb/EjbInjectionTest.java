@@ -34,46 +34,34 @@ import org.testng.annotations.Test;
  * 
  * @author David Allen
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class EjbInjectionTest extends AbstractJSR299Test
-{
-   
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EjbInjectionTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EjbInjectionTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EjbInjectionTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertions({
-      @SpecAssertion(section = "3.5.1", id = "ee"),
-      @SpecAssertion(section = "7.3.6", id = "ld"),
-      @SpecAssertion(section = "7.3.6", id = "mg")
-   })
-   public void testInjectionOfEjbs()
-   {
-      Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
-      CreationalContext<ManagedBean> creationalContext = getCurrentManager().createCreationalContext(managedBean);
-      ManagedBean instance = managedBean.create(creationalContext);
-      assert instance.getMyEjb() != null : "EJB reference was not produced and injected into bean";
-      assert instance.getMyEjb().knockKnock().equals("We're home");
-   }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-   @SpecAssertions({
-      @SpecAssertion(section = "7.3.6", id = "mh")
-   })
-   public void testPassivationOfEjbs() throws Exception
-   {
-      Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
-      CreationalContext<ManagedBean> creationalContext = getCurrentManager().createCreationalContext(managedBean);
-      ManagedBean instance = managedBean.create(creationalContext);
-      instance = (ManagedBean) deserialize(serialize(instance));
-      assert instance.getMyEjb() != null : "EJB reference was not produced and injected into bean";
-      assert instance.getMyEjb().knockKnock().equals("We're home");
-   }
+
+    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "ee"), @SpecAssertion(section = "7.3.6", id = "ld"),
+            @SpecAssertion(section = "7.3.6", id = "mg") })
+    public void testInjectionOfEjbs() {
+        Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
+        CreationalContext<ManagedBean> creationalContext = getCurrentManager().createCreationalContext(managedBean);
+        ManagedBean instance = managedBean.create(creationalContext);
+        assert instance.getMyEjb() != null : "EJB reference was not produced and injected into bean";
+        assert instance.getMyEjb().knockKnock().equals("We're home");
+    }
+
+    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "mh") })
+    public void testPassivationOfEjbs() throws Exception {
+        Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
+        CreationalContext<ManagedBean> creationalContext = getCurrentManager().createCreationalContext(managedBean);
+        ManagedBean instance = managedBean.create(creationalContext);
+        instance = (ManagedBean) deserialize(serialize(instance));
+        assert instance.getMyEjb() != null : "EJB reference was not produced and injected into bean";
+        assert instance.getMyEjb().knockKnock().equals("We're home");
+    }
 
 }

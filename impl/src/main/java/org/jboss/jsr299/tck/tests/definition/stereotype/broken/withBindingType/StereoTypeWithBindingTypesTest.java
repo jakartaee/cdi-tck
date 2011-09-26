@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.definition.stereotype.broken.withBindingType;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -24,23 +23,18 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecVersion;
 
 //@ExpectedDeploymentException(DefinitionError.class)
-@SpecVersion(spec="cdi", version="20091018")
-public class StereoTypeWithBindingTypesTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091018")
+public class StereoTypeWithBindingTypesTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-         return new WebArchiveBuilder()
-             .withTestClassPackage(StereoTypeWithBindingTypesTest.class)
-             .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(StereoTypeWithBindingTypesTest.class).build();
     }
-   
-   // @Test
-   //@SpecAssertion(section = "2.7.1.3", id = "b")  now untestable
-   public void testStereotypeWithBindingTypes()
-   {
-      assert false;
-   }
-   
+
+    // @Test
+    // @SpecAssertion(section = "2.7.1.3", id = "b") now untestable
+    public void testStereotypeWithBindingTypes() {
+        assert false;
+    }
+
 }

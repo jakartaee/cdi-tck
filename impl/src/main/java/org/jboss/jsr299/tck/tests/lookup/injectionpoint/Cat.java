@@ -20,22 +20,22 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
-public class Cat implements Animal
-{
-   @Inject private InjectionPoint injectionPoint;
-   
-   @Inject private BeanManager beanManager;
-   
-   public String hello() {
-      return "hello";
-   }
-   
-   public InjectionPoint getInjectionPoint() {
-      return injectionPoint;
-   }
+public class Cat implements Animal {
+    @Inject
+    private InjectionPoint injectionPoint;
 
-   public BeanManager getBeanManager()
-   {
-      return beanManager;
-   }
+    @Inject
+    private BeanManager beanManager;
+
+    public String hello() {
+        return "hello";
+    }
+
+    public InjectionPoint getInjectionPoint() {
+        return injectionPoint;
+    }
+
+    public BeanManager getBeanManager() {
+        return beanManager;
+    }
 }

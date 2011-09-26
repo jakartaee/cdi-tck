@@ -31,52 +31,45 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * TODO This test specifically tests session beans even though the assertions are true
- * for all managed beans. So likely there should be a parallel set of tests for session
- * and other managed beans.
+ * TODO This test specifically tests session beans even though the assertions are true for all managed beans. So likely there
+ * should be a parallel set of tests for session and other managed beans.
  * 
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseQualifierDefinitionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseQualifierDefinitionTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseQualifierDefinitionTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseQualifierDefinitionTest.class).build();
     }
-    
-   @SuppressWarnings("unchecked")
-   @Test
-   @SpecAssertion(section = "4.1", id = "al")
-   public void testQualifierDeclaredInheritedIsInherited() throws Exception
-   {
-      Set<? extends Annotation> qualifiers = getBeans(BorderCollieLocal.class, new HairyQualifier(false)).iterator().next().getQualifiers();
-      assert annotationSetMatches(qualifiers, Any.class, Hairy.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "ala")
-   public void testQualifierNotDeclaredInheritedIsNotInherited() throws Exception
-   {      
-      assert getBeans(TameSkinnyHairlessCatLocal.class, new SkinnyQualifier()).size() == 0;
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "ap")
-   public void testQualifierDeclaredInheritedIsIndirectlyInherited()
-   {
-      Set<? extends Annotation> qualifiers = getBeans(EnglishBorderCollieLocal.class, new HairyQualifier(false)).iterator().next().getQualifiers();
-      assert annotationSetMatches(qualifiers, Any.class, Hairy.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "apa")
-   public void testQualifierNotDeclaredInheritedIsNotIndirectlyInherited()
-   {          
-      Set<Bean<FamousCatLocal>> beans = getBeans(FamousCatLocal.class, new SkinnyQualifier());
-      assert beans.size() == 0;
-   }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    @SpecAssertion(section = "4.1", id = "al")
+    public void testQualifierDeclaredInheritedIsInherited() throws Exception {
+        Set<? extends Annotation> qualifiers = getBeans(BorderCollieLocal.class, new HairyQualifier(false)).iterator().next()
+                .getQualifiers();
+        assert annotationSetMatches(qualifiers, Any.class, Hairy.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "ala")
+    public void testQualifierNotDeclaredInheritedIsNotInherited() throws Exception {
+        assert getBeans(TameSkinnyHairlessCatLocal.class, new SkinnyQualifier()).size() == 0;
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "ap")
+    public void testQualifierDeclaredInheritedIsIndirectlyInherited() {
+        Set<? extends Annotation> qualifiers = getBeans(EnglishBorderCollieLocal.class, new HairyQualifier(false)).iterator()
+                .next().getQualifiers();
+        assert annotationSetMatches(qualifiers, Any.class, Hairy.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "apa")
+    public void testQualifierNotDeclaredInheritedIsNotIndirectlyInherited() {
+        Set<Bean<FamousCatLocal>> beans = getBeans(FamousCatLocal.class, new SkinnyQualifier());
+        assert beans.size() == 0;
+    }
 }

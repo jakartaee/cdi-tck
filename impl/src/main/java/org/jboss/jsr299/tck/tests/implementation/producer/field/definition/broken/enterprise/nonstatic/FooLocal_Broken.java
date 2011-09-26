@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.definition.brok
 import javax.ejb.Local;
 
 @Local
-public interface FooLocal_Broken
-{
+public interface FooLocal_Broken {
 
 }

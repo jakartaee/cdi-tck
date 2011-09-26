@@ -19,15 +19,12 @@ package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.bro
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-public class BusFactory
-{
-   @Produces
-   public Bus producesBus()
-   {
-      return new Bus("School bus");
-   }
-   
-   public void disposeBus(@Disposes Bus bus)
-   {
-   }
+public class BusFactory {
+    @Produces
+    public Bus producesBus() {
+        return new Bus("School bus");
+    }
+
+    public void disposeBus(@Disposes Bus bus) {
+    }
 }

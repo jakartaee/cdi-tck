@@ -18,9 +18,8 @@ package org.jboss.jsr299.tck.tests.lookup.dependency.resolution.broken.ambiguous
 
 import javax.inject.Inject;
 
-
-public class Farm_Broken
-{
-   @SuppressWarnings("unused")
-   @Inject private Animal animal;
+public class Farm_Broken {
+    @SuppressWarnings("unused")
+    @Inject
+    private Animal animal;
 }

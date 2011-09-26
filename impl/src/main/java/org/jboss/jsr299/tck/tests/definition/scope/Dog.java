@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.definition.scope;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-public class Dog
-{
-   
+public class Dog {
+
 }

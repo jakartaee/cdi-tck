@@ -18,13 +18,10 @@ package org.jboss.jsr299.tck.tests.event.observer.resolve;
 
 import javax.enterprise.event.Observes;
 
-public class SystemMonitor
-{
-   public void lowBattery(@Observes BatteryEvent e)
-   {
-   }
-   
-   public void lowDiskSpace(@Observes DiskSpaceEvent e)
-   {
-   }
+public class SystemMonitor {
+    public void lowBattery(@Observes BatteryEvent e) {
+    }
+
+    public void lowDiskSpace(@Observes DiskSpaceEvent e) {
+    }
 }

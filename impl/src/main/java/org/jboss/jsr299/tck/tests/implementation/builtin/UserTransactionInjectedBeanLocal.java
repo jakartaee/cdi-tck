@@ -21,12 +21,11 @@ import javax.transaction.UserTransaction;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Local
-public interface UserTransactionInjectedBeanLocal
-{
-   
-   public UserTransaction getUserTransaction();
+public interface UserTransactionInjectedBeanLocal {
+
+    public UserTransaction getUserTransaction();
 
 }

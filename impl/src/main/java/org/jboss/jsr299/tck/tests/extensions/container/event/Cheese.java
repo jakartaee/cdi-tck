@@ -16,10 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.container.event;
 
-public class Cheese extends Food
-{
-   public Cheese(boolean fresh)
-   {
-      super(fresh);
-   }
+public class Cheese extends Food {
+    public Cheese(boolean fresh) {
+        super(fresh);
+    }
 }

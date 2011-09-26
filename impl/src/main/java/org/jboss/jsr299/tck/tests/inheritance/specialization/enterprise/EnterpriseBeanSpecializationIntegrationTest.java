@@ -30,32 +30,29 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseBeanSpecializationIntegrationTest extends AbstractJSR299Test
-{
-    
-   private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {};
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseBeanSpecializationIntegrationTest extends AbstractJSR299Test {
+
+    private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {
+    };
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseBeanSpecializationIntegrationTest.class)
-            .withBeansXml("beans.xml")
-             // Originally with ejb-jar.xml however this resource does not exist in /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/inheritance/specialization/enterprise
-            // .withEjbJarXml("ejb-jar.xml")
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanSpecializationIntegrationTest.class)
+                .withBeansXml("beans.xml")
+                // Originally with ejb-jar.xml however this resource does not exist in
+                // /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/inheritance/specialization/enterprise
+                // .withEjbJarXml("ejb-jar.xml")
+                .build();
     }
-   
-   @Test
-   @SpecAssertions({
-     @SpecAssertion(section = "4.3", id = "ca")
-   })
-   public void testSpecializedBeanNotInstantiated() throws Exception
-   {
-      Bean<?> farmerBean = getCurrentManager().resolve(getCurrentManager().getBeans(FarmerLocal.class,LANDOWNER_LITERAL));
-      FarmerLocal farmer = (FarmerLocal) getCurrentManager().getReference(farmerBean, Object.class, getCurrentManager().createCreationalContext(farmerBean));
-      assert farmer.getClassName().equals(LazyFarmer.class.getName());
-   }
-   
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "4.3", id = "ca") })
+    public void testSpecializedBeanNotInstantiated() throws Exception {
+        Bean<?> farmerBean = getCurrentManager().resolve(getCurrentManager().getBeans(FarmerLocal.class, LANDOWNER_LITERAL));
+        FarmerLocal farmer = (FarmerLocal) getCurrentManager().getReference(farmerBean, Object.class,
+                getCurrentManager().createCreationalContext(farmerBean));
+        assert farmer.getClassName().equals(LazyFarmer.class.getName());
+    }
+
 }

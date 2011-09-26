@@ -18,9 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.bro
 
 import javax.enterprise.inject.Disposes;
 
-public class Scrapyard
-{
-   public void disposeBus(@Disposes Vehicle bus)
-   {
-   }
+public class Scrapyard {
+    public void disposeBus(@Disposes Vehicle bus) {
+    }
 }

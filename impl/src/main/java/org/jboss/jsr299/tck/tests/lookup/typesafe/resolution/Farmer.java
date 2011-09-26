@@ -16,13 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
-public class Farmer<T>
-{
-   String name;
+public class Farmer<T> {
+    String name;
 
-   Farmer(String name)
-   {
-      this.name = name;
-   }
-   
+    Farmer(String name) {
+        this.name = name;
+    }
+
 }

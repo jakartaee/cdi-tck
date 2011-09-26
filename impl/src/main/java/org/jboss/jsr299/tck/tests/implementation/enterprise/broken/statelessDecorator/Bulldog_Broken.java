@@ -23,13 +23,12 @@ import javax.inject.Inject;
 
 @Stateless
 @Decorator
-public class Bulldog_Broken implements BulldogLocal_Broken, Dog
-{
-   @Inject @Delegate
-   private Dog delegate;
+public class Bulldog_Broken implements BulldogLocal_Broken, Dog {
+    @Inject
+    @Delegate
+    private Dog delegate;
 
-   public void foo()
-   {
-      delegate.foo();
-   }
+    public void foo() {
+        delegate.foo();
+    }
 }

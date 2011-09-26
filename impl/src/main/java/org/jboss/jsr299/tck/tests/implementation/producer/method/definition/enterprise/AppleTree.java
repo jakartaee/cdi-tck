@@ -20,10 +20,10 @@ import javax.ejb.Stateful;
 import javax.enterprise.inject.Produces;
 
 @Stateful
-public class AppleTree implements AppleTreeLocal
-{
-   @Produces @Yummy public Apple produceApple()
-   {
-      return new Apple(this);
-   }
+public class AppleTree implements AppleTreeLocal {
+    @Produces
+    @Yummy
+    public Apple produceApple() {
+        return new Apple(this);
+    }
 }

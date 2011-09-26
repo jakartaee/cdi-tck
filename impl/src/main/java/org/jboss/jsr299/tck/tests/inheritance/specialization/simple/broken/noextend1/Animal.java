@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.noextend1;
 
-public interface Animal
-{
+public interface Animal {
 
 }

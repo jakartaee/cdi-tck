@@ -22,12 +22,11 @@ import javax.enterprise.context.SessionScoped;
 
 @AnimalStereotype
 @SessionScoped
-public class ShortHairedDog implements Animal, Serializable
-{
+public class ShortHairedDog implements Animal, Serializable {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1859229950272574260L;
+    private static final long serialVersionUID = 1859229950272574260L;
 
 }

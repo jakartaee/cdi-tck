@@ -29,31 +29,25 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class EJBDecoratorInvocationTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EJBDecoratorInvocationTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EJBDecoratorInvocationTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EJBDecoratorInvocationTest.class).withBeansXml("beans.xml")
+                .build();
     }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="7.2", id="d")
-   })
-   public void testEJBDecoratorInvocation() {
-       // testDecoratorInvocation tests decorators of normal beans called from an EJB
-       // it doesn't test actual decoration of the EJB
-       PigStyDecorator.reset();
-       PigStyImpl.reset();
-       getInstanceByType(PigSty.class).clean();
-       assert PigStyDecorator.isDecoratorCalled();
-       assert PigStyImpl.isBeanCalled();
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "d") })
+    public void testEJBDecoratorInvocation() {
+        // testDecoratorInvocation tests decorators of normal beans called from an EJB
+        // it doesn't test actual decoration of the EJB
+        PigStyDecorator.reset();
+        PigStyImpl.reset();
+        getInstanceByType(PigSty.class).clean();
+        assert PigStyDecorator.isDecoratorCalled();
+        assert PigStyImpl.isBeanCalled();
+    }
 
 }

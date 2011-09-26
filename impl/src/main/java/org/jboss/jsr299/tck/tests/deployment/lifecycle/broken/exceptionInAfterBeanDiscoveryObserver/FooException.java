@@ -18,34 +18,29 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.exceptionInAfterB
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class FooException extends RuntimeException
-{
+public class FooException extends RuntimeException {
 
-   /**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 4441409975741605270L;
+    private static final long serialVersionUID = 4441409975741605270L;
 
-	public FooException()
-   {
-      super();
-   }
+    public FooException() {
+        super();
+    }
 
-   public FooException(String arg0, Throwable arg1)
-   {
-      super(arg0, arg1);
-   }
+    public FooException(String arg0, Throwable arg1) {
+        super(arg0, arg1);
+    }
 
-   public FooException(String arg0)
-   {
-      super(arg0);
-   }
+    public FooException(String arg0) {
+        super(arg0);
+    }
 
-   public FooException(Throwable arg0)
-   {
-      super(arg0);
-   }
+    public FooException(Throwable arg0) {
+        super(arg0);
+    }
 
 }

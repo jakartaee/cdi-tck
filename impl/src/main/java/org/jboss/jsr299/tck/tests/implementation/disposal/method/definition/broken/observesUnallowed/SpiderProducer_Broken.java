@@ -20,17 +20,14 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-public class SpiderProducer_Broken
-{
+public class SpiderProducer_Broken {
 
-   @Produces
-   public static Spider getSpider()
-   {
-      return new Spider();
-   }
+    @Produces
+    public static Spider getSpider() {
+        return new Spider();
+    }
 
-   public static void destorySpider(@Disposes @Observes Spider spider)
-   {
-   }
+    public static void destorySpider(@Disposes @Observes Spider spider) {
+    }
 
 }

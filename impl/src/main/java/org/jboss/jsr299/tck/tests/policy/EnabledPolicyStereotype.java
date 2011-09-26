@@ -30,9 +30,8 @@ import javax.enterprise.inject.Stereotype;
 @RequestScoped
 @Stereotype
 @Alternative
-@Target( { TYPE, METHOD })
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
-public @interface EnabledPolicyStereotype
-{
+public @interface EnabledPolicyStereotype {
 
 }

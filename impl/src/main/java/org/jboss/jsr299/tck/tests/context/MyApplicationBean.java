@@ -21,12 +21,11 @@ import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class MyApplicationBean implements Serializable
-{
+public class MyApplicationBean implements Serializable {
 
-   /**
+    /**
     * 
     */
-   private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 }

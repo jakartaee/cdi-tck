@@ -19,10 +19,10 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.nonPassivationCapa
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 
-public class RecordProducer
-{
-   public final @Produces @SessionScoped Broken_Record getRecord()
-   {
-      return new Broken_Record();
-   }
+public class RecordProducer {
+    public final @Produces
+    @SessionScoped
+    Broken_Record getRecord() {
+        return new Broken_Record();
+    }
 }

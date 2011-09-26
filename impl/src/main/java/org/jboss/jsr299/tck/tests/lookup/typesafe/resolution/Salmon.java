@@ -20,7 +20,6 @@ import javax.inject.Named;
 
 @Named
 @FishILike
-public class Salmon implements ScottishFish
-{
+public class Salmon implements ScottishFish {
 
 }

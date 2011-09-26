@@ -16,9 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.passivatingProducerMethodWithNonPassivatingParameter;
 
-public class City
-{
-   public void ping() {
-      
-   }
+public class City {
+    public void ping() {
+
+    }
 }

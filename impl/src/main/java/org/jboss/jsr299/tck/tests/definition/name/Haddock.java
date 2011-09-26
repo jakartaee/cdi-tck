@@ -19,8 +19,8 @@ package org.jboss.jsr299.tck.tests.definition.name;
 import javax.enterprise.inject.Default;
 import javax.inject.Named;
 
-@Named @Default
-public class Haddock implements Animal
-{
+@Named
+@Default
+public class Haddock implements Animal {
 
 }

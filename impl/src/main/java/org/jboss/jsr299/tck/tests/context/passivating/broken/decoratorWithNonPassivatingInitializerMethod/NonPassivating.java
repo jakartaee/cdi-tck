@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPassivatingInitializerMethod;
 
-public class NonPassivating
-{
-   
+public class NonPassivating {
+
 }

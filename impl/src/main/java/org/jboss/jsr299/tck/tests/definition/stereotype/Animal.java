@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.definition.stereotype;
 
-public interface Animal
-{
+public interface Animal {
 
 }

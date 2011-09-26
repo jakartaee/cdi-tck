@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.definition.ente
 import javax.ejb.Local;
 
 @Local
-public interface ChickenLocal
-{
+public interface ChickenLocal {
 
 }

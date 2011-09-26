@@ -20,7 +20,6 @@ import javax.inject.Named;
 
 @Named("whitefish")
 @Whitefish
-public class Plaice implements Animal
-{
+public class Plaice implements Animal {
 
 }

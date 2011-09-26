@@ -20,16 +20,14 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
 
-public class ProcessObserverMethodObserver implements Extension
-{
+public class ProcessObserverMethodObserver implements Extension {
 
     /**
      * https://issues.jboss.org/browse/CDI-88
      * 
      * @param event
      */
-   public void observeObserverMethodForEventB(@Observes ProcessObserverMethod<EventB, EventBObserver> event)
-   {
-      event.addDefinitionError(new RuntimeException("Definition error for EventB"));
-   }
+    public void observeObserverMethodForEventB(@Observes ProcessObserverMethod<EventB, EventBObserver> event) {
+        event.addDefinitionError(new RuntimeException("Definition error for EventB"));
+    }
 }

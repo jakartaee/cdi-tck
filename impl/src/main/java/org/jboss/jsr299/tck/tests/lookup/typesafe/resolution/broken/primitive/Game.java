@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.broken.primitive;
 import javax.inject.Inject;
 
 @SuppressWarnings("unused")
-public class Game
-{
-   @Inject private int number;
+public class Game {
+    @Inject
+    private int number;
 }

@@ -24,10 +24,8 @@ import javax.inject.Named;
 @SessionScoped
 @Stateful
 @Named("John")
-public class WrappedEnterpriseBean implements WrappedEnterpriseBeanLocal
-{
-   @Remove
-   public void bye() 
-   {
-   }
+public class WrappedEnterpriseBean implements WrappedEnterpriseBeanLocal {
+    @Remove
+    public void bye() {
+    }
 }

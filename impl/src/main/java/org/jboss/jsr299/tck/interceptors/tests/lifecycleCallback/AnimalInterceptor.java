@@ -24,59 +24,44 @@ import javax.annotation.PreDestroy;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class AnimalInterceptor
-{
-   private static Set<String> postConstructInterceptorCalledFor = new HashSet<String>();
-   private static Set<String> preDestroyInterceptorCalledFor = new HashSet<String>();
+class AnimalInterceptor {
+    private static Set<String> postConstructInterceptorCalledFor = new HashSet<String>();
+    private static Set<String> preDestroyInterceptorCalledFor = new HashSet<String>();
 
-   @PostConstruct
-   public void postConstruct(InvocationContext ctx)
-   {
-      postConstructInterceptorCalledFor.add(((Animal) ctx.getTarget()).getAnimalType());
-      try
-      {
-         ctx.proceed();
-      }
-      catch (Exception e)
-      {
-         throw new RuntimeException(e);
-      }
-   }
+    @PostConstruct
+    public void postConstruct(InvocationContext ctx) {
+        postConstructInterceptorCalledFor.add(((Animal) ctx.getTarget()).getAnimalType());
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-   @AroundInvoke
-   public Object intercept(InvocationContext ctx) throws Exception
-   {
-      if (ctx.getMethod().getName().equals("echo"))
-      {
-         return ctx.proceed() + ctx.getParameters()[0].toString();
-      }
-      else
-      {
-         return ctx.proceed();
-      }
-   }
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
+        if (ctx.getMethod().getName().equals("echo")) {
+            return ctx.proceed() + ctx.getParameters()[0].toString();
+        } else {
+            return ctx.proceed();
+        }
+    }
 
-   @PreDestroy
-   public void preDestroy(InvocationContext ctx)
-   {
-      preDestroyInterceptorCalledFor.add(((Animal) ctx.getTarget()).getAnimalType());
-      try
-      {
-         ctx.proceed();
-      }
-      catch (Exception e)
-      {
-         throw new RuntimeException(e);
-      }
-   }
+    @PreDestroy
+    public void preDestroy(InvocationContext ctx) {
+        preDestroyInterceptorCalledFor.add(((Animal) ctx.getTarget()).getAnimalType());
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-   public static boolean isPostConstructInterceptorCalled(String animalType)
-   {
-      return postConstructInterceptorCalledFor.contains(animalType);
-   }
+    public static boolean isPostConstructInterceptorCalled(String animalType) {
+        return postConstructInterceptorCalledFor.contains(animalType);
+    }
 
-   public static boolean isPreDestroyInterceptorCalled(String animalType)
-   {
-      return preDestroyInterceptorCalledFor.contains(animalType);
-   }
+    public static boolean isPreDestroyInterceptorCalled(String animalType) {
+        return preDestroyInterceptorCalledFor.contains(animalType);
+    }
 }

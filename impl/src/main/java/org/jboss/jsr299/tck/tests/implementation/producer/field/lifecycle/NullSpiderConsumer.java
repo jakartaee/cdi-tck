@@ -25,15 +25,14 @@ import java.io.Serializable;
  * @author David Allen
  * 
  */
-public class NullSpiderConsumer implements Serializable
-{
-   private static final long serialVersionUID = 1L;
+public class NullSpiderConsumer implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-   @Null @Working
-   private BlackWidow injectedSpider;
+    @Null
+    @Working
+    private BlackWidow injectedSpider;
 
-   public BlackWidow getInjectedSpider()
-   {
-      return injectedSpider;
-   }
+    public BlackWidow getInjectedSpider() {
+        return injectedSpider;
+    }
 }

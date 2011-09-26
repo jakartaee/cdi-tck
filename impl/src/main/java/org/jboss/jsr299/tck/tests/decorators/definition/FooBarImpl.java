@@ -18,14 +18,13 @@ package org.jboss.jsr299.tck.tests.decorators.definition;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class FooBarImpl implements FooBar
-{
+public class FooBarImpl implements FooBar {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 9211059814119576671L;
+    private static final long serialVersionUID = 9211059814119576671L;
 
 }

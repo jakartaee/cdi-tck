@@ -23,24 +23,21 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-
 /**
- * Portable configuration for JAX-RS.  This class must be used in the web.xml
- * as a servlet in order to activate the JAX-RS resources.
+ * Portable configuration for JAX-RS. This class must be used in the web.xml as a servlet in order to activate the JAX-RS
+ * resources.
  * 
  * @author David Allen
- *
+ * 
  */
 @ApplicationPath("/jaxrs")
-public class JaxrsApplication extends Application
-{
+public class JaxrsApplication extends Application {
 
-@Override
-   public Set<Class<?>> getClasses()
-   {
-      HashSet<Class<?>> set = new HashSet<Class<?>>();
-      set.add(ApplicationResource.class);
-      return set;
-   }
+    @Override
+    public Set<Class<?>> getClasses() {
+        HashSet<Class<?>> set = new HashSet<Class<?>>();
+        set.add(ApplicationResource.class);
+        return set;
+    }
 
 }

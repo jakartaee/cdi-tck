@@ -25,41 +25,36 @@ import javax.inject.Named;
 
 @Named
 @ConversationScoped
-public class Storm implements Serializable
-{
-   
-   /**
+public class Storm implements Serializable {
+
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -1513633490356967202L;
+    private static final long serialVersionUID = -1513633490356967202L;
 
-	@Inject Conversation conversation;
-   
-   private String strength;
-   
-   public String thunder()
-   {
-      return "thunder";
-   }
-   
-   public String lightening()
-   {
-      return "lightening";
-   }
-   
-   public void beginConversation()
-   {
-      conversation.begin();
-   }
-   
-   public String getStrength()
-   {
-      return strength;
-   }
-   
-   public void setStrength(String strength)
-   {
-      this.strength = strength;
-   }
-   
+    @Inject
+    Conversation conversation;
+
+    private String strength;
+
+    public String thunder() {
+        return "thunder";
+    }
+
+    public String lightening() {
+        return "lightening";
+    }
+
+    public void beginConversation() {
+        conversation.begin();
+    }
+
+    public String getStrength() {
+        return strength;
+    }
+
+    public void setStrength(String strength) {
+        this.strength = strength;
+    }
+
 }

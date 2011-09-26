@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.event.eventTypes;
 
-public class Song
-{
+public class Song {
 }

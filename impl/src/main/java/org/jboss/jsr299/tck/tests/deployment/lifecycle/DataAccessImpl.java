@@ -18,34 +18,28 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class DataAccessImpl implements DataAccess
-{
+public class DataAccessImpl implements DataAccess {
 
-   public void delete()
-   {
+    public void delete() {
 
-   }
+    }
 
-   public Class<?> getDataType()
-   {
-      return null;
-   }
+    public Class<?> getDataType() {
+        return null;
+    }
 
-   public Object getId()
-   {
-      return null;
-   }
+    public Object getId() {
+        return null;
+    }
 
-   public Object load(Object id)
-   {
-      return null;
-   }
+    public Object load(Object id) {
+        return null;
+    }
 
-   public void save()
-   {
-      
-   }
+    public void save() {
+
+    }
 
 }

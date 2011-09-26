@@ -19,10 +19,8 @@ package org.jboss.jsr299.tck.tests.lookup.byname.broken.injectionPointWithNamed2
 import javax.enterprise.event.Observes;
 import javax.inject.Named;
 
-public class Foo
-{
-   public void observe(@Observes Bar bar, @Named Bar bar1)
-   {
-      
-   }
+public class Foo {
+    public void observe(@Observes Bar bar, @Named Bar bar1) {
+
+    }
 }

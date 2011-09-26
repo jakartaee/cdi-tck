@@ -26,26 +26,23 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * FIXME check extension location 
- * @Resource(source = "javax.enterprise.inject.spi.Extension", destination = "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension") 
+ * FIXME check extension location
+ * 
+ * @Resource(source = "javax.enterprise.inject.spi.Extension", destination =
+ *                  "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class ThrowExceptionInProcessBeanObserverTest extends AbstractJSR299Test
-{
-    
+public class ThrowExceptionInProcessBeanObserverTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ThrowExceptionInProcessBeanObserverTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ThrowExceptionInProcessBeanObserverTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "11.5.8", id = "hd")
-   public void testProcessBeanObserverThrowsException()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "11.5.8", id = "hd")
+    public void testProcessBeanObserverThrowsException() {
+    }
 }

@@ -16,10 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.newSimpleBean;
 
-
 @Tame
-public class Lion
-{
+public class Lion {
 
-   
 }

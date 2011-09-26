@@ -26,10 +26,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Stereotype;
 
 @Stereotype
-@Target( { TYPE })
+@Target({ TYPE })
 @Retention(RUNTIME)
 @ApplicationScoped
-public @interface RiverFishStereotype
-{
+public @interface RiverFishStereotype {
 
 }

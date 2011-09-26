@@ -20,13 +20,11 @@ import java.util.List;
 
 import javax.enterprise.event.Observes;
 
-public class WildBostonTerrier
-{
-   
-   public static boolean observed;
-   
-   public void observesEventTypeWithWildcard(@Observes List<?> someArray)
-   {
-      observed = true;
-   }
+public class WildBostonTerrier {
+
+    public static boolean observed;
+
+    public void observesEventTypeWithWildcard(@Observes List<?> someArray) {
+        observed = true;
+    }
 }

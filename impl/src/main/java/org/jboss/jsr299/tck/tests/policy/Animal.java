@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.policy;
 
-public interface Animal
-{
+public interface Animal {
 
 }

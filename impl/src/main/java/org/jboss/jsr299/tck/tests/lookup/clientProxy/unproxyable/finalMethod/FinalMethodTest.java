@@ -25,22 +25,17 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class FinalMethodTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class FinalMethodTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(FinalMethodTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(FinalMethodTest.class).build();
     }
-    
-   @Test
-   @SpecAssertion(section = "5.4.1", id = "bba")
-   public void testClassWithFinalMethodCannotBeProxied()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "5.4.1", id = "bba")
+    public void testClassWithFinalMethodCannotBeProxied() {
+    }
 }

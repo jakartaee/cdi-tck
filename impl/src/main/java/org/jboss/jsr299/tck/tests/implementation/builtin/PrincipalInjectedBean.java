@@ -29,51 +29,43 @@ import javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Stateful
-public class PrincipalInjectedBean implements PrincipalInjectedBeanLocal
-{
+public class PrincipalInjectedBean implements PrincipalInjectedBeanLocal {
 
-   static final String DEFAULT_JAAS_CONFIG_NAME = "default";
-   
-   @Inject Instance<Principal> principal;
-   
-   public Principal getPrincipal()
-   {
-      return principal.get();
-   }
-   
-   public void login() throws LoginException
-   {
-      LoginContext lc = new LoginContext(DEFAULT_JAAS_CONFIG_NAME, null, null, createConfiguration());
-      lc.login();
-   }
-   
-   protected AppConfigurationEntry createAppConfigurationEntry()
-   {
-      return new AppConfigurationEntry( 
-            MockLoginModule.class.getName(), 
-            LoginModuleControlFlag.REQUIRED, 
-            new HashMap<String,String>() 
-         );
-   }
-   
-   protected javax.security.auth.login.Configuration createConfiguration()
-   {
-      return new javax.security.auth.login.Configuration()
-      {
-         private AppConfigurationEntry[] aces = { createAppConfigurationEntry() };
-         
-         @Override
-         public AppConfigurationEntry[] getAppConfigurationEntry(String name)
-         {
-            return DEFAULT_JAAS_CONFIG_NAME.equals(name) ? aces : null;
-         }
-         
-         @Override
-         public void refresh() {}
-      };
-   }
+    static final String DEFAULT_JAAS_CONFIG_NAME = "default";
+
+    @Inject
+    Instance<Principal> principal;
+
+    public Principal getPrincipal() {
+        return principal.get();
+    }
+
+    public void login() throws LoginException {
+        LoginContext lc = new LoginContext(DEFAULT_JAAS_CONFIG_NAME, null, null, createConfiguration());
+        lc.login();
+    }
+
+    protected AppConfigurationEntry createAppConfigurationEntry() {
+        return new AppConfigurationEntry(MockLoginModule.class.getName(), LoginModuleControlFlag.REQUIRED,
+                new HashMap<String, String>());
+    }
+
+    protected javax.security.auth.login.Configuration createConfiguration() {
+        return new javax.security.auth.login.Configuration() {
+            private AppConfigurationEntry[] aces = { createAppConfigurationEntry() };
+
+            @Override
+            public AppConfigurationEntry[] getAppConfigurationEntry(String name) {
+                return DEFAULT_JAAS_CONFIG_NAME.equals(name) ? aces : null;
+            }
+
+            @Override
+            public void refresh() {
+            }
+        };
+    }
 
 }

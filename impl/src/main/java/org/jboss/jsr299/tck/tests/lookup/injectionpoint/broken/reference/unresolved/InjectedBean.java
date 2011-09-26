@@ -16,10 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint.broken.reference.unresolved;
 
-public class InjectedBean
-{
-   public InjectedBean(String name)
-   {
-      
-   }
+public class InjectedBean {
+    public InjectedBean(String name) {
+
+    }
 }

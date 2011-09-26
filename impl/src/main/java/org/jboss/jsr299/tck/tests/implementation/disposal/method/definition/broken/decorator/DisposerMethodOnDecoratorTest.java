@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.broken.decorator;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -26,25 +25,20 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DisposerMethodOnDecoratorTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DisposerMethodOnDecoratorTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
+    public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
 
-            .withTestClassPackage(DisposerMethodOnDecoratorTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+        .withTestClassPackage(DisposerMethodOnDecoratorTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "3.3.6", id = "gb")
-   //WELD-424
-   public void testDisposerMethodNotAllowedOnDecorator()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "3.3.6", id = "gb")
+    // WELD-424
+    public void testDisposerMethodNotAllowedOnDecorator() {
+    }
 }

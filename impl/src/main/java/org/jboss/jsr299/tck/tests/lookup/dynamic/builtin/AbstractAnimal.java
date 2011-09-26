@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dynamic.builtin;
 
-abstract class AbstractAnimal implements Animal
-{
+abstract class AbstractAnimal implements Animal {
 
 }

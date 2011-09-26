@@ -26,42 +26,35 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseScopeDefinitionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseScopeDefinitionTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseScopeDefinitionTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseScopeDefinitionTest.class).build();
     }
-    
-   @Test 
-   @SpecAssertion(section="4.1", id = "be")
-   public void testScopeTypeDeclaredInheritedIsInherited() throws Exception
-   {
-      assert getBeans(BorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
-   }
-   
-   @Test @SpecAssertion(section="4.1", id = "bea")
-   public void testScopeTypeNotDeclaredInheritedIsNotInherited() throws Exception
-   {
-      assert !getBeans(SiameseLocal.class).iterator().next().getScope().equals(FooScoped.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "bh")
-   public void testScopeTypeDeclaredInheritedIsIndirectlyInherited()
-   {
-      assert getBeans(EnglishBorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
-   }
-   
-   @Test
-   @SpecAssertion(section = "4.1", id = "bha")
-   public void testScopeTypeNotDeclaredInheritedIsNotIndirectlyInherited()
-   {
-      assert !getBeans(BengalTigerLocal.class).iterator().next().getScope().equals(FooScoped.class);
-   }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "be")
+    public void testScopeTypeDeclaredInheritedIsInherited() throws Exception {
+        assert getBeans(BorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "bea")
+    public void testScopeTypeNotDeclaredInheritedIsNotInherited() throws Exception {
+        assert !getBeans(SiameseLocal.class).iterator().next().getScope().equals(FooScoped.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "bh")
+    public void testScopeTypeDeclaredInheritedIsIndirectlyInherited() {
+        assert getBeans(EnglishBorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "4.1", id = "bha")
+    public void testScopeTypeNotDeclaredInheritedIsNotIndirectlyInherited() {
+        assert !getBeans(BengalTigerLocal.class).iterator().next().getScope().equals(FooScoped.class);
+    }
 }

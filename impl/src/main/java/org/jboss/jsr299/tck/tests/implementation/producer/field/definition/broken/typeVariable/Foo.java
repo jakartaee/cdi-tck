@@ -18,8 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.definition.brok
 
 import javax.enterprise.inject.Produces;
 
-public class Foo<T>
-{
-   @Produces
-   T foo = null;
+public class Foo<T> {
+    @Produces
+    T foo = null;
 }

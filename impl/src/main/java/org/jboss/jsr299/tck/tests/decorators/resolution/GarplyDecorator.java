@@ -21,10 +21,10 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class GarplyDecorator<T extends Animal>
-{
-   
-   @Inject @Delegate
-   private Garply<T> garply;
+public class GarplyDecorator<T extends Animal> {
+
+    @Inject
+    @Delegate
+    private Garply<T> garply;
 
 }

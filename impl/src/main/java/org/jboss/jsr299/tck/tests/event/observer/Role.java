@@ -29,8 +29,7 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RUNTIME)
-@Target( { FIELD, PARAMETER, METHOD, TYPE })
-public @interface Role
-{
-   String value();
+@Target({ FIELD, PARAMETER, METHOD, TYPE })
+public @interface Role {
+    String value();
 }

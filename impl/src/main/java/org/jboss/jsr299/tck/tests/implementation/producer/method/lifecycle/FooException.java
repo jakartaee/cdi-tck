@@ -16,12 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.lifecycle;
 
-public class FooException extends RuntimeException
-{
+public class FooException extends RuntimeException {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 6562854972213425887L;
-   
+    private static final long serialVersionUID = 6562854972213425887L;
+
 }

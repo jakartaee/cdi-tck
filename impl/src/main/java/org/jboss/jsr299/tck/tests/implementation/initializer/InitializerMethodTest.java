@@ -25,45 +25,32 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class InitializerMethodTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InitializerMethodTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(InitializerMethodTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(InitializerMethodTest.class).build();
     }
 
-   @Test(groups = { "initializerMethod" })
-   @SpecAssertions({
-      @SpecAssertion(section = "3.9.1", id = "f"),
-      @SpecAssertion(section = "2.3.5", id = "b"),
-      @SpecAssertion(section = "3.9", id = "a")
-   })
-   public void testBindingTypeOnInitializerParameter()
-   {
-      PremiumChickenHutch hutch = getInstanceByType(PremiumChickenHutch.class);
-      assert hutch.getChicken().getName().equals("Preferred");
-      StandardChickenHutch anotherHutch = getInstanceByType(StandardChickenHutch.class);
-      assert anotherHutch.getChicken().getName().equals("Standard");
-   }
+    @Test(groups = { "initializerMethod" })
+    @SpecAssertions({ @SpecAssertion(section = "3.9.1", id = "f"), @SpecAssertion(section = "2.3.5", id = "b"),
+            @SpecAssertion(section = "3.9", id = "a") })
+    public void testBindingTypeOnInitializerParameter() {
+        PremiumChickenHutch hutch = getInstanceByType(PremiumChickenHutch.class);
+        assert hutch.getChicken().getName().equals("Preferred");
+        StandardChickenHutch anotherHutch = getInstanceByType(StandardChickenHutch.class);
+        assert anotherHutch.getChicken().getName().equals("Standard");
+    }
 
-   @Test(groups = { "initializerMethod" })
-   @SpecAssertions({ 
-      @SpecAssertion(section = "3.9", id = "g"), 
-      @SpecAssertion(section = "3.9.1", id = "a"),
-      @SpecAssertion(section = "3.9.1", id = "e"),
-      @SpecAssertion(section = "5.5.2", id = "ad"),
-      @SpecAssertion(section = "3.10", id = "a")
-   })
-   public void testMultipleInitializerMethodsAreCalled()
-   {
-      ChickenHutch chickenHutch = getInstanceByType(ChickenHutch.class);
-      assert chickenHutch.fox != null;
-      assert chickenHutch.chicken != null;
-   }
+    @Test(groups = { "initializerMethod" })
+    @SpecAssertions({ @SpecAssertion(section = "3.9", id = "g"), @SpecAssertion(section = "3.9.1", id = "a"),
+            @SpecAssertion(section = "3.9.1", id = "e"), @SpecAssertion(section = "5.5.2", id = "ad"),
+            @SpecAssertion(section = "3.10", id = "a") })
+    public void testMultipleInitializerMethodsAreCalled() {
+        ChickenHutch chickenHutch = getInstanceByType(ChickenHutch.class);
+        assert chickenHutch.fox != null;
+        assert chickenHutch.chicken != null;
+    }
 
 }

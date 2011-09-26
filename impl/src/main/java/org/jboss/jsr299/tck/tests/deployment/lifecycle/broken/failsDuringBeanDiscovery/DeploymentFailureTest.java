@@ -26,28 +26,20 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DeploymentFailureTest extends AbstractJSR299Test
-{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DeploymentFailureTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
+    public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
 
-            .withTestClassPackage(DeploymentFailureTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+        .withTestClassPackage(DeploymentFailureTest.class).withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "10.4.2", id = "e"),
-      @SpecAssertion(section = "11.5.2", id = "a")
-   })
-   public void testDeploymentFailsBeforeNotifyingObserversAfterBeanDiscovery()
-   {
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "e"), @SpecAssertion(section = "11.5.2", id = "a") })
+    public void testDeploymentFailsBeforeNotifyingObserversAfterBeanDiscovery() {
+    }
 
 }

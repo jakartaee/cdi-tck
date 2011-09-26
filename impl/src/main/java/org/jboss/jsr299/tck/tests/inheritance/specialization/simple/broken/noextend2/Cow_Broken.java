@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.noex
 import javax.enterprise.inject.Specializes;
 
 @Specializes
-public class Cow_Broken
-{
+public class Cow_Broken {
 
 }

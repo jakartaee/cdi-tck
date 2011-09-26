@@ -18,11 +18,10 @@ package org.jboss.jsr299.tck.tests.decorators.invocation;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Foo
-{
-   
-   public void log(String message);
+public interface Foo {
+
+    public void log(String message);
 
 }

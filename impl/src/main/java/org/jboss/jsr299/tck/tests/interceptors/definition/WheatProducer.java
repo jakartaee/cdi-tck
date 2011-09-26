@@ -20,10 +20,9 @@ import javax.enterprise.inject.Produces;
 import javax.interceptor.Interceptors;
 
 @Interceptors(MissileInterceptor.class)
-public class WheatProducer
-{
-   @Produces Wheat createWheat() 
-   {
-      return new Wheat(null);
-   }
+public class WheatProducer {
+    @Produces
+    Wheat createWheat() {
+        return new Wheat(null);
+    }
 }

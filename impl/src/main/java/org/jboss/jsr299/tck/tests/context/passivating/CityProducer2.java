@@ -18,11 +18,10 @@ package org.jboss.jsr299.tck.tests.context.passivating;
 
 import javax.enterprise.inject.Produces;
 
-public class CityProducer2
-{
-   @Produces @Big
-   public Violation create()
-   {
-      return new Violation();
-   }
+public class CityProducer2 {
+    @Produces
+    @Big
+    public Violation create() {
+        return new Violation();
+    }
 }

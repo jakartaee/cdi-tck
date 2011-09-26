@@ -27,10 +27,9 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-@Target( { TYPE, METHOD, PARAMETER })
+@Target({ TYPE, METHOD, PARAMETER })
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-public @interface Asynchronous
-{
+public @interface Asynchronous {
 }

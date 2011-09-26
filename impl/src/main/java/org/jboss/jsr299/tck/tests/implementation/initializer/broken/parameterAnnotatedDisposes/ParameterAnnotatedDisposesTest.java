@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.initializer.broken.parameterAnnotatedDisposes;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -26,23 +25,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ParameterAnnotatedDisposesTest extends AbstractJSR299Test
-{   
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ParameterAnnotatedDisposesTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ParameterAnnotatedDisposesTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ParameterAnnotatedDisposesTest.class).build();
     }
-    
-   @Test(groups = "initializerMethod")
-   @SpecAssertion(section = "3.9.1", id = "ca")
-   public void testInitializerMethodHasParameterAnnotatedDisposes()
-   {
-   }
-   
+
+    @Test(groups = "initializerMethod")
+    @SpecAssertion(section = "3.9.1", id = "ca")
+    public void testInitializerMethodHasParameterAnnotatedDisposes() {
+    }
+
 }

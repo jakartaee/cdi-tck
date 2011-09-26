@@ -16,13 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
-public class Milk
-{
-   @SuppressWarnings("unused")
-   private boolean fresh;
+public class Milk {
+    @SuppressWarnings("unused")
+    private boolean fresh;
 
-   public Milk(boolean fresh)
-   {
-      this.fresh = fresh;
-   }
+    public Milk(boolean fresh) {
+        this.fresh = fresh;
+    }
 }

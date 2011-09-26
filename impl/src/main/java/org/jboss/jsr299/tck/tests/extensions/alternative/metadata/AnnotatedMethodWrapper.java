@@ -25,44 +25,35 @@ import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-public class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements AnnotatedMethod<X>
-{
+public class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements AnnotatedMethod<X> {
 
-   private AnnotatedMethod<X> delegate;
-   
-   public AnnotatedMethodWrapper(AnnotatedMethod<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) 
-   {
-      super(delegate, keepOriginalAnnotations, annotations);
-      this.delegate = delegate;
-   }
+    private AnnotatedMethod<X> delegate;
 
-   public Method getJavaMember()
-   {
-      return delegate.getJavaMember();
-   }
+    public AnnotatedMethodWrapper(AnnotatedMethod<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
+        super(delegate, keepOriginalAnnotations, annotations);
+        this.delegate = delegate;
+    }
 
-   public List<AnnotatedParameter<X>> getParameters()
-   {
-      return delegate.getParameters();
-   }
+    public Method getJavaMember() {
+        return delegate.getJavaMember();
+    }
 
-   public AnnotatedType<X> getDeclaringType()
-   {
-      return delegate.getDeclaringType();
-   }
+    public List<AnnotatedParameter<X>> getParameters() {
+        return delegate.getParameters();
+    }
 
-   public boolean isStatic()
-   {
-      return delegate.isStatic();
-   }
+    public AnnotatedType<X> getDeclaringType() {
+        return delegate.getDeclaringType();
+    }
 
-   @Override
-   public Set<Annotation> getAnnotations()
-   {
-      // TODO Auto-generated method stub
-      return super.getAnnotations();
-   }
-   
-   
-   
+    public boolean isStatic() {
+        return delegate.isStatic();
+    }
+
+    @Override
+    public Set<Annotation> getAnnotations() {
+        // TODO Auto-generated method stub
+        return super.getAnnotations();
+    }
+
 }

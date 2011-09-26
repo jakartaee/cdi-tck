@@ -21,7 +21,6 @@ import javax.enterprise.context.Dependent;
 
 @Dependent
 @Stateful
-public class Helsinki implements HelsinkiLocal
-{
+public class Helsinki implements HelsinkiLocal {
 
 }

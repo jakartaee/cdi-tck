@@ -25,27 +25,20 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class EjbInitializerMethodTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EjbInitializerMethodTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EjbInitializerMethodTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EjbInitializerMethodTest.class).build();
     }
-    
-   @Test(groups = { "initializerMethod", "ejb3" })
-   @SpecAssertions({
-      @SpecAssertion(section = "3.9", id = "e")
-   })
-   // This DOES NOT TEST initializer methods on Java EE component classes PLM
-   public void testInitializerMethodNotABusinessMethod()
-   {
-      AndalusianChicken.nonBusinessMethodCalled = false;
-      getInstanceByType(LocalChicken.class).cluck();
-      assert AndalusianChicken.nonBusinessMethodCalled;
-   }
+
+    @Test(groups = { "initializerMethod", "ejb3" })
+    @SpecAssertions({ @SpecAssertion(section = "3.9", id = "e") })
+    // This DOES NOT TEST initializer methods on Java EE component classes PLM
+    public void testInitializerMethodNotABusinessMethod() {
+        AndalusianChicken.nonBusinessMethodCalled = false;
+        getInstanceByType(LocalChicken.class).cluck();
+        assert AndalusianChicken.nonBusinessMethodCalled;
+    }
 }

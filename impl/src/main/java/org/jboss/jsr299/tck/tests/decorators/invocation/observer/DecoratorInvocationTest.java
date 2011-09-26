@@ -29,28 +29,20 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class DecoratorInvocationTest extends AbstractJSR299Test
-{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DecoratorInvocationTest extends AbstractJSR299Test {
 
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DecoratorInvocationTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DecoratorInvocationTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section="7.2", id="if")
-   })
-   public void testDecoratorInvocation()
-   {
-      ObserverImpl.reset();
-      getCurrentManager().fireEvent(new Foo("foo!"));
-      assert ObserverImpl.isObservervedCorrectly();
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "if") })
+    public void testDecoratorInvocation() {
+        ObserverImpl.reset();
+        getCurrentManager().fireEvent(new Foo("foo!"));
+        assert ObserverImpl.isObservervedCorrectly();
+    }
 
 }

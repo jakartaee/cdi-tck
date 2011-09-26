@@ -16,13 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.broken.multipleDisposersForProducer;
 
-public class Bus
-{
-   @SuppressWarnings("unused")
-   private String name;
-   
-   public Bus(String name)
-   {
-      this.name = name;
-   }
+public class Bus {
+    @SuppressWarnings("unused")
+    private String name;
+
+    public Bus(String name) {
+        this.name = name;
+    }
 }

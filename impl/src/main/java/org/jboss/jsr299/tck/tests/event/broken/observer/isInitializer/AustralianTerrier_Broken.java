@@ -20,9 +20,8 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.inject.Inject;
 
-public class AustralianTerrier_Broken
-{
-   public @Inject void observesAfterBeanDiscovery(@Observes AfterBeanDiscovery discovery)
-   {
-   }
+public class AustralianTerrier_Broken {
+    public @Inject
+    void observesAfterBeanDiscovery(@Observes AfterBeanDiscovery discovery) {
+    }
 }

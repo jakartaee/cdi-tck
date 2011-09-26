@@ -20,24 +20,21 @@ import javax.inject.Inject;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public class TestListener implements ServletContextListener
-{
-   @Inject
-   private Sheep sheep;
-   private boolean initializerCalled = false;
-   
-   @Inject
-   public void initialize(Sheep sheep) {
-      initializerCalled = sheep != null;
-   }
-   
-   public void contextDestroyed(ServletContextEvent sce)
-   {
-   }
+public class TestListener implements ServletContextListener {
+    @Inject
+    private Sheep sheep;
+    private boolean initializerCalled = false;
 
-   public void contextInitialized(ServletContextEvent sce)
-   {
-      sce.getServletContext().setAttribute("listener.injected", sheep != null);
-      sce.getServletContext().setAttribute("listener.initializer.called", initializerCalled);
-   }
+    @Inject
+    public void initialize(Sheep sheep) {
+        initializerCalled = sheep != null;
+    }
+
+    public void contextDestroyed(ServletContextEvent sce) {
+    }
+
+    public void contextInitialized(ServletContextEvent sce) {
+        sce.getServletContext().setAttribute("listener.injected", sheep != null);
+        sce.getServletContext().setAttribute("listener.initializer.called", initializerCalled);
+    }
 }

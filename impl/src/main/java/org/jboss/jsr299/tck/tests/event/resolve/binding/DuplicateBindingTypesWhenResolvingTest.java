@@ -26,36 +26,28 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DuplicateBindingTypesWhenResolvingTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DuplicateBindingTypesWhenResolvingTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DuplicateBindingTypesWhenResolvingTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DuplicateBindingTypesWhenResolvingTest.class).build();
     }
-    
-   public static class AnEventType
-   {
-   }
 
-   public static class AnObserver
-   {
-      public boolean wasNotified = false;
+    public static class AnEventType {
+    }
 
-      public void observer(@Observes AnEventType event)
-      {
-         wasNotified = true;
-      }
-   }
+    public static class AnObserver {
+        public boolean wasNotified = false;
 
-   @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
-   @SpecAssertion(section = "11.3.10", id = "d")
-   public void testDuplicateBindingTypesWhenResolvingFails()
-   {
-      getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeABinding(), new BindingTypeABinding());
-   }
+        public void observer(@Observes AnEventType event) {
+            wasNotified = true;
+        }
+    }
+
+    @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
+    @SpecAssertion(section = "11.3.10", id = "d")
+    public void testDuplicateBindingTypesWhenResolvingFails() {
+        getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeABinding(), new BindingTypeABinding());
+    }
 }

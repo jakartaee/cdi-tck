@@ -22,15 +22,14 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-public class Forssa_Broken implements Serializable
-{
-   private static final long serialVersionUID = 2155797154677120837L;
+public class Forssa_Broken implements Serializable {
+    private static final long serialVersionUID = 2155797154677120837L;
 
-   public Forssa_Broken() {
-   }
-   
-   @Inject
-   public Forssa_Broken(Violation reference) {
-   }
-   
+    public Forssa_Broken() {
+    }
+
+    @Inject
+    public Forssa_Broken(Violation reference) {
+    }
+
 }

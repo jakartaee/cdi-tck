@@ -18,7 +18,7 @@
 package org.jboss.jsr299.tck.tests.decorators.interceptor;
 
 public interface Foo {
-    
+
     public void doSomething();
 
 }

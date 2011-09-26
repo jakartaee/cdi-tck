@@ -22,10 +22,8 @@ import javax.enterprise.context.RequestScoped;
 
 @Stateful
 @RequestScoped
-public class Dingo_Broken<T> implements DingoLocal_Broken<T>
-{
-   @Remove
-   public void remove()
-   {
-   }
+public class Dingo_Broken<T> implements DingoLocal_Broken<T> {
+    @Remove
+    public void remove() {
+    }
 }

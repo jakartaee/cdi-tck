@@ -16,10 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
-
-
 @Synchronous
-public class Cat
-{
+public class Cat {
 
 }

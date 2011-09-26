@@ -16,7 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.interceptorWithNonPassivatingInitializerMethodParameter;
 
-public class Violation
-{
-   public Violation(String foo) {}
+public class Violation {
+    public Violation(String foo) {
+    }
 }

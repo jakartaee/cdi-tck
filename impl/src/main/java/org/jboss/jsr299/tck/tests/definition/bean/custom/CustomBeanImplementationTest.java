@@ -25,86 +25,66 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class CustomBeanImplementationTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class CustomBeanImplementationTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(CustomBeanImplementationTest.class)
-            .withBeansXml("beans.xml")
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(CustomBeanImplementationTest.class).withBeansXml("beans.xml")
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-   @Test
-   @SpecAssertions({  
-      @SpecAssertion(section = "5.1.1", id = "k"), 
-      @SpecAssertion(section = "5.1.4", id = "q") 
-   })
-   public void testGetBeanClassCalled()
-   {
-      assert IntegerBean.bean.isGetBeanClassCalled();
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "k"), @SpecAssertion(section = "5.1.4", id = "q") })
+    public void testGetBeanClassCalled() {
+        assert IntegerBean.bean.isGetBeanClassCalled();
+    }
 
-   @Test
-   @SpecAssertion(section = "5.1.1", id = "k")
-   public void testGetStereotypesCalled()
-   {
-      assert IntegerBean.bean.isGetStereotypesCalled();
-   }
+    @Test
+    @SpecAssertion(section = "5.1.1", id = "k")
+    public void testGetStereotypesCalled() {
+        assert IntegerBean.bean.isGetStereotypesCalled();
+    }
 
-   @Test
-   @SpecAssertion(section = "5.1.1", id = "k")
-   public void testIsPolicyCalled()
-   {
-      assert IntegerBean.bean.isAlternativeCalled();
-   }
+    @Test
+    @SpecAssertion(section = "5.1.1", id = "k")
+    public void testIsPolicyCalled() {
+        assert IntegerBean.bean.isAlternativeCalled();
+    }
 
-   @Test
-   @SpecAssertion(section = "5.2", id = "na")
-   public void testGetTypesCalled()
-   {
-      assert IntegerBean.bean.isGetTypesCalled();
-   }
+    @Test
+    @SpecAssertion(section = "5.2", id = "na")
+    public void testGetTypesCalled() {
+        assert IntegerBean.bean.isGetTypesCalled();
+    }
 
-   @Test
-   @SpecAssertion(section = "5.2", id = "nb")
-   public void testGetBindingsCalled()
-   {
-      assert IntegerBean.bean.isGetQualifiersCalled();
-   }
+    @Test
+    @SpecAssertion(section = "5.2", id = "nb")
+    public void testGetBindingsCalled() {
+        assert IntegerBean.bean.isGetQualifiersCalled();
+    }
 
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "5.2.1", id = "b"),
-      @SpecAssertion(section = "6.6.4", id = "ga")
-   })
-   public void testGetInjectionPointsCalled()
-   {
-      assert IntegerBean.bean.isGetInjectionPointsCalled();
-   }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "b"), @SpecAssertion(section = "6.6.4", id = "ga") })
+    public void testGetInjectionPointsCalled() {
+        assert IntegerBean.bean.isGetInjectionPointsCalled();
+    }
 
-   @Test
-   @SpecAssertion(section = "5.2.4", id = "ba")
-   public void testIsNullableCalled()
-   {
-      assert IntegerBean.bean.isNullableCalled();
-   }
+    @Test
+    @SpecAssertion(section = "5.2.4", id = "ba")
+    public void testIsNullableCalled() {
+        assert IntegerBean.bean.isNullableCalled();
+    }
 
-   @Test
-   @SpecAssertion(section = "5.3", id = "e")
-   public void testGetNameCalled()
-   {
-      assert IntegerBean.bean.isGetNameCalled();
-   }
+    @Test
+    @SpecAssertion(section = "5.3", id = "e")
+    public void testGetNameCalled() {
+        assert IntegerBean.bean.isGetNameCalled();
+    }
 
-   @Test
-   @SpecAssertion(section = "6.5.2", id = "e")
-   public void testGetScopeTypeCalled()
-   {
-      assert IntegerBean.bean.isGetScopeCalled();
-   }
+    @Test
+    @SpecAssertion(section = "6.5.2", id = "e")
+    public void testGetScopeTypeCalled() {
+        assert IntegerBean.bean.isGetScopeCalled();
+    }
 }

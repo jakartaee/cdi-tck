@@ -18,11 +18,9 @@ package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.bro
 
 import javax.enterprise.inject.Produces;
 
-public class FooProducer
-{
-   @Produces
-   public String produce()
-   {
-      return "foo";
-   }
+public class FooProducer {
+    @Produces
+    public String produce() {
+        return "foo";
+    }
 }

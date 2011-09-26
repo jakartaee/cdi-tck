@@ -31,89 +31,79 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ObserverTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ObserverTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ObserverTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ObserverTest.class).build();
     }
-    
-   @Test(groups = { "events" })
-   @SpecAssertions( {
-      @SpecAssertion(section = "10.2", id = "i"),
-      @SpecAssertion(section = "10.5", id = "aa")
-   })
-   public void testObserverNotifiedWhenEventTypeAndAllBindingsMatch()
-   {
-      Annotation roleBinding = new RoleBinding("Admin");
 
-      // Fire an event that will be delivered to the two above observers
-      AnEventType anEvent = new AnEventType();
-      getCurrentManager().fireEvent(anEvent, roleBinding);
-      
-      assert AnObserver.wasNotified;
-      assert AnotherObserver.wasNotified;
-      AnObserver.wasNotified = false;
-      AnotherObserver.wasNotified = false;
-      
-      // Fire an event that will be delivered to only one
-      getCurrentManager().fireEvent(anEvent);
-      assert AnObserver.wasNotified;
-      assert !AnotherObserver.wasNotified;
-      AnObserver.wasNotified = false;
-      AnotherObserver.wasNotified = false;
-      
-      // Also make sure the binding value is considered
-      getCurrentManager().fireEvent(anEvent, new RoleBinding("user"));
-      assert AnObserver.wasNotified;
-      assert !AnotherObserver.wasNotified;
-   }
-   @Test(groups = { "events" })
-   @SpecAssertion(section = "11.1.3", id = "b")
-   public void testGetBeanOnObserverMethod()
-   {
-      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
-      assert observers.size() == 1;
-      ObserverMethod<? super StockPrice> observerMethod = observers.iterator().next();
-      assert observerMethod.getBeanClass().equals(StockWatcher.class);
-   }
+    @Test(groups = { "events" })
+    @SpecAssertions({ @SpecAssertion(section = "10.2", id = "i"), @SpecAssertion(section = "10.5", id = "aa") })
+    public void testObserverNotifiedWhenEventTypeAndAllBindingsMatch() {
+        Annotation roleBinding = new RoleBinding("Admin");
 
-   @Test(groups = { "events" })
-   @SpecAssertion(section = "11.1.3", id = "c")
-   public void testGetObservedTypeOnObserverMethod()
-   {
-      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
-      assert observers.size() == 1;
-      ObserverMethod<?> observerMethod = observers.iterator().next();
-      assert observerMethod.getObservedType().equals(StockPrice.class);
-   }
+        // Fire an event that will be delivered to the two above observers
+        AnEventType anEvent = new AnEventType();
+        getCurrentManager().fireEvent(anEvent, roleBinding);
 
-   @Test(groups = { "events" })
-   @SpecAssertion(section = "11.1.3", id = "c")
-   public void testGetObservedBindingsOnObserverMethod()
-   {
-      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
-      assert observers.size() == 1;
-      ObserverMethod<?> observerMethod = observers.iterator().next();
-      assert observerMethod.getObservedQualifiers().isEmpty();
-   }
+        assert AnObserver.wasNotified;
+        assert AnotherObserver.wasNotified;
+        AnObserver.wasNotified = false;
+        AnotherObserver.wasNotified = false;
 
-   @Test(groups = { "events" })
-   @SpecAssertion(section = "11.1.3", id = "d")
-   public void testGetNotifyOnObserverMethod()
-   {
-      Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
-      assert observers.size() == 1;
-      assert observers.iterator().next().getReception().equals(Reception.ALWAYS);
+        // Fire an event that will be delivered to only one
+        getCurrentManager().fireEvent(anEvent);
+        assert AnObserver.wasNotified;
+        assert !AnotherObserver.wasNotified;
+        AnObserver.wasNotified = false;
+        AnotherObserver.wasNotified = false;
 
-      Set<ObserverMethod<? super ConditionalEvent>> conditionalObservers = getCurrentManager().resolveObserverMethods(new ConditionalEvent());
-      assert !conditionalObservers.isEmpty();
-      assert conditionalObservers.iterator().next().getReception().equals(Reception.IF_EXISTS);
-   }
+        // Also make sure the binding value is considered
+        getCurrentManager().fireEvent(anEvent, new RoleBinding("user"));
+        assert AnObserver.wasNotified;
+        assert !AnotherObserver.wasNotified;
+    }
+
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "11.1.3", id = "b")
+    public void testGetBeanOnObserverMethod() {
+        Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
+        assert observers.size() == 1;
+        ObserverMethod<? super StockPrice> observerMethod = observers.iterator().next();
+        assert observerMethod.getBeanClass().equals(StockWatcher.class);
+    }
+
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "11.1.3", id = "c")
+    public void testGetObservedTypeOnObserverMethod() {
+        Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
+        assert observers.size() == 1;
+        ObserverMethod<?> observerMethod = observers.iterator().next();
+        assert observerMethod.getObservedType().equals(StockPrice.class);
+    }
+
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "11.1.3", id = "c")
+    public void testGetObservedBindingsOnObserverMethod() {
+        Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
+        assert observers.size() == 1;
+        ObserverMethod<?> observerMethod = observers.iterator().next();
+        assert observerMethod.getObservedQualifiers().isEmpty();
+    }
+
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "11.1.3", id = "d")
+    public void testGetNotifyOnObserverMethod() {
+        Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
+        assert observers.size() == 1;
+        assert observers.iterator().next().getReception().equals(Reception.ALWAYS);
+
+        Set<ObserverMethod<? super ConditionalEvent>> conditionalObservers = getCurrentManager().resolveObserverMethods(
+                new ConditionalEvent());
+        assert !conditionalObservers.isEmpty();
+        assert conditionalObservers.iterator().next().getReception().equals(Reception.IF_EXISTS);
+    }
 
 }

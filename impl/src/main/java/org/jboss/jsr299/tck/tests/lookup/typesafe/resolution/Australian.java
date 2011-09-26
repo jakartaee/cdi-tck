@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
-public class Australian
-{
+public class Australian {
 
 }

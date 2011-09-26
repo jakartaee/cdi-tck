@@ -16,11 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation;
 
-public class BarImpl implements Bar
-{
+public class BarImpl implements Bar {
 
-   public boolean foo()
-   {
-      return false;
-   }
+    public boolean foo() {
+        return false;
+    }
 }

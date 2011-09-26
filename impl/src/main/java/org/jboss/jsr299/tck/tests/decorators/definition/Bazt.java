@@ -23,11 +23,10 @@ import java.util.Set;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Bazt extends Baz
-{
+public interface Bazt extends Baz {
 
-   public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(Bazt.class));  
+    public static final Set<Type> TYPES = new HashSet<Type>(Arrays.asList(Bazt.class));
 
 }

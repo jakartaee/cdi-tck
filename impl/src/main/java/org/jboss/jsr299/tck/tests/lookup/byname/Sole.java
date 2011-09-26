@@ -21,7 +21,6 @@ import javax.inject.Named;
 
 @Named("fish")
 @Alternative
-public class Sole implements Animal
-{
+public class Sole implements Animal {
 
 }

@@ -18,9 +18,8 @@ package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class AnimalImpl implements Animal
-{
+public class AnimalImpl implements Animal {
 
 }

@@ -22,17 +22,16 @@ import javax.transaction.UserTransaction;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Stateful
-public class UserTransactionInjectedBean implements UserTransactionInjectedBeanLocal
-{
+public class UserTransactionInjectedBean implements UserTransactionInjectedBeanLocal {
 
-   @Inject transient UserTransaction userTransaction;
-   
-   public UserTransaction getUserTransaction()
-   {
-      return userTransaction;
-   }
+    @Inject
+    transient UserTransaction userTransaction;
+
+    public UserTransaction getUserTransaction() {
+        return userTransaction;
+    }
 
 }

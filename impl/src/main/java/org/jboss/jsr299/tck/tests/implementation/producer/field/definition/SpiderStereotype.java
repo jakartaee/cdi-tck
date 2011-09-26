@@ -30,18 +30,16 @@ import javax.enterprise.inject.Stereotype;
 import javax.inject.Named;
 
 /**
- * Test stereotype used to change the scope type and deployment type
- * of another bean, in particular a producer field bean.
+ * Test stereotype used to change the scope type and deployment type of another bean, in particular a producer field bean.
  * 
  * @author David Allen
- *
+ * 
  */
 @Stereotype
-@Target( { TYPE, METHOD, FIELD })
+@Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @RequestScoped
 @Named
-public @interface SpiderStereotype
-{
+public @interface SpiderStereotype {
 
 }

@@ -30,66 +30,54 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class EJBRequestContextTest extends AbstractJSR299Test
-{
-    
-    @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EJBRequestContextTest.class)
-            .build();
-    }
-    
-   /**
-    * The request scope is active during any remote method invocation of any EJB
-    * bean, during any call to an EJB timeout method and during message delivery
-    * to any EJB message driven bean.
-    */
-   @Test(groups = { "contexts", "ejb3.1", "integration" })
-   @SpecAssertion(section = "6.7.1", id = "gc")
-   public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception
-   {
-      FMSModelIII.reset();
-      FMS flightManagementSystem = getInstanceByType(FMS.class);
-      flightManagementSystem.climb();
-      waitForClimbed();
-      assert flightManagementSystem.isRequestScopeActive();
-   }
-   
-   private void waitForClimbed() throws Exception
-   {
-      for (int i = 0; !FMSModelIII.isClimbed() && i < 2000; i++)
-      {
-         Thread.sleep(10);
-      }
-   }
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EJBRequestContextTest extends AbstractJSR299Test {
 
-   /**
-    * The request context is destroyed after the remote method invocation,
-    * timeout or message delivery completes.
-    */
-   @Test(groups = { "contexts", "ejb3.1", "integration" })
-   @SpecAssertion(section = "6.7.1", id = "hc")
-   public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception
-   {
-      FMSModelIII.reset();
-      FMS flightManagementSystem = getInstanceByType(FMS.class);
-      flightManagementSystem.climb();
-      waitForClimbed();
-      flightManagementSystem.descend();
-      waitForDescended();
-      assert !flightManagementSystem.isSameBean();
-      assert SimpleRequestBean.isBeanDestroyed();
-   }
-   
-   private void waitForDescended() throws Exception
-   {
-      for (int i = 0; !FMSModelIII.isDescended() && i < 2000; i++)
-      {
-         Thread.sleep(10);
-      }
-   }
+    @Deployment
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EJBRequestContextTest.class).build();
+    }
+
+    /**
+     * The request scope is active during any remote method invocation of any EJB bean, during any call to an EJB timeout method
+     * and during message delivery to any EJB message driven bean.
+     */
+    @Test(groups = { "contexts", "ejb3.1", "integration" })
+    @SpecAssertion(section = "6.7.1", id = "gc")
+    public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
+        FMSModelIII.reset();
+        FMS flightManagementSystem = getInstanceByType(FMS.class);
+        flightManagementSystem.climb();
+        waitForClimbed();
+        assert flightManagementSystem.isRequestScopeActive();
+    }
+
+    private void waitForClimbed() throws Exception {
+        for (int i = 0; !FMSModelIII.isClimbed() && i < 2000; i++) {
+            Thread.sleep(10);
+        }
+    }
+
+    /**
+     * The request context is destroyed after the remote method invocation, timeout or message delivery completes.
+     */
+    @Test(groups = { "contexts", "ejb3.1", "integration" })
+    @SpecAssertion(section = "6.7.1", id = "hc")
+    public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
+        FMSModelIII.reset();
+        FMS flightManagementSystem = getInstanceByType(FMS.class);
+        flightManagementSystem.climb();
+        waitForClimbed();
+        flightManagementSystem.descend();
+        waitForDescended();
+        assert !flightManagementSystem.isSameBean();
+        assert SimpleRequestBean.isBeanDestroyed();
+    }
+
+    private void waitForDescended() throws Exception {
+        for (int i = 0; !FMSModelIII.isDescended() && i < 2000; i++) {
+            Thread.sleep(10);
+        }
+    }
 
 }

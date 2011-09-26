@@ -22,38 +22,36 @@ import javax.inject.Inject;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
-public class FooDecorator2 implements Foo
-{
-   
-   public static final String SUFFIX = "fooDecorator2";
-   
-   private static String message;
-   
-   /**
-    * @return the message
-    */
-   public static String getMessage()
-   {
-      return message;
-   }
-   
-   /**
-    * @param message the message to set
-    */
-   public static void reset()
-   {
-      FooDecorator2.message = null;
-   }
-   
-   @Inject @Delegate Foo foo;
-   
-   public void log(String message)
-   {
-      FooDecorator2.message = message;
-      foo.log(message + SUFFIX);
-   }
+public class FooDecorator2 implements Foo {
+
+    public static final String SUFFIX = "fooDecorator2";
+
+    private static String message;
+
+    /**
+     * @return the message
+     */
+    public static String getMessage() {
+        return message;
+    }
+
+    /**
+     * @param message the message to set
+     */
+    public static void reset() {
+        FooDecorator2.message = null;
+    }
+
+    @Inject
+    @Delegate
+    Foo foo;
+
+    public void log(String message) {
+        FooDecorator2.message = message;
+        foo.log(message + SUFFIX);
+    }
 
 }

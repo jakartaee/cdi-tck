@@ -20,9 +20,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
 
 @Stateless
-public class TibetanTerrier_Broken implements Terrier
-{
-   public void observeSomeEvent(@Observes String someEvent)
-   {
-   }
+public class TibetanTerrier_Broken implements Terrier {
+    public void observeSomeEvent(@Observes String someEvent) {
+    }
 }

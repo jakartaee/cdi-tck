@@ -18,10 +18,9 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.passivatingScope;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @EpochScoped
-public class RomanEmpire
-{
+public class RomanEmpire {
 
 }

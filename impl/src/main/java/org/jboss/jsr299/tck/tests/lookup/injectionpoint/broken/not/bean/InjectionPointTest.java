@@ -26,22 +26,16 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class InjectionPointTest extends AbstractJSR299Test
-{
-    
+public class InjectionPointTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(InjectionPointTest.class)
-            .withWebXml("web.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InjectionPointTest.class).withWebXml("web.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "5.5.7", id = "ga")
-   public void testDefinitionErrorDetected()
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "5.5.7", id = "ga")
+    public void testDefinitionErrorDetected() {
+    }
 }

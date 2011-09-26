@@ -26,10 +26,9 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-@Target( { FIELD, PARAMETER} )
+@Target({ FIELD, PARAMETER })
 @Retention(RUNTIME)
 @Documented
 @Qualifier
-public @interface Wild
-{
+public @interface Wild {
 }

@@ -32,22 +32,17 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ObserverMethodAnnotatedProducesTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ObserverMethodAnnotatedProducesTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ObserverMethodAnnotatedProducesTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ObserverMethodAnnotatedProducesTest.class).build();
     }
-    
-   @Test(groups = { "events" })
-   @SpecAssertion(section = "10.4.2", id = "d")
-   public void testObserverMethodAnnotatedProducesFails()
-   {
-   }
+
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "10.4.2", id = "d")
+    public void testObserverMethodAnnotatedProducesFails() {
+    }
 }

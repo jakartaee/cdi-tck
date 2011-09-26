@@ -20,8 +20,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
 
 @Stateless
-public class Foo_Broken implements FooLocal_Broken
-{
-   @Produces
-   Integer zero = 0;
+public class Foo_Broken implements FooLocal_Broken {
+    @Produces
+    Integer zero = 0;
 }

@@ -27,24 +27,19 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class ManagerTestEar extends AbstractJSR299Test
-{
-    
+public class ManagerTestEar extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClass(ManagerTestEar.class)
-            .withClasses(JndiBeanManagerInjected.class, Dummy.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClass(ManagerTestEar.class)
+                .withClasses(JndiBeanManagerInjected.class, Dummy.class).build();
     }
-    
-   @Test(groups = { "manager", "ejb3", "integration" })
-   @SpecAssertion(section = "11.3", id = "da")
-   public void testManagerLookupInJndi() throws Exception
-   {
-      BeanManager beanManager = getInstanceByType(JndiBeanManagerInjected.class).getManagerFromJndi();
-      assert beanManager != null;
-      assert beanManager.equals(getCurrentManager());
-   }
+
+    @Test(groups = { "manager", "ejb3", "integration" })
+    @SpecAssertion(section = "11.3", id = "da")
+    public void testManagerLookupInJndi() throws Exception {
+        BeanManager beanManager = getInstanceByType(JndiBeanManagerInjected.class).getManagerFromJndi();
+        assert beanManager != null;
+        assert beanManager.equals(getCurrentManager());
+    }
 }

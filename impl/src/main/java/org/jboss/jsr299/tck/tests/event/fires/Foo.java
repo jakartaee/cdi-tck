@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.event.fires;
 
-public class Foo<T>
-{
+public class Foo<T> {
 
 }

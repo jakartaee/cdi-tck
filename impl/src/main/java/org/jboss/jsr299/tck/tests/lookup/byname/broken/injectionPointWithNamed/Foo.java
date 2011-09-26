@@ -19,12 +19,10 @@ package org.jboss.jsr299.tck.tests.lookup.byname.broken.injectionPointWithNamed;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
-public class Foo
-{
-   
-   @Produces
-   public Baz produceFoo(@Named Bar bar)
-   {
-      return new Baz("");
-   }
+public class Foo {
+
+    @Produces
+    public Baz produceFoo(@Named Bar bar) {
+        return new Baz("");
+    }
 }

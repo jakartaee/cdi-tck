@@ -16,10 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.broken.interceptorCanNotBeDecorator;
 
-public class Automobile
-{
-   public void start()
-   {
-      
-   }
+public class Automobile {
+    public void start() {
+
+    }
 }

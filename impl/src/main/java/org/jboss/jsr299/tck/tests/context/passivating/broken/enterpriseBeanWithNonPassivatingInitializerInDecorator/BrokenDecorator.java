@@ -23,10 +23,12 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-abstract class BrokenDecorator implements EspooLocal_Broken, Serializable
-{
-   @Inject @Delegate EspooLocal_Broken espooLocal;
-   
-   @Inject
-   public void init(District district) {}
+abstract class BrokenDecorator implements EspooLocal_Broken, Serializable {
+    @Inject
+    @Delegate
+    EspooLocal_Broken espooLocal;
+
+    @Inject
+    public void init(District district) {
+    }
 }

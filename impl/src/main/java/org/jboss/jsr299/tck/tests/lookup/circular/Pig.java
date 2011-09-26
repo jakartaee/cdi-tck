@@ -22,20 +22,18 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-public class Pig implements Serializable
-{
-   
-   private static final long serialVersionUID = 2445308247858178311L;
+public class Pig implements Serializable {
 
-   @Inject Food food;
-   
-   public String getName()
-   {
-      return "john";
-   }
-   
-   public String getNameOfFood()
-   {
-      return food.getName();
-   }
+    private static final long serialVersionUID = 2445308247858178311L;
+
+    @Inject
+    Food food;
+
+    public String getName() {
+        return "john";
+    }
+
+    public String getNameOfFood() {
+        return food.getName();
+    }
 }

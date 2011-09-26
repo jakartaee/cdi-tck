@@ -24,32 +24,27 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class SessionBeanInterceptorOrderTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class SessionBeanInterceptorOrderTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(SessionBeanInterceptorOrderTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(SessionBeanInterceptorOrderTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "9.4", id = "fb")
-   public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding()
-   {
-      MissileInterceptor.intercepted = false;
-      RadarInterceptor.intercepted = false;
-      RadarInterceptor.interceptedFirst = false;
 
-      MissileLocal missile = getInstanceByType(MissileLocal.class);
-      missile.fire();
+    @Test
+    @SpecAssertion(section = "9.4", id = "fb")
+    public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding() {
+        MissileInterceptor.intercepted = false;
+        RadarInterceptor.intercepted = false;
+        RadarInterceptor.interceptedFirst = false;
 
-      assert MissileInterceptor.intercepted;
-      assert RadarInterceptor.intercepted;
-      assert RadarInterceptor.interceptedFirst;
-   }
+        MissileLocal missile = getInstanceByType(MissileLocal.class);
+        missile.fire();
+
+        assert MissileInterceptor.intercepted;
+        assert RadarInterceptor.intercepted;
+        assert RadarInterceptor.interceptedFirst;
+    }
 }

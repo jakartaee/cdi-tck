@@ -25,23 +25,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class DependentIsConditionalObserverTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DependentIsConditionalObserverTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DependentIsConditionalObserverTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DependentIsConditionalObserverTest.class).build();
     }
-    
-   // WBRI-315
-   @Test(groups = { "events" })
-   @SpecAssertion(section = "10.4.3", id = "b")
-   public void testDependentBeanWithConditionalObserverMethodIsDefinitionError()
-   {
-   }
+
+    // WBRI-315
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "10.4.3", id = "b")
+    public void testDependentBeanWithConditionalObserverMethodIsDefinitionError() {
+    }
 }

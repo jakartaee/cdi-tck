@@ -18,12 +18,10 @@ package org.jboss.jsr299.tck.interceptors.tests.lifecycleCallback.order;
 
 import javax.annotation.PostConstruct;
 
-class CargoShip extends Ship
-{
-   @PostConstruct
-   void postConstruct2()
-   {
-      assert LakeCargoShip.getSequence() == 5;
-      LakeCargoShip.setSequence(6);
-   }
+class CargoShip extends Ship {
+    @PostConstruct
+    void postConstruct2() {
+        assert LakeCargoShip.getSequence() == 5;
+        LakeCargoShip.setSequence(6);
+    }
 }

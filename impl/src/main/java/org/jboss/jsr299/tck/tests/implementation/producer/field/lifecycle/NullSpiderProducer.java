@@ -20,14 +20,15 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.lifecycle;
 import javax.enterprise.inject.Produces;
 
 /**
- * Contains producer for Spider which always is a null value and
- * in Dependent scope
+ * Contains producer for Spider which always is a null value and in Dependent scope
  * 
  * @author David Allen
- *
+ * 
  */
-public class NullSpiderProducer
-{
-   @Produces @Null @Working public BlackWidow produceBlackWidow = null;
+public class NullSpiderProducer {
+    @Produces
+    @Null
+    @Working
+    public BlackWidow produceBlackWidow = null;
 
 }

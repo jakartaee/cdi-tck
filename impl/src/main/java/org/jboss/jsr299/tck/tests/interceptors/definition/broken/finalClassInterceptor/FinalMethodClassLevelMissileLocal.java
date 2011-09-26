@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInte
 import javax.ejb.Local;
 
 @Local
-public interface FinalMethodClassLevelMissileLocal
-{
-   void fire();
+public interface FinalMethodClassLevelMissileLocal {
+    void fire();
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.producer.method.broken.indirectOverride;
 
-public class Product
-{
-   
+public class Product {
+
 }

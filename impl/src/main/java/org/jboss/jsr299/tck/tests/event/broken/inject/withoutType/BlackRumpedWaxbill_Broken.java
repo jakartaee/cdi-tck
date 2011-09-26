@@ -20,9 +20,9 @@ import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
-public class BlackRumpedWaxbill_Broken
-{
-   @SuppressWarnings({"unchecked", "unused"})
-   @Inject @Any 
-   private Event simpleEvent;
+public class BlackRumpedWaxbill_Broken {
+    @SuppressWarnings({ "unchecked", "unused" })
+    @Inject
+    @Any
+    private Event simpleEvent;
 }

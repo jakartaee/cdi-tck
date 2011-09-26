@@ -20,15 +20,17 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
-public class OakTree
-{
-   @Produces @Dependent public Acorn growAcorn()
-   {
-      return null;
-   }
-   
-   @Produces @RequestScoped @Yummy public Pollen pollinate()
-   {
-      return null;
-   }
+public class OakTree {
+    @Produces
+    @Dependent
+    public Acorn growAcorn() {
+        return null;
+    }
+
+    @Produces
+    @RequestScoped
+    @Yummy
+    public Pollen pollinate() {
+        return null;
+    }
 }

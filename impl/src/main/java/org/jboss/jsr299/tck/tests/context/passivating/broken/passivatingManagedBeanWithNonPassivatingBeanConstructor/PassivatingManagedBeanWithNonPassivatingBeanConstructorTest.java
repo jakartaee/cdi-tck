@@ -25,22 +25,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class PassivatingManagedBeanWithNonPassivatingBeanConstructorTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class PassivatingManagedBeanWithNonPassivatingBeanConstructorTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(PassivatingManagedBeanWithNonPassivatingBeanConstructorTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(PassivatingManagedBeanWithNonPassivatingBeanConstructorTest.class)
+                .build();
     }
-    
-   @Test(groups = { "contexts", "passivation" })
-   @SpecAssertion(section = "6.6.4", id = "aabb")
-   public void testSimpleDependentWebBeanWithNonSerializableImplementationInjectedIntoConstructorParameterOfWebBeanWithPassivatingScopeFails()
-   {
-   }
+
+    @Test(groups = { "contexts", "passivation" })
+    @SpecAssertion(section = "6.6.4", id = "aabb")
+    public void testSimpleDependentWebBeanWithNonSerializableImplementationInjectedIntoConstructorParameterOfWebBeanWithPassivatingScopeFails() {
+    }
 }

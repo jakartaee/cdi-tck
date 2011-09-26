@@ -24,19 +24,16 @@ import org.jboss.jsr299.tck.tests.interceptors.definition.member.AnimalCountInte
 
 @Interceptor
 @AnimalCountInterceptorBinding(Operation.DECREASE)
-public class DecreasingInterceptor
-{
-   private static boolean intercepted = false;
+public class DecreasingInterceptor {
+    private static boolean intercepted = false;
 
-   @AroundInvoke
-   public Object aroundInvoke(InvocationContext ctx) throws Exception
-   {
-      intercepted = true;
-      return ((Integer) ctx.proceed()) - 10;
-   }
+    @AroundInvoke
+    public Object aroundInvoke(InvocationContext ctx) throws Exception {
+        intercepted = true;
+        return ((Integer) ctx.proceed()) - 10;
+    }
 
-   public static boolean isIntercepted()
-   {
-      return intercepted;
-   }
+    public static boolean isIntercepted() {
+        return intercepted;
+    }
 }

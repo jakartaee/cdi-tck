@@ -20,21 +20,19 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class House
-{
-   
-   // For serialization
-   public House() {}
-   
-   @Inject
-   public House(House house)
-   {
-      house.ping();
-   }
-   
-   private void ping()
-   {
-      
-   }
-   
+public class House {
+
+    // For serialization
+    public House() {
+    }
+
+    @Inject
+    public House(House house) {
+        house.ping();
+    }
+
+    private void ping() {
+
+    }
+
 }

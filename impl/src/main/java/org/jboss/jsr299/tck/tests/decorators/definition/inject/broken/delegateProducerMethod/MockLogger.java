@@ -18,15 +18,11 @@ package org.jboss.jsr299.tck.tests.decorators.definition.inject.broken.delegateP
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class MockLogger implements Logger
-{
+public class MockLogger implements Logger {
 
-   
-
-   public void log(String string)
-   {
-   }
+    public void log(String string) {
+    }
 
 }

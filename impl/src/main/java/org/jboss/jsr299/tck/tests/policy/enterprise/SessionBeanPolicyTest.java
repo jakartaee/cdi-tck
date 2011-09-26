@@ -24,24 +24,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class SessionBeanPolicyTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class SessionBeanPolicyTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(SessionBeanPolicyTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(SessionBeanPolicyTest.class).withBeansXml("beans.xml").build();
     }
 
-   @Test(groups = { "policy"})
-   @SpecAssertion(section = "5.1.1", id = "eb")
-   public void testEnabledPolicyAvailable()
-   {
-      assert getBeans(EjbInterface.class).size() == 1;
-      assert getBeans(EjbInterface.class).iterator().next().getTypes().contains(EjbInterface.class);
-   }
+    @Test(groups = { "policy" })
+    @SpecAssertion(section = "5.1.1", id = "eb")
+    public void testEnabledPolicyAvailable() {
+        assert getBeans(EjbInterface.class).size() == 1;
+        assert getBeans(EjbInterface.class).iterator().next().getTypes().contains(EjbInterface.class);
+    }
 }

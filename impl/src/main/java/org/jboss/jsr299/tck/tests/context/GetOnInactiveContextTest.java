@@ -29,28 +29,23 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class GetOnInactiveContextTest extends AbstractJSR299Test
-{
-    
-    @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(GetFromContextualTest.class)
-            .build();
-    }
-    
-   @Test(groups = { "contexts" }, expectedExceptions = { ContextNotActiveException.class })
-   @SpecAssertion(section = "6.2", id = "m")
-   public void testInvokingGetOnInactiveContextFails()
-   {
-      Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
-      assert sessionContext.isActive();
-      setContextInactive(sessionContext);
+@SpecVersion(spec = "cdi", version = "20091101")
+public class GetOnInactiveContextTest extends AbstractJSR299Test {
 
-      Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
-      sessionContext.get(mySessionBean);
-   }
-   
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(GetFromContextualTest.class).build();
+    }
+
+    @Test(groups = { "contexts" }, expectedExceptions = { ContextNotActiveException.class })
+    @SpecAssertion(section = "6.2", id = "m")
+    public void testInvokingGetOnInactiveContextFails() {
+        Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
+        assert sessionContext.isActive();
+        setContextInactive(sessionContext);
+
+        Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
+        sessionContext.get(mySessionBean);
+    }
+
 }

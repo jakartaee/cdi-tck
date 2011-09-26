@@ -30,29 +30,23 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class InterceptorNotResolvedTest extends AbstractJSR299Test
-{
-    
-   @Deployment
-   public static WebArchive createTestArchive() 
-	{
-       return new WebArchiveBuilder()
-           .withTestClassPackage(InterceptorNotResolvedTest.class)
-           .withBeansXml("beans.xml")
-           .build();
-   }
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InterceptorNotResolvedTest extends AbstractJSR299Test {
 
-   @Test(groups = { "resolution", "rewrite" })
-   // TODO PLM should check injection, not resolution
-   @SpecAssertion(section = "5.1.4", id = "b")
-   public void testInterceptorNotResolved() 
-   {
-      Set<Type> types = new HashSet<Type>();
-      for (Bean<Cat> bean : getBeans(Cat.class)) {
-         types.addAll(bean.getTypes());
-      }
-      assert !types.contains(CatInterceptor.class);
-      assert getInstanceByType(Cat.class) != null;
-   }
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(InterceptorNotResolvedTest.class).withBeansXml("beans.xml").build();
+    }
+
+    @Test(groups = { "resolution", "rewrite" })
+    // TODO PLM should check injection, not resolution
+    @SpecAssertion(section = "5.1.4", id = "b")
+    public void testInterceptorNotResolved() {
+        Set<Type> types = new HashSet<Type>();
+        for (Bean<Cat> bean : getBeans(Cat.class)) {
+            types.addAll(bean.getTypes());
+        }
+        assert !types.contains(CatInterceptor.class);
+        assert getInstanceByType(Cat.class) != null;
+    }
 }

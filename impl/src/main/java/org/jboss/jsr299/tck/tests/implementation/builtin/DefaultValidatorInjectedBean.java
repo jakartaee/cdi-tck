@@ -22,17 +22,16 @@ import javax.validation.Validator;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @Stateful
-public class DefaultValidatorInjectedBean implements DefaultValidatorInjectedBeanLocal
-{
+public class DefaultValidatorInjectedBean implements DefaultValidatorInjectedBeanLocal {
 
-   @Inject transient Validator defaultValidator;
-   
-   public Validator getDefaultValidator()
-   {
-      return defaultValidator;
-   }
+    @Inject
+    transient Validator defaultValidator;
+
+    public Validator getDefaultValidator() {
+        return defaultValidator;
+    }
 
 }

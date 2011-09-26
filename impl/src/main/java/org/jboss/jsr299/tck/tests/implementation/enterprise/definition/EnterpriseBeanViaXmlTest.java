@@ -33,30 +33,22 @@ import org.testng.annotations.Test;
  * 
  * @author David Allen
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class EnterpriseBeanViaXmlTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EnterpriseBeanViaXmlTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EnterpriseBeanViaXmlTest.class)
-            .withEjbJarXml("ejb-jar.xml")
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanViaXmlTest.class).withEjbJarXml("ejb-jar.xml")
+                .build();
     }
 
-   @Test(groups = { "enterpriseBeans", "ejbjarxml" })
-   @SpecAssertions( { 
-      @SpecAssertion(section = "3.1.1", id = "n"),
-      @SpecAssertion(section = "3.2.2", id = "ba") 
-   })
-   public void testEjbDeclaredInXmlNotSimpleBean()
-   {
-      Bean<ElephantLocal> elephantBean = getBeans(ElephantLocal.class).iterator().next();
-      // The interface is a known type but the class should not be
-      assert elephantBean.getTypes().contains(ElephantLocal.class);
-      assert !elephantBean.getTypes().contains(Elephant.class);
-   }
-   
+    @Test(groups = { "enterpriseBeans", "ejbjarxml" })
+    @SpecAssertions({ @SpecAssertion(section = "3.1.1", id = "n"), @SpecAssertion(section = "3.2.2", id = "ba") })
+    public void testEjbDeclaredInXmlNotSimpleBean() {
+        Bean<ElephantLocal> elephantBean = getBeans(ElephantLocal.class).iterator().next();
+        // The interface is a known type but the class should not be
+        assert elephantBean.getTypes().contains(ElephantLocal.class);
+        assert !elephantBean.getTypes().contains(Elephant.class);
+    }
+
 }

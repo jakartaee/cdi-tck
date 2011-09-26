@@ -25,41 +25,36 @@ import javax.inject.Inject;
 
 @Stateful
 @RequestScoped
-public class Kassel implements KleinStadt, SchoeneStadt
-{
-   private String name;
+public class Kassel implements KleinStadt, SchoeneStadt {
+    private String name;
 
-   @Inject
-   private GrossStadt grossStadt;
-   
-   @PostConstruct
-   public void begruendet()
-   {
-      grossStadt.kleinStadtCreated();
-      name = "Kassel";
-   }
+    @Inject
+    private GrossStadt grossStadt;
 
-   @Remove
-   public void zustandVergessen()
-   {
-   }
+    @PostConstruct
+    public void begruendet() {
+        grossStadt.kleinStadtCreated();
+        name = "Kassel";
+    }
 
-   @PreDestroy
-   public void zustandVerloren()
-   {
-      grossStadt.kleinStadtDestroyed();
-   }
-   
-   public void ping() {}
+    @Remove
+    public void zustandVergessen() {
+    }
 
-   public String getName()
-   {
-      return name;
-   }
+    @PreDestroy
+    public void zustandVerloren() {
+        grossStadt.kleinStadtDestroyed();
+    }
 
-   public void setName(String name)
-   {
-      this.name = name;
-   }
+    public void ping() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }

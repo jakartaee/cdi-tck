@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
+
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
@@ -26,7 +27,7 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-@Target( { TYPE, METHOD, PARAMETER, FIELD })
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Qualifier
 public @interface Wild {

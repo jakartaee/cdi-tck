@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 import javax.ejb.Local;
 
 @Local
-public interface ScottishBirdLocal extends Bird
-{
+public interface ScottishBirdLocal extends Bird {
 
 }

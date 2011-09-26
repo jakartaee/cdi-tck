@@ -21,6 +21,5 @@ import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
 @ConversationScoped
-public class BeanWithTooManyScopeTypes_Broken
-{
+public class BeanWithTooManyScopeTypes_Broken {
 }

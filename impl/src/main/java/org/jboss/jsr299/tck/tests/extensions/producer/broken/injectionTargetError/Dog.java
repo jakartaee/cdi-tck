@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.producer.broken.injectionTargetError;
 
-public class Dog
-{
+public class Dog {
 
 }

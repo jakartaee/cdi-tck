@@ -20,22 +20,19 @@ import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
-public class ObserverDecorator implements Observer
-{
-   
-   @Inject @Delegate
-   private Observer observer;
-   
-   public void observe(Foo foo)
-   {
-      observer.observe(new Foo("decorated"));
-   }
+public class ObserverDecorator implements Observer {
 
+    @Inject
+    @Delegate
+    private Observer observer;
+
+    public void observe(Foo foo) {
+        observer.observe(new Foo("decorated"));
+    }
 
 }

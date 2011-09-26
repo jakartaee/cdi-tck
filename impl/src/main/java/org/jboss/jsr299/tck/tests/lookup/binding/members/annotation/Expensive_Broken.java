@@ -29,8 +29,7 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RUNTIME)
-@Target( { METHOD, FIELD, PARAMETER, TYPE })
-public @interface Expensive_Broken
-{
-   SimpleAnnotation member();
+@Target({ METHOD, FIELD, PARAMETER, TYPE })
+public @interface Expensive_Broken {
+    SimpleAnnotation member();
 }

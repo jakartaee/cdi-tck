@@ -25,28 +25,23 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class SessionBeanInterceptorOnNonContextualEjbReferenceTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class SessionBeanInterceptorOnNonContextualEjbReferenceTest extends AbstractJSR299Test {
+
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(SessionBeanInterceptorOnNonContextualEjbReferenceTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(SessionBeanInterceptorOnNonContextualEjbReferenceTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "7.2", id = "h")
-   public void testNonContextualSessionBeanReferenceIsIntercepted()
-   {
-      MissileInterceptor.intercepted = false;
 
-      Ship cruiser = getInstanceByType(Ship.class);
-      cruiser.defend();
+    @Test
+    @SpecAssertion(section = "7.2", id = "h")
+    public void testNonContextualSessionBeanReferenceIsIntercepted() {
+        MissileInterceptor.intercepted = false;
 
-      assert MissileInterceptor.intercepted;
-   }
+        Ship cruiser = getInstanceByType(Ship.class);
+        cruiser.defend();
+
+        assert MissileInterceptor.intercepted;
+    }
 }

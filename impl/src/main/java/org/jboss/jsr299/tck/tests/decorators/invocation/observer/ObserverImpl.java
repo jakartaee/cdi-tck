@@ -18,36 +18,30 @@ package org.jboss.jsr299.tck.tests.decorators.invocation.observer;
 
 import javax.enterprise.event.Observes;
 
-
-
 /**
  * @author pmuir
- *
+ * 
  */
-public class ObserverImpl implements Observer
-{
-   
-   private static boolean observervedCorrectly = false;
-   
-   /**
-    * @param log the log to set
-    */
-   public static void reset()
-   {
-      observervedCorrectly = false;
-   }
-   
-   public void observe(@Observes Foo foo)
-   {
-      observervedCorrectly = foo.getFoo().equals("decorated");
-   }
-   
-   /**
-    * @return the disposedCorrectly
-    */
-   public static boolean isObservervedCorrectly()
-   {
-      return observervedCorrectly;
-   }
+public class ObserverImpl implements Observer {
+
+    private static boolean observervedCorrectly = false;
+
+    /**
+     * @param log the log to set
+     */
+    public static void reset() {
+        observervedCorrectly = false;
+    }
+
+    public void observe(@Observes Foo foo) {
+        observervedCorrectly = foo.getFoo().equals("decorated");
+    }
+
+    /**
+     * @return the disposedCorrectly
+     */
+    public static boolean isObservervedCorrectly() {
+        return observervedCorrectly;
+    }
 
 }

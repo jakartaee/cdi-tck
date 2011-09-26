@@ -28,9 +28,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Stereotype;
 
 @Stereotype()
-@Target( { TYPE, METHOD, FIELD })
+@Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @RequestScoped
-public @interface AnimalStereotype
-{
+public @interface AnimalStereotype {
 }

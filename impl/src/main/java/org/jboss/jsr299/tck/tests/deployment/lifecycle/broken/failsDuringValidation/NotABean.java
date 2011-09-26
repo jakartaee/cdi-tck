@@ -16,10 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.failsDuringValidation;
 
-public class NotABean
-{
-   public NotABean(String name)
-   {
-      
-   }
+public class NotABean {
+    public NotABean(String name) {
+
+    }
 }

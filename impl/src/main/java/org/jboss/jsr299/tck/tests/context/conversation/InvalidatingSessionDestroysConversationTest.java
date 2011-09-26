@@ -29,35 +29,29 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Nicklas Karlsson
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class InvalidatingSessionDestroysConversationTest extends AbstractConversationTest
-{
-    
-    @Deployment(testable=false)
-    public static WebArchive createTestArchive() 
-	{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InvalidatingSessionDestroysConversationTest extends AbstractConversationTest {
+
+    @Deployment(testable = false)
+    public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-            .withTestClassDefinition(InvalidatingSessionDestroysConversationTest.class)
-            .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
-                        CloudController.class, OutermostFilter.class)
-            .withWebResource("cloud.jsf", "cloud.jspx")
-            .withWebResource("clouds.jsf", "clouds.jspx")
-            .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
-            .withWebXml("web.xml")
-            .build();
+                .withTestClassDefinition(InvalidatingSessionDestroysConversationTest.class)
+                .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
+                        CloudController.class, OutermostFilter.class).withWebResource("cloud.jsf", "cloud.jspx")
+                .withWebResource("clouds.jsf", "clouds.jspx").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
+                .withWebXml("web.xml").build();
     }
-   
-   @Test(groups = { "contexts" })
-   @SpecAssertion(section = "6.7.4", id = "qa")
-   // TODO this test doesn't precisely probe the boundaries of the service() method
-   public void testInvalidatingSessionDestroysConversation() throws Exception
-   {
-      WebClient webClient = new WebClient();
-      resetCloud(webClient);
-      webClient.getPage(getPath("clouds.jsf"));
-      assert !isCloudDestroyed(webClient);
-      invalidateSession(webClient);
-      assert isCloudDestroyed(webClient);
-   }
+
+    @Test(groups = { "contexts" })
+    @SpecAssertion(section = "6.7.4", id = "qa")
+    // TODO this test doesn't precisely probe the boundaries of the service() method
+    public void testInvalidatingSessionDestroysConversation() throws Exception {
+        WebClient webClient = new WebClient();
+        resetCloud(webClient);
+        webClient.getPage(getPath("clouds.jsf"));
+        assert !isCloudDestroyed(webClient);
+        invalidateSession(webClient);
+        assert isCloudDestroyed(webClient);
+    }
 
 }

@@ -18,12 +18,11 @@ package org.jboss.jsr299.tck.tests.lookup.binding.members.array;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class TheBeatles
-{
-   
-   @Expensive_Broken(prices = { "" }) Watch watch;
-   
+public class TheBeatles {
+
+    @Expensive_Broken(prices = { "" })
+    Watch watch;
 
 }

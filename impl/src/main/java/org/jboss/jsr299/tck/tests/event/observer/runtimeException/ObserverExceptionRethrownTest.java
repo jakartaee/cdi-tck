@@ -26,29 +26,23 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests that an unchecked exception thrown from a non-transactional
- * observer is rethrown.
+ * Tests that an unchecked exception thrown from a non-transactional observer is rethrown.
  * 
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ObserverExceptionRethrownTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ObserverExceptionRethrownTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ObserverExceptionRethrownTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ObserverExceptionRethrownTest.class).build();
     }
-    
-   @Test(groups = { "events" }, expectedExceptions = { TeaCupPomeranian.OversizedException.class })
-   @SpecAssertion(section = "10.5", id = "cc")
-   public void testNonTransactionalObserverThrowsNonCheckedExceptionIsRethrown()
-   {
-      getCurrentManager().fireEvent("string event");
-   }
+
+    @Test(groups = { "events" }, expectedExceptions = { TeaCupPomeranian.OversizedException.class })
+    @SpecAssertion(section = "10.5", id = "cc")
+    public void testNonTransactionalObserverThrowsNonCheckedExceptionIsRethrown() {
+        getCurrentManager().fireEvent("string event");
+    }
 
 }

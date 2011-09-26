@@ -31,87 +31,81 @@ import javax.enterprise.inject.spi.PassivationCapable;
 
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
-public class CatBean implements Bean<Cat>, PassivationCapable
-{
-   public static final CatBean bean = new CatBean();
-   
-   @SuppressWarnings("serial")
-   public Set<Annotation> getQualifiers()
-   {
-      return new HashSet<Annotation>(){{ add(new DefaultLiteral());}};
-   }
+public class CatBean implements Bean<Cat>, PassivationCapable {
+    public static final CatBean bean = new CatBean();
 
-   public Class<? extends Annotation> getDeploymentType()
-   {
-      return null;
-   }
+    @SuppressWarnings("serial")
+    public Set<Annotation> getQualifiers() {
+        return new HashSet<Annotation>() {
+            {
+                add(new DefaultLiteral());
+            }
+        };
+    }
 
-   public Set<InjectionPoint> getInjectionPoints()
-   {
-      return new HashSet<InjectionPoint>();
-   }
+    public Class<? extends Annotation> getDeploymentType() {
+        return null;
+    }
 
-   public String getName()
-   {
-      return "cat";
-   }
-   
-   public Set<Class<? extends Annotation>> getStereotypes() {
-      return new HashSet<Class<? extends Annotation>>();
-   }
+    public Set<InjectionPoint> getInjectionPoints() {
+        return new HashSet<InjectionPoint>();
+    }
 
-   public Class<? extends Annotation> getScope()
-   {
-      return Dependent.class;
-   }
+    public String getName() {
+        return "cat";
+    }
 
-   @SuppressWarnings("serial")
-   public Set<Type> getTypes()
-   {
-      return new HashSet<Type>() {{ add(Cat.class); add(Object.class); }};
-   }
+    public Set<Class<? extends Annotation>> getStereotypes() {
+        return new HashSet<Class<? extends Annotation>>();
+    }
 
-   public boolean isNullable()
-   {
-      return false;
-   }
+    public Class<? extends Annotation> getScope() {
+        return Dependent.class;
+    }
 
-   public boolean isSerializable()
-   {
-      return false;
-   }
-   
-   public Class<?> getBeanClass()
-   {
-      return Cat.class;
-   }
-   
-   public boolean isAlternative()
-   {
-      return false;
-   }
+    @SuppressWarnings("serial")
+    public Set<Type> getTypes() {
+        return new HashSet<Type>() {
+            {
+                add(Cat.class);
+                add(Object.class);
+            }
+        };
+    }
 
-   public Cat create(CreationalContext<Cat> creationalContext)
-   {
-      return new Cat("kitty");
-   }
+    public boolean isNullable() {
+        return false;
+    }
 
-   public void destroy(Cat instance, CreationalContext<Cat> creationalContext)
-   {
-      creationalContext.release();
-   }
+    public boolean isSerializable() {
+        return false;
+    }
 
-   public static CatBean getBean()
-   {
-      return bean;
-   }
+    public Class<?> getBeanClass() {
+        return Cat.class;
+    }
 
-   public void afterDiscovery(@Observes AfterBeanDiscovery event) {
-      event.addBean(bean);
-   }
+    public boolean isAlternative() {
+        return false;
+    }
 
-   public String getId()
-   {
-      return "org.jboss.jsr299.tck.tests.extensions.beanManager.CatBean";
-   }
+    public Cat create(CreationalContext<Cat> creationalContext) {
+        return new Cat("kitty");
+    }
+
+    public void destroy(Cat instance, CreationalContext<Cat> creationalContext) {
+        creationalContext.release();
+    }
+
+    public static CatBean getBean() {
+        return bean;
+    }
+
+    public void afterDiscovery(@Observes AfterBeanDiscovery event) {
+        event.addBean(bean);
+    }
+
+    public String getId() {
+        return "org.jboss.jsr299.tck.tests.extensions.beanManager.CatBean";
+    }
 }

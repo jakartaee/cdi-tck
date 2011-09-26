@@ -18,21 +18,19 @@ package org.jboss.jsr299.tck.tests.decorators.definition.inject.delegateInitiali
 
 import javax.inject.Inject;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
-public class CowShed
-{
-   
-   public static final String MESSAGE = "cowShed";
+public class CowShed {
 
-   @Inject Logger logger;
+    public static final String MESSAGE = "cowShed";
 
-   public void milk()
-   {
-      logger.log(MESSAGE);
-   }
+    @Inject
+    Logger logger;
+
+    public void milk() {
+        logger.log(MESSAGE);
+    }
 
 }

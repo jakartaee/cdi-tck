@@ -29,7 +29,7 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RUNTIME)
-@Target( { METHOD, FIELD, PARAMETER, TYPE })
+@Target({ METHOD, FIELD, PARAMETER, TYPE })
 public @interface Expensive_Broken {
-	String[] prices();
+    String[] prices();
 }

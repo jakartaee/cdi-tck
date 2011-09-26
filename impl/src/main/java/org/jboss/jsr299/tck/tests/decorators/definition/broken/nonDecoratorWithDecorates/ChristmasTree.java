@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition.broken.nonDecoratorWithDecorates;
 
-public class ChristmasTree
-{
+public class ChristmasTree {
 
 }

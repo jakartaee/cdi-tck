@@ -28,27 +28,19 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class GetWithNoCreationalContextTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class GetWithNoCreationalContextTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(GetWithNoCreationalContextTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(GetWithNoCreationalContextTest.class).build();
     }
-    
-   @Test(groups = { "contexts" })
-   @SpecAssertions({
-      @SpecAssertion(section = "6.2", id = "na"),
-      @SpecAssertion(section = "6.2", id = "k")
-   })
-   public void testGetWithoutCreationalContextReturnsNull()
-   {
-      Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
-      assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean) == null;
-   }
-   
+
+    @Test(groups = { "contexts" })
+    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "na"), @SpecAssertion(section = "6.2", id = "k") })
+    public void testGetWithoutCreationalContextReturnsNull() {
+        Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
+        assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean) == null;
+    }
+
 }

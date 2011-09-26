@@ -22,7 +22,7 @@ import javax.interceptor.Interceptors;
 @Stateful
 @Airborne
 @Interceptors(RadarInterceptor.class)
-public class Missile implements MissileLocal
-{
-   public void fire() {}
+public class Missile implements MissileLocal {
+    public void fire() {
+    }
 }

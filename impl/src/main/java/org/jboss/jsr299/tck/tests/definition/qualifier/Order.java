@@ -18,8 +18,8 @@ package org.jboss.jsr299.tck.tests.definition.qualifier;
 
 import javax.inject.Inject;
 
-public class Order
-{
-   @Inject
-   public Order(OrderProcessor processor) {} 
+public class Order {
+    @Inject
+    public Order(OrderProcessor processor) {
+    }
 }

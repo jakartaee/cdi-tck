@@ -21,7 +21,6 @@ package org.jboss.jsr299.tck.tests.lookup.binding.members.array;
  * 
  */
 @Expensive_Broken(prices = { "" })
-public class Watch
-{
+public class Watch {
 
 }

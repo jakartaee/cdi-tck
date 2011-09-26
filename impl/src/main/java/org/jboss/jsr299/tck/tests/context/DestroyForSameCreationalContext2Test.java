@@ -35,40 +35,35 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class DestroyForSameCreationalContext2Test extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class DestroyForSameCreationalContext2Test extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(DestroyForSameCreationalContext2Test.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DestroyForSameCreationalContext2Test.class).build();
     }
-   
-   @Test
-   @SpecAssertion(section = "6.2", id = "r")
-   public void testDestroyForSameCreationalContextOnly()
-   {
-      // Check that the mock cc is called (via cc.release()) when we request a context destroyed
-      // Note that this is an indirect effect
-      Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
-      Context requestContext = getCurrentManager().getContext(RequestScoped.class);
-      
-      // We also test this directly using a custom contextual, and ensuring that the same contextual is passed to both methods
-      DummyContextual contextual = new DummyContextual();
-      
-      sessionContext.get(contextual, getCurrentManager().createCreationalContext(contextual));
-      destroyContext(sessionContext);
-      assert contextual.getCreationalContextPassedToCreate() == contextual.getCreationalContextPassedToDestroy();
-      
-      // Also test the request context
-      contextual = new DummyContextual();
-      requestContext.get(contextual, getCurrentManager().createCreationalContext(contextual));
-      destroyContext(requestContext);
-      assert contextual.getCreationalContextPassedToCreate() == contextual.getCreationalContextPassedToDestroy();
-      
-   }
-   
+
+    @Test
+    @SpecAssertion(section = "6.2", id = "r")
+    public void testDestroyForSameCreationalContextOnly() {
+        // Check that the mock cc is called (via cc.release()) when we request a context destroyed
+        // Note that this is an indirect effect
+        Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
+        Context requestContext = getCurrentManager().getContext(RequestScoped.class);
+
+        // We also test this directly using a custom contextual, and ensuring that the same contextual is passed to both methods
+        DummyContextual contextual = new DummyContextual();
+
+        sessionContext.get(contextual, getCurrentManager().createCreationalContext(contextual));
+        destroyContext(sessionContext);
+        assert contextual.getCreationalContextPassedToCreate() == contextual.getCreationalContextPassedToDestroy();
+
+        // Also test the request context
+        contextual = new DummyContextual();
+        requestContext.get(contextual, getCurrentManager().createCreationalContext(contextual));
+        destroyContext(requestContext);
+        assert contextual.getCreationalContextPassedToCreate() == contextual.getCreationalContextPassedToDestroy();
+
+    }
+
 }

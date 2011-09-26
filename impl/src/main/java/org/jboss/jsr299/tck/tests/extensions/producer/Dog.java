@@ -20,100 +20,82 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+public class Dog {
+    private static boolean constructorCalled = false;
+    private static boolean postConstructCalled;
+    private static boolean preDestroyCalled;
+    private static DogBed dogBed;
 
-public class Dog
-{
-   private static boolean     constructorCalled = false;
-   private static boolean     postConstructCalled;
-   private static boolean     preDestroyCalled;
-   private static DogBed      dogBed;
+    public static final String DEFAULT_COLOR = "Brown";
+    private String color = DEFAULT_COLOR;
 
-   public static final String DEFAULT_COLOR     = "Brown";
-   private String             color             = DEFAULT_COLOR;
-   
-   @Inject
-   private DogBone            dogBone;
+    @Inject
+    private DogBone dogBone;
 
-   public Dog()
-   {
-      constructorCalled = true;
-   }
+    public Dog() {
+        constructorCalled = true;
+    }
 
-   public Dog(String color)
-   {
-      this.color = color;
-   }
+    public Dog(String color) {
+        this.color = color;
+    }
 
-   @Inject
-   public void init(DogBed dogBed)
-   {
-      Dog.dogBed = dogBed;
-   }
+    @Inject
+    public void init(DogBed dogBed) {
+        Dog.dogBed = dogBed;
+    }
 
-   @PostConstruct
-   public void postConstruct()
-   {
-      postConstructCalled = true;
-   }
+    @PostConstruct
+    public void postConstruct() {
+        postConstructCalled = true;
+    }
 
-   @PreDestroy
-   public void preDestroy()
-   {
-      preDestroyCalled = true;
-   }
+    @PreDestroy
+    public void preDestroy() {
+        preDestroyCalled = true;
+    }
 
-   public static boolean isConstructorCalled()
-   {
-      return constructorCalled;
-   }
+    public static boolean isConstructorCalled() {
+        return constructorCalled;
+    }
 
-   public static void setConstructorCalled(boolean constructorCalled)
-   {
-      Dog.constructorCalled = constructorCalled;
-   }
+    public static void setConstructorCalled(boolean constructorCalled) {
+        Dog.constructorCalled = constructorCalled;
+    }
 
-   public static DogBed getDogBed()
-   {
-      return dogBed;
-   }
+    public static DogBed getDogBed() {
+        return dogBed;
+    }
 
-   public static void setDogBed(DogBed dogBed)
-   {
-      Dog.dogBed = dogBed;
-   }
+    public static void setDogBed(DogBed dogBed) {
+        Dog.dogBed = dogBed;
+    }
 
-   public String getColor()
-   {
-      return color;
-   }
+    public String getColor() {
+        return color;
+    }
 
-   public static boolean isPostConstructCalled()
-   {
-      return postConstructCalled;
-   }
+    public static boolean isPostConstructCalled() {
+        return postConstructCalled;
+    }
 
-   public static void setPostConstructCalled(boolean postConstructCalled)
-   {
-      Dog.postConstructCalled = postConstructCalled;
-   }
+    public static void setPostConstructCalled(boolean postConstructCalled) {
+        Dog.postConstructCalled = postConstructCalled;
+    }
 
-   public static boolean isPreDestroyCalled()
-   {
-      return preDestroyCalled;
-   }
+    public static boolean isPreDestroyCalled() {
+        return preDestroyCalled;
+    }
 
-   public static void setPreDestroyCalled(boolean preDestroyCalled)
-   {
-      Dog.preDestroyCalled = preDestroyCalled;
-   }
+    public static void setPreDestroyCalled(boolean preDestroyCalled) {
+        Dog.preDestroyCalled = preDestroyCalled;
+    }
 
-   public DogBone getDogBone()
-   {
-      return dogBone;
-   }
+    public DogBone getDogBone() {
+        return dogBone;
+    }
 
-   public void setDogBone(DogBone dogBone)
-   {
-      this.dogBone = dogBone;
-   }
+    public void setDogBone(DogBone dogBone) {
+        this.dogBone = dogBone;
+    }
 }

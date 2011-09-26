@@ -30,54 +30,44 @@ import org.testng.annotations.Test;
  * @author David Allen
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class ApplicationContextSharedTest extends AbstractJSR299Test
-{
+public class ApplicationContextSharedTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(ApplicationContextSharedTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(ApplicationContextSharedTest.class).build();
     }
-    
-   @Test(groups = { "contexts", "ejb3", "integration", "rewrite", "javaee-full-only" })
-   @SpecAssertion(section = "6.7.3", id = "e")
-   public void testApplicationContextShared() throws Exception
-   {
-      FMSModelIII.reset();
-      FMS flightManagementSystem = getInstanceByType(FMS.class);
-      flightManagementSystem.climb();
-      waitForClimbed();
-      flightManagementSystem.descend();
-      waitForDescended();
-      assert flightManagementSystem.isSameBean();
-   }
 
-   private void waitForClimbed() throws Exception
-   {
-      for (int i = 0; !FMSModelIII.isClimbed() && i < 2000; i++)
-      {
-         Thread.sleep(10);
-      }
-   }
+    @Test(groups = { "contexts", "ejb3", "integration", "rewrite", "javaee-full-only" })
+    @SpecAssertion(section = "6.7.3", id = "e")
+    public void testApplicationContextShared() throws Exception {
+        FMSModelIII.reset();
+        FMS flightManagementSystem = getInstanceByType(FMS.class);
+        flightManagementSystem.climb();
+        waitForClimbed();
+        flightManagementSystem.descend();
+        waitForDescended();
+        assert flightManagementSystem.isSameBean();
+    }
 
-   @Test(groups = { "contexts", "ejb3", "integration", "javaee-full-only" })
-   @SpecAssertion(section = "6.7.3", id = "dc")
-   public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception
-   {
-      FMS flightManagementSystem = getInstanceByType(FMS.class);
-      flightManagementSystem.climb();
-      waitForClimbed();
-      assert flightManagementSystem.isApplicationScopeActive();
-   }
+    private void waitForClimbed() throws Exception {
+        for (int i = 0; !FMSModelIII.isClimbed() && i < 2000; i++) {
+            Thread.sleep(10);
+        }
+    }
 
-   private void waitForDescended() throws Exception
-   {
-      for (int i = 0; !FMSModelIII.isDescended() && i < 2000; i++)
-      {
-         Thread.sleep(10);
-      }
-   }
+    @Test(groups = { "contexts", "ejb3", "integration", "javaee-full-only" })
+    @SpecAssertion(section = "6.7.3", id = "dc")
+    public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
+        FMS flightManagementSystem = getInstanceByType(FMS.class);
+        flightManagementSystem.climb();
+        waitForClimbed();
+        assert flightManagementSystem.isApplicationScopeActive();
+    }
+
+    private void waitForDescended() throws Exception {
+        for (int i = 0; !FMSModelIII.isDescended() && i < 2000; i++) {
+            Thread.sleep(10);
+        }
+    }
 
 }

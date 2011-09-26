@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition.broken.multiParams;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -27,28 +26,20 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class MultipleDisposeParametersDefinitionTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class MultipleDisposeParametersDefinitionTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
+    public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
 
-            .withTestClassPackage(MultipleDisposeParametersDefinitionTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+        .withTestClassPackage(MultipleDisposeParametersDefinitionTest.class).withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "3.3.5", id = "a"),
-      @SpecAssertion(section = "3.3.6", id = "ba")
-   })
-   public void testMultipleDisposeParameters()
-   {
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.3.5", id = "a"), @SpecAssertion(section = "3.3.6", id = "ba") })
+    public void testMultipleDisposeParameters() {
+    }
 
 }

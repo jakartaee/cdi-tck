@@ -18,9 +18,8 @@ package org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary.libraryBe
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class Bar
-{
+public class Bar {
 
 }

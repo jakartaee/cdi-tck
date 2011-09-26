@@ -25,15 +25,12 @@ import javax.interceptor.InvocationContext;
 @SuppressWarnings("serial")
 @Interceptor
 @GroceryInterceptorBinding
-public class GroceryInterceptor implements Serializable
-{
-   @AroundInvoke
-   public Object interceptFoo(InvocationContext ctx) throws Exception
-   {
-      if (ctx.getMethod().getName().equals("foo"))
-      {
-         return "foo";
-      }
-      return ctx.proceed();
-   }
+public class GroceryInterceptor implements Serializable {
+    @AroundInvoke
+    public Object interceptFoo(InvocationContext ctx) throws Exception {
+        if (ctx.getMethod().getName().equals("foo")) {
+            return "foo";
+        }
+        return ctx.proceed();
+    }
 }

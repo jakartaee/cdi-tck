@@ -23,9 +23,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "isSheepInjectedResponse", propOrder = {
-    "_return"
-})
+@XmlType(name = "isSheepInjectedResponse", propOrder = { "_return" })
 public class IsSheepInjectedResponse {
 
     @XmlElement(name = "return")

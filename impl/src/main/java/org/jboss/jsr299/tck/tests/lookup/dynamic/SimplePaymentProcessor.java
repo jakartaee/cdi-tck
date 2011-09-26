@@ -22,6 +22,5 @@ import org.jboss.jsr299.tck.tests.lookup.dynamic.PayBy.PaymentMethod;
 
 @PayBy(PaymentMethod.CASH)
 @ApplicationScoped
-public class SimplePaymentProcessor implements SynchronousPaymentProcessor
-{
+public class SimplePaymentProcessor implements SynchronousPaymentProcessor {
 }

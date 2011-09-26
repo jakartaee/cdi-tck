@@ -18,13 +18,12 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.definition;
 
 import javax.enterprise.inject.Produces;
 
-public class Chicken
-{
-   
-   @Produces @Yummy
-   public Egg produceEgg()
-   {
-      return new Egg(this);
-   }
+public class Chicken {
+
+    @Produces
+    @Yummy
+    public Egg produceEgg() {
+        return new Egg(this);
+    }
 
 }

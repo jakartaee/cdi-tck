@@ -26,16 +26,13 @@ import javax.interceptor.InvocationContext;
 
 @Interceptor
 @BakedBinding
-public class BrokenInterceptor implements Serializable
-{
-   @Inject
-   public BrokenInterceptor(@Default UnserializableManagedBean violation)
-   {
-   }
+public class BrokenInterceptor implements Serializable {
+    @Inject
+    public BrokenInterceptor(@Default UnserializableManagedBean violation) {
+    }
 
-   @AroundInvoke
-   public Object invoke(InvocationContext ctx) throws Exception
-   {
-      return ctx.proceed();
-   }
+    @AroundInvoke
+    public Object invoke(InvocationContext ctx) throws Exception {
+        return ctx.proceed();
+    }
 }

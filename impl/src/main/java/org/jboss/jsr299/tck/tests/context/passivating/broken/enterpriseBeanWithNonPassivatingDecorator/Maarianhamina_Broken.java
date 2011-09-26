@@ -20,9 +20,8 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 
 @Stateful
-public class Maarianhamina_Broken implements MaarianHaminaLocal_Broken
-{  
-   @Remove
-   public void bye() {
-   }
+public class Maarianhamina_Broken implements MaarianHaminaLocal_Broken {
+    @Remove
+    public void bye() {
+    }
 }

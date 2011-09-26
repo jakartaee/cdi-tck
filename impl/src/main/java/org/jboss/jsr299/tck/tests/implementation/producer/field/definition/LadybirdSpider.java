@@ -19,12 +19,10 @@ package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class LadybirdSpider extends Spider
-{
+public class LadybirdSpider extends Spider {
 
-   public void spinWeb()
-   {
-      
-   }
-   
+    public void spinWeb() {
+
+    }
+
 }

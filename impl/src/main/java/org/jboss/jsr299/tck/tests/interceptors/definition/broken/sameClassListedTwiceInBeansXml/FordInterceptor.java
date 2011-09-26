@@ -20,11 +20,11 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor @Transactional
-public class FordInterceptor
-{
-   @AroundInvoke public Object alwaysReturnThis(InvocationContext ctx) throws Exception
-   {
-      return ctx.proceed();
-   }
+@Interceptor
+@Transactional
+public class FordInterceptor {
+    @AroundInvoke
+    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
+        return ctx.proceed();
+    }
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.enterprise.nonbusiness;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -27,25 +26,17 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class ProducerMethodNotBusinessMethodTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ProducerMethodNotBusinessMethodTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(ProducerMethodNotBusinessMethodTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(ProducerMethodNotBusinessMethodTest.class).build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "3.3.2", id = "fa"),
-      @SpecAssertion(section = "3.3", id = "d")
-   })
-   public void testProducerMethodOnSessionBeanMustBeBusinessMethod()
-   {
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.3.2", id = "fa"), @SpecAssertion(section = "3.3", id = "d") })
+    public void testProducerMethodOnSessionBeanMustBeBusinessMethod() {
+    }
 }

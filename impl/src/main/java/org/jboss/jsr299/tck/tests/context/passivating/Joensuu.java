@@ -23,10 +23,9 @@ import javax.inject.Inject;
 
 @SuppressWarnings("serial")
 @SessionScoped
-public class Joensuu implements Serializable
-{
-   @SuppressWarnings("unused")
-   @Inject
-   private transient Violation reference;
+public class Joensuu implements Serializable {
+    @SuppressWarnings("unused")
+    @Inject
+    private transient Violation reference;
 
 }

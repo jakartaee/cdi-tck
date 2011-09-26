@@ -20,18 +20,15 @@ import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
-public class SpiderProducer_Broken
-{
+public class SpiderProducer_Broken {
 
-   @Produces
-   public static Spider getSpider()
-   {
-      return new Spider();
-   }
+    @Produces
+    public static Spider getSpider() {
+        return new Spider();
+    }
 
-   @Inject
-   public static void destorySpider(@Disposes Spider spider)
-   {
-   }
+    @Inject
+    public static void destorySpider(@Disposes Spider spider) {
+    }
 
 }

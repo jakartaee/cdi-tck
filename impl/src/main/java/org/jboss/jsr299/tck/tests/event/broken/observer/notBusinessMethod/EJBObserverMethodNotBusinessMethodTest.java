@@ -27,30 +27,22 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Test an observer method on an EJB that is neither a business method nor a
- * static method of the class.
+ * Test an observer method on an EJB that is neither a business method nor a static method of the class.
  * 
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class EJBObserverMethodNotBusinessMethodTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class EJBObserverMethodNotBusinessMethodTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(EJBObserverMethodNotBusinessMethodTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EJBObserverMethodNotBusinessMethodTest.class).build();
     }
-    
-   @Test(groups = { "events" })
-   @SpecAssertions( { 
-      @SpecAssertion(section = "10.4", id = "d"), 
-	   @SpecAssertion(section = "10.4.2", id = "g") })
-   public void testObserverMethodOnEnterpriseBeanNotBusinessMethodOrStaticFails()
-   {
-   }
+
+    @Test(groups = { "events" })
+    @SpecAssertions({ @SpecAssertion(section = "10.4", id = "d"), @SpecAssertion(section = "10.4.2", id = "g") })
+    public void testObserverMethodOnEnterpriseBeanNotBusinessMethodOrStaticFails() {
+    }
 }

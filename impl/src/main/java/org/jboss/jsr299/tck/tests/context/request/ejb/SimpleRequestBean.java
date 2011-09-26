@@ -20,29 +20,24 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-public class SimpleRequestBean
-{
-   private double id = Math.random();
-   private static boolean beanDestroyed = false;
+public class SimpleRequestBean {
+    private double id = Math.random();
+    private static boolean beanDestroyed = false;
 
-   public double getId()
-   {
-      return id;
-   }
-   
-   @PreDestroy
-   public void destroy()
-   {
-      beanDestroyed = true;
-   }
+    public double getId() {
+        return id;
+    }
 
-   public static boolean isBeanDestroyed()
-   {
-      return beanDestroyed;
-   }
+    @PreDestroy
+    public void destroy() {
+        beanDestroyed = true;
+    }
 
-   public static void setBeanDestroyed(boolean beanDestroyed)
-   {
-      SimpleRequestBean.beanDestroyed = beanDestroyed;
-   }
+    public static boolean isBeanDestroyed() {
+        return beanDestroyed;
+    }
+
+    public static void setBeanDestroyed(boolean beanDestroyed) {
+        SimpleRequestBean.beanDestroyed = beanDestroyed;
+    }
 }

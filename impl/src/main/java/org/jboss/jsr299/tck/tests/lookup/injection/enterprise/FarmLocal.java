@@ -19,8 +19,8 @@ package org.jboss.jsr299.tck.tests.lookup.injection.enterprise;
 import javax.ejb.Local;
 
 @Local
-public interface FarmLocal
-{
-   int getAnimalCount();
-   boolean isInjectionPerformedCorrectly();
+public interface FarmLocal {
+    int getAnimalCount();
+
+    boolean isInjectionPerformedCorrectly();
 }

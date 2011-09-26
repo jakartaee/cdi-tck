@@ -26,31 +26,23 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "3.1.PFD")
-public class LifecycleCallbackInterceptorExceptionTest extends AbstractJSR299Test
-{
-    
+public class LifecycleCallbackInterceptorExceptionTest extends AbstractJSR299Test {
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-            .withTestClassPackage(LifecycleCallbackInterceptorExceptionTest.class)
-            .build();
+        return new WebArchiveBuilder().withTestClassPackage(LifecycleCallbackInterceptorExceptionTest.class).build();
     }
-    
-   @Test(expectedExceptions = RuntimeException.class)
-   @SpecAssertion(section = "5.2", id = "a")
-   public void testPostConstructCanThrowRuntimeException()
-   {
-      getInstanceByType(Sheep.class);
-   }
 
-   @Test
-   @SpecAssertions( { 
-      @SpecAssertion(section = "5.2", id = "c"), 
-      @SpecAssertion(section = "5.2", id = "d")
-   })
-   public void testLifecycleCallbackInterceptorCanCatchException()
-   {
-      getInstanceByType(Goat.class);
-      assert GoatInterceptor.isExceptionCaught();
-   }
+    @Test(expectedExceptions = RuntimeException.class)
+    @SpecAssertion(section = "5.2", id = "a")
+    public void testPostConstructCanThrowRuntimeException() {
+        getInstanceByType(Sheep.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.2", id = "c"), @SpecAssertion(section = "5.2", id = "d") })
+    public void testLifecycleCallbackInterceptorCanCatchException() {
+        getInstanceByType(Goat.class);
+        assert GoatInterceptor.isExceptionCaught();
+    }
 }

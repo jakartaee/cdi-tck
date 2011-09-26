@@ -16,23 +16,18 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
+public class OuterClass {
 
-public class OuterClass
-{
+    class InnerClass_NotBean {
 
-   class InnerClass_NotBean
-   {
-      
-      public InnerClass_NotBean()
-      {
-         
-      }
-      
-   }
-   
-   static class StaticInnerClass
-   {
-      
-   }
+        public InnerClass_NotBean() {
+
+        }
+
+    }
+
+    static class StaticInnerClass {
+
+    }
 
 }

@@ -20,20 +20,19 @@ import javax.enterprise.inject.Produces;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class DaoProducer
-{
+public class DaoProducer {
 
-   @Produces
-   public Dao<Object, Object> getDao()
-   {
-      return new Dao<Object, Object>();
-   }
-   
-   @SuppressWarnings("unchecked")
-   @Produces Dao getRawDao() {
-       return getDao();
-   }
-   
+    @Produces
+    public Dao<Object, Object> getDao() {
+        return new Dao<Object, Object>();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Produces
+    Dao getRawDao() {
+        return getDao();
+    }
+
 }

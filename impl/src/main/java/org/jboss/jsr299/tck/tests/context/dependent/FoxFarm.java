@@ -18,15 +18,14 @@ package org.jboss.jsr299.tck.tests.context.dependent;
 
 import javax.inject.Inject;
 
-public class FoxFarm
-{
-   @Inject public Fox fox;      
-   
-   public Fox constructorFox;
-  
-   @Inject
-   public FoxFarm(Fox fox)
-   {
-      this.constructorFox = fox;
-   }   
+public class FoxFarm {
+    @Inject
+    public Fox fox;
+
+    public Fox constructorFox;
+
+    @Inject
+    public FoxFarm(Fox fox) {
+        this.constructorFox = fox;
+    }
 }

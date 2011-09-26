@@ -27,28 +27,22 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests that a checked exception thrown from a non-transactional
- * observer is wrapped and thrown.
+ * Tests that a checked exception thrown from a non-transactional observer is wrapped and thrown.
  * 
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class CheckedExceptionWrappedTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class CheckedExceptionWrappedTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(CheckedExceptionWrappedTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(CheckedExceptionWrappedTest.class).build();
     }
-    
-   @Test(groups = { "events" }, expectedExceptions = { ObserverException.class })
-   @SpecAssertion(section = "10.5", id = "cd")
-   public void testNonTransactionalObserverThrowsCheckedExceptionIsWrappedAndRethrown()
-   {
-      getCurrentManager().fireEvent(new Integer(1));
-   }
+
+    @Test(groups = { "events" }, expectedExceptions = { ObserverException.class })
+    @SpecAssertion(section = "10.5", id = "cd")
+    public void testNonTransactionalObserverThrowsCheckedExceptionIsWrappedAndRethrown() {
+        getCurrentManager().fireEvent(new Integer(1));
+    }
 }

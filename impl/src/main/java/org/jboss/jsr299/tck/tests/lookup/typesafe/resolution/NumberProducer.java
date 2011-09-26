@@ -18,17 +18,20 @@ package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
 import javax.enterprise.inject.Produces;
 
-public class NumberProducer
-{
+public class NumberProducer {
 
-   @Produces @Min @Number
-   public static final double min = 0;
-   
-   public static final Double max = Double.valueOf(10.5);
-   
-   @Produces @Max @Number
-   public static Double getMax() {
-      return max;
-   }
+    @Produces
+    @Min
+    @Number
+    public static final double min = 0;
+
+    public static final Double max = Double.valueOf(10.5);
+
+    @Produces
+    @Max
+    @Number
+    public static Double getMax() {
+        return max;
+    }
 
 }

@@ -20,27 +20,22 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
 
-public class BeanDiscoveryObserver
-{
-   private static boolean afterBeanDiscovery;
-   
-   public void afterBeanDiscovery(@Observes AfterBeanDiscovery event)
-   {
-      afterBeanDiscovery = true;
-   }
+public class BeanDiscoveryObserver {
+    private static boolean afterBeanDiscovery;
 
-   public void afterDeploymentValidation(@Observes AfterDeploymentValidation event)
-   {
-      assert false : "Deployment should have already failed because of the presence of an unsatisfied dependency";
-   }
+    public void afterBeanDiscovery(@Observes AfterBeanDiscovery event) {
+        afterBeanDiscovery = true;
+    }
 
-   public static boolean isAfterBeanDiscovery()
-   {
-      return afterBeanDiscovery;
-   }
+    public void afterDeploymentValidation(@Observes AfterDeploymentValidation event) {
+        assert false : "Deployment should have already failed because of the presence of an unsatisfied dependency";
+    }
 
-   public static void setAfterBeanDiscovery(boolean managerInitialized)
-   {
-      BeanDiscoveryObserver.afterBeanDiscovery = managerInitialized;
-   }
+    public static boolean isAfterBeanDiscovery() {
+        return afterBeanDiscovery;
+    }
+
+    public static void setAfterBeanDiscovery(boolean managerInitialized) {
+        BeanDiscoveryObserver.afterBeanDiscovery = managerInitialized;
+    }
 }

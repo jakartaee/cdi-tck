@@ -29,30 +29,24 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class CustomDecoratorTest extends AbstractJSR299Test
-{
-    
+public class CustomDecoratorTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(CustomDecoratorTest.class)
-            .withBeansXml("beans.xml")
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(CustomDecoratorTest.class).withBeansXml("beans.xml")
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @SuppressWarnings("unchecked")
-   @Test
-   @SpecAssertion(section = "8.3", id = "b")
-   public void testCustomImplementationOfDecoratorInterface()
-   {
-      assert getInstanceByType(Vehicle.class).start().equals("Bus started and decorated.");
-      assert getInstanceByType(Vehicle.class).stop().equals("Bus stopped and decorated.");
-      assert AfterBeanDiscoveryObserver.getDecorator().isGetDecoratedTypesCalled();
-      assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateQualifiersCalled();
-      assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateTypeCalled();
-      assert !getCurrentManager().resolveDecorators(new HashSet<Type>(Arrays.asList(Vehicle.class))).isEmpty();
-      assert !getCurrentManager().resolveDecorators(new HashSet<Type>(Arrays.asList(Vehicle.class, Bus.class))).isEmpty();
-   }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    @SpecAssertion(section = "8.3", id = "b")
+    public void testCustomImplementationOfDecoratorInterface() {
+        assert getInstanceByType(Vehicle.class).start().equals("Bus started and decorated.");
+        assert getInstanceByType(Vehicle.class).stop().equals("Bus stopped and decorated.");
+        assert AfterBeanDiscoveryObserver.getDecorator().isGetDecoratedTypesCalled();
+        assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateQualifiersCalled();
+        assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateTypeCalled();
+        assert !getCurrentManager().resolveDecorators(new HashSet<Type>(Arrays.asList(Vehicle.class))).isEmpty();
+        assert !getCurrentManager().resolveDecorators(new HashSet<Type>(Arrays.asList(Vehicle.class, Bus.class))).isEmpty();
+    }
 }

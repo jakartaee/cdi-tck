@@ -20,17 +20,14 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class Air
-{
-   
-   public Air()
-   {
-   
-   }
-   
-   @Inject
-   public Air(Bird bird)
-   {
-   }
-   
+public class Air {
+
+    public Air() {
+
+    }
+
+    @Inject
+    public Air(Bird bird) {
+    }
+
 }

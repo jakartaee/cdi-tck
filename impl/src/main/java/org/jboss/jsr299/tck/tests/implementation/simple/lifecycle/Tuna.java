@@ -19,11 +19,9 @@ package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-public class Tuna
-{
-   public String getName()
-   {
-      return "Ophir";
-   }
+public class Tuna {
+    public String getName() {
+        return "Ophir";
+    }
 
 }

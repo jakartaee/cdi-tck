@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.lookup.byname;
 import javax.inject.Named;
 
 @Named("fish")
-public class Salmon implements Animal
-{
+public class Salmon implements Animal {
 
 }

@@ -20,18 +20,16 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 @ApplicationScoped
-public class Food
-{
-   
-   @Inject Pig pig;
-   
-   public String getName()
-   {
-      return "food";
-   }
-   
-   public String getNameOfPig()
-   {
-      return pig.getName();
-   }
+public class Food {
+
+    @Inject
+    Pig pig;
+
+    public String getName() {
+        return "food";
+    }
+
+    public String getNameOfPig() {
+        return pig.getName();
+    }
 }

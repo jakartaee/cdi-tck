@@ -18,10 +18,9 @@ package org.jboss.jsr299.tck.tests.definition.stereotype.inheritance;
 
 /**
  * @author pmuir
- *
+ * 
  */
 @NamedRequestPolicyStereotype
-public class Horse
-{
+public class Horse {
 
 }

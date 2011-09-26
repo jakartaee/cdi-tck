@@ -17,7 +17,7 @@
 package org.jboss.jsr299.tck.tests.context.dependent;
 
 @Transactional
-public class AccountTransaction
-{
-   public void execute() {}
+public class AccountTransaction {
+    public void execute() {
+    }
 }

@@ -21,24 +21,20 @@ import java.lang.annotation.Annotation;
 import javax.enterprise.inject.spi.AnnotatedCallable;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 
-public class AnnotatedParameterWrapper<X> extends AnnotatedWrapper implements AnnotatedParameter<X>
-{
-   private AnnotatedParameter<X> delegate;
-   
-   public AnnotatedParameterWrapper(AnnotatedParameter<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations)
-   {
-      super(delegate, keepOriginalAnnotations, annotations);
-      this.delegate = delegate;
-   }
+public class AnnotatedParameterWrapper<X> extends AnnotatedWrapper implements AnnotatedParameter<X> {
+    private AnnotatedParameter<X> delegate;
 
-   public AnnotatedCallable<X> getDeclaringCallable()
-   {
-      return delegate.getDeclaringCallable();
-   }
+    public AnnotatedParameterWrapper(AnnotatedParameter<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
+        super(delegate, keepOriginalAnnotations, annotations);
+        this.delegate = delegate;
+    }
 
-   public int getPosition()
-   {
-      return delegate.getPosition();
-   }
+    public AnnotatedCallable<X> getDeclaringCallable() {
+        return delegate.getDeclaringCallable();
+    }
+
+    public int getPosition() {
+        return delegate.getPosition();
+    }
 
 }

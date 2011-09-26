@@ -27,31 +27,25 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests that any failure in an observer observing the AfterDeploymentValidation
- * event results in a deployment error.
+ * Tests that any failure in an observer observing the AfterDeploymentValidation event results in a deployment error.
  * 
  * @author David Allen
  * @author Dan Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class AfterDeploymentValidationObserverExecutionFailureTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class AfterDeploymentValidationObserverExecutionFailureTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(AfterDeploymentValidationObserverExecutionFailureTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(AfterDeploymentValidationObserverExecutionFailureTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test(groups={"rewrite"})
-   @SpecAssertion(section = "11.5.3", id = "c")
-   public void testObserverFailureTreatedAsDeploymentError()
-   {
-   }
-   
+
+    @Test(groups = { "rewrite" })
+    @SpecAssertion(section = "11.5.3", id = "c")
+    public void testObserverFailureTreatedAsDeploymentError() {
+    }
+
 }

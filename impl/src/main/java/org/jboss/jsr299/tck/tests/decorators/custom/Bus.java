@@ -16,16 +16,13 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.custom;
 
-public class Bus implements Vehicle
-{
+public class Bus implements Vehicle {
 
-   public String start()
-   {
-      return "Bus started";
-   }
+    public String start() {
+        return "Bus started";
+    }
 
-   public String stop()
-   {
-      return "Bus stopped";
-   }
+    public String stop() {
+        return "Bus stopped";
+    }
 }

@@ -18,18 +18,15 @@ package org.jboss.jsr299.tck.tests.event.observer;
 
 import javax.enterprise.event.Observes;
 
-public class StockWatcher
-{
-   private static Class<?> observerClazz;
-   
-   public void observeStockPrice(@Observes StockPrice price)
-   {
-      observerClazz = this.getClass();
-      price.recordVisit(this);
-   }
+public class StockWatcher {
+    private static Class<?> observerClazz;
 
-   public static Class<?> getObserverClazz()
-   {
-      return observerClazz;
-   }
+    public void observeStockPrice(@Observes StockPrice price) {
+        observerClazz = this.getClass();
+        price.recordVisit(this);
+    }
+
+    public static Class<?> getObserverClazz() {
+        return observerClazz;
+    }
 }

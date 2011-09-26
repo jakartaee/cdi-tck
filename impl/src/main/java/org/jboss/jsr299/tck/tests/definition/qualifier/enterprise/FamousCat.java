@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.definition.qualifier.enterprise;
 import javax.ejb.Stateless;
 
 @Stateless
-public class FamousCat extends TameSkinnyHairlessCat implements FamousCatLocal
-{
+public class FamousCat extends TameSkinnyHairlessCat implements FamousCatLocal {
 
 }

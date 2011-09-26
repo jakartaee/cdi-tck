@@ -16,8 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dynamic;
 
-public interface AsynchronousPaymentProcessor extends PaymentProcessor
-{
-   int getValue();
-   void setValue(int value);
+public interface AsynchronousPaymentProcessor extends PaymentProcessor {
+    int getValue();
+
+    void setValue(int value);
 }

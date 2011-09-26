@@ -16,16 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.invocation.producer.method;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
-public interface Producer
-{
-   
-   public Foo produce();
-   
-   public void dispose(Foo foo);
+public interface Producer {
+
+    public Foo produce();
+
+    public void dispose(Foo foo);
 
 }

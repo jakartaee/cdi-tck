@@ -28,9 +28,8 @@ import java.lang.annotation.Target;
 import javax.inject.Qualifier;
 
 @Retention(RUNTIME)
-@Target({TYPE, METHOD, FIELD, PARAMETER})
+@Target({ TYPE, METHOD, FIELD, PARAMETER })
 @Qualifier
-public @interface StandardVariety
-{
+public @interface StandardVariety {
 
 }

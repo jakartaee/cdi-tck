@@ -25,36 +25,26 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class AfterBeanDiscoveryTest extends AbstractJSR299Test
-{
-   
+@SpecVersion(spec = "cdi", version = "20091101")
+public class AfterBeanDiscoveryTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(AfterBeanDiscoveryTest.class)
-            .withExtension("javax.enterprise.inject.spi.Extension")
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(AfterBeanDiscoveryTest.class)
+                .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
-    
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.2", id="db")
-   })
-   public void testBeanIsAdded()
-   {
-      assert getBeans(Cockatoo.class).size() == 1;
-      assert getInstanceByType(Cockatoo.class).getName().equals("Billy");
-   }
-   
-   @Test
-   @SpecAssertions({
-      @SpecAssertion(section = "11.5.2", id="da")
-   })
-   public void testProcessBeanIsFired()
-   {
-      assert AfterBeanDiscoveryObserver.isProcessBeanFiredForCockatooBean();
-   }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "db") })
+    public void testBeanIsAdded() {
+        assert getBeans(Cockatoo.class).size() == 1;
+        assert getInstanceByType(Cockatoo.class).getName().equals("Billy");
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "da") })
+    public void testProcessBeanIsFired() {
+        assert AfterBeanDiscoveryObserver.isProcessBeanFiredForCockatooBean();
+    }
 
 }

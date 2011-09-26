@@ -32,149 +32,127 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
-public class IntegerBean implements Bean<Integer>, Extension
-{
-   
-   public static final IntegerBean bean = new IntegerBean();
-   
-   private boolean getQualifiersCalled = false;
-   private boolean getInjectionPointsCalled = false;
-   private boolean getNameCalled = false;
-   private boolean getScopeCalled = false;
-   private boolean getTypesCalled = false;
-   private boolean isAlternativeCalled = false;
-   private boolean isSerializableCalled = false;
-   private boolean isNullableCalled = false;
-   private boolean isGetBeanClassCalled = false;
-   private boolean getStereotypesCalled = false;
-   
-   public Class<?> getBeanClass()
-   {
-      isGetBeanClassCalled = true;
-      return Integer.class;
-   }
+public class IntegerBean implements Bean<Integer>, Extension {
 
-   public Set<InjectionPoint> getInjectionPoints()
-   {
-      getInjectionPointsCalled = true;
-      return Collections.emptySet();
-   }
+    public static final IntegerBean bean = new IntegerBean();
 
-   public String getName()
-   {
-      getNameCalled = true;
-      return "one";
-   }
+    private boolean getQualifiersCalled = false;
+    private boolean getInjectionPointsCalled = false;
+    private boolean getNameCalled = false;
+    private boolean getScopeCalled = false;
+    private boolean getTypesCalled = false;
+    private boolean isAlternativeCalled = false;
+    private boolean isSerializableCalled = false;
+    private boolean isNullableCalled = false;
+    private boolean isGetBeanClassCalled = false;
+    private boolean getStereotypesCalled = false;
 
-   @SuppressWarnings("serial")
-   public Set<Annotation> getQualifiers()
-   {
-      getQualifiersCalled = true;
-      return new HashSet<Annotation>() {
-         {
-            add(new DefaultLiteral());
-         }
-      };
-   }
+    public Class<?> getBeanClass() {
+        isGetBeanClassCalled = true;
+        return Integer.class;
+    }
 
-   public Class<? extends Annotation> getScope()
-   {
-      getScopeCalled = true;
-      return Dependent.class;
-   }
+    public Set<InjectionPoint> getInjectionPoints() {
+        getInjectionPointsCalled = true;
+        return Collections.emptySet();
+    }
 
-   public Set<Class<? extends Annotation>> getStereotypes()
-   {
-      HashSet<Class<? extends Annotation>> stereotypes = new HashSet<Class<? extends Annotation>>();
-      stereotypes.add(AlternativeStereotype.class);
-      getStereotypesCalled = true;
-      return stereotypes;
-   }
+    public String getName() {
+        getNameCalled = true;
+        return "one";
+    }
 
-   public Set<Type> getTypes()
-   {
-      HashSet<Type> types = new HashSet<Type>();
-      types.add(Object.class);
-      types.add(Number.class);
-      types.add(Integer.class);
-      
-      getTypesCalled = true;
-      return types;
-   }
+    @SuppressWarnings("serial")
+    public Set<Annotation> getQualifiers() {
+        getQualifiersCalled = true;
+        return new HashSet<Annotation>() {
+            {
+                add(new DefaultLiteral());
+            }
+        };
+    }
 
-   public boolean isAlternative()
-   {
-      isAlternativeCalled = true;
-      return true;
-   }
+    public Class<? extends Annotation> getScope() {
+        getScopeCalled = true;
+        return Dependent.class;
+    }
 
-   public boolean isNullable()
-   {
-      isNullableCalled = true;
-      return false;
-   }
+    public Set<Class<? extends Annotation>> getStereotypes() {
+        HashSet<Class<? extends Annotation>> stereotypes = new HashSet<Class<? extends Annotation>>();
+        stereotypes.add(AlternativeStereotype.class);
+        getStereotypesCalled = true;
+        return stereotypes;
+    }
 
-   public Integer create(CreationalContext<Integer> creationalContext)
-   {
-      return new Integer(1);
-   }
+    public Set<Type> getTypes() {
+        HashSet<Type> types = new HashSet<Type>();
+        types.add(Object.class);
+        types.add(Number.class);
+        types.add(Integer.class);
 
-   public void destroy(Integer instance, CreationalContext<Integer> creationalContext)
-   {
-      creationalContext.release();
-   }
+        getTypesCalled = true;
+        return types;
+    }
 
-   public boolean isGetQualifiersCalled()
-   {
-      return getQualifiersCalled;
-   }
+    public boolean isAlternative() {
+        isAlternativeCalled = true;
+        return true;
+    }
 
-   public boolean isGetInjectionPointsCalled()
-   {
-      return getInjectionPointsCalled;
-   }
+    public boolean isNullable() {
+        isNullableCalled = true;
+        return false;
+    }
 
-   public boolean isGetNameCalled()
-   {
-      return getNameCalled;
-   }
+    public Integer create(CreationalContext<Integer> creationalContext) {
+        return new Integer(1);
+    }
 
-   public boolean isGetScopeCalled()
-   {
-      return getScopeCalled;
-   }
+    public void destroy(Integer instance, CreationalContext<Integer> creationalContext) {
+        creationalContext.release();
+    }
 
-   public boolean isGetTypesCalled()
-   {
-      return getTypesCalled;
-   }
+    public boolean isGetQualifiersCalled() {
+        return getQualifiersCalled;
+    }
 
-   public boolean isAlternativeCalled()
-   {
-      return isAlternativeCalled;
-   }
+    public boolean isGetInjectionPointsCalled() {
+        return getInjectionPointsCalled;
+    }
 
-   public boolean isSerializableCalled()
-   {
-      return isSerializableCalled;
-   }
+    public boolean isGetNameCalled() {
+        return getNameCalled;
+    }
 
-   public boolean isNullableCalled()
-   {
-      return isNullableCalled;
-   }
+    public boolean isGetScopeCalled() {
+        return getScopeCalled;
+    }
 
-   public boolean isGetBeanClassCalled()
-   {
-      return isGetBeanClassCalled;
-   }
+    public boolean isGetTypesCalled() {
+        return getTypesCalled;
+    }
 
-   public boolean isGetStereotypesCalled()
-   {
-      return getStereotypesCalled;
-   }
-   
-   public void afterDiscovery(@Observes AfterBeanDiscovery event) {
-      event.addBean(bean);
-   }
+    public boolean isAlternativeCalled() {
+        return isAlternativeCalled;
+    }
+
+    public boolean isSerializableCalled() {
+        return isSerializableCalled;
+    }
+
+    public boolean isNullableCalled() {
+        return isNullableCalled;
+    }
+
+    public boolean isGetBeanClassCalled() {
+        return isGetBeanClassCalled;
+    }
+
+    public boolean isGetStereotypesCalled() {
+        return getStereotypesCalled;
+    }
+
+    public void afterDiscovery(@Observes AfterBeanDiscovery event) {
+        event.addBean(bean);
+    }
 }

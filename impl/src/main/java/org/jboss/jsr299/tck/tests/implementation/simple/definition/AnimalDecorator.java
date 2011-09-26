@@ -21,8 +21,9 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-abstract class AnimalDecorator implements Animal
-{
-   @Inject @Delegate Animal delegate;
+abstract class AnimalDecorator implements Animal {
+    @Inject
+    @Delegate
+    Animal delegate;
 
 }

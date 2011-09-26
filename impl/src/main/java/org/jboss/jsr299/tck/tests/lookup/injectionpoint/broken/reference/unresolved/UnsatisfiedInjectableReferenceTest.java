@@ -31,34 +31,27 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests retrieving an injectable reference for a bean which cannot be
- * resolved.
+ * Tests retrieving an injectable reference for a bean which cannot be resolved.
  * 
  * @author David Allen
- *
+ * 
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class UnsatisfiedInjectableReferenceTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class UnsatisfiedInjectableReferenceTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(UnsatisfiedInjectableReferenceTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(UnsatisfiedInjectableReferenceTest.class).build();
     }
-    
-   @SuppressWarnings("unchecked")
-   @Test(expectedExceptions = UnsatisfiedResolutionException.class)
-   @SpecAssertions({
-      @SpecAssertion(section = "11.3.2", id = "bb")
-   })
-   public void testUnsatisfiedReference()
-   {
-      Bean<SimpleBean> bean = this.getBeans(SimpleBean.class).iterator().next();
-      UnsatisfiedInjectionPoint injectionPoint = new UnsatisfiedInjectionPoint(bean);
-      CreationalContext<SimpleBean> creationalContext = getCurrentManager().createCreationalContext((Bean<SimpleBean>)injectionPoint.getBean());
-      getCurrentManager().getInjectableReference(injectionPoint, creationalContext);
-   }
+
+    @SuppressWarnings("unchecked")
+    @Test(expectedExceptions = UnsatisfiedResolutionException.class)
+    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "bb") })
+    public void testUnsatisfiedReference() {
+        Bean<SimpleBean> bean = this.getBeans(SimpleBean.class).iterator().next();
+        UnsatisfiedInjectionPoint injectionPoint = new UnsatisfiedInjectionPoint(bean);
+        CreationalContext<SimpleBean> creationalContext = getCurrentManager().createCreationalContext(
+                (Bean<SimpleBean>) injectionPoint.getBean());
+        getCurrentManager().getInjectableReference(injectionPoint, creationalContext);
+    }
 }

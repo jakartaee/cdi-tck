@@ -22,14 +22,11 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 
-public class GeneralListProducer<T>
-{
-   
-   @Produces
-   @RequestScoped
-   public List<T> create()
-   {
-       return new ArrayList<T>();
-   } 
-}
+public class GeneralListProducer<T> {
 
+    @Produces
+    @RequestScoped
+    public List<T> create() {
+        return new ArrayList<T>();
+    }
+}

@@ -25,23 +25,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class NullableBeanTest extends AbstractJSR299Test
-{
+@SpecVersion(spec = "cdi", version = "20091101")
+public class NullableBeanTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(NullableBeanTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(NullableBeanTest.class).build();
     }
-    
+
     @Test(groups = { "injection", "producerMethod" })
-   @SpecAssertion(section = "5.2.4", id = "aa")
-   public void testPrimitiveInjectionPointResolvesToNullableWebBean() throws Exception
-   {
-   }
-   
+    @SpecAssertion(section = "5.2.4", id = "aa")
+    public void testPrimitiveInjectionPointResolvesToNullableWebBean() throws Exception {
+    }
+
 }

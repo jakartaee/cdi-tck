@@ -20,26 +20,20 @@ import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.inject.Produces;
 
-
 /**
  * @author pmuir
- *
+ * 
  */
 @Decorator
-public class TimestampLogger
-{
-   
-   @Produces
-   public String setLogger(@Delegate Logger logger)
-   {
-      return "";
-   }
-   
-   public void log(String message)
-   {
-      
-   }
+public class TimestampLogger {
 
+    @Produces
+    public String setLogger(@Delegate Logger logger) {
+        return "";
+    }
 
+    public void log(String message) {
+
+    }
 
 }

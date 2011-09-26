@@ -16,6 +16,5 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.passivatingProducerMethodWithNonPassivatingParameter;
 
-public class Violation
-{
+public class Violation {
 }

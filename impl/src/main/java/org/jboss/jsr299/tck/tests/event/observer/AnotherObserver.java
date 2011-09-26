@@ -21,16 +21,13 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 
 @RequestScoped
-public class AnotherObserver
-{
-   static boolean wasNotified = false;
+public class AnotherObserver {
+    static boolean wasNotified = false;
 
-   void observer(@Observes @Role("Admin") AnEventType event)
-   {
-      wasNotified = true;
-   }
-   
-   void conditionalObserve(@Observes(notifyObserver = Reception.IF_EXISTS) ConditionalEvent e)
-   {
-   }
+    void observer(@Observes @Role("Admin") AnEventType event) {
+        wasNotified = true;
+    }
+
+    void conditionalObserve(@Observes(notifyObserver = Reception.IF_EXISTS) ConditionalEvent e) {
+    }
 }

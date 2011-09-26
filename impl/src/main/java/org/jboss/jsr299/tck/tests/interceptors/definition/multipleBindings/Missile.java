@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.multipleBindings;
 
-public interface Missile
-{
-   void fire();
+public interface Missile {
+    void fire();
 }

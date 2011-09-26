@@ -6,16 +6,13 @@ import javax.enterprise.inject.New;
 import org.jboss.jsr299.tck.literals.NewLiteral;
 
 @Alternative
-public class Tiger
-{
+public class Tiger {
 
-   public static final New NEW = new NewLiteral()
-   {
-      
-      public Class<?> value()
-      {
-         return Tiger.class;
-      }
-   };
-   
+    public static final New NEW = new NewLiteral() {
+
+        public Class<?> value() {
+            return Tiger.class;
+        }
+    };
+
 }

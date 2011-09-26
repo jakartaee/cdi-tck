@@ -19,18 +19,16 @@ package org.jboss.jsr299.tck.tests.decorators.custom;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
-public class VehicleDecorator implements Vehicle
-{
-   @Inject @Delegate
-   Vehicle delegate;
+public class VehicleDecorator implements Vehicle {
+    @Inject
+    @Delegate
+    Vehicle delegate;
 
-   public String start()
-   {
-      return delegate.start() + " and decorated.";
-   }
+    public String start() {
+        return delegate.start() + " and decorated.";
+    }
 
-   public String stop()
-   {
-      return delegate.stop() + " and decorated.";
-   }
+    public String stop() {
+        return delegate.stop() + " and decorated.";
+    }
 }

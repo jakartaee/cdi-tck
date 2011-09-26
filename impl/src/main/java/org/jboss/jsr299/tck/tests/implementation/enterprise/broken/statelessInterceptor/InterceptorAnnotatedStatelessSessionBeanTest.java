@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.broken.statelessInterceptor;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -26,23 +25,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec="cdi", version="20091101")
-public class InterceptorAnnotatedStatelessSessionBeanTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class InterceptorAnnotatedStatelessSessionBeanTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(InterceptorAnnotatedStatelessSessionBeanTest.class)
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(InterceptorAnnotatedStatelessSessionBeanTest.class).build();
     }
-    
-   @Test(groups = { "enterpriseBeans" })
-   @SpecAssertion(section = "3.2", id = "g")
-   public void testStatelessSessionBeanNotAllowedToBeInterceptor()
-   {
-   }
-   
+
+    @Test(groups = { "enterpriseBeans" })
+    @SpecAssertion(section = "3.2", id = "g")
+    public void testStatelessSessionBeanNotAllowedToBeInterceptor() {
+    }
+
 }

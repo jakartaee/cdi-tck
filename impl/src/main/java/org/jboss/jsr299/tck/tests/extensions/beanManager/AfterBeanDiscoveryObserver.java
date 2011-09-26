@@ -20,12 +20,10 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
-public class AfterBeanDiscoveryObserver implements Extension
-{
-   
-   public void addABean(@Observes AfterBeanDiscovery afterBeanDiscovery)
-   {
-      afterBeanDiscovery.addBean(new CowBean());
-   }
+public class AfterBeanDiscoveryObserver implements Extension {
+
+    public void addABean(@Observes AfterBeanDiscovery afterBeanDiscovery) {
+        afterBeanDiscovery.addBean(new CowBean());
+    }
 
 }

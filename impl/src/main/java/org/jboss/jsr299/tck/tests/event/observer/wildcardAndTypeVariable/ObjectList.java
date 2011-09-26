@@ -20,9 +20,8 @@ import java.util.ArrayList;
 
 /**
  * @author pmuir
- *
+ * 
  */
-public class ObjectList extends ArrayList<Object>
-{
+public class ObjectList extends ArrayList<Object> {
 
 }

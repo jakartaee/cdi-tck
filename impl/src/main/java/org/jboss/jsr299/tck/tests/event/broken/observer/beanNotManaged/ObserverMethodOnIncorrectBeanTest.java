@@ -25,28 +25,22 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests an observer method on something that is not a managed bean
- * or a session bean.
+ * Tests an observer method on something that is not a managed bean or a session bean.
  * 
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec="cdi", version="20091101")
-public class ObserverMethodOnIncorrectBeanTest extends AbstractJSR299Test
-{
-    
+@SpecVersion(spec = "cdi", version = "20091101")
+public class ObserverMethodOnIncorrectBeanTest extends AbstractJSR299Test {
+
     @Deployment
-    public static WebArchive createTestArchive() 
-	{
-        return new WebArchiveBuilder()
-            .withTestClassPackage(ObserverMethodOnIncorrectBeanTest.class)
-            .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ObserverMethodOnIncorrectBeanTest.class).build();
     }
-    
-   @Test(groups = { "events" })
-   @SpecAssertion(section = "10.4", id = "aa")
-   public void testObserverMethodNotOnManagedOrSessionBeanFails()
-   {
-      assert getCurrentManager().resolveObserverMethods(new String()).isEmpty();
-   }
+
+    @Test(groups = { "events" })
+    @SpecAssertion(section = "10.4", id = "aa")
+    public void testObserverMethodNotOnManagedOrSessionBeanFails() {
+        assert getCurrentManager().resolveObserverMethods(new String()).isEmpty();
+    }
 }

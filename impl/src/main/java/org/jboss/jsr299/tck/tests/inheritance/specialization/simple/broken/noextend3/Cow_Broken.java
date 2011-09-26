@@ -19,10 +19,8 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.noex
 import javax.enterprise.inject.Specializes;
 
 @Specializes
-public class Cow_Broken extends Mammal
-{
-   public Cow_Broken()
-   {
-      super("Herbivore");
-   }
+public class Cow_Broken extends Mammal {
+    public Cow_Broken() {
+        super("Herbivore");
+    }
 }

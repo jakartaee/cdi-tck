@@ -21,23 +21,22 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-@RequestScoped @Stateful
-public class House implements HouseLocal
-{
-   
-   public static boolean destroyed;
-   
-   @Inject RoomLocal room;
-   
-   public RoomLocal open() 
-   {
-      return room;
-   }
-   
-   @PreDestroy
-    public void preDestroy()
-   {
-      House.destroyed = true;
-   }
-   
+@RequestScoped
+@Stateful
+public class House implements HouseLocal {
+
+    public static boolean destroyed;
+
+    @Inject
+    RoomLocal room;
+
+    public RoomLocal open() {
+        return room;
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        House.destroyed = true;
+    }
+
 }

@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.enterprise.nonContext
 import javax.ejb.Local;
 
 @Local
-public interface Ship
-{
-   void defend();
+public interface Ship {
+    void defend();
 }

@@ -27,22 +27,17 @@ import org.testng.annotations.Test;
 /**
  * TODO exclude unless https://issues.jboss.org/browse/WELD-458 is fixed
  */
-public class InterceptorForLifecycleTargetMethodTest extends AbstractJSR299Test
-{
-    
+public class InterceptorForLifecycleTargetMethodTest extends AbstractJSR299Test {
+
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() 
-	{
-        return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(InterceptorForLifecycleTargetMethodTest.class)
-            .withBeansXml("beans.xml")
-            .build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(InterceptorForLifecycleTargetMethodTest.class)
+                .withBeansXml("beans.xml").build();
     }
-    
-   @Test
-   @SpecAssertion(section = "9.2", id = "d")
-   public void testInterceptorForLifecycleTargetMethod() throws Exception
-   {
-   }
+
+    @Test
+    @SpecAssertion(section = "9.2", id = "d")
+    public void testInterceptorForLifecycleTargetMethod() throws Exception {
+    }
 }

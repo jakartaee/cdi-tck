@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition.broken.parameterizedReturnTypeWithWildcard;
 
-public class FunnelWeaver<T>
-{
-   
+public class FunnelWeaver<T> {
+
 }

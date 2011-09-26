@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.definition.stereotype;
 
 @NonStereotype
-public class Goat
-{
+public class Goat {
 
 }

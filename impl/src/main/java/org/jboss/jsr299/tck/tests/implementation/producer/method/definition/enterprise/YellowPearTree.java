@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.definition.enterprise;
 
-public class YellowPearTree extends PearTree
-{
+public class YellowPearTree extends PearTree {
 
 }

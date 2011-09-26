@@ -16,12 +16,10 @@
  */
 package org.jboss.jsr299.tck.interceptors.tests.lifecycleCallback;
 
-public abstract class Animal
-{
-   void foo()
-   {
-      
-   }
+public abstract class Animal {
+    void foo() {
 
-   public abstract String getAnimalType();
+    }
+
+    public abstract String getAnimalType();
 }

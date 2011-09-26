@@ -16,12 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating;
 
-public class UnderwaterCity implements CityInterface
-{
+public class UnderwaterCity implements CityInterface {
 
-   public void foo()
-   {
-      
-   }
+    public void foo() {
+
+    }
 
 }
