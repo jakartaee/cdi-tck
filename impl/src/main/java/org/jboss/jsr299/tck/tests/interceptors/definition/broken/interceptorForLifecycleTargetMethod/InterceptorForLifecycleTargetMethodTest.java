@@ -24,6 +24,9 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.testng.annotations.Test;
 
+/**
+ * TODO exclude unless https://issues.jboss.org/browse/WELD-458 is fixed
+ */
 public class InterceptorForLifecycleTargetMethodTest extends AbstractJSR299Test
 {
     

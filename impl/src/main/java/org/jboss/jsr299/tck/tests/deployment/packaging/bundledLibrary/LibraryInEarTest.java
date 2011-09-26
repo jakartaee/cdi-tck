@@ -41,7 +41,8 @@ public class LibraryInEarTest extends AbstractJSR299Test
     public static EnterpriseArchive createTestArchive() 
 	{
         return new EnterpriseArchiveBuilder()
-            .withTestClassPackage(LibraryInEarTest.class)
+            .withTestClass(LibraryInEarTest.class)
+            .withClasses(Baz.class, BazLocal.class, Foo.class)
             .withBeanLibrary(Bar.class)
             .build();
     }

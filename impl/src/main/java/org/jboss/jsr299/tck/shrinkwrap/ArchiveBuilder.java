@@ -32,9 +32,11 @@ import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
 /**
  * Abstract shrinkwrap archive builder for JSR299 TCK arquillian test.
  * 
- * Remember that all arquillian tests running in as-client mode (including tests using {@link ShouldThrowException}) cannot
- * contain testing related stuff like test class itself while arquillian is not repackaging test archive. That's why
+ * <p>
+ * Note that all arquillian tests running in as-client mode (including tests using {@link ShouldThrowException}) cannot contain
+ * testing related stuff like test class itself while arquillian is not repackaging test archive. That's why
  * {@link #isAsClientMode} has to be properly set.
+ * </p>
  * 
  * @author Martin Kouba
  */
@@ -165,7 +167,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     {
         return withTestClassDefinition(testClazz).withPackage(testClazz.getPackage());
     }
-    
+
     /**
      * Add test class to archive and set test class definition for configuration purpose.
      * 
@@ -178,7 +180,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Set test class definition for configuration purpose.  Do not add it to final archive.
+     * Set test class definition for configuration purpose. Do not add it to final archive.
      * 
      * @param test
      * @return self
@@ -428,7 +430,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     public abstract T self();
 
     /**
-     * @return build shrinkwrap archive
+     * @return shrinkwrap archive
      */
     public A build()
     {
@@ -457,7 +459,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * @return build concrete shrinkwrap archive
+     * @return concrete shrinkwrap archive
      */
     protected abstract A buildInternal();
 
@@ -610,6 +612,10 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
     }
 
+    /**
+     * Add default libraries from lib directory specified with <code>org.jboss.jsr299.tck.libraryDirectory</code> property in
+     * <b>cdi-tck.properties</b>.
+     */
     private void addDefaultLibraries()
     {
 
@@ -631,7 +637,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Resource descriptor.
+     * Internal resource descriptor.
      * 
      * @author Martin Kouba
      */

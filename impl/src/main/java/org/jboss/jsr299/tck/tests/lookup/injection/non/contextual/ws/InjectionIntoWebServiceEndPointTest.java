@@ -31,8 +31,8 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 1. Needs javaee-full profile
- * 2. Injection not working (use serverConfig property in arquillian.xml)
+ * 1. Needs javaee-full profile (use serverConfig property in arquillian.xml)
+ * 2. Injection not working - AS7-1903
  */
 @SpecVersion(spec="cdi", version="20091101")
 public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
@@ -57,7 +57,6 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test
       @SpecAssertion(section = "5.5.2", id = "aq"),
       @SpecAssertion(section = "5.5.2", id = "ar")
    })
-   // JBAS-7046
    public void testInjectionIntoWebServiceEndpoint() throws Exception
    {
       URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
