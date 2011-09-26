@@ -110,8 +110,12 @@ public class ApplicationContextTest extends AbstractJSR299Test
       assert Double.parseDouble(secondRequestResult.getContent()) == Double.parseDouble(firstRequestResult.getContent());
    }
 
-   @Test(groups = { "contexts", "integration", "broken" })
-   // CDITCK-96
+   /**
+    *  Related to CDITCK-96.
+    *  
+    * @throws Exception
+    */
+   @Test(groups = { "contexts", "integration" })
    @SpecAssertion(section = "6.7.3", id = "e")
    public void testApplicationContextSharedBetweenJaxRsRequests() throws Exception
    {

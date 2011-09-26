@@ -17,7 +17,6 @@
 
 package org.jboss.jsr299.tck.tests.context.application;
 
-import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -32,13 +31,14 @@ import javax.ws.rs.Produces;
 @Path("/application-id")
 public class ApplicationResource
 {
-   @Inject
-   private BeanManager jsr299Manager;
+    
+    @Inject
+    SimpleApplicationBean simpleApplicationBean;
 
-   @GET @Produces("text/plain")
+   @GET
+   @Produces("text/plain")
    public String getValue()
    {
-      SimpleApplicationBean aBean = org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(jsr299Manager,SimpleApplicationBean.class);
-      return Double.toString(aBean.getId());
+      return Double.toString(simpleApplicationBean.getId());
    }
 }
