@@ -63,9 +63,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     protected List<String> excludedClasses = null;
 
-    protected List<File> libraries = null;
-
-    protected List<BeanLibraryDescriptor> beanLibraries = null;
+    protected List<LibraryDescriptor> libraries = null;
 
     /**
      * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}
@@ -363,9 +361,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     public T withLibrary(File library) {
 
         if (this.libraries == null)
-            this.libraries = new ArrayList<File>();
+            this.libraries = new ArrayList<LibraryDescriptor>();
 
-        this.libraries.add(library);
+        this.libraries.add(new LibraryDescriptor(library));
         return self();
     }
 
@@ -376,22 +374,32 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return
      */
     public T withBeanLibrary(Class<?>... beanClasses) {
-        return withBeanLibrary(false, beanClasses);
+        return withLibrary(true, beanClasses);
     }
 
     /**
-     * Add bean library that consists of defined bean classes.
+     * Add library that consists of defined classes.
      * 
-     * @param omitBeansXml
-     * @param beanClasses
+     * @param classes
      * @return
      */
-    public T withBeanLibrary(boolean omitBeansXml, Class<?>... beanClasses) {
+    public T withLibrary(Class<?>... classes) {
+        return withLibrary(false, classes);
+    }
 
-        if (beanLibraries == null)
-            beanLibraries = new ArrayList<BeanLibraryDescriptor>();
+    /**
+     * Add library that consists of defined classes. Include empty beans.xml if necessary.
+     * 
+     * @param omitBeansXml
+     * @param classes
+     * @return
+     */
+    public T withLibrary(boolean includeEmptyBeanXml, Class<?>... classes) {
 
-        this.beanLibraries.add(new BeanLibraryDescriptor(omitBeansXml, beanClasses));
+        if (libraries == null)
+            libraries = new ArrayList<LibraryDescriptor>();
+
+        this.libraries.add(new LibraryDescriptor(includeEmptyBeanXml, classes));
         return self();
     }
 
@@ -489,32 +497,28 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     protected void processLibraries(LibraryContainer<?> archive) {
 
-        // File libraries
         if (libraries != null) {
-            for (File library : libraries) {
-                archive.addAsLibrary(library);
-            }
-        }
 
-        // Bean libraries
-        if (beanLibraries != null) {
+            for (LibraryDescriptor descriptor : libraries) {
 
-            for (BeanLibraryDescriptor descriptor : beanLibraries) {
+                if (descriptor.getFileDescriptor() != null) {
+                    archive.addAsLibrary(descriptor.getFileDescriptor());
+                } else {
 
-                JavaArchive beanLibrary = ShrinkWrap.create(JavaArchive.class);
-                for (Class<?> beanClazz : descriptor.getBeanClasses()) {
-                    beanLibrary.addClass(beanClazz);
-                }
-                if (!descriptor.isOmitBeanXml()) {
-
-                    if (descriptor.getBeansXml() == null) {
-                        beanLibrary.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
-                    } else {
-                        beanLibrary.addAsManifestResource(descriptor.getBeansXml().getSource(), descriptor.getBeansXml()
-                                .getTarget());
+                    JavaArchive library = ShrinkWrap.create(JavaArchive.class);
+                    for (Class<?> clazz : descriptor.getBeanClasses()) {
+                        library.addClass(clazz);
                     }
+
+                    if (descriptor.getBeansXml() != null) {
+                        library.addAsManifestResource(descriptor.getBeansXml().getSource(), descriptor.getBeansXml()
+                                .getTarget());
+
+                    } else if (descriptor.includeEmptyBeanXml) {
+                        library.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
+                    }
+                    archive.addAsLibrary(library);
                 }
-                archive.addAsLibrary(beanLibrary);
             }
         }
     }
@@ -622,32 +626,39 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Descriptor of separate bean archive. Its possible to omit beans.xml - degrading this to ordinary library.
+     * Internal library descriptor. Its possible to automatically include empty beans.xml to promote it to BDA.
      * 
      * @author Martin Kouba
      */
-    protected class BeanLibraryDescriptor {
+    protected class LibraryDescriptor {
 
-        private List<Class<?>> beanClasses;
+        private File fileDescriptor;
+
+        private List<Class<?>> libraryClasses;
 
         private ResourceDescriptor beansXml;
 
-        private boolean omitBeanXml;
+        private boolean includeEmptyBeanXml;
 
-        public BeanLibraryDescriptor(ResourceDescriptor beansXml, Class<?>... classes) {
+        public LibraryDescriptor(File fileDescriptor) {
             super();
-            this.beansXml = beansXml;
-            this.beanClasses = Arrays.asList(classes);
+            this.fileDescriptor = fileDescriptor;
         }
 
-        public BeanLibraryDescriptor(boolean omitBeanXml, Class<?>... classes) {
+        public LibraryDescriptor(ResourceDescriptor beansXml, Class<?>... classes) {
             super();
-            this.omitBeanXml = omitBeanXml;
-            this.beanClasses = Arrays.asList(classes);
+            this.beansXml = beansXml;
+            this.libraryClasses = Arrays.asList(classes);
+        }
+
+        public LibraryDescriptor(boolean omitBeanXml, Class<?>... classes) {
+            super();
+            this.includeEmptyBeanXml = omitBeanXml;
+            this.libraryClasses = Arrays.asList(classes);
         }
 
         public List<Class<?>> getBeanClasses() {
-            return beanClasses;
+            return libraryClasses;
         }
 
         public ResourceDescriptor getBeansXml() {
@@ -655,7 +666,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
 
         public boolean isOmitBeanXml() {
-            return omitBeanXml;
+            return includeEmptyBeanXml;
+        }
+
+        public File getFileDescriptor() {
+            return fileDescriptor;
         }
     }
 

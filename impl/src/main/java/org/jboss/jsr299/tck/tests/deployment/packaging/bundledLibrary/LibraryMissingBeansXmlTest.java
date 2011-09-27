@@ -39,7 +39,7 @@ public class LibraryMissingBeansXmlTest extends AbstractJSR299Test {
     public static WebArchive createTestArchive() {
         // We put Foo in test archive, but Bar goes in the library
         return new WebArchiveBuilder().withTestClass(LibraryMissingBeansXmlTest.class).withClasses(Foo.class)
-                .withBeanLibrary(true, Bar.class).build();
+                .withLibrary(Bar.class).build();
     }
 
     @Test(groups = {})
