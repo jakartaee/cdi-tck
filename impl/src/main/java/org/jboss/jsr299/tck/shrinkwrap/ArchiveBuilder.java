@@ -38,9 +38,12 @@ import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
  * {@link #isAsClientMode} has to be properly set.
  * </p>
  * 
+ * @param <T> Self type to enable abstract builder pattern
+ * @param <A> Final shrinkwrap archive
  * @author Martin Kouba
  */
 public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends Archive<A>> {
+
     private boolean isAsClientMode = false;
 
     private Class<?> testClazz = null;
@@ -417,7 +420,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         resolveAsClientMode();
 
-        withResource(JSR299PropertiesBasedConfigurationBuilder.RESOURCE_BUNDLE, null, false);
         // org.jboss.jsr299.tck.api
         withPackage(JSR299Configuration.class.getPackage());
         // org.jboss.jsr299.tck.spi
