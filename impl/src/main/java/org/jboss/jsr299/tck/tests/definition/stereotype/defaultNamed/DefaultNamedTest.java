@@ -34,10 +34,14 @@ public class DefaultNamedTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "aaa"), @SpecAssertion(section = "2.5.2", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "a"), @SpecAssertion(section = "2.7.1.3", id = "aaa"),
+            @SpecAssertion(section = "2.5.2", id = "e") })
     public void testStereotypeWithEmptyNamed() {
         assert getBeans(FallowDeer.class).size() == 1;
         assert "fallowDeer".equals(getBeans(FallowDeer.class).iterator().next().getName());
+        assert getBeans(RoeDeer.class).size() == 1;
+        assert "roeDeer".equals(getBeans(RoeDeer.class).iterator().next().getName());
+
     }
 
 }

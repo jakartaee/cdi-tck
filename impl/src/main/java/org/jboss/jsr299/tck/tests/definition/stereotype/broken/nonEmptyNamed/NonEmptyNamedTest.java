@@ -32,13 +32,11 @@ public class NonEmptyNamedTest extends AbstractJSR299Test {
     @ShouldThrowException(Exception.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-
-        .withTestClassPackage(NonEmptyNamedTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(NonEmptyNamedTest.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "aab"), @SpecAssertion(section = "2.5.2", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "aab") })
     public void testStereotypeWithNonEmptyNamed() {
     }
 
