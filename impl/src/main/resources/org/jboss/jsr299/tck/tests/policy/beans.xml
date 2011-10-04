@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans>
-	<alternatives>
-		<class>org.jboss.jsr299.tck.tests.policy.Chicken</class>
-		<class>org.jboss.jsr299.tck.tests.policy.EnabledSheepProducer</class>
-		<stereotype>org.jboss.jsr299.tck.tests.policy.EnabledPolicyStereotype</stereotype>
-	</alternatives>
-</beans>
