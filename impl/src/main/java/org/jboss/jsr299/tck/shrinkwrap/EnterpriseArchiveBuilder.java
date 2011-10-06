@@ -19,6 +19,7 @@ package org.jboss.jsr299.tck.shrinkwrap;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 
@@ -60,7 +61,10 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         processLibraries(enterpriseArchive);
 
         // Add beans.xml to META-INF
-        if (beansXml != null) {
+        if (beansDescriptor != null) {
+            ejbArchive.addAsManifestResource(new StringAsset(beansDescriptor.exportAsString()),
+                    beansDescriptor.getDescriptorName());
+        } else if (beansXml != null) {
             ejbArchive.addAsManifestResource(beansXml.getSource(), beansXml.getTarget());
         } else {
             ejbArchive.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));

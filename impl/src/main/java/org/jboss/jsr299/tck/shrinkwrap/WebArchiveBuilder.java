@@ -46,7 +46,10 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
         processManifestResources(webArchive);
         processResources(webArchive);
 
-        if (beansXml != null) {
+        if (beansDescriptor != null) {
+            webArchive.addAsWebInfResource(new StringAsset(beansDescriptor.exportAsString()),
+                    beansDescriptor.getDescriptorName());
+        } else if (beansXml != null) {
             webArchive.addAsWebInfResource(beansXml.getSource(), beansXml.getTarget());
         } else {
             webArchive.addAsWebInfResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));

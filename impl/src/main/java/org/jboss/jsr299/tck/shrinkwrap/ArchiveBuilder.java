@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.enterprise.inject.spi.Extension;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -38,16 +40,21 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.container.ClassContainer;
 import org.jboss.shrinkwrap.api.container.LibraryContainer;
 import org.jboss.shrinkwrap.api.container.ManifestContainer;
 import org.jboss.shrinkwrap.api.container.ResourceContainer;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
 
 /**
  * Abstract shrinkwrap archive builder for JSR299 TCK arquillian test.
- * 
+ * <p>
+ * This is a base class for builders that try to solve most <b>JBoss Test Harness</b> to <b>Arquillian</b> migration issues. The
+ * main goal was to use CDI TCK 1.0 tests with minimum code changes.
+ * </p>
  * <p>
  * Note that all arquillian tests running in as-client mode (including tests using {@link ShouldThrowException}) cannot contain
  * testing related stuff like test class itself while arquillian is not repackaging test archive. That's why
@@ -65,6 +72,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     private Class<?> testClazz = null;
 
     protected ResourceDescriptor beansXml = null;
+
+    protected BeansDescriptor beansDescriptor = null;
 
     protected ResourceDescriptor webXml = null;
 
@@ -84,8 +93,14 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     protected List<LibraryDescriptor> libraries = null;
 
+    protected List<ServiceProviderDescriptor> serviceProviders = null;
+
     /**
      * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}
+     * 
+     * <p>
+     * Do not use this in new tests - use ${@link #withBeansXml(BeansDescriptor)} instead.
+     * </p>
      * 
      * @param beansXml
      * @return self
@@ -96,14 +111,54 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
+     * Add <code>beans.xml</code> descriptor created with shrinkwrap-descriptors.
+     * 
+     * @param beansDescriptor
+     * @return self
+     */
+    public T withBeansXml(BeansDescriptor beansDescriptor) {
+        this.beansDescriptor = beansDescriptor;
+        return self();
+    }
+
+    /**
      * Add CDI extension located in src/main/resource/{testPackagePath} to
      * META-INF/services/javax.enterprise.inject.spi.Extension.
+     * 
+     * <p>
+     * Do not use this in new tests - use ${@link #withExtension(Class)} instead.
+     * </p>
      * 
      * @param extension
      * @return self
      */
     public T withExtension(String extension) {
         return withManifestResource(extension, "services/javax.enterprise.inject.spi.Extension", true);
+    }
+
+    /**
+     * Add CDI extension. This method does not add the specified class to the archive.
+     * 
+     * @param extensionClass
+     * @return self
+     */
+    public T withExtension(Class<? extends Extension> extensionClass) {
+        return withServiceProvider(new ServiceProviderDescriptor(Extension.class, extensionClass));
+    }
+
+    /**
+     * Add service provider.
+     * 
+     * @param serviceProvider
+     * @return
+     */
+    public T withServiceProvider(ServiceProviderDescriptor serviceProvider) {
+
+        if (serviceProviders == null)
+            serviceProviders = new ArrayList<ServiceProviderDescriptor>();
+
+        serviceProviders.add(serviceProvider);
+        return self();
     }
 
     /**
@@ -387,13 +442,42 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add bean library that consists of defined bean classes; automatically include empty beans.xml.
+     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
+     * defined classes implements {@link Extension} add corresponding service provider.
      * 
      * @param beanClasses
      * @return
      */
     public T withBeanLibrary(Class<?>... beanClasses) {
-        return withLibrary(true, beanClasses);
+
+        List<Class<?>> extensions = new ArrayList<Class<?>>();
+        for (Class<?> beanClass : beanClasses) {
+            if (Extension.class.isAssignableFrom(beanClass)) {
+                extensions.add(beanClass);
+            }
+        }
+        return withLibrary(null, new ServiceProviderDescriptor(Extension.class, (Class<?>[]) extensions.toArray()), true,
+                beanClasses);
+    }
+
+    /**
+     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
+     * defined classes implements {@link Extension} add corresponding service provider.
+     * 
+     * @param beanClasses
+     * @return
+     */
+    public T withBeanLibrary(BeansDescriptor beansDescriptor, Class<?>... beanClasses) {
+
+        List<Class<?>> extensions = new ArrayList<Class<?>>();
+        for (Class<?> beanClass : beanClasses) {
+            if (Extension.class.isAssignableFrom(beanClass)) {
+                extensions.add(beanClass);
+            }
+        }
+        return withLibrary(beansDescriptor,
+                new ServiceProviderDescriptor(Extension.class, extensions.toArray(new Class<?>[extensions.size()])), true,
+                beanClasses);
     }
 
     /**
@@ -403,22 +487,25 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return
      */
     public T withLibrary(Class<?>... classes) {
-        return withLibrary(false, classes);
+        return withLibrary(null, null, false, classes);
     }
 
     /**
      * Add library that consists of defined classes. Include empty beans.xml if necessary.
      * 
+     * @param serviceProvider
      * @param omitBeansXml
      * @param classes
      * @return
      */
-    public T withLibrary(boolean includeEmptyBeanXml, Class<?>... classes) {
+    public T withLibrary(BeansDescriptor beansDescriptor, ServiceProviderDescriptor serviceProvider,
+            boolean includeEmptyBeanXml, Class<?>... classes) {
 
         if (libraries == null)
             libraries = new ArrayList<LibraryDescriptor>();
 
-        this.libraries.add(new LibraryDescriptor(includeEmptyBeanXml, classes));
+        this.libraries.add(beansDescriptor != null ? new LibraryDescriptor(serviceProvider, beansDescriptor, classes)
+                : new LibraryDescriptor(serviceProvider, includeEmptyBeanXml, classes));
         return self();
     }
 
@@ -522,20 +609,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 if (descriptor.getFileDescriptor() != null) {
                     archive.addAsLibrary(descriptor.getFileDescriptor());
                 } else {
-
-                    JavaArchive library = ShrinkWrap.create(JavaArchive.class);
-                    for (Class<?> clazz : descriptor.getBeanClasses()) {
-                        library.addClass(clazz);
-                    }
-
-                    if (descriptor.getBeansXml() != null) {
-                        library.addAsManifestResource(descriptor.getBeansXml().getSource(), descriptor.getBeansXml()
-                                .getTarget());
-
-                    } else if (descriptor.includeEmptyBeanXml) {
-                        library.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
-                    }
-                    archive.addAsLibrary(library);
+                    archive.addAsLibrary(descriptor.buildJarArchive());
                 }
             }
         }
@@ -567,14 +641,19 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     protected void processManifestResources(ManifestContainer<?> archive) {
 
-        if (manifestResources == null)
-            return;
+        if (manifestResources != null) {
+            for (ResourceDescriptor resource : manifestResources) {
+                if (resource.getTarget() == null) {
+                    archive.addAsManifestResource(resource.getSource());
+                } else {
+                    archive.addAsManifestResource(resource.getSource(), resource.getTarget());
+                }
+            }
+        }
 
-        for (ResourceDescriptor resource : manifestResources) {
-            if (resource.getTarget() == null) {
-                archive.addAsManifestResource(resource.getSource());
-            } else {
-                archive.addAsManifestResource(resource.getSource(), resource.getTarget());
+        if (serviceProviders != null) {
+            for (ServiceProviderDescriptor descriptor : serviceProviders) {
+                archive.addAsServiceProvider(descriptor.getServiceInterface(), descriptor.getServiceImplementations());
             }
         }
     }
@@ -596,6 +675,33 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 withLibrary(file);
             }
         }
+    }
+
+    /**
+     * Internal service provider descriptor.
+     * 
+     * @author Martin Kouba
+     */
+    protected class ServiceProviderDescriptor {
+
+        private Class<?> serviceInterface;
+
+        private Class<?>[] serviceImplementations;
+
+        public ServiceProviderDescriptor(Class<?> serviceInterface, Class<?>... serviceImplementations) {
+            super();
+            this.serviceInterface = serviceInterface;
+            this.serviceImplementations = serviceImplementations;
+        }
+
+        public Class<?> getServiceInterface() {
+            return serviceInterface;
+        }
+
+        public Class<?>[] getServiceImplementations() {
+            return serviceImplementations;
+        }
+
     }
 
     /**
@@ -644,34 +750,49 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Internal library descriptor. Its possible to automatically include empty beans.xml to promote it to BDA.
+     * Internal library descriptor.
+     * 
+     * <p>
+     * Its possible to automatically include empty beans.xml to promote it to BDA.
+     * </p>
      * 
      * @author Martin Kouba
      */
     protected class LibraryDescriptor {
 
-        private File fileDescriptor;
+        private File fileDescriptor = null;
 
-        private List<Class<?>> libraryClasses;
+        private List<Class<?>> libraryClasses = null;
 
-        private ResourceDescriptor beansXml;
+        protected BeansDescriptor beansDescriptor = null;
 
-        private boolean includeEmptyBeanXml;
+        private boolean includeEmptyBeanXml = false;
+
+        private List<ServiceProviderDescriptor> serviceProviders;
 
         public LibraryDescriptor(File fileDescriptor) {
             super();
             this.fileDescriptor = fileDescriptor;
         }
 
-        public LibraryDescriptor(ResourceDescriptor beansXml, Class<?>... classes) {
+        public LibraryDescriptor(ServiceProviderDescriptor serviceProvider, BeansDescriptor beansDescriptor,
+                Class<?>... classes) {
             super();
-            this.beansXml = beansXml;
+            if (serviceProvider != null) {
+                this.serviceProviders = new ArrayList<ServiceProviderDescriptor>();
+                this.serviceProviders.add(serviceProvider);
+            }
+            this.beansDescriptor = beansDescriptor;
             this.libraryClasses = Arrays.asList(classes);
         }
 
-        public LibraryDescriptor(boolean omitBeanXml, Class<?>... classes) {
+        public LibraryDescriptor(ServiceProviderDescriptor serviceProvider, boolean includeEmptyBeanXml, Class<?>... classes) {
             super();
-            this.includeEmptyBeanXml = omitBeanXml;
+            if (serviceProvider != null) {
+                this.serviceProviders = new ArrayList<ServiceProviderDescriptor>();
+                this.serviceProviders.add(serviceProvider);
+            }
+            this.includeEmptyBeanXml = includeEmptyBeanXml;
             this.libraryClasses = Arrays.asList(classes);
         }
 
@@ -690,6 +811,39 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         public File getFileDescriptor() {
             return fileDescriptor;
         }
+
+        public List<ServiceProviderDescriptor> getServiceProviders() {
+            return serviceProviders;
+        }
+
+        /**
+         * 
+         * @return shrinkwrap jar archive
+         */
+        public JavaArchive buildJarArchive() {
+
+            JavaArchive library = ShrinkWrap.create(JavaArchive.class);
+            for (Class<?> clazz : libraryClasses) {
+                library.addClass(clazz);
+            }
+
+            if (serviceProviders != null) {
+                for (ServiceProviderDescriptor serviceProvider : serviceProviders) {
+                    library.addAsServiceProvider(serviceProvider.getServiceInterface(),
+                            serviceProvider.getServiceImplementations());
+                }
+            }
+
+            if (beansDescriptor != null) {
+                library.addAsManifestResource(new StringAsset(beansDescriptor.exportAsString()),
+                        beansDescriptor.getDescriptorName());
+
+            } else if (includeEmptyBeanXml) {
+                library.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
+            }
+            return library;
+        }
+
     }
 
     private String getTestPackagePath() {
