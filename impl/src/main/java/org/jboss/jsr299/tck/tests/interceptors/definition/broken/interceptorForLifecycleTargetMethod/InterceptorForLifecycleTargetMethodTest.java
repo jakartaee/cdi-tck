@@ -22,11 +22,13 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
  * TODO exclude unless https://issues.jboss.org/browse/WELD-458 is fixed
  */
+@SpecVersion(spec = "cdi", version = "20091101")
 public class InterceptorForLifecycleTargetMethodTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)

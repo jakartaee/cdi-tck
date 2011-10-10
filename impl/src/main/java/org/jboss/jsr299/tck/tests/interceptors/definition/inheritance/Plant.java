@@ -14,11 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
+package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 
-@FooBinding
-public final class FinalClassClassLevelMissile {
+import java.util.ArrayList;
+import java.util.List;
 
-    public void fire() {
+public class Plant {
+
+    public List<String> inspections = new ArrayList<String>();
+
+    public void inspect(String id) {
+        inspections.add(id);
     }
+
+    public boolean isInspectedBy(String id) {
+        return inspections.contains(id);
+    }
+
 }

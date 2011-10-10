@@ -14,11 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
+package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance.broken.binding;
 
-@FooBinding
-public final class FinalClassClassLevelMissile {
+public final class Messerschmitt extends Fighter {
 
-    public void fire() {
-    }
 }

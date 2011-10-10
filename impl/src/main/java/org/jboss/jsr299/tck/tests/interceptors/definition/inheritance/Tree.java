@@ -14,11 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
+package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 
-@FooBinding
-public final class FinalClassClassLevelMissile {
+@GuardedBySquirrel
+@GuardedByWoodpecker
+public class Tree extends Plant {
 
-    public void fire() {
+    public void ping() {
     }
+
 }

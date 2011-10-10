@@ -19,20 +19,26 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInte
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+/**
+ * 
+ * @author Ondrej Skutka
+ * @author Martin Kouba
+ */
+@SpecVersion(spec = "cdi", version = "20091101")
 public class FinalClassClassLevelInterceptorTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder()
-                .withTestClassDefinition(FinalClassClassLevelInterceptorTest.class)
-                .withClasses(FooBinding.class, MissileInterceptor.class, FinalClassClassLevelMissile.class,
-                        FinalClassClassLevelMissileLocal.class).withBeansXml("beans.xml").build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassDefinition(FinalClassClassLevelInterceptorTest.class)
+                .withClasses(FooBinding.class, MissileInterceptor.class, FinalClassClassLevelMissile.class)
+                .withBeansXml("beans.xml").build();
     }
 
     @Test

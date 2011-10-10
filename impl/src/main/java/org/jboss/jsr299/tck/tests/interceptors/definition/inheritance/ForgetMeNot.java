@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
+package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 
-import javax.ejb.Local;
+import javax.ejb.Stateless;
 
-@Local
-public interface FinalClassClassLevelMissileLocal {
-    void fire();
+@Stateless
+public class ForgetMeNot extends Flower {
+
 }

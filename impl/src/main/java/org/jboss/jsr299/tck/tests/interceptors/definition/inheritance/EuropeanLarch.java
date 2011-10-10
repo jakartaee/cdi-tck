@@ -14,11 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
+package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 
-import javax.ejb.Local;
+@European
+public class EuropeanLarch extends Larch {
 
-@Local
-public interface FinalClassMethodLevelMissileLocal {
-    void fire();
 }

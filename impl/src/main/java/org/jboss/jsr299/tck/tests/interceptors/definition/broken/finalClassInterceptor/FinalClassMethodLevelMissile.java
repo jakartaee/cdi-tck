@@ -16,10 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
 
-import javax.ejb.Stateful;
 
-@Stateful
-public final class FinalClassMethodLevelMissile implements FinalClassMethodLevelMissileLocal {
+public final class FinalClassMethodLevelMissile {
+
     @FooBinding
     public void fire() {
     }

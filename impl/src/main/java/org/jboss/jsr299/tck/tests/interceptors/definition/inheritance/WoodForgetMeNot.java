@@ -14,11 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
+package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 
-@FooBinding
-public final class FinalClassClassLevelMissile {
+import javax.ejb.Stateless;
 
-    public void fire() {
-    }
+@European
+@Stateless
+public class WoodForgetMeNot extends ForgetMeNot {
+
 }

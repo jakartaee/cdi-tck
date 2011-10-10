@@ -14,35 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
+package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance.broken.binding;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
  * 
- * @author Ondrej Skutka
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class FinalClassMethodLevelInterceptorTest extends AbstractJSR299Test {
+public class FinalClassWithInheritedStereotypeInterceptorTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassDefinition(FinalClassMethodLevelInterceptorTest.class)
-                .withClasses(FooBinding.class, MissileInterceptor.class, FinalClassMethodLevelMissile.class)
-                .withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassDefinition(FinalClassWithInheritedStereotypeInterceptorTest.class)
+                .withClasses(Fighter.class, FighterStereotype.class, Spitfire.class, LandingBinding.class,
+                        LandingInterceptor.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                                .clazz(LandingInterceptor.class.getName()).up()).build();
     }
 
     @Test
-    @SpecAssertion(section = "9.3", id = "da")
-    public void testFinalClassWithMethodLevelInterceptor() throws Exception {
+    @SpecAssertion(section = "9.3", id = "cf")
+    public void testFinalMethodWithInheritedStereotypeInterceptor() throws Exception {
     }
 }
