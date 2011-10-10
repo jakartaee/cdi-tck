@@ -419,7 +419,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * Add persistence.xml.
      * 
      * @param persistenceXml
-     * @return
+     * @return self
      */
     public T withPersistenceXml(String persistenceXml) {
         this.persistenceXml = new ResourceDescriptor(persistenceXml);
@@ -430,7 +430,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * Add library.
      * 
      * @param library
-     * @return
+     * @return self
      */
     public T withLibrary(File library) {
 
@@ -446,18 +446,10 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * defined classes implements {@link Extension} add corresponding service provider.
      * 
      * @param beanClasses
-     * @return
+     * @return self
      */
     public T withBeanLibrary(Class<?>... beanClasses) {
-
-        List<Class<?>> extensions = new ArrayList<Class<?>>();
-        for (Class<?> beanClass : beanClasses) {
-            if (Extension.class.isAssignableFrom(beanClass)) {
-                extensions.add(beanClass);
-            }
-        }
-        return withLibrary(null, new ServiceProviderDescriptor(Extension.class, (Class<?>[]) extensions.toArray()), true,
-                beanClasses);
+        return withLibrary(null, true, beanClasses);
     }
 
     /**
@@ -465,29 +457,42 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * defined classes implements {@link Extension} add corresponding service provider.
      * 
      * @param beanClasses
-     * @return
+     * @return self
      */
     public T withBeanLibrary(BeansDescriptor beansDescriptor, Class<?>... beanClasses) {
+        return withBeanLibrary(null, beansDescriptor, beanClasses);
+    }
 
-        List<Class<?>> extensions = new ArrayList<Class<?>>();
-        for (Class<?> beanClass : beanClasses) {
-            if (Extension.class.isAssignableFrom(beanClass)) {
-                extensions.add(beanClass);
-            }
-        }
-        return withLibrary(beansDescriptor,
-                new ServiceProviderDescriptor(Extension.class, extensions.toArray(new Class<?>[extensions.size()])), true,
-                beanClasses);
+    /**
+     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
+     * defined classes implements {@link Extension} add corresponding service provider.
+     * 
+     * @param beanClasses
+     * @return self
+     */
+    public T withBeanLibrary(String name, Class<?>... beanClasses) {
+        return withBeanLibrary(name, null, beanClasses);
+    }
+
+    /**
+     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
+     * defined classes implements {@link Extension} add corresponding service provider.
+     * 
+     * @param beanClasses
+     * @return self
+     */
+    public T withBeanLibrary(String name, BeansDescriptor beansDescriptor, Class<?>... beanClasses) {
+        return withLibrary(name, beansDescriptor, true, beanClasses);
     }
 
     /**
      * Add library that consists of defined classes.
      * 
      * @param classes
-     * @return
+     * @return self
      */
     public T withLibrary(Class<?>... classes) {
-        return withLibrary(null, null, false, classes);
+        return withLibrary(null, false, classes);
     }
 
     /**
@@ -498,14 +503,34 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param classes
      * @return
      */
-    public T withLibrary(BeansDescriptor beansDescriptor, ServiceProviderDescriptor serviceProvider,
-            boolean includeEmptyBeanXml, Class<?>... classes) {
+    public T withLibrary(BeansDescriptor beansDescriptor, boolean includeEmptyBeanXml, Class<?>... classes) {
+        return withLibrary(null, beansDescriptor, includeEmptyBeanXml, classes);
+    }
+
+    /**
+     * Add library that consists of defined classes. Include empty beans.xml if necessary.
+     * 
+     * @param serviceProvider
+     * @param omitBeansXml
+     * @param classes
+     * @return
+     */
+    public T withLibrary(String name, BeansDescriptor beansDescriptor, boolean includeEmptyBeanXml, Class<?>... classes) {
 
         if (libraries == null)
             libraries = new ArrayList<LibraryDescriptor>();
 
-        this.libraries.add(beansDescriptor != null ? new LibraryDescriptor(serviceProvider, beansDescriptor, classes)
-                : new LibraryDescriptor(serviceProvider, includeEmptyBeanXml, classes));
+        List<Class<?>> extensions = new ArrayList<Class<?>>();
+        for (Class<?> clazz : classes) {
+            if (Extension.class.isAssignableFrom(clazz)) {
+                extensions.add(clazz);
+            }
+        }
+        ServiceProviderDescriptor serviceProvider = extensions.isEmpty() ? null : new ServiceProviderDescriptor(
+                Extension.class, extensions.toArray(new Class<?>[extensions.size()]));
+
+        this.libraries.add(beansDescriptor != null ? new LibraryDescriptor(name, serviceProvider, beansDescriptor, classes)
+                : new LibraryDescriptor(name, serviceProvider, includeEmptyBeanXml, classes));
         return self();
     }
 
@@ -760,6 +785,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     protected class LibraryDescriptor {
 
+        private String name;
+
         private File fileDescriptor = null;
 
         private List<Class<?>> libraryClasses = null;
@@ -775,7 +802,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             this.fileDescriptor = fileDescriptor;
         }
 
-        public LibraryDescriptor(ServiceProviderDescriptor serviceProvider, BeansDescriptor beansDescriptor,
+        public LibraryDescriptor(String name, ServiceProviderDescriptor serviceProvider, BeansDescriptor beansDescriptor,
                 Class<?>... classes) {
             super();
             if (serviceProvider != null) {
@@ -784,9 +811,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             }
             this.beansDescriptor = beansDescriptor;
             this.libraryClasses = Arrays.asList(classes);
+            this.name = name;
         }
 
-        public LibraryDescriptor(ServiceProviderDescriptor serviceProvider, boolean includeEmptyBeanXml, Class<?>... classes) {
+        public LibraryDescriptor(String name, ServiceProviderDescriptor serviceProvider, boolean includeEmptyBeanXml,
+                Class<?>... classes) {
             super();
             if (serviceProvider != null) {
                 this.serviceProviders = new ArrayList<ServiceProviderDescriptor>();
@@ -794,6 +823,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             }
             this.includeEmptyBeanXml = includeEmptyBeanXml;
             this.libraryClasses = Arrays.asList(classes);
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
         }
 
         public List<Class<?>> getBeanClasses() {
@@ -822,7 +856,14 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
          */
         public JavaArchive buildJarArchive() {
 
-            JavaArchive library = ShrinkWrap.create(JavaArchive.class);
+            JavaArchive library = null;
+
+            if (name != null) {
+                library = ShrinkWrap.create(JavaArchive.class, name);
+            } else {
+                library = ShrinkWrap.create(JavaArchive.class);
+            }
+
             for (Class<?> clazz : libraryClasses) {
                 library.addClass(clazz);
             }
