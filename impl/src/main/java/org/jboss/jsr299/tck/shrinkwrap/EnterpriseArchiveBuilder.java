@@ -54,6 +54,8 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         // EJB module - contains test package
         JavaArchive ejbArchive = ShrinkWrap.create(JavaArchive.class, "test.jar");
 
+        ejbArchive.addClass(Dummy.class);
+
         processPackages(ejbArchive);
         processClasses(ejbArchive);
         processManifestResources(ejbArchive);

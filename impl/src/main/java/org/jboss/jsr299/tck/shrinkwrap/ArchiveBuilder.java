@@ -616,6 +616,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             return;
 
         for (String clazz : classes) {
+
+            if ((isAsClientMode() && testClazz.getName().equals(clazz))
+                    || (excludedClasses != null && excludedClasses.contains(clazz)))
+                continue;
+
             archive.addClass(clazz);
         }
     }

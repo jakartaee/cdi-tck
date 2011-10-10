@@ -31,8 +31,8 @@ public class ManagerTestEar extends AbstractJSR299Test {
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClass(ManagerTestEar.class)
-                .withClasses(JndiBeanManagerInjected.class, Dummy.class).build();
+        return new EnterpriseArchiveBuilder().withTestClass(ManagerTestEar.class).withClasses(JndiBeanManagerInjected.class)
+                .build();
     }
 
     @Test(groups = { "manager", "ejb3", "integration" })
