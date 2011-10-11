@@ -39,7 +39,7 @@ public class FinalClassWithInheritedStereotypeInterceptorTest extends AbstractJS
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(FinalClassWithInheritedStereotypeInterceptorTest.class)
-                .withClasses(Fighter.class, FighterStereotype.class, Spitfire.class, LandingBinding.class,
+                .withClasses(Fighter.class, FighterStereotype.class, Messerschmitt.class, LandingBinding.class,
                         LandingInterceptor.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()

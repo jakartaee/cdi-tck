@@ -19,4 +19,7 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance.broken.bi
 @LandingBinding
 public class Jumbojet {
 
+    public final void land() {
+    }
+
 }

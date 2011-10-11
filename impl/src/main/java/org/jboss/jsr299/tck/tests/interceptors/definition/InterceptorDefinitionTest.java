@@ -170,40 +170,6 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "a"), @SpecAssertion(section = "9.2", id = "a"),
-            @SpecAssertion(section = "12.3", id = "kb") })
-    // WELD-219
-    public void testManagedBeanIsIntercepted() {
-        MissileInterceptor.intercepted = false;
-
-        Missile missile = getInstanceByType(Missile.class);
-        missile.fire();
-        assert MissileInterceptor.intercepted;
-
-        assert missile.getWarhead() != null; // test that injection works
-    }
-
-    @Test
-    @SpecAssertion(section = "7.2", id = "a1")
-    public void testInitializerMethodsNotIntercepted() {
-        MissileInterceptor.intercepted = false;
-
-        getInstanceByType(Missile.class);
-
-        assert !MissileInterceptor.intercepted;
-    }
-
-    @Test
-    @SpecAssertion(section = "7.2", id = "ia")
-    public void testProducerMethodsAreIntercepted() {
-        MissileInterceptor.intercepted = false;
-
-        getInstanceByType(Wheat.class);
-
-        assert MissileInterceptor.intercepted;
-    }
-
-    @Test
     @SpecAssertions({ @SpecAssertion(section = "9.1", id = "a"), @SpecAssertion(section = "9.1", id = "b"),
             @SpecAssertion(section = "9.1", id = "c"), @SpecAssertion(section = "9.3", id = "a") })
     public void testInterceptorBindingAnnotation() {
@@ -246,20 +212,6 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test {
         foo.doAction();
 
         assert AtomicInterceptor.intercepted;
-        assert MissileInterceptor.intercepted;
-    }
-
-    @Test
-    @SpecAssertion(section = "3.9", id = "f")
-    public void testInitializerMethodNotIntercepter() {
-        MissileInterceptor.intercepted = false;
-
-        Submarine submarine = getInstanceByType(Submarine.class);
-
-        assert !MissileInterceptor.intercepted;
-
-        assert submarine.isInjected(); // this call is intercepted
-
         assert MissileInterceptor.intercepted;
     }
 

@@ -14,15 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition;
+package org.jboss.jsr299.tck.tests.interceptors.invocation;
 
-import javax.enterprise.inject.Produces;
-import javax.interceptor.Interceptors;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Interceptors(MissileInterceptor.class)
-public class WheatProducer {
-    @Produces
-    Wheat createWheat() {
-        return new Wheat(null);
-    }
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import javax.interceptor.InterceptorBinding;
+
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface MissileBinding {
+
 }

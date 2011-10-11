@@ -14,8 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance.broken.binding;
+package org.jboss.jsr299.tck.tests.interceptors.invocation;
 
-public class Boeing extends Jumbojet {
+@MissileBinding
+public class Rye {
+
+    public void ping() {
+    }
 
 }

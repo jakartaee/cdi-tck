@@ -14,9 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition;
+package org.jboss.jsr299.tck.tests.interceptors.invocation;
 
-public class Wheat {
-    public Wheat(String type) {
-    }
+public class Warhead {
+
 }

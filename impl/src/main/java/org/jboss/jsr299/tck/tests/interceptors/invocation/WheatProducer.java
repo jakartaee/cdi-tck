@@ -14,20 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition;
+package org.jboss.jsr299.tck.tests.interceptors.invocation;
 
-import javax.inject.Inject;
+import javax.enterprise.inject.Disposes;
+import javax.enterprise.inject.Produces;
+import javax.interceptor.Interceptors;
 
-@MissileBinding
-public class Submarine {
-    private Warhead warhead;
+@Interceptors(MissileInterceptor.class)
+public class WheatProducer {
 
-    @Inject
-    public void init(Warhead warhead) {
-        this.warhead = warhead;
+    public static boolean destroyed = false;
+
+    @Produces
+    public Wheat createWheat() {
+        return new Wheat(null);
     }
 
-    public boolean isInjected() {
-        return warhead != null;
+    public void destroyWheat(@Disposes Wheat wheat) {
+        destroyed = true;
     }
 }
