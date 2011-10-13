@@ -60,6 +60,10 @@ import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
  * testing related stuff like test class itself while arquillian is not repackaging test archive. That's why
  * {@link #isAsClientMode} has to be properly set.
  * </p>
+ * <p>
+ * In case of {@link #isTestArchive} set to <code>false</code> this archive may not include any testing related stuff as it is
+ * probably part of another test archive.
+ * </p>
  * 
  * @param <T> Self type to enable abstract builder pattern
  * @param <A> Final shrinkwrap archive
@@ -67,7 +71,11 @@ import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
  */
 public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends Archive<A>> {
 
+    private String name;
+
     private boolean isAsClientMode = false;
+
+    private boolean isTestArchive = true;
 
     private Class<?> testClazz = null;
 
@@ -94,6 +102,17 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected List<LibraryDescriptor> libraries = null;
 
     protected List<ServiceProviderDescriptor> serviceProviders = null;
+
+    /**
+     * Change default archive name.
+     * 
+     * @param name
+     * @return
+     */
+    public T withName(String name) {
+        this.name = name;
+        return self();
+    }
 
     /**
      * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}
@@ -543,24 +562,28 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return shrinkwrap archive
      */
     public A build() {
-        if (testClazz == null)
-            throw new IllegalStateException("Test class must be set!");
 
-        resolveAsClientMode();
+        if (isTestArchive()) {
 
-        // org.jboss.jsr299.tck.api
-        withPackage(JSR299Configuration.class.getPackage());
-        // org.jboss.jsr299.tck.spi
-        withPackage(Beans.class.getPackage());
-        // org.jboss.jsr299.tck.impl
-        withClasses(ConfigurationFactory.class, JSR299ConfigurationImpl.class, JSR299PropertiesBasedConfigurationBuilder.class,
-                MockCreationalContext.class, OldSPIBridge.class);
-        // org.jboss.jsr299.tck.literal
-        withPackage(AnyLiteral.class.getPackage());
-        addDefaultLibraries();
+            if (testClazz == null)
+                throw new IllegalStateException("Test class must be set!");
 
-        if (!isAsClientMode) {
-            withClass(AbstractJSR299Test.class);
+            resolveAsClientMode();
+
+            // org.jboss.jsr299.tck.api
+            withPackage(JSR299Configuration.class.getPackage());
+            // org.jboss.jsr299.tck.spi
+            withPackage(Beans.class.getPackage());
+            // org.jboss.jsr299.tck.impl
+            withClasses(ConfigurationFactory.class, JSR299ConfigurationImpl.class,
+                    JSR299PropertiesBasedConfigurationBuilder.class, MockCreationalContext.class, OldSPIBridge.class);
+            // org.jboss.jsr299.tck.literal
+            withPackage(AnyLiteral.class.getPackage());
+            addDefaultLibraries();
+
+            if (!isAsClientMode()) {
+                withClass(AbstractJSR299Test.class);
+            }
         }
         return buildInternal();
     }
@@ -905,6 +928,22 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
+     * 
+     * @return <code>true</code> in case of archive should
+     */
+    public boolean isTestArchive() {
+        return isTestArchive;
+    }
+
+    /**
+     * Mark this archive as non-testing.
+     */
+    public T notTestArchive() {
+        this.isTestArchive = false;
+        return self();
+    }
+
+    /**
      * Find deployment method on test class definition and set to as-client mode if {@link Deployment#testable()} false or
      * {@link ShouldThrowException} is present.
      */
@@ -923,4 +962,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             }
         }
     }
+
+    /**
+     * @return name of final archive
+     */
+    public String getName() {
+        return name;
+    }
+
 }

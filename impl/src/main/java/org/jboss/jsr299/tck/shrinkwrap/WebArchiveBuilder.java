@@ -21,6 +21,8 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 
 /**
  * Shrinkwrap web archive builder for JSR299 TCK arquillian test. This builder is intended to provide basic functionality
@@ -30,6 +32,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
  */
 public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArchive> {
 
+    private static final String DEFAULT_WAR_NAME = "test.war";
+
     @Override
     public WebArchiveBuilder self() {
         return this;
@@ -38,7 +42,13 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
     @Override
     public WebArchive buildInternal() {
 
-        WebArchive webArchive = ShrinkWrap.create(WebArchive.class, "test.war");
+        WebArchive webArchive = null;
+
+        if (getName() == null) {
+            webArchive = ShrinkWrap.create(WebArchive.class, DEFAULT_WAR_NAME);
+        } else {
+            webArchive = ShrinkWrap.create(WebArchive.class, getName());
+        }
 
         processPackages(webArchive);
         processClasses(webArchive);
@@ -58,7 +68,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
         if (webXml != null) {
             webArchive.setWebXML(webXml.getSource());
         } else {
-            webArchive.setWebXML(new StringAsset("<?xml version=\"1.0\" encoding=\"UTF-8\"?><web-app></web-app>"));
+            webArchive.setWebXML(new StringAsset(Descriptors.create(WebAppDescriptor.class).exportAsString()));
         }
 
         if (persistenceXml != null) {
