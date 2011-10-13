@@ -65,33 +65,33 @@ public class InterceptorBindingInheritanceTest extends AbstractJSR299Test {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "4.1", id = "ad"), @SpecAssertion(section = "4.1", id = "ada") })
     public void testInterceptorBindingDirectlyInheritedFromManagedBean() throws Exception {
-        larch.ping();
-        Assert.assertTrue(larch.isInspectedBy(SquirrelInterceptor.class.getName()));
-        Assert.assertFalse(larch.isInspectedBy(WoodpeckerInterceptor.class.getName()));
+        larch.pong();
+        Assert.assertTrue(larch.inspections.contains(SquirrelInterceptor.class.getName()));
+        Assert.assertFalse(larch.inspections.contains(WoodpeckerInterceptor.class.getName()));
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "4.1", id = "aj"), @SpecAssertion(section = "4.1", id = "aja") })
     public void testInterceptorBindingIndirectlyInheritedFromManagedBean() throws Exception {
-        europeanLarch.ping();
-        Assert.assertTrue(europeanLarch.isInspectedBy(SquirrelInterceptor.class.getName()));
-        Assert.assertFalse(europeanLarch.isInspectedBy(WoodpeckerInterceptor.class.getName()));
+        europeanLarch.pong();
+        Assert.assertTrue(europeanLarch.inspections.contains(SquirrelInterceptor.class.getName()));
+        Assert.assertFalse(europeanLarch.inspections.contains(WoodpeckerInterceptor.class.getName()));
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "4.1", id = "an"), @SpecAssertion(section = "4.1", id = "ana") })
     public void testInterceptorBindingDirectlyInheritedFromSessionBean() throws Exception {
         forgetMeNot.pong();
-        Assert.assertTrue(forgetMeNot.isInspectedBy(SquirrelInterceptor.class.getName()));
-        Assert.assertFalse(forgetMeNot.isInspectedBy(WoodpeckerInterceptor.class.getName()));
+        Assert.assertTrue(forgetMeNot.inspections.contains(SquirrelInterceptor.class.getName()));
+        Assert.assertFalse(forgetMeNot.inspections.contains(WoodpeckerInterceptor.class.getName()));
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "4.1", id = "ar"), @SpecAssertion(section = "4.1", id = "ara") })
     public void testInterceptorBindingIndirectlyInheritedFromSessionBean() throws Exception {
         woodForgetMeNot.pong();
-        Assert.assertTrue(woodForgetMeNot.isInspectedBy(SquirrelInterceptor.class.getName()));
-        Assert.assertFalse(woodForgetMeNot.isInspectedBy(WoodpeckerInterceptor.class.getName()));
+        Assert.assertTrue(woodForgetMeNot.inspections.contains(SquirrelInterceptor.class.getName()));
+        Assert.assertFalse(woodForgetMeNot.inspections.contains(WoodpeckerInterceptor.class.getName()));
     }
 
 }

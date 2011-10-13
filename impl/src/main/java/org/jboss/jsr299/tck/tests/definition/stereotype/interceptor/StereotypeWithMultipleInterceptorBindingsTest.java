@@ -14,32 +14,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.definition.stereotype.broken.tooManyScopes;
+package org.jboss.jsr299.tck.tests.definition.stereotype.interceptor;
+
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
+/**
+ * 
+ * @author Martin Kouba
+ */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class TooManyScopeTypesTest extends AbstractJSR299Test {
+public class StereotypeWithMultipleInterceptorBindingsTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-
-        .withTestClassPackage(TooManyScopeTypesTest.class).build();
+                .withTestClassPackage(StereotypeWithMultipleInterceptorBindingsTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                                .clazz(AlphaInterceptor.class.getName(), OmegaInterceptor.class.getName()).up()).build();
     }
 
+    @Inject
+    Foo foo;
+
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.1", id = "ab"), @SpecAssertion(section = "2.8", id = "c") })
-    public void testStereotypeWithTooManyScopeTypes() {
+    @SpecAssertions({ @SpecAssertion(section = "2.7.1.2", id = "a0"), @SpecAssertion(section = "2.7.1.2", id = "c") })
+    public void testMultipleInterceptorBindings() {
+        foo.ping();
+        Assert.assertTrue(foo.inspections.contains(AlphaInterceptor.class.getName()));
+        Assert.assertTrue(foo.inspections.contains(OmegaInterceptor.class.getName()));
     }
 
 }

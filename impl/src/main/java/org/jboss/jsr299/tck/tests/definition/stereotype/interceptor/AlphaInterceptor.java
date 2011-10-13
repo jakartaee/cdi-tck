@@ -14,16 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
+package org.jboss.jsr299.tck.tests.definition.stereotype.interceptor;
 
-import javax.ejb.Stateless;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
 
-@GuardedBySquirrel
-@GuardedByWoodpecker
-@Stateless
-public class Flower extends Plant {
+@Alpha
+@Interceptor
+public class AlphaInterceptor {
 
-    public void pong() {
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
+
+        Object target = ctx.getTarget();
+
+        if (target instanceof Foo) {
+            ((Foo) target).inspections.add(this.getClass().getName());
+        }
+        return ctx.proceed();
     }
 
 }

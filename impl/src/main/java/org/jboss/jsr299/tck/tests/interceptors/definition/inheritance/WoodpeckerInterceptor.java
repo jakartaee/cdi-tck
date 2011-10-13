@@ -14,7 +14,7 @@ public class WoodpeckerInterceptor {
         Object target = ctx.getTarget();
 
         if (target instanceof Plant) {
-            ((Plant) target).inspect(this.getClass().getName());
+            ((Plant) target).inspections.add(this.getClass().getName());
         }
         return ctx.proceed();
     }

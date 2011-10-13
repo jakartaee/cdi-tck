@@ -20,7 +20,8 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 @GuardedByWoodpecker
 public class Tree extends Plant {
 
-    public void ping() {
+    @Override
+    public void pong() {
     }
 
 }

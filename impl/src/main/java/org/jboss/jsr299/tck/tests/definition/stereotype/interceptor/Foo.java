@@ -14,16 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
+package org.jboss.jsr299.tck.tests.definition.stereotype.interceptor;
 
-import javax.ejb.Stateless;
+import java.util.ArrayList;
+import java.util.List;
 
-@GuardedBySquirrel
-@GuardedByWoodpecker
-@Stateless
-public class Flower extends Plant {
+@AlphaOmegaStereotype
+public class Foo {
 
-    public void pong() {
+    public List<String> inspections = new ArrayList<String>();
+
+    public void ping() {
     }
 
 }

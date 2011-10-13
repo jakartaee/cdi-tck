@@ -19,16 +19,8 @@ package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Plant {
+public abstract class Plant implements Ping {
 
     public List<String> inspections = new ArrayList<String>();
-
-    public void inspect(String id) {
-        inspections.add(id);
-    }
-
-    public boolean isInspectedBy(String id) {
-        return inspections.contains(id);
-    }
 
 }

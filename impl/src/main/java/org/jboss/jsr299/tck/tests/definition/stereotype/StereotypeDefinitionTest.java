@@ -58,7 +58,8 @@ public class StereotypeDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "c"), @SpecAssertion(section = "2.7.1", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "c"), @SpecAssertion(section = "2.7.1", id = "b"),
+            @SpecAssertion(section = "2.7.1.2", id = "a") })
     public void testOneStereotypeAllowed() {
         Bean<LongHairedDog> bean = getBeans(LongHairedDog.class).iterator().next();
         assert bean.getScope().equals(RequestScoped.class);

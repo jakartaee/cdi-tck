@@ -16,14 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 
-import javax.ejb.Stateless;
+public interface Ping {
 
-@GuardedBySquirrel
-@GuardedByWoodpecker
-@Stateless
-public class Flower extends Plant {
-
-    public void pong() {
-    }
+    public void pong();
 
 }
