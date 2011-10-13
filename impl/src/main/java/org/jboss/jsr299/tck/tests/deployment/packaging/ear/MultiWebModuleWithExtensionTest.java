@@ -16,74 +16,67 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.packaging.ear;
 
-import javax.enterprise.inject.spi.Extension;
-import javax.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.application6.ApplicationDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * This test verifies that a CDI extension can be used with a web application bundled inside of an enterprise archive (.ear)
- * 
+ * This test verifies that multiple CDI-enabled web applications can be bundled inside of an enterprise archive (.ear).
+ * <p>
+ * Note that this test has to run in as-client mode since arquillian cannot work with such archive (doesn't know which WAR to
+ * enrich).
+ * </p>
  * <p>
  * This test was originally part of Seam Compatibility project.
- * <p>
- * 
+ * </p>
  * TODO verify assertions
  * 
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
- * @see https://issues.jboss.org/browse/JBAS-8683
+ * @see http://java.net/jira/browse/GLASSFISH-16303
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class SingleWebAppTest extends AbstractJSR299Test {
+public class MultiWebModuleWithExtensionTest extends AbstractJSR299Test {
 
-    @Deployment
+    @Deployment(testable = false)
     public static EnterpriseArchive createTestArchive() {
 
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().withTestClass(SingleWebAppTest.class).build();
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().withTestClass(
+                MultiWebModuleWithExtensionTest.class).build();
         StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class).applicationName("Test")
-                .createModule().getOrCreateWeb().webUri("test.war").contextRoot("/test").up().up().exportAsString());
+                .createModule().getOrCreateWeb().webUri("foo.war").contextRoot("/foo").up().up().createModule()
+                .getOrCreateWeb().webUri("bar.war").contextRoot("/bar").up().up().exportAsString());
         enterpriseArchive.setApplicationXML(applicationXml);
 
-        WebArchive webArchive = createWar("test.war", createJar("test.jar", FooExtension.class, FooBean.class));
-        webArchive.addClass(FooWebBean.class);
+        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("foo.war").withClasses(FooWebBean.class)
+                .withBeanLibrary("foo.jar", FooExtension.class, FooBean.class).build();
+        fooArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
+                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
+        enterpriseArchive.addAsModule(fooArchive);
 
-        enterpriseArchive.addAsModule(webArchive);
+        WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName("bar.war").withClasses(BarWebBean.class)
+                .withBeanLibrary("bar.jar", BarExtension.class, BarBean.class).build();
+        fooArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
+                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
+        enterpriseArchive.addAsModule(barArchive);
+
         return enterpriseArchive;
     }
 
-    public static WebArchive createWar(String name, JavaArchive... libraries) {
-        StringAsset webXml = new StringAsset(Descriptors.create(WebAppDescriptor.class).exportAsString());
-        return ShrinkWrap.create(WebArchive.class, name).setWebXML(webXml)
-                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml").addAsLibraries(libraries);
-    }
-
-    public static JavaArchive createJar(String name, Class<? extends Extension> extension, Class<?>... classes) {
-        return ShrinkWrap.create(JavaArchive.class, name).addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
-                .addClasses(classes).addClass(extension).addAsServiceProvider(Extension.class, extension);
-    }
-
-    @Inject
-    FooWebBean fooWebBean;
-
-    @Test
+    @Test(groups = { "javaee-full-only" })
     @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbc"), @SpecAssertion(section = "12.1", id = "bbe") })
-    public void test() {
-        fooWebBean.ping();
+    public void testMultipleWebModulesWithExtension() {
     }
+
 }
