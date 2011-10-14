@@ -16,12 +16,15 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition;
 
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
 public class SpiderProducer {
+
     private static boolean tameSpiderDestroyed = false;
     private static boolean deadliestSpiderDestroyed = false;
+    private static int widowsDestroyed = 0;
 
     @Produces
     @Tame
@@ -35,6 +38,18 @@ public class SpiderProducer {
         return tameTarantula.getDeathsCaused() >= tarantula.getDeathsCaused() ? tameTarantula : tarantula;
     }
 
+    @Produces
+    @Tame
+    public Widow produceTameWidow() {
+        return new Widow("steatoda");
+    }
+
+    @Produces
+    @Deadliest
+    public Widow produceDeadliestWidow() {
+        return new Widow("black");
+    }
+
     public void destroyTameSpider(@Disposes @Tame Tarantula spider) {
         SpiderProducer.tameSpiderDestroyed = true;
     }
@@ -44,6 +59,10 @@ public class SpiderProducer {
         SpiderProducer.deadliestSpiderDestroyed = true;
     }
 
+    public void destroyWidow(@Disposes @Any Widow widow) {
+        widowsDestroyed++;
+    }
+
     public static boolean isTameSpiderDestroyed() {
         return tameSpiderDestroyed;
     }
@@ -51,4 +70,9 @@ public class SpiderProducer {
     public static boolean isDeadliestSpiderDestroyed() {
         return deadliestSpiderDestroyed;
     }
+
+    public static int getWidowsDestroyed() {
+        return widowsDestroyed;
+    }
+
 }

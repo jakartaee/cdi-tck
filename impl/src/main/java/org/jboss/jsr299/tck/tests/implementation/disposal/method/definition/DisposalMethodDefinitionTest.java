@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition;
 
+import static org.testng.Assert.assertEquals;
+
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -33,7 +35,11 @@ import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
 public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
+
     private static final Annotation DEADLIEST_LITERAL = new AnnotationLiteral<Deadliest>() {
+    };
+
+    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
     };
 
     @Deployment
@@ -84,6 +90,23 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
         Tarantula instance = getCurrentManager().getContext(tarantula.getScope()).get(tarantula);
         tarantula.destroy(instance, creationalContext);
         assert SpiderProducer.isDeadliestSpiderDestroyed();
+    }
+
+    @Test(groups = { "disposalMethod" })
+    @SpecAssertion(section = "3.3.5", id = "da")
+    public void testDisposalMethodForMultipleProducerMethods() throws Exception {
+
+        Bean<Widow> deadliest = getBeans(Widow.class, DEADLIEST_LITERAL).iterator().next();
+        CreationalContext<Widow> deadliestCreationalContext = getCurrentManager().createCreationalContext(deadliest);
+        Widow deadliestInstance = getCurrentManager().getContext(deadliest.getScope()).get(deadliest);
+        deadliest.destroy(deadliestInstance, deadliestCreationalContext);
+
+        Bean<Widow> tame = getBeans(Widow.class, TAME_LITERAL).iterator().next();
+        CreationalContext<Widow> tameCreationalContext = getCurrentManager().createCreationalContext(tame);
+        Widow tameInstance = getCurrentManager().getContext(deadliest.getScope()).get(tame);
+        tame.destroy(tameInstance, tameCreationalContext);
+
+        assertEquals(SpiderProducer.getWidowsDestroyed(), 2);
     }
 
 }
