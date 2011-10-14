@@ -60,7 +60,7 @@ public class JSR299PropertiesBasedConfigurationBuilder {
     }
 
     /**
-     * @param minimal Minimal initialization includes simple properties only (no SPI instances)
+     * @param minimal Minimal initialization includes simple properties only (no SPI instances) - building test archive phase
      * @return initialized self
      */
     public JSR299PropertiesBasedConfigurationBuilder init(boolean minimal) {
@@ -75,9 +75,9 @@ public class JSR299PropertiesBasedConfigurationBuilder {
             jsr299Configuration.setContexts(contextsInstance);
         }
 
-        // We only need library dir in minimal mode while creating test archive
         jsr299Configuration.setLibraryDirectory(getStringValue(JSR299Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null,
                 minimal));
+        jsr299Configuration.setTestDataSource(getStringValue(JSR299Configuration.TEST_DATASOURCE_PROPERTY_NAME, null, minimal));
         return this;
     }
 

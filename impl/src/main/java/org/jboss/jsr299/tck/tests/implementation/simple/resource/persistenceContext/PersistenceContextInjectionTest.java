@@ -43,7 +43,7 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(PersistenceContextInjectionTest.class).withBeansXml("beans.xml")
-                .withPersistenceXml("persistence.xml").build();
+                .withDefaultPersistenceXml().build();
     }
 
     @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })

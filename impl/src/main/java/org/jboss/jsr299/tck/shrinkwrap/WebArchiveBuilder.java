@@ -71,8 +71,8 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
             webArchive.setWebXML(new StringAsset(Descriptors.create(WebAppDescriptor.class).exportAsString()));
         }
 
-        if (persistenceXml != null) {
-            webArchive.addAsResource(persistenceXml.getSource(), "META-INF/persistence.xml");
+        if (persistenceDescriptor != null) {
+            webArchive.addAsResource(new StringAsset(persistenceDescriptor.exportAsString()), "META-INF/persistence.xml");
         }
 
         if (webResources != null) {

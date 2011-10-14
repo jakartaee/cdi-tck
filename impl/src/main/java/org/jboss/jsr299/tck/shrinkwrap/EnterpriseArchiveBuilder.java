@@ -95,6 +95,7 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
             ejbArchive = ShrinkWrap.create(JavaArchive.class, getName());
         }
 
+        // CDITCK-56
         ejbArchive.addClass(Dummy.class);
 
         processPackages(ejbArchive);
@@ -103,7 +104,6 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         processResources(ejbArchive);
         processLibraries(enterpriseArchive);
 
-        // Add beans.xml to META-INF
         if (beansDescriptor != null) {
             ejbArchive.addAsManifestResource(new StringAsset(beansDescriptor.exportAsString()),
                     beansDescriptor.getDescriptorName());
@@ -112,6 +112,11 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         } else {
             ejbArchive.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
         }
+
+        if (persistenceDescriptor != null) {
+            ejbArchive.addAsManifestResource(new StringAsset(persistenceDescriptor.exportAsString()), "persistence.xml");
+        }
+
         enterpriseArchive.addAsModule(ejbArchive);
 
         // Default web module

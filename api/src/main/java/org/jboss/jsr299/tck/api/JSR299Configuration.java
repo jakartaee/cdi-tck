@@ -25,20 +25,22 @@ import org.jboss.jsr299.tck.spi.Managers;
 
 /**
  * The configuration of the TCK.
- *
+ * 
  * The TCK may be configured using system properties or placed in a properties file called META-INF/cdi-tck.properties.
- *
+ * 
  * Porting package property names are the FQCN of the SPI class. Other property names (one for each non-porting package SPI
  * configuration option) are specified here. The defaults are also listed here.
- *
+ * 
  * The TCK may also be configured programatically through this interface
- *
+ * 
  * @author Pete Muir
  * @author Martin Kouba
  */
 public interface JSR299Configuration {
 
     public static final String LIBRARY_DIRECTORY_PROPERTY_NAME = "org.jboss.jsr299.tck.libraryDirectory";
+
+    public static final String TEST_DATASOURCE_PROPERTY_NAME = "org.jboss.jsr299.tck.testDataSource";
 
     /**
      * The implementation of {@link Beans} in use.
@@ -71,11 +73,27 @@ public interface JSR299Configuration {
     /**
      * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the
      * implementation). Any jars in this directory will be added to the deployed artifact.
-     *
+     * 
      * By default no directory is used.
+     * 
+     * @return path to additional libraries
      */
     public String getLibraryDirectory();
 
     public void setLibraryDirectory(String libraryDir);
+
+    /**
+     * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - example datasource must be provided.
+     * These tests belong to testng group <code>persistence</code>.
+     * 
+     * @return JNDI name of test datasource
+     */
+    public String getTestDataSource();
+
+    /**
+     * 
+     * @param testDatasource
+     */
+    public void setTestDataSource(String testDatasource);
 
 }

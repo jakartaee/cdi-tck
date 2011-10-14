@@ -40,6 +40,7 @@ public class JSR299ConfigurationImpl implements JSR299Configuration {
     private Managers managers;
     private EL el;
     private String libraryDirectory;
+    private String testDataSource;
 
     protected JSR299ConfigurationImpl() {
     }
@@ -92,6 +93,14 @@ public class JSR299ConfigurationImpl implements JSR299Configuration {
         this.libraryDirectory = libraryDirectory;
     }
 
+    public String getTestDataSource() {
+        return testDataSource;
+    }
+
+    public void setTestDataSource(String testDataSource) {
+        this.testDataSource = testDataSource;
+    }
+
     @Override
     public String toString() {
         StringBuilder configuration = new StringBuilder();
@@ -102,6 +111,7 @@ public class JSR299ConfigurationImpl implements JSR299Configuration {
         configuration.append("\tEL: ").append(getEl()).append("\n");
         configuration.append("\tManagers: ").append(getManagers()).append("\n");
         configuration.append("\tLibrary dir: ").append(getLibraryDirectory()).append("\n");
+        configuration.append("\tTest DS: ").append(getTestDataSource()).append("\n");
         configuration.append("\n");
         return configuration.toString();
     }

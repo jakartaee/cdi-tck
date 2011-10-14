@@ -46,7 +46,9 @@ import org.jboss.shrinkwrap.api.container.LibraryContainer;
 import org.jboss.shrinkwrap.api.container.ManifestContainer;
 import org.jboss.shrinkwrap.api.container.ResourceContainer;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.persistence20.PersistenceDescriptor;
 import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
 
 /**
@@ -85,7 +87,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     protected ResourceDescriptor webXml = null;
 
-    protected ResourceDescriptor persistenceXml = null;
+    protected PersistenceDescriptor persistenceDescriptor = null;
 
     protected List<ResourceDescriptor> manifestResources = null;
 
@@ -435,13 +437,23 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add persistence.xml.
+     * Add default persistence.xml.
+     * 
+     * @return self
+     */
+    public T withDefaultPersistenceXml() {
+        return withPersistenceXml(Descriptors.create(PersistenceDescriptor.class).createPersistenceUnit().name("test")
+                .jtaDataSource(ConfigurationFactory.get().getTestDataSource()).up());
+    }
+
+    /**
+     * Add persistence.xml descriptor created with shrinkwrap-descriptors.
      * 
      * @param persistenceXml
      * @return self
      */
-    public T withPersistenceXml(String persistenceXml) {
-        this.persistenceXml = new ResourceDescriptor(persistenceXml);
+    public T withPersistenceXml(PersistenceDescriptor persistenceDescriptor) {
+        this.persistenceDescriptor = persistenceDescriptor;
         return self();
     }
 
