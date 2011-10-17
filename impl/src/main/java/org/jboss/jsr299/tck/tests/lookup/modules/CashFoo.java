@@ -16,10 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
-public interface Bar {
+import javax.enterprise.inject.Specializes;
 
-    public int ping();
+@Specializes
+public class CashFoo extends PaymentFoo {
 
-    public Foo getFoo();
+    @Override
+    public int pong() {
+        return 0;
+    }
 
 }

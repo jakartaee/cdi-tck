@@ -18,12 +18,19 @@ package org.jboss.jsr299.tck.tests.lookup.modules;
 
 public class ProducedFoo implements Foo {
 
+    private String name;
+
     public ProducedFoo(String name) {
+        this.name = name;
     }
 
     @Override
     public int pong() {
         return 1;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

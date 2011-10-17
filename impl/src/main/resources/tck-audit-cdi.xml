@@ -2257,8 +2257,9 @@ detects the problem and treats it as a definition error.</text>
         <text>Check a specialized managed bean is not injectable</text> 
       </assertion>
       
-      <assertion id="m">
-        <text>Check a specialized producer field is not injectable</text> 
+      <assertion id="m" testable="false" >
+        <text>Check a specialized producer field is not injectable</text>
+        <note>Specialized producer method is not legal.</note>
       </assertion>
       
       <assertion id="n">

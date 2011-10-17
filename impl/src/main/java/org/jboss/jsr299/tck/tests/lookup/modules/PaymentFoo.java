@@ -16,10 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
-public interface Bar {
+public class PaymentFoo implements Foo {
 
-    public int ping();
-
-    public Foo getFoo();
+    @Override
+    public int pong() {
+        return 1;
+    }
 
 }

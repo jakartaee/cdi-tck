@@ -16,10 +16,21 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
-public interface Bar {
+import javax.inject.Inject;
 
-    public int ping();
+@Standard
+public class WebPaymentBar implements Bar {
 
-    public Foo getFoo();
+    @Inject
+    PaymentFoo foo;
+
+    public int ping() {
+        return foo.pong();
+    }
+
+    @Override
+    public Foo getFoo() {
+        return foo;
+    }
 
 }

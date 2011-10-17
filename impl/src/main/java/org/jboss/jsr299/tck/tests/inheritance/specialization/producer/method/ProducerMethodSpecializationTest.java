@@ -53,10 +53,8 @@ public class ProducerMethodSpecializationTest extends AbstractJSR299Test {
                 .getQualifiers().size() == 4;
         assert annotationSetMatches(getCurrentManager().getBeans(Necklace.class, EXPENSIVE_LITERAL, SPARKLY_LITERAL).iterator()
                 .next().getQualifiers(), Expensive.class, Sparkly.class, Any.class, Named.class);
-        assert getBeans(Necklace.class, new AnnotationLiteral<Sparkly>() {
-        }).size() == 1;
-        assert getBeans(Necklace.class, new AnnotationLiteral<Sparkly>() {
-        }).iterator().next().getName().equals("expensiveGift");
+        assert getBeans(Necklace.class, SPARKLY_LITERAL).size() == 1;
+        assert getBeans(Necklace.class, SPARKLY_LITERAL).iterator().next().getName().equals("expensiveGift");
         Product product = getInstanceByType(Product.class, EXPENSIVE_LITERAL, SPARKLY_LITERAL);
         assert product instanceof Necklace;
     }

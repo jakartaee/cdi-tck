@@ -14,12 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.modules;
+package org.jboss.jsr299.tck.tests.lookup.modules.broken;
 
-public interface Bar {
+import javax.ejb.Local;
 
-    public int ping();
-
-    public Foo getFoo();
+@Local
+public interface EjbFooLocal extends BrokenFoo {
 
 }

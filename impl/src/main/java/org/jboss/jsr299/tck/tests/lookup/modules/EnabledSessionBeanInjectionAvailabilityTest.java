@@ -22,11 +22,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -34,6 +30,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
+ * Test that bean in web module can inject enabled session bean from EJB module.
+ * 
+ * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
+ * classloading requirements)!
  * 
  * @author Martin Kouba
  */
@@ -42,15 +42,13 @@ public class EnabledSessionBeanInjectionAvailabilityTest extends AbstractJSR299T
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
+
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
                 .withTestClassDefinition(EnabledSessionBeanInjectionAvailabilityTest.class)
                 .withClasses(EjbFoo.class, EjbFooLocal.class).withBeanLibrary(Foo.class, Bar.class).build();
 
-        WebArchive webArchive = new WebArchiveBuilder().notTestArchive()
-                .withClasses(EnabledSessionBeanInjectionAvailabilityTest.class, WebBar.class).build();
-        webArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class).addToClassPath("test.jar")
-                .exportAsString()));
-        enterpriseArchive.addAsModule(webArchive);
+        enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
+                .withClasses(EnabledSessionBeanInjectionAvailabilityTest.class, WebBar.class).build());
 
         return enterpriseArchive;
     }

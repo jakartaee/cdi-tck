@@ -22,12 +22,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
@@ -49,19 +46,18 @@ public class SelectedAlternativeSessionBeanInjectionAvailabilityTest extends Abs
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
+
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
                 .withTestClassDefinition(SelectedAlternativeSessionBeanInjectionAvailabilityTest.class)
                 .withClasses(AlternativeEjbFoo.class, EjbFooLocal.class).withBeanLibrary(Foo.class, Bar.class).build();
 
-        WebArchive webArchive = new WebArchiveBuilder()
+        enterpriseArchive.addAsModule(new WebArchiveBuilder()
+                .withDefaultEjbModuleDependency()
                 .notTestArchive()
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(AlternativeEjbFoo.class.getName())
                                 .up()).withClasses(SelectedAlternativeSessionBeanInjectionAvailabilityTest.class, WebBar.class)
-                .build();
-        webArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
-                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
-        enterpriseArchive.addAsModule(webArchive);
+                .build());
 
         return enterpriseArchive;
     }

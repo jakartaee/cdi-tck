@@ -14,52 +14,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.modules;
+package org.jboss.jsr299.tck.tests.lookup.modules.broken;
 
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Test that bean in web module can inject enabled bean producer method from EJB module.
- * 
- * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
- * classloading requirements)!
  * 
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class EnabledProducerMethodInjectionAvailabilityTest extends AbstractJSR299Test {
+public class DisabledSessionBeanInjectionNotAvailableTest extends AbstractJSR299Test {
 
+    @ShouldThrowException(Exception.class)
     @Deployment
     public static EnterpriseArchive createTestArchive() {
 
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
-                .withTestClassDefinition(EnabledProducerMethodInjectionAvailabilityTest.class)
-                .withClasses(FooMethodProducer.class, ProducedFoo.class).withBeanLibrary(Foo.class, Bar.class).build();
+                .withTestClassDefinition(DisabledSessionBeanInjectionNotAvailableTest.class)
+                .withClasses(DisabledEjbFoo.class, EjbFooLocal.class).withBeanLibrary(BrokenFoo.class, BrokenBar.class).build();
 
         enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
-                .withClasses(EnabledProducerMethodInjectionAvailabilityTest.class, WebBar.class).build());
+                .withClasses(DisabledSessionBeanInjectionNotAvailableTest.class, BrokenWebBar.class).build());
 
         return enterpriseArchive;
     }
 
     @Inject
-    Bar bar;
+    BrokenBar bar;
 
     @Test(groups = "javaee-full-only")
-    @SpecAssertions({ @SpecAssertion(section = "5.1.4", id = "f") })
+    @SpecAssertion(section = "5.1.4", id = "j")
     public void testInjection() throws Exception {
-        Assert.assertEquals(bar.ping(), 1);
     }
 
 }

@@ -16,10 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
-public interface Bar {
+import javax.ejb.Stateless;
 
-    public int ping();
+@Stateless
+public class PaymentEjbFoo implements Foo {
 
-    public Foo getFoo();
+    @Override
+    public int pong() {
+        return 1;
+    }
 
 }

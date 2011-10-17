@@ -22,11 +22,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -46,15 +42,13 @@ public class EnabledManagedBeanInjectionAvailabilityTest extends AbstractJSR299T
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
+
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
                 .withTestClassDefinition(EnabledManagedBeanInjectionAvailabilityTest.class).withClasses(ManagedFoo.class)
                 .withBeanLibrary(Foo.class, Bar.class).build();
 
-        WebArchive webArchive = new WebArchiveBuilder().notTestArchive()
-                .withClasses(EnabledSessionBeanInjectionAvailabilityTest.class, WebBar.class).build();
-        webArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
-                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
-        enterpriseArchive.addAsModule(webArchive);
+        enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
+                .withClasses(EnabledManagedBeanInjectionAvailabilityTest.class, WebBar.class).build());
 
         return enterpriseArchive;
     }
@@ -66,6 +60,7 @@ public class EnabledManagedBeanInjectionAvailabilityTest extends AbstractJSR299T
     @SpecAssertions({ @SpecAssertion(section = "5.1.4", id = "c"), @SpecAssertion(section = "5.1", id = "aa") })
     public void testInjection() throws Exception {
         Assert.assertEquals(bar.ping(), 0);
+        assert bar.getFoo() instanceof ManagedFoo;
     }
 
 }

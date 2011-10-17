@@ -16,8 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules.broken;
 
+import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 
+@Alternative
 public class DisabledFooMethodProducer {
 
     @Produces

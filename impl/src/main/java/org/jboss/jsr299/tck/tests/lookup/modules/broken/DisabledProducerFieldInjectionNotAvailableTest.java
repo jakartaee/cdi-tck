@@ -21,11 +21,7 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -44,12 +40,11 @@ public class DisabledProducerFieldInjectionNotAvailableTest extends AbstractJSR2
 
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
                 .withTestClassDefinition(DisabledProducerFieldInjectionNotAvailableTest.class)
-                .withClasses(DisabledFooFieldProducer.class, BrokenProducedFoo.class).withBeanLibrary(BrokenFoo.class, BrokenBar.class).build();
+                .withClasses(DisabledFooFieldProducer.class, BrokenProducedFoo.class)
+                .withBeanLibrary(BrokenFoo.class, BrokenBar.class).build();
 
-        WebArchive webArchive = new WebArchiveBuilder().notTestArchive().withClasses(BrokenWebBar.class).build();
-        webArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
-                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
-        enterpriseArchive.addAsModule(webArchive);
+        enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
+                .withClasses(BrokenWebBar.class).build());
 
         return enterpriseArchive;
     }

@@ -16,6 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Set;
+
+import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -24,13 +29,11 @@ import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * Test that bean in web module can inject enabled bean producer method from EJB module.
+ * Test that bean in web module cannot inject specialized producer methods from EJB module.
  * 
  * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
  * classloading requirements)!
@@ -38,17 +41,18 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class EnabledProducerMethodInjectionAvailabilityTest extends AbstractJSR299Test {
+public class SpecializedProducerMethodInjectionNotAvailableTest extends AbstractJSR299Test {
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
 
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
-                .withTestClassDefinition(EnabledProducerMethodInjectionAvailabilityTest.class)
-                .withClasses(FooMethodProducer.class, ProducedFoo.class).withBeanLibrary(Foo.class, Bar.class).build();
+                .withTestClassDefinition(SpecializedProducerMethodInjectionNotAvailableTest.class)
+                .withClasses(SpecializedFooMethodProducer.class, FooMethodProducer.class)
+                .withBeanLibrary(Foo.class, Bar.class, Enterprise.class, Standard.class).build();
 
         enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
-                .withClasses(EnabledProducerMethodInjectionAvailabilityTest.class, WebBar.class).build());
+                .withClasses(SpecializedProducerMethodInjectionNotAvailableTest.class, WebBar.class).build());
 
         return enterpriseArchive;
     }
@@ -57,9 +61,15 @@ public class EnabledProducerMethodInjectionAvailabilityTest extends AbstractJSR2
     Bar bar;
 
     @Test(groups = "javaee-full-only")
-    @SpecAssertions({ @SpecAssertion(section = "5.1.4", id = "f") })
-    public void testInjection() throws Exception {
-        Assert.assertEquals(bar.ping(), 1);
+    @SpecAssertion(section = "5.1.4", id = "n")
+    public void testManagedBeanInjection() throws Exception {
+        assertEquals(bar.ping(), 1);
+        Set<Bean<Foo>> beans = getBeans(Foo.class);
+        assert beans.size() == 1;
+        assert beans.iterator().next().getBeanClass().equals(ProducedFoo.class);
+        Foo instance = getInstanceByType(Foo.class);
+        assert instance instanceof ProducedFoo;
+        assert ((ProducedFoo) instance).getName().equals(SpecializedFooMethodProducer.class.getName());
     }
 
 }

@@ -27,4 +27,9 @@ public class WebBar implements Bar {
         return foo.pong();
     }
 
+    @Override
+    public Foo getFoo() {
+        return foo;
+    }
+
 }

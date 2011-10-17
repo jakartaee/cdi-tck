@@ -14,12 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.modules;
+package org.jboss.jsr299.tck.tests.lookup.modules.broken;
 
-public interface Bar {
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Alternative;
 
-    public int ping();
+@Alternative
+@Stateless
+public class DisabledEjbFoo implements EjbFooLocal {
 
-    public Foo getFoo();
+    @Override
+    public int pong() {
+        return 0;
+    }
 
 }
