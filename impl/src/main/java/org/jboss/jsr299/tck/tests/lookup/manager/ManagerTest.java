@@ -17,6 +17,7 @@
 package org.jboss.jsr299.tck.tests.lookup.manager;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.spi.Bean;
@@ -78,6 +79,13 @@ public class ManagerTest extends AbstractJSR299Test {
     public void testGetReferenceReturnsContextualInstance() {
         Bean<FishFarmOffice> bean = getBeans(FishFarmOffice.class).iterator().next();
         assert getCurrentManager().getReference(bean, FishFarmOffice.class, getCurrentManager().createCreationalContext(bean)) instanceof FishFarmOffice;
+    }
+
+    @Test(expectedExceptions = { IllegalArgumentException.class })
+    @SpecAssertion(section = "11.3.1", id = "c")
+    public void testGetReferenceWithIllegalBeanType() {
+        Bean<FishFarmOffice> bean = getBeans(FishFarmOffice.class).iterator().next();
+        getCurrentManager().getReference(bean, BigDecimal.class, getCurrentManager().createCreationalContext(bean));
     }
 
     private boolean isSerializable(Class<?> clazz) {
