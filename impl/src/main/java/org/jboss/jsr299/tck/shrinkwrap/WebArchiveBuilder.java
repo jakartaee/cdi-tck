@@ -22,6 +22,7 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 
 /**
@@ -33,6 +34,19 @@ import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArchive> {
 
     private static final String DEFAULT_WAR_NAME = "test.war";
+
+    private boolean hasDefaultEjbModuleDependency = false;
+
+    /**
+     * Add default EJB module dependency to manifest. Useful when building custom web module of enterprise archive.
+     * 
+     * @see EnterpriseArchiveBuilder#DEFAULT_EJB_MODULE_NAME
+     * @return self
+     */
+    public WebArchiveBuilder withDefaultEjbModuleDependency() {
+        this.hasDefaultEjbModuleDependency = true;
+        return this;
+    }
 
     @Override
     public WebArchiveBuilder self() {
@@ -83,6 +97,12 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
                     webArchive.addAsWebResource(resource.getSource(), resource.getTarget());
                 }
             }
+        }
+
+        // Default EJB module dependency
+        if (this.hasDefaultEjbModuleDependency) {
+            webArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
+                    .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
         }
         return webArchive;
     }
