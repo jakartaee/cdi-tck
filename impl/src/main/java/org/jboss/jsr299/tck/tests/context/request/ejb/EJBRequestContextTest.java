@@ -42,7 +42,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test {
      * The request scope is active during any remote method invocation of any EJB bean, during any call to an EJB timeout method
      * and during message delivery to any EJB message driven bean.
      */
-    @Test(groups = { "contexts", "ejb3.1", "integration" })
+    @Test(groups = { "javaee-full-only", "contexts", "ejb3.1", "integration" })
     @SpecAssertion(section = "6.7.1", id = "gc")
     public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
@@ -61,7 +61,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test {
     /**
      * The request context is destroyed after the remote method invocation, timeout or message delivery completes.
      */
-    @Test(groups = { "contexts", "ejb3.1", "integration" })
+    @Test(groups = { "javaee-full-only", "contexts", "ejb3.1", "integration" })
     @SpecAssertion(section = "6.7.1", id = "hc")
     public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();

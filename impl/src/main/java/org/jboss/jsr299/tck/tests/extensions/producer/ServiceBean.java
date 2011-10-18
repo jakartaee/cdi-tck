@@ -14,23 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.el;
+package org.jboss.jsr299.tck.tests.extensions.producer;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateless;
 
-@RequestScoped
-public class Tuna {
+@Stateless
+public class ServiceBean implements ServiceRemote {
 
-    long timestamp;
-
-    @PostConstruct
-    public void create() {
-        timestamp = System.currentTimeMillis();
-    }
-
-    public String getName() {
-        return "Ophir";
+    @Override
+    public String ping() {
+        return "pong";
     }
 
 }

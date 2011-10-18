@@ -52,7 +52,15 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
         Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
         assert requestContext.get(tunaBean) == null;
         TunaFarm tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression("#{tunaFarm}", TunaFarm.class);
+        assert requestContext.get(tunaBean) != null;
         assert tunaFarm.tuna != null;
+        long timestamp = tunaFarm.tuna.timestamp;
+        tunaFarm = null;
+        // Lookup once again - do not create new instance
+        tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression("#{tunaFarm}", TunaFarm.class);
+        // assert requestContext.get(tunaBean) != null;
+        assert tunaFarm.tuna != null;
+        assert timestamp == tunaFarm.tuna.timestamp;
     }
 
     @Test(groups = { "el" })

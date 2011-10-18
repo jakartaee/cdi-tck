@@ -28,6 +28,7 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -41,7 +42,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "9.5", id = "fa")
+    @SpecAssertions({ @SpecAssertion(section = "9.5", id = "fa"), @SpecAssertion(section = "11.5.2", id = "dd") })
     // WELD-238
     public void testCustomPostConstructInterceptor() {
         assert !getCurrentManager().resolveInterceptors(POST_CONSTRUCT, new SecureLiteral(), new TransactionalLiteral())
@@ -51,7 +52,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "9.5", id = "fb")
+    @SpecAssertions({ @SpecAssertion(section = "9.5", id = "fb"), @SpecAssertion(section = "11.5.2", id = "dd") })
     // WELD-238
     public void testCustomPreDestroyInterceptor() {
         assert !getCurrentManager().resolveInterceptors(PRE_DESTROY, new SecureLiteral(), new TransactionalLiteral()).isEmpty();
@@ -60,7 +61,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "9.5", id = "fc")
+    @SpecAssertions({ @SpecAssertion(section = "9.5", id = "fc"), @SpecAssertion(section = "11.5.2", id = "dd") })
     // WELD-238
     public void testCustomPostActivateInterceptor() {
         assert !getCurrentManager().resolveInterceptors(POST_ACTIVATE, new SecureLiteral(), new TransactionalLiteral())
@@ -70,7 +71,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "9.5", id = "fd")
+    @SpecAssertions({ @SpecAssertion(section = "9.5", id = "fd"), @SpecAssertion(section = "11.5.2", id = "dd") })
     // WELD-238
     public void testCustomPrePassivateInterceptor() {
         assert !getCurrentManager().resolveInterceptors(PRE_PASSIVATE, new SecureLiteral(), new TransactionalLiteral())
@@ -80,7 +81,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "9.5", id = "fe")
+    @SpecAssertions({ @SpecAssertion(section = "9.5", id = "fe"), @SpecAssertion(section = "11.5.2", id = "dd") })
     // WELD-238
     public void testCustomAroundInvokeInterceptor() {
         assert !getCurrentManager().resolveInterceptors(AROUND_INVOKE, new SecureLiteral(), new TransactionalLiteral())
@@ -90,7 +91,7 @@ public class CustomInterceptorTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "9.5", id = "ff")
+    @SpecAssertions({ @SpecAssertion(section = "9.5", id = "ff"), @SpecAssertion(section = "11.5.2", id = "dd") })
     // WELD-238
     public void testCustomAroundTimeoutInterceptor() {
         assert !getCurrentManager().resolveInterceptors(AROUND_TIMEOUT, new SecureLiteral(), new TransactionalLiteral())

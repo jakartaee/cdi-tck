@@ -24,6 +24,7 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -43,7 +44,7 @@ public class IntegrationWithUnifiedELTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "el" })
-    @SpecAssertion(section = "12.4", id = "a")
+    @SpecAssertions({ @SpecAssertion(section = "12.4", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
     public void testELResolverRegisteredWithJsf() throws Exception {
         WebClient webclient = new WebClient();
         String content = webclient.getPage(contextPath + "JSFTestPage.jsf").getWebResponse().getContentAsString();
@@ -51,7 +52,7 @@ public class IntegrationWithUnifiedELTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "el" })
-    @SpecAssertion(section = "12.4", id = "a")
+    @SpecAssertions({ @SpecAssertion(section = "12.4", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
     public void testELResolverRegisteredWithServletContainer() throws Exception {
         WebClient webclient = new WebClient();
         String content = webclient.getPage(contextPath + "JSPTestPage.jsp").getWebResponse().getContentAsString();

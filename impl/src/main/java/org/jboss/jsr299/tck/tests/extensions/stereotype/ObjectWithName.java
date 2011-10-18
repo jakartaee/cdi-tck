@@ -14,23 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.el;
+package org.jboss.jsr299.tck.tests.extensions.stereotype;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@RequestScoped
-public class Tuna {
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    long timestamp;
+import javax.enterprise.inject.Stereotype;
+import javax.inject.Named;
 
-    @PostConstruct
-    public void create() {
-        timestamp = System.currentTimeMillis();
-    }
-
-    public String getName() {
-        return "Ophir";
-    }
+@Named
+@Stereotype
+@Target({ TYPE, METHOD, FIELD })
+@Retention(RUNTIME)
+public @interface ObjectWithName {
 
 }

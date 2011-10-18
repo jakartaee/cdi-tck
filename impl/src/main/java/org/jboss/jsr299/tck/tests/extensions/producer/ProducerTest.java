@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.producer;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -120,6 +123,13 @@ public class ProducerTest extends AbstractJSR299Test {
     }
 
     @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.7", id = "ac"), @SpecAssertion(section = "11.5.7", id = "e") })
+    public void testProduceCallsOverridenResourceProducerMethod() {
+        assertEquals(getInstanceByType(ServiceRemote.class).ping(), "pong");
+        assertTrue(ProducerProcessor.isOverriddenServiceProducerCalled);
+    }
+
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "11.5.7", id = "e") })
     public void testSetProducerOverridesProducer() {
         ProducerProcessor.reset();
@@ -213,6 +223,12 @@ public class ProducerTest extends AbstractJSR299Test {
     public void testGetAnnotatedTypeOnProcessInjectionTarget() {
         assert ProducerProcessor.getDogAnnotatedType() != null;
         assert ProducerProcessor.getDogAnnotatedType().getBaseType().equals(Dog.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "ec") })
+    public void testResourceAreConsideredToBeProducerField() {
+        assertTrue(ProducerProcessor.isServiceProducerFieldObserved);
     }
 
 }

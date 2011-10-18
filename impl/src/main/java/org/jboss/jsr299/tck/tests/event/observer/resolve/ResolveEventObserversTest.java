@@ -105,6 +105,13 @@ public class ResolveEventObserversTest extends AbstractJSR299Test {
                 Annotation[].class) != null;
     }
 
+    @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
+    @SpecAssertion(section = "11.3.10", id = "e")
+    public void testBeanManagerResolveObserversWithIllegalQualifier() {
+        getCurrentManager().resolveObserverMethods(new SimpleEventType(), new AnnotationLiteral<Override>() {
+        });
+    }
+
     @Test(groups = { "events" })
     @SpecAssertion(section = "12.3", id = "o")
     public void testObserverMethodAutomaticallyRegistered() {

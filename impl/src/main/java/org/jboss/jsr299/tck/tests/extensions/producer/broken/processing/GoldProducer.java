@@ -14,23 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.el;
+package org.jboss.jsr299.tck.tests.extensions.producer.broken.processing;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Produces;
 
-@RequestScoped
-public class Tuna {
+public class GoldProducer {
 
-    long timestamp;
-
-    @PostConstruct
-    public void create() {
-        timestamp = System.currentTimeMillis();
-    }
-
-    public String getName() {
-        return "Ophir";
+    @Produces
+    public Gold produceGold() {
+        return new Gold(0);
     }
 
 }

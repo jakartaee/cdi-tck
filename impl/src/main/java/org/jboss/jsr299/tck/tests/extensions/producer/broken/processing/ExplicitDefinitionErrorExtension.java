@@ -14,23 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.el;
+package org.jboss.jsr299.tck.tests.extensions.producer.broken.processing;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.Extension;
+import javax.enterprise.inject.spi.ProcessProducer;
 
-@RequestScoped
-public class Tuna {
+/**
+ * 
+ * @author Martin Kouba
+ */
+public class ExplicitDefinitionErrorExtension implements Extension {
 
-    long timestamp;
-
-    @PostConstruct
-    public void create() {
-        timestamp = System.currentTimeMillis();
+    public void processGoldProducer(@Observes ProcessProducer<GoldProducer, Gold> event) {
+        event.addDefinitionError(new NullPointerException());
     }
-
-    public String getName() {
-        return "Ophir";
-    }
-
 }

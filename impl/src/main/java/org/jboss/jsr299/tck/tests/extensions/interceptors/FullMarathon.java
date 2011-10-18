@@ -9,28 +9,20 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.el;
+package org.jboss.jsr299.tck.tests.extensions.interceptors;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-@RequestScoped
-public class Tuna {
-
-    long timestamp;
-
-    @PostConstruct
-    public void create() {
-        timestamp = System.currentTimeMillis();
-    }
-
-    public String getName() {
-        return "Ophir";
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value = { ElementType.TYPE })
+public @interface FullMarathon {
 
 }
