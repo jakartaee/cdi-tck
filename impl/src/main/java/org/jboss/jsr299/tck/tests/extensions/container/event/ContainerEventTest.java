@@ -49,7 +49,7 @@ public class ContainerEventTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.3", id = "ba"), @SpecAssertion(section = "11.5.6", id = "aaa") })
+    @SpecAssertions({ @SpecAssertion(section = "12.3", id = "da"), @SpecAssertion(section = "11.5.6", id = "aaa") })
     public void testProcessInjectionTargetFiredForManagedBean() {
         assert ProcessInjectionTargetObserver.getManagedBeanEvent() != null;
         validateManagedBean(ProcessInjectionTargetObserver.getManagedBeanEvent().getAnnotatedType());
@@ -82,6 +82,13 @@ public class ContainerEventTest extends AbstractJSR299Test {
         assert ProcessInjectionTargetObserver.getEvent4Observed() == 0;
         assert ProcessInjectionTargetObserver.getEvent5Observed() == 1;
         assert ProcessInjectionTargetObserver.getEventWithTypeVariable() != null;
+    }
+
+    @Test
+    @SpecAssertion(section = "12.3", id = "ba")
+    public void testProcessAnnotatedTypeFiredForManagedBean() {
+        assert ProcessAnnotatedTypeObserver.getManagedBeanEvent() != null;
+        validateManagedBean(ProcessAnnotatedTypeObserver.getManagedBeanEvent().getAnnotatedType());
     }
 
     @Test

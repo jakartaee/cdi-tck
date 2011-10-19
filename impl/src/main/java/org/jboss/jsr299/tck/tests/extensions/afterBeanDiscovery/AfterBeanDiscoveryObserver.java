@@ -26,29 +26,43 @@ import java.util.Set;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
+import javax.enterprise.event.Reception;
+import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.ProcessBean;
+import javax.enterprise.inject.spi.ProcessObserverMethod;
 
+import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
 public class AfterBeanDiscoveryObserver implements Extension {
 
-    private static boolean processBeanFiredForCockatooBean;
+    public static TestableObserverMethod<Talk> addedObserverMethod;
 
-    public static boolean isProcessBeanFiredForCockatooBean() {
-        return processBeanFiredForCockatooBean;
-    }
+    public static boolean isTalkProcessObserverMethodObserved = false;
+
+    public static boolean isProcessBeanFiredForCockatooBean = false;
 
     public void observeProcessBean(@Observes ProcessBean<Cockatoo> event) {
-        AfterBeanDiscoveryObserver.processBeanFiredForCockatooBean = true;
+        isProcessBeanFiredForCockatooBean = true;
         assert event.getBean().getName().equals("cockatoo");
     }
 
-    public void addABean(@Observes AfterBeanDiscovery afterBeanDiscovery) {
-        afterBeanDiscovery.addBean(new Bean<Cockatoo>() {
+    /**
+     * FIXME revise parameters order according to CDI-88/CDITCK-174 resolution
+     * 
+     * @param event
+     */
+    public void observeProcessObserverMethod(@Observes ProcessObserverMethod<Talk, Listener> event) {
+        isTalkProcessObserverMethodObserved = true;
+    }
+
+    public void addABean(@Observes AfterBeanDiscovery event) {
+
+        event.addBean(new Bean<Cockatoo>() {
 
             private final Set<Annotation> qualifiers = new HashSet<Annotation>(Arrays.asList(new DefaultLiteral()));
             private final Set<Type> types = new HashSet<Type>(Arrays.<Type> asList(Cockatoo.class));
@@ -97,6 +111,42 @@ public class AfterBeanDiscoveryObserver implements Extension {
                 // No-op
             }
         });
+
+        // Ad observer method
+        addedObserverMethod = new TestableObserverMethod<Talk>() {
+
+            boolean observed = false;
+
+            public void notify(Talk event) {
+                observed = true;
+            }
+
+            public boolean isObserved() {
+                return observed;
+            }
+
+            public Class<?> getBeanClass() {
+                return Listener.class;
+            }
+
+            public Set<Annotation> getObservedQualifiers() {
+                return Collections.<Annotation> singleton(new AnyLiteral());
+            }
+
+            public Type getObservedType() {
+                return Talk.class;
+            }
+
+            public Reception getReception() {
+                return Reception.ALWAYS;
+            }
+
+            public TransactionPhase getTransactionPhase() {
+                return TransactionPhase.IN_PROGRESS;
+            }
+
+        };
+        event.addObserverMethod(addedObserverMethod);
     }
 
 }

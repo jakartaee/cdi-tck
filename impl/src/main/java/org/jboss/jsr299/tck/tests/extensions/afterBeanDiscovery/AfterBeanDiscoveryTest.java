@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.afterBeanDiscovery;
 
+import static org.testng.Assert.assertTrue;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -44,7 +46,20 @@ public class AfterBeanDiscoveryTest extends AbstractJSR299Test {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "da") })
     public void testProcessBeanIsFired() {
-        assert AfterBeanDiscoveryObserver.isProcessBeanFiredForCockatooBean();
+        assert AfterBeanDiscoveryObserver.isProcessBeanFiredForCockatooBean;
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.2", id = "ea")
+    public void testProcessObserverMethodFiredWhileAddingObserverMethod() {
+        assertTrue(AfterBeanDiscoveryObserver.isTalkProcessObserverMethodObserved);
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.2", id = "eb")
+    public void testObserverMethodRegistered() {
+        getCurrentManager().fireEvent(new Talk("Hello"));
+        assertTrue(AfterBeanDiscoveryObserver.addedObserverMethod.isObserved());
     }
 
 }
