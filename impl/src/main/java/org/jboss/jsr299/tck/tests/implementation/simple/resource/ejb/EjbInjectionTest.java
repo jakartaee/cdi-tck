@@ -19,6 +19,7 @@ package org.jboss.jsr299.tck.tests.implementation.simple.resource.ejb;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -62,6 +63,15 @@ public class EjbInjectionTest extends AbstractJSR299Test {
         instance = (ManagedBean) deserialize(serialize(instance));
         assert instance.getMyEjb() != null : "EJB reference was not produced and injected into bean";
         assert instance.getMyEjb().knockKnock().equals("We're home");
+    }
+
+    @Test(groups = { "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "ad") })
+    public void testResourceBeanTypes() {
+        Bean<BeanRemote> beanRemote = getBeans(BeanRemote.class, new AnnotationLiteral<Lazy>() {
+        }).iterator().next();
+        assert beanRemote.getTypes().size() == 3;
+        assert rawTypeSetMatches(beanRemote.getTypes(), BeanRemote.class, Object.class, AnotherInterface.class);
     }
 
 }

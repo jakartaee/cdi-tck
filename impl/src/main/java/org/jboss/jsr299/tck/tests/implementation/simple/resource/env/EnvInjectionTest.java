@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.resource.env;
 
+import java.io.Serializable;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
@@ -63,5 +65,15 @@ public class EnvInjectionTest extends AbstractJSR299Test {
         String greeting = greetingEnvBean.create(greetingEnvCc);
         assert greeting != null;
         assert greeting.equals("Hello there my friend");
+    }
+
+    @Test(groups = { "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "aa") })
+    public void testResourceBeanTypes() {
+        Bean<String> greeting = getBeans(String.class, new AnnotationLiteral<Greeting>() {
+        }).iterator().next();
+        assert greeting.getTypes().size() == 5;
+        assert rawTypeSetMatches(greeting.getTypes(), String.class, Object.class, Serializable.class, Comparable.class,
+                CharSequence.class);
     }
 }

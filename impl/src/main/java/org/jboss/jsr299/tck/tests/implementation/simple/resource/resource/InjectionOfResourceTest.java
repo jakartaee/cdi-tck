@@ -67,4 +67,14 @@ public class InjectionOfResourceTest extends AbstractJSR299Test {
         managedBean = (ManagedBean) deserialize(serialize(managedBean));
         assert managedBean.getBeanManager() != null;
     }
+
+    @Test(groups = { "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "aa") })
+    public void testResourceBeanTypes() {
+        Bean<BeanManager> beanRemote = getBeans(BeanManager.class, new AnnotationLiteral<Another>() {
+        }).iterator().next();
+        assert beanRemote.getTypes().size() == 2;
+        assert beanRemote.getTypes().contains(BeanManager.class);
+        assert beanRemote.getTypes().contains(Object.class);
+    }
 }

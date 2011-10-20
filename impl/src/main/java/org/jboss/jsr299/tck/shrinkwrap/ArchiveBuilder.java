@@ -120,7 +120,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}
      * 
      * <p>
-     * Do not use this in new tests - use ${@link #withBeansXml(BeansDescriptor)} instead.
+     * Do not use this in new tests - use {@link #withBeansXml(BeansDescriptor)} instead.
      * </p>
      * 
      * @param beansXml
@@ -147,7 +147,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * META-INF/services/javax.enterprise.inject.spi.Extension.
      * 
      * <p>
-     * Do not use this in new tests - use ${@link #withExtension(Class)} instead.
+     * Do not use this in new tests - use {@link #withExtension(Class)} instead.
      * </p>
      * 
      * @param extension

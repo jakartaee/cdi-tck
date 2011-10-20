@@ -200,8 +200,15 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         }).getTree().getClass().equals(AppleTree.class);
     }
 
+    /**
+     * Note on the "3.3.2 h" assertion related to CDI section "3.3.2. Declaring a producer method" statement
+     * "A producer method may have any number of parameters." JVM spec allows max 255 params. This test works with two producer
+     * method params - {@link SpiderProducer#producesDeadliestTarantula(Tarantula, Tarantula)}. To fulfill the assertion
+     * requirements we would need to test 255 producer methods with 1 to 255 parameter injection points.
+     */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3.5", id = "a"), @SpecAssertion(section = "3.3.2", id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = "2.3.5", id = "a"), @SpecAssertion(section = "3.3.2", id = "i"),
+            @SpecAssertion(section = "3.3.2", id = "h") })
     public void testBindingTypesAppliedToProducerMethodParameters() {
         Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);

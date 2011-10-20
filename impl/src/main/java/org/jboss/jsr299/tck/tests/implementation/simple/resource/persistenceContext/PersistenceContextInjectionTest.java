@@ -21,6 +21,7 @@ import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -90,14 +91,22 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "hh") })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "hh"), @SpecAssertion(section = "3.5.2", id = "ab") })
     public void testBeanTypesAndBindingTypesOfPersistenceContext() {
-        Bean<EntityManager> managedBeanBean = getBeans(EntityManager.class, new AnnotationLiteral<Database>() {
+        Bean<EntityManager> manager = getBeans(EntityManager.class, new AnnotationLiteral<Database>() {
         }).iterator().next();
-        assert managedBeanBean.getTypes().size() == 2;
-        assert managedBeanBean.getTypes().contains(Object.class);
-        assert managedBeanBean.getTypes().contains(EntityManager.class);
-        assert managedBeanBean.getQualifiers().size() == 2;
-        assert annotationSetMatches(managedBeanBean.getQualifiers(), Any.class, Database.class);
+        assert manager.getTypes().size() == 2;
+        assert rawTypeSetMatches(manager.getTypes(), EntityManager.class, Object.class);
+        assert manager.getQualifiers().size() == 2;
+        assert annotationSetMatches(manager.getQualifiers(), Any.class, Database.class);
+    }
+
+    @Test(groups = { "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "ac") })
+    public void testBeanTypesOfPersistenceUnit() {
+        Bean<EntityManagerFactory> factory = getBeans(EntityManagerFactory.class, new AnnotationLiteral<Database>() {
+        }).iterator().next();
+        assert factory.getTypes().size() == 2;
+        assert rawTypeSetMatches(factory.getTypes(), EntityManagerFactory.class, Object.class);
     }
 }
