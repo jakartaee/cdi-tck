@@ -49,6 +49,7 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.persistence20.PersistenceDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
 
 /**
@@ -87,6 +88,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     protected ResourceDescriptor webXml = null;
 
+    protected WebAppDescriptor webXmlDescriptor = null;
+
     protected PersistenceDescriptor persistenceDescriptor = null;
 
     protected List<ResourceDescriptor> manifestResources = null;
@@ -117,7 +120,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}
+     * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}.
      * 
      * <p>
      * Do not use this in new tests - use {@link #withBeansXml(BeansDescriptor)} instead.
@@ -228,7 +231,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Specified classes must be excluded from final archive unless also added via {@link #withClass(Class)} or
      * {@link #withClasses(Class...)}. Useful for exluding some classes from package added via {@link #withPackage(Package)}.
-     * 
      * 
      * @param classes
      * @return self
@@ -426,13 +428,28 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add web.xml.
+     * Add web.xml located in src/main/resource/{testPackagePath}.
+     * 
+     * <p>
+     * Do not use this in new tests - use {@link #withWebXml(WebAppDescriptor)} instead.
+     * </p>
      * 
      * @param webXml
      * @return
      */
     public T withWebXml(String webXml) {
         this.webXml = new ResourceDescriptor(webXml);
+        return self();
+    }
+
+    /**
+     * Add <code>web.xml</code> descriptor created with shrinkwrap-descriptors.
+     * 
+     * @param webXml
+     * @return
+     */
+    public T withWebXml(WebAppDescriptor webXml) {
+        this.webXmlDescriptor = webXml;
         return self();
     }
 

@@ -16,14 +16,13 @@
  */
 package org.jboss.jsr299.tck.shrinkwrap;
 
-import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 
 /**
@@ -110,7 +109,8 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         } else if (beansXml != null) {
             ejbArchive.addAsManifestResource(beansXml.getSource(), beansXml.getTarget());
         } else {
-            ejbArchive.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
+            ejbArchive.addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()),
+                    "beans.xml");
         }
 
         if (persistenceDescriptor != null) {
