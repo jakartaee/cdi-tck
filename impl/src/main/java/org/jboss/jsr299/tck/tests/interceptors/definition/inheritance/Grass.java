@@ -16,22 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import javax.ejb.Stateless;
 
-@Interceptor
-@GuardedBySquirrel
-public class SquirrelInterceptor {
+@Stateless
+public class Grass extends PongPlant {
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-
-        Object target = ctx.getTarget();
-
-        if (target instanceof Plant) {
-            ((Plant) target).inspect(this.getClass().getName());
-        }
-        return ctx.proceed();
-    }
 }

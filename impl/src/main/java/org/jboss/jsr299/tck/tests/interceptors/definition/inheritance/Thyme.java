@@ -16,22 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+@Culinary
+public class Thyme extends Herb {
 
-@Interceptor
-@GuardedBySquirrel
-public class SquirrelInterceptor {
-
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-
-        Object target = ctx.getTarget();
-
-        if (target instanceof Plant) {
-            ((Plant) target).inspect(this.getClass().getName());
-        }
-        return ctx.proceed();
-    }
 }

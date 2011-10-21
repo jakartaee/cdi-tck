@@ -16,22 +16,20 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Interceptor
-@GuardedBySquirrel
-public class SquirrelInterceptor {
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
+import javax.inject.Qualifier;
 
-        Object target = ctx.getTarget();
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
+@Retention(RUNTIME)
+@Qualifier
+public @interface Culinary {
 
-        if (target instanceof Plant) {
-            ((Plant) target).inspect(this.getClass().getName());
-        }
-        return ctx.proceed();
-    }
 }

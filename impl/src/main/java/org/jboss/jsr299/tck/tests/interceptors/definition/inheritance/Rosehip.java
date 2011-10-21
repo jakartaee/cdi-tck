@@ -1,3 +1,5 @@
+package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
+
 /*
  * JBoss, Home of Professional Open Source
  * Copyright 2010, Red Hat, Inc., and individual contributors
@@ -14,24 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
+@Culinary
+public class Rosehip extends Shrub {
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
-
-@Interceptor
-@GuardedBySquirrel
-public class SquirrelInterceptor {
-
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-
-        Object target = ctx.getTarget();
-
-        if (target instanceof Plant) {
-            ((Plant) target).inspect(this.getClass().getName());
-        }
-        return ctx.proceed();
-    }
 }

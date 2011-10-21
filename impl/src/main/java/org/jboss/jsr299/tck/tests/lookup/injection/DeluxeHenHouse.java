@@ -16,6 +16,26 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection;
 
+import javax.annotation.Resource;
+import javax.inject.Inject;
+
 public class DeluxeHenHouse extends HenHouse {
+
+    @Resource(name = "greeting")
+    String greeting;
+
+    @Inject
+    Wolf wolf;
+
+    private boolean initializerCalledAfterInjection = false;
+
+    @Inject
+    public void initialize() {
+        initializerCalledAfterInjection = (fox != null && wolf != null && greeting != null);
+    }
+
+    public boolean isInitializerCalledAfterInjection() {
+        return initializerCalledAfterInjection;
+    }
 
 }

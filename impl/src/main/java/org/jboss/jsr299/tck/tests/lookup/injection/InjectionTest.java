@@ -20,6 +20,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -30,7 +32,11 @@ public class InjectionTest extends AbstractJSR299Test {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InjectionTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(InjectionTest.class)
+                .withWebXml(
+                        Descriptors.create(WebAppDescriptor.class).createEnvEntry().envEntryName("greeting")
+                                .envEntryType("java.lang.String").envEntryValue("Hello").up()).build();
     }
 
     @Test(groups = { "injection", "producerMethod" })
@@ -51,11 +57,13 @@ public class InjectionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "4.2", id = "aa")
+    @SpecAssertions({ @SpecAssertion(section = "4.2", id = "aa"), @SpecAssertion(section = "5.5.2", id = "bg"),
+            @SpecAssertion(section = "5.5.2", id = "bh") })
     public void testFieldDeclaredInSuperclassInjected() throws Exception {
         DeluxeHenHouse henHouse = getInstanceByType(DeluxeHenHouse.class);
         assert henHouse.fox != null;
         assert henHouse.fox.getName().equals("gavin");
+        assert henHouse.isInitializerCalledAfterInjection();
     }
 
     @Test

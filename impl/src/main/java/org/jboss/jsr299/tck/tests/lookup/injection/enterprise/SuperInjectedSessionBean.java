@@ -14,24 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.interceptors.definition.inheritance;
+package org.jboss.jsr299.tck.tests.lookup.injection.enterprise;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
-@Interceptor
-@GuardedBySquirrel
-public class SquirrelInterceptor {
+@Stateless
+public class SuperInjectedSessionBean {
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
+    @EJB
+    protected DeluxeHenHouseLocal deluxeHenHouse;
 
-        Object target = ctx.getTarget();
-
-        if (target instanceof Plant) {
-            ((Plant) target).inspect(this.getClass().getName());
-        }
-        return ctx.proceed();
-    }
 }

@@ -21,7 +21,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 @Stateless
-public class InjectedSessionBean implements InjectedSessionBeanLocal {
+public class InjectedSessionBean extends SuperInjectedSessionBean implements InjectedSessionBeanLocal {
     @EJB
     private FarmLocal farm;
     private boolean initializerCalledAfterResourceInjection = false;
@@ -32,7 +32,7 @@ public class InjectedSessionBean implements InjectedSessionBeanLocal {
 
     @Inject
     public void initialize() {
-        initializerCalledAfterResourceInjection = farm != null;
+        initializerCalledAfterResourceInjection = (farm != null && deluxeHenHouse != null);
     }
 
     public boolean isInitializerCalledAfterResourceInjection() {

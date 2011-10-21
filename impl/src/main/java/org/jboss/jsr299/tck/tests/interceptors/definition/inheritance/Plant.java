@@ -21,6 +21,14 @@ import java.util.List;
 
 public abstract class Plant implements Ping {
 
-    public List<String> inspections = new ArrayList<String>();
+    private List<String> inspections = new ArrayList<String>();
+
+    public void inspect(String id) {
+        inspections.add(id);
+    }
+
+    public boolean inspectedBy(String id) {
+        return inspections.contains(id);
+    }
 
 }
