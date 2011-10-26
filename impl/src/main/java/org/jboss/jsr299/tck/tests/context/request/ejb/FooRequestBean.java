@@ -14,27 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.el;
+package org.jboss.jsr299.tck.tests.context.request.ejb;
 
-import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
-public class Tuna {
+public class FooRequestBean {
 
-    long timestamp;
+    private double id = Math.random();
+    private static boolean beanDestroyed = false;
 
-    @PostConstruct
-    public void create() {
-        timestamp = System.currentTimeMillis();
+    public double getId() {
+        return id;
     }
 
-    public String getName() {
-        return "Ophir";
+    @PreDestroy
+    public void destroy() {
+        beanDestroyed = true;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public static boolean isBeanDestroyed() {
+        return beanDestroyed;
     }
 
+    public static void reset() {
+        beanDestroyed = false;
+    }
 }

@@ -29,26 +29,38 @@ public class SpiderProducer {
 
     private static boolean dependentContextActive = false;
     private static boolean destroyed = false;
-    private static SpiderProducer instanceUsedForDisposal = null;
+    private static Integer instanceUsedForDisposalHashcode = null;
+    private static Integer instanceUsedForProducerHashcode = null;
+    private static Integer foxUsedForDisposalHashcode = null;
 
     @Produces
     @Pet
     public Tarantula produceTarantula(Tarantula spider, DomesticationKit domesticationKit) {
         dependentContextActive = beanManager.getContext(Dependent.class).isActive();
+        instanceUsedForProducerHashcode = this.hashCode();
         return spider;
     }
 
     public void disposeTarantula(@Disposes @Pet Tarantula tarantula, Fox fox) {
         dependentContextActive = beanManager.getContext(Dependent.class).isActive();
-        instanceUsedForDisposal = this;
+        instanceUsedForDisposalHashcode = this.hashCode();
+        foxUsedForDisposalHashcode = fox.hashCode();
     }
 
     public static boolean isDependentContextActive() {
         return dependentContextActive;
     }
 
-    public static SpiderProducer getInstanceUsedForDisposal() {
-        return instanceUsedForDisposal;
+    public static Integer getInstanceUsedForDisposalHashcode() {
+        return instanceUsedForDisposalHashcode;
+    }
+
+    public static Integer getInstanceUsedForProducerHashcode() {
+        return instanceUsedForProducerHashcode;
+    }
+
+    public static Integer getFoxUsedForDisposalHashcode() {
+        return foxUsedForDisposalHashcode;
     }
 
     public static boolean isDestroyed() {
@@ -58,7 +70,9 @@ public class SpiderProducer {
     public static void reset() {
         destroyed = false;
         dependentContextActive = false;
-        instanceUsedForDisposal = null;
+        instanceUsedForDisposalHashcode = null;
+        instanceUsedForProducerHashcode = null;
+        foxUsedForDisposalHashcode = null;
     }
 
     @PreDestroy

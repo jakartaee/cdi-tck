@@ -26,13 +26,24 @@ public class Tarantula extends Spider implements DeadlySpider {
 
     private static boolean dependentContextActive = false;
 
+    private Integer producerInstanceHashcode = null;
+
     public Tarantula() {
         dependentContextActive = ConfigurationFactory.get().getContexts().getDependentContext().isActive();
+    }
+
+    public Tarantula(Integer producerInstanceHashcode) {
+        dependentContextActive = ConfigurationFactory.get().getContexts().getDependentContext().isActive();
+        this.producerInstanceHashcode = producerInstanceHashcode;
     }
 
     @PreDestroy
     public void preDestroy() {
         destroyed = true;
+    }
+
+    public Integer getProducerInstanceHashcode() {
+        return producerInstanceHashcode;
     }
 
     public static boolean isDependentContextActive() {

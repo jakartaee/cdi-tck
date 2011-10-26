@@ -2129,8 +2129,9 @@ detects the problem and treats it as a definition error.</text>
       </assertion>
     </group>
     
-    <assertion id="d">
+    <assertion id="d" testable="false">
       <text>An alternative is never available for injection, lookup or EL resolution in a Java EE module or library that is not a bean deployment archive (a module or library with no |beans.xml| file.</text>
+      <note>If a module/library is not BDA then no injection is possible at all</note>
     </assertion>
     
     <assertion id="e">

@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.context.dependent;
 
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
+
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
@@ -59,6 +63,8 @@ public class DependentContextTest extends AbstractJSR299Test {
         CreationalContext<FoxRun> creationalContext = getCurrentManager().createCreationalContext(foxRunBean);
         FoxRun foxRun = foxRunBean.create(creationalContext);
         assert !foxRun.fox.equals(foxRun.anotherFox);
+        assert !foxRun.fox.equals(foxRun.petFox);
+        assert !foxRun.anotherFox.equals(foxRun.petFox);
     }
 
     @Test(groups = { "contexts", "injection" })
@@ -89,49 +95,85 @@ public class DependentContextTest extends AbstractJSR299Test {
     @Test(groups = { "contexts", "producerMethod" })
     @SpecAssertion(section = "6.4", id = "da")
     public void testInstanceUsedForProducerMethodNotShared() throws Exception {
-        Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class, PET_LITERAL).iterator().next();
 
-        CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
-        Tarantula tarantula = tarantulaBean.create(creationalContext);
-        Tarantula tarantula2 = tarantulaBean.create(creationalContext);
-        assert tarantula != null;
-        assert tarantula2 != null;
-        assert tarantula != tarantula2;
+        SpiderProducer.reset();
+        getInstanceByType(Tarantula.class, PET_LITERAL);
+        Integer firstInstanceHash = SpiderProducer.getInstanceUsedForProducerHashcode();
+        SpiderProducer.reset();
+        getInstanceByType(Tarantula.class, PET_LITERAL);
+        Integer secondInstanceHash = SpiderProducer.getInstanceUsedForProducerHashcode();
+
+        assertFalse(firstInstanceHash.equals(secondInstanceHash));
     }
 
     @Test(groups = { "contexts", "producerMethod" })
     @SpecAssertion(section = "6.4", id = "db")
     public void testInstanceUsedForProducerFieldNotShared() throws Exception {
-        Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class, TAME_LITERAL).iterator().next();
-        CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
-        Tarantula tarantula = tarantulaBean.create(creationalContext);
-        Tarantula tarantula2 = tarantulaBean.create(creationalContext);
-        assert tarantula != null;
-        assert tarantula2 != null;
-        assert tarantula != tarantula2;
+
+        Tarantula firstIntance = getInstanceByType(Tarantula.class, TAME_LITERAL);
+        Tarantula secondIntance = getInstanceByType(Tarantula.class, TAME_LITERAL);
+
+        assertNotNull(firstIntance.getProducerInstanceHashcode());
+        assertNotNull(secondIntance.getProducerInstanceHashcode());
+        assertNotEquals(firstIntance.getProducerInstanceHashcode(), secondIntance.getProducerInstanceHashcode());
     }
 
     @Test(groups = { "contexts", "disposalMethod" })
-    @SpecAssertion(section = "6.4", id = "dc")
+    @SpecAssertions({ @SpecAssertion(section = "6.4", id = "dc"), @SpecAssertion(section = "6.4", id = "dg") })
     public void testInstanceUsedForDisposalMethodNotShared() {
+
+        Integer firstFoxHash = getInstanceByType(Fox.class).hashCode();
+
+        SpiderProducer.reset();
         SpiderProducer spiderProducer = getInstanceByType(SpiderProducer.class);
         Bean<Tarantula> tarantulaBean = getUniqueBean(Tarantula.class, PET_LITERAL);
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
         Tarantula tarantula = tarantulaBean.create(creationalContext);
         assert tarantula != null;
+
         tarantulaBean.destroy(tarantula, creationalContext);
-        assert SpiderProducer.getInstanceUsedForDisposal() != null;
-        assert SpiderProducer.getInstanceUsedForDisposal() != spiderProducer;
+        Integer secondFoxHash = SpiderProducer.getFoxUsedForDisposalHashcode();
+
+        assert SpiderProducer.getInstanceUsedForDisposalHashcode() != null;
+        assert !SpiderProducer.getInstanceUsedForDisposalHashcode().equals(spiderProducer.hashCode());
+
+        CreationalContext<Tarantula> nextCreationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
+        Tarantula nextTarantula = tarantulaBean.create(nextCreationalContext);
+        assert nextTarantula != null;
+
+        tarantulaBean.destroy(nextTarantula, creationalContext);
+        Integer thirdFoxHash = SpiderProducer.getFoxUsedForDisposalHashcode();
+
+        assertNotEquals(firstFoxHash, secondFoxHash);
+        assertNotEquals(firstFoxHash, thirdFoxHash);
+        assertNotEquals(thirdFoxHash, secondFoxHash);
+
         SpiderProducer.reset();
     }
 
     @Test(groups = { "contexts", "observerMethod" })
-    @SpecAssertion(section = "6.4", id = "dd")
+    @SpecAssertions({ @SpecAssertion(section = "6.4", id = "dd"), @SpecAssertion(section = "6.4", id = "dg") })
     public void testInstanceUsedForObserverMethodNotShared() {
+
+        HorseStable.reset();
         HorseStable firstStableInstance = getInstanceByType(HorseStable.class);
+
         getCurrentManager().fireEvent(new HorseInStableEvent());
-        assert HorseStable.getInstanceThatObservedEvent() != null;
-        assert HorseStable.getInstanceThatObservedEvent() != firstStableInstance;
+        Integer firstFoxHash = HorseStable.getFoxUsedForObservedEventHashcode();
+        Integer firstObserverHash = HorseStable.getInstanceThatObservedEventHashcode();
+
+        getCurrentManager().fireEvent(new HorseInStableEvent());
+        Integer secondFoxHash = HorseStable.getFoxUsedForObservedEventHashcode();
+        Integer secondObserverHash = HorseStable.getInstanceThatObservedEventHashcode();
+
+        assertNotNull(firstObserverHash);
+        assertNotNull(secondObserverHash);
+        assertNotNull(firstFoxHash);
+        assertNotNull(secondFoxHash);
+        assertNotEquals(firstStableInstance.hashCode(), firstObserverHash);
+        assertNotEquals(firstStableInstance.hashCode(), secondObserverHash);
+        assertNotEquals(firstObserverHash, secondObserverHash);
+        assertNotEquals(firstFoxHash, secondFoxHash);
     }
 
     @Test(groups = "contexts")
@@ -355,7 +397,7 @@ public class DependentContextTest extends AbstractJSR299Test {
         HorseStable.reset();
         Fox.reset();
         getCurrentManager().fireEvent(new HorseInStableEvent());
-        assert HorseStable.getInstanceThatObservedEvent() != null;
+        assert HorseStable.getInstanceThatObservedEventHashcode() != null;
         assert HorseStable.isDestroyed();
         assert Fox.isDestroyed();
     }

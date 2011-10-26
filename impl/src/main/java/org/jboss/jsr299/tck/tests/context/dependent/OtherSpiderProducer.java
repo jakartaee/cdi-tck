@@ -24,7 +24,7 @@ public class OtherSpiderProducer {
 
     @Produces
     @Tame
-    public Tarantula produceTarantula = new Tarantula();
+    public Tarantula produceTarantula = new Tarantula(this.hashCode());
 
     @PreDestroy
     public void destroy() {

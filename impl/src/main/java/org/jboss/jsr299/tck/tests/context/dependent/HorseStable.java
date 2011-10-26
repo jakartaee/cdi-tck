@@ -25,7 +25,8 @@ import javax.inject.Inject;
 @Dependent
 public class HorseStable {
     private static boolean dependentContextActive = false;
-    private static HorseStable instanceThatObservedEvent = null;
+    private static Integer instanceThatObservedEventHashcode = null;
+    private static Integer foxUsedForObservedEventHashcode = null;
     private static boolean destroyed = false;
 
     @Inject
@@ -34,7 +35,8 @@ public class HorseStable {
     }
 
     public void horseEntered(@Observes HorseInStableEvent horseEvent, Fox fox) {
-        instanceThatObservedEvent = this;
+        instanceThatObservedEventHashcode = this.hashCode();
+        foxUsedForObservedEventHashcode = fox.hashCode();
     }
 
     @PreDestroy
@@ -48,12 +50,17 @@ public class HorseStable {
 
     public static void reset() {
         HorseStable.dependentContextActive = false;
-        instanceThatObservedEvent = null;
+        instanceThatObservedEventHashcode = null;
+        foxUsedForObservedEventHashcode = null;
         destroyed = false;
     }
 
-    public static HorseStable getInstanceThatObservedEvent() {
-        return instanceThatObservedEvent;
+    public static Integer getInstanceThatObservedEventHashcode() {
+        return instanceThatObservedEventHashcode;
+    }
+
+    public static Integer getFoxUsedForObservedEventHashcode() {
+        return foxUsedForObservedEventHashcode;
     }
 
     public static boolean isDestroyed() {

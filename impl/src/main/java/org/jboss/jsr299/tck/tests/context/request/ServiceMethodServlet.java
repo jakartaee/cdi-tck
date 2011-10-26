@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.tests.context.request;
 
 import java.io.IOException;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -42,8 +42,8 @@ public class ServiceMethodServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!jsr299Manager.getContext(ApplicationScoped.class).isActive()) {
-            throw new ServletException("Application context is not active");
+        if (!jsr299Manager.getContext(RequestScoped.class).isActive()) {
+            throw new ServletException("Request context is not active");
         } else {
             super.service(req, resp);
         }

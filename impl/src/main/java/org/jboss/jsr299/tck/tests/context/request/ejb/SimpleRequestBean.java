@@ -37,7 +37,7 @@ public class SimpleRequestBean {
         return beanDestroyed;
     }
 
-    public static void setBeanDestroyed(boolean beanDestroyed) {
-        SimpleRequestBean.beanDestroyed = beanDestroyed;
+    public static void reset() {
+        beanDestroyed = false;
     }
 }

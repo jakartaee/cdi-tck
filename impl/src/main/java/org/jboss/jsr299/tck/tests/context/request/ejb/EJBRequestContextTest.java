@@ -16,11 +16,17 @@
  */
 package org.jboss.jsr299.tck.tests.context.request.ejb;
 
+import java.util.concurrent.Future;
+
+import javax.ejb.EJB;
+
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -33,15 +39,23 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EJBRequestContextTest extends AbstractJSR299Test {
 
-    @Deployment
+    @Deployment(name = "TEST", order = 1)
     public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EJBRequestContextTest.class).build();
+        return new EnterpriseArchiveBuilder().withTestClass(EJBRequestContextTest.class)
+                .withClasses(FMS.class, FMSModelIII.class, BarBean.class, SimpleRequestBean.class, FooRemote.class).build();
+    }
+
+    @Deployment(name = "REMOTE_EJB", order = 2)
+    public static EnterpriseArchive createEjbArchive() {
+        return new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().withName("test-ejb.ear")
+                .withEjbModuleName("test-ejb.jar").withClasses(FooBean.class, FooRemote.class, FooRequestBean.class).build();
     }
 
     /**
      * The request scope is active during any remote method invocation of any EJB bean, during any call to an EJB timeout method
      * and during message delivery to any EJB message driven bean.
      */
+    @OperateOnDeployment("TEST")
     @Test(groups = { "javaee-full-only", "contexts", "ejb3.1", "integration" })
     @SpecAssertion(section = "6.7.1", id = "gc")
     public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
@@ -61,10 +75,12 @@ public class EJBRequestContextTest extends AbstractJSR299Test {
     /**
      * The request context is destroyed after the remote method invocation, timeout or message delivery completes.
      */
+    @OperateOnDeployment("TEST")
     @Test(groups = { "javaee-full-only", "contexts", "ejb3.1", "integration" })
     @SpecAssertion(section = "6.7.1", id = "hc")
     public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
+        SimpleRequestBean.reset();
         FMS flightManagementSystem = getInstanceByType(FMS.class);
         flightManagementSystem.climb();
         waitForClimbed();
@@ -78,6 +94,33 @@ public class EJBRequestContextTest extends AbstractJSR299Test {
         for (int i = 0; !FMSModelIII.isDescended() && i < 2000; i++) {
             Thread.sleep(10);
         }
+    }
+
+    @EJB(lookup = "java:global/test-ejb/test-ejb/FooBean!org.jboss.jsr299.tck.tests.context.request.ejb.FooRemote")
+    FooRemote foo;
+
+    @EJB
+    BarBean bar;
+
+    @OperateOnDeployment("TEST")
+    @Test(groups = { "javaee-full-only", "contexts", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ga"), @SpecAssertion(section = "6.7.1", id = "ha") })
+    public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
+        assert foo.ping() != null;
+        assert foo.wasRequestBeanInPreviousCallDestroyed();
+    }
+
+    @OperateOnDeployment("TEST")
+    @Test(groups = { "javaee-full-only", "contexts", "integration" })
+    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "gb"), @SpecAssertion(section = "6.7.1", id = "hb") })
+    public void testRequestScopeActiveDuringAsyncCallToEjb() throws Exception {
+        SimpleRequestBean simpleRequestBean = getInstanceByType(SimpleRequestBean.class);
+        SimpleRequestBean.reset();
+        Future<Double> result = bar.compute();
+        Double id = result.get();
+        assert id != -1.00;
+        assert id != simpleRequestBean.getId();
+        assert SimpleRequestBean.isBeanDestroyed();
     }
 
 }

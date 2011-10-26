@@ -46,21 +46,18 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
     }
 
     @Test(groups = "beanLifecycle")
-    @SpecAssertion(section = "6.5.2", id = "a")
+    @SpecAssertions({ @SpecAssertion(section = "6.5.2", id = "a"), @SpecAssertion(section = "6.5.2", id = "b") })
     public void testContextCreatesNewInstanceForInjection() {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
         Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
         assert requestContext.get(tunaBean) == null;
         TunaFarm tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression("#{tunaFarm}", TunaFarm.class);
-        assert requestContext.get(tunaBean) != null;
         assert tunaFarm.tuna != null;
-        long timestamp = tunaFarm.tuna.timestamp;
-        tunaFarm = null;
-        // Lookup once again - do not create new instance
-        tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression("#{tunaFarm}", TunaFarm.class);
-        // assert requestContext.get(tunaBean) != null;
-        assert tunaFarm.tuna != null;
-        assert timestamp == tunaFarm.tuna.timestamp;
+        long timestamp = tunaFarm.tuna.getTimestamp();
+        // Lookup once again - do not create new instance - contextual instance already exists
+        Tuna tuna = requestContext.get(tunaBean);
+        assert tuna != null;
+        assert timestamp == tuna.getTimestamp();
     }
 
     @Test(groups = { "el" })

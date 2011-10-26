@@ -32,6 +32,10 @@ public class FoxRun {
     @Inject
     public Fox anotherFox;
 
+    @Inject
+    @Pet
+    public Fox petFox;
+
     @PreDestroy
     public void destroy() {
         destroyed = true;
