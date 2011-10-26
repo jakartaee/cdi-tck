@@ -29,8 +29,7 @@ import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
  * Shrinkwrap enterprise archive builder for JSR299 TCK arquillian test. This builder is intended to provide basic functionality
  * covering common TCK needs. Use shrinkwrap API to adapt archive to advanced scenarios.
  * <p>
- * Test classes are added to EJB module. The default archive name defined with {@link #withName(String)} is used for this EJB
- * module not EAR itself.
+ * Test classes are added to EJB module.
  * </p>
  * <h2>Default and custom web module</h2>
  * <p>
@@ -65,6 +64,8 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
 
     private boolean hasDefaultWebModule = true;
 
+    private String ejbModuleName = null;
+
     /**
      * Do not add default web module.
      * 
@@ -72,7 +73,12 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
      */
     public EnterpriseArchiveBuilder noDefaultWebModule() {
         this.hasDefaultWebModule = false;
-        return this;
+        return self();
+    }
+
+    public EnterpriseArchiveBuilder withEjbModuleName(String ejbModuleName) {
+        this.ejbModuleName = ejbModuleName;
+        return self();
     }
 
     @Override
@@ -83,15 +89,21 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
     @Override
     public EnterpriseArchive buildInternal() {
 
-        EnterpriseArchive enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, DEFAULT_EAR_NAME);
+        EnterpriseArchive enterpriseArchive = null;
+
+        if (getName() == null) {
+            enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, DEFAULT_EAR_NAME);
+        } else {
+            enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, getName());
+        }
 
         // EJB module - contains test package
         JavaArchive ejbArchive = null;
 
-        if (getName() == null) {
+        if (ejbModuleName == null) {
             ejbArchive = ShrinkWrap.create(JavaArchive.class, DEFAULT_EJB_MODULE_NAME);
         } else {
-            ejbArchive = ShrinkWrap.create(JavaArchive.class, getName());
+            ejbArchive = ShrinkWrap.create(JavaArchive.class, ejbModuleName);
         }
 
         // CDITCK-56
