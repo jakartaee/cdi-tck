@@ -636,11 +636,11 @@ detects the problem and treats it as a definition error.</text>
       <text>Deployment problems are detected by the container at initialization time.  If a deployment problem exists in a deployment, initialization will be aborted by the container.</text>
     </assertion>
     
-    <assertion id="d">
+    <assertion id="d" testable="false">
       <text>The container is permitted to define a non-portable mode, for use at development time, in which some definition errors and deployment problems do not cause application initialization to abort.</text>
     </assertion>
     
-    <assertion id="e">
+    <assertion id="e" testable="false">
       <text>Exceptions represent problems that may not be detected until they actually occur at runtime.  All exceptions defined by this specification are unchecked exceptions.  All exceptions defined by this specification may be safely caught and handled by the application.</text>
     </assertion>
     
@@ -3378,7 +3378,7 @@ detects the problem and treats it as a definition error.</text>
       <text>From time to time, the container must obtain an injectable reference for an injection point.  The container must identify a bean according to the rules defined in Section 5.2, "Typesafe resolution" and resolving ambiguities according to Section 5.2.1, "Unsatisfied and ambiguous dependencies", then obtain a contextual reference for this bean and the type of the injection point according to Section 6.5.3, "Contextual reference for a bean".</text>
     </assertion>
     
-    <assertion id="b">
+    <assertion id="b" testable="false">
       <text>For certain combinations of scopes, the container is permitted to optimize the procedure for obtaining an injectable reference for an injection point - the container is permitted to directly inject a contextual instance of the bean, as defined in Section 6.5.2, "Contextual instance of a bean", and if an incompletely initialized instance of the bean is registered with the current |CreationalContext|, as defined in Section 6.1, "The Contextual interface", the container is permitted to directly inject this instance.</text>
     </assertion>
   </section>
@@ -3507,8 +3507,9 @@ detects the problem and treats it as a definition error.</text>
         <text>Test that a bean with the scope is passivation capable.</text>
       </assertion>
       
-      <assertion id="b">
+      <assertion id="b" testable="false">
         <text>Test that an implementation of |Contextual| passed to the context object for the scope is passivation capable.</text>
+        <note>This is in essence enforced by the stuff in 6.6.4</note>
       </assertion>
     </group>
     
@@ -3703,10 +3704,6 @@ detects the problem and treats it as a definition error.</text>
 
     <assertion id="c">
       <text>The request scope is active during any Java EE web service invocation.</text>
-    </assertion>
-    
-    <assertion id="e">
-      <text>The request scope is active during any asynchronous observer method notification.</text>
     </assertion>
     
     <group>

@@ -48,8 +48,12 @@ public class InjectableReferenceTest extends AbstractJSR299Test {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "a"), @SpecAssertion(section = "11.3.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "a"), @SpecAssertion(section = "11.3.2", id = "ab"),
+            @SpecAssertion(section = "11.3.3", id = "a"), @SpecAssertion(section = "6.5.5", id = "a") })
     public void testGetInjectableReferenceOnBeanManager() {
+
+        BeanWithInjectionPointMetadata.reset();
+
         // Get an instance of the bean which has another bean injected into it
         FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
         BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
@@ -59,6 +63,11 @@ public class InjectableReferenceTest extends AbstractJSR299Test {
                 (Bean<BeanWithInjectionPointMetadata>) ip.getBean());
         Object beanInstance = getCurrentManager().getInjectableReference(ip, creationalContext);
         assert beanInstance instanceof BeanWithInjectionPointMetadata;
+
+        // The second parameter is an instance of may be used to destroy any object with scope @Dependent that is created
+        Bean<BeanWithInjectionPointMetadata> bean = getUniqueBean(BeanWithInjectionPointMetadata.class);
+        bean.destroy((BeanWithInjectionPointMetadata) beanInstance, creationalContext);
+        assert BeanWithInjectionPointMetadata.isDestroyed();
     }
 
     @SuppressWarnings("unchecked")

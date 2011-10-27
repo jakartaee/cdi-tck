@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
+import javax.annotation.PreDestroy;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
@@ -26,10 +27,26 @@ import javax.inject.Inject;
  * 
  */
 public class BeanWithInjectionPointMetadata {
+
+    private static boolean isDestroyed;
+
     @Inject
     private InjectionPoint injectedMetadata;
 
     public InjectionPoint getInjectedMetadata() {
         return injectedMetadata;
+    }
+
+    @PreDestroy
+    public void onDestroy() {
+        isDestroyed = true;
+    }
+
+    public static boolean isDestroyed() {
+        return isDestroyed;
+    }
+
+    public static void reset() {
+        isDestroyed = false;
     }
 }

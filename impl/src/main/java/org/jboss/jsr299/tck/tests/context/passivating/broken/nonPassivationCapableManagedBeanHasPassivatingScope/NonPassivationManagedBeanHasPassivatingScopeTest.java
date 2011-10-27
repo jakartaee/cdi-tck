@@ -22,6 +22,7 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -41,7 +42,7 @@ public class NonPassivationManagedBeanHasPassivatingScopeTest extends AbstractJS
     }
 
     @Test(groups = { "contexts", "passivation" })
-    @SpecAssertion(section = "6.6.4", id = "aaa")
+    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "aaa"), @SpecAssertion(section = "6.6.3", id = "a") })
     public void testSimpleWebBeanWithNonSerializableImplementationClassFails() {
     }
 }

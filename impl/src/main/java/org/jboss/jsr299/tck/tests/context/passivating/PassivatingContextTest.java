@@ -50,7 +50,7 @@ public class PassivatingContextTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "contexts", "passivation", "rewrite" })
-    @SpecAssertion(section = "6.6.1", id = "ba")
+    @SpecAssertions({ @SpecAssertion(section = "6.6.1", id = "ba"), @SpecAssertion(section = "6.6.3", id = "a") })
     public void testManagedBeanWithSerializableImplementationClassOK() {
         Set<Bean<Jyvaskyla>> beans = getBeans(Jyvaskyla.class);
         assert !beans.isEmpty();
