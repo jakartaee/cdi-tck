@@ -185,11 +185,14 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "beanLifecycle", "lifecycleCallbacks" })
-    @SpecAssertions({ @SpecAssertion(section = "6.5.3", id = "a0"), @SpecAssertion(section = "7.3.1", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = "6.5.3", id = "a0"), @SpecAssertion(section = "7.3.1", id = "ba"),
+            @SpecAssertion(section = "6.5.3", id = "c") })
     public void testContextualDestroyDisposesWhenNecessary() {
         final Bean<Goose> gooseBean = getBeans(Goose.class).iterator().next();
         final CreationalContext<Goose> gooseCc = getCurrentManager().createCreationalContext(gooseBean);
         final Goose goose = gooseBean.create(gooseCc);
+        // If the bean has a pseudo-scope, the container must obtain a contextual instance
+        assert !getCurrentConfiguration().getBeans().isProxy(goose);
         assert !EggProducer.isEggDisposed();
         assert !Egg.isEggDestroyed();
         gooseBean.destroy(goose, gooseCc);

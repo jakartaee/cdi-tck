@@ -24,17 +24,12 @@ import java.util.Set;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 
-public class IntegerBean implements Bean<Integer>, Extension {
-
-    public static final IntegerBean bean = new IntegerBean();
+public class IntegerBean implements Bean<Integer> {
 
     private boolean getQualifiersCalled = false;
     private boolean getInjectionPointsCalled = false;
@@ -152,7 +147,4 @@ public class IntegerBean implements Bean<Integer>, Extension {
         return getStereotypesCalled;
     }
 
-    public void afterDiscovery(@Observes AfterBeanDiscovery event) {
-        event.addBean(bean);
-    }
 }

@@ -55,6 +55,7 @@ public class ExtensionsTest extends AbstractJSR299Test {
         assert getBeans(Alligator.class).size() == 0;
         assert getBeans(Alligator.class, new AnnotationLiteral<Tame>() {
         }).size() == 1;
+        assert getCurrentManager().isQualifier(Tame.class);
     }
 
     @Test
