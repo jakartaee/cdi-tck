@@ -60,24 +60,23 @@ public class JSR299PropertiesBasedConfigurationBuilder {
     }
 
     /**
-     * @param minimal Minimal initialization includes simple properties only (no SPI instances) - building test archive phase
+     * @param deploymentPhase Deployment phase (building test archive) initialization includes deployment specific properties
      * @return initialized self
      */
-    public JSR299PropertiesBasedConfigurationBuilder init(boolean minimal) {
+    public JSR299PropertiesBasedConfigurationBuilder init(boolean deploymentPhase) {
 
-        if (!minimal) {
-            jsr299Configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, true));
-            jsr299Configuration.setManagers(getInstanceValue(Managers.PROPERTY_NAME, Managers.class, true));
-            jsr299Configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, true));
+        jsr299Configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, true));
+        jsr299Configuration.setManagers(getInstanceValue(Managers.PROPERTY_NAME, Managers.class, true));
+        jsr299Configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, true));
 
-            @SuppressWarnings("unchecked")
-            Contexts<? extends Context> contextsInstance = getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, true);
-            jsr299Configuration.setContexts(contextsInstance);
-        }
+        @SuppressWarnings("unchecked")
+        Contexts<? extends Context> contextsInstance = getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, true);
+        jsr299Configuration.setContexts(contextsInstance);
 
         jsr299Configuration.setLibraryDirectory(getStringValue(JSR299Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null,
-                minimal));
-        jsr299Configuration.setTestDataSource(getStringValue(JSR299Configuration.TEST_DATASOURCE_PROPERTY_NAME, null, minimal));
+                deploymentPhase));
+        jsr299Configuration.setTestDataSource(getStringValue(JSR299Configuration.TEST_DATASOURCE_PROPERTY_NAME, null,
+                deploymentPhase));
         return this;
     }
 

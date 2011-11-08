@@ -40,7 +40,7 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
     @Test
     @SpecAssertion(section = "6.4.3", id = "a")
     public void testQualifiedNameLookup() {
-        assert getCurrentConfiguration().getEl().evaluateValueExpression(
+        assert getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(),
                 "#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class);
         assert getInstanceByType(Counter.class).getCount() == 1;
     }
@@ -51,7 +51,8 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
         Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
         assert requestContext.get(tunaBean) == null;
-        TunaFarm tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression("#{tunaFarm}", TunaFarm.class);
+        TunaFarm tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{tunaFarm}",
+                TunaFarm.class);
         assert tunaFarm.tuna != null;
         long timestamp = tunaFarm.tuna.getTimestamp();
         // Lookup once again - do not create new instance - contextual instance already exists
@@ -63,8 +64,8 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
     @Test(groups = { "el" })
     @SpecAssertion(section = "12.4", id = "c")
     public void testUnresolvedNameReturnsNull() {
-        assert getCurrentManager().getELResolver().getValue(getCurrentConfiguration().getEl().createELContext(), null,
-                "nonExistingTuna") == null;
+        assert getCurrentManager().getELResolver().getValue(
+                getCurrentConfiguration().getEl().createELContext(getCurrentManager()), null, "nonExistingTuna") == null;
     }
 
     @Test(groups = "el")
@@ -72,6 +73,6 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
     public void testELResolverReturnsContextualInstance() {
         Salmon salmon = getInstanceByType(Salmon.class);
         salmon.setAge(3);
-        assert getCurrentConfiguration().getEl().evaluateValueExpression("#{salmon.age}", Integer.class) == 3;
+        assert getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{salmon.age}", Integer.class) == 3;
     }
 }

@@ -17,6 +17,7 @@
 package org.jboss.jsr299.tck.spi;
 
 import javax.el.ELContext;
+import javax.enterprise.inject.spi.BeanManager;
 
 /**
  * This interface provides operations relating to EL.
@@ -38,7 +39,7 @@ public interface EL {
      * @param expectedType
      * @return
      */
-    public <T> T evaluateValueExpression(String expression, Class<T> expectedType);
+    public <T> T evaluateValueExpression(BeanManager beanManager, String expression, Class<T> expectedType);
 
     /**
      *
@@ -48,9 +49,14 @@ public interface EL {
      * @param expectedParamTypes
      * @return
      */
-    public <T> T evaluateMethodExpression(String expression, Class<T> expectedType, Class<?>[] expectedParamTypes,
+    public <T> T evaluateMethodExpression(BeanManager beanManager, String expression, Class<T> expectedType, Class<?>[] expectedParamTypes,
             Object[] expectedParams);
 
-    public ELContext createELContext();
+    /**
+     * 
+     * @param beanManager
+     * @return
+     */
+    public ELContext createELContext(BeanManager beanManager);
 
 }

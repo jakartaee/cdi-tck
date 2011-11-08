@@ -32,6 +32,7 @@ import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.util.TypeLiteral;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.jsr299.tck.api.JSR299Configuration;
@@ -43,8 +44,11 @@ import org.jboss.jsr299.tck.impl.OldSPIBridge;
  */
 public abstract class AbstractJSR299Test extends Arquillian {
 
+    @Inject
+    protected BeanManager beanManager;
+
     protected BeanManager getCurrentManager() {
-        return getCurrentConfiguration().getManagers().getManager();
+        return beanManager;
     }
 
     protected byte[] serialize(Object instance) throws IOException {

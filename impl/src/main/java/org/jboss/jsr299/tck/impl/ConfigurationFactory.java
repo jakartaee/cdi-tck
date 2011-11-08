@@ -18,11 +18,11 @@ public final class ConfigurationFactory {
      * @param minimal Minimal configuration includes simple properties only (no SPI instances)
      * @return current JSR299 configuration
      */
-    public static JSR299Configuration get(boolean minimal) {
+    public static JSR299Configuration get(boolean deploymentPhase) {
 
         if (current == null) {
             try {
-                current = new JSR299PropertiesBasedConfigurationBuilder().init(minimal).getJsr299Configuration();
+                current = new JSR299PropertiesBasedConfigurationBuilder().init(deploymentPhase).getJsr299Configuration();
             } catch (Exception e) {
                 throw new IllegalStateException("Unable to get configuration", e);
             }

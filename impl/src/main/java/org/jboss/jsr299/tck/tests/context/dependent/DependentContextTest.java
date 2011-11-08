@@ -87,8 +87,8 @@ public class DependentContextTest extends AbstractJSR299Test {
         Set<Bean<Fox>> foxBeans = getBeans(Fox.class);
         assert foxBeans.size() == 1;
 
-        Fox fox1 = getCurrentConfiguration().getEl().evaluateValueExpression("#{fox}", Fox.class);
-        Fox fox2 = getCurrentConfiguration().getEl().evaluateValueExpression("#{fox}", Fox.class);
+        Fox fox1 = getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{fox}", Fox.class);
+        Fox fox2 = getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{fox}", Fox.class);
         assert !fox1.equals(fox2);
     }
 
@@ -258,8 +258,8 @@ public class DependentContextTest extends AbstractJSR299Test {
     @SpecAssertion(section = "6.4", id = "g")
     // Dependent context is now always active
     public void testContextIsActiveWhenEvaluatingElExpression() {
-        String foxName = getCurrentConfiguration().getEl().evaluateMethodExpression("#{sensitiveFox.getName}", String.class,
-                new Class[0], new Object[0]);
+        String foxName = getCurrentConfiguration().getEl().evaluateMethodExpression(getCurrentManager(),
+                "#{sensitiveFox.getName}", String.class, new Class[0], new Object[0]);
         assert foxName != null;
         assert SensitiveFox.isDependentContextActiveDuringEval();
     }
@@ -335,7 +335,7 @@ public class DependentContextTest extends AbstractJSR299Test {
         Fox.reset();
         FoxRun.setDestroyed(false);
 
-        getCurrentConfiguration().getEl().evaluateValueExpression("#{foxRun}", FoxRun.class);
+        getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{foxRun}", FoxRun.class);
         assert FoxRun.isDestroyed();
         assert Fox.isDestroyed();
     }

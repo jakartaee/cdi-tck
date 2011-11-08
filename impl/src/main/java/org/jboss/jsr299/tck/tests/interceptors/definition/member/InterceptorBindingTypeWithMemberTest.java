@@ -55,4 +55,17 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractJSR299Test {
         assert farm.getVehicleCount() == 20;
         assert VehicleCountInterceptor.isIntercepted();
     }
+
+    /**
+     * Note that we cannot directly test that member values are compared using equals() as only primitive types, String, Class,
+     * enum and annotation are permitted to be annotation attributes. We test that two different String objects used as member
+     * values are considered equal when resolving interceptor (interceptor is applied).
+     */
+    @Test
+    @SpecAssertion(section = "9.5.2", id = "ab")
+    public void testInterceptorBindingTypeMemberValuesComparedWithEquals() {
+        Plant plant = getInstanceByType(Plant.class);
+        plant.grow();
+        assert PlantInterceptor.isIntercepted();
+    }
 }

@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.spi;
 
-import javax.enterprise.inject.spi.BeanManager;
 
 /**
  * This interface provides operations relating to a Manager.
@@ -31,12 +30,5 @@ import javax.enterprise.inject.spi.BeanManager;
 public interface Managers {
 
     public static final String PROPERTY_NAME = Managers.class.getName();
-
-    /**
-     * Get a new Manager instance
-     *
-     * @return the Manager
-     */
-    public BeanManager getManager();
 
 }

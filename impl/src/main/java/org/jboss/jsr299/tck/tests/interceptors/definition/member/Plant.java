@@ -14,26 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.modules;
+package org.jboss.jsr299.tck.tests.interceptors.definition.member;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+@PlantInterceptorBinding(age = 1, name = Plant.TEST)
+public class Plant {
 
-import org.jboss.jsr299.tck.impl.ConfigurationFactory;
-import org.jboss.jsr299.tck.spi.EL;
+    public static final String TEST = "TEST";
 
-/**
- * This bean uses {@link EL} implementation located in EAR library.
- * 
- * @author Martin Kouba
- */
-public class WebFooELResolver {
-
-    @Inject
-    BeanManager beanManager;
-
-    public int ping() {
-        return ConfigurationFactory.get().getEl().evaluateValueExpression(beanManager, "managedFoo", ManagedFoo.class).pong();
+    public void grow() {
     }
-
 }

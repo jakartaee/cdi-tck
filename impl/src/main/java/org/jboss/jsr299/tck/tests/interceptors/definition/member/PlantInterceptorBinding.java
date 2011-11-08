@@ -14,26 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.modules;
+package org.jboss.jsr299.tck.tests.interceptors.definition.member;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import org.jboss.jsr299.tck.impl.ConfigurationFactory;
-import org.jboss.jsr299.tck.spi.EL;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-/**
- * This bean uses {@link EL} implementation located in EAR library.
- * 
- * @author Martin Kouba
- */
-public class WebFooELResolver {
+import javax.interceptor.InterceptorBinding;
 
-    @Inject
-    BeanManager beanManager;
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface PlantInterceptorBinding {
 
-    public int ping() {
-        return ConfigurationFactory.get().getEl().evaluateValueExpression(beanManager, "managedFoo", ManagedFoo.class).pong();
-    }
+    int age();
+
+    String name();
 
 }
