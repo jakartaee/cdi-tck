@@ -56,7 +56,7 @@ public class VisibilityOfAnnotatedTypesFromExtensionInAlphaBeanArchiveTest exten
 
     @Test
     @SpecAssertion(section = "11.5", id = "b")
-    public void shouldObserveExpectedAnnotatedTypes(AnnotatedTypeObserverExtension observer) {
+    public void shouldObserveExpectedAnnotatedTypes() {
         Assert.assertTrue(observer.observed(Beer.class));
         Assert.assertTrue(observer.observed(Soda.class));
     }

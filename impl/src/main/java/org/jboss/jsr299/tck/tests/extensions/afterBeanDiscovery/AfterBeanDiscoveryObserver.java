@@ -121,6 +121,10 @@ public class AfterBeanDiscoveryObserver implements Extension {
                 observed = true;
             }
 
+            public void notify(Talk event, Set<Annotation> qualifiers) {
+                observed = true;
+            }
+
             public boolean isObserved() {
                 return observed;
             }

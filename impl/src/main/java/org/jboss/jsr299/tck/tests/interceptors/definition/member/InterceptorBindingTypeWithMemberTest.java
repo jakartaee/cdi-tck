@@ -16,10 +16,18 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.member;
 
+import java.util.List;
+
+import javax.enterprise.inject.spi.InterceptionType;
+import javax.enterprise.inject.spi.Interceptor;
+import javax.enterprise.util.AnnotationLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -33,10 +41,22 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InterceptorBindingTypeWithMemberTest extends AbstractJSR299Test {
 
+    @SuppressWarnings("serial")
+    public abstract class PlantInterceptorBindingLiteral extends AnnotationLiteral<PlantInterceptorBinding> implements
+            PlantInterceptorBinding {
+    }
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InterceptorBindingTypeWithMemberTest.class)
-                .withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(InterceptorBindingTypeWithMemberTest.class)
+                .withBeansXml(
+                        Descriptors
+                                .create(BeansDescriptor.class)
+                                .createInterceptors()
+                                .clazz(IncreasingInterceptor.class.getName(), DecreasingInterceptor.class.getName(),
+                                        VehicleCountInterceptor.class.getName(), PlantInterceptor.class.getName()).up())
+                .build();
     }
 
     @Test
@@ -59,11 +79,25 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractJSR299Test {
     /**
      * Note that we cannot directly test that member values are compared using equals() as only primitive types, String, Class,
      * enum and annotation are permitted to be annotation attributes. We test that two different String objects used as member
-     * values are considered equal when resolving interceptor (interceptor is applied).
+     * values are considered equal when resolving interceptor (interceptor is resolved and applied).
      */
     @Test
     @SpecAssertion(section = "9.5.2", id = "ab")
     public void testInterceptorBindingTypeMemberValuesComparedWithEquals() {
+
+        @SuppressWarnings("serial")
+        List<Interceptor<?>> interceptors = getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
+                new PlantInterceptorBindingLiteral() {
+
+                    public String name() {
+                        return "TEST";
+                    }
+
+                    public int age() {
+                        return 1;
+                    }
+                });
+        assert interceptors.size() > 0;
         Plant plant = getInstanceByType(Plant.class);
         plant.grow();
         assert PlantInterceptor.isIntercepted();

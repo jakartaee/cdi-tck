@@ -17,8 +17,13 @@
 package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
 import javax.ejb.EnterpriseBean;
+import javax.ejb.Stateless;
 
-public class MockEnterpriseBean implements EnterpriseBean {
+/**
+ * This mock originaly implemented {@link EnterpriseBean} - does not correspond to relevant assertion.
+ */
+@Stateless
+public class MockEnterpriseBean {
 
     /**
 	 * 

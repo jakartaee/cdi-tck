@@ -39,10 +39,9 @@ public class EnterpriseBeanSpecializationIntegrationTest extends AbstractJSR299T
     @Deployment
     public static EnterpriseArchive createTestArchive() {
         return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanSpecializationIntegrationTest.class)
-                .withBeansXml("beans.xml")
-                // Originally with ejb-jar.xml however this resource does not exist in
-                // /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/inheritance/specialization/enterprise
-                // .withEjbJarXml("ejb-jar.xml")
+        // Originally with ejb-jar.xml however this resource does not exist in
+        // /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/inheritance/specialization/enterprise
+        // .withEjbJarXml("ejb-jar.xml")
                 .build();
     }
 

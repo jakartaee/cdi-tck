@@ -37,7 +37,7 @@ public class ClientProxyTest extends AbstractJSR299Test {
 
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ClientProxyTest.class).withWebXml("web.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(ClientProxyTest.class).build();
     }
 
     @Test
