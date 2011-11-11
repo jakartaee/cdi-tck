@@ -32,7 +32,7 @@ import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
  */
 public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArchive> {
 
-    private static final String DEFAULT_WAR_NAME = "test.war";
+    public static final String DEFAULT_WAR_NAME = "test.war";
 
     private boolean hasDefaultEjbModuleDependency = false;
 
@@ -58,7 +58,9 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
         WebArchive webArchive = null;
 
         if (getName() == null) {
-            webArchive = ShrinkWrap.create(WebArchive.class, DEFAULT_WAR_NAME);
+            // Let arquillian generate archive name in order to avoid reload issues in AS7 (AS7-1638)
+            // webArchive = ShrinkWrap.create(WebArchive.class, DEFAULT_WAR_NAME);
+            webArchive = ShrinkWrap.create(WebArchive.class);
         } else {
             webArchive = ShrinkWrap.create(WebArchive.class, getName());
         }

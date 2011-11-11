@@ -60,7 +60,7 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
 
     public static final String DEFAULT_EAR_NAME = "test.ear";
 
-    public static final String DEFAULT_EJB_MODULE_NAME = "test.jar";
+    public static final String DEFAULT_EJB_MODULE_NAME = "test-ejb.jar";
 
     private boolean hasDefaultWebModule = true;
 
@@ -92,7 +92,9 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         EnterpriseArchive enterpriseArchive = null;
 
         if (getName() == null) {
-            enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, DEFAULT_EAR_NAME);
+            // Let arquillian generate archive name in order to avoid reload issues in AS7 (AS7-1638)
+            // enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, DEFAULT_EAR_NAME);
+            enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class);
         } else {
             enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, getName());
         }
