@@ -599,6 +599,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
             resolveAsClientMode();
 
+            // CDI TCK properties
+            withResource(JSR299PropertiesBasedConfigurationBuilder.RESOURCE_BUNDLE, null, false);
             // org.jboss.jsr299.tck.api
             withPackage(JSR299Configuration.class.getPackage());
             // org.jboss.jsr299.tck.spi
