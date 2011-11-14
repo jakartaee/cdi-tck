@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
@@ -25,6 +26,19 @@ public class SpiderProducer {
     private static boolean tameSpiderDestroyed = false;
     private static boolean deadliestSpiderDestroyed = false;
     private static int widowsDestroyed = 0;
+    private static boolean scaryBlackWidowDestroyed = false;
+    private static boolean tameBlackWidowDestroyed = false;
+    
+    @Produces
+    @Scary
+    @SuppressWarnings("unused")
+    private final Calisoga scaryCalisoga = new Calisoga("scary");
+    @Produces
+    @Tame
+    @SuppressWarnings("unused")
+    @RequestScoped
+    private final Calisoga tameCalisoga = new Calisoga("tame");
+    
 
     @Produces
     @Tame
@@ -59,6 +73,18 @@ public class SpiderProducer {
         SpiderProducer.deadliestSpiderDestroyed = true;
     }
 
+    public void destroyScaryCalisoga(@Disposes @Scary Calisoga calisoga) {
+        assert calisoga != null;
+        assert "scary".equals(calisoga.getName());
+        scaryBlackWidowDestroyed = true;
+    }
+
+    public void destroyTameCalisoga(@Disposes @Tame Calisoga calisoga) {
+        assert calisoga != null;
+        assert "tame".equals(calisoga.getName());
+        tameBlackWidowDestroyed = true;
+    }
+
     public void destroyWidow(@Disposes @Any Widow widow) {
         widowsDestroyed++;
     }
@@ -75,4 +101,19 @@ public class SpiderProducer {
         return widowsDestroyed;
     }
 
+    public static boolean isScaryBlackWidowDestroyed() {
+        return scaryBlackWidowDestroyed;
+    }
+
+    public static boolean isTameBlackWidowDestroyed() {
+        return tameBlackWidowDestroyed;
+    }
+    
+    public static void reset() {
+        tameSpiderDestroyed = false;
+        deadliestSpiderDestroyed = false;
+        widowsDestroyed = 0;
+        scaryBlackWidowDestroyed = false;
+        tameBlackWidowDestroyed = false;
+    }
 }

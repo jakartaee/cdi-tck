@@ -96,6 +96,8 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
     @SpecAssertion(section = "3.3.5", id = "da")
     public void testDisposalMethodForMultipleProducerMethods() throws Exception {
 
+        SpiderProducer.reset();
+
         Bean<Widow> deadliest = getBeans(Widow.class, DEADLIEST_LITERAL).iterator().next();
         CreationalContext<Widow> deadliestCreationalContext = getCurrentManager().createCreationalContext(deadliest);
         Widow deadliestInstance = getCurrentManager().getContext(deadliest.getScope()).get(deadliest);
@@ -107,6 +109,30 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
         tame.destroy(tameInstance, tameCreationalContext);
 
         assertEquals(SpiderProducer.getWidowsDestroyed(), 2);
+    }
+
+    /**
+     * Tests that a disposal method can be bound to a product of a producer field. CDI-145
+     */
+    @Test(groups = { "disposalMethod" })
+    @SpecAssertion(section = "???", id = "???") // TODO
+    public void testDisposalMethodCalledForProducerField() throws Exception {
+        SpiderProducer.reset();
+        createAndDestroyBean(Calisoga.class, new Scary.Literal());
+        assert SpiderProducer.isScaryBlackWidowDestroyed();
+        assert !SpiderProducer.isTameBlackWidowDestroyed();
+
+        SpiderProducer.reset();
+        createAndDestroyBean(Calisoga.class, TAME_LITERAL);
+        assert !SpiderProducer.isScaryBlackWidowDestroyed();
+        assert SpiderProducer.isTameBlackWidowDestroyed();
+    }
+    
+    private <T> void createAndDestroyBean(Class<T> type, Annotation... qualifiers) {
+        Bean<T> bean = getBeans(type, qualifiers).iterator().next();
+        CreationalContext<T> creationalContext = getCurrentManager().createCreationalContext(bean);
+        T instance = bean.create(creationalContext);
+        bean.destroy(instance, creationalContext);
     }
 
 }
