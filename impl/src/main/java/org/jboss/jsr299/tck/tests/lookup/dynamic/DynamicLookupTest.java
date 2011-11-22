@@ -191,7 +191,7 @@ public class DynamicLookupTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "3.12", id = "xc")
+    @SpecAssertion(section = "3.14", id = "xc")
     public void testNewBeanNotEnabledWithouInjectionPoint() {
         assert getInstanceByType(ObtainsNewInstanceBean.class).getIae().isUnsatisfied();
     }

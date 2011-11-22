@@ -49,10 +49,10 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3.5", id = "c"), @SpecAssertion(section = "3.3.4", id = "b"),
-            @SpecAssertion(section = "3.3.4", id = "c"), @SpecAssertion(section = "3.3.4", id = "e"),
-            @SpecAssertion(section = "3.3.5", id = "ba"), @SpecAssertion(section = "3.3.6", id = "a"),
-            @SpecAssertion(section = "3.3.6", id = "b0"), @SpecAssertion(section = "3.3.7", id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = "2.3.5", id = "c"), @SpecAssertion(section = "3.5", id = "b"),
+            @SpecAssertion(section = "3.5", id = "c"), @SpecAssertion(section = "3.5", id = "e"),
+            @SpecAssertion(section = "3.5.1", id = "ba"), @SpecAssertion(section = "3.5.2", id = "a"),
+            @SpecAssertion(section = "3.5.2", id = "b0"), @SpecAssertion(section = "3.5.3", id = "aa"),
             @SpecAssertion(section = "5.5.4", id = "b") })
     public void testBindingTypesAppliedToDisposalMethodParameters() throws Exception {
         assert !SpiderProducer.isTameSpiderDestroyed();
@@ -66,7 +66,7 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.3.4", id = "aa"), @SpecAssertion(section = "3.3.5", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = "3.5", id = "aa"), @SpecAssertion(section = "3.5.1", id = "ba") })
     public void testDisposalMethodOnNonBean() throws Exception {
         Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);
@@ -83,7 +83,7 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
      * @throws Exception
      */
     @Test(groups = { "disposalMethod" })
-    @SpecAssertions({ @SpecAssertion(section = "3.3.6", id = "h"), @SpecAssertion(section = "3.10", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "h"), @SpecAssertion(section = "3.11", id = "a") })
     public void testDisposalMethodParametersGetInjected() throws Exception {
         Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);
@@ -93,7 +93,7 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "disposalMethod" })
-    @SpecAssertion(section = "3.3.5", id = "da")
+    @SpecAssertion(section = "3.5.1", id = "da")
     public void testDisposalMethodForMultipleProducerMethods() throws Exception {
 
         Bean<Widow> deadliest = getBeans(Widow.class, DEADLIEST_LITERAL).iterator().next();

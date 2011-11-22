@@ -33,7 +33,7 @@ public class CreationalContextForNonContextualTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.3", id = "b")
+    @SpecAssertion(section = "11.3.4", id = "b")
     public void testCreationalContext() {
         assert getCurrentManager().createCreationalContext(null) != null;
     }

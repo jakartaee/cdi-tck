@@ -84,7 +84,7 @@ public class SimpleBeanDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "3.7.1", id = "aa")
+    @SpecAssertion(section = "3.8.1", id = "aa")
     public void testInitializerAnnotatedConstructor() throws Exception {
         Sheep.constructedCorrectly = false;
         getInstanceByType(Sheep.class);
@@ -92,8 +92,8 @@ public class SimpleBeanDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.7.1", id = "ba"), @SpecAssertion(section = "3.1.3", id = "a"),
-            @SpecAssertion(section = "3.7", id = "a"), @SpecAssertion(section = "5.5.1", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "ba"), @SpecAssertion(section = "3.1.3", id = "a"),
+            @SpecAssertion(section = "3.8", id = "a"), @SpecAssertion(section = "5.5.1", id = "ba") })
     public void testEmptyConstructorUsed() {
         Donkey.constructedCorrectly = false;
         getInstanceByType(Donkey.class);
@@ -101,7 +101,7 @@ public class SimpleBeanDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.7.1", id = "aa"), @SpecAssertion(section = "5.5.1", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "aa"), @SpecAssertion(section = "5.5.1", id = "aa") })
     public void testInitializerAnnotatedConstructorUsedOverEmptyConstuctor() throws Exception {
         getInstanceByType(Turkey.class);
         assert Turkey.constructedCorrectly;

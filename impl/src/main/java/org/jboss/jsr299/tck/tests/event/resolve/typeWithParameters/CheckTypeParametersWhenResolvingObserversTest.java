@@ -66,7 +66,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractJSR29
     }
 
     @Test(groups = { "events" })
-    @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "b"), @SpecAssertion(section = "11.3.10", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "b"), @SpecAssertion(section = "11.3.11", id = "a") })
     public void testResolvingChecksTypeParameters() {
         assert getCurrentManager().resolveObserverMethods(new StringList()).size() == 1;
         assert getCurrentManager().resolveObserverMethods(new IntegerList()).size() == 1;

@@ -62,14 +62,14 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "el" })
-    @SpecAssertion(section = "12.4", id = "c")
+    @SpecAssertion(section = "12.5", id = "c")
     public void testUnresolvedNameReturnsNull() {
         assert getCurrentManager().getELResolver().getValue(
                 getCurrentConfiguration().getEl().createELContext(getCurrentManager()), null, "nonExistingTuna") == null;
     }
 
     @Test(groups = "el")
-    @SpecAssertions({ @SpecAssertion(section = "12.4", id = "d"), @SpecAssertion(section = "2.5", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "12.5", id = "d"), @SpecAssertion(section = "2.5", id = "a") })
     public void testELResolverReturnsContextualInstance() {
         Salmon salmon = getInstanceByType(Salmon.class);
         salmon.setAge(3);

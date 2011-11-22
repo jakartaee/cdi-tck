@@ -44,7 +44,7 @@ public class IntegrationWithUnifiedELTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "el" })
-    @SpecAssertions({ @SpecAssertion(section = "12.4", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = "12.5", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
     public void testELResolverRegisteredWithJsf() throws Exception {
         WebClient webclient = new WebClient();
         String content = webclient.getPage(contextPath + "JSFTestPage.jsf").getWebResponse().getContentAsString();
@@ -52,7 +52,7 @@ public class IntegrationWithUnifiedELTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "el" })
-    @SpecAssertions({ @SpecAssertion(section = "12.4", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = "12.5", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
     public void testELResolverRegisteredWithServletContainer() throws Exception {
         WebClient webclient = new WebClient();
         String content = webclient.getPage(contextPath + "JSPTestPage.jsp").getWebResponse().getContentAsString();

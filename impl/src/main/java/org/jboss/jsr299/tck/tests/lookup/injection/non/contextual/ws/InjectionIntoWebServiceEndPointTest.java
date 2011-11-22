@@ -18,9 +18,11 @@ package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws;
 
 import java.net.URL;
 
+import javax.enterprise.inject.spi.Bean;
 import javax.xml.namespace.QName;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -31,29 +33,33 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 1. Needs javaee-full profile (use serverConfig property in arquillian.xml) 2. Injection not working - AS7-1903
+ * Needs javaee-full profile (use serverConfig property in arquillian.xml).
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test {
 
-    @ArquillianResource
-    protected URL contextPath;
-
-    @Deployment(testable = false)
+    @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InjectionIntoWebServiceEndPointTest.class)
-        // .withClasses(Sheep.class, SheepWSEndPoint.class)
-                .withWebXml("web.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(InjectionIntoWebServiceEndPointTest.class).withWebXml("web.xml")
+                .build();
     }
 
-    @Test(groups = "javaee-full-only")
+    @RunAsClient
+    @Test(groups = "javaee-full-only", dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ee"), @SpecAssertion(section = "5.5.2", id = "aq"),
             @SpecAssertion(section = "5.5.2", id = "ar") })
-    public void testInjectionIntoWebServiceEndpoint() throws Exception {
+    public void testInjectionIntoWebServiceEndpoint(@ArquillianResource URL contextPath) throws Exception {
         URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
         SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(
                 "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWS"));
         SheepWS ws = service.getSheepWSPort();
         assert ws.isSheepInjected();
+    }
+
+    @Test
+    public void testResourceBeanTypes() {
+
+        Bean<SheepWS> sheepWsBean = getBeans(SheepWS.class).iterator().next();
+        assert sheepWsBean.getTypes().size() == 2;
     }
 }

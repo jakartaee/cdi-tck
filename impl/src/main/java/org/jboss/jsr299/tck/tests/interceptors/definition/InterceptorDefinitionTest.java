@@ -128,7 +128,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.12", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "a") })
     // WBRI-59
     public void testResolveInterceptorsReturnsOrderedList() {
         Annotation transactionalBinding = new AnnotationLiteral<Transactional>() {
@@ -145,7 +145,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertions({ @SpecAssertion(section = "11.3.12", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "b") })
     // WBRI-59
     public void testSameBindingTypesToResolveInterceptorsFails() {
         Annotation transactionalBinding = new AnnotationLiteral<Transactional>() {
@@ -154,14 +154,14 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertions({ @SpecAssertion(section = "11.3.12", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "c") })
     // WBRI-59
     public void testNoBindingTypesToResolveInterceptorsFails() {
         getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE);
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertions({ @SpecAssertion(section = "11.3.12", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "d") })
     // WBRI-59
     public void testNonBindingTypeToResolveInterceptorsFails() {
         Annotation nonBinding = new AnnotationLiteral<NonBindingType>() {

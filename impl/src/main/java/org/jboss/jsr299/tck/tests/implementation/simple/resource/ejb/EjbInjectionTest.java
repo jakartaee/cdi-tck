@@ -44,7 +44,7 @@ public class EjbInjectionTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "ee"), @SpecAssertion(section = "7.3.6", id = "ld"),
+    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "ee"), @SpecAssertion(section = "7.3.6", id = "ld"),
             @SpecAssertion(section = "7.3.6", id = "mg") })
     public void testInjectionOfEjbs() {
         Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();

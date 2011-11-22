@@ -44,7 +44,7 @@ public class InjectionTargetDefinitionErrorTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "da") })
     public void testAddingDefinitionError() {
     }
 }

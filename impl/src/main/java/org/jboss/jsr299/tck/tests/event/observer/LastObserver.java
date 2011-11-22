@@ -14,9 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.context.passivating.broken.finalProducerFieldNotPassivationCapable;
+package org.jboss.jsr299.tck.tests.event.observer;
 
-final class Broken_Record {
-    public Broken_Record() {
+import javax.enterprise.event.Observes;
+
+public class LastObserver {
+
+    static boolean wasNotified = false;
+
+    void observer(@Observes AnEventType event) {
+        wasNotified = true;
     }
 }

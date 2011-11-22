@@ -46,7 +46,7 @@ public class DuplicateBindingTypesWhenResolvingTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.10", id = "d")
+    @SpecAssertion(section = "11.3.11", id = "d")
     public void testDuplicateBindingTypesWhenResolvingFails() {
         getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeABinding(), new BindingTypeABinding());
     }

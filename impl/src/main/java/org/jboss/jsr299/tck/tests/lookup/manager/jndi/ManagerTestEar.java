@@ -36,7 +36,7 @@ public class ManagerTestEar extends AbstractJSR299Test {
     }
 
     @Test(groups = { "manager", "ejb3", "integration" })
-    @SpecAssertion(section = "11.3", id = "da")
+    @SpecAssertion(section = "11.3.1", id = "d")
     public void testManagerLookupInJndi() throws Exception {
         BeanManager beanManager = getInstanceByType(JndiBeanManagerInjected.class).getManagerFromJndi();
         assert beanManager != null;

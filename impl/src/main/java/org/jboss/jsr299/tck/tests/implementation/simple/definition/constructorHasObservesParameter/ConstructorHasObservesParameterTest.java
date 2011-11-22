@@ -35,7 +35,7 @@ public class ConstructorHasObservesParameterTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "observerMethod" })
-    @SpecAssertion(section = "3.7.1", id = "ea")
+    @SpecAssertion(section = "3.8.1", id = "ea")
     public void testConstructorHasObservesParameter() {
     }
 

@@ -44,11 +44,11 @@ public class ProcessSessionBeanTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "c"), @SpecAssertion(section = "11.5.8", id = "edb"),
-            @SpecAssertion(section = "11.5.8", id = "efb"), @SpecAssertion(section = "11.5.8", id = "fb"),
-            @SpecAssertion(section = "11.5.8", id = "hb"), @SpecAssertion(section = "11.5.8", id = "hc"),
-            @SpecAssertion(section = "11.5.8", id = "m"), @SpecAssertion(section = "11.5.8", id = "k"),
-            @SpecAssertion(section = "12.3", id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "c"), @SpecAssertion(section = "11.5.11", id = "edb"),
+            @SpecAssertion(section = "11.5.11", id = "efb"), @SpecAssertion(section = "11.5.11", id = "fb"),
+            @SpecAssertion(section = "11.5.11", id = "hb"), @SpecAssertion(section = "11.5.11", id = "hc"),
+            @SpecAssertion(section = "11.5.11", id = "m"), @SpecAssertion(section = "11.5.11", id = "k"),
+            @SpecAssertion(section = "12.4", id = "fb") })
     public void testProcessSessionBeanEvent() {
         assert ProcessBeanObserver.getElephantProcessSessionBean().getBean().getBeanClass().equals(Elephant.class);
         assert ProcessBeanObserver.getElephantProcessBeanCount() == 0;

@@ -35,7 +35,7 @@ public class TooManyInitializerAnnotatedConstructorsTest extends AbstractJSR299T
     }
 
     @Test
-    @SpecAssertion(section = "3.7.1", id = "ca")
+    @SpecAssertion(section = "3.8.1", id = "ca")
     public void testTooManyInitializerAnnotatedConstructor() {
     }
 

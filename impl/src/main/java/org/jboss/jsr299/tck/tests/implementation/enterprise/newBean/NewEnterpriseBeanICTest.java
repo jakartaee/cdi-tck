@@ -39,7 +39,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "new" })
-    @SpecAssertion(section = "3.12", id = "l")
+    @SpecAssertion(section = "3.14", id = "l")
     public void testNewBeanHasSameConstructor() {
         ExplicitConstructor newBean = getInstanceByType(ExplicitConstructor.class, ExplicitConstructorSessionBean.NEW);
         assert newBean.getConstructorCalls() == 1;
@@ -47,7 +47,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "new" })
-    @SpecAssertion(section = "3.12", id = "m")
+    @SpecAssertion(section = "3.14", id = "m")
     public void testNewBeanHasSameInitializers() {
         InitializerSimpleBeanLocal bean = getInstanceByType(InitializerSimpleBeanLocal.class);
         InitializerSimpleBeanLocal newBean = getInstanceByType(InitializerSimpleBeanLocal.class, InitializerSimpleBeanLocal.NEW);
@@ -62,7 +62,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
      * @throws Exception
      */
     @Test(groups = { "new" })
-    @SpecAssertion(section = "3.12", id = "v")
+    @SpecAssertion(section = "3.14", id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);
         FoxLocal newFox = getInstanceByType(FoxLocal.class, FoxLocal.NEW);
@@ -74,7 +74,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "new", "disposal" })
-    @SpecAssertion(section = "3.12", id = "x")
+    @SpecAssertion(section = "3.14", id = "x")
     public void testNewBeanHasNoDisposalMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);
         FoxLocal newFox = getInstanceByType(FoxLocal.class, FoxLocal.NEW);

@@ -41,7 +41,7 @@ public class NonPassivationCapableProducerMethodTest extends AbstractJSR299Test 
     }
 
     @Test(groups = { "passivation" })
-    @SpecAssertions({ @SpecAssertion(section = "6.6.1", id = "cb"), @SpecAssertion(section = "6.6.4", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "ca") })
     public void testNonPassivationCapableProducerMethodNotOk() {
     }
 }

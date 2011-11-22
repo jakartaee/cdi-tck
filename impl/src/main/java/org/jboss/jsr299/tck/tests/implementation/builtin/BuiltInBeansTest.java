@@ -34,7 +34,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Section 3.6
  * 
  * @author Pete Muir
  * @author Martin Kouba
@@ -48,7 +47,7 @@ public class BuiltInBeansTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "a") })
     public void testUserTransactionBean() throws SystemException {
         UserTransaction userTransaction = getInstanceByType(UserTransactionInjectedBeanLocal.class).getUserTransaction();
         assert userTransaction != null;
@@ -57,7 +56,7 @@ public class BuiltInBeansTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "c") })
     public void testDefaultValidatorFactoryBean() throws SystemException {
         ValidatorFactory defaultValidatorFactory = getInstanceByType(DefaultValidatorFactoryInjectedBeanLocal.class)
                 .getDefaultValidatorFactory();
@@ -67,7 +66,7 @@ public class BuiltInBeansTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "d") })
     public void testDefaultValidatorBean() throws SystemException {
         Validator defaultValidator = getInstanceByType(DefaultValidatorInjectedBeanLocal.class).getDefaultValidator();
         assert defaultValidator != null;
@@ -83,7 +82,7 @@ public class BuiltInBeansTest extends AbstractJSR299Test {
      */
     @Test(groups = "rewrite")
     // PLM We should check the Principal somehow
-    @SpecAssertions({ @SpecAssertion(section = "3.6", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "b") })
     public void testPrincipalBean() throws SystemException, LoginException {
         PrincipalInjectedBeanLocal instance = getInstanceByType(PrincipalInjectedBeanLocal.class);
         instance.login();

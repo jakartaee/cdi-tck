@@ -37,7 +37,7 @@ public class ObserverParameterUnallowedDefinitionTest extends AbstractJSR299Test
     }
 
     @Test
-    @SpecAssertion(section = "3.3.6", id = "ea")
+    @SpecAssertion(section = "3.5.2", id = "ea")
     public void testObserverParameterUnallowed() {
     }
 

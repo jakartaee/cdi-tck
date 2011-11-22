@@ -36,7 +36,7 @@ public class InitializerMethodAnnotatedProducesTest extends AbstractJSR299Test {
     }
 
     @Test(groups = "initializerMethod")
-    @SpecAssertions({ @SpecAssertion(section = "3.9.1", id = "ba"), @SpecAssertion(section = "3.3.2", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = "3.10.1", id = "ba"), @SpecAssertion(section = "3.3.2", id = "ca") })
     public void testInitializerMethodAnnotatedProduces() {
     }
 

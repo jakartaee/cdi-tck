@@ -75,14 +75,14 @@ public class ManagerTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.1", id = "a"), @SpecAssertion(section = "11.3.1", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "a"), @SpecAssertion(section = "11.3.2", id = "b") })
     public void testGetReferenceReturnsContextualInstance() {
         Bean<FishFarmOffice> bean = getBeans(FishFarmOffice.class).iterator().next();
         assert getCurrentManager().getReference(bean, FishFarmOffice.class, getCurrentManager().createCreationalContext(bean)) instanceof FishFarmOffice;
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.1", id = "c")
+    @SpecAssertion(section = "11.3.2", id = "c")
     public void testGetReferenceWithIllegalBeanType() {
         Bean<FishFarmOffice> bean = getBeans(FishFarmOffice.class).iterator().next();
         getCurrentManager().getReference(bean, BigDecimal.class, getCurrentManager().createCreationalContext(bean));

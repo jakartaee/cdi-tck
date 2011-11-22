@@ -36,8 +36,8 @@ public class ConstructorHasDisposesParameterTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "disposalMethod" })
-    @SpecAssertions({ @SpecAssertion(section = "3.7.1", id = "da"), @SpecAssertion(section = "12.2", id = "db"),
-            @SpecAssertion(section = "12.4", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "da"), @SpecAssertion(section = "12.2", id = "db"),
+            @SpecAssertion(section = "12.5", id = "a") })
     public void testConstructorHasDisposesParameter() throws Exception {
     }
 

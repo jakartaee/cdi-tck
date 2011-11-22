@@ -37,7 +37,7 @@ public class ProducesUnallowedDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "3.3.6", id = "ca")
+    @SpecAssertion(section = "3.5.2", id = "ca")
     public void testProducesUnallowed() {
     }
 

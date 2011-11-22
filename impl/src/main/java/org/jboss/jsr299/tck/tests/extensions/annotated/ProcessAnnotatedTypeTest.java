@@ -43,7 +43,7 @@ public class ProcessAnnotatedTypeTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.5", id = "a"), @SpecAssertion(section = "12.3", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "a"), @SpecAssertion(section = "12.4", id = "ba") })
     public void testProcessAnnotatedTypeEventsSent() {
         // Randomly test some of the classes and interfaces that should have
         // been discovered and sent via the event
@@ -55,13 +55,13 @@ public class ProcessAnnotatedTypeTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.5", id = "ba")
+    @SpecAssertion(section = "11.5.6", id = "ba")
     public void testGetAnnotatedType() {
         assert ProcessAnnotatedTypeObserver.getDogAnnotatedType().getBaseType().equals(Dog.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.5", id = "bb"), @SpecAssertion(section = "11.5.5", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "bb"), @SpecAssertion(section = "11.5.6", id = "ca") })
     public void testSetAnnotatedType() {
         assert TestAnnotatedType.isGetConstructorsUsed();
         assert TestAnnotatedType.isGetFieldsUsed();
@@ -69,7 +69,7 @@ public class ProcessAnnotatedTypeTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.5", id = "bc")
+    @SpecAssertion(section = "11.5.6", id = "bc")
     public void testVeto() {
         assert getCurrentManager().getBeans(VetoedBean.class).isEmpty();
     }

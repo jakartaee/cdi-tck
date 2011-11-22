@@ -99,28 +99,28 @@ public class ResolveEventObserversTest extends AbstractJSR299Test {
     @Test(groups = { "events" })
     @SpecAssertions({
             // these two assertions combine to create a logical, testable assertion
-            @SpecAssertion(section = "11.3.10", id = "a"), @SpecAssertion(section = "11.3.10", id = "b") })
+            @SpecAssertion(section = "11.3.11", id = "a"), @SpecAssertion(section = "11.3.11", id = "b") })
     public void testBeanManagerResolveObserversSignature() throws Exception {
         assert getCurrentManager().getClass().getDeclaredMethod(BEAN_MANAGER_RESOLVE_OBSERVERS_METHOD_NAME, Object.class,
                 Annotation[].class) != null;
     }
 
     @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.10", id = "e")
+    @SpecAssertion(section = "11.3.11", id = "e")
     public void testBeanManagerResolveObserversWithIllegalQualifier() {
         getCurrentManager().resolveObserverMethods(new SimpleEventType(), new AnnotationLiteral<Override>() {
         });
     }
 
     @Test(groups = { "events" })
-    @SpecAssertion(section = "12.3", id = "o")
+    @SpecAssertion(section = "12.4", id = "o")
     public void testObserverMethodAutomaticallyRegistered() {
         assert !getCurrentManager().resolveObserverMethods(new String(), new AnnotationLiteral<Secret>() {
         }).isEmpty();
     }
 
     @Test(groups = { "events" })
-    @SpecAssertion(section = "12.3", id = "o")
+    @SpecAssertion(section = "12.4", id = "o")
     public void testObserverMethodNotAutomaticallyRegisteredForDisabledBeans() {
         Set<ObserverMethod<? super Ghost>> ghostObservers = getCurrentManager().resolveObserverMethods(new Ghost());
         assert ghostObservers.size() == 0;

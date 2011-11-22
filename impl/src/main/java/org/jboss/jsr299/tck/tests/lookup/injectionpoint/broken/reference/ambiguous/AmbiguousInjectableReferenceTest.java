@@ -46,7 +46,7 @@ public class AmbiguousInjectableReferenceTest extends AbstractJSR299Test {
 
     @SuppressWarnings("unchecked")
     @Test(expectedExceptions = AmbiguousResolutionException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "bc") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.3", id = "bc") })
     public void testUnsatisfiedReference() {
         Bean<SimpleBean> bean = this.getBeans(SimpleBean.class).iterator().next();
         AmbiguousInjectionPoint injectionPoint = new AmbiguousInjectionPoint(bean);

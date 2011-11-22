@@ -35,7 +35,7 @@ public class ParameterAnnotatedObservesTest extends AbstractJSR299Test {
     }
 
     @Test(groups = "initializerMethod")
-    @SpecAssertion(section = "3.9.1", id = "da")
+    @SpecAssertion(section = "3.10.1", id = "da")
     public void testInitializerMethodHasParameterAnnotatedObserves() {
     }
 

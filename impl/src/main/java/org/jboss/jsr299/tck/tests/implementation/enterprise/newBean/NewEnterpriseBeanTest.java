@@ -48,7 +48,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "new" })
-    @SpecAssertion(section = "3.12", id = "p")
+    @SpecAssertion(section = "3.14", id = "p")
     public void testNewBeanIsDependentScoped() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, WrappedEnterpriseBeanLocal.NEW);
         assert beans.size() == 1;
@@ -57,7 +57,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "new" })
-    @SpecAssertion(section = "3.12", id = "r")
+    @SpecAssertion(section = "3.14", id = "r")
     public void testNewBeanIsHasOnlyNewBinding() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, WrappedEnterpriseBeanLocal.NEW);
         assert beans.size() == 1;
@@ -67,7 +67,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "new" })
-    @SpecAssertion(section = "3.12", id = "s")
+    @SpecAssertion(section = "3.14", id = "s")
     public void testNewBeanHasNoBeanELName() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, WrappedEnterpriseBeanLocal.NEW);
         assert beans.size() == 1;
@@ -76,7 +76,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "new" })
-    @SpecAssertion(section = "3.12", id = "t")
+    @SpecAssertion(section = "3.14", id = "t")
     public void testNewBeanHasNoStereotypes() {
         Bean<MonkeyLocal> monkeyBean = getBeans(MonkeyLocal.class).iterator().next();
         Bean<MonkeyLocal> newMonkeyBean = getBeans(MonkeyLocal.class, MonkeyLocal.NEW).iterator().next();
@@ -87,14 +87,14 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "new" })
-    @SpecAssertion(section = "3.12", id = "u")
+    @SpecAssertion(section = "3.14", id = "u")
     public void testNewBeanHasNoObservers() {
         // Should just be 1 observer from bean, not new bean
         assert getCurrentManager().resolveObserverMethods("event").size() == 1;
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "j"), @SpecAssertion(section = "3.12", id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = "3.14", id = "j"), @SpecAssertion(section = "3.14", id = "k") })
     public void testForEachEnterpriseBeanANewBeanExists() {
         Bean<OrderLocal> orderBean = getBeans(OrderLocal.class).iterator().next();
         Bean<OrderLocal> newOrderBean = getBeans(OrderLocal.class, OrderLocal.NEW).iterator().next();
@@ -125,7 +125,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "new" })
-    @SpecAssertion(section = "3.12", id = "h")
+    @SpecAssertion(section = "3.14", id = "h")
     public void testNewBeanHasSameInjectedFields() {
         Bean<InitializerSimpleBeanLocal> simpleBean = getBeans(InitializerSimpleBeanLocal.class).iterator().next();
         Bean<InitializerSimpleBeanLocal> newSimpleBean = getBeans(InitializerSimpleBeanLocal.class,

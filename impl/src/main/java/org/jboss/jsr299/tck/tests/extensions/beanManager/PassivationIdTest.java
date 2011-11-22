@@ -43,7 +43,7 @@ public class PassivationIdTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.6", id = "a")
+    @SpecAssertion(section = "11.3.7", id = "a")
     public void testGetPassivationCapableBeanById() {
         Bean<?> passivatingBean = getCurrentManager().getPassivationCapableBean(CowBean.PASSIVATION_ID);
         assert passivatingBean.getBeanClass().equals(Cow.class);

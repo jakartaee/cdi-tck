@@ -65,7 +65,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test(groups = "producerMethod")
-    @SpecAssertions({ @SpecAssertion(section = "3.3.4", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "3.5", id = "b") })
     public void testStaticDisposerMethod() throws Exception {
         assert getBeans(String.class).size() == 1;
         String aString = getInstanceByType(String.class);

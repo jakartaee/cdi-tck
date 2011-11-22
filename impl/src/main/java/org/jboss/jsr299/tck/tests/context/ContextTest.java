@@ -56,7 +56,7 @@ public class ContextTest extends AbstractJSR299Test {
     @Test(groups = { "contexts" })
     @SpecAssertions({ @SpecAssertion(section = "2.4.1", id = "aa"), @SpecAssertion(section = "2.4.1", id = "ab"),
             @SpecAssertion(section = "2.4.1", id = "ac"), @SpecAssertion(section = "2.4.1", id = "ca"),
-            @SpecAssertion(section = "11.3.14", id = "a") })
+            @SpecAssertion(section = "11.3.15", id = "a") })
     public void testBuiltInContexts() {
         Context context = getCurrentManager().getContext(Dependent.class);
         assert context != null;

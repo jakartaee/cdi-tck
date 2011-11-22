@@ -40,7 +40,7 @@ public class ProcessAnnotatedTypeEventThrowsExceptionTest extends AbstractJSR299
     }
 
     @Test
-    @SpecAssertion(section = "11.5.5", id = "e")
+    @SpecAssertion(section = "11.5.6", id = "e")
     public void testProcessAnnotatedTypeEventThrowsExceptionNotOk() {
     }
 }

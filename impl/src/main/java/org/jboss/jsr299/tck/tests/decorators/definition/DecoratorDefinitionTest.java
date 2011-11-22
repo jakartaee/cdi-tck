@@ -51,7 +51,7 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.1", id = "d"), @SpecAssertion(section = "8.1.1", id = "a"),
             @SpecAssertion(section = "8.1.3", id = "c"), @SpecAssertion(section = "8.3", id = "aa"),
-            @SpecAssertion(section = "11.1.1", id = "a"), @SpecAssertion(section = "12.3", id = "kc") })
+            @SpecAssertion(section = "11.1.1", id = "a"), @SpecAssertion(section = "12.4", id = "kc") })
     public void testDecoratorIsManagedBean() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(MockLogger.TYPES);
         assert decorators.size() == 1;
@@ -67,8 +67,8 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.1", id = "b"), @SpecAssertion(section = "8.1", id = "c"),
-            @SpecAssertion(section = "11.1.1", id = "b"), @SpecAssertion(section = "11.3.11", id = "a"),
-            @SpecAssertion(section = "11.3.11", id = "b") })
+            @SpecAssertion(section = "11.1.1", id = "b"), @SpecAssertion(section = "11.3.12", id = "a"),
+            @SpecAssertion(section = "11.3.12", id = "b") })
     public void testDecoratedTypes() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(FooBar.TYPES);
         assert decorators.size() == 1;
@@ -105,7 +105,7 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.2", id = "b"), @SpecAssertion(section = "8.3", id = "aa"),
-            @SpecAssertion(section = "11.3.11", id = "a") })
+            @SpecAssertion(section = "11.3.12", id = "a") })
     public void testDecoratorOrdering() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Bazt.TYPES);
         assert decorators.size() == 2;
@@ -131,7 +131,7 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.11", id = "c")
+    @SpecAssertion(section = "11.3.12", id = "c")
     public void testDuplicateBindingsOnResolveDecoratorsFails() {
         Annotation binding = new AnnotationLiteral<Meta>() {
         };
@@ -139,7 +139,7 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.11", id = "d")
+    @SpecAssertion(section = "11.3.12", id = "d")
     public void testNonBindingsOnResolveDecoratorsFails() {
         Annotation binding = new AnnotationLiteral<NonMeta>() {
         };
@@ -147,7 +147,7 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.11", id = "e")
+    @SpecAssertion(section = "11.3.12", id = "e")
     public void testEmptyTypeSetOnResolveDecoratorsFails() {
         Annotation binding = new AnnotationLiteral<NonMeta>() {
         };

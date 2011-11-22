@@ -35,7 +35,7 @@ public class ParameterAnnotatedDisposesTest extends AbstractJSR299Test {
     }
 
     @Test(groups = "initializerMethod")
-    @SpecAssertion(section = "3.9.1", id = "ca")
+    @SpecAssertion(section = "3.10.1", id = "ca")
     public void testInitializerMethodHasParameterAnnotatedDisposes() {
     }
 

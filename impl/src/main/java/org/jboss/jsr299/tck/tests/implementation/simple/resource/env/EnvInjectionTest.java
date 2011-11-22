@@ -46,7 +46,7 @@ public class EnvInjectionTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-    @SpecAssertion(section = "3.5.1", id = "bb")
+    @SpecAssertion(section = "3.6.1", id = "bb")
     public void testInjectionOfEnv() {
         Bean<GreetingBean> greetingBean = getBeans(GreetingBean.class).iterator().next();
         CreationalContext<GreetingBean> greetingBeanCc = getCurrentManager().createCreationalContext(greetingBean);

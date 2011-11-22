@@ -43,7 +43,7 @@ public class ProcessObserverMethodExceptionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.9", id = "db")
+    @SpecAssertion(section = "11.5.12", id = "db")
     public void testExceptionIsDefinitionError() {
     }
 

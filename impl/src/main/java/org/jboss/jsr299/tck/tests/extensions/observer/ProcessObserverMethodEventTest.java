@@ -41,20 +41,20 @@ public class ProcessObserverMethodEventTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.9", id = "aaa")
+    @SpecAssertion(section = "11.5.12", id = "aaa")
     public void testProcessObserverMethodEventsSent() {
         assert ProcessObserverMethodObserver.getEventtypes().contains(EventA.class);
     }
 
     @Test
-    @SpecAssertion(section = "11.5.9", id = "aba")
+    @SpecAssertion(section = "11.5.12", id = "aba")
     public void testGetAnnotatedMethod() {
         assert ProcessObserverMethodObserver.getAnnotatedMethod().getParameters().iterator().next().getBaseType()
                 .equals(EventA.class);
     }
 
     @Test
-    @SpecAssertion(section = "11.5.9", id = "ba")
+    @SpecAssertion(section = "11.5.12", id = "ba")
     public void testGetObserverMethod() {
         assert ProcessObserverMethodObserver.getObserverMethod().getObservedType().equals(EventA.class);
     }

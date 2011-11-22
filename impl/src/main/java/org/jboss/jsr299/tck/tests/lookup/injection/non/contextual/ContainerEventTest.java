@@ -62,55 +62,55 @@ public class ContainerEventTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aac"), @SpecAssertion(section = "11.5.6", id = "abc"),
-            @SpecAssertion(section = "12.3", id = "de") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aac"), @SpecAssertion(section = "11.5.8", id = "abc"),
+            @SpecAssertion(section = "12.4", id = "de") })
     public void testProcessInjectionTargetEventFiredForServletListener() {
         assert ProcessInjectionTargetObserver.getListenerEvent() != null;
         validateServletListenerAnnotatedType(ProcessInjectionTargetObserver.getListenerEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aad"), @SpecAssertion(section = "11.5.6", id = "abd"),
-            @SpecAssertion(section = "12.3", id = "df") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aad"), @SpecAssertion(section = "11.5.8", id = "abd"),
+            @SpecAssertion(section = "12.4", id = "df") })
     public void testProcessInjectionTargetEventFiredForTagHandler() {
         assert ProcessInjectionTargetObserver.getTagHandlerEvent() != null;
         validateTagHandlerAnnotatedType(ProcessInjectionTargetObserver.getTagHandlerEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aae"), @SpecAssertion(section = "11.5.6", id = "abe"),
-            @SpecAssertion(section = "12.3", id = "dg") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aae"), @SpecAssertion(section = "11.5.8", id = "abe"),
+            @SpecAssertion(section = "12.4", id = "dg") })
     public void testProcessInjectionTargetEventFiredForTagLibraryListener() {
         assert ProcessInjectionTargetObserver.getTagLibraryListenerEvent() != null;
         validateTagLibraryListenerAnnotatedType(ProcessInjectionTargetObserver.getTagLibraryListenerEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aah"), @SpecAssertion(section = "11.5.6", id = "abh"),
-            @SpecAssertion(section = "12.3", id = "dj") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aah"), @SpecAssertion(section = "11.5.8", id = "abh"),
+            @SpecAssertion(section = "12.4", id = "dj") })
     public void testProcessInjectionTargetEventFiredForServlet() {
         assert ProcessInjectionTargetObserver.getServletEvent() != null;
         validateServletAnnotatedType(ProcessInjectionTargetObserver.getServletEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aai"), @SpecAssertion(section = "11.5.6", id = "abi"),
-            @SpecAssertion(section = "12.3", id = "dk") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aai"), @SpecAssertion(section = "11.5.8", id = "abi"),
+            @SpecAssertion(section = "12.4", id = "dk") })
     public void testProcessInjectionTargetEventFiredForFilter() {
         assert ProcessInjectionTargetObserver.getFilterEvent() != null;
         validateFilterAnnotatedType(ProcessInjectionTargetObserver.getFilterEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertion(section = "12.3", id = "dd")
+    @SpecAssertion(section = "12.4", id = "dd")
     public void testProcessInjectionTargetEventFiredForJsfManagedBean() {
         assert ProcessInjectionTargetObserver.getJsfManagedBeanEvent() != null;
         validateJsfManagedBeanAnnotatedType(ProcessInjectionTargetObserver.getJsfManagedBeanEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aas"), @SpecAssertion(section = "11.5.6", id = "aao"),
-            @SpecAssertion(section = "11.5.6", id = "aan"), @SpecAssertion(section = "11.5.6", id = "aap") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aas"), @SpecAssertion(section = "11.5.8", id = "aao"),
+            @SpecAssertion(section = "11.5.8", id = "aan"), @SpecAssertion(section = "11.5.8", id = "aap") })
     public void testTypeOfProcessInjectionTargetParameter() {
         assert !ProcessInjectionTargetObserver.isStringObserved();
         assert ProcessInjectionTargetObserver.isTagHandlerSubTypeObserved();
@@ -121,42 +121,42 @@ public class ContainerEventTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "12.3", id = "be")
+    @SpecAssertion(section = "12.4", id = "be")
     public void testProcessAnnotatedTypeEventFiredForServletListener() {
         assert ProcessAnnotatedTypeObserver.getListenerEvent() != null;
         validateServletListenerAnnotatedType(ProcessAnnotatedTypeObserver.getListenerEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertion(section = "12.3", id = "bf")
+    @SpecAssertion(section = "12.4", id = "bf")
     public void testProcessAnnotatedTypeEventFiredForTagHandler() {
         assert ProcessAnnotatedTypeObserver.getTagHandlerEvent() != null;
         validateTagHandlerAnnotatedType(ProcessAnnotatedTypeObserver.getTagHandlerEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertion(section = "12.3", id = "bg")
+    @SpecAssertion(section = "12.4", id = "bg")
     public void testProcessAnnotatedTypeEventFiredForTagLibraryListener() {
         assert ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent() != null;
         validateTagLibraryListenerAnnotatedType(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertion(section = "12.3", id = "bj")
+    @SpecAssertion(section = "12.4", id = "bj")
     public void testProcessAnnotatedTypeEventFiredForServlet() {
         assert ProcessAnnotatedTypeObserver.getServletEvent() != null;
         validateServletAnnotatedType(ProcessAnnotatedTypeObserver.getServletEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertion(section = "12.3", id = "bk")
+    @SpecAssertion(section = "12.4", id = "bk")
     public void testProcessAnnotatedTypeEventFiredForFilter() {
         assert ProcessAnnotatedTypeObserver.getFilterEvent() != null;
         validateFilterAnnotatedType(ProcessAnnotatedTypeObserver.getFilterEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertion(section = "12.3", id = "bd")
+    @SpecAssertion(section = "12.4", id = "bd")
     public void testProcessAnnotatedTypeEventFiredForJsfManagedBean() {
         assert ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent() != null;
         validateJsfManagedBeanAnnotatedType(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent().getAnnotatedType());

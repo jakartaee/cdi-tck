@@ -33,7 +33,7 @@ public class NonBindingTypePassedToFireTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.9", id = "e")
+    @SpecAssertion(section = "11.3.10", id = "e")
     public void testExceptionThrownIfNonBindingTypePassedToFire() throws Exception {
         OwlFinch_Broken bean = getInstanceByType(OwlFinch_Broken.class);
         bean.methodThatFiresEvent();

@@ -49,7 +49,7 @@ public class BeanByTypeTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "aa"), @SpecAssertion(section = "11.3.4", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "aa"), @SpecAssertion(section = "11.3.5", id = "b") })
     public void testGetBeans() {
         Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
         assert beans.size() == 1;
@@ -57,7 +57,7 @@ public class BeanByTypeTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "c") })
     public void testNoBindingImpliesCurrent() {
         Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
         assert beans.size() == 1;
@@ -65,7 +65,7 @@ public class BeanByTypeTest extends AbstractJSR299Test {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "da") })
     public void testTypeVariable() {
         TypeVariable<?> t = new TypeVariable<GenericDeclaration>() {
 
@@ -85,13 +85,13 @@ public class BeanByTypeTest extends AbstractJSR299Test {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "e") })
     public void testSameBindingTwice() {
         getCurrentManager().getBeans(SimpleBean.class, new TameLiteral(), new TameLiteral());
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.4", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "f") })
     public void testNonBindingType() {
         getCurrentManager().getBeans(SimpleBean.class, new NonBindingTypeLiteral());
     }

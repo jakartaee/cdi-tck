@@ -34,7 +34,7 @@ public class EjbInitializerMethodTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "initializerMethod", "ejb3" })
-    @SpecAssertions({ @SpecAssertion(section = "3.9", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = "3.10", id = "e") })
     // This DOES NOT TEST initializer methods on Java EE component classes PLM
     public void testInitializerMethodNotABusinessMethod() {
         AndalusianChicken.nonBusinessMethodCalled = false;

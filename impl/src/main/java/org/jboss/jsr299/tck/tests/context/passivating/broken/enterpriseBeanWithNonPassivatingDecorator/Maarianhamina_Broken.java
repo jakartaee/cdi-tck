@@ -18,8 +18,10 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.enterpriseBeanWith
 
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 
 @Stateful
+@SessionScoped
 public class Maarianhamina_Broken implements MaarianHaminaLocal_Broken {
     @Remove
     public void bye() {

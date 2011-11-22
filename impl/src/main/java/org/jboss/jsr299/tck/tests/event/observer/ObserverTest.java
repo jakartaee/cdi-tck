@@ -44,26 +44,31 @@ public class ObserverTest extends AbstractJSR299Test {
     public void testObserverNotifiedWhenEventTypeAndAllBindingsMatch() {
         Annotation roleBinding = new RoleBinding("Admin");
 
-        // Fire an event that will be delivered to the two above observers
+        // Fire an event that will be delivered to the all observers
         AnEventType anEvent = new AnEventType();
         getCurrentManager().fireEvent(anEvent, roleBinding);
 
         assert AnObserver.wasNotified;
         assert AnotherObserver.wasNotified;
+        assert LastObserver.wasNotified;
         AnObserver.wasNotified = false;
         AnotherObserver.wasNotified = false;
+        LastObserver.wasNotified = false;
 
         // Fire an event that will be delivered to only one
         getCurrentManager().fireEvent(anEvent);
         assert AnObserver.wasNotified;
         assert !AnotherObserver.wasNotified;
+        assert LastObserver.wasNotified;
         AnObserver.wasNotified = false;
         AnotherObserver.wasNotified = false;
+        LastObserver.wasNotified = false;
 
         // Also make sure the binding value is considered
         getCurrentManager().fireEvent(anEvent, new RoleBinding("user"));
         assert AnObserver.wasNotified;
         assert !AnotherObserver.wasNotified;
+        assert LastObserver.wasNotified;
     }
 
     @Test(groups = { "events" })

@@ -49,7 +49,7 @@ public class NonBindingTypesWhenResolvingTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.11", id = "e")
+    @SpecAssertion(section = "11.3.12", id = "e")
     public void testNonBindingTypeAnnotationWhenResolvingFails() {
         Set<ObserverMethod<? super AnEventType>> resolvedObservers = getCurrentManager().resolveObserverMethods(
                 new AnEventType(), new AnimalStereotypeAnnotationLiteral());

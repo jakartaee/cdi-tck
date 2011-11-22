@@ -44,7 +44,7 @@ public class AlternativeAvailabilityTest extends AbstractJSR299Test {
     @Test(groups = { "alternatives" })
     @SpecAssertions({ @SpecAssertion(section = "5.1", id = "e"), @SpecAssertion(section = "5.1.1", id = "c"),
             @SpecAssertion(section = "5.1.1", id = "ea"), @SpecAssertion(section = "2.6", id = "a"),
-            @SpecAssertion(section = "2.6.1", id = "a"), @SpecAssertion(section = "12.3", id = "ka")
+            @SpecAssertion(section = "2.6.1", id = "a"), @SpecAssertion(section = "12.4", id = "ka")
 
     })
     public void testAlternativeAvailability() throws Exception {

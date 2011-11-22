@@ -37,7 +37,7 @@ public class DisposerMethodOnInterceptorTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "3.3.6", id = "ga")
+    @SpecAssertion(section = "3.5.2", id = "ga")
     // WELD-424
     public void testDisposerMethodNotAllowedOnInterceptor() {
     }

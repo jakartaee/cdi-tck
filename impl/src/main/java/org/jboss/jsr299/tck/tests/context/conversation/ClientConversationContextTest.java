@@ -303,8 +303,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         HtmlPage page = client.getPage(getPath("cumulus.jsf?cid=foo"));
 
         assert page.getBody().getTextContent().contains("NonexistentConversationException thrown properly");
-        // FIXME WELD-878
-        // assert page.getBody().getTextContent().contains("Conversation.isTransient: true");
+        // WELD-878
+        assert page.getBody().getTextContent().contains("Conversation.isTransient: true");
     }
 
     @Test

@@ -58,13 +58,13 @@ public class FireEventTest extends AbstractJSR299Test {
     @Test(groups = { "events" })
     @SpecAssertions({
             // these two assertions combine to create a logical, testable assertion
-            @SpecAssertion(section = "11.3.9", id = "a"), @SpecAssertion(section = "11.3.9", id = "b") })
+            @SpecAssertion(section = "11.3.10", id = "a"), @SpecAssertion(section = "11.3.10", id = "b") })
     public void testBeanManagerInterfaceForFireEventMethod() throws Exception {
         assert BeanManager.class.getDeclaredMethod(BEAN_MANAGER_FIRE_EVENT_METHOD_NAME, Object.class, Annotation[].class) != null;
     }
 
     @Test(groups = { "events" })
-    @SpecAssertion(section = "11.3.9", id = "a")
+    @SpecAssertion(section = "11.3.10", id = "a")
     public void testBeanManagerFireEvent() {
         Billing billing = getInstanceByType(Billing.class);
         billing.reset();
@@ -79,13 +79,13 @@ public class FireEventTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.9", id = "c")
+    @SpecAssertion(section = "11.3.10", id = "c")
     public void testTypeVariableEventTypeFails() throws Exception {
         getCurrentManager().fireEvent(new Foo<String>());
     }
 
     @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.9", id = "d")
+    @SpecAssertion(section = "11.3.10", id = "d")
     public void testDuplicateBindingsToFireEventFails() throws Exception {
         getCurrentManager().fireEvent(new Object(), new AnnotationLiteral<Lifted>() {
         }, new AnnotationLiteral<Lifted>() {

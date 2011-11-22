@@ -36,7 +36,7 @@ public class AddDefinitionErrorTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.8", id = "h")
+    @SpecAssertion(section = "11.5.11", id = "h")
     public void testAddDefinitionError() {
     }
 }

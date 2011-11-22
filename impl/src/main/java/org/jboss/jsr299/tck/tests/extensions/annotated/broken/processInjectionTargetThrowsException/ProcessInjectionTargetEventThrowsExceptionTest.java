@@ -40,7 +40,7 @@ public class ProcessInjectionTargetEventThrowsExceptionTest extends AbstractJSR2
     }
 
     @Test
-    @SpecAssertion(section = "11.5.6", id = "f")
+    @SpecAssertion(section = "11.5.8", id = "f")
     public void testProcessInjectionTargetEventThrowsExceptionNotOk() {
     }
 }

@@ -48,8 +48,8 @@ public class InjectableReferenceTest extends AbstractJSR299Test {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "a"), @SpecAssertion(section = "11.3.2", id = "ab"),
-            @SpecAssertion(section = "11.3.3", id = "a"), @SpecAssertion(section = "6.5.5", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.3", id = "a"), @SpecAssertion(section = "11.3.3", id = "ab"),
+            @SpecAssertion(section = "11.3.4", id = "a"), @SpecAssertion(section = "6.5.5", id = "a") })
     public void testGetInjectableReferenceOnBeanManager() {
 
         BeanWithInjectionPointMetadata.reset();
@@ -72,7 +72,7 @@ public class InjectableReferenceTest extends AbstractJSR299Test {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.3", id = "b") })
     public void testGetInjectableReferenceReturnsDelegateForDelegateInjectionPoint() {
         // Get hold of the correct IP by inspecting the ones the container created for LoggerConsumer
         assert getBeans(LoggerConsumer.class).size() == 1;

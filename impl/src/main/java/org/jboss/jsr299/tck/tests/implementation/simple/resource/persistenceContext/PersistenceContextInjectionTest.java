@@ -48,7 +48,7 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "cc"), @SpecAssertion(section = "7.3.6", id = "lb"),
+    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "cc"), @SpecAssertion(section = "7.3.6", id = "lb"),
             @SpecAssertion(section = "7.3.6", id = "mc") })
     public void testInjectionOfPersistenceContext() {
         ServiceBean serviceBean = getInstanceByType(ServiceBean.class);
@@ -58,7 +58,7 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "dd"), @SpecAssertion(section = "7.3.6", id = "lc"),
+    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "dd"), @SpecAssertion(section = "7.3.6", id = "lc"),
             @SpecAssertion(section = "7.3.6", id = "me") })
     public void testInjectionOfPersistenceUnit() {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
@@ -91,7 +91,7 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
-    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "hh"), @SpecAssertion(section = "3.5.2", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "hh"), @SpecAssertion(section = "3.5.2", id = "ab") })
     public void testBeanTypesAndBindingTypesOfPersistenceContext() {
         Bean<EntityManager> manager = getBeans(EntityManager.class, new AnnotationLiteral<Database>() {
         }).iterator().next();

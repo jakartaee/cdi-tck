@@ -45,7 +45,7 @@ public class ProducerProcessingWithDefinitionErrorTest extends AbstractJSR299Tes
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.7", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.9", id = "f") })
     public void testExplicitDefinitionError() {
     }
 

@@ -45,9 +45,9 @@ public class ProcessBeanTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "ba"), @SpecAssertion(section = "11.5.8", id = "eda"),
-            @SpecAssertion(section = "11.5.8", id = "efa"), @SpecAssertion(section = "11.5.8", id = "fa"),
-            @SpecAssertion(section = "11.5.8", id = "l"), @SpecAssertion(section = "12.3", id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "ba"), @SpecAssertion(section = "11.5.11", id = "eda"),
+            @SpecAssertion(section = "11.5.11", id = "efa"), @SpecAssertion(section = "11.5.11", id = "fa"),
+            @SpecAssertion(section = "11.5.11", id = "l"), @SpecAssertion(section = "12.4", id = "fa") })
     public void testProcessBeanEvent() {
         assert ProcessBeanObserver.getCatProcessManagedBean().getBean().getBeanClass().equals(Cat.class);
         assert ProcessBeanObserver.getCatProcessBeanCount() == 2;
@@ -55,10 +55,10 @@ public class ProcessBeanTest extends AbstractJSR299Test {
         assert ProcessBeanObserver.getCatProcessManagedBean().getAnnotatedBeanClass().getBaseType().equals(Cat.class);
     }
 
-    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "eaa"), @SpecAssertion(section = "11.5.8", id = "edc"),
-            @SpecAssertion(section = "11.5.8", id = "efc"), @SpecAssertion(section = "11.5.8", id = "fc"),
-            @SpecAssertion(section = "11.5.8", id = "i"), @SpecAssertion(section = "11.5.8", id = "j"),
-            @SpecAssertion(section = "12.3", id = "ha") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "eaa"), @SpecAssertion(section = "11.5.11", id = "edc"),
+            @SpecAssertion(section = "11.5.11", id = "efc"), @SpecAssertion(section = "11.5.11", id = "fc"),
+            @SpecAssertion(section = "11.5.11", id = "i"), @SpecAssertion(section = "11.5.11", id = "j"),
+            @SpecAssertion(section = "12.4", id = "ha") })
     @Test
     public void testProcessProducerMethodEvent() {
         assert ProcessBeanObserver.getCowProcessProducerMethod().getBean().getTypes().contains(Cow.class);
@@ -82,9 +82,9 @@ public class ProcessBeanTest extends AbstractJSR299Test {
                 .getJavaMember().getDeclaringClass().equals(Cowshed.class);
     }
 
-    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "eb"), @SpecAssertion(section = "11.5.8", id = "edd"),
-            @SpecAssertion(section = "11.5.8", id = "efd"), @SpecAssertion(section = "11.5.8", id = "fd"),
-            @SpecAssertion(section = "11.5.8", id = "n"), @SpecAssertion(section = "12.3", id = "hb") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "eb"), @SpecAssertion(section = "11.5.11", id = "edd"),
+            @SpecAssertion(section = "11.5.11", id = "efd"), @SpecAssertion(section = "11.5.11", id = "fd"),
+            @SpecAssertion(section = "11.5.11", id = "n"), @SpecAssertion(section = "12.4", id = "hb") })
     @Test
     public void testProcessProducerFieldEvent() {
         assert ProcessBeanObserver.getChickenProcessProducerField().getBean().getTypes().contains(Chicken.class);

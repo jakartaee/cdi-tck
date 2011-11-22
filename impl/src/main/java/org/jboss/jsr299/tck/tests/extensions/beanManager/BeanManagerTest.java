@@ -70,7 +70,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.7", id = "a")
+    @SpecAssertion(section = "11.3.8", id = "a")
     public void testAmbiguousDependencyResolved() {
         Set<Bean<?>> beans = new HashSet<Bean<?>>();
         beans.addAll(getCurrentManager().getBeans(SimpleBean.class));
@@ -79,7 +79,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test(expectedExceptions = AmbiguousResolutionException.class)
-    @SpecAssertion(section = "11.3.7", id = "b")
+    @SpecAssertion(section = "11.3.8", id = "b")
     public void testAmbiguousDependencyNotResolved() {
         Set<Bean<?>> beans = new HashSet<Bean<?>>();
         beans.addAll(getCurrentManager().getBeans(Dog.class));
@@ -88,7 +88,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test(expectedExceptions = InjectionException.class)
-    @SpecAssertion(section = "11.3.8", id = "a")
+    @SpecAssertion(section = "11.3.9", id = "a")
     public void testValidateThrowsException() {
         DogHouse dogHouse = getInstanceByType(DogHouse.class);
         InjectionPoint injectionPoint = new InjectionPointDecorator(dogHouse.getDog().getInjectedMetadata());
@@ -97,7 +97,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test(groups = "rewrite")
-    @SpecAssertion(section = "11.3.13", id = "aa")
+    @SpecAssertion(section = "11.3.14", id = "aa")
     // Should also check a custom bindingtype
     public void testDetermineBindingType() {
         assert getCurrentManager().isQualifier(Tame.class);
@@ -108,7 +108,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
 
     @Test(groups = "rewrite")
     // Should also check a custom scope
-    @SpecAssertion(section = "11.3.13", id = "ab")
+    @SpecAssertion(section = "11.3.14", id = "ab")
     public void testDetermineScopeType() {
         assert getCurrentManager().isScope(ApplicationScoped.class);
         assert !getCurrentManager().isScope(Tame.class);
@@ -117,7 +117,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test(groups = "rewrite")
-    @SpecAssertion(section = "11.3.13", id = "ac")
+    @SpecAssertion(section = "11.3.14", id = "ac")
     // Should also check a custom stereotype
     public void testDetermineStereotype() {
         assert getCurrentManager().isStereotype(AnimalStereotype.class);
@@ -129,7 +129,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     @Test(groups = "rewrite")
     // WBRI-59
     // Should also check a custom interceptor binding type
-    @SpecAssertion(section = "11.3.13", id = "ad")
+    @SpecAssertion(section = "11.3.14", id = "ad")
     public void testDetermineInterceptorBindingType() {
         assert getCurrentManager().isInterceptorBinding(Transactional.class);
         assert !getCurrentManager().isInterceptorBinding(Tame.class);
@@ -138,7 +138,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "rewrite" })
-    @SpecAssertion(section = "11.3.13", id = "ae")
+    @SpecAssertion(section = "11.3.14", id = "ae")
     // Should also check a custom sterotype
     public void testGetMetaAnnotationsForStereotype() {
         Set<Annotation> stereotypeAnnotations = getCurrentManager().getStereotypeDefinition(AnimalStereotype.class);
@@ -167,7 +167,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "rewrite" })
-    @SpecAssertion(section = "11.3.13", id = "af")
+    @SpecAssertion(section = "11.3.14", id = "af")
     public void testGetMetaAnnotationsForInterceptorBindingType() {
         Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingDefinition(Transactional.class);
         assert metaAnnotations.size() == 4;
@@ -175,7 +175,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "rewrite" })
-    @SpecAssertion(section = "11.3.13", id = "ag")
+    @SpecAssertion(section = "11.3.14", id = "ag")
     // Should also check a custom defined scope
     public void testgetScope() {
         assert getCurrentManager().isNormalScope(RequestScoped.class);
@@ -186,13 +186,13 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.15", id = "a")
+    @SpecAssertion(section = "11.3.16", id = "a")
     public void testGetELResolver() {
         assert getCurrentManager().getELResolver() != null;
     }
 
     @Test
-    @SpecAssertion(section = "11.3.17", id = "a")
+    @SpecAssertion(section = "11.3.18", id = "a")
     public void testObtainingAnnotatedType() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
         assert annotatedType.isAnnotationPresent(Specializes.class);
@@ -203,7 +203,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.18", id = "aa")
+    @SpecAssertion(section = "11.3.19", id = "aa")
     public void testObtainingInjectionTarget() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
         assert getCurrentManager().createInjectionTarget(annotatedType) != null;

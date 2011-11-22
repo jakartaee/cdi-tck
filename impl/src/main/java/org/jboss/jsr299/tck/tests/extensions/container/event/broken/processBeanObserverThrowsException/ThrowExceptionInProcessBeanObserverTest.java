@@ -42,7 +42,7 @@ public class ThrowExceptionInProcessBeanObserverTest extends AbstractJSR299Test 
     }
 
     @Test
-    @SpecAssertion(section = "11.5.8", id = "hd")
+    @SpecAssertion(section = "11.5.11", id = "hd")
     public void testProcessBeanObserverThrowsException() {
     }
 }

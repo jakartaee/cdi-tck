@@ -47,7 +47,7 @@ public class EventTest extends AbstractJSR299Test {
 
     @Test(groups = { "events" })
     @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "i"), @SpecAssertion(section = "5.5.6", id = "c"),
-            @SpecAssertion(section = "2.3.5", id = "ca"), @SpecAssertion(section = "3.10", id = "a") })
+            @SpecAssertion(section = "2.3.5", id = "ca"), @SpecAssertion(section = "3.11", id = "a") })
     public void testObserverMethodReceivesInjectionsOnNonObservesParameters() {
         getCurrentManager().fireEvent("validate injected parameters");
     }
@@ -82,7 +82,7 @@ public class EventTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "events" }, expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.10", id = "c")
+    @SpecAssertion(section = "11.3.11", id = "c")
     public <T> void testEventObjectContainsTypeVariablesWhenResolvingFails() {
         eventObjectContainsTypeVariables(new ArrayList<T>());
     }

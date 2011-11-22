@@ -45,7 +45,7 @@ public class ProducerProcessingWithExceptionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.7", id = "h") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.9", id = "h") })
     public void testException() {
     }
 

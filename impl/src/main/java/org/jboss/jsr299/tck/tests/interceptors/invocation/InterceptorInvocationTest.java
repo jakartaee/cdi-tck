@@ -48,7 +48,7 @@ public class InterceptorInvocationTest extends AbstractJSR299Test {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "7.2", id = "a"), @SpecAssertion(section = "9.2", id = "a"),
-            @SpecAssertion(section = "12.3", id = "kb") })
+            @SpecAssertion(section = "12.4", id = "kb") })
     public void testManagedBeanIsIntercepted() {
 
         MissileInterceptor.reset();
@@ -61,7 +61,7 @@ public class InterceptorInvocationTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "a1"), @SpecAssertion(section = "3.9", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "a1"), @SpecAssertion(section = "3.10", id = "f") })
     public void testInitializerMethodsNotIntercepted() {
 
         MissileInterceptor.reset();

@@ -37,7 +37,7 @@ public class UnresolvedDisposalMethodDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "3.3.7", id = "ca")
+    @SpecAssertion(section = "3.5.3", id = "ca")
     public void testUnresolvedDisposalMethod() {
     }
 }

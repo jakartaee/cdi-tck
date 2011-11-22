@@ -35,7 +35,7 @@ public class GenericInitializerMethodTest extends AbstractJSR299Test {
     }
 
     @Test(groups = "ri-broken")
-    @SpecAssertion(section = "3.9.1", id = "ab")
+    @SpecAssertion(section = "3.10.1", id = "ab")
     public void testGenericInitializerMethodNotAllowed() {
     }
 }

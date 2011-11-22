@@ -46,7 +46,7 @@ public class UnsatisfiedInjectableReferenceTest extends AbstractJSR299Test {
 
     @SuppressWarnings("unchecked")
     @Test(expectedExceptions = UnsatisfiedResolutionException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.3", id = "bb") })
     public void testUnsatisfiedReference() {
         Bean<SimpleBean> bean = this.getBeans(SimpleBean.class).iterator().next();
         UnsatisfiedInjectionPoint injectionPoint = new UnsatisfiedInjectionPoint(bean);

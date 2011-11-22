@@ -37,7 +37,7 @@ public class InitializerUnallowedDefinitionTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "3.3.6", id = "da")
+    @SpecAssertion(section = "3.5.2", id = "da")
     public void testInitializerUnallowed() {
     }
 

@@ -38,7 +38,7 @@ public class MultipleDisposeParametersDefinitionTest extends AbstractJSR299Test 
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.3.5", id = "a"), @SpecAssertion(section = "3.3.6", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "a"), @SpecAssertion(section = "3.5.2", id = "ba") })
     public void testMultipleDisposeParameters() {
     }
 

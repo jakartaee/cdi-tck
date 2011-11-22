@@ -49,7 +49,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
     }
 
     @Test(groups = "beanConstruction")
-    @SpecAssertions({ @SpecAssertion(section = "3.7.1", id = "f"), @SpecAssertion(section = "3.7.1", id = "g"),
+    @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "f"), @SpecAssertion(section = "3.8.1", id = "g"),
             @SpecAssertion(section = "2.3.5", id = "d") })
     public void testInjectionOfParametersIntoBeanConstructor() {
         assert getBeans(FishPond.class).size() == 1;
@@ -82,7 +82,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "3.7.1", id = "g")
+    @SpecAssertion(section = "3.8.1", id = "g")
     public void testQualifierTypeAnnotatedConstructor() {
         getInstanceByType(Duck.class);
         assert Duck.constructedCorrectly;
@@ -147,7 +147,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
 
     @Test(groups = "injection")
     @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa"), @SpecAssertion(section = "3.8.1", id = "aa"),
-            @SpecAssertion(section = "2.3.4", id = "a"), @SpecAssertion(section = "3.8", id = "a"),
+            @SpecAssertion(section = "2.3.4", id = "a"), @SpecAssertion(section = "3.9", id = "a"),
             @SpecAssertion(section = "12.1", id = "bca") })
     public void testCreateInjectsFieldsDeclaredInJava() {
         assert getBeans(TunaFarm.class).size() == 1;

@@ -36,7 +36,7 @@ public class NamedNonFieldInjectionPointTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "3.11", id = "b")
+    @SpecAssertion(section = "3.13", id = "b")
     // WELD-427
     public void testNamedInitializerMethodInjectionPointNotAllowed() throws Exception {
     }

@@ -38,8 +38,8 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "resolution" })
-    @SpecAssertions({ @SpecAssertion(section = "5.3.1", id = "ca"), @SpecAssertion(section = "11.3.5", id = "aa"),
-            @SpecAssertion(section = "11.3.5", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "5.3.1", id = "ca"), @SpecAssertion(section = "11.3.6", id = "aa"),
+            @SpecAssertion(section = "11.3.6", id = "b") })
     public void testAmbiguousELNamesResolved() throws Exception {
         // Cod, Plaice and AlaskaPlaice are named "whitefish" - Cod is a not-enabled policy, AlaskaPlaice specializes Plaice
         Set<Bean<?>> beans = getCurrentManager().getBeans("whitefish");
@@ -52,7 +52,7 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "3.11", id = "a")
+    @SpecAssertion(section = "3.13", id = "a")
     public void testFieldNameUsedAsBeanName() {
         assert getInstanceByType(FishingNet.class).isCarpInjected();
     }

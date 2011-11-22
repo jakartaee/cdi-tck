@@ -152,7 +152,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "enterpriseBeans", "lifecycle", "integration" })
-    @SpecAssertion(section = "3.9.1", id = "f")
+    @SpecAssertion(section = "3.10.1", id = "f")
     public void testInitializerMethodsCalledWithCurrentParameterValues() {
         AlteStadt alteStadt = getInstanceByType(AlteStadt.class);
         assert alteStadt != null : "Could not find the AlteStadt bean";

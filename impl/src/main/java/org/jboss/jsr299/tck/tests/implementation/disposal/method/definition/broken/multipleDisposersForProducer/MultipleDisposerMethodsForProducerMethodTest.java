@@ -37,7 +37,7 @@ public class MultipleDisposerMethodsForProducerMethodTest extends AbstractJSR299
     }
 
     @Test
-    @SpecAssertion(section = "3.3.7", id = "ba")
+    @SpecAssertion(section = "3.5.3", id = "ba")
     public void testMultipleDisposerMethodsForProducerMethodNotAllowed() {
     }
 }
