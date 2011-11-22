@@ -115,7 +115,7 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
      * Tests that a disposal method can be bound to a product of a producer field. CDI-145
      */
     @Test(groups = { "disposalMethod" })
-    @SpecAssertion(section = "???", id = "???") // TODO
+    @SpecAssertion(section = "3.5.3", id = "ab")
     public void testDisposalMethodCalledForProducerField() throws Exception {
         SpiderProducer.reset();
         createAndDestroyBean(Calisoga.class, new Scary.Literal());
@@ -127,7 +127,7 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
         assert !SpiderProducer.isScaryBlackWidowDestroyed();
         assert SpiderProducer.isTameBlackWidowDestroyed();
     }
-    
+
     private <T> void createAndDestroyBean(Class<T> type, Annotation... qualifiers) {
         Bean<T> bean = getBeans(type, qualifiers).iterator().next();
         CreationalContext<T> creationalContext = getCurrentManager().createCreationalContext(bean);
