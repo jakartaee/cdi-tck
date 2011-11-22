@@ -25,6 +25,7 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -39,7 +40,8 @@ public class CustomDecoratorTest extends AbstractJSR299Test {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = "8.3", id = "b")
+    @SpecAssertions({ @SpecAssertion(section = "8.3", id = "b"), @SpecAssertion(section = "11.5.6", id = "bc"),
+            @SpecAssertion(section = "11.5.2", id = "dc") })
     public void testCustomImplementationOfDecoratorInterface() {
         assert getInstanceByType(Vehicle.class).start().equals("Bus started and decorated.");
         assert getInstanceByType(Vehicle.class).stop().equals("Bus stopped and decorated.");

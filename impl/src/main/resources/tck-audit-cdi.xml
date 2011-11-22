@@ -6285,8 +6285,9 @@
             <text>|addContext()| registers a custom |Context| object with the container.</text>
         </assertion>
 
-        <assertion id="fb">
+        <assertion id="fb" testable="false">
             <text>A portable extension may take advantage of this event to register beans, interceptors, decorators, observer methods and custom context objects with the container.</text>
+            <note>See d*, e* and f</note>
         </assertion>
 
         <assertion id="g">
