@@ -21,6 +21,7 @@ import java.lang.annotation.Annotation;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.IllegalProductException;
+import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
@@ -207,9 +208,6 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test
       assert daddyLongLegsSpider.getName().equals("produceDaddyLongLegs");
    }
 
-
-
-
    // Review 2.2
    @Test(groups = "producerMethod")
    @SpecAssertions({ 
@@ -225,14 +223,16 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test
       assert wolfSpider.getScope().equals(RequestScoped.class);
    }
 
-   @Test
-   @SpecAssertion(section = "4.2", id = "da")
-   public void testNonStaticProducerMethodInheritedBySpecializingSubclass()
+   @Test(expectedExceptions = UnsatisfiedResolutionException.class)
+   @SpecAssertions({ @SpecAssertion(section = "4.2", id = "da"), @SpecAssertion(section = "4.3", id = "cb") })
+   public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass() 
    {
-      assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {}).size() == 1;
-      assert getInstanceByType(Egg.class,new AnnotationLiteral<Yummy>() {}).getMother().getClass().equals(AndalusianChicken.class);
+       assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
+       }).size() == 0;
+       getInstanceByType(Egg.class, new AnnotationLiteral<Yummy>() {
+       });
    }
-   
+
    @Test
    @SpecAssertions({
       @SpecAssertion(section = "4.2", id = "da"),

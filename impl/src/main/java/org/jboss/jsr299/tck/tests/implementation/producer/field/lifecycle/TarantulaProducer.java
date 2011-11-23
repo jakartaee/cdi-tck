@@ -20,6 +20,6 @@ import javax.enterprise.inject.Produces;
 
 public class TarantulaProducer
 {
-   @Produces @Tame public Tarantula produceTarantula = new DefangedTarantula();
+   @Produces @Tame public Tarantula produceTarantula = new Tarantula();
 
 }

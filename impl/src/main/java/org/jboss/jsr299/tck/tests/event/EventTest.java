@@ -79,16 +79,11 @@ public class EventTest extends AbstractJSR299Test
    }
 
    @Test(groups = { "events" })
-   @SpecAssertions({
-      //@SpecAssertion(section = "4.3.2", id = "d"),
-      @SpecAssertion(section="4.3", id="cb"),
-      @SpecAssertion(section = "5.5.6", id = "baa")
-   })
-   public void testObserverCalledOnMostSpecializedInstance()
-   {
-      Shop.deliveryObservedBy = null;
-      getCurrentManager().fireEvent(new Delivery());
-      assert Shop.deliveryObservedBy.equals(FarmShop.class.getName());
+   @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cc"), @SpecAssertion(section = "5.5.6", id = "baa") })
+   public void testObserverNotCalled() {
+       Shop.deliveryObservedBy = null;
+       getCurrentManager().fireEvent(new Delivery());
+       assert Shop.deliveryObservedBy == null;
    }
 
    @Test(groups = { "events" }, expectedExceptions = IllegalArgumentException.class)
