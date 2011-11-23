@@ -81,7 +81,7 @@ public class FireEventTest extends AbstractJSR299Test {
     @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.10", id = "c")
     public void testTypeVariableEventTypeFails() throws Exception {
-        getCurrentManager().fireEvent(new Foo<String>());
+        getInstanceByType(Bar.class).<Integer> fireWithTypeVariable();
     }
 
     @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
@@ -92,7 +92,7 @@ public class FireEventTest extends AbstractJSR299Test {
         });
     }
 
-    /**
+/**
      * This test verifies that the {@link Event} object capable of firing {@link Item} objects can be injected with the {@link
      * @Any} binding type and that the injected object can be used to fire an event. The functionality is verified by checking
      * that the corresponding observer gets invoked.
