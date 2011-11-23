@@ -80,7 +80,7 @@ public class FireEventTest extends AbstractJSR299Test
    @SpecAssertion(section = "11.3.9", id = "c")
    public void testTypeVariableEventTypeFails() throws Exception
    {
-      getCurrentManager().fireEvent(new Foo<String>());  
+	  getInstanceByType(Bar.class).<Integer> fireWithTypeVariable();  
    }
    
    @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
