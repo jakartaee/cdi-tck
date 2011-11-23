@@ -167,6 +167,20 @@
                </methods>
             </class>
 
+	    <!-- CDITCK-221 -->
+	    <class name="org.jboss.jsr299.tck.tests.context.application.ejb.ApplicationContextSharedTest">
+               <methods>
+               	  <exclude name="testApplicationContextShared" />
+                  <exclude name="testApplicationScopeActiveDuringCallToEjbTimeoutMethod" />
+               </methods>
+             </class>
+	     <class name="org.jboss.jsr299.tck.tests.context.request.ejb.EJBRequestContextTest">
+               <methods>
+                  <exclude name="testRequestScopeActiveDuringCallToEjbTimeoutMethod" />
+                  <exclude name="testRequestScopeDestroyedAfterCallToEjbTimeoutMethod" />
+               </methods>
+             </class>
+
             <!-- Issues in Weld (the RI) -->
 
         </classes>

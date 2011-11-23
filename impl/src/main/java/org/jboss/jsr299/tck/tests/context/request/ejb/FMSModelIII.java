@@ -62,14 +62,6 @@ public class FMSModelIII implements FMS
    @Timeout
    public void timeout(Timer timer)
    {
-      if (timer.getInfo().equals(CLIMB_COMMAND))
-      {
-         climbed = true;
-      }
-      if (timer.getInfo().equals(DESCEND_COMMAND))
-      {
-         descended = true;
-      }
       if (beanManager.getContext(RequestScoped.class).isActive())
       {
          requestScopeActive = true;
@@ -84,6 +76,15 @@ public class FMSModelIII implements FMS
          {
             beanId = simpleRequestBean.get().getId();
          }
+      }
+      // CDITCK-221 - applicationScopeActive, beanId and sameBean have been set and are testable
+      if (timer.getInfo().equals(CLIMB_COMMAND))
+      {
+         climbed = true;
+      }
+      if (timer.getInfo().equals(DESCEND_COMMAND))
+      {
+         descended = true;
       }
    }
 
