@@ -19,6 +19,7 @@ package org.jboss.jsr299.tck.tests.inheritance.specialization.simple;
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Named;
@@ -63,12 +64,10 @@ public class SimpleBeanSpecializationTest extends AbstractJSR299Test {
         assert "farmer".equals(getBeans(LazyFarmer.class, LANDOWNER_LITERAL).iterator().next().getName());
     }
 
-    @Test
-    @SpecAssertions({
-    // @SpecAssertion(section = "4.3.2", id = "ab"), removed from spec
-    @SpecAssertion(section = "4.3", id = "cb") })
-    public void testProducerMethodOnSpecializedBeanCalledOnSpecializingBean() {
-        assert getBeans(Waste.class).size() == 1;
-        assert getInstanceByType(Waste.class).getFrom().equals(Office.class.getName());
+    @Test(expectedExceptions = UnsatisfiedResolutionException.class)
+    @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cb") })
+    public void testProducerMethodOnSpecializedBeanNotCalled() {
+        assert getBeans(Waste.class).size() == 0;
+        getInstanceByType(Waste.class);
     }
 }

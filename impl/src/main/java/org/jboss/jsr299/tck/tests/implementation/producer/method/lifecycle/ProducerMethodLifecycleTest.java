@@ -87,7 +87,7 @@ public class ProducerMethodLifecycleTest extends AbstractJSR299Test {
 
     @Test(groups = { "producerMethod" })
     @SpecAssertions({ @SpecAssertion(section = "5.5.4", id = "c"), @SpecAssertion(section = "4.3", id = "cb") })
-    public void testProducerMethodFromMostSpecializedBeanUsed() {
+    public void testProducerMethodFromSpecializedBeanUsed() {
         SpiderProducer.reset();
         PreferredSpiderProducer.reset();
         Bean<Tarantula> spiderBean = getBeans(Tarantula.class, PET_LITERAL).iterator().next();

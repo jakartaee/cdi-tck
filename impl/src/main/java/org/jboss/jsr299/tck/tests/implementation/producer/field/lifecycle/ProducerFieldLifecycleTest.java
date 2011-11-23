@@ -65,10 +65,8 @@ public class ProducerFieldLifecycleTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { "producerField", "specialization" })
-    @SpecAssertions({
-    // @SpecAssertion(section = "4.3.2", id = "b"), removed
-    @SpecAssertion(section = "4.3", id = "cb") })
-    public void testSpecializedBeanAlwaysUsed() throws Exception {
+    @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cd") })
+    public void testProducerFieldFromSpecializedBeanUsed() throws Exception {
         TarantulaConsumer spiderConsumer = getInstanceByType(TarantulaConsumer.class);
         assert spiderConsumer.getConsumedTarantula() != null;
         assert spiderConsumer.getConsumedTarantula() instanceof DefangedTarantula;
