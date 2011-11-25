@@ -15,7 +15,7 @@ public final class ConfigurationFactory {
     }
 
     /**
-     * @param minimal Minimal configuration includes simple properties only (no SPI instances)
+     * @param deploymentPhase Deployment phase (building test archive) initialization includes deployment specific properties
      * @return current JSR299 configuration
      */
     public static JSR299Configuration get(boolean deploymentPhase) {

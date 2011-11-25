@@ -32,9 +32,6 @@ import org.jboss.jsr299.tck.spi.Managers;
  */
 public class JSR299ConfigurationImpl implements JSR299Configuration {
 
-    public static final String INTEGRATION_TEST_PACKAGE_NAME = "org.jboss.jsr299.tck.integration";
-    public static final String UNIT_TEST_PACKAGE_NAME = "org.jboss.jsr299.tck.unit";
-
     private Beans beans;
     private Contexts<? extends Context> contexts;
     private Managers managers;

@@ -24,9 +24,6 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.enterprise.context.spi.Context;
-
-import org.jboss.jsr299.tck.api.ConfigurationDependent;
 import org.jboss.jsr299.tck.api.JSR299Configuration;
 import org.jboss.jsr299.tck.spi.Beans;
 import org.jboss.jsr299.tck.spi.Contexts;
@@ -63,15 +60,13 @@ public class JSR299PropertiesBasedConfigurationBuilder {
      * @param deploymentPhase Deployment phase (building test archive) initialization includes deployment specific properties
      * @return initialized self
      */
+    @SuppressWarnings("unchecked")
     public JSR299PropertiesBasedConfigurationBuilder init(boolean deploymentPhase) {
 
-        jsr299Configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, true));
-        jsr299Configuration.setManagers(getInstanceValue(Managers.PROPERTY_NAME, Managers.class, true));
-        jsr299Configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, true));
-
-        @SuppressWarnings("unchecked")
-        Contexts<? extends Context> contextsInstance = getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, true);
-        jsr299Configuration.setContexts(contextsInstance);
+        jsr299Configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, !deploymentPhase));
+        jsr299Configuration.setManagers(getInstanceValue(Managers.PROPERTY_NAME, Managers.class, !deploymentPhase));
+        jsr299Configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, !deploymentPhase));
+        jsr299Configuration.setContexts(getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
 
         jsr299Configuration.setLibraryDirectory(getStringValue(JSR299Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null,
                 deploymentPhase));
@@ -209,10 +204,6 @@ public class JSR299PropertiesBasedConfigurationBuilder {
             } catch (IllegalAccessException e) {
                 throw new IllegalStateException("Error instantiating " + clazz + " specified by " + propertyName, e);
             }
-        }
-
-        if (instance instanceof ConfigurationDependent) {
-            ((ConfigurationDependent) instance).setConfiguration(jsr299Configuration);
         }
         return instance;
     }
