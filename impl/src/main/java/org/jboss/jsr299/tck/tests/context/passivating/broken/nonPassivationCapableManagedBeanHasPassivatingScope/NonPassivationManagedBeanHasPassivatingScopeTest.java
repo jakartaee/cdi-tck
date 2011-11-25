@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
  * 
  * @author Nicklas Karlsson
  * @author David Allen
- * 
+ * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class NonPassivationManagedBeanHasPassivatingScopeTest extends AbstractJSR299Test {
@@ -42,7 +42,7 @@ public class NonPassivationManagedBeanHasPassivatingScopeTest extends AbstractJS
     }
 
     @Test(groups = { "contexts", "passivation" })
-    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "aaa"), @SpecAssertion(section = "6.6.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "a"), @SpecAssertion(section = "6.6.3", id = "a") })
     public void testSimpleWebBeanWithNonSerializableImplementationClassFails() {
     }
 }

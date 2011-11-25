@@ -20,6 +20,7 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 
+@SuppressWarnings("serial")
 @Stateful
 @SessionScoped
 public class SessionScopedSessionBean implements SessionScopedSessionInterface {

@@ -21,6 +21,7 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+@SuppressWarnings("serial")
 @SessionScoped
 @Stateful
 @Named("John")

@@ -21,6 +21,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
+@SuppressWarnings("serial")
 @Stateful
 @SessionScoped
 public class Fox implements FoxLocal {

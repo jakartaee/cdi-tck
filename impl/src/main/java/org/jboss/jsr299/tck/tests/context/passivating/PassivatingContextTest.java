@@ -111,7 +111,7 @@ public class PassivatingContextTest extends AbstractJSR299Test {
     }
 
     @Test(groups = { CONTEXTS, PASSIVATION })
-    @SpecAssertion(section = "6.6.4", id = "aaba")
+    @SpecAssertion(section = "6.6.4", id = "aa")
     public void testBeanWithNonSerializableImplementationInjectedIntoTransientFieldOK() {
         Set<Bean<Joensuu>> beans = getBeans(Joensuu.class);
         assert !beans.isEmpty();

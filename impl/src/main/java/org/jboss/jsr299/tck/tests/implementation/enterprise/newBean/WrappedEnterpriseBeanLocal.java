@@ -16,13 +16,15 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.newBean;
 
+import java.io.Serializable;
+
 import javax.ejb.Local;
 import javax.enterprise.inject.New;
 
 import org.jboss.jsr299.tck.literals.NewLiteral;
 
 @Local
-public interface WrappedEnterpriseBeanLocal {
+public interface WrappedEnterpriseBeanLocal extends Serializable {
     void bye();
 
     public static final New NEW = new NewLiteral() {

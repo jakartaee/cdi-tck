@@ -36,7 +36,7 @@ public class PassivatingManagedBeanWithNonPassivatingInjcetedFieldTest extends A
     }
 
     @Test(groups = { "contexts", "passivation" })
-    @SpecAssertion(section = "6.6.4", id = "aaba")
-    public void testSimpleDependentWebBeanWithNonSerializableImplementationInjectedIntoNonTransientFieldOfWebBeanWithPassivatingScopeFails() {
+    @SpecAssertion(section = "6.6.4", id = "aa")
+    public void testBeanWithNonSerializableImplementationInjectedIntoNonTransientFieldOfBeanWithPassivatingScopeFails() {
     }
 }

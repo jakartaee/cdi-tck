@@ -18,11 +18,13 @@ package org.jboss.jsr299.tck.tests.context.passivating.broken.dependentScopedPro
 
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @Stateful
+@SessionScoped
 public class Maarianhamina_Broken implements MaarianHaminaLocal_Broken {
-    @SuppressWarnings("unused")
+
     @Inject
     @British
     Cow cow;

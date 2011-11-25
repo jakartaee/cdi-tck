@@ -19,9 +19,12 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.jsr299.tck.tests.context.passivating.injection;
+package org.jboss.jsr299.tck.tests.context.passivating.validation;
 
-import javax.inject.Inject;
+import static org.testng.Assert.assertEquals;
+
+import java.lang.reflect.Type;
+import java.util.Collections;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -30,11 +33,13 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
+ * Verifies that a decorator that is passivation capable while having non-passivation capable dependencies is allowed provided
+ * it does not decorate a bean declaring passivation scope.
+ * 
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
@@ -43,31 +48,22 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class NonPassivatingInjectionIntoPassivatingBeanTest extends AbstractJSR299Test {
-
-    @Inject
-    @Random
-    private Sheep sheep;
-
-    @Inject
-    @Huge
-    private Sheep hugeSheep;
+public class DecoratorWithNonPassivationCapableDependenciesTest extends AbstractJSR299Test {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(NonPassivatingInjectionIntoPassivatingBeanTest.class)
+                .withTestClass(DecoratorWithNonPassivationCapableDependenciesTest.class)
+                .withClasses(Engine.class, Ferry.class, Vessel.class, VesselDecorator.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(BioInterceptor.class.getName())
-                                .up().createDecorators().clazz(AnimalDecorator.class.getName()).up()).build();
+                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(VesselDecorator.class.getName())
+                                .up()).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "ia"), @SpecAssertion(section = "6.6.4", id = "ib") })
-    public void test() {
-        sheep.run();
-        hugeSheep.run();
-        // we only need to test that this deployment is valid in CDI 1.1
+    @SpecAssertion(section = "6.6.4", id = "l")
+    public void testDeploymentValid() {
+        // it is enough to verify that the deployment passes validation and deploys
+        assertEquals(1, getCurrentManager().resolveDecorators(Collections.<Type> singleton(Ferry.class)).size());
     }
-
 }

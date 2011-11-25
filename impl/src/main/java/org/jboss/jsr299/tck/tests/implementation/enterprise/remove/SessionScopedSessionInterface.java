@@ -16,9 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.remove;
 
+import java.io.Serializable;
+
 import javax.ejb.Local;
 
 @Local
-public interface SessionScopedSessionInterface {
+public interface SessionScopedSessionInterface extends Serializable {
     public void remove();
 }

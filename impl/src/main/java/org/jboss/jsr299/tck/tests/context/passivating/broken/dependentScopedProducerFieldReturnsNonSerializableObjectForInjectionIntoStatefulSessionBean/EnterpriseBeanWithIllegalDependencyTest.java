@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.dependentScopedProducerFieldReturnsNonSerializableObjectForInjectionIntoStatefulSessionBean;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.PASSIVATION;
+
 import javax.enterprise.inject.IllegalProductException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -34,7 +38,7 @@ public class EnterpriseBeanWithIllegalDependencyTest extends AbstractJSR299Test 
         return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanWithIllegalDependencyTest.class).build();
     }
 
-    @Test(groups = { "contexts", "passivation", "integration" })
+    @Test(groups = { CONTEXTS, PASSIVATION, INTEGRATION })
     @SpecAssertion(section = "6.6.4", id = "fbb")
     public void test() {
         try {

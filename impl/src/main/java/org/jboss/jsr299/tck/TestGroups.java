@@ -35,6 +35,8 @@ public final class TestGroups {
 
     public static final String PASSIVATION = "passivation";
 
+    public static final String LIFECYCLE = "lifecycle";
+
     private TestGroups() {
     }
 

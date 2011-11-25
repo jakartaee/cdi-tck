@@ -16,10 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.dependentScopedProducerMethodReturnsNonSerializableObjectForInjectionIntoStatefulSessionBean;
 
+import java.io.Serializable;
+
 import javax.ejb.Local;
 
 @Local
-public interface MaarianHaminaLocal_Broken {
+public interface MaarianHaminaLocal_Broken extends Serializable {
 
     void ping();
 

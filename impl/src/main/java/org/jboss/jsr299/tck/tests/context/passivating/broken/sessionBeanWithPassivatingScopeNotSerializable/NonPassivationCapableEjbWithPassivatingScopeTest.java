@@ -19,22 +19,21 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.jsr299.tck.tests.context.passivating.injection;
-
-import javax.inject.Inject;
+package org.jboss.jsr299.tck.tests.context.passivating.broken.sessionBeanWithPassivatingScopeNotSerializable;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
+ * Verifies that a deployment which contains a non-passivation capable SFSB which is bound to a passivating context, is not
+ * valid.
+ * 
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
@@ -43,31 +42,17 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class NonPassivatingInjectionIntoPassivatingBeanTest extends AbstractJSR299Test {
+public class NonPassivationCapableEjbWithPassivatingScopeTest extends AbstractJSR299Test {
 
-    @Inject
-    @Random
-    private Sheep sheep;
-
-    @Inject
-    @Huge
-    private Sheep hugeSheep;
-
+    @ShouldThrowException(Exception.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-                .withTestClassPackage(NonPassivatingInjectionIntoPassivatingBeanTest.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(BioInterceptor.class.getName())
-                                .up().createDecorators().clazz(AnimalDecorator.class.getName()).up()).build();
+        return new WebArchiveBuilder().withTestClassPackage(NonPassivationCapableEjbWithPassivatingScopeTest.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "ia"), @SpecAssertion(section = "6.6.4", id = "ib") })
-    public void test() {
-        sheep.run();
-        hugeSheep.run();
-        // we only need to test that this deployment is valid in CDI 1.1
+    @SpecAssertion(section = "6.6.4", id = "b")
+    public void testDeployment() {
     }
 
 }

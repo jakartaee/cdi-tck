@@ -16,12 +16,15 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.remove;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.LIFECYCLE;
+
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -29,16 +32,17 @@ import org.testng.annotations.Test;
 /**
  * 
  * @author Nicklas Karlsson
+ * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EnterpriseBeanRemoveMethodTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanRemoveMethodTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseBeanRemoveMethodTest.class).build();
     }
 
-    @Test(groups = { "enterpriseBeans", "removeMethod", "lifecycle" })
+    @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertion(section = "3.2.1", id = "a")
     public void testApplicationMayCallAnyRemoveMethodOnDependentScopedSessionEnterpriseBeans() throws Exception {
         Bean<?> bean = getCurrentManager().getBeans(StateKeeper.class).iterator().next();
@@ -51,7 +55,7 @@ public class EnterpriseBeanRemoveMethodTest extends AbstractJSR299Test {
         assert stateKeeper.isRemoveCalled();
     }
 
-    @Test(groups = { "enterpriseBeans", "removeMethod", "lifecycle" })
+    @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertion(section = "3.2.1", id = "da")
     public void testApplicationMayCallRemoveMethodOnDependentScopedSessionEnterpriseBeansButNoParametersArePassed()
             throws Exception {
@@ -61,7 +65,7 @@ public class EnterpriseBeanRemoveMethodTest extends AbstractJSR299Test {
         assert stateKeeper.isRemoveCalled();
     }
 
-    @Test(groups = { "enterpriseBeans", "removeMethod", "lifecycle" }, expectedExceptions = UnsupportedOperationException.class)
+    @Test(groups = { INTEGRATION, LIFECYCLE }, expectedExceptions = UnsupportedOperationException.class)
     @SpecAssertion(section = "3.2.1", id = "b")
     public void testApplicationCannotCallRemoveMethodOnNonDependentScopedSessionEnterpriseBean() {
         SessionScopedSessionInterface sessionBean = getInstanceByType(SessionScopedSessionInterface.class);

@@ -1,10 +1,4 @@
-<specification 
-    xmlns="http://jboss.com/products/weld/tck/audit" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd" 
-    name="JSR-299: Contexts and Dependency Injection for Java Enterprise Edition" 
-    id="cdi" 
-    version="20091101">
+<specification xmlns="http://jboss.com/products/weld/tck/audit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd" name="JSR-299: Contexts and Dependency Injection for Java Enterprise Edition" id="cdi" version="20091101">
 
     <section id="2" title="Concepts">
 
@@ -2096,25 +2090,25 @@
     </section>
 
     <section id="4.3" title="Specialization">
-        
+
         <assertion id="a" testable="false">
             <text>If two beans both support a certain bean type, and share at least one qualifier, then they are both eligible for injection to any injection point with that declared type and qualifier.</text>
         </assertion>
-        
+
         <group>
             <text>When an enabled bean specializes a second bean, we can be certain that the second bean is never instantiated or called by the container. Even if the second bean defines a producer or observer method, the method will never be called.</text>
-             <assertion id="ca">
+            <assertion id="ca">
                 <text>The second bean is never instantiated.</text>
-             </assertion>
-             <assertion id="cb">
+            </assertion>
+            <assertion id="cb">
                 <text>Producer method on specialized bean is not called.</text>
-             </assertion>        
-             <assertion id="cc">
+            </assertion>
+            <assertion id="cc">
                 <text>Observer method on specialized bean is not called.</text>
-             </assertion>
-             <assertion id="cd">
+            </assertion>
+            <assertion id="cd">
                 <text>Producer field on specialized bean is not used.</text>
-             </assertion>
+            </assertion>
         </group>
 
     </section>
@@ -3679,12 +3673,19 @@
 
     <section id="6.6.4" title="Validation of passivation capable beans and dependencies">
 
-        <assertion id="aaa">
+        <group>
             <text>If a managed bean which declares a passivating scope is not passivation capable, then the container automatically detects the problem and treats it as a deployment problem.</text>
-            <note>Here we check the class, as interceptors and decorators are tested below</note>
-        </assertion>
+            <assertion id="a">
+                <text>Test managed bean.</text>
+                <note>Here we check the class, as interceptors and decorators are tested below</note>
+            </assertion>
+            <assertion id="b">
+                <text>Test stateful session bean.</text>
+                <note>Here we check the class, as interceptors and decorators are tested below</note>
+            </assertion>
+        </group>
 
-        <assertion id="aaba">
+        <assertion id="aa">
             <text>If a managed bean which declares a passivating scope has a non-transient injected field that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>
         </assertion>
 
@@ -3699,7 +3700,7 @@
         </group>
 
         <assertion id="ba">
-            <text>If a stateful session bean has a non-transient injected field that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>
+            <text>If a stateful session bean which declares a passivating scope has a non-transient injected field that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>
         </assertion>
 
         <group>
@@ -3753,7 +3754,7 @@
         </group>
 
         <group>
-            <text>If a bean which declares a passivating scope type, or any stateful session bean, has a decorator or interceptor which is not a passivation capable dependency, the container automatically detects the problem and treats it as a deployment problem.</text>
+            <text>If a bean which declares a passivating scope type has a decorator or interceptor which is not a passivation capable dependency, the container automatically detects the problem and treats it as a deployment problem.</text>
             <assertion id="ha">
                 <text>Test a bean with decorator which is not a passivation capable dependency.</text>
             </assertion>
@@ -3767,17 +3768,30 @@
                 <text>Test a stateful session bean with interceptor which is not a passivation capable dependency.</text>
             </assertion>
         </group>
-        
+
         <assertion id="ia" implied="true">
             <text>Managed bean which declares a passivating scope may have bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency.</text>
-            <note>Not allowed in CDI 1.0</note>
+            <note>This was not allowed in CDI 1.0</note>
         </assertion>
-        
+
         <assertion id="ib" implied="true">
             <text>Stateful session bean which declares a passivating scope may have bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency.</text>
-            <note>Not allowed in CDI 1.0</note>
+            <note>This was not allowed in CDI 1.0</note>
+        </assertion>
+
+        <assertion id="j" implied="true">
+            <text>Stateful session bean which does not declare a passivating scope needn't be passivation capable.</text>
+            <note>This was not allowed in CDI 1.0</note>
+        </assertion>
+
+        <assertion id="k" implied="true">
+            <text>Passivation capable interceptor with non-passivation capable dependencies is allowed unless it intercepts a bean declaring passivation scope.</text>
         </assertion>
         
+        <assertion id="l" implied="true">
+            <text>Passivation capable decorator with non-passivation capable dependencies is allowed unless it decorates a bean declaring passivation scope.</text>
+        </assertion>
+
     </section>
 
     <section id="6.7" title="Context management for built-in scopes">
