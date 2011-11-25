@@ -3767,6 +3767,17 @@
                 <text>Test a stateful session bean with interceptor which is not a passivation capable dependency.</text>
             </assertion>
         </group>
+        
+        <assertion id="ia" implied="true">
+            <text>Managed bean which declares a passivating scope may have bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency.</text>
+            <note>Not allowed in CDI 1.0</note>
+        </assertion>
+        
+        <assertion id="ib" implied="true">
+            <text>Stateful session bean which declares a passivating scope may have bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency.</text>
+            <note>Not allowed in CDI 1.0</note>
+        </assertion>
+        
     </section>
 
     <section id="6.7" title="Context management for built-in scopes">

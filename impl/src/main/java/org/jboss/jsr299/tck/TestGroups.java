@@ -33,6 +33,8 @@ public final class TestGroups {
      */
     public static final String CONTEXTS = "contexts";
 
+    public static final String PASSIVATION = "passivation";
+
     private TestGroups() {
     }
 
