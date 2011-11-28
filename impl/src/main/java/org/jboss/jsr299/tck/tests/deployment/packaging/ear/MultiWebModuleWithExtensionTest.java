@@ -25,7 +25,6 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.application6.ApplicationDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -60,15 +59,11 @@ public class MultiWebModuleWithExtensionTest extends AbstractJSR299Test {
         enterpriseArchive.setApplicationXML(applicationXml);
 
         WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("foo.war").withClasses(FooWebBean.class)
-                .withBeanLibrary("foo.jar", FooExtension.class, FooBean.class).build();
-        fooArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
-                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
+                .withBeanLibrary("foo.jar", FooExtension.class, FooBean.class).withDefaultEjbModuleDependency().build();
         enterpriseArchive.addAsModule(fooArchive);
 
         WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName("bar.war").withClasses(BarWebBean.class)
-                .withBeanLibrary("bar.jar", BarExtension.class, BarBean.class).build();
-        fooArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
-                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
+                .withBeanLibrary("bar.jar", BarExtension.class, BarBean.class).withDefaultEjbModuleDependency().build();
         enterpriseArchive.addAsModule(barArchive);
 
         return enterpriseArchive;

@@ -22,12 +22,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.application6.ApplicationDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -35,6 +31,9 @@ import org.testng.annotations.Test;
 
 /**
  * This test verifies that a CDI extension can be used with a web application bundled inside of an enterprise archive (.ear)
+ * 
+ * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
+ * classloading requirements)!
  * 
  * <p>
  * This test was originally part of Seam Compatibility project.
@@ -52,15 +51,15 @@ public class SingleWebModuleWithExtensionTest extends AbstractJSR299Test {
     @Deployment
     public static EnterpriseArchive createTestArchive() {
 
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
-                .withTestClass(SingleWebModuleWithExtensionTest.class).noDefaultWebModule().build();
-        StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class).applicationName("Test")
-                .createModule().getOrCreateWeb().webUri("test.war").contextRoot("/test").up().up().exportAsString());
-        enterpriseArchive.setApplicationXML(applicationXml);
-        WebArchive webArchive = new WebArchiveBuilder().notTestArchive().withName("test.war").withClasses(FooWebBean.class)
-                .withBeanLibrary("test.jar", FooExtension.class, FooBean.class).build();
-        webArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
-                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
+                .withTestClassDefinition(SingleWebModuleWithExtensionTest.class).build();
+        // StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class).applicationName("Test")
+        // .createModule().getOrCreateWeb().webUri("test.war").contextRoot("/test").up().up().exportAsString());
+        // enterpriseArchive.setApplicationXML(applicationXml);
+
+        WebArchive webArchive = new WebArchiveBuilder().notTestArchive().withName("test.war")
+                .withClasses(SingleWebModuleWithExtensionTest.class, FooWebBean.class)
+                .withBeanLibrary("test.jar", FooExtension.class, FooBean.class).withDefaultEjbModuleDependency().build();
         enterpriseArchive.addAsModule(webArchive);
         return enterpriseArchive;
     }

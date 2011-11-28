@@ -25,10 +25,10 @@ import javax.inject.Inject;
 public class BarWebBean {
 
     @Inject
-    FooBean fooBean;
+    BarBean barBean;
 
     public void ping() {
-        fooBean.getExtension();
+        barBean.getExtension();
     }
 
 }
