@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.clientProxy;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.io.IOException;
 
 import javax.enterprise.context.ContextNotActiveException;
@@ -64,7 +66,7 @@ public class ClientProxyTest extends AbstractJSR299Test {
         assert tuna.getState().equals("tuned");
     }
 
-    @Test(expectedExceptions = { ContextNotActiveException.class, IllegalStateException.class })
+    @Test(groups = INTEGRATION, expectedExceptions = { ContextNotActiveException.class, IllegalStateException.class })
     @SpecAssertions({ @SpecAssertion(section = "5.4.2", id = "ab"), @SpecAssertion(section = "6.5.4", id = "a") })
     public void testInactiveScope() throws Exception {
         assert getCurrentConfiguration().getContexts().getRequestContext().isActive();

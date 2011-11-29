@@ -17,6 +17,7 @@
 package org.jboss.jsr299.tck.tests.lookup.injection;
 
 import static org.jboss.jsr299.tck.TestGroups.INJECTION;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -59,7 +60,7 @@ public class InjectionTest extends AbstractJSR299Test {
         assert wolfPack.getAlphaWolf() != null;
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "4.2", id = "aa"), @SpecAssertion(section = "5.5.2", id = "bg"),
             @SpecAssertion(section = "5.5.2", id = "bh") })
     public void testFieldDeclaredInSuperclassInjected() throws Exception {

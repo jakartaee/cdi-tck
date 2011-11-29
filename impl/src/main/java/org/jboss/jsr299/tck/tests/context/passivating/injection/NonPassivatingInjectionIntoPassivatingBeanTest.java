@@ -21,6 +21,8 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.injection;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,6 +44,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class NonPassivatingInjectionIntoPassivatingBeanTest extends AbstractJSR299Test {
 

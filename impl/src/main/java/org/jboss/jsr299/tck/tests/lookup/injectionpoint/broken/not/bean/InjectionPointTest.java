@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint.broken.not.bean;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.SERVLET;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -25,6 +28,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InjectionPointTest extends AbstractJSR299Test {
 
@@ -34,7 +38,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(InjectionPointTest.class).withWebXml("web.xml").build();
     }
 
-    @Test
+    @Test(groups = SERVLET)
     @SpecAssertion(section = "5.5.7", id = "ga")
     public void testDefinitionErrorDetected() {
     }

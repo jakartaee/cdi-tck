@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.clientProxy.incontainer;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -29,6 +31,7 @@ import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ClientProxyTest extends AbstractJSR299Test {
 

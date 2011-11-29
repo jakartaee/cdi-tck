@@ -21,6 +21,8 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.interceptors.custom;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import javax.interceptor.Interceptor;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,6 +47,7 @@ import org.testng.annotations.Test;
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class CustomInterceptorRegistrationTest extends AbstractJSR299Test {
 
@@ -53,7 +56,6 @@ public class CustomInterceptorRegistrationTest extends AbstractJSR299Test {
 
         return new WebArchiveBuilder()
                 .withTestClassPackage(CustomInterceptorRegistrationTest.class)
-                .withExcludedClasses(CustomInterceptorInvocationTest.class)
                 .withExtension(CustomInterceptorExtension.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(FooInterceptor.class.getName())

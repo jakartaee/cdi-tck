@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.producer;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -41,6 +42,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerTest extends AbstractJSR299Test {
 

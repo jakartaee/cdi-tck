@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.lifecycle;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -44,6 +45,7 @@ import org.testng.annotations.Test;
  * 
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ExtensionLifecycleTest extends AbstractJSR299Test {
 

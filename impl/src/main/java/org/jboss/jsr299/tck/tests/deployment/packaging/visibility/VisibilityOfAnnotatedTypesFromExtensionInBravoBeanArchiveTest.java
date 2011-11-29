@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.packaging.visibility;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -41,6 +43,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15735">GLASSFISH-15735</a> (unresolved)
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class VisibilityOfAnnotatedTypesFromExtensionInBravoBeanArchiveTest extends AbstractJSR299Test {
 

@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -42,7 +44,7 @@ public class LibraryMissingBeansXmlTest extends AbstractJSR299Test {
                 .withLibrary(Bar.class).build();
     }
 
-    @Test(groups = {})
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbc") })
     public void test() {
         assert getCurrentManager().getBeans(Foo.class).size() == 1;
