@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.resolve.nonbinding;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import java.util.Set;
 
 import javax.enterprise.event.Observes;
@@ -48,7 +50,7 @@ public class NonBindingTypesWhenResolvingTest extends AbstractJSR299Test {
         }
     }
 
-    @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.12", id = "e")
     public void testNonBindingTypeAnnotationWhenResolvingFails() {
         Set<ObserverMethod<? super AnEventType>> resolvedObservers = getCurrentManager().resolveObserverMethods(

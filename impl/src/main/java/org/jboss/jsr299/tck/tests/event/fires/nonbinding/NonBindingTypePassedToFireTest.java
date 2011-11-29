@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.fires.nonbinding;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -32,7 +34,7 @@ public class NonBindingTypePassedToFireTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(NonBindingTypePassedToFireTest.class).build();
     }
 
-    @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.10", id = "e")
     public void testExceptionThrownIfNonBindingTypePassedToFire() throws Exception {
         OwlFinch_Broken bean = getInstanceByType(OwlFinch_Broken.class);

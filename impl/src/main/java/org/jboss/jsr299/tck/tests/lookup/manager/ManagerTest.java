@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.manager;
 
+import static org.jboss.jsr299.tck.TestGroups.INJECTION;
+import static org.jboss.jsr299.tck.TestGroups.MANAGER;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -41,7 +44,7 @@ public class ManagerTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ManagerTest.class).build();
     }
 
-    @Test(groups = { "manager", "injection", "deployment" })
+    @Test(groups = { MANAGER, INJECTION })
     @SpecAssertion(section = "11.3", id = "c")
     public void testInjectingManager() {
         FishFarmOffice fishFarmOffice = getInstanceByType(FishFarmOffice.class);

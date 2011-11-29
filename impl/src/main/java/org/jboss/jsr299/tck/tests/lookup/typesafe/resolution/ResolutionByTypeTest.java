@@ -16,6 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
+import static org.jboss.jsr299.tck.TestGroups.INJECTION;
+import static org.jboss.jsr299.tck.TestGroups.POLICY;
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
+import static org.jboss.jsr299.tck.TestGroups.RESOLUTION;
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -59,7 +65,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ResolutionByTypeTest.class).build();
     }
 
-    @Test(groups = "resolution")
+    @Test(groups = RESOLUTION)
     @SpecAssertion(section = "5.2", id = "lb")
     public void testDefaultBindingTypeAssumed() throws Exception {
         Set<Bean<Tuna>> possibleTargets = getBeans(Tuna.class);
@@ -67,7 +73,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test {
         assert possibleTargets.iterator().next().getTypes().contains(Tuna.class);
     }
 
-    @Test(groups = "resolution")
+    @Test(groups = RESOLUTION)
     @SpecAssertion(section = "5.2", id = "hc")
     public void testResolveByType() throws Exception {
 
@@ -93,7 +99,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test {
         assert classes.contains(Haddock.class);
     }
 
-    @Test(groups = "injection")
+    @Test(groups = INJECTION)
     @SpecAssertions({ @SpecAssertion(section = "2.3.4", id = "b"), @SpecAssertion(section = "5.2", id = "lc"),
             @SpecAssertion(section = "2.3.3", id = "d"), @SpecAssertion(section = "5.2", id = "la"),
             @SpecAssertion(section = "5.2.6", id = "a"), @SpecAssertion(section = "5.2.6", id = "d") })
@@ -119,7 +125,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test {
 
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertions({ @SpecAssertion(section = "5.2", id = "ka") })
     public void testResolveByTypeWithTypeParameter() throws Exception {
         assert getBeans(new TypeLiteral<Farmer<ScottishFish>>() {
@@ -128,13 +134,13 @@ public class ResolutionByTypeTest extends AbstractJSR299Test {
         }).iterator().next().getTypes().contains(ScottishFishFarmer.class);
     }
 
-    @Test(groups = { "resolution", "producerMethod" })
+    @Test(groups = { RESOLUTION, PRODUCER_METHOD })
     @SpecAssertions({ @SpecAssertion(section = "5.2", id = "j"), @SpecAssertion(section = "2.2.1", id = "i") })
     public void testResolveByTypeWithArray() throws Exception {
         assert getBeans(Spider[].class).size() == 1;
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertions({ @SpecAssertion(section = "5.2", id = "i"), @SpecAssertion(section = "5.2.4", id = "aa"),
             @SpecAssertion(section = "5.2.4", id = "ab"), @SpecAssertion(section = "5.2.6", id = "b"),
             @SpecAssertion(section = "5.2.6", id = "c") })
@@ -151,7 +157,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test {
         assert NumberProducer.max.equals(max);
     }
 
-    @Test(groups = "resolution")
+    @Test(groups = RESOLUTION)
     @SpecAssertions({ @SpecAssertion(section = "5.2", id = "ld"), @SpecAssertion(section = "5.2.5", id = "b") })
     public void testResolveByTypeWithNonBindingMembers() throws Exception {
 
@@ -177,7 +183,7 @@ public class ResolutionByTypeTest extends AbstractJSR299Test {
         assert !classes.contains(Sole.class);
     }
 
-    @Test(groups = { "policy", "rewrite" })
+    @Test(groups = { POLICY, REWRITE })
     // TODO Needs to be rewritten to use injection PLM
     @SpecAssertion(section = "5.1.4", id = "i")
     public void testPolicyNotAvailableInNonDeploymentArchive() throws Exception {

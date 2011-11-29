@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer.beanNotManaged;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -38,7 +40,7 @@ public class ObserverMethodOnIncorrectBeanTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodOnIncorrectBeanTest.class).build();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "10.4", id = "aa")
     public void testObserverMethodNotOnManagedOrSessionBeanFails() {
         assert getCurrentManager().resolveObserverMethods(new String()).isEmpty();

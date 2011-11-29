@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.inject.Any;
@@ -25,8 +27,8 @@ import javax.inject.Named;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -39,15 +41,11 @@ public class EnterpriseBeanSpecializationTest extends AbstractJSR299Test {
     };
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanSpecializationTest.class)
-        // Originally with ejb-jar.xml however this resource does not exist in
-        // /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/inheritance/specialization/enterprise
-        // .withEjbJarXml("ejb-jar.xml")
-                .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseBeanSpecializationTest.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "j"), @SpecAssertion(section = "3.2.4", id = "aa") })
     public void testSpecializingBeanHasBindingsOfSpecializedAndSpecializingBean() {
         assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).size() == 1;
@@ -59,7 +57,7 @@ public class EnterpriseBeanSpecializationTest extends AbstractJSR299Test {
                 .getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class);
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "k") })
     public void testSpecializingBeanHasNameOfSpecializedBean() {
         assert getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).size() == 1;

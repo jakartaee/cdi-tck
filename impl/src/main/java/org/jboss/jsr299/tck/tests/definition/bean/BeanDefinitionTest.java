@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.definition.bean;
 
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
+
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
@@ -74,7 +76,7 @@ public class BeanDefinitionTest extends AbstractJSR299Test {
         assert getBeans(RedSnapper.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "2.2.1", id = "j"), @SpecAssertion(section = "5.2.4", id = "ba"),
             @SpecAssertion(section = "11.1", id = "bd") })
     public void testIsNullable() throws Exception {

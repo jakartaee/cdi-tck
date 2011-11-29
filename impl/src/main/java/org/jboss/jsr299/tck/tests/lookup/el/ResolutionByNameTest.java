@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.el;
 
+import static org.jboss.jsr299.tck.TestGroups.EL;
+import static org.jboss.jsr299.tck.TestGroups.LIFECYCLE;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.inject.spi.Bean;
@@ -45,7 +48,7 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
         assert getInstanceByType(Counter.class).getCount() == 1;
     }
 
-    @Test(groups = "beanLifecycle")
+    @Test(groups = LIFECYCLE)
     @SpecAssertions({ @SpecAssertion(section = "6.5.2", id = "a"), @SpecAssertion(section = "6.5.2", id = "b") })
     public void testContextCreatesNewInstanceForInjection() {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
@@ -61,14 +64,14 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
         assert timestamp == tuna.getTimestamp();
     }
 
-    @Test(groups = { "el" })
+    @Test(groups = { EL })
     @SpecAssertion(section = "12.5", id = "c")
     public void testUnresolvedNameReturnsNull() {
         assert getCurrentManager().getELResolver().getValue(
                 getCurrentConfiguration().getEl().createELContext(getCurrentManager()), null, "nonExistingTuna") == null;
     }
 
-    @Test(groups = "el")
+    @Test(groups = EL)
     @SpecAssertions({ @SpecAssertion(section = "12.5", id = "d"), @SpecAssertion(section = "2.5", id = "a") })
     public void testELResolverReturnsContextualInstance() {
         Salmon salmon = getInstanceByType(Salmon.class);

@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Set;
@@ -60,7 +61,7 @@ public class SpecializedProducerMethodInjectionNotAvailableTest extends Abstract
     @Inject
     Bar bar;
 
-    @Test(groups = "javaee-full-only")
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = "5.1.4", id = "n")
     public void testManagedBeanInjection() throws Exception {
         assertEquals(bar.ping(), 1);

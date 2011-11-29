@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.checkedException;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import javax.enterprise.event.ObserverException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -40,7 +42,7 @@ public class CheckedExceptionWrappedTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(CheckedExceptionWrappedTest.class).build();
     }
 
-    @Test(groups = { "events" }, expectedExceptions = { ObserverException.class })
+    @Test(groups = { EVENTS }, expectedExceptions = { ObserverException.class })
     @SpecAssertion(section = "10.5", id = "cd")
     public void testNonTransactionalObserverThrowsCheckedExceptionIsWrappedAndRethrown() {
         getCurrentManager().fireEvent(new Integer(1));

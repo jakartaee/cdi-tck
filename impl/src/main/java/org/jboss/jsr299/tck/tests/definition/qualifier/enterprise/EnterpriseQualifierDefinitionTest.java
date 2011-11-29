@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier.enterprise;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
@@ -24,8 +26,8 @@ import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -39,12 +41,12 @@ import org.testng.annotations.Test;
 public class EnterpriseQualifierDefinitionTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseQualifierDefinitionTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseQualifierDefinitionTest.class).build();
     }
 
     @SuppressWarnings("unchecked")
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "4.1", id = "al")
     public void testQualifierDeclaredInheritedIsInherited() throws Exception {
         Set<? extends Annotation> qualifiers = getBeans(BorderCollieLocal.class, new HairyQualifier(false)).iterator().next()
@@ -52,13 +54,13 @@ public class EnterpriseQualifierDefinitionTest extends AbstractJSR299Test {
         assert annotationSetMatches(qualifiers, Any.class, Hairy.class);
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "4.1", id = "ala")
     public void testQualifierNotDeclaredInheritedIsNotInherited() throws Exception {
         assert getBeans(TameSkinnyHairlessCatLocal.class, new SkinnyQualifier()).size() == 0;
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "4.1", id = "ap")
     public void testQualifierDeclaredInheritedIsIndirectlyInherited() {
         Set<? extends Annotation> qualifiers = getBeans(EnglishBorderCollieLocal.class, new HairyQualifier(false)).iterator()
@@ -66,7 +68,7 @@ public class EnterpriseQualifierDefinitionTest extends AbstractJSR299Test {
         assert annotationSetMatches(qualifiers, Any.class, Hairy.class);
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "4.1", id = "apa")
     public void testQualifierNotDeclaredInheritedIsNotIndirectlyInherited() {
         Set<Bean<FamousCatLocal>> beans = getBeans(FamousCatLocal.class, new SkinnyQualifier());

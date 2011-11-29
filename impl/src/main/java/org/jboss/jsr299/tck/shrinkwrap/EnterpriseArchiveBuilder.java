@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.shrinkwrap;
 
+import org.jboss.jsr299.tck.TestGroups;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
@@ -47,12 +48,15 @@ import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
  * </p>
  * <h2>Use case</h2>
  * <p>
- * Use enterprise in TCK tests archive only while:
+ * Use enterprise archive in TCK tests only while:
  * </p>
  * <ul>
  * <li>explicitly testing EAR structure</li>
  * <li>testing Java EE full profile (e.g. EJB timer service, MDBs)</li>
  * </ul>
+ * <p>
+ * Tests that use {@link EnterpriseArchiveBuilder} must belong to {@link TestGroups#JAVAEE_FULL} group.
+ * </p>
  * 
  * @author Martin Kouba
  */

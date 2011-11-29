@@ -16,10 +16,13 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.initializer;
 
+import static org.jboss.jsr299.tck.TestGroups.INITIALIZER_METHOD;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -29,11 +32,12 @@ import org.testng.annotations.Test;
 public class EjbInitializerMethodTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EjbInitializerMethodTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EjbInitializerMethodTest.class)
+                .withExcludedClass(InitializerMethodTest.class).build();
     }
 
-    @Test(groups = { "initializerMethod", "ejb3" })
+    @Test(groups = { INITIALIZER_METHOD, INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = "3.10", id = "e") })
     // This DOES NOT TEST initializer methods on Java EE component classes PLM
     public void testInitializerMethodNotABusinessMethod() {

@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.fires;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -55,7 +57,7 @@ public class FireEventTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(FireEventTest.class).build();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({
             // these two assertions combine to create a logical, testable assertion
             @SpecAssertion(section = "11.3.10", id = "a"), @SpecAssertion(section = "11.3.10", id = "b") })
@@ -63,7 +65,7 @@ public class FireEventTest extends AbstractJSR299Test {
         assert BeanManager.class.getDeclaredMethod(BEAN_MANAGER_FIRE_EVENT_METHOD_NAME, Object.class, Annotation[].class) != null;
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "11.3.10", id = "a")
     public void testBeanManagerFireEvent() {
         Billing billing = getInstanceByType(Billing.class);
@@ -78,13 +80,13 @@ public class FireEventTest extends AbstractJSR299Test {
         assert billing.getCharge() == 5.00d;
     }
 
-    @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.10", id = "c")
     public void testTypeVariableEventTypeFails() throws Exception {
         getInstanceByType(Bar.class).<Integer> fireWithTypeVariable();
     }
 
-    @Test(groups = { "events" }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.10", id = "d")
     public void testDuplicateBindingsToFireEventFails() throws Exception {
         getCurrentManager().fireEvent(new Object(), new AnnotationLiteral<Lifted>() {
@@ -97,7 +99,7 @@ public class FireEventTest extends AbstractJSR299Test {
      * @Any} binding type and that the injected object can be used to fire an event. The functionality is verified by checking
      * that the corresponding observer gets invoked.
      */
-    @Test(groups = "events")
+    @Test(groups = EVENTS)
     @SpecAssertion(section = "10.3", id = "a")
     public void testInjectedAnyEventCanFireEvent() {
         Billing billing = getInstanceByType(Billing.class);
@@ -127,7 +129,7 @@ public class FireEventTest extends AbstractJSR299Test {
      * object's type is the same as the the parameterized type on the event field.
      **/
     @SpecAssertions({ @SpecAssertion(section = "10.3", id = "b"), @SpecAssertion(section = "10.3.1", id = "cb") })
-    @Test(groups = "events")
+    @Test(groups = EVENTS)
     public void testInjectedEventAcceptsEventObject() throws SecurityException, NoSuchFieldException, NoSuchMethodException {
         Billing billing = getInstanceByType(Billing.class);
         billing.reset();
@@ -175,7 +177,7 @@ public class FireEventTest extends AbstractJSR299Test {
      * properly injected and that this object can be used to fire an event. The functionality is verified by checking that the
      * cooresponding observer gets invoked.
      */
-    @Test(groups = "events")
+    @Test(groups = EVENTS)
     @SpecAssertions({ @SpecAssertion(section = "10.3", id = "c"), @SpecAssertion(section = "10.3.1", id = "cb") })
     public void testInjectedEventCanHaveBindings() {
         Billing billing = getInstanceByType(Billing.class);
@@ -208,7 +210,7 @@ public class FireEventTest extends AbstractJSR299Test {
      * This test verifies that binding types can be specified dynamically when firing an event using {@link Event#fire()} by
      * first using the {@link Event#select()} method to retrieve an Event object with associated binding types.
      */
-    @Test(groups = "events")
+    @Test(groups = EVENTS)
     @SpecAssertion(section = "10.3", id = "d")
     public void testInjectedEventCanSpecifyBindingsDynamically() {
         Billing billing = getInstanceByType(Billing.class);
@@ -237,7 +239,7 @@ public class FireEventTest extends AbstractJSR299Test {
         assert housekeeping.getItemsTainted().contains(water);
     }
 
-    @Test(groups = "events")
+    @Test(groups = EVENTS)
     @SpecAssertion(section = "10.3.1", id = "ca")
     public void testEventProvidesMethodForFiringEventsWithCombinationOfTypeAndBindings() {
         DoggiePoints points = getInstanceByType(DoggiePoints.class);
@@ -251,7 +253,7 @@ public class FireEventTest extends AbstractJSR299Test {
         assert points.getNumPraiseReceived() == 1;
     }
 
-    @Test(groups = "events")
+    @Test(groups = EVENTS)
     @SpecAssertion(section = "10.3.1", id = "eda")
     public void testEventSelectedFiresAndObserversNotified() {
         Housekeeping houseKeeping = getInstanceByType(Housekeeping.class);
@@ -272,7 +274,7 @@ public class FireEventTest extends AbstractJSR299Test {
         assert houseKeeping.getItemsMissing().iterator().next() == crackers;
     }
 
-    @Test(groups = { "events" }, expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = { EVENTS }, expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "10.3.1", id = "f")
     public <T> void testEventFireThrowsExceptionIfEventObjectContainsTypeVariable() {
         MiniBar miniBar = getInstanceByType(MiniBar.class);

@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.context.conversation;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -33,6 +36,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Nicklas Karlsson
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class LongRunningConversationPropagatedByFacesContextTest extends AbstractConversationTest {
 
@@ -49,7 +53,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "l"), @SpecAssertion(section = "2.4.1", id = "ba") })
     public void testConversationPropagated() throws Exception {
         WebClient webClient = new WebClient();
@@ -67,7 +71,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
         assert stormStrength.getValueAttribute().equals(STORM_STRENGTH);
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "m")
     public void testConversationPropagatedOverRedirect() throws Exception {
         WebClient webClient = new WebClient();

@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.manager.jndi;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.jsr299.tck.TestGroups.MANAGER;
+
 import javax.enterprise.inject.spi.BeanManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -35,7 +38,7 @@ public class ManagerTestEar extends AbstractJSR299Test {
                 .build();
     }
 
-    @Test(groups = { "manager", "ejb3", "integration" })
+    @Test(groups = { JAVAEE_FULL, MANAGER })
     @SpecAssertion(section = "11.3.1", id = "d")
     public void testManagerLookupInJndi() throws Exception {
         BeanManager beanManager = getInstanceByType(JndiBeanManagerInjected.class).getManagerFromJndi();

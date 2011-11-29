@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.definition.constructorHasObservesParameter;
 
+import static org.jboss.jsr299.tck.TestGroups.OBSERVER_METHOD;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +36,7 @@ public class ConstructorHasObservesParameterTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ConstructorHasObservesParameterTest.class).build();
     }
 
-    @Test(groups = { "observerMethod" })
+    @Test(groups = { OBSERVER_METHOD })
     @SpecAssertion(section = "3.8.1", id = "ea")
     public void testConstructorHasObservesParameter() {
     }

@@ -16,18 +16,21 @@
  */
 package org.jboss.jsr299.tck.tests.event;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.enterprise.event.Observes;
 
 public class Shop {
 
-    public static String deliveryObservedBy = null;
+    public static Set<String> observers = new HashSet<String>();
 
     public String getClassName() {
         return Shop.class.getName();
     }
 
     public void observeDelivery(@Observes Delivery delivery) {
-        deliveryObservedBy = getClassName();
+        observers.add(getClassName());
     }
 
 }

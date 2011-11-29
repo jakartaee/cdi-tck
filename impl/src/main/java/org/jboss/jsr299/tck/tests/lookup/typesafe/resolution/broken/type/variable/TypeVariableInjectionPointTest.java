@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.broken.type.variable;
 
+import static org.jboss.jsr299.tck.TestGroups.RESOLUTION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +36,7 @@ public class TypeVariableInjectionPointTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(TypeVariableInjectionPointTest.class).build();
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertion(section = "5.2.2", id = "c")
     public void testTypeVariableInjectionPoint() {
     }

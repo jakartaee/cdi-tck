@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.packaging.ear;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -67,7 +69,7 @@ public class SingleWebModuleWithExtensionTest extends AbstractJSR299Test {
     @Inject
     FooWebBean fooWebBean;
 
-    @Test(groups = { "javaee-full-only" })
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbc"), @SpecAssertion(section = "12.1", id = "bbe") })
     public void testSingleWebModuleWithExtension() {
         fooWebBean.ping();

@@ -16,11 +16,13 @@
  */
 package org.jboss.jsr299.tck.tests.interceptors.definition.broken.finalClassInterceptor;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -35,14 +37,14 @@ public class FinalMethodMethodLevelInterceptorTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder()
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder()
                 .withTestClassDefinition(FinalMethodMethodLevelInterceptorTest.class)
                 .withClasses(FooBinding.class, MissileInterceptor.class, FinalMethodMethodLevelMissile.class,
                         FinalMethodMethodLevelMissileLocal.class).withBeansXml("beans.xml").build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "9.3", id = "db")
     public void testFinalMethodWithMethodLevelInterceptor() throws Exception {
     }

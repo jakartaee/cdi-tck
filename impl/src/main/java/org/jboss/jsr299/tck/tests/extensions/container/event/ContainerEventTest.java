@@ -18,6 +18,7 @@ package org.jboss.jsr299.tck.tests.extensions.container.event;
 
 import static javax.enterprise.inject.spi.SessionBeanType.STATEFUL;
 import static javax.enterprise.inject.spi.SessionBeanType.STATELESS;
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
@@ -39,6 +40,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractJSR299Test {
 

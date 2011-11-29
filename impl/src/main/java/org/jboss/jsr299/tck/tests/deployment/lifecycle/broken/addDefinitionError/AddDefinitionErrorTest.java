@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.addDefinitionError;
 
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -44,7 +46,7 @@ public class AddDefinitionErrorTest extends AbstractJSR299Test {
         .withTestClassPackage(AddDefinitionErrorTest.class).withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-    @Test(groups = { "rewrite" })
+    @Test(groups = { REWRITE })
     @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "ca"), @SpecAssertion(section = "12.2", id = "c") })
     public void testObserverDefinitionErrorTreatedAsDefinitionError() {
     }

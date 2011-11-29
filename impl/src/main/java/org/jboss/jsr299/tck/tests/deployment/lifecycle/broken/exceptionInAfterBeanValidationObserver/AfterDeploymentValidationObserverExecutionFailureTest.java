@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.exceptionInAfterBeanValidationObserver;
 
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -43,7 +45,7 @@ public class AfterDeploymentValidationObserverExecutionFailureTest extends Abstr
                 .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-    @Test(groups = { "rewrite" })
+    @Test(groups = { REWRITE })
     @SpecAssertion(section = "11.5.3", id = "c")
     public void testObserverFailureTreatedAsDeploymentError() {
     }

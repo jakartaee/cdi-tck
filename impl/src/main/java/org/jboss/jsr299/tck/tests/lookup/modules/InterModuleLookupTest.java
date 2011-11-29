@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -52,7 +54,7 @@ public class InterModuleLookupTest extends AbstractJSR299Test {
     @Inject
     WebFooLookup fooLookup;
 
-    @Test(groups = "javaee-full-only")
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = "5.1", id = "ab")
     public void testEnabledManagedBeanAvailableForInjection() throws Exception {
         assert fooLookup.ping() == 0;

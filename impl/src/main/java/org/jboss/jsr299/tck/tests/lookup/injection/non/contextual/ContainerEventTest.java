@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.util.EventListener;
 
 import javax.enterprise.inject.Any;
@@ -49,6 +51,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * 
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractJSR299Test {
 

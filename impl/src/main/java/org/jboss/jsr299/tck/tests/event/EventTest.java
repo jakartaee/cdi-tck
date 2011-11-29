@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.event;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+import static org.jboss.jsr299.tck.TestGroups.INHERITANCE;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.util.ArrayList;
 
 import javax.enterprise.context.spi.Context;
@@ -33,10 +37,14 @@ import org.testng.annotations.Test;
 /**
  * Event bus tests
  * 
+ * TODO This test was temporarily marked as integration one because of problems with <b>arquillian-weld-ee-embedded-1.1</b> in
+ * {@link #testStaticObserverMethodInvoked()}.
+ * 
  * @author Nicklas Karlsson
  * @author David Allen
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EventTest extends AbstractJSR299Test {
 
@@ -45,7 +53,7 @@ public class EventTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(EventTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "i"), @SpecAssertion(section = "5.5.6", id = "c"),
             @SpecAssertion(section = "2.3.5", id = "ca"), @SpecAssertion(section = "3.11", id = "a") })
     public void testObserverMethodReceivesInjectionsOnNonObservesParameters() {
@@ -56,7 +64,7 @@ public class EventTest extends AbstractJSR299Test {
      * FIXME the spec doesn't follow this exactly because technically it isn't supposed to use the bean resolution algorithm to
      * obtain the instance, which it does.
      */
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "10.4", id = "c"), @SpecAssertion(section = "5.5.6", id = "a") })
     public void testStaticObserverMethodInvoked() {
         Context requestContext = getCurrentConfiguration().getContexts().getRequestContext();
@@ -71,15 +79,16 @@ public class EventTest extends AbstractJSR299Test {
         }
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cc"), @SpecAssertion(section = "5.5.6", id = "baa") })
-    public void testObserverNotCalled() {
-        Shop.deliveryObservedBy = null;
+    public void testObserverCalledOnMostSpecializedInstance() {
+        Shop.observers.clear();
         getCurrentManager().fireEvent(new Delivery());
-        assert Shop.deliveryObservedBy == null;
+        assert Shop.observers.size() == 1;
+        assert Shop.observers.iterator().next().equals(FarmShop.class.getName());
     }
 
-    @Test(groups = { "events" }, expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = { EVENTS }, expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "11.3.11", id = "c")
     public <T> void testEventObjectContainsTypeVariablesWhenResolvingFails() {
         eventObjectContainsTypeVariables(new ArrayList<T>());
@@ -89,7 +98,7 @@ public class EventTest extends AbstractJSR299Test {
         getCurrentManager().resolveObserverMethods(eventToFire);
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "10.2.3", id = "b"), @SpecAssertion(section = "10.2.3", id = "c") })
     public void testObserverMethodNotifiedWhenBindingsMatch() {
         getCurrentManager().fireEvent(new MultiBindingEvent(), new RoleBinding("Admin"), new TameAnnotationLiteral());
@@ -103,7 +112,7 @@ public class EventTest extends AbstractJSR299Test {
      * 
      * @throws Exception
      */
-    @Test(groups = { "events", "inheritance" })
+    @Test(groups = { EVENTS, INHERITANCE })
     @SpecAssertion(section = "4.2", id = "dc")
     public void testNonStaticObserverMethodInherited() {
         Egg egg = new Egg();
@@ -111,7 +120,7 @@ public class EventTest extends AbstractJSR299Test {
         assert typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class);
     }
 
-    @Test(groups = { "events", "inheritance" })
+    @Test(groups = { EVENTS, INHERITANCE })
     @SpecAssertions({ @SpecAssertion(section = "4.2", id = "di"), @SpecAssertion(section = "11.1.3", id = "f") })
     public void testNonStaticObserverMethodIndirectlyInherited() {
         StockPrice price = new StockPrice();
@@ -120,7 +129,7 @@ public class EventTest extends AbstractJSR299Test {
                 IndirectStockWatcher.class);
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "11.1.3", id = "e")
     public void testGetTransactionPhaseOnObserverMethod() {
         assert getCurrentManager().resolveObserverMethods(new StockPrice()).iterator().next().getTransactionPhase()
@@ -135,7 +144,7 @@ public class EventTest extends AbstractJSR299Test {
                 .equals(TransactionPhase.AFTER_SUCCESS);
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "11.1.3", id = "ga")
     public void testInstanceOfBeanForEveryEnabledObserverMethod() {
         assert !getCurrentManager().resolveObserverMethods(new StockPrice()).isEmpty();

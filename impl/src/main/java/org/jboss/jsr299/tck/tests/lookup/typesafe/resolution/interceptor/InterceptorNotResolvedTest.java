@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.interceptor;
 
+import static org.jboss.jsr299.tck.TestGroups.RESOLUTION;
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,7 +41,7 @@ public class InterceptorNotResolvedTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(InterceptorNotResolvedTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { "resolution", "rewrite" })
+    @Test(groups = { RESOLUTION, REWRITE })
     // TODO PLM should check injection, not resolution
     @SpecAssertion(section = "5.1.4", id = "b")
     public void testInterceptorNotResolved() {

@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.byname;
 
+import static org.jboss.jsr299.tck.TestGroups.RESOLUTION;
+
 import java.util.Set;
 
 import javax.enterprise.inject.spi.Bean;
@@ -37,7 +39,7 @@ public class ResolutionByNameTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ResolutionByNameTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertions({ @SpecAssertion(section = "5.3.1", id = "ca"), @SpecAssertion(section = "11.3.6", id = "aa"),
             @SpecAssertion(section = "11.3.6", id = "b") })
     public void testAmbiguousELNamesResolved() throws Exception {

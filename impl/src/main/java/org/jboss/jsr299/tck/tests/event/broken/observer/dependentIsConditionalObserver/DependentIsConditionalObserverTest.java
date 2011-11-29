@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer.dependentIsConditionalObserver;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -35,7 +37,7 @@ public class DependentIsConditionalObserverTest extends AbstractJSR299Test {
     }
 
     // WBRI-315
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "10.4.3", id = "b")
     public void testDependentBeanWithConditionalObserverMethodIsDefinitionError() {
     }

@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.newBean;
 
+import static org.jboss.jsr299.tck.TestGroups.DISPOSAL;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.NEW;
+
 import java.util.Set;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -24,8 +28,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -34,11 +38,12 @@ import org.testng.annotations.Test;
 public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(NewEnterpriseBeanICTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(NewEnterpriseBeanICTest.class)
+                .withExcludedClass(NewEnterpriseBeanTest.class).build();
     }
 
-    @Test(groups = { "new" })
+    @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "l")
     public void testNewBeanHasSameConstructor() {
         ExplicitConstructor newBean = getInstanceByType(ExplicitConstructor.class, ExplicitConstructorSessionBean.NEW);
@@ -46,7 +51,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
         assert newBean.getInjectedSimpleBean() != null;
     }
 
-    @Test(groups = { "new" })
+    @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "m")
     public void testNewBeanHasSameInitializers() {
         InitializerSimpleBeanLocal bean = getInstanceByType(InitializerSimpleBeanLocal.class);
@@ -61,7 +66,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
      * 
      * @throws Exception
      */
-    @Test(groups = { "new" })
+    @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);
@@ -73,7 +78,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
         assert theOnlyLitter.getQuantity() == fox.getNextLitterSize();
     }
 
-    @Test(groups = { "new", "disposal" })
+    @Test(groups = { INTEGRATION, NEW, DISPOSAL })
     @SpecAssertion(section = "3.14", id = "x")
     public void testNewBeanHasNoDisposalMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);

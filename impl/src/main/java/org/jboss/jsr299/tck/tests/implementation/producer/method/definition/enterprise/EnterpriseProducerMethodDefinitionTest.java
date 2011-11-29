@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.definition.enterprise;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.util.Set;
 
 import javax.enterprise.inject.spi.Bean;
@@ -23,8 +25,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -33,12 +35,11 @@ import org.testng.annotations.Test;
 public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseProducerMethodDefinitionTest.class)
-                .withBeansXml("beans.xml").build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseProducerMethodDefinitionTest.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "4.2", id = "dd")
     public void testNonStaticProducerMethodInheritedBySpecializingSubclass() {
         assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
@@ -47,7 +48,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test {
         }).getMother() instanceof AndalusianChickenLocal;
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "4.2", id = "dd")
     public void testNonStaticProducerMethodNotInherited() {
         assert getBeans(Apple.class, new AnnotationLiteral<Yummy>() {
@@ -56,7 +57,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test {
         }).getTree() instanceof AppleTreeLocal;
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "4.2", id = "dj")
     public void testNonStaticProducerMethodNotIndirectlyInherited() {
         Set<Bean<Pear>> beans = getBeans(Pear.class, new AnnotationLiteral<Yummy>() {

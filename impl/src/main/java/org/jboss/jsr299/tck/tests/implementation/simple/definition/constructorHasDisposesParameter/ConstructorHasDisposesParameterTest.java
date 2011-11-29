@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.definition.constructorHasDisposesParameter;
 
+import static org.jboss.jsr299.tck.TestGroups.DISPOSAL;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -35,7 +37,7 @@ public class ConstructorHasDisposesParameterTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ConstructorHasDisposesParameterTest.class).build();
     }
 
-    @Test(groups = { "disposalMethod" })
+    @Test(groups = { DISPOSAL })
     @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "da"), @SpecAssertion(section = "12.2", id = "db"),
             @SpecAssertion(section = "12.5", id = "a") })
     public void testConstructorHasDisposesParameter() throws Exception {

@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.deployment.lifecycle;
 
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -41,7 +43,7 @@ public class DeploymentTest extends AbstractJSR299Test {
                 .withExtension("javax.enterprise.inject.spi.Extension.DeploymentTest").build();
     }
 
-    @Test(groups = "rewrite")
+    @Test(groups = REWRITE)
     @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "a"), @SpecAssertion(section = "11.5.3", id = "a"),
             @SpecAssertion(section = "12.2", id = "g") })
     public void testDeployedManagerEvent() {
@@ -50,7 +52,7 @@ public class DeploymentTest extends AbstractJSR299Test {
         getCurrentManager().fireEvent("event");
     }
 
-    @Test(groups = {})
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "11.1", id = "f") })
     public void testOnlyEnabledBeansDeployed() {
         assert !getBeans(User.class).isEmpty();

@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.context.conversation;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -29,6 +32,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Nicklas Karlsson
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InvalidatingSessionDestroysConversationTest extends AbstractConversationTest {
 
@@ -42,7 +46,7 @@ public class InvalidatingSessionDestroysConversationTest extends AbstractConvers
                 .withWebXml("web.xml").build();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "qa")
     // TODO this test doesn't precisely probe the boundaries of the service() method
     public void testInvalidatingSessionDestroysConversation() throws Exception {

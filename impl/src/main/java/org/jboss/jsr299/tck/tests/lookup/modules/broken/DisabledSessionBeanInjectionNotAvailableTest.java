@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules.broken;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -52,7 +54,7 @@ public class DisabledSessionBeanInjectionNotAvailableTest extends AbstractJSR299
     @Inject
     BrokenBar bar;
 
-    @Test(groups = "javaee-full-only")
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = "5.1.4", id = "j")
     public void testInjection() throws Exception {
     }

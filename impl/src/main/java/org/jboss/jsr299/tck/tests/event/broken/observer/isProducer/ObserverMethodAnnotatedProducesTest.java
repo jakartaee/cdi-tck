@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.event.broken.observer.isProducer;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -41,7 +43,7 @@ public class ObserverMethodAnnotatedProducesTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodAnnotatedProducesTest.class).build();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "10.4.2", id = "d")
     public void testObserverMethodAnnotatedProducesFails() {
     }

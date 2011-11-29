@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules.broken;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -49,7 +51,7 @@ public class DisabledProducerFieldInjectionNotAvailableTest extends AbstractJSR2
         return enterpriseArchive;
     }
 
-    @Test(groups = "javaee-full-only")
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = "5.1.4", id = "h")
     public void testInjection() throws Exception {
     }

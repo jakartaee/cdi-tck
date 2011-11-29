@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint.broken.normal.scope;
 
+import static org.jboss.jsr299.tck.TestGroups.INJECTION_POINT;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +36,7 @@ public class NormalScopedBeanWithInjectionPoint extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(NormalScopedBeanWithInjectionPoint.class).build();
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "f")
     public void testSessionScopedBeanWithInjectionPoint() {
     }

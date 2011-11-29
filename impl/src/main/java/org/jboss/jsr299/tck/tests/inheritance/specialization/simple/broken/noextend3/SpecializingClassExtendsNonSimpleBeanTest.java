@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.noextend3;
 
+import static org.jboss.jsr299.tck.TestGroups.SPECIALIZATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +36,7 @@ public class SpecializingClassExtendsNonSimpleBeanTest extends AbstractJSR299Tes
         return new WebArchiveBuilder().withTestClassPackage(SpecializingClassExtendsNonSimpleBeanTest.class).build();
     }
 
-    @Test(groups = { "specialization" })
+    @Test(groups = { SPECIALIZATION })
     @SpecAssertion(section = "3.1.4", id = "da")
     public void testSpecializingClassExtendsNonSimpleBean() {
     }

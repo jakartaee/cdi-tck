@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.eventTypes;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -38,7 +40,7 @@ public class EventTypesTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(EventTypesTest.class).build();
     }
 
-    @Test(groups = "event")
+    @Test(groups = EVENTS)
     @SpecAssertions({ @SpecAssertion(section = "10.1", id = "aa"), @SpecAssertion(section = "10.1", id = "j") })
     public void testEventTypeIsConcreteTypeWithNoTypeVariables() {
         Listener listener = getInstanceByType(Listener.class);
@@ -63,7 +65,7 @@ public class EventTypesTest extends AbstractJSR299Test {
         assert listener.getObjectsFired().get(3).equals(1);
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "10.1", id = "c")
     public void testEventTypeIncludesAllSuperclassesAndInterfacesOfEventObject() {
         // we have to use a dependent-scoped observer here because we it is observing the Object event type

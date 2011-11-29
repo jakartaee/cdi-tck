@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.noextend1;
 
+import static org.jboss.jsr299.tck.TestGroups.SPECIALIZATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +36,7 @@ public class SpecializingBeanImplementsInterfaceOnly extends AbstractJSR299Test 
         return new WebArchiveBuilder().withTestClassPackage(SpecializingBeanImplementsInterfaceOnly.class).build();
     }
 
-    @Test(groups = { "specialization" })
+    @Test(groups = { SPECIALIZATION })
     @SpecAssertion(section = "3.1.4", id = "dd")
     public void testSpecializingClassImplementsInterfaceAndExtendsNothing() {
     }

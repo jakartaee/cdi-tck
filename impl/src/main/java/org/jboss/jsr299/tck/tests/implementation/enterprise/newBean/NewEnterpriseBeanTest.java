@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.newBean;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.NEW;
+
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
@@ -29,8 +32,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -43,11 +46,11 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
     };
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(NewEnterpriseBeanTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(NewEnterpriseBeanTest.class).build();
     }
 
-    @Test(groups = { "new" })
+    @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "p")
     public void testNewBeanIsDependentScoped() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, WrappedEnterpriseBeanLocal.NEW);
@@ -56,7 +59,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
         assert Dependent.class.equals(newEnterpriseBean.getScope());
     }
 
-    @Test(groups = { "new" })
+    @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "r")
     public void testNewBeanIsHasOnlyNewBinding() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, WrappedEnterpriseBeanLocal.NEW);
@@ -66,7 +69,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
         assert newEnterpriseBean.getQualifiers().iterator().next().annotationType().equals(New.class);
     }
 
-    @Test(groups = { "new" })
+    @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "s")
     public void testNewBeanHasNoBeanELName() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, WrappedEnterpriseBeanLocal.NEW);
@@ -75,7 +78,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
         assert newEnterpriseBean.getName() == null;
     }
 
-    @Test(groups = { "new" })
+    @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "t")
     public void testNewBeanHasNoStereotypes() {
         Bean<MonkeyLocal> monkeyBean = getBeans(MonkeyLocal.class).iterator().next();
@@ -86,14 +89,14 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
         assert newMonkeyBean.getName() == null;
     }
 
-    @Test(groups = { "new" })
+    @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "u")
     public void testNewBeanHasNoObservers() {
         // Should just be 1 observer from bean, not new bean
         assert getCurrentManager().resolveObserverMethods("event").size() == 1;
     }
 
-    @Test
+    @Test(groups = { INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = "3.14", id = "j"), @SpecAssertion(section = "3.14", id = "k") })
     public void testForEachEnterpriseBeanANewBeanExists() {
         Bean<OrderLocal> orderBean = getBeans(OrderLocal.class).iterator().next();
@@ -124,7 +127,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
         assert lionBean.getBeanClass().equals(newLionBean.getBeanClass());
     }
 
-    @Test(groups = { "new" })
+    @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "h")
     public void testNewBeanHasSameInjectedFields() {
         Bean<InitializerSimpleBeanLocal> simpleBean = getBeans(InitializerSimpleBeanLocal.class).iterator().next();

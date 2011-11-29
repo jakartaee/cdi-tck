@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.resource.env;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.LIFECYCLE;
+
 import java.io.Serializable;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -36,6 +39,7 @@ import org.testng.annotations.Test;
  * 
  * @author Dan Allen
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EnvInjectionTest extends AbstractJSR299Test {
 
@@ -45,7 +49,7 @@ public class EnvInjectionTest extends AbstractJSR299Test {
                 .withWebXml("web.xml").build();
     }
 
-    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @Test(groups = { LIFECYCLE })
     @SpecAssertion(section = "3.6.1", id = "bb")
     public void testInjectionOfEnv() {
         Bean<GreetingBean> greetingBean = getBeans(GreetingBean.class).iterator().next();
@@ -55,7 +59,7 @@ public class EnvInjectionTest extends AbstractJSR299Test {
         assert instance.greet().equals("Hello there my friend");
     }
 
-    @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
+    @Test(groups = { LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "la"), @SpecAssertion(section = "7.3.6", id = "ma"),
             @SpecAssertion(section = "7.3.6", id = "o") })
     public void testProduceEnvProxy() {
@@ -67,7 +71,7 @@ public class EnvInjectionTest extends AbstractJSR299Test {
         assert greeting.equals("Hello there my friend");
     }
 
-    @Test(groups = { "integration" })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "aa") })
     public void testResourceBeanTypes() {
         Bean<String> greeting = getBeans(String.class, new AnnotationLiteral<Greeting>() {

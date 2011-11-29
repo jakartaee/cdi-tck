@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.nullableBean;
 
+import static org.jboss.jsr299.tck.TestGroups.INJECTION;
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +37,7 @@ public class NullableBeanTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(NullableBeanTest.class).build();
     }
 
-    @Test(groups = { "injection", "producerMethod" })
+    @Test(groups = { INJECTION, PRODUCER_METHOD })
     @SpecAssertion(section = "5.2.4", id = "aa")
     public void testPrimitiveInjectionPointResolvesToNullableWebBean() throws Exception {
     }

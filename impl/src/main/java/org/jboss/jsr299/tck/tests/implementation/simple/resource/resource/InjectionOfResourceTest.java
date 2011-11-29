@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.resource.resource;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.LIFECYCLE;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
@@ -30,6 +33,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InjectionOfResourceTest extends AbstractJSR299Test {
 
@@ -38,7 +42,7 @@ public class InjectionOfResourceTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(InjectionOfResourceTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+    @Test(groups = { LIFECYCLE })
     @SpecAssertion(section = "3.6.1", id = "bb")
     public void testInjectionOfResource() {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
@@ -47,7 +51,7 @@ public class InjectionOfResourceTest extends AbstractJSR299Test {
         assert managedBean.getBeanManager() != null : "@Another Manager not found";
     }
 
-    @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
+    @Test(groups = { LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "la"), @SpecAssertion(section = "7.3.6", id = "ma"),
             @SpecAssertion(section = "7.3.6", id = "o") })
     public void testProduceResourceProxy() {
@@ -58,7 +62,7 @@ public class InjectionOfResourceTest extends AbstractJSR299Test {
         assert beanManager != null;
     }
 
-    @Test(groups = { "beanLifecycle", "commonsAnnotations", "integration" })
+    @Test(groups = { LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "mb") })
     public void testPassivatingResource() throws Exception {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
@@ -68,7 +72,7 @@ public class InjectionOfResourceTest extends AbstractJSR299Test {
         assert managedBean.getBeanManager() != null;
     }
 
-    @Test(groups = { "integration" })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "aa") })
     public void testResourceBeanTypes() {
         Bean<BeanManager> beanRemote = getBeans(BeanManager.class, new AnnotationLiteral<Another>() {

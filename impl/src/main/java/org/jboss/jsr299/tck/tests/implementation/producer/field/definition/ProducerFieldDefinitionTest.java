@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.field.definition;
 
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_FIELD;
+
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Set;
@@ -49,11 +51,10 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ProducerFieldDefinitionTest.class).withBeansXml("beans.xml")
-                .build();
+        return new WebArchiveBuilder().withTestClassPackage(ProducerFieldDefinitionTest.class).build();
     }
 
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertion(section = "3.4", id = "fa")
     public void testParameterizedReturnType() throws Exception {
         FunnelWeaverSpiderConsumer spiderConsumer = getInstanceByType(FunnelWeaverSpiderConsumer.class);
@@ -62,7 +63,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert spiderConsumer.getInjectedSpider().equals(FunnelWeaverSpiderProducer.getSpider());
     }
 
-    @Test(groups = { "producerField", "deployment" })
+    @Test(groups = { PRODUCER_FIELD })
     @SpecAssertions({ @SpecAssertion(section = "3.4", id = "j"), @SpecAssertion(section = "3.4", id = "c"),
             @SpecAssertion(section = "3.4.2", id = "a") })
     public void testBeanDeclaresMultipleProducerFields() {
@@ -72,7 +73,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert getInstanceByType(BlackWidow.class, TAME_LITERAL).equals(OtherSpiderProducer.BLACK_WIDOW);
     }
 
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertions({ @SpecAssertion(section = "2.3.1", id = "aa") })
     public void testDefaultBindingType() {
         Set<Bean<Tarantula>> tarantulaBeans = getBeans(Tarantula.class);
@@ -80,7 +81,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert tarantulaBeans.iterator().next().getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertion(section = "3.4.1", id = "c")
     public void testApiTypeForClassReturn() {
         Set<Bean<Tarantula>> tarantulaBeans = getBeans(Tarantula.class, PET_LITERAL);
@@ -95,7 +96,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert tarantulaBean.getTypes().contains(Object.class);
     }
 
-    @Test(groups = { "producerField" })
+    @Test(groups = { PRODUCER_FIELD })
     @SpecAssertion(section = "3.4.1", id = "a")
     public void testApiTypeForInterfaceReturn() {
         Set<Bean<Animal>> animalBeans = getBeans(Animal.class, new AnnotationLiteral<AsAnimal>() {
@@ -107,7 +108,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert animalModel.getTypes().contains(Object.class);
     }
 
-    @Test(groups = { "producerField" })
+    @Test(groups = { PRODUCER_FIELD })
     @SpecAssertion(section = "3.4.1", id = "ba")
     public void testApiTypeForPrimitiveReturn() {
         Set<Bean<?>> beans = getCurrentManager().getBeans("SpiderSize");
@@ -118,7 +119,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert intModel.getTypes().contains(Object.class);
     }
 
-    @Test(groups = { "producerField" })
+    @Test(groups = { PRODUCER_FIELD })
     @SpecAssertions({ @SpecAssertion(section = "3.4.1", id = "bb"), @SpecAssertion(section = "2.2.1", id = "i") })
     public void testApiTypeForArrayTypeReturn() {
         Set<Bean<Spider[]>> spidersBeans = getBeans(Spider[].class);
@@ -129,7 +130,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert spidersModel.getTypes().contains(Object.class);
     }
 
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "f"), @SpecAssertion(section = "2.3.3", id = "c") })
     public void testBindingType() {
         Set<Bean<Tarantula>> tarantulaBeans = getBeans(Tarantula.class, TAME_LITERAL);
@@ -139,7 +140,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert tarantulaModel.getQualifiers().contains(TAME_LITERAL);
     }
 
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertion(section = "3.4.2", id = "b")
     public void testScopeType() {
         Set<Bean<Tarantula>> tarantulaBeans = getBeans(Tarantula.class, TAME_LITERAL, FOO_LITERAL);
@@ -148,7 +149,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert tarantulaModel.getScope().equals(RequestScoped.class);
     }
 
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "c"), @SpecAssertion(section = "2.5.1", id = "c") })
     public void testNamedField() {
         Set<Bean<?>> beans = getCurrentManager().getBeans("blackWidow");
@@ -159,7 +160,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert blackWidowModel.getName().equals("blackWidow");
     }
 
-    @Test(groups = { "producerField" })
+    @Test(groups = { PRODUCER_FIELD })
     @SpecAssertions({ @SpecAssertion(section = "2.5.2", id = "c"), @SpecAssertion(section = "2.5.3", id = "a"),
             @SpecAssertion(section = "3.4.3", id = "a"), @SpecAssertion(section = "2.5.1", id = "d") })
     public void testDefaultNamedField() {
@@ -170,7 +171,7 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
     }
 
     // review 2.2
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertions({ @SpecAssertion(section = "2.7.2", id = "c"), @SpecAssertion(section = "3.4.2", id = "e") })
     public void testStereotype() {
         Set<Bean<Tarantula>> tarantulaBeans = getBeans(Tarantula.class, STATIC_LITERAL);
@@ -179,20 +180,20 @@ public class ProducerFieldDefinitionTest extends AbstractJSR299Test {
         assert tarantulaModel.getScope().equals(RequestScoped.class);
     }
 
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertion(section = "4.2", id = "ea")
     public void testNonStaticProducerFieldNotInherited() {
         assert !(getInstanceByType(Egg.class, FOO_LITERAL).getMother() instanceof InfertileChicken);
     }
 
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertion(section = "4.2", id = "ec")
     public void testNonStaticProducerFieldNotIndirectlyInherited() {
         assert !(getInstanceByType(Egg.class, FOO_LITERAL).getMother() instanceof LameInfertileChicken);
     }
 
     @SuppressWarnings("serial")
-    @Test(groups = "producerField")
+    @Test(groups = PRODUCER_FIELD)
     @SpecAssertion(section = "3.4", id = "fb")
     public void testProducerFieldWithTypeVariable() {
         assert (getInstanceByType(new TypeLiteral<List<Spider>>() {

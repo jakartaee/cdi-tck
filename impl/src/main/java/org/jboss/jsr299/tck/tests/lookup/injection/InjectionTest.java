@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection;
 
+import static org.jboss.jsr299.tck.TestGroups.INJECTION;
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -39,7 +42,7 @@ public class InjectionTest extends AbstractJSR299Test {
                                 .envEntryType("java.lang.String").envEntryValue("Hello").up()).build();
     }
 
-    @Test(groups = { "injection", "producerMethod" })
+    @Test(groups = { INJECTION, PRODUCER_METHOD })
     @SpecAssertion(section = "5.2.4", id = "aa")
     public void testInjectionPerformsBoxingIfNecessary() throws Exception {
         assert getBeans(SpiderNest.class).size() == 1;

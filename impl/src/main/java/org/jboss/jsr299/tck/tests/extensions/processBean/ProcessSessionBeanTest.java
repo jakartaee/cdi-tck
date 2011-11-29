@@ -16,13 +16,15 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.processBean;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.SessionBeanType;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -38,12 +40,12 @@ import org.testng.annotations.Test;
 public class ProcessSessionBeanTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(ProcessSessionBeanTest.class)
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ProcessSessionBeanTest.class)
                 .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "c"), @SpecAssertion(section = "11.5.11", id = "edb"),
             @SpecAssertion(section = "11.5.11", id = "efb"), @SpecAssertion(section = "11.5.11", id = "fb"),
             @SpecAssertion(section = "11.5.11", id = "hb"), @SpecAssertion(section = "11.5.11", id = "hc"),

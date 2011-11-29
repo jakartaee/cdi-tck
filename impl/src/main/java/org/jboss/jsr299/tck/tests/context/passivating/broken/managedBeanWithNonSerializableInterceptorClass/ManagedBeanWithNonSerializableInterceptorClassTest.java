@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.managedBeanWithNonSerializableInterceptorClass;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.PASSIVATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +37,7 @@ public class ManagedBeanWithNonSerializableInterceptorClassTest extends Abstract
         return new WebArchiveBuilder().withTestClassPackage(ManagedBeanWithNonSerializableInterceptorClassTest.class).build();
     }
 
-    @Test(groups = { "contexts", "passivation" })
+    @Test(groups = { CONTEXTS, PASSIVATION })
     @SpecAssertion(section = "6.6.1", id = "bb")
     public void testManagedBeanWithNonSerializableInterceptorClassNotOK() {
     }

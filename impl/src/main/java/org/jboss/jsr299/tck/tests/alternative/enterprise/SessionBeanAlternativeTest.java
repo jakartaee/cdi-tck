@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.alternative.enterprise;
 
+import static org.jboss.jsr299.tck.TestGroups.ALTERNATIVES;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -32,7 +35,7 @@ public class SessionBeanAlternativeTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(SessionBeanAlternativeTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { "alternatives" })
+    @Test(groups = { INTEGRATION, ALTERNATIVES })
     @SpecAssertion(section = "5.1.1", id = "eb")
     public void testEnabledPolicyAvailable() {
         assert getBeans(EjbInterface.class).size() == 1;

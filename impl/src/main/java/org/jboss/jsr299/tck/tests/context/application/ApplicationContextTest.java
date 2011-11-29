@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.context.application;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.SERVLET;
+
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -35,6 +39,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextTest extends AbstractJSR299Test {
 
@@ -47,7 +52,7 @@ public class ApplicationContextTest extends AbstractJSR299Test {
                 .withWebResource("SimplePage.html").build();
     }
 
-    @Test(groups = { "contexts", "servlet", "integration" })
+    @Test(groups = { CONTEXTS, SERVLET })
     @SpecAssertion(section = "6.7.3", id = "aa")
     public void testApplicationScopeActiveDuringServiceMethod() throws Exception {
         WebClient webClient = new WebClient();
@@ -55,7 +60,7 @@ public class ApplicationContextTest extends AbstractJSR299Test {
         webClient.getPage(contextPath + "TestServlet?test=servlet");
     }
 
-    @Test(groups = { "contexts", "servlet", "integration" })
+    @Test(groups = { CONTEXTS, SERVLET })
     @SpecAssertion(section = "6.7.3", id = "ab")
     public void testApplicationScopeActiveDuringDoFilterMethod() throws Exception {
         WebClient webClient = new WebClient();
@@ -63,7 +68,7 @@ public class ApplicationContextTest extends AbstractJSR299Test {
         webClient.getPage(contextPath + "SimplePage.html");
     }
 
-    @Test(groups = { "contexts", "integration" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.3", id = "ac")
     public void testApplicationScopeActiveDuringServletContextListenerInvocation() throws Exception {
         WebClient webClient = new WebClient();
@@ -71,7 +76,7 @@ public class ApplicationContextTest extends AbstractJSR299Test {
         webClient.getPage(contextPath + "TestServlet?test=servletContextListener");
     }
 
-    @Test(groups = { "contexts", "integration" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.3", id = "ad")
     public void testApplicationScopeActiveDuringHttpSessionListenerInvocation() throws Exception {
         WebClient webClient = new WebClient();
@@ -79,7 +84,7 @@ public class ApplicationContextTest extends AbstractJSR299Test {
         webClient.getPage(contextPath + "TestServlet?test=httpSessionListener");
     }
 
-    @Test(groups = { "contexts", "integration" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.3", id = "af")
     public void testApplicationScopeActiveDuringServletRequestListenerInvocation() throws Exception {
         WebClient webClient = new WebClient();
@@ -87,7 +92,7 @@ public class ApplicationContextTest extends AbstractJSR299Test {
         webClient.getPage(contextPath + "TestServlet?test=servletRequestListener");
     }
 
-    @Test(groups = { "contexts", "integration" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.3", id = "e")
     public void testApplicationContextSharedBetweenServletRequests() throws Exception {
         WebClient webClient = new WebClient();
@@ -107,7 +112,7 @@ public class ApplicationContextTest extends AbstractJSR299Test {
      * 
      * @throws Exception
      */
-    @Test(groups = { "contexts", "integration" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.3", id = "e")
     public void testApplicationContextSharedBetweenJaxRsRequests() throws Exception {
         WebClient webClient = new WebClient();

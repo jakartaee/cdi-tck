@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.definition;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.context.Dependent;
@@ -25,8 +27,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -40,40 +42,39 @@ import org.testng.annotations.Test;
 public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanDefinitionTest.class)
-                .withBeansXml("beans.xml").build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseBeanDefinitionTest.class).withBeansXml("beans.xml")
+                .build();
     }
 
-    @Test(groups = { "enterpriseBeans" })
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "3.2", id = "b")
     public void testStatelessMustBeDependentScoped() {
         assert getBeans(GiraffeLocal.class).size() == 1;
         assert getBeans(GiraffeLocal.class).iterator().next().getScope().equals(Dependent.class);
     }
 
-    @Test(groups = { "new", "jboss-as-broken" })
+    @Test(groups = { INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "ab"), @SpecAssertion(section = "5.5.1", id = "ab") })
-    // WELD-357
     public void testConstructorAnnotatedInjectCalled() {
         ExplicitConstructor bean = getInstanceByType(ExplicitConstructor.class);
         assert bean.getConstructorCalls() == 1;
         assert bean.getInjectedSimpleBean() instanceof SimpleBean;
     }
 
-    @Test(groups = { "enterpriseBeans" })
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "3.2", id = "c")
     public void testSingletonWithDependentScopeOK() {
         assert getBeans(Labrador.class).size() == 1;
     }
 
-    @Test(groups = { "enterpriseBeans" })
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "3.2", id = "c")
     public void testSingletonWithApplicationScopeOK() {
         assert getBeans(Laika.class).size() == 1;
     }
 
-    @Test(groups = { "enterpriseBeans" })
+    @Test(groups = { INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = "3.2.2", id = "aa"), @SpecAssertion(section = "3.2.3", id = "c") })
     public void testBeanTypesAreLocalInterfacesWithoutWildcardTypesOrTypeVariablesWithSuperInterfaces() {
         Bean<DogLocal> dogBean = getBeans(DogLocal.class).iterator().next();
@@ -82,14 +83,14 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test {
         assert !dogBean.getTypes().contains(Pitbull.class);
     }
 
-    @Test(groups = { "ejb 3.1" })
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "3.2.2", id = "ba")
     public void testEnterpriseBeanClassLocalView() {
         Bean<Retriever> dogBean = getUniqueBean(Retriever.class);
         assert dogBean.getTypes().contains(Retriever.class);
     }
 
-    @Test(groups = "enterpriseBeans")
+    @Test(groups = { INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = "3.2.2", id = "c"), @SpecAssertion(section = "3.2.3", id = "aa"),
             @SpecAssertion(section = "2.2", id = "l") })
     public void testObjectIsInAPITypes() {
@@ -97,28 +98,28 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test {
         assert getBeans(GiraffeLocal.class).iterator().next().getTypes().contains(Object.class);
     }
 
-    @Test(groups = { "enterpriseBeans" })
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "3.2.2", id = "d")
     public void testRemoteInterfacesAreNotInAPITypes() {
         Bean<DogLocal> dogBean = getBeans(DogLocal.class).iterator().next();
         assert !dogBean.getTypes().contains(DogRemote.class);
     }
 
-    @Test(groups = "enterpriseBeans")
+    @Test(groups = { INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = "3.2.3", id = "ba"), @SpecAssertion(section = "3.2", id = "e") })
     public void testBeanWithScopeAnnotation() {
         Bean<LionLocal> lionBean = getBeans(LionLocal.class).iterator().next();
         assert lionBean.getScope().equals(RequestScoped.class);
     }
 
-    @Test(groups = "enterpriseBeans")
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "3.2.3", id = "bb")
     public void testBeanWithNamedAnnotation() {
         Bean<MonkeyLocal> monkeyBean = getBeans(MonkeyLocal.class).iterator().next();
         assert monkeyBean.getName().equals("Monkey");
     }
 
-    @Test(groups = "enterpriseBeans")
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "3.2.3", id = "bd")
     public void testBeanWithStereotype() {
         Bean<PolarBearLocal> polarBearBean = getBeans(PolarBearLocal.class).iterator().next();
@@ -126,7 +127,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test {
         assert polarBearBean.getName().equals("polarBear");
     }
 
-    @Test(groups = "enterpriseBeans")
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "3.2.3", id = "be")
     public void testBeanWithQualifiers() {
         Annotation tame = new AnnotationLiteral<Tame>() {
@@ -135,7 +136,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test {
         assert apeBean.getQualifiers().contains(tame);
     }
 
-    @Test(groups = "enterpriseBeans")
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "3.2.5", id = "a")
     public void testDefaultName() {
         assert getBeans(PitbullLocal.class).size() == 1;

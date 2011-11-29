@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle.unproxyable;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +36,7 @@ public class UnproxyableManagedBeanTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(UnproxyableManagedBeanTest.class).build();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.5.3", id = "a")
     public void testNormalScopedUnproxyableBeanThrowsException() {
     }

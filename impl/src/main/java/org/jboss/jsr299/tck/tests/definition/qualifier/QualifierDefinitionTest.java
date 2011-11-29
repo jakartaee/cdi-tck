@@ -16,6 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.definition.qualifier;
 
+import static org.jboss.jsr299.tck.TestGroups.ANNOTATION_DEFINITION;
+import static org.jboss.jsr299.tck.TestGroups.INJECTION;
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
@@ -59,7 +64,7 @@ public class QualifierDefinitionTest extends AbstractJSR299Test {
         assert injectionPoint.getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = { "annotationDefinition", "rewrite" })
+    @Test(groups = { ANNOTATION_DEFINITION, REWRITE })
     @SpecAssertion(section = "2.3.2", id = "ba")
     public void testQualifierDeclaresBindingAnnotation() {
         // Probably can use new SPI for this...
@@ -81,7 +86,7 @@ public class QualifierDefinitionTest extends AbstractJSR299Test {
         assert model.getQualifiers().size() == 4;
     }
 
-    @Test(groups = { "injection", "producerMethod" })
+    @Test(groups = { INJECTION, PRODUCER_METHOD })
     @SpecAssertion(section = "2.3.5", id = "a")
     public void testFieldInjectedFromProducerMethod() throws Exception {
         Bean<Barn> barnBean = getBeans(Barn.class).iterator().next();

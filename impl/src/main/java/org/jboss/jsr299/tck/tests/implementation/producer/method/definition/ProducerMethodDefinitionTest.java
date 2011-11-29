@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.definition;
 
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
+
 import java.lang.annotation.Annotation;
 import java.util.List;
 
@@ -51,20 +53,20 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ProducerMethodDefinitionTest.class).build();
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3", id = "b"), @SpecAssertion(section = "5.5.4", id = "a") })
     public void testStaticMethod() throws Exception {
         assert getBeans(String.class).size() == 1;
         assert getInstanceByType(String.class).equals(BeanWithStaticProducerMethod.getString());
     }
 
-    @Test(groups = { "producerMethod" })
+    @Test(groups = { PRODUCER_METHOD })
     @SpecAssertions({ @SpecAssertion(section = "3.3", id = "aa") })
     public void testProducerOnNonBean() throws Exception {
         assert getBeans(Cherry.class).isEmpty();
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.5", id = "b") })
     public void testStaticDisposerMethod() throws Exception {
         assert getBeans(String.class).size() == 1;
@@ -75,14 +77,14 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert BeanWithStaticProducerMethod.stringDestroyed;
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertion(section = "3.3", id = "ga")
     public void testParameterizedReturnType() throws Exception {
         assert getBeans(new TypeLiteral<FunnelWeaver<Spider>>() {
         }).size() == 1;
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3", id = "c"), @SpecAssertion(section = "3.3.2", id = "a"),
             @SpecAssertion(section = "2.3.1", id = "a0"), @SpecAssertion(section = "2.3.1", id = "aa") })
     public void testDefaultBindingType() throws Exception {
@@ -92,7 +94,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(new AnyLiteral());
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3.1", id = "c"), @SpecAssertion(section = "2.2", id = "l") })
     public void testApiTypeForClassReturn() throws Exception {
         assert getBeans(Tarantula.class).size() == 1;
@@ -107,7 +109,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert tarantula.getTypes().contains(Object.class);
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertion(section = "3.3.1", id = "a")
     public void testApiTypeForInterfaceReturn() throws Exception {
         assert getBeans(Bite.class).size() == 1;
@@ -117,7 +119,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert animal.getTypes().contains(Object.class);
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertion(section = "3.3.1", id = "ba")
     public void testApiTypeForPrimitiveReturn() throws Exception {
         assert getBeans(Integer.class).size() == 1;
@@ -127,7 +129,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert integer.getTypes().contains(Object.class);
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3.1", id = "bb"), @SpecAssertion(section = "2.2.1", id = "i") })
     public void testApiTypeForArrayTypeReturn() throws Exception {
         assert getBeans(Spider[].class).size() == 1;
@@ -137,7 +139,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert spiders.getTypes().contains(Object.class);
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3.2", id = "be"), @SpecAssertion(section = "3.3", id = "k"),
             @SpecAssertion(section = "2.3.3", id = "b") })
     public void testBindingType() throws Exception {
@@ -147,7 +149,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert tarantula.getQualifiers().contains(TAME_LITERAL);
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3.2", id = "ba"), @SpecAssertion(section = "3.3", id = "k") })
     public void testScopeType() throws Exception {
         assert getBeans(DaddyLongLegs.class, TAME_LITERAL).size() == 1;
@@ -155,7 +157,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert daddyLongLegs.getScope().equals(RequestScoped.class);
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3.2", id = "bb"), @SpecAssertion(section = "2.5.1", id = "b") })
     public void testNamedMethod() throws Exception {
         assert getBeans(BlackWidow.class, TAME_LITERAL).size() == 1;
@@ -163,7 +165,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert blackWidowSpider.getName().equals("blackWidow");
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3.2", id = "bb"), @SpecAssertion(section = "2.5.2", id = "b"),
             @SpecAssertion(section = "2.5.1", id = "d"), @SpecAssertion(section = "3.3.8", id = "a") })
     public void testDefaultNamedMethod() throws Exception {
@@ -173,7 +175,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
     }
 
     // Review 2.2
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "2.7.2", id = "b"), @SpecAssertion(section = "3.3.2", id = "ba"),
             @SpecAssertion(section = "2.4.4", id = "c"), @SpecAssertion(section = "3.3.2", id = "bd") })
     public void testStereotypeSpecifiesScope() throws Exception {

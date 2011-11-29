@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.alternative.broken.incorrect.name;
 
+import static org.jboss.jsr299.tck.TestGroups.ALTERNATIVES;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -35,7 +37,7 @@ public class NoClassWithSpecifiedNameTest extends AbstractJSR299Test {
                 .build();
     }
 
-    @Test(groups = { "alternatives" })
+    @Test(groups = { ALTERNATIVES })
     @SpecAssertion(section = "5.1.1", id = "h")
     public void test() {
     }

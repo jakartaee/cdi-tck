@@ -17,6 +17,9 @@
 
 package org.jboss.jsr299.tck.tests.lookup.byname.duplicateNameResolution;
 
+import static org.jboss.jsr299.tck.TestGroups.EL;
+import static org.jboss.jsr299.tck.TestGroups.RESOLUTION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -35,7 +38,7 @@ public class DuplicateNameResolutionTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(DuplicateNameResolutionTest.class).build();
     }
 
-    @Test(groups = { "resolution", "el" })
+    @Test(groups = { RESOLUTION, EL })
     @SpecAssertion(section = "5.3.1", id = "da")
     public void testDuplicateNamedBeans() throws Exception {
     }

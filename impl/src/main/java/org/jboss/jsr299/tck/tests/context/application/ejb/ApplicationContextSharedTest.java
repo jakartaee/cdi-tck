@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.context.application.ejb;
 
 import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
-import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -34,6 +33,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextSharedTest extends AbstractJSR299Test {
 
@@ -42,7 +42,7 @@ public class ApplicationContextSharedTest extends AbstractJSR299Test {
         return new EnterpriseArchiveBuilder().withTestClassPackage(ApplicationContextSharedTest.class).build();
     }
 
-    @Test(groups = { JAVAEE_FULL, CONTEXTS, INTEGRATION })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.3", id = "e")
     public void testApplicationContextShared() throws Exception {
         FMSModelIII.reset();
@@ -60,7 +60,7 @@ public class ApplicationContextSharedTest extends AbstractJSR299Test {
         }
     }
 
-    @Test(groups = { JAVAEE_FULL, CONTEXTS, INTEGRATION })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.3", id = "dc")
     public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMS flightManagementSystem = getInstanceByType(FMS.class);

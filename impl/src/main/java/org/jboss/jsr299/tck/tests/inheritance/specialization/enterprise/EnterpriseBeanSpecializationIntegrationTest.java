@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.inject.spi.Bean;
@@ -23,8 +25,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -37,15 +39,11 @@ public class EnterpriseBeanSpecializationIntegrationTest extends AbstractJSR299T
     };
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanSpecializationIntegrationTest.class)
-        // Originally with ejb-jar.xml however this resource does not exist in
-        // /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/inheritance/specialization/enterprise
-        // .withEjbJarXml("ejb-jar.xml")
-                .build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseBeanSpecializationIntegrationTest.class).build();
     }
 
-    @Test
+    @Test(groups = { INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = "4.3", id = "ca") })
     public void testSpecializedBeanNotInstantiated() throws Exception {
         Bean<?> farmerBean = getCurrentManager().resolve(getCurrentManager().getBeans(FarmerLocal.class, LANDOWNER_LITERAL));

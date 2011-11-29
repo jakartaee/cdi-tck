@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.enterprise;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+import static org.jboss.jsr299.tck.TestGroups.INHERITANCE;
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
@@ -30,6 +34,7 @@ import org.testng.annotations.Test;
  * @author Shane Bryzak
  * @author Martin Kouba
  */
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EnterpriseEventInheritenceTest extends AbstractJSR299Test {
 
@@ -38,7 +43,7 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test {
         return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseEventInheritenceTest.class).build();
     }
 
-    @Test(groups = { "events", "inheritance" })
+    @Test(groups = { EVENTS, INHERITANCE })
     @SpecAssertion(section = "4.2", id = "df")
     public void testNonStaticObserverMethodInherited() throws Exception {
         Egg egg = new Egg();
@@ -48,7 +53,7 @@ public class EnterpriseEventInheritenceTest extends AbstractJSR299Test {
         assert egg.getVisited().contains(LazyFarmer.class.getSimpleName());
     }
 
-    @Test(groups = { "events", "inheritance" })
+    @Test(groups = { EVENTS, INHERITANCE })
     @SpecAssertion(section = "4.2", id = "dl")
     public void testNonStaticObserverMethodIndirectlyInherited() throws Exception {
         StockPrice stockPrice = new StockPrice();

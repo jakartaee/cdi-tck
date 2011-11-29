@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.failsDuringValidation;
 
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -45,7 +47,7 @@ public class AfterBeanDiscoveryFailureTest extends AbstractJSR299Test {
                 .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-    @Test(groups = { "rewrite" })
+    @Test(groups = { REWRITE })
     @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "a"), @SpecAssertion(section = "12.2", id = "e"),
             @SpecAssertion(section = "12.2", id = "f") })
     // WBRI-312

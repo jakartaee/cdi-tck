@@ -17,13 +17,16 @@
 
 package org.jboss.jsr299.tck.tests.context.dependent.ejb;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -32,11 +35,11 @@ import org.testng.annotations.Test;
 public class DependentContextEjbTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(DependentContextEjbTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(DependentContextEjbTest.class).build();
     }
 
-    @Test(groups = { "contexts", "ejb3", "integration" })
+    @Test(groups = { CONTEXTS, INTEGRATION })
     @SpecAssertion(section = "6.4.2", id = "aaab")
     public void testDestroyingEjbDestroysDependents() throws Exception {
         assert getBeans(HouseLocal.class).size() == 1;
@@ -53,7 +56,7 @@ public class DependentContextEjbTest extends AbstractJSR299Test {
         assert Table.destroyed;
     }
 
-    @Test(groups = { "contexts", "ejb3", "integration" })
+    @Test(groups = { CONTEXTS, INTEGRATION })
     @SpecAssertion(section = "6.4.2", id = "aaab")
     public void testDestroyingEjbDestroysDependentSimples() throws Exception {
         assert getBeans(FarmLocal.class).size() == 1;

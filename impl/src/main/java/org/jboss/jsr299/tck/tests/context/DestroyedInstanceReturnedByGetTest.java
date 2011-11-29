@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.context;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
@@ -39,7 +41,7 @@ public class DestroyedInstanceReturnedByGetTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(DestroyedInstanceReturnedByGetTest.class).build();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "q"), @SpecAssertion(section = "11.1", id = "aa") })
     public void testDestroyedInstanceMustNotBeReturnedByGet() {
         assert getBeans(MySessionBean.class).size() == 1;

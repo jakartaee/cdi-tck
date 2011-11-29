@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.builtin;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import java.security.Principal;
 
 import javax.security.auth.login.LoginException;
@@ -38,6 +41,7 @@ import org.testng.annotations.Test;
  * @author Pete Muir
  * @author Martin Kouba
  */
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BuiltInBeansTest extends AbstractJSR299Test {
 
@@ -80,7 +84,7 @@ public class BuiltInBeansTest extends AbstractJSR299Test {
      * @throws SystemException
      * @throws LoginException
      */
-    @Test(groups = "rewrite")
+    @Test(groups = REWRITE)
     // PLM We should check the Principal somehow
     @SpecAssertions({ @SpecAssertion(section = "3.7", id = "b") })
     public void testPrincipalBean() throws SystemException, LoginException {

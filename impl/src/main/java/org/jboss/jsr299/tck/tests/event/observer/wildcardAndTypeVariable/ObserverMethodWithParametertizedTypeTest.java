@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.event.observer.wildcardAndTypeVariable;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import java.util.List;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -41,7 +43,7 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractJSR299Test
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodWithParametertizedTypeTest.class).build();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "10.4.1", id = "cb")
     public void testObserverMethodCanObserveTypeVariable() {
         BostonTerrier.observed = false;
@@ -51,7 +53,7 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractJSR299Test
         assert BostonTerrier.observed;
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "10.4.1", id = "ca")
     public void testObserverMethodCanObserveWildcardType() {
         WildBostonTerrier.observed = false;

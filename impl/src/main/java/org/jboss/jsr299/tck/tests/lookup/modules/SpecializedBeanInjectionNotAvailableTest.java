@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Set;
@@ -66,7 +67,7 @@ public class SpecializedBeanInjectionNotAvailableTest extends AbstractJSR299Test
     @Enterprise
     Bar enterpriseBar;
 
-    @Test(groups = "javaee-full-only")
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = "5.1.4", id = "l")
     public void testManagedBeanInjection() throws Exception {
         assertEquals(bar.ping(), 0);
@@ -75,7 +76,7 @@ public class SpecializedBeanInjectionNotAvailableTest extends AbstractJSR299Test
         assert beans.iterator().next().getBeanClass().equals(CashFoo.class);
     }
 
-    @Test(groups = "javaee-full-only")
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = "5.1.4", id = "k")
     public void testSessionBeanInjection() throws Exception {
         assertEquals(enterpriseBar.ping(), 0);

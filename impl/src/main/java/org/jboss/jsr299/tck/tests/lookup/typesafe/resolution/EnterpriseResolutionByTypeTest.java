@@ -16,12 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -30,11 +32,11 @@ import org.testng.annotations.Test;
 public class EnterpriseResolutionByTypeTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseResolutionByTypeTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseResolutionByTypeTest.class).build();
     }
 
-    @Test
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "2.2.2", id = "b")
     public void testBeanTypesOnSessionBean() {
         assert getBeans(CapercaillieLocal.class).size() == 1;

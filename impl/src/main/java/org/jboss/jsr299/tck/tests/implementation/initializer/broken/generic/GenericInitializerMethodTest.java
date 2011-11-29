@@ -34,7 +34,7 @@ public class GenericInitializerMethodTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(GenericInitializerMethodTest.class).build();
     }
 
-    @Test(groups = "ri-broken")
+    @Test
     @SpecAssertion(section = "3.10.1", id = "ab")
     public void testGenericInitializerMethodNotAllowed() {
     }

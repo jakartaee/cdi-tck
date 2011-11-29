@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -56,7 +58,7 @@ public class EnabledProducerFieldInjectionAvailabilityTest extends AbstractJSR29
     @Inject
     Bar bar;
 
-    @Test(groups = "javaee-full-only")
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "5.1.4", id = "e") })
     public void testInjection() throws Exception {
         Assert.assertEquals(bar.ping(), 1);

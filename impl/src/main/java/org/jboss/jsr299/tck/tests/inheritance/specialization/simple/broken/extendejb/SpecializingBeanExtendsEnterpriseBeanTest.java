@@ -16,11 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.extendejb;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.SPECIALIZATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -30,11 +33,11 @@ public class SpecializingBeanExtendsEnterpriseBeanTest extends AbstractJSR299Tes
 
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(SpecializingBeanExtendsEnterpriseBeanTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(SpecializingBeanExtendsEnterpriseBeanTest.class).build();
     }
 
-    @Test(groups = { "specialization" })
+    @Test(groups = { INTEGRATION, SPECIALIZATION })
     @SpecAssertion(section = "3.1.4", id = "dc")
     public void testSpecializingClassDirectlyExtendsEnterpriseBean() {
     }

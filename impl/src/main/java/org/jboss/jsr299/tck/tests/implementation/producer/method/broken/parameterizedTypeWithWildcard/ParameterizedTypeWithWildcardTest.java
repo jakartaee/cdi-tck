@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.parameterizedTypeWithWildcard;
 
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -35,7 +37,7 @@ public class ParameterizedTypeWithWildcardTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ParameterizedTypeWithWildcardTest.class).build();
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3", id = "ha"), @SpecAssertion(section = "2.2.1", id = "lb") })
     public void testParameterizedReturnTypeWithWildcard() throws Exception {
     }

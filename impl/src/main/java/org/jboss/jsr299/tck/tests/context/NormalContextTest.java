@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.context;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -46,7 +48,7 @@ public class NormalContextTest extends AbstractJSR299Test {
                 .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "j"), @SpecAssertion(section = "6.2", id = "l"),
             @SpecAssertion(section = "6.3", id = "c") })
     public void testGetReturnsExistingInstance() {
@@ -63,7 +65,7 @@ public class NormalContextTest extends AbstractJSR299Test {
         assert fourth.getId() == 10;
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "l") })
     public void testGetWithCreationalContextReturnsNewInstance() {
         MyContextual bean = AfterBeanDiscoveryObserver.getBean();
@@ -75,7 +77,7 @@ public class NormalContextTest extends AbstractJSR299Test {
         assert bean.isCreateCalled();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.2", id = "nb")
     public void testGetMayNotReturnNullUnlessContextualCreateReturnsNull() {
         // The case of no creational context is already tested where a null is
@@ -88,7 +90,7 @@ public class NormalContextTest extends AbstractJSR299Test {
         assert bean.isCreateCalled();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.3", id = "e") })
     public void testSameNormalScopeBeanInjectedEverywhere() {
         SimpleBeanA instanceOfA = getInstanceByType(SimpleBeanA.class);

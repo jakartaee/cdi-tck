@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.el.integration;
 
+import static org.jboss.jsr299.tck.TestGroups.EL;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -30,6 +33,7 @@ import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class IntegrationWithUnifiedELTest extends AbstractJSR299Test {
 
@@ -43,7 +47,7 @@ public class IntegrationWithUnifiedELTest extends AbstractJSR299Test {
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").build();
     }
 
-    @Test(groups = { "el" })
+    @Test(groups = { EL })
     @SpecAssertions({ @SpecAssertion(section = "12.5", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
     public void testELResolverRegisteredWithJsf() throws Exception {
         WebClient webclient = new WebClient();
@@ -51,7 +55,7 @@ public class IntegrationWithUnifiedELTest extends AbstractJSR299Test {
         assert content.contains("Dolly");
     }
 
-    @Test(groups = { "el" })
+    @Test(groups = { EL })
     @SpecAssertions({ @SpecAssertion(section = "12.5", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
     public void testELResolverRegisteredWithServletContainer() throws Exception {
         WebClient webclient = new WebClient();

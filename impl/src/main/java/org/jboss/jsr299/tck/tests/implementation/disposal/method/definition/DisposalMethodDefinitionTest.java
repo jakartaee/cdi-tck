@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition;
 
+import static org.jboss.jsr299.tck.TestGroups.DISPOSAL;
 import static org.testng.Assert.assertEquals;
 
 import java.lang.annotation.Annotation;
@@ -82,7 +83,7 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
      * 
      * @throws Exception
      */
-    @Test(groups = { "disposalMethod" })
+    @Test(groups = { DISPOSAL })
     @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "h"), @SpecAssertion(section = "3.11", id = "a") })
     public void testDisposalMethodParametersGetInjected() throws Exception {
         Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
@@ -92,7 +93,7 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
         assert SpiderProducer.isDeadliestSpiderDestroyed();
     }
 
-    @Test(groups = { "disposalMethod" })
+    @Test(groups = { DISPOSAL })
     @SpecAssertion(section = "3.5.1", id = "da")
     public void testDisposalMethodForMultipleProducerMethods() throws Exception {
 
@@ -114,7 +115,7 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test {
     /**
      * Tests that a disposal method can be bound to a product of a producer field. CDI-145
      */
-    @Test(groups = { "disposalMethod" })
+    @Test(groups = { DISPOSAL })
     @SpecAssertion(section = "3.5.3", id = "ab")
     public void testDisposalMethodCalledForProducerField() throws Exception {
         SpiderProducer.reset();

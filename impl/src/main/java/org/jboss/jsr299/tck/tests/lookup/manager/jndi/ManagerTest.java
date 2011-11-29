@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.manager.jndi;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.MANAGER;
+
 import javax.enterprise.inject.spi.BeanManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -34,7 +37,7 @@ public class ManagerTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClass(ManagerTest.class).withClasses(JndiBeanManagerInjected.class).build();
     }
 
-    @Test(groups = { "manager", "ejb3", "integration" })
+    @Test(groups = { MANAGER, INTEGRATION })
     @SpecAssertion(section = "11.3.1", id = "d")
     public void testManagerLookupInJndi() throws Exception {
         BeanManager beanManager = getInstanceByType(JndiBeanManagerInjected.class).getManagerFromJndi();

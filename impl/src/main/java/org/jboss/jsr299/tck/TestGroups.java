@@ -16,15 +16,27 @@
  */
 package org.jboss.jsr299.tck;
 
+/**
+ * TestNG groups used in CDI TCK. Most of them are useless because of not used consistently.
+ * 
+ * The most important groups (used by TCK runner) are:
+ * <ul>
+ * <li>{@link #INTEGRATION} - used to exclude integration tests when running standalone container</li>
+ * <li>{@link #JAVAEE_FULL} - subset of integration tests used to exclude tests that require full Java EE platform; tests that
+ * belong to this group are also considered to be integration tests</li>
+ * </ul>
+ * 
+ * @author Martin Kouba
+ */
 public final class TestGroups {
 
     /**
-     * Integration test
+     * Integration test - cannot run in embedded arquillian container
      */
     public static final String INTEGRATION = "integration";
 
     /**
-     * Test requires full Java EE platform (JAX-WS, EJB timers, ...)
+     * Integration test that requires full Java EE platform (EAR packaging, JAX-WS, EJB timers, ...)
      */
     public static final String JAVAEE_FULL = "javaee-full";
 
@@ -37,6 +49,52 @@ public final class TestGroups {
 
     public static final String LIFECYCLE = "lifecycle";
 
+    public static final String ALTERNATIVES = "alternatives";
+
+    /**
+     * Probably needs to be rewritten
+     */
+    public static final String REWRITE = "rewrite";
+
+    public static final String RESOLUTION = "resolution";
+
+    public static final String POLICY = "policy";
+
+    public static final String EL = "el";
+
+    public static final String EVENTS = "events";
+
+    public static final String INHERITANCE = "inheritance";
+
+    public static final String NEW = "new";
+
+    public static final String DISPOSAL = "disposal";
+
+    public static final String INITIALIZER_METHOD = "initializerMethod";
+
+    public static final String SPECIALIZATION = "specialization";
+
+    public static final String MANAGER = "manager";
+
+    public static final String SERVLET = "servlet";
+
+    public static final String INJECTION = "injection";
+
+    public static final String INJECTION_POINT = "injectionPoint";
+
+    public static final String PRODUCER_METHOD = "producerMethod";
+
+    public static final String PRODUCER_FIELD = "producerField";
+
+    public static final String OBSERVER_METHOD = "observerMethod";
+
+    public static final String ANNOTATION_DEFINITION = "annotationDefinition";
+
+    public static final String INNER_CLASS = "innerClass";
+
+    /**
+     * No instance
+     */
     private TestGroups() {
     }
 

@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.context;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+
 import javax.enterprise.context.ContextNotActiveException;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
@@ -37,7 +39,7 @@ public class GetOnInactiveContextTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(GetFromContextualTest.class).build();
     }
 
-    @Test(groups = { "contexts" }, expectedExceptions = { ContextNotActiveException.class })
+    @Test(groups = { CONTEXTS }, expectedExceptions = { ContextNotActiveException.class })
     @SpecAssertion(section = "6.2", id = "m")
     public void testInvokingGetOnInactiveContextFails() {
         Context sessionContext = getCurrentManager().getContext(SessionScoped.class);

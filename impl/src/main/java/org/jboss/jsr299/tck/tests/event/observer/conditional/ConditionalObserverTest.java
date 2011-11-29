@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer.conditional;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class ConditionalObserverTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ConditionalObserverTest.class).build();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "5.5.6", id = "baa"), @SpecAssertion(section = "10.4.3", id = "a") })
     public void testConditionalObserver() {
         RecluseSpider.reset();
@@ -57,7 +59,7 @@ public class ConditionalObserverTest extends AbstractJSR299Test {
         RecluseSpider.reset();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "5.5.6", id = "baa")
     public void testObserverMethodInvokedOnReturnedInstanceFromContext() {
         RecluseSpider spider = getInstanceByType(RecluseSpider.class);

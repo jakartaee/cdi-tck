@@ -20,6 +20,7 @@ package org.jboss.jsr299.tck.tests.extensions.beanManager;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
@@ -96,7 +97,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
         getCurrentManager().validate(injectionPoint);
     }
 
-    @Test(groups = "rewrite")
+    @Test(groups = REWRITE)
     @SpecAssertion(section = "11.3.14", id = "aa")
     // Should also check a custom bindingtype
     public void testDetermineBindingType() {
@@ -106,7 +107,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
         assert !getCurrentManager().isQualifier(Transactional.class);
     }
 
-    @Test(groups = "rewrite")
+    @Test(groups = REWRITE)
     // Should also check a custom scope
     @SpecAssertion(section = "11.3.14", id = "ab")
     public void testDetermineScopeType() {
@@ -116,7 +117,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
         assert !getCurrentManager().isScope(Transactional.class);
     }
 
-    @Test(groups = "rewrite")
+    @Test(groups = REWRITE)
     @SpecAssertion(section = "11.3.14", id = "ac")
     // Should also check a custom stereotype
     public void testDetermineStereotype() {
@@ -126,7 +127,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
         assert !getCurrentManager().isStereotype(Transactional.class);
     }
 
-    @Test(groups = "rewrite")
+    @Test(groups = REWRITE)
     // WBRI-59
     // Should also check a custom interceptor binding type
     @SpecAssertion(section = "11.3.14", id = "ad")
@@ -137,7 +138,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
         assert !getCurrentManager().isInterceptorBinding(ApplicationScoped.class);
     }
 
-    @Test(groups = { "rewrite" })
+    @Test(groups = { REWRITE })
     @SpecAssertion(section = "11.3.14", id = "ae")
     // Should also check a custom sterotype
     public void testGetMetaAnnotationsForStereotype() {
@@ -166,7 +167,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
         });
     }
 
-    @Test(groups = { "rewrite" })
+    @Test(groups = { REWRITE })
     @SpecAssertion(section = "11.3.14", id = "af")
     public void testGetMetaAnnotationsForInterceptorBindingType() {
         Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingDefinition(Transactional.class);
@@ -174,7 +175,7 @@ public class BeanManagerTest extends AbstractJSR299Test {
         assert annotationSetMatches(metaAnnotations, Target.class, Retention.class, Documented.class, InterceptorBinding.class);
     }
 
-    @Test(groups = { "rewrite" })
+    @Test(groups = { REWRITE })
     @SpecAssertion(section = "11.3.14", id = "ag")
     // Should also check a custom defined scope
     public void testgetScope() {

@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.definition.scope;
 
+import static org.jboss.jsr299.tck.TestGroups.ANNOTATION_DEFINITION;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import java.util.Arrays;
@@ -52,7 +54,7 @@ public class ScopeDefinitionTest extends AbstractJSR299Test {
         assert bean.getScope().equals(AnotherScopeType.class);
     }
 
-    @Test(groups = { "annotationDefinition" })
+    @Test(groups = { ANNOTATION_DEFINITION })
     @SpecAssertion(section = "2.4.2", id = "aa")
     public void testScopeTypeHasCorrectTarget() {
         assert getBeans(Mullet.class).size() == 1;
@@ -64,7 +66,7 @@ public class ScopeDefinitionTest extends AbstractJSR299Test {
         assert elements.contains(ElementType.FIELD);
     }
 
-    @Test(groups = { "annotationDefinition" })
+    @Test(groups = { ANNOTATION_DEFINITION })
     @SpecAssertion(section = "2.4.2", id = "ba")
     public void testScopeTypeDeclaresScopeTypeAnnotation() {
         assert getBeans(Mullet.class).size() == 1;

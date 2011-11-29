@@ -16,10 +16,12 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.enterprise;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -29,11 +31,11 @@ import org.testng.annotations.Test;
 public class SessionBeanInjectionTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(SessionBeanInjectionTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(SessionBeanInjectionTest.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "5.5", id = "a"), @SpecAssertion(section = "5.5.2", id = "aa"),
             @SpecAssertion(section = "5.5.2", id = "ab"), @SpecAssertion(section = "5.5.2", id = "ba"),
             @SpecAssertion(section = "5.5.2", id = "be") })
@@ -41,14 +43,14 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test {
         assert getInstanceByType(FarmLocal.class).isInjectionPerformedCorrectly();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "5.5", id = "c"), @SpecAssertion(section = "5.5.2", id = "ak"),
             @SpecAssertion(section = "5.5.2", id = "al") })
     public void testInjectionOnNonContextualSessionBean() {
         assert getInstanceByType(InjectedSessionBeanLocal.class).getFarm().isInjectionPerformedCorrectly();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ed"), @SpecAssertion(section = "5.5.2", id = "ao"),
             @SpecAssertion(section = "5.5.2", id = "ap") })
     public void testInjectionOnEJBInterceptor() {
@@ -58,7 +60,7 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test {
         assert getInstanceByType(InjectedSessionBeanLocal.class).getFarm().getAnimalCount() == 2;
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "4.2", id = "ab")
     public void testFieldDeclaredInSuperclassInjected() {
         DeluxeHenHouseLocal henHouse = getInstanceByType(DeluxeHenHouseLocal.class);
@@ -66,7 +68,7 @@ public class SessionBeanInjectionTest extends AbstractJSR299Test {
         assert henHouse.getFox().getName().equals("gavin");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "4.2", id = "ad")
     public void testFieldDeclaredInSuperclassIndirectlyInjected() {
         MegaPoorHenHouseLocal henHouse = getInstanceByType(MegaPoorHenHouseLocal.class);

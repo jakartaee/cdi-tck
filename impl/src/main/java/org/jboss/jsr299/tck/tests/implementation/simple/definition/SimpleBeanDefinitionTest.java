@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.definition;
 
+import static org.jboss.jsr299.tck.TestGroups.INNER_CLASS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -45,7 +47,7 @@ public class SimpleBeanDefinitionTest extends AbstractJSR299Test {
         assert getBeans(Cow_NotBean.class).size() == 0;
     }
 
-    @Test(groups = "innerClass")
+    @Test(groups = INNER_CLASS)
     @SpecAssertions({ @SpecAssertion(section = "3.1.1", id = "ba") })
     public void testStaticInnerClassDeclaredInJavaAllowed() {
         assert getBeans(StaticInnerClass.class).size() == 1;

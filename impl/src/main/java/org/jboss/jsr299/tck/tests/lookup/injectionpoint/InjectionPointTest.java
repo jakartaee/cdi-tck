@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
+import static org.jboss.jsr299.tck.TestGroups.INJECTION_POINT;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -53,7 +55,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(InjectionPointTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertions({ @SpecAssertion(section = "6.5.3", id = "d"), @SpecAssertion(section = "5.5.7", id = "aa") })
     public void testGetBean() {
 
@@ -67,7 +69,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert beanWithInjectionPoint.getInjectedMetadata().getBean().equals(resolvedBeans.iterator().next());
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "ba")
     public void testGetType() {
         // Get an instance of the bean which has another bean injected into it
@@ -77,7 +79,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "bc")
     public void testGetBindingTypes() {
         // Get an instance of the bean which has another bean injected into it
@@ -89,7 +91,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert Default.class.isAssignableFrom(bindingTypes.iterator().next().annotationType());
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "ca")
     public void testGetMemberField() {
         // Get an instance of the bean which has another bean injected into it
@@ -99,7 +101,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert Field.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getMember().getClass());
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "cb")
     public void testGetMemberMethod() {
         // Get an instance of the bean which has another bean injected into it
@@ -114,7 +116,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "cc")
     public void testGetMemberConstructor() {
         // Get an instance of the bean which has another bean injected into it
@@ -129,7 +131,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "daa")
     public void testGetAnnotatedField() {
         // Get an instance of the bean which has another bean injected into it
@@ -140,7 +142,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated().isAnnotationPresent(AnimalStereotype.class);
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "daa")
     public void testGetAnnotatedParameter() {
         // Get an instance of the bean which has another bean injected into it
@@ -151,14 +153,14 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert annotationSetMatches(beanWithInjectionPoint.getInjectedMetadata().getQualifiers(), Default.class);
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "ea")
     public void testDependentScope() {
         assert getBeans(InjectionPoint.class).size() == 1;
         assert getBeans(InjectionPoint.class).iterator().next().getScope().equals(Dependent.class);
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "eb")
     public void testPassivationCapability() throws Exception {
         InjectionPoint ip1 = getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
@@ -174,7 +176,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert ip3.getType().equals(BeanWithInjectionPointMetadata.class);
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "ea")
     public void testApiTypeInjectionPoint() {
         // Get an instance of the bean which has another bean injected into it
@@ -184,7 +186,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert InjectionPoint.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getClass());
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "ea")
     public void testCurrentBinding() {
         // Get an instance of the bean which has another bean injected into it
@@ -194,7 +196,7 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = { "injectionPoint" })
+    @Test(groups = { INJECTION_POINT })
     @SpecAssertion(section = "5.5.7", id = "dca")
     public void testIsTransient() {
         FieldInjectionPointBean bean1 = getInstanceByType(FieldInjectionPointBean.class);

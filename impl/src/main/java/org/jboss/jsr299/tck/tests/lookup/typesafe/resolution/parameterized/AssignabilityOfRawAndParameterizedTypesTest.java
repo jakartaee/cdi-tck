@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.parameterized;
 
+import static org.jboss.jsr299.tck.TestGroups.RESOLUTION;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -40,7 +42,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
         return new WebArchiveBuilder().withTestClassPackage(AssignabilityOfRawAndParameterizedTypesTest.class).build();
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertions({ @SpecAssertion(section = "5.2", id = "kb"), @SpecAssertion(section = "2.2.1", id = "f"),
             @SpecAssertion(section = "2.2.1", id = "g") })
     public void testAssignabilityToRawType() {
@@ -48,7 +50,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
         assert getBeans(Dao.class).size() == 4; // Dao, DaoProducer.getDao(), DaoProducer.getRawDao and ObjectDao
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertion(section = "5.2.3", id = "ba")
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithActualTypes() {
         assert getBeans(new TypeLiteral<Map<Integer, Integer>>() {
@@ -57,7 +59,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
         }).iterator().next().getTypes().contains(IntegerHashMap.class);
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "c") })
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcards() {
         assert getBeans(new TypeLiteral<HashMap<? extends Number, ? super Integer>>() {
@@ -66,13 +68,13 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
         }).iterator().next().getTypes().contains(IntegerHashMap.class);
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "b") })
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcardsAtInjectionPoint() {
         assert getInstanceByType(InjectedBean.class).getMap() instanceof IntegerHashMap;
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertion(section = "5.2.3", id = "da")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards() {
         Set<Bean<Result<? extends Throwable, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Throwable, ? super Exception>>() {
@@ -81,7 +83,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertion(section = "5.2.3", id = "db")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards2() {
         Set<Bean<Result<? extends Exception, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Exception, ? super Exception>>() {
@@ -90,7 +92,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertion(section = "5.2.3", id = "e")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithActualTypes() {
         Set<Bean<Result<Exception, Exception>>> beans = getBeans(new TypeLiteral<Result<Exception, Exception>>() {
@@ -99,7 +101,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractJSR299T
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
     }
 
-    @Test(groups = { "resolution" })
+    @Test(groups = { RESOLUTION })
     @SpecAssertion(section = "5.2.3", id = "f")
     public <T1 extends Exception, T2 extends Exception> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
         Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>() {

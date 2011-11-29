@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.deployment.packaging.bundledLibrary;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
@@ -42,7 +44,7 @@ public class LibraryInEarTest extends AbstractJSR299Test {
                 .withClasses(Baz.class, BazLocal.class, Foo.class).withBeanLibrary(Bar.class).build();
     }
 
-    @Test
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbb") })
     public void test() {
         assert getCurrentManager().getBeans(Foo.class).size() == 1;

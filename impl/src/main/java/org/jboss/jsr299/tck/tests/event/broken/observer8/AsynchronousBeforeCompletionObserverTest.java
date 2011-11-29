@@ -38,7 +38,7 @@ public class AsynchronousBeforeCompletionObserverTest extends AbstractJSR299Test
         return new WebArchiveBuilder().withTestClassPackage(AsynchronousBeforeCompletionObserverTest.class).build();
     }
 
-    // @Test(groups = { "events" })
+    // @Test(groups = { EVENTS })
     // @SpecAssertion(section = "10.5.6", id = "b")
     // Asynchronous events are not specified now
     public void testAsynchronousObserverAsBeforeCompletionObserverFails() {

@@ -16,11 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer.notBusinessMethod;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -37,11 +40,11 @@ public class EJBObserverMethodNotBusinessMethodTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EJBObserverMethodNotBusinessMethodTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EJBObserverMethodNotBusinessMethodTest.class).build();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { INTEGRATION, EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "10.4", id = "d"), @SpecAssertion(section = "10.4.2", id = "g") })
     public void testObserverMethodOnEnterpriseBeanNotBusinessMethodOrStaticFails() {
     }

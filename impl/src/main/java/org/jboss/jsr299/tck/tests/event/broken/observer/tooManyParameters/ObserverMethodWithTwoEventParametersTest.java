@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.observer.tooManyParameters;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -35,7 +37,7 @@ public class ObserverMethodWithTwoEventParametersTest extends AbstractJSR299Test
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodWithTwoEventParametersTest.class).build();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "10.4.1", id = "a"), @SpecAssertion(section = "10.4.2", id = "b") })
     public void testObserverMethodMustHaveOnlyOneEventParameter() {
     }

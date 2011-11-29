@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.select;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
@@ -41,7 +43,7 @@ public class SelectEventTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(SelectEventTest.class).build();
     }
 
-    @Test(groups = "events")
+    @Test(groups = EVENTS)
     @SpecAssertion(section = "10.3.1", id = "eaa")
     public void testEventSelectReturnsEventOfSameType() {
         AlarmSystem alarm = getInstanceByType(AlarmSystem.class);
@@ -75,7 +77,7 @@ public class SelectEventTest extends AbstractJSR299Test {
         assert alarm.getNumViolentBreakIns() == 1;
     }
 
-    @Test(groups = { "events" }, expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = { EVENTS }, expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "10.3.1", id = "eab")
     public <T> void testEventSelectThrowsExceptionIfEventTypeHasTypeVariable() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
@@ -83,7 +85,7 @@ public class SelectEventTest extends AbstractJSR299Test {
         });
     }
 
-    @Test(groups = "events", expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = EVENTS, expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "10.3.1", id = "eba")
     public void testEventSelectThrowsExceptionForDuplicateBindingType() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
@@ -92,7 +94,7 @@ public class SelectEventTest extends AbstractJSR299Test {
         });
     }
 
-    @Test(groups = "events", expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = EVENTS, expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "10.3.1", id = "eba")
     public void testEventSelectWithSubtypeThrowsExceptionForDuplicateBindingType() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
@@ -101,7 +103,7 @@ public class SelectEventTest extends AbstractJSR299Test {
         });
     }
 
-    @Test(groups = "events", expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = EVENTS, expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "10.3.1", id = "ec")
     public void testEventSelectThrowsExceptionIfAnnotationIsNotBindingType() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
@@ -109,7 +111,7 @@ public class SelectEventTest extends AbstractJSR299Test {
         });
     }
 
-    @Test(groups = "events", expectedExceptions = IllegalArgumentException.class)
+    @Test(groups = EVENTS, expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "10.3.1", id = "ec")
     public void testEventSelectWithSubtypeThrowsExceptionIfAnnotationIsNotBindingType() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);

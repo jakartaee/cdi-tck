@@ -2888,7 +2888,7 @@
         </assertion>
 
         <assertion id="baa">
-            <text>When the container calls an observer method (defined in Section 10.5 "Observer methods"), if the observer method is non-static, the container must obtain a contextual instance of the bean according to Section 6.5.2 "Contextual instance of a bean". If this observer method is a conditional observer method, obtain the contextual instance that already exists, only if the scope of the bean that declares the observer method is currently active, without creating a new contextual instance. Finally, the container must invoke the observer method on the resulting instance, if any, as a business method invocation, as defined in Section 7.2 "Container invocations and interception".
+            <text>When the container calls an observer method (defined in Section 10.4 "Observer methods"), if the observer method is non-static, the container must obtain a contextual instance of the bean according to Section 6.5.2 "Contextual instance of a bean". If this observer method is a conditional observer method, obtain the contextual instance that already exists, only if the scope of the bean that declares the observer method is currently active, without creating a new contextual instance. Finally, the container must invoke the observer method on the resulting instance, if any, as a business method invocation, as defined in Section 7.2 "Container invocations and interception".
             </text>
         </assertion>
 

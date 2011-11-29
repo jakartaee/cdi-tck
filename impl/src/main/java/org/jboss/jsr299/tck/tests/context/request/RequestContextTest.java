@@ -16,6 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.context.request;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+import static org.jboss.jsr299.tck.TestGroups.SERVLET;
+
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -30,6 +35,7 @@ import org.testng.annotations.Test;
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class RequestContextTest extends AbstractJSR299Test {
 
@@ -45,7 +51,7 @@ public class RequestContextTest extends AbstractJSR299Test {
     /**
      * The request scope is active during the service() method of any Servlet in the web application.
      */
-    @Test(groups = { "contexts", "servlet", "integration" })
+    @Test(groups = { CONTEXTS, SERVLET })
     @SpecAssertion(section = "6.7.1", id = "aa")
     public void testRequestScopeActiveDuringServiceMethod() throws Exception {
         WebClient webClient = new WebClient();
@@ -56,7 +62,7 @@ public class RequestContextTest extends AbstractJSR299Test {
     /**
      * The request scope is active during the doFilter() method of any Servlet in the web application.
      */
-    @Test(groups = { "contexts", "servlet", "integration" })
+    @Test(groups = { CONTEXTS, SERVLET })
     @SpecAssertion(section = "6.7.1", id = "ab")
     public void testRequestScopeActiveDuringServletFilter() throws Exception {
         WebClient webClient = new WebClient();
@@ -67,7 +73,7 @@ public class RequestContextTest extends AbstractJSR299Test {
     /**
      * The request context is destroyed at the end of the servlet request, after the Servlet service() method returns.
      */
-    @Test(groups = { "contexts", "servlet", "integration", "rewrite" })
+    @Test(groups = { CONTEXTS, SERVLET, REWRITE })
     @SpecAssertion(section = "6.7.1", id = "baa")
     // TODO Need to tidy this one up, make it actually check that the context is active til after the service method ends
     public void testRequestScopeIsDestroyedAfterServletRequest() throws Exception {

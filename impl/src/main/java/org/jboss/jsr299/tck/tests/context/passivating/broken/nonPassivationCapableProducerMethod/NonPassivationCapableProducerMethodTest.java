@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.nonPassivationCapableProducerMethod;
 
+import static org.jboss.jsr299.tck.TestGroups.PASSIVATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -40,7 +42,7 @@ public class NonPassivationCapableProducerMethodTest extends AbstractJSR299Test 
         return new WebArchiveBuilder().withTestClassPackage(NonPassivationCapableProducerMethodTest.class).build();
     }
 
-    @Test(groups = { "passivation" })
+    @Test(groups = { PASSIVATION })
     @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "ca") })
     public void testNonPassivationCapableProducerMethodNotOk() {
     }

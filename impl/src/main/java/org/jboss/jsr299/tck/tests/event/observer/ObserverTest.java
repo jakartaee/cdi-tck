@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.observer;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
@@ -39,7 +41,7 @@ public class ObserverTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ObserverTest.class).build();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "10.2", id = "i"), @SpecAssertion(section = "10.5", id = "aa") })
     public void testObserverNotifiedWhenEventTypeAndAllBindingsMatch() {
         Annotation roleBinding = new RoleBinding("Admin");
@@ -71,7 +73,7 @@ public class ObserverTest extends AbstractJSR299Test {
         assert LastObserver.wasNotified;
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "11.1.3", id = "b")
     public void testGetBeanOnObserverMethod() {
         Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
@@ -80,7 +82,7 @@ public class ObserverTest extends AbstractJSR299Test {
         assert observerMethod.getBeanClass().equals(StockWatcher.class);
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "11.1.3", id = "c")
     public void testGetObservedTypeOnObserverMethod() {
         Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
@@ -89,7 +91,7 @@ public class ObserverTest extends AbstractJSR299Test {
         assert observerMethod.getObservedType().equals(StockPrice.class);
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "11.1.3", id = "c")
     public void testGetObservedBindingsOnObserverMethod() {
         Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
@@ -98,7 +100,7 @@ public class ObserverTest extends AbstractJSR299Test {
         assert observerMethod.getObservedQualifiers().isEmpty();
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "11.1.3", id = "d")
     public void testGetNotifyOnObserverMethod() {
         Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());

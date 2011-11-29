@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.event.resolve.typeWithParameters;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import java.util.ArrayList;
 
 import javax.enterprise.event.Observes;
@@ -65,7 +67,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractJSR29
         }
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "b"), @SpecAssertion(section = "11.3.11", id = "a") })
     public void testResolvingChecksTypeParameters() {
         assert getCurrentManager().resolveObserverMethods(new StringList()).size() == 1;
@@ -73,7 +75,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractJSR29
         assert getCurrentManager().resolveObserverMethods(new CharacterList()).size() == 0;
     }
 
-    @Test(groups = { "events" })
+    @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "a"), @SpecAssertion(section = "10.4", id = "aa")
     // FIXME also 10.3.1, which does not yet have spec assertions cataloged
     })

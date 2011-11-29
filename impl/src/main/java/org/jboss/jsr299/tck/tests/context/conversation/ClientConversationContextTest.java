@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.context.conversation;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -34,6 +38,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Dan Allen
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ClientConversationContextTest extends AbstractConversationTest {
 
@@ -50,7 +55,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "hb"), @SpecAssertion(section = "6.7.4", id = "o") })
     public void testConversationIdSetByContainerIsUnique() throws Exception {
         WebClient client = new WebClient();
@@ -70,7 +75,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert !c1.equals(c2);
     }
 
-    @Test(groups = { "contexts", "rewrite" })
+    @Test(groups = { CONTEXTS, REWRITE })
     @SpecAssertion(section = "6.7.4", id = "j")
     // TODO this test doesn't verify that the conversation context itself is destroyed
     public void testTransientConversationInstancesDestroyedAtRequestEnd() throws Exception {
@@ -81,7 +86,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert isCloudDestroyed(client);
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "k")
     public void testLongRunningConversationInstancesNotDestroyedAtRequestEnd() throws Exception {
         WebClient client = new WebClient();
@@ -96,7 +101,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert !isCloudDestroyed(client);
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "p")
     public void testConversationsDontCrossSessionBoundary1() throws Exception {
         WebClient client = new WebClient();
@@ -126,7 +131,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert !hasRained(rain);
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "p")
     public void testConversationsDontCrossSessionBoundary2() throws Exception {
         WebClient client = new WebClient();
@@ -155,7 +160,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert !hasRained(rain);
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "a")
     public void testConversationActiveDuringNonFacesRequest() throws Exception {
         WebClient client = new WebClient();
@@ -164,7 +169,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert span.getTextContent().equals(Cloud.NAME);
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "f")
     public void testConversationBeginMakesConversationLongRunning() throws Exception {
         WebClient client = new WebClient();
@@ -178,7 +183,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert isLongRunning(page);
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.5", id = "r")
     public void testBeginAlreadyLongRunningConversationThrowsException() throws Exception {
         WebClient client = new WebClient();
@@ -198,7 +203,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert page.getBody().getTextContent().contains("Hello world!");
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "g"), @SpecAssertion(section = "6.7.5", id = "k"),
             @SpecAssertion(section = "6.7.5", id = "o") })
     public void testConversationEndMakesConversationTransient() throws Exception {
@@ -218,7 +223,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert !isLongRunning(page);
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.5", id = "q")
     public void testEndTransientConversationThrowsException() throws Exception {
         WebClient client = new WebClient();
@@ -232,7 +237,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert page.getBody().getTextContent().contains("Hello world!");
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.5", id = "ib"), @SpecAssertion(section = "6.7.5", id = "iaa") })
     public void testBeanWithRequestScope() throws Exception {
         WebClient client = new WebClient();
@@ -240,7 +245,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert page.getBody().getTextContent().contains("Correct scope: true");
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.5", id = "id")
     public void testBeanWithDefaultQualifier() throws Exception {
         WebClient client = new WebClient();
@@ -248,7 +253,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert page.getBody().getTextContent().contains("Correct qualifier: true");
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.5", id = "ie")
     public void testBeanWithNameJavaxEnterpriseContextConversation() throws Exception {
         WebClient client = new WebClient();
@@ -256,7 +261,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert page.getBody().getTextContent().contains("Correct name: true");
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.5", id = "l"), @SpecAssertion(section = "6.7.4", id = "e") })
     public void testTransientConversationHasNullId() throws Exception {
         WebClient client = new WebClient();
@@ -264,7 +269,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert page.getBody().getTextContent().contains("Default conversation has null id: true");
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "ha"), @SpecAssertion(section = "6.7.5", id = "j") })
     public void testConversationIdMayBeSetByApplication() throws Exception {
         WebClient client = new WebClient();
@@ -280,7 +285,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert page.getBody().getTextContent().contains("Cumulus humilis");
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "hb"), @SpecAssertion(section = "6.7.5", id = "j") })
     public void testConversationIdMayBeSetByContainer() throws Exception {
         WebClient client = new WebClient();
@@ -296,7 +301,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert page.getBody().getTextContent().contains("Cumulus congestus");
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "tb")
     public void testNonexistentConversationExceptionThrown() throws Exception {
         WebClient client = new WebClient();

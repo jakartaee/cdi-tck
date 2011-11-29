@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.simple.lifecycle;
 
+import static org.jboss.jsr299.tck.TestGroups.INJECTION;
+import static org.jboss.jsr299.tck.TestGroups.LIFECYCLE;
+import static org.jboss.jsr299.tck.TestGroups.SPECIALIZATION;
+
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.context.Dependent;
@@ -48,7 +52,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(SimpleBeanLifecycleTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = "beanConstruction")
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "f"), @SpecAssertion(section = "3.8.1", id = "g"),
             @SpecAssertion(section = "2.3.5", id = "d") })
     public void testInjectionOfParametersIntoBeanConstructor() {
@@ -88,7 +92,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         assert Duck.constructedCorrectly;
     }
 
-    @Test(groups = { "specialization" })
+    @Test(groups = { SPECIALIZATION })
     @SpecAssertions({ @SpecAssertion(section = "3.1.4", id = "ac") })
     public void testSpecializedBeanExtendsManagedBean() {
         assert MountainLion.class.getAnnotation(Specializes.class) != null;
@@ -107,7 +111,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         assert specializedBean.getBeanClass().getSuperclass().equals(Lion.class);
     }
 
-    @Test(groups = "beanLifecycle")
+    @Test(groups = LIFECYCLE)
     @SpecAssertions({ @SpecAssertion(section = "6.1.1", id = "d"), @SpecAssertion(section = "6.1.1", id = "g") })
     public void testCreateReturnsSameBeanPushed() {
         final CreationalContext<ShoeFactory> creationalContext = new MockCreationalContext<ShoeFactory>();
@@ -119,7 +123,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         }
     }
 
-    @Test(groups = "beanLifecycle")
+    @Test(groups = LIFECYCLE)
     @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa") })
     public void testBeanCreateInjectsDependenciesAndInvokesInitializerToInstantiateInstance() {
         MockCreationalContext.reset();
@@ -134,7 +138,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         assert fishPond.postConstructCalled; // required by Managed Bean specification
     }
 
-    @Test(groups = { "beanLifecycle" })
+    @Test(groups = { LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "2", id = "g"), @SpecAssertion(section = "2.2.1", id = "b"),
             @SpecAssertion(section = "2.2.1", id = "k"), @SpecAssertion(section = "12.2", id = "da") })
     public void testManagedBean() {
@@ -145,7 +149,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         assert redSnapper.isTouched();
     }
 
-    @Test(groups = "injection")
+    @Test(groups = INJECTION)
     @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa"), @SpecAssertion(section = "3.8.1", id = "aa"),
             @SpecAssertion(section = "2.3.4", id = "a"), @SpecAssertion(section = "3.9", id = "a"),
             @SpecAssertion(section = "12.1", id = "bca") })
@@ -159,7 +163,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         assert tunaFarm.qualifiedTuna.getName().equals("qualifiedTuna");
     }
 
-    @Test(groups = "beanLifecycle")
+    @Test(groups = LIFECYCLE)
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "l") })
     public void testContextCreatesNewInstanceForInjection() {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
@@ -169,7 +173,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         assert tunaFarm.tuna != null;
     }
 
-    @Test(groups = { "beanLifecycle", "lifecycleCallbacks" })
+    @Test(groups = { LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa"), @SpecAssertion(section = "7.3.1", id = "ba") })
     public void testPostConstructPreDestroy() {
         assert getBeans(Farm.class).size() == 1;
@@ -184,7 +188,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         assert farm.farmOffice.noOfStaff == 0;
     }
 
-    @Test(groups = { "beanLifecycle", "lifecycleCallbacks" })
+    @Test(groups = { LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "6.5.3", id = "a0"), @SpecAssertion(section = "7.3.1", id = "ba"),
             @SpecAssertion(section = "6.5.3", id = "c") })
     public void testContextualDestroyDisposesWhenNecessary() {
@@ -200,7 +204,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         assert !Egg.isEggDestroyed();
     }
 
-    @Test(groups = "beanLifecycle")
+    @Test(groups = LIFECYCLE)
     @SpecAssertions({ @SpecAssertion(section = "6.1", id = "a1") })
     public void testContextualDestroyCatchesException() {
         Bean<Cod> codBean = getBeans(Cod.class).iterator().next();
@@ -210,7 +214,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
         codBean.destroy(codInstance, creationalContext);
     }
 
-    @Test(groups = "beanLifecycle")
+    @Test(groups = LIFECYCLE)
     @SpecAssertions({ @SpecAssertion(section = "5.5.3", id = "a") })
     public void testDependentsDestroyedAfterPreDestroy() {
         Bean<FishPond> pondBean = getBeans(FishPond.class).iterator().next();

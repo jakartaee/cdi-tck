@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.interceptors.definition;
 
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
@@ -79,7 +81,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test {
         });
     }
 
-    @Test(groups = "rewrite")
+    @Test(groups = REWRITE)
     @SpecAssertions({ @SpecAssertion(section = "11.1.2", id = "c"), @SpecAssertion(section = "11.1.2", id = "e") })
     // WBRI-59
     // TODO Add tests for EJB timeout method PLM

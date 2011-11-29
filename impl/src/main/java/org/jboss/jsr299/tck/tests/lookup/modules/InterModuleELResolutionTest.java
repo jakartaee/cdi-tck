@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.modules;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -35,6 +37,7 @@ import org.testng.annotations.Test;
  * 
  * @author Martin Kouba
  */
+@Test
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InterModuleELResolutionTest extends AbstractJSR299Test {
 
@@ -52,7 +55,7 @@ public class InterModuleELResolutionTest extends AbstractJSR299Test {
     @Inject
     WebFooELResolver fooELResolver;
 
-    @Test(groups = "javaee-full-only")
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = "5.1", id = "ac")
     public void testEnabledManagedBeanAvailableForELResolution() throws Exception {
         assert fooELResolver.ping() == 0;

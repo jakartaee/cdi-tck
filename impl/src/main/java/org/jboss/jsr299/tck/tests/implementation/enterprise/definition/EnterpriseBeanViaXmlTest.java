@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.implementation.enterprise.definition;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +44,7 @@ public class EnterpriseBeanViaXmlTest extends AbstractJSR299Test {
                 .build();
     }
 
-    @Test(groups = { "enterpriseBeans", "ejbjarxml" })
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "3.1.1", id = "n"), @SpecAssertion(section = "3.2.2", id = "ba") })
     public void testEjbDeclaredInXmlNotSimpleBean() {
         Bean<ElephantLocal> elephantBean = getBeans(ElephantLocal.class).iterator().next();

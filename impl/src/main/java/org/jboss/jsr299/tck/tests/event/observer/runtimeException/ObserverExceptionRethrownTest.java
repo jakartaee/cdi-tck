@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.event.observer.runtimeException;
 
+import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -39,7 +41,7 @@ public class ObserverExceptionRethrownTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ObserverExceptionRethrownTest.class).build();
     }
 
-    @Test(groups = { "events" }, expectedExceptions = { TeaCupPomeranian.OversizedException.class })
+    @Test(groups = { EVENTS }, expectedExceptions = { TeaCupPomeranian.OversizedException.class })
     @SpecAssertion(section = "10.5", id = "cc")
     public void testNonTransactionalObserverThrowsNonCheckedExceptionIsRethrown() {
         getCurrentManager().fireEvent("string event");

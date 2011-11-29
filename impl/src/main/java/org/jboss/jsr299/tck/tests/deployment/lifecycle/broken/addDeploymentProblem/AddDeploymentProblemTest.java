@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.addDeploymentProblem;
 
+import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -44,7 +46,7 @@ public class AddDeploymentProblemTest extends AbstractJSR299Test {
                 .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-    @Test(groups = { "rewrite" })
+    @Test(groups = { REWRITE })
     @SpecAssertion(section = "11.5.3", id = "b")
     public void testObserverDeploymentProblemTreatedAsDeploymentError() {
     }

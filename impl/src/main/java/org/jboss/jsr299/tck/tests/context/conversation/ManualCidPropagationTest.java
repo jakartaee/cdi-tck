@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.context.conversation;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -32,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Dan Allen
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ManualCidPropagationTest extends AbstractConversationTest {
 
@@ -45,7 +49,7 @@ public class ManualCidPropagationTest extends AbstractConversationTest {
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "n")
     public void testManualCidPropagation() throws Exception {
         WebClient webClient = new WebClient();

@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.alternative;
 
+import static org.jboss.jsr299.tck.TestGroups.ALTERNATIVES;
+
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +43,7 @@ public class AlternativeAvailabilityTest extends AbstractJSR299Test {
                 .build();
     }
 
-    @Test(groups = { "alternatives" })
+    @Test(groups = { ALTERNATIVES })
     @SpecAssertions({ @SpecAssertion(section = "5.1", id = "e"), @SpecAssertion(section = "5.1.1", id = "c"),
             @SpecAssertion(section = "5.1.1", id = "ea"), @SpecAssertion(section = "2.6", id = "a"),
             @SpecAssertion(section = "2.6.1", id = "a"), @SpecAssertion(section = "12.4", id = "ka")
@@ -62,14 +64,14 @@ public class AlternativeAvailabilityTest extends AbstractJSR299Test {
         assert getCurrentManager().getBeans("dog").size() == 0;
     }
 
-    @Test(groups = { "alternatives" })
+    @Test(groups = { ALTERNATIVES })
     @SpecAssertion(section = "11.1", id = "bc")
     public void testIsAlternative() {
         Bean<?> cat = getCurrentManager().resolve(getCurrentManager().getBeans(Cat.class));
         assert cat.isAlternative();
     }
 
-    @Test(groups = { "alternatives" })
+    @Test(groups = { ALTERNATIVES })
     @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "g"), @SpecAssertion(section = "2.6.1", id = "b"),
             @SpecAssertion(section = "2.7", id = "aa"), @SpecAssertion(section = "2.7.1.4", id = "a") })
     public void testAnyEnabledAlternativeStereotypeMakesAlternativeEnabled() throws Exception {
@@ -77,7 +79,7 @@ public class AlternativeAvailabilityTest extends AbstractJSR299Test {
         assert getCurrentManager().getBeans("bird").size() == 1;
     }
 
-    @Test(groups = { "alternatives" })
+    @Test(groups = { ALTERNATIVES })
     @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "fa") })
     public void testProducersOnAlternativeClass() throws Exception {
         assert getBeans(Sheep.class, new AnnotationLiteral<Wild>() {
@@ -86,7 +88,7 @@ public class AlternativeAvailabilityTest extends AbstractJSR299Test {
         }).size() == 0;
     }
 
-    @Test(groups = { "alternatives" })
+    @Test(groups = { ALTERNATIVES })
     @SpecAssertions({ @SpecAssertion(section = "2.6.1", id = "ab"), @SpecAssertion(section = "2.6.1", id = "ac") })
     public void testProducerAlternativesOnMethodAndField() throws Exception {
         assert getBeans(Cat.class, new AnnotationLiteral<Wild>() {
@@ -95,7 +97,7 @@ public class AlternativeAvailabilityTest extends AbstractJSR299Test {
         }).size() == 0;
     }
 
-    @Test(groups = { "alternatives" })
+    @Test(groups = { ALTERNATIVES })
     @SpecAssertions({ @SpecAssertion(section = "2.6.1", id = "c"), @SpecAssertion(section = "2.6.1", id = "d") })
     public void testStereotypeAlternativeOnProducerMethodAndField() throws Exception {
         assert getBeans(Bird.class, new AnnotationLiteral<Tame>() {

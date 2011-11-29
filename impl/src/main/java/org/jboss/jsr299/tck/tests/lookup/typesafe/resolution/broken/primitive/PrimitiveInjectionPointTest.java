@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.typesafe.resolution.broken.primitive;
 
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
+import static org.jboss.jsr299.tck.TestGroups.RESOLUTION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +37,7 @@ public class PrimitiveInjectionPointTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(PrimitiveInjectionPointTest.class).build();
     }
 
-    @Test(groups = { "resolution", "producerMethod" })
+    @Test(groups = { RESOLUTION, PRODUCER_METHOD })
     @SpecAssertion(section = "5.2.4", id = "aa")
     public void testPrimitiveInjectionPointResolvedToNonPrimitiveProducerMethod() {
     }

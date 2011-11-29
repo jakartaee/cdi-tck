@@ -17,7 +17,6 @@
 package org.jboss.jsr299.tck.tests.context.request.ejb;
 
 import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
-import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
 
 import java.util.concurrent.Future;
@@ -40,6 +39,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EJBRequestContextTest extends AbstractJSR299Test {
 
@@ -60,7 +60,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test {
      * and during message delivery to any EJB message driven bean.
      */
     @OperateOnDeployment("TEST")
-    @Test(groups = { JAVAEE_FULL, CONTEXTS, INTEGRATION })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.1", id = "gc")
     public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
@@ -80,7 +80,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test {
      * The request context is destroyed after the remote method invocation, timeout or message delivery completes.
      */
     @OperateOnDeployment("TEST")
-    @Test(groups = { JAVAEE_FULL, CONTEXTS, INTEGRATION })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.1", id = "hc")
     public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
@@ -107,7 +107,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test {
     BarBean bar;
 
     @OperateOnDeployment("TEST")
-    @Test(groups = { JAVAEE_FULL, CONTEXTS, INTEGRATION })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ga"), @SpecAssertion(section = "6.7.1", id = "ha") })
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
         assert foo.ping() != null;
@@ -115,7 +115,7 @@ public class EJBRequestContextTest extends AbstractJSR299Test {
     }
 
     @OperateOnDeployment("TEST")
-    @Test(groups = { JAVAEE_FULL, CONTEXTS, INTEGRATION })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "gb"), @SpecAssertion(section = "6.7.1", id = "hb") })
     public void testRequestScopeActiveDuringAsyncCallToEjb() throws Exception {
         SimpleRequestBean simpleRequestBean = getInstanceByType(SimpleRequestBean.class);

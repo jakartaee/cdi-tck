@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.context;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.CreationalContext;
@@ -45,7 +47,7 @@ public class ContextDestroysBeansTest extends AbstractJSR299Test {
                 .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "p"), @SpecAssertion(section = "6.3", id = "d") })
     public void testContextDestroysBeansWhenDestroyed() {
         MyContextual bean = AfterBeanDiscoveryObserver.getBean();

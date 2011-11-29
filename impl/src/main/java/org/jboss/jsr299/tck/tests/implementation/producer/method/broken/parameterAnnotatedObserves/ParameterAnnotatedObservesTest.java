@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.parameterAnnotatedObserves;
 
+import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,7 +36,7 @@ public class ParameterAnnotatedObservesTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(ParameterAnnotatedObservesTest.class).build();
     }
 
-    @Test(groups = "producerMethod")
+    @Test(groups = PRODUCER_METHOD)
     @SpecAssertion(section = "3.3.2", id = "ea")
     public void testProducerMethodWithParameterAnnotatedObserves() throws Exception {
     }

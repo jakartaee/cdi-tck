@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.lifecycle;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+import static org.jboss.jsr299.tck.TestGroups.LIFECYCLE;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -29,8 +32,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
-import org.jboss.jsr299.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -51,11 +54,11 @@ import org.testng.annotations.Test;
 public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
 
     @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseBeanLifecycleTest.class).build();
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseBeanLifecycleTest.class).build();
     }
 
-    @Test(groups = { "enterpriseBeans", "clientProxy", "lifecycle", "integration" })
+    @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "aa"), @SpecAssertion(section = "7.3.2", id = "bb"),
             @SpecAssertion(section = "6.5.3", id = "b"), @SpecAssertion(section = "12.1", id = "bba") })
     public void testCreateSFSB() throws Exception {
@@ -86,7 +89,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
         assert interfaces.contains(Serializable.class);
     }
 
-    @Test(groups = { "enterpriseBeans", "clientProxy", "lifecycle", "integration" })
+    @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "6.6.2", id = "a") })
     public void testSerializeSFSB() throws Exception {
         // SFSBs in AS 7.0.1 do not support passivation yet
@@ -104,7 +107,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
 
     }
 
-    @Test(groups = { "enterpriseBeans", "clientProxy", "lifecycle", "integration" })
+    @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "bc"), @SpecAssertion(section = "7.3.3", id = "c") })
     public void testDestroyRemovesSFSB() throws Exception {
         GrossStadt frankfurt = getInstanceByType(GrossStadt.class);
@@ -122,7 +125,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
         // frankfurt.dispose();
     }
 
-    @Test(groups = { "enterpriseBeans", "lifecycle", "integration" })
+    @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "bc"), @SpecAssertion(section = "3.2.1", id = "dba") })
     public void testRemovedEjbIgnored() {
         KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
@@ -137,7 +140,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
         assert !"Kassel-Wilhelmshoehe".equals(newStadtInstance.getName()) : "The destroyed SFSB was not ignored";
     }
 
-    @Test(groups = { "enterpriseBeans", "lifecycle", "integration" })
+    @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "7.3.3", id = "b") })
     public void testCreateSLSB() {
         Bean<NeueStadt> stadtBean = getBeans(NeueStadt.class).iterator().next();
@@ -151,7 +154,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
         assert stadtInstance instanceof GeschichtslosStadt;
     }
 
-    @Test(groups = { "enterpriseBeans", "lifecycle", "integration" })
+    @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertion(section = "3.10.1", id = "f")
     public void testInitializerMethodsCalledWithCurrentParameterValues() {
         AlteStadt alteStadt = getInstanceByType(AlteStadt.class);
@@ -159,7 +162,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
         assert alteStadt.getAnotherPlaceOfInterest() != null;
     }
 
-    @Test(groups = { "enterpriseBeans", "lifecycle" })
+    @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertion(section = "5.5.3", id = "a")
     public void testDependentObjectsDestroyed() {
         Bean<UniStadt> uniStadtBean = getBeans(UniStadt.class).iterator().next();
@@ -171,7 +174,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
         assert frankfurt.isSchlossDestroyed();
     }
 
-    @Test
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "4.2", id = "bab")
     public void testDirectSubClassInheritsPostConstructOnSuperclass() throws Exception {
         OrderProcessor.postConstructCalled = false;
@@ -180,7 +183,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
         assert OrderProcessor.postConstructCalled;
     }
 
-    @Test
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "4.2", id = "bad")
     public void testIndirectSubClassInheritsPostConstructOnSuperclass() throws Exception {
         OrderProcessor.postConstructCalled = false;
@@ -189,7 +192,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
         assert OrderProcessor.postConstructCalled;
     }
 
-    @Test
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "4.2", id = "bbb")
     public void testSubClassInheritsPreDestroyOnSuperclass() throws Exception {
         OrderProcessor.preDestroyCalled = false;
@@ -201,7 +204,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
         assert OrderProcessor.preDestroyCalled;
     }
 
-    @Test
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "4.2", id = "bbd")
     public void testIndirectSubClassInheritsPreDestroyOnSuperclass() throws Exception {
         OrderProcessor.preDestroyCalled = false;

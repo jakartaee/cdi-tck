@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.initializer.broken.methodAnnotatedProduces;
 
+import static org.jboss.jsr299.tck.TestGroups.INITIALIZER_METHOD;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -35,7 +37,7 @@ public class InitializerMethodAnnotatedProducesTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(InitializerMethodAnnotatedProducesTest.class).build();
     }
 
-    @Test(groups = "initializerMethod")
+    @Test(groups = INITIALIZER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.10.1", id = "ba"), @SpecAssertion(section = "3.3.2", id = "ca") })
     public void testInitializerMethodAnnotatedProduces() {
     }

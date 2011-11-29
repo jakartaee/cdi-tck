@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.context;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.MANAGER;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.ContextNotActiveException;
 import javax.enterprise.context.Dependent;
@@ -41,19 +44,19 @@ public class ContextTest extends AbstractJSR299Test {
                 .withExtension("javax.enterprise.inject.spi.Extension").build();
     }
 
-    @Test(expectedExceptions = { IllegalStateException.class }, groups = { "manager" })
+    @Test(expectedExceptions = { IllegalStateException.class }, groups = { MANAGER })
     @SpecAssertion(section = "6.5.1", id = "b")
     public void testGetContextWithTooManyActiveContextsFails() {
         getCurrentManager().getContext(DummyScoped.class);
     }
 
-    @Test(expectedExceptions = { ContextNotActiveException.class }, groups = { "manager" })
+    @Test(expectedExceptions = { ContextNotActiveException.class }, groups = { MANAGER })
     @SpecAssertion(section = "6.5.1", id = "a")
     public void testGetContextWithNoRegisteredContextsFails() {
         getCurrentManager().getContext(Unregistered.class);
     }
 
-    @Test(groups = { "contexts" })
+    @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "2.4.1", id = "aa"), @SpecAssertion(section = "2.4.1", id = "ab"),
             @SpecAssertion(section = "2.4.1", id = "ac"), @SpecAssertion(section = "2.4.1", id = "ca"),
             @SpecAssertion(section = "11.3.15", id = "a") })

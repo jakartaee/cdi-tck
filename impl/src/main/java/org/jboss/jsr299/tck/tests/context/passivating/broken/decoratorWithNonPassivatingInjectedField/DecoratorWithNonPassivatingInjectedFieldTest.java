@@ -16,6 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.context.passivating.broken.decoratorWithNonPassivatingInjectedField;
 
+import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
+import static org.jboss.jsr299.tck.TestGroups.PASSIVATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -35,7 +38,7 @@ public class DecoratorWithNonPassivatingInjectedFieldTest extends AbstractJSR299
                 .withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { "contexts", "passivation" })
+    @Test(groups = { CONTEXTS, PASSIVATION })
     @SpecAssertion(section = "6.6.4", id = "aaf")
     public void testPassivationCapableBeanWithNonPassivatingDecoratorInjectedFieldFails() {
     }
