@@ -6,8 +6,6 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
-import org.jboss.jsr299.tck.tests.interceptors.definition.broken.observer.FooPayload;
-
 @Decorator
 public class FilesystemLogger implements Logger {
 
