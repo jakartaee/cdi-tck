@@ -21,18 +21,31 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+/**
+ * Test conflicting transitive interceptor bindings.
+ */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class InvalidInterceptorBindingAnnotationsTest extends AbstractJSR299Test {
+public class InvalidTransitiveInterceptorBindingAnnotationsTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InvalidInterceptorBindingAnnotationsTest.class)
-                .withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClass(InvalidTransitiveInterceptorBindingAnnotationsTest.class)
+                .withClasses(Foo.class, FooBinding.class, BarBinding.class, BazBinding.class, FooInterceptor.class,
+                        BarInterceptor.class, YesBazInterceptor.class, NoBazInterceptor.class)
+                .withBeansXml(
+                        Descriptors
+                                .create(BeansDescriptor.class)
+                                .createInterceptors()
+                                .clazz(FooInterceptor.class.getName(), BarInterceptor.class.getName(),
+                                        YesBazInterceptor.class.getName(), NoBazInterceptor.class.getName()).up()).build();
     }
 
     @Test

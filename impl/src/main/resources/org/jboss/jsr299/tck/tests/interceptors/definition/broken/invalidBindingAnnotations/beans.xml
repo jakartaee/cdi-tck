@@ -1,5 +1,0 @@
-<beans> 
-  <interceptors>
-    <class>org.jboss.jsr299.tck.tests.interceptors.definition.broken.invalidBindingAnnotations.FooInterceptor</class>
-  </interceptors>
-</beans>

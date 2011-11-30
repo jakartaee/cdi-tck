@@ -22,16 +22,20 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Documented;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import javax.enterprise.inject.Stereotype;
 
+import org.jboss.jsr299.tck.tests.interceptors.definition.broken.invalidBindingAnnotations.BazBinding.ANSWER;
+
 @Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @Documented
-@FooBinding("abc")
-public @Stereotype
-@interface FooStereotype {
+@Inherited
+@BazBinding(ANSWER.YES)
+@Stereotype
+public @interface FooStereotype {
 
 }

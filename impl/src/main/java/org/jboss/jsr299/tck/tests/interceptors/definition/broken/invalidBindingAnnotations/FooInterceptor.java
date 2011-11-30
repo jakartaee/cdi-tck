@@ -20,7 +20,7 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@FooBinding("abc")
+@FooBinding
 @Interceptor
 public class FooInterceptor {
     @AroundInvoke
