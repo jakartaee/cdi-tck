@@ -2601,8 +2601,19 @@
             </assertion>
 
             <assertion id="bba">
-                <text>Test with a class that has non-static, final method with public, protected or default visibility.</text>
+                <text>Test with a class that has non-static, final method with public visibility.</text>
             </assertion>
+            
+            <assertion id="bca">
+                <text>Test with a class that has static final method with public visibility.</text>
+                <note>This is not allowed in CDI 1.0.</note>
+            </assertion>
+            
+            <assertion id="bda">
+                <text>Test with a class that has final method with private visibility.</text>
+                <note>This is not allowed in CDI 1.0.</note>
+            </assertion>
+            
         </group>
 
         <assertion id="ca">
