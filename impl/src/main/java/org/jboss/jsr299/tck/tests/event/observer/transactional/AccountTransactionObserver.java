@@ -21,6 +21,7 @@ public class AccountTransactionObserver {
      * @throws Exception
      */
     public void withdrawAfterSuccess(@Observes(during = TransactionPhase.AFTER_SUCCESS) Withdrawal withdrawal) throws Exception {
+        logEventFired(TransactionPhase.AFTER_SUCCESS);
         afterSuccessObservedTime = now();
         pause();
     }
@@ -32,6 +33,7 @@ public class AccountTransactionObserver {
      */
     public void withdrawAfterCompletion(@Observes(during = TransactionPhase.AFTER_COMPLETION) Withdrawal withdrawal)
             throws Exception {
+        logEventFired(TransactionPhase.AFTER_COMPLETION);
         afterCompletionObservedTime = now();
         pause();
     }
@@ -43,6 +45,7 @@ public class AccountTransactionObserver {
      */
     public void withdrawBeforeCompletion(@Observes(during = TransactionPhase.BEFORE_COMPLETION) Withdrawal withdrawal)
             throws Exception {
+        logEventFired(TransactionPhase.BEFORE_COMPLETION);
         beforeCompletionObservedTime = now();
         pause();
     }
@@ -64,6 +67,7 @@ public class AccountTransactionObserver {
      * @throws Exception
      */
     public void withdrawAfterFailure(@Observes(during = TransactionPhase.AFTER_FAILURE) Withdrawal withdrawal) throws Exception {
+        logEventFired(TransactionPhase.AFTER_FAILURE);
         afterFailureObservedTime = now();
         pause();
     }
@@ -74,6 +78,10 @@ public class AccountTransactionObserver {
 
     private void pause() throws Exception {
         Thread.sleep(500l);
+    }
+
+    private void logEventFired(TransactionPhase phase) {
+        System.out.println(phase);
     }
 
     public static void reset() {
