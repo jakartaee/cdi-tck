@@ -52,7 +52,7 @@ public class QualifierDefinitionTest extends AbstractJSR299Test {
         Bean<Order> order = getBeans(Order.class).iterator().next();
         assert order.getQualifiers().size() == 2;
         assert order.getQualifiers().contains(new DefaultLiteral());
-        assert order.getQualifiers().contains(new AnyLiteral());
+        assert order.getQualifiers().contains(AnyLiteral.INSTANCE);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class QualifierDefinitionTest extends AbstractJSR299Test {
                 .getQualifiers();
         assert bindings.size() == 2;
         assert bindings.contains(new HairyQualifier(false));
-        assert bindings.contains(new AnyLiteral());
+        assert bindings.contains(AnyLiteral.INSTANCE);
     }
 
     @Test
@@ -111,7 +111,7 @@ public class QualifierDefinitionTest extends AbstractJSR299Test {
         Set<? extends Annotation> bindings = getBeans(ShetlandPony.class).iterator().next().getQualifiers();
         assert bindings.size() == 2;
         assert bindings.contains(new DefaultLiteral());
-        assert bindings.contains(new AnyLiteral());
+        assert bindings.contains(AnyLiteral.INSTANCE);
     }
 
     @Test
@@ -122,7 +122,7 @@ public class QualifierDefinitionTest extends AbstractJSR299Test {
         assert bindings.size() == 2;
         Annotation hairyLiteral = new HairyQualifier(true);
         assert bindings.contains(hairyLiteral);
-        assert bindings.contains(new AnyLiteral());
+        assert bindings.contains(AnyLiteral.INSTANCE);
     }
 
     @Test
@@ -140,7 +140,7 @@ public class QualifierDefinitionTest extends AbstractJSR299Test {
         Set<? extends Annotation> bindings = getBeans(MiniatureShetlandPony.class).iterator().next().getQualifiers();
         assert bindings.size() == 2;
         assert bindings.contains(new DefaultLiteral());
-        assert bindings.contains(new AnyLiteral());
+        assert bindings.contains(AnyLiteral.INSTANCE);
     }
 
 }

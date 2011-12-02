@@ -145,8 +145,8 @@ public class ResolutionByTypeTest extends AbstractJSR299Test {
             @SpecAssertion(section = "5.2.4", id = "ab"), @SpecAssertion(section = "5.2.6", id = "b"),
             @SpecAssertion(section = "5.2.6", id = "c") })
     public void testResolveByTypeWithPrimitives() {
-        assert getBeans(Double.class, new AnyLiteral()).size() == 2;
-        assert getBeans(double.class, new AnyLiteral()).size() == 2;
+        assert getBeans(Double.class, AnyLiteral.INSTANCE).size() == 2;
+        assert getBeans(double.class, AnyLiteral.INSTANCE).size() == 2;
 
         Double min = getInstanceByType(Double.class, new AnnotationLiteral<Min>() {
         });

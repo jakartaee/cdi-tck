@@ -38,7 +38,7 @@ public class UnsatisfiedInjectionPoint implements InjectionPoint {
     public UnsatisfiedInjectionPoint(Bean<SimpleBean> beanWithInjectionPoint) {
         this.bean = beanWithInjectionPoint;
         bindings.add(new DefaultLiteral());
-        bindings.add(new AnyLiteral());
+        bindings.add(AnyLiteral.INSTANCE);
     }
 
     public Annotated getAnnotated() {

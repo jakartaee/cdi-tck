@@ -19,5 +19,16 @@ package org.jboss.jsr299.tck.literals;
 import javax.enterprise.inject.Any;
 import javax.enterprise.util.AnnotationLiteral;
 
+/**
+ * Annotation literal for {@link Any}
+ */
+@SuppressWarnings("all")
 public class AnyLiteral extends AnnotationLiteral<Any> implements Any {
+
+    private static final long serialVersionUID = 1L;
+
+    public static final Any INSTANCE = new AnyLiteral();
+
+    private AnyLiteral() {
+    }
 }

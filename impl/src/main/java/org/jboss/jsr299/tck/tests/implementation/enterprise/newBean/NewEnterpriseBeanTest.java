@@ -103,7 +103,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
         Bean<OrderLocal> newOrderBean = getBeans(OrderLocal.class, OrderLocal.NEW).iterator().next();
         assert orderBean.getQualifiers().size() == 2;
         assert orderBean.getQualifiers().contains(new DefaultLiteral());
-        assert orderBean.getQualifiers().contains(new AnyLiteral());
+        assert orderBean.getQualifiers().contains(AnyLiteral.INSTANCE);
 
         assert getBeans(OrderLocal.class, OrderLocal.NEW).size() == 1;
         assert newOrderBean.getQualifiers().size() == 1;
@@ -117,7 +117,7 @@ public class NewEnterpriseBeanTest extends AbstractJSR299Test {
         assert getBeans(LionLocal.class, TAME_LITERAL).size() == 1;
         assert lionBean.getQualifiers().size() == 2;
         assert lionBean.getQualifiers().contains(TAME_LITERAL);
-        assert lionBean.getQualifiers().contains(new AnyLiteral());
+        assert lionBean.getQualifiers().contains(AnyLiteral.INSTANCE);
 
         assert getBeans(LionLocal.class, LionLocal.NEW).size() == 1;
         assert newLionBean.getQualifiers().size() == 1;

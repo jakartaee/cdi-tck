@@ -37,7 +37,7 @@ public class AmbiguousInjectionPoint implements InjectionPoint {
     public AmbiguousInjectionPoint(Bean<SimpleBean> bean) {
         this.bean = bean;
         bindings.add(new DefaultLiteral());
-        bindings.add(new AnyLiteral());
+        bindings.add(AnyLiteral.INSTANCE);
     }
 
     public Annotated getAnnotated() {

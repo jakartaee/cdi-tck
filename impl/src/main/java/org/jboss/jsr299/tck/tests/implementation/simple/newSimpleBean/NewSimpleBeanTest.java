@@ -169,7 +169,7 @@ public class NewSimpleBeanTest extends AbstractJSR299Test {
         assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().size() == 2;
         assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().contains(TAME_LITERAL);
         assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers()
-                .contains(new AnyLiteral());
+                .contains(AnyLiteral.INSTANCE);
 
         assert getInstanceByType(LionCage.class).getNewLion() != null;
     }

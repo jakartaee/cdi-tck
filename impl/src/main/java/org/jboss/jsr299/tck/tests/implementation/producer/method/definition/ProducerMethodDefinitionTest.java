@@ -91,7 +91,7 @@ public class ProducerMethodDefinitionTest extends AbstractJSR299Test {
         assert getCurrentManager().getBeans(Tarantula.class).size() == 1;
         assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().size() == 2;
         assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(new DefaultLiteral());
-        assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(new AnyLiteral());
+        assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(AnyLiteral.INSTANCE);
     }
 
     @Test(groups = PRODUCER_METHOD)

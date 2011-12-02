@@ -52,7 +52,7 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
         // The base type of the fruit injection point is overridden to
         // TropicalFruit
         assert GroceryWrapper.isGetBaseTypeOfFruitFieldUsed();
-        assert getInstanceByType(Grocery.class, new AnyLiteral()).getFruit().getMetadata().getType()
+        assert getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getFruit().getMetadata().getType()
                 .equals(TropicalFruit.class);
     }
 
@@ -61,15 +61,15 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
     public void testGetTypeClosureUsed() {
         assert GroceryWrapper.isGetTypeClosureUsed();
         // should be [Object, Grocery] instead of [Object, Shop, Grocery]
-        assert getBeans(Grocery.class, new AnyLiteral()).iterator().next().getTypes().size() == 2;
-        assert getBeans(Shop.class, new AnyLiteral()).size() == 0;
+        assert getBeans(Grocery.class, AnyLiteral.INSTANCE).iterator().next().getTypes().size() == 2;
+        assert getBeans(Shop.class, AnyLiteral.INSTANCE).size() == 0;
     }
 
     @Test
     @SpecAssertion(section = "11.4", id = "l")
     public void testGetAnnotationUsedForGettingScopeInformation() {
         // @ApplicationScoped is overridden by @RequestScoped
-        assert getBeans(Grocery.class, new AnyLiteral()).iterator().next().getScope().equals(RequestScoped.class);
+        assert getBeans(Grocery.class, AnyLiteral.INSTANCE).iterator().next().getScope().equals(RequestScoped.class);
     }
 
     @Test
@@ -91,27 +91,27 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
     @SpecAssertion(section = "11.4", id = "p")
     public void testGetAnnotationUsedForGettingInterceptorInformation() {
         // The extension adds the GroceryInterceptorBinding
-        Grocery grocery = getInstanceByType(Grocery.class, new AnyLiteral());
+        Grocery grocery = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE);
         assert grocery.foo().equals("foo");
     }
 
     @Test
     @SpecAssertion(section = "11.4", id = "r")
     public void testPreviouslyNonInjectAnnotatedConstructorIsUsed() {
-        assert getInstanceByType(Grocery.class, new AnyLiteral()).isConstructorWithParameterUsed();
+        assert getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isConstructorWithParameterUsed();
     }
 
     @Test
     @SpecAssertion(section = "11.4", id = "t")
     public void testPreviouslyNonInjectAnnotatedFieldIsInjected() {
-        assert getInstanceByType(Grocery.class, new AnyLiteral()).isVegetablesInjected();
+        assert getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isVegetablesInjected();
     }
 
     @SuppressWarnings("unchecked")
     @SpecAssertion(section = "11.4", id = "u")
     public void testExtraQualifierIsAppliedToInjectedField() {
-        assert getInstanceByType(Grocery.class, new AnyLiteral()).getFruit() != null;
-        Set<Annotation> qualifiers = getInstanceByType(Grocery.class, new AnyLiteral()).getFruit().getMetadata()
+        assert getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getFruit() != null;
+        Set<Annotation> qualifiers = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getFruit().getMetadata()
                 .getQualifiers();
         assert qualifiers.size() == 1;
         assert annotationSetMatches(qualifiers, Cheap.class);
@@ -121,7 +121,7 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
     @SpecAssertion(section = "11.4", id = "v")
     public void testProducesCreatesProducerField() {
         // The extension adds @Producer to the bread field
-        assert getBeans(Bread.class, new AnyLiteral()).size() == 1;
+        assert getBeans(Bread.class, AnyLiteral.INSTANCE).size() == 1;
     }
 
     @Test
@@ -129,7 +129,7 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
     public void testInjectCreatesInitializerMethod() {
         // The extension adds @Inject to the nonInjectAnnotatedInitializer()
         // method
-        assert getInstanceByType(Grocery.class, new AnyLiteral()).isWaterInjected();
+        assert getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isWaterInjected();
     }
 
     @SuppressWarnings("unchecked")
@@ -137,7 +137,7 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
     @SpecAssertion(section = "11.4", id = "x")
     public void testQualifierAddedToInitializerParameter() {
         // The @Cheap qualifier is added to the method parameter
-        Set<Annotation> qualifiers = getInstanceByType(Grocery.class, new AnyLiteral()).getInitializerFruit().getMetadata()
+        Set<Annotation> qualifiers = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getInitializerFruit().getMetadata()
                 .getQualifiers();
         assert annotationSetMatches(qualifiers, Cheap.class);
     }
@@ -146,7 +146,7 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
     @SpecAssertion(section = "11.4", id = "y")
     public void testProducesCreatesProducerMethod() {
         // The extension adds @Producer to the getMilk() method
-        assert getBeans(Milk.class, new AnyLiteral()).size() == 1;
+        assert getBeans(Milk.class, AnyLiteral.INSTANCE).size() == 1;
     }
 
     @Test
@@ -162,7 +162,7 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
     @SpecAssertion(section = "11.4", id = "aa")
     public void testQualifierIsAppliedToProducerMethodParameter() {
         // The @Cheap qualifier is added to the method parameter
-        Set<Annotation> qualifiers = getInstanceByType(Yogurt.class, new AnyLiteral()).getFruit().getMetadata().getQualifiers();
+        Set<Annotation> qualifiers = getInstanceByType(Yogurt.class, AnyLiteral.INSTANCE).getFruit().getMetadata().getQualifiers();
         assert qualifiers.size() == 1;
         assert annotationSetMatches(qualifiers, Cheap.class);
     }
@@ -172,8 +172,8 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
     @SpecAssertions({ @SpecAssertion(section = "11.4", id = "ae"), @SpecAssertion(section = "11.4", id = "ag") })
     public void testObserverMethod() {
         getCurrentManager().fireEvent(new Milk(true));
-        Milk event = getInstanceByType(Grocery.class, new AnyLiteral()).getObserverEvent();
-        TropicalFruit parameter = getInstanceByType(Grocery.class, new AnyLiteral()).getObserverParameter();
+        Milk event = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getObserverEvent();
+        TropicalFruit parameter = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getObserverParameter();
         assert event != null;
         assert parameter != null;
         assert parameter.getMetadata().getQualifiers().size() == 1;
@@ -186,6 +186,6 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
         getCurrentManager().fireEvent(new Bread(true));
         // normally, the event would be observer, however the extension adds the
         // @Expensive qualifier to the method parameter
-        assert !getInstanceByType(Grocery.class, new AnyLiteral()).isObserver2Used();
+        assert !getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isObserver2Used();
     }
 }

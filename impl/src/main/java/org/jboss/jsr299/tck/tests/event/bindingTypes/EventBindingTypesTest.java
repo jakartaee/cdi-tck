@@ -96,14 +96,14 @@ public class EventBindingTypesTest extends AbstractJSR299Test {
     public void testEventAlwaysHasAnyBinding() {
         Bean<Event<Animal>> animalEventBean = getUniqueBean(new TypeLiteral<Event<Animal>>() {
         }, new WildAnnotationLiteral());
-        assert animalEventBean.getQualifiers().contains(new AnyLiteral());
+        assert animalEventBean.getQualifiers().contains(AnyLiteral.INSTANCE);
 
         Bean<Event<Animal>> tameAnimalEventBean = getUniqueBean(new TypeLiteral<Event<Animal>>() {
         }, new TameAnnotationLiteral());
-        assert tameAnimalEventBean.getQualifiers().contains(new AnyLiteral());
+        assert tameAnimalEventBean.getQualifiers().contains(AnyLiteral.INSTANCE);
 
         Bean<Event<Animal>> wildAnimalEventBean = getUniqueBean(new TypeLiteral<Event<Animal>>() {
         }, new WildAnnotationLiteral());
-        assert wildAnimalEventBean.getQualifiers().contains(new AnyLiteral());
+        assert wildAnimalEventBean.getQualifiers().contains(AnyLiteral.INSTANCE);
     }
 }

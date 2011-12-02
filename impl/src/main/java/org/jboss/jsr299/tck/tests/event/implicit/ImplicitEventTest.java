@@ -66,16 +66,16 @@ public class ImplicitEventTest extends AbstractJSR299Test {
     @Test(groups = EVENTS)
     @SpecAssertion(section = "10.3.2", id = "b")
     public void testImplicitEventHasAllExplicitBindingTypes() {
-        assert getBeans(AWARD_EVENT_LITERAL, new AnyLiteral(), new HonorsLiteral()).size() == 1;
+        assert getBeans(AWARD_EVENT_LITERAL, AnyLiteral.INSTANCE, new HonorsLiteral()).size() == 1;
     }
 
     @SpecAssertion(section = "10.1", id = "i")
     public void testImplicitEventHasAnyBinding() {
-        assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getQualifiers().contains(new AnyLiteral());
-        assert getUniqueBean(COURSE_FULL_EVENT_LITERAL).getQualifiers().contains(new AnyLiteral());
-        assert getUniqueBean(AWARD_EVENT_LITERAL).getQualifiers().contains(new AnyLiteral());
-        assert getUniqueBean(AWARD_EVENT_LITERAL, new HonorsLiteral()).getQualifiers().contains(new AnyLiteral());
-        assert getUniqueBean(AWARD_EVENT_LITERAL, new AnyLiteral(), new HonorsLiteral()) == getUniqueBean(AWARD_EVENT_LITERAL,
+        assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
+        assert getUniqueBean(COURSE_FULL_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
+        assert getUniqueBean(AWARD_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
+        assert getUniqueBean(AWARD_EVENT_LITERAL, new HonorsLiteral()).getQualifiers().contains(AnyLiteral.INSTANCE);
+        assert getUniqueBean(AWARD_EVENT_LITERAL, AnyLiteral.INSTANCE, new HonorsLiteral()) == getUniqueBean(AWARD_EVENT_LITERAL,
                 new HonorsLiteral());
     }
 

@@ -70,7 +70,7 @@ public class ExtensionLifecycleTest extends AbstractJSR299Test {
         // Bean has two qualifiers @Default and @Any
         assertEquals(simpleExtensionBean.getQualifiers().size(), 2);
         assertTrue(simpleExtensionBean.getQualifiers().contains(new DefaultLiteral()));
-        assertTrue(simpleExtensionBean.getQualifiers().contains(new AnyLiteral()));
+        assertTrue(simpleExtensionBean.getQualifiers().contains(AnyLiteral.INSTANCE));
         // Bean types include the class of the service provider and all superclases and interfaces
         Set<Type> types = simpleExtensionBean.getTypes();
         assertEquals(types.size(), 4);

@@ -88,7 +88,7 @@ public class DynamicLookupTest extends AbstractJSR299Test {
             @SpecAssertion(section = "5.6.1", id = "fa"), @SpecAssertion(section = "5.6.1", id = "fc") })
     public void testGetMethod() {
         // initial setup of contextual instance
-        getInstanceByType(AdvancedPaymentProcessor.class, new AnyLiteral()).setValue(10);
+        getInstanceByType(AdvancedPaymentProcessor.class, AnyLiteral.INSTANCE).setValue(10);
 
         Instance<AsynchronousPaymentProcessor> instance = getInstanceByType(ObtainsInstanceBean.class).getPaymentProcessor();
         assert instance.get() instanceof AdvancedPaymentProcessor;
@@ -125,8 +125,8 @@ public class DynamicLookupTest extends AbstractJSR299Test {
             @SpecAssertion(section = "5.6.3", id = "a") })
     public void testIteratorMethod() {
         // initial setup of contextual instances
-        getInstanceByType(AdvancedPaymentProcessor.class, new AnyLiteral()).setValue(1);
-        getInstanceByType(RemotePaymentProcessor.class, new AnyLiteral()).setValue(2);
+        getInstanceByType(AdvancedPaymentProcessor.class, AnyLiteral.INSTANCE).setValue(1);
+        getInstanceByType(RemotePaymentProcessor.class, AnyLiteral.INSTANCE).setValue(2);
 
         Instance<PaymentProcessor> instance = getInstanceByType(ObtainsInstanceBean.class).getAnyPaymentProcessor();
         Iterator<AsynchronousPaymentProcessor> iterator1 = instance.select(AsynchronousPaymentProcessor.class).iterator();

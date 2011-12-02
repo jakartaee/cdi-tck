@@ -134,7 +134,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
             }
 
             public Set<Annotation> getObservedQualifiers() {
-                return Collections.<Annotation> singleton(new AnyLiteral());
+                return Collections.<Annotation> singleton(AnyLiteral.INSTANCE);
             }
 
             public Type getObservedType() {

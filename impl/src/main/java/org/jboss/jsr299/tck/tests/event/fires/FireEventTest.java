@@ -115,7 +115,7 @@ public class FireEventTest extends AbstractJSR299Test {
 
         assert eventInjection != null;
         assert eventInjection.getQualifiers().size() == 1;
-        assert eventInjection.getQualifiers().contains(new AnyLiteral());
+        assert eventInjection.getQualifiers().contains(AnyLiteral.INSTANCE);
 
         CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
         MiniBar miniBar = miniBarBean.create(miniBarCc);
@@ -228,7 +228,7 @@ public class FireEventTest extends AbstractJSR299Test {
 
         assert eventInjection != null;
         assert eventInjection.getQualifiers().size() == 1;
-        assert eventInjection.getQualifiers().contains(new AnyLiteral());
+        assert eventInjection.getQualifiers().contains(AnyLiteral.INSTANCE);
         CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
         MiniBar miniBar = miniBarBean.create(miniBarCc);
         miniBar.stock();
