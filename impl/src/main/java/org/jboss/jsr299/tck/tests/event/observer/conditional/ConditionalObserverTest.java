@@ -17,10 +17,13 @@
 package org.jboss.jsr299.tck.tests.event.observer.conditional;
 
 import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.spi.Context;
 import javax.enterprise.event.Reception;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -69,7 +72,7 @@ public class ConditionalObserverTest extends AbstractJSR299Test {
         assert spider.getWeb().getRings() == 1;
     }
 
-    @Test
+    @Test(groups = { EVENTS })
     @SpecAssertion(section = "10.4.3", id = "c")
     public void testNotifyEnumerationContainsNotifyValues() {
         assert Reception.values().length == 2;
@@ -81,4 +84,28 @@ public class ConditionalObserverTest extends AbstractJSR299Test {
         assert notifyValueNames.contains("IF_EXISTS");
         assert notifyValueNames.contains("ALWAYS");
     }
+
+    @Test(groups = { EVENTS })
+    @SpecAssertion(section = "10.5", id = "bca")
+    public void testConditionalObserverMethodNotInvokedIfNoActiveContext() {
+
+        Tarantula.reset();
+        Context requestContext = getCurrentConfiguration().getContexts().getRequestContext();
+        Tarantula tarantula = getInstanceByType(Tarantula.class);
+        tarantula.ping();
+
+        try {
+            // Instance exists but there is no context active for its scope
+            setContextInactive(requestContext);
+            getCurrentManager().fireEvent(new TarantulaEvent());
+            // Observer method not called
+            assertFalse(Tarantula.isNotified());
+        } finally {
+            setContextActive(requestContext);
+        }
+        // Context is active now
+        getCurrentManager().fireEvent(new TarantulaEvent());
+        assertTrue(Tarantula.isNotified());
+    }
+
 }

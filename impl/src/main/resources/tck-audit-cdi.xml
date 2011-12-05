@@ -5350,19 +5350,17 @@
 
         <assertion id="bb">
             <text>If the observer method is a transactional observer method and there is currently a JTA transaction in progress, the container calls the observer method during the appropriate transaction completion phase. ~Otherwise, the container calls the observer immediately.~</text>
-            <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
         </assertion>
 
         <assertion id="bc">
             <text>If the observer method is a transactional observer method and there is currently a JTA transaction in progress, ~the container calls the observer method during the appropriate transaction completion phase.~ Otherwise, the container calls the observer immediately.</text>
-            <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
         </assertion>
 
         <assertion id="bca">
             <text>If the observer method is a conditional observer method and there is no context active for the scope to which the bean declaring the observer method belongs, then the observer method should not be called.</text>
         </assertion>
 
-        <assertion id="bcb">
+        <assertion id="bcb" testable="false">
             <text>The order in which observer methods are called is not defined, and so portable applications should not rely upon the order in which observers are called.</text>
         </assertion>
 

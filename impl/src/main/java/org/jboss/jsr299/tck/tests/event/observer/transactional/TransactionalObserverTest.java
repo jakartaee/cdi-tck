@@ -34,7 +34,8 @@ public class TransactionalObserverTest extends AbstractJSR299Test {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "10.4.4", id = "a"), @SpecAssertion(section = "10.4.4", id = "b"),
             @SpecAssertion(section = "10.4.4", id = "c"), @SpecAssertion(section = "10.4.4", id = "d"),
-            @SpecAssertion(section = "10.4.4", id = "e"), @SpecAssertion(section = "10.4.4", id = "gaa") })
+            @SpecAssertion(section = "10.4.4", id = "e"), @SpecAssertion(section = "10.4.4", id = "gaa"),
+            @SpecAssertion(section = "10.5", id = "bb") })
     public void testSucessfullTransaction() throws Exception {
         logTestMethod("testSucessfullTransaction");
         AccountTransactionObserver.reset();
@@ -52,7 +53,8 @@ public class TransactionalObserverTest extends AbstractJSR299Test {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "10.4.4", id = "a"), @SpecAssertion(section = "10.4.4", id = "b"),
             @SpecAssertion(section = "10.4.4", id = "c"), @SpecAssertion(section = "10.4.4", id = "d"),
-            @SpecAssertion(section = "10.4.4", id = "e"), @SpecAssertion(section = "10.4.4", id = "gaa") })
+            @SpecAssertion(section = "10.4.4", id = "e"), @SpecAssertion(section = "10.4.4", id = "gaa"),
+            @SpecAssertion(section = "10.5", id = "bb") })
     public void testFailedTransaction() throws Exception {
         logTestMethod("testFailedTransaction");
         AccountTransactionObserver.reset();
@@ -72,7 +74,7 @@ public class TransactionalObserverTest extends AbstractJSR299Test {
      * @throws Exception
      */
     @Test
-    @SpecAssertion(section = "10.4.4", id = "a")
+    @SpecAssertions({ @SpecAssertion(section = "10.4.4", id = "a"), @SpecAssertion(section = "10.5", id = "bc") })
     public void testNoTransaction() throws Exception {
         logTestMethod("testNoTransaction");
         AccountTransactionObserver.reset();
