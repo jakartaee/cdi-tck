@@ -1,8 +1,0 @@
-<beans> 
-   <decorators>
-      <class>org.jboss.jsr299.tck.tests.decorators.definition.BazDecorator</class>
-      <class>org.jboss.jsr299.tck.tests.decorators.definition.BazDecorator1</class>
-      <class>org.jboss.jsr299.tck.tests.decorators.definition.FooDecorator</class>
-      <class>org.jboss.jsr299.tck.tests.decorators.definition.TimestampLogger</class>
-   </decorators>
-</beans>

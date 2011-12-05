@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.definition;
 
+import static org.testng.Assert.assertEquals;
+
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -31,6 +33,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -45,7 +49,15 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DecoratorDefinitionTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(DecoratorDefinitionTest.class)
+                .withBeansXml(
+                        Descriptors
+                                .create(BeansDescriptor.class)
+                                .createDecorators()
+                                .clazz(BazDecorator.class.getName(), BazDecorator1.class.getName(),
+                                        FooDecorator.class.getName(), TimestampLogger.class.getName(),
+                                        ChargeDecorator.class.getName()).up()).build();
     }
 
     @Test
@@ -153,4 +165,22 @@ public class DecoratorDefinitionTest extends AbstractJSR299Test {
         };
         getCurrentManager().resolveDecorators(new HashSet<Type>(), binding);
     }
+
+    /**
+     * Test that if the decorator does not implement a method of the decorated type, the container will provide an implicit
+     * implementation that calls the method on the delegate.
+     * 
+     * @param account
+     */
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = "8.1.3", id = "ca")
+    public void testAbstractDecoratorNotImplementingMethodOfDecoratedType(BankAccount account) {
+        ChargeDecorator.reset();
+        account.deposit(100);
+        assertEquals(ChargeDecorator.charged, 0);
+        account.withdraw(50);
+        assertEquals(ChargeDecorator.charged, 5);
+        assertEquals(account.getBalance(), 45);
+    }
+
 }
