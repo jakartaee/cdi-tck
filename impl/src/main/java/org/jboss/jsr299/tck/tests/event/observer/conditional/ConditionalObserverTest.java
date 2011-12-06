@@ -17,6 +17,7 @@
 package org.jboss.jsr299.tck.tests.event.observer.conditional;
 
 import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -85,7 +86,7 @@ public class ConditionalObserverTest extends AbstractJSR299Test {
         assert notifyValueNames.contains("ALWAYS");
     }
 
-    @Test(groups = { EVENTS })
+    @Test(groups = { INTEGRATION, EVENTS })
     @SpecAssertion(section = "10.5", id = "bca")
     public void testConditionalObserverMethodNotInvokedIfNoActiveContext() {
 

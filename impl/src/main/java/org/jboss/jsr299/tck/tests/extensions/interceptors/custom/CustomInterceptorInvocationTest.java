@@ -67,7 +67,7 @@ public class CustomInterceptorInvocationTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "dd"), @SpecAssertion(section = "11.1.2", id = "d") })
     public void testCustomInterceptorInvocation() {
         CustomInterceptor.reset();
         FooInterceptor.reset();
