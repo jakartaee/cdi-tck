@@ -14,13 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise;
+package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.types;
 
-import javax.ejb.Local;
-
-@Local
-public interface OfficeLocal extends BuildingLocal {
-
-    public String getClassName();
+public interface Foo {
 
 }

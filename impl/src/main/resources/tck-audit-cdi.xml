@@ -2131,7 +2131,7 @@
         </assertion>
 
         <assertion id="l">
-            <text>X must have all bean types of Y. If X does not support some bean type of Y, the container automatically detects the problem and treats it as a definition error.</text>
+            <text>X must have all the bean types of Y. If X does not have some bean type of Y, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
         <group>
@@ -2150,8 +2150,9 @@
             </assertion>
         </group>
 
-        <assertion id="n">
+        <assertion id="n" testable="false">
             <text>If an interceptor or decorator is annotated |@Specializes|, non-portable behavior results.</text>
+            <note>Defines non-portable behavior</note>
         </assertion>
     </section>
 
@@ -6047,13 +6048,13 @@
 
         <group>
             <text>The interface |javax.enterprise.inject.spi.AnnotatedType| exposes the |Class| object and members.</text>
-            <assertion id="aa">
+            <assertion id="aaa">
                 <text>Test that |getConstructors()| returns all the constructors declared for the type.</text>
             </assertion>
-            <assertion id="ab">
+            <assertion id="aab">
                 <text>Test that |getMethods()| returns all the methods declared on the type and those declared on any supertypes.</text>
             </assertion>
-            <assertion id="ac">
+            <assertion id="aac">
                 <text>Test that |getFields()| returns all the fields declared on the type and those declared on any supertypes.</text>
             </assertion>
         </group>
