@@ -2604,17 +2604,17 @@
             <assertion id="bba">
                 <text>Test with a class that has non-static, final method with public visibility.</text>
             </assertion>
-            
+
             <assertion id="bca">
                 <text>Test with a class that has static final method with public visibility.</text>
                 <note>This is not allowed in CDI 1.0.</note>
             </assertion>
-            
+
             <assertion id="bda">
                 <text>Test with a class that has final method with private visibility.</text>
                 <note>This is not allowed in CDI 1.0.</note>
             </assertion>
-            
+
         </group>
 
         <assertion id="ca">
@@ -3799,7 +3799,7 @@
         <assertion id="k" implied="true">
             <text>Passivation capable interceptor with non-passivation capable dependencies is allowed unless it intercepts a bean declaring passivation scope.</text>
         </assertion>
-        
+
         <assertion id="l" implied="true">
             <text>Passivation capable decorator with non-passivation capable dependencies is allowed unless it decorates a bean declaring passivation scope.</text>
         </assertion>
@@ -6043,7 +6043,7 @@
     <section id="11.4" title="Alternative metadata sources">
         <assertion id="a" testable="false">
             <text>The interfaces |AnnotatedType|, |AnnotatedField|, |AnnotatedMethod|, |AnnotatedConstructor| and |AnnotatedParameter| in the package |javax.enterprise.inject.spi| allow a portable extension to specify metadata that overrides the annotations that exist on a bean class. The portable extension is responsible for implementing the interfaces, thereby exposing the metadata to the container.</text>
-            <note>Statement of intent</note>
+            <note>Statement of intent. In fact some assertions in this section do test metadata constructed by container as defined in sections "11.3.18. Obtaining an AnnotatedType for a class" and "11.5.6. ProcessAnnotatedType event".</note>
         </assertion>
 
         <group>
@@ -6081,15 +6081,19 @@
                 <text>|isAnnotationPresent()| returns |true| if the program element has an annotation of the given annotation type, or |false| otherwise.</text>
             </assertion>
 
-            <assertion id="ga">
-                <text>If the |Annotated| represents a type, then the annotations returned should include all annotations on the type and it's super types regardless of whether the annotation is marked |@Inherited|.</text>
-            </assertion>
-
         </group>
+
+        <assertion id="ga">
+            <text>If the |Annotated| represents a type, then the annotations returned should include all annotations on the type and it's super types regardless of whether the annotation is marked |@Inherited|.</text>
+        </assertion>
 
         <group>
             <text>The container must use the operations of |Annotated| and its subinterfaces to discover program element types and annotations. The container must not directly call the Java Reflection API. In particular, the container must call |Annotated.getBaseType()| to determine the type of an injection point, event parameter or disposed parameter, call |Annotated.getTypeClosure()| to determine the bean types of any kind of bean, call |Annotated.getAnnotations()| to determine the scope, qualifiers, stereotypes and interceptor bindings of a bean, call |Annotated.isAnnotationPresent()| and |Annotated.getAnnotation()| to read any bean annotations defined by this specification, and call
                 |AnnotatedType.getConstructors()|, |AnnotatedType.getMethods()| and |AnnotatedType.getFields()| to determine the members of a bean class.</text>
+
+            <assertion id="h">
+                <text>Check that the container uses the operations of |Annotated| and its subinterfaces to discover program element types and annotations. and that the container does not use the Java Reflection API.</text>
+            </assertion>
 
             <assertion id="ha">
                 <text>Check that |getBaseType()| is used to determine the type of _a field injection point_. The base type should be different from the orignal type specified in the class definition</text>

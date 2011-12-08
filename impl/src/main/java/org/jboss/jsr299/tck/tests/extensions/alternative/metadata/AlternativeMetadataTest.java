@@ -16,10 +16,14 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -162,7 +166,8 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
     @SpecAssertion(section = "11.4", id = "aa")
     public void testQualifierIsAppliedToProducerMethodParameter() {
         // The @Cheap qualifier is added to the method parameter
-        Set<Annotation> qualifiers = getInstanceByType(Yogurt.class, AnyLiteral.INSTANCE).getFruit().getMetadata().getQualifiers();
+        Set<Annotation> qualifiers = getInstanceByType(Yogurt.class, AnyLiteral.INSTANCE).getFruit().getMetadata()
+                .getQualifiers();
         assert qualifiers.size() == 1;
         assert annotationSetMatches(qualifiers, Cheap.class);
     }
@@ -188,4 +193,17 @@ public class AlternativeMetadataTest extends AbstractJSR299Test {
         // @Expensive qualifier to the method parameter
         assert !getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isObserver2Used();
     }
+
+    @SuppressWarnings("serial")
+    @Test
+    @SpecAssertion(section = "11.4", id = "h")
+    public void testContainerUsesOperationsOfAnnotatedNotReflectionApi() {
+        assertEquals(getBeans(Sausage.class, AnyLiteral.INSTANCE).size(), 1);
+        // Overriding annotated type has no methods and fields and thus there are no cheap and expensive sausages
+        assertTrue(getBeans(Sausage.class, new AnnotationLiteral<Expensive>() {
+        }).isEmpty());
+        assertTrue(getBeans(Sausage.class, new AnnotationLiteral<Cheap>() {
+        }).isEmpty());
+    }
+
 }

@@ -17,10 +17,19 @@
 
 package org.jboss.jsr299.tck.tests.extensions.annotated;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.util.Set;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.spi.AnnotatedConstructor;
+import javax.enterprise.inject.spi.AnnotatedField;
+import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -86,4 +95,42 @@ public class AlternativeMetaDataTest extends AbstractJSR299Test {
         assert annotatedType.isAnnotationPresent(RequestScoped.class);
         assert !annotatedType.isAnnotationPresent(ApplicationScoped.class);
     }
+
+    @Test
+    @SpecAssertion(section = "11.4", id = "aaa")
+    public void testConstructors() {
+        AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
+        Set<AnnotatedConstructor<WildCat>> constructors = annotatedType.getConstructors();
+        assertEquals(constructors.size(), 1);
+        Class<?>[] constructorParams = constructors.iterator().next().getJavaMember().getParameterTypes();
+        assertEquals(constructorParams.length, 1);
+        assertEquals(constructorParams[0], String.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "11.4", id = "aab")
+    public void testMethos() {
+        AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
+        Set<AnnotatedMethod<? super WildCat>> methods = annotatedType.getMethods();
+        String[] names = new String[] { "yowl", "jump", "bite", "getName" };
+        assertEquals(methods.size(), 4);
+        for (AnnotatedMethod<? super WildCat> method : methods) {
+            // Just simple test for method name
+            assertTrue(ArrayUtils.contains(names, method.getJavaMember().getName()));
+        }
+    }
+
+    @Test
+    @SpecAssertion(section = "11.4", id = "aac")
+    public void testFields() {
+        AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
+        Set<AnnotatedField<? super WildCat>> fields = annotatedType.getFields();
+        String[] names = new String[] { "age", "name" };
+        assertEquals(fields.size(), 2);
+        for (AnnotatedField<? super WildCat> field : fields) {
+            // Just simple test for field name
+            assertTrue(ArrayUtils.contains(names, field.getJavaMember().getName()));
+        }
+    }
+
 }
