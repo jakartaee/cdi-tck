@@ -16,9 +16,40 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.newBean;
 
-import javax.ejb.Local;
+import javax.enterprise.inject.New;
+import javax.inject.Inject;
 
-@Local
-public interface MonkeyLocal {
+/**
+ * The container discovers <code>@New</code> qualified beans by inspecting injection points other enabled beans.
+ * 
+ * See also CDITCK-250.
+ * 
+ * @author Martin Kouba
+ */
+public class NewSessionBeanConsumer {
+
+    @Inject
+    @New(Order.class)
+    OrderLocal order;
+
+    @Inject
+    @New(Monkey.class)
+    MonkeyLocal monkey;
+
+    @Inject
+    @New(Lion.class)
+    LionLocal lion;
+
+    @Inject
+    @New(InitializerSimpleBean.class)
+    InitializerSimpleBeanLocal initializerSimpleBean;
+
+    @Inject
+    @New(Fox.class)
+    FoxLocal fox;
+
+    @Inject
+    @New(ExplicitConstructorSessionBean.class)
+    ExplicitConstructor explicitConstructor;
 
 }

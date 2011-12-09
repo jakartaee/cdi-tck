@@ -51,10 +51,6 @@ public class ObtainsNewInstanceBean {
     // }
 
     public Instance<IllegalArgumentException> getIae() {
-        return iae.select(new NewLiteral() {
-            public Class<?> value() {
-                return IllegalArgumentException.class;
-            }
-        });
+        return iae.select(new NewLiteral(IllegalArgumentException.class));
     }
 }

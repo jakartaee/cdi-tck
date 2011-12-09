@@ -28,6 +28,7 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
+import org.jboss.jsr299.tck.literals.NewLiteral;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -46,7 +47,8 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
     @Test(groups = { INTEGRATION, NEW })
     @SpecAssertion(section = "3.14", id = "l")
     public void testNewBeanHasSameConstructor() {
-        ExplicitConstructor newBean = getInstanceByType(ExplicitConstructor.class, ExplicitConstructorSessionBean.NEW);
+        ExplicitConstructor newBean = getInstanceByType(ExplicitConstructor.class, new NewLiteral(
+                ExplicitConstructorSessionBean.class));
         assert newBean.getConstructorCalls() == 1;
         assert newBean.getInjectedSimpleBean() != null;
     }
@@ -55,7 +57,8 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
     @SpecAssertion(section = "3.14", id = "m")
     public void testNewBeanHasSameInitializers() {
         InitializerSimpleBeanLocal bean = getInstanceByType(InitializerSimpleBeanLocal.class);
-        InitializerSimpleBeanLocal newBean = getInstanceByType(InitializerSimpleBeanLocal.class, InitializerSimpleBeanLocal.NEW);
+        InitializerSimpleBeanLocal newBean = getInstanceByType(InitializerSimpleBeanLocal.class, new NewLiteral(
+                InitializerSimpleBean.class));
         assert bean != newBean;
         assert bean.getInitializerCalls() == 2;
     }
@@ -70,7 +73,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
     @SpecAssertion(section = "3.14", id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);
-        FoxLocal newFox = getInstanceByType(FoxLocal.class, FoxLocal.NEW);
+        FoxLocal newFox = getInstanceByType(FoxLocal.class, new NewLiteral(Fox.class));
         fox.setNextLitterSize(3);
         newFox.setNextLitterSize(5);
         Litter theOnlyLitter = getInstanceByType(Litter.class, new AnnotationLiteral<Tame>() {
@@ -82,7 +85,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
     @SpecAssertion(section = "3.14", id = "x")
     public void testNewBeanHasNoDisposalMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);
-        FoxLocal newFox = getInstanceByType(FoxLocal.class, FoxLocal.NEW);
+        FoxLocal newFox = getInstanceByType(FoxLocal.class, new NewLiteral(Fox.class));
         Set<Bean<Litter>> beans = getBeans(Litter.class, new AnnotationLiteral<Tame>() {
         });
         assert beans.size() == 1;

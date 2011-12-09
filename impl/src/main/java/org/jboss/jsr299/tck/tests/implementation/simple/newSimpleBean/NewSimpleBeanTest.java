@@ -36,6 +36,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
+import org.jboss.jsr299.tck.literals.NewLiteral;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -208,7 +209,7 @@ public class NewSimpleBeanTest extends AbstractJSR299Test {
     @SpecAssertion(section = "3.14", id = "xb")
     public void testNewBeanIsNotAlternative() {
         assert getUniqueBean(Tiger.class).isAlternative();
-        assert !getUniqueBean(Tiger.class, Tiger.NEW).isAlternative();
+        assert !getUniqueBean(Tiger.class, NewLiteral.INSTANCE).isAlternative();
     }
 
     @Test

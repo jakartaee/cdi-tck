@@ -19,9 +19,6 @@ package org.jboss.jsr299.tck.tests.implementation.enterprise.newBean;
 import java.io.Serializable;
 
 import javax.ejb.Local;
-import javax.enterprise.inject.New;
-
-import org.jboss.jsr299.tck.literals.NewLiteral;
 
 @Local
 public interface FoxLocal extends Serializable {
@@ -39,12 +36,5 @@ public interface FoxLocal extends Serializable {
     public void disposeLitter(Litter litter);
 
     public boolean isLitterDisposed();
-
-    public static final New NEW = new NewLiteral() {
-
-        public Class<?> value() {
-            return Fox.class;
-        }
-    };
 
 }

@@ -19,6 +19,27 @@ package org.jboss.jsr299.tck.literals;
 import javax.enterprise.inject.New;
 import javax.enterprise.util.AnnotationLiteral;
 
-public abstract class NewLiteral extends AnnotationLiteral<New> implements New {
+/**
+ * Annotation literal for {@link New}
+ */
+@SuppressWarnings("all")
+public class NewLiteral extends AnnotationLiteral<New> implements New {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * The container defaults the value to the declared type of the injection point
+     */
+    public static final New INSTANCE = new NewLiteral(New.class);
+
+    private Class<?> value;
+
+    public Class<?> value() {
+        return value;
+    }
+
+    public NewLiteral(Class<?> value) {
+        this.value = value;
+    }
 
 }
