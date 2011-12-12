@@ -5666,7 +5666,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.1" title="">
+    <section id="11.3.1" title="Obtaining a reference to the CDI container">
 
         <assertion id="a">
             <text>A portable extension may obtain a reference to the current container by calling |CDI.current()|.</text>

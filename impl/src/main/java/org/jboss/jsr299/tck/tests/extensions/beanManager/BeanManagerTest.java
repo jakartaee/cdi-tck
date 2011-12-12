@@ -21,6 +21,9 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
 import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
@@ -52,6 +55,7 @@ import org.jboss.jsr299.tck.literals.TargetLiteral;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -209,4 +213,26 @@ public class BeanManagerTest extends AbstractJSR299Test {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
         assert getCurrentManager().createInjectionTarget(annotatedType) != null;
     }
+
+    /**
+     * The method BeanManager.getExtension() returns the container's instance of an Extension class declared in
+     * META-INF/services, or throws an IllegalArgumentException if the container has no instance of the given class.
+     */
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.3.24", id = "a"), @SpecAssertion(section = "11.3.24", id = "b") })
+    public void testGetExtension() {
+
+        AfterBeanDiscoveryObserver extension = getCurrentManager().getExtension(AfterBeanDiscoveryObserver.class);
+        assertNotNull(extension);
+        assertTrue(extension.getAfterBeanDiscoveryObserved());
+
+        try {
+            getCurrentManager().getExtension(UnregisteredExtension.class);
+        } catch (Throwable t) {
+            assertTrue(isThrowablePresent(IllegalArgumentException.class, t));
+            return;
+        }
+        fail();
+    }
+
 }

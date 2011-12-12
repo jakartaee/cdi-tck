@@ -16,21 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.beanManager;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
-public class AfterBeanDiscoveryObserver implements Extension {
-
-    private boolean afterBeanDiscoveryObserved = false;
-
-    public void addABean(@Observes AfterBeanDiscovery afterBeanDiscovery) {
-        afterBeanDiscovery.addBean(new CowBean());
-        afterBeanDiscoveryObserved = true;
-    }
-
-    public boolean getAfterBeanDiscoveryObserved() {
-        return afterBeanDiscoveryObserved;
-    }
+public class UnregisteredExtension implements Extension {
 
 }
