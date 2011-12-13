@@ -38,7 +38,9 @@ public class ProcessAnnotatedTypeObserver implements Extension {
 
     public void observeSausageAnnotatedType(@Observes ProcessAnnotatedType<Sausage> event) {
 
-        final AnnotatedType<Sausage> overridingSausage = new AnnotatedType<Sausage>() {
+        final AnnotatedConstructor<Sausage> originalConstructor = event.getAnnotatedType().getConstructors().iterator().next();
+
+        AnnotatedType<Sausage> overridingSausage = new AnnotatedType<Sausage>() {
 
             @Override
             public boolean isAnnotationPresent(Class<? extends Annotation> annotationType) {
@@ -87,7 +89,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
 
             @Override
             public Set<AnnotatedConstructor<Sausage>> getConstructors() {
-                return Collections.emptySet();
+                return Collections.singleton(originalConstructor);
             }
         };
         event.setAnnotatedType(overridingSausage);

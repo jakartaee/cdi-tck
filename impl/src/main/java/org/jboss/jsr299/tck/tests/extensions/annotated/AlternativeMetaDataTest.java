@@ -29,7 +29,6 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -116,7 +115,7 @@ public class AlternativeMetaDataTest extends AbstractJSR299Test {
         assertEquals(methods.size(), 4);
         for (AnnotatedMethod<? super WildCat> method : methods) {
             // Just simple test for method name
-            assertTrue(ArrayUtils.contains(names, method.getJavaMember().getName()));
+            assertTrue(arrayContains(names, method.getJavaMember().getName()));
         }
     }
 
@@ -129,8 +128,20 @@ public class AlternativeMetaDataTest extends AbstractJSR299Test {
         assertEquals(fields.size(), 2);
         for (AnnotatedField<? super WildCat> field : fields) {
             // Just simple test for field name
-            assertTrue(ArrayUtils.contains(names, field.getJavaMember().getName()));
+            assertTrue(arrayContains(names, field.getJavaMember().getName()));
         }
+    }
+
+    private boolean arrayContains(Object[] array, Object objectToFind) {
+
+        if (array == null || objectToFind == null)
+            return false;
+
+        for (Object obj : array) {
+            if (obj.equals(objectToFind))
+                return true;
+        }
+        return false;
     }
 
 }

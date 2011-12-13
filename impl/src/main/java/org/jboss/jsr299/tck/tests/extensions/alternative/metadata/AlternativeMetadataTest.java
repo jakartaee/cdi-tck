@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.alternative.metadata;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -30,6 +31,8 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -38,16 +41,23 @@ import org.testng.annotations.Test;
 /**
  * This test class contains tests for adding meta data using extensions.
  * 
+ * Temporarily marked as integration tests - see SHRINKWRAP-369.
+ * 
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class AlternativeMetadataTest extends AbstractJSR299Test {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(AlternativeMetadataTest.class).withBeansXml("beans.xml")
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(AlternativeMetadataTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                                .clazz(GroceryInterceptor.class.getName()).up())
+                .withExtension(ProcessAnnotatedTypeObserver.class).build();
     }
 
     @Test

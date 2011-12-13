@@ -1,5 +1,0 @@
-<beans>
-	<interceptors>
-		<class>org.jboss.jsr299.tck.tests.extensions.alternative.metadata.GroceryInterceptor</class>
-	</interceptors>
-</beans>
