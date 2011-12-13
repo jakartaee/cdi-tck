@@ -51,5 +51,9 @@ public class NewSessionBeanConsumer {
     @Inject
     @New(ExplicitConstructorSessionBean.class)
     ExplicitConstructor explicitConstructor;
+    
+    @Inject
+    @New(WrappedEnterpriseBean.class)
+    WrappedEnterpriseBeanLocal wrappedEnterpriseBean;
 
 }
