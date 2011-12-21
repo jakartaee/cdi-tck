@@ -93,6 +93,11 @@ public final class TestGroups {
     public static final String INNER_CLASS = "innerClass";
 
     /**
+     * Requires basic JMS configuration
+     */
+    public static final String JMS = "innerClass";
+
+    /**
      * No instance
      */
     private TestGroups() {

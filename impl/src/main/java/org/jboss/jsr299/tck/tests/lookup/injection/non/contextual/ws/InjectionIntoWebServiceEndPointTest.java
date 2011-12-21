@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws;
 
+import static org.jboss.jsr299.tck.TestGroups.JAVAEE_FULL;
+
 import java.net.URL;
 
 import javax.enterprise.inject.spi.Bean;
@@ -45,7 +47,7 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractJSR299Test {
     }
 
     @RunAsClient
-    @Test(groups = "javaee-full-only", dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ee"), @SpecAssertion(section = "5.5.2", id = "aq"),
             @SpecAssertion(section = "5.5.2", id = "ar") })
     public void testInjectionIntoWebServiceEndpoint(@ArquillianResource URL contextPath) throws Exception {

@@ -3866,10 +3866,6 @@
             <text>The request context is destroyed after the web service invocation completes.</text>
         </assertion>
 
-        <assertion id="fa">
-            <text>The request context is destroyed after the asynchronous observer notification completes</text>
-        </assertion>
-
         <group>
             <text>The request context is destroyed after the EJB remote method invocation, asynchronous method invocation, timeout or message delivery completes.</text>
 
@@ -6441,7 +6437,7 @@
     <section id="11.5.6" title="ProcessAnnotatedType event">
 
         <group>
-            <text>The container must fire an event for each Java class it discovers in a bean archive and for annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|, before it reads the declared annotations.. The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where |X| is the class, for classes and interfaces discovered in a bean archive, or of type |javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType&lt;X&gt;| for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            <text>The container must fire an event for each Java class or interface it discovers in a bean archive and for annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|, before it reads the declared annotations.. The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where |X| is the class, for classes and interfaces discovered in a bean archive, or of type |javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType&lt;X&gt;| for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
             <assertion id="a">
                 <text>Test for classes and interfaces discovered in a bean archive.</text>
             </assertion>
