@@ -38,4 +38,9 @@ public class Cat implements Animal {
     public BeanManager getBeanManager() {
         return beanManager;
     }
+
+    @Override
+    public InjectionPoint getDecoratorInjectionPoint() {
+        return null;
+    }
 }

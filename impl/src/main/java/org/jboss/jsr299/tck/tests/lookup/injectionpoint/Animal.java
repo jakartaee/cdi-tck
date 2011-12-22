@@ -16,6 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
+import javax.enterprise.inject.spi.InjectionPoint;
+
 public interface Animal {
-    String hello();
+
+    public String hello();
+
+    public InjectionPoint getDecoratorInjectionPoint();
 }

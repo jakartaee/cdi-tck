@@ -17,11 +17,17 @@
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
 import static org.jboss.jsr299.tck.TestGroups.INJECTION_POINT;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.context.Dependent;
@@ -29,6 +35,7 @@ import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -36,6 +43,8 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -52,7 +61,11 @@ public class InjectionPointTest extends AbstractJSR299Test {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InjectionPointTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(InjectionPointTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                                .clazz(TimestampLogger.class.getName(), AnimalDecorator.class.getName()).up()).build();
     }
 
     @Test(groups = { INJECTION_POINT })
@@ -206,4 +219,53 @@ public class InjectionPointTest extends AbstractJSR299Test {
         assert !ip1.isTransient();
         assert ip2.isTransient();
     }
+
+    /**
+     * CDI-78 reopened.
+     * 
+     * Base of this test was originally part of CDITCK-138 but disappeared during branch merge.
+     */
+    @Test(groups = { INJECTION_POINT })
+    @SpecAssertion(section = "5.5.7", id = "dba")
+    public void testIsDelegate() {
+
+        assert !getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata().isDelegate();
+
+        Cat cat = getInstanceByType(Cattery.class).getCat();
+        // Cat is decorated
+        assert cat.hello().equals("hello world!");
+        assert cat.getBeanManager() != null;
+        assert cat.getInjectionPoint() != null;
+        assert !cat.getInjectionPoint().isDelegate();
+
+        List<Decorator<?>> animalDecorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(Animal.class));
+        // There is only one decorator for Animal
+        assert animalDecorators.size() == 1;
+        Decorator<?> animalDecorator = animalDecorators.iterator().next();
+        // Decorator has two injection points - metadata and delegate
+        assert animalDecorator.getInjectionPoints().size() == 2;
+
+        for (InjectionPoint injectionPoint : animalDecorator.getInjectionPoints()) {
+            if (injectionPoint.getType().equals(InjectionPoint.class)) {
+                assertFalse(injectionPoint.isDelegate());
+            } else if (injectionPoint.getType().equals(Animal.class)) {
+                assertTrue(injectionPoint.isDelegate());
+            } else {
+                // Unexpected injection point type
+                assert false;
+            }
+        }
+    }
+
+    /**
+     * CDI-78 reopened.
+     */
+    @Test(groups = { INJECTION_POINT })
+    @SpecAssertion(section = "5.5.7", id = "i")
+    public void testDecoratorInjectionPoint() {
+        Cat cat = getInstanceByType(Cattery.class).getCat();
+        cat.hello();
+        assertEquals(cat.getDecoratorInjectionPoint().getBean().getBeanClass(), Cattery.class);
+    }
+
 }

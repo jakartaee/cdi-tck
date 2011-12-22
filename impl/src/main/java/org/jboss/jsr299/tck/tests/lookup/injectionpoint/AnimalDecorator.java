@@ -18,16 +18,25 @@ package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
+import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
 @Decorator
 public class AnimalDecorator implements Animal {
 
     @Inject
+    private InjectionPoint injectedMetadata;
+
+    @Inject
     @Delegate
-    private Animal bean;
+    private Animal animal;
 
     public String hello() {
-        return bean.hello() + " world!";
+        return animal.hello() + " world!";
+    }
+
+    @Override
+    public InjectionPoint getDecoratorInjectionPoint() {
+        return injectedMetadata;
     }
 }
