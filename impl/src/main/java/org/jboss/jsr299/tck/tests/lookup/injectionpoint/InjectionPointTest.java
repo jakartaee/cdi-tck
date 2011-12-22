@@ -65,7 +65,8 @@ public class InjectionPointTest extends AbstractJSR299Test {
                 .withTestClassPackage(InjectionPointTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createDecorators()
-                                .clazz(TimestampLogger.class.getName(), AnimalDecorator.class.getName()).up()).build();
+                                .clazz(AnimalDecorator1.class.getName(), AnimalDecorator2.class.getName(), AnimalDecorator3.class.getName()).up())
+                .build();
     }
 
     @Test(groups = { INJECTION_POINT })
@@ -233,28 +234,33 @@ public class InjectionPointTest extends AbstractJSR299Test {
 
         Cat cat = getInstanceByType(Cattery.class).getCat();
         // Cat is decorated
-        assert cat.hello().equals("hello world!");
+        assert cat.hello().equals("hello!!!");
         assert cat.getBeanManager() != null;
         assert cat.getInjectionPoint() != null;
         assert !cat.getInjectionPoint().isDelegate();
 
         List<Decorator<?>> animalDecorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(Animal.class));
-        // There is only one decorator for Animal
-        assert animalDecorators.size() == 1;
-        Decorator<?> animalDecorator = animalDecorators.iterator().next();
-        // Decorator has two injection points - metadata and delegate
-        assert animalDecorator.getInjectionPoints().size() == 2;
+        assert animalDecorators.size() == 3;
+        for (Decorator<?> animalDecorator : animalDecorators) {
+            // Decorator has two injection points - metadata and delegate
+            assert animalDecorator.getInjectionPoints().size() == 3;
 
-        for (InjectionPoint injectionPoint : animalDecorator.getInjectionPoints()) {
-            if (injectionPoint.getType().equals(InjectionPoint.class)) {
-                assertFalse(injectionPoint.isDelegate());
-            } else if (injectionPoint.getType().equals(Animal.class)) {
-                assertTrue(injectionPoint.isDelegate());
-            } else {
-                // Unexpected injection point type
-                assert false;
+            for (InjectionPoint injectionPoint : animalDecorator.getInjectionPoints()) {
+                if (injectionPoint.getType().equals(InjectionPoint.class)) {
+                    assertFalse(injectionPoint.isDelegate());
+                } else if (injectionPoint.getType().equals(Animal.class)) {
+                    assertTrue(injectionPoint.isDelegate());
+                } else if (injectionPoint.getType().equals(Toy.class)) {
+                    assertFalse(injectionPoint.isDelegate());
+                } else {
+                    // Unexpected injection point type
+                    assert false;
+                }
             }
         }
+        Toy toy = cat.getToy();
+        assert toy.getInjectionPoint() != null;
+        assert toy.getInjectionPoint().getBean().getBeanClass().equals(AnimalDecorator2.class);
     }
 
     /**
@@ -265,7 +271,8 @@ public class InjectionPointTest extends AbstractJSR299Test {
     public void testDecoratorInjectionPoint() {
         Cat cat = getInstanceByType(Cattery.class).getCat();
         cat.hello();
-        assertEquals(cat.getDecoratorInjectionPoint().getBean().getBeanClass(), Cattery.class);
+        assertEquals(cat.getDecorator1InjectionPoint().getBean().getBeanClass(), Cattery.class);
+        assertEquals(cat.getDecorator2InjectionPoint().getBean().getBeanClass(), Cattery.class);
+        assertEquals(cat.getDecorator3InjectionPoint().getBean().getBeanClass(), Cattery.class);
     }
-
 }

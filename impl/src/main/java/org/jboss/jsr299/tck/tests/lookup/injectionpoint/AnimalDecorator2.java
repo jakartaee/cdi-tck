@@ -16,17 +16,35 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.injectionpoint;
 
+import javax.decorator.Decorator;
+import javax.decorator.Delegate;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Inject;
 
-public interface Animal {
+@Decorator
+public abstract class AnimalDecorator2 implements Animal {
 
-    public String hello();
+    @Inject
+    private InjectionPoint injectedMetadata;
 
-    public InjectionPoint getDecorator1InjectionPoint();
+    @Inject
+    @Delegate
+    private Animal animal;
 
-    public InjectionPoint getDecorator2InjectionPoint();
+    @Inject
+    private Toy toy;
 
-    public InjectionPoint getDecorator3InjectionPoint();
-    
-    public Toy getToy();
+    public String hello() {
+        return animal.hello() + "!";
+    }
+
+    @Override
+    public InjectionPoint getDecorator2InjectionPoint() {
+        return injectedMetadata;
+    }
+
+    @Override
+    public Toy getToy() {
+        return toy;
+    }
 }

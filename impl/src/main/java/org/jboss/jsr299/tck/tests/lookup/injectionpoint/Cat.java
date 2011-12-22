@@ -40,7 +40,22 @@ public class Cat implements Animal {
     }
 
     @Override
-    public InjectionPoint getDecoratorInjectionPoint() {
+    public InjectionPoint getDecorator1InjectionPoint() {
+        return null;
+    }
+
+    @Override
+    public InjectionPoint getDecorator2InjectionPoint() {
+        return null;
+    }
+
+    @Override
+    public InjectionPoint getDecorator3InjectionPoint() {
+        return null;
+    }
+
+    @Override
+    public Toy getToy() {
         return null;
     }
 }

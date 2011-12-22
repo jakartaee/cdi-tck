@@ -22,7 +22,7 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
 @Decorator
-public class AnimalDecorator implements Animal {
+public abstract class AnimalDecorator3 implements Animal {
 
     @Inject
     private InjectionPoint injectedMetadata;
@@ -31,12 +31,16 @@ public class AnimalDecorator implements Animal {
     @Delegate
     private Animal animal;
 
+    @Inject
+    @SuppressWarnings("unused")
+    private Toy toy;
+
     public String hello() {
-        return animal.hello() + " world!";
+        return animal.hello() + "!";
     }
 
     @Override
-    public InjectionPoint getDecoratorInjectionPoint() {
+    public InjectionPoint getDecorator3InjectionPoint() {
         return injectedMetadata;
     }
 }
