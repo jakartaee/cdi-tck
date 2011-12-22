@@ -98,6 +98,11 @@ public final class TestGroups {
     public static final String JMS = "innerClass";
 
     /**
+     * Test support of enums
+     */
+    public static final String ENUMS = "enums";
+
+    /**
      * No instance
      */
     private TestGroups() {

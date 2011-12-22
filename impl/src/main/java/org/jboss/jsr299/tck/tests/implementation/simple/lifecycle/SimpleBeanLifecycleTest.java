@@ -152,7 +152,7 @@ public class SimpleBeanLifecycleTest extends AbstractJSR299Test {
     @Test(groups = INJECTION)
     @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa"), @SpecAssertion(section = "3.8.1", id = "aa"),
             @SpecAssertion(section = "2.3.4", id = "a"), @SpecAssertion(section = "3.9", id = "a"),
-            @SpecAssertion(section = "12.1", id = "bca") })
+            @SpecAssertion(section = "3.9.1", id = "aa"), @SpecAssertion(section = "12.1", id = "bca") })
     public void testCreateInjectsFieldsDeclaredInJava() {
         assert getBeans(TunaFarm.class).size() == 1;
         TunaFarm tunaFarm = getInstanceByType(TunaFarm.class);
