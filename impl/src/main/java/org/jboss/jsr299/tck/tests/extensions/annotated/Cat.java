@@ -16,6 +16,7 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.annotated;
 
+@Felid
 public class Cat {
 
     protected int age = 0;

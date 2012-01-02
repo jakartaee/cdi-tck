@@ -16,22 +16,22 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.annotated;
 
-import javax.enterprise.context.RequestScoped;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@RequestScoped
-public class WildCat extends Cat {
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    private String name;
+import javax.inject.Qualifier;
 
-    public WildCat(String name) {
-        this.name = name;
-    }
-
-    public void bite() {
-    }
-
-    public String getName() {
-        return name;
-    }
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
+@Retention(RUNTIME)
+@Documented
+@Qualifier
+public @interface Felid {
 
 }

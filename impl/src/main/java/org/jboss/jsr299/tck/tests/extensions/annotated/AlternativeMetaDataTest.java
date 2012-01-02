@@ -34,6 +34,7 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -79,12 +80,15 @@ public class AlternativeMetaDataTest extends AbstractJSR299Test {
         assert annotatedType.getAnnotation(ApplicationScoped.class) == null;
     }
 
+    @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = "11.4", id = "f")
+    @SpecAssertions({ @SpecAssertion(section = "11.4", id = "f"), @SpecAssertion(section = "11.4", id = "ga") })
     public void testGetAnnotations() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(ClassD.class);
         assert annotatedType.getAnnotations().size() == 2;
         assert annotationSetMatches(annotatedType.getAnnotations(), RequestScoped.class, Tame.class);
+        AnnotatedType<WildCat> annotatedWildCatType = getCurrentManager().createAnnotatedType(WildCat.class);
+        assert annotationSetMatches(annotatedWildCatType.getAnnotations(), RequestScoped.class, Felid.class);
     }
 
     @Test
@@ -108,7 +112,7 @@ public class AlternativeMetaDataTest extends AbstractJSR299Test {
 
     @Test
     @SpecAssertion(section = "11.4", id = "aab")
-    public void testMethos() {
+    public void testMethods() {
         AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
         Set<AnnotatedMethod<? super WildCat>> methods = annotatedType.getMethods();
         String[] names = new String[] { "yowl", "jump", "bite", "getName" };
