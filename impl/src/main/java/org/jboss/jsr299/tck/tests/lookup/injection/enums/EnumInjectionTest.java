@@ -22,6 +22,7 @@
 package org.jboss.jsr299.tck.tests.lookup.injection.enums;
 
 import static org.jboss.jsr299.tck.TestGroups.ENUMS;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
@@ -45,10 +46,12 @@ import org.testng.annotations.Test;
  * This test was originally part of Weld test suite.
  * <p>
  * 
+ * SHRINKWRAP-369 - we use extension we have to mark this test as integration one.
+ * 
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = ENUMS)
+@Test(groups = { INTEGRATION, ENUMS })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EnumInjectionTest extends AbstractJSR299Test {
 
