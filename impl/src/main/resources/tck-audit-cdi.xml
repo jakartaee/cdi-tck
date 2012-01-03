@@ -3037,15 +3037,17 @@
                 <text>Bean with scope |@Dependent|, qualifier |@???| and type |Bean| can be injected into any decorator instance.</text>
             </assertion>
             <assertion id="e">
-                <text>Bean with scope |@Dependent|, qualifier |@???| and type |Bean| that can be injected into any decorator instance is passivation capable dependency.</text>
-            </assertion>
-            <assertion id="f">
                 <text>Bean with scope |@Dependent|, qualifier |@???| and type |Bean| which can be injected into any interceptor instance.</text>
             </assertion>
-            <assertion id="g">
-                <text>Bean with scope |@Dependent|, qualifier |@???| and type |Bean| that can be injected into any interceptor instance is passivation capable dependency.</text>
-            </assertion>
         </group>
+
+        <assertion id="f">
+            <text>These beans are passivation capable dependencies, as defined in Section 6.6.2, "Passivation capable dependencies".</text>
+        </assertion>
+
+        <assertion id="g" implied="true">
+            <text>Dynamic lookup of built-in beans is not allowed.</text>
+        </assertion>
 
     </section>
 

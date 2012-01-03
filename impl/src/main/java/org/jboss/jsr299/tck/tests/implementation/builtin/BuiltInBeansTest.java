@@ -79,7 +79,6 @@ public class BuiltInBeansTest extends AbstractJSR299Test {
     }
 
     /**
-     * FIXME in jbossas7 web profile login-module is disabled
      * 
      * @throws SystemException
      * @throws LoginException
