@@ -161,13 +161,23 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add CDI extension. This method does not add the specified class to the archive.
+     * Add CDI extension. This method does not add the specified extension class to the archive.
      * 
      * @param extensionClass
      * @return self
      */
     public T withExtension(Class<? extends Extension> extensionClass) {
         return withServiceProvider(new ServiceProviderDescriptor(Extension.class, extensionClass));
+    }
+
+    /**
+     * Add CDI extensions. This method does not add the specified extension classes to the archive.
+     * 
+     * @param extensionClasses
+     * @return self
+     */
+    public T withExtensions(Class<? extends Extension>... extensionClasses) {
+        return withServiceProvider(new ServiceProviderDescriptor(Extension.class, extensionClasses));
     }
 
     /**
