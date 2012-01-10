@@ -96,6 +96,16 @@ public abstract class AbstractJSR299Test extends Arquillian {
         return annotationTypeList.size() == 0;
     }
 
+    /**
+     * @param annotations The annotation set
+     * @param requiredAnnotationTypes The required annotations
+     * @return <code>true</code> if speficied set matches required annotations, <code>false</code> otherwise
+     */
+    public boolean annotationSetMatches(Set<? extends Annotation> annotations, Annotation... requiredAnnotations) {
+        List<Annotation> requiredAnnotationList = new ArrayList<Annotation>();
+        return requiredAnnotations.length == annotations.size() && annotations.containsAll(requiredAnnotationList);
+    }
+
     public boolean rawTypeSetMatches(Set<Type> types, Class<?>... requiredTypes) {
         List<Class<?>> typeList = new ArrayList<Class<?>>();
         typeList.addAll(Arrays.asList(requiredTypes));

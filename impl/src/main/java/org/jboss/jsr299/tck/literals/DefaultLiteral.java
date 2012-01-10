@@ -24,5 +24,9 @@ import javax.enterprise.util.AnnotationLiteral;
  * 
  * @author Pete Muir
  */
+@SuppressWarnings("all")
 public class DefaultLiteral extends AnnotationLiteral<Default> implements Default {
+
+    public static final Default INSTANCE = new DefaultLiteral();
+
 }

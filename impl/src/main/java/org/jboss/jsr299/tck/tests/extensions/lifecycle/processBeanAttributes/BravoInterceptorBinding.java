@@ -14,27 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.literals;
+package org.jboss.jsr299.tck.tests.extensions.lifecycle.processBeanAttributes;
 
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Named;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-/**
- * Annotation literal for {@link Named}
- */
-@SuppressWarnings("all")
-public class NamedLiteral extends AnnotationLiteral<Named> implements Named {
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    public static final Named INSTANCE = new NamedLiteral("");
+import javax.interceptor.InterceptorBinding;
 
-    private String value = "";
-
-    public String value() {
-        return value;
-    }
-
-    public NamedLiteral(String value) {
-        this.value = value;
-    }
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface BravoInterceptorBinding {
 
 }
