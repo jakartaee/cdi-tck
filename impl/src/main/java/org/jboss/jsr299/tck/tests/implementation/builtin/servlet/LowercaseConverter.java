@@ -33,6 +33,10 @@ import javax.servlet.http.HttpSession;
 @SessionScoped
 public class LowercaseConverter implements Serializable {
 
+    protected static final String TEXT = "text";
+
+    private long id = System.currentTimeMillis();
+
     @Inject
     private HttpServletRequest httpServletRequest;
 
@@ -42,7 +46,24 @@ public class LowercaseConverter implements Serializable {
     @Inject
     private ServletContext servletContext;
 
+    /**
+     * 
+     * @param text
+     * @return
+     */
     public String convert(String text) {
+        if (text == null) {
+            // Request
+            text = httpServletRequest.getParameter(TEXT);
+            if (text == null) {
+                // Session
+                text = (String) httpSession.getAttribute(TEXT);
+                if (text == null) {
+                    // Servlet context
+                    text = (String) servletContext.getAttribute(TEXT);
+                }
+            }
+        }
         return text != null ? text.toLowerCase() : null;
     }
 
@@ -56,6 +77,10 @@ public class LowercaseConverter implements Serializable {
 
     public HttpSession getHttpSession() {
         return httpSession;
+    }
+
+    public long getId() {
+        return id;
     }
 
 }

@@ -26,9 +26,15 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.net.URL;
+
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -37,7 +43,13 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
+
 /**
+ * Test that servlet container built-in beans are available for injection and that it's possible to obtain an instance of
+ * BeanManager from ServletContext.
+ * 
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
@@ -55,15 +67,49 @@ public class ServletContainerBuiltinBeanTest extends AbstractJSR299Test {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "3.7", id = "da"), @SpecAssertion(section = "3.7", id = "db"),
             @SpecAssertion(section = "3.7", id = "dc") })
-    public void testBuiltinBeans() {
+    public void testBuiltinBeansAvailableForInjection() {
+
         String result = lowercaseConverter.convert("Foo");
         assertEquals(result, "foo");
+
         assertNotNull(lowercaseConverter.getHttpServletRequest());
         assertNotNull(lowercaseConverter.getHttpServletRequest().getRequestURL());
         assertNotNull(lowercaseConverter.getHttpSession());
         assertNotNull(lowercaseConverter.getHttpSession().getId());
         assertNotNull(lowercaseConverter.getServletContext());
         assertTrue(lowercaseConverter.getServletContext().getMajorVersion() >= 2);
+    }
+
+    @Test
+    @SpecAssertion(section = "11.3.1", id = "e")
+    public void testBeanManagerAvailableViaServletContext() {
+
+        BeanManager beanManager = (BeanManager) lowercaseConverter.getServletContext()
+                .getAttribute(BeanManager.class.getName());
+        assertNotNull(beanManager);
+        assertEquals(beanManager, getCurrentManager());
+        Bean<?> bean = beanManager.resolve(beanManager.getBeans(LowercaseConverter.class));
+        LowercaseConverter converter = (LowercaseConverter) beanManager.getReference(bean, LowercaseConverter.class,
+                beanManager.createCreationalContext(bean));
+        assertEquals(converter.getId(), lowercaseConverter.getId());
+    }
+
+    @RunAsClient
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "da"), @SpecAssertion(section = "3.7", id = "db"),
+            @SpecAssertion(section = "3.7", id = "dc") })
+    public void testBuiltinBeansFromClient(@ArquillianResource URL contextPath) throws Exception {
+
+        WebClient client = new WebClient();
+
+        TextPage requestPage = client.getPage(contextPath + "/convert-request?text=BaR");
+        assertEquals(requestPage.getContent(), "bar");
+
+        TextPage sessionPage = client.getPage(contextPath + "/convert-session");
+        assertEquals(sessionPage.getContent(), "session");
+
+        TextPage contextPage = client.getPage(contextPath + "/convert-context");
+        assertEquals(contextPage.getContent(), "servletcontext");
     }
 
 }
