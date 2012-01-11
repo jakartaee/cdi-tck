@@ -31,6 +31,7 @@ import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
 
+import javax.decorator.Decorator;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
@@ -212,7 +213,6 @@ public class VerifyValuesTest extends AbstractJSR299Test {
 
         assertTrue(typeSetMatches(attributes.getTypes(), Object.class, BravoInterceptor.class));
         assertTrue(attributes.getStereotypes().isEmpty());
-        assertTrue(attributes.getQualifiers().isEmpty());
     }
 
     @Test
@@ -224,9 +224,9 @@ public class VerifyValuesTest extends AbstractJSR299Test {
         assertFalse(attributes.isAlternative());
         assertTrue(attributes.isNullable());
 
-        assertTrue(typeSetMatches(attributes.getTypes(), Object.class, BravoDecorator.class));
-        assertTrue(attributes.getStereotypes().isEmpty());
-        assertTrue(attributes.getQualifiers().isEmpty());
+        assertTrue(typeSetMatches(attributes.getTypes(), Object.class, BravoDecorator.class, BravoInterface.class));
+        assertTrue(attributes.getStereotypes().size() == 1);
+        assertTrue(attributes.getStereotypes().iterator().next().equals(Decorator.class));
     }
 
     private void verifyName(BeanAttributes<?> attributes, String name) {
