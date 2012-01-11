@@ -36,6 +36,8 @@ import javax.enterprise.util.AnnotationLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.jsr299.tck.util.HierarchyDiscovery;
+import org.jboss.jsr299.tck.util.ParameterizedTypeImpl;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -54,7 +56,8 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InterceptorDefinitionTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(InterceptorDefinitionTest.class)
+                .withClasses(HierarchyDiscovery.class, ParameterizedTypeImpl.class).withBeansXml("beans.xml").build();
     }
 
     @Test

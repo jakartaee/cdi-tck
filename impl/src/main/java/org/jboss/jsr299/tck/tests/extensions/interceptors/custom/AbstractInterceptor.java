@@ -31,7 +31,7 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.Interceptor;
 
-import org.jboss.jsr299.tck.tests.interceptors.definition.HierarchyDiscovery;
+import org.jboss.jsr299.tck.util.HierarchyDiscovery;
 
 /**
  * Utility class for extension-provided interceptor tests.

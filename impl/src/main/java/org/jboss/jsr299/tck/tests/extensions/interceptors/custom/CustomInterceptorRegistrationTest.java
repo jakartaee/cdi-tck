@@ -28,7 +28,7 @@ import javax.interceptor.Interceptor;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.jsr299.tck.tests.interceptors.definition.HierarchyDiscovery;
+import org.jboss.jsr299.tck.util.HierarchyDiscovery;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
