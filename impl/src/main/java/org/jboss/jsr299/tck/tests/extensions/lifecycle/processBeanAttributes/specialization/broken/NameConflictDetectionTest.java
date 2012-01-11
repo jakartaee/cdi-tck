@@ -21,6 +21,8 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.lifecycle.processBeanAttributes.specialization.broken;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -48,6 +50,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 public class NameConflictDetectionTest extends AbstractJSR299Test {
 
     @ShouldThrowException(Exception.class)
