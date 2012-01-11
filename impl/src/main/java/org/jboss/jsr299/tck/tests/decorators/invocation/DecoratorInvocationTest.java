@@ -38,8 +38,8 @@ public class DecoratorInvocationTest extends AbstractJSR299Test {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorInvocationTest.class)
-                .withExcludedClasses(EJBDecoratorInvocationTest.class, PigSty.class, PigStyImpl.class, PigStyDecorator.class,
-                        Pig.class)
+                .withExcludedClasses(EJBDecoratorInvocationTest.class.getName(), PigSty.class.getName(),
+                        PigStyImpl.class.getName(), PigStyDecorator.class.getName(), Pig.class.getName())
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)

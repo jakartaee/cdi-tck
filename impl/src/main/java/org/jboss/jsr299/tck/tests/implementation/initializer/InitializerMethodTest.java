@@ -34,7 +34,7 @@ public class InitializerMethodTest extends AbstractJSR299Test {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(InitializerMethodTest.class)
-                .withExcludedClass(EjbInitializerMethodTest.class).build();
+                .withExcludedClass(EjbInitializerMethodTest.class.getName()).build();
     }
 
     @Test(groups = { INITIALIZER_METHOD, INTEGRATION })

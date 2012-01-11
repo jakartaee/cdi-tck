@@ -41,7 +41,7 @@ public class NewEnterpriseBeanICTest extends AbstractJSR299Test {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(NewEnterpriseBeanICTest.class)
-                .withExcludedClass(NewEnterpriseBeanTest.class).build();
+                .withExcludedClass(NewEnterpriseBeanTest.class.getName()).build();
     }
 
     @Test(groups = { INTEGRATION, NEW })

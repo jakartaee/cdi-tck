@@ -227,14 +227,14 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * Specified class must be excluded from final archive unless also added via {@link #withClass(Class)} or
      * {@link #withClasses(Class...)}. Useful for exluding some classes from package added via {@link #withPackage(Package)}.
      * 
-     * @param clazz
+     * @param clazz Fully qualified class name
      * @return self
      */
-    public T withExcludedClass(Class<?> clazz) {
+    public T withExcludedClass(String clazz) {
         if (this.excludedClasses == null)
             this.excludedClasses = new ArrayList<String>();
 
-        this.excludedClasses.add(clazz.getName());
+        this.excludedClasses.add(clazz);
         return self();
     }
 
@@ -242,12 +242,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * Specified classes must be excluded from final archive unless also added via {@link #withClass(Class)} or
      * {@link #withClasses(Class...)}. Useful for exluding some classes from package added via {@link #withPackage(Package)}.
      * 
-     * @param classes
+     * @param classes Fully qualified class names
      * @return self
      */
-    public T withExcludedClasses(Class<?>... classes) {
+    public T withExcludedClasses(String... classes) {
 
-        for (Class<?> clazz : classes) {
+        for (String clazz : classes) {
             withExcludedClass(clazz);
         }
         return self();

@@ -58,6 +58,7 @@ public class CustomInterceptorRegistrationTest extends AbstractJSR299Test {
         return new WebArchiveBuilder()
                 .withTestClassPackage(CustomInterceptorRegistrationTest.class)
                 .withClasses(HierarchyDiscovery.class)
+                .withExcludedClasses(CustomInterceptorInvocationTest.class.getName())
                 .withExtension(CustomInterceptorExtension.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(FooInterceptor.class.getName())

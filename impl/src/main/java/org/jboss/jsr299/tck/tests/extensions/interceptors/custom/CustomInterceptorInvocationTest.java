@@ -29,6 +29,7 @@ import javax.interceptor.Interceptor;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.jsr299.tck.util.HierarchyDiscovery;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -59,7 +60,9 @@ public class CustomInterceptorInvocationTest extends AbstractJSR299Test {
 
         return new WebArchiveBuilder()
                 .withTestClassPackage(CustomInterceptorInvocationTest.class)
-                .withExcludedClasses(CustomInterceptorRegistrationTest.class, InterceptedSerializableBean.class)
+                .withClasses(HierarchyDiscovery.class)
+                .withExcludedClasses(CustomInterceptorRegistrationTest.class.getName(),
+                        InterceptedSerializableBean.class.getName())
                 .withExtension(CustomInterceptorExtension.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(FooInterceptor.class.getName())
