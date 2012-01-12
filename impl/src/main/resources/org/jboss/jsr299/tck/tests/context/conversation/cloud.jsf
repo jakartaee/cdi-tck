@@ -15,8 +15,10 @@
   <body>
    <f:view>
       <h:outputText value="#{cloud.name}" id="cloudName" />
+        <h:form>
+         <h:commandButton action="#{cloud.cumulus}" value="Cumulus" id="cumulus" />
+      </h:form>
    </f:view>
   </body>
   </html>
 </jsp:root>
-

@@ -19,8 +19,10 @@ package org.jboss.jsr299.tck.tests.context.conversation;
 import java.io.Serializable;
 
 import javax.annotation.PreDestroy;
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
@@ -36,9 +38,16 @@ public class Cloud implements Serializable {
 
     public static final String RAINED_HEADER_NAME = Cloud.class.getName() + ".rained";
 
+    public static final String CUMULUS = "cumulus";
+
     private static boolean destroyed = false;
 
     private boolean rained;
+
+    private String name = NAME;
+
+    @Inject
+    Conversation conversation;
 
     @PreDestroy
     public void destroy() {
@@ -54,7 +63,7 @@ public class Cloud implements Serializable {
     }
 
     public String getName() {
-        return NAME;
+        return name;
     }
 
     public void rain() {
@@ -64,6 +73,11 @@ public class Cloud implements Serializable {
 
     public boolean isRained() {
         return rained;
+    }
+
+    public void cumulus() {
+        this.name = CUMULUS;
+        conversation.begin();
     }
 
 }

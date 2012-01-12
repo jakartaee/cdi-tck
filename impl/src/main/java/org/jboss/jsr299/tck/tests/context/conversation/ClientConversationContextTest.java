@@ -19,6 +19,7 @@ package org.jboss.jsr299.tck.tests.context.conversation;
 import static org.jboss.jsr299.tck.TestGroups.CONTEXTS;
 import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
@@ -339,4 +340,32 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         page = beginConversationButton.click();
         assert page.getBody().getTextContent().contains("Stratocumulus");
     }
+
+    @Test
+    public void testSuppressedConversationPropagation() throws Exception {
+        WebClient client = new WebClient();
+
+        // Access the start page
+        HtmlPage cloud = client.getPage(getPath("cloud.jsf"));
+        assertEquals(getFirstMatchingElement(cloud, HtmlSpan.class, "cloudName").getTextContent(), Cloud.NAME);
+
+        // Now start a conversation and check the cloud name changes
+        HtmlPage page1 = getFirstMatchingElement(cloud, HtmlSubmitInput.class, Cloud.CUMULUS).click();
+        assertEquals(getFirstMatchingElement(page1, HtmlSpan.class, "cloudName").getTextContent(), Cloud.CUMULUS);
+        String cid = getCid(page1);
+
+        // Activate the conversation from a GET request
+        HtmlPage page2 = client.getPage(getPath("cloud.jsf", cid));
+        assertEquals(getFirstMatchingElement(page2, HtmlSpan.class, "cloudName").getTextContent(), Cloud.CUMULUS);
+
+        // Send a GET request with the "cid" parameter and suppressed conversation propagation (using
+        // conversationPropagation=none)
+        HtmlPage page3 = client.getPage(getPath("cloud.jsf", cid) + "&conversationPropagation=none");
+        assertEquals(getFirstMatchingElement(page3, HtmlSpan.class, "cloudName").getTextContent(), Cloud.NAME);
+
+        // Test again using the proprietary "nocid" parameter (kept for backwards compatibility)
+        HtmlPage page4 = client.getPage(getPath("cloud.jsf", cid) + "&nocid=true");
+        assertEquals(getFirstMatchingElement(page4, HtmlSpan.class, "cloudName").getTextContent(), Cloud.NAME);
+    }
+
 }
