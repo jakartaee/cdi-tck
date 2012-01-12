@@ -24,6 +24,7 @@ package org.jboss.jsr299.tck.tests.extensions.lifecycle.processBeanAttributes.sp
 import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -56,6 +57,9 @@ public class VetoTest extends AbstractJSR299Test {
     @Inject
     @Any
     Alpha alpha;
+    
+    @Inject
+    private VerifyingExtension extension;
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.5.10", id = "be"), @SpecAssertion(section = "11.5.10", id = "aa"),
@@ -70,5 +74,8 @@ public class VetoTest extends AbstractJSR299Test {
         assertNotNull(alpha);
         assertTrue(alpha instanceof Bravo);
         assertFalse(alpha instanceof Charlie);
+        assertNull(extension.getAlpha());
+        assertNotNull(extension.getBravo());
+        assertNotNull(extension.getCharlie());
     }
 }
