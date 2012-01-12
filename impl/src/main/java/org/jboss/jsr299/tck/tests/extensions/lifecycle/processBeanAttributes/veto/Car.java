@@ -21,17 +21,8 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.lifecycle.processBeanAttributes.veto;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessBeanAttributes;
+import javax.enterprise.inject.Veto;
 
-public class VetoingExtension implements Extension {
-
-    void veto(@Observes ProcessBeanAttributes<Field> event) {
-        event.veto();
-    }
-
-    void vetoCar(@Observes ProcessBeanAttributes<Car> event) {
-        event.veto();
-    }
+@Veto
+public class Car {
 }

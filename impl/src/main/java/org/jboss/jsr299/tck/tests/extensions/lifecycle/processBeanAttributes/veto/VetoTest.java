@@ -55,5 +55,7 @@ public class VetoTest extends AbstractJSR299Test {
         assertEquals(getCurrentManager().getBeans(Field.class).size(), 0);
         assertEquals(getCurrentManager().getBeans(Wheat.class).size(), 0);
         assertEquals(getCurrentManager().getBeans(Flower.class).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Factory.class).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Car.class).size(), 0);
     }
 }
