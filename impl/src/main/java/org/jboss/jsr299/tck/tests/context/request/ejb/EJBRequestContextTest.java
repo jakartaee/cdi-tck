@@ -36,6 +36,8 @@ import org.testng.annotations.Test;
 /**
  * EJB and related tests with the built-in request context.
  * 
+ * Clarification for request context lifecycle during remote method invocation of EJB is required - see CDI-180.
+ * 
  * @author David Allen
  * @author Martin Kouba
  */
