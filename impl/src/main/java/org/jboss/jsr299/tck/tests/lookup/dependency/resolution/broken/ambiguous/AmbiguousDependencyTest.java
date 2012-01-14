@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.dependency.resolution.broken.ambiguous;
 
+import javax.enterprise.inject.spi.DeploymentException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -28,14 +30,14 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class AmbiguousDependencyTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(AmbiguousDependencyTest.class).build();
     }
 
     @Test
-    @SpecAssertion(section = "5.2.1", id = "aa")
+    @SpecAssertion(section = "5.2.1", id = "ab")
     public void testAmbiguousDependency() {
     }
 

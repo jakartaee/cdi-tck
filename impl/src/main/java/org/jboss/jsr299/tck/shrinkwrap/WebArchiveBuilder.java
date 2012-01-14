@@ -53,7 +53,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
     }
 
     @Override
-    public WebArchive buildInternal() {
+    protected WebArchive buildInternal() {
 
         WebArchive webArchive = null;
 

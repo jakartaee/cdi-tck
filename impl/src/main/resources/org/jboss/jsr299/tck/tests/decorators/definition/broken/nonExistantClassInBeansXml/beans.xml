@@ -1,5 +1,0 @@
-<beans> 
-   <decorators>
-      <class>com.acme.NonExistantDecoratorClass</class>
-   </decorators>
-</beans>

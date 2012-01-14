@@ -1,5 +1,0 @@
-<beans> 
-	<decorators>
-		<class>org.jboss.jsr299.tck.tests.implementation.producer.field.definition.broken.decorator.FooDecorator_Broken</class>
-	</decorators>
-</beans>

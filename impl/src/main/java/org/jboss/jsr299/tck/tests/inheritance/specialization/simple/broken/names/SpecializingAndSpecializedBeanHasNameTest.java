@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.names;
 
+import javax.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -28,7 +30,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SpecializingAndSpecializedBeanHasNameTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(SpecializingAndSpecializedBeanHasNameTest.class).build();

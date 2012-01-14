@@ -23,6 +23,8 @@ package org.jboss.jsr299.tck.tests.extensions.lifecycle.processBeanAttributes.br
 
 import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 
+import javax.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -34,6 +36,8 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
+ * FIXME The related part of spec needs clarification - see CDI-197, CDI-200, CDI-201.
+ * 
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
@@ -41,11 +45,12 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
+// SHRINKWRAP-369
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InvalidTypesTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()

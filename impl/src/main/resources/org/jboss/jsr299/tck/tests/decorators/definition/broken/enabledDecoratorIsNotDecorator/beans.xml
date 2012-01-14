@@ -1,5 +1,0 @@
-<beans> 
-   <decorators>
-      <class>org.jboss.jsr299.tck.tests.decorators.definition.broken.enabledDecoratorIsNotDecorator.TimestampLogger</class>
-   </decorators>
-</beans>

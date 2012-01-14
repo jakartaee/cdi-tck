@@ -20,7 +20,7 @@ package org.jboss.jsr299.tck.tests.lookup.binding.members.annotation;
  * @author pmuir
  * 
  */
-@Expensive_Broken(member = @SimpleAnnotation)
+@Expensive(member = @SimpleAnnotation)
 public class Watch {
 
 }

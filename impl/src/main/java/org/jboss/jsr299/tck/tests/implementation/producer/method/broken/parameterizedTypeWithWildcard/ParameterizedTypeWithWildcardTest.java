@@ -18,6 +18,8 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.paramet
 
 import static org.jboss.jsr299.tck.TestGroups.PRODUCER_METHOD;
 
+import javax.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -31,7 +33,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ParameterizedTypeWithWildcardTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ParameterizedTypeWithWildcardTest.class).build();

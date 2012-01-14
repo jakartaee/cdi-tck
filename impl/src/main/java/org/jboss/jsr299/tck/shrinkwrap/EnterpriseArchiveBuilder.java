@@ -91,7 +91,7 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
     }
 
     @Override
-    public EnterpriseArchive buildInternal() {
+    protected EnterpriseArchive buildInternal() {
 
         EnterpriseArchive enterpriseArchive = null;
 

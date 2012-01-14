@@ -17,6 +17,10 @@
 
 package org.jboss.jsr299.tck.tests.extensions.annotated.broken.processAnnotatedObserverThrowsException;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
+import javax.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -27,16 +31,18 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests that an exception thrown by a ProcessAnnotatedType event observer is treated as a deployment error
+ * Tests that an exception thrown by a ProcessAnnotatedType event observer is treated as a definition error
  */
+// SHRINKWRAP-369
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProcessAnnotatedTypeEventThrowsExceptionTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ProcessAnnotatedTypeEventThrowsExceptionTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(ProcessAnnotatedTypeObserver.class).build();
     }
 
     @Test

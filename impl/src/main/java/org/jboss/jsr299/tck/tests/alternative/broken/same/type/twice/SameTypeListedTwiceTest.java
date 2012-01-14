@@ -18,11 +18,15 @@ package org.jboss.jsr299.tck.tests.alternative.broken.same.type.twice;
 
 import static org.jboss.jsr299.tck.TestGroups.ALTERNATIVES;
 
+import javax.enterprise.inject.spi.DeploymentException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -30,10 +34,14 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SameTypeListedTwiceTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(SameTypeListedTwiceTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(SameTypeListedTwiceTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createAlternatives()
+                                .clazz(Dog.class.getName(), Cat.class.getName(), Cat.class.getName()).up()).build();
     }
 
     @Test(groups = { ALTERNATIVES })

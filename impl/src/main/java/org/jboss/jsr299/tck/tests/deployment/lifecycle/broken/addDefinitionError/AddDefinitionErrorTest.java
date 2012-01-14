@@ -16,7 +16,9 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.addDefinitionError;
 
-import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
+import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -35,18 +37,19 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  * @author Martin Kouba
  */
+// SHRINKWRAP-369
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class AddDefinitionErrorTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-
-        .withTestClassPackage(AddDefinitionErrorTest.class).withExtension("javax.enterprise.inject.spi.Extension").build();
+        return new WebArchiveBuilder().withTestClassPackage(AddDefinitionErrorTest.class)
+                .withExtension(BeanDiscoveryObserver.class).build();
     }
 
-    @Test(groups = { REWRITE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "ca"), @SpecAssertion(section = "12.2", id = "c") })
     public void testObserverDefinitionErrorTreatedAsDefinitionError() {
     }

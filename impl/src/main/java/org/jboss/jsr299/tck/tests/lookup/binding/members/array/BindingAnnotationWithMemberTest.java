@@ -16,8 +16,11 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.binding.members.array;
 
+import static org.testng.Assert.assertNotNull;
+
+import javax.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -25,17 +28,24 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+/**
+ * This test originally tested non-portable behavior (qualifier annotation with array-valued member) which does not make sense
+ * since non-portable behavior is not testable.
+ */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BindingAnnotationWithMemberTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BindingAnnotationWithMemberTest.class).build();
     }
 
+    @Inject
+    TheBeatles beatles;
+
     @Test
     @SpecAssertion(section = "5.2.5", id = "b")
-    public void testArrayMemberWithoutNonBinding() {
+    public void testArrayMemberWithNonBinding() {
+        assertNotNull(beatles.getWatch());
     }
 }

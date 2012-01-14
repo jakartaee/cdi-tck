@@ -18,6 +18,7 @@ package org.jboss.jsr299.tck.tests.extensions.producer.broken.processing;
 
 import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 
+import javax.enterprise.inject.spi.DefinitionException;
 import javax.enterprise.inject.spi.ProcessProducer;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -35,11 +36,12 @@ import org.testng.annotations.Test;
  * 
  * @author Martin Kouba
  */
+// SHRINKWRAP-369
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerProcessingWithDefinitionErrorTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(ProducerProcessingWithDefinitionErrorTest.class)

@@ -14,11 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.two;
+package org.jboss.jsr299.tck.tests.lookup.binding.members.array;
 
-import javax.enterprise.inject.Specializes;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Specializes
-public class SheepFarmer_Broken extends Farmer {
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
+import javax.enterprise.util.Nonbinding;
+import javax.inject.Qualifier;
+
+@Qualifier
+@Retention(RUNTIME)
+@Target({ METHOD, FIELD, PARAMETER, TYPE })
+public @interface Expensive {
+
+    @Nonbinding
+    String[] prices();
 }

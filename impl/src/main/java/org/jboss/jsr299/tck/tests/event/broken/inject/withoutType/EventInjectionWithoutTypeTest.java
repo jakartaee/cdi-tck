@@ -16,16 +16,17 @@
  */
 package org.jboss.jsr299.tck.tests.event.broken.inject.withoutType;
 
-import static org.jboss.jsr299.tck.TestGroups.EVENTS;
+import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.testng.annotations.Test;
 
 /**
+ * FIXME This is not a valid TCK test since it does not cover any spec assertion.
+ * 
  * Tests if the Event object on an injection point annotated {@link @Any} has a type parameter for the actual type of event.
  * 
  * @author David Allen
@@ -33,13 +34,13 @@ import org.testng.annotations.Test;
  */
 public class EventInjectionWithoutTypeTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(EventInjectionWithoutTypeTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    // @Test(groups = { EVENTS })
     // FIXME need spec assertion, probably in the section that defines the Event interface
     public void testAnyAnnotationOnEventInjectionPointWithoutTypeParameterFails() {
     }

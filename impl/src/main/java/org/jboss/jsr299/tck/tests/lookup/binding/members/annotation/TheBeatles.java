@@ -16,13 +16,20 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.binding.members.annotation;
 
+import javax.inject.Inject;
+
 /**
  * @author pmuir
  * 
  */
 public class TheBeatles {
 
-    @Expensive_Broken(member = @SimpleAnnotation)
-    Watch watch;
+    @Inject
+    @Expensive(member = @SimpleAnnotation)
+    private Watch watch;
+
+    public Watch getWatch() {
+        return watch;
+    }
 
 }

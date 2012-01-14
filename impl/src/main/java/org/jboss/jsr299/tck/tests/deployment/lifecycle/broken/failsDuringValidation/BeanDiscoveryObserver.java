@@ -19,8 +19,10 @@ package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.failsDuringValida
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
+import javax.enterprise.inject.spi.Extension;
 
-public class BeanDiscoveryObserver {
+public class BeanDiscoveryObserver implements Extension {
+
     private static boolean afterBeanDiscovery;
 
     public void afterBeanDiscovery(@Observes AfterBeanDiscovery event) {

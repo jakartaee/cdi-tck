@@ -1196,7 +1196,7 @@
         </assertion>
 
         <assertion id="ib">
-            <text>Interceptors ~and decorators~ may not declare producer fields. If ~an interceptor or~ decorator has a field annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
+            <text>~Interceptors~ and decorators may not declare producer fields. If ~an interceptor or~ decorator has a field annotated |@Produces|, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
     </section>
 
@@ -2138,15 +2138,15 @@
             <text>If Y has a name and X declares a name explicitly, using |@Named|, the container automatically detects the problem and treats it as a definition error.</text>
 
             <assertion id="la">
-                <text>Test that a specializing producer method with a name throws a deployment exception.</text>
+                <text>Test that a specializing producer method with a name throws a definition exception.</text>
             </assertion>
 
             <assertion id="lb">
-                <text>Test that a specializing managed bean with a name throws a deployment exception.</text>
+                <text>Test that a specializing managed bean with a name throws a definition exception.</text>
             </assertion>
 
             <assertion id="lc">
-                <text>Test that a specializing enterprise bean with a name throws a deployment exception.</text>
+                <text>Test that a specializing enterprise bean with a name throws a definition exception.</text>
             </assertion>
         </group>
 
@@ -2412,10 +2412,15 @@
     </section>
 
     <section id="5.2.1" title="Unsatisfied and ambiguous dependencies">
-        <assertion id="aa">
+        <group>
             <text>The container must validate all injection points of all enabled beans and of all other Java EE component classes supporting injection when the application is initialized to ensure that there are no unsatisfied or ambiguous dependencies. If an unsatisfied or ambiguous dependency exists, the container automatically detects the problem and treats it as a deployment problem.</text>
-            <note>These need expanding out - one for each assertion that results in an exception in 5.7.1</note>
-        </assertion>
+            <assertion id="aa">
+                <text>Test unsatisfied dependency.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test ambiguous dependency.</text>
+            </assertion>
+        </group>
 
         <assertion id="b">
             <text>For a custom implementation of the |Bean| interface defined in Section 11.1, "The Bean interface", the container calls |getInjectionPoints()| to determine the set of injection points.</text>
@@ -2590,19 +2595,21 @@
     </section>
 
     <section id="5.4.1" title="Unproxyable bean types">
-        <assertion id="aa">
-            <text>Classes which don't have a non-private constructor with no parameters cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
-        </assertion>
 
         <group>
-            <text>Classes which are declared final or have non-static, final methods with public, protected or default visibility cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
+        
+            <text>Certain legal bean types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
+            
+            <assertion id="aa">
+                <text>Test a class which doesn't have a non-private constructor with no parameters.</text>
+            </assertion>
 
             <assertion id="baa">
-                <text>Test with a final class.</text>
+                <text>Test a class which is declared final.</text>
             </assertion>
 
             <assertion id="bba">
-                <text>Test with a class that has non-static, final method with public visibility.</text>
+                <text>Test a class that has non-static, final method with public visibility.</text>
             </assertion>
 
             <assertion id="bca">
@@ -2611,19 +2618,19 @@
             </assertion>
 
             <assertion id="bda">
-                <text>Test with a class that has final method with private visibility.</text>
+                <text>Test a class that has final method with private visibility.</text>
                 <note>This is not allowed in CDI 1.0.</note>
             </assertion>
 
+            <assertion id="ca">
+                <text>Test primitive type</text>
+            </assertion>
+
+            <assertion id="da">
+                <text>Test array type. </text>
+            </assertion>
+
         </group>
-
-        <assertion id="ca">
-            <text>Primitive types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
-        </assertion>
-
-        <assertion id="da">
-            <text>Array types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
-        </assertion>
 
     </section>
 

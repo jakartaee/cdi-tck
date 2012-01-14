@@ -17,7 +17,9 @@
 
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.exceptionInAfterBeanValidationObserver;
 
-import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
+import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -35,17 +37,19 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  * @author Martin Kouba
  */
+// SHRINKWRAP-369
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class AfterDeploymentValidationObserverExecutionFailureTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(AfterDeploymentValidationObserverExecutionFailureTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(BeanDiscoveryObserver.class).build();
     }
 
-    @Test(groups = { REWRITE })
+    @Test
     @SpecAssertion(section = "11.5.3", id = "c")
     public void testObserverFailureTreatedAsDeploymentError() {
     }

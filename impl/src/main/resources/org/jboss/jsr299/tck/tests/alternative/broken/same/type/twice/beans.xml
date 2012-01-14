@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans>
-	<alternatives>
-		<class>org.jboss.jsr299.tck.tests.alternative.broken.same.type.twice.Dog</class>
-		<class>org.jboss.jsr299.tck.tests.alternative.broken.same.type.twice.Cat</class>
-		<class>org.jboss.jsr299.tck.tests.alternative.broken.same.type.twice.Cat</class>
-	</alternatives>
-</beans>

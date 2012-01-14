@@ -1,5 +1,0 @@
-<beans> 
-	<interceptors>
-		<class>org.jboss.jsr299.tck.tests.implementation.producer.method.broken.interceptor.SimpleInterceptor_Broken</class>
-	</interceptors>
-</beans>

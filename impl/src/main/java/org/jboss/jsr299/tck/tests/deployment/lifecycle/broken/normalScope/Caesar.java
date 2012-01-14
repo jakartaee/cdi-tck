@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.event.broken.observer8;
+package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.normalScope;
 
-import static javax.enterprise.event.TransactionPhase.BEFORE_COMPLETION;
+import javax.inject.Inject;
 
-import javax.enterprise.event.Observes;
+public class Caesar {
 
-public class Terrier {
-    public void observer(@Observes(during = BEFORE_COMPLETION) String event) {
-    }
+    @SuppressWarnings("unused")
+    @Inject
+    private RomanEmpire empire;
 }

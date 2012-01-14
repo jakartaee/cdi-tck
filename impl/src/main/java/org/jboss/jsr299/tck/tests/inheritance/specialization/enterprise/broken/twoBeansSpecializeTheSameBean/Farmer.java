@@ -17,10 +17,9 @@
 package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.broken.twoBeansSpecializeTheSameBean;
 
 import javax.ejb.Stateful;
-import javax.inject.Named;
 
 @Landowner
-@Named
+// @Named
 @Stateful
 public class Farmer implements FarmerInterface {
     public String getClassName() {

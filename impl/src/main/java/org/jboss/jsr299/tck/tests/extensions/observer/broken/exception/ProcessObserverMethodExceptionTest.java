@@ -17,6 +17,10 @@
 
 package org.jboss.jsr299.tck.tests.extensions.observer.broken.exception;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
+import javax.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -32,14 +36,16 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
+// SHRINKWRAP-369
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProcessObserverMethodExceptionTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ProcessObserverMethodExceptionTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(ProcessObserverMethodObserver.class).build();
     }
 
     @Test

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.jsr299.tck.tests.lookup.binding.members.array;
+package org.jboss.jsr299.tck.tests.lookup.binding.members.annotation;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -25,11 +25,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import javax.enterprise.util.Nonbinding;
 import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RUNTIME)
 @Target({ METHOD, FIELD, PARAMETER, TYPE })
-public @interface Expensive_Broken {
-    String[] prices();
+public @interface Expensive {
+
+    @Nonbinding
+    SimpleAnnotation member();
 }

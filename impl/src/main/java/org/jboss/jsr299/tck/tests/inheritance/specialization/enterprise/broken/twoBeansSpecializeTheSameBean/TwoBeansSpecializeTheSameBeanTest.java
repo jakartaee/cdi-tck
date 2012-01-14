@@ -16,33 +16,28 @@
  */
 package org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.broken.twoBeansSpecializeTheSameBean;
 
+import javax.enterprise.inject.spi.DeploymentException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.jsr299.tck.tests.inheritance.specialization.simple.broken.two.TwoSpecializingBeansForOneSpecializedTest;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091018")
 public class TwoBeansSpecializeTheSameBeanTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(TwoBeansSpecializeTheSameBeanTest.class).withBeansXml("beans.xml")
-                .build();
+        return new WebArchiveBuilder().withTestClassPackage(TwoBeansSpecializeTheSameBeanTest.class).build();
     }
 
-    /**
-     * This method tests session beans
-     * 
-     * @see org.jboss.jsr299.tck.tests.inheritance.specialization.producer.method.broken.twoBeansSpecializeTheSameBean.TwoBeansSpecializeTheSameBeanTest#testTwoBeansSpecializeTheSameBean()
-     * @see TwoSpecializingBeansForOneSpecializedTest#testTwoBeansSpecializeTheSameBean()
-     * 
-     */
-    // @Test
-    // @SpecAssertion(section = "4.3.3", id = "c") removed from spec
+    @Test
+    @SpecAssertion(section = "5.1.3", id = "a")
     public void testTwoBeansSpecializeTheSameBean() {
     }
 }

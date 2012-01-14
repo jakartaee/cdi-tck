@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.container.event.broken.processBeanObserverThrowsException;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
+import javax.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -25,20 +29,16 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-/**
- * FIXME check extension location
- * 
- * @Resource(source = "javax.enterprise.inject.spi.Extension", destination =
- *                  "WEB-INF/classes/META-INF/services/javax.enterprise.inject.spi.Extension")
- */
+//SHRINKWRAP-369
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ThrowExceptionInProcessBeanObserverTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ThrowExceptionInProcessBeanObserverTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(ProcessBeanObserver.class).build();
     }
 
     @Test

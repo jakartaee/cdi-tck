@@ -34,6 +34,8 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
+ * FIXME The related part of spec needs clarification - see CDI-197, CDI-200, CDI-201.
+ * 
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
@@ -41,11 +43,12 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
+// SHRINKWRAP-369
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InvalidStereotypeTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(IllegalArgumentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()

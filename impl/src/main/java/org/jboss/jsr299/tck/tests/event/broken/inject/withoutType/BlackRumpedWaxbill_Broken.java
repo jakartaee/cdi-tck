@@ -21,7 +21,7 @@ import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 public class BlackRumpedWaxbill_Broken {
-    @SuppressWarnings({ "unchecked", "unused" })
+    @SuppressWarnings({ "unused", "rawtypes" })
     @Inject
     @Any
     private Event simpleEvent;

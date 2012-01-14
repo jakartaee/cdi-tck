@@ -1,5 +1,0 @@
-<beans>
-    <interceptors>
-        <class>org.jboss.jsr299.tck.tests.context.passivating.broken.interceptorWithNonPassivatingInjectedField.BrokenInterceptor</class>
-    </interceptors>
-</beans>

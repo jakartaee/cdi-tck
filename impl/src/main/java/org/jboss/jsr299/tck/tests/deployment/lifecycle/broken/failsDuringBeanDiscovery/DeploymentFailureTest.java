@@ -16,6 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.failsDuringBeanDiscovery;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
+import javax.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
@@ -26,19 +30,19 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+//SHRINKWRAP-369
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class DeploymentFailureTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-
-        .withTestClassPackage(DeploymentFailureTest.class).withExtension("javax.enterprise.inject.spi.Extension").build();
+        return new WebArchiveBuilder().withTestClassPackage(DeploymentFailureTest.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "e"), @SpecAssertion(section = "11.5.2", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "e") })
     public void testDeploymentFailsBeforeNotifyingObserversAfterBeanDiscovery() {
     }
 

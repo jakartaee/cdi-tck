@@ -16,13 +16,20 @@
  */
 package org.jboss.jsr299.tck.tests.lookup.binding.members.array;
 
+import javax.inject.Inject;
+
 /**
  * @author pmuir
  * 
  */
 public class TheBeatles {
 
-    @Expensive_Broken(prices = { "" })
-    Watch watch;
+    @Inject
+    @Expensive(prices = { "ONE" })
+    private Watch watch;
+
+    public Watch getWatch() {
+        return watch;
+    }
 
 }

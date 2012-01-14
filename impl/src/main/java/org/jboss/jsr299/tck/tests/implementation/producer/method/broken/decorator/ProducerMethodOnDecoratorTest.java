@@ -16,11 +16,15 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.producer.method.broken.decorator;
 
+import javax.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -28,11 +32,14 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerMethodOnDecoratorTest extends AbstractJSR299Test {
 
-    @ShouldThrowException(Exception.class)
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ProducerMethodOnDecoratorTest.class).withBeansXml("beans.xml")
-                .build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(ProducerMethodOnDecoratorTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(FooDecorator_Broken.class.getName())
+                                .up()).build();
     }
 
     @Test

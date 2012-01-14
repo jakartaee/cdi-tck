@@ -20,7 +20,7 @@ package org.jboss.jsr299.tck.tests.lookup.binding.members.array;
  * @author pmuir
  * 
  */
-@Expensive_Broken(prices = { "" })
+@Expensive(prices = { "TWO" })
 public class Watch {
 
 }

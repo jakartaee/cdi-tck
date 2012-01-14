@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans>
-	<alternatives>
-		<class>org.jboss.jsr299.tck.tests.alternative.broken.not.alternative.Cat</class>
-	</alternatives>
-</beans>

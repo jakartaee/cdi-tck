@@ -1,7 +1,0 @@
-<beans> 
-   <decorators>
-      <class>org.jboss.jsr299.tck.tests.decorators.definition.broken.decoratorListedTwiceInBeansXml.PresentDecorator</class>
-      <class>org.jboss.jsr299.tck.tests.decorators.definition.broken.decoratorListedTwiceInBeansXml.PresentDecorator</class>
-   </decorators>
-
-</beans>
