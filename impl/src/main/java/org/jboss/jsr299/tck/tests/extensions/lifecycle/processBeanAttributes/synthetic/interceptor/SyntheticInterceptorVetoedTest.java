@@ -1,3 +1,5 @@
+package org.jboss.jsr299.tck.tests.extensions.lifecycle.processBeanAttributes.synthetic.interceptor;
+
 import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
