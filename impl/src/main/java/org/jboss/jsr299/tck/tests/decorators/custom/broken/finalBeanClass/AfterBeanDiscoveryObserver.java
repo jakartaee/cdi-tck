@@ -30,7 +30,6 @@ public class AfterBeanDiscoveryObserver implements Extension {
 
     private static CustomDecoratorImplementation decorator;
 
-    @SuppressWarnings("unchecked")
     public void addInterceptors(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
         AnnotatedType<VehicleDecorator> type = beanManager.createAnnotatedType(VehicleDecorator.class);
         Set<AnnotatedField<? super VehicleDecorator>> annotatedFields = type.getFields();

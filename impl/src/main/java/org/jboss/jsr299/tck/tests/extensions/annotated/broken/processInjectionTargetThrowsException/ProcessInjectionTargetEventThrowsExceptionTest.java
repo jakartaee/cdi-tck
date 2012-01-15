@@ -17,6 +17,8 @@
 
 package org.jboss.jsr299.tck.tests.extensions.annotated.broken.processInjectionTargetThrowsException;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -31,6 +33,7 @@ import org.testng.annotations.Test;
 /**
  * Tests that an exception thrown by a ProcessAnnotatedType event observer is treated as a deployment error
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProcessInjectionTargetEventThrowsExceptionTest extends AbstractJSR299Test {
 

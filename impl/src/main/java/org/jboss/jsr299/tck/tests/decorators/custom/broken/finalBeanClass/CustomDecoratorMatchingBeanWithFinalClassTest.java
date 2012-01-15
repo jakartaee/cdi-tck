@@ -16,6 +16,8 @@
  */
 package org.jboss.jsr299.tck.tests.decorators.custom.broken.finalBeanClass;
 
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -30,6 +32,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class CustomDecoratorMatchingBeanWithFinalClassTest extends AbstractJSR299Test {
 
     @ShouldThrowException(DeploymentException.class)
