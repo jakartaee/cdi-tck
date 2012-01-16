@@ -16,26 +16,18 @@
  */
 package org.jboss.jsr299.tck.tests.extensions.beanManager;
 
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.Extension;
+import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import org.jboss.jsr299.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
+import org.jboss.jsr299.tck.tests.extensions.beanManager.Transactional.TransactionalLiteral;
 
-import javax.enterprise.util.AnnotationLiteral;
-import javax.interceptor.InterceptorBinding;
+public class ProcessAnnotatedTypeObserver implements Extension {
 
-@Target({ TYPE, METHOD })
-@Retention(RUNTIME)
-@Documented
-@InterceptorBinding
-public @interface Transactional {
-
-    @SuppressWarnings("all")
-    public class TransactionalLiteral extends AnnotationLiteral<Transactional> implements Transactional {
-        public static final TransactionalLiteral INSTANCE = new TransactionalLiteral();
+    public void observeDerivedBean(@Observes ProcessAnnotatedType<WrappedBean> event, BeanManager manager) {
+        event.setAnnotatedType(new AnnotatedTypeWrapper<WrappedBean>(event.getAnnotatedType(), true,
+                TransactionalLiteral.INSTANCE));
     }
-
 }

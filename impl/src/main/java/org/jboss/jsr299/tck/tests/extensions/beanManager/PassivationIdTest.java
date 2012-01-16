@@ -39,7 +39,7 @@ public class PassivationIdTest extends AbstractJSR299Test {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(PassivationIdTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
     @Test

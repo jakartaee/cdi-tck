@@ -20,7 +20,9 @@ package org.jboss.jsr299.tck.tests.extensions.beanManager;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
+import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 import static org.jboss.jsr299.tck.TestGroups.REWRITE;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -53,6 +55,8 @@ import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.RetentionLiteral;
 import org.jboss.jsr299.tck.literals.TargetLiteral;
 import org.jboss.jsr299.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.jsr299.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
+import org.jboss.jsr299.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -65,13 +69,17 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
+// SHRINKWRAP-369
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BeanManagerTest extends AbstractJSR299Test {
 
+    @SuppressWarnings("unchecked")
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanManagerTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class)
+                .withExtensions(AfterBeanDiscoveryObserver.class, ProcessAnnotatedTypeObserver.class).build();
     }
 
     @Test
@@ -197,18 +205,30 @@ public class BeanManagerTest extends AbstractJSR299Test {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.18", id = "a")
+    @SpecAssertions({ @SpecAssertion(section = "11.3.18", id = "a") })
     public void testObtainingAnnotatedType() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
-        assert annotatedType.isAnnotationPresent(Specializes.class);
-        assert annotatedType.isAnnotationPresent(Tame.class);
-        assert annotatedType.getFields().size() == 1;
-        assert annotatedType.getMethods().isEmpty();
-        assert annotatedType.getTypeClosure().size() == 3;
+        assertTrue(annotatedType.isAnnotationPresent(Specializes.class));
+        assertTrue(annotatedType.isAnnotationPresent(Tame.class));
+        assertEquals(1, annotatedType.getFields().size());
+        assertTrue(annotatedType.getMethods().isEmpty());
+        assertEquals(3, annotatedType.getTypeClosure().size());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.3.18", id = "b") })
+    public void testObtainingWrappedAnnotatedType() {
+        AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(WrappedBean.class);
+        assertTrue(annotatedType.isAnnotationPresent(Tame.class));
+        assertTrue(annotatedType.isAnnotationPresent(Transactional.class));
+        assertTrue(annotatedType.getFields().isEmpty());
+        assertTrue(annotatedType.getMethods().isEmpty());
+        assertEquals(2, annotatedType.getTypeClosure().size());
     }
 
     @Test
     @SpecAssertion(section = "11.3.19", id = "aa")
+    // CDI-83
     public void testObtainingInjectionTarget() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
         assert getCurrentManager().createInjectionTarget(annotatedType) != null;
