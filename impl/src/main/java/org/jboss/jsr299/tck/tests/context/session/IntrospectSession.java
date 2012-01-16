@@ -19,7 +19,6 @@ package org.jboss.jsr299.tck.tests.context.session;
 
 import java.io.IOException;
 
-import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,14 +35,12 @@ public class IntrospectSession extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private BeanManager jsr299Manager;
+    SimpleSessionBean sessionBean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/text");
-        SimpleSessionBean aBean = org.jboss.jsr299.tck.impl.OldSPIBridge.getInstanceByType(jsr299Manager,
-                SimpleSessionBean.class);
-        resp.getWriter().print(aBean.getTimestamp());
+        resp.getWriter().print(sessionBean.getTimestamp());
     }
 
 }

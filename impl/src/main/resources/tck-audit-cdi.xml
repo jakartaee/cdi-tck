@@ -3939,9 +3939,17 @@
         <assertion id="cb">
             <text>The session context is destroyed when the |HTTPSession| times out, ~after all |HttpSessionListener|s have been called, and at the very end of any request in which |invalidate()| was called~, after all filters and |ServletRequestListeners| have been called.</text>
         </assertion>
+        
+        <assertion id="cd">
+            <text>The session context is destroyed ~when the |HTTPSession| times out, after all |HttpSessionListener|s have been called, and~ at the very end of any request in which |invalidate()| was called, ~after all filters and |ServletRequestListeners| have been called.~</text>
+        </assertion>
 
-        <assertion id="d">
-            <text>An event with the |HttpSessionEvent| as payload and with qualifier |@Initialized(SessionScoped.class)| is fired when the session context is initialized and an event with qualifier |@Destroyed(SessionScoped.class)| when the session context is destroyed.</text>
+        <assertion id="da">
+            <text>An event with the |HttpSessionEvent| as payload and with qualifier |@Initialized(SessionScoped.class)| is fired when the session context is initialized.</text>
+        </assertion>
+        
+        <assertion id="db">
+            <text>An event with the |HttpSessionEvent| as payload and with qualifier |@Destroyed(SessionScoped.class)| is fired when the session context is destroyed.</text>
         </assertion>
 
     </section>
@@ -4052,8 +4060,12 @@
             </assertion>
         </group>
 
-        <assertion id="b">
-            <text>An event with the |ServletRequestEvent| as the payload and with qualifier |@Initialized(ConversationContext.class)| is fired when the conversation context is initialized and an event with qualifier |@Destroyed(ConversationContext.class)| when the conversation context is destroyed.</text>
+        <assertion id="ba">
+            <text>An event with the |ServletRequestEvent| as the payload and with qualifier |@Initialized(ConversationContext.class)| is fired when the conversation context is initialized.</text>
+        </assertion>
+        
+        <assertion id="bb">
+            <text>An event with the |ServletRequestEvent| as the payload and with qualifier |@Destroyed(ConversationContext.class)| when the conversation context is destroyed.</text>
         </assertion>
 
         <group>

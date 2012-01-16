@@ -38,11 +38,11 @@ public class ServiceMethodServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private BeanManager jsr299Manager;
+    private BeanManager manager;
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!jsr299Manager.getContext(SessionScoped.class).isActive()) {
+        if (!manager.getContext(SessionScoped.class).isActive()) {
             throw new ServletException("Session is not active");
         } else {
             super.service(req, resp);
