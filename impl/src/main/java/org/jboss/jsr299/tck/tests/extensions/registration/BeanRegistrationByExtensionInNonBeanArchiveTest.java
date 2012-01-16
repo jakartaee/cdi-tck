@@ -54,7 +54,7 @@ public class BeanRegistrationByExtensionInNonBeanArchiveTest extends AbstractJSR
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.5", id = "b"), @SpecAssertion(section = "11.5", id = "bb"),
-            @SpecAssertion(section = "11.5.1", id = "af") })
+            @SpecAssertion(section = "11.5.1", id = "af"), @SpecAssertion(section = "12.1", id = "f") })
     public void shouldFindBeanReference() {
         Assert.assertNotNull(bean);
         Assert.assertTrue(bean.isInvokable());

@@ -20,6 +20,7 @@ import static org.jboss.jsr299.tck.TestGroups.INTEGRATION;
 
 import java.util.Set;
 
+import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
@@ -39,13 +40,13 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test {
         return new WebArchiveBuilder().withTestClassPackage(EnterpriseProducerMethodDefinitionTest.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = INTEGRATION, expectedExceptions = UnsatisfiedResolutionException.class)
     @SpecAssertion(section = "4.2", id = "dd")
-    public void testNonStaticProducerMethodInheritedBySpecializingSubclass() {
+    public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass() {
         assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
-        }).size() == 1;
-        assert getInstanceByType(Egg.class, new AnnotationLiteral<Yummy>() {
-        }).getMother() instanceof AndalusianChickenLocal;
+        }).size() == 0;
+        getInstanceByType(Egg.class, new AnnotationLiteral<Yummy>() {
+        }).getMother();
     }
 
     @Test(groups = INTEGRATION)

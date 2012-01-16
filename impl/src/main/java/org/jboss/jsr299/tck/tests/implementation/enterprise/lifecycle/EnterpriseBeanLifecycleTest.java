@@ -92,10 +92,6 @@ public class EnterpriseBeanLifecycleTest extends AbstractJSR299Test {
     @Test(groups = { INTEGRATION, LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "6.6.2", id = "a") })
     public void testSerializeSFSB() throws Exception {
-        // SFSBs in AS 7.0.1 do not support passivation yet
-        // may also be related to
-        // https://issues.jboss.org/browse/AS7-799
-        // https://issues.jboss.org/browse/AS7-1490
 
         KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
         });
