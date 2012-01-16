@@ -5683,15 +5683,9 @@
             <text>A portable extension may obtain a reference to the current container by calling |CDI.current()|.</text>
         </assertion>
 
-        <group>
-            <text>When |CDI.current()| is called, the first |javax.enterprise.inject.spi.CDIProvider| is loaded, and the |CDIProvider.getCDI()| method called. If no providers are available an IllegalStateException is thrown.</text>
-            <assertion id="b">
-                <text>Test that the |CDIProvider.getCDI()| method is called.</text>
-            </assertion>
-            <assertion id="c">
-                <text>Test that if no provider is available an IllegalStateException is thrown.</text>
-            </assertion>
-        </group>
+         <assertion id="b" testable="false">
+             <text>When |CDI.current()| is called, the first |javax.enterprise.inject.spi.CDIProvider| is loaded, and the |CDIProvider.getCDI()| method called. If no providers are available an IllegalStateException is thrown.</text>
+         </assertion>
 
         <assertion id="d">
             <text>Java EE components may obtain an instance of |BeanManager| from JNDI by looking up the name |java:comp/BeanManager|.</text>
