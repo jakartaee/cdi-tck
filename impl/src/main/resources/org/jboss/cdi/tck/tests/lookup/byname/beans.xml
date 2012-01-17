@@ -1,0 +1,5 @@
+<beans> 
+   <alternatives>
+      <class>org.jboss.cdi.tck.tests.lookup.byname.Sole</class>
+   </alternatives>
+</beans>

@@ -1,0 +1,5 @@
+<beans> 
+   <decorators>
+      <class>org.jboss.cdi.tck.tests.decorators.custom.VehicleDecorator</class>
+   </decorators>
+</beans>

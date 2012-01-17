@@ -1,9 +1,0 @@
-<beans> 
-   <interceptors>
-      <class>org.jboss.jsr299.tck.tests.decorators.interceptor.FooInterceptor</class>
-   </interceptors>
-
-   <decorators>
-      <class>org.jboss.jsr299.tck.tests.decorators.interceptor.FooDecorator</class>
-   </decorators>
-</beans>

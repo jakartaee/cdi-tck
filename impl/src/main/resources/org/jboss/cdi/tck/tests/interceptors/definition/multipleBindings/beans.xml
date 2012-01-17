@@ -1,0 +1,6 @@
+<beans> 
+  <interceptors>
+    <class>org.jboss.cdi.tck.tests.interceptors.definition.multipleBindings.MissileInterceptor</class>      
+    <class>org.jboss.cdi.tck.tests.interceptors.definition.multipleBindings.LockInterceptor</class>      
+  </interceptors>
+</beans>

@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
    <parent>
-      <artifactId>jsr299-tck-parent</artifactId>
-      <groupId>org.jboss.jsr299.tck</groupId>
+      <artifactId>cdi-tck-parent</artifactId>
+      <groupId>org.jboss.cdi.tck</groupId>
       <version>1.1.0-SNAPSHOT</version>
    </parent>
    <modelVersion>4.0.0</modelVersion>
-   <groupId>org.jboss.jsr299.tck</groupId>
-   <artifactId>jsr299-tck-impl</artifactId>
+   <groupId>org.jboss.cdi.tck</groupId>
+   <artifactId>cdi-tck-impl</artifactId>
    <name>CDI TCK tests</name>
 
    <description>CDI TCK tests</description>
@@ -20,8 +20,8 @@
       </dependency>
 
       <dependency>
-         <groupId>org.jboss.jsr299.tck</groupId>
-         <artifactId>jsr299-tck-api</artifactId>
+         <groupId>org.jboss.cdi.tck</groupId>
+         <artifactId>cdi-tck-api</artifactId>
       </dependency>
       
        <dependency>
@@ -270,50 +270,7 @@
          </build>
       </profile>
 
-      <!-- TODO dumping artifacts not available right now -->
-      <!-- profile>
-         <id>write-artifacts-to-disk</id>
-         <activation>
-            <property>
-               <name>dumpArtifacts</name>
-            </property>
-         </activation>
-         <build>
-            <plugins>
-               <plugin>
-                  <groupId>org.codehaus.mojo</groupId>
-                  <artifactId>exec-maven-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <id>generate-jsr-299-artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                           <goal>java</goal>
-                        </goals>
-                     </execution>
-                  </executions>
-                  <configuration>
-                     <mainClass>org.jboss.jsr299.tck.api.TCK</mainClass>
-                     <systemProperties>
-                        <systemProperty>
-                           <key>dumpArtifacts</key>
-                           <value>true</value>
-                        </systemProperty>
-                        <systemProperty>
-                           <key>org.jboss.jsr299.tck.outputDirectory</key>
-                           <value>target/jsr299-artifacts</value>
-                        </systemProperty>
-                        <systemProperty>
-                           <key>org.jboss.jsr299.tck.libraryDirectory</key>
-                           <value>${libaryDir}</value>
-                        </systemProperty>
-                     </systemProperties>
-                  </configuration>
-               </plugin>
-            </plugins>
-         </build>
-      </profile-->
-      
+      <!-- Not sure if jdk 1.5 is still relevant  -->
       <profile>
          <id>javax.xml.ws</id>
          <activation>

@@ -1,8 +1,0 @@
-<beans>
-	<alternatives>
-		<class>org.jboss.jsr299.tck.tests.implementation.simple.newSimpleBean.Tiger</class>
-	</alternatives>
-	<interceptors>
-		<class>org.jboss.jsr299.tck.tests.implementation.simple.newSimpleBean.OrderInterceptor</class>
-	</interceptors>
-</beans>

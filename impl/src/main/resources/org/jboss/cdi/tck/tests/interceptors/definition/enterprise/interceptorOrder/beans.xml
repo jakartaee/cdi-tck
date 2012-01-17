@@ -1,0 +1,5 @@
+<beans>
+  <interceptors>
+    <class>org.jboss.cdi.tck.tests.interceptors.definition.enterprise.interceptorOrder.MissileInterceptor</class>
+  </interceptors>
+</beans>

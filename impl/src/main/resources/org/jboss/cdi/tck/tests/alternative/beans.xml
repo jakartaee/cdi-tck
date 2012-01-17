@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<alternatives>
+		<class>org.jboss.cdi.tck.tests.alternative.Chicken</class>
+		<class>org.jboss.cdi.tck.tests.alternative.EnabledSheepProducer</class>
+		<stereotype>org.jboss.cdi.tck.tests.alternative.EnabledAlternativeStereotype</stereotype>
+	</alternatives>
+</beans>

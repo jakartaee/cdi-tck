@@ -1,0 +1,4 @@
+org.jboss.cdi.tck.tests.extensions.container.event.ProcessBeanObserver
+org.jboss.cdi.tck.tests.extensions.container.event.ProcessInjectionTargetObserver
+org.jboss.cdi.tck.tests.extensions.container.event.ProcessAnnotatedTypeObserver
+

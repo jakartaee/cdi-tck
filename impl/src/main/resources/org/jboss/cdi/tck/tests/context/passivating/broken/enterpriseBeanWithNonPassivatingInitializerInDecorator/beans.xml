@@ -1,0 +1,5 @@
+<beans> 
+   <decorators>
+      <class>org.jboss.cdi.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInitializerInDecorator.BrokenDecorator</class>
+   </decorators>
+</beans>

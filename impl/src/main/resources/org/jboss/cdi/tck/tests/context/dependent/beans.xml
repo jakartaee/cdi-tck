@@ -1,0 +1,8 @@
+<beans> 
+   <decorators>
+      <class>org.jboss.cdi.tck.tests.context.dependent.InteriorDecorator</class>
+   </decorators>
+   <interceptors>
+      <class>org.jboss.cdi.tck.tests.context.dependent.TransactionalInterceptor</class>
+   </interceptors>
+</beans>

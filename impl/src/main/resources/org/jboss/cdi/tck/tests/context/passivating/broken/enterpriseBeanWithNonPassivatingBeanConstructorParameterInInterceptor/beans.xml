@@ -1,0 +1,5 @@
+<beans>
+    <interceptors>
+        <class>org.jboss.cdi.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingBeanConstructorParameterInInterceptor.BrokenInterceptor</class>
+    </interceptors>
+</beans>

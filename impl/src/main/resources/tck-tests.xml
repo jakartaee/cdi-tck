@@ -11,13 +11,13 @@
          </method-selector>
       </method-selectors>
       <packages>
-         <package name="org.jboss.jsr299.tck.tests.*" />
-         <package name="org.jboss.jsr299.tck.interceptors.tests.*" />
+         <package name="org.jboss.cdi.tck.tests.*" />
+         <package name="org.jboss.cdi.tck.interceptors.tests.*" />
       </packages>
       <classes>
       
          <!-- CDITCK-108 -->
-         <class name="org.jboss.jsr299.tck.tests.context.application.ejb.ApplicationContextSharedTest">
+         <class name="org.jboss.cdi.tck.tests.context.application.ejb.ApplicationContextSharedTest">
             <methods>
                <exclude name="testApplicationScopeActiveDuringCallToEjbTimeoutMethod" />
                <exclude name="testApplicationContextShared" />
@@ -27,37 +27,37 @@
          <!-- Issues in Weld (the RI) -->
          
          <!-- WELD-393 -->
-         <class name="org.jboss.jsr299.tck.interceptors.tests.definition.DefinitionTest">
+         <class name="org.jboss.cdi.tck.interceptors.tests.definition.DefinitionTest">
             <methods>
                <exclude name="testInterceptorMethodDefinedOnTargetClass" />
             </methods>
          </class>
          
          <!-- WELD-390 -->
-         <class name="org.jboss.jsr299.tck.interceptors.tests.lifecycleCallback.order.InvocationOrderTest">
+         <class name="org.jboss.cdi.tck.interceptors.tests.lifecycleCallback.order.InvocationOrderTest">
             <methods>
                <exclude name="testInvocationOrder" />
             </methods>
          </class>
          <!-- WELD-269 -->
-         <class name="org.jboss.jsr299.tck.tests.decorators.custom.CustomDecoratorTest">
+         <class name="org.jboss.cdi.tck.tests.decorators.custom.CustomDecoratorTest">
             <methods>
                <exclude name="testCustomImplementationOfDecoratorInterface" />
             </methods>
          </class>
          <!-- WELD-272 -->
-         <class name="org.jboss.jsr299.tck.tests.decorators.definition.broken.finalBeanClass.FinalBeanClassTest">
+         <class name="org.jboss.cdi.tck.tests.decorators.definition.broken.finalBeanClass.FinalBeanClassTest">
             <methods>
                <exclude name="testAppliesToFinalManagedBeanClass" />
             </methods>
          </class>
-         <class name="org.jboss.jsr299.tck.tests.decorators.definition.broken.finalBeanMethod.FinalBeanMethodTest">
+         <class name="org.jboss.cdi.tck.tests.decorators.definition.broken.finalBeanMethod.FinalBeanMethodTest">
             <methods>
                <exclude name="testAppliesToFinalMethodOnManagedBeanClass" />
             </methods>
          </class>
          <!-- WELD-377 -->
-         <class name="org.jboss.jsr299.tck.tests.decorators.invocation.EJBDecoratorInvocationTest">
+         <class name="org.jboss.cdi.tck.tests.decorators.invocation.EJBDecoratorInvocationTest">
             <methods>
                <exclude name="testEJBDecoratorInvocation" />
             </methods>

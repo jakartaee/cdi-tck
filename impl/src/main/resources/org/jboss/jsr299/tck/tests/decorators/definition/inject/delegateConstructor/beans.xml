@@ -1,5 +1,0 @@
-<beans> 
-   <decorators>
-      <class>org.jboss.jsr299.tck.tests.decorators.definition.inject.delegateConstructor.TimestampLogger</class>
-   </decorators>
-</beans>
