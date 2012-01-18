@@ -310,9 +310,9 @@
    </build>
 
    <scm>
-       <connection>scm:git:git://github.com/jboss/cditck.git</connection>
-       <developerConnection>scm:git:git@github.com:jboss/cditck.git</developerConnection>
-       <url>https://github.com/jboss/cditck</url>
+       <connection>scm:git:git://github.com/jboss/cdi-tck.git</connection>
+       <developerConnection>scm:git:git@github.com:jboss/cdi-tck.git</developerConnection>
+       <url>https://github.com/jboss/cdi-tck</url>
     </scm>
 
    <profiles>
