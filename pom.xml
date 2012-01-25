@@ -108,38 +108,6 @@
 
    <!-- Dependency management -->
 
-   <repositories>
-      <repository>
-         <id>repository.jboss.org</id>
-         <name>JBoss Repository</name>
-         <url>http://repository.jboss.org/maven2</url>
-         <releases>
-            <enabled>true</enabled>
-         </releases>
-      </repository>
-      <repository>
-         <id>snapshots.jboss.org</id>
-         <name>JBoss Repository</name>
-         <url>http://snapshots.jboss.org/maven2</url>
-         <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>never</updatePolicy>
-         </snapshots>
-      </repository>
-      <repository>
-         <id>oss.sonatype.org/jboss-snapshots</id>
-         <name>JBoss (Nexus) Snapshots Repository</name>
-         <url>http://oss.sonatype.org/content/repositories/snapshots</url>
-         <releases>
-            <enabled>false</enabled>
-         </releases>
-         <snapshots>
-            <enabled>true</enabled>
-            <updatePolicy>never</updatePolicy>
-         </snapshots>
-      </repository>
-   </repositories>
-
    <dependencyManagement>
       <dependencies>
 
@@ -301,6 +269,7 @@
                <artifactId>maven-release-plugin</artifactId>
                <version>2.0</version>
                <configuration>
+		  <mavenExecutorId>forked-path</mavenExecutorId> 
                   <preparationGoals>clean install</preparationGoals>
                   <arguments>-Drelease -Dtck-audit</arguments>
                </configuration>

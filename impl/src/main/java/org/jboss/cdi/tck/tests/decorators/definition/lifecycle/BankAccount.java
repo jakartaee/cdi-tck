@@ -14,31 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jboss.cdi.tck.tests.decorators.definition.lifecycle;
 
-package org.jboss.cdi.tck.tests.decorators.interceptor;
+public interface BankAccount {
 
-import javax.annotation.PostConstruct;
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+    public void withdraw(int amount);
 
-@FooBinding
-@Decorator
-public class FooDecorator implements Foo {
+    public void deposit(int amount);
+    
+    public int getBalance();
 
-    public static String NAME = "FooDecorator";
-
-    @Inject
-    @Delegate
-    Foo foo;
-
-    public void doSomething() {
-        CallStore.addCaller(NAME);
-        foo.doSomething();
-    }
-
-    @PostConstruct
-    public void postConstruct() {
-        CallStore.addLifecycleCaller(FooDecorator.class.getName());
-    }
 }

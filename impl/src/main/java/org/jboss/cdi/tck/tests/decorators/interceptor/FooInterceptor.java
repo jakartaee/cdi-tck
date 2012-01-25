@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.interceptor;
 
+import javax.annotation.PostConstruct;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -23,11 +24,17 @@ import javax.interceptor.InvocationContext;
 @Interceptor
 @FooBinding
 public class FooInterceptor {
+
     public static String NAME = "FooInterceptor";
 
     @AroundInvoke
     public Object interceptMe(InvocationContext ctx) throws Exception {
-        CallOrder.addCaller(NAME);
+        CallStore.addCaller(NAME);
         return ctx.proceed();
+    }
+
+    @PostConstruct
+    public void postConstruct(InvocationContext ctx) {
+        CallStore.addLifecycleCaller(ctx.getTarget().getClass().getName());
     }
 }

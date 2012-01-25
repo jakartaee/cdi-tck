@@ -19,19 +19,34 @@ package org.jboss.cdi.tck.tests.decorators.interceptor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CallOrder {
+public class CallStore {
+
     private static List<String> callers = new ArrayList<String>();
+
+    private static List<String> lifecycleCallers = new ArrayList<String>();
+
+    private CallStore() {
+    }
 
     public static void resetCallers() {
         callers = new ArrayList<String>();
+        lifecycleCallers = new ArrayList<String>();
     }
 
     public static void addCaller(String caller) {
         callers.add(caller);
     }
 
-    public static List<String> callers() {
+    public static void addLifecycleCaller(String caller) {
+        lifecycleCallers.add(caller);
+    }
+
+    public static List<String> getCallers() {
         return callers;
+    }
+
+    public static List<String> getLifecycleCallers() {
+        return lifecycleCallers;
     }
 
 }

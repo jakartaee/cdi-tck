@@ -16,6 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
@@ -52,12 +56,11 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testManagedBeanIsIntercepted() {
 
         MissileInterceptor.reset();
-
         Missile missile = getInstanceByType(Missile.class);
         missile.fire();
-        assert MissileInterceptor.methodIntercepted;
 
-        assert missile.getWarhead() != null; // test that injection works
+        assertTrue(MissileInterceptor.methodIntercepted);
+        assertNotNull(missile.getWarhead()); // test that injection works
     }
 
     @Test
@@ -65,13 +68,11 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testInitializerMethodsNotIntercepted() {
 
         MissileInterceptor.reset();
-
         Missile missile = getInstanceByType(Missile.class);
-        assert !MissileInterceptor.methodIntercepted;
 
-        assert missile.initCalled(); // this call is intercepted
-
-        assert MissileInterceptor.methodIntercepted;
+        assertFalse(MissileInterceptor.methodIntercepted);
+        assertTrue(missile.initCalled()); // this call is intercepted
+        assertTrue(MissileInterceptor.methodIntercepted);
     }
 
     @Test
@@ -79,10 +80,9 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testProducerMethodsAreIntercepted() {
 
         MissileInterceptor.reset();
-
         getInstanceByType(Wheat.class);
 
-        assert MissileInterceptor.methodIntercepted;
+        assertTrue(MissileInterceptor.methodIntercepted);
     }
 
     @Test
@@ -96,11 +96,10 @@ public class InterceptorInvocationTest extends AbstractTest {
         Wheat instance = getInstanceByType(Wheat.class);
 
         MissileInterceptor.methodIntercepted = false;
-
         bean.destroy(instance, creationalContext);
 
-        assert WheatProducer.destroyed;
-        assert MissileInterceptor.methodIntercepted;
+        assertTrue(WheatProducer.destroyed);
+        assertTrue(MissileInterceptor.methodIntercepted);
     }
 
     @Test
@@ -108,11 +107,10 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testObserverMethodsAreIntercepted() {
 
         MissileInterceptor.reset();
-
         getCurrentManager().fireEvent(new Missile());
 
-        assert MissileObserver.observed;
-        assert MissileInterceptor.methodIntercepted;
+        assertTrue(MissileObserver.observed);
+        assertTrue(MissileInterceptor.methodIntercepted);
     }
 
     @Test
@@ -120,11 +118,21 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testLifecycleCallbacksAreIntercepted() {
 
         MissileInterceptor.reset();
-
         getInstanceByType(Rye.class);
 
-        assert !MissileInterceptor.methodIntercepted;
-        assert MissileInterceptor.lifecycleCallbackIntercepted;
+        assertFalse(MissileInterceptor.methodIntercepted);
+        assertTrue(MissileInterceptor.lifecycleCallbackIntercepted);
+    }
+
+    @Test
+    @SpecAssertion(section = "7.2", id = "m")
+    public void testObjectMethodsAreNotIntercepted() {
+
+        MissileInterceptor.reset();
+        getInstanceByType(Missile.class).toString();
+
+        assertFalse(MissileInterceptor.methodIntercepted);
+        assertTrue(MissileInterceptor.lifecycleCallbackIntercepted);
     }
 
 }

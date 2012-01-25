@@ -14,20 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.decorators.definition;
+package org.jboss.cdi.tck.tests.decorators.definition.lifecycle;
 
+import java.io.Serializable;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 /**
- * Only withdrawal is charged. Implicit implementation that calls the method on the delegate is provided for
- * {@link Account#deposit(int)}.
+ * Decorator is a managed bean and may use the {@link PostConstruct} and {@link PreDestroy} annotations to identify methods to
+ * be called back by the container at the appropriate points in the bean’s lifecycle.
  * 
  * @author Martin Kouba
  */
+@SuppressWarnings("serial")
 @Decorator
-public abstract class ChargeDecorator implements Account {
+public abstract class ChargeDecorator implements BankAccount, Serializable {
 
     private static final int WITHDRAWAL_CHARGE = 5;
 
@@ -35,7 +40,7 @@ public abstract class ChargeDecorator implements Account {
 
     @Inject
     @Delegate
-    private Account account;
+    private BankAccount account;
 
     @Override
     public void withdraw(int amount) {
@@ -43,11 +48,18 @@ public abstract class ChargeDecorator implements Account {
         charged += WITHDRAWAL_CHARGE;
     }
 
-    @Override
-    public abstract void deposit(int amount);
-
     public static void reset() {
         charged = 0;
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        CallStore.addPostConstructCaller(DurableAccount.class.getName());
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        CallStore.addPreDestroyCaller(DurableAccount.class.getName());
     }
 
 }

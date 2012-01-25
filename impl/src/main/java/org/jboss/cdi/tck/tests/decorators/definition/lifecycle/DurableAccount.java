@@ -14,40 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.decorators.definition;
+package org.jboss.cdi.tck.tests.decorators.definition.lifecycle;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import java.io.Serializable;
 
-/**
- * Only withdrawal is charged. Implicit implementation that calls the method on the delegate is provided for
- * {@link Account#deposit(int)}.
- * 
- * @author Martin Kouba
- */
-@Decorator
-public abstract class ChargeDecorator implements Account {
+import javax.enterprise.context.SessionScoped;
 
-    private static final int WITHDRAWAL_CHARGE = 5;
+@SuppressWarnings("serial")
+@SessionScoped
+public class DurableAccount implements BankAccount, Serializable {
 
-    public static int charged = 0;
-
-    @Inject
-    @Delegate
-    private Account account;
+    int balance = 0;
 
     @Override
     public void withdraw(int amount) {
-        account.withdraw(amount + WITHDRAWAL_CHARGE);
-        charged += WITHDRAWAL_CHARGE;
+        balance -= amount;
     }
 
     @Override
-    public abstract void deposit(int amount);
+    public void deposit(int amount) {
+        balance += amount;
+    }
 
-    public static void reset() {
-        charged = 0;
+    public int getBalance() {
+        return balance;
     }
 
 }

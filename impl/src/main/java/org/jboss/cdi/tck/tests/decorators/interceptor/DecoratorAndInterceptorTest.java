@@ -16,12 +16,17 @@
  */
 package org.jboss.cdi.tck.tests.decorators.interceptor;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import java.util.List;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -32,23 +37,35 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DecoratorAndInterceptorTest.class).withBeansXml("beans.xml")
-                .build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(DecoratorAndInterceptorTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(FooInterceptor.class.getName())
+                                .up().createDecorators().clazz(FooDecorator.class.getName()).up()).build();
     }
 
+    /**
+     * Test that interceptor is called before decorator and that invocations of decorator methods during method or lifecycle
+     * callback interception are not business method invocation, and therefore are not intercepted by interceptors.
+     */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.2", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = "8.2", id = "f"), @SpecAssertion(section = "7.2", id = "ka") })
     public void testInterceptorCalledBeforeDecorator() {
-        CallOrder.resetCallers();
-        Foo foo = getInstanceByType(Foo.class);
 
+        CallStore.resetCallers();
+
+        Foo foo = getInstanceByType(Foo.class);
         foo.doSomething();
 
-        List<String> callers = CallOrder.callers();
+        List<String> callers = CallStore.getCallers();
+        assertEquals(callers.size(), 2);
+        assertTrue(callers.get(0).equals(FooInterceptor.NAME));
+        assertTrue(callers.get(1).equals(FooDecorator.NAME));
 
-        assert callers.size() == 2;
-        assert callers.get(0).equals(FooInterceptor.NAME);
-        assert callers.get(1).equals(FooDecorator.NAME);
+        List<String> lifecycleCallers = CallStore.getLifecycleCallers();
+        assertEquals(lifecycleCallers.size(), 2);
+        assertTrue(lifecycleCallers.contains(FooDecorator.class.getName()));
+        assertTrue(lifecycleCallers.contains(foo.getClass().getName()));
     }
 
 }
