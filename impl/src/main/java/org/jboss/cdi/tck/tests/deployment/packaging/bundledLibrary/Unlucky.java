@@ -16,19 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary;
 
-import javax.inject.Inject;
-
-/**
- * @author pmuir
- * 
- */
-public class Foo {
-
-    @Inject
-    private Bar bar;
-
-    public int ping() {
-        return bar.ping();
-    }
+public class Unlucky {
 
 }

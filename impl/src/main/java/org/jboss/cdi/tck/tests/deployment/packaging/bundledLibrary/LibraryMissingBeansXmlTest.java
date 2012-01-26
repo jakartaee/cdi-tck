@@ -18,11 +18,12 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary.libraryBeans.Bar;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -39,15 +40,15 @@ public class LibraryMissingBeansXmlTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        // We put Foo in test archive, but Bar goes in the library
-        return new WebArchiveBuilder().withTestClass(LibraryMissingBeansXmlTest.class).withClasses(Foo.class)
-                .withLibrary(Bar.class).build();
+        // We put Foo in test archive, but Bar goes in the library without beans.xml
+        return new WebArchiveBuilder().withTestClass(LibraryMissingBeansXmlTest.class).withClasses(Foo.class, Bar.class)
+                .withLibrary(Unlucky.class).build();
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbc") })
     public void test() {
-        assert getCurrentManager().getBeans(Foo.class).size() == 1;
-        assert getCurrentManager().getBeans(Bar.class).isEmpty();
+        assertEquals(getCurrentManager().getBeans(Foo.class).size(), 1);
+        assertTrue(getCurrentManager().getBeans(Unlucky.class).isEmpty());
     }
 }

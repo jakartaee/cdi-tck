@@ -18,12 +18,16 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.testng.Assert.assertEquals;
+
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary.libraryBeans.Bar;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -31,6 +35,9 @@ import org.testng.annotations.Test;
 
 /**
  * Tests related to the final deployment phase of the lifecycle.
+ * 
+ * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
+ * classloading requirements)!
  * 
  * @author David Allen
  * @author Martin Kouba
@@ -40,15 +47,34 @@ public class LibraryInEarTest extends AbstractTest {
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClass(LibraryInEarTest.class)
-                .withClasses(Baz.class, BazLocal.class, Foo.class).withBeanLibrary(Bar.class).build();
+
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
+                .withTestClassDefinition(LibraryInEarTest.class).withClasses(Baz.class).withBeanLibrary(Bar.class).build();
+
+        WebArchive webArchive = new WebArchiveBuilder().notTestArchive().withName("test.war")
+                .withClasses(LibraryInEarTest.class, Foo.class).withDefaultEjbModuleDependency().build();
+        enterpriseArchive.addAsModule(webArchive);
+
+        return enterpriseArchive;
     }
+
+    @Inject
+    Baz baz;
+
+    @Inject
+    Foo foo;
 
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbb") })
     public void test() {
-        assert getCurrentManager().getBeans(Foo.class).size() == 1;
-        assert getCurrentManager().getBeans(Bar.class).size() == 1;
-        assert getCurrentManager().getBeans(BazLocal.class).size() == 1;
+
+        assertEquals(getCurrentManager().getBeans(Foo.class).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Bar.class).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Baz.class).size(), 1);
+
+        // Bean in EJB module can inject bean from EAR library
+        assertEquals(baz.ping(), 1);
+        // Bean in WAR classes can inject bean from EAR library
+        assertEquals(foo.ping(), 1);
     }
 }

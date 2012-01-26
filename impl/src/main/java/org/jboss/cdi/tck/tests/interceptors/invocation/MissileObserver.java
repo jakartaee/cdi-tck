@@ -2,7 +2,7 @@ package org.jboss.cdi.tck.tests.interceptors.invocation;
 
 import javax.enterprise.event.Observes;
 
-@MissileBinding
+@AlmightyBinding
 public class MissileObserver {
 
     public static boolean observed = false;

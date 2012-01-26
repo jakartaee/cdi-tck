@@ -14,21 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary;
+package org.jboss.cdi.tck.tests.interceptors.invocation;
 
-import javax.inject.Inject;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-/**
- * @author pmuir
- * 
- */
-public class Foo {
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    @Inject
-    private Bar bar;
+import javax.interceptor.InterceptorBinding;
 
-    public int ping() {
-        return bar.ping();
-    }
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface AlmightyBinding {
 
 }

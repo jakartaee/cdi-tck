@@ -16,8 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
-@MissileBinding
-public class Rye {
+import java.io.Serializable;
+
+import javax.enterprise.context.SessionScoped;
+
+@SuppressWarnings("serial")
+@SessionScoped
+@AlmightyBinding
+public class Rye implements Serializable {
 
     public void ping() {
     }

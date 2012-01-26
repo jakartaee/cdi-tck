@@ -5368,8 +5368,9 @@
             <text>When an event is fired by the application, the container must determine the observers for that event according to the observer resolution defined by Section 10.2, "Observer resolution", then then for each observer method, either invoke the observer method immediately or register the observer method for later invocation during the transaction completion phase, using a JTA |Synchronization|.</text>
         </assertion>
 
-        <assertion id="ba">
+        <assertion id="ba" testable="false">
             <text>The container calls observer methods as defined in Section 5.5.6, "Invocation of observer methods".</text>
+            <note>Tested in 5.5.6.</note>
         </assertion>
 
         <assertion id="bb">
@@ -5388,12 +5389,12 @@
             <text>The order in which observer methods are called is not defined, and so portable applications should not rely upon the order in which observers are called.</text>
         </assertion>
 
-        <assertion id="bd">
+        <assertion id="bda">
             <text>Any observer method called before completion of a transaction may call |setRollbackOnly()| to force a transaction rollback.</text>
             <note>Unverifiable since an observer method cannot access the transaction being committed</note>
         </assertion>
 
-        <assertion id="bd" testable="false">
+        <assertion id="bdb" testable="false">
             <text>An observer method may not directly initiate, commit or rollback JTA transactions.</text>
             <note>Doesn't specify what happens if they do</note>
         </assertion>

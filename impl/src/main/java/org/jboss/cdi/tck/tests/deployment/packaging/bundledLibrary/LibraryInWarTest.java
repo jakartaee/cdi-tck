@@ -17,10 +17,13 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary;
 
+import static org.testng.Assert.assertEquals;
+
+import javax.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary.libraryBeans.Bar;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -42,10 +45,16 @@ public class LibraryInWarTest extends AbstractTest {
                 .build();
     }
 
+    @Inject
+    Foo foo;
+
     @Test(groups = {})
     @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bcb") })
     public void test() {
-        assert getCurrentManager().getBeans(Foo.class).size() == 1;
-        assert getCurrentManager().getBeans(Bar.class).size() == 1;
+        assertEquals(getCurrentManager().getBeans(Foo.class).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Bar.class).size(), 1);
+
+        // Bean in WAR classes can inject bean from WAR library
+        assertEquals(foo.ping(), 1);
     }
 }

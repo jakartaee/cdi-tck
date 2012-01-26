@@ -16,14 +16,17 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+@SuppressWarnings("serial")
 @Interceptor
-@MissileBinding
-public class MissileInterceptor {
+@AlmightyBinding
+public class AlmightyInterceptor implements Serializable {
 
     public static boolean methodIntercepted = false;
 

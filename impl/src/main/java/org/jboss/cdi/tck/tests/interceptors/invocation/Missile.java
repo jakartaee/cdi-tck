@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.interceptors.invocation;
 
 import javax.inject.Inject;
 
-@MissileBinding
+@AlmightyBinding
 public class Missile {
     @Inject
     private Warhead warhead;

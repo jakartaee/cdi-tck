@@ -16,11 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.interceptor.Interceptors;
 
-@Interceptors(MissileInterceptor.class)
+@RequestScoped
+@Interceptors(AlmightyInterceptor.class)
 public class WheatProducer {
 
     public static boolean destroyed = false;

@@ -47,7 +47,7 @@ public class InterceptorInvocationTest extends AbstractTest {
                 .withTestClassPackage(InterceptorInvocationTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(MissileInterceptor.class.getName()).up()).build();
+                                .clazz(AlmightyInterceptor.class.getName()).up()).build();
     }
 
     @Test
@@ -55,84 +55,93 @@ public class InterceptorInvocationTest extends AbstractTest {
             @SpecAssertion(section = "12.4", id = "kb") })
     public void testManagedBeanIsIntercepted() {
 
-        MissileInterceptor.reset();
+        AlmightyInterceptor.reset();
         Missile missile = getInstanceByType(Missile.class);
         missile.fire();
 
-        assertTrue(MissileInterceptor.methodIntercepted);
+        assertTrue(AlmightyInterceptor.methodIntercepted);
         assertNotNull(missile.getWarhead()); // test that injection works
+
+        AlmightyInterceptor.reset();
+        // Test interception of application scoped bean invocation
+        Watcher watcher = getInstanceByType(Watcher.class);
+        watcher.ping();
+
+        assertTrue(AlmightyInterceptor.methodIntercepted);
+        assertTrue(AlmightyInterceptor.lifecycleCallbackIntercepted);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "7.2", id = "a1"), @SpecAssertion(section = "3.10", id = "f") })
     public void testInitializerMethodsNotIntercepted() {
 
-        MissileInterceptor.reset();
+        AlmightyInterceptor.reset();
         Missile missile = getInstanceByType(Missile.class);
 
-        assertFalse(MissileInterceptor.methodIntercepted);
+        assertFalse(AlmightyInterceptor.methodIntercepted);
         assertTrue(missile.initCalled()); // this call is intercepted
-        assertTrue(MissileInterceptor.methodIntercepted);
+        assertTrue(AlmightyInterceptor.methodIntercepted);
     }
 
     @Test
     @SpecAssertion(section = "7.2", id = "ia")
     public void testProducerMethodsAreIntercepted() {
 
-        MissileInterceptor.reset();
+        AlmightyInterceptor.reset();
         getInstanceByType(Wheat.class);
 
-        assertTrue(MissileInterceptor.methodIntercepted);
+        assertTrue(AlmightyInterceptor.methodIntercepted);
     }
 
     @Test
     @SpecAssertion(section = "7.2", id = "ic")
     public void testDisposerMethodsAreIntercepted() {
 
-        MissileInterceptor.reset();
+        AlmightyInterceptor.reset();
 
         Bean<Wheat> bean = getBeans(Wheat.class).iterator().next();
         CreationalContext<Wheat> creationalContext = getCurrentManager().createCreationalContext(bean);
         Wheat instance = getInstanceByType(Wheat.class);
 
-        MissileInterceptor.methodIntercepted = false;
+        AlmightyInterceptor.methodIntercepted = false;
         bean.destroy(instance, creationalContext);
 
         assertTrue(WheatProducer.destroyed);
-        assertTrue(MissileInterceptor.methodIntercepted);
+        assertTrue(AlmightyInterceptor.methodIntercepted);
     }
 
     @Test
     @SpecAssertion(section = "7.2", id = "ie")
     public void testObserverMethodsAreIntercepted() {
 
-        MissileInterceptor.reset();
+        AlmightyInterceptor.reset();
         getCurrentManager().fireEvent(new Missile());
 
         assertTrue(MissileObserver.observed);
-        assertTrue(MissileInterceptor.methodIntercepted);
+        assertTrue(AlmightyInterceptor.methodIntercepted);
     }
 
     @Test
     @SpecAssertion(section = "7.2", id = "j")
     public void testLifecycleCallbacksAreIntercepted() {
 
-        MissileInterceptor.reset();
-        getInstanceByType(Rye.class);
+        AlmightyInterceptor.reset();
+        Rye rye = getInstanceByType(Rye.class);
+        rye.ping();
 
-        assertFalse(MissileInterceptor.methodIntercepted);
-        assertTrue(MissileInterceptor.lifecycleCallbackIntercepted);
+        assertTrue(AlmightyInterceptor.methodIntercepted);
+        assertTrue(AlmightyInterceptor.lifecycleCallbackIntercepted);
     }
 
     @Test
     @SpecAssertion(section = "7.2", id = "m")
     public void testObjectMethodsAreNotIntercepted() {
 
-        MissileInterceptor.reset();
+        AlmightyInterceptor.reset();
         getInstanceByType(Missile.class).toString();
 
-        assertFalse(MissileInterceptor.methodIntercepted);
-        assertTrue(MissileInterceptor.lifecycleCallbackIntercepted);
+        assertFalse(AlmightyInterceptor.methodIntercepted);
+        assertTrue(AlmightyInterceptor.lifecycleCallbackIntercepted);
     }
 
 }

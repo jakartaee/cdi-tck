@@ -14,12 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary.libraryBeans;
+package org.jboss.cdi.tck.tests.interceptors.invocation;
 
-/**
- * @author pmuir
- * 
- */
-public class Bar {
+import java.io.Serializable;
+
+import javax.enterprise.context.ApplicationScoped;
+
+@SuppressWarnings("serial")
+@ApplicationScoped
+@AlmightyBinding
+public class Watcher implements Serializable {
+
+    public void ping() {
+    }
 
 }
