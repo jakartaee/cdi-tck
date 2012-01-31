@@ -14,18 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method;
+package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.enterprise;
 
 import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.Specializes;
+import javax.inject.Named;
 
-public class JewelryShop extends Shop {
-    @Override
+public class Shop {
+
     @Produces
-    @Specializes
-    @Sparkly
+    @Expensive
+    @Named
     public Necklace getExpensiveGift() {
-        return new Necklace(10);
+        return new Necklace();
     }
 
 }

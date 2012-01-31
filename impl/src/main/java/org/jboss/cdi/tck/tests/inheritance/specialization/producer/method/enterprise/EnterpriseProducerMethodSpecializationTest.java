@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method;
+package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.enterprise;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -38,7 +38,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class ProducerMethodSpecializationTest extends AbstractTest {
+public class EnterpriseProducerMethodSpecializationTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     private static Annotation EXPENSIVE_LITERAL = new AnnotationLiteral<Expensive>() {
@@ -49,13 +49,12 @@ public class ProducerMethodSpecializationTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ProducerMethodSpecializationTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseProducerMethodSpecializationTest.class).build();
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia"), @SpecAssertion(section = "4.3.1", id = "k"),
-            @SpecAssertion(section = "4.3.1", id = "j"), @SpecAssertion(section = "5.5.4", id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia"), @SpecAssertion(section = "5.5.4", id = "c"),
             @SpecAssertion(section = "3.3.3", id = "aa") })
     public void testSpecializingProducerMethod() {
 
@@ -81,13 +80,6 @@ public class ProducerMethodSpecializationTest extends AbstractTest {
         Bean<Necklace> sparklyBean = sparklyNecklaceBeans.iterator().next();
         // Check EL name of specializing bean
         assertEquals(sparklyBean.getName(), "expensiveGift");
-    }
-
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia") })
-    public void testSpecializingBeanInjection(@Expensive Product product) {
-        assertTrue(product instanceof Necklace);
-        assertEquals(product.getPrice(), 10);
     }
 
 }

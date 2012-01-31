@@ -18,4 +18,9 @@ package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method;
 
 public class Necklace extends Product {
 
+    public Necklace(int price) {
+        super();
+        setPrice(price);
+    }
+
 }

@@ -16,9 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.util.Set;
 
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
@@ -36,38 +42,70 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SimpleBeanSpecializationTest extends AbstractTest {
 
+    @SuppressWarnings("serial")
     private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {
+    };
+
+    @SuppressWarnings("serial")
+    private static Annotation LAZY_LITERAL = new AnnotationLiteral<Lazy>() {
     };
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(SimpleBeanSpecializationTest.class).withBeansXml("beans.xml")
-                .build();
+        return new WebArchiveBuilder().withTestClassPackage(SimpleBeanSpecializationTest.class).build();
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia"), @SpecAssertion(section = "4.3.1", id = "ib") })
+    public void testIndirectSpecialization() {
+        // LazyFarmer specializes directly Farmer and indirectly Human
+        Set<Bean<Human>> humanBeans = getBeans(Human.class);
+        assertEquals(humanBeans.size(), 1);
+        Set<Bean<Farmer>> farmerBeans = getBeans(Farmer.class, LANDOWNER_LITERAL);
+        assertEquals(farmerBeans.size(), 1);
+        Bean<Farmer> lazyFarmerBean = farmerBeans.iterator().next();
+        assertEquals(lazyFarmerBean.getBeanClass(), humanBeans.iterator().next().getBeanClass());
+
+        // Types of specializing bean
+        Set<Type> lazyFarmerBeanTypes = lazyFarmerBean.getTypes();
+        assertEquals(lazyFarmerBeanTypes.size(), 4);
+        assertTrue(typeSetMatches(lazyFarmerBeanTypes, Object.class, Human.class, Farmer.class, LazyFarmer.class));
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia") })
+    public void testSpecializingBeanInjection(Farmer farmer) {
+        assertEquals(farmer.getClassName(), LazyFarmer.class.getName());
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia"), @SpecAssertion(section = "4.3.1", id = "ib"),
-            @SpecAssertion(section = "4.3.1", id = "j"), @SpecAssertion(section = "3.1.4", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "j"), @SpecAssertion(section = "3.1.4", id = "aa") })
     public void testSpecializingBeanHasQualifiersOfSpecializedAndSpecializingBean() {
-        assert getBeans(LazyFarmer.class, LANDOWNER_LITERAL).size() == 1;
-        Bean<?> bean = getBeans(LazyFarmer.class, LANDOWNER_LITERAL).iterator().next();
-        assert bean.getTypes().contains(Farmer.class);
-        assert bean.getQualifiers().size() == 4;
-        assert annotationSetMatches(bean.getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class);
+        Bean<LazyFarmer> lazyFarmerBean = getBeans(LazyFarmer.class, LAZY_LITERAL).iterator().next();
+        Set<Annotation> lazyFarmerBeanQualifiers = lazyFarmerBean.getQualifiers();
+        assertEquals(lazyFarmerBeanQualifiers.size(), 5);
+        // LazyFarmer inherits Default from Human; LandOwner and Named from Farmer
+        assertTrue(annotationSetMatches(lazyFarmerBean.getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class,
+                Default.class));
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "k"), @SpecAssertion(section = "3.1.4", id = "ab") })
     public void testSpecializingBeanHasNameOfSpecializedBean() {
-        assert getBeans(LazyFarmer.class, LANDOWNER_LITERAL).size() == 1;
-        assert "farmer".equals(getBeans(LazyFarmer.class, LANDOWNER_LITERAL).iterator().next().getName());
+        String expectedName = "farmer";
+        Set<Bean<?>> beans = getCurrentManager().getBeans(expectedName);
+        assertEquals(beans.size(), 1);
+        Bean<?> farmerBean = beans.iterator().next();
+        assertEquals(farmerBean.getName(), expectedName);
+        assertEquals(farmerBean.getBeanClass(), LazyFarmer.class);
     }
 
     @Test(expectedExceptions = UnsatisfiedResolutionException.class)
     @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cb") })
     public void testProducerMethodOnSpecializedBeanNotCalled() {
-        assert getBeans(Waste.class).size() == 0;
+        assertEquals(getBeans(Waste.class).size(), 0);
+        // Throw UnsatisfiedResolutionException
         getInstanceByType(Waste.class);
     }
 }

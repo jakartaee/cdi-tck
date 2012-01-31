@@ -17,8 +17,12 @@
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.util.Set;
 
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
@@ -37,6 +41,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EnterpriseBeanSpecializationTest extends AbstractTest {
 
+    @SuppressWarnings("serial")
     private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {
     };
 
@@ -46,22 +51,47 @@ public class EnterpriseBeanSpecializationTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "j"), @SpecAssertion(section = "3.2.4", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia"), @SpecAssertion(section = "3.2.4", id = "aa") })
+    public void testDirectSpecialization() {
+
+        Set<Bean<LazyFarmerLocal>> farmerBeans = getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL);
+        assertEquals(farmerBeans.size(), 1);
+        Bean<LazyFarmerLocal> lazyFarmerBean = farmerBeans.iterator().next();
+        assertEquals(lazyFarmerBean.getBeanClass(), LazyFarmer.class);
+
+        // Types of specializing bean
+        Set<Type> lazyFarmerBeanTypes = lazyFarmerBean.getTypes();
+        assertEquals(lazyFarmerBeanTypes.size(), 3);
+        assertTrue(typeSetMatches(lazyFarmerBeanTypes, Object.class, FarmerLocal.class, LazyFarmerLocal.class));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "j") })
     public void testSpecializingBeanHasBindingsOfSpecializedAndSpecializingBean() {
-        assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).size() == 1;
-        Bean<LazyFarmerLocal> bean = getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next();
-        assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getTypes()
-                .contains(FarmerLocal.class);
-        assert getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getQualifiers().size() == 4;
-        assert annotationSetMatches(getCurrentManager().getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next()
-                .getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class);
+        Set<Bean<LazyFarmerLocal>> farmerBeans = getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL);
+        assertEquals(farmerBeans.size(), 1);
+        Bean<LazyFarmerLocal> lazyFarmerBean = farmerBeans.iterator().next();
+        assertEquals(lazyFarmerBean.getQualifiers().size(), 4);
+        // LazyFarmer inherits LandOwner and Named from Farmer
+        assertTrue(annotationSetMatches(lazyFarmerBean.getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class));
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "k") })
     public void testSpecializingBeanHasNameOfSpecializedBean() {
-        assert getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).size() == 1;
-        assert getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL).iterator().next().getName().equals("farmer");
+        String expectedName = "farmer";
+        Set<Bean<?>> beans = getCurrentManager().getBeans(expectedName);
+        assertEquals(beans.size(), 1);
+        Bean<?> farmerBean = beans.iterator().next();
+        assertEquals(farmerBean.getName(), expectedName);
+        assertEquals(farmerBean.getBeanClass(), LazyFarmer.class);
+    }
+
+    @Test(groups = { INTEGRATION }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "4.3", id = "ca") })
+    public void testSpecializedBeanNotInstantiated(@Landowner FarmerLocal farmer) throws Exception {
+        assertEquals(farmer.getClassName(), LazyFarmer.class.getName());
     }
 
 }
