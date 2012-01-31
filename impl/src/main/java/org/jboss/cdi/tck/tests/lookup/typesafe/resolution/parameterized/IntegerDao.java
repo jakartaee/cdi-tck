@@ -16,23 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
-import javax.enterprise.inject.Produces;
-
-/**
- * @author pmuir
- * 
- */
-public class DaoProducer {
-
-    @Produces
-    public Dao<Object, Object> getDao() {
-        return new Dao<Object, Object>();
-    }
-
-    @SuppressWarnings({ "rawtypes" })
-    @Produces
-    Dao getRawDao() {
-        return getDao();
-    }
+public class IntegerDao extends Dao<Integer, Integer> {
 
 }

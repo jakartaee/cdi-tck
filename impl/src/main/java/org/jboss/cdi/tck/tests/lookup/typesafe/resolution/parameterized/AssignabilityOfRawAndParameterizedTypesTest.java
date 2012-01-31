@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
 import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
+import static org.testng.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +47,9 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "5.2", id = "kb"), @SpecAssertion(section = "2.2.1", id = "f"),
             @SpecAssertion(section = "2.2.1", id = "g") })
     public void testAssignabilityToRawType() {
-        Set<Bean<Dao>> beans = getBeans(Dao.class);
-        assert getBeans(Dao.class).size() == 4; // Dao, DaoProducer.getDao(), DaoProducer.getRawDao and ObjectDao
+        // Dao, DaoProducer.getDao(), DaoProducer.getRawDao and ObjectDao
+        // IntegerDao is not assignable to the raw required type Dao
+        assertEquals(getBeans(Dao.class).size(), 4);
     }
 
     @Test(groups = { RESOLUTION })
