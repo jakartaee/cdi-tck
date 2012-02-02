@@ -18,4 +18,14 @@ package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.enter
 
 public class Product {
 
+    private int price = 0;
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
 }

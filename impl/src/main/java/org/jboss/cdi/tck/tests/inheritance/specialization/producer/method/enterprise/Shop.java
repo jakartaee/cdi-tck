@@ -25,7 +25,7 @@ public class Shop {
     @Expensive
     @Named
     public Necklace getExpensiveGift() {
-        return new Necklace();
+        return new Necklace(5);
     }
 
 }

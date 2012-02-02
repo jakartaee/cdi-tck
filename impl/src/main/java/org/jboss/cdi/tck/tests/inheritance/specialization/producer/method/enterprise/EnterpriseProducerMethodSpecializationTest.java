@@ -24,6 +24,7 @@ import java.lang.reflect.Type;
 import java.util.Set;
 
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Named;
@@ -80,6 +81,14 @@ public class EnterpriseProducerMethodSpecializationTest extends AbstractTest {
         Bean<Necklace> sparklyBean = sparklyNecklaceBeans.iterator().next();
         // Check EL name of specializing bean
         assertEquals(sparklyBean.getName(), "expensiveGift");
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia") })
+    public void testSpecializingBeanInjection(@Expensive Product expensiveProduct, @Default Product plainProduct) {
+        assertTrue(expensiveProduct instanceof Necklace);
+        assertEquals(expensiveProduct.getPrice(), 10);
+        assertEquals(plainProduct.getPrice(), 0);
     }
 
 }

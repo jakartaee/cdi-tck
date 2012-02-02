@@ -28,7 +28,7 @@ public class JewelryShop extends Shop {
     @Specializes
     @Sparkly
     public Necklace getExpensiveGift() {
-        return new Necklace();
+        return new Necklace(10);
     }
 
 }
