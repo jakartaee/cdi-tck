@@ -45,7 +45,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
 
     @Test(groups = { RESOLUTION })
     @SpecAssertions({ @SpecAssertion(section = "5.2", id = "kb"), @SpecAssertion(section = "2.2.1", id = "f"),
-            @SpecAssertion(section = "2.2.1", id = "g") })
+            @SpecAssertion(section = "2.2.1", id = "g"), @SpecAssertion(section = "5.2.3", id = "a") })
     public void testAssignabilityToRawType() {
         // Dao, DaoProducer.getDao(), DaoProducer.getRawDao and ObjectDao
         // IntegerDao is not assignable to the raw required type Dao
@@ -105,11 +105,15 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
 
     @Test(groups = { RESOLUTION })
     @SpecAssertion(section = "5.2.3", id = "f")
-    public <T1 extends Exception, T2 extends Exception> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
+    public <T1 extends Exception, T2 extends Exception, T3, T4> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
         Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>() {
         });
         assert beans.size() == 1;
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
+
+        Set<Bean<Dao<T3, T4>>> daoBeans = getBeans(new TypeLiteral<Dao<T3, T4>>() {
+        });
+        assertEquals(daoBeans.size(), 2);
     }
 
 }
