@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.builtin;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.REWRITE;
+import static org.testng.Assert.assertNotNull;
 
 import java.security.Principal;
 
@@ -54,7 +55,7 @@ public class BuiltInBeansTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "3.7", id = "a") })
     public void testUserTransactionBean() throws SystemException {
         UserTransaction userTransaction = getInstanceByType(UserTransactionInjectedBeanLocal.class).getUserTransaction();
-        assert userTransaction != null;
+        assertNotNull(userTransaction);
         // Check that the UserTransaction is at least queryable
         userTransaction.getStatus();
     }
@@ -64,7 +65,7 @@ public class BuiltInBeansTest extends AbstractTest {
     public void testDefaultValidatorFactoryBean() throws SystemException {
         ValidatorFactory defaultValidatorFactory = getInstanceByType(DefaultValidatorFactoryInjectedBeanLocal.class)
                 .getDefaultValidatorFactory();
-        assert defaultValidatorFactory != null;
+        assertNotNull(defaultValidatorFactory);
         // Check that the ValidatorFactory is at least queryable
         defaultValidatorFactory.getValidator();
     }
@@ -73,7 +74,7 @@ public class BuiltInBeansTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "3.7", id = "d") })
     public void testDefaultValidatorBean() throws SystemException {
         Validator defaultValidator = getInstanceByType(DefaultValidatorInjectedBeanLocal.class).getDefaultValidator();
-        assert defaultValidator != null;
+        assertNotNull(defaultValidator);
         // Check that the ValidatorFactory is at least queryable
         defaultValidator.getConstraintsForClass(BuiltInBeansTest.class);
     }
