@@ -38,6 +38,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SessionContextTest extends AbstractTest {
 
+    private static final long DEFAULT_SLEEP_INTERVAL = 3000;
+
     @ArquillianResource
     private URL contextPath;
 
@@ -106,7 +108,9 @@ public class SessionContextTest extends AbstractTest {
         assert firstRequestResult.getContent() != null;
         assert Long.parseLong(firstRequestResult.getContent()) != 0;
         webClient.getPage(contextPath + "InvalidateSession?timeout=1");
-        Thread.sleep(1500);
+
+        Thread.sleep(DEFAULT_SLEEP_INTERVAL);
+
         // Make a second request and make sure the same context is not there
         TextPage secondRequestResult = webClient.getPage(contextPath + "IntrospectSession");
         assert secondRequestResult.getContent() != null;
