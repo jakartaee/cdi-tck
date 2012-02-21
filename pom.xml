@@ -103,7 +103,7 @@
       <apache.httpclient.version>3.1</apache.httpclient.version>
       <htmlunit.version>2.4</htmlunit.version>
       <resteasy.version>2.2.1.GA</resteasy.version>
-      <arquillian.version>1.0.0.CR6</arquillian.version>
+      <arquillian.version>1.0.0.CR7</arquillian.version>
    </properties>
 
    <!-- Dependency management -->
