@@ -623,7 +623,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             addDefaultLibraries();
 
             if (!isAsClientMode()) {
-                withClass(AbstractTest.class);
+                withPackage(AbstractTest.class.getPackage());
             }
         }
         return buildInternal();

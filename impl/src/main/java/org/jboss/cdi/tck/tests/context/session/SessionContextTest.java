@@ -25,6 +25,7 @@ import java.net.URL;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.Timer;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -109,7 +110,7 @@ public class SessionContextTest extends AbstractTest {
         assert Long.parseLong(firstRequestResult.getContent()) != 0;
         webClient.getPage(contextPath + "InvalidateSession?timeout=1");
 
-        Thread.sleep(DEFAULT_SLEEP_INTERVAL);
+        new Timer().setDelay(DEFAULT_SLEEP_INTERVAL).start();
 
         // Make a second request and make sure the same context is not there
         TextPage secondRequestResult = webClient.getPage(contextPath + "IntrospectSession");

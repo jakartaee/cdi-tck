@@ -27,6 +27,8 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.Timer;
+import org.jboss.cdi.tck.Timer.StopCondition;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.context.jms.LogStore.LogMessage;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -77,7 +79,11 @@ public class MessageListenerContextTest extends AbstractTest {
         producer.sendTopicMessage();
 
         // Wait for async processing
-        Thread.sleep(300l);
+        new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return AbstractMessageListener.processedMessages.get() >= 2;
+            }
+        }).start();
 
         List<LogMessage> logMessages = store.getLogMessages();
         assertEquals(logMessages.size(), 2);

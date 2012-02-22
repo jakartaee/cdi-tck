@@ -21,6 +21,8 @@ import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.Timer;
+import org.jboss.cdi.tck.Timer.StopCondition;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -48,16 +50,22 @@ public class ApplicationContextSharedTest extends AbstractTest {
         FMSModelIII.reset();
         FMS flightManagementSystem = getInstanceByType(FMS.class);
         flightManagementSystem.climb();
-        waitForClimbed();
-        flightManagementSystem.descend();
-        waitForDescended();
-        assert flightManagementSystem.isSameBean();
-    }
 
-    private void waitForClimbed() throws Exception {
-        for (int i = 0; !FMSModelIII.isClimbed() && i < 2000; i++) {
-            Thread.sleep(10);
-        }
+        Timer timer = new Timer().setDelay(20000l).addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return FMSModelIII.isClimbed();
+            }
+        }).start();
+
+        flightManagementSystem.descend();
+
+        timer.addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return FMSModelIII.isDescended();
+            }
+        }, true).start();
+
+        assert flightManagementSystem.isSameBean();
     }
 
     @Test(groups = { CONTEXTS })
@@ -65,14 +73,14 @@ public class ApplicationContextSharedTest extends AbstractTest {
     public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMS flightManagementSystem = getInstanceByType(FMS.class);
         flightManagementSystem.climb();
-        waitForClimbed();
-        assert flightManagementSystem.isApplicationScopeActive();
-    }
 
-    private void waitForDescended() throws Exception {
-        for (int i = 0; !FMSModelIII.isDescended() && i < 2000; i++) {
-            Thread.sleep(10);
-        }
+        new Timer().setDelay(20000l).addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return FMSModelIII.isClimbed();
+            }
+        }).start();
+
+        assert flightManagementSystem.isApplicationScopeActive();
     }
 
 }
