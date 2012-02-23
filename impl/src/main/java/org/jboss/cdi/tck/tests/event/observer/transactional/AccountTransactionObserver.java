@@ -3,6 +3,8 @@ package org.jboss.cdi.tck.tests.event.observer.transactional;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.TransactionPhase;
 
+import org.jboss.cdi.tck.Timer;
+
 /**
  * 
  * @author Martin Kouba
@@ -77,7 +79,7 @@ public class AccountTransactionObserver {
     }
 
     private void pause() throws Exception {
-        Thread.sleep(500l);
+        Timer.startNew(500l);
     }
 
     private void logEventFired(TransactionPhase phase) {

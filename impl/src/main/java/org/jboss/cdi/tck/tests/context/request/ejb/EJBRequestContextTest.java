@@ -26,6 +26,8 @@ import javax.ejb.EJB;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.Timer;
+import org.jboss.cdi.tck.Timer.StopCondition;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -68,14 +70,14 @@ public class EJBRequestContextTest extends AbstractTest {
         FMSModelIII.reset();
         FMS flightManagementSystem = getInstanceByType(FMS.class);
         flightManagementSystem.climb();
-        waitForClimbed();
-        assert flightManagementSystem.isRequestScopeActive();
-    }
 
-    private void waitForClimbed() throws Exception {
-        for (int i = 0; !FMSModelIII.isClimbed() && i < 2000; i++) {
-            Thread.sleep(10);
-        }
+        new Timer().setDelay(20000l).addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return FMSModelIII.isClimbed();
+            }
+        }).start();
+
+        assert flightManagementSystem.isRequestScopeActive();
     }
 
     /**
@@ -89,17 +91,23 @@ public class EJBRequestContextTest extends AbstractTest {
         SimpleRequestBean.reset();
         FMS flightManagementSystem = getInstanceByType(FMS.class);
         flightManagementSystem.climb();
-        waitForClimbed();
+
+        Timer timer = new Timer().setDelay(20000l).addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return FMSModelIII.isClimbed();
+            }
+        }).start();
+
         flightManagementSystem.descend();
-        waitForDescended();
+
+        timer.addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return FMSModelIII.isDescended();
+            }
+        }, true).start();
+
         assert !flightManagementSystem.isSameBean();
         assert SimpleRequestBean.isBeanDestroyed();
-    }
-
-    private void waitForDescended() throws Exception {
-        for (int i = 0; !FMSModelIII.isDescended() && i < 2000; i++) {
-            Thread.sleep(10);
-        }
     }
 
     @EJB(lookup = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.ejb.FooRemote")

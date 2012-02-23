@@ -110,7 +110,7 @@ public class SessionContextTest extends AbstractTest {
         assert Long.parseLong(firstRequestResult.getContent()) != 0;
         webClient.getPage(contextPath + "InvalidateSession?timeout=1");
 
-        new Timer().setDelay(DEFAULT_SLEEP_INTERVAL).start();
+        Timer.startNew(DEFAULT_SLEEP_INTERVAL);
 
         // Make a second request and make sure the same context is not there
         TextPage secondRequestResult = webClient.getPage(contextPath + "IntrospectSession");

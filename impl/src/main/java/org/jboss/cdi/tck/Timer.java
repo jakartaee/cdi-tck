@@ -171,6 +171,28 @@ public class Timer {
             this.stopConditions.clear();
     }
 
+    /**
+     * Start a new timer with specified delay.
+     * 
+     * @param delay
+     * @return finished timer
+     * @throws InterruptedException
+     */
+    public static Timer startNew(long delay) throws InterruptedException {
+        return new Timer().setDelay(delay).start();
+    }
+
+    /**
+     * Start a new timer with specified delay and sleep interval.
+     * 
+     * @param delay
+     * @return finished timer
+     * @throws InterruptedException
+     */
+    public static Timer startNew(long delay, long sleepInterval) throws InterruptedException {
+        return new Timer().setDelay(delay).setSleepInterval(sleepInterval).start();
+    }
+
     private void checkConfiguration() {
         if (delay < 0 || sleepInterval < 0 || delay < sleepInterval)
             throw new IllegalArgumentException("Invalid timer configuration");

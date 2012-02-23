@@ -24,10 +24,14 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.Timer;
+import org.jboss.cdi.tck.Timer.StopCondition;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -56,6 +60,7 @@ public class MessageDrivenBeanInterceptorInvocationTest extends AbstractTest {
     SimpleMessageProducer producer;
 
     @Test
+    @SpecAssertions(@SpecAssertion(section = "7.2", id = "la"))
     public void testMessageDrivenBeanMethodIntercepted() throws Exception {
 
         MissileInterceptor.reset();
@@ -63,7 +68,12 @@ public class MessageDrivenBeanInterceptorInvocationTest extends AbstractTest {
         producer.sendQueueMessage();
 
         // Wait for async processing
-        Thread.sleep(300l);
+        new Timer().setDelay(3000l).addStopCondition(new StopCondition() {
+            @Override
+            public boolean isSatisfied() {
+                return MessageDrivenMissile.messageAccepted;
+            }
+        }).start();
 
         assertTrue(MessageDrivenMissile.messageAccepted);
         assertTrue(MissileInterceptor.methodIntercepted);
