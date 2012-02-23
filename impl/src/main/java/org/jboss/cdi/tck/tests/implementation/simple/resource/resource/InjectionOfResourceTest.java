@@ -73,7 +73,7 @@ public class InjectionOfResourceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "aa") })
     public void testResourceBeanTypes() {
         Bean<BeanManager> beanRemote = getBeans(BeanManager.class, new AnnotationLiteral<Another>() {
         }).iterator().next();

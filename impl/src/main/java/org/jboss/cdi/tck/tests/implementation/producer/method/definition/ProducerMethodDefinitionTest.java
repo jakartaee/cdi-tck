@@ -17,9 +17,11 @@
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
 import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
+import static org.testng.Assert.assertEquals;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
@@ -167,11 +169,12 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
 
     @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3.2", id = "bb"), @SpecAssertion(section = "2.5.2", id = "b"),
-            @SpecAssertion(section = "2.5.1", id = "d"), @SpecAssertion(section = "3.3.8", id = "a") })
+            @SpecAssertion(section = "2.5.1", id = "d") })
     public void testDefaultNamedMethod() throws Exception {
-        assert getBeans(DaddyLongLegs.class, TAME_LITERAL).size() == 1;
-        Bean<DaddyLongLegs> daddyLongLegsSpider = getBeans(DaddyLongLegs.class, TAME_LITERAL).iterator().next();
-        assert daddyLongLegsSpider.getName().equals("produceDaddyLongLegs");
+        Set<Bean<DaddyLongLegs>> beans = getBeans(DaddyLongLegs.class, TAME_LITERAL);
+        assertEquals(beans.size(), 1);
+        Bean<DaddyLongLegs> daddyLongLegsSpider = beans.iterator().next();
+        assertEquals(daddyLongLegsSpider.getName(), "produceDaddyLongLegs");
     }
 
     // Review 2.2

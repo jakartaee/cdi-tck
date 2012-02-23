@@ -80,7 +80,7 @@ public class ProcessBeanAttributesFiredForSyntheticBeanTest extends AbstractTest
     @SuppressWarnings("unchecked")
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.3.22", id = "a"), @SpecAssertion(section = "11.5.10", id = "aa"),
-            @SpecAssertion(section = "11.5.10 ", id = "bb"), @SpecAssertion(section = "11.5.10 ", id = "bc"),
+            @SpecAssertion(section = "11.5.10", id = "bb"), @SpecAssertion(section = "11.5.10", id = "bc"),
             @SpecAssertion(section = "11.5.6", id = "bc") })
     public void testProcessBeanAttributesFired() {
 

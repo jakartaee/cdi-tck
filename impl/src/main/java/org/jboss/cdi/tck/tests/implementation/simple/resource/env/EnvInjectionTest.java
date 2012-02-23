@@ -63,6 +63,7 @@ public class EnvInjectionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "la"), @SpecAssertion(section = "7.3.6", id = "ma"),
             @SpecAssertion(section = "7.3.6", id = "o") })
     public void testProduceEnvProxy() {
+        @SuppressWarnings("serial")
         Bean<String> greetingEnvBean = getBeans(String.class, new AnnotationLiteral<Greeting>() {
         }).iterator().next();
         CreationalContext<String> greetingEnvCc = getCurrentManager().createCreationalContext(greetingEnvBean);
@@ -72,8 +73,9 @@ public class EnvInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "aa") })
     public void testResourceBeanTypes() {
+        @SuppressWarnings("serial")
         Bean<String> greeting = getBeans(String.class, new AnnotationLiteral<Greeting>() {
         }).iterator().next();
         assert greeting.getTypes().size() == 5;

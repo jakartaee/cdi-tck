@@ -1362,7 +1362,7 @@
 
     <section id="3.6.2" title="Bean types of a resource">
         <group>
-            <text>The unrestricted set of bean types of a resource is determined by the declared type of the producer field, as specified by Section 3.4.1, “Bean types of a producer field”.</text>
+            <text>The unrestricted set of bean types of a resource is determined by the declared type of the producer field, as specified by Section 3.4.1, "Bean types of a producer field".</text>
             <assertion id="aa">
                 <text>Check @Resource</text>
             </assertion>

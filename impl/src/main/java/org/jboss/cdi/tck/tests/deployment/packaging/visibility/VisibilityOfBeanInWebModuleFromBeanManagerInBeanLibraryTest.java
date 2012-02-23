@@ -57,7 +57,7 @@ public class VisibilityOfBeanInWebModuleFromBeanManagerInBeanLibraryTest extends
     BeerCollector collector;
 
     @Test
-    @SpecAssertion(section = "12.1 ", id = "bcb")
+    @SpecAssertion(section = "12.1", id = "bcb")
     public void shouldFindBeanByType() {
         Assert.assertTrue(collector.getNumDiscovered() == 2);
     }

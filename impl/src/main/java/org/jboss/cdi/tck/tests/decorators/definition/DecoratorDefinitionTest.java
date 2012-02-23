@@ -174,7 +174,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
      */
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "8.1", id = "d"), @SpecAssertion(section = "8.1.3", id = "c"),
-            @SpecAssertion(section = "8.", id = "ca") })
+            @SpecAssertion(section = "8.1.3", id = "ca") })
     public void testAbstractDecoratorNotImplementingMethodOfDecoratedType(BankAccount account) {
         ChargeDecorator.reset();
         account.deposit(100);

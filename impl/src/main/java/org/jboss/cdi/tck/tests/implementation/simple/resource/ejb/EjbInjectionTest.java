@@ -69,8 +69,9 @@ public class EjbInjectionTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "ad") })
     public void testResourceBeanTypes() {
+        @SuppressWarnings("serial")
         Bean<BeanRemote> beanRemote = getBeans(BeanRemote.class, new AnnotationLiteral<Lazy>() {
         }).iterator().next();
         assert beanRemote.getTypes().size() == 3;

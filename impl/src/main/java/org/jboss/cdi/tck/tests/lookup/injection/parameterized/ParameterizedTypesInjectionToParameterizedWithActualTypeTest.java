@@ -50,7 +50,7 @@ public class ParameterizedTypesInjectionToParameterizedWithActualTypeTest extend
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "ba"), @SpecAssertion(section = "5.2.3", id = "bb"),
-            @SpecAssertion(section = "5.2.3", id = "ab"), @SpecAssertion(section = "5.2.3", id = "e") })
+            @SpecAssertion(section = "5.2.3", id = "a"), @SpecAssertion(section = "5.2.3", id = "e") })
     public void testInjection() {
         assertNotNull(consumer.getDao());
         assertEquals(consumer.getDao().getId(), Dao.class.getName());

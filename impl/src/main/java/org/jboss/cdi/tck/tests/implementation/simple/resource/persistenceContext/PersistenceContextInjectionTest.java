@@ -95,7 +95,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test(groups = { LIFECYCLE })
-    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "hh"), @SpecAssertion(section = "3.5.2", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "hh"), @SpecAssertion(section = "3.6.2", id = "ab") })
     public void testBeanTypesAndBindingTypesOfPersistenceContext() {
         Bean<EntityManager> manager = getBeans(EntityManager.class, new AnnotationLiteral<Database>() {
         }).iterator().next();
@@ -106,7 +106,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test(groups = { LIFECYCLE })
-    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "ac") })
     public void testBeanTypesOfPersistenceUnit() {
         Bean<EntityManagerFactory> factory = getBeans(EntityManagerFactory.class, new AnnotationLiteral<Database>() {
         }).iterator().next();

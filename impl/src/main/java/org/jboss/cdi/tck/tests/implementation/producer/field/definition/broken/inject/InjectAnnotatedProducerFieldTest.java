@@ -38,7 +38,7 @@ public class InjectAnnotatedProducerFieldTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "g"), @SpecAssertion(section = "3.8.1", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "g") })
     public void testInjectAnnotatedProducerFieldNotAllowed() {
     }
 }

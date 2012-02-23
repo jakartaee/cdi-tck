@@ -27,7 +27,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "cdi", version = "20091018")
+@SpecVersion(spec = "cdi", version = "20091101")
 public class TwoBeansSpecializeTheSameBeanTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
