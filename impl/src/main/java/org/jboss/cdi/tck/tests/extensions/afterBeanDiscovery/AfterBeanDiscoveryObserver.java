@@ -61,7 +61,12 @@ public class AfterBeanDiscoveryObserver implements Extension {
     }
 
     public void addABean(@Observes AfterBeanDiscovery event) {
+        addBean(event);
+        addObserverMethod(event);
+        event.addContext(new SuperContext());
+    }
 
+    private void addBean(AfterBeanDiscovery event) {
         event.addBean(new Bean<Cockatoo>() {
 
             private final Set<Annotation> qualifiers = new HashSet<Annotation>(Arrays.asList(new DefaultLiteral()));
@@ -111,8 +116,10 @@ public class AfterBeanDiscoveryObserver implements Extension {
                 // No-op
             }
         });
+    }
 
-        // Ad observer method
+    private void addObserverMethod(AfterBeanDiscovery event) {
+
         addedObserverMethod = new TestableObserverMethod<Talk>() {
 
             boolean observed = false;

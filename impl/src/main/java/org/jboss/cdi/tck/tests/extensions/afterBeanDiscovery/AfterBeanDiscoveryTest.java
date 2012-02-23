@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
+
+import javax.enterprise.context.spi.Context;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -60,6 +63,15 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     public void testObserverMethodRegistered() {
         getCurrentManager().fireEvent(new Talk("Hello"));
         assertTrue(AfterBeanDiscoveryObserver.addedObserverMethod.isObserved());
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.2", id = "f")
+    public void testAddContext() {
+        Context context = getCurrentManager().getContext(SuperScoped.class);
+        assertNotNull(context);
+        assertTrue(context.isActive());
+        assertTrue(context instanceof SuperContext);
     }
 
 }

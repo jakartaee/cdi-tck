@@ -6342,6 +6342,7 @@
 
         <assertion id="f">
             <text>|addContext()| registers a custom |Context| object with the container.</text>
+            <note>Right now only the registation process is tested</note>
         </assertion>
 
         <assertion id="fb" testable="false">
