@@ -7121,9 +7121,6 @@
             <assertion id="bb">
                 <text>Check session bean</text>
             </assertion>
-            <assertion id="bc">
-                <text>Check non-contextual session bean</text>
-            </assertion>
             <assertion id="bd">
                 <text>Check JSF managed beans</text>
             </assertion>
@@ -7167,9 +7164,6 @@
             </assertion>
             <assertion id="db">
                 <text>Check session bean</text>
-            </assertion>
-            <assertion id="dc">
-                <text>Check non-contextual session bean</text>
             </assertion>
             <assertion id="dd">
                 <text>Check JSF managed beans</text>

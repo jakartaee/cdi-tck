@@ -22,6 +22,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -41,7 +42,7 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.12", id = "aaa")
+    @SpecAssertions({ @SpecAssertion(section = "11.5.12", id = "aaa"), @SpecAssertion(section = "12.4", id = "i") })
     public void testProcessObserverMethodEventsSent() {
         assert ProcessObserverMethodObserver.getEventtypes().contains(EventA.class);
     }
@@ -54,7 +55,7 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.12", id = "ba")
+    @SpecAssertions({ @SpecAssertion(section = "11.5.12", id = "ba"), @SpecAssertion(section = "12.4", id = "i") })
     public void testGetObserverMethod() {
         assert ProcessObserverMethodObserver.getObserverMethod().getObservedType().equals(EventA.class);
     }

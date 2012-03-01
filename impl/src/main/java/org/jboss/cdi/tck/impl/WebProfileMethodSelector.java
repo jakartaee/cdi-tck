@@ -8,8 +8,9 @@ import org.testng.IMethodSelectorContext;
 import org.testng.ITestNGMethod;
 
 /**
- * 
+ * @deprecated Use TestNG groups instead
  */
+@Deprecated
 public class WebProfileMethodSelector implements IMethodSelector {
 
     private static final long serialVersionUID = 4868366080536037160L;

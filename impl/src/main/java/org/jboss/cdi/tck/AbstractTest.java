@@ -134,22 +134,27 @@ public abstract class AbstractTest extends Arquillian {
         return resolveUniqueBean(type.getType(), beans);
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public <T> Set<Bean<T>> getBeans(Class<T> type, Annotation... bindings) {
         return (Set) getCurrentManager().getBeans(type, bindings);
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public <T> Set<Bean<T>> getBeans(TypeLiteral<T> type, Annotation... bindings) {
         return (Set) getCurrentManager().getBeans(type.getType(), bindings);
     }
 
+    @SuppressWarnings("deprecation")
     public <T> T getInstanceByType(Class<T> beanType, Annotation... bindings) {
         return OldSPIBridge.getInstanceByType(getCurrentManager(), beanType, bindings);
     }
 
+    @SuppressWarnings("deprecation")
     public <T> T getInstanceByType(TypeLiteral<T> beanType, Annotation... bindings) {
         return OldSPIBridge.getInstanceByType(getCurrentManager(), beanType, bindings);
     }
 
+    @SuppressWarnings("deprecation")
     public Object getInstanceByName(String name) {
         return OldSPIBridge.getInstanceByName(getCurrentManager(), name);
     }

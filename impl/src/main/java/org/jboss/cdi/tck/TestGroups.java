@@ -95,7 +95,7 @@ public final class TestGroups {
     /**
      * Requires basic JMS configuration
      */
-    public static final String JMS = "innerClass";
+    public static final String JMS = "jms";
 
     /**
      * Test support of enums
