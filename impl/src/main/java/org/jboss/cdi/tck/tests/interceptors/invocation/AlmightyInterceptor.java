@@ -20,6 +20,7 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.interceptor.AroundInvoke;
+import javax.interceptor.AroundTimeout;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
@@ -30,11 +31,19 @@ public class AlmightyInterceptor implements Serializable {
 
     public static boolean methodIntercepted = false;
 
+    public static boolean timeoutIntercepted = false;
+
     public static boolean lifecycleCallbackIntercepted = false;
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
         methodIntercepted = true;
+        return ctx.proceed();
+    }
+
+    @AroundTimeout
+    public Object interceptTimeout(InvocationContext ctx) throws Exception {
+        timeoutIntercepted = true;
         return ctx.proceed();
     }
 
