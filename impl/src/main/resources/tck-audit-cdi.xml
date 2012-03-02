@@ -4306,9 +4306,6 @@
             <assertion id="la">
                 <text>Verify message listener methods are intercepted</text>
             </assertion>
-            <assertion id="lb">
-                <text>Verify message listener methods are decorated</text>
-            </assertion>
         </group>
 
         <assertion id="m">

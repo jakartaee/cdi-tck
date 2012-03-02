@@ -137,7 +137,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "7.2", id = "m")
+    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "m"), @SpecAssertion(section = "7.2", id = "g") })
     public void testObjectMethodsAreNotIntercepted() {
 
         AlmightyInterceptor.reset();
