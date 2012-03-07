@@ -24,5 +24,8 @@ import javax.inject.Inject;
  * 
  * @author Pete Muir
  */
+@SuppressWarnings("all")
 public class InjectLiteral extends AnnotationLiteral<Inject> implements Inject {
+
+    public static final Inject INSTANCE = new InjectLiteral();
 }

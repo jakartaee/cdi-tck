@@ -24,6 +24,7 @@ import javax.enterprise.util.AnnotationLiteral;
  * @author pmuir
  * 
  */
+@SuppressWarnings("all")
 public abstract class TargetLiteral extends AnnotationLiteral<Target> implements Target {
 
 }
