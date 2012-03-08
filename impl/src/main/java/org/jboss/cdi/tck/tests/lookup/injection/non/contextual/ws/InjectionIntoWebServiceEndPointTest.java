@@ -34,9 +34,6 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-/**
- * Needs javaee-full profile (use serverConfig property in arquillian.xml).
- */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InjectionIntoWebServiceEndPointTest extends AbstractTest {
 
@@ -59,8 +56,8 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractTest {
     }
 
     @Test
+    @SpecAssertion(section = "3.6.1", id = "ff")
     public void testResourceBeanTypes() {
-
         Bean<SheepWS> sheepWsBean = getBeans(SheepWS.class).iterator().next();
         assert sheepWsBean.getTypes().size() == 2;
     }

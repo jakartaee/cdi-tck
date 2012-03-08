@@ -1074,9 +1074,15 @@
     </section>
 
     <section id="3.3.4" title="Default name for a producer method">
-        <assertion id="a">
+        <group>
             <text>The default name for a producer method is the method name, unless the method follows the JavaBeans property getter naming convention, in which case the default name is the JavaBeans property name</text>
-        </assertion>
+            <assertion id="a">
+                <text>Test default name is the method name.</text>
+            </assertion>
+            <assertion id="b">
+                <text>Test default name is the JavaBeans property name.</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="3.4" title="Producer fields">
@@ -2590,9 +2596,9 @@
     <section id="5.4.1" title="Unproxyable bean types">
 
         <group>
-        
+
             <text>Certain legal bean types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
-            
+
             <assertion id="aa">
                 <text>Test a class which doesn't have a non-private constructor with no parameters.</text>
             </assertion>
@@ -3932,7 +3938,7 @@
         <assertion id="cb">
             <text>The session context is destroyed when the |HTTPSession| times out, ~after all |HttpSessionListener|s have been called, and at the very end of any request in which |invalidate()| was called~, after all filters and |ServletRequestListeners| have been called.</text>
         </assertion>
-        
+
         <assertion id="cd">
             <text>The session context is destroyed ~when the |HTTPSession| times out, after all |HttpSessionListener|s have been called, and~ at the very end of any request in which |invalidate()| was called, ~after all filters and |ServletRequestListeners| have been called.~</text>
         </assertion>
@@ -3940,7 +3946,7 @@
         <assertion id="da">
             <text>An event with the |HttpSessionEvent| as payload and with qualifier |@Initialized(SessionScoped.class)| is fired when the session context is initialized.</text>
         </assertion>
-        
+
         <assertion id="db">
             <text>An event with the |HttpSessionEvent| as payload and with qualifier |@Destroyed(SessionScoped.class)| is fired when the session context is destroyed.</text>
         </assertion>
@@ -4056,7 +4062,7 @@
         <assertion id="ba">
             <text>An event with the |ServletRequestEvent| as the payload and with qualifier |@Initialized(ConversationContext.class)| is fired when the conversation context is initialized.</text>
         </assertion>
-        
+
         <assertion id="bb">
             <text>An event with the |ServletRequestEvent| as the payload and with qualifier |@Destroyed(ConversationContext.class)| when the conversation context is destroyed.</text>
         </assertion>
@@ -5686,9 +5692,9 @@
             <text>A portable extension may obtain a reference to the current container by calling |CDI.current()|.</text>
         </assertion>
 
-         <assertion id="b" testable="false">
-             <text>When |CDI.current()| is called, the first |javax.enterprise.inject.spi.CDIProvider| is loaded, and the |CDIProvider.getCDI()| method called. If no providers are available an IllegalStateException is thrown.</text>
-         </assertion>
+        <assertion id="b" testable="false">
+            <text>When |CDI.current()| is called, the first |javax.enterprise.inject.spi.CDIProvider| is loaded, and the |CDIProvider.getCDI()| method called. If no providers are available an IllegalStateException is thrown.</text>
+        </assertion>
 
         <assertion id="d">
             <text>Java EE components may obtain an instance of |BeanManager| from JNDI by looking up the name |java:comp/BeanManager|.</text>

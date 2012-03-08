@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -26,8 +27,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -42,11 +43,11 @@ import org.testng.annotations.Test;
 public class EjbInjectionTest extends AbstractTest {
 
     @Deployment
-    public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(EjbInjectionTest.class).withBeansXml("beans.xml").build();
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClassPackage(EjbInjectionTest.class).build();
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups = { JAVAEE_FULL, LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "ee"), @SpecAssertion(section = "7.3.6", id = "ld"),
             @SpecAssertion(section = "7.3.6", id = "mg") })
     public void testInjectionOfEjbs() {
@@ -57,7 +58,7 @@ public class EjbInjectionTest extends AbstractTest {
         assert instance.getMyEjb().knockKnock().equals("We're home");
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups = { JAVAEE_FULL, LIFECYCLE })
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "mh") })
     public void testPassivationOfEjbs() throws Exception {
         Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
