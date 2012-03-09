@@ -201,7 +201,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
         assertTrue(attributes.getStereotypes().isEmpty());
         assertEquals(attributes.getScope(), Dependent.class);
         assertEquals(attributes.getName(), "volume");
-        assertTrue(attributes.isAlternative());
+        assertFalse(attributes.isAlternative());
         assertFalse(attributes.isNullable());
     }
 

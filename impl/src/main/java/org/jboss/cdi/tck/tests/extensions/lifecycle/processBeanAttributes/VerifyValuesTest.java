@@ -162,7 +162,7 @@ public class VerifyValuesTest extends AbstractTest {
         assertNotNull(attributes);
         assertEquals(RequestScoped.class, attributes.getScope());
         verifyName(attributes, "createBravo");
-        assertTrue(attributes.isAlternative()); // because bravo producer is
+        assertTrue(attributes.isAlternative());
         assertTrue(attributes.isNullable());
 
         assertTrue(typeSetMatches(attributes.getTypes(), BravoInterface.class, Object.class));
@@ -189,7 +189,7 @@ public class VerifyValuesTest extends AbstractTest {
         assertNotNull(attributes);
         assertEquals(ApplicationScoped.class, attributes.getScope());
         verifyName(attributes, "charlie");
-        assertTrue(attributes.isAlternative()); // because charlie producer is
+        assertFalse(attributes.isAlternative());
         assertTrue(attributes.isNullable());
 
         assertTrue(typeSetMatches(attributes.getTypes(), Object.class, Charlie.class, CharlieInterface.class));
