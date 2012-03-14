@@ -309,9 +309,21 @@ public class DependentContextTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "6.1.1", id = "e") })
     public void testCallingCreationalContextReleaseDestroysDependents() {
         assert getBeans(Farm.class).size() == 1;
+
+        // Unmanaged instance
         Bean<Farm> farmBean = getBeans(Farm.class).iterator().next();
         CreationalContext<Farm> creationalContext = getCurrentManager().createCreationalContext(farmBean);
         Farm farm = farmBean.create(creationalContext);
+        farm.open();
+        Stable.destroyed = false;
+        Horse.destroyed = false;
+        creationalContext.release();
+        assert Stable.destroyed;
+        assert Horse.destroyed;
+
+        // Contextual reference
+        creationalContext = getCurrentManager().createCreationalContext(farmBean);
+        farm = (Farm) getCurrentManager().getReference(farmBean, Farm.class, creationalContext);
         farm.open();
         Stable.destroyed = false;
         Horse.destroyed = false;
