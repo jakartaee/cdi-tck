@@ -59,8 +59,8 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION, LIFECYCLE })
-    @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "aa"), @SpecAssertion(section = "7.3.2", id = "bb"),
-            @SpecAssertion(section = "6.5.3", id = "b"), @SpecAssertion(section = "12.1", id = "bba") })
+    @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "bb"), @SpecAssertion(section = "6.5.3", id = "b"),
+            @SpecAssertion(section = "12.1", id = "bba") })
     public void testCreateSFSB() throws Exception {
         GrossStadt frankfurt = getInstanceByType(GrossStadt.class);
         Bean<KleinStadt> stadtBean = getBeans(KleinStadt.class).iterator().next();

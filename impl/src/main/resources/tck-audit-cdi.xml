@@ -4367,8 +4367,9 @@
     </section>
 
     <section id="7.3.2" title="Lifecycle of stateful session beans">
-        <assertion id="aa">
+        <assertion id="aa" testable="false">
             <text>When the |create()| method of a |Bean| object that represents a stateful session bean that is called, the container creates and returns a container-specific internal local reference to a new session bean instance. The reference must be passivation capable. This reference is not directly exposed to the application.</text>
+            <note>It's not possible to test container-specific internal local reference that is not directly exposed to the application.</note>
         </assertion>
 
         <assertion id="bb">
@@ -4381,9 +4382,10 @@
     </section>
 
     <section id="7.3.3" title="Lifecycle of stateless session and singleton beans">
-        <assertion id="a">
+        <assertion id="a" testable="false">
             <text>When the |create()| method of a Bean object that represents a stateless session or singleton session bean is called, the container
                 creates and returns a container-specific internal local reference to the session bean. This reference is not directly exposed to the application.</text>
+            <note>It's not possible to test container-specific internal local reference that is not directly exposed to the application.</note>
         </assertion>
 
         <assertion id="b">

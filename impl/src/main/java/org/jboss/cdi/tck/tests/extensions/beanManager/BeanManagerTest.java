@@ -234,6 +234,13 @@ public class BeanManagerTest extends AbstractTest {
         assert getCurrentManager().createInjectionTarget(annotatedType) != null;
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    @SpecAssertion(section = "11.3.19", id = "ab")
+    public void testObtainingInjectionTargetWithDefinitionError() {
+        AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(Snake.class);
+        getCurrentManager().createInjectionTarget(annotatedType);
+    }
+
     /**
      * The method BeanManager.getExtension() returns the container's instance of an Extension class declared in
      * META-INF/services, or throws an IllegalArgumentException if the container has no instance of the given class.
