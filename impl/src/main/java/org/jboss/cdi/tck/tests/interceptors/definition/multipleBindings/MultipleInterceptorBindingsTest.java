@@ -36,7 +36,8 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "9.5.1", id = "a"), @SpecAssertion(section = "9.5", id = "ca"),
-            @SpecAssertion(section = "9.2", id = "ab"), @SpecAssertion(section = "9.3", id = "ba") })
+            @SpecAssertion(section = "9.2", id = "ab"), @SpecAssertion(section = "9.3", id = "ba"),
+            @SpecAssertion(section = "2", id = "f") })
     public void testInterceptorAppliedToBeanWithAllBindings() {
         MissileInterceptor.intercepted = false;
 

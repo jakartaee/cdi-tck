@@ -29,6 +29,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -60,7 +61,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.5.2", id = "a")
+    @SpecAssertions({ @SpecAssertion(section = "9.5.2", id = "a"), @SpecAssertion(section = "2", id = "f") })
     public void testInterceptorBindingTypeWithMember() {
         Farm farm = getInstanceByType(Farm.class);
         assert farm.getAnimalCount() == 20;
