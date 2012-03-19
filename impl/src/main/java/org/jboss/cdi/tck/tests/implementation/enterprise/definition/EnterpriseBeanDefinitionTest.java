@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 
@@ -38,6 +39,7 @@ import org.testng.annotations.Test;
  * @author Nicklas Karlsson
  * @author Martin Kouba
  */
+@Test(groups = { INTEGRATION })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EnterpriseBeanDefinitionTest extends AbstractTest {
 
@@ -47,14 +49,14 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
                 .build();
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertion(section = "3.2", id = "b")
     public void testStatelessMustBeDependentScoped() {
         assert getBeans(GiraffeLocal.class).size() == 1;
         assert getBeans(GiraffeLocal.class).iterator().next().getScope().equals(Dependent.class);
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "ab"), @SpecAssertion(section = "5.5.1", id = "ab") })
     public void testConstructorAnnotatedInjectCalled() {
         ExplicitConstructor bean = getInstanceByType(ExplicitConstructor.class);
@@ -62,19 +64,26 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
         assert bean.getInjectedSimpleBean() instanceof SimpleBean;
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = "5.5.1", id = "bb")
+    public void testConstructorWithNoParamsUsed(NoParamConstructorSessionBean noParamConstructorSessionBean) {
+        noParamConstructorSessionBean.ping();
+        assertTrue(NoParamConstructorSessionBean.constructedCorrectly);
+    }
+
+    @Test
     @SpecAssertion(section = "3.2", id = "c")
     public void testSingletonWithDependentScopeOK() {
         assert getBeans(Labrador.class).size() == 1;
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertion(section = "3.2", id = "c")
     public void testSingletonWithApplicationScopeOK() {
         assert getBeans(Laika.class).size() == 1;
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.2.2", id = "aa"), @SpecAssertion(section = "3.2.3", id = "c") })
     public void testBeanTypesAreLocalInterfacesWithoutWildcardTypesOrTypeVariablesWithSuperInterfaces() {
         Bean<DogLocal> dogBean = getBeans(DogLocal.class).iterator().next();
@@ -83,14 +92,14 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
         assert !dogBean.getTypes().contains(Pitbull.class);
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertion(section = "3.2.2", id = "ba")
     public void testEnterpriseBeanClassLocalView() {
         Bean<Retriever> dogBean = getUniqueBean(Retriever.class);
         assert dogBean.getTypes().contains(Retriever.class);
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.2.2", id = "c"), @SpecAssertion(section = "3.2.3", id = "aa"),
             @SpecAssertion(section = "2.2", id = "l") })
     public void testObjectIsInAPITypes() {
@@ -98,28 +107,28 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
         assert getBeans(GiraffeLocal.class).iterator().next().getTypes().contains(Object.class);
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertion(section = "3.2.2", id = "d")
     public void testRemoteInterfacesAreNotInAPITypes() {
         Bean<DogLocal> dogBean = getBeans(DogLocal.class).iterator().next();
         assert !dogBean.getTypes().contains(DogRemote.class);
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.2.3", id = "ba"), @SpecAssertion(section = "3.2", id = "e") })
     public void testBeanWithScopeAnnotation() {
         Bean<LionLocal> lionBean = getBeans(LionLocal.class).iterator().next();
         assert lionBean.getScope().equals(RequestScoped.class);
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertion(section = "3.2.3", id = "bb")
     public void testBeanWithNamedAnnotation() {
         Bean<MonkeyLocal> monkeyBean = getBeans(MonkeyLocal.class).iterator().next();
         assert monkeyBean.getName().equals("Monkey");
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertion(section = "3.2.3", id = "bd")
     public void testBeanWithStereotype() {
         Bean<PolarBearLocal> polarBearBean = getBeans(PolarBearLocal.class).iterator().next();
@@ -127,7 +136,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
         assert polarBearBean.getName().equals("polarBear");
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertion(section = "3.2.3", id = "be")
     public void testBeanWithQualifiers() {
         Annotation tame = new AnnotationLiteral<Tame>() {
@@ -136,7 +145,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
         assert apeBean.getQualifiers().contains(tame);
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertion(section = "3.2.5", id = "a")
     public void testDefaultName() {
         assert getBeans(PitbullLocal.class).size() == 1;
