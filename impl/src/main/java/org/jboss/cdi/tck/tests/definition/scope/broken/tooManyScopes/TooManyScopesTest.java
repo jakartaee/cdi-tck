@@ -24,6 +24,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -37,7 +38,7 @@ public class TooManyScopesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.4.3", id = "ba")
+    @SpecAssertions({ @SpecAssertion(section = "2.4.3", id = "ba"), @SpecAssertion(section = "2.8", id = "ba") })
     public void testTooManyScopesSpecifiedInJava() {
     }
 

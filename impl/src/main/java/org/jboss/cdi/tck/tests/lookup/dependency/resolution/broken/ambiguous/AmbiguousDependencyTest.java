@@ -24,6 +24,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -37,7 +38,8 @@ public class AmbiguousDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.1", id = "ab")
+    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "2.8", id = "c"),
+            @SpecAssertion(section = "2.8", id = "ca") })
     public void testAmbiguousDependency() {
     }
 

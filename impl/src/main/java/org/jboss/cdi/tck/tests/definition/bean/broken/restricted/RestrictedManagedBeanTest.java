@@ -24,6 +24,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -42,7 +43,7 @@ public class RestrictedManagedBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.2", id = "j")
+    @SpecAssertions({ @SpecAssertion(section = "2.2.2", id = "j"), @SpecAssertion(section = "2.8", id = "ba") })
     public void testInvalidTypedValueOnManagedBean() {
     }
 
