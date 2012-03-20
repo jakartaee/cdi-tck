@@ -19,6 +19,9 @@ package org.jboss.cdi.tck.tests.context.application;
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.SERVLET;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
 
@@ -98,13 +101,13 @@ public class ApplicationContextTest extends AbstractTest {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
         TextPage firstRequestResult = webClient.getPage(contextPath + "IntrospectApplication");
-        assert firstRequestResult.getContent() != null;
-        assert Double.parseDouble(firstRequestResult.getContent()) != 0;
+        assertNotNull(firstRequestResult.getContent());
+        assertTrue(Double.parseDouble(firstRequestResult.getContent()) != 0);
         // Make a second request and make sure the same context is used
         TextPage secondRequestResult = webClient.getPage(contextPath + "IntrospectApplication");
-        assert secondRequestResult.getContent() != null;
+        assertNotNull(secondRequestResult.getContent());
         // should be same random number
-        assert Double.parseDouble(secondRequestResult.getContent()) == Double.parseDouble(firstRequestResult.getContent());
+        assertEquals(Double.parseDouble(secondRequestResult.getContent()), Double.parseDouble(firstRequestResult.getContent()));
     }
 
     /**
@@ -118,13 +121,13 @@ public class ApplicationContextTest extends AbstractTest {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
         TextPage firstRequestResult = webClient.getPage(contextPath + "jaxrs/application-id");
-        assert firstRequestResult.getContent() != null;
-        assert Double.parseDouble(firstRequestResult.getContent()) != 0;
+        assertNotNull(firstRequestResult.getContent());
+        assertTrue(Double.parseDouble(firstRequestResult.getContent()) != 0);
         // Make a second request and make sure the same context is used
         TextPage secondRequestResult = webClient.getPage(contextPath + "jaxrs/application-id");
-        assert secondRequestResult.getContent() != null;
+        assertNotNull(secondRequestResult.getContent());
         // should be same random number
-        assert Double.parseDouble(secondRequestResult.getContent()) == Double.parseDouble(firstRequestResult.getContent());
+        assertEquals(Double.parseDouble(secondRequestResult.getContent()), Double.parseDouble(firstRequestResult.getContent()));
     }
 
 }

@@ -1,289 +1,266 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-   <parent>
-      <artifactId>cdi-tck-parent</artifactId>
-      <groupId>org.jboss.cdi.tck</groupId>
-      <version>1.1.0-SNAPSHOT</version>
-   </parent>
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>org.jboss.cdi.tck</groupId>
-   <artifactId>cdi-tck-impl</artifactId>
-   <name>CDI TCK tests</name>
+    <parent>
+        <artifactId>cdi-tck-parent</artifactId>
+        <groupId>org.jboss.cdi.tck</groupId>
+        <version>1.1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jboss.cdi.tck</groupId>
+    <artifactId>cdi-tck-impl</artifactId>
+    <name>CDI TCK tests</name>
 
-   <description>CDI TCK tests</description>
+    <description>CDI TCK tests</description>
 
-   <dependencies>
+    <dependencies>
 
-      <dependency>
-         <groupId>javax.enterprise</groupId>
-         <artifactId>cdi-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>org.jboss.cdi.tck</groupId>
-         <artifactId>cdi-tck-api</artifactId>
-      </dependency>
-      
-       <dependency>
-		   <groupId>org.jboss.arquillian.testng</groupId>
-		   <artifactId>arquillian-testng-container</artifactId>
-		   <!-- Exclude this version of API -->
-		   <exclusions>
-		   <exclusion>
-	          <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-	          <artifactId>shrinkwrap-descriptors-api</artifactId>
-        	</exclusion>
-	        <exclusion>
-	          <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-	          <artifactId>shrinkwrap-descriptors-spi</artifactId>
-	        </exclusion>
-		   </exclusions>
-		</dependency>
-		
-		<!-- We use 1.2.x version of API to avoid problematic migration -->
-		<dependency>
-			<groupId>org.jboss.shrinkwrap.descriptors</groupId>
-			<artifactId>shrinkwrap-descriptors-impl-jboss</artifactId>
-			<version>1.2.0-alpha-1</version>
-		</dependency>
+        <dependency>
+            <groupId>org.jboss.cdi.tck</groupId>
+            <artifactId>cdi-tck-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>org.testng</groupId>
-         <artifactId>testng</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.testng</groupId>
+            <artifactId>arquillian-testng-container</artifactId>
+            <!-- Exclude this version of API -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                    <artifactId>shrinkwrap-descriptors-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                    <artifactId>shrinkwrap-descriptors-spi</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.servlet</groupId>
-         <artifactId>servlet-api</artifactId>
-      </dependency>
+        <!-- We use 1.2.x version of API to avoid problematic migration -->
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+            <artifactId>shrinkwrap-descriptors-impl-jboss</artifactId>
+            <version>1.2.0-alpha-1</version>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.servlet.jsp</groupId>
-         <artifactId>jsp-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.transaction</groupId>
-         <artifactId>jta</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.validation</groupId>
-         <artifactId>validation-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>org.jboss.test-audit</groupId>
-         <artifactId>jboss-test-audit-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>org.jboss.ejb3</groupId>
-         <artifactId>jboss-ejb3-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>org.jboss.spec.javax.interceptor</groupId>
-         <artifactId>jboss-interceptors-api_1.1_spec</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>org.jboss.test-audit</groupId>
+            <artifactId>jboss-test-audit-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.annotation</groupId>
-         <artifactId>jsr250-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>org.jboss.ejb3</groupId>
+            <artifactId>jboss-ejb3-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.jws</groupId>
-         <artifactId>jsr181-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>org.jboss.spec.javax.interceptor</groupId>
+            <artifactId>jboss-interceptors-api_1.1_spec</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.el</groupId>
-         <artifactId>el-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.faces</groupId>
-         <artifactId>jsf-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.jws</groupId>
+            <artifactId>jsr181-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.inject</groupId>
-         <artifactId>javax.inject</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>el-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>javax.persistence</groupId>
-         <artifactId>persistence-api</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>commons-httpclient</groupId>
-         <artifactId>commons-httpclient</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
 
-      <dependency>
-         <groupId>net.sourceforge.htmlunit</groupId>
-         <artifactId>htmlunit</artifactId>
-      </dependency>
-      
-      <dependency>
-         <groupId>org.jboss.resteasy</groupId>
-         <artifactId>jaxrs-api</artifactId>
-      </dependency>			
-      
-   </dependencies>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+        </dependency>
 
-   <build>
-      <defaultGoal>install</defaultGoal>
-      <plugins>
-         <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <executions>
-               <execution>
-                  <id>attach-artifacts</id>
-                  <phase>package</phase>
-                  <goals>
-                     <goal>attach-artifact</goal>
-                  </goals>
-                  <configuration>
-                     <artifacts>
-                        <artifact>
-                           <file>${basedir}/src/main/resources/tck-tests.xml</file>
-                           <type>xml</type>
-                           <classifier>suite</classifier>
-                        </artifact>
-                        <artifact>
-                           <file>${basedir}/src/main/resources/tck-audit-mb.xml</file>
-                           <type>xml</type>
-                           <classifier>audit-mb</classifier>
-                        </artifact>
-                        <artifact>
-                           <file>${basedir}/src/main/resources/tck-audit-cdi.xml</file>
-                           <type>xml</type>
-                           <classifier>audit-cdi</classifier>
-                        </artifact>
-                        <artifact>
-                           <file>${basedir}/src/main/resources/tck-audit-int.xml</file>
-                           <type>xml</type>
-                           <classifier>audit-int</classifier>
-                        </artifact>
-                        <artifact>
-                           <file>${basedir}/src/main/resources/cdi-api.sig</file>
-                           <type>sig</type>
-                           <classifier>sigtest</classifier>
-                        </artifact>
-                     </artifacts>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-         <!-- TODO do we really need this plugin? -->
-         <!-- plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-               <execution>
-                  <id>copy-in-container-dependencies</id>
-                  <goals>
-                     <goal>copy</goal>
-                  </goals>
-                  <configuration>
-                     <outputDirectory>${project.build.outputDirectory}/lib</outputDirectory>
-                     <stripVersion>true</stripVersion>
-                     <artifactItems>
-                        <artifactItem>
-                           <groupId>org.jboss.test-harness</groupId>
-                           <artifactId>jboss-test-harness</artifactId>
-                           <overWrite>true</overWrite>
-                        </artifactItem>
-                     </artifactItems>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin-->
-      </plugins>
-   </build>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+        </dependency>
 
-   <profiles>
-      <profile>
-         <id>tck-audit</id>
-         <activation>
-            <jdk>1.6</jdk>
-         </activation>
-         <dependencies>
-            <dependency>
-               <groupId>org.jboss.test-audit</groupId>
-               <artifactId>jboss-test-audit-impl</artifactId>
-            </dependency>
-         </dependencies>
-         <build>
-            <plugins>
-               <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-compiler-plugin</artifactId>
-                  <configuration>
-                     <source>1.6</source>
-                     <target>1.6</target>
-                     <!-- this is a really ugly workaround for passing multiple arguments to 
-                          the annotation processor tool, see MCOMPILER-75 and MCOMPILER-135 for more details -->
-                     <compilerArguments>                     
-                        <Aapt.flag1>-AoutputDir=${basedir}/../target/</Aapt.flag1>
-                     </compilerArguments>
-                     <compilerArgument>-AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml</compilerArgument>
-                  </configuration>
-               </plugin>
-               <plugin>
-                  <groupId>org.codehaus.mojo</groupId>
-                  <artifactId>build-helper-maven-plugin</artifactId>
-                  <executions>
-                     <execution>
-                        <id>attach-report-artifacts</id>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>jaxrs-api</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
                         <phase>package</phase>
                         <goals>
-                           <goal>attach-artifact</goal>
+                            <goal>attach-artifact</goal>
                         </goals>
                         <configuration>
-                           <artifacts>
-                              <artifact>
-                                 <file>../target/coverage-cdi.html</file>
-                                 <type>html</type>
-                                 <classifier>coverage-cdi</classifier>
-                              </artifact>
-                              <artifact>
-                                 <file>../target/coverage-mb.html</file>
-                                 <type>html</type>
-                                 <classifier>coverage-mb</classifier>
-                              </artifact>
-                              <artifact>
-                                 <file>../target/coverage-int.html</file>
-                                 <type>html</type>
-                                 <classifier>coverage-int</classifier>
-                              </artifact>
-                           </artifacts>
+                            <artifacts>
+                                <artifact>
+                                    <file>${basedir}/src/main/resources/tck-tests.xml</file>
+                                    <type>xml</type>
+                                    <classifier>suite</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${basedir}/src/main/resources/tck-audit-mb.xml</file>
+                                    <type>xml</type>
+                                    <classifier>audit-mb</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${basedir}/src/main/resources/tck-audit-cdi.xml</file>
+                                    <type>xml</type>
+                                    <classifier>audit-cdi</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${basedir}/src/main/resources/tck-audit-int.xml</file>
+                                    <type>xml</type>
+                                    <classifier>audit-int</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${basedir}/src/main/resources/cdi-api.sig</file>
+                                    <type>sig</type>
+                                    <classifier>sigtest</classifier>
+                                </artifact>
+                            </artifacts>
                         </configuration>
-                     </execution>
-                  </executions>
-               </plugin>
-            </plugins>
-         </build>
-      </profile>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- TODO do we really need this plugin? -->
+            <!-- plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> <executions> <execution> <id>copy-in-container-dependencies</id> <goals> <goal>copy</goal> </goals> <configuration> <outputDirectory>${project.build.outputDirectory}/lib</outputDirectory> <stripVersion>true</stripVersion> <artifactItems> <artifactItem> <groupId>org.jboss.test-harness</groupId> <artifactId>jboss-test-harness</artifactId> <overWrite>true</overWrite> </artifactItem> </artifactItems> </configuration> </execution> </executions> </plugin -->
+        </plugins>
+    </build>
 
-      <!-- Not sure if jdk 1.5 is still relevant  -->
-      <profile>
-         <id>javax.xml.ws</id>
-         <activation>
-            <jdk>1.5</jdk>
-         </activation>
-         <dependencies>
-            <dependency>
-               <groupId>javax.xml.ws</groupId>
-               <artifactId>jaxws-api</artifactId>
-            </dependency>
-         </dependencies>
-      </profile>
-      
-   </profiles>
+    <profiles>
+        <profile>
+            <id>tck-audit</id>
+            <activation>
+                <jdk>1.6</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.test-audit</groupId>
+                    <artifactId>jboss-test-audit-impl</artifactId>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>1.6</source>
+                            <target>1.6</target>
+                            <!-- this is a really ugly workaround for passing multiple arguments to the annotation processor tool, see MCOMPILER-75 and MCOMPILER-135 for more details -->
+                            <compilerArguments>
+                                <Aapt.flag1>-AoutputDir=${basedir}/../target/</Aapt.flag1>
+                            </compilerArguments>
+                            <compilerArgument>-AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml</compilerArgument>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-report-artifacts</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>../target/coverage-cdi.html</file>
+                                            <type>html</type>
+                                            <classifier>coverage-cdi</classifier>
+                                        </artifact>
+                                        <artifact>
+                                            <file>../target/coverage-mb.html</file>
+                                            <type>html</type>
+                                            <classifier>coverage-mb</classifier>
+                                        </artifact>
+                                        <artifact>
+                                            <file>../target/coverage-int.html</file>
+                                            <type>html</type>
+                                            <classifier>coverage-int</classifier>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Not sure if jdk 1.5 is still relevant -->
+        <profile>
+            <id>javax.xml.ws</id>
+            <activation>
+                <jdk>1.5</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>javax.xml.ws</groupId>
+                    <artifactId>jaxws-api</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+
+    </profiles>
 
 </project>

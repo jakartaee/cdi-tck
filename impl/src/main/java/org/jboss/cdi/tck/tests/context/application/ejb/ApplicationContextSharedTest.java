@@ -18,14 +18,23 @@ package org.jboss.cdi.tck.tests.context.application.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.util.concurrent.Future;
+
+import javax.ejb.EJB;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.Timer;
 import org.jboss.cdi.tck.Timer.StopCondition;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.cdi.tck.tests.context.request.ejb.BarBean;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -38,6 +47,9 @@ import org.testng.annotations.Test;
 @Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextSharedTest extends AbstractTest {
+
+    @EJB
+    BarBean bar;
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
@@ -65,7 +77,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
             }
         }, true).start();
 
-        assert flightManagementSystem.isSameBean();
+        assertTrue(flightManagementSystem.isSameBean());
     }
 
     @Test(groups = { CONTEXTS })
@@ -80,7 +92,16 @@ public class ApplicationContextSharedTest extends AbstractTest {
             }
         }).start();
 
-        assert flightManagementSystem.isApplicationScopeActive();
+        assertTrue(flightManagementSystem.isApplicationScopeActive());
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { CONTEXTS })
+    @SpecAssertions({ @SpecAssertion(section = "6.7.3", id = "db") })
+    public void testApplicationScopeActiveDuringAsyncCallToEjb(SimpleApplicationBean simpleApplicationBean) throws Exception {
+        Future<Double> result = bar.compute();
+        Double id = result.get();
+        assertNotEquals(id, -1.00);
+        assertEquals(id, simpleApplicationBean.getId());
     }
 
 }
