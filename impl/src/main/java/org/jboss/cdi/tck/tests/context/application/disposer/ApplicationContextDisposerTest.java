@@ -28,6 +28,7 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.SimpleLogger;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -40,6 +41,8 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextDisposerTest extends AbstractTest {
 
+    private static final SimpleLogger logger = new SimpleLogger(ApplicationContextDisposerTest.class);
+
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ApplicationContextDisposerTest.class).build();
@@ -51,7 +54,7 @@ public class ApplicationContextDisposerTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "6.7.3", id = "dg")
     public void testApplicationContextActiveDuringDispose() {
-        System.out.println("Injected forest: " + forest.toString());
+        logger.log("Injected forest: {0}", forest.toString());
         @SuppressWarnings("serial")
         Bean<Mushroom> bean = getUniqueBean(Mushroom.class, new AnnotationLiteral<Edible>() {
         });

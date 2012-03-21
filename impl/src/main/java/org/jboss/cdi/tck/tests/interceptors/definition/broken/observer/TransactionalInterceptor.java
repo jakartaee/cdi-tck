@@ -21,9 +21,13 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 @Transactional
 @Interceptor
 public class TransactionalInterceptor {
+
+    private static final SimpleLogger logger = new SimpleLogger(TransactionalInterceptor.class);
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
@@ -31,6 +35,6 @@ public class TransactionalInterceptor {
     }
 
     public void observeFoo(@Observes FooPayload fooPayload) {
-        System.out.println("OBSERVED");
+        logger.log("OBSERVED");
     }
 }

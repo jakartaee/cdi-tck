@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.SimpleLogger;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -21,6 +22,8 @@ import org.testng.annotations.Test;
 @Test(groups = { INTEGRATION })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class TransactionalObserverTest extends AbstractTest {
+
+    private static final SimpleLogger logger = new SimpleLogger(TransactionalObserverTest.class);
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -85,7 +88,7 @@ public class TransactionalObserverTest extends AbstractTest {
     }
 
     private void logTestMethod(String methodName) {
-        System.out.println(methodName);
+        logger.log(methodName);
     }
 
 }

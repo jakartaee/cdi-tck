@@ -20,9 +20,13 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 public class BarExtension implements Extension {
 
+    private static final SimpleLogger logger = new SimpleLogger(BarExtension.class);
+
     public void beforeBeanDiscovery(@Observes BeforeBeanDiscovery event) {
-        System.out.println("bar");
+        logger.log("bar");
     }
 }

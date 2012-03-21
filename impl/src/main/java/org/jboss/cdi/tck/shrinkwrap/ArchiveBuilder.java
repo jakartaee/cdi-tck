@@ -28,6 +28,8 @@ import javax.enterprise.inject.spi.Extension;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.SimpleLogger;
+import org.jboss.cdi.tck.Timer;
 import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.impl.ConfigurationImpl;
@@ -625,6 +627,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             if (!isAsClientMode()) {
                 withPackage(AbstractTest.class.getPackage());
             }
+            // Timer and SimpleLogger
+            withClasses(Timer.class, SimpleLogger.class);
         }
         return buildInternal();
     }

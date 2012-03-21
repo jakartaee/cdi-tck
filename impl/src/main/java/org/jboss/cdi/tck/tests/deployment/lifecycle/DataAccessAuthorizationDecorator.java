@@ -20,8 +20,13 @@ import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 @Decorator
 public class DataAccessAuthorizationDecorator implements DataAccess {
+
+    private static final SimpleLogger logger = new SimpleLogger(DataAccessAuthorizationDecorator.class);
+
     @Inject
     @Delegate
     DataAccess delegate;
@@ -43,9 +48,9 @@ public class DataAccessAuthorizationDecorator implements DataAccess {
         Object id = delegate.getId();
         Class<?> type = delegate.getDataType();
         if (user.hasPermission(action, type, id)) {
-            System.out.println("Authorized for " + action);
+            logger.log("Authorized for " + action);
         } else {
-            System.out.println("Not authorized for " + action);
+            logger.log("Not authorized for " + action);
             throw new NotAuthorizedException(action);
         }
     }

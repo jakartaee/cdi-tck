@@ -22,8 +22,12 @@ import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.servlet.ServletContextEvent;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 @ApplicationScoped
 public class Observer1 {
+
+    private static final SimpleLogger logger = new SimpleLogger(Observer1.class);
 
     private boolean observed;
 
@@ -39,6 +43,6 @@ public class Observer1 {
     }
 
     void observeDestroyedServletContext(@Observes @Destroyed(ApplicationScoped.class) ServletContextEvent event) {
-        System.out.println("ServletContext destroyed"); // this is tricky to test properly
+        logger.log("ServletContext destroyed"); // this is tricky to test properly
     }
 }

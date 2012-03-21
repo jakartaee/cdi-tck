@@ -17,14 +17,18 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 /**
  * @author Martin Kouba
  * 
  */
 public class Leaf<T extends Tree> {
 
+    private static final SimpleLogger logger = new SimpleLogger(Leaf.class);
+
     public void ping() {
-        System.out.println("leaf ping " + this.getClass().hashCode());
+        logger.log("leaf ping " + this.getClass().hashCode());
     }
 
 }

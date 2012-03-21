@@ -21,10 +21,14 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 /**
  * @author Martin Kouba
  */
 public class Mushroomer {
+
+    private static final SimpleLogger logger = new SimpleLogger(Mushroomer.class);
 
     private final long id = System.currentTimeMillis();
 
@@ -36,7 +40,7 @@ public class Mushroomer {
     }
 
     public void eatMushroom(@Disposes @Edible Mushroom mushroom, Forest forest) {
-        System.out.println("Dispose mushroom - " + this.toString());
+        logger.log("Dispose mushroom - {0}", this.toString());
         forest.setEmpty();
     }
 

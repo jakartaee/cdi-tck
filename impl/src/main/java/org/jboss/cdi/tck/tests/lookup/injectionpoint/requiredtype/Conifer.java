@@ -17,14 +17,18 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 /**
  * @author Martin Kouba
  */
 public abstract class Conifer implements Tree {
 
+    private static final SimpleLogger logger = new SimpleLogger(Conifer.class);
+
     @Override
     public void ping() {
-        System.out.println("tree ping " + this.getClass().hashCode());
+        logger.log("tree ping " + this.getClass().hashCode());
     }
 
     public final void stand() {

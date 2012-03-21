@@ -19,10 +19,14 @@ package org.jboss.cdi.tck.tests.context.application.async;
 
 import javax.servlet.AsyncContext;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 /**
  * @author Martin Kouba
  */
 public class AsyncRequestProcessor implements Runnable {
+
+    private static final SimpleLogger logger = new SimpleLogger(AsyncRequestProcessor.class);
 
     private final AsyncContext actx;
 
@@ -66,7 +70,7 @@ public class AsyncRequestProcessor implements Runnable {
         } else {
             actx.complete();
         }
-        System.out.println("async processing finished");
+        logger.log("Async processing finished");
     }
 
 }

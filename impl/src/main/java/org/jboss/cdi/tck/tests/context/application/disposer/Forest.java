@@ -19,11 +19,15 @@ package org.jboss.cdi.tck.tests.context.application.disposer;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 /**
  * @author Martin Kouba
  */
 @ApplicationScoped
 public class Forest {
+
+    private static final SimpleLogger logger = new SimpleLogger(Forest.class);
 
     private final long id = System.currentTimeMillis();
 
@@ -31,7 +35,7 @@ public class Forest {
 
     public void setEmpty() {
         empty = true;
-        System.out.println("Set empty - " + this.toString());
+        logger.log("Set empty - {0}", this.toString());
     }
 
     public boolean isEmpty() {

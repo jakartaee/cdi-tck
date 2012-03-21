@@ -27,6 +27,8 @@ import javax.servlet.AsyncListener;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 /**
  * @author Martin Kouba
  */
@@ -38,6 +40,8 @@ public class SimpleAsyncListener implements AsyncListener {
     public static Long onComplete = null;
     public static boolean isApplicationContextActive = false;
     public static boolean isSimpleApplicationBeanAvailable = false;
+
+    private static final SimpleLogger logger = new SimpleLogger(SimpleAsyncListener.class);
 
     @Inject
     SimpleApplicationBean simpleApplicationBean;
@@ -52,7 +56,7 @@ public class SimpleAsyncListener implements AsyncListener {
      */
     @Override
     public void onComplete(AsyncEvent event) throws IOException {
-        System.out.println("onComplete");
+        logger.log("onComplete");
         onComplete = System.currentTimeMillis();
 
         if (onTimeout == null && onError == null) {
@@ -69,7 +73,7 @@ public class SimpleAsyncListener implements AsyncListener {
      */
     @Override
     public void onTimeout(AsyncEvent event) throws IOException {
-        System.out.println("onTimeout");
+        logger.log("onTimeout");
         onTimeout = System.currentTimeMillis();
         checkApplicationContextAvailability(event);
         writeInfo(event.getSuppliedResponse());
@@ -83,7 +87,7 @@ public class SimpleAsyncListener implements AsyncListener {
      */
     @Override
     public void onError(AsyncEvent event) throws IOException {
-        System.out.println("onError");
+        logger.log("onError");
         onError = System.currentTimeMillis();
         if (checkApplicationContextAvailability(event)) {
             event.getAsyncContext().complete();
@@ -98,7 +102,7 @@ public class SimpleAsyncListener implements AsyncListener {
      */
     @Override
     public void onStartAsync(AsyncEvent event) throws IOException {
-        System.out.println("onStartAsync");
+        logger.log("onStartAsync");
         onStartAsync = System.currentTimeMillis();
         checkApplicationContextAvailability(event);
     }
@@ -108,7 +112,7 @@ public class SimpleAsyncListener implements AsyncListener {
             isSimpleApplicationBeanAvailable = simpleApplicationBean.ping();
             isApplicationContextActive = beanManager.getContext(ApplicationScoped.class).isActive();
         } catch (Throwable e) {
-            System.out.println("Problem while checking application scope: " + e.getMessage());
+            logger.log("Problem while checking application scope: " + e.getMessage());
         }
         if (!isApplicationContextActive || !isSimpleApplicationBeanAvailable) {
             ((HttpServletResponse) event.getSuppliedResponse()).setStatus(500);

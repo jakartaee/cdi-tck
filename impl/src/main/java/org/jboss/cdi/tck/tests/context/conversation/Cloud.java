@@ -25,6 +25,8 @@ import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 @Named
 @Default
 @ConversationScoped
@@ -33,6 +35,8 @@ public class Cloud implements Serializable {
 	 * 
 	 */
     private static final long serialVersionUID = 5765109971012677278L;
+
+    private static final SimpleLogger logger = new SimpleLogger(Cloud.class);
 
     public static final String NAME = Cloud.class.getName() + ".Pete";
 
@@ -68,7 +72,7 @@ public class Cloud implements Serializable {
 
     public void rain() {
         rained = true;
-        System.out.println("rain!");
+        logger.log("rain!");
     }
 
     public boolean isRained() {

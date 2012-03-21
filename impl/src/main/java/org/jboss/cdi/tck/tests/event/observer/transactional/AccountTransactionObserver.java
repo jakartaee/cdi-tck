@@ -3,6 +3,7 @@ package org.jboss.cdi.tck.tests.event.observer.transactional;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.TransactionPhase;
 
+import org.jboss.cdi.tck.SimpleLogger;
 import org.jboss.cdi.tck.Timer;
 
 /**
@@ -10,6 +11,8 @@ import org.jboss.cdi.tck.Timer;
  * @author Martin Kouba
  */
 public class AccountTransactionObserver {
+
+    private static final SimpleLogger logger = new SimpleLogger(AccountTransactionObserver.class);
 
     public static long beforeCompletionObservedTime = 0l;
     public static long afterCompletionObservedTime = 0l;
@@ -83,7 +86,7 @@ public class AccountTransactionObserver {
     }
 
     private void logEventFired(TransactionPhase phase) {
-        System.out.println(phase);
+        logger.log(phase.toString());
     }
 
     public static void reset() {

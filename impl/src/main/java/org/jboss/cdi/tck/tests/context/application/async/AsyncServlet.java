@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.cdi.tck.SimpleLogger;
+
 @WebServlet(name = "AsyncServlet", urlPatterns = { "/AsyncServlet" }, asyncSupported = true)
 @SuppressWarnings("serial")
 public class AsyncServlet extends HttpServlet {
@@ -37,6 +39,8 @@ public class AsyncServlet extends HttpServlet {
     public static final String TEST_ERROR = "error";
     public static final String TEST_LOOP = "loop";
     private static final String[] VALID_TESTS = new String[] { TEST_TIMEOUT, TEST_COMPLETE, TEST_ERROR, TEST_LOOP };
+
+    private static final SimpleLogger logger = new SimpleLogger(AsyncServlet.class);
 
     private static final long TIMEOUT = 200l;
 
@@ -78,6 +82,6 @@ public class AsyncServlet extends HttpServlet {
                 inLoop = true;
             }
         }
-        System.out.println("Service finished [" + test + "]");
+        logger.log("Service finished: {0}", test);
     }
 }
