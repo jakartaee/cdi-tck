@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -54,7 +55,7 @@ public class DisposerMethodInheritanceTest extends AbstractTest {
         assertEquals(Apple.disposedBy.get(0), AppleTree.class);
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "4.2", id = "de"), @SpecAssertion(section = "4.2", id = "dk") })
     public void testSessionBeanDisposerMethodNotInherited() {
         Bean<Egg> bean = getUniqueBean(Egg.class);
