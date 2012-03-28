@@ -39,6 +39,18 @@ class Listener {
         objectsFired.add(b);
     }
 
+    public void registerArrayOfSongs(@Observes Song[] songs) {
+        objectsFired.add(songs);
+    }
+
+    public void registerArrayOfNumbers(@Observes Integer[] integers) {
+        objectsFired.add(integers);
+    }
+
+    public void registerArrayOfNumberPrimitives(@Observes int[] integers) {
+        objectsFired.add(integers);
+    }
+
     public List<Object> getObjectsFired() {
         return objectsFired;
     }
