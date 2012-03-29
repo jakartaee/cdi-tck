@@ -16,17 +16,22 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws;
 
-import javax.enterprise.inject.Produces;
-import javax.xml.ws.WebServiceRef;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class SheepWSProducer {
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    @Black
-    @Produces
-    // Not possible right now
-    // See ARQ-540
-    // @WebServiceRef(value = SheepWSEndPointService.class, wsdlLocation = "http://localhost:8080/test/TestWebService?wsdl")
-    @WebServiceRef
-    public SheepWS sheepWS;
+import javax.inject.Qualifier;
+
+@Qualifier
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
+@Retention(RUNTIME)
+@Documented
+public @interface Black {
 
 }

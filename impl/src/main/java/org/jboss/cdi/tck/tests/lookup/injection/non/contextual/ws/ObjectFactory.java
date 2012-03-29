@@ -25,6 +25,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    public static final String TARGET_NS = "http://ws.contextual.non.injection.lookup.tests.tck.cdi.jboss.org/";
+
     private final static QName _IsSheepInjected_QNAME = new QName(
             "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "isSheepInjected");
     private final static QName _IsSheepInjectedResponse_QNAME = new QName(
@@ -41,12 +43,12 @@ public class ObjectFactory {
         return new IsSheepInjectedResponse();
     }
 
-    @XmlElementDecl(namespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", name = "isSheepInjected")
+    @XmlElementDecl(namespace = TARGET_NS, name = "isSheepInjected")
     public JAXBElement<IsSheepInjected> createIsSheepInjected(IsSheepInjected value) {
         return new JAXBElement<IsSheepInjected>(_IsSheepInjected_QNAME, IsSheepInjected.class, null, value);
     }
 
-    @XmlElementDecl(namespace = "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", name = "isSheepInjectedResponse")
+    @XmlElementDecl(namespace = TARGET_NS, name = "isSheepInjectedResponse")
     public JAXBElement<IsSheepInjectedResponse> createIsSheepInjectedResponse(IsSheepInjectedResponse value) {
         return new JAXBElement<IsSheepInjectedResponse>(_IsSheepInjectedResponse_QNAME, IsSheepInjectedResponse.class, null,
                 value);

@@ -21,8 +21,10 @@ import javax.jws.WebService;
 
 @WebService(endpointInterface = "org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws.SheepWS", serviceName = "SheepWS")
 public class SheepWSEndPoint implements SheepWS {
+
     @Inject
     private Sheep sheep;
+
     private boolean initializerCalled = false;
 
     @Inject

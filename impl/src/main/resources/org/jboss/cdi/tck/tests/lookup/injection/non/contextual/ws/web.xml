@@ -5,12 +5,12 @@
 	<display-name>Dependency Injection Test</display-name>
 
 	<servlet>
-		<servlet-name>org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws.SheepWSEndPoint</servlet-name>
+		<servlet-name>SheepWSEndPoint</servlet-name>
 		<servlet-class>org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws.SheepWSEndPoint</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws.SheepWSEndPoint</servlet-name>
+		<servlet-name>SheepWSEndPoint</servlet-name>
 		<url-pattern>/TestWebService</url-pattern>
 	</servlet-mapping>
 	<session-config>

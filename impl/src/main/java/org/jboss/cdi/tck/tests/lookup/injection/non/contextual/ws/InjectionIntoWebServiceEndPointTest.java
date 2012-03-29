@@ -17,10 +17,13 @@
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
 
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.xml.namespace.QName;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -34,6 +37,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InjectionIntoWebServiceEndPointTest extends AbstractTest {
 
@@ -44,21 +48,37 @@ public class InjectionIntoWebServiceEndPointTest extends AbstractTest {
     }
 
     @RunAsClient
-    @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ee"), @SpecAssertion(section = "5.5.2", id = "aq"),
             @SpecAssertion(section = "5.5.2", id = "ar") })
     public void testInjectionIntoWebServiceEndpoint(@ArquillianResource URL contextPath) throws Exception {
         URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
-        SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(
-                "http://ws.contextual.non.injection.lookup.tests.tck.jsr299.jboss.org/", "SheepWS"));
+        SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(ObjectFactory.TARGET_NS, "SheepWS"));
         SheepWS ws = service.getSheepWSPort();
-        assert ws.isSheepInjected();
+        assertTrue(ws.isSheepInjected());
     }
 
     @Test
     @SpecAssertion(section = "3.6.1", id = "ff")
     public void testResourceBeanTypes() {
-        Bean<SheepWS> sheepWsBean = getBeans(SheepWS.class).iterator().next();
-        assert sheepWsBean.getTypes().size() == 2;
+        Bean<SheepWS> sheepWsBean = getUniqueBean(SheepWS.class);
+        assertEquals(sheepWsBean.getTypes().size(), 3);
+        typeSetMatches(sheepWsBean.getTypes(), Object.class, SheepWS.class, SheepWSEndPoint.class);
+
+        @SuppressWarnings("serial")
+        Bean<SheepWS> blackSheepWsBean = getUniqueBean(SheepWS.class, new AnnotationLiteral<Black>() {
+        });
+        // See bean types of a producer field
+        assertEquals(blackSheepWsBean.getTypes().size(), 2);
+        typeSetMatches(blackSheepWsBean.getTypes(), Object.class, SheepWS.class);
     }
+
+    // Not possible right now
+    // See ARQ-540
+    // @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    // @SpecAssertion(section = "3.6.1", id = "ff")
+    // public void testResourceInvocation(@Black SheepWS sheepWS) {
+    // assertNotNull(sheepWS);
+    // assertTrue(sheepWS.isSheepInjected());
+    // }
 }
