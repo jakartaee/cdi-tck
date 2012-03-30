@@ -48,8 +48,11 @@ import org.testng.annotations.Test;
  * This test verifies that ProcessAnnotatedType and ProcessInjectionTarget events are fired for various Java EE components and
  * tests the AnnotatedType implementation.
  * 
- * @author Jozef Hartinger
+ * It's placed in this package because it works with the same Java EE components as
+ * {@link InjectionIntoNonContextualComponentTest} does.
  * 
+ * @author Jozef Hartinger
+ * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")

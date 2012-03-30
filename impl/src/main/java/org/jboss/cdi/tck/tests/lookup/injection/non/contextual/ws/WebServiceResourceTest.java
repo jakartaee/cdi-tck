@@ -39,11 +39,11 @@ import org.testng.annotations.Test;
 
 @Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
-public class InjectionIntoWebServiceEndPointTest extends AbstractTest {
+public class WebServiceResourceTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InjectionIntoWebServiceEndPointTest.class).withWebXml("web.xml")
+        return new WebArchiveBuilder().withTestClassPackage(WebServiceResourceTest.class).withWebXml("web.xml")
                 .build();
     }
 
