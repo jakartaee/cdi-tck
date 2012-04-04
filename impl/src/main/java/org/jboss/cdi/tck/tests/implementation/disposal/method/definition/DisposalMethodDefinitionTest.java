@@ -116,7 +116,7 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
      * Tests that a disposal method can be bound to a product of a producer field. CDI-145
      */
     @Test(groups = { DISPOSAL })
-    @SpecAssertion(section = "3.5.3", id = "ab")
+    @SpecAssertions({ @SpecAssertion(section = "3.5.3", id = "ab"), @SpecAssertion(section = "7.3.5", id = "o") })
     public void testDisposalMethodCalledForProducerField() throws Exception {
         SpiderProducer.reset();
         createAndDestroyBean(Calisoga.class, new Scary.Literal());

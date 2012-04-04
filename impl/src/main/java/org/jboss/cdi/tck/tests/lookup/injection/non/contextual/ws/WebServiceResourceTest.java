@@ -43,8 +43,7 @@ public class WebServiceResourceTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(WebServiceResourceTest.class).withWebXml("web.xml")
-                .build();
+        return new WebArchiveBuilder().withTestClassPackage(WebServiceResourceTest.class).withWebXml("web.xml").build();
     }
 
     @RunAsClient
@@ -59,7 +58,7 @@ public class WebServiceResourceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.6.1", id = "ff")
+    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "ff"), @SpecAssertion(section = "3.6.2", id = "ae") })
     public void testResourceBeanTypes() {
         Bean<SheepWS> sheepWsBean = getUniqueBean(SheepWS.class);
         assertEquals(sheepWsBean.getTypes().size(), 3);

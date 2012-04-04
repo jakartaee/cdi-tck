@@ -16,12 +16,29 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
 public class BlackWidowProducer {
-    public static BlackWidow blackWidow = new BlackWidow();
+
+    public static boolean blackWidowDestroyed = false;
+
+    public static long destroyedBlackWidowTimeOfBirth = 0l;
+
+    public static BlackWidow blackWidow = new BlackWidow(System.currentTimeMillis());
+
     @Produces
     @Tame
     public BlackWidow produceBlackWidow = blackWidow;
+
+    public void destoryTarantula(@Disposes @Tame BlackWidow blackWidow) {
+        blackWidowDestroyed = true;
+        destroyedBlackWidowTimeOfBirth = blackWidow.getTimeOfBirth();
+    }
+
+    public static void reset() {
+        blackWidowDestroyed = false;
+        destroyedBlackWidowTimeOfBirth = 0l;
+    }
 
 }

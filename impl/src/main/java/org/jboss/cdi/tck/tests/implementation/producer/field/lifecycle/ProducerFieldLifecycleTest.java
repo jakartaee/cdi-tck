@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
 import static org.jboss.cdi.tck.TestGroups.PRODUCER_FIELD;
 import static org.jboss.cdi.tck.TestGroups.SPECIALIZATION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.IllegalProductException;
@@ -36,14 +38,19 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerFieldLifecycleTest extends AbstractTest {
 
+    @SuppressWarnings("serial")
     private AnnotationLiteral<Null> NULL_LITERAL = new AnnotationLiteral<Null>() {
     };
+    @SuppressWarnings("serial")
     private AnnotationLiteral<Broken> BROKEN_LITERAL = new AnnotationLiteral<Broken>() {
+    };
+    @SuppressWarnings("serial")
+    private AnnotationLiteral<Tame> TAME_LITERAL = new AnnotationLiteral<Tame>() {
     };
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ProducerFieldLifecycleTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(ProducerFieldLifecycleTest.class).build();
     }
 
     @Test(groups = { PRODUCER_FIELD })
@@ -108,4 +115,15 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
         }
     }
 
+    @Test(groups = { PRODUCER_FIELD })
+    @SpecAssertions({ @SpecAssertion(section = "7.3.5", id = "o") })
+    public void testProducerFieldBeanDestroy() throws Exception {
+        BlackWidowProducer.reset();
+        Bean<BlackWidow> bean = getUniqueBean(BlackWidow.class, TAME_LITERAL);
+        CreationalContext<BlackWidow> ctx = getCurrentManager().createCreationalContext(bean);
+        BlackWidow instance = bean.create(ctx);
+        bean.destroy(instance, ctx);
+        assertTrue(BlackWidowProducer.blackWidowDestroyed);
+        assertEquals(BlackWidowProducer.destroyedBlackWidowTimeOfBirth, instance.getTimeOfBirth());
+    }
 }

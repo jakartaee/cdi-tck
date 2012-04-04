@@ -17,6 +17,20 @@
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
 public class BlackWidow extends Spider implements DeadlySpider {
+
+    private long timeOfBirth = 0l;
+
+    public BlackWidow() {
+    }
+
+    public BlackWidow(long timeOfBirth) {
+        this.timeOfBirth = timeOfBirth;
+    }
+
+    public long getTimeOfBirth() {
+        return timeOfBirth;
+    }
+
     public void bite() {
         // Test method used for proxy instances to force
         // creation of the instance.
