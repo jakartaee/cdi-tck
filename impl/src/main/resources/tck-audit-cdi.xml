@@ -3821,13 +3821,22 @@
     </section>
 
     <section id="6.7.1" title="Request context lifecycle">
-        <assertion id="aa">
-            <text>The request scope is active during the |service()| method of any servlet in the web application~, during the |doFilter()| method of any servlet filter and when the container calls any |ServletRequestListener| or |AsyncListener|.~</text>
-        </assertion>
-
-        <assertion id="ab">
-            <text>The request scope is active ~during the |service()| method of any servlet in the web application~, during the |doFilter()| method of any servlet filter and when the container calls any |ServletRequestListener| or |AsyncListener|.</text>
-        </assertion>
+        
+        <group>
+            <text>The request scope is active during the |service()| method of any servlet in the web application, during the |doFilter()| method of any servlet filter and when the container calls any |ServletRequestListener| or |AsyncListener|.</text>
+            <assertion id="aa">
+                <text>Check |service()| method.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Check |doFilter()| method.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Check |ServletRequestListener|.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>Check |AsyncListener|.</text>
+            </assertion>
+        </group>
 
         <assertion id="c">
             <text>The request scope is active during any Java EE web service invocation.</text>
@@ -3859,13 +3868,17 @@
 
         <group>
             <text>The request context is destroyed at the end of the servlet request, after the |service()| method and all |doFilter()| methods, and all |requestDestroyed()| and |onComplete()| notifications return.</text>
-
-            <assertion id="baa">
-                <text>Test the request context is destroyed at the end of the servlet request, after the |service()| method.</text>
+            <assertion id="ba">
+                <text>Check |service()| method.</text>
             </assertion>
-
-            <assertion id="bba">
-                <text>Test the request context is destroyed after all |doFilter()| methods, and all |requestDestroyed()| and |onComplete()| notifications return.</text>
+            <assertion id="bb">
+                <text>Check |doFilter()| methods.</text>
+            </assertion>
+            <assertion id="bc">
+                <text>Check |requestDestroyed()| notification.</text>
+            </assertion>
+            <assertion id="bd">
+                <text>Check |onComplete()| notification.</text>
             </assertion>
         </group>
 

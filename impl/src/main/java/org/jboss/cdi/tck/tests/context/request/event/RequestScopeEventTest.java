@@ -55,7 +55,7 @@ public class RequestScopeEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ja") })
+    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ja"), @SpecAssertion(section = "6.7.1", id = "baa") })
     public void test() throws Exception {
         WebClient client = new WebClient();
 

@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2012, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,27 +17,22 @@
 
 package org.jboss.cdi.tck.tests.context.request;
 
-import java.io.IOException;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+import javax.servlet.annotation.WebListener;
+
+import org.jboss.cdi.tck.SimpleLogger;
 
 /**
- * Servlet used just to test context during service method.
- * 
- * @author David Allen
  * @author Martin Kouba
  */
-@WebServlet(name = "ServiceMethod", urlPatterns = "/serviceMethodTest")
-public class ServiceMethodServlet extends HttpServlet {
+@WebListener
+public class TestServletRequestListener implements ServletRequestListener {
 
-    private static final long serialVersionUID = 1L;
+    private static final SimpleLogger logger = new SimpleLogger(TestServletRequestListener.class);
 
     @Inject
     private BeanManager beanManager;
@@ -45,24 +40,30 @@ public class ServiceMethodServlet extends HttpServlet {
     @Inject
     private SimpleRequestBean simpleBean;
 
+    @Inject
+    private RequestContextGuard guard;
+
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void requestDestroyed(ServletRequestEvent sre) {
+        logger.log("Request destroyed...");
         checkRequestContextActive();
-        super.service(req, resp);
+
+        String mode = sre.getServletRequest().getParameter("guard");
+        if (mode != null && mode.equals("collect")) {
+            guard.setServletRequestListenerCheckpoint(System.currentTimeMillis());
+        }
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/text");
-        resp.getWriter().println("It worked!");
+    public void requestInitialized(ServletRequestEvent sre) {
+        // No-op
     }
 
-    private void checkRequestContextActive() throws ServletException {
+    private void checkRequestContextActive() throws IllegalStateException {
         if (beanManager == null || !beanManager.getContext(RequestScoped.class).isActive() || simpleBean == null) {
-            throw new ServletException("Request context is not active");
+            throw new IllegalStateException("Request context is not active");
         }
         // Check bean invocation
         simpleBean.getId();
     }
-
 }

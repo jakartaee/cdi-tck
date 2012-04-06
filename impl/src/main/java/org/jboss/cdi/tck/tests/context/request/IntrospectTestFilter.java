@@ -31,16 +31,19 @@ import javax.servlet.annotation.WebFilter;
 
 import org.jboss.cdi.tck.SimpleLogger;
 
-@WebFilter(filterName = "FilterTest", displayName = "Test Filter for Sessions", urlPatterns = "/SimplePage.html")
-public class TestFilter implements Filter {
+@WebFilter(filterName = "DestroyTestFilter", urlPatterns = "/introspectRequest")
+public class IntrospectTestFilter implements Filter {
 
-    private static final SimpleLogger logger = new SimpleLogger(TestFilter.class);
+    private static final SimpleLogger logger = new SimpleLogger(IntrospectTestFilter.class);
 
     @Inject
     private BeanManager beanManager;
 
     @Inject
     private SimpleRequestBean simpleBean;
+
+    @Inject
+    private RequestContextGuard guard;
 
     public void destroy() {
         beanManager = null;
@@ -52,6 +55,11 @@ public class TestFilter implements Filter {
         checkRequestContextActive();
         chain.doFilter(request, response);
         checkRequestContextActive();
+
+        String mode = request.getParameter("guard");
+        if (mode != null && mode.equals("collect")) {
+            guard.setFilterCheckpoint(System.currentTimeMillis());
+        }
     }
 
     private void checkRequestContextActive() throws ServletException {
@@ -63,7 +71,7 @@ public class TestFilter implements Filter {
     }
 
     public void init(FilterConfig filterConfig) throws ServletException {
-        // No-op
+
     }
 
 }

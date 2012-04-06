@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.context.request;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.REWRITE;
 import static org.jboss.cdi.tck.TestGroups.SERVLET;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 
 import java.net.URL;
 
@@ -29,6 +31,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -45,14 +48,14 @@ public class RequestContextTest extends AbstractTest {
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(RequestContextTest.class)
-                .withWebResource("SimplePage.html", "SimplePage.html").withWebXml("web.xml").build();
+                .withWebResource("SimplePage.html", "SimplePage.html").build();
     }
 
     /**
      * The request scope is active during the service() method of any Servlet in the web application.
      */
     @Test(groups = { CONTEXTS, SERVLET })
-    @SpecAssertion(section = "6.7.1", id = "aa")
+    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "aa"), @SpecAssertion(section = "6.7.1", id = "ac") })
     public void testRequestScopeActiveDuringServiceMethod() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -60,10 +63,10 @@ public class RequestContextTest extends AbstractTest {
     }
 
     /**
-     * The request scope is active during the doFilter() method of any Servlet in the web application.
+     * The request scope is active during the doFilter() method of any Filter in the web application.
      */
     @Test(groups = { CONTEXTS, SERVLET })
-    @SpecAssertion(section = "6.7.1", id = "ab")
+    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ab"), @SpecAssertion(section = "6.7.1", id = "ac") })
     public void testRequestScopeActiveDuringServletFilter() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -71,26 +74,32 @@ public class RequestContextTest extends AbstractTest {
     }
 
     /**
-     * The request context is destroyed at the end of the servlet request, after the Servlet service() method returns.
+     * The request context is destroyed at the end of the servlet request, after the service() method and all doFilter()
+     * methods, and all requestDestroyed() and onComplete() notifications return.
      */
-    @Test(groups = { CONTEXTS, SERVLET, REWRITE })
-    @SpecAssertion(section = "6.7.1", id = "baa")
-    // TODO Need to tidy this one up, make it actually check that the context is active til after the service method ends
+    @Test(groups = { CONTEXTS, SERVLET })
+    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ba"), @SpecAssertion(section = "6.7.1", id = "bb"),
+            @SpecAssertion(section = "6.7.1", id = "bc") })
     public void testRequestScopeIsDestroyedAfterServletRequest() throws Exception {
+
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage firstRequestResult = webClient.getPage(contextPath + "IntrospectRequest");
-        assert firstRequestResult.getContent() != null;
-        assert Double.parseDouble(firstRequestResult.getContent()) != 0;
-        // Make a second request and make sure the same context is not there
-        TextPage secondRequestResult = webClient.getPage(contextPath + "IntrospectRequest");
-        assert secondRequestResult.getContent() != null;
-        assert Double.parseDouble(secondRequestResult.getContent()) != Double.parseDouble(firstRequestResult.getContent());
 
-        // As final confirmation that the context was destroyed, check that its beans
-        // were also destroyed.
-        // TextPage beanDestructionResult = webClient.getPage(contextPath + "InvalidateSession?isBeanDestroyed");
-        // assert Boolean.parseBoolean(beanDestructionResult.getContent());
+        // First request - response content contains SimpleRequestBean id
+        TextPage firstRequestResult = webClient.getPage(contextPath + "introspectRequest");
+        assertNotNull(firstRequestResult.getContent());
+        assertNotEquals(Double.parseDouble(firstRequestResult.getContent()), 0);
+        // Make a second request and make sure the same context is not there (compare SimpleRequestBean ids)
+        TextPage secondRequestResult = webClient.getPage(contextPath + "introspectRequest");
+        assertNotNull(secondRequestResult.getContent());
+        assertNotEquals(Double.parseDouble(secondRequestResult.getContent()),
+                Double.parseDouble(firstRequestResult.getContent()));
+
+        // Make sure request context is destroyed after service(), doFilter(), requestDestroyed()
+        webClient.getPage(contextPath + "introspectRequest?guard=collect");
+        TextPage destroyRequestResult = webClient.getPage(contextPath + "introspectRequest?guard=verify");
+        assertNotNull(destroyRequestResult.getContent());
+        assertEquals(destroyRequestResult.getContent(), "true");
     }
 
 }

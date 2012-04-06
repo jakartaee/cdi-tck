@@ -18,25 +18,44 @@ package org.jboss.cdi.tck.tests.context.request;
 
 import java.io.IOException;
 
-import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class IntrospectRequestScope extends HttpServlet {
+import org.jboss.cdi.tck.SimpleLogger;
+
+@WebServlet(name = "RequestIntrospector", urlPatterns = "/introspectRequest")
+public class IntrospectServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
+    private static final SimpleLogger logger = new SimpleLogger(IntrospectServlet.class);
+
     @Inject
-    private BeanManager jsr299Manager;
+    private SimpleRequestBean simpleBean;
+
+    @Inject
+    private RequestContextGuard guard;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         resp.setContentType("text/text");
-        SimpleRequestBean aBean = org.jboss.cdi.tck.impl.OldSPIBridge.getInstanceByType(jsr299Manager,
-                SimpleRequestBean.class);
-        resp.getWriter().print(aBean.getId());
+        String mode = req.getParameter("guard");
+
+        if (mode == null) {
+            resp.getWriter().print(simpleBean.getId());
+        } else if (mode.equals("collect")) {
+            guard.setServletCheckpoint(System.currentTimeMillis());
+        } else if (mode.equals("verify")) {
+            logger.log("Verify guard: {0}", guard.isCheckpointSequenceOk());
+            resp.getWriter().print(guard.isCheckpointSequenceOk());
+        } else {
+            throw new ServletException("Unknown guard mode");
+        }
     }
 
 }
