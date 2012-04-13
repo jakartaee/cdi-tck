@@ -1,0 +1,140 @@
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2012, Red Hat, Inc., and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.jboss.cdi.tck.tests.deployment.packaging.war.modules;
+
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
+import java.util.Set;
+
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.Bean;
+import javax.inject.Inject;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.testng.annotations.Test;
+
+/**
+ * This test is aimed to verify packaging-related issues in a little bit more complex deployment scenario. The assertions are
+ * rather informative and redundant as they're already verified in elementary tests.
+ * 
+ * @author Martin Kouba
+ */
+@Test(groups = INTEGRATION)
+public class WebArchiveModulesTest extends AbstractTest {
+
+    /**
+     * Modules:
+     * <ul>
+     * <li>A - WEB-INF/classes BDA: Foo, Secured, SecurityInterceptor, Business, BusinessOperationEvent</li>
+     * <li>B - WEB-INF/lib BDA: Bar, AlternativeBar, BarInspector</li>
+     * <li>C - WEB-INF/lib BDA: Baz, LoggingDecorator, Bazinga</li>
+     * <li>D - WEB-INF/lib BDA: Qux, ContainerEventsObserver, LegacyServiceProducer</li>
+     * <li>E - WEB-INF/lib non-BDA: LegacyService</li>
+     * </ul>
+     * 
+     * @return test archive
+     */
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClass(WebArchiveModulesTest.class)
+                // A
+                .withClasses(Foo.class, Secured.class, SecurityInterceptor.class, Business.class, BusinessOperationEvent.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(AlternativeBar.class.getName())
+                                .up())
+                // B
+                .withBeanLibrary(
+                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                                .clazz(SecurityInterceptor.class.getName()).up(), Bar.class, AlternativeBar.class,
+                        BarInspector.class)
+                // C
+                .withBeanLibrary(
+                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(LoggingDecorator.class.getName())
+                                .up(), Baz.class, LoggingDecorator.class, Bazinga.class)
+                // D
+                .withBeanLibrary(Qux.class, ContainerEventsObserver.class, LegacyServiceProducer.class)
+                // E
+                .withLibrary(LegacyService.class).build();
+    }
+
+    @Inject
+    Foo foo;
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5", id = "bb") })
+    public void testExtensionAndContainerEvents() throws Exception {
+        // Test extension registration and container lifecycle events
+        assertTrue(ContainerEventsObserver.allEventsOk());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bcb"), @SpecAssertion(section = "12.1", id = "bcb"), })
+    public void testInjectionChainVisibilityAndInterceptorEnablement() {
+        // Test injection chain, visibility, SecurityInterceptor is enabled in B only
+        SecurityInterceptor.reset();
+        Bar bar = foo.getBar();
+        assertTrue(bar.isAlternative());
+        assertTrue(bar.getBaz().getId().equals(bar.getQux().getBaz().getId()));
+        assertEquals(SecurityInterceptor.getNumberOfInterceptions(), 3);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.3", id = "aa"), @SpecAssertion(section = "8.2", id = "a"),
+            @SpecAssertion(section = "10.2", id = "i") })
+    public void testDecoratorAndCrossModuleEventObserver() throws Exception {
+        // Test LoggingDecorator is enabled in C only; bean from D observes event from A
+        foo.getBar().getBaz().businessOperation1();
+        foo.businessOperation1();
+        assertEquals(LoggingDecorator.getNumberOfDecorationsPerformed(), 1);
+        assertEquals(Qux.getEventsObserved(), 1);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "aa"), @SpecAssertion(section = "3.3", id = "c"),
+            @SpecAssertion(section = "10.2", id = "i") })
+    public void testProducerAndEventDuringDisposal() throws Exception {
+        // Test legacy service producer in D, bean from A is observing event fired during legacy service disposal in D
+        Bean<LegacyService> bean = getUniqueBean(LegacyService.class);
+        CreationalContext<LegacyService> ctx = getCurrentManager().createCreationalContext(bean);
+        LegacyService instance = bean.create(ctx);
+        bean.destroy(instance, ctx);
+        assertTrue(Foo.legacyObserved);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "c") })
+    public void testAlternatives(BarInspector barInspector) throws Exception {
+
+        Set<Bean<?>> beans = getCurrentManager().getBeans(AlternativeBar.class);
+        assertEquals(beans.size(), 1);
+        assertEquals(beans.iterator().next().getBeanClass(), AlternativeBar.class);
+
+        // Bar alternative is enabled in WEB-INF/classes only
+        assertFalse(barInspector.getBar().isAlternative());
+    }
+}
