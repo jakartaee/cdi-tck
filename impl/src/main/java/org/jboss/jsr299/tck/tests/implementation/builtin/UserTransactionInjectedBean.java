@@ -16,7 +16,10 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.builtin;
 
+import static javax.ejb.TransactionManagementType.BEAN;
+
 import javax.ejb.Stateful;
+import javax.ejb.TransactionManagement;
 import javax.inject.Inject;
 import javax.transaction.UserTransaction;
 
@@ -25,6 +28,7 @@ import javax.transaction.UserTransaction;
  *
  */
 @Stateful
+@TransactionManagement(BEAN)
 public class UserTransactionInjectedBean implements UserTransactionInjectedBeanLocal
 {
 
