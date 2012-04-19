@@ -19,11 +19,6 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.lifecycle;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.CreationalContext;
@@ -83,10 +78,8 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
 
         // Verify that the instance returned is a proxy by checking for all local interfaces
         assert getCurrentConfiguration().getBeans().isProxy(stadtInstance);
-        Set<Class> interfaces = new HashSet<Class>(Arrays.asList(stadtInstance.getClass().getInterfaces()));
-        assert interfaces.contains(KleinStadt.class);
-        assert interfaces.contains(SchoeneStadt.class);
-        assert interfaces.contains(Serializable.class);
+        assert stadtInstance instanceof KleinStadt;
+        assert stadtInstance instanceof SchoeneStadt;
     }
 
     @Test(groups = { INTEGRATION, LIFECYCLE })
