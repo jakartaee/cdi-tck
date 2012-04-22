@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptors.custom;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertTrue;
 
 import javax.inject.Inject;
@@ -44,6 +45,7 @@ import org.testng.annotations.Test;
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class CustomInterceptorInvocationTest extends AbstractTest {
 
