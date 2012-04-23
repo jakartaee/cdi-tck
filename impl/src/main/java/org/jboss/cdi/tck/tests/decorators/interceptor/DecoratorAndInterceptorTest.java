@@ -41,7 +41,8 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
                 .withTestClassPackage(DecoratorAndInterceptorTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(FooInterceptor.class.getName())
-                                .up().createDecorators().clazz(FooDecorator.class.getName()).up()).build();
+                                .up().createDecorators().clazz(FooDecorator1.class.getName(), FooDecorator2.class.getName())
+                                .up()).build();
     }
 
     /**
@@ -50,7 +51,7 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
      */
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.2", id = "f"), @SpecAssertion(section = "7.2", id = "ka") })
-    public void testInterceptorCalledBeforeDecorator() {
+    public void testInterceptorCalledBeforeDecoratorChain() {
 
         CallStore.resetCallers();
 
@@ -58,13 +59,14 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
         foo.doSomething();
 
         List<String> callers = CallStore.getCallers();
-        assertEquals(callers.size(), 2);
-        assertTrue(callers.get(0).equals(FooInterceptor.NAME));
-        assertTrue(callers.get(1).equals(FooDecorator.NAME));
+        assertEquals(callers.size(), 3);
+        assertEquals(callers.get(0), FooInterceptor.NAME);
+        assertEquals(callers.get(1), FooDecorator1.NAME);
+        assertEquals(callers.get(2), FooDecorator2.NAME);
 
         List<String> lifecycleCallers = CallStore.getLifecycleCallers();
-        assertEquals(lifecycleCallers.size(), 2);
-        assertTrue(lifecycleCallers.contains(FooDecorator.class.getName()));
+        assertEquals(lifecycleCallers.size(), 3);
+        assertTrue(lifecycleCallers.contains(FooDecorator1.NAME));
         assertTrue(lifecycleCallers.contains(foo.getClass().getName()));
     }
 

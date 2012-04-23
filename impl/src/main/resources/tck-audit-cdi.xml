@@ -3822,7 +3822,7 @@
     </section>
 
     <section id="6.7.1" title="Request context lifecycle">
-        
+
         <group>
             <text>The request scope is active during the |service()| method of any servlet in the web application, during the |doFilter()| method of any servlet filter and when the container calls any |ServletRequestListener| or |AsyncListener|.</text>
             <assertion id="aa">
@@ -4354,14 +4354,19 @@
                 <text>Verify that a session bean's business methods receive EJB services</text>
                 <note>This is tested by the EJB TCK</note>
             </assertion>
+
+            <assertion id="h">
+                <text>Verify that a non-contextual session bean's business methods are intercepted</text>
+            </assertion>
+
+            <assertion id="i">
+                <text>Verify that a non-contextual session bean's business methods are decorated</text>
+            </assertion>
+
         </group>
 
         <assertion id="g">
             <text>If the invocation is not a business method invocation, it is treated as a normal Java method call and is not intercepted by the container.</text>
-        </assertion>
-
-        <assertion id="h" implied="true">
-            <text>Verify that a non-contextual session bean reference is intercepted</text>
         </assertion>
 
     </section>

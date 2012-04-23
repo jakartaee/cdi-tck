@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2012, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -9,36 +9,32 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.decorators.interceptor;
+package org.jboss.cdi.tck.tests.decorators.invocation.enterprise;
 
-import javax.annotation.PostConstruct;
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
-@FooBinding
+/**
+ * @author Martin Kouba
+ */
 @Decorator
-public class FooDecorator implements Foo {
-
-    public static String NAME = "FooDecorator";
+public abstract class FooBusinessDecorator2 implements Business {
 
     @Inject
     @Delegate
-    Foo foo;
+    private FooBusiness business;
 
-    public void doSomething() {
-        CallStore.addCaller(NAME);
-        foo.doSomething();
+    @Override
+    public String businessOperation1() {
+        CallStore.addCaller(FooBusinessDecorator2.class.getName());
+        return business.businessOperation1() + FooBusinessDecorator2.class.getName();
     }
 
-    @PostConstruct
-    public void postConstruct() {
-        CallStore.addLifecycleCaller(FooDecorator.class.getName());
-    }
 }

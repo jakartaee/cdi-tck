@@ -14,9 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.decorators.interceptor;
+package org.jboss.cdi.tck.tests.decorators.invocation.enterprise;
 
-import javax.annotation.PostConstruct;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -25,16 +24,10 @@ import javax.interceptor.InvocationContext;
 @FooBinding
 public class FooInterceptor {
 
-    public static String NAME = FooInterceptor.class.getSimpleName();
-
     @AroundInvoke
-    public Object interceptMe(InvocationContext ctx) throws Exception {
-        CallStore.addCaller(NAME);
+    public Object aroundInvoke(InvocationContext ctx) throws Exception {
+        CallStore.addCaller(FooInterceptor.class.getName());
         return ctx.proceed();
     }
 
-    @PostConstruct
-    public void postConstruct(InvocationContext ctx) {
-        CallStore.addLifecycleCaller(ctx.getTarget().getClass().getName());
-    }
 }
