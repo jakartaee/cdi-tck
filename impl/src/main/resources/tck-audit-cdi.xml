@@ -7286,9 +7286,10 @@
             <text>If a name used in an EL expression does not resolve to any bean, the |ELResolver| must return a null value.</text>
         </assertion>
 
-        <assertion id="b">
+        <!-- All unresolvable ambiguous EL names are detected by the container when the application is initialized -->
+        <!-- assertion id="b">
             <text>If a name used in an EL expression resolves to more than one bean, the |ELResolver| must throw an |AmbiguousResolutionException|.</text>
-        </assertion>
+        </assertion-->
 
         <assertion id="d">
             <text>Otherwise, if a name used in an EL expression resolves to exactly one bean, the |ELResolver| must return a contextual instance of the bean, as defined in Section 6.5.2, "Contextual instance of a bean".</text>

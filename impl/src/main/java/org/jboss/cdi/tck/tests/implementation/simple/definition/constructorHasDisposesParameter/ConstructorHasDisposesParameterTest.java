@@ -40,8 +40,7 @@ public class ConstructorHasDisposesParameterTest extends AbstractTest {
     }
 
     @Test(groups = { DISPOSAL })
-    @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "da"), @SpecAssertion(section = "12.2", id = "db"),
-            @SpecAssertion(section = "12.5", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "da"), @SpecAssertion(section = "12.2", id = "db") })
     public void testConstructorHasDisposesParameter() throws Exception {
     }
 
