@@ -22,6 +22,8 @@ import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @FooBinding
 @Decorator
 public class FooDecorator1 implements Foo {
@@ -33,12 +35,12 @@ public class FooDecorator1 implements Foo {
     Foo foo;
 
     public void doSomething() {
-        CallStore.addCaller(NAME);
+        ActionSequence.add(NAME);
         foo.doSomething();
     }
 
     @PostConstruct
     public void postConstruct() {
-        CallStore.addLifecycleCaller(NAME);
+        ActionSequence.add("lifecycle", NAME);
     }
 }

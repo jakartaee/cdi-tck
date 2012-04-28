@@ -27,7 +27,7 @@ import javax.servlet.AsyncListener;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.cdi.tck.SimpleLogger;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba

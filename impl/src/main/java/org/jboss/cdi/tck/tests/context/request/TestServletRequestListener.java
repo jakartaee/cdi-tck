@@ -24,7 +24,7 @@ import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
 
-import org.jboss.cdi.tck.SimpleLogger;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba

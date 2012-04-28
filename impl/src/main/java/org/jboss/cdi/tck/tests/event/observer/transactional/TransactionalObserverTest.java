@@ -1,14 +1,19 @@
 package org.jboss.cdi.tck.tests.event.observer.transactional;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.enterprise.event.TransactionPhase;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.SimpleLogger;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
+import org.jboss.cdi.tck.util.SimpleLogger;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -40,17 +45,25 @@ public class TransactionalObserverTest extends AbstractTest {
             @SpecAssertion(section = "10.4.4", id = "e"), @SpecAssertion(section = "10.4.4", id = "gaa"),
             @SpecAssertion(section = "10.5", id = "bb") })
     public void testSucessfullTransaction() throws Exception {
+
         logTestMethod("testSucessfullTransaction");
-        AccountTransactionObserver.reset();
+        ActionSequence.reset();
+
         // Checkpoint is right before tx commit
-        long checkpoint = accountService.withdrawSuccesTransaction(1);
+        accountService.withdrawSuccesTransaction(1);
+
+        // Test sequence
         // BEFORE_COMPLETION must be fired at the beginning of the commit (after checkpoint)
-        assertTrue(AccountTransactionObserver.beforeCompletionObservedTime > checkpoint);
-        // AFTER_COMPLETION and AFTER_SUCCESS must be fired after BEFORE_COMPLETION
-        assertTrue(AccountTransactionObserver.afterSuccessObservedTime > AccountTransactionObserver.beforeCompletionObservedTime);
-        assertTrue(AccountTransactionObserver.afterCompletionObservedTime > AccountTransactionObserver.beforeCompletionObservedTime);
+        // AFTER_SUCCESS must be fired after BEFORE_COMPLETION and before AFTER_COMPLETION
         // AFTER_FAILURE is not fired
-        assertTrue(AccountTransactionObserver.afterFailureObservedTime == 0l);
+        List<String> correctSequence = new ArrayList<String>();
+        correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
+        correctSequence.add("checkpoint");
+        correctSequence.add(TransactionPhase.BEFORE_COMPLETION.toString());
+        correctSequence.add(TransactionPhase.AFTER_SUCCESS.toString());
+        correctSequence.add(TransactionPhase.AFTER_COMPLETION.toString());
+
+        assertEquals(ActionSequence.getSequence(), correctSequence);
     }
 
     @Test
@@ -59,16 +72,22 @@ public class TransactionalObserverTest extends AbstractTest {
             @SpecAssertion(section = "10.4.4", id = "e"), @SpecAssertion(section = "10.4.4", id = "gaa"),
             @SpecAssertion(section = "10.5", id = "bb") })
     public void testFailedTransaction() throws Exception {
+
         logTestMethod("testFailedTransaction");
-        AccountTransactionObserver.reset();
+        ActionSequence.reset();
+
         // Checkpoint is right before tx rollback
-        long checkpoint = accountService.withdrawFailedTransaction(2);
-        // AFTER_COMPLETION and AFTER_FAILURE must be fired after checkpoint
-        assertTrue(AccountTransactionObserver.afterCompletionObservedTime > checkpoint);
-        assertTrue(AccountTransactionObserver.afterFailureObservedTime > checkpoint);
+        accountService.withdrawFailedTransaction(2);
+
+        // AFTER_FAILURE must be fired after checkpoint and before AFTER_COMPLETION
         // AFTER_SUCCESS and BEFORE_COMPLETION is not fired
-        assertTrue(AccountTransactionObserver.afterSuccessObservedTime == 0l);
-        assertTrue(AccountTransactionObserver.beforeCompletionObservedTime == 0l);
+        List<String> correctSequence = new ArrayList<String>();
+        correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
+        correctSequence.add("checkpoint");
+        correctSequence.add(TransactionPhase.AFTER_FAILURE.toString());
+        correctSequence.add(TransactionPhase.AFTER_COMPLETION.toString());
+
+        assertEquals(ActionSequence.getSequence(), correctSequence);
     }
 
     /**
@@ -79,12 +98,17 @@ public class TransactionalObserverTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "10.4.4", id = "a"), @SpecAssertion(section = "10.5", id = "bc") })
     public void testNoTransaction() throws Exception {
+
         logTestMethod("testNoTransaction");
-        AccountTransactionObserver.reset();
+        ActionSequence.reset();
+
         // Checkpoint is after event send
-        long checkpoint = accountService.withdrawNoTransaction(3);
+        accountService.withdrawNoTransaction(3);
+
         // No TX is active - all events are fired immediately and thus before checkpoint
-        assertTrue(AccountTransactionObserver.allEventsFiredBeforeCheckpoint(checkpoint));
+        List<String> sequence = ActionSequence.getSequence();
+        assertEquals(sequence.size(), 6);
+        assertEquals(sequence.get(sequence.size() - 1), "checkpoint");
     }
 
     private void logTestMethod(String methodName) {

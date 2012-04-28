@@ -30,6 +30,7 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -74,17 +75,18 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(FooBusiness.class));
         assertEquals(decorators.size(), 2);
 
-        CallStore.resetCallers();
+        ActionSequence.reset();
 
         // Test actual decoration
         assertEquals(foo.businessOperation1(), Foo.class.getName() + FooBusinessDecorator2.class.getName()
                 + FooBusinessDecorator1.class.getName());
 
         // Decorators are called after interceptors and decorator that occures earlier in the list is called first
-        assertEquals(CallStore.getCallers().size(), 3);
-        assertEquals(CallStore.getCallers().get(0), FooInterceptor.class.getName());
-        assertEquals(CallStore.getCallers().get(1), FooBusinessDecorator1.class.getName());
-        assertEquals(CallStore.getCallers().get(2), FooBusinessDecorator2.class.getName());
+        List<String> sequence = ActionSequence.getSequence();
+        assertEquals(sequence.size(), 3);
+        assertEquals(sequence.get(0), FooInterceptor.class.getName());
+        assertEquals(sequence.get(1), FooBusinessDecorator1.class.getName());
+        assertEquals(sequence.get(2), FooBusinessDecorator2.class.getName());
 
         // Only businessOperation1() is decorated
         assertEquals(foo.businessOperation2(), Foo.class.getName());
@@ -99,12 +101,13 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
         assertEquals(decorators.size(), 1);
         assertEquals(decorators.iterator().next().getDecoratedTypes().size(), 1);
 
-        CallStore.resetCallers();
+        ActionSequence.reset();
 
         // Test actual decoration
         assertEquals(foo.invokeBarBusinessOperation1(), Bar.class.getName() + BarBusinessDecorator.class.getName());
 
-        assertEquals(CallStore.getCallers().size(), 1);
-        assertEquals(CallStore.getCallers().get(0), BarBusinessDecorator.class.getName());
+        List<String> sequence = ActionSequence.getSequence();
+        assertEquals(sequence.size(), 1);
+        assertEquals(sequence.get(0), BarBusinessDecorator.class.getName());
     }
 }

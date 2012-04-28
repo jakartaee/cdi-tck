@@ -21,6 +21,8 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @Interceptor
 @FooBinding
 public class FooInterceptor {
@@ -29,12 +31,12 @@ public class FooInterceptor {
 
     @AroundInvoke
     public Object interceptMe(InvocationContext ctx) throws Exception {
-        CallStore.addCaller(NAME);
+        ActionSequence.add(NAME);
         return ctx.proceed();
     }
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
-        CallStore.addLifecycleCaller(ctx.getTarget().getClass().getName());
+        ActionSequence.add("lifecycle", ctx.getTarget().getClass().getName());
     }
 }

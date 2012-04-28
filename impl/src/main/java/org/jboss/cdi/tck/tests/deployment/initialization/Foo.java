@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.deployment.initialization;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 public class Foo {
 
     public static long pingPerformedAt = 0l;
 
     public void ping() {
-        pingPerformedAt = System.currentTimeMillis();
+        ActionSequence.add(Foo.class.getName());
     }
 
 }

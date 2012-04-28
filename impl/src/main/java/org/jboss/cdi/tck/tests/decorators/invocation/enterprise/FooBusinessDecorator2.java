@@ -21,6 +21,8 @@ import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 /**
  * @author Martin Kouba
  */
@@ -33,7 +35,7 @@ public abstract class FooBusinessDecorator2 implements Business {
 
     @Override
     public String businessOperation1() {
-        CallStore.addCaller(FooBusinessDecorator2.class.getName());
+        ActionSequence.add(FooBusinessDecorator2.class.getName());
         return business.businessOperation1() + FooBusinessDecorator2.class.getName();
     }
 

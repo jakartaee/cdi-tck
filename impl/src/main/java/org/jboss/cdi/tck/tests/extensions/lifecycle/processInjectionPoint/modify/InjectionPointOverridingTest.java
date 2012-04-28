@@ -29,7 +29,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.NewLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.ForwardingInjectionPoint;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -54,7 +53,6 @@ public class InjectionPointOverridingTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InjectionPointOverridingTest.class)
-                .withClasses(ForwardingInjectionPoint.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createDecorators().clazz(AnimalDecorator.class.getName())
                                 .up()).withExtension(ModifyingExtension.class).build();

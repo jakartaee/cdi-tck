@@ -25,6 +25,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @WebServlet("/bank")
 @SuppressWarnings("serial")
 public class BankServlet extends HttpServlet {
@@ -50,9 +52,9 @@ public class BankServlet extends HttpServlet {
         resp.getWriter().append("\n");
         resp.getWriter().append("DurableBalance:" + durableAccount.getBalance());
         resp.getWriter().append("\n");
-        resp.getWriter().append("PostConstructCallers:" + CallStore.getPostConstructCallers().size());
+        resp.getWriter().append("PostConstructCallers:" + ActionSequence.getSequenceSize("postConstructCallers"));
         resp.getWriter().append("\n");
-        resp.getWriter().append("PreDestroyCallers:" + CallStore.getPreDestroyCallers().size());
+        resp.getWriter().append("PreDestroyCallers:" + ActionSequence.getSequenceSize("preDestroyCallers"));
         resp.getWriter().append("\n");
 
         resp.setContentType("text/plain");

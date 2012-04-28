@@ -20,13 +20,15 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @Interceptor
 @FooBinding
 public class FooInterceptor {
 
     @AroundInvoke
     public Object aroundInvoke(InvocationContext ctx) throws Exception {
-        CallStore.addCaller(FooInterceptor.class.getName());
+        ActionSequence.add(FooInterceptor.class.getName());
         return ctx.proceed();
     }
 

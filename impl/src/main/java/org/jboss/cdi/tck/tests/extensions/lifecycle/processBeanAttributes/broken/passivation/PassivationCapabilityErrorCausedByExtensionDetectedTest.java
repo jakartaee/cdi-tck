@@ -24,7 +24,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.ForwardingBeanAttributes;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -48,8 +47,7 @@ public class PassivationCapabilityErrorCausedByExtensionDetectedTest extends Abs
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(PassivationCapabilityErrorCausedByExtensionDetectedTest.class)
-                .withClasses(ModifyingExtension1.class, Laptop.class, ForwardingBeanAttributes.class)
-                .withExtension(ModifyingExtension1.class).build();
+                .withClasses(ModifyingExtension1.class, Laptop.class).withExtension(ModifyingExtension1.class).build();
     }
 
     @Test

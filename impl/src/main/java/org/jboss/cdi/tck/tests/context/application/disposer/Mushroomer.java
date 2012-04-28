@@ -21,7 +21,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-import org.jboss.cdi.tck.SimpleLogger;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba

@@ -23,41 +23,33 @@ import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 /**
  * 
  * @author Martin Kouba
  */
 public class LifecycleMonitoringExtension implements Extension {
 
-    public static long createdAt = 0l;
-
-    public static long beforeBeanDiscoveryObservedAt = 0l;
-
-    public static long afterBeanDiscoveryObservedAt = 0l;
-
-    public static long afterDeploymentValidationObservedAt = 0l;
-
-    public static long beanDiscoveryObservedAt = 0l;
-
     public LifecycleMonitoringExtension() {
-        createdAt = System.currentTimeMillis();
+        ActionSequence.add(LifecycleMonitoringExtension.class.getName());
     }
 
     public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event) {
-        beforeBeanDiscoveryObservedAt = System.currentTimeMillis();
+        ActionSequence.add(BeforeBeanDiscovery.class.getName());
     }
 
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event) {
-        afterBeanDiscoveryObservedAt = System.currentTimeMillis();
+        ActionSequence.add(AfterBeanDiscovery.class.getName());
     }
 
     public void observeAfterDeploymentValidation(@Observes AfterDeploymentValidation event) {
-        afterDeploymentValidationObservedAt = System.currentTimeMillis();
+        ActionSequence.add(AfterDeploymentValidation.class.getName());
     }
 
     public void observeBeanDiscovery(@Observes ProcessAnnotatedType<Foo> event) {
         // We only need to check bean discovery occured in specific sequence
-        beanDiscoveryObservedAt = System.currentTimeMillis();
+        ActionSequence.add(ProcessAnnotatedType.class.getName());
     }
 
 }

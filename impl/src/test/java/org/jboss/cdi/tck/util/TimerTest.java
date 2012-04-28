@@ -14,10 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck;
+package org.jboss.cdi.tck.util;
 
-import org.jboss.cdi.tck.Timer.ResolutionLogic;
-import org.jboss.cdi.tck.Timer.StopCondition;
+import org.jboss.cdi.tck.util.Timer;
+import org.jboss.cdi.tck.util.Timer.ResolutionLogic;
+import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.testng.annotations.Test;
 import org.testng.internal.thread.ThreadTimeoutException;
 

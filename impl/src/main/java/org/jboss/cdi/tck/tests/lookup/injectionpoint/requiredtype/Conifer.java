@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
-import org.jboss.cdi.tck.SimpleLogger;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba

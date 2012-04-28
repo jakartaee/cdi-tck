@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.context.application.disposer;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import org.jboss.cdi.tck.SimpleLogger;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba

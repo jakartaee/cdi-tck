@@ -24,6 +24,7 @@ import java.util.List;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -53,21 +54,21 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "8.2", id = "f"), @SpecAssertion(section = "7.2", id = "ka") })
     public void testInterceptorCalledBeforeDecoratorChain() {
 
-        CallStore.resetCallers();
+        ActionSequence.reset();
 
         Foo foo = getInstanceByType(Foo.class);
         foo.doSomething();
 
-        List<String> callers = CallStore.getCallers();
-        assertEquals(callers.size(), 3);
-        assertEquals(callers.get(0), FooInterceptor.NAME);
-        assertEquals(callers.get(1), FooDecorator1.NAME);
-        assertEquals(callers.get(2), FooDecorator2.NAME);
+        List<String> sequence = ActionSequence.getSequence();
+        assertEquals(sequence.size(), 3);
+        assertEquals(sequence.get(0), FooInterceptor.NAME);
+        assertEquals(sequence.get(1), FooDecorator1.NAME);
+        assertEquals(sequence.get(2), FooDecorator2.NAME);
 
-        List<String> lifecycleCallers = CallStore.getLifecycleCallers();
-        assertEquals(lifecycleCallers.size(), 3);
-        assertTrue(lifecycleCallers.contains(FooDecorator1.NAME));
-        assertTrue(lifecycleCallers.contains(foo.getClass().getName()));
+        List<String> lifecycle = ActionSequence.getSequence("lifecycle");
+        assertEquals(lifecycle.size(), 3);
+        assertTrue(lifecycle.contains(FooDecorator1.NAME));
+        assertTrue(lifecycle.contains(foo.getClass().getName()));
     }
 
 }

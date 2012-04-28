@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.tests.deployment.initialization;
 
 import javax.inject.Inject;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 public enum Bar {
 
     BAZ;
@@ -29,7 +31,7 @@ public enum Bar {
     @Inject
     public void setFoo(Foo foo) {
         this.foo = foo;
-        injectionPerformedAt = System.currentTimeMillis();
+        ActionSequence.add(Bar.class.getName());
     }
 
 }

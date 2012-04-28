@@ -29,7 +29,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-import org.jboss.cdi.tck.SimpleLogger;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 @WebFilter(filterName = "DestroyTestFilter", urlPatterns = "/introspectRequest")
 public class IntrospectTestFilter implements Filter {

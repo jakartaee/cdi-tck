@@ -24,6 +24,8 @@ import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 /**
  * Decorator is a managed bean and may use the {@link PostConstruct} and {@link PreDestroy} annotations to identify methods to
  * be called back by the container at the appropriate points in the bean’s lifecycle.
@@ -54,12 +56,12 @@ public abstract class ChargeDecorator implements BankAccount, Serializable {
 
     @PostConstruct
     public void postConstruct() {
-        CallStore.addPostConstructCaller(DurableAccount.class.getName());
+        ActionSequence.add("postConstructCallers", DurableAccount.class.getName());
     }
 
     @PreDestroy
     public void preDestroy() {
-        CallStore.addPreDestroyCaller(DurableAccount.class.getName());
+        ActionSequence.add("preDestroyCallers", DurableAccount.class.getName());
     }
 
 }

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.cdi.tck.SimpleLogger;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 @WebServlet(name = "RequestIntrospector", urlPatterns = "/introspectRequest")
 public class IntrospectServlet extends HttpServlet {

@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.ForwardingBeanAttributes;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -37,7 +36,6 @@ public class SyntheticInterceptorVetoedTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(SyntheticInterceptorVetoedTest.class)
-                .withClasses(ForwardingBeanAttributes.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
                                 .clazz(ExternalInterceptor.class.getName()).up())

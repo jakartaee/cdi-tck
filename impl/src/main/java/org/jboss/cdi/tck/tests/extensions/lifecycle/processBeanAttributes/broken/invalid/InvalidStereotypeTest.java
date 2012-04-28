@@ -24,7 +24,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.ForwardingBeanAttributes;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -48,10 +47,9 @@ public class InvalidStereotypeTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-                .withTestClass(InvalidStereotypeTest.class)
-                .withClasses(Telephone.class, PlainOldAnnotation.class, InvalidStereotypeExtension.class,
-                        ForwardingBeanAttributes.class).withExtension(InvalidStereotypeExtension.class).build();
+        return new WebArchiveBuilder().withTestClass(InvalidStereotypeTest.class)
+                .withClasses(Telephone.class, PlainOldAnnotation.class, InvalidStereotypeExtension.class)
+                .withExtension(InvalidStereotypeExtension.class).build();
     }
 
     @Test

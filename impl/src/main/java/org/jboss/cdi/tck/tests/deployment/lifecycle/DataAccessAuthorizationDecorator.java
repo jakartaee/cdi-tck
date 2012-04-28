@@ -20,7 +20,7 @@ import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
-import org.jboss.cdi.tck.SimpleLogger;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 @Decorator
 public class DataAccessAuthorizationDecorator implements DataAccess {

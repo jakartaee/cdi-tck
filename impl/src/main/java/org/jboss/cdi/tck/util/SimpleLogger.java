@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck;
+package org.jboss.cdi.tck.util;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

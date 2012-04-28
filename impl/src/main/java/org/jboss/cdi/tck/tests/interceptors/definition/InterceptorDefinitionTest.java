@@ -56,8 +56,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InterceptorDefinitionTest.class)
-                .withClasses(HierarchyDiscovery.class, ParameterizedTypeImpl.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(InterceptorDefinitionTest.class).withBeansXml("beans.xml").build();
     }
 
     @Test

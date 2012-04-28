@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.UserTransaction;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @Named
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)
@@ -25,13 +27,11 @@ public class AccountService {
      * @param amount
      * @throws Exception
      */
-    public long withdrawSuccesTransaction(int amount) throws Exception {
-
+    public void withdrawSuccesTransaction(int amount) throws Exception {
         userTransaction.begin();
         event.fire(new Withdrawal(amount));
-        long checkpoint = now();
+        ActionSequence.add("checkpoint");
         userTransaction.commit();
-        return checkpoint;
     }
 
     /**
@@ -39,14 +39,12 @@ public class AccountService {
      * @param amount
      * @throws Exception
      */
-    public long withdrawFailedTransaction(int amount) throws Exception {
-
+    public void withdrawFailedTransaction(int amount) throws Exception {
         userTransaction.begin();
         event.fire(new Withdrawal(amount));
-        long checkpoint = now();
+        ActionSequence.add("checkpoint");
         // Failed for any reason
         userTransaction.rollback();
-        return checkpoint;
     }
 
     /**
@@ -54,14 +52,9 @@ public class AccountService {
      * @param amount
      * @throws Exception
      */
-    public long withdrawNoTransaction(int amount) throws Exception {
-
+    public void withdrawNoTransaction(int amount) throws Exception {
         event.fire(new Withdrawal(amount));
-        return now();
-    }
-
-    private long now() {
-        return System.currentTimeMillis();
+        ActionSequence.add("checkpoint");
     }
 
 }

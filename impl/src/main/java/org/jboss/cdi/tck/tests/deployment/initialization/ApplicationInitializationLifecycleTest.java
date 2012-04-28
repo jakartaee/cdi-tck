@@ -17,17 +17,21 @@
 package org.jboss.cdi.tck.tests.deployment.initialization;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+import javax.enterprise.inject.spi.AfterBeanDiscovery;
+import javax.enterprise.inject.spi.AfterDeploymentValidation;
+import javax.enterprise.inject.spi.BeforeBeanDiscovery;
+import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -61,39 +65,24 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
 
         foo.ping();
 
-        // Test lifecycle phases occured
-        assertTrue(LifecycleMonitoringExtension.createdAt > 0l);
-        assertTrue(LifecycleMonitoringExtension.beforeBeanDiscoveryObservedAt > 0l);
-        assertTrue(LifecycleMonitoringExtension.beanDiscoveryObservedAt > 0l);
-        assertTrue(LifecycleMonitoringExtension.afterBeanDiscoveryObservedAt > 0l);
-        assertTrue(LifecycleMonitoringExtension.afterDeploymentValidationObservedAt > 0l);
-        assertTrue(Bar.injectionPerformedAt > 0l);
-        assertTrue(Foo.pingPerformedAt > 0l);
-
         // Test lifecycle phases sequence
-        List<Long> sequence = new ArrayList<Long>();
+        List<String> correctSequence = new ArrayList<String>();
         // Extension registration
-        sequence.add(LifecycleMonitoringExtension.createdAt);
+        correctSequence.add(LifecycleMonitoringExtension.class.getName());
         // BeforeBeanDiscovery
-        sequence.add(LifecycleMonitoringExtension.beforeBeanDiscoveryObservedAt);
+        correctSequence.add(BeforeBeanDiscovery.class.getName());
         // Bean discovery
-        sequence.add(LifecycleMonitoringExtension.beanDiscoveryObservedAt);
+        correctSequence.add(ProcessAnnotatedType.class.getName());
         // AfterBeanDiscovery
-        sequence.add(LifecycleMonitoringExtension.afterBeanDiscoveryObservedAt);
+        correctSequence.add(AfterBeanDiscovery.class.getName());
         // Validating bean dependencies and specialization - currently no portable way how to test
         // AfterDeploymentValidation
-        sequence.add(LifecycleMonitoringExtension.afterDeploymentValidationObservedAt);
+        correctSequence.add(AfterDeploymentValidation.class.getName());
         // Inject any enums declaring injection points
-        sequence.add(Bar.injectionPerformedAt);
+        correctSequence.add(Bar.class.getName());
         // Processing requests
-        sequence.add(Foo.pingPerformedAt);
+        correctSequence.add(Foo.class.getName());
 
-        List<Long> ascSequence = new ArrayList<Long>();
-        ascSequence.addAll(sequence);
-        // Sort asc
-        Collections.sort(ascSequence);
-
-        // See java.util.List.equals(Object)
-        assertTrue(sequence.equals(ascSequence));
+        assertEquals(ActionSequence.getSequence(), correctSequence);
     }
 }
