@@ -20,11 +20,15 @@ import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
 public class BusFactory {
+
     @Produces
     public Bus producesBus() {
         return new Bus("School bus");
     }
 
     public void disposeBus(@Disposes Bus bus) {
+    }
+
+    public void disposeVehicle(@Disposes Vehicle bus) {
     }
 }

@@ -16,7 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.multipleDisposersForProducer;
 
-public class Bus {
+public class Bus implements Vehicle {
+
     @SuppressWarnings("unused")
     private String name;
 
