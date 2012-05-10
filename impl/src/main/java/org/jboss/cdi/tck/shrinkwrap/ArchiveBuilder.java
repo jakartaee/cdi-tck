@@ -653,10 +653,18 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             final URLPackageScanner.Callback callback = new URLPackageScanner.Callback() {
                 @Override
                 public void classFound(String className) {
-                    if ((isAsClientMode() && testClazz.getName().equals(className))
-                            || (excludedClasses != null && excludedClasses.contains(className)))
+
+                    if (isAsClientMode() && testClazz.getName().equals(className))
                         return;
 
+                    if (excludedClasses != null && !excludedClasses.isEmpty()) {
+
+                        for (String exludeClassName : excludedClasses) {
+                            // Handle annonymous inner classes
+                            if (className.startsWith(exludeClassName))
+                                return;
+                        }
+                    }
                     archive.addClass(className);
                 }
             };

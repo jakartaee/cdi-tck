@@ -234,7 +234,7 @@ public class Timer {
     /**
      * 
      */
-    public interface StopCondition {
+    public static interface StopCondition {
 
         /**
          * @return <code>true</code> if stop condition satisfied, <code>false</code> otherwise
@@ -243,7 +243,7 @@ public class Timer {
 
     }
 
-    public enum ResolutionLogic {
+    public static enum ResolutionLogic {
 
         /**
          * At least one condition must be satisfied
