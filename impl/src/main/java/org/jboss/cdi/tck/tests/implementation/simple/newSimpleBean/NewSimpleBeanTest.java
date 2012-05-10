@@ -17,8 +17,11 @@
 package org.jboss.cdi.tck.tests.implementation.simple.newSimpleBean;
 
 import static org.jboss.cdi.tck.TestGroups.NEW;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
-import java.lang.annotation.Annotation;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,17 +31,18 @@ import java.util.TreeSet;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.literals.NewLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -47,12 +51,13 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class NewSimpleBeanTest extends AbstractTest {
 
-    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
-
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(NewSimpleBeanTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(NewSimpleBeanTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Tiger.class.getName()).up()
+                                .createInterceptors().clazz(OrderInterceptor.class.getName()).up()).build();
     }
 
     @Test
@@ -73,6 +78,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert getInstanceByType(Hippogriff.class).getHomes() instanceof HashMap<?, ?>;
     }
 
+    @SuppressWarnings("serial")
     @Test
     @SpecAssertions({ @SpecAssertion(section = "3.14", id = "yg") })
     public void testNewBeanCreatedForProducerMethod() {
@@ -87,6 +93,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert getInstanceByType(Bestiary.class).getPossibleNames() instanceof TreeSet<?>;
     }
 
+    @SuppressWarnings("serial")
     @Test
     @SpecAssertions({ @SpecAssertion(section = "3.14", id = "yk") })
     public void testNewBeanCreatedForDisposerMethod() {
@@ -99,9 +106,7 @@ public class NewSimpleBeanTest extends AbstractTest {
     }
 
     @Test(groups = { NEW })
-    @SpecAssertions({
-    // FIXME empty assertion!
-    })
+    @SpecAssertions({})
     public void testNewBeanIsDependentScoped() {
         FoxRun foxRun = getInstanceByType(FoxRun.class);
         foxRun.getNewFox().setDen(new Den("TheLarches"));
@@ -158,21 +163,40 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert !foxRun.getNewFox().isLitterDisposed();
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     @SpecAssertion(section = "3.14", id = "d")
     public void testForEachSimpleBeanANewBeanExists() {
-        assert getBeans(Order.class).size() == 1;
-        assert getUniqueBean(Order.class).getQualifiers().size() == 2;
-        assert getUniqueBean(Order.class).getQualifiers().contains(new DefaultLiteral());
-        assert getInstanceByType(Shop.class).getNewOrder() != null;
 
-        assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).size() == 1;
-        assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().size() == 2;
-        assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers().contains(TAME_LITERAL);
-        assert getCurrentManager().getBeans(Lion.class, TAME_LITERAL).iterator().next().getQualifiers()
-                .contains(AnyLiteral.INSTANCE);
+        Bean<Order> orderBean = getUniqueBean(Order.class);
 
-        assert getInstanceByType(LionCage.class).getNewLion() != null;
+        assertEquals(orderBean.getQualifiers().size(), 2);
+        assertTrue(annotationSetMatches(orderBean.getQualifiers(), Any.class, Default.class));
+
+        assertNotNull(getInstanceByType(Shop.class).getNewOrder());
+
+        Bean<Order> newOrderBean = getUniqueBean(Order.class, NewLiteral.INSTANCE);
+        assertEquals(newOrderBean.getBeanClass(), Order.class);
+
+        Bean<Lion> lionBean = getUniqueBean(Lion.class, new TameLiteral());
+        assertEquals(lionBean.getQualifiers().size(), 2);
+        assertTrue(annotationSetMatches(lionBean.getQualifiers(), Any.class, Tame.class));
+
+        assertNotNull(getInstanceByType(LionCage.class).getNewLion());
+    }
+
+    @Test
+    @SpecAssertion(section = "3.14", id = "e")
+    public void testNewBeanHasTheSameBeanTypes() {
+        Bean<Order> bean = getUniqueBean(Order.class, NewLiteral.INSTANCE);
+        assertTrue(typeSetMatches(bean.getTypes(), Object.class, Serializable.class, Order.class));
+    }
+
+    @Test
+    @SpecAssertion(section = "3.14", id = "i")
+    public void testNewBeanHasTheSameInterceptorBindings() {
+        // Method foo() is intercepted
+        assertTrue(getInstanceByType(Shop.class).getNewOrder().foo());
     }
 
     @Test(groups = { NEW })

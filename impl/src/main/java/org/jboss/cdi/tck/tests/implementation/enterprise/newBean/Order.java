@@ -19,12 +19,18 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 
+@Secure
 @Stateful
 public class Order implements OrderLocal {
 
     @Remove
     public void remove() {
 
+    }
+
+    @Override
+    public boolean ping() {
+        return false;
     }
 
 }

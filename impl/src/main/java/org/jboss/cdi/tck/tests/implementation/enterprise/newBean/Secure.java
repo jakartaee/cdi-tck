@@ -16,13 +16,20 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
-import javax.ejb.Local;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Local
-public interface OrderLocal {
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    public boolean ping();
+import javax.interceptor.InterceptorBinding;
 
-    public void remove();
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface Secure {
 
 }

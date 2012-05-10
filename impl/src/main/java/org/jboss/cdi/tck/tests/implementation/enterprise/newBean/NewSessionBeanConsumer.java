@@ -30,30 +30,40 @@ public class NewSessionBeanConsumer {
 
     @Inject
     @New(Order.class)
-    OrderLocal order;
+    private OrderLocal order;
 
+    @SuppressWarnings("unused")
     @Inject
     @New(Monkey.class)
-    MonkeyLocal monkey;
+    private MonkeyLocal monkey;
 
+    @SuppressWarnings("unused")
     @Inject
     @New(Lion.class)
-    LionLocal lion;
+    private LionLocal lion;
 
+    @SuppressWarnings("unused")
     @Inject
     @New(InitializerSimpleBean.class)
-    InitializerSimpleBeanLocal initializerSimpleBean;
+    private InitializerSimpleBeanLocal initializerSimpleBean;
 
+    @SuppressWarnings("unused")
     @Inject
     @New(Fox.class)
-    FoxLocal fox;
+    private FoxLocal fox;
 
+    @SuppressWarnings("unused")
     @Inject
     @New(ExplicitConstructorSessionBean.class)
-    ExplicitConstructor explicitConstructor;
+    private ExplicitConstructor explicitConstructor;
 
+    @SuppressWarnings("unused")
     @Inject
     @New(WrappedEnterpriseBean.class)
-    WrappedEnterpriseBeanLocal wrappedEnterpriseBean;
+    private WrappedEnterpriseBeanLocal wrappedEnterpriseBean;
+
+    public OrderLocal getOrder() {
+        return order;
+    }
 
 }

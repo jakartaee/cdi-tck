@@ -18,15 +18,19 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.NEW;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 
-import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.util.Set;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.New;
 import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -35,23 +39,31 @@ import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.literals.NewLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@Test(groups = { INTEGRATION, NEW })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class NewEnterpriseBeanTest extends AbstractTest {
 
-    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
-
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(NewEnterpriseBeanTest.class).build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(NewEnterpriseBeanTest.class)
+                .withExcludedClasses(Tiger.class.getName(), Spell.class.getName(), Staff.class.getName(),
+                        Dragon.class.getName(), NewEnterpriseBeanICTest.class.getName(), Hat.class.getName(),
+                        Fireball.class.getName())
+                .withLibrary(Tiger.class, Spell.class, Staff.class, Dragon.class, Hat.class, Fireball.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(OrderInterceptor.class.getName())
+                                .up()).build();
     }
 
-    @Test(groups = { INTEGRATION, NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "p")
     public void testNewBeanIsDependentScoped() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, new NewLiteral(
@@ -61,7 +73,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
         assert Dependent.class.equals(newEnterpriseBean.getScope());
     }
 
-    @Test(groups = { INTEGRATION, NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "r")
     public void testNewBeanIsHasOnlyNewBinding() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, new NewLiteral(
@@ -72,7 +84,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
         assert newEnterpriseBean.getQualifiers().iterator().next().annotationType().equals(New.class);
     }
 
-    @Test(groups = { INTEGRATION, NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "s")
     public void testNewBeanHasNoBeanELName() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, new NewLiteral(
@@ -82,7 +94,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
         assert newEnterpriseBean.getName() == null;
     }
 
-    @Test(groups = { INTEGRATION, NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "t")
     public void testNewBeanHasNoStereotypes() {
         Bean<MonkeyLocal> monkeyBean = getBeans(MonkeyLocal.class).iterator().next();
@@ -93,14 +105,14 @@ public class NewEnterpriseBeanTest extends AbstractTest {
         assert newMonkeyBean.getName() == null;
     }
 
-    @Test(groups = { INTEGRATION, NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "u")
     public void testNewBeanHasNoObservers() {
         // Should just be 1 observer from bean, not new bean
         assert getCurrentManager().resolveObserverMethods("event").size() == 1;
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.14", id = "j"), @SpecAssertion(section = "3.14", id = "k") })
     public void testForEachEnterpriseBeanANewBeanExists() {
         Bean<OrderLocal> orderBean = getBeans(OrderLocal.class).iterator().next();
@@ -115,14 +127,14 @@ public class NewEnterpriseBeanTest extends AbstractTest {
         assert newOrderBean.getQualifiers().size() == 1;
         assert newOrderBean.getQualifiers().iterator().next().annotationType().equals(New.class);
 
-        Set<Bean<LionLocal>> lionBeans = getBeans(LionLocal.class, TAME_LITERAL);
+        Set<Bean<LionLocal>> lionBeans = getBeans(LionLocal.class, TameLiteral.INSTANCE);
         Set<Bean<LionLocal>> newLionBeans = getBeans(LionLocal.class, new NewLiteral(Lion.class));
         assert lionBeans.size() == 1;
         assert newLionBeans.size() == 1;
         Bean<LionLocal> lionBean = lionBeans.iterator().next();
         Bean<LionLocal> newLionBean = newLionBeans.iterator().next();
         assert lionBean.getQualifiers().size() == 2;
-        assert lionBean.getQualifiers().contains(TAME_LITERAL);
+        assert lionBean.getQualifiers().contains(TameLiteral.INSTANCE);
         assert lionBean.getQualifiers().contains(AnyLiteral.INSTANCE);
         assert newLionBean.getQualifiers().size() == 1;
         assert newLionBean.getQualifiers().iterator().next().annotationType().equals(New.class);
@@ -130,13 +142,90 @@ public class NewEnterpriseBeanTest extends AbstractTest {
         assert lionBean.getBeanClass().equals(newLionBean.getBeanClass());
     }
 
-    @Test(groups = { INTEGRATION, NEW })
-    @SpecAssertion(section = "3.14", id = "h")
+    @Test
+    @SpecAssertion(section = "3.14", id = "n")
     public void testNewBeanHasSameInjectedFields() {
         Bean<InitializerSimpleBeanLocal> simpleBean = getBeans(InitializerSimpleBeanLocal.class).iterator().next();
         Bean<InitializerSimpleBeanLocal> newSimpleBean = getBeans(InitializerSimpleBeanLocal.class,
                 new NewLiteral(InitializerSimpleBean.class)).iterator().next();
         assert !newSimpleBean.getInjectionPoints().isEmpty();
         assert simpleBean.getInjectionPoints().equals(newSimpleBean.getInjectionPoints());
+    }
+
+    @Test
+    @SpecAssertion(section = "3.14", id = "o")
+    public void testNewBeanHasTheSameInterceptorBindings() {
+        // Method foo() is intercepted
+        assertTrue(getInstanceByType(NewSessionBeanConsumer.class).getOrder().ping());
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.14", id = "yb") })
+    public void testNewBeanCreatedForFieldInjectionPoint(Wizard wizard) {
+        Bean<Tiger> bean = getUniqueBean(Tiger.class, NewLiteral.INSTANCE);
+        checkNewQualifiedBean(bean, Object.class, Tiger.class);
+        assertTrue(wizard.getTiger().ping());
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.14", id = "yd") })
+    public void testNewBeanCreatedForInitializerInjectionPoint(Wizard wizard) {
+        Bean<Staff> bean = getUniqueBean(Staff.class, NewLiteral.INSTANCE);
+        checkNewQualifiedBean(bean, Object.class, Staff.class);
+        assertTrue(wizard.getStaff().ping());
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.14", id = "yf") })
+    public void testNewBeanCreatedForConstructorInjectionPoint(Wizard wizard) {
+        Bean<Spell> bean = getUniqueBean(Spell.class, NewLiteral.INSTANCE);
+        checkNewQualifiedBean(bean, Object.class, Spell.class);
+        assertTrue(wizard.getSpell().ping());
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.14", id = "yh") })
+    public void testNewBeanCreatedForProducerMethod(Wizard wizard) {
+        Bean<Dragon> bean = getUniqueBean(Dragon.class, NewLiteral.INSTANCE);
+        checkNewQualifiedBean(bean, Object.class, Dragon.class);
+        assertTrue(wizard.getDragon().ping());
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.14", id = "yj") })
+    public void testNewBeanCreatedForObserverMethod(Wizard wizard) {
+        Bean<Hat> bean = getUniqueBean(Hat.class, NewLiteral.INSTANCE);
+        checkNewQualifiedBean(bean, Object.class, Hat.class);
+        getCurrentManager().fireEvent(new Wizard());
+        assertTrue(wizard.getHat().ping());
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.14", id = "yl") })
+    public void testNewBeanCreatedForDisposerMethod(Wizard wizard) {
+
+        Bean<Fireball> bean = getUniqueBean(Fireball.class, NewLiteral.INSTANCE);
+        checkNewQualifiedBean(bean, Object.class, Fireball.class);
+
+        Bean<Dragon> dragonBean = getUniqueBean(Dragon.class, TameLiteral.INSTANCE);
+        CreationalContext<Dragon> ctx = getCurrentManager().createCreationalContext(dragonBean);
+        Dragon dragon = dragonBean.create(ctx);
+        dragonBean.destroy(dragon, ctx);
+
+        assertTrue(wizard.isDragonDestroyed());
+    }
+
+    private <T> void checkNewQualifiedBean(Bean<T> bean, Type... requiredTypes) {
+        assertTrue(typeSetMatches(bean.getTypes(), requiredTypes));
+        // Has scope @Dependent,
+        assertEquals(bean.getScope(), Dependent.class);
+        // Has exactly one qualifier...
+        assertTrue(annotationSetMatches(bean.getQualifiers(), new NewLiteral(bean.getBeanClass())));
+        // Has no bean EL name
+        assertNull(bean.getName());
+        // Has no stereotypes
+        assertTrue(bean.getStereotypes() == null || bean.getStereotypes().isEmpty());
+        // Is not an alternative
+        assertFalse(bean.isAlternative());
     }
 }

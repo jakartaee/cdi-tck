@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.enterprise.inject.New;
 import javax.inject.Inject;
 
+@SuppressWarnings("serial")
 public class Shop implements Serializable {
 
     @Inject

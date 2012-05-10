@@ -35,6 +35,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@Test(groups = { INTEGRATION, NEW })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class NewEnterpriseBeanICTest extends AbstractTest {
 
@@ -44,7 +45,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
                 .withExcludedClass(NewEnterpriseBeanTest.class.getName()).build();
     }
 
-    @Test(groups = { INTEGRATION, NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "l")
     public void testNewBeanHasSameConstructor() {
         ExplicitConstructor newBean = getInstanceByType(ExplicitConstructor.class, new NewLiteral(
@@ -53,7 +54,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
         assert newBean.getInjectedSimpleBean() != null;
     }
 
-    @Test(groups = { INTEGRATION, NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "m")
     public void testNewBeanHasSameInitializers() {
         InitializerSimpleBeanLocal bean = getInstanceByType(InitializerSimpleBeanLocal.class);
@@ -69,23 +70,25 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
      * 
      * @throws Exception
      */
-    @Test(groups = { INTEGRATION, NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);
         FoxLocal newFox = getInstanceByType(FoxLocal.class, new NewLiteral(Fox.class));
         fox.setNextLitterSize(3);
         newFox.setNextLitterSize(5);
+        @SuppressWarnings("serial")
         Litter theOnlyLitter = getInstanceByType(Litter.class, new AnnotationLiteral<Tame>() {
         });
         assert theOnlyLitter.getQuantity() == fox.getNextLitterSize();
     }
 
-    @Test(groups = { INTEGRATION, NEW, DISPOSAL })
+    @Test(groups = { DISPOSAL })
     @SpecAssertion(section = "3.14", id = "x")
     public void testNewBeanHasNoDisposalMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);
         FoxLocal newFox = getInstanceByType(FoxLocal.class, new NewLiteral(Fox.class));
+        @SuppressWarnings("serial")
         Set<Bean<Litter>> beans = getBeans(Litter.class, new AnnotationLiteral<Tame>() {
         });
         assert beans.size() == 1;
