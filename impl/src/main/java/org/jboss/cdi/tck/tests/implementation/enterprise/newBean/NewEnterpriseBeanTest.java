@@ -75,7 +75,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = "3.14", id = "r")
-    public void testNewBeanIsHasOnlyNewBinding() {
+    public void testNewBeanHasOnlyOneQualifier() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, new NewLiteral(
                 WrappedEnterpriseBean.class));
         assert beans.size() == 1;

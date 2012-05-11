@@ -1639,14 +1639,12 @@
             <text>This second bean has scope |@Dependent|.</text>
         </assertion>
 
-        <assertion id="r" testable="false">
+        <assertion id="r">
             <text>This second bean has exactly one qualifier: |@javax.enterprise.inject.New(X.class)| where |x| is the bean class.</text>
-            <note>Cannot look up Bean programmatically</note>
         </assertion>
 
-        <assertion id="s" testable="false">
+        <assertion id="s">
             <text>This second bean has no bean EL name.</text>
-            <note>Cannot lookup Bean programmatically</note>
         </assertion>
 
         <assertion id="t">
