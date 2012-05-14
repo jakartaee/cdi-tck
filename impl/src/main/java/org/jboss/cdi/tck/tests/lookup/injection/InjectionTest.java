@@ -19,6 +19,9 @@ package org.jboss.cdi.tck.tests.lookup.injection;
 import static org.jboss.cdi.tck.TestGroups.INJECTION;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -60,14 +63,15 @@ public class InjectionTest extends AbstractTest {
         assert wolfPack.getAlphaWolf() != null;
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "4.2", id = "aa"), @SpecAssertion(section = "5.5.2", id = "bg"),
-            @SpecAssertion(section = "5.5.2", id = "bh") })
-    public void testFieldDeclaredInSuperclassInjected() throws Exception {
-        DeluxeHenHouse henHouse = getInstanceByType(DeluxeHenHouse.class);
-        assert henHouse.fox != null;
-        assert henHouse.fox.getName().equals("gavin");
-        assert henHouse.isInitializerCalledAfterInjection();
+            @SpecAssertion(section = "5.5.2", id = "bh"), @SpecAssertion(section = "5.5.2", id = "bk"),
+            @SpecAssertion(section = "5.5.2", id = "bl") })
+    public void testInjectionFieldsAndInitializerMethods(DeluxeHenHouse henHouse) throws Exception {
+        assertNotNull(henHouse.fox);
+        assertEquals(henHouse.fox.getName(), "gavin");
+        assertTrue(henHouse.initializerCalledAfterInjectionPointsInit);
+        assertTrue(henHouse.postConstructCalledAfterInitializers);
     }
 
     @Test

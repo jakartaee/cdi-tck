@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
@@ -27,15 +28,17 @@ public class DeluxeHenHouse extends HenHouse {
     @Inject
     Wolf wolf;
 
-    private boolean initializerCalledAfterInjection = false;
+    public boolean initializerCalledAfterInjectionPointsInit = false;
+
+    public boolean postConstructCalledAfterInitializers = false;
 
     @Inject
     public void initialize() {
-        initializerCalledAfterInjection = (fox != null && wolf != null && greeting != null);
+        initializerCalledAfterInjectionPointsInit = (fox != null && wolf != null && greeting != null);
     }
 
-    public boolean isInitializerCalledAfterInjection() {
-        return initializerCalledAfterInjection;
+    @PostConstruct
+    public void postConstruct() {
+        postConstructCalledAfterInitializers = (initializerCalledAfterInjectionPointsInit && hen != null);
     }
-
 }
