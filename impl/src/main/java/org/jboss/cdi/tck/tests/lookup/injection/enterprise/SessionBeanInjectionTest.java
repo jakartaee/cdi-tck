@@ -27,6 +27,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SessionBeanInjectionTest extends AbstractTest {
 
@@ -35,7 +36,7 @@ public class SessionBeanInjectionTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(SessionBeanInjectionTest.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.5", id = "a"), @SpecAssertion(section = "5.5.2", id = "aa"),
             @SpecAssertion(section = "5.5.2", id = "ab"), @SpecAssertion(section = "5.5.2", id = "ba"),
             @SpecAssertion(section = "5.5.2", id = "be") })
@@ -43,14 +44,14 @@ public class SessionBeanInjectionTest extends AbstractTest {
         assert getInstanceByType(FarmLocal.class).isInjectionPerformedCorrectly();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.5", id = "c"), @SpecAssertion(section = "5.5.2", id = "ak"),
             @SpecAssertion(section = "5.5.2", id = "al") })
     public void testInjectionOnNonContextualSessionBean() {
         assert getInstanceByType(InjectedSessionBeanLocal.class).getFarm().isInjectionPerformedCorrectly();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ed"), @SpecAssertion(section = "5.5.2", id = "ao"),
             @SpecAssertion(section = "5.5.2", id = "ap") })
     public void testInjectionOnEJBInterceptor() {
@@ -60,7 +61,7 @@ public class SessionBeanInjectionTest extends AbstractTest {
         assert getInstanceByType(InjectedSessionBeanLocal.class).getFarm().getAnimalCount() == 2;
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertion(section = "4.2", id = "ab")
     public void testFieldDeclaredInSuperclassInjected() {
         DeluxeHenHouseLocal henHouse = getInstanceByType(DeluxeHenHouseLocal.class);
@@ -68,7 +69,7 @@ public class SessionBeanInjectionTest extends AbstractTest {
         assert henHouse.getFox().getName().equals("gavin");
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertion(section = "4.2", id = "ad")
     public void testFieldDeclaredInSuperclassIndirectlyInjected() {
         MegaPoorHenHouseLocal henHouse = getInstanceByType(MegaPoorHenHouseLocal.class);

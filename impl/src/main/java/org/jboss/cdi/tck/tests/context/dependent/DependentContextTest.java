@@ -411,7 +411,8 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test(groups = { CONTEXTS, OBSERVER_METHOD })
-    @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "ddg"), @SpecAssertion(section = "6.4.2", id = "ccd") })
+    @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "ddg"), @SpecAssertion(section = "6.4.2", id = "ccd"),
+            @SpecAssertion(section = "5.5.6", id = "d") })
     public void testDependentsDestroyedWhenObserverMethodEvaluationCompletes() {
         // Reset test class state...
         HorseStable.reset();
