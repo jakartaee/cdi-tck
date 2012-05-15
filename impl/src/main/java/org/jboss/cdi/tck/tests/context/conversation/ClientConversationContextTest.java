@@ -342,6 +342,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
+    @SpecAssertion(section = "6.7.4", id = "oa")
     public void testSuppressedConversationPropagation() throws Exception {
         WebClient client = new WebClient();
 

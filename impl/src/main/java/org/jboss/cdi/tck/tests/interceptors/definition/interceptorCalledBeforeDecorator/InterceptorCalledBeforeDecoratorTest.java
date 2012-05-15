@@ -21,6 +21,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -34,7 +35,7 @@ public class InterceptorCalledBeforeDecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.4", id = "g")
+    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "g"), @SpecAssertion(section = "9.2", id = "b") })
     public void testInterceptorCalledBeforeDecorator() {
         FooImpl.interceptorCalledFirst = false;
         FooImpl.decoratorCalledFirst = false;
