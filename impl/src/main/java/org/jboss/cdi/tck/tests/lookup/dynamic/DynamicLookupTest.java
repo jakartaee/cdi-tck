@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.Instance;
@@ -180,14 +182,19 @@ public class DynamicLookupTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "5.6", id = "e"), @SpecAssertion(section = "5.6.3", id = "b") })
-    @SuppressWarnings("serial")
     public void testNewBean() {
-        // TODO check possible weld bug
-        // Instance<List<String>> instance = getInstanceByType(ObtainsNewInstanceBean.class).getStrings();
-        // assert instance.select(new TypeLiteral<ArrayList<String>>(){}).get() instanceof ArrayList<?>;
-        String instance = getInstanceByType(ObtainsNewInstanceBean.class).getString();
-        assert instance != null && instance instanceof String;
-        getInstanceByType(ObtainsNewInstanceBean.class).getMap();
+        Instance<String> string = getInstanceByType(ObtainsNewInstanceBean.class).getString();
+        assert !string.isAmbiguous();
+        assert !string.isUnsatisfied();
+        assert string.get() != null;
+        assert string.get() instanceof String;
+
+        Instance<Map<String, String>> map = getInstanceByType(ObtainsNewInstanceBean.class).getMap();
+        assert !map.isAmbiguous();
+        assert !map.isUnsatisfied();
+        Map<String, String> instance = map.get();
+        assert instance != null;
+        assert instance instanceof HashMap<?, ?>;
     }
 
     @Test

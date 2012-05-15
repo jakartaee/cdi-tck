@@ -28,27 +28,22 @@ import org.jboss.cdi.tck.literals.NewLiteral;
 public class ObtainsNewInstanceBean {
     @Inject
     @New(HashMap.class)
-    Map<String, String> map;
+    private Instance<Map<String, String>> map;
+
     @Inject
     @New
-    String string;
-    // @Inject @New(ArrayList.class) Instance<List<String>> strings;
+    private Instance<String> string;
+
     @Inject
     Instance<IllegalArgumentException> iae;
 
-    public String getString() {
+    public Instance<String> getString() {
         return string;
     }
 
-    public Map getMap() {
+    public Instance<Map<String, String>> getMap() {
         return map;
-        // return map.select(new TypeLiteral<HashMap<String, String>>(){}).get();
     }
-
-    // public Instance<List<String>> getStrings()
-    // {
-    // return strings;
-    // }
 
     public Instance<IllegalArgumentException> getIae() {
         return iae.select(new NewLiteral(IllegalArgumentException.class));
