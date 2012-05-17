@@ -15,8 +15,9 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution;
+package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution.enterprise;
 
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -30,6 +31,8 @@ import javax.enterprise.util.AnnotationLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Timer;
+import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -42,13 +45,14 @@ import org.testng.annotations.Test;
  * 
  * @author Martin Kouba
  */
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
-public class InterceptorBindingResolutionTest extends AbstractTest {
+public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(InterceptorBindingResolutionTest.class)
+                .withTestClassPackage(EnterpriseInterceptorBindingResolutionTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
                                 .clazz(ComplicatedInterceptor.class.getName()).up()).build();
@@ -87,6 +91,22 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
         ComplicatedInterceptor.reset();
         monitorService.ping();
         assertFalse(ComplicatedInterceptor.intercepted);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = "9.5", id = "bb")
+    public void testTimeoutMethodInterceptorBindings(MessageService messageService) throws Exception {
+
+        assertNotNull(messageService);
+        ComplicatedInterceptor.reset();
+        messageService.start();
+        // Timeout is async
+        new Timer().addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return ComplicatedInterceptor.intercepted;
+            }
+        }).start();
+        assertTrue(ComplicatedInterceptor.intercepted);
     }
 
     @SuppressWarnings("serial")
