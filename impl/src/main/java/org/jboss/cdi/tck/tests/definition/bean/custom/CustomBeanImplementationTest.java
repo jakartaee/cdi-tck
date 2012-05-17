@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.custom;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -27,19 +29,20 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class CustomBeanImplementationTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
+        BeansDescriptor beanDescriptor = Descriptors.create(BeansDescriptor.class).createAlternatives()
+                .stereotype(AlternativeStereotype.class.getName()).up();
         return new WebArchiveBuilder()
                 .withTestClass(CustomBeanImplementationTest.class)
                 .withClasses(AfterBeanDiscoveryObserver.class, AlternativeStereotype.class, House.class,
                         CustomInjectionPoint.class, Bar.class)
-                .withLibrary(Foo.class, FooBean.class, IntegerBean.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives()
-                                .stereotype(AlternativeStereotype.class.getName()).up())
+                .withLibrary(beanDescriptor, false, Foo.class, FooBean.class, IntegerBean.class)
+                .withBeansXml(beanDescriptor)
                 .withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
