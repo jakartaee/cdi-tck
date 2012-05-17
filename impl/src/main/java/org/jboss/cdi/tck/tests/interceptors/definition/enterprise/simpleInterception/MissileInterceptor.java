@@ -22,14 +22,20 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+@SuppressWarnings("serial")
 @Interceptor
 @Airborne
 public class MissileInterceptor implements Serializable {
+
     public static boolean intercepted = false;
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
         intercepted = true;
         return ctx.proceed();
+    }
+
+    public static void reset() {
+        intercepted = false;
     }
 }

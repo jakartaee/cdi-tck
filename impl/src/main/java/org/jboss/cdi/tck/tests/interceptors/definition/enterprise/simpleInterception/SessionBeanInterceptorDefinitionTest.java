@@ -17,11 +17,17 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.simpleInterception;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -31,18 +37,31 @@ public class SessionBeanInterceptorDefinitionTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(SessionBeanInterceptorDefinitionTest.class)
-                .withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(SessionBeanInterceptorDefinitionTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                                .clazz(MissileInterceptor.class.getName()).up()).build();
     }
+
+    @Inject
+    MissileLocal missile;
+
+    @Inject
+    Rocket rocket;
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = "7.2", id = "c")
     public void testSessionBeanIsIntercepted() {
-        MissileInterceptor.intercepted = false;
 
-        MissileLocal missile = getInstanceByType(MissileLocal.class);
+        assertNotNull(missile);
+        MissileInterceptor.reset();
         missile.fire();
+        assertTrue(MissileInterceptor.intercepted);
 
-        assert MissileInterceptor.intercepted;
+        assertNotNull(rocket);
+        MissileInterceptor.reset();
+        rocket.fire();
+        assertTrue(MissileInterceptor.intercepted);
     }
 }
