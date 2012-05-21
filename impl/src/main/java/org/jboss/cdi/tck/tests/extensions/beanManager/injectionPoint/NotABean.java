@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.injectionPoint;
 
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class NotABean {
 
@@ -25,8 +25,7 @@ public class NotABean {
     }
 
     @Inject
-    @Produces
-    public void init(Magazine magazine) {
+    public void init(@Named Magazine magazine) {
     }
 
 }
