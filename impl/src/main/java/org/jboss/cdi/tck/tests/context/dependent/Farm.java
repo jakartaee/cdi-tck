@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
-@RequestScoped
 public class Farm {
 
     @Inject
