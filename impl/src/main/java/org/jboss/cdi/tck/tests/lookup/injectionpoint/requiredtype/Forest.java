@@ -41,9 +41,8 @@ public class Forest {
     @Inject
     Needle[] needles;
 
-    @SuppressWarnings("rawtypes")
     @Inject
-    Leaf leaf;
+    Leaf<?> leaf;
 
     @Inject
     Leaf<Spruce> spruceLeaf;

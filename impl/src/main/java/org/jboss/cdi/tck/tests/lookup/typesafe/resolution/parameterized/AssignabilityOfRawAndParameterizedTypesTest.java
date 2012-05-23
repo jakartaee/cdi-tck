@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
 import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -103,6 +104,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
     }
 
+    @SuppressWarnings("serial")
     @Test(groups = { RESOLUTION })
     @SpecAssertion(section = "5.2.3", id = "f")
     public <T1 extends Exception, T2 extends Exception, T3, T4> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
@@ -113,7 +115,8 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
 
         Set<Bean<Dao<T3, T4>>> daoBeans = getBeans(new TypeLiteral<Dao<T3, T4>>() {
         });
-        assertEquals(daoBeans.size(), 2);
+        assertEquals(daoBeans.size(), 1);
+        assertTrue(rawTypeSetMatches(daoBeans.iterator().next().getTypes(), Dao.class, Object.class));
     }
 
 }

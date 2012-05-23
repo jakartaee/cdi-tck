@@ -39,13 +39,13 @@ public class ParameterizedTypesInjectionToParameterizedWithTypeVariableUpperBoun
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(ParameterizedTypesInjectionToParameterizedWithTypeVariableUpperBoundTest.class)
+        return new WebArchiveBuilder()
+                .withTestClass(ParameterizedTypesInjectionToParameterizedWithTypeVariableUpperBoundTest.class)
                 .withClasses(Dao.class, ObjectDao.class, ConsumerTypeVariableUpperBound.class).build();
     }
 
-    @SuppressWarnings("rawtypes")
     @Inject
-    ConsumerTypeVariableUpperBound consumer;
+    ConsumerTypeVariableUpperBound<?, ?> consumer;
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "f") })
