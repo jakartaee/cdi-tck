@@ -103,7 +103,10 @@
         <apache.httpclient.version>3.1</apache.httpclient.version>
         <htmlunit.version>2.4</htmlunit.version>
         <resteasy.version>2.2.1.GA</resteasy.version>
-        <arquillian.version>1.0.0.CR7</arquillian.version>
+        <arquillian.version>1.0.0.Final</arquillian.version>
+        <shrinkwrap.version>1.0.0</shrinkwrap.version>
+        <shrinkwrap.descriptors.version>2.0.0-alpha-2</shrinkwrap.descriptors.version>
+        <jboss.jms.api.version>1.0.0.Final</jboss.jms.api.version>
     </properties>
 
     <!-- Dependency management -->
@@ -254,6 +257,24 @@
                 <groupId>org.jboss.arquillian.testng</groupId>
                 <artifactId>arquillian-testng-container</artifactId>
                 <version>${arquillian.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.shrinkwrap</groupId>
+                <artifactId>shrinkwrap-impl-base</artifactId>
+                <version>${shrinkwrap.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
+                <version>${shrinkwrap.descriptors.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.spec.javax.jms</groupId>
+                <artifactId>jboss-jms-api_1.1_spec</artifactId>
+                <version>${jboss.jms.api.version}</version>
             </dependency>
 
         </dependencies>

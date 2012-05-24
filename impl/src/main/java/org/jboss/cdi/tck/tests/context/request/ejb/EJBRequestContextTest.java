@@ -110,7 +110,7 @@ public class EJBRequestContextTest extends AbstractTest {
         assert SimpleRequestBean.isBeanDestroyed();
     }
 
-    @EJB(lookup = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.ejb.FooRemote")
+    @EJB(mappedName = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.ejb.FooRemote")
     FooRemote foo;
 
     @EJB

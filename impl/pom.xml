@@ -27,24 +27,16 @@
         <dependency>
             <groupId>org.jboss.arquillian.testng</groupId>
             <artifactId>arquillian-testng-container</artifactId>
-            <!-- Exclude this version of API -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-                    <artifactId>shrinkwrap-descriptors-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-                    <artifactId>shrinkwrap-descriptors-spi</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jboss.shrinkwrap</groupId>
+            <artifactId>shrinkwrap-impl-base</artifactId>
         </dependency>
 
-        <!-- We use 1.2.x version of API to avoid problematic migration -->
         <dependency>
             <groupId>org.jboss.shrinkwrap.descriptors</groupId>
-            <artifactId>shrinkwrap-descriptors-impl-jboss</artifactId>
-            <version>1.2.0-alpha-1</version>
+            <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
         </dependency>
 
         <dependency>
@@ -130,6 +122,11 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>jaxrs-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.jms</groupId>
+            <artifactId>jboss-jms-api_1.1_spec</artifactId>
         </dependency>
 
     </dependencies>
