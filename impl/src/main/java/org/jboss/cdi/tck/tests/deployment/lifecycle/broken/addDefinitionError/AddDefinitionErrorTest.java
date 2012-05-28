@@ -50,7 +50,7 @@ public class AddDefinitionErrorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "ca"), @SpecAssertion(section = "12.2", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "ca"), @SpecAssertion(section = "12.2", id = "e") })
     public void testObserverDefinitionErrorTreatedAsDefinitionError() {
     }
 
