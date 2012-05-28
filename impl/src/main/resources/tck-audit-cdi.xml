@@ -4049,7 +4049,7 @@
             <assertion id="ga">
                 <text>The event payload is the |ServletContextEvent| if the application is a web application deployed to a Servlet container.</text>
             </assertion>
-            <assertion id="gb">
+            <assertion id="gb" testable="false">
                 <text>the |???| in ???</text>
                 <note>Specification not finished yet</note>
             </assertion>
