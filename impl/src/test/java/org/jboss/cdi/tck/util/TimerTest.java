@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.util;
 
-import org.jboss.cdi.tck.util.Timer;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 import org.jboss.cdi.tck.util.Timer.ResolutionLogic;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.testng.annotations.Test;
@@ -32,18 +34,19 @@ public class TimerTest {
     @Test(timeOut = 1000l)
     public void testSingleCondition() throws InterruptedException {
 
-        new Timer().setDelay(5000l).addStopCondition(new StopCondition() {
+        Timer timer = new Timer().setDelay(5000l).addStopCondition(new StopCondition() {
             @Override
             public boolean isSatisfied() {
                 return true;
             }
         }).start();
+        assertTrue(timer.isStopConditionsSatisfiedBeforeTimeout());
     }
 
     @Test(timeOut = 1000l)
     public void testMultipleConditionDisjunction() throws InterruptedException {
 
-        new Timer().setDelay(5000l).addStopCondition(new StopCondition() {
+        Timer timer = new Timer().setDelay(5000l).addStopCondition(new StopCondition() {
             @Override
             public boolean isSatisfied() {
                 return true;
@@ -54,6 +57,7 @@ public class TimerTest {
                 return false;
             }
         }).start();
+        assertTrue(timer.isStopConditionsSatisfiedBeforeTimeout());
     }
 
     @Test(timeOut = 1000l, expectedExceptions = { ThreadTimeoutException.class })
@@ -82,6 +86,7 @@ public class TimerTest {
                 return true;
             }
         }).start();
+        assertTrue(timer.isStopConditionsSatisfiedBeforeTimeout());
 
         // Will be stopped after timeout (5s) exceeds
         timer.addStopCondition(new StopCondition() {
@@ -90,6 +95,7 @@ public class TimerTest {
                 return false;
             }
         }, true).start();
+        assertFalse(timer.isStopConditionsSatisfiedBeforeTimeout());
 
         timer.reset();
 

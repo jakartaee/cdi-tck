@@ -101,12 +101,13 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
         ComplicatedInterceptor.reset();
         messageService.start();
         // Timeout is async
-        new Timer().addStopCondition(new StopCondition() {
+        StopCondition condition = new StopCondition() {
             public boolean isSatisfied() {
                 return ComplicatedInterceptor.intercepted;
             }
-        }).start();
-        assertTrue(ComplicatedInterceptor.intercepted);
+        };
+        Timer timer = new Timer().addStopCondition(condition).start();
+        assertTrue(timer.isStopConditionsSatisfiedBeforeTimeout() || condition.isSatisfied());
     }
 
     @SuppressWarnings("serial")

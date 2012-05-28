@@ -58,6 +58,8 @@ public class Timer {
      */
     private ResolutionLogic resolutionLogic = DEFAULT_RESOLUTION_LOGIC;
 
+    private boolean stopConditionsSatisfiedBeforeTimeout = false;
+
     /**
      * Create new timer with default delay and sleep interval.
      * 
@@ -114,7 +116,7 @@ public class Timer {
      * Add new stop condition.
      * 
      * @param condition
-     * @param clear Clear stop conditions
+     * @param clear Clear stop conditions and reset {@link #stopConditionsSatisfiedBeforeTimeout}
      * @return self
      */
     public Timer addStopCondition(StopCondition condition, boolean clear) {
@@ -146,7 +148,7 @@ public class Timer {
 
             long start = System.currentTimeMillis();
 
-            while (!hasConditionsSatisfied() && !isTimeoutExpired(start)) {
+            while (resolveSleepConditions(start)) {
                 Thread.sleep(sleepInterval);
             }
         }
@@ -164,11 +166,20 @@ public class Timer {
     }
 
     /**
-     * 
+     * Clear stop conditions and reset {@link #stopConditionsSatisfiedBeforeTimeout}.
      */
     public void clearStopConditions() {
         if (this.stopConditions != null && !this.stopConditions.isEmpty())
             this.stopConditions.clear();
+        this.stopConditionsSatisfiedBeforeTimeout = false;
+    }
+
+    /**
+     * @return <code>true</code> if stop conditions are satisfied according to actual {@link #resolutionLogic} before timeout
+     *         occurs, <code>false</code> otherwise
+     */
+    public boolean isStopConditionsSatisfiedBeforeTimeout() {
+        return stopConditionsSatisfiedBeforeTimeout;
     }
 
     /**
@@ -191,6 +202,18 @@ public class Timer {
      */
     public static Timer startNew(long delay, long sleepInterval) throws InterruptedException {
         return new Timer().setDelay(delay).setSleepInterval(sleepInterval).start();
+    }
+
+    private boolean resolveSleepConditions(long start) {
+
+        if (hasConditionsSatisfied()) {
+            stopConditionsSatisfiedBeforeTimeout = true;
+            return false;
+        }
+        if (isTimeoutExpired(start)) {
+            return false;
+        }
+        return true;
     }
 
     private void checkConfiguration() {
