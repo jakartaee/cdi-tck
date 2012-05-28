@@ -20,6 +20,8 @@ import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.REWRITE;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -202,6 +204,28 @@ public class ClientConversationContextTest extends AbstractConversationTest {
                 "beginConversationAndSwallowException");
         page = beginConversationButton2.click();
         assert page.getBody().getTextContent().contains("Hello world!");
+    }
+
+    @Test(groups = { CONTEXTS })
+    @SpecAssertion(section = "6.7.5", id = "s")
+    public void testBeginConversationWithExplicitIdAlreadyUsedByDifferentConversation() throws Exception {
+
+        WebClient client = new WebClient();
+        HtmlPage page = client.getPage(getPath("cumulus.jsf"));
+        assertFalse(isLongRunning(page));
+
+        // Begin a conversation with explicit id
+        HtmlSubmitInput beginConversationButton = getFirstMatchingElement(page, HtmlSubmitInput.class,
+                "beginConversationIdentifiedByCustomIdentifier");
+        page = beginConversationButton.click();
+        assertTrue(isLongRunning(page));
+
+        // Try it again with the same id
+        page = client.getPage(getPath("cumulus.jsf"));
+        beginConversationButton = getFirstMatchingElement(page, HtmlSubmitInput.class,
+                "beginConversationIdentifiedByCustomIdentifierAndSwallowException");
+        page = beginConversationButton.click();
+        assertTrue(page.getBody().getTextContent().contains("Hello world!"));
     }
 
     @Test(groups = { CONTEXTS })

@@ -41,6 +41,15 @@ public class Cumulus implements Serializable {
         conversation.begin(customCid);
     }
 
+    public String beginConversationIdentifiedByCustomIdentifierAndSwallowException() {
+        try {
+            beginConversationIdentifiedByCustomIdentifier();
+            return "error";
+        } catch (IllegalArgumentException e) {
+            return "home";
+        }
+    }
+
     public String beginConversationAndSwallowException() {
         try {
             conversation.begin();
