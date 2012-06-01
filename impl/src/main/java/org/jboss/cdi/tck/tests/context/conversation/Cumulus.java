@@ -50,7 +50,7 @@ public class Cumulus implements Serializable {
         try {
             beginNextConversationIdentifiedByCustomIdentifier();
             return "error";
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             return "home";
         }
     }
