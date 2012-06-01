@@ -29,6 +29,7 @@ public class Cumulus implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final int timeout = 15000;
     private static final String customCid = "humilis";
+    private static final String customCidAlreadyInUse = "alreadyInUse";
 
     @Inject
     private Conversation conversation;
@@ -41,11 +42,15 @@ public class Cumulus implements Serializable {
         conversation.begin(customCid);
     }
 
+    public void beginNextConversationIdentifiedByCustomIdentifier() {
+        conversation.begin(customCidAlreadyInUse);
+    }
+
     public String beginConversationIdentifiedByCustomIdentifierAndSwallowException() {
         try {
-            beginConversationIdentifiedByCustomIdentifier();
+            beginNextConversationIdentifiedByCustomIdentifier();
             return "error";
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             return "home";
         }
     }

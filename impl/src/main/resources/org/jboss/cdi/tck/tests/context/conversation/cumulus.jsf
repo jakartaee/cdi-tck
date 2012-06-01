@@ -29,9 +29,13 @@
 					action="#{cumulus.beginConversationIdentifiedByCustomIdentifier}"
 					value="Begin conversation identified by custom identifier"
 					id="beginConversationIdentifiedByCustomIdentifier" />
+                <h:commandButton
+                    action="#{cumulus.beginNextConversationIdentifiedByCustomIdentifier}"
+                    value="Begin next conversation identified by custom identifier"
+                    id="beginNextConversationIdentifiedByCustomIdentifier" />
 				<h:commandButton
                     action="#{cumulus.beginConversationIdentifiedByCustomIdentifierAndSwallowException}"
-                    value="Begin conversation identified by custom identifier"
+                    value="Begin conversation identified by custom identifier and swallow exception"
                     id="beginConversationIdentifiedByCustomIdentifierAndSwallowException" />
 				<h:commandButton
 					action="#{cumulus.beginConversationAndSwallowException}"

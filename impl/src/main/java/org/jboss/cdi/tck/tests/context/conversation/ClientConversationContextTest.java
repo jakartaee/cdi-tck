@@ -216,7 +216,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
 
         // Begin a conversation with explicit id
         HtmlSubmitInput beginConversationButton = getFirstMatchingElement(page, HtmlSubmitInput.class,
-                "beginConversationIdentifiedByCustomIdentifier");
+                "beginNextConversationIdentifiedByCustomIdentifier");
         page = beginConversationButton.click();
         assertTrue(isLongRunning(page));
 
@@ -225,6 +225,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         beginConversationButton = getFirstMatchingElement(page, HtmlSubmitInput.class,
                 "beginConversationIdentifiedByCustomIdentifierAndSwallowException");
         page = beginConversationButton.click();
+        // Exception is swallowed and the browser is redirected to home
         assertTrue(page.getBody().getTextContent().contains("Hello world!"));
     }
 
