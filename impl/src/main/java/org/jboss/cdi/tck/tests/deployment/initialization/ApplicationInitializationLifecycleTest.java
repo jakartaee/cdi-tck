@@ -19,9 +19,6 @@ package org.jboss.cdi.tck.tests.deployment.initialization;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
@@ -66,7 +63,7 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
         foo.ping();
 
         // Test lifecycle phases sequence
-        List<String> correctSequence = new ArrayList<String>();
+        ActionSequence correctSequence = new ActionSequence();
         // Extension registration
         correctSequence.add(LifecycleMonitoringExtension.class.getName());
         // BeforeBeanDiscovery

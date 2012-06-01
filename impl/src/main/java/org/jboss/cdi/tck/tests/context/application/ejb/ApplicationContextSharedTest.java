@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.Future;
@@ -27,9 +28,9 @@ import java.util.concurrent.Future;
 import javax.ejb.EJB;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
-import org.jboss.cdi.tck.tests.context.request.ejb.BarBean;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
@@ -44,19 +45,31 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@Test(groups = JAVAEE_FULL)
+@Test(groups = { JAVAEE_FULL, CONTEXTS })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextSharedTest extends AbstractTest {
+
+    @Deployment(name = "TEST", order = 1)
+    public static EnterpriseArchive createTestArchive() {
+        return new EnterpriseArchiveBuilder().withTestClass(ApplicationContextSharedTest.class)
+                .withClasses(BarBean.class, FMS.class, FMSModelIII.class, SimpleApplicationBean.class, FooRemote.class).build();
+    }
+
+    @Deployment(name = "REMOTE_EJB", order = 2)
+    public static EnterpriseArchive createEjbArchive() {
+        return new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().withName("test-ejb.ear")
+                .withEjbModuleName("test-ejb.jar").withClasses(FooBean.class, FooRemote.class, SimpleApplicationBean.class)
+                .build();
+    }
 
     @EJB
     BarBean bar;
 
-    @Deployment
-    public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(ApplicationContextSharedTest.class).build();
-    }
+    @EJB(mappedName = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.ejb.FooRemote")
+    FooRemote foo;
 
-    @Test(groups = { CONTEXTS })
+    @OperateOnDeployment("TEST")
+    @Test
     @SpecAssertion(section = "6.7.3", id = "e")
     public void testApplicationContextShared() throws Exception {
         FMSModelIII.reset();
@@ -80,7 +93,8 @@ public class ApplicationContextSharedTest extends AbstractTest {
         assertTrue(flightManagementSystem.isSameBean());
     }
 
-    @Test(groups = { CONTEXTS })
+    @OperateOnDeployment("TEST")
+    @Test
     @SpecAssertion(section = "6.7.3", id = "dc")
     public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMS flightManagementSystem = getInstanceByType(FMS.class);
@@ -95,13 +109,21 @@ public class ApplicationContextSharedTest extends AbstractTest {
         assertTrue(flightManagementSystem.isApplicationScopeActive());
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { CONTEXTS })
+    @OperateOnDeployment("TEST")
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "6.7.3", id = "db") })
     public void testApplicationScopeActiveDuringAsyncCallToEjb(SimpleApplicationBean simpleApplicationBean) throws Exception {
         Future<Double> result = bar.compute();
         Double id = result.get();
         assertNotEquals(id, -1.00);
         assertEquals(id, simpleApplicationBean.getId());
+    }
+
+    @OperateOnDeployment("TEST")
+    @Test
+    @SpecAssertion(section = "6.7.3", id = "da")
+    public void testApplicationScopeActiveDuringRemoteCallToEjb() {
+        assertNotNull(foo.ping());
     }
 
 }

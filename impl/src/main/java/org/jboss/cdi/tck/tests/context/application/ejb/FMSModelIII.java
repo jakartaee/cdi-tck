@@ -28,7 +28,6 @@ import javax.inject.Inject;
 
 @Stateless
 public class FMSModelIII implements FMS {
-    private static final long serialVersionUID = 1L;
 
     private static final String CLIMB_COMMAND = "ClimbCommand";
     private static final String DESCEND_COMMAND = "DescendCommand";
