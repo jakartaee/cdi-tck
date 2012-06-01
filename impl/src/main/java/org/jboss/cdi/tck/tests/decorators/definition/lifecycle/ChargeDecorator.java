@@ -56,12 +56,12 @@ public abstract class ChargeDecorator implements BankAccount, Serializable {
 
     @PostConstruct
     public void postConstruct() {
-        ActionSequence.add("postConstructCallers", DurableAccount.class.getName());
+        ActionSequence.addAction("postConstructCallers", DurableAccount.class.getName());
     }
 
     @PreDestroy
     public void preDestroy() {
-        ActionSequence.add("preDestroyCallers", DurableAccount.class.getName());
+        ActionSequence.addAction("preDestroyCallers", DurableAccount.class.getName());
     }
 
 }

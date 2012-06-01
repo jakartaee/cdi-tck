@@ -31,12 +31,12 @@ public class FooInterceptor {
 
     @AroundInvoke
     public Object interceptMe(InvocationContext ctx) throws Exception {
-        ActionSequence.add(NAME);
+        ActionSequence.addAction(NAME);
         return ctx.proceed();
     }
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
-        ActionSequence.add("lifecycle", ctx.getTarget().getClass().getName());
+        ActionSequence.addAction("lifecycle", ctx.getTarget().getClass().getName());
     }
 }

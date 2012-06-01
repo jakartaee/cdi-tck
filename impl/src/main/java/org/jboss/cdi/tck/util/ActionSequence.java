@@ -17,11 +17,13 @@
 package org.jboss.cdi.tck.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
+ * Simple data holder for sequence of actions identified with {@link String}.
  * 
  * @author Martin Kouba
  */
@@ -29,55 +31,136 @@ public final class ActionSequence {
 
     private static final String DEFAULT_SEQUENCE = "default";
 
-    private static Map<String, List<String>> sequences;
+    /**
+     * Static sequences holder
+     */
+    private static Map<String, ActionSequence> sequences = null;
 
-    static {
-        sequences = new HashMap<String, List<String>>();
-        sequences.put(DEFAULT_SEQUENCE, new ArrayList<String>());
+    private List<String> data = Collections.synchronizedList(new ArrayList<String>());
+
+    public ActionSequence add(String actionId) {
+        this.data.add(actionId);
+        return this;
     }
 
-    private ActionSequence() {
-    }
-
-    public static void reset() {
-        sequences.clear();
+    public List<String> getData() {
+        return data;
     }
 
     /**
+     * Remove all sequences.
+     */
+    public static void reset() {
+        if (sequences != null)
+            sequences.clear();
+    }
+
+    /**
+     * Add actionId to specified sequence. Add new sequence if needed.
      * 
      * @param sequence
      * @param actionId
      */
-    public static void add(String sequence, String actionId) {
+    public static void addAction(String sequence, String actionId) {
+
+        if (sequences == null)
+            sequences = new HashMap<String, ActionSequence>();
 
         if (!sequences.containsKey(sequence))
-            sequences.put(sequence, new ArrayList<String>());
+            sequences.put(sequence, new ActionSequence());
 
         sequences.get(sequence).add(actionId);
     }
 
     /**
+     * Add actionId to default sequence.
      * 
      * @param actionId
      */
-    public static void add(String actionId) {
-        add(DEFAULT_SEQUENCE, actionId);
+    public static void addAction(String actionId) {
+        addAction(DEFAULT_SEQUENCE, actionId);
     }
 
-    public static List<String> getSequence() {
+    /**
+     * @return default sequence
+     */
+    public static ActionSequence getSequence() {
         return getSequence(DEFAULT_SEQUENCE);
     }
 
-    public static List<String> getSequence(String sequence) {
-        return sequences.get(sequence);
+    /**
+     * @param name
+     * @return specified sequence
+     */
+    public static ActionSequence getSequence(String name) {
+        return sequences.get(name);
     }
 
+    /**
+     * @return data of default sequence
+     */
+    public static List<String> getSequenceData() {
+        return getSequenceData(DEFAULT_SEQUENCE);
+    }
+
+    /**
+     * @param sequence
+     * @return data of specified sequence
+     */
+    public static List<String> getSequenceData(String sequence) {
+        return sequences.get(sequence).getData();
+    }
+
+    /**
+     * @return size of default sequence
+     */
     public static int getSequenceSize() {
-        return getSequence().size();
+        return getSequenceSize(DEFAULT_SEQUENCE);
     }
 
+    /**
+     * @param sequence
+     * @return size of specified sequence
+     */
     public static int getSequenceSize(String sequence) {
-        return sequences.containsKey(sequence) ? sequences.get(sequence).size() : 0;
+        return sequences.containsKey(sequence) ? sequences.get(sequence).getData().size() : 0;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((data == null) ? 0 : data.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ActionSequence other = (ActionSequence) obj;
+        if (data == null) {
+            if (other.data != null)
+                return false;
+        } else if (!data.equals(other.data))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("ActionSequence [");
+        if (data != null) {
+            builder.append("data=");
+            builder.append(data);
+        }
+        builder.append("]");
+        return builder.toString();
     }
 
 }

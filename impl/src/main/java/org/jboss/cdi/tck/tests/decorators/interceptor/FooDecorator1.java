@@ -35,12 +35,12 @@ public class FooDecorator1 implements Foo {
     Foo foo;
 
     public void doSomething() {
-        ActionSequence.add(NAME);
+        ActionSequence.addAction(NAME);
         foo.doSomething();
     }
 
     @PostConstruct
     public void postConstruct() {
-        ActionSequence.add("lifecycle", NAME);
+        ActionSequence.addAction("lifecycle", NAME);
     }
 }

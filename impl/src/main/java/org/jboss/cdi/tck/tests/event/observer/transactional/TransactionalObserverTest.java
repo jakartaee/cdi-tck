@@ -3,7 +3,6 @@ package org.jboss.cdi.tck.tests.event.observer.transactional;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.event.TransactionPhase;
@@ -56,7 +55,7 @@ public class TransactionalObserverTest extends AbstractTest {
         // BEFORE_COMPLETION must be fired at the beginning of the commit (after checkpoint)
         // AFTER_SUCCESS must be fired after BEFORE_COMPLETION and before AFTER_COMPLETION
         // AFTER_FAILURE is not fired
-        List<String> correctSequence = new ArrayList<String>();
+        ActionSequence correctSequence = new ActionSequence();
         correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
         correctSequence.add("checkpoint");
         correctSequence.add(TransactionPhase.BEFORE_COMPLETION.toString());
@@ -81,7 +80,7 @@ public class TransactionalObserverTest extends AbstractTest {
 
         // AFTER_FAILURE must be fired after checkpoint and before AFTER_COMPLETION
         // AFTER_SUCCESS and BEFORE_COMPLETION is not fired
-        List<String> correctSequence = new ArrayList<String>();
+        ActionSequence correctSequence = new ActionSequence();
         correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
         correctSequence.add("checkpoint");
         correctSequence.add(TransactionPhase.AFTER_FAILURE.toString());
@@ -106,7 +105,7 @@ public class TransactionalObserverTest extends AbstractTest {
         accountService.withdrawNoTransaction(3);
 
         // No TX is active - all events are fired immediately and thus before checkpoint
-        List<String> sequence = ActionSequence.getSequence();
+        List<String> sequence = ActionSequence.getSequenceData();
         assertEquals(sequence.size(), 6);
         assertEquals(sequence.get(sequence.size() - 1), "checkpoint");
     }

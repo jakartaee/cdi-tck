@@ -59,13 +59,13 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
         Foo foo = getInstanceByType(Foo.class);
         foo.doSomething();
 
-        List<String> sequence = ActionSequence.getSequence();
+        List<String> sequence = ActionSequence.getSequenceData();
         assertEquals(sequence.size(), 3);
         assertEquals(sequence.get(0), FooInterceptor.NAME);
         assertEquals(sequence.get(1), FooDecorator1.NAME);
         assertEquals(sequence.get(2), FooDecorator2.NAME);
 
-        List<String> lifecycle = ActionSequence.getSequence("lifecycle");
+        List<String> lifecycle = ActionSequence.getSequenceData("lifecycle");
         assertEquals(lifecycle.size(), 3);
         assertTrue(lifecycle.contains(FooDecorator1.NAME));
         assertTrue(lifecycle.contains(foo.getClass().getName()));

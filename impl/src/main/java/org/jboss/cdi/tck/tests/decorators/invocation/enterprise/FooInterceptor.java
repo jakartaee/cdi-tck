@@ -28,7 +28,7 @@ public class FooInterceptor {
 
     @AroundInvoke
     public Object aroundInvoke(InvocationContext ctx) throws Exception {
-        ActionSequence.add(FooInterceptor.class.getName());
+        ActionSequence.addAction(FooInterceptor.class.getName());
         return ctx.proceed();
     }
 

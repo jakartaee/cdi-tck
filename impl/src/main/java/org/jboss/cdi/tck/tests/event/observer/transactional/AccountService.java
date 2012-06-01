@@ -30,7 +30,7 @@ public class AccountService {
     public void withdrawSuccesTransaction(int amount) throws Exception {
         userTransaction.begin();
         event.fire(new Withdrawal(amount));
-        ActionSequence.add("checkpoint");
+        ActionSequence.addAction("checkpoint");
         userTransaction.commit();
     }
 
@@ -42,7 +42,7 @@ public class AccountService {
     public void withdrawFailedTransaction(int amount) throws Exception {
         userTransaction.begin();
         event.fire(new Withdrawal(amount));
-        ActionSequence.add("checkpoint");
+        ActionSequence.addAction("checkpoint");
         // Failed for any reason
         userTransaction.rollback();
     }
@@ -54,7 +54,7 @@ public class AccountService {
      */
     public void withdrawNoTransaction(int amount) throws Exception {
         event.fire(new Withdrawal(amount));
-        ActionSequence.add("checkpoint");
+        ActionSequence.addAction("checkpoint");
     }
 
 }

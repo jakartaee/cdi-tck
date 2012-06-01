@@ -82,7 +82,7 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
                 + FooBusinessDecorator1.class.getName());
 
         // Decorators are called after interceptors and decorator that occures earlier in the list is called first
-        List<String> sequence = ActionSequence.getSequence();
+        List<String> sequence = ActionSequence.getSequenceData();
         assertEquals(sequence.size(), 3);
         assertEquals(sequence.get(0), FooInterceptor.class.getName());
         assertEquals(sequence.get(1), FooBusinessDecorator1.class.getName());
@@ -106,7 +106,7 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
         // Test actual decoration
         assertEquals(foo.invokeBarBusinessOperation1(), Bar.class.getName() + BarBusinessDecorator.class.getName());
 
-        List<String> sequence = ActionSequence.getSequence();
+        List<String> sequence = ActionSequence.getSequenceData();
         assertEquals(sequence.size(), 1);
         assertEquals(sequence.get(0), BarBusinessDecorator.class.getName());
     }

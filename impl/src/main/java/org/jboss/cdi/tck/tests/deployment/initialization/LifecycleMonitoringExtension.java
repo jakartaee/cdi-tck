@@ -32,24 +32,24 @@ import org.jboss.cdi.tck.util.ActionSequence;
 public class LifecycleMonitoringExtension implements Extension {
 
     public LifecycleMonitoringExtension() {
-        ActionSequence.add(LifecycleMonitoringExtension.class.getName());
+        ActionSequence.addAction(LifecycleMonitoringExtension.class.getName());
     }
 
     public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event) {
-        ActionSequence.add(BeforeBeanDiscovery.class.getName());
+        ActionSequence.addAction(BeforeBeanDiscovery.class.getName());
     }
 
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event) {
-        ActionSequence.add(AfterBeanDiscovery.class.getName());
+        ActionSequence.addAction(AfterBeanDiscovery.class.getName());
     }
 
     public void observeAfterDeploymentValidation(@Observes AfterDeploymentValidation event) {
-        ActionSequence.add(AfterDeploymentValidation.class.getName());
+        ActionSequence.addAction(AfterDeploymentValidation.class.getName());
     }
 
     public void observeBeanDiscovery(@Observes ProcessAnnotatedType<Foo> event) {
         // We only need to check bean discovery occured in specific sequence
-        ActionSequence.add(ProcessAnnotatedType.class.getName());
+        ActionSequence.addAction(ProcessAnnotatedType.class.getName());
     }
 
 }

@@ -35,7 +35,7 @@ public abstract class BarBusinessDecorator implements Business {
 
     @Override
     public String businessOperation1() {
-        ActionSequence.add(BarBusinessDecorator.class.getSimpleName());
+        ActionSequence.addAction(BarBusinessDecorator.class.getSimpleName());
         return business.businessOperation1() + BarBusinessDecorator.class.getName();
     }
 }

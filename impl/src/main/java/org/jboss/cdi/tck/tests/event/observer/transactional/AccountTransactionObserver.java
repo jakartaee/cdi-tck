@@ -64,6 +64,6 @@ public class AccountTransactionObserver {
 
     private void logEventFired(TransactionPhase phase) {
         logger.log(phase.toString());
-        ActionSequence.add(phase.toString());
+        ActionSequence.addAction(phase.toString());
     }
 }

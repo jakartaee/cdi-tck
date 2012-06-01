@@ -35,7 +35,7 @@ public abstract class FooBusinessDecorator1 implements Business {
 
     @Override
     public String businessOperation1() {
-        ActionSequence.add(FooBusinessDecorator1.class.getName());
+        ActionSequence.addAction(FooBusinessDecorator1.class.getName());
         return business.businessOperation1() + FooBusinessDecorator1.class.getName();
     }
 

@@ -23,7 +23,7 @@ public class Foo {
     public static long pingPerformedAt = 0l;
 
     public void ping() {
-        ActionSequence.add(Foo.class.getName());
+        ActionSequence.addAction(Foo.class.getName());
     }
 
 }

@@ -31,7 +31,7 @@ public enum Bar {
     @Inject
     public void setFoo(Foo foo) {
         this.foo = foo;
-        ActionSequence.add(Bar.class.getName());
+        ActionSequence.addAction(Bar.class.getName());
     }
 
 }
