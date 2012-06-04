@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2008, Red Hat, Inc. and/or its affiliates, and individual contributors
+ * Copyright 2010, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,33 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.request.jaxrs;
+package org.jboss.cdi.tck.tests.context.request.ws;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.RequestScoped;
+import java.io.IOException;
+
 import javax.inject.Inject;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@RequestScoped
-public class Foo {
+@WebServlet("/info")
+@SuppressWarnings("serial")
+public class InfoServlet extends HttpServlet {
 
     @Inject
-    ObservingBean observingBean;
+    private ObservingBean observer;
 
-    private long id;
-
-    public long getId() {
-        return id;
-    }
-
-    @PostConstruct
-    public void init() {
-        this.id = System.currentTimeMillis();
-    }
-
-    @PreDestroy
-    public void destroy() {
-        observingBean.getFooDestroyedCount().incrementAndGet();
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.getWriter().append("Foo destroyed:" + observer.getFooDestroyedCount().get());
+        resp.setContentType("text/plain");
     }
 
 }

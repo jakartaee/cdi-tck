@@ -14,14 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.request.jaxrs;
+package org.jboss.cdi.tck.tests.context.request.ws;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
+
+import javax.xml.namespace.QName;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -42,7 +44,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * 
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class RequestContextTest extends AbstractTest {
 
@@ -53,32 +55,33 @@ public class RequestContextTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(RequestContextTest.class)
+                .withExcludedClass(TranslatorEndpointService.class.getName())
                 .withWebXml(
-                        Descriptors.create(WebAppDescriptor.class).createServletMapping()
-                                .servletName("javax.ws.rs.core.Application").urlPattern("/resources/*").up()).build();
+                        Descriptors.create(WebAppDescriptor.class).createServlet().servletName("Translator")
+                                .servletClass("org.jboss.cdi.tck.tests.context.request.ws.TranslatorEndpoint").loadOnStartup(1)
+                                .up().createServletMapping().servletName("Translator").urlPattern("/translator").up()).build();
     }
 
     @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "c"), @SpecAssertion(section = "6.7.1", id = "d"),
-            @SpecAssertion(section = "6.7.1", id = "jb") })
+            @SpecAssertion(section = "6.7.3", id = "b") })
     public void testRequestScopeActiveDuringWebServiceInvocation() throws Exception {
+
+        URL wsdlLocation = new URL(contextPath.toExternalForm() + "translator?wsdl");
+        TranslatorEndpointService endpointService = new TranslatorEndpointService(wsdlLocation, new QName(
+                "http://ws.request.context.tests.tck.cdi.jboss.org/", "Translator"));
+        Translator translator = endpointService.getTranslatorPort();
+
+        // New instance of Foo is created for each WS request
+        Long id01 = Long.valueOf(translator.translate());
+        Long id02 = Long.valueOf(translator.translate());
+        assertNotEquals(id01, id02);
 
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
 
-        // New instance of Foo is created for each request
-        TextPage resource01 = webClient.getPage(contextPath + "resources/foo");
-        Long id01 = Long.valueOf(resource01.getContent());
-        TextPage resource02 = webClient.getPage(contextPath + "resources/foo");
-        Long id02 = Long.valueOf(resource02.getContent());
-        assertNotEquals(id01, id02);
-
-        // At the time the info servlet is generating response, 3 requests were initialized and 2 destroyed
-        TextPage resource03 = webClient.getPage(contextPath + "info");
-        assertTrue(resource03.getContent().contains("Initialized requests:3"));
-        assertTrue(resource03.getContent().contains("Destroyed requests:2"));
-
-        assertTrue(resource03.getContent().contains("Foo destroyed:2"));
+        TextPage info = webClient.getPage(contextPath + "info");
+        assertTrue(info.getContent().contains("Foo destroyed:2"));
     }
 
 }

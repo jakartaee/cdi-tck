@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2008, Red Hat, Inc. and/or its affiliates, and individual contributors
+ * Copyright 2010, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,33 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.request.jaxrs;
+package org.jboss.cdi.tck.tests.context.request.ws;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import java.util.concurrent.atomic.AtomicInteger;
 
-@RequestScoped
-public class Foo {
+import javax.enterprise.context.ApplicationScoped;
 
-    @Inject
-    ObservingBean observingBean;
+@ApplicationScoped
+public class ObservingBean {
 
-    private long id;
+    private final AtomicInteger fooDestroyedCount = new AtomicInteger();
 
-    public long getId() {
-        return id;
-    }
-
-    @PostConstruct
-    public void init() {
-        this.id = System.currentTimeMillis();
-    }
-
-    @PreDestroy
-    public void destroy() {
-        observingBean.getFooDestroyedCount().incrementAndGet();
+    public AtomicInteger getFooDestroyedCount() {
+        return fooDestroyedCount;
     }
 
 }
