@@ -18,10 +18,11 @@ package org.jboss.cdi.tck.tests.implementation.simple.lifecycle.unproxyable;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 
+import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.UnproxyableResolutionException;
+import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -29,20 +30,19 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-/**
- * TODO Needs to be fixed to test runtime exception instead of deployment time exception - CDITCK-263.
- */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class UnproxyableManagedBeanTest extends AbstractTest {
 
-    @ShouldThrowException(UnproxyableResolutionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(UnproxyableManagedBeanTest.class).build();
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test(groups = { CONTEXTS }, expectedExceptions = UnproxyableResolutionException.class)
     @SpecAssertion(section = "6.5.3", id = "a")
-    public void testNormalScopedUnproxyableBeanThrowsException() {
+    public void testNormalScopedUnproxyableBeanResolution() {
+        Bean<UnproxyableBean> bean = getUniqueBean(UnproxyableBean.class);
+        CreationalContext<UnproxyableBean> ctx = getCurrentManager().createCreationalContext(bean);
+        getCurrentManager().getReference(bean, UnproxyableBean.class, ctx);
     }
 }
