@@ -26,7 +26,7 @@ import javax.enterprise.inject.spi.Extension;
  */
 public class LifecycleMonitoringExtension implements Extension {
 
-    public void observeBeforeBeanDiscovery(@Observes BeforeShutdown event) {
+    public void observeBeforeShutdown(@Observes BeforeShutdown event) {
         InfoClient.doGetInfo(BeforeShutdown.class.getName());
     }
 
