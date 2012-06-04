@@ -53,4 +53,11 @@ public class ActionSequenceTest {
         assertEquals(ActionSequence.getSequenceSize(nextSeq), 0);
     }
 
+    @Test
+    public void testToString() {
+        ActionSequence.addAction("1");
+        ActionSequence.addAction("2");
+        assertEquals(ActionSequence.getSequence().toString(), "ActionSequence [data=[1, 2]]");
+    }
+
 }
