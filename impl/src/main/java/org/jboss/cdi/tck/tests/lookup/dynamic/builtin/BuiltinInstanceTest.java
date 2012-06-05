@@ -16,9 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -36,6 +41,10 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BuiltinInstanceTest extends AbstractTest {
 
+    @SuppressWarnings("serial")
+    private static final AnnotationLiteral<FarmBased> farmBasedLiteral = new AnnotationLiteral<FarmBased>() {
+    };
+
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BuiltinInstanceTest.class).build();
@@ -44,32 +53,64 @@ public class BuiltinInstanceTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "5.6.2", id = "d")
     public void testScopeOfBuiltinInstance() {
-        Bean<Instance<Cow>> bean = getBeans(new TypeLiteral<Instance<Cow>>() {
-        }).iterator().next();
-        assert Dependent.class.equals(bean.getScope());
+        @SuppressWarnings("serial")
+        Bean<Instance<Cow>> bean = getUniqueBean(new TypeLiteral<Instance<Cow>>() {
+        });
+        assertEquals(bean.getScope(), Dependent.class);
     }
 
     @Test
     @SpecAssertion(section = "5.6.2", id = "e")
     public void testNameOfBuiltinInstance() {
-        Bean<Instance<Cow>> bean = getBeans(new TypeLiteral<Instance<Cow>>() {
-        }).iterator().next();
-        assert bean.getName() == null;
+        @SuppressWarnings("serial")
+        Bean<Instance<Cow>> bean = getUniqueBean(new TypeLiteral<Instance<Cow>>() {
+        });
+        assertNull(bean.getName());
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.6.2", id = "a"), @SpecAssertion(section = "5.6.2", id = "f") })
-    public void testInstanceProvidedForEveryLegalBeanType() {
-        Farm farm = getInstanceByType(Farm.class);
-        assert farm.getAnimal() != null;
-        assert farm.getAbstractAnimal() != null;
-        assert farm.getCow() != null;
+    @SuppressWarnings({ "serial", "rawtypes" })
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    // CDI-232
+    // @SpecAssertion(section = "5.6.2", id = "a")
+    @SpecAssertions({ @SpecAssertion(section = "5.6.2", id = "f") })
+    public void testInstanceProvidedForEveryLegalBeanType(Farm farm, Instance<Predator<?>> predatorInstance) {
+
+        // Interface
+        Bean<?> instanceBean = getUniqueBean(new TypeLiteral<Instance<Animal>>() {
+        });
+        // Abstract class
+        assertEquals(getUniqueBean(new TypeLiteral<Instance<AbstractAnimal>>() {
+        }), instanceBean);
+        // Final class
+        assertEquals(getUniqueBean(new TypeLiteral<Instance<FinalAnimal>>() {
+        }), instanceBean);
+        // Parameterized and raw type
+        assertEquals(getUniqueBean(new TypeLiteral<Instance<Wolf>>() {
+        }), instanceBean);
+        assertEquals(getUniqueBean(new TypeLiteral<Instance<Predator>>() {
+        }), instanceBean);
+        // Array
+        assertEquals(getUniqueBean(new TypeLiteral<Instance<Sheep[]>>() {
+        }), instanceBean);
+        // Primitive
+        assertEquals(getUniqueBean(new TypeLiteral<Instance<Integer>>() {
+        }, farmBasedLiteral), instanceBean);
+
+        assertNotNull(predatorInstance);
+        predatorInstance.select(Wolf.class).get().attack(null);
+
+        assertNotNull(farm.getAnimal());
+        assertNotNull(farm.getAbstractAnimal());
+        assertNotNull(farm.getCow());
+        farm.getCow().get().ping();
     }
 
-    @Test
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = "5.6.2", id = "g")
-    public void testInstanceIsPassivationCapable() throws Exception {
-        Field field = getInstanceByType(Field.class);
+    public void testInstanceIsPassivationCapable(Field field) throws Exception {
+
+        assertNotNull(field);
+
         Object object = deserialize(serialize(field));
         assert field.getInstance().get() instanceof Cow;
         assert object instanceof Field;

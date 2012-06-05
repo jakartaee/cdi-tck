@@ -21,9 +21,11 @@ import java.io.Serializable;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
+@SuppressWarnings("serial")
 public class Field implements Serializable {
 
     @Inject
+    @FarmBased
     private Instance<Cow> instance;
 
     public Instance<Cow> getInstance() {

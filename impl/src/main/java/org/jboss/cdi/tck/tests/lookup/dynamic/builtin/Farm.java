@@ -17,14 +17,19 @@
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
 import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
-public class Farm extends AbstractAnimal {
+public class Farm {
+
     @Inject
     private Instance<Animal> animal;
+
     @Inject
     private Instance<AbstractAnimal> abstractAnimal;
+
     @Inject
+    @FarmBased
     private Instance<Cow> cow;
 
     public Instance<Animal> getAnimal() {
@@ -37,6 +42,22 @@ public class Farm extends AbstractAnimal {
 
     public Instance<Cow> getCow() {
         return cow;
+    }
+
+    @Produces
+    public Sheep produceSheep() {
+        return new Sheep();
+    }
+
+    @Produces
+    public Sheep[] produceSheeps() {
+        return new Sheep[] {};
+    }
+
+    @FarmBased
+    @Produces
+    public int produceSheepCount() {
+        return 0;
     }
 
 }

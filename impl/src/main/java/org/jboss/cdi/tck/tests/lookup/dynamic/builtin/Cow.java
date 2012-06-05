@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
+@FarmBased
 public class Cow extends AbstractAnimal {
 
 }

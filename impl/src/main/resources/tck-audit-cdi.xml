@@ -3134,12 +3134,14 @@
     </section>
 
     <section id="5.6.2" title="The built-in Instance">
-        <assertion id="a">
+        <assertion id="a" testable="false">
             <text>The container must provide a built-in bean with |Instance&lt;X&gt;| and |Provider&lt;X&gt;| for every legal bean type |x| in its set of bean types.</text>
+            <note>FIXME - see also CDI-232.</note>
         </assertion>
 
-        <assertion id="b">
+        <assertion id="b" testable="false">
             <text>The container must provide a built-in bean with every qualifier type in its set of qualifier types.</text>
+            <note>FIXME - see also CDI-232.</note>
         </assertion>
 
         <assertion id="d">
