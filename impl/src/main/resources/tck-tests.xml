@@ -82,6 +82,14 @@
             </methods>
          </class>
 
+	<!-- CDITCK-249 -->
+	<class name="org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.EnterpriseBeanSpecializationTest">
+            <methods>
+               <exclude name=".*"/>
+            </methods>
+         </class>
+
+
          <!-- Issues in Weld (the RI) -->
          
          
