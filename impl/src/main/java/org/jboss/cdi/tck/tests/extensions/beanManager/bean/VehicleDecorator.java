@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 
+import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Veto;
 import javax.inject.Inject;
 
 @Veto
+@Decorator
 public class VehicleDecorator implements Vehicle {
 
     @Inject
