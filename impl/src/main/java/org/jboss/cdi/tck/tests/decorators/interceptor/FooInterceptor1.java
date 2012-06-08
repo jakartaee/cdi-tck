@@ -14,25 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle;
-
-import java.io.Serializable;
+package org.jboss.cdi.tck.tests.decorators.interceptor;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
-@SuppressWarnings("serial")
-@Airborne
 @Interceptor
-public class MissileInterceptor implements Serializable {
+@FooBinding1
+public class FooInterceptor1 {
 
-    @PreDestroy
-    public void preDestroy(InvocationContext ctx) {
-        ActionSequence.addAction("preDestroy", MissileInterceptor.class.getName());
+    public static String NAME = FooInterceptor1.class.getSimpleName();
+
+    @AroundInvoke
+    public Object interceptMe(InvocationContext ctx) throws Exception {
+        ActionSequence.addAction(NAME);
+        return ctx.proceed();
+    }
+
+    @PostConstruct
+    public void postConstruct(InvocationContext ctx) {
+        ActionSequence.addAction("postConstruct", ctx.getTarget().getClass().getName() + NAME);
         try {
             ctx.proceed();
         } catch (Throwable e) {
@@ -40,9 +46,9 @@ public class MissileInterceptor implements Serializable {
         }
     }
 
-    @PostConstruct
-    public void postConstruct(InvocationContext ctx) {
-        ActionSequence.addAction("postConstruct", MissileInterceptor.class.getName());
+    @PreDestroy
+    public void preDestroy(InvocationContext ctx) {
+        ActionSequence.addAction("preDestroy", ctx.getTarget().getClass().getName() + NAME);
         try {
             ctx.proceed();
         } catch (Throwable e) {

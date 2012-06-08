@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
+
+import java.util.List;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -24,6 +26,7 @@ import javax.enterprise.inject.spi.Bean;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -41,14 +44,15 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
                 .withTestClassPackage(LifecycleInterceptorDefinitionTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(MissileInterceptor.class.getName()).up()).build();
+                                .clazz(MissileInterceptor.class.getName(), DestructionInterceptor.class.getName()).up())
+                .build();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "9.3", id = "a"), @SpecAssertion(section = "9.5", id = "a") })
     public void testLifecycleInterception() {
 
-        MissileInterceptor.reset();
+        ActionSequence.reset();
 
         Bean<Missile> bean = getUniqueBean(Missile.class);
         CreationalContext<Missile> ctx = getCurrentManager().createCreationalContext(bean);
@@ -56,7 +60,34 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
         missile.fire();
         bean.destroy(missile, ctx);
 
-        assertTrue(MissileInterceptor.postConstructCalled);
-        assertTrue(MissileInterceptor.preDestroyCalled);
+        assertEquals(ActionSequence.getSequenceSize("postConstruct"), 1);
+        assertEquals(ActionSequence.getSequenceData("postConstruct").get(0), MissileInterceptor.class.getName());
+        assertEquals(ActionSequence.getSequenceSize("preDestroy"), 1);
+        assertEquals(ActionSequence.getSequenceData("preDestroy").get(0), MissileInterceptor.class.getName());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "9.5", id = "a") })
+    public void tesMultipleLifecycleInterceptors() {
+
+        ActionSequence.reset();
+
+        Bean<Rocket> bean = getUniqueBean(Rocket.class);
+        CreationalContext<Rocket> ctx = getCurrentManager().createCreationalContext(bean);
+        Rocket rocket = bean.create(ctx);
+        rocket.fire();
+        bean.destroy(rocket, ctx);
+
+        List<String> postConstruct = ActionSequence.getSequenceData("postConstruct");
+        assertEquals(postConstruct.size(), 3);
+        assertEquals(postConstruct.get(0), MissileInterceptor.class.getName());
+        assertEquals(postConstruct.get(1), DestructionInterceptor.class.getName());
+        assertEquals(postConstruct.get(2), Rocket.class.getName());
+
+        List<String> preDestroy = ActionSequence.getSequenceData("preDestroy");
+        assertEquals(preDestroy.size(), 3);
+        assertEquals(preDestroy.get(0), MissileInterceptor.class.getName());
+        assertEquals(preDestroy.get(1), DestructionInterceptor.class.getName());
+        assertEquals(preDestroy.get(2), Rocket.class.getName());
     }
 }

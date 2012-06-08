@@ -108,7 +108,7 @@ public final class ActionSequence {
      * @return data of specified sequence
      */
     public static List<String> getSequenceData(String sequence) {
-        return sequences.get(sequence).getData();
+        return sequences.containsKey(sequence) ? sequences.get(sequence).getData() : null;
     }
 
     /**

@@ -17,24 +17,18 @@
 
 package org.jboss.cdi.tck.tests.decorators.interceptor;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import org.jboss.cdi.tck.util.ActionSequence;
+import javax.interceptor.InterceptorBinding;
 
-@Decorator
-public class FooDecorator2 implements Foo {
-
-    public static String NAME = FooDecorator2.class.getSimpleName();
-
-    @Inject
-    @Delegate
-    Foo foo;
-
-    public void doSomething() {
-        ActionSequence.addAction(NAME);
-        foo.doSomething();
-    }
+@Inherited
+@InterceptorBinding
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface FooBinding2 {
 
 }

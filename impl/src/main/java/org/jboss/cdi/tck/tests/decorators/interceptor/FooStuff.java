@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.decorators.interceptor;
 
-@FooBinding
+
+@FooBinding1
+@FooBinding2
 public class FooStuff implements Foo {
 
     public void doSomething() {

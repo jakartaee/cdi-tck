@@ -17,9 +17,11 @@
 package org.jboss.cdi.tck.tests.decorators.interceptor;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 import java.util.List;
+
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -41,34 +43,60 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorAndInterceptorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(FooInterceptor.class.getName())
-                                .up().createDecorators().clazz(FooDecorator1.class.getName(), FooDecorator2.class.getName())
-                                .up()).build();
+                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                                .clazz(FooInterceptor1.class.getName(), FooInterceptor2.class.getName()).up()
+                                .createDecorators().clazz(FooDecorator1.class.getName(), FooDecorator2.class.getName()).up())
+                .build();
     }
 
     /**
-     * Test that interceptor is called before decorator and that invocations of decorator methods during method or lifecycle
-     * callback interception are not business method invocation, and therefore are not intercepted by interceptors.
+     * Test that interceptor chain is called before decorator chain and that invocations of decorator methods during method or
+     * lifecycle callback interception are not business method invocation, and therefore are not intercepted by interceptors.
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.2", id = "f"), @SpecAssertion(section = "7.2", id = "ka") })
-    public void testInterceptorCalledBeforeDecoratorChain() {
+    @SpecAssertions({ @SpecAssertion(section = "8.2", id = "f"), @SpecAssertion(section = "9.4", id = "g"),
+            @SpecAssertion(section = "7.2", id = "ka"), @SpecAssertion(section = "7.2", id = "kb"),
+            @SpecAssertion(section = "7.2", id = "kc"), @SpecAssertion(section = "7.2", id = "kd") })
+    public void testMethodCallbacks() {
 
         ActionSequence.reset();
-
-        Foo foo = getInstanceByType(Foo.class);
-        foo.doSomething();
+        useFoo();
 
         List<String> sequence = ActionSequence.getSequenceData();
-        assertEquals(sequence.size(), 3);
-        assertEquals(sequence.get(0), FooInterceptor.NAME);
-        assertEquals(sequence.get(1), FooDecorator1.NAME);
-        assertEquals(sequence.get(2), FooDecorator2.NAME);
+        assertEquals(sequence.size(), 4);
+        assertEquals(sequence.get(0), FooInterceptor1.NAME);
+        assertEquals(sequence.get(1), FooInterceptor2.NAME);
+        assertEquals(sequence.get(2), FooDecorator1.NAME);
+        assertEquals(sequence.get(3), FooDecorator2.NAME);
+    }
 
-        List<String> lifecycle = ActionSequence.getSequenceData("lifecycle");
-        assertEquals(lifecycle.size(), 3);
-        assertTrue(lifecycle.contains(FooDecorator1.NAME));
-        assertTrue(lifecycle.contains(foo.getClass().getName()));
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "kc"), @SpecAssertion(section = "7.2", id = "kd") })
+    public void testLifecycleCallbacks() {
+
+        ActionSequence.reset();
+        String fooClass = useFoo();
+
+        List<String> postConstruct = ActionSequence.getSequenceData("postConstruct");
+        assertEquals(postConstruct.size(), 2);
+        assertEquals(postConstruct.get(0), fooClass + FooInterceptor1.NAME);
+        assertEquals(postConstruct.get(1), fooClass + FooInterceptor2.NAME);
+
+        List<String> preDestroy = ActionSequence.getSequenceData("preDestroy");
+        assertEquals(preDestroy.size(), 2);
+        assertEquals(preDestroy.get(0), fooClass + FooInterceptor1.NAME);
+        assertEquals(preDestroy.get(1), fooClass + FooInterceptor2.NAME);
+    }
+
+    private String useFoo() {
+        String fooClass = null;
+        Bean<Foo> bean = getUniqueBean(Foo.class);
+        CreationalContext<Foo> ctx = getCurrentManager().createCreationalContext(bean);
+        Foo foo = bean.create(ctx);
+        fooClass = foo.getClass().getName();
+        foo.doSomething();
+        bean.destroy(foo, ctx);
+        return fooClass;
     }
 
 }

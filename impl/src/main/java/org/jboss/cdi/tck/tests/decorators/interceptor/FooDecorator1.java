@@ -17,14 +17,12 @@
 
 package org.jboss.cdi.tck.tests.decorators.interceptor;
 
-import javax.annotation.PostConstruct;
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
-@FooBinding
 @Decorator
 public class FooDecorator1 implements Foo {
 
@@ -37,10 +35,5 @@ public class FooDecorator1 implements Foo {
     public void doSomething() {
         ActionSequence.addAction(NAME);
         foo.doSomething();
-    }
-
-    @PostConstruct
-    public void postConstruct() {
-        ActionSequence.addAction("lifecycle", NAME);
     }
 }

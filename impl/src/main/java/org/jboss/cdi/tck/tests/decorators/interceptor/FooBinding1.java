@@ -29,6 +29,6 @@ import javax.interceptor.InterceptorBinding;
 @InterceptorBinding
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface FooBinding {
+public @interface FooBinding1 {
 
 }

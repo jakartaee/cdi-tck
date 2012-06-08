@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.decorators.interceptor;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -24,10 +25,10 @@ import javax.interceptor.InvocationContext;
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Interceptor
-@FooBinding
-public class FooInterceptor {
+@FooBinding2
+public class FooInterceptor2 {
 
-    public static String NAME = FooInterceptor.class.getSimpleName();
+    public static String NAME = FooInterceptor2.class.getSimpleName();
 
     @AroundInvoke
     public Object interceptMe(InvocationContext ctx) throws Exception {
@@ -37,6 +38,21 @@ public class FooInterceptor {
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
-        ActionSequence.addAction("lifecycle", ctx.getTarget().getClass().getName());
+        ActionSequence.addAction("postConstruct", ctx.getTarget().getClass().getName() + NAME);
+        try {
+            ctx.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PreDestroy
+    public void preDestroy(InvocationContext ctx) {
+        ActionSequence.addAction("preDestroy", ctx.getTarget().getClass().getName() + NAME);
+        try {
+            ctx.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -14,27 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle;
 
-package org.jboss.cdi.tck.tests.decorators.interceptor;
+import java.lang.annotation.Target;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Documented;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.METHOD;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import javax.interceptor.InterceptorBinding;
 
-import org.jboss.cdi.tck.util.ActionSequence;
-
-@Decorator
-public class FooDecorator2 implements Foo {
-
-    public static String NAME = FooDecorator2.class.getSimpleName();
-
-    @Inject
-    @Delegate
-    Foo foo;
-
-    public void doSomething() {
-        ActionSequence.addAction(NAME);
-        foo.doSomething();
-    }
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface Destructive {
 
 }

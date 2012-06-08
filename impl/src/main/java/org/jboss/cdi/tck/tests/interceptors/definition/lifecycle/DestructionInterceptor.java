@@ -26,13 +26,13 @@ import javax.interceptor.InvocationContext;
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @SuppressWarnings("serial")
-@Airborne
+@Destructive
 @Interceptor
-public class MissileInterceptor implements Serializable {
+public class DestructionInterceptor implements Serializable {
 
     @PreDestroy
     public void preDestroy(InvocationContext ctx) {
-        ActionSequence.addAction("preDestroy", MissileInterceptor.class.getName());
+        ActionSequence.addAction("preDestroy", DestructionInterceptor.class.getName());
         try {
             ctx.proceed();
         } catch (Throwable e) {
@@ -42,12 +42,11 @@ public class MissileInterceptor implements Serializable {
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
-        ActionSequence.addAction("postConstruct", MissileInterceptor.class.getName());
+        ActionSequence.addAction("postConstruct", DestructionInterceptor.class.getName());
         try {
             ctx.proceed();
         } catch (Throwable e) {
             throw new RuntimeException(e);
         }
     }
-
 }
