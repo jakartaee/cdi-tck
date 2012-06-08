@@ -19,8 +19,10 @@ package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 import static org.jboss.cdi.tck.TestGroups.EVENTS;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -73,6 +75,19 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         assert getCurrentManager().resolveObserverMethods(new StringList()).size() == 1;
         assert getCurrentManager().resolveObserverMethods(new IntegerList()).size() == 1;
         assert getCurrentManager().resolveObserverMethods(new CharacterList()).size() == 0;
+    }
+
+    @Test(groups = { EVENTS })
+    @SpecAssertion(section = "10.2.1", id = "b")
+    public void testParameterizedEventTypeAssignableToRawType() {
+        verifyRawTypeObserver(new RawTypeObserver.BoxWithDifferentTypeParameters());
+        verifyRawTypeObserver(new RawTypeObserver.BoxWithObjectTypeParameters());
+    }
+
+    private void verifyRawTypeObserver(Object event) {
+        Set<ObserverMethod<? super Object>> observers = getCurrentManager().resolveObserverMethods(event);
+        assert observers.size() == 1;
+        assert observers.iterator().next().getBeanClass().equals(RawTypeObserver.class);
     }
 
     @Test(groups = { EVENTS })
