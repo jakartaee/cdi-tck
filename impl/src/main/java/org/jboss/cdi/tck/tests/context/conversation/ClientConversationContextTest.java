@@ -300,15 +300,15 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     public void testConversationIdMayBeSetByApplication() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
-        assert !isLongRunning(page);
+        assertFalse(isLongRunning(page));
 
         // begin a conversation
         HtmlSubmitInput beginConversationButton = getFirstMatchingElement(page, HtmlSubmitInput.class,
                 "beginConversationIdentifiedByCustomIdentifier");
         page = beginConversationButton.click();
-        assert isLongRunning(page);
-        assert getCid(page).equals("humilis");
-        assert page.getBody().getTextContent().contains("Cumulus humilis");
+        assertTrue(isLongRunning(page));
+        assertEquals(getCid(page), "humilis");
+        assertTrue(page.getBody().getTextContent().contains("Cumulus humilis"));
     }
 
     @Test(groups = { CONTEXTS })
