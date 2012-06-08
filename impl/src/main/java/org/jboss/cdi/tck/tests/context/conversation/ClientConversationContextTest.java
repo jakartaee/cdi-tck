@@ -215,15 +215,15 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assertFalse(isLongRunning(page));
 
         // Begin a conversation with explicit id
-        HtmlSubmitInput beginConversationButton = getFirstMatchingElement(page, HtmlSubmitInput.class,
-                "beginNextConversationIdentifiedByCustomIdentifier");
+        HtmlSubmitInput beginConversationButton = (HtmlSubmitInput) page
+                .getElementById("form:beginNextConversationIdentifiedByCustomIdentifier");
         page = beginConversationButton.click();
         assertTrue(isLongRunning(page));
 
         // Try it again with the same id
         page = client.getPage(getPath("cumulus.jsf"));
-        beginConversationButton = getFirstMatchingElement(page, HtmlSubmitInput.class,
-                "beginConversationIdentifiedByCustomIdentifierAndSwallowException");
+        beginConversationButton = (HtmlSubmitInput) page
+                .getElementById("form:beginConversationIdentifiedByCustomIdentifierAndSwallowException");
         page = beginConversationButton.click();
         // Exception is swallowed and the browser is redirected to home
         assertTrue(page.getBody().getTextContent().contains("Hello world!"));
@@ -303,8 +303,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assertFalse(isLongRunning(page));
 
         // begin a conversation
-        HtmlSubmitInput beginConversationButton = getFirstMatchingElement(page, HtmlSubmitInput.class,
-                "beginConversationIdentifiedByCustomIdentifier");
+        HtmlSubmitInput beginConversationButton = (HtmlSubmitInput) page
+                .getElementById("form:beginConversationIdentifiedByCustomIdentifier");
         page = beginConversationButton.click();
         assertTrue(isLongRunning(page));
         assertEquals(getCid(page), "humilis");

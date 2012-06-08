@@ -78,6 +78,15 @@ public abstract class AbstractConversationTest extends AbstractTest {
 
     }
 
+    /**
+     * Note that this method doesn't return the first element whose id equals specified id but the one whose id contains
+     * specified id!
+     * 
+     * @param page
+     * @param elementClass
+     * @param id
+     * @return the first element whose id contains specified id
+     */
     protected <T extends HtmlElement> T getFirstMatchingElement(HtmlPage page, Class<T> elementClass, String id) {
 
         Set<T> inputs = getElements(page.getBody(), elementClass);
