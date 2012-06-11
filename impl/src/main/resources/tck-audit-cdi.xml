@@ -5460,9 +5460,19 @@
             <text>Observers may throw exceptions. ~If an observer method is a transactional observer method, any exception is caught and logged by the container. Otherwise, the exception aborts processing of the event. No other observer methods of that event will be called. The |BeanManager.fireEvent()| or |Event.fire()| method rethrows the exception.~ If the exception is a checked exception, it is wrapped and rethrown as an (unchecked) |ObserverException|.</text>
         </assertion>
 
-        <assertion id="f">
+        <group>
             <text>For a custom implementation of the |ObserverMethod| interface defined in Section 11.1.3, "The ObserverMethod interface", the container must call |getReception()| and |getTransactionPhase()| to determine if the observer method is a conditional or transactional observer method, and |notify()| to invoke the method.</text>
-        </assertion>
+            <assertion id="fa">
+                <text>Check |getTransactionPhase()| is called.</text>
+            </assertion>
+            <assertion id="fb">
+                <text>Check |notify()| is called.</text>
+            </assertion>
+            <assertion id="fc">
+                <text>Check |getReception()| is called.</text>
+                <note>This assertion will be probably removed - see CDI-124.</note>                
+            </assertion>
+        </group>
 
         <assertion id="fa">
             <text>CDI 1.1 implementations should call the notify method which takes both the event object and the event qualifiers only.</text>
