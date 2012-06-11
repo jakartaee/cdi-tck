@@ -55,7 +55,7 @@ public class CustomTransactionalObserverTest extends AbstractTest {
     private ObserverExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fa"), @SpecAssertion(section = "10.5", id = "fb"), })
+    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fa"), @SpecAssertion(section = "10.5", id = "fb") })
     public void testCustomTransactionalObserver() throws Exception {
 
         ActionSequence.reset();
