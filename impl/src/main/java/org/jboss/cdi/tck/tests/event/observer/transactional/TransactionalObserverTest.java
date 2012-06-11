@@ -45,7 +45,7 @@ public class TransactionalObserverTest extends AbstractTest {
             @SpecAssertion(section = "10.5", id = "bb") })
     public void testSucessfullTransaction() throws Exception {
 
-        logTestMethod("testSucessfullTransaction");
+        logger.log("testSucessfullTransaction");
         ActionSequence.reset();
 
         // Checkpoint is right before tx commit
@@ -72,7 +72,7 @@ public class TransactionalObserverTest extends AbstractTest {
             @SpecAssertion(section = "10.5", id = "bb") })
     public void testFailedTransaction() throws Exception {
 
-        logTestMethod("testFailedTransaction");
+        logger.log("testFailedTransaction");
         ActionSequence.reset();
 
         // Checkpoint is right before tx rollback
@@ -98,7 +98,7 @@ public class TransactionalObserverTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "10.4.4", id = "a"), @SpecAssertion(section = "10.5", id = "bc") })
     public void testNoTransaction() throws Exception {
 
-        logTestMethod("testNoTransaction");
+        logger.log("testNoTransaction");
         ActionSequence.reset();
 
         // Checkpoint is after event send
@@ -110,8 +110,26 @@ public class TransactionalObserverTest extends AbstractTest {
         assertEquals(sequence.get(sequence.size() - 1), "checkpoint");
     }
 
-    private void logTestMethod(String methodName) {
-        logger.log(methodName);
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "bda") })
+    public void testObserverFailedTransaction() throws Exception {
+
+        logger.log("testObserverFailedTransaction");
+        ActionSequence.reset();
+
+        accountService.withdrawObserverFailedTransaction(2);
+
+        // IN_PROGRESS is fired twice
+        // AFTER_FAILURE must be fired after checkpoint and before AFTER_COMPLETION
+        // AFTER_SUCCESS and BEFORE_COMPLETION is not fired
+        ActionSequence correctSequence = new ActionSequence();
+        correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
+        correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
+        correctSequence.add("checkpoint");
+        correctSequence.add(TransactionPhase.AFTER_FAILURE.toString());
+        correctSequence.add(TransactionPhase.AFTER_COMPLETION.toString());
+
+        assertEquals(ActionSequence.getSequence(), correctSequence);
     }
 
 }

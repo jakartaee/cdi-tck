@@ -7,6 +7,7 @@ import javax.ejb.TransactionManagementType;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Status;
 import javax.transaction.UserTransaction;
 
 import org.jboss.cdi.tck.util.ActionSequence;
@@ -21,6 +22,9 @@ public class AccountService {
 
     @Inject
     Event<Withdrawal> event;
+
+    @Inject
+    Event<Failure> eventFailure;
 
     /**
      * 
@@ -55,6 +59,23 @@ public class AccountService {
     public void withdrawNoTransaction(int amount) throws Exception {
         event.fire(new Withdrawal(amount));
         ActionSequence.addAction("checkpoint");
+    }
+
+    /**
+     * 
+     * @param amount
+     * @throws Exception
+     */
+    public void withdrawObserverFailedTransaction(int amount) throws Exception {
+        userTransaction.begin();
+        event.fire(new Withdrawal(amount));
+        eventFailure.fire(new Failure());
+        ActionSequence.addAction("checkpoint");
+        if (userTransaction.getStatus() == Status.STATUS_MARKED_ROLLBACK) {
+            userTransaction.rollback();
+        } else {
+            userTransaction.commit();
+        }
     }
 
 }

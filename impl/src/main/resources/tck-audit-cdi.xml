@@ -5436,7 +5436,6 @@
 
         <assertion id="bda">
             <text>Any observer method called before completion of a transaction may call |setRollbackOnly()| to force a transaction rollback.</text>
-            <note>Unverifiable since an observer method cannot access the transaction being committed</note>
         </assertion>
 
         <assertion id="bdb" testable="false">

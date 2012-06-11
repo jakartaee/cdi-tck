@@ -1,7 +1,9 @@
 package org.jboss.cdi.tck.tests.event.observer.transactional;
 
+import javax.annotation.Resource;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.TransactionPhase;
+import javax.transaction.UserTransaction;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
@@ -13,6 +15,9 @@ import org.jboss.cdi.tck.util.SimpleLogger;
 public class AccountTransactionObserver {
 
     private static final SimpleLogger logger = new SimpleLogger(AccountTransactionObserver.class);
+
+    @Resource
+    private UserTransaction userTransaction;
 
     /**
      * 
@@ -60,6 +65,16 @@ public class AccountTransactionObserver {
      */
     public void withdrawAfterFailure(@Observes(during = TransactionPhase.AFTER_FAILURE) Withdrawal withdrawal) throws Exception {
         logEventFired(TransactionPhase.AFTER_FAILURE);
+    }
+
+    /**
+     * 
+     * @param failure
+     * @throws Exception
+     */
+    public void failBeforeCompletion(@Observes(during = TransactionPhase.IN_PROGRESS) Failure failure) throws Exception {
+        logEventFired(TransactionPhase.IN_PROGRESS);
+        userTransaction.setRollbackOnly();
     }
 
     private void logEventFired(TransactionPhase phase) {
