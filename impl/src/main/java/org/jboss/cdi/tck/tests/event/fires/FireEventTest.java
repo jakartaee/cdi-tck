@@ -275,7 +275,7 @@ public class FireEventTest extends AbstractTest {
     }
 
     @Test(groups = { EVENTS }, expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "10.3.1", id = "f")
+    @SpecAssertions({ @SpecAssertion(section = "10.3.1", id = "f"), @SpecAssertion(section = "10.2", id = "j") })
     public <T> void testEventFireThrowsExceptionIfEventObjectContainsTypeVariable() {
         MiniBar miniBar = getInstanceByType(MiniBar.class);
         miniBar.itemEvent.fire(new Item_Illegal<T>("12 oz Beer", 5.50));

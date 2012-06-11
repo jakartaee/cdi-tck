@@ -335,7 +335,8 @@
 
         <assertion id="da">
             <text>If there are two different stereotypes declared by the bean that declare different default scopes, then there is no default scope and the bean must explicitly declare a scope. If it does not explicitly declare a scope, the container automatically
-                detects the problem and treats it as a definition error.</text>
+                detects the problem and treats it as a definition error.
+            </text>
         </assertion>
 
         <assertion id="e">
@@ -2454,7 +2455,8 @@
 
         <group>
             <text>A parameterized bean type is considered assignable to a parameterized required type if they have identical raw type and for each parameter: the required type parameter and the bean type parameter are actual types with identical raw type, and, if the type is parameterized, the bean type parameter is assignable to the required type parameter according to these rules, or the required type parameter is a wildcard, the bean type parameter is an actual type and the actual type is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the required type parameter is a wildcard, the bean type parameter is a type
-                variable and the upper bound of the type variable is assignable to or assignable from the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the required type parameter is an actual type, the bean type parameter is a type variable and the actual type is as- signable to the upper bound, if any, of the type variable, or the required type parameter and the bean type parameter are both type variables and the upper bound of the required type parameter is assignable to the upper bound, if any, of the bean type parameter.</text>
+                variable and the upper bound of the type variable is assignable to or assignable from the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the required type parameter is an actual type, the bean type parameter is a type variable and the actual type is as- signable to the upper bound, if any, of the type variable, or the required type parameter and the bean type parameter are both type variables and the upper bound of the required type parameter is assignable to the upper bound, if any, of the bean type parameter.
+            </text>
 
             <assertion id="ba">
                 <text>Check the required type parameter and the bean type parameter are actual types with identical raw type</text>
@@ -2804,7 +2806,8 @@
 
         <group>
             <text>The container must ensure that: Initializer methods declared by a class X in the type hierarchy of the bean are called after all injected fields declared by X or by superclasses of X have been initialized, and after all Java EE component environment resource dependencies declared by X or by superclasses of X have been injected. Any |@PostConstruct| callback declared by a class X in the type hierarchy of the bean is called after all initializer meth- ods declared by X or by superclasses of X have been called, after all injected fields declared by X or by superclasses of X have been initialized, and after all Java EE component environment resource dependencies declared by X
-                or by superclasses of X have been injected. Any servlet |init()| method is called after all initializer methods have been called, all injected fields have been initialized and all Java EE component environment resource dependencies have been injected.</text>
+                or by superclasses of X have been injected. Any servlet |init()| method is called after all initializer methods have been called, all injected fields have been initialized and all Java EE component environment resource dependencies have been injected.
+            </text>
             <assertion id="ba">
                 <text>Test session bean initializer methods called after injected field of X</text>
             </assertion>
@@ -4406,7 +4409,8 @@
     <section id="7.3.3" title="Lifecycle of stateless session and singleton beans">
         <assertion id="a" testable="false">
             <text>When the |create()| method of a Bean object that represents a stateless session or singleton session bean is called, the container
-                creates and returns a container-specific internal local reference to the session bean. This reference is not directly exposed to the application.</text>
+                creates and returns a container-specific internal local reference to the session bean. This reference is not directly exposed to the application.
+            </text>
             <note>It's not possible to test container-specific internal local reference that is not directly exposed to the application.</note>
         </assertion>
 
@@ -4746,7 +4750,8 @@
 
         <group>
             <text>A parameterized bean type is considered assignable to a parameterized delegate type if they have identical raw type and for each parameter: the delegate type parameter and the bean type parameter are actual types with identical raw type, and, if the type is parameterized, the bean type parameter is assignable to the delegate type parameter according to these rules, or the delegate type parameter is a wildcard, the bean type parameter is an actual type and the actual type is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the delegate type parameter is a wildcard, the bean type parameter is a type
-                variable and the upper bound of the type variable is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the delegate type parameter and the bean type parameter are both type variables and the upper bound of the bean type parameter is assignable to the upper bound, if any, of the delegate type parameter, or the delegate type parameter is a type variable, the bean type parameter is an actual type, and the actual type is assignable to the upper bound, if any, of the type variable.</text>
+                variable and the upper bound of the type variable is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the delegate type parameter and the bean type parameter are both type variables and the upper bound of the bean type parameter is assignable to the upper bound, if any, of the delegate type parameter, or the delegate type parameter is a type variable, the bean type parameter is an actual type, and the actual type is assignable to the upper bound, if any, of the type variable.
+            </text>
 
             <assertion id="c">
                 <text>Check both have identical type parameters</text>
@@ -4928,7 +4933,8 @@
 
         <assertion id="b">
             <text>The order of the interceptor declarations determines the interceptor ordering. Interceptors which occur earlier in the list are
-                called first.</text>
+                called first.
+            </text>
         </assertion>
 
         <group>
@@ -4950,7 +4956,7 @@
         <group>
             <text>Interceptors declared using |@Interceptors| or in |ejb-jar.xml| are called before interceptors declared
                 using interceptor bindings.
-        </text>
+            </text>
 
             <assertion id="fa">
                 <text>Test with a managed bean</text>
@@ -4969,7 +4975,7 @@
     <section id="9.5" title="Interceptor resolution">
         <assertion id="a">
             <text>For a lifecycle callback method, the interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings and stereotypes.
-      </text>
+            </text>
         </assertion>
 
         <group>
@@ -5127,10 +5133,28 @@
             <text>A parameterized event type is considered assignable to a raw observed event type if the raw types are identical.</text>
         </assertion>
 
-        <assertion id="c">
+        <group>
             <text>A parameterized event type is considered assignable to a parameterized observed event type if they have identical raw type and for each parameter the observed event type parameter is an actual type with identical raw type to the event type parameter, and, if the type is parameterized, the event type parameter is assignable to the observed event type parameter according to these rules, or the observed event type parameter is a wildcard and the event type parameter is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the observed event type parameter is a type variable and the event type parameter is
-                assignable to the upper bound, if any, of the type variable.</text>
-        </assertion>
+                assignable to the upper bound, if any, of the type variable.
+            </text>
+            <assertion id="c">
+                <text>Check the event type parameter and the observed event type parameter are actual types with identical raw type.</text>
+            </assertion>
+            <assertion id="d">
+                <text>Check the event type parameter and the observed event type parameter are actual types with identical raw type for nested type parameters.</text>
+            </assertion>
+            <assertion id="e">
+                <text>Check the observed event type parameter is a wildcard and the event type parameter is assignable to the upper bound, if any,
+                    of the wildcard and assignable from the lower bound, if any, of the wildcard.
+                </text>
+            </assertion>
+            <assertion id="f">
+                <text>Check the observed event type parameter is a type variable and the event type parameter is assignable to the upper bound, if
+                    any, of the type variable.
+                </text>
+            </assertion>
+        </group>
+
     </section>
 
     <section id="10.2.2" title="Event qualifier types with members">
@@ -5234,7 +5258,8 @@
 
         <assertion id="g">
             <text>The built-in implementation must be a passivation capable dependency, as defined in Section 6.6.2, "Passivation capable
-                dependencies".</text>
+                dependencies".
+            </text>
         </assertion>
     </section>
 
@@ -6127,7 +6152,8 @@
 
         <group>
             <text>The container must use the operations of |Annotated| and its subinterfaces to discover program element types and annotations. The container must not directly call the Java Reflection API. In particular, the container must call |Annotated.getBaseType()| to determine the type of an injection point, event parameter or disposed parameter, call |Annotated.getTypeClosure()| to determine the bean types of any kind of bean, call |Annotated.getAnnotations()| to determine the scope, qualifiers, stereotypes and interceptor bindings of a bean, call |Annotated.isAnnotationPresent()| and |Annotated.getAnnotation()| to read any bean annotations defined by this specification, and call
-                |AnnotatedType.getConstructors()|, |AnnotatedType.getMethods()| and |AnnotatedType.getFields()| to determine the members of a bean class.</text>
+                |AnnotatedType.getConstructors()|, |AnnotatedType.getMethods()| and |AnnotatedType.getFields()| to determine the members of a bean class.
+            </text>
 
             <assertion id="h">
                 <text>Check that the container uses the operations of |Annotated| and its subinterfaces to discover program element types and annotations. and that the container does not use the Java Reflection API.</text>
@@ -7092,7 +7118,7 @@
             <assertion id="db">
                 <text>
                     Check definitions errors occur
-         </text>
+                </text>
             </assertion>
         </group>
 
@@ -7231,16 +7257,17 @@
 
         <group>
             <text>For each enabled bean, the container must search the class for producer methods and fields, including resources, and for each producer method or field create a |Producer|, as defined in Section 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type |ProcessProducer|, as defined in Section 11.5.7, "ProcessProducer event", and then if the producer method or field is enabled, create a |Bean| object that implements the rules defined in Section 7.3.4, "Lifecycle of producer methods", Section 7.3.5, "Lifecycle of producer fields" or Section 7.3.6, "Lifecycle of resources", and fire an event which is a subtype of |ProcessBean|, as defined in Section 11.5.8,
-                "ProcessBean event".</text>
+                "ProcessBean event".
+            </text>
             <assertion id="ha">
                 <text>
                     Check a producer method
-        </text>
+                </text>
             </assertion>
             <assertion id="hb">
                 <text>
                     Check a producer field
-        </text>
+                </text>
             </assertion>
         </group>
 
@@ -7292,9 +7319,7 @@
         </assertion>
 
         <!-- All unresolvable ambiguous EL names are detected by the container when the application is initialized -->
-        <!-- assertion id="b">
-            <text>If a name used in an EL expression resolves to more than one bean, the |ELResolver| must throw an |AmbiguousResolutionException|.</text>
-        </assertion-->
+        <!-- assertion id="b"> <text>If a name used in an EL expression resolves to more than one bean, the |ELResolver| must throw an |AmbiguousResolutionException|.</text> </assertion -->
 
         <assertion id="d">
             <text>Otherwise, if a name used in an EL expression resolves to exactly one bean, the |ELResolver| must return a contextual instance of the bean, as defined in Section 6.5.2, "Contextual instance of a bean".</text>

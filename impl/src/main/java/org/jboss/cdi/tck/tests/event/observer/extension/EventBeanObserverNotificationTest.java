@@ -28,6 +28,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -61,19 +62,22 @@ public class EventBeanObserverNotificationTest extends AbstractObserverNotificat
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "fa")
+    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fa"), @SpecAssertion(section = "11.5.2", id = "eb"),
+            @SpecAssertion(section = "10.2", id = "k") })
     public void testNoQualifier() {
         testNoQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "fa")
+    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fa"), @SpecAssertion(section = "11.5.2", id = "eb"),
+            @SpecAssertion(section = "10.2", id = "k") })
     public void testSingleQualifier() {
         testSingleQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "fa")
+    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fa"), @SpecAssertion(section = "11.5.2", id = "eb"),
+            @SpecAssertion(section = "10.2", id = "k") })
     public void testMultipleQualifiers() {
         testMultipleQualifiersInternal();
     }
