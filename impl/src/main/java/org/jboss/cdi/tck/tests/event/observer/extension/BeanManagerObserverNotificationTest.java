@@ -50,19 +50,19 @@ public class BeanManagerObserverNotificationTest extends AbstractObserverNotific
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "fa")
+    @SpecAssertion(section = "10.5", id = "fd")
     public void testNoQualifier() {
         testNoQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "fa")
+    @SpecAssertion(section = "10.5", id = "fd")
     public void testSingleQualifier() {
         testSingleQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "fa")
+    @SpecAssertion(section = "10.5", id = "fd")
     public void testMultipleQualifiers() {
         testMultipleQualifiersInternal();
     }

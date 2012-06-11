@@ -62,21 +62,21 @@ public class EventBeanObserverNotificationTest extends AbstractObserverNotificat
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fa"), @SpecAssertion(section = "11.5.2", id = "eb"),
+    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fd"), @SpecAssertion(section = "11.5.2", id = "eb"),
             @SpecAssertion(section = "10.2", id = "k") })
     public void testNoQualifier() {
         testNoQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fa"), @SpecAssertion(section = "11.5.2", id = "eb"),
+    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fd"), @SpecAssertion(section = "11.5.2", id = "eb"),
             @SpecAssertion(section = "10.2", id = "k") })
     public void testSingleQualifier() {
         testSingleQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fa"), @SpecAssertion(section = "11.5.2", id = "eb"),
+    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fd"), @SpecAssertion(section = "11.5.2", id = "eb"),
             @SpecAssertion(section = "10.2", id = "k") })
     public void testMultipleQualifiers() {
         testMultipleQualifiersInternal();
