@@ -976,7 +976,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return <code>true</code> if building as-client mode archive, <code>false</code> otherwise
      */
     public Boolean isAsClientMode() {
-        return isAsClientMode;
+        return isAsClientMode != null ? isAsClientMode : false;
     }
 
     /**
@@ -1023,7 +1023,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     private void resolveAsClientMode() {
 
-        if (isAsClientMode() != null) {
+        if (this.isAsClientMode != null) {
             return;
         }
 
