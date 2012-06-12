@@ -116,7 +116,7 @@ public class ContainerEventTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aas"), @SpecAssertion(section = "11.5.8", id = "aao"),
-            @SpecAssertion(section = "11.5.8", id = "aan"), @SpecAssertion(section = "11.5.8", id = "aap") })
+            @SpecAssertion(section = "11.5.8", id = "aan") })
     public void testTypeOfProcessInjectionTargetParameter() {
         assert !ProcessInjectionTargetObserver.isStringObserved();
         assert ProcessInjectionTargetObserver.isTagHandlerSubTypeObserved();

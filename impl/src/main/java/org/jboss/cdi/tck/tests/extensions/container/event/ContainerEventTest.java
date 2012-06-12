@@ -76,17 +76,6 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aal"), @SpecAssertion(section = "11.5.8", id = "aam") })
-    public void testTypeOfProcessInjectionTargetParameter() {
-        assert ProcessInjectionTargetObserver.getEvent1Observed() == 0;
-        assert ProcessInjectionTargetObserver.getEvent2Observed() == 0;
-        assert ProcessInjectionTargetObserver.getEvent3Observed() == 0;
-        assert ProcessInjectionTargetObserver.getEvent4Observed() == 0;
-        assert ProcessInjectionTargetObserver.getEvent5Observed() == 1;
-        assert ProcessInjectionTargetObserver.getEventWithTypeVariable() != null;
-    }
-
-    @Test
     @SpecAssertion(section = "12.4", id = "ba")
     public void testProcessAnnotatedTypeFiredForManagedBean() {
         assert ProcessAnnotatedTypeObserver.getManagedBeanEvent() != null;

@@ -6611,32 +6611,17 @@
             <assertion id="aai">
                 <text>Test event is fired for a filter</text>
             </assertion>
-            <assertion id="aal">
-                <text>Test type for a managed bean</text>
+            <assertion id="aan" implied="true">
+                <text>Test supertype for a servlet listener</text>
+                <note>See 10.2. Observer resolution</note>
             </assertion>
-            <assertion id="aam">
-                <text>Test type for a session bean</text>
+            <assertion id="aao" implied="true">
+                <text>Test supertype and subtype for a tag handler</text>
+                <note>See 10.2. Observer resolution</note>
             </assertion>
-            <assertion id="aan">
-                <text>Test type for a servlet listener</text>
-            </assertion>
-            <assertion id="aao">
-                <text>Test type for a tag handler</text>
-            </assertion>
-            <assertion id="aap">
-                <text>Test type for a tag library listener</text>
-            </assertion>
-            <assertion id="aaq">
-                <text>Test type for an EJB Interceptor</text>
-            </assertion>
-            <assertion id="aar">
-                <text>Test type for a WS endpoint</text>
-            </assertion>
-            <assertion id="aas">
-                <text>Test type for a servlet</text>
-            </assertion>
-            <assertion id="aat">
-                <text>Test type for a filter</text>
+            <assertion id="aas" implied="true">
+                <text>Test supertype and subtype for a servlet</text>
+                <note>See 10.2. Observer resolution|</note>
             </assertion>
         </group>
 
