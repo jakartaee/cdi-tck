@@ -26,6 +26,7 @@ import java.util.List;
 import javax.enterprise.inject.spi.Extension;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.api.Configuration;
@@ -54,15 +55,15 @@ import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
 
 /**
- * Abstract shrinkwrap archive builder for JSR299 TCK arquillian test.
+ * Abstract ShrinkWrap archive builder for CDI TCK Arquillian test.
  * <p>
  * This is a base class for builders that try to solve most <b>JBoss Test Harness</b> to <b>Arquillian</b> migration issues. The
  * main goal was to use CDI TCK 1.0 tests with minimum code changes.
  * </p>
  * <p>
- * Note that all arquillian tests running in as-client mode (including tests using {@link ShouldThrowException}) cannot contain
- * testing related stuff like test class itself while arquillian is not repackaging test archive. That's why
- * {@link #isAsClientMode} has to be properly set.
+ * Note that all Arquillian tests running in as-client mode (including tests using {@link ShouldThrowException}) must not
+ * contain testing related stuff (anything that depends on Arquillian, TestNG, incl. test class itself) since Arquillian is not
+ * enriching as-client test archives. That's why {@link #isAsClientMode} has to be properly set.
  * </p>
  * <p>
  * In case of {@link #isTestArchive} set to <code>false</code> this archive may not include any testing related stuff as it is
@@ -77,7 +78,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     private String name;
 
-    private boolean isAsClientMode = false;
+    private Boolean isAsClientMode = null;
 
     private boolean isTestArchive = true;
 
@@ -972,22 +973,34 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * 
-     * @return <code>true</code> if building as-client mode archive (no test infrastructure), <code>false</code> otherwise
+     * @return <code>true</code> if building as-client mode archive, <code>false</code> otherwise
      */
-    protected boolean isAsClientMode() {
+    public Boolean isAsClientMode() {
         return isAsClientMode;
     }
 
     /**
+     * @param isAsClientMode
+     * @see #resolveAsClientMode()
+     */
+    public T setAsClientMode(boolean isAsClientMode) {
+        this.isAsClientMode = isAsClientMode;
+        return self();
+    }
+
+    /**
      * 
-     * @return <code>true</code> in case of archive should
+     * @return <code>true</code> if TCK specific infrastructure (porting package, utils, etc.) should be automatically added,
+     *         <code>false</code> otherwise
+     * @see #resolveAsClientMode()
      */
     public boolean isTestArchive() {
         return isTestArchive;
     }
 
     /**
-     * Mark this archive as non-testing.
+     * Mark this archive as non-testing. TCK specific infrastructure (porting package, utils, etc.) will not be automatically
+     * added.
      */
     public T notTestArchive() {
         this.isTestArchive = false;
@@ -995,19 +1008,36 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Find deployment method on test class definition and set to as-client mode if {@link Deployment#testable()} false or
-     * {@link ShouldThrowException} is present.
+     * Try to resolve as-client mode automatically unless it was set already.
+     * 
+     * Set as-client mode to <code>true</code> provided that:
+     * <ul>
+     * <li>test class is annotated with {@link RunAsClient}</li>
+     * <li>the first deployment method on test class definition is annotated with {@link ShouldThrowException} or
+     * {@link Deployment#testable()} is false</li>
+     * <ul>
+     * 
+     * Note that this will NOT work correctly for test class with multiple deployments.
+     * 
+     * @see #setAsClientMode(boolean)
      */
     private void resolveAsClientMode() {
+
+        if (isAsClientMode() != null) {
+            return;
+        }
+
+        if (testClazz.isAnnotationPresent(RunAsClient.class)) {
+            setAsClientMode(true);
+        }
 
         for (Method method : testClazz.getMethods()) {
 
             if (method.isAnnotationPresent(Deployment.class)) {
-
-                if (method.isAnnotationPresent(ShouldThrowException.class)) {
-                    this.isAsClientMode = true;
-                } else if (!method.getAnnotation(Deployment.class).testable()) {
-                    this.isAsClientMode = true;
+                // The first deployment method
+                if (method.isAnnotationPresent(ShouldThrowException.class)
+                        || !method.getAnnotation(Deployment.class).testable()) {
+                    setAsClientMode(true);
                 }
                 break;
             }

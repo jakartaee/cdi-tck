@@ -25,7 +25,7 @@ import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 
 /**
- * Shrinkwrap web archive builder for JSR299 TCK arquillian test. This builder is intended to provide basic functionality
+ * ShrinkWrap {@link WebArchive} builder for CDI TCK Arquillian test. This builder is intended to provide basic functionality
  * covering common TCK needs. Use shrinkwrap API to adapt archive to advanced scenarios.
  * 
  * @author Martin Kouba

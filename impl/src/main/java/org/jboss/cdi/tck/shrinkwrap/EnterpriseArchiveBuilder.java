@@ -27,8 +27,8 @@ import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 
 /**
- * Shrinkwrap enterprise archive builder for JSR299 TCK arquillian test. This builder is intended to provide basic functionality
- * covering common TCK needs. Use shrinkwrap API to adapt archive to advanced scenarios.
+ * ShrinkWrap {@link EnterpriseArchive} builder for CDI TCK Arquillian test. This builder is intended to provide basic
+ * functionality covering common TCK needs. Use shrinkwrap API to adapt archive to advanced scenarios.
  * <p>
  * Test classes are added to EJB module.
  * </p>
