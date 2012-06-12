@@ -7139,16 +7139,15 @@
     </section>
 
     <section id="12.3" title="Application shutdown lifecycle">
-        <!-- TODO Not sure if possible to test -->
         <group>
             <text>When an application is stopped, the container performs the following steps:</text>
-            <assertion id="a" testable="false">
+            <assertion id="a">
                 <text>First, the container must destroy all contexts.</text>
             </assertion>
-            <assertion id="b" testable="false">
+            <assertion id="b">
                 <text>Next, the container must destroy dependent objects injected into enums.</text>
             </assertion>
-            <assertion id="c" testable="false">
+            <assertion id="c">
                 <text>Finally, the container must fire an event of type |BeforeShutdown|, as defined in Section 11.5.4, "BeforeShutdown event".</text>
             </assertion>
         </group>

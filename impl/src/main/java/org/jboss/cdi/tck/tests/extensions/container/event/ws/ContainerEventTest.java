@@ -44,18 +44,29 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractTest {
 
+    @SuppressWarnings("unchecked")
     @Deployment
     public static EnterpriseArchive createTestArchive() {
         return new EnterpriseArchiveBuilder().withTestClassPackage(ContainerEventTest.class)
-                .withExtension(ProcessInjectionTargetObserver.class).build();
+                .withExtensions(ProcessInjectionTargetObserver.class, ProcessAnnotatedTypeObserver.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aag"), @SpecAssertion(section = "11.5.8", id = "abg") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aag"), @SpecAssertion(section = "11.5.8", id = "abg"),
+            @SpecAssertion(section = "12.4", id = "di") })
     public void testProcessInjectionTargetFiredForWsEndpoint() {
         assertNotNull(ProcessInjectionTargetObserver.getWsEndpointEvent());
-        AnnotatedType<TranslatorEndpoint> annotatedType = ProcessInjectionTargetObserver.getWsEndpointEvent()
-                .getAnnotatedType();
+        validateWsEndpointAnnotatedType(ProcessInjectionTargetObserver.getWsEndpointEvent().getAnnotatedType());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "12.4", id = "bi") })
+    public void testProcessAnnotatedTypeFiredForWsEndpoint() {
+        assertNotNull(ProcessAnnotatedTypeObserver.getWsEndpointEvent());
+        validateWsEndpointAnnotatedType(ProcessAnnotatedTypeObserver.getWsEndpointEvent().getAnnotatedType());
+    }
+
+    private void validateWsEndpointAnnotatedType(AnnotatedType<TranslatorEndpoint> annotatedType) {
         assertEquals(annotatedType.getBaseType(), TranslatorEndpoint.class);
         // translate()
         assertEquals(annotatedType.getMethods().size(), 1);
@@ -63,4 +74,5 @@ public class ContainerEventTest extends AbstractTest {
         // Translator, TranslatorEndpoint, Object
         assertTrue(typeSetMatches(typeClosure, Translator.class, TranslatorEndpoint.class, Object.class));
     }
+
 }
