@@ -290,13 +290,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add package (that is its content).
+     * Add package (that is its content). Subpackages are not included.
      * 
      * @param pack
-     * @param isTestPackage
      * @return self
      */
-    private T withPackage(Package pack) {
+    public T withPackage(Package pack) {
 
         if (this.packages == null)
             this.packages = new ArrayList<String>();
