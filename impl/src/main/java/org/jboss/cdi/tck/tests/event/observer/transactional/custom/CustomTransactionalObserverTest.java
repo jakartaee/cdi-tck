@@ -61,7 +61,7 @@ public class CustomTransactionalObserverTest extends AbstractTest {
         ActionSequence.reset();
 
         // GiraffeObserver 2x, GiraffeCustomObserver 1x
-        assertEquals(getCurrentManager().resolveObserverMethods(Giraffe.class).size(), 3);
+        assertEquals(getCurrentManager().resolveObserverMethods(new Giraffe()).size(), 3);
 
         // Transactional invocation
         giraffeService.feed();
