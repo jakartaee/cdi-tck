@@ -24,7 +24,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.deployment.packaging.ear.MultiWebModuleWithExtensionTest;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -57,11 +56,11 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
     @Deployment(testable = false)
     public static EnterpriseArchive createTestArchive() {
 
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().withTestClass(
-                MultiWebModuleWithExtensionTest.class).build();
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().build();
         StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class).applicationName("Test")
-                .createModule().getOrCreateWeb().webUri("test1.war").contextRoot("/test1").up().up().createModule()
-                .getOrCreateWeb().webUri("test2.war").contextRoot("/test2").up().up().exportAsString());
+                .createModule().ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb()
+                .webUri("test1.war").contextRoot("/test1").up().up().createModule().getOrCreateWeb().webUri("test2.war")
+                .contextRoot("/test2").up().up().exportAsString());
         enterpriseArchive.setApplicationXML(applicationXml);
 
         WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("test1.war").withClasses(Observer2.class)

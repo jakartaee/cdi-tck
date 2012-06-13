@@ -53,11 +53,11 @@ public class MultiWebModuleWithExtensionTest extends AbstractTest {
     @Deployment(testable = false)
     public static EnterpriseArchive createTestArchive() {
 
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().withTestClass(
-                MultiWebModuleWithExtensionTest.class).build();
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().build();
         StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class).applicationName("Test")
-                .createModule().getOrCreateWeb().webUri("foo.war").contextRoot("/foo").up().up().createModule()
-                .getOrCreateWeb().webUri("bar.war").contextRoot("/bar").up().up().exportAsString());
+                .createModule().ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb()
+                .webUri("foo.war").contextRoot("/foo").up().up().createModule().getOrCreateWeb().webUri("bar.war")
+                .contextRoot("/bar").up().up().exportAsString());
         enterpriseArchive.setApplicationXML(applicationXml);
 
         WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("foo.war").withClasses(FooWebBean.class)
