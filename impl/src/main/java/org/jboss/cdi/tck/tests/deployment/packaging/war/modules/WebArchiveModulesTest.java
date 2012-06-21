@@ -93,7 +93,8 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bca"), @SpecAssertion(section = "12.1", id = "bcb") })
+    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bca"), @SpecAssertion(section = "12.1", id = "bcb"),
+            @SpecAssertion(section = "5.2", id = "n") })
     public void testInjectionChainVisibilityAndInterceptorEnablement() {
         // Test injection chain, visibility, SecurityInterceptor is enabled in B only
         SecurityInterceptor.reset();

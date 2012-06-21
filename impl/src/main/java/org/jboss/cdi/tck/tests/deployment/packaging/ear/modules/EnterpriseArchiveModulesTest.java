@@ -143,7 +143,8 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bba"), @SpecAssertion(section = "12.1", id = "bbb"),
-            @SpecAssertion(section = "12.1", id = "bbc"), @SpecAssertion(section = "12.1", id = "bbe") })
+            @SpecAssertion(section = "12.1", id = "bbc"), @SpecAssertion(section = "12.1", id = "bbe"),
+            @SpecAssertion(section = "5.2", id = "n") })
     public void testVisibilityAndInterceptorEnablement() throws Exception {
         SecurityInterceptor.reset();
         inspector.reset();

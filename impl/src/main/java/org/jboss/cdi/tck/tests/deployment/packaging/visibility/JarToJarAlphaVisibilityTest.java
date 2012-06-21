@@ -21,6 +21,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -46,7 +47,7 @@ public class JarToJarAlphaVisibilityTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "12.1", id = "bcb")
+    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bcb"), @SpecAssertion(section = "5.2", id = "n") })
     public void testDeployment() {
         // noop
     }
