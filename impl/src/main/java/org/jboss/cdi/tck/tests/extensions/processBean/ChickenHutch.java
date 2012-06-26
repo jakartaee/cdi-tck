@@ -16,10 +16,17 @@
  */
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
 public class ChickenHutch {
+
+    @SuppressWarnings("unused")
     @Produces
     private Chicken chicken;
+
+    public void disposeOfRocky(@Disposes Chicken rocky) {
+
+    }
 
 }
