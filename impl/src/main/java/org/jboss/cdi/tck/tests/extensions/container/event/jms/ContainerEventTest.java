@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.TestGroups.JMS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
@@ -57,19 +58,39 @@ public class ContainerEventTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aaba"), @SpecAssertion(section = "11.5.8", id = "abba") })
     public void testProcessInjectionTargetEventFiredForMessageDrivenBean() {
+
         ProcessInjectionTarget<QueueMessageDrivenBean> event = ProcessInjectionTargetObserver.getMdbEvent();
+
         assertNotNull(event);
         AnnotatedType<QueueMessageDrivenBean> annotatedType = event.getAnnotatedType();
         assertEquals(annotatedType.getBaseType(), QueueMessageDrivenBean.class);
+
         // Methods initialize() and onMessage()
         assertEquals(annotatedType.getMethods().size(), 2);
         for (AnnotatedMethod<? super QueueMessageDrivenBean> method : annotatedType.getMethods()) {
-            assertTrue(method.isAnnotationPresent(Inject.class) || method.isAnnotationPresent(Override.class));
+            if ("initialize".equals(method.getJavaMember().getName())) {
+                assertTrue(method.isAnnotationPresent(Inject.class));
+                assertEquals(method.getParameters().size(), 1);
+                assertEquals(method.getDeclaringType().getJavaClass(), QueueMessageDrivenBean.class);
+            } else if ("onMessage".equals(method.getJavaMember().getName())) {
+                assertEquals(method.getParameters().size(), 1);
+                assertEquals(method.getDeclaringType().getJavaClass(), QueueMessageDrivenBean.class);
+            } else {
+                fail();
+            }
         }
+
         // Fields sheep and initializerCalled
         assertEquals(annotatedType.getFields().size(), 2);
         for (AnnotatedField<? super QueueMessageDrivenBean> field : annotatedType.getFields()) {
-            assertTrue(field.isAnnotationPresent(Inject.class) || field.isAnnotationPresent(SuppressWarnings.class));
+            if ("sheep".equals(field.getJavaMember().getName())) {
+                assertTrue(field.isAnnotationPresent(Inject.class));
+                assertEquals(field.getDeclaringType().getJavaClass(), QueueMessageDrivenBean.class);
+            } else if ("initializerCalled".equals(field.getJavaMember().getName())) {
+                assertEquals(field.getDeclaringType().getJavaClass(), QueueMessageDrivenBean.class);
+            } else {
+                fail();
+            }
         }
     }
 }
