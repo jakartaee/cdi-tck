@@ -18,7 +18,6 @@
 package org.jboss.cdi.tck.tests.inheritance.generics;
 
 /**
- * @author Martin Kouba
  * 
  */
 public class Qux extends Baz<String> {

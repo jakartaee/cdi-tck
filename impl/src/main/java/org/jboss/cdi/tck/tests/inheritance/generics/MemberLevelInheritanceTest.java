@@ -18,16 +18,16 @@
 package org.jboss.cdi.tck.tests.inheritance.generics;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.fail;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.ObserverMethod;
+import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -48,46 +48,64 @@ public class MemberLevelInheritanceTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(MemberLevelInheritanceTest.class).build();
     }
 
+    @SuppressWarnings("serial")
     @Test
     @SpecAssertion(section = "4.2", id = "f")
-    public void testInjectionPoint() throws Exception {
+    public void testInjectionPointDefinition() throws Exception {
 
         Bean<Foo> fooBean = getUniqueBean(Foo.class);
         Set<InjectionPoint> injectionPoints = fooBean.getInjectionPoints();
-        assertEquals(injectionPoints.size(), 1);
-        InjectionPoint inheritedInjectionPoint = injectionPoints.iterator().next();
+        // Baz<T1> baz, T1 t1, Baz<List<T2>> t2BazList, T1[] t1Array
+        assertEquals(injectionPoints.size(), 4);
 
-        checkParameterizedType(inheritedInjectionPoint.getType(), Baz.class, String.class);
-    }
+        for (InjectionPoint injectionPoint : injectionPoints) {
 
-    @Test
-    @SpecAssertion(section = "4.2", id = "j")
-    public void testObserver() throws Exception {
-
-        Set<ObserverMethod<? super Qux>> observerMethods = getCurrentManager().resolveObserverMethods(new Qux(null));
-        // Foo and Bar
-        assertEquals(observerMethods.size(), 2);
-
-        for (ObserverMethod<? super Qux> observerMethod : observerMethods) {
-            if (observerMethod.getBeanClass().equals(Foo.class)) {
-                checkParameterizedType(observerMethod.getObservedType(), Baz.class, String.class);
-                return;
+            if ("baz".equals(injectionPoint.getMember().getName())) {
+                assertEquals(injectionPoint.getType(), new TypeLiteral<Baz<String>>() {
+                }.getType());
+            } else if ("t1".equals(injectionPoint.getMember().getName())) {
+                assertEquals(injectionPoint.getType(), String.class);
+            } else if ("t2BazList".equals(injectionPoint.getMember().getName())) {
+                assertEquals(injectionPoint.getType(), new TypeLiteral<Baz<List<Qux>>>() {
+                }.getType());
+            } else if ("setT1Array".equals(injectionPoint.getMember().getName())) {
+                // Initializer IP
+                assertEquals(injectionPoint.getType(), String[].class);
+            } else {
+                fail("Unexpected injection point");
             }
         }
-        // No Foo observer
-        fail();
     }
 
-    private void checkParameterizedType(Type declaredType, Type rawType, Type argumentType) {
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = "4.2", id = "f")
+    public void testInjectionPoint(Foo foo) throws Exception {
+        assertNotNull(foo);
+        assertNotNull(foo.getBaz());
+        assertNotNull(foo.getT1Array());
+        assertNotNull(foo.getT2BazList());
+    }
 
-        assertTrue(declaredType instanceof ParameterizedType);
-        ParameterizedType parameterizedType = (ParameterizedType) declaredType;
+    @SuppressWarnings("serial")
+    @Test
+    @SpecAssertion(section = "4.2", id = "j")
+    public void testObserverResolution() throws Exception {
 
-        assertEquals(parameterizedType.getRawType(), rawType);
+        Set<ObserverMethod<? super Qux>> observerMethods = getCurrentManager().resolveObserverMethods(new Qux(null));
+        assertEquals(observerMethods.size(), 1);
+        ObserverMethod<? super Qux> observerMethod = observerMethods.iterator().next();
+        assertEquals(observerMethod.getBeanClass(), Foo.class);
+        assertEquals(observerMethod.getObservedType(), new TypeLiteral<Baz<String>>() {
+        }.getType());
+    }
 
-        Type[] arguments = parameterizedType.getActualTypeArguments();
-        assertEquals(arguments.length, 1);
-        assertTrue(arguments[0].equals(argumentType));
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = "4.2", id = "j")
+    public void testObserver(Foo foo) throws Exception {
+        assertNotNull(foo);
+        getCurrentManager().fireEvent(new Qux(null));
+        assertNotNull(foo.getT1BazEvent());
+        assertNotNull(foo.getT1ObserverInjectionPoint());
     }
 
 }

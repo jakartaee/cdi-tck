@@ -17,12 +17,26 @@
 
 package org.jboss.cdi.tck.tests.inheritance.generics;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Produces;
 
 /**
  * 
  */
-@RequestScoped
-public class Foo extends Bar<String, Qux> {
+public class Producer {
+
+    @Produces
+    public String produceString() {
+        return "ok";
+    }
+
+    @Produces
+    public String[] produceStringArray() {
+        return new String[] {};
+    }
+
+    @Produces
+    public Baz<Baz<Qux>> produceBazBazQux() {
+        return new Baz<Baz<Qux>>();
+    }
 
 }

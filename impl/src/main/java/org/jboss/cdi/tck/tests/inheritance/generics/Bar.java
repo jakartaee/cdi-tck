@@ -17,20 +17,65 @@
 
 package org.jboss.cdi.tck.tests.inheritance.generics;
 
+import java.util.List;
+
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Veto;
 import javax.inject.Inject;
 
 /**
- * @author Martin Kouba
+ * 
  */
-public class Bar<T> {
+@Veto
+public class Bar<T1, T2> {
 
-    @SuppressWarnings("unused")
     @Inject
-    private Baz<T> baz;
+    private Baz<T1> baz;
 
-    public void observeBaz(@Observes Baz<T> baz) {
-        // No-op
+    @Inject
+    private T1 t1;
+
+    @Inject
+    private Baz<List<T2>> t2BazList;
+
+    private T1[] t1Array;
+
+    private Baz<T1> t1BazEvent;
+
+    private T1 t1ObserverInjectionPoint;
+
+    @Inject
+    public void setT1Array(T1[] t1Array) {
+        this.t1Array = t1Array;
+    }
+
+    public void observeBaz(@Observes Baz<T1> baz, T1 t1) {
+        t1BazEvent = baz;
+        t1ObserverInjectionPoint = t1;
+    }
+
+    public Baz<T1> getBaz() {
+        return baz;
+    }
+
+    public Baz<List<T2>> getT2BazList() {
+        return t2BazList;
+    }
+
+    public T1 getT1() {
+        return t1;
+    }
+
+    public T1[] getT1Array() {
+        return t1Array;
+    }
+
+    public Baz<T1> getT1BazEvent() {
+        return t1BazEvent;
+    }
+
+    public T1 getT1ObserverInjectionPoint() {
+        return t1ObserverInjectionPoint;
     }
 
 }

@@ -17,9 +17,7 @@
 
 package org.jboss.cdi.tck.tests.inheritance.generics;
 
-
 /**
- * @author Martin Kouba
  */
 public class Baz<T> {
 
