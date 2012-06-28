@@ -3705,10 +3705,6 @@
                 <text>Test managed bean.</text>
                 <note>Here we check the class, as interceptors and decorators are tested below</note>
             </assertion>
-            <assertion id="b">
-                <text>Test stateful session bean.</text>
-                <note>Here we check the class, as interceptors and decorators are tested below</note>
-            </assertion>
         </group>
 
         <assertion id="aa">

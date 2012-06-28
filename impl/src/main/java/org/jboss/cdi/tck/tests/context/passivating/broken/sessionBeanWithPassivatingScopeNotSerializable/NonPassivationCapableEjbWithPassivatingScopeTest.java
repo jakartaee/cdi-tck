@@ -48,7 +48,7 @@ public class NonPassivationCapableEjbWithPassivatingScopeTest extends AbstractTe
     }
 
     @Test
-    @SpecAssertion(section = "6.6.4", id = "b")
+    @SpecAssertion(section = "6.6.4", id = "aa")
     public void testDeployment() {
     }
 
