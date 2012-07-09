@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +31,7 @@ import java.util.Map;
 public final class ActionSequence {
 
     /**
-     * Name of sequence.
+     * Name of sequence
      */
     private String name;
 
@@ -59,10 +60,10 @@ public final class ActionSequence {
     }
 
     /**
-     * @return read-only view of sequence data
+     * @return read-only copy of sequence data
      */
     public List<String> getData() {
-        return Collections.unmodifiableList(this.data);
+        return Collections.unmodifiableList(new ArrayList<String>(this.data));
     }
 
     /**
@@ -72,40 +73,50 @@ public final class ActionSequence {
         return name;
     }
 
+    /**
+     * 
+     * @param actions
+     * @return <code>true</code> if sequence data contain all of the specified actions, <code>false</code> otherwise
+     */
+    public boolean containsAll(String... actions) {
+        return getData().containsAll(Arrays.asList(actions));
+    }
+
+    /**
+     * 
+     * @param actions
+     * @return <code>true</code> if sequence data begins with the specified actions, <code>false</code> otherwise
+     */
+    public boolean beginsWith(String... actions) {
+
+        List<String> sequenceData = getData();
+        List<String> matchData = Arrays.asList(actions);
+
+        if (sequenceData.size() < matchData.size())
+            return false;
+
+        return sequenceData.subList(0, matchData.size()).equals(matchData);
+    }
+
+    /**
+     * 
+     * @param actions
+     * @return <code>true</code> if sequence data ends with the specified actions, <code>false</code> otherwise
+     */
+    public boolean endsWith(String... actions) {
+
+        List<String> sequenceData = getData();
+        List<String> matchData = Arrays.asList(actions);
+
+        if (sequenceData.size() < matchData.size())
+            return false;
+
+        return sequenceData.subList(sequenceData.size() - matchData.size(), sequenceData.size()).equals(matchData);
+    }
+
     @Override
     public String toString() {
-        return String.format("ActionSequence [name=%s, data=%s]", name, data);
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((data == null) ? 0 : data.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ActionSequence other = (ActionSequence) obj;
-        if (data == null) {
-            if (other.data != null)
-                return false;
-        } else if (!data.equals(other.data))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        return true;
+        return String.format("ActionSequence [name=%s, data=%s]", name, getData());
     }
 
     // Static members

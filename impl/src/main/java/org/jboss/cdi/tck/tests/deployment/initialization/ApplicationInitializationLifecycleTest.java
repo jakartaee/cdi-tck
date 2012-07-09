@@ -19,6 +19,9 @@ package org.jboss.cdi.tck.tests.deployment.initialization;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
@@ -63,23 +66,23 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
         foo.ping();
 
         // Test lifecycle phases sequence
-        ActionSequence correctSequence = new ActionSequence();
+        List<String> correctSequenceData = new ArrayList<String>();
         // Extension registration
-        correctSequence.add(LifecycleMonitoringExtension.class.getName());
+        correctSequenceData.add(LifecycleMonitoringExtension.class.getName());
         // BeforeBeanDiscovery
-        correctSequence.add(BeforeBeanDiscovery.class.getName());
+        correctSequenceData.add(BeforeBeanDiscovery.class.getName());
         // Bean discovery
-        correctSequence.add(ProcessAnnotatedType.class.getName());
+        correctSequenceData.add(ProcessAnnotatedType.class.getName());
         // AfterBeanDiscovery
-        correctSequence.add(AfterBeanDiscovery.class.getName());
+        correctSequenceData.add(AfterBeanDiscovery.class.getName());
         // Validating bean dependencies and specialization - currently no portable way how to test
         // AfterDeploymentValidation
-        correctSequence.add(AfterDeploymentValidation.class.getName());
+        correctSequenceData.add(AfterDeploymentValidation.class.getName());
         // Inject any enums declaring injection points
-        correctSequence.add(Bar.class.getName());
+        correctSequenceData.add(Bar.class.getName());
         // Processing requests
-        correctSequence.add(Foo.class.getName());
+        correctSequenceData.add(Foo.class.getName());
 
-        assertEquals(ActionSequence.getSequence(), correctSequence);
+        assertEquals(ActionSequence.getSequenceData(), correctSequenceData);
     }
 }

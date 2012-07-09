@@ -53,16 +53,12 @@ public class TransactionalObserverTest extends AbstractTest {
 
         // Test sequence
         // BEFORE_COMPLETION must be fired at the beginning of the commit (after checkpoint)
-        // AFTER_SUCCESS must be fired after BEFORE_COMPLETION and before AFTER_COMPLETION
+        // AFTER_SUCCESS and AFTER_COMPLETION must be fired after BEFORE_COMPLETION
         // AFTER_FAILURE is not fired
-        ActionSequence correctSequence = new ActionSequence();
-        correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
-        correctSequence.add("checkpoint");
-        correctSequence.add(TransactionPhase.BEFORE_COMPLETION.toString());
-        correctSequence.add(TransactionPhase.AFTER_SUCCESS.toString());
-        correctSequence.add(TransactionPhase.AFTER_COMPLETION.toString());
-
-        assertEquals(ActionSequence.getSequence(), correctSequence);
+        ActionSequence.getSequence().beginsWith(TransactionPhase.IN_PROGRESS.toString(), "checkpoint",
+                TransactionPhase.BEFORE_COMPLETION.toString());
+        ActionSequence.getSequence().containsAll(TransactionPhase.AFTER_SUCCESS.toString(),
+                TransactionPhase.AFTER_COMPLETION.toString());
     }
 
     @Test
@@ -78,15 +74,11 @@ public class TransactionalObserverTest extends AbstractTest {
         // Checkpoint is right before tx rollback
         accountService.withdrawFailedTransaction(2);
 
-        // AFTER_FAILURE must be fired after checkpoint and before AFTER_COMPLETION
+        // AFTER_FAILURE and AFTER_COMPLETION must be fired after checkpoint
         // AFTER_SUCCESS and BEFORE_COMPLETION is not fired
-        ActionSequence correctSequence = new ActionSequence();
-        correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
-        correctSequence.add("checkpoint");
-        correctSequence.add(TransactionPhase.AFTER_FAILURE.toString());
-        correctSequence.add(TransactionPhase.AFTER_COMPLETION.toString());
-
-        assertEquals(ActionSequence.getSequence(), correctSequence);
+        ActionSequence.getSequence().beginsWith(TransactionPhase.IN_PROGRESS.toString(), "checkpoint");
+        ActionSequence.getSequence().containsAll(TransactionPhase.AFTER_FAILURE.toString(),
+                TransactionPhase.AFTER_COMPLETION.toString());
     }
 
     /**
@@ -120,16 +112,12 @@ public class TransactionalObserverTest extends AbstractTest {
         accountService.withdrawObserverFailedTransaction(2);
 
         // IN_PROGRESS is fired twice
-        // AFTER_FAILURE must be fired after checkpoint and before AFTER_COMPLETION
+        // AFTER_FAILURE and AFTER_COMPLETION must be fired after checkpoint
         // AFTER_SUCCESS and BEFORE_COMPLETION is not fired
-        ActionSequence correctSequence = new ActionSequence();
-        correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
-        correctSequence.add(TransactionPhase.IN_PROGRESS.toString());
-        correctSequence.add("checkpoint");
-        correctSequence.add(TransactionPhase.AFTER_FAILURE.toString());
-        correctSequence.add(TransactionPhase.AFTER_COMPLETION.toString());
-
-        assertEquals(ActionSequence.getSequence(), correctSequence);
+        ActionSequence.getSequence().beginsWith(TransactionPhase.IN_PROGRESS.toString(),
+                TransactionPhase.IN_PROGRESS.toString(), "checkpoint");
+        ActionSequence.getSequence().containsAll(TransactionPhase.AFTER_FAILURE.toString(),
+                TransactionPhase.AFTER_COMPLETION.toString());
     }
 
 }

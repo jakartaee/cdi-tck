@@ -18,7 +18,9 @@
 package org.jboss.cdi.tck.util;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import java.util.ArrayList;
@@ -123,4 +125,37 @@ public class ActionSequenceTest {
         assertEquals(ActionSequence.getSequenceSize(), threads * actions);
     }
 
+    @Test
+    public void testContainsAll() {
+        ActionSequence.reset();
+        ActionSequence.addAction("1");
+        ActionSequence.addAction("2");
+        ActionSequence.addAction("3");
+        ActionSequence.addAction("4");
+        assertTrue(ActionSequence.getSequence().containsAll("1", "3"));
+        assertTrue(ActionSequence.getSequence().containsAll("4", "2"));
+        assertFalse(ActionSequence.getSequence().containsAll("4", "2", "aaa"));
+    }
+
+    @Test
+    public void testBeginsWith() {
+        ActionSequence.reset();
+        ActionSequence.addAction("1");
+        ActionSequence.addAction("2");
+        ActionSequence.addAction("3");
+        ActionSequence.addAction("4");
+        assertTrue(ActionSequence.getSequence().beginsWith("1", "2"));
+        assertFalse(ActionSequence.getSequence().beginsWith("4"));
+    }
+
+    @Test
+    public void testEndsWith() {
+        ActionSequence.reset();
+        ActionSequence.addAction("1");
+        ActionSequence.addAction("2");
+        ActionSequence.addAction("3");
+        ActionSequence.addAction("4");
+        assertTrue(ActionSequence.getSequence().endsWith("3", "4"));
+        assertFalse(ActionSequence.getSequence().endsWith("2", "3"));
+    }
 }

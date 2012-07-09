@@ -73,15 +73,11 @@ public class CustomTransactionalObserverTest extends AbstractTest {
 
         // Test custom observer received notification during the after completion phase (after succesfull commit)
         // BEFORE_COMPLETION must be fired at the beginning of the commit (after checkpoint)
-        // AFTER_SUCCESS must be fired after BEFORE_COMPLETION and before AFTER_COMPLETION
+        // AFTER_SUCCESS and AFTER_COMPLETION must be fired after BEFORE_COMPLETION
         // AFTER_FAILURE is not fired
-        ActionSequence correctSequence = new ActionSequence();
-        correctSequence.add("checkpoint");
-        correctSequence.add(TransactionPhase.BEFORE_COMPLETION.toString());
-        correctSequence.add(TransactionPhase.AFTER_SUCCESS.toString());
-        correctSequence.add(TransactionPhase.AFTER_COMPLETION.toString());
-
-        assertEquals(ActionSequence.getSequence(), correctSequence);
+        ActionSequence.getSequence().beginsWith("checkpoint", TransactionPhase.BEFORE_COMPLETION.toString());
+        ActionSequence.getSequence().containsAll(TransactionPhase.AFTER_SUCCESS.toString(),
+                TransactionPhase.AFTER_COMPLETION.toString());
     }
 
 }
