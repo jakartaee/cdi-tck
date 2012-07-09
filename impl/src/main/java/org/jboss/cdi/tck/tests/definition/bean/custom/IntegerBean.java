@@ -73,10 +73,11 @@ public class IntegerBean implements Bean<Integer> {
     }
 
     public Set<Class<? extends Annotation>> getStereotypes() {
-        HashSet<Class<? extends Annotation>> stereotypes = new HashSet<Class<? extends Annotation>>();
-        stereotypes.add(AlternativeStereotype.class);
+        // Spec needs clarification - see CDITCK-273
+        // HashSet<Class<? extends Annotation>> stereotypes = new HashSet<Class<? extends Annotation>>();
+        // stereotypes.add(AlternativeStereotype.class);
         getStereotypesCalled = true;
-        return stereotypes;
+        return Collections.emptySet();
     }
 
     public Set<Type> getTypes() {
@@ -91,7 +92,9 @@ public class IntegerBean implements Bean<Integer> {
 
     public boolean isAlternative() {
         isAlternativeCalled = true;
-        return true;
+        // Spec needs clarification - see CDITCK-273
+        // return true
+        return false;
     }
 
     public boolean isNullable() {

@@ -22,8 +22,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -35,15 +33,10 @@ public class CustomBeanImplementationTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        BeansDescriptor beanDescriptor = Descriptors.create(BeansDescriptor.class).createAlternatives()
-                .stereotype(AlternativeStereotype.class.getName()).up();
-        return new WebArchiveBuilder()
-                .withTestClass(CustomBeanImplementationTest.class)
-                .withClasses(AfterBeanDiscoveryObserver.class, AlternativeStereotype.class, House.class,
-                        CustomInjectionPoint.class, Bar.class)
-                .withLibrary(beanDescriptor, false, Foo.class, FooBean.class, IntegerBean.class)
-                .withBeansXml(beanDescriptor)
-                .withExtension(AfterBeanDiscoveryObserver.class).build();
+        return new WebArchiveBuilder().withTestClass(CustomBeanImplementationTest.class)
+                .withClasses(AfterBeanDiscoveryObserver.class, House.class, CustomInjectionPoint.class, Bar.class)
+                .withLibrary(Foo.class, FooBean.class, IntegerBean.class).withExtension(AfterBeanDiscoveryObserver.class)
+                .build();
     }
 
     @Test

@@ -96,7 +96,7 @@ public class FooBean implements Bean<Foo> {
 
     @Override
     public Set<InjectionPoint> getInjectionPoints() {
-        Set<InjectionPoint> injectionPoints = new HashSet<InjectionPoint>(1);
+        Set<InjectionPoint> injectionPoints = new HashSet<InjectionPoint>(2);
         injectionPoints.add(integerInjectionPoint);
         injectionPoints.add(barInjectionPoint);
         return injectionPoints;
