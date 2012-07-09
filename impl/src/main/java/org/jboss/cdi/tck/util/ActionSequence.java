@@ -29,101 +29,52 @@ import java.util.Map;
  */
 public final class ActionSequence {
 
-    private static final String DEFAULT_SEQUENCE = "default";
+    /**
+     * Name of sequence.
+     */
+    private String name;
 
     /**
-     * Static sequences holder
+     * Data - list of actions
      */
-    private static Map<String, ActionSequence> sequences = null;
-
     private List<String> data = Collections.synchronizedList(new ArrayList<String>());
 
+    public ActionSequence() {
+        super();
+        this.name = DEFAULT_SEQUENCE;
+    }
+
+    public ActionSequence(String name) {
+        super();
+        this.name = name;
+    }
+
+    /**
+     * @param actionId
+     * @return data holder
+     */
     public ActionSequence add(String actionId) {
         this.data.add(actionId);
         return this;
     }
 
+    /**
+     * @return read-only view of sequence data
+     */
     public List<String> getData() {
-        return data;
+        return Collections.unmodifiableList(this.data);
     }
 
     /**
-     * Remove all sequences.
+     * @return name of sequence
      */
-    public static void reset() {
-        if (sequences != null)
-            sequences.clear();
+    public String getName() {
+        return name;
     }
 
-    /**
-     * Add actionId to specified sequence. Add new sequence if needed.
-     * 
-     * @param sequence
-     * @param actionId
-     */
-    public static void addAction(String sequence, String actionId) {
-
-        if (sequences == null)
-            sequences = new HashMap<String, ActionSequence>();
-
-        if (!sequences.containsKey(sequence))
-            sequences.put(sequence, new ActionSequence());
-
-        sequences.get(sequence).add(actionId);
-    }
-
-    /**
-     * Add actionId to default sequence.
-     * 
-     * @param actionId
-     */
-    public static void addAction(String actionId) {
-        addAction(DEFAULT_SEQUENCE, actionId);
-    }
-
-    /**
-     * @return default sequence
-     */
-    public static ActionSequence getSequence() {
-        return getSequence(DEFAULT_SEQUENCE);
-    }
-
-    /**
-     * @param name
-     * @return specified sequence
-     */
-    public static ActionSequence getSequence(String name) {
-        return sequences.get(name);
-    }
-
-    /**
-     * @return data of default sequence
-     */
-    public static List<String> getSequenceData() {
-        return getSequenceData(DEFAULT_SEQUENCE);
-    }
-
-    /**
-     * @param sequence
-     * @return data of specified sequence
-     */
-    public static List<String> getSequenceData(String sequence) {
-        return sequences.containsKey(sequence) ? sequences.get(sequence).getData() : null;
-    }
-
-    /**
-     * @return size of default sequence
-     */
-    public static int getSequenceSize() {
-        return getSequenceSize(DEFAULT_SEQUENCE);
-    }
-
-    /**
-     * @param sequence
-     * @return size of specified sequence
-     */
-    public static int getSequenceSize(String sequence) {
-        return sequences.containsKey(sequence) ? sequences.get(sequence).getData().size() : 0;
+    @Override
+    public String toString() {
+        return String.format("ActionSequence [name=%s, data=%s]", name, data);
     }
 
     @Override
@@ -131,6 +82,7 @@ public final class ActionSequence {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((data == null) ? 0 : data.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
 
@@ -148,19 +100,113 @@ public final class ActionSequence {
                 return false;
         } else if (!data.equals(other.data))
             return false;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
         return true;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("ActionSequence [");
-        if (data != null) {
-            builder.append("data=");
-            builder.append(data);
+    // Static members
+
+    private static final String DEFAULT_SEQUENCE = "default";
+
+    /**
+     * Static sequence map
+     */
+    private static Map<String, ActionSequence> sequences = new HashMap<String, ActionSequence>();
+
+    /**
+     * Remove all sequences.
+     */
+    public static void reset() {
+        synchronized (sequences) {
+            sequences.clear();
         }
-        builder.append("]");
-        return builder.toString();
+    }
+
+    /**
+     * Add actionId to specified sequence. Add new sequence if needed.
+     * 
+     * @param sequence
+     * @param actionId
+     * @return <code>true</code> if a new sequence was added, <code>false</code> otherwise
+     */
+    public static boolean addAction(String sequenceName, String actionId) {
+
+        boolean newSequenceAdded = false;
+
+        synchronized (sequences) {
+
+            if (!sequences.containsKey(sequenceName)) {
+                sequences.put(sequenceName, new ActionSequence(sequenceName));
+                newSequenceAdded = true;
+            }
+            sequences.get(sequenceName).add(actionId);
+        }
+        return newSequenceAdded;
+    }
+
+    /**
+     * Add actionId to default sequence.
+     * 
+     * @param actionId
+     * @return <code>true</code> if a new sequence was added, <code>false</code> otherwise
+     */
+    public static boolean addAction(String actionId) {
+        return addAction(DEFAULT_SEQUENCE, actionId);
+    }
+
+    /**
+     * @return default sequence or <code>null</code> if no such sequence exists
+     */
+    public static ActionSequence getSequence() {
+        return getSequence(DEFAULT_SEQUENCE);
+    }
+
+    /**
+     * @param name
+     * @return specified sequence or <code>null</code> if no such sequence exists
+     */
+    public static ActionSequence getSequence(String sequenceName) {
+        synchronized (sequences) {
+            return sequences.get(sequenceName);
+        }
+    }
+
+    /**
+     * @return data of default sequence or <code>null</code> if no such sequence exists
+     */
+    public static List<String> getSequenceData() {
+        return getSequenceData(DEFAULT_SEQUENCE);
+    }
+
+    /**
+     * @param sequenceName
+     * @return data of specified sequence or <code>null</code> if no such sequence exists
+     */
+    public static List<String> getSequenceData(String sequenceName) {
+        synchronized (sequences) {
+            return sequences.containsKey(sequenceName) ? sequences.get(sequenceName).getData() : null;
+        }
+    }
+
+    /**
+     * @return size of default sequence
+     */
+    public static int getSequenceSize() {
+        return getSequenceSize(DEFAULT_SEQUENCE);
+    }
+
+    /**
+     * @param sequence
+     * @return size of specified sequence
+     */
+    public static int getSequenceSize(String sequenceName) {
+        synchronized (sequences) {
+            return sequences.containsKey(sequenceName) ? sequences.get(sequenceName).getData().size() : 0;
+        }
     }
 
 }
