@@ -2881,11 +2881,11 @@
         </assertion>
 
         <assertion id="c">
-            <text>When the container calls a producer method, if the method is non-static the container must obtain a contextual instance of the most specialized bean, as defined by Section 6.5.2 "Contextual instance of a bean", then invoke the method upon this instance.</text>
+            <text>When the container calls a producer method, if the method is non-static the container must obtain a contextual instance of the bean which declares the method, as defined by Section 6.5.2 "Contextual instance of a bean", then invoke the method upon this instance.</text>
         </assertion>
 
         <assertion id="d">
-            <text>When the container calls a disposer method, if the method is non-static the container must obtain a contextual instance of the most specialized bean, as defined by Section 6.5.2 "Contextual instance of a bean", then invoke the method upon this instance.</text>
+            <text>When the container calls a disposer method, if the method is non-static the container must obtain a contextual instance of the bean which declares the method, as defined by Section 6.5.2 "Contextual instance of a bean", then invoke the method upon this instance.</text>
         </assertion>
 
         <assertion id="e">
