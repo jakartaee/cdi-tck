@@ -2486,6 +2486,10 @@
                 <text>Check the required type parameter and the bean type parameter are both type variables and the upper bound of the required type parameter is assignable to the upper bound of the bean type parameter.</text>
             </assertion>
         </group>
+        
+        <assertion id="g" implied="true">
+            <text>A raw bean type is not assignable to a parameterized required type.</text>
+        </assertion>
 
     </section>
 
