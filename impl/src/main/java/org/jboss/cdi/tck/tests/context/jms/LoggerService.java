@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.jms;
 
-import java.util.Random;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -25,14 +25,14 @@ import javax.inject.Inject;
 @RequestScoped
 public class LoggerService {
 
-    private float id;
+    private String id;
 
     @Inject
     private LogStore store;
 
     @PostConstruct
     public void init() {
-        id = new Random().nextFloat();
+        id = UUID.randomUUID().toString();
     }
 
     /**
@@ -44,7 +44,7 @@ public class LoggerService {
         if (text == null)
             throw new IllegalArgumentException();
 
-        store.recordLogMessage(text, "" + id);
+        store.recordLogMessage(text, id);
     }
 
 }
