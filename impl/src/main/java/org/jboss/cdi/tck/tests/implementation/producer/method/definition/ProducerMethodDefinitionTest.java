@@ -213,7 +213,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
      */
     @Test
     @SpecAssertions({ @SpecAssertion(section = "2.3.5", id = "a"), @SpecAssertion(section = "3.3.2", id = "i"),
-            @SpecAssertion(section = "3.3.2", id = "h") })
+            @SpecAssertion(section = "3.3.2", id = "h"), @SpecAssertion(section = "5.5.4", id = "e") })
     public void testBindingTypesAppliedToProducerMethodParameters() {
         Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);

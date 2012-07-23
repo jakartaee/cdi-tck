@@ -94,7 +94,8 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
      * @throws Exception
      */
     @Test(groups = { DISPOSAL })
-    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "h"), @SpecAssertion(section = "3.11", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "h"), @SpecAssertion(section = "3.11", id = "a"),
+            @SpecAssertion(section = "5.5.4", id = "e") })
     public void testDisposalMethodParametersGetInjected() throws Exception {
 
         SpiderProducer.reset();

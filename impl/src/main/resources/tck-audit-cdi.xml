@@ -2893,8 +2893,14 @@
         </assertion>
 
         <assertion id="e">
-            <text>The container passes an injectable reference to each injected method parameter. The container is also responsible for destroying dependent objects created during this invocation, as defined in Section 6.4.2, "Destruction of objects with scope @Dependent".</text>
+            <text>The container passes an injectable reference to each injected method parameter.</text>
         </assertion>
+        
+        <assertion id="f">
+            <text>The container is also responsible for destroying dependent objects created during this invocation, as defined in Section 6.4.2, "Destruction of objects with scope @Dependent".</text>
+            <note></note>
+        </assertion>
+        
     </section>
 
     <section id="5.5.5" title="Access to producer field values">

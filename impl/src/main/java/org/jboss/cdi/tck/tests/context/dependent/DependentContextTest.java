@@ -27,6 +27,7 @@ import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.util.Set;
@@ -361,7 +362,8 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test(groups = { CONTEXTS, PRODUCER_METHOD })
-    @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "ddd"), @SpecAssertion(section = "6.4.1", id = "h") })
+    @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "ddd"), @SpecAssertion(section = "6.4.1", id = "h"),
+            @SpecAssertion(section = "5.5.4", id = "f") })
     public void testDependentsDestroyedWhenProducerMethodCompletes() {
         // Reset the test classes
         SpiderProducer.reset();
@@ -393,21 +395,25 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test(groups = { CONTEXTS, DISPOSAL })
-    @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "ddf"), @SpecAssertion(section = "6.4.2", id = "ccc") })
+    @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "ddf"), @SpecAssertion(section = "6.4.2", id = "ccc"),
+            @SpecAssertion(section = "5.5.4", id = "d"), @SpecAssertion(section = "5.5.4", id = "f") })
     public void testDependentsDestroyedWhenDisposerMethodCompletes() {
         Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class, PET_LITERAL).iterator().next();
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
         Tarantula tarantula = tarantulaBean.create(creationalContext);
-        assert tarantula != null;
+        assertNotNull(tarantula);
 
         // Reset test class state
         SpiderProducer.reset();
         Fox.reset();
 
         tarantulaBean.destroy(tarantula, creationalContext);
-        assert SpiderProducer.isDestroyed();
-        assert Fox.isDestroyed();
+        assertTrue(SpiderProducer.isDestroyed());
+        assertNotNull(SpiderProducer.getFoxUsedForDisposalHashcode());
+        assertTrue(Fox.isDestroyed());
+
         SpiderProducer.reset();
+        Fox.reset();
     }
 
     @Test(groups = { CONTEXTS, OBSERVER_METHOD })
