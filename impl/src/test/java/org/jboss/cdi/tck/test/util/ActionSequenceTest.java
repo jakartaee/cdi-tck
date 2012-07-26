@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.util;
+package org.jboss.cdi.tck.test.util;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -30,6 +30,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.testng.annotations.Test;
 
 /**

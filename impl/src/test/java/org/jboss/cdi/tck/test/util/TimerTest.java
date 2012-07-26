@@ -14,11 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.util;
+package org.jboss.cdi.tck.test.util;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.ResolutionLogic;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.testng.annotations.Test;
