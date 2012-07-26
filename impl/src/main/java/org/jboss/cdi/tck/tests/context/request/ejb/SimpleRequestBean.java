@@ -16,21 +16,31 @@
  */
 package org.jboss.cdi.tck.tests.context.request.ejb;
 
+import java.util.UUID;
+
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class SimpleRequestBean {
-    private double id = Math.random();
+
+    private String id;
+
     private static boolean beanDestroyed = false;
 
-    public double getId() {
-        return id;
+    @PostConstruct
+    public void init() {
+        id = UUID.randomUUID().toString();
     }
 
     @PreDestroy
     public void destroy() {
         beanDestroyed = true;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public static boolean isBeanDestroyed() {

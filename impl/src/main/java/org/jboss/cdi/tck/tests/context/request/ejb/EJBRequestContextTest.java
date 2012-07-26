@@ -18,6 +18,10 @@ package org.jboss.cdi.tck.tests.context.request.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.Future;
 
@@ -43,7 +47,6 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EJBRequestContextTest extends AbstractTest {
 
@@ -53,18 +56,24 @@ public class EJBRequestContextTest extends AbstractTest {
                 .withClasses(FMS.class, FMSModelIII.class, BarBean.class, SimpleRequestBean.class, FooRemote.class).build();
     }
 
-    @Deployment(name = "REMOTE_EJB", order = 2)
+    @Deployment(name = "REMOTE_EJB", order = 2, testable = false)
     public static EnterpriseArchive createEjbArchive() {
         return new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().withName("test-ejb.ear")
                 .withEjbModuleName("test-ejb.jar").withClasses(FooBean.class, FooRemote.class, FooRequestBean.class).build();
     }
+
+    @EJB(lookup = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.ejb.FooRemote")
+    FooRemote foo;
+
+    @EJB
+    BarBean bar;
 
     /**
      * The request scope is active during any remote method invocation of any EJB bean, during any call to an EJB timeout method
      * and during message delivery to any EJB message driven bean.
      */
     @OperateOnDeployment("TEST")
-    @Test(groups = { CONTEXTS })
+    @Test(groups = { JAVAEE_FULL, CONTEXTS })
     @SpecAssertion(section = "6.7.1", id = "gc")
     public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
@@ -77,19 +86,20 @@ public class EJBRequestContextTest extends AbstractTest {
             }
         }).start();
 
-        assert flightManagementSystem.isRequestScopeActive();
+        assertTrue(flightManagementSystem.isRequestScopeActive());
     }
 
     /**
      * The request context is destroyed after the remote method invocation, timeout or message delivery completes.
      */
     @OperateOnDeployment("TEST")
-    @Test(groups = { CONTEXTS })
+    @Test(groups = { JAVAEE_FULL, CONTEXTS })
     @SpecAssertion(section = "6.7.1", id = "hc")
     public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
         SimpleRequestBean.reset();
         FMS flightManagementSystem = getInstanceByType(FMS.class);
+
         flightManagementSystem.climb();
 
         Timer timer = new Timer().setDelay(20000l).addStopCondition(new StopCondition() {
@@ -106,35 +116,29 @@ public class EJBRequestContextTest extends AbstractTest {
             }
         }, true).start();
 
-        assert !flightManagementSystem.isSameBean();
-        assert SimpleRequestBean.isBeanDestroyed();
+        assertFalse(flightManagementSystem.isSameBean());
+        assertTrue(SimpleRequestBean.isBeanDestroyed());
     }
 
-    @EJB(mappedName = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.ejb.FooRemote")
-    FooRemote foo;
-
-    @EJB
-    BarBean bar;
-
     @OperateOnDeployment("TEST")
-    @Test(groups = { CONTEXTS })
+    @Test(groups = { JAVAEE_FULL, CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ga"), @SpecAssertion(section = "6.7.1", id = "ha") })
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
-        assert foo.ping() != null;
-        assert foo.wasRequestBeanInPreviousCallDestroyed();
+        assertNotNull(foo.ping());
+        assertTrue(foo.wasRequestBeanInPreviousCallDestroyed());
     }
 
     @OperateOnDeployment("TEST")
-    @Test(groups = { CONTEXTS })
+    @Test(groups = { JAVAEE_FULL, CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "gb"), @SpecAssertion(section = "6.7.1", id = "hb") })
     public void testRequestScopeActiveDuringAsyncCallToEjb() throws Exception {
         SimpleRequestBean simpleRequestBean = getInstanceByType(SimpleRequestBean.class);
         SimpleRequestBean.reset();
-        Future<Double> result = bar.compute();
-        Double id = result.get();
-        assert id != -1.00;
-        assert id != simpleRequestBean.getId();
-        assert SimpleRequestBean.isBeanDestroyed();
+        Future<String> result = bar.compute();
+        String id = result.get();
+        assertNotNull(id);
+        assertNotEquals(id, simpleRequestBean.getId());
+        assertTrue(SimpleRequestBean.isBeanDestroyed());
     }
 
 }

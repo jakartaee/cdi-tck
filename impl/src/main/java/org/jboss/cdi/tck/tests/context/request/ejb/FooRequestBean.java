@@ -31,6 +31,7 @@ public class FooRequestBean {
 
     @PreDestroy
     public void destroy() {
+        System.out.println("DESTROYED");
         beanDestroyed = true;
     }
 

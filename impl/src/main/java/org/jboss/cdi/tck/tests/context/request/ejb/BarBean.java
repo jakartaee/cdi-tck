@@ -42,9 +42,9 @@ public class BarBean {
      * 
      * @return
      */
-    public Future<Double> compute() {
+    public Future<String> compute() {
 
-        Double result = null;
+        String result = null;
         Context requestContext = null;
 
         try {
@@ -53,12 +53,10 @@ public class BarBean {
             // No-op
         }
 
-        if (requestContext == null || !requestContext.isActive() || simpleRequestBean == null) {
-            result = -1.00;
-        } else {
+        if (requestContext != null && requestContext.isActive() && simpleRequestBean != null) {
             result = simpleRequestBean.getId();
         }
-        return new AsyncResult<Double>(result);
+        return new AsyncResult<String>(result);
     }
 
 }

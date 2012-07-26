@@ -28,7 +28,6 @@ import javax.inject.Inject;
 
 @Stateless
 public class FMSModelIII implements FMS {
-    private static final long serialVersionUID = 1L;
 
     private static final String CLIMB_COMMAND = "ClimbCommand";
     private static final String DESCEND_COMMAND = "DescendCommand";
@@ -43,7 +42,7 @@ public class FMSModelIII implements FMS {
     Instance<SimpleRequestBean> simpleRequestBean;
 
     private static volatile boolean requestScopeActive = false;
-    private static volatile double beanId = 0.0d;
+    private static volatile String beanId = null;
     private static volatile boolean sameBean = false;
 
     private static volatile boolean climbed;
@@ -61,10 +60,8 @@ public class FMSModelIII implements FMS {
     public void timeout(Timer timer) {
         if (beanManager.getContext(RequestScoped.class).isActive()) {
             requestScopeActive = true;
-            if (beanId > 0.0) {
-                if (beanId == simpleRequestBean.get().getId()) {
-                    sameBean = true;
-                }
+            if (beanId != null && beanId.equals(simpleRequestBean.get().getId())) {
+                sameBean = true;
             } else {
                 beanId = simpleRequestBean.get().getId();
             }
@@ -83,7 +80,7 @@ public class FMSModelIII implements FMS {
     }
 
     public static void reset() {
-        beanId = 0.0d;
+        beanId = null;
         climbed = false;
         descended = false;
         requestScopeActive = false;

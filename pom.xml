@@ -86,7 +86,7 @@
         <jsr250.api.version>1.0</jsr250.api.version>
         <cdi.api.version>1.1.EDR1.2</cdi.api.version>
         <atinject.api.version>1</atinject.api.version>
-        <ejb.api.version>3.1.0</ejb.api.version>
+        <jboss.ejb.api.version>1.0.2.Final</jboss.ejb.api.version>
         <jsr250.api.version>1.0</jsr250.api.version>
         <jpa.api.version>1.0</jpa.api.version>
         <validation.api.version>1.0.0.GA</validation.api.version>
@@ -204,23 +204,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.ejb3</groupId>
-                <artifactId>jboss-ejb3-api</artifactId>
-                <version>${ejb.api.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>jboss-jaxrpc</artifactId>
-                        <groupId>jbossws</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>jboss-transaction-api</artifactId>
-                        <groupId>org.jboss.javaee</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <artifactId>jboss-jaxrpc</artifactId>
-                        <groupId>jboss.jbossws</groupId>
-                    </exclusion>
-                </exclusions>
+                <groupId>org.jboss.spec.javax.ejb</groupId>
+                <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+                <version>${jboss.ejb.api.version}</version>
             </dependency>
 
             <dependency>
