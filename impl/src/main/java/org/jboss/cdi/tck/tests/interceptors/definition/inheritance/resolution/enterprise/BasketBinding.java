@@ -14,30 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution;
+package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution.enterprise;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Interceptor
-@TransactionalBinding
-@LoggedBinding
-@MessageBinding
-@PingBinding
-@PongBinding
-@BallBinding(requiresBall = true)
-public class ComplicatedInterceptor {
+import java.lang.annotation.Documented;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    public static boolean intercepted = false;
+import javax.enterprise.util.Nonbinding;
+import javax.interceptor.InterceptorBinding;
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        intercepted = true;
-        return ctx.proceed();
-    }
+@Target({ TYPE })
+@Retention(RUNTIME)
+@Inherited
+@Documented
+@InterceptorBinding
+public @interface BasketBinding {
 
-    public static void reset() {
-        intercepted = false;
-    }
+    boolean requiresBall() default false;
+
+    @Nonbinding
+    boolean requiresPlayer() default false;
+
 }

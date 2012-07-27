@@ -20,9 +20,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution.e
 import javax.ejb.Stateful;
 
 @MessageBinding
-@PingBinding
-@PongBinding
-@BallBinding(requiresBall = true)
+@BasketBinding(requiresBall = true)
 @Stateful
 public class RemoteMessageService extends RemoteService {
 

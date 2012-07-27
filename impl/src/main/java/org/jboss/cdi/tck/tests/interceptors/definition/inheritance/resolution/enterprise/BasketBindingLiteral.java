@@ -16,20 +16,34 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution.enterprise;
 
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.enterprise.util.AnnotationLiteral;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+/**
+ * Annotation literal for {@link BasketBinding}
+ */
+@SuppressWarnings("all")
+public class BasketBindingLiteral extends AnnotationLiteral<BasketBinding> implements BasketBinding {
 
-import javax.interceptor.InterceptorBinding;
+    public static final BasketBinding INSTANCE = new BasketBindingLiteral(false, false);
 
-@Target({ TYPE })
-@Retention(RUNTIME)
-@Inherited
-@Documented
-@InterceptorBinding
-public @interface TransactionalBinding {
+    private boolean requiresBall;
+
+    private boolean requiresPlayer;
+
+    public BasketBindingLiteral(boolean requiresBall, boolean requiresPlayer) {
+        super();
+        this.requiresBall = requiresBall;
+        this.requiresPlayer = requiresPlayer;
+    }
+
+    @Override
+    public boolean requiresBall() {
+        return requiresBall;
+    }
+
+    @Override
+    public boolean requiresPlayer() {
+        return requiresPlayer;
+    }
+
 }

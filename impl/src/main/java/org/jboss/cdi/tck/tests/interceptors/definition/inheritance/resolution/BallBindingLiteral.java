@@ -17,10 +17,9 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution;
 
 import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Named;
 
 /**
- * Annotation literal for {@link Named}
+ * Annotation literal for {@link BallBinding}
  */
 @SuppressWarnings("all")
 public class BallBindingLiteral extends AnnotationLiteral<BallBinding> implements BallBinding {

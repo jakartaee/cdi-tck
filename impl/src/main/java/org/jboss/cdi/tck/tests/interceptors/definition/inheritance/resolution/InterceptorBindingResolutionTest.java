@@ -38,7 +38,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ * Interceptor resolution test.
  * 
  * @author Martin Kouba
  */
@@ -51,7 +51,8 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
                 .withTestClassPackage(InterceptorBindingResolutionTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(ComplicatedInterceptor.class.getName()).up()).build();
+                                .clazz(ComplicatedInterceptor.class.getName(), ComplicatedLifecycleInterceptor.class.getName())
+                                .up()).build();
     }
 
     /**
@@ -61,6 +62,7 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
      * meta-annotations of other interceptor bindings.
      * 
      * @param messageService
+     * @param monitorService
      */
     @SuppressWarnings("serial")
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -89,10 +91,15 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
         assertFalse(ComplicatedInterceptor.intercepted);
     }
 
+    /**
+     * For a lifecycle callback method, the interceptor bindings include the interceptor bindings declared or inherited by the
+     * bean at the class level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor
+     * bindings and stereotypes.
+     */
     @SuppressWarnings("serial")
     @Test
     @SpecAssertion(section = "9.5", id = "a")
-    public void testLifecycleInterceptorBindings() throws Exception {
+    public void testLifecycleInterceptorBindings() {
 
         // Test interceptor is resolved (note non-binding member of BallBinding)
         assertEquals(
@@ -100,19 +107,15 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
                         new AnnotationLiteral<MessageBinding>() {
                         }, new AnnotationLiteral<LoggedBinding>() {
                         }, new AnnotationLiteral<TransactionalBinding>() {
-                        }, new AnnotationLiteral<PingBinding>() {
-                        }, new AnnotationLiteral<PongBinding>() {
-                        }, new BallBindingLiteral(true, true)).size(), 1);
+                        }, new BasketBindingLiteral(true, true)).size(), 1);
         assertEquals(
                 getCurrentManager().resolveInterceptors(InterceptionType.PRE_DESTROY, new AnnotationLiteral<MessageBinding>() {
                 }, new AnnotationLiteral<LoggedBinding>() {
                 }, new AnnotationLiteral<TransactionalBinding>() {
-                }, new AnnotationLiteral<PingBinding>() {
-                }, new AnnotationLiteral<PongBinding>() {
-                }, new BallBindingLiteral(true, true)).size(), 1);
+                }, new BasketBindingLiteral(true, true)).size(), 1);
 
         // Test the set of interceptor bindings
-        ComplicatedInterceptor.reset();
+        ComplicatedLifecycleInterceptor.reset();
 
         Bean<RemoteMessageService> bean = getUniqueBean(RemoteMessageService.class);
         CreationalContext<RemoteMessageService> ctx = getCurrentManager().createCreationalContext(bean);
@@ -120,8 +123,7 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
         remoteMessageService.ping();
         bean.destroy(remoteMessageService, ctx);
 
-        assertTrue(ComplicatedInterceptor.postConstructCalled);
-        assertTrue(ComplicatedInterceptor.preDestroyCalled);
+        assertTrue(ComplicatedLifecycleInterceptor.postConstructCalled);
+        assertTrue(ComplicatedLifecycleInterceptor.preDestroyCalled);
     }
-
 }

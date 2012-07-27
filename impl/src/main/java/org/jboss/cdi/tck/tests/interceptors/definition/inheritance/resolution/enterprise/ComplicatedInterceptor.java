@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution.enterprise;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.AroundTimeout;
 import javax.interceptor.Interceptor;
@@ -33,8 +31,6 @@ import javax.interceptor.InvocationContext;
 public class ComplicatedInterceptor {
 
     public static boolean intercepted = false;
-    public static boolean preDestroyCalled = false;
-    public static boolean postConstructCalled = false;
 
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
@@ -48,19 +44,7 @@ public class ComplicatedInterceptor {
         return ctx.proceed();
     }
 
-    @PreDestroy
-    public void preDestroy(InvocationContext ctx) {
-        preDestroyCalled = true;
-    }
-
-    @PostConstruct
-    public void postConstruct(InvocationContext ctx) {
-        postConstructCalled = true;
-    }
-
     public static void reset() {
         intercepted = false;
-        preDestroyCalled = false;
-        postConstructCalled = false;
     }
 }

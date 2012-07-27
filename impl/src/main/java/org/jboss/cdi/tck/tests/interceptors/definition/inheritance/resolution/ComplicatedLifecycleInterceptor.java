@@ -16,7 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution;
 
-import javax.interceptor.AroundInvoke;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
@@ -24,20 +25,24 @@ import javax.interceptor.InvocationContext;
 @TransactionalBinding
 @LoggedBinding
 @MessageBinding
-@PingBinding
-@PongBinding
-@BallBinding(requiresBall = true)
-public class ComplicatedInterceptor {
+@BasketBinding(requiresBall = true)
+public class ComplicatedLifecycleInterceptor {
 
-    public static boolean intercepted = false;
+    public static boolean preDestroyCalled = false;
+    public static boolean postConstructCalled = false;
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        intercepted = true;
-        return ctx.proceed();
+    @PreDestroy
+    public void preDestroy(InvocationContext ctx) {
+        preDestroyCalled = true;
+    }
+
+    @PostConstruct
+    public void postConstruct(InvocationContext ctx) {
+        postConstructCalled = true;
     }
 
     public static void reset() {
-        intercepted = false;
+        preDestroyCalled = false;
+        postConstructCalled = false;
     }
 }

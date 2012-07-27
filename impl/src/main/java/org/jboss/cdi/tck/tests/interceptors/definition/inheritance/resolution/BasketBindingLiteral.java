@@ -16,28 +16,34 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import javax.enterprise.util.AnnotationLiteral;
 
-@Interceptor
-@TransactionalBinding
-@LoggedBinding
-@MessageBinding
-@PingBinding
-@PongBinding
-@BallBinding(requiresBall = true)
-public class ComplicatedInterceptor {
+/**
+ * Annotation literal for {@link BasketBinding}
+ */
+@SuppressWarnings("all")
+public class BasketBindingLiteral extends AnnotationLiteral<BasketBinding> implements BasketBinding {
 
-    public static boolean intercepted = false;
+    public static final BasketBinding INSTANCE = new BasketBindingLiteral(false, false);
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        intercepted = true;
-        return ctx.proceed();
+    private boolean requiresBall;
+
+    private boolean requiresPlayer;
+
+    public BasketBindingLiteral(boolean requiresBall, boolean requiresPlayer) {
+        super();
+        this.requiresBall = requiresBall;
+        this.requiresPlayer = requiresPlayer;
     }
 
-    public static void reset() {
-        intercepted = false;
+    @Override
+    public boolean requiresBall() {
+        return requiresBall;
     }
+
+    @Override
+    public boolean requiresPlayer() {
+        return requiresPlayer;
+    }
+
 }

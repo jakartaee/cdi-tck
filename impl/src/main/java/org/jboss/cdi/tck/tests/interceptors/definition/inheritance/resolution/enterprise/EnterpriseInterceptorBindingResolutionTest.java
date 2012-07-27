@@ -41,7 +41,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ * Interceptor resolution test.
  * 
  * @author Martin Kouba
  */
@@ -55,7 +55,8 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
                 .withTestClassPackage(EnterpriseInterceptorBindingResolutionTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(ComplicatedInterceptor.class.getName()).up()).build();
+                                .clazz(ComplicatedInterceptor.class.getName(), ComplicatedLifecycleInterceptor.class.getName())
+                                .up()).build();
     }
 
     /**
@@ -121,19 +122,15 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
                         new AnnotationLiteral<MessageBinding>() {
                         }, new AnnotationLiteral<LoggedBinding>() {
                         }, new AnnotationLiteral<TransactionalBinding>() {
-                        }, new AnnotationLiteral<PingBinding>() {
-                        }, new AnnotationLiteral<PongBinding>() {
-                        }, new BallBindingLiteral(true, true)).size(), 1);
+                        }, new BasketBindingLiteral(true, true)).size(), 1);
         assertEquals(
                 getCurrentManager().resolveInterceptors(InterceptionType.PRE_DESTROY, new AnnotationLiteral<MessageBinding>() {
                 }, new AnnotationLiteral<LoggedBinding>() {
                 }, new AnnotationLiteral<TransactionalBinding>() {
-                }, new AnnotationLiteral<PingBinding>() {
-                }, new AnnotationLiteral<PongBinding>() {
-                }, new BallBindingLiteral(true, true)).size(), 1);
+                }, new BasketBindingLiteral(true, true)).size(), 1);
 
         // Test the set of interceptor bindings
-        ComplicatedInterceptor.reset();
+        ComplicatedLifecycleInterceptor.reset();
 
         Bean<RemoteMessageService> bean = getUniqueBean(RemoteMessageService.class);
         CreationalContext<RemoteMessageService> ctx = getCurrentManager().createCreationalContext(bean);
@@ -141,8 +138,8 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
         remoteMessageService.ping();
         bean.destroy(remoteMessageService, ctx);
 
-        assertTrue(ComplicatedInterceptor.postConstructCalled);
-        assertTrue(ComplicatedInterceptor.preDestroyCalled);
+        assertTrue(ComplicatedLifecycleInterceptor.postConstructCalled);
+        assertTrue(ComplicatedLifecycleInterceptor.preDestroyCalled);
     }
 
 }
