@@ -104,9 +104,10 @@
                <exclude name=".*" />
             </methods>
          </class>
-	 <class name="org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.EnterpriseBeanSpecializationIntegrationTest">
+         <class
+            name="org.jboss.jsr299.tck.tests.inheritance.specialization.enterprise.EnterpriseBeanSpecializationIntegrationTest">
             <methods>
-               <exclude name=".*"/>
+               <exclude name=".*" />
             </methods>
          </class>
          <!-- CDITCK-250 -->
@@ -148,6 +149,27 @@
          <!-- CDITCK-265 -->
          <class
             name="org.jboss.jsr299.tck.tests.implementation.producer.field.lifecycle.ProducerFieldLifecycleTest">
+            <methods>
+               <exclude name=".*" />
+            </methods>
+         </class>
+         <!-- CDITCK-263 -->
+         <class
+            name="org.jboss.jsr299.tck.tests.implementation.simple.lifecycle.unproxyable.UnproxyableManagedBeanTest">
+            <methods>
+               <exclude name=".*" />
+            </methods>
+         </class>
+         <!-- CDITCK-280 -->
+         <class
+            name="org.jboss.jsr299.tck.tests.context.passivating.broken.finalProducerFieldNotPassivationCapable.NonPassivationCapableProducerFieldTest">
+            <methods>
+               <exclude name=".*" />
+            </methods>
+         </class>
+         <!-- CDITCK-281 -->
+         <class
+            name="org.jboss.jsr299.tck.tests.deployment.lifecycle.broken.normalScope.AddingNormalScopeTest">
             <methods>
                <exclude name=".*" />
             </methods>
