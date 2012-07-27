@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.jms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -24,16 +25,22 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class LogStore {
 
-    private final List<LogMessage> logMessages = new ArrayList<LogMessage>();
+    private final List<LogMessage> logMessages = Collections.synchronizedList(new ArrayList<LogMessage>());
 
     public void recordLogMessage(String text, String serviceId) {
         logMessages.add(new LogMessage(Thread.currentThread().getId(), text, serviceId));
     }
 
+    /**
+     * @return read-only view of logged messages
+     */
     public List<LogMessage> getLogMessages() {
-        return logMessages;
+        return Collections.unmodifiableList(new ArrayList<LogMessage>(this.logMessages));
     }
 
+    /**
+     * Immutable log message.
+     */
     public class LogMessage {
 
         private final long threadId;
