@@ -4,11 +4,11 @@
    <title>Appeals Process</title>
    <para>
       While the CDI TCK is rigourous about enforcing an implementation's
-      conformance to the JSR-299 specification, it's reasonable to assume that
+      conformance to the JSR 346 specification, it's reasonable to assume that
       an implementor may discover new and/or better ways to validate the
       assertions. This chapter covers the appeals process, defined by the
       Specification Lead, Red Hat Middleware LLC., which allows implementors of
-      the JSR-299 specification to challenge one or more tests defined by the
+      the JSR 346 specification to challenge one or more tests defined by the
       CDI TCK.
    </para>
    <para>
@@ -30,14 +30,14 @@
       <title>Who can make challenges to the TCK?</title>
       <para>
          Any implementor may submit an appeal to challenge one or more tests in
-         the CDI TCK. In fact, members of the JSR-299 Expert Group (EG) encourage
+         the CDI TCK. In fact, members of the JSR 346 Expert Group (EG) encourage
          this level of participation.
       </para>
    </section>
    <section>
       <title>What challenges to the TCK may be submitted?</title>
       <para>
-         Any test case (e.g., <literal>@Artifact</literal> class,
+         Any test case (e.g., test class,
          <literal>@Test</literal> method), test case configuration (e.g.,
          beans.xml), test beans, annotations and other resources may be
          challenged by an appeal.
@@ -45,7 +45,7 @@
       <para>
          What is generally not challengable are the assertions made by the
          specification. The specification document is controlled by a separate
-         process and challenges to it should be handled through the JSR-299 EG
+         process and challenges to it should be handled through the JSR 346 EG
          by sending an e-mail to <ulink
          url="mailto:jsr299-comments@jcp.org">jsr299-comments@jcp.org</ulink>.
       </para>
@@ -61,9 +61,9 @@
          be pursed in the comments of the filed issue for accurate record. 
       </para>
       <para>
-         To submit an issue in the JBoss JIRA, you must have a (free) JBoss.com
+         To submit an issue in the JBoss JIRA, you must have a (free) JBoss.org
          member account. You can create a member account using the <ulink
-         url="http://www.jboss.org/index.html?op=checkage&amp;module=user">on-line
+         url="https://community.jboss.org/register.jspa">on-line
          registration</ulink>.
       </para>
       <para>
@@ -103,19 +103,19 @@
       <para>
          Resolved issue not addressed for 30 days will be closed by the TCK
          Project Lead. If the TCK Project Lead and appellant are unable to
-         agree on the issue resolution, it will be referred to the JSR-299
+         agree on the issue resolution, it will be referred to the JSR 346
          specification lead or his/her designate.
       </para>
       <para>
          Periodically, an updated TCK will be released containing tests altered
          due to challenges. No new tests will be added. Implementations are 
-         required to pass the updated TCK. This release stream is named 1.0.z where
+         required to pass the updated TCK. This release stream is named 1.1.z where
          z will be incremented.
       </para>
       <para>
          Additionally, new tests will be added to the TCK improving coverage of the
          specification. We encourage implementations to pass this TCK, however it is
-         not required. This release stream is named 1.y.z where y > 0.
+         not required. This release stream is named 1.y.z where y > 1.
       </para>
    </section>
 </chapter>

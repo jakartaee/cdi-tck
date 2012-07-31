@@ -3,10 +3,9 @@
 
    <modelVersion>4.0.0</modelVersion>
 
-   <groupId>org.jboss.cdi.tck</groupId>
    <artifactId>cdi-tck-reference-guide</artifactId>
    <packaging>jdocbook</packaging>
-   <name>JSR-299 TCK Reference Guide</name>
+   <name>CDI TCK Reference Guide</name>
 
    <parent>
       <groupId>org.jboss.cdi.tck</groupId>
@@ -44,6 +43,36 @@
             </executions>
          </plugin>
       </plugins>
+      <pluginManagement>
+          <plugins>
+              <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+              <plugin>
+                  <groupId>org.eclipse.m2e</groupId>
+                  <artifactId>lifecycle-mapping</artifactId>
+                  <version>1.0.0</version>
+                  <configuration>
+                      <lifecycleMappingMetadata>
+                          <pluginExecutions>
+                              <pluginExecution>
+                                  <pluginExecutionFilter>
+                                      <groupId>org.jboss.maven.plugins</groupId>
+                                      <artifactId>maven-jdocbook-plugin</artifactId>
+                                      <versionRange>[2.2.3,)</versionRange>
+                                      <goals>
+                                          <goal>resources</goal>
+                                          <goal>generate</goal>
+                                      </goals>
+                                  </pluginExecutionFilter>
+                                  <action>
+                                      <ignore></ignore>
+                                  </action>
+                              </pluginExecution>
+                          </pluginExecutions>
+                      </lifecycleMappingMetadata>
+                  </configuration>
+              </plugin>
+          </plugins>
+      </pluginManagement>
    </build>
 
    <scm>

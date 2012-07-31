@@ -2,7 +2,7 @@
 <!DOCTYPE bookinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
 <bookinfo>
    <copyright>
-      <year>2009</year>
+      <year>2012</year>
       <holder>
          Red Hat Inc., and individual contributors listed as authors.
       </holder>
@@ -17,8 +17,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</literallayout></releaseinfo>
 
-   <title>Technology Compatibility Kit Reference Guide for JSR-299: Context and
-      Dependency Injection for Java EE</title>
+   <title>Technology Compatibility Kit Reference Guide for JSR 346: Contexts and Dependency Injection for Java EE 1.1</title>
    <subtitle>Specification Lead: Red Hat Inc.</subtitle>
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Author_Group.xml" />
 <!--

@@ -121,29 +121,18 @@
       <para>
          The CDI TCK is designed as a portable, configurable and automated test
          suite for verifying the compatibility of an implementation of the
-         JSR-299: Contexts and Dependency Injection for Java EE specification.
-         The test suite is built atop TestNG and provides a series of extensions
-         that allow runtime packaging and deployment of JEE artifacts for
-         in-container testing (JBoss Test Harness).
+         JSR 346: Contexts and Dependency Injection for Java EE 1.1 specification.
+         The test suite is built atop TestNG and Arquillian testing platform.
+      </para>
+      <para>
+         Each test class in the suite acts as a deployable unit. The
+         deployable units, or artifacts, can be either a WAR or an EAR.
       </para>
       <note>
          <para>
-            The CDI TCK harness is based on the JBoss Test harness, which
-            provides most of the aforementioned functionality.
+           The archive is defined using ShrinkWrap, which is a Java API for creating archives.
          </para>
       </note>
-      <para>
-         Each test class in the suite acts as a deployable unit. The
-         deployable units, or artifacts, are defined declaratively using
-         annotations. The artifact produced can be either a WAR or an EAR.
-      </para>
-      <para>
-         The declarative approach allows many of the tests to be executed in
-         a standalone implementation of CDI, accounting for a boast in developer
-         productivity. However, an implementation is only valid if all tests
-         pass using the in-container execution mode. The standalone mode is
-         merely a developer convenience.
-      </para>
 
       <section>
          <title>CDI TCK Specifications and Requirements</title>
@@ -165,19 +154,18 @@
             <listitem>
                <para>
                   <emphasis role="bold">Contexts and Dependency Injection for
-                     Java EE 1.0 API</emphasis>
+                     Java EE 1.1 API</emphasis>
                   - The Java API defined in the CDI specification and provided
                   by the reference implementation.
                </para>
             </listitem>
             <listitem>
                <para>
-                  <emphasis role="bold">JBoss Test Harness</emphasis>
-                  - The CDI TCK requires version 1.0.0 of the JBoss Test
-                  Harness. The Harness is based on TestNG 5.x 
+                  <emphasis role="bold">Testing platform</emphasis>
+                  - The CDI TCK requires version 1.0.2.Final of the Arquillian. 
+                  The TCK test suite is based on TestNG 6.x 
                   (<ulink url="http://testng.org">http://testng.org</ulink>).
-                  You can read more about the harness in
-                  <xref linkend="test-harness" />.
+                  .
                </para>
             </listitem>
             <listitem>
@@ -185,7 +173,7 @@
                   <emphasis role="bold">Porting Package</emphasis>
                   - An implementation of SPIs that are required for the test
                   suite to run the in-container tests and at times extend the
-                  CDI 1.0 API to provide extra information to the TCK.
+                  CDI 1.1 API to provide extra information to the TCK.
                </para>
             </listitem>
             <listitem>
@@ -209,7 +197,7 @@
             <listitem>
                <para>
                   <emphasis role="bold">JSR-330</emphasis> - CDI builds on JSR-330,
-                  and as such JSR-299 implementations must additionally pass the
+                  and as such JSR 346 implementations must additionally pass the
                   JSR-330 TCK.
                </para>
                <tip>
@@ -229,16 +217,12 @@
          <itemizedlist>
             <listitem>
                <para>
-                  <emphasis role="bold">JBoss Test Harness 1.0.0</emphasis>
-                  and related documentation.
+                  <emphasis role="bold">Arquillian 1.0.2.Final</emphasis>
                </para>
             </listitem>
             <listitem>
                <para>
-                  <emphasis role="bold">TestNG 5.10</emphasis>, the testing
-                  framework on which the JBoss Test Harness is based and which
-                  provides the extension points for selecting an executing the
-                  tests in the test suite.
+                  <emphasis role="bold">TestNG 6.2</emphasis>
                </para>
             </listitem>
             <listitem>
@@ -291,7 +275,7 @@
          <itemizedlist>
             <listitem>
                <para>
-                  JBoss AS 6.0 using Sun Java SE 6 on Red Hat Enterprise 
+                  JBoss AS 7.2 using Sun Java SE 6 on Red Hat Enterprise 
                   Linux 5.2
                </para>
             </listitem>

@@ -22,21 +22,21 @@
       </para>
       <para>
          You can also download the current source code from
-         <ulink url="http://anonsvn.jboss.org/repos/weld/cdi-tck/trunk">JBoss SVN repository</ulink>.
+         <ulink url="https://github.com/jboss/cdi-tck">GitHub repository</ulink>.
       </para>
       <para>
          The TCK project is available in the JBoss Maven 2 repository as
-         <code>org.jboss.jsr299.tck:jsr299-tck-impl</code>; the POM defines all
+         <code>org.jboss.cdi.tck:cdi-tck-impl</code>; the POM defines all
          dependencies required to run the TCK.
       </para>
       <para>
-         Executing the TCK requires a Java EE 5 or better runtime environment
+         Executing the TCK requires a Java EE 6 or better runtime environment
          (i.e., application server), to which the test artifacts are deployed
          and the individual tests are invoked. The TCK does not depend on any
          particular Java EE implementation.
       </para>
       <para>
-         The JSR-299: Contexts and Dependency Injection for Java EE 1.0
+         The JSR 346: Contexts and Dependency Injection for Java EE 1.1
          reference implementation (RI) project is named Weld. You can
          obtain the latest  release from the
          <ulink url="http://seamframework.org/Download">download page</ulink>
@@ -51,7 +51,7 @@
       </note>
       <para>
          Naturally, to execute Java programs, you must have a Java SE runtime
-         environment. The TCK requires Java 5 or better, which you can obtain
+         environment. The TCK requires Java 6 or better, which you can obtain
          from the
          <ulink url="http://java.sun.com">Java Software</ulink>
          website.
@@ -67,12 +67,12 @@
       <itemizedlist>
          <listitem>
             <para>
-               Java 5 or better
+               Java 6 or better
             </para>
          </listitem>
          <listitem>
             <para>
-               Java EE 6 preview or better (e.g., JBoss AS 6.0.x or GlassFish V3)
+               Java EE 6 or better (e.g., JBoss AS 7.2.x or GlassFish V3)
             </para>
          </listitem>
       </itemizedlist>
@@ -82,8 +82,8 @@
       </para>
       <para>
          The rest of the TCK software can simply be extracted. It's
-         recommended that you create a folder named jsr299 to hold all of the
-         jsr299-related projects. Then, extract the TCK distribution into a
+         recommended that you create a folder named jsr346 to hold all of the
+         jsr346-related projects. Then, extract the TCK distribution into a
          subfolder named tck. If you have downloaded the Weld distribution,
          extract it into a sibling folder named weld. The resulting folder
          structure is shown here:
@@ -94,16 +94,13 @@
             guide.
          </para>
       </note>
-      <programlisting><![CDATA[jsr299/
+      <programlisting><![CDATA[jsr346/
    weld/
    tck/]]></programlisting>
 
       <para>
-         Each test class is treated as an individual artifact (hence the
-         <literal>@Artifact</literal>
-         annotation on the class). All test methods (i.e., methods annotated
-         with
-         <literal>@Test</literal>)
+         Each test class is treated as an individual artifact. All test methods (i.e., methods annotated
+         with <literal>@Test</literal>)
          in the test class are run in the application, meaning bean discovery
          occurs exactly once per artifact and the same BeanManager is used by
          each test method in the class.
@@ -113,48 +110,6 @@
          <title>
             Running the TCK against the CDI RI (Weld) and JBoss AS
          </title>
-
-         <para>
-            Weld is built as a modular library, and as such can be
-            retro-fitted to Java EE 5 products as required. JBoss AS 5.2 and
-            above releases bundle Weld. To run the TCK with JBoss AS, you must
-            use JBoss AS 5.2 or above.
-         </para>
-
-         <para>
-            To install JBoss AS 5.2 and update to the latest 
-            release: 
-         </para>
-
-         <itemizedlist>
-            <listitem>
-               <para>
-                  First, you should download JBoss AS 5.2 from the JBoss AS
-                  <ulink url="http://jboss.org/jbossas/downloads">project page</ulink>.
-               </para>
-            </listitem>
-            <listitem>
-               <para>
-                  Set the
-                  <literal>JBOSS_HOME</literal>
-                  environment variable to the location of the JBoss AS software.
-               </para>
-            </listitem>
-            <listitem>
-               <para>
-                  Change to the <literal>weld</literal> directory in the TCK.
-               </para>
-            </listitem>
-            <listitem>
-               <para>
-                  Create a file called <literal>local.build.properties</literal>
-                  in <literal>weld/jboss-as</literal> and make sure the
-                  <literal>jboss.home</literal>
-                  property references a JBoss AS 6.0 installation:
-               </para>
-               <programlisting>jboss.home=/path/to/jboss-as-6.0</programlisting>
-            </listitem>
-         </itemizedlist>
 
          <para>
             The CDI TCK includes a TCK runner that executes the TCK using Web
