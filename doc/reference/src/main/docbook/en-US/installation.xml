@@ -18,7 +18,7 @@
          <code>/artifacts</code>, the TCK library dependencies in
          <code>/lib</code>
          and documentation in
-         <code>/lib</code>.
+         <code>/doc</code>.
       </para>
       <para>
          You can also download the current source code from

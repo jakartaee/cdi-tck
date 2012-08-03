@@ -21,7 +21,7 @@
      
      <para>To run the signature test simply change the execution command from <literal>Setup</literal> to <literal>SignatureTest</literal>:</para>
 
-      <programlisting><![CDATA[java -jar sigtestdev.jar SignatureTest -classpath "%JAVA_HOME%\jre\lib\rt.jar:lib/cdi-api.jar:lib/javax.inject.jar:lib/el-api.jar:lib/jboss-interceptor-api.jar" -Package javax.decorator -Package javax.enterprise -FileName artifacts/jsr299-tck-impl-sigtest.sig -static]]></programlisting>
+      <programlisting><![CDATA[java -jar sigtestdev.jar SignatureTest -classpath "%JAVA_HOME%\jre\lib\rt.jar:lib/cdi-api.jar:lib/javax.inject.jar:lib/el-api.jar:lib/jboss-interceptor-api.jar" -Package javax.decorator -Package javax.enterprise -FileName artifacts/cdi-tck-impl-sigtest.sig -static]]></programlisting>
 
      <para>When running the signature test, you may get the following message:</para>
 
@@ -48,7 +48,7 @@ supr javax.enterprise.context.ContextException
 hfds serialVersionUID
 ]]></programlisting>
 
-     <para>Let's change the default (empty) constructor parameter to one with a <literal>java.lang.Integer</literal>parameter instead:</para>
+     <para>Let's change the default (empty) constructor parameter to one with a <literal>java.lang.Integer</literal> parameter instead:</para>
 
      <programlisting><![CDATA[CLSS public javax.enterprise.context.BusyConversationException
 cons public BusyConversationException(java.lang.Integer)
