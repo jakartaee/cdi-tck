@@ -25,7 +25,7 @@
          <ulink url="https://github.com/jboss/cdi-tck">GitHub repository</ulink>.
       </para>
       <para>
-         The TCK project is available in the JBoss Maven 2 repository as
+         The TCK project is available in the JBoss Maven repository as
          <code>org.jboss.cdi.tck:cdi-tck-impl</code>; the POM defines all
          dependencies required to run the TCK.
       </para>
@@ -39,7 +39,7 @@
          The JSR 346: Contexts and Dependency Injection for Java EE 1.1
          reference implementation (RI) project is named Weld. You can
          obtain the latest  release from the
-         <ulink url="http://seamframework.org/Download">download page</ulink>
+         <ulink url="http://seamframework.org/Weld/Downloads">download page</ulink>
          on Seam Framework website.
       </para>
       <note>
@@ -53,7 +53,7 @@
          Naturally, to execute Java programs, you must have a Java SE runtime
          environment. The TCK requires Java 6 or better, which you can obtain
          from the
-         <ulink url="http://java.sun.com">Java Software</ulink>
+         <ulink url="http://www.oracle.com/technetwork/java/index.html">Java Software</ulink>
          website.
       </para>
    </section>
@@ -82,11 +82,11 @@
       </para>
       <para>
          The rest of the TCK software can simply be extracted. It's
-         recommended that you create a folder named jsr346 to hold all of the
-         jsr346-related projects. Then, extract the TCK distribution into a
-         subfolder named tck. If you have downloaded the Weld distribution,
-         extract it into a sibling folder named weld. The resulting folder
-         structure is shown here:
+         recommended that you create a folder named <emphasis>jsr346</emphasis> 
+         to hold all of the jsr346-related projects. Then, extract the TCK distribution 
+         into a subfolder named <emphasis>tck</emphasis>. If you have downloaded the 
+         Weld distribution, extract it into a sibling folder named <emphasis>weld</emphasis>.
+         The resulting folder structure is shown here:
       </para>
       <note>
          <para>
@@ -99,8 +99,8 @@
    tck/]]></programlisting>
 
       <para>
-         Each test class is treated as an individual artifact. All test methods (i.e., methods annotated
-         with <literal>@Test</literal>)
+         Each test class is treated as an individual artifact. All test methods 
+         (i.e., methods annotated with <literal>@Test</literal>)
          in the test class are run in the application, meaning bean discovery
          occurs exactly once per artifact and the same BeanManager is used by
          each test method in the class.
@@ -112,8 +112,8 @@
          </title>
 
          <para>
-            The CDI TCK includes a TCK runner that executes the TCK using Web
-            Beans as the CDI implementation and JBoss AS as the Java EE runtime.
+            The CDI TCK includes a TCK runner that executes the TCK using Weld
+            as the CDI implementation and JBoss AS as the Java EE runtime.
             To run the tck:
          </para>
 
@@ -121,7 +121,7 @@
             <listitem>
                <para>
                   You need to install Maven. You can find documention on how to
-                  install Maven 2 in the
+                  install Maven in the
                   <ulink
                      url="http://www.sonatype.com/books/maven-book/reference/installation-sect-maven-install.html">Maven: The Definitive Guide</ulink>
                   book published by Sonatype.
@@ -152,42 +152,37 @@ mvn test -Dincontainer]]></programlisting>
          Eclipse, or any other IDE, is not required to execute or pass the TCK.
          However an implementor may wish to execute tests in an IDE to aid
          debugging the tests. This section introduces two essential Eclipse
-         plugins, TestNG and Maven 2, and points you to resources explaining
+         plugins, TestNG and Maven, and points you to resources explaining
          how to install them.
       </para>
       <section id="eclipse-testng-plugin">
          <title>TestNG Plugin</title>
          <para>
-            The TCK is built on the JBoss Test Harness, which is in turn built on
-            TestNG. Therefore, having the TestNG plugin installed in Eclipse is
-            essential. Instructions for using the TestNG update site to add the
-            TestNG plugin to Eclipse are provided on the TestNG
+            The TCK test suite is built on the TestNG. Therefore, having the TestNG plugin 
+            installed in Eclipse is essential. Instructions for using the TestNG update site 
+            to add the TestNG plugin to Eclipse are provided on the TestNG
             <ulink url="http://testng.org/doc/download.html">download page</ulink>.
             You can find a tutorial that explains how to use the TestNG plugin on
             the TestNG
             <ulink url="http://testng.org/doc/eclipse.html">Eclipse page</ulink>.
          </para>
       </section>
-      <section id="m2eclipse-plugin">
-         <title>Maven 2 Plugin (m2eclipse)</title>
+      <section id="m2e-plugin">
+         <title>Maven Plugin (m2e)</title>
          <para>
-            Another useful plugin is m2eclipse. Both the TCK project and 
-            are use Maven 2. Therefore, to work with these projects in Eclipse, you
-            may wish to have native support for Maven 2 projects, which the m2eclipse
-            plugin provides. Instructions for using the m2eclipse update site to
-            add the m2eclipse plugin to Eclipse are provided on the m2eclipse home
-            page. For more, read the m2eclipse
-            <ulink url="http://www.sonatype.com/books/m2eclipse-book/reference">reference guide</ulink>.
+            Another useful plugin is m2e. The TCK project use Maven. Therefore, to work 
+            with TCK in Eclipse, you may wish to have native support for Maven projects, which the m2e
+            plugin provides. Instructions for using the m2e update site to
+            add the m2e plugin to Eclipse are provided on the m2e <ulink url="http://eclipse.org/m2e/">home
+            page</ulink>.
          </para>
          <para>
-            m2eclipse is still a rather young project dealing with a complex
-            domain and you may run into problems using it. If that is the case,
-            you can alternatively use the Eclipse plugin for Maven 2 to
-            generate native Eclipse projects from Maven 2 projects.
+            You can alternatively use the Eclipse plugin for Maven to
+            generate native Eclipse projects from Maven projects.
          </para>
          <para>
-            If you have Maven 2 installed, you have everything you need.  Just
-            execute the following command from any Maven 2 project to produce
+            If you have Maven installed, you have everything you need.  Just
+            execute the following command from any Maven project to produce
             the Eclipse project files.
          </para>
          <programlisting>mvn eclipse:eclipse</programlisting>

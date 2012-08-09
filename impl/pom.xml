@@ -170,8 +170,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- TODO do we really need this plugin? -->
-            <!-- plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> <executions> <execution> <id>copy-in-container-dependencies</id> <goals> <goal>copy</goal> </goals> <configuration> <outputDirectory>${project.build.outputDirectory}/lib</outputDirectory> <stripVersion>true</stripVersion> <artifactItems> <artifactItem> <groupId>org.jboss.test-harness</groupId> <artifactId>jboss-test-harness</artifactId> <overWrite>true</overWrite> </artifactItem> </artifactItems> </configuration> </execution> </executions> </plugin -->
         </plugins>
     </build>
 

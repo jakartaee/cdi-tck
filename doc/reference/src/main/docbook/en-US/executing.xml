@@ -4,20 +4,20 @@
    <title>Executing the Test Suite</title>
    <para>
       This chapter explains how to run the TCK on Weld as well as your own
-      implementation. The CDI TCK uses the Maven 2 TestNG plugin and the JBoss
-      Test Harness to execute the test suite. Learning to execute the test suite
-      from Maven 2 is prerequisite knowlege for running the tests in an IDE,
+      implementation. The CDI TCK uses the Maven Surefire plugin and the Arquillian 
+      test platform to execute the test suite. Learning to execute the test suite
+      from Maven is prerequisite knowlege for running the tests in an IDE,
       such as Eclipse.
    </para>
    <section>
       <title>The Test Suite Runner</title>
 
       <para>
-         The test suite is executed by the Maven 2 TestNG plugin during the test
-         phase of the Maven 2 life cycle. The execution happens within a TCK
+         The test suite is executed by the Maven Surefire plugin during the test
+         phase of the Maven life cycle. The execution happens within a TCK
          runner project (as opposed to the TCK project itself). Weld
          includes a TCK runner project that executes the CDI TCK on Weld
-         running inside JBoss AS 6.0. To execute the CDI TCK on your own CDI
+         running inside JBoss AS 7.2.0 FIXME. To execute the CDI TCK on your own CDI
          implementation, you could modify the TCK runner project included with
          Weld to use your CDI implementation as described in <xref
          linkend="configuration" />.
@@ -34,23 +34,22 @@
       <programlisting>cd weld/jboss-tck-runner</programlisting>
       <note>
          <para>
-             These instructions assume you have extracted the CDI-related
+             These instructions assume you have extracted the jsr346-related
              software according to the recommendation given in <xref
              linkend="tck-environment"/>.
          </para>
       </note>
       <para>
-         Then execute the Maven 2 life cycle through the test phase:
+         Then execute the Maven life cycle through the test phase:
       </para>
       <programlisting>mvn test</programlisting>
       <para>
          Without any command-line flags, the test suite is run in standalone
-         mode, which means that any test class with the
-         <literal>@org.jboss.testharness.impl.packaging.IntegrationTest
-         </literal>
-         annotation is skipped. This mode uses the
-         <literal>StandaloneContainers</literal>
-         SPI to invoke the test artifact within a mock Java EE life cycle and
+         mode (activating weld-embedded Maven profile), which means that any 
+         test within the <emphasis>integration</emphasis> or 
+         <emphasis>javaee-full</emphasis> TestNG group is skipped. This mode uses the
+         <emphasis>Weld EE Embedded Arquillian container adapter</emphasis>
+         to invoke the test within a mock Java EE life cycle and
          capture the results of the test. However, passing the suite in this
          mode is not sufficient to pass the TCK as a whole. The suite must be
          passed while executing using the in-container mode.
@@ -64,73 +63,59 @@
          <xref linkend="tck-in-jboss-as" /> callout.
       </para>
       <para>
-         Then, execute the TCK runner with Maven 2 as follows:
+         Then, execute the TCK runner with Maven as follows:
       </para>
       <programlisting>mvn test -Dincontainer</programlisting>
       <para>
-         The presence of the <literal>incontainer</literal> property activates a
-         Maven 2 profile that assigns the
-         <literal>org.jboss.testharness.standalone</literal> system property to
-         <literal>false</literal> and the
-         <literal>org.jboss.testharness.runIntegrationTests</literal> system
-         property to <literal>true</literal>, hence activating the in-container
-         test mode. This time, all the test artifacts in the test suite are
+         The presence of the <emphasis>incontainer</emphasis> property activates an 
+         in-container Maven profile. This time, all the tests in the test suite are
          executed.
       </para>
       <para>
-         The in-container profile will also start and stop the application
-         server automatically, a feature which the profile activates by setting
-         the <literal>org.jboss.testharness.container.forceRestart</literal> to
-         <literal>true</literal>.
+         The Arquillian will also start and stop the application server automatically.
       </para>
       <para>
-         The in-container mode uses the <literal>Containers</literal> SPI to
-         deploy the test artifact to the container and execute the test in a
-         true Java EE life cycle. The JBoss TCK runner has a dependency on the
-         library that provides an implementation of this interface for JBoss AS
-         6.0.
+         The in-container mode uses the <emphasis>JBoss AS 7.1 FIXME Managed Arquillian container adapter</emphasis>
+         to deploy the test artifact to the container and execute the test in a
+         true Java EE life cycle.
       </para>
       <para>
          Since in-container tests are executed in a remote JVM, the results of
          the test must be communicated back to the runner over a
-         container-supported protocol. The JBoss Test Harness provides
-         servlet-based communication over HTTP as described in <xref
-         linkend="incontainer-communication" />.
+         container-supported protocol. The Arquillian provides
+         servlet-based communication over HTTP.
       </para>
    </section>
    <section>
-      <title>Dumping the Test Artifacts</title>
+      <title>Dumping the Test Archives</title>
       <para>
          As you have learned, when the test suite is executing using
-         in-container mode, each test class is packaged as a deployable artifact
+         in-container mode, each test class is packaged as a deployable archive
          and deployed to the container. The test is then executed within the
          context of the deployed application. This leaves room for errors in
          packaging. When investigating a test failure, you may find it helpful
-         to inspect the artifact after it's generated. The TCK can accommodate
-         this type of inspection by "dumping" the generated artifact to disk.
+         to inspect the archive after it's generated. The TCK (or Arquillian respectively)
+         can accommodate this type of inspection by "dumping" the generated archive to disk.
       </para>
       <para>
-         The feature just described is activated in the jboss-tck-runner project
-         by appending the <literal>dumpArtifacts</literal> command line property
-         to the end of the command that invokes the Maven 2 test phase.
+         The feature just described is activated in the Arquillian configuration file (<xref linkend="arquillian-settings"/>).
+         In order to export the test archive you'll have to add the <literal>deploymentExportPath</literal> property to <literal>engine</literal> tag and assign 
+         a relative or absolute directory where the test archive should be exported, e.g.:
+         </para>
+         <programlisting><![CDATA[
+            <engine>
+                <property name="deploymentExportPath">target/</property>
+            </engine>
+         ]]></programlisting>
+         <para>
+          Arquillian will export 
+         the archive to that location for any test you run.
       </para>
-      <programlisting>mvn test-compile -DdumpArtifacts</programlisting>
       <para>
-         The directory where the artifacts get written is configured using the
-         <literal>org.jboss.testharness.outputDirectory</literal> property. The
-         <literal>dumpArtifacts</literal> profile in the jboss-tck-runner
-         project sets this value to the relative directory path
-         <literal>target/jsr299-artifacts</literal>.
+        To enable the export for just a single test, use the VM argument 
+        <literal>arquillian.deploymentExportPath</literal>:
       </para>
-      
-      <para>
-         However, if you are using Ant, you will be pleased to see the
-         <literal>lib/</literal>, containing all dependencies required
-         to run the TCK - just add every jar to your classpath. Further
-         if you are using Weld, and wish to use Weld's implementation of
-         the porting package, you should add every jar in <literal>weld/porting-package-lib</literal>
-         to your classpath.
-      </para>
+      <programlisting>-Darquillian.deploymentExportPath=target/deployments/</programlisting>
    </section>
    <!--
 vim: ts=3:sw=3:tw=80:set expandtab

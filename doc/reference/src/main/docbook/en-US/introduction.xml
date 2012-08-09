@@ -41,7 +41,7 @@
       </para>
       <note>
          <para>
-            Sun Microsystems, Inc. will implement the porting package for the
+            Oracle Corporation will implement the porting package for the
             CDI RI and test the CDI RI on the Java EE Reference Implementation.
          </para>
       </note>
@@ -122,7 +122,7 @@
          The CDI TCK is designed as a portable, configurable and automated test
          suite for verifying the compatibility of an implementation of the
          JSR 346: Contexts and Dependency Injection for Java EE 1.1 specification.
-         The test suite is built atop TestNG and Arquillian testing platform.
+         The test suite is built atop TestNG framework and Arquillian platform.
       </para>
       <para>
          Each test class in the suite acts as a deployable unit. The
@@ -162,7 +162,8 @@
             <listitem>
                <para>
                   <emphasis role="bold">Testing platform</emphasis>
-                  - The CDI TCK requires version 1.0.2.Final of the Arquillian. 
+                  - The CDI TCK requires version 1.0.2.Final of the Arquillian 
+                  (<ulink url="http://arquillian.org">http://arquillian.org</ulink>). 
                   The TCK test suite is based on TestNG 6.x 
                   (<ulink url="http://testng.org">http://testng.org</ulink>).
                   .
@@ -196,15 +197,15 @@
             </listitem>
             <listitem>
                <para>
-                  <emphasis role="bold">JSR-330</emphasis> - CDI builds on JSR-330,
+                  <emphasis role="bold">JSR 330</emphasis> - CDI builds on JSR 330,
                   and as such JSR 346 implementations must additionally pass the
-                  JSR-330 TCK.
+                  JSR 330 TCK.
                </para>
                <tip>
                   <para>
                      The TCK distribution includes <literal>weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar</literal>
-                     which contains two classes showing how the CDI RI passes the JSR-330
-                     TCK. The source for these classes is available from <ulink url="http://anonsvn.jboss.org/repos/weld/tags/1.0.0-CR2/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck/" />
+                     which contains two classes showing how the CDI RI passes the JSR 330
+                     TCK. The source for these classes is available from <ulink url="https://github.com/weld/core/tree/2.0/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck" />
                   </para>
                </tip>
             </listitem>
@@ -266,7 +267,7 @@
          </itemizedlist>
          <note>
             <para>
-               Sun Microsystems, Inc. will implement the porting package for the
+               Oracle Corporation will implement the porting package for the
                CDI RI and test the CDI RI on the Java EE Reference
                Implementation .
             </para>
@@ -275,7 +276,7 @@
          <itemizedlist>
             <listitem>
                <para>
-                  JBoss AS 7.2 using Sun Java SE 6 on Red Hat Enterprise 
+                  JBoss AS 7.2 using Oracle Java SE 6 on Red Hat Enterprise 
                   Linux 5.2
                </para>
             </listitem>

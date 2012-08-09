@@ -47,14 +47,14 @@
          specification. The specification document is controlled by a separate
          process and challenges to it should be handled through the JSR 346 EG
          by sending an e-mail to <ulink
-         url="mailto:jsr299-comments@jcp.org">jsr299-comments@jcp.org</ulink>.
+         url="mailto:jsr346-comments@jcp.org">jsr346-comments@jcp.org</ulink>.
       </para>
    </section>
    <section>
       <title>How these challenges are submitted?</title>
       <para>
          To submit a challenge, a new issue should be created in the <ulink
-         url="https://jira.jboss.org/jira/browse/CDITCK">CDITCK project</ulink>
+         url="https://jira.jboss.org/jira/browse/CDITCK">CDI TCK project</ulink>
          of the JBoss JIRA using the Issue Type: Bug. The appellant should
          complete the Summary, Component (TCK Appeal), Environment and
          Description Field only. Any communication regarding the issue should
@@ -80,12 +80,12 @@
          Project Lead, as designated by Specification Lead, Red Hat Middleware
          LLC. or his/her designate. The appellant can also monitor the process
          by following the issue report filed in the <ulink
-         url="https://jira.jboss.org/jira/browse/CDITCK">CDITCK project</ulink>
+         url="https://jira.jboss.org/jira/browse/CDITCK">CDI TCK project</ulink>
          of the JBoss JIRA.
       </para>
       <para>
          The current TCK Project Lead is listed on the <ulink
-         url="https://jira.jboss.org/jira/browse/CDITCK">CDITCK Project Summary
+         url="https://jira.jboss.org/jira/browse/CDITCK">CDI TCK Project Summary
          Page</ulink> on the JBoss JIRA.
       </para>
    </section>

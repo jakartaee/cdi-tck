@@ -13,7 +13,8 @@
          There is almost no difference in how you debug a standalone test
          from how you run it. With the test class open in the Eclipse editor,
          simply right click in the editor view and select Debug As &gt; TestNG
-         Test. Eclipse will stop at any breakpoints you set just like it would         with any other local debug process.
+         Test. Eclipse will stop at any breakpoints you set just like it would         
+         with any other local debug process.
       </para>
       <para>
          If you plan to step into a class in the Weld implementation (or any
@@ -101,12 +102,12 @@
          <para>
             The Eclipse Server Tools, a subproject of the Eclipse Web Tools
             Project (WTP), has support for launching most major application
-            servers, including JBoss AS 5. However, if you are using JBoss AS,
+            servers, including JBoss AS 7. However, if you are using JBoss AS,
             you should consider using JBoss Tools instead, which offers tighter
             integration with JBoss technologies. See either the
             <ulink url="http://www.eclipse.org/webtools/server/server.php">Server Tools documentation</ulink>
             or the
-            <ulink url="http://docs.jboss.org/tools/3.0.1.GA/en/as/html/index.html">JBoss Tools documentation</ulink>
+            <ulink url="http://docs.jboss.org/tools/">JBoss Tools documentation</ulink>
             for how to setup a container and start it in debug mode.
          </para>
          <para>
@@ -125,11 +126,12 @@
             try.
          </para>
          <para>
-            Open a test annotated with <literal>@IntegrationTest</literal> in
-            the Eclipse editor, right click in the editor view, and select Debug
-            As &gt; TestNG Test. This time when the IDE hits the breakpoint, it
-            halts the JVM thread of the container rather than the thread that
-            launched the test.
+            Open a test in the Eclipse editor, right click in the editor view, and select Debug
+            As &gt; TestNG Test (this works for the container started in debug mode from within the
+            IDE) or run the TestNG test and debug Remote Java Application (remote debug configuration) 
+            in the same time (when attaching the debugger over a socket connection to a container).
+            This time when the IDE hits the breakpoint, it halts the JVM thread of the container 
+            rather than the thread that launched the test.
          </para>
          <para>
             Remember that if you need to debug into dependent libraries, the

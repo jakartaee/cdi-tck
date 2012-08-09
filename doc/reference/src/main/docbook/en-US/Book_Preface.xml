@@ -10,8 +10,8 @@
       EE (CDI) 1.1 specification.
    </para>
    <para>
-      The CDI TCK is built atop the Arquillian testing platform. The CDI TCK uses the Arquillian
-      version 1.0.2.Final to execute the test suite.
+      The CDI TCK is built atop TestNG framework and Arquillian platform. The CDI TCK uses 
+      the Arquillian version <emphasis>1.0.2.Final</emphasis> to execute the test suite.
    </para>
 
    <para>
@@ -44,15 +44,15 @@
       </para>
       <para>
          The CDI TCK is based on the Context and Dependency Injection for Java
-         EE technology specification 1.0 (JSR 346). Information about the
+         EE 1.1 technology specification (JSR 346). Information about the
          specification, including links to the specification documents, can be
          found on the
          <ulink url="http://jcp.org/en/jsr/detail?id=346">JSR 346 JCP page</ulink>.
       </para>
       <para>
          Before running the tests in the CDI TCK, read and become
-         familiar
-         with the Arquillian testing platform. <ulink url="http://arquillian.org/guides/">Arquillian Guides</ulink> are a good point to start with.
+         familiar with the Arquillian testing platform. A good starting point could be 
+         a series of <ulink url="http://arquillian.org/guides/">Arquillian Guides</ulink>.
       </para>
 
    </section>

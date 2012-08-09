@@ -12,7 +12,6 @@
 
    <section id="tck-properties">
       <title>TCK Properties</title>
-
       <para>
          System properties and/or the resource
          <code>META-INF/cdi-tck.properties</code>,
@@ -49,12 +48,23 @@
                      <literal>org.jboss.cdi.tck.testDataSource=java:jboss/datasources/ExampleDS</literal>
                   </entry>
                   <entry>
-                     A few TCK tests work with Java EE services that require a datasource to be provided (JPA, JTA).
+                     A few TCK tests work with Java EE services (JPA, JTA) that require a datasource to be provided.
                   </entry>
                </row>
             </tbody>
          </tgroup>
       </table>
+   </section>
+   <section id="arquillian-settings">
+      <title>Arquillian settings</title>
+      <para>
+        The Arquillian testing platform will look for configuration settings in a file named <emphasis>arquillian.xml</emphasis> in 
+        the root of your classpath. If it exists it will be auto loaded, else default values will be used. This file is not a requirement 
+        however it's very useful for container configuration. See an example configuration for JBoss TCK runner:  
+      </para>
+      <programlisting>
+        weld/jboss-tck-runner/src/test/jbossas7/arquillian.xml
+      </programlisting>
    </section>
    <section>
       <title>The Porting Package</title>
@@ -103,7 +113,7 @@
       <title>Using the CDI TCK with the Java EE Web Profile</title>
       <para>
          You can configure the CDI TCK to just run tests appropriate to the Java EE
-         Web Profile by excluding TestNG group <literal>javaee-full</literal>, 
+         Web Profile by excluding TestNG group <emphasis>javaee-full</emphasis>, 
          e.g. via maven-surefire-plugin configuration:
       </para>
       <programlisting><![CDATA[

@@ -26,7 +26,9 @@ package org.jboss.cdi.tck.spi;
  * occurred,
  *
  * @author Shane Bryzak
+ * @deprecated Will be removed in CDI TCK 1.1 final version.
  */
+@Deprecated
 public interface Managers {
 
     public static final String PROPERTY_NAME = Managers.class.getName();

@@ -2,20 +2,29 @@
 <!DOCTYPE authorgroup PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [ ]>
 <authorgroup>
    <author>
-      <firstname>Gavin</firstname>
-      <surname>King</surname>
-      <affiliation>
-         <jobtitle>JSR-299: Contexts and Dependency Injection (CDI) for Java EE
-            specification lead</jobtitle>
-         <orgname>Red Hat Inc.</orgname>
-      </affiliation>
-   </author>
-   <author>
       <firstname>Pete</firstname>
       <surname>Muir</surname>
       <affiliation>
+         <jobtitle>JSR 346: Contexts and Dependency Injection (CDI) for Java EE 1.1
+            specification lead</jobtitle>
+         <!-- orgname>Red Hat Inc.</orgname-->
+      </affiliation>
+   </author>
+   <author>
+      <firstname>Gavin</firstname>
+      <surname>King</surname>
+      <affiliation>
+         <jobtitle>JSR 299: Contexts and Dependency Injection (CDI) for Java EE 1.0
+            specification lead</jobtitle>
+         <!-- orgname>Red Hat Inc.</orgname-->
+      </affiliation>
+   </author>
+   <author>
+      <firstname>Martin</firstname>
+      <surname>Kouba</surname>
+      <affiliation>
          <jobtitle>CDI TCK lead</jobtitle>
-         <orgname>Red Hat Inc.</orgname>
+         <!-- orgname>Red Hat Inc.</orgname-->
       </affiliation>
    </author>
    <author>
@@ -23,7 +32,7 @@
       <surname>Allen</surname>
       <affiliation>
          <jobtitle>CDI TCK developer</jobtitle>
-         <orgname>Red Hat Inc.</orgname>
+         <!-- orgname>Red Hat Inc.</orgname-->
       </affiliation>
    </author>
 <!--
