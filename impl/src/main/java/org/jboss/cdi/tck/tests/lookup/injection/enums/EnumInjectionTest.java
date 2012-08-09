@@ -58,8 +58,8 @@ public class EnumInjectionTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "3.9", id = "c"), @SpecAssertion(section = "3.9.1", id = "aa"),
-            @SpecAssertion(section = "3.10", id = "c"), @SpecAssertion(section = "5.5.2", id = "ada"),
-            @SpecAssertion(section = "5.5.2", id = "adb") })
+            @SpecAssertion(section = "3.10", id = "c"), @SpecAssertion(section = "5.5", id = "da"),
+            @SpecAssertion(section = "5.5.2", id = "ada"), @SpecAssertion(section = "5.5.2", id = "adb") })
     public void testBasicEnum() {
         verifyBasicEnum(BasicEnum.FOO);
         verifyBasicEnum(BasicEnum.BAR);
