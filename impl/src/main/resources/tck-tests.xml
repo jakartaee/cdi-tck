@@ -1,67 +1,41 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<!-- CDI TCK TestNG configuration for Weld -->
 <suite name="CDI TCK" verbose="0" configfailurepolicy="continue">
-   
-   <test name="CDI TCK">
-      <method-selectors>
-         <method-selector>
-            <selector-class name="org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector" />
-         </method-selector>
-      </method-selectors>
-      <packages>
-         <package name="org.jboss.cdi.tck.tests.*" />
-         <package name="org.jboss.cdi.tck.interceptors.tests.*" />
-      </packages>
-      <classes>
-      
-         <!-- CDITCK-108 -->
-         <class name="org.jboss.cdi.tck.tests.context.application.ejb.ApplicationContextSharedTest">
-            <methods>
-               <exclude name="testApplicationScopeActiveDuringCallToEjbTimeoutMethod" />
-               <exclude name="testApplicationContextShared" />
-            </methods>
-         </class>
-         
-         <!-- Issues in Weld (the RI) -->
-         
-         <!-- WELD-393 -->
-         <class name="org.jboss.cdi.tck.interceptors.tests.definition.DefinitionTest">
-            <methods>
-               <exclude name="testInterceptorMethodDefinedOnTargetClass" />
-            </methods>
-         </class>
-         
-         <!-- WELD-390 -->
-         <class name="org.jboss.cdi.tck.interceptors.tests.lifecycleCallback.order.InvocationOrderTest">
-            <methods>
-               <exclude name="testInvocationOrder" />
-            </methods>
-         </class>
-         <!-- WELD-269 -->
-         <class name="org.jboss.cdi.tck.tests.decorators.custom.CustomDecoratorTest">
-            <methods>
-               <exclude name="testCustomImplementationOfDecoratorInterface" />
-            </methods>
-         </class>
-         <!-- WELD-272 -->
-         <class name="org.jboss.cdi.tck.tests.decorators.definition.broken.finalBeanClass.FinalBeanClassTest">
-            <methods>
-               <exclude name="testAppliesToFinalManagedBeanClass" />
-            </methods>
-         </class>
-         <class name="org.jboss.cdi.tck.tests.decorators.definition.broken.finalBeanMethod.FinalBeanMethodTest">
-            <methods>
-               <exclude name="testAppliesToFinalMethodOnManagedBeanClass" />
-            </methods>
-         </class>
-         <!-- WELD-377 -->
-         <class name="org.jboss.cdi.tck.tests.decorators.invocation.EJBDecoratorInvocationTest">
-            <methods>
-               <exclude name="testEJBDecoratorInvocation" />
-            </methods>
-         </class>
-                  
-      </classes>
-   </test>
-   
+
+    <listeners>
+        <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor" />
+    </listeners>
+
+    <test name="CDI TCK">
+
+        <packages>
+            <package name="org.jboss.cdi.tck.tests.*" />
+            <package name="org.jboss.cdi.tck.interceptors.tests.*" />
+        </packages>
+
+        <classes>
+
+            <!-- Issues in the spec/TCK -->
+
+            <!-- CDI-206 -->
+            <class name="org.jboss.cdi.tck.tests.context.conversation.ClientConversationContextTest">
+                <methods>
+                    <exclude name="testNonexistentConversationExceptionThrown" />
+                </methods>
+            </class>
+            <!-- CDI-83 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.beanManager.BeanManagerTest">
+                <methods>
+                    <exclude name="testObtainingWrappedAnnotatedType" />
+                </methods>
+            </class>
+            <!-- CDI-180 -->
+            <class name="org.jboss.cdi.tck.tests.context.request.ejb.EJBRequestContextTest">
+                <methods>
+                    <exclude name="testRequestScopeActiveDuringRemoteCallToEjb" />
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
 </suite>
