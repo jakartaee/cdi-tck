@@ -58,8 +58,6 @@ public final class TestGroups {
 
     public static final String RESOLUTION = "resolution";
 
-    public static final String POLICY = "policy";
-
     public static final String EL = "el";
 
     public static final String EVENTS = "events";

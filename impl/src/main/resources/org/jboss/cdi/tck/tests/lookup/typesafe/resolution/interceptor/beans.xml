@@ -1,5 +1,0 @@
-<beans> 
-   <interceptors>
-      <class>org.jboss.cdi.tck.tests.lookup.typesafe.resolution.interceptor.CatInterceptor</class>
-   </interceptors>
-</beans>

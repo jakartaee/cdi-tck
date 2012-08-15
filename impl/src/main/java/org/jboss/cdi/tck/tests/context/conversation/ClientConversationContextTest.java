@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.context.conversation;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.REWRITE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -50,12 +49,13 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(ClientConversationContextTest.class)
                 .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
-                        CloudController.class, OutermostFilter.class, Cumulus.class, BuiltInConversation.class)
-                .withWebResource("home.jsf", "home.jspx").withWebResource("cloud.jsf", "cloud.jspx")
-                .withWebResource("clouds.jsf", "clouds.jspx").withWebResource("cumulus.jsf", "cumulus.jspx")
-                .withWebResource("builtin.jsf", "builtin.jspx").withWebResource("error.jsf", "error.jspx")
-                .withWebResource("storm.jsf", "storm.jspx").withWebResource("rain.jsf", "rain.jspx")
-                .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
+                        CloudController.class, OutermostFilter.class, Cumulus.class, BuiltInConversation.class,
+                        ConversationContextObserver.class).withWebResource("home.jsf", "home.jspx")
+                .withWebResource("cloud.jsf", "cloud.jspx").withWebResource("clouds.jsf", "clouds.jspx")
+                .withWebResource("cumulus.jsf", "cumulus.jspx").withWebResource("builtin.jsf", "builtin.jspx")
+                .withWebResource("error.jsf", "error.jspx").withWebResource("storm.jsf", "storm.jspx")
+                .withWebResource("rain.jsf", "rain.jspx").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
+                .withWebXml("web.xml").build();
     }
 
     @Test(groups = { CONTEXTS })
@@ -78,15 +78,19 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assert !c1.equals(c2);
     }
 
-    @Test(groups = { CONTEXTS, REWRITE })
+    @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "j")
-    // TODO this test doesn't verify that the conversation context itself is destroyed
     public void testTransientConversationInstancesDestroyedAtRequestEnd() throws Exception {
         WebClient client = new WebClient();
+
         resetCloud(client);
+        resetConversationContextObserver(client);
+
         HtmlPage page = client.getPage(getPath("cloud.jsf"));
-        assert !isLongRunning(page);
-        assert isCloudDestroyed(client);
+
+        assertFalse(isLongRunning(page));
+        assertTrue(isCloudDestroyed(client));
+        assertTrue(isConversationContextDestroyed(client));
     }
 
     @Test(groups = { CONTEXTS })

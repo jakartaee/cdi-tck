@@ -17,10 +17,8 @@
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
 import static org.jboss.cdi.tck.TestGroups.INJECTION;
-import static org.jboss.cdi.tck.TestGroups.POLICY;
 import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
 import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
-import static org.jboss.cdi.tck.TestGroups.REWRITE;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -44,6 +42,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@SuppressWarnings("serial")
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ResolutionByTypeTest extends AbstractTest {
 
@@ -181,21 +180,6 @@ public class ResolutionByTypeTest extends AbstractTest {
         assert classes.contains(Halibut.class);
         assert classes.contains(RoundWhitefish.class);
         assert !classes.contains(Sole.class);
-    }
-
-    @Test(groups = { POLICY, REWRITE })
-    // TODO Needs to be rewritten to use injection PLM
-    @SpecAssertion(section = "5.1.4", id = "i")
-    public void testPolicyNotAvailableInNonDeploymentArchive() throws Exception {
-        Set<Bean<Spider>> spiders = getBeans(Spider.class);
-        Set<Type> types = new HashSet<Type>();
-        for (Bean<Spider> spider : spiders) {
-            types.addAll(spider.getTypes());
-        }
-        assert !types.contains(CrabSpider.class);
-        assert !types.contains(DaddyLongLegs.class);
-
-        assert getCurrentManager().getBeans("crabSpider").size() == 0;
     }
 
     @Test

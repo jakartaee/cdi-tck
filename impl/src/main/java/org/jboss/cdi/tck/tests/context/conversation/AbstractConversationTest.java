@@ -44,8 +44,17 @@ public abstract class AbstractConversationTest extends AbstractTest {
         return page.getWebResponse().getStatusCode() == 200;
     }
 
+    protected boolean isConversationContextDestroyed(WebClient client) throws Exception {
+        Page page = client.getPage(getConversationStatusPath("conversationContextDestroyed"));
+        return page.getWebResponse().getStatusCode() == 200;
+    }
+
     protected void resetCloud(WebClient client) throws Exception {
         client.getPage(getConversationStatusPath("resetCloud"));
+    }
+
+    protected void resetConversationContextObserver(WebClient client) throws Exception {
+        client.getPage(getConversationStatusPath("resetConversationContextObserver"));
     }
 
     protected void invalidateSession(WebClient client) throws Exception {

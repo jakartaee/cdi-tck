@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.definition.qualifier;
 import static org.jboss.cdi.tck.TestGroups.ANNOTATION_DEFINITION;
 import static org.jboss.cdi.tck.TestGroups.INJECTION;
 import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
-import static org.jboss.cdi.tck.TestGroups.REWRITE;
+import static org.testng.Assert.assertFalse;
 
 import java.lang.annotation.Annotation;
 import java.util.Set;
@@ -64,11 +64,10 @@ public class QualifierDefinitionTest extends AbstractTest {
         assert injectionPoint.getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = { ANNOTATION_DEFINITION, REWRITE })
+    @Test(groups = { ANNOTATION_DEFINITION })
     @SpecAssertion(section = "2.3.2", id = "ba")
     public void testQualifierDeclaresBindingAnnotation() {
-        // Probably can use new SPI for this...
-        assert !getBeans(Tarantula.class, new TameQualifier()).isEmpty();
+        assertFalse(getBeans(Tarantula.class, new TameLiteral()).isEmpty());
     }
 
     @Test

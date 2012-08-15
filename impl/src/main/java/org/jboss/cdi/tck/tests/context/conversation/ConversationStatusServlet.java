@@ -48,10 +48,18 @@ public class ConversationStatusServlet extends HttpServlet {
             } else {
                 resp.setStatus(208);
             }
+        } else if ("conversationContextDestroyed".equals(method)) {
+            if (ConversationContextObserver.isDestroyed()) {
+                resp.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                resp.setStatus(208);
+            }
         } else if ("invalidateSession".equals(method)) {
             req.getSession().invalidate();
         } else if ("resetCloud".equals(method)) {
             Cloud.setDestroyed(false);
+        } else if ("resetConversationContextObserver".equals(method)) {
+            ConversationContextObserver.reset();
         } else {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }

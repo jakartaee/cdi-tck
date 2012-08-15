@@ -14,10 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.definition.qualifier;
+package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled;
 
-import javax.enterprise.util.AnnotationLiteral;
+import javax.enterprise.inject.Alternative;
 
-public class TameQualifier extends AnnotationLiteral<Tame> implements Tame {
+@Alternative
+public class CrabSpider {
 
 }

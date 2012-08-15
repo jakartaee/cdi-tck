@@ -17,7 +17,9 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
-import static org.jboss.cdi.tck.TestGroups.REWRITE;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
@@ -39,6 +41,8 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.HierarchyDiscovery;
 import org.jboss.cdi.tck.util.ParameterizedTypeImpl;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -51,17 +55,40 @@ import org.testng.annotations.Test;
  * @author Marius Bogoevici
  * @author Martin Kouba
  */
+@SuppressWarnings("serial")
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InterceptorDefinitionTest extends AbstractTest {
 
+    private static final AnnotationLiteral<Transactional> TRANSACTIONAL_LITERAL = new AnnotationLiteral<Transactional>() {
+    };
+
+    private static final AnnotationLiteral<Secure> SECURE_LITERAL = new AnnotationLiteral<Secure>() {
+    };
+
+    private static final AnnotationLiteral<MissileBinding> MISSILE_LITERAL = new AnnotationLiteral<MissileBinding>() {
+    };
+
+    private static final AnnotationLiteral<Logged> LOGGED_LITERAL = new AnnotationLiteral<Logged>() {
+    };
+
+    private static final AnnotationLiteral<Atomic> ATOMIC_LITERAL = new AnnotationLiteral<Atomic>() {
+    };
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InterceptorDefinitionTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(InterceptorDefinitionTest.class)
+                .withBeansXml(
+                        Descriptors
+                                .create(BeansDescriptor.class)
+                                .createInterceptors()
+                                .clazz(AtomicInterceptor.class.getName(), MissileInterceptor.class.getName(),
+                                        SecureInterceptor.class.getName(), TransactionalInterceptor.class.getName(),
+                                        FileLogger.class.getName(), NetworkLogger.class.getName()).up()).build();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.1.2", id = "a") })
-    // WBRI-59
     public void testInterceptorsImplementInterceptorInterface() {
         boolean interfaceFound = false;
         for (Type type : getInterfacesImplemented(getTransactionalInterceptor().getClass())) {
@@ -70,42 +97,34 @@ public class InterceptorDefinitionTest extends AbstractTest {
                 break;
             }
         }
-        assert interfaceFound;
+        assertTrue(interfaceFound);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.1.2", id = "b") })
-    // WBRI-59
     public void testInterceptorBindingTypes() {
         Interceptor<?> interceptorBean = getTransactionalInterceptor();
-        assert interceptorBean.getInterceptorBindings().size() == 1;
-        assert interceptorBean.getInterceptorBindings().contains(new AnnotationLiteral<Transactional>() {
-        });
+        assertEquals(interceptorBean.getInterceptorBindings().size(), 1);
+        assertTrue(interceptorBean.getInterceptorBindings().contains(TRANSACTIONAL_LITERAL));
     }
 
-    @Test(groups = REWRITE)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "11.1.2", id = "c"), @SpecAssertion(section = "11.1.2", id = "e") })
-    // WBRI-59
-    // TODO Add tests for EJB timeout method PLM
     public void testInterceptionType() {
         Interceptor<?> interceptorBean = getTransactionalInterceptor();
-        assert interceptorBean.intercepts(InterceptionType.AROUND_INVOKE);
-        assert !interceptorBean.intercepts(InterceptionType.POST_ACTIVATE);
-        assert !interceptorBean.intercepts(InterceptionType.POST_CONSTRUCT);
-        assert !interceptorBean.intercepts(InterceptionType.PRE_DESTROY);
-        assert !interceptorBean.intercepts(InterceptionType.PRE_PASSIVATE);
+        assertTrue(interceptorBean.intercepts(InterceptionType.AROUND_INVOKE));
+        assertFalse(interceptorBean.intercepts(InterceptionType.POST_ACTIVATE));
+        assertFalse(interceptorBean.intercepts(InterceptionType.POST_CONSTRUCT));
+        assertFalse(interceptorBean.intercepts(InterceptionType.PRE_DESTROY));
+        assertFalse(interceptorBean.intercepts(InterceptionType.PRE_PASSIVATE));
+        assertFalse(interceptorBean.intercepts(InterceptionType.AROUND_TIMEOUT));
     }
 
     @Test
     @SpecAssertion(section = "11.1.2", id = "f")
-    // WBRI-59
     public void testInstanceOfInterceptorForEveryEnabledInterceptor() {
-        List<AnnotationLiteral<?>> annotationLiterals = Arrays.<AnnotationLiteral<?>> asList(
-                new AnnotationLiteral<Transactional>() {
-                }, new AnnotationLiteral<Secure>() {
-                }, new AnnotationLiteral<MissileBinding>() {
-                }, new AnnotationLiteral<Logged>() {
-                });
+        List<AnnotationLiteral<?>> annotationLiterals = Arrays.<AnnotationLiteral<?>> asList(TRANSACTIONAL_LITERAL,
+                SECURE_LITERAL, MISSILE_LITERAL, LOGGED_LITERAL);
 
         List<Class<?>> interceptorClasses = new ArrayList<Class<?>>(Arrays.<Class<?>> asList(AtomicInterceptor.class,
                 MissileInterceptor.class, SecureInterceptor.class, TransactionalInterceptor.class, NetworkLogger.class,
@@ -120,37 +139,31 @@ public class InterceptorDefinitionTest extends AbstractTest {
         }
 
         List<Interceptor<?>> interceptors = getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
-                new AnnotationLiteral<Atomic>() {
-                }, new AnnotationLiteral<MissileBinding>() {
-                });
+                ATOMIC_LITERAL, MISSILE_LITERAL);
         for (Interceptor<?> interceptor : interceptors) {
             interceptorClasses.remove(interceptor.getBeanClass());
         }
 
-        assert interceptorClasses.size() == 1;
-        assert interceptorClasses.get(0).equals(NotEnabledAtomicInterceptor.class);
+        assertEquals(interceptorClasses.size(), 1);
+        assertEquals(interceptorClasses.get(0), NotEnabledAtomicInterceptor.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "a") })
-    // WBRI-59
     public void testResolveInterceptorsReturnsOrderedList() {
-        Annotation transactionalBinding = new AnnotationLiteral<Transactional>() {
-        };
-        Annotation secureBinding = new AnnotationLiteral<Secure>() {
-        };
+
         List<Interceptor<?>> interceptors = getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
-                transactionalBinding, secureBinding);
-        assert interceptors.size() == 2;
-        assert interceptors.get(0).getInterceptorBindings().size() == 1;
-        assert interceptors.get(0).getInterceptorBindings().contains(secureBinding);
-        assert interceptors.get(1).getInterceptorBindings().size() == 1;
-        assert interceptors.get(1).getInterceptorBindings().contains(transactionalBinding);
+                TRANSACTIONAL_LITERAL, SECURE_LITERAL);
+
+        assertEquals(interceptors.size(), 2);
+        assertEquals(interceptors.get(0).getInterceptorBindings().size(), 1);
+        assertTrue(interceptors.get(0).getInterceptorBindings().contains(SECURE_LITERAL));
+        assertEquals(interceptors.get(1).getInterceptorBindings().size(), 1);
+        assertTrue(interceptors.get(1).getInterceptorBindings().contains(TRANSACTIONAL_LITERAL));
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "b") })
-    // WBRI-59
     public void testSameBindingTypesToResolveInterceptorsFails() {
         Annotation transactionalBinding = new AnnotationLiteral<Transactional>() {
         };
@@ -159,14 +172,12 @@ public class InterceptorDefinitionTest extends AbstractTest {
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "c") })
-    // WBRI-59
     public void testNoBindingTypesToResolveInterceptorsFails() {
         getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE);
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "d") })
-    // WBRI-59
     public void testNonBindingTypeToResolveInterceptorsFails() {
         Annotation nonBinding = new AnnotationLiteral<NonBindingType>() {
         };
@@ -178,18 +189,17 @@ public class InterceptorDefinitionTest extends AbstractTest {
             @SpecAssertion(section = "9.1", id = "c"), @SpecAssertion(section = "9.3", id = "a") })
     public void testInterceptorBindingAnnotation() {
         List<Interceptor<?>> interceptors = getLoggedInterceptors();
-        assert interceptors.size() > 1;
+        assertTrue(interceptors.size() > 1);
 
         Interceptor<?> interceptorBean = interceptors.iterator().next();
-        assert interceptorBean.getInterceptorBindings().size() == 1;
-        assert interceptorBean.getInterceptorBindings().contains(new AnnotationLiteral<Logged>() {
-        });
+        assertEquals(interceptorBean.getInterceptorBindings().size(), 1);
+        assertTrue(interceptorBean.getInterceptorBindings().contains(LOGGED_LITERAL));
 
         Target target = (interceptorBean.getInterceptorBindings().iterator().next()).annotationType().getAnnotation(
                 Target.class);
         List<ElementType> elements = Arrays.asList(target.value());
-        assert elements.contains(ElementType.TYPE);
-        assert elements.contains(ElementType.METHOD);
+        assertTrue(elements.contains(ElementType.TYPE));
+        assertTrue(elements.contains(ElementType.METHOD));
     }
 
     @Test
@@ -202,8 +212,8 @@ public class InterceptorDefinitionTest extends AbstractTest {
         SecureTransaction secureTransaction = getInstanceByType(SecureTransaction.class);
         secureTransaction.transact();
 
-        assert FileLogger.intercepted;
-        assert NetworkLogger.intercepted;
+        assertTrue(FileLogger.intercepted);
+        assertTrue(NetworkLogger.intercepted);
     }
 
     @Test
@@ -215,8 +225,8 @@ public class InterceptorDefinitionTest extends AbstractTest {
         AtomicFoo foo = getInstanceByType(AtomicFoo.class);
         foo.doAction();
 
-        assert AtomicInterceptor.intercepted;
-        assert MissileInterceptor.intercepted;
+        assertTrue(AtomicInterceptor.intercepted);
+        assertTrue(MissileInterceptor.intercepted);
     }
 
     private Interceptor<?> getTransactionalInterceptor() {
