@@ -16,26 +16,29 @@
  */
 package org.jboss.cdi.tck.tests.event.observer;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.enterprise.util.AnnotationLiteral;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+@SuppressWarnings("all")
+public class RoleLiteral extends AnnotationLiteral<Role> implements Role {
 
-import javax.enterprise.util.Nonbinding;
-import javax.inject.Qualifier;
+    private static final long serialVersionUID = 1L;
 
-@Qualifier
-@Retention(RUNTIME)
-@Target({ FIELD, PARAMETER, METHOD, TYPE })
-public @interface Role {
+    private String value = null;
 
-    String value();
+    private String nonbindingValue = null;
 
-    @Nonbinding
-    String nonbindingValue() default "blabla";
+    public RoleLiteral(String value, String nonbindingValue) {
+        this.value = value;
+        this.nonbindingValue = nonbindingValue;
+    }
+
+    public String value() {
+        return value;
+    }
+
+    @Override
+    public String nonbindingValue() {
+        return nonbindingValue;
+    }
 
 }

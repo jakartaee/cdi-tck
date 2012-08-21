@@ -14,28 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer;
+package org.jboss.cdi.tck.tests.event.observer.method;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.enterprise.event.Observes;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+public class StockWatcher {
 
-import javax.enterprise.util.Nonbinding;
-import javax.inject.Qualifier;
+    private static Class<?> observerClazz;
 
-@Qualifier
-@Retention(RUNTIME)
-@Target({ FIELD, PARAMETER, METHOD, TYPE })
-public @interface Role {
+    public void observeStockPrice(@Observes StockPrice price) {
+        observerClazz = this.getClass();
+        price.recordVisit(this);
+    }
 
-    String value();
-
-    @Nonbinding
-    String nonbindingValue() default "blabla";
-
+    public static Class<?> getObserverClazz() {
+        return observerClazz;
+    }
 }

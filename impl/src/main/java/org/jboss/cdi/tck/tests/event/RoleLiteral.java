@@ -14,28 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer;
+package org.jboss.cdi.tck.tests.event;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.enterprise.util.AnnotationLiteral;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+public class RoleLiteral extends AnnotationLiteral<Role> implements Role {
+    private String value = null;
 
-import javax.enterprise.util.Nonbinding;
-import javax.inject.Qualifier;
+    public RoleLiteral(String value) {
+        this.value = value;
+    }
 
-@Qualifier
-@Retention(RUNTIME)
-@Target({ FIELD, PARAMETER, METHOD, TYPE })
-public @interface Role {
-
-    String value();
-
-    @Nonbinding
-    String nonbindingValue() default "blabla";
+    public String value() {
+        return value;
+    }
 
 }

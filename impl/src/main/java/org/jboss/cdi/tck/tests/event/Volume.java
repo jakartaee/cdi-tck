@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event;
 
+@Tame
 public class Volume {
 
 }

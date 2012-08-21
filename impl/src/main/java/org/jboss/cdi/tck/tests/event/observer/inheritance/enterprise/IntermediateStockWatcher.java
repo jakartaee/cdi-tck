@@ -14,28 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer;
+package org.jboss.cdi.tck.tests.event.observer.inheritance.enterprise;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+public class IntermediateStockWatcher extends StockWatcher {
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import javax.enterprise.util.Nonbinding;
-import javax.inject.Qualifier;
-
-@Qualifier
-@Retention(RUNTIME)
-@Target({ FIELD, PARAMETER, METHOD, TYPE })
-public @interface Role {
-
-    String value();
-
-    @Nonbinding
-    String nonbindingValue() default "blabla";
-
+    @Override
+    public String getName() {
+        return IntermediateStockWatcher.class.getSimpleName();
+    }
 }

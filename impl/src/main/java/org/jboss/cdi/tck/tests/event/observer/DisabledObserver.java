@@ -14,18 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer.runtimeException;
+package org.jboss.cdi.tck.tests.event.observer;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Alternative;
 
-public class TeaCupPomeranian {
+@Alternative
+public class DisabledObserver {
 
-    public static class OversizedException extends RuntimeException {
-        private static final long serialVersionUID = 1L;
+    static boolean wasNotified = false;
+
+    void observer(@Observes AnEventType event) {
+        wasNotified = true;
     }
-
-    public void observeSimpleEvent(@Observes String someEvent) {
-        throw new OversizedException();
-    }
-
 }

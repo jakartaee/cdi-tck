@@ -19,11 +19,12 @@ package org.jboss.cdi.tck.tests.event;
 import static org.jboss.cdi.tck.TestGroups.EVENTS;
 import static org.jboss.cdi.tck.TestGroups.INHERITANCE;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 
 import javax.enterprise.context.spi.Context;
-import javax.enterprise.event.TransactionPhase;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -37,9 +38,6 @@ import org.testng.annotations.Test;
 /**
  * Event bus tests
  * 
- * TODO This test was temporarily marked as integration one because of problems with <b>arquillian-weld-ee-embedded-1.1</b> in
- * {@link #testStaticObserverMethodInvoked()}.
- * 
  * @author Nicklas Karlsson
  * @author David Allen
  * @author Martin Kouba
@@ -50,30 +48,38 @@ public class EventTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(EventTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(EventTest.class).build();
     }
 
     @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "i"), @SpecAssertion(section = "5.5.6", id = "c"),
             @SpecAssertion(section = "2.3.5", id = "ca"), @SpecAssertion(section = "3.11", id = "a") })
-    public void testObserverMethodReceivesInjectionsOnNonObservesParameters() {
-        getCurrentManager().fireEvent("validate injected parameters");
+    public void testObserverMethodParameterInjectionPoints() {
+        TerrierObserver.reset();
+        getCurrentManager().fireEvent(new BullTerrier());
+        assertTrue(TerrierObserver.eventObserved);
+        assertTrue(TerrierObserver.parametersInjected);
     }
 
     /**
-     * FIXME the spec doesn't follow this exactly because technically it isn't supposed to use the bean resolution algorithm to
-     * obtain the instance, which it does.
+     * This test was temporarily marked as integration one because of problems with arquillian-weld-ee-embedded-1.1 container
+     * adapter.
      */
-    @Test(groups = { EVENTS })
+    @Test(groups = { EVENTS, INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = "10.4", id = "c"), @SpecAssertion(section = "5.5.6", id = "a") })
     public void testStaticObserverMethodInvoked() {
+
         Context requestContext = getCurrentConfiguration().getContexts().getRequestContext();
+
         try {
+            // Deactivate request context so that we're sure the contextual instance is not obtained
             getCurrentConfiguration().getContexts().setInactive(requestContext);
+
             StaticObserver.reset();
             getCurrentManager().fireEvent(new Delivery());
-            assert StaticObserver.isDeliveryReceived();
-            StaticObserver.reset();
+
+            assertTrue(StaticObserver.isDeliveryReceived());
+
         } finally {
             getCurrentConfiguration().getContexts().setActive(requestContext);
         }
@@ -81,11 +87,12 @@ public class EventTest extends AbstractTest {
 
     @Test(groups = { EVENTS })
     @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cc"), @SpecAssertion(section = "5.5.6", id = "baa") })
-    public void testObserverCalledOnMostSpecializedInstance() {
+    public void testObserverCalledOnSpecializedBeanOnly() {
         Shop.observers.clear();
         getCurrentManager().fireEvent(new Delivery());
-        assert Shop.observers.size() == 1;
-        assert Shop.observers.iterator().next().equals(FarmShop.class.getName());
+        // FarmShop specializes Shop
+        assertEquals(Shop.observers.size(), 1);
+        assertEquals(Shop.observers.iterator().next(), FarmShop.class.getName());
     }
 
     @Test(groups = { EVENTS }, expectedExceptions = IllegalArgumentException.class)
@@ -94,63 +101,37 @@ public class EventTest extends AbstractTest {
         eventObjectContainsTypeVariables(new ArrayList<T>());
     }
 
-    private <E> void eventObjectContainsTypeVariables(ArrayList<E> eventToFire) {
-        getCurrentManager().resolveObserverMethods(eventToFire);
-    }
-
     @Test(groups = { EVENTS })
-    @SpecAssertions({ @SpecAssertion(section = "10.2.3", id = "b"), @SpecAssertion(section = "10.2.3", id = "c") })
-    public void testObserverMethodNotifiedWhenBindingsMatch() {
-        getCurrentManager().fireEvent(new MultiBindingEvent(), new RoleBinding("Admin"), new TameAnnotationLiteral());
-        assert BullTerrier.isMultiBindingEventObserved();
-        assert BullTerrier.isSingleBindingEventObserved();
+    @SpecAssertions({ @SpecAssertion(section = "10.2.3", id = "a"), @SpecAssertion(section = "10.2.3", id = "b") })
+    public void testObserverMethodNotifiedWhenQualifiersMatch() {
+
+        BullTerrier.reset();
+
+        getCurrentManager().fireEvent(new MultiBindingEvent(), new RoleLiteral("Admin"), new TameAnnotationLiteral());
+
+        assertTrue(BullTerrier.isMultiBindingEventObserved());
+        assertTrue(BullTerrier.isSingleBindingEventObserved());
     }
 
-    /**
-     * By default, Java implementation reuse is assumed. In this case, the producer, disposal and observer methods of the first
-     * bean are not inherited by the second bean.
-     * 
-     * @throws Exception
-     */
     @Test(groups = { EVENTS, INHERITANCE })
     @SpecAssertion(section = "4.2", id = "dc")
     public void testNonStaticObserverMethodInherited() {
         Egg egg = new Egg();
         getCurrentManager().fireEvent(egg);
-        assert typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class);
+        assertTrue(typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class));
     }
 
     @Test(groups = { EVENTS, INHERITANCE })
-    @SpecAssertions({ @SpecAssertion(section = "4.2", id = "di"), @SpecAssertion(section = "11.1.3", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = "4.2", id = "di") })
     public void testNonStaticObserverMethodIndirectlyInherited() {
         StockPrice price = new StockPrice();
         getCurrentManager().fireEvent(price);
-        assert typeSetMatches(price.getClassesVisited(), StockWatcher.class, IntermediateStockWatcher.class,
-                IndirectStockWatcher.class);
+        assertTrue(typeSetMatches(price.getClassesVisited(), StockWatcher.class, IntermediateStockWatcher.class,
+                IndirectStockWatcher.class));
     }
 
-    @Test(groups = { EVENTS })
-    @SpecAssertion(section = "11.1.3", id = "e")
-    public void testGetTransactionPhaseOnObserverMethod() {
-        assert getCurrentManager().resolveObserverMethods(new StockPrice()).iterator().next().getTransactionPhase()
-                .equals(TransactionPhase.IN_PROGRESS);
-        assert getCurrentManager().resolveObserverMethods(new DisobedientDog()).iterator().next().getTransactionPhase()
-                .equals(TransactionPhase.BEFORE_COMPLETION);
-        assert getCurrentManager().resolveObserverMethods(new ShowDog()).iterator().next().getTransactionPhase()
-                .equals(TransactionPhase.AFTER_COMPLETION);
-        assert getCurrentManager().resolveObserverMethods(new SmallDog()).iterator().next().getTransactionPhase()
-                .equals(TransactionPhase.AFTER_FAILURE);
-        assert getCurrentManager().resolveObserverMethods(new LargeDog()).iterator().next().getTransactionPhase()
-                .equals(TransactionPhase.AFTER_SUCCESS);
+    private <E> void eventObjectContainsTypeVariables(ArrayList<E> eventToFire) {
+        getCurrentManager().resolveObserverMethods(eventToFire);
     }
 
-    @Test(groups = { EVENTS })
-    @SpecAssertion(section = "11.1.3", id = "ga")
-    public void testInstanceOfBeanForEveryEnabledObserverMethod() {
-        assert !getCurrentManager().resolveObserverMethods(new StockPrice()).isEmpty();
-        assert !getCurrentManager().resolveObserverMethods(new DisobedientDog()).isEmpty();
-        assert !getCurrentManager().resolveObserverMethods(new ShowDog()).isEmpty();
-        assert !getCurrentManager().resolveObserverMethods(new SmallDog()).isEmpty();
-        assert !getCurrentManager().resolveObserverMethods(new LargeDog()).isEmpty();
-    }
 }

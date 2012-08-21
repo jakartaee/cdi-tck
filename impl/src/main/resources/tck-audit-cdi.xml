@@ -5117,9 +5117,15 @@
             <note>Describes non-portable behavior</note>
         </assertion>
 
-        <assertion id="i">
+        <group>
             <text>An event is delivered to an observer method if the observer method belongs to an enabled bean, the event object is assignable to the observed event type, taking type parameters into consideration, the observer method has no event qualifiers or has a subset of the event qualifiers. An observer method has an event qualifier if it has an observed event qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.Nonbinding|. Also the event is not a container lifecycle event, as defined in Section 11.5 "Container lifecycle events", or the observer method belongs to an extension.</text>
-        </assertion>
+            <assertion id="c">
+                <text>Check an event is delivered if the observer method belongs to an enabled bean, the event object is assignable to the observed event type and has a subset of the event qualifiers.</text>            
+            </assertion>
+            <assertion id="d">
+                <text>Check an event is not delivered if the observer method belongs to an disabled bean.</text>            
+            </assertion>
+        </group>
 
         <assertion id="j">
             <text>If the runtime type of the event object contains a type variable, the container must throw an |IllegalArgumentException|.</text>
@@ -5182,10 +5188,7 @@
         <assertion id="b">
             <text>An observer method will only be notified if all the observed event qualifiers are specified when the event is fired.</text>
         </assertion>
-
-        <assertion id="c">
-            <text>Other, less specific, observers will also be notified of events with multiple event qualifiers.</text>
-        </assertion>
+        
     </section>
 
     <section id="10.3" title="Firing events">
