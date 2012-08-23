@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.deployment.lifecycle;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
@@ -37,34 +40,35 @@ public class ExtensionsTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ExtensionsTest.class).withBeansXml("beans.xml")
-                .withExtension("javax.enterprise.inject.spi.Extension.ExtensionsTest").build();
+        return new WebArchiveBuilder().withTestClassPackage(ExtensionsTest.class)
+                .withExtension(BeforeBeanDiscoveryObserver.class).build();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.5.1", id = "a"), @SpecAssertion(section = "12.2", id = "b"),
             @SpecAssertion(section = "12.2", id = "c") })
     public void testBeforeBeanDiscoveryEventIsCalled() {
-        assert BeforeBeanDiscoveryObserver.isObserved();
+        assertTrue(BeforeBeanDiscoveryObserver.isObserved());
     }
 
+    @SuppressWarnings("serial")
     @Test
     @SpecAssertion(section = "11.5.1", id = "ab")
     public void testAddingBindingType() {
-        assert BeforeBeanDiscoveryObserver.isObserved();
-        assert getBeans(Alligator.class).size() == 0;
-        assert getBeans(Alligator.class, new AnnotationLiteral<Tame>() {
-        }).size() == 1;
-        assert getCurrentManager().isQualifier(Tame.class);
+        assertTrue(BeforeBeanDiscoveryObserver.isObserved());
+        assertEquals(getBeans(Alligator.class).size(), 0);
+        assertEquals(getBeans(Alligator.class, new AnnotationLiteral<Tame>() {
+        }).size(), 1);
+        assertTrue(getCurrentManager().isQualifier(Tame.class));
     }
 
     @Test
     @SpecAssertion(section = "11.5.1", id = "ac")
     public void testAddingScopeType() {
-        assert BeforeBeanDiscoveryObserver.isObserved();
-        assert getBeans(RomanEmpire.class).size() == 1;
+        assertTrue(BeforeBeanDiscoveryObserver.isObserved());
+        assertEquals(getBeans(RomanEmpire.class).size(), 1);
         Bean<RomanEmpire> bean = getBeans(RomanEmpire.class).iterator().next();
-        assert bean.getScope().equals(EpochScoped.class);
+        assertTrue(bean.getScope().equals(EpochScoped.class));
     }
 
 }

@@ -17,7 +17,8 @@
 
 package org.jboss.cdi.tck.tests.deployment.lifecycle;
 
-import static org.jboss.cdi.tck.TestGroups.REWRITE;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -39,25 +40,22 @@ public class DeploymentTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DeploymentTest.class).withBeansXml("beans.xml")
-                .withExtension("javax.enterprise.inject.spi.Extension.DeploymentTest").build();
+        return new WebArchiveBuilder().withTestClassPackage(DeploymentTest.class).withExtension(ManagerObserver.class).build();
     }
 
-    @Test(groups = REWRITE)
-    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "a"), @SpecAssertion(section = "11.5.3", id = "a"),
-            @SpecAssertion(section = "12.2", id = "g") })
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "a"), @SpecAssertion(section = "11.5.3", id = "a") })
     public void testDeployedManagerEvent() {
-        assert ManagerObserver.isAfterDeploymentValidationCalled();
-        // Make sure the manager does accept requests now
-        getCurrentManager().fireEvent("event");
+        assertTrue(ManagerObserver.isAfterDeploymentValidationCalled());
+        assertTrue(ManagerObserver.isAfterBeanDiscoveryCalled());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.1", id = "f") })
     public void testOnlyEnabledBeansDeployed() {
-        assert !getBeans(User.class).isEmpty();
-        assert getBeans(DataAccessAuthorizationDecorator.class).isEmpty();
-        assert getBeans(Interceptor1.class).isEmpty();
-        assert getBeans(DisabledBean.class).isEmpty();
+        assertFalse(getBeans(User.class).isEmpty());
+        assertTrue(getBeans(DataAccessAuthorizationDecorator.class).isEmpty());
+        assertTrue(getBeans(Interceptor1.class).isEmpty());
+        assertTrue(getBeans(DisabledBean.class).isEmpty());
     }
 }
