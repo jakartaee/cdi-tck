@@ -260,29 +260,37 @@
     </section>
 
     <section id="2.4.1" title="Built-in scope types">
-        <assertion id="aa">
-            <text>There are five standard scope types defined by this specification, all defined in the package javax.enterprise.context. The |@RequestScoped|~, |@ApplicationScoped| and |@SessionScoped|~ annotations defined in Section 6.7, "Context management for built-in scopes" represent the standard scopes defined by the Java Servlets specification.</text>
-        </assertion>
 
-        <assertion id="ab">
-            <text>There are five standard scope types defined by this specification, all defined in the package javax.enterprise.context. The ~|@RequestScoped|, ~|@ApplicationScoped|~ and |@SessionScoped|~ annotations defined in Section 6.7, "Context management for built-in scopes" represent the standard scopes defined by the Java Servlets specification.</text>
-        </assertion>
+        <group>
 
-        <assertion id="ac">
-            <text>There are five standard scope types defined by this specification, all defined in the package javax.enterprise.context. The ~|@RequestScoped|, |@ApplicationScoped| and ~|@SessionScoped| annotations defined in Section 6.7, "Context management for built-in scopes" represent the standard scopes defined by the Java Servlets specification.</text>
-        </assertion>
+            <text>There are five standard scope types defined by this specification, all defined in the package |javax.enterprise.context|.</text>
 
-        <assertion id="ba">
-            <text>There are five standard scope types defined by this specification, all defined in the package javax.enterprise.context. The |@ConversationScoped| annotation represents the conversation scope defined in Section 6.7.4, "Conversation context lifecycle".</text>
-        </assertion>
+            <assertion id="aa">
+                <text> The |@RequestScoped|~, |@ApplicationScoped| and |@SessionScoped|~ annotations defined in Section 6.7, "Context management for built-in scopes" represent the standard scopes defined by the Java Servlets specification.</text>
+            </assertion>
 
-        <assertion id="ca">
-            <text>There are five standard scope types defined by this specification, all defined in the package javax.enterprise.context. The |@Dependent| pseudo-scope is for dependent objects, as defined in Section 6.4, "Dependent pseudo-scope"</text>
-        </assertion>
+            <assertion id="ab">
+                <text>The ~|@RequestScoped|, ~|@ApplicationScoped|~ and |@SessionScoped|~ annotations defined in Section 6.7, "Context management for built-in scopes" represent the standard scopes defined by the Java Servlets specification.</text>
+            </assertion>
 
-        <assertion id="e" testable="false">
-            <text>If an interceptor or decorator has any scope other than |@Dependent|, non-portable behavior results.</text>
-        </assertion>
+            <assertion id="ac">
+                <text>The ~|@RequestScoped|, |@ApplicationScoped| and ~|@SessionScoped| annotations defined in Section 6.7, "Context management for built-in scopes" represent the standard scopes defined by the Java Servlets specification.</text>
+            </assertion>
+
+            <assertion id="ba">
+                <text>The |@ConversationScoped| annotation represents the conversation scope defined in Section 6.7.4, "Conversation context lifecycle".</text>
+            </assertion>
+
+            <assertion id="ca">
+                <text>The |@Dependent| pseudo-scope is for dependent objects, as defined in Section 6.4, "Dependent pseudo-scope"</text>
+            </assertion>
+
+            <assertion id="e" testable="false">
+                <text>If an interceptor or decorator has any scope other than |@Dependent|, non-portable behavior results.</text>
+            </assertion>
+
+        </group>
+
     </section>
 
     <section id="2.4.2" title="Defining new scope types">

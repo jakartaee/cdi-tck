@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -50,12 +51,10 @@ public class ClientConversationContextTest extends AbstractConversationTest {
                 .withTestClassDefinition(ClientConversationContextTest.class)
                 .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
                         CloudController.class, OutermostFilter.class, Cumulus.class, BuiltInConversation.class,
-                        ConversationContextObserver.class).withWebResource("home.jsf", "home.jspx")
-                .withWebResource("cloud.jsf", "cloud.jspx").withWebResource("clouds.jsf", "clouds.jspx")
-                .withWebResource("cumulus.jsf", "cumulus.jspx").withWebResource("builtin.jsf", "builtin.jspx")
-                .withWebResource("error.jsf", "error.jspx").withWebResource("storm.jsf", "storm.jspx")
-                .withWebResource("rain.jsf", "rain.jspx").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
-                .withWebXml("web.xml").build();
+                        ConversationContextObserver.class).withWebResource("home.xhtml").withWebResource("cloud.xhtml")
+                .withWebResource("clouds.xhtml").withWebResource("cumulus.xhtml").withWebResource("builtin.xhtml")
+                .withWebResource("error.xhtml").withWebResource("storm.xhtml").withWebResource("rain.xhtml")
+                .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
     }
 
     @Test(groups = { CONTEXTS })
@@ -75,7 +74,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
 
         String c2 = getCid(storm);
 
-        assert !c1.equals(c2);
+        assertNotEquals(c1, c2);
     }
 
     @Test(groups = { CONTEXTS })

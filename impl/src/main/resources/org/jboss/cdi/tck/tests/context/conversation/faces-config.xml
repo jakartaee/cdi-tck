@@ -1,42 +1,12 @@
 <?xml version="1.0"?>
-<faces-config version="1.2" 
-              xmlns="http://java.sun.com/xml/ns/javaee"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
-  
-   <lifecycle>
-      <phase-listener>org.jboss.cdi.tck.tests.context.conversation.ConversationTestPhaseListener</phase-listener>
-   </lifecycle>
-   
-   <navigation-rule>
-      <from-view-id>/storm.jspx</from-view-id>
-      <navigation-case>
-         <from-outcome>thunder</from-outcome>
-         <to-view-id>/thunder.jspx</to-view-id>
-      </navigation-case>
-   </navigation-rule>
-   
-   <navigation-rule>
-      <from-view-id>/storm.jspx</from-view-id>
-      <navigation-case>
-         <from-outcome>lightening</from-outcome>
-         <to-view-id>/lightening.jspx</to-view-id>
-         <redirect/>
-      </navigation-case>
-   </navigation-rule>
-   
-   <navigation-rule>
-      <from-view-id>/cumulus.jspx</from-view-id>
-      <navigation-case>
-         <from-outcome>home</from-outcome>
-         <to-view-id>/home.jspx</to-view-id>
-         <redirect/>
-      </navigation-case>
-      <navigation-case>
-         <from-outcome>error</from-outcome>
-         <to-view-id>/error.jspx</to-view-id>
-         <redirect/>
-      </navigation-case>
-   </navigation-rule>
-   
+<faces-config
+    version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    <lifecycle>
+        <phase-listener>org.jboss.cdi.tck.tests.context.conversation.ConversationTestPhaseListener</phase-listener>
+    </lifecycle>
+
 </faces-config>

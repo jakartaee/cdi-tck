@@ -23,14 +23,15 @@ import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.jboss.cdi.tck.util.SimpleLogger;
+
 @Named
 @ConversationScoped
 public class Storm implements Serializable {
 
-    /**
-	 * 
-	 */
     private static final long serialVersionUID = -1513633490356967202L;
+
+    private final SimpleLogger logger = new SimpleLogger(Storm.class);
 
     @Inject
     Conversation conversation;
@@ -42,11 +43,12 @@ public class Storm implements Serializable {
     }
 
     public String lightening() {
-        return "lightening";
+        return "lightening?faces-redirect=true";
     }
 
     public void beginConversation() {
         conversation.begin();
+        logger.log("Long-running conversation {0}", conversation.getId());
     }
 
     public String getStrength() {
@@ -54,6 +56,7 @@ public class Storm implements Serializable {
     }
 
     public void setStrength(String strength) {
+        logger.log("Set strength {0} in conversation {1}", strength, conversation.getId());
         this.strength = strength;
     }
 

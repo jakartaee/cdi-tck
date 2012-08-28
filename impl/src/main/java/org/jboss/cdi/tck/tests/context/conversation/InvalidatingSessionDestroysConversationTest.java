@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.tests.context.conversation;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -41,8 +43,8 @@ public class InvalidatingSessionDestroysConversationTest extends AbstractConvers
         return new WebArchiveBuilder()
                 .withTestClassDefinition(InvalidatingSessionDestroysConversationTest.class)
                 .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
-                        CloudController.class, OutermostFilter.class).withWebResource("cloud.jsf", "cloud.jspx")
-                .withWebResource("clouds.jsf", "clouds.jspx").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
+                        CloudController.class, OutermostFilter.class).withWebResource("cloud.xhtml")
+                .withWebResource("clouds.xhtml").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
                 .withWebXml("web.xml").build();
     }
 
@@ -50,12 +52,15 @@ public class InvalidatingSessionDestroysConversationTest extends AbstractConvers
     @SpecAssertion(section = "6.7.4", id = "qa")
     // TODO this test doesn't precisely probe the boundaries of the service() method
     public void testInvalidatingSessionDestroysConversation() throws Exception {
+
         WebClient webClient = new WebClient();
+
         resetCloud(webClient);
         webClient.getPage(getPath("clouds.jsf"));
-        assert !isCloudDestroyed(webClient);
+
+        assertFalse(isCloudDestroyed(webClient));
         invalidateSession(webClient);
-        assert isCloudDestroyed(webClient);
+        assertTrue(isCloudDestroyed(webClient));
     }
 
 }

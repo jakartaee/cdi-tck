@@ -44,15 +44,17 @@ public class ManualCidPropagationTest extends AbstractConversationTest {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(ManualCidPropagationTest.class)
                 .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
-                        CloudController.class, OutermostFilter.class).withWebResource("cloud.jsf", "cloud.jspx")
-                .withWebResource("storm.jsf", "storm.jspx").withWebResource("clouds.jsf", "clouds.jspx")
+                        CloudController.class, OutermostFilter.class).withWebResource("cloud.xhtml")
+                .withWebResource("storm.xhtml").withWebResource("clouds.xhtml")
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
     }
 
     @Test(groups = { CONTEXTS })
     @SpecAssertion(section = "6.7.4", id = "n")
     public void testManualCidPropagation() throws Exception {
+
         WebClient webClient = new WebClient();
+
         HtmlPage storm = webClient.getPage(getPath("storm.jsf"));
         HtmlSubmitInput beginConversationButton = getFirstMatchingElement(storm, HtmlSubmitInput.class,
                 "beginConversationButton");
