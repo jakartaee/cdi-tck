@@ -3882,11 +3882,6 @@
                 <text>Test the request scope is active during message delivery to any EJB message-driven bean.</text>
             </assertion>
         </group>
-
-        <assertion id="ge">
-            <text>The request scope is active during any message delivery to a |MessageListener| for a JMS topic or queue obtained from the Java EE component environment.</text>
-        </assertion>
-
         <group>
             <text>The request context is destroyed at the end of the servlet request, after the |service()| method and all |doFilter()| methods, and all |requestDestroyed()| and |onComplete()| notifications return.</text>
             <assertion id="ba">
@@ -3927,10 +3922,6 @@
             </assertion>
         </group>
 
-        <assertion id="i">
-            <text>The request context is destroyed after the message delivery to the |MessageListener| completes.</text>
-        </assertion>
-
         <group>
             <text>An event with qualifier |@Initialized(RequestScoped.class)| is fired when the request context is initialized and an event with qualifier |@Destroyed(RequestScoped.class)| when the request context is destroyed.</text>
             <assertion id="ja">
@@ -3941,10 +3932,6 @@
             </assertion>
             <assertion id="jc" testable="false">
                 <text>The event payload is the |???| if the context is initialized or destroyed due to a EJB remote method invocation, asynchronous method invocation, timeout or message delivery.</text>
-                <note>Specification not finished yet</note>
-            </assertion>
-            <assertion id="jd" testable="false">
-                <text>The event payload is the |???| if the context is initialized or destroyed due to a message delivery to a |MessageListener|.</text>
                 <note>Specification not finished yet</note>
             </assertion>
         </group>
@@ -4034,16 +4021,6 @@
 
             <assertion id="dd">
                 <text>Test message delivery to any EJB message-driven bean.</text>
-            </assertion>
-        </group>
-
-        <group>
-            <text>The application scope is active during any message delivery to a |MessageListener| for a JMS topic or queue obtained from the Java EE component environment.</text>
-            <assertion id="de">
-                <text>Test JMS topic</text>
-            </assertion>
-            <assertion id="df">
-                <text>Test JMS queue</text>
             </assertion>
         </group>
 
