@@ -21,8 +21,8 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.REWRITE;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -41,6 +41,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.AmbiguousResolutionException;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.InjectionException;
 import javax.enterprise.inject.Specializes;
 import javax.enterprise.inject.Stereotype;
@@ -65,6 +66,8 @@ import org.testng.annotations.Test;
 
 /**
  * Mostly tests for extensions specified in chapter 11 of the specification and not already tested elsewhere.
+ * 
+ * TODO add tests for custom scope, qualifier, stereotype, interceptor added via extension
  * 
  * @author David Allen
  * @author Martin Kouba
@@ -109,99 +112,97 @@ public class BeanManagerTest extends AbstractTest {
         getCurrentManager().validate(injectionPoint);
     }
 
-    @Test(groups = REWRITE)
+    @Test
     @SpecAssertion(section = "11.3.14", id = "aa")
-    // Should also check a custom bindingtype
-    public void testDetermineBindingType() {
-        assert getCurrentManager().isQualifier(Tame.class);
-        assert !getCurrentManager().isQualifier(AnimalStereotype.class);
-        assert !getCurrentManager().isQualifier(ApplicationScoped.class);
-        assert !getCurrentManager().isQualifier(Transactional.class);
+    public void testDetermineQualifierType() {
+        assertTrue(getCurrentManager().isQualifier(Any.class));
+        assertTrue(getCurrentManager().isQualifier(Tame.class));
+        assertFalse(getCurrentManager().isQualifier(AnimalStereotype.class));
+        assertFalse(getCurrentManager().isQualifier(ApplicationScoped.class));
+        assertFalse(getCurrentManager().isQualifier(Transactional.class));
     }
 
-    @Test(groups = REWRITE)
-    // Should also check a custom scope
+    @Test
     @SpecAssertion(section = "11.3.14", id = "ab")
-    public void testDetermineScopeType() {
-        assert getCurrentManager().isScope(ApplicationScoped.class);
-        assert !getCurrentManager().isScope(Tame.class);
-        assert !getCurrentManager().isScope(AnimalStereotype.class);
-        assert !getCurrentManager().isScope(Transactional.class);
+    public void testDetermineScope() {
+        assertTrue(getCurrentManager().isScope(ApplicationScoped.class));
+        assertTrue(getCurrentManager().isScope(DummyScoped.class));
+        assertFalse(getCurrentManager().isScope(Tame.class));
+        assertFalse(getCurrentManager().isScope(AnimalStereotype.class));
+        assertFalse(getCurrentManager().isScope(Transactional.class));
     }
 
-    @Test(groups = REWRITE)
+    @Test
     @SpecAssertion(section = "11.3.14", id = "ac")
-    // Should also check a custom stereotype
     public void testDetermineStereotype() {
-        assert getCurrentManager().isStereotype(AnimalStereotype.class);
-        assert !getCurrentManager().isStereotype(Tame.class);
-        assert !getCurrentManager().isStereotype(ApplicationScoped.class);
-        assert !getCurrentManager().isStereotype(Transactional.class);
+        assertTrue(getCurrentManager().isStereotype(AnimalStereotype.class));
+        assertFalse(getCurrentManager().isStereotype(Tame.class));
+        assertFalse(getCurrentManager().isStereotype(ApplicationScoped.class));
+        assertFalse(getCurrentManager().isStereotype(Transactional.class));
     }
 
-    @Test(groups = REWRITE)
-    // WBRI-59
-    // Should also check a custom interceptor binding type
+    @Test
     @SpecAssertion(section = "11.3.14", id = "ad")
     public void testDetermineInterceptorBindingType() {
-        assert getCurrentManager().isInterceptorBinding(Transactional.class);
-        assert !getCurrentManager().isInterceptorBinding(Tame.class);
-        assert !getCurrentManager().isInterceptorBinding(AnimalStereotype.class);
-        assert !getCurrentManager().isInterceptorBinding(ApplicationScoped.class);
+        assertTrue(getCurrentManager().isInterceptorBinding(Transactional.class));
+        assertFalse(getCurrentManager().isInterceptorBinding(Tame.class));
+        assertFalse(getCurrentManager().isInterceptorBinding(AnimalStereotype.class));
+        assertFalse(getCurrentManager().isInterceptorBinding(ApplicationScoped.class));
     }
 
-    @Test(groups = { REWRITE })
+    @SuppressWarnings("serial")
+    @Test
     @SpecAssertion(section = "11.3.14", id = "ae")
-    // Should also check a custom sterotype
     public void testGetMetaAnnotationsForStereotype() {
         Set<Annotation> stereotypeAnnotations = getCurrentManager().getStereotypeDefinition(AnimalStereotype.class);
-        assert stereotypeAnnotations.size() == 5;
-        assert stereotypeAnnotations.contains(new AnnotationLiteral<Stereotype>() {
-        });
-        assert stereotypeAnnotations.contains(new AnnotationLiteral<RequestScoped>() {
-        });
-        assert stereotypeAnnotations.contains(new AnnotationLiteral<Inherited>() {
-        });
-        assert stereotypeAnnotations.contains(new RetentionLiteral() {
+        assertEquals(stereotypeAnnotations.size(), 5);
+        assertTrue(stereotypeAnnotations.contains(new AnnotationLiteral<Stereotype>() {
+        }));
+        assertTrue(stereotypeAnnotations.contains(new AnnotationLiteral<RequestScoped>() {
+        }));
+        assertTrue(stereotypeAnnotations.contains(new AnnotationLiteral<Inherited>() {
+        }));
+        assertTrue(stereotypeAnnotations.contains(new RetentionLiteral() {
 
             public RetentionPolicy value() {
                 return RetentionPolicy.RUNTIME;
             }
 
-        });
-        assert stereotypeAnnotations.contains(new TargetLiteral() {
+        }));
+        assertTrue(stereotypeAnnotations.contains(new TargetLiteral() {
 
             public ElementType[] value() {
                 ElementType[] value = { TYPE, METHOD, FIELD };
                 return value;
             }
 
-        });
+        }));
     }
 
-    @Test(groups = { REWRITE })
+    @SuppressWarnings("unchecked")
+    @Test
     @SpecAssertion(section = "11.3.14", id = "af")
     public void testGetMetaAnnotationsForInterceptorBindingType() {
         Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingDefinition(Transactional.class);
-        assert metaAnnotations.size() == 4;
+        assertEquals(metaAnnotations.size(), 4);
         assert annotationSetMatches(metaAnnotations, Target.class, Retention.class, Documented.class, InterceptorBinding.class);
     }
 
-    @Test(groups = { REWRITE })
+    @Test
     @SpecAssertion(section = "11.3.14", id = "ag")
-    // Should also check a custom defined scope
-    public void testgetScope() {
-        assert getCurrentManager().isNormalScope(RequestScoped.class);
-        assert !getCurrentManager().isPassivatingScope(RequestScoped.class);
-
-        assert getCurrentManager().isNormalScope(SessionScoped.class);
-        assert getCurrentManager().isPassivatingScope(SessionScoped.class);
+    public void testDetermineScopeType() {
+        assertTrue(getCurrentManager().isNormalScope(RequestScoped.class));
+        assertFalse(getCurrentManager().isPassivatingScope(RequestScoped.class));
+        assertTrue(getCurrentManager().isNormalScope(SessionScoped.class));
+        assertTrue(getCurrentManager().isPassivatingScope(SessionScoped.class));
+        assertTrue(getCurrentManager().isNormalScope(DummyScoped.class));
+        assertFalse(getCurrentManager().isPassivatingScope(DummyScoped.class));
     }
 
     @Test
     @SpecAssertion(section = "11.3.16", id = "a")
     public void testGetELResolver() {
-        assert getCurrentManager().getELResolver() != null;
+        assertNotNull(getCurrentManager().getELResolver());
     }
 
     @Test
@@ -231,7 +232,7 @@ public class BeanManagerTest extends AbstractTest {
     // CDI-83
     public void testObtainingInjectionTarget() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
-        assert getCurrentManager().createInjectionTarget(annotatedType) != null;
+        assertNotNull(getCurrentManager().createInjectionTarget(annotatedType));
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)

@@ -4178,9 +4178,8 @@
 
         <assertion id="ua">
             <text>The container ensures that a long-running conversation may be associated with at most one request at a time, by blocking or rejecting concurrent requests. If the container rejects a request, it must associate the request with a new transient conversation and throw an exception of type |javax.enterprise.context.BusyConversationException|.</text>
+            <note>Not testable until CDI-206 is resolved.</note>
         </assertion>
-
-        <!-- TODO there are some open issues in EDR1.1 -->
 
     </section>
 
