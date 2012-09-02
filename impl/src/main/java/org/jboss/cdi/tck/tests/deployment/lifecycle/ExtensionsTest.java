@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.lifecycle;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -36,6 +37,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class ExtensionsTest extends AbstractTest {
 
     @Deployment

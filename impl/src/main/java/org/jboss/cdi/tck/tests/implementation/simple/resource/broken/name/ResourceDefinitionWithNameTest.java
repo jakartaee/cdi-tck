@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.name;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -31,6 +33,7 @@ import org.testng.annotations.Test;
 /**
  * @author Martin Kouba
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ResourceDefinitionWithNameTest extends AbstractTest {
 
