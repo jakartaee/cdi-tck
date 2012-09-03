@@ -51,6 +51,7 @@ public class ObserverInheritanceTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "4.2", id = "dc"), @SpecAssertion(section = "4.2", id = "di") })
     public void testNonStaticObserverMethodInherited() {
 
+        ActionSequence.reset();
         getCurrentManager().fireEvent(new Egg());
 
         // Foo directly extends AbstractFooObserver - observer invoked
