@@ -312,6 +312,10 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assertTrue(isLongRunning(page));
         assertEquals(getCid(page), "humilis");
         assertTrue(page.getBody().getTextContent().contains("Cumulus humilis"));
+
+        HtmlPage nextPage = client.getPage(getPath("cumulus.jsf?cid=humilis"));
+        assertTrue(isLongRunning(nextPage));
+        assertEquals(getCid(page), "humilis");
     }
 
     @Test(groups = { CONTEXTS })

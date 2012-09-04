@@ -4076,31 +4076,29 @@
         <assertion id="bb">
             <text>An event with the |ServletRequestEvent| as the payload and with qualifier |@Destroyed(ConversationContext.class)| when the conversation context is destroyed.</text>
         </assertion>
-
-        <group>
-            <text>Any Servlet request has exactly one associated conversation.</text>
-            <assertion id="c">
-                <text>Test JSF request.</text>
-            </assertion>
-            <assertion id="ca">
-                <text>Test non-JSF request.</text>
-                <note>Test required since CDI 1.0 defined conversation for JSF requests only.</note>
-            </assertion>
-        </group>
+        
+        <assertion id="c" testable="false">
+                <text>Any Servlet request has exactly one associated conversation.</text>
+                <note>We have no portable way how to test it</note>
+        </assertion>
 
         <group>
             <text>The conversation associated with a Servlet request is determined at the beginning of the request before calling any |service()| method of any servlet in the web application, calling the |doFilter()| method of any servlet filter in the web application and before the container calls any |ServletRequestListener| or |AsyncListener| in the web application.</text>
             <assertion id="da">
                 <text>Test |service()| method of a servlet.</text>
+                <note>This may only be tested indirectly</note>
             </assertion>
             <assertion id="db">
                 <text>Test |doFilter()| method of a servlet filter.</text>
+                <note>This may only be tested indirectly</note>
             </assertion>
             <assertion id="dc">
                 <text>Test |ServletRequestListener|.</text>
+                <note>This may only be tested indirectly</note>
             </assertion>
             <assertion id="dd">
                 <text>Test |AsyncListener|.</text>
+                <note>This may only be tested indirectly</note>
             </assertion>
         </group>
 
