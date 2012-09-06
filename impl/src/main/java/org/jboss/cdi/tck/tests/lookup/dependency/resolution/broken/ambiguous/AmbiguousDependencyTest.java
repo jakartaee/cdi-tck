@@ -38,7 +38,7 @@ public class AmbiguousDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "2.8", id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "ab"), @SpecAssertion(section = "2.8", id = "c"),
             @SpecAssertion(section = "2.8", id = "ca") })
     public void testAmbiguousDependency() {
     }

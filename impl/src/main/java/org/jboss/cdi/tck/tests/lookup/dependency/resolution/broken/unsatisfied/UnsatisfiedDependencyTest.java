@@ -37,7 +37,7 @@ public class UnsatisfiedDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.1", id = "aa")
+    @SpecAssertion(section = "5.2.2", id = "aa")
     public void testUnsatisfiedDependency() {
     }
 

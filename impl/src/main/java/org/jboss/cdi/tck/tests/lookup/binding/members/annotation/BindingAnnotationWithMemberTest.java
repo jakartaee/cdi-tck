@@ -44,7 +44,7 @@ public class BindingAnnotationWithMemberTest extends AbstractTest {
     TheBeatles theBeatles;
 
     @Test
-    @SpecAssertion(section = "5.2.5", id = "b")
+    @SpecAssertion(section = "5.2.6", id = "b")
     public void testAnnotationMemberWithNonBinding() {
         assertNotNull(theBeatles.getWatch());
     }

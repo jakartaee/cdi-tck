@@ -40,7 +40,7 @@ public class NullableBeanTest extends AbstractTest {
     }
 
     @Test(groups = { INJECTION, PRODUCER_METHOD })
-    @SpecAssertion(section = "5.2.4", id = "aa")
+    @SpecAssertion(section = "5.2.5", id = "aa")
     public void testPrimitiveInjectionPointResolvesToNullableWebBean() throws Exception {
     }
 

@@ -48,7 +48,7 @@ public class ObserverMethodParameterInjectionValidationTest extends AbstractTest
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "i"), @SpecAssertion(section = "5.2.1", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "i"), @SpecAssertion(section = "5.2.2", id = "aa") })
     public void test() {
     }
 }

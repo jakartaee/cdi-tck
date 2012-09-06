@@ -51,7 +51,7 @@ public class ParameterizedTypesInjectionToRawTypeTest extends AbstractTest {
     ConsumerRawObject consumerObject;
 
     @Test
-    @SpecAssertion(section = "5.2.3", id = "a")
+    @SpecAssertion(section = "5.2.4", id = "a")
     public void testInjection() {
 
         assertNotNull(consumer);

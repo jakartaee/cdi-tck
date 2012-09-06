@@ -62,7 +62,7 @@ public class QualifierInheritedTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ea"), @SpecAssertion(section = "5.2", id = "la"),
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ea"), @SpecAssertion(section = "5.2.1", id = "la"),
             @SpecAssertion(section = "4.1", id = "aa") })
     public void testResolution() throws Exception {
 

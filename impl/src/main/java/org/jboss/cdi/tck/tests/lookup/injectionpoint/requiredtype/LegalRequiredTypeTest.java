@@ -45,7 +45,7 @@ public class LegalRequiredTypeTest extends AbstractTest {
     Forest forest;
 
     @Test
-    @SpecAssertion(section = "5.2.2", id = "a")
+    @SpecAssertion(section = "5.2.3", id = "a")
     public void testLegalRequiredType() {
         forest.ping();
         assertEquals(forest.getAge(), 10);

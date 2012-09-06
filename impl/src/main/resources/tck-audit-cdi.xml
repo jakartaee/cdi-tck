@@ -2361,10 +2361,10 @@
     </section>
 
     <section id="5.2" title="Typesafe resolution">
+    </section>
 
-        <assertion id="hc" implied="true">
-            <text>Check multiple types resolve to a single getBeans()</text>
-        </assertion>
+    <section id="5.2.1" title="Performing typesafe resolution">
+
         <group>
             <text>A bean is assignable to a given injection point if the bean has a bean type that matches the required type. For this purpose, primitive types are considered to match their corresponding wrapper types in |java.lang| and array types are considered to match only if their element types are identical. Parameterized and raw types are considered to match if they are identical or if the bean type is assignable to the required type, as defined in Section 5.2.3, "Assignability of raw and parameterized types".</text>
 
@@ -2424,9 +2424,10 @@
                 <text>Test |getQualifiers()| determines qualifiers.</text>
             </assertion>
         </group>
+        
     </section>
 
-    <section id="5.2.1" title="Unsatisfied and ambiguous dependencies">
+    <section id="5.2.2" title="Unsatisfied and ambiguous dependencies">
         <group>
             <text>The container must validate all injection points of all enabled beans and of all other Java EE component classes supporting injection when the application is initialized to ensure that there are no unsatisfied or ambiguous dependencies. If an unsatisfied or ambiguous dependency exists, the container automatically detects the problem and treats it as a deployment problem.</text>
             <assertion id="aa">
@@ -2442,7 +2443,7 @@
         </assertion>
     </section>
 
-    <section id="5.2.2" title="Legal injection point types">
+    <section id="5.2.3" title="Legal injection point types">
         <assertion id="a">
             <text>Any legal bean type, as defined in Section 2.2.1, "Legal bean types" may be the required type of an injection point.</text>
         </assertion>
@@ -2456,7 +2457,7 @@
         </assertion>
     </section>
 
-    <section id="5.2.3" title="Assignability of raw and parameterized types">
+    <section id="5.2.4" title="Assignability of raw and parameterized types">
         <assertion id="a">
             <text>A parameterized bean type is considered assignable to a raw required type if the raw types are identical and all type parameters of the bean type are either unbounded type variables or |java.lang.Object|.</text>
         </assertion>
@@ -2494,14 +2495,14 @@
                 <text>Check the required type parameter and the bean type parameter are both type variables and the upper bound of the required type parameter is assignable to the upper bound of the bean type parameter.</text>
             </assertion>
         </group>
-        
+
         <assertion id="g" implied="true">
             <text>A raw bean type is not assignable to a parameterized required type.</text>
         </assertion>
 
     </section>
 
-    <section id="5.2.4" title="Primitive types and null values">
+    <section id="5.2.5" title="Primitive types and null values">
         <group>
             <text>If necessary, the container performs boxing or unboxing when it injects a value to a field or parameter of primitive or wrapper type.</text>
 
@@ -2523,7 +2524,7 @@
         </assertion>
     </section>
 
-    <section id="5.2.5" title="Qualifier annotations with members">
+    <section id="5.2.6" title="Qualifier annotations with members">
         <assertion id="a" testable="false">
             <text>Qualifier types may have annotation members.</text>
             <note>A statement of intent</note>
@@ -2538,7 +2539,7 @@
         </assertion>
     </section>
 
-    <section id="5.2.6" title="Multiple qualifiers">
+    <section id="5.2.7" title="Multiple qualifiers">
         <assertion id="a">
             <text>A bean class may declare multiple qualifiers.</text>
         </assertion>
@@ -2903,12 +2904,12 @@
         <assertion id="e">
             <text>The container passes an injectable reference to each injected method parameter.</text>
         </assertion>
-        
+
         <assertion id="f">
             <text>The container is also responsible for destroying dependent objects created during this invocation, as defined in Section 6.4.2, "Destruction of objects with scope @Dependent".</text>
             <note></note>
         </assertion>
-        
+
     </section>
 
     <section id="5.5.5" title="Access to producer field values">
@@ -4076,10 +4077,10 @@
         <assertion id="bb">
             <text>An event with the |ServletRequestEvent| as the payload and with qualifier |@Destroyed(ConversationContext.class)| when the conversation context is destroyed.</text>
         </assertion>
-        
+
         <assertion id="c" testable="false">
-                <text>Any Servlet request has exactly one associated conversation.</text>
-                <note>We have no portable way how to test it</note>
+            <text>Any Servlet request has exactly one associated conversation.</text>
+            <note>We have no portable way how to test it</note>
         </assertion>
 
         <group>
@@ -5102,10 +5103,10 @@
         <group>
             <text>An event is delivered to an observer method if the observer method belongs to an enabled bean, the event object is assignable to the observed event type, taking type parameters into consideration, the observer method has no event qualifiers or has a subset of the event qualifiers. An observer method has an event qualifier if it has an observed event qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.Nonbinding|. Also the event is not a container lifecycle event, as defined in Section 11.5 "Container lifecycle events", or the observer method belongs to an extension.</text>
             <assertion id="c">
-                <text>Check an event is delivered if the observer method belongs to an enabled bean, the event object is assignable to the observed event type and has a subset of the event qualifiers.</text>            
+                <text>Check an event is delivered if the observer method belongs to an enabled bean, the event object is assignable to the observed event type and has a subset of the event qualifiers.</text>
             </assertion>
             <assertion id="d">
-                <text>Check an event is not delivered if the observer method belongs to an disabled bean.</text>            
+                <text>Check an event is not delivered if the observer method belongs to an disabled bean.</text>
             </assertion>
         </group>
 
@@ -5170,7 +5171,7 @@
         <assertion id="b">
             <text>An observer method will only be notified if all the observed event qualifiers are specified when the event is fired.</text>
         </assertion>
-        
+
     </section>
 
     <section id="10.3" title="Firing events">
@@ -5461,7 +5462,7 @@
             </assertion>
             <assertion id="fc">
                 <text>Check |getReception()| is called.</text>
-                <note>This assertion will be probably removed - see CDI-124.</note>                
+                <note>This assertion will be probably removed - see CDI-124.</note>
             </assertion>
         </group>
 
@@ -5807,9 +5808,17 @@
     </section>
 
     <section id="11.3.5" title="Obtaining a Bean by type">
-        <assertion id="aa">
-            <text>The method |BeanManager.getBeans()| returns the set of beans which have the given required type and qualifiers and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of typesafe resolution defined in Section 5.2, "Typesafe resolution".</text>
-        </assertion>
+        
+        <group>
+            <text>The method |BeanManager.getBeans()| returns the set of beans which have the given required type and qualifiers and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules for candidates of typesafe resolution defined in Section 5.2.1, “Performing typesafe resolution”.</text>            
+            <assertion id="aa">
+                <text>Test simple scenario.</text>
+            </assertion>
+            <assertion id="ab" implied="true">
+                <text>Test alternatives are not filtered.</text>
+                <note>CDI-231</note>
+            </assertion>
+        </group>
 
         <assertion id="b">
             <text>The first parameter is a required bean type. The remaining parameters are required qualifiers.</text>
@@ -5856,6 +5865,20 @@
         <assertion id="b">
             <text>If the ambiguous dependency resolution rules fail, the container must throw an |AmbiguousResolutionException|.</text>
         </assertion>
+        
+        <group>
+            <text>The method |BeanManager.resolve()| must return null, if:</text>
+            <assertion id="c">
+                <text>null is passed to |resolve()|,</text>
+            </assertion>
+            <assertion id="d">
+                <text>no beans are passed to |resolve()|,</text>
+            </assertion>
+            <assertion id="e">
+                <text>no bean is available for injection in the module (as defined in Section 5.1, "Modularity"").</text>
+            </assertion>
+        </group>
+        
     </section>
 
     <section id="11.3.9" title="Validating an injection point">

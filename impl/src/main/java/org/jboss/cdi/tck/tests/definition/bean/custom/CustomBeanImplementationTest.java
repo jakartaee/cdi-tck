@@ -58,19 +58,19 @@ public class CustomBeanImplementationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2", id = "na")
+    @SpecAssertion(section = "5.2.1", id = "na")
     public void testGetTypesCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetTypesCalled();
     }
 
     @Test
-    @SpecAssertion(section = "5.2", id = "nb")
+    @SpecAssertion(section = "5.2.1", id = "nb")
     public void testGetBindingsCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetQualifiersCalled();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "b"), @SpecAssertion(section = "6.6.4", id = "ga"),
+    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "b"), @SpecAssertion(section = "6.6.4", id = "ga"),
             @SpecAssertion(section = "6.6.4", id = "gb") })
     public void testGetInjectionPointsCalled(Bar bar) {
         assert AfterBeanDiscoveryObserver.integerBean.isGetInjectionPointsCalled();
@@ -80,7 +80,7 @@ public class CustomBeanImplementationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.4", id = "ba")
+    @SpecAssertion(section = "5.2.5", id = "ba")
     public void testIsNullableCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isNullableCalled();
     }

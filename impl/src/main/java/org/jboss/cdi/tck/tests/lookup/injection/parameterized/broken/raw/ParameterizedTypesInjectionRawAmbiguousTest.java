@@ -45,7 +45,7 @@ public class ParameterizedTypesInjectionRawAmbiguousTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.3", id = "a")
+    @SpecAssertion(section = "5.2.4", id = "a")
     public void testInjection() {
         // Should throw exception - ambiguous resolution
     }

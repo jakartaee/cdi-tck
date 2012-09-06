@@ -42,7 +42,7 @@ public class RawBeanTypeParameterizedRequiredTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.3", id = "g")
+    @SpecAssertion(section = "5.2.4", id = "g")
     public void test() {
         // Test that deployment fails
     }

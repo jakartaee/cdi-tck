@@ -48,7 +48,7 @@ public class InjectionTest extends AbstractTest {
     }
 
     @Test(groups = { INJECTION, PRODUCER_METHOD })
-    @SpecAssertion(section = "5.2.4", id = "aa")
+    @SpecAssertion(section = "5.2.5", id = "aa")
     public void testInjectionPerformsBoxingIfNecessary() throws Exception {
         assert getBeans(SpiderNest.class).size() == 1;
         SpiderNest spiderNest = getInstanceByType(SpiderNest.class);
@@ -57,7 +57,7 @@ public class InjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2", id = "kc"), @SpecAssertion(section = "5.5", id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "kc"), @SpecAssertion(section = "5.5", id = "b"),
             @SpecAssertion(section = "5.5.2", id = "ac") })
     public void testInjectionOfNamedBean() {
         WolfPack wolfPack = getInstanceByType(WolfPack.class);

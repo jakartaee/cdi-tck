@@ -40,7 +40,7 @@ public class PrimitiveInjectionPointTest extends AbstractTest {
     }
 
     @Test(groups = { RESOLUTION, PRODUCER_METHOD })
-    @SpecAssertion(section = "5.2.4", id = "aa")
+    @SpecAssertion(section = "5.2.5", id = "aa")
     public void testPrimitiveInjectionPointResolvedToNonPrimitiveProducerMethod() {
     }
 }

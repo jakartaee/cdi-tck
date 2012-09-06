@@ -48,7 +48,7 @@ public class ParameterizedTypesInjectionToParameterizedWithTypeVariableTest exte
     ConsumerTypeVariable consumer;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.4", id = "f") })
     public void testInjection() {
         assertNotNull(consumer.getDao());
         assertEquals(consumer.getDao().getId(), Dao.class.getName());

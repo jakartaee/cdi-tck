@@ -49,8 +49,8 @@ public class ParameterizedTypesInjectionToParameterizedWithWildcardTest extends 
     ConsumerWildcard consumer;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "c"), @SpecAssertion(section = "5.2.3", id = "da"),
-            @SpecAssertion(section = "5.2.3", id = "db") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.4", id = "c"), @SpecAssertion(section = "5.2.4", id = "da"),
+            @SpecAssertion(section = "5.2.4", id = "db") })
     public void testInjection() {
         assertNotNull(consumer.getDao());
         assertEquals(consumer.getDao().getId(), Dao.class.getName());

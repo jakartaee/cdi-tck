@@ -47,7 +47,7 @@ public class JarToJarAlphaVisibilityTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bcb"), @SpecAssertion(section = "5.2", id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bcb"), @SpecAssertion(section = "5.2.1", id = "n") })
     public void testDeployment() {
         // noop
     }

@@ -39,7 +39,7 @@ public class TypeVariableInjectionPointTest extends AbstractTest {
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertion(section = "5.2.2", id = "c")
+    @SpecAssertion(section = "5.2.3", id = "c")
     public void testTypeVariableInjectionPoint() {
     }
 }

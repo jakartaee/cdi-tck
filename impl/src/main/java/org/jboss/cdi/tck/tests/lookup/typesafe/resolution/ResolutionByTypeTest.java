@@ -19,12 +19,14 @@ package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 import static org.jboss.cdi.tck.TestGroups.INJECTION;
 import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
 import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.inject.spi.Bean;
@@ -34,7 +36,6 @@ import javax.enterprise.util.TypeLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -65,99 +66,71 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test(groups = RESOLUTION)
-    @SpecAssertion(section = "5.2", id = "lb")
+    @SpecAssertion(section = "5.2.1", id = "lb")
     public void testDefaultBindingTypeAssumed() throws Exception {
         Set<Bean<Tuna>> possibleTargets = getBeans(Tuna.class);
-        assert possibleTargets.size() == 1;
-        assert possibleTargets.iterator().next().getTypes().contains(Tuna.class);
-    }
-
-    @Test(groups = RESOLUTION)
-    @SpecAssertion(section = "5.2", id = "hc")
-    public void testResolveByType() throws Exception {
-
-        assert getBeans(Tuna.class, new DefaultLiteral()).size() == 1;
-
-        assert getBeans(Tuna.class).size() == 1;
-
-        Set<Bean<Animal>> beans = getBeans(Animal.class, new AnnotationLiteral<FishILike>() {
-        });
-        assert beans.size() == 3;
-        List<Class<? extends Animal>> classes = new ArrayList<Class<? extends Animal>>();
-        for (Bean<Animal> bean : beans) {
-            if (bean.getTypes().contains(Salmon.class)) {
-                classes.add(Salmon.class);
-            } else if (bean.getTypes().contains(SeaBass.class)) {
-                classes.add(SeaBass.class);
-            } else if (bean.getTypes().contains(Haddock.class)) {
-                classes.add(Haddock.class);
-            }
-        }
-        assert classes.contains(Salmon.class);
-        assert classes.contains(SeaBass.class);
-        assert classes.contains(Haddock.class);
+        assertEquals(possibleTargets.size(), 1);
+        assertTrue(possibleTargets.iterator().next().getTypes().contains(Tuna.class));
     }
 
     @Test(groups = INJECTION)
-    @SpecAssertions({ @SpecAssertion(section = "2.3.4", id = "b"), @SpecAssertion(section = "5.2", id = "lc"),
-            @SpecAssertion(section = "2.3.3", id = "d"), @SpecAssertion(section = "5.2", id = "la"),
-            @SpecAssertion(section = "5.2.6", id = "a"), @SpecAssertion(section = "5.2.6", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = "2.3.4", id = "b"), @SpecAssertion(section = "5.2.1", id = "lc"),
+            @SpecAssertion(section = "2.3.3", id = "d"), @SpecAssertion(section = "5.2.1", id = "la"),
+            @SpecAssertion(section = "5.2.7", id = "a"), @SpecAssertion(section = "5.2.7", id = "d") })
     public void testAllQualifiersSpecifiedForResolutionMustAppearOnBean() {
-        assert getBeans(Animal.class, new ChunkyLiteral(), new AnnotationLiteral<Whitefish>() {
-        }).size() == 1;
-        assert getBeans(Animal.class, new ChunkyLiteral(), new AnnotationLiteral<Whitefish>() {
-        }).iterator().next().getTypes().contains(Cod.class);
 
-        assert getBeans(ScottishFish.class, new AnnotationLiteral<Whitefish>() {
-        }).size() == 2;
-        List<Class<? extends Animal>> classes = new ArrayList<Class<? extends Animal>>();
-        for (Bean<ScottishFish> bean : getBeans(ScottishFish.class, new AnnotationLiteral<Whitefish>() {
-        })) {
-            if (bean.getTypes().contains(Cod.class)) {
-                classes.add(Cod.class);
-            } else if (bean.getTypes().contains(Sole.class)) {
-                classes.add(Sole.class);
+        Set<Bean<Animal>> animalBeans = getBeans(Animal.class, new ChunkyLiteral(), new AnnotationLiteral<Whitefish>() {
+        });
+        assertEquals(animalBeans.size(), 1);
+        assertTrue(animalBeans.iterator().next().getTypes().contains(Cod.class));
+
+        Set<Bean<ScottishFish>> scottishFishBeans = getBeans(ScottishFish.class, new AnnotationLiteral<Whitefish>() {
+        });
+        assertEquals(scottishFishBeans.size(), 2);
+
+        for (Bean<ScottishFish> bean : scottishFishBeans) {
+            if (!bean.getTypes().contains(Cod.class) && !bean.getTypes().contains(Sole.class)) {
+                fail();
             }
         }
-        assert classes.contains(Cod.class);
-        assert classes.contains(Sole.class);
-
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertions({ @SpecAssertion(section = "5.2", id = "ka") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "ka") })
     public void testResolveByTypeWithTypeParameter() throws Exception {
-        assert getBeans(new TypeLiteral<Farmer<ScottishFish>>() {
-        }).size() == 1;
-        assert getBeans(new TypeLiteral<Farmer<ScottishFish>>() {
-        }).iterator().next().getTypes().contains(ScottishFishFarmer.class);
+
+        Set<Bean<Farmer<ScottishFish>>> beans = getBeans(new TypeLiteral<Farmer<ScottishFish>>() {
+        });
+        assertEquals(beans.size(), 1);
+        assertTrue(beans.iterator().next().getTypes().contains(ScottishFishFarmer.class));
     }
 
     @Test(groups = { RESOLUTION, PRODUCER_METHOD })
-    @SpecAssertions({ @SpecAssertion(section = "5.2", id = "j"), @SpecAssertion(section = "2.2.1", id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "j"), @SpecAssertion(section = "2.2.1", id = "i") })
     public void testResolveByTypeWithArray() throws Exception {
-        assert getBeans(Spider[].class).size() == 1;
+        assertEquals(getBeans(Spider[].class).size(), 1);
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertions({ @SpecAssertion(section = "5.2", id = "i"), @SpecAssertion(section = "5.2.4", id = "aa"),
-            @SpecAssertion(section = "5.2.4", id = "ab"), @SpecAssertion(section = "5.2.6", id = "b"),
-            @SpecAssertion(section = "5.2.6", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "i"), @SpecAssertion(section = "5.2.5", id = "aa"),
+            @SpecAssertion(section = "5.2.5", id = "ab"), @SpecAssertion(section = "5.2.7", id = "b"),
+            @SpecAssertion(section = "5.2.7", id = "c") })
     public void testResolveByTypeWithPrimitives() {
-        assert getBeans(Double.class, AnyLiteral.INSTANCE).size() == 2;
-        assert getBeans(double.class, AnyLiteral.INSTANCE).size() == 2;
+
+        assertEquals(getBeans(Double.class, AnyLiteral.INSTANCE).size(), 2);
+        assertEquals(getBeans(double.class, AnyLiteral.INSTANCE).size(), 2);
 
         Double min = getInstanceByType(Double.class, new AnnotationLiteral<Min>() {
         });
         double max = getInstanceByType(double.class, new AnnotationLiteral<Max>() {
         });
 
-        assert min.equals(NumberProducer.min);
-        assert NumberProducer.max.equals(max);
+        assertEquals(min, NumberProducer.min);
+        assertEquals(max, NumberProducer.max);
     }
 
     @Test(groups = RESOLUTION)
-    @SpecAssertions({ @SpecAssertion(section = "5.2", id = "ld"), @SpecAssertion(section = "5.2.5", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "ld"), @SpecAssertion(section = "5.2.6", id = "b") })
     public void testResolveByTypeWithNonBindingMembers() throws Exception {
 
         Set<Bean<Animal>> beans = getBeans(Animal.class, new ExpensiveLiteral() {
@@ -171,69 +144,69 @@ public class ResolutionByTypeTest extends AbstractTest {
 
         }, new AnnotationLiteral<Whitefish>() {
         });
-        assert beans.size() == 2;
+        assertEquals(beans.size(), 2);
 
         Set<Type> classes = new HashSet<Type>();
         for (Bean<Animal> bean : beans) {
             classes.addAll(bean.getTypes());
         }
-        assert classes.contains(Halibut.class);
-        assert classes.contains(RoundWhitefish.class);
-        assert !classes.contains(Sole.class);
+        assertTrue(classes.contains(Halibut.class));
+        assertTrue(classes.contains(RoundWhitefish.class));
+        assertFalse(classes.contains(Sole.class));
     }
 
     @Test
     @SpecAssertion(section = "2.2.2", id = "a")
     public void testBeanTypesOnManagedBean() {
-        assert getBeans(Canary.class).size() == 1;
+        assertEquals(getBeans(Canary.class).size(), 1);
         Bean<Canary> bean = getUniqueBean(Canary.class);
-        assert getBeans(Bird.class).isEmpty();
-        assert typeSetMatches(bean.getTypes(), Canary.class, Object.class);
+        assertTrue(getBeans(Bird.class).isEmpty());
+        assertTrue(typeSetMatches(bean.getTypes(), Canary.class, Object.class));
     }
 
     @Test
     @SpecAssertion(section = "2.2.2", id = "e")
     public void testGenericBeanTypesOnManagedBean() {
-        assert getBeans(AUSTRALIAN_FLIGHTLESS_BIRD).size() == 1;
-        assert getBeans(Emu.class).isEmpty();
-        assert getBeans(EUROPEAN_FLIGHTLESS_BIRD).isEmpty();
+        assertEquals(getBeans(AUSTRALIAN_FLIGHTLESS_BIRD).size(), 1);
+        assertTrue(getBeans(Emu.class).isEmpty());
+        assertTrue(getBeans(EUROPEAN_FLIGHTLESS_BIRD).isEmpty());
         Bean<FlightlessBird<Australian>> bean = getUniqueBean(AUSTRALIAN_FLIGHTLESS_BIRD);
-        assert typeSetMatches(bean.getTypes(), AUSTRALIAN_FLIGHTLESS_BIRD.getType(), Object.class);
+        assertTrue(typeSetMatches(bean.getTypes(), AUSTRALIAN_FLIGHTLESS_BIRD.getType(), Object.class));
     }
 
     @Test
     @SpecAssertion(section = "2.2.2", id = "c")
     public void testBeanTypesOnProducerMethod() {
-        assert getBeans(Parrot.class).size() == 1;
-        assert getBeans(Bird.class).isEmpty();
+        assertEquals(getBeans(Parrot.class).size(), 1);
+        assertTrue(getBeans(Bird.class).isEmpty());
         Bean<Parrot> bean = getUniqueBean(Parrot.class);
-        assert typeSetMatches(bean.getTypes(), Parrot.class, Object.class);
+        assertTrue(typeSetMatches(bean.getTypes(), Parrot.class, Object.class));
     }
 
     @Test
     @SpecAssertion(section = "2.2.2", id = "h")
     public void testGenericBeanTypesOnProducerField() {
-        assert getBeans(EUROPEAN_CAT, TAME).size() == 1;
-        assert getBeans(DomesticCat.class, TAME).isEmpty();
+        assertEquals(getBeans(EUROPEAN_CAT, TAME).size(), 1);
+        assertTrue(getBeans(DomesticCat.class, TAME).isEmpty());
         Bean<Cat<European>> bean = getUniqueBean(EUROPEAN_CAT, TAME);
-        assert typeSetMatches(bean.getTypes(), EUROPEAN_CAT.getType(), Object.class);
+        assertTrue(typeSetMatches(bean.getTypes(), EUROPEAN_CAT.getType(), Object.class));
     }
 
     @Test
     @SpecAssertion(section = "2.2.2", id = "g")
     public void testGenericBeanTypesOnProducerMethod() {
-        assert getBeans(AFRICAN_CAT, WILD).size() == 1;
-        assert getBeans(Lion.class, WILD).isEmpty();
+        assertEquals(getBeans(AFRICAN_CAT, WILD).size(), 1);
+        assertTrue(getBeans(Lion.class, WILD).isEmpty());
         Bean<Cat<African>> bean = getUniqueBean(AFRICAN_CAT, WILD);
-        assert typeSetMatches(bean.getTypes(), AFRICAN_CAT.getType(), Object.class);
+        assertTrue(typeSetMatches(bean.getTypes(), AFRICAN_CAT.getType(), Object.class));
     }
 
     @Test
     @SpecAssertion(section = "2.2.2", id = "d")
     public void testBeanTypesOnProducerField() {
-        assert getBeans(Dove.class).size() == 1;
-        assert getBeans(Bird.class).isEmpty();
+        assertEquals(getBeans(Dove.class).size(), 1);
+        assertTrue(getBeans(Bird.class).isEmpty());
         Bean<Dove> bean = getUniqueBean(Dove.class);
-        assert typeSetMatches(bean.getTypes(), Dove.class, Object.class);
+        assertTrue(typeSetMatches(bean.getTypes(), Dove.class, Object.class));
     }
 }

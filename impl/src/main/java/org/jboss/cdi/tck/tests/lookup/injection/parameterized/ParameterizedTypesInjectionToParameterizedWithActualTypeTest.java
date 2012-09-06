@@ -49,8 +49,8 @@ public class ParameterizedTypesInjectionToParameterizedWithActualTypeTest extend
     ConsumerActualType consumer;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "ba"), @SpecAssertion(section = "5.2.3", id = "bb"),
-            @SpecAssertion(section = "5.2.3", id = "a"), @SpecAssertion(section = "5.2.3", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.4", id = "ba"), @SpecAssertion(section = "5.2.4", id = "bb"),
+            @SpecAssertion(section = "5.2.4", id = "a"), @SpecAssertion(section = "5.2.4", id = "e") })
     public void testInjection() {
         assertNotNull(consumer.getDao());
         assertEquals(consumer.getDao().getId(), Dao.class.getName());

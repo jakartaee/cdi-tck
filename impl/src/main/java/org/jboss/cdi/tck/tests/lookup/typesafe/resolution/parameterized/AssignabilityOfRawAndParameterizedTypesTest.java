@@ -45,8 +45,8 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertions({ @SpecAssertion(section = "5.2", id = "kb"), @SpecAssertion(section = "2.2.1", id = "f"),
-            @SpecAssertion(section = "2.2.1", id = "g"), @SpecAssertion(section = "5.2.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "kb"), @SpecAssertion(section = "2.2.1", id = "f"),
+            @SpecAssertion(section = "2.2.1", id = "g"), @SpecAssertion(section = "5.2.4", id = "a") })
     public void testAssignabilityToRawType() {
         // Dao, DaoProducer.getDao(), DaoProducer.getRawDao and ObjectDao
         // IntegerDao is not assignable to the raw required type Dao
@@ -54,7 +54,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertion(section = "5.2.3", id = "ba")
+    @SpecAssertion(section = "5.2.4", id = "ba")
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithActualTypes() {
         assert getBeans(new TypeLiteral<Map<Integer, Integer>>() {
         }).size() == 2;
@@ -63,7 +63,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.4", id = "c") })
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcards() {
         assert getBeans(new TypeLiteral<HashMap<? extends Number, ? super Integer>>() {
         }).size() == 1;
@@ -72,13 +72,13 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "b") })
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcardsAtInjectionPoint() {
         assert getInstanceByType(InjectedBean.class).getMap() instanceof IntegerHashMap;
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertion(section = "5.2.3", id = "da")
+    @SpecAssertion(section = "5.2.4", id = "da")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards() {
         Set<Bean<Result<? extends Throwable, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Throwable, ? super Exception>>() {
         });
@@ -87,7 +87,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertion(section = "5.2.3", id = "db")
+    @SpecAssertion(section = "5.2.4", id = "db")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards2() {
         Set<Bean<Result<? extends Exception, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Exception, ? super Exception>>() {
         });
@@ -96,7 +96,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test(groups = { RESOLUTION })
-    @SpecAssertion(section = "5.2.3", id = "e")
+    @SpecAssertion(section = "5.2.4", id = "e")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithActualTypes() {
         Set<Bean<Result<Exception, Exception>>> beans = getBeans(new TypeLiteral<Result<Exception, Exception>>() {
         });
@@ -106,7 +106,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test(groups = { RESOLUTION })
-    @SpecAssertion(section = "5.2.3", id = "f")
+    @SpecAssertion(section = "5.2.4", id = "f")
     public <T1 extends Exception, T2 extends Exception, T3, T4> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
         Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>() {
         });
