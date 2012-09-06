@@ -77,7 +77,7 @@ public class BeanDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = PRODUCER_METHOD)
-    @SpecAssertions({ @SpecAssertion(section = "2.2.1", id = "j"), @SpecAssertion(section = "5.2.5", id = "ba"),
+    @SpecAssertions({ @SpecAssertion(section = "2.2.1", id = "j"), @SpecAssertion(section = "5.2.5", id = "c"),
             @SpecAssertion(section = "11.1", id = "bd") })
     public void testIsNullable() throws Exception {
         assert getBeans(int.class).size() == 1;

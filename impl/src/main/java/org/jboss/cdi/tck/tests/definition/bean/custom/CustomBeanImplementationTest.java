@@ -80,7 +80,7 @@ public class CustomBeanImplementationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.5", id = "ba")
+    @SpecAssertion(section = "5.2.5", id = "c")
     public void testIsNullableCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isNullableCalled();
     }

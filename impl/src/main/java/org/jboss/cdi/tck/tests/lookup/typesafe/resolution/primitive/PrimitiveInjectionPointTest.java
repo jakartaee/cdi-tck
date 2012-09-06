@@ -14,15 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.primitive;
+package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.primitive;
 
 import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
 import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
-import javax.enterprise.inject.spi.DeploymentException;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -30,17 +31,34 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+/**
+ * Test varios types of injection points of primitive types that resolve to a producer method or producer field that returns a
+ * null value at runtime. The container must inject the primitive type's default value as defined by the JSL 4.12.5
+ * "Initial Values of Variables".
+ * 
+ * @author Martin Kouba
+ */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class PrimitiveInjectionPointTest extends AbstractTest {
 
-    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(PrimitiveInjectionPointTest.class).build();
     }
 
+    @Inject
+    Game game;
+
     @Test(groups = { RESOLUTION, PRODUCER_METHOD })
-    @SpecAssertion(section = "5.2.5", id = "aa")
+    @SpecAssertion(section = "5.2.5", id = "b")
     public void testPrimitiveInjectionPointResolvedToNonPrimitiveProducerMethod() {
+        assertTrue(game.getInjectedByte() == 0);
+        assertTrue(game.getInjectedShort() == 0);
+        assertTrue(game.getInjectedInt() == 0);
+        assertTrue(game.getInjectedLong() == 0L);
+        assertTrue(game.getInjectedFloat() == 0.0f);
+        assertTrue(game.getInjectedDouble() == 0.0d);
+        assertTrue(game.getInjectedChar() == '\u0000');
+        assertFalse(game.isInjectedBoolean());
     }
 }

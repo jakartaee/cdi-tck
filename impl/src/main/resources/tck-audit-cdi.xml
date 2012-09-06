@@ -2514,12 +2514,12 @@
                 <text>Test unboxing.</text>
             </assertion>
         </group>
-
-        <assertion id="aa">
-            <text>If an injection point of primitive type resolves to a bean that may have null values, such as a producer method with a nonprimitive return type or a producer field with a non-primitive type, the container automatically detects the problem and treats it as a deployment problem.</text>
+        
+        <assertion id="b">
+            <text>If an injection point of primitive type resolves to a producer method or producer field that returns a null value at runtime, the container must inject the primitive type's default value as defined by the Java Language Specification.</text>
         </assertion>
 
-        <assertion id="ba">
+        <assertion id="c">
             <text>For a custom implementation of the Bean interface defined in Section 11.1, "The Bean interface", the container calls |isNullable()| to determine whether the bean may have null values.</text>
         </assertion>
     </section>

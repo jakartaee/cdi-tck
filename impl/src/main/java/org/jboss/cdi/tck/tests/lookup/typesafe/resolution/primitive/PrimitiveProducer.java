@@ -14,14 +14,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injection.nullableBean;
+package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.primitive;
 
 import javax.enterprise.inject.Produces;
 
-public class FarmHouseProducer_Broken {
+public class PrimitiveProducer {
 
     @Produces
-    public Integer getNumberOfBedrooms() {
+    public Short producedShort = null;
+
+    @Produces
+    public Long producedLong = null;
+
+    @Produces
+    public Byte getByte() {
+        return null;
+    }
+
+    @Produces
+    public Integer getInteger() {
+        return null;
+    }
+
+    @Produces
+    public Float getFloat() {
+        return null;
+    }
+
+    @Produces
+    public Double getDouble() {
+        return null;
+    }
+
+    @Produces
+    public Character getChar() {
+        return null;
+    }
+
+    @Produces
+    public Boolean getBoolean() {
         return null;
     }
 
