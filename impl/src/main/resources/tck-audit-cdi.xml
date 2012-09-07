@@ -3113,6 +3113,10 @@
         <assertion id="ba">
             <text>The |select()| method returns a child |Instance| for a given required type and additional required qualifiers. If no required type is given, the required type is the same as the parent.</text>
         </assertion>
+        
+        <assertion id="c">
+            <text>If an injection point of raw type |Instance| is defined, the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
 
         <assertion id="da">
             <text>If two instances of the same qualifier type are passed to |select()|, an |IllegalArgumentException| is thrown.</text>
