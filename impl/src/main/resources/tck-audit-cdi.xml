@@ -5758,10 +5758,6 @@
             <text>Java EE components may obtain an instance of |BeanManager| from JNDI by looking up the name |java:comp/BeanManager|.</text>
         </assertion>
 
-        <assertion id="e">
-            <text>Web components may obtain an instance of |BeanManager| by calling |ServletContext.getAttribute("javax.enterprise.inject.spi.BeanManager")|.</text>
-        </assertion>
-
     </section>
 
     <section id="11.3.2" title="Obtaining a contextual reference for a bean">

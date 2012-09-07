@@ -23,8 +23,6 @@ import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
 
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,8 +40,7 @@ import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
- * Test that servlet container built-in beans are available for injection and that it's possible to obtain an instance of
- * BeanManager from ServletContext.
+ * Test that servlet container built-in beans are available for injection.
  * 
  * @author Martin Kouba
  */
@@ -73,20 +70,6 @@ public class ServletContainerBuiltinBeanTest extends AbstractTest {
         assertNotNull(lowercaseConverter.getHttpSession().getId());
         assertNotNull(lowercaseConverter.getServletContext());
         assertTrue(lowercaseConverter.getServletContext().getMajorVersion() >= 2);
-    }
-
-    @Test
-    @SpecAssertion(section = "11.3.1", id = "e")
-    public void testBeanManagerAvailableViaServletContext() {
-
-        BeanManager beanManager = (BeanManager) lowercaseConverter.getServletContext()
-                .getAttribute(BeanManager.class.getName());
-        assertNotNull(beanManager);
-        assertEquals(beanManager, getCurrentManager());
-        Bean<?> bean = beanManager.resolve(beanManager.getBeans(LowercaseConverter.class));
-        LowercaseConverter converter = (LowercaseConverter) beanManager.getReference(bean, LowercaseConverter.class,
-                beanManager.createCreationalContext(bean));
-        assertEquals(converter.getId(), lowercaseConverter.getId());
     }
 
     @RunAsClient
