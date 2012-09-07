@@ -5251,6 +5251,10 @@
         <assertion id="f">
             <text>The container must provide a built-in bean with an implementation provided automatically by the container.</text>
         </assertion>
+        
+        <assertion id="e">
+            <text>If an injection point of raw type |Event| is defined, the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
 
         <assertion id="g">
             <text>The built-in implementation must be a passivation capable dependency, as defined in Section 6.6.2, "Passivation capable
