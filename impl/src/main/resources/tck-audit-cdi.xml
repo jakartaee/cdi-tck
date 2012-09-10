@@ -5916,6 +5916,10 @@
         <assertion id="e">
             <text>If an instance of an annotation that is not a qualifier type is given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
+        
+        <assertion id="f">
+            <text>If the runtime type of the event object is assignable to the type of a container lifecycle event, |IllegalArgumentException| is thrown.</text>
+        </assertion>
 
     </section>
 
@@ -6334,6 +6338,15 @@
 
         <assertion id="bb">
             <text>Service providers may have observer methods, which may observer any event, including any container lifecycle event, and obtain an injected |BeanManager| reference.</text>
+        </assertion>
+        
+        <assertion id="bc">
+            <text>An extension may use |BeanManager.fireEvent()| to deliver events to observer methods defined on extensions.</text>
+        </assertion>
+        
+        <assertion id="bd" testable="false">
+            <text>The container is not required to deliver events fired during application initialization to observer methods defined on beans.</text>
+            <note>Non-portable behavior</note>
         </assertion>
 
         <assertion id="d">
