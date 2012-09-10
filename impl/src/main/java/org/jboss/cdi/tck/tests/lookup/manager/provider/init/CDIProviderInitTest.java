@@ -14,12 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.manager.provider;
+package org.jboss.cdi.tck.tests.lookup.manager.provider.init;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -36,7 +37,8 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * TODO This test needs verification.
+ * Test {@link CDI} after the container fires the BeforeBeanDiscovery container lifecycle event until the application
+ * initialization is completed.
  * 
  * <p>
  * This test was originally part of Weld test suite.
@@ -47,12 +49,12 @@ import org.testng.annotations.Test;
  */
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
-public class CdiProviderIncontainerTest extends AbstractTest {
+public class CDIProviderInitTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClass(CdiProviderIncontainerTest.class)
+                .withTestClass(CDIProviderInitTest.class)
                 .withClasses(Alpha.class, MarkerObtainerWar.class, Foo.class, Marker.class,
                         AfterDeploymentValidationObserver.class)
                 .withExtension(AfterDeploymentValidationObserver.class)
@@ -73,7 +75,7 @@ public class CdiProviderIncontainerTest extends AbstractTest {
     NonBdaAfterDeploymentValidationObserver nonbdaExtension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.1", id = "a"), @SpecAssertion(section = "12.1", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.1", id = "aa"), @SpecAssertion(section = "12.1", id = "f") })
     public void testAccessingBeanManager() {
 
         // War itself
@@ -93,7 +95,7 @@ public class CdiProviderIncontainerTest extends AbstractTest {
         assertEquals(MarkerObtainerBda2.getBeans(Marker.class).size(), 1);
         assertEquals(MarkerObtainerBda2.getBeans(Marker.class).iterator().next().getBeanClass(), Charlie.class);
         assertEquals(MarkerObtainerBda2.getBeans(Baz.class).size(), 1);
-        assertEquals(MarkerObtainerBda1.getBeans(Bar.class).size(), 1);
+        assertEquals(MarkerObtainerBda2.getBeans(Bar.class).size(), 1);
 
         // non-bda
         assertNotNull(nonbdaExtension.getBeanManager());

@@ -14,21 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.manager.provider;
+package org.jboss.cdi.tck.tests.lookup.manager.provider.init;
 
-import java.util.Set;
+public class Bar {
 
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.CDI;
-
-public class MarkerObtainerNonBda {
-
-    public static Set<Bean<?>> getBeans(Class<?> clazz) {
-        return CDI.current().getBeanManager().getBeans(clazz);
-    }
-
-    public static BeanManager getBeanManager() {
-        return CDI.current().getBeanManager();
-    }
 }

@@ -14,11 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.manager.provider;
+package org.jboss.cdi.tck.tests.lookup.manager.provider.init;
 
-import javax.enterprise.inject.Alternative;
-
-@Alternative
-public class Alpha implements Marker {
+public class Foo {
 
 }

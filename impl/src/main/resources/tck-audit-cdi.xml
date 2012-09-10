@@ -2424,7 +2424,7 @@
                 <text>Test |getQualifiers()| determines qualifiers.</text>
             </assertion>
         </group>
-        
+
     </section>
 
     <section id="5.2.2" title="Unsatisfied and ambiguous dependencies">
@@ -2514,7 +2514,7 @@
                 <text>Test unboxing.</text>
             </assertion>
         </group>
-        
+
         <assertion id="b">
             <text>If an injection point of primitive type resolves to a producer method or producer field that returns a null value at runtime, the container must inject the primitive type's default value as defined by the Java Language Specification.</text>
         </assertion>
@@ -3113,7 +3113,7 @@
         <assertion id="ba">
             <text>The |select()| method returns a child |Instance| for a given required type and additional required qualifiers. If no required type is given, the required type is the same as the parent.</text>
         </assertion>
-        
+
         <assertion id="c">
             <text>If an injection point of raw type |Instance| is defined, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
@@ -5251,7 +5251,7 @@
         <assertion id="f">
             <text>The container must provide a built-in bean with an implementation provided automatically by the container.</text>
         </assertion>
-        
+
         <assertion id="e">
             <text>If an injection point of raw type |Event| is defined, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
@@ -5746,13 +5746,34 @@
 
     <section id="11.3.1" title="Obtaining a reference to the CDI container">
 
-        <assertion id="a">
-            <text>A portable extension may obtain a reference to the current container by calling |CDI.current()|.</text>
-        </assertion>
+        <group>
+            <text>
+                A portable extension or other object may obtain a reference to the current container by calling |CDI.current()|. |CDI.getBeanManager()| may be called at any time after the container fires the |BeforeBeanDiscovery| container 
+                lifecycle event until the container fires the |BeforeShutdown| container lifecycle event. Other methods on CDI may be called after the application initialization is completed until the application shutdown starts.
+            </text>
+            <assertion id="aa">
+                <text>Test |CDI.getBeanManager()| is called before the application initialization is completed.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test |CDI.getBeanManager()| is called after the application initialization is completed.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Test lookup of bean instances after the application initialization is completed.</text>
+            </assertion>     
+        </group>
+        
 
-        <assertion id="b" testable="false">
-            <text>When |CDI.current()| is called, the first |javax.enterprise.inject.spi.CDIProvider| is loaded, and the |CDIProvider.getCDI()| method called. If no providers are available an IllegalStateException is thrown.</text>
-        </assertion>
+        <group>
+            <text>
+                The |CDIProvider| to use may be set by the application or container using the |setCDIProvider()| method. If the |setCDIProvider()| has not been called, the first service provider of the service |javax.enterprise.inject.spi.CDIProvider| 
+                declared in META-INF/services is used. If no provider is available an |IllegalStateException| is thrown.
+            </text>
+            <assertion id="ba">
+                <text>
+                    Test using |CDIProvider| set by the application.
+                </text>
+            </assertion>
+        </group>
 
         <assertion id="d">
             <text>Java EE components may obtain an instance of |BeanManager| from JNDI by looking up the name |java:comp/BeanManager|.</text>
@@ -5812,9 +5833,9 @@
     </section>
 
     <section id="11.3.5" title="Obtaining a Bean by type">
-        
+
         <group>
-            <text>The method |BeanManager.getBeans()| returns the set of beans which have the given required type and qualifiers and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules for candidates of typesafe resolution defined in Section 5.2.1, “Performing typesafe resolution”.</text>            
+            <text>The method |BeanManager.getBeans()| returns the set of beans which have the given required type and qualifiers and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules for candidates of typesafe resolution defined in Section 5.2.1, “Performing typesafe resolution”.</text>
             <assertion id="aa">
                 <text>Test simple scenario.</text>
             </assertion>
@@ -5869,7 +5890,7 @@
         <assertion id="b">
             <text>If the ambiguous dependency resolution rules fail, the container must throw an |AmbiguousResolutionException|.</text>
         </assertion>
-        
+
         <group>
             <text>The method |BeanManager.resolve()| must return null, if:</text>
             <assertion id="c">
@@ -5882,7 +5903,7 @@
                 <text>no bean is available for injection in the module (as defined in Section 5.1, "Modularity"").</text>
             </assertion>
         </group>
-        
+
     </section>
 
     <section id="11.3.9" title="Validating an injection point">
@@ -5916,7 +5937,7 @@
         <assertion id="e">
             <text>If an instance of an annotation that is not a qualifier type is given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
-        
+
         <assertion id="f">
             <text>If the runtime type of the event object is assignable to the type of a container lifecycle event, |IllegalArgumentException| is thrown.</text>
         </assertion>
@@ -6339,11 +6360,11 @@
         <assertion id="bb">
             <text>Service providers may have observer methods, which may observer any event, including any container lifecycle event, and obtain an injected |BeanManager| reference.</text>
         </assertion>
-        
+
         <assertion id="bc">
             <text>An extension may use |BeanManager.fireEvent()| to deliver events to observer methods defined on extensions.</text>
         </assertion>
-        
+
         <assertion id="bd" testable="false">
             <text>The container is not required to deliver events fired during application initialization to observer methods defined on beans.</text>
             <note>Non-portable behavior</note>
