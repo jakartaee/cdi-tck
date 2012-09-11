@@ -27,6 +27,7 @@ import javax.inject.Inject;
 @Alternative
 public class Bravo {
 
+    @Powerful
     @Inject
     Alpha alpha;
 
