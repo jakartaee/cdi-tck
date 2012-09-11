@@ -44,7 +44,7 @@ import org.jboss.cdi.tck.util.ForwardingBeanAttributes;
 public class BeanExtension implements Extension {
 
     private Bean<Lion> hungryLion;
-    private Bean<Lion> hungryTiger;
+    private Bean<Tiger> hungryTiger;
 
     void registerBeans(@Observes AfterBeanDiscovery event, BeanManager manager) {
         // create a synthetic class bean
@@ -97,7 +97,7 @@ public class BeanExtension implements Extension {
         assertNotNull(method);
         BeanAttributes<Tiger> attributes = (BeanAttributes<Tiger>) starveOut(manager.createBeanAttributes(method));
         Producer<Tiger> producer = event.getProducer();
-        hungryTiger = (Bean<Lion>) manager.createBean(attributes, Zoo.class, producer);
+        hungryTiger = (Bean<Tiger>) manager.createBean(attributes, Zoo.class, producer);
     }
 
     private <T> BeanAttributes<T> starveOut(final BeanAttributes<T> attributes) {
