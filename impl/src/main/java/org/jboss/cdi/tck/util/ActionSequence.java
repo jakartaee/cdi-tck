@@ -26,6 +26,8 @@ import java.util.Map;
 /**
  * Simple data holder for sequence of actions identified with {@link String}.
  * 
+ * Always call {@link #reset()} before your test code to remove previous sequences stored in static map!
+ * 
  * @author Martin Kouba
  */
 public final class ActionSequence {
