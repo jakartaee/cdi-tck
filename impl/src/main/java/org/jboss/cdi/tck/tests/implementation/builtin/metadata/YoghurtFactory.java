@@ -30,9 +30,9 @@ import javax.enterprise.inject.spi.Bean;
 @SessionScoped
 public class YoghurtFactory implements Serializable {
 
-    private Bean<?> fruitYoghurtBean;
-    private Bean<?> probioticYoghurtBean;
-    private final List<Bean<?>> beans = new ArrayList<Bean<?>>();
+    private Bean<Yoghurt> fruitYoghurtBean;
+    private Bean<Yoghurt> probioticYoghurtBean;
+    private final List<Bean<?>> disposedBeans = new ArrayList<Bean<?>>();
 
     @Produces
     @Fruit
@@ -48,8 +48,8 @@ public class YoghurtFactory implements Serializable {
         return new Yoghurt();
     }
 
-    public void dispose(@Disposes @Any Yoghurt yoghurt, Bean<?> bean) {
-        beans.add(bean);
+    public void dispose(@Disposes @Any Yoghurt yoghurt, Bean<Yoghurt> bean) {
+        disposedBeans.add(bean);
     }
 
     public Bean<?> getFruitYoghurtBean() {
@@ -60,7 +60,7 @@ public class YoghurtFactory implements Serializable {
         return probioticYoghurtBean;
     }
 
-    public List<Bean<?>> getBeans() {
-        return beans;
+    public List<Bean<?>> getDisposedBeans() {
+        return disposedBeans;
     }
 }

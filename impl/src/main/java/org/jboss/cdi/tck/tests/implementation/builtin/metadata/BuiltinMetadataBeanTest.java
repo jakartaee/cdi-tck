@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata;
 
-import static org.jboss.cdi.tck.TestGroups.PASSIVATION;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNull;
 
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -79,7 +77,8 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.8", id = "a"), @SpecAssertion(section = "5.5.8", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = "5.5.8", id = "a"), @SpecAssertion(section = "5.5.8", id = "n"),
+            @SpecAssertion(section = "5.5.8", id = "f") })
     public void testProducerAndDisposerMethodMetadata() {
         Bean<Yoghurt> fruitYoghurtBean = getUniqueBean(Yoghurt.class, new Fruit.Literal());
         CreationalContext<Yoghurt> fruitCtx = getCurrentManager().createCreationalContext(fruitYoghurtBean);
@@ -94,9 +93,9 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
         // Now verify the disposer method
         fruitYoghurtBean.destroy(fruitYoghurt, fruitCtx);
         probioticYoghurtBean.destroy(probioticYoghurt, probioticCtx);
-        assertEquals(factory.getBeans().size(), 2);
-        assertEquals(fruitYoghurtBean, factory.getBeans().get(0));
-        assertEquals(probioticYoghurtBean, factory.getBeans().get(1));
+        assertEquals(factory.getDisposedBeans().size(), 2);
+        assertEquals(fruitYoghurtBean, factory.getDisposedBeans().get(0));
+        assertEquals(probioticYoghurtBean, factory.getDisposedBeans().get(1));
     }
 
     @Test
@@ -125,17 +124,4 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
         assertEquals(bean, instance.getDecoratedBean());
     }
 
-    @Test(groups = { PASSIVATION })
-    @SpecAssertions({ @SpecAssertion(section = "5.5.8", id = "g"), @SpecAssertion(section = "5.5.8", id = "f") })
-    public void testIllegalInjectionDetected() {
-        assertNull(getReference(Bean.class));
-        assertNull(getReference(Interceptor.class));
-        assertNull(getReference(Decorator.class));
-    }
-
-    private Object getReference(Class<?> type) {
-        Bean<?> bean = getCurrentManager().resolve(getCurrentManager().getBeans(type));
-        CreationalContext<?> ctx = getCurrentManager().createCreationalContext(bean);
-        return getCurrentManager().getReference(bean, type, ctx);
-    }
 }
