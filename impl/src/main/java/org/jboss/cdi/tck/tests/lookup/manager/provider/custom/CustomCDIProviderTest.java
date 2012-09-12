@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.lookup.manager.provider.custom;
 
-import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.inject.spi.CDI;
@@ -45,12 +44,11 @@ public class CustomCDIProviderTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "11.3.1", id = "ba")
     public void testCustomCDIProvider() {
-        CDI.setCDIProvider(new DummyCDIProvider());
-        CDI<Object> currentContainer = CDI.current();
-        assertTrue(currentContainer instanceof DummyCDI);
-        assertNull(currentContainer.get());
-        assertTrue(currentContainer.isAmbiguous());
-        assertTrue(currentContainer.isUnsatisfied());
+        ForwardingCDIProvider.reset();
+        CDI<Object> discovered = CDI.current();
+        CDI.setCDIProvider(new ForwardingCDIProvider(discovered));
+        CDI.current();
+        assertTrue(ForwardingCDIProvider.isCalled);
     }
 
 }

@@ -26,11 +26,24 @@ import javax.enterprise.inject.spi.CDIProvider;
  * 
  */
 @Veto
-public class DummyCDIProvider implements CDIProvider {
+public class ForwardingCDIProvider implements CDIProvider {
+
+    public static boolean isCalled = false;
+
+    private CDI<Object> cdi;
+
+    public ForwardingCDIProvider(CDI<Object> discoveredCdi) {
+        cdi = discoveredCdi;
+    }
 
     @Override
     public CDI<Object> getCDI() {
-        return new DummyCDI();
+        isCalled = true;
+        return cdi;
+    }
+
+    public static void reset() {
+        isCalled = false;
     }
 
 }
