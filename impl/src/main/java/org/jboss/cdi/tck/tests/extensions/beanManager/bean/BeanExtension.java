@@ -51,13 +51,13 @@ public class BeanExtension implements Extension {
         AnnotatedType<Office> oat = manager.createAnnotatedType(Office.class);
         BeanAttributes<Office> oa = manager.createBeanAttributes(oat);
         InjectionTarget<Office> oit = manager.createInjectionTarget(oat);
-        Bean<?> bean = manager.createBean(oa, Office.class, oit);
+        Bean<Office> bean = manager.createBean(oa, Office.class, oit);
         event.addBean(bean);
         // create a serializable synthetic class bean
         AnnotatedType<SerializableOffice> soat = manager.createAnnotatedType(SerializableOffice.class);
         BeanAttributes<SerializableOffice> soa = manager.createBeanAttributes(soat);
         InjectionTarget<SerializableOffice> soit = manager.createInjectionTarget(soat);
-        Bean<?> serializableBean = manager.createBean(soa, SerializableOffice.class, soit);
+        Bean<SerializableOffice> serializableBean = manager.createBean(soa, SerializableOffice.class, soit);
         event.addBean(serializableBean);
         // create a synthetic decorator
         AnnotatedType<VehicleDecorator> doat = manager.createAnnotatedType(VehicleDecorator.class);
@@ -82,7 +82,7 @@ public class BeanExtension implements Extension {
         BeanAttributes<Lion> attributes = (BeanAttributes<Lion>) starveOut(manager.createBeanAttributes(zoo.getFields()
                 .iterator().next()));
         Producer<Lion> producer = event.getProducer();
-        hungryLion = (Bean<Lion>) manager.createBean(attributes, Zoo.class, producer);
+        hungryLion = manager.createBean(attributes, Zoo.class, producer);
     }
 
     @SuppressWarnings("unchecked")
@@ -97,7 +97,7 @@ public class BeanExtension implements Extension {
         assertNotNull(method);
         BeanAttributes<Tiger> attributes = (BeanAttributes<Tiger>) starveOut(manager.createBeanAttributes(method));
         Producer<Tiger> producer = event.getProducer();
-        hungryTiger = (Bean<Tiger>) manager.createBean(attributes, Zoo.class, producer);
+        hungryTiger = manager.createBean(attributes, Zoo.class, producer);
     }
 
     private <T> BeanAttributes<T> starveOut(final BeanAttributes<T> attributes) {
