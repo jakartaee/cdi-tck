@@ -63,9 +63,7 @@ public class EagerSingletonPostConstructCallbackTest extends AbstractTest {
         TextPage page = client.getPage(contextPath + "eager");
         // Context was active
         assertTrue(page.getContent().contains("Active:true"));
-        // Singleton and the current request
-        assertTrue(page.getContent().contains("Initialized requests:2"));
-        // Singleton, current request not destroyed yet
+        // Only singleton callback, current request not destroyed yet
         assertTrue(page.getContent().contains("Destroyed requests:1"));
     }
 

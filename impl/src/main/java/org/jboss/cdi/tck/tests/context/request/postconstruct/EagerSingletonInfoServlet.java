@@ -48,8 +48,6 @@ public class EagerSingletonInfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().append("Active:" + eagerSingleton.isRequestContextActiveDuringPostConstruct());
         resp.getWriter().append("\n");
-        resp.getWriter().append("Initialized requests:" + observer.getInitializations().get());
-        resp.getWriter().append("\n");
         resp.getWriter().append("Destroyed requests:" + observer.getDestructions().get());
         resp.setContentType("text/plain");
     }

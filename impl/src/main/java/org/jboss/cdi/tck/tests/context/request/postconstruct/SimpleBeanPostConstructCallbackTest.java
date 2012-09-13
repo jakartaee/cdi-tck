@@ -62,8 +62,6 @@ public class SimpleBeanPostConstructCallbackTest extends AbstractTest {
         TextPage page = client.getPage(contextPath + "simple");
         // Context was active
         assertTrue(page.getContent().contains("Active:true"));
-        // The current request
-        assertTrue(page.getContent().contains("Initialized requests:1"));
         // Not destroyed yet
         assertTrue(page.getContent().contains("Destroyed requests:0"));
     }

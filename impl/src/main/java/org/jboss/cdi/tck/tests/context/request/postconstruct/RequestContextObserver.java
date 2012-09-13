@@ -20,14 +20,6 @@ package org.jboss.cdi.tck.tests.context.request.postconstruct;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Destroyed;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
-import javax.servlet.ServletRequestEvent;
-import javax.servlet.http.HttpServletRequest;
-
-import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba
@@ -36,20 +28,8 @@ import org.jboss.cdi.tck.util.SimpleLogger;
 @ApplicationScoped
 public class RequestContextObserver {
 
-    private SimpleLogger logger = new SimpleLogger(RequestContextObserver.class);
-
     private AtomicInteger initializations = new AtomicInteger();
     private AtomicInteger destructions = new AtomicInteger();
-
-    public void observerRequestContextInitialized(@Observes @Initialized(RequestScoped.class) ServletRequestEvent event) {
-        log("Initialized", event);
-        initializations.incrementAndGet();
-    }
-
-    public void observerRequestContextDestroyed(@Observes @Destroyed(RequestScoped.class) ServletRequestEvent event) {
-        log("Destroyed", event);
-        destructions.incrementAndGet();
-    }
 
     public AtomicInteger getInitializations() {
         return initializations;
@@ -59,9 +39,12 @@ public class RequestContextObserver {
         return destructions;
     }
 
-    private void log(String action, ServletRequestEvent event) {
-        HttpServletRequest request = (HttpServletRequest) event.getServletRequest();
-        logger.log(action + ": " + request.getRequestURI() + "/" + request.getQueryString());
+    public void recordInit() {
+        initializations.incrementAndGet();
+    }
+
+    public void recordDestroy() {
+        destructions.incrementAndGet();
     }
 
 }

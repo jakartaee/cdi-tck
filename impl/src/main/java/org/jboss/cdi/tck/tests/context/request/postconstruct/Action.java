@@ -17,7 +17,9 @@
 
 package org.jboss.cdi.tck.tests.context.request.postconstruct;
 
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 /**
  * @author Martin Kouba
@@ -26,8 +28,16 @@ import javax.enterprise.context.RequestScoped;
 @RequestScoped
 public class Action {
 
+    @Inject
+    RequestContextObserver observer;
+
     public boolean ping() {
         return true;
+    }
+
+    @PreDestroy
+    public void destroy() {
+        observer.recordDestroy();
     }
 
 }
