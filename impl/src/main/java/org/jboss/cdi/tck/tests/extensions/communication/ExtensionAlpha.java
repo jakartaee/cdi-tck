@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.communication;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
@@ -29,6 +30,10 @@ import org.jboss.cdi.tck.util.ActionSequence;
  * 
  */
 public class ExtensionAlpha implements Extension {
+
+    public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event) {
+        ActionSequence.reset();
+    }
 
     public void observeProcessAnnotatedType(@Observes ProcessAnnotatedType<?> event, BeanManager beanManager) {
         beanManager.fireEvent(new PatEvent(event.getAnnotatedType().getJavaClass()));

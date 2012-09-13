@@ -53,8 +53,6 @@ public class ExtensionsCommunicationTest extends AbstractTest {
     @SpecAssertion(section = "11.5", id = "bc")
     public void testEvents() {
 
-        ActionSequence.reset();
-
         // Fired by alpha, recorder by beta
         ActionSequence patSeq = ActionSequence.getSequence(EventBase.PAT_SEQ);
         assertNotNull(patSeq);
