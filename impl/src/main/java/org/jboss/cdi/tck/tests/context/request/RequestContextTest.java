@@ -29,6 +29,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -75,7 +76,7 @@ public class RequestContextTest extends AbstractTest {
 
     /**
      * The request context is destroyed at the end of the servlet request, after the service() method and all doFilter()
-     * methods, and all requestDestroyed() and onComplete() notifications return.
+     * methods, and all requestDestroyed() notifications return.
      */
     @Test(groups = { CONTEXTS, SERVLET })
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ba"), @SpecAssertion(section = "6.7.1", id = "bb"),
@@ -88,18 +89,19 @@ public class RequestContextTest extends AbstractTest {
         // First request - response content contains SimpleRequestBean id
         TextPage firstRequestResult = webClient.getPage(contextPath + "introspectRequest");
         assertNotNull(firstRequestResult.getContent());
-        assertNotEquals(Double.parseDouble(firstRequestResult.getContent()), 0);
         // Make a second request and make sure the same context is not there (compare SimpleRequestBean ids)
         TextPage secondRequestResult = webClient.getPage(contextPath + "introspectRequest");
         assertNotNull(secondRequestResult.getContent());
-        assertNotEquals(Double.parseDouble(secondRequestResult.getContent()),
-                Double.parseDouble(firstRequestResult.getContent()));
+        assertNotEquals(secondRequestResult.getContent().trim(), firstRequestResult.getContent().trim());
 
         // Make sure request context is destroyed after service(), doFilter(), requestDestroyed()
-        webClient.getPage(contextPath + "introspectRequest?guard=collect");
-        TextPage destroyRequestResult = webClient.getPage(contextPath + "introspectRequest?guard=verify");
+        webClient.getPage(contextPath + "introspectRequest?mode=collect");
+        ActionSequence correctSequence = new ActionSequence().add(IntrospectServlet.class.getName())
+                .add(IntrospectTestFilter.class.getName()).add(TestServletRequestListener.class.getName())
+                .add(ContextDestructionObserver.class.getName());
+        TextPage destroyRequestResult = webClient.getPage(contextPath + "introspectRequest?mode=verify");
         assertNotNull(destroyRequestResult.getContent());
-        assertEquals(destroyRequestResult.getContent(), "true");
+        assertEquals(destroyRequestResult.getContent(), correctSequence.toString());
     }
 
 }

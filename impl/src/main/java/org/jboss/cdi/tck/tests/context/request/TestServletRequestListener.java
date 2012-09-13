@@ -24,6 +24,7 @@ import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
 
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
@@ -40,17 +41,14 @@ public class TestServletRequestListener implements ServletRequestListener {
     @Inject
     private SimpleRequestBean simpleBean;
 
-    @Inject
-    private RequestContextGuard guard;
-
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
         logger.log("Request destroyed...");
         checkRequestContextActive();
 
-        String mode = sre.getServletRequest().getParameter("guard");
-        if (mode != null && mode.equals("collect")) {
-            guard.setServletRequestListenerCheckpoint(System.currentTimeMillis());
+        String mode = sre.getServletRequest().getParameter("mode");
+        if (IntrospectServlet.MODE_COLLECT.equals(mode)) {
+            ActionSequence.addAction(TestServletRequestListener.class.getName());
         }
     }
 

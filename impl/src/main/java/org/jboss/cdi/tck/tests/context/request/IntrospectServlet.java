@@ -25,34 +25,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.cdi.tck.util.SimpleLogger;
+import org.jboss.cdi.tck.util.ActionSequence;
 
 @WebServlet(name = "RequestIntrospector", urlPatterns = "/introspectRequest")
 public class IntrospectServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+    public static final String MODE_COLLECT = "collect";
 
-    private static final SimpleLogger logger = new SimpleLogger(IntrospectServlet.class);
+    public static final String MODE_VERIFY = "verify";
+
+    private static final long serialVersionUID = 1L;
 
     @Inject
     private SimpleRequestBean simpleBean;
-
-    @Inject
-    private RequestContextGuard guard;
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setContentType("text/text");
-        String mode = req.getParameter("guard");
+        String mode = req.getParameter("mode");
 
         if (mode == null) {
-            resp.getWriter().print(simpleBean.getId());
-        } else if (mode.equals("collect")) {
-            guard.setServletCheckpoint(System.currentTimeMillis());
-        } else if (mode.equals("verify")) {
-            logger.log("Verify guard: {0}", guard.isCheckpointSequenceOk());
-            resp.getWriter().print(guard.isCheckpointSequenceOk());
+            resp.getWriter().append(simpleBean.getId());
+        } else if (MODE_COLLECT.equals(mode)) {
+            ActionSequence.reset();
+            ActionSequence.addAction(IntrospectServlet.class.getName());
+        } else if (MODE_VERIFY.equals(mode)) {
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setContentType("text/plain");
+            resp.getWriter().write(ActionSequence.getSequence().toString());
         } else {
             throw new ServletException("Unknown guard mode");
         }

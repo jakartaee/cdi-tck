@@ -3918,6 +3918,12 @@
                 <text>Test the request scope is active during message delivery to any EJB message-driven bean.</text>
             </assertion>
         </group>
+        
+         <assertion id="e">
+            <text>The request scope is active during |@PostConstruct| callback of any bean.</text>
+        </assertion>
+        
+        
         <group>
             <text>The request context is destroyed at the end of the servlet request, after the |service()| method and all |doFilter()| methods, and all |requestDestroyed()| and |onComplete()| notifications return.</text>
             <assertion id="ba">
@@ -3957,6 +3963,10 @@
                 <text>Test the request context is destroyed after the message delivery completes.</text>
             </assertion>
         </group>
+        
+         <assertion id="f">
+            <text>The request context is destroyed after the after the @PostConstruct callback completes, if it did not already exist when the @PostConstruct callback occurred.</text>
+        </assertion>
 
         <group>
             <text>An event with qualifier |@Initialized(RequestScoped.class)| is fired when the request context is initialized and an event with qualifier |@Destroyed(RequestScoped.class)| when the request context is destroyed.</text>
@@ -4069,6 +4079,10 @@
                 <text>Test |@PreDestroy| method</text>
             </assertion>
         </group>
+        
+        <assertion id="h">
+            <text>The application scope is active during |@PostConstruct| callback of any bean.</text>
+        </assertion>
 
         <assertion id="e">
             <text>The application context is shared between all servlet requests, asynchronous observer method notifications, web service invocations, EJB remote method invocations, EJB asynchronous method invocations, EJB timeouts and message deliveries to message driven beans that execute within the same application.</text>

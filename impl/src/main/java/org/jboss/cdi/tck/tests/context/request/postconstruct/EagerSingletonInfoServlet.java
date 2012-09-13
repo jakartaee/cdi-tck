@@ -15,43 +15,43 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.deployment.shutdown;
+package org.jboss.cdi.tck.tests.context.request.postconstruct;
 
 import java.io.IOException;
 
+import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.cdi.tck.util.ActionSequence;
-
+/**
+ * @author Martin Kouba
+ * 
+ */
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/info")
-public class InfoServlet extends HttpServlet {
+@WebServlet("/eager")
+public class EagerSingletonInfoServlet extends HttpServlet {
+
+    @Inject
+    RequestContextObserver observer;
+
+    @Inject
+    BeanManager beanManager;
+
+    @Inject
+    EagerSingleton eagerSingleton;
 
     @Override
-    public void init() throws ServletException {
-        ActionSequence.reset();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        String action = request.getParameter("action");
-
-        if ("add".equals(action)) {
-            ActionSequence.addAction(request.getParameter("id"));
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.setContentType("text/plain");
-        } else if ("get".equals(action)) {
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.setContentType("text/plain");
-            response.getWriter().write(ActionSequence.getSequence().toString());
-        } else {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.getWriter().append("Active:" + eagerSingleton.isRequestContextActiveDuringPostConstruct());
+        resp.getWriter().append("\n");
+        resp.getWriter().append("Initialized requests:" + observer.getInitializations().get());
+        resp.getWriter().append("\n");
+        resp.getWriter().append("Destroyed requests:" + observer.getDestructions().get());
+        resp.setContentType("text/plain");
     }
 
 }

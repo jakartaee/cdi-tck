@@ -29,6 +29,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 @WebFilter(filterName = "DestroyTestFilter", urlPatterns = "/introspectRequest")
@@ -42,9 +43,6 @@ public class IntrospectTestFilter implements Filter {
     @Inject
     private SimpleRequestBean simpleBean;
 
-    @Inject
-    private RequestContextGuard guard;
-
     public void destroy() {
         beanManager = null;
     }
@@ -56,9 +54,9 @@ public class IntrospectTestFilter implements Filter {
         chain.doFilter(request, response);
         checkRequestContextActive();
 
-        String mode = request.getParameter("guard");
-        if (mode != null && mode.equals("collect")) {
-            guard.setFilterCheckpoint(System.currentTimeMillis());
+        String mode = request.getParameter("mode");
+        if (IntrospectServlet.MODE_COLLECT.equals(mode)) {
+            ActionSequence.addAction(IntrospectTestFilter.class.getName());
         }
     }
 
