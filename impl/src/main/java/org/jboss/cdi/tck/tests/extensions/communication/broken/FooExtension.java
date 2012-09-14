@@ -18,12 +18,9 @@
 package org.jboss.cdi.tck.tests.extensions.communication.broken;
 
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Annotated;
-import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessBean;
 
 /**
  * @author Martin Kouba
@@ -31,25 +28,15 @@ import javax.enterprise.inject.spi.ProcessBean;
  */
 public class FooExtension implements Extension {
 
-    public void observeProcessAnnotatedType(@Observes BeforeBeanDiscovery event, BeanManager beanManager) {
+    public void observeProcessAnnotatedType(@Observes BeforeBeanDiscovery bbd, BeanManager beanManager) {
 
-        ProcessBean<String> newEvent = new ProcessBean<String>() {
-
-            @Override
-            public Annotated getAnnotated() {
-                return null;
+        for (Object event : ContainerLifecycleEvents.CONTAINER_LIFECYCLE_EVENTS) {
+            try {
+                beanManager.fireEvent(event);
+                throw new IllegalStateException("Expected exception (IllegalArgumentException) not thrown");
+            } catch (IllegalArgumentException expected) {
             }
-
-            @Override
-            public Bean<String> getBean() {
-                return null;
-            }
-
-            @Override
-            public void addDefinitionError(Throwable t) {
-            }
-        };
-        beanManager.fireEvent(newEvent);
+        }
     }
 
 }

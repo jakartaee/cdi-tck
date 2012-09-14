@@ -19,10 +19,10 @@ package org.jboss.cdi.tck.tests.extensions.communication.broken;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -32,16 +32,18 @@ import org.testng.annotations.Test;
 
 /**
  * An extension is not allowed to fire an event with runtime type assignable to the type of a container lifecycle event. Tested
- * extension fires such event during ProcessAnnotatedType notification - thrown exception is treated as a definition error by
- * the container.
+ * extension fires such events during BeforeBeanDiscovery notification
  * 
  * @author Martin Kouba
+ * @author Jozef Hartinger
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ExtensionCannotFireContainerLifecycleEventTest extends AbstractTest {
 
-    @ShouldThrowException(DefinitionException.class)
+    @Inject
+    private BeanManager manager;
+
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ExtensionCannotFireContainerLifecycleEventTest.class)
@@ -51,7 +53,13 @@ public class ExtensionCannotFireContainerLifecycleEventTest extends AbstractTest
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = "11.3.10", id = "f")
     public void testFireContainerLifecycleEvent() {
-        // Test initialization is aborted by the container
+        for (Object event : ContainerLifecycleEvents.CONTAINER_LIFECYCLE_EVENTS) {
+            try {
+                beanManager.fireEvent(event);
+                throw new IllegalStateException("Expected exception (IllegalArgumentException) not thrown");
+            } catch (IllegalArgumentException expected) {
+            }
+        }
     }
 
 }
