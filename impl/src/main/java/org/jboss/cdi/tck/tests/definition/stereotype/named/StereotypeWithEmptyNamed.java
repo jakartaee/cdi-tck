@@ -14,13 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.definition.stereotype.defaultNamed;
+package org.jboss.cdi.tck.tests.definition.stereotype.named;
 
-/**
- * 
- * @author Martin Kouba
- */
-@StereotypeWithEmptyNamed
-public class RoeDeer {
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import javax.enterprise.inject.Stereotype;
+import javax.inject.Named;
+
+@Stereotype
+@Target({ TYPE })
+@Retention(RUNTIME)
+@Named
+public @interface StereotypeWithEmptyNamed {
 
 }

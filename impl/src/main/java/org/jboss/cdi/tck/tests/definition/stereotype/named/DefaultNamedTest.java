@@ -14,7 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.definition.stereotype.defaultNamed;
+package org.jboss.cdi.tck.tests.definition.stereotype.named;
+
+import static org.testng.Assert.assertEquals;
+
+import java.util.Set;
+
+import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -36,12 +42,16 @@ public class DefaultNamedTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "2.7", id = "a"), @SpecAssertion(section = "2.7.1.3", id = "aaa"),
             @SpecAssertion(section = "2.5.2", id = "e") })
-    public void testStereotypeWithEmptyNamed() {
-        assert getBeans(FallowDeer.class).size() == 1;
-        assert "fallowDeer".equals(getBeans(FallowDeer.class).iterator().next().getName());
-        assert getBeans(RoeDeer.class).size() == 1;
-        assert "roeDeer".equals(getBeans(RoeDeer.class).iterator().next().getName());
+    public void testStereotypeDeclaringNamed() {
 
+        Set<Bean<FallowDeer>> fallowBeans = getBeans(FallowDeer.class);
+        assertEquals(fallowBeans.size(), 1);
+        assertEquals(fallowBeans.iterator().next().getName(), "fallowDeer");
+
+        // The name is overriden by the bean
+        Set<Bean<RoeDeer>> roeBeans = getBeans(RoeDeer.class);
+        assertEquals(roeBeans.size(), 1);
+        assertEquals(roeBeans.iterator().next().getName(), "roe");
     }
 
 }
