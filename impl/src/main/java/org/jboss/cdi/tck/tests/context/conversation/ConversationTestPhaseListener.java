@@ -20,10 +20,10 @@ import javax.enterprise.context.ContextNotActiveException;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.CDI;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jboss.cdi.tck.impl.OldSPIBridge;
@@ -42,8 +42,7 @@ public class ConversationTestPhaseListener implements PhaseListener {
     @SuppressWarnings("deprecation")
     public void beforePhase(PhaseEvent event) {
 
-        BeanManager beanManager = (BeanManager) ((ServletContext) event.getFacesContext().getExternalContext().getContext())
-                .getAttribute(BeanManager.class.getName());
+        BeanManager beanManager = CDI.current().getBeanManager();
 
         if (event.getPhaseId().equals(PhaseId.APPLY_REQUEST_VALUES)) {
             try {
@@ -54,7 +53,7 @@ public class ConversationTestPhaseListener implements PhaseListener {
             }
         }
         if (event.getPhaseId().equals(PhaseId.RENDER_RESPONSE)) {
-            Conversation conversation = OldSPIBridge.getInstanceByType(beanManager, Conversation.class);
+            Conversation conversation = CDI.current().select(Conversation.class).get();
             HttpServletResponse response = (HttpServletResponse) event.getFacesContext().getExternalContext().getResponse();
             response.addHeader(AbstractConversationTest.CID_HEADER_NAME,
                     conversation.getId() == null ? " null" : conversation.getId());
