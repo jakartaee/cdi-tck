@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.communication.broken;
+package org.jboss.cdi.tck.tests.extensions.beanManager.broken.event;
 
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
@@ -60,7 +60,7 @@ public class ContainerLifecycleEvents {
     }
 
     public static final Collection<Object> CONTAINER_LIFECYCLE_EVENTS;
-    
+
     public static final BeforeBeanDiscovery BEFORE_BEAN_DISCOVERY = new BeforeBeanDiscovery() {
         @Override
         public void addStereotype(Class<? extends Annotation> stereotype, Annotation... stereotypeDef) {
@@ -322,10 +322,9 @@ public class ContainerLifecycleEvents {
             return null;
         }
     };
-    
+
     static {
         List<Object> values = new LinkedList<Object>();
-        values.add(BEFORE_BEAN_DISCOVERY);
         values.add(AFTER_BEAN_DISCOVERY);
         values.add(AFTER_DEPLOYMENT_VALIDATION);
         values.add(BEFORE_SHUTDOWN);
@@ -340,7 +339,8 @@ public class ContainerLifecycleEvents {
         values.add(PROCESS_SESSION_BEAN);
         values.add(PROCESS_PRODUCER_FIELD);
         values.add(PROCESS_PRODUCER_FIELD);
+        values.add(BEFORE_BEAN_DISCOVERY);
         CONTAINER_LIFECYCLE_EVENTS = Collections.unmodifiableList(values);
-        
+
     }
 }

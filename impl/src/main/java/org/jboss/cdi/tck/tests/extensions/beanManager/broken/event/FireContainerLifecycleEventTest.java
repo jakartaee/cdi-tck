@@ -15,12 +15,9 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.extensions.communication.broken;
+package org.jboss.cdi.tck.tests.extensions.beanManager.broken.event;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -32,21 +29,18 @@ import org.testng.annotations.Test;
 
 /**
  * An extension is not allowed to fire an event with runtime type assignable to the type of a container lifecycle event. Tested
- * extension fires such events during BeforeBeanDiscovery notification
+ * extension fires such events during BeforeBeanDiscovery notification.
  * 
  * @author Martin Kouba
  * @author Jozef Hartinger
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class ExtensionCannotFireContainerLifecycleEventTest extends AbstractTest {
-
-    @Inject
-    private BeanManager manager;
+public class FireContainerLifecycleEventTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ExtensionCannotFireContainerLifecycleEventTest.class)
+        return new WebArchiveBuilder().withTestClassPackage(FireContainerLifecycleEventTest.class)
                 .withExtension(FooExtension.class).build();
     }
 
@@ -55,7 +49,7 @@ public class ExtensionCannotFireContainerLifecycleEventTest extends AbstractTest
     public void testFireContainerLifecycleEvent() {
         for (Object event : ContainerLifecycleEvents.CONTAINER_LIFECYCLE_EVENTS) {
             try {
-                beanManager.fireEvent(event);
+                getCurrentManager().fireEvent(event);
                 throw new IllegalStateException("Expected exception (IllegalArgumentException) not thrown");
             } catch (IllegalArgumentException expected) {
             }

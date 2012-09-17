@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.extensions.communication.broken;
+package org.jboss.cdi.tck.tests.extensions.beanManager.broken.event;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.BeanManager;
@@ -24,7 +24,7 @@ import javax.enterprise.inject.spi.Extension;
 
 /**
  * @author Martin Kouba
- * 
+ * @author Jozef Hartinger
  */
 public class FooExtension implements Extension {
 
