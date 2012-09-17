@@ -6141,7 +6141,10 @@
                 <text>Test that the method |BeanManager.createProducer()| returns a container provided implementation of |Producer| for a given |AnnotatedField|.</text>
             </assertion>
             <assertion id="c">
-                <text>Test that the method |BeanManager.createProducer()| throws an |IllegalArgumentException| if there is a definition error associated with the producer method or field.</text>
+                <text>Test that the method |BeanManager.createProducer()| throws an |IllegalArgumentException| if there is a definition error associated with the producer method.</text>
+            </assertion>
+            <assertion id="d">
+                <text>Test that the method |BeanManager.createProducer()| throws an |IllegalArgumentException| if there is a definition error associated with the producer field.</text>
             </assertion>
         </group>
     </section>
