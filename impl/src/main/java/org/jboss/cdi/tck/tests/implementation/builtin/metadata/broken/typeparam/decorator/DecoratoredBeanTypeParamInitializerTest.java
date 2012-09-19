@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam;
+package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.decorator;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -23,6 +23,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Cream;
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Milk;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -33,17 +35,17 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class BuiltinInterceptorInvalidTypeParamInitializerTest extends AbstractTest {
+public class DecoratoredBeanTypeParamInitializerTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(BuiltinInterceptorInvalidTypeParamInitializerTest.class)
-                .withClasses(Cream.class, MilkInterceptorInitializer.class, MilkBinding.class).build();
+        return new WebArchiveBuilder().withTestClass(DecoratoredBeanTypeParamInitializerTest.class)
+                .withClasses(Cream.class, MilkDecoratedBeanInitializer.class, Milk.class).build();
     }
 
     @Test
-    @SpecAssertion(section = "5.5.8", id = "k")
+    @SpecAssertion(section = "5.5.8", id = "n")
     public void testDeploymentFails() {
     }
 

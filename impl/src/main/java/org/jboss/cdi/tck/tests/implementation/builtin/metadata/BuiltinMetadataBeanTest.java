@@ -77,7 +77,7 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.8", id = "a"), @SpecAssertion(section = "5.5.8", id = "n"),
+    @SpecAssertions({ @SpecAssertion(section = "5.5.8", id = "a"), @SpecAssertion(section = "5.5.8", id = "q"),
             @SpecAssertion(section = "5.5.8", id = "f") })
     public void testProducerAndDisposerMethodMetadata() {
         Bean<Yoghurt> fruitYoghurtBean = getUniqueBean(Yoghurt.class, new Fruit.Literal());

@@ -33,13 +33,13 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class BuiltinBeanInvalidTypeParamInitializerTest extends AbstractTest {
+public class BeanTypeParamConstructorTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(BuiltinBeanInvalidTypeParamInitializerTest.class)
-                .withClasses(Cream.class, YoghurtInitializer.class).build();
+        return new WebArchiveBuilder().withTestClass(BeanTypeParamConstructorTest.class)
+                .withClasses(Cream.class, YoghurtConstructor.class).build();
     }
 
     @Test

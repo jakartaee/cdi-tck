@@ -14,22 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam;
+package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.decorator;
 
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Cream;
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Milk;
 
-import javax.interceptor.InterceptorBinding;
+@Decorator
+public class MilkDecoratorInitializer implements Milk {
 
-@Target({ TYPE, METHOD })
-@Retention(RUNTIME)
-@Documented
-@InterceptorBinding
-public @interface MilkBinding {
+    @Inject
+    @Delegate
+    Milk milk;
+
+    @Inject
+    public void setDecorator(javax.enterprise.inject.spi.Decorator<Cream> decorator) {
+    }
+
+    @Override
+    public void ping() {
+        milk.ping();
+    }
 
 }

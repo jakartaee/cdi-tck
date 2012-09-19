@@ -3064,14 +3064,13 @@
             </assertion>
         </group>
 
-        <!-- CDI-42 -->
         <group>
             <text>Additionally, the container must provide beans allowing interceptors and decorators to obtain information about the beans they intercept and decorate. These beans are passivation capable dependencies, as defined in Section 6.6.2, "Passivation capable dependencies".</text>
             <assertion id="d">
-                <text>Bean with scope |@Dependent|, qualifier |@???| and type |Bean| can be injected into any decorator instance.</text>
+                <text>Bean with scope |@Dependent|, qualifier |@@Decorated| and type |Bean| can be injected into any decorator instance.</text>
             </assertion>
             <assertion id="e">
-                <text>Bean with scope |@Dependent|, qualifier |@???| and type |Bean| which can be injected into any interceptor instance.</text>
+                <text>Bean with scope |@Dependent|, qualifier |@Intercepted| and type |Bean| which can be injected into any interceptor instance.</text>
             </assertion>
         </group>
 
@@ -3088,28 +3087,31 @@
         </assertion>
 
         <group>
-            <text>The injection of bean metadata is restricted. If The injection point is a field, an initializer method parameter or a bean constructor then the type parameter of the injected |Bean|, |Interceptor| or |Decorator| must be the same as the type declaring the injection point.
-                If the injection point is a producer method parameter then the type parameter of the injected |Bean| must be the same as the producer method return type. If the injection point is a disposer method parameter then the type parameter of the injected Bean must be the same as the
-                disposed parameter. Otherwise, the container automatically detects the problem and treats it as a definition error.
-            </text>
+            <text>The injection of bean metadata is restricted.</text>
             <assertion id="j">
-                <text>Test invalid type parameter of the injected |Bean|.</text>
+                <text>If the injection point is a field, an initializer method parameter or a bean constructor, with qualifier |@Default| and type parameter of the injected |Bean| is not the same as the type declaring the injection point, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
             <assertion id="k">
-                <text>Test invalid type parameter of the injected |Interceptor|.</text>
+                <text>If the injection point is a field, an initializer method parameter or a bean constructor, with qualifier |@Default| and type parameter of the injected |Interceptor| is not the same as the type declaring the injection point, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
             <assertion id="l">
-                <text>Test invalid type parameter of the injected |Decorator|.</text>
+                <text>If the injection point is a field, an initializer method parameter or a bean constructor, with qualifier |@Default| and type parameter of the injected |Decorator| is not the same as the type declaring the injection point, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
             <assertion id="m">
-                <text>Test invalid type parameter of the injected |Bean| for a producer method parameter.</text>
+                <text>If the injection point is a field, an initializer method parameter or a bean constructor of an interceptor, with qualifier |@Intercepted| and the type parameter of the injected |Bean| is not an unbounded wildcard, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
             <assertion id="n">
-                <text>Test invalid type parameter of the injected |Bean| for a disposer method parameter.</text>
+                <text>If he injection point is a field, an initializer method parameter or a bean constructor of a decorator, with qualifier |@Decorated| and the type parameter of the injected |Bean| is not the same as the delegate type, the container automatically detects the problem and treats it as a definition error.</text>
+            </assertion>
+            <assertion id="o">
+                <text>If the injection point is a producer method parameter and the type parameter of the injected |Bean| is not the same as the producer method return type, the container automatically detects the problem and treats it as a definition error.</text>
+            </assertion>
+            <assertion id="p">
+                <text>If the injection point is a disposer method parameter and the type parameter of the injected |Bean| is not the same as the disposed parameter, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
         </group>
 
-        <assertion id="n">
+        <assertion id="q">
             <text>If a |Bean| instance is injected into a disposer method, it represents the producer method to which the disposer method is bound.</text>
         </assertion>
 
@@ -6625,7 +6627,7 @@
             <assertion id="aa">
                 <text>Test for classes and interfaces discovered in a bean archive.</text>
             </assertion>
-            <assertion id="aa">
+            <assertion id="ab">
                 <text>Test for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
             </assertion>
             <assertion id="ac">

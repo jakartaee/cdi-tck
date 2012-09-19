@@ -14,21 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam;
+package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.decorator;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
+import javax.enterprise.inject.Decorated;
+import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
 
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Cream;
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Milk;
+
 @Decorator
-public class MilkDecoratorConstructor implements Milk {
+public class MilkDecoratedBeanConstructor implements Milk {
 
     @Inject
     @Delegate
     Milk milk;
 
     @Inject
-    public MilkDecoratorConstructor(javax.enterprise.inject.spi.Decorator<Cream> decorator) {
+    public MilkDecoratedBeanConstructor(@Decorated Bean<Cream> bean) {
     }
 
     @Override

@@ -15,24 +15,28 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam;
+package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.interceptor;
 
-import javax.enterprise.inject.spi.Interceptor;
+import javax.enterprise.inject.Intercepted;
+import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
+
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Milk;
 
 /**
  * @author Martin Kouba
  * 
  */
-@MilkBinding
-@javax.interceptor.Interceptor
-public class MilkInterceptorField {
+@Binding
+@Interceptor
+public class InterceptedBeanInitializer {
 
-    @SuppressWarnings("unused")
     @Inject
-    private Interceptor<Cream> interceptor;
+    public void setInterceptor(@Intercepted Bean<? super Milk> bean) {
+    }
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {

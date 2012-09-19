@@ -33,17 +33,17 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class BuiltinInterceptorInvalidTypeParamFieldTest extends AbstractTest {
+public class BeanTypeParamDisposerTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(BuiltinInterceptorInvalidTypeParamFieldTest.class)
-                .withClasses(Cream.class, MilkInterceptorField.class, MilkBinding.class).build();
+        return new WebArchiveBuilder().withTestClass(BeanTypeParamDisposerTest.class)
+                .withClasses(Cream.class, Milk.class, MilkDisposer.class).build();
     }
 
     @Test
-    @SpecAssertion(section = "5.5.8", id = "k")
+    @SpecAssertion(section = "5.5.8", id = "p")
     public void testDeploymentFails() {
     }
 
