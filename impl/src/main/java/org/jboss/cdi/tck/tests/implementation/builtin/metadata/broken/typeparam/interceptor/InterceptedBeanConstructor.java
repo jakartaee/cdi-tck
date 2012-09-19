@@ -24,7 +24,7 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.Milk;
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Milk;
 
 /**
  * @author Martin Kouba
