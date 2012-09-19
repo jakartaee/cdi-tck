@@ -56,7 +56,7 @@ public class EnterpriseVetoedTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(EnterpriseVetoedTest.class)
                 .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class, ElephantLocal.class, Elephant.class,
-                        Leopard.class, ModifyingExtension.class, VerifyingExtension.class)
+                        ModifyingExtension.class, VerifyingExtension.class)
                 .withPackage(Piranha.class.getPackage()).withExtensions(ModifyingExtension.class, VerifyingExtension.class)
                 .withLibrary(Gecko.class).build();
     }
@@ -65,7 +65,7 @@ public class EnterpriseVetoedTest extends AbstractTest {
     VerifyingExtension verifyingExtension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h") })
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"), @SpecAssertion(section = "11.5.6", id = "ac") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
@@ -76,13 +76,6 @@ public class EnterpriseVetoedTest extends AbstractTest {
     public void testPackageLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
         assertEquals(getCurrentManager().getBeans(Piranha.class, AnyLiteral.INSTANCE).size(), 0);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "11.5.6", id = "ac") })
-    public void testReplacingAnnotatedTypeWithExtension() {
-        assertTrue(verifyingExtension.getClasses().contains(Leopard.class));
-        assertEquals(getCurrentManager().getBeans(Leopard.class, AnyLiteral.INSTANCE).size(), 1);
     }
 
     @Test

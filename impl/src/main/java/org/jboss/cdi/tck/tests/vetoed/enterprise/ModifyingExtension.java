@@ -16,22 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.vetoed.enterprise;
 
-import java.lang.annotation.Annotation;
-
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
-
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
 
 public class ModifyingExtension implements Extension {
-
-    public void observeLeopard(@Observes ProcessAnnotatedType<Leopard> event) {
-        // The original bean is vetoed but we provide an alternative metadata source
-        event.setAnnotatedType(new AnnotatedTypeWrapper<Leopard>(event.getAnnotatedType(), false, new Annotation[] {}));
-    }
 
     public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager beanManager) {
         event.addAnnotatedType(beanManager.createAnnotatedType(Gecko.class));
