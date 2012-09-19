@@ -712,6 +712,10 @@
             <text>A top-level Java class is not a managed bean if it implements |javax.enterprise.inject.spi.Extension|.</text>
         </assertion>
 
+        <assertion id="h">
+            <text>A top-level Java class is not a managed bean if it is annotated |@Vetoed|.</text>
+        </assertion>
+
         <assertion id="n">
             <text>A top-level Java class is not a managed bean if it is declared as an EJB bean class in |ejb-jar.xml|</text>
         </assertion>
@@ -811,8 +815,13 @@
     </section>
 
     <section id="3.2" title="Session beans">
-        <assertion id="aa" testable="false">
-            <text>A session bean is a bean that is implemented by a session bean with an EJB 3.x client view. The basic lifecycle and semantics of EJB session beans are defined by the EJB specification.</text>
+
+        <assertion id="aa">
+            <text>A session bean is a bean that is implemented by a session bean with an EJB 3.x client view that is not annotated with |@Vetoed|.</text>
+        </assertion>
+
+        <assertion id="ab" testable="false">
+            <text>The basic lifecycle and semantics of EJB session beans are defined by the EJB specification.</text>
             <note>This is a reference to the EJB specification</note>
         </assertion>
 
@@ -1573,14 +1582,10 @@
         </assertion>
     </section>
 
-    <section id="3.12" title="Vetoing beans">
+    <section id="3.12" title="Vetoing types">
 
         <assertion id="a">
-            <text>Any class or package may be prevented from providing bean definitions by adding the |@Veto| annotation on the class or package.</text>
-        </assertion>
-
-        <assertion id="b">
-            <text>Any class or package may be prevented from providing bean definitions based on the availability of other classes by adding the |@Requires| annotation on the class or package.</text>
+            <text>Any type or package may be prevented from being considered by CDI by adding the |@Vetoed| annotation on the type or package.</text>
         </assertion>
 
     </section>
@@ -3918,12 +3923,12 @@
                 <text>Test the request scope is active during message delivery to any EJB message-driven bean.</text>
             </assertion>
         </group>
-        
-         <assertion id="e">
+
+        <assertion id="e">
             <text>The request scope is active during |@PostConstruct| callback of any bean.</text>
         </assertion>
-        
-        
+
+
         <group>
             <text>The request context is destroyed at the end of the servlet request, after the |service()| method and all |doFilter()| methods, and all |requestDestroyed()| and |onComplete()| notifications return.</text>
             <assertion id="ba">
@@ -3963,8 +3968,8 @@
                 <text>Test the request context is destroyed after the message delivery completes.</text>
             </assertion>
         </group>
-        
-         <assertion id="f">
+
+        <assertion id="f">
             <text>The request context is destroyed after the after the @PostConstruct callback completes, if it did not already exist when the @PostConstruct callback occurred.</text>
         </assertion>
 
@@ -4079,7 +4084,7 @@
                 <text>Test |@PreDestroy| method</text>
             </assertion>
         </group>
-        
+
         <assertion id="h">
             <text>The application scope is active during |@PostConstruct| callback of any bean.</text>
         </assertion>
@@ -6616,12 +6621,18 @@
     <section id="11.5.6" title="ProcessAnnotatedType event">
 
         <group>
-            <text>The container must fire an event for each Java class or interface it discovers in a bean archive and for annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|, before it reads the declared annotations.. The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where |X| is the class, for classes and interfaces discovered in a bean archive, or of type |javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType&lt;X&gt;| for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
-            <assertion id="a">
+            <text>The container must fire an event for each Java class or interface it discovers in a bean archive and for annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|, except for those annotated with |@Vetoed|, before it reads the declared annotations.. The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where |X| is the class, for classes and interfaces discovered in a bean archive, or of type |javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType&lt;X&gt;| for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            <assertion id="aa">
                 <text>Test for classes and interfaces discovered in a bean archive.</text>
             </assertion>
             <assertion id="aa">
                 <text>Test for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>The event is not fired for classes and interfaces discovered in a bean archive and annotated with |@Vetoed|.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>The event is not fired for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()| and annotated with |@Vetoed|.</text>
             </assertion>
         </group>
 

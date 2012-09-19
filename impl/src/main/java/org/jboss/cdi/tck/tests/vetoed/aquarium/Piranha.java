@@ -14,11 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.veto.pen;
+package org.jboss.cdi.tck.tests.vetoed.aquarium;
 
-import javax.enterprise.inject.Requires;
-
-@Requires({ "java.lang.Double" })
-public class Giraffe {
+public class Piranha {
 
 }

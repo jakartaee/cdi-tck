@@ -14,10 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.veto;
+package org.jboss.cdi.tck.tests.vetoed.enterprise.aquarium;
 
-import javax.enterprise.inject.Vetoed;
+import javax.ejb.Stateless;
 
-@Vetoed
-public class Car {
+@Stateless
+public class Piranha {
+
 }

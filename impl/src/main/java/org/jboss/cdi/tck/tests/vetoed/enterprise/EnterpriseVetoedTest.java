@@ -14,10 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.veto;
+package org.jboss.cdi.tck.tests.vetoed.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import javax.inject.Inject;
@@ -28,9 +29,7 @@ import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
-import org.jboss.cdi.tck.tests.veto.aquarium.Piranha;
-import org.jboss.cdi.tck.tests.veto.pen.Giraffe;
-import org.jboss.cdi.tck.tests.veto.pen.Rhino;
+import org.jboss.cdi.tck.tests.vetoed.enterprise.aquarium.Piranha;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -39,7 +38,7 @@ import org.testng.annotations.Test;
 
 /**
  * <p>
- * This test was originally part of Weld test suite.
+ * This test was originally part of the Weld test suite.
  * <p>
  * 
  * Temporarily marked as integration tests - see SHRINKWRAP-369.
@@ -49,56 +48,47 @@ import org.testng.annotations.Test;
  */
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
-public class VetoTest extends AbstractTest {
+public class EnterpriseVetoedTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(VetoTest.class)
-                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class)
-                .withExtensions(ModifyingExtension.class, VerifyingExtension.class).build()
-                .addPackage(Piranha.class.getPackage()).addPackage(Giraffe.class.getPackage());
+        return new WebArchiveBuilder()
+                .withTestClass(EnterpriseVetoedTest.class)
+                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class, ElephantLocal.class, Elephant.class,
+                        Leopard.class, ModifyingExtension.class, VerifyingExtension.class)
+                .withPackage(Piranha.class.getPackage()).withExtensions(ModifyingExtension.class, VerifyingExtension.class)
+                .withLibrary(Gecko.class).build();
     }
 
     @Inject
-    private VerifyingExtension verifyingExtension;
+    VerifyingExtension verifyingExtension;
 
     @Test
-    @SpecAssertion(section = "3.12", id = "a")
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h") })
     public void testClassLevelVeto() {
-        assertTrue(verifyingExtension.getClasses().contains(Elephant.class));
+        assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
     }
 
     @Test
-    @SpecAssertion(section = "3.12", id = "a")
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h") })
     public void testPackageLevelVeto() {
-        assertTrue(verifyingExtension.getClasses().contains(Piranha.class));
+        assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
         assertEquals(getCurrentManager().getBeans(Piranha.class, AnyLiteral.INSTANCE).size(), 0);
     }
 
     @Test
-    @SpecAssertion(section = "3.12", id = "b")
-    public void testClassLevelRequirements() {
-        assertTrue(verifyingExtension.getClasses().contains(Lion.class));
-        assertTrue(verifyingExtension.getClasses().contains(Tiger.class));
-        assertEquals(getCurrentManager().getBeans(Lion.class, AnyLiteral.INSTANCE).size(), 1);
-        assertEquals(getCurrentManager().getBeans(Tiger.class, AnyLiteral.INSTANCE).size(), 0);
-    }
-
-    @Test
-    @SpecAssertion(section = "3.12", id = "b")
-    public void testPackageLevelRequirements() {
-        assertTrue(verifyingExtension.getClasses().contains(Rhino.class));
-        assertTrue(verifyingExtension.getClasses().contains(Giraffe.class));
-        assertEquals(getCurrentManager().getBeans(Rhino.class, AnyLiteral.INSTANCE).size(), 0);
-        assertEquals(getCurrentManager().getBeans(Giraffe.class, AnyLiteral.INSTANCE).size(), 0);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.12", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "11.5.6", id = "ac") })
     public void testReplacingAnnotatedTypeWithExtension() {
         assertTrue(verifyingExtension.getClasses().contains(Leopard.class));
         assertEquals(getCurrentManager().getBeans(Leopard.class, AnyLiteral.INSTANCE).size(), 1);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "11.5.6", id = "ad") })
+    public void testAnnotatedTypeAddedByExtension() {
+        assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
+        assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);
     }
 }

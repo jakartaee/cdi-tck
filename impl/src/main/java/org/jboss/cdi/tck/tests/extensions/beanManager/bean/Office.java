@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.enterprise.inject.Veto;
+import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
 
-@Veto
+@Vetoed
 @Large
 public class Office implements Building<String> {
 

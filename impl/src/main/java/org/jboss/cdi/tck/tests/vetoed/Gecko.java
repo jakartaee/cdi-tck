@@ -14,8 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.veto.pen;
+package org.jboss.cdi.tck.tests.vetoed;
 
-public class Rhino {
+import javax.enterprise.inject.Vetoed;
+
+/**
+ * 
+ */
+@Vetoed
+public class Gecko {
 
 }

@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.manager.provider.custom;
 
-import javax.enterprise.inject.Veto;
+import javax.enterprise.inject.Vetoed;
 import javax.enterprise.inject.spi.CDI;
 import javax.enterprise.inject.spi.CDIProvider;
 
@@ -25,7 +25,7 @@ import javax.enterprise.inject.spi.CDIProvider;
  * @author Martin Kouba
  * 
  */
-@Veto
+@Vetoed
 public class ForwardingCDIProvider implements CDIProvider {
 
     public static boolean isCalled = false;

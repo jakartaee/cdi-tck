@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.context.dependent.instance;
 
-import javax.enterprise.inject.Veto;
+import javax.enterprise.inject.Vetoed;
 
-@Veto
+@Vetoed
 public class GoodEvent {
 
 }

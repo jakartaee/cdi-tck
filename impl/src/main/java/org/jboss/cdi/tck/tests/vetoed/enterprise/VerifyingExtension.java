@@ -14,11 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.veto;
+package org.jboss.cdi.tck.tests.vetoed.enterprise;
 
-import javax.enterprise.inject.Veto;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
-@Veto
-public class Elephant {
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.Extension;
+import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
+public class VerifyingExtension implements Extension {
+
+    private final Set<Class<?>> classes = new HashSet<Class<?>>();
+
+    public void observeAnnotatedType(@Observes ProcessAnnotatedType<?> event) {
+        classes.add(event.getAnnotatedType().getJavaClass());
+    }
+
+    public Set<Class<?>> getClasses() {
+        return Collections.unmodifiableSet(classes);
+    }
 }

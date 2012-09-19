@@ -14,25 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.veto;
+package org.jboss.cdi.tck.tests.vetoed;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.annotation.Annotation;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
-public class VerifyingExtension implements Extension {
+import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
 
-    private final Set<Class<?>> classes = new HashSet<Class<?>>();
+public class ModifyingExtension implements Extension {
 
-    public void observeAnnotatedType(@Observes ProcessAnnotatedType<?> event) {
-        classes.add(event.getAnnotatedType().getJavaClass());
+    public void observeLeopard(@Observes ProcessAnnotatedType<Leopard> event) {
+        // The original bean is vetoed but we provide an alternative metadata source
+        event.setAnnotatedType(new AnnotatedTypeWrapper<Leopard>(event.getAnnotatedType(), false, new Annotation[] {}));
     }
 
-    public Set<Class<?>> getClasses() {
-        return Collections.unmodifiableSet(classes);
+    public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager beanManager) {
+        event.addAnnotatedType(beanManager.createAnnotatedType(Gecko.class));
+        event.addAnnotatedType(beanManager.createAnnotatedType(Reptile.class));
     }
 }

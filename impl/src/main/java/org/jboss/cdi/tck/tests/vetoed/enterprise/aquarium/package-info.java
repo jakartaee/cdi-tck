@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Requires({ "java.lang.Object", "non.existing.class" })
-package org.jboss.cdi.tck.tests.veto.pen;
+@Vetoed
+package org.jboss.cdi.tck.tests.vetoed.enterprise.aquarium;
 
-import javax.enterprise.inject.Requires;
+import javax.enterprise.inject.Vetoed;
 

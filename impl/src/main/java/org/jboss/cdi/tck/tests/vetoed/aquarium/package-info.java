@@ -16,8 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Veto
-package org.jboss.cdi.tck.tests.veto.aquarium;
+@Vetoed
+package org.jboss.cdi.tck.tests.vetoed.aquarium;
 
-import javax.enterprise.inject.Veto;
+import javax.enterprise.inject.Vetoed;
 

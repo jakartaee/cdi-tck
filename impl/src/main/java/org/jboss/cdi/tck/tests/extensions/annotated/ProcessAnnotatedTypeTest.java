@@ -43,7 +43,7 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "a"), @SpecAssertion(section = "12.4", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aa"), @SpecAssertion(section = "12.4", id = "ba") })
     public void testProcessAnnotatedTypeEventsSent() {
         // Randomly test some of the classes and interfaces that should have
         // been discovered and sent via the event

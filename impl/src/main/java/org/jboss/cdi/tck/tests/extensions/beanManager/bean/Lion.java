@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 
-import javax.enterprise.inject.Veto;
+import javax.enterprise.inject.Vetoed;
 
-@Veto
+@Vetoed
 public class Lion {
 
     public void foo() {

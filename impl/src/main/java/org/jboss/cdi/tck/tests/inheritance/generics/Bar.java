@@ -20,13 +20,13 @@ package org.jboss.cdi.tck.tests.inheritance.generics;
 import java.util.List;
 
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Veto;
+import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
 
 /**
  * 
  */
-@Veto
+@Vetoed
 public class Bar<T1, T2> {
 
     @Inject

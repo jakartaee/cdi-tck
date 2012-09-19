@@ -14,11 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.veto;
+package org.jboss.cdi.tck.tests.vetoed;
 
-import javax.enterprise.inject.Requires;
+import javax.enterprise.inject.Vetoed;
 
-@Requires({ "java.lang.Exception", "non.existing.class" })
-public class Tiger {
+/**
+ * Modified by an extension not to contain the {@link Vetoed} annotation.
+ * 
+ * @author Jozef Hartinger
+ * 
+ */
+@Vetoed
+public class Leopard {
 
 }

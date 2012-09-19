@@ -14,20 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.veto;
+package org.jboss.cdi.tck.tests.vetoed;
 
-import java.lang.annotation.Annotation;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
+public class VerifyingExtension implements Extension {
 
-public class ModifyingExtension implements Extension {
+    private final Set<Class<?>> classes = new HashSet<Class<?>>();
 
-    public void observeLeopard(@Observes ProcessAnnotatedType<Leopard> event) {
-        // The original bean is vetoed but we provide an alternative metadata source
-        event.setAnnotatedType(new AnnotatedTypeWrapper<Leopard>(event.getAnnotatedType(), false, new Annotation[] {}));
+    public void observeAnnotatedType(@Observes ProcessAnnotatedType<?> event) {
+        classes.add(event.getAnnotatedType().getJavaClass());
+    }
+
+    public Set<Class<?>> getClasses() {
+        return Collections.unmodifiableSet(classes);
     }
 }

@@ -14,8 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.veto.aquarium;
+package org.jboss.cdi.tck.tests.vetoed.enterprise;
 
-public class Piranha {
+import javax.ejb.Stateful;
+import javax.enterprise.inject.Vetoed;
+
+/**
+ * Modified by an extension not to contain the {@link Vetoed} annotation.
+ * 
+ * @author Jozef Hartinger
+ * 
+ */
+@Vetoed
+@Stateful
+public class Leopard {
 
 }

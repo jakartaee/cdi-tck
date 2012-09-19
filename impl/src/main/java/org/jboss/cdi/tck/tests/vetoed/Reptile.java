@@ -14,36 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.producer;
 
-import static org.testng.Assert.assertNotNull;
+package org.jboss.cdi.tck.tests.vetoed;
 
 import javax.enterprise.inject.Vetoed;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
 
 @Vetoed
-public class Factory {
+public interface Reptile {
 
-    public static final Toy WOODY = new Toy("Woody");
-
-    public static final SpaceSuit<?> INVALID_FIELD1 = new SpaceSuit<Object>();
-    @Inject
-    public static final Toy INVALID_FIELD2 = null;
-
-    public final Object INVALID_FIELD3 = null;
-
-    public static Toy getBuzz(BeanManager manager, SpaceSuit<Toy> suit) {
-        assertNotNull(manager);
-        assertNotNull(suit);
-        return new Toy("Buzz Lightyear");
-    }
-
-    public static <T> T invalidProducerMethod1(T t) {
-        return null;
-    }
-
-    public Toy invalidProducerMethod2() {
-        return new Toy("nonStaticNonBean");
-    }
 }

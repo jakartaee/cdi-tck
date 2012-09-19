@@ -68,7 +68,7 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "ab") })
     public void testEventsFired() {
         Set<Class<?>> patClasses = verifyingExtension.getPatClasses();
         Set<Class<?>> psatClasses = verifyingExtension.getPsatClasses();

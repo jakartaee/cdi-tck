@@ -19,10 +19,10 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Veto;
+import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
 
-@Veto
+@Vetoed
 @Decorator
 public class VehicleDecorator implements Vehicle {
 
@@ -30,7 +30,7 @@ public class VehicleDecorator implements Vehicle {
     @Any
     @Delegate
     private Vehicle delegate;
-    
+
     public boolean decorated() {
         return true;
     }
