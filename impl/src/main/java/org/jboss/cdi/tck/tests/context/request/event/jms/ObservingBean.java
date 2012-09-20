@@ -30,14 +30,13 @@ public class ObservingBean {
     private final AtomicInteger initializedRequestCount = new AtomicInteger();
     private final AtomicInteger destroyedRequestCount = new AtomicInteger();
 
-    public void observeRequestInitialized(@Observes @Initialized(RequestScoped.class) Object event) {
+    public <T extends Object> void observeRequestInitialized(@Observes @Initialized(RequestScoped.class) T event) {
         initializedRequestCount.incrementAndGet();
     }
 
-    public void observeRequestDestroyed(@Observes @Destroyed(RequestScoped.class) Object event) {
+    public <T extends Object> void observeRequestDestroyed(@Observes @Destroyed(RequestScoped.class) T event) {
         destroyedRequestCount.incrementAndGet();
     }
-
     public AtomicInteger getInitializedRequestCount() {
         return initializedRequestCount;
     }
