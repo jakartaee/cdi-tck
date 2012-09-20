@@ -3983,9 +3983,17 @@
             <assertion id="jb">
                 <text>The event payload is the |ServletRequestEvent| if the context is initialized or destroyed due to a web service invocation.</text>
             </assertion>
-            <assertion id="jc" testable="false">
-                <text>The event payload is the |???| if the context is initialized or destroyed due to a EJB remote method invocation, asynchronous method invocation, timeout or message delivery.</text>
-                <note>Specification not finished yet</note>
+            <assertion id="jc">
+                <text>The event payload is the |java.lang.Object| if the context is initialized or destroyed due to a EJB remote method invocation.</text>
+            </assertion>
+            <assertion id="jd">
+                <text>The event payload is the |java.lang.Object| if the context is initialized or destroyed due to a EJB asynchronous method invocation.</text>
+            </assertion>
+            <assertion id="je">
+                <text>The event payload is the |java.lang.Object| if the context is initialized or destroyed due to a EJB timeout method invocation.</text>
+            </assertion>
+            <assertion id="jf">
+                <text>The event payload is the |java.lang.Object| if the context is initialized or destroyed due to a message delivery to any EJB message-driven bean.</text>
             </assertion>
         </group>
 
