@@ -21,7 +21,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class GraultExtendsDecorator {
+public class GraultExtendsDecorator implements DecoratedType {
 
     @Inject
     @Delegate

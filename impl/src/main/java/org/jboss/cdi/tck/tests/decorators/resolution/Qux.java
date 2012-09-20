@@ -16,6 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.resolution;
 
-public interface Qux<T> {
+public interface Qux<T> extends DecoratedType {
 
 }

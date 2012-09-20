@@ -16,6 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.resolution;
 
-public interface Baz<T> {
+public interface Baz<T> extends DecoratedType {
 
 }

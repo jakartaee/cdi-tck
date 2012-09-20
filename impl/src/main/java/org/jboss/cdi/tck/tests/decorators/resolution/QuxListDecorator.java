@@ -23,7 +23,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class QuxListDecorator {
+public class QuxListDecorator implements DecoratedType {
 
     @Inject
     @Delegate

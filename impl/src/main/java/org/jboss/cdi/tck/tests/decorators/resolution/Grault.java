@@ -16,6 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.resolution;
 
-public interface Grault<T> {
+public interface Grault<T> extends DecoratedType {
 
 }

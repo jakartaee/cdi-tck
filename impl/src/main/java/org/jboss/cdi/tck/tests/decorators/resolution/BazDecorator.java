@@ -21,7 +21,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class BazDecorator {
+public class BazDecorator implements DecoratedType {
 
     @Inject
     @Delegate

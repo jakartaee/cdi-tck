@@ -21,7 +21,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class GarplyDecorator<T extends Animal> {
+public class GarplyDecorator<T extends Animal> implements DecoratedType {
 
     @Inject
     @Delegate

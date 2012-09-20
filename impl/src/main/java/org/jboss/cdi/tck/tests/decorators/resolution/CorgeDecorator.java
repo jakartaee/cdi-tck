@@ -21,7 +21,7 @@ import javax.decorator.Delegate;
 import javax.inject.Inject;
 
 @Decorator
-public class CorgeDecorator {
+public class CorgeDecorator implements DecoratedType {
 
     @Inject
     @Delegate

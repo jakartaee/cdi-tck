@@ -16,6 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.resolution;
 
-public interface Corge<T, S> {
+public interface Corge<T, S> extends DecoratedType {
 
 }

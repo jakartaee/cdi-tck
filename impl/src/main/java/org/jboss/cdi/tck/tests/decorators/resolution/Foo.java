@@ -16,6 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.resolution;
 
-public interface Foo<T> {
+public interface Foo<T> extends DecoratedType {
 
 }
