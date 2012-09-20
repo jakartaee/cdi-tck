@@ -4637,12 +4637,16 @@
         <assertion id="d">
             <text>The decorator class may be abstract.</text>
         </assertion>
-
+        
         <assertion id="e">
-            <text>Decorators of a session bean must comply with the bean provider programming restrictions defined by the EJB specification.</text>
+            <text>If the set of decorated types of a decorator is empty, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
         <assertion id="f">
+            <text>Decorators of a session bean must comply with the bean provider programming restrictions defined by the EJB specification.</text>
+        </assertion>
+
+        <assertion id="g">
             <text>Decorators of a stateful session bean must comply with the rules for instance passivation and conversational state defined by the EJB specification.</text>
         </assertion>
     </section>
