@@ -4845,16 +4845,22 @@
     </section>
 
     <section id="8.4" title="Decorator invocation">
-        <assertion id="a">
-            <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and, after processing all interceptors of the method, invokes decorators of the bean. The container searches for the first decorator of the instance that implements the method that is being invoked as a business method.</text>
-        </assertion>
+        
+        <group>
+            <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and, after processing all interceptors of the method, invokes decorators of the bean. The container searches for the first decorator of the instance that implements the method that is being invoked as a business method. If such decorator exists, the container calls the method of the decorator.</text>
+            <assertion id="aa">
+                <text>Test decorator of managed bean is called.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test decorator of session bean is called .</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Test decorator of built-in bean is called.</text>
+            </assertion>    
+        </group>
 
         <assertion id="b">
             <text>If no such decorator exists, the container invokes the business method of the intercepted instance.</text>
-        </assertion>
-
-        <assertion id="c">
-            <text>Otherwise, the container calls the method of the decorator.</text>
         </assertion>
 
         <assertion id="d">

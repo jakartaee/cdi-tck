@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertTrue;
+
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -46,16 +49,17 @@ public class EJBDecoratorInvocationTest extends AbstractTest {
                                 .up()).build();
     }
 
+    @Inject
+    PigSty pigSty;
+
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "d"), @SpecAssertion(section = "8.4", id = "ab") })
     public void testEJBDecoratorInvocation() {
-        // testDecoratorInvocation tests decorators of normal beans called from an EJB
-        // it doesn't test actual decoration of the EJB
         PigStyDecorator.reset();
         PigStyImpl.reset();
-        getInstanceByType(PigSty.class).clean();
-        assert PigStyDecorator.isDecoratorCalled();
-        assert PigStyImpl.isBeanCalled();
+        pigSty.clean();
+        assertTrue(PigStyDecorator.isDecoratorCalled());
+        assertTrue(PigStyImpl.isBeanCalled());
     }
 
 }

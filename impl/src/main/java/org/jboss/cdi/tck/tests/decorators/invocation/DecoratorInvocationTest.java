@@ -49,9 +49,9 @@ public class DecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "a"), @SpecAssertion(section = "8.4", id = "c"),
-            @SpecAssertion(section = "8.4", id = "b"), @SpecAssertion(section = "8.1.3", id = "d"),
-            @SpecAssertion(section = "8.1.2", id = "f"), @SpecAssertion(section = "7.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "aa"), @SpecAssertion(section = "8.4", id = "b"),
+            @SpecAssertion(section = "8.1.3", id = "d"), @SpecAssertion(section = "8.1.2", id = "f"),
+            @SpecAssertion(section = "7.2", id = "b") })
     public void testDecoratorInvocation() {
         TimestampLogger.reset();
         MockLogger.reset();
