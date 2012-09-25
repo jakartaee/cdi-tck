@@ -15,15 +15,15 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.decorators.builtin.conversation;
+package org.jboss.cdi.tck.tests.decorators.builtin.beanmanager;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Type;
 import java.util.Collections;
 
-import javax.enterprise.context.Conversation;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,42 +38,40 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * @author Martin Kouba
+ * The {@link BeanManager} built-in bean is never intercepted by decorators.
  * 
+ * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class BuiltinConversationDecoratorTest extends AbstractDecoratorTest {
+public class BeanManagerDecoratorTest extends AbstractDecoratorTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(BuiltinConversationDecoratorTest.class)
+                .withTestClassPackage(BeanManagerDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createDecorators()
-                                .clazz(ConversationDecorator.class.getName()).up()).build();
+                                .clazz(BeanManagerDecorator.class.getName()).up()).build();
     }
 
     @Inject
-    ConversationObserver conversationObserver;
-
-    @Inject
-    Conversation conversation;
+    FooObserver fooObserver;
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac"), @SpecAssertion(section = "8.3", id = "aa") })
     public void testDecoratorIsResolved() {
-        checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(Conversation.class)), ConversationDecorator.class,
-                Collections.<Type> singleton(Conversation.class), Conversation.class);
+        checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(BeanManager.class)), BeanManagerDecorator.class,
+                Collections.<Type> singleton(BeanManager.class), BeanManager.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac") })
-    public void testDecoratorIsInvoked() {
-        String cid = "foo";
-        conversation.begin(cid);
-        assertFalse(conversation.isTransient());
-        assertEquals(conversationObserver.getDecoratedConversationId(), cid);
+    public void testDecoratorIsNotApplied() {
+        Foo payload = new Foo(false);
+        getCurrentManager().fireEvent(payload);
+        assertTrue(fooObserver.isObserved());
+        assertFalse(payload.isDecorated());
     }
 
 }

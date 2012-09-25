@@ -17,21 +17,18 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.event;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.reflect.Type;
 import java.util.Collections;
-import java.util.List;
 
 import javax.enterprise.event.Event;
-import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.util.TypeLiteral;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.decorators.AbstractDecoratorTest;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -45,12 +42,13 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class BuiltinEventDecoratorTest extends AbstractTest {
+public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(BuiltinEventDecoratorTest.class)
+                .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createDecorators().clazz(FooEventDecorator.class.getName())
                                 .up()).build();
@@ -68,10 +66,8 @@ public class BuiltinEventDecoratorTest extends AbstractTest {
         @SuppressWarnings("serial")
         TypeLiteral<Event<Foo>> eventFooLiteral = new TypeLiteral<Event<Foo>>() {
         };
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.singleton(eventFooLiteral.getType()));
-        assertNotNull(decorators);
-        assertEquals(decorators.size(), 1);
-        assertTrue(FooEventDecorator.class.equals(decorators.iterator().next().getBeanClass()));
+        checkDecorator(resolveUniqueDecorator(Collections.singleton(eventFooLiteral.getType())), FooEventDecorator.class,
+                Collections.<Type> singleton(eventFooLiteral.getType()), eventFooLiteral.getType());
     }
 
     @Test

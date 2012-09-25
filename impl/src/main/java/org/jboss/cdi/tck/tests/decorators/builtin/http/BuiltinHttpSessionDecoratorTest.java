@@ -17,21 +17,17 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.http;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Type;
 import java.util.Collections;
-import java.util.List;
 
-import javax.enterprise.inject.spi.Decorator;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.decorators.AbstractDecoratorTest;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -45,12 +41,13 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class BuiltinHttpSessionDecoratorTest extends AbstractTest {
+public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(BuiltinHttpSessionDecoratorTest.class)
+                .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createDecorators()
                                 .clazz(HttpSessionDecorator.class.getName()).up()).build();
@@ -65,10 +62,8 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac"), @SpecAssertion(section = "8.3", id = "aa") })
     public void testDecoratorIsResolved() {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(HttpSession.class));
-        assertNotNull(decorators);
-        assertEquals(decorators.size(), 1);
-        assertTrue(HttpSessionDecorator.class.equals(decorators.iterator().next().getBeanClass()));
+        checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(HttpSession.class)), HttpSessionDecorator.class,
+                Collections.<Type> singleton(HttpSession.class), HttpSession.class);
     }
 
     @Test
