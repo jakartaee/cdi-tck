@@ -14,16 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.producer.field.definition;
 
-import javax.enterprise.inject.Produces;
+package org.jboss.cdi.tck.tests.implementation.producer.method.definition.name;
+
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import javax.enterprise.inject.Stereotype;
 import javax.inject.Named;
 
-public class TarantulaProducer {
-
-    @Named
-    @Produces
-    @Pet
-    public Tarantula producedPetTarantula = new Tarantula();
+@Stereotype
+@Target({ TYPE, METHOD, FIELD })
+@Retention(RUNTIME)
+@Named
+public @interface BugStereotype {
 
 }

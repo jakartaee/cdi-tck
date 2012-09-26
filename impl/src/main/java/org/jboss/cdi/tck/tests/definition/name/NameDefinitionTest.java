@@ -16,10 +16,17 @@
  */
 package org.jboss.cdi.tck.tests.definition.name;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.literals.AnyLiteral;
+import org.jboss.cdi.tck.literals.DefaultLiteral;
+import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -39,43 +46,40 @@ public class NameDefinitionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "2.5.1", id = "a"), @SpecAssertion(section = "2", id = "e"),
             @SpecAssertion(section = "3.1.3", id = "bb") })
     public void testNonDefaultNamed() {
-        assert getBeans(Moose.class).size() == 1;
-        Bean<Moose> moose = getBeans(Moose.class).iterator().next();
-        assert moose.getName().equals("aMoose");
+        Bean<Moose> moose = getUniqueBean(Moose.class);
+        assertEquals(moose.getName(), "aMoose");
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "2.5.2", id = "a"), @SpecAssertion(section = "3.1.5", id = "a"),
-            @SpecAssertion(section = "2.5.1", id = "d") })
+            @SpecAssertion(section = "2.5.1", id = "d"), @SpecAssertion(section = "2.5.2", id = "fa") })
     public void testDefaultNamed() {
-        assert getBeans(Haddock.class).size() == 1;
-        Bean<Haddock> haddock = getBeans(Haddock.class).iterator().next();
-        assert haddock.getName() != null;
-        assert haddock.getName().equals("haddock");
+        String name = "haddock";
+        Bean<Haddock> haddock = getUniqueBean(Haddock.class);
+        assertEquals(haddock.getName(), name);
+        assertTrue(annotationSetMatches(haddock.getQualifiers(), AnyLiteral.INSTANCE, DefaultLiteral.INSTANCE,
+                new NamedLiteral(name)));
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "a"), @SpecAssertion(section = "2.7.1.3", id = "aaa") })
+    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "a"), @SpecAssertion(section = "2.7.1.3", id = "aa") })
     public void testStereotypeDefaultsName() {
-        assert getBeans(RedSnapper.class).size() == 1;
-        Bean<RedSnapper> bean = getBeans(RedSnapper.class).iterator().next();
-        assert bean.getName().equals("redSnapper");
+        Bean<RedSnapper> bean = getUniqueBean(RedSnapper.class);
+        assertEquals(bean.getName(), "redSnapper");
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "2.5.3", id = "a"), @SpecAssertion(section = "2", id = "e") })
-    public void testNotNamedInJava() {
-        assert getBeans(SeaBass.class).size() == 1;
-        Bean<SeaBass> bean = getBeans(SeaBass.class).iterator().next();
-        assert bean.getName() == null;
+    public void testNamedNotDeclaredByBean() {
+        Bean<SeaBass> bean = getUniqueBean(SeaBass.class);
+        assertNull(bean.getName());
     }
 
     @Test
     @SpecAssertion(section = "2.5.3", id = "a")
-    public void testNotNamedInStereotype() {
-        assert getBeans(Minnow.class).size() == 1;
-        Bean<Minnow> bean = getBeans(Minnow.class).iterator().next();
-        assert bean.getName() == null;
+    public void testNamedNotDeclaredByStereotype() {
+        Bean<Minnow> bean = getUniqueBean(Minnow.class);
+        assertNull(bean.getName());
     }
 
 }

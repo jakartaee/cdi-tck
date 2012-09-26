@@ -17,23 +17,19 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.name;
 
-import javax.inject.Named;
 
 /**
  * @author Martin Kouba
  */
-@Named
 public class Bug {
 
     public static final String NAME_GRAHAM = "Graham";
 
     public static final String NAME_TERRY = "Terry";
 
-    private String name;
+    public static final String NAME_JOHN = "John";
 
-    public Bug() {
-        super();
-    }
+    private String name;
 
     public Bug(String name) {
         super();

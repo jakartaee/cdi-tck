@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition;
 
 import static org.jboss.cdi.tck.TestGroups.PRODUCER_FIELD;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -29,7 +31,9 @@ import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.DefaultLiteral;
+import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -37,6 +41,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@SuppressWarnings("serial")
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerFieldDefinitionTest extends AbstractTest {
 
@@ -161,13 +166,25 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = { PRODUCER_FIELD })
-    @SpecAssertions({ @SpecAssertion(section = "2.5.2", id = "c"), @SpecAssertion(section = "2.5.3", id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = "2.5.2", id = "c"), @SpecAssertion(section = "2.7.1.3", id = "aa"),
+            @SpecAssertion(section = "2.7.1.3", id = "ab"), @SpecAssertion(section = "2.5.3", id = "a"),
             @SpecAssertion(section = "3.4.3", id = "a"), @SpecAssertion(section = "2.5.1", id = "d") })
-    public void testDefaultNamedField() {
-        Set<Bean<Tarantula>> tarantulaBeans = getBeans(Tarantula.class, STATIC_LITERAL);
-        assert tarantulaBeans.size() == 1;
-        Bean<Tarantula> tarantulaModel = tarantulaBeans.iterator().next();
-        assert tarantulaModel.getName().equals("produceTarantula");
+    public void testDefaultNamedByStereotype() {
+        Bean<Tarantula> staticTarantulaBean = getUniqueBean(Tarantula.class, STATIC_LITERAL);
+        assertEquals(staticTarantulaBean.getName(), "produceTarantula");
+        // Any, Static
+        assertTrue(annotationSetMatches(staticTarantulaBean.getQualifiers(), AnyLiteral.INSTANCE, STATIC_LITERAL));
+
+    }
+
+    @Test(groups = { PRODUCER_FIELD })
+    @SpecAssertions({ @SpecAssertion(section = "2.5.2", id = "fc") })
+    public void testDefaultNamed() {
+        Bean<Tarantula> tarantulaBean = getUniqueBean(Tarantula.class, PET_LITERAL);
+        assertEquals(tarantulaBean.getName(), "producedPetTarantula");
+        // Any, Pet, Named
+        assertTrue(annotationSetMatches(tarantulaBean.getQualifiers(), AnyLiteral.INSTANCE, PET_LITERAL, new NamedLiteral(
+                "producedPetTarantula")));
     }
 
     // review 2.2
@@ -192,7 +209,6 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
         assert !(getInstanceByType(Egg.class, FOO_LITERAL).getMother() instanceof LameInfertileChicken);
     }
 
-    @SuppressWarnings("serial")
     @Test(groups = PRODUCER_FIELD)
     @SpecAssertion(section = "3.4", id = "fb")
     public void testProducerFieldWithTypeVariable() {

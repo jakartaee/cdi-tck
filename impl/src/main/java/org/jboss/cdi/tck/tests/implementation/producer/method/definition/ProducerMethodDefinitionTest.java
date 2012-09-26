@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
 import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
-import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
@@ -35,6 +35,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.DefaultLiteral;
+import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -42,6 +43,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@SuppressWarnings("serial")
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerMethodDefinitionTest extends AbstractTest {
 
@@ -169,12 +171,14 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
 
     @Test(groups = PRODUCER_METHOD)
     @SpecAssertions({ @SpecAssertion(section = "3.3.2", id = "bb"), @SpecAssertion(section = "2.5.2", id = "b"),
-            @SpecAssertion(section = "2.5.1", id = "d") })
+            @SpecAssertion(section = "2.5.2", id = "fb"), @SpecAssertion(section = "2.5.1", id = "d") })
     public void testDefaultNamedMethod() throws Exception {
-        Set<Bean<DaddyLongLegs>> beans = getBeans(DaddyLongLegs.class, TAME_LITERAL);
-        assertEquals(beans.size(), 1);
-        Bean<DaddyLongLegs> daddyLongLegsSpider = beans.iterator().next();
-        assertEquals(daddyLongLegsSpider.getName(), "produceDaddyLongLegs");
+        String name = "produceDaddyLongLegs";
+        Bean<DaddyLongLegs> daddyLongLegs = getUniqueBean(DaddyLongLegs.class, TAME_LITERAL);
+        assertEquals(daddyLongLegs.getName(), name);
+        // Any, Tame, Named
+        assertTrue(annotationSetMatches(daddyLongLegs.getQualifiers(), AnyLiteral.INSTANCE, TAME_LITERAL,
+                new NamedLiteral(name)));
     }
 
     // Review 2.2

@@ -382,33 +382,44 @@
         </assertion>
     </section>
 
-    <section id="2.5.2" title="Default bean EL names">
+    <section id="2.5.2" title="Default bean names">
 
         <group>
-            <text>A default EL name must be assigned by the container when a bean class or producer method or field of a bean declares a |@Named| annotation and no EL name is explicitly specified by the |value| member.</text>
-
+            <text>A default name must be assigned by the container when a bean class or producer method or field of a bean declares a |@Named| annotation and no bean name is explicitly specified by the |value| member.</text>
             <assertion id="a">
                 <text>Test with a bean class.</text>
             </assertion>
-
             <assertion id="b">
                 <text>Test with a producer method.</text>
             </assertion>
-
             <assertion id="c">
                 <text>Test with a producer field.</text>
             </assertion>
         </group>
 
         <assertion id="e">
-            <text>A default EL name must be assigned by the container when a bean declares a stereotype that declares an empty |@Named| annotation, and the bean does not explicitly specify an EL name.</text>
+            <text>A default name must be assigned by the container when a bean declares a stereotype that declares an empty |@Named| annotation, and the bean does not explicitly specify an bean name.</text>
         </assertion>
+
+        <group>
+            <text>If a bean class or producer method or field of a bean declares a |@Named| annotation and no bean name is explicitly specified the value of the |value| member is defaulted.</text>
+            <assertion id="fa">
+                <text>Test with a bean class.</text>
+            </assertion>
+            <assertion id="fb">
+                <text>Test with a producer method.</text>
+            </assertion>
+            <assertion id="fc">
+                <text>Test with a producer field.</text>
+            </assertion>
+        </group>        
+   
     </section>
 
-    <section id="2.5.3" title="Beans with no EL name">
+    <section id="2.5.3" title="Beans with no name">
 
         <assertion id="a">
-            <text>If |@Named| is not declared by the bean, nor by its stereotypes, a bean has no EL name.</text>
+            <text>If |@Named| is not declared by the bean, nor by its stereotypes, a bean has no name.</text>
         </assertion>
 
         <assertion id="b" testable="false">
@@ -557,11 +568,15 @@
     </section>
 
     <section id="2.7.1.3" title="Declaring a @Named stereotype">
-        <assertion id="aaa">
+        <assertion id="aa">
             <text>A stereotype may declare an empty |@Named| annotation, which specifies that every bean with the stereotype has a defaulted name when a name is not explicitly specified by the bean.</text>
         </assertion>
+        
+        <assertion id="ab">
+            <text>A |@Named| qualifier declared by a stereotype is not added to the qualifiers of a bean with the stereotype.</text>
+        </assertion>
 
-        <assertion id="aab">
+        <assertion id="ac">
             <text>If a stereotype declares a non-empty |@Named| annotation, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 

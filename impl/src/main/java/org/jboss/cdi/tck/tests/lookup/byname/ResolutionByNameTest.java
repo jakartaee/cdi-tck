@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.lookup.byname;
 
 import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -26,6 +28,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -36,26 +40,24 @@ public class ResolutionByNameTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ResolutionByNameTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(ResolutionByNameTest.class)
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Sole.class.getName()).up())
+                .build();
     }
 
     @Test(groups = { RESOLUTION })
     @SpecAssertions({ @SpecAssertion(section = "5.3.1", id = "ca"), @SpecAssertion(section = "11.3.6", id = "aa"),
             @SpecAssertion(section = "11.3.6", id = "b") })
     public void testAmbiguousELNamesResolved() throws Exception {
-        // Cod, Plaice and AlaskaPlaice are named "whitefish" - Cod is a not-enabled policy, AlaskaPlaice specializes Plaice
+        // Cod, Plaice and AlaskaPlaice are named "whitefish" - Cod is a not-enabled alternative, AlaskaPlaice specializes
+        // Plaice
         Set<Bean<?>> beans = getCurrentManager().getBeans("whitefish");
-        assert beans.size() == 1;
-        assert getCurrentManager().resolve(beans).getTypes().contains(AlaskaPlaice.class);
-        // Both Salmon and Sole are named "fish" - Sole is an enabled policy
+        assertEquals(beans.size(), 1);
+        assertTrue(getCurrentManager().resolve(beans).getTypes().contains(AlaskaPlaice.class));
+        // Both Salmon and Sole are named "fish" - Sole is an enabled alternative
         beans = getCurrentManager().getBeans("fish");
-        assert beans.size() == 2;
-        assert getCurrentManager().resolve(beans).getTypes().contains(Sole.class);
+        assertEquals(beans.size(), 2);
+        assertTrue(getCurrentManager().resolve(beans).getTypes().contains(Sole.class));
     }
 
-    @Test
-    @SpecAssertion(section = "3.13", id = "a")
-    public void testFieldNameUsedAsBeanName() {
-        assert getInstanceByType(FishingNet.class).isCarpInjected();
-    }
 }

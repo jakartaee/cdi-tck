@@ -18,21 +18,26 @@
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.name;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
-import javax.inject.Inject;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.literals.AnyLiteral;
+import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
  */
+@SuppressWarnings("serial")
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerMethodWithDefaultNameTest extends AbstractTest {
 
@@ -41,27 +46,31 @@ public class ProducerMethodWithDefaultNameTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ProducerMethodWithDefaultNameTest.class).build();
     }
 
-    @Inject
-    Bugzilla bugzilla;
-
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test
     @SpecAssertion(section = "3.3.4", id = "a")
     public void testMethodName() {
-        Bug terry = getCurrentConfiguration().getEl().evaluateValueExpression(beanManager, "#{findTerry}", Bug.class);
-        assertNotNull(terry);
-        assertEquals(terry.getName(), Bug.NAME_TERRY);
-        assertNotNull(bugzilla.getTerry());
-        assertEquals(bugzilla.getTerry().getName(), Bug.NAME_TERRY);
+        String name = "findTerry";
+        Bean<Bug> terry = getUniqueBean(Bug.class, new AnnotationLiteral<Crazy>() {
+        });
+        assertEquals(terry.getName(), name);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test
     @SpecAssertion(section = "3.3.4", id = "b")
     public void testJavaBeansPropertyName() {
-        Bug graham = getCurrentConfiguration().getEl().evaluateValueExpression(beanManager, "#{graham}", Bug.class);
-        assertNotNull(graham);
-        assertEquals(graham.getName(), Bug.NAME_GRAHAM);
-        assertNotNull(bugzilla.getGraham());
-        assertEquals(bugzilla.getGraham().getName(), Bug.NAME_GRAHAM);
+        String name = "graham";
+        Bean<Bug> graham = getUniqueBean(Bug.class);
+        assertEquals(graham.getName(), name);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "aa"), @SpecAssertion(section = "2.7.1.3", id = "ab") })
+    public void testProducerMethodQualifiers() {
+        String name = "produceJohn";
+        Bean<Bug> john = getUniqueBean(Bug.class, new AnnotationLiteral<Funny>() {
+        });
+        assertEquals(john.getName(), name);
+        assertTrue(annotationSetMatches(john.getQualifiers(), AnyLiteral.INSTANCE, DefaultLiteral.INSTANCE));
     }
 
 }

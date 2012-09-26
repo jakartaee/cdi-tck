@@ -17,13 +17,15 @@
 package org.jboss.cdi.tck.tests.definition.stereotype.named;
 
 import static org.testng.Assert.assertEquals;
-
-import java.util.Set;
+import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.literals.AnyLiteral;
+import org.jboss.cdi.tck.literals.DefaultLiteral;
+import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -40,18 +42,22 @@ public class DefaultNamedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "a"), @SpecAssertion(section = "2.7.1.3", id = "aaa"),
-            @SpecAssertion(section = "2.5.2", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "a"), @SpecAssertion(section = "2.7.1.3", id = "aa"),
+            @SpecAssertion(section = "2.7.1.3", id = "ab"), @SpecAssertion(section = "2.5.2", id = "e") })
     public void testStereotypeDeclaringNamed() {
+        Bean<FallowDeer> fallowBean = getUniqueBean(FallowDeer.class);
+        assertEquals(fallowBean.getName(), "fallowDeer");
+        assertTrue(annotationSetMatches(fallowBean.getQualifiers(), AnyLiteral.INSTANCE, DefaultLiteral.INSTANCE));
+    }
 
-        Set<Bean<FallowDeer>> fallowBeans = getBeans(FallowDeer.class);
-        assertEquals(fallowBeans.size(), 1);
-        assertEquals(fallowBeans.iterator().next().getName(), "fallowDeer");
-
-        // The name is overriden by the bean
-        Set<Bean<RoeDeer>> roeBeans = getBeans(RoeDeer.class);
-        assertEquals(roeBeans.size(), 1);
-        assertEquals(roeBeans.iterator().next().getName(), "roe");
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "aa") })
+    public void testStereotypeNamedOverridenByBean() {
+        // The bean name is overriden by the bean
+        Bean<RoeDeer> roeBean = getUniqueBean(RoeDeer.class);
+        assertEquals(roeBean.getName(), "roe");
+        assertTrue(annotationSetMatches(roeBean.getQualifiers(), AnyLiteral.INSTANCE, DefaultLiteral.INSTANCE,
+                new NamedLiteral("roe")));
     }
 
 }

@@ -32,10 +32,18 @@ public class BugProducer {
         return new Bug(Bug.NAME_GRAHAM);
     }
 
+    @Crazy
     @Produces
     @Named
     public Bug findTerry() {
         return new Bug(Bug.NAME_TERRY);
+    }
+
+    @Funny
+    @Produces
+    @BugStereotype
+    public Bug produceJohn() {
+        return new Bug(Bug.NAME_JOHN);
     }
 
 }

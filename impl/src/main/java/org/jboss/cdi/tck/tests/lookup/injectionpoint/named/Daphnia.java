@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2012, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -15,30 +15,18 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.implementation.producer.method.definition.name;
+package org.jboss.cdi.tck.tests.lookup.injectionpoint.named;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+public class Daphnia {
 
-/**
- * @author Martin Kouba
- */
-public class Bugzilla {
+    private String name;
 
-    @Named
-    @Inject
-    private Bug graham;
-
-    @Named("findTerry")
-    @Inject
-    private Bug terry;
-
-    public Bug getGraham() {
-        return graham;
+    public Daphnia(String name) {
+        this.name = name;
     }
 
-    public Bug getTerry() {
-        return terry;
+    public String getName() {
+        return name;
     }
 
 }

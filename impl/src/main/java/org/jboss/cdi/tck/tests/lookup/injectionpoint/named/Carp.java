@@ -14,17 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.byname;
+package org.jboss.cdi.tck.tests.lookup.injectionpoint.named;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
-public class FishingNet {
-    @Inject
-    @Named
-    private Animal carp;
+@Named
+// -> @Named("carp")
+public class Carp implements Animal {
 
-    public boolean isCarpInjected() {
-        return (carp != null) && (carp instanceof Carp);
+    @Override
+    public Integer ping() {
+        return 1;
     }
+
 }
