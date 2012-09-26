@@ -36,6 +36,8 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
 
     private boolean hasDefaultEjbModuleDependency = false;
 
+    private String beansDescriptorTargetBase = null;
+
     /**
      * Add default EJB module dependency to manifest. Useful when building custom web module of enterprise archive.
      * 
@@ -44,6 +46,20 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
      */
     public WebArchiveBuilder withDefaultEjbModuleDependency() {
         this.hasDefaultEjbModuleDependency = true;
+        return this;
+    }
+
+    /**
+     * Set the beans.xml descriptor target path base.
+     * 
+     * By default the target base is <code>null</code> and the beans.xml descriptor is placed in WEB-INF dir. However CDI 1.1
+     * allows an alternative location: WEB-INF/classes/META-INF.
+     * 
+     * @param beansDescriptorTargetBase
+     * @return self
+     */
+    public WebArchiveBuilder withBeansDescriptorTargetBase(String beansDescriptorTargetBase) {
+        this.beansDescriptorTargetBase = beansDescriptorTargetBase;
         return this;
     }
 
@@ -73,12 +89,12 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
 
         if (beansDescriptor != null) {
             webArchive.addAsWebInfResource(new StringAsset(beansDescriptor.exportAsString()),
-                    beansDescriptor.getDescriptorName());
+                    buildBeansDescriptorTargetPath(beansDescriptor.getDescriptorName()));
         } else if (beansXml != null) {
-            webArchive.addAsWebInfResource(beansXml.getSource(), beansXml.getTarget());
+            webArchive.addAsWebInfResource(beansXml.getSource(), buildBeansDescriptorTargetPath(beansXml.getTarget()));
         } else {
             webArchive.addAsWebInfResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()),
-                    "beans.xml");
+                    buildBeansDescriptorTargetPath("beans.xml"));
         }
 
         if (webXmlDescriptor != null) {
@@ -109,6 +125,14 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
                     .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
         }
         return webArchive;
+    }
+
+    private String buildBeansDescriptorTargetPath(String descriptorName) {
+
+        if (beansDescriptorTargetBase == null)
+            return descriptorName;
+
+        return beansDescriptorTargetBase + descriptorName;
     }
 
 }

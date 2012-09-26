@@ -36,6 +36,7 @@ import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
@@ -45,6 +46,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
+@SpecVersion(spec = "cdi", version = "20091101")
 public class WebArchiveModulesTest extends AbstractTest {
 
     /**

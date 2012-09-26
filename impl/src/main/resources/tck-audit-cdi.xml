@@ -7139,8 +7139,18 @@
             <text>A library jar, EJB jar, application client jar or rar archive is a bean archive if it has a file named |beans.xml| in the |META-INF| directory.</text>
         </assertion>
 
+        <group>
+            <text>The |WEB-INF/classes| directory of a war is a bean archive if there is a file named |beans.xml| in the |WEB-INF| directory or in the |WEB-INF/classes/META-INF| directory of the war.</text>
+            <assertion id="aba" testable="false">
+                <text>Test the |beans.xml| file in the |WEB-INF| directory.</text>
+                <note>By default all TCK web archive deployments.</note>
+            </assertion>
+            <assertion id="abb">
+                <text>Test the |beans.xml| file in the |WEB-INF/classes/META-INF| directory.</text>
+            </assertion>        
+        </group>
         <assertion id="ab" testable="false">
-            <text>The |WEB-INF/classes| directory of a war is a bean archive if there is a file named |beans.xml| in the |WEB-INF| directory of the war.</text>
+            <text>The |WEB-INF/classes| directory of a war is a bean archive if there is a file named |beans.xml| in the |WEB-INF| directory or in the WEB-INF/classes/META-INF directory of the war.</text>
         </assertion>
 
         <assertion id="ac" testable="false">
