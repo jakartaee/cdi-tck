@@ -18,6 +18,8 @@
 package org.jboss.cdi.tck.tests.context.request.event.timeout;
 
 import java.io.IOException;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -25,9 +27,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.jboss.cdi.tck.util.Timer;
-import org.jboss.cdi.tck.util.Timer.StopCondition;
 
 /**
  * @author Martin Kouba
@@ -38,7 +37,7 @@ import org.jboss.cdi.tck.util.Timer.StopCondition;
 public class InfoServlet extends HttpServlet {
 
     @Inject
-    ObservingBean observingBean;
+    ApplicationScopedObserver observingBean;
 
     @Inject
     TimeoutService timeoutService;
@@ -46,23 +45,19 @@ public class InfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        timeoutService.start();
+        SynchronousQueue<Boolean> queue = new SynchronousQueue<Boolean>();
+        timeoutService.start(queue);
 
+        Boolean initializedResult;
         try {
-            new Timer().setDelay(1000l).addStopCondition(new StopCondition() {
-                public boolean isSatisfied() {
-                    return TimeoutService.isTimeouted;
-                }
-            }).start();
+            initializedResult = queue.poll(5, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             throw new ServletException(e);
         }
 
-        resp.getWriter().append("Timeouted:" + TimeoutService.isTimeouted);
+        resp.getWriter().append("Initialized:" + initializedResult);
         resp.getWriter().append("\n");
-        resp.getWriter().append("Initialized:" + observingBean.getInitializedRequestCount().get());
-        resp.getWriter().append("\n");
-        resp.getWriter().append("Destroyed:" + observingBean.getDestroyedRequestCount().get());
+        resp.getWriter().append("Destroyed:" + observingBean.isDestroyedCalled());
         resp.setContentType("text/plain");
     }
 
