@@ -17,40 +17,34 @@
 package org.jboss.cdi.tck.tests.context.request.event.remote;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ContextNotActiveException;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.spi.Context;
-import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 @Stateless
 public class FooBean implements FooRemote {
 
     @Inject
-    BeanManager beanManager;
+    private RequestScopedObserver requestScopedObserver;
 
     @Inject
-    ObservingBean observingBean;
+    private ApplicationScopedObserver applicationScopedObserver;
 
-    public String ping() {
-
-        Context requestContext = null;
-
-        try {
-            requestContext = beanManager.getContext(RequestScoped.class);
-        } catch (ContextNotActiveException e) {
-            // No-op
-        }
-
-        if (requestContext == null || !requestContext.isActive()) {
-            return null;
-        }
-        return "pong";
+    /**
+     * Verifies that the request context is active during remote method invocation and that @Initialized(RequestScoped.class)
+     * was fired when this context was initialized. Also resets {@link ApplicationScopedObserver} which detects @Destroyed
+     * events.
+     */
+    public boolean first() {
+        applicationScopedObserver.reset();
+        return requestScopedObserver.isInitializedObserved();
     }
 
-    public ObserverResults getObserverResults() {
-        return new ObserverResults(observingBean.getInitializedRequestCount().get(), observingBean.getDestroyedRequestCount()
-                .get());
+    /**
+     * Verifies that the request context is active during remote method invocation and that @Initialized(RequestScoped.class)
+     * was fired when this context was initialized. Furthermore, this method verifies that the @Destroyed event observer that
+     * was reset in the {@link #first()} invocation received @Destroyed event in the meantime (this event was fired once the
+     * request context of the {@link #first()} invocation was destroyed).
+     */
+    public boolean second() {
+        return requestScopedObserver.isInitializedObserved() && applicationScopedObserver.isDestroyedCalled();
     }
-
 }

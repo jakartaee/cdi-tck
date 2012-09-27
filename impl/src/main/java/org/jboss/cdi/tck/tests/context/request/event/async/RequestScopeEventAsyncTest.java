@@ -63,11 +63,9 @@ public class RequestScopeEventAsyncTest extends AbstractTest {
         TextPage page = client.getPage(contextPath + "info");
         String content = page.getContent();
 
-        checkContent(content, "(Active:)(\\w+)", "true");
-        // Test request and async request
-        checkContent(content, "(Initialized:)(\\d+)", "2");
+        checkContent(content, "(Initialized:)(\\w+)", "true");
         // Timeout request only
-        checkContent(content, "(Destroyed:)(\\d+)", "1");
+        checkContent(content, "(Destroyed:)(\\w+)", "true");
     }
 
     private void checkContent(String content, String pattern, String expected) {

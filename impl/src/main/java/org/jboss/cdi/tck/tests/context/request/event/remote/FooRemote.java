@@ -21,8 +21,8 @@ import javax.ejb.Remote;
 @Remote
 public interface FooRemote {
 
-    public String ping();
+    boolean first();
 
-    public ObserverResults getObserverResults();
+    boolean second();
 
 }

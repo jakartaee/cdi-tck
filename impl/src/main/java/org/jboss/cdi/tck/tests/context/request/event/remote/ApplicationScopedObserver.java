@@ -14,35 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.request.event.async;
+package org.jboss.cdi.tck.tests.context.request.event.remote;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Destroyed;
-import javax.enterprise.context.Initialized;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 
 @ApplicationScoped
-public class ObservingBean {
+public class ApplicationScopedObserver {
 
-    private final AtomicInteger initializedRequestCount = new AtomicInteger();
-    private final AtomicInteger destroyedRequestCount = new AtomicInteger();
+    private final AtomicBoolean destroyedCalled = new AtomicBoolean();
 
-    public <T extends Object> void observeRequestInitialized(@Observes @Initialized(RequestScoped.class) T event) {
-        initializedRequestCount.incrementAndGet();
+    void observeRequestDestroyed(@Observes @Destroyed(RequestScoped.class) Object event) {
+        destroyedCalled.set(true);
     }
 
-    public <T extends Object> void observeRequestDestroyed(@Observes @Destroyed(RequestScoped.class) T event) {
-        destroyedRequestCount.incrementAndGet();
+    boolean isDestroyedCalled() {
+        return destroyedCalled.get();
     }
 
-    public AtomicInteger getInitializedRequestCount() {
-        return initializedRequestCount;
-    }
-
-    public AtomicInteger getDestroyedRequestCount() {
-        return destroyedRequestCount;
+    void reset() {
+        destroyedCalled.set(false);
     }
 }

@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.request.event.remote;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import javax.ejb.EJB;
 
@@ -43,14 +43,14 @@ public class RequestScopeEventRemoteTest extends AbstractTest {
     @Deployment(name = "TEST", order = 1)
     public static EnterpriseArchive createTestArchive() {
         return new EnterpriseArchiveBuilder().withTestClass(RequestScopeEventRemoteTest.class)
-                .withClasses(FooRemote.class, ObserverResults.class).build();
+                .withClasses(FooRemote.class).build();
     }
 
     @Deployment(name = "REMOTE_EJB", order = 2, testable = false)
     public static EnterpriseArchive createEjbArchive() {
         return new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().withName("test-ejb.ear")
                 .withEjbModuleName("test-ejb.jar")
-                .withClasses(FooBean.class, FooRemote.class, ObservingBean.class, ObserverResults.class).build();
+                .withClasses(FooBean.class, FooRemote.class, RequestScopedObserver.class, ApplicationScopedObserver.class).build();
     }
 
     @EJB(lookup = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.event.remote.FooRemote")
@@ -61,11 +61,8 @@ public class RequestScopeEventRemoteTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "jc") })
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
 
-        assertEquals(foo.ping(), "pong");
-
-        ObserverResults results = foo.getObserverResults();
-        assertEquals(results.getInitialized(), Integer.valueOf(2));
-        assertEquals(results.getDestroyed(), Integer.valueOf(1));
+        assertTrue(foo.first());
+        assertTrue(foo.second());
     }
 
 }

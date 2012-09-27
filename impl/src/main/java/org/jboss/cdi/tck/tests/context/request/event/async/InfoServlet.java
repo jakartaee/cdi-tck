@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 public class InfoServlet extends HttpServlet {
 
     @Inject
-    ObservingBean observingBean;
+    ApplicationScopedObserver observingBean;
 
     @Inject
     AsyncService asyncService;
@@ -47,14 +47,12 @@ public class InfoServlet extends HttpServlet {
         Future<Boolean> result = asyncService.compute();
 
         try {
-            resp.getWriter().append("Active:" + result.get());
+            resp.getWriter().append("Initialized:" + result.get());
         } catch (Exception e) {
             throw new ServletException(e);
         }
         resp.getWriter().append("\n");
-        resp.getWriter().append("Initialized:" + observingBean.getInitializedRequestCount().get());
-        resp.getWriter().append("\n");
-        resp.getWriter().append("Destroyed:" + observingBean.getDestroyedRequestCount().get());
+        resp.getWriter().append("Destroyed:" + observingBean.isDestroyedCalled());
         resp.setContentType("text/plain");
     }
 

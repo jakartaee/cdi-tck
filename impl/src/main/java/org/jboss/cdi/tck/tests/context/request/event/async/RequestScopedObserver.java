@@ -14,33 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jboss.cdi.tck.tests.context.request.event.async;
 
-import java.util.concurrent.Future;
+import javax.enterprise.context.Initialized;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Observes;
 
-import javax.ejb.AsyncResult;
-import javax.ejb.Asynchronous;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+@RequestScoped
+public class RequestScopedObserver {
 
-@Stateless
-public class AsyncService {
+    private boolean initializedObserved;
 
-    @Inject
-    private RequestScopedObserver requestScopedObserver;
-
-    @Inject
-    private ApplicationScopedObserver observer;
-
-    @Asynchronous
-    public Future<Boolean> compute() {
-        /*
-         * This verifies that:
-         * 1) Request context is active
-         * 2) @Initialized(RequestScoped.class) was received
-         */
-        observer.reset();
-        return new AsyncResult<Boolean>(requestScopedObserver.isInitializedObserved());
+    void initialize(@Observes @Initialized(RequestScoped.class) Object event) {
+        if (event != null) {
+            initializedObserved = true;
+        }
     }
+
+    boolean isInitializedObserved() {
+        return initializedObserved;
+    }
+
 }
