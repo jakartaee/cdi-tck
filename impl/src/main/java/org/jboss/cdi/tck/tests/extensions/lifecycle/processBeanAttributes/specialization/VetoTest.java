@@ -42,11 +42,12 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class VetoTest extends AbstractTest {
 
+    @SuppressWarnings("unchecked")
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(VetoTest.class)
-                .withClasses(Alpha.class, Bar.class, Baz.class, Bravo.class, Foo.class, Charlie.class, VetoingExtension.class)
-                .withExtension(VetoingExtension.class).build();
+                .withClasses(Alpha.class, Bar.class, Baz.class, Bravo.class, Foo.class, Charlie.class, VetoingExtension.class, VerifyingExtension.class)
+                .withExtensions(VetoingExtension.class, VerifyingExtension.class).build();
     }
 
     @Inject
