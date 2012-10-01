@@ -49,7 +49,7 @@ public class SpecializedProducerMethodInjectionNotAvailableTest extends Abstract
 
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
                 .withTestClassDefinition(SpecializedProducerMethodInjectionNotAvailableTest.class)
-                .withClasses(SpecializedFooMethodProducer.class, FooMethodProducer.class)
+                .withClasses(SpecializedFooMethodProducer.class, FooMethodProducer.class, ProducedFoo.class)
                 .withBeanLibrary(Foo.class, Bar.class, Enterprise.class, Standard.class).build();
 
         enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
