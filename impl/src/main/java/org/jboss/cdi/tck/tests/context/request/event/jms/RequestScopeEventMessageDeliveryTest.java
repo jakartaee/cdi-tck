@@ -19,24 +19,20 @@ package org.jboss.cdi.tck.tests.context.request.event.jms;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JMS;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.assertTrue;
 
-import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Timer;
+import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * 
@@ -46,37 +42,42 @@ import com.gargoylesoftware.htmlunit.WebClient;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
 
-    @Deployment(testable = false)
+    @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(RequestScopeEventMessageDeliveryTest.class).build();
     }
 
-    @ArquillianResource
-    private URL contextPath;
+    @Inject
+    private SimpleMessageProducer producer;
+
+    @Inject
+    private ApplicationScopedObserver observer;
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "jf") })
     public void testEventsFired() throws Exception {
 
-        WebClient client = new WebClient();
+        AbstractMessageListener.reset();
+        observer.reset();
 
-        TextPage page = client.getPage(contextPath + "info");
-        String content = page.getContent();
+        producer.sendTopicMessage();
 
-        checkContent(content, "(Delivered:)(\\d+)", "1");
-        // Test request and message delivery request
-        checkContent(content, "(Initialized:)(\\d+)", "2");
-        // Timeout request only
-        checkContent(content, "(Destroyed:)(\\d+)", "1");
-    }
+        new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return AbstractMessageListener.getProcessedMessages() >= 1;
+            }
+        }).start();
 
-    private void checkContent(String content, String pattern, String expected) {
-        Matcher matcher = Pattern.compile(pattern).matcher(content);
-        if (matcher.find()) {
-            String value = matcher.group(2);
-            assertEquals(value, expected);
-        } else {
-            fail();
-        }
+        assertEquals(1, AbstractMessageListener.getProcessedMessages());
+        assertTrue(AbstractMessageListener.isInitializedEventObserver());
+
+        // wait for the request scope for the message delivery to be destroyed and verify that the event was delivered
+        new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return observer.isDestroyedCalled();
+            }
+        }).start();
+
+        assertTrue(observer.isDestroyedCalled());
     }
 }
