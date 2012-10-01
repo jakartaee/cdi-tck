@@ -28,6 +28,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.cdi.tck.util.Timer;
+import org.jboss.cdi.tck.util.Timer.StopCondition;
+
 /**
  * @author Martin Kouba
  * 
@@ -36,11 +39,17 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/info")
 public class InfoServlet extends HttpServlet {
 
-    @Inject
-    ApplicationScopedObserver observingBean;
+    private final ApplicationScopedObserver observingBean;
 
     @Inject
     TimeoutService timeoutService;
+
+    @Inject
+    public InfoServlet(ApplicationScopedObserver observingBean) {
+        this.observingBean = observingBean;
+    }
+
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,6 +66,18 @@ public class InfoServlet extends HttpServlet {
 
         resp.getWriter().append("Initialized:" + initializedResult);
         resp.getWriter().append("\n");
+
+        // wait for the request scope created for the async method invocation to be destroyed
+        try {
+            new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
+                public boolean isSatisfied() {
+                    return observingBean.isDestroyedCalled();
+                }
+            }).start();
+        } catch (InterruptedException e) {
+            throw new ServletException(e);
+        }
+        
         resp.getWriter().append("Destroyed:" + observingBean.isDestroyedCalled());
         resp.setContentType("text/plain");
     }
