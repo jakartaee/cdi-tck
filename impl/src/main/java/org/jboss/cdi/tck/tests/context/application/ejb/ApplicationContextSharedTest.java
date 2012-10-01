@@ -55,7 +55,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
                 .withClasses(BarBean.class, FMS.class, FMSModelIII.class, SimpleApplicationBean.class, FooRemote.class).build();
     }
 
-    @Deployment(name = "REMOTE_EJB", order = 2)
+    @Deployment(name = "REMOTE_EJB", order = 2, testable = false)
     public static EnterpriseArchive createEjbArchive() {
         return new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().withName("test-ejb.ear")
                 .withEjbModuleName("test-ejb.jar").withClasses(FooBean.class, FooRemote.class, SimpleApplicationBean.class)
@@ -65,7 +65,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
     @EJB
     BarBean bar;
 
-    @EJB(mappedName = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.ejb.FooRemote")
+    @EJB(lookup = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.application.ejb.FooRemote")
     FooRemote foo;
 
     @OperateOnDeployment("TEST")

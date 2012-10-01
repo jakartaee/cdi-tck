@@ -60,7 +60,7 @@ public class EJBJarDeploymentTest extends AbstractTest {
                 .setAsClientMode(false).build();
     }
 
-    @EJB(mappedName = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.deployment.packaging.ejb.FooRemote")
+    @EJB(lookup = "java:global/test-ejb/FooBean!org.jboss.cdi.tck.tests.deployment.packaging.ejb.FooRemote")
     FooRemote foo;
 
     @OperateOnDeployment("TEST")
