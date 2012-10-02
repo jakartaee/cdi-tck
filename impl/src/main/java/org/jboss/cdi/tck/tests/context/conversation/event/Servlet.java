@@ -31,26 +31,29 @@ import javax.servlet.http.HttpServletResponse;
 public class Servlet extends HttpServlet {
 
     @Inject
-    private ObservingBean observer;
+    Conversation conversation;
 
     @Inject
-    private Conversation conversation;
+    ConversationScopedObserver conversationScopedObserver;
 
     @Inject
-    private ConversationScopedBean bean;
+    ApplicationScopedObserver applicationScopedObserver;
+
+    @Inject
+    ConversationScopedBean bean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String uri = req.getRequestURI();
         if (uri.endsWith("/begin")) {
-            conversation.begin("org.jboss.weld");
-            bean.setFoo("baz");
+            conversation.begin(ConversationScopedBean.CID);
+            bean.ping();
         } else if (uri.contains("/end")) {
             conversation.end();
         }
-        resp.getWriter().append("Initialized conversations:" + observer.getInitializedConversationCount().get());
+        resp.getWriter().append("Initialized:" + conversationScopedObserver.isInitializedObserved());
         resp.getWriter().append("\n");
-        resp.getWriter().append("Destroyed conversations:" + observer.getDestroyedConversationCount().get());
+        resp.getWriter().append("Destroyed:" + applicationScopedObserver.isDestroyedCalled());
         resp.getWriter().append("\n");
         resp.getWriter().append("cid:" + conversation.getId());
         resp.setContentType("text/plain");

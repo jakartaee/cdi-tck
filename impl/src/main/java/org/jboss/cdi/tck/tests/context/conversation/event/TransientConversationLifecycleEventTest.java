@@ -51,21 +51,24 @@ public class TransientConversationLifecycleEventTest extends AbstractTest {
 
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassDefinition(TransientConversationLifecycleEventTest.class)
-                .withClasses(Servlet.class, ObservingBean.class, ConversationScopedBean.class).build();
+        return new WebArchiveBuilder()
+                .withTestClassDefinition(TransientConversationLifecycleEventTest.class)
+                .withClasses(Servlet.class, ConversationScopedObserver.class, ApplicationScopedObserver.class,
+                        ConversationScopedBean.class).build();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "ba"), @SpecAssertion(section = "6.7.4", id = "bb") })
     public void testLifecycleEventFiredForTransientConversation() throws Exception {
+
         WebClient client = new WebClient();
 
         TextPage page = client.getPage(contextPath + "/display");
-        assertTrue(page.getContent().contains("Initialized conversations:1")); // the current transient
-        assertTrue(page.getContent().contains("Destroyed conversations:0")); // not destroyed yet
+        assertTrue(page.getContent().contains("Initialized:true")); // the current transient
+        assertTrue(page.getContent().contains("Destroyed:false")); // not destroyed yet
 
         page = client.getPage(contextPath + "/display");
-        assertTrue(page.getContent().contains("Initialized conversations:2"));
-        assertTrue(page.getContent().contains("Destroyed conversations:1"));
+        assertTrue(page.getContent().contains("Initialized:true")); // the current transient
+        assertTrue(page.getContent().contains("Destroyed:true")); // the previous transient was destroyed
     }
 }

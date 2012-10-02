@@ -16,34 +16,28 @@
  */
 package org.jboss.cdi.tck.tests.context.conversation.event;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.Destroyed;
-import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.servlet.ServletRequestEvent;
 
 @ApplicationScoped
-public class ObservingBean {
+public class ApplicationScopedObserver {
 
-    private final AtomicInteger initializedConversationCount = new AtomicInteger();
-    private final AtomicInteger destroyedConversationCount = new AtomicInteger();
+    private final AtomicBoolean destroyedCalled = new AtomicBoolean();
 
-    public void observeConversationInitialized(@Observes @Initialized(ConversationScoped.class) ServletRequestEvent event) {
-        initializedConversationCount.incrementAndGet();
+    void observeRequestDestroyed(@Observes @Destroyed(ConversationScoped.class) ServletRequestEvent event) {
+        destroyedCalled.set(true);
     }
 
-    public void observeConversationDestroyed(@Observes @Destroyed(ConversationScoped.class) ServletRequestEvent event) {
-        destroyedConversationCount.incrementAndGet();
+    boolean isDestroyedCalled() {
+        return destroyedCalled.get();
     }
 
-    public AtomicInteger getInitializedConversationCount() {
-        return initializedConversationCount;
-    }
-
-    public AtomicInteger getDestroyedConversationCount() {
-        return destroyedConversationCount;
+    public void reset() {
+        destroyedCalled.set(false);
     }
 }

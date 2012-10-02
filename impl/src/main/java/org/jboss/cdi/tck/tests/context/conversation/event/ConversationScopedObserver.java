@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2012, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,19 +19,24 @@ package org.jboss.cdi.tck.tests.context.conversation.event;
 import java.io.Serializable;
 
 import javax.enterprise.context.ConversationScoped;
-import javax.inject.Inject;
+import javax.enterprise.context.Initialized;
+import javax.enterprise.event.Observes;
+import javax.servlet.ServletRequestEvent;
 
 @SuppressWarnings("serial")
 @ConversationScoped
-public class ConversationScopedBean implements Serializable {
+public class ConversationScopedObserver implements Serializable {
 
-    public static final String CID = ConversationScopedBean.class.getName();
+    private boolean initializedObserved;
 
-    @Inject
-    ApplicationScopedObserver applicationScopedObserver;
+    void initialize(@Observes @Initialized(ConversationScoped.class) ServletRequestEvent event) {
+        if (event != null) {
+            initializedObserved = true;
+        }
+    }
 
-    public void ping() {
-        applicationScopedObserver.reset();
+    boolean isInitializedObserved() {
+        return initializedObserved;
     }
 
 }
