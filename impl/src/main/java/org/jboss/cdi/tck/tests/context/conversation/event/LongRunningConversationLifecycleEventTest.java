@@ -88,7 +88,7 @@ public class LongRunningConversationLifecycleEventTest extends AbstractTest {
 
         // The current transient conversation is initialized
         // The last long-running conversation was destroyed after the previous servlet request service() method completed
-        page = client.getPage(contextPath + "/end?cid=" + ConversationScopedBean.CID);
+        page = client.getPage(contextPath + "/display");
         assertTrue(page.getContent().contains("Initialized:true"));
         assertTrue(page.getContent().contains("Destroyed:true"));
         assertTrue(page.getContent().contains("cid:null"));

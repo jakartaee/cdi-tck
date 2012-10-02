@@ -63,7 +63,7 @@ public class TransientConversationLifecycleEventTest extends AbstractTest {
 
         WebClient client = new WebClient();
 
-        TextPage page = client.getPage(contextPath + "/display");
+        TextPage page = client.getPage(contextPath + "/display-transient");
         assertTrue(page.getContent().contains("Initialized:true")); // the current transient
         assertTrue(page.getContent().contains("Destroyed:false")); // not destroyed yet
 

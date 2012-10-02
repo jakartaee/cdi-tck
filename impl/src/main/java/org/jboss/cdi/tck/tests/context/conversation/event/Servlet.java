@@ -49,7 +49,10 @@ public class Servlet extends HttpServlet {
             conversation.begin(ConversationScopedBean.CID);
             bean.ping();
         } else if (uri.contains("/end")) {
+            req.setAttribute("foo", System.currentTimeMillis());
             conversation.end();
+        } else if (uri.contains("/display-transient")) {
+            req.setAttribute("foo", System.currentTimeMillis());
         }
         resp.getWriter().append("Initialized:" + conversationScopedObserver.isInitializedObserved());
         resp.getWriter().append("\n");

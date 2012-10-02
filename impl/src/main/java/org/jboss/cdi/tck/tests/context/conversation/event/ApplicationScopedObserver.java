@@ -30,7 +30,9 @@ public class ApplicationScopedObserver {
     private final AtomicBoolean destroyedCalled = new AtomicBoolean();
 
     void observeRequestDestroyed(@Observes @Destroyed(ConversationScoped.class) ServletRequestEvent event) {
-        destroyedCalled.set(true);
+        if (event.getServletRequest().getAttribute("foo") != null) {
+            destroyedCalled.set(true);
+        }
     }
 
     boolean isDestroyedCalled() {
