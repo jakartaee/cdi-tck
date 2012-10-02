@@ -38,6 +38,13 @@ public class MissileInterceptor {
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
         lifecycleCallbackIntercepted = true;
+        try {
+            ctx.proceed();
+        } catch (RuntimeException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void reset() {
