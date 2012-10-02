@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.context.conversation.event.notattached;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import javax.enterprise.context.ConversationScoped;
 
@@ -25,7 +24,7 @@ import javax.enterprise.context.ConversationScoped;
 @ConversationScoped
 public class ConversationScopedBean implements Serializable {
 
-    public static final String CID = UUID.randomUUID().toString();
+    public static final String CID = ConversationScopedBean.class.getName();
 
     public void ping() {
     }
