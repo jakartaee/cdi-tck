@@ -4157,9 +4157,8 @@
             <assertion id="bb">
                 <text>An event with the |ServletRequestEvent| as the payload and with qualifier |@Destroyed(ConversationContext.class)| is fired when the conversation context is destroyed.</text>
             </assertion>
-            <assertion id="bc" testable="false">
+            <assertion id="bc">
                 <text>An event with the conversation id as the payload and with qualifier |@Destroyed(ConversationContext.class)| is fired when the conversation context is destroyed and is not associated with a current Servlet request.</text>
-                <note>The conversation timeout is a just hint to the container - not required.</note>
             </assertion>
         </group>
 
