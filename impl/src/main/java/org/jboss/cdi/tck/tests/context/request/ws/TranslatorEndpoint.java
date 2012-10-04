@@ -26,7 +26,7 @@ public class TranslatorEndpoint implements Translator {
     private Foo foo;
 
     public String translate() {
-        return "" + foo.getId();
+        return foo.getId();
     }
 
 }

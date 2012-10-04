@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.request.ws;
 
+import java.util.UUID;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
@@ -27,15 +29,15 @@ public class Foo {
     @Inject
     ObservingBean observingBean;
 
-    private long id;
+    private String id;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
     @PostConstruct
     public void init() {
-        this.id = System.currentTimeMillis();
+        this.id = UUID.randomUUID().toString();
     }
 
     @PreDestroy

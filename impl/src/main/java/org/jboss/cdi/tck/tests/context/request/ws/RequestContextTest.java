@@ -18,10 +18,13 @@ package org.jboss.cdi.tck.tests.context.request.ws;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.namespace.QName;
 
@@ -73,15 +76,22 @@ public class RequestContextTest extends AbstractTest {
         Translator translator = endpointService.getTranslatorPort();
 
         // New instance of Foo is created for each WS request
-        Long id01 = Long.valueOf(translator.translate());
-        Long id02 = Long.valueOf(translator.translate());
+        String id01 = translator.translate();
+        String id02 = translator.translate();
         assertNotEquals(id01, id02);
 
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
 
         TextPage info = webClient.getPage(contextPath + "info");
-        assertTrue(info.getContent().contains("Foo destroyed:2"));
+
+        Matcher matcher = Pattern.compile("(Foo destroyed:)(\\w+)").matcher(info.getContent());
+        if (matcher.find()) {
+            String value = matcher.group(2);
+            assertEquals(value, "2");
+        } else {
+            fail();
+        }
     }
 
 }
