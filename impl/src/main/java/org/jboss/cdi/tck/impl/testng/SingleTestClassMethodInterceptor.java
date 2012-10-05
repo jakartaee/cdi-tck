@@ -67,7 +67,7 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
                     return result;
                 }
             });
-            logger.log(Level.INFO, "tckTest not set [time: {0} ms]", System.currentTimeMillis() - start);
+            logger.log(Level.INFO, "tckTest not set [time: {1} ms]", System.currentTimeMillis() - start);
             return methods;
         }
 
@@ -87,8 +87,8 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
                 }
             }
         }
-        logger.log(Level.INFO, "tckTest set to {0} [time: {1} ms]", new Object[] { testClass,
-                System.currentTimeMillis() - start });
+        logger.log(Level.INFO, "tckTest set to {0} [methods: {1}, time: {2} ms]",
+                new Object[] { testClass, ret.size(), System.currentTimeMillis() - start });
         return ret;
     }
 

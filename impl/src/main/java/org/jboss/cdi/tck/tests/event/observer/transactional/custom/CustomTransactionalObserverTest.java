@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.event.observer.transactional.custom;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -38,7 +39,7 @@ import org.testng.annotations.Test;
 /**
  * @author Martin Kouba
  */
-@Test(groups = { INTEGRATION })
+@Test(groups = { INTEGRATION, PERSISTENCE })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class CustomTransactionalObserverTest extends AbstractTest {
 

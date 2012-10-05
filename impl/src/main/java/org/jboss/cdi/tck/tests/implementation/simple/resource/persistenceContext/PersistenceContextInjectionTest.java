@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.simple.resource.persistenceContex
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
+import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.Any;
@@ -41,7 +42,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
+@Test(groups = { INTEGRATION, PERSISTENCE, LIFECYCLE })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class PersistenceContextInjectionTest extends AbstractTest {
 
@@ -51,7 +52,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
                 .withDefaultPersistenceXml().build();
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "cc"), @SpecAssertion(section = "7.3.6", id = "lb"),
             @SpecAssertion(section = "7.3.6", id = "mc") })
     public void testInjectionOfPersistenceContext() {
@@ -61,7 +62,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
         assert serviceBean.validateEntityManager();
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "dd"), @SpecAssertion(section = "7.3.6", id = "lc"),
             @SpecAssertion(section = "7.3.6", id = "me") })
     public void testInjectionOfPersistenceUnit() {
@@ -72,7 +73,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
         assert managedBean.getPersistenceUnit().isOpen() : "Persistence unit not open injected into bean";
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "md") })
     public void testPassivationOfPersistenceContext() throws Exception {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
@@ -83,7 +84,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
         assert managedBean.getPersistenceContext().getDelegate() != null : "Persistence context not deserialized correctly";
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "lc"), @SpecAssertion(section = "7.3.6", id = "mf") })
     public void testPassivationOfPersistenceUnit() throws Exception {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
@@ -94,7 +95,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
         assert managedBean.getPersistenceUnit().isOpen() : "Persistence unit not open injected into bean";
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "hh"), @SpecAssertion(section = "3.6.2", id = "ab") })
     public void testBeanTypesAndBindingTypesOfPersistenceContext() {
         Bean<EntityManager> manager = getBeans(EntityManager.class, new AnnotationLiteral<Database>() {
@@ -105,7 +106,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
         assert annotationSetMatches(manager.getQualifiers(), Any.class, Database.class);
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "ac") })
     public void testBeanTypesOfPersistenceUnit() {
         Bean<EntityManagerFactory> factory = getBeans(EntityManagerFactory.class, new AnnotationLiteral<Database>() {

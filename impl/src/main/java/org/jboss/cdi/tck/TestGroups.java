@@ -101,6 +101,11 @@ public final class TestGroups {
     public static final String ENUMS = "enums";
 
     /**
+     * Requires test data source
+     */
+    public static final String PERSISTENCE = "persistence";
+
+    /**
      * No instance
      */
     private TestGroups() {
