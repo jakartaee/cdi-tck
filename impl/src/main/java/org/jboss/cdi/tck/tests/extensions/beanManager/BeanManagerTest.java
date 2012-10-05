@@ -24,6 +24,7 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
@@ -34,6 +35,7 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,6 +61,8 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -82,16 +86,19 @@ public class BeanManagerTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanManagerTest.class)
                 .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class)
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Soy.class.getName()).up())
                 .withExtensions(AfterBeanDiscoveryObserver.class, ProcessAnnotatedTypeObserver.class).build();
     }
 
     @Test
     @SpecAssertion(section = "11.3.8", id = "a")
     public void testAmbiguousDependencyResolved() {
-        Set<Bean<?>> beans = new HashSet<Bean<?>>();
-        beans.addAll(getCurrentManager().getBeans(SimpleBean.class));
-        beans.addAll(getCurrentManager().getBeans(DerivedBean.class));
-        getCurrentManager().resolve(beans);
+        Set<Bean<?>> beans = getCurrentManager().getBeans(Food.class);
+        assertEquals(beans.size(), 2);
+        Bean<?> bean = getCurrentManager().resolve(beans);
+        assertNotNull(bean);
+        assertTrue(bean.isAlternative());
+        assertTrue(typeSetMatches(bean.getTypes(), Food.class, Soy.class, Object.class));
     }
 
     @Test(expectedExceptions = AmbiguousResolutionException.class)
@@ -261,6 +268,19 @@ public class BeanManagerTest extends AbstractTest {
             return;
         }
         fail();
+    }
+
+    @Test
+    @SpecAssertion(section = "11.3.8", id = "c")
+    public void testResolveWithNull() {
+        assertNull(getCurrentManager().resolve(null));
+    }
+
+    @Test
+    @SpecAssertion(section = "11.3.8", id = "d")
+    public void testResolveWithEmptySet() {
+        assertNull(getCurrentManager().resolve(Collections.<Bean<? extends Integer>> emptySet()));
+        assertNull(getCurrentManager().resolve(new HashSet<Bean<? extends String>>()));
     }
 
 }
