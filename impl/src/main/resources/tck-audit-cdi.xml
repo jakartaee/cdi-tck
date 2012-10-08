@@ -3499,11 +3499,6 @@
             </assertion>
         </group>
 
-        <!-- See CDI-109 -->
-        <assertion id="bbb" testable="false">
-            <text>The container must ensure that all |@Dependent| scoped contextual instances injected into method parameters of an observer method of any container lifecycle event, as defined in Section 11.5, "Container lifecycle events", are destroyed after all observers of the |BeforeShutdown| event complete.</text>
-        </assertion>
-
         <group>
             <text>The container must ensure that all |@Dependent| scoped contextual instances injected into method parameters of a disposer method or observer method of any other event are destroyed when the invocation completes.</text>
             <assertion id="ccc">
