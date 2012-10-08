@@ -2170,16 +2170,13 @@
         </assertion>
 
         <group>
-            <text>If Y has a name and X declares a name explicitly, using |@Named|, the container automatically detects the problem and treats it as a definition error.</text>
-
+            <text>If Y has a bean name and X declares a bean name explicitly the container automatically detects the problem and treats it as a definition error.</text>
             <assertion id="la">
                 <text>Test that a specializing producer method with a name throws a definition exception.</text>
             </assertion>
-
             <assertion id="lb">
                 <text>Test that a specializing managed bean with a name throws a definition exception.</text>
             </assertion>
-
             <assertion id="lc">
                 <text>Test that a specializing enterprise bean with a name throws a definition exception.</text>
             </assertion>
@@ -2252,7 +2249,7 @@
         </group>
 
         <group>
-            <text>An alternative is selected for the bean deployment archive if the policy is a producer method, field or resource, and the bean class that declares the method or field is listed.</text>
+            <text>An alternative is selected for the bean deployment archive if the alternative is a producer method, field or resource, and the bean class that declares the method or field is listed.</text>
 
             <assertion id="fa">
                 <text>Test for enablement of a producer method and field.</text>
@@ -2268,7 +2265,7 @@
         </assertion>
 
         <assertion id="h">
-            <text>Each child |&lt;class&gt;| element must specify the name of a alternative bean class. If there is no class with the specified name, or if the class with the specified name is not an alternative bean class, the container automatically detects the problem and treats it as a deployment problem.</text>
+            <text>Each child |&lt;class&gt;| element must specify the name of a bean class of an alternative bean. If there is no class with the specified name, or if the class with the specified name is not an alternative bean class, the container automatically detects the problem and treats it as a deployment problem.</text>
         </assertion>
 
         <assertion id="i">
