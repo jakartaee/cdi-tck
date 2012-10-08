@@ -953,7 +953,7 @@
 
     <section id="3.2.5" title="Default name for a session bean">
         <assertion id="a">
-            <text>The default name for a managed bean is the unqualified class name of the session bean class, after converting the first character to lower case.</text>
+            <text>The default name for a session bean is the unqualified class name of the session bean class, after converting the first character to lower case.</text>
         </assertion>
     </section>
 
