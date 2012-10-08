@@ -17,6 +17,10 @@
 
 package org.jboss.cdi.tck.tests.extensions.bean.bytype;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+
 import java.lang.reflect.GenericDeclaration;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
@@ -29,6 +33,8 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -45,23 +51,40 @@ public class BeanByTypeTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(BeanByTypeTest.class).build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(BeanByTypeTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createAlternatives()
+                                .clazz(AlternativeConnector.class.getName()).up()).build();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "aa"), @SpecAssertion(section = "11.3.5", id = "b") })
     public void testGetBeans() {
         Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
-        assert beans.size() == 1;
-        assert beans.iterator().next().getBeanClass().equals(SimpleBean.class);
+        assertEquals(beans.size(), 1);
+        assertEquals(beans.iterator().next().getBeanClass(), SimpleBean.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "c") })
     public void testNoBindingImpliesCurrent() {
         Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
-        assert beans.size() == 1;
-        assert beans.iterator().next().getQualifiers().contains(new DefaultLiteral());
+        assertEquals(beans.size(), 1);
+        assertTrue(beans.iterator().next().getQualifiers().contains(new DefaultLiteral()));
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "ab") })
+    public void testGetBeansDoesNotResolveAlternatives() {
+        Set<Bean<?>> beans = getCurrentManager().getBeans(Connector.class);
+        assertEquals(beans.size(), 2);
+        for (Bean<?> bean : beans) {
+            if (!typeSetMatches(bean.getTypes(), Object.class, Connector.class)
+                    && !typeSetMatches(bean.getTypes(), Object.class, Connector.class, AlternativeConnector.class)) {
+                fail("Unexpected bean types found");
+            }
+        }
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
