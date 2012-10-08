@@ -5284,7 +5284,6 @@
         </assertion>
 
         <assertion id="cb">
-            qualifiers
             <text>For an injected |Event|, the specified type is the type parameter specified at the injection point, and the specified qualifiers are the qualifiers specified at the injection point.</text>
         </assertion>
 
@@ -5311,6 +5310,11 @@
         <assertion id="f">
             <text>If the runtime type of the event object contains a type variable, an |IllegalArgumentException| is thrown.</text>
         </assertion>
+        
+        <assertion id="g">
+            <text>If the runtime type of the event object is assignable to the type of a container lifecycle event, |IllegalArgumentException| is thrown.</text>
+        </assertion>
+        
     </section>
 
     <section id="10.3.2" title="The built-in Event">

@@ -14,18 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.broken.event;
+package org.jboss.cdi.tck.tests.event.fires;
 
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.Context;
+import javax.enterprise.event.Event;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
 import javax.enterprise.inject.spi.Annotated;
@@ -54,13 +53,40 @@ import javax.enterprise.inject.spi.ProcessProducerMethod;
 import javax.enterprise.inject.spi.ProcessSessionBean;
 import javax.enterprise.inject.spi.Producer;
 import javax.enterprise.inject.spi.SessionBeanType;
+import javax.inject.Inject;
 
+@RequestScoped
 public class ContainerLifecycleEvents {
 
-    private ContainerLifecycleEvents() {
+    @Inject
+    Event<Object> event;
+
+    public void fireContainerLifecycleEvents() {
+        tryFire(AfterBeanDiscovery.class, AFTER_BEAN_DISCOVERY);
+        tryFire(AfterDeploymentValidation.class, AFTER_DEPLOYMENT_VALIDATION);
+        tryFire(BeforeShutdown.class, BEFORE_SHUTDOWN);
+        tryFire(ProcessModule.class, PROCESS_MODULE);
+        tryFire(ProcessAnnotatedType.class, PROCESS_ANNOTATED_TYPE);
+        tryFire(ProcessInjectionPoint.class, PROCESS_INJECTION_POINT);
+        tryFire(ProcessInjectionTarget.class, PROCESS_INJECTION_TARGET);
+        tryFire(ProcessProducer.class, PROCESS_PRODUCER);
+        tryFire(ProcessBeanAttributes.class, PROCESS_BEAN_ATTRIBUTES);
+        tryFire(ProcessBean.class, PROCESS_BEAN);
+        tryFire(ProcessObserverMethod.class, PROCESS_OBSERVER_METHOD);
+        tryFire(ProcessSessionBean.class, PROCESS_SESSION_BEAN);
+        tryFire(ProcessProducerField.class, PROCESS_PRODUCER_FIELD);
+        tryFire(ProcessProducerMethod.class, PROCESS_PRODUCER_METHOD);
+        tryFire(BeforeBeanDiscovery.class, BEFORE_BEAN_DISCOVERY);
     }
 
-    public static final Collection<Object> CONTAINER_LIFECYCLE_EVENTS;
+    private <T> void tryFire(Class<T> clazz, T payload) {
+        try {
+            event.select(clazz).fire(payload);
+            throw new IllegalStateException("Expected exception (IllegalArgumentException) not thrown");
+        } catch (IllegalArgumentException expected) {
+            expected.getCause();
+        }
+    }
 
     public static final BeforeBeanDiscovery BEFORE_BEAN_DISCOVERY = new BeforeBeanDiscovery() {
         @Override
@@ -351,24 +377,4 @@ public class ContainerLifecycleEvents {
         }
     };
 
-    static {
-        List<Object> values = new LinkedList<Object>();
-        values.add(AFTER_BEAN_DISCOVERY);
-        values.add(AFTER_DEPLOYMENT_VALIDATION);
-        values.add(BEFORE_SHUTDOWN);
-        values.add(PROCESS_MODULE);
-        values.add(PROCESS_ANNOTATED_TYPE);
-        values.add(PROCESS_INJECTION_POINT);
-        values.add(PROCESS_INJECTION_TARGET);
-        values.add(PROCESS_PRODUCER);
-        values.add(PROCESS_BEAN_ATTRIBUTES);
-        values.add(PROCESS_BEAN);
-        values.add(PROCESS_OBSERVER_METHOD);
-        values.add(PROCESS_SESSION_BEAN);
-        values.add(PROCESS_PRODUCER_FIELD);
-        values.add(PROCESS_PRODUCER_METHOD);
-        values.add(BEFORE_BEAN_DISCOVERY);
-        CONTAINER_LIFECYCLE_EVENTS = Collections.unmodifiableList(values);
-
-    }
 }

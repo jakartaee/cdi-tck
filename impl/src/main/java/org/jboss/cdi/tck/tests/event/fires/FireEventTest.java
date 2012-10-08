@@ -17,8 +17,12 @@
 package org.jboss.cdi.tck.tests.event.fires;
 
 import static org.jboss.cdi.tck.TestGroups.EVENTS;
+import static org.jboss.cdi.tck.TestGroups.REWRITE;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -28,7 +32,6 @@ import java.lang.reflect.TypeVariable;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.util.AnnotationLiteral;
 
@@ -48,45 +51,39 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  * @author Martin Kouba
  */
+@Test(groups = { EVENTS })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class FireEventTest extends AbstractTest {
-    private static final String BEAN_MANAGER_FIRE_EVENT_METHOD_NAME = "fireEvent";
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(FireEventTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
-    @SpecAssertions({
-            // these two assertions combine to create a logical, testable assertion
-            @SpecAssertion(section = "11.3.10", id = "a"), @SpecAssertion(section = "11.3.10", id = "b") })
-    public void testBeanManagerInterfaceForFireEventMethod() throws Exception {
-        assert BeanManager.class.getDeclaredMethod(BEAN_MANAGER_FIRE_EVENT_METHOD_NAME, Object.class, Annotation[].class) != null;
-    }
-
-    @Test(groups = { EVENTS })
-    @SpecAssertion(section = "11.3.10", id = "a")
+    @SuppressWarnings("serial")
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "11.3.10", id = "a"), @SpecAssertion(section = "11.3.10", id = "b") })
     public void testBeanManagerFireEvent() {
         Billing billing = getInstanceByType(Billing.class);
         billing.reset();
         MiniBar miniBar = new MiniBar();
         miniBar.stockNoNotify();
         getCurrentManager().fireEvent(miniBar);
-        assert billing.isActive();
+        assertTrue(billing.isActive());
         Item chocolate = miniBar.getItemByName("Chocolate");
         getCurrentManager().fireEvent(chocolate, new AnnotationLiteral<Lifted>() {
         });
-        assert billing.getCharge() == 5.00d;
+        assertEquals(billing.getCharge(), 5);
     }
 
-    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.10", id = "c")
     public void testTypeVariableEventTypeFails() throws Exception {
         getInstanceByType(Bar.class).<Integer> fireWithTypeVariable();
     }
 
-    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
+    @SuppressWarnings("serial")
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.10", id = "d")
     public void testDuplicateBindingsToFireEventFails() throws Exception {
         getCurrentManager().fireEvent(new Object(), new AnnotationLiteral<Lifted>() {
@@ -99,7 +96,8 @@ public class FireEventTest extends AbstractTest {
      * @Any} binding type and that the injected object can be used to fire an event. The functionality is verified by checking
      * that the corresponding observer gets invoked.
      */
-    @Test(groups = EVENTS)
+    // Simplify assertions
+    @Test(groups = REWRITE)
     @SpecAssertion(section = "10.3", id = "a")
     public void testInjectedAnyEventCanFireEvent() {
         Billing billing = getInstanceByType(Billing.class);
@@ -113,23 +111,24 @@ public class FireEventTest extends AbstractTest {
             }
         }
 
-        assert eventInjection != null;
-        assert eventInjection.getQualifiers().size() == 1;
-        assert eventInjection.getQualifiers().contains(AnyLiteral.INSTANCE);
+        assertNotNull(eventInjection);
+        assertEquals(eventInjection.getQualifiers().size(), 1);
+        assertTrue(eventInjection.getQualifiers().contains(AnyLiteral.INSTANCE));
 
         CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
         MiniBar miniBar = miniBarBean.create(miniBarCc);
         miniBar.stock();
-        assert billing.isActive();
-        assert billing.getMiniBarValue() == 16.00d;
+        assertTrue(billing.isActive());
+        assertEquals(billing.getMiniBarValue(), 16);
     }
 
     /**
      * This test verifies that the fire() method of the injected {@link Event} object accepts an event object and that the event
      * object's type is the same as the the parameterized type on the event field.
      **/
+    // Simplify assertions
+    @Test(groups = REWRITE)
     @SpecAssertions({ @SpecAssertion(section = "10.3", id = "b"), @SpecAssertion(section = "10.3.1", id = "cb") })
-    @Test(groups = EVENTS)
     public void testInjectedEventAcceptsEventObject() throws SecurityException, NoSuchFieldException, NoSuchMethodException {
         Billing billing = getInstanceByType(Billing.class);
         billing.reset();
@@ -139,37 +138,37 @@ public class FireEventTest extends AbstractTest {
 
         Field eventField = miniBar.getClass().getDeclaredField("miniBarEvent");
         ParameterizedType eventFieldType = (ParameterizedType) eventField.getGenericType();
-        assert eventFieldType.getActualTypeArguments().length == 1;
-        assert MiniBar.class.equals(eventFieldType.getActualTypeArguments()[0]);
-        assert Event.class.equals(eventFieldType.getRawType());
+        assertEquals(eventFieldType.getActualTypeArguments().length, 1);
+        assertEquals(MiniBar.class, eventFieldType.getActualTypeArguments()[0]);
+        assertEquals(Event.class, eventFieldType.getRawType());
         Method fireMethod = null;
         @SuppressWarnings("unchecked")
         Class<Event<Item>> eventFieldClass = (Class<Event<Item>>) eventFieldType.getRawType();
         for (Method method : eventFieldClass.getMethods()) {
             if (method.getName().equals("fire") && !method.isSynthetic()) {
                 if (fireMethod != null) {
-                    assert false : "Expecting exactly one method on Event named 'fire'";
+                    fail("Expecting exactly one method on Event named 'fire'");
                 }
                 fireMethod = method;
             }
         }
 
         if (fireMethod == null) {
-            assert false : "Expecting exactly one method on Event named 'fire'";
+            fail("Expecting exactly one method on Event named 'fire'");
         }
 
-        assert fireMethod.getParameterTypes().length == 1;
-        assert fireMethod.getGenericParameterTypes().length == 1;
+        assertEquals(fireMethod.getParameterTypes().length, 1);
+        assertEquals(fireMethod.getGenericParameterTypes().length, 1);
         // make sure the same type used to parameterize the Event class is referenced in the fire() method
         Type fireMethodArgumentType = fireMethod.getGenericParameterTypes()[0];
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings("rawtypes")
         Type eventClassParameterizedType = ((TypeVariable) fireMethod.getGenericParameterTypes()[0]).getGenericDeclaration()
                 .getTypeParameters()[0];
-        assert fireMethodArgumentType.equals(eventClassParameterizedType);
+        assertEquals(fireMethodArgumentType, eventClassParameterizedType);
 
         miniBar.stock();
-        assert billing.isActive();
-        assert billing.getMiniBarValue() == 16.00d;
+        assertTrue(billing.isActive());
+        assertEquals(billing.getMiniBarValue(), 16);
     }
 
     /**
@@ -177,7 +176,9 @@ public class FireEventTest extends AbstractTest {
      * properly injected and that this object can be used to fire an event. The functionality is verified by checking that the
      * cooresponding observer gets invoked.
      */
-    @Test(groups = EVENTS)
+    @SuppressWarnings("serial")
+    // Simplify assertions
+    @Test(groups = REWRITE)
     @SpecAssertions({ @SpecAssertion(section = "10.3", id = "c"), @SpecAssertion(section = "10.3.1", id = "cb") })
     public void testInjectedEventCanHaveBindings() {
         Billing billing = getInstanceByType(Billing.class);
@@ -192,25 +193,26 @@ public class FireEventTest extends AbstractTest {
             }
         }
 
-        assert eventInjection != null;
-        assert eventInjection.getQualifiers().size() == 1;
-        assert eventInjection.getQualifiers().contains(new AnnotationLiteral<Lifted>() {
-        });
+        assertNotNull(eventInjection);
+        assertEquals(eventInjection.getQualifiers().size(), 1);
+        assertTrue(eventInjection.getQualifiers().contains(new AnnotationLiteral<Lifted>() {
+        }));
 
         CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
         MiniBar miniBar = miniBarBean.create(miniBarCc);
         miniBar.stock();
         Item chocolate = miniBar.getItemByName("Chocolate");
-        assert chocolate != null;
+        assertNotNull(chocolate);
         miniBar.liftItem(chocolate);
-        assert billing.getCharge() == chocolate.getPrice();
+        assertEquals(billing.getCharge(), chocolate.getPrice());
     }
 
     /**
      * This test verifies that binding types can be specified dynamically when firing an event using {@link Event#fire()} by
      * first using the {@link Event#select()} method to retrieve an Event object with associated binding types.
      */
-    @Test(groups = EVENTS)
+    // Simplify assertions
+    @Test(groups = REWRITE)
     @SpecAssertion(section = "10.3", id = "d")
     public void testInjectedEventCanSpecifyBindingsDynamically() {
         Billing billing = getInstanceByType(Billing.class);
@@ -226,59 +228,67 @@ public class FireEventTest extends AbstractTest {
             }
         }
 
-        assert eventInjection != null;
-        assert eventInjection.getQualifiers().size() == 1;
-        assert eventInjection.getQualifiers().contains(AnyLiteral.INSTANCE);
+        assertNotNull(eventInjection);
+        assertEquals(eventInjection.getQualifiers().size(), 1);
+        assertTrue(eventInjection.getQualifiers().contains(AnyLiteral.INSTANCE));
         CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
         MiniBar miniBar = miniBarBean.create(miniBarCc);
         miniBar.stock();
         Item water = miniBar.liftItemByName("16 oz Water");
         miniBar.restoreItem(water);
-        assert billing.getCharge() == 1.00d;
-        assert housekeeping.getItemsTainted().size() == 1;
-        assert housekeeping.getItemsTainted().contains(water);
+        assertEquals(billing.getCharge(), 1);
+        assertEquals(housekeeping.getItemsTainted().size(), 1);
+        assertTrue(housekeeping.getItemsTainted().contains(water));
     }
 
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertion(section = "10.3.1", id = "ca")
     public void testEventProvidesMethodForFiringEventsWithCombinationOfTypeAndBindings() {
         DoggiePoints points = getInstanceByType(DoggiePoints.class);
         points.reset();
         DogWhisperer master = getInstanceByType(DogWhisperer.class);
         master.issueTamingCommand();
-        assert points.getNumTamed() == 1;
-        assert points.getNumPraiseReceived() == 0;
+        assertEquals(points.getNumTamed(), 1);
+        assertEquals(points.getNumPraiseReceived(), 0);
         master.givePraise();
-        assert points.getNumTamed() == 1;
-        assert points.getNumPraiseReceived() == 1;
+        assertEquals(points.getNumTamed(), 1);
+        assertEquals(points.getNumPraiseReceived(), 1);
     }
 
-    @Test(groups = EVENTS)
+    // Simplify assertions
+    @SuppressWarnings("serial")
+    @Test(groups = REWRITE)
     @SpecAssertion(section = "10.3.1", id = "eda")
     public void testEventSelectedFiresAndObserversNotified() {
         Housekeeping houseKeeping = getInstanceByType(Housekeeping.class);
         houseKeeping.reset();
         MiniBar miniBar = getInstanceByType(MiniBar.class);
-        Item chocolate = new Item("Chocolate", 5.00d);
-        Item crackers = new Item("Crackers", 2.50d);
+        Item chocolate = new Item("Chocolate", 5);
+        Item crackers = new Item("Crackers", 2);
 
         miniBar.getItemEvent().fire(chocolate);
-        assert houseKeeping.getItemActivity().size() == 1;
-        assert houseKeeping.getItemActivity().get(0) == chocolate;
+        assertEquals(houseKeeping.getItemActivity().size(), 1);
+        assertEquals(houseKeeping.getItemActivity().get(0), chocolate);
 
         miniBar.getItemEvent().select(new AnnotationLiteral<Lifted>() {
         }).fire(crackers);
-        assert houseKeeping.getItemActivity().size() == 2;
-        assert houseKeeping.getItemActivity().get(1) == crackers;
-        assert houseKeeping.getItemsMissing().size() == 1;
-        assert houseKeeping.getItemsMissing().iterator().next() == crackers;
+        assertEquals(houseKeeping.getItemActivity().size(), 2);
+        assertEquals(houseKeeping.getItemActivity().get(1), crackers);
+        assertEquals(houseKeeping.getItemsMissing().size(), 1);
+        assertEquals(houseKeeping.getItemsMissing().iterator().next(), crackers);
     }
 
-    @Test(groups = { EVENTS }, expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertions({ @SpecAssertion(section = "10.3.1", id = "f"), @SpecAssertion(section = "10.2", id = "j") })
     public <T> void testEventFireThrowsExceptionIfEventObjectContainsTypeVariable() {
         MiniBar miniBar = getInstanceByType(MiniBar.class);
-        miniBar.itemEvent.fire(new Item_Illegal<T>("12 oz Beer", 5.50));
+        miniBar.itemEvent.fire(new Item_Illegal<T>("12 oz Beer", 6));
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = "10.3.1", id = "g")
+    public void testFireContainerLifecycleEvent(ContainerLifecycleEvents containerLifecycleEvents) {
+        containerLifecycleEvents.fireContainerLifecycleEvents();
     }
 
 }

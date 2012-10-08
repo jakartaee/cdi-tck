@@ -16,9 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.fires;
 
+
 public class Item_Illegal<T> extends Item {
 
-    public Item_Illegal(String name, double price) {
+    public Item_Illegal(String name, int price) {
         super(name, price);
     }
 

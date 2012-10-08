@@ -25,6 +25,7 @@ import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
 public class MiniBar {
+
     private Set<Item> items = new HashSet<Item>();
 
     @Inject
@@ -89,8 +90,8 @@ public class MiniBar {
     }
 
     public void stockNoNotify() {
-        items.add(new Item("Chocolate", 5.00));
-        items.add(new Item("16 oz Water", 1.00));
-        items.add(new Item("Disposable Camera", 10.00));
+        items.add(new Item("Chocolate", 5));
+        items.add(new Item("16 oz Water", 1));
+        items.add(new Item("Disposable Camera", 10));
     }
 }

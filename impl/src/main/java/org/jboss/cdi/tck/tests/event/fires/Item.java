@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.event.fires;
 
+
 public class Item {
+
     private String name;
 
-    private double price;
+    private int price;
 
-    public Item(String name, double price) {
+    public Item(String name, int price) {
         this.name = name;
         this.price = price;
     }
@@ -30,7 +32,7 @@ public class Item {
         return name;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 }

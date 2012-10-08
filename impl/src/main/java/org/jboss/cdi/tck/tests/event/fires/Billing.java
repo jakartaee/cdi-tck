@@ -24,12 +24,13 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 
 @RequestScoped
-class Billing {
+public class Billing {
+
     private boolean active = false;
 
-    private double charge = 0;
+    private int charge = 0;
 
-    private double miniBarValue = 0d;
+    private int miniBarValue = 0;
 
     private Set<Item> itemsPurchased = new HashSet<Item>();
 
@@ -39,11 +40,11 @@ class Billing {
         }
     }
 
-    public double getCharge() {
+    public int getCharge() {
         return charge;
     }
 
-    public double getMiniBarValue() {
+    public int getMiniBarValue() {
         return miniBarValue;
     }
 
