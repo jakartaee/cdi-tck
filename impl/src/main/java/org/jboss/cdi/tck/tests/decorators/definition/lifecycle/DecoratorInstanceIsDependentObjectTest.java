@@ -57,7 +57,7 @@ public class DecoratorInstanceIsDependentObjectTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "8", id = "c") })
     public void testDecoratorInstanceIsDependentObject() throws Exception {
 
         WebClient webClient = new WebClient();

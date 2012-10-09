@@ -4628,8 +4628,12 @@
             <text>Decorators may be associated with any managed bean that is not itself an interceptor or decorator or with any EJB session bean.</text>
             <note>Doesn't specify an error</note>
         </assertion>
-
+        
         <assertion id="b">
+            <text>Decorators are not applied to the return value of a producer method or the current value of a producer field.</text>
+        </assertion>
+
+        <assertion id="c">
             <text>A decorator instance is a dependent object of the object it decorates.</text>
         </assertion>
     </section>
