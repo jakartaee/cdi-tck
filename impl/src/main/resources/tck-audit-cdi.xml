@@ -2096,28 +2096,13 @@
         </group>
 
         <group>
-            <text>If X is a generic type, and an injection point, producer method, producer field, disposer method or observer method declared by X is inherited by Y, and the declared type of the injection point, producer method, producer field, disposed para- meter or event parameter contains type variables declared by X, the type of the injection point, producer method, producer field, disposed parameter or event parameter inherited in Y is the declared type, after substitution of actual type arguments declared by Y or any intermediate class that is a subclass of X and a superclass of Y.</text>
+            <text>If X is a generic type, and an injection point or observer method declared by X is inherited by Y, and the declared type of the injection point, producer method, producer field, disposed para- meter or event parameter contains type variables declared by X, the type of the injection point, producer method, producer field, disposed parameter or event parameter inherited in Y is the declared type, after substitution of actual type arguments declared by Y or any intermediate class that is a subclass of X and a superclass of Y.</text>
 
             <assertion id="f">
                 <text>Check injection point</text>
             </assertion>
 
-            <assertion id="g" testable="false">
-                <text>Check producer method</text>
-                <note>FIXME - see CDI-222</note>
-            </assertion>
-
-            <assertion id="h" testable="false">
-                <text>Check producer field</text>
-                <note>FIXME - see CDI-222</note>
-            </assertion>
-
-            <assertion id="i" testable="false">
-                <text>Check disposer method</text>
-                <note>FIXME - see CDI-222</note>
-            </assertion>
-
-            <assertion id="j">
+            <assertion id="g">
                 <text>check observer method</text>
             </assertion>
         </group>

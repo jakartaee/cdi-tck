@@ -88,7 +88,7 @@ public class MemberLevelInheritanceTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "4.2", id = "j")
+    @SpecAssertion(section = "4.2", id = "g")
     public void testObserverResolution() throws Exception {
 
         Set<ObserverMethod<? super Qux>> observerMethods = getCurrentManager().resolveObserverMethods(new Qux(null));
@@ -100,7 +100,7 @@ public class MemberLevelInheritanceTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "4.2", id = "j")
+    @SpecAssertion(section = "4.2", id = "g")
     public void testObserver(Foo foo) throws Exception {
         assertNotNull(foo);
         getCurrentManager().fireEvent(new Qux(null));
