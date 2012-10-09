@@ -19,7 +19,10 @@ package org.jboss.cdi.tck.tests.extensions.processBean;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBean;
+import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessSessionBean;
+
+import org.jboss.cdi.tck.util.ActionSequence;
 
 public class ProcessSessionBeanObserver implements Extension {
 
@@ -27,12 +30,19 @@ public class ProcessSessionBeanObserver implements Extension {
 
     private static int elephantProcessBeanCount;
 
+    private static ActionSequence elephantActionSeq = new ActionSequence();
+
     public void observeElephantSessionBean(@Observes ProcessSessionBean<Elephant> event) {
         ProcessSessionBeanObserver.elephantProcessSessionBean = event;
+        elephantActionSeq.add(ProcessSessionBean.class.getName());
     }
 
     public void observeElephantBean(@Observes ProcessBean<Elephant> event) {
         ProcessSessionBeanObserver.elephantProcessBeanCount++;
+    }
+
+    public void observeElephantBeanAttributes(@Observes ProcessBeanAttributes<Elephant> event) {
+        elephantActionSeq.add(ProcessBeanAttributes.class.getName());
     }
 
     public static ProcessSessionBean<Elephant> getElephantProcessSessionBean() {
@@ -41,6 +51,10 @@ public class ProcessSessionBeanObserver implements Extension {
 
     public static int getElephantProcessBeanCount() {
         return elephantProcessBeanCount;
+    }
+
+    public static ActionSequence getElephantActionSeq() {
+        return elephantActionSeq;
     }
 
 }

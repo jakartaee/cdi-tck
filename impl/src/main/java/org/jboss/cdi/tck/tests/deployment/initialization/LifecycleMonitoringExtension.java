@@ -22,6 +22,7 @@ import javax.enterprise.inject.spi.AfterDeploymentValidation;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
+import javax.enterprise.inject.spi.ProcessModule;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
@@ -37,6 +38,10 @@ public class LifecycleMonitoringExtension implements Extension {
 
     public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event) {
         ActionSequence.addAction(BeforeBeanDiscovery.class.getName());
+    }
+
+    public void observeProcessModule(@Observes ProcessModule event) {
+        ActionSequence.addAction(ProcessModule.class.getName());
     }
 
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event) {

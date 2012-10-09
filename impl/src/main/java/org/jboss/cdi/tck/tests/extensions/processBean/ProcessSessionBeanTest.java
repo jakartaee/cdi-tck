@@ -20,7 +20,10 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.util.Arrays;
+
 import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessSessionBean;
 import javax.enterprise.inject.spi.SessionBeanType;
 
@@ -49,11 +52,11 @@ public class ProcessSessionBeanTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "c"), @SpecAssertion(section = "11.5.11", id = "edb"),
-            @SpecAssertion(section = "11.5.11", id = "efb"), @SpecAssertion(section = "11.5.11", id = "fb"),
-            @SpecAssertion(section = "11.5.11", id = "hb"), @SpecAssertion(section = "11.5.11", id = "hc"),
-            @SpecAssertion(section = "11.5.11", id = "m"), @SpecAssertion(section = "11.5.11", id = "k"),
-            @SpecAssertion(section = "12.4", id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "ca"), @SpecAssertion(section = "11.5.11", id = "cb"),
+            @SpecAssertion(section = "11.5.11", id = "edb"), @SpecAssertion(section = "11.5.11", id = "efb"),
+            @SpecAssertion(section = "11.5.11", id = "fb"), @SpecAssertion(section = "11.5.11", id = "hb"),
+            @SpecAssertion(section = "11.5.11", id = "hc"), @SpecAssertion(section = "11.5.11", id = "m"),
+            @SpecAssertion(section = "11.5.11", id = "k"), @SpecAssertion(section = "12.4", id = "fb") })
     public void testProcessSessionBeanEvent() {
 
         ProcessSessionBean<Elephant> event = ProcessSessionBeanObserver.getElephantProcessSessionBean();
@@ -64,6 +67,9 @@ public class ProcessSessionBeanTest extends AbstractTest {
         assertEquals(event.getSessionBeanType(), SessionBeanType.STATELESS);
         assertTrue(event.getAnnotated() instanceof AnnotatedType<?>);
         assertEquals(event.getAnnotatedBeanClass().getBaseType(), Elephant.class);
+
+        assertEquals(ProcessSessionBeanObserver.getElephantActionSeq().getData(),
+                Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessSessionBean.class.getName()));
     }
 
 }

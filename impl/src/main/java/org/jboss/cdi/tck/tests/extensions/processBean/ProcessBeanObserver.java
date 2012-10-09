@@ -19,9 +19,12 @@ package org.jboss.cdi.tck.tests.extensions.processBean;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBean;
+import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessManagedBean;
 import javax.enterprise.inject.spi.ProcessProducerField;
 import javax.enterprise.inject.spi.ProcessProducerMethod;
+
+import org.jboss.cdi.tck.util.ActionSequence;
 
 public class ProcessBeanObserver implements Extension {
 
@@ -36,9 +39,14 @@ public class ProcessBeanObserver implements Extension {
     private static ProcessProducerField<Chicken, ChickenHutch> chickenProcessProducerField;
     private static int chickenHutchProcessBeanCount;
 
+    private static ActionSequence catActionSeq = new ActionSequence();
+    private static ActionSequence cowActionSeq = new ActionSequence();
+    private static ActionSequence chickenActionSeq = new ActionSequence();
+
     public void observeCatManagedBean(@Observes ProcessManagedBean<Cat> event) {
         ProcessBeanObserver.catProcessManagedBean = event;
         ProcessBeanObserver.catProcessBeanCount++;
+        catActionSeq.add(ProcessManagedBean.class.getName());
     }
 
     public void observeCatBean(@Observes ProcessBean<Cat> event) {
@@ -52,6 +60,7 @@ public class ProcessBeanObserver implements Extension {
      */
     public void observeCowProcessProducerMethod(@Observes ProcessProducerMethod<Cow, Cowshed> event) {
         ProcessBeanObserver.cowProcessProducerMethod = event;
+        cowActionSeq.add(ProcessProducerMethod.class.getName());
     }
 
     public void observeCowShedProccesBean(@Observes ProcessBean<Cowshed> event) {
@@ -65,10 +74,23 @@ public class ProcessBeanObserver implements Extension {
      */
     public void observeChickenProcessProducerField(@Observes ProcessProducerField<Chicken, ChickenHutch> event) {
         ProcessBeanObserver.chickenProcessProducerField = event;
+        chickenActionSeq.add(ProcessProducerField.class.getName());
     }
 
     public void observeChickenHutchProccesBean(@Observes ProcessBean<ChickenHutch> event) {
         ProcessBeanObserver.chickenHutchProcessBeanCount++;
+    }
+
+    public void observeCatBeanAttributes(@Observes ProcessBeanAttributes<Cat> event) {
+        catActionSeq.add(ProcessBeanAttributes.class.getName());
+    }
+
+    public void observeCowBeanAttributes(@Observes ProcessBeanAttributes<Cow> event) {
+        cowActionSeq.add(ProcessBeanAttributes.class.getName());
+    }
+
+    public void observeChickenBeanAttributes(@Observes ProcessBeanAttributes<Chicken> event) {
+        chickenActionSeq.add(ProcessBeanAttributes.class.getName());
     }
 
     public static ProcessManagedBean<Cat> getCatProcessManagedBean() {
@@ -89,6 +111,18 @@ public class ProcessBeanObserver implements Extension {
 
     public static int getChickenHutchProcessBeanCount() {
         return chickenHutchProcessBeanCount;
+    }
+
+    public static ActionSequence getCatActionSeq() {
+        return catActionSeq;
+    }
+
+    public static ActionSequence getCowActionSeq() {
+        return cowActionSeq;
+    }
+
+    public static ActionSequence getChickenActionSeq() {
+        return chickenActionSeq;
     }
 
     /**

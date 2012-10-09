@@ -26,6 +26,7 @@ import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
+import javax.enterprise.inject.spi.ProcessModule;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -60,7 +61,7 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "12.2", id = "b"), @SpecAssertion(section = "12.2", id = "c"),
             @SpecAssertion(section = "12.2", id = "da"), @SpecAssertion(section = "12.2", id = "f"),
             @SpecAssertion(section = "12.2", id = "g"), @SpecAssertion(section = "12.2", id = "ga"),
-            @SpecAssertion(section = "12.2", id = "h") })
+            @SpecAssertion(section = "12.2", id = "h"), @SpecAssertion(section = "12.2", id = "i") })
     public void testInitialization() {
 
         foo.ping();
@@ -71,6 +72,8 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
         correctSequenceData.add(LifecycleMonitoringExtension.class.getName());
         // BeforeBeanDiscovery
         correctSequenceData.add(BeforeBeanDiscovery.class.getName());
+        // ProcessModule
+        correctSequenceData.add(ProcessModule.class.getName());
         // Bean discovery
         correctSequenceData.add(ProcessAnnotatedType.class.getName());
         // AfterBeanDiscovery

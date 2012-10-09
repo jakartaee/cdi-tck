@@ -6983,24 +6983,40 @@
 
     <section id="11.5.11" title="ProcessBean event">
         <assertion id="aa" testable="false">
-            <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean archive, before registering the |Bean| object. No event is fired for any |@New| qualified bean, defined in Section 3.12, "@New qualified beans".</text>
+            <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean archive, after firing the |ProcessBeanAttributes| for the bean and before registering the |Bean| object. No event is fired for any |@New| qualified bean, defined in Section 3.12, "@New qualified beans".</text>
             <note>Tested below</note>
         </assertion>
 
         <assertion id="ba">
             <text>For a managed bean with bean class |X|, the container must raise an event of type |ProcessManagedBean&lt;X&gt;|.</text>
         </assertion>
+        
+        <assertion id="bb">
+            <text>Test |ProcessManagedBean| is fired after |ProcessBeanAttributes|.</text>
+        </assertion>
 
-        <assertion id="c">
+        <assertion id="ca">
             <text>For a session bean with bean class |X|, the container must raise an event of type |ProcessSessionBean&lt;X&gt;|.</text>
+        </assertion>
+        
+         <assertion id="cb">
+            <text>Test |ProcessSessionBean| is fired after |ProcessBeanAttributes|.</text>
         </assertion>
 
         <assertion id="eaa">
             <text>For a producer method with method return type |X| of a bean with bean class |T|, the container must raise an event of type |ProcessProducerMethod&lt;T, X&gt;|.</text>
         </assertion>
+        
+        <assertion id="eab">
+            <text>Test |ProcessProducerMethod| is fired after |ProcessBeanAttributes|.</text>
+        </assertion>
 
-        <assertion id="eb">
+        <assertion id="eba">
             <text>For a producer field with field type |X| of a bean with bean class |T|, the container must raise an event of type |ProcessProducerField&lt;T, X&gt;|.</text>
+        </assertion>
+        
+         <assertion id="ebb">
+            <text>Test |ProcessProducerField| is fired after |ProcessBeanAttributes|.</text>
         </assertion>
 
         <assertion id="ec">
@@ -7259,17 +7275,19 @@
         <assertion id="c">
             <text>Next, the container must fire an event of type |BeforeBeanDiscovery|, as defined in Section 11.5.1, "BeforeBeanDiscovery event".</text>
         </assertion>
+        
+        <assertion id="i">
+            <text>Next, the container must fire an event of type |ProcessModule| for every bean archive, as defined in Section 11.5.5, “ProcessModule event”.</text>
+        </assertion>
 
         <group>
             <text>Next, the container must perform bean discovery, and abort initialization of the application if any definition errors exist, as defined in Section 2.8, "Problems detected automatically by the container". Additionally, for every Java EE component class supporting injection that may be instantiated by the container at runtime, the container must create an |InjectionTarget| for the class, as defined in 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type ProcessInjectionTarget, as defined in Section 11.5.6, "ProcessInjectionTarget event".</text>
 
             <assertion id="da">
-                <text>Check beans are discovered</text>
+                <text>Check beans are discovered.</text>
             </assertion>
             <assertion id="db">
-                <text>
-                    Check definitions errors occur
-                </text>
+                <text>Check definitions error occurs.</text>
             </assertion>
         </group>
 

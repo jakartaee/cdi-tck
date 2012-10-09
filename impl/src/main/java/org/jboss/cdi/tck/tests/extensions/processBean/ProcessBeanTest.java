@@ -16,9 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
+
+import java.util.Arrays;
 
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Disposes;
@@ -26,6 +29,7 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessManagedBean;
 import javax.enterprise.inject.spi.ProcessProducerField;
 import javax.enterprise.inject.spi.ProcessProducerMethod;
@@ -38,7 +42,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 /**
  * 
@@ -59,9 +62,10 @@ public class ProcessBeanTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "ba"), @SpecAssertion(section = "11.5.11", id = "eda"),
-            @SpecAssertion(section = "11.5.11", id = "efa"), @SpecAssertion(section = "11.5.11", id = "fa"),
-            @SpecAssertion(section = "11.5.11", id = "l"), @SpecAssertion(section = "12.4", id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "ba"), @SpecAssertion(section = "11.5.11", id = "bb"),
+            @SpecAssertion(section = "11.5.11", id = "eda"), @SpecAssertion(section = "11.5.11", id = "efa"),
+            @SpecAssertion(section = "11.5.11", id = "fa"), @SpecAssertion(section = "11.5.11", id = "l"),
+            @SpecAssertion(section = "12.4", id = "fa") })
     public void testProcessBeanEvent() {
 
         ProcessManagedBean<Cat> event = ProcessBeanObserver.getCatProcessManagedBean();
@@ -72,12 +76,15 @@ public class ProcessBeanTest extends AbstractTest {
         assertEquals(event.getAnnotatedBeanClass().getBaseType(), Cat.class);
         assertEquals(ProcessBeanObserver.getCatProcessBeanCount(), 2);
         assertTrue(ProcessBeanObserver.getCatProcessManagedBean().getAnnotated() instanceof AnnotatedType<?>);
+
+        assertEquals(ProcessBeanObserver.getCatActionSeq().getData(),
+                Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessManagedBean.class.getName()));
     }
 
-    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "eaa"), @SpecAssertion(section = "11.5.11", id = "edc"),
-            @SpecAssertion(section = "11.5.11", id = "efc"), @SpecAssertion(section = "11.5.11", id = "fc"),
-            @SpecAssertion(section = "11.5.11", id = "i"), @SpecAssertion(section = "11.5.11", id = "j"),
-            @SpecAssertion(section = "12.4", id = "ha") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "eaa"), @SpecAssertion(section = "11.5.11", id = "eab"),
+            @SpecAssertion(section = "11.5.11", id = "edc"), @SpecAssertion(section = "11.5.11", id = "efc"),
+            @SpecAssertion(section = "11.5.11", id = "fc"), @SpecAssertion(section = "11.5.11", id = "i"),
+            @SpecAssertion(section = "11.5.11", id = "j"), @SpecAssertion(section = "12.4", id = "ha") })
     @Test
     public void testProcessProducerMethodEvent() {
 
@@ -105,11 +112,15 @@ public class ProcessBeanTest extends AbstractTest {
         assertEquals(disposedParam.getDeclaringCallable().getJavaMember().getName(), "disposeOfDaisy");
         assertEquals(disposedParam.getDeclaringCallable().getJavaMember().getDeclaringClass(), Cowshed.class);
         assertEquals(disposedParam.getDeclaringCallable().getDeclaringType().getJavaClass(), Cowshed.class);
+
+        assertEquals(ProcessBeanObserver.getCowActionSeq().getData(),
+                Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessProducerMethod.class.getName()));
     }
 
-    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "eb"), @SpecAssertion(section = "11.5.11", id = "edd"),
-            @SpecAssertion(section = "11.5.11", id = "efd"), @SpecAssertion(section = "11.5.11", id = "fd"),
-            @SpecAssertion(section = "11.5.11", id = "n"), @SpecAssertion(section = "12.4", id = "hb") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "eba"), @SpecAssertion(section = "11.5.11", id = "ebb"),
+            @SpecAssertion(section = "11.5.11", id = "edd"), @SpecAssertion(section = "11.5.11", id = "efd"),
+            @SpecAssertion(section = "11.5.11", id = "fd"), @SpecAssertion(section = "11.5.11", id = "n"),
+            @SpecAssertion(section = "12.4", id = "hb") })
     @Test
     public void testProcessProducerFieldEvent() {
 
@@ -137,6 +148,9 @@ public class ProcessBeanTest extends AbstractTest {
         assertEquals(disposedParam.getDeclaringCallable().getJavaMember().getName(), "disposeOfRocky");
         assertEquals(disposedParam.getDeclaringCallable().getJavaMember().getDeclaringClass(), ChickenHutch.class);
         assertEquals(disposedParam.getDeclaringCallable().getDeclaringType().getJavaClass(), ChickenHutch.class);
+
+        assertEquals(ProcessBeanObserver.getChickenActionSeq().getData(),
+                Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessProducerField.class.getName()));
     }
 
 }
