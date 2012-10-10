@@ -17,11 +17,16 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.http;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Type;
 import java.util.Collections;
+import java.util.List;
 
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.Decorator;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -40,6 +45,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * 
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
 
@@ -50,7 +56,7 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createDecorators()
-                                .clazz(HttpSessionDecorator.class.getName()).up()).build();
+                                .clazz(HttpSessionDecorator.class.getName()).clazz(HttpSessionDecorator2.class.getName()).up()).build();
     }
 
     @Inject
@@ -59,11 +65,18 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
     @Inject
     HttpSessionObserver httpSessionObserver;
 
+    @Inject
+    private BeanManager manager;
+
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac"), @SpecAssertion(section = "8.3", id = "aa") })
     public void testDecoratorIsResolved() {
-        checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(HttpSession.class)), HttpSessionDecorator.class,
-                Collections.<Type> singleton(HttpSession.class), HttpSession.class);
+        List<Decorator<?>> decorators = manager.resolveDecorators(Collections.<Type> singleton(HttpSession.class));
+        assertEquals(2, decorators.size());
+        for (Decorator<?> decorator : decorators) {
+            assertEquals(decorator.getDecoratedTypes(), Collections.<Type> singleton(HttpSession.class));
+            assertEquals(decorator.getDelegateType(), HttpSession.class);
+        }
     }
 
     @Test
@@ -72,5 +85,7 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
         httpSession.invalidate();
         assertTrue(httpSessionObserver.isDestroyed());
         assertTrue(httpSessionObserver.isDecorated());
+        assertEquals(3, httpSession.getLastAccessedTime());
+        assertEquals("bar", httpSession.getAttribute("foo"));
     }
 }

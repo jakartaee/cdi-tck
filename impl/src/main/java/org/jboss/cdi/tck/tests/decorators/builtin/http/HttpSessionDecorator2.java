@@ -23,28 +23,27 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 /**
- * @author Martin Kouba
+ * @author Jozef Hartinger
  * 
  */
 @Decorator
-public abstract class HttpSessionDecorator implements HttpSession {
+public abstract class HttpSessionDecorator2 implements HttpSession {
 
     @Inject
     @Delegate
     HttpSession delegate;
 
-    @Inject
-    HttpSessionObserver httpSessionObserver;
-
     @Override
     public long getLastAccessedTime() {
-        return delegate.getLastAccessedTime() * 3;
+        return 1;
     }
 
     @Override
-    public void invalidate() {
-        delegate.invalidate();
-        httpSessionObserver.setDecorated(true);
+    public Object getAttribute(String name) {
+        if ("foo".equals(name)) {
+            return "bar";
+        }
+        return delegate.getAttribute(name);
     }
 
     
