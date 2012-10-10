@@ -3330,6 +3330,10 @@
         <assertion id="o">
             <text>The |get()| method may not create a new instance of the given contextual type unless a |CreationalContext| is given.</text>
         </assertion>
+        
+        <assertion id="s">
+            <text>When the container calls |get()| for a context that is associated with a passivating scope it must ensure that the given instance of |Contextual| and the instance of |CreationalContext|, if given, are serializable.</text>
+        </assertion>
 
         <assertion id="p">
             <text>The context object is responsible for destroying any contextual instance it creates by passing the instance to the |destroy()| method of the |Contextual| object representing the contextual type.</text>
