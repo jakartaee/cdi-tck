@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.event;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Type;
@@ -35,6 +36,7 @@ import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -51,14 +53,18 @@ public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createDecorators().clazz(FooEventDecorator.class.getName())
+                        .clazz(StringEventDecorator.class.getName()).clazz(CharSequenceEventDecorator.class.getName())
                                 .up()).build();
     }
 
     @Inject
-    FooObserver fooObserver;
+    Observer observer;
 
     @Inject
-    Event<Foo> event;
+    Event<Foo> fooEvent;
+
+    @Inject
+    private Event<String> stringEvent;
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac"), @SpecAssertion(section = "8.3", id = "aa") })
@@ -74,9 +80,21 @@ public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
     @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac") })
     public void testDecoratorIsInvoked() {
         Foo payload = new Foo(false);
-        event.fire(payload);
-        assertTrue(fooObserver.isObserved());
+        fooEvent.fire(payload);
+        assertTrue(observer.isObserved());
         assertTrue(payload.isDecorated());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac") })
+    public void testMultipleDecorators() {
+        stringEvent.fire("TCK");
+        assertEquals(observer.getString(), "DecoratedCharSequenceDecoratedStringTCK");
+        try {
+            stringEvent.select();
+            Assert.fail("Exception not thrown");
+        } catch (Exception expected) {
+        }
     }
 
 }

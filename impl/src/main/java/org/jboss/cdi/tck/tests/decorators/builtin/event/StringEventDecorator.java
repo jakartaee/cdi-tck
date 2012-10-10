@@ -14,27 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jboss.cdi.tck.tests.decorators.builtin.event;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
+import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 
-/**
- * @author Martin Kouba
- * 
- */
-@RequestScoped
-public class FooObserver {
+@Decorator
+public abstract class StringEventDecorator implements Event<String> {
 
-    private boolean isObserved = false;
+    @Inject
+    @Delegate
+    private Event<String> delegate;
 
-    public void observeFoo(@Observes Foo event) {
-        isObserved = true;
-    }
-
-    public boolean isObserved() {
-        return isObserved;
+    @Override
+    public void fire(String event) {
+        delegate.fire("DecoratedString" + event);
     }
 
 }
