@@ -38,7 +38,7 @@ public abstract class ConversationDecorator implements Conversation {
 
     @Override
     public void begin(String id) {
-        conversation.begin();
+        conversation.begin(id);
         conversationObserver.setDecoratedConversationId(conversation.getId());
     }
 
