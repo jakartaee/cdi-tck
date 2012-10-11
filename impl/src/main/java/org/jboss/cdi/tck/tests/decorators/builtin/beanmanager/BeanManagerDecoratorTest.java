@@ -20,9 +20,7 @@ package org.jboss.cdi.tck.tests.decorators.builtin.beanmanager;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
-
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
@@ -58,20 +56,18 @@ public class BeanManagerDecoratorTest extends AbstractDecoratorTest {
     @Inject
     FooObserver fooObserver;
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac"), @SpecAssertion(section = "8.3", id = "aa") })
-    public void testDecoratorIsResolved() {
-        checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(BeanManager.class)), BeanManagerDecorator.class,
-                Collections.<Type> singleton(BeanManager.class), BeanManager.class);
-    }
+    @Inject
+    private BeanManager manager;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5", id = "be") })
     public void testDecoratorIsNotApplied() {
         Foo payload = new Foo(false);
-        getCurrentManager().fireEvent(payload);
+        manager.fireEvent(payload);
         assertTrue(fooObserver.isObserved());
         assertFalse(payload.isDecorated());
+
+        assertTrue(manager.isQualifier(Default.class)); // not decorated
     }
 
 }

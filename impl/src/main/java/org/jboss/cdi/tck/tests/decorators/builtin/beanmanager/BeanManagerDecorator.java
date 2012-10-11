@@ -42,4 +42,8 @@ public abstract class BeanManagerDecorator implements BeanManager {
         }
     }
 
+    @Override
+    public boolean isQualifier(Class<? extends Annotation> annotationType) {
+        return false;
+    }
 }

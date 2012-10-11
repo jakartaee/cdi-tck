@@ -55,7 +55,7 @@ public class BuiltinUserTransactionDecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acn") })
     public void testUserTransactionDecorated() throws Exception {
         Assert.assertEquals(sessionBean.getTransaction().getStatus(), Status.STATUS_UNKNOWN);
     }

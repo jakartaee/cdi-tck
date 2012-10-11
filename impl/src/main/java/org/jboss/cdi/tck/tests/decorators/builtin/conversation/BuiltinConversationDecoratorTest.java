@@ -61,14 +61,14 @@ public class BuiltinConversationDecoratorTest extends AbstractDecoratorTest {
     Conversation conversation;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac"), @SpecAssertion(section = "8.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ach"), @SpecAssertion(section = "8.3", id = "aa") })
     public void testDecoratorIsResolved() {
         checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(Conversation.class)), ConversationDecorator.class,
                 Collections.<Type> singleton(Conversation.class), Conversation.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ach") })
     public void testDecoratorIsInvoked() {
         String cid = "foo";
         conversation.begin(cid);

@@ -4844,19 +4844,67 @@
     </section>
 
     <section id="8.4" title="Decorator invocation">
-        
-        <group>
-            <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and, after processing all interceptors of the method, invokes decorators of the bean. The container searches for the first decorator of the instance that implements the method that is being invoked as a business method. If such decorator exists, the container calls the method of the decorator.</text>
-            <assertion id="aa">
-                <text>Test decorator of managed bean is called.</text>
-            </assertion>
-            <assertion id="ab">
-                <text>Test decorator of session bean is called .</text>
-            </assertion>
-            <assertion id="ac">
-                <text>Test decorator of built-in bean is called.</text>
-            </assertion>    
-        </group>
+
+    <group>
+        <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and, after processing all interceptors of the method, invokes decorators of the bean. The container searches for the first decorator of the instance that implements the method that is being invoked as a business method. If such decorator exists, the container calls the method of the decorator.</text>
+        <assertion id="aa">
+            <text>Test decorator of managed bean is called.</text>
+        </assertion>
+        <assertion id="ab">
+            <text>Test decorator of session bean is called .</text>
+        </assertion>
+        <assertion id="aca">
+            <text>Test injected Event</text>
+        </assertion>
+        <assertion id="acb">
+            <text>Test injected Instance</text>
+        </assertion>
+        <assertion id="acc">
+            <text>Test injected @Default Bean</text>
+        </assertion>
+        <assertion id="acd">
+            <text>Test injected @Intercepted Bean</text>
+        </assertion>
+        <assertion id="ace">
+            <text>Test injected @Decorated Bean</text>
+        </assertion>
+        <assertion id="acf">
+            <text>Test injected Interceptor</text>
+        </assertion>
+        <assertion id="acg">
+            <text>Test injected Decorator</text>
+        </assertion>
+        <assertion id="ach">
+            <text>Test injected Conversation</text>
+        </assertion>
+        <assertion id="aci">
+            <text>Test injected HttpServletRequest</text>
+        </assertion>
+        <assertion id="acj">
+            <text>Test injected HttpSession</text>
+        </assertion>
+        <assertion id="ack">
+            <text>Test injected ServletContext</text>
+        </assertion>
+        <assertion id="acl">
+            <text>Test injected InjectionPoint</text>
+        </assertion>
+        <assertion id="acm">
+            <text>Test injected Principal</text>
+        </assertion>
+        <assertion id="acn">
+            <text>Test injected UserTransaction</text>
+        </assertion>
+        <assertion id="aco">
+            <text>Test injected Validator</text>
+        </assertion>
+        <assertion id="acp">
+            <text>Test injected ValidatorFactory</text>
+        </assertion>
+        <assertion id="acq">
+            <text>Test injected ConstraintValidator</text>
+        </assertion>
+    </group>
 
         <assertion id="b">
             <text>If no such decorator exists, the container invokes the business method of the intercepted instance.</text>
@@ -6446,6 +6494,10 @@
         <assertion id="bd" testable="false">
             <text>The container is not required to deliver events fired during application initialization to observer methods defined on beans.</text>
             <note>Non-portable behavior</note>
+        </assertion>
+
+        <assertion id="be">
+            <text>Any decorators associated with BeanManager will not be applied.</text>
         </assertion>
 
         <assertion id="d">

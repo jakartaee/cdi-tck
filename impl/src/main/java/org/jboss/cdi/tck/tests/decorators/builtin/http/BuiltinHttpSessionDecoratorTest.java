@@ -69,7 +69,7 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
     private BeanManager manager;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac"), @SpecAssertion(section = "8.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acj"), @SpecAssertion(section = "8.3", id = "aa") })
     public void testDecoratorIsResolved() {
         List<Decorator<?>> decorators = manager.resolveDecorators(Collections.<Type> singleton(HttpSession.class));
         assertEquals(2, decorators.size());
@@ -80,7 +80,7 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acj") })
     public void testDecoratorIsInvoked() {
         httpSession.invalidate();
         assertTrue(httpSessionObserver.isDestroyed());

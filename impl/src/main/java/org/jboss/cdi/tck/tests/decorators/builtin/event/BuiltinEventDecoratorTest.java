@@ -67,7 +67,7 @@ public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
     private Event<String> stringEvent;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac"), @SpecAssertion(section = "8.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "aca"), @SpecAssertion(section = "8.3", id = "aa") })
     public void testDecoratorIsResolved() {
         @SuppressWarnings("serial")
         TypeLiteral<Event<Foo>> eventFooLiteral = new TypeLiteral<Event<Foo>>() {
@@ -77,7 +77,7 @@ public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "aca") })
     public void testDecoratorIsInvoked() {
         Foo payload = new Foo(false);
         fooEvent.fire(payload);
@@ -86,7 +86,7 @@ public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "aca") })
     public void testMultipleDecorators() {
         stringEvent.fire("TCK");
         assertEquals(observer.getString(), "DecoratedCharSequenceDecoratedStringTCK");
