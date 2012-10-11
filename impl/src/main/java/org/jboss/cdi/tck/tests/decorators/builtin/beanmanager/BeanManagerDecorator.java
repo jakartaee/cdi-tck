@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.beanmanager;
 
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
 import javax.decorator.Decorator;
@@ -29,7 +30,8 @@ import javax.inject.Inject;
  * 
  */
 @Decorator
-public abstract class BeanManagerDecorator implements BeanManager {
+@SuppressWarnings("serial")
+public abstract class BeanManagerDecorator implements BeanManager, Serializable {
 
     @Inject
     @Delegate

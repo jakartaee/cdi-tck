@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.builtin.transaction;
 
+import java.io.Serializable;
+
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
@@ -24,7 +26,8 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 @Decorator
-public abstract class UserTransactionDecorator implements UserTransaction {
+@SuppressWarnings("serial")
+public abstract class UserTransactionDecorator implements UserTransaction, Serializable {
 
     @SuppressWarnings("unused")
     @Inject

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.builtin.event;
 
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
 import javax.decorator.Decorator;
@@ -25,7 +26,8 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 @Decorator
-public abstract class CharSequenceEventDecorator<T extends CharSequence> implements Event<T> {
+@SuppressWarnings("serial")
+public abstract class CharSequenceEventDecorator<T extends CharSequence> implements Event<T>, Serializable {
 
     @SuppressWarnings("unused")
     @Inject

@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.conversation;
 
+import java.io.Serializable;
+
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.context.Conversation;
@@ -27,7 +29,8 @@ import javax.inject.Inject;
  * 
  */
 @Decorator
-public abstract class ConversationDecorator implements Conversation {
+@SuppressWarnings("serial")
+public abstract class ConversationDecorator implements Conversation, Serializable {
 
     @Inject
     @Delegate

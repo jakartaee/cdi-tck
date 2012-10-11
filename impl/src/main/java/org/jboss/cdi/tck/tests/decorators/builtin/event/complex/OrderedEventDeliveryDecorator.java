@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.builtin.event.complex;
 
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +34,8 @@ import javax.enterprise.util.TypeLiteral;
 import javax.inject.Inject;
 
 @Decorator
-public class OrderedEventDeliveryDecorator<T> implements Event<T> {
+@SuppressWarnings("serial")
+public class OrderedEventDeliveryDecorator<T> implements Event<T>, Serializable {
 
     private final Set<Annotation> qualifiers;
     private final BeanManager manager;

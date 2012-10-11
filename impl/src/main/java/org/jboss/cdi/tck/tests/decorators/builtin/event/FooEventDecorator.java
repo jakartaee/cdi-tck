@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.event;
 
+import java.io.Serializable;
+
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.event.Event;
@@ -27,7 +29,8 @@ import javax.inject.Inject;
  * 
  */
 @Decorator
-public abstract class FooEventDecorator implements Event<Foo> {
+@SuppressWarnings("serial")
+public abstract class FooEventDecorator implements Event<Foo>, Serializable {
 
     @Inject
     @Delegate
