@@ -20,6 +20,11 @@
          <plugin>
             <groupId>org.jboss.maven.plugins</groupId>
             <artifactId>maven-jdocbook-plugin</artifactId>
+            <configuration>
+                <options>
+                    <applyStandardInjectionValues>false</applyStandardInjectionValues>
+                </options>
+            </configuration>
          </plugin>
          <plugin>
             <groupId>org.codehaus.mojo</groupId>
