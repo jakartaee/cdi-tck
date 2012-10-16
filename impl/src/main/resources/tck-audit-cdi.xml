@@ -6712,7 +6712,37 @@
                 <text>The event is not fired for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()| and annotated with |@Vetoed|.</text>
             </assertion>
         </group>
-
+        
+        <group>
+            <text>The annotation |@WithAnnotations| may be applied to the event parameter. If the annotation is applied, the container must only deliver |ProcessAnnotatedType| events for types which contain at least one of the annotations specified. The annotation can appear on the type, on any field, method or constructor declared by the type, or on any parameter of any method or constructor declared by the type.</text>
+            <assertion id="fa">
+                <text>Test annotation on the type.</text>
+            </assertion>
+            <assertion id="fb">
+                <text>Test annotation on the field.</text>
+            </assertion>
+            <assertion id="fc">
+                <text>Test annotation on the method.</text>
+            </assertion>
+            <assertion id="fd">
+                <text>Test annotation on the constructor.</text>
+            </assertion>
+            <assertion id="fe">
+                <text>Test annotation on the parameter of the method.</text>
+            </assertion>
+            <assertion id="ff">
+                <text>Test annotation on the parameter of the constructor.</text>
+            </assertion>
+        </group>
+        
+        <assertion id="g">
+            <text>The annotation may be applied as a meta-annotation on any annotation considered.</text>
+        </assertion>
+        
+        <assertion id="h">
+            <text>If the |@WithAnnotations| annotation is applied to any other event parameter, the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
+        
         <assertion id="ba">
             <text>|getAnnotatedType()| returns the |AnnotatedType| object that will be used by the container to read the declared annotations.</text>
         </assertion>
