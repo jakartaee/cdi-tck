@@ -17,8 +17,6 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.broken.processAnnotatedObserverThrowsException;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -33,8 +31,6 @@ import org.testng.annotations.Test;
 /**
  * Tests that an exception thrown by a ProcessAnnotatedType event observer is treated as a definition error
  */
-// SHRINKWRAP-369
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProcessAnnotatedTypeEventThrowsExceptionTest extends AbstractTest {
 

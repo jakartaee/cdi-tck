@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.builtin.event.complex;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,12 +36,10 @@ import org.testng.annotations.Test;
 
 /**
  * Test that uses a more complex scenario to verify that Decorators can be used to alter event delivery logic.
- *
+ * 
  * @author Jozef Hartinger
- *
+ * 
  */
-// SHRINKWRAP-369
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ComplexEventDecoratorTest extends AbstractTest {
 

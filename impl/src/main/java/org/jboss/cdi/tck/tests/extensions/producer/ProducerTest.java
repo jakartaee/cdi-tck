@@ -48,8 +48,7 @@ public class ProducerTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ProducerTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+        return new WebArchiveBuilder().withTestClassPackage(ProducerTest.class).withExtension(ProducerProcessor.class).build();
     }
 
     @Test

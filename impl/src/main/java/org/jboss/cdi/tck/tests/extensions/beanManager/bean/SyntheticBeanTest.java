@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -39,8 +38,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * TODO This test needs verification.
- * 
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
@@ -48,8 +45,6 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-// SHRINKWRAP-369
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SyntheticBeanTest extends AbstractTest {
 

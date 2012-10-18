@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.synthetic;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -45,12 +44,9 @@ import org.testng.annotations.Test;
  * This test was originally part of Weld test suite.
  * <p>
  * 
- * Temporarily marked as integration tests - see SHRINKWRAP-369.
- * 
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
 

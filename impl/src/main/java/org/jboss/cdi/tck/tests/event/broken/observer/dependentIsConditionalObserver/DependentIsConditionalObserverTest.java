@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.event.broken.observer.dependentIsConditionalObserver;
 
 import static org.jboss.cdi.tck.TestGroups.EVENTS;
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -30,8 +29,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-//SHRINKWRAP-369
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class DependentIsConditionalObserverTest extends AbstractTest {
 
@@ -41,7 +38,6 @@ public class DependentIsConditionalObserverTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DependentIsConditionalObserverTest.class).build();
     }
 
-    // WBRI-315
     @Test(groups = { EVENTS })
     @SpecAssertion(section = "10.4.3", id = "b")
     public void testDependentBeanWithConditionalObserverMethodIsDefinitionError() {

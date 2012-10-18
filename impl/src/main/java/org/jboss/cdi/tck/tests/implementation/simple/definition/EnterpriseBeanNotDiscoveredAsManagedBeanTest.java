@@ -14,11 +14,7 @@ public class EnterpriseBeanNotDiscoveredAsManagedBeanTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(EnterpriseBeanNotDiscoveredAsManagedBeanTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension")
-                // Originally with faces-config.xml however this resource does not exist in
-                // /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/implementation/simple/definition
-                // .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
-                .build();
+                .withExtension(EnterpriseBeanObserver.class).build();
     }
 
     @Test

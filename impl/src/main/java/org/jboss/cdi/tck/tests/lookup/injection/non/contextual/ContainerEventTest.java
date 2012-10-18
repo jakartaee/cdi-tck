@@ -58,10 +58,11 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractTest {
 
+    @SuppressWarnings("unchecked")
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ContainerEventTest.class).withWebXml("web.xml")
-                .withExtension("javax.enterprise.inject.spi.Extension")
+                .withExtensions(ProcessInjectionTargetObserver.class, ProcessAnnotatedTypeObserver.class)
                 .withWebResource("ManagedBeanTestPage.jsp", "ManagedBeanTestPage.jsp")
                 .withWebResource("TagPage.jsp", "TagPage.jsp").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
                 .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld").build();

@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.broken.processing;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-
 import javax.enterprise.inject.spi.DefinitionException;
 import javax.enterprise.inject.spi.ProcessProducer;
 
@@ -36,8 +34,6 @@ import org.testng.annotations.Test;
  * 
  * @author Martin Kouba
  */
-// SHRINKWRAP-369
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerProcessingWithExceptionTest extends AbstractTest {
 

@@ -38,7 +38,7 @@ public class CustomInterceptorTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(CustomInterceptorTest.class).withBeansXml("beans.xml")
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
     @Test

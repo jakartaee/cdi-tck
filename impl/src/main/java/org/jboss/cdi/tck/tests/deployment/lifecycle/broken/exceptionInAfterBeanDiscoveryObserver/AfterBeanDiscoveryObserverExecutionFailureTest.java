@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.deployment.lifecycle.broken.exceptionInAfterBeanDiscoveryObserver;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -36,8 +34,6 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  * @author Martin Kouba
  */
-// SHRINKWRAP-369
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class AfterBeanDiscoveryObserverExecutionFailureTest extends AbstractTest {
 

@@ -46,7 +46,7 @@ public class AfterBeanDiscoveryFailureTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(AfterBeanDiscoveryFailureTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(BeanDiscoveryObserver.class).build();
     }
 
     @Test(groups = { REWRITE })

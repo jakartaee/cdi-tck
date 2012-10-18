@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.vetoed;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
 import javax.inject.Inject;
 
@@ -42,12 +40,9 @@ import org.testng.annotations.Test;
  * This test was originally part of the Weld test suite.
  * <p>
  * 
- * Temporarily marked as integration tests - see SHRINKWRAP-369.
- * 
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class VetoedTest extends AbstractTest {
 
@@ -66,7 +61,8 @@ public class VetoedTest extends AbstractTest {
     VerifyingExtension verifyingExtension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"), @SpecAssertion(section = "11.5.6", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
+            @SpecAssertion(section = "11.5.6", id = "ac") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
@@ -74,7 +70,8 @@ public class VetoedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"), @SpecAssertion(section = "11.5.6", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
+            @SpecAssertion(section = "11.5.6", id = "ac") })
     public void testPackageLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
         assertEquals(getCurrentManager().getBeans(Piranha.class, AnyLiteral.INSTANCE).size(), 0);

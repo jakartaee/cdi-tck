@@ -44,10 +44,13 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractTest {
 
+    @SuppressWarnings("unchecked")
     @Deployment
     public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClassPackage(ContainerEventTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").withEjbJarXml("ejb-jar.xml").build();
+        return new EnterpriseArchiveBuilder()
+                .withTestClassPackage(ContainerEventTest.class)
+                .withExtensions(ProcessBeanObserver.class, ProcessInjectionTargetObserver.class,
+                        ProcessAnnotatedTypeObserver.class).withEjbJarXml("ejb-jar.xml").build();
     }
 
     @Test

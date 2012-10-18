@@ -20,7 +20,6 @@ package org.jboss.cdi.tck.tests.extensions.beanManager;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -76,8 +75,6 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-// SHRINKWRAP-369
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BeanManagerTest extends AbstractTest {
 

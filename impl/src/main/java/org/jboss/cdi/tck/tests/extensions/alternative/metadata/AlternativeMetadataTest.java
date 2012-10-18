@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -41,12 +40,9 @@ import org.testng.annotations.Test;
 /**
  * This test class contains tests for adding meta data using extensions.
  * 
- * Temporarily marked as integration tests - see SHRINKWRAP-369.
- * 
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class AlternativeMetadataTest extends AbstractTest {
 

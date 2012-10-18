@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.broken.passivation;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -40,8 +38,6 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-// SHRINKWRAP-369
-@Test(groups = INTEGRATION)
 public class PassivationCapableDependencyErrorCausedByExtensionDetectedTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

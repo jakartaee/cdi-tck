@@ -45,7 +45,7 @@ public class NormalContextTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(NormalContextTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
     @Test(groups = { CONTEXTS })

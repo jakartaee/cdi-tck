@@ -40,7 +40,7 @@ public class AddingNormalScopeTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(AddingNormalScopeTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(BeforeBeanDiscoveryObserver.class).build();
     }
 
     @Test

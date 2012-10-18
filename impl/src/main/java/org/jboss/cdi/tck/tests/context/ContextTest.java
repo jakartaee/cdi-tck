@@ -40,8 +40,8 @@ public class ContextTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ContextTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+        return new WebArchiveBuilder().withTestClassPackage(ContextTest.class).withExtension(AfterBeanDiscoveryObserver.class)
+                .build();
     }
 
     @Test(expectedExceptions = { IllegalStateException.class }, groups = { MANAGER })

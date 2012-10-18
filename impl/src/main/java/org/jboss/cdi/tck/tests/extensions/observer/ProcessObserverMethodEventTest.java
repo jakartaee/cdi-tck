@@ -38,7 +38,7 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ProcessObserverMethodEventTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(ProcessObserverMethodObserver.class).build();
     }
 
     @Test

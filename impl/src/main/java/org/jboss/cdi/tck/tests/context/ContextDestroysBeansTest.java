@@ -44,7 +44,7 @@ public class ContextDestroysBeansTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ContextDestroysBeansTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
     @Test(groups = { CONTEXTS })

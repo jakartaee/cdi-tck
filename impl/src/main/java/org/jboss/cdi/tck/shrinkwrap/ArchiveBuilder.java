@@ -148,21 +148,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add CDI extension located in src/main/resource/{testPackagePath} to
-     * META-INF/services/javax.enterprise.inject.spi.Extension.
-     * 
-     * <p>
-     * Do not use this in new tests - use {@link #withExtension(Class)} instead.
-     * </p>
-     * 
-     * @param extension
-     * @return self
-     */
-    public T withExtension(String extension) {
-        return withManifestResource(extension, "services/javax.enterprise.inject.spi.Extension", true);
-    }
-
-    /**
      * Add CDI extension. This method does not add the specified extension class to the archive.
      * 
      * @param extensionClass

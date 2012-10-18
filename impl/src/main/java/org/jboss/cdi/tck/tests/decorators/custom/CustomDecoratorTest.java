@@ -35,7 +35,7 @@ public class CustomDecoratorTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(CustomDecoratorTest.class).withBeansXml("beans.xml")
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
     @SuppressWarnings("unchecked")

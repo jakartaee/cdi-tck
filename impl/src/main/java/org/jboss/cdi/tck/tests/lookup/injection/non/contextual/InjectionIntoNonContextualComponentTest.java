@@ -40,10 +40,12 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     @ArquillianResource
     private URL contextPath;
 
+    @SuppressWarnings("unchecked")
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(InjectionIntoNonContextualComponentTest.class)
-                .withWebXml("web2.xml").withExtension("javax.enterprise.inject.spi.Extension")
+                .withWebXml("web2.xml")
+                .withExtensions(ProcessInjectionTargetObserver.class, ProcessAnnotatedTypeObserver.class)
                 .withWebResource("ManagedBeanTestPage.jsp", "ManagedBeanTestPage.jsp")
                 .withWebResource("TagPage.jsp", "TagPage.jsp").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
                 .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld").build();
