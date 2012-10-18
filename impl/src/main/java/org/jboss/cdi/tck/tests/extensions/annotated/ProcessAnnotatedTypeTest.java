@@ -17,6 +17,17 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.enterprise.inject.spi.AnnotatedMethod;
+import javax.enterprise.inject.spi.AnnotatedType;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -39,7 +50,7 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ProcessAnnotatedTypeTest.class)
-                .withExtension("javax.enterprise.inject.spi.Extension").build();
+                .withExtension(ProcessAnnotatedTypeObserver.class).build();
     }
 
     @Test
@@ -47,30 +58,40 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     public void testProcessAnnotatedTypeEventsSent() {
         // Randomly test some of the classes and interfaces that should have
         // been discovered and sent via the event
-        assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(AbstractC.class);
-        assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(ClassD.class);
-        assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Dog.class);
-        assert ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(InterfaceA.class);
+        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(AbstractC.class));
+        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(ClassD.class));
+        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Dog.class));
+        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(InterfaceA.class));
+        // CDI-269
         // assert !ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Tame.class);
     }
 
     @Test
     @SpecAssertion(section = "11.5.6", id = "ba")
     public void testGetAnnotatedType() {
-        assert ProcessAnnotatedTypeObserver.getDogAnnotatedType().getBaseType().equals(Dog.class);
+        AnnotatedType<Dog> annotatedType = ProcessAnnotatedTypeObserver.getDogAnnotatedType();
+        assertEquals(annotatedType.getBaseType(), Dog.class);
+        Set<AnnotatedMethod<? super Dog>> annotatedMethods = annotatedType.getMethods();
+        assertEquals(annotatedMethods.size(), 3);
+        for (AnnotatedMethod<? super Dog> annotatedMethod : annotatedMethods) {
+            Set<String> validMethodNames = new HashSet<String>(Arrays.asList("bite", "live", "drinkMilk"));
+            if (!validMethodNames.contains(annotatedMethod.getJavaMember().getName())) {
+                fail("Invalid method name found" + annotatedMethod.getJavaMember().getName());
+            }
+        }
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "bb"), @SpecAssertion(section = "11.5.6", id = "ca") })
     public void testSetAnnotatedType() {
-        assert TestAnnotatedType.isGetConstructorsUsed();
-        assert TestAnnotatedType.isGetFieldsUsed();
-        assert TestAnnotatedType.isGetMethodsUsed();
+        assertTrue(TestAnnotatedType.isGetConstructorsUsed());
+        assertTrue(TestAnnotatedType.isGetFieldsUsed());
+        assertTrue(TestAnnotatedType.isGetMethodsUsed());
     }
 
     @Test
     @SpecAssertion(section = "11.5.6", id = "bc")
     public void testVeto() {
-        assert getCurrentManager().getBeans(VetoedBean.class).isEmpty();
+        assertTrue(getCurrentManager().getBeans(VetoedBean.class).isEmpty());
     }
 }
