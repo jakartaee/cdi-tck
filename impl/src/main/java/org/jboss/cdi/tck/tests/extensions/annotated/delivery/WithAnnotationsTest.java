@@ -59,14 +59,13 @@ public class WithAnnotationsTest extends AbstractTest {
 
         List<Class<?>> processedDesiredAnWantedTypes = processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes();
         assertFalse(processedDesiredAnWantedTypes.isEmpty());
-        assertEquals(processedDesiredAnWantedTypes.size(), 7);
+        assertEquals(processedDesiredAnWantedTypes.size(), 6);
         assertTrue(processedDesiredAnWantedTypes.contains(Hummingbird.class));
         assertTrue(processedDesiredAnWantedTypes.contains(Falcon.class));
         assertTrue(processedDesiredAnWantedTypes.contains(Turkey.class));
         assertTrue(processedDesiredAnWantedTypes.contains(Sparrow.class));
         assertTrue(processedDesiredAnWantedTypes.contains(Hen.class));
         assertTrue(processedDesiredAnWantedTypes.contains(Hawk.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Phoenix.class));
 
         List<Class<?>> processedDesiredTypes = processAnnotatedTypeObserver.getProcessedDesiredTypes();
         assertFalse(processedDesiredTypes.isEmpty());
@@ -82,9 +81,10 @@ public class WithAnnotationsTest extends AbstractTest {
     public void testDeliveryMetaAnnotation() {
         List<Class<?>> processedTypes = processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes();
         assertFalse(processedTypes.isEmpty());
-        assertEquals(processedTypes.size(), 2);
+        assertEquals(processedTypes.size(), 3);
         assertTrue(processedTypes.contains(Chicken.class));
         assertTrue(processedTypes.contains(Hummingbird.class));
+        assertTrue(processedTypes.contains(Hawk.class));
     }
 
 }
