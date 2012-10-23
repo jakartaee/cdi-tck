@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -38,55 +39,44 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * 
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
-public class WithAnnotationsTest extends AbstractTest {
+public class EnterpriseWithAnnotationsTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClass(WithAnnotationsTest.class)
-                .withClasses(Baby.class, BeforeBeanDiscoveryObserver.class, Desired.class, Egg.class, Falcon.class, Hen.class,
-                        Hummingbird.class, Chicken.class, Phoenix.class, ProcessAnnotatedTypeObserver.class, Raven.class,
-                        Sparrow.class, Turkey.class, Wanted.class).withLibrary(Griffin.class)
-                .withExtensions(ProcessAnnotatedTypeObserver.class, BeforeBeanDiscoveryObserver.class).build();
+                .withTestClass(EnterpriseWithAnnotationsTest.class)
+                .withClasses(Baby.class, Desired.class, ProcessAnnotatedTypeObserver.class, Hawk.class, Wanted.class,
+                        Chicken.class).withExtensions(ProcessAnnotatedTypeObserver.class).build();
     }
 
     @Inject
     ProcessAnnotatedTypeObserver processAnnotatedTypeObserver;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "fa"), @SpecAssertion(section = "11.5.6", id = "fb"),
-            @SpecAssertion(section = "11.5.6", id = "fc"), @SpecAssertion(section = "11.5.6", id = "fd"),
-            @SpecAssertion(section = "11.5.6", id = "fe"), @SpecAssertion(section = "11.5.6", id = "ff") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "fc") })
     public void testDelivery() {
 
         List<Class<?>> processedDesiredAnWantedTypes = processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes();
         assertFalse(processedDesiredAnWantedTypes.isEmpty());
-        assertEquals(processedDesiredAnWantedTypes.size(), 6);
-        assertTrue(processedDesiredAnWantedTypes.contains(Hummingbird.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Falcon.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Turkey.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Sparrow.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Hen.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Griffin.class));
+        assertEquals(processedDesiredAnWantedTypes.size(), 1);
+        assertTrue(processedDesiredAnWantedTypes.contains(Hawk.class));
 
         List<Class<?>> processedDesiredTypes = processAnnotatedTypeObserver.getProcessedDesiredTypes();
         assertFalse(processedDesiredTypes.isEmpty());
-        assertEquals(processedDesiredTypes.size(), 3);
-        assertTrue(processedDesiredTypes.contains(Hummingbird.class));
-        assertTrue(processedDesiredTypes.contains(Turkey.class));
-        assertTrue(processedDesiredTypes.contains(Sparrow.class));
+        assertEquals(processedDesiredTypes.size(), 1);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "fa"), @SpecAssertion(section = "11.5.6", id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "fc"), @SpecAssertion(section = "11.5.6", id = "g") })
     public void testDeliveryMetaAnnotation() {
         List<Class<?>> processedTypes = processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes();
         assertFalse(processedTypes.isEmpty());
         assertEquals(processedTypes.size(), 2);
+        assertTrue(processedTypes.contains(Hawk.class));
         assertTrue(processedTypes.contains(Chicken.class));
-        assertTrue(processedTypes.contains(Hummingbird.class));
     }
 
 }

@@ -24,7 +24,7 @@ import javax.inject.Inject;
 public class Hawk {
 
     @Inject
-    public Hawk(@Desired @Baby Chicken chicken) {
+    public void init(@Desired @Baby Chicken chicken) {
     }
 
 }
