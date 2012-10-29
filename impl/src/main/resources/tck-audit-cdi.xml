@@ -958,7 +958,7 @@
 
     <section id="3.3" title="Producer methods">
         <assertion id="aa">
-            <text>A producer method must be a non-abstract method of a managed bean class or session bean class.</text>
+            <text>A producer method must be a default-access, public, protected or private, non-abstract method of a managed bean class or session bean class.</text>
         </assertion>
 
         <assertion id="b">
@@ -1118,12 +1118,12 @@
 
     <section id="3.4" title="Producer fields">
         <assertion id="aa">
-            <text>A producer field must be a field of a managed bean class ~or session bean class~</text>
+            <text>A producer field must be a default-access, public, protected or private, field of a managed bean class ~or session bean class~</text>
             <note>Just test that a producer field on these works</note>
         </assertion>
 
         <assertion id="ab">
-            <text>A producer field must be a field of a ~managed bean class or~ session bean class</text>
+            <text>A producer field must be a default-access, public, protected or private, field of a ~managed bean class or~ session bean class</text>
             <note>Just test that a producer field on these works</note>
         </assertion>
 
@@ -1246,7 +1246,7 @@
     <section id="3.5" title="Disposer methods">
 
         <assertion id="aa">
-            <text>A disposer method must be a non-abstract method of a managed bean class or session bean class.</text>
+            <text>A disposer method must be a default-access, public, protected or private, non-abstract method of a managed bean class or session bean class.</text>
         </assertion>
 
         <assertion id="b">
@@ -1454,7 +1454,7 @@
 
     <section id="3.8" title="Bean constructors">
         <assertion id="a">
-            <text>When the container instantiates a bean, it calls the bean constructor. The bean constructor is a constructor of the bean class</text>
+            <text>When the container instantiates a bean, it calls the bean constructor. The bean constructor is a default-access, public, protected or private constructor of the bean class.</text>
         </assertion>
     </section>
 
@@ -1527,7 +1527,7 @@
 
     <section id="3.10" title="Initializer methods">
         <group>
-            <text>An initializer method is a non-abstract, non-static, non-generic method of a bean class, a non-abstract, non-static method of an enum or of any Java EE component class supporting injection.</text>
+            <text>An initializer method is a default-access, public, protected or private, non-abstract, non-static, non-generic method of a bean class, a non-abstract, non-static method of an enum or of any Java EE component class supporting injection.</text>
 
             <assertion id="a">
                 <text>Test a bean-class.</text>
@@ -5440,15 +5440,7 @@
 
     <section id="10.4.2" title="Declaring an observer method">
         <assertion id="a">
-            <assertion id="ea">
-                <text>For a Producer that represents a producer _method_ or field, |produce()| _calls the producer method on_, or accesses the producer field of, a contextual instance of the most specialized bean that specializes the bean that declares the producer method, as defined in Section 5.6.6, "Invocation of producer or disposer methods".</text>
-            </assertion>
-
-            <assertion id="eb">
-                <text>For a Producer that represents a producer method or _field_, |produce()| calls the producer method on, _or accesses the producer field of_, a contextual instance of the most specialized bean that specializes the bean that declares the producer method, as defined in Section 5.6.6, "Invocation of producer or disposer methods".</text>
-            </assertion>
-
-            <text>An observer method may be declared by annotating a parameter |@javax.enterprise.event.Observes|. That parameter is the event parameter. The declared type of the parameter is the observed event type.</text>
+            <text>An observer method may be declared by annotating a parameter |@javax.enterprise.event.Observes| of a default-access, public, protected or private method. That parameter is the event parameter. The declared type of the parameter is the observed event type.</text>
         </assertion>
 
         <assertion id="b">
