@@ -304,8 +304,7 @@
         </assertion>
 
         <assertion id="ac" testable="false">
-            <text>A scope type must not have any attributes.</text>
-            <note>Behavior not specified</note>
+            <text>A scope type must not have any attributes. If a scope type has attributes non-portable behavior results.</text>
         </assertion>
 
         <assertion id="ba">
