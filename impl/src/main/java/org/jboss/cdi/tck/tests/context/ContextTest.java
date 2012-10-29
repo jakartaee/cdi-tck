@@ -59,7 +59,7 @@ public class ContextTest extends AbstractTest {
     @Test(groups = { CONTEXTS })
     @SpecAssertions({ @SpecAssertion(section = "2.4.1", id = "aa"), @SpecAssertion(section = "2.4.1", id = "ab"),
             @SpecAssertion(section = "2.4.1", id = "ac"), @SpecAssertion(section = "2.4.1", id = "ca"),
-            @SpecAssertion(section = "11.3.15", id = "a") })
+            @SpecAssertion(section = "11.3.16", id = "a") })
     public void testBuiltInContexts() {
         Context context = getCurrentManager().getContext(Dependent.class);
         assert context != null;

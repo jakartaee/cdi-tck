@@ -204,13 +204,13 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.16", id = "a")
+    @SpecAssertion(section = "11.3.17", id = "a")
     public void testGetELResolver() {
         assertNotNull(getCurrentManager().getELResolver());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.18", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.19", id = "a") })
     public void testObtainingAnnotatedType() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
         assertTrue(annotatedType.isAnnotationPresent(Specializes.class));
@@ -221,7 +221,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.18", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.19", id = "b") })
     public void testObtainingWrappedAnnotatedType() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(WrappedBean.class);
         assertTrue(annotatedType.isAnnotationPresent(Tame.class));
@@ -232,7 +232,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.19", id = "aa")
+    @SpecAssertion(section = "11.3.20", id = "aa")
     // CDI-83
     public void testObtainingInjectionTarget() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
@@ -240,7 +240,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.19", id = "ab")
+    @SpecAssertion(section = "11.3.20", id = "ab")
     public void testObtainingInjectionTargetWithDefinitionError() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(Snake.class);
         getCurrentManager().createInjectionTarget(annotatedType);
@@ -251,7 +251,7 @@ public class BeanManagerTest extends AbstractTest {
      * META-INF/services, or throws an IllegalArgumentException if the container has no instance of the given class.
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.24", id = "a"), @SpecAssertion(section = "11.3.24", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.25", id = "a"), @SpecAssertion(section = "11.3.25", id = "b") })
     public void testGetExtension() {
 
         AfterBeanDiscoveryObserver extension = getCurrentManager().getExtension(AfterBeanDiscoveryObserver.class);

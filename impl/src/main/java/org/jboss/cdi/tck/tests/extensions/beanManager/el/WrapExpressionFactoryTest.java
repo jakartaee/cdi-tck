@@ -58,7 +58,7 @@ public class WrapExpressionFactoryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.17", id = "a"), @SpecAssertion(section = "11.3.17", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.18", id = "a"), @SpecAssertion(section = "11.3.18", id = "b") })
     public void testWrapping() {
 
         ActionSequence.reset();

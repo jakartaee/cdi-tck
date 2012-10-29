@@ -77,7 +77,7 @@ public class SyntheticBeanTest extends AbstractTest {
     SerializableOffice serializableOffice;
 
     @Test
-    @SpecAssertion(section = "11.3.23", id = "a")
+    @SpecAssertion(section = "11.3.24", id = "a")
     public void testRegisteredBean() {
         Bean<Office> bean = getUniqueBean(Office.class, Large.Literal.INSTANCE);
         assertEquals(bean.getInjectionPoints().size(), 3);
@@ -88,7 +88,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.23", id = "a")
+    @SpecAssertion(section = "11.3.24", id = "a")
     public void testSerializableBean() {
         @SuppressWarnings("unchecked")
         Bean<Office> bean = (Bean<Office>) getCurrentManager().resolve(
@@ -106,7 +106,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.23", id = "b")
+    @SpecAssertion(section = "11.3.24", id = "b")
     public void testSyntheticProducerField() {
         assertNotNull(lion);
         lion.foo();
@@ -115,7 +115,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.23", id = "b")
+    @SpecAssertion(section = "11.3.24", id = "b")
     public void testSyntheticProducerMethod() {
         assertNotNull(tiger);
         tiger.foo();
@@ -124,7 +124,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.23", id = "a")
+    @SpecAssertion(section = "11.3.24", id = "a")
     public void testSyntheticDecorator() {
         assertTrue(truck.decorated());
     }

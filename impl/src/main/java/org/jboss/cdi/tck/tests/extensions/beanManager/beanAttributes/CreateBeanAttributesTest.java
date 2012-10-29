@@ -63,7 +63,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = "11.3.22", id = "a")
+    @SpecAssertion(section = "11.3.23", id = "a")
     public void testBeanAttributesForManagedBean() {
         AnnotatedType<Mountain> type = getCurrentManager().createAnnotatedType(Mountain.class);
         BeanAttributes<Mountain> attributes = getCurrentManager().createBeanAttributes(type);
@@ -79,7 +79,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = "11.3.22", id = "a")
+    @SpecAssertion(section = "11.3.23", id = "a")
     public void testBeanAttributesForManagedBeanWithModifiedAnnotatedType() {
         AnnotatedType<Mountain> type = getCurrentManager().createAnnotatedType(Mountain.class);
         AnnotatedType<Mountain> wrappedType = new AnnotatedTypeWrapper<Mountain>(type, false, new NamedLiteral("Mount Blanc"));
@@ -96,7 +96,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = "11.3.22", id = "a")
+    @SpecAssertion(section = "11.3.23", id = "a")
     public void testBeanAttributesForSessionBean() {
         AnnotatedType<Lake> type = getCurrentManager().createAnnotatedType(Lake.class);
         BeanAttributes<Lake> attributes = getCurrentManager().createBeanAttributes(type);
@@ -111,7 +111,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.22", id = "b")
+    @SpecAssertion(section = "11.3.23", id = "b")
     public void testBeanAttributesForMethod() {
         AnnotatedType<Dam> type = getCurrentManager().createAnnotatedType(Dam.class);
 
@@ -143,7 +143,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.22", id = "b")
+    @SpecAssertion(section = "11.3.23", id = "b")
     public void testBeanAttributesForField() {
         AnnotatedType<Dam> type = getCurrentManager().createAnnotatedType(Dam.class);
 
@@ -206,7 +206,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.22", id = "c")
+    @SpecAssertion(section = "11.3.23", id = "c")
     public void testInvalidMember() {
         AnnotatedConstructor<?> constructor = getCurrentManager().createAnnotatedType(InvalidBeanType.class).getConstructors()
                 .iterator().next();

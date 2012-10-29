@@ -6161,20 +6161,41 @@
             </assertion>
         </group>
     </section>
+    
+    <section id="11.3.15" title="Determining the hash code and equivalence of qualifiers and interceptor bindings">
+        <group>
+            <text>A portable extension may determine if two qualifiers or two interceptor bindings are considered equivalent for the purposes of typesafe resolution, as defined in Section 5.2.1, "Performing typesafe resolution".</text>
+            <assertion id="a">
+                <text>Test equality of qualifiers using |BeanManager.areQualifiersEquivalent()|.</text>
+            </assertion>
+            <assertion id="b">
+                <text>Test equality of interceptor bindings using |BeanManager.areInterceptorBindingsEquivalent()|.</text>
+            </assertion>
+        </group>
+        <group>
+            <text>A portable extension may determine the hash code of a qualifier or and interceptor binding, ignoring any members annotated with |@Nonbinding|.</text>
+            <assertion id="c">
+                <text>Determine the hash code of a qualifier using |BeanManager.getQualifierHashCode()|.</text>
+            </assertion>
+            <assertion id="d">
+                <text>Determine the hash code of an interceptor binding using |BeanManager.getInterceptorBindingHashCode()|.</text>
+            </assertion>
+        </group>
+    </section>
 
-    <section id="11.3.15" title="Obtaining the active Context for a scope">
+    <section id="11.3.16" title="Obtaining the active Context for a scope">
         <assertion id="a">
             <text>The method |BeanManager.getContext()| retrieves an active context object associated with the a given scope, as defined in Section 6.5.1, "The active context object for a scope".</text>
         </assertion>
     </section>
 
-    <section id="11.3.16" title="Obtaining the ELResolver">
+    <section id="11.3.17" title="Obtaining the ELResolver">
         <assertion id="a">
             <text>The method |BeanManager.getELResolver()| returns the |javax.el.ELResolver| specified in Section 12.4, "Integration with Unified EL".</text>
         </assertion>
     </section>
 
-    <section id="11.3.17" title="Wrapping a Unified EL ExpressionFactory">
+    <section id="11.3.18" title="Wrapping a Unified EL ExpressionFactory">
         <assertion id="a">
             <text>The method |BeanManager.wrapExpressionFactory()| returns a wrapper |javax.el.ExpressionFactory| that delegates |MethodExpression| and |ValueExpression| creation to the given |ExpressionFactory|.</text>
         </assertion>
@@ -6184,7 +6205,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.18" title="Obtaining an AnnotatedType for a class">
+    <section id="11.3.19" title="Obtaining an AnnotatedType for a class">
         <assertion id="a">
             <text>The method |BeanManager.createAnnotatedType()| returns an |AnnotatedType| that may be used to read the annotations of a given Java class or interface.</text>
         </assertion>
@@ -6193,7 +6214,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.19" title="Obtaining an InjectionTarget for a class">
+    <section id="11.3.20" title="Obtaining an InjectionTarget for a class">
 
         <group>
             <text>The method |BeanManager.createInjectionTarget()| returns a container provided implementation of |InjectionTarget| for a given |AnnotatedType| or throws an |IllegalArgumentException| if there is a definition error associated with any injection point of the type.</text>
@@ -6208,7 +6229,7 @@
 
     </section>
 
-    <section id="11.3.20" title="Obtaining a Producer for a field or method">
+    <section id="11.3.21" title="Obtaining a Producer for a field or method">
         <group>
             <text>The method |BeanManager.createProducer()| returns a container provided implementation of |Producer| for a given |AnnotatedMethod| or |AnnotatedField| or throws an |IllegalArgumentException| if there is a definition error associated with the producer method or field.</text>
             <assertion id="a">
@@ -6226,7 +6247,7 @@
         </group>
     </section>
 
-    <section id="11.3.21" title="Obtaining an InjectionPoint">
+    <section id="11.3.22" title="Obtaining an InjectionPoint">
         <group>
             <text>The method |BeanManager.createInjectionPoint()| returns a container provided implementation of |InjectionPoint| for a given |AnnotatedField| or |AnnotatedParameter| or throws an |IllegalArgumentException| if there is a definition error associated with the injection point.</text>
             <assertion id="a">
@@ -6241,7 +6262,7 @@
         </group>
     </section>
 
-    <section id="11.3.22" title="Obtaining a BeanAttributes">
+    <section id="11.3.23" title="Obtaining a BeanAttributes">
         <group>
             <text>The method |BeanManager.createBeanAttributes()| returns a container provided implementation of |BeanAttributes| by reading the annotations of a given |AnnotatedType| or |AnnotatedMember|, according to the rules define in |Chapter 2, Concepts|, or throws an |IllegalArgumentException| if there is a definition error associated with the declared bean attributes.</text>
             <assertion id="a">
@@ -6256,7 +6277,7 @@
         </group>
     </section>
 
-    <section id="11.3.23" title="Obtaining a Bean">
+    <section id="11.3.24" title="Obtaining a Bean">
         <group>
             <text>The method |BeanManager.createBean()| returns a container provided implementation of |Bean|. The method accepts a |BeanAttributes|, which determines the bean types, qualifiers, scope, name and stereotypes of the returned |Bean|, and the return values of |isAlternative()| and |isNullable()|, and a class, which determines the return value of |Bean.getClass()|.</text>
         </group>
@@ -6268,7 +6289,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.24" title="Obtaining the instance of an Extension">
+    <section id="11.3.25" title="Obtaining the instance of an Extension">
         <group>
             <text>The method |BeanManager.getExtension()| returns the container's instance of an |Extension| class declared in |META-INF/services|, or throws an |IllegalArgumentException| if the container has no instance of the given class.</text>
             <assertion id="a">

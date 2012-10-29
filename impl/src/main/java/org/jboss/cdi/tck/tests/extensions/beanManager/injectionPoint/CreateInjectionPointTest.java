@@ -64,7 +64,7 @@ public class CreateInjectionPointTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.22", id = "a") })
     public void testField() {
         AnnotatedType<?> type = getCurrentManager().createAnnotatedType(Library.class);
         assertEquals(type.getFields().size(), 1);
@@ -81,7 +81,7 @@ public class CreateInjectionPointTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.22", id = "b") })
     public void testConstructorParameter() {
         AnnotatedType<?> type = getCurrentManager().createAnnotatedType(Library.class);
         assertEquals(type.getConstructors().size(), 1);
@@ -99,7 +99,7 @@ public class CreateInjectionPointTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.22", id = "b") })
     public void testMethodParameter() {
         AnnotatedType<?> type = getCurrentManager().createAnnotatedType(Library.class);
         assertEquals(1, type.getMethods().size());
@@ -116,7 +116,7 @@ public class CreateInjectionPointTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.22", id = "c") })
     public void testInvalidField() {
         AnnotatedField<Magazine> invalidField = new AnnotatedField<Magazine>() {
 
@@ -164,7 +164,7 @@ public class CreateInjectionPointTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = "11.3.22", id = "c") })
     public void testInvalidParameter() {
         AnnotatedType<?> type = getCurrentManager().createAnnotatedType(NotABean.class);
         assertEquals(1, type.getMethods().size());
