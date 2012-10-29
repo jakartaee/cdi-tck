@@ -54,7 +54,8 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aa"), @SpecAssertion(section = "12.4", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aa"), @SpecAssertion(section = "11.5.6", id = "ab"),
+            @SpecAssertion(section = "12.4", id = "ba") })
     public void testProcessAnnotatedTypeEventsSent() {
         // Randomly test some of the classes and interfaces that should have
         // been discovered and sent via the event
@@ -62,8 +63,20 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
         assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(ClassD.class));
         assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Dog.class));
         assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(InterfaceA.class));
-        // CDI-269
-        // assert !ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Tame.class);
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.6", id = "ac")
+    public void testProcessAnnotatedTypeFiredForEnum() {
+        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Type.class));
+    }
+
+    @Test
+    @SpecAssertion(section = "11.5.6", id = "ad")
+    public void testProcessAnnotatedTypeFiredForAnnotation() {
+        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Tame.class));
+        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(MissileBinding.class));
+        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(DummyAnnotation.class));
     }
 
     @Test

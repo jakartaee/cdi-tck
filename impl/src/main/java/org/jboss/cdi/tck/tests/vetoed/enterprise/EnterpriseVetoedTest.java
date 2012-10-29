@@ -27,7 +27,6 @@ import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
-import org.jboss.cdi.tck.tests.vetoed.enterprise.aquarium.Piranha;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -51,7 +50,7 @@ public class EnterpriseVetoedTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(EnterpriseVetoedTest.class)
                 .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class, ElephantLocal.class, Elephant.class,
-                        ModifyingExtension.class, VerifyingExtension.class).withPackage(Piranha.class.getPackage())
+                        ModifyingExtension.class, VerifyingExtension.class)
                 .withExtensions(ModifyingExtension.class, VerifyingExtension.class).withLibrary(Gecko.class).build();
     }
 
@@ -60,21 +59,14 @@ public class EnterpriseVetoedTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
-            @SpecAssertion(section = "11.5.6", id = "ac") })
+            @SpecAssertion(section = "11.5.6", id = "ia") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h") })
-    public void testPackageLevelVeto() {
-        assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
-        assertEquals(getCurrentManager().getBeans(Piranha.class, AnyLiteral.INSTANCE).size(), 0);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "11.5.6", id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "11.5.6", id = "ie") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
         assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);

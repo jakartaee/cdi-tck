@@ -412,8 +412,8 @@
             <assertion id="fc">
                 <text>Test with a producer field.</text>
             </assertion>
-        </group>        
-   
+        </group>
+
     </section>
 
     <section id="2.5.3" title="Beans with no name">
@@ -571,7 +571,7 @@
         <assertion id="aa">
             <text>A stereotype may declare an empty |@Named| annotation, which specifies that every bean with the stereotype has a defaulted name when a name is not explicitly specified by the bean.</text>
         </assertion>
-        
+
         <assertion id="ab">
             <text>A |@Named| qualifier declared by a stereotype is not added to the qualifiers of a bean with the stereotype.</text>
         </assertion>
@@ -3330,7 +3330,7 @@
         <assertion id="o">
             <text>The |get()| method may not create a new instance of the given contextual type unless a |CreationalContext| is given.</text>
         </assertion>
-        
+
         <assertion id="s">
             <text>When the container calls |get()| for a context that is associated with a passivating scope it must ensure that the given instance of |Contextual| and the instance of |CreationalContext|, if given, are serializable.</text>
         </assertion>
@@ -4129,7 +4129,7 @@
                 <note>Test required since CDI 1.0 defined conversation for JSF requests only.</note>
             </assertion>
         </group>
-        
+
         <group>
             <text>An event with qualifier |@Initialized(ConversationContext.class)| is fired when the conversation context is initialized and an event with qualifier |@Destroyed(ConversationScoped.class)| is fired when the conversation is destroyed. The event payload is the conversation id if the conversation context is destroyed and is not associated with a current Servlet request, the |ServletRequestEvent| if the application is a web application deployed to a Servlet container, any |java.lang.Object| for other types of application.</text>
             <assertion id="ba">
@@ -4617,7 +4617,7 @@
             <text>Decorators may be associated with any managed bean that is not itself an interceptor or decorator or with any EJB session bean.</text>
             <note>Doesn't specify an error</note>
         </assertion>
-        
+
         <assertion id="b">
             <text>Decorators are not applied to the return value of a producer method or the current value of a producer field.</text>
         </assertion>
@@ -4644,7 +4644,7 @@
         <assertion id="d">
             <text>The decorator class may be abstract.</text>
         </assertion>
-        
+
         <assertion id="e">
             <text>If the set of decorated types of a decorator is empty, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
@@ -4845,66 +4845,66 @@
 
     <section id="8.4" title="Decorator invocation">
 
-    <group>
-        <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and, after processing all interceptors of the method, invokes decorators of the bean. The container searches for the first decorator of the instance that implements the method that is being invoked as a business method. If such decorator exists, the container calls the method of the decorator.</text>
-        <assertion id="aa">
-            <text>Test decorator of managed bean is called.</text>
-        </assertion>
-        <assertion id="ab">
-            <text>Test decorator of session bean is called .</text>
-        </assertion>
-        <assertion id="aca">
-            <text>Test injected Event</text>
-        </assertion>
-        <assertion id="acb">
-            <text>Test injected Instance</text>
-        </assertion>
-        <assertion id="acc">
-            <text>Test injected @Default Bean</text>
-        </assertion>
-        <assertion id="acd">
-            <text>Test injected @Intercepted Bean</text>
-        </assertion>
-        <assertion id="ace">
-            <text>Test injected @Decorated Bean</text>
-        </assertion>
-        <assertion id="acf">
-            <text>Test injected Interceptor</text>
-        </assertion>
-        <assertion id="acg">
-            <text>Test injected Decorator</text>
-        </assertion>
-        <assertion id="ach">
-            <text>Test injected Conversation</text>
-        </assertion>
-        <assertion id="aci">
-            <text>Test injected HttpServletRequest</text>
-        </assertion>
-        <assertion id="acj">
-            <text>Test injected HttpSession</text>
-        </assertion>
-        <assertion id="ack">
-            <text>Test injected ServletContext</text>
-        </assertion>
-        <assertion id="acl">
-            <text>Test injected InjectionPoint</text>
-        </assertion>
-        <assertion id="acm">
-            <text>Test injected Principal</text>
-        </assertion>
-        <assertion id="acn">
-            <text>Test injected UserTransaction</text>
-        </assertion>
-        <assertion id="aco">
-            <text>Test injected Validator</text>
-        </assertion>
-        <assertion id="acp">
-            <text>Test injected ValidatorFactory</text>
-        </assertion>
-        <assertion id="acq">
-            <text>Test injected ConstraintValidator</text>
-        </assertion>
-    </group>
+        <group>
+            <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and, after processing all interceptors of the method, invokes decorators of the bean. The container searches for the first decorator of the instance that implements the method that is being invoked as a business method. If such decorator exists, the container calls the method of the decorator.</text>
+            <assertion id="aa">
+                <text>Test decorator of managed bean is called.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test decorator of session bean is called .</text>
+            </assertion>
+            <assertion id="aca">
+                <text>Test injected Event</text>
+            </assertion>
+            <assertion id="acb">
+                <text>Test injected Instance</text>
+            </assertion>
+            <assertion id="acc">
+                <text>Test injected @Default Bean</text>
+            </assertion>
+            <assertion id="acd">
+                <text>Test injected @Intercepted Bean</text>
+            </assertion>
+            <assertion id="ace">
+                <text>Test injected @Decorated Bean</text>
+            </assertion>
+            <assertion id="acf">
+                <text>Test injected Interceptor</text>
+            </assertion>
+            <assertion id="acg">
+                <text>Test injected Decorator</text>
+            </assertion>
+            <assertion id="ach">
+                <text>Test injected Conversation</text>
+            </assertion>
+            <assertion id="aci">
+                <text>Test injected HttpServletRequest</text>
+            </assertion>
+            <assertion id="acj">
+                <text>Test injected HttpSession</text>
+            </assertion>
+            <assertion id="ack">
+                <text>Test injected ServletContext</text>
+            </assertion>
+            <assertion id="acl">
+                <text>Test injected InjectionPoint</text>
+            </assertion>
+            <assertion id="acm">
+                <text>Test injected Principal</text>
+            </assertion>
+            <assertion id="acn">
+                <text>Test injected UserTransaction</text>
+            </assertion>
+            <assertion id="aco">
+                <text>Test injected Validator</text>
+            </assertion>
+            <assertion id="acp">
+                <text>Test injected ValidatorFactory</text>
+            </assertion>
+            <assertion id="acq">
+                <text>Test injected ConstraintValidator</text>
+            </assertion>
+        </group>
 
         <assertion id="b">
             <text>If no such decorator exists, the container invokes the business method of the intercepted instance.</text>
@@ -5351,11 +5351,11 @@
         <assertion id="f">
             <text>If the runtime type of the event object contains a type variable, an |IllegalArgumentException| is thrown.</text>
         </assertion>
-        
+
         <assertion id="g">
             <text>If the runtime type of the event object is assignable to the type of a container lifecycle event, |IllegalArgumentException| is thrown.</text>
         </assertion>
-        
+
     </section>
 
     <section id="10.3.2" title="The built-in Event">
@@ -6698,21 +6698,64 @@
     <section id="11.5.6" title="ProcessAnnotatedType event">
 
         <group>
-            <text>The container must fire an event for each Java class or interface it discovers in a bean archive and for annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|, except for those annotated with |@Vetoed|, before it reads the declared annotations.. The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where |X| is the class, for classes and interfaces discovered in a bean archive, or of type |javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType&lt;X&gt;| for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            <text>The container must fire an event, before it processes a type, for each Java class, interface, enum or annotation discovered in a bean archive, Annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|, annotation added by |BeforeBeanDiscovery.addInterceptorBinding()|, |BeforeBeanDiscovery.addQualifier()|, |BeforeBeanDiscovery.addScope()| or |BeforeBeanDiscovery.addStereotype()|.</text>
             <assertion id="aa">
-                <text>Test for classes and interfaces discovered in a bean archive.</text>
+                <text>Test class discovered in a bean archive.</text>
             </assertion>
             <assertion id="ab">
-                <text>Test for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+                <text>Test interface discovered in a bean archive.</text>
             </assertion>
             <assertion id="ac">
-                <text>The event is not fired for classes and interfaces discovered in a bean archive and annotated with |@Vetoed|.</text>
+                <text>Test enum discovered in a bean archive.</text>
             </assertion>
             <assertion id="ad">
-                <text>The event is not fired for classes and interfaces added by |BeforeBeanDiscovery.addAnnotatedType()| and annotated with |@Vetoed|.</text>
+                <text>Test annotation discovered in a bean archive.</text>
+            </assertion>
+            <assertion id="ae">
+                <text>Test class added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+            <assertion id="af">
+                <text>Test interface added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+            <assertion id="ag">
+                <text>Test enum added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+            <assertion id="ah">
+                <text>Test annotation added by |BeforeBeanDiscovery.addInterceptorBinding()|, |BeforeBeanDiscovery.addQualifier()|, |BeforeBeanDiscovery.addScope()| and |BeforeBeanDiscovery.addStereotype()|.</text>
             </assertion>
         </group>
-        
+
+        <group>
+            <text>An event is not fired for any type annotated with |@Vetoed|, or in a package annotated with |@Vetoed|.</text>
+            <assertion id="ia">
+                <text>Test |@Vetoed| class discovered in a bean archive.</text>
+            </assertion>
+            <assertion id="ib">
+                <text>Test |@Vetoed| interface discovered in a bean archive.</text>
+            </assertion>
+            <assertion id="ic">
+                <text>Test |@Vetoed| enum discovered in a bean archive.</text>
+            </assertion>
+            <assertion id="id">
+                <text>Test |@Vetoed| annotation discovered in a bean archive.</text>
+            </assertion>
+            <assertion id="ie">
+                <text>Test |@Vetoed| class added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+            <assertion id="if">
+                <text>Test |@Vetoed| interface added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+            <assertion id="ig">
+                <text>Test |@Vetoed| enum added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+            <assertion id="ih">
+                <text>Test |@Vetoed| annotation added by |BeforeBeanDiscovery.addInterceptorBinding()|, |BeforeBeanDiscovery.addQualifier()|, |BeforeBeanDiscovery.addScope()| and |BeforeBeanDiscovery.addStereotype()|.</text>
+            </assertion>
+            <assertion id="ii">
+                <text>Test |@Vetoed| package.</text>
+            </assertion>
+        </group>
+
         <group>
             <text>The annotation |@WithAnnotations| may be applied to the event parameter. If the annotation is applied, the container must only deliver |ProcessAnnotatedType| events for types which contain at least one of the annotations specified. The annotation can appear on the type, on any field, method or constructor declared by the type, or on any parameter of any method or constructor declared by the type.</text>
             <assertion id="fa">
@@ -6734,15 +6777,15 @@
                 <text>Test annotation on the parameter of the constructor.</text>
             </assertion>
         </group>
-        
+
         <assertion id="g">
             <text>The annotation may be applied as a meta-annotation on any annotation considered.</text>
         </assertion>
-        
+
         <assertion id="h">
             <text>If the |@WithAnnotations| annotation is applied to any other event parameter, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
-        
+
         <assertion id="ba">
             <text>|getAnnotatedType()| returns the |AnnotatedType| object that will be used by the container to read the declared annotations.</text>
         </assertion>
@@ -6759,9 +6802,15 @@
             <text>|getSource()| returns the |Extension| instance that added the annotated type.</text>
         </assertion>
 
-        <assertion id="ca">
+        <group>
             <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType|. The container must use the final value of this property, after all observers have been called, as the only source of types and annotations for the the program elements.</text>
-        </assertion>
+            <assertion id="ca">
+                <text>Test class added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+            <assertion id="cb">
+                <text>Test annotation added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+        </group>
 
         <assertion id="e">
             <text>If any observer method of a |ProcessAnnotatedType| event throws an exception, the exception is treated as a definition error by the container.</text>
@@ -7061,7 +7110,7 @@
         <assertion id="ba">
             <text>For a managed bean with bean class |X|, the container must raise an event of type |ProcessManagedBean&lt;X&gt;|.</text>
         </assertion>
-        
+
         <assertion id="bb">
             <text>Test |ProcessManagedBean| is fired after |ProcessBeanAttributes|.</text>
         </assertion>
@@ -7069,15 +7118,15 @@
         <assertion id="ca">
             <text>For a session bean with bean class |X|, the container must raise an event of type |ProcessSessionBean&lt;X&gt;|.</text>
         </assertion>
-        
-         <assertion id="cb">
+
+        <assertion id="cb">
             <text>Test |ProcessSessionBean| is fired after |ProcessBeanAttributes|.</text>
         </assertion>
 
         <assertion id="eaa">
             <text>For a producer method with method return type |X| of a bean with bean class |T|, the container must raise an event of type |ProcessProducerMethod&lt;T, X&gt;|.</text>
         </assertion>
-        
+
         <assertion id="eab">
             <text>Test |ProcessProducerMethod| is fired after |ProcessBeanAttributes|.</text>
         </assertion>
@@ -7085,8 +7134,8 @@
         <assertion id="eba">
             <text>For a producer field with field type |X| of a bean with bean class |T|, the container must raise an event of type |ProcessProducerField&lt;T, X&gt;|.</text>
         </assertion>
-        
-         <assertion id="ebb">
+
+        <assertion id="ebb">
             <text>Test |ProcessProducerField| is fired after |ProcessBeanAttributes|.</text>
         </assertion>
 
@@ -7229,7 +7278,7 @@
             </assertion>
             <assertion id="abb">
                 <text>Test the |beans.xml| file in the |WEB-INF/classes/META-INF| directory.</text>
-            </assertion>        
+            </assertion>
         </group>
         <assertion id="ab" testable="false">
             <text>The |WEB-INF/classes| directory of a war is a bean archive if there is a file named |beans.xml| in the |WEB-INF| directory or in the WEB-INF/classes/META-INF directory of the war.</text>
@@ -7346,7 +7395,7 @@
         <assertion id="c">
             <text>Next, the container must fire an event of type |BeforeBeanDiscovery|, as defined in Section 11.5.1, "BeforeBeanDiscovery event".</text>
         </assertion>
-        
+
         <assertion id="i">
             <text>Next, the container must fire an event of type |ProcessModule| for every bean archive, as defined in Section 11.5.5, “ProcessModule event”.</text>
         </assertion>

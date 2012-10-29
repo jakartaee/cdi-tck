@@ -18,7 +18,12 @@ package org.jboss.cdi.tck.tests.vetoed;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.InterceptionType;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -28,6 +33,8 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
 import org.jboss.cdi.tck.tests.vetoed.aquarium.Fish;
+import org.jboss.cdi.tck.tests.vetoed.aquarium.FishType;
+import org.jboss.cdi.tck.tests.vetoed.aquarium.Fishy;
 import org.jboss.cdi.tck.tests.vetoed.aquarium.Piranha;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -51,10 +58,11 @@ public class VetoedTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(VetoedTest.class)
-                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class, Animal.class, Elephant.class,
-                        ModifyingExtension.class, VerifyingExtension.class).withPackage(Piranha.class.getPackage())
-                .withExtensions(ModifyingExtension.class, VerifyingExtension.class).withLibrary(Gecko.class, Reptile.class)
-                .build();
+                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class, Animal.class, Elephant.class, Shark.class,
+                        Predator.class, Type.class, MissileBinding.class, DummyScoped.class, AnimalStereotype.class,
+                        Tiger.class, ModifyingExtension.class, VerifyingExtension.class)
+                .withPackage(Piranha.class.getPackage()).withExtensions(ModifyingExtension.class, VerifyingExtension.class)
+                .withLibrary(Gecko.class, Reptile.class).build();
     }
 
     @Inject
@@ -62,24 +70,60 @@ public class VetoedTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
-            @SpecAssertion(section = "11.5.6", id = "ac") })
+            @SpecAssertion(section = "11.5.6", id = "ia"), @SpecAssertion(section = "11.5.6", id = "ib") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
         assertFalse(verifyingExtension.getClasses().contains(Animal.class));
     }
 
+    @SuppressWarnings("serial")
     @Test
     @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
-            @SpecAssertion(section = "11.5.6", id = "ac") })
-    public void testPackageLevelVeto() {
-        assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
-        assertEquals(getCurrentManager().getBeans(Piranha.class, AnyLiteral.INSTANCE).size(), 0);
-        assertFalse(verifyingExtension.getClasses().contains(Fish.class));
+            @SpecAssertion(section = "11.5.6", id = "id") })
+    public void testVetoedAnnotation() {
+        assertFalse(verifyingExtension.getClasses().contains(Predator.class));
+        assertFalse(verifyingExtension.getClasses().contains(MissileBinding.class));
+        assertFalse(verifyingExtension.getClasses().contains(AnimalStereotype.class));
+        assertFalse(verifyingExtension.getClasses().contains(DummyScoped.class));
+
+        // Predator qualifier is not taken into account
+        Bean<Tiger> tigerBean = getUniqueBean(Tiger.class);
+        assertTrue(tigerBean.getStereotypes().isEmpty());
+        assertEquals(
+                getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
+                        new AnnotationLiteral<MissileBinding>() {
+                        }).size(), 0);
+
+        // TODO check custom scope
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "11.5.6", id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
+            @SpecAssertion(section = "11.5.6", id = "ic") })
+    public void testVetoedEnum() {
+        assertFalse(verifyingExtension.getClasses().contains(Type.class));
+        assertNull(Type.A.getBeanManager());
+    }
+
+    @SuppressWarnings("serial")
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
+            @SpecAssertion(section = "11.5.6", id = "ii") })
+    public void testPackageLevelVeto() {
+        assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
+        assertFalse(verifyingExtension.getClasses().contains(Fish.class));
+        assertFalse(verifyingExtension.getClasses().contains(FishType.class));
+        assertFalse(verifyingExtension.getClasses().contains(Fishy.class));
+        assertEquals(getCurrentManager().getBeans(Piranha.class, AnyLiteral.INSTANCE).size(), 0);
+        assertEquals(getCurrentManager().getBeans(Shark.class).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Shark.class, new AnnotationLiteral<Fishy>() {
+        }).size(), 0);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "11.5.6", id = "ie"),
+            @SpecAssertion(section = "11.5.6", id = "if") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
         assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);
