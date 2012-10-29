@@ -14,12 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition.dependentWithPublicField;
+package org.jboss.cdi.tck.tests.implementation.simple.definition.nonDependentWithPublicStaticField;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -29,17 +28,17 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class DependentWithPublicFieldTest extends AbstractTest {
+public class NonDependentWithPublicStaticFieldTest extends AbstractTest {
 
-    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DependentWithPublicFieldTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(NonDependentWithPublicStaticFieldTest.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "fc"), @SpecAssertion(section = "2.8", id = "ba") })
-    public void testNonDependentScopedBeanCanNotHavePublicField() {
+    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "fb") })
+    public void testNonDependentScopedBeanCanHavePublicStaticField() {
+        assertEquals(Leopard.NAME, "john");
     }
 
 }

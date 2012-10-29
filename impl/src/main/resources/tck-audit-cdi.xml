@@ -682,19 +682,24 @@
     </section>
 
     <section id="3.1" title="Managed beans">
-        <assertion id="f0">
+        
+        <assertion id="a">
             <text>If the bean class of a managed bean is annotated with both the |@Interceptor| and |@Decorator| stereotypes, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
-
-        <assertion id="fa">
-            <text>If a managed bean has a public field, it must have scope |@Dependent|.</text>
-            <note>Check that a dependent scoped bean with a public field does work</note>
-        </assertion>
-
-        <assertion id="fba">
-            <text>If a managed bean with a public field declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
-        </assertion>
-
+        
+        <group>
+            <text>If a managed bean has a non-static public field, it must have scope |@Dependent|. If a managed bean with a non-static public field declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
+            <assertion id="fa">
+                <text>Check a dependent scoped bean with a public field.</text>
+            </assertion>
+            <assertion id="fb">
+                <text>Check a managed bean with a static public field which declares any scope other than |@Dependent|.</text>
+            </assertion>
+            <assertion id="fc">
+                <text>If a managed bean with a non-static public field declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
+            </assertion>
+        </group>
+        
         <assertion id="g">
             <text>If the managed bean class is a generic type, it must have scope |@Dependent|. If a managed bean with a parameterized bean class declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>

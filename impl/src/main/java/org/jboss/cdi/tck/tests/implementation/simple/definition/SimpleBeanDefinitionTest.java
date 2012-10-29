@@ -34,11 +34,7 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(SimpleBeanDefinitionTest.class)
-        // Originally with faces-config.xml however this resource does not exist in
-        // /jsr299-tck-impl/src/main/resources/org/jboss/jsr299/tck/tests/implementation/simple/definition
-        // .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
-                .build();
+        return new WebArchiveBuilder().withTestClassPackage(SimpleBeanDefinitionTest.class).build();
     }
 
     @Test
@@ -111,7 +107,8 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = "3.1", id = "fa")
-    public void testDependentScopedBeanCanHavePublicField() throws Exception {
+    public void testDependentScopedBeanCanHaveNonStaticPublicField() throws Exception {
         assert getInstanceByType(Tiger.class).name.equals("pete");
     }
+
 }

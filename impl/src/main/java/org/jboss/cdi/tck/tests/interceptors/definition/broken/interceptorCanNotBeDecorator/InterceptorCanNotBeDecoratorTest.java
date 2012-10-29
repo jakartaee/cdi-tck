@@ -37,7 +37,7 @@ public class InterceptorCanNotBeDecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.1", id = "f0")
+    @SpecAssertion(section = "3.1", id = "a")
     public void testInterceptorCanNotAlsoBeDecorator() throws Exception {
     }
 }
