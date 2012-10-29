@@ -14,19 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInjectedFieldInInterceptor;
+package org.jboss.cdi.tck.tests.context.passivating.enterprise.valid;
 
 import java.io.Serializable;
 
-import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @SuppressWarnings("serial")
-public class BrokenInterceptor implements Serializable {
-
-    @Inject
-    District district;
+@Interceptor
+@Digital
+public class DigitalInterceptor implements Serializable {
 
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {

@@ -3634,10 +3634,12 @@
 
     <section id="6.6.1" title="Passivation capable beans">
 
-        <assertion id="a" testable="false">
-            <text>As defined by the EJB specification, all stateful session beans are passivation capable. Stateless and singleton session beans are not passivation capable.</text>
-            <note>Defined by EJB spec</note>
-        </assertion>
+        <group>
+            <text>As defined by the EJB specification, all stateful session beans are passivation capable if and only if all interceptors and decorators of the bean are passivation capable. Stateless and singleton session beans are not passivation capable.</text>
+            <assertion id="a">
+                <text>Test passivation capable stateful session bean.</text>
+            </assertion>
+        </group>
 
         <group>
             <text>A managed bean is passivation capable if and only if the bean class is serializable and all interceptors and decorators of the bean are serializable.</text>
@@ -3756,10 +3758,12 @@
     <section id="6.6.4" title="Validation of passivation capable beans and dependencies">
 
         <group>
-            <text>If a managed bean which declares a passivating scope is not passivation capable, then the container automatically detects the problem and treats it as a deployment problem.</text>
+            <text>If a managed bean or stateful session bean which declares a passivating scope is not passivation capable, then the container automatically detects the problem and treats it as a deployment problem.</text>
             <assertion id="a">
                 <text>Test managed bean.</text>
-                <note>Here we check the class, as interceptors and decorators are tested below</note>
+            </assertion>
+            <assertion id="b">
+                <text>Test stateful session bean.</text>
             </assertion>
         </group>
 

@@ -14,22 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInjectedFieldInInterceptor;
+package org.jboss.cdi.tck.tests.context.passivating.enterprise.valid;
 
-import java.io.Serializable;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import javax.inject.Inject;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-@SuppressWarnings("serial")
-public class BrokenInterceptor implements Serializable {
+import javax.interceptor.InterceptorBinding;
 
-    @Inject
-    District district;
+@InterceptorBinding
+@Inherited
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+@Documented
+public @interface Digital {
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        return ctx.proceed();
-    }
 }

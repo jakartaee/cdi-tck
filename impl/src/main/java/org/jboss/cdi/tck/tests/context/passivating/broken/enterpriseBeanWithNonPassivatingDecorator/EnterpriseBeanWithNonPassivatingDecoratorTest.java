@@ -30,6 +30,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -47,7 +48,7 @@ public class EnterpriseBeanWithNonPassivatingDecoratorTest extends AbstractTest 
     }
 
     @Test(groups = { CONTEXTS, PASSIVATION, INTEGRATION })
-    @SpecAssertion(section = "6.6.4", id = "hb")
+    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "b"), @SpecAssertion(section = "6.6.4", id = "hb") })
     public void testEnterpriseBeanWithNonPassivatingDecoratorFails() {
     }
 }

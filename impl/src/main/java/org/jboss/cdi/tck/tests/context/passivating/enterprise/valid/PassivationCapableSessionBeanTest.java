@@ -14,33 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.passivating.broken.managedBeanWithNonSerializableInterceptorClass;
-
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-import static org.jboss.cdi.tck.TestGroups.PASSIVATION;
-
-import javax.enterprise.inject.spi.DeploymentException;
+package org.jboss.cdi.tck.tests.context.passivating.enterprise.valid;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+/**
+ * Verifies that a deployment which contains a passivation capable SFSB is valid.
+ * 
+ * @author Jozef Hartinger
+ * @author Martin Kouba
+ */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class ManagedBeanWithNonSerializableInterceptorClassTest extends AbstractTest {
+public class PassivationCapableSessionBeanTest extends AbstractTest {
 
-    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ManagedBeanWithNonSerializableInterceptorClassTest.class).build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(PassivationCapableSessionBeanTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                                .clazz(DigitalInterceptor.class.getName()).up()).build();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
-    @SpecAssertion(section = "6.6.4", id = "hc")
-    public void testManagedBeanWithNonSerializableInterceptorClassNotOK() {
+    @Test
+    @SpecAssertion(section = "6.6.1", id = "a")
+    public void testDeployment() {
+        // only verify deployment
     }
 }

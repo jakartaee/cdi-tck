@@ -14,9 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.passivating.broken.managedBeanWithNonSerializableInterceptorClass;
+package org.jboss.cdi.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInterceptor;
 
 import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PASSIVATION;
 
 import javax.enterprise.inject.spi.DeploymentException;
@@ -26,21 +27,28 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class ManagedBeanWithNonSerializableInterceptorClassTest extends AbstractTest {
+public class EnterpriseBeanWithNonPassivatingInterceptorTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ManagedBeanWithNonSerializableInterceptorClassTest.class).build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(EnterpriseBeanWithNonPassivatingInterceptorTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                                .clazz(DigitalInterceptor.class.getName()).up()).build();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
-    @SpecAssertion(section = "6.6.4", id = "hc")
-    public void testManagedBeanWithNonSerializableInterceptorClassNotOK() {
+    @Test(groups = { CONTEXTS, PASSIVATION, INTEGRATION })
+    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "b"), @SpecAssertion(section = "6.6.4", id = "hd") })
+    public void testEnterpriseBeanWithNonPassivatingDecoratorFails() {
     }
 }
