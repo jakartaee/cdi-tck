@@ -3647,7 +3647,7 @@
         </group>
 
         <group>
-            <text>A managed bean is passivation capable if and only if the bean class is serializable and all interceptors and decorators of the bean are serializable.</text>
+            <text>A managed bean is passivation capable if and only if the bean class is serializable and all interceptors and decorators of the bean are passivation capable.</text>
             <assertion id="ba">
                 <text>Tests with a serializable bean class.</text>
             </assertion>
@@ -5834,6 +5834,12 @@
         <assertion id="k">
             <text>|preDestroy()| calls the |@PreDestroy| callback, if it exists, according to the semantics required by the Java EE platform specification.</text>
         </assertion>
+        
+        <assertion id="l" testable="false">
+            <text>Implementations of |Producer| and |InjectionTarget| must ensure that the set of injection points returned by |getInjectionPoints()| are injected by |produce()| or |inject()|.</text>
+            <note>Targeting extension developers</note>
+        </assertion>
+        
     </section>
 
     <section id="11.3" title="The BeanManager object">
