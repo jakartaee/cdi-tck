@@ -6173,10 +6173,10 @@
         <group>
             <text>A portable extension may determine if two qualifiers or two interceptor bindings are considered equivalent for the purposes of typesafe resolution, as defined in Section 5.2.1, "Performing typesafe resolution".</text>
             <assertion id="a">
-                <text>Test equality of qualifiers using |BeanManager.areQualifiersEquivalent()|.</text>
+                <text>Test equivalence of qualifiers using |BeanManager.areQualifiersEquivalent()|.</text>
             </assertion>
             <assertion id="b">
-                <text>Test equality of interceptor bindings using |BeanManager.areInterceptorBindingsEquivalent()|.</text>
+                <text>Test equivalence of interceptor bindings using |BeanManager.areInterceptorBindingsEquivalent()|.</text>
             </assertion>
         </group>
         <group>
