@@ -40,7 +40,7 @@ public @interface Missile {
 
     String position();
 
-    Level level() default Level.A;
+    Level level() default org.jboss.cdi.tck.tests.extensions.beanManager.equivalence.interceptorbinding.Level.A;
 
     @Nonbinding
     boolean important() default false;

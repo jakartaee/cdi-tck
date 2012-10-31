@@ -43,7 +43,7 @@ public @interface Monster {
 
     String position();
 
-    Level level() default Level.A;
+    Level level() default org.jboss.cdi.tck.tests.extensions.beanManager.equivalence.qualifier.Level.A;
 
     @Nonbinding
     ArmorClass armorClass();
