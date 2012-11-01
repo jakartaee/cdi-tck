@@ -15,19 +15,21 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.decorators.builtin.http;
+package org.jboss.cdi.tck.tests.decorators.builtin.instance;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 
-import javax.enterprise.inject.spi.Decorator;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.spi.Producer;
+import javax.enterprise.util.TypeLiteral;
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -41,48 +43,51 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
+ * Basic test for decorating built-in {@link Instance} bean.
+ * 
  * @author Martin Kouba
  * 
  */
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
-public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
+public class BuiltinInstanceDecoratorTest extends AbstractDecoratorTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(BuiltinHttpSessionDecoratorTest.class)
+                .withTestClassPackage(BuiltinInstanceDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createDecorators()
-                                .clazz(HttpSessionDecorator.class.getName()).clazz(HttpSessionDecorator2.class.getName()).up())
-                .build();
+                                .clazz(MuleInstanceDecorator.class.getName()).up()).build();
     }
 
     @Inject
-    HttpSession httpSession;
+    Instance<Mule> instance;
 
-    @Inject
-    HttpSessionObserver httpSessionObserver;
-
+    @SuppressWarnings({ "serial" })
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acj"), @SpecAssertion(section = "8.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acb") })
     public void testDecoratorIsResolved() {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(HttpSession.class));
-        assertEquals(2, decorators.size());
-        for (Decorator<?> decorator : decorators) {
-            assertEquals(decorator.getDecoratedTypes(), Collections.<Type> singleton(HttpSession.class));
-            assertEquals(decorator.getDelegateType(), HttpSession.class);
-        }
+        TypeLiteral<Instance<Mule>> instanceLiteral = new TypeLiteral<Instance<Mule>>() {
+        };
+        TypeLiteral<Producer<Mule>> producerLiteral = new TypeLiteral<Producer<Mule>>() {
+        };
+        TypeLiteral<Iterable<Mule>> iterableLiteral = new TypeLiteral<Iterable<Mule>>() {
+        };
+        checkDecorator(
+                resolveUniqueDecorator(Collections.singleton(instanceLiteral.getType())),
+                MuleInstanceDecorator.class,
+                new HashSet<Type>(
+                        Arrays.asList(instanceLiteral.getType(), producerLiteral.getType(), iterableLiteral.getType())),
+                Instance.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acj") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acb") })
     public void testDecoratorIsInvoked() {
-        httpSession.invalidate();
-        assertTrue(httpSessionObserver.isDestroyed());
-        assertTrue(httpSessionObserver.isDecorated());
-        assertEquals(3, httpSession.getLastAccessedTime());
-        assertEquals("bar", httpSession.getAttribute("foo"));
+        assertTrue(instance.isAmbiguous());
+        Mule mule = instance.get();
+        assertNotNull(mule);
     }
 }
