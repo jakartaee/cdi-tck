@@ -17,15 +17,41 @@
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
+import org.jboss.cdi.tck.util.ForwardingIdentifiedAnnotatedType;
+
 public class BeforeBeanDiscoveryObserver implements Extension {
 
-    public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager beanManager) {
-        event.addAnnotatedType(beanManager.createAnnotatedType(Phoenix.class));
-        event.addAnnotatedType(beanManager.createAnnotatedType(Griffin.class));
-    }
+    public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, final BeanManager beanManager) {
 
+        event.addAnnotatedType(new ForwardingIdentifiedAnnotatedType<Phoenix>() {
+
+            @Override
+            public String getExtensionId() {
+                return BeforeBeanDiscoveryObserver.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Phoenix> delegate() {
+                return beanManager.createAnnotatedType(Phoenix.class);
+            }
+        });
+
+        event.addAnnotatedType(new ForwardingIdentifiedAnnotatedType<Griffin>() {
+
+            @Override
+            public String getExtensionId() {
+                return BeforeBeanDiscoveryObserver.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Griffin> delegate() {
+                return beanManager.createAnnotatedType(Griffin.class);
+            }
+        });
+    }
 }
