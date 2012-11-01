@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.decorators.definition.producer;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
+import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 @Decorator
@@ -26,6 +27,7 @@ public abstract class ChargeDecorator implements BankAccount {
     private static final int WITHDRAWAL_CHARGE = 5;
 
     @Inject
+    @Any
     @Delegate
     private BankAccount account;
 

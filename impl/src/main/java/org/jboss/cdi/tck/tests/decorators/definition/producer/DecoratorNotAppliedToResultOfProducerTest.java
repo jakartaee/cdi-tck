@@ -27,12 +27,14 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
  * 
  */
+@SpecVersion(spec = "cdi", version = "20091101")
 public class DecoratorNotAppliedToResultOfProducerTest extends AbstractTest {
 
     @Deployment
@@ -46,22 +48,37 @@ public class DecoratorNotAppliedToResultOfProducerTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = "8", id = "b")
-    public void testDecoratorNotAppliedToResultOfProducerMethod(@Synthetic ShortTermAccount shortTermAccount) {
-        assertNotNull(shortTermAccount);
-        shortTermAccount.deposit(10);
-        shortTermAccount.withdraw(5);
+    public void testDecoratorNotAppliedToResultOfProducerMethod(ShortTermAccount account,
+            @Synthetic ShortTermAccount producedAccount) {
+        assertNotNull(account);
+        assertNotNull(producedAccount);
+
+        account.deposit(10);
+        account.withdraw(5);
+        // ChargeDecorator is applied
+        assertEquals(account.getBalance(), 0);
+
+        producedAccount.deposit(10);
+        producedAccount.withdraw(5);
         // ChargeDecorator is not applied
-        assertEquals(shortTermAccount.getBalance(), 5);
+        assertEquals(producedAccount.getBalance(), 5);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = "8", id = "b")
-    public void testDecoratorNotAppliedToResultOfProducerField(@Synthetic DurableAccount durableAccount) {
-        assertNotNull(durableAccount);
-        durableAccount.deposit(20);
-        durableAccount.withdraw(25);
+    public void testDecoratorNotAppliedToResultOfProducerField(DurableAccount account, @Synthetic DurableAccount producedAccount) {
+        assertNotNull(account);
+        assertNotNull(producedAccount);
+
+        account.deposit(20);
+        account.withdraw(25);
+        // ChargeDecorator is applied
+        assertEquals(account.getBalance(), -10);
+
+        producedAccount.deposit(20);
+        producedAccount.withdraw(25);
         // ChargeDecorator is not applied
-        assertEquals(durableAccount.getBalance(), -5);
+        assertEquals(producedAccount.getBalance(), -5);
     }
 
 }
