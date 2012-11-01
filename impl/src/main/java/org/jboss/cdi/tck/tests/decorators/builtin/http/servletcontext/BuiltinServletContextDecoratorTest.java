@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.decorators.builtin.http;
+package org.jboss.cdi.tck.tests.decorators.builtin.http.servletcontext;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertNotNull;
 
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -27,7 +27,7 @@ import java.util.List;
 
 import javax.enterprise.inject.spi.Decorator;
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -46,43 +46,39 @@ import org.testng.annotations.Test;
  */
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
-public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
+public class BuiltinServletContextDecoratorTest extends AbstractDecoratorTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(BuiltinHttpSessionDecoratorTest.class)
+                .withTestClassPackage(BuiltinServletContextDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createDecorators()
-                                .clazz(HttpSessionDecorator.class.getName()).clazz(HttpSessionDecorator2.class.getName()).up())
-                .build();
+                                .clazz(ServletContextDecorator1.class.getName())
+                                .clazz(ServletContextDecorator2.class.getName()).up()).build();
     }
 
     @Inject
-    HttpSession httpSession;
-
-    @Inject
-    HttpSessionObserver httpSessionObserver;
+    ServletContext servletContext;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acj"), @SpecAssertion(section = "8.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ack") })
     public void testDecoratorIsResolved() {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(HttpSession.class));
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
+                Collections.<Type> singleton(ServletContext.class));
         assertEquals(2, decorators.size());
         for (Decorator<?> decorator : decorators) {
-            assertEquals(decorator.getDecoratedTypes(), Collections.<Type> singleton(HttpSession.class));
-            assertEquals(decorator.getDelegateType(), HttpSession.class);
+            assertEquals(decorator.getDecoratedTypes(), Collections.singleton(ServletContext.class));
+            assertEquals(decorator.getDelegateType(), ServletContext.class);
         }
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acj") })
+    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ack") })
     public void testDecoratorIsInvoked() {
-        httpSession.invalidate();
-        assertTrue(httpSessionObserver.isDestroyed());
-        assertTrue(httpSessionObserver.isDecorated());
-        assertEquals(3, httpSession.getLastAccessedTime());
-        assertEquals("bar", httpSession.getAttribute("foo"));
+        assertEquals(servletContext.getContextPath(), "whee");
+        assertEquals(servletContext.getMajorVersion(), 20);
+        assertNotNull(servletContext.getServerInfo());
     }
 }

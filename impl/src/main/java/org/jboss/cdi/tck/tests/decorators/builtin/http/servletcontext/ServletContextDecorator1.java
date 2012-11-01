@@ -15,40 +15,28 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.decorators.builtin.http;
-
-import java.io.Serializable;
+package org.jboss.cdi.tck.tests.decorators.builtin.http.servletcontext;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext;
 
-/**
- * @author Jozef Hartinger
- * 
- */
 @Decorator
-@SuppressWarnings("serial")
-public abstract class HttpSessionDecorator2 implements HttpSession, Serializable {
+public abstract class ServletContextDecorator1 implements ServletContext {
 
     @Inject
     @Delegate
-    HttpSession delegate;
+    ServletContext delegate;
 
     @Override
-    public long getLastAccessedTime() {
-        return 1;
+    public String getContextPath() {
+        return "whee";
     }
 
     @Override
-    public Object getAttribute(String name) {
-        if ("foo".equals(name)) {
-            return "bar";
-        }
-        return delegate.getAttribute(name);
+    public int getMajorVersion() {
+        return delegate.getMajorVersion();
     }
-
-    
 
 }

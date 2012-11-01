@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.decorators.builtin.http;
+package org.jboss.cdi.tck.tests.decorators.builtin.http.session;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebListener;

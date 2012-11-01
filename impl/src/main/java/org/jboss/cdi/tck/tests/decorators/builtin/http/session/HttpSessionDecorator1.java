@@ -15,34 +15,40 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.decorators.builtin.http;
+package org.jboss.cdi.tck.tests.decorators.builtin.http.session;
 
-import javax.enterprise.context.RequestScoped;
+import java.io.Serializable;
+
+import javax.decorator.Decorator;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Martin Kouba
  * 
  */
-@RequestScoped
-public class HttpSessionObserver {
+@Decorator
+public abstract class HttpSessionDecorator1 implements HttpSession, Serializable {
 
-    private boolean isDecorated = false;
-    private boolean isDestroyed = false;
+    @Inject
+    @Delegate
+    HttpSession delegate;
 
-    public boolean isDecorated() {
-        return isDecorated;
+    @Inject
+    HttpSessionObserver httpSessionObserver;
+
+    @Override
+    public long getLastAccessedTime() {
+        return delegate.getLastAccessedTime() * 3;
     }
 
-    public void setDecorated(boolean isDecorated) {
-        this.isDecorated = isDecorated;
+    @Override
+    public void invalidate() {
+        delegate.invalidate();
+        httpSessionObserver.setDecorated(true);
     }
 
-    public boolean isDestroyed() {
-        return isDestroyed;
-    }
-
-    public void setDestroyed(boolean isDestroyed) {
-        this.isDestroyed = isDestroyed;
-    }
+    
 
 }
