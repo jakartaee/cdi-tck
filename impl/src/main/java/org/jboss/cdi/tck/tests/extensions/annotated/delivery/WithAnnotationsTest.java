@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -39,6 +40,7 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class WithAnnotationsTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
