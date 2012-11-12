@@ -47,7 +47,7 @@ public class DisabledSessionBeanInjectionNotAvailableTest extends AbstractTest {
                 .withClasses(DisabledEjbFoo.class, EjbFooLocal.class).withBeanLibrary(BrokenFoo.class, BrokenBar.class).build();
 
         enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
-                .withClasses(DisabledSessionBeanInjectionNotAvailableTest.class, BrokenWebBar.class).build());
+                .withClasses(BrokenWebBar.class).build());
 
         return enterpriseArchive;
     }
