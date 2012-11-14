@@ -64,7 +64,7 @@ public class EjbInjectionTest extends AbstractTest {
         Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> creationalContext = getCurrentManager().createCreationalContext(managedBean);
         ManagedBean instance = managedBean.create(creationalContext);
-        instance = (ManagedBean) deserialize(serialize(instance));
+        instance = (ManagedBean) activate(passivate(instance));
         assert instance.getMyEjb() != null : "EJB reference was not produced and injected into bean";
         assert instance.getMyEjb().knockKnock().equals("We're home");
     }

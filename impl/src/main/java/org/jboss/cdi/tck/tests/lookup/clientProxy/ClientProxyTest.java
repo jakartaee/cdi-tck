@@ -52,8 +52,8 @@ public class ClientProxyTest extends AbstractTest {
     public void testSimpleBeanClientProxyIsSerializable() throws IOException, ClassNotFoundException {
         TunedTuna tuna = getInstanceByType(TunedTuna.class);
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
-        byte[] bytes = serialize(tuna);
-        tuna = (TunedTuna) deserialize(bytes);
+        byte[] bytes = passivate(tuna);
+        tuna = (TunedTuna) activate(bytes);
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
         assert tuna.getState().equals("tuned");
     }

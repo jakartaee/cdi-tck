@@ -68,7 +68,7 @@ public class InjectionOfResourceTest extends AbstractTest {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
         ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
-        managedBean = (ManagedBean) deserialize(serialize(managedBean));
+        managedBean = (ManagedBean) activate(passivate(managedBean));
         assert managedBean.getBeanManager() != null;
     }
 

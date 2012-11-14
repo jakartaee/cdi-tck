@@ -79,7 +79,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
         ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
-        managedBean = (ManagedBean) deserialize(serialize(managedBean));
+        managedBean = (ManagedBean) activate(passivate(managedBean));
         assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
         assert managedBean.getPersistenceContext().getDelegate() != null : "Persistence context not deserialized correctly";
     }
@@ -90,7 +90,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
         ManagedBean managedBean = managedBeanBean.create(managedBeanCc);
-        managedBean = (ManagedBean) deserialize(serialize(managedBean));
+        managedBean = (ManagedBean) activate(passivate(managedBean));
         assert managedBean.getPersistenceUnit() != null : "Persistence unit was not injected into bean";
         assert managedBean.getPersistenceUnit().isOpen() : "Persistence unit not open injected into bean";
     }

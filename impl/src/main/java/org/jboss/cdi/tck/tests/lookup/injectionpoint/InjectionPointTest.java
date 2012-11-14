@@ -181,9 +181,9 @@ public class InjectionPointTest extends AbstractTest {
         InjectionPoint ip2 = getInstanceByType(MethodInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
         InjectionPoint ip3 = getInstanceByType(ConstructorInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
 
-        ip1 = (InjectionPoint) deserialize(serialize(ip1));
-        ip2 = (InjectionPoint) deserialize(serialize(ip2));
-        ip3 = (InjectionPoint) deserialize(serialize(ip3));
+        ip1 = (InjectionPoint) activate(passivate(ip1));
+        ip2 = (InjectionPoint) activate(passivate(ip2));
+        ip3 = (InjectionPoint) activate(passivate(ip3));
 
         assert ip1.getType().equals(BeanWithInjectionPointMetadata.class);
         assert ip2.getType().equals(BeanWithInjectionPointMetadata.class);

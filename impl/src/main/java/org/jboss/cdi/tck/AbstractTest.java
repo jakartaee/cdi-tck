@@ -51,12 +51,12 @@ public abstract class AbstractTest extends Arquillian {
         return beanManager;
     }
 
-    protected byte[] serialize(Object instance) throws IOException {
-        return getCurrentConfiguration().getBeans().serialize(instance);
+    protected byte[] passivate(Object instance) throws IOException {
+        return getCurrentConfiguration().getBeans().passivate(instance);
     }
 
-    protected Object deserialize(byte[] bytes) throws IOException, ClassNotFoundException {
-        return getCurrentConfiguration().getBeans().deserialize(bytes);
+    protected Object activate(byte[] bytes) throws IOException, ClassNotFoundException {
+        return getCurrentConfiguration().getBeans().activate(bytes);
     }
 
     protected void setContextActive(Context context) {

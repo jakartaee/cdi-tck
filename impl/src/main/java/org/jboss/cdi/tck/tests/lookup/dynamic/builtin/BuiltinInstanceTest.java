@@ -111,7 +111,7 @@ public class BuiltinInstanceTest extends AbstractTest {
 
         assertNotNull(field);
 
-        Object object = deserialize(serialize(field));
+        Object object = activate(passivate(field));
         assert field.getInstance().get() instanceof Cow;
         assert object instanceof Field;
         Field field2 = (Field) object;

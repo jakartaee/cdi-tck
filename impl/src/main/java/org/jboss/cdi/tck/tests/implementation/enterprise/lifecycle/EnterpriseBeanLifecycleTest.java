@@ -89,8 +89,8 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
         });
 
-        byte[] bytes = serialize(stadtInstance);
-        Object object = deserialize(bytes);
+        byte[] bytes = passivate(stadtInstance);
+        Object object = activate(bytes);
         stadtInstance = (KleinStadt) object;
         assert getCurrentConfiguration().getBeans().isProxy(stadtInstance);
 

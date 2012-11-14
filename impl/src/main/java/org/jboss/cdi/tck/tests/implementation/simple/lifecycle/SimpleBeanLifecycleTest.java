@@ -68,8 +68,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testSerializeRequestScoped() throws Exception {
         Cod codInstance = getInstanceByType(Cod.class);
 
-        byte[] bytes = serialize(codInstance);
-        Object object = deserialize(bytes);
+        byte[] bytes = passivate(codInstance);
+        Object object = activate(bytes);
         codInstance = (Cod) object;
         assert getCurrentConfiguration().getBeans().isProxy(codInstance);
     }
@@ -79,8 +79,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testSerializeSessionScoped() throws Exception {
         Bream instance = getInstanceByType(Bream.class);
 
-        byte[] bytes = serialize(instance);
-        Object object = deserialize(bytes);
+        byte[] bytes = passivate(instance);
+        Object object = activate(bytes);
         instance = (Bream) object;
         assert getCurrentConfiguration().getBeans().isProxy(instance);
     }

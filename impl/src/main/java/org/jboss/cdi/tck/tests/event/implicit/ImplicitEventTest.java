@@ -119,9 +119,9 @@ public class ImplicitEventTest extends AbstractTest {
         Registration registration = getInstanceByType(Registration.class);
         Event<StudentRegisteredEvent> event = registration.getInjectedStudentRegisteredEvent();
         assert Serializable.class.isAssignableFrom(event.getClass());
-        byte[] serializedEvent = serialize(event);
+        byte[] serializedEvent = passivate(event);
         @SuppressWarnings("unchecked")
-        Event<StudentRegisteredEvent> eventCopy = (Event<StudentRegisteredEvent>) deserialize(serializedEvent);
+        Event<StudentRegisteredEvent> eventCopy = (Event<StudentRegisteredEvent>) activate(serializedEvent);
         // make sure we can still use it
         Student student = new Student("Dan");
         eventCopy.fire(new StudentRegisteredEvent(student));
