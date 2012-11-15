@@ -106,6 +106,11 @@ public final class TestGroups {
     public static final String PERSISTENCE = "persistence";
 
     /**
+     * Requires installed library
+     */
+    public static final String INSTALLED_LIB = "installedLib";
+
+    /**
      * No instance
      */
     private TestGroups() {
