@@ -4867,7 +4867,8 @@
             <assertion id="acb">
                 <text>Test injected Instance</text>
             </assertion>
-            <assertion id="acc">
+            <!-- TODO these assertions will be probably removed - see CDI-164 -->
+            <!-- assertion id="acc">
                 <text>Test injected @Default Bean</text>
             </assertion>
             <assertion id="acd">
@@ -4881,7 +4882,7 @@
             </assertion>
             <assertion id="acg">
                 <text>Test injected Decorator</text>
-            </assertion>
+            </assertion-->
             <assertion id="ach">
                 <text>Test injected Conversation</text>
             </assertion>
@@ -4903,7 +4904,8 @@
             <assertion id="acn">
                 <text>Test injected UserTransaction</text>
             </assertion>
-            <assertion id="aco">
+            <!-- TODO these assertions will be probably removed - see CDI-164 -->
+            <!-- assertion id="aco">
                 <text>Test injected Validator</text>
             </assertion>
             <assertion id="acp">
@@ -4911,7 +4913,7 @@
             </assertion>
             <assertion id="acq">
                 <text>Test injected ConstraintValidator</text>
-            </assertion>
+            </assertion-->
         </group>
 
         <assertion id="b">
