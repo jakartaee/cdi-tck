@@ -106,6 +106,7 @@
         <arquillian.version>1.0.2.Final</arquillian.version>
         <shrinkwrap.descriptors.version>2.0.0-alpha-3</shrinkwrap.descriptors.version>
         <jboss.jms.api.version>1.0.0.Final</jboss.jms.api.version>
+        <jboss.connector.api.version>1.0.1.Final</jboss.connector.api.version>
     </properties>
 
     <!-- Dependency management -->
@@ -254,6 +255,12 @@
                 <groupId>org.jboss.spec.javax.jms</groupId>
                 <artifactId>jboss-jms-api_1.1_spec</artifactId>
                 <version>${jboss.jms.api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jboss.spec.javax.resource</groupId>
+                <artifactId>jboss-connector-api_1.6_spec</artifactId>
+                <version>${jboss.connector.api.version}</version>
             </dependency>
 
         </dependencies>
