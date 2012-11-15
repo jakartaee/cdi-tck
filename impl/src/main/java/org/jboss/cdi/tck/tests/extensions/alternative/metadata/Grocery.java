@@ -30,7 +30,7 @@ public class Grocery implements Shop {
     @Inject
     private Fruit fruit;
     private boolean constructorWithParameterUsed = false;
-    private TropicalFruit initializerFruit = null;
+    private Fruit initializerFruit = null;
     private Bread bread = new Bread(true);
     private Water water = null;
 
@@ -50,7 +50,7 @@ public class Grocery implements Shop {
     }
 
     @Inject
-    public void initializer(@Any TropicalFruit fruit) {
+    public void initializer(@Any Fruit fruit) {
         this.initializerFruit = fruit;
     }
 
@@ -70,7 +70,7 @@ public class Grocery implements Shop {
         return constructorWithParameterUsed;
     }
 
-    public TropicalFruit getInitializerFruit() {
+    public Fruit getInitializerFruit() {
         return initializerFruit;
     }
 

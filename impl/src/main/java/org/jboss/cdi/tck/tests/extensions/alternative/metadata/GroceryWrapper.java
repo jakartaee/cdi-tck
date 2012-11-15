@@ -40,6 +40,7 @@ import org.jboss.cdi.tck.literals.InjectLiteral;
 public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
     private final Set<Type> typeClosure = new HashSet<Type>();
     private static boolean getBaseTypeOfFruitFieldUsed = false;
+    private static boolean getBaseTypeOfInitializerTropicalFruitParameterUsed = false;
     private static boolean getTypeClosureUsed = false;
 
     public GroceryWrapper(AnnotatedType<Grocery> delegate) {
@@ -88,6 +89,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
         return fields;
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes", "serial" })
     @Override
     public Set<AnnotatedMethod<? super Grocery>> getMethods() {
         Set<AnnotatedMethod<? super Grocery>> methods = new HashSet<AnnotatedMethod<? super Grocery>>();
@@ -104,7 +106,18 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
             } else if (method.getJavaMember().getName().equals("nonInjectAnnotatedInitializer")) {
                 methods.add(wrapMethod(method, false, new InjectLiteral()));
             } else if (method.getJavaMember().getName().equals("initializer")) {
-                methods.add(wrapMethodParameters(method, false, new Annotation[] { new CheapLiteral() }));
+
+                AnnotatedMethodWrapper<? super Grocery> methodWrapper = new AnnotatedMethodWrapper(method, true);
+                methodWrapper.replaceParameters(new AnnotatedParameterWrapper(methodWrapper.getParameter(0), false,
+                        new CheapLiteral()) {
+                    @Override
+                    public Type getBaseType() {
+                        getBaseTypeOfInitializerTropicalFruitParameterUsed = true;
+                        return TropicalFruit.class;
+                    }
+                });
+                methods.add(methodWrapper);
+
             } else if (method.getJavaMember().getName().equals("observer1")) {
                 Annotation[] firstParameterAnnotations = new Annotation[] { new Observes() {
 
@@ -189,6 +202,10 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
 
     public static boolean isGetBaseTypeOfFruitFieldUsed() {
         return getBaseTypeOfFruitFieldUsed;
+    }
+
+    public static boolean isGetBaseTypeOfInitializerTropicalFruitParameterUsed() {
+        return getBaseTypeOfInitializerTropicalFruitParameterUsed;
     }
 
     public static boolean isGetTypeClosureUsed() {

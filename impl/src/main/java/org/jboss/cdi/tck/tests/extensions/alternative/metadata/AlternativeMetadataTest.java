@@ -67,6 +67,14 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
+    @SpecAssertion(section = "11.4", id = "hb")
+    public void testGetBaseTypeUsedToDetermineTypeOfInitializerInjectionPoint() {
+        assertEquals(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getInitializerFruit().getMetadata().getType(),
+                TropicalFruit.class);
+        assertTrue(GroceryWrapper.isGetBaseTypeOfInitializerTropicalFruitParameterUsed());
+    }
+
+    @Test
     @SpecAssertion(section = "11.4", id = "ka")
     public void testGetTypeClosureUsed() {
         assert GroceryWrapper.isGetTypeClosureUsed();

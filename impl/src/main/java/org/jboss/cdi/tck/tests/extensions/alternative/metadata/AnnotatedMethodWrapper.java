@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -29,9 +31,12 @@ public class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements Annot
 
     private AnnotatedMethod<X> delegate;
 
+    private List<AnnotatedParameter<X>> parameters;
+
     public AnnotatedMethodWrapper(AnnotatedMethod<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
         super(delegate, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
+        this.parameters = delegate.getParameters();
     }
 
     public Method getJavaMember() {
@@ -39,7 +44,17 @@ public class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements Annot
     }
 
     public List<AnnotatedParameter<X>> getParameters() {
-        return delegate.getParameters();
+        return parameters;
+    }
+
+    public AnnotatedParameter<X> getParameter(int position) {
+        for (Iterator<AnnotatedParameter<X>> iterator = this.parameters.iterator(); iterator.hasNext();) {
+            AnnotatedParameter<X> parameter = iterator.next();
+            if (parameter.getPosition() == position) {
+                return parameter;
+            }
+        }
+        return null;
     }
 
     public AnnotatedType<X> getDeclaringType() {
@@ -52,8 +67,12 @@ public class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements Annot
 
     @Override
     public Set<Annotation> getAnnotations() {
-        // TODO Auto-generated method stub
         return super.getAnnotations();
+    }
+
+    public AnnotatedMethodWrapper<X> replaceParameters(AnnotatedParameter<X>... parameters) {
+        this.parameters = Arrays.asList(parameters);
+        return this;
     }
 
 }
