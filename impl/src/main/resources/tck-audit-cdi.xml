@@ -682,11 +682,11 @@
     </section>
 
     <section id="3.1" title="Managed beans">
-        
+
         <assertion id="a">
             <text>If the bean class of a managed bean is annotated with both the |@Interceptor| and |@Decorator| stereotypes, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
-        
+
         <group>
             <text>If a managed bean has a non-static public field, it must have scope |@Dependent|. If a managed bean with a non-static public field declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
             <assertion id="fa">
@@ -699,7 +699,7 @@
                 <text>If a managed bean with a non-static public field declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
         </group>
-        
+
         <assertion id="g">
             <text>If the managed bean class is a generic type, it must have scope |@Dependent|. If a managed bean with a parameterized bean class declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
@@ -3196,6 +3196,20 @@
         <assertion id="m">
             <text>The method |isAmbiguous()| returns |true| if there is more than one bean that has the required type and qualifiers and is eligible for injection into the class into which the parent |Instance| was injected, or |false| otherwise.</text>
         </assertion>
+
+        <group>
+            <text>The method |destroy()| instructs the container to destroy the instance. The bean instance passed to |destroy()| should be a dependent scoped bean instance, or a client proxy for a normal scoped bean. Applications are encouraged to always call |destroy()| when they no longer require an instance obtained from |Instance|.</text>
+            <assertion id="n">
+                <text>Test dependent scoped bean instance passed to |destroy()|.</text>
+            </assertion>
+            <assertion id="o">
+                <text>Test client proxy passed to |destroy()|.</text>
+            </assertion>
+            <assertion id="p" implied="true">
+                <text>Test |UnsupportedOperationException| is thrown when if the active context object for the scope type of the bean does not support destroying bean instances.</text>
+            </assertion>
+        </group>
+
     </section>
 
     <section id="5.6.2" title="The built-in Instance">
@@ -3337,6 +3351,11 @@
 
         <assertion id="s">
             <text>When the container calls |get()| for a context that is associated with a passivating scope it must ensure that the given instance of |Contextual| and the instance of |CreationalContext|, if given, are serializable.</text>
+        </assertion>
+
+        <assertion id="t">
+            <text>The |destroy()| method destroys an existing contextual instance, removing it from the context instance.</text>
+            <note>The AlterableContext interface was introduced in Contexts and Dependency Injection for Java EE 1.1 to allow bean instances to be destroyed by the application.</note>
         </assertion>
 
         <assertion id="p">
@@ -4868,21 +4887,7 @@
                 <text>Test injected Instance</text>
             </assertion>
             <!-- TODO these assertions will be probably removed - see CDI-164 -->
-            <!-- assertion id="acc">
-                <text>Test injected @Default Bean</text>
-            </assertion>
-            <assertion id="acd">
-                <text>Test injected @Intercepted Bean</text>
-            </assertion>
-            <assertion id="ace">
-                <text>Test injected @Decorated Bean</text>
-            </assertion>
-            <assertion id="acf">
-                <text>Test injected Interceptor</text>
-            </assertion>
-            <assertion id="acg">
-                <text>Test injected Decorator</text>
-            </assertion-->
+            <!-- assertion id="acc"> <text>Test injected @Default Bean</text> </assertion> <assertion id="acd"> <text>Test injected @Intercepted Bean</text> </assertion> <assertion id="ace"> <text>Test injected @Decorated Bean</text> </assertion> <assertion id="acf"> <text>Test injected Interceptor</text> </assertion> <assertion id="acg"> <text>Test injected Decorator</text> </assertion -->
             <assertion id="ach">
                 <text>Test injected Conversation</text>
             </assertion>
@@ -4905,15 +4910,7 @@
                 <text>Test injected UserTransaction</text>
             </assertion>
             <!-- TODO these assertions will be probably removed - see CDI-164 -->
-            <!-- assertion id="aco">
-                <text>Test injected Validator</text>
-            </assertion>
-            <assertion id="acp">
-                <text>Test injected ValidatorFactory</text>
-            </assertion>
-            <assertion id="acq">
-                <text>Test injected ConstraintValidator</text>
-            </assertion-->
+            <!-- assertion id="aco"> <text>Test injected Validator</text> </assertion> <assertion id="acp"> <text>Test injected ValidatorFactory</text> </assertion> <assertion id="acq"> <text>Test injected ConstraintValidator</text> </assertion -->
         </group>
 
         <assertion id="b">
@@ -5836,12 +5833,12 @@
         <assertion id="k">
             <text>|preDestroy()| calls the |@PreDestroy| callback, if it exists, according to the semantics required by the Java EE platform specification.</text>
         </assertion>
-        
+
         <assertion id="l" testable="false">
             <text>Implementations of |Producer| and |InjectionTarget| must ensure that the set of injection points returned by |getInjectionPoints()| are injected by |produce()| or |inject()|.</text>
             <note>Targeting extension developers</note>
         </assertion>
-        
+
     </section>
 
     <section id="11.3" title="The BeanManager object">
@@ -6170,7 +6167,7 @@
             </assertion>
         </group>
     </section>
-    
+
     <section id="11.3.15" title="Determining the hash code and equivalence of qualifiers and interceptor bindings">
         <group>
             <text>A portable extension may determine if two qualifiers or two interceptor bindings are considered equivalent for the purposes of typesafe resolution, as defined in Section 5.2.1, "Performing typesafe resolution".</text>
