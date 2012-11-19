@@ -17,18 +17,44 @@
 package org.jboss.cdi.tck.tests.extensions.annotated.synthetic;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
+import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 
 public class RegisteringExtension1 implements Extension {
 
-    void registerApple(@Observes BeforeBeanDiscovery event, BeanManager manager) {
-        event.addAnnotatedType(new AnnotatedTypeWrapper<Apple>(manager.createAnnotatedType(Apple.class), false,
-                Juicy.Literal.INSTANCE));
-        event.addAnnotatedType(new AnnotatedTypeWrapper<Orange>(manager.createAnnotatedType(Orange.class), false,
-                Juicy.Literal.INSTANCE));
+    void registerApple(@Observes BeforeBeanDiscovery event, final BeanManager manager) {
+
+        new AddForwardingAnnotatedTypeAction<Apple>() {
+
+            @Override
+            public String getExtensionId() {
+                return RegisteringExtension1.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Apple> delegate() {
+                return new AnnotatedTypeWrapper<Apple>(manager.createAnnotatedType(Apple.class), false, Juicy.Literal.INSTANCE);
+            }
+        }.perform(event);
+
+        new AddForwardingAnnotatedTypeAction<Orange>() {
+
+            @Override
+            public String getExtensionId() {
+                return RegisteringExtension1.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Orange> delegate() {
+                return new AnnotatedTypeWrapper<Orange>(manager.createAnnotatedType(Orange.class), false,
+                        Juicy.Literal.INSTANCE);
+            }
+        }.perform(event);
+
     }
 }

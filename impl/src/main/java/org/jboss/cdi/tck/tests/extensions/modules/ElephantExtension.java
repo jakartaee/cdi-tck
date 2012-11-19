@@ -17,13 +17,29 @@
 package org.jboss.cdi.tck.tests.extensions.modules;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
+import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
+
 public class ElephantExtension implements Extension {
 
-    public void registerElephant(@Observes BeforeBeanDiscovery event, BeanManager manager) {
-        event.addAnnotatedType(manager.createAnnotatedType(Elephant.class));
+    public void registerElephant(@Observes BeforeBeanDiscovery event, final BeanManager manager) {
+
+        new AddForwardingAnnotatedTypeAction<Elephant>() {
+
+            @Override
+            public String getExtensionId() {
+                return ElephantExtension.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Elephant> delegate() {
+                return manager.createAnnotatedType(Elephant.class);
+            }
+        }.perform(event);
+
     }
 }

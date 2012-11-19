@@ -22,13 +22,13 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
-import org.jboss.cdi.tck.util.ForwardingIdentifiedAnnotatedType;
+import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 
 public class BeforeBeanDiscoveryObserver implements Extension {
 
     public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, final BeanManager beanManager) {
 
-        event.addAnnotatedType(new ForwardingIdentifiedAnnotatedType<Phoenix>() {
+        new AddForwardingAnnotatedTypeAction<Phoenix>() {
 
             @Override
             public String getExtensionId() {
@@ -39,9 +39,9 @@ public class BeforeBeanDiscoveryObserver implements Extension {
             public AnnotatedType<Phoenix> delegate() {
                 return beanManager.createAnnotatedType(Phoenix.class);
             }
-        });
+        }.perform(event);
 
-        event.addAnnotatedType(new ForwardingIdentifiedAnnotatedType<Griffin>() {
+        new AddForwardingAnnotatedTypeAction<Griffin>() {
 
             @Override
             public String getExtensionId() {
@@ -52,6 +52,7 @@ public class BeforeBeanDiscoveryObserver implements Extension {
             public AnnotatedType<Griffin> delegate() {
                 return beanManager.createAnnotatedType(Griffin.class);
             }
-        });
+        }.perform(event);
+
     }
 }

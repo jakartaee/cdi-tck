@@ -17,9 +17,12 @@
 package org.jboss.cdi.tck.tests.extensions.registration;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
+
+import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 
 /**
  * An extension which registers a bean programmatically.
@@ -28,7 +31,19 @@ import javax.enterprise.inject.spi.Extension;
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  */
 public class ManualBeanRegistrationExtension implements Extension {
-    public void registerBeans(@Observes BeforeBeanDiscovery event, BeanManager bm) {
-        event.addAnnotatedType(bm.createAnnotatedType(BeanClassToRegister.class));
+    public void registerBeans(@Observes BeforeBeanDiscovery event, final BeanManager bm) {
+
+        new AddForwardingAnnotatedTypeAction<BeanClassToRegister>() {
+
+            @Override
+            public String getExtensionId() {
+                return ManualBeanRegistrationExtension.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<BeanClassToRegister> delegate() {
+                return bm.createAnnotatedType(BeanClassToRegister.class);
+            }
+        }.perform(event);
     }
 }

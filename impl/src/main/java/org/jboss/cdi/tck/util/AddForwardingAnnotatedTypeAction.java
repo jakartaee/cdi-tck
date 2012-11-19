@@ -17,15 +17,19 @@
 
 package org.jboss.cdi.tck.util;
 
+import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.IdentifiedAnnotatedType;
 
 /**
+ * Tests should use this abstraction when adding new custom {@link AnnotatedType} during {@link BeforeBeanDiscovery}
+ * notification.
  * 
- * @deprecated {@link IdentifiedAnnotatedType} will be probably removed, see CDI-58. Use
- *             {@link AddForwardingAnnotatedTypeAction} instead.
+ * See also CDI-58.
+ * 
  * @author Martin Kouba
  */
-public abstract class ForwardingIdentifiedAnnotatedType<X> extends ForwardingAnnotatedType<X> implements
+public abstract class AddForwardingAnnotatedTypeAction<X> extends ForwardingAnnotatedType<X> implements
         IdentifiedAnnotatedType<X> {
 
     public abstract String getExtensionId();
@@ -33,6 +37,10 @@ public abstract class ForwardingIdentifiedAnnotatedType<X> extends ForwardingAnn
     @Override
     public String getID() {
         return getExtensionId() + "_" + delegate().getJavaClass().getName();
+    }
+
+    public void perform(BeforeBeanDiscovery event) {
+        event.addAnnotatedType(this);
     }
 
 }

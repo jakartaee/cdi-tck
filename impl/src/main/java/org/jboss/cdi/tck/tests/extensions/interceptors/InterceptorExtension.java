@@ -17,9 +17,12 @@
 package org.jboss.cdi.tck.tests.extensions.interceptors;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
+
+import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 
 /**
  * @author Stuart Douglas <stuart@baileyroberts.com.au>
@@ -29,13 +32,37 @@ public class InterceptorExtension implements Extension {
     /**
      * registers two interceptors via the SPI
      */
-    public void beforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager beanManager) throws SecurityException,
-            NoSuchMethodException {
+    public void beforeBeanDiscovery(@Observes BeforeBeanDiscovery event, final BeanManager beanManager)
+            throws SecurityException, NoSuchMethodException {
 
         event.addInterceptorBinding(Incremented.class);
         event.addInterceptorBinding(FullMarathon.class);
-        event.addAnnotatedType(beanManager.createAnnotatedType(IncrementingInterceptor.class));
-        event.addAnnotatedType(beanManager.createAnnotatedType(LifecycleInterceptor.class));
+
+        new AddForwardingAnnotatedTypeAction<IncrementingInterceptor>() {
+
+            @Override
+            public String getExtensionId() {
+                return InterceptorExtension.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<IncrementingInterceptor> delegate() {
+                return beanManager.createAnnotatedType(IncrementingInterceptor.class);
+            }
+        }.perform(event);
+
+        new AddForwardingAnnotatedTypeAction<LifecycleInterceptor>() {
+
+            @Override
+            public String getExtensionId() {
+                return InterceptorExtension.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<LifecycleInterceptor> delegate() {
+                return beanManager.createAnnotatedType(LifecycleInterceptor.class);
+            }
+        }.perform(event);
     }
 
 }

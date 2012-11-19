@@ -54,7 +54,10 @@ public class ResourceAdapterArchiveTest extends AbstractTest {
                 .build();
 
         ResourceAdapterArchive rar = ShrinkWrap.create(ResourceAdapterArchive.class);
-        rar.addAsLibrary(ShrinkWrap.create(JavaArchive.class).addClasses(Translator.class, TestResourceAdapter.class));
+        rar.addAsLibrary(ShrinkWrap
+                .create(JavaArchive.class)
+                .addClasses(Translator.class, TestResourceAdapter.class)
+                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml"));
         rar.addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml");
         rar.addAsManifestResource(
                 new StringAsset(Descriptors.create(ConnectorDescriptor.class).version("1.6").displayName("Test RA")

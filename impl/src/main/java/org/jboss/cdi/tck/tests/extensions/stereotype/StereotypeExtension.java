@@ -17,9 +17,12 @@
 package org.jboss.cdi.tck.tests.extensions.stereotype;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
+
+import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 
 /**
  * @author Martin Kouba
@@ -29,11 +32,23 @@ public class StereotypeExtension implements Extension {
     /**
      * Registers stereotype via the SPI.
      */
-    public void beforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager beanManager) throws SecurityException,
-            NoSuchMethodException {
+    public void beforeBeanDiscovery(@Observes BeforeBeanDiscovery event, final BeanManager beanManager)
+            throws SecurityException, NoSuchMethodException {
 
         event.addStereotype(ObjectWithName.class);
-        event.addAnnotatedType(beanManager.createAnnotatedType(Chair.class));
+
+        new AddForwardingAnnotatedTypeAction<Chair>() {
+
+            @Override
+            public String getExtensionId() {
+                return StereotypeExtension.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Chair> delegate() {
+                return beanManager.createAnnotatedType(Chair.class);
+            }
+        }.perform(event);
     }
 
 }

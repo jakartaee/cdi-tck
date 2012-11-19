@@ -23,13 +23,24 @@ import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
+import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 
 public class AppleExtension implements Extension {
 
-    void registerApple(@Observes BeforeBeanDiscovery event, BeanManager manager) {
+    void registerApple(@Observes BeforeBeanDiscovery event, final BeanManager manager) {
 
-        final AnnotatedType<Apple> type = manager.createAnnotatedType(Apple.class);
-        event.addAnnotatedType(new AnnotatedTypeWrapper<Apple>(type, false, null) {
-        });
+        new AddForwardingAnnotatedTypeAction<Apple>() {
+
+            @Override
+            public String getExtensionId() {
+                return AppleExtension.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Apple> delegate() {
+                return new AnnotatedTypeWrapper<Apple>(manager.createAnnotatedType(Apple.class), false) {
+                };
+            }
+        }.perform(event);
     }
 }

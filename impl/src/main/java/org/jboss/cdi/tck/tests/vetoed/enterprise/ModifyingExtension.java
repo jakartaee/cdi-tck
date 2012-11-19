@@ -17,13 +17,28 @@
 package org.jboss.cdi.tck.tests.vetoed.enterprise;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
+import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
+
 public class ModifyingExtension implements Extension {
 
-    public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager beanManager) {
-        event.addAnnotatedType(beanManager.createAnnotatedType(Gecko.class));
+    public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, final BeanManager beanManager) {
+
+        new AddForwardingAnnotatedTypeAction<Gecko>() {
+
+            @Override
+            public String getExtensionId() {
+                return ModifyingExtension.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Gecko> delegate() {
+                return beanManager.createAnnotatedType(Gecko.class);
+            }
+        }.perform(event);
     }
 }

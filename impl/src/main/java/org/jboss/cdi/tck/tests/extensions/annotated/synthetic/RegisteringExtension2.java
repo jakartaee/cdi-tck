@@ -17,16 +17,29 @@
 package org.jboss.cdi.tck.tests.extensions.annotated.synthetic;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
 import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
+import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 
 public class RegisteringExtension2 implements Extension {
 
-    void registerApple(@Observes BeforeBeanDiscovery event, BeanManager manager) {
-        event.addAnnotatedType(new AnnotatedTypeWrapper<Pear>(manager.createAnnotatedType(Pear.class), false,
-                Juicy.Literal.INSTANCE));
+    void registerApple(@Observes BeforeBeanDiscovery event, final BeanManager manager) {
+
+        new AddForwardingAnnotatedTypeAction<Pear>() {
+
+            @Override
+            public String getExtensionId() {
+                return RegisteringExtension2.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Pear> delegate() {
+                return new AnnotatedTypeWrapper<Pear>(manager.createAnnotatedType(Pear.class), false, Juicy.Literal.INSTANCE);
+            }
+        }.perform(event);
     }
 }
