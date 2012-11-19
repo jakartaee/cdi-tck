@@ -16,10 +16,18 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
+import java.util.List;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -30,30 +38,45 @@ public class InterceptorOrderTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InterceptorOrderTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(InterceptorOrderTest.class)
+                .withBeansXml(
+                        Descriptors
+                                .create(BeansDescriptor.class)
+                                .createInterceptors()
+                                .clazz(SecondInterceptor.class.getName(), FirstInterceptor.class.getName(),
+                                        TransactionalInterceptor.class.getName()).up()).build();
     }
 
-    @Test
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "9.4", id = "b") })
-    public void testInterceptorsCalledInOrderDefinedByBeansXml() {
-        FirstInterceptor.calledFirst = false;
-        SecondInterceptor.calledFirst = false;
+    public void testInterceptorsCalledInOrderDefinedByBeansXml(Foo foo) {
 
-        Foo foo = getInstanceByType(Foo.class);
+        assertNotNull(foo);
+        ActionSequence.reset();
+
         foo.bar();
 
-        assert SecondInterceptor.calledFirst;
+        List<String> sequence = ActionSequence.getSequenceData();
+        assertEquals(sequence.size(), 2);
+        assertEquals(sequence.get(0), SecondInterceptor.class.getName());
+        assertEquals(sequence.get(1), FirstInterceptor.class.getName());
     }
 
-    @Test
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = "9.4", id = "fa")
-    public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding() {
-        TransactionalInterceptor.first = false;
-        AnotherInterceptor.first = false;
+    public void testInterceptorsInvocationOrder(AccountTransaction transaction) {
 
-        AccountTransaction transaction = getInstanceByType(AccountTransaction.class);
+        assertNotNull(transaction);
+        ActionSequence.reset();
+
         transaction.execute();
 
-        assert AnotherInterceptor.first;
+        List<String> sequence = ActionSequence.getSequenceData();
+        assertEquals(sequence.size(), 4);
+        assertEquals(sequence.get(0), AnotherInterceptor.class.getName());
+        assertEquals(sequence.get(1), TransactionalInterceptor.class.getName());
+        assertEquals(sequence.get(2), Transaction.class.getName());
+        assertEquals(sequence.get(3), AccountTransaction.class.getName());
     }
 }

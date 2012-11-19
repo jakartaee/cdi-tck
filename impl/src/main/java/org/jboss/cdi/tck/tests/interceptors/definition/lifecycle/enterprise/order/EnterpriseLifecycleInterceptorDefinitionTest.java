@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle;
+package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.enterprise.order;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
@@ -36,20 +37,19 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class LifecycleInterceptorDefinitionTest extends AbstractTest {
+public class EnterpriseLifecycleInterceptorDefinitionTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(LifecycleInterceptorDefinitionTest.class)
+                .withTestClassPackage(EnterpriseLifecycleInterceptorDefinitionTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(MissileInterceptor.class.getName(), DestructionInterceptor.class.getName()).up())
-                .build();
+                                .clazz(MissileInterceptor.class.getName()).up()).build();
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.3", id = "a"), @SpecAssertion(section = "9.5", id = "a") })
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "fb") })
     public void testLifecycleInterception() {
 
         ActionSequence.reset();
@@ -60,36 +60,18 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
         missile.fire();
         bean.destroy(missile, ctx);
 
-        assertEquals(ActionSequence.getSequenceSize("postConstruct"), 1);
-        assertEquals(ActionSequence.getSequenceData("postConstruct").get(0), MissileInterceptor.class.getName());
-        assertEquals(ActionSequence.getSequenceSize("preDestroy"), 1);
-        assertEquals(ActionSequence.getSequenceData("preDestroy").get(0), MissileInterceptor.class.getName());
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.5", id = "a") })
-    public void tesMultipleLifecycleInterceptors() {
-
-        ActionSequence.reset();
-
-        Bean<Rocket> bean = getUniqueBean(Rocket.class);
-        CreationalContext<Rocket> ctx = getCurrentManager().createCreationalContext(bean);
-        Rocket rocket = bean.create(ctx);
-        rocket.fire();
-        bean.destroy(rocket, ctx);
-
         List<String> postConstruct = ActionSequence.getSequenceData("postConstruct");
         assertEquals(postConstruct.size(), 4);
-        assertEquals(postConstruct.get(0), MissileInterceptor.class.getName());
-        assertEquals(postConstruct.get(1), DestructionInterceptor.class.getName());
+        assertEquals(postConstruct.get(0), AnotherInterceptor.class.getName());
+        assertEquals(postConstruct.get(1), MissileInterceptor.class.getName());
         assertEquals(postConstruct.get(2), Weapon.class.getName());
-        assertEquals(postConstruct.get(3), Rocket.class.getName());
+        assertEquals(postConstruct.get(3), Missile.class.getName());
 
         List<String> preDestroy = ActionSequence.getSequenceData("preDestroy");
         assertEquals(preDestroy.size(), 4);
-        assertEquals(preDestroy.get(0), MissileInterceptor.class.getName());
-        assertEquals(preDestroy.get(1), DestructionInterceptor.class.getName());
-        assertEquals(preDestroy.get(2), Weapon.class.getName());
-        assertEquals(preDestroy.get(3), Rocket.class.getName());
+        assertEquals(postConstruct.get(0), AnotherInterceptor.class.getName());
+        assertEquals(postConstruct.get(1), MissileInterceptor.class.getName());
+        assertEquals(postConstruct.get(2), Weapon.class.getName());
+        assertEquals(postConstruct.get(3), Missile.class.getName());
     }
 }

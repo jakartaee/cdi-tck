@@ -19,13 +19,14 @@ package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 public class AnotherInterceptor {
-    public static boolean first = false;
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
-        if (!TransactionalInterceptor.first)
-            first = true;
+        ActionSequence.addAction(AnotherInterceptor.class.getName());
         return ctx.proceed();
     }
+
 }

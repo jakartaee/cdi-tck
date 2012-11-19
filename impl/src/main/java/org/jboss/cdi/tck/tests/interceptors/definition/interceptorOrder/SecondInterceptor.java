@@ -20,6 +20,8 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @Interceptor
 @Secure
 public class SecondInterceptor {
@@ -27,8 +29,7 @@ public class SecondInterceptor {
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
-        if (!FirstInterceptor.calledFirst)
-            calledFirst = true;
+        ActionSequence.addAction(SecondInterceptor.class.getName());
         return ctx.proceed();
     }
 }

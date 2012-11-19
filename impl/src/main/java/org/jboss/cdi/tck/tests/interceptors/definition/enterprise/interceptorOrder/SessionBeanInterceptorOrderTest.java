@@ -17,10 +17,15 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.interceptorOrder;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
+import java.util.List;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -35,18 +40,19 @@ public class SessionBeanInterceptorOrderTest extends AbstractTest {
                 .build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = "9.4", id = "fb")
-    public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding() {
-        MissileInterceptor.intercepted = false;
-        RadarInterceptor.intercepted = false;
-        RadarInterceptor.interceptedFirst = false;
+    public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding(MissileLocal missile) {
 
-        MissileLocal missile = getInstanceByType(MissileLocal.class);
+        assertNotNull(missile);
+        ActionSequence.reset();
+
         missile.fire();
 
-        assert MissileInterceptor.intercepted;
-        assert RadarInterceptor.intercepted;
-        assert RadarInterceptor.interceptedFirst;
+        List<String> sequence = ActionSequence.getSequenceData();
+        assertEquals(sequence.size(), 3);
+        assertEquals(sequence.get(0), RadarInterceptor.class.getName());
+        assertEquals(sequence.get(1), MissileInterceptor.class.getName());
+        assertEquals(sequence.get(2), Missile.class.getName());
     }
 }

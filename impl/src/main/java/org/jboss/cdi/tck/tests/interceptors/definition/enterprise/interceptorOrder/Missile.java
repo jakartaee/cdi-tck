@@ -17,12 +17,24 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.interceptorOrder;
 
 import javax.ejb.Stateful;
+import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptors;
+import javax.interceptor.InvocationContext;
+
+import org.jboss.cdi.tck.util.ActionSequence;
 
 @Stateful
 @Airborne
 @Interceptors(RadarInterceptor.class)
 public class Missile implements MissileLocal {
+
     public void fire() {
     }
+
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
+        ActionSequence.addAction(Missile.class.getName());
+        return ctx.proceed();
+    }
+
 }

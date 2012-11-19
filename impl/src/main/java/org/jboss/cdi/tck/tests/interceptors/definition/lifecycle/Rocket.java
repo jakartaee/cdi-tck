@@ -24,7 +24,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 
 @Destructive
 @Airborne
-public class Rocket {
+public class Rocket extends Weapon {
 
     public void fire() {
     }

@@ -14,23 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.order;
 
-package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.interceptorOrder;
-
-import java.io.Serializable;
-
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.interceptor.Interceptors;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
-public class RadarInterceptor implements Serializable {
+@Transactional
+@Interceptors(AnotherInterceptor.class)
+public class AccountTransaction extends Transaction {
 
-    private static final long serialVersionUID = 1L;
+    public void execute() {
+    }
 
-    @AroundInvoke
-    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
-        ActionSequence.addAction(RadarInterceptor.class.getName());
-        return ctx.proceed();
+    @PreDestroy
+    public void preDestroyAccountTransaction() {
+        ActionSequence.addAction("preDestroy", AccountTransaction.class.getName());
+    }
+
+    @PostConstruct
+    public void postConstructAccountTransaction() {
+        ActionSequence.addAction("postConstruct", AccountTransaction.class.getName());
     }
 }

@@ -14,23 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.order;
 
-package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.interceptorOrder;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-import java.io.Serializable;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import javax.interceptor.InterceptorBinding;
 
-import org.jboss.cdi.tck.util.ActionSequence;
+@Target({ TYPE })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface Transactional {
 
-public class RadarInterceptor implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    @AroundInvoke
-    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
-        ActionSequence.addAction(RadarInterceptor.class.getName());
-        return ctx.proceed();
-    }
 }

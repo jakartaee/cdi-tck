@@ -16,11 +16,22 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
 
+import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptors;
+import javax.interceptor.InvocationContext;
+
+import org.jboss.cdi.tck.util.ActionSequence;
 
 @Transactional
 @Interceptors(AnotherInterceptor.class)
-public class AccountTransaction {
+public class AccountTransaction extends Transaction {
+
     public void execute() {
+    }
+
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
+        ActionSequence.addAction(AccountTransaction.class.getName());
+        return ctx.proceed();
     }
 }

@@ -22,14 +22,17 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @Interceptor
 @Airborne
 public class MissileInterceptor implements Serializable {
-    public static boolean intercepted = false;
+
+    private static final long serialVersionUID = 1L;
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
-        intercepted = true;
+        ActionSequence.addAction(MissileInterceptor.class.getName());
         return ctx.proceed();
     }
 }

@@ -14,23 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.interceptorOrder;
+package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.enterprise.order;
 
 import java.io.Serializable;
 
-import javax.interceptor.AroundInvoke;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
-public class RadarInterceptor implements Serializable {
+@SuppressWarnings("serial")
+@Airborne
+@Interceptor
+public class MissileInterceptor implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    @PreDestroy
+    public void preDestroy(InvocationContext ctx) {
+        ActionSequence.addAction("preDestroy", MissileInterceptor.class.getName());
+        try {
+            ctx.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-    @AroundInvoke
-    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
-        ActionSequence.addAction(RadarInterceptor.class.getName());
-        return ctx.proceed();
+    @PostConstruct
+    public void postConstruct(InvocationContext ctx) {
+        ActionSequence.addAction("postConstruct", MissileInterceptor.class.getName());
+        try {
+            ctx.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 }

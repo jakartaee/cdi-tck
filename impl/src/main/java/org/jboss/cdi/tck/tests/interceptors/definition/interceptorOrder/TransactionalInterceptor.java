@@ -20,15 +20,15 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @Transactional
 @Interceptor
 public class TransactionalInterceptor {
-    public static boolean first = false;
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
-        if (!AnotherInterceptor.first)
-            first = true;
+        ActionSequence.addAction(TransactionalInterceptor.class.getName());
         return ctx.proceed();
     }
 

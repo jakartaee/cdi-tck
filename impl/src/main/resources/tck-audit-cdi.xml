@@ -5077,9 +5077,7 @@
         </assertion>
 
         <group>
-            <text>Interceptors declared using |@Interceptors| or in |ejb-jar.xml| are called before interceptors declared
-                using interceptor bindings.
-            </text>
+            <text>Interceptors declared using interceptor bindings are called after interceptors declared using |@Interceptors| or in |ejb-jar.xml| and before any around-invoke or lifecycle event callback methods declared on the target class or any superclass of the target class.</text>
 
             <assertion id="fa">
                 <text>Test with a managed bean</text>
