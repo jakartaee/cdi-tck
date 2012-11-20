@@ -6327,6 +6327,10 @@
             </assertion>
         </group>
 
+        <assertion id="b">
+            <text>When determining annotations on a type, the container must only consider the special inheritance rules defined for scope types in Section 4.1, "Inheritance of type-level metadata".</text>
+        </assertion>
+
         <group>
             <text>The interface |javax.enterprise.inject.spi.Annotated| exposes the overriding annotations and type declarations.</text>
             <assertion id="c">
