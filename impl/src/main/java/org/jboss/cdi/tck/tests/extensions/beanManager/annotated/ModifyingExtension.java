@@ -29,6 +29,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
+import javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
 
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.tests.extensions.beanManager.annotated.Alpha.AlphaLiteral;
@@ -98,8 +99,10 @@ public class ModifyingExtension implements Extension {
      * @param event
      */
     public void observeProcessAnnotatedType(@Observes ProcessAnnotatedType<Foo> event) {
-        // Wrap the default annotated type
-        event.setAnnotatedType(new AnnotatedTypeWrapper<Foo>(event.getAnnotatedType(), false, AlphaLiteral.INSTANCE));
+        if (!(event instanceof ProcessSyntheticAnnotatedType<?>)) {
+            // Wrap the default annotated type
+            event.setAnnotatedType(new AnnotatedTypeWrapper<Foo>(event.getAnnotatedType(), false, AlphaLiteral.INSTANCE));
+        }
     }
 
     /**
