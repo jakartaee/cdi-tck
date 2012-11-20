@@ -32,15 +32,19 @@ import javax.enterprise.inject.spi.IdentifiedAnnotatedType;
 public abstract class AddForwardingAnnotatedTypeAction<X> extends ForwardingAnnotatedType<X> implements
         IdentifiedAnnotatedType<X> {
 
-    public abstract String getExtensionId();
+    public abstract String getBaseId();
 
     @Override
     public String getID() {
-        return getExtensionId() + "_" + delegate().getJavaClass().getName();
+        return buildId(getBaseId(), delegate().getJavaClass());
     }
 
     public void perform(BeforeBeanDiscovery event) {
         event.addAnnotatedType(this);
+    }
+
+    public static String buildId(String baseId, Class<?> javaClass) {
+        return baseId + "_" + javaClass.getName();
     }
 
 }

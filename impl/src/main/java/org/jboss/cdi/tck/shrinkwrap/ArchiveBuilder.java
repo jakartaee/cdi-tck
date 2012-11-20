@@ -38,6 +38,7 @@ import org.jboss.cdi.tck.impl.PropertiesBasedConfigurationBuilder;
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.util.Timer;
+import org.jboss.cdi.tck.util.annotated.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -611,8 +612,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             if (!isAsClientMode()) {
                 withPackage(AbstractTest.class.getPackage());
             }
-            // Util package
+            // Util packages
             withPackage(Timer.class.getPackage());
+            withPackage(AnnotatedWrapper.class.getPackage());
         }
         return buildInternal();
     }

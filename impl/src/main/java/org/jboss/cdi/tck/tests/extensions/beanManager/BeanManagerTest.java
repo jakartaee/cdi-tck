@@ -57,8 +57,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.RetentionLiteral;
 import org.jboss.cdi.tck.literals.TargetLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -82,7 +80,6 @@ public class BeanManagerTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanManagerTest.class)
-                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class)
                 .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Soy.class.getName()).up())
                 .withExtensions(AfterBeanDiscoveryObserver.class, ProcessAnnotatedTypeObserver.class).build();
     }
@@ -220,9 +217,10 @@ public class BeanManagerTest extends AbstractTest {
         assertEquals(3, annotatedType.getTypeClosure().size());
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.19", id = "b") })
+    // @Test
+    // @SpecAssertions({ @SpecAssertion(section = "11.3.19", id = "b") })
     public void testObtainingWrappedAnnotatedType() {
+        // FIXME remove the test
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(WrappedBean.class);
         assertTrue(annotatedType.isAnnotationPresent(Tame.class));
         assertTrue(annotatedType.isAnnotationPresent(Transactional.class));

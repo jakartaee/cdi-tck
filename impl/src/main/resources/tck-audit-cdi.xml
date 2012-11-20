@@ -6214,7 +6214,10 @@
             <text>The method |BeanManager.createAnnotatedType()| returns an |AnnotatedType| that may be used to read the annotations of a given Java class or interface.</text>
         </assertion>
         <assertion id="b">
-            <text>If the |AnnotatedType| for the class has been wrapped or replaced by |ProcessAnnotatedType| then the wrapped or replaced |AnnotatedType| should be returned |BeanManager.createAnnoatedType()|.</text>
+            <text>The method |BeanManager.getAnnotatedType()| returns the |AnnotatedType| discovered or added during container initialization.</text>
+        </assertion>
+        <assertion id="c">
+            <text>The method |BeanManager.getAnnotatedTypes()| returns the |AnnotatedType|s discovered or added during container initialization.</text>
         </assertion>
     </section>
 

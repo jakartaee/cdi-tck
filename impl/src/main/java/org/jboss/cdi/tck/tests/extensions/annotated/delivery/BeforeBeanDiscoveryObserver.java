@@ -31,7 +31,7 @@ public class BeforeBeanDiscoveryObserver implements Extension {
         new AddForwardingAnnotatedTypeAction<Phoenix>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return BeforeBeanDiscoveryObserver.class.getName();
             }
 
@@ -44,7 +44,7 @@ public class BeforeBeanDiscoveryObserver implements Extension {
         new AddForwardingAnnotatedTypeAction<Griffin>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return BeforeBeanDiscoveryObserver.class.getName();
             }
 

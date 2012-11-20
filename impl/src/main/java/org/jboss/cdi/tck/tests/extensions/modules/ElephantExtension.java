@@ -31,7 +31,7 @@ public class ElephantExtension implements Extension {
         new AddForwardingAnnotatedTypeAction<Elephant>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return ElephantExtension.class.getName();
             }
 

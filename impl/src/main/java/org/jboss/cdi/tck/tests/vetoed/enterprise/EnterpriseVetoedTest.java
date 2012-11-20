@@ -25,8 +25,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -47,10 +45,8 @@ public class EnterpriseVetoedTest extends AbstractTest {
     @SuppressWarnings("unchecked")
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-                .withTestClass(EnterpriseVetoedTest.class)
-                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class, ElephantLocal.class, Elephant.class,
-                        ModifyingExtension.class, VerifyingExtension.class)
+        return new WebArchiveBuilder().withTestClass(EnterpriseVetoedTest.class)
+                .withClasses(ElephantLocal.class, Elephant.class, ModifyingExtension.class, VerifyingExtension.class)
                 .withExtensions(ModifyingExtension.class, VerifyingExtension.class).withLibrary(Gecko.class).build();
     }
 

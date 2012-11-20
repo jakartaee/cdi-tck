@@ -36,6 +36,11 @@ import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.cdi.tck.literals.InjectLiteral;
+import org.jboss.cdi.tck.util.annotated.AnnotatedConstructorWrapper;
+import org.jboss.cdi.tck.util.annotated.AnnotatedFieldWrapper;
+import org.jboss.cdi.tck.util.annotated.AnnotatedMethodWrapper;
+import org.jboss.cdi.tck.util.annotated.AnnotatedParameterWrapper;
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
 public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
     private final Set<Type> typeClosure = new HashSet<Type>();

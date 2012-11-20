@@ -20,7 +20,7 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
 
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
 public class ModifyingExtension implements Extension {
 

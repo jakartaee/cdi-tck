@@ -21,8 +21,8 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
 import org.jboss.cdi.tck.tests.extensions.beanManager.Transactional.TransactionalLiteral;
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
 public class ProcessAnnotatedTypeObserver implements Extension {
 

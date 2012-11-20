@@ -31,7 +31,7 @@ public class ModifyingExtension implements Extension {
         new AddForwardingAnnotatedTypeAction<Gecko>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return ModifyingExtension.class.getName();
             }
 

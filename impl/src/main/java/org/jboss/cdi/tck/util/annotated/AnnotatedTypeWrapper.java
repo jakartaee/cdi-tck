@@ -14,39 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
+package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-import java.util.List;
+import java.util.Set;
 
 import javax.enterprise.inject.spi.AnnotatedConstructor;
-import javax.enterprise.inject.spi.AnnotatedParameter;
+import javax.enterprise.inject.spi.AnnotatedField;
+import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-public class AnnotatedConstructorWrapper<X> extends AnnotatedWrapper implements AnnotatedConstructor<X> {
+public class AnnotatedTypeWrapper<X> extends AnnotatedWrapper implements AnnotatedType<X> {
+    private AnnotatedType<X> delegate;
 
-    private AnnotatedConstructor<X> delegate;
-
-    public AnnotatedConstructorWrapper(AnnotatedConstructor<X> delegate, boolean keepOriginalAnnotations,
-            Annotation... annotations) {
+    public AnnotatedTypeWrapper(AnnotatedType<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
         super(delegate, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
     }
 
-    public Constructor<X> getJavaMember() {
-        return delegate.getJavaMember();
+    public Set<AnnotatedConstructor<X>> getConstructors() {
+        return delegate.getConstructors();
     }
 
-    public List<AnnotatedParameter<X>> getParameters() {
-        return delegate.getParameters();
+    public Set<AnnotatedField<? super X>> getFields() {
+        return delegate.getFields();
     }
 
-    public AnnotatedType<X> getDeclaringType() {
-        return delegate.getDeclaringType();
+    public Class<X> getJavaClass() {
+        return delegate.getJavaClass();
     }
 
-    public boolean isStatic() {
-        return delegate.isStatic();
+    public Set<AnnotatedMethod<? super X>> getMethods() {
+        return delegate.getMethods();
     }
 }

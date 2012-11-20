@@ -36,7 +36,7 @@ public class ManualBeanRegistrationExtension implements Extension {
         new AddForwardingAnnotatedTypeAction<BeanClassToRegister>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return ManualBeanRegistrationExtension.class.getName();
             }
 

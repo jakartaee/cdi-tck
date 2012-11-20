@@ -14,37 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
+package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
-import java.util.Set;
+import java.lang.reflect.Field;
 
-import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedField;
-import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-public class AnnotatedTypeWrapper<X> extends AnnotatedWrapper implements AnnotatedType<X> {
-    private AnnotatedType<X> delegate;
+public class AnnotatedFieldWrapper<X> extends AnnotatedWrapper implements AnnotatedField<X> {
 
-    public AnnotatedTypeWrapper(AnnotatedType<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
+    private AnnotatedField<X> delegate;
+
+    public AnnotatedFieldWrapper(AnnotatedField<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
         super(delegate, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
     }
 
-    public Set<AnnotatedConstructor<X>> getConstructors() {
-        return delegate.getConstructors();
+    public Field getJavaMember() {
+        return delegate.getJavaMember();
     }
 
-    public Set<AnnotatedField<? super X>> getFields() {
-        return delegate.getFields();
+    public AnnotatedType<X> getDeclaringType() {
+        return delegate.getDeclaringType();
     }
 
-    public Class<X> getJavaClass() {
-        return delegate.getJavaClass();
-    }
-
-    public Set<AnnotatedMethod<? super X>> getMethods() {
-        return delegate.getMethods();
+    public boolean isStatic() {
+        return delegate.isStatic();
     }
 }

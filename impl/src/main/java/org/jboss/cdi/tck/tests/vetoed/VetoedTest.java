@@ -30,8 +30,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
 import org.jboss.cdi.tck.tests.vetoed.aquarium.Fish;
 import org.jboss.cdi.tck.tests.vetoed.aquarium.FishType;
 import org.jboss.cdi.tck.tests.vetoed.aquarium.Fishy;
@@ -58,11 +56,11 @@ public class VetoedTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(VetoedTest.class)
-                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class, Animal.class, Elephant.class, Shark.class,
-                        Predator.class, Type.class, MissileBinding.class, DummyScoped.class, AnimalStereotype.class,
-                        Tiger.class, ModifyingExtension.class, VerifyingExtension.class)
-                .withPackage(Piranha.class.getPackage()).withExtensions(ModifyingExtension.class, VerifyingExtension.class)
-                .withLibrary(Gecko.class, Reptile.class).build();
+                .withClasses(Animal.class, Elephant.class, Shark.class, Predator.class, Type.class, MissileBinding.class,
+                        DummyScoped.class, AnimalStereotype.class, Tiger.class, ModifyingExtension.class,
+                        VerifyingExtension.class).withPackage(Piranha.class.getPackage())
+                .withExtensions(ModifyingExtension.class, VerifyingExtension.class).withLibrary(Gecko.class, Reptile.class)
+                .build();
     }
 
     @Inject

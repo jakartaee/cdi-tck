@@ -37,8 +37,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -57,8 +56,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(CreateBeanAttributesTest.class)
-                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(CreateBeanAttributesTest.class).build();
     }
 
     @SuppressWarnings("unchecked")

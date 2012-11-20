@@ -40,7 +40,7 @@ public class StereotypeExtension implements Extension {
         new AddForwardingAnnotatedTypeAction<Chair>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return StereotypeExtension.class.getName();
             }
 

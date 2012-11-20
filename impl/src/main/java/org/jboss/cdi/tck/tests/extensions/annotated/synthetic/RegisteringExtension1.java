@@ -22,8 +22,8 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
 import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
 public class RegisteringExtension1 implements Extension {
 
@@ -32,7 +32,7 @@ public class RegisteringExtension1 implements Extension {
         new AddForwardingAnnotatedTypeAction<Apple>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return RegisteringExtension1.class.getName();
             }
 
@@ -45,7 +45,7 @@ public class RegisteringExtension1 implements Extension {
         new AddForwardingAnnotatedTypeAction<Orange>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return RegisteringExtension1.class.getName();
             }
 

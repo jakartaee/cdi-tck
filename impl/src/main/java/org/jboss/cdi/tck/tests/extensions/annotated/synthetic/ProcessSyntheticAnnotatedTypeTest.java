@@ -31,8 +31,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedTypeWrapper;
-import org.jboss.cdi.tck.tests.extensions.alternative.metadata.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -58,7 +56,6 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ProcessSyntheticAnnotatedTypeTest.class)
-                .withClasses(AnnotatedTypeWrapper.class, AnnotatedWrapper.class)
                 .withExtensions(RegisteringExtension1.class, RegisteringExtension2.class, ModifyingExtension.class,
                         VerifyingExtension.class).build();
     }

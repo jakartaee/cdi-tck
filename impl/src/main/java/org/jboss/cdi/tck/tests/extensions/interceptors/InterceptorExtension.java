@@ -41,7 +41,7 @@ public class InterceptorExtension implements Extension {
         new AddForwardingAnnotatedTypeAction<IncrementingInterceptor>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return InterceptorExtension.class.getName();
             }
 
@@ -54,7 +54,7 @@ public class InterceptorExtension implements Extension {
         new AddForwardingAnnotatedTypeAction<LifecycleInterceptor>() {
 
             @Override
-            public String getExtensionId() {
+            public String getBaseId() {
                 return InterceptorExtension.class.getName();
             }
 

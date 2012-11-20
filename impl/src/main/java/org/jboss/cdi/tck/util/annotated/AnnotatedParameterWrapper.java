@@ -14,32 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
+package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 
-import javax.enterprise.inject.spi.AnnotatedField;
-import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.inject.spi.AnnotatedCallable;
+import javax.enterprise.inject.spi.AnnotatedParameter;
 
-public class AnnotatedFieldWrapper<X> extends AnnotatedWrapper implements AnnotatedField<X> {
+public class AnnotatedParameterWrapper<X> extends AnnotatedWrapper implements AnnotatedParameter<X> {
+    private AnnotatedParameter<X> delegate;
 
-    private AnnotatedField<X> delegate;
-
-    public AnnotatedFieldWrapper(AnnotatedField<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
+    public AnnotatedParameterWrapper(AnnotatedParameter<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
         super(delegate, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
     }
 
-    public Field getJavaMember() {
-        return delegate.getJavaMember();
+    public AnnotatedCallable<X> getDeclaringCallable() {
+        return delegate.getDeclaringCallable();
     }
 
-    public AnnotatedType<X> getDeclaringType() {
-        return delegate.getDeclaringType();
+    public int getPosition() {
+        return delegate.getPosition();
     }
 
-    public boolean isStatic() {
-        return delegate.isStatic();
-    }
 }

@@ -14,27 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
+package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
+import java.util.List;
 
-import javax.enterprise.inject.spi.AnnotatedCallable;
+import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedParameter;
+import javax.enterprise.inject.spi.AnnotatedType;
 
-public class AnnotatedParameterWrapper<X> extends AnnotatedWrapper implements AnnotatedParameter<X> {
-    private AnnotatedParameter<X> delegate;
+public class AnnotatedConstructorWrapper<X> extends AnnotatedWrapper implements AnnotatedConstructor<X> {
 
-    public AnnotatedParameterWrapper(AnnotatedParameter<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
+    private AnnotatedConstructor<X> delegate;
+
+    public AnnotatedConstructorWrapper(AnnotatedConstructor<X> delegate, boolean keepOriginalAnnotations,
+            Annotation... annotations) {
         super(delegate, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
     }
 
-    public AnnotatedCallable<X> getDeclaringCallable() {
-        return delegate.getDeclaringCallable();
+    public Constructor<X> getJavaMember() {
+        return delegate.getJavaMember();
     }
 
-    public int getPosition() {
-        return delegate.getPosition();
+    public List<AnnotatedParameter<X>> getParameters() {
+        return delegate.getParameters();
     }
 
+    public AnnotatedType<X> getDeclaringType() {
+        return delegate.getDeclaringType();
+    }
+
+    public boolean isStatic() {
+        return delegate.isStatic();
+    }
 }
