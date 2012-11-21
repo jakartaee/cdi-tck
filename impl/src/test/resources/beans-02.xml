@@ -1,0 +1,6 @@
+<beans>
+    <interceptors>
+        <class priority="200" enabled="false">org.jboss.cdi.tck.shrinkwrap.descriptors.Bar</class>
+        <class priority="800">org.jboss.cdi.tck.shrinkwrap.descriptors.Foo</class>
+    </interceptors>
+</beans>

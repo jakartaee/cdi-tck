@@ -1,0 +1,6 @@
+<beans>
+    <decorators>
+        <class>org.jboss.cdi.tck.shrinkwrap.descriptors.Bar</class>
+        <class priority="100">org.jboss.cdi.tck.shrinkwrap.descriptors.Foo</class>
+    </decorators>
+</beans>
