@@ -26,6 +26,7 @@ import static org.testng.Assert.fail;
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.inject.AmbiguousResolutionException;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
@@ -33,6 +34,7 @@ import javax.inject.Inject;
 public abstract class AssertBean {
 
     @Inject
+    @Any
     Instance<Object> instance;
 
     @Inject

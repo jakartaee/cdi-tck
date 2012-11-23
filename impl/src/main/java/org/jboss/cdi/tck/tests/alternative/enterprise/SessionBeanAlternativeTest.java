@@ -36,7 +36,7 @@ public class SessionBeanAlternativeTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION, ALTERNATIVES })
-    @SpecAssertion(section = "5.1.1", id = "eb")
+    @SpecAssertion(section = "5.1.1", id = "cb")
     public void testEnabledPolicyAvailable() {
         assert getBeans(EjbInterface.class).size() == 1;
         assert getBeans(EjbInterface.class).iterator().next().getTypes().contains(EjbInterface.class);

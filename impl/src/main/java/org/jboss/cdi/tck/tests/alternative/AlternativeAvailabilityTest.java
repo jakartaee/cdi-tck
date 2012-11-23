@@ -61,8 +61,8 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     };
 
     @Test(groups = { ALTERNATIVES })
-    @SpecAssertions({ @SpecAssertion(section = "5.1", id = "e"), @SpecAssertion(section = "5.1.1", id = "c"),
-            @SpecAssertion(section = "5.1.1", id = "ea"), @SpecAssertion(section = "2.6", id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = "5.1", id = "e"), @SpecAssertion(section = "5.1.1", id = "ab"),
+            @SpecAssertion(section = "5.1.1", id = "ca"), @SpecAssertion(section = "2.6", id = "a"),
             @SpecAssertion(section = "2.6.1", id = "a"), @SpecAssertion(section = "12.4", id = "ka")
 
     })
@@ -95,7 +95,7 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     }
 
     @Test(groups = { ALTERNATIVES })
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "g"), @SpecAssertion(section = "2.6.1", id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "cf"), @SpecAssertion(section = "2.6.1", id = "b"),
             @SpecAssertion(section = "2.7", id = "aa"), @SpecAssertion(section = "2.7.1.4", id = "a") })
     public void testAnyEnabledAlternativeStereotypeMakesAlternativeEnabled() throws Exception {
         assertEquals(getBeans(Bird.class).size(), 1);
@@ -103,7 +103,7 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     }
 
     @Test(groups = { ALTERNATIVES })
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "cc"), @SpecAssertion(section = "5.1.1", id = "cd") })
     public void testProducersOnAlternativeClass() throws Exception {
         assertEquals(getBeans(Sheep.class, WILD_LITERAL).size(), 2);
         assertEquals(getBeans(Sheep.class, TAME_LITERAL).size(), 0);

@@ -17,11 +17,13 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 import static org.testng.Assert.assertEquals;
 
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -46,7 +48,7 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class SelectedAlternative02Test extends SelectedAlternativeTest {
+public class SelectedAlternative02Test extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {

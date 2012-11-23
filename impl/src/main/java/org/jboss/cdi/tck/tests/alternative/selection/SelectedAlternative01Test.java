@@ -17,21 +17,24 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlStereotype;
 import org.jboss.cdi.tck.tests.alternative.selection.Tame.TameLiteral;
 import org.jboss.cdi.tck.tests.alternative.selection.Wild.WildLiteral;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * TODO add assertions
- * 
  * The simplest possible scenario - test various alternatives are selected for the entire application, no deselection, no
  * priority ordering during resolution.
  * 
@@ -55,7 +58,7 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class SelectedAlternative01Test extends SelectedAlternativeTest {
+public class SelectedAlternative01Test extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -79,6 +82,7 @@ public class SelectedAlternative01Test extends SelectedAlternativeTest {
     Charlie charlie;
 
     @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ba") })
     public void testAlternativeManagedBeanSelected() {
         alpha.assertAvailable(Foo.class);
         bravo.assertAvailable(Foo.class);
@@ -86,6 +90,7 @@ public class SelectedAlternative01Test extends SelectedAlternativeTest {
     }
 
     @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "bc"), @SpecAssertion(section = "5.1.1", id = "bd") })
     public void testAlternativeProducerSelected() {
         // Producer field
         alpha.assertAvailable(Bar.class, WildLiteral.INSTANCE);
@@ -98,6 +103,7 @@ public class SelectedAlternative01Test extends SelectedAlternativeTest {
     }
 
     @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "bf") })
     public void testAlternativeStereotypeSelected() {
         alpha.assertAvailable(Baz.class);
         bravo.assertAvailable(Baz.class);

@@ -2217,41 +2217,128 @@
     </section>
 
     <section id="5.1.1" title="Declaring selected alternatives for a bean deployment archive">
-        <assertion id="c">
-            <text>By default, a bean deployment archive has no selected alternatives. An alternative must be explicitly declared using the &lt;alternatives&gt; element of the |beans.xml| file of the bean deployment archive.</text>
-        </assertion>
 
-        <assertion id="d" testable="false">
-            <text>The &lt;alternatives&gt; element contains a list of bean classes and stereotypes. </text>
+        <assertion id="aa" testable="false">
+            <text>Alternatives may be selected for an application, or selected only for a particular bean archive.</text>
+            <note>This is a statement of intent</note>
+        </assertion>
+        <assertion id="ab" implied="true">
+            <text>By default, a bean archive has no selected alternatives.</text>
         </assertion>
 
         <group>
-            <text>An alternative is selected for the bean deployment archive if the alternative is a managed bean or session bean and the bean class of the bean is listed.</text>
+            <text>An alternative may be selected for an application using the &lt;alternatives&gt; element of the |beans.xml| file of the bean archive that declares the alternative. The &lt;alternatives&gt; element contains a list of bean classes and stereotypes, along with a priority attribute.</text>
+            <assertion id="ba">
+                <text>An alternative is selected for the entire application if the alternative is a managed bean ~or session bean~ and the bean class of the bean is listed, along with a priority attribute.</text>
+            </assertion>
+            <assertion id="bb">
+                <text>An alternative is selected for the entire application if the alternative is a ~managed bean or~ session bean and the bean class of the bean is listed, along with a priority attribute.</text>
+            </assertion>
+            <assertion id="bc">
+                <text>An alternative is selected for the entire application if the alternative is a producer method, ~field or resource~, and the bean class that declares the method or field is listed, along with a priority attribute.</text>
+            </assertion>
+            <assertion id="bd">
+                <text>An alternative is selected for the entire application if the alternative is a producer ~method,~ field ~or resource~, and the bean class that declares the method or field is listed, along with a priority attribute.</text>
+            </assertion>
+            <assertion id="be">
+                <text>An alternative is selected for the entire application if the alternative is a ~producer method, field or~ resource, and the bean class that declares the method or field is listed, along with a priority attribute.</text>
+            </assertion>
+            <assertion id="bf">
+                <text>An alternative is selected for the entire application if any |@Alternative| stereotype of the alternative is listed, along with a priority attribute.</text>
+            </assertion>
+        </group>
 
+        <group>
+            <text>An alternative may be selected for a bean archive using the &lt;alternatives&gt; element of the |beans.xml| file of the bean archive. The &lt;alternatives&gt; element contains a list of bean classes and stereotypes, along with a priority attribute.</text>
+            <assertion id="ca">
+                <text>An alternative is selected for the bean archive if the alternative is a managed bean ~or session bean~ and the bean class of the bean is listed.</text>
+            </assertion>
+            <assertion id="cb">
+                <text>An alternative is selected for the bean archive if the alternative is a ~managed bean or~ session bean and the bean class of the bean is listed.</text>
+            </assertion>
+            <assertion id="cc">
+                <text>An alternative is selected for the bean archive if the alternative is a producer method, ~field or resource,~ and the bean class that declares the method or field is listed.</text>
+            </assertion>
+            <assertion id="cd">
+                <text>An alternative is selected for the bean archive if the alternative is a producer ~method,~ field ~or resource~, and the bean class that declares the method or field is listed.</text>
+            </assertion>
+            <assertion id="ce">
+                <text>An alternative is selected for the bean archive if the alternative is a ~producer method, field or~ resource, and the bean class that declares the method or field is listed.</text>
+            </assertion>
+            <assertion id="cf">
+                <text>An alternative is selected for the bean archive if any |@Alternative| stereotype of the alternative is listed.</text>
+            </assertion>
+            <assertion id="cg" implied="true">
+                <text>An alternative selected only for a specific bean archive is not selected for an application.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>An alternative selected for an application may be deselected for a bean archive using the &lt;alternatives&gt; element of the |beans.xml| file of the bean archive. The &lt;alternatives&gt; element contains a list of bean classes and stereotypes, along with a disabled flag.</text>
+            <assertion id="da">
+                <text>An alternative is not selected for the bean archive if the alternative is a managed bean ~or session bean~ and the bean class of the bean is listed, along with a disabled flag.</text>
+            </assertion>
+            <assertion id="db">
+                <text>An alternative is not selected for the bean archive if the alternative is a ~managed bean or~ session bean and the bean class of the bean is listed, along with a disabled flag.</text>
+            </assertion>
+            <assertion id="dc">
+                <text>An alternative is not selected for the bean archive if the alternative is a producer method, ~field or resource,~ and the bean class that declares the method or field is listed, along with a disabled flag.</text>
+            </assertion>
+            <assertion id="dd">
+                <text>An alternative is not selected for the bean archive if the alternative is a producer ~method,~ field ~or resource~, and the bean class that declares the method or field is listed, along with a disabled flag.</text>
+            </assertion>
+            <assertion id="de">
+                <text>An alternative is not selected for the bean archive if the alternative is a ~producer method, field or~ resource, and the bean class that declares the method or field is listed, along with a disabled flag.</text>
+            </assertion>
+            <assertion id="df">
+                <text>An alternative is not selected for the bean archive if any |@Alternative| stereotype of the alternative is listed, along with a disabled flag.</text>
+            </assertion>
+        </group>
+
+        <!-- CDI-303 -->
+        <group>
+            <text>An alternative may be given a default priority, but not selected for an application using the &lt;alternatives&gt; element of the |beans.xml| file of the bean archive. The &lt;alternatives&gt; element contains a list of bean classes and stereotypes, along with a disabled flag and a priority attribute.</text>
             <assertion id="ea">
-                <text>Test with a managed bean.</text>
+                <text>An alternative is is not selected for an application if the alternative is a managed bean ~or session bean~ and the bean class of the bean is listed, along with a disabled flag and a priority attribute.</text>
             </assertion>
-
             <assertion id="eb">
-                <text>Test with a session bean.</text>
+                <text>An alternative is is not selected for an application if the alternative is a ~managed bean or~ session bean and the bean class of the bean is listed, along with a disabled flag and a priority attribute.</text>
+            </assertion>
+            <assertion id="ec">
+                <text>An alternative is is not selected for an application if the alternative is a producer method, ~field or resource,~ and the bean class that declares the method or field is listed, along with a disabled flag and a priority attribute.</text>
+            </assertion>
+            <assertion id="ed">
+                <text>An alternative is is not selected for an application if the alternative is a producer ~method,~ field ~or resource~, and the bean class that declares the method or field is listed, along with a disabled flag and a priority attribute.</text>
+            </assertion>
+            <assertion id="ee">
+                <text>An alternative is is not selected for an application if the alternative is a ~producer method, field or~ resource, and the bean class that declares the method or field is listed, along with a disabled flag and a priority attribute.</text>
+            </assertion>
+            <assertion id="ef">
+                <text>An alternative is is not selected for an application if any |@Alternative| stereotype of the alternative is listed, along with a disabled flag and a priority attribute.</text>
             </assertion>
         </group>
 
         <group>
-            <text>An alternative is selected for the bean deployment archive if the alternative is a producer method, field or resource, and the bean class that declares the method or field is listed.</text>
-
+            <text>An alternative with a default priority may be selected for a bean archive using the &lt;alternatives&gt; element of the |beans.xml| file of the bean archive. The &lt;alternatives&gt; element contains a list of bean classes and stereotypes, along with an enabled flag.</text>
             <assertion id="fa">
-                <text>Test for enablement of a producer method and field.</text>
+                <text>An alternative is selected for the bean archive if the alternative is a managed bean ~or session bean~ and the bean class of the bean is listed, along with an enabled flag.</text>
             </assertion>
-
             <assertion id="fb">
-                <text>Test for enablement of a resource.</text>
+                <text>An alternative is selected for the bean archive if the alternative is a ~managed bean or~ session bean and the bean class of the bean is listed, along with an enabled flag.</text>
+            </assertion>
+            <assertion id="fc">
+                <text>An alternative is selected for the bean archive if the alternative is a producer method, ~field or resource,~ and the bean class that declares the method or field is listed, along with an enabled flag.</text>
+            </assertion>
+            <assertion id="fd">
+                <text>An alternative is selected for the bean archive if the alternative is a producer ~method,~ field ~or resource~, and the bean class that declares the method or field is listed, along with an enabled flag.</text>
+            </assertion>
+            <assertion id="fe">
+                <text>An alternative is selected for the bean archive if the alternative is a ~producer method, field or~ resource, and the bean class that declares the method or field is listed, along with an enabled flag.</text>
+            </assertion>
+            <assertion id="ff">
+                <text>An alternative is selected for the bean archive if any |@Alternative| stereotype of the alternative is listed, along with an enabled flag.</text>
             </assertion>
         </group>
-
-        <assertion id="g">
-            <text>An alternative is selected for the bean deployment archive if any |@Alternative| stereotype of the alternative is listed.</text>
-        </assertion>
 
         <assertion id="h">
             <text>Each child |&lt;class&gt;| element must specify the name of a bean class of an alternative bean. If there is no class with the specified name, or if the class with the specified name is not an alternative bean class, the container automatically detects the problem and treats it as a deployment problem.</text>

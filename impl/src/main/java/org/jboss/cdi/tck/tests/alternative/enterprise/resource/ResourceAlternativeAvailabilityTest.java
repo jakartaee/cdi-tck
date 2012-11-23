@@ -60,7 +60,7 @@ public class ResourceAlternativeAvailabilityTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test(groups = PERSISTENCE)
-    @SpecAssertion(section = "5.1.1", id = "fb")
+    @SpecAssertion(section = "5.1.1", id = "ce")
     public void testResourceAvailability() {
 
         AnnotationLiteral<DatabaseTest> testLiteral = new AnnotationLiteral<DatabaseTest>() {

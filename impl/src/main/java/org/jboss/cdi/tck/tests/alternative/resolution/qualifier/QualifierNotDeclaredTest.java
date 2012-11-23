@@ -60,7 +60,7 @@ public class QualifierNotDeclaredTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ea"), @SpecAssertion(section = "5.2.1", id = "lb") })
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ca"), @SpecAssertion(section = "5.2.1", id = "lb") })
     public void testResolution() throws Exception {
 
         Bean<?> bean = getCurrentManager().resolve(getCurrentManager().getBeans(Foo.class, TrueLiteral.INSTANCE));

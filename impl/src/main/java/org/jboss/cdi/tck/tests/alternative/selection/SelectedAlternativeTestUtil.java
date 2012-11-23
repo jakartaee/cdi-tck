@@ -17,17 +17,16 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
-import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 
 /**
  * @author Martin Kouba
  * 
  */
-public abstract class SelectedAlternativeTest extends AbstractTest {
+public final class SelectedAlternativeTestUtil {
 
     protected static WebArchiveBuilder createBuilderBase() {
-        return new WebArchiveBuilder().withLibrary(SelectedAlternativeTest.class, TestBean.class, Wild.class, Tame.class,
+        return new WebArchiveBuilder().withLibrary(SelectedAlternativeTestUtil.class, TestBean.class, Wild.class, Tame.class,
                 SelectedStereotype.class, AssertBean.class);
     }
 

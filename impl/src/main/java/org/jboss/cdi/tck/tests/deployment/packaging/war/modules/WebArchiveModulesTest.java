@@ -130,7 +130,7 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "cg") })
     public void testAlternatives(BarInspector barInspector) throws Exception {
 
         Set<Bean<?>> beans = getCurrentManager().getBeans(AlternativeBar.class);

@@ -17,27 +17,33 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 import static org.testng.Assert.assertEquals;
 
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
+import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlStereotype;
+import org.jboss.cdi.tck.tests.alternative.selection.Tame.TameLiteral;
+import org.jboss.cdi.tck.tests.alternative.selection.Wild.WildLiteral;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * TODO add assertions
- * 
  * Test selecting alternative with default priority.
  * 
  * WAR deployment with 2 libraries:
  * <ul>
  * <li>WEB-INF/classes - alpha - does not declare any alternative, includes {@link TestBean} implementation, has {@link Bar}
  * alternative selected</li>
- * <li>lib 1 - bravo - declares {@link Foo} alternative selected for the app with priority 1000</li>
+ * <li>lib 1 - bravo - declares {@link Foo} unselected alternative with default priority 1000 and unselected alternative
+ * stereotype {@link SelectedStereotype} with default priority 60</li>
  * <li>lib 2 - charlie - declares {@link Bar} unselected alternative with default priority 2000</li>
  * </ul>
  * 
@@ -45,24 +51,30 @@ import org.testng.annotations.Test;
  * <ul>
  * <li>{@link Bar} is available for injection in alpha/li>
  * <li>{@link Foo} is available for injection in bravo, charlie</li>
+ * <li>{@link Bar} with {@link Wild} qualifier is available for injection in alpha</li>
+ * <li>{@link Bar} with {@link Tame} qualifier is available for injection in alpha</li>
  * </ul>
  * 
  * @author Martin Kouba
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class SelectedAlternative05Test extends SelectedAlternativeTest {
+public class SelectedAlternative05Test extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return createBuilderBase()
                 .withTestClass(SelectedAlternative05Test.class)
-                .withBeansXml(new Beans11DescriptorImpl().alternatives(new BeansXmlClass(Bar.class, true)))
+                .withBeansXml(
+                        new Beans11DescriptorImpl().alternatives(new BeansXmlClass(Bar.class, true), new BeansXmlClass(
+                                BarProducer.class, true), new BeansXmlStereotype(SelectedStereotype.class, true)))
                 .withClasses(Alpha.class, SimpleTestBean.class)
-                .withBeanLibrary(new Beans11DescriptorImpl().alternatives(new BeansXmlClass(Foo.class, 1000)), Bravo.class,
-                        Foo.class)
-                .withBeanLibrary(new Beans11DescriptorImpl().alternatives(new BeansXmlClass(Bar.class, false, 2000)),
-                        Charlie.class, Bar.class).build();
+                .withBeanLibrary(
+                        new Beans11DescriptorImpl().alternatives(new BeansXmlClass(Foo.class, 1000), new BeansXmlStereotype(
+                                SelectedStereotype.class, false, 60)), Bravo.class, Foo.class, Baz.class)
+                .withBeanLibrary(
+                        new Beans11DescriptorImpl().alternatives(new BeansXmlClass(Bar.class, false, 2000), new BeansXmlClass(
+                                BarProducer.class, false, 1100)), Charlie.class, Bar.class, BarProducer.class).build();
     }
 
     @Inject
@@ -75,10 +87,33 @@ public class SelectedAlternative05Test extends SelectedAlternativeTest {
     Charlie charlie;
 
     @Test
-    public void testAlternativeSelected() {
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ea"), @SpecAssertion(section = "5.1.1", id = "fa") })
+    public void testManagedBeanWithDefaultPrioritySelected() {
         assertEquals(alpha.assertAvailable(TestBean.class).getId(), Bar.class.getName());
         assertEquals(bravo.assertAvailable(TestBean.class).getId(), Foo.class.getName());
         assertEquals(charlie.assertAvailable(TestBean.class).getId(), Foo.class.getName());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ec"), @SpecAssertion(section = "5.1.1", id = "ed"),
+            @SpecAssertion(section = "5.1.1", id = "fc"), @SpecAssertion(section = "5.1.1", id = "fd") })
+    public void testAlternativeProducerSelected() {
+        // Producer field
+        alpha.assertAvailable(Bar.class, WildLiteral.INSTANCE);
+        bravo.assertUnsatisfied(Bar.class, WildLiteral.INSTANCE);
+        charlie.assertUnsatisfied(Bar.class, WildLiteral.INSTANCE);
+        // Producer method
+        alpha.assertAvailable(Bar.class, TameLiteral.INSTANCE);
+        bravo.assertUnsatisfied(Bar.class, TameLiteral.INSTANCE);
+        charlie.assertUnsatisfied(Bar.class, TameLiteral.INSTANCE);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ef"), @SpecAssertion(section = "5.1.1", id = "ff") })
+    public void testAlternativeStereotypeSelected() {
+        alpha.assertAvailable(Baz.class);
+        bravo.assertUnsatisfied(Baz.class);
+        charlie.assertUnsatisfied(Baz.class);
     }
 
 }

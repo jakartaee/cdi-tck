@@ -17,15 +17,20 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlStereotype;
 import org.jboss.cdi.tck.tests.alternative.selection.Tame.TameLiteral;
 import org.jboss.cdi.tck.tests.alternative.selection.Wild.WildLiteral;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -55,7 +60,7 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class SelectedAlternative04Test extends SelectedAlternativeTest {
+public class SelectedAlternative04Test extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -82,14 +87,16 @@ public class SelectedAlternative04Test extends SelectedAlternativeTest {
     Charlie charlie;
 
     @Test
-    public void testAlternativeManagedBeanSelected() {
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "da") })
+    public void testAlternativeManagedBeanDeselected() {
         alpha.assertUnsatisfied(Foo.class);
         bravo.assertAvailable(Foo.class);
         charlie.assertAvailable(Foo.class);
     }
 
     @Test
-    public void testAlternativeProducerSelected() {
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "dc"), @SpecAssertion(section = "5.1.1", id = "dd") })
+    public void testAlternativeProducerDeselected() {
         // Producer field
         alpha.assertUnsatisfied(Bar.class, WildLiteral.INSTANCE);
         bravo.assertAvailable(Bar.class, WildLiteral.INSTANCE);
@@ -101,7 +108,8 @@ public class SelectedAlternative04Test extends SelectedAlternativeTest {
     }
 
     @Test
-    public void testAlternativeStereotypeSelected() {
+    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "df") })
+    public void testAlternativeStereotypeDeselected() {
         alpha.assertUnsatisfied(Baz.class);
         bravo.assertAvailable(Baz.class);
         charlie.assertAvailable(Baz.class);

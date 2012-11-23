@@ -20,8 +20,6 @@ package org.jboss.cdi.tck.tests.alternative.selection;
 import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 
-import org.jboss.cdi.tck.tests.alternative.Wild;
-
 public class BarProducer {
 
     @Alternative
