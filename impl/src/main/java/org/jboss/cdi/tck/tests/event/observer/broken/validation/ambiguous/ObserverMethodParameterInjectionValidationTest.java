@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.validation;
+package org.jboss.cdi.tck.tests.event.observer.broken.validation.ambiguous;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -29,21 +29,21 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Validates that injection points on disposer methods are validated.
+ * Validates that injection points on observer methods are validated.
  * 
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class DisposerMethodParameterInjectionValidationTest extends AbstractTest {
+public class ObserverMethodParameterInjectionValidationTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive getDeployment() {
-        return new WebArchiveBuilder().withTestClassPackage(DisposerMethodParameterInjectionValidationTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(ObserverMethodParameterInjectionValidationTest.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "i"), @SpecAssertion(section = "5.2.2", id = "af") })
     public void test() {
     }
 }

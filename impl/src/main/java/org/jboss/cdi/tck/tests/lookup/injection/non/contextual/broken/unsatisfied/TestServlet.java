@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2010, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -9,25 +9,26 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,  
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.broken.unsatisfied;
 
-package org.jboss.cdi.tck.tests.alternative.selection;
+import java.io.File;
 
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import javax.inject.Inject;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 
-/**
- * @author Martin Kouba
- * 
- */
-public final class SelectedAlternativeTestUtil {
+@WebServlet("/test")
+public class TestServlet extends HttpServlet {
 
-    public static WebArchiveBuilder createBuilderBase() {
-        return new WebArchiveBuilder().withLibrary(SelectedAlternativeTestUtil.class, TestBean.class, Wild.class, Tame.class,
-                SelectedStereotype.class, AssertBean.class);
+    private static final long serialVersionUID = 1L;
+
+    @Inject
+    public void initialize(File file) {
     }
 
 }

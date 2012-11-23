@@ -15,19 +15,8 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.alternative.selection;
+package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.broken.ambiguous;
 
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-
-/**
- * @author Martin Kouba
- * 
- */
-public final class SelectedAlternativeTestUtil {
-
-    public static WebArchiveBuilder createBuilderBase() {
-        return new WebArchiveBuilder().withLibrary(SelectedAlternativeTestUtil.class, TestBean.class, Wild.class, Tame.class,
-                SelectedStereotype.class, AssertBean.class);
-    }
+public class Cow extends Animal {
 
 }

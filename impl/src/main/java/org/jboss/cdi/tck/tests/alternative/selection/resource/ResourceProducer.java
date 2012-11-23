@@ -14,21 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.validation;
+package org.jboss.cdi.tck.tests.alternative.selection.resource;
 
-import java.util.List;
-
-import javax.enterprise.inject.Disposes;
+import javax.annotation.Resource;
 import javax.enterprise.inject.Produces;
 
-public class Producer {
+public class ResourceProducer {
 
     @Produces
-    public Product produce() {
-        return new Product();
-    }
-
-    public void dispose(@Disposes Product product, List<Integer> integers) {
-    }
+    @ProductionReady
+    @Resource(name = "test3")
+    String test3;
 
 }

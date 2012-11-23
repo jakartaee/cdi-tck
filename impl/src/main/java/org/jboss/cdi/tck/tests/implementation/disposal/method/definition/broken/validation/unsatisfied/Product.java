@@ -15,19 +15,11 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.alternative.selection;
+package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.validation.unsatisfied;
 
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+public class Product {
 
-/**
- * @author Martin Kouba
- * 
- */
-public final class SelectedAlternativeTestUtil {
-
-    public static WebArchiveBuilder createBuilderBase() {
-        return new WebArchiveBuilder().withLibrary(SelectedAlternativeTestUtil.class, TestBean.class, Wild.class, Tame.class,
-                SelectedStereotype.class, AssertBean.class);
+    public Product(String name) {
     }
 
 }

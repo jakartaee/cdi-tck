@@ -108,7 +108,7 @@ public class WebArchiveModulesTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.3", id = "aa"), @SpecAssertion(section = "8.2", id = "a"),
-            @SpecAssertion(section = "10.2", id = "i") })
+            @SpecAssertion(section = "10.2", id = "c") })
     public void testDecoratorAndCrossModuleEventObserver() throws Exception {
         // Test LoggingDecorator is enabled in C only; bean from D observes event from A
         foo.getBar().getBaz().businessOperation1();
@@ -119,7 +119,7 @@ public class WebArchiveModulesTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "3.3", id = "aa"), @SpecAssertion(section = "3.3", id = "c"),
-            @SpecAssertion(section = "10.2", id = "i") })
+            @SpecAssertion(section = "10.2", id = "c") })
     public void testProducerAndEventDuringDisposal() throws Exception {
         // Test legacy service producer in D, bean from A is observing event fired during legacy service disposal in D
         Bean<LegacyService> bean = getUniqueBean(LegacyService.class);

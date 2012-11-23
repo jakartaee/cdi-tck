@@ -27,13 +27,6 @@ public class EnabledResourceProducer {
     @Produces
     @DatabaseTest
     @PersistenceContext
-    private EntityManager persistenceContext;
-
-    /**
-     * @return the persistenceContext
-     */
-    public EntityManager getPersistenceContext() {
-        return persistenceContext;
-    }
+    EntityManager persistenceContext;
 
 }

@@ -35,8 +35,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * TODO add assertions
- * 
  * Test various alternatives are selected for the entire application but deselected for a specific bean archive.
  * 
  * WAR deployment with 2 libraries:

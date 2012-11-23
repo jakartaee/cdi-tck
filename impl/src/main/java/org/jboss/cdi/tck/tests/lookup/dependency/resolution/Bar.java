@@ -15,19 +15,21 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.alternative.selection;
+package org.jboss.cdi.tck.tests.lookup.dependency.resolution;
 
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+public class Bar {
 
-/**
- * @author Martin Kouba
- * 
- */
-public final class SelectedAlternativeTestUtil {
+    private int id = 1;
 
-    public static WebArchiveBuilder createBuilderBase() {
-        return new WebArchiveBuilder().withLibrary(SelectedAlternativeTestUtil.class, TestBean.class, Wild.class, Tame.class,
-                SelectedStereotype.class, AssertBean.class);
+    public Bar() {
+    }
+
+    public Bar(int id) {
+        this.id = id;
+    }
+
+    public int ping() {
+        return id;
     }
 
 }

@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 import static org.testng.Assert.assertEquals;
 
@@ -27,13 +28,13 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * TODO add assertions
- * 
- * Test resolution of ambiguous dependencies (see also "Unsatisfied and ambiguous dependencies" chapter in the spec).
+ * Test resolution of ambiguous dependencies.
  * 
  * WAR deployment with 2 libraries:
  * <ul>
@@ -70,7 +71,8 @@ public class SelectedAlternative02Test extends AbstractTest {
     @Inject
     Charlie charlie;
 
-    @Test
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "ca"), @SpecAssertion(section = "5.2.2", id = "cc") })
     public void testDependencyResolvable() {
         assertEquals(alpha.assertAvailable(TestBean.class).getId(), Bar.class.getName());
         assertEquals(bravo.assertAvailable(TestBean.class).getId(), Bar.class.getName());

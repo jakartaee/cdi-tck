@@ -14,7 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.dependency.resolution.broken.ambiguous;
+package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.broken.ambiguous;
+
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -28,19 +30,19 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
-public class AmbiguousDependencyTest extends AbstractTest {
+public class AmbiguousInjectionIntoNonContextualComponentTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(AmbiguousDependencyTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(AmbiguousInjectionIntoNonContextualComponentTest.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "ae"), @SpecAssertion(section = "2.8", id = "c"),
-            @SpecAssertion(section = "2.8", id = "ca") })
-    public void testAmbiguousDependency() {
+    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "ah") })
+    public void testInjectionIntoServlet() throws Exception {
     }
 
 }
