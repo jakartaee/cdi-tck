@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 
 import javax.inject.Inject;
@@ -57,6 +58,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * 
  */
+@Test(groups = { INTEGRATION })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SelectedAlternative01Test extends AbstractTest {
 

@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 
 /**
@@ -28,6 +29,11 @@ public final class SelectedAlternativeTestUtil {
     public static WebArchiveBuilder createBuilderBase() {
         return new WebArchiveBuilder().withLibrary(SelectedAlternativeTestUtil.class, TestBean.class, Wild.class, Tame.class,
                 SelectedStereotype.class, AssertBean.class);
+    }
+
+    public static EnterpriseArchiveBuilder createEnterpriseBuilderBase() {
+        return new EnterpriseArchiveBuilder().withLibrary(SelectedAlternativeTestUtil.class, TestBean.class, Wild.class,
+                Tame.class, SelectedStereotype.class, AssertBean.class);
     }
 
 }
