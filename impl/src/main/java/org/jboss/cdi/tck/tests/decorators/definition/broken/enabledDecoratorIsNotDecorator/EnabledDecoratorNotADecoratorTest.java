@@ -47,7 +47,7 @@ public class EnabledDecoratorNotADecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.2", id = "bb")
+    @SpecAssertion(section = "8.2", id = "hb")
     public void testEnabledDecoratorNotADecoratorTest() {
     }
 

@@ -48,7 +48,7 @@ public class DecoratorListedTwiceInBeansXmlTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.2", id = "bc")
+    @SpecAssertion(section = "8.2", id = "hc")
     public void testDecoratorListedTwiceInBeansXmlNotOK() {
     }
 }

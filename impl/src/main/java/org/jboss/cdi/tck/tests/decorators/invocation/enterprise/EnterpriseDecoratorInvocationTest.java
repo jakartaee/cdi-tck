@@ -68,8 +68,8 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "7.2", id = "d"), @SpecAssertion(section = "8.1", id = "d"),
             @SpecAssertion(section = "8.1.1", id = "a"), @SpecAssertion(section = "8.1.2", id = "cc"),
-            @SpecAssertion(section = "8.2", id = "a"), @SpecAssertion(section = "8.2", id = "b"),
-            @SpecAssertion(section = "8.2", id = "f") })
+            @SpecAssertion(section = "8.2", id = "c"), @SpecAssertion(section = "8.2", id = "g"),
+            @SpecAssertion(section = "8.2", id = "i") })
     public void testContextualDecorated() throws Exception {
 
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(FooBusiness.class));

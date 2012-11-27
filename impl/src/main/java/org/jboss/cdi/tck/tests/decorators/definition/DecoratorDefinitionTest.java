@@ -116,7 +116,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.2", id = "b"), @SpecAssertion(section = "8.3", id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = "8.2", id = "g"), @SpecAssertion(section = "8.3", id = "aa"),
             @SpecAssertion(section = "11.3.12", id = "a") })
     public void testDecoratorOrdering() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Bazt.TYPES);
@@ -126,7 +126,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.2", id = "a")
+    @SpecAssertion(section = "8.2", id = "ab")
     public void testNonEnabledDecoratorNotResolved() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Field.TYPES);
         assert decorators.size() == 0;

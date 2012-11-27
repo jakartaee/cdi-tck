@@ -107,7 +107,7 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3", id = "aa"), @SpecAssertion(section = "8.2", id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = "8.3", id = "aa"), @SpecAssertion(section = "8.2", id = "c"),
             @SpecAssertion(section = "10.2", id = "c") })
     public void testDecoratorAndCrossModuleEventObserver() throws Exception {
         // Test LoggingDecorator is enabled in C only; bean from D observes event from A

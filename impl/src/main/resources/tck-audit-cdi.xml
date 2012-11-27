@@ -4893,30 +4893,55 @@
     </section>
 
     <section id="8.2" title="Decorator enablement and ordering">
-        <assertion id="a">
-            <text>By default, decorators are not enabled. A decorator must be explicitly enabled by listing its bean class under the |&lt;decorators&gt;| element in |beans.xml| file of the bean archive.</text>
+    
+        <assertion id="aa" testable="false">
+            <text>Decorators may be enabled for an application, or enabled only for a particular bean archive.</text>
+            <note>This is a statement of intent</note>
         </assertion>
-
+        <assertion id="ab" implied="true">
+            <text>By default, a bean archive has no enabled decorators.</text>
+        </assertion>
+        
         <assertion id="b">
-            <text>The order of the decorator declarations determines the decorator ordering. Decorators which occur earlier in the list are called first.</text>
+            <text>A decorator may be enabled for the entire application by listing its class, along with a priority attribute, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive which contains the decorator class.</text>
         </assertion>
-
+        
+        <assertion id="c">
+            <text>A decorator may be enabled for a bean archive by listing its class under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive.</text>
+        </assertion>
+        
+        <assertion id="d">
+            <text>A decorator enabled for an application may be disabled for a bean archive by listing its class, along with an enabled flag, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive.</text>
+        </assertion>
+        
+        <assertion id="e">
+            <text>A decorator may be given a default priority, but not enabled by listing its class, along with a disabled flag and the priority attribute, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive which contains the decorator class.</text>
+        </assertion>
+        
+        <assertion id="f">
+            <text>A decorator with a default priority may be enabled for a bean archive by listing its class, along with an enabled flag, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive.</text>
+        </assertion>
+        
+        <assertion id="g">
+            <text>The priority of the decorator declaration, defined in Section 2.9, "Priority ordering", determines the default decorator ordering for the application. The order of the decorator declarations for a bean archive overrides the default decorator order. If the set of decorators enabled for the application and the set of decorators enabled for a bean archive are disjoint, then the first decorator enabled for the bean archive is given a priority of 1000. Decorators which occur earlier in the list are called first.</text>
+        </assertion>
+        
         <group>
             <text>Each child |&lt;class&gt;| element must specify the name of a decorator bean class. If there is no class with the specified name, or if the class with the specified name is not a decorator bean class, the container automatically detects the problem and treats it as a deployment problem.</text>
-            <assertion id="ba">
+            <assertion id="ha">
                 <text>Test with a nonexistent class name.</text>
             </assertion>
 
-            <assertion id="bb">
+            <assertion id="hb">
                 <text>Test with a non-decorator class.</text>
             </assertion>
         </group>
 
-        <assertion id="bc">
+        <assertion id="hc">
             <text>If the same class is listed twice under the |&lt;decorators&gt;| element, the container automatically detects the problem and treats it as a deployment problem.</text>
         </assertion>
 
-        <assertion id="f">
+        <assertion id="i">
             <text>Decorators are called after interceptors.</text>
         </assertion>
     </section>

@@ -43,7 +43,7 @@ public class NonExistantDecoratorClassInBeansXmlTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.2", id = "ba")
+    @SpecAssertion(section = "8.2", id = "ha")
     public void testNonExistantDecoratorClassInBeansXmlNotOK() {
     }
 }
