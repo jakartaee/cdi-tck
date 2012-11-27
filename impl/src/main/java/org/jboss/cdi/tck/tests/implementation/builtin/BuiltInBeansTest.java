@@ -25,8 +25,6 @@ import java.security.Principal;
 import javax.security.auth.login.LoginException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -58,25 +56,6 @@ public class BuiltInBeansTest extends AbstractTest {
         assertNotNull(userTransaction);
         // Check that the UserTransaction is at least queryable
         userTransaction.getStatus();
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "c") })
-    public void testDefaultValidatorFactoryBean() throws SystemException {
-        ValidatorFactory defaultValidatorFactory = getInstanceByType(DefaultValidatorFactoryInjectedBeanLocal.class)
-                .getDefaultValidatorFactory();
-        assertNotNull(defaultValidatorFactory);
-        // Check that the ValidatorFactory is at least queryable
-        defaultValidatorFactory.getValidator();
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "d") })
-    public void testDefaultValidatorBean() throws SystemException {
-        Validator defaultValidator = getInstanceByType(DefaultValidatorInjectedBeanLocal.class).getDefaultValidator();
-        assertNotNull(defaultValidator);
-        // Check that the ValidatorFactory is at least queryable
-        defaultValidator.getConstraintsForClass(BuiltInBeansTest.class);
     }
 
     /**

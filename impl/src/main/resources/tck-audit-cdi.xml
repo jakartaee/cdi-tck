@@ -1432,14 +1432,6 @@
             <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.security.Principal|, allowing injection of a |Principal| representing the current caller identity.</text>
         </assertion>
 
-        <assertion id="c">
-            <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.validation.ValidatorFactory|, allowing injection of the default Bean Validation |ValidatorFactory|.</text>
-        </assertion>
-
-        <assertion id="d">
-            <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.validation.Validator|, allowing injection of a |Validator| for the default Bean Validation |ValidatorFactory|.</text>
-        </assertion>
-
         <assertion id="da">
             <text>A servlet container must provide a bean with qualifier |@Default| and bean type |javax.servlet.http.HttpServletRequest|, allowing injection of a reference to the |HttpServletRequest|. This bean is passivation capable dependency, as defined in Section 6.6.2, "Passivation capable dependencies".</text>
         </assertion>
