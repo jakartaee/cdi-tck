@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.ordering.global;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -84,7 +85,7 @@ public class GlobalDecoratorOrderingTest extends AbstractTest {
     @Inject
     private Decorated decorated;
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "8.2", id = "b"), @SpecAssertion(section = "8.2", id = "c"),
             @SpecAssertion(section = "8.2", id = "d"), @SpecAssertion(section = "8.2", id = "e"),
             @SpecAssertion(section = "8.2", id = "f") })
