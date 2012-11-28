@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorNotListedInBeansXml;
 
+import static org.testng.Assert.assertFalse;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -34,13 +36,13 @@ public class InterceptorNotListedInBeansXmlNotEnabledTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.4", id = "a")
+    @SpecAssertion(section = "9.4", id = "ab")
     public void testInterceptorNotListedInBeansXmlNotInvoked() {
         TransactionInterceptor.invoked = false;
 
         AccountHolder accountHolder = getInstanceByType(AccountHolder.class);
         accountHolder.transfer(0);
 
-        assert !TransactionInterceptor.invoked;
+        assertFalse(TransactionInterceptor.invoked);
     }
 }

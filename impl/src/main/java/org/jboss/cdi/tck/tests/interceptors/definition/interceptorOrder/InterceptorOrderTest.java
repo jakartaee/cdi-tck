@@ -49,7 +49,7 @@ public class InterceptorOrderTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "bb"), @SpecAssertion(section = "9.4", id = "bf") })
     public void testInterceptorsCalledInOrderDefinedByBeansXml(Foo foo) {
 
         assertNotNull(foo);
