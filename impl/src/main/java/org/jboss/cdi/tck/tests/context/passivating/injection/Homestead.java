@@ -28,7 +28,7 @@ import javax.inject.Inject;
 @SessionScoped
 public class Homestead implements Serializable {
 
-    protected Homestead() {
+    public Homestead() {
     }
 
     @Inject
