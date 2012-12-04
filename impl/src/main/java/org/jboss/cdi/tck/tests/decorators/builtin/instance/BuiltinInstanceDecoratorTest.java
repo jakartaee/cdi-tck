@@ -27,9 +27,9 @@ import java.util.Collections;
 import java.util.HashSet;
 
 import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.spi.Producer;
 import javax.enterprise.util.TypeLiteral;
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -44,9 +44,9 @@ import org.testng.annotations.Test;
 
 /**
  * Basic test for decorating built-in {@link Instance} bean.
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -71,7 +71,7 @@ public class BuiltinInstanceDecoratorTest extends AbstractDecoratorTest {
     public void testDecoratorIsResolved() {
         TypeLiteral<Instance<Mule>> instanceLiteral = new TypeLiteral<Instance<Mule>>() {
         };
-        TypeLiteral<Producer<Mule>> producerLiteral = new TypeLiteral<Producer<Mule>>() {
+        TypeLiteral<Provider<Mule>> providerLiteral = new TypeLiteral<Provider<Mule>>() {
         };
         TypeLiteral<Iterable<Mule>> iterableLiteral = new TypeLiteral<Iterable<Mule>>() {
         };
@@ -79,8 +79,8 @@ public class BuiltinInstanceDecoratorTest extends AbstractDecoratorTest {
                 resolveUniqueDecorator(Collections.singleton(instanceLiteral.getType())),
                 MuleInstanceDecorator.class,
                 new HashSet<Type>(
-                        Arrays.asList(instanceLiteral.getType(), producerLiteral.getType(), iterableLiteral.getType())),
-                Instance.class);
+                        Arrays.asList(instanceLiteral.getType(), providerLiteral.getType(), iterableLiteral.getType())),
+                instanceLiteral.getType());
     }
 
     @Test
