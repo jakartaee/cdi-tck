@@ -18,11 +18,15 @@
 package org.jboss.cdi.tck.test.util;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
+import javax.enterprise.util.TypeLiteral;
 import javax.inject.Inject;
 
 import org.jboss.cdi.tck.literals.AnyLiteral;
@@ -89,4 +93,19 @@ public class AssertTest {
         Assert.assertAnnotationSetMatches(null);
     }
 
+    @SuppressWarnings("serial")
+    @Test(expectedExceptions = AssertionError.class)
+    public void testTypeSetDoeNotMatch() {
+        Assert.assertTypeSetMatches(new HashSet<Type>(Arrays.asList(String.class, new TypeLiteral<List<Integer>>() {
+        }.getType())), String.class);
+    }
+
+    @SuppressWarnings("serial")
+    @Test
+    public void testTypeSetMatches() {
+        Assert.assertTypeSetMatches(
+                new HashSet<Type>(Arrays.asList(Integer.class, String.class, new TypeLiteral<List<Boolean>>() {
+                }.getType())), String.class, Integer.class, new TypeLiteral<List<Boolean>>() {
+                }.getType());
+    }
 }

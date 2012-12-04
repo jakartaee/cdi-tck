@@ -20,6 +20,7 @@ package org.jboss.cdi.tck.util;
 import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -56,6 +57,20 @@ public class Assert {
             if (!requiredAnnotationTypesList.contains(annotation.annotationType())) {
                 fail("Set " + annotations.toString() + " does not match array " + Arrays.toString(requiredAnnotationTypes));
             }
+        }
+    }
+
+    /**
+     * 
+     * @param types
+     * @param requiredTypes
+     */
+    public static void assertTypeSetMatches(Set<? extends Type> types, Type... requiredTypes) {
+
+        List<Type> requiredTypeList = Arrays.asList(requiredTypes);
+
+        if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
+            fail("Set " + types.toString() + " does not match array " + requiredTypeList.toString());
         }
     }
 }
