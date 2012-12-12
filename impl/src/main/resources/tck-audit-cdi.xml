@@ -4856,7 +4856,7 @@
 
     <section id="8.1.3" title="Decorated types of a decorator">
         <assertion id="a">
-            <text>The delegate type of a decorator must implement or extend every decorated type. If the delegate type does not implement or extend a decorated type of the decorator, the container automatically detects the problem and treats it as a definition error.</text>
+            <text>The delegate type of a decorator must implement or extend every decorated type (with exactly the same type parameters). If the delegate type does not implement or extend a decorated type of the decorator (or specifies different type parameters), the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
         <assertion id="ab">
