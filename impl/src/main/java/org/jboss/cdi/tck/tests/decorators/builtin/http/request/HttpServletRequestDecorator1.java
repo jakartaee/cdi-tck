@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.http.request;
 
+import java.io.Serializable;
+
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
@@ -25,7 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Decorator
-public abstract class HttpServletRequestDecorator1 implements HttpServletRequest {
+@SuppressWarnings("serial")
+public abstract class HttpServletRequestDecorator1 implements HttpServletRequest, Serializable {
 
     @Inject
     @Delegate

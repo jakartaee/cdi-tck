@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.injectionpoint;
 
+import java.io.Serializable;
+
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.inject.spi.Bean;
@@ -24,7 +26,8 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
 @Decorator
-public abstract class InjectionPointDecorator implements InjectionPoint {
+@SuppressWarnings("serial")
+public abstract class InjectionPointDecorator implements InjectionPoint, Serializable {
 
     @Inject
     @Delegate

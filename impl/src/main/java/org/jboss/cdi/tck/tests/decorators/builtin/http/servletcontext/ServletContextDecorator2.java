@@ -17,13 +17,16 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.http.servletcontext;
 
+import java.io.Serializable;
+
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 
 @Decorator
-public abstract class ServletContextDecorator2 implements ServletContext {
+@SuppressWarnings("serial")
+public abstract class ServletContextDecorator2 implements ServletContext, Serializable {
 
     @Inject
     @Delegate
