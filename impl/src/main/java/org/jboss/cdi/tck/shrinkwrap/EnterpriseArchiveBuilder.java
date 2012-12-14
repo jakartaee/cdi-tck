@@ -113,7 +113,7 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         }
 
         // CDITCK-56
-        ejbArchive.addClass(Dummy.class);
+        ejbArchive.addClass(DummySessionBean.class);
 
         processPackages(ejbArchive);
         processClasses(ejbArchive);
