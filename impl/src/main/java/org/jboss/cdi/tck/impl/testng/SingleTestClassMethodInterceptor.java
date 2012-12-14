@@ -67,7 +67,7 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
                     return result;
                 }
             });
-            logger.log(Level.INFO, "tckTest not set [time: {1} ms]", System.currentTimeMillis() - start);
+            logger.log(Level.INFO, "tckTest not set [time: {0} ms]", System.currentTimeMillis() - start);
             return methods;
         }
 

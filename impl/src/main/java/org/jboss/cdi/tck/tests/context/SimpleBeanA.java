@@ -26,7 +26,6 @@ public class SimpleBeanA implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    @SessionScoped
     private SimpleBeanZ z;
 
     public SimpleBeanZ getZ() {

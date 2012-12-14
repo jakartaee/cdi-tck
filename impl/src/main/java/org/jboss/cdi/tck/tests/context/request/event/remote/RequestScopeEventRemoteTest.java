@@ -42,7 +42,7 @@ public class RequestScopeEventRemoteTest extends AbstractTest {
 
     @Deployment(name = "TEST", order = 1)
     public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClass(RequestScopeEventRemoteTest.class)
+        return new EnterpriseArchiveBuilder().withTestClass(RequestScopeEventRemoteTest.class).setAsClientMode(false)
                 .withClasses(FooRemote.class).build();
     }
 
@@ -50,7 +50,8 @@ public class RequestScopeEventRemoteTest extends AbstractTest {
     public static EnterpriseArchive createEjbArchive() {
         return new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().withName("test-ejb.ear")
                 .withEjbModuleName("test-ejb.jar")
-                .withClasses(FooBean.class, FooRemote.class, RequestScopedObserver.class, ApplicationScopedObserver.class).build();
+                .withClasses(FooBean.class, FooRemote.class, RequestScopedObserver.class, ApplicationScopedObserver.class)
+                .build();
     }
 
     @EJB(lookup = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.event.remote.FooRemote")

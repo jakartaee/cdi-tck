@@ -51,7 +51,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @Deployment(name = "TEST", order = 1)
     public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClass(ApplicationContextSharedTest.class)
+        return new EnterpriseArchiveBuilder().withTestClass(ApplicationContextSharedTest.class).setAsClientMode(false)
                 .withClasses(BarBean.class, FMS.class, FMSModelIII.class, SimpleApplicationBean.class, FooRemote.class).build();
     }
 

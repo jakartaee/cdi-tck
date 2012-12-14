@@ -52,7 +52,7 @@ public class EJBRequestContextTest extends AbstractTest {
 
     @Deployment(name = "TEST", order = 1)
     public static EnterpriseArchive createTestArchive() {
-        return new EnterpriseArchiveBuilder().withTestClass(EJBRequestContextTest.class)
+        return new EnterpriseArchiveBuilder().withTestClass(EJBRequestContextTest.class).setAsClientMode(false)
                 .withClasses(FMS.class, FMSModelIII.class, BarBean.class, SimpleRequestBean.class, FooRemote.class).build();
     }
 

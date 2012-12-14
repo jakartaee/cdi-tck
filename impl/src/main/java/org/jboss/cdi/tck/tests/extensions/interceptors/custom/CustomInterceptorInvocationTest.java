@@ -56,10 +56,10 @@ public class CustomInterceptorInvocationTest extends AbstractTest {
     public static WebArchive createTestArchive() {
 
         return new WebArchiveBuilder()
-                .withTestClassPackage(CustomInterceptorInvocationTest.class)
-                .withClasses(HierarchyDiscovery.class)
-                .withExcludedClasses(CustomInterceptorRegistrationTest.class.getName(),
-                        InterceptedSerializableBean.class.getName())
+                .withTestClass(CustomInterceptorInvocationTest.class)
+                .withClasses(HierarchyDiscovery.class, AbstractInterceptor.class, CustomInterceptor.class,
+                        CustomInterceptorExtension.class, FooInterceptor.class, FooInterceptorBinding.class,
+                        InterceptedBean.class)
                 .withExtension(CustomInterceptorExtension.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(FooInterceptor.class.getName())

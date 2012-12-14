@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.lookup.manager.jndi;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.MANAGER;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
-import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -37,11 +39,14 @@ public class ManagerTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClass(ManagerTest.class).withClasses(JndiBeanManagerInjected.class).build();
     }
 
+    @Inject
+    JndiBeanManagerInjected jndiBeanManagerInjected;
+
     @Test(groups = { MANAGER, INTEGRATION })
     @SpecAssertion(section = "11.3.1", id = "d")
     public void testManagerLookupInJndi() throws Exception {
-        BeanManager beanManager = getInstanceByType(JndiBeanManagerInjected.class).getManagerFromJndi();
-        assert beanManager != null;
-        assert beanManager.equals(getCurrentManager());
+        assertNotNull(jndiBeanManagerInjected);
+        assertNotNull(jndiBeanManagerInjected.getManagerFromJndi());
+        assertEquals(jndiBeanManagerInjected.getManagerFromJndi(), getCurrentManager());
     }
 }
