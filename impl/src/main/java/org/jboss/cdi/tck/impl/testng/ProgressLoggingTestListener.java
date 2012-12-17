@@ -21,8 +21,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.testng.IInvokedMethod;
+import org.testng.IInvokedMethodListener2;
 import org.testng.ITestContext;
-import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 /**
@@ -31,43 +32,39 @@ import org.testng.ITestResult;
  * @author Martin Kouba
  * 
  */
-public class ProgressLoggingTestListener implements ITestListener {
+public class ProgressLoggingTestListener implements IInvokedMethodListener2 {
 
     private final Logger logger = Logger.getLogger(ProgressLoggingTestListener.class.getName());
 
-    private final AtomicInteger testStarted = new AtomicInteger(0);
+    private final AtomicInteger testMethodInvocations = new AtomicInteger(0);
 
-    private int totalCountOfMethods = 0;
+    private Integer totalCountOfMethods = null;
 
     @Override
-    public void onTestStart(ITestResult result) {
-        logger.log(Level.INFO, "On test start {0}/{1}", new Object[] { testStarted.incrementAndGet(), totalCountOfMethods });
+    public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
     }
 
     @Override
-    public void onTestSuccess(ITestResult result) {
+    public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
     }
 
     @Override
-    public void onTestFailure(ITestResult result) {
+    public void beforeInvocation(IInvokedMethod method, ITestResult testResult, ITestContext context) {
+
+        if (!method.isTestMethod()) {
+            return;
+        }
+
+        if (totalCountOfMethods == null) {
+            totalCountOfMethods = context.getSuite().getAllMethods().size();
+        }
+
+        logger.log(Level.INFO, "Invoke {0}: {1}/{2}", new Object[] { method.getTestMethod().getMethodName(),
+                testMethodInvocations.incrementAndGet(), totalCountOfMethods });
     }
 
     @Override
-    public void onTestSkipped(ITestResult result) {
-    }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-    }
-
-    @Override
-    public void onStart(ITestContext context) {
-        // For some reason this is only called once and not per test class as javadoc claims
-        totalCountOfMethods = context.getSuite().getAllMethods().size();
-    }
-
-    @Override
-    public void onFinish(ITestContext context) {
+    public void afterInvocation(IInvokedMethod method, ITestResult testResult, ITestContext context) {
     }
 
 }
