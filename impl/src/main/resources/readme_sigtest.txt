@@ -22,3 +22,7 @@ Once again, here's a working example:
 java -jar  "/home/shane/java/sigtest-2.1/lib/sigtestdev.jar" SignatureTest -classpath "/usr/local/java/jre/lib/rt.jar:/home/shane/.m2/repository/javax/enterprise/cdi-api/1.0/cdi-api-1.0.jar:/home/shane/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar:/home/shane/.m2/repository/javax/el/el-api/2.1.2-b04/el-api-2.1.2-b04.jar:/home/shane/.m2/repository/org/jboss/interceptor/jboss-interceptor-api/3.1.0-CR1/jboss-interceptor-api-3.1.0-CR1.jar" -Package javax.decorator -Package javax.enterprise -FileName cdi-api.sig -static
 
 
+JDK7 signature test
+---------------------------
+
+cdi-api-jdk7.sig is a signature file build with JDK 7
