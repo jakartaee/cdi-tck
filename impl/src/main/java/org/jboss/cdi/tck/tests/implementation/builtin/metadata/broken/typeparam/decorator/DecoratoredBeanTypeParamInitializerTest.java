@@ -40,7 +40,7 @@ public class DecoratoredBeanTypeParamInitializerTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(DecoratoredBeanTypeParamInitializerTest.class)
+        return new WebArchiveBuilder().withTestClassDefinition(DecoratoredBeanTypeParamInitializerTest.class)
                 .withClasses(Cream.class, MilkDecoratedBeanInitializer.class, Milk.class).build();
     }
 

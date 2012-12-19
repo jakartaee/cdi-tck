@@ -283,6 +283,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Set test class definition for configuration purpose. Do not add it to final archive.
      * 
+     * Always use this for as-client test archives, e.g. deployment method annotated with {@link ShouldThrowException}.
+     * 
      * @param test
      * @return self
      */

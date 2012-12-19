@@ -38,7 +38,7 @@ public class BeanTypeParamFieldTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(BeanTypeParamFieldTest.class)
+        return new WebArchiveBuilder().withTestClassDefinition(BeanTypeParamFieldTest.class)
                 .withClasses(Cream.class, YoghurtField.class).build();
     }
 

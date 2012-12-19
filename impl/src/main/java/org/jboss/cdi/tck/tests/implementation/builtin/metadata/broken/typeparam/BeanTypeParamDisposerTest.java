@@ -38,7 +38,7 @@ public class BeanTypeParamDisposerTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(BeanTypeParamDisposerTest.class)
+        return new WebArchiveBuilder().withTestClassDefinition(BeanTypeParamDisposerTest.class)
                 .withClasses(Cream.class, Milk.class, MilkDisposer.class).build();
     }
 

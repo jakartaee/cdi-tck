@@ -38,7 +38,7 @@ public class BeanTypeParamInitializerTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(BeanTypeParamInitializerTest.class)
+        return new WebArchiveBuilder().withTestClassDefinition(BeanTypeParamInitializerTest.class)
                 .withClasses(Cream.class, YoghurtInitializer.class).build();
     }
 

@@ -39,7 +39,7 @@ public class InterceptorTypeParamFieldTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(InterceptorTypeParamFieldTest.class)
+        return new WebArchiveBuilder().withTestClassDefinition(InterceptorTypeParamFieldTest.class)
                 .withClasses(Cream.class, InterceptorField.class, Binding.class).build();
     }
 

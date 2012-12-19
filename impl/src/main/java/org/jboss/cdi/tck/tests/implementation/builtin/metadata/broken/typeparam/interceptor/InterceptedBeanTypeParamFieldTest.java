@@ -39,7 +39,7 @@ public class InterceptedBeanTypeParamFieldTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(InterceptedBeanTypeParamFieldTest.class)
+        return new WebArchiveBuilder().withTestClassDefinition(InterceptedBeanTypeParamFieldTest.class)
                 .withClasses(Cream.class, InterceptedBeanField.class, Binding.class).build();
     }
 

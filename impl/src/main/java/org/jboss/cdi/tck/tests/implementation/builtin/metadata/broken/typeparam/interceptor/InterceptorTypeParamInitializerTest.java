@@ -39,7 +39,7 @@ public class InterceptorTypeParamInitializerTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(InterceptorTypeParamInitializerTest.class)
+        return new WebArchiveBuilder().withTestClassDefinition(InterceptorTypeParamInitializerTest.class)
                 .withClasses(Cream.class, InterceptorInitializer.class, Binding.class).build();
     }
 

@@ -40,7 +40,7 @@ public class DecoratorTypeParamConstructorTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(DecoratorTypeParamConstructorTest.class)
+        return new WebArchiveBuilder().withTestClassDefinition(DecoratorTypeParamConstructorTest.class)
                 .withClasses(Cream.class, MilkDecoratorConstructor.class, Milk.class).build();
     }
 
