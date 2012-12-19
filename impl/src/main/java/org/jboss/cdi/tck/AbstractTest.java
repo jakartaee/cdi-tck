@@ -47,6 +47,14 @@ public abstract class AbstractTest extends Arquillian {
     @Inject
     protected BeanManager beanManager;
 
+    /**
+     * Note that TCK uses Arquillian Servlet protocol and so the test class is instantiated/enriched from within the WAR module.
+     * This affects most of the {@link BeanManager} methods functionality. For instance the method
+     * {@link BeanManager#getBeans(Type, Annotation...)} returns the set of beans which are available for injection in the
+     * module or library containing the class into which the {@link BeanManager} was injected (simplified).
+     * 
+     * @return the current {@link BeanManager}
+     */
     protected BeanManager getCurrentManager() {
         return beanManager;
     }

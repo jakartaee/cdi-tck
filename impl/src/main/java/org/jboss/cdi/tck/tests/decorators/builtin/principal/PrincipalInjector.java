@@ -17,24 +17,25 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.principal;
 
-import java.io.Serializable;
 import java.security.Principal;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
-@SuppressWarnings("serial")
-@Decorator
-public abstract class PrincipalDecorator implements Principal, Serializable {
+public class PrincipalInjector {
 
     @Inject
-    @Delegate
-    Principal principal;
+    private Principal principal;
 
-    @Override
-    public String getName() {
-        return "Edgar";
+    @Inject
+    private BeanManager beanManager;
+
+    public Principal getPrincipal() {
+        return principal;
+    }
+
+    public BeanManager getBeanManager() {
+        return beanManager;
     }
 
 }

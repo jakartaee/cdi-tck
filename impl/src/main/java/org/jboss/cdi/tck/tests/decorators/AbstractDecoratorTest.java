@@ -25,6 +25,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Set;
 
+import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Decorator;
 
 import org.jboss.cdi.tck.AbstractTest;
@@ -36,7 +37,14 @@ import org.jboss.cdi.tck.AbstractTest;
 public abstract class AbstractDecoratorTest extends AbstractTest {
 
     protected Decorator<?> resolveUniqueDecorator(Set<Type> types, Annotation... qualifiers) {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(types, qualifiers);
+        return resolveUniqueDecorator(null, types, qualifiers);
+    }
+
+    protected Decorator<?> resolveUniqueDecorator(BeanManager currentBeanManager, Set<Type> types, Annotation... qualifiers) {
+        if (currentBeanManager == null) {
+            currentBeanManager = getCurrentManager();
+        }
+        List<Decorator<?>> decorators = currentBeanManager.resolveDecorators(types, qualifiers);
         assertNotNull(decorators);
         assertEquals(decorators.size(), 1);
         return decorators.iterator().next();

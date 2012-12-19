@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.decorators.builtin.principal;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import java.lang.reflect.Type;
 import java.security.Principal;
@@ -55,18 +56,22 @@ public class BuiltinPrincipalDecoratorTest extends AbstractDecoratorTest {
     }
 
     @Inject
-    Principal principal;
+    PrincipalInjector principalInjector;
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acm") })
     public void testDecoratorIsResolved() {
-        checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(Principal.class)), PrincipalDecorator.class,
-                Collections.<Type> singleton(Principal.class), Principal.class);
+        assertNotNull(principalInjector);
+        checkDecorator(
+                resolveUniqueDecorator(principalInjector.getBeanManager(), Collections.<Type> singleton(Principal.class)),
+                PrincipalDecorator.class, Collections.<Type> singleton(Principal.class), Principal.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acm") })
     public void testDecoratorInvoked() throws Exception {
-        assertEquals(principal.getName(), "Edgar");
+        assertNotNull(principalInjector);
+        assertNotNull(principalInjector.getPrincipal());
+        assertEquals(principalInjector.getPrincipal().getName(), "Edgar");
     }
 }
