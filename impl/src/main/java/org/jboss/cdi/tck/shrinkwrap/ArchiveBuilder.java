@@ -44,8 +44,10 @@ import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.annotated.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.Archive;
+import org.jboss.shrinkwrap.api.ArchivePath;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.container.ClassContainer;
@@ -53,11 +55,14 @@ import org.jboss.shrinkwrap.api.container.LibraryContainer;
 import org.jboss.shrinkwrap.api.container.ManifestContainer;
 import org.jboss.shrinkwrap.api.container.ResourceContainer;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.persistence20.PersistenceDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
+import org.jboss.shrinkwrap.impl.base.asset.AssetUtil;
+import org.jboss.shrinkwrap.impl.base.path.BasicPath;
 
 /**
  * Abstract ShrinkWrap archive builder for CDI TCK Arquillian test.
@@ -659,21 +664,19 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @param archive
      */
-    protected void processPackages(final ClassContainer<?> archive) {
+    protected <P extends Archive<?> & ClassContainer<?>> void processPackages(final P archive) {
 
         if (packages == null)
             return;
 
         // Avoid using URLPackageScanner if possible - it has negative performance effects
         if ((excludedClasses == null || excludedClasses.isEmpty()) && !isAsClientMode()) {
-
             archive.addPackages(false, packages.toArray(new Package[packages.size()]));
-
         } else {
 
             final String testClazzName = testClazz.getName();
             final ClassLoader cl = testClazz.getClassLoader();
-            final ClassLoader clToUse = (cl != null ? cl : Thread.currentThread().getContextClassLoader());
+            final ClassLoader clToUse = (cl != null ? cl : ClassLoader.getSystemClassLoader());
 
             final URLPackageScanner.Callback callback = new URLPackageScanner.Callback() {
                 @Override
@@ -689,7 +692,18 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                                 return;
                         }
                     }
-                    archive.addClass(className);
+
+                    // This is a performance WORKAROUND - adding classes via ClassContainer.addClass(String fqcn) is much slower
+                    // See also org.jboss.shrinkwrap.impl.base.container.ContainerBase addPackage() and getClassesPath() methods
+                    ArchivePath classesPath = resolveClassesPath(archive);
+
+                    if (classesPath != null) {
+                        ArchivePath classNamePath = AssetUtil.getFullPathForClassResource(className);
+                        archive.add(new ClassLoaderAsset(classNamePath.get().substring(1), clToUse), new BasicPath(classesPath,
+                                classNamePath));
+                    } else {
+                        archive.addClass(className);
+                    }
                 }
             };
 
@@ -1106,6 +1120,19 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         logger.log(Level.INFO, "Support library built [time: {0} ms]", System.currentTimeMillis() - start);
         return supportLib;
+    }
+
+    /**
+     * @param archive
+     * @return Base Path for the ClassContainer resources
+     */
+    private ArchivePath resolveClassesPath(Archive<?> archive) {
+        if (archive instanceof WebArchive) {
+            return ArchivePaths.create("WEB-INF/classes");
+        } else if (archive instanceof JavaArchive) {
+            return new BasicPath("/");
+        }
+        return null;
     }
 
 }

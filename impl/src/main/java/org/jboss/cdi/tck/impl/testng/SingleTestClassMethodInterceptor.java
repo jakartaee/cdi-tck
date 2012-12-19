@@ -53,7 +53,12 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
 
     public List<IMethodInstance> intercept(List<IMethodInstance> methods, ITestContext context) {
 
-        logger.log(Level.INFO, "Intercepting... [methods: {0}]", methods.size());
+        if (methods == null || methods.isEmpty() || methods.size() == 1) {
+            return methods;
+        }
+
+        logger.log(Level.INFO, "Intercepting... [methods: {0}, testRun: {1}, suiteName: {2}]", new Object[] { methods.size(),
+                context.getName(), context.getSuite().getName() });
 
         long start = System.currentTimeMillis();
         String testClass = System.getProperty(TEST_CLASS_PROPERTY);
