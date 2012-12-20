@@ -3197,6 +3197,14 @@
         <assertion id="i">
             <text>If a |Decorator| instance is injected into a bean instance other than a decorator instance, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
+        
+        <assertion id="r">
+            <text>If a |Bean| instance with qualifier |@Intercepted| is injected into a bean instance other than an interceptor instance, the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
+
+        <assertion id="s">
+            <text>If a |Bean| instance with qualifier |@Decorated| is injected into a bean instance other than an interceptor instance, the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
 
         <group>
             <text>The injection of bean metadata is restricted.</text>

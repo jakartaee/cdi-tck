@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection;
+package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection.intercepted;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -33,17 +33,17 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class BuiltinInterceptorInjectionTest extends AbstractTest {
+public class InterceptedBeanFieldInjectionTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassDefinition(BuiltinInterceptorInjectionTest.class).withClasses(Foo.class)
-                .build();
+        return new WebArchiveBuilder().withTestClassDefinition(InterceptedBeanFieldInjectionTest.class)
+                .withClasses(InterceptedFieldInjector.class).build();
     }
 
     @Test
-    @SpecAssertion(section = "5.5.8", id = "h")
+    @SpecAssertion(section = "5.5.8", id = "r")
     public void testDeploymentFails() {
     }
 

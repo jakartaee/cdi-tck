@@ -38,7 +38,8 @@ public class BuiltinDecoratorInjectionTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(BuiltinDecoratorInjectionTest.class).withClasses(Bar.class).build();
+        return new WebArchiveBuilder().withTestClassDefinition(BuiltinDecoratorInjectionTest.class).withClasses(Bar.class)
+                .build();
     }
 
     @Test
