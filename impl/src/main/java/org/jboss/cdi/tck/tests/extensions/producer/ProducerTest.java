@@ -42,6 +42,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
+@SuppressWarnings("serial")
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerTest extends AbstractTest {
@@ -124,14 +125,15 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.9", id = "ac"), @SpecAssertion(section = "11.5.9", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.9", id = "ac"), @SpecAssertion(section = "11.5.9", id = "e"),
+            @SpecAssertion(section = "11.5.9", id = "gb") })
     public void testProduceCallsOverridenResourceProducerMethod() {
         assertEquals(getInstanceByType(ServiceRemote.class).ping(), "pong");
         assertTrue(ProducerProcessor.isOverriddenServiceProducerCalled);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.9", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.9", id = "e"), @SpecAssertion(section = "11.5.9", id = "ga") })
     public void testSetProducerOverridesProducer() {
         ProducerProcessor.reset();
         assert getInstanceByType(Cow.class, new AnnotationLiteral<Noisy>() {
