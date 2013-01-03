@@ -46,8 +46,8 @@ public class QuxAsyncListener implements AsyncListener {
             }
         }
 
-        event.getSuppliedResponse().setContentType("text/plain");
-        event.getSuppliedResponse().getWriter().append(testResult.toString());
+        event.getAsyncContext().getResponse().setContentType("text/plain");
+        event.getAsyncContext().getResponse().getWriter().append(testResult.toString());
     }
 
     @Override

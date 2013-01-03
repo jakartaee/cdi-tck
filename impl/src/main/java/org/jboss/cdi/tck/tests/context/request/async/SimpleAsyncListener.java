@@ -62,7 +62,7 @@ public class SimpleAsyncListener implements AsyncListener {
         if (onTimeout == null && onError == null) {
             // Do not check and write info in case of post timeout/error action
             checkApplicationContextAvailability(event);
-            writeInfo(event.getSuppliedResponse());
+            writeInfo(event.getAsyncContext().getResponse());
         }
     }
 
@@ -76,7 +76,7 @@ public class SimpleAsyncListener implements AsyncListener {
         logger.log("onTimeout");
         onTimeout = System.currentTimeMillis();
         checkApplicationContextAvailability(event);
-        writeInfo(event.getSuppliedResponse());
+        writeInfo(event.getAsyncContext().getResponse());
         event.getAsyncContext().complete();
     }
 
@@ -115,7 +115,7 @@ public class SimpleAsyncListener implements AsyncListener {
             logger.log("Problem while checking request scope: " + e.getMessage());
         }
         if (!isRequestContextActive || simpleRequestBeanId == null) {
-            ((HttpServletResponse) event.getSuppliedResponse()).setStatus(500);
+            ((HttpServletResponse) event.getAsyncContext().getResponse()).setStatus(500);
             return false;
         }
         return true;
