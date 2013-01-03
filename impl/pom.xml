@@ -207,9 +207,12 @@
                         <configuration>
                             <source>1.6</source>
                             <target>1.6</target>
-                            <!-- this is a really ugly workaround for passing multiple arguments to the annotation processor tool, see MCOMPILER-75 and MCOMPILER-135 for more details -->
-                            <compilerArguments>
+                            <!-- this was a really ugly workaround for passing multiple arguments to the annotation processor tool, see MCOMPILER-75 and MCOMPILER-135 for more details -->
+                            <!-- compilerArguments>
                                 <Aapt.flag1>-AoutputDir=${basedir}/../target/</Aapt.flag1>
+                            </compilerArguments-->
+                            <compilerArguments>
+                                <AoutputDir>${basedir}/../target/</AoutputDir>
                             </compilerArguments>
                             <compilerArgument>-AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml</compilerArgument>
                         </configuration>

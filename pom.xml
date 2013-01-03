@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.jboss.weld</groupId>
         <artifactId>weld-parent</artifactId>
-        <version>17</version>
+        <version>21</version>
     </parent>
 
     <!-- Metadata -->
@@ -82,7 +82,7 @@
     </modules>
 
     <properties>
-        <jboss.test.audit.version>1.1.0.CR2</jboss.test.audit.version>
+        <jboss.test.audit.version>1.1.0-SNAPSHOT</jboss.test.audit.version>
         <testng.version>6.3</testng.version>
         <jsr250.api.version>1.0</jsr250.api.version>
         <cdi.api.version>1.1-PRD</cdi.api.version>

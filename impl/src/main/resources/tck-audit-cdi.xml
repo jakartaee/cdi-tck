@@ -1,5 +1,7 @@
 <specification xmlns="http://jboss.com/products/weld/tck/audit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd" name="JSR 346: Contexts and Dependency Injection for Java EE 1.1" id="cdi" version="20091101">
 
+    <section id="1" title="Architecture"/>
+    
     <section id="2" title="Concepts">
 
         <assertion id="a">
