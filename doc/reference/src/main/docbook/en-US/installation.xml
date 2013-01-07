@@ -163,7 +163,7 @@
          <itemizedlist>
             <listitem>
                <para>
-                  You need to install Maven 2.0.10. You can find documention on how to
+                  You need to install Maven 2.0.10. You can find documentation on how to
                   install Maven 2 in the
                   <ulink
                      url="http://www.sonatype.com/books/maven-book/reference/installation-sect-maven-install.html">Maven: The Definitive Guide</ulink>

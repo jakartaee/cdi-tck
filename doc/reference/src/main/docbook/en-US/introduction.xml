@@ -30,7 +30,7 @@
       </para>
       <para>
          A TCK is entirely implementation agnostic. Ideally, it should validate
-         assertions by consulting the specficiation's public API.  However, when
+         assertions by consulting the specification's public API.  However, when
          the information returned by the public API is not low-level enough to
          validate the assertion, the implementation must be consulted directly.
          In this case, the TCK provides an independent API as part of a porting
@@ -123,7 +123,7 @@
          suite for verifying the compatibility of an implementation of the
          JSR-299: Contexts and Dependency Injection for Java EE specification.
          The test suite is built atop TestNG and provides a series of extensions
-         that allow runtime packaging and deployment of JEE artifacts for
+         that allow runtime packaging and deployment of Java EE artifacts for
          in-container testing (JBoss Test Harness).
       </para>
       <note>

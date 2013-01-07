@@ -6,7 +6,7 @@
       This chapter lays out how to configure the TCK Harness by specifying
       the SPI implementation classes, defining the target container connection
       information, and various other switches. You then learn how to setup a TCK
-      runner project that executes the the TCK test suite, putting these
+      runner project that executes the TCK test suite, putting these
       settings into practice. Finally, a detailed account of how the JBoss Test
       Harness negotiates the execution of the tests in the container is given.
    </para>
@@ -243,7 +243,7 @@
          describes how Weld uses Maven 2 to execute the CDI TCK. See
          <xref linkend="test-suite-runner" />. The TestNG documentation provides
          extensive information on launching TestNG using the Java, Ant, Eclipse
-         or IntellJ IDEA.
+         or IntelliJ IDEA.
       </para>
 
    </section>
