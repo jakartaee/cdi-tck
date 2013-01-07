@@ -18,6 +18,7 @@ package org.jboss.jsr299.tck.tests.implementation.producer.method.definition.ent
 
 import java.util.Set;
 
+import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
@@ -38,28 +39,28 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091101")
 public class EnterpriseProducerMethodDefinitionTest extends AbstractJSR299Test
 {
-   @Test
+   @Test(expectedExceptions = UnsatisfiedResolutionException.class)
    @SpecAssertion(section = "4.2", id = "dd")
-   public void testNonStaticProducerMethodInheritedBySpecializingSubclass()
+   public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass()
    {
-      assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {}).size() == 1;
-      assert getInstanceByType(Egg.class,new AnnotationLiteral<Yummy>() {}).getMother() instanceof AndalusianChickenLocal;
+      assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {}).size() == 0;
+      getInstanceByType(Egg.class,new AnnotationLiteral<Yummy>() {});
    }
-   
+
    @Test
    @SpecAssertion(section = "4.2", id = "dd")
    public void testNonStaticProducerMethodNotInherited()
    {
       assert getBeans(Apple.class, new AnnotationLiteral<Yummy>() {}).size() == 1;
-      assert getInstanceByType(Apple.class,new AnnotationLiteral<Yummy>() {}).getTree() instanceof AppleTreeLocal;      
+      assert getInstanceByType(Apple.class,new AnnotationLiteral<Yummy>() {}).getTree() instanceof AppleTreeLocal;
    }
-   
+
    @Test
    @SpecAssertion(section = "4.2", id = "dj")
    public void testNonStaticProducerMethodNotIndirectlyInherited()
    {
       Set<Bean<Pear>> beans = getBeans(Pear.class, new AnnotationLiteral<Yummy>() {});
       assert beans.size() == 2;
-   }   
+   }
 }
 
