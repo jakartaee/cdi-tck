@@ -3,7 +3,7 @@
 <chapter id="appeals-process">
    <title>Appeals Process</title>
    <para>
-      While the CDI TCK is rigourous about enforcing an implementation's
+      While the CDI TCK is rigorous about enforcing an implementation's
       conformance to the JSR 346 specification, it's reasonable to assume that
       an implementor may discover new and/or better ways to validate the
       assertions. This chapter covers the appeals process, defined by the
@@ -43,7 +43,7 @@
          challenged by an appeal.
       </para>
       <para>
-         What is generally not challengable are the assertions made by the
+         What is generally not challengeable are the assertions made by the
          specification. The specification document is controlled by a separate
          process and challenges to it should be handled through the JSR 346 EG
          by sending an e-mail to <ulink

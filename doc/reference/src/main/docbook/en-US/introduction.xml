@@ -30,7 +30,7 @@
       </para>
       <para>
          A TCK is entirely implementation agnostic. Ideally, it should validate
-         assertions by consulting the specficiation's public API.  However, when
+         assertions by consulting the specification's public API.  However, when
          the information returned by the public API is not low-level enough to
          validate the assertion, the implementation must be consulted directly.
          In this case, the TCK provides an independent API as part of a porting

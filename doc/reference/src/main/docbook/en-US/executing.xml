@@ -6,7 +6,7 @@
       This chapter explains how to run the TCK on Weld as well as your own
       implementation. The CDI TCK uses the Maven Surefire plugin and the Arquillian 
       test platform to execute the test suite. Learning to execute the test suite
-      from Maven is prerequisite knowlege for running the tests in an IDE,
+      from Maven is prerequisite knowledge for running the tests in an IDE,
       such as Eclipse.
    </para>
    <section>

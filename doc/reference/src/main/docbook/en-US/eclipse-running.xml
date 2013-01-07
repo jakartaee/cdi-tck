@@ -65,7 +65,7 @@ mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs]]><
    <section>
       <title>Readying the Eclipse workspace</title>
       <para>
-         When setting up your Ecilpse workspace, we recommended creating three
+         When setting up your Eclipse workspace, we recommended creating three
          workings sets:
       </para>
       <orderedlist>
@@ -171,7 +171,7 @@ Weld JBoss TCK Runner
       </para>
       <para>
         As it turns out, the TCK runner doesn't need to access the tests to
-        build. It only needs its classes, configurations and other dependenices
+        build. It only needs its classes, configurations and other dependencies
         at runtime (when the TestNG plugin executes). Therefore, we can disable 
         <emphasis>Resolve dependencies from workspace projects</emphasis> setting 
         on weld-jboss-runner-tck11 project:

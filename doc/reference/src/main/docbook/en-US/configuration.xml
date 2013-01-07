@@ -6,7 +6,7 @@
       This chapter lays out how to configure the TCK Harness by specifying
       the SPI implementation classes, defining the target container connection
       information, and various other switches. You then learn how to setup a TCK
-      runner project that executes the the TCK test suite, putting these
+      runner project that executes the TCK test suite, putting these
       settings into practice.
    </para>
 
@@ -172,7 +172,7 @@
       <para>
          It's beyond the scope of this guide to describe in how to set up your
          build environment to run the TCK. The TestNG documentation provides extensive 
-         information on launching TestNG using the Java, Ant, Eclipse or IntellJ IDEA.
+         information on launching TestNG using the Java, Ant, Eclipse or IntelliJ IDEA.
          <literal>FIXME</literal>
       </para>
 
