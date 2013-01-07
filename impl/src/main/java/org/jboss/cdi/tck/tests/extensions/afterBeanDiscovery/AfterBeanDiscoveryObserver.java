@@ -29,7 +29,10 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
+import javax.enterprise.inject.spi.AnnotatedField;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.ProcessBean;
@@ -37,8 +40,11 @@ import javax.enterprise.inject.spi.ProcessObserverMethod;
 
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.DefaultLiteral;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 public class AfterBeanDiscoveryObserver implements Extension {
+
+    private static final SimpleLogger logger = new SimpleLogger(AfterBeanDiscoveryObserver.class);
 
     public static TestableObserverMethod<Talk> addedObserverMethod;
 
@@ -60,13 +66,13 @@ public class AfterBeanDiscoveryObserver implements Extension {
         isTalkProcessObserverMethodObserved = true;
     }
 
-    public void addABean(@Observes AfterBeanDiscovery event) {
-        addBean(event);
+    public void addABean(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
+        addBean(event, beanManager);
         addObserverMethod(event);
         event.addContext(new SuperContext());
     }
 
-    private void addBean(AfterBeanDiscovery event) {
+    private void addBean(AfterBeanDiscovery event, final BeanManager beanManager) {
         event.addBean(new Bean<Cockatoo>() {
 
             private final Set<Annotation> qualifiers = new HashSet<Annotation>(Arrays.asList(new DefaultLiteral()));
@@ -109,7 +115,31 @@ public class AfterBeanDiscoveryObserver implements Extension {
             }
 
             public Cockatoo create(CreationalContext<Cockatoo> creationalContext) {
-                return new Cockatoo("Billy");
+
+                Cockatoo cockatoo = new Cockatoo("Billy");
+
+                try {
+                    // Try to lookup InjectionPoint metadata
+                    AnnotatedType<Cockatoo> annotatedType = beanManager.createAnnotatedType(Cockatoo.class);
+                    AnnotatedField<? super Cockatoo> injectionPointField = null;
+
+                    for (AnnotatedField<? super Cockatoo> field : annotatedType.getFields()) {
+                        if (field.getBaseType().equals(InjectionPoint.class)) {
+                            injectionPointField = field;
+                        }
+                    }
+
+                    if (injectionPointField != null) {
+                        Object injectionPoint = beanManager.getInjectableReference(
+                                beanManager.createInjectionPoint(injectionPointField), creationalContext);
+                        if (injectionPoint != null) {
+                            cockatoo.setInjectionPoint((InjectionPoint) injectionPoint);
+                        }
+                    }
+                } catch (Exception e) {
+                    logger.log("InjectionPoint is not available: {0}", e.getMessage());
+                }
+                return cockatoo;
             }
 
             public void destroy(Cockatoo instance, CreationalContext<Cockatoo> creationalContext) {

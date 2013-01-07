@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -44,6 +45,15 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     public void testBeanIsAdded() {
         assert getBeans(Cockatoo.class).size() == 1;
         assert getInstanceByType(Cockatoo.class).getName().equals("Billy");
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "", id = "") })
+    public void testCustomDependentBeanInjectionPointIsAvailable(Cage cage) {
+        assertNotNull(cage);
+        assertNotNull(cage.getCockatoo());
+        assertNotNull(cage.getCockatoo().getInjectionPoint());
+        assertEquals(cage.getCockatoo().getInjectionPoint().getBean().getBeanClass(), Cage.class);
     }
 
     @Test
