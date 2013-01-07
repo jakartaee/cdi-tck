@@ -177,7 +177,7 @@
       <para>
          The question is, how does the JBoss Test Harness negotiate with the
          container to execute the test when TestNG is being invoked locally?
-         Technially the mechanism is pluggable, but JBoss Test Harness provides
+         Technically the mechanism is pluggable, but JBoss Test Harness provides
          a default implementation that uses HTTP communication that you will
          likely use. Here's how the default implementation works.
       </para>
@@ -217,7 +217,7 @@
          either html or a serialized object, depending on the value of the
          <literal>outputMode</literal>
          request parameter that was passed to the servlet. Once the result has
-         been transfered to the client-side TestNG, TestNG wraps up the run of
+         been transferred to the client-side TestNG, TestNG wraps up the run of
          the test as though it had been executed in the same JVM.
       </para>
       <para>
@@ -272,7 +272,7 @@
          </literal> property. The default implementation passes on the original
          exception unchanged. The implementation for JBoss AS used with the CDI
          TCK, on the other hand, deciphers the exception thrown by the JBoss
-         deployer and converts it to one of the catagory exceptions defined in
+         deployer and converts it to one of the category exceptions defined in
          the CDI TCK API.
       </para>
       <para>

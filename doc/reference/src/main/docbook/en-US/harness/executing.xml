@@ -22,7 +22,7 @@
          directory in the Weld distribution. The dependencies of the TCK
          runner project for Weld are listed in
          <xref linkend="tck-runner-dependencies" />. You must also pull in
-         the transitve dependencies of these projects.
+         the transitive dependencies of these projects.
       </para>
       <table frame="all" id="tck-runner-dependencies" title="CDI TCK Runner dependencies">
          <title>Weld JBoss TCK Runner Dependencies</title>
@@ -218,7 +218,7 @@
       </para>
       <para>
          Once the artifact is written to disk, you have an option of manually
-         deploying it to the container. You can execute the tests in the artfact
+         deploying it to the container. You can execute the tests in the artifact
          by requesting the context path of the application in the browser. If
          you want to execute an individual test method, specify the method name
          in the
