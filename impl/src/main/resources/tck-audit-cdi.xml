@@ -6486,13 +6486,16 @@
         <group>
             <text>The interface |javax.enterprise.inject.spi.AnnotatedType| exposes the |Class| object and members.</text>
             <assertion id="aaa">
-                <text>Test that |getConstructors()| returns all the constructors declared for the type.</text>
+                <text>Test that |getConstructors()| returns all default-access, public, protected or private constructors declared for the type.</text>
             </assertion>
             <assertion id="aab">
-                <text>Test that |getMethods()| returns all the methods declared on the type and those declared on any supertypes.</text>
+                <text>Test that |getMethods()| returns all default-access, public, protected or private methods declared on the type and those declared on any supertypes.</text>
+            </assertion>
+            <assertion id="aad">
+                <text>The container should call |AnnotatedMethod.getJavaMember().getDeclaringClass()| to determine the type in the type hierarchy that declared the method.</text>
             </assertion>
             <assertion id="aac">
-                <text>Test that |getFields()| returns all the fields declared on the type and those declared on any supertypes.</text>
+                <text>Test that |getFields()| returns all default-access, public, protected or private fields declared on the type and those declared on any supertypes.</text>
             </assertion>
         </group>
 
@@ -6523,10 +6526,6 @@
             </assertion>
 
         </group>
-
-        <assertion id="ga">
-            <text>If the |Annotated| represents a type, then the annotations returned should include all annotations on the type and it's super types regardless of whether the annotation is marked |@Inherited|.</text>
-        </assertion>
 
         <group>
             <text>The container must use the operations of |Annotated| and its subinterfaces to discover program element types and annotations. The container must not directly call the Java Reflection API. In particular, the container must call |Annotated.getBaseType()| to determine the type of an injection point, event parameter or disposed parameter, call |Annotated.getTypeClosure()| to determine the bean types of any kind of bean, call |Annotated.getAnnotations()| to determine the scope, qualifiers, stereotypes and interceptor bindings of a bean, call |Annotated.isAnnotationPresent()| and |Annotated.getAnnotation()| to read any bean annotations defined by this specification, and call

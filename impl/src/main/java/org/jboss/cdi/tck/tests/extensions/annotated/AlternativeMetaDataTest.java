@@ -17,9 +17,12 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.reflect.Modifier;
+import java.util.Date;
 import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -82,13 +85,13 @@ public class AlternativeMetaDataTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.4", id = "f"), @SpecAssertion(section = "11.4", id = "ga") })
+    @SpecAssertions({ @SpecAssertion(section = "11.4", id = "f") })
     public void testGetAnnotations() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(ClassD.class);
         assert annotatedType.getAnnotations().size() == 2;
         assert annotationSetMatches(annotatedType.getAnnotations(), RequestScoped.class, Tame.class);
         AnnotatedType<WildCat> annotatedWildCatType = getCurrentManager().createAnnotatedType(WildCat.class);
-        assert annotationSetMatches(annotatedWildCatType.getAnnotations(), RequestScoped.class, Felid.class);
+        assertAnnotationSetMatches(annotatedWildCatType.getAnnotations(), RequestScoped.class);
     }
 
     @Test
@@ -104,10 +107,24 @@ public class AlternativeMetaDataTest extends AbstractTest {
     public void testConstructors() {
         AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
         Set<AnnotatedConstructor<WildCat>> constructors = annotatedType.getConstructors();
-        assertEquals(constructors.size(), 1);
-        Class<?>[] constructorParams = constructors.iterator().next().getJavaMember().getParameterTypes();
+        assertEquals(constructors.size(), 4);
+        for (AnnotatedConstructor<WildCat> annotatedConstructor : constructors) {
+            if (Modifier.isPrivate(annotatedConstructor.getJavaMember().getModifiers())) {
+                verifyConstructor(annotatedConstructor, Integer.class);
+            } else if (Modifier.isPublic(annotatedConstructor.getJavaMember().getModifiers())) {
+                verifyConstructor(annotatedConstructor, String.class);
+            } else if (Modifier.isProtected(annotatedConstructor.getJavaMember().getModifiers())) {
+                verifyConstructor(annotatedConstructor, Cat.class);
+            } else {
+                verifyConstructor(annotatedConstructor, Date.class);
+            }
+        }
+    }
+
+    private void verifyConstructor(AnnotatedConstructor<WildCat> annotatedConstructor, Class<?> paramClass) {
+        Class<?>[] constructorParams = annotatedConstructor.getJavaMember().getParameterTypes();
         assertEquals(constructorParams.length, 1);
-        assertEquals(constructorParams[0], String.class);
+        assertEquals(constructorParams[0], paramClass);
     }
 
     @Test
@@ -128,8 +145,8 @@ public class AlternativeMetaDataTest extends AbstractTest {
     public void testFields() {
         AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
         Set<AnnotatedField<? super WildCat>> fields = annotatedType.getFields();
-        String[] names = new String[] { "age", "name" };
-        assertEquals(fields.size(), 2);
+        String[] names = new String[] { "age", "name", "publicName", "isOld" };
+        assertEquals(fields.size(), 4);
         for (AnnotatedField<? super WildCat> field : fields) {
             // Just simple test for field name
             assertTrue(arrayContains(names, field.getJavaMember().getName()));

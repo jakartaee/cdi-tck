@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
+import java.util.Date;
+
 import javax.enterprise.context.RequestScoped;
 
 @RequestScoped
@@ -23,11 +25,23 @@ public class WildCat extends Cat {
 
     private String name;
 
+    public String publicName;
+
     public WildCat(String name) {
         this.name = name;
     }
 
-    public void bite() {
+    @SuppressWarnings("unused")
+    private WildCat(Integer age) {
+    }
+
+    protected WildCat(Cat parent) {
+    }
+
+    WildCat(Date dateOfBirth) {
+    }
+
+    void bite() {
     }
 
     public String getName() {

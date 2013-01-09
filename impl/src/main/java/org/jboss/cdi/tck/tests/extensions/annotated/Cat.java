@@ -21,6 +21,8 @@ public class Cat {
 
     protected int age = 0;
 
+    Boolean isOld;
+
     public Cat() {
     }
 
@@ -31,7 +33,8 @@ public class Cat {
     protected void yowl() {
     }
 
-    public void jump() {
+    @SuppressWarnings("unused")
+    private void jump() {
     }
 
 }
