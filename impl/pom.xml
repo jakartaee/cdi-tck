@@ -211,7 +211,7 @@
                             <!-- compilerArguments> <Aapt.flag1>-AoutputDir=${basedir}/../target/</Aapt.flag1> </compilerArguments -->
                             <compilerArguments>
                                 <AoutputDir>${basedir}/../target/</AoutputDir>
-                                <AgeneratedSourcesOutputDir>${basedir}/target/generated-sources</AgeneratedSourcesOutputDir>
+                                <AgeneratedSourcesOutputDir>${basedir}/src/generated/java</AgeneratedSourcesOutputDir>
                                 <AgeneratedSourcesPackage>org.jboss.cdi.tck</AgeneratedSourcesPackage>
                             </compilerArguments>
                             <compilerArgument>-AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml</compilerArgument>
@@ -261,7 +261,7 @@
                                 </goals>
                                 <configuration>
                                     <sources>
-                                        <source>target/generated-sources</source>
+                                        <source>${basedir}/src/generated/java</source>
                                     </sources>
                                 </configuration>
                             </execution>

@@ -34,6 +34,7 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.api.Configuration;
+import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.impl.ConfigurationImpl;
 import org.jboss.cdi.tck.impl.MockCreationalContext;
@@ -642,6 +643,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
             if (!isAsClientMode()) {
                 withClass(AbstractTest.class);
+                withClass(Sections.class);
                 withClass(TestGroups.class);
             }
         }
