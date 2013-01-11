@@ -39,7 +39,7 @@ public class PrivateFinalMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.4.1", id = "bda")
+    @SpecAssertion(section = "3.15", id = "bda")
     public void testClassWithPrivateFinalMethodCanBeProxied() {
         assertEquals(getCurrentManager().getBeans(Whale.class).size(), 1);
     }

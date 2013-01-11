@@ -43,7 +43,7 @@ public class StaticFinalMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.4.1", id = "bca")
+    @SpecAssertion(section = "3.15", id = "bca")
     public void testClassWithStaticFinalMethodCanBeProxied() {
         tunaFarm.sayHello();
     }

@@ -22,8 +22,8 @@
             <groupId>org.jboss.cdi.tck</groupId>
             <artifactId>cdi-tck-api</artifactId>
         </dependency>
-        
-         <dependency>
+
+        <dependency>
             <groupId>org.jboss.cdi.tck</groupId>
             <artifactId>cdi-tck-ext-lib</artifactId>
         </dependency>
@@ -208,11 +208,11 @@
                             <source>1.6</source>
                             <target>1.6</target>
                             <!-- this was a really ugly workaround for passing multiple arguments to the annotation processor tool, see MCOMPILER-75 and MCOMPILER-135 for more details -->
-                            <!-- compilerArguments>
-                                <Aapt.flag1>-AoutputDir=${basedir}/../target/</Aapt.flag1>
-                            </compilerArguments-->
+                            <!-- compilerArguments> <Aapt.flag1>-AoutputDir=${basedir}/../target/</Aapt.flag1> </compilerArguments -->
                             <compilerArguments>
                                 <AoutputDir>${basedir}/../target/</AoutputDir>
+                                <AgeneratedSourcesOutputDir>${basedir}/target/generated-sources</AgeneratedSourcesOutputDir>
+                                <AgeneratedSourcesPackage>org.jboss.cdi.tck</AgeneratedSourcesPackage>
                             </compilerArguments>
                             <compilerArgument>-AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml</compilerArgument>
                         </configuration>
@@ -245,6 +245,24 @@
                                             <classifier>coverage-int</classifier>
                                         </artifact>
                                     </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>add-source</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>add-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>target/generated-sources</source>
+                                    </sources>
                                 </configuration>
                             </execution>
                         </executions>

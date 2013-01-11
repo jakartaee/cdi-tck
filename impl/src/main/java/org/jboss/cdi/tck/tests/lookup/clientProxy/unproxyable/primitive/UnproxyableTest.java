@@ -37,7 +37,7 @@ public class UnproxyableTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.4.1", id = "ca")
+    @SpecAssertion(section = "3.15", id = "ca")
     public void testInjectionPointWithUnproxyableTypeWhichResolvesToNormalScopedBean() {
     }
 

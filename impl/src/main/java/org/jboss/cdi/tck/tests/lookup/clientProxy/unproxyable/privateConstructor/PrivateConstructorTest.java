@@ -40,7 +40,7 @@ public class PrivateConstructorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.4.1", id = "aa")
+    @SpecAssertion(section = "3.15", id = "aa")
     public void testClassWithPrivateConstructor() {
     }
 }

@@ -59,7 +59,7 @@ public class ClientProxyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.4.2", id = "aa")
+    @SpecAssertion(section = "5.4.1", id = "aa")
     public void testClientProxyInvocation() {
         TunedTuna tuna = getInstanceByType(TunedTuna.class);
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
@@ -67,7 +67,7 @@ public class ClientProxyTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, expectedExceptions = { ContextNotActiveException.class, IllegalStateException.class })
-    @SpecAssertions({ @SpecAssertion(section = "5.4.2", id = "ab"), @SpecAssertion(section = "6.5.4", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "5.4.1", id = "ab"), @SpecAssertion(section = "6.5.4", id = "a") })
     public void testInactiveScope() throws Exception {
         assert getCurrentConfiguration().getContexts().getRequestContext().isActive();
         Context ctx = getCurrentConfiguration().getContexts().getRequestContext();

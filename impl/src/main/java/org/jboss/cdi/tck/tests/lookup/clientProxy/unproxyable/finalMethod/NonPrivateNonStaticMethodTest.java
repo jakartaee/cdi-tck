@@ -38,7 +38,7 @@ public class NonPrivateNonStaticMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.4.1", id = "bba")
+    @SpecAssertion(section = "3.15", id = "bba")
     public void testClassWithPublicFinalMethodCannotBeProxied() {
     }
 }

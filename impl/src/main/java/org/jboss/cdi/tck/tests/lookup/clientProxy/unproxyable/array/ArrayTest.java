@@ -41,7 +41,7 @@ public class ArrayTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.4.1", id = "da"), @SpecAssertion(section = "2.8", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "3.15", id = "da"), @SpecAssertion(section = "2.8", id = "b") })
     public void testInjectionPointWithArrayType() {
     }
 }

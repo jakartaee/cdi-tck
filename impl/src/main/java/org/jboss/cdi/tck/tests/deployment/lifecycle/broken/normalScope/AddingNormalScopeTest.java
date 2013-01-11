@@ -44,7 +44,7 @@ public class AddingNormalScopeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.1", id = "ac"), @SpecAssertion(section = "5.4.1", id = "baa") })
+    @SpecAssertions({ @SpecAssertion(section = "11.5.1", id = "ac"), @SpecAssertion(section = "3.15", id = "baa") })
     public void testAddingScopeType() {
     }
 

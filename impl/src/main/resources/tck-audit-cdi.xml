@@ -1,8 +1,8 @@
-<specification xmlns="http://jboss.com/products/weld/tck/audit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd" name="JSR 346: Contexts and Dependency Injection for Java EE 1.1" id="cdi" version="20091101">
+<specification xmlns="http://jboss.com/products/weld/tck/audit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd" name="JSR 346: Contexts and Dependency Injection for Java EE 1.1" id="cdi" version="20091101" generateSectionIds="true" generateSectionClass="true">
 
-    <section id="1" title="Architecture"/>
-    
-    <section id="2" title="Concepts">
+    <section id="architecture" title="Architecture" level="1" />
+
+    <section id="concepts" title="Concepts" level="1">
 
         <assertion id="a">
             <text>A bean comprises of a (nonempty) set of bean types.</text>
@@ -34,10 +34,10 @@
         </assertion>
     </section>
 
-    <section id="2.1" title="Functionality provided by the container to the bean">
+    <section id="capabilities" title="Functionality provided by the container to the bean" level="2">
     </section>
 
-    <section id="2.2" title="Bean types">
+    <section id="bean_types" title="Bean types" level="2">
 
         <assertion id="a">
             <text>A bean may have multiple bean types.</text>
@@ -49,7 +49,7 @@
 
     </section>
 
-    <section id="2.2.1" title="Legal bean types">
+    <section id="legal_bean_types" title="Legal bean types" level="3">
         <assertion id="a">
             <text>A bean type may be an interface.</text>
         </assertion>
@@ -99,7 +99,7 @@
         </assertion>
     </section>
 
-    <section id="2.2.2" title="Restricting the bean types of a bean">
+    <section id="restricting_bean_types" title="Restricting the bean types of a bean" level="3">
         <group>
             <text>The bean types of a bean may be restricted by annotating the bean class or producer method or field with the annotation |@javax.enterprise.inject.Typed|. When a |@Typed| annotation is explicitly specified, only the types whose classes are explicitly listed using the |value| member, together with |java.lang.Object| are bean types of the bean.</text>
             <assertion id="a">
@@ -142,17 +142,17 @@
         </group>
     </section>
 
-    <section id="2.2.3" title="Typecasting between bean types">
+    <section id="typecasting_between_bean_types" title="Typecasting between bean types" level="3">
         <assertion id="a">
             <text>A client of a bean may typecast its contextual reference to a bean to any bean type of the bean which is a Java interface. However, the client may not in general typecast its contextual reference to an arbitrary concrete bean type of the bean.</text>
         </assertion>
     </section>
 
-    <section id="2.3" title="Qualifiers">
+    <section id="qualifiers" title="Qualifiers" level="2">
 
     </section>
 
-    <section id="2.3.1" title="Built-in qualifier types">
+    <section id="builtin_qualifiers" title="Built-in qualifier types" level="3">
 
         <assertion id="a0">
             <text>Every bean has the built-in qualifier |@Any|, even if it does not explicitly declare this qualifier, ~except for the special |@New| qualified beans defined in Section 3.14, "@New qualified beans"~.</text>
@@ -168,7 +168,7 @@
         </assertion>
     </section>
 
-    <section id="2.3.2" title="Defining new qualifier types">
+    <section id="defining_qualifier_types" title="Defining new qualifier types" level="3">
         <assertion id="aa" testable="false">
             <text>A qualifier type is a Java annotation defined as |@Target({METHOD, FIELD, PARAMETER, TYPE})|~ and |@Retention(RUNTIME)|~.</text>
         </assertion>
@@ -188,7 +188,7 @@
         </assertion>
     </section>
 
-    <section id="2.3.3" title="Declaring the qualifiers of a bean">
+    <section id="declaring_bean_qualifiers" title="Declaring the qualifiers of a bean" level="3">
         <group>
             <text>The qualifiers of a bean are declared by annotating the bean class or producer method or field with the qualifier types.</text>
 
@@ -210,7 +210,7 @@
         </assertion>
     </section>
 
-    <section id="2.3.4" title="Specifying qualifiers of an injected field">
+    <section id="injected_field_qualifiers" title="Specifying qualifiers of an injected field" level="3">
         <assertion id="a">
             <text>Qualifier types may be applied to injected fields (see Section 3.8, "Injected fields") to determine the bean that is injected, according to the rules of typesafe resolution defined in Section 5.3, "Typesafe resolution".</text>
         </assertion>
@@ -220,7 +220,7 @@
         </assertion>
     </section>
 
-    <section id="2.3.5" title="Specifying qualifiers of a method or constructor parameter">
+    <section id="method_constructor_parameter_qualifiers" title="Specifying qualifiers of a method or constructor parameter" level="3">
         <group>
             <text>Qualifier types may be applied to parameters of producer methods, initializer methods, disposer methods, observer methods or bean constructors (see Chapter 3, Bean implementation) to determine the bean instance that is passed when the method is called by the container.</text>
 
@@ -246,7 +246,7 @@
         </group>
     </section>
 
-    <section id="2.4" title="Scopes">
+    <section id="scopes" title="Scopes" level="2">
         <assertion id="a">
             <text>All beans have a scope.</text>
         </assertion>
@@ -261,7 +261,7 @@
         </assertion>
     </section>
 
-    <section id="2.4.1" title="Built-in scope types">
+    <section id="builtin_scopes" title="Built-in scope types" level="3">
 
         <group>
 
@@ -295,7 +295,7 @@
 
     </section>
 
-    <section id="2.4.2" title="Defining new scope types">
+    <section id="defining_new_scope_type" title="Defining new scope types" level="3">
         <assertion id="aa">
             <text>A scope type is a Java annotation defined as |@Target({TYPE, METHOD, FIELD})|~ and |@Retention(RUNTIME)|~.</text>
         </assertion>
@@ -315,7 +315,7 @@
 
     </section>
 
-    <section id="2.4.3" title="Declaring the bean scope">
+    <section id="declaring_bean_scope" title="Declaring the bean scope" level="3">
         <assertion id="a">
             <text>The scope of a bean is defined by annotating the bean class or producer method or field with a scope type.</text>
         </assertion>
@@ -329,7 +329,7 @@
         </assertion>
     </section>
 
-    <section id="2.4.4" title="Default scope">
+    <section id="default_scope" title="Default scope" level="3">
         <assertion id="aa">
             <text>When no scope is explicitly declared by annotating the bean class or producer method or field the scope of a bean is defaulted.</text>
         </assertion>
@@ -353,17 +353,17 @@
         </assertion>
     </section>
 
-    <section id="2.5" title="Bean EL names">
+    <section id="names" title="Bean names" level="2">
 
         <assertion id="a">
-            <text>A valid bean EL name is a period-separated list of valid EL identifiers</text>
+            <text>A valid bean name is a period-separated list of valid EL identifiers</text>
         </assertion>
     </section>
 
-    <section id="2.5.1" title="Declaring the bean EL name">
+    <section id="declaring_bean_name" title="Declaring the bean name" level="3">
 
         <group>
-            <text>To specify the EL name of a bean, the qualifier |@javax.inject.Named| is applied to the bean class or producer method or field.</text>
+            <text>To specify the name of a bean, the qualifier |@javax.inject.Named| is applied to the bean class or producer method or field.</text>
 
             <assertion id="a">
                 <text>Test with a bean class.</text>
@@ -383,7 +383,7 @@
         </assertion>
     </section>
 
-    <section id="2.5.2" title="Default bean names">
+    <section id="default_name" title="Default bean names" level="3">
 
         <group>
             <text>A default name must be assigned by the container when a bean class or producer method or field of a bean declares a |@Named| annotation and no bean name is explicitly specified by the |value| member.</text>
@@ -417,7 +417,7 @@
 
     </section>
 
-    <section id="2.5.3" title="Beans with no name">
+    <section id="beans_with_no_name" title="Beans with no name" level="3">
 
         <assertion id="a">
             <text>If |@Named| is not declared by the bean, nor by its stereotypes, a bean has no name.</text>
@@ -428,13 +428,13 @@
         </assertion>
     </section>
 
-    <section id="2.6" title="Alternatives">
+    <section id="alternatives" title="Alternatives" level="2">
         <assertion id="a">
             <text>An alternative is a bean that must be explicitly declared in the |beans.xml| file if it should be available for lookup, injection or EL resolution.</text>
         </assertion>
     </section>
 
-    <section id="2.6.1" title="Declaring an alternative">
+    <section id="declaring_alternative" title="Declaring an alternative" level="3">
 
         <group>
             <text>An alternative may be declared by annotating the bean class or producer method or field with the |@Alternative| annotation.</text>
@@ -474,7 +474,7 @@
 
     </section>
 
-    <section id="2.7" title="Stereotypes">
+    <section id="stereotypes" title="Stereotypes" level="2">
 
         <assertion id="a">
             <text>A stereotype may specify that all beans with the stereotype have defaulted bean EL names.</text>
@@ -503,7 +503,7 @@
 
     </section>
 
-    <section id="2.7.1" title="Defining new stereotypes">
+    <section id="defining_new_stereotype" title="Defining new stereotypes" level="3">
         <group>
             <text>A beans stereotype is a Java annotation defined as |@Target({TYPE, METHOD, FIELD})|, |@Target(TYPE)|, |@Target(METHOD)|, |@Target(FIELD)| or |@Target({METHOD, FIELD})| and |@Retention(RUNTIME)|.</text>
 
@@ -534,7 +534,7 @@
         </assertion>
     </section>
 
-    <section id="2.7.1.1" title="Declaring the default scope for a stereotype">
+    <section id="stereotype_default_scope" title="Declaring the default scope for a stereotype" level="4">
 
         <group>
             <text>The default scope of a stereotype is defined by annotating the stereotype with a scope type. A stereotype may declare at most one scope. If a stereotype declares more than one scope, the container automatically detects the problem and treats it as a definition error.</text>
@@ -550,7 +550,7 @@
 
     </section>
 
-    <section id="2.7.1.2" title="Specifying interceptor bindings for a stereotype">
+    <section id="specify_stereotype_interceptor_bindings" title="Specifying interceptor bindings for a stereotype" level="4">
         <assertion id="a0">
             <text>The interceptor bindings of a stereotype are defined by annotating the stereotype with the interceptor binding types.</text>
         </assertion>
@@ -568,7 +568,7 @@
         </assertion>
     </section>
 
-    <section id="2.7.1.3" title="Declaring a @Named stereotype">
+    <section id="named_stereotype" title="Declaring a @Named stereotype" level="4">
         <assertion id="aa">
             <text>A stereotype may declare an empty |@Named| annotation, which specifies that every bean with the stereotype has a defaulted name when a name is not explicitly specified by the bean.</text>
         </assertion>
@@ -592,13 +592,13 @@
 
     </section>
 
-    <section id="2.7.1.4" title="Declaring an @Alternative stereotype">
+    <section id="alternative_stereotype" title="Declaring an @Alternative stereotype" level="4">
         <assertion id="a">
             <text>A stereotype may declare an |@Alternative| annotation, which specifies that every bean with the stereotype is an alternative.</text>
         </assertion>
     </section>
 
-    <section id="2.7.1.5" title="Stereotypes with additional stereotypes">
+    <section id="stereotypes_with_additional_stereotypes" title="Stereotypes with additional stereotypes" level="4">
         <assertion id="a">
             <text>A stereotype may declare other stereotypes.</text>
         </assertion>
@@ -614,7 +614,7 @@
 
     </section>
 
-    <section id="2.7.2" title="Declaring the stereotypes for a bean">
+    <section id="declaring_stereotypes" title="Declaring the stereotypes for a bean" level="3">
         <group>
             <text>Stereotype annotations may be applied to a bean class or producer method or field.</text>
 
@@ -640,14 +640,14 @@
         </assertion>
     </section>
 
-    <section id="2.7.3" title="Built-in stereotypes">
+    <section id="builtin_stereotypes" title="Built-in stereotypes" level="3">
         <assertion id="aa" testable="false">
             <text>The built-in stereotype |@javax.enterprise.inject.Model| is intended for use with beans that define the model layer of an MVC web application architecture such as JSF.</text>
             <note>Tested by API signature test</note>
         </assertion>
     </section>
 
-    <section id="2.8" title="Problems detected automatically by the container">
+    <section id="exceptions" title="Problems detected automatically by the container" level="2">
         <assertion id="a" testable="false">
             <text>When the application violates a rule defined by this specification, the container automatically detects the problem. There are three kinds of problem - definition errors occur when a single bean definition violates the rules of this specification, deployment problems occur when there are problems resolving dependencies, or inconsistent specialization, in a particular deployment, and exceptions occur at runtime.</text>
             <note>Generalization</note>
@@ -679,11 +679,14 @@
 
     </section>
 
-    <section id="3" title="Programming model">
+    <section id="priorities" title="Priority ordering" level="2">
+    </section>
+
+    <section id="implementation" title="Programming model" level="1">
 
     </section>
 
-    <section id="3.1" title="Managed beans">
+    <section id="managed_beans" title="Managed beans" level="2">
 
         <assertion id="a">
             <text>If the bean class of a managed bean is annotated with both the |@Interceptor| and |@Decorator| stereotypes, the container automatically detects the problem and treats it as a definition error.</text>
@@ -707,7 +710,7 @@
         </assertion>
     </section>
 
-    <section id="3.1.1" title="Which Java classes are managed beans?">
+    <section id="what_classes_are_beans" title="Which Java classes are managed beans?" level="3">
         <assertion id="b">
             <text>A top-level Java class is not a managed bean if it is a non-static inner class.</text>
         </assertion>
@@ -750,14 +753,14 @@
         </assertion>
     </section>
 
-    <section id="3.1.2" title="Bean types of a managed bean">
+    <section id="managed_bean_types" title="Bean types of a managed bean" level="3">
 
         <assertion id="a">
             <text>The unrestricted set of bean types for a managed bean contains the bean class, every superclass and all interfaces it implements directly or indirectly.</text>
         </assertion>
     </section>
 
-    <section id="3.1.3" title="Declaring a managed bean">
+    <section id="declaring_managed_bean" title="Declaring a managed bean" level="3">
         <assertion id="a">
             <text>A managed bean with a constructor that takes no parameters does not require any special annotations</text>
         </assertion>
@@ -791,7 +794,7 @@
         </assertion>
     </section>
 
-    <section id="3.1.4" title="Specializing a managed bean">
+    <section id="specialize_managed_bean" title="Specializing a managed bean" level="3">
         <group>
             <text>If a bean class of a managed bean X is annotated |@Specializes|, then the bean class of X must directly extend the bean class of another managed bean Y. Then X directly specializes Y, as defined in Section 4.3, "Specialization".</text>
 
@@ -829,13 +832,13 @@
         </group>
     </section>
 
-    <section id="3.1.5" title="Default name for a managed bean">
+    <section id="managed_bean_name" title="Default bean name for a managed bean" level="3">
         <assertion id="a">
             <text>The default name for a managed bean is the unqualified class name of the bean class, after converting the first character to lower case</text>
         </assertion>
     </section>
 
-    <section id="3.2" title="Session beans">
+    <section id="session_beans" title="Session beans" level="2">
 
         <assertion id="aa">
             <text>A session bean is a bean that is implemented by a session bean with an EJB 3.x client view that is not annotated with |@Vetoed|.</text>
@@ -881,7 +884,7 @@
         </assertion>
     </section>
 
-    <section id="3.2.1" title="EJB remove methods of session beans">
+    <section id="session_bean_ejb_remove_method" title="EJB remove methods of session beans" level="3">
         <assertion id="a">
             <text>If a session bean is a stateful session bean, and the scope is |@Dependent|, the application may call any EJB remove method of a contextual instance of the session bean.</text>
         </assertion>
@@ -899,7 +902,7 @@
         </assertion>
     </section>
 
-    <section id="3.2.2" title="Bean types of a session bean">
+    <section id="session_bean_types" title="Bean types of a session bean" level="3">
         <assertion id="aa">
             <text>The unrestricted set of bean types for a session bean contains all local interfaces of the bean and their superinterfaces.</text>
         </assertion>
@@ -917,7 +920,7 @@
         </assertion>
     </section>
 
-    <section id="3.2.3" title="Declaring a session bean">
+    <section id="declaring_session_bean" title="Declaring a session bean" level="3">
         <assertion id="aa">
             <text>A session bean does not require any special annotations apart from the component-defining annotation (or XML declaration) required by the EJB specification.</text>
         </assertion>
@@ -947,7 +950,7 @@
         </assertion>
     </section>
 
-    <section id="3.2.4" title="Specializing a session bean">
+    <section id="specialize_session_bean" title="Specializing a session bean" level="3">
         <assertion id="aa">
             <text>If a bean class of a session bean X is annotated |@Specializes|, then the bean class of X must directly extend the bean class of another session bean Y. Then X directly specializes Y, as defined in Section 4.3 "Specialization".</text>
         </assertion>
@@ -957,13 +960,13 @@
         </assertion>
     </section>
 
-    <section id="3.2.5" title="Default name for a session bean">
+    <section id="session_bean_name" title="Default bean name for a session bean" level="3">
         <assertion id="a">
             <text>The default name for a session bean is the unqualified class name of the session bean class, after converting the first character to lower case.</text>
         </assertion>
     </section>
 
-    <section id="3.3" title="Producer methods">
+    <section id="producer_method" title="Producer methods" level="2">
         <assertion id="aa">
             <text>A producer method must be a default-access, public, protected or private, non-abstract method of a managed bean class or session bean class.</text>
         </assertion>
@@ -1017,7 +1020,7 @@
         </assertion>
     </section>
 
-    <section id="3.3.1" title="Bean types of a producer method">
+    <section id="producer_method_types" title="Bean types of a producer method" level="3">
         <assertion id="a">
             <text>If the return type of a producer method is an interface, the unrestricted set of bean types contains the return type, all interfaces it extends directly or indirectly and |java.lang.Object|</text>
         </assertion>
@@ -1039,7 +1042,7 @@
         </assertion>
     </section>
 
-    <section id="3.3.2" title="Declaring a producer method">
+    <section id="declaring_producer_method" title="Declaring a producer method" level="3">
         <assertion id="a">
             <text>A producer method may be declared by annotating a method with the |@javax.enterprise.inject.Produces| annotation</text>
         </assertion>
@@ -1097,7 +1100,7 @@
         </assertion>
     </section>
 
-    <section id="3.3.3" title="Specializing a producer method">
+    <section id="specialize_producer_method" title="Specializing a producer method" level="3">
         <assertion id="aa">
             <text>If a producer method X is annotated |@Specializes|, then it must be non-static and directly override another producer method Y. Then X directly specializes Y, as defined in Section 4.3 "Specialization".</text>
         </assertion>
@@ -1111,7 +1114,7 @@
         </assertion>
     </section>
 
-    <section id="3.3.4" title="Default name for a producer method">
+    <section id="producer_method_name" title="Default bean name for a producer method" level="3">
         <group>
             <text>The default name for a producer method is the method name, unless the method follows the JavaBeans property getter naming convention, in which case the default name is the JavaBeans property name</text>
             <assertion id="a">
@@ -1123,7 +1126,7 @@
         </group>
     </section>
 
-    <section id="3.4" title="Producer fields">
+    <section id="producer_field" title="Producer fields" level="2">
         <assertion id="aa">
             <text>A producer field must be a default-access, public, protected or private, field of a managed bean class ~or session bean class~</text>
             <note>Just test that a producer field on these works</note>
@@ -1184,7 +1187,7 @@
         </assertion>
     </section>
 
-    <section id="3.4.1" title="Bean types of a producer field">
+    <section id="producer_field_types" title="Bean types of a producer field" level="3">
         <assertion id="a">
             <text>The bean types of a producer field depend upon the field type. If the field type is an interface, the unrestricted set of bean types contains the field type, all interfaces it extends directly or indirectly and |java.lang.Object|.</text>
         </assertion>
@@ -1206,7 +1209,7 @@
         </assertion>
     </section>
 
-    <section id="3.4.2" title="Declaring a producer field">
+    <section id="declaring_producer_field" title="Declaring a producer field" level="3">
         <assertion id="a">
             <text>A producer field may be declared by annotating a field with the |@javax.enterprise.inject.Produces| annotation.</text>
         </assertion>
@@ -1244,13 +1247,13 @@
         </assertion>
     </section>
 
-    <section id="3.4.3" title="Default name for a producer field">
+    <section id="producer_field_name" title="Default bean name for a producer field" level="3">
         <assertion id="a">
             <text>The default name for a producer field is the field name</text>
         </assertion>
     </section>
 
-    <section id="3.5" title="Disposer methods">
+    <section id="disposer_method" title="Disposer methods" level="2">
 
         <assertion id="aa">
             <text>A disposer method must be a default-access, public, protected or private, non-abstract method of a managed bean class or session bean class.</text>
@@ -1273,7 +1276,7 @@
         </assertion>
     </section>
 
-    <section id="3.5.1" title="Disposed parameter of a disposer method">
+    <section id="disposer_method_disposed_parameter" title="Disposed parameter of a disposer method" level="3">
         <assertion id="a">
             <text>Each disposer method must have exactly one disposed parameter, of the same type as the corresponding producer method return type or producer field type.</text>
         </assertion>
@@ -1287,7 +1290,7 @@
         </assertion>
     </section>
 
-    <section id="3.5.2" title="Declaring a disposer method">
+    <section id="declaring_disposer_method" title="Declaring a disposer method" level="3">
         <assertion id="a">
             <text>A disposer method may be declared by annotating a parameter |@javax.enterprise.inject.Disposes|. That parameter is the disposed parameter</text>
         </assertion>
@@ -1329,7 +1332,7 @@
         </assertion>
     </section>
 
-    <section id="3.5.3" title="Disposer method resolution">
+    <section id="disposer_method_resolution" title="Disposer method resolution" level="3">
         <assertion id="aa">
             <text>A disposer method is bound to a producer method if the producer method is declared by the same bean class as the disposer method, and the producer method is assignable to the disposed parameter, according to the rules of typesafe resolution defined in Section 5.2, "Typesafe resolution".</text>
         </assertion>
@@ -1347,7 +1350,7 @@
         </assertion>
     </section>
 
-    <section id="3.6" title="Resources">
+    <section id="resources" title="Resources" level="2">
         <assertion id="ka" testable="false">
             <text>The container is not required to support resources with scope other than |@Dependent|.</text>
             <note>Statement about non-portable behavior</note>
@@ -1359,7 +1362,7 @@
         </assertion>
     </section>
 
-    <section id="3.6.1" title="Declaring a resource">
+    <section id="declaring_resource" title="Declaring a resource" level="3">
         <assertion id="aa" testable="false">
             <text>A resource may be declared by specifying a Java EE component environment injection annotation as part of a producer field declaration.</text>
             <note>Introductory text for the folloiwing assertions</note>
@@ -1404,7 +1407,7 @@
 
     </section>
 
-    <section id="3.6.2" title="Bean types of a resource">
+    <section id="resource_types" title="Bean types of a resource" level="3">
         <group>
             <text>The unrestricted set of bean types of a resource is determined by the declared type of the producer field, as specified by Section 3.4.1, "Bean types of a producer field".</text>
             <assertion id="aa">
@@ -1425,7 +1428,7 @@
         </group>
     </section>
 
-    <section id="3.7" title="Additional built-in beans">
+    <section id="additional_builtin_beans" title="Additional built-in beans" level="2">
         <assertion id="a">
             <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.transaction.UserTransaction|, allowing injection of a reference to the JTA |UserTransaction|.</text>
         </assertion>
@@ -1451,13 +1454,13 @@
         </assertion>
     </section>
 
-    <section id="3.8" title="Bean constructors">
+    <section id="bean_constructors" title="Bean constructors" level="2">
         <assertion id="a">
             <text>When the container instantiates a bean, it calls the bean constructor. The bean constructor is a default-access, public, protected or private constructor of the bean class.</text>
         </assertion>
     </section>
 
-    <section id="3.8.1" title="Declaring a bean constructor">
+    <section id="declaring_bean_constructor" title="Declaring a bean constructor" level="3">
         <group>
             <text>The bean constructor may be identified by annotating the constructor |@Inject|</text>
             <assertion id="aa">
@@ -1494,7 +1497,7 @@
         </assertion>
     </section>
 
-    <section id="3.9" title="Injected fields">
+    <section id="injected_fields" title="Injected fields" level="2">
         <group>
             <text>An injected field is a non-static, non-final field of a bean class, a non-static, non-final field of an enum, or of any Java EE component class supporting injection.</text>
 
@@ -1514,7 +1517,7 @@
 
     </section>
 
-    <section id="3.9.1" title="Declaring an injected field">
+    <section id="declaring_injected_field" title="Declaring an injected field" level="3">
         <assertion id="aa">
             <text>An injected field may be declared by annotating the field |@javax.inject.Inject|.</text>
         </assertion>
@@ -1524,7 +1527,7 @@
         </assertion>
     </section>
 
-    <section id="3.10" title="Initializer methods">
+    <section id="initializer_methods" title="Initializer methods" level="2">
         <group>
             <text>An initializer method is a default-access, public, protected or private, non-abstract, non-static, non-generic method of a bean class, a non-abstract, non-static method of an enum or of any Java EE component class supporting injection.</text>
 
@@ -1559,7 +1562,7 @@
         </assertion>
     </section>
 
-    <section id="3.10.1" title="Declaring an initializer method">
+    <section id="declaring_initializer" title="Declaring an initializer method" level="3">
         <assertion id="a">
             <text>An initializer method may be declared by annotating the method |@javax.inject.Inject|</text>
         </assertion>
@@ -1589,13 +1592,13 @@
         </assertion>
     </section>
 
-    <section id="3.11" title="The default qualifier at injection points">
+    <section id="injection_point_default_qualifier" title="The default qualifier at injection points" level="2">
         <assertion id="a">
             <text>If an injection point declares no qualifier, the injection point has exactly one qualifier, the default qualifier |@Default|.</text>
         </assertion>
     </section>
 
-    <section id="3.12" title="Vetoing types">
+    <section id="veto" title="Vetoing types" level="2">
 
         <assertion id="a">
             <text>Any type or package may be prevented from being considered by CDI by adding the |@Vetoed| annotation on the type or package.</text>
@@ -1603,7 +1606,7 @@
 
     </section>
 
-    <section id="3.13" title="The qualifier @Named at injection points">
+    <section id="named_at_injection_point" title="The qualifier @Named at injection points" level="2">
         <assertion id="a">
             <text>If an injected field declares a |@Named| annotation that does not specify the |value| member, the name of the field is assumed.</text>
         </assertion>
@@ -1613,7 +1616,7 @@
         </assertion>
     </section>
 
-    <section id="3.14" title="@New qualified beans">
+    <section id="new" title="@New qualified beans" level="2">
         <assertion id="d">
             <text>For each managed bean, a second bean exists which has the same bean class.</text>
         </assertion>
@@ -1751,11 +1754,51 @@
         </assertion>
     </section>
 
-    <section id="4" title="Inheritance and specialization">
+    <section id="unproxyable" title="Unproxyable bean types" level="2">
+
+        <group>
+
+            <text>Certain legal bean types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
+
+            <assertion id="aa">
+                <text>Test a class which doesn't have a non-private constructor with no parameters.</text>
+            </assertion>
+
+            <assertion id="baa">
+                <text>Test a class which is declared final.</text>
+            </assertion>
+
+            <assertion id="bba">
+                <text>Test a class that has non-static, final method with public visibility.</text>
+            </assertion>
+
+            <assertion id="bca">
+                <text>Test with a class that has static final method with public visibility.</text>
+                <note>This is not allowed in CDI 1.0.</note>
+            </assertion>
+
+            <assertion id="bda">
+                <text>Test a class that has final method with private visibility.</text>
+                <note>This is not allowed in CDI 1.0.</note>
+            </assertion>
+
+            <assertion id="ca">
+                <text>Test primitive type</text>
+            </assertion>
+
+            <assertion id="da">
+                <text>Test array type. </text>
+            </assertion>
+
+        </group>
 
     </section>
 
-    <section id="4.1" title="Inheritance of type-level metadata">
+    <section id="inheritance" title="Inheritance and specialization" level="1">
+
+    </section>
+
+    <section id="type_level_inheritance" title="Inheritance of type-level metadata" level="2">
         <group>
             <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean or session bean Y. If X is annotated with a qualifier type, stereotype or interceptor binding type Z then Y inherits the annotation if and only if Z declares the |@Inherited| meta-annotation and neither Y nor any intermediate class that is a subclass of X and a superclass of Y declares an annotation of type Z.</text>
 
@@ -1930,7 +1973,7 @@
 
     </section>
 
-    <section id="4.2" title="Inheritance of member-level metadata">
+    <section id="member_level_inheritance" title="Inheritance of member-level metadata" level="2">
 
         <group>
             <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean or session bean Y. If X declares an injected field x then Y inherits x.</text>
@@ -2107,7 +2150,7 @@
 
     </section>
 
-    <section id="4.3" title="Specialization">
+    <section id="specialization" title="Specialization" level="2">
 
         <assertion id="a" testable="false">
             <text>If two beans both support a certain bean type, and share at least one qualifier, then they are both eligible for injection to any injection point with that declared type and qualifier.</text>
@@ -2131,7 +2174,7 @@
 
     </section>
 
-    <section id="4.3.1" title="Direct and indirect specialization">
+    <section id="direct_and_indirect_specialization" title="Direct and indirect specialization" level="3">
         <assertion id="ia">
             <text>A bean X is said to specialize another bean Y if X directly specializes Y.</text>
         </assertion>
@@ -2171,7 +2214,7 @@
         </assertion>
     </section>
 
-    <section id="5" title="Dependency injection, lookup, and EL">
+    <section id="injection_el_resolution" title="Dependency injection, lookup and EL" level="1">
 
         <assertion id="b">
             <text>The container is required to support circularities in the bean dependency graph where at least one bean participating in every circular chain of dependencies has a normal scope, as defined in Section 6.3, "Normal scopes and pseudo-scopes".</text>
@@ -2183,7 +2226,7 @@
         </assertion>
     </section>
 
-    <section id="5.1" title="Modularity">
+    <section id="selection" title="Modularity" level="2">
         <group>
             <text>Beans packaged in a certain Java EE module or library are available for injection, lookup and EL resolution to classes and JSP/JSF pages packaged in some other Java EE module or library if and only if the first module or library is required to be accessible to the other module or library by the Java EE platform specification.</text>
 
@@ -2210,7 +2253,7 @@
         </assertion>
     </section>
 
-    <section id="5.1.1" title="Declaring selected alternatives for a bean deployment archive">
+    <section id="declaring_selected_alternatives" title="Declaring selected alternatives for a bean archive" level="3">
 
         <assertion id="aa" testable="false">
             <text>Alternatives may be selected for an application, or selected only for a particular bean archive.</text>
@@ -2351,20 +2394,20 @@
         </assertion>
     </section>
 
-    <section id="5.1.2" title="Enabled and disabled beans">
+    <section id="enablement" title="Enabled and disabled beans" level="3">
         <assertion id="a" testable="false">
             <text>A bean is said to be enabled if it is deployed in a bean deployment archive, and it is not a producer method or field of a disabled bean, and it is not specialized by any other enabled bean, as defined in Section 4.3, "Specialization", and either it is not an alternative, or it is a selected alternative of at least one bean deployment archive. Otherwise, the bean is said to be disabled.</text>
-            <note>Tested in 5.1.4</note>
+            <note>Tested in "inter_module_injection"</note>
         </assertion>
     </section>
 
-    <section id="5.1.3" title="Inconsistent specialization">
+    <section id="inconsistent_specialization" title="Inconsistent specialization" level="3">
         <assertion id="a">
             <text>Suppose an enabled bean X specializes a second bean Y. If there is another enabled bean that specializes Y we say that inconsistent specialization exists. The container automatically detects inconsistent specialization and treats it as a deployment problem.</text>
         </assertion>
     </section>
 
-    <section id="5.1.4" title="Inter-module injection">
+    <section id="inter_module_injection" title="Inter-module injection" level="3">
         <group>
             <text>A bean is available for injection in a certain module if the bean is not an interceptor or decorator, the bean is enabled, the bean is either not an alternative, or the module is a bean archive and the bean is a selected alternative of the bean archive, and the bean class is required to be accessible to classes in the module, according to the class accessibility requirements of the module architecture.</text>
 
@@ -2447,10 +2490,10 @@
         </group>
     </section>
 
-    <section id="5.2" title="Typesafe resolution">
+    <section id="typesafe_resolution" title="Typesafe resolution" level="2">
     </section>
 
-    <section id="5.2.1" title="Performing typesafe resolution">
+    <section id="performing_typesafe_resolution" title="Performing typesafe resolution" level="3">
 
         <group>
             <text>A bean is assignable to a given injection point if the bean has a bean type that matches the required type. For this purpose, primitive types are considered to match their corresponding wrapper types in |java.lang| and array types are considered to match only if their element types are identical. Parameterized and raw types are considered to match if they are identical or if the bean type is assignable to the required type, as defined in Section 5.2.3, "Assignability of raw and parameterized types".</text>
@@ -2514,7 +2557,7 @@
 
     </section>
 
-    <section id="5.2.2" title="Unsatisfied and ambiguous dependencies">
+    <section id="unsatisfied_and_ambig_dependencies" title="Unsatisfied and ambiguous dependencies" level="3">
 
         <group>
             <text>When an ambiguous dependency exists, the container attempts to resolve the ambiguity. The container eliminates all eligible beans that are not alternatives, except for producer methods and fields of beans that are alternatives. If there is exactly one bean remaining, the container will select this bean, and the ambiguous dependency is called resolvable. If all the beans left are alternatives with a priority, then the container will select the alternative with the highest priority, and the ambiguous dependency is called resolvable.</text>
@@ -2562,7 +2605,7 @@
         </assertion>
     </section>
 
-    <section id="5.2.3" title="Legal injection point types">
+    <section id="legal_injection_point_types" title="Legal injection point types" level="3">
         <assertion id="a">
             <text>Any legal bean type, as defined in Section 2.2.1, "Legal bean types" may be the required type of an injection point.</text>
         </assertion>
@@ -2576,7 +2619,7 @@
         </assertion>
     </section>
 
-    <section id="5.2.4" title="Assignability of raw and parameterized types">
+    <section id="assignable_parameters" title="Assignability of raw and parameterized types" level="3">
         <assertion id="a">
             <text>A parameterized bean type is considered assignable to a raw required type if the raw types are identical and all type parameters of the bean type are either unbounded type variables or |java.lang.Object|.</text>
         </assertion>
@@ -2621,7 +2664,7 @@
 
     </section>
 
-    <section id="5.2.5" title="Primitive types and null values">
+    <section id="null" title="Primitive types and null values" level="3">
         <group>
             <text>If necessary, the container performs boxing or unboxing when it injects a value to a field or parameter of primitive or wrapper type.</text>
 
@@ -2643,7 +2686,7 @@
         </assertion>
     </section>
 
-    <section id="5.2.6" title="Qualifier annotations with members">
+    <section id="qualifier_annotation_members" title="Qualifier annotations with members" level="3">
         <assertion id="a" testable="false">
             <text>Qualifier types may have annotation members.</text>
             <note>A statement of intent</note>
@@ -2658,7 +2701,7 @@
         </assertion>
     </section>
 
-    <section id="5.2.7" title="Multiple qualifiers">
+    <section id="multiple_qualifiers" title="Multiple qualifiers" level="3">
         <assertion id="a">
             <text>A bean class may declare multiple qualifiers.</text>
         </assertion>
@@ -2676,7 +2719,7 @@
         </assertion>
     </section>
 
-    <section id="5.3" title="EL Name resolution">
+    <section id="name_resolution" title="EL name resolution" level="2">
         <assertion id="d">
             <text>An EL name resolves to a bean if the bean has the given EL name, and the bean is available for injection in the war containing the JSP or JSF page with the EL expression.</text>
         </assertion>
@@ -2686,7 +2729,7 @@
         </assertion>
     </section>
 
-    <section id="5.3.1" title="Ambiguous EL names">
+    <section id="ambig_names" title="Ambiguous EL names" level="3">
         <assertion id="ca">
             <text>An ambiguous EL name exists in an EL expression when an EL name resolves to multiple beans. When an ambiguous EL name exists, the container attempts to resolve the ambiguity. If any of the beans are alternatives, the container eliminates all beans that are not alternatives. If there is exactly one bean remaining, the container will select this bean, and the ambiguous EL name is called resolvable.</text>
         </assertion>
@@ -2704,7 +2747,7 @@
         </group>
     </section>
 
-    <section id="5.4" title="Client proxies">
+    <section id="client_proxies" title="Client proxies" level="2">
         <assertion id="b">
             <text>A contextual reference to a bean with a normal scope, as defined in Section 6.3, “Normal scopes and pseudo-scopes”, is not a direct reference to a contextual instance of the bean (the object returned by |Contextual.create()|). Instead, the contextual reference is a client proxy object.</text>
         </assertion>
@@ -2727,47 +2770,7 @@
         </assertion>
     </section>
 
-    <section id="5.4.1" title="Unproxyable bean types">
-
-        <group>
-
-            <text>Certain legal bean types cannot be proxied by the container. If an injection point whose declared type cannot be proxied by the container resolves to a bean with a normal scope, the container automatically detects the problem and treats it as a deployment problem.</text>
-
-            <assertion id="aa">
-                <text>Test a class which doesn't have a non-private constructor with no parameters.</text>
-            </assertion>
-
-            <assertion id="baa">
-                <text>Test a class which is declared final.</text>
-            </assertion>
-
-            <assertion id="bba">
-                <text>Test a class that has non-static, final method with public visibility.</text>
-            </assertion>
-
-            <assertion id="bca">
-                <text>Test with a class that has static final method with public visibility.</text>
-                <note>This is not allowed in CDI 1.0.</note>
-            </assertion>
-
-            <assertion id="bda">
-                <text>Test a class that has final method with private visibility.</text>
-                <note>This is not allowed in CDI 1.0.</note>
-            </assertion>
-
-            <assertion id="ca">
-                <text>Test primitive type</text>
-            </assertion>
-
-            <assertion id="da">
-                <text>Test array type. </text>
-            </assertion>
-
-        </group>
-
-    </section>
-
-    <section id="5.4.2" title="Client proxy invocation">
+    <section id="client_proxy_invocation" title="Client proxy invocation" level="3">
         <assertion id="aa">
             <text>Every time a method of the bean is invoked upon a client proxy, the client proxy must obtain a contextual instance of the bean, as defined in Section 6.5.2, "Contextual instance of a bean", and invoke the method upon this instance.</text>
         </assertion>
@@ -2782,7 +2785,7 @@
 
     </section>
 
-    <section id="5.5" title="Dependency injection">
+    <section id="injection" title="Dependency injection" level="2">
         <assertion id="a">
             <text>The container is required to perform dependency injection whenever it creates a contextual instance of a session bean.</text>
         </assertion>
@@ -2841,7 +2844,7 @@
         </assertion>
     </section>
 
-    <section id="5.5.1" title="Injection using the bean constructor">
+    <section id="instantiation" title="Injection using the bean constructor" level="3">
         <group>
             <text>When the container instantiates a managed bean or session bean with a constructor annotated |@Inject|, the container calls this constructor, passing an injectable reference to each parameter. If there is no constructor annotated |@Inject|, the container calls the constructor with no parameters.</text>
             <assertion id="aa">
@@ -2859,7 +2862,7 @@
         </group>
     </section>
 
-    <section id="5.5.2" title="Injection of fields and initializer methods">
+    <section id="fields_initializer_methods" title="Injection of fields and initializer methods" level="3">
         <group>
             <text>When the container creates a new instance of a managed bean, session bean, enum or of any other Java EE component class supporting injection, the container must: Initialize the values of all injected fields. The container sets the value of each injected field to an injectable reference. Call all initializer methods, passing an injectable reference to each parameter.</text>
             <assertion id="aa">
@@ -2997,13 +3000,13 @@
         </group>
     </section>
 
-    <section id="5.5.3" title="Destruction of dependent objects">
+    <section id="dependent_objects_destruction" title="Destruction of dependent objects" level="3">
         <assertion id="a">
             <text>When the container destroys an instance of a bean, enum or of any Java EE component class supporting injection, the container destroys all dependent objects, as defined in Section 6.4.2, "Destruction of objects with scope @Dependent", after the |@PreDestroy| callback completes and after the servlet |destroy()| method is called.</text>
         </assertion>
     </section>
 
-    <section id="5.5.4" title="Invocation of producer or disposer methods">
+    <section id="producer_or_disposer_methods_invocation" title="Invocation of producer or disposer methods" level="3">
         <assertion id="a">
             <text>When the container calls a producer method, if the method is static, the container must invoke the method.</text>
         </assertion>
@@ -3031,7 +3034,7 @@
 
     </section>
 
-    <section id="5.5.5" title="Access to producer field values">
+    <section id="producer_fields_access" title="Access to producer field values" level="3">
         <assertion id="a">
             <text>When the container accesses the value of a producer field, if the producer field is static, the container must access the field value.</text>
         </assertion>
@@ -3041,7 +3044,7 @@
         </assertion>
     </section>
 
-    <section id="5.5.6" title="Invocation of observer methods">
+    <section id="observers_method_invocation" title="Invocation of observer methods" level="3">
         <assertion id="a">
             <text>When the container calls an observer method (defined in Section 10.4 "Observer methods"), if the observer method is static, the container must invoke the method.</text>
         </assertion>
@@ -3060,7 +3063,7 @@
         </assertion>
     </section>
 
-    <section id="5.5.7" title="Injection point metadata">
+    <section id="injection_point" title="Injection point metadata" level="3">
         <assertion id="aa">
             <text>The |javax.enterprise.inject.spi.InjectionPoint.getBean()| method returns the Bean object representing the bean that defines the injection point.</text>
         </assertion>
@@ -3163,7 +3166,7 @@
 
     </section>
 
-    <section id="5.5.8" title="Bean metadata">
+    <section id="bean_metadata" title="Bean metadata" level="3">
 
         <group>
             <text>The container must provide beans allowing a bean instance to obtain a |Bean|, |Interceptor| or |Decorator| instance containing its metadata.</text>
@@ -3199,7 +3202,7 @@
         <assertion id="i">
             <text>If a |Decorator| instance is injected into a bean instance other than a decorator instance, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
-        
+
         <assertion id="r">
             <text>If a |Bean| instance with qualifier |@Intercepted| is injected into a bean instance other than an interceptor instance, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
@@ -3239,7 +3242,7 @@
 
     </section>
 
-    <section id="5.6" title="Programmatic lookup">
+    <section id="programmatic_lookup" title="Programmatic lookup" level="2">
         <assertion id="aa">
             <text>An instance of the |javax.enterprise.inject.Instance| interface may be injected.</text>
         </assertion>
@@ -3261,7 +3264,7 @@
         </assertion>
     </section>
 
-    <section id="5.6.1" title="The Instance interface">
+    <section id="dynamic_lookup" title="The Instance interface" level="3">
         <assertion id="aa">
             <text>The |Instance| interface provides a method for obtaining instances of beans with a specified combination of required type and qualifiers, and inherits the ability to iterate beans with that combination of required type and qualifiers from |java.lang.Iterable|.</text>
         </assertion>
@@ -3333,7 +3336,7 @@
 
     </section>
 
-    <section id="5.6.2" title="The built-in Instance">
+    <section id="builtin_instance" title="The built-in Instance" level="3">
         <assertion id="a" testable="false">
             <text>The container must provide a built-in bean with |Instance&lt;X&gt;| and |Provider&lt;X&gt;| for every legal bean type |x| in its set of bean types.</text>
             <note>FIXME - see also CDI-232.</note>
@@ -3361,7 +3364,7 @@
         </assertion>
     </section>
 
-    <section id="5.6.3" title="Using AnnotationLiteral and TypeLiteral">
+    <section id="annotationliteral_typeliteral" title="Using AnnotationLiteral and TypeLiteral" level="3">
         <assertion id="a" implied="true">
             <text>Test |javax.enterprise.util.AnnotationLiteral| when using |Instance.select()| to specify qualifiers.</text>
         </assertion>
@@ -3371,11 +3374,11 @@
         </assertion>
     </section>
 
-    <section id="6" title="Scopes and contexts">
+    <section id="contexts" title="Scopes and contexts" level="1">
 
     </section>
 
-    <section id="6.1" title="The Contextual interface">
+    <section id="contextual" title="The Contextual interface" level="2">
         <assertion id="a0">
             <text>If an exception occurs while creating an instance, the exception is rethrown by the |create()| method. If the exception is a checked exception, it must be wrapped and rethrown as an (unchecked) |CreationException|.</text>
         </assertion>
@@ -3395,7 +3398,7 @@
         </assertion>
     </section>
 
-    <section id="6.1.1" title="The CreationalContext interface">
+    <section id="creational_context" title="The CreationalContext interface" level="3">
         <assertion id="ca" testable="false">
             <text>The interface |javax.enterprise.context.spi.CreationalContext| provides operations that are used by the |Contextual| implementation during instance creation and destruction.</text>
             <note>introductory text</note>
@@ -3428,7 +3431,7 @@
         </assertion>
     </section>
 
-    <section id="6.2" title="The Context interface">
+    <section id="context" title="The Context interface" level="2">
         <assertion id="aa" testable="false">
             <text>The |javax.enterprise.context.spi.Context| interface provides an operation for obtaining contextual instances with a particular scope of any contextual type.</text>
             <note>Introductory text</note>
@@ -3492,7 +3495,7 @@
         </assertion>
     </section>
 
-    <section id="6.3" title="Normal scopes and pseudo-scopes">
+    <section id="normal_scope" title="Normal scopes and pseudo-scopes" level="2">
         <assertion id="a" testable="false">
             <text>There may be no more than one mapped instance of a context object per contextual type per thread</text>
             <note>Not testable through API</note>
@@ -3531,7 +3534,7 @@
         </assertion>
     </section>
 
-    <section id="6.4" title="Dependent pseudo-scope">
+    <section id="dependent_context" title="Dependent pseudo-scope" level="2">
         <assertion id="a">
             <text>When a bean is declared to have |@Dependent| scope, no injected instance of the bean is ever shared between multiple injection points.</text>
         </assertion>
@@ -3581,7 +3584,7 @@
         </assertion>
     </section>
 
-    <section id="6.4.1" title="Dependent objects">
+    <section id="dependent_objects" title="Dependent objects" level="3">
         <group>
             <text>Instances of interceptors or decorators with scope |@Dependent| are dependent objects of the bean instance they decorate.</text>
             <assertion id="aa">
@@ -3618,7 +3621,7 @@
         </assertion>
     </section>
 
-    <section id="6.4.2" title="Destruction of objects with scope @Dependent">
+    <section id="dependent_destruction" title="Destruction of objects with scope @Dependent" level="3">
 
         <group>
             <text>The container must ensure that all dependent objects of a non-contextual instance of a bean or other Java EE component class are destroyed when the instance is destroyed by the container.</text>
@@ -3674,7 +3677,7 @@
         </assertion>
     </section>
 
-    <section id="6.4.3" title="Dependent pseudo-scope and Unified EL">
+    <section id="dependent_scope_el" title="Dependent pseudo-scope and Unified EL" level="3">
         <assertion id="a">
             <text>Suppose a Unified EL expression in a JSF or JSP page refers to a bean with scope |@Dependent| by its EL name. Each time the EL expression is evaluated the bean is instantiated at most once, and the resulting instance is reused for every appearance of the EL name, and the resulting instance is destroyed when the evaluation completes.</text>
         </assertion>
@@ -3684,11 +3687,11 @@
         </assertion>
     </section>
 
-    <section id="6.5" title="Contextual instances and contextual references">
+    <section id="contextual_instances_and_references" title="Contextual instances and contextual references" level="2">
 
     </section>
 
-    <section id="6.5.1" title="The active context object for a scope">
+    <section id="active_context" title="The active context object for a scope" level="3">
         <assertion id="a">
             <text>From time to time, the container must obtain an active context object for a certain scope type. The container must search for an active instance of |Context| associated with the scope type. If no active context object exists for the scope type, the container throws a |ContextNotActiveException|.</text>
         </assertion>
@@ -3698,7 +3701,7 @@
         </assertion>
     </section>
 
-    <section id="6.5.2" title="Contextual instance of a bean">
+    <section id="contextual_instance" title="Contextual instance of a bean" level="3">
         <assertion id="a">
             <text>From time to time, the container must obtain a contextual instance of a bean. The container must obtain the active context object for the bean scope, then obtain an instance of the bean by calling |Context.get()|, passing the |Bean| instance representing the bean and an instance of |CreationalContext|.</text>
         </assertion>
@@ -3717,7 +3720,7 @@
         </assertion>
     </section>
 
-    <section id="6.5.3" title="Contextual reference for a bean">
+    <section id="contextual_reference" title="Contextual reference for a bean" level="3">
         <assertion id="a0">
             <text>Contextual references must be obtained with a given |CreationalContext|, allowing any instance of scope |@Dependent| that is created to be later destroyed.</text>
         </assertion>
@@ -3739,7 +3742,7 @@
         </assertion>
     </section>
 
-    <section id="6.5.4" title="Contextual reference validity">
+    <section id="contextual_reference_validity" title="Contextual reference validity" level="3">
         <assertion id="a">
             <text>Any reference to a bean with a normal scope is valid as long as the application maintains a hard reference to it. However, it may only be invoked when the context associated with the normal scope is active. If it is invoked when the context is inactive, a |ContextNotActiveException| is thrown by the container.</text>
         </assertion>
@@ -3750,7 +3753,7 @@
         </assertion>
     </section>
 
-    <section id="6.5.5" title="Injectable references">
+    <section id="injectable_reference" title="Injectable references" level="3">
         <assertion id="a">
             <text>From time to time, the container must obtain an injectable reference for an injection point. The container must identify a bean according to the rules defined in Section 5.2, "Typesafe resolution" and resolving ambiguities according to Section 5.2.1, "Unsatisfied and ambiguous dependencies", then obtain a contextual reference for this bean and the type of the injection point according to Section 6.5.3, "Contextual reference for a bean".</text>
         </assertion>
@@ -3760,7 +3763,7 @@
         </assertion>
     </section>
 
-    <section id="6.5.6" title="Injectable reference validity">
+    <section id="injectable_reference_validity" title="Injectable reference validity" level="3">
         <assertion id="a">
             <text>Injectable references to a bean must respect the rules of contextual reference validity, with the following exceptions - a reference to a bean injected into a field, bean constructor or initializer method is only valid until the object into which it was injected is destroyed, a reference to a bean injected into a producer method is only valid until the producer method bean instance that is being produced is destroyed, and a reference to a bean injected into a disposer method or observer method is only valid until the invocation of the method completes.</text>
         </assertion>
@@ -3771,13 +3774,13 @@
         </assertion>
     </section>
 
-    <section id="6.6" title="Passivation and passivating scopes">
+    <section id="passivating_scope" title="Passivation and passivating scopes" level="2">
         <assertion id="a" implied="true">
             <text>Test that passivation occurs.</text>
         </assertion>
     </section>
 
-    <section id="6.6.1" title="Passivation capable beans">
+    <section id="passivation_capable" title="Passivation capable beans" level="3">
 
         <group>
             <text>As defined by the EJB specification, all stateful session beans are passivation capable if and only if all interceptors and decorators of the bean are passivation capable. Stateless and singleton session beans are not passivation capable.</text>
@@ -3854,7 +3857,7 @@
         </assertion>
     </section>
 
-    <section id="6.6.2" title="Passivation capable dependencies">
+    <section id="passivation_capable_dependency" title="Passivation capable dependencies" level="3">
         <assertion id="a">
             <text>The container must guarantee that all session beans are passivation capable dependencies.</text>
         </assertion>
@@ -3880,7 +3883,7 @@
         </assertion>
     </section>
 
-    <section id="6.6.3" title="Passivating scopes">
+    <section id="passivating_scopes" title="Passivating scopes" level="3">
         <group>
             <text>A passivating scope requires that beans with the scope are passivation capable, and implementations of |Contextual| passed to any context object for the scope are passivation capable.</text>
 
@@ -3900,7 +3903,7 @@
         </assertion>
     </section>
 
-    <section id="6.6.4" title="Validation of passivation capable beans and dependencies">
+    <section id="passivation_validation" title="Validation of passivation capable beans and dependencies" level="3">
 
         <group>
             <text>If a managed bean or stateful session bean which declares a passivating scope is not passivation capable, then the container automatically detects the problem and treats it as a deployment problem.</text>
@@ -4021,14 +4024,14 @@
 
     </section>
 
-    <section id="6.7" title="Context management for built-in scopes">
+    <section id="builtin_contexts" title="Context management for built-in scopes" level="2">
         <group>
             <text>The built-in request and application context objects are active during servlet, web service and EJB invocations, and the built in session and request context objects are active during servlet and web service invocations. For other kinds of invocations, a portable extension may define a custom context object for any or all of the built-in scopes.</text>
         </group>
 
     </section>
 
-    <section id="6.7.1" title="Request context lifecycle">
+    <section id="request_context" title="Request context lifecycle" level="3">
 
         <group>
             <text>The request scope is active during the |service()| method of any servlet in the web application, during the |doFilter()| method of any servlet filter and when the container calls any |ServletRequestListener| or |AsyncListener|.</text>
@@ -4143,7 +4146,7 @@
 
     </section>
 
-    <section id="6.7.2" title="Session context lifecycle">
+    <section id="session_context" title="Session context lifecycle" level="3">
         <assertion id="aa">
             <text>The session scope is active during the |service()| method of any servlet in the web application ~, during the |doFilter()| method of any servlet filter~ and when the container calls any |HttpSessionListener|, |AsyncListener| or |ServletRequestListener|.</text>
         </assertion>
@@ -4178,7 +4181,7 @@
 
     </section>
 
-    <section id="6.7.3" title="Application context lifecycle">
+    <section id="application_context" title="Application context lifecycle" level="3">
         <group>
             <text>The application scope is active during the |service()| method of any servlet in the web application, during the |doFilter()| method of any servlet filter and when the container calls any |ServletContextListener|, |HttpSessionListener|, |AsyncListener| or |ServletRequestListener|.</text>
             <assertion id="aa">
@@ -4265,7 +4268,7 @@
 
     </section>
 
-    <section id="6.7.4" title="Conversation context lifecycle">
+    <section id="conversation_context" title="Conversation context lifecycle" level="3">
 
         <group>
             <text>The conversation scope is active during all Servlet requests.</text>
@@ -4395,7 +4398,7 @@
 
     </section>
 
-    <section id="6.7.5" title="The Conversation interface">
+    <section id="conversation" title="The Conversation interface" level="3">
         <group>
             <text>The container provides a built-in bean with bean type |Conversation|, scope |@RequestScoped|, and qualifier |@Default|, named |javax.enterprise.context.conversation|.</text>
             <assertion id="iaa">
@@ -4456,15 +4459,13 @@
         </assertion>
     </section>
 
-    <section id="7" title="Lifecycle of contextual instances">
-
+    <section id="lifecycle" title="Lifecycle of contextual instances" level="1">
     </section>
 
-    <section id="7.1" title="Restriction upon bean instantiation">
-
+    <section id="bean_instantiation_restriction" title="Restriction upon bean instantiation" level="2">
     </section>
 
-    <section id="7.2" title="Container invocations and interception">
+    <section id="biz_method" title="Container invocations and interception" level="2">
         <assertion id="a0" testable="false">
             <text>When the application invokes a method of a bean via a contextual reference to the bean, as defined in Section 6.5.3, "Contextual reference for a bean", or a business method of a session bean via an EJB remote or local reference, the invocation is treated as a business method invocation.</text>
         </assertion>
@@ -4579,11 +4580,11 @@
 
     </section>
 
-    <section id="7.3" title="Lifecycle of contextual instances">
+    <section id="contextual_instance_lifecycle" title="Lifecycle of contextual instances" level="2">
 
     </section>
 
-    <section id="7.3.1" title="Lifecycle of managed beans">
+    <section id="managed_bean_lifecycle" title="Lifecycle of managed beans" level="3">
         <assertion id="aa">
             <text>When the |create()| method of the |Bean| object that represents a managed bean is called, the container obtains an instance of the bean, as defined by the Managed Beans specification, calling the bean constructor as defined by Section 5.5.1, "Injection using the bean constructor", and performing dependency injection as defined in Section 5.5.2, "Injection of fields and initializer methods".</text>
         </assertion>
@@ -4593,7 +4594,7 @@
         </assertion>
     </section>
 
-    <section id="7.3.2" title="Lifecycle of stateful session beans">
+    <section id="stateful_lifecycle" title="Lifecycle of stateful session beans" level="3">
         <assertion id="aa" testable="false">
             <text>When the |create()| method of a |Bean| object that represents a stateful session bean that is called, the container creates and returns a container-specific internal local reference to a new session bean instance. The reference must be passivation capable. This reference is not directly exposed to the application.</text>
             <note>It's not possible to test container-specific internal local reference that is not directly exposed to the application.</note>
@@ -4608,7 +4609,7 @@
         </assertion>
     </section>
 
-    <section id="7.3.3" title="Lifecycle of stateless session and singleton beans">
+    <section id="stateless_lifecycle" title="Lifecycle of stateless session and singleton beans" level="3">
         <assertion id="a" testable="false">
             <text>When the |create()| method of a Bean object that represents a stateless session or singleton session bean is called, the container
                 creates and returns a container-specific internal local reference to the session bean. This reference is not directly exposed to the application.
@@ -4625,7 +4626,7 @@
         </assertion>
     </section>
 
-    <section id="7.3.4" title="Lifecycle of producer methods">
+    <section id="producer_method_lifecycle" title="Lifecycle of producer methods" level="3">
         <assertion id="ea">
             <text>When the create() method of a |Bean| object that represents a producer method is called, the container must invoke the producer method as defined by Section 5.5.4, "Invocation of producer or disposer methods". The return value of the producer method, after method interception completes, is the new contextual instance to be returned by |Bean.create()|.</text>
         </assertion>
@@ -4647,7 +4648,7 @@
         </assertion>
     </section>
 
-    <section id="7.3.5" title="Lifecycle of producer fields">
+    <section id="producer_field_lifecycle" title="Lifecycle of producer fields" level="3">
         <assertion id="ga">
             <text>When the |create()| method of a |Bean| object that represents a producer field is called, the container must access the producer field as defined by Section 5.5.5, "Access to producer field values" to obtain the current value of the field. The value of the producer field is the new contextual instance to be returned by |Bean.create()|.</text>
         </assertion>
@@ -4665,7 +4666,7 @@
         </assertion>
     </section>
 
-    <section id="7.3.6" title="Lifecycle of resources">
+    <section id="resource_lifecycle" title="Lifecycle of resources" level="3">
         <group>
             <text>When the |create()| method of a |Bean| object that represents a resource is called, the container creates and returns a container-specific internal reference to the Java EE component environment resource, entity manager, entity manager factory, remote EJB instance or web service reference. This reference is not directly exposed to the application.</text>
 
@@ -4760,7 +4761,7 @@
 
     </section>
 
-    <section id="8" title="Decorators">
+    <section id="decorators" title="Decorators" level="1">
         <assertion id="a" testable="false">
             <text>Decorators may be associated with any managed bean that is not itself an interceptor or decorator or with any EJB session bean.</text>
             <note>Doesn't specify an error</note>
@@ -4775,7 +4776,7 @@
         </assertion>
     </section>
 
-    <section id="8.1" title="Decorator beans">
+    <section id="decorator_bean" title="Decorator beans" level="2">
         <assertion id="a" testable="false">
             <text>A decorator is a managed bean.</text>
             <note>Statement of intent</note>
@@ -4806,13 +4807,13 @@
         </assertion>
     </section>
 
-    <section id="8.1.1" title="Declaring a decorator">
+    <section id="decorator_annotation" title="Declaring a decorator" level="3">
         <assertion id="a">
             <text>A decorator is declared by annotating the bean class with the |@javax.decorator.Decorator| stereotype.</text>
         </assertion>
     </section>
 
-    <section id="8.1.2" title="Decorator delegate injection points">
+    <section id="delegate_attribute" title="Decorator delegate injection points" level="3">
         <assertion id="a">
             <text>All decorators have a delegate injection point. A delegate injection point is an injection point of the bean class. The type and qualifiers of the injection point are called the delegate type and delegate qualifiers. The decorator applies to beans that are assignable to the delegate injection point. The delegate injection point must be be declared by annotating the injection point with the annotation |@javax.decorator.Delegate|.</text>
         </assertion>
@@ -4864,7 +4865,7 @@
 
     </section>
 
-    <section id="8.1.3" title="Decorated types of a decorator">
+    <section id="decorated_types" title="Decorated types of a decorator" level="3">
         <assertion id="a">
             <text>The delegate type of a decorator must implement or extend every decorated type (with exactly the same type parameters). If the delegate type does not implement or extend a decorated type of the decorator (or specifies different type parameters), the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
@@ -4894,8 +4895,8 @@
         </assertion>
     </section>
 
-    <section id="8.2" title="Decorator enablement and ordering">
-    
+    <section id="enabled_decorators" title="Decorator enablement and ordering" level="2">
+
         <assertion id="aa" testable="false">
             <text>Decorators may be enabled for an application, or enabled only for a particular bean archive.</text>
             <note>This is a statement of intent</note>
@@ -4903,31 +4904,31 @@
         <assertion id="ab" implied="true">
             <text>By default, a bean archive has no enabled decorators.</text>
         </assertion>
-        
+
         <assertion id="b">
             <text>A decorator may be enabled for the entire application by listing its class, along with a priority attribute, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive which contains the decorator class.</text>
         </assertion>
-        
+
         <assertion id="c">
             <text>A decorator may be enabled for a bean archive by listing its class under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive.</text>
         </assertion>
-        
+
         <assertion id="d">
             <text>A decorator enabled for an application may be disabled for a bean archive by listing its class, along with an enabled flag, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive.</text>
         </assertion>
-        
+
         <assertion id="e">
             <text>A decorator may be given a default priority, but not enabled by listing its class, along with a disabled flag and the priority attribute, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive which contains the decorator class.</text>
         </assertion>
-        
+
         <assertion id="f">
             <text>A decorator with a default priority may be enabled for a bean archive by listing its class, along with an enabled flag, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive.</text>
         </assertion>
-        
+
         <assertion id="g">
             <text>The priority of the decorator declaration, defined in Section 2.9, "Priority ordering", determines the default decorator ordering for the application. The order of the decorator declarations for a bean archive overrides the default decorator order. If the set of decorators enabled for the application and the set of decorators enabled for a bean archive are disjoint, then the first decorator enabled for the bean archive is given a priority of 1000. Decorators which occur earlier in the list are called first.</text>
         </assertion>
-        
+
         <group>
             <text>Each child |&lt;class&gt;| element must specify the name of a decorator bean class. If there is no class with the specified name, or if the class with the specified name is not a decorator bean class, the container automatically detects the problem and treats it as a deployment problem.</text>
             <assertion id="ha">
@@ -4948,7 +4949,7 @@
         </assertion>
     </section>
 
-    <section id="8.3" title="Decorator resolution">
+    <section id="decorator_resolution" title="Decorator resolution" level="2">
         <assertion id="aa">
             <text>The process of matching decorators to a certain bean is called decorator resolution. A decorator is bound to a bean if the bean is assignable to the delegate injection point according to the rules defined in Section 5.2, "Typesafe resolution", and the decorator is enabled in the bean archive containing the bean.</text>
         </assertion>
@@ -4966,7 +4967,7 @@
         </assertion>
     </section>
 
-    <section id="8.3.1" title="Assignability of raw and parameterized types for delegate injection points">
+    <section id="delegate_assignable_parameters" title="Assignability of raw and parameterized types for delegate injection points" level="3">
         <group>
             <text>A raw bean type is considered assignable to a parameterized delegate type if the raw types are identical and all type parameters of the delegate type are either unbounded type variables or |java.lang.Object|.</text>
 
@@ -5016,7 +5017,7 @@
 
     </section>
 
-    <section id="8.4" title="Decorator invocation">
+    <section id="decorator_invocation" title="Decorator invocation" level="2">
 
         <group>
             <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and, after processing all interceptors of the method, invokes decorators of the bean. The container searches for the first decorator of the instance that implements the method that is being invoked as a business method. If such decorator exists, the container calls the method of the decorator.</text>
@@ -5076,11 +5077,10 @@
         </assertion>
     </section>
 
-    <section id="9" title="Interceptor bindings">
-
+    <section id="interceptors" title="Interceptor bindings" level="1">
     </section>
 
-    <section id="9.1" title="Interceptor binding types">
+    <section id="interceptor_bindings" title="Interceptor binding types" level="2">
         <assertion id="a">
             <text>An interceptor binding type is a Java annotation defined as |@Target({TYPE, METHOD})| or |@Target(TYPE)| and |@Retention(RUNTIME)|.</text>
         </assertion>
@@ -5094,7 +5094,7 @@
         </assertion>
     </section>
 
-    <section id="9.1.1" title="Interceptor binding types with additional interceptor bindings">
+    <section id="interceptor_binding_with_additional_interceptor_bindings" title="Interceptor binding types with additional interceptor bindings" level="3">
         <assertion id="a">
             <text>An interceptor binding type may declare other interceptor bindings.</text>
         </assertion>
@@ -5109,7 +5109,7 @@
         </assertion>
     </section>
 
-    <section id="9.1.2" title="Interceptor bindings for stereotypes">
+    <section id="stereotype_interceptor_bindings" title="Interceptor bindings for stereotypes" level="3">
         <assertion id="a">
             <text>Interceptor bindings may be applied to a stereotype by annotating the stereotype annotation</text>
         </assertion>
@@ -5124,7 +5124,7 @@
         </assertion>
     </section>
 
-    <section id="9.2" title="Declaring the interceptor bindings of an interceptor">
+    <section id="declaring_interceptor" title="Declaring the interceptor bindings of an interceptor" level="2">
         <assertion id="a">
             <text>The interceptor bindings of an interceptor are specified by annotating the interceptor class with the binding types and the |@javax.interceptor.Interceptor| annotation.</text>
         </assertion>
@@ -5147,7 +5147,7 @@
         </assertion>
     </section>
 
-    <section id="9.3" title="Binding an interceptor to a bean">
+    <section id="binding_interceptor_to_bean" title="Binding an interceptor to a bean" level="2">
         <assertion id="a">
             <text>An interceptor binding may be declared by annotating the bean class, or a method of the bean class, with the interceptor binding type.</text>
         </assertion>
@@ -5195,8 +5195,8 @@
         </group>
     </section>
 
-    <section id="9.4" title="Interceptor enablement and ordering">
-        
+    <section id="enabled_interceptors" title="Interceptor enablement and ordering" level="2">
+
         <assertion id="aa" testable="false">
             <text>Interceptors may be enabled for an application, or enabled only for a particular bean archive.</text>
             <note>This is a statement of intent</note>
@@ -5204,27 +5204,27 @@
         <assertion id="ab" implied="true">
             <text>By default, a bean archive has no enabled interceptors.</text>
         </assertion>
-        
+
         <assertion id="ba">
             <text>An interceptor may be enabled for the entire application by listing its class, along with a priority attribute, under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive which contains the interceptor class.</text>
         </assertion>
-        
+
         <assertion id="bb">
             <text>An interceptor may be enabled for a bean archive by listing its class under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive.</text>
         </assertion>
-        
+
         <assertion id="bc">
             <text>An interceptor enabled for an application may be disabled for a bean archive by listing its class, along with a disabled flag, under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive.</text>
         </assertion>
-        
+
         <assertion id="bd">
             <text>An interceptor may be given a default priority, but not enabled by listing its class, along with a disabled flag and the priority attribute, under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive which contains the interceptor class.</text>
         </assertion>
-        
+
         <assertion id="be">
             <text>An interceptor with a default priority may be enabled for a bean archive by listing its class, along with an enabled flag, under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive.</text>
         </assertion>
-        
+
         <assertion id="bf">
             <text>The priority of the interceptor declaration, defined in Section 2.9, "Priority ordering", determines the default interceptor ordering for the application. The order of the interceptor declarations for a bean archive overrides the default interceptor order. If the set of interceptors enabled for the application and the set of interceptors enabled for a bean archive are disjoint, then the interceptors enabled for the bean archive are given an incrementing priority starting at 1000. Interceptors which occur earlier in the list are called first.</text>
         </assertion>
@@ -5262,7 +5262,7 @@
         </assertion>
     </section>
 
-    <section id="9.5" title="Interceptor resolution">
+    <section id="interceptor_resolution" title="Interceptor resolution" level="2">
         <assertion id="a">
             <text>For a lifecycle callback method, the interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings and stereotypes.
             </text>
@@ -5306,7 +5306,7 @@
 
     </section>
 
-    <section id="9.5.1" title="Interceptors with multiple bindings">
+    <section id="interceptor_with_multiple_bindings" title="Interceptors with multiple bindings" level="3">
         <group>
             <text>An interceptor class may specify multiple interceptor bindings.</text>
             <assertion id="a">
@@ -5319,7 +5319,7 @@
         </group>
     </section>
 
-    <section id="9.5.2" title="Interceptor binding types with members">
+    <section id="interceptor_binding_members" title="Interceptor binding types with members" level="3">
         <assertion id="a">
             <text>Interceptor binding types may have annotation members.</text>
         </assertion>
@@ -5346,11 +5346,10 @@
 
     </section>
 
-    <section id="10" title="Events">
-
+    <section id="events" title="Events" level="1">
     </section>
 
-    <section id="10.1" title="Event types and qualifier types">
+    <section id="event_types_and_qualifier_types" title="Event types and qualifier types" level="2">
 
         <assertion id="aa">
             <text>An event object is an instance of a concrete Java class with no type variables.</text>
@@ -5390,7 +5389,7 @@
         </assertion>
     </section>
 
-    <section id="10.2" title="Observer resolution">
+    <section id="observer_resolution" title="Observer resolution" level="2">
         <assertion id="a" testable="false">
             <text>The process of matching an event to its observer methods is called observer resolution. The container considers event type and qualifiers when resolving observers.</text>
             <note>Statement of intent</note>
@@ -5420,7 +5419,7 @@
         </assertion>
     </section>
 
-    <section id="10.2.1" title="Assignability of type variables, raw and parameterized types">
+    <section id="observers_assignability" title="Assignability of type variables, raw and parameterized types" level="3">
         <assertion id="a">
             <text>An event type is considered assignable to a type variable if the event type is assignable to the upper bound, if any.</text>
         </assertion>
@@ -5453,7 +5452,7 @@
 
     </section>
 
-    <section id="10.2.2" title="Event qualifier types with members">
+    <section id="event_qualifier_types_with_members" title="Event qualifier types with members" level="3">
         <assertion id="a">
             <text>The qualifier type for an |Event| qualifier may have annotation members.</text>
         </assertion>
@@ -5464,7 +5463,7 @@
         </assertion>
     </section>
 
-    <section id="10.2.3" title="Multiple event qualifiers">
+    <section id="multiple_event_qualifiers" title="Multiple event qualifiers" level="3">
         <assertion id="a">
             <text>An event parameter may have multiple qualifiers.</text>
         </assertion>
@@ -5475,7 +5474,7 @@
 
     </section>
 
-    <section id="10.3" title="Firing events">
+    <section id="firing_events" title="Firing events" level="2">
         <assertion id="a">
             <text>Beans fire events via an instance of the |javax.enterprise.event.Event| interface, which may be injected.</text>
         </assertion>
@@ -5493,7 +5492,7 @@
         </assertion>
     </section>
 
-    <section id="10.3.1" title="The Event interface">
+    <section id="event" title="The Event interface" level="3">
         <assertion id="ca">
             <text>The |Event| interface provides a method for firing events with a specified combination of type and qualifiers.</text>
         </assertion>
@@ -5532,7 +5531,7 @@
 
     </section>
 
-    <section id="10.3.2" title="The built-in Event">
+    <section id="builtin_event" title="The built-in Event" level="3">
         <assertion id="a">
             <text>The container must provide a built-in bean with |Event&lt;X&gt;| in its set of bean types, for every Java type |x| that does not contain a type variable.</text>
         </assertion>
@@ -5564,7 +5563,7 @@
         </assertion>
     </section>
 
-    <section id="10.4" title="Observer methods">
+    <section id="observer_methods" title="Observer methods" level="2">
         <assertion id="a0" testable="false">
             <text>An observer method allows the application to receive and respond to event notifications.</text>
             <note>A general statement.</note>
@@ -5591,7 +5590,7 @@
         </assertion>
     </section>
 
-    <section id="10.4.1" title="Event parameter of an observer method">
+    <section id="observer_method_event_parameter" title="Event parameter of an observer method" level="3">
         <assertion id="a">
             <text>Each observer method must have exactly one event parameter, of the same type as the event type it observes. When searching for observer methods for an event, the container considers the type and qualifiers of the event parameter</text>
         </assertion>
@@ -5613,7 +5612,7 @@
 
     </section>
 
-    <section id="10.4.2" title="Declaring an observer method">
+    <section id="observes" title="Declaring an observer method" level="3">
         <assertion id="a">
             <text>An observer method may be declared by annotating a parameter |@javax.enterprise.event.Observes| of a default-access, public, protected or private method. That parameter is the event parameter. The declared type of the parameter is the observed event type.</text>
         </assertion>
@@ -5651,7 +5650,7 @@
         </assertion>
     </section>
 
-    <section id="10.4.3" title="Conditional observer methods">
+    <section id="conditional_observer_methods" title="Conditional observer methods" level="3">
         <assertion id="a">
             <text>A conditional observer method may be declared by specifying |receive=IF_EXISTS|.</text>
         </assertion>
@@ -5665,7 +5664,7 @@
         </assertion>
     </section>
 
-    <section id="10.4.4" title="Transactional observer methods">
+    <section id="transactional_observer_methods" title="Transactional observer methods" level="3">
         <assertion id="a">
             <text>Transactional observer methods are observer methods which receive event notifications during the before or after completion phase of the transaction in which the event was fired. If no transaction is in progress when the event is fired, they are notified at the same time as other observers</text>
             <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
@@ -5701,7 +5700,7 @@
         </assertion>
     </section>
 
-    <section id="10.5" title="Observer notification">
+    <section id="observer_notification" title="Observer notification" level="2">
         <assertion id="aa">
             <text>When an event is fired by the application, the container must determine the observers for that event according to the observer resolution defined by Section 10.2, "Observer resolution", then then for each observer method, either invoke the observer method immediately or register the observer method for later invocation during the transaction completion phase, using a JTA |Synchronization|.</text>
         </assertion>
@@ -5769,7 +5768,7 @@
 
     </section>
 
-    <section id="10.5.1" title="Observer method invocation context">
+    <section id="observer_method_invocation_context" title="Observer method invocation context" level="3">
         <assertion id="ba">
             <text>If the observer method is a before completion transactional observer method, it is called within the context of the transaction that is about to complete and with the same client security context and lifecycle contexts.</text>
         </assertion>
@@ -5787,7 +5786,7 @@
         </assertion>
     </section>
 
-    <section id="11" title="Portable extensions">
+    <section id="spi" title="Portable extensions" level="1">
         <assertion id="a" testable="false">
             <text>A portable extension may integrate with the container by providing its own beans, interceptors and decorators to the container.</text>
         </assertion>
@@ -5805,7 +5804,7 @@
         </assertion>
     </section>
 
-    <section id="11.1" title="The Bean interface">
+    <section id="bean" title="The Bean interface" level="2">
         <assertion id="aa">
             <text>Implementations of |Bean| must also implement the inherited operations defined by the |Contextual| interface defined in Section 6.1, "The Contextual interface".</text>
         </assertion>
@@ -5839,7 +5838,7 @@
         </assertion>
     </section>
 
-    <section id="11.1.1" title="The Decorator interface">
+    <section id="decorator" title="The Decorator interface" level="3">
         <assertion id="a">
             <text>The |Bean| object for a decorator must implement the interface |javax.enterprise.inject.spi.Decorator|.</text>
         </assertion>
@@ -5857,7 +5856,7 @@
         </assertion>
     </section>
 
-    <section id="11.1.2" title="The Interceptor interface">
+    <section id="interceptor" title="The Interceptor interface" level="3">
         <assertion id="a">
             <text>The |Bean| object for an interceptor must implement |javax.enterprise.inject.spi.Interceptor|.</text>
         </assertion>
@@ -5883,7 +5882,7 @@
         </assertion>
     </section>
 
-    <section id="11.1.3" title="The ObserverMethod interface">
+    <section id="observer_method" title="The ObserverMethod interface" level="3">
         <assertion id="a" testable="false">
             <text>The interface |javax.enterprise.inject.spi.ObserverMethod| defines everything the container needs to know about an observer method.</text>
         </assertion>
@@ -5913,7 +5912,7 @@
         </assertion>
     </section>
 
-    <section id="11.2" title="The Producer and InjectionTarget interfaces">
+    <section id="injectiontarget" title="The Producer and InjectionTarget interfaces" level="2">
         <assertion id="a" testable="false">
             <text>The interface |javax.enterprise.inject.spi.Producer| provides a generic operation for producing an instance of a type.</text>
             <note>Statement of intent</note>
@@ -6008,7 +6007,7 @@
 
     </section>
 
-    <section id="11.3" title="The BeanManager object">
+    <section id="beanmanager" title="The BeanManager object" level="2">
         <group>
             <text>The container provides a built-in bean with bean type |BeanManager|, scope |@Dependent| and qualifier |@Default|.</text>
 
@@ -6039,7 +6038,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.1" title="Obtaining a reference to the CDI container">
+    <section id="provider" title="Obtaining a reference to the CDI container" level="3">
 
         <group>
             <text>
@@ -6076,7 +6075,7 @@
 
     </section>
 
-    <section id="11.3.2" title="Obtaining a contextual reference for a bean">
+    <section id="bm_obtain_contextual_reference" title="Obtaining a contextual reference for a bean" level="3">
         <assertion id="a">
             <text>The method |BeanManager.getReference()| returns a contextual reference for a given bean and bean type, as defined in Section 6.5.3, "Contextual reference for a bean".</text>
         </assertion>
@@ -6090,7 +6089,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.3" title="Obtaining an injectable reference">
+    <section id="bm_obtain_injectable_reference" title="Obtaining an injectable reference" level="3">
         <assertion id="a">
             <text>The method |BeanManager.getInjectableReference()| returns an injectable reference for a given injection point, as defined in Section 6.5.5, "Injectable references".</text>
         </assertion>
@@ -6117,7 +6116,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.4" title="Obtaining a CreationalContext">
+    <section id="bm_obtain_creationalcontext" title="Obtaining a CreationalContext" level="3">
         <assertion id="a">
             <text>An instance of |CreationalContext| for a certain instance of |Contextual| may be obtained by calling |BeanManager.createCreationalContext()|.</text>
         </assertion>
@@ -6127,7 +6126,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.5" title="Obtaining a Bean by type">
+    <section id="bm_obtain_bean_by_type" title="Obtaining a Bean by type" level="3">
 
         <group>
             <text>The method |BeanManager.getBeans()| returns the set of beans which have the given required type and qualifiers and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules for candidates of typesafe resolution defined in Section 5.2.1, “Performing typesafe resolution”.</text>
@@ -6161,7 +6160,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.6" title="Obtaining a Bean by name">
+    <section id="bm_obtain_bean_by_name" title="Obtaining a Bean by name" level="3">
         <assertion id="aa">
             <text>The method |BeanManager.getBeans()| which accepts a string returns the set of beans which have the given EL name and are available for injection in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, according to the rules of EL name resolution defined in Section 5.3, "EL name resolution".</text>
         </assertion>
@@ -6171,13 +6170,13 @@
         </assertion>
     </section>
 
-    <section id="11.3.7" title="Obtaining a passivation capable bean by identifier">
+    <section id="bm_obtain_passivation_capable_bean" title="Obtaining a passivation capable bean by identifier" level="3">
         <assertion id="a">
             <text>The method |BeanManager.getPassivationCapableBean()| returns the |PassivationCapable| bean with the given identifier (see Section 6.6.1, "Passivation capable beans").</text>
         </assertion>
     </section>
 
-    <section id="11.3.8" title="Resolving an ambiguous dependency">
+    <section id="bm_resolve_ambiguous_dep" title="Resolving an ambiguous dependency" level="3">
         <assertion id="a">
             <text>The method |BeanManager.resolve()| applies the ambiguous dependency resolution rules defined in Section 5.2.1, "Unsatisfied and ambiguous dependencies" to a set of |Bean|s.</text>
         </assertion>
@@ -6201,7 +6200,7 @@
 
     </section>
 
-    <section id="11.3.9" title="Validating an injection point">
+    <section id="bm_validate_ip" title="Validating an injection point" level="3">
         <assertion id="a">
             <text>The |BeanManager.validate()| operation validates an injection point and throws an |InjectionException| if there is a deployment problem (for example, an unsatisfied or unresolvable ambiguous dependency) associated with the injection point.</text>
             <note>Statement of intent</note>
@@ -6212,7 +6211,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.10" title="Firing an event">
+    <section id="bm_fire_event" title="Firing an event" level="3">
         <assertion id="a">
             <text>The method |BeanManager.fireEvent()| fires an event and notifies observers, according to Section 10.5, "Observer notification".</text>
         </assertion>
@@ -6239,7 +6238,7 @@
 
     </section>
 
-    <section id="11.3.11" title="Observer method resolution">
+    <section id="bm_observer_method_resolution" title="Observer method resolution" level="3">
         <assertion id="a">
             <text>The method |BeanManager.resolveObserverMethods()| resolves observer methods for an event according to the rules of observer resolution defined in Section 10.2, "Observer resolution".</text>
         </assertion>
@@ -6261,7 +6260,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.12" title="Decorator resolution">
+    <section id="bm_decorator_resolution" title="Decorator resolution" level="3">
         <assertion id="a">
             <text>The method |BeanManager.resolveDecorators()| returns the ordered list of decorators for a set of bean types and a set of qualifiers which are enabled in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, as defined in Section 8.3, "Decorator resolution".</text>
         </assertion>
@@ -6283,7 +6282,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.13" title="Interceptor resolution">
+    <section id="bm_interceptor_resolution" title="Interceptor resolution" level="3">
         <assertion id="a">
             <text>The method |BeanManager.resolveInterceptors()| returns the ordered list of interceptors for a set of interceptor bindings and a type of interception which are enabled in the module or library containing the class into which the |BeanManager| was injected or the Java EE component from whose JNDI environment namespace the |BeanManager| was obtained, as defined in Section 9.5, "Interceptor resolution".</text>
         </assertion>
@@ -6301,7 +6300,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.14" title="Determining if an annotation is a qualifier type, scope type, stereotype or interceptor binding type">
+    <section id="bm_determining_annotation" title="Determining if an annotation is a qualifier type, scope type, stereotype or interceptor binding type" level="3">
         <group>
             <text>A portable extension may test an annotation to determine if it is a qualifier type, scope type, stereotype or interceptor binding type, obtain the set of meta-annotations declared by a stereotype or interceptor binding type, or determine if a scope type is a normal or passivating scope.</text>
 
@@ -6335,7 +6334,7 @@
         </group>
     </section>
 
-    <section id="11.3.15" title="Determining the hash code and equivalence of qualifiers and interceptor bindings">
+    <section id="bm_determining_hash" title="Determining the hash code and equivalence of qualifiers and interceptor bindings" level="3">
         <group>
             <text>A portable extension may determine if two qualifiers or two interceptor bindings are considered equivalent for the purposes of typesafe resolution, as defined in Section 5.2.1, "Performing typesafe resolution".</text>
             <assertion id="a">
@@ -6356,19 +6355,19 @@
         </group>
     </section>
 
-    <section id="11.3.16" title="Obtaining the active Context for a scope">
+    <section id="bm_obtain_active_context" title="Obtaining the active Context for a scope" level="3">
         <assertion id="a">
             <text>The method |BeanManager.getContext()| retrieves an active context object associated with the a given scope, as defined in Section 6.5.1, "The active context object for a scope".</text>
         </assertion>
     </section>
 
-    <section id="11.3.17" title="Obtaining the ELResolver">
+    <section id="bm_obtain_elresolver" title="Obtaining the ELResolver" level="3">
         <assertion id="a">
             <text>The method |BeanManager.getELResolver()| returns the |javax.el.ELResolver| specified in Section 12.4, "Integration with Unified EL".</text>
         </assertion>
     </section>
 
-    <section id="11.3.18" title="Wrapping a Unified EL ExpressionFactory">
+    <section id="bm_wrap_expressionfactory" title="Wrapping a Unified EL ExpressionFactory" level="3">
         <assertion id="a">
             <text>The method |BeanManager.wrapExpressionFactory()| returns a wrapper |javax.el.ExpressionFactory| that delegates |MethodExpression| and |ValueExpression| creation to the given |ExpressionFactory|.</text>
         </assertion>
@@ -6378,7 +6377,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.19" title="Obtaining an AnnotatedType for a class">
+    <section id="bm_obtain_annotatedtype" title="Obtaining an AnnotatedType for a class" level="3">
         <assertion id="a">
             <text>The method |BeanManager.createAnnotatedType()| returns an |AnnotatedType| that may be used to read the annotations of a given Java class or interface.</text>
         </assertion>
@@ -6390,7 +6389,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.20" title="Obtaining an InjectionTarget for a class">
+    <section id="bm_obtain_injectiontarget" title="Obtaining an InjectionTarget for a class" level="3">
 
         <group>
             <text>The method |BeanManager.createInjectionTarget()| returns a container provided implementation of |InjectionTarget| for a given |AnnotatedType| or throws an |IllegalArgumentException| if there is a definition error associated with any injection point of the type.</text>
@@ -6405,7 +6404,7 @@
 
     </section>
 
-    <section id="11.3.21" title="Obtaining a Producer for a field or method">
+    <section id="bm_obtain_producer" title="Obtaining a Producer for a field or method" level="3">
         <group>
             <text>The method |BeanManager.createProducer()| returns a container provided implementation of |Producer| for a given |AnnotatedMethod| or |AnnotatedField| or throws an |IllegalArgumentException| if there is a definition error associated with the producer method or field.</text>
             <assertion id="a">
@@ -6423,7 +6422,7 @@
         </group>
     </section>
 
-    <section id="11.3.22" title="Obtaining an InjectionPoint">
+    <section id="bm_obtain_injectionpoint" title="Obtaining an InjectionPoint" level="3">
         <group>
             <text>The method |BeanManager.createInjectionPoint()| returns a container provided implementation of |InjectionPoint| for a given |AnnotatedField| or |AnnotatedParameter| or throws an |IllegalArgumentException| if there is a definition error associated with the injection point.</text>
             <assertion id="a">
@@ -6438,7 +6437,7 @@
         </group>
     </section>
 
-    <section id="11.3.23" title="Obtaining a BeanAttributes">
+    <section id="bm_obtain_beanattributes" title="Obtaining a BeanAttributes" level="3">
         <group>
             <text>The method |BeanManager.createBeanAttributes()| returns a container provided implementation of |BeanAttributes| by reading the annotations of a given |AnnotatedType| or |AnnotatedMember|, according to the rules define in |Chapter 2, Concepts|, or throws an |IllegalArgumentException| if there is a definition error associated with the declared bean attributes.</text>
             <assertion id="a">
@@ -6453,7 +6452,7 @@
         </group>
     </section>
 
-    <section id="11.3.24" title="Obtaining a Bean">
+    <section id="bm_obtain_bean" title="Obtaining a Bean" level="3">
         <group>
             <text>The method |BeanManager.createBean()| returns a container provided implementation of |Bean|. The method accepts a |BeanAttributes|, which determines the bean types, qualifiers, scope, name and stereotypes of the returned |Bean|, and the return values of |isAlternative()| and |isNullable()|, and a class, which determines the return value of |Bean.getClass()|.</text>
         </group>
@@ -6465,7 +6464,7 @@
         </assertion>
     </section>
 
-    <section id="11.3.25" title="Obtaining the instance of an Extension">
+    <section id="bm_obtain_extension" title="Obtaining the instance of an Extension" level="3">
         <group>
             <text>The method |BeanManager.getExtension()| returns the container's instance of an |Extension| class declared in |META-INF/services|, or throws an |IllegalArgumentException| if the container has no instance of the given class.</text>
             <assertion id="a">
@@ -6477,7 +6476,7 @@
         </group>
     </section>
 
-    <section id="11.4" title="Alternative metadata sources">
+    <section id="alternative_metadata_sources" title="Alternative metadata sources" level="2">
         <assertion id="a" testable="false">
             <text>The interfaces |AnnotatedType|, |AnnotatedField|, |AnnotatedMethod|, |AnnotatedConstructor| and |AnnotatedParameter| in the package |javax.enterprise.inject.spi| allow a portable extension to specify metadata that overrides the annotations that exist on a bean class. The portable extension is responsible for implementing the interfaces, thereby exposing the metadata to the container.</text>
             <note>Statement of intent. In fact some assertions in this section do test metadata constructed by container as defined in sections "11.3.18. Obtaining an AnnotatedType for a class" and "11.5.6. ProcessAnnotatedType event".</note>
@@ -6672,7 +6671,7 @@
         </group>
     </section>
 
-    <section id="11.5" title="Container lifecycle events">
+    <section id="init_events" title="Container lifecycle events" level="2">
         <assertion id="a" testable="false">
             <text>During the application initialization process, the container fires a series of events, allowing portable extensions to integrate with the container initialization process defined in Section 12.2, "Application initialization lifecycle".</text>
             <note>Generic statement</note>
@@ -6708,7 +6707,7 @@
         </assertion>
     </section>
 
-    <section id="11.5.1" title="BeforeBeanDiscovery event">
+    <section id="bbd" title="BeforeBeanDiscovery event" level="3">
         <assertion id="a">
             <text>The container must fire an event before it begins the bean discovery process. The event object must be of type |javax.enterprise.inject.spi.BeforeBeanDiscovery|.</text>
         </assertion>
@@ -6744,7 +6743,7 @@
         </assertion>
     </section>
 
-    <section id="11.5.2" title="AfterBeanDiscovery event">
+    <section id="abd" title="AfterBeanDiscovery event" level="3">
         <assertion id="a">
             <text>The container must fire a second event when it has fully completed the bean discovery process, validated that there are no definition errors relating to the discovered beans, and registered |Bean| and |ObserverMethod| objects for the discovered beans, but before detecting deployment problems. The event object must be of type |javax.enterprise.inject.spi.AfterBeanDiscovery|.</text>
         </assertion>
@@ -6798,7 +6797,7 @@
         </assertion>
     </section>
 
-    <section id="11.5.3" title="AfterDeploymentValidation event">
+    <section id="adv" title="AfterDeploymentValidation event" level="3">
         <assertion id="a">
             <text>The container must fire a third event after it has validated that there are no deployment problems and before creating contexts or processing requests. The event object must be of type |javax.enterprise.inject.spi.AfterDeploymentValidation|.</text>
         </assertion>
@@ -6816,7 +6815,7 @@
         </assertion>
     </section>
 
-    <section id="11.5.4" title="BeforeShutdown event">
+    <section id="bs" title="BeforeShutdown event" level="3">
         <assertion id="a">
             <text>The container must fire a final event after it has finished processing requests and destroyed all contexts. The event object must be of type |javax.enterprise.inject.spi.BeforeShutdown|.</text>
         </assertion>
@@ -6827,7 +6826,7 @@
         </assertion>
     </section>
 
-    <section id="11.5.5" title="ProcessModule event">
+    <section id="pm" title="ProcessModule event" level="3">
 
         <assertion id="a">
             <text>The container must fire an event for each bean deployment archive, before it processes the classes packaged in that module. The event object must be of type |javax.enterprise.inject.spi.ProcessModule|.</text>
@@ -6894,7 +6893,7 @@
 
     </section>
 
-    <section id="11.5.6" title="ProcessAnnotatedType event">
+    <section id="pat" title="ProcessAnnotatedType event" level="3">
 
         <group>
             <text>The container must fire an event, before it processes a type, for each Java class, interface, enum or annotation discovered in a bean archive, Annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|, annotation added by |BeforeBeanDiscovery.addInterceptorBinding()|, |BeforeBeanDiscovery.addQualifier()|, |BeforeBeanDiscovery.addScope()| or |BeforeBeanDiscovery.addStereotype()|.</text>
@@ -7016,7 +7015,7 @@
         </assertion>
     </section>
 
-    <section id="11.5.7" title="ProcessInjectionPoint event">
+    <section id="pip" title="ProcessInjectionPoint event" level="3">
 
         <assertion id="a">
             <text>The container must fire an event for every injection point of every Java EE component class supporting injection that may be instantiated by the container at runtime. The event object must be of type |javax.enterprise.inject.spi.ProcessInjectionPoint&lt;T, X&gt;| where |T| is the bean class of the bean that declares the injection point, and |X| is the declared type of the injection point.</text>
@@ -7044,7 +7043,7 @@
 
     </section>
 
-    <section id="11.5.8" title="ProcessInjectionTarget event">
+    <section id="pit" title="ProcessInjectionTarget event" level="3">
         <group>
             <text>The container must fire an event for every Java EE component class supporting injection that may be instantiated by the container at runtime, including every managed bean declared using |@ManagedBean|, EJB session or message-driven bean, enabled bean, enabled interceptor or enabled decorator. The event object must be of type |javax.enterprise.inject.spi.ProcessInjectionTarget&lt;X&gt;|, where |x| is the managed bean class, session bean class or Java EE component class supporting injection.</text>
             <assertion id="aaa">
@@ -7173,7 +7172,7 @@
         </assertion>
     </section>
 
-    <section id="11.5.9" title="ProcessProducer event">
+    <section id="pp" title="ProcessProducer event" level="3">
         <group>
             <text>The container must fire an event for each producer method or field of each enabled bean, including resources.</text>
             <assertion id="aa">
@@ -7240,7 +7239,7 @@
         </assertion>
     </section>
 
-    <section id="11.5.10" title="ProcessBeanAttributes event">
+    <section id="pba" title="ProcessBeanAttributes event" level="3">
 
         <group>
             <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean archive, before registering the |Bean| object. No event is fired for any |@New| qualified bean, defined in Section 3.14, "@New qualified beans". The event object must be of type |javax.enterprise.inject.spi.ProcessBeanAttributes&lt;T&gt;| where |T| is the bean class of the managed bean or session bean, the return type of the producer method, or the type of the producer field.</text>
@@ -7300,7 +7299,7 @@
 
     </section>
 
-    <section id="11.5.11" title="ProcessBean event">
+    <section id="pb" title="ProcessBean event" level="3">
         <assertion id="aa" testable="false">
             <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean archive, after firing the |ProcessBeanAttributes| for the bean and before registering the |Bean| object. No event is fired for any |@New| qualified bean, defined in Section 3.12, "@New qualified beans".</text>
             <note>Tested below</note>
@@ -7434,7 +7433,7 @@
 
     </section>
 
-    <section id="11.5.12" title="ProcessObserverMethod event">
+    <section id="pom" title="ProcessObserverMethod event" level="3">
         <assertion id="aaa">
             <text>The container must fire an event for each observer method of each enabled bean, before registering the |ObserverMethod| object. The event object must be of type |javax.enterprise.inject.spi.ProcessObserverMethod&lt;T, X&gt;| where |T| is the bean class of the bean that declares the observer method and |X| is the observed event type of the observer method.</text>
         </assertion>
@@ -7456,11 +7455,11 @@
         </assertion>
     </section>
 
-    <section id="12" title="Packaging and Deployment">
+    <section id="packaging_deployment" title="Packaging and deployment" level="1">
 
     </section>
 
-    <section id="12.1" title="Bean deployment archives">
+    <section id="bean_archive" title="Bean archives" level="2">
         <assertion id="aa" testable="false">
             <text>Bean classes of enabled beans must be deployed in bean archives.</text>
         </assertion>
@@ -7581,7 +7580,7 @@
 
     </section>
 
-    <section id="12.2" title="Application initialization lifecycle">
+    <section id="initialization" title="Application initialization lifecycle" level="2">
         <assertion id="a" testable="false">
             <text>When an application is started, the container performs the following steps.</text>
             <note>Description</note>
@@ -7632,7 +7631,7 @@
         </assertion>
     </section>
 
-    <section id="12.3" title="Application shutdown lifecycle">
+    <section id="shutdown" title="Application shutdown lifecycle" level="2">
         <group>
             <text>When an application is stopped, the container performs the following steps:</text>
             <assertion id="a">
@@ -7648,7 +7647,7 @@
 
     </section>
 
-    <section id="12.4" title="Bean discovery">
+    <section id="bean_discovery" title="Bean discovery" level="2">
         <assertion id="a" testable="false">
             <text>The container automatically discovers managed beans (according to the rules of Section 3.1.1, "Which Java classes are managed beans?") and session beans in bean archives and searches the bean classes for producer methods, producer fields, disposer methods and observer methods.</text>
             <note>Statement of intent</note>
@@ -7758,7 +7757,6 @@
             </assertion>
         </group>
 
-
         <assertion id="i">
             <text>For each enabled bean, the container must search the class for observer methods, and for each observer method create an |ObserverMethod| object, as defined in Section 11.1.3, "The ObserverMethod interface" and fire an event of type |ProcessObserverMethod|, as defined in Section 11.5.9, "ProcessObserverMethod event".</text>
         </assertion>
@@ -7796,7 +7794,7 @@
         </assertion>
     </section>
 
-    <section id="12.5" title="Integration with Unified EL">
+    <section id="el" title="Integration with Unified EL" level="2">
         <assertion id="a">
             <text>The container must provide a Unified EL |ELResolver| to the servlet engine and JSF implementation that resolves bean EL names using the rules of name resolution defined in 5.3, "EL name resolution" and resolving ambiguities according to Section 5.3.1, "Ambiguous EL names".</text>
         </assertion>
