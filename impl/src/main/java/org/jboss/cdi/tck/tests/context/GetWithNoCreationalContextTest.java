@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Contextual;
 
@@ -38,7 +36,7 @@ public class GetWithNoCreationalContextTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(GetWithNoCreationalContextTest.class).build();
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "na"), @SpecAssertion(section = "6.2", id = "k") })
     public void testGetWithoutCreationalContextReturnsNull() {
         Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();

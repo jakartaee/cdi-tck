@@ -17,9 +17,6 @@
 
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled;
 
-import static org.jboss.cdi.tck.TestGroups.ALTERNATIVES;
-import static org.jboss.cdi.tck.TestGroups.INJECTION;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +41,7 @@ public class DisabledBeanNotAvailableForInjectionTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DisabledBeanNotAvailableForInjectionTest.class).build();
     }
 
-    @Test(groups = { ALTERNATIVES, INJECTION })
+    @Test
     @SpecAssertion(section = "5.1.4", id = "i")
     public void testDeployment() {
         // Test deployment problem

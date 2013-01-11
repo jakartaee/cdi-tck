@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve.enterprise;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -35,7 +34,7 @@ public class ResolveEnterpriseEventObserverTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ResolveEnterpriseEventObserverTest.class).build();
     }
 
-    @Test(groups = { INTEGRATION, EVENTS })
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "10.4", id = "d")
     public void testObserverMethodOnEnterpriseBeanIsBusinessMethodOrStatic() {
         assert getCurrentManager().resolveObserverMethods(new EJBEvent()).size() == 2;

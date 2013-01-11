@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.parameterizedReturnTypeWithWildcard;
 
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_FIELD;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +36,7 @@ public class ParameterizedReturnTypeWithWildcardTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ParameterizedReturnTypeWithWildcardTest.class).build();
     }
 
-    @Test(groups = PRODUCER_FIELD)
+    @Test
     @SpecAssertion(section = "3.4", id = "ga")
     public void testParameterizedReturnTypeWithWildcard() {
     }

@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.conversation;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -59,7 +58,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "l"), @SpecAssertion(section = "2.4.1", id = "ba") })
     public void testConversationPropagated() throws Exception {
 
@@ -84,7 +83,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
         assertEquals(stormStrength.getValueAttribute(), STORM_STRENGTH);
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertion(section = "6.7.4", id = "m")
     public void testConversationPropagatedOverRedirect() throws Exception {
 
@@ -110,7 +109,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
         assertEquals(stormStrength.getValueAttribute(), REDIRECT_STORM_STRENGTH);
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "l") })
     public void testConversationPropagatedAjax() throws Exception {
 

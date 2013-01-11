@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.type.variable;
 
-import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +36,7 @@ public class TypeVariableInjectionPointTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(TypeVariableInjectionPointTest.class).build();
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertion(section = "5.2.3", id = "c")
     public void testTypeVariableInjectionPoint() {
     }

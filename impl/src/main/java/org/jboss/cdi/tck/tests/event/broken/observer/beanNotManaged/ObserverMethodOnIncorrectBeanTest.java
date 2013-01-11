@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.beanNotManaged;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -40,7 +38,7 @@ public class ObserverMethodOnIncorrectBeanTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodOnIncorrectBeanTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4", id = "aa")
     public void testObserverMethodNotOnManagedOrSessionBeanFails() {
         assert getCurrentManager().resolveObserverMethods(new String()).isEmpty();

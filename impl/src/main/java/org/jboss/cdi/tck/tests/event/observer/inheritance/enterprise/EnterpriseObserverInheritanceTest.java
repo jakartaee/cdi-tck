@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.inheritance.enterprise;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-import static org.jboss.cdi.tck.TestGroups.INHERITANCE;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -45,7 +43,7 @@ public class EnterpriseObserverInheritanceTest extends AbstractTest {
         return new EnterpriseArchiveBuilder().withTestClassPackage(EnterpriseObserverInheritanceTest.class).build();
     }
 
-    @Test(groups = { EVENTS, INHERITANCE })
+    @Test
     @SpecAssertion(section = "4.2", id = "df")
     public void testNonStaticObserverMethodInherited() throws Exception {
         Egg egg = new Egg();
@@ -55,7 +53,7 @@ public class EnterpriseObserverInheritanceTest extends AbstractTest {
         assertTrue(egg.getVisited().contains(LazyFarmer.class.getSimpleName()));
     }
 
-    @Test(groups = { EVENTS, INHERITANCE })
+    @Test
     @SpecAssertion(section = "4.2", id = "dl")
     public void testNonStaticObserverMethodIndirectlyInherited() throws Exception {
         StockPrice stockPrice = new StockPrice();

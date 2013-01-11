@@ -17,8 +17,6 @@
 
 package org.jboss.cdi.tck.tests.event.broken.observer.isProducer;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,7 +43,7 @@ public class ObserverMethodAnnotatedProducesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodAnnotatedProducesTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4.2", id = "d")
     public void testObserverMethodAnnotatedProducesFails() {
     }

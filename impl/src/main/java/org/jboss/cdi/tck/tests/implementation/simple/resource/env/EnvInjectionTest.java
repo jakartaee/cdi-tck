@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.env;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
 
 import java.io.Serializable;
 
@@ -49,7 +48,7 @@ public class EnvInjectionTest extends AbstractTest {
                 .withWebXml("web.xml").build();
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertion(section = "3.6.1", id = "bb")
     public void testInjectionOfEnv() {
         Bean<GreetingBean> greetingBean = getBeans(GreetingBean.class).iterator().next();
@@ -59,7 +58,7 @@ public class EnvInjectionTest extends AbstractTest {
         assert instance.greet().equals("Hello there my friend");
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "la"), @SpecAssertion(section = "7.3.6", id = "ma"),
             @SpecAssertion(section = "7.3.6", id = "o") })
     public void testProduceEnvProxy() {

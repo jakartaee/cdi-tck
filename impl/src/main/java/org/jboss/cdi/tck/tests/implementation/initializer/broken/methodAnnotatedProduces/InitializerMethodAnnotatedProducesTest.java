@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.methodAnnotatedProduces;
 
-import static org.jboss.cdi.tck.TestGroups.INITIALIZER_METHOD;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,7 +37,7 @@ public class InitializerMethodAnnotatedProducesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(InitializerMethodAnnotatedProducesTest.class).build();
     }
 
-    @Test(groups = INITIALIZER_METHOD)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.10.1", id = "ba"), @SpecAssertion(section = "3.3.2", id = "ca") })
     public void testInitializerMethodAnnotatedProduces() {
     }

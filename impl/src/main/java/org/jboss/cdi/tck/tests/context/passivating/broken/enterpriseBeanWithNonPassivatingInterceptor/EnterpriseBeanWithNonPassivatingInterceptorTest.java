@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInterceptor;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.PASSIVATION;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -47,7 +45,7 @@ public class EnterpriseBeanWithNonPassivatingInterceptorTest extends AbstractTes
                                 .clazz(DigitalInterceptor.class.getName()).up()).build();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION, INTEGRATION })
+    @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "b"), @SpecAssertion(section = "6.6.4", id = "hd") })
     public void testEnterpriseBeanWithNonPassivatingDecoratorFails() {
     }

@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.parameterAnnotatedDisposes;
 
-import static org.jboss.cdi.tck.TestGroups.INITIALIZER_METHOD;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +36,7 @@ public class ParameterAnnotatedDisposesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ParameterAnnotatedDisposesTest.class).build();
     }
 
-    @Test(groups = INITIALIZER_METHOD)
+    @Test
     @SpecAssertion(section = "3.10.1", id = "ca")
     public void testInitializerMethodHasParameterAnnotatedDisposes() {
     }

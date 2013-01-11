@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.application.ejb;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
@@ -45,7 +44,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@Test(groups = { JAVAEE_FULL, CONTEXTS })
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextSharedTest extends AbstractTest {
 

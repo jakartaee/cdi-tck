@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-import static org.jboss.cdi.tck.TestGroups.PASSIVATION;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Set;
@@ -51,42 +48,42 @@ public class PassivatingContextTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(PassivatingContextTest.class).build();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.6.1", id = "ba"), @SpecAssertion(section = "6.6.3", id = "a") })
     public void testManagedBeanWithSerializableImplementationClassOK() {
         Set<Bean<Jyvaskyla>> beans = getBeans(Jyvaskyla.class);
         assert !beans.isEmpty();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertion(section = "6.6.1", id = "bb")
     public void testManagedBeanWithSerializableInterceptorClassOK() {
         Set<Bean<Kokkola>> beans = getBeans(Kokkola.class);
         assert !beans.isEmpty();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertion(section = "6.6.1", id = "bc")
     public void testManagedBeanWithSerializableDecoratorOK() {
         Set<Bean<City>> beans = getBeans(City.class);
         assert !beans.isEmpty();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertion(section = "6.6.1", id = "ca")
     public void testPassivationCapableProducerMethodIsOK() {
         Set<Bean<Record>> beans = getBeans(Record.class);
         assert !beans.isEmpty();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertion(section = "6.6.1", id = "da")
     public void testPassivationCapableProducerFieldIsOK() {
         Set<Bean<Wheat>> beans = getBeans(Wheat.class);
         assert !beans.isEmpty();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertion(section = "6.6.2", id = "c")
     public void testInjectionOfDependentPrimitiveProductIntoNormalBean() {
         getInstanceByType(NumberConsumer.class).ping();
@@ -98,7 +95,7 @@ public class PassivatingContextTest extends AbstractTest {
         getInstanceByType(SerializableCityConsumer.class).ping();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.6", id = "a") })
     public void testPassivationOccurs() throws IOException, ClassNotFoundException {
         Kajaani instance = getInstanceByType(Kajaani.class);
@@ -110,20 +107,20 @@ public class PassivatingContextTest extends AbstractTest {
         assert instance.getTheNumber() == 100;
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertion(section = "6.6.4", id = "aa")
     public void testBeanWithNonSerializableImplementationInjectedIntoTransientFieldOK() {
         Set<Bean<Joensuu>> beans = getBeans(Joensuu.class);
         assert !beans.isEmpty();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION }, expectedExceptions = IllegalProductException.class)
+    @Test(expectedExceptions = IllegalProductException.class)
     @SpecAssertion(section = "6.6.4", id = "ea")
     public void testPassivatingScopeProducerMethodReturnsUnserializableObjectNotOk() {
         getInstanceByType(Television.class).turnOn();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION }, expectedExceptions = IllegalProductException.class)
+    @Test(expectedExceptions = IllegalProductException.class)
     @SpecAssertion(section = "6.6.4", id = "eb")
     public void testNonSerializableProducerFieldDeclaredPassivatingThrowsIllegalProductException() {
         getInstanceByType(HelsinkiNonSerializable.class).ping();

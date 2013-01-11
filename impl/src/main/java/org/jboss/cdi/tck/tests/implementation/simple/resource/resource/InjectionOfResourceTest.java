@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.resource;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -42,7 +41,7 @@ public class InjectionOfResourceTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(InjectionOfResourceTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertion(section = "3.6.1", id = "bb")
     public void testInjectionOfResource() {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
@@ -51,7 +50,7 @@ public class InjectionOfResourceTest extends AbstractTest {
         assert managedBean.getBeanManager() != null : "@Another Manager not found";
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "la"), @SpecAssertion(section = "7.3.6", id = "ma"),
             @SpecAssertion(section = "7.3.6", id = "o") })
     public void testProduceResourceProxy() {
@@ -62,7 +61,7 @@ public class InjectionOfResourceTest extends AbstractTest {
         assert beanManager != null;
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "mb") })
     public void testPassivatingResource() throws Exception {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();

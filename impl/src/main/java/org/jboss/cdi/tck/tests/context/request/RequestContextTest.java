@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.request;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.SERVLET;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
@@ -55,7 +53,7 @@ public class RequestContextTest extends AbstractTest {
     /**
      * The request scope is active during the service() method of any Servlet in the web application.
      */
-    @Test(groups = { CONTEXTS, SERVLET })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "aa"), @SpecAssertion(section = "6.7.1", id = "ac") })
     public void testRequestScopeActiveDuringServiceMethod() throws Exception {
         WebClient webClient = new WebClient();
@@ -66,7 +64,7 @@ public class RequestContextTest extends AbstractTest {
     /**
      * The request scope is active during the doFilter() method of any Filter in the web application.
      */
-    @Test(groups = { CONTEXTS, SERVLET })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ab"), @SpecAssertion(section = "6.7.1", id = "ac") })
     public void testRequestScopeActiveDuringServletFilter() throws Exception {
         WebClient webClient = new WebClient();
@@ -78,7 +76,7 @@ public class RequestContextTest extends AbstractTest {
      * The request context is destroyed at the end of the servlet request, after the service() method and all doFilter()
      * methods, and all requestDestroyed() notifications return.
      */
-    @Test(groups = { CONTEXTS, SERVLET })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ba"), @SpecAssertion(section = "6.7.1", id = "bb"),
             @SpecAssertion(section = "6.7.1", id = "bc") })
     public void testRequestScopeIsDestroyedAfterServletRequest() throws Exception {

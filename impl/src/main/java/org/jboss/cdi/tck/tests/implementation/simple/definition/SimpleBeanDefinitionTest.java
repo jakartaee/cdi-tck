@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
-import static org.jboss.cdi.tck.TestGroups.INNER_CLASS;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -43,7 +41,7 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
         assert getBeans(Cow_NotBean.class).size() == 0;
     }
 
-    @Test(groups = INNER_CLASS)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.1.1", id = "ba") })
     public void testStaticInnerClassDeclaredInJavaAllowed() {
         assert getBeans(StaticInnerClass.class).size() == 1;

@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInjectedFieldInInterceptor;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.PASSIVATION;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -41,7 +39,7 @@ public class EnterpriseBeanWithNonPassivatingInjectedFieldInInterceptorTest exte
                 EnterpriseBeanWithNonPassivatingInjectedFieldInInterceptorTest.class).build();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION, INTEGRATION })
+    @Test(groups =  INTEGRATION)
     @SpecAssertion(section = "6.6.4", id = "bda")
     // WBRI-361
     public void testSessionBeanWithNonPassivatingInjectedFieldInInterceptorFails() {

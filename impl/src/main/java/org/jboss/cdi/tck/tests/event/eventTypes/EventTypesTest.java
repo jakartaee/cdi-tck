@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.eventTypes;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -54,7 +53,7 @@ public class EventTypesTest extends AbstractTest {
     @Inject
     Event<int[]> intArrayEvent;
 
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.1", id = "aa"), @SpecAssertion(section = "10.1", id = "j") })
     public void testEventTypeIsConcreteTypeWithNoTypeVariables() {
         Listener listener = getInstanceByType(Listener.class);
@@ -81,7 +80,7 @@ public class EventTypesTest extends AbstractTest {
         assert listener.getObjectsFired().get(3).equals(1);
     }
 
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.1", id = "j") })
     public void testEventTypeIsArray() {
 
@@ -110,7 +109,7 @@ public class EventTypesTest extends AbstractTest {
         assertEquals(listener.getObjectsFired().get(2), intArray);
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.1", id = "c")
     public void testEventTypeIncludesAllSuperclassesAndInterfacesOfEventObject() {
         // we have to use a dependent-scoped observer here because we it is observing the Object event type

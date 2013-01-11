@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-import static org.jboss.cdi.tck.TestGroups.MANAGER;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.ContextNotActiveException;
 import javax.enterprise.context.Dependent;
@@ -44,19 +41,19 @@ public class ContextTest extends AbstractTest {
                 .build();
     }
 
-    @Test(expectedExceptions = { IllegalStateException.class }, groups = { MANAGER })
+    @Test(expectedExceptions = { IllegalStateException.class })
     @SpecAssertion(section = "6.5.1", id = "b")
     public void testGetContextWithTooManyActiveContextsFails() {
         getCurrentManager().getContext(DummyScoped.class);
     }
 
-    @Test(expectedExceptions = { ContextNotActiveException.class }, groups = { MANAGER })
+    @Test(expectedExceptions = { ContextNotActiveException.class })
     @SpecAssertion(section = "6.5.1", id = "a")
     public void testGetContextWithNoRegisteredContextsFails() {
         getCurrentManager().getContext(Unregistered.class);
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "2.4.1", id = "aa"), @SpecAssertion(section = "2.4.1", id = "ab"),
             @SpecAssertion(section = "2.4.1", id = "ac"), @SpecAssertion(section = "2.4.1", id = "ca"),
             @SpecAssertion(section = "11.3.16", id = "a") })

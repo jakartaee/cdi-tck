@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.persistenceContext;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -42,7 +41,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@Test(groups = { INTEGRATION, PERSISTENCE, LIFECYCLE })
+@Test(groups = { INTEGRATION, PERSISTENCE })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class PersistenceContextInjectionTest extends AbstractTest {
 

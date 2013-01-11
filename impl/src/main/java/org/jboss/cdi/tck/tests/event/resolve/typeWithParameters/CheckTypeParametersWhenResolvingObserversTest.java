@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
 import static org.jboss.cdi.tck.tests.event.resolve.typeWithParameters.AbstractObserver.buildActionId;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -48,7 +47,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         return new WebArchiveBuilder().withTestClassPackage(CheckTypeParametersWhenResolvingObserversTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "b"), @SpecAssertion(section = "11.3.11", id = "a") })
     public void testResolvingChecksTypeParameters() {
         verifyObserver(new StringList(), 1, StringListObserver.class);
@@ -56,14 +55,14 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         verifyObserver(new CharacterList(), 0);
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.2.1", id = "b")
     public void testParameterizedEventTypeAssignableToRawType() {
         verifyObserver(new RawTypeObserver.BoxWithDifferentTypeParameters(), 1, RawTypeObserver.class);
         verifyObserver(new RawTypeObserver.BoxWithObjectTypeParameters(), 1, RawTypeObserver.class);
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "c"), @SpecAssertion(section = "10.4", id = "aa") })
     public void testObservedEventTypeParameterIsActualType() {
         ActionSequence.reset();
@@ -73,7 +72,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         verifyEvent(FooObserver.SEQUENCE, 1, buildActionId(FooObserver.class, fooString));
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "d") })
     public void testObservedEventTypeParameterIsActualTypeNested() {
         ActionSequence.reset();
@@ -83,7 +82,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         verifyEvent(FooObserver.SEQUENCE_NESTED, 1, buildActionId(FooObserver.class, fooStringList));
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "e") })
     public void testObservedEventTypeParameterIsWildcard() {
 
@@ -107,7 +106,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         verifyEvent(WildcardObserver.SEQUENCE_UPPER, 1, buildActionId(WildcardObserver.class, quxStringList));
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.2.1", id = "f")
     public void testObservedEventTypeParameterIsTypeVariable() {
 
@@ -128,7 +127,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
 
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.2.1", id = "a")
     public void testEventTypeAssignableToATypeVariable() {
 
@@ -151,7 +150,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     /**
      * Quick and dirty test for various event type resolution use cases.
      */
-    @Test(groups = { EVENTS })
+    @Test
     public void testEventTypeResolution() {
         int expectedMatches = 5;
         Dog<?, ?> dogStringNumber = new Dog.DogStringNumber();

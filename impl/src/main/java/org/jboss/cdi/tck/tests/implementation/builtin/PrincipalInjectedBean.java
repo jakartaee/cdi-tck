@@ -23,9 +23,9 @@ import javax.ejb.Stateful;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.security.auth.login.AppConfigurationEntry;
+import javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
-import javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag;
 
 /**
  * @author pmuir

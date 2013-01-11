@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer;
 
-import static org.jboss.cdi.tck.TestGroups.INITIALIZER_METHOD;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +36,7 @@ public class EjbInitializerMethodTest extends AbstractTest {
                 .withExcludedClass(InitializerMethodTest.class.getName()).build();
     }
 
-    @Test(groups = { INITIALIZER_METHOD, INTEGRATION })
+    @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "3.10", id = "e") })
     // This DOES NOT TEST initializer methods on Java EE component classes PLM
     public void testInitializerMethodNotABusinessMethod() {

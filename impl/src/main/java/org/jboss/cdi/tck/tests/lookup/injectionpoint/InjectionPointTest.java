@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import static org.jboss.cdi.tck.TestGroups.INJECTION_POINT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -69,7 +68,7 @@ public class InjectionPointTest extends AbstractTest {
                 .build();
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.5.3", id = "d"), @SpecAssertion(section = "5.5.7", id = "aa") })
     public void testGetBean() {
 
@@ -83,7 +82,7 @@ public class InjectionPointTest extends AbstractTest {
         assert beanWithInjectionPoint.getInjectedMetadata().getBean().equals(resolvedBeans.iterator().next());
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "ba")
     public void testGetType() {
         // Get an instance of the bean which has another bean injected into it
@@ -93,7 +92,7 @@ public class InjectionPointTest extends AbstractTest {
         assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "bc")
     public void testGetBindingTypes() {
         // Get an instance of the bean which has another bean injected into it
@@ -105,7 +104,7 @@ public class InjectionPointTest extends AbstractTest {
         assert Default.class.isAssignableFrom(bindingTypes.iterator().next().annotationType());
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "ca")
     public void testGetMemberField() {
         // Get an instance of the bean which has another bean injected into it
@@ -115,7 +114,7 @@ public class InjectionPointTest extends AbstractTest {
         assert Field.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getMember().getClass());
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "cb")
     public void testGetMemberMethod() {
         // Get an instance of the bean which has another bean injected into it
@@ -130,7 +129,7 @@ public class InjectionPointTest extends AbstractTest {
         assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "cc")
     public void testGetMemberConstructor() {
         // Get an instance of the bean which has another bean injected into it
@@ -145,7 +144,7 @@ public class InjectionPointTest extends AbstractTest {
         assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "daa")
     public void testGetAnnotatedField() {
         // Get an instance of the bean which has another bean injected into it
@@ -156,7 +155,7 @@ public class InjectionPointTest extends AbstractTest {
         assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated().isAnnotationPresent(AnimalStereotype.class);
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "daa")
     public void testGetAnnotatedParameter() {
         // Get an instance of the bean which has another bean injected into it
@@ -167,14 +166,14 @@ public class InjectionPointTest extends AbstractTest {
         assert annotationSetMatches(beanWithInjectionPoint.getInjectedMetadata().getQualifiers(), Default.class);
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "ea")
     public void testDependentScope() {
         assert getBeans(InjectionPoint.class).size() == 1;
         assert getBeans(InjectionPoint.class).iterator().next().getScope().equals(Dependent.class);
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "eb")
     public void testPassivationCapability() throws Exception {
         InjectionPoint ip1 = getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
@@ -190,7 +189,7 @@ public class InjectionPointTest extends AbstractTest {
         assert ip3.getType().equals(BeanWithInjectionPointMetadata.class);
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "ea")
     public void testApiTypeInjectionPoint() {
         // Get an instance of the bean which has another bean injected into it
@@ -200,7 +199,7 @@ public class InjectionPointTest extends AbstractTest {
         assert InjectionPoint.class.isAssignableFrom(beanWithInjectionPoint.getInjectedMetadata().getClass());
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "ea")
     public void testCurrentBinding() {
         // Get an instance of the bean which has another bean injected into it
@@ -210,7 +209,7 @@ public class InjectionPointTest extends AbstractTest {
         assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "dca")
     public void testIsTransient() {
         FieldInjectionPointBean bean1 = getInstanceByType(FieldInjectionPointBean.class);
@@ -226,7 +225,7 @@ public class InjectionPointTest extends AbstractTest {
      * 
      * Base of this test was originally part of CDITCK-138 but disappeared during branch merge.
      */
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "dba")
     public void testIsDelegate() {
 
@@ -266,7 +265,7 @@ public class InjectionPointTest extends AbstractTest {
     /**
      * CDI-78 reopened.
      */
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "i")
     public void testDecoratorInjectionPoint() {
         Cat cat = getInstanceByType(Cattery.class).getCat();

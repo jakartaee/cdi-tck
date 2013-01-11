@@ -17,8 +17,6 @@
 
 package org.jboss.cdi.tck.tests.event.observer.inheritance;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-import static org.jboss.cdi.tck.TestGroups.INHERITANCE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -47,7 +45,7 @@ public class ObserverInheritanceTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ObserverInheritanceTest.class).build();
     }
 
-    @Test(groups = { EVENTS, INHERITANCE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "4.2", id = "dc"), @SpecAssertion(section = "4.2", id = "di") })
     public void testNonStaticObserverMethodInherited() {
 

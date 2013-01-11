@@ -17,9 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.application.async;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.SERVLET;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -41,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * 
  * @author Martin Kouba
  */
-@Test(groups = { INTEGRATION, CONTEXTS, SERVLET })
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextAsyncListenerTest extends AbstractTest {
 

@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
-import javax.enterprise.inject.Alternative;
 
 public class FunnelWeaver<T> {
     String name;

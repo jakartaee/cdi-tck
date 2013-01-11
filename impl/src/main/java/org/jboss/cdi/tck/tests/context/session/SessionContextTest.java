@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.session;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.SERVLET;
 
 import java.net.URL;
 
@@ -50,7 +48,7 @@ public class SessionContextTest extends AbstractTest {
                 .withWebResource("SimplePage.html", "SimplePage.html").withWebXml("web.xml").build();
     }
 
-    @Test(groups = { CONTEXTS, SERVLET })
+    @Test
     @SpecAssertion(section = "6.7.2", id = "aa")
     public void testSessionScopeActiveDuringServiceMethod() throws Exception {
         WebClient webClient = new WebClient();
@@ -58,7 +56,7 @@ public class SessionContextTest extends AbstractTest {
         webClient.getPage(contextPath + "serviceMethodTest");
     }
 
-    @Test(groups = { CONTEXTS, SERVLET })
+    @Test
     @SpecAssertion(section = "6.7.2", id = "ab")
     public void testSessionScopeActiveDuringDoFilterMethod() throws Exception {
         WebClient webClient = new WebClient();
@@ -66,7 +64,7 @@ public class SessionContextTest extends AbstractTest {
         webClient.getPage(contextPath + "SimplePage.html");
     }
 
-    @Test(groups = { CONTEXTS, SERVLET })
+    @Test
     @SpecAssertion(section = "6.7.2", id = "b")
     public void testSessionContextSharedBetweenServletRequestsInSameHttpSession() throws Exception {
         WebClient webClient = new WebClient();
@@ -80,7 +78,7 @@ public class SessionContextTest extends AbstractTest {
         assert Long.parseLong(secondRequestResult.getContent()) == Long.parseLong(firstRequestResult.getContent());
     }
 
-    @Test(groups = { CONTEXTS, SERVLET })
+    @Test
     @SpecAssertion(section = "6.7.2", id = "ca")
     public void testSessionContextDestroyedWhenHttpSessionInvalidated() throws Exception {
         WebClient webClient = new WebClient();
@@ -100,7 +98,7 @@ public class SessionContextTest extends AbstractTest {
         assert Boolean.parseBoolean(beanDestructionResult.getContent());
     }
 
-    @Test(groups = { CONTEXTS, SERVLET })
+    @Test
     @SpecAssertion(section = "6.7.2", id = "cb")
     public void testSessionContextDestroyedWhenHttpSessionTimesOut() throws Exception {
         WebClient webClient = new WebClient();

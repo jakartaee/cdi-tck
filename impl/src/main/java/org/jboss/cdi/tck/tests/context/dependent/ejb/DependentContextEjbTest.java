@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.context.dependent.ejb;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -39,7 +38,7 @@ public class DependentContextEjbTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DependentContextEjbTest.class).build();
     }
 
-    @Test(groups = { CONTEXTS, INTEGRATION })
+    @Test(groups =  INTEGRATION)
     @SpecAssertion(section = "6.4.2", id = "aaab")
     public void testDestroyingEjbDestroysDependents() throws Exception {
         assert getBeans(HouseLocal.class).size() == 1;
@@ -56,7 +55,7 @@ public class DependentContextEjbTest extends AbstractTest {
         assert Table.destroyed;
     }
 
-    @Test(groups = { CONTEXTS, INTEGRATION })
+    @Test(groups =  INTEGRATION)
     @SpecAssertion(section = "6.4.2", id = "aaab")
     public void testDestroyingEjbDestroysDependentSimples() throws Exception {
         assert getBeans(FarmLocal.class).size() == 1;

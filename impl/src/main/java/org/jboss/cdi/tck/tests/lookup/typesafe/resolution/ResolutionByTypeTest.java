@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
-import static org.jboss.cdi.tck.TestGroups.INJECTION;
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
-import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -65,7 +62,7 @@ public class ResolutionByTypeTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ResolutionByTypeTest.class).build();
     }
 
-    @Test(groups = RESOLUTION)
+    @Test
     @SpecAssertion(section = "5.2.1", id = "lb")
     public void testDefaultBindingTypeAssumed() throws Exception {
         Set<Bean<Tuna>> possibleTargets = getBeans(Tuna.class);
@@ -73,7 +70,7 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertTrue(possibleTargets.iterator().next().getTypes().contains(Tuna.class));
     }
 
-    @Test(groups = INJECTION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "2.3.4", id = "b"), @SpecAssertion(section = "5.2.1", id = "lc"),
             @SpecAssertion(section = "2.3.3", id = "d"), @SpecAssertion(section = "5.2.1", id = "la"),
             @SpecAssertion(section = "5.2.7", id = "a"), @SpecAssertion(section = "5.2.7", id = "d") })
@@ -95,7 +92,7 @@ public class ResolutionByTypeTest extends AbstractTest {
         }
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "ka") })
     public void testResolveByTypeWithTypeParameter() throws Exception {
 
@@ -105,13 +102,13 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertTrue(beans.iterator().next().getTypes().contains(ScottishFishFarmer.class));
     }
 
-    @Test(groups = { RESOLUTION, PRODUCER_METHOD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "j"), @SpecAssertion(section = "2.2.1", id = "i") })
     public void testResolveByTypeWithArray() throws Exception {
         assertEquals(getBeans(Spider[].class).size(), 1);
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "i"), @SpecAssertion(section = "5.2.5", id = "aa"),
             @SpecAssertion(section = "5.2.5", id = "ab"), @SpecAssertion(section = "5.2.7", id = "b"),
             @SpecAssertion(section = "5.2.7", id = "c") })
@@ -129,7 +126,7 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertEquals(max, NumberProducer.max);
     }
 
-    @Test(groups = RESOLUTION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "ld"), @SpecAssertion(section = "5.2.6", id = "b") })
     public void testResolveByTypeWithNonBindingMembers() throws Exception {
 

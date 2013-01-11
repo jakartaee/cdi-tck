@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.implementation.simple.resource.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -47,7 +46,7 @@ public class EjbInjectionTest extends AbstractTest {
         return new EnterpriseArchiveBuilder().withTestClassPackage(EjbInjectionTest.class).build();
     }
 
-    @Test(groups = { JAVAEE_FULL, LIFECYCLE })
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "ee"), @SpecAssertion(section = "7.3.6", id = "ld"),
             @SpecAssertion(section = "7.3.6", id = "mg") })
     public void testInjectionOfEjbs() {
@@ -58,7 +57,7 @@ public class EjbInjectionTest extends AbstractTest {
         assert instance.getMyEjb().knockKnock().equals("We're home");
     }
 
-    @Test(groups = { JAVAEE_FULL, LIFECYCLE })
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "mh") })
     public void testPassivationOfEjbs() throws Exception {
         Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
@@ -69,7 +68,7 @@ public class EjbInjectionTest extends AbstractTest {
         assert instance.getMyEjb().knockKnock().equals("We're home");
     }
 
-    @Test(groups = { INTEGRATION })
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "ad") })
     public void testResourceBeanTypes() {
         @SuppressWarnings("serial")

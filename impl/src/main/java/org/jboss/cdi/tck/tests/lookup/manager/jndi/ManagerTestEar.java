@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.lookup.manager.jndi;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.TestGroups.MANAGER;
 
 import javax.enterprise.inject.spi.BeanManager;
 
@@ -38,7 +37,7 @@ public class ManagerTestEar extends AbstractTest {
                 .build();
     }
 
-    @Test(groups = { JAVAEE_FULL, MANAGER })
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = "11.3.1", id = "d")
     public void testManagerLookupInJndi() throws Exception {
         BeanManager beanManager = getInstanceByType(JndiBeanManagerInjected.class).getManagerFromJndi();

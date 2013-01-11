@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.alternative.enterprise;
 
-import static org.jboss.cdi.tck.TestGroups.ALTERNATIVES;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -35,7 +34,7 @@ public class SessionBeanAlternativeTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(SessionBeanAlternativeTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { INTEGRATION, ALTERNATIVES })
+    @Test(groups = { INTEGRATION })
     @SpecAssertion(section = "5.1.1", id = "cb")
     public void testEnabledPolicyAvailable() {
         assert getBeans(EjbInterface.class).size() == 1;

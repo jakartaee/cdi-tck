@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.alternative.broken.not.alternative.stereotype;
 
-import static org.jboss.cdi.tck.TestGroups.ALTERNATIVES;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +40,7 @@ public class ClassIsNotAlternativeTest extends AbstractTest {
                 .build();
     }
 
-    @Test(groups = { ALTERNATIVES })
+    @Test
     @SpecAssertion(section = "5.1.1", id = "i")
     public void test() {
     }

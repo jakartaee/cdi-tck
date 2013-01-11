@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.lifecycle;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.Context;
@@ -53,7 +52,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(EnterpriseBeanLifecycleTest.class).build();
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "bb"), @SpecAssertion(section = "6.5.3", id = "b"),
             @SpecAssertion(section = "12.1", id = "bba") })
     public void testCreateSFSB() throws Exception {
@@ -82,7 +81,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         assert stadtInstance instanceof SchoeneStadt;
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "6.6.2", id = "a") })
     public void testSerializeSFSB() throws Exception {
 
@@ -96,7 +95,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
 
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "bc"), @SpecAssertion(section = "7.3.3", id = "c") })
     public void testDestroyRemovesSFSB() throws Exception {
         GrossStadt frankfurt = getInstanceByType(GrossStadt.class);
@@ -114,7 +113,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         // frankfurt.dispose();
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "bc"), @SpecAssertion(section = "3.2.1", id = "dba") })
     public void testRemovedEjbIgnored() {
         KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
@@ -129,7 +128,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         assert !"Kassel-Wilhelmshoehe".equals(newStadtInstance.getName()) : "The destroyed SFSB was not ignored";
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "7.3.3", id = "b") })
     public void testCreateSLSB() {
         Bean<NeueStadt> stadtBean = getBeans(NeueStadt.class).iterator().next();
@@ -143,7 +142,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         assert stadtInstance instanceof GeschichtslosStadt;
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups =  INTEGRATION)
     @SpecAssertion(section = "3.10.1", id = "f")
     public void testInitializerMethodsCalledWithCurrentParameterValues() {
         AlteStadt alteStadt = getInstanceByType(AlteStadt.class);
@@ -151,7 +150,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         assert alteStadt.getAnotherPlaceOfInterest() != null;
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups =  INTEGRATION)
     @SpecAssertion(section = "5.5.3", id = "a")
     public void testDependentObjectsDestroyed() {
         Bean<UniStadt> uniStadtBean = getBeans(UniStadt.class).iterator().next();

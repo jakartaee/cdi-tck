@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.tooManyParameters;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,7 +37,7 @@ public class ObserverMethodWithTwoEventParametersTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodWithTwoEventParametersTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.4.1", id = "a"), @SpecAssertion(section = "10.4.2", id = "b") })
     public void testObserverMethodMustHaveOnlyOneEventParameter() {
     }

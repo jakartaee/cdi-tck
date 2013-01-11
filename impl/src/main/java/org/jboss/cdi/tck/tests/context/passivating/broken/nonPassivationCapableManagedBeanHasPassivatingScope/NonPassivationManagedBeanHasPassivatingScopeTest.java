@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.nonPassivationCapableManagedBeanHasPassivatingScope;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-import static org.jboss.cdi.tck.TestGroups.PASSIVATION;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -46,7 +43,7 @@ public class NonPassivationManagedBeanHasPassivatingScopeTest extends AbstractTe
         return new WebArchiveBuilder().withTestClassPackage(NonPassivationManagedBeanHasPassivatingScopeTest.class).build();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "a"), @SpecAssertion(section = "6.6.3", id = "a") })
     public void testSimpleWebBeanWithNonSerializableImplementationClassFails() {
     }

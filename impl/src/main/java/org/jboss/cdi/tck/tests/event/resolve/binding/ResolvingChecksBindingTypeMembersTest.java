@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.binding;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import javax.enterprise.event.Observes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -56,7 +54,7 @@ public class ResolvingChecksBindingTypeMembersTest extends AbstractTest {
         }
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.4.1", id = "a"), @SpecAssertion(section = "10.2.2", id = "a") })
     public void testResolvingChecksBindingTypeMembers() {
         assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("first-observer")).size() == 1;

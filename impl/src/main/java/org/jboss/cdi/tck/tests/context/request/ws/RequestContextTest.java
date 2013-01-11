@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.request.ws;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
@@ -65,7 +64,7 @@ public class RequestContextTest extends AbstractTest {
                                 .up().createServletMapping().servletName("Translator").urlPattern("/translator").up()).build();
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "c"), @SpecAssertion(section = "6.7.1", id = "d"),
             @SpecAssertion(section = "6.7.3", id = "b") })
     public void testRequestScopeActiveDuringWebServiceInvocation() throws Exception {

@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -44,20 +42,20 @@ public class ResolveEventObserversTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ResolveEventObserversTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4", id = "e")
     public void testMultipleObserverMethodsForSameEventPermissible() {
         assert getCurrentManager().resolveObserverMethods(new DiskSpaceEvent()).size() == 2;
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4", id = "f")
     public void testMultipleObserverMethodsOnBeanPermissible() {
         assert getCurrentManager().resolveObserverMethods(new BatteryEvent()).size() == 1;
         assert getCurrentManager().resolveObserverMethods(new DiskSpaceEvent()).size() == 2;
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4.2", id = "a")
     public void testMethodWithParameterAnnotatedWithObservesRegistersObserverMethod() throws SecurityException,
             NoSuchMethodException {
@@ -75,14 +73,14 @@ public class ResolveEventObserversTest extends AbstractTest {
         assert method.getParameterAnnotations()[0][0].annotationType().equals(Observes.class);
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4.1", id = "b")
     public void testObserverMethodWithoutBindingTypesObservesEventsWithoutBindingTypes() {
         // Resolve registered observers with an event containing no binding types
         assert getCurrentManager().resolveObserverMethods(new SimpleEventType()).size() == 2;
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "c"), @SpecAssertion(section = "10.2.2", id = "a"),
             @SpecAssertion(section = "10.2.3", id = "a") })
     public void testObserverMethodMayHaveMultipleBindingTypes() {
@@ -91,14 +89,14 @@ public class ResolveEventObserversTest extends AbstractTest {
                 new TameAnnotationLiteral()).size() == 2;
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.5", id = "aa")
     public void testObserverMethodRegistration() {
         // Resolve registered observers with an event containing no binding types
         assert getCurrentManager().resolveObserverMethods(new SimpleEventType()).size() == 2;
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({
             // these two assertions combine to create a logical, testable assertion
             @SpecAssertion(section = "11.3.11", id = "a"), @SpecAssertion(section = "11.3.11", id = "b") })
@@ -107,21 +105,21 @@ public class ResolveEventObserversTest extends AbstractTest {
                 Annotation[].class) != null;
     }
 
-    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.11", id = "e")
     public void testBeanManagerResolveObserversWithIllegalQualifier() {
         getCurrentManager().resolveObserverMethods(new SimpleEventType(), new AnnotationLiteral<Override>() {
         });
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "12.4", id = "o")
     public void testObserverMethodAutomaticallyRegistered() {
         assert !getCurrentManager().resolveObserverMethods(new String(), new AnnotationLiteral<Secret>() {
         }).isEmpty();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "12.4", id = "o")
     public void testObserverMethodNotAutomaticallyRegisteredForDisabledBeans() {
         Set<ObserverMethod<? super Ghost>> ghostObservers = getCurrentManager().resolveObserverMethods(new Ghost());

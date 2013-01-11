@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer;
 
-import static org.jboss.cdi.tck.TestGroups.INITIALIZER_METHOD;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +36,7 @@ public class InitializerMethodTest extends AbstractTest {
                 .withExcludedClass(EjbInitializerMethodTest.class.getName()).build();
     }
 
-    @Test(groups = { INITIALIZER_METHOD, INTEGRATION })
+    @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "3.10.1", id = "f"), @SpecAssertion(section = "2.3.5", id = "b"),
             @SpecAssertion(section = "3.10", id = "a") })
     public void testBindingTypeOnInitializerParameter() {
@@ -47,7 +46,7 @@ public class InitializerMethodTest extends AbstractTest {
         assert anotherHutch.getChicken().getName().equals("Standard");
     }
 
-    @Test(groups = { INITIALIZER_METHOD, INTEGRATION })
+    @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "3.10", id = "g"), @SpecAssertion(section = "3.10.1", id = "a"),
             @SpecAssertion(section = "3.10.1", id = "e"), @SpecAssertion(section = "5.5.2", id = "ad"),
             @SpecAssertion(section = "3.11", id = "a") })

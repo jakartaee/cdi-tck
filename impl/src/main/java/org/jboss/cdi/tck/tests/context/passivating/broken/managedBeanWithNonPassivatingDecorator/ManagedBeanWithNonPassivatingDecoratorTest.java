@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.managedBeanWithNonPassivatingDecorator;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-import static org.jboss.cdi.tck.TestGroups.PASSIVATION;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -46,7 +43,7 @@ public class ManagedBeanWithNonPassivatingDecoratorTest extends AbstractTest {
                                 .clazz(MaarianhaminaDecorator.class.getName()).up()).build();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertion(section = "6.6.4", id = "ha")
     public void testManagedBeanWithNonPassivatingDecoratorFails() {
     }

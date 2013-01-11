@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.noextend1;
 
-import static org.jboss.cdi.tck.TestGroups.SPECIALIZATION;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +36,7 @@ public class SpecializingBeanImplementsInterfaceOnly extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(SpecializingBeanImplementsInterfaceOnly.class).build();
     }
 
-    @Test(groups = { SPECIALIZATION })
+    @Test
     @SpecAssertion(section = "3.1.4", id = "dd")
     public void testSpecializingClassImplementsInterfaceAndExtendsNothing() {
     }

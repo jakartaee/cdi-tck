@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.parameterAnnotatedObserves;
 
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +36,7 @@ public class ParameterAnnotatedObservesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ParameterAnnotatedObservesTest.class).build();
     }
 
-    @Test(groups = PRODUCER_METHOD)
+    @Test
     @SpecAssertion(section = "3.3.2", id = "ea")
     public void testProducerMethodWithParameterAnnotatedObserves() throws Exception {
     }

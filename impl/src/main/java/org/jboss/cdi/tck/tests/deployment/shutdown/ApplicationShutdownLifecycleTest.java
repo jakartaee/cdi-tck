@@ -18,7 +18,6 @@
 package org.jboss.cdi.tck.tests.deployment.shutdown;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.SERVLET;
 import static org.testng.Assert.assertEquals;
 
 import java.net.URL;
@@ -51,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-@Test(groups = { INTEGRATION, SERVLET })
+@Test(groups = INTEGRATION)
 public class ApplicationShutdownLifecycleTest extends AbstractTest {
 
     private static final String FOO = "foo";

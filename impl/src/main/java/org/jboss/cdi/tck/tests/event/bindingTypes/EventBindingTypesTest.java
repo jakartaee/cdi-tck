@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.bindingTypes;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
@@ -44,7 +42,7 @@ public class EventBindingTypesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(EventBindingTypesTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.1", id = "d")
     public void testEventBindingTypeTargetsMethodFieldParameterElementTypes() {
         Animal animal = new Animal();
@@ -52,7 +50,7 @@ public class EventBindingTypesTest extends AbstractTest {
         getInstanceByType(AnimalAssessment.class).classifyAsTame(animal);
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.1", id = "e")
     public void testEventBindingTypeTargetsFieldParameterElementTypes() {
         Animal animal = new Animal();
@@ -63,7 +61,7 @@ public class EventBindingTypesTest extends AbstractTest {
     /**
      * This test ensures that an event binding type without runtime retention is effectively invisible
      */
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertion(section = "10.1", id = "f")
     public void testNonRuntimeBindingTypeIsNotAnEventBindingType() {
         DiscerningObserver observer = getInstanceByType(DiscerningObserver.class);
@@ -77,21 +75,21 @@ public class EventBindingTypesTest extends AbstractTest {
         assert observer.getNumTimesNonRuntimeBindingTypeObserved() == 2;
     }
 
-    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "10.1", id = "f")
     public void testFireEventWithNonRuntimeBindingTypeFails() {
         getCurrentManager().fireEvent(new Animal(), new AnnotationLiteral<NonRuntimeBindingType>() {
         });
     }
 
-    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "10.1", id = "g")
     public void testFireEventWithNonBindingAnnotationsFails() {
         getCurrentManager().fireEvent(new Animal(), new AnnotationLiteral<NonBindingType>() {
         });
     }
 
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertion(section = "10.1", id = "i")
     public void testEventAlwaysHasAnyBinding() {
         Bean<Event<Animal>> animalEventBean = getUniqueBean(new TypeLiteral<Event<Animal>>() {

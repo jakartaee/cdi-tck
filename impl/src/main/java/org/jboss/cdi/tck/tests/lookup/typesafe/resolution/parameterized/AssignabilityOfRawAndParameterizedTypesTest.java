@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
-import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -44,7 +43,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(AssignabilityOfRawAndParameterizedTypesTest.class).build();
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "kb"), @SpecAssertion(section = "2.2.1", id = "f"),
             @SpecAssertion(section = "2.2.1", id = "g"), @SpecAssertion(section = "5.2.4", id = "a") })
     public void testAssignabilityToRawType() {
@@ -53,7 +52,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         assertEquals(getBeans(Dao.class).size(), 4);
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertion(section = "5.2.4", id = "ba")
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithActualTypes() {
         assert getBeans(new TypeLiteral<Map<Integer, Integer>>() {
@@ -62,7 +61,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         }).iterator().next().getTypes().contains(IntegerHashMap.class);
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2.4", id = "c") })
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcards() {
         assert getBeans(new TypeLiteral<HashMap<? extends Number, ? super Integer>>() {
@@ -71,13 +70,13 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         }).iterator().next().getTypes().contains(IntegerHashMap.class);
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "b") })
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcardsAtInjectionPoint() {
         assert getInstanceByType(InjectedBean.class).getMap() instanceof IntegerHashMap;
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertion(section = "5.2.4", id = "da")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards() {
         Set<Bean<Result<? extends Throwable, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Throwable, ? super Exception>>() {
@@ -86,7 +85,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertion(section = "5.2.4", id = "db")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards2() {
         Set<Bean<Result<? extends Exception, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Exception, ? super Exception>>() {
@@ -95,7 +94,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertion(section = "5.2.4", id = "e")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithActualTypes() {
         Set<Bean<Result<Exception, Exception>>> beans = getBeans(new TypeLiteral<Result<Exception, Exception>>() {
@@ -105,7 +104,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @SuppressWarnings("serial")
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertion(section = "5.2.4", id = "f")
     public <T1 extends Exception, T2 extends Exception, T3, T4> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
         Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>() {

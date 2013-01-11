@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.fires.nonbinding;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -34,7 +32,7 @@ public class NonBindingTypePassedToFireTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(NonBindingTypePassedToFireTest.class).build();
     }
 
-    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.10", id = "e")
     public void testExceptionThrownIfNonBindingTypePassedToFire() throws Exception {
         OwlFinch_Broken bean = getInstanceByType(OwlFinch_Broken.class);

@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.CreationalContext;
@@ -47,7 +45,7 @@ public class ContextDestroysBeansTest extends AbstractTest {
                 .withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "p"), @SpecAssertion(section = "6.3", id = "d") })
     public void testContextDestroysBeansWhenDestroyed() {
         MyContextual bean = AfterBeanDiscoveryObserver.getBean();

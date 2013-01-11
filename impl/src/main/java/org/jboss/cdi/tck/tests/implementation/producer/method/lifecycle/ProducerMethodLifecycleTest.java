@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
-import static org.jboss.cdi.tck.TestGroups.DISPOSAL;
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
-
 import java.util.Set;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -56,7 +53,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
                 .build();
     }
 
-    @Test(groups = { PRODUCER_METHOD })
+    @Test
     @SpecAssertion(section = "7.3.4", id = "ea")
     public void testProducerMethodBeanCreate() {
         PreferredSpiderProducer.reset();
@@ -68,7 +65,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         assert PreferredSpiderProducer.getInjectedWeb().isDestroyed();
     }
 
-    @Test(groups = { PRODUCER_METHOD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.4", id = "ea") })
     public void testProducerMethodInvokedOnCreate() {
         Bean<SpiderEgg> eggBean = getBeans(SpiderEgg.class, FIRST_BORN_LITERAL).iterator().next();
@@ -76,7 +73,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         assert eggBean.create(eggCc) != null;
     }
 
-    @Test(groups = { PRODUCER_METHOD })
+    @Test
     @SpecAssertion(section = "3.3", id = "j")
     public void testWhenApplicationInvokesProducerMethodParametersAreNotInjected() {
         try {
@@ -88,7 +85,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         assert false : "The BeanManager should not have been injected into the producer method";
     }
 
-    @Test(groups = { PRODUCER_METHOD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.5.4", id = "c"), @SpecAssertion(section = "4.3", id = "cb") })
     public void testProducerMethodFromSpecializedBeanUsed() {
         SpiderProducer.reset();
@@ -100,7 +97,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         assert !SpiderProducer.isTarantulaCreated();
     }
 
-    @Test(groups = { PRODUCER_METHOD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.4", id = "k") })
     public void testCreateReturnsNullIfProducerDoesAndDependent() {
         Bean<Spider> nullSpiderBean = getBeans(Spider.class, NULL_LITERAL).iterator().next();
@@ -108,7 +105,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         assert nullSpiderBean.create(nullSpiderBeanCc) == null;
     }
 
-    @Test(groups = { PRODUCER_METHOD }, expectedExceptions = IllegalProductException.class)
+    @Test(expectedExceptions = IllegalProductException.class)
     @SpecAssertions({ @SpecAssertion(section = "7.3.4", id = "l") })
     public void testCreateFailsIfProducerReturnsNullAndNotDependent() {
         Bean<PotatoChip> potatoChipBean = getBeans(PotatoChip.class, NULL_LITERAL).iterator().next();
@@ -119,7 +116,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         assert false;
     }
 
-    @Test(groups = { PRODUCER_METHOD, DISPOSAL })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.4", id = "ma"), @SpecAssertion(section = "7.3.4", id = "r") })
     public void testProducerMethodBeanDestroy() {
         PreferredSpiderProducer.reset();
@@ -138,7 +135,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         assert PreferredSpiderProducer.getInjectedWeb().isDestroyed();
     }
 
-    @Test(groups = { PRODUCER_METHOD }, expectedExceptions = FooException.class)
+    @Test(expectedExceptions = FooException.class)
     @SpecAssertions({ @SpecAssertion(section = "6.1", id = "a0") })
     public void testCreateRethrowsUncheckedException() {
         Bean<Ship> shipBean = getBeans(Ship.class, FAIL_LITERAL).iterator().next();
@@ -147,7 +144,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         assert false;
     }
 
-    @Test(groups = { PRODUCER_METHOD }, expectedExceptions = CreationException.class)
+    @Test(expectedExceptions = CreationException.class)
     @SpecAssertions({ @SpecAssertion(section = "6.1", id = "a0") })
     public void testCreateWrapsCheckedExceptionAndRethrows() {
         Bean<Lorry> lorryBean = getBeans(Lorry.class, FAIL_LITERAL).iterator().next();

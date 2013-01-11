@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise.broken.directlyExtendsSimpleBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.SPECIALIZATION;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -39,7 +38,7 @@ public class DirectlyExtendsSimpleBeanTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DirectlyExtendsSimpleBeanTest.class).build();
     }
 
-    @Test(groups = { INTEGRATION, SPECIALIZATION })
+    @Test(groups =  INTEGRATION)
     @SpecAssertion(section = "3.2.4", id = "da")
     public void testSpecializingClassDirectlyExtendsSimpleBean() {
     }

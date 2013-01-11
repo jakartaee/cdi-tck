@@ -17,8 +17,6 @@
 
 package org.jboss.cdi.tck.tests.event.broken.observer.isInitializer;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,7 +43,7 @@ public class ObserverMethodAnnotatedInitialzerTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodAnnotatedInitialzerTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4.2", id = "e")
     public void testObserverMethodAnnotatedInitializerFails() {
     }

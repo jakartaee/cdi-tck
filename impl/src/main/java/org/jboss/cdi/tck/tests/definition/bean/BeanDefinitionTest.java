@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean;
 
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
-
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
@@ -76,7 +74,7 @@ public class BeanDefinitionTest extends AbstractTest {
         assert getBeans(RedSnapper.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
-    @Test(groups = PRODUCER_METHOD)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "2.2.1", id = "j"), @SpecAssertion(section = "5.2.5", id = "c"),
             @SpecAssertion(section = "11.1", id = "bd") })
     public void testIsNullable() throws Exception {

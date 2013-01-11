@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.constructorHasDisposesParameter;
 
-import static org.jboss.cdi.tck.TestGroups.DISPOSAL;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,7 +37,7 @@ public class ConstructorHasDisposesParameterTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ConstructorHasDisposesParameterTest.class).build();
     }
 
-    @Test(groups = { DISPOSAL })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "da"), @SpecAssertion(section = "12.2", id = "db") })
     public void testConstructorHasDisposesParameter() throws Exception {
     }

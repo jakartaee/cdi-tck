@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
-import static org.jboss.cdi.tck.TestGroups.ANNOTATION_DEFINITION;
-import static org.jboss.cdi.tck.TestGroups.INJECTION;
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
 import static org.testng.Assert.assertFalse;
 
 import java.lang.annotation.Annotation;
@@ -64,7 +61,7 @@ public class QualifierDefinitionTest extends AbstractTest {
         assert injectionPoint.getQualifiers().contains(new DefaultLiteral());
     }
 
-    @Test(groups = { ANNOTATION_DEFINITION })
+    @Test
     @SpecAssertion(section = "2.3.2", id = "ba")
     public void testQualifierDeclaresBindingAnnotation() {
         assertFalse(getBeans(Tarantula.class, new TameLiteral()).isEmpty());
@@ -85,7 +82,6 @@ public class QualifierDefinitionTest extends AbstractTest {
         assert model.getQualifiers().size() == 4;
     }
 
-    @Test(groups = { INJECTION, PRODUCER_METHOD })
     @SpecAssertion(section = "2.3.5", id = "a")
     public void testFieldInjectedFromProducerMethod() throws Exception {
         Bean<Barn> barnBean = getBeans(Barn.class).iterator().next();

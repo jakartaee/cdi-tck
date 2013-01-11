@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.conversation;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -48,7 +47,7 @@ public class InvalidatingSessionDestroysConversationTest extends AbstractConvers
                 .withWebXml("web.xml").build();
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertion(section = "6.7.4", id = "qa")
     // TODO this test doesn't precisely probe the boundaries of the service() method
     public void testInvalidatingSessionDestroysConversation() throws Exception {

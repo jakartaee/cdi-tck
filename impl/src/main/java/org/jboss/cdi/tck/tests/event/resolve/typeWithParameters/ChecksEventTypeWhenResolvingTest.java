@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import javax.enterprise.event.Observes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,7 +45,7 @@ public class ChecksEventTypeWhenResolvingTest extends AbstractTest {
         }
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4.1", id = "a")
     public void testResolvingChecksEventType() {
         assert !getCurrentManager().resolveObserverMethods(new AnEventType()).isEmpty();

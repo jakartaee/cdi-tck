@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.el;
 
-import static org.jboss.cdi.tck.TestGroups.EL;
-import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.inject.spi.Bean;
@@ -48,7 +45,7 @@ public class ResolutionByNameTest extends AbstractTest {
         assert getInstanceByType(Counter.class).getCount() == 1;
     }
 
-    @Test(groups = LIFECYCLE)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.5.2", id = "a"), @SpecAssertion(section = "6.5.2", id = "b") })
     public void testContextCreatesNewInstanceForInjection() {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
@@ -64,14 +61,14 @@ public class ResolutionByNameTest extends AbstractTest {
         assert timestamp == tuna.getTimestamp();
     }
 
-    @Test(groups = { EL })
+    @Test
     @SpecAssertion(section = "12.5", id = "c")
     public void testUnresolvedNameReturnsNull() {
         assert getCurrentManager().getELResolver().getValue(
                 getCurrentConfiguration().getEl().createELContext(getCurrentManager()), null, "nonExistingTuna") == null;
     }
 
-    @Test(groups = EL)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "12.5", id = "d"), @SpecAssertion(section = "2.5", id = "a") })
     public void testELResolverReturnsContextualInstance() {
         Salmon salmon = getInstanceByType(Salmon.class);

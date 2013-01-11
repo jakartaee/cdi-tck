@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.alternative;
 
-import static org.jboss.cdi.tck.TestGroups.ALTERNATIVES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -60,7 +59,7 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     private static final AnnotationLiteral<Tame> TAME_LITERAL = new AnnotationLiteral<Tame>() {
     };
 
-    @Test(groups = { ALTERNATIVES })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.1", id = "e"), @SpecAssertion(section = "5.1.1", id = "ab"),
             @SpecAssertion(section = "5.1.1", id = "ca"), @SpecAssertion(section = "2.6", id = "a"),
             @SpecAssertion(section = "2.6.1", id = "a"), @SpecAssertion(section = "12.4", id = "ka")
@@ -87,14 +86,14 @@ public class AlternativeAvailabilityTest extends AbstractTest {
         assertEquals(getCurrentManager().getBeans("dog").size(), 0);
     }
 
-    @Test(groups = { ALTERNATIVES })
+    @Test
     @SpecAssertion(section = "11.1", id = "bc")
     public void testIsAlternative() {
         Bean<?> cat = getCurrentManager().resolve(getCurrentManager().getBeans(Cat.class));
         assertTrue(cat.isAlternative());
     }
 
-    @Test(groups = { ALTERNATIVES })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "cf"), @SpecAssertion(section = "2.6.1", id = "b"),
             @SpecAssertion(section = "2.7", id = "aa"), @SpecAssertion(section = "2.7.1.4", id = "a") })
     public void testAnyEnabledAlternativeStereotypeMakesAlternativeEnabled() throws Exception {
@@ -102,21 +101,21 @@ public class AlternativeAvailabilityTest extends AbstractTest {
         assertEquals(getCurrentManager().getBeans("bird").size(), 1);
     }
 
-    @Test(groups = { ALTERNATIVES })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "cc"), @SpecAssertion(section = "5.1.1", id = "cd") })
     public void testProducersOnAlternativeClass() throws Exception {
         assertEquals(getBeans(Sheep.class, WILD_LITERAL).size(), 2);
         assertEquals(getBeans(Sheep.class, TAME_LITERAL).size(), 0);
     }
 
-    @Test(groups = { ALTERNATIVES })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "2.6.1", id = "ab"), @SpecAssertion(section = "2.6.1", id = "ac") })
     public void testProducerAlternativesOnMethodAndField() throws Exception {
         assertEquals(getBeans(Cat.class, WILD_LITERAL).size(), 2);
         assertEquals(getBeans(Cat.class, TAME_LITERAL).size(), 0);
     }
 
-    @Test(groups = { ALTERNATIVES })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "2.6.1", id = "c"), @SpecAssertion(section = "2.6.1", id = "d") })
     public void testStereotypeAlternativeOnProducerMethodAndField() throws Exception {
         assertEquals(getBeans(Bird.class, WILD_LITERAL).size(), 0);

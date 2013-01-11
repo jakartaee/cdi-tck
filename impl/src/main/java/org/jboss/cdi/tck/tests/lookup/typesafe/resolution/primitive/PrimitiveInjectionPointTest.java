@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.primitive;
 
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
-import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -49,7 +47,7 @@ public class PrimitiveInjectionPointTest extends AbstractTest {
     @Inject
     Game game;
 
-    @Test(groups = { RESOLUTION, PRODUCER_METHOD })
+    @Test
     @SpecAssertion(section = "5.2.5", id = "b")
     public void testPrimitiveInjectionPointResolvedToNonPrimitiveProducerMethod() {
         assertTrue(game.getInjectedByte() == 0);

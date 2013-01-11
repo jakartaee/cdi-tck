@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.el.integration;
 
-import static org.jboss.cdi.tck.TestGroups.EL;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import java.net.URL;
@@ -47,7 +46,7 @@ public class IntegrationWithUnifiedELTest extends AbstractTest {
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").build();
     }
 
-    @Test(groups = { EL })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "12.5", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
     public void testELResolverRegisteredWithJsf() throws Exception {
         WebClient webclient = new WebClient();
@@ -55,7 +54,7 @@ public class IntegrationWithUnifiedELTest extends AbstractTest {
         assert content.contains("Dolly");
     }
 
-    @Test(groups = { EL })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "12.5", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
     public void testELResolverRegisteredWithServletContainer() throws Exception {
         WebClient webclient = new WebClient();

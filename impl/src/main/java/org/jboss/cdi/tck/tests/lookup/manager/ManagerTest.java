@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.manager;
 
-import static org.jboss.cdi.tck.TestGroups.INJECTION;
-import static org.jboss.cdi.tck.TestGroups.MANAGER;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -44,7 +41,7 @@ public class ManagerTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ManagerTest.class).build();
     }
 
-    @Test(groups = { MANAGER, INJECTION })
+    @Test
     @SpecAssertion(section = "11.3", id = "c")
     public void testInjectingManager() {
         FishFarmOffice fishFarmOffice = getInstanceByType(FishFarmOffice.class);

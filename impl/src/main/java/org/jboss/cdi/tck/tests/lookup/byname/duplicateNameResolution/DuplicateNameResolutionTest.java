@@ -17,9 +17,6 @@
 
 package org.jboss.cdi.tck.tests.lookup.byname.duplicateNameResolution;
 
-import static org.jboss.cdi.tck.TestGroups.EL;
-import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -40,7 +37,7 @@ public class DuplicateNameResolutionTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DuplicateNameResolutionTest.class).build();
     }
 
-    @Test(groups = { RESOLUTION, EL })
+    @Test
     @SpecAssertion(section = "5.3.1", id = "da")
     public void testDuplicateNamedBeans() throws Exception {
     }

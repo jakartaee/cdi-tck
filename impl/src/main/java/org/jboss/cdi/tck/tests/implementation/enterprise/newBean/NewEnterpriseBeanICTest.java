@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
-import static org.jboss.cdi.tck.TestGroups.DISPOSAL;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.NEW;
 
 import java.util.Set;
 
@@ -35,7 +33,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@Test(groups = { INTEGRATION, NEW })
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class NewEnterpriseBeanICTest extends AbstractTest {
 
@@ -83,7 +81,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
         assert theOnlyLitter.getQuantity() == fox.getNextLitterSize();
     }
 
-    @Test(groups = { DISPOSAL })
+    @Test
     @SpecAssertion(section = "3.14", id = "x")
     public void testNewBeanHasNoDisposalMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);

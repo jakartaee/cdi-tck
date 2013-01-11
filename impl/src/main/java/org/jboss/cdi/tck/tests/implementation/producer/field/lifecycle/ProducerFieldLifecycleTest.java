@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_FIELD;
-import static org.jboss.cdi.tck.TestGroups.SPECIALIZATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -53,28 +51,28 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ProducerFieldLifecycleTest.class).build();
     }
 
-    @Test(groups = { PRODUCER_FIELD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.4", id = "aa") // removed from spec
     })
     public void testProducerFieldNotAnotherBean() {
         assert getInstanceByType(BrownRecluse.class) != null;
     }
 
-    @Test(groups = { PRODUCER_FIELD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.5.5", id = "a"), @SpecAssertion(section = "3.4", id = "b") })
     public void testProducerStaticFieldBean() {
         StaticTarantulaConsumer tarantulaConsumer = getInstanceByType(StaticTarantulaConsumer.class);
         assert tarantulaConsumer.getConsumedTarantula().equals(StaticTarantulaProducer.produceTarantula);
     }
 
-    @Test(groups = { PRODUCER_FIELD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.5.5", id = "b"), @SpecAssertion(section = "7.3.5", id = "ga") })
     public void testProducerFieldBeanCreate() throws Exception {
         BlackWidowConsumer spiderConsumer = getInstanceByType(BlackWidowConsumer.class);
         assert spiderConsumer.getInjectedSpider().equals(BlackWidowProducer.blackWidow);
     }
 
-    @Test(groups = { PRODUCER_FIELD, SPECIALIZATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cd") })
     public void testProducerFieldFromSpecializingBeanUsed() throws Exception {
         TarantulaConsumer spiderConsumer = getInstanceByType(TarantulaConsumer.class);
@@ -82,14 +80,14 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
         assert spiderConsumer.getConsumedTarantula() instanceof DefangedTarantula;
     }
 
-    @Test(groups = { PRODUCER_FIELD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.4", id = "d"), @SpecAssertion(section = "7.3.5", id = "m") })
     public void testProducerFieldReturnsNullIsDependent() throws Exception {
         NullSpiderConsumer consumerBean = getInstanceByType(NullSpiderConsumer.class);
         assert consumerBean.getInjectedSpider() == null;
     }
 
-    @Test(groups = { PRODUCER_FIELD }, expectedExceptions = IllegalProductException.class)
+    @Test(expectedExceptions = IllegalProductException.class)
     @SpecAssertions({ @SpecAssertion(section = "7.3.5", id = "n") })
     public void testProducerFieldForNullValueNotDependent() throws Exception {
         Bean<BlackWidow> spiderBean = getBeans(BlackWidow.class, NULL_LITERAL, BROKEN_LITERAL).iterator().next();
@@ -100,7 +98,7 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
         assert false;
     }
 
-    @Test(groups = { PRODUCER_FIELD }, expectedExceptions = IllegalProductException.class)
+    @Test(expectedExceptions = IllegalProductException.class)
     @SpecAssertions({ @SpecAssertion(section = "3.4", id = "e"), @SpecAssertion(section = "7.3.5", id = "n") })
     public void testProducerFieldReturnsNullIsNotDependent() throws Exception {
         NullSpiderConsumerForBrokenProducer consumer = getInstanceByType(NullSpiderConsumerForBrokenProducer.class);
@@ -115,7 +113,7 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
         }
     }
 
-    @Test(groups = { PRODUCER_FIELD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.5", id = "o") })
     public void testProducerFieldBeanDestroy() throws Exception {
         BlackWidowProducer.reset();

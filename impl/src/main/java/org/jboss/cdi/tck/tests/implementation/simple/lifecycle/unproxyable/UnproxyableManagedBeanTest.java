@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle.unproxyable;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.UnproxyableResolutionException;
 import javax.enterprise.inject.spi.Bean;
@@ -38,7 +36,7 @@ public class UnproxyableManagedBeanTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(UnproxyableManagedBeanTest.class).build();
     }
 
-    @Test(groups = { CONTEXTS }, expectedExceptions = UnproxyableResolutionException.class)
+    @Test(expectedExceptions = UnproxyableResolutionException.class)
     @SpecAssertion(section = "6.5.3", id = "a")
     public void testNormalScopedUnproxyableBeanResolution() {
         Bean<UnproxyableBean> bean = getUniqueBean(UnproxyableBean.class);

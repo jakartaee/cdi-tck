@@ -40,7 +40,7 @@ public class EventInjectionWithoutTypeTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(EventInjectionWithoutTypeTest.class).build();
     }
 
-    // @Test(groups = { EVENTS })
+    // @Test
     // FIXME need spec assertion, probably in the section that defines the Event interface
     public void testAnyAnnotationOnEventInjectionPointWithoutTypeParameterFails() {
     }

@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertTrue;
 
@@ -51,7 +50,7 @@ public class ConversationDeterminationTest extends AbstractTest {
     @ArquillianResource
     private URL contextPath;
 
-    @Test(groups = { INTEGRATION, CONTEXTS })
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "da"), @SpecAssertion(section = "6.7.4", id = "db"),
             @SpecAssertion(section = "6.7.4", id = "dc"), @SpecAssertion(section = "6.7.4", id = "dd") })
     public void testConversationDetermination() throws Exception {

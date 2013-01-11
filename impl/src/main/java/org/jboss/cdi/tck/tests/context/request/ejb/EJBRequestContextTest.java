@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.request.ejb;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
@@ -73,7 +72,7 @@ public class EJBRequestContextTest extends AbstractTest {
      * and during message delivery to any EJB message driven bean.
      */
     @OperateOnDeployment("TEST")
-    @Test(groups = { JAVAEE_FULL, CONTEXTS })
+    @Test(groups =  JAVAEE_FULL)
     @SpecAssertion(section = "6.7.1", id = "gc")
     public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
@@ -93,7 +92,7 @@ public class EJBRequestContextTest extends AbstractTest {
      * The request context is destroyed after the remote method invocation, timeout or message delivery completes.
      */
     @OperateOnDeployment("TEST")
-    @Test(groups = { JAVAEE_FULL, CONTEXTS })
+    @Test(groups =  JAVAEE_FULL)
     @SpecAssertion(section = "6.7.1", id = "hc")
     public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
@@ -121,7 +120,7 @@ public class EJBRequestContextTest extends AbstractTest {
     }
 
     @OperateOnDeployment("TEST")
-    @Test(groups = { JAVAEE_FULL, CONTEXTS })
+    @Test(groups =  JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ga"), @SpecAssertion(section = "6.7.1", id = "ha") })
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
         assertNotNull(foo.ping());
@@ -129,7 +128,7 @@ public class EJBRequestContextTest extends AbstractTest {
     }
 
     @OperateOnDeployment("TEST")
-    @Test(groups = { JAVAEE_FULL, CONTEXTS })
+    @Test(groups =  JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "gb"), @SpecAssertion(section = "6.7.1", id = "hb") })
     public void testRequestScopeActiveDuringAsyncCallToEjb() throws Exception {
         SimpleRequestBean simpleRequestBean = getInstanceByType(SimpleRequestBean.class);

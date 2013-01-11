@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.conditional;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -44,7 +43,7 @@ public class ConditionalObserverTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ConditionalObserverTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.5.6", id = "baa"), @SpecAssertion(section = "10.4.3", id = "a") })
     public void testConditionalObserver() {
         RecluseSpider.reset();
@@ -63,7 +62,7 @@ public class ConditionalObserverTest extends AbstractTest {
         RecluseSpider.reset();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "5.5.6", id = "baa")
     public void testObserverMethodInvokedOnReturnedInstanceFromContext() {
         RecluseSpider spider = getInstanceByType(RecluseSpider.class);
@@ -73,7 +72,7 @@ public class ConditionalObserverTest extends AbstractTest {
         assert spider.getWeb().getRings() == 1;
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4.3", id = "c")
     public void testNotifyEnumerationContainsNotifyValues() {
         assert Reception.values().length == 2;
@@ -86,7 +85,7 @@ public class ConditionalObserverTest extends AbstractTest {
         assert notifyValueNames.contains("ALWAYS");
     }
 
-    @Test(groups = { INTEGRATION, EVENTS })
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "10.5", id = "bca")
     public void testConditionalObserverMethodNotInvokedIfNoActiveContext() {
 

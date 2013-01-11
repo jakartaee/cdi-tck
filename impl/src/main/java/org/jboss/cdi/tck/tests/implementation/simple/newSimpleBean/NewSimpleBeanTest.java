@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.newSimpleBean;
 
-import static org.jboss.cdi.tck.TestGroups.NEW;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -105,7 +104,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert getInstanceByType(Bestiary.class).getKnightsWhichKilledTheDragons() instanceof LinkedHashSet<?>;
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertions({})
     public void testNewBeanIsDependentScoped() {
         FoxRun foxRun = getInstanceByType(FoxRun.class);
@@ -113,7 +112,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert !foxRun.getNewFox().getDen().getName().equals(foxRun.getNewFox2().getDen().getName());
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "t")
     public void testNewBeanHasNoStereotypes() {
         Bean<Fox> foxBean = getBeans(Fox.class).iterator().next();
@@ -125,14 +124,14 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert newFox2.getDen().getName() != "TheElms";
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "u")
     public void testNewBeanHasNoObservers() {
         // As long as only one observer exists here, we know it is not from the @New bean
         assert getCurrentManager().resolveObserverMethods("event").size() == 1;
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "w")
     public void testNewBeanHasNoProducerFields() throws Exception {
         FoxRun foxRun = getInstanceByType(FoxRun.class);
@@ -141,7 +140,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert theOnlyDen.getName().equals(foxRun.getFox().getDen().getName());
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
         FoxRun foxRun = getInstanceByType(FoxRun.class);
@@ -151,7 +150,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert theOnlyLitter.getQuantity() == foxRun.getFox().getNextLitterSize();
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "x")
     public void testNewBeanHasNoDisposerMethods() throws Exception {
         FoxRun foxRun = getInstanceByType(FoxRun.class);
@@ -199,7 +198,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assertTrue(getInstanceByType(Shop.class).getNewOrder().foo());
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "f")
     public void testNewBeanHasSameConstructor() {
         ExplicitContructorSimpleBean.setConstructorCalls(0);
@@ -211,7 +210,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert calls == 2;
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "g")
     public void testNewBeanHasSameInitializers() {
         InitializerSimpleBean.setInitializerCalls(0);
@@ -222,14 +221,14 @@ public class NewSimpleBeanTest extends AbstractTest {
         assert calls == 2;
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "h")
     public void testNewBeanHasSameInjectedFields() {
         Consumer consumer = getInstanceByType(Consumer.class);
         assert consumer.getNewInitializerSimpleBean().getOrder() != null;
     }
 
-    @Test(groups = { NEW })
+    @Test
     @SpecAssertion(section = "3.14", id = "xb")
     public void testNewBeanIsNotAlternative() {
         assert getUniqueBean(Tiger.class).isAlternative();

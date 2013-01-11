@@ -16,10 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
-import static org.jboss.cdi.tck.TestGroups.INJECTION;
-import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
-import static org.jboss.cdi.tck.TestGroups.SPECIALIZATION;
-
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.context.Dependent;
@@ -92,7 +88,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert Duck.constructedCorrectly;
     }
 
-    @Test(groups = { SPECIALIZATION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.1.4", id = "ac") })
     public void testSpecializedBeanExtendsManagedBean() {
         assert MountainLion.class.getAnnotation(Specializes.class) != null;
@@ -111,7 +107,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert specializedBean.getBeanClass().getSuperclass().equals(Lion.class);
     }
 
-    @Test(groups = LIFECYCLE)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.1.1", id = "d"), @SpecAssertion(section = "6.1.1", id = "g") })
     public void testCreateReturnsSameBeanPushed() {
         final CreationalContext<ShoeFactory> creationalContext = new MockCreationalContext<ShoeFactory>();
@@ -123,7 +119,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         }
     }
 
-    @Test(groups = LIFECYCLE)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa") })
     public void testBeanCreateInjectsDependenciesAndInvokesInitializerToInstantiateInstance() {
         MockCreationalContext.reset();
@@ -138,7 +134,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert fishPond.postConstructCalled; // required by Managed Bean specification
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "2", id = "g"), @SpecAssertion(section = "2.2.1", id = "b"),
             @SpecAssertion(section = "2.2.1", id = "k"), @SpecAssertion(section = "12.2", id = "da") })
     public void testManagedBean() {
@@ -149,7 +145,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert redSnapper.isTouched();
     }
 
-    @Test(groups = INJECTION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa"), @SpecAssertion(section = "3.8.1", id = "aa"),
             @SpecAssertion(section = "2.3.4", id = "a"), @SpecAssertion(section = "3.9", id = "a"),
             @SpecAssertion(section = "3.9.1", id = "aa"), @SpecAssertion(section = "12.1", id = "bca") })
@@ -163,7 +159,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert tunaFarm.qualifiedTuna.getName().equals("qualifiedTuna");
     }
 
-    @Test(groups = LIFECYCLE)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "l") })
     public void testContextCreatesNewInstanceForInjection() {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
@@ -173,7 +169,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert tunaFarm.tuna != null;
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa"), @SpecAssertion(section = "7.3.1", id = "ba") })
     public void testPostConstructPreDestroy() {
         assert getBeans(Farm.class).size() == 1;
@@ -188,7 +184,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert farm.farmOffice.noOfStaff == 0;
     }
 
-    @Test(groups = { LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.5.3", id = "a0"), @SpecAssertion(section = "7.3.1", id = "ba"),
             @SpecAssertion(section = "6.5.3", id = "c") })
     public void testContextualDestroyDisposesWhenNecessary() {
@@ -204,7 +200,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert !Egg.isEggDestroyed();
     }
 
-    @Test(groups = LIFECYCLE)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.1", id = "a1") })
     public void testContextualDestroyCatchesException() {
         Bean<Cod> codBean = getBeans(Cod.class).iterator().next();
@@ -214,7 +210,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         codBean.destroy(codInstance, creationalContext);
     }
 
-    @Test(groups = LIFECYCLE)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.5.3", id = "a") })
     public void testDependentsDestroyedAfterPreDestroy() {
         Bean<FishPond> pondBean = getBeans(FishPond.class).iterator().next();

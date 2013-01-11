@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.remove;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
 
 import javax.enterprise.inject.spi.Bean;
 
@@ -42,7 +41,7 @@ public class EnterpriseBeanRemoveMethodTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(EnterpriseBeanRemoveMethodTest.class).build();
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "3.2.1", id = "a")
     public void testApplicationMayCallAnyRemoveMethodOnDependentScopedSessionEnterpriseBeans() throws Exception {
         Bean<?> bean = getCurrentManager().getBeans(StateKeeper.class).iterator().next();
@@ -55,7 +54,7 @@ public class EnterpriseBeanRemoveMethodTest extends AbstractTest {
         assert stateKeeper.isRemoveCalled();
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE })
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = "3.2.1", id = "da")
     public void testApplicationMayCallRemoveMethodOnDependentScopedSessionEnterpriseBeansButNoParametersArePassed()
             throws Exception {
@@ -65,7 +64,7 @@ public class EnterpriseBeanRemoveMethodTest extends AbstractTest {
         assert stateKeeper.isRemoveCalled();
     }
 
-    @Test(groups = { INTEGRATION, LIFECYCLE }, expectedExceptions = UnsupportedOperationException.class)
+    @Test(groups = INTEGRATION, expectedExceptions = UnsupportedOperationException.class)
     @SpecAssertion(section = "3.2.1", id = "b")
     public void testApplicationCannotCallRemoveMethodOnNonDependentScopedSessionEnterpriseBean() {
         SessionScopedSessionInterface sessionBean = getInstanceByType(SessionScopedSessionInterface.class);

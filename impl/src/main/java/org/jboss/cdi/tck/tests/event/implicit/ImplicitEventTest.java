@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.implicit;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -55,7 +53,7 @@ public class ImplicitEventTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ImplicitEventTest.class).build();
     }
 
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertion(section = "10.3.2", id = "a")
     public void testImplicitEventExistsForEachEventType() {
         assert getBeans(STUDENT_REGISTERED_EVENT_LITERAL).size() == 1;
@@ -63,7 +61,7 @@ public class ImplicitEventTest extends AbstractTest {
         assert getBeans(AWARD_EVENT_LITERAL).size() == 1;
     }
 
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertion(section = "10.3.2", id = "b")
     public void testImplicitEventHasAllExplicitBindingTypes() {
         assert getBeans(AWARD_EVENT_LITERAL, AnyLiteral.INSTANCE, new HonorsLiteral()).size() == 1;
@@ -79,19 +77,19 @@ public class ImplicitEventTest extends AbstractTest {
                 new HonorsLiteral());
     }
 
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertion(section = "10.3.2", id = "d")
     public void testImplicitEventHasDependentScope() {
         assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getScope().equals(Dependent.class);
     }
 
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertion(section = "10.3.2", id = "e")
     public void testImplicitEventHasNoName() {
         assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getName() == null;
     }
 
-    @Test(groups = EVENTS)
+    @Test
     @SpecAssertion(section = "10.3.2", id = "f")
     public void testImplicitEventHasImplementation() {
         StudentDirectory directory = getInstanceByType(StudentDirectory.class);
@@ -106,7 +104,7 @@ public class ImplicitEventTest extends AbstractTest {
         assert directory.getStudents().contains(student);
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.3.2", id = "g"), @SpecAssertion(section = "6.6.2", id = "e") // TODO break up
                                                                                                                 // this
                                                                                                                 // assertion

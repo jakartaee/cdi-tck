@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.interceptor;
 
-import static org.jboss.cdi.tck.TestGroups.INJECTION;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,7 +43,7 @@ public class InterceptorNotResolvedTest extends AbstractTest {
                                 .up()).build();
     }
 
-    @Test(groups = { INJECTION })
+    @Test
     @SpecAssertion(section = "5.1.4", id = "b")
     public void testInterceptorNotAvailableForInjection() {
         // Test deployment problem

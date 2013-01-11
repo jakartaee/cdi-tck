@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck;
 
 /**
- * TestNG groups used in CDI TCK. Most of them are useless because of not used consistently.
+ * TestNG groups used in the CDI TCK.
  * 
  * The most important groups (used by TCK runner) are:
  * <ul>
@@ -41,54 +41,9 @@ public final class TestGroups {
     public static final String JAVAEE_FULL = "javaee-full";
 
     /**
-     * Contexts related test
-     */
-    public static final String CONTEXTS = "contexts";
-
-    public static final String PASSIVATION = "passivation";
-
-    public static final String LIFECYCLE = "lifecycle";
-
-    public static final String ALTERNATIVES = "alternatives";
-
-    /**
      * Probably needs to be rewritten
      */
     public static final String REWRITE = "rewrite";
-
-    public static final String RESOLUTION = "resolution";
-
-    public static final String EL = "el";
-
-    public static final String EVENTS = "events";
-
-    public static final String INHERITANCE = "inheritance";
-
-    public static final String NEW = "new";
-
-    public static final String DISPOSAL = "disposal";
-
-    public static final String INITIALIZER_METHOD = "initializerMethod";
-
-    public static final String SPECIALIZATION = "specialization";
-
-    public static final String MANAGER = "manager";
-
-    public static final String SERVLET = "servlet";
-
-    public static final String INJECTION = "injection";
-
-    public static final String INJECTION_POINT = "injectionPoint";
-
-    public static final String PRODUCER_METHOD = "producerMethod";
-
-    public static final String PRODUCER_FIELD = "producerField";
-
-    public static final String OBSERVER_METHOD = "observerMethod";
-
-    public static final String ANNOTATION_DEFINITION = "annotationDefinition";
-
-    public static final String INNER_CLASS = "innerClass";
 
     /**
      * Requires basic JMS configuration

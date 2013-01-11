@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.observer;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -37,7 +36,7 @@ public class ObserverNotificationTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ObserverNotificationTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.2", id = "c"), @SpecAssertion(section = "10.2", id = "d"),
             @SpecAssertion(section = "10.5", id = "aa") })
     public void testObserversNotified() {

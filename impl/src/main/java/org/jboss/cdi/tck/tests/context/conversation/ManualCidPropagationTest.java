@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.conversation;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -49,7 +48,7 @@ public class ManualCidPropagationTest extends AbstractConversationTest {
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertion(section = "6.7.4", id = "n")
     public void testManualCidPropagation() throws Exception {
 

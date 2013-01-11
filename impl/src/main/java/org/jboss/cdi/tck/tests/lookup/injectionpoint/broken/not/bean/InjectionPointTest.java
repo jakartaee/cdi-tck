@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.not.bean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.SERVLET;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -40,7 +39,7 @@ public class InjectionPointTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(InjectionPointTest.class).withWebXml("web.xml").build();
     }
 
-    @Test(groups = SERVLET)
+    @Test
     @SpecAssertion(section = "5.5.7", id = "ga")
     public void testDefinitionErrorDetected() {
     }

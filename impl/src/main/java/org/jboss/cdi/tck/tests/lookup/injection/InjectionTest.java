@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection;
 
-import static org.jboss.cdi.tck.TestGroups.INJECTION;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -47,7 +45,7 @@ public class InjectionTest extends AbstractTest {
                                 .envEntryType("java.lang.String").envEntryValue("Hello").up()).build();
     }
 
-    @Test(groups = { INJECTION, PRODUCER_METHOD })
+    @Test
     @SpecAssertion(section = "5.2.5", id = "aa")
     public void testInjectionPerformsBoxingIfNecessary() throws Exception {
         assert getBeans(SpiderNest.class).size() == 1;

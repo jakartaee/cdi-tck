@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.isDisposer;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +42,7 @@ public class ObserverMethodAnnotatedDisposesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodAnnotatedDisposesTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertion(section = "10.4.2", id = "f")
     public void testObserverMethodWithDisposesParamFails() {
     }

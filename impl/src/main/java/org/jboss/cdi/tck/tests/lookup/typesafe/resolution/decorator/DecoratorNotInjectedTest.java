@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.decorator;
 
-import static org.jboss.cdi.tck.TestGroups.INJECTION;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +36,7 @@ public class DecoratorNotInjectedTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DecoratorNotInjectedTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { INJECTION })
+    @Test
     @SpecAssertion(section = "5.1.4", id = "a")
     public void testDecoratorNotResolved() {
     }

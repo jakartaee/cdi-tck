@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.normal.scope;
 
-import static org.jboss.cdi.tck.TestGroups.INJECTION_POINT;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +36,7 @@ public class NormalScopedBeanWithInjectionPoint extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(NormalScopedBeanWithInjectionPoint.class).build();
     }
 
-    @Test(groups = { INJECTION_POINT })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "f")
     public void testSessionScopedBeanWithInjectionPoint() {
     }

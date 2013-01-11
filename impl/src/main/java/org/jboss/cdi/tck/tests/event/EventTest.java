@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-import static org.jboss.cdi.tck.TestGroups.INHERITANCE;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -42,7 +40,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
+@Test
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EventTest extends AbstractTest {
 
@@ -51,7 +49,7 @@ public class EventTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(EventTest.class).build();
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "i"), @SpecAssertion(section = "5.5.6", id = "c"),
             @SpecAssertion(section = "2.3.5", id = "ca"), @SpecAssertion(section = "3.11", id = "a") })
     public void testObserverMethodParameterInjectionPoints() {
@@ -65,7 +63,7 @@ public class EventTest extends AbstractTest {
      * This test was temporarily marked as integration one because of problems with arquillian-weld-ee-embedded-1.1 container
      * adapter.
      */
-    @Test(groups = { EVENTS, INTEGRATION })
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = "10.4", id = "c"), @SpecAssertion(section = "5.5.6", id = "a") })
     public void testStaticObserverMethodInvoked() {
 
@@ -85,7 +83,7 @@ public class EventTest extends AbstractTest {
         }
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cc"), @SpecAssertion(section = "5.5.6", id = "baa") })
     public void testObserverCalledOnSpecializedBeanOnly() {
         Shop.observers.clear();
@@ -95,13 +93,13 @@ public class EventTest extends AbstractTest {
         assertEquals(Shop.observers.iterator().next(), FarmShop.class.getName());
     }
 
-    @Test(groups = { EVENTS }, expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "11.3.11", id = "c")
     public <T> void testEventObjectContainsTypeVariablesWhenResolvingFails() {
         eventObjectContainsTypeVariables(new ArrayList<T>());
     }
 
-    @Test(groups = { EVENTS })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "10.2.3", id = "a"), @SpecAssertion(section = "10.2.3", id = "b") })
     public void testObserverMethodNotifiedWhenQualifiersMatch() {
 
@@ -113,7 +111,7 @@ public class EventTest extends AbstractTest {
         assertTrue(BullTerrier.isSingleBindingEventObserved());
     }
 
-    @Test(groups = { EVENTS, INHERITANCE })
+    @Test
     @SpecAssertion(section = "4.2", id = "dc")
     public void testNonStaticObserverMethodInherited() {
         Egg egg = new Egg();
@@ -121,7 +119,7 @@ public class EventTest extends AbstractTest {
         assertTrue(typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class));
     }
 
-    @Test(groups = { EVENTS, INHERITANCE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "4.2", id = "di") })
     public void testNonStaticObserverMethodIndirectlyInherited() {
         StockPrice price = new StockPrice();

@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.alternative.broken.incorrect.name;
 
-import static org.jboss.cdi.tck.TestGroups.ALTERNATIVES;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -48,7 +46,7 @@ public class NoClassWithSpecifiedNameTest extends AbstractTest {
                                 .up()).build();
     }
 
-    @Test(groups = { ALTERNATIVES })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "h"), @SpecAssertion(section = "2.8", id = "c"),
             @SpecAssertion(section = "2.8", id = "ca") })
     public void test() {

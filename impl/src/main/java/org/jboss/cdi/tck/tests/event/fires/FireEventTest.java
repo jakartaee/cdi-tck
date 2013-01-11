@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.fires;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
 import static org.jboss.cdi.tck.TestGroups.REWRITE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -51,7 +50,7 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  * @author Martin Kouba
  */
-@Test(groups = { EVENTS })
+@Test
 @SpecVersion(spec = "cdi", version = "20091101")
 public class FireEventTest extends AbstractTest {
 

@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition;
 
-import static org.jboss.cdi.tck.TestGroups.DISPOSAL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -93,7 +92,7 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
      * 
      * @throws Exception
      */
-    @Test(groups = { DISPOSAL })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "h"), @SpecAssertion(section = "3.11", id = "a"),
             @SpecAssertion(section = "5.5.4", id = "e") })
     public void testDisposalMethodParametersGetInjected() throws Exception {
@@ -108,7 +107,7 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
         assertTrue(SpiderProducer.isDeadliestSpiderDestroyed());
     }
 
-    @Test(groups = { DISPOSAL })
+    @Test
     @SpecAssertion(section = "3.5.1", id = "da")
     public void testDisposalMethodForMultipleProducerMethods() throws Exception {
 
@@ -130,7 +129,7 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
     /**
      * Tests that a disposal method can be bound to a product of a producer field. CDI-145
      */
-    @Test(groups = { DISPOSAL })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "3.5.3", id = "ab"), @SpecAssertion(section = "7.3.5", id = "o") })
     public void testDisposalMethodCalledForProducerField() throws Exception {
 

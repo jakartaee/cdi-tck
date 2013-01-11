@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution;
 
-import org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution.LoggedBinding;
 
 @LoggedBinding
 @ServiceStereotype

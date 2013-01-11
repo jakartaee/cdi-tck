@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.parameterAnnotatedObserves;
 
-import static org.jboss.cdi.tck.TestGroups.INITIALIZER_METHOD;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +36,7 @@ public class ParameterAnnotatedObservesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ParameterAnnotatedObservesTest.class).build();
     }
 
-    @Test(groups = INITIALIZER_METHOD)
+    @Test
     @SpecAssertion(section = "3.10.1", id = "da")
     public void testInitializerMethodHasParameterAnnotatedObserves() {
     }

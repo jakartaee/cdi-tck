@@ -16,14 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-import static org.jboss.cdi.tck.TestGroups.DISPOSAL;
-import static org.jboss.cdi.tck.TestGroups.EL;
-import static org.jboss.cdi.tck.TestGroups.INJECTION;
-import static org.jboss.cdi.tck.TestGroups.LIFECYCLE;
-import static org.jboss.cdi.tck.TestGroups.OBSERVER_METHOD;
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_FIELD;
-import static org.jboss.cdi.tck.TestGroups.PRODUCER_METHOD;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
@@ -61,7 +53,7 @@ public class DependentContextTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DependentContextTest.class).withBeansXml("beans.xml").build();
     }
 
-    @Test(groups = { CONTEXTS, INJECTION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4", id = "a"), @SpecAssertion(section = "6.4.1", id = "ga") })
     public void testInstanceNotSharedBetweenInjectionPoints() {
         Set<Bean<Fox>> foxBeans = getBeans(Fox.class);
@@ -76,7 +68,7 @@ public class DependentContextTest extends AbstractTest {
         assert !foxRun.anotherFox.equals(foxRun.petFox);
     }
 
-    @Test(groups = { CONTEXTS, INJECTION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4.1", id = "ga"), @SpecAssertion(section = "6.4.1", id = "gb"),
             @SpecAssertion(section = "6.4.1", id = "gc") })
     public void testDependentBeanIsDependentObjectOfBeanInjectedInto() {
@@ -90,7 +82,7 @@ public class DependentContextTest extends AbstractTest {
         assert !foxHole.fox.equals(foxHole.initializerFox);
     }
 
-    @Test(groups = { CONTEXTS, EL })
+    @Test
     @SpecAssertion(section = "6.4", id = "ca")
     public void testInstanceUsedForElEvaluationNotShared() throws Exception {
         Set<Bean<Fox>> foxBeans = getBeans(Fox.class);
@@ -101,7 +93,7 @@ public class DependentContextTest extends AbstractTest {
         assert !fox1.equals(fox2);
     }
 
-    @Test(groups = { CONTEXTS, PRODUCER_METHOD })
+    @Test
     @SpecAssertion(section = "6.4", id = "da")
     public void testInstanceUsedForProducerMethodNotShared() throws Exception {
 
@@ -115,7 +107,7 @@ public class DependentContextTest extends AbstractTest {
         assertFalse(firstInstanceHash.equals(secondInstanceHash));
     }
 
-    @Test(groups = { CONTEXTS, PRODUCER_METHOD })
+    @Test
     @SpecAssertion(section = "6.4", id = "db")
     public void testInstanceUsedForProducerFieldNotShared() throws Exception {
 
@@ -127,7 +119,7 @@ public class DependentContextTest extends AbstractTest {
         assertNotEquals(firstIntance.getProducerInstanceHashcode(), secondIntance.getProducerInstanceHashcode());
     }
 
-    @Test(groups = { CONTEXTS, DISPOSAL })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4", id = "dc"), @SpecAssertion(section = "6.4", id = "dg") })
     public void testInstanceUsedForDisposalMethodNotShared() {
 
@@ -160,7 +152,7 @@ public class DependentContextTest extends AbstractTest {
         SpiderProducer.reset();
     }
 
-    @Test(groups = { CONTEXTS, OBSERVER_METHOD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4", id = "dd"), @SpecAssertion(section = "6.4", id = "dg") })
     public void testInstanceUsedForObserverMethodNotShared() {
 
@@ -185,7 +177,7 @@ public class DependentContextTest extends AbstractTest {
         assertNotEquals(firstFoxHash, secondFoxHash);
     }
 
-    @Test(groups = CONTEXTS)
+    @Test
     @SpecAssertion(section = "6.4", id = "e")
     public void testContextGetWithCreationalContextReturnsNewInstance() {
         Set<Bean<Fox>> foxBeans = getBeans(Fox.class);
@@ -196,7 +188,7 @@ public class DependentContextTest extends AbstractTest {
         assert context.get(foxBean, new MockCreationalContext<Fox>()) instanceof Fox;
     }
 
-    @Test(groups = CONTEXTS)
+    @Test
     @SpecAssertion(section = "6.4", id = "f")
     public void testContextGetWithCreateFalseReturnsNull() {
         Set<Bean<Fox>> foxBeans = getBeans(Fox.class);
@@ -206,19 +198,19 @@ public class DependentContextTest extends AbstractTest {
         assert context.get(foxBean, null) == null;
     }
 
-    @Test(groups = CONTEXTS)
+    @Test
     @SpecAssertion(section = "6.2", id = "ab")
     public void testContextScopeType() {
         assert getCurrentManager().getContext(Dependent.class).getScope().equals(Dependent.class);
     }
 
-    @Test(groups = CONTEXTS)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "ha"), @SpecAssertion(section = "6.4", id = "g") })
     public void testContextIsActive() {
         assert getCurrentManager().getContext(Dependent.class).isActive();
     }
 
-    @Test(groups = { CONTEXTS, PRODUCER_METHOD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.2", id = "ha"), @SpecAssertion(section = "6.4", id = "g") // Dependent context
                                                                                                             // is now always
                                                                                                             // active
@@ -231,7 +223,7 @@ public class DependentContextTest extends AbstractTest {
         SpiderProducer.reset();
     }
 
-    @Test(groups = { CONTEXTS, PRODUCER_FIELD })
+    @Test
     @SpecAssertion(section = "6.4", id = "g")
     // Dependent context is now always active
     public void testContextIsActiveWhenInvokingProducerField() {
@@ -242,7 +234,7 @@ public class DependentContextTest extends AbstractTest {
         SpiderProducer.reset();
     }
 
-    @Test(groups = { CONTEXTS, DISPOSAL })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4", id = "g"), @SpecAssertion(section = "11.1", id = "aa") })
     public void testContextIsActiveWhenInvokingDisposalMethod() {
         Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class, PET_LITERAL).iterator().next();
@@ -255,7 +247,7 @@ public class DependentContextTest extends AbstractTest {
         SpiderProducer.reset();
     }
 
-    @Test(groups = { CONTEXTS, OBSERVER_METHOD })
+    @Test
     @SpecAssertion(section = "6.4", id = "g")
     // Dependent context is now always active
     public void testContextIsActiveWhenCreatingObserverMethodInstance() {
@@ -263,7 +255,7 @@ public class DependentContextTest extends AbstractTest {
         assert HorseStable.isDependentContextActive();
     }
 
-    @Test(groups = { CONTEXTS, EL })
+    @Test
     @SpecAssertion(section = "6.4", id = "g")
     // Dependent context is now always active
     public void testContextIsActiveWhenEvaluatingElExpression() {
@@ -273,7 +265,7 @@ public class DependentContextTest extends AbstractTest {
         assert SensitiveFox.isDependentContextActiveDuringEval();
     }
 
-    @Test(groups = { CONTEXTS, LIFECYCLE })
+    @Test
     @SpecAssertion(section = "6.4", id = "g")
     // Dependent context is now always active
     public void testContextIsActiveDuringBeanCreation() {
@@ -282,7 +274,7 @@ public class DependentContextTest extends AbstractTest {
         assert fox1.isDependentContextActiveDuringCreate();
     }
 
-    @Test(groups = { CONTEXTS, INJECTION })
+    @Test
     @SpecAssertion(section = "6.4", id = "g")
     // Dependent context is now always active
     public void testContextIsActiveDuringInjection() {
@@ -291,7 +283,7 @@ public class DependentContextTest extends AbstractTest {
         assert foxRun.fox != null;
     }
 
-    @Test(groups = { CONTEXTS, LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "aaaa"), @SpecAssertion(section = "6.4", id = "b") })
     public void testDestroyingSimpleParentDestroysDependents() {
         assert getBeans(Farm.class).size() == 1;
@@ -306,7 +298,7 @@ public class DependentContextTest extends AbstractTest {
         assert Horse.destroyed;
     }
 
-    @Test(groups = { CONTEXTS, LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.1.1", id = "e") })
     public void testCallingCreationalContextReleaseDestroysDependents() {
         assert getBeans(Farm.class).size() == 1;
@@ -333,7 +325,7 @@ public class DependentContextTest extends AbstractTest {
         assert Horse.destroyed;
     }
 
-    @Test(groups = { CONTEXTS, LIFECYCLE })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "aaaa"), @SpecAssertion(section = "6.4", id = "b") })
     public void testDestroyingManagedParentDestroysDependentsOfSameBean() {
         // Reset test class
@@ -349,7 +341,7 @@ public class DependentContextTest extends AbstractTest {
         assert Fox.getDestroyCount() == 2;
     }
 
-    @Test(groups = { CONTEXTS, EL })
+    @Test
     @SpecAssertion(section = "6.4.2", id = "eee")
     public void testDependentsDestroyedWhenElEvaluationCompletes() throws Exception {
         // Reset test class
@@ -361,7 +353,7 @@ public class DependentContextTest extends AbstractTest {
         assert Fox.isDestroyed();
     }
 
-    @Test(groups = { CONTEXTS, PRODUCER_METHOD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "ddd"), @SpecAssertion(section = "6.4.1", id = "h"),
             @SpecAssertion(section = "5.5.4", id = "f") })
     public void testDependentsDestroyedWhenProducerMethodCompletes() {
@@ -383,7 +375,7 @@ public class DependentContextTest extends AbstractTest {
         SpiderProducer.reset();
     }
 
-    @Test(groups = { CONTEXTS, PRODUCER_FIELD })
+    @Test
     @SpecAssertion(section = "6.4.2", id = "dde")
     public void testDependentsDestroyedWhenProducerFieldCompletes() {
         // Reset the test class
@@ -394,7 +386,7 @@ public class DependentContextTest extends AbstractTest {
         assert OtherSpiderProducer.isDestroyed();
     }
 
-    @Test(groups = { CONTEXTS, DISPOSAL })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "ddf"), @SpecAssertion(section = "6.4.2", id = "ccc"),
             @SpecAssertion(section = "5.5.4", id = "d"), @SpecAssertion(section = "5.5.4", id = "f") })
     public void testDependentsDestroyedWhenDisposerMethodCompletes() {
@@ -416,7 +408,7 @@ public class DependentContextTest extends AbstractTest {
         Fox.reset();
     }
 
-    @Test(groups = { CONTEXTS, OBSERVER_METHOD })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "6.4.2", id = "ddg"), @SpecAssertion(section = "6.4.2", id = "ccd"),
             @SpecAssertion(section = "5.5.6", id = "d") })
     public void testDependentsDestroyedWhenObserverMethodEvaluationCompletes() {
@@ -429,7 +421,7 @@ public class DependentContextTest extends AbstractTest {
         assert Fox.isDestroyed();
     }
 
-    @Test(groups = { CONTEXTS })
+    @Test
     @SpecAssertion(section = "6.4.1", id = "ab")
     public void testDependentScopedDecoratorsAreDependentObjectsOfBean() {
         Bean<Interior> roomBean = getBeans(Interior.class, new RoomBinding()).iterator().next();

@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.interceptorWithNonPassivatingInjectedField;
 
-import static org.jboss.cdi.tck.TestGroups.CONTEXTS;
-import static org.jboss.cdi.tck.TestGroups.PASSIVATION;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,7 +42,7 @@ public class PassivationCapableBeanWithNonPassivatingInterceptorTest extends Abs
                                 .up()).build();
     }
 
-    @Test(groups = { CONTEXTS, PASSIVATION })
+    @Test
     @SpecAssertion(section = "6.6.4", id = "aac")
     public void testPassivationCapableBeanWithNonPassivatingInterceptorFails() {
     }

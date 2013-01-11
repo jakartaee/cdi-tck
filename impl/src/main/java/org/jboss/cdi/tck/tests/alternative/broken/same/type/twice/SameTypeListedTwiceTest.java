@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.alternative.broken.same.type.twice;
 
-import static org.jboss.cdi.tck.TestGroups.ALTERNATIVES;
-
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +42,7 @@ public class SameTypeListedTwiceTest extends AbstractTest {
                                 .clazz(Dog.class.getName(), Cat.class.getName(), Cat.class.getName()).up()).build();
     }
 
-    @Test(groups = { ALTERNATIVES })
+    @Test
     @SpecAssertion(section = "5.1.1", id = "j")
     public void test() {
     }

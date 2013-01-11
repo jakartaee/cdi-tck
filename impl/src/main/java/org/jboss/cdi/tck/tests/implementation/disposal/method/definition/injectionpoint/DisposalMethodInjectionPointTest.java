@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.injectionpoint;
 
-import static org.jboss.cdi.tck.TestGroups.DISPOSAL;
-
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
@@ -50,7 +48,7 @@ public class DisposalMethodInjectionPointTest extends AbstractTest {
      * Test that the InjectionPoint injected into a disposer method represents the producer method for which the disposer method
      * is being invoked.
      */
-    @Test(groups = { DISPOSAL })
+    @Test
     @SpecAssertion(section = "5.5.7", id = "h")
     public void test() {
         BarProducer.reset();

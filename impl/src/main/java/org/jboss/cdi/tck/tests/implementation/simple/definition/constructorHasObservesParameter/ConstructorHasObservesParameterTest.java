@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.constructorHasObservesParameter;
 
-import static org.jboss.cdi.tck.TestGroups.OBSERVER_METHOD;
-
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +36,7 @@ public class ConstructorHasObservesParameterTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ConstructorHasObservesParameterTest.class).build();
     }
 
-    @Test(groups = { OBSERVER_METHOD })
+    @Test
     @SpecAssertion(section = "3.8.1", id = "ea")
     public void testConstructorHasObservesParameter() {
     }

@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.binding;
 
-import static org.jboss.cdi.tck.TestGroups.EVENTS;
-
 import javax.enterprise.event.Observes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,7 +45,7 @@ public class DuplicateBindingTypesWhenResolvingTest extends AbstractTest {
         }
     }
 
-    @Test(groups = { EVENTS }, expectedExceptions = { IllegalArgumentException.class })
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = "11.3.11", id = "d")
     public void testDuplicateBindingTypesWhenResolvingFails() {
         getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeABinding(), new BindingTypeABinding());

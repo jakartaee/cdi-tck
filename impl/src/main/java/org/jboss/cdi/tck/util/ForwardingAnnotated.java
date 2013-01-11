@@ -16,10 +16,11 @@
  */
 package org.jboss.cdi.tck.util;
 
-import javax.enterprise.inject.spi.Annotated;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Set;
+
+import javax.enterprise.inject.spi.Annotated;
 
 /**
  * Base class to allow implementation of the decorator pattern

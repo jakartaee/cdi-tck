@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname;
 
-import static org.jboss.cdi.tck.TestGroups.RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -45,7 +44,7 @@ public class ResolutionByNameTest extends AbstractTest {
                 .build();
     }
 
-    @Test(groups = { RESOLUTION })
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "5.3.1", id = "ca"), @SpecAssertion(section = "11.3.6", id = "aa"),
             @SpecAssertion(section = "11.3.6", id = "b") })
     public void testAmbiguousELNamesResolved() throws Exception {
