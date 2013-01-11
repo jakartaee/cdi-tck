@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context;
 
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
+
 import javax.enterprise.context.ContextNotActiveException;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
@@ -38,7 +40,7 @@ public class GetOnInactiveContextTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = { ContextNotActiveException.class })
-    @SpecAssertion(section = "6.2", id = "m")
+    @SpecAssertion(section = CONTEXT, id = "m")
     public void testInvokingGetOnInactiveContextFails() {
         Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
         assert sessionContext.isActive();

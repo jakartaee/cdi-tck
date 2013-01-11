@@ -16,6 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBSERVER_METHOD_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.EVENT_QUALIFIER_TYPES_WITH_MEMBERS;
+import static org.jboss.cdi.tck.cdi.Sections.MULTIPLE_EVENT_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_EVENT_PARAMETER;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -43,20 +52,20 @@ public class ResolveEventObserversTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.4", id = "e")
+    @SpecAssertion(section = OBSERVER_METHODS, id = "e")
     public void testMultipleObserverMethodsForSameEventPermissible() {
         assert getCurrentManager().resolveObserverMethods(new DiskSpaceEvent()).size() == 2;
     }
 
     @Test
-    @SpecAssertion(section = "10.4", id = "f")
+    @SpecAssertion(section = OBSERVER_METHODS, id = "f")
     public void testMultipleObserverMethodsOnBeanPermissible() {
         assert getCurrentManager().resolveObserverMethods(new BatteryEvent()).size() == 1;
         assert getCurrentManager().resolveObserverMethods(new DiskSpaceEvent()).size() == 2;
     }
 
     @Test
-    @SpecAssertion(section = "10.4.2", id = "a")
+    @SpecAssertion(section = OBSERVES, id = "a")
     public void testMethodWithParameterAnnotatedWithObservesRegistersObserverMethod() throws SecurityException,
             NoSuchMethodException {
         Set<ObserverMethod<? super Temperature>> temperatureObservers = getCurrentManager().resolveObserverMethods(
@@ -74,15 +83,15 @@ public class ResolveEventObserversTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.4.1", id = "b")
+    @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "b")
     public void testObserverMethodWithoutBindingTypesObservesEventsWithoutBindingTypes() {
         // Resolve registered observers with an event containing no binding types
         assert getCurrentManager().resolveObserverMethods(new SimpleEventType()).size() == 2;
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "c"), @SpecAssertion(section = "10.2.2", id = "a"),
-            @SpecAssertion(section = "10.2.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "c"), @SpecAssertion(section = EVENT_QUALIFIER_TYPES_WITH_MEMBERS, id = "a"),
+            @SpecAssertion(section = MULTIPLE_EVENT_QUALIFIERS, id = "a") })
     public void testObserverMethodMayHaveMultipleBindingTypes() {
         // If we can resolve the observer with the two binding types, then it worked
         assert getCurrentManager().resolveObserverMethods(new MultiBindingEvent(), new RoleBinding("Admin"),
@@ -90,7 +99,7 @@ public class ResolveEventObserversTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.5", id = "aa")
+    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "aa")
     public void testObserverMethodRegistration() {
         // Resolve registered observers with an event containing no binding types
         assert getCurrentManager().resolveObserverMethods(new SimpleEventType()).size() == 2;
@@ -99,28 +108,28 @@ public class ResolveEventObserversTest extends AbstractTest {
     @Test
     @SpecAssertions({
             // these two assertions combine to create a logical, testable assertion
-            @SpecAssertion(section = "11.3.11", id = "a"), @SpecAssertion(section = "11.3.11", id = "b") })
+            @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "a"), @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "b") })
     public void testBeanManagerResolveObserversSignature() throws Exception {
         assert getCurrentManager().getClass().getDeclaredMethod(BEAN_MANAGER_RESOLVE_OBSERVERS_METHOD_NAME, Object.class,
                 Annotation[].class) != null;
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.11", id = "e")
+    @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "e")
     public void testBeanManagerResolveObserversWithIllegalQualifier() {
         getCurrentManager().resolveObserverMethods(new SimpleEventType(), new AnnotationLiteral<Override>() {
         });
     }
 
     @Test
-    @SpecAssertion(section = "12.4", id = "o")
+    @SpecAssertion(section = BEAN_DISCOVERY, id = "o")
     public void testObserverMethodAutomaticallyRegistered() {
         assert !getCurrentManager().resolveObserverMethods(new String(), new AnnotationLiteral<Secret>() {
         }).isEmpty();
     }
 
     @Test
-    @SpecAssertion(section = "12.4", id = "o")
+    @SpecAssertion(section = BEAN_DISCOVERY, id = "o")
     public void testObserverMethodNotAutomaticallyRegisteredForDisabledBeans() {
         Set<ObserverMethod<? super Ghost>> ghostObservers = getCurrentManager().resolveObserverMethods(new Ghost());
         assert ghostObservers.size() == 0;

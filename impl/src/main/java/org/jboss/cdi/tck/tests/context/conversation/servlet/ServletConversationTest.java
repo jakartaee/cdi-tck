@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.conversation.servlet;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -61,7 +62,7 @@ public class ServletConversationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "aa") })
     public void testTransientConversation() throws Exception {
         WebClient client = new WebClient();
         TextPage page = client.getPage(getPath("/display", null));
@@ -71,7 +72,7 @@ public class ServletConversationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "aa") })
     public void testLongRunningConversation() throws Exception {
         WebClient client = new WebClient();
 
@@ -123,7 +124,7 @@ public class ServletConversationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "aa") })
     public void testPost() throws Exception {
         WebClient client = new WebClient();
 
@@ -157,7 +158,7 @@ public class ServletConversationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.4", id = "qa")
+    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "qa")
     // TODO this test doesn't verify that the long-running conversation is destroyed but that it cannot be associated
     public void testInvalidatingSessionDestroysConversation() throws Exception {
         WebClient client = new WebClient();

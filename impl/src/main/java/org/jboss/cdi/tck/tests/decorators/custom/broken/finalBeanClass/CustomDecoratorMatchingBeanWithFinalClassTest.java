@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.decorators.custom.broken.finalBeanClass;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -46,7 +47,7 @@ public class CustomDecoratorMatchingBeanWithFinalClassTest extends AbstractTest 
     }
 
     @Test
-    @SpecAssertion(section = "8.3", id = "ab")
+    @SpecAssertion(section = DECORATOR_RESOLUTION, id = "ab")
     public void testCustomDecoratorDecoratingFinalBean() {
     }
 }

@@ -16,6 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_MANAGED_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.DEFINING_QUALIFIER_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
 import static org.testng.Assert.assertFalse;
 
 import java.lang.annotation.Annotation;
@@ -44,7 +51,7 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3.1", id = "a0"), @SpecAssertion(section = "2.3.1", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "a0"), @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "aa") })
     public void testDefaultQualifierDeclaredInJava() {
         Bean<Order> order = getBeans(Order.class).iterator().next();
         assert order.getQualifiers().size() == 2;
@@ -53,7 +60,7 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3.1", id = "b"), @SpecAssertion(section = "11.1", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "b"), @SpecAssertion(section = BEAN, id = "c") })
     public void testDefaultQualifierForInjectionPoint() {
         Bean<Order> order = getBeans(Order.class).iterator().next();
         assert order.getInjectionPoints().size() == 1;
@@ -62,13 +69,13 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.3.2", id = "ba")
+    @SpecAssertion(section = DEFINING_QUALIFIER_TYPES, id = "ba")
     public void testQualifierDeclaresBindingAnnotation() {
         assertFalse(getBeans(Tarantula.class, new TameLiteral()).isEmpty());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3.3", id = "a"), @SpecAssertion(section = "3.1.3", id = "be") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_QUALIFIERS, id = "a"), @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "be") })
     public void testQualifiersDeclaredInJava() {
         Bean<Cat> cat = getBeans(Cat.class, new SynchronousQualifier()).iterator().next();
         assert cat.getQualifiers().size() == 2;
@@ -76,13 +83,13 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3.3", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_QUALIFIERS, id = "d") })
     public void testMultipleQualifiers() {
         Bean<?> model = getBeans(Cod.class, new ChunkyQualifier(true), new WhitefishQualifier()).iterator().next();
         assert model.getQualifiers().size() == 4;
     }
 
-    @SpecAssertion(section = "2.3.5", id = "a")
+    @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "a")
     public void testFieldInjectedFromProducerMethod() throws Exception {
         Bean<Barn> barnBean = getBeans(Barn.class).iterator().next();
         Barn barn = barnBean.create(getCurrentManager().createCreationalContext(barnBean));
@@ -91,7 +98,7 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.1", id = "aa")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aa")
     public void testQualifierDeclaredInheritedIsInherited() throws Exception {
         Set<? extends Annotation> bindings = getBeans(BorderCollie.class, new HairyQualifier(false)).iterator().next()
                 .getQualifiers();
@@ -101,7 +108,7 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.1", id = "aaa")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aaa")
     public void testQualifierNotDeclaredInheritedIsNotInherited() {
         Set<? extends Annotation> bindings = getBeans(ShetlandPony.class).iterator().next().getQualifiers();
         assert bindings.size() == 2;
@@ -110,7 +117,7 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.1", id = "aa")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aa")
     public void testQualifierDeclaredInheritedIsBlockedByIntermediateClass() {
         Set<? extends Annotation> bindings = getBeans(ClippedBorderCollie.class, new HairyQualifier(true)).iterator().next()
                 .getQualifiers();
@@ -121,7 +128,7 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.1", id = "ag")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ag")
     public void testQualifierDeclaredInheritedIsIndirectlyInherited() {
         Set<? extends Annotation> bindings = getBeans(EnglishBorderCollie.class, new HairyQualifier(false)).iterator().next()
                 .getQualifiers();
@@ -130,7 +137,7 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.1", id = "aga")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aga")
     public void testQualifierNotDeclaredInheritedIsNotIndirectlyInherited() {
         Set<? extends Annotation> bindings = getBeans(MiniatureShetlandPony.class).iterator().next().getQualifiers();
         assert bindings.size() == 2;

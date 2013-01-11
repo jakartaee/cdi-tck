@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.broken.specializingAndSpecializedBeanHaveName;
 
+import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class SpecializingAndSpecializedBeanHaveNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.3.1", id = "la")
+    @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "la")
     public void testSpecializingAndSpecializedBeanHasName() {
     }
 

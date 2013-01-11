@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -69,7 +70,7 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
      */
     @SuppressWarnings("serial")
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "9.5", id = "ba")
+    @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ba")
     public void testBusinessMethodInterceptorBindings(MessageService messageService, MonitorService monitorService) {
 
         // Test interceptor is resolved (note non-binding member of BallBinding)
@@ -95,7 +96,7 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "9.5", id = "bb")
+    @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "bb")
     public void testTimeoutMethodInterceptorBindings(MessageService messageService) throws Exception {
 
         assertNotNull(messageService);
@@ -113,7 +114,7 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "9.5", id = "a")
+    @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "a")
     public void testLifecycleInterceptorBindings() throws Exception {
 
         // Test interceptor is resolved (note non-binding member of BallBinding)

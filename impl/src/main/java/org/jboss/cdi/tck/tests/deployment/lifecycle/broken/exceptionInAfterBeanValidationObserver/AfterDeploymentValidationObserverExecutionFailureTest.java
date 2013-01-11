@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.deployment.lifecycle.broken.exceptionInAfterBeanValidationObserver;
 
+import static org.jboss.cdi.tck.cdi.Sections.ADV;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -46,7 +48,7 @@ public class AfterDeploymentValidationObserverExecutionFailureTest extends Abstr
     }
 
     @Test
-    @SpecAssertion(section = "11.5.3", id = "c")
+    @SpecAssertion(section = ADV, id = "c")
     public void testObserverFailureTreatedAsDeploymentError() {
     }
 

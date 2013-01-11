@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.dynamic;
 
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -62,13 +63,13 @@ public class DynamicInjectionPointTest extends AbstractTest {
     Bar bar;
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "aab")
+    @SpecAssertion(section = INJECTION_POINT, id = "aab")
     public void testInjectionPointGetBean() {
         assertEquals(bar.getFoo().getInjectionPoint().getBean(), getUniqueBean(Bar.class));
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "baa")
+    @SpecAssertion(section = INJECTION_POINT, id = "baa")
     public void testInjectionPointGetType() {
         assertEquals(bar.getFoo().getInjectionPoint().getType(), Foo.class);
         assertEquals(bar.getTypeNiceFoo().getInjectionPoint().getType(), NiceFoo.class);
@@ -76,7 +77,7 @@ public class DynamicInjectionPointTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "5.5.7", id = "bca")
+    @SpecAssertion(section = INJECTION_POINT, id = "bca")
     public void testInjectionPointGetQualifiers() {
 
         Set<Annotation> fooQualifiers = bar.getFoo().getInjectionPoint().getQualifiers();
@@ -88,8 +89,8 @@ public class DynamicInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.7", id = "caa"), @SpecAssertion(section = "5.5.7", id = "cba"),
-            @SpecAssertion(section = "5.5.7", id = "cca") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "caa"), @SpecAssertion(section = INJECTION_POINT, id = "cba"),
+            @SpecAssertion(section = INJECTION_POINT, id = "cca") })
     public void testInjectionPointGetMember() {
 
         Member fieldMember = bar.getFoo().getInjectionPoint().getMember();
@@ -137,13 +138,13 @@ public class DynamicInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "dbb")
+    @SpecAssertion(section = INJECTION_POINT, id = "dbb")
     public void testInjectionPointIsDelegate() {
         assertFalse(bar.getFoo().getInjectionPoint().isDelegate());
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "dcb")
+    @SpecAssertion(section = INJECTION_POINT, id = "dcb")
     public void testInjectionPointIsTransient() {
         assertTrue(bar.getTransientFoo().getInjectionPoint().isTransient());
         assertFalse(bar.getFoo().getInjectionPoint().isTransient());

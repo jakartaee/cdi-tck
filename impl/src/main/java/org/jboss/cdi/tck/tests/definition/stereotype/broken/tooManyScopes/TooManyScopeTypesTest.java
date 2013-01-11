@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.broken.tooManyScopes;
 
+import static org.jboss.cdi.tck.cdi.Sections.EXCEPTIONS;
+import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPE_DEFAULT_SCOPE;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +41,7 @@ public class TooManyScopeTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.1", id = "ab"), @SpecAssertion(section = "2.8", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPE_DEFAULT_SCOPE, id = "ab"), @SpecAssertion(section = EXCEPTIONS, id = "b") })
     public void testStereotypeWithTooManyScopeTypes() {
     }
 

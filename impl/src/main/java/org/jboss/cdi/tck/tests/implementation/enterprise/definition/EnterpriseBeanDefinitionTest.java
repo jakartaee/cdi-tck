@@ -17,6 +17,13 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SESSION_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.INSTANTIATION;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEANS;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_NAME;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_TYPES;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
@@ -50,14 +57,14 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.2", id = "b")
+    @SpecAssertion(section = SESSION_BEANS, id = "b")
     public void testStatelessMustBeDependentScoped() {
         assert getBeans(GiraffeLocal.class).size() == 1;
         assert getBeans(GiraffeLocal.class).iterator().next().getScope().equals(Dependent.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "ab"), @SpecAssertion(section = "5.5.1", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "ab"), @SpecAssertion(section = INSTANTIATION, id = "ab") })
     public void testConstructorAnnotatedInjectCalled() {
         ExplicitConstructor bean = getInstanceByType(ExplicitConstructor.class);
         assert bean.getConstructorCalls() == 1;
@@ -65,26 +72,26 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "5.5.1", id = "bb")
+    @SpecAssertion(section = INSTANTIATION, id = "bb")
     public void testConstructorWithNoParamsUsed(NoParamConstructorSessionBean noParamConstructorSessionBean) {
         noParamConstructorSessionBean.ping();
         assertTrue(NoParamConstructorSessionBean.constructedCorrectly);
     }
 
     @Test
-    @SpecAssertion(section = "3.2", id = "c")
+    @SpecAssertion(section = SESSION_BEANS, id = "c")
     public void testSingletonWithDependentScopeOK() {
         assert getBeans(Labrador.class).size() == 1;
     }
 
     @Test
-    @SpecAssertion(section = "3.2", id = "c")
+    @SpecAssertion(section = SESSION_BEANS, id = "c")
     public void testSingletonWithApplicationScopeOK() {
         assert getBeans(Laika.class).size() == 1;
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.2.2", id = "aa"), @SpecAssertion(section = "3.2.3", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = SESSION_BEAN_TYPES, id = "aa"), @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "c") })
     public void testBeanTypesAreLocalInterfacesWithoutWildcardTypesOrTypeVariablesWithSuperInterfaces() {
         Bean<DogLocal> dogBean = getBeans(DogLocal.class).iterator().next();
         assert dogBean.getTypes().contains(DogLocal.class);
@@ -93,43 +100,43 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.2.2", id = "ba")
+    @SpecAssertion(section = SESSION_BEAN_TYPES, id = "ba")
     public void testEnterpriseBeanClassLocalView() {
         Bean<Retriever> dogBean = getUniqueBean(Retriever.class);
         assert dogBean.getTypes().contains(Retriever.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.2.2", id = "c"), @SpecAssertion(section = "3.2.3", id = "aa"),
-            @SpecAssertion(section = "2.2", id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = SESSION_BEAN_TYPES, id = "c"), @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "aa"),
+            @SpecAssertion(section = BEAN_TYPES, id = "l") })
     public void testObjectIsInAPITypes() {
         assert getBeans(GiraffeLocal.class).size() == 1;
         assert getBeans(GiraffeLocal.class).iterator().next().getTypes().contains(Object.class);
     }
 
     @Test
-    @SpecAssertion(section = "3.2.2", id = "d")
+    @SpecAssertion(section = SESSION_BEAN_TYPES, id = "d")
     public void testRemoteInterfacesAreNotInAPITypes() {
         Bean<DogLocal> dogBean = getBeans(DogLocal.class).iterator().next();
         assert !dogBean.getTypes().contains(DogRemote.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.2.3", id = "ba"), @SpecAssertion(section = "3.2", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "ba"), @SpecAssertion(section = SESSION_BEANS, id = "e") })
     public void testBeanWithScopeAnnotation() {
         Bean<LionLocal> lionBean = getBeans(LionLocal.class).iterator().next();
         assert lionBean.getScope().equals(RequestScoped.class);
     }
 
     @Test
-    @SpecAssertion(section = "3.2.3", id = "bb")
+    @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "bb")
     public void testBeanWithNamedAnnotation() {
         Bean<MonkeyLocal> monkeyBean = getBeans(MonkeyLocal.class).iterator().next();
         assert monkeyBean.getName().equals("Monkey");
     }
 
     @Test
-    @SpecAssertion(section = "3.2.3", id = "bd")
+    @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "bd")
     public void testBeanWithStereotype() {
         Bean<PolarBearLocal> polarBearBean = getBeans(PolarBearLocal.class).iterator().next();
         assert polarBearBean.getScope().equals(RequestScoped.class);
@@ -137,7 +144,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.2.3", id = "be")
+    @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "be")
     public void testBeanWithQualifiers() {
         Annotation tame = new AnnotationLiteral<Tame>() {
         };
@@ -146,7 +153,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.2.5", id = "a")
+    @SpecAssertion(section = SESSION_BEAN_NAME, id = "a")
     public void testDefaultName() {
         assert getBeans(PitbullLocal.class).size() == 1;
         assert getBeans(PitbullLocal.class).iterator().next().getName().equals("pitbull");

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.nonDependentWithPublicStaticField;
 
+import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEANS;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -36,7 +37,7 @@ public class NonDependentWithPublicStaticFieldTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEANS, id = "fb") })
     public void testNonDependentScopedBeanCanHavePublicStaticField() {
         assertEquals(Leopard.NAME, "john");
     }

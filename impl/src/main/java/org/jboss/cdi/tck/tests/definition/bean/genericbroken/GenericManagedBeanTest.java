@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.genericbroken;
 
+import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEANS;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class GenericManagedBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.1", id = "g")
+    @SpecAssertion(section = MANAGED_BEANS, id = "g")
     public void testNonDependentGenericManagedBeanNotOk() throws Exception {
     }
 }

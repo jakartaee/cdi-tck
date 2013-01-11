@@ -18,6 +18,8 @@
 package org.jboss.cdi.tck.tests.lookup.modules.specialization;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
+import static org.jboss.cdi.tck.cdi.Sections.SELECTION;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -72,7 +74,7 @@ public class SpecializationModularity08Test extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "5.1", id = "aa"), @SpecAssertion(section = "5.1.4", id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "aa"), @SpecAssertion(section = INTER_MODULE_INJECTION, id = "l") })
     public void testSpecialization() {
     }
 

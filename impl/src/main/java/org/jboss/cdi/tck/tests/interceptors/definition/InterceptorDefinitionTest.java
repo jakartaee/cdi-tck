@@ -17,6 +17,13 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.BM_INTERCEPTOR_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDINGS;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS;
+import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPE_INTERCEPTOR_BINDINGS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -88,7 +95,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.1.2", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR, id = "a") })
     public void testInterceptorsImplementInterceptorInterface() {
         boolean interfaceFound = false;
         for (Type type : getInterfacesImplemented(getTransactionalInterceptor().getClass())) {
@@ -101,7 +108,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.1.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR, id = "b") })
     public void testInterceptorBindingTypes() {
         Interceptor<?> interceptorBean = getTransactionalInterceptor();
         assertEquals(interceptorBean.getInterceptorBindings().size(), 1);
@@ -109,7 +116,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.1.2", id = "c"), @SpecAssertion(section = "11.1.2", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR, id = "c"), @SpecAssertion(section = INTERCEPTOR, id = "e") })
     public void testInterceptionType() {
         Interceptor<?> interceptorBean = getTransactionalInterceptor();
         assertTrue(interceptorBean.intercepts(InterceptionType.AROUND_INVOKE));
@@ -121,7 +128,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.1.2", id = "f")
+    @SpecAssertion(section = INTERCEPTOR, id = "f")
     public void testInstanceOfInterceptorForEveryEnabledInterceptor() {
         List<AnnotationLiteral<?>> annotationLiterals = Arrays.<AnnotationLiteral<?>> asList(TRANSACTIONAL_LITERAL,
                 SECURE_LITERAL, MISSILE_LITERAL, LOGGED_LITERAL);
@@ -149,7 +156,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BM_INTERCEPTOR_RESOLUTION, id = "a") })
     public void testResolveInterceptorsReturnsOrderedList() {
 
         List<Interceptor<?>> interceptors = getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
@@ -163,7 +170,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_INTERCEPTOR_RESOLUTION, id = "b") })
     public void testSameBindingTypesToResolveInterceptorsFails() {
         Annotation transactionalBinding = new AnnotationLiteral<Transactional>() {
         };
@@ -171,13 +178,13 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BM_INTERCEPTOR_RESOLUTION, id = "c") })
     public void testNoBindingTypesToResolveInterceptorsFails() {
         getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE);
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertions({ @SpecAssertion(section = "11.3.13", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = BM_INTERCEPTOR_RESOLUTION, id = "d") })
     public void testNonBindingTypeToResolveInterceptorsFails() {
         Annotation nonBinding = new AnnotationLiteral<NonBindingType>() {
         };
@@ -185,8 +192,8 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.1", id = "a"), @SpecAssertion(section = "9.1", id = "b"),
-            @SpecAssertion(section = "9.1", id = "c"), @SpecAssertion(section = "9.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "a"), @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "b"),
+            @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "c"), @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a") })
     public void testInterceptorBindingAnnotation() {
         List<Interceptor<?>> interceptors = getLoggedInterceptors();
         assertTrue(interceptors.size() > 1);
@@ -203,8 +210,8 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.1.2", id = "a"), @SpecAssertion(section = "9.1.2", id = "b"),
-            @SpecAssertion(section = "2.7.1.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPE_INTERCEPTOR_BINDINGS, id = "a"), @SpecAssertion(section = STEREOTYPE_INTERCEPTOR_BINDINGS, id = "b"),
+            @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "b") })
     public void testStereotypeInterceptorBindings() {
         FileLogger.intercepted = false;
         NetworkLogger.intercepted = false;
@@ -217,7 +224,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.1.1", id = "a"), @SpecAssertion(section = "9.1.1", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS, id = "a"), @SpecAssertion(section = INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS, id = "b") })
     public void testInterceptorBindingsCanDeclareOtherInterceptorBindings() {
         AtomicInterceptor.intercepted = false;
         MissileInterceptor.intercepted = false;

@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
 import static org.testng.Assert.assertTrue;
 
 import javax.inject.Inject;
@@ -53,7 +55,7 @@ public class EJBDecoratorInvocationTest extends AbstractTest {
     PigSty pigSty;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "d"), @SpecAssertion(section = "8.4", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "d"), @SpecAssertion(section = DECORATOR_INVOCATION, id = "ab") })
     public void testEJBDecoratorInvocation() {
         PigStyDecorator.reset();
         PigStyImpl.reset();

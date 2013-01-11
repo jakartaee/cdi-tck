@@ -17,6 +17,11 @@
 package org.jboss.cdi.tck.tests.lookup.injection;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.NULL;
+import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -46,7 +51,7 @@ public class InjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.5", id = "aa")
+    @SpecAssertion(section = NULL, id = "aa")
     public void testInjectionPerformsBoxingIfNecessary() throws Exception {
         assert getBeans(SpiderNest.class).size() == 1;
         SpiderNest spiderNest = getInstanceByType(SpiderNest.class);
@@ -55,17 +60,17 @@ public class InjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "kc"), @SpecAssertion(section = "5.5", id = "b"),
-            @SpecAssertion(section = "5.5.2", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "kc"), @SpecAssertion(section = INJECTION, id = "b"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ac") })
     public void testInjectionOfNamedBean() {
         WolfPack wolfPack = getInstanceByType(WolfPack.class);
         assert wolfPack.getAlphaWolf() != null;
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "4.2", id = "aa"), @SpecAssertion(section = "5.5.2", id = "bg"),
-            @SpecAssertion(section = "5.5.2", id = "bh"), @SpecAssertion(section = "5.5.2", id = "bk"),
-            @SpecAssertion(section = "5.5.2", id = "bl") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "aa"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bg"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bh"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bk"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bl") })
     public void testInjectionFieldsAndInitializerMethods(DeluxeHenHouse henHouse) throws Exception {
         assertNotNull(henHouse.fox);
         assertEquals(henHouse.fox.getName(), "gavin");
@@ -74,7 +79,7 @@ public class InjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.2", id = "ac")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ac")
     public void testFieldDeclaredInIndirectSuperclassInjected() throws Exception {
         MegaPoorHenHouse henHouse = getInstanceByType(MegaPoorHenHouse.class);
         assert henHouse.fox != null;

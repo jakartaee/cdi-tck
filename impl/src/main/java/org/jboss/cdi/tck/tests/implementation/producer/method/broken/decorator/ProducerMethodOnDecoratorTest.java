@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.decorator;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_METHOD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class ProducerMethodOnDecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3.2", id = "gb")
+    @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "gb")
     // WELD-419
     public void testProducerMethodNotAllowedOnDecorator() {
     }

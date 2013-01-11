@@ -17,6 +17,10 @@
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELDS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
 
 import java.net.URL;
 
@@ -52,8 +56,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ef"), @SpecAssertion(section = "5.5.2", id = "ae"),
-            @SpecAssertion(section = "5.5.2", id = "bn"), @SpecAssertion(section = "3.9", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ef"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ae"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bn"), @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoServlet() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -61,8 +65,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.2", id = "af"), @SpecAssertion(section = "5.5.2", id = "bm"),
-            @SpecAssertion(section = "3.10", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "af"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bm"),
+            @SpecAssertion(section = INITIALIZER_METHODS, id = "b") })
     public void testServletInitializerMethodCalled() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -70,8 +74,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "eg"), @SpecAssertion(section = "5.5.2", id = "ag"),
-            @SpecAssertion(section = "5.5.2", id = "bq"), @SpecAssertion(section = "3.9", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "eg"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ag"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bq"), @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoFilter() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -79,8 +83,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.2", id = "ah"), @SpecAssertion(section = "5.5.2", id = "bp"),
-            @SpecAssertion(section = "3.10", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ah"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bp"),
+            @SpecAssertion(section = INITIALIZER_METHODS, id = "b") })
     public void testFilterInitializerMethodCalled() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -88,8 +92,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ea"), @SpecAssertion(section = "5.5.2", id = "ai"),
-            @SpecAssertion(section = "3.9", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ea"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ai"),
+            @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoServletListener() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -97,7 +101,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.2", id = "aj"), @SpecAssertion(section = "3.10", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "aj"), @SpecAssertion(section = INITIALIZER_METHODS, id = "b") })
     public void testServletListenerInitializerMethodCalled() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -105,8 +109,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "eb"), @SpecAssertion(section = "5.5.2", id = "am"),
-            @SpecAssertion(section = "5.5.2", id = "an"), @SpecAssertion(section = "3.9", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "eb"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "am"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "an"), @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoTagHandler() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
@@ -117,8 +121,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ec"), @SpecAssertion(section = "5.5.2", id = "as"),
-            @SpecAssertion(section = "3.9", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ec"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "as"),
+            @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoTagLibraryListener() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -126,7 +130,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.2", id = "at"), @SpecAssertion(section = "3.10", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "at"), @SpecAssertion(section = INITIALIZER_METHODS, id = "b") })
     public void testTagLibraryListenerInitializerMethodCalled() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -134,8 +138,8 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "d"), @SpecAssertion(section = "5.5.2", id = "au"),
-            @SpecAssertion(section = "5.5.2", id = "av"), @SpecAssertion(section = "3.9", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "d"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "au"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "av"), @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoJSFManagedBean() throws Exception {
         WebClient webclient = new WebClient();
         webclient.setThrowExceptionOnFailingStatusCode(true);

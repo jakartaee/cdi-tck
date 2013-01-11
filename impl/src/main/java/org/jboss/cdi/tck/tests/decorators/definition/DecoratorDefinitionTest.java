@@ -16,6 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BM_DECORATOR_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATED_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_ANNOTATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
 import static org.testng.Assert.assertEquals;
 
 import java.io.Serializable;
@@ -61,9 +70,9 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.1", id = "d"), @SpecAssertion(section = "8.1.1", id = "a"),
-            @SpecAssertion(section = "8.1.3", id = "c"), @SpecAssertion(section = "8.3", id = "aa"),
-            @SpecAssertion(section = "11.1.1", id = "a"), @SpecAssertion(section = "12.4", id = "kc") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN, id = "d"), @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a"),
+            @SpecAssertion(section = DECORATED_TYPES, id = "c"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
+            @SpecAssertion(section = DECORATOR, id = "a"), @SpecAssertion(section = BEAN_DISCOVERY, id = "kc") })
     public void testDecoratorIsManagedBean() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(MockLogger.TYPES);
         assert decorators.size() == 1;
@@ -78,9 +87,9 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.1", id = "b"), @SpecAssertion(section = "8.1", id = "c"),
-            @SpecAssertion(section = "11.1.1", id = "b"), @SpecAssertion(section = "11.3.12", id = "a"),
-            @SpecAssertion(section = "11.3.12", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN, id = "b"), @SpecAssertion(section = DECORATOR_BEAN, id = "c"),
+            @SpecAssertion(section = DECORATOR, id = "b"), @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "a"),
+            @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "b") })
     public void testDecoratedTypes() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(FooBar.TYPES);
         assert decorators.size() == 1;
@@ -95,7 +104,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.1.2", id = "a"), @SpecAssertion(section = "11.1.1", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "a"), @SpecAssertion(section = DECORATOR, id = "c") })
     public void testDelegateInjectionPoint() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Logger.TYPES);
         assert decorators.size() == 1;
@@ -109,15 +118,15 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.1.3", id = "b")
+    @SpecAssertion(section = DECORATED_TYPES, id = "b")
     public void testDecoratorDoesNotImplementDelegateType() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Bazt.TYPES);
         assert decorators.size() == 2;
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.2", id = "g"), @SpecAssertion(section = "8.3", id = "aa"),
-            @SpecAssertion(section = "11.3.12", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS, id = "g"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
+            @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "a") })
     public void testDecoratorOrdering() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Bazt.TYPES);
         assert decorators.size() == 2;
@@ -126,14 +135,14 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.2", id = "ab")
+    @SpecAssertion(section = ENABLED_DECORATORS, id = "ab")
     public void testNonEnabledDecoratorNotResolved() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Field.TYPES);
         assert decorators.size() == 0;
     }
 
     @Test
-    @SpecAssertion(section = "11.1.1", id = "d")
+    @SpecAssertion(section = DECORATOR, id = "d")
     public void testInstanceOfDecoratorForEachEnabled() {
         assert !getCurrentManager().resolveDecorators(MockLogger.TYPES).isEmpty();
         assert !getCurrentManager().resolveDecorators(FooBar.TYPES).isEmpty();
@@ -143,7 +152,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.12", id = "c")
+    @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "c")
     public void testDuplicateBindingsOnResolveDecoratorsFails() {
         Annotation binding = new AnnotationLiteral<Meta>() {
         };
@@ -151,7 +160,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.12", id = "d")
+    @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "d")
     public void testNonBindingsOnResolveDecoratorsFails() {
         Annotation binding = new AnnotationLiteral<NonMeta>() {
         };
@@ -159,7 +168,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.12", id = "e")
+    @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "e")
     public void testEmptyTypeSetOnResolveDecoratorsFails() {
         Annotation binding = new AnnotationLiteral<NonMeta>() {
         };
@@ -173,8 +182,8 @@ public class DecoratorDefinitionTest extends AbstractTest {
      * @param account
      */
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "8.1", id = "d"), @SpecAssertion(section = "8.1.3", id = "c"),
-            @SpecAssertion(section = "8.1.3", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN, id = "d"), @SpecAssertion(section = DECORATED_TYPES, id = "c"),
+            @SpecAssertion(section = DECORATED_TYPES, id = "ca") })
     public void testAbstractDecoratorNotImplementingMethodOfDecoratedType(BankAccount account) {
         ChargeDecorator.reset();
         account.deposit(100);

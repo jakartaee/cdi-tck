@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.ear;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 
 import javax.inject.Inject;
 
@@ -70,7 +71,7 @@ public class SingleWebModuleWithExtensionTest extends AbstractTest {
     FooWebBean fooWebBean;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbc"), @SpecAssertion(section = "12.1", id = "bbe") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bbe") })
     public void testSingleWebModuleWithExtension() {
         fooWebBean.ping();
     }

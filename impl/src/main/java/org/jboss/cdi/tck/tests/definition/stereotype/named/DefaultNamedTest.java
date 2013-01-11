@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.named;
 
+import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_NAME;
+import static org.jboss.cdi.tck.cdi.Sections.NAMED_STEREOTYPE;
+import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -42,8 +45,8 @@ public class DefaultNamedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "a"), @SpecAssertion(section = "2.7.1.3", id = "aa"),
-            @SpecAssertion(section = "2.7.1.3", id = "ab"), @SpecAssertion(section = "2.5.2", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPES, id = "a"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa"),
+            @SpecAssertion(section = NAMED_STEREOTYPE, id = "ab"), @SpecAssertion(section = DEFAULT_NAME, id = "e") })
     public void testStereotypeDeclaringNamed() {
         Bean<FallowDeer> fallowBean = getUniqueBean(FallowDeer.class);
         assertEquals(fallowBean.getName(), "fallowDeer");
@@ -51,7 +54,7 @@ public class DefaultNamedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa") })
     public void testStereotypeNamedOverridenByBean() {
         // The bean name is overriden by the bean
         Bean<RoeDeer> roeBean = getUniqueBean(RoeDeer.class);

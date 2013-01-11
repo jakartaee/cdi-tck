@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.specialization;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
@@ -59,7 +61,7 @@ public class SpecializationTest extends AbstractTest {
     private VerifyingExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.10", id = "aa"), @SpecAssertion(section = "4.3", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = PBA, id = "aa"), @SpecAssertion(section = SPECIALIZATION, id = "ca") })
     public void testProcessBeanAttributesFiredProperlyForSpecializedBean() {
         assertNull(extension.getAlpha());
         assertNull(extension.getBravo());

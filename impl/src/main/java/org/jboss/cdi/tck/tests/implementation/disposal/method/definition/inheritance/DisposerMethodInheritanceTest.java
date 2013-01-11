@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.testng.Assert.assertEquals;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -44,7 +45,7 @@ public class DisposerMethodInheritanceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.2", id = "db"), @SpecAssertion(section = "4.2", id = "dh") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "db"), @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dh") })
     public void testManagedBeanDisposerMethodNotInherited() {
         Bean<Apple> bean = getUniqueBean(Apple.class);
         CreationalContext<Apple> ctx = getCurrentManager().createCreationalContext(bean);
@@ -56,7 +57,7 @@ public class DisposerMethodInheritanceTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "4.2", id = "de"), @SpecAssertion(section = "4.2", id = "dk") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "de"), @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dk") })
     public void testSessionBeanDisposerMethodNotInherited() {
         Bean<Egg> bean = getUniqueBean(Egg.class);
         CreationalContext<Egg> ctx = getCurrentManager().createCreationalContext(bean);

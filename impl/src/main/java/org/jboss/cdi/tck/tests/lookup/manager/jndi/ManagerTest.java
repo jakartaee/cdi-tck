@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.manager.jndi;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -42,7 +43,7 @@ public class ManagerTest extends AbstractTest {
     JndiBeanManagerInjected jndiBeanManagerInjected;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "11.3.1", id = "d")
+    @SpecAssertion(section = PROVIDER, id = "d")
     public void testManagerLookupInJndi() throws Exception {
         assertNotNull(jndiBeanManagerInjected);
         assertNotNull(jndiBeanManagerInjected.getManagerFromJndi());

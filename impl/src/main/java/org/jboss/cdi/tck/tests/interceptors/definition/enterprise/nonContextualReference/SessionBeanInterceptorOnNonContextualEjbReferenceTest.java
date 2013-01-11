@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.nonContextualReference;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -37,7 +38,7 @@ public class SessionBeanInterceptorOnNonContextualEjbReferenceTest extends Abstr
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "7.2", id = "h")
+    @SpecAssertion(section = BIZ_METHOD, id = "h")
     public void testNonContextualSessionBeanReferenceIsIntercepted() {
         MissileInterceptor.intercepted = false;
 

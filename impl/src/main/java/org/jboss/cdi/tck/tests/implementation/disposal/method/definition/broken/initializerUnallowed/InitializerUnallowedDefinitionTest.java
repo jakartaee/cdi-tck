@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.initializerUnallowed;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class InitializerUnallowedDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.5.2", id = "da")
+    @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "da")
     public void testInitializerUnallowed() {
     }
 

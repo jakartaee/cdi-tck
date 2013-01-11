@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.jms;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JMS;
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
 import static org.testng.Assert.assertTrue;
 
 import javax.inject.Inject;
@@ -60,7 +61,7 @@ public class MessageDrivenBeanInterceptorInvocationTest extends AbstractTest {
     SimpleMessageProducer producer;
 
     @Test
-    @SpecAssertions(@SpecAssertion(section = "7.2", id = "la"))
+    @SpecAssertions(@SpecAssertion(section = BIZ_METHOD, id = "la"))
     public void testMessageDrivenBeanMethodIntercepted() throws Exception {
 
         MissileInterceptor.reset();

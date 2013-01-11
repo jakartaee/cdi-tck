@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -43,7 +44,7 @@ public class ResourceDefinitionWithDifferentTypeTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = "3.6.1", id = "j")
+    @SpecAssertion(section = DECLARING_RESOURCE, id = "j")
     public void testDeployment() {
     }
 

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.injectionpoint;
 
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
@@ -49,7 +51,7 @@ public class DisposalMethodInjectionPointTest extends AbstractTest {
      * is being invoked.
      */
     @Test
-    @SpecAssertion(section = "5.5.7", id = "h")
+    @SpecAssertion(section = INJECTION_POINT, id = "h")
     public void test() {
         BarProducer.reset();
         Bean<BarConsumer> bean = getBeans(BarConsumer.class).iterator().next();

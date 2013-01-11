@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.any;
 
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_QUALIFIERS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -33,7 +35,7 @@ public class AnyInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.3.1", id = "a0")
+    @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "a0")
     public void testAnyInjectionIfExactlyOneBeanForType() {
         assert getInstanceByType(Customer.class).drink != null;
     }

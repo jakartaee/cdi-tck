@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.modules;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PM;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -63,14 +64,14 @@ public class MultiModuleProcessingTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "11.5.5", id = "a")
+    @SpecAssertion(section = PM, id = "a")
     public void testProcessedModulesCount(ModuleProcessingExtension moduleProcessingExtension) {
         // WEB-INF/classes and bean library
         assertEquals(moduleProcessingExtension.getModules().size(), 2);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "11.5.5", id = "cg")
+    @SpecAssertion(section = PM, id = "cg")
     public void test(ModuleProcessingExtension moduleProcessingExtension) {
 
         List<ProcessModuleHolder> modules = new ArrayList<ProcessModuleHolder>(moduleProcessingExtension.getModules());

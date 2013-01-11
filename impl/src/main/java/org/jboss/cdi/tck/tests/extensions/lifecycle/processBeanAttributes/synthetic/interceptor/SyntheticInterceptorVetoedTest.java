@@ -1,6 +1,9 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.synthetic.interceptor;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.PBA;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -46,8 +49,8 @@ public class SyntheticInterceptorVetoedTest extends AbstractTest {
     ExternalInterceptorExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.10", id = "be"), @SpecAssertion(section = "11.5.2", id = "dd"),
-            @SpecAssertion(section = "11.5.6", id = "bc") })
+    @SpecAssertions({ @SpecAssertion(section = PBA, id = "be"), @SpecAssertion(section = ABD, id = "dd"),
+            @SpecAssertion(section = PAT, id = "bc") })
     public void testSyntheticInterceptorBeanCanBeVetoed() {
         assertTrue(extension.isTypeVetoed());
         assertTrue(extension.isBeanRegistered());

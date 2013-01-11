@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.deployment.lifecycle;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BBD;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -47,15 +49,15 @@ public class ExtensionsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.1", id = "a"), @SpecAssertion(section = "12.2", id = "b"),
-            @SpecAssertion(section = "12.2", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BBD, id = "a"), @SpecAssertion(section = INITIALIZATION, id = "b"),
+            @SpecAssertion(section = INITIALIZATION, id = "c") })
     public void testBeforeBeanDiscoveryEventIsCalled() {
         assertTrue(BeforeBeanDiscoveryObserver.isObserved());
     }
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "11.5.1", id = "ab")
+    @SpecAssertion(section = BBD, id = "ab")
     public void testAddingBindingType() {
         assertTrue(BeforeBeanDiscoveryObserver.isObserved());
         assertEquals(getBeans(Alligator.class).size(), 0);
@@ -65,7 +67,7 @@ public class ExtensionsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.1", id = "ac")
+    @SpecAssertion(section = BBD, id = "ac")
     public void testAddingScopeType() {
         assertTrue(BeforeBeanDiscoveryObserver.isObserved());
         assertEquals(getBeans(RomanEmpire.class).size(), 1);

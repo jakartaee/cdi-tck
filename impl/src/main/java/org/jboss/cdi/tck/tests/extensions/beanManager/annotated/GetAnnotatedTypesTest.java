@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.annotated;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_ANNOTATEDTYPE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -56,7 +57,7 @@ public class GetAnnotatedTypesTest extends AbstractTest {
     ModifyingExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.19", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_ANNOTATEDTYPE, id = "b") })
     public void testGetAnnotatedType() {
 
         AnnotatedType<Foo> aplha = extension.getAplha();
@@ -86,7 +87,7 @@ public class GetAnnotatedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.19", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_ANNOTATEDTYPE, id = "c") })
     public void testGetAnnotatedTypes() {
 
         List<AnnotatedType<Foo>> allFoo = extension.getAllFoo();

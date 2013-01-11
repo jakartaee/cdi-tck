@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer;
 
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -37,8 +39,8 @@ public class ObserverNotificationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.2", id = "c"), @SpecAssertion(section = "10.2", id = "d"),
-            @SpecAssertion(section = "10.5", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "c"), @SpecAssertion(section = OBSERVER_RESOLUTION, id = "d"),
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "aa") })
     public void testObserversNotified() {
 
         AnEventType anEvent = new AnEventType();

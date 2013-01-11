@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -41,7 +43,7 @@ public class ResourceDefinitionWithDifferentTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.6.1", id = "j")
+    @SpecAssertion(section = DECLARING_RESOURCE, id = "j")
     public void testDeployment() {
     }
 

@@ -16,6 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.definition.name;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEANS_WITH_NO_NAME;
+import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_NAME;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_MANAGED_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_NAME;
+import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_NAME;
+import static org.jboss.cdi.tck.cdi.Sections.NAMED_STEREOTYPE;
+import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
@@ -43,16 +51,16 @@ public class NameDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.5.1", id = "a"), @SpecAssertion(section = "2", id = "e"),
-            @SpecAssertion(section = "3.1.3", id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_NAME, id = "a"), @SpecAssertion(section = CONCEPTS, id = "e"),
+            @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "bb") })
     public void testNonDefaultNamed() {
         Bean<Moose> moose = getUniqueBean(Moose.class);
         assertEquals(moose.getName(), "aMoose");
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.5.2", id = "a"), @SpecAssertion(section = "3.1.5", id = "a"),
-            @SpecAssertion(section = "2.5.1", id = "d"), @SpecAssertion(section = "2.5.2", id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = DEFAULT_NAME, id = "a"), @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a"),
+            @SpecAssertion(section = DECLARING_BEAN_NAME, id = "d"), @SpecAssertion(section = DEFAULT_NAME, id = "fa") })
     public void testDefaultNamed() {
         String name = "haddock";
         Bean<Haddock> haddock = getUniqueBean(Haddock.class);
@@ -62,21 +70,21 @@ public class NameDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "a"), @SpecAssertion(section = "2.7.1.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPES, id = "a"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa") })
     public void testStereotypeDefaultsName() {
         Bean<RedSnapper> bean = getUniqueBean(RedSnapper.class);
         assertEquals(bean.getName(), "redSnapper");
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.5.3", id = "a"), @SpecAssertion(section = "2", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = BEANS_WITH_NO_NAME, id = "a"), @SpecAssertion(section = CONCEPTS, id = "e") })
     public void testNamedNotDeclaredByBean() {
         Bean<SeaBass> bean = getUniqueBean(SeaBass.class);
         assertNull(bean.getName());
     }
 
     @Test
-    @SpecAssertion(section = "2.5.3", id = "a")
+    @SpecAssertion(section = BEANS_WITH_NO_NAME, id = "a")
     public void testNamedNotDeclaredByStereotype() {
         Bean<Minnow> bean = getUniqueBean(Minnow.class);
         assertNull(bean.getName());

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.abortProcessing;
 
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
+
 import javax.enterprise.event.Observes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -58,7 +60,7 @@ public class ObserverExceptionAbortsProcessingTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.5", id = "cb")
+    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cb")
     public void testObserverThrowsExceptionAbortsNotifications() {
         // Fire an event that will be delivered to the two above observers
         AnEventType anEvent = new AnEventType();

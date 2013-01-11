@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.lookup.manager.provider.runtime;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -58,7 +59,7 @@ public class CDIProviderRuntimeTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.1", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = PROVIDER, id = "ab") })
     public void testGetBeanManager(BravoMarker bravoMarker) {
 
         // Test BDA01
@@ -77,7 +78,7 @@ public class CDIProviderRuntimeTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.1", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = PROVIDER, id = "ac") })
     public void testLookup(BravoMarker bravoMarker) {
 
         // Test BDA01

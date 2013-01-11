@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.custom.broken.toomanydelegateinjectionpoints;
 
+import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,7 +41,7 @@ public class CustomDecoratorWithTooManyDelegateInjectionPointsTest extends Abstr
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.1.2", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "ca") })
     public void testDeploymentFails() {
     }
 }

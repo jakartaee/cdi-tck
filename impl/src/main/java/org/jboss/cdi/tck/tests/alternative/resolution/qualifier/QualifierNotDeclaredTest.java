@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -60,7 +62,7 @@ public class QualifierNotDeclaredTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ca"), @SpecAssertion(section = "5.2.1", id = "lb") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ca"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "lb") })
     public void testResolution() throws Exception {
 
         Bean<?> bean = getCurrentManager().resolve(getCurrentManager().getBeans(Foo.class, TrueLiteral.INSTANCE));

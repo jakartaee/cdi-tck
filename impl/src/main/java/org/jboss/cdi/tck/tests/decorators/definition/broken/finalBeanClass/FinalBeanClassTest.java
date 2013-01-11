@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.finalBeanClass;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,7 +49,7 @@ public class FinalBeanClassTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.3", id = "ab")
+    @SpecAssertion(section = DECORATOR_RESOLUTION, id = "ab")
     public void testAppliesToFinalManagedBeanClass() {
     }
 

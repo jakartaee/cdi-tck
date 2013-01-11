@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -52,7 +53,7 @@ public class FinalMethodMethodLevelInterceptorTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "9.3", id = "db")
+    @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "db")
     public void testFinalMethodWithMethodLevelInterceptor() throws Exception {
     }
 }

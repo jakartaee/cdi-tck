@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.stereotype;
 
+import static org.jboss.cdi.tck.cdi.Sections.BBD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -44,7 +45,7 @@ public class StereotypeExtensionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.1", id = "ad")
+    @SpecAssertion(section = BBD, id = "ad")
     public void testStereotypeWorks() {
         Object instance = getInstanceByName("chair");
         assertNotNull(instance);

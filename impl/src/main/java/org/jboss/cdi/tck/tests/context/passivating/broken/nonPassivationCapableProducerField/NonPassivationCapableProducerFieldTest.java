@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.nonPassivationCapableProducerField;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class NonPassivationCapableProducerFieldTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION, id = "d") })
     public void testNonPassivationCapableProducerFieldNotOk() {
     }
 }

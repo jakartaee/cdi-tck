@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalClass;
 
+import static org.jboss.cdi.tck.cdi.Sections.UNPROXYABLE;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class FinalClassTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.15", id = "baa")
+    @SpecAssertion(section = UNPROXYABLE, id = "baa")
     public void testInjectionPointWithUnproxyableTypeWhichResolvesToNormalScopedBean() {
     }
 

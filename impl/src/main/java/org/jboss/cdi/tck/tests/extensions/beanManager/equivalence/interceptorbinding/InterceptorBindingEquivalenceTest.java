@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.equivalence.interceptorbinding;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_DETERMINING_HASH;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
@@ -57,7 +58,7 @@ public class InterceptorBindingEquivalenceTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.15", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_DETERMINING_HASH, id = "b") })
     public void testAreInterceptorBindingsEquivalent() {
 
         Annotation literal1 = new MissileInterceptorBinding() {
@@ -82,7 +83,7 @@ public class InterceptorBindingEquivalenceTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.15", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = BM_DETERMINING_HASH, id = "d") })
     public void testGetInterceptorBindingHashCode() {
 
         Annotation literal1 = new MissileInterceptorBinding() {

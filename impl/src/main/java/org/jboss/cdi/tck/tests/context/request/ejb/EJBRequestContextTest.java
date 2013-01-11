@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.request.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
@@ -73,7 +74,7 @@ public class EJBRequestContextTest extends AbstractTest {
      */
     @OperateOnDeployment("TEST")
     @Test(groups =  JAVAEE_FULL)
-    @SpecAssertion(section = "6.7.1", id = "gc")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "gc")
     public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
         FMS flightManagementSystem = getInstanceByType(FMS.class);
@@ -93,7 +94,7 @@ public class EJBRequestContextTest extends AbstractTest {
      */
     @OperateOnDeployment("TEST")
     @Test(groups =  JAVAEE_FULL)
-    @SpecAssertion(section = "6.7.1", id = "hc")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "hc")
     public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
         SimpleRequestBean.reset();
@@ -121,7 +122,7 @@ public class EJBRequestContextTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(groups =  JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ga"), @SpecAssertion(section = "6.7.1", id = "ha") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "ga"), @SpecAssertion(section = REQUEST_CONTEXT, id = "ha") })
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
         assertNotNull(foo.ping());
         assertTrue(foo.wasRequestBeanInPreviousCallDestroyed());
@@ -129,7 +130,7 @@ public class EJBRequestContextTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(groups =  JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "gb"), @SpecAssertion(section = "6.7.1", id = "hb") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "gb"), @SpecAssertion(section = REQUEST_CONTEXT, id = "hb") })
     public void testRequestScopeActiveDuringAsyncCallToEjb() throws Exception {
         SimpleRequestBean simpleRequestBean = getInstanceByType(SimpleRequestBean.class);
         SimpleRequestBean.reset();

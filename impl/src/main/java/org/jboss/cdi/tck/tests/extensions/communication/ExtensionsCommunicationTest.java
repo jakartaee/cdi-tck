@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.extensions.communication;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -50,7 +51,7 @@ public class ExtensionsCommunicationTest extends AbstractTest {
      * An extension may use BeanManager.fireEvent() to deliver events to observer methods defined on extensions.
      */
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "11.5", id = "bc")
+    @SpecAssertion(section = INIT_EVENTS, id = "bc")
     public void testEvents() {
 
         // Fired by alpha, recorder by beta

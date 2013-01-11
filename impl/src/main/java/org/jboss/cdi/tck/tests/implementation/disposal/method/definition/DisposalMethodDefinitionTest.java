@@ -16,6 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_DISPOSED_PARAMETER;
+import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT_DEFAULT_QUALIFIER;
+import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -52,11 +60,11 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3.5", id = "c"), @SpecAssertion(section = "3.5", id = "b"),
-            @SpecAssertion(section = "3.5", id = "c"), @SpecAssertion(section = "3.5", id = "e"),
-            @SpecAssertion(section = "3.5.1", id = "ba"), @SpecAssertion(section = "3.5.2", id = "a"),
-            @SpecAssertion(section = "3.5.2", id = "b0"), @SpecAssertion(section = "3.5.3", id = "aa"),
-            @SpecAssertion(section = "5.5.4", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "c"), @SpecAssertion(section = DISPOSER_METHOD, id = "b"),
+            @SpecAssertion(section = DISPOSER_METHOD, id = "c"), @SpecAssertion(section = DISPOSER_METHOD, id = "e"),
+            @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba"), @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "a"),
+            @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "b0"), @SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "aa"),
+            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "b") })
     public void testBindingTypesAppliedToDisposalMethodParameters() throws Exception {
 
         SpiderProducer.reset();
@@ -74,7 +82,7 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.5", id = "aa"), @SpecAssertion(section = "3.5.1", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD, id = "aa"), @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba") })
     public void testDisposalMethodOnNonBean() throws Exception {
 
         Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
@@ -93,8 +101,8 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "h"), @SpecAssertion(section = "3.11", id = "a"),
-            @SpecAssertion(section = "5.5.4", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "h"), @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a"),
+            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "e") })
     public void testDisposalMethodParametersGetInjected() throws Exception {
 
         SpiderProducer.reset();
@@ -108,7 +116,7 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.5.1", id = "da")
+    @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "da")
     public void testDisposalMethodForMultipleProducerMethods() throws Exception {
 
         SpiderProducer.reset();
@@ -130,7 +138,7 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
      * Tests that a disposal method can be bound to a product of a producer field. CDI-145
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.5.3", id = "ab"), @SpecAssertion(section = "7.3.5", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "ab"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "o") })
     public void testDisposalMethodCalledForProducerField() throws Exception {
 
         SpiderProducer.reset();

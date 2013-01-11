@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.el;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_WRAP_EXPRESSIONFACTORY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -58,7 +59,7 @@ public class WrapExpressionFactoryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.18", id = "a"), @SpecAssertion(section = "11.3.18", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_WRAP_EXPRESSIONFACTORY, id = "a"), @SpecAssertion(section = BM_WRAP_EXPRESSIONFACTORY, id = "b") })
     public void testWrapping() {
 
         ActionSequence.reset();

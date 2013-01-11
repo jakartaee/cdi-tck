@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.tests.event.observer.extension;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 
 import java.lang.annotation.Annotation;
 
@@ -62,22 +65,22 @@ public class EventBeanObserverNotificationTest extends AbstractObserverNotificat
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fd"), @SpecAssertion(section = "11.5.2", id = "eb"),
-            @SpecAssertion(section = "10.2", id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fd"), @SpecAssertion(section = ABD, id = "eb"),
+            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "k") })
     public void testNoQualifier() {
         testNoQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fd"), @SpecAssertion(section = "11.5.2", id = "eb"),
-            @SpecAssertion(section = "10.2", id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fd"), @SpecAssertion(section = ABD, id = "eb"),
+            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "k") })
     public void testSingleQualifier() {
         testSingleQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fd"), @SpecAssertion(section = "11.5.2", id = "eb"),
-            @SpecAssertion(section = "10.2", id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fd"), @SpecAssertion(section = ABD, id = "eb"),
+            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "k") })
     public void testMultipleQualifiers() {
         testMultipleQualifiersInternal();
     }

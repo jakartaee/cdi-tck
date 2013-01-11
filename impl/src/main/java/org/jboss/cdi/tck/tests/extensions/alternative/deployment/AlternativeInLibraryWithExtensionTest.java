@@ -16,6 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.deployment;
 
+import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_ALTERNATIVE;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -59,8 +63,8 @@ public class AlternativeInLibraryWithExtensionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.6", id = "a"), @SpecAssertion(section = "2.6.1", id = "a"),
-            @SpecAssertion(section = "12.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVES, id = "a"), @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "a"),
+            @SpecAssertion(section = INITIALIZATION, id = "b") })
     public void testAlternative() {
         Assert.assertEquals("barAlternative", foo.getBar().ping());
     }

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.alternative.broken.incorrect.name;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.EXCEPTIONS;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,8 +50,8 @@ public class NoClassWithSpecifiedNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "h"), @SpecAssertion(section = "2.8", id = "c"),
-            @SpecAssertion(section = "2.8", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "h"), @SpecAssertion(section = EXCEPTIONS, id = "c"),
+            @SpecAssertion(section = EXCEPTIONS, id = "ca") })
     public void test() {
     }
 }

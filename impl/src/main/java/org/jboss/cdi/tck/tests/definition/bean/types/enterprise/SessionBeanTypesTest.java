@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types.enterprise;
 
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_TYPES;
 import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -47,8 +48,8 @@ public class SessionBeanTypesTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.2.2", id = "aa"), @SpecAssertion(section = "3.2.2", id = "ba"),
-            @SpecAssertion(section = "3.2.2", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = SESSION_BEAN_TYPES, id = "aa"), @SpecAssertion(section = SESSION_BEAN_TYPES, id = "ba"),
+            @SpecAssertion(section = SESSION_BEAN_TYPES, id = "c") })
     public void testGenericHierarchyBeanTypes() {
 
         // Generic class inheritance with abstact class and interface

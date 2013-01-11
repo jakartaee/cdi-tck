@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.parameterizedTypeWithWildcard;
 
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +41,7 @@ public class ParameterizedTypeWithWildcardTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "ha"), @SpecAssertion(section = "2.2.1", id = "lb") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "ha"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "lb") })
     public void testParameterizedReturnTypeWithWildcard() throws Exception {
     }
 

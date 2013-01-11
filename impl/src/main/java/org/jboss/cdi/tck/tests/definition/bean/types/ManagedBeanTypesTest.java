@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types;
 
+import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_TYPES;
 import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -47,7 +48,7 @@ public class ManagedBeanTypesTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.1.2", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_TYPES, id = "a") })
     public void testGenericHierarchyBeanTypes() {
 
         // Generic class inheritance with abstact class and interface

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.deployment.lifecycle.broken.exceptionInAfterBeanDiscoveryObserver;
 
+import static org.jboss.cdi.tck.cdi.Sections.ABD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,7 +47,7 @@ public class AfterBeanDiscoveryObserverExecutionFailureTest extends AbstractTest
     }
 
     @Test
-    @SpecAssertion(section = "11.5.2", id = "g")
+    @SpecAssertion(section = ABD, id = "g")
     public void testObserverFailureTreatedAsDefinitionError() {
     }
 }

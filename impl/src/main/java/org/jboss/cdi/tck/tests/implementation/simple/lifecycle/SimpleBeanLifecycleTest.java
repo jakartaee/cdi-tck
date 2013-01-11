@@ -16,6 +16,25 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
+import static org.jboss.cdi.tck.cdi.Sections.CREATIONAL_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INJECTED_FIELD;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS_DESTRUCTION;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELDS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELD_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
+
 import java.lang.annotation.Annotation;
 
 import javax.enterprise.context.Dependent;
@@ -49,8 +68,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "f"), @SpecAssertion(section = "3.8.1", id = "g"),
-            @SpecAssertion(section = "2.3.5", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "f"), @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "g"),
+            @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "d") })
     public void testInjectionOfParametersIntoBeanConstructor() {
         assert getBeans(FishPond.class).size() == 1;
         FishPond fishPond = getInstanceByType(FishPond.class);
@@ -60,7 +79,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.6.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "b") })
     public void testSerializeRequestScoped() throws Exception {
         Cod codInstance = getInstanceByType(Cod.class);
 
@@ -71,7 +90,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.6.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "b") })
     public void testSerializeSessionScoped() throws Exception {
         Bream instance = getInstanceByType(Bream.class);
 
@@ -82,14 +101,14 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.8.1", id = "g")
+    @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "g")
     public void testQualifierTypeAnnotatedConstructor() {
         getInstanceByType(Duck.class);
         assert Duck.constructedCorrectly;
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.1.4", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ac") })
     public void testSpecializedBeanExtendsManagedBean() {
         assert MountainLion.class.getAnnotation(Specializes.class) != null;
         Bean<Lion> bean = null;
@@ -108,7 +127,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.1.1", id = "d"), @SpecAssertion(section = "6.1.1", id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = CREATIONAL_CONTEXT, id = "d"), @SpecAssertion(section = CREATIONAL_CONTEXT, id = "g") })
     public void testCreateReturnsSameBeanPushed() {
         final CreationalContext<ShoeFactory> creationalContext = new MockCreationalContext<ShoeFactory>();
         final Contextual<ShoeFactory> bean = getBeans(ShoeFactory.class).iterator().next();
@@ -120,7 +139,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa") })
     public void testBeanCreateInjectsDependenciesAndInvokesInitializerToInstantiateInstance() {
         MockCreationalContext.reset();
         final CreationalContext<FishPond> creationalContext = new MockCreationalContext<FishPond>();
@@ -135,8 +154,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2", id = "g"), @SpecAssertion(section = "2.2.1", id = "b"),
-            @SpecAssertion(section = "2.2.1", id = "k"), @SpecAssertion(section = "12.2", id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = CONCEPTS, id = "g"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "b"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "k"), @SpecAssertion(section = INITIALIZATION, id = "da") })
     public void testManagedBean() {
         assert getBeans(RedSnapper.class).size() == 1;
         assert getInstanceByType(RedSnapper.class) instanceof RedSnapper;
@@ -146,9 +165,9 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa"), @SpecAssertion(section = "3.8.1", id = "aa"),
-            @SpecAssertion(section = "2.3.4", id = "a"), @SpecAssertion(section = "3.9", id = "a"),
-            @SpecAssertion(section = "3.9.1", id = "aa"), @SpecAssertion(section = "12.1", id = "bca") })
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa"), @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa"),
+            @SpecAssertion(section = INJECTED_FIELD_QUALIFIERS, id = "a"), @SpecAssertion(section = INJECTED_FIELDS, id = "a"),
+            @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bca") })
     public void testCreateInjectsFieldsDeclaredInJava() {
         assert getBeans(TunaFarm.class).size() == 1;
         TunaFarm tunaFarm = getInstanceByType(TunaFarm.class);
@@ -160,7 +179,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "l") })
     public void testContextCreatesNewInstanceForInjection() {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
         Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
@@ -170,7 +189,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.1", id = "aa"), @SpecAssertion(section = "7.3.1", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa"), @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba") })
     public void testPostConstructPreDestroy() {
         assert getBeans(Farm.class).size() == 1;
         Bean<Farm> farmBean = getBeans(Farm.class).iterator().next();
@@ -185,8 +204,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.5.3", id = "a0"), @SpecAssertion(section = "7.3.1", id = "ba"),
-            @SpecAssertion(section = "6.5.3", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "a0"), @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba"),
+            @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "c") })
     public void testContextualDestroyDisposesWhenNecessary() {
         final Bean<Goose> gooseBean = getBeans(Goose.class).iterator().next();
         final CreationalContext<Goose> gooseCc = getCurrentManager().createCreationalContext(gooseBean);
@@ -201,7 +220,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.1", id = "a1") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "a1") })
     public void testContextualDestroyCatchesException() {
         Bean<Cod> codBean = getBeans(Cod.class).iterator().next();
         CreationalContext<Cod> creationalContext = getCurrentManager().createCreationalContext(codBean);
@@ -211,7 +230,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION, id = "a") })
     public void testDependentsDestroyedAfterPreDestroy() {
         Bean<FishPond> pondBean = getBeans(FishPond.class).iterator().next();
         CreationalContext<FishPond> creationalContext = getCurrentManager().createCreationalContext(pondBean);
@@ -221,7 +240,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.2", id = "baa")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "baa")
     public void testSubClassInheritsPostConstructOnSuperclass() {
         OrderProcessor.postConstructCalled = false;
         assert getBeans(CdOrderProcessor.class).size() == 1;
@@ -230,7 +249,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.2", id = "bac")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "bac")
     public void testIndirectSubClassInheritsPostConstructOnSuperclass() {
         OrderProcessor.postConstructCalled = false;
         assert getBeans(IndirectOrderProcessor.class).size() == 1;
@@ -239,7 +258,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.2", id = "bba")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "bba")
     public void testSubClassInheritsPreDestroyOnSuperclass() {
         OrderProcessor.preDestroyCalled = false;
         assert getBeans(CdOrderProcessor.class).size() == 1;
@@ -251,7 +270,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.2", id = "bbc")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "bbc")
     public void testIndirectSubClassInheritsPreDestroyOnSuperclass() {
         OrderProcessor.preDestroyCalled = false;
         assert getBeans(IndirectOrderProcessor.class).size() == 1;
@@ -263,7 +282,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.2", id = "baa")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "baa")
     public void testSubClassDoesNotInheritPostConstructOnSuperclassBlockedByIntermediateClass() {
         assert getBeans(NovelOrderProcessor.class).size() == 1;
         OrderProcessor.postConstructCalled = false;
@@ -272,7 +291,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.2", id = "bba")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "bba")
     public void testSubClassDoesNotInheritPreDestroyConstructOnSuperclassBlockedByIntermediateClass() {
         OrderProcessor.preDestroyCalled = false;
         assert getBeans(NovelOrderProcessor.class).size() == 1;
@@ -284,14 +303,14 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = CreationException.class)
-    @SpecAssertion(section = "6.1", id = "a0")
+    @SpecAssertion(section = CONTEXTUAL, id = "a0")
     public void testCreationExceptionWrapsCheckedExceptionThrownFromCreate() {
         assert getBeans(Lorry_Broken.class).size() == 1;
         getInstanceByType(Lorry_Broken.class);
     }
 
     @Test(expectedExceptions = FooException.class)
-    @SpecAssertion(section = "6.1", id = "a0")
+    @SpecAssertion(section = CONTEXTUAL, id = "a0")
     public void testUncheckedExceptionThrownFromCreateNotWrapped() {
         assert getBeans(Van_Broken.class).size() == 1;
         getInstanceByType(Van_Broken.class);

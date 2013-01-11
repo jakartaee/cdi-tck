@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.context.request.event.async;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
@@ -55,7 +56,7 @@ public class RequestScopeEventAsyncTest extends AbstractTest {
     private URL contextPath;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "jd") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "jd") })
     public void testEventsFired() throws Exception {
 
         WebClient client = new WebClient();

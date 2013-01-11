@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.NEW;
 
 import java.util.Set;
 
@@ -44,7 +45,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.14", id = "l")
+    @SpecAssertion(section = NEW, id = "l")
     public void testNewBeanHasSameConstructor() {
         ExplicitConstructor newBean = getInstanceByType(ExplicitConstructor.class, new NewLiteral(
                 ExplicitConstructorSessionBean.class));
@@ -53,7 +54,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.14", id = "m")
+    @SpecAssertion(section = NEW, id = "m")
     public void testNewBeanHasSameInitializers() {
         InitializerSimpleBeanLocal bean = getInstanceByType(InitializerSimpleBeanLocal.class);
         InitializerSimpleBeanLocal newBean = getInstanceByType(InitializerSimpleBeanLocal.class, new NewLiteral(
@@ -69,7 +70,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertion(section = "3.14", id = "v")
+    @SpecAssertion(section = NEW, id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);
         FoxLocal newFox = getInstanceByType(FoxLocal.class, new NewLiteral(Fox.class));
@@ -82,7 +83,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.14", id = "x")
+    @SpecAssertion(section = NEW, id = "x")
     public void testNewBeanHasNoDisposalMethods() throws Exception {
         FoxLocal fox = getInstanceByType(FoxLocal.class);
         FoxLocal newFox = getInstanceByType(FoxLocal.class, new NewLiteral(Fox.class));

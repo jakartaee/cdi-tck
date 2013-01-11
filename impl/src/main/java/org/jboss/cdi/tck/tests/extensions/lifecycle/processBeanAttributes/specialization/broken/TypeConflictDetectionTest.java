@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.specialization.broken;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.PBA;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -56,7 +58,7 @@ public class TypeConflictDetectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.10", id = "aa"), @SpecAssertion(section = "4.3.1", id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = PBA, id = "aa"), @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "l") })
     public void testDeployment() {
     }
 }

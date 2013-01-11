@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.inject.delegateInitializerMethod;
 
+import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -38,7 +40,7 @@ public class DelegateInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.1.2", id = "cd") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "cd") })
     public void testDecoratorDelegateInjectionPoints() {
         TimestampLogger.reset();
         MockLogger.reset();

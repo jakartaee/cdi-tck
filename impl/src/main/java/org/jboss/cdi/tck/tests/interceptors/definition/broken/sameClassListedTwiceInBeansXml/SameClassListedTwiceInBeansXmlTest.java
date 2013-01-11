@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.sameClassListedTwiceInBeansXml;
 
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class SameClassListedTwiceInBeansXmlTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.4", id = "cb")
+    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "cb")
     public void testSameInterceptorClassListedTwiceInBeansXmlNotOk() {
     }
 }

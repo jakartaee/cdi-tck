@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.definition.stereotype.interceptor.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS;
 
 import javax.inject.Inject;
 
@@ -53,7 +54,7 @@ public class EnterpriseStereotypeInterceptorBindingTest extends AbstractTest {
     Foo foo;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "b") })
     public void testStereotypeInterceptorBindings() {
         AlphaInterceptor.reset();
         foo.ping();

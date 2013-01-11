@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.interceptorForLifecycleTargetMethod;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INTERCEPTOR;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -48,7 +49,7 @@ public class InterceptorForLifecycleTargetMethodTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "9.2", id = "d")
+    @SpecAssertion(section = DECLARING_INTERCEPTOR, id = "d")
     public void testInterceptorForLifecycleTargetMethod() throws Exception {
     }
 }

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.producer;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_PRODUCER;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -63,7 +64,7 @@ public class SyntheticProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_PRODUCER, id = "b") })
     public void testStaticProducerField() {
         AnnotatedField<? super Factory> field = this.<Factory, AnnotatedField<Factory>> getAnnotatedMember(Factory.class,
                 "WOODY");
@@ -75,7 +76,7 @@ public class SyntheticProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_PRODUCER, id = "b") })
     public void testNonStaticProducerField() {
         AnnotatedField<? super AnotherFactory> field = this
                 .<AnotherFactory, AnnotatedField<AnotherFactory>> getAnnotatedMember(AnotherFactory.class, "jessie");
@@ -89,7 +90,7 @@ public class SyntheticProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_PRODUCER, id = "a") })
     public void testStaticProducerMethod() {
         AnnotatedMethod<? super Factory> method = this.<Factory, AnnotatedMethod<Factory>> getAnnotatedMember(Factory.class,
                 "getBuzz");
@@ -101,7 +102,7 @@ public class SyntheticProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_PRODUCER, id = "a") })
     public void testNonStaticProducerMethod() {
         AnnotatedMethod<? super AnotherFactory> method = this
                 .<AnotherFactory, AnnotatedMethod<AnotherFactory>> getAnnotatedMember(AnotherFactory.class, "getRex");
@@ -115,7 +116,7 @@ public class SyntheticProducerTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_PRODUCER, id = "c") })
     public void testInvalidProducerMethod1() {
         AnnotatedMethod<? super Factory> method = this.<Factory, AnnotatedMethod<Factory>> getAnnotatedMember(Factory.class,
                 "invalidProducerMethod1");
@@ -123,7 +124,7 @@ public class SyntheticProducerTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_PRODUCER, id = "c") })
     public void testInvalidProducerMethod2() {
         // Producer method is not static but no declaringBean is provided
         AnnotatedMethod<? super Factory> method = this.<Factory, AnnotatedMethod<Factory>> getAnnotatedMember(Factory.class,
@@ -132,7 +133,7 @@ public class SyntheticProducerTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_PRODUCER, id = "d") })
     public void testInvalidProducerField1() {
         // Producer field type contains a wildcard type parameter
         AnnotatedField<? super Factory> field = this.<Factory, AnnotatedField<Factory>> getAnnotatedMember(Factory.class,
@@ -141,7 +142,7 @@ public class SyntheticProducerTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_PRODUCER, id = "d") })
     public void testInvalidProducerField2() {
         // Producer field is annotated @Inject
         AnnotatedField<? super Factory> field = this.<Factory, AnnotatedField<Factory>> getAnnotatedMember(Factory.class,
@@ -150,7 +151,7 @@ public class SyntheticProducerTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.21", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_PRODUCER, id = "d") })
     public void testInvalidProducerField3() {
         // Producer field is not static but no declaringBean is provided
         AnnotatedField<? super Factory> field = this.<Factory, AnnotatedField<Factory>> getAnnotatedMember(Factory.class,

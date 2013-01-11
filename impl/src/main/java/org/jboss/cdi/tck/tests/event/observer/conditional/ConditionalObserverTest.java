@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.tests.event.observer.conditional;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.CONDITIONAL_OBSERVER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVERS_METHOD_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -44,7 +47,7 @@ public class ConditionalObserverTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.6", id = "baa"), @SpecAssertion(section = "10.4.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "baa"), @SpecAssertion(section = CONDITIONAL_OBSERVER_METHODS, id = "a") })
     public void testConditionalObserver() {
         RecluseSpider.reset();
         getCurrentManager().fireEvent(new ConditionalEvent());
@@ -63,7 +66,7 @@ public class ConditionalObserverTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.6", id = "baa")
+    @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "baa")
     public void testObserverMethodInvokedOnReturnedInstanceFromContext() {
         RecluseSpider spider = getInstanceByType(RecluseSpider.class);
         spider.setWeb(new Web());
@@ -73,7 +76,7 @@ public class ConditionalObserverTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.4.3", id = "c")
+    @SpecAssertion(section = CONDITIONAL_OBSERVER_METHODS, id = "c")
     public void testNotifyEnumerationContainsNotifyValues() {
         assert Reception.values().length == 2;
         List<String> notifyValueNames = new ArrayList<String>();
@@ -86,7 +89,7 @@ public class ConditionalObserverTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "bca")
+    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "bca")
     public void testConditionalObserverMethodNotInvokedIfNoActiveContext() {
 
         Tarantula.reset();

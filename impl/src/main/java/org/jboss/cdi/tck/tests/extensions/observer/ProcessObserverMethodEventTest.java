@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.extensions.observer;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.POM;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -42,20 +45,20 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.12", id = "aaa"), @SpecAssertion(section = "12.4", id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = POM, id = "aaa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "i") })
     public void testProcessObserverMethodEventsSent() {
         assert ProcessObserverMethodObserver.getEventtypes().contains(EventA.class);
     }
 
     @Test
-    @SpecAssertion(section = "11.5.12", id = "aba")
+    @SpecAssertion(section = POM, id = "aba")
     public void testGetAnnotatedMethod() {
         assert ProcessObserverMethodObserver.getAnnotatedMethod().getParameters().iterator().next().getBaseType()
                 .equals(EventA.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.12", id = "ba"), @SpecAssertion(section = "12.4", id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = POM, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY, id = "i") })
     public void testGetObserverMethod() {
         assert ProcessObserverMethodObserver.getObserverMethod().getObservedType().equals(EventA.class);
     }

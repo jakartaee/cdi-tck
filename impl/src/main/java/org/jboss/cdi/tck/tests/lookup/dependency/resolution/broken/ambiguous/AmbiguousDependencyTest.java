@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dependency.resolution.broken.ambiguous;
 
+import static org.jboss.cdi.tck.cdi.Sections.EXCEPTIONS;
+import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,8 +41,8 @@ public class AmbiguousDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "ae"), @SpecAssertion(section = "2.8", id = "c"),
-            @SpecAssertion(section = "2.8", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ae"), @SpecAssertion(section = EXCEPTIONS, id = "c"),
+            @SpecAssertion(section = EXCEPTIONS, id = "ca") })
     public void testAmbiguousDependency() {
     }
 

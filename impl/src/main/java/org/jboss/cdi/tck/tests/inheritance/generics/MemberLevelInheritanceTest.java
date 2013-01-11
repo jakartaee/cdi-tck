@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.inheritance.generics;
 
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.fail;
@@ -50,7 +51,7 @@ public class MemberLevelInheritanceTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "4.2", id = "f")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "f")
     public void testInjectionPointDefinition() throws Exception {
 
         Bean<Foo> fooBean = getUniqueBean(Foo.class);
@@ -78,7 +79,7 @@ public class MemberLevelInheritanceTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "4.2", id = "f")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "f")
     public void testInjectionPoint(Foo foo) throws Exception {
         assertNotNull(foo);
         assertNotNull(foo.getBaz());
@@ -88,7 +89,7 @@ public class MemberLevelInheritanceTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "4.2", id = "g")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "g")
     public void testObserverResolution() throws Exception {
 
         Set<ObserverMethod<? super Qux>> observerMethods = getCurrentManager().resolveObserverMethods(new Qux(null));
@@ -100,7 +101,7 @@ public class MemberLevelInheritanceTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "4.2", id = "g")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "g")
     public void testObserver(Foo foo) throws Exception {
         assertNotNull(foo);
         getCurrentManager().fireEvent(new Qux(null));

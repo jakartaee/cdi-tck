@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.broken.enterpriseBeanWithNonPassivatingInjectedFieldInDecorator;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -45,7 +46,7 @@ public class EnterpriseBeanWithNonPassivatingInjectedFieldInDecoratorTest extend
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertion(section = "6.6.4", id = "bdd")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "bdd")
     public void testSessionBeanWithNonPassivatingInjectedFieldInDecoratorFails() {
     }
 

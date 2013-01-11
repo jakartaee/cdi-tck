@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.decorators.interceptor;
 
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
@@ -54,9 +57,9 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
      * lifecycle callback interception are not business method invocation, and therefore are not intercepted by interceptors.
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.2", id = "i"), @SpecAssertion(section = "9.4", id = "g"),
-            @SpecAssertion(section = "7.2", id = "ka"), @SpecAssertion(section = "7.2", id = "kb"),
-            @SpecAssertion(section = "7.2", id = "kc"), @SpecAssertion(section = "7.2", id = "kd") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS, id = "i"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g"),
+            @SpecAssertion(section = BIZ_METHOD, id = "ka"), @SpecAssertion(section = BIZ_METHOD, id = "kb"),
+            @SpecAssertion(section = BIZ_METHOD, id = "kc"), @SpecAssertion(section = BIZ_METHOD, id = "kd") })
     public void testMethodCallbacks() {
 
         ActionSequence.reset();
@@ -71,7 +74,7 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "kc"), @SpecAssertion(section = "7.2", id = "kd") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "kc"), @SpecAssertion(section = BIZ_METHOD, id = "kd") })
     public void testLifecycleCallbacks() {
 
         ActionSequence.reset();

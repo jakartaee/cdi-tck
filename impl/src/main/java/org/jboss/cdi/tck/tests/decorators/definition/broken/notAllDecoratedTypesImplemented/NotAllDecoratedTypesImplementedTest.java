@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.notAllDecoratedTypesImplemented;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATED_TYPES;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,7 +49,7 @@ public class NotAllDecoratedTypesImplementedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.1.3", id = "a")
+    @SpecAssertion(section = DECORATED_TYPES, id = "a")
     public void testNotAllDecoratedTypesImplemented() {
     }
 

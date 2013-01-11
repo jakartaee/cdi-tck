@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.context.dependent.instance;
 
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS;
 import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class BuiltinInstanceDependentObjectTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.4.1", id = "i"), @SpecAssertion(section = "6.4.2", id = "ccd") })
+    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_OBJECTS, id = "i"), @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ccd") })
     public void testInstanceDependentObject() {
         Foo.reset();
         getCurrentManager().fireEvent(new GoodEvent());

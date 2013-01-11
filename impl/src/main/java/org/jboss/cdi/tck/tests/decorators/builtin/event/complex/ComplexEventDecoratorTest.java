@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.builtin.event.complex;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +63,7 @@ public class ComplexEventDecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "aca") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "aca") })
     public void testOrderedEvents() {
         event.select(Bar.Literal.INSTANCE).select(Baz.Literal.INSTANCE).fire(new Payload());
 

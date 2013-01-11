@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname;
 
+import static org.jboss.cdi.tck.cdi.Sections.AMBIG_NAMES;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEAN_BY_NAME;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -45,8 +47,8 @@ public class ResolutionByNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.3.1", id = "ca"), @SpecAssertion(section = "11.3.6", id = "aa"),
-            @SpecAssertion(section = "11.3.6", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "ca"), @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "aa"),
+            @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "b") })
     public void testAmbiguousELNamesResolved() throws Exception {
         // Cod, Plaice and AlaskaPlaice are named "whitefish" - Cod is a not-enabled alternative, AlaskaPlaice specializes
         // Plaice

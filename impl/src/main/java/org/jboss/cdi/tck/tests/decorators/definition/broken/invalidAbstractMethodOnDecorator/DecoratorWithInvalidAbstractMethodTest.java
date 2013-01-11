@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.invalidAbstractMethodOnDecorator;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATED_TYPES;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -49,7 +51,7 @@ public class DecoratorWithInvalidAbstractMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.1.3", id = "cb")
+    @SpecAssertion(section = DECORATED_TYPES, id = "cb")
     public void testAbstractMethodsNotDeclaredByDecoratedTypeNotOk() {
     }
 

@@ -2,6 +2,8 @@ package org.jboss.cdi.tck.tests.event.observer.transactional;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
+import static org.jboss.cdi.tck.cdi.Sections.TRANSACTIONAL_OBSERVER_METHODS;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
@@ -40,10 +42,10 @@ public class TransactionalObserverTest extends AbstractTest {
     AccountService accountService;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.4", id = "a"), @SpecAssertion(section = "10.4.4", id = "b"),
-            @SpecAssertion(section = "10.4.4", id = "c"), @SpecAssertion(section = "10.4.4", id = "d"),
-            @SpecAssertion(section = "10.4.4", id = "e"), @SpecAssertion(section = "10.4.4", id = "gaa"),
-            @SpecAssertion(section = "10.5", id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "b"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "c"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "d"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "e"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "gaa"),
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "bb") })
     public void testSucessfullTransaction() throws Exception {
 
         logger.log("testSucessfullTransaction");
@@ -63,10 +65,10 @@ public class TransactionalObserverTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.4", id = "a"), @SpecAssertion(section = "10.4.4", id = "b"),
-            @SpecAssertion(section = "10.4.4", id = "c"), @SpecAssertion(section = "10.4.4", id = "d"),
-            @SpecAssertion(section = "10.4.4", id = "e"), @SpecAssertion(section = "10.4.4", id = "gaa"),
-            @SpecAssertion(section = "10.5", id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "b"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "c"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "d"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "e"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "gaa"),
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "bb") })
     public void testFailedTransaction() throws Exception {
 
         logger.log("testFailedTransaction");
@@ -88,7 +90,7 @@ public class TransactionalObserverTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.4", id = "a"), @SpecAssertion(section = "10.5", id = "bc") })
+    @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"), @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "bc") })
     public void testNoTransaction() throws Exception {
 
         logger.log("testNoTransaction");
@@ -104,7 +106,7 @@ public class TransactionalObserverTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "bda") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "bda") })
     public void testObserverFailedTransaction() throws Exception {
 
         logger.log("testObserverFailedTransaction");

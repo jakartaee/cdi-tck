@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.broken.processing;
 
+import static org.jboss.cdi.tck.cdi.Sections.PP;
+
 import javax.enterprise.inject.spi.DefinitionException;
 import javax.enterprise.inject.spi.ProcessProducer;
 
@@ -46,7 +48,7 @@ public class ProducerProcessingWithExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.9", id = "h") })
+    @SpecAssertions({ @SpecAssertion(section = PP, id = "h") })
     public void testException() {
     }
 

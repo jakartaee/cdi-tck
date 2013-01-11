@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.broken.binding;
 
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -48,7 +50,7 @@ public class FinalClassWithInheritedClassLevelInterceptorTest extends AbstractTe
     }
 
     @Test
-    @SpecAssertion(section = "9.3", id = "cc")
+    @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "cc")
     public void testFinalClassWithInheritedClassLevelInterceptor() throws Exception {
     }
 }

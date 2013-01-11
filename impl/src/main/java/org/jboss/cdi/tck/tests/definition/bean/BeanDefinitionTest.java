@@ -16,6 +16,16 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_MANAGED_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.NULL;
+import static org.jboss.cdi.tck.cdi.Sections.SCOPES;
+import static org.jboss.cdi.tck.cdi.Sections.TYPECASTING_BETWEEN_BEAN_TYPES;
+
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
@@ -53,30 +63,30 @@ public class BeanDefinitionTest extends AbstractTest {
     // throws a definition exception if any of these occur
 
     @Test
-    @SpecAssertion(section = "2", id = "a")
+    @SpecAssertion(section = CONCEPTS, id = "a")
     public void testBeanTypesNonEmpty() {
         assert getBeans(RedSnapper.class).size() == 1;
         assert getBeans(RedSnapper.class).iterator().next().getTypes().size() > 0;
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2", id = "b"), @SpecAssertion(section = "11.1", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = CONCEPTS, id = "b"), @SpecAssertion(section = BEAN, id = "ba") })
     public void testQualifiersNonEmpty() {
         assert getBeans(RedSnapper.class).size() == 1;
         assert getBeans(RedSnapper.class).iterator().next().getQualifiers().size() > 0;
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2", id = "c"), @SpecAssertion(section = "2.4", id = "a"),
-            @SpecAssertion(section = "3.1.3", id = "ba"), @SpecAssertion(section = "11.1", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = CONCEPTS, id = "c"), @SpecAssertion(section = SCOPES, id = "a"),
+            @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "ba"), @SpecAssertion(section = BEAN, id = "ba") })
     public void testHasScopeType() {
         assert getBeans(RedSnapper.class).size() == 1;
         assert getBeans(RedSnapper.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.2.1", id = "j"), @SpecAssertion(section = "5.2.5", id = "c"),
-            @SpecAssertion(section = "11.1", id = "bd") })
+    @SpecAssertions({ @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "j"), @SpecAssertion(section = NULL, id = "c"),
+            @SpecAssertion(section = BEAN, id = "bd") })
     public void testIsNullable() throws Exception {
         assert getBeans(int.class).size() == 1;
         Bean<Integer> bean = getBeans(int.class).iterator().next();
@@ -87,10 +97,10 @@ public class BeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.1.2", id = "a"), @SpecAssertion(section = "2.2", id = "a"),
-            @SpecAssertion(section = "2.2.1", id = "a"), @SpecAssertion(section = "2.2.1", id = "d"),
-            @SpecAssertion(section = "2.2.1", id = "e"), @SpecAssertion(section = "2.2", id = "l"),
-            @SpecAssertion(section = "11.1", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_TYPES, id = "a"), @SpecAssertion(section = BEAN_TYPES, id = "a"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "a"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "d"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "e"), @SpecAssertion(section = BEAN_TYPES, id = "l"),
+            @SpecAssertion(section = BEAN, id = "ba") })
     public void testBeanTypes() {
         assert getBeans(Tarantula.class).size() == 1;
         Bean<Tarantula> bean = getBeans(Tarantula.class).iterator().next();
@@ -104,7 +114,7 @@ public class BeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.3", id = "a")
+    @SpecAssertion(section = TYPECASTING_BETWEEN_BEAN_TYPES, id = "a")
     @SuppressWarnings("unused")
     public void testBeanClientCanCastBeanInstanceToAnyBeanType() {
         assert getBeans(Tarantula.class).size() == 1;
@@ -119,7 +129,7 @@ public class BeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.1", id = "c")
+    @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "c")
     public void testAbstractApiType() {
         assert getBeans(FriendlyAntelope.class).size() == 1;
         Bean<FriendlyAntelope> bean = getBeans(FriendlyAntelope.class).iterator().next();
@@ -131,13 +141,13 @@ public class BeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.1", id = "d")
+    @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "d")
     public void testFinalApiType() {
         assert !getBeans(DependentFinalTuna.class).isEmpty();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.1.3", id = "bd"), @SpecAssertion(section = "11.1", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "bd"), @SpecAssertion(section = BEAN, id = "ba") })
     public void testMultipleStereotypes() {
         Bean<ComplicatedTuna> tunaBean = getBeans(ComplicatedTuna.class).iterator().next();
         assert tunaBean.getScope().equals(RequestScoped.class);
@@ -145,14 +155,14 @@ public class BeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.1.3", id = "c")
+    @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "c")
     public void testBeanExtendsAnotherBean() {
         assert !getBeans(Spider.class).isEmpty();
         assert !getBeans(Tarantula.class).isEmpty();
     }
 
     @Test
-    @SpecAssertion(section = "11.1", id = "bb")
+    @SpecAssertion(section = BEAN, id = "bb")
     public void testBeanClassOnSimpleBean() {
         Set<Bean<Horse>> beans = getBeans(Horse.class);
         assert beans.size() == 1;

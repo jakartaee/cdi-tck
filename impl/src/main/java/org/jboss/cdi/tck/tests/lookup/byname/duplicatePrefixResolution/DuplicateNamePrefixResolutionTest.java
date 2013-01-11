@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.byname.duplicatePrefixResolution;
 
+import static org.jboss.cdi.tck.cdi.Sections.AMBIG_NAMES;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +40,7 @@ public class DuplicateNamePrefixResolutionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.3.1", id = "db")
+    @SpecAssertion(section = AMBIG_NAMES, id = "db")
     public void testDuplicateBeanNamePrefix() {
     }
 

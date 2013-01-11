@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.decorators.builtin.principal;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -59,7 +60,7 @@ public class BuiltinPrincipalDecoratorTest extends AbstractDecoratorTest {
     PrincipalInjector principalInjector;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acm") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acm") })
     public void testDecoratorIsResolved() {
         assertNotNull(principalInjector);
         checkDecorator(
@@ -68,7 +69,7 @@ public class BuiltinPrincipalDecoratorTest extends AbstractDecoratorTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acm") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acm") })
     public void testDecoratorInvoked() throws Exception {
         assertNotNull(principalInjector);
         assertNotNull(principalInjector.getPrincipal());

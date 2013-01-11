@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.event.observer.method;
 
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -48,7 +49,7 @@ public class ObserverMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.1.3", id = "b")
+    @SpecAssertion(section = OBSERVER_METHOD, id = "b")
     public void testGetBeanClassOnObserverMethod() {
         Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
         assertEquals(observers.size(), 1);
@@ -57,7 +58,7 @@ public class ObserverMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.1.3", id = "c")
+    @SpecAssertion(section = OBSERVER_METHOD, id = "c")
     public void testGetObservedTypeOnObserverMethod() {
         Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
         assertEquals(observers.size(), 1);
@@ -66,7 +67,7 @@ public class ObserverMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.1.3", id = "c")
+    @SpecAssertion(section = OBSERVER_METHOD, id = "c")
     public void testGetObservedQualifiersOnObserverMethod() {
         Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
         assertEquals(observers.size(), 1);
@@ -75,7 +76,7 @@ public class ObserverMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.1.3", id = "d")
+    @SpecAssertion(section = OBSERVER_METHOD, id = "d")
     public void testGetNotifyOnObserverMethod() {
         Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
         assertEquals(observers.size(), 1);
@@ -88,7 +89,7 @@ public class ObserverMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.1.3", id = "e")
+    @SpecAssertion(section = OBSERVER_METHOD, id = "e")
     public void testGetTransactionPhaseOnObserverMethod() {
 
         assertEquals(getCurrentManager().resolveObserverMethods(new StockPrice()).iterator().next().getTransactionPhase(),
@@ -104,7 +105,7 @@ public class ObserverMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.1.3", id = "ga")
+    @SpecAssertion(section = OBSERVER_METHOD, id = "ga")
     public void testInstanceOfBeanForEveryEnabledObserverMethod() {
         assertFalse(getCurrentManager().resolveObserverMethods(new StockPrice()).isEmpty());
         assertFalse(getCurrentManager().resolveObserverMethods(new DisobedientDog()).isEmpty());
@@ -114,7 +115,7 @@ public class ObserverMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.1.3", id = "f")
+    @SpecAssertion(section = OBSERVER_METHOD, id = "f")
     public void testNotifyOnObserverMethod() {
         Integer event = Integer.valueOf(1);
         Set<ObserverMethod<? super Integer>> observerMethods = getCurrentManager().resolveObserverMethods(event);

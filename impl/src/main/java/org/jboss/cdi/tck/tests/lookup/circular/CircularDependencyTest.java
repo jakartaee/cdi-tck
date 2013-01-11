@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.circular;
 
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_EL_RESOLUTION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -33,7 +35,7 @@ public class CircularDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "b")
+    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testCircularInjectionOnTwoNormalBeans() throws Exception {
         Pig pig = getInstanceByType(Pig.class);
         Food food = getInstanceByType(Food.class);
@@ -42,7 +44,7 @@ public class CircularDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "b")
+    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testCircularInjectionOnOneNormalAndOneDependentBean() throws Exception {
         Petrol petrol = getInstanceByType(Petrol.class);
         Car car = getInstanceByType(Car.class);
@@ -51,37 +53,37 @@ public class CircularDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "b")
+    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testNormalProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception {
         getInstanceByType(NormalSelfConsumingNormalProducer.class).ping();
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "b")
+    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testNormalProducerMethodDeclaredOnDependentBeanWhichInjectsProducedBean() throws Exception {
         getInstanceByType(DependentSelfConsumingNormalProducer.class).ping();
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "b")
+    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testDependentProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception {
         getInstanceByType(NormalSelfConsumingDependentProducer.class).ping();
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "b")
+    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testNormalCircularConstructors() throws Exception {
         assert getInstanceByType(Bird.class) != null;
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "b")
+    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testNormalAndDependentCircularConstructors() throws Exception {
         assert getInstanceByType(Planet.class) != null;
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "b")
+    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testSelfConsumingConstructorsOnNormalBean() throws Exception {
         assert getInstanceByType(House.class) != null;
     }

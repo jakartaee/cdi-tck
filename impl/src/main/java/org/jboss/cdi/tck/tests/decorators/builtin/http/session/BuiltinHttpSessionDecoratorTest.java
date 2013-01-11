@@ -18,6 +18,8 @@
 package org.jboss.cdi.tck.tests.decorators.builtin.http.session;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -66,7 +68,7 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
     HttpSessionObserver httpSessionObserver;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acj"), @SpecAssertion(section = "8.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acj"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa") })
     public void testDecoratorIsResolved() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(HttpSession.class));
         assertEquals(2, decorators.size());
@@ -77,7 +79,7 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acj") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acj") })
     public void testDecoratorIsInvoked() {
         httpSession.invalidate();
         assertTrue(httpSessionObserver.isDestroyed());

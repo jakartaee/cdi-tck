@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.manager;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEANMANAGER;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_CONTEXTUAL_REFERENCE;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -42,47 +45,47 @@ public class ManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3", id = "c")
+    @SpecAssertion(section = BEANMANAGER, id = "c")
     public void testInjectingManager() {
         FishFarmOffice fishFarmOffice = getInstanceByType(FishFarmOffice.class);
         assert fishFarmOffice.beanManager != null;
     }
 
     @Test
-    @SpecAssertion(section = "11.3", id = "aa")
+    @SpecAssertion(section = BEANMANAGER, id = "aa")
     public void testContainerProvidesManagerBean() {
         assert getBeans(BeanManager.class).size() > 0;
     }
 
     @Test
-    @SpecAssertion(section = "11.3", id = "ab")
+    @SpecAssertion(section = BEANMANAGER, id = "ab")
     public void testManagerBeanIsDependentScoped() {
         Bean<BeanManager> beanManager = getBeans(BeanManager.class).iterator().next();
         assert beanManager.getScope().equals(Dependent.class);
     }
 
     @Test
-    @SpecAssertion(section = "11.3", id = "ac")
+    @SpecAssertion(section = BEANMANAGER, id = "ac")
     public void testManagerBeanHasCurrentBinding() {
         Bean<BeanManager> beanManager = getBeans(BeanManager.class).iterator().next();
         assert beanManager.getQualifiers().contains(new DefaultLiteral());
     }
 
     @Test
-    @SpecAssertion(section = "11.3", id = "b")
+    @SpecAssertion(section = BEANMANAGER, id = "b")
     public void testManagerBeanIsPassivationCapable() {
         assert isSerializable(getCurrentManager().getClass());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.2", id = "a"), @SpecAssertion(section = "11.3.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_CONTEXTUAL_REFERENCE, id = "a"), @SpecAssertion(section = BM_OBTAIN_CONTEXTUAL_REFERENCE, id = "b") })
     public void testGetReferenceReturnsContextualInstance() {
         Bean<FishFarmOffice> bean = getBeans(FishFarmOffice.class).iterator().next();
         assert getCurrentManager().getReference(bean, FishFarmOffice.class, getCurrentManager().createCreationalContext(bean)) instanceof FishFarmOffice;
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.2", id = "c")
+    @SpecAssertion(section = BM_OBTAIN_CONTEXTUAL_REFERENCE, id = "c")
     public void testGetReferenceWithIllegalBeanType() {
         Bean<FishFarmOffice> bean = getBeans(FishFarmOffice.class).iterator().next();
         getCurrentManager().getReference(bean, BigDecimal.class, getCurrentManager().createCreationalContext(bean));

@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.modules;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.SELECTION;
 
 import javax.inject.Inject;
 
@@ -56,7 +57,7 @@ public class InterModuleELResolutionTest extends AbstractTest {
     WebFooELResolver fooELResolver;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = "5.1", id = "ac")
+    @SpecAssertion(section = SELECTION, id = "ac")
     public void testEnabledManagedBeanAvailableForELResolution() throws Exception {
         assert fooELResolver.ping() == 0;
     }

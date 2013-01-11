@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata.annotated;
 
+import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES;
 import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -55,7 +56,7 @@ public class AnnotatedTypeAnnotationsTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.4", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "b") })
     public void testCreateAnnotatedType() {
         assertAnnotationSetMatches(getCurrentManager().createAnnotatedType(Android.class).getAnnotations(),
                 RequestScoped.class, InheritedQualifier.class, Fate.class);
@@ -65,7 +66,7 @@ public class AnnotatedTypeAnnotationsTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.4", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "b") })
     public void testProcessAnnotatedType() {
 
         AnnotatedType<Kryten> kryten = extension.getKryten();
@@ -79,7 +80,7 @@ public class AnnotatedTypeAnnotationsTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.4", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "b") })
     public void testGetAnnotatedType() {
 
         AnnotatedType<Android> android = extension.getAndroid();
@@ -89,7 +90,7 @@ public class AnnotatedTypeAnnotationsTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.4", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "b") })
     public void testGetAnnotatedTypes() {
 
         List<AnnotatedType<Human>> humans = extension.getAllHumans();

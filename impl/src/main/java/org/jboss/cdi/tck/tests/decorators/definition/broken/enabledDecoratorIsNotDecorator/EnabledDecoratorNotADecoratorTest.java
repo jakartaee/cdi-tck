@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.enabledDecoratorIsNotDecorator;
 
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,7 +49,7 @@ public class EnabledDecoratorNotADecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.2", id = "hb")
+    @SpecAssertion(section = ENABLED_DECORATORS, id = "hb")
     public void testEnabledDecoratorNotADecoratorTest() {
     }
 

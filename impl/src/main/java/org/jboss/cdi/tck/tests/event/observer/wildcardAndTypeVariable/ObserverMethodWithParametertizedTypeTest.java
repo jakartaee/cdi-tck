@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.event.observer.wildcardAndTypeVariable;
 
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_EVENT_PARAMETER;
+
 import java.util.List;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +44,7 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.4.1", id = "cb")
+    @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "cb")
     public void testObserverMethodCanObserveTypeVariable() {
         BostonTerrier.observed = false;
         Behavior event = new Behavior() {
@@ -52,7 +54,7 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.4.1", id = "ca")
+    @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "ca")
     public void testObserverMethodCanObserveWildcardType() {
         WildBostonTerrier.observed = false;
         // TODO Not sure if this should match a wildcard event, I think it should as ? is an upper bound of all types PLM

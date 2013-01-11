@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.implementation.builtin.broken.transaction;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ADDITIONAL_BUILTIN_BEANS;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -48,7 +49,7 @@ public class UserTransactionInvalidInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "e") })
     public void testUserTransactionInjection() throws Exception {
     }
 

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.decorator;
 
+import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class DecoratorNotInjectedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.1.4", id = "a")
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "a")
     public void testDecoratorNotResolved() {
     }
 }

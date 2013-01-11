@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise.broken.directlyExtendsNothing;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_SESSION_BEAN;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -39,7 +40,7 @@ public class DirectlyExtendsNothingTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertion(section = "3.2.4", id = "da")
+    @SpecAssertion(section = SPECIALIZE_SESSION_BEAN, id = "da")
     public void testSpecializingClassDirectlyExtendsNothing() {
     }
 

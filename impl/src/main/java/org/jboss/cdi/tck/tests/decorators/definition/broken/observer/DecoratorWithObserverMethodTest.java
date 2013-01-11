@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.observer;
 
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -48,7 +50,7 @@ public class DecoratorWithObserverMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.4.2", id = "h")
+    @SpecAssertion(section = OBSERVES, id = "h")
     public void testDecoratorWithObserverMethodNotOk() {
     }
 }

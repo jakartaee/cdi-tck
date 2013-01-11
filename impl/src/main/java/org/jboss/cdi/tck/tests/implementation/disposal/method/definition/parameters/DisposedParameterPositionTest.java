@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.parameters;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_DISPOSED_PARAMETER;
 import static org.testng.Assert.assertEquals;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -50,8 +53,8 @@ public class DisposedParameterPositionTest extends AbstractTest {
     Thinker thinker;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.5.2", id = "h"), @SpecAssertion(section = "3.3.2", id = "i"),
-            @SpecAssertion(section = "3.5.1", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "h"), @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "i"),
+            @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "a") })
     public void testDisposedParameterPosition() {
 
         assertEquals(thinker.getIdeas().size(), 0);

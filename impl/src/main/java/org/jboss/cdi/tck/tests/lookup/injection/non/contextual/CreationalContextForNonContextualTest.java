@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_CREATIONALCONTEXT;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -33,7 +35,7 @@ public class CreationalContextForNonContextualTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.4", id = "b")
+    @SpecAssertion(section = BM_OBTAIN_CREATIONALCONTEXT, id = "b")
     public void testCreationalContext() {
         assert getCurrentManager().createCreationalContext(null) != null;
     }

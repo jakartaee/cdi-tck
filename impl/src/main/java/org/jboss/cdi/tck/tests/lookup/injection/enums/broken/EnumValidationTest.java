@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.injection.enums.broken;
 
 import static org.jboss.cdi.tck.TestGroups.ENUMS;
+import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -48,7 +49,7 @@ public class EnumValidationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.2", id = "aa")
+    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "aa")
     public void testDeployment() {
     }
 }

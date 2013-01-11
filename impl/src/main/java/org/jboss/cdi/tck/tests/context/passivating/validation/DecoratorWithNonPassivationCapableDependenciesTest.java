@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.validation;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 import static org.testng.Assert.assertEquals;
 
 import java.lang.reflect.Type;
@@ -56,7 +57,7 @@ public class DecoratorWithNonPassivationCapableDependenciesTest extends Abstract
     }
 
     @Test
-    @SpecAssertion(section = "6.6.4", id = "l")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "l")
     public void testDeploymentValid() {
         // it is enough to verify that the deployment passes validation and deploys
         assertEquals(1, getCurrentManager().resolveDecorators(Collections.<Type> singleton(Ferry.class)).size());

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nonExistantClassInBeansXml;
 
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class NonExistantDecoratorClassInBeansXmlTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.2", id = "ha")
+    @SpecAssertion(section = ENABLED_DECORATORS, id = "ha")
     public void testNonExistantDecoratorClassInBeansXmlNotOK() {
     }
 }

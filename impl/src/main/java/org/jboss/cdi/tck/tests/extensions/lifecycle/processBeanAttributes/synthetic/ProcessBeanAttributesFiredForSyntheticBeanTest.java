@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.synthetic;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEANATTRIBUTES;
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.PBA;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -72,9 +75,9 @@ public class ProcessBeanAttributesFiredForSyntheticBeanTest extends AbstractTest
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.23", id = "a"), @SpecAssertion(section = "11.5.10", id = "aa"),
-            @SpecAssertion(section = "11.5.10", id = "bb"), @SpecAssertion(section = "11.5.10", id = "bc"),
-            @SpecAssertion(section = "11.5.6", id = "bc") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a"), @SpecAssertion(section = PBA, id = "aa"),
+            @SpecAssertion(section = PBA, id = "bb"), @SpecAssertion(section = PBA, id = "bc"),
+            @SpecAssertion(section = PAT, id = "bc") })
     public void testProcessBeanAttributesFired() {
 
         assertTrue(bicycleExtension.isVetoed());

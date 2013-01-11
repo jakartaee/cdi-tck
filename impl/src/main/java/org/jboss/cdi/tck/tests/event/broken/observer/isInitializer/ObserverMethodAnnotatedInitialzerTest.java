@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.event.broken.observer.isInitializer;
 
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +46,7 @@ public class ObserverMethodAnnotatedInitialzerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.4.2", id = "e")
+    @SpecAssertion(section = OBSERVES, id = "e")
     public void testObserverMethodAnnotatedInitializerFails() {
     }
 }

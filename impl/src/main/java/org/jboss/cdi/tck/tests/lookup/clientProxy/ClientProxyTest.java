@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.tests.lookup.clientProxy;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.CLIENT_PROXIES;
+import static org.jboss.cdi.tck.cdi.Sections.CLIENT_PROXY_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE_VALIDITY;
 
 import java.io.IOException;
 
@@ -41,14 +44,14 @@ public class ClientProxyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.4", id = "b")
+    @SpecAssertion(section = CLIENT_PROXIES, id = "b")
     public void testClientProxyUsedForNormalScope() {
         Tuna tuna = getInstanceByType(Tuna.class);
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
     }
 
     @Test
-    @SpecAssertion(section = "5.4", id = "c")
+    @SpecAssertion(section = CLIENT_PROXIES, id = "c")
     public void testSimpleBeanClientProxyIsSerializable() throws IOException, ClassNotFoundException {
         TunedTuna tuna = getInstanceByType(TunedTuna.class);
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
@@ -59,7 +62,7 @@ public class ClientProxyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.4.1", id = "aa")
+    @SpecAssertion(section = CLIENT_PROXY_INVOCATION, id = "aa")
     public void testClientProxyInvocation() {
         TunedTuna tuna = getInstanceByType(TunedTuna.class);
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
@@ -67,7 +70,7 @@ public class ClientProxyTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, expectedExceptions = { ContextNotActiveException.class, IllegalStateException.class })
-    @SpecAssertions({ @SpecAssertion(section = "5.4.1", id = "ab"), @SpecAssertion(section = "6.5.4", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = CLIENT_PROXY_INVOCATION, id = "ab"), @SpecAssertion(section = CONTEXTUAL_REFERENCE_VALIDITY, id = "a") })
     public void testInactiveScope() throws Exception {
         assert getCurrentConfiguration().getContexts().getRequestContext().isActive();
         Context ctx = getCurrentConfiguration().getContexts().getRequestContext();

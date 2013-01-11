@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.normal;
 
+import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
@@ -56,19 +57,19 @@ public class DestroyingNormalScopedInstanceTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.6.1", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
     public void testApplicationScopedComponent(Instance<ApplicationScopedComponent> instance) {
         testComponent(instance);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.6.1", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
     public void testRequestScopedComponent(Instance<RequestScopedComponent> instance) {
         testComponent(instance);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.6.1", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
     public void testCustomScopedComponent(Instance<CustomScopedComponent> instance) {
         testComponent(instance);
     }
@@ -107,7 +108,7 @@ public class DestroyingNormalScopedInstanceTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.6.1", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "e") })
     public void testUnsupportedOperationExceptionThrownIfUnderlyingContextNotAlterable(
             Instance<CustomScopedComponent> instance, CustomScopeExtension extension) {
         try {
@@ -122,7 +123,7 @@ public class DestroyingNormalScopedInstanceTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.6.1", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
     public void testContextDestroyCalled(Instance<CustomScopedComponent> instance) {
         CustomScopedComponent component = instance.get();
         CustomAlterableContext.reset();
@@ -137,7 +138,7 @@ public class DestroyingNormalScopedInstanceTest extends AbstractTest {
      */
 
     @Test(expectedExceptions = NullPointerException.class, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.6.1", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
     public void testNullParameter(Instance<ApplicationScopedComponent> instance) {
         instance.destroy(null);
     }

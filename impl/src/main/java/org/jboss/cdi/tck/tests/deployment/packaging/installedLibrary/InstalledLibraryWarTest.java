@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.packaging.installedLibrary;
 
 import static org.jboss.cdi.tck.TestGroups.INSTALLED_LIB;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -64,14 +65,14 @@ public class InstalledLibraryWarTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bcc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bcc") })
     public void testInjection(@Strict Translator translator) {
         assertNotNull(translator);
         assertEquals(translator.echo("hello"), "hello");
     }
 
     @Test(groups = { INTEGRATION, INSTALLED_LIB })
-    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bcc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bcc") })
     public void testResolution() {
         // No assertion needed
         getUniqueBean(Translator.class, StrictLiteral.INSTANCE);

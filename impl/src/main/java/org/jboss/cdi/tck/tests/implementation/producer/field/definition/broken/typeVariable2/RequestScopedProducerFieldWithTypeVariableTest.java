@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.typeVariable2;
 
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class RequestScopedProducerFieldWithTypeVariableTest extends AbstractTest
     }
 
     @Test
-    @SpecAssertion(section = "3.4", id = "gb")
+    @SpecAssertion(section = PRODUCER_FIELD, id = "gb")
     public void testRequestScopedProducerFieldParameterizedWithTypeVariableNotAllowed() {
     }
 }

@@ -17,6 +17,10 @@
 package org.jboss.cdi.tck.tests.event.fires;
 
 import static org.jboss.cdi.tck.TestGroups.REWRITE;
+import static org.jboss.cdi.tck.cdi.Sections.BM_FIRE_EVENT;
+import static org.jboss.cdi.tck.cdi.Sections.EVENT;
+import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENTS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -61,7 +65,7 @@ public class FireEventTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.10", id = "a"), @SpecAssertion(section = "11.3.10", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_FIRE_EVENT, id = "a"), @SpecAssertion(section = BM_FIRE_EVENT, id = "b") })
     public void testBeanManagerFireEvent() {
         Billing billing = getInstanceByType(Billing.class);
         billing.reset();
@@ -76,14 +80,14 @@ public class FireEventTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.10", id = "c")
+    @SpecAssertion(section = BM_FIRE_EVENT, id = "c")
     public void testTypeVariableEventTypeFails() throws Exception {
         getInstanceByType(Bar.class).<Integer> fireWithTypeVariable();
     }
 
     @SuppressWarnings("serial")
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.10", id = "d")
+    @SpecAssertion(section = BM_FIRE_EVENT, id = "d")
     public void testDuplicateBindingsToFireEventFails() throws Exception {
         getCurrentManager().fireEvent(new Object(), new AnnotationLiteral<Lifted>() {
         }, new AnnotationLiteral<Lifted>() {
@@ -97,7 +101,7 @@ public class FireEventTest extends AbstractTest {
      */
     // Simplify assertions
     @Test(groups = REWRITE)
-    @SpecAssertion(section = "10.3", id = "a")
+    @SpecAssertion(section = FIRING_EVENTS, id = "a")
     public void testInjectedAnyEventCanFireEvent() {
         Billing billing = getInstanceByType(Billing.class);
         billing.reset();
@@ -127,7 +131,7 @@ public class FireEventTest extends AbstractTest {
      **/
     // Simplify assertions
     @Test(groups = REWRITE)
-    @SpecAssertions({ @SpecAssertion(section = "10.3", id = "b"), @SpecAssertion(section = "10.3.1", id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS, id = "b"), @SpecAssertion(section = EVENT, id = "cb") })
     public void testInjectedEventAcceptsEventObject() throws SecurityException, NoSuchFieldException, NoSuchMethodException {
         Billing billing = getInstanceByType(Billing.class);
         billing.reset();
@@ -178,7 +182,7 @@ public class FireEventTest extends AbstractTest {
     @SuppressWarnings("serial")
     // Simplify assertions
     @Test(groups = REWRITE)
-    @SpecAssertions({ @SpecAssertion(section = "10.3", id = "c"), @SpecAssertion(section = "10.3.1", id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS, id = "c"), @SpecAssertion(section = EVENT, id = "cb") })
     public void testInjectedEventCanHaveBindings() {
         Billing billing = getInstanceByType(Billing.class);
         billing.reset();
@@ -212,7 +216,7 @@ public class FireEventTest extends AbstractTest {
      */
     // Simplify assertions
     @Test(groups = REWRITE)
-    @SpecAssertion(section = "10.3", id = "d")
+    @SpecAssertion(section = FIRING_EVENTS, id = "d")
     public void testInjectedEventCanSpecifyBindingsDynamically() {
         Billing billing = getInstanceByType(Billing.class);
         billing.reset();
@@ -241,7 +245,7 @@ public class FireEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.3.1", id = "ca")
+    @SpecAssertion(section = EVENT, id = "ca")
     public void testEventProvidesMethodForFiringEventsWithCombinationOfTypeAndBindings() {
         DoggiePoints points = getInstanceByType(DoggiePoints.class);
         points.reset();
@@ -257,7 +261,7 @@ public class FireEventTest extends AbstractTest {
     // Simplify assertions
     @SuppressWarnings("serial")
     @Test(groups = REWRITE)
-    @SpecAssertion(section = "10.3.1", id = "eda")
+    @SpecAssertion(section = EVENT, id = "eda")
     public void testEventSelectedFiresAndObserversNotified() {
         Housekeeping houseKeeping = getInstanceByType(Housekeeping.class);
         houseKeeping.reset();
@@ -278,14 +282,14 @@ public class FireEventTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "10.3.1", id = "f"), @SpecAssertion(section = "10.2", id = "j") })
+    @SpecAssertions({ @SpecAssertion(section = EVENT, id = "f"), @SpecAssertion(section = OBSERVER_RESOLUTION, id = "j") })
     public <T> void testEventFireThrowsExceptionIfEventObjectContainsTypeVariable() {
         MiniBar miniBar = getInstanceByType(MiniBar.class);
         miniBar.itemEvent.fire(new Item_Illegal<T>("12 oz Beer", 6));
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "10.3.1", id = "g")
+    @SpecAssertion(section = EVENT, id = "g")
     public void testFireContainerLifecycleEvent(ContainerLifecycleEvents containerLifecycleEvents) {
         containerLifecycleEvents.fireContainerLifecycleEvents();
     }

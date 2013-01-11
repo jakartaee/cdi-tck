@@ -16,6 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.el;
 
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_INSTANCE;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_SCOPE_EL;
+import static org.jboss.cdi.tck.cdi.Sections.EL;
+import static org.jboss.cdi.tck.cdi.Sections.NAMES;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.inject.spi.Bean;
@@ -38,7 +43,7 @@ public class ResolutionByNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.4.3", id = "a")
+    @SpecAssertion(section = DEPENDENT_SCOPE_EL, id = "a")
     public void testQualifiedNameLookup() {
         assert getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(),
                 "#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class);
@@ -46,7 +51,7 @@ public class ResolutionByNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.5.2", id = "a"), @SpecAssertion(section = "6.5.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_INSTANCE, id = "a"), @SpecAssertion(section = CONTEXTUAL_INSTANCE, id = "b") })
     public void testContextCreatesNewInstanceForInjection() {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
         Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
@@ -62,14 +67,14 @@ public class ResolutionByNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "12.5", id = "c")
+    @SpecAssertion(section = EL, id = "c")
     public void testUnresolvedNameReturnsNull() {
         assert getCurrentManager().getELResolver().getValue(
                 getCurrentConfiguration().getEl().createELContext(getCurrentManager()), null, "nonExistingTuna") == null;
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.5", id = "d"), @SpecAssertion(section = "2.5", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = EL, id = "d"), @SpecAssertion(section = NAMES, id = "a") })
     public void testELResolverReturnsContextualInstance() {
         Salmon salmon = getInstanceByType(Salmon.class);
         salmon.setAge(3);

@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.event.broken.raw;
 
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_EVENT;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class RawEventDisposerInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.3.2", id = "e")
+    @SpecAssertion(section = BUILTIN_EVENT, id = "e")
     public void testDefinitionError() {
         // Test initialization is aborted by the container
     }

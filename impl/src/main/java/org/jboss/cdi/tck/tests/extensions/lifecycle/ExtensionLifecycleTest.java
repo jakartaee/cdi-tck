@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -59,7 +60,7 @@ public class ExtensionLifecycleTest extends AbstractTest {
     SimpleBean simpleBean;
 
     @Test
-    @SpecAssertion(section = "11.5", id = "e")
+    @SpecAssertion(section = INIT_EVENTS, id = "e")
     public void testContainerProvidesBeanForExtension() {
         // For each service provider the container must provide a bean
         Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleExtension.class);
@@ -81,7 +82,7 @@ public class ExtensionLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5", id = "d"), @SpecAssertion(section = "11.5", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "d"), @SpecAssertion(section = INIT_EVENTS, id = "e") })
     public void testContainerInstantiatesSingleInstanceOfExtension() {
         // The container instantiates a single instance of each extension
         long id = simpleBean.getSimpleExtension().getId();
@@ -89,8 +90,8 @@ public class ExtensionLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5", id = "d"), @SpecAssertion(section = "11.5", id = "e"),
-            @SpecAssertion(section = "11.5", id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "d"), @SpecAssertion(section = INIT_EVENTS, id = "e"),
+            @SpecAssertion(section = INIT_EVENTS, id = "bb") })
     public void testContainerDeliversEventNotifications() {
         assertTrue(simpleBean.getSimpleExtension().isContainerEventObserved());
         getCurrentManager().fireEvent(new SimpleEvent(System.currentTimeMillis()));

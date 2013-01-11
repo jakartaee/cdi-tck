@@ -17,6 +17,11 @@
 package org.jboss.cdi.tck.tests.implementation.initializer;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INITIALIZER;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT_DEFAULT_QUALIFIER;
+import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -37,8 +42,8 @@ public class InitializerMethodTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "3.10.1", id = "f"), @SpecAssertion(section = "2.3.5", id = "b"),
-            @SpecAssertion(section = "3.10", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_INITIALIZER, id = "f"), @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "b"),
+            @SpecAssertion(section = INITIALIZER_METHODS, id = "a") })
     public void testBindingTypeOnInitializerParameter() {
         PremiumChickenHutch hutch = getInstanceByType(PremiumChickenHutch.class);
         assert hutch.getChicken().getName().equals("Preferred");
@@ -47,9 +52,9 @@ public class InitializerMethodTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "3.10", id = "g"), @SpecAssertion(section = "3.10.1", id = "a"),
-            @SpecAssertion(section = "3.10.1", id = "e"), @SpecAssertion(section = "5.5.2", id = "ad"),
-            @SpecAssertion(section = "3.11", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = INITIALIZER_METHODS, id = "g"), @SpecAssertion(section = DECLARING_INITIALIZER, id = "a"),
+            @SpecAssertion(section = DECLARING_INITIALIZER, id = "e"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ad"),
+            @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a") })
     public void testMultipleInitializerMethodsAreCalled() {
         ChickenHutch chickenHutch = getInstanceByType(ChickenHutch.class);
         assert chickenHutch.fox != null;

@@ -17,6 +17,15 @@
 package org.jboss.cdi.tck.tests.event;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBSERVER_METHOD_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT_DEFAULT_QUALIFIER;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.MULTIPLE_EVENT_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVERS_METHOD_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -50,8 +59,8 @@ public class EventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "i"), @SpecAssertion(section = "5.5.6", id = "c"),
-            @SpecAssertion(section = "2.3.5", id = "ca"), @SpecAssertion(section = "3.11", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "i"), @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "c"),
+            @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "ca"), @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a") })
     public void testObserverMethodParameterInjectionPoints() {
         TerrierObserver.reset();
         getCurrentManager().fireEvent(new BullTerrier());
@@ -64,7 +73,7 @@ public class EventTest extends AbstractTest {
      * adapter.
      */
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "10.4", id = "c"), @SpecAssertion(section = "5.5.6", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHODS, id = "c"), @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "a") })
     public void testStaticObserverMethodInvoked() {
 
         Context requestContext = getCurrentConfiguration().getContexts().getRequestContext();
@@ -84,7 +93,7 @@ public class EventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cc"), @SpecAssertion(section = "5.5.6", id = "baa") })
+    @SpecAssertions({ @SpecAssertion(section = SPECIALIZATION, id = "cc"), @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "baa") })
     public void testObserverCalledOnSpecializedBeanOnly() {
         Shop.observers.clear();
         getCurrentManager().fireEvent(new Delivery());
@@ -94,13 +103,13 @@ public class EventTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.11", id = "c")
+    @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "c")
     public <T> void testEventObjectContainsTypeVariablesWhenResolvingFails() {
         eventObjectContainsTypeVariables(new ArrayList<T>());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.2.3", id = "a"), @SpecAssertion(section = "10.2.3", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = MULTIPLE_EVENT_QUALIFIERS, id = "a"), @SpecAssertion(section = MULTIPLE_EVENT_QUALIFIERS, id = "b") })
     public void testObserverMethodNotifiedWhenQualifiersMatch() {
 
         BullTerrier.reset();
@@ -112,7 +121,7 @@ public class EventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4.2", id = "dc")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dc")
     public void testNonStaticObserverMethodInherited() {
         Egg egg = new Egg();
         getCurrentManager().fireEvent(egg);
@@ -120,7 +129,7 @@ public class EventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.2", id = "di") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "di") })
     public void testNonStaticObserverMethodIndirectlyInherited() {
         StockPrice price = new StockPrice();
         getCurrentManager().fireEvent(price);

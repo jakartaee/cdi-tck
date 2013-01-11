@@ -16,6 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATED_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -49,9 +54,9 @@ public class DecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "aa"), @SpecAssertion(section = "8.4", id = "b"),
-            @SpecAssertion(section = "8.1.3", id = "d"), @SpecAssertion(section = "8.1.2", id = "f"),
-            @SpecAssertion(section = "7.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "aa"), @SpecAssertion(section = DECORATOR_INVOCATION, id = "b"),
+            @SpecAssertion(section = DECORATED_TYPES, id = "d"), @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "f"),
+            @SpecAssertion(section = BIZ_METHOD, id = "b") })
     public void testDecoratorInvocation() {
         TimestampLogger.reset();
         MockLogger.reset();
@@ -62,11 +67,11 @@ public class DecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "d"), @SpecAssertion(section = "8.4", id = "e"),
-            @SpecAssertion(section = "8.4", id = "f"),
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "d"), @SpecAssertion(section = DECORATOR_INVOCATION, id = "e"),
+            @SpecAssertion(section = DECORATOR_INVOCATION, id = "f"),
             // @SpecAssertion(section="8.4", id="a"),
-            @SpecAssertion(section = "8.1.3", id = "d"), @SpecAssertion(section = "8.1.2", id = "f"),
-            @SpecAssertion(section = "7.2", id = "kb") })
+            @SpecAssertion(section = DECORATED_TYPES, id = "d"), @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "f"),
+            @SpecAssertion(section = BIZ_METHOD, id = "kb") })
     public void testChainedDecoratorInvocation() {
         FooDecorator1.reset();
         FooDecorator2.reset();
@@ -81,7 +86,7 @@ public class DecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.1.2", id = "g")
+    @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "g")
     // WELD-430
     public void testDecoratorInvokesDelegateMethodOutsideOfBusinessMethodInterception() {
         assert getInstanceByType(Bar.class).foo();

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.binding.overriding;
 
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDING_MEMBERS;
 import static org.testng.Assert.assertEquals;
 
 import javax.inject.Inject;
@@ -59,7 +60,7 @@ public class InterceptorBindingOverridingTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.5.2", id = "cb")
+    @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "cb")
     public void testInterceptorBindingOverriden() {
         // getAge() returns 3, SlowAgingInterceptor adds one (4) and NegatingInterceptor negates (-4)
         assertEquals(pony.getAge(), -4);

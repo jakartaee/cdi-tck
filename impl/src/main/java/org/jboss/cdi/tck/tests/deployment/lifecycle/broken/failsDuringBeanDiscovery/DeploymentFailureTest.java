@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.deployment.lifecycle.broken.failsDuringBeanDiscovery;
 
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +40,7 @@ public class DeploymentFailureTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "e") })
     public void testDeploymentFailsBeforeNotifyingObserversAfterBeanDiscovery() {
     }
 

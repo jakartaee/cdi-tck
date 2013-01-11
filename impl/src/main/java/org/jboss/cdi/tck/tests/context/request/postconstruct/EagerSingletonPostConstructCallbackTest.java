@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.context.request.postconstruct;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
@@ -55,7 +56,7 @@ public class EagerSingletonPostConstructCallbackTest extends AbstractTest {
     private URL contextPath;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "e"), @SpecAssertion(section = "6.7.1", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "e"), @SpecAssertion(section = REQUEST_CONTEXT, id = "f") })
     public void testEagerSingletonPostConstructCallback() throws Exception {
 
         WebClient client = new WebClient();

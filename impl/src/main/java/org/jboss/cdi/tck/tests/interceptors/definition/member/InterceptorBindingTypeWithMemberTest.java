@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.member;
 
+import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDING_MEMBERS;
+
 import java.util.List;
 
 import javax.enterprise.inject.spi.InterceptionType;
@@ -61,7 +64,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.5.2", id = "a"), @SpecAssertion(section = "2", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "a"), @SpecAssertion(section = CONCEPTS, id = "f") })
     public void testInterceptorBindingTypeWithMember() {
         Farm farm = getInstanceByType(Farm.class);
         assert farm.getAnimalCount() == 20;
@@ -70,7 +73,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.5.2", id = "b")
+    @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "b")
     public void testInterceptorBindingTypeWithNonBindingMember() {
         Farm farm = getInstanceByType(Farm.class);
         assert farm.getVehicleCount() == 20;
@@ -83,7 +86,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
      * values are considered equal when resolving interceptor (interceptor is resolved and applied).
      */
     @Test
-    @SpecAssertion(section = "9.5.2", id = "ab")
+    @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "ab")
     public void testInterceptorBindingTypeMemberValuesComparedWithEquals() {
 
         @SuppressWarnings("serial")

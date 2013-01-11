@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.equivalence.qualifier;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_DETERMINING_HASH;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
@@ -47,7 +48,7 @@ public class QualifierEquivalenceTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.15", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BM_DETERMINING_HASH, id = "a") })
     public void testAreQualifiersEquivalent() {
 
         Annotation literal1 = new MonsterQualifier() {
@@ -68,7 +69,7 @@ public class QualifierEquivalenceTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.15", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BM_DETERMINING_HASH, id = "c") })
     public void testGetQualifierHashCode() {
 
         Annotation literal1 = new MonsterQualifier() {

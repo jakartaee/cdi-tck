@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.ear;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -74,7 +75,7 @@ public class MultiWebModuleWithExtensionTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bbc"), @SpecAssertion(section = "12.1", id = "bbe") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bbe") })
     public void testMultipleWebModulesWithExtension() {
     }
 

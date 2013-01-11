@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.container.event.ws;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.PIT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -52,15 +54,15 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aag"), @SpecAssertion(section = "11.5.8", id = "abg"),
-            @SpecAssertion(section = "12.4", id = "di") })
+    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aag"), @SpecAssertion(section = PIT, id = "abg"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "di") })
     public void testProcessInjectionTargetFiredForWsEndpoint() {
         assertNotNull(ProcessInjectionTargetObserver.getWsEndpointEvent());
         validateWsEndpointAnnotatedType(ProcessInjectionTargetObserver.getWsEndpointEvent().getAnnotatedType());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.4", id = "bi") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "bi") })
     public void testProcessAnnotatedTypeFiredForWsEndpoint() {
         assertNotNull(ProcessAnnotatedTypeObserver.getWsEndpointEvent());
         validateWsEndpointAnnotatedType(ProcessAnnotatedTypeObserver.getWsEndpointEvent().getAnnotatedType());

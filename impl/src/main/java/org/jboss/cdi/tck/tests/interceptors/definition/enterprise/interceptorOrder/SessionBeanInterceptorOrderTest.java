@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.interceptorOrder;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -41,7 +42,7 @@ public class SessionBeanInterceptorOrderTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "9.4", id = "fb")
+    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "fb")
     public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding(MissileLocal missile) {
 
         assertNotNull(missile);

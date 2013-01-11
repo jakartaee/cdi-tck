@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.synthetic;
 
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -61,7 +62,7 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "ae"), @SpecAssertion(section = "11.5.6", id = "af") })
+    @SpecAssertions({ @SpecAssertion(section = PAT, id = "ae"), @SpecAssertion(section = PAT, id = "af") })
     public void testEventsFired() {
         Set<Class<?>> patClasses = verifyingExtension.getPatClasses();
         Set<Class<?>> psatClasses = verifyingExtension.getPsatClasses();
@@ -89,7 +90,7 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "bd") })
+    @SpecAssertions({ @SpecAssertion(section = PAT, id = "bd") })
     public void testEventsSources() {
         Map<Class<?>, Extension> sources = verifyingExtension.getSources();
         assertTrue(sources.get(Apple.class) instanceof RegisteringExtension1);

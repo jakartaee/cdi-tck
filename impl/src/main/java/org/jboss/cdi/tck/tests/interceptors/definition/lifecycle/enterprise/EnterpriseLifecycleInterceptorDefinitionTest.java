@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -46,7 +48,7 @@ public class EnterpriseLifecycleInterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "9.3", id = "a"), @SpecAssertion(section = "9.5", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a"), @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "a") })
     public void testLifecycleInterception() {
 
         MissileInterceptor.reset();

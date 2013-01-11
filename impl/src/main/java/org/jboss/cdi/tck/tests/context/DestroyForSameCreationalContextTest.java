@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context;
 
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.CreationalContext;
@@ -46,7 +48,7 @@ public class DestroyForSameCreationalContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.2", id = "r")
+    @SpecAssertion(section = CONTEXT, id = "r")
     public void testDestroyForSameCreationalContextOnly() {
         // Check that the mock cc is called (via cc.release()) when we request a context destroyed
         // Note that this is an indirect effect

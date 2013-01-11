@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.binding.members.array;
 
+import static org.jboss.cdi.tck.cdi.Sections.QUALIFIER_ANNOTATION_MEMBERS;
 import static org.testng.Assert.assertNotNull;
 
 import javax.inject.Inject;
@@ -44,7 +45,7 @@ public class BindingAnnotationWithMemberTest extends AbstractTest {
     TheBeatles beatles;
 
     @Test
-    @SpecAssertion(section = "5.2.6", id = "b")
+    @SpecAssertion(section = QUALIFIER_ANNOTATION_MEMBERS, id = "b")
     public void testArrayMemberWithNonBinding() {
         assertNotNull(beatles.getWatch());
     }

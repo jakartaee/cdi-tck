@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.dependent;
 
+import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -61,7 +62,7 @@ public class DestroyingDependentInstanceTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.6.1", id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "n") })
     public void testDestroyingDependentInstances(Instance<Foo> instance) {
 
         assertNotNull(instance);
@@ -89,7 +90,7 @@ public class DestroyingDependentInstanceTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.6.1", id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "n") })
     public void testDestroyingInterceptedDependentBean(Instance<Bar> instance) {
 
         assertNotNull(instance);

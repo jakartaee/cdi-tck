@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.lookup.el.integration;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.EL;
+import static org.jboss.cdi.tck.cdi.Sections.NAME_RESOLUTION;
 
 import java.net.URL;
 
@@ -47,7 +49,7 @@ public class IntegrationWithUnifiedELTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.5", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = EL, id = "a"), @SpecAssertion(section = NAME_RESOLUTION, id = "d") })
     public void testELResolverRegisteredWithJsf() throws Exception {
         WebClient webclient = new WebClient();
         String content = webclient.getPage(contextPath + "JSFTestPage.jsf").getWebResponse().getContentAsString();
@@ -55,7 +57,7 @@ public class IntegrationWithUnifiedELTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.5", id = "a"), @SpecAssertion(section = "5.3", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = EL, id = "a"), @SpecAssertion(section = NAME_RESOLUTION, id = "d") })
     public void testELResolverRegisteredWithServletContainer() throws Exception {
         WebClient webclient = new WebClient();
         String content = webclient.getPage(contextPath + "JSPTestPage.jsp").getWebResponse().getContentAsString();

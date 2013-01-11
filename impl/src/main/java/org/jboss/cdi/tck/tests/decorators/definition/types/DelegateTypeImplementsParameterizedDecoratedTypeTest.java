@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.decorators.definition.types;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATED_TYPES;
 import static org.testng.Assert.assertEquals;
 
 import javax.inject.Inject;
@@ -52,7 +53,7 @@ public class DelegateTypeImplementsParameterizedDecoratedTypeTest extends Abstra
     MockLogger logger;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.1.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATED_TYPES, id = "a") })
     public void testDelegateTypeIsValid() {
         logger.log("foo");
         assertEquals(MockLogger.getLog(), "Decorated:foo");

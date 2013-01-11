@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
+import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES;
 import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -58,14 +59,14 @@ public class AlternativeMetaDataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "c")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "c")
     public void testBaseType() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DogHouse.class);
         assert annotatedType.getBaseType().equals(DogHouse.class);
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "d")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "d")
     public void testTypeClosure() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(ClassD.class);
         assert annotatedType.getTypeClosure().contains(Object.class);
@@ -76,7 +77,7 @@ public class AlternativeMetaDataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "e")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "e")
     public void testGetAnnotation() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(ClassD.class);
         assert annotatedType.getAnnotation(RequestScoped.class) != null;
@@ -85,7 +86,7 @@ public class AlternativeMetaDataTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.4", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "f") })
     public void testGetAnnotations() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(ClassD.class);
         assert annotatedType.getAnnotations().size() == 2;
@@ -95,7 +96,7 @@ public class AlternativeMetaDataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "g")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "g")
     public void testIsAnnotationPresent() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(ClassD.class);
         assert annotatedType.isAnnotationPresent(RequestScoped.class);
@@ -103,7 +104,7 @@ public class AlternativeMetaDataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "aaa")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "aaa")
     public void testConstructors() {
         AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
         Set<AnnotatedConstructor<WildCat>> constructors = annotatedType.getConstructors();
@@ -128,7 +129,7 @@ public class AlternativeMetaDataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "aab")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "aab")
     public void testMethods() {
         AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
         Set<AnnotatedMethod<? super WildCat>> methods = annotatedType.getMethods();
@@ -141,7 +142,7 @@ public class AlternativeMetaDataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "aac")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "aac")
     public void testFields() {
         AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
         Set<AnnotatedField<? super WildCat>> fields = annotatedType.getFields();

@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.modules;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PM;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -81,14 +82,14 @@ public class SingleModuleProcessingTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "11.5.5", id = "a")
+    @SpecAssertion(section = PM, id = "a")
     public void testProcessedModulesCount(SingleModuleProcessingExtension moduleProcessingExtension) {
         // Single module: WEB-INF/classes
         assertEquals(moduleProcessingExtension.getModules().size(), 1);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "11.5.5", id = "bd") })
+    @SpecAssertions({ @SpecAssertion(section = PM, id = "bd") })
     public void testAnnotatedTypes(SingleModuleProcessingExtension moduleProcessingExtension) {
         Set<AnnotatedType<?>> types = moduleProcessingExtension.getFirstModule().getAnnotatedTypes();
         assertContainsAll(types, Animal.class, Decorator1.class, Decorator2.class, Decorator3.class, Interceptor1.class,
@@ -97,8 +98,8 @@ public class SingleModuleProcessingTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "11.5.5", id = "ba"), @SpecAssertion(section = "11.5.5", id = "ca"),
-            @SpecAssertion(section = "11.5.5", id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = PM, id = "ba"), @SpecAssertion(section = PM, id = "ca"),
+            @SpecAssertion(section = PM, id = "cb") })
     public void testAlternatives(SingleModuleProcessingExtension moduleProcessingExtension) {
 
         Set<Class<?>> enabledAlternatives = moduleProcessingExtension.getFirstModule().getAlternatives();
@@ -110,8 +111,8 @@ public class SingleModuleProcessingTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "11.5.5", id = "bc"), @SpecAssertion(section = "11.5.5", id = "ce"),
-            @SpecAssertion(section = "11.5.5", id = "cf") })
+    @SpecAssertions({ @SpecAssertion(section = PM, id = "bc"), @SpecAssertion(section = PM, id = "ce"),
+            @SpecAssertion(section = PM, id = "cf") })
     public void testDecorators(SingleModuleProcessingExtension moduleProcessingExtension) {
 
         List<Class<?>> enabledDecorators = moduleProcessingExtension.getFirstModule().getDecorators();
@@ -126,8 +127,8 @@ public class SingleModuleProcessingTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "11.5.5", id = "bb"), @SpecAssertion(section = "11.5.5", id = "cc"),
-            @SpecAssertion(section = "11.5.5", id = "cd") })
+    @SpecAssertions({ @SpecAssertion(section = PM, id = "bb"), @SpecAssertion(section = PM, id = "cc"),
+            @SpecAssertion(section = PM, id = "cd") })
     public void testInterceptors(SingleModuleProcessingExtension moduleProcessingExtension) {
 
         List<Class<?>> enabledInterceptors = moduleProcessingExtension.getFirstModule().getInterceptors();
@@ -143,7 +144,7 @@ public class SingleModuleProcessingTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "11.5.5", id = "be") })
+    @SpecAssertions({ @SpecAssertion(section = PM, id = "be") })
     public void testBeansXml(SingleModuleProcessingExtension moduleProcessingExtension) throws Exception {
         assertEquals(moduleProcessingExtension.getFirstModule().getBeansXml(),
                 IOUtils.toString(this.getClass().getResourceAsStream(BEANS_XML_TEST)));

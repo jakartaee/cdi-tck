@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nodecoratedtypes;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -52,7 +54,7 @@ public class DecoratorWithNoDecoratedTypes2Test extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.1", id = "e")
+    @SpecAssertion(section = DECORATOR_BEAN, id = "e")
     public void testDeploymentFails() {
     }
 

@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.genericStateless;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEANS;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -39,7 +40,7 @@ public class GenericStatelessSessionBeanTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = "3.2", id = "i")
+    @SpecAssertion(section = SESSION_BEANS, id = "i")
     // WELD-433
     public void testRequestScopedGenericStatelessSessionBean() {
     }

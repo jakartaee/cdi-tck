@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
 import static org.testng.Assert.assertEquals;
 
 import java.lang.reflect.Type;
@@ -70,15 +71,15 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
     private YoghurtFactory factory;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.8", id = "a"), @SpecAssertion(section = "5.5.8", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_METADATA, id = "a"), @SpecAssertion(section = BEAN_METADATA, id = "f") })
     public void testBeanMetadata() {
         Bean<?> resolvedBean = getUniqueBean(Yoghurt.class);
         assertEquals(resolvedBean, yoghurt.getBeanBean());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.8", id = "a"), @SpecAssertion(section = "5.5.8", id = "q"),
-            @SpecAssertion(section = "5.5.8", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_METADATA, id = "a"), @SpecAssertion(section = BEAN_METADATA, id = "q"),
+            @SpecAssertion(section = BEAN_METADATA, id = "f") })
     public void testProducerAndDisposerMethodMetadata() {
         Bean<Yoghurt> fruitYoghurtBean = getUniqueBean(Yoghurt.class, new Fruit.Literal());
         CreationalContext<Yoghurt> fruitCtx = getCurrentManager().createCreationalContext(fruitYoghurtBean);
@@ -99,8 +100,8 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.8", id = "b"), @SpecAssertion(section = "5.5.8", id = "d"),
-            @SpecAssertion(section = "5.5.8", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_METADATA, id = "b"), @SpecAssertion(section = BEAN_METADATA, id = "d"),
+            @SpecAssertion(section = BEAN_METADATA, id = "f") })
     public void testInterceptorMetadata() {
         Bean<?> bean = getUniqueBean(Yoghurt.class);
         Interceptor<?> interceptor = getCurrentManager()
@@ -112,8 +113,8 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.8", id = "c"), @SpecAssertion(section = "5.5.8", id = "e"),
-            @SpecAssertion(section = "5.5.8", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_METADATA, id = "c"), @SpecAssertion(section = BEAN_METADATA, id = "e"),
+            @SpecAssertion(section = BEAN_METADATA, id = "f") })
     public void testDecoratorMetadata() {
         Bean<?> bean = getUniqueBean(Yoghurt.class);
         Decorator<?> decorator = getCurrentManager().resolveDecorators(Collections.<Type> singleton(MilkProduct.class))

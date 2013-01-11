@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple;
 
+import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -56,7 +59,7 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia"), @SpecAssertion(section = "4.3.1", id = "ib") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia"), @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ib") })
     public void testIndirectSpecialization() {
         // LazyFarmer specializes directly Farmer and indirectly Human
         Set<Bean<Human>> humanBeans = getBeans(Human.class);
@@ -73,14 +76,14 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia") })
     public void testSpecializingBeanInjection(Farmer farmer) {
         assertEquals(farmer.getClassName(), LazyFarmer.class.getName());
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "j"), @SpecAssertion(section = "3.1.4", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "j"), @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "aa") })
     public void testSpecializingBeanHasQualifiersOfSpecializedAndSpecializingBean() {
         Bean<LazyFarmer> lazyFarmerBean = getBeans(LazyFarmer.class, LAZY_LITERAL).iterator().next();
         Set<Annotation> lazyFarmerBeanQualifiers = lazyFarmerBean.getQualifiers();
@@ -91,7 +94,7 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "k"), @SpecAssertion(section = "3.1.4", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "k"), @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ab") })
     public void testSpecializingBeanHasNameOfSpecializedBean() {
         String expectedName = "farmer";
         Set<Bean<?>> beans = getCurrentManager().getBeans(expectedName);
@@ -102,7 +105,7 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = UnsatisfiedResolutionException.class)
-    @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = SPECIALIZATION, id = "cb") })
     public void testProducerMethodOnSpecializedBeanNotCalled() {
         assertEquals(getBeans(Waste.class).size(), 0);
         // Throw UnsatisfiedResolutionException

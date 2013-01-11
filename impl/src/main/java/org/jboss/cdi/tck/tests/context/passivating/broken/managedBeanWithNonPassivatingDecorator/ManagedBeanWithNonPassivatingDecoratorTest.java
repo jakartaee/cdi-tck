@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.managedBeanWithNonPassivatingDecorator;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +46,7 @@ public class ManagedBeanWithNonPassivatingDecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.6.4", id = "ha")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ha")
     public void testManagedBeanWithNonPassivatingDecoratorFails() {
     }
 }

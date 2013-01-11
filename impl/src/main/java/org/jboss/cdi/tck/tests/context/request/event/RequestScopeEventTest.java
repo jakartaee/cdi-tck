@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.request.event;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
@@ -55,7 +56,7 @@ public class RequestScopeEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "ja") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "ja") })
     public void test() throws Exception {
         WebClient client = new WebClient();
 

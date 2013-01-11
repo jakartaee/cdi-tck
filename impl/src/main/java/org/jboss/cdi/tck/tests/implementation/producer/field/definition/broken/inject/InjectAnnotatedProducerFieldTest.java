@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.inject;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_FIELD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +40,7 @@ public class InjectAnnotatedProducerFieldTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_FIELD, id = "g") })
     public void testInjectAnnotatedProducerFieldNotAllowed() {
     }
 }

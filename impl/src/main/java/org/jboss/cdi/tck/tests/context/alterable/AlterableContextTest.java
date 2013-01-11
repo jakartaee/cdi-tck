@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.alterable;
 
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
@@ -54,25 +55,25 @@ public class AlterableContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "t") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "t") })
     public void testApplicationScopedComponent() {
         testComponent(ApplicationScopedComponent.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "t") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "t") })
     public void testRequestScopedComponent() {
         testComponent(RequestScopedComponent.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "t") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "t") })
     public void testCustomScopedComponent() {
         testComponent(CustomScopedComponent.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "t") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "t") })
     public void testNothingHappensIfNoInstanceToDestroy(ApplicationScopedComponent application) {
         Bean<?> bean = getUniqueBean(ApplicationScopedComponent.class);
         AlterableContext context = (AlterableContext) getCurrentManager().getContext(bean.getScope());

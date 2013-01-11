@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.modules;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Set;
@@ -62,7 +63,7 @@ public class SpecializedProducerMethodInjectionNotAvailableTest extends Abstract
     Bar bar;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = "5.1.4", id = "n")
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "n")
     public void testManagedBeanInjection() throws Exception {
         assertEquals(bar.ping(), 1);
         Set<Bean<Foo>> beans = getBeans(Foo.class);

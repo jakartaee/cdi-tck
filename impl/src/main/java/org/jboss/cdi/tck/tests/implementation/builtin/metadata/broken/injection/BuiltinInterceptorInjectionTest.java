@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class BuiltinInterceptorInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.8", id = "h")
+    @SpecAssertion(section = BEAN_METADATA, id = "h")
     public void testDeploymentFails() {
     }
 

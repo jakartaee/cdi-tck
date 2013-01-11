@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized.broken;
 
+import static org.jboss.cdi.tck.cdi.Sections.ASSIGNABLE_PARAMETERS;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +44,7 @@ public class RawBeanTypeParameterizedRequiredTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.4", id = "g")
+    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "g")
     public void test() {
         // Test that deployment fails
     }

@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.modules;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
 import javax.inject.Inject;
 
@@ -59,7 +60,7 @@ public class EnabledProducerMethodInjectionAvailabilityTest extends AbstractTest
     Bar bar;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "5.1.4", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = INTER_MODULE_INJECTION, id = "f") })
     public void testInjection() throws Exception {
         Assert.assertEquals(bar.ping(), 1);
     }

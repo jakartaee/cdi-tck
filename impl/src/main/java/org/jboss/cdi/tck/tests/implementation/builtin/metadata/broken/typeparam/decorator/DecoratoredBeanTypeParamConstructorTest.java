@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.decorator;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,7 +47,7 @@ public class DecoratoredBeanTypeParamConstructorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.8", id = "n")
+    @SpecAssertion(section = BEAN_METADATA, id = "n")
     public void testDeploymentFails() {
     }
 

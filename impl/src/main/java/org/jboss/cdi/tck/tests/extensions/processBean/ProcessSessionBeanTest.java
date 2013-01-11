@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.PB;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -52,11 +54,11 @@ public class ProcessSessionBeanTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "11.5.11", id = "ca"), @SpecAssertion(section = "11.5.11", id = "cb"),
-            @SpecAssertion(section = "11.5.11", id = "edb"), @SpecAssertion(section = "11.5.11", id = "efb"),
-            @SpecAssertion(section = "11.5.11", id = "fb"), @SpecAssertion(section = "11.5.11", id = "hb"),
-            @SpecAssertion(section = "11.5.11", id = "hc"), @SpecAssertion(section = "11.5.11", id = "m"),
-            @SpecAssertion(section = "11.5.11", id = "k"), @SpecAssertion(section = "12.4", id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = PB, id = "ca"), @SpecAssertion(section = PB, id = "cb"),
+            @SpecAssertion(section = PB, id = "edb"), @SpecAssertion(section = PB, id = "efb"),
+            @SpecAssertion(section = PB, id = "fb"), @SpecAssertion(section = PB, id = "hb"),
+            @SpecAssertion(section = PB, id = "hc"), @SpecAssertion(section = PB, id = "m"),
+            @SpecAssertion(section = PB, id = "k"), @SpecAssertion(section = BEAN_DISCOVERY, id = "fb") })
     public void testProcessSessionBeanEvent() {
 
         ProcessSessionBean<Elephant> event = ProcessSessionBeanObserver.getElephantProcessSessionBean();

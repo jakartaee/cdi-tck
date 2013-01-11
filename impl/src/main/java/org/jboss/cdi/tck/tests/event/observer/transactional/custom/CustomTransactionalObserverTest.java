@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.event.observer.transactional.custom;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -56,7 +57,7 @@ public class CustomTransactionalObserverTest extends AbstractTest {
     private ObserverExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.5", id = "fa"), @SpecAssertion(section = "10.5", id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fa"), @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fb") })
     public void testCustomTransactionalObserver() throws Exception {
 
         ActionSequence.reset();

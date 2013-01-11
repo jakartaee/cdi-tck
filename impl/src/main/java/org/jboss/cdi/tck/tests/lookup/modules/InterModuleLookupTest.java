@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.modules;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.SELECTION;
 
 import javax.inject.Inject;
 
@@ -55,7 +56,7 @@ public class InterModuleLookupTest extends AbstractTest {
     WebFooLookup fooLookup;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = "5.1", id = "ab")
+    @SpecAssertion(section = SELECTION, id = "ab")
     public void testEnabledManagedBeanAvailableForInjection() throws Exception {
         assert fooLookup.ping() == 0;
     }

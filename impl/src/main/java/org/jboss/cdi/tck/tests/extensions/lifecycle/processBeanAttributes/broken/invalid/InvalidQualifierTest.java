@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.broken.invalid;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -49,7 +51,7 @@ public class InvalidQualifierTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.1", id = "ba")
+    @SpecAssertion(section = BEAN, id = "ba")
     public void test() {
     }
 }

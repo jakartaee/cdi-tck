@@ -16,6 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.multipleBindings;
 
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INTERCEPTOR;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_WITH_MULTIPLE_BINDINGS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -35,9 +41,9 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.5.1", id = "a"), @SpecAssertion(section = "9.5", id = "ca"),
-            @SpecAssertion(section = "9.2", id = "ab"), @SpecAssertion(section = "9.3", id = "ba"),
-            @SpecAssertion(section = "2", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_WITH_MULTIPLE_BINDINGS, id = "a"), @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ca"),
+            @SpecAssertion(section = DECLARING_INTERCEPTOR, id = "ab"), @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "ba"),
+            @SpecAssertion(section = CONCEPTS, id = "f") })
     public void testInterceptorAppliedToBeanWithAllBindings() {
         MissileInterceptor.intercepted = false;
 
@@ -48,7 +54,7 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.5.1", id = "b")
+    @SpecAssertion(section = INTERCEPTOR_WITH_MULTIPLE_BINDINGS, id = "b")
     public void testInterceptorNotAppliedToBeanWithSomeBindings() {
         MissileInterceptor.intercepted = false;
 
@@ -59,7 +65,7 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.3", id = "bb")
+    @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "bb")
     public void testMultipleInterceptorsOnMethod() {
         LockInterceptor.intercepted = false;
 

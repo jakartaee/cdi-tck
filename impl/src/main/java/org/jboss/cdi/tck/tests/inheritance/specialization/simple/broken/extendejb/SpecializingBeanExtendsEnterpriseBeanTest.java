@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.extendejb;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -39,7 +40,7 @@ public class SpecializingBeanExtendsEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertion(section = "3.1.4", id = "dc")
+    @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "dc")
     public void testSpecializingClassDirectlyExtendsEnterpriseBean() {
     }
 

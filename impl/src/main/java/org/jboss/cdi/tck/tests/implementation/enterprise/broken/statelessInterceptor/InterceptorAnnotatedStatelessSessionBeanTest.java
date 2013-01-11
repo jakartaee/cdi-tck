@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.statelessInterceptor;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEANS;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -39,7 +40,7 @@ public class InterceptorAnnotatedStatelessSessionBeanTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = "3.2", id = "g")
+    @SpecAssertion(section = SESSION_BEANS, id = "g")
     public void testStatelessSessionBeanNotAllowedToBeInterceptor() {
     }
 

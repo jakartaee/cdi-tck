@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.conversation;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
@@ -61,14 +63,14 @@ public class BuiltinConversationDecoratorTest extends AbstractDecoratorTest {
     Conversation conversation;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ach"), @SpecAssertion(section = "8.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "ach"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa") })
     public void testDecoratorIsResolved() {
         checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(Conversation.class)), ConversationDecorator.class,
                 Collections.<Type> singleton(Conversation.class), Conversation.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ach") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "ach") })
     public void testDecoratorIsInvoked() {
         String cid = "foo";
         conversation.begin(cid);

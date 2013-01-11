@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.inheritance;
 
+import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES_WITH_ADDITIONAL_STEREOTYPES;
+
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
@@ -43,7 +45,7 @@ public class StereotypeInheritenceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.5", id = "a"), @SpecAssertion(section = "2.7.1.5", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPES_WITH_ADDITIONAL_STEREOTYPES, id = "a"), @SpecAssertion(section = STEREOTYPES_WITH_ADDITIONAL_STEREOTYPES, id = "b") })
     public void testInheritence() {
         Set<Bean<Horse>> beans = getBeans(Horse.class);
         assert beans.size() == 1;

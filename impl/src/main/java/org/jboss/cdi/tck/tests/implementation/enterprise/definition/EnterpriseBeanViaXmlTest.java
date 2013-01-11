@@ -18,6 +18,8 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.WHAT_CLASSES_ARE_BEANS;
 
 import javax.enterprise.inject.spi.Bean;
 
@@ -45,7 +47,7 @@ public class EnterpriseBeanViaXmlTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "3.1.1", id = "n"), @SpecAssertion(section = "3.2.2", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "n"), @SpecAssertion(section = SESSION_BEAN_TYPES, id = "ba") })
     public void testEjbDeclaredInXmlNotSimpleBean() {
         Bean<ElephantLocal> elephantBean = getBeans(ElephantLocal.class).iterator().next();
         // The interface is a known type but the class should not be

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.broken.scopeConflict;
 
+import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_SCOPE;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +40,7 @@ public class IncompatibleStereotypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.4.4", id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = DEFAULT_SCOPE, id = "da") })
     public void testMultipleIncompatibleScopeStereotypes() {
     }
 }

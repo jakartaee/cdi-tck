@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.deployment.lifecycle.broken.addDeploymentProblem;
 
+import static org.jboss.cdi.tck.cdi.Sections.ADV;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,7 +49,7 @@ public class AddDeploymentProblemTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.3", id = "b")
+    @SpecAssertion(section = ADV, id = "b")
     public void testObserverDeploymentProblemTreatedAsDeploymentError() {
     }
 

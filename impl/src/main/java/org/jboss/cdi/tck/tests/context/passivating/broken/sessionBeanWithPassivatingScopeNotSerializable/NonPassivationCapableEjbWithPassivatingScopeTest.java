@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.sessionBeanWithPassivatingScopeNotSerializable;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -48,7 +50,7 @@ public class NonPassivationCapableEjbWithPassivatingScopeTest extends AbstractTe
     }
 
     @Test
-    @SpecAssertion(section = "6.6.4", id = "aa")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "aa")
     public void testDeployment() {
     }
 

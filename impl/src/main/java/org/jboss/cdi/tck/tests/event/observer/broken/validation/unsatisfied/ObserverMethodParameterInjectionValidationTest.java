@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.broken.validation.unsatisfied;
 
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
+import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -48,7 +51,7 @@ public class ObserverMethodParameterInjectionValidationTest extends AbstractTest
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.2", id = "i"), @SpecAssertion(section = "5.2.2", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "i"), @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ab") })
     public void test() {
     }
 }

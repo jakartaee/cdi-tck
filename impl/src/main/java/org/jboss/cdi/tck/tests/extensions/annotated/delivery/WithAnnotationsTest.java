@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -58,9 +59,9 @@ public class WithAnnotationsTest extends AbstractTest {
     ProcessAnnotatedTypeObserver processAnnotatedTypeObserver;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "fa"), @SpecAssertion(section = "11.5.6", id = "fb"),
-            @SpecAssertion(section = "11.5.6", id = "fc"), @SpecAssertion(section = "11.5.6", id = "fd"),
-            @SpecAssertion(section = "11.5.6", id = "fe"), @SpecAssertion(section = "11.5.6", id = "ff") })
+    @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "fb"),
+            @SpecAssertion(section = PAT, id = "fc"), @SpecAssertion(section = PAT, id = "fd"),
+            @SpecAssertion(section = PAT, id = "fe"), @SpecAssertion(section = PAT, id = "ff") })
     public void testDelivery() {
 
         List<Class<?>> processedDesiredAnWantedTypes = processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes();
@@ -82,7 +83,7 @@ public class WithAnnotationsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "fa"), @SpecAssertion(section = "11.5.6", id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "g") })
     public void testDeliveryMetaAnnotation() {
         List<Class<?>> processedTypes = processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes();
         assertFalse(processedTypes.isEmpty());

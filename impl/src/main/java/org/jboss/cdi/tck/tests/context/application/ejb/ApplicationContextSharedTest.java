@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.application.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
@@ -69,7 +70,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test
-    @SpecAssertion(section = "6.7.3", id = "e")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "e")
     public void testApplicationContextShared() throws Exception {
         FMSModelIII.reset();
         FMS flightManagementSystem = getInstanceByType(FMS.class);
@@ -94,7 +95,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test
-    @SpecAssertion(section = "6.7.3", id = "dc")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "dc")
     public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMS flightManagementSystem = getInstanceByType(FMS.class);
         flightManagementSystem.climb();
@@ -110,7 +111,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "6.7.3", id = "db") })
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT, id = "db") })
     public void testApplicationScopeActiveDuringAsyncCallToEjb(SimpleApplicationBean simpleApplicationBean) throws Exception {
         Future<Double> result = bar.compute();
         Double id = result.get();
@@ -120,7 +121,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test
-    @SpecAssertion(section = "6.7.3", id = "da")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "da")
     public void testApplicationScopeActiveDuringRemoteCallToEjb() {
         assertNotNull(foo.ping());
     }

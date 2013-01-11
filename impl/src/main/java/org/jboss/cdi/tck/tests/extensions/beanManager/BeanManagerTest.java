@@ -20,6 +20,13 @@ package org.jboss.cdi.tck.tests.extensions.beanManager;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
+import static org.jboss.cdi.tck.cdi.Sections.BM_DETERMINING_ANNOTATION;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_ANNOTATEDTYPE;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_ELRESOLVER;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_EXTENSION;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTIONTARGET;
+import static org.jboss.cdi.tck.cdi.Sections.BM_RESOLVE_AMBIGUOUS_DEP;
+import static org.jboss.cdi.tck.cdi.Sections.BM_VALIDATE_IP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -85,7 +92,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.8", id = "a")
+    @SpecAssertion(section = BM_RESOLVE_AMBIGUOUS_DEP, id = "a")
     public void testAmbiguousDependencyResolved() {
         Set<Bean<?>> beans = getCurrentManager().getBeans(Food.class);
         assertEquals(beans.size(), 2);
@@ -96,7 +103,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = AmbiguousResolutionException.class)
-    @SpecAssertion(section = "11.3.8", id = "b")
+    @SpecAssertion(section = BM_RESOLVE_AMBIGUOUS_DEP, id = "b")
     public void testAmbiguousDependencyNotResolved() {
         Set<Bean<?>> beans = new HashSet<Bean<?>>();
         beans.addAll(getCurrentManager().getBeans(Dog.class));
@@ -105,7 +112,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = InjectionException.class)
-    @SpecAssertion(section = "11.3.9", id = "a")
+    @SpecAssertion(section = BM_VALIDATE_IP, id = "a")
     public void testValidateThrowsException() {
         DogHouse dogHouse = getInstanceByType(DogHouse.class);
         InjectionPoint injectionPoint = new InjectionPointDecorator(dogHouse.getDog().getInjectedMetadata());
@@ -114,7 +121,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.14", id = "aa")
+    @SpecAssertion(section = BM_DETERMINING_ANNOTATION, id = "aa")
     public void testDetermineQualifierType() {
         assertTrue(getCurrentManager().isQualifier(Any.class));
         assertTrue(getCurrentManager().isQualifier(Tame.class));
@@ -124,7 +131,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.14", id = "ab")
+    @SpecAssertion(section = BM_DETERMINING_ANNOTATION, id = "ab")
     public void testDetermineScope() {
         assertTrue(getCurrentManager().isScope(ApplicationScoped.class));
         assertTrue(getCurrentManager().isScope(DummyScoped.class));
@@ -134,7 +141,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.14", id = "ac")
+    @SpecAssertion(section = BM_DETERMINING_ANNOTATION, id = "ac")
     public void testDetermineStereotype() {
         assertTrue(getCurrentManager().isStereotype(AnimalStereotype.class));
         assertFalse(getCurrentManager().isStereotype(Tame.class));
@@ -143,7 +150,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.14", id = "ad")
+    @SpecAssertion(section = BM_DETERMINING_ANNOTATION, id = "ad")
     public void testDetermineInterceptorBindingType() {
         assertTrue(getCurrentManager().isInterceptorBinding(Transactional.class));
         assertFalse(getCurrentManager().isInterceptorBinding(Tame.class));
@@ -153,7 +160,7 @@ public class BeanManagerTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "11.3.14", id = "ae")
+    @SpecAssertion(section = BM_DETERMINING_ANNOTATION, id = "ae")
     public void testGetMetaAnnotationsForStereotype() {
         Set<Annotation> stereotypeAnnotations = getCurrentManager().getStereotypeDefinition(AnimalStereotype.class);
         assertEquals(stereotypeAnnotations.size(), 5);
@@ -182,7 +189,7 @@ public class BeanManagerTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = "11.3.14", id = "af")
+    @SpecAssertion(section = BM_DETERMINING_ANNOTATION, id = "af")
     public void testGetMetaAnnotationsForInterceptorBindingType() {
         Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingDefinition(Transactional.class);
         assertEquals(metaAnnotations.size(), 4);
@@ -190,7 +197,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.14", id = "ag")
+    @SpecAssertion(section = BM_DETERMINING_ANNOTATION, id = "ag")
     public void testDetermineScopeType() {
         assertTrue(getCurrentManager().isNormalScope(RequestScoped.class));
         assertFalse(getCurrentManager().isPassivatingScope(RequestScoped.class));
@@ -201,13 +208,13 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.17", id = "a")
+    @SpecAssertion(section = BM_OBTAIN_ELRESOLVER, id = "a")
     public void testGetELResolver() {
         assertNotNull(getCurrentManager().getELResolver());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.19", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_ANNOTATEDTYPE, id = "a") })
     public void testObtainingAnnotatedType() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
         assertTrue(annotatedType.isAnnotationPresent(Specializes.class));
@@ -218,7 +225,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     // @Test
-    // @SpecAssertions({ @SpecAssertion(section = "11.3.19", id = "b") })
+    // @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_ANNOTATEDTYPE, id = "b") })
     public void testObtainingWrappedAnnotatedType() {
         // FIXME remove the test
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(WrappedBean.class);
@@ -230,7 +237,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.20", id = "aa")
+    @SpecAssertion(section = BM_OBTAIN_INJECTIONTARGET, id = "aa")
     // CDI-83
     public void testObtainingInjectionTarget() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
@@ -238,7 +245,7 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "11.3.20", id = "ab")
+    @SpecAssertion(section = BM_OBTAIN_INJECTIONTARGET, id = "ab")
     public void testObtainingInjectionTargetWithDefinitionError() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(Snake.class);
         getCurrentManager().createInjectionTarget(annotatedType);
@@ -249,7 +256,7 @@ public class BeanManagerTest extends AbstractTest {
      * META-INF/services, or throws an IllegalArgumentException if the container has no instance of the given class.
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.25", id = "a"), @SpecAssertion(section = "11.3.25", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_EXTENSION, id = "a"), @SpecAssertion(section = BM_OBTAIN_EXTENSION, id = "b") })
     public void testGetExtension() {
 
         AfterBeanDiscoveryObserver extension = getCurrentManager().getExtension(AfterBeanDiscoveryObserver.class);
@@ -266,13 +273,13 @@ public class BeanManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.8", id = "c")
+    @SpecAssertion(section = BM_RESOLVE_AMBIGUOUS_DEP, id = "c")
     public void testResolveWithNull() {
         assertNull(getCurrentManager().resolve(null));
     }
 
     @Test
-    @SpecAssertion(section = "11.3.8", id = "d")
+    @SpecAssertion(section = BM_RESOLVE_AMBIGUOUS_DEP, id = "d")
     public void testResolveWithEmptySet() {
         assertNull(getCurrentManager().resolve(Collections.<Bean<? extends Integer>> emptySet()));
         assertNull(getCurrentManager().resolve(new HashSet<Bean<? extends String>>()));

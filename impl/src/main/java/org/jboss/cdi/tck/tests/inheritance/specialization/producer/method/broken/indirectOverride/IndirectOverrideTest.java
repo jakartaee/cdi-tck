@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.broken.indirectOverride;
 
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_PRODUCER_METHOD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class IndirectOverrideTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3.3", id = "ca")
+    @SpecAssertion(section = SPECIALIZE_PRODUCER_METHOD, id = "ca")
     public void testSpecializedMethodIndirectlyOverridesAnotherProducerMethod() {
     }
 

@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.lookup.injection.enterprise.chain;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_EL_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -49,7 +50,7 @@ public class SessionBeanInjectionChainTest extends AbstractTest {
     Qux qux;
 
     @Test
-    @SpecAssertion(section = "5", id = "b")
+    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testChainOfSessionBeans() {
         assertNotNull(qux);
         assertEquals(qux.ping(0), 4);

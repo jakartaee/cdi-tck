@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_SCOPE;
+import static org.jboss.cdi.tck.cdi.Sections.EXCEPTIONS;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +41,7 @@ public class TooManyScopesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.4.3", id = "ba"), @SpecAssertion(section = "2.8", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_SCOPE, id = "ba"), @SpecAssertion(section = EXCEPTIONS, id = "ba") })
     public void testTooManyScopesSpecifiedInJava() {
     }
 

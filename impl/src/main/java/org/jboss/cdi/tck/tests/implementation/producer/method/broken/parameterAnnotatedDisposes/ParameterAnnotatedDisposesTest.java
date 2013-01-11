@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.parameterAnnotatedDisposes;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_METHOD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class ParameterAnnotatedDisposesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3.2", id = "da")
+    @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "da")
     public void testProducerMethodWithParameterAnnotatedDisposes() throws Exception {
     }
 

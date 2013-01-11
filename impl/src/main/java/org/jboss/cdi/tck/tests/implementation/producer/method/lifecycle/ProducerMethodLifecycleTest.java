@@ -16,6 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
+
 import java.util.Set;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -54,7 +60,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "7.3.4", id = "ea")
+    @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "ea")
     public void testProducerMethodBeanCreate() {
         PreferredSpiderProducer.reset();
         Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class, PET_LITERAL).iterator().next();
@@ -66,7 +72,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.4", id = "ea") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "ea") })
     public void testProducerMethodInvokedOnCreate() {
         Bean<SpiderEgg> eggBean = getBeans(SpiderEgg.class, FIRST_BORN_LITERAL).iterator().next();
         CreationalContext<SpiderEgg> eggCc = getCurrentManager().createCreationalContext(eggBean);
@@ -74,7 +80,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3", id = "j")
+    @SpecAssertion(section = PRODUCER_METHOD, id = "j")
     public void testWhenApplicationInvokesProducerMethodParametersAreNotInjected() {
         try {
             getInstanceByType(BrownRecluse.class).layAnEgg(null);
@@ -86,7 +92,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.5.4", id = "c"), @SpecAssertion(section = "4.3", id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "c"), @SpecAssertion(section = SPECIALIZATION, id = "cb") })
     public void testProducerMethodFromSpecializedBeanUsed() {
         SpiderProducer.reset();
         PreferredSpiderProducer.reset();
@@ -98,7 +104,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.4", id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "k") })
     public void testCreateReturnsNullIfProducerDoesAndDependent() {
         Bean<Spider> nullSpiderBean = getBeans(Spider.class, NULL_LITERAL).iterator().next();
         CreationalContext<Spider> nullSpiderBeanCc = getCurrentManager().createCreationalContext(nullSpiderBean);
@@ -106,7 +112,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalProductException.class)
-    @SpecAssertions({ @SpecAssertion(section = "7.3.4", id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "l") })
     public void testCreateFailsIfProducerReturnsNullAndNotDependent() {
         Bean<PotatoChip> potatoChipBean = getBeans(PotatoChip.class, NULL_LITERAL).iterator().next();
         assert potatoChipBean != null;
@@ -117,7 +123,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.4", id = "ma"), @SpecAssertion(section = "7.3.4", id = "r") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "ma"), @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "r") })
     public void testProducerMethodBeanDestroy() {
         PreferredSpiderProducer.reset();
         Set<Bean<?>> beans = getCurrentManager().getBeans(Tarantula.class, PET_LITERAL);
@@ -136,7 +142,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = FooException.class)
-    @SpecAssertions({ @SpecAssertion(section = "6.1", id = "a0") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "a0") })
     public void testCreateRethrowsUncheckedException() {
         Bean<Ship> shipBean = getBeans(Ship.class, FAIL_LITERAL).iterator().next();
         CreationalContext<Ship> shipCc = getCurrentManager().createCreationalContext(shipBean);
@@ -145,7 +151,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = CreationException.class)
-    @SpecAssertions({ @SpecAssertion(section = "6.1", id = "a0") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "a0") })
     public void testCreateWrapsCheckedExceptionAndRethrows() {
         Bean<Lorry> lorryBean = getBeans(Lorry.class, FAIL_LITERAL).iterator().next();
         CreationalContext<Lorry> lorryCc = getCurrentManager().createCreationalContext(lorryBean);

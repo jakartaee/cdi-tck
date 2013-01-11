@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.noextend2;
 
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class SpecializingBeanExtendsNothingTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.1.4", id = "db")
+    @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "db")
     public void testSpecializingClassDirectlyExtendsNothing() {
     }
 

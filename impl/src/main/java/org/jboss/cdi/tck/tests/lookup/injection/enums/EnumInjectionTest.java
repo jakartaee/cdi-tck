@@ -17,6 +17,11 @@
 package org.jboss.cdi.tck.tests.lookup.injection.enums;
 
 import static org.jboss.cdi.tck.TestGroups.ENUMS;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INJECTED_FIELD;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELDS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
@@ -54,9 +59,9 @@ public class EnumInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.9", id = "c"), @SpecAssertion(section = "3.9.1", id = "aa"),
-            @SpecAssertion(section = "3.10", id = "c"), @SpecAssertion(section = "5.5", id = "da"),
-            @SpecAssertion(section = "5.5.2", id = "ada"), @SpecAssertion(section = "5.5.2", id = "adb") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTED_FIELDS, id = "c"), @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "aa"),
+            @SpecAssertion(section = INITIALIZER_METHODS, id = "c"), @SpecAssertion(section = INJECTION, id = "da"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ada"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "adb") })
     public void testBasicEnum() {
         verifyBasicEnum(BasicEnum.FOO);
         verifyBasicEnum(BasicEnum.BAR);
@@ -64,8 +69,8 @@ public class EnumInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.9", id = "c"), @SpecAssertion(section = "3.10", id = "c"),
-            @SpecAssertion(section = "5.5.2", id = "ada"), @SpecAssertion(section = "5.5.2", id = "adb") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTED_FIELDS, id = "c"), @SpecAssertion(section = INITIALIZER_METHODS, id = "c"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ada"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "adb") })
     public void testAdvancedEnum() {
         assertEquals(EnclosingClass.AdvancedEnum.values().length, 2);
         for (EnclosingClass.AdvancedEnum item : EnclosingClass.AdvancedEnum.values()) {

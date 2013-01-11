@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.producer;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class ProducerMethodWithPrimitiveReturnTypePassivationTest extends Abstra
     Universe universe;
 
     @Test
-    @SpecAssertion(section = "6.6.1", id = "caa")
+    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "caa")
     public void testProducerMethodWithPrimitiveReturnType() {
         assert universe.getAnswer() == 42;
     }

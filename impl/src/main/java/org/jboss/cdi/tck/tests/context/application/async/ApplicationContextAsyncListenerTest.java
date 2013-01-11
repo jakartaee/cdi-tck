@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.context.application.async;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -53,7 +54,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.3", id = "ae")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnComplete() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -64,7 +65,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.3", id = "ae")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -73,7 +74,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.3", id = "ae")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -81,7 +82,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.3", id = "ae")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);

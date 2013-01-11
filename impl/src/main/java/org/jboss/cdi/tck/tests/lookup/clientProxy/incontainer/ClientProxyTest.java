@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.clientProxy.incontainer;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.CLIENT_PROXIES;
 
 import java.net.URL;
 
@@ -44,7 +45,7 @@ public class ClientProxyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.4", id = "d")
+    @SpecAssertion(section = CLIENT_PROXIES, id = "d")
     public void testInvocationIsProcessedOnCurrentInstance() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);

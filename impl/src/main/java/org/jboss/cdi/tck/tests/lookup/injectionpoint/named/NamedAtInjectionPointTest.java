@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.named;
 
+import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_NAME;
+import static org.jboss.cdi.tck.cdi.Sections.NAMED_AT_INJECTION_POINT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -49,7 +51,7 @@ public class NamedAtInjectionPointTest extends AbstractTest {
     Pike pike;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.13", id = "a"), @SpecAssertion(section = "2.5.2", id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = NAMED_AT_INJECTION_POINT, id = "a"), @SpecAssertion(section = DEFAULT_NAME, id = "fa") })
     public void testFieldNameUsedAsBeanName() {
         // Managed bean
         assertNotNull(fishingNet);

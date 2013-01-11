@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.inject.broken.delegateProducerMethod;
 
+import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -48,7 +50,7 @@ public class DelegateInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.1.2", id = "cf") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "cf") })
     public void testDecoratorDelegateInjectionPoints() {
     }
 

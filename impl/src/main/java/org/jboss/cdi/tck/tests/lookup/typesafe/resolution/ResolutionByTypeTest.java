@@ -16,6 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELD_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.MULTIPLE_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.NULL;
+import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.QUALIFIER_ANNOTATION_MEMBERS;
+import static org.jboss.cdi.tck.cdi.Sections.RESTRICTING_BEAN_TYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -63,7 +71,7 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.1", id = "lb")
+    @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "lb")
     public void testDefaultBindingTypeAssumed() throws Exception {
         Set<Bean<Tuna>> possibleTargets = getBeans(Tuna.class);
         assertEquals(possibleTargets.size(), 1);
@@ -71,9 +79,9 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3.4", id = "b"), @SpecAssertion(section = "5.2.1", id = "lc"),
-            @SpecAssertion(section = "2.3.3", id = "d"), @SpecAssertion(section = "5.2.1", id = "la"),
-            @SpecAssertion(section = "5.2.7", id = "a"), @SpecAssertion(section = "5.2.7", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTED_FIELD_QUALIFIERS, id = "b"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "lc"),
+            @SpecAssertion(section = DECLARING_BEAN_QUALIFIERS, id = "d"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "la"),
+            @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "a"), @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "d") })
     public void testAllQualifiersSpecifiedForResolutionMustAppearOnBean() {
 
         Set<Bean<Animal>> animalBeans = getBeans(Animal.class, new ChunkyLiteral(), new AnnotationLiteral<Whitefish>() {
@@ -93,7 +101,7 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "ka") })
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "ka") })
     public void testResolveByTypeWithTypeParameter() throws Exception {
 
         Set<Bean<Farmer<ScottishFish>>> beans = getBeans(new TypeLiteral<Farmer<ScottishFish>>() {
@@ -103,15 +111,15 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "j"), @SpecAssertion(section = "2.2.1", id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "j"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "i") })
     public void testResolveByTypeWithArray() throws Exception {
         assertEquals(getBeans(Spider[].class).size(), 1);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "i"), @SpecAssertion(section = "5.2.5", id = "aa"),
-            @SpecAssertion(section = "5.2.5", id = "ab"), @SpecAssertion(section = "5.2.7", id = "b"),
-            @SpecAssertion(section = "5.2.7", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "i"), @SpecAssertion(section = NULL, id = "aa"),
+            @SpecAssertion(section = NULL, id = "ab"), @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "b"),
+            @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "c") })
     public void testResolveByTypeWithPrimitives() {
 
         assertEquals(getBeans(Double.class, AnyLiteral.INSTANCE).size(), 2);
@@ -127,7 +135,7 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "ld"), @SpecAssertion(section = "5.2.6", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "ld"), @SpecAssertion(section = QUALIFIER_ANNOTATION_MEMBERS, id = "b") })
     public void testResolveByTypeWithNonBindingMembers() throws Exception {
 
         Set<Bean<Animal>> beans = getBeans(Animal.class, new ExpensiveLiteral() {
@@ -153,7 +161,7 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.2", id = "a")
+    @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "a")
     public void testBeanTypesOnManagedBean() {
         assertEquals(getBeans(Canary.class).size(), 1);
         Bean<Canary> bean = getUniqueBean(Canary.class);
@@ -162,7 +170,7 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.2", id = "e")
+    @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "e")
     public void testGenericBeanTypesOnManagedBean() {
         assertEquals(getBeans(AUSTRALIAN_FLIGHTLESS_BIRD).size(), 1);
         assertTrue(getBeans(Emu.class).isEmpty());
@@ -172,7 +180,7 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.2", id = "c")
+    @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "c")
     public void testBeanTypesOnProducerMethod() {
         assertEquals(getBeans(Parrot.class).size(), 1);
         assertTrue(getBeans(Bird.class).isEmpty());
@@ -181,7 +189,7 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.2", id = "h")
+    @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "h")
     public void testGenericBeanTypesOnProducerField() {
         assertEquals(getBeans(EUROPEAN_CAT, TAME).size(), 1);
         assertTrue(getBeans(DomesticCat.class, TAME).isEmpty());
@@ -190,7 +198,7 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.2", id = "g")
+    @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "g")
     public void testGenericBeanTypesOnProducerMethod() {
         assertEquals(getBeans(AFRICAN_CAT, WILD).size(), 1);
         assertTrue(getBeans(Lion.class, WILD).isEmpty());
@@ -199,7 +207,7 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.2", id = "d")
+    @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "d")
     public void testBeanTypesOnProducerField() {
         assertEquals(getBeans(Dove.class).size(), 1);
         assertTrue(getBeans(Bird.class).isEmpty());

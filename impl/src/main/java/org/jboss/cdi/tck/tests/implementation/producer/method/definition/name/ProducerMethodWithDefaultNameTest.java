@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.name;
 
+import static org.jboss.cdi.tck.cdi.Sections.NAMED_STEREOTYPE;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_NAME;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -47,7 +49,7 @@ public class ProducerMethodWithDefaultNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3.4", id = "a")
+    @SpecAssertion(section = PRODUCER_METHOD_NAME, id = "a")
     public void testMethodName() {
         String name = "findTerry";
         Bean<Bug> terry = getUniqueBean(Bug.class, new AnnotationLiteral<Crazy>() {
@@ -56,7 +58,7 @@ public class ProducerMethodWithDefaultNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3.4", id = "b")
+    @SpecAssertion(section = PRODUCER_METHOD_NAME, id = "b")
     public void testJavaBeansPropertyName() {
         String name = "graham";
         Bean<Bug> graham = getUniqueBean(Bug.class);
@@ -64,7 +66,7 @@ public class ProducerMethodWithDefaultNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "aa"), @SpecAssertion(section = "2.7.1.3", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "ab") })
     public void testProducerMethodQualifiers() {
         String name = "produceJohn";
         Bean<Bug> john = getUniqueBean(Bug.class, new AnnotationLiteral<Funny>() {

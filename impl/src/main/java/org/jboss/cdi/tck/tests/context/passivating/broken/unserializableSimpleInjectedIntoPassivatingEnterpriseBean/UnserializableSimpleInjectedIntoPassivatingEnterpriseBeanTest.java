@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.broken.unserializableSimpleInjectedIntoPassivatingEnterpriseBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -40,7 +41,7 @@ public class UnserializableSimpleInjectedIntoPassivatingEnterpriseBeanTest exten
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "6.6.4", id = "ba")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ba")
     public void testSimpleDependentWebBeanWithNonSerializableImplementationInjectedIntoStatefulSessionBeanFails() {
         // Not possible while deployment should fail
         // getInstanceByType(EspooLocal_Broken.class);

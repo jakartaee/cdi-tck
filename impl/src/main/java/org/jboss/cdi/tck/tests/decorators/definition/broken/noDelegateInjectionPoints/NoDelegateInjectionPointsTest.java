@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.noDelegateInjectionPoints;
 
+import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,7 +49,7 @@ public class NoDelegateInjectionPointsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.1.2", id = "cb")
+    @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "cb")
     public void testNoDelegateInjectionPoints() {
     }
 

@@ -17,6 +17,10 @@
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INTERCEPTOR;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -54,8 +58,8 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "a"), @SpecAssertion(section = "9.2", id = "a"),
-            @SpecAssertion(section = "12.4", id = "kb") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "a"), @SpecAssertion(section = DECLARING_INTERCEPTOR, id = "a"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "kb") })
     public void testManagedBeanIsIntercepted() {
 
         AlmightyInterceptor.reset();
@@ -75,7 +79,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "a1"), @SpecAssertion(section = "3.10", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "a1"), @SpecAssertion(section = INITIALIZER_METHODS, id = "f") })
     public void testInitializerMethodsNotIntercepted() {
 
         AlmightyInterceptor.reset();
@@ -87,7 +91,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "7.2", id = "ia")
+    @SpecAssertion(section = BIZ_METHOD, id = "ia")
     public void testProducerMethodsAreIntercepted() {
 
         AlmightyInterceptor.reset();
@@ -97,7 +101,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "7.2", id = "ic")
+    @SpecAssertion(section = BIZ_METHOD, id = "ic")
     public void testDisposerMethodsAreIntercepted() {
 
         AlmightyInterceptor.reset();
@@ -114,7 +118,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "7.2", id = "ie")
+    @SpecAssertion(section = BIZ_METHOD, id = "ie")
     public void testObserverMethodsAreIntercepted() {
 
         AlmightyInterceptor.reset();
@@ -125,7 +129,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "7.2", id = "j")
+    @SpecAssertion(section = BIZ_METHOD, id = "j")
     public void testLifecycleCallbacksAreIntercepted() {
 
         AlmightyInterceptor.reset();
@@ -137,7 +141,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "m"), @SpecAssertion(section = "7.2", id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "m"), @SpecAssertion(section = BIZ_METHOD, id = "g") })
     public void testObjectMethodsAreNotIntercepted() {
 
         AlmightyInterceptor.reset();
@@ -148,7 +152,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertion(section = "7.2", id = "ig")
+    @SpecAssertion(section = BIZ_METHOD, id = "ig")
     public void testTimeoutMethodIntercepted(Timing timing) throws Exception {
 
         timing.createTimer();

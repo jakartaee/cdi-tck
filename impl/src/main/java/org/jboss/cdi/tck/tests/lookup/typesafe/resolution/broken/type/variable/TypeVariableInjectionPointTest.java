@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.type.variable;
 
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_INJECTION_POINT_TYPES;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class TypeVariableInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.3", id = "c")
+    @SpecAssertion(section = LEGAL_INJECTION_POINT_TYPES, id = "c")
     public void testTypeVariableInjectionPoint() {
     }
 }

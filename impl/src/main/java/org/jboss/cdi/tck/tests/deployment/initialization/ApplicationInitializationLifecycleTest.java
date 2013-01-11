@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.deployment.initialization;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -58,10 +59,10 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
     Foo foo;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.2", id = "b"), @SpecAssertion(section = "12.2", id = "c"),
-            @SpecAssertion(section = "12.2", id = "da"), @SpecAssertion(section = "12.2", id = "f"),
-            @SpecAssertion(section = "12.2", id = "g"), @SpecAssertion(section = "12.2", id = "ga"),
-            @SpecAssertion(section = "12.2", id = "h"), @SpecAssertion(section = "12.2", id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = INITIALIZATION, id = "b"), @SpecAssertion(section = INITIALIZATION, id = "c"),
+            @SpecAssertion(section = INITIALIZATION, id = "da"), @SpecAssertion(section = INITIALIZATION, id = "f"),
+            @SpecAssertion(section = INITIALIZATION, id = "g"), @SpecAssertion(section = INITIALIZATION, id = "ga"),
+            @SpecAssertion(section = INITIALIZATION, id = "h"), @SpecAssertion(section = INITIALIZATION, id = "i") })
     public void testInitialization() {
 
         foo.ping();

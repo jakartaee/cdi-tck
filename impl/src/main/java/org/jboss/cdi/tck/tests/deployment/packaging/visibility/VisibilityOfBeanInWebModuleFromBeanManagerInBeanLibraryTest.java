@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.visibility;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 
 import javax.inject.Inject;
 
@@ -57,13 +58,13 @@ public class VisibilityOfBeanInWebModuleFromBeanManagerInBeanLibraryTest extends
     BeerCollector collector;
 
     @Test
-    @SpecAssertion(section = "12.1", id = "bcb")
+    @SpecAssertion(section = BEAN_ARCHIVE, id = "bcb")
     public void shouldFindBeanByType() {
         Assert.assertTrue(collector.getNumDiscovered() == 2);
     }
 
     @Test
-    @SpecAssertion(section = "12.1", id = "bcb")
+    @SpecAssertion(section = BEAN_ARCHIVE, id = "bcb")
     public void shouldFindBeanByName() {
         Assert.assertTrue(collector.isNamedBeerVisible("americanCraftBeer"));
     }

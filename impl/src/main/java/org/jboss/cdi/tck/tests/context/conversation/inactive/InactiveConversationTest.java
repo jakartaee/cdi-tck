@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.context.conversation.inactive;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -55,7 +56,7 @@ public class InactiveConversationTest extends AbstractTest {
     Bar bar;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = "6.7.5", id = "p")
+    @SpecAssertion(section = CONVERSATION, id = "p")
     public void testContextNotActiveExceptionThrown() throws Exception {
 
         assertNotNull(foo);

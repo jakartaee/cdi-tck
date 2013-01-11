@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -54,8 +56,8 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "aa"), @SpecAssertion(section = "11.5.6", id = "ab"),
-            @SpecAssertion(section = "12.4", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = PAT, id = "aa"), @SpecAssertion(section = PAT, id = "ab"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "ba") })
     public void testProcessAnnotatedTypeEventsSent() {
         // Randomly test some of the classes and interfaces that should have
         // been discovered and sent via the event
@@ -66,13 +68,13 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.6", id = "ac")
+    @SpecAssertion(section = PAT, id = "ac")
     public void testProcessAnnotatedTypeFiredForEnum() {
         assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Type.class));
     }
 
     @Test
-    @SpecAssertion(section = "11.5.6", id = "ad")
+    @SpecAssertion(section = PAT, id = "ad")
     public void testProcessAnnotatedTypeFiredForAnnotation() {
         assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Tame.class));
         assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(MissileBinding.class));
@@ -80,7 +82,7 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.6", id = "ba")
+    @SpecAssertion(section = PAT, id = "ba")
     public void testGetAnnotatedType() {
         AnnotatedType<Dog> annotatedType = ProcessAnnotatedTypeObserver.getDogAnnotatedType();
         assertEquals(annotatedType.getBaseType(), Dog.class);
@@ -95,7 +97,7 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.6", id = "bb"), @SpecAssertion(section = "11.5.6", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = PAT, id = "bb"), @SpecAssertion(section = PAT, id = "ca") })
     public void testSetAnnotatedType() {
         assertTrue(TestAnnotatedType.isGetConstructorsUsed());
         assertTrue(TestAnnotatedType.isGetFieldsUsed());
@@ -103,7 +105,7 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.6", id = "bc")
+    @SpecAssertion(section = PAT, id = "bc")
     public void testVeto() {
         assertTrue(getCurrentManager().getBeans(VetoedBean.class).isEmpty());
     }

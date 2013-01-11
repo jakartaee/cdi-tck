@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.broken.field;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INJECTED_FIELD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -41,7 +43,7 @@ public class InjectedFieldAnnotatedWithProducesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.9.1", id = "b")
+    @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "b")
     public void testDeployment() {
     }
 

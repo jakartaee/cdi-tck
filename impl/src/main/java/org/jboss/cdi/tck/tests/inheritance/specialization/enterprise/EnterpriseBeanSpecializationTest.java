@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_SESSION_BEAN;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -51,7 +54,7 @@ public class EnterpriseBeanSpecializationTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia"), @SpecAssertion(section = "3.2.4", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia"), @SpecAssertion(section = SPECIALIZE_SESSION_BEAN, id = "aa") })
     public void testDirectSpecialization() {
 
         Set<Bean<LazyFarmerLocal>> farmerBeans = getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL);
@@ -67,7 +70,7 @@ public class EnterpriseBeanSpecializationTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "j") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "j") })
     public void testSpecializingBeanHasBindingsOfSpecializedAndSpecializingBean() {
         Set<Bean<LazyFarmerLocal>> farmerBeans = getBeans(LazyFarmerLocal.class, LANDOWNER_LITERAL);
         assertEquals(farmerBeans.size(), 1);
@@ -78,7 +81,7 @@ public class EnterpriseBeanSpecializationTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "k") })
     public void testSpecializingBeanHasNameOfSpecializedBean() {
         String expectedName = "farmer";
         Set<Bean<?>> beans = getCurrentManager().getBeans(expectedName);
@@ -89,7 +92,7 @@ public class EnterpriseBeanSpecializationTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "4.3", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = SPECIALIZATION, id = "ca") })
     public void testSpecializedBeanNotInstantiated(@Landowner FarmerLocal farmer) throws Exception {
         assertEquals(farmer.getClassName(), LazyFarmer.class.getName());
     }

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
 
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -49,7 +50,7 @@ public class InterceptorOrderTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "bb"), @SpecAssertion(section = "9.4", id = "bf") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "bb"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "bf") })
     public void testInterceptorsCalledInOrderDefinedByBeansXml(Foo foo) {
 
         assertNotNull(foo);
@@ -64,7 +65,7 @@ public class InterceptorOrderTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "9.4", id = "fa")
+    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "fa")
     public void testInterceptorsInvocationOrder(AccountTransaction transaction) {
 
         assertNotNull(transaction);

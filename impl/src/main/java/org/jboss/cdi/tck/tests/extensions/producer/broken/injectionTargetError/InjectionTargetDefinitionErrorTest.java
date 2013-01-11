@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.broken.injectionTargetError;
 
+import static org.jboss.cdi.tck.cdi.Sections.PIT;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -46,7 +48,7 @@ public class InjectionTargetDefinitionErrorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = PIT, id = "da") })
     public void testAddingDefinitionError() {
     }
 }

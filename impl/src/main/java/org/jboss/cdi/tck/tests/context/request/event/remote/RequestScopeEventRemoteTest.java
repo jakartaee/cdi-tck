@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.request.event.remote;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertTrue;
 
 import javax.ejb.EJB;
@@ -58,7 +59,7 @@ public class RequestScopeEventRemoteTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(groups =  JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "jc") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "jc") })
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
 
         assertTrue(foo.first());

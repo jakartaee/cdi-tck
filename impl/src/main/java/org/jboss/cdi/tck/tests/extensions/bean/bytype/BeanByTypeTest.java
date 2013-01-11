@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.bean.bytype;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEAN_BY_TYPE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -59,7 +60,7 @@ public class BeanByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "aa"), @SpecAssertion(section = "11.3.5", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "aa"), @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "b") })
     public void testGetBeans() {
         Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
         assertEquals(beans.size(), 1);
@@ -67,7 +68,7 @@ public class BeanByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "c") })
     public void testNoBindingImpliesCurrent() {
         Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
         assertEquals(beans.size(), 1);
@@ -75,7 +76,7 @@ public class BeanByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "ab") })
     public void testGetBeansDoesNotResolveAlternatives() {
         Set<Bean<?>> beans = getCurrentManager().getBeans(Connector.class);
         assertEquals(beans.size(), 2);
@@ -88,7 +89,7 @@ public class BeanByTypeTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "da") })
     public void testTypeVariable() {
         TypeVariable<?> t = new TypeVariable<GenericDeclaration>() {
 
@@ -108,13 +109,13 @@ public class BeanByTypeTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "e") })
     public void testSameBindingTwice() {
         getCurrentManager().getBeans(SimpleBean.class, new TameLiteral(), new TameLiteral());
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.5", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "f") })
     public void testNonBindingType() {
         getCurrentManager().getBeans(SimpleBean.class, new NonBindingTypeLiteral());
     }

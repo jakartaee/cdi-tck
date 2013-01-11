@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.application.predestroy;
 
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -47,7 +48,7 @@ public class ApplicationContextPreDestroyTest extends AbstractTest {
     Bar bar;
 
     @Test
-    @SpecAssertion(section = "6.7.3", id = "dh")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "dh")
     public void testApplicationContextActivePreDestroy() {
         Bean<Foo> bean = getUniqueBean(Foo.class);
         CreationalContext<Foo> ctx = getCurrentManager().createCreationalContext(bean);

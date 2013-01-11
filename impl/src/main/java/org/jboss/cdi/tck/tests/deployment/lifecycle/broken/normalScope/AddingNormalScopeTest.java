@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.deployment.lifecycle.broken.normalScope;
 
+import static org.jboss.cdi.tck.cdi.Sections.BBD;
+import static org.jboss.cdi.tck.cdi.Sections.UNPROXYABLE;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +47,7 @@ public class AddingNormalScopeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.1", id = "ac"), @SpecAssertion(section = "3.15", id = "baa") })
+    @SpecAssertions({ @SpecAssertion(section = BBD, id = "ac"), @SpecAssertion(section = UNPROXYABLE, id = "baa") })
     public void testAddingScopeType() {
     }
 

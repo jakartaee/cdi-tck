@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBSERVER_METHOD_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVERS_ASSIGNABILITY;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS;
 import static org.jboss.cdi.tck.tests.event.resolve.typeWithParameters.AbstractObserver.buildActionId;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -48,7 +51,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "b"), @SpecAssertion(section = "11.3.11", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "b"), @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "a") })
     public void testResolvingChecksTypeParameters() {
         verifyObserver(new StringList(), 1, StringListObserver.class);
         verifyObserver(new IntegerList(), 1, IntegerListObserver.class);
@@ -56,14 +59,14 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     }
 
     @Test
-    @SpecAssertion(section = "10.2.1", id = "b")
+    @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "b")
     public void testParameterizedEventTypeAssignableToRawType() {
         verifyObserver(new RawTypeObserver.BoxWithDifferentTypeParameters(), 1, RawTypeObserver.class);
         verifyObserver(new RawTypeObserver.BoxWithObjectTypeParameters(), 1, RawTypeObserver.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "c"), @SpecAssertion(section = "10.4", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "c"), @SpecAssertion(section = OBSERVER_METHODS, id = "aa") })
     public void testObservedEventTypeParameterIsActualType() {
         ActionSequence.reset();
         Foo<String> fooString = new Foo.FooString();
@@ -73,7 +76,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "d") })
     public void testObservedEventTypeParameterIsActualTypeNested() {
         ActionSequence.reset();
         Foo<List<String>> fooStringList = new Foo.FooStringList();
@@ -83,7 +86,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.2.1", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "e") })
     public void testObservedEventTypeParameterIsWildcard() {
 
         ActionSequence.reset();
@@ -107,7 +110,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     }
 
     @Test
-    @SpecAssertion(section = "10.2.1", id = "f")
+    @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "f")
     public void testObservedEventTypeParameterIsTypeVariable() {
 
         ActionSequence.reset();
@@ -128,7 +131,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     }
 
     @Test
-    @SpecAssertion(section = "10.2.1", id = "a")
+    @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "a")
     public void testEventTypeAssignableToATypeVariable() {
 
         ActionSequence.reset();

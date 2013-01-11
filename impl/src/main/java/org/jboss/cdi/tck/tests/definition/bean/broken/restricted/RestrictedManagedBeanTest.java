@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.broken.restricted;
 
+import static org.jboss.cdi.tck.cdi.Sections.EXCEPTIONS;
+import static org.jboss.cdi.tck.cdi.Sections.RESTRICTING_BEAN_TYPES;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +46,7 @@ public class RestrictedManagedBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.2.2", id = "j"), @SpecAssertion(section = "2.8", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "j"), @SpecAssertion(section = EXCEPTIONS, id = "ba") })
     public void testInvalidTypedValueOnManagedBean() {
     }
 

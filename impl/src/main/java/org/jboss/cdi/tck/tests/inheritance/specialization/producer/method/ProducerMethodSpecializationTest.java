@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method;
 
+import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_PRODUCER_METHOD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -54,9 +57,9 @@ public class ProducerMethodSpecializationTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia"), @SpecAssertion(section = "4.3.1", id = "k"),
-            @SpecAssertion(section = "4.3.1", id = "j"), @SpecAssertion(section = "5.5.4", id = "c"),
-            @SpecAssertion(section = "3.3.3", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia"), @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "k"),
+            @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "j"), @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "c"),
+            @SpecAssertion(section = SPECIALIZE_PRODUCER_METHOD, id = "aa") })
     public void testSpecializingProducerMethod() {
 
         Set<Bean<Necklace>> expensiveNecklaceBeans = getBeans(Necklace.class, EXPENSIVE_LITERAL);
@@ -84,7 +87,7 @@ public class ProducerMethodSpecializationTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "4.3.1", id = "ia") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia") })
     public void testSpecializingBeanInjection(@Expensive Product product) {
         assertTrue(product instanceof Necklace);
         assertEquals(product.getPrice(), 10);

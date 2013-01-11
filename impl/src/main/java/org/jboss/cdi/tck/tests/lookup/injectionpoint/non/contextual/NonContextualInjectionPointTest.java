@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.non.contextual;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 import static org.testng.Assert.assertNull;
 
 import javax.naming.InitialContext;
@@ -42,13 +43,13 @@ public class NonContextualInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "aaa")
+    @SpecAssertion(section = INJECTION_POINT, id = "aaa")
     public void testEnumInjectionPointGetBean() {
         assertNull(BasicEnum.FOO.getFoo().getInjectionPoint().getBean());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "5.5.7", id = "aaa")
+    @SpecAssertion(section = INJECTION_POINT, id = "aaa")
     public void testEjbInjectionPointGetBean() throws Exception {
         Bar bar = (Bar) new InitialContext().lookup("java:module/Bar");
         assertNull(bar.getFoo().getInjectionPoint().getBean());

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.alternative.broken.not.alternative.stereotype;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -41,7 +43,7 @@ public class ClassIsNotAlternativeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.1.1", id = "i")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "i")
     public void test() {
     }
 

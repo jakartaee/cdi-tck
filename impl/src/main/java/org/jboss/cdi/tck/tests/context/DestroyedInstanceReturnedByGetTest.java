@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.context;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.CreationalContext;
@@ -39,7 +42,7 @@ public class DestroyedInstanceReturnedByGetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "q"), @SpecAssertion(section = "11.1", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "q"), @SpecAssertion(section = BEAN, id = "aa") })
     public void testDestroyedInstanceMustNotBeReturnedByGet() {
         assert getBeans(MySessionBean.class).size() == 1;
         Bean<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();

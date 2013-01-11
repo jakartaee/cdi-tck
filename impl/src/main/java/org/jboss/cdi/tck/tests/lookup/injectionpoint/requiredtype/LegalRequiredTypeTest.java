@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_INJECTION_POINT_TYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -45,7 +46,7 @@ public class LegalRequiredTypeTest extends AbstractTest {
     Forest forest;
 
     @Test
-    @SpecAssertion(section = "5.2.3", id = "a")
+    @SpecAssertion(section = LEGAL_INJECTION_POINT_TYPES, id = "a")
     public void testLegalRequiredType() {
         forest.ping();
         assertEquals(forest.getAge(), 10);

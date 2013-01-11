@@ -17,6 +17,15 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.lifecycle;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INITIALIZER;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS_DESTRUCTION;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_EJB_REMOVE_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.STATEFUL_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.STATELESS_LIFECYCLE;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.Context;
@@ -53,8 +62,8 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "bb"), @SpecAssertion(section = "6.5.3", id = "b"),
-            @SpecAssertion(section = "12.1", id = "bba") })
+    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bb"), @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "b"),
+            @SpecAssertion(section = BEAN_ARCHIVE, id = "bba") })
     public void testCreateSFSB() throws Exception {
         GrossStadt frankfurt = getInstanceByType(GrossStadt.class);
         Bean<KleinStadt> stadtBean = getBeans(KleinStadt.class).iterator().next();
@@ -82,7 +91,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "6.6.2", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "a") })
     public void testSerializeSFSB() throws Exception {
 
         KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
@@ -96,7 +105,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "bc"), @SpecAssertion(section = "7.3.3", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bc"), @SpecAssertion(section = STATELESS_LIFECYCLE, id = "c") })
     public void testDestroyRemovesSFSB() throws Exception {
         GrossStadt frankfurt = getInstanceByType(GrossStadt.class);
         Bean<KleinStadt> stadtBean = getBeans(KleinStadt.class).iterator().next();
@@ -114,7 +123,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "7.3.2", id = "bc"), @SpecAssertion(section = "3.2.1", id = "dba") })
+    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bc"), @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "dba") })
     public void testRemovedEjbIgnored() {
         KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
         });
@@ -129,7 +138,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "7.3.3", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = STATELESS_LIFECYCLE, id = "b") })
     public void testCreateSLSB() {
         Bean<NeueStadt> stadtBean = getBeans(NeueStadt.class).iterator().next();
         assert stadtBean != null : "Expected a bean for stateful session bean Kassel";
@@ -143,7 +152,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertion(section = "3.10.1", id = "f")
+    @SpecAssertion(section = DECLARING_INITIALIZER, id = "f")
     public void testInitializerMethodsCalledWithCurrentParameterValues() {
         AlteStadt alteStadt = getInstanceByType(AlteStadt.class);
         assert alteStadt != null : "Could not find the AlteStadt bean";
@@ -151,7 +160,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertion(section = "5.5.3", id = "a")
+    @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION, id = "a")
     public void testDependentObjectsDestroyed() {
         Bean<UniStadt> uniStadtBean = getBeans(UniStadt.class).iterator().next();
         CreationalContext<UniStadt> creationalContext = getCurrentManager().createCreationalContext(uniStadtBean);
@@ -163,7 +172,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = "4.2", id = "bab")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "bab")
     public void testDirectSubClassInheritsPostConstructOnSuperclass() throws Exception {
         OrderProcessor.postConstructCalled = false;
         assert getBeans(DirectOrderProcessorLocal.class).size() == 1;
@@ -172,7 +181,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = "4.2", id = "bad")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "bad")
     public void testIndirectSubClassInheritsPostConstructOnSuperclass() throws Exception {
         OrderProcessor.postConstructCalled = false;
         assert getBeans(OrderProcessorLocal.class).size() == 1;
@@ -181,7 +190,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = "4.2", id = "bbb")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "bbb")
     public void testSubClassInheritsPreDestroyOnSuperclass() throws Exception {
         OrderProcessor.preDestroyCalled = false;
         assert getBeans(DirectOrderProcessorLocal.class).size() == 1;
@@ -193,7 +202,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = "4.2", id = "bbd")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "bbd")
     public void testIndirectSubClassInheritsPreDestroyOnSuperclass() throws Exception {
         OrderProcessor.preDestroyCalled = false;
         assert getBeans(OrderProcessorLocal.class).size() == 1;

@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.alternative.selection;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 import static org.testng.Assert.assertEquals;
 
@@ -89,7 +90,7 @@ public class SelectedAlternative05Test extends AbstractTest {
     Charlie charlie;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ea"), @SpecAssertion(section = "5.1.1", id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ea"), @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "fa") })
     public void testManagedBeanWithDefaultPrioritySelected() {
         assertEquals(alpha.assertAvailable(TestBean.class).getId(), Bar.class.getName());
         assertEquals(bravo.assertAvailable(TestBean.class).getId(), Foo.class.getName());
@@ -97,8 +98,8 @@ public class SelectedAlternative05Test extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ec"), @SpecAssertion(section = "5.1.1", id = "ed"),
-            @SpecAssertion(section = "5.1.1", id = "fc"), @SpecAssertion(section = "5.1.1", id = "fd") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ec"), @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ed"),
+            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "fc"), @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "fd") })
     public void testAlternativeProducerSelected() {
         // Producer field
         alpha.assertAvailable(Bar.class, WildLiteral.INSTANCE);
@@ -111,7 +112,7 @@ public class SelectedAlternative05Test extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ef"), @SpecAssertion(section = "5.1.1", id = "ff") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ef"), @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ff") })
     public void testAlternativeStereotypeSelected() {
         alpha.assertAvailable(Baz.class);
         bravo.assertUnsatisfied(Baz.class);

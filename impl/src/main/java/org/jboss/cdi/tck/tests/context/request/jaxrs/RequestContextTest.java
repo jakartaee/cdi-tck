@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.request.jaxrs;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -58,8 +59,8 @@ public class RequestContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "c"), @SpecAssertion(section = "6.7.1", id = "d"),
-            @SpecAssertion(section = "6.7.1", id = "jb") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "c"), @SpecAssertion(section = REQUEST_CONTEXT, id = "d"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "jb") })
     public void testRequestScopeActiveDuringWebServiceInvocation() throws Exception {
 
         WebClient webClient = new WebClient();

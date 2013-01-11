@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.alternative.selection.resource;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 
 import javax.inject.Inject;
@@ -86,7 +87,7 @@ public class ResourceAlternative03Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ee"), @SpecAssertion(section = "5.1.1", id = "fe") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ee"), @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "fe") })
     public void testAlternativeResourceDeselected() {
         alpha.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE);
         bravo.assertUnsatisfied(String.class, ProductionReadyLiteral.INSTANCE);

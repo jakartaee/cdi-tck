@@ -16,6 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATING_SCOPE;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATING_SCOPES;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Set;
@@ -49,54 +55,54 @@ public class PassivatingContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.6.1", id = "ba"), @SpecAssertion(section = "6.6.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ba"), @SpecAssertion(section = PASSIVATING_SCOPES, id = "a") })
     public void testManagedBeanWithSerializableImplementationClassOK() {
         Set<Bean<Jyvaskyla>> beans = getBeans(Jyvaskyla.class);
         assert !beans.isEmpty();
     }
 
     @Test
-    @SpecAssertion(section = "6.6.1", id = "bb")
+    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "bb")
     public void testManagedBeanWithSerializableInterceptorClassOK() {
         Set<Bean<Kokkola>> beans = getBeans(Kokkola.class);
         assert !beans.isEmpty();
     }
 
     @Test
-    @SpecAssertion(section = "6.6.1", id = "bc")
+    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "bc")
     public void testManagedBeanWithSerializableDecoratorOK() {
         Set<Bean<City>> beans = getBeans(City.class);
         assert !beans.isEmpty();
     }
 
     @Test
-    @SpecAssertion(section = "6.6.1", id = "ca")
+    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ca")
     public void testPassivationCapableProducerMethodIsOK() {
         Set<Bean<Record>> beans = getBeans(Record.class);
         assert !beans.isEmpty();
     }
 
     @Test
-    @SpecAssertion(section = "6.6.1", id = "da")
+    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "da")
     public void testPassivationCapableProducerFieldIsOK() {
         Set<Bean<Wheat>> beans = getBeans(Wheat.class);
         assert !beans.isEmpty();
     }
 
     @Test
-    @SpecAssertion(section = "6.6.2", id = "c")
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "c")
     public void testInjectionOfDependentPrimitiveProductIntoNormalBean() {
         getInstanceByType(NumberConsumer.class).ping();
     }
 
     @Test
-    @SpecAssertion(section = "6.6.2", id = "c")
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "c")
     public void testInjectionOfDependentSerializableProductIntoNormalBean() {
         getInstanceByType(SerializableCityConsumer.class).ping();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.6", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATING_SCOPE, id = "a") })
     public void testPassivationOccurs() throws IOException, ClassNotFoundException {
         Kajaani instance = getInstanceByType(Kajaani.class);
         instance.setTheNumber(100);
@@ -108,20 +114,20 @@ public class PassivatingContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.6.4", id = "aa")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "aa")
     public void testBeanWithNonSerializableImplementationInjectedIntoTransientFieldOK() {
         Set<Bean<Joensuu>> beans = getBeans(Joensuu.class);
         assert !beans.isEmpty();
     }
 
     @Test(expectedExceptions = IllegalProductException.class)
-    @SpecAssertion(section = "6.6.4", id = "ea")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ea")
     public void testPassivatingScopeProducerMethodReturnsUnserializableObjectNotOk() {
         getInstanceByType(Television.class).turnOn();
     }
 
     @Test(expectedExceptions = IllegalProductException.class)
-    @SpecAssertion(section = "6.6.4", id = "eb")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "eb")
     public void testNonSerializableProducerFieldDeclaredPassivatingThrowsIllegalProductException() {
         getInstanceByType(HelsinkiNonSerializable.class).ping();
     }

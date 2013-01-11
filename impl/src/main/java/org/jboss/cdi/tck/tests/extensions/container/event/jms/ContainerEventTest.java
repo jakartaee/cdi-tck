@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.container.event.jms;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JMS;
+import static org.jboss.cdi.tck.cdi.Sections.PIT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -56,7 +57,7 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.8", id = "aaba"), @SpecAssertion(section = "11.5.8", id = "abba") })
+    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aaba"), @SpecAssertion(section = PIT, id = "abba") })
     public void testProcessInjectionTargetEventFiredForMessageDrivenBean() {
 
         ProcessInjectionTarget<QueueMessageDrivenBean> event = ProcessInjectionTargetObserver.getMdbEvent();

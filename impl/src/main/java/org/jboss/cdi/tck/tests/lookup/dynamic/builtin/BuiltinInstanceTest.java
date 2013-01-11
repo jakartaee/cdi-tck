@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_INSTANCE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
@@ -51,7 +52,7 @@ public class BuiltinInstanceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.6.2", id = "d")
+    @SpecAssertion(section = BUILTIN_INSTANCE, id = "d")
     public void testScopeOfBuiltinInstance() {
         @SuppressWarnings("serial")
         Bean<Instance<Cow>> bean = getUniqueBean(new TypeLiteral<Instance<Cow>>() {
@@ -60,7 +61,7 @@ public class BuiltinInstanceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.6.2", id = "e")
+    @SpecAssertion(section = BUILTIN_INSTANCE, id = "e")
     public void testNameOfBuiltinInstance() {
         @SuppressWarnings("serial")
         Bean<Instance<Cow>> bean = getUniqueBean(new TypeLiteral<Instance<Cow>>() {
@@ -71,8 +72,8 @@ public class BuiltinInstanceTest extends AbstractTest {
     @SuppressWarnings({ "serial", "rawtypes" })
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     // CDI-232
-    // @SpecAssertion(section = "5.6.2", id = "a")
-    @SpecAssertions({ @SpecAssertion(section = "5.6.2", id = "f") })
+    // @SpecAssertion(section = BUILTIN_INSTANCE, id = "a")
+    @SpecAssertions({ @SpecAssertion(section = BUILTIN_INSTANCE, id = "f") })
     public void testInstanceProvidedForEveryLegalBeanType(Farm farm, Instance<Predator<?>> predatorInstance) {
 
         // Interface
@@ -106,7 +107,7 @@ public class BuiltinInstanceTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "5.6.2", id = "g")
+    @SpecAssertion(section = BUILTIN_INSTANCE, id = "g")
     public void testInstanceIsPassivationCapable(Field field) throws Exception {
 
         assertNotNull(field);

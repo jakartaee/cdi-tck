@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.context;
 
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.NORMAL_SCOPE;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -47,8 +50,8 @@ public class NormalContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "j"), @SpecAssertion(section = "6.2", id = "l"),
-            @SpecAssertion(section = "6.3", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "j"), @SpecAssertion(section = CONTEXT, id = "l"),
+            @SpecAssertion(section = NORMAL_SCOPE, id = "c") })
     public void testGetReturnsExistingInstance() {
         Bean<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
         CreationalContext<MySessionBean> creationalContext = getCurrentManager().createCreationalContext(mySessionBean);
@@ -64,7 +67,7 @@ public class NormalContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "l") })
     public void testGetWithCreationalContextReturnsNewInstance() {
         MyContextual bean = AfterBeanDiscoveryObserver.getBean();
         bean.setShouldReturnNullInstances(false);
@@ -76,7 +79,7 @@ public class NormalContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.2", id = "nb")
+    @SpecAssertion(section = CONTEXT, id = "nb")
     public void testGetMayNotReturnNullUnlessContextualCreateReturnsNull() {
         // The case of no creational context is already tested where a null is
         // returned. Here we just test that the contextual create can return null.
@@ -89,7 +92,7 @@ public class NormalContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.3", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = NORMAL_SCOPE, id = "e") })
     public void testSameNormalScopeBeanInjectedEverywhere() {
         SimpleBeanA instanceOfA = getInstanceByType(SimpleBeanA.class);
         SimpleBeanB instanceOfB = getInstanceByType(SimpleBeanB.class);

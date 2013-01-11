@@ -18,6 +18,14 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.war.modules;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
+import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -88,15 +96,15 @@ public class WebArchiveModulesTest extends AbstractTest {
     Foo foo;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5", id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "bb") })
     public void testExtensionAndContainerEvents() throws Exception {
         // Test extension registration and container lifecycle events
         assertTrue(ContainerEventsObserver.allEventsOk());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bca"), @SpecAssertion(section = "12.1", id = "bcb"),
-            @SpecAssertion(section = "5.2.1", id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bca"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bcb"),
+            @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
     public void testInjectionChainVisibilityAndInterceptorEnablement() {
         // Test injection chain, visibility, SecurityInterceptor is enabled in B only
         SecurityInterceptor.reset();
@@ -107,8 +115,8 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3", id = "aa"), @SpecAssertion(section = "8.2", id = "c"),
-            @SpecAssertion(section = "10.2", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"), @SpecAssertion(section = ENABLED_DECORATORS, id = "c"),
+            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "c") })
     public void testDecoratorAndCrossModuleEventObserver() throws Exception {
         // Test LoggingDecorator is enabled in C only; bean from D observes event from A
         foo.getBar().getBaz().businessOperation1();
@@ -118,8 +126,8 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "aa"), @SpecAssertion(section = "3.3", id = "c"),
-            @SpecAssertion(section = "10.2", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "aa"), @SpecAssertion(section = PRODUCER_METHOD, id = "c"),
+            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "c") })
     public void testProducerAndEventDuringDisposal() throws Exception {
         // Test legacy service producer in D, bean from A is observing event fired during legacy service disposal in D
         Bean<LegacyService> bean = getUniqueBean(LegacyService.class);
@@ -130,7 +138,7 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "cg") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "cg") })
     public void testAlternatives(BarInspector barInspector) throws Exception {
 
         Set<Bean<?>> beans = getCurrentManager().getBeans(AlternativeBar.class);

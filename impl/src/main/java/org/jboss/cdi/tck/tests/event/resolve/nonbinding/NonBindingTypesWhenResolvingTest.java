@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.nonbinding;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_DECORATOR_RESOLUTION;
+
 import java.util.Set;
 
 import javax.enterprise.event.Observes;
@@ -49,7 +51,7 @@ public class NonBindingTypesWhenResolvingTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = "11.3.12", id = "e")
+    @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "e")
     public void testNonBindingTypeAnnotationWhenResolvingFails() {
         Set<ObserverMethod<? super AnEventType>> resolvedObservers = getCurrentManager().resolveObserverMethods(
                 new AnEventType(), new AnimalStereotypeAnnotationLiteral());

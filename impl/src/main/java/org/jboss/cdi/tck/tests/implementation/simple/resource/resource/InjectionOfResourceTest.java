@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.resource;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
+import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -42,7 +45,7 @@ public class InjectionOfResourceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.6.1", id = "bb")
+    @SpecAssertion(section = DECLARING_RESOURCE, id = "bb")
     public void testInjectionOfResource() {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
@@ -51,8 +54,8 @@ public class InjectionOfResourceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "la"), @SpecAssertion(section = "7.3.6", id = "ma"),
-            @SpecAssertion(section = "7.3.6", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "la"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "ma"),
+            @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "o") })
     public void testProduceResourceProxy() {
         Bean<BeanManager> beanManagerBean = getBeans(BeanManager.class, new AnnotationLiteral<Another>() {
         }).iterator().next();
@@ -62,7 +65,7 @@ public class InjectionOfResourceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "mb") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mb") })
     public void testPassivatingResource() throws Exception {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
@@ -72,7 +75,7 @@ public class InjectionOfResourceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_TYPES, id = "aa") })
     public void testResourceBeanTypes() {
         Bean<BeanManager> beanRemote = getBeans(BeanManager.class, new AnnotationLiteral<Another>() {
         }).iterator().next();

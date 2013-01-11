@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
@@ -51,8 +52,8 @@ public class ConversationDeterminationTest extends AbstractTest {
     private URL contextPath;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "da"), @SpecAssertion(section = "6.7.4", id = "db"),
-            @SpecAssertion(section = "6.7.4", id = "dc"), @SpecAssertion(section = "6.7.4", id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "da"), @SpecAssertion(section = CONVERSATION_CONTEXT, id = "db"),
+            @SpecAssertion(section = CONVERSATION_CONTEXT, id = "dc"), @SpecAssertion(section = CONVERSATION_CONTEXT, id = "dd") })
     public void testConversationDetermination() throws Exception {
 
         WebClient webClient = new WebClient();

@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.env;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
+import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 
 import java.io.Serializable;
 
@@ -49,7 +52,7 @@ public class EnvInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.6.1", id = "bb")
+    @SpecAssertion(section = DECLARING_RESOURCE, id = "bb")
     public void testInjectionOfEnv() {
         Bean<GreetingBean> greetingBean = getBeans(GreetingBean.class).iterator().next();
         CreationalContext<GreetingBean> greetingBeanCc = getCurrentManager().createCreationalContext(greetingBean);
@@ -59,8 +62,8 @@ public class EnvInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "la"), @SpecAssertion(section = "7.3.6", id = "ma"),
-            @SpecAssertion(section = "7.3.6", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "la"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "ma"),
+            @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "o") })
     public void testProduceEnvProxy() {
         @SuppressWarnings("serial")
         Bean<String> greetingEnvBean = getBeans(String.class, new AnnotationLiteral<Greeting>() {
@@ -72,7 +75,7 @@ public class EnvInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_TYPES, id = "aa") })
     public void testResourceBeanTypes() {
         @SuppressWarnings("serial")
         Bean<String> greeting = getBeans(String.class, new AnnotationLiteral<Greeting>() {

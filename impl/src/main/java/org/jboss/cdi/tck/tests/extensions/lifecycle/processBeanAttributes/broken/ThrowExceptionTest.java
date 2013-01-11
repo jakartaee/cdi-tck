@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.broken;
 
+import static org.jboss.cdi.tck.cdi.Sections.PBA;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,7 +41,7 @@ public class ThrowExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.10", id = "d")
+    @SpecAssertion(section = PBA, id = "d")
     public void testDeployment() {
     }
 

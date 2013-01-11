@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.visibility;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 
 import javax.inject.Inject;
 
@@ -58,7 +59,7 @@ public class VisibilityOfAnnotatedTypesFromExtensionInBravoBeanArchiveTest exten
     AnnotatedTypeObserverExtension observer;
 
     @Test
-    @SpecAssertion(section = "11.5", id = "b")
+    @SpecAssertion(section = INIT_EVENTS, id = "b")
     public void shouldObserveExpectedAnnotatedTypes() {
         Assert.assertTrue(observer.observed(Beer.class));
         Assert.assertTrue(observer.observed(Soda.class));

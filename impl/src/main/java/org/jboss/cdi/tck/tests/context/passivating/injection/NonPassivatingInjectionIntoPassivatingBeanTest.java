@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.injection;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
 import javax.inject.Inject;
 
@@ -61,7 +62,7 @@ public class NonPassivatingInjectionIntoPassivatingBeanTest extends AbstractTest
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "ia"), @SpecAssertion(section = "6.6.4", id = "ib") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ia"), @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ib") })
     public void test() {
         sheep.run();
         hugeSheep.run();

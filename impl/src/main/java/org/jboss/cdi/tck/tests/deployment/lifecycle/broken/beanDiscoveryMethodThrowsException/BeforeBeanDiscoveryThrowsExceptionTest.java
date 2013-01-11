@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.deployment.lifecycle.broken.beanDiscoveryMethodThrowsException;
 
+import static org.jboss.cdi.tck.cdi.Sections.BBD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +44,7 @@ public class BeforeBeanDiscoveryThrowsExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.1", id = "ag")
+    @SpecAssertion(section = BBD, id = "ag")
     public void testThrowsException() {
     }
 

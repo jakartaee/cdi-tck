@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.broken.processAnnotatedObserverThrowsException;
 
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +44,7 @@ public class ProcessAnnotatedTypeEventThrowsExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.6", id = "e")
+    @SpecAssertion(section = PAT, id = "e")
     public void testProcessAnnotatedTypeEventThrowsExceptionNotOk() {
     }
 }

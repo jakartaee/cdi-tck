@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.lookup.manager.provider.init;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -75,7 +77,7 @@ public class CDIProviderInitTest extends AbstractTest {
     NonBdaAfterDeploymentValidationObserver nonbdaExtension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.3.1", id = "aa"), @SpecAssertion(section = "12.1", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = PROVIDER, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE, id = "f") })
     public void testAccessingBeanManager() {
 
         // War itself

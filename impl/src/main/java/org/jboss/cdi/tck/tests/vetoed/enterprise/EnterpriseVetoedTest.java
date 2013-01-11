@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.vetoed.enterprise;
 
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.VETO;
+import static org.jboss.cdi.tck.cdi.Sections.WHAT_CLASSES_ARE_BEANS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
@@ -54,15 +57,15 @@ public class EnterpriseVetoedTest extends AbstractTest {
     VerifyingExtension verifyingExtension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
-            @SpecAssertion(section = "11.5.6", id = "ia") })
+    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
+            @SpecAssertion(section = PAT, id = "ia") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "11.5.6", id = "ie") })
+    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = PAT, id = "ie") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
         assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);

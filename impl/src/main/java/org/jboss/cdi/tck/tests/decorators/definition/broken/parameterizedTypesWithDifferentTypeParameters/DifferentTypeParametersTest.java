@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.parameterizedTypesWithDifferentTypeParameters;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATED_TYPES;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,7 +49,7 @@ public class DifferentTypeParametersTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.1.3", id = "ab")
+    @SpecAssertion(section = DECORATED_TYPES, id = "ab")
     public void testTypeParametersOnDecoratedTypeAndDelegateTypeDoNotMatch() {
     }
 }

@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.beanmanager;
 
+import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -60,7 +61,7 @@ public class BeanManagerDecoratorTest extends AbstractDecoratorTest {
     private BeanManager manager;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5", id = "be") })
+    @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "be") })
     public void testDecoratorIsNotApplied() {
         Foo payload = new Foo(false);
         manager.fireEvent(payload);

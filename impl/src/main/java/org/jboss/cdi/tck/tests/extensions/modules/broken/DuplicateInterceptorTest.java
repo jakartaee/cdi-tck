@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.modules.broken;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PM;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -47,7 +48,7 @@ public class DuplicateInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.5", id = "e")
+    @SpecAssertion(section = PM, id = "e")
     public void testDeployment() {
     }
 }

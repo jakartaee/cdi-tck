@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.byname.broken.injectionPointWithNamed2;
 
+import static org.jboss.cdi.tck.cdi.Sections.NAMED_AT_INJECTION_POINT;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +40,7 @@ public class NamedNonFieldInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.13", id = "b")
+    @SpecAssertion(section = NAMED_AT_INJECTION_POINT, id = "b")
     // WELD-427
     public void testNamedObserverMethodInjectionPointNotAllowed() throws Exception {
     }

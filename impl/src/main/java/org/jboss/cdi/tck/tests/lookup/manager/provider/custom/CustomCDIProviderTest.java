@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.lookup.manager.provider.custom;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.inject.spi.CDI;
@@ -43,7 +44,7 @@ public class CustomCDIProviderTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION )
-    @SpecAssertion(section = "11.3.1", id = "ba")
+    @SpecAssertion(section = PROVIDER, id = "ba")
     public void testCustomCDIProvider() {
         ForwardingCDIProvider.reset();
         CDI<Object> discovered = CDI.current();

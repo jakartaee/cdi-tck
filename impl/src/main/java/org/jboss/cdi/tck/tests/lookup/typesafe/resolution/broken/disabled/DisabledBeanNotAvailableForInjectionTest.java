@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled;
 
+import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +44,7 @@ public class DisabledBeanNotAvailableForInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.1.4", id = "i")
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "i")
     public void testDeployment() {
         // Test deployment problem
     }

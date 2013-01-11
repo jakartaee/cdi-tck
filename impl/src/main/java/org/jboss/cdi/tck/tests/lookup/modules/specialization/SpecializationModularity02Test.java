@@ -18,6 +18,8 @@
 package org.jboss.cdi.tck.tests.lookup.modules.specialization;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.SELECTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -68,7 +70,7 @@ public class SpecializationModularity02Test extends AbstractTest {
     Alpha alpha;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "5.1", id = "aa"), @SpecAssertion(section = "4.3.1", id = "ia") })
+    @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "aa"), @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia") })
     public void testSpecialization() {
         assertNotNull(alpha);
         assertEquals(alpha.hello(), "HELLO");

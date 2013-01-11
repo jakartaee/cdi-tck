@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.decorators.definition.producer;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATORS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -47,7 +48,7 @@ public class DecoratorNotAppliedToResultOfProducerTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "8", id = "b")
+    @SpecAssertion(section = DECORATORS, id = "b")
     public void testDecoratorNotAppliedToResultOfProducerMethod(ShortTermAccount account,
             @Synthetic ShortTermAccount producedAccount) {
         assertNotNull(account);
@@ -65,7 +66,7 @@ public class DecoratorNotAppliedToResultOfProducerTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "8", id = "b")
+    @SpecAssertion(section = DECORATORS, id = "b")
     public void testDecoratorNotAppliedToResultOfProducerField(DurableAccount account, @Synthetic DurableAccount producedAccount) {
         assertNotNull(account);
         assertNotNull(producedAccount);

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation.observer;
 
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -38,7 +40,7 @@ public class DecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "if") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "if") })
     public void testDecoratorInvocation() {
         ObserverImpl.reset();
         getCurrentManager().fireEvent(new Foo("foo!"));

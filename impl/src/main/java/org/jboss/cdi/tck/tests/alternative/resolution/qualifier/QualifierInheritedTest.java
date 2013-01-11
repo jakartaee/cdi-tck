@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -62,8 +65,8 @@ public class QualifierInheritedTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ca"), @SpecAssertion(section = "5.2.1", id = "la"),
-            @SpecAssertion(section = "4.1", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ca"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "la"),
+            @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aa") })
     public void testResolution() throws Exception {
 
         Bean<?> bean = getCurrentManager().resolve(getCurrentManager().getBeans(Tree.class, TrueLiteral.INSTANCE));

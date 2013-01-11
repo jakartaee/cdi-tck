@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.generic;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INITIALIZER;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class GenericInitializerMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.10.1", id = "ab")
+    @SpecAssertion(section = DECLARING_INITIALIZER, id = "ab")
     public void testGenericInitializerMethodNotAllowed() {
     }
 }

@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.modules.broken;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
 import javax.enterprise.inject.spi.DeploymentException;
 import javax.inject.Inject;
@@ -56,7 +57,7 @@ public class DisabledSessionBeanInjectionNotAvailableTest extends AbstractTest {
     BrokenBar bar;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = "5.1.4", id = "j")
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "j")
     public void testInjection() throws Exception {
     }
 

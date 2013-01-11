@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.dynamic.broken.raw;
 
+import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class RawInstanceProducerMethodInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.6.1", id = "c")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "c")
     public void testDefinitionError() {
         // Test initialization is aborted by the container
     }

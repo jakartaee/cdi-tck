@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEAN;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -77,7 +79,7 @@ public class SyntheticBeanTest extends AbstractTest {
     SerializableOffice serializableOffice;
 
     @Test
-    @SpecAssertion(section = "11.3.24", id = "a")
+    @SpecAssertion(section = BM_OBTAIN_BEAN, id = "a")
     public void testRegisteredBean() {
         Bean<Office> bean = getUniqueBean(Office.class, Large.Literal.INSTANCE);
         assertEquals(bean.getInjectionPoints().size(), 3);
@@ -88,7 +90,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.24", id = "a")
+    @SpecAssertion(section = BM_OBTAIN_BEAN, id = "a")
     public void testSerializableBean() {
         @SuppressWarnings("unchecked")
         Bean<Office> bean = (Bean<Office>) getCurrentManager().resolve(
@@ -98,7 +100,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.3", id = "a")
+    @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a")
     // TODO verify assertions
     public void testSyntheticBeanIntercepted() {
         assertTrue(office.intercepted());
@@ -106,7 +108,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.24", id = "b")
+    @SpecAssertion(section = BM_OBTAIN_BEAN, id = "b")
     public void testSyntheticProducerField() {
         assertNotNull(lion);
         lion.foo();
@@ -115,7 +117,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.24", id = "b")
+    @SpecAssertion(section = BM_OBTAIN_BEAN, id = "b")
     public void testSyntheticProducerMethod() {
         assertNotNull(tiger);
         tiger.foo();
@@ -124,7 +126,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.3.24", id = "a")
+    @SpecAssertion(section = BM_OBTAIN_BEAN, id = "a")
     public void testSyntheticDecorator() {
         assertTrue(truck.decorated());
     }

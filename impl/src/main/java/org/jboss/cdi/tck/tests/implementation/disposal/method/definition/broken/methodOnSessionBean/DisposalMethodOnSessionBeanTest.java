@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.methodOnSessionBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -42,7 +44,7 @@ public class DisposalMethodOnSessionBeanTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "3.5", id = "d"), @SpecAssertion(section = "3.5.2", id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD, id = "d"), @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "fa") })
     public void testDisposalMethodNotBusinessOrStatic() {
     }
 

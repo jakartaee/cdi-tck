@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.dependentWithPublicField;
 
+import static org.jboss.cdi.tck.cdi.Sections.EXCEPTIONS;
+import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEANS;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +41,7 @@ public class DependentWithPublicFieldTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "fc"), @SpecAssertion(section = "2.8", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEANS, id = "fc"), @SpecAssertion(section = EXCEPTIONS, id = "ba") })
     public void testNonDependentScopedBeanCanNotHavePublicField() {
     }
 

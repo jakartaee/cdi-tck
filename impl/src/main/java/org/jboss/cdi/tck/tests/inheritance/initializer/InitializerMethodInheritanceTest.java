@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.inheritance.initializer;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.testng.Assert.assertEquals;
 
 import java.math.BigDecimal;
@@ -53,27 +54,27 @@ public class InitializerMethodInheritanceTest extends AbstractTest {
     BigDecimal expensive;
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "4.2", id = "dm")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dm")
     public void testManagedBeanDirectlyInheritsInitializer(@FirstLevel Citrus citrus) {
         assertEquals(citrus.getPrice(), cheap);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "4.2", id = "do")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "do")
     public void testManagedBeanIndirectlyInheritsInitializer(@SecondLevel Orange orange, @SecondLevel Lemon lemon) {
         assertEquals(orange.getPrice(), cheap);
         assertEquals(lemon.getPrice(), expensive);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "4.2", id = "dn")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dn")
     public void testSessionBeanDirectlyInheritsInitializer(@FirstLevel CitrusEjb citrus, @FirstLevel AppleEjb apple) {
         assertEquals(citrus.getPrice(), cheap);
         assertEquals(apple.getPrice(), expensive);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "4.2", id = "dp")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dp")
     public void testSessionBeanIndirectlyInheritsInitializer(@SecondLevel OrangeEjb orange) {
         assertEquals(orange.getPrice(), cheap);
     }

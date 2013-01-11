@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.alternative.selection;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 
 import javax.inject.Inject;
@@ -84,7 +85,7 @@ public class SelectedAlternative01Test extends AbstractTest {
     Charlie charlie;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ba") })
     public void testAlternativeManagedBeanSelected() {
         alpha.assertAvailable(Foo.class);
         bravo.assertAvailable(Foo.class);
@@ -92,7 +93,7 @@ public class SelectedAlternative01Test extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "bc"), @SpecAssertion(section = "5.1.1", id = "bd") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "bc"), @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "bd") })
     public void testAlternativeProducerSelected() {
         // Producer field
         alpha.assertAvailable(Bar.class, WildLiteral.INSTANCE);
@@ -105,7 +106,7 @@ public class SelectedAlternative01Test extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "bf") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "bf") })
     public void testAlternativeStereotypeSelected() {
         alpha.assertAvailable(Baz.class);
         bravo.assertAvailable(Baz.class);

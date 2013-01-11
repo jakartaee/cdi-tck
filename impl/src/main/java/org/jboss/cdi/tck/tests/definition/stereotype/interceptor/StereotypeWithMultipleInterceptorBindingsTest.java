@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.interceptor;
 
+import static org.jboss.cdi.tck.cdi.Sections.SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -50,7 +52,7 @@ public class StereotypeWithMultipleInterceptorBindingsTest extends AbstractTest 
     Foo foo;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.2", id = "a0"), @SpecAssertion(section = "2.7.1.2", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "a0"), @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "c") })
     public void testMultipleInterceptorBindings() {
         foo.ping();
         Assert.assertTrue(foo.inspections.contains(AlphaInterceptor.class.getName()));

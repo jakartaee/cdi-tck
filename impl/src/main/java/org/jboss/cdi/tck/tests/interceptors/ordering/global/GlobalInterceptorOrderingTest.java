@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.interceptors.ordering.global;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -88,9 +89,9 @@ public class GlobalInterceptorOrderingTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "ba"), @SpecAssertion(section = "9.4", id = "bb"),
-            @SpecAssertion(section = "9.4", id = "bc"), @SpecAssertion(section = "9.4", id = "bd"),
-            @SpecAssertion(section = "9.4", id = "be") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "ba"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "bb"),
+            @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "bc"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "bd"),
+            @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "be") })
     public void testOrderingInWebInfClasses(Dao dao) {
 
         assertNotNull(dao);
@@ -121,7 +122,7 @@ public class GlobalInterceptorOrderingTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "ba"), @SpecAssertion(section = "9.4", id = "bd") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "ba"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "bd") })
     public void testOrderingInLib(Service service) {
 
         assertNotNull(service);

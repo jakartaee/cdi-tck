@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.interceptors;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BBD;
+import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -71,16 +73,16 @@ public class InterceptorExtensionTest extends AbstractTest {
     private NumberSource numberSource;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5", id = "b"), @SpecAssertion(section = "11.5", id = "bb"),
-            @SpecAssertion(section = "11.5.1", id = "ae") })
+    @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
+            @SpecAssertion(section = BBD, id = "ae") })
     public void testInterceptorCalled() {
         assertEquals(2, numberSource.value());
         assertTrue(IncrementingInterceptor.isDoAroundCalled());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5", id = "b"), @SpecAssertion(section = "11.5", id = "bb"),
-            @SpecAssertion(section = "11.5.1", id = "ae") })
+    @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
+            @SpecAssertion(section = BBD, id = "ae") })
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void testLifecycleInterceptor() {
 

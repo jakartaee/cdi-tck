@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.reference.ambiguous;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTABLE_REFERENCE;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.spi.Bean;
@@ -46,7 +48,7 @@ public class AmbiguousInjectableReferenceTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test(expectedExceptions = AmbiguousResolutionException.class)
-    @SpecAssertions({ @SpecAssertion(section = "11.3.3", id = "bc") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INJECTABLE_REFERENCE, id = "bc") })
     public void testUnsatisfiedReference() {
         Bean<SimpleBean> bean = this.getBeans(SimpleBean.class).iterator().next();
         AmbiguousInjectionPoint injectionPoint = new AmbiguousInjectionPoint(bean);

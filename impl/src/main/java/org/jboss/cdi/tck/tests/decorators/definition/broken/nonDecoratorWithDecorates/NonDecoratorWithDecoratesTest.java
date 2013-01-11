@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nonDecoratorWithDecorates;
 
+import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +44,7 @@ public class NonDecoratorWithDecoratesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.1.2", id = "cg")
+    @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "cg")
     public void testNonDecoratorWithDecoratesAnnotationNotOK() {
     }
 }

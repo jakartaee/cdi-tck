@@ -16,6 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.implicit;
 
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_EVENT;
+import static org.jboss.cdi.tck.cdi.Sections.EVENT_TYPES_AND_QUALIFIER_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -54,7 +58,7 @@ public class ImplicitEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.3.2", id = "a")
+    @SpecAssertion(section = BUILTIN_EVENT, id = "a")
     public void testImplicitEventExistsForEachEventType() {
         assert getBeans(STUDENT_REGISTERED_EVENT_LITERAL).size() == 1;
         assert getBeans(COURSE_FULL_EVENT_LITERAL).size() == 1;
@@ -62,12 +66,12 @@ public class ImplicitEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.3.2", id = "b")
+    @SpecAssertion(section = BUILTIN_EVENT, id = "b")
     public void testImplicitEventHasAllExplicitBindingTypes() {
         assert getBeans(AWARD_EVENT_LITERAL, AnyLiteral.INSTANCE, new HonorsLiteral()).size() == 1;
     }
 
-    @SpecAssertion(section = "10.1", id = "i")
+    @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "i")
     public void testImplicitEventHasAnyBinding() {
         assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
         assert getUniqueBean(COURSE_FULL_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
@@ -78,19 +82,19 @@ public class ImplicitEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.3.2", id = "d")
+    @SpecAssertion(section = BUILTIN_EVENT, id = "d")
     public void testImplicitEventHasDependentScope() {
         assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getScope().equals(Dependent.class);
     }
 
     @Test
-    @SpecAssertion(section = "10.3.2", id = "e")
+    @SpecAssertion(section = BUILTIN_EVENT, id = "e")
     public void testImplicitEventHasNoName() {
         assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getName() == null;
     }
 
     @Test
-    @SpecAssertion(section = "10.3.2", id = "f")
+    @SpecAssertion(section = BUILTIN_EVENT, id = "f")
     public void testImplicitEventHasImplementation() {
         StudentDirectory directory = getInstanceByType(StudentDirectory.class);
         directory.reset();
@@ -105,7 +109,7 @@ public class ImplicitEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.3.2", id = "g"), @SpecAssertion(section = "6.6.2", id = "e") // TODO break up
+    @SpecAssertions({ @SpecAssertion(section = BUILTIN_EVENT, id = "g"), @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "e") // TODO break up
                                                                                                                 // this
                                                                                                                 // assertion
                                                                                                                 // into smaller

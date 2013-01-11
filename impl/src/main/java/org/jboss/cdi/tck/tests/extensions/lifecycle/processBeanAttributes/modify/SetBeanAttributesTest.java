@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modify;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PBA;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -53,7 +54,7 @@ public class SetBeanAttributesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.10", id = "bc"), @SpecAssertion(section = "11.5.10", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = PBA, id = "bc"), @SpecAssertion(section = PBA, id = "c") })
     public void testBeanModified() {
 
         assertEquals(getCurrentManager().getBeans(Cat.class, DefaultLiteral.INSTANCE).size(), 0);

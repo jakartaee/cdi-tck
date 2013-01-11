@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.event.observer.extension;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 
 import java.lang.annotation.Annotation;
 
@@ -50,19 +51,19 @@ public class BeanManagerObserverNotificationTest extends AbstractObserverNotific
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "fd")
+    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fd")
     public void testNoQualifier() {
         testNoQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "fd")
+    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fd")
     public void testSingleQualifier() {
         testSingleQualifierInternal();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.5", id = "fd")
+    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fd")
     public void testMultipleQualifiers() {
         testMultipleQualifiersInternal();
     }

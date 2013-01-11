@@ -17,6 +17,14 @@
 package org.jboss.cdi.tck.tests.definition.bean.custom;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_INSTANCE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
+import static org.jboss.cdi.tck.cdi.Sections.NAME_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.NULL;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -40,38 +48,38 @@ public class CustomBeanImplementationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "k"), @SpecAssertion(section = "5.1.4", id = "q") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "k"), @SpecAssertion(section = INTER_MODULE_INJECTION, id = "q") })
     public void testGetBeanClassCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetBeanClassCalled();
     }
 
     @Test
-    @SpecAssertion(section = "5.1.1", id = "k")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "k")
     public void testGetStereotypesCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetStereotypesCalled();
     }
 
     @Test
-    @SpecAssertion(section = "5.1.1", id = "k")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "k")
     public void testIsPolicyCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isAlternativeCalled();
     }
 
     @Test
-    @SpecAssertion(section = "5.2.1", id = "na")
+    @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "na")
     public void testGetTypesCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetTypesCalled();
     }
 
     @Test
-    @SpecAssertion(section = "5.2.1", id = "nb")
+    @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "nb")
     public void testGetBindingsCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetQualifiersCalled();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "b"), @SpecAssertion(section = "6.6.4", id = "ga"),
-            @SpecAssertion(section = "6.6.4", id = "gb") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "b"), @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ga"),
+            @SpecAssertion(section = PASSIVATION_VALIDATION, id = "gb") })
     public void testGetInjectionPointsCalled(Bar bar) {
         assert AfterBeanDiscoveryObserver.integerBean.isGetInjectionPointsCalled();
         assert FooBean.barInjectionPoint.isTransientCalled();
@@ -80,19 +88,19 @@ public class CustomBeanImplementationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.5", id = "c")
+    @SpecAssertion(section = NULL, id = "c")
     public void testIsNullableCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isNullableCalled();
     }
 
     @Test
-    @SpecAssertion(section = "5.3", id = "e")
+    @SpecAssertion(section = NAME_RESOLUTION, id = "e")
     public void testGetNameCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetNameCalled();
     }
 
     @Test
-    @SpecAssertion(section = "6.5.2", id = "e")
+    @SpecAssertion(section = CONTEXTUAL_INSTANCE, id = "e")
     public void testGetScopeTypeCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetScopeCalled();
     }

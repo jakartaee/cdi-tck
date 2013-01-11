@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.interceptor;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_FIELD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class ProducerFieldOnInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.4.2", id = "ia")
+    @SpecAssertion(section = DECLARING_PRODUCER_FIELD, id = "ia")
     // WELD-419
     public void testProducerFieldNotAllowedOnInterceptor() {
     }

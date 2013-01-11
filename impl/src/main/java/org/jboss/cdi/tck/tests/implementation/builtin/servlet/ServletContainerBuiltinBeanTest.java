@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.builtin.servlet;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ADDITIONAL_BUILTIN_BEANS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -57,8 +58,8 @@ public class ServletContainerBuiltinBeanTest extends AbstractTest {
     LowercaseConverter lowercaseConverter;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "da"), @SpecAssertion(section = "3.7", id = "db"),
-            @SpecAssertion(section = "3.7", id = "dc") })
+    @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "da"), @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "db"),
+            @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "dc") })
     public void testBuiltinBeansAvailableForInjection() {
 
         String result = lowercaseConverter.convert("Foo");
@@ -74,8 +75,8 @@ public class ServletContainerBuiltinBeanTest extends AbstractTest {
 
     @RunAsClient
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "da"), @SpecAssertion(section = "3.7", id = "db"),
-            @SpecAssertion(section = "3.7", id = "dc") })
+    @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "da"), @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "db"),
+            @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "dc") })
     public void testBuiltinBeansFromClient(@ArquillianResource URL contextPath) throws Exception {
 
         WebClient client = new WebClient();

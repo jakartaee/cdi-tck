@@ -32,7 +32,7 @@ public class StereoTypeWithBindingTypesTest extends AbstractTest {
     }
 
     // @Test
-    // @SpecAssertion(section = "2.7.1.3", id = "b") now untestable
+    // @SpecAssertion(section = NAMED_STEREOTYPE, id = "b") now untestable
     public void testStereotypeWithBindingTypes() {
         assert false;
     }

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.visibility;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -47,7 +50,7 @@ public class JarToJarAlphaVisibilityTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "12.1", id = "bcb"), @SpecAssertion(section = "5.2.1", id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bcb"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
     public void testDeployment() {
         // noop
     }

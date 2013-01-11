@@ -50,8 +50,8 @@ public class AfterBeanDiscoveryFailureTest extends AbstractTest {
     }
 
     @Test(groups = { REWRITE })
-    // @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "a"), @SpecAssertion(section = "12.2", id = "e"),
-    // @SpecAssertion(section = "12.2", id = "f") })
+    // @SpecAssertions({ @SpecAssertion(section = ABD, id = "a"), @SpecAssertion(section = INITIALIZATION, id = "e"),
+    // @SpecAssertion(section = INITIALIZATION, id = "f") })
     // WBRI-312
     public void testDeploymentFailsDuringValidation() {
     }

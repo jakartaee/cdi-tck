@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.war;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.testng.Assert.assertNotNull;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +45,7 @@ public class BeansDescriptorAlternativeLocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "12.1", id = "abb")
+    @SpecAssertion(section = BEAN_ARCHIVE, id = "abb")
     public void testAlternativeLocation() {
         // Injection works
         assertNotNull(beanManager);

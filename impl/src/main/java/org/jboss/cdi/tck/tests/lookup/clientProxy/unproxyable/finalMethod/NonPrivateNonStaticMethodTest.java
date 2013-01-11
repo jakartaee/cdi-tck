@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalMethod;
 
+import static org.jboss.cdi.tck.cdi.Sections.UNPROXYABLE;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +40,7 @@ public class NonPrivateNonStaticMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.15", id = "bba")
+    @SpecAssertion(section = UNPROXYABLE, id = "bba")
     public void testClassWithPublicFinalMethodCannotBeProxied() {
     }
 }

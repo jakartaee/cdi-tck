@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.custom;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -52,7 +53,7 @@ public class CustomPassivatingScopeCalledWithSerializableParametersTest extends 
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "s") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "s") })
     public void testWithImplicitBean(Instance<Foo> foo, ClusteringExtension extension) {
         ClusterContext ctx = extension.getContext();
         ctx.reset();
@@ -64,7 +65,7 @@ public class CustomPassivatingScopeCalledWithSerializableParametersTest extends 
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "6.2", id = "s") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "s") })
     public void testWithExtensionProvidedBean(Instance<Bar> bar, ClusteringExtension extension) {
         ClusterContext ctx = extension.getContext();
         ctx.reset();

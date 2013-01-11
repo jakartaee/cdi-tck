@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery.broken;
 
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class WithAnnotationsAppliedToIllegalContainerLifecycleEventParameterTest
     }
 
     @Test
-    @SpecAssertion(section = "11.5.6", id = "h")
+    @SpecAssertion(section = PAT, id = "h")
     public void testDeploymentFails() {
     }
 

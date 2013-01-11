@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
+import static org.jboss.cdi.tck.cdi.Sections.ASSIGNABLE_PARAMETERS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -49,8 +50,8 @@ public class ParameterizedTypesInjectionToParameterizedWithWildcardTest extends 
     ConsumerWildcard consumer;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.4", id = "c"), @SpecAssertion(section = "5.2.4", id = "da"),
-            @SpecAssertion(section = "5.2.4", id = "db") })
+    @SpecAssertions({ @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "c"), @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "da"),
+            @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "db") })
     public void testInjection() {
         assertNotNull(consumer.getDao());
         assertEquals(consumer.getDao().getId(), Dao.class.getName());

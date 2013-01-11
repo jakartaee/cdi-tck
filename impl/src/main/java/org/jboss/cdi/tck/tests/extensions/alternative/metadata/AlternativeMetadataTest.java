@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
+import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -59,7 +60,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "ha")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ha")
     public void testGetBaseTypeUsedToDetermineTypeOfInjectionPoint() {
         // The base type of the fruit injection point is overridden to
         // TropicalFruit
@@ -69,7 +70,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "hb")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "hb")
     public void testGetBaseTypeUsedToDetermineTypeOfInitializerInjectionPoint() {
         assertEquals(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getInitializerFruit().getMetadata().getType(),
                 TropicalFruit.class);
@@ -77,7 +78,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "ka")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ka")
     public void testGetTypeClosureUsed() {
         assertTrue(GroceryWrapper.isGetTypeClosureUsed());
         // should be [Object, Grocery] instead of [Object, Shop, Grocery]
@@ -86,14 +87,14 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "l")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "l")
     public void testGetAnnotationUsedForGettingScopeInformation() {
         // @ApplicationScoped is overridden by @RequestScoped
         assertEquals(getBeans(Grocery.class, AnyLiteral.INSTANCE).iterator().next().getScope(), RequestScoped.class);
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "m")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "m")
     public void testGetAnnotationUsedForGettingQualifierInformation() {
         // @Expensive is overridden by @Cheap
         assertEquals(getBeans(Grocery.class, new CheapLiteral()).size(), 1);
@@ -101,14 +102,14 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "n")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "n")
     public void testGetAnnotationUsedForGettingStereotypeInformation() {
         // The extension adds a stereotype with @Named qualifier
         assertNotNull(getInstanceByName("grocery"));
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "p")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "p")
     public void testGetAnnotationUsedForGettingInterceptorInformation() {
         // The extension adds the GroceryInterceptorBinding
         Grocery grocery = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE);
@@ -116,19 +117,19 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "r")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "r")
     public void testPreviouslyNonInjectAnnotatedConstructorIsUsed() {
         assertTrue(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isConstructorWithParameterUsed());
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "t")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "t")
     public void testPreviouslyNonInjectAnnotatedFieldIsInjected() {
         assertTrue(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isVegetablesInjected());
     }
 
     @SuppressWarnings("unchecked")
-    @SpecAssertion(section = "11.4", id = "u")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "u")
     public void testExtraQualifierIsAppliedToInjectedField() {
         assertNotNull(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getFruit());
         Set<Annotation> qualifiers = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getFruit().getMetadata()
@@ -138,14 +139,14 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "v")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "v")
     public void testProducesCreatesProducerField() {
         // The extension adds @Producer to the bread field
         assertEquals(getBeans(Bread.class, AnyLiteral.INSTANCE).size(), 1);
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "w")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "w")
     public void testInjectCreatesInitializerMethod() {
         // The extension adds @Inject to the nonInjectAnnotatedInitializer()
         // method
@@ -154,7 +155,7 @@ public class AlternativeMetadataTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = "11.4", id = "x")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "x")
     public void testQualifierAddedToInitializerParameter() {
         // The @Cheap qualifier is added to the method parameter
         Set<Annotation> qualifiers = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getInitializerFruit().getMetadata()
@@ -163,14 +164,14 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "y")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "y")
     public void testProducesCreatesProducerMethod() {
         // The extension adds @Producer to the getMilk() method
         assertEquals(getBeans(Milk.class, AnyLiteral.INSTANCE).size(), 1);
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "z")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "z")
     public void testQualifierIsAppliedToProducerMethod() {
         // The extension adds @Expensive to the getMilk() method
         assertEquals(getBeans(Yogurt.class, new ExpensiveLiteral()).size(), 1);
@@ -179,7 +180,7 @@ public class AlternativeMetadataTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = "11.4", id = "aa")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "aa")
     public void testQualifierIsAppliedToProducerMethodParameter() {
         // The @Cheap qualifier is added to the method parameter
         Set<Annotation> qualifiers = getInstanceByType(Yogurt.class, AnyLiteral.INSTANCE).getFruit().getMetadata()
@@ -190,7 +191,7 @@ public class AlternativeMetadataTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.4", id = "ae"), @SpecAssertion(section = "11.4", id = "ag") })
+    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ae"), @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ag") })
     public void testObserverMethod() {
         getCurrentManager().fireEvent(new Milk(true));
         Milk event = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getObserverEvent();
@@ -202,7 +203,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.4", id = "af")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "af")
     public void testExtraQualifierAppliedToObservesMethodParameter() {
         getCurrentManager().fireEvent(new Bread(true));
         // normally, the event would be observer, however the extension adds the
@@ -212,7 +213,7 @@ public class AlternativeMetadataTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "11.4", id = "h")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "h")
     public void testContainerUsesOperationsOfAnnotatedNotReflectionApi() {
         assertEquals(getBeans(Sausage.class, AnyLiteral.INSTANCE).size(), 1);
         // Overriding annotated type has no methods and fields and thus there are no cheap and expensive sausages

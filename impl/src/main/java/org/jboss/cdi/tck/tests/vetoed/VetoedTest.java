@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.vetoed;
 
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.VETO;
+import static org.jboss.cdi.tck.cdi.Sections.WHAT_CLASSES_ARE_BEANS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
@@ -67,8 +70,8 @@ public class VetoedTest extends AbstractTest {
     VerifyingExtension verifyingExtension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
-            @SpecAssertion(section = "11.5.6", id = "ia"), @SpecAssertion(section = "11.5.6", id = "ib") })
+    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
+            @SpecAssertion(section = PAT, id = "ia"), @SpecAssertion(section = PAT, id = "ib") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
@@ -77,8 +80,8 @@ public class VetoedTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
-            @SpecAssertion(section = "11.5.6", id = "id") })
+    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
+            @SpecAssertion(section = PAT, id = "id") })
     public void testVetoedAnnotation() {
         assertFalse(verifyingExtension.getClasses().contains(Predator.class));
         assertFalse(verifyingExtension.getClasses().contains(MissileBinding.class));
@@ -97,8 +100,8 @@ public class VetoedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
-            @SpecAssertion(section = "11.5.6", id = "ic") })
+    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
+            @SpecAssertion(section = PAT, id = "ic") })
     public void testVetoedEnum() {
         assertFalse(verifyingExtension.getClasses().contains(Type.class));
         assertNull(Type.A.getBeanManager());
@@ -106,8 +109,8 @@ public class VetoedTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "3.1.1", id = "h"),
-            @SpecAssertion(section = "11.5.6", id = "ii") })
+    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
+            @SpecAssertion(section = PAT, id = "ii") })
     public void testPackageLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
         assertFalse(verifyingExtension.getClasses().contains(Fish.class));
@@ -120,8 +123,8 @@ public class VetoedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.12", id = "a"), @SpecAssertion(section = "11.5.6", id = "ie"),
-            @SpecAssertion(section = "11.5.6", id = "if") })
+    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = PAT, id = "ie"),
+            @SpecAssertion(section = PAT, id = "if") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
         assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);

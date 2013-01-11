@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.multiParams;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_DISPOSED_PARAMETER;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +41,7 @@ public class MultipleDisposeParametersDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.5.1", id = "a"), @SpecAssertion(section = "3.5.2", id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "a"), @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "ba") })
     public void testMultipleDisposeParameters() {
     }
 

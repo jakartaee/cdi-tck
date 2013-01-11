@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.modify;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PIP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
@@ -70,15 +71,15 @@ public class InjectionPointOverridingTest extends AbstractTest {
     Dog dog;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.7", id = "a"), @SpecAssertion(section = "11.5.7", id = "bb"),
-            @SpecAssertion(section = "11.5.7", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "bb"),
+            @SpecAssertion(section = PIP, id = "c") })
     public void testOverridingFieldInjectionPoint() {
         assertTrue(bean.getDog() instanceof Hound);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.7", id = "a"), @SpecAssertion(section = "11.5.7", id = "bb"),
-            @SpecAssertion(section = "11.5.7", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "bb"),
+            @SpecAssertion(section = PIP, id = "c") })
     public void testDelegateInjectionPoint() {
         assertNotNull(hound);
         assertTrue(hound.decorated());
@@ -87,8 +88,8 @@ public class InjectionPointOverridingTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.7", id = "a"), @SpecAssertion(section = "11.5.7", id = "bb"),
-            @SpecAssertion(section = "11.5.7", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "bb"),
+            @SpecAssertion(section = PIP, id = "c") })
     public void testNewInjectionPointDiscovered() {
         assertEquals(getBeans(Cat.class, NewLiteral.INSTANCE).size(), 1);
         assertNotNull(bean.getCat());

@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.alternative.selection;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 import static org.testng.Assert.assertEquals;
 
@@ -72,7 +73,7 @@ public class SelectedAlternative03Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "5.2.2", id = "ca"), @SpecAssertion(section = "5.2.2", id = "cc") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ca"), @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cc") })
     public void testDependencyResolvable() {
         assertEquals(alpha.assertAvailable(TestBean.class).getId(), Foo.class.getName());
         assertEquals(bravo.assertAvailable(TestBean.class).getId(), Foo.class.getName());

@@ -16,6 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
+import static org.jboss.cdi.tck.cdi.Sections.ASSIGNABLE_PARAMETERS;
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_INJECTION_POINT_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -44,8 +48,8 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "kb"), @SpecAssertion(section = "2.2.1", id = "f"),
-            @SpecAssertion(section = "2.2.1", id = "g"), @SpecAssertion(section = "5.2.4", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "kb"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "f"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "g"), @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "a") })
     public void testAssignabilityToRawType() {
         // Dao, DaoProducer.getDao(), DaoProducer.getRawDao and ObjectDao
         // IntegerDao is not assignable to the raw required type Dao
@@ -53,7 +57,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.4", id = "ba")
+    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "ba")
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithActualTypes() {
         assert getBeans(new TypeLiteral<Map<Integer, Integer>>() {
         }).size() == 2;
@@ -62,7 +66,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.4", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "c") })
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcards() {
         assert getBeans(new TypeLiteral<HashMap<? extends Number, ? super Integer>>() {
         }).size() == 1;
@@ -71,13 +75,13 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.3", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = LEGAL_INJECTION_POINT_TYPES, id = "b") })
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcardsAtInjectionPoint() {
         assert getInstanceByType(InjectedBean.class).getMap() instanceof IntegerHashMap;
     }
 
     @Test
-    @SpecAssertion(section = "5.2.4", id = "da")
+    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "da")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards() {
         Set<Bean<Result<? extends Throwable, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Throwable, ? super Exception>>() {
         });
@@ -86,7 +90,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.4", id = "db")
+    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "db")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards2() {
         Set<Bean<Result<? extends Exception, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Exception, ? super Exception>>() {
         });
@@ -95,7 +99,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.4", id = "e")
+    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "e")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithActualTypes() {
         Set<Bean<Result<Exception, Exception>>> beans = getBeans(new TypeLiteral<Result<Exception, Exception>>() {
         });
@@ -105,7 +109,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "5.2.4", id = "f")
+    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "f")
     public <T1 extends Exception, T2 extends Exception, T3, T4> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
         Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>() {
         });

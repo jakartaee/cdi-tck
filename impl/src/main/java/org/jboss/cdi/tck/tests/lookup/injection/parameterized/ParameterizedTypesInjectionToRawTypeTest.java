@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
+import static org.jboss.cdi.tck.cdi.Sections.ASSIGNABLE_PARAMETERS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -51,7 +52,7 @@ public class ParameterizedTypesInjectionToRawTypeTest extends AbstractTest {
     ConsumerRawObject consumerObject;
 
     @Test
-    @SpecAssertion(section = "5.2.4", id = "a")
+    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "a")
     public void testInjection() {
 
         assertNotNull(consumer);

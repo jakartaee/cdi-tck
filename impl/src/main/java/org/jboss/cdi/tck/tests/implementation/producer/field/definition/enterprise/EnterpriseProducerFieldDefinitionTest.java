@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD;
 
 import javax.enterprise.util.AnnotationLiteral;
 
@@ -38,7 +39,7 @@ public class EnterpriseProducerFieldDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "3.4", id = "ab"), @SpecAssertion(section = "3.4", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "ab"), @SpecAssertion(section = PRODUCER_FIELD, id = "ca") })
     public void testStaticProducerField() {
         assert getInstanceByType(Egg.class, new AnnotationLiteral<Foo>() {
         }) != null;

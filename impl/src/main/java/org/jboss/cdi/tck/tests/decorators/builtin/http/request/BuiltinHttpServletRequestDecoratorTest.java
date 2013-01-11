@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.decorators.builtin.http.request;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
@@ -69,7 +70,7 @@ public class BuiltinHttpServletRequestDecoratorTest extends AbstractDecoratorTes
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "aci") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "aci") })
     public void testDecoratorIsResolved() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.<Type> singleton(HttpServletRequest.class));
@@ -82,7 +83,7 @@ public class BuiltinHttpServletRequestDecoratorTest extends AbstractDecoratorTes
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "aci") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "aci") })
     public void testDecoratorIsInvoked() {
         assertNull(httpServletRequest.getSession());
         assertEquals(httpServletRequest.getLocale(), Locale.SIMPLIFIED_CHINESE);

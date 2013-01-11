@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.order;
 
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class LifecycleInterceptorOrderTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.4", id = "fa")
+    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "fa")
     public void testLifecycleCallbackInvocationOrder() {
 
         ActionSequence.reset();

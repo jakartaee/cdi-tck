@@ -17,6 +17,10 @@
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
+import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -48,8 +52,8 @@ public class WebServiceResourceTest extends AbstractTest {
 
     @RunAsClient
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "ee"), @SpecAssertion(section = "5.5.2", id = "aq"),
-            @SpecAssertion(section = "5.5.2", id = "ar") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ee"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "aq"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ar") })
     public void testInjectionIntoWebServiceEndpoint(@ArquillianResource URL contextPath) throws Exception {
         URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
         SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(ObjectFactory.TARGET_NS, "SheepWS"));
@@ -58,7 +62,7 @@ public class WebServiceResourceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "ff"), @SpecAssertion(section = "3.6.2", id = "ae") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "ff"), @SpecAssertion(section = RESOURCE_TYPES, id = "ae") })
     public void testResourceBeanTypes() {
         Bean<SheepWS> sheepWsBean = getUniqueBean(SheepWS.class);
         assertEquals(sheepWsBean.getTypes().size(), 3);
@@ -75,7 +79,7 @@ public class WebServiceResourceTest extends AbstractTest {
     // Not possible right now
     // See ARQ-540
     // @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    // @SpecAssertion(section = "3.6.1", id = "ff")
+    // @SpecAssertion(section = DECLARING_RESOURCE, id = "ff")
     // public void testResourceInvocation(@Black SheepWS sheepWS) {
     // assertNotNull(sheepWS);
     // assertTrue(sheepWS.isSheepInjected());

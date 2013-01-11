@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.not.bean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -40,7 +41,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "ga")
+    @SpecAssertion(section = INJECTION_POINT, id = "ga")
     public void testDefinitionErrorDetected() {
     }
 }

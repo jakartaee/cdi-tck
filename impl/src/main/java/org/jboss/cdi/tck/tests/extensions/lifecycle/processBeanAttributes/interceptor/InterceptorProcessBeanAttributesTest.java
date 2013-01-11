@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.interceptor;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PBA;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -54,13 +55,13 @@ public class InterceptorProcessBeanAttributesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "11.5.10", id = "ab")
+    @SpecAssertion(section = PBA, id = "ab")
     public void testAlphaInterceptorObserved() {
         assertEquals(VerifyingExtension.aplhaInterceptorObserved.get(), 1);
     }
 
     @Test
-    @SpecAssertion(section = "11.5.10", id = "ab")
+    @SpecAssertion(section = PBA, id = "ab")
     public void testBravoInterceptorObserved() {
         assertEquals(VerifyingExtension.bravoInterceptorObserved.get(), 1);
     }

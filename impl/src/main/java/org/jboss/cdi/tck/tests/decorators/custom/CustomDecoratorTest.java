@@ -16,6 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.decorators.custom;
 
+import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.PAT;
+
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -40,8 +44,8 @@ public class CustomDecoratorTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3", id = "b"), @SpecAssertion(section = "11.5.6", id = "bc"),
-            @SpecAssertion(section = "11.5.2", id = "dc") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "b"), @SpecAssertion(section = PAT, id = "bc"),
+            @SpecAssertion(section = ABD, id = "dc") })
     public void testCustomImplementationOfDecoratorInterface() {
         assert getInstanceByType(Vehicle.class).start().equals("Bus started and decorated.");
         assert getInstanceByType(Vehicle.class).stop().equals("Bus stopped and decorated.");

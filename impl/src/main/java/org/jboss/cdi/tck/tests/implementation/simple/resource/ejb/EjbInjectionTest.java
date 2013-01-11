@@ -19,6 +19,9 @@ package org.jboss.cdi.tck.tests.implementation.simple.resource.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
+import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -47,8 +50,8 @@ public class EjbInjectionTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "ee"), @SpecAssertion(section = "7.3.6", id = "ld"),
-            @SpecAssertion(section = "7.3.6", id = "mg") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "ee"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "ld"),
+            @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mg") })
     public void testInjectionOfEjbs() {
         Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> creationalContext = getCurrentManager().createCreationalContext(managedBean);
@@ -58,7 +61,7 @@ public class EjbInjectionTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "mh") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mh") })
     public void testPassivationOfEjbs() throws Exception {
         Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> creationalContext = getCurrentManager().createCreationalContext(managedBean);
@@ -69,7 +72,7 @@ public class EjbInjectionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_TYPES, id = "ad") })
     public void testResourceBeanTypes() {
         @SuppressWarnings("serial")
         Bean<BeanRemote> beanRemote = getBeans(BeanRemote.class, new AnnotationLiteral<Lazy>() {

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalMethod;
 
+import static org.jboss.cdi.tck.cdi.Sections.UNPROXYABLE;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,7 +40,7 @@ public class PrivateFinalMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.15", id = "bda")
+    @SpecAssertion(section = UNPROXYABLE, id = "bda")
     public void testClassWithPrivateFinalMethodCanBeProxied() {
         assertEquals(getCurrentManager().getBeans(Whale.class).size(), 1);
     }

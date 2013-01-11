@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.resolution;
 
+import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ASSIGNABLE_PARAMETERS;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -77,7 +79,7 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "aa") })
     public void testUnboundedTypeVariables() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.singleton(BAR_TYPE_VARIABLE_LITERAL.getType()));
@@ -85,7 +87,7 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "ab") })
     public void testObject() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.singleton(BAZ_TYPE_VARIABLE_LITERAL.getType()));
@@ -93,7 +95,7 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "ac") })
     public void testUnboundedTypeVariablesAndObject() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.singleton(FOO_TYPE_VARIABLE_LITERAL.getType()));
@@ -104,7 +106,7 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "c") })
     public void testIdenticalTypeParamerters() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.singleton(QUX_STRING_LITERAL.getType()));
@@ -112,7 +114,7 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "d") })
     public void testNestedIdenticalTypeParamerters() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.singleton(QUX_STRING_LIST_LITERAL.getType()));
@@ -120,7 +122,7 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "e") })
     public void testDelegateWildcardBeanActualType() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.singleton(GRAULT_INTEGER_LITERAL.getType()));
@@ -128,7 +130,7 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "f") })
     public void testDelegateWildcardBeanTypeVariable() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.singleton(CORGE_TYPE_VARIABLE_EXTENDS_COW_LITERAL.getType()));
@@ -136,7 +138,7 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "g") })
     public void testDelegateTypeVariableBeanTypeVariable() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.singleton(GARPLY_EXTENDS_FRESIAN_COW_LITERAL.getType()));
@@ -144,7 +146,7 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.3.1", id = "h") })
+    @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "h") })
     public void testDelegateTypeVariableBeanActualType() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.singleton(GARPLY_COW_LITERAL.getType()));

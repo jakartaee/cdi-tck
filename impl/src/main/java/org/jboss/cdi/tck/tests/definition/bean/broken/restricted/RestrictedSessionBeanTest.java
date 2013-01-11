@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.broken.restricted;
 
+import static org.jboss.cdi.tck.cdi.Sections.RESTRICTING_BEAN_TYPES;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +44,7 @@ public class RestrictedSessionBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2.2", id = "k")
+    @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "k")
     public void testInvalidTypedValueOnSessionBean() {
     }
 

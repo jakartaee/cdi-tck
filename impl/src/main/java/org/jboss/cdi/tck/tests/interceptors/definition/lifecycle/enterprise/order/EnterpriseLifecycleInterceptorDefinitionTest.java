@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.enterprise.order;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public class EnterpriseLifecycleInterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "fb") })
     public void testLifecycleInterception() {
 
         ActionSequence.reset();

@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.decorators.definition.lifecycle;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATORS;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
@@ -57,7 +58,7 @@ public class DecoratorInstanceIsDependentObjectTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8", id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATORS, id = "c") })
     public void testDecoratorInstanceIsDependentObject() throws Exception {
 
         WebClient webClient = new WebClient();

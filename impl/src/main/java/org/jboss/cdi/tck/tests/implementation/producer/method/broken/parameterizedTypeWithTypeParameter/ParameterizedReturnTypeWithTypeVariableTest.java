@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.parameterizedTypeWithTypeParameter;
 
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class ParameterizedReturnTypeWithTypeVariableTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3", id = "iab")
+    @SpecAssertion(section = PRODUCER_METHOD, id = "iab")
     public void testNonDependentScopedProducerMethodWithParameterizedTypeWithTypeVariable() {
     }
 

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.select;
 
+import static org.jboss.cdi.tck.cdi.Sections.EVENT;
+
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
@@ -42,7 +44,7 @@ public class SelectEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.3.1", id = "eaa")
+    @SpecAssertion(section = EVENT, id = "eaa")
     public void testEventSelectReturnsEventOfSameType() {
         AlarmSystem alarm = getInstanceByType(AlarmSystem.class);
         alarm.reset();
@@ -76,7 +78,7 @@ public class SelectEventTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "10.3.1", id = "eab")
+    @SpecAssertion(section = EVENT, id = "eab")
     public <T> void testEventSelectThrowsExceptionIfEventTypeHasTypeVariable() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
         sensor.securityEvent.select(new TypeLiteral<SecurityEvent_Illegal<T>>() {
@@ -84,7 +86,7 @@ public class SelectEventTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "10.3.1", id = "eba")
+    @SpecAssertion(section = EVENT, id = "eba")
     public void testEventSelectThrowsExceptionForDuplicateBindingType() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
         sensor.securityEvent.select(new AnnotationLiteral<SystemTest>() {
@@ -93,7 +95,7 @@ public class SelectEventTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "10.3.1", id = "eba")
+    @SpecAssertion(section = EVENT, id = "eba")
     public void testEventSelectWithSubtypeThrowsExceptionForDuplicateBindingType() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
         sensor.securityEvent.select(BreakInEvent.class, new AnnotationLiteral<Violent>() {
@@ -102,7 +104,7 @@ public class SelectEventTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "10.3.1", id = "ec")
+    @SpecAssertion(section = EVENT, id = "ec")
     public void testEventSelectThrowsExceptionIfAnnotationIsNotBindingType() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
         sensor.securityEvent.select(new AnnotationLiteral<NotABindingType>() {
@@ -110,7 +112,7 @@ public class SelectEventTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "10.3.1", id = "ec")
+    @SpecAssertion(section = EVENT, id = "ec")
     public void testEventSelectWithSubtypeThrowsExceptionIfAnnotationIsNotBindingType() {
         SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
         sensor.securityEvent.select(BreakInEvent.class, new AnnotationLiteral<NotABindingType>() {

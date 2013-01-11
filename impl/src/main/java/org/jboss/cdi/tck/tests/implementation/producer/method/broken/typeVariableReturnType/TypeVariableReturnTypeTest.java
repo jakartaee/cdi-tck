@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.typeVariableReturnType;
 
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +41,7 @@ public class TypeVariableReturnTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "ib"), @SpecAssertion(section = "2.2.1", id = "la") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "ib"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "la") })
     public void testTypeVariableNotAllowed() {
     }
 

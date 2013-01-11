@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nodecoratedtypes;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -52,7 +53,7 @@ public class DecoratorWithNoDecoratedTypes3Test extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "8.1", id = "e")
+    @SpecAssertion(section = DECORATOR_BEAN, id = "e")
     public void testDeploymentFails() {
     }
 }

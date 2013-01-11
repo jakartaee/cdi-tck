@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.event.observer.inheritance;
 
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -46,7 +47,7 @@ public class ObserverInheritanceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "4.2", id = "dc"), @SpecAssertion(section = "4.2", id = "di") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dc"), @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "di") })
     public void testNonStaticObserverMethodInherited() {
 
         ActionSequence.reset();

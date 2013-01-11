@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized.broken.raw;
 
+import static org.jboss.cdi.tck.cdi.Sections.ASSIGNABLE_PARAMETERS;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,7 +47,7 @@ public class ParameterizedTypesInjectionRawAmbiguousTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.4", id = "a")
+    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "a")
     public void testInjection() {
         // Should throw exception - ambiguous resolution
     }

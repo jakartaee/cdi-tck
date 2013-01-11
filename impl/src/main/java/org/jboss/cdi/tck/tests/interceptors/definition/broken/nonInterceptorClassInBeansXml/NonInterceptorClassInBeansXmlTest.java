@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.nonInterceptorClassInBeansXml;
 
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -41,7 +43,7 @@ public class NonInterceptorClassInBeansXmlTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "9.4", id = "cab")
+    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "cab")
     public void testNonInterceptorClassInBeansXmlNotOk() {
     }
 }

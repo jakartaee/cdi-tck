@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.multipleDisposersForProducer;
 
+import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_RESOLUTION;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class MultipleDisposerMethodsForProducerMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.5.3", id = "ba")
+    @SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "ba")
     public void testMultipleDisposerMethodsForProducerMethodNotAllowed() {
     }
 }

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.binding;
 
+import static org.jboss.cdi.tck.cdi.Sections.EVENT_QUALIFIER_TYPES_WITH_MEMBERS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_EVENT_PARAMETER;
+
 import javax.enterprise.event.Observes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -55,7 +58,7 @@ public class ResolvingChecksBindingTypeMembersTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.4.1", id = "a"), @SpecAssertion(section = "10.2.2", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "a"), @SpecAssertion(section = EVENT_QUALIFIER_TYPES_WITH_MEMBERS, id = "a") })
     public void testResolvingChecksBindingTypeMembers() {
         assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("first-observer")).size() == 1;
         assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("second-observer")).size() == 1;

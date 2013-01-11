@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.context.conversation;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION;
+import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
@@ -57,7 +59,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "hb"), @SpecAssertion(section = "6.7.4", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "hb"), @SpecAssertion(section = CONVERSATION_CONTEXT, id = "o") })
     public void testConversationIdSetByContainerIsUnique() throws Exception {
         WebClient client = new WebClient();
         HtmlPage storm = client.getPage(getPath("storm.jsf"));
@@ -77,7 +79,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.4", id = "j")
+    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "j")
     public void testTransientConversationInstancesDestroyedAtRequestEnd() throws Exception {
         WebClient client = new WebClient();
 
@@ -92,7 +94,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.4", id = "k")
+    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "k")
     public void testLongRunningConversationInstancesNotDestroyedAtRequestEnd() throws Exception {
         WebClient client = new WebClient();
         HtmlPage storm = client.getPage(getPath("storm.jsf"));
@@ -107,7 +109,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.4", id = "p")
+    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "p")
     public void testConversationsDontCrossSessionBoundary1() throws Exception {
         WebClient client = new WebClient();
         client.setThrowExceptionOnFailingStatusCode(false);
@@ -137,7 +139,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.4", id = "p")
+    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "p")
     public void testConversationsDontCrossSessionBoundary2() throws Exception {
         WebClient client = new WebClient();
 
@@ -166,7 +168,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.4", id = "a")
+    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "a")
     public void testConversationActiveDuringNonFacesRequest() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cloud.jsf"));
@@ -175,7 +177,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.4", id = "f")
+    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "f")
     public void testConversationBeginMakesConversationLongRunning() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -189,7 +191,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.5", id = "r")
+    @SpecAssertion(section = CONVERSATION, id = "r")
     public void testBeginAlreadyLongRunningConversationThrowsException() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -209,7 +211,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.5", id = "s")
+    @SpecAssertion(section = CONVERSATION, id = "s")
     public void testBeginConversationWithExplicitIdAlreadyUsedByDifferentConversation() throws Exception {
 
         WebClient client = new WebClient();
@@ -232,8 +234,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "g"), @SpecAssertion(section = "6.7.5", id = "k"),
-            @SpecAssertion(section = "6.7.5", id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "g"), @SpecAssertion(section = CONVERSATION, id = "k"),
+            @SpecAssertion(section = CONVERSATION, id = "o") })
     public void testConversationEndMakesConversationTransient() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -252,7 +254,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.5", id = "q")
+    @SpecAssertion(section = CONVERSATION, id = "q")
     public void testEndTransientConversationThrowsException() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -266,7 +268,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.5", id = "ib"), @SpecAssertion(section = "6.7.5", id = "iaa") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION, id = "ib"), @SpecAssertion(section = CONVERSATION, id = "iaa") })
     public void testBeanWithRequestScope() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("builtin.jsf"));
@@ -274,7 +276,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.5", id = "id")
+    @SpecAssertion(section = CONVERSATION, id = "id")
     public void testBeanWithDefaultQualifier() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("builtin.jsf"));
@@ -282,7 +284,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.5", id = "ie")
+    @SpecAssertion(section = CONVERSATION, id = "ie")
     public void testBeanWithNameJavaxEnterpriseContextConversation() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("builtin.jsf"));
@@ -290,7 +292,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.5", id = "l"), @SpecAssertion(section = "6.7.4", id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION, id = "l"), @SpecAssertion(section = CONVERSATION_CONTEXT, id = "e") })
     public void testTransientConversationHasNullId() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("builtin.jsf"));
@@ -298,7 +300,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "ha"), @SpecAssertion(section = "6.7.5", id = "j") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "ha"), @SpecAssertion(section = CONVERSATION, id = "j") })
     public void testConversationIdMayBeSetByApplication() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -318,7 +320,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.4", id = "hb"), @SpecAssertion(section = "6.7.5", id = "j") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "hb"), @SpecAssertion(section = CONVERSATION, id = "j") })
     public void testConversationIdMayBeSetByContainer() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -334,7 +336,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.4", id = "tb")
+    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "tb")
     public void testNonexistentConversationExceptionThrown() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf?cid=foo"));
@@ -345,7 +347,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.5", id = "m"), @SpecAssertion(section = "6.7.5", id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION, id = "m"), @SpecAssertion(section = CONVERSATION, id = "n") })
     public void testSetConversationTimeoutOverride() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -359,7 +361,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.5", id = "m")
+    @SpecAssertion(section = CONVERSATION, id = "m")
     public void testConversationHasDefaultTimeout() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -373,7 +375,7 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = "6.7.4", id = "oa")
+    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "oa")
     public void testSuppressedConversationPropagation() throws Exception {
         WebClient client = new WebClient();
 

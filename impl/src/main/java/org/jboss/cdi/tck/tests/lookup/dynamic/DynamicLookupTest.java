@@ -16,6 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATIONLITERAL_TYPELITERAL;
+import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
+import static org.jboss.cdi.tck.cdi.Sections.NEW;
+import static org.jboss.cdi.tck.cdi.Sections.PROGRAMMATIC_LOOKUP;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -51,14 +56,14 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.6", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "aa") })
     public void testObtainsInjectsInstanceOfInstance() {
         ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
         assert injectionPoint.getPaymentProcessor() != null;
     }
 
     @Test
-    @SpecAssertion(section = "5.6.1", id = "da")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "da")
     public void testDuplicateBindingsThrowsException() {
         try {
             ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
@@ -71,7 +76,7 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.6.1", id = "e")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "e")
     public void testNonBindingThrowsException() {
         try {
             ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
@@ -85,9 +90,9 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.6", id = "ba"), @SpecAssertion(section = "5.6", id = "ca"),
-            @SpecAssertion(section = "5.6.1", id = "aa"), @SpecAssertion(section = "5.6.1", id = "ab"),
-            @SpecAssertion(section = "5.6.1", id = "fa"), @SpecAssertion(section = "5.6.1", id = "fc") })
+    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ba"), @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ca"),
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "aa"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ab"),
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fa"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fc") })
     public void testGetMethod() {
         // initial setup of contextual instance
         getInstanceByType(AdvancedPaymentProcessor.class, AnyLiteral.INSTANCE).setValue(10);
@@ -98,7 +103,7 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.6.1", id = "fba")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fba")
     public void testUnsatisfiedDependencyThrowsException() {
         try {
             getInstanceByType(ObtainsInstanceBean.class).getPaymentProcessor().select(RemotePaymentProcessor.class).get();
@@ -110,7 +115,7 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.6.1", id = "fbb")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fbb")
     public void testAmbiguousDependencyThrowsException() {
         try {
             getInstanceByType(ObtainsInstanceBean.class).getAnyPaymentProcessor().get();
@@ -122,9 +127,9 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.6.1", id = "aa"), @SpecAssertion(section = "5.6.1", id = "ba"),
-            @SpecAssertion(section = "5.6.1", id = "ja"), @SpecAssertion(section = "5.6.1", id = "ka"),
-            @SpecAssertion(section = "5.6.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "aa"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ba"),
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ka"),
+            @SpecAssertion(section = ANNOTATIONLITERAL_TYPELITERAL, id = "a") })
     public void testIteratorMethod() {
         // initial setup of contextual instances
         getInstanceByType(AdvancedPaymentProcessor.class, AnyLiteral.INSTANCE).setValue(1);
@@ -165,7 +170,7 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.6.1", id = "l")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "l")
     public void testIsUnsatisfied() {
         ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
         assert !injectionPoint.getAnyPaymentProcessor().isUnsatisfied();
@@ -173,7 +178,7 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.6", id = "da"), @SpecAssertion(section = "5.6.1", id = "m") })
+    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "da"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m") })
     public void testIsAmbiguous() {
         ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
         assert injectionPoint.getAnyPaymentProcessor().isAmbiguous();
@@ -181,7 +186,7 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.6", id = "e"), @SpecAssertion(section = "5.6.3", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "e"), @SpecAssertion(section = ANNOTATIONLITERAL_TYPELITERAL, id = "b") })
     public void testNewBean() {
         Instance<String> string = getInstanceByType(ObtainsNewInstanceBean.class).getString();
         assert !string.isAmbiguous();
@@ -198,7 +203,7 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.14", id = "xc")
+    @SpecAssertion(section = NEW, id = "xc")
     public void testNewBeanNotEnabledWithouInjectionPoint() {
         assert getInstanceByType(ObtainsNewInstanceBean.class).getIae().isUnsatisfied();
     }

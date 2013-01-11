@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
+import static org.jboss.cdi.tck.cdi.Sections.ASSIGNABLE_PARAMETERS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -48,7 +49,7 @@ public class ParameterizedTypesInjectionToParameterizedWithTypeVariableTest exte
     ConsumerTypeVariable consumer;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.4", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "f") })
     public void testInjection() {
         assertNotNull(consumer.getDao());
         assertEquals(consumer.getDao().getId(), Dao.class.getName());

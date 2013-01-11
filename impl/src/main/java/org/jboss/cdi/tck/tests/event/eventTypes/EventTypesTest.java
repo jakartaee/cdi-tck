@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.eventTypes;
 
+import static org.jboss.cdi.tck.cdi.Sections.EVENT_TYPES_AND_QUALIFIER_TYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -54,7 +55,7 @@ public class EventTypesTest extends AbstractTest {
     Event<int[]> intArrayEvent;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.1", id = "aa"), @SpecAssertion(section = "10.1", id = "j") })
+    @SpecAssertions({ @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "aa"), @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "j") })
     public void testEventTypeIsConcreteTypeWithNoTypeVariables() {
         Listener listener = getInstanceByType(Listener.class);
         listener.reset();
@@ -81,7 +82,7 @@ public class EventTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "10.1", id = "j") })
+    @SpecAssertions({ @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "j") })
     public void testEventTypeIsArray() {
 
         Listener listener = getInstanceByType(Listener.class);
@@ -110,7 +111,7 @@ public class EventTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "10.1", id = "c")
+    @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "c")
     public void testEventTypeIncludesAllSuperclassesAndInterfacesOfEventObject() {
         // we have to use a dependent-scoped observer here because we it is observing the Object event type
         // and a request-scoped object would get called outside of when the request scope is active in this situation

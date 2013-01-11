@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.modules.broken;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -54,7 +55,7 @@ public class DisabledProducerFieldInjectionNotAvailableTest extends AbstractTest
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = "5.1.4", id = "h")
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "h")
     public void testInjection() throws Exception {
     }
 

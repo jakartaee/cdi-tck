@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation.producer.method;
 
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
@@ -41,7 +43,7 @@ public class DecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.2", id = "ib"), @SpecAssertion(section = "7.2", id = "id") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "ib"), @SpecAssertion(section = BIZ_METHOD, id = "id") })
     public void testDecoratorInvocation() {
         ProducerDecorator.reset();
         ProducerImpl.reset();

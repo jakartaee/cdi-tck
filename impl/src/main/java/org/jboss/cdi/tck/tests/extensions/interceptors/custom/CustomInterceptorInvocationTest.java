@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.interceptors.custom;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR;
 import static org.testng.Assert.assertTrue;
 
 import javax.inject.Inject;
@@ -67,7 +69,7 @@ public class CustomInterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "dd"), @SpecAssertion(section = "11.1.2", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = ABD, id = "dd"), @SpecAssertion(section = INTERCEPTOR, id = "d") })
     public void testCustomInterceptorInvocation() {
         CustomInterceptor.reset();
         FooInterceptor.reset();

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.interceptorCanNotBeDecorator;
 
+import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEANS;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class InterceptorCanNotBeDecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.1", id = "a")
+    @SpecAssertion(section = MANAGED_BEANS, id = "a")
     public void testInterceptorCanNotAlsoBeDecorator() throws Exception {
     }
 }

@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.decorators.builtin.instance;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -67,7 +68,7 @@ public class BuiltinInstanceDecoratorTest extends AbstractDecoratorTest {
 
     @SuppressWarnings({ "serial" })
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acb") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acb") })
     public void testDecoratorIsResolved() {
         TypeLiteral<Instance<Mule>> instanceLiteral = new TypeLiteral<Instance<Mule>>() {
         };
@@ -84,7 +85,7 @@ public class BuiltinInstanceDecoratorTest extends AbstractDecoratorTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acb") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acb") })
     public void testDecoratorIsInvoked() {
         assertTrue(instance.isAmbiguous());
         Mule mule = instance.get();

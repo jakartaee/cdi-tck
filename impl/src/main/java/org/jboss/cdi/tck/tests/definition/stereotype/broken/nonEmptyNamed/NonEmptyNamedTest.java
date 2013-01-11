@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.broken.nonEmptyNamed;
 
+import static org.jboss.cdi.tck.cdi.Sections.NAMED_STEREOTYPE;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +40,7 @@ public class NonEmptyNamedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.7.1.3", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = NAMED_STEREOTYPE, id = "ac") })
     public void testStereotypeWithNonEmptyNamed() {
     }
 

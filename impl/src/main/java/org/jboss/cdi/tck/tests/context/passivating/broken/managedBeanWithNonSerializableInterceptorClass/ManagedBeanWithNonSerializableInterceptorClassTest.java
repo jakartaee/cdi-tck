@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.managedBeanWithNonSerializableInterceptorClass;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class ManagedBeanWithNonSerializableInterceptorClassTest extends Abstract
     }
 
     @Test
-    @SpecAssertion(section = "6.6.4", id = "hc")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "hc")
     public void testManagedBeanWithNonSerializableInterceptorClassNotOK() {
     }
 }

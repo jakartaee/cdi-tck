@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.event.broken.raw;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_EVENT;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -46,7 +47,7 @@ public class RawEventCustomBeanTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "10.3.2", id = "e")
+    @SpecAssertion(section = BUILTIN_EVENT, id = "e")
     public void testDefinitionError() {
         // Test initialization is aborted by the container
     }

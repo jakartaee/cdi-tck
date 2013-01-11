@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalMethod;
 
+import static org.jboss.cdi.tck.cdi.Sections.UNPROXYABLE;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,7 +45,7 @@ public class StaticFinalMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.15", id = "bca")
+    @SpecAssertion(section = UNPROXYABLE, id = "bca")
     public void testClassWithStaticFinalMethodCanBeProxied() {
         tunaFarm.sayHello();
     }

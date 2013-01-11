@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INTERCEPTOR;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -35,7 +38,7 @@ public class InterceptorCalledBeforeDecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.4", id = "g"), @SpecAssertion(section = "9.2", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g"), @SpecAssertion(section = DECLARING_INTERCEPTOR, id = "b") })
     public void testInterceptorCalledBeforeDecorator() {
         FooImpl.interceptorCalledFirst = false;
         FooImpl.decoratorCalledFirst = false;

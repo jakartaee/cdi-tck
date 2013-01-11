@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, expectedExceptions = UnsatisfiedResolutionException.class)
-    @SpecAssertion(section = "4.2", id = "dd")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dd")
     public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass() {
         assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
         }).size() == 0;
@@ -50,7 +51,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "4.2", id = "dd")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dd")
     public void testNonStaticProducerMethodNotInherited() {
         assert getBeans(Apple.class, new AnnotationLiteral<Yummy>() {
         }).size() == 1;
@@ -59,7 +60,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = "4.2", id = "dj")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dj")
     public void testNonStaticProducerMethodNotIndirectlyInherited() {
         Set<Bean<Pear>> beans = getBeans(Pear.class, new AnnotationLiteral<Yummy>() {
         });

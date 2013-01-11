@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.multipleDelegateInjectionPoints;
 
+import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,7 +49,7 @@ public class MultipleDelegateInjectionPointsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "8.1.2", id = "ca")
+    @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "ca")
     public void testMultipleDelegateInjectionPoints() {
     }
 

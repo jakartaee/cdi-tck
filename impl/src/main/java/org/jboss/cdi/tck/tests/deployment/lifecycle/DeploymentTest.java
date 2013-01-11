@@ -18,6 +18,9 @@
 package org.jboss.cdi.tck.tests.deployment.lifecycle;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.ADV;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -46,14 +49,14 @@ public class DeploymentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.5.2", id = "a"), @SpecAssertion(section = "11.5.3", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = ABD, id = "a"), @SpecAssertion(section = ADV, id = "a") })
     public void testDeployedManagerEvent() {
         assertTrue(ManagerObserver.isAfterDeploymentValidationCalled());
         assertTrue(ManagerObserver.isAfterBeanDiscoveryCalled());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "11.1", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN, id = "f") })
     public void testOnlyEnabledBeansDeployed() {
         assertFalse(getBeans(User.class).isEmpty());
         assertTrue(getBeans(DataAccessAuthorizationDecorator.class).isEmpty());

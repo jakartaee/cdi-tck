@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.alternative.enterprise.resource;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -60,7 +61,7 @@ public class ResourceAlternativeAvailabilityTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test(groups = PERSISTENCE)
-    @SpecAssertion(section = "5.1.1", id = "ce")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ce")
     public void testResourceAvailability() {
 
         AnnotationLiteral<DatabaseTest> testLiteral = new AnnotationLiteral<DatabaseTest>() {

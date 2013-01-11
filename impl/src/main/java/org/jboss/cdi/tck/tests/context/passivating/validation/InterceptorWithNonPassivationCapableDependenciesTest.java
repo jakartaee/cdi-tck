@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.validation;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 import static org.testng.Assert.assertEquals;
 
 import javax.enterprise.inject.spi.InterceptionType;
@@ -55,7 +56,7 @@ public class InterceptorWithNonPassivationCapableDependenciesTest extends Abstra
     }
 
     @Test
-    @SpecAssertion(section = "6.6.4", id = "k")
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "k")
     public void test() {
         // it is enough to verify that the deployment passes validation and deploys
         assertEquals(

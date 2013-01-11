@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.broken.passivation;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -49,7 +51,7 @@ public class PassivationCapableDependencyErrorCausedByExtensionDetectedTest exte
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.6.4", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION, id = "aa") })
     public void test() {
     }
 }

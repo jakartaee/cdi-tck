@@ -18,6 +18,10 @@
 package org.jboss.cdi.tck.tests.deployment.shutdown;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.BS;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.SHUTDOWN;
 import static org.testng.Assert.assertEquals;
 
 import java.net.URL;
@@ -92,9 +96,9 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
      * @throws Exception
      */
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
-    @SpecAssertions({ @SpecAssertion(section = "12.3", id = "a"), @SpecAssertion(section = "12.3", id = "b"),
-            @SpecAssertion(section = "12.3", id = "c"), @SpecAssertion(section = "6.7.1", id = "ja"),
-            @SpecAssertion(section = "6.7.3", id = "ga"), @SpecAssertion(section = "11.5.4", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = SHUTDOWN, id = "a"), @SpecAssertion(section = SHUTDOWN, id = "b"),
+            @SpecAssertion(section = SHUTDOWN, id = "c"), @SpecAssertion(section = REQUEST_CONTEXT, id = "ja"),
+            @SpecAssertion(section = APPLICATION_CONTEXT, id = "ga"), @SpecAssertion(section = BS, id = "a") })
     public void testShutdown(@ArquillianResource @OperateOnDeployment(FOO) URL fooContext,
             @ArquillianResource @OperateOnDeployment(INFO) URL infoContext) throws Exception {
 

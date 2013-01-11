@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.builtin;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.REWRITE;
+import static org.jboss.cdi.tck.cdi.Sections.ADDITIONAL_BUILTIN_BEANS;
 import static org.testng.Assert.assertNotNull;
 
 import java.security.Principal;
@@ -50,7 +51,7 @@ public class BuiltInBeansTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "a") })
     public void testUserTransactionBean() throws SystemException {
         UserTransaction userTransaction = getInstanceByType(UserTransactionInjectedBeanLocal.class).getUserTransaction();
         assertNotNull(userTransaction);
@@ -65,7 +66,7 @@ public class BuiltInBeansTest extends AbstractTest {
      */
     @Test(groups = REWRITE)
     // PLM We should check the Principal somehow
-    @SpecAssertions({ @SpecAssertion(section = "3.7", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "b") })
     public void testPrincipalBean() throws SystemException, LoginException {
         PrincipalInjectedBeanLocal instance = getInstanceByType(PrincipalInjectedBeanLocal.class);
         instance.login();

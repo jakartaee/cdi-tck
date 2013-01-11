@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.tests.context.jms;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JMS;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
@@ -63,8 +65,8 @@ public class MessageDrivenBeanContextTest extends AbstractTest {
     LogStore store;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.1", id = "gd"), @SpecAssertion(section = "6.7.1", id = "hd"),
-            @SpecAssertion(section = "6.7.3", id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "gd"), @SpecAssertion(section = REQUEST_CONTEXT, id = "hd"),
+            @SpecAssertion(section = APPLICATION_CONTEXT, id = "dd") })
     public void testRequestScopeActiveDuringMessageDelivery() throws Exception {
 
         AbstractMessageListener.resetProcessedMessages();

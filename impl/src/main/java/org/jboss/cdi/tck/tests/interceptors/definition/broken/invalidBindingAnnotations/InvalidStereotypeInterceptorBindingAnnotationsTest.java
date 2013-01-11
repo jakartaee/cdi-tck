@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.invalidBindingAnnotations;
 
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDING_MEMBERS;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -54,7 +56,7 @@ public class InvalidStereotypeInterceptorBindingAnnotationsTest extends Abstract
     }
 
     @Test
-    @SpecAssertion(section = "9.5.2", id = "d")
+    @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "d")
     public void testInterceptorBindingsWithConflictingAnnotationMembersNotOk() {
     }
 }

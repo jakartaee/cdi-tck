@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -69,7 +71,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.5.3", id = "d"), @SpecAssertion(section = "5.5.7", id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "d"), @SpecAssertion(section = INJECTION_POINT, id = "aa") })
     public void testGetBean() {
 
         // Get an instance of the bean which has another bean injected into it
@@ -83,7 +85,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "ba")
+    @SpecAssertion(section = INJECTION_POINT, id = "ba")
     public void testGetType() {
         // Get an instance of the bean which has another bean injected into it
         FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
@@ -93,7 +95,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "bc")
+    @SpecAssertion(section = INJECTION_POINT, id = "bc")
     public void testGetBindingTypes() {
         // Get an instance of the bean which has another bean injected into it
         FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
@@ -105,7 +107,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "ca")
+    @SpecAssertion(section = INJECTION_POINT, id = "ca")
     public void testGetMemberField() {
         // Get an instance of the bean which has another bean injected into it
         FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
@@ -115,7 +117,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "cb")
+    @SpecAssertion(section = INJECTION_POINT, id = "cb")
     public void testGetMemberMethod() {
         // Get an instance of the bean which has another bean injected into it
         MethodInjectionPointBean beanWithInjectedBean = getInstanceByType(MethodInjectionPointBean.class);
@@ -130,7 +132,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "cc")
+    @SpecAssertion(section = INJECTION_POINT, id = "cc")
     public void testGetMemberConstructor() {
         // Get an instance of the bean which has another bean injected into it
         ConstructorInjectionPointBean beanWithInjectedBean = getInstanceByType(ConstructorInjectionPointBean.class);
@@ -145,7 +147,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "daa")
+    @SpecAssertion(section = INJECTION_POINT, id = "daa")
     public void testGetAnnotatedField() {
         // Get an instance of the bean which has another bean injected into it
         FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
@@ -156,7 +158,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "daa")
+    @SpecAssertion(section = INJECTION_POINT, id = "daa")
     public void testGetAnnotatedParameter() {
         // Get an instance of the bean which has another bean injected into it
         MethodInjectionPointBean beanWithInjectedBean = getInstanceByType(MethodInjectionPointBean.class);
@@ -167,14 +169,14 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "ea")
+    @SpecAssertion(section = INJECTION_POINT, id = "ea")
     public void testDependentScope() {
         assert getBeans(InjectionPoint.class).size() == 1;
         assert getBeans(InjectionPoint.class).iterator().next().getScope().equals(Dependent.class);
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "eb")
+    @SpecAssertion(section = INJECTION_POINT, id = "eb")
     public void testPassivationCapability() throws Exception {
         InjectionPoint ip1 = getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
         InjectionPoint ip2 = getInstanceByType(MethodInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
@@ -190,7 +192,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "ea")
+    @SpecAssertion(section = INJECTION_POINT, id = "ea")
     public void testApiTypeInjectionPoint() {
         // Get an instance of the bean which has another bean injected into it
         FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
@@ -200,7 +202,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "ea")
+    @SpecAssertion(section = INJECTION_POINT, id = "ea")
     public void testCurrentBinding() {
         // Get an instance of the bean which has another bean injected into it
         FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
@@ -210,7 +212,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5.7", id = "dca")
+    @SpecAssertion(section = INJECTION_POINT, id = "dca")
     public void testIsTransient() {
         FieldInjectionPointBean bean1 = getInstanceByType(FieldInjectionPointBean.class);
         TransientFieldInjectionPointBean bean2 = getInstanceByType(TransientFieldInjectionPointBean.class);
@@ -226,7 +228,7 @@ public class InjectionPointTest extends AbstractTest {
      * Base of this test was originally part of CDITCK-138 but disappeared during branch merge.
      */
     @Test
-    @SpecAssertion(section = "5.5.7", id = "dba")
+    @SpecAssertion(section = INJECTION_POINT, id = "dba")
     public void testIsDelegate() {
 
         assert !getInstanceByType(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata().isDelegate();
@@ -266,7 +268,7 @@ public class InjectionPointTest extends AbstractTest {
      * CDI-78 reopened.
      */
     @Test
-    @SpecAssertion(section = "5.5.7", id = "i")
+    @SpecAssertion(section = INJECTION_POINT, id = "i")
     public void testDecoratorInjectionPoint() {
         Cat cat = getInstanceByType(Cattery.class).getCat();
         cat.hello();

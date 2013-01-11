@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.builtin.injectionpoint;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -57,14 +58,14 @@ public class BuiltinInjectionPointDecoratorTest extends AbstractDecoratorTest {
     Company company;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acl") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acl") })
     public void testDecoratorIsResolved() {
         checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(InjectionPoint.class)),
                 InjectionPointDecorator.class, Collections.<Type> singleton(InjectionPoint.class), InjectionPoint.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "acl") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acl") })
     public void testDecoratorInvoked() throws Exception {
         assertTrue(company.getFuse().getInjectionPoint().isTransient());
         assertEquals(company.getFuse().getInjectionPoint().getBean(), getUniqueBean(Company.class));

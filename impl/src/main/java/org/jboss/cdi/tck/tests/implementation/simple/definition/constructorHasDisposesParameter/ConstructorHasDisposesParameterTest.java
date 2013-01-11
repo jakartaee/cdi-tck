@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.constructorHasDisposesParameter;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,7 +41,7 @@ public class ConstructorHasDisposesParameterTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.8.1", id = "da"), @SpecAssertion(section = "12.2", id = "db") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "da"), @SpecAssertion(section = INITIALIZATION, id = "db") })
     public void testConstructorHasDisposesParameter() throws Exception {
     }
 

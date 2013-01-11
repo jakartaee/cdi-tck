@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.constructorHasObservesParameter;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +39,7 @@ public class ConstructorHasObservesParameterTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.8.1", id = "ea")
+    @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "ea")
     public void testConstructorHasObservesParameter() {
     }
 

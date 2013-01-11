@@ -18,6 +18,9 @@ package org.jboss.cdi.tck.tests.implementation.simple.resource.persistenceContex
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
+import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.Any;
@@ -52,8 +55,8 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "cc"), @SpecAssertion(section = "7.3.6", id = "lb"),
-            @SpecAssertion(section = "7.3.6", id = "mc") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "cc"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lb"),
+            @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mc") })
     public void testInjectionOfPersistenceContext() {
         ServiceBean serviceBean = getInstanceByType(ServiceBean.class);
         ManagedBean managedBean = serviceBean.getManagedBean();
@@ -62,8 +65,8 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "dd"), @SpecAssertion(section = "7.3.6", id = "lc"),
-            @SpecAssertion(section = "7.3.6", id = "me") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "dd"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lc"),
+            @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "me") })
     public void testInjectionOfPersistenceUnit() {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
@@ -73,7 +76,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "md") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "md") })
     public void testPassivationOfPersistenceContext() throws Exception {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
@@ -84,7 +87,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "7.3.6", id = "lc"), @SpecAssertion(section = "7.3.6", id = "mf") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lc"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mf") })
     public void testPassivationOfPersistenceUnit() throws Exception {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
@@ -95,7 +98,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6.1", id = "hh"), @SpecAssertion(section = "3.6.2", id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "hh"), @SpecAssertion(section = RESOURCE_TYPES, id = "ab") })
     public void testBeanTypesAndBindingTypesOfPersistenceContext() {
         Bean<EntityManager> manager = getBeans(EntityManager.class, new AnnotationLiteral<Database>() {
         }).iterator().next();
@@ -106,7 +109,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.6.2", id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_TYPES, id = "ac") })
     public void testBeanTypesOfPersistenceUnit() {
         Bean<EntityManagerFactory> factory = getBeans(EntityManagerFactory.class, new AnnotationLiteral<Database>() {
         }).iterator().next();

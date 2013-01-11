@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.decorators.builtin.http.servletcontext;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -63,7 +64,7 @@ public class BuiltinServletContextDecoratorTest extends AbstractDecoratorTest {
     ServletContext servletContext;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ack") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "ack") })
     public void testDecoratorIsResolved() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
                 Collections.<Type> singleton(ServletContext.class));
@@ -75,7 +76,7 @@ public class BuiltinServletContextDecoratorTest extends AbstractDecoratorTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "8.4", id = "ack") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "ack") })
     public void testDecoratorIsInvoked() {
         assertEquals(servletContext.getContextPath(), "whee");
         assertEquals(servletContext.getMajorVersion(), 20);

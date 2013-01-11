@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.application.event;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 
 import javax.servlet.ServletContext;
 
@@ -75,7 +76,7 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6.7.3", id = "ga") })
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT, id = "ga") })
     public void testDeployment() {
         // noop - the deployment either fails or not
     }

@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.event.broken.observer.notBusinessMethod;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -46,7 +48,7 @@ public class EJBObserverMethodNotBusinessMethodTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = "10.4", id = "d"), @SpecAssertion(section = "10.4.2", id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHODS, id = "d"), @SpecAssertion(section = OBSERVES, id = "g") })
     public void testObserverMethodOnEnterpriseBeanNotBusinessMethodOrStaticFails() {
     }
 }

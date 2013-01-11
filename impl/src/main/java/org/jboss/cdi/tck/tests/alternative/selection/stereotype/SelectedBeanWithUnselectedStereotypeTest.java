@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection.stereotype;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Set;
@@ -49,7 +50,7 @@ public class SelectedBeanWithUnselectedStereotypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1.1", id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ca") })
     public void testSingleAlternativeIsSelected() {
         // Bar is selected
         Set<Bean<Bar>> barBeans = getBeans(Bar.class);

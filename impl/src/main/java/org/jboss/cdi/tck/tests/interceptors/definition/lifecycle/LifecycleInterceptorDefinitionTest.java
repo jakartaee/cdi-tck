@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle;
 
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
@@ -49,7 +51,7 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.3", id = "a"), @SpecAssertion(section = "9.5", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a"), @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "a") })
     public void testLifecycleInterception() {
 
         ActionSequence.reset();
@@ -67,7 +69,7 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "9.5", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "a") })
     public void tesMultipleLifecycleInterceptors() {
 
         ActionSequence.reset();
