@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery;
 
 import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -49,7 +50,7 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "", id = "") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "ea") })
     public void testCustomDependentBeanInjectionPointIsAvailable(Cage cage) {
         assertNotNull(cage);
         assertNotNull(cage.getCockatoo());

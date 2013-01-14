@@ -112,14 +112,14 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "c"), @SpecAssertion(section = BEAN_DISCOVERY, id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = PB, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "fb") })
     public void testProcessSessionBeanFiredForStatelessSessionBean() {
         assert ProcessBeanObserver.getProcessStatelessSessionBeanEvent() != null;
         validateStatelessSessionBean(ProcessBeanObserver.getProcessStatelessSessionBeanEvent().getAnnotatedBeanClass());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "c"), @SpecAssertion(section = BEAN_DISCOVERY, id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = PB, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "fb") })
     public void testProcessSessionBeanFiredForStatefulSessionBean() {
         assert ProcessBeanObserver.getProcessStatefulSessionBeanEvent() != null;
         validateStatefulSessionBean(ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getAnnotatedBeanClass());
