@@ -26,6 +26,7 @@ import static org.testng.Assert.assertTrue;
 import java.util.concurrent.Future;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
@@ -65,7 +66,7 @@ public class EJBRequestContextTest extends AbstractTest {
     @EJB(lookup = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.request.ejb.FooRemote")
     FooRemote foo;
 
-    @EJB
+    @Inject
     BarBean bar;
 
     /**
@@ -73,7 +74,7 @@ public class EJBRequestContextTest extends AbstractTest {
      * and during message delivery to any EJB message driven bean.
      */
     @OperateOnDeployment("TEST")
-    @Test(groups =  JAVAEE_FULL)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = REQUEST_CONTEXT, id = "gc")
     public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
@@ -93,7 +94,7 @@ public class EJBRequestContextTest extends AbstractTest {
      * The request context is destroyed after the remote method invocation, timeout or message delivery completes.
      */
     @OperateOnDeployment("TEST")
-    @Test(groups =  JAVAEE_FULL)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = REQUEST_CONTEXT, id = "hc")
     public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
@@ -121,16 +122,18 @@ public class EJBRequestContextTest extends AbstractTest {
     }
 
     @OperateOnDeployment("TEST")
-    @Test(groups =  JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "ga"), @SpecAssertion(section = REQUEST_CONTEXT, id = "ha") })
+    @Test(groups = JAVAEE_FULL)
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "ga"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "ha") })
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
         assertNotNull(foo.ping());
         assertTrue(foo.wasRequestBeanInPreviousCallDestroyed());
     }
 
     @OperateOnDeployment("TEST")
-    @Test(groups =  JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "gb"), @SpecAssertion(section = REQUEST_CONTEXT, id = "hb") })
+    @Test(groups = JAVAEE_FULL)
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "gb"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "hb") })
     public void testRequestScopeActiveDuringAsyncCallToEjb() throws Exception {
         SimpleRequestBean simpleRequestBean = getInstanceByType(SimpleRequestBean.class);
         SimpleRequestBean.reset();

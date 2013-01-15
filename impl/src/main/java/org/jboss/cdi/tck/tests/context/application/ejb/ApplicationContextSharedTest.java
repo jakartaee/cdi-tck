@@ -26,6 +26,7 @@ import static org.testng.Assert.assertTrue;
 import java.util.concurrent.Future;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
@@ -62,7 +63,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
                 .build();
     }
 
-    @EJB
+    @Inject
     BarBean bar;
 
     @EJB(lookup = "java:global/test-ejb/test-ejb/FooBean!org.jboss.cdi.tck.tests.context.application.ejb.FooRemote")
