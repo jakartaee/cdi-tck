@@ -34,6 +34,18 @@
                     <exclude name="testRequestScopeActiveDuringRemoteCallToEjb" />
                 </methods>
             </class>
+            <!-- CDI-247 -->
+            <class name="org.jboss.cdi.tck.tests.definition.bean.custom.CustomBeanImplementationTest">
+                <methods>
+                    <exclude name="testIsNullableCalled" />
+                </methods>
+            </class>
+            <!-- CDI-52 -->
+            <class name="org.jboss.cdi.tck.tests.implementation.disposal.method.definition.injectionpoint.DisposalMethodInjectionPointTest">
+                <methods>
+                    <exclude name="test" />
+                </methods>
+            </class>
 
         </classes>
     </test>

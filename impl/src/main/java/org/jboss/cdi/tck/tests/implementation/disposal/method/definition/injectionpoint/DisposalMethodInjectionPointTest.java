@@ -31,9 +31,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * <p>
- * This test was originally part of Weld test suite.
- * <p>
+ * This test will be probably removed - see also CDI-52.
  * 
  * @author David Allen
  * @author Martin Kouba
@@ -46,10 +44,6 @@ public class DisposalMethodInjectionPointTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DisposalMethodInjectionPointTest.class).build();
     }
 
-    /**
-     * Test that the InjectionPoint injected into a disposer method represents the producer method for which the disposer method
-     * is being invoked.
-     */
     @Test
     @SpecAssertion(section = INJECTION_POINT, id = "h")
     public void test() {
