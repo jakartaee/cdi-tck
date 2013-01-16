@@ -84,14 +84,14 @@
          <para>
             The assertions are listed in the XML file
             impl/src/main/resources/tck-audit.xml in the CDI TCK distribution.
-            Each assertion is identified by the section of the specification
+            Each assertion is identified by the section identifier of the specification
             document in which it resides and assigned a unique paragraph
             identifier to narrow down the location of the assertion further.  To
             continue with the example, the assertion shown above is listed in the
             tck-audit.xml file using this XML fragment:
          </para>
          <programlisting role="XML">
-         <![CDATA[<section id="2.3.3" title="Declaring the qualifiers of a bean">
+         <![CDATA[<section id="declaring_bean_qualifiers" title="Declaring the qualifiers of a bean">
           ...
           <assertion id="d">
              <text>Any bean may declare multiple qualifier types.</type>
@@ -110,12 +110,19 @@
          </para>
 
          <programlisting role="JAVA"><![CDATA[@Test
-@SpecAssertion(section = "2.3.3", id = "d")
-public void testMultipleBindings()
+@SpecAssertion(section = DECLARING_BEAN_QUALIFIERS, id = "d")
+public void testMultipleQualifiers()
 {
   Bean<?> model = getBeans(Cod.class, new ChunkyBinding(true), new WhitefishBinding()).iterator().next();
   assert model.getBindings().size() == 3;
 }]]></programlisting>
+
+         <note>
+            <para>
+               Section identifiers are not used directly. Instead automatically generated constants are applied. 
+            </para>
+         </note>
+         
          
          <para>
             To help evaluate the distribution of coverage for these assertions,

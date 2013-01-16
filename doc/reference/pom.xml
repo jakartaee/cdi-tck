@@ -1,89 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-   <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-   <artifactId>cdi-tck-reference-guide</artifactId>
-   <packaging>jdocbook</packaging>
-   <name>CDI TCK Reference Guide</name>
+    <artifactId>cdi-tck-reference-guide</artifactId>
+    <packaging>jdocbook</packaging>
+    <name>CDI TCK Reference Guide</name>
 
-   <parent>
-      <groupId>org.jboss.cdi.tck</groupId>
-      <artifactId>cdi-tck-parent</artifactId>
-      <version>1.1.0-SNAPSHOT</version>
-      <relativePath>../../pom.xml</relativePath>
-   </parent>
+    <parent>
+        <groupId>org.jboss.cdi.tck</groupId>
+        <artifactId>cdi-tck-parent</artifactId>
+        <version>1.1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
 
-   <build>
-      <defaultGoal>process-classes</defaultGoal>
-      <plugins>
-         <plugin>
-            <groupId>org.jboss.maven.plugins</groupId>
-            <artifactId>maven-jdocbook-plugin</artifactId>
-            <configuration>
-                <options>
-                    <applyStandardInjectionValues>false</applyStandardInjectionValues>
-                </options>
-            </configuration>
-         </plugin>
-         <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <executions>
-               <execution>
-                  <id>attach-zip</id>
-                  <phase>package</phase>
-                  <goals>
-                     <goal>attach-artifact</goal>
-                  </goals>
-                  <configuration>
-                     <artifacts>
-                        <artifact>
-                           <file>${project.build.outputDirectory}/${project.artifactId}-${project.version}.war</file>
-                           <type>war</type>
-                        </artifact>
-                     </artifacts>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-      </plugins>
-      <pluginManagement>
-          <plugins>
-              <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-              <plugin>
-                  <groupId>org.eclipse.m2e</groupId>
-                  <artifactId>lifecycle-mapping</artifactId>
-                  <version>1.0.0</version>
-                  <configuration>
-                      <lifecycleMappingMetadata>
-                          <pluginExecutions>
-                              <pluginExecution>
-                                  <pluginExecutionFilter>
-                                      <groupId>org.jboss.maven.plugins</groupId>
-                                      <artifactId>maven-jdocbook-plugin</artifactId>
-                                      <versionRange>[2.2.3,)</versionRange>
-                                      <goals>
-                                          <goal>resources</goal>
-                                          <goal>generate</goal>
-                                      </goals>
-                                  </pluginExecutionFilter>
-                                  <action>
-                                      <ignore />
-                                  </action>
-                              </pluginExecution>
-                          </pluginExecutions>
-                      </lifecycleMappingMetadata>
-                  </configuration>
-              </plugin>
-          </plugins>
-      </pluginManagement>
-   </build>
+    <build>
+        <defaultGoal>process-classes</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.jboss.maven.plugins</groupId>
+                <artifactId>maven-jdocbook-plugin</artifactId>
+                <configuration>
+                    <options>
+                        <!-- applyStandardInjectionValues>false</applyStandardInjectionValues -->
+                    </options>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.outputDirectory}/${project.artifactId}-${project.version}.war</file>
+                                    <type>war</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.jboss.maven.plugins</groupId>
+                                        <artifactId>maven-jdocbook-plugin</artifactId>
+                                        <versionRange>[2.2.3,)</versionRange>
+                                        <goals>
+                                            <goal>resources</goal>
+                                            <goal>generate</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore />
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-   <scm>
-       <connection>scm:git:git://github.com/jboss/cditck.git</connection>
-       <developerConnection>scm:git:git@github.com:jboss/cditck.git</developerConnection>
-       <url>https://github.com/jboss/cditck</url>
-   </scm>
+    <scm>
+        <connection>scm:git:git://github.com/jboss/cditck.git</connection>
+        <developerConnection>scm:git:git@github.com:jboss/cditck.git</developerConnection>
+        <url>https://github.com/jboss/cditck</url>
+    </scm>
 
 </project>

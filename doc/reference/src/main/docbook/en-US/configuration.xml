@@ -27,7 +27,7 @@
             <colspec colnum="2" colname="description" colwidth="2*" />
             <thead>
                <row>
-                  <entry>Property = Required/Example Value</entry>
+                  <entry>Property = Example Value</entry>
                   <entry>Description</entry>
                </row>
             </thead>
@@ -48,7 +48,8 @@
                      <literal>org.jboss.cdi.tck.testDataSource=java:jboss/datasources/ExampleDS</literal>
                   </entry>
                   <entry>
-                     A few TCK tests work with Java EE services (JPA, JTA) that require a datasource to be provided.
+                     A few TCK tests work with Java EE persistence services (JPA, JTA) that require a data source to be provided. 
+                     This property defines JNDI name of such resource.
                   </entry>
                </row>
             </tbody>
@@ -173,9 +174,7 @@
          It's beyond the scope of this guide to describe in how to set up your
          build environment to run the TCK. The TestNG documentation provides extensive 
          information on launching TestNG using the Java, Ant, Eclipse or IntelliJ IDEA.
-         <literal>FIXME</literal>
       </para>
-
    </section>
    
    <section>
@@ -186,6 +185,16 @@
          with assertions enabled. See 
          <ulink url="http://java.sun.com/j2se/1.4.2/docs/guide/lang/assert.html#enable-disable">Programming With Assertions</ulink>
          for more information on how to enable assertions.
+      </para>
+      <para>
+        Tests within the <emphasis>JMS</emphasis> TestNG group require basic Java Message Service configuration, or two test JMS destinations respectively. 
+        A queue for PTP messaging domain with JNDI name <literal>java:/queue/test</literal> and a topic for pub/sub messaging domain with JNDI name <literal>java:/topic/test</literal>. 
+      </para>
+      <para>
+        Tests within the <emphasis>persistence</emphasis> TestNG group require basic data source configuration. The data source has to be valid and JTA-based. The JNDI name of the DataSource is specified with <literal>org.jboss.cdi.tck.testDataSource</literal> configuration property.
+      </para>
+      <para>
+        Tests within the <emphasis>installedLib</emphasis> TestNG group require <literal>cdi-tck-ext-lib.jar</literal> artifact to be installed as a library (see also Java EE 6 specification, section EE.8.2.2 Installed Libraries).
       </para>
    </section>
 <!--

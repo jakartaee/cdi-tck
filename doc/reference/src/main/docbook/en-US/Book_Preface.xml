@@ -11,7 +11,7 @@
    </para>
    <para>
       The CDI TCK is built atop TestNG framework and Arquillian platform. The CDI TCK uses 
-      the Arquillian version <emphasis>1.0.2.Final</emphasis> to execute the test suite.
+      the Arquillian version <emphasis>1.0.3.Final</emphasis> to execute the test suite.
    </para>
 
    <para>
