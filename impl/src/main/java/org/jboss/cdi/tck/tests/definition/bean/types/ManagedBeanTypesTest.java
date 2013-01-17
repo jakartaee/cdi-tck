@@ -22,6 +22,9 @@ import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.TypeLiteral;
 
@@ -68,6 +71,15 @@ public class ManagedBeanTypesTest extends AbstractTest {
         assertEquals(tigerBean.getTypes().size(), 4);
         assertTypeSetMatches(tigerBean.getTypes(), Object.class, Tiger.class, new TypeLiteral<Animal<String>>() {
         }.getType(), new TypeLiteral<Mammal<String>>() {
+        }.getType());
+
+        // Nested generic class inheritance
+        Bean<Flock> flockBean = getUniqueBean(Flock.class);
+        assertNotNull(flockBean);
+        // Object, Flock, List<Vulture<Integer>>, Collection<Vulture<Integer>>, Iterable<Vulture<Integer>>
+        assertTypeSetMatches(flockBean.getTypes(), Object.class, Flock.class, new TypeLiteral<List<Vulture<Integer>>>() {
+        }.getType(), new TypeLiteral<Collection<Vulture<Integer>>>() {
+        }.getType(), new TypeLiteral<Iterable<Vulture<Integer>>>() {
         }.getType());
     }
 
