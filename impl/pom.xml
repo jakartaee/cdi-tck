@@ -211,10 +211,14 @@
                             <!-- compilerArguments> <Aapt.flag1>-AoutputDir=${basedir}/../target/</Aapt.flag1> </compilerArguments -->
                             <compilerArguments>
                                 <AoutputDir>${basedir}/../target/</AoutputDir>
-                                <AgeneratedSourcesOutputDir>${basedir}/src/generated/java</AgeneratedSourcesOutputDir>
+                                <!-- Use javax.tools.StandardLocation.SOURCE_OUTPUT instead -->
+                                <!-- AgeneratedSourcesOutputDir>${basedir}/src/generated/java</AgeneratedSourcesOutputDir-->
                                 <AgeneratedSourcesPackage>org.jboss.cdi.tck</AgeneratedSourcesPackage>
                             </compilerArguments>
                             <compilerArgument>-AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml</compilerArgument>
+                            <generatedSourcesDirectory>target/generated-sources/audit</generatedSourcesDirectory>
+                            <!-- Disable annotation processor for test sources -->
+                            <testCompilerArgument>-proc:none</testCompilerArgument>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -247,12 +251,6 @@
                                     </artifacts>
                                 </configuration>
                             </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <executions>
                             <execution>
                                 <id>add-source</id>
                                 <phase>generate-sources</phase>
@@ -261,7 +259,7 @@
                                 </goals>
                                 <configuration>
                                     <sources>
-                                        <source>${basedir}/src/generated/java</source>
+                                        <source>target/generated-sources/audit</source>
                                     </sources>
                                 </configuration>
                             </execution>
