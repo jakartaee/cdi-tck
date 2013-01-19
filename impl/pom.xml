@@ -185,6 +185,35 @@
                 </executions>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.codehaus.mojo</groupId>
+                                        <artifactId>exec-maven-plugin</artifactId>
+                                        <versionRange>[1.1.1,)</versionRange>
+                                        <goals>
+                                            <goal>java</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
@@ -211,12 +240,8 @@
                             <!-- compilerArguments> <Aapt.flag1>-AoutputDir=${basedir}/../target/</Aapt.flag1> </compilerArguments -->
                             <compilerArguments>
                                 <AoutputDir>${basedir}/../target/</AoutputDir>
-                                <!-- Use javax.tools.StandardLocation.SOURCE_OUTPUT instead -->
-                                <!-- AgeneratedSourcesOutputDir>${basedir}/src/generated/java</AgeneratedSourcesOutputDir-->
-                                <AgeneratedSourcesPackage>org.jboss.cdi.tck</AgeneratedSourcesPackage>
                             </compilerArguments>
                             <compilerArgument>-AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml</compilerArgument>
-                            <generatedSourcesDirectory>target/generated-sources/audit</generatedSourcesDirectory>
                             <!-- Disable annotation processor for test sources -->
                             <testCompilerArgument>-proc:none</testCompilerArgument>
                         </configuration>
@@ -261,6 +286,29 @@
                                     <sources>
                                         <source>target/generated-sources/audit</source>
                                     </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <mainClass>org.jboss.test.audit.generate.SectionsClassGenerator</mainClass>
+                                    <arguments>
+                                        <!-- auditFilePath -->
+                                        <argument>${basedir}/src/main/resources/tck-audit-cdi.xml</argument>
+                                        <!-- packageBase -->
+                                        <argument>org.jboss.cdi.tck</argument>
+                                        <!-- outputDirPath -->
+                                        <argument>${basedir}/target/generated-sources/audit</argument>
+                                    </arguments>
                                 </configuration>
                             </execution>
                         </executions>
