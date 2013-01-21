@@ -1,4 +1,4 @@
-<specification xmlns="http://jboss.com/products/weld/tck/audit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd" name="JSR 346: Contexts and Dependency Injection for Java EE 1.1" id="cdi" version="20091101" generateSectionIds="true" generateSectionClass="true">
+<specification xmlns="http://jboss.com/products/weld/tck/audit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd" name="JSR 346: Contexts and Dependency Injection for Java EE 1.1" id="cdi" version="20091101" generateSectionIds="true">
 
     <section id="architecture" title="Architecture" level="1" />
 
@@ -5352,7 +5352,7 @@
     <section id="event_types_and_qualifier_types" title="Event types and qualifier types" level="2">
 
         <assertion id="aa">
-            <text>An event object is an instance of a concrete Java class with no type variables.</text>
+            <text>An event object is an instance of a concrete Java class with no unresolvable type variables.</text>
         </assertion>
 
         <assertion id="c">
@@ -5360,8 +5360,7 @@
         </assertion>
 
         <assertion id="cb" testable="false">
-            <text>An event type may not contain a type variable.</text>
-            <note>Doesn't specify an error condition</note>
+            <text>An event type may not contain an unresolvable type variable.</text>
         </assertion>
 
         <assertion id="d">
@@ -5401,9 +5400,9 @@
         </assertion>
 
         <group>
-            <text>An event is delivered to an observer method if the observer method belongs to an enabled bean, the event object is assignable to the observed event type, taking type parameters into consideration, the observer method has no event qualifiers or has a subset of the event qualifiers. An observer method has an event qualifier if it has an observed event qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.Nonbinding|. Also the event is not a container lifecycle event, as defined in Section 11.5 "Container lifecycle events", or the observer method belongs to an extension.</text>
+            <text>An event is delivered to an observer method if the observer method belongs to an enabled bean, an event type is assignable to the observed event type, taking type parameters into consideration, the observer method has no event qualifiers or has a subset of the event qualifiers. An observer method has an event qualifier if it has an observed event qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.Nonbinding|. Also the event is not a container lifecycle event, as defined in Section 11.5 "Container lifecycle events", or the observer method belongs to an extension.</text>
             <assertion id="c">
-                <text>Check an event is delivered if the observer method belongs to an enabled bean, the event object is assignable to the observed event type and has a subset of the event qualifiers.</text>
+                <text>Check an event is delivered if the observer method belongs to an enabled bean, an event type is assignable to the observed event type and has a subset of the event qualifiers.</text>
             </assertion>
             <assertion id="d">
                 <text>Check an event is not delivered if the observer method belongs to an disabled bean.</text>
@@ -5521,8 +5520,12 @@
             <text>The method |fire()| fires an event with the specified qualifiers and notifies observers, as defined by Section 10.5, "Observer notification".</text>
         </assertion>
 
+        <assertion id="edb">
+            <text>If the container is unable to resolve the parameterized type of the event object, it uses the specified type to infer the parameterized type of the event types.</text>
+        </assertion>
+
         <assertion id="f">
-            <text>If the runtime type of the event object contains a type variable, an |IllegalArgumentException| is thrown.</text>
+            <text>If the runtime type of the event object contains an unresolvabvle type variable, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
         <assertion id="g">
@@ -7465,7 +7468,7 @@
         </assertion>
 
         <assertion id="a" testable="false">
-            <text>A library jar, EJB jar, application client jar or rar archive is a bean archive if it has a file named |beans.xml| in the |META-INF| directory.</text>
+            <text>A library jar, EJB jar or application client jar is a bean archive if it has a file named |beans.xml| in the |META-INF| directory.</text>
         </assertion>
 
         <group>
@@ -7497,7 +7500,7 @@
         </assertion>
 
         <group>
-            <text>In an application deployed as an ear, the container searches every bean archive bundled with or referenced by the ear, including bean archives bundled with or referenced by wars and EJB jars contained in the ear. The bean archives might be library jars, EJB jars, rars or war |WEB-INF/classes| directories.</text>
+            <text>In an application deployed as an ear, the container searches every bean archive bundled with or referenced by the ear, including bean archives bundled with or referenced by wars, EJB jars and rars contained in the ear. The bean archives might be library jars, EJB jars or war |WEB-INF/classes| directories.</text>
             <assertion id="bba">
                 <text>Check an EJB jar in an EAR</text>
             </assertion>
@@ -7536,6 +7539,13 @@
 
             <assertion id="bcd">
                 <text>Check classes in the jar.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>In an application deployed as a rar, the container searches every bean archive bundled with or referenced by the rar.</text>
+            <assertion id="bce">
+                <text>Check bean archive bundled in the rar.</text>
             </assertion>
         </group>
 

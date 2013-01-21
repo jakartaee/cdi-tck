@@ -41,8 +41,6 @@ import org.testng.annotations.Test;
 /**
  * Test resource adapter bean archive included in an EAR.
  * 
- * TODO I'm not completely sure about the test RAR structure and connector descriptor.
- * 
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -55,11 +53,11 @@ public class ResourceAdapterArchiveTest extends AbstractTest {
                 .build();
 
         ResourceAdapterArchive rar = ShrinkWrap.create(ResourceAdapterArchive.class);
+        // JCA spec 20.2.0.1 Resource Adapter Archive
         rar.addAsLibrary(ShrinkWrap
                 .create(JavaArchive.class)
                 .addClasses(Translator.class, TestResourceAdapter.class)
                 .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml"));
-        rar.addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml");
         rar.addAsManifestResource(
                 new StringAsset(Descriptors.create(ConnectorDescriptor.class).version("1.6").displayName("Test RA")
                         .vendorName("Red Hat Middleware LLC").eisType("Test RA").resourceadapterVersion("0.1")

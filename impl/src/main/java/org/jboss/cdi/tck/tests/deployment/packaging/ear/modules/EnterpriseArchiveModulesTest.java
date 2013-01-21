@@ -70,10 +70,10 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
      * Modules:
      * <ul>
      * <li>A - EJB jar BDA: Foo, BusinessOperationEventInspector</li>
-     * <li>B - EJB jar BDA: LegacyServiceProducer</li>
+     * <li>B - EJB jar BDA: LegacyServiceProducer, ContainerEventsObserver</li>
      * <li>C - lib BDA: Bar, AlternativeBar, BarInspector, Util, Business, BusinessOperationEvent,
      * BusinessOperationObservedEvent, NonEnterprise, Secured, SecurityInterceptor, LoggingDecorator</li>
-     * <li>D - lib non-BDA: LegacyService, ContainerEventsObserver</li>
+     * <li>D - lib non-BDA: LegacyService</li>
      * <li>E - web archive
      * <ul>
      * <li>F - WEB-INF/classes BDA: Baz, Bazinga</li>
@@ -103,7 +103,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
 
         // B - not visible for ACDE
         JavaArchive barArchive = ShrinkWrap.create(JavaArchive.class, "bar.jar")
-                .addClasses(BarInspector.class, ContainerEventsObserver.class, LegacyServiceProducer.class)
+                .addClasses(BarInspector.class, ContainerEventsObserver.class, LegacyServiceProducer.class, DummyBar.class)
                 .addAsServiceProvider(Extension.class, ContainerEventsObserver.class)
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         enterpriseArchive.addAsModule(barArchive);
@@ -164,7 +164,8 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"), @SpecAssertion(section = ENABLED_DECORATORS, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
+            @SpecAssertion(section = ENABLED_DECORATORS, id = "a") })
     public void testDecoratorEnablement() throws Exception {
         // Test LoggingDecorator is enabled in F only
         LoggingDecorator.reset();
@@ -174,8 +175,8 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "aa"), @SpecAssertion(section = PRODUCER_METHOD, id = "c"),
-            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "aa"),
+            @SpecAssertion(section = PRODUCER_METHOD, id = "c"), @SpecAssertion(section = OBSERVER_RESOLUTION, id = "i") })
     public void testProducerAndEventDuringDisposal() throws Exception {
         // Test legacy service producer in B, bean from F is observing event fired during legacy service disposal
         Bean<LegacyService> bean = getUniqueBean(LegacyService.class);

@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.event.observer.wildcardAndTypeVariable;
 
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_EVENT_PARAMETER;
+import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
@@ -44,23 +45,22 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "cb")
+    @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "ca")
     public void testObserverMethodCanObserveTypeVariable() {
         BostonTerrier.observed = false;
         Behavior event = new Behavior() {
         };
         getCurrentManager().fireEvent(event);
-        assert BostonTerrier.observed;
+        assertTrue(BostonTerrier.observed);
     }
 
     @Test
-    @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "ca")
+    @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "cb")
     public void testObserverMethodCanObserveWildcardType() {
         WildBostonTerrier.observed = false;
-        // TODO Not sure if this should match a wildcard event, I think it should as ? is an upper bound of all types PLM
         List<Object> event = new ObjectList();
         getCurrentManager().fireEvent(event);
-        assert WildBostonTerrier.observed;
+        assertTrue(WildBostonTerrier.observed);
     }
 
 }
