@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.extensions.modules;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.ProcessModule;
@@ -27,7 +26,7 @@ public class SingleModuleProcessingExtension extends ModuleProcessingExtension {
     public void observe(@Observes ProcessModule event) {
         super.observe(event);
 
-        Set<Class<?>> alternatives = event.getAlternatives();
+        List<Class<?>> alternatives = event.getAlternatives();
         alternatives.remove(Lion.class);
         alternatives.add(Tiger.class);
 

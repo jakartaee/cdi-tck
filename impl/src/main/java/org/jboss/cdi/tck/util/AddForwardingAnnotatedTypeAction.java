@@ -35,7 +35,7 @@ public abstract class AddForwardingAnnotatedTypeAction<X> extends ForwardingAnno
     public abstract String getBaseId();
 
     @Override
-    public String getID() {
+    public String getId() {
         return buildId(getBaseId(), delegate().getJavaClass());
     }
 

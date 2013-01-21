@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -82,6 +81,14 @@ public class ContainerLifecycleEvents {
         @Override
         public void addAnnotatedType(AnnotatedType<?> type) {
         }
+
+        @Override
+        public void addQualifier(AnnotatedType<? extends Annotation> qualifier) {
+        }
+
+        @Override
+        public void addInterceptorBinding(AnnotatedType<? extends Annotation> bindingType) {
+        }
     };
 
     public static final AfterBeanDiscovery AFTER_BEAN_DISCOVERY = new AfterBeanDiscovery() {
@@ -128,12 +135,7 @@ public class ContainerLifecycleEvents {
         }
 
         @Override
-        public Iterator<AnnotatedType<?>> getAnnotatedTypes() {
-            return null;
-        }
-
-        @Override
-        public Set<Class<?>> getAlternatives() {
+        public List<Class<?>> getAlternatives() {
             return null;
         }
     };

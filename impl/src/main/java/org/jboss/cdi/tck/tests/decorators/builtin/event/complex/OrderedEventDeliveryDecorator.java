@@ -48,7 +48,8 @@ public class OrderedEventDeliveryDecorator<T> implements Event<T>, Serializable 
     }
 
     @Inject
-    public OrderedEventDeliveryDecorator(@Delegate Event<T> delegate, InjectionPoint ip, BeanManager manager, OrderedEventDeliveryExtension extension) {
+    public OrderedEventDeliveryDecorator(@Delegate Event<T> delegate, InjectionPoint ip, BeanManager manager,
+            OrderedEventDeliveryExtension extension) {
         this.qualifiers = new HashSet<Annotation>(ip.getQualifiers());
         this.manager = manager;
         this.comparator = new ObserverMethodComparator(extension);
@@ -56,11 +57,12 @@ public class OrderedEventDeliveryDecorator<T> implements Event<T>, Serializable 
 
     @Override
     public void fire(T event) {
-        Set<ObserverMethod<? super T>> observers = manager.resolveObserverMethods(event, this.qualifiers.toArray(new Annotation[qualifiers.size()]));
+        Set<ObserverMethod<? super T>> observers = manager.resolveObserverMethods(event,
+                this.qualifiers.toArray(new Annotation[qualifiers.size()]));
         List<ObserverMethod<? super T>> sortedObservers = new ArrayList<ObserverMethod<? super T>>(observers);
         Collections.sort(sortedObservers, comparator);
         for (ObserverMethod<? super T> observer : sortedObservers) {
-            observer.notify(event, qualifiers);
+            observer.notify(event);
         }
     }
 

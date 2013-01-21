@@ -31,7 +31,7 @@ public abstract class ForwardingIdentifiedAnnotatedType<X> extends ForwardingAnn
     public abstract String getExtensionId();
 
     @Override
-    public String getID() {
+    public String getId() {
         return getExtensionId() + "_" + delegate().getJavaClass().getName();
     }
 

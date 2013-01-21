@@ -85,7 +85,7 @@
         <jboss.test.audit.version>1.1.0-SNAPSHOT</jboss.test.audit.version>
         <testng.version>6.3</testng.version>
         <jsr250.api.version>1.0</jsr250.api.version>
-        <cdi.api.version>1.1-PRD</cdi.api.version>
+        <cdi.api.version>1.1-20130121</cdi.api.version>
         <atinject.api.version>1</atinject.api.version>
         <jboss.ejb.api.version>1.0.2.Final</jboss.ejb.api.version>
         <jsr250.api.version>1.0</jsr250.api.version>

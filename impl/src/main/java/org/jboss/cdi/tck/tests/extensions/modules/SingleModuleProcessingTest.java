@@ -89,20 +89,11 @@ public class SingleModuleProcessingTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = PM, id = "bd") })
-    public void testAnnotatedTypes(SingleModuleProcessingExtension moduleProcessingExtension) {
-        Set<AnnotatedType<?>> types = moduleProcessingExtension.getFirstModule().getAnnotatedTypes();
-        assertContainsAll(types, Animal.class, Decorator1.class, Decorator2.class, Decorator3.class, Interceptor1.class,
-                Interceptor2.class, Interceptor3.class, Lion.class, SingleModuleProcessingExtension.class,
-                ModuleProcessingExtension.class, Tiger.class);
-    }
-
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = PM, id = "ba"), @SpecAssertion(section = PM, id = "ca"),
             @SpecAssertion(section = PM, id = "cb") })
     public void testAlternatives(SingleModuleProcessingExtension moduleProcessingExtension) {
 
-        Set<Class<?>> enabledAlternatives = moduleProcessingExtension.getFirstModule().getAlternatives();
+        List<Class<?>> enabledAlternatives = moduleProcessingExtension.getFirstModule().getAlternatives();
         assertEquals(enabledAlternatives.size(), 1);
         assertTrue(enabledAlternatives.contains(Lion.class));
 
