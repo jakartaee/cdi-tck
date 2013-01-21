@@ -20,8 +20,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * Simple data holder for sequence of actions identified with {@link String}.
@@ -32,9 +34,8 @@ import java.util.Map;
  */
 public final class ActionSequence {
 
-    /**
-     * Name of sequence
-     */
+    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.]+");
+
     private String name;
 
     /**
@@ -47,8 +48,12 @@ public final class ActionSequence {
         this.name = DEFAULT_SEQUENCE;
     }
 
+    /**
+     * @param name
+     */
     public ActionSequence(String name) {
         super();
+        checkStringValue(name);
         this.name = name;
     }
 
@@ -57,6 +62,7 @@ public final class ActionSequence {
      * @return data holder
      */
     public ActionSequence add(String actionId) {
+        checkStringValue(name);
         this.data.add(actionId);
         return this;
     }
@@ -119,6 +125,25 @@ public final class ActionSequence {
     @Override
     public String toString() {
         return String.format("ActionSequence [name=%s, data=%s]", name, getData());
+    }
+
+    /**
+     * 
+     * @return data in simple CSV format
+     */
+    public String dataToCsv() {
+        if (data.isEmpty()) {
+            return "";
+        }
+        StringBuilder csv = new StringBuilder();
+        for (Iterator<String> iterator = data.iterator(); iterator.hasNext();) {
+            String actionId = iterator.next();
+            csv.append(actionId);
+            if (iterator.hasNext()) {
+                csv.append(",");
+            }
+        }
+        return csv.toString();
     }
 
     // Static members
@@ -220,6 +245,37 @@ public final class ActionSequence {
         synchronized (sequences) {
             return sequences.containsKey(sequenceName) ? sequences.get(sequenceName).getData().size() : 0;
         }
+    }
+
+    /**
+     * 
+     * @param csv
+     * @return
+     */
+    public static ActionSequence buildFromCsvData(String csv) {
+
+        if (csv == null) {
+            throw new NullPointerException();
+        }
+
+        ActionSequence sequence = new ActionSequence();
+
+        if (csv.length() != 0) {
+
+            String[] data = csv.split(",");
+            for (String actionId : data) {
+                sequence.add(actionId);
+            }
+        }
+        return sequence;
+    }
+
+    private static void checkStringValue(String value) {
+
+        if (VALID_NAME_PATTERN.matcher(value).matches())
+            return;
+
+        throw new IllegalArgumentException("Invalid name/id specified:" + value);
     }
 
 }

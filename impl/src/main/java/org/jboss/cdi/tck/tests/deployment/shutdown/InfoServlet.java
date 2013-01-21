@@ -48,7 +48,7 @@ public class InfoServlet extends HttpServlet {
         } else if ("get".equals(action)) {
             response.setStatus(HttpServletResponse.SC_OK);
             response.setContentType("text/plain");
-            response.getWriter().write(ActionSequence.getSequence().toString());
+            response.getWriter().write(ActionSequence.getSequence().dataToCsv());
         } else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }

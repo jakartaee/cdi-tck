@@ -18,11 +18,14 @@
 package org.jboss.cdi.tck.tests.deployment.shutdown;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletRequestEvent;
+import javax.servlet.http.HttpSessionEvent;
 
 public class ContextDestructionObserver {
 
@@ -32,6 +35,14 @@ public class ContextDestructionObserver {
 
     public void observerApplicationContextDestroyed(@Observes @Destroyed(ApplicationScoped.class) ServletContextEvent event) {
         InfoClient.doGetInfo(ApplicationScoped.class.getName());
+    }
+
+    public void observerConversationContextDestroyed(@Observes @Destroyed(ConversationScoped.class) String id) {
+        InfoClient.doGetInfo(ConversationScoped.class.getName());
+    }
+
+    public void observerSessionContextDestroyed(@Observes @Destroyed(SessionScoped.class) HttpSessionEvent event) {
+        InfoClient.doGetInfo(SessionScoped.class.getName());
     }
 
 }

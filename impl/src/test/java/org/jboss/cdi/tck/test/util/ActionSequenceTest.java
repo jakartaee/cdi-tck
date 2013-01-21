@@ -159,4 +159,38 @@ public class ActionSequenceTest {
         assertTrue(ActionSequence.getSequence().endsWith("3", "4"));
         assertFalse(ActionSequence.getSequence().endsWith("2", "3"));
     }
+
+    @Test
+    public void testStringValues() {
+        ActionSequence seq = null;
+        try {
+            seq = new ActionSequence("The best sequence");
+        } catch (IllegalArgumentException expected) {
+        }
+        seq = new ActionSequence();
+        seq.add("01254_55757.dd");
+        seq.add(ActionSequence.class.getName());
+        try {
+            seq.add("^$loop");
+        } catch (IllegalArgumentException expected) {
+        }
+        try {
+            seq.add("My test");
+        } catch (IllegalArgumentException expected) {
+        }
+    }
+
+    @Test
+    public void testCsv() {
+        ActionSequence seq = new ActionSequence();
+        seq.add("1");
+        seq.add(ActionSequence.class.getName());
+        seq.add("1_test");
+        String csv = seq.dataToCsv();
+        assertNotNull(csv);
+        assertEquals(csv, "1," + ActionSequence.class.getName() + ",1_test");
+        ActionSequence built = ActionSequence.buildFromCsvData(csv);
+        assertEquals(built.getData().size(), 3);
+        assertTrue(built.endsWith("1_test"));
+    }
 }

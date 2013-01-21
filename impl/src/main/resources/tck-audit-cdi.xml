@@ -1499,7 +1499,7 @@
 
     <section id="injected_fields" title="Injected fields" level="2">
         <group>
-            <text>An injected field is a non-static, non-final field of a bean class, a non-static, non-final field of an enum, or of any Java EE component class supporting injection.</text>
+            <text>An injected field is a non-static, non-final field of a bean class or of any Java EE component class supporting injection.</text>
 
             <assertion id="a">
                 <text>Test a bean class.</text>
@@ -1507,10 +1507,6 @@
 
             <assertion id="b">
                 <text>Test a Java EE component class.</text>
-            </assertion>
-
-            <assertion id="c">
-                <text>Test an enum.</text>
             </assertion>
 
         </group>
@@ -1529,7 +1525,7 @@
 
     <section id="initializer_methods" title="Initializer methods" level="2">
         <group>
-            <text>An initializer method is a default-access, public, protected or private, non-abstract, non-static, non-generic method of a bean class, a non-abstract, non-static method of an enum or of any Java EE component class supporting injection.</text>
+            <text>An initializer method is a default-access, public, protected or private, non-abstract, non-static, non-generic method of a bean class or of any Java EE component class supporting injection.</text>
 
             <assertion id="a">
                 <text>Test a bean-class.</text>
@@ -1539,9 +1535,6 @@
                 <text>Test a Java EE component class.</text>
             </assertion>
 
-            <assertion id="c">
-                <text>Test an enum.</text>
-            </assertion>
         </group>
 
         <assertion id="e">
@@ -2578,7 +2571,7 @@
         </group>
 
         <group>
-            <text>The container must validate all injection points of all enabled beans, all enums, all observer methods, all disposer methods and all other Java EE component classes supporting injection when the application is initialized to ensure that there are no unsatisfied or ambiguous dependencies. If an unsatisfied or ambiguous dependency exists, the container automatically detects the problem and treats it as a deployment problem.</text>
+            <text>The container must validate all injection points of all enabled beans, all observer methods, all disposer methods and all other Java EE component classes supporting injection when the application is initialized to ensure that there are no unsatisfied or ambiguous dependencies. If an unsatisfied or ambiguous dependency exists, the container automatically detects the problem and treats it as a deployment problem.</text>
             <assertion id="aa">
                 <text>Test unsatisfied dependency for enabled bean.</text>
             </assertion>
@@ -2807,10 +2800,6 @@
             <text>The container is required to perform dependency injection whenever it instantiates non-contextual instances of managed beans.</text>
         </assertion>
 
-        <assertion id="da">
-            <text>The container is required to perform dependency injection whenever it instantiates non-contextual instances of enums.</text>
-        </assertion>
-
         <group>
             <text>The container is required to perform dependency injection whenever it instantiates instances of any other Java EE component class supporting injection.</text>
             <assertion id="ea">
@@ -2841,7 +2830,7 @@
         </assertion>
 
         <assertion id="g">
-            <text>The container interacts with instances of beans, enums and other Java EE component classes supporting injection by calling methods and getting and setting the field values.</text>
+            <text>The container interacts with instances of beans and other Java EE component classes supporting injection by calling methods and getting and setting the field values.</text>
         </assertion>
 
         <assertion id="h">
@@ -2869,7 +2858,7 @@
 
     <section id="fields_initializer_methods" title="Injection of fields and initializer methods" level="3">
         <group>
-            <text>When the container creates a new instance of a managed bean, session bean, enum or of any other Java EE component class supporting injection, the container must: Initialize the values of all injected fields. The container sets the value of each injected field to an injectable reference. Call all initializer methods, passing an injectable reference to each parameter.</text>
+            <text>When the container creates a new instance of a managed bean, session bean, or of any other Java EE component class supporting injection, the container must: Initialize the values of all injected fields. The container sets the value of each injected field to an injectable reference. Call all initializer methods, passing an injectable reference to each parameter.</text>
             <assertion id="aa">
                 <text>Test session bean fields injected</text>
             </assertion>
@@ -2881,12 +2870,6 @@
             </assertion>
             <assertion id="ad">
                 <text>Test managed bean initializer methods called</text>
-            </assertion>
-            <assertion id="ada">
-                <text>Test enum fields injected</text>
-            </assertion>
-            <assertion id="adb">
-                <text>Test enum initializer methods called</text>
             </assertion>
             <assertion id="ae">
                 <text>Test Servlet fields injected</text>
@@ -3007,7 +2990,7 @@
 
     <section id="dependent_objects_destruction" title="Destruction of dependent objects" level="3">
         <assertion id="a">
-            <text>When the container destroys an instance of a bean, enum or of any Java EE component class supporting injection, the container destroys all dependent objects, as defined in Section 6.4.2, "Destruction of objects with scope @Dependent", after the |@PreDestroy| callback completes and after the servlet |destroy()| method is called.</text>
+            <text>When the container destroys an instance of a bean or of any Java EE component class supporting injection, the container destroys all dependent objects, as defined in Section 6.4.2, "Destruction of objects with scope @Dependent", after the |@PreDestroy| callback completes and after the servlet |destroy()| method is called.</text>
         </assertion>
     </section>
 
@@ -7580,11 +7563,6 @@
             <note>Describes undefined behavior</note>
         </assertion>
 
-        <assertion id="e" testable="false">
-            <text>If an enum declaring injection points is defined in installed library jars, non-portable behavior results.</text>
-            <note>Non-portable behavior</note>
-        </assertion>
-
         <assertion id="f">
             <text>An extension may be deployed in any archive, including those that are not bean archives.</text>
         </assertion>
@@ -7632,10 +7610,6 @@
             <text>Next, the container must fire an event of type |AfterDeploymentValidation|, as defined in Section 11.5.3, "AfterDeploymentValidation event", and abort initialization of the application if any observer registers a deployment problem.</text>
         </assertion>
 
-        <assertion id="ga">
-            <text>Next, the container must inject any enums declaring injection points.</text>
-        </assertion>
-
         <assertion id="h">
             <text>Finally, the container begins directing requests to the application.</text>
             <note>Can only check the inverse, that requests aren't directed to the application before</note>
@@ -7649,9 +7623,6 @@
                 <text>First, the container must destroy all contexts.</text>
             </assertion>
             <assertion id="b">
-                <text>Next, the container must destroy dependent objects injected into enums.</text>
-            </assertion>
-            <assertion id="c">
                 <text>Finally, the container must fire an event of type |BeforeShutdown|, as defined in Section 11.5.4, "BeforeShutdown event".</text>
             </assertion>
         </group>

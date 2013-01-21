@@ -22,13 +22,15 @@ import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.BS;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.SHUTDOWN;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
 import java.net.URLEncoder;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.spi.BeforeShutdown;
 
 import org.jboss.arquillian.container.test.api.Deployer;
@@ -65,8 +67,8 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
     public static WebArchive createFooTestArchive() {
         return new WebArchiveBuilder()
                 .notTestArchive()
-                .withClasses(Foo.class, Bar.class, ContextDestructionObserver.class, LifecycleMonitoringExtension.class,
-                        SimpleLogger.class, InitServlet.class, InfoClient.class)
+                .withClasses(ContextDestructionObserver.class, LifecycleMonitoringExtension.class, SimpleLogger.class,
+                        InitServlet.class, InfoClient.class, Foo.class, Bar.class, Baz.class, Qux.class)
                 .withExtension(LifecycleMonitoringExtension.class).build();
     }
 
@@ -97,8 +99,8 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
      */
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
     @SpecAssertions({ @SpecAssertion(section = SHUTDOWN, id = "a"), @SpecAssertion(section = SHUTDOWN, id = "b"),
-            @SpecAssertion(section = SHUTDOWN, id = "c"), @SpecAssertion(section = REQUEST_CONTEXT, id = "ja"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "ga"), @SpecAssertion(section = BS, id = "a") })
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "ja"), @SpecAssertion(section = APPLICATION_CONTEXT, id = "ga"),
+            @SpecAssertion(section = BS, id = "a") })
     public void testShutdown(@ArquillianResource @OperateOnDeployment(FOO) URL fooContext,
             @ArquillianResource @OperateOnDeployment(INFO) URL infoContext) throws Exception {
 
@@ -110,13 +112,14 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
         // Undeploy foo
         deployer.undeploy(FOO);
 
-        // 1. Destroy contexts
-        // 2. Destroy dependent objects injected into enums
-        // 3. BeforeShutdown event
-        ActionSequence correctSequence = new ActionSequence().add(RequestScoped.class.getName())
-                .add(ApplicationScoped.class.getName()).add(Foo.class.getName()).add(BeforeShutdown.class.getName());
+        // 1. Destroy contexts (the order is not set)
+        // 2. BeforeShutdown event
         TextPage info = webClient.getPage(infoContext + "info?action=get");
-        assertEquals(info.getContent(), correctSequence.toString());
+        ActionSequence actual = ActionSequence.buildFromCsvData(info.getContent());
+        assertTrue(actual.endsWith(BeforeShutdown.class.getName()));
+        assertTrue(actual.containsAll(RequestScoped.class.getName(), SessionScoped.class.getName(),
+                ApplicationScoped.class.getName(), ConversationScoped.class.getName(), Foo.class.getName(),
+                Bar.class.getName(), Baz.class.getName(), Qux.class.getName()));
 
         // Undeploy info
         deployer.undeploy(INFO);

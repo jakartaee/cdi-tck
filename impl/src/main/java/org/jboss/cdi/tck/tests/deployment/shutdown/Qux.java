@@ -9,45 +9,25 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injection.enums;
+package org.jboss.cdi.tck.tests.deployment.shutdown;
 
-import javax.inject.Inject;
+import javax.annotation.PreDestroy;
+import javax.enterprise.context.ApplicationScoped;
 
-public enum BasicEnum {
+@ApplicationScoped
+public class Qux {
 
-    FOO(1), BAR(2), BAZ(3);
-
-    @Inject
-    @Persian
-    private Cat cat;
-
-    private Dog dog;
-
-    private final int value;
-
-    private BasicEnum(int value) {
-        this.value = value;
+    public void ping() {
     }
 
-    @Inject
-    public void init(Dog dog) {
-        this.dog = dog;
+    @PreDestroy
+    public void destroy() {
+        InfoClient.doGetInfo(Qux.class.getName());
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public Cat getCat() {
-        return cat;
-    }
-
-    public Dog getDog() {
-        return dog;
-    }
 }

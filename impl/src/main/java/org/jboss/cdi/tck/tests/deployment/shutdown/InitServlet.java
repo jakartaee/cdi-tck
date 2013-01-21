@@ -20,6 +20,7 @@ package org.jboss.cdi.tck.tests.deployment.shutdown;
 import java.io.IOException;
 import java.net.URLDecoder;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,6 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/init")
 public class InitServlet extends HttpServlet {
+
+    @Inject
+    Foo foo;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,5 +44,7 @@ public class InitServlet extends HttpServlet {
         } else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
+
+        foo.ping();
     }
 }

@@ -61,8 +61,8 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = INITIALIZATION, id = "b"), @SpecAssertion(section = INITIALIZATION, id = "c"),
             @SpecAssertion(section = INITIALIZATION, id = "da"), @SpecAssertion(section = INITIALIZATION, id = "f"),
-            @SpecAssertion(section = INITIALIZATION, id = "g"), @SpecAssertion(section = INITIALIZATION, id = "ga"),
-            @SpecAssertion(section = INITIALIZATION, id = "h"), @SpecAssertion(section = INITIALIZATION, id = "i") })
+            @SpecAssertion(section = INITIALIZATION, id = "g"), @SpecAssertion(section = INITIALIZATION, id = "h"),
+            @SpecAssertion(section = INITIALIZATION, id = "i") })
     public void testInitialization() {
 
         foo.ping();
@@ -82,8 +82,6 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
         // Validating bean dependencies and specialization - currently no portable way how to test
         // AfterDeploymentValidation
         correctSequenceData.add(AfterDeploymentValidation.class.getName());
-        // Inject any enums declaring injection points
-        correctSequenceData.add(Bar.class.getName());
         // Processing requests
         correctSequenceData.add(Foo.class.getName());
 
