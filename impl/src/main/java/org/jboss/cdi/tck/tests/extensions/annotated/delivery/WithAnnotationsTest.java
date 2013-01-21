@@ -41,7 +41,6 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-@Test(groups = INTEGRATION)
 public class WithAnnotationsTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
@@ -49,47 +48,68 @@ public class WithAnnotationsTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(WithAnnotationsTest.class)
-                .withClasses(Baby.class, BeforeBeanDiscoveryObserver.class, Desired.class, Egg.class, Falcon.class, Hen.class,
-                        Hummingbird.class, Chicken.class, Phoenix.class, ProcessAnnotatedTypeObserver.class, Raven.class,
-                        Sparrow.class, Turkey.class, Wanted.class).withLibrary(Griffin.class)
+                .withClasses(Baby.class, BeforeBeanDiscoveryObserver.class, Desired.class, Egg.class, Falcon.class,
+                        BatFalcon.class, Hen.class, Hummingbird.class, BeeHummingbird.class, Chicken.class, Phoenix.class,
+                        ProcessAnnotatedTypeObserver.class, Raven.class, Sparrow.class, Jack.class, Turkey.class,
+                        OcellatedTurkey.class, Wanted.class, MetaAnnotation.class).withLibrary(Griffin.class)
                 .withExtensions(ProcessAnnotatedTypeObserver.class, BeforeBeanDiscoveryObserver.class).build();
     }
 
     @Inject
     ProcessAnnotatedTypeObserver processAnnotatedTypeObserver;
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "fb"),
             @SpecAssertion(section = PAT, id = "fc"), @SpecAssertion(section = PAT, id = "fd"),
             @SpecAssertion(section = PAT, id = "fe"), @SpecAssertion(section = PAT, id = "ff") })
     public void testDelivery() {
 
+        // Annotated with @Desired or @Wanted
         List<Class<?>> processedDesiredAnWantedTypes = processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes();
         assertFalse(processedDesiredAnWantedTypes.isEmpty());
-        assertEquals(processedDesiredAnWantedTypes.size(), 6);
+        assertEquals(processedDesiredAnWantedTypes.size(), 12);
+        // type-level
+        assertTrue(processedDesiredAnWantedTypes.contains(Bird.class));
         assertTrue(processedDesiredAnWantedTypes.contains(Hummingbird.class));
+        assertTrue(processedDesiredAnWantedTypes.contains(BeeHummingbird.class));
+        // member-level
         assertTrue(processedDesiredAnWantedTypes.contains(Falcon.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Turkey.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Sparrow.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Hen.class));
+        assertTrue(processedDesiredAnWantedTypes.contains(BatFalcon.class));
         assertTrue(processedDesiredAnWantedTypes.contains(Griffin.class));
+        assertTrue(processedDesiredAnWantedTypes.contains(Hen.class));
+        assertTrue(processedDesiredAnWantedTypes.contains(RubberChicken.class));
+        assertTrue(processedDesiredAnWantedTypes.contains(Turkey.class));
+        assertTrue(processedDesiredAnWantedTypes.contains(OcellatedTurkey.class));
+        assertTrue(processedDesiredAnWantedTypes.contains(Jack.class));
+        assertTrue(processedDesiredAnWantedTypes.contains(Sparrow.class));
 
+        // Annotated with @Desired only
         List<Class<?>> processedDesiredTypes = processAnnotatedTypeObserver.getProcessedDesiredTypes();
         assertFalse(processedDesiredTypes.isEmpty());
-        assertEquals(processedDesiredTypes.size(), 3);
+        assertEquals(processedDesiredTypes.size(), 7);
+        // type-level
+        assertTrue(processedDesiredTypes.contains(Bird.class));
         assertTrue(processedDesiredTypes.contains(Hummingbird.class));
+        assertTrue(processedDesiredTypes.contains(BeeHummingbird.class));
+        // member-level
         assertTrue(processedDesiredTypes.contains(Turkey.class));
+        assertTrue(processedDesiredTypes.contains(OcellatedTurkey.class));
         assertTrue(processedDesiredTypes.contains(Sparrow.class));
+        assertTrue(processedDesiredTypes.contains(Jack.class));
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "g") })
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "fc"),
+            @SpecAssertion(section = PAT, id = "g") })
     public void testDeliveryMetaAnnotation() {
         List<Class<?>> processedTypes = processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes();
         assertFalse(processedTypes.isEmpty());
-        assertEquals(processedTypes.size(), 2);
+        assertEquals(processedTypes.size(), 5);
         assertTrue(processedTypes.contains(Chicken.class));
+        assertTrue(processedTypes.contains(Hen.class));
+        assertTrue(processedTypes.contains(RubberChicken.class));
         assertTrue(processedTypes.contains(Hummingbird.class));
+        assertTrue(processedTypes.contains(BeeHummingbird.class));
     }
 
 }

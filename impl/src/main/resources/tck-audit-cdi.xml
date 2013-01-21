@@ -6942,24 +6942,24 @@
         </group>
 
         <group>
-            <text>The annotation |@WithAnnotations| may be applied to the event parameter. If the annotation is applied, the container must only deliver |ProcessAnnotatedType| events for types which contain at least one of the annotations specified. The annotation can appear on the type, on any field, method or constructor declared by the type, or on any parameter of any method or constructor declared by the type.</text>
+            <text>The annotation |@WithAnnotations| may be applied to the event parameter. If the annotation is applied, the container must only deliver |ProcessAnnotatedType| events for types which contain at least one of the annotations specified. The annotation can appear on the type, or any of its supertypes, on any field, method or constructor declared by the type, or any of its supertypes, or on any parameter of any method or constructor declared by the type, or any of its supertypes.</text>
             <assertion id="fa">
-                <text>Test annotation on the type.</text>
+                <text>Test annotation on the type, or any of its supertypes.</text>
             </assertion>
             <assertion id="fb">
-                <text>Test annotation on the field.</text>
+                <text>Test annotation on the field declared by the type, or any of its supertypes.</text>
             </assertion>
             <assertion id="fc">
-                <text>Test annotation on the method.</text>
+                <text>Test annotation on the method declared by the type, or any of its supertypes.</text>
             </assertion>
             <assertion id="fd">
-                <text>Test annotation on the constructor.</text>
+                <text>Test annotation on the constructor declared by the type, or any of its supertypes.</text>
             </assertion>
             <assertion id="fe">
-                <text>Test annotation on the parameter of the method.</text>
+                <text>Test annotation on the parameter of the method declared by the type, or any of its supertypes.</text>
             </assertion>
             <assertion id="ff">
-                <text>Test annotation on the parameter of the constructor.</text>
+                <text>Test annotation on the parameter of the constructor declared by the type, or any of its supertypes.</text>
             </assertion>
         </group>
 

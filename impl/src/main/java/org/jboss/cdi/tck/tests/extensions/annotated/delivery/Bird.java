@@ -17,21 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
-import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
-
-@Model
-public class Hummingbird implements Bird {
-
-    public int ping() {
-        return 1;
-    }
-
-    @Baby
-    @Produces
-    public Hummingbird produceBaby(BeanManager beanManager) {
-        return new Hummingbird();
-    }
+@Desired
+public interface Bird {
 
 }

@@ -50,7 +50,7 @@ public class EnterpriseWithAnnotationsTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(EnterpriseWithAnnotationsTest.class)
                 .withClasses(Baby.class, Desired.class, ProcessAnnotatedTypeObserver.class, Hawk.class, Wanted.class,
-                        Chicken.class).withExtensions(ProcessAnnotatedTypeObserver.class).build();
+                        Chicken.class, MetaAnnotation.class).withExtensions(ProcessAnnotatedTypeObserver.class).build();
     }
 
     @Inject

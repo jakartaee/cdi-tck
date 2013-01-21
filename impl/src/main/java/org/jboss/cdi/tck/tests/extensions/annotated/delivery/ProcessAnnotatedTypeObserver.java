@@ -24,7 +24,6 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.WithAnnotations;
-import javax.inject.Qualifier;
 
 public class ProcessAnnotatedTypeObserver implements Extension {
 
@@ -40,7 +39,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         processedDesiredAndWantedTypes.add(pat.getAnnotatedType().getJavaClass());
     }
 
-    public void observeMetaAnnotationTypes(@WithAnnotations({ Qualifier.class }) @Observes ProcessAnnotatedType<?> pat) {
+    public void observeMetaAnnotationTypes(@WithAnnotations({ MetaAnnotation.class }) @Observes ProcessAnnotatedType<?> pat) {
         processedMetaAnnotationTypes.add(pat.getAnnotatedType().getJavaClass());
     }
 

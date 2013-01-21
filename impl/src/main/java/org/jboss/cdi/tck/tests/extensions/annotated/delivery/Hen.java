@@ -21,7 +21,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
 @ApplicationScoped
-public class Hen {
+public class Hen extends Chicken {
 
     @Produces
     public Chicken produceChicken(@Wanted Egg egg) {
