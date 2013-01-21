@@ -737,7 +737,7 @@
         </assertion>
 
         <assertion id="h">
-            <text>A top-level Java class is not a managed bean if it is annotated |@Vetoed|.</text>
+            <text>A top-level Java class is not a managed bean if it is annotated |@Vetoed| or placed in a package annotated |@Vetoed|.</text>
         </assertion>
 
         <assertion id="n">
@@ -841,7 +841,7 @@
     <section id="session_beans" title="Session beans" level="2">
 
         <assertion id="aa">
-            <text>A session bean is a bean that is implemented by a session bean with an EJB 3.x client view that is not annotated with |@Vetoed|.</text>
+            <text>A session bean is a bean that is implemented by a session bean with an EJB 3.x client view that is not annotated with |@Vetoed| or in a package annotated |@Vetoed|.</text>
         </assertion>
 
         <assertion id="ab" testable="false">
@@ -1602,6 +1602,11 @@
 
         <assertion id="a">
             <text>Any type or package may be prevented from being considered by CDI by adding the |@Vetoed| annotation on the type or package.</text>
+        </assertion>
+        
+        <assertion id="b" testable="false">
+            <text>If packages are split across jars, non-portable behavior results. An application can prevent packages being split across jars by sealing the package as defined by the Extension Mechanism Architecture.</text>
+            <note>Non-portable behavior</note>
         </assertion>
 
     </section>
