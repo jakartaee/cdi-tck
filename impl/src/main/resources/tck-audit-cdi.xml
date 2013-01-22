@@ -3858,13 +3858,40 @@
             <text>The container must guarantee that all passivation capable beans with scope |@Dependent| are passivation capable dependencies.</text>
         </assertion>
 
-        <assertion id="da">
+        <group>
             <text>The container must guarantee that all resources are passivation capable dependencies.</text>
-        </assertion>
+            <assertion id="da">
+                <text>Test resource for a Java EE resource.</text>
+            </assertion>
+            <assertion id="db">
+                <text>Test resource for a persistence unit.</text>
+            </assertion>
+            <assertion id="dc">
+                <text>Test resource for a persistence context.</text>
+            </assertion>
+            <assertion id="dd">
+                <text>Test resource for a remote EJB.</text>
+            </assertion>
+            <assertion id="de">
+                <text>Test resource for a web service.</text>
+            </assertion>
+        </group>
 
-        <assertion id="e">
+        <group>
             <text>The container must guarantee that the built-in beans of type |Instance|, |Event|, |InjectionPoint| and |BeanManager| are passivation capable dependencies.</text>
-        </assertion>
+            <assertion id="ea">
+                <text>Test built-in |Instance|.</text>
+            </assertion>
+            <assertion id="eb">
+                <text>Test built-in |Event|.</text>
+            </assertion>
+            <assertion id="ec">
+                <text>Test built-in |InjectionPoint|.</text>
+            </assertion>
+            <assertion id="ed">
+                <text>Test built-in |BeanManager|.</text>
+            </assertion>
+        </group>
 
         <assertion id="fa">
             <text>A custom implementation of |Bean| is a passivation capable dependency if it implements |PassivationCapable| or if |getScope()| returns a normal scope type.</text>
@@ -6740,7 +6767,7 @@
                 <note>Note that CDI-58 is still open.</note>
             </assertion>
         </group>
-        
+
         <assertion id="ag">
             <text>If any observer method of the |BeforeBeanDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
@@ -6940,7 +6967,7 @@
                 <text>Test |@Vetoed| package.</text>
             </assertion>
         </group>
-        
+
         <assertion id="j">
             <text>The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where X is the class, for types discovered in a bean archive, or of type |javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType&lt;X&gt;| for types added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
         </assertion>

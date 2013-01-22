@@ -77,8 +77,8 @@ public class ImplicitEventTest extends AbstractTest {
         assert getUniqueBean(COURSE_FULL_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
         assert getUniqueBean(AWARD_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
         assert getUniqueBean(AWARD_EVENT_LITERAL, new HonorsLiteral()).getQualifiers().contains(AnyLiteral.INSTANCE);
-        assert getUniqueBean(AWARD_EVENT_LITERAL, AnyLiteral.INSTANCE, new HonorsLiteral()) == getUniqueBean(AWARD_EVENT_LITERAL,
-                new HonorsLiteral());
+        assert getUniqueBean(AWARD_EVENT_LITERAL, AnyLiteral.INSTANCE, new HonorsLiteral()) == getUniqueBean(
+                AWARD_EVENT_LITERAL, new HonorsLiteral());
     }
 
     @Test
@@ -109,12 +109,8 @@ public class ImplicitEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BUILTIN_EVENT, id = "g"), @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "e") // TODO break up
-                                                                                                                // this
-                                                                                                                // assertion
-                                                                                                                // into smaller
-                                                                                                                // bits
-    })
+    @SpecAssertions({ @SpecAssertion(section = BUILTIN_EVENT, id = "g"),
+            @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "eb") })
     public void testImplicitEventIsPassivationCapable() throws IOException, ClassNotFoundException {
         StudentDirectory directory = getInstanceByType(StudentDirectory.class);
         directory.reset();
