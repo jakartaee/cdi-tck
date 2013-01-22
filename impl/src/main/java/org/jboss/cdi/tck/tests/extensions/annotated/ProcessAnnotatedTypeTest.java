@@ -57,7 +57,7 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PAT, id = "aa"), @SpecAssertion(section = PAT, id = "ab"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "ba") })
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "ba"), @SpecAssertion(section = PAT, id = "j") })
     public void testProcessAnnotatedTypeEventsSent() {
         // Randomly test some of the classes and interfaces that should have
         // been discovered and sent via the event
@@ -71,14 +71,6 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     @SpecAssertion(section = PAT, id = "ac")
     public void testProcessAnnotatedTypeFiredForEnum() {
         assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Type.class));
-    }
-
-    @Test
-    @SpecAssertion(section = PAT, id = "ad")
-    public void testProcessAnnotatedTypeFiredForAnnotation() {
-        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(Tame.class));
-        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(MissileBinding.class));
-        assertTrue(ProcessAnnotatedTypeObserver.getAnnotatedclasses().contains(DummyAnnotation.class));
     }
 
     @Test

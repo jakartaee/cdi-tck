@@ -1596,7 +1596,7 @@
         <assertion id="a">
             <text>Any type or package may be prevented from being considered by CDI by adding the |@Vetoed| annotation on the type or package.</text>
         </assertion>
-        
+
         <assertion id="b" testable="false">
             <text>If packages are split across jars, non-portable behavior results. An application can prevent packages being split across jars by sealing the package as defined by the Extension Mechanism Architecture.</text>
             <note>Non-portable behavior</note>
@@ -6703,9 +6703,15 @@
             <text>The container must fire an event before it begins the bean discovery process. The event object must be of type |javax.enterprise.inject.spi.BeforeBeanDiscovery|.</text>
         </assertion>
 
-        <assertion id="ab">
+        <group>
             <text>|addQualifier()| declares an annotation type as a qualifier type.</text>
-        </assertion>
+            <assertion id="ab">
+                <text>Test |Class| method parameter.</text>
+            </assertion>
+            <assertion id="aba">
+                <text>Test |AnnotatedType| method parameter.</text>
+            </assertion>
+        </group>
 
         <assertion id="ac">
             <text>|addScope()| declares an annotation type as a scope type.</text>
@@ -6715,9 +6721,15 @@
             <text>|addStereotype()| declares an annotation type as a stereotype, and specifies its meta-annotations.</text>
         </assertion>
 
-        <assertion id="ae">
+        <group>
             <text>|addInterceptorBinding()| declares an annotation type as an interceptor binding type, and specifies its meta-annotations.</text>
-        </assertion>
+            <assertion id="ae">
+                <text>Test |Class| method parameter.</text>
+            </assertion>
+            <assertion id="aea">
+                <text>Test |AnnotatedType| method parameter.</text>
+            </assertion>
+        </group>
 
         <group>
             <text>|addAnnotatedType()| adds a given |AnnotatedType| to the set of types which will be scanned during bean discovery. More than one |AnnotatedType| may use the same base type, and the container must consider these as different types.</text>
@@ -6883,7 +6895,7 @@
     <section id="pat" title="ProcessAnnotatedType event" level="3">
 
         <group>
-            <text>The container must fire an event, before it processes a type, for each Java class, interface, enum or annotation discovered in a bean archive, Annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|, annotation added by |BeforeBeanDiscovery.addInterceptorBinding()|, |BeforeBeanDiscovery.addQualifier()|, |BeforeBeanDiscovery.addScope()| or |BeforeBeanDiscovery.addStereotype()|.</text>
+            <text>The container must fire an event, before it processes a type, for each Java class, interface or enum in a bean archive and annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
             <assertion id="aa">
                 <text>Test class discovered in a bean archive.</text>
             </assertion>
@@ -6893,9 +6905,6 @@
             <assertion id="ac">
                 <text>Test enum discovered in a bean archive.</text>
             </assertion>
-            <assertion id="ad">
-                <text>Test annotation discovered in a bean archive.</text>
-            </assertion>
             <assertion id="ae">
                 <text>Test class added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
             </assertion>
@@ -6904,9 +6913,6 @@
             </assertion>
             <assertion id="ag">
                 <text>Test enum added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
-            </assertion>
-            <assertion id="ah">
-                <text>Test annotation added by |BeforeBeanDiscovery.addInterceptorBinding()|, |BeforeBeanDiscovery.addQualifier()|, |BeforeBeanDiscovery.addScope()| and |BeforeBeanDiscovery.addStereotype()|.</text>
             </assertion>
         </group>
 
@@ -6921,9 +6927,6 @@
             <assertion id="ic">
                 <text>Test |@Vetoed| enum discovered in a bean archive.</text>
             </assertion>
-            <assertion id="id">
-                <text>Test |@Vetoed| annotation discovered in a bean archive.</text>
-            </assertion>
             <assertion id="ie">
                 <text>Test |@Vetoed| class added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
             </assertion>
@@ -6933,13 +6936,14 @@
             <assertion id="ig">
                 <text>Test |@Vetoed| enum added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
             </assertion>
-            <assertion id="ih">
-                <text>Test |@Vetoed| annotation added by |BeforeBeanDiscovery.addInterceptorBinding()|, |BeforeBeanDiscovery.addQualifier()|, |BeforeBeanDiscovery.addScope()| and |BeforeBeanDiscovery.addStereotype()|.</text>
-            </assertion>
             <assertion id="ii">
                 <text>Test |@Vetoed| package.</text>
             </assertion>
         </group>
+        
+        <assertion id="j">
+            <text>The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where X is the class, for types discovered in a bean archive, or of type |javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType&lt;X&gt;| for types added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+        </assertion>
 
         <group>
             <text>The annotation |@WithAnnotations| may be applied to the event parameter. If the annotation is applied, the container must only deliver |ProcessAnnotatedType| events for types which contain at least one of the annotations specified. The annotation can appear on the type, or any of its supertypes, on any field, method or constructor declared by the type, or any of its supertypes, or on any parameter of any method or constructor declared by the type, or any of its supertypes.</text>

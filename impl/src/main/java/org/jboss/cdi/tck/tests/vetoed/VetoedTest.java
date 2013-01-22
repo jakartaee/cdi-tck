@@ -22,10 +22,7 @@ import static org.jboss.cdi.tck.cdi.Sections.WHAT_CLASSES_ARE_BEANS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertTrue;
 
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.InterceptionType;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
@@ -78,27 +75,6 @@ public class VetoedTest extends AbstractTest {
         assertFalse(verifyingExtension.getClasses().contains(Animal.class));
     }
 
-    @SuppressWarnings("serial")
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
-            @SpecAssertion(section = PAT, id = "id") })
-    public void testVetoedAnnotation() {
-        assertFalse(verifyingExtension.getClasses().contains(Predator.class));
-        assertFalse(verifyingExtension.getClasses().contains(MissileBinding.class));
-        assertFalse(verifyingExtension.getClasses().contains(AnimalStereotype.class));
-        assertFalse(verifyingExtension.getClasses().contains(DummyScoped.class));
-
-        // Predator qualifier is not taken into account
-        Bean<Tiger> tigerBean = getUniqueBean(Tiger.class);
-        assertTrue(tigerBean.getStereotypes().isEmpty());
-        assertEquals(
-                getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
-                        new AnnotationLiteral<MissileBinding>() {
-                        }).size(), 0);
-
-        // TODO check custom scope
-    }
-
     @Test
     @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
             @SpecAssertion(section = PAT, id = "ic") })
@@ -120,6 +96,18 @@ public class VetoedTest extends AbstractTest {
         assertEquals(getCurrentManager().getBeans(Shark.class).size(), 1);
         assertEquals(getCurrentManager().getBeans(Shark.class, new AnnotationLiteral<Fishy>() {
         }).size(), 0);
+
+        // CDI-282
+        // assertFalse(verifyingExtension.getClasses().contains(Predator.class));
+        // assertFalse(verifyingExtension.getClasses().contains(MissileBinding.class));
+        // assertFalse(verifyingExtension.getClasses().contains(AnimalStereotype.class));
+        // assertFalse(verifyingExtension.getClasses().contains(DummyScoped.class));
+        // Bean<Tiger> tigerBean = getUniqueBean(Tiger.class);
+        // assertTrue(tigerBean.getStereotypes().isEmpty());
+        // assertEquals(
+        // getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
+        // new AnnotationLiteral<MissileBinding>() {
+        // }).size(), 0);
     }
 
     @Test
