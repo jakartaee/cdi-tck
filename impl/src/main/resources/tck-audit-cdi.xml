@@ -6023,9 +6023,9 @@
             <text>Any bean may obtain an instance of |BeanManager| by injecting it.</text>
         </assertion>
 
-        <assertion id="e">
+        <assertion id="e" testable="false">
             <text>Any operation of |BeanManager| may be called at any time during the execution of the application.</text>
-            <note>This does not appear to be testable</note>
+            <note>Note that all operations have dedicated assertions.</note>
         </assertion>
     </section>
 
@@ -6194,11 +6194,6 @@
     <section id="bm_validate_ip" title="Validating an injection point" level="3">
         <assertion id="a">
             <text>The |BeanManager.validate()| operation validates an injection point and throws an |InjectionException| if there is a deployment problem (for example, an unsatisfied or unresolvable ambiguous dependency) associated with the injection point.</text>
-            <note>Statement of intent</note>
-        </assertion>
-
-        <assertion id="a">
-            <text>The method |validate()| validates the dependency and throws an |InjectionException| if there is a deployment problem (for example, an unsatisfied or unresolvable ambiguous dependency) associated with the injection point.</text>
         </assertion>
     </section>
 
@@ -6732,15 +6727,20 @@
         </group>
 
         <group>
-            <text>|addAnnotatedType()| adds a given |AnnotatedType| to the set of types which will be scanned during bean discovery. More than one |AnnotatedType| may use the same base type, and the container must consider these as different types.</text>
+            <text>|addAnnotatedType()| adds a given |AnnotatedType| to the set of types which will be scanned during bean discovery. If an AnnotatedType with the same identifier already exists in the set of types the container automatically detects the problem and treats it as a deployment problem. Portable extensions are encouraged to add |IdentifiedAnnotatedType| s in order to not accidentally conflict with discovered types.</text>
             <assertion id="af">
                 <text>Test the |addAnnotatedType()| method.</text>
             </assertion>
             <assertion id="afa">
                 <text>Test that more than one |AnnotatedType| may use the same base type.</text>
+                <note>Note that CDI-58 is still open.</note>
+            </assertion>
+            <assertion id="afb">
+                <text>Test adding |AnnotatedType| if any other |AnnotatedType| with the same identifier already exists in the set of types.</text>
+                <note>Note that CDI-58 is still open.</note>
             </assertion>
         </group>
-
+        
         <assertion id="ag">
             <text>If any observer method of the |BeforeBeanDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
@@ -6994,10 +6994,7 @@
         <group>
             <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType|. The container must use the final value of this property, after all observers have been called, as the only source of types and annotations for the the program elements.</text>
             <assertion id="ca">
-                <text>Test class added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
-            </assertion>
-            <assertion id="cb">
-                <text>Test annotation added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+                <text>Test replacing |AnnotatedType| added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
             </assertion>
         </group>
 
