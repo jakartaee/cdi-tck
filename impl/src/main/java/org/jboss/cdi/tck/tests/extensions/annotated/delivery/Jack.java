@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
+@Pirate
 public class Jack extends Sparrow {
 
 }

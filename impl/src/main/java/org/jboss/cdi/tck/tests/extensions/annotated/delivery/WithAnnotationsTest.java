@@ -48,10 +48,10 @@ public class WithAnnotationsTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(WithAnnotationsTest.class)
-                .withClasses(Baby.class, BeforeBeanDiscoveryObserver.class, Desired.class, Egg.class, Falcon.class,
-                        BatFalcon.class, Hen.class, Hummingbird.class, BeeHummingbird.class, Chicken.class, Phoenix.class,
-                        ProcessAnnotatedTypeObserver.class, Raven.class, Sparrow.class, Jack.class, Turkey.class,
-                        OcellatedTurkey.class, Wanted.class, MetaAnnotation.class).withLibrary(Griffin.class)
+                .withClasses(Baby.class, BeforeBeanDiscoveryObserver.class, Desired.class, Egg.class, Bird.class, Pirate.class,
+                        Falcon.class, BatFalcon.class, Hen.class, Hummingbird.class, BeeHummingbird.class, Chicken.class,
+                        Phoenix.class, ProcessAnnotatedTypeObserver.class, Raven.class, Sparrow.class, Jack.class,
+                        Turkey.class, OcellatedTurkey.class, Wanted.class, MetaAnnotation.class).withLibrary(Griffin.class)
                 .withExtensions(ProcessAnnotatedTypeObserver.class, BeforeBeanDiscoveryObserver.class).build();
     }
 
