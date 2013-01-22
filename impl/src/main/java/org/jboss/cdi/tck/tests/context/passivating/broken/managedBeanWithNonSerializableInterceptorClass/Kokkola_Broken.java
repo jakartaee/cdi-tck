@@ -26,4 +26,7 @@ import javax.interceptor.Interceptors;
 @Interceptors(Interceptor_Broken.class)
 public class Kokkola_Broken implements Serializable {
 
+    public void ping() {
+    }
+
 }
