@@ -21,6 +21,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.inject.spi.Bean;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -40,13 +42,17 @@ public class StereotypeExtensionTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
 
-        return new WebArchiveBuilder().withTestClass(StereotypeExtensionTest.class)
-                .withLibrary(Chair.class, ObjectWithName.class, StereotypeExtension.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(StereotypeExtensionTest.class)
+                .withExtension(StereotypeExtension.class).build();
     }
 
     @Test
     @SpecAssertion(section = BBD, id = "ad")
     public void testStereotypeWorks() {
+
+        Bean<Chair> chairBean = getUniqueBean(Chair.class);
+        assertEquals(chairBean.getName(), "chair");
+
         Object instance = getInstanceByName("chair");
         assertNotNull(instance);
         assertTrue(instance instanceof Chair);

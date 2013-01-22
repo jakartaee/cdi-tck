@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.stereotype;
 
-@ObjectWithName
+@StereotypeCandidate
 public class Chair {
 
     public int breakUpToPieces() {
