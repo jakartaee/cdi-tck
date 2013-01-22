@@ -5780,10 +5780,6 @@
             </assertion>
         </group>
 
-        <assertion id="fd">
-            <text>CDI 1.1 implementations should call the notify method which takes both the event object and the event qualifiers only.</text>
-        </assertion>
-
     </section>
 
     <section id="observer_method_invocation_context" title="Observer method invocation context" level="3">

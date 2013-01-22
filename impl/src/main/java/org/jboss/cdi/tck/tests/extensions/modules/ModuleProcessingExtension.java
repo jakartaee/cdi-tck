@@ -17,9 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.modules;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
@@ -54,14 +52,12 @@ public class ModuleProcessingExtension implements Extension {
         private final List<Class<?>> interceptors;
         private final List<Class<?>> decorators;
         private final List<Class<?>> alternatives;
-        private final Set<Class<?>> classes;
         private final String beansXml;
 
         public ProcessModuleHolder(ProcessModule event) {
             this.interceptors = new ArrayList<Class<?>>(event.getInterceptors());
             this.decorators = new ArrayList<Class<?>>(event.getDecorators());
             this.alternatives = new ArrayList<Class<?>>(event.getAlternatives());
-            this.classes = new HashSet<Class<?>>();
             this.beansXml = readBeansXml(event);
         }
 
@@ -75,10 +71,6 @@ public class ModuleProcessingExtension implements Extension {
 
         public List<Class<?>> getAlternatives() {
             return alternatives;
-        }
-
-        public Set<Class<?>> getClasses() {
-            return classes;
         }
 
         public String getBeansXml() {

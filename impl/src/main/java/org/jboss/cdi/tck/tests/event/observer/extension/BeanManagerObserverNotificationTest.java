@@ -17,7 +17,9 @@
 package org.jboss.cdi.tck.tests.event.observer.extension;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.ABD;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 
 import java.lang.annotation.Annotation;
 
@@ -25,6 +27,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -51,20 +54,10 @@ public class BeanManagerObserverNotificationTest extends AbstractObserverNotific
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fd")
-    public void testNoQualifier() {
-        testNoQualifierInternal();
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fb"), @SpecAssertion(section = ABD, id = "eb"),
+            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "k") })
+    public void testNotifyInvoked() {
+        testNotifyInvokedInternal();
     }
 
-    @Test(groups = INTEGRATION)
-    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fd")
-    public void testSingleQualifier() {
-        testSingleQualifierInternal();
-    }
-
-    @Test(groups = INTEGRATION)
-    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fd")
-    public void testMultipleQualifiers() {
-        testMultipleQualifiersInternal();
-    }
 }

@@ -31,9 +31,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 public class GiraffeCustomObserver implements ObserverMethod<Giraffe> {
 
     private boolean transactionPhaseCalled;
-    private boolean legacyNotifyCalled;
     private Giraffe receivedPayload;
-    private Set<Annotation> receivedQualifiers;
 
     private final Set<Annotation> qualifiers;
 
@@ -47,9 +45,7 @@ public class GiraffeCustomObserver implements ObserverMethod<Giraffe> {
     }
 
     protected void reset() {
-        this.legacyNotifyCalled = false;
         this.receivedPayload = null;
-        this.receivedQualifiers = null;
         this.transactionPhaseCalled = false;
     }
 
@@ -75,25 +71,12 @@ public class GiraffeCustomObserver implements ObserverMethod<Giraffe> {
     }
 
     public void notify(Giraffe event) {
-        legacyNotifyCalled = true;
-    }
-
-    public void notify(Giraffe event, Set<Annotation> qualifiers) {
         ActionSequence.addAction(TransactionPhase.AFTER_SUCCESS.toString());
         receivedPayload = event;
-        receivedQualifiers = qualifiers;
-    }
-
-    public boolean isLegacyNotifyCalled() {
-        return legacyNotifyCalled;
     }
 
     public Giraffe getReceivedPayload() {
         return receivedPayload;
-    }
-
-    public Set<Annotation> getReceivedQualifiers() {
-        return receivedQualifiers;
     }
 
     public boolean isTransactionPhaseCalled() {

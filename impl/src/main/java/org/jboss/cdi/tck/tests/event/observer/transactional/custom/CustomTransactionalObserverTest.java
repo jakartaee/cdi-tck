@@ -40,7 +40,6 @@ import org.testng.annotations.Test;
 /**
  * @author Martin Kouba
  */
-@Test(groups = { INTEGRATION, PERSISTENCE })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class CustomTransactionalObserverTest extends AbstractTest {
 
@@ -56,8 +55,9 @@ public class CustomTransactionalObserverTest extends AbstractTest {
     @Inject
     private ObserverExtension extension;
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fa"), @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fb") })
+    @Test(groups = { INTEGRATION, PERSISTENCE })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fa"),
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fb") })
     public void testCustomTransactionalObserver() throws Exception {
 
         ActionSequence.reset();

@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.extensions.modules;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PM;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -72,14 +71,14 @@ public class MultiModuleProcessingTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = PM, id = "cg")
-    public void test(ModuleProcessingExtension moduleProcessingExtension) {
+    public void testInitialValues(ModuleProcessingExtension moduleProcessingExtension) {
 
         List<ProcessModuleHolder> modules = new ArrayList<ProcessModuleHolder>(moduleProcessingExtension.getModules());
-        for (Iterator<ProcessModuleHolder> i = modules.iterator(); i.hasNext();) {
+        for (Iterator<ProcessModuleHolder> iterator = modules.iterator(); iterator.hasNext();) {
 
-            ProcessModuleHolder module = i.next();
+            ProcessModuleHolder module = iterator.next();
 
-            if (module.getClasses().contains(Tiger.class)) {
+            if (!module.getInterceptors().isEmpty()) {
                 // Bean library
                 assertEquals(module.getAlternatives().size(), 1);
                 assertEquals(module.getAlternatives().iterator().next(), Tiger.class);
@@ -87,24 +86,13 @@ public class MultiModuleProcessingTest extends AbstractTest {
                 assertEquals(module.getDecorators().get(0), Decorator1.class);
                 assertEquals(module.getInterceptors().size(), 1);
                 assertEquals(module.getInterceptors().get(0), Interceptor1.class);
-                assertTrue(module.getClasses().contains(Animal.class));
-                assertTrue(module.getClasses().contains(Decorator1.class));
-                assertTrue(module.getClasses().contains(Interceptor1.class));
-                assertTrue(module.getClasses().contains(Tiger.class));
-                assertTrue(module.getClasses().contains(ModuleProcessingExtension.class));
-                assertFalse(module.getClasses().contains(Elephant.class));
-                assertFalse(module.getClasses().contains(ElephantExtension.class));
-                assertFalse(module.getClasses().contains(Lion.class));
-                i.remove();
-            } else if (module.getClasses().contains(Lion.class)) {
+                iterator.remove();
+            } else {
                 // WEB-INF/classes
                 assertTrue(module.getAlternatives().isEmpty());
                 assertTrue(module.getInterceptors().isEmpty());
                 assertTrue(module.getDecorators().isEmpty());
-                assertFalse(module.getClasses().contains(Tiger.class));
-                assertFalse(module.getClasses().contains(ModuleProcessingExtension.class));
-                assertFalse(module.getClasses().contains(ElephantExtension.class));
-                i.remove();
+                iterator.remove();
             }
         }
         assertEquals(modules.size(), 0);
