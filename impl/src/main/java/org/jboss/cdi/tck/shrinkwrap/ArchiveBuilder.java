@@ -686,8 +686,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 @Override
                 public void classFound(String className) {
 
-                    if (isAsClientMode() && testClazzName.equals(className))
+                    if (isAsClientMode() && testClazzName.equals(className)) {
                         return;
+                    }
 
                     if (excludedClasses != null && !excludedClasses.isEmpty()) {
                         for (String exludeClassName : excludedClasses) {
@@ -697,7 +698,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                         }
                     }
 
-                    // This is a performance WORKAROUND - adding classes via ClassContainer.addClass(String fqcn) is much slower
+                    // This is a performance WORKAROUND - adding classes via ClassContainer.addClass() is much slower
+                    // Actually the performace loss is caused by inner classes handling - which is not necessary here
                     // See also org.jboss.shrinkwrap.impl.base.container.ContainerBase addPackage() and getClassesPath() methods
                     ArchivePath classesPath = resolveClassesPath(archive);
 
@@ -724,15 +726,16 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     protected void processClasses(ClassContainer<?> archive) {
 
-        if (classes == null)
+        if (classes == null || classes.isEmpty()) {
             return;
+        }
 
         for (Class<?> clazz : classes) {
 
-            if ((isAsClientMode() && testClazz.getName().equals(clazz))
-                    || (excludedClasses != null && excludedClasses.contains(clazz)))
+            if ((isAsClientMode() && testClazz.getName().equals(clazz.getName()))
+                    || (excludedClasses != null && excludedClasses.contains(clazz.getName()))) {
                 continue;
-
+            }
             archive.addClass(clazz);
         }
     }
