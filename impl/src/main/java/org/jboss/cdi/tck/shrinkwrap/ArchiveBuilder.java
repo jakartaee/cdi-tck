@@ -22,7 +22,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -120,11 +122,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     protected List<ResourceDescriptor> webResources = null;
 
-    protected List<Package> packages = null;
+    protected Set<Package> packages = null;
 
-    protected List<Class<?>> classes = null;
+    protected Set<Class<?>> classes = null;
 
-    protected List<String> excludedClasses = null;
+    protected Set<String> excludedClasses = null;
 
     protected List<LibraryDescriptor> libraries = null;
 
@@ -212,7 +214,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     public T withClass(Class<?> clazz) {
         if (this.classes == null)
-            this.classes = new ArrayList<Class<?>>();
+            this.classes = new HashSet<Class<?>>();
 
         this.classes.add(clazz);
         return self();
@@ -243,7 +245,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     public T withExcludedClass(String clazz) {
         if (this.excludedClasses == null)
-            this.excludedClasses = new ArrayList<String>();
+            this.excludedClasses = new HashSet<String>();
 
         this.excludedClasses.add(clazz);
         return self();
@@ -312,7 +314,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     public T withPackage(Package pack) {
 
         if (this.packages == null)
-            this.packages = new ArrayList<Package>();
+            this.packages = new HashSet<Package>();
 
         this.packages.add(pack);
         return self();
@@ -737,6 +739,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         if (isSinglePackage(classes)) {
 
             Package classesPackage = null;
+            final List<String> simpleNames = getSimpleNames(classes);
 
             for (Class<?> clazz : classes) {
 
@@ -748,13 +751,22 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 archive.add(resource, location);
             }
 
-            // Handle inner classes - similar code would be normally called for each class
+            // Quite naive way of handling inner classes
+            // The reason for this is that similar code would be normally called for each class - see also
+            // ContainerBase.addClasses()
             archive.addPackages(false, new Filter<ArchivePath>() {
 
                 @Override
                 public boolean include(ArchivePath path) {
-                    // See also ContainerBase.addClasses()
-                    return path.get().matches(".*\\$.+\\.class");
+                    String pathStr = path.get();
+                    // Filter out irrelevant filenames
+                    for (String simpleName : simpleNames) {
+                        if (pathStr.contains(simpleName)) {
+                            // Match inner class filename
+                            return pathStr.matches(".*\\$.+\\.class");
+                        }
+                    }
+                    return false;
                 }
             }, classesPackage);
 
@@ -771,7 +783,17 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
     }
 
-    private boolean isSinglePackage(List<Class<?>> classes) {
+    private List<String> getSimpleNames(Set<Class<?>> classes) {
+
+        List<String> simpleNames = new ArrayList<String>(classes.size());
+
+        for (Class<?> clazz : classes) {
+            simpleNames.add(clazz.getSimpleName());
+        }
+        return simpleNames;
+    }
+
+    private boolean isSinglePackage(Set<Class<?>> classes) {
 
         String packageName = null;
 
