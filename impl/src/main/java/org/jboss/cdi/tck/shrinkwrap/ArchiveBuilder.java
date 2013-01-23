@@ -47,7 +47,10 @@ import org.jboss.cdi.tck.util.annotated.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePath;
 import org.jboss.shrinkwrap.api.ArchivePaths;
+import org.jboss.shrinkwrap.api.Filter;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.Asset;
+import org.jboss.shrinkwrap.api.asset.ClassAsset;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
@@ -90,6 +93,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     private static final Logger logger = Logger.getLogger(ArchiveBuilder.class.getName());
 
     private static final JavaArchive supportLibrary = buildSupportLibrary();
+
+    private static final JavaArchive incontainerLibrary = buildIncontainerLibrary();
 
     private String name;
 
@@ -642,9 +647,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             addDefaultLibraries();
 
             if (!isAsClientMode()) {
-                withClass(AbstractTest.class);
-                withClass(Sections.class);
-                withClass(TestGroups.class);
+                withLibrary(incontainerLibrary);
             }
         }
 
@@ -724,20 +727,68 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * 
      * @param archive
      */
-    protected void processClasses(ClassContainer<?> archive) {
+    protected <P extends Archive<?> & ClassContainer<?>> void processClasses(P archive) {
 
         if (classes == null || classes.isEmpty()) {
             return;
         }
 
-        for (Class<?> clazz : classes) {
+        // Optimize if all classes come from the same package
+        if (isSinglePackage(classes)) {
 
-            if ((isAsClientMode() && testClazz.getName().equals(clazz.getName()))
-                    || (excludedClasses != null && excludedClasses.contains(clazz.getName()))) {
-                continue;
+            Package classesPackage = null;
+
+            for (Class<?> clazz : classes) {
+
+                if (classesPackage == null) {
+                    classesPackage = clazz.getPackage();
+                }
+                Asset resource = new ClassAsset(clazz);
+                ArchivePath location = new BasicPath(resolveClassesPath(archive), AssetUtil.getFullPathForClassResource(clazz));
+                archive.add(resource, location);
             }
-            archive.addClass(clazz);
+
+            // Handle inner classes - similar code would be normally called for each class
+            archive.addPackages(false, new Filter<ArchivePath>() {
+
+                @Override
+                public boolean include(ArchivePath path) {
+                    // See also ContainerBase.addClasses()
+                    return path.get().matches(".*\\$.+\\.class");
+                }
+            }, classesPackage);
+
+        } else {
+
+            for (Class<?> clazz : classes) {
+
+                if ((isAsClientMode() && testClazz.getName().equals(clazz.getName()))
+                        || (excludedClasses != null && excludedClasses.contains(clazz.getName()))) {
+                    continue;
+                }
+                archive.addClass(clazz);
+            }
         }
+    }
+
+    private boolean isSinglePackage(List<Class<?>> classes) {
+
+        String packageName = null;
+
+        for (Class<?> clazz : classes) {
+            if (packageName == null) {
+                packageName = getPackageName(clazz);
+            } else {
+                if (!packageName.equals(getPackageName(clazz))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private String getPackageName(Class<?> clazz) {
+        return clazz.getPackage() != null ? clazz.getPackage().getName() : "";
     }
 
     /**
@@ -1126,6 +1177,17 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 .addPackage(Timer.class.getPackage()).addPackage(AnnotatedWrapper.class.getPackage());
 
         logger.log(Level.INFO, "Support library built [time: {0} ms]", System.currentTimeMillis() - start);
+        return supportLib;
+    }
+
+    private static JavaArchive buildIncontainerLibrary() {
+
+        long start = System.currentTimeMillis();
+
+        JavaArchive supportLib = ShrinkWrap.create(JavaArchive.class, "cdi-tck-incontainer.jar").addClasses(AbstractTest.class,
+                Sections.class, TestGroups.class);
+
+        logger.log(Level.INFO, "Incontainer library built [time: {0} ms]", System.currentTimeMillis() - start);
         return supportLib;
     }
 
