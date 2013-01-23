@@ -22,7 +22,7 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 
 @Model
-public class Hummingbird implements Bird {
+public class Hummingbird extends Bird {
 
     public int ping() {
         return 1;

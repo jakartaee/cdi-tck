@@ -20,6 +20,6 @@ package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class RubberChicken extends Chicken {
+public class RubberChicken extends Hen {
 
 }

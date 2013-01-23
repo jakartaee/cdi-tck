@@ -50,8 +50,9 @@ public class WithAnnotationsTest extends AbstractTest {
                 .withTestClass(WithAnnotationsTest.class)
                 .withClasses(Baby.class, BeforeBeanDiscoveryObserver.class, Desired.class, Egg.class, Bird.class, Pirate.class,
                         Falcon.class, BatFalcon.class, Hen.class, Hummingbird.class, BeeHummingbird.class, Chicken.class,
-                        Phoenix.class, ProcessAnnotatedTypeObserver.class, Raven.class, Sparrow.class, Jack.class,
-                        Turkey.class, OcellatedTurkey.class, Wanted.class, MetaAnnotation.class).withLibrary(Griffin.class)
+                        RubberChicken.class, Phoenix.class, ProcessAnnotatedTypeObserver.class, Raven.class, Sparrow.class,
+                        Jack.class, Turkey.class, OcellatedTurkey.class, Wanted.class, MetaAnnotation.class)
+                .withLibrary(Griffin.class)
                 .withExtensions(ProcessAnnotatedTypeObserver.class, BeforeBeanDiscoveryObserver.class).build();
     }
 
@@ -65,51 +66,51 @@ public class WithAnnotationsTest extends AbstractTest {
     public void testDelivery() {
 
         // Annotated with @Desired or @Wanted
-        List<Class<?>> processedDesiredAnWantedTypes = processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes();
-        assertFalse(processedDesiredAnWantedTypes.isEmpty());
-        assertEquals(processedDesiredAnWantedTypes.size(), 12);
+        List<Class<?>> desiredWantedTypes = processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes();
+        assertFalse(desiredWantedTypes.isEmpty());
+        assertEquals(desiredWantedTypes.size(), 12);
         // type-level
-        assertTrue(processedDesiredAnWantedTypes.contains(Bird.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Hummingbird.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(BeeHummingbird.class));
+        assertTrue(desiredWantedTypes.contains(Bird.class));
+        assertTrue(desiredWantedTypes.contains(Hummingbird.class));
+        assertTrue(desiredWantedTypes.contains(BeeHummingbird.class));
         // member-level
-        assertTrue(processedDesiredAnWantedTypes.contains(Falcon.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(BatFalcon.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Griffin.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Hen.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(RubberChicken.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Turkey.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(OcellatedTurkey.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Jack.class));
-        assertTrue(processedDesiredAnWantedTypes.contains(Sparrow.class));
+        assertTrue(desiredWantedTypes.contains(Falcon.class));
+        assertTrue(desiredWantedTypes.contains(BatFalcon.class));
+        assertTrue(desiredWantedTypes.contains(Griffin.class));
+        assertTrue(desiredWantedTypes.contains(Hen.class));
+        assertTrue(desiredWantedTypes.contains(RubberChicken.class));
+        assertTrue(desiredWantedTypes.contains(Turkey.class));
+        assertTrue(desiredWantedTypes.contains(OcellatedTurkey.class));
+        assertTrue(desiredWantedTypes.contains(Jack.class));
+        assertTrue(desiredWantedTypes.contains(Sparrow.class));
 
         // Annotated with @Desired only
-        List<Class<?>> processedDesiredTypes = processAnnotatedTypeObserver.getProcessedDesiredTypes();
-        assertFalse(processedDesiredTypes.isEmpty());
-        assertEquals(processedDesiredTypes.size(), 7);
+        List<Class<?>> desiredTypes = processAnnotatedTypeObserver.getProcessedDesiredTypes();
+        assertFalse(desiredTypes.isEmpty());
+        assertEquals(desiredTypes.size(), 7);
         // type-level
-        assertTrue(processedDesiredTypes.contains(Bird.class));
-        assertTrue(processedDesiredTypes.contains(Hummingbird.class));
-        assertTrue(processedDesiredTypes.contains(BeeHummingbird.class));
+        assertTrue(desiredTypes.contains(Bird.class));
+        assertTrue(desiredTypes.contains(Hummingbird.class));
+        assertTrue(desiredTypes.contains(BeeHummingbird.class));
         // member-level
-        assertTrue(processedDesiredTypes.contains(Turkey.class));
-        assertTrue(processedDesiredTypes.contains(OcellatedTurkey.class));
-        assertTrue(processedDesiredTypes.contains(Sparrow.class));
-        assertTrue(processedDesiredTypes.contains(Jack.class));
+        assertTrue(desiredTypes.contains(Turkey.class));
+        assertTrue(desiredTypes.contains(OcellatedTurkey.class));
+        assertTrue(desiredTypes.contains(Sparrow.class));
+        assertTrue(desiredTypes.contains(Jack.class));
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "fc"),
             @SpecAssertion(section = PAT, id = "g") })
     public void testDeliveryMetaAnnotation() {
-        List<Class<?>> processedTypes = processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes();
-        assertFalse(processedTypes.isEmpty());
-        assertEquals(processedTypes.size(), 5);
-        assertTrue(processedTypes.contains(Chicken.class));
-        assertTrue(processedTypes.contains(Hen.class));
-        assertTrue(processedTypes.contains(RubberChicken.class));
-        assertTrue(processedTypes.contains(Hummingbird.class));
-        assertTrue(processedTypes.contains(BeeHummingbird.class));
+        List<Class<?>> metaTypes = processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes();
+        assertFalse(metaTypes.isEmpty());
+        assertEquals(metaTypes.size(), 5);
+        assertTrue(metaTypes.contains(Chicken.class));
+        assertTrue(metaTypes.contains(Hen.class));
+        assertTrue(metaTypes.contains(RubberChicken.class));
+        assertTrue(metaTypes.contains(Hummingbird.class));
+        assertTrue(metaTypes.contains(BeeHummingbird.class));
     }
 
 }

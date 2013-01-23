@@ -18,6 +18,6 @@
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
 @Desired
-public interface Bird {
+public class Bird {
 
 }
