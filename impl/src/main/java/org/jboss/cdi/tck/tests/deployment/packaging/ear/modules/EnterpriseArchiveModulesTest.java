@@ -42,7 +42,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
@@ -52,6 +51,7 @@ import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
@@ -63,22 +63,21 @@ import org.testng.annotations.Test;
  * 
  * @author Martin Kouba
  */
-@Test(groups = JAVAEE_FULL)
+@SpecVersion(spec = "cdi", version = "20091101")
 public class EnterpriseArchiveModulesTest extends AbstractTest {
 
     /**
      * Modules:
      * <ul>
      * <li>A - EJB jar BDA: Foo, BusinessOperationEventInspector</li>
-     * <li>B - EJB jar BDA: LegacyServiceProducer, ContainerEventsObserver</li>
-     * <li>C - lib BDA: Bar, AlternativeBar, BarInspector, Util, Business, BusinessOperationEvent,
-     * BusinessOperationObservedEvent, NonEnterprise, Secured, SecurityInterceptor, LoggingDecorator</li>
+     * <li>B - EJB jar BDA: Bar, BarInspector, ContainerEventsObserver, LegacyServiceProducer, DummyBar</li>
+     * <li>C - lib BDA: AlternativeBar, Util, Business, BusinessOperationEvent, BusinessOperationObservedEvent, NonEnterprise,
+     * Secured, SecurityInterceptor, LoggingDecorator</li>
      * <li>D - lib non-BDA: LegacyService</li>
      * <li>E - web archive
      * <ul>
-     * <li>F - WEB-INF/classes BDA: Baz, Bazinga</li>
+     * <li>F - WEB-INF/classes BDA: Baz</li>
      * <li>G - WEB-INF/lib BDA: Qux</li>
-     * <li>H - WEB-INF/classes non-BDA:</li>
      * </ul>
      * </li>
      * </ul>
@@ -93,23 +92,29 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
                 .withTestClassDefinition(EnterpriseArchiveModulesTest.class)
                 .withClasses(Foo.class, BusinessOperationEventInspector.class)
                 // C - lib visible to all
-                .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(SecurityInterceptor.class.getName()).up(), Bar.class, AlternativeBar.class, Util.class,
-                        Business.class, BusinessOperationEvent.class, BusinessOperationObservedEvent.class,
-                        NonEnterprise.class, Secured.class, SecurityInterceptor.class, LoggingDecorator.class)
+                .withBeanLibrary(AlternativeBar.class, Util.class, Business.class, BusinessOperationEvent.class,
+                        BusinessOperationObservedEvent.class, NonEnterprise.class, Secured.class, SecurityInterceptor.class,
+                        LoggingDecorator.class)
                 // D - lib visible to all
                 .withLibrary(LegacyService.class).noDefaultWebModule().build();
 
         // B - not visible for ACDE
-        JavaArchive barArchive = ShrinkWrap.create(JavaArchive.class, "bar.jar")
-                .addClasses(BarInspector.class, ContainerEventsObserver.class, LegacyServiceProducer.class, DummyBar.class)
+        JavaArchive barArchive = ShrinkWrap
+                .create(JavaArchive.class, "bar.jar")
+                .addClasses(Bar.class, BarInspector.class, ContainerEventsObserver.class, LegacyServiceProducer.class,
+                        DummyBar.class)
                 .addAsServiceProvider(Extension.class, ContainerEventsObserver.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+                .addAsManifestResource(
+                        new StringAsset(Descriptors.create(BeansDescriptor.class).createInterceptors()
+                                .clazz(SecurityInterceptor.class.getName()).up().exportAsString()), "beans.xml")
+                // Make A visible in a portable way
+                .setManifest(
+                        new StringAsset(Descriptors.create(ManifestDescriptor.class)
+                                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).exportAsString()));
         enterpriseArchive.addAsModule(barArchive);
 
         // E - not visible for ABCD
-        WebArchive bazArchive = new WebArchiveBuilder()
+        WebArchive bazWebArchive = new WebArchiveBuilder()
                 .notTestArchive()
                 // F - with enabled decorator
                 .withClasses(Baz.class, EnterpriseArchiveModulesTest.class)
@@ -124,23 +129,23 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
                                 .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).addToClassPath("bar.jar")
                                 .exportAsString()));
-        enterpriseArchive.addAsModule(bazArchive);
+        enterpriseArchive.addAsModule(bazWebArchive);
 
         return enterpriseArchive;
     }
 
     @Inject
-    private Business foo;
+    Business foo;
 
     @Inject
-    private BusinessOperationEventInspector inspector;
+    BusinessOperationEventInspector inspector;
 
     @Inject
-    private BarInspector barInspector;
+    BarInspector barInspector;
 
     @NonEnterprise
     @Inject
-    private Business baz;
+    Business baz;
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "bb") })
@@ -149,7 +154,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
         assertTrue(ContainerEventsObserver.allEventsOk());
     }
 
-    @Test
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bba"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bbb"),
             @SpecAssertion(section = BEAN_ARCHIVE, id = "bbc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bbe"),
             @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
@@ -158,12 +163,13 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
         inspector.reset();
         foo.businessOperation1();
         foo.businessOperation2();
+        // Bar, Qux
         assertEquals(inspector.getBusinessOperationObservations(), 2);
-        // Interceptor is enabled in C only; observed method intercepted
+        // Interceptor is enabled in B only; observed method intercepted
         assertEquals(SecurityInterceptor.getNumberOfInterceptions(), 1);
     }
 
-    @Test
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
             @SpecAssertion(section = ENABLED_DECORATORS, id = "a") })
     public void testDecoratorEnablement() throws Exception {
@@ -174,7 +180,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
         assertEquals(LoggingDecorator.getNumberOfDecorationsPerformed(), 1);
     }
 
-    @Test
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "aa"),
             @SpecAssertion(section = PRODUCER_METHOD, id = "c"), @SpecAssertion(section = OBSERVER_RESOLUTION, id = "i") })
     public void testProducerAndEventDuringDisposal() throws Exception {
@@ -183,18 +189,17 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
         CreationalContext<LegacyService> ctx = getCurrentManager().createCreationalContext(bean);
         LegacyService instance = bean.create(ctx);
         bean.destroy(instance, ctx);
+        assertTrue(LegacyService.cleanupPerformed);
         assertTrue(LegacyService.disposalObserved);
     }
 
-    @Test
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "c") })
     public void testAlternatives() throws Exception {
-
         Set<Bean<?>> beans = getCurrentManager().getBeans(AlternativeBar.class);
         assertEquals(beans.size(), 1);
         assertEquals(beans.iterator().next().getBeanClass(), AlternativeBar.class);
-
-        // Bar alternative is enabled in A only
+        // Bar alternative is enabled in F only
         assertFalse(barInspector.getBar().isAlternative());
     }
 
