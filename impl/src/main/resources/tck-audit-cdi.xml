@@ -5425,7 +5425,7 @@
         </group>
 
         <assertion id="j">
-            <text>If the runtime type of the event object contains a type variable, the container must throw an |IllegalArgumentException|.</text>
+            <text>If the runtime type of the event object contains an unresolvable type variable, the container must throw an |IllegalArgumentException|.</text>
         </assertion>
 
         <assertion id="k">
@@ -5540,7 +5540,7 @@
         </assertion>
 
         <assertion id="f">
-            <text>If the runtime type of the event object contains an unresolvabvle type variable, an |IllegalArgumentException| is thrown.</text>
+            <text>If the runtime type of the event object contains an unresolvable type variable, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
         <assertion id="g">

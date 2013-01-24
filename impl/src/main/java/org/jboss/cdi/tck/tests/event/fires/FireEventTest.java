@@ -283,7 +283,7 @@ public class FireEventTest extends AbstractTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertions({ @SpecAssertion(section = EVENT, id = "f"), @SpecAssertion(section = OBSERVER_RESOLUTION, id = "j") })
-    public <T> void testEventFireThrowsExceptionIfEventObjectContainsTypeVariable() {
+    public <T> void testEventFireThrowsExceptionIfEventObjectTypeContainsUnresovableTypeVariable() {
         MiniBar miniBar = getInstanceByType(MiniBar.class);
         miniBar.itemEvent.fire(new Item_Illegal<T>("12 oz Beer", 6));
     }
