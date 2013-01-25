@@ -22,7 +22,9 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
+import org.jboss.cdi.tck.tests.extensions.annotated.delivery.Wanted.WantedLiteral;
 import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
 public class BeforeBeanDiscoveryObserver implements Extension {
 
@@ -50,7 +52,8 @@ public class BeforeBeanDiscoveryObserver implements Extension {
 
             @Override
             public AnnotatedType<Griffin> delegate() {
-                return beanManager.createAnnotatedType(Griffin.class);
+                return new AnnotatedTypeWrapper<Griffin>(beanManager.createAnnotatedType(Griffin.class), false,
+                        WantedLiteral.INSTANCE);
             }
         }.perform(event);
 

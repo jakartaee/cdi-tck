@@ -27,8 +27,18 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import javax.enterprise.util.AnnotationLiteral;
+
 @Target({ TYPE, METHOD, PARAMETER, FIELD, CONSTRUCTOR })
 @Retention(RUNTIME)
 public @interface Wanted {
+
+    @SuppressWarnings("all")
+    public static class WantedLiteral extends AnnotationLiteral<Wanted> implements Wanted {
+
+        private static final long serialVersionUID = 1L;
+
+        public static final Wanted INSTANCE = new WantedLiteral();
+    }
 
 }

@@ -17,14 +17,8 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
-import javax.inject.Inject;
-
 public class Griffin {
 
-    @Inject
-    Egg egg;
-
-    @Wanted
     public void ping() {
     }
 

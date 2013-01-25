@@ -51,8 +51,7 @@ public class WithAnnotationsTest extends AbstractTest {
                 .withClasses(Baby.class, BeforeBeanDiscoveryObserver.class, Desired.class, Egg.class, Bird.class, Pirate.class,
                         Falcon.class, BatFalcon.class, Hen.class, Hummingbird.class, BeeHummingbird.class, Chicken.class,
                         RubberChicken.class, Phoenix.class, ProcessAnnotatedTypeObserver.class, Raven.class, Sparrow.class,
-                        Jack.class, Turkey.class, OcellatedTurkey.class, Wanted.class, MetaAnnotation.class)
-                .withLibrary(Griffin.class)
+                        Jack.class, Turkey.class, OcellatedTurkey.class, Wanted.class, MetaAnnotation.class, Griffin.class)
                 .withExtensions(ProcessAnnotatedTypeObserver.class, BeforeBeanDiscoveryObserver.class).build();
     }
 
