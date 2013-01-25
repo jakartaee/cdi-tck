@@ -22,14 +22,9 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.InterceptionType;
@@ -39,7 +34,9 @@ import org.apache.commons.io.IOUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -56,7 +53,6 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SingleModuleProcessingTest extends AbstractTest {
 
@@ -64,15 +60,14 @@ public class SingleModuleProcessingTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-
         return new WebArchiveBuilder()
                 .withTestClass(SingleModuleProcessingTest.class)
                 .withClasses(Animal.class, Binding.class, Decorator1.class, Decorator2.class, Decorator3.class,
                         Interceptor1.class, Interceptor2.class, Interceptor3.class, Lion.class,
                         SingleModuleProcessingExtension.class, ModuleProcessingExtension.class, Tiger.class)
-                .withBeansXml(getBeansDescriptor()).withExtension(SingleModuleProcessingExtension.class).build()
-                .addAsResource(new StringAsset(getBeansDescriptor().exportAsString()), BEANS_XML_TEST)
-                .addPackages(true, IOUtils.class.getPackage());
+                .withBeansXml(getBeansDescriptor()).withExtension(SingleModuleProcessingExtension.class)
+                .withLibrary(ShrinkWrap.create(JavaArchive.class).addPackages(true, IOUtils.class.getPackage())).build()
+                .addAsResource(new StringAsset(getBeansDescriptor().exportAsString()), BEANS_XML_TEST);
     }
 
     private static BeansDescriptor getBeansDescriptor() {
@@ -81,14 +76,14 @@ public class SingleModuleProcessingTest extends AbstractTest {
                 .clazz(Interceptor1.class.getName(), Interceptor2.class.getName()).up();
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = PM, id = "a")
     public void testProcessedModulesCount(SingleModuleProcessingExtension moduleProcessingExtension) {
         // Single module: WEB-INF/classes
         assertEquals(moduleProcessingExtension.getModules().size(), 1);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = PM, id = "ba"), @SpecAssertion(section = PM, id = "ca"),
             @SpecAssertion(section = PM, id = "cb") })
     public void testAlternatives(SingleModuleProcessingExtension moduleProcessingExtension) {
@@ -141,13 +136,4 @@ public class SingleModuleProcessingTest extends AbstractTest {
                 IOUtils.toString(this.getClass().getResourceAsStream(BEANS_XML_TEST)));
     }
 
-    private void assertContainsAll(Collection<AnnotatedType<?>> annotatedTypes, Class<?>... types) {
-        Set<Class<?>> typeSet = new HashSet<Class<?>>(Arrays.asList(types));
-        for (AnnotatedType<?> item : annotatedTypes) {
-            typeSet.remove(item.getJavaClass());
-        }
-        if (!typeSet.isEmpty()) {
-            throw new IllegalStateException("The following types are not contained: " + typeSet);
-        }
-    }
 }

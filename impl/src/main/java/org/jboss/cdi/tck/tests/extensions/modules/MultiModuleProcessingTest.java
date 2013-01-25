@@ -30,6 +30,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.modules.ModuleProcessingExtension.ProcessModuleHolder;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -45,7 +47,6 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class MultiModuleProcessingTest extends AbstractTest {
 
@@ -54,22 +55,26 @@ public class MultiModuleProcessingTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(MultiModuleProcessingTest.class)
                 .withClasses(Lion.class)
+                // Tiger alternative selected
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Tiger.class.getName()).up())
+                // Tiger alternative selected, Decorator1 and Interceptor1 enabled
                 .withBeanLibrary(
                         Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Tiger.class.getName()).up()
                                 .createDecorators().clazz(Decorator1.class.getName()).up().createInterceptors()
                                 .clazz(Interceptor1.class.getName()).up(), Animal.class, Decorator1.class, Interceptor1.class,
                         Tiger.class, Binding.class, ModuleProcessingExtension.class)
-                .withLibrary(Elephant.class, ElephantExtension.class).build().addPackages(true, IOUtils.class.getPackage());
+                .withLibrary(Elephant.class, ElephantExtension.class)
+                .withLibrary(ShrinkWrap.create(JavaArchive.class).addPackages(true, IOUtils.class.getPackage())).build();
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = PM, id = "a")
     public void testProcessedModulesCount(ModuleProcessingExtension moduleProcessingExtension) {
         // WEB-INF/classes and bean library
         assertEquals(moduleProcessingExtension.getModules().size(), 2);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = PM, id = "cg")
     public void testInitialValues(ModuleProcessingExtension moduleProcessingExtension) {
 
@@ -87,9 +92,10 @@ public class MultiModuleProcessingTest extends AbstractTest {
                 assertEquals(module.getInterceptors().size(), 1);
                 assertEquals(module.getInterceptors().get(0), Interceptor1.class);
                 iterator.remove();
-            } else {
+            } else if (!module.getAlternatives().isEmpty()) {
                 // WEB-INF/classes
-                assertTrue(module.getAlternatives().isEmpty());
+                assertEquals(module.getAlternatives().size(), 1);
+                assertEquals(module.getAlternatives().iterator().next(), Tiger.class);
                 assertTrue(module.getInterceptors().isEmpty());
                 assertTrue(module.getDecorators().isEmpty());
                 iterator.remove();
