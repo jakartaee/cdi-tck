@@ -16,6 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.synthetic;
 
-public class Apple {
+public class Apple implements Fruit {
 
 }

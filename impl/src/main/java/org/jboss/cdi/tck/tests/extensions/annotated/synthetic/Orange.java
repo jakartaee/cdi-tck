@@ -16,6 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.synthetic;
 
-public class Orange {
+public class Orange implements Fruit {
 
 }
