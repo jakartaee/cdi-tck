@@ -147,7 +147,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
     @Inject
     Business baz;
 
-    @Test
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "bb") })
     public void testExtensionAndContainerEvents() throws Exception {
         // Test extension registration and container lifecycle events

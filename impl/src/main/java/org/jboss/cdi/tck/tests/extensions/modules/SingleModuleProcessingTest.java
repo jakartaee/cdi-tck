@@ -96,7 +96,7 @@ public class SingleModuleProcessingTest extends AbstractTest {
         assertEquals(bean.getBeanClass(), Tiger.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = PM, id = "bc"), @SpecAssertion(section = PM, id = "ce"),
             @SpecAssertion(section = PM, id = "cf") })
     public void testDecorators(SingleModuleProcessingExtension moduleProcessingExtension) {
@@ -112,7 +112,7 @@ public class SingleModuleProcessingTest extends AbstractTest {
         assertEquals(decorators.get(1).getBeanClass(), Decorator3.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = PM, id = "bb"), @SpecAssertion(section = PM, id = "cc"),
             @SpecAssertion(section = PM, id = "cd") })
     public void testInterceptors(SingleModuleProcessingExtension moduleProcessingExtension) {
@@ -129,7 +129,7 @@ public class SingleModuleProcessingTest extends AbstractTest {
         assertEquals(interceptors.get(1).getBeanClass(), Interceptor1.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = PM, id = "be") })
     public void testBeansXml(SingleModuleProcessingExtension moduleProcessingExtension) throws Exception {
         assertEquals(moduleProcessingExtension.getFirstModule().getBeansXml(),
