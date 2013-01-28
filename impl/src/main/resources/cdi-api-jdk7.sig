@@ -553,7 +553,9 @@ CLSS public abstract interface javax.enterprise.inject.spi.BeforeBeanDiscovery
 meth public abstract !varargs void addInterceptorBinding(java.lang.Class<? extends java.lang.annotation.Annotation>,java.lang.annotation.Annotation[])
 meth public abstract !varargs void addStereotype(java.lang.Class<? extends java.lang.annotation.Annotation>,java.lang.annotation.Annotation[])
 meth public abstract void addAnnotatedType(javax.enterprise.inject.spi.AnnotatedType<?>)
+meth public abstract void addInterceptorBinding(javax.enterprise.inject.spi.AnnotatedType<? extends java.lang.annotation.Annotation>)
 meth public abstract void addQualifier(java.lang.Class<? extends java.lang.annotation.Annotation>)
+meth public abstract void addQualifier(javax.enterprise.inject.spi.AnnotatedType<? extends java.lang.annotation.Annotation>)
 meth public abstract void addScope(java.lang.Class<? extends java.lang.annotation.Annotation>,boolean,boolean)
 
 CLSS public abstract interface javax.enterprise.inject.spi.BeforeShutdown
@@ -594,7 +596,7 @@ CLSS public abstract interface javax.enterprise.inject.spi.Extension
 
 CLSS public abstract interface javax.enterprise.inject.spi.IdentifiedAnnotatedType<%0 extends java.lang.Object>
 intf javax.enterprise.inject.spi.AnnotatedType<{javax.enterprise.inject.spi.IdentifiedAnnotatedType%0}>
-meth public abstract java.lang.String getID()
+meth public abstract java.lang.String getId()
 
 CLSS public abstract interface javax.enterprise.inject.spi.InjectionPoint
 meth public abstract boolean isDelegate()
@@ -635,7 +637,6 @@ meth public abstract java.util.Set<java.lang.annotation.Annotation> getObservedQ
 meth public abstract javax.enterprise.event.Reception getReception()
 meth public abstract javax.enterprise.event.TransactionPhase getTransactionPhase()
 meth public abstract void notify({javax.enterprise.inject.spi.ObserverMethod%0})
-meth public abstract void notify({javax.enterprise.inject.spi.ObserverMethod%0},java.util.Set<java.lang.annotation.Annotation>)
 
 CLSS public abstract interface javax.enterprise.inject.spi.PassivationCapable
 meth public abstract java.lang.String getId()
@@ -674,10 +675,9 @@ meth public abstract javax.enterprise.inject.spi.AnnotatedType<{javax.enterprise
 
 CLSS public abstract interface javax.enterprise.inject.spi.ProcessModule
 meth public abstract java.io.InputStream getBeansXml()
-meth public abstract java.util.Iterator<javax.enterprise.inject.spi.AnnotatedType<?>> getAnnotatedTypes()
+meth public abstract java.util.List<java.lang.Class<?>> getAlternatives()
 meth public abstract java.util.List<java.lang.Class<?>> getDecorators()
 meth public abstract java.util.List<java.lang.Class<?>> getInterceptors()
-meth public abstract java.util.Set<java.lang.Class<?>> getAlternatives()
 
 CLSS public abstract interface javax.enterprise.inject.spi.ProcessObserverMethod<%0 extends java.lang.Object, %1 extends java.lang.Object>
 meth public abstract javax.enterprise.inject.spi.AnnotatedMethod<{javax.enterprise.inject.spi.ProcessObserverMethod%1}> getAnnotatedMethod()
