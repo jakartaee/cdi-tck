@@ -21,9 +21,12 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.Extension;
 import javax.inject.Inject;
@@ -57,24 +60,27 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ProcessSyntheticAnnotatedTypeTest.class)
-                .withExtensions(RegisteringExtension1.class, RegisteringExtension2.class, ModifyingExtension.class,
+                .withExtensions(RegisteringExtension1.class, RegisteringExtension2.class, RegisteringExtension3.class, ModifyingExtension.class,
                         VerifyingExtension.class).build();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PAT, id = "ae"), @SpecAssertion(section = PAT, id = "af"),
-            @SpecAssertion(section = PAT, id = "j") })
+            @SpecAssertion(section = PAT, id = "j"), @SpecAssertion(section = PAT, id = "ag") })
     public void testEventsFired() {
         Set<Class<?>> patClasses = verifyingExtension.getPatClasses();
         Set<Class<?>> psatClasses = verifyingExtension.getPsatClasses();
-        assertEquals(psatClasses.size(), 3);
+        
+        assertEquals(psatClasses.size(), 4);
         assertTrue(psatClasses.contains(Orange.class));
         assertTrue(psatClasses.contains(Apple.class));
         assertTrue(psatClasses.contains(Pear.class));
+        assertTrue(psatClasses.contains(Vegetables.class));
         // Also verify that PAT is fired for classes in a BDA
         assertTrue(patClasses.contains(Orange.class));
         assertTrue(patClasses.contains(Apple.class));
         assertTrue(patClasses.contains(Pear.class));
+        
 
         // Test changes applied
         Set<Bean<?>> oranges = getCurrentManager().getBeans(Orange.class, AnyLiteral.INSTANCE);
@@ -98,5 +104,4 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
         assertTrue(sources.get(Orange.class) instanceof RegisteringExtension1);
         assertTrue(sources.get(Pear.class) instanceof RegisteringExtension2);
     }
-
 }
