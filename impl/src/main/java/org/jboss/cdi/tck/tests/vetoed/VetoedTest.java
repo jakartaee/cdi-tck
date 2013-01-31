@@ -21,7 +21,6 @@ import static org.jboss.cdi.tck.cdi.Sections.VETO;
 import static org.jboss.cdi.tck.cdi.Sections.WHAT_CLASSES_ARE_BEANS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNull;
 
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
@@ -56,7 +55,7 @@ public class VetoedTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(VetoedTest.class)
-                .withClasses(Animal.class, Elephant.class, Shark.class, Predator.class, Type.class, MissileBinding.class,
+                .withClasses(Animal.class, Elephant.class, Shark.class, Predator.class, MissileBinding.class,
                         DummyScoped.class, AnimalStereotype.class, Tiger.class, ModifyingExtension.class,
                         VerifyingExtension.class).withPackage(Piranha.class.getPackage())
                 .withExtensions(ModifyingExtension.class, VerifyingExtension.class).withLibrary(Gecko.class, Reptile.class)
@@ -73,14 +72,6 @@ public class VetoedTest extends AbstractTest {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
         assertFalse(verifyingExtension.getClasses().contains(Animal.class));
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
-            @SpecAssertion(section = PAT, id = "ic") })
-    public void testVetoedEnum() {
-        assertFalse(verifyingExtension.getClasses().contains(Type.class));
-        assertNull(Type.A.getBeanManager());
     }
 
     @SuppressWarnings("serial")

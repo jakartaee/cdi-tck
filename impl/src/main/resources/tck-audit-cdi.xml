@@ -6947,17 +6947,11 @@
             <assertion id="ib">
                 <text>Test |@Vetoed| interface discovered in a bean archive.</text>
             </assertion>
-            <assertion id="ic">
-                <text>Test |@Vetoed| enum discovered in a bean archive.</text>
-            </assertion>
             <assertion id="ie">
                 <text>Test |@Vetoed| class added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
             </assertion>
             <assertion id="if">
                 <text>Test |@Vetoed| interface added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
-            </assertion>
-            <assertion id="ig">
-                <text>Test |@Vetoed| enum added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
             </assertion>
             <assertion id="ii">
                 <text>Test |@Vetoed| package.</text>

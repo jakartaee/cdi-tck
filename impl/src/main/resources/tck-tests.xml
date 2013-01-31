@@ -46,6 +46,12 @@
                     <exclude name="test" />
                 </methods>
             </class>
+            <!-- CDI-298 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.annotated.delivery.WithAnnotationsTest">
+                <methods>
+                    <exclude name="testDelivery"/>
+                </methods>
+            </class>
 
         </classes>
     </test>
