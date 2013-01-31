@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.deployment.packaging.ear;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.testng.Assert.assertNotNull;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -37,10 +39,6 @@ import org.testng.annotations.Test;
 /**
  * This test verifies that multiple CDI-enabled web applications can be bundled inside of an enterprise archive (.ear).
  * <p>
- * Note that this test has to run in as-client mode since arquillian cannot work with such archive (doesn't know which WAR to
- * enrich).
- * </p>
- * <p>
  * This test was originally part of Seam Compatibility project.
  * </p>
  * 
@@ -51,10 +49,11 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class MultiWebModuleWithExtensionTest extends AbstractTest {
 
-    @Deployment(testable = false)
+    @Deployment
     public static EnterpriseArchive createTestArchive() {
 
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().withClasses(SimpleLogger.class).notTestArchive()
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
+                .withTestClassDefinition(MultiWebModuleWithExtensionTest.class).withClasses(SimpleLogger.class)
                 .noDefaultWebModule().build();
         StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class).applicationName("Test")
                 .createModule().ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb()
@@ -62,8 +61,9 @@ public class MultiWebModuleWithExtensionTest extends AbstractTest {
                 .contextRoot("/bar").up().up().exportAsString());
         enterpriseArchive.setApplicationXML(applicationXml);
 
-        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("foo.war").withClasses(FooWebBean.class)
-                .withBeanLibrary("foo.jar", FooExtension.class, FooBean.class).withDefaultEjbModuleDependency().build();
+        WebArchive fooArchive = Testable.archiveToTest(new WebArchiveBuilder().notTestArchive().withName("foo.war")
+                .withClasses(MultiWebModuleWithExtensionTest.class, FooWebBean.class)
+                .withBeanLibrary("foo.jar", FooExtension.class, FooBean.class).withDefaultEjbModuleDependency().build());
         enterpriseArchive.addAsModule(fooArchive);
 
         WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName("bar.war").withClasses(BarWebBean.class)
@@ -73,9 +73,11 @@ public class MultiWebModuleWithExtensionTest extends AbstractTest {
         return enterpriseArchive;
     }
 
-    @Test(groups = JAVAEE_FULL)
+    @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bbe") })
-    public void testMultipleWebModulesWithExtension() {
+    public void testMultipleWebModulesWithExtension(FooBean fooBean) {
+        assertNotNull(fooBean);
+        assertNotNull(fooBean.getExtension());
     }
 
 }
