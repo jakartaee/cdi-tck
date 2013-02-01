@@ -102,7 +102,7 @@
         <interceptor.api.version>1.0.0.Beta1</interceptor.api.version>
         <jws.api.version>1.0-MR1</jws.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
-        <htmlunit.version>2.4</htmlunit.version>
+        <htmlunit.version>2.9</htmlunit.version>
         <resteasy.version>2.2.1.GA</resteasy.version>
         <arquillian.version>1.0.3.Final</arquillian.version>
         <shrinkwrap.descriptors.version>2.0.0-alpha-3</shrinkwrap.descriptors.version>
