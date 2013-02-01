@@ -26,13 +26,14 @@ import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
 
+
 public class VerifyingExtension implements Extension {
 
     private Set<Class<?>> patClasses = new HashSet<Class<?>>();
     private Set<Class<?>> psatClasses = new HashSet<Class<?>>();
     private Map<Class<?>, Extension> sources = new HashMap<Class<?>, Extension>();
 
-    public <T extends Fruit> void verify(@Observes ProcessAnnotatedType<T> event) {
+    public <T extends Plants> void verify(@Observes ProcessAnnotatedType<T> event) {
         if (event instanceof ProcessSyntheticAnnotatedType<?>) {
             psatClasses.add(event.getAnnotatedType().getJavaClass());
         } else {
@@ -43,7 +44,7 @@ public class VerifyingExtension implements Extension {
     public <T extends Fruit> void verifySource(@Observes ProcessSyntheticAnnotatedType<T> event) {
         sources.put(event.getAnnotatedType().getJavaClass(), event.getSource());
     }
-
+    
     protected Set<Class<?>> getPatClasses() {
         return patClasses;
     }
