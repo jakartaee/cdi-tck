@@ -57,10 +57,10 @@ import org.testng.annotations.Test;
 /**
  * This test is aimed to verify packaging-related issues in a little bit more complex deployment scenario. The assertions are
  * rather informative and redundant as they're already verified in elementary tests.
- * 
+ *
  * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
  * classloading requirements)!
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -81,7 +81,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
      * </ul>
      * </li>
      * </ul>
-     * 
+     *
      * @return test archive
      */
     @Deployment
@@ -171,7 +171,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
 
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
-            @SpecAssertion(section = ENABLED_DECORATORS, id = "a") })
+            @SpecAssertion(section = ENABLED_DECORATORS, id = "c") })
     public void testDecoratorEnablement() throws Exception {
         // Test LoggingDecorator is enabled in F only
         LoggingDecorator.reset();
@@ -182,7 +182,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
 
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "aa"),
-            @SpecAssertion(section = PRODUCER_METHOD, id = "c"), @SpecAssertion(section = OBSERVER_RESOLUTION, id = "i") })
+            @SpecAssertion(section = PRODUCER_METHOD, id = "c"), @SpecAssertion(section = OBSERVER_RESOLUTION, id = "c") })
     public void testProducerAndEventDuringDisposal() throws Exception {
         // Test legacy service producer in B, bean from F is observing event fired during legacy service disposal
         Bean<LegacyService> bean = getUniqueBean(LegacyService.class);
@@ -194,7 +194,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ca") })
     public void testAlternatives() throws Exception {
         Set<Bean<?>> beans = getCurrentManager().getBeans(AlternativeBar.class);
         assertEquals(beans.size(), 1);
