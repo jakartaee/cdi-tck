@@ -16,15 +16,21 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.normal;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
-import javax.enterprise.inject.spi.Extension;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class CustomScopeExtension implements Extension {
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    void registerContext(@Observes AfterBeanDiscovery event) {
-        event.addContext(new CustomAlterableContext());
-        event.addContext(new CustomNonAlterableContext());
-    }
+import javax.enterprise.context.NormalScope;
+
+@NormalScope(passivating = true)
+@Inherited
+@Target({ TYPE, METHOD, FIELD })
+@Retention(RUNTIME)
+public @interface AlterableScoped {
 
 }

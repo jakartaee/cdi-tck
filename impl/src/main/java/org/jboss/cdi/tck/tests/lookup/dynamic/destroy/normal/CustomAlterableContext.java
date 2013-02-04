@@ -16,17 +16,24 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.normal;
 
+import java.lang.annotation.Annotation;
+
 import javax.enterprise.context.spi.AlterableContext;
 import javax.enterprise.context.spi.Contextual;
 
-public class CustomAlterableContext extends CustomNonAlterableContext implements AlterableContext {
+public class CustomAlterableContext extends AbstractContext implements AlterableContext {
 
     private static boolean destroyCalled;
 
-    @Override
+    @SuppressWarnings("unchecked")
     public void destroy(Contextual<?> contextual) {
-        destroyCalled = true;
-        super.destroy(contextual);
+    	destroyCalled = true;
+        Instance instance = storage.remove(contextual);
+        if (instance != null) {
+            @SuppressWarnings("rawtypes")
+            Contextual rawContextual = contextual;
+            rawContextual.destroy(instance.getInstance(), instance.getCtx());
+        }
     }
 
     public static void reset() {
@@ -36,4 +43,9 @@ public class CustomAlterableContext extends CustomNonAlterableContext implements
     public static boolean isDestroyCalled() {
         return destroyCalled;
     }
+
+	@Override
+	public Class<? extends Annotation> getScope() {
+		return AlterableScoped.class;
+	}
 }

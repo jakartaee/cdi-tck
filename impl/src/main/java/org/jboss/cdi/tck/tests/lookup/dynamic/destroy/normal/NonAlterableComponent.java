@@ -16,15 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.normal;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
-import javax.enterprise.inject.spi.Extension;
 
-public class CustomScopeExtension implements Extension {
+@NonAlterableScoped
+public class NonAlterableComponent extends AbstractComponent {
 
-    void registerContext(@Observes AfterBeanDiscovery event) {
-        event.addContext(new CustomAlterableContext());
-        event.addContext(new CustomNonAlterableContext());
-    }
 
 }

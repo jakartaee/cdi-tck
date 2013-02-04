@@ -37,109 +37,113 @@ import org.testng.annotations.Test;
 
 /**
  * Tests for https://issues.jboss.org/browse/CDI-139
- * 
+ *
  * <p>
  * This test was originally part of the Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class DestroyingNormalScopedInstanceTest extends AbstractTest {
 
-    private static final String[] VALUES = { "foo", "bar", "baz" };
+	private static final String[] VALUES = { "foo", "bar", "baz" };
 
-    @Deployment
-    public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DestroyingNormalScopedInstanceTest.class)
-                .withExtension(CustomScopeExtension.class).build();
-    }
+	@Deployment
+	public static WebArchive createTestArchive() {
+		return new WebArchiveBuilder()
+				.withTestClassPackage(DestroyingNormalScopedInstanceTest.class)
+				.withExtension(CustomScopeExtension.class).build();
+	}
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
-    public void testApplicationScopedComponent(Instance<ApplicationScopedComponent> instance) {
-        testComponent(instance);
-    }
+	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
+	public void testApplicationScopedComponent(
+			Instance<ApplicationScopedComponent> instance) {
+		testComponent(instance);
+	}
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
-    public void testRequestScopedComponent(Instance<RequestScopedComponent> instance) {
-        testComponent(instance);
-    }
+	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
+	public void testRequestScopedComponent(
+			Instance<RequestScopedComponent> instance) {
+		testComponent(instance);
+	}
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
-    public void testCustomScopedComponent(Instance<CustomScopedComponent> instance) {
-        testComponent(instance);
-    }
+	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
+	public void testCustomScopedComponent(
+			Instance<AlterableComponent> instance) {
+		testComponent(instance);
+	}
 
-    /**
-     * TODO add assertion - OPEN ISSUE atm
-     * 
-     * @param application
-     */
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    public void testNothingHappensIfNoInstanceToDestroy(ApplicationScopedComponent application) {
-        Bean<?> bean = getUniqueBean(ApplicationScopedComponent.class);
-        AlterableContext context = (AlterableContext) getCurrentManager().getContext(bean.getScope());
+	/**
+	 * TODO add assertion - OPEN ISSUE atm
+	 *
+	 * @param application
+	 */
+	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+	public void testNothingHappensIfNoInstanceToDestroy(
+			ApplicationScopedComponent application) {
+		Bean<?> bean = getUniqueBean(ApplicationScopedComponent.class);
+		AlterableContext context = (AlterableContext) getCurrentManager()
+				.getContext(bean.getScope());
 
-        AbstractComponent.reset();
-        application.setValue("value");
-        context.destroy(bean);
-        assertTrue(AbstractComponent.isDestroyed());
+		AbstractComponent.reset();
+		application.setValue("value");
+		context.destroy(bean);
+		assertTrue(AbstractComponent.isDestroyed());
 
-        context.destroy(bean); // make sure subsequent calls do not raise exception
-        context.destroy(bean);
-    }
+		context.destroy(bean);
+		// Make sure subsequent calls do not raise exception
+		context.destroy(bean);
+	}
 
-    private <T extends AbstractComponent> void testComponent(Instance<T> instance) {
-        for (String string : VALUES) {
-            T reference = instance.get();
-            assertNull(reference.getValue());
-            reference.setValue(string);
-            assertEquals(reference.getValue(), string);
+	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, expectedExceptions = UnsupportedOperationException.class)
+	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "p") })
+	public void testUnsupportedOperationExceptionThrownIfUnderlyingContextNotAlterable(
+			Instance<NonAlterableComponent> instance,
+			CustomScopeExtension extension) {
+		NonAlterableComponent component = instance.get();
+		instance.destroy(component);
+		fail("expected exception not thrown");
+	}
 
-            AbstractComponent.reset();
-            instance.destroy(reference);
-            assertTrue(AbstractComponent.isDestroyed());
-            assertNull(reference.getValue(), reference.getValue());
-        }
-    }
+	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
+	public void testContextDestroyCalled(
+			Instance<AlterableComponent> instance) {
+		AlterableComponent component = instance.get();
+		CustomAlterableContext.reset();
+		instance.destroy(component);
+		assertTrue(CustomAlterableContext.isDestroyCalled());
+	}
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "e") })
-    public void testUnsupportedOperationExceptionThrownIfUnderlyingContextNotAlterable(
-            Instance<CustomScopedComponent> instance, CustomScopeExtension extension) {
-        try {
-            extension.switchToNonAlterable();
-            CustomScopedComponent component = instance.get();
-            instance.destroy(component);
-            fail("expected exception not thrown");
-        } catch (UnsupportedOperationException expected) {
-        } finally {
-            extension.switchToAlterable();
-        }
-    }
+	/**
+	 * TODO add assertion - OPEN ISSUE atm
+	 *
+	 * @param application
+	 */
+	@Test(expectedExceptions = NullPointerException.class, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
+	public void testNullParameter(Instance<ApplicationScopedComponent> instance) {
+		instance.destroy(null);
+	}
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
-    public void testContextDestroyCalled(Instance<CustomScopedComponent> instance) {
-        CustomScopedComponent component = instance.get();
-        CustomAlterableContext.reset();
-        instance.destroy(component);
-        assertTrue(CustomAlterableContext.isDestroyCalled());
-    }
 
-    /**
-     * TODO add assertion - OPEN ISSUE atm
-     * 
-     * @param application
-     */
+	private <T extends AbstractComponent> void testComponent(
+			Instance<T> instance) {
+		for (String string : VALUES) {
+			T reference = instance.get();
+			assertNull(reference.getValue());
+			reference.setValue(string);
+			assertEquals(reference.getValue(), string);
 
-    @Test(expectedExceptions = NullPointerException.class, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
-    public void testNullParameter(Instance<ApplicationScopedComponent> instance) {
-        instance.destroy(null);
-    }
+			AbstractComponent.reset();
+			instance.destroy(reference);
+			assertTrue(AbstractComponent.isDestroyed());
+			assertNull(reference.getValue(), reference.getValue());
+		}
+	}
 }

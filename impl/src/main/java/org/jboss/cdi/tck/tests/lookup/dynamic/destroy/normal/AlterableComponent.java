@@ -16,21 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.normal;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.io.Serializable;
 
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+@AlterableScoped
+public class AlterableComponent extends AbstractComponent implements Serializable {
 
-import javax.enterprise.context.NormalScope;
-
-@NormalScope(passivating = true)
-@Inherited
-@Target({ TYPE, METHOD, FIELD })
-@Retention(RUNTIME)
-public @interface CustomScoped {
+    private static final long serialVersionUID = 6231182776948026757L;
 
 }
