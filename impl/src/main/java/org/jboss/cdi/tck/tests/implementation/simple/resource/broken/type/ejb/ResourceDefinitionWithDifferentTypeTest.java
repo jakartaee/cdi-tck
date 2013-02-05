@@ -40,7 +40,7 @@ public class ResourceDefinitionWithDifferentTypeTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ResourceDefinitionWithDifferentTypeTest.class).build();
+        return new WebArchiveBuilder().withName("ResourceDefinitionWithDifferentTypeTestEJB.war").withTestClassPackage(ResourceDefinitionWithDifferentTypeTest.class).build();
     }
 
     @Test(groups = JAVAEE_FULL)
