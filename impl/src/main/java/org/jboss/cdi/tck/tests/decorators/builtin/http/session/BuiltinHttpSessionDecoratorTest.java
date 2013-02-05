@@ -44,9 +44,8 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
 
@@ -67,7 +66,7 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
     @Inject
     HttpSessionObserver httpSessionObserver;
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acj"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa") })
     public void testDecoratorIsResolved() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(HttpSession.class));
@@ -78,7 +77,7 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
         }
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acj") })
     public void testDecoratorIsInvoked() {
         httpSession.invalidate();

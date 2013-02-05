@@ -17,13 +17,13 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.http.session;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
-@RequestScoped
+@ApplicationScoped
 public class HttpSessionObserver {
 
     private boolean isDecorated = false;
