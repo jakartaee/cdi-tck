@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,36 +23,50 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet used just to test context during service method.
- * 
+ *
  * @author David Allen
- * 
+ * @author Martin Kouba
  */
-public class ServiceMethodServlet extends HttpServlet {
+@WebServlet(name = "TestServlet", urlPatterns = "/test")
+public class TestServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Inject
-    private BeanManager manager;
+	@Inject
+	private BeanManager beanManager;
 
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!manager.getContext(SessionScoped.class).isActive()) {
-            throw new ServletException("Session is not active");
-        } else {
-            super.service(req, resp);
-        }
-    }
+	@Inject
+	private SimpleSessionBean simpleBean;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/text");
-        resp.getWriter().println("It worked!");
-    }
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		checkSessionContextActive();
+		super.service(req, resp);
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		resp.setContentType("text/text");
+		resp.getWriter().println("It worked!");
+	}
+
+	private void checkSessionContextActive() throws ServletException {
+		if (beanManager == null
+				|| !beanManager.getContext(SessionScoped.class).isActive()
+				|| simpleBean == null) {
+			throw new ServletException("Session context is not active");
+		}
+		// Check bean invocation
+		simpleBean.getId();
+	}
 
 }

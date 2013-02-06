@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -59,7 +59,7 @@ public class RequestContextTest extends AbstractTest {
     public void testRequestScopeActiveDuringServiceMethod() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        webClient.getPage(contextPath + "serviceMethodTest");
+        webClient.getPage(contextPath + "test");
     }
 
     /**
@@ -86,19 +86,19 @@ public class RequestContextTest extends AbstractTest {
         webClient.setThrowExceptionOnFailingStatusCode(true);
 
         // First request - response content contains SimpleRequestBean id
-        TextPage firstRequestResult = webClient.getPage(contextPath + "introspectRequest");
+        TextPage firstRequestResult = webClient.getPage(contextPath + "introspect");
         assertNotNull(firstRequestResult.getContent());
         // Make a second request and make sure the same context is not there (compare SimpleRequestBean ids)
-        TextPage secondRequestResult = webClient.getPage(contextPath + "introspectRequest");
+        TextPage secondRequestResult = webClient.getPage(contextPath + "introspect");
         assertNotNull(secondRequestResult.getContent());
         assertNotEquals(secondRequestResult.getContent().trim(), firstRequestResult.getContent().trim());
 
         // Make sure request context is destroyed after service(), doFilter(), requestDestroyed()
-        webClient.getPage(contextPath + "introspectRequest?mode=collect");
+        webClient.getPage(contextPath + "introspect?mode=collect");
         ActionSequence correctSequence = new ActionSequence().add(IntrospectServlet.class.getName())
-                .add(IntrospectTestFilter.class.getName()).add(TestServletRequestListener.class.getName())
+                .add(IntrospectFilter.class.getName()).add(TestServletRequestListener.class.getName())
                 .add(ContextDestructionObserver.class.getName());
-        TextPage destroyRequestResult = webClient.getPage(contextPath + "introspectRequest?mode=verify");
+        TextPage destroyRequestResult = webClient.getPage(contextPath + "introspect?mode=verify");
         assertNotNull(destroyRequestResult.getContent());
         assertEquals(destroyRequestResult.getContent(), correctSequence.toString());
     }

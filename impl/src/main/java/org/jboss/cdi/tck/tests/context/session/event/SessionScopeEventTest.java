@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -57,7 +57,7 @@ public class SessionScopeEventTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "da"), @SpecAssertion(section = SESSION_CONTEXT, id = "db"),
-            @SpecAssertion(section = SESSION_CONTEXT, id = "cd") })
+            @SpecAssertion(section = SESSION_CONTEXT, id = "ca") })
     public void test() throws Exception {
         WebClient client = new WebClient();
 

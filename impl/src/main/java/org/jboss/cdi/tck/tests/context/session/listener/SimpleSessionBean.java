@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.session;
+package org.jboss.cdi.tck.tests.context.session.listener;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -22,13 +22,11 @@ import java.util.UUID;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
 
-import org.jboss.cdi.tck.util.ActionSequence;
-
 @SessionScoped
 public class SimpleSessionBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    private static boolean beanDestroyed = false;
     private String id = UUID.randomUUID().toString();
 
     public String getId() {
@@ -37,7 +35,14 @@ public class SimpleSessionBean implements Serializable {
 
 	@PreDestroy
     public void destroy() {
-		 ActionSequence.addAction(SimpleSessionBean.class.getName());
+        beanDestroyed = true;
     }
 
+    public static boolean isBeanDestroyed() {
+        return beanDestroyed;
+    }
+
+    public static void setBeanDestroyed(boolean beanDestroyed) {
+        SimpleSessionBean.beanDestroyed = beanDestroyed;
+    }
 }

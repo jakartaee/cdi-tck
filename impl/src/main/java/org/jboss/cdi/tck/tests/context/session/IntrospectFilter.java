@@ -18,9 +18,6 @@ package org.jboss.cdi.tck.tests.context.session;
 
 import java.io.IOException;
 
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -29,44 +26,32 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
 
-@WebFilter(filterName = "FilterTest", displayName = "Test Filter for Sessions", urlPatterns = "/SimplePage.html")
-public class TestFilter implements Filter {
+/**
+ * Just to verify session context is destroyed after Filter is called.
+ */
+@WebFilter(filterName = "IntrospectFilter", urlPatterns = "/introspect")
+public class IntrospectFilter implements Filter {
 
 	private static final SimpleLogger logger = new SimpleLogger(
-			TestFilter.class);
-
-	@Inject
-	private BeanManager beanManager;
-
-	@Inject
-	private SimpleSessionBean simpleBean;
+			IntrospectFilter.class);
 
 	public void destroy() {
-		beanManager = null;
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		logger.log("Do filter...");
-		checkSessionContextActive();
 		chain.doFilter(request, response);
-		checkSessionContextActive();
-
+		String mode = request.getParameter("mode");
+        if (IntrospectServlet.MODE_INVALIDATE.equals(mode)) {
+            ActionSequence.addAction(IntrospectFilter.class.getName());
+        }
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-	}
-
-	private void checkSessionContextActive() throws ServletException {
-		if (beanManager == null
-				|| !beanManager.getContext(SessionScoped.class).isActive()
-				|| simpleBean == null) {
-			throw new ServletException("Session context is not active");
-		}
-		// Check bean invocation
-		simpleBean.getId();
 	}
 
 }

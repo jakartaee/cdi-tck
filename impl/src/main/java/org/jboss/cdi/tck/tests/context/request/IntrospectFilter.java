@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -32,10 +32,10 @@ import javax.servlet.annotation.WebFilter;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
 
-@WebFilter(filterName = "DestroyTestFilter", urlPatterns = "/introspectRequest")
-public class IntrospectTestFilter implements Filter {
+@WebFilter(filterName = "IntrospectFilter", urlPatterns = "/introspect")
+public class IntrospectFilter implements Filter {
 
-    private static final SimpleLogger logger = new SimpleLogger(IntrospectTestFilter.class);
+    private static final SimpleLogger logger = new SimpleLogger(IntrospectFilter.class);
 
     @Inject
     private BeanManager beanManager;
@@ -56,7 +56,7 @@ public class IntrospectTestFilter implements Filter {
 
         String mode = request.getParameter("mode");
         if (IntrospectServlet.MODE_COLLECT.equals(mode)) {
-            ActionSequence.addAction(IntrospectTestFilter.class.getName());
+            ActionSequence.addAction(IntrospectFilter.class.getName());
         }
     }
 

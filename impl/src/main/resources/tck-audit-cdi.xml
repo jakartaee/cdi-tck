@@ -4163,27 +4163,35 @@
 
     <section id="session_context" title="Session context lifecycle" level="3">
         <assertion id="aa">
-            <text>The session scope is active during the |service()| method of any servlet in the web application ~, during the |doFilter()| method of any servlet filter~ and when the container calls any |HttpSessionListener|, |AsyncListener| or |ServletRequestListener|.</text>
+            <text>The session scope is active during the |service()| method of any servlet in the web application.</text>
         </assertion>
 
         <assertion id="ab">
-            <text>The session scope is active ~during the |service()| method of any servlet in the web application~, during the |doFilter()| method of any servlet filter and when the container calls any |HttpSessionListener|, |AsyncListener| or |ServletRequestListener|.</text>
+            <text>The session scope is active during the |doFilter()| method of any servlet filter.</text>
+        </assertion>
+        
+        <assertion id="ac">
+            <text>The session scope is active when the container calls any |HttpSessionListener|.</text>
+        </assertion>
+        
+        <assertion id="ad">
+            <text>The session scope is active when the container calls any |AsyncListener|.</text>
+        </assertion>
+        
+        <assertion id="ae">
+            <text>The session scope is active when the container calls any |ServletRequestListener|.</text>
         </assertion>
 
         <assertion id="b">
             <text>The session context is shared between all servlet requests that occur in the same HTTP servlet session.</text>
         </assertion>
-
+        
         <assertion id="ca">
-            <text>The session context is destroyed when the ~|HTTPSession| times out, after all |HttpSessionListener|s have been called~, and at the very end of any request in which |invalidate()| was called, after all filters and |ServletRequestListeners| have been called.</text>
+            <text>The session context is destroyed at the very end of any request in which |invalidate()| was called, after all filters and |ServletRequestListeners| have been called.</text>
         </assertion>
 
         <assertion id="cb">
-            <text>The session context is destroyed when the |HTTPSession| times out, ~after all |HttpSessionListener|s have been called, and at the very end of any request in which |invalidate()| was called~, after all filters and |ServletRequestListeners| have been called.</text>
-        </assertion>
-
-        <assertion id="cd">
-            <text>The session context is destroyed ~when the |HTTPSession| times out, after all |HttpSessionListener|s have been called, and~ at the very end of any request in which |invalidate()| was called, ~after all filters and |ServletRequestListeners| have been called.~</text>
+            <text>The session context is destroyed when the |HTTPSession| times out, after all |HttpSessionListener|s have been called.</text>
         </assertion>
 
         <assertion id="da">

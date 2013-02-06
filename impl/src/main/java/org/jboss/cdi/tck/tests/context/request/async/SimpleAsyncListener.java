@@ -61,7 +61,7 @@ public class SimpleAsyncListener implements AsyncListener {
 
         if (onTimeout == null && onError == null) {
             // Do not check and write info in case of post timeout/error action
-            checkApplicationContextAvailability(event);
+            checkRequestContextAvailability(event);
             writeInfo(event.getAsyncContext().getResponse());
         }
     }
@@ -75,7 +75,7 @@ public class SimpleAsyncListener implements AsyncListener {
     public void onTimeout(AsyncEvent event) throws IOException {
         logger.log("onTimeout");
         onTimeout = System.currentTimeMillis();
-        checkApplicationContextAvailability(event);
+        checkRequestContextAvailability(event);
         writeInfo(event.getAsyncContext().getResponse());
         event.getAsyncContext().complete();
     }
@@ -89,7 +89,7 @@ public class SimpleAsyncListener implements AsyncListener {
     public void onError(AsyncEvent event) throws IOException {
         logger.log("onError");
         onError = System.currentTimeMillis();
-        if (checkApplicationContextAvailability(event)) {
+        if (checkRequestContextAvailability(event)) {
             event.getAsyncContext().complete();
             // event.getAsyncContext().dispatch("/bar.jsp");
         }
@@ -104,10 +104,10 @@ public class SimpleAsyncListener implements AsyncListener {
     public void onStartAsync(AsyncEvent event) throws IOException {
         logger.log("onStartAsync");
         onStartAsync = System.currentTimeMillis();
-        checkApplicationContextAvailability(event);
+        checkRequestContextAvailability(event);
     }
 
-    private boolean checkApplicationContextAvailability(AsyncEvent event) throws IOException {
+    private boolean checkRequestContextAvailability(AsyncEvent event) throws IOException {
         try {
             simpleRequestBeanId = simpleRequestBean.getId();
             isRequestContextActive = beanManager.getContext(RequestScoped.class).isActive();

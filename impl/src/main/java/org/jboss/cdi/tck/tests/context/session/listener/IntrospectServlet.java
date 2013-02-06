@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.request;
+package org.jboss.cdi.tck.tests.context.session.listener;
 
 import java.io.IOException;
 
@@ -27,36 +27,46 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
+/**
+ * Used to process requests to check which session context is in use.
+ *
+ * @author David Allen
+ * @author Martin Kouba
+ */
 @WebServlet(name = "IntrospectServlet", urlPatterns = "/introspect")
 public class IntrospectServlet extends HttpServlet {
 
-    public static final String MODE_COLLECT = "collect";
+	private static final long serialVersionUID = 1L;
 
-    public static final String MODE_VERIFY = "verify";
+	public static final String MODE_INVALIDATE = "invalidate";
 
-    private static final long serialVersionUID = 1L;
+	public static final String MODE_VERIFY = "verify";
 
-    @Inject
-    private SimpleRequestBean simpleBean;
+	static boolean isSessionScopeActive = true;
 
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	@Inject
+	SimpleSessionBean simpleBean;
 
-        resp.setContentType("text/text");
-        String mode = req.getParameter("mode");
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 
-        if (mode == null) {
-            resp.getWriter().append(simpleBean.getId());
-        } else if (MODE_COLLECT.equals(mode)) {
-            ActionSequence.reset();
-            ActionSequence.addAction(IntrospectServlet.class.getName());
-        } else if (MODE_VERIFY.equals(mode)) {
-            resp.setStatus(HttpServletResponse.SC_OK);
-            resp.setContentType("text/plain");
-            resp.getWriter().write(ActionSequence.getSequence().toString());
-        } else {
-            throw new ServletException("Unknown guard mode");
-        }
-    }
+		resp.setContentType("text/text");
+		String mode = req.getParameter("mode");
+
+		if (mode == null) {
+			resp.getWriter().append(simpleBean.getId());
+		} else if (MODE_INVALIDATE.equals(mode)) {
+			ActionSequence.reset();
+			ActionSequence.addAction(IntrospectServlet.class.getName());
+			req.getSession().invalidate();
+		} else if (MODE_VERIFY.equals(mode)) {
+			resp.setStatus(HttpServletResponse.SC_OK);
+			resp.setContentType("text/plain");
+			resp.getWriter().write(""+isSessionScopeActive);
+		} else {
+			throw new ServletException("Unknown mode");
+		}
+	}
 
 }

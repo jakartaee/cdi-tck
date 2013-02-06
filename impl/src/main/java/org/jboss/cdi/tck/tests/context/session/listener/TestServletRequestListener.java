@@ -15,16 +15,15 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.context.request;
+package org.jboss.cdi.tck.tests.context.session.listener;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
 
-import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
@@ -39,30 +38,31 @@ public class TestServletRequestListener implements ServletRequestListener {
     private BeanManager beanManager;
 
     @Inject
-    private SimpleRequestBean simpleBean;
+    private SimpleSessionBean simpleBean;
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
         logger.log("Request destroyed...");
-        checkRequestContextActive();
-
-        String mode = sre.getServletRequest().getParameter("mode");
-        if (IntrospectServlet.MODE_COLLECT.equals(mode)) {
-            ActionSequence.addAction(TestServletRequestListener.class.getName());
-        }
+        checkSessionContextActive();
     }
 
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
     	logger.log("Request initialized...");
-        checkRequestContextActive();
+    	checkSessionContextActive();
     }
 
-    private void checkRequestContextActive() throws IllegalStateException {
-        if (beanManager == null || !beanManager.getContext(RequestScoped.class).isActive() || simpleBean == null) {
-            throw new IllegalStateException("Request context is not active");
-        }
-        // Check bean invocation
-        simpleBean.getId();
-    }
+    private void checkSessionContextActive() throws IllegalStateException {
+		try {
+			if (!beanManager.getContext(SessionScoped.class).isActive()
+					|| simpleBean == null) {
+				IntrospectServlet.isSessionScopeActive = false;
+			}
+			// Check bean invocation
+			simpleBean.getId();
+		} catch (Exception e) {
+			IntrospectServlet.isSessionScopeActive = false;
+		}
+	}
+
 }

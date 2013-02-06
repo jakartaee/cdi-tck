@@ -9,39 +9,60 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.session;
+
+package org.jboss.cdi.tck.tests.context.request;
 
 import java.io.IOException;
 
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class InvalidateSession extends HttpServlet {
+/**
+ * Servlet used just to test context during service method.
+ *
+ * @author David Allen
+ * @author Martin Kouba
+ */
+@WebServlet(name = "ServiceMethod", urlPatterns = "/test")
+public class TestServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     @Inject
-    SimpleSessionBean sessionBean;
+    private BeanManager beanManager;
+
+    @Inject
+    private SimpleRequestBean simpleBean;
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        checkRequestContextActive();
+        super.service(req, resp);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/text");
-
-        if (req.getParameter("timeout") != null) {
-            SimpleSessionBean.setBeanDestroyed(false);
-            req.getSession().setMaxInactiveInterval(Integer.parseInt(req.getParameter("timeout")));
-        } else if (req.getParameter("isBeanDestroyed") != null) {
-            resp.getWriter().print(SimpleSessionBean.isBeanDestroyed());
-        } else {
-            SimpleSessionBean.setBeanDestroyed(false);
-            req.getSession().invalidate();
-        }
+        resp.getWriter().println("It worked!");
     }
+
+    private void checkRequestContextActive() throws ServletException {
+        if (beanManager == null || !beanManager.getContext(RequestScoped.class).isActive() || simpleBean == null) {
+            throw new ServletException("Request context is not active");
+        }
+        // Check bean invocation
+        simpleBean.getId();
+    }
+
 }

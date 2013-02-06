@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2013, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,28 +16,31 @@
  */
 package org.jboss.cdi.tck.tests.context.session;
 
-import java.io.Serializable;
-import java.util.UUID;
-
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.SessionScoped;
+import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
 
 import org.jboss.cdi.tck.util.ActionSequence;
+import org.jboss.cdi.tck.util.SimpleLogger;
 
-@SessionScoped
-public class SimpleSessionBean implements Serializable {
+/**
+ * Just to verify session context is destroyed after HttpSessionListener is called.
+ */
+@WebListener
+public class IntrospectHttpSessionListener implements HttpSessionListener {
 
-    private static final long serialVersionUID = 1L;
+	private static final SimpleLogger logger = new SimpleLogger(
+			IntrospectHttpSessionListener.class);
 
-    private String id = UUID.randomUUID().toString();
-
-    public String getId() {
-		return id;
+	@Override
+	public void sessionCreated(HttpSessionEvent se) {
+		logger.log("Session created...");
 	}
 
-	@PreDestroy
-    public void destroy() {
-		 ActionSequence.addAction(SimpleSessionBean.class.getName());
-    }
+	@Override
+	public void sessionDestroyed(HttpSessionEvent se) {
+		logger.log("Session destroyed...");
+		ActionSequence.addAction(IntrospectHttpSessionListener.class.getName());
+	}
 
 }
