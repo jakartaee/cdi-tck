@@ -15,15 +15,17 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.context.request.async;
+package org.jboss.cdi.tck.tests.context.session.async;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -43,20 +45,20 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class RequestContextAsyncListenerTest extends AbstractTest {
+public class SessionContextAsyncListenerTest extends AbstractTest {
 
     @ArquillianResource
     private URL contextPath;
 
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(RequestContextAsyncListenerTest.class).withWebResource("foo.jsp")
+        return new WebArchiveBuilder().withTestClassPackage(SessionContextAsyncListenerTest.class).withWebResource("foo.jsp")
                 .withWebResource("bar.jsp").build();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "ad"), @SpecAssertion(section = REQUEST_CONTEXT, id = "bd") })
-    public void testRequestContextActiveOnComplete() throws Exception {
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
+    public void testSessionContextActiveOnComplete() throws Exception {
 
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -65,16 +67,14 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
         assertTrue(page01.getContent().contains("onTimeout: null"));
         assertTrue(page01.getContent().contains("onError: null"));
         assertFalse(page01.getContent().contains("onComplete: null"));
-
-        // Indirectly test request context is destroyed after onComplete()
-        TextPage page02 = webClient.getPage(getPage(AsyncServlet.TEST_COMPLETE));
-        assertNotEquals(extractSimpleRequestBeanIdString(page01.getContent()),
-                extractSimpleRequestBeanIdString(page02.getContent()));
+        String id = extractSimpleSessionBeanId(page01.getContent());
+        assertNotNull(id);
+        assertFalse(id.isEmpty());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = REQUEST_CONTEXT, id = "ad")
-    public void testRequestContextActiveOnTimeout() throws Exception {
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
+    public void testSessionContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
         TextPage page = webClient.getPage(getPage(AsyncServlet.TEST_TIMEOUT));
@@ -82,16 +82,16 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = REQUEST_CONTEXT, id = "ad")
-    public void testRequestContextActiveOnError() throws Exception {
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
+    public void testSessionContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
         webClient.getPage(getPage(AsyncServlet.TEST_ERROR));
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = REQUEST_CONTEXT, id = "ad")
-    public void testRequestContextActiveOnStartAsync() throws Exception {
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
+    public void testSessionContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
         TextPage page = webClient.getPage(getPage(AsyncServlet.TEST_LOOP));
@@ -103,9 +103,12 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
         return contextPath + "AsyncServlet?test=" + test;
     }
 
-    private String extractSimpleRequestBeanIdString(String content) {
-        String[] tokens = content.split(",");
+    private String extractSimpleSessionBeanId(String content) {
         // See SimpleAsyncListener#getInfo()
-        return tokens[5];
+        Matcher matcher = Pattern.compile("^(.+)(simpleSessionBeanId: )(.+)$").matcher(content);
+        if(matcher.matches()) {
+            return matcher.group(3);
+        }
+        return null;
     }
 }

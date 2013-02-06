@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.context.request.async;
+package org.jboss.cdi.tck.tests.context.session.async;
 
 import java.io.IOException;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.AsyncEvent;
@@ -38,13 +38,13 @@ public class SimpleAsyncListener implements AsyncListener {
     public static Long onError = null;
     public static Long onTimeout = null;
     public static Long onComplete = null;
-    public static boolean isRequestContextActive = false;
-    public static Long simpleRequestBeanId = null;
+    public static boolean isSessionContextActive = false;
+    public static Long simpleSessionBeanId = null;
 
     private static final SimpleLogger logger = new SimpleLogger(SimpleAsyncListener.class);
 
     @Inject
-    SimpleRequestBean simpleRequestBean;
+    SimpleSessionBean simpleSessionBean;
 
     @Inject
     BeanManager beanManager;
@@ -61,7 +61,7 @@ public class SimpleAsyncListener implements AsyncListener {
 
         if (onTimeout == null && onError == null) {
             // Do not check and write info in case of post timeout/error action
-            checkRequestContextAvailability(event);
+            checkSessionContextAvailability(event);
             writeInfo(event.getAsyncContext().getResponse());
         }
     }
@@ -75,7 +75,7 @@ public class SimpleAsyncListener implements AsyncListener {
     public void onTimeout(AsyncEvent event) throws IOException {
         logger.log("onTimeout");
         onTimeout = System.currentTimeMillis();
-        checkRequestContextAvailability(event);
+        checkSessionContextAvailability(event);
         writeInfo(event.getAsyncContext().getResponse());
         event.getAsyncContext().complete();
     }
@@ -89,7 +89,7 @@ public class SimpleAsyncListener implements AsyncListener {
     public void onError(AsyncEvent event) throws IOException {
         logger.log("onError");
         onError = System.currentTimeMillis();
-        if (checkRequestContextAvailability(event)) {
+        if (checkSessionContextAvailability(event)) {
             event.getAsyncContext().complete();
             // event.getAsyncContext().dispatch("/bar.jsp");
         }
@@ -104,17 +104,17 @@ public class SimpleAsyncListener implements AsyncListener {
     public void onStartAsync(AsyncEvent event) throws IOException {
         logger.log("onStartAsync");
         onStartAsync = System.currentTimeMillis();
-        checkRequestContextAvailability(event);
+        checkSessionContextAvailability(event);
     }
 
-    private boolean checkRequestContextAvailability(AsyncEvent event) throws IOException {
+    private boolean checkSessionContextAvailability(AsyncEvent event) throws IOException {
         try {
-            simpleRequestBeanId = simpleRequestBean.getId();
-            isRequestContextActive = beanManager.getContext(RequestScoped.class).isActive();
+            simpleSessionBeanId = simpleSessionBean.getId();
+            isSessionContextActive = beanManager.getContext(SessionScoped.class).isActive();
         } catch (Throwable e) {
             logger.log("Problem while checking request scope: " + e.getMessage());
         }
-        if (!isRequestContextActive || simpleRequestBeanId == null) {
+        if (!isSessionContextActive || simpleSessionBeanId == null) {
             ((HttpServletResponse) event.getAsyncContext().getResponse()).setStatus(500);
             return false;
         }
@@ -126,8 +126,8 @@ public class SimpleAsyncListener implements AsyncListener {
         onError = null;
         onTimeout = null;
         onComplete = null;
-        isRequestContextActive = false;
-        simpleRequestBeanId = null;
+        isSessionContextActive = false;
+        simpleSessionBeanId = null;
     }
 
     private void writeInfo(ServletResponse response) throws IOException {
@@ -137,8 +137,8 @@ public class SimpleAsyncListener implements AsyncListener {
 
     public static String getInfo() {
         return String
-                .format("onStartAsync: %s, onError: %s, onTimeout: %s, onComplete: %s, isRequestContextActive: %s, simpleRequestBeanId: %s",
-                        onStartAsync, onError, onTimeout, onComplete, isRequestContextActive, simpleRequestBeanId);
+                .format("onStartAsync: %s, onError: %s, onTimeout: %s, onComplete: %s, isSessionContextActive: %s, simpleSessionBeanId: %s",
+                        onStartAsync, onError, onTimeout, onComplete, isSessionContextActive, simpleSessionBeanId);
     }
 
 }
