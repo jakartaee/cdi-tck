@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
 
 import javax.enterprise.inject.spi.DefinitionException;
@@ -34,6 +35,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = { INTEGRATION })
 public class ResourceDefinitionWithDifferentTypeTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
