@@ -1,6 +1,6 @@
 <beans>
     <alternatives>
-        <stereotype priority="100">org.jboss.cdi.tck.shrinkwrap.descriptors.Foo</stereotype>
-        <class priority="200" enabled="false">org.jboss.cdi.tck.shrinkwrap.descriptors.Bar</class>
+        <stereotype priority="100">org.jboss.cdi.tck.test.shrinkwrap.descriptors.Foo</stereotype>
+        <class priority="200" enabled="false">org.jboss.cdi.tck.test.shrinkwrap.descriptors.Bar</class>
     </alternatives>
 </beans>
