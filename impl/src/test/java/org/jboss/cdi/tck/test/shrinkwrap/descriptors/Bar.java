@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.shrinkwrap.descriptors;
+package org.jboss.cdi.tck.test.shrinkwrap.descriptors;
 
 public class Bar {
 

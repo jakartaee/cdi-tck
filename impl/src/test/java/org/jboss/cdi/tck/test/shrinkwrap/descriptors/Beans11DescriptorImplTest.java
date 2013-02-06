@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.shrinkwrap.descriptors;
+package org.jboss.cdi.tck.test.shrinkwrap.descriptors;
 
 import static org.testng.Assert.assertEquals;
 
@@ -24,6 +24,9 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
+import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
+import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlStereotype;
 import org.jboss.shrinkwrap.descriptor.api.DescriptorExportException;
 import org.testng.annotations.Test;
 

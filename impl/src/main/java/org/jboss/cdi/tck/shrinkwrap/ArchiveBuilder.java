@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -85,7 +85,7 @@ import org.jboss.shrinkwrap.impl.base.path.BasicPath;
  * In case of {@link #isTestArchive} set to <code>false</code> this archive may not include any testing related stuff as it is
  * probably part of another test archive.
  * </p>
- * 
+ *
  * @param <T> Self type to enable abstract builder pattern
  * @param <A> Final shrinkwrap archive
  * @author Martin Kouba
@@ -135,8 +135,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected List<ServiceProviderDescriptor> serviceProviders = null;
 
     /**
-     * Change default archive name.
-     * 
+     * Set the name of the archive.
+     *
      * @param name
      * @return
      */
@@ -147,11 +147,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}.
-     * 
+     *
      * <p>
      * Do not use this in new tests - use {@link #withBeansXml(BeansDescriptor)} instead.
      * </p>
-     * 
+     *
      * @param beansXml
      * @return self
      */
@@ -162,7 +162,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add <code>beans.xml</code> descriptor created with shrinkwrap-descriptors.
-     * 
+     *
      * @param beansDescriptor
      * @return self
      */
@@ -173,7 +173,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add CDI extension. This method does not add the specified extension class to the archive.
-     * 
+     *
      * @param extensionClass
      * @return self
      */
@@ -183,7 +183,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add CDI extensions. This method does not add the specified extension classes to the archive.
-     * 
+     *
      * @param extensionClasses
      * @return self
      */
@@ -193,7 +193,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add service provider.
-     * 
+     *
      * @param serviceProvider
      * @return
      */
@@ -208,7 +208,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add class to archive.
-     * 
+     *
      * @param clazz
      * @return self
      */
@@ -222,7 +222,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add classes to archive.
-     * 
+     *
      * @param classes
      * @return self
      */
@@ -237,9 +237,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Specified class must be excluded from final archive unless also added via {@link #withClass(Class)} or
      * {@link #withClasses(Class...)}. Useful for exluding some classes from package added via {@link #withPackage(Package)}.
-     * 
+     *
      * Avoid using this feature if possible - the implementation has negative performance effects.
-     * 
+     *
      * @param clazz Fully qualified class name
      * @return self
      */
@@ -254,9 +254,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Specified classes must be excluded from final archive unless also added via {@link #withClass(Class)} or
      * {@link #withClasses(Class...)}. Useful for exluding some classes from package added via {@link #withPackage(Package)}.
-     * 
+     *
      * Avoid using this feature if possible - the implementation has negative performance effects.
-     * 
+     *
      * @param classes Fully qualified class names
      * @return self
      */
@@ -270,7 +270,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add all classes in the test class package to archive and set test class definition for configuration purpose.
-     * 
+     *
      * @param testClazz
      * @return self
      */
@@ -280,7 +280,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add test class to archive and set test class definition for configuration purpose.
-     * 
+     *
      * @param testClazz
      * @return self
      */
@@ -290,9 +290,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Set test class definition for configuration purpose. Do not add it to final archive.
-     * 
+     *
      * Always use this for as-client test archives, e.g. deployment method annotated with {@link ShouldThrowException}.
-     * 
+     *
      * @param test
      * @return self
      */
@@ -307,7 +307,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add package (that is its content). Subpackages are not included.
-     * 
+     *
      * @param pack
      * @return self
      */
@@ -322,7 +322,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add resource to META-INF.
-     * 
+     *
      * @param source
      * @return self
      */
@@ -332,7 +332,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add resource to META-INF.
-     * 
+     *
      * @param source
      * @param useTestPackageToLocateSource
      * @return self
@@ -343,7 +343,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add resource to META-INF.
-     * 
+     *
      * @param source
      * @param target
      * @param useTestPackageToLocateSource
@@ -360,7 +360,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add resource.
-     * 
+     *
      * @param source
      * @return self
      */
@@ -370,7 +370,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add resource.
-     * 
+     *
      * @param source
      * @param useTestPackageToLocateSource
      * @return self
@@ -381,7 +381,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add resource.
-     * 
+     *
      * @param source
      * @param target
      * @param useTestPackageToLocateSource
@@ -398,7 +398,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add web resource.
-     * 
+     *
      * @param source
      * @return self
      */
@@ -408,7 +408,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add web resource.
-     * 
+     *
      * @param source
      * @param target
      * @return self
@@ -419,7 +419,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add web resource.
-     * 
+     *
      * @param source
      * @param useTestPackageToLocateSource
      * @return self
@@ -430,7 +430,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add web resource.
-     * 
+     *
      * @param source
      * @return
      */
@@ -445,7 +445,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add ejb-jar.xml located in src/main/resource/{testPackagePath} to META-INF/ejb-jar.xml.
-     * 
+     *
      * @param ejbJarXml
      * @return
      */
@@ -455,11 +455,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add web.xml located in src/main/resource/{testPackagePath}.
-     * 
+     *
      * <p>
      * Do not use this in new tests - use {@link #withWebXml(WebAppDescriptor)} instead.
      * </p>
-     * 
+     *
      * @param webXml
      * @return
      */
@@ -470,7 +470,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add <code>web.xml</code> descriptor created with shrinkwrap-descriptors.
-     * 
+     *
      * @param webXml
      * @return
      */
@@ -481,7 +481,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add default persistence.xml.
-     * 
+     *
      * @return self
      */
     public T withDefaultPersistenceXml() {
@@ -491,7 +491,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add persistence.xml descriptor created with shrinkwrap-descriptors.
-     * 
+     *
      * @param persistenceXml
      * @return self
      */
@@ -502,7 +502,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add library.
-     * 
+     *
      * @param library
      * @return self
      */
@@ -518,7 +518,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
      * defined classes implements {@link Extension} add corresponding service provider.
-     * 
+     *
      * @param beanClasses
      * @return self
      */
@@ -529,7 +529,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
      * defined classes implements {@link Extension} add corresponding service provider.
-     * 
+     *
      * @param beanClasses
      * @return self
      */
@@ -540,7 +540,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
      * defined classes implements {@link Extension} add corresponding service provider.
-     * 
+     *
      * @param beanClasses
      * @return self
      */
@@ -551,7 +551,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
      * defined classes implements {@link Extension} add corresponding service provider.
-     * 
+     *
      * @param beanClasses
      * @return self
      */
@@ -561,7 +561,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add library that consists of defined classes.
-     * 
+     *
      * @param classes
      * @return self
      */
@@ -571,7 +571,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add library that consists of defined classes. Include empty beans.xml if necessary.
-     * 
+     *
      * @param serviceProvider
      * @param omitBeansXml
      * @param classes
@@ -583,7 +583,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add library that consists of defined classes. Include empty beans.xml if necessary.
-     * 
+     *
      * @param serviceProvider
      * @param omitBeansXml
      * @param classes
@@ -610,7 +610,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add the specified ShrinkWrap library.
-     * 
+     *
      * @param library
      * @return self
      */
@@ -670,7 +670,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Process packages. Exclude classes specified via {@link #withExcludedClass(Class)}. If in as-client mode, filter test
      * class.
-     * 
+     *
      * @param archive
      */
     protected <P extends Archive<?> & ClassContainer<?>> void processPackages(final P archive) {
@@ -678,7 +678,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         if (packages == null)
             return;
 
-        // Avoid using URLPackageScanner if possible - it has negative performance effects
+        // Avoid using URLPackageScanner if possible - it has negative
+        // performance effects
         if ((excludedClasses == null || excludedClasses.isEmpty()) && !isAsClientMode()) {
             archive.addPackages(false, packages.toArray(new Package[packages.size()]));
         } else {
@@ -703,9 +704,13 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                         }
                     }
 
-                    // This is a performance WORKAROUND - adding classes via ClassContainer.addClass() is much slower
-                    // Actually the performace loss is caused by inner classes handling - which is not necessary here
-                    // See also org.jboss.shrinkwrap.impl.base.container.ContainerBase addPackage() and getClassesPath() methods
+                    // This is a performance WORKAROUND - adding classes via
+                    // ClassContainer.addClass() is much slower
+                    // Actually the performace loss is caused by inner classes
+                    // handling - which is not necessary here
+                    // See also
+                    // org.jboss.shrinkwrap.impl.base.container.ContainerBase
+                    // addPackage() and getClassesPath() methods
                     ArchivePath classesPath = resolveClassesPath(archive);
 
                     if (classesPath != null) {
@@ -726,7 +731,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Process classes.
-     * 
+     *
      * @param archive
      */
     protected <P extends Archive<?> & ClassContainer<?>> void processClasses(P archive) {
@@ -739,9 +744,15 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         if (isSinglePackage(classes)) {
 
             Package classesPackage = null;
-            final List<String> simpleNames = getSimpleNames(classes);
+            final List<String> simpleNames = new ArrayList<String>(classes.size());
 
             for (Class<?> clazz : classes) {
+
+                if (skipClassName(clazz.getName())) {
+                    continue;
+                }
+
+                simpleNames.add(clazz.getSimpleName());
 
                 if (classesPackage == null) {
                     classesPackage = clazz.getPackage();
@@ -752,7 +763,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             }
 
             // Quite naive way of handling inner classes
-            // The reason for this is that similar code would be normally called for each class - see also
+            // The reason for this is that similar code would be normally called
+            // for each class - see also
             // ContainerBase.addClasses()
             archive.addPackages(false, new Filter<ArchivePath>() {
 
@@ -771,11 +783,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             }, classesPackage);
 
         } else {
-
             for (Class<?> clazz : classes) {
-
-                if ((isAsClientMode() && testClazz.getName().equals(clazz.getName()))
-                        || (excludedClasses != null && excludedClasses.contains(clazz.getName()))) {
+                if (skipClassName(clazz.getName())) {
                     continue;
                 }
                 archive.addClass(clazz);
@@ -783,14 +792,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
     }
 
-    private List<String> getSimpleNames(Set<Class<?>> classes) {
-
-        List<String> simpleNames = new ArrayList<String>(classes.size());
-
-        for (Class<?> clazz : classes) {
-            simpleNames.add(clazz.getSimpleName());
-        }
-        return simpleNames;
+    private boolean skipClassName(String className) {
+        return ((isAsClientMode() && testClazz.getName().equals(className)) || (excludedClasses != null && excludedClasses
+                .contains(className)));
     }
 
     private boolean isSinglePackage(Set<Class<?>> classes) {
@@ -815,7 +819,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Process libraries.
-     * 
+     *
      * @param archive
      */
     protected void processLibraries(LibraryContainer<?> archive) {
@@ -839,7 +843,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Process resources.
-     * 
+     *
      * @param archive
      */
     protected void processResources(ResourceContainer<?> archive) {
@@ -858,7 +862,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Process manifest resources.
-     * 
+     *
      * @param archive
      */
     protected void processManifestResources(ManifestContainer<?> archive) {
@@ -903,7 +907,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Internal service provider descriptor.
-     * 
+     *
      * @author Martin Kouba
      */
     protected class ServiceProviderDescriptor {
@@ -930,7 +934,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Internal resource descriptor.
-     * 
+     *
      * @author Martin Kouba
      */
     protected class ResourceDescriptor {
@@ -975,7 +979,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Internal library descriptor.
-     * 
+     *
      * @author Martin Kouba
      */
     protected class LibraryDescriptor {
@@ -1010,7 +1014,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
 
         /**
-         * 
+         *
          * @param name
          * @param serviceProvider
          * @param includeEmptyBeanXml Automatically include empty beans.xml to promote the lib to BDA
@@ -1053,7 +1057,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
 
         /**
-         * 
+         *
          * @return shrinkwrap jar archive
          */
         public JavaArchive buildJarArchive() {
@@ -1094,7 +1098,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * 
+     *
      * @return <code>true</code> if building as-client mode archive, <code>false</code> otherwise
      */
     public Boolean isAsClientMode() {
@@ -1111,7 +1115,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * 
+     *
      * @return <code>true</code> if TCK specific infrastructure (porting package, utils, etc.) should be automatically added,
      *         <code>false</code> otherwise
      * @see #resolveAsClientMode()
@@ -1131,14 +1135,14 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Try to resolve as-client mode automatically unless it was set already.
-     * 
+     *
      * Set as-client mode to <code>true</code> provided that:
      * <ul>
      * <li>test class is annotated with {@link RunAsClient}</li>
      * <li>the deployment method on test class definition is annotated with {@link ShouldThrowException} or
      * {@link Deployment#testable()} is false</li>
      * <ul>
-     * 
+     *
      * @throws IllegalStateException If multiple deployments detected and as-client mode not set
      * @see #setAsClientMode(boolean)
      */
