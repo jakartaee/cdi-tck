@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -34,6 +34,9 @@ import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 
@@ -43,6 +46,7 @@ import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.Contextual;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.CreationException;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Specializes;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
@@ -239,13 +243,18 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert Salmon.isBeanDestroyed();
     }
 
-    @Test
+    @Test(dataProvider=ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "baa")
-    public void testSubClassInheritsPostConstructOnSuperclass() {
+    public void testSubClassInheritsPostConstructOnSuperclass(Instance<Object> instance) {
         OrderProcessor.postConstructCalled = false;
-        assert getBeans(CdOrderProcessor.class).size() == 1;
+        assertEquals(getBeans(CdOrderProcessor.class).size(), 1);
         getInstanceByType(CdOrderProcessor.class).order();
-        assert OrderProcessor.postConstructCalled;
+        assertTrue(OrderProcessor.postConstructCalled);
+
+        assertNotNull(instance);
+        OrderProcessor.postConstructCalled = false;
+        instance.select(CdOrderProcessor.class).get().order();
+        assertTrue(OrderProcessor.postConstructCalled);
     }
 
     @Test
