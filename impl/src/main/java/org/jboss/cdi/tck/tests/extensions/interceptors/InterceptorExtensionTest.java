@@ -57,12 +57,12 @@ public class InterceptorExtensionTest extends AbstractTest {
 
         return new WebArchiveBuilder()
                 .withTestClass(InterceptorExtensionTest.class)
-                .withClasses(Marathon.class, NumberSource.class)
-                .withLibrary(IncrementingInterceptor.class, LifecycleInterceptor.class, FullMarathon.class, Incremented.class,
+                .withClasses(Marathon.class, NumberSource.class, WordSource.class)
+                .withLibrary(SuffixingInterceptor.class, IncrementingInterceptor.class, LifecycleInterceptor.class, Suffixed.class, FullMarathon.class, Incremented.class,
                         InterceptorExtension.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(IncrementingInterceptor.class.getName(), LifecycleInterceptor.class.getName()).up())
+                                .clazz(SuffixingInterceptor.class.getName(), IncrementingInterceptor.class.getName(), LifecycleInterceptor.class.getName()).up())
                 .build();
     }
 
@@ -71,12 +71,15 @@ public class InterceptorExtensionTest extends AbstractTest {
 
     @Inject
     private NumberSource numberSource;
+    
+    @Inject
+    private WordSource wordSource;
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
             @SpecAssertion(section = BBD, id = "ae") })
-    public void testInterceptorCalled() {
-        assertEquals(2, numberSource.value());
+    public void testInterceptorAddedByClass() {
+        assertEquals(numberSource.value(), 2);
         assertTrue(IncrementingInterceptor.isDoAroundCalled());
     }
 
@@ -91,9 +94,18 @@ public class InterceptorExtensionTest extends AbstractTest {
         Marathon marathon = (Marathon) bean.create(creationalContext);
 
         assertTrue(LifecycleInterceptor.isPostConstructCalled());
-        assertEquals(42, marathon.getLength());
+        assertEquals(marathon.getLength(), 42);
         bean.destroy(marathon, creationalContext);
         assertTrue(LifecycleInterceptor.isPreDestroyCalled());
     }
-
+    
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
+            @SpecAssertion(section = BBD, id = "aea") })
+    public void testInterceptorAddedByAnnotatedType() {
+        assertEquals(wordSource.getWord(), WordSource.word);
+        assertEquals(wordSource.getWordWithSuffix(), WordSource.wordWithSuffix);
+        assertTrue(SuffixingInterceptor.isDoAroundCalled());
+    }
+    
 }

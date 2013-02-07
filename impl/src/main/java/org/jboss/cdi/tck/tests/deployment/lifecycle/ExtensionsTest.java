@@ -49,21 +49,12 @@ public class ExtensionsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BBD, id = "a"), @SpecAssertion(section = INITIALIZATION, id = "b"),
-            @SpecAssertion(section = INITIALIZATION, id = "c") })
+    @SpecAssertions({
+        @SpecAssertion(section = BBD, id = "a"),
+        @SpecAssertion(section = INITIALIZATION, id = "b"),
+        @SpecAssertion(section = INITIALIZATION, id = "c")})
     public void testBeforeBeanDiscoveryEventIsCalled() {
         assertTrue(BeforeBeanDiscoveryObserver.isObserved());
-    }
-
-    @SuppressWarnings("serial")
-    @Test
-    @SpecAssertion(section = BBD, id = "ab")
-    public void testAddingBindingType() {
-        assertTrue(BeforeBeanDiscoveryObserver.isObserved());
-        assertEquals(getBeans(Alligator.class).size(), 0);
-        assertEquals(getBeans(Alligator.class, new AnnotationLiteral<Tame>() {
-        }).size(), 1);
-        assertTrue(getCurrentManager().isQualifier(Tame.class));
     }
 
     @Test
@@ -75,4 +66,46 @@ public class ExtensionsTest extends AbstractTest {
         assertTrue(bean.getScope().equals(EpochScoped.class));
     }
 
+    @SuppressWarnings("serial")
+    @Test
+    @SpecAssertion(section = BBD, id = "ab")
+    public void testAddingQualifierByClass() {
+        assertTrue(BeforeBeanDiscoveryObserver.isObserved());
+        assertEquals(getBeans(Alligator.class).size(), 0);
+        assertEquals(getBeans(Alligator.class, new AnnotationLiteral<Tame>() {
+        }).size(), 1);
+        assertTrue(getCurrentManager().isQualifier(Tame.class));
+    }
+
+    @Test
+    @SpecAssertion(section = BBD, id = "aba")
+    public void testAddingQualifierByAnnotatedType() {
+        assertTrue(BeforeBeanDiscoveryObserver.isObserved());
+
+        // @Skill#level should be ignored
+        assertEquals(beanManager.getBeans(Programmer.class, new SkillLiteral() {
+            @Override
+            public String language() {
+                return "Java";
+            }
+
+            @Override
+            public String level() {
+                return "whatever";
+            }
+        }), 1);
+
+        // there should be no @Skill(language="C++")Programmer
+        assertEquals(beanManager.getBeans(Programmer.class, new SkillLiteral() {
+            @Override
+            public String language() {
+                return "C++";
+            }
+
+            @Override
+            public String level() {
+                return "guru";
+            }
+        }), 0);
+    }
 }
