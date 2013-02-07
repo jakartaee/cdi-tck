@@ -45,7 +45,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
@@ -112,7 +112,9 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
         assertEquals(foo.invokeBarBusinessOperation1(), Bar.class.getName() + BarBusinessDecorator.class.getName());
 
         List<String> sequence = ActionSequence.getSequenceData();
-        assertEquals(sequence.size(), 1);
-        assertEquals(sequence.get(0), BarBusinessDecorator.class.getName());
+        assertEquals(sequence.size(), 2);
+        // invokeBarBusinessOperation1() is intercepted
+        assertEquals(sequence.get(0), FooInterceptor.class.getName());
+        assertEquals(sequence.get(1), BarBusinessDecorator.class.getName());
     }
 }
