@@ -18,14 +18,14 @@ package org.jboss.cdi.tck;
 
 /**
  * TestNG groups used in the CDI TCK.
- * 
+ *
  * The most important groups (used by TCK runner) are:
  * <ul>
  * <li>{@link #INTEGRATION} - used to exclude integration tests when running standalone container</li>
  * <li>{@link #JAVAEE_FULL} - subset of integration tests used to exclude tests that require full Java EE platform; tests that
  * belong to this group are also considered to be integration tests</li>
  * </ul>
- * 
+ *
  * @author Martin Kouba
  */
 public final class TestGroups {
@@ -64,6 +64,11 @@ public final class TestGroups {
      * Requires installed library
      */
     public static final String INSTALLED_LIB = "installedLib";
+
+    /**
+     * Test contains JAX-RS web service.
+     */
+    public static final String JAX_RS = "jaxrs";
 
     /**
      * No instance

@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.application;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.JAX_RS;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -27,6 +28,7 @@ import java.net.URL;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.jaxrs.JaxRsActivator;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -41,7 +43,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextTest extends AbstractTest {
 
@@ -50,11 +51,13 @@ public class ApplicationContextTest extends AbstractTest {
 
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ApplicationContextTest.class).withWebXml("web.xml")
+        return new WebArchiveBuilder().withTestClassPackage(ApplicationContextTest.class)
+                .withClass(JaxRsActivator.class)
+                .withWebXml("web.xml")
                 .withWebResource("SimplePage.html").build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "aa")
     public void testApplicationScopeActiveDuringServiceMethod() throws Exception {
         WebClient webClient = new WebClient();
@@ -62,7 +65,7 @@ public class ApplicationContextTest extends AbstractTest {
         webClient.getPage(contextPath + "TestServlet?test=servlet");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ab")
     public void testApplicationScopeActiveDuringDoFilterMethod() throws Exception {
         WebClient webClient = new WebClient();
@@ -70,7 +73,7 @@ public class ApplicationContextTest extends AbstractTest {
         webClient.getPage(contextPath + "SimplePage.html");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ac")
     public void testApplicationScopeActiveDuringServletContextListenerInvocation() throws Exception {
         WebClient webClient = new WebClient();
@@ -78,7 +81,7 @@ public class ApplicationContextTest extends AbstractTest {
         webClient.getPage(contextPath + "TestServlet?test=servletContextListener");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ad")
     public void testApplicationScopeActiveDuringHttpSessionListenerInvocation() throws Exception {
         WebClient webClient = new WebClient();
@@ -86,7 +89,7 @@ public class ApplicationContextTest extends AbstractTest {
         webClient.getPage(contextPath + "TestServlet?test=httpSessionListener");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "af")
     public void testApplicationScopeActiveDuringServletRequestListenerInvocation() throws Exception {
         WebClient webClient = new WebClient();
@@ -94,7 +97,7 @@ public class ApplicationContextTest extends AbstractTest {
         webClient.getPage(contextPath + "TestServlet?test=servletRequestListener");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "e")
     public void testApplicationContextSharedBetweenServletRequests() throws Exception {
         WebClient webClient = new WebClient();
@@ -111,19 +114,19 @@ public class ApplicationContextTest extends AbstractTest {
 
     /**
      * Related to CDITCK-96.
-     * 
+     *
      * @throws Exception
      */
-    @Test
+    @Test(groups = { INTEGRATION, JAX_RS })
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "e")
     public void testApplicationContextSharedBetweenJaxRsRequests() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage firstRequestResult = webClient.getPage(contextPath + "jaxrs/application-id");
+        TextPage firstRequestResult = webClient.getPage(contextPath + "rest/application-id");
         assertNotNull(firstRequestResult.getContent());
         assertTrue(Double.parseDouble(firstRequestResult.getContent()) != 0);
         // Make a second request and make sure the same context is used
-        TextPage secondRequestResult = webClient.getPage(contextPath + "jaxrs/application-id");
+        TextPage secondRequestResult = webClient.getPage(contextPath + "rest/application-id");
         assertNotNull(secondRequestResult.getContent());
         // should be same random number
         assertEquals(Double.parseDouble(secondRequestResult.getContent()), Double.parseDouble(firstRequestResult.getContent()));
