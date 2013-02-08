@@ -16,19 +16,25 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptors;
 
+import java.util.Set;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
-
+import javax.enterprise.util.AnnotationLiteral;
+import javax.enterprise.util.Nonbinding;
 import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
+import org.jboss.cdi.tck.util.annotated.AnnotatedMethodWrapper;
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
 /**
  * @author Stuart Douglas <stuart@baileyroberts.com.au>
  * @author Martin Kouba
  */
 public class InterceptorExtension implements Extension {
+
     /**
      * registers two interceptors via the SPI
      */
@@ -37,9 +43,24 @@ public class InterceptorExtension implements Extension {
 
         event.addInterceptorBinding(Incremented.class);
         event.addInterceptorBinding(FullMarathon.class);
+        event.addInterceptorBinding(new AnnotatedTypeWrapper<Suffixed>(beanManager.createAnnotatedType(Suffixed.class), true) {
+            Set<AnnotatedMethod<? super Suffixed>> methods;
+
+            @Override
+            public Set<AnnotatedMethod<? super Suffixed>> getMethods() {
+                for (AnnotatedMethod<? super Suffixed> method : super.getMethods()) {
+                    if ("value".equals(method.getJavaMember().getName())) {
+                        methods.add(new AnnotatedMethodWrapper<Suffixed>((AnnotatedMethod<Suffixed>) method, true, new AnnotationLiteral<Nonbinding>() {}));
+                    } else {
+                        methods.add(method);
+                    }
+                }
+
+                return methods;
+            }
+        });
 
         new AddForwardingAnnotatedTypeAction<IncrementingInterceptor>() {
-
             @Override
             public String getBaseId() {
                 return InterceptorExtension.class.getName();
@@ -52,7 +73,6 @@ public class InterceptorExtension implements Extension {
         }.perform(event);
 
         new AddForwardingAnnotatedTypeAction<LifecycleInterceptor>() {
-
             @Override
             public String getBaseId() {
                 return InterceptorExtension.class.getName();
@@ -63,6 +83,17 @@ public class InterceptorExtension implements Extension {
                 return beanManager.createAnnotatedType(LifecycleInterceptor.class);
             }
         }.perform(event);
-    }
 
+        new AddForwardingAnnotatedTypeAction<SuffixingInterceptor>() {
+            @Override
+            public String getBaseId() {
+                return InterceptorExtension.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<SuffixingInterceptor> delegate() {
+                return beanManager.createAnnotatedType(SuffixingInterceptor.class);
+            }
+        }.perform(event);
+    }
 }
