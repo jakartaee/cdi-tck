@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,6 +23,7 @@ import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
 import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertNotNull;
 
 import java.net.URL;
 
@@ -78,10 +79,10 @@ public class WebServiceResourceTest extends AbstractTest {
 
     // Not possible right now
     // See ARQ-540
-    // @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    // @SpecAssertion(section = DECLARING_RESOURCE, id = "ff")
-    // public void testResourceInvocation(@Black SheepWS sheepWS) {
-    // assertNotNull(sheepWS);
-    // assertTrue(sheepWS.isSheepInjected());
-    // }
+     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+     @SpecAssertion(section = DECLARING_RESOURCE, id = "ff")
+     public void testResourceInvocation(@Black SheepWS sheepWS) {
+         assertNotNull(sheepWS);
+         assertTrue(sheepWS.isSheepInjected());
+     }
 }
