@@ -28,9 +28,11 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
+@SpecVersion(spec = "cdi", version = "20091101")
 public class TwoBeansOneClassTest extends AbstractTest {
 
     @Deployment
@@ -43,9 +45,9 @@ public class TwoBeansOneClassTest extends AbstractTest {
     @SpecAssertions({
         @SpecAssertion(section = INIT_EVENTS, id = "b"),
         @SpecAssertion(section = INIT_EVENTS, id = "bb"),
-        @SpecAssertion(section = BBD, id = "af"),
         @SpecAssertion(section = BEAN_ARCHIVE, id = "f"),
-        @SpecAssertion(section = BEAN_ARCHIVE, id = "afa")})
+        @SpecAssertion(section = BBD, id = "af"),
+        @SpecAssertion(section = BBD, id = "afa")})
     public void testTwoBeansWithOneBaseClass() {
         assertEquals(beanManager.getBeans(Beanie.class), 0);
         assertEquals(beanManager.getBeans(Beanie.class, new BeanieTypeLiteral() {
