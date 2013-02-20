@@ -25,7 +25,7 @@ import javax.enterprise.inject.spi.Extension;
 import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
-// This test extension expects that AddForwardingAnnotatedTypeAction distinguishes 
+// This test extension expects that AddForwardingAnnotatedTypeAction distinguishes
 // annotated types by more that just the baseId and delegate class
 public class TwoBeansOneClassExtension implements Extension {
     public void registerBeans(@Observes BeforeBeanDiscovery event, final BeanManager bm) {
@@ -33,34 +33,38 @@ public class TwoBeansOneClassExtension implements Extension {
         // add basic Beanie
         new AddForwardingAnnotatedTypeAction<Beanie>() {
 
+            final AnnotatedType<Beanie> delegate = bm.createAnnotatedType(Beanie.class);
+
             @Override
             public String getBaseId() {
-                return TwoBeansOneClassExtension.class.getName();
+                return "basic";
             }
 
             @Override
             public AnnotatedType<Beanie> delegate() {
-                return bm.createAnnotatedType(Beanie.class);
+                return delegate;
             }
         }.perform(event);
-        
+
         // add @BeanieType("propeller")Beanie
         new AddForwardingAnnotatedTypeAction<Beanie>() {
 
+            final AnnotatedType<Beanie> delegate = new AnnotatedTypeWrapper<Beanie>(bm.createAnnotatedType(Beanie.class), false, new BeanieTypeLiteral() {
+
+                @Override
+                public String value() {
+                    return "propeller";
+                }
+            });
+
             @Override
             public String getBaseId() {
-                return TwoBeansOneClassExtension.class.getName();
+                return "propeller";
             }
 
             @Override
             public AnnotatedType<Beanie> delegate() {
-                return new AnnotatedTypeWrapper<Beanie>(bm.createAnnotatedType(Beanie.class), false, new BeanieTypeLiteral() {
-
-                    @Override
-                    public String value() {
-                        return "propeller";
-                    }
-                });
+                return delegate;
             }
         }.perform(event);
     }

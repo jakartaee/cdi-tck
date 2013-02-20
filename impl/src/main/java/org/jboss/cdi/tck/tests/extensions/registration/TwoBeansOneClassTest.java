@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.registration;
 
 import javax.enterprise.inject.spi.DeploymentException;
+
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BBD;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
@@ -33,6 +35,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class TwoBeansOneClassTest extends AbstractTest {
 
     @Deployment
@@ -49,19 +52,19 @@ public class TwoBeansOneClassTest extends AbstractTest {
         @SpecAssertion(section = BBD, id = "af"),
         @SpecAssertion(section = BBD, id = "afa")})
     public void testTwoBeansWithOneBaseClass() {
-        assertEquals(beanManager.getBeans(Beanie.class), 0);
+        assertEquals(beanManager.getBeans(Beanie.class).size(), 0);
         assertEquals(beanManager.getBeans(Beanie.class, new BeanieTypeLiteral() {
             @Override
             public String value() {
                 return "basic";
             }
-        }), 1);
+        }).size(), 1);
 
         assertEquals(beanManager.getBeans(Beanie.class, new BeanieTypeLiteral() {
             @Override
             public String value() {
                 return "propeller";
             }
-        }), 1);
+        }).size(), 1);
     }
 }
