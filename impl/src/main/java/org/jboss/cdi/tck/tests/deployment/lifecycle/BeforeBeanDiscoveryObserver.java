@@ -9,14 +9,16 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.tests.deployment.lifecycle;
 
+import java.util.HashSet;
 import java.util.Set;
+
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.BeanManager;
@@ -24,6 +26,7 @@ import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.Nonbinding;
+
 import org.jboss.cdi.tck.util.annotated.AnnotatedMethodWrapper;
 import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
@@ -66,8 +69,8 @@ public class BeforeBeanDiscoveryObserver implements Extension {
         beforeBeanDiscovery.addQualifier(new AnnotatedTypeWrapper<Skill>(beanManager.createAnnotatedType(Skill.class), true) {
             Set<AnnotatedMethod<? super Skill>> methods;
 
-            @Override
-            public Set<AnnotatedMethod<? super Skill>> getMethods() {
+            {
+                methods = new HashSet<AnnotatedMethod<? super Skill>>();
                 for (final AnnotatedMethod<? super Skill> method : super.getMethods()) {
                     if ("level".equals(method.getJavaMember().getName())) {
                         methods.add(new AnnotatedMethodWrapper<Skill>((AnnotatedMethod<Skill>) method, true, new AnnotationLiteral<Nonbinding>() {}));
@@ -75,6 +78,10 @@ public class BeforeBeanDiscoveryObserver implements Extension {
                         methods.add(method);
                     }
                 }
+            }
+
+            @Override
+            public Set<AnnotatedMethod<? super Skill>> getMethods() {
                 return methods;
             }
         });
