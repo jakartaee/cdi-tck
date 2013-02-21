@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptors;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AnnotatedMethod;
@@ -46,8 +47,8 @@ public class InterceptorExtension implements Extension {
         event.addInterceptorBinding(new AnnotatedTypeWrapper<Suffixed>(beanManager.createAnnotatedType(Suffixed.class), true) {
             Set<AnnotatedMethod<? super Suffixed>> methods;
 
-            @Override
-            public Set<AnnotatedMethod<? super Suffixed>> getMethods() {
+            {
+                methods = new HashSet<AnnotatedMethod<? super Suffixed>>();
                 for (AnnotatedMethod<? super Suffixed> method : super.getMethods()) {
                     if ("value".equals(method.getJavaMember().getName())) {
                         methods.add(new AnnotatedMethodWrapper<Suffixed>((AnnotatedMethod<Suffixed>) method, true, new AnnotationLiteral<Nonbinding>() {}));
@@ -55,7 +56,10 @@ public class InterceptorExtension implements Extension {
                         methods.add(method);
                     }
                 }
+            }
 
+            @Override
+            public Set<AnnotatedMethod<? super Suffixed>> getMethods() {
                 return methods;
             }
         });
