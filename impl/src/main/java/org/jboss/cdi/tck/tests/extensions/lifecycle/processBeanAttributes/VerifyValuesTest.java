@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -57,7 +57,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -105,7 +105,6 @@ public class VerifyValuesTest extends AbstractTest {
         assertEquals(attributes.getScope(), ApplicationScoped.class);
         verifyName(attributes, "alpha");
         assertTrue(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
         assertTrue(typeSetMatches(attributes.getTypes(), Object.class, Alpha.class));
         assertTrue(typeSetMatches(attributes.getStereotypes(), AlphaStereotype.class));
         assertTrue(annotationSetMatches(attributes.getQualifiers(), AlphaQualifier.class, Named.class, Any.class));
@@ -137,7 +136,6 @@ public class VerifyValuesTest extends AbstractTest {
         assertEquals(deltaAttributes.getScope(), Dependent.class);
         verifyName(deltaAttributes, "delta");
         assertFalse(deltaAttributes.isAlternative());
-        assertTrue(deltaAttributes.isNullable());
 
         assertTrue(typeSetMatches(deltaAttributes.getTypes(), Object.class, Delta.class));
         assertTrue(deltaAttributes.getStereotypes().isEmpty());
@@ -164,7 +162,6 @@ public class VerifyValuesTest extends AbstractTest {
         assertEquals(RequestScoped.class, attributes.getScope());
         verifyName(attributes, "createBravo");
         assertTrue(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
 
         assertTrue(typeSetMatches(attributes.getTypes(), BravoInterface.class, Object.class));
         assertTrue(typeSetMatches(attributes.getStereotypes(), AlphaStereotype.class));
@@ -191,7 +188,6 @@ public class VerifyValuesTest extends AbstractTest {
         assertEquals(ApplicationScoped.class, attributes.getScope());
         verifyName(attributes, "charlie");
         assertFalse(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
 
         assertTrue(typeSetMatches(attributes.getTypes(), Object.class, Charlie.class, CharlieInterface.class));
         assertTrue(typeSetMatches(attributes.getStereotypes(), AlphaStereotype.class));
@@ -205,7 +201,6 @@ public class VerifyValuesTest extends AbstractTest {
         assertNotNull(attributes);
         assertEquals(Dependent.class, attributes.getScope());
         assertFalse(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
 
         assertTrue(typeSetMatches(attributes.getTypes(), Object.class, BravoInterceptor.class));
         assertTrue(attributes.getStereotypes().isEmpty());
@@ -218,7 +213,6 @@ public class VerifyValuesTest extends AbstractTest {
         assertNotNull(attributes);
         assertEquals(Dependent.class, attributes.getScope());
         assertFalse(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
 
         assertTrue(typeSetMatches(attributes.getTypes(), Object.class, BravoDecorator.class, BravoInterface.class));
         assertTrue(attributes.getStereotypes().size() == 1);

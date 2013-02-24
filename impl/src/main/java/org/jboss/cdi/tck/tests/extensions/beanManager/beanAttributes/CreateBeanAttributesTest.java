@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -48,7 +48,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -73,7 +73,6 @@ public class CreateBeanAttributesTest extends AbstractTest {
         assertEquals(attributes.getScope(), ApplicationScoped.class);
         assertEquals(attributes.getName(), "mountain");
         assertTrue(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
     }
 
     @SuppressWarnings("unchecked")
@@ -90,7 +89,6 @@ public class CreateBeanAttributesTest extends AbstractTest {
         assertEquals(attributes.getScope(), Dependent.class);
         assertEquals(attributes.getName(), "Mount Blanc");
         assertFalse(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
     }
 
     @SuppressWarnings("unchecked")
@@ -106,7 +104,6 @@ public class CreateBeanAttributesTest extends AbstractTest {
         assertEquals(attributes.getScope(), Dependent.class);
         assertEquals(attributes.getName(), "lake");
         assertTrue(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
     }
 
     @Test
@@ -179,7 +176,6 @@ public class CreateBeanAttributesTest extends AbstractTest {
         assertEquals(attributes.getScope(), ApplicationScoped.class);
         assertEquals(attributes.getName(), "fish");
         assertTrue(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
     }
 
     @SuppressWarnings("unchecked")
@@ -190,7 +186,6 @@ public class CreateBeanAttributesTest extends AbstractTest {
         assertEquals(attributes.getScope(), Dependent.class);
         assertNull(attributes.getName());
         assertFalse(attributes.isAlternative());
-        assertTrue(attributes.isNullable());
     }
 
     @SuppressWarnings("unchecked")
@@ -201,7 +196,6 @@ public class CreateBeanAttributesTest extends AbstractTest {
         assertEquals(attributes.getScope(), Dependent.class);
         assertEquals(attributes.getName(), "volume");
         assertFalse(attributes.isAlternative());
-        assertFalse(attributes.isNullable());
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)

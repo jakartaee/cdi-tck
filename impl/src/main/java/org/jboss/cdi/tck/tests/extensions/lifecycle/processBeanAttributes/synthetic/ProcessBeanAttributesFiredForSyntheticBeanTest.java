@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -49,7 +49,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -89,7 +89,6 @@ public class ProcessBeanAttributesFiredForSyntheticBeanTest extends AbstractTest
         assertTrue(typeSetMatches(attributesBeforeRegistering.getTypes(), Object.class, Vehicle.class, Bicycle.class));
         assertTrue(annotationSetMatches(attributesBeforeRegistering.getQualifiers(), FooQualifier.class, Any.class));
         assertFalse(attributesBeforeRegistering.isAlternative());
-        assertTrue(attributesBeforeRegistering.isNullable());
 
         BeanAttributes<Bicycle> attributesBeforeModifying = modifyingExtension.getBicycleAttributesBeforeModifying();
         assertEquals(attributesBeforeModifying.getScope(), ApplicationScoped.class);
@@ -97,7 +96,6 @@ public class ProcessBeanAttributesFiredForSyntheticBeanTest extends AbstractTest
         assertTrue(typeSetMatches(attributesBeforeModifying.getTypes(), Object.class, Vehicle.class, Bicycle.class));
         assertTrue(annotationSetMatches(attributesBeforeModifying.getQualifiers(), FooQualifier.class, Any.class));
         assertFalse(attributesBeforeModifying.isAlternative());
-        assertTrue(attributesBeforeModifying.isNullable());
 
         Set<Bean<Bicycle>> beans = getBeans(Bicycle.class, AnyLiteral.INSTANCE);
         assertEquals(beans.size(), 1);
@@ -107,6 +105,5 @@ public class ProcessBeanAttributesFiredForSyntheticBeanTest extends AbstractTest
         assertTrue(typeSetMatches(bean.getTypes(), Object.class, Bicycle.class));
         assertTrue(annotationSetMatches(bean.getQualifiers(), FooQualifier.class, Any.class));
         assertTrue(bean.isAlternative());
-        assertTrue(bean.isNullable());
     }
 }
