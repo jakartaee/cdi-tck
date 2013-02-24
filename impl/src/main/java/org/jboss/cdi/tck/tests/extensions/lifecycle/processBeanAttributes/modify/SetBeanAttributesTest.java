@@ -30,6 +30,8 @@ import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -50,7 +52,9 @@ public class SetBeanAttributesTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(SetBeanAttributesTest.class)
-                .withExtension(ModifyingExtension.class).build();
+                .withExtension(ModifyingExtension.class)
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Cat.class.getName()).up())
+                .build();
     }
 
     @Test

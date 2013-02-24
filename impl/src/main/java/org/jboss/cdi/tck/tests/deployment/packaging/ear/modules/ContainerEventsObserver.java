@@ -29,7 +29,6 @@ import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessInjectionPoint;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
-import javax.enterprise.inject.spi.ProcessModule;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
 import javax.enterprise.inject.spi.ProcessProducer;
 import javax.enterprise.inject.spi.ProcessSessionBean;
@@ -61,11 +60,6 @@ public class ContainerEventsObserver implements Extension {
 
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
         isAfterBeanDiscoveryOk = (beanManager != null);
-    }
-
-    public void observeProcessModule(@Observes ProcessModule event, BeanManager beanManager) {
-        if (beanManager != null)
-            processedModules.incrementAndGet();
     }
 
     public void observeProcessAnnotatedType(@Observes ProcessAnnotatedType<Foo> event, BeanManager beanManager) {
@@ -100,7 +94,7 @@ public class ContainerEventsObserver implements Extension {
 
     public static boolean allEventsOk() {
         return isAfterDeploymentValidationOk && isBeforeBeanDiscoveryOk && isAfterBeanDiscoveryOk
-                && processedModules.get() == 6 && isProcessAnnotatedTypeOk && isProcessInjectionPointOk
+                && isProcessAnnotatedTypeOk && isProcessInjectionPointOk
                 && isProcessInjectionTargetOk && isProcessProducerOk && isProcessBeanAttributesOk && isProcessManagedBeanOk
                 && isProcessObserverMethodOk;
     }

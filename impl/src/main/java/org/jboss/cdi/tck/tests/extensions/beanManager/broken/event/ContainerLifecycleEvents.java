@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.broken.event;
 
-import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Collections;
@@ -45,7 +44,6 @@ import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessInjectionPoint;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
-import javax.enterprise.inject.spi.ProcessModule;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
 import javax.enterprise.inject.spi.ProcessProducer;
 import javax.enterprise.inject.spi.ProcessProducerField;
@@ -130,28 +128,6 @@ public class ContainerLifecycleEvents {
     };
 
     public static final BeforeShutdown BEFORE_SHUTDOWN = new BeforeShutdown() {
-    };
-
-    public static final ProcessModule PROCESS_MODULE = new ProcessModule() {
-        @Override
-        public List<Class<?>> getInterceptors() {
-            return null;
-        }
-
-        @Override
-        public List<Class<?>> getDecorators() {
-            return null;
-        }
-
-        @Override
-        public InputStream getBeansXml() {
-            return null;
-        }
-
-        @Override
-        public List<Class<?>> getAlternatives() {
-            return null;
-        }
     };
 
     public static final ProcessAnnotatedType<Integer> PROCESS_ANNOTATED_TYPE = new ProcessAnnotatedType<Integer>() {
@@ -372,7 +348,6 @@ public class ContainerLifecycleEvents {
         values.add(AFTER_BEAN_DISCOVERY);
         values.add(AFTER_DEPLOYMENT_VALIDATION);
         values.add(BEFORE_SHUTDOWN);
-        values.add(PROCESS_MODULE);
         values.add(PROCESS_ANNOTATED_TYPE);
         values.add(PROCESS_INJECTION_POINT);
         values.add(PROCESS_INJECTION_TARGET);

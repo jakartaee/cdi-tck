@@ -16,44 +16,38 @@
  */
 package org.jboss.cdi.tck.tests.event.fires;
 
-import java.io.InputStream;
-import java.lang.annotation.Annotation;
-import java.util.List;
-import java.util.Set;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.AFTER_BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.AFTER_DEPLOYMENT_VALIDATION;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.BEFORE_BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.BEFORE_SHUTDOWN;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_ANNOTATED_TYPE;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_BEAN;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_BEAN_ATTRIBUTES;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_INJECTION_POINT;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_INJECTION_TARGET;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_OBSERVER_METHOD;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_PRODUCER;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_PRODUCER_FIELD;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_PRODUCER_METHOD;
+import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_SESSION_BEAN;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.spi.Context;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
-import javax.enterprise.inject.spi.Annotated;
-import javax.enterprise.inject.spi.AnnotatedField;
-import javax.enterprise.inject.spi.AnnotatedMember;
-import javax.enterprise.inject.spi.AnnotatedMethod;
-import javax.enterprise.inject.spi.AnnotatedParameter;
-import javax.enterprise.inject.spi.AnnotatedType;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanAttributes;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.BeforeShutdown;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.enterprise.inject.spi.InjectionTarget;
-import javax.enterprise.inject.spi.ObserverMethod;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessInjectionPoint;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
-import javax.enterprise.inject.spi.ProcessModule;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
 import javax.enterprise.inject.spi.ProcessProducer;
 import javax.enterprise.inject.spi.ProcessProducerField;
 import javax.enterprise.inject.spi.ProcessProducerMethod;
 import javax.enterprise.inject.spi.ProcessSessionBean;
-import javax.enterprise.inject.spi.Producer;
-import javax.enterprise.inject.spi.SessionBeanType;
 import javax.inject.Inject;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.*;
 
 @RequestScoped
 public class ContainerLifecycleEventDispatcher {
@@ -65,7 +59,6 @@ public class ContainerLifecycleEventDispatcher {
         tryFire(AfterBeanDiscovery.class, AFTER_BEAN_DISCOVERY);
         tryFire(AfterDeploymentValidation.class, AFTER_DEPLOYMENT_VALIDATION);
         tryFire(BeforeShutdown.class, BEFORE_SHUTDOWN);
-        tryFire(ProcessModule.class, PROCESS_MODULE);
         tryFire(ProcessAnnotatedType.class, PROCESS_ANNOTATED_TYPE);
         tryFire(ProcessInjectionPoint.class, PROCESS_INJECTION_POINT);
         tryFire(ProcessInjectionTarget.class, PROCESS_INJECTION_TARGET);

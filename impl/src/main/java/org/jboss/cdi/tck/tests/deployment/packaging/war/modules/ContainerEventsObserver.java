@@ -17,8 +17,6 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.war.modules;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
@@ -30,7 +28,6 @@ import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessInjectionPoint;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 import javax.enterprise.inject.spi.ProcessManagedBean;
-import javax.enterprise.inject.spi.ProcessModule;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
 import javax.enterprise.inject.spi.ProcessProducer;
 
@@ -42,7 +39,6 @@ public class ContainerEventsObserver implements Extension {
     private static boolean isAfterDeploymentValidationOk = false;
     private static boolean isBeforeBeanDiscoveryOk = false;
     private static boolean isAfterBeanDiscoveryOk = false;
-    private static AtomicInteger processedModules = new AtomicInteger(0);
     private static boolean isProcessAnnotatedTypeOk = false;
     private static boolean isProcessInjectionPointOk = false;
     private static boolean isProcessInjectionTargetOk = false;
@@ -61,11 +57,6 @@ public class ContainerEventsObserver implements Extension {
 
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
         isAfterBeanDiscoveryOk = (beanManager != null);
-    }
-
-    public void observeProcessModule(@Observes ProcessModule event, BeanManager beanManager) {
-        if (beanManager != null)
-            processedModules.incrementAndGet();
     }
 
     public void observeProcessAnnotatedType(@Observes ProcessAnnotatedType<Foo> event, BeanManager beanManager) {
@@ -99,7 +90,7 @@ public class ContainerEventsObserver implements Extension {
 
     public static boolean allEventsOk() {
         return isAfterDeploymentValidationOk && isBeforeBeanDiscoveryOk && isAfterBeanDiscoveryOk
-                && processedModules.get() == 4 && isProcessAnnotatedTypeOk && isProcessInjectionPointOk
+                && isProcessAnnotatedTypeOk && isProcessInjectionPointOk
                 && isProcessInjectionTargetOk && isProcessProducerOk && isProcessBeanAttributesOk && isProcessManagedBeanOk
                 && isProcessObserverMethodOk;
     }

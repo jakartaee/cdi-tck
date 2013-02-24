@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -22,12 +22,11 @@ import javax.enterprise.inject.spi.AfterDeploymentValidation;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
-import javax.enterprise.inject.spi.ProcessModule;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 public class LifecycleMonitoringExtension implements Extension {
@@ -38,10 +37,6 @@ public class LifecycleMonitoringExtension implements Extension {
 
     public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event) {
         ActionSequence.addAction(BeforeBeanDiscovery.class.getName());
-    }
-
-    public void observeProcessModule(@Observes ProcessModule event) {
-        ActionSequence.addAction(ProcessModule.class.getName());
     }
 
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event) {
