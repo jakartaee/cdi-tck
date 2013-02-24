@@ -49,22 +49,22 @@ public class ObservingExtension implements Extension {
 
     /**
      * Store the result, don't verify anything since it's more transparent to have assertions in the test class methods.
-     * 
+     *
      * The methods {@link BeanManager#getAnnotatedType(Class, String)} and {@link BeanManager#getAnnotatedTypes(Class)} will be
      * probably placed on the {@link AfterBeanDiscovery}. See also CDI-83.
-     * 
+     *
      * @param event
      * @param beanManager
      */
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
 
-        for (AnnotatedType<Human> annotatedType : beanManager.getAnnotatedTypes(Human.class)) {
+        for (AnnotatedType<Human> annotatedType : event.getAnnotatedTypes(Human.class)) {
             allHumans.add(annotatedType);
         }
-        for (AnnotatedType<Android> annotatedType : beanManager.getAnnotatedTypes(Android.class)) {
+        for (AnnotatedType<Android> annotatedType : event.getAnnotatedTypes(Android.class)) {
             allAndroids.add(annotatedType);
         }
-        android = beanManager.getAnnotatedType(Android.class, null);
+        android = event.getAnnotatedType(Android.class, null);
     }
 
     public AnnotatedType<Kryten> getKryten() {

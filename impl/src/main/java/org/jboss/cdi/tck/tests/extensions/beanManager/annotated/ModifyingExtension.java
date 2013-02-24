@@ -56,7 +56,7 @@ public class ModifyingExtension implements Extension {
 
     /**
      * Add two {@link AnnotatedType}s derived from {@link Foo}.
-     * 
+     *
      * @param event
      * @param beanManager
      */
@@ -95,7 +95,7 @@ public class ModifyingExtension implements Extension {
 
     /**
      * Change the discovered {@link AnnotatedType} for {@link Foo}.
-     * 
+     *
      * @param event
      */
     public void observeProcessAnnotatedType(@Observes ProcessAnnotatedType<Foo> event) {
@@ -107,22 +107,22 @@ public class ModifyingExtension implements Extension {
 
     /**
      * Store the result, don't verify anything since it's more transparent to have assertions in the test class methods.
-     * 
+     *
      * The methods {@link BeanManager#getAnnotatedType(Class, String)} and {@link BeanManager#getAnnotatedTypes(Class)} will be
      * probably placed on the {@link AfterBeanDiscovery}. See also CDI-83.
-     * 
+     *
      * @param event
      * @param beanManager
      */
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
 
-        for (AnnotatedType<Foo> annotatedType : beanManager.getAnnotatedTypes(Foo.class)) {
+        for (AnnotatedType<Foo> annotatedType : event.getAnnotatedTypes(Foo.class)) {
             allFoo.add(annotatedType);
         }
-        bravo = beanManager.getAnnotatedType(Foo.class, buildId(BASE_ID_BRAVO, Foo.class));
-        charlie = beanManager.getAnnotatedType(Foo.class, buildId(BASE_ID_CHARLIE, Foo.class));
-        aplha = beanManager.getAnnotatedType(Foo.class, null);
-        bar = beanManager.getAnnotatedType(Bar.class, null);
+        bravo = event.getAnnotatedType(Foo.class, buildId(BASE_ID_BRAVO, Foo.class));
+        charlie = event.getAnnotatedType(Foo.class, buildId(BASE_ID_CHARLIE, Foo.class));
+        aplha = event.getAnnotatedType(Foo.class, null);
+        bar = event.getAnnotatedType(Bar.class, null);
     }
 
     public AnnotatedType<Foo> getAplha() {

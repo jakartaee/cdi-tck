@@ -89,6 +89,10 @@ public class ContainerLifecycleEvents {
         @Override
         public void addInterceptorBinding(AnnotatedType<? extends Annotation> bindingType) {
         }
+
+        @Override
+        public void addAnnotatedType(AnnotatedType<?> type, String id) {
+        }
     };
 
     public static final AfterBeanDiscovery AFTER_BEAN_DISCOVERY = new AfterBeanDiscovery() {
@@ -106,6 +110,16 @@ public class ContainerLifecycleEvents {
 
         @Override
         public void addBean(Bean<?> bean) {
+        }
+
+        @Override
+        public <T> AnnotatedType<T> getAnnotatedType(Class<T> type, String id) {
+            return null;
+        }
+
+        @Override
+        public <T> Iterable<AnnotatedType<T>> getAnnotatedTypes(Class<T> type) {
+            return null;
         }
     };
 
