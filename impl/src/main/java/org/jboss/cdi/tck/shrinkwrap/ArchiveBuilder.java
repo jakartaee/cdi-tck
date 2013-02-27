@@ -66,6 +66,7 @@ import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.persistence20.PersistenceDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
 import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
 import org.jboss.shrinkwrap.impl.base.asset.AssetUtil;
 import org.jboss.shrinkwrap.impl.base.path.BasicPath;
@@ -475,6 +476,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return
      */
     public T withWebXml(WebAppDescriptor webXml) {
+
+        if(webXml.getVersion() == null) {
+            // CDITCK-316 always set the version attribute
+            webXml.version(WebAppVersionType._3_0);
+        }
+
         this.webXmlDescriptor = webXml;
         return self();
     }
@@ -496,6 +503,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return self
      */
     public T withPersistenceXml(PersistenceDescriptor persistenceDescriptor) {
+
+        if(persistenceDescriptor.getVersion() == null || persistenceDescriptor.getVersion().isEmpty()) {
+            // CDITCK-316 always set the version attribute
+            persistenceDescriptor.version("2.0");
+        }
+
         this.persistenceDescriptor = persistenceDescriptor;
         return self();
     }

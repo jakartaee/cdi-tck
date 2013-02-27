@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Seam Compatibility project.
  * </p>
- * 
+ *
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  * @see http://java.net/jira/browse/GLASSFISH-16303
@@ -55,10 +55,11 @@ public class MultiWebModuleWithExtensionTest extends AbstractTest {
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
                 .withTestClassDefinition(MultiWebModuleWithExtensionTest.class).withClasses(SimpleLogger.class)
                 .noDefaultWebModule().build();
-        StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class).applicationName("Test")
-                .createModule().ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb()
-                .webUri("foo.war").contextRoot("/foo").up().up().createModule().getOrCreateWeb().webUri("bar.war")
-                .contextRoot("/bar").up().up().exportAsString());
+        StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class)
+                .version(EnterpriseArchiveBuilder.DEFAULT_APP_VERSION).applicationName("Test").createModule()
+                .ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb().webUri("foo.war")
+                .contextRoot("/foo").up().up().createModule().getOrCreateWeb().webUri("bar.war").contextRoot("/bar").up().up()
+                .exportAsString());
         enterpriseArchive.setApplicationXML(applicationXml);
 
         WebArchive fooArchive = Testable.archiveToTest(new WebArchiveBuilder().notTestArchive().withName("foo.war")

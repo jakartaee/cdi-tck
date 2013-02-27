@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -57,10 +57,12 @@ import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
  * <p>
  * Tests that use {@link EnterpriseArchiveBuilder} must belong to {@link TestGroups#JAVAEE_FULL} group.
  * </p>
- * 
+ *
  * @author Martin Kouba
  */
 public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBuilder, EnterpriseArchive> {
+
+    public static final String DEFAULT_APP_VERSION = "6";
 
     public static final String DEFAULT_EAR_NAME = "test.ear";
 
@@ -72,7 +74,7 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
 
     /**
      * Do not add default web module.
-     * 
+     *
      * @return self
      */
     public EnterpriseArchiveBuilder noDefaultWebModule() {

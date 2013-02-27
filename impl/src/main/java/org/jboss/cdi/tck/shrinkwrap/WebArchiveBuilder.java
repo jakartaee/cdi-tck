@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -28,7 +28,7 @@ import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
 /**
  * ShrinkWrap {@link WebArchive} builder for CDI TCK Arquillian test. This builder is intended to provide basic functionality
  * covering common TCK needs. Use shrinkwrap API to adapt archive to advanced scenarios.
- * 
+ *
  * @author Martin Kouba
  */
 public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArchive> {
@@ -41,7 +41,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
 
     /**
      * Add default EJB module dependency to manifest. Useful when building custom web module of enterprise archive.
-     * 
+     *
      * @see EnterpriseArchiveBuilder#DEFAULT_EJB_MODULE_NAME
      * @return self
      */
@@ -52,10 +52,10 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
 
     /**
      * Set the beans.xml descriptor target path base.
-     * 
+     *
      * By default the target base is <code>null</code> and the beans.xml descriptor is placed in WEB-INF dir. However CDI 1.1
      * allows an alternative location: WEB-INF/classes/META-INF.
-     * 
+     *
      * @param beansDescriptorTargetBase
      * @return self
      */
@@ -99,7 +99,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
         }
 
         if (webXmlDescriptor != null) {
-            webArchive.setWebXML(new StringAsset(webXmlDescriptor.version(WebAppVersionType._3_0).exportAsString()));
+            webArchive.setWebXML(new StringAsset(webXmlDescriptor.exportAsString()));
         } else if (webXml != null) {
             webArchive.setWebXML(webXml.getSource());
         } else {
