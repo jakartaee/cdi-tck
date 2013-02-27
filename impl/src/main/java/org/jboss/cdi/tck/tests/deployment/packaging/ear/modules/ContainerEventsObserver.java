@@ -17,8 +17,6 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.ear.modules;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
@@ -41,7 +39,6 @@ public class ContainerEventsObserver implements Extension {
     private static boolean isAfterDeploymentValidationOk = false;
     private static boolean isBeforeBeanDiscoveryOk = false;
     private static boolean isAfterBeanDiscoveryOk = false;
-    private static AtomicInteger processedModules = new AtomicInteger(0);
     private static boolean isProcessAnnotatedTypeOk = false;
     private static boolean isProcessInjectionPointOk = false;
     private static boolean isProcessInjectionTargetOk = false;

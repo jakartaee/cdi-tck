@@ -92,17 +92,16 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
                 .withTestClassDefinition(EnterpriseArchiveModulesTest.class)
                 .withClasses(Foo.class, BusinessOperationEventInspector.class)
                 // C - lib visible to all
-                .withBeanLibrary(AlternativeBar.class, Util.class, Business.class, BusinessOperationEvent.class,
+                .withBeanLibrary(Util.class, Business.class, BusinessOperationEvent.class,
                         BusinessOperationObservedEvent.class, NonEnterprise.class, Secured.class, SecurityInterceptor.class,
                         LoggingDecorator.class)
                 // D - lib visible to all
                 .withLibrary(LegacyService.class).noDefaultWebModule().build();
 
-        // B - not visible for ACDE
+        // B - not visible for ACD
         JavaArchive barArchive = ShrinkWrap
-                .create(JavaArchive.class, "bar.jar")
-                .addClasses(Bar.class, BarInspector.class, ContainerEventsObserver.class, LegacyServiceProducer.class,
-                        DummyBar.class)
+                .create(JavaArchive.class, "bar-ejb.jar")
+                .addClasses(Bar.class, AlternativeBar.class, BarInspector.class, ContainerEventsObserver.class, LegacyServiceProducer.class)
                 .addAsServiceProvider(Extension.class, ContainerEventsObserver.class)
                 .addAsManifestResource(
                         new StringAsset(Descriptors.create(BeansDescriptor.class).createInterceptors()
@@ -127,7 +126,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
                 // Make A and B visible in a portable way
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
-                                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).addToClassPath("bar.jar")
+                                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).addToClassPath("bar-ejb.jar")
                                 .exportAsString()));
         enterpriseArchive.addAsModule(bazWebArchive);
 
@@ -163,7 +162,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
         inspector.reset();
         foo.businessOperation1();
         foo.businessOperation2();
-        // Bar, Qux
+        // BusinessOperationEvent observers: Bar, Qux
         assertEquals(inspector.getBusinessOperationObservations(), 2);
         // Interceptor is enabled in B only; observed method intercepted
         assertEquals(SecurityInterceptor.getNumberOfInterceptions(), 1);
