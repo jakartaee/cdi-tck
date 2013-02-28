@@ -27,7 +27,7 @@ import java.util.Set;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class Assert {
 
@@ -35,7 +35,7 @@ public class Assert {
     }
 
     /**
-     * 
+     *
      * @param annotations
      * @param requiredAnnotationTypes
      * @throws AssertionError if the annotations set and required annotations do not match
@@ -43,8 +43,13 @@ public class Assert {
     public static void assertAnnotationSetMatches(Set<? extends Annotation> annotations,
             Class<? extends Annotation>... requiredAnnotationTypes) {
 
+        if(annotations == null) {
+            throw new IllegalArgumentException();
+        }
+
+
         if (annotations.size() != requiredAnnotationTypes.length) {
-            fail("Set " + annotations.toString() + " does not match array " + Arrays.toString(requiredAnnotationTypes));
+            fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(), Arrays.toString(requiredAnnotationTypes), requiredAnnotationTypes.length));
         }
 
         if (annotations.isEmpty() && requiredAnnotationTypes.length == 0) {
@@ -55,22 +60,45 @@ public class Assert {
 
         for (Annotation annotation : annotations) {
             if (!requiredAnnotationTypesList.contains(annotation.annotationType())) {
-                fail("Set " + annotations.toString() + " does not match array " + Arrays.toString(requiredAnnotationTypes));
+                fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(), requiredAnnotationTypesList, requiredAnnotationTypesList.size()));
             }
         }
     }
 
     /**
-     * 
+     *
      * @param types
      * @param requiredTypes
      */
     public static void assertTypeSetMatches(Set<? extends Type> types, Type... requiredTypes) {
 
+        if(types == null) {
+            throw new IllegalArgumentException();
+        }
+
         List<Type> requiredTypeList = Arrays.asList(requiredTypes);
 
         if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
-            fail("Set " + types.toString() + " does not match array " + requiredTypeList.toString());
+            fail(String.format("Set %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList, requiredTypeList.size()));
         }
     }
+
+    /**
+     *
+     * @param types
+     * @param requiredTypes
+     */
+    public static void assertTypeListMatches(List<? extends Type> types, Type... requiredTypes) {
+
+        if(types == null) {
+            throw new IllegalArgumentException();
+        }
+
+        List<Type> requiredTypeList = Arrays.asList(requiredTypes);
+
+        if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
+            fail(String.format("List %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList, requiredTypeList.size()));
+        }
+    }
+
 }

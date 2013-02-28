@@ -19,11 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PAT;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
-import java.util.List;
+import static org.jboss.cdi.tck.util.Assert.assertTypeListMatches;
 
 import javax.inject.Inject;
 
@@ -38,7 +34,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class WithAnnotationsTest extends AbstractTest {
@@ -65,51 +61,27 @@ public class WithAnnotationsTest extends AbstractTest {
     public void testDelivery() {
 
         // Annotated with @Desired or @Wanted
-        List<Class<?>> desiredWantedTypes = processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes();
-        assertFalse(desiredWantedTypes.isEmpty());
-        assertEquals(desiredWantedTypes.size(), 12);
-        // type-level
-        assertTrue(desiredWantedTypes.contains(Bird.class));
-        assertTrue(desiredWantedTypes.contains(Hummingbird.class));
-        assertTrue(desiredWantedTypes.contains(BeeHummingbird.class));
-        // member-level
-        assertTrue(desiredWantedTypes.contains(Falcon.class));
-        assertTrue(desiredWantedTypes.contains(BatFalcon.class));
-        assertTrue(desiredWantedTypes.contains(Griffin.class));
-        assertTrue(desiredWantedTypes.contains(Hen.class));
-        assertTrue(desiredWantedTypes.contains(RubberChicken.class));
-        assertTrue(desiredWantedTypes.contains(Turkey.class));
-        assertTrue(desiredWantedTypes.contains(OcellatedTurkey.class));
-        assertTrue(desiredWantedTypes.contains(Jack.class));
-        assertTrue(desiredWantedTypes.contains(Sparrow.class));
+        assertTypeListMatches(processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes(),
+                // type-level
+                Bird.class, Hummingbird.class, BeeHummingbird.class,
+                // member-level
+                Falcon.class, BatFalcon.class, Griffin.class, Hen.class, RubberChicken.class, Turkey.class,
+                OcellatedTurkey.class, Jack.class, Sparrow.class);
 
         // Annotated with @Desired only
-        List<Class<?>> desiredTypes = processAnnotatedTypeObserver.getProcessedDesiredTypes();
-        assertFalse(desiredTypes.isEmpty());
-        assertEquals(desiredTypes.size(), 7);
+        assertTypeListMatches(processAnnotatedTypeObserver.getProcessedDesiredTypes(),
         // type-level
-        assertTrue(desiredTypes.contains(Bird.class));
-        assertTrue(desiredTypes.contains(Hummingbird.class));
-        assertTrue(desiredTypes.contains(BeeHummingbird.class));
-        // member-level
-        assertTrue(desiredTypes.contains(Turkey.class));
-        assertTrue(desiredTypes.contains(OcellatedTurkey.class));
-        assertTrue(desiredTypes.contains(Sparrow.class));
-        assertTrue(desiredTypes.contains(Jack.class));
+                Bird.class, Hummingbird.class, BeeHummingbird.class,
+                // member-level
+                Turkey.class, OcellatedTurkey.class, Sparrow.class, Jack.class);
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "fc"),
             @SpecAssertion(section = PAT, id = "g") })
     public void testDeliveryMetaAnnotation() {
-        List<Class<?>> metaTypes = processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes();
-        assertFalse(metaTypes.isEmpty());
-        assertEquals(metaTypes.size(), 5);
-        assertTrue(metaTypes.contains(Chicken.class));
-        assertTrue(metaTypes.contains(Hen.class));
-        assertTrue(metaTypes.contains(RubberChicken.class));
-        assertTrue(metaTypes.contains(Hummingbird.class));
-        assertTrue(metaTypes.contains(BeeHummingbird.class));
+        assertTypeListMatches(processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes(), Chicken.class, Hen.class,
+                RubberChicken.class, Hummingbird.class, BeeHummingbird.class);
     }
 
 }

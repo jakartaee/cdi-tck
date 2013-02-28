@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class AssertTest {
 
@@ -88,7 +88,7 @@ public class AssertTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(expectedExceptions = NullPointerException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAnnotationSetIsNull() {
         Assert.assertAnnotationSetMatches(null);
     }
