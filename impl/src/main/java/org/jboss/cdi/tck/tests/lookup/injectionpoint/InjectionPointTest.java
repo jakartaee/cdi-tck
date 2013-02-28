@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -53,7 +52,7 @@ import org.testng.annotations.Test;
 
 /**
  * Injection point metadata tests
- * 
+ *
  * @author David Allen
  * @author Jozef Hartinger
  */
@@ -224,7 +223,7 @@ public class InjectionPointTest extends AbstractTest {
 
     /**
      * CDI-78 reopened.
-     * 
+     *
      * Base of this test was originally part of CDITCK-138 but disappeared during branch merge.
      */
     @Test
@@ -244,7 +243,7 @@ public class InjectionPointTest extends AbstractTest {
         assert animalDecorators.size() == 3;
         for (Decorator<?> animalDecorator : animalDecorators) {
             // Decorator has two injection points - metadata and delegate
-            assert animalDecorator.getInjectionPoints().size() == 3;
+            assert animalDecorator.getInjectionPoints().size() == 2;
 
             for (InjectionPoint injectionPoint : animalDecorator.getInjectionPoints()) {
                 if (injectionPoint.getType().equals(InjectionPoint.class)) {
@@ -264,16 +263,4 @@ public class InjectionPointTest extends AbstractTest {
         assert toy.getInjectionPoint().getBean().getBeanClass().equals(AnimalDecorator2.class);
     }
 
-    /**
-     * CDI-78 reopened.
-     */
-    @Test
-    @SpecAssertion(section = INJECTION_POINT, id = "i")
-    public void testDecoratorInjectionPoint() {
-        Cat cat = getInstanceByType(Cattery.class).getCat();
-        cat.hello();
-        assertEquals(cat.getDecorator1InjectionPoint().getBean().getBeanClass(), Cattery.class);
-        assertEquals(cat.getDecorator2InjectionPoint().getBean().getBeanClass(), Cattery.class);
-        assertEquals(cat.getDecorator3InjectionPoint().getBean().getBeanClass(), Cattery.class);
-    }
 }

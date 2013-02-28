@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.extensions.beanManager.annotated;
+package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated;
 
 import static org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction.buildId;
 
@@ -32,9 +32,9 @@ import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
 
 import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.tests.extensions.beanManager.annotated.Alpha.AlphaLiteral;
-import org.jboss.cdi.tck.tests.extensions.beanManager.annotated.Bravo.BravoLiteral;
-import org.jboss.cdi.tck.tests.extensions.beanManager.annotated.Charlie.CharlieLiteral;
+import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Alpha.AlphaLiteral;
+import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Bravo.BravoLiteral;
+import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Charlie.CharlieLiteral;
 import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 

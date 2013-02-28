@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.extensions.beanManager.annotated;
+package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -34,14 +34,14 @@ import javax.inject.Qualifier;
 @Target({ TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
 @Documented
-public @interface Charlie {
+public @interface Bravo {
 
     @SuppressWarnings("all")
-    public static class CharlieLiteral extends AnnotationLiteral<Charlie> implements Charlie {
+    public static class BravoLiteral extends AnnotationLiteral<Bravo> implements Bravo {
 
         private static final long serialVersionUID = 1L;
 
-        public static final Charlie INSTANCE = new CharlieLiteral();
+        public static final Bravo INSTANCE = new BravoLiteral();
 
     }
 

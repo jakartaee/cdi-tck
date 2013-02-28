@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.extensions.beanManager.annotated;
+package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;

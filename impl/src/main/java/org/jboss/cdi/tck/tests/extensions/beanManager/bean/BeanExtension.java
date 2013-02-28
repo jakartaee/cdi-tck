@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -34,7 +34,6 @@ import javax.enterprise.inject.spi.BeanAttributes;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.InjectionTarget;
 import javax.enterprise.inject.spi.ProcessProducer;
 import javax.enterprise.inject.spi.Producer;
 
@@ -50,20 +49,17 @@ public class BeanExtension implements Extension {
         // create a synthetic class bean
         AnnotatedType<Office> oat = manager.createAnnotatedType(Office.class);
         BeanAttributes<Office> oa = manager.createBeanAttributes(oat);
-        InjectionTarget<Office> oit = manager.createInjectionTarget(oat);
-        Bean<Office> bean = manager.createBean(oa, Office.class, oit);
+        Bean<Office> bean = manager.createBean(oa, Office.class, manager.getInjectionTargetFactory(oat));
         event.addBean(bean);
         // create a serializable synthetic class bean
         AnnotatedType<SerializableOffice> soat = manager.createAnnotatedType(SerializableOffice.class);
         BeanAttributes<SerializableOffice> soa = manager.createBeanAttributes(soat);
-        InjectionTarget<SerializableOffice> soit = manager.createInjectionTarget(soat);
-        Bean<SerializableOffice> serializableBean = manager.createBean(soa, SerializableOffice.class, soit);
+        Bean<SerializableOffice> serializableBean = manager.createBean(soa, SerializableOffice.class, manager.getInjectionTargetFactory(soat));
         event.addBean(serializableBean);
         // create a synthetic decorator
         AnnotatedType<VehicleDecorator> doat = manager.createAnnotatedType(VehicleDecorator.class);
         BeanAttributes<VehicleDecorator> doa = addDecoratorStereotype(manager.createBeanAttributes(doat));
-        InjectionTarget<VehicleDecorator> doit = manager.createInjectionTarget(doat);
-        Bean<?> decoratorBean = manager.createBean(doa, VehicleDecorator.class, doit);
+        Bean<?> decoratorBean = manager.createBean(doa, VehicleDecorator.class, manager.getInjectionTargetFactory(doat));
         assertTrue(decoratorBean instanceof Decorator<?>);
         event.addBean(decoratorBean);
 
@@ -82,7 +78,8 @@ public class BeanExtension implements Extension {
         BeanAttributes<Lion> attributes = (BeanAttributes<Lion>) starveOut(manager.createBeanAttributes(zoo.getFields()
                 .iterator().next()));
         Producer<Lion> producer = event.getProducer();
-        hungryLion = manager.createBean(attributes, Zoo.class, producer);
+        // This is not possible right now - CDI API update required
+        // hungryLion = manager.createBean(attributes, Zoo.class, producer);
     }
 
     @SuppressWarnings("unchecked")
@@ -97,7 +94,8 @@ public class BeanExtension implements Extension {
         assertNotNull(method);
         BeanAttributes<Tiger> attributes = (BeanAttributes<Tiger>) starveOut(manager.createBeanAttributes(method));
         Producer<Tiger> producer = event.getProducer();
-        hungryTiger = manager.createBean(attributes, Zoo.class, producer);
+        // This is not possible right now - CDI API update required
+        //hungryTiger = manager.createBean(attributes, Zoo.class, producer);
     }
 
     private <T> BeanAttributes<T> starveOut(final BeanAttributes<T> attributes) {

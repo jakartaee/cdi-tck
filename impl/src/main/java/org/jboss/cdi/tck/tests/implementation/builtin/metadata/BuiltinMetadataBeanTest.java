@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -44,10 +44,10 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * Note that we also test that all built-in beans are passivation capable dependencies - if validation of passivation capable
  * beans and dependencies fails test the deployment (and thus all test methods) will fail.
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -80,23 +80,18 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = BEAN_METADATA, id = "a"), @SpecAssertion(section = BEAN_METADATA, id = "q"),
             @SpecAssertion(section = BEAN_METADATA, id = "f") })
-    public void testProducerAndDisposerMethodMetadata() {
+    public void testProducerMethodMetadata() {
         Bean<Yoghurt> fruitYoghurtBean = getUniqueBean(Yoghurt.class, new Fruit.Literal());
         CreationalContext<Yoghurt> fruitCtx = getCurrentManager().createCreationalContext(fruitYoghurtBean);
         Yoghurt fruitYoghurt = (Yoghurt) getCurrentManager().getReference(fruitYoghurtBean, Yoghurt.class, fruitCtx);
+        fruitYoghurt.getBeanBean();
         assertEquals(fruitYoghurtBean, factory.getFruitYoghurtBean());
 
         Bean<Yoghurt> probioticYoghurtBean = getUniqueBean(Yoghurt.class, new Probiotic.Literal());
         CreationalContext<Yoghurt> probioticCtx = getCurrentManager().createCreationalContext(probioticYoghurtBean);
-        Yoghurt probioticYoghurt = (Yoghurt) getCurrentManager().getReference(probioticYoghurtBean, Yoghurt.class, fruitCtx);
+        Yoghurt probioticYoghurt = (Yoghurt) getCurrentManager().getReference(probioticYoghurtBean, Yoghurt.class, probioticCtx);
+        probioticYoghurt.getBeanBean();
         assertEquals(probioticYoghurtBean, factory.getProbioticYoghurtBean());
-
-        // Now verify the disposer method
-        fruitYoghurtBean.destroy(fruitYoghurt, fruitCtx);
-        probioticYoghurtBean.destroy(probioticYoghurt, probioticCtx);
-        assertEquals(factory.getDisposedBeans().size(), 2);
-        assertEquals(fruitYoghurtBean, factory.getDisposedBeans().get(0));
-        assertEquals(probioticYoghurtBean, factory.getDisposedBeans().get(1));
     }
 
     @Test

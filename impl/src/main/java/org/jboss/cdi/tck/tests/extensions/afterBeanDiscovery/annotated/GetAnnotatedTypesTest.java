@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.extensions.beanManager.annotated;
+package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated;
 
-import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_ANNOTATEDTYPE;
+import static org.jboss.cdi.tck.cdi.Sections.ABD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -32,9 +32,9 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.InjectLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.extensions.beanManager.annotated.Alpha.AlphaLiteral;
-import org.jboss.cdi.tck.tests.extensions.beanManager.annotated.Bravo.BravoLiteral;
-import org.jboss.cdi.tck.tests.extensions.beanManager.annotated.Charlie.CharlieLiteral;
+import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Alpha.AlphaLiteral;
+import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Bravo.BravoLiteral;
+import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Charlie.CharlieLiteral;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -57,7 +57,7 @@ public class GetAnnotatedTypesTest extends AbstractTest {
     ModifyingExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_ANNOTATEDTYPE, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = ABD, id = "h") })
     public void testGetAnnotatedType() {
 
         AnnotatedType<Foo> aplha = extension.getAplha();
@@ -87,7 +87,7 @@ public class GetAnnotatedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_ANNOTATEDTYPE, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = ABD, id = "i") })
     public void testGetAnnotatedTypes() {
 
         List<AnnotatedType<Foo>> allFoo = extension.getAllFoo();

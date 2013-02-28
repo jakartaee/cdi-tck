@@ -2656,8 +2656,8 @@
             </assertion>
         </group>
 
-        <assertion id="g" implied="true">
-            <text>A raw bean type is not assignable to a parameterized required type.</text>
+        <assertion id="g">
+            <text>A raw bean type is considered assignable to a parameterized required type if the raw types are identical and all type parameters of the required type are either unbounded type variables or |java.lang.Object|.</text>
         </assertion>
 
     </section>
@@ -3064,20 +3064,32 @@
             <text>If the injection point represents a dynamically obtained instance, the |getBean()| method should return the |Bean| object representing the bean that defines the |Instance| injection point.</text>
         </assertion>
 
+        <assertion id="aac">
+            <text>If the injection point represents a dynamically obtained instance, the |getBean()| method should return the |Bean| object representing the bean that defines the |Event| injection point.</text>
+        </assertion>
+
         <assertion id="ba">
-            <text>The |javax.enterprise.inject.spi.InjectionPoint.getType()| method returns the declared type of the injection point.</text>
+            <text>The |javax.enterprise.inject.spi.InjectionPoint.getType()| method returns the required type of the injection point.</text>
         </assertion>
 
         <assertion id="baa">
             <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getType()| method returns the required type (as defined by |Instance.select()|).</text>
         </assertion>
 
+        <assertion id="bab">
+            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getType()| method returns the required type (as defined by |Event.select()|).</text>
+        </assertion>
+
         <assertion id="bc">
-            <text>The |javax.enterprise.inject.spi.InjectionPoint.getQualifiers()| method returns the declared qualifiers of the injection point.</text>
+            <text>The |javax.enterprise.inject.spi.InjectionPoint.getQualifiers()| method returns the required qualifiers of the injection point.</text>
         </assertion>
 
         <assertion id="bca">
             <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getQualifiers()| method returns required qualifiers of the injection point including any additional required qualifers (as defined by |Instance.select()|).</text>
+        </assertion>
+
+        <assertion id="bca">
+            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getQualifiers()| method returns required qualifiers of the injection point including any additional required qualifers (as defined by |Event.select()|).</text>
         </assertion>
 
         <assertion id="ca">
@@ -3088,12 +3100,20 @@
             <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Field| object representing the field that defines the |Instance| injection point in the case of field injection.</text>
         </assertion>
 
+        <assertion id="cab">
+            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Field| object representing the field that defines the |Event| injection point in the case of field injection.</text>
+        </assertion>
+
         <assertion id="cb">
             <text>The |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Method| object in the case of method parameter injection.</text>
         </assertion>
 
         <assertion id="cba">
             <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Method| object representing the method that defines the |Instance| injection point in the case of method parameter injection.</text>
+        </assertion>
+
+        <assertion id="cbb">
+            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Method| object representing the method that defines the |Event| injection point in the case of method parameter injection.</text>
         </assertion>
 
         <assertion id="cc">
@@ -3104,12 +3124,20 @@
             <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Constructor| object representing the constructor that defines the |Instance| injection point in the case of constructor parameter injection.</text>
         </assertion>
 
+        <assertion id="cca">
+            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Constructor| object representing the constructor that defines the |Event| injection point in the case of constructor parameter injection.</text>
+        </assertion>
+
         <assertion id="daa">
             <text>The |getAnnotated()| method returns an instance of |javax.enterprise.inject.spi.AnnotatedField| or |javax.enterprise.inject.spi.AnnotatedParameter|, depending upon whether the injection point is an injected field or a constructor/method parameter.</text>
         </assertion>
 
         <assertion id="dab">
             <text>If the injection point represents a dynamically obtained instance, then the |getAnnotated()| method returns an instance of |javax.enterprise.inject.spi.AnnotatedField| or |javax.enterprise.inject.spi.AnnotatedParameter| representing the |Instance| injection point, depending upon whether the injection point is an injected field or a constructor/method parameter.</text>
+        </assertion>
+
+        <assertion id="dac">
+            <text>If the injection point represents a dynamically obtained instance, then the |getAnnotated()| method returns an instance of |javax.enterprise.inject.spi.AnnotatedField| or |javax.enterprise.inject.spi.AnnotatedParameter| representing the |Event| injection point, depending upon whether the injection point is an injected field or a constructor/method parameter.</text>
         </assertion>
 
         <assertion id="dba">
@@ -3128,6 +3156,10 @@
             <text>If the injection point represents a dynamically obtained instance then the |isTransient()| method returns true if the |Instance| injection point is a transient field, and false otherwise.</text>
         </assertion>
 
+        <assertion id="dcc">
+            <text>If the injection point represents a dynamically obtained instance then the |isTransient()| method returns true if the |Event| injection point is a transient field, and false otherwise.</text>
+        </assertion>
+
         <assertion id="ea">
             <text>The container must provide a bean with scope |@Dependent|, bean type |InjectionPoint| and qualifier |@Default|, allowing dependent objects, as defined in Section 6.4.1, "Dependent objects", to obtain information about the injection point to which they belong.</text>
         </assertion>
@@ -3142,14 +3174,6 @@
 
         <assertion id="ga">
             <text>If a Java EE component class supporting injection that is not a bean has an injection point of type |InjectionPoint| and qualifier |@Default|, the container automatically detects the problem and treats it as a definition error.</text>
-        </assertion>
-
-        <assertion id="h">
-            <text>The |InjectionPoint| injected into a disposer method represents the producer method for which the disposer method is being invoked.</text>
-        </assertion>
-
-        <assertion id="i">
-            <text>The |InjectionPoint| injected into a decorator represents the injection point on the bean the decorated type is injected into.</text>
         </assertion>
 
     </section>
@@ -3219,14 +3243,11 @@
             <assertion id="o">
                 <text>If the injection point is a producer method parameter and the type parameter of the injected |Bean| is not the same as the producer method return type, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
-            <assertion id="p">
-                <text>If the injection point is a disposer method parameter and the type parameter of the injected |Bean| is not the same as the disposed parameter, the container automatically detects the problem and treats it as a definition error.</text>
+            <assertion id="p" testable="false">
+                <text>If the injection point is a disposer method parameter then no Bean instance can be injected, as a disposer method may resolve to more than one producer method.</text>
+                <note>TODO verify</note>
             </assertion>
         </group>
-
-        <assertion id="q">
-            <text>If a |Bean| instance is injected into a disposer method, it represents the producer method to which the disposer method is bound.</text>
-        </assertion>
 
     </section>
 
@@ -4169,15 +4190,15 @@
         <assertion id="ab">
             <text>The session scope is active during the |doFilter()| method of any servlet filter.</text>
         </assertion>
-        
+
         <assertion id="ac">
             <text>The session scope is active when the container calls any |HttpSessionListener|.</text>
         </assertion>
-        
+
         <assertion id="ad">
             <text>The session scope is active when the container calls any |AsyncListener|.</text>
         </assertion>
-        
+
         <assertion id="ae">
             <text>The session scope is active when the container calls any |ServletRequestListener|.</text>
         </assertion>
@@ -4185,7 +4206,7 @@
         <assertion id="b">
             <text>The session context is shared between all servlet requests that occur in the same HTTP servlet session.</text>
         </assertion>
-        
+
         <assertion id="ca">
             <text>The session context is destroyed at the very end of any request in which |invalidate()| was called, after all filters and |ServletRequestListeners| have been called.</text>
         </assertion>
@@ -5827,28 +5848,39 @@
     </section>
 
     <section id="bean" title="The Bean interface" level="2">
+
+        <group>
+            <text>The |BeanAttributes| interface exposes the basic attributes of a bean.</text>
+
+            <assertion id="ba">
+                <text>|getTypes()|, |getQualifiers()|, |getScope()|, |getName()| and |getStereotypes()| must return the bean types, qualifiers, scope type, EL name and stereotypes of the bean, as defined in Chapter 2, Concepts.</text>
+            </assertion>
+
+            <assertion id="bc">
+                <text>|isAlternative()| must return |true| if the bean is an alternative, and |false| otherwise.</text>
+            </assertion>
+
+        </group>
+
+        <group>
+            <text>The interface |javax.enterprise.inject.spi.Bean| defines everything the container needs to manage instances of a certain bean.</text>
+
+            <assertion id="bb">
+                <text>|getBeanClass()| returns the bean class of the managed bean or session bean or of the bean that declares the producer method or field.</text>
+            </assertion>
+
+            <assertion id="c">
+                <text>|getInjectionPoints()| returns a set of |InjectionPoint| objects, defined in Section 5.5.7, "Injection point metadata", representing injection points of the bean, that will be validated by the container at initialization time.</text>
+            </assertion>
+
+            <assertion id="bd" testable="false">
+                <text>|isNullable()| is deprecated in CDI 1.1 and should be ignored by the container.</text>
+            </assertion>
+
+        </group>
+
         <assertion id="aa">
             <text>Implementations of |Bean| must also implement the inherited operations defined by the |Contextual| interface defined in Section 6.1, "The Contextual interface".</text>
-        </assertion>
-
-        <assertion id="ba">
-            <text>|getTypes()|, |getQualifiers()|, |getScope()|, |getName()| and |getStereotypes()| must return the bean types, qualifiers, scope type, EL name and stereotypes of the bean, as defined in Chapter 2, Concepts.</text>
-        </assertion>
-
-        <assertion id="bb">
-            <text>|getBeanClass()| returns the bean class of the managed bean or session bean or of the bean that declares the producer method or field.</text>
-        </assertion>
-
-        <assertion id="bc">
-            <text>|isAlternative()| must return |true| if the bean is an alternative, and |false| otherwise.</text>
-        </assertion>
-
-        <assertion id="bd">
-            <text>|isNullable()| must return |true| if the method |create()| sometimes returns a |null| value, and |false| otherwise, as defined in Section 5.2.4, "Primitive types and null values".</text>
-        </assertion>
-
-        <assertion id="c">
-            <text>|getInjectionPoints()| returns a set of |InjectionPoint| objects, defined in Section 5.5.7, "Injection point metadata", representing injection points of the bean, that will be validated by the container at initialization time.</text>
         </assertion>
 
         <assertion id="f">
@@ -6398,12 +6430,6 @@
         <assertion id="a">
             <text>The method |BeanManager.createAnnotatedType()| returns an |AnnotatedType| that may be used to read the annotations of a given Java class or interface.</text>
         </assertion>
-        <assertion id="b">
-            <text>The method |BeanManager.getAnnotatedType()| returns the |AnnotatedType| discovered or added during container initialization.</text>
-        </assertion>
-        <assertion id="c">
-            <text>The method |BeanManager.getAnnotatedTypes()| returns the |AnnotatedType|s discovered or added during container initialization.</text>
-        </assertion>
     </section>
 
     <section id="bm_obtain_injectiontarget" title="Obtaining an InjectionTarget for a class" level="3">
@@ -6758,13 +6784,12 @@
         </group>
 
         <group>
-            <text>|addAnnotatedType()| adds a given |AnnotatedType| to the set of types which will be scanned during bean discovery. If an AnnotatedType with the same identifier already exists in the set of types the container automatically detects the problem and treats it as a deployment problem. Portable extensions are encouraged to add |IdentifiedAnnotatedType| s in order to not accidentally conflict with discovered types.</text>
+            <text>|addAnnotatedType()| adds a given |AnnotatedType| to the set of types which will be scanned during bean discoverywith an optional identifier. The id of an |AnnotatedType| added by the container is not defined.</text>
             <assertion id="af">
                 <text>Test the |addAnnotatedType()| method.</text>
             </assertion>
             <assertion id="afa">
                 <text>Test that more than one |AnnotatedType| may use the same base type.</text>
-                <note>Note that CDI-58 is still open.</note>
             </assertion>
             <assertion id="afb">
                 <text>Test adding |AnnotatedType| if any other |AnnotatedType| with the same identifier already exists in the set of types.</text>
@@ -6775,6 +6800,15 @@
         <assertion id="ag">
             <text>If any observer method of the |BeforeBeanDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
+    </section>
+
+    <section id="atd" title="AfterTypeDiscovery event" level="3">
+        <assertion id="a">
+            <text>The container must fire an event when it has fully completed the type discovery process and before it begins the bean discovery process. The event object must be of type |javax.enterprise.inject.spi.AfterTypeDiscovery|.</text>
+        </assertion>
+
+        <!-- TODO -->
+
     </section>
 
     <section id="abd" title="AfterBeanDiscovery event" level="3">
@@ -6821,6 +6855,14 @@
             <note>Right now only the registation process is tested</note>
         </assertion>
 
+        <assertion id="h">
+            <text>|getAnnotatedType()| returns the |AnnotatedType| discovered or added during container initialization. If the |id| passed is null, the container should substitute the container generated id.</text>
+        </assertion>
+
+        <assertion id="i">
+            <text>|getAnnotatedTypes()| returns the |AnnotatedType|s discovered or added during container initialization.</text>
+        </assertion>
+
         <assertion id="fb" testable="false">
             <text>A portable extension may take advantage of this event to register beans, interceptors, decorators, observer methods and custom context objects with the container.</text>
             <note>See d*, e* and f</note>
@@ -6833,7 +6875,7 @@
 
     <section id="adv" title="AfterDeploymentValidation event" level="3">
         <assertion id="a">
-            <text>The container must fire a third event after it has validated that there are no deployment problems and before creating contexts or processing requests. The event object must be of type |javax.enterprise.inject.spi.AfterDeploymentValidation|.</text>
+            <text>The container must fire an event after it has validated that there are no deployment problems and before creating contexts or processing requests. The event object must be of type |javax.enterprise.inject.spi.AfterDeploymentValidation|.</text>
         </assertion>
 
         <assertion id="b">
@@ -6858,69 +6900,6 @@
             <text>If any observer method of the |BeforeShutdown| event throws an exception, the exception is ignored by the container.</text>
             <note>This is not testable in a portable way - the only way would be to check successful undeploy.</note>
         </assertion>
-    </section>
-
-    <section id="pm" title="ProcessModule event" level="3">
-
-        <assertion id="a">
-            <text>The container must fire an event for each bean deployment archive, before it processes the classes packaged in that module. The event object must be of type |javax.enterprise.inject.spi.ProcessModule|.</text>
-        </assertion>
-
-        <assertion id="ba">
-            <text>|getAlternatives()| returns the set of enabled alternatives of the bean deployment archive.</text>
-        </assertion>
-
-        <assertion id="bb">
-            <text>|getInterceptors()| returns the list of enabled interceptors of the bean deployment archive.</text>
-        </assertion>
-
-        <assertion id="bc">
-            <text>|getDecorators()| returns the list of enabled decorators of the bean deployment archive.</text>
-        </assertion>
-
-        <assertion id="be">
-            <text>|getBeansXml()| returns an input stream which can be used to read in the |beans.xml| for this module.</text>
-        </assertion>
-
-        <group>
-            <text>Any observer of this event is permitted to add classes to, or remove classes from, the set of alternatives, list of interceptors or list of decorators. The container must use the final values of these collections, after all observers have been called, to determine the enabled alternatives, interceptors, and decorators for the bean deployment archive. The initial values of these collections is determined by reading the |beans.xml| file of the bean deployment archive.</text>
-            <assertion id="ca">
-                <text>Check observer is permitted to add classes to the set of alternatives and the container reflects this operation.</text>
-            </assertion>
-            <assertion id="cb">
-                <text>Check observer is permitted to remove classes from the set of alternatives and the container reflects this operation.</text>
-            </assertion>
-            <assertion id="cc">
-                <text>Check observer is permitted to add classes to the list of interceptors and the container reflects this operation.</text>
-            </assertion>
-            <assertion id="cd">
-                <text>Check observer is permitted to remove classes from the list of interceptors and the container reflects this operation.</text>
-            </assertion>
-            <assertion id="ce">
-                <text>Check observer is permitted to add classes to the list of decorators and the container reflects this operation.</text>
-            </assertion>
-            <assertion id="cf">
-                <text>Check observer is permitted to remove classes from the list of decorators and the container reflects this operation.</text>
-            </assertion>
-            <assertion id="cg">
-                <text>Check the initial values are determined by reading the |beans.xml| file of the bean deployment archive.</text>
-            </assertion>
-        </group>
-
-        <assertion id="d">
-            <text>If any observer method of a |ProcessModule| event throws an exception, the exception is treated as a deployment problem by the container.</text>
-        </assertion>
-
-        <assertion id="e">
-            <text>If the final list of enabled interceptors of the bean deployment archive contains duplicate elements, the container automatically detects the problem and treats it as a deployment problem.</text>
-            <note>Implied - see 9.4. Interceptor enablement and ordering</note>
-        </assertion>
-
-        <assertion id="f">
-            <text>If the final list of enabled decorators of the bean deployment archive contains duplicate elements, the container automatically detects the problem and treats it as a deployment problem.</text>
-            <note>Implied - see 8.2. Decorator enablement and ordering</note>
-        </assertion>
-
     </section>
 
     <section id="pat" title="ProcessAnnotatedType event" level="3">
@@ -6971,24 +6950,24 @@
         </assertion>
 
         <group>
-            <text>The annotation |@WithAnnotations| may be applied to the event parameter. If the annotation is applied, the container must only deliver |ProcessAnnotatedType| events for types which contain at least one of the annotations specified. The annotation can appear on the type, or any of its supertypes, on any field, method or constructor declared by the type, or any of its supertypes, or on any parameter of any method or constructor declared by the type, or any of its supertypes.</text>
+            <text>The annotation |@WithAnnotations| may be applied to the event parameter. If the annotation is applied, the container must only deliver |ProcessAnnotatedType| events for types which contain at least one of the annotations specified. The annotation can appear on the annotated type, or on any member, or any parameter of any member of the annotated type, as defined in Section 11.4.</text>
             <assertion id="fa">
-                <text>Test annotation on the type, or any of its supertypes.</text>
+                <text>Test annotation on the annotated type.</text>
             </assertion>
             <assertion id="fb">
-                <text>Test annotation on the field declared by the type, or any of its supertypes.</text>
+                <text>Test annotation on the field declared by the annotated type.</text>
             </assertion>
             <assertion id="fc">
-                <text>Test annotation on the method declared by the type, or any of its supertypes.</text>
+                <text>Test annotation on the method declared by the annotated type.</text>
             </assertion>
             <assertion id="fd">
-                <text>Test annotation on the constructor declared by the type, or any of its supertypes.</text>
+                <text>Test annotation on the constructor declared by the annotated type.</text>
             </assertion>
             <assertion id="fe">
-                <text>Test annotation on the parameter of the method declared by the type, or any of its supertypes.</text>
+                <text>Test annotation on the parameter of the method declared by the annotated type.</text>
             </assertion>
             <assertion id="ff">
-                <text>Test annotation on the parameter of the constructor declared by the type, or any of its supertypes.</text>
+                <text>Test annotation on the parameter of the constructor declared by the annotated type.</text>
             </assertion>
         </group>
 
