@@ -24,7 +24,7 @@ import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
 
 /**
- * 
+ *
  */
 @Vetoed
 public class Bar<T1, T2> {
@@ -33,6 +33,7 @@ public class Bar<T1, T2> {
     private Baz<T1> baz;
 
     @Inject
+    @Amazing
     private T1 t1;
 
     @Inject
@@ -49,7 +50,7 @@ public class Bar<T1, T2> {
         this.t1Array = t1Array;
     }
 
-    public void observeBaz(@Observes Baz<T1> baz, T1 t1) {
+    public void observeBaz(@Observes Baz<T1> baz, @Amazing T1 t1) {
         t1BazEvent = baz;
         t1ObserverInjectionPoint = t1;
     }

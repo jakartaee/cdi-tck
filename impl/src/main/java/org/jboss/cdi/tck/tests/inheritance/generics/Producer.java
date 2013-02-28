@@ -20,11 +20,12 @@ package org.jboss.cdi.tck.tests.inheritance.generics;
 import javax.enterprise.inject.Produces;
 
 /**
- * 
+ *
  */
 public class Producer {
 
     @Produces
+    @Amazing
     public String produceString() {
         return "ok";
     }

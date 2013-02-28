@@ -106,7 +106,7 @@ public class MemberLevelInheritanceTest extends AbstractTest {
         assertNotNull(foo);
         getCurrentManager().fireEvent(new Qux(null));
         assertNotNull(foo.getT1BazEvent());
-        assertNotNull(foo.getT1ObserverInjectionPoint());
+        assertEquals(foo.getT1ObserverInjectionPoint(), "ok");
     }
 
 }

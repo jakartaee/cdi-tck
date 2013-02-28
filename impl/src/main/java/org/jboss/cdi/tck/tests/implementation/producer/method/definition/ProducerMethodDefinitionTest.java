@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -75,8 +75,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "b"), @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "a") })
     public void testStaticMethod() throws Exception {
-        assert getBeans(String.class).size() == 1;
-        assert getInstanceByType(String.class).equals(BeanWithStaticProducerMethod.getString());
+        assert getBeans(String.class, TAME_LITERAL).size() == 1;
+        assert getInstanceByType(String.class, TAME_LITERAL).equals(BeanWithStaticProducerMethod.getString());
     }
 
     @Test
@@ -88,9 +88,9 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD, id = "b") })
     public void testStaticDisposerMethod() throws Exception {
-        assert getBeans(String.class).size() == 1;
-        String aString = getInstanceByType(String.class);
-        Bean<String> stringBean = getBeans(String.class).iterator().next();
+        assert getBeans(String.class, TAME_LITERAL).size() == 1;
+        String aString = getInstanceByType(String.class, TAME_LITERAL);
+        Bean<String> stringBean = getBeans(String.class, TAME_LITERAL).iterator().next();
         CreationalContext<String> creationalContext = getCurrentManager().createCreationalContext(stringBean);
         stringBean.destroy(aString, creationalContext);
         assert BeanWithStaticProducerMethod.stringDestroyed;
