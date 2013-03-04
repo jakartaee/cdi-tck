@@ -16,15 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.extensions.registration;
 
-import javax.enterprise.inject.spi.DeploymentException;
-
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BBD;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
+import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -32,10 +30,8 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-import static org.testng.Assert.assertEquals;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-@Test(groups = INTEGRATION)
 public class TwoBeansOneClassTest extends AbstractTest {
 
     @Deployment
@@ -44,11 +40,11 @@ public class TwoBeansOneClassTest extends AbstractTest {
                 .withLibrary(TwoBeansOneClassExtension.class, Beanie.class, BeanieType.class, BeanieTypeLiteral.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({
         @SpecAssertion(section = INIT_EVENTS, id = "b"),
         @SpecAssertion(section = INIT_EVENTS, id = "bb"),
-        @SpecAssertion(section = BEAN_ARCHIVE, id = "f"),
+        @SpecAssertion(section = BEAN_ARCHIVE, id = "n"),
         @SpecAssertion(section = BBD, id = "af"),
         @SpecAssertion(section = BBD, id = "afa")})
     public void testTwoBeansWithOneBaseClass() {

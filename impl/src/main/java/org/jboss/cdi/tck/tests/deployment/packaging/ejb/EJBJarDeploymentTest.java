@@ -42,7 +42,6 @@ import org.testng.annotations.Test;
 /**
  * @author Martin Kouba
  */
-@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EJBJarDeploymentTest extends AbstractTest {
 
@@ -64,8 +63,9 @@ public class EJBJarDeploymentTest extends AbstractTest {
     @EJB(lookup = "java:global/test-ejb/FooBean!org.jboss.cdi.tck.tests.deployment.packaging.ejb.FooRemote")
     FooRemote foo;
 
+    @Test(groups = JAVAEE_FULL)
     @OperateOnDeployment("TEST")
-    @SpecAssertion(section = BEAN_ARCHIVE, id = "bcd")
+    @SpecAssertion(section = BEAN_ARCHIVE, id = "jj")
     public void testContainerSearchesEJBJar() throws Exception {
         assertNotNull(foo);
         assertTrue(foo.isBarBeanObserved());

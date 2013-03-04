@@ -40,17 +40,16 @@ import org.testng.annotations.Test;
 
 /**
  * Test installed library bean archive referenced by a WAR.
- * 
- * TODO I'm not completely sure about test configuration (manifests contents).
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InstalledLibraryWarTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
+        // I'm not completely sure about test configuration (manifests contents)
         return new WebArchiveBuilder()
                 .withTestClass(InstalledLibraryWarTest.class)
                 .build()
@@ -65,14 +64,14 @@ public class InstalledLibraryWarTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bcc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ji") })
     public void testInjection(@Strict Translator translator) {
         assertNotNull(translator);
         assertEquals(translator.echo("hello"), "hello");
     }
 
     @Test(groups = { INTEGRATION, INSTALLED_LIB })
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bcc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ji") })
     public void testResolution() {
         // No assertion needed
         getUniqueBean(Translator.class, StrictLiteral.INSTANCE);

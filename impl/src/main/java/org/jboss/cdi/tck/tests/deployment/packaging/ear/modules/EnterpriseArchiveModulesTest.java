@@ -154,8 +154,8 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bba"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bbb"),
-            @SpecAssertion(section = BEAN_ARCHIVE, id = "bbc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bbe"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ja"), @SpecAssertion(section = BEAN_ARCHIVE, id = "jb"),
+            @SpecAssertion(section = BEAN_ARCHIVE, id = "jc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "je"),
             @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
     public void testVisibilityAndInterceptorEnablement() throws Exception {
         SecurityInterceptor.reset();

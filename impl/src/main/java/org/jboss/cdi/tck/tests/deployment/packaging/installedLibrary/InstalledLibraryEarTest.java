@@ -40,11 +40,9 @@ import org.testng.annotations.Test;
 
 /**
  * Test installed library bean archive referenced by an EAR.
- * 
- * TODO I'm not completely sure about test configuration (manifests contents).
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InstalledLibraryEarTest extends AbstractTest {
@@ -55,6 +53,7 @@ public class InstalledLibraryEarTest extends AbstractTest {
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().withTestClass(InstalledLibraryEarTest.class)
                 .build();
 
+        // I'm not completely sure about test configuration (manifests contents)
         enterpriseArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
                 .attribute("Extension-List", "CDITCKExtLib")
                 .attribute("CDITCKExtLib-Extension-Name", "org.jboss.cdi.tck.extlib")
@@ -67,14 +66,14 @@ public class InstalledLibraryEarTest extends AbstractTest {
     }
 
     @Test(groups = { JAVAEE_FULL, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbf") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jf") })
     public void testInjection(@Strict Translator translator) {
         assertNotNull(translator);
         assertEquals(translator.echo("hello"), "hello");
     }
 
     @Test(groups = { JAVAEE_FULL, INSTALLED_LIB })
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbf") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jf") })
     public void testResolution() {
         // No assertion needed
         getUniqueBean(Translator.class, StrictLiteral.INSTANCE);

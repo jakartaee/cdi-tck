@@ -25,6 +25,7 @@ import java.util.List;
 
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
+import javax.enterprise.inject.spi.AfterTypeDiscovery;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.inject.Inject;
@@ -45,7 +46,6 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-@Test(groups = INTEGRATION)
 public class ApplicationInitializationLifecycleTest extends AbstractTest {
 
     @Deployment
@@ -57,11 +57,11 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
     @Inject
     Foo foo;
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INITIALIZATION, id = "b"), @SpecAssertion(section = INITIALIZATION, id = "c"),
             @SpecAssertion(section = INITIALIZATION, id = "da"), @SpecAssertion(section = INITIALIZATION, id = "f"),
             @SpecAssertion(section = INITIALIZATION, id = "g"), @SpecAssertion(section = INITIALIZATION, id = "h"),
-            @SpecAssertion(section = INITIALIZATION, id = "i") })
+            @SpecAssertion(section = INITIALIZATION, id = "i"), @SpecAssertion(section = INITIALIZATION, id = "j") })
     public void testInitialization() {
 
         foo.ping();
@@ -74,6 +74,8 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
         correctSequenceData.add(BeforeBeanDiscovery.class.getName());
         // Bean discovery
         correctSequenceData.add(ProcessAnnotatedType.class.getName());
+        // AfterTypeDiscovery
+        correctSequenceData.add(AfterTypeDiscovery.class.getName());
         // AfterBeanDiscovery
         correctSequenceData.add(AfterBeanDiscovery.class.getName());
         // Validating bean dependencies and specialization - currently no portable way how to test

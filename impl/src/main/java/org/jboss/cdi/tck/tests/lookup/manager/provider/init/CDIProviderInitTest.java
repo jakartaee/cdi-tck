@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -41,15 +41,14 @@ import org.testng.annotations.Test;
 /**
  * Test {@link CDI} after the container fires the BeforeBeanDiscovery container lifecycle event until the application
  * initialization is completed.
- * 
+ *
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class CDIProviderInitTest extends AbstractTest {
 
@@ -76,8 +75,8 @@ public class CDIProviderInitTest extends AbstractTest {
     @Inject
     NonBdaAfterDeploymentValidationObserver nonbdaExtension;
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PROVIDER, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE, id = "f") })
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = PROVIDER, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE, id = "n") })
     public void testAccessingBeanManager() {
 
         // War itself

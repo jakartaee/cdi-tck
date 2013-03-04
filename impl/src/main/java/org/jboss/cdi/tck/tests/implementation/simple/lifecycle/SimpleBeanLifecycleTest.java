@@ -171,7 +171,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa"), @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa"),
             @SpecAssertion(section = INJECTED_FIELD_QUALIFIERS, id = "a"), @SpecAssertion(section = INJECTED_FIELDS, id = "a"),
-            @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bca") })
+            @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE, id = "jg") })
     public void testCreateInjectsFieldsDeclaredInJava() {
         assert getBeans(TunaFarm.class).size() == 1;
         TunaFarm tunaFarm = getInstanceByType(TunaFarm.class);

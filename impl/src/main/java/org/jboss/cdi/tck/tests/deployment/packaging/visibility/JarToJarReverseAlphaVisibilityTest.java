@@ -30,13 +30,13 @@ import org.testng.annotations.Test;
 
 /**
  * Same as {@link JarToJarAlphaVisibilityTest} but the content of alpha and bravo jars is swapped to detect ordering issues.
- * 
+ *
  * <p>
  * This test was originally part of Seam Compatibility project.
  * <p>
- * 
+ *
  * TODO verify assertions
- * 
+ *
  * @author <a href="mailto:jharting@redhat.com">Jozef Hartinger</a>
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15735">GLASSFISH-15735</a>
@@ -51,7 +51,7 @@ public class JarToJarReverseAlphaVisibilityTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bcb"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jh"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
     public void testDeployment() {
     }
 }

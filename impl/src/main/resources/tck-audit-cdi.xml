@@ -3273,9 +3273,8 @@
             <assertion id="o">
                 <text>If the injection point is a producer method parameter and the type parameter of the injected |Bean| is not the same as the producer method return type, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
-            <assertion id="p" testable="false">
-                <text>If the injection point is a disposer method parameter then no Bean instance can be injected, as a disposer method may resolve to more than one producer method.</text>
-                <note>TODO verify</note>
+            <assertion id="p">
+                <text>If the injection point is a disposer method parameter then no Bean instance can be injected, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
         </group>
 
@@ -3686,7 +3685,7 @@
         </group>
 
         <group>
-            <text>The container must ensure that  all |@Dependent| scoped contextual instances injected into method or constructor parameters that are annotated with |@TransientReference| are destroyed when the invocation completes.</text>
+            <text>The container must ensure that all |@Dependent| scoped contextual instances injected into method or constructor parameters that are annotated with |@TransientReference| are destroyed when the invocation completes.</text>
             <assertion id="fa">
                 <text>Test producer method parameter.</text>
             </assertion>
@@ -6896,13 +6895,48 @@
             <text>The container must fire an event when it has fully completed the type discovery process and before it begins the bean discovery process. The event object must be of type |javax.enterprise.inject.spi.AfterTypeDiscovery|.</text>
         </assertion>
 
-        <!-- TODO -->
+        <assertion id="b">
+            <text>|getAlternatives()| returns the ordered list of enabled alternatives for the application. Alternative enabled for a bean archive are not included in the list.</text>
+        </assertion>
 
+        <assertion id="c">
+            <text>|getInterceptors()| returns the ordered list of enabled interceptors for the application. Interceptors enabled for a bean archive are not included in the list.</text>
+        </assertion>
+
+        <assertion id="d">
+            <text>|getDecorators()| returns the ordered list of enabled decorators for the application. Decorators enabled for a bean archive are not included in the list.</text>
+        </assertion>
+
+        <assertion id="e">
+            <text>|addAnnotatedType()| adds a given AnnotatedType to the set of types which will be scanned during bean discovery, with an identifier.</text>
+        </assertion>
+
+        <assertion id="f" testable="false">
+            <text>If an alternative, interceptor or decorator is added using |AfterTypeDiscovery.addAnnotatedType()|, non-portable behavior results.</text>
+            <note>Non-portable behavior</note>
+        </assertion>
+
+        <group>
+            <text>Any observer of this event is permitted to add classes to, or remove classes from, the list of alternatives, list of interceptors or list of decorators. The container must use the final values of these collections, after all observers of |AfterTypeDiscovery| have been called, to determine the order of the enabled alternatives, interceptors, and decorators for application. The initial values of these collections is defined by the |@Priority| annotation.</text>
+            <assertion id="g">
+                <text>Test the list of alternatives.</text>
+            </assertion>
+            <assertion id="h">
+                <text>Test the list of interceptors.</text>
+            </assertion>
+            <assertion id="i">
+                <text>Test the list of decorators.</text>
+            </assertion>
+        </group>
+
+        <assertion id="j">
+            <text>If any observer method of an |AfterTypeDiscovery| event throws an exception, the exception is treated as a deployment problem by the container.</text>
+        </assertion>
     </section>
 
     <section id="abd" title="AfterBeanDiscovery event" level="3">
         <assertion id="a">
-            <text>The container must fire a second event when it has fully completed the bean discovery process, validated that there are no definition errors relating to the discovered beans, and registered |Bean| and |ObserverMethod| objects for the discovered beans, but before detecting deployment problems. The event object must be of type |javax.enterprise.inject.spi.AfterBeanDiscovery|.</text>
+            <text>The container must fire an event when it has fully completed the bean discovery process, validated that there are no definition errors relating to the discovered beans, and registered |Bean| and |ObserverMethod| objects for the discovered beans, but before detecting deployment problems. The event object must be of type |javax.enterprise.inject.spi.AfterBeanDiscovery|.</text>
         </assertion>
 
         <assertion id="ca">
@@ -7557,123 +7591,145 @@
     </section>
 
     <section id="bean_archive" title="Bean archives" level="2">
-        <assertion id="aa" testable="false">
+        <assertion id="a" testable="false">
             <text>Bean classes of enabled beans must be deployed in bean archives.</text>
         </assertion>
 
-        <assertion id="a" testable="false">
-            <text>A library jar, EJB jar or application client jar is a bean archive if it has a file named |beans.xml| in the |META-INF| directory.</text>
+        <group>
+            <text>An explicit bean archive is an archive which contains a |beans.xml| file with a version number of 1.1 (or later), with the |bean-discovery-mode| of |all|, or with no version number, or that is an empty file.</text>
+            <assertion id="ba">
+                <text>Test an archive which contains a |beans.xml| file with a version number of 1.1, with the |bean-discovery-mode| of |all|.</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Test an archive which contains a |beans.xml| file with no version number.</text>
+            </assertion>
+            <assertion id="bc">
+                <text>Test an archive which contains an empty |beans.xml|.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>An implicit bean archive is an archive which contains one or more beans with a bean defining annotation, and does not contain a |beans.xml| with the |bean-discovery-mode| of |none|.</text>
+            <assertion id="ca">
+                <text>Test an archive which contains beans with a bean defining annotation, and does not contain a |beans.xml| with the |bean-discovery-mode| of |none|.</text>
+            </assertion>
+            <assertion id="cb">
+                <text>Test an archive which contains beans with a bean defining annotation, and does contain a |beans.xml| with the |bean-discovery-mode| of |none|.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>When determining which archives are bean archives, the container must consider:</text>
+            <assertion id="da" testable="false">
+                <text>Library jars, EJB jars or application client jars.</text>
+                <note>Covered elsewhere in this section.</note>
+            </assertion>
+            <assertion id="db" testable="false">
+                <text>The WEB-INF/classes directory of a war.</text>
+                <note>Covered elsewhere in this section</note>
+            </assertion>
+            <assertion id="dc" testable="false">
+                <text>Directories in the JVM classpath.</text>
+                <note>Covered elsewhere in this section</note>
+            </assertion>
+        </group>
+
+        <assertion id="e" testable="false">
+            <text>A Java EE container is required by the Java EE specification to support Java EE modules. Other containers may or may not provide support for war, EJB jar or rar bean archives.</text>
+            <note>Covered elsewhere in this section.</note>
         </assertion>
 
         <group>
-            <text>The |WEB-INF/classes| directory of a war is a bean archive if there is a file named |beans.xml| in the |WEB-INF| directory or in the |WEB-INF/classes/META-INF| directory of the war.</text>
-            <assertion id="aba" testable="false">
-                <text>Test the |beans.xml| file in the |WEB-INF| directory.</text>
-                <note>By default all TCK web archive deployments.</note>
+            <text>The |beans.xml| file must be named:</text>
+            <assertion id="fa" testable="false">
+                <text>|META-INF/beans.xml|</text>
+                <note>Covered elsewhere in this section.</note>
             </assertion>
-            <assertion id="abb">
-                <text>Test the |beans.xml| file in the |WEB-INF/classes/META-INF| directory.</text>
+            <assertion id="fb">
+                <text>In a war, |WEB-INF/beans.xml| or |WEB-INF/classes/META-INF/beans.xml|</text>
+                <note>WEB-INF/beans.xml - by default all TCK web archive deployments.</note>
             </assertion>
         </group>
-        <assertion id="ab" testable="false">
-            <text>The |WEB-INF/classes| directory of a war is a bean archive if there is a file named |beans.xml| in the |WEB-INF| directory or in the WEB-INF/classes/META-INF directory of the war.</text>
+
+        <assertion id="g" testable="false">
+            <text>If a war has a file named |beans.xml| in both the |WEB-INF| directory and in the |WEB-INF/classes/META-INF| directory, then non-portable behavior results. Portable applications must have a beans.xml file in only one of the |WEB-INF| or the |WEB-INF/classes/META-INF| directories.</text>
+            <note>Non-portable behaviour.</note>
         </assertion>
 
-        <assertion id="ac" testable="false">
-            <text>A directory in the JVM classpath is a bean deployment archive if it has a file named |beans.xml| in the |META-INF| directory.</text>
-            <note>covered in bb*, bc*, bd*</note>
+        <assertion id="h" testable="false">
+            <text>If |beans.xml| file with version 1.1 is used, the |bean-discovery-mode| attribute is required.</text>
+            <note>As defined in beans_1_1.xsd.</note>
         </assertion>
 
-        <assertion id="b" testable="false">
-            <text>The container is not required to support application client jar bean archives.</text>
-        </assertion>
-
-        <assertion id="ba" testable="false">
-            <text>The container searches for beans in all bean archives in the application classpath.</text>
-            <note>covered in bb*, bc*, bd*</note>
+        <assertion id="i" testable="false">
+            <text>For compatibility with Contexts and Dependency 1.0, products must contain an option to cause an archive to be ignored by the container when no |beans.xml| is present.</text>
+            <note>Implementation specific.</note>
         </assertion>
 
         <group>
             <text>In an application deployed as an ear, the container searches every bean archive bundled with or referenced by the ear, including bean archives bundled with or referenced by wars, EJB jars and rars contained in the ear. The bean archives might be library jars, EJB jars or war |WEB-INF/classes| directories.</text>
-            <assertion id="bba">
-                <text>Check an EJB jar in an EAR</text>
+            <assertion id="ja">
+                <text>Test an EJB jar in an EAR.</text>
             </assertion>
-            <assertion id="bbb">
-                <text>Check a bundled library in an EAR</text>
+            <assertion id="jb">
+                <text>Test a bundled library in an EAR.</text>
             </assertion>
-            <assertion id="bbc">
-                <text>Check a bundled library in a WAR</text>
+            <assertion id="jc">
+                <text>Test a bundled library in a WAR.</text>
             </assertion>
-            <assertion id="bbd">
-                <text>Check a rar</text>
+            <assertion id="jd">
+                <text>Test a rar in an EAR.</text>
             </assertion>
-            <assertion id="bbe">
-                <text>Check a war in an ear</text>
+            <assertion id="je">
+                <text>Test a war in an EAR.</text>
             </assertion>
-            <assertion id="bbf">
-                <text>Check for a jar installed as a library</text>
+            <assertion id="jf">
+                <text>Test an installed library.</text>
             </assertion>
         </group>
 
         <group>
             <text>In an application deployed as a war, the container searches every bean archive bundled with or referenced by the war. The bean archives might be library jars or the |WEB-INF/classes| directory.</text>
-            <assertion id="bca">
-                <text>Check classes in the war</text>
+            <assertion id="jg">
+                <text>Test |WEB-INF/classes| directory.</text>
             </assertion>
-            <assertion id="bcb">
-                <text>Check bundled libraries in the war</text>
+            <assertion id="jh">
+                <text>Test bundled library.</text>
             </assertion>
-            <assertion id="bcc">
-                <text>Check for a jar installed as a library</text>
+            <assertion id="ji">
+                <text>Test an installed library.</text>
             </assertion>
         </group>
 
         <group>
             <text>In an application deployed as an EJB jar, the container searches the EJB jar, if it is a bean archive, and every bean archive referenced by the EJB jar.</text>
-
-            <assertion id="bcd">
-                <text>Check classes in the jar.</text>
+            <assertion id="jj">
+                <text>Test classes in the EJB jar.</text>
             </assertion>
         </group>
 
-        <group>
+        <assertion id="jk">
             <text>In an application deployed as a rar, the container searches every bean archive bundled with or referenced by the rar.</text>
-            <assertion id="bce">
-                <text>Check bean archive bundled in the rar.</text>
-            </assertion>
-        </group>
-
-        <group>
-            <text>An embeddable EJB container searches each bean archive in the JVM classpath that is listed in the value of the embeddable container initialization property |javax.ejb.embeddable.modules|, or every bean archive in the JVM classpath if the property is not specified. The bean archives might be directories, library jars or EJB jars.</text>
-            <assertion id="bda" testable="false">
-                <text>Check modules specified by |javax.ejb.embeddable.modules|</text>
-                <note>1.0 release of the TCK does not cover embeddable EJB</note>
-            </assertion>
-            <assertion id="bdb" testable="false">
-                <text>Check libraries</text>
-                <note>1.0 release of the TCK does not cover embeddable EJB</note>
-            </assertion>
-            <assertion id="bdc" testable="false">
-                <text>Check directories</text>
-                <note>1.0 release of the TCK does not cover embeddable EJB</note>
-            </assertion>
-            <assertion id="bda" testable="false">
-                <text>Check ejb jars</text>
-                <note>1.0 release of the TCK does not cover embeddable EJB</note>
-            </assertion>
-        </group>
-
-        <assertion id="be" testable="false">
-            <text>When searching for beans, the container considers any Java class in any bean archive, any |ejb-jar.xml| file in the metadata directory of any EJB bean archive, any Java class referenced by the |@New| qualifier of an injection point of another bean, and any interceptor or decorator class declared in the |beans.xml| file of any bean archive.</text>
-            <note>covered in bb*, bc*, bd*</note>
         </assertion>
 
-        <assertion id="d" testable="false">
+        <assertion id="jl">
+            <text>An embeddable EJB container searches each bean archive in the JVM classpath that is listed in the value of the embeddable container initialization property |javax.ejb.embeddable.modules|, or every bean archive in the JVM classpath if the property is not specified. The bean archives might be directories, library jars or EJB jars.</text>
+        </assertion>
+
+        <assertion id="k" testable="false">
             <text>If a bean class is deployed in two different bean archives, non-portable behaviour results. Portable applications must deploy each bean class in no more than one bean archive.</text>
             <note>Describes undefined behavior</note>
         </assertion>
 
-        <assertion id="f">
+        <assertion id="l" testable="false">
+            <text>Explicit bean archives may contain classes which are not deployed as beans. For example a bean archive might contain message-driven beans.</text>
+        </assertion>
+
+        <assertion id="m" testable="false">
+            <text>Implicit bean archives are likely to contain classes which are not deployed as beans.</text>
+        </assertion>
+
+        <assertion id="n">
             <text>An extension may be deployed in any archive, including those that are not bean archives.</text>
         </assertion>
 
@@ -7694,7 +7750,11 @@
         </assertion>
 
         <assertion id="i">
-            <text>Next, the container must fire an event of type |ProcessModule| for every bean archive, as defined in Section 11.5.5, “ProcessModule event”.</text>
+            <text>Next, the container must perform type discovery. Additionally, for every type discovered the container must fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.7.</text>
+        </assertion>
+
+        <assertion id="j">
+            <text>Next, the container must fire an event of type |AfterTypeDiscovery|, as defined in Section 11.5.2.</text>
         </assertion>
 
         <group>
@@ -7746,7 +7806,38 @@
         </assertion>
 
         <group>
-            <text>For each Java class or interface deployed in a bean archive, the container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.5, "ProcessAnnotatedType event".</text>
+            <text>Exclude filters are defined by &lt;exclude&gt; elements in the |beans.xml| for the bean archive as children of the &lt;scan&gt; element.</text>
+            <assertion id="pa">
+                <text>By default an exclude filter is active.</text>
+            </assertion>
+            <assertion id="pb">
+                <text>An exclude filter is not active if the definition contains a child element named &lt;if-class-available&gt; with a name attribute, and the classloader for the bean archive can load a class for that name.</text>
+            </assertion>
+            <assertion id="pc">
+                <text>An exclude filter is not active if the definition contains a child element named &lt;if-class-not-available&gt; with a name attribute, and the classloader for the bean archive cannot load a class for that name.</text>
+            </assertion>
+            <assertion id="pd">
+                <text>An exclude filter is not active if the definition contains a child element named &lt;if-system-property&gt; with a name attribute, and there is no system property defined for that name.</text>
+            </assertion>
+            <assertion id="pe">
+                <text>An exclude filter is not active if the definition contains a child element named &lt;if-system-property&gt; with a name attribute and a value attribute, and there is no system property defined for that name with that value.</text>
+            </assertion>
+        </group>
+
+        <assertion id="qa">
+            <text>The type is excluded from discovery if the fully qualified name of the type being discovered matches the value of the name attribute of the exclude filter.</text>
+        </assertion>
+
+        <assertion id="qb">
+            <text>The type is excluded from discovery if the package name of the type being discovered matches the value of the name attribute with a suffix ".*" of the exclude filter.</text>
+        </assertion>
+
+        <assertion id="qc">
+            <text>The type is excluded from discovery if the package name of the type being discovered starts with the value of the name attribute with a suffix ".**" of the exclude filter.</text>
+        </assertion>
+
+        <group>
+            <text>The container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.7, for every Java class, interface or enum discovered.</text>
             <assertion id="ba">
                 <text>Check managed bean</text>
             </assertion>
@@ -7778,6 +7869,14 @@
                 <text>Check filter</text>
             </assertion>
         </group>
+
+        <assertion id="r">
+            <text>The container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.7, for each Java class, interface or enum that must be delivered to a |ProcessAnnotatedType| observer, where the event parameter is annotated with |@WithAnnotations|.</text>
+        </assertion>
+
+        <assertion id="s">
+            <text>If an extension calls |BeforeBeanDiscovery.addAnnotatedType()| or |AfterTypeDiscovery.addAnnotatedType()|, the type passed must be added to the set of discovered types.</text>
+        </assertion>
 
         <assertion id="c" testable="false">
             <text>For each Java class in any bean archive, the container must inspect the type metadata to determine if it is a bean or other Java EE component class supporting injection.</text>
@@ -7834,8 +7933,7 @@
         </group>
 
         <group>
-            <text>For each enabled bean, the container must search the class for producer methods and fields, including resources, and for each producer method or field create a |Producer|, as defined in Section 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type |ProcessProducer|, as defined in Section 11.5.7, "ProcessProducer event", and then if the producer method or field is enabled, create a |Bean| object that implements the rules defined in Section 7.3.4, "Lifecycle of producer methods", Section 7.3.5, "Lifecycle of producer fields" or Section 7.3.6, "Lifecycle of resources", and fire an event which is a subtype of |ProcessBean|, as defined in Section 11.5.8,
-                "ProcessBean event".
+            <text>For each enabled bean, the container must search the class for producer methods and fields, including resources, and for each producer method or field create a |Producer|, as defined in Section 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type |ProcessProducer|, as defined in Section 11.5.7, "ProcessProducer event", and then if the producer method or field is enabled, create a |Bean| object that implements the rules defined in Section 7.3.4, "Lifecycle of producer methods", Section 7.3.5, "Lifecycle of producer fields" or Section 7.3.6, "Lifecycle of resources", and fire an event which is a subtype of |ProcessBean|, as defined in Section 11.5.8, "ProcessBean event".
             </text>
             <assertion id="ha">
                 <text>

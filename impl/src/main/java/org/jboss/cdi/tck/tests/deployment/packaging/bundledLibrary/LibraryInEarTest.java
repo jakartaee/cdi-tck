@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -36,10 +36,10 @@ import org.testng.annotations.Test;
 
 /**
  * Tests related to the final deployment phase of the lifecycle.
- * 
+ *
  * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
  * classloading requirements)!
- * 
+ *
  * @author David Allen
  * @author Martin Kouba
  */
@@ -66,7 +66,7 @@ public class LibraryInEarTest extends AbstractTest {
     Foo foo;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbb") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jb") })
     public void test() {
 
         assertEquals(getCurrentManager().getBeans(Foo.class).size(), 1);

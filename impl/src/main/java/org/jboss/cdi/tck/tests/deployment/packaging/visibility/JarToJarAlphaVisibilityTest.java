@@ -30,13 +30,13 @@ import org.testng.annotations.Test;
 
 /**
  * Verifies that a bean from a BDA is injectable into another BDA.
- * 
+ *
  * <p>
  * This test was originally part of Seam Compatibility project.
  * <p>
- * 
+ *
  * TODO verify assertions
- * 
+ *
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  */
@@ -50,7 +50,7 @@ public class JarToJarAlphaVisibilityTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bcb"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jh"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
     public void testDeployment() {
         // noop
     }

@@ -31,9 +31,9 @@ import org.testng.annotations.Test;
 /**
  * The <code>WEB-INF/classes</code> directory of a war is a bean archive if there is a file named beans.xml in the
  * <code>WEB-INF/classes/META-INF</code> directory of the war.
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BeansDescriptorAlternativeLocationTest extends AbstractTest {
@@ -45,7 +45,7 @@ public class BeansDescriptorAlternativeLocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BEAN_ARCHIVE, id = "abb")
+    @SpecAssertion(section = BEAN_ARCHIVE, id = "fb")
     public void testAlternativeLocation() {
         // Injection works
         assertNotNull(beanManager);

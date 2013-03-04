@@ -34,14 +34,14 @@ import org.testng.annotations.Test;
 
 /**
  * This test verifies that a CDI extension can be used with a web application bundled inside of an enterprise archive (.ear)
- * 
+ *
  * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
  * classloading requirements)!
- * 
+ *
  * <p>
  * This test was originally part of Seam Compatibility project.
  * <p>
- * 
+ *
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  * @see https://issues.jboss.org/browse/JBAS-8683
@@ -69,7 +69,7 @@ public class SingleWebModuleWithExtensionTest extends AbstractTest {
     FooWebBean fooWebBean;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bbe") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "je") })
     public void testSingleWebModuleWithExtension() {
         fooWebBean.ping();
     }

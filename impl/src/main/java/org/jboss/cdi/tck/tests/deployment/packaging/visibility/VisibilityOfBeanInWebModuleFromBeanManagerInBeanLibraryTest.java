@@ -33,13 +33,11 @@ import org.testng.annotations.Test;
 /**
  * Validates that a bean in the WEB-INF/classes directory is visible to the BeanManager injected into a bean contained within a
  * bean library in the same bean (web) archive.
- * 
+ *
  * <p>
  * This test was originally part of Seam Compatibility project.
  * <p>
- * 
- * TODO verify assertions
- * 
+ *
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15721">GLASSFISH-15721</a>
@@ -58,13 +56,13 @@ public class VisibilityOfBeanInWebModuleFromBeanManagerInBeanLibraryTest extends
     BeerCollector collector;
 
     @Test
-    @SpecAssertion(section = BEAN_ARCHIVE, id = "bcb")
+    @SpecAssertion(section = BEAN_ARCHIVE, id = "jh")
     public void shouldFindBeanByType() {
         Assert.assertTrue(collector.getNumDiscovered() == 2);
     }
 
     @Test
-    @SpecAssertion(section = BEAN_ARCHIVE, id = "bcb")
+    @SpecAssertion(section = BEAN_ARCHIVE, id = "jh")
     public void shouldFindBeanByName() {
         Assert.assertTrue(collector.isNamedBeerVisible("americanCraftBeer"));
     }

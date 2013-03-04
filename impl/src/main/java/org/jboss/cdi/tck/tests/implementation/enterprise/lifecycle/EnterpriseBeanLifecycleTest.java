@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -44,11 +44,11 @@ import org.testng.annotations.Test;
 
 /**
  * Sections
- * 
+ *
  * 6.5. Lifecycle of stateful session beans 6.6. Lifecycle of stateless session and singleton beans 6.11. Lifecycle of EJBs
- * 
+ *
  * Mostly overlapping with other tests...
- * 
+ *
  * @author Nicklas Karlsson
  * @author David Allen
  * @author Martin Kouba
@@ -63,7 +63,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
 
     @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bb"), @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "b"),
-            @SpecAssertion(section = BEAN_ARCHIVE, id = "bba") })
+            @SpecAssertion(section = BEAN_ARCHIVE, id = "ja") })
     public void testCreateSFSB() throws Exception {
         GrossStadt frankfurt = getInstanceByType(GrossStadt.class);
         Bean<KleinStadt> stadtBean = getBeans(KleinStadt.class).iterator().next();

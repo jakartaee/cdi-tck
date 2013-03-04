@@ -50,7 +50,7 @@ import org.testng.annotations.Test;
 /**
  * This test is aimed to verify packaging-related issues in a little bit more complex deployment scenario. The assertions are
  * rather informative and redundant as they're already verified in elementary tests.
- * 
+ *
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
@@ -66,7 +66,7 @@ public class WebArchiveModulesTest extends AbstractTest {
      * <li>D - WEB-INF/lib BDA: Qux, ContainerEventsObserver, LegacyServiceProducer</li>
      * <li>E - WEB-INF/lib non-BDA: LegacyService</li>
      * </ul>
-     * 
+     *
      * @return test archive
      */
     @Deployment
@@ -103,7 +103,7 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bca"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bcb"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jg"), @SpecAssertion(section = BEAN_ARCHIVE, id = "jh"),
             @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
     public void testInjectionChainVisibilityAndInterceptorEnablement() {
         // Test injection chain, visibility, SecurityInterceptor is enabled in B only

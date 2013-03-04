@@ -75,7 +75,7 @@ public class MultiWebModuleWithExtensionTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bbe") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "je") })
     public void testMultipleWebModulesWithExtension(FooBean fooBean) {
         assertNotNull(fooBean);
         assertNotNull(fooBean.getExtension());

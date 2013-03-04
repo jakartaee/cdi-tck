@@ -40,7 +40,7 @@ import org.testng.annotations.Test;
 
 /**
  * Test resource adapter bean archive included in an EAR.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -70,14 +70,14 @@ public class ResourceAdapterArchiveTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbd") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jd") })
     public void testInjection(Translator translator) {
         assertNotNull(translator);
         assertEquals(translator.ping(), 1);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bbd") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jd") })
     public void testResolution() {
         getUniqueBean(Translator.class);
     }

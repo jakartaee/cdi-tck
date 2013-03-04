@@ -34,11 +34,11 @@ import org.testng.annotations.Test;
 
 /**
  * Validates that a bean can be registered by an extension that resides in a non-bean archive.
- * 
+ *
  * <p>
  * This test was originally part of Seam Compatibility project.
  * <p>
- * 
+ *
  * @author <a href="http://community.jboss.org/people/LightGuard">Jason Porter</a>
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  * @author Martin Kouba
@@ -58,7 +58,7 @@ public class BeanRegistrationByExtensionInNonBeanArchiveTest extends AbstractTes
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
-            @SpecAssertion(section = BBD, id = "af"), @SpecAssertion(section = BEAN_ARCHIVE, id = "f") })
+            @SpecAssertion(section = BBD, id = "af"), @SpecAssertion(section = BEAN_ARCHIVE, id = "n") })
     public void shouldFindBeanReference() {
         Assert.assertNotNull(bean);
         Assert.assertTrue(bean.isInvokable());
