@@ -353,6 +353,12 @@
         </assertion>
     </section>
 
+    <section id="bean_defining_annotations" title="Bean defining annotations" level="2">
+
+        <!-- Tested within "bean_archive" section -->
+
+    </section>
+
     <section id="names" title="Bean names" level="2">
 
         <assertion id="a">
@@ -1349,6 +1355,30 @@
             <text>If there is no producer method or producer field declared by the bean class that is assignable to the disposed parameter of a disposer method, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
     </section>
+
+    <section id="javaee_components" title="Java EE components" level="2">
+
+        <group>
+            <text>The instance used by the container to service an invocation of a Java EE component will not be the same instance obtained when using |@Inject|, instantiated by the container to invoke a producer method, observer method or disposer method, or instantiated by the container to access the value of a producer field.</text>
+            <assertion id="a">
+                <text>Test instance obtained using |@Inject|.</text>
+            </assertion>
+            <assertion id="b">
+                <text>Test instance instantiated by the container to invoke a producer method.</text>
+            </assertion>
+            <assertion id="c">
+                <text>Test instance instantiated by the container to invoke a disposer method.</text>
+            </assertion>
+            <assertion id="d">
+                <text>Test instance instantiated by the container to invoke a observer method.</text>
+            </assertion>
+            <assertion id="e">
+                <text>Test instance instantiated by the container to access the value of a producer field.</text>
+            </assertion>
+        </group>
+
+    </section>
+
 
     <section id="resources" title="Resources" level="2">
         <assertion id="ka" testable="false">
@@ -3647,11 +3677,24 @@
         <group>
             <text>The container must ensure that all |@Dependent| scoped contextual instances injected into method parameters of a disposer method or observer method of any other event are destroyed when the invocation completes.</text>
             <assertion id="ccc">
-                <text>Check disposer method</text>
+                <text>Check disposer method.</text>
             </assertion>
 
             <assertion id="ccd">
-                <text>Check observer method</text>
+                <text>Check observer method.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>The container must ensure that  all |@Dependent| scoped contextual instances injected into method or constructor parameters that are annotated with |@TransientReference| are destroyed when the invocation completes.</text>
+            <assertion id="fa">
+                <text>Test producer method parameter.</text>
+            </assertion>
+            <assertion id="fb">
+                <text>Test initializer method parameter.</text>
+            </assertion>
+            <assertion id="fc">
+                <text>Test bean constructor parameter.</text>
             </assertion>
         </group>
 
@@ -3659,19 +3702,19 @@
             <text>The container must ensure that any |@Dependent| scoped contextual instance created to receive a producer method, producer field, disposer method or observer method invocation is destroyed when the invocation completes.</text>
 
             <assertion id="ddd">
-                <text>Check producer method</text>
+                <text>Check producer method.</text>
             </assertion>
 
             <assertion id="dde">
-                <text>Check producer field</text>
+                <text>Check producer field.</text>
             </assertion>
 
             <assertion id="ddf">
-                <text>Check disposer method</text>
+                <text>Check disposer method.</text>
             </assertion>
 
             <assertion id="ddg">
-                <text>Check observer method</text>
+                <text>Check observer method.</text>
             </assertion>
         </group>
 
@@ -3792,11 +3835,18 @@
     <section id="passivation_capable" title="Passivation capable beans" level="3">
 
         <group>
-            <text>As defined by the EJB specification, all stateful session beans are passivation capable if and only if all interceptors and decorators of the bean are passivation capable. Stateless and singleton session beans are not passivation capable.</text>
-            <assertion id="a">
-                <text>Test passivation capable stateful session bean.</text>
+            <text>As defined by the EJB specification, all stateful session beans are passivation capable if interceptors and decorators of the bean are passivation capable, and the stateful session bean does not have the |passivationCapable| flag set to false.</text>
+            <assertion id="aa">
+                <text>Test a passivation capable stateful session bean.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test a stateful session bean with |passivationCapable| flag set to true.</text>
             </assertion>
         </group>
+
+        <assertion id="i">
+            <text>As defined by the EJB specification, stateless and singleton session beans are not passivation capable.</text>
+        </assertion>
 
         <group>
             <text>A managed bean is passivation capable if and only if the bean class is serializable and all interceptors and decorators of the bean are passivation capable.</text>
@@ -3942,7 +3992,7 @@
     <section id="passivation_validation" title="Validation of passivation capable beans and dependencies" level="3">
 
         <group>
-            <text>If a managed bean or stateful session bean which declares a passivating scope is not passivation capable, then the container automatically detects the problem and treats it as a deployment problem.</text>
+            <text>If a managed bean which declares a passivating scope, a stateful session bean which declares a passivating scope, or a built-in bean is not passivation capable then the container automatically detects the problem and treats it as a deployment problem.</text>
             <assertion id="a">
                 <text>Test managed bean.</text>
             </assertion>
@@ -3951,17 +4001,51 @@
             </assertion>
         </group>
 
-        <assertion id="aa">
-            <text>If a managed bean which declares a passivating scope has a non-transient injected field that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>
-        </assertion>
+        <group>
+            <text>If a managed bean which declares a passivating scope, a stateful session bean which declares a passivating scope, or a built-in bean has a non-transient injected field, bean constructor parameter or initializer method parameter which is not annotated with |@TransientReference| and that resolves to a dependent scoped bean that is not a passivation capable dependency then the container automatically detects the problem and treats it as a deployment problem.</text>
+            <assertion id="aa">
+                <text>Test non-transient injected field.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test transient injected field.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Test bean constructor parameter which is not annotated with |@TransientReference|.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>Test bean constructor parameter which is annotated with |@TransientReference|.</text>
+            </assertion>
+            <assertion id="ae">
+                <text>Test initializer method parameter which is not annotated with |@TransientReference|.</text>
+            </assertion>
+            <assertion id="af">
+                <text>Test initializer method parameter which is not annotated with |@TransientReference|.</text>
+            </assertion>
+        </group>
 
         <group>
-            <text>If a managed bean which declares a passivating scope has an interceptor or decorator with a non-transient injected field that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>
+            <text>If a managed bean which declares a passivating scope, a stateful session bean which declares a passivating scope, or a built-in bean has a non-transient injected field, bean constructor parameter or initializer method parameter that resolves to a bean that is not a dependent scoped bean and that is not a passivation capable dependency then the container automatically detects the problem and treats it as a deployment problem.</text>
+            <assertion id="ag">
+                <text>Test non-transient injected field.</text>
+            </assertion>
+            <assertion id="ah">
+                <text>Test transient injected field.</text>
+            </assertion>
+            <assertion id="ai">
+                <text>Test bean constructor parameter.</text>
+            </assertion>
+            <assertion id="aj">
+                <text>Test initializer method parameter.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>If a managed bean which declares a passivating scope, a stateful session bean which declares a passivating scope, or a built-in bean has an interceptor or decorator with a non-transient injected field that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>
             <assertion id="aac">
-                <text>Test interceptor with injected field.</text>
+                <text>Test interceptor with a non-transient injected field that does not resolve to a passivation capable dependency.</text>
             </assertion>
             <assertion id="aaf">
-                <text>Test decorator with injected field.</text>
+                <text>Test decorator with a non-transient injected field that does not resolve to a passivation capable dependency.</text>
             </assertion>
         </group>
 
@@ -5766,7 +5850,7 @@
         </assertion>
 
         <assertion id="bca">
-            <text>If the observer method is a conditional observer method and there is no context active for the scope to which the bean declaring the observer method belongs, then the observer method should not be called.</text>
+            <text>If there is no context active for the scope to which the bean declaring the observer method belongs, then the observer method should not be called.</text>
         </assertion>
 
         <assertion id="bcb" testable="false">
@@ -6170,6 +6254,14 @@
         </assertion>
     </section>
 
+    <section id="bm_obtain_unmanaged_instance" title="Obtaining an unmanaged instance" level="3">
+
+        <assertion id="a">
+            <text>A helper class, |Unmanaged| provides a set of methods optimized for working with unmanaged instances.</text>
+        </assertion>
+
+    </section>
+
     <section id="bm_obtain_creationalcontext" title="Obtaining a CreationalContext" level="3">
         <assertion id="a">
             <text>An instance of |CreationalContext| for a certain instance of |Contextual| may be obtained by calling |BeanManager.createCreationalContext()|.</text>
@@ -6246,9 +6338,6 @@
             </assertion>
             <assertion id="d">
                 <text>no beans are passed to |resolve()|,</text>
-            </assertion>
-            <assertion id="e">
-                <text>no bean is available for injection in the module (as defined in Section 5.1, "Modularity"").</text>
             </assertion>
         </group>
 
@@ -7234,7 +7323,7 @@
     <section id="pba" title="ProcessBeanAttributes event" level="3">
 
         <group>
-            <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean archive, before registering the |Bean| object. No event is fired for any |@New| qualified bean, defined in Section 3.14, "@New qualified beans". The event object must be of type |javax.enterprise.inject.spi.ProcessBeanAttributes&lt;T&gt;| where |T| is the bean class of the managed bean or session bean, the return type of the producer method, or the type of the producer field.</text>
+            <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean archive, before registering the |Bean| object. No event is fired for any |@New| qualified bean, defined in Section 3.14, "@New qualified beans" or beans added programmatically using |AfterBeanDiscovery.addBean()| or for any built-in beans. The event object must be of type |javax.enterprise.inject.spi.ProcessBeanAttributes&lt;T&gt;| where |T| is the bean class of the managed bean or session bean, the return type of the producer method, or the type of the producer field.</text>
             <assertion id="aa">
                 <text>Event is fired for enabled bean.</text>
             </assertion>
@@ -7246,6 +7335,12 @@
             </assertion>
             <assertion id="ad">
                 <text>No event is fired for any |@New| qualified bean.</text>
+            </assertion>
+            <assertion id="ae">
+                <text>No event is fired for beans added programmatically using |AfterBeanDiscovery.addBean()|.</text>
+            </assertion>
+            <assertion id="af">
+                <text>No event is fired for any built-in bean.</text>
             </assertion>
         </group>
 
@@ -7281,8 +7376,18 @@
             <text>|veto()| forces the container to ignore the bean.</text>
         </assertion>
 
-        <assertion id="c">
-            <text>Any observer of this event is permitted to wrap and/or replace the |BeanAttributes|. The container must use the final value of this property, after all observers have been called, to manage instances of the bean.</text>
+        <group>
+            <text>Any observer of this event is permitted to wrap and/or replace the |BeanAttributes|. The container must use the final value of this property, after all observers have been called, to manage instances of the bean. Changes to BeanAttributes are not propagated to the annotated type from which the bean definition was created.</text>
+            <assertion id="ca">
+                <text>Test the final value of this property is used.</text>
+            </assertion>
+            <assertion id="cc">
+                <text>Test the changes are not propagated.</text>
+            </assertion>
+        </group>
+
+        <assertion id="e">
+            <text>Any bean which has its bean attributes altered must have it’s definition validated during deployment validation.</text>
         </assertion>
 
         <assertion id="d">

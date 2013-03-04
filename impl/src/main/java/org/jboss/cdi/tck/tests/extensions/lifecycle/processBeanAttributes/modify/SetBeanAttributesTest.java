@@ -58,7 +58,7 @@ public class SetBeanAttributesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "bc"), @SpecAssertion(section = PBA, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = PBA, id = "bc"), @SpecAssertion(section = PBA, id = "ca") })
     public void testBeanModified() {
 
         assertEquals(getCurrentManager().getBeans(Cat.class, DefaultLiteral.INSTANCE).size(), 0);

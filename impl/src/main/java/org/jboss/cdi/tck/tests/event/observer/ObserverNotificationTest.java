@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,6 +20,8 @@ import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+
+import javax.enterprise.context.spi.Context;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -39,8 +41,8 @@ public class ObserverNotificationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "c"), @SpecAssertion(section = OBSERVER_RESOLUTION, id = "d"),
-            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "c"),
+            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "d"), @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "aa") })
     public void testObserversNotified() {
 
         AnEventType anEvent = new AnEventType();
@@ -69,6 +71,24 @@ public class ObserverNotificationTest extends AbstractTest {
         assertFalse(AnotherObserver.wasNotified);
         assertTrue(LastObserver.wasNotified);
         assertFalse(DisabledObserver.wasNotified);
+    }
+
+    @Test
+    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "bca")
+    public void testObserverMethodNotInvokedIfNoActiveContext() {
+
+        Context requestContext = getCurrentConfiguration().getContexts().getRequestContext();
+
+        resetObservers();
+
+        try {
+            setContextInactive(requestContext);
+            // Observer method not called - there is no context active for its scope
+            getCurrentManager().fireEvent(new AnEventType(), new RoleLiteral("Admin", "hurray"));
+            assertFalse(AnotherObserver.wasNotified);
+        } finally {
+            setContextActive(requestContext);
+        }
     }
 
     private void resetObservers() {
