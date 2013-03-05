@@ -21,7 +21,7 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
-import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
@@ -115,7 +115,7 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"), @SpecAssertion(section = ENABLED_DECORATORS, id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"), @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a"),
             @SpecAssertion(section = OBSERVER_RESOLUTION, id = "c") })
     public void testDecoratorAndCrossModuleEventObserver() throws Exception {
         // Test LoggingDecorator is enabled in C only; bean from D observes event from A

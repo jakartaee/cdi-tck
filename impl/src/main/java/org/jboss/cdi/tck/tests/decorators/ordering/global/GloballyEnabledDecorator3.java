@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.decorators.ordering.global;
 
+import javax.annotation.Priority;
 import javax.decorator.Decorator;
 
+@Priority(1015)
 @Decorator
 public class GloballyEnabledDecorator3 extends AbstractDecorator {
 }

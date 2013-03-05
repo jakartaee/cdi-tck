@@ -25,7 +25,7 @@ import javax.inject.Inject;
  * 
  */
 @Decorator
-public class BazDecorator implements Baz {
+public class BazDecorator2 implements Baz {
 
     @Inject
     @Delegate

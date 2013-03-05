@@ -17,7 +17,8 @@
 package org.jboss.cdi.tck.tests.decorators.ordering.global;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_PRIORITY;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -28,9 +29,9 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -40,7 +41,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of the Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -55,62 +56,40 @@ public class GlobalDecoratorOrderingTest extends AbstractTest {
                 .withClasses(DecoratedImpl.class, LegacyDecorator1.class, LegacyDecorator2.class, LegacyDecorator3.class,
                         WebApplicationGlobalDecorator.class)
                 .withBeansXml(
-                        new Beans11DescriptorImpl().decorators(
-                                //
-                                new BeansXmlClass(LegacyDecorator1.class), new BeansXmlClass(LegacyDecorator2.class),
-                                new BeansXmlClass(LegacyDecorator3.class),
-                                // Disable GED3
-                                new BeansXmlClass(GloballyEnabledDecorator3.class, false),
-                                // Enabled GPD1
-                                new BeansXmlClass(GloballyPrioritizedDecorator1.class, true),
-                                //
-                                new BeansXmlClass(GloballyEnabledDecorator5.class),
-                                // Enabled WAGD globally
-                                new BeansXmlClass(WebApplicationGlobalDecorator.class, 1008)))
-                .withBeanLibrary(
-                        new Beans11DescriptorImpl().decorators(
-                        // globally enabled decorators
-                                new BeansXmlClass(GloballyEnabledDecorator4.class, 1025), new BeansXmlClass(
-                                        GloballyEnabledDecorator5.class, 800), new BeansXmlClass(
-                                        GloballyEnabledDecorator1.class, 995), new BeansXmlClass(
-                                        GloballyEnabledDecorator2.class, 1005), new BeansXmlClass(
-                                        GloballyEnabledDecorator3.class, 1015),
-                                // decorators with globally set priority (but disabled)
-                                new BeansXmlClass(GloballyPrioritizedDecorator1.class, false, 1015), new BeansXmlClass(
-                                        GloballyPrioritizedDecorator2.class, false, 1020)), AbstractDecorator.class,
-                        Decorated.class, GloballyEnabledDecorator1.class, GloballyEnabledDecorator2.class,
-                        GloballyEnabledDecorator3.class, GloballyEnabledDecorator4.class, GloballyEnabledDecorator5.class,
-                        GloballyPrioritizedDecorator1.class, GloballyPrioritizedDecorator2.class).build();
+                        Descriptors
+                                .create(BeansDescriptor.class)
+                                .createDecorators()
+                                .clazz(LegacyDecorator1.class.getName(), LegacyDecorator2.class.getName(),
+                                        LegacyDecorator3.class.getName()).up())
+                .withBeanLibrary(AbstractDecorator.class, Decorated.class, GloballyEnabledDecorator1.class,
+                        GloballyEnabledDecorator2.class, GloballyEnabledDecorator3.class, GloballyEnabledDecorator4.class,
+                        GloballyEnabledDecorator5.class).build();
     }
 
     @Inject
     private Decorated decorated;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS, id = "b"), @SpecAssertion(section = ENABLED_DECORATORS, id = "c"),
-            @SpecAssertion(section = ENABLED_DECORATORS, id = "d"), @SpecAssertion(section = ENABLED_DECORATORS, id = "e"),
-            @SpecAssertion(section = ENABLED_DECORATORS, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS_PRIORITY, id = "a"),
+            @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a"),
+            @SpecAssertion(section = ENABLED_DECORATORS_PRIORITY, id = "b") })
     public void testDecoratorsInWebInfClasses() {
 
         List<String> expected = new ArrayList<String>();
+        // 800
+        expected.add(GloballyEnabledDecorator5.class.getSimpleName());
         // 995
         expected.add(GloballyEnabledDecorator1.class.getSimpleName());
-        // 1000
-        expected.add(LegacyDecorator1.class.getSimpleName());
         // 1005
         expected.add(GloballyEnabledDecorator2.class.getSimpleName());
         // 1008
         expected.add(WebApplicationGlobalDecorator.class.getSimpleName());
-        // 1000 + 10
-        expected.add(LegacyDecorator2.class.getSimpleName());
-        // 1015
-        expected.add(GloballyPrioritizedDecorator1.class.getSimpleName());
-        // 1000 + 20
-        expected.add(LegacyDecorator3.class.getSimpleName());
         // 1025
         expected.add(GloballyEnabledDecorator4.class.getSimpleName());
-        // 1000 + 30 (originally 800)
-        expected.add(GloballyEnabledDecorator5.class.getSimpleName());
+        // Decorators enabled using beans.xml
+        expected.add(LegacyDecorator1.class.getSimpleName());
+        expected.add(LegacyDecorator2.class.getSimpleName());
+        expected.add(LegacyDecorator3.class.getSimpleName());
         // Bean itself
         expected.add(DecoratedImpl.class.getSimpleName());
 

@@ -21,7 +21,7 @@ import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
-import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
@@ -170,7 +170,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
 
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
-            @SpecAssertion(section = ENABLED_DECORATORS, id = "c") })
+            @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a") })
     public void testDecoratorEnablement() throws Exception {
         // Test LoggingDecorator is enabled in F only
         LoggingDecorator.reset();

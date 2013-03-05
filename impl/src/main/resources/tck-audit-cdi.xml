@@ -4890,7 +4890,7 @@
 
     <section id="decorators" title="Decorators" level="1">
         <assertion id="a" testable="false">
-            <text>Decorators may be associated with any managed bean that is not itself an interceptor or decorator or with any EJB session bean.</text>
+            <text>Decorators may be associated with any managed bean that is not itself an interceptor or decorator, with any EJB session bean or with any built-in bean other than the built-in bean with type |BeanManager| and qualifier |@Default|.</text>
             <note>Doesn't specify an error</note>
         </assertion>
 
@@ -5024,56 +5024,62 @@
 
     <section id="enabled_decorators" title="Decorator enablement and ordering" level="2">
 
-        <assertion id="aa" testable="false">
-            <text>Decorators may be enabled for an application, or enabled only for a particular bean archive.</text>
-            <note>This is a statement of intent</note>
-        </assertion>
-        <assertion id="ab" implied="true">
-            <text>By default, a bean archive has no enabled decorators.</text>
+        <assertion id="a" testable="false">
+            <text>This specification defines two methods of enabling and ordering decorators. The @Priority annotation, introduced in Contexts and Dependency Injection 1.1 allows a decorator to be enabled and ordered for an entire application. Contexts and Dependency Injection 1.0 allowed only for a decorator to be enabled and ordered for a bean archive.</text>
+            <note>Statement of intent</note>
         </assertion>
 
         <assertion id="b">
-            <text>A decorator may be enabled for the entire application by listing its class, along with a priority attribute, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive which contains the decorator class.</text>
+            <text>Decorators are called after interceptors.</text>
+        </assertion>
+    </section>
+
+    <section id="enabled_decorators_priority" title="Decorator enablement and ordering for an application" level="3">
+
+        <assertion id="a">
+            <text>A decorator may be enabled for the entire application by applying the |@Priority| annotation, along with a priority value, on the decorator class.</text>
         </assertion>
 
-        <assertion id="c">
-            <text>A decorator may be enabled for a bean archive by listing its class under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive.</text>
+        <assertion id="b">
+            <text>Decorators with the smaller priority values are called first.</text>
         </assertion>
 
-        <assertion id="d">
-            <text>A decorator enabled for an application may be disabled for a bean archive by listing its class, along with an enabled flag, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive.</text>
+        <assertion id="c" testable="false">
+            <text>The order of more than one decorator with the same priority is undefined.</text>
+            <note>Undefined behaviour.</note>
         </assertion>
 
-        <assertion id="e">
-            <text>A decorator may be given a default priority, but not enabled by listing its class, along with a disabled flag and the priority attribute, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive which contains the decorator class.</text>
+        <assertion id="d" testable="false">
+            <text>The priority value ranges defined in the Java Interceptors specification section 5.5 should be used when defining decorator priorities.</text>
+            <note>No explicit requirement.</note>
         </assertion>
 
-        <assertion id="f">
-            <text>A decorator with a default priority may be enabled for a bean archive by listing its class, along with an enabled flag, under the |&lt;decorators&gt;| element of the |beans.xml| file of the bean archive.</text>
+    </section>
+
+    <section id="enabled_decorators_bean_archive" title="Decorator enablement and ordering for a bean archive" level="3">
+
+        <assertion id="a">
+            <text>A decorator may be explicitly enabled by listing its bean class under the |&lt;decorators&gt;| element of the beans.xml file of the bean archive.</text>
         </assertion>
 
-        <assertion id="g">
-            <text>The priority of the decorator declaration, defined in Section 2.9, "Priority ordering", determines the default decorator ordering for the application. The order of the decorator declarations for a bean archive overrides the default decorator order. If the set of decorators enabled for the application and the set of decorators enabled for a bean archive are disjoint, then the first decorator enabled for the bean archive is given a priority of 1000. Decorators which occur earlier in the list are called first.</text>
+        <assertion id="b">
+            <text>The order of the decorator declarations determines the decorator ordering. Decorators which occur earlier in the list are called first.</text>
         </assertion>
 
         <group>
             <text>Each child |&lt;class&gt;| element must specify the name of a decorator bean class. If there is no class with the specified name, or if the class with the specified name is not a decorator bean class, the container automatically detects the problem and treats it as a deployment problem.</text>
-            <assertion id="ha">
+            <assertion id="ca">
                 <text>Test with a nonexistent class name.</text>
             </assertion>
-
-            <assertion id="hb">
+            <assertion id="cb">
                 <text>Test with a non-decorator class.</text>
             </assertion>
         </group>
 
-        <assertion id="hc">
+        <assertion id="d">
             <text>If the same class is listed twice under the |&lt;decorators&gt;| element, the container automatically detects the problem and treats it as a deployment problem.</text>
         </assertion>
 
-        <assertion id="i">
-            <text>Decorators are called after interceptors.</text>
-        </assertion>
     </section>
 
     <section id="decorator_resolution" title="Decorator resolution" level="2">

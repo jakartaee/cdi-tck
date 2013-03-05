@@ -23,6 +23,7 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_ANNOTATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 import static org.testng.Assert.assertEquals;
 
 import java.lang.reflect.Type;
@@ -73,8 +74,8 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "d"), @SpecAssertion(section = DECORATOR_BEAN, id = "d"),
             @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a"), @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "cc"),
-            @SpecAssertion(section = ENABLED_DECORATORS, id = "c"), @SpecAssertion(section = ENABLED_DECORATORS, id = "g"),
-            @SpecAssertion(section = ENABLED_DECORATORS, id = "i") })
+            @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a"), @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "b"),
+            @SpecAssertion(section = ENABLED_DECORATORS, id = "b") })
     public void testContextualDecorated() throws Exception {
 
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(FooBusiness.class));
