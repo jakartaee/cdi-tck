@@ -9,14 +9,14 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.invalidBindingAnnotations;
 
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDING_MEMBERS;
+import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -27,13 +27,12 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
-import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
  * Test bean with conflicting interceptor bindings on stereotypes.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -55,8 +54,8 @@ public class InvalidStereotypeInterceptorBindingAnnotationsTest extends Abstract
                                         YesBazInterceptor.class.getName(), NoBazInterceptor.class.getName()).up()).build();
     }
 
-    @Test
-    @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "d")
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "d")
     public void testInterceptorBindingsWithConflictingAnnotationMembersNotOk() {
     }
 }

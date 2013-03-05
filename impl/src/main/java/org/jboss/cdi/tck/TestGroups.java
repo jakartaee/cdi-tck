@@ -71,6 +71,13 @@ public final class TestGroups {
     public static final String JAX_RS = "jaxrs";
 
     /**
+     * Test is completely overlapping with the Java Interceptors specification.
+     *
+     * @see CDITCK-321
+     */
+    public static final String INTERCEPTORS_SPEC = "interceptorsSpec";
+
+    /**
      * No instance
      */
     private TestGroups() {

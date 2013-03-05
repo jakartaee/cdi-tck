@@ -9,15 +9,15 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.member;
 
-import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDING_MEMBERS;
+import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 
 import java.util.List;
 
@@ -32,13 +32,12 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
  * Tests for interceptor bindings types with members.
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -63,8 +62,8 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
                 .build();
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "a"), @SpecAssertion(section = CONCEPTS, id = "f") })
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "a"), @SpecAssertion(section = CONCEPTS, id = "f") })
     public void testInterceptorBindingTypeWithMember() {
         Farm farm = getInstanceByType(Farm.class);
         assert farm.getAnimalCount() == 20;
@@ -73,7 +72,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "b")
+    @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "b")
     public void testInterceptorBindingTypeWithNonBindingMember() {
         Farm farm = getInstanceByType(Farm.class);
         assert farm.getVehicleCount() == 20;
@@ -85,8 +84,8 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
      * enum and annotation are permitted to be annotation attributes. We test that two different String objects used as member
      * values are considered equal when resolving interceptor (interceptor is resolved and applied).
      */
-    @Test
-    @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "ab")
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "ab")
     public void testInterceptorBindingTypeMemberValuesComparedWithEquals() {
 
         @SuppressWarnings("serial")

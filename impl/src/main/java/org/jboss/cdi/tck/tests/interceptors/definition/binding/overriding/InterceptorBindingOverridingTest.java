@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.binding.overriding;
 
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDING_MEMBERS;
+import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
 import static org.testng.Assert.assertEquals;
 
 import javax.inject.Inject;
@@ -27,17 +27,16 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
-import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
  * Test that interceptor bindings defined at method level override those defined at the class level.
- * 
+ *
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -59,8 +58,8 @@ public class InterceptorBindingOverridingTest extends AbstractTest {
                                         SlowAgingInterceptor.class.getName()).up()).build();
     }
 
-    @Test
-    @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "cb")
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "cb")
     public void testInterceptorBindingOverriden() {
         // getAge() returns 3, SlowAgingInterceptor adds one (4) and NegatingInterceptor negates (-4)
         assertEquals(pony.getAge(), -4);

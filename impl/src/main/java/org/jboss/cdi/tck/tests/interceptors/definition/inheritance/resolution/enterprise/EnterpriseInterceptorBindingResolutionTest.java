@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.resolution.enterprise;
 
+import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -37,13 +37,12 @@ import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
-import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
  * Interceptor resolution test.
- * 
+ *
  * @author Martin Kouba
  */
 @Test(groups = JAVAEE_FULL)
@@ -65,12 +64,12 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
      * recursively, interceptor bindings declared as meta-annotations of other interceptor bindings and stereotypes, together
      * with all interceptor bindings declared at the method level, including, recursively, interceptor bindings declared as
      * meta-annotations of other interceptor bindings.
-     * 
+     *
      * @param messageService
      */
     @SuppressWarnings("serial")
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ba")
+    @Test(groups = INTERCEPTORS_SPEC, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    // @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ba")
     public void testBusinessMethodInterceptorBindings(MessageService messageService, MonitorService monitorService) {
 
         // Test interceptor is resolved (note non-binding member of BallBinding)
@@ -95,8 +94,8 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
         assertFalse(ComplicatedInterceptor.intercepted);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "bb")
+    @Test(groups = INTERCEPTORS_SPEC, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    // @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "bb")
     public void testTimeoutMethodInterceptorBindings(MessageService messageService) throws Exception {
 
         assertNotNull(messageService);
@@ -113,8 +112,8 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
     }
 
     @SuppressWarnings("serial")
-    @Test
-    @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "a")
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "a")
     public void testLifecycleInterceptorBindings() throws Exception {
 
         // Test interceptor is resolved (note non-binding member of BallBinding)

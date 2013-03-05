@@ -9,25 +9,19 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.multipleBindings;
 
-import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
-import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INTERCEPTOR;
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_WITH_MULTIPLE_BINDINGS;
+import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -40,10 +34,9 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
                 .build();
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_WITH_MULTIPLE_BINDINGS, id = "a"), @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ca"),
-            @SpecAssertion(section = DECLARING_INTERCEPTOR, id = "ab"), @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "ba"),
-            @SpecAssertion(section = CONCEPTS, id = "f") })
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_WITH_MULTIPLE_BINDINGS, id = "a"), @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ca"),
+    //        @SpecAssertion(section = DECLARING_INTERCEPTOR, id = "ab"), @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "ba") })
     public void testInterceptorAppliedToBeanWithAllBindings() {
         MissileInterceptor.intercepted = false;
 
@@ -53,8 +46,8 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
         assert MissileInterceptor.intercepted;
     }
 
-    @Test
-    @SpecAssertion(section = INTERCEPTOR_WITH_MULTIPLE_BINDINGS, id = "b")
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertion(section = INTERCEPTOR_WITH_MULTIPLE_BINDINGS, id = "b")
     public void testInterceptorNotAppliedToBeanWithSomeBindings() {
         MissileInterceptor.intercepted = false;
 
@@ -64,8 +57,8 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
         assert !MissileInterceptor.intercepted;
     }
 
-    @Test
-    @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "bb")
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "bb")
     public void testMultipleInterceptorsOnMethod() {
         LockInterceptor.intercepted = false;
 

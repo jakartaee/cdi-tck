@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,11 +17,9 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
-import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
+import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
 import static org.jboss.cdi.tck.cdi.Sections.BM_INTERCEPTOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR;
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDINGS;
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS;
 import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPE_INTERCEPTOR_BINDINGS;
 import static org.testng.Assert.assertEquals;
@@ -57,7 +55,7 @@ import org.testng.annotations.Test;
 
 /**
  * Tests related to the definition of interceptors, but not necessarily their execution.
- * 
+ *
  * @author David Allen
  * @author Marius Bogoevici
  * @author Martin Kouba
@@ -191,9 +189,11 @@ public class InterceptorDefinitionTest extends AbstractTest {
         getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, nonBinding);
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "a"), @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "b"),
-            @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "c"), @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a") })
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "a"), @SpecAssertion(section =
+    // INTERCEPTOR_BINDINGS, id = "b"),
+    // @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "c"), @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a")
+    // })
     public void testInterceptorBindingAnnotation() {
         List<Interceptor<?>> interceptors = getLoggedInterceptors();
         assertTrue(interceptors.size() > 1);
@@ -210,7 +210,8 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = STEREOTYPE_INTERCEPTOR_BINDINGS, id = "a"), @SpecAssertion(section = STEREOTYPE_INTERCEPTOR_BINDINGS, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPE_INTERCEPTOR_BINDINGS, id = "a"),
+            @SpecAssertion(section = STEREOTYPE_INTERCEPTOR_BINDINGS, id = "b"),
             @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "b") })
     public void testStereotypeInterceptorBindings() {
         FileLogger.intercepted = false;
@@ -223,8 +224,9 @@ public class InterceptorDefinitionTest extends AbstractTest {
         assertTrue(NetworkLogger.intercepted);
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS, id = "a"), @SpecAssertion(section = INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS, id = "b") })
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS, id = "a"),
+    //        @SpecAssertion(section = INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS, id = "b") })
     public void testInterceptorBindingsCanDeclareOtherInterceptorBindings() {
         AtomicInterceptor.intercepted = false;
         MissileInterceptor.intercepted = false;

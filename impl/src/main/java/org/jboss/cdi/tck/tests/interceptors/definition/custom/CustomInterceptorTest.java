@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -44,7 +44,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "fa"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ca"), @SpecAssertion(section = ABD, id = "dd") })
     // WELD-238
     public void testCustomPostConstructInterceptor() {
         assert !getCurrentManager().resolveInterceptors(POST_CONSTRUCT, new SecureLiteral(), new TransactionalLiteral())
@@ -54,7 +54,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "fb"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cb"), @SpecAssertion(section = ABD, id = "dd") })
     // WELD-238
     public void testCustomPreDestroyInterceptor() {
         assert !getCurrentManager().resolveInterceptors(PRE_DESTROY, new SecureLiteral(), new TransactionalLiteral()).isEmpty();
@@ -63,7 +63,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "fc"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cc"), @SpecAssertion(section = ABD, id = "dd") })
     // WELD-238
     public void testCustomPostActivateInterceptor() {
         assert !getCurrentManager().resolveInterceptors(POST_ACTIVATE, new SecureLiteral(), new TransactionalLiteral())
@@ -73,7 +73,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "fd"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cd"), @SpecAssertion(section = ABD, id = "dd") })
     // WELD-238
     public void testCustomPrePassivateInterceptor() {
         assert !getCurrentManager().resolveInterceptors(PRE_PASSIVATE, new SecureLiteral(), new TransactionalLiteral())
@@ -83,7 +83,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "fe"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ce"), @SpecAssertion(section = ABD, id = "dd") })
     // WELD-238
     public void testCustomAroundInvokeInterceptor() {
         assert !getCurrentManager().resolveInterceptors(AROUND_INVOKE, new SecureLiteral(), new TransactionalLiteral())
@@ -93,7 +93,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ff"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cf"), @SpecAssertion(section = ABD, id = "dd") })
     // WELD-238
     public void testCustomAroundTimeoutInterceptor() {
         assert !getCurrentManager().resolveInterceptors(AROUND_TIMEOUT, new SecureLiteral(), new TransactionalLiteral())

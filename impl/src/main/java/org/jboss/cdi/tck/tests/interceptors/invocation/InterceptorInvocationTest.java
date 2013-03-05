@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.interceptors.invocation;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INTERCEPTOR;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -42,7 +41,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -58,7 +57,8 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "a"), @SpecAssertion(section = DECLARING_INTERCEPTOR, id = "a"),
+    // @SpecAssertion(section = DECLARING_INTERCEPTOR, id = "a")
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "a"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "kb") })
     public void testManagedBeanIsIntercepted() {
 

@@ -5214,268 +5214,123 @@
     </section>
 
     <section id="interceptor_bindings" title="Interceptor binding types" level="2">
-        <assertion id="a">
-            <text>An interceptor binding type is a Java annotation defined as |@Target({TYPE, METHOD})| or |@Target(TYPE)| and |@Retention(RUNTIME)|.</text>
-        </assertion>
-
-        <assertion id="b">
-            <text>An interceptor binding type may be declared by specifying the |@javax.interceptor.InterceptorBinding| meta-annotation.</text>
-        </assertion>
-
-        <assertion id="c">
-            <text>Multiple interceptors may be bound to the same interceptor binding type or types.</text>
-        </assertion>
-    </section>
-
-    <section id="interceptor_binding_with_additional_interceptor_bindings" title="Interceptor binding types with additional interceptor bindings" level="3">
-        <assertion id="a">
-            <text>An interceptor binding type may declare other interceptor bindings.</text>
-        </assertion>
-
-        <assertion id="b">
-            <text>Interceptor bindings are transitive - an interceptor binding declared by an interceptor binding type is inherited by all beans and other interceptor binding types that declare that interceptor binding type.</text>
-        </assertion>
-
-        <assertion id="c" testable="false">
-            <text>Interceptor binding types declared |@Target(TYPE)| may not be applied to interceptor binding types declared |@Target({TYPE, METHOD})|.</text>
-            <note>The behaviour here is undefined.</note>
-        </assertion>
     </section>
 
     <section id="stereotype_interceptor_bindings" title="Interceptor bindings for stereotypes" level="3">
         <assertion id="a">
-            <text>Interceptor bindings may be applied to a stereotype by annotating the stereotype annotation</text>
+            <text>Interceptor bindings may be applied to a stereotype by annotating the stereotype annotation.</text>
         </assertion>
 
         <assertion id="b">
-            <text>An interceptor binding declared by a stereotype are inherited by any bean that declares that stereotype.</text>
+            <text>An interceptor binding declared by a stereotype is inherited by any bean that declares that stereotype.</text>
         </assertion>
 
         <assertion id="c" testable="false">
             <text>If a stereotype declares interceptor bindings, it must be defined as |@Target(TYPE)|.</text>
-            <note>The behaviour here is undefined.</note>
+            <note>Undefined behaviour.</note>
         </assertion>
     </section>
 
     <section id="declaring_interceptor" title="Declaring the interceptor bindings of an interceptor" level="2">
+
         <assertion id="a">
-            <text>The interceptor bindings of an interceptor are specified by annotating the interceptor class with the binding types and the |@javax.interceptor.Interceptor| annotation.</text>
+            <text>If an interceptor for lifecycle callbacks declares an interceptor binding type that not defined |@Target(TYPE)|, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
-        <assertion id="ab">
-            <text>An interceptor class may declare multiple interceptor bindings.</text>
-        </assertion>
-
-        <assertion id="b">
-            <text>If an interceptor does not declare an |@Interceptor| annotation, it must be bound to beans using |@Interceptors| ~or |ejb-jar.xml|~.</text>
-            <note>Defining interceptor using |ejb-jar.xml| is EJB specific feature and thus it's not tested in this TCK.</note>
-        </assertion>
-
-        <assertion id="c" testable="false">
-            <text>All interceptors declared using |@Interceptor| must specify at least one interceptor binding. If an interceptor declared using |@Interceptor| does not declare any interceptor binding, non-portable behavior results.</text>
-        </assertion>
-
-        <assertion id="d">
-            <text>An interceptor for lifecycle callbacks may only declare interceptor binding types that are defined as |@Target(TYPE)|. If an interceptor for lifecycle callbacks declares an interceptor binding type that is defined |@Target({TYPE, METHOD})|, the container automatically detects the problem and treats it as a definition error.</text>
-        </assertion>
     </section>
 
     <section id="binding_interceptor_to_bean" title="Binding an interceptor to a bean" level="2">
+
         <assertion id="a">
-            <text>An interceptor binding may be declared by annotating the bean class, or a method of the bean class, with the interceptor binding type.</text>
+            <text>The set of interceptor bindings for a method are those declared at class level includes those declared on stereotypes. An interceptor binding declared on a bean class replaces an interceptor binding of the same type declared by a stereotype that is applied to the bean class.</text>
         </assertion>
 
-        <group>
-            <text>A bean class or method of a bean class may declare multiple interceptor bindings.</text>
-            <assertion id="ba">
-                <text>A bean class may declare multiple interceptor bindings.</text>
-            </assertion>
-            <assertion id="bb">
-                <text>A method of a bean class may declare multiple interceptor bindings.</text>
-            </assertion>
-        </group>
+        <assertion id="b">
+            <text>If a managed bean has a class-level or method-level interceptor binding, the managed bean must be a proxyable bean type, as defined in Section "unproxyable".</text>
+        </assertion>
 
-        <group>
-            <text>If the bean class of a managed bean declares or inherits a class level interceptor binding or a stereotype with interceptor bindings, it must not be declared final, or have any non-static, non-private, final methods. If a managed bean has a class-level interceptor binding and is declared final or has a non-static, non-private, final method, the container automatically detects the problem and treats it as a definition error.</text>
-            <assertion id="ca">
-                <text>If the bean class of a managed bean declares a class level interceptor binding, it must not be declared final.</text>
-            </assertion>
-            <assertion id="cb">
-                <text>If the bean class of a managed bean declares a class level interceptor binding, it must not have any non-static, non-private, final methods.</text>
-            </assertion>
-            <assertion id="cc">
-                <text>If the bean class of a managed bean inherits a class level interceptor binding, it must not be declared final.</text>
-            </assertion>
-            <assertion id="cd">
-                <text>If the bean class of a managed bean inherits a class level interceptor binding, it must not have any non-static, non-private, final methods.</text>
-            </assertion>
-            <assertion id="ce">
-                <text>If the bean class of a managed bean inherits a stereotype with interceptor bindings, it must not be declared final.</text>
-            </assertion>
-            <assertion id="cf">
-                <text>If the bean class of a managed bean inherits a stereotype with interceptor bindings, it must not have any non-static, non-private, final methods.</text>
-            </assertion>
-        </group>
-
-        <group>
-            <text>If a non-static, non-private method of a bean class of a managed bean declares a method level interceptor binding, neither the method nor the bean class may be declared final. If a non-static, non-private, final method of a managed bean has a method level interceptor binding, the container automatically detects the problem and treats it as a definition error.</text>
-            <assertion id="da">
-                <text>If a non-static, non-private method of a bean class of a managed bean declares a method level interceptor binding, the bean class may not be declared final.</text>
-            </assertion>
-            <assertion id="db">
-                <text>If a non-static, non-private method of a bean class of a managed bean declares a method level interceptor binding, the method may not be declared final.</text>
-            </assertion>
-        </group>
     </section>
 
     <section id="enabled_interceptors" title="Interceptor enablement and ordering" level="2">
 
-        <assertion id="aa" testable="false">
-            <text>Interceptors may be enabled for an application, or enabled only for a particular bean archive.</text>
-            <note>This is a statement of intent</note>
-        </assertion>
-        <assertion id="ab" implied="true">
-            <text>By default, a bean archive has no enabled interceptors.</text>
+        <assertion id="a" testable="false">
+            <text>This specification extends the Java Interceptors specification and defines support for enabling interceptors only for a bean archive, as defined by Contexts and Dependency Injection 1.0, and the ability to override the interceptor order using the portable extension SPI, defined in Section "atd".</text>
+            <note>Statement of intent.</note>
         </assertion>
 
-        <assertion id="ba">
-            <text>An interceptor may be enabled for the entire application by listing its class, along with a priority attribute, under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive which contains the interceptor class.</text>
+        <assertion id="b">
+            <text>An interceptor may be explicitly enabled for a bean archive by listing its class under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive.</text>
         </assertion>
 
-        <assertion id="bb">
-            <text>An interceptor may be enabled for a bean archive by listing its class under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive.</text>
-        </assertion>
-
-        <assertion id="bc">
-            <text>An interceptor enabled for an application may be disabled for a bean archive by listing its class, along with a disabled flag, under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive.</text>
-        </assertion>
-
-        <assertion id="bd">
-            <text>An interceptor may be given a default priority, but not enabled by listing its class, along with a disabled flag and the priority attribute, under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive which contains the interceptor class.</text>
-        </assertion>
-
-        <assertion id="be">
-            <text>An interceptor with a default priority may be enabled for a bean archive by listing its class, along with an enabled flag, under the |&lt;interceptors&gt;| element of the |beans.xml| file of the bean archive.</text>
-        </assertion>
-
-        <assertion id="bf">
-            <text>The priority of the interceptor declaration, defined in Section 2.9, "Priority ordering", determines the default interceptor ordering for the application. The order of the interceptor declarations for a bean archive overrides the default interceptor order. If the set of interceptors enabled for the application and the set of interceptors enabled for a bean archive are disjoint, then the interceptors enabled for the bean archive are given an incrementing priority starting at 1000. Interceptors which occur earlier in the list are called first.</text>
+        <assertion id="c">
+            <text>The order of the interceptor declarations determines the interceptor ordering. Interceptors which occur earlier in the list are called first.</text>
         </assertion>
 
         <group>
             <text>Each child |&lt;class&gt;| element must specify the name of an interceptor class. If there is no class with the specified name, or if the class with the specified name is not an interceptor class, the container automatically detects the problem and treats it as a deployment problem.</text>
-
-            <assertion id="caa">
+            <assertion id="da">
                 <text>Test with a non-existant class.</text>
             </assertion>
-
-            <assertion id="cab">
+            <assertion id="db">
                 <text>Test with a class that isn't an interceptor.</text>
             </assertion>
         </group>
 
-        <assertion id="cb">
+        <assertion id="e">
             <text>If the same class is listed twice under the |&lt;interceptors&gt;| element, the container automatically detects the problem and treats it as a deployment problem.</text>
         </assertion>
 
         <group>
-            <text>Interceptors declared using interceptor bindings are called after interceptors declared using |@Interceptors| or in |ejb-jar.xml| and before any around-invoke or lifecycle event callback methods declared on the target class or any superclass of the target class.</text>
-
-            <assertion id="fa">
-                <text>Test with a managed bean</text>
+            <text>Interceptors declared using |@Interceptors|, declared in |ejb-jar.xml| or enabled using |@Priority| are called before interceptors enabled using |beans.xml|.</text>
+             <assertion id="fa">
+                <text>Test interceptors declared using |@Interceptors|.</text>
             </assertion>
-
             <assertion id="fb">
-                <text>Test with session bean</text>
+                <text>Test interceptors declared in |ejb-jar.xml|.</text>
+            </assertion>
+            <assertion id="fc">
+                <text>Test interceptors enabled using |@Priority|.</text>
             </assertion>
         </group>
 
-        <assertion id="g">
-            <text>Interceptors are called before decorators.</text>
+        <assertion id="g" implied="true">
+            <text>By default, a bean archive has no enabled interceptors.</text>
         </assertion>
+
     </section>
 
     <section id="interceptor_resolution" title="Interceptor resolution" level="2">
-        <assertion id="a">
-            <text>For a lifecycle callback method, the interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings and stereotypes.
-            </text>
-        </assertion>
 
-        <group>
-            <text>For a business method, or EJB timeout method, the bean interceptor bindings include the interceptor bindings declared or inherited by the bean at the class level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings and stereotypes, together with all interceptor bindings declared at the method level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings.</text>
-            <assertion id="ba">
-                <text>Check a business method</text>
-            </assertion>
-            <assertion id="bb">
-                <text>Check an EJB timeout method</text>
-            </assertion>
-        </group>
-
-        <assertion id="ca">
-            <text>An interceptor is bound to a method if the method has all the interceptor bindings of the interceptor. A method has an interceptor binding of an interceptor if it has an interceptor binding with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.NonBinding|, and the interceptor intercepts the given kind of lifecycle callback or business method, and the interceptor is enabled in the bean archive containing the bean.</text>
-        </assertion>
-
-        <group>
-            <text>For a custom implementation of the Interceptor interface defined in Section 11.1.2, "The Interceptor interface", the container calls |getInterceptorBindings()| to determine the interceptor bindings of the interceptor and |intercepts()| to determine if the interceptor intercepts a given kind of lifecycle callback, EJB timeout or business method.</text>
-            <assertion id="fa">
-                <text>Check for @PostConstruct</text>
-            </assertion>
-            <assertion id="fb">
-                <text>Check for @PreDestroy</text>
-            </assertion>
-            <assertion id="fc">
-                <text>Check for @PostActivate</text>
-            </assertion>
-            <assertion id="fd">
-                <text>Check for @PrePassivate</text>
-            </assertion>
-            <assertion id="fe">
-                <text>Check for @AroundInvoke</text>
-            </assertion>
-            <assertion id="ff">
-                <text>Check for @AroundTimeout</text>
-            </assertion>
-        </group>
-
-    </section>
-
-    <section id="interceptor_with_multiple_bindings" title="Interceptors with multiple bindings" level="3">
-        <group>
-            <text>An interceptor class may specify multiple interceptor bindings.</text>
-            <assertion id="a">
-                <text>Test that the interceptor is applied to a bean with all of the bindings.</text>
-            </assertion>
-
-            <assertion id="b">
-                <text>Test that the interceptor it not applied to a bean with only some of the interceptor bindings.</text>
-            </assertion>
-        </group>
-    </section>
-
-    <section id="interceptor_binding_members" title="Interceptor binding types with members" level="3">
-        <assertion id="a">
-            <text>Interceptor binding types may have annotation members.</text>
-        </assertion>
-
-        <assertion id="ab">
-            <text>Annotation member values are compared using |equals()|.</text>
+        <assertion id="a" testable="false">
+            <text>This specification extends the Java Interceptors specification and defines the effect of applying |@Nonbinding| to an interceptor binding member, and how the interceptor bindings of a custom implementation of the |Interceptor| interface are determined.</text>
+            <note>Statement of intent.</note>
         </assertion>
 
         <assertion id="b">
-            <text>An annotation member may be excluded from consideration using the |@Nonbinding| annotation.</text>
+            <text>If any interceptor binding has a member annotated |@javax.enterprise.util.Nonbinding|, the member is ignored when performing interceptor resolution, and the method does not need to have the same annotation member value.</text>
         </assertion>
 
-        <assertion id="ca" testable="false">
-            <text>Array-valued or annotation-valued members of an interceptor binding type should be annotated |@Nonbinding| in a portable application. If an array-valued or annotation-valued member of an interceptor binding type is not annotated |@Nonbinding|, non-portable behavior results.</text>
-        </assertion>
-
-        <assertion id="cb">
-            <text>Interceptor bindings defined on methods may override the interceptor bindings defined on classes.</text>
-        </assertion>
-
-        <assertion id="d">
-            <text>If the set of interceptor bindings of a bean or interceptor, including bindings inherited from stereotypes and other interceptor bindings, has two instances of a certain interceptor binding type and the instances have different values of some annotation member, the bean or interceptor must override the inherited set by definining an annotation instance of its own, otherwise, the container automatically detects the problem and treats it as a definition error.</text>
-        </assertion>
+        <group>
+            <text>For a custom implementation of the |Interceptor| interface defined in Section "interceptor", the container calls |getInterceptorBindings()| to determine the interceptor bindings of the interceptor and |intercepts()| to determine if the interceptor intercepts a given kind of lifecycle callback, EJB timeout or business method.</text>
+            <assertion id="ca">
+                <text>Check for @PostConstruct</text>
+            </assertion>
+            <assertion id="cb">
+                <text>Check for @PreDestroy</text>
+            </assertion>
+            <assertion id="cc">
+                <text>Check for @PostActivate</text>
+            </assertion>
+            <assertion id="cd">
+                <text>Check for @PrePassivate</text>
+            </assertion>
+            <assertion id="ce">
+                <text>Check for @AroundInvoke</text>
+            </assertion>
+            <assertion id="cf">
+                <text>Check for @AroundTimeout</text>
+            </assertion>
+        </group>
 
     </section>
 

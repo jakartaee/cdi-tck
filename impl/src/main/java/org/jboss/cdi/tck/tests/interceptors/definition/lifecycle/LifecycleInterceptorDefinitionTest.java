@@ -9,15 +9,14 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle;
 
-import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
+import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
@@ -32,8 +31,6 @@ import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -50,8 +47,9 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
                 .build();
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a"), @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "a") })
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a"), @SpecAssertion(section =
+    // INTERCEPTOR_RESOLUTION, id = "a") })
     public void testLifecycleInterception() {
 
         ActionSequence.reset();
@@ -68,8 +66,8 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
         assertEquals(ActionSequence.getSequenceData("preDestroy").get(0), MissileInterceptor.class.getName());
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "a") })
+    @Test(groups = INTERCEPTORS_SPEC)
+    // @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "a") })
     public void tesMultipleLifecycleInterceptors() {
 
         ActionSequence.reset();

@@ -17,8 +17,10 @@
 
 package org.jboss.cdi.tck.tests.interceptors.ordering.global;
 
+import javax.annotation.Priority;
 import javax.interceptor.Interceptor;
 
+@Priority(800)
 @Transactional
 @Interceptor
 public class GloballyEnabledInterceptor5 extends AbstractInterceptor {
