@@ -82,7 +82,6 @@ public class CustomBeanImplementationTest extends AbstractTest {
     public void testGetInjectionPointsCalled(Bar bar) {
         assert AfterBeanDiscoveryObserver.integerBean.isGetInjectionPointsCalled();
         assert FooBean.barInjectionPoint.isTransientCalled();
-        assert FooBean.integerInjectionPoint.isTransientCalled();
         assert bar.getOne() == 1;
     }
 
