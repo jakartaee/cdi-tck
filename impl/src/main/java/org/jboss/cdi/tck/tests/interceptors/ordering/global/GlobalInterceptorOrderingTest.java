@@ -77,6 +77,7 @@ public class GlobalInterceptorOrderingTest extends AbstractTest {
         sequence.add(GloballyEnabledInterceptor1.class.getName());
         sequence.add(GloballyEnabledInterceptor2.class.getName());
         sequence.add(WebApplicationGlobalInterceptor1.class.getName());
+        sequence.add(GloballyEnabledInterceptor3.class.getName());
         sequence.add(GloballyEnabledInterceptor4.class.getName());
         // Interceptors enabled using beans.xml
         sequence.add(LegacyInterceptor1.class.getName());

@@ -84,6 +84,8 @@ public class GlobalDecoratorOrderingTest extends AbstractTest {
         expected.add(GloballyEnabledDecorator2.class.getSimpleName());
         // 1008
         expected.add(WebApplicationGlobalDecorator.class.getSimpleName());
+        // 1015
+        expected.add(GloballyEnabledDecorator3.class.getSimpleName());
         // 1025
         expected.add(GloballyEnabledDecorator4.class.getSimpleName());
         // Decorators enabled using beans.xml
