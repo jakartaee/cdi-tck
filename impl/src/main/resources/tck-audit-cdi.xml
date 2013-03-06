@@ -4069,16 +4069,6 @@
             </assertion>
         </group>
 
-        <assertion id="ia" implied="true">
-            <text>Managed bean which declares a passivating scope may have bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency.</text>
-            <note>This was not allowed in CDI 1.0</note>
-        </assertion>
-
-        <assertion id="ib" implied="true">
-            <text>Stateful session bean which declares a passivating scope may have bean constructor parameter or initializer method parameter that does not resolve to a passivation capable dependency.</text>
-            <note>This was not allowed in CDI 1.0</note>
-        </assertion>
-
         <assertion id="j" implied="true">
             <text>Stateful session bean which does not declare a passivating scope needn't be passivation capable.</text>
             <note>This was not allowed in CDI 1.0</note>
