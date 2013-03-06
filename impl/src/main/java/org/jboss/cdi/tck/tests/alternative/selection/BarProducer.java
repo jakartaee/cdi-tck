@@ -17,9 +17,11 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import javax.annotation.Priority;
 import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 
+@Priority(1100)
 public class BarProducer {
 
     @Alternative

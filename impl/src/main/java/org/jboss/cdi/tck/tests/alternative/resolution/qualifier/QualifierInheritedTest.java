@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
 import static org.testng.Assert.assertEquals;
@@ -40,7 +40,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -61,11 +61,11 @@ public class QualifierInheritedTest extends AbstractTest {
      * {@link Larch} is enabled alternative and extends {@link Tree}, which has {@link True} qualifier that declares the
      * {@link Inherited} meta-annotation. Therefore the result of typesafe resolution for type {@link Tree} and qualifier
      * {@link True} is the {@link Larch} bean.
-     * 
+     *
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ca"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "la"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "la"),
             @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aa") })
     public void testResolution() throws Exception {
 

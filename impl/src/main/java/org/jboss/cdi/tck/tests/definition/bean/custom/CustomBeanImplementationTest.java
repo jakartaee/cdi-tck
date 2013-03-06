@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.definition.bean.custom;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_INSTANCE;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 import static org.jboss.cdi.tck.cdi.Sections.NAME_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.NULL;
@@ -48,19 +48,19 @@ public class CustomBeanImplementationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "k"), @SpecAssertion(section = INTER_MODULE_INJECTION, id = "q") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "h"), @SpecAssertion(section = INTER_MODULE_INJECTION, id = "q") })
     public void testGetBeanClassCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetBeanClassCalled();
     }
 
     @Test
-    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "k")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "h")
     public void testGetStereotypesCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetStereotypesCalled();
     }
 
     @Test
-    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "k")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "h")
     public void testIsPolicyCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isAlternativeCalled();
     }

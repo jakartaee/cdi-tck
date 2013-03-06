@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.alternative.selection.resource;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 
 import javax.inject.Inject;
@@ -26,8 +26,6 @@ import javax.persistence.EntityManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
 import org.jboss.cdi.tck.tests.alternative.selection.Alpha;
 import org.jboss.cdi.tck.tests.alternative.selection.Bravo;
 import org.jboss.cdi.tck.tests.alternative.selection.Charlie;
@@ -43,21 +41,21 @@ import org.testng.annotations.Test;
 /**
  * The simplest possible scenario - test alternative resource is selected for the entire application, no deselection, no
  * priority ordering during resolution.
- * 
+ *
  * WAR deployment with 2 libraries:
  * <ul>
  * <li>WEB-INF/classes - alpha - does not declare any alternative</li>
  * <li>lib 1 - bravo - declares {@link ResouceProducer} alternative selected for the app with priority 1000</li>
  * <li>lib 2 - charlie - does not declare any alternative</li>
  * </ul>
- * 
+ *
  * Expected results:
  * <ul>
  * <li>{@link EntityManager} with {@link ProductionReady} qualifier is available for injection in all bean archives</li>
  * </ul>
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ResourceAlternative01Test extends AbstractTest {
@@ -68,9 +66,7 @@ public class ResourceAlternative01Test extends AbstractTest {
                 .withTestClass(ResourceAlternative01Test.class)
                 .withLibrary(ProductionReady.class)
                 .withClasses(Alpha.class)
-                .withBeanLibrary(
-                        new Beans11DescriptorImpl().alternatives(new BeansXmlClass(BravoResourceProducer.class, 1000)),
-                        Bravo.class, BravoResourceProducer.class)
+                .withBeanLibrary(Bravo.class, BravoResourceProducer.class)
                 .withBeanLibrary(Charlie.class)
                 .withWebXml(
                         Descriptors.create(WebAppDescriptor.class).createEnvEntry().envEntryName("test1")
@@ -87,7 +83,7 @@ public class ResourceAlternative01Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "be") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ad") })
     public void testAlternativeResourceSelected() {
         alpha.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE);
         bravo.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE);

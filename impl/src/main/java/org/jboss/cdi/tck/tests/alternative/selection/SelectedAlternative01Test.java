@@ -18,16 +18,13 @@
 package org.jboss.cdi.tck.tests.alternative.selection;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlStereotype;
 import org.jboss.cdi.tck.tests.alternative.selection.Tame.TameLiteral;
 import org.jboss.cdi.tck.tests.alternative.selection.Wild.WildLiteral;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -37,9 +34,9 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * The simplest possible scenario - test various alternatives are selected for the entire application, no deselection, no
- * priority ordering during resolution.
- * 
+ * The simplest possible scenario - test various alternatives are selected for the entire application, no priority ordering
+ * during resolution.
+ *
  * WAR deployment with 2 libraries:
  * <ul>
  * <li>WEB-INF/classes - alpha - does not declare any alternative</li>
@@ -47,7 +44,7 @@ import org.testng.annotations.Test;
  * {@link SelectedStereotype} for the app with priority 60</li>
  * <li>lib 2 - charlie - declares {@link Bar} producer alternatives selected for the app with priority 1100</li>
  * </ul>
- * 
+ *
  * Expected results:
  * <ul>
  * <li>{@link Foo} is available for injection in all bean archives</li>
@@ -55,24 +52,18 @@ import org.testng.annotations.Test;
  * <li>{@link Bar} with {@link Wild} qualifier is available for injection in all bean archives</li>
  * <li>{@link Bar} with {@link Tame} qualifier is available for injection in all bean archives</li>
  * </ul>
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
-@Test(groups = { INTEGRATION })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SelectedAlternative01Test extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return createBuilderBase()
-                .withTestClass(SelectedAlternative01Test.class)
-                .withClasses(Alpha.class)
-                .withBeanLibrary(
-                        new Beans11DescriptorImpl().alternatives(new BeansXmlClass(Foo.class, 1000), new BeansXmlStereotype(
-                                SelectedStereotype.class, 60)), Bravo.class, Foo.class, Baz.class)
-                .withBeanLibrary(new Beans11DescriptorImpl().alternatives(new BeansXmlClass(BarProducer.class, 1100)),
-                        Charlie.class, Bar.class, BarProducer.class).build();
+        return createBuilderBase().withTestClass(SelectedAlternative01Test.class).withClasses(Alpha.class)
+                .withBeanLibrary(Bravo.class, Foo.class, Baz.class)
+                .withBeanLibrary(Charlie.class, Bar.class, BarProducer.class).build();
     }
 
     @Inject
@@ -84,16 +75,17 @@ public class SelectedAlternative01Test extends AbstractTest {
     @Inject
     Charlie charlie;
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ba") })
+    @Test(groups=INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "aa") })
     public void testAlternativeManagedBeanSelected() {
         alpha.assertAvailable(Foo.class);
         bravo.assertAvailable(Foo.class);
         charlie.assertAvailable(Foo.class);
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "bc"), @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "bd") })
+    @Test(groups=INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ab"),
+            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ac") })
     public void testAlternativeProducerSelected() {
         // Producer field
         alpha.assertAvailable(Bar.class, WildLiteral.INSTANCE);
@@ -105,8 +97,8 @@ public class SelectedAlternative01Test extends AbstractTest {
         charlie.assertAvailable(Bar.class, TameLiteral.INSTANCE);
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "bf") })
+    @Test(groups=INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "b") })
     public void testAlternativeStereotypeSelected() {
         alpha.assertAvailable(Baz.class);
         bravo.assertAvailable(Baz.class);

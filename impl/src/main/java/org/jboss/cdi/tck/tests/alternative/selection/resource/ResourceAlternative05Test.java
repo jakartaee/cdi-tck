@@ -26,8 +26,6 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
 import org.jboss.cdi.tck.tests.alternative.selection.Alpha;
 import org.jboss.cdi.tck.tests.alternative.selection.Bravo;
 import org.jboss.cdi.tck.tests.alternative.selection.Charlie;
@@ -42,18 +40,18 @@ import org.testng.annotations.Test;
 
 /**
  * Test resolution of ambiguous dependencies.
- * 
+ *
  * WAR deployment with 2 libraries:
  * <ul>
  * <li>WEB-INF/classes - alpha - does not declare any alternative, includes {@link ResourceProducer}</li>
  * <li>lib 1 - bravo - declares {@link BravoResourceProducer} alternative selected for the app with priority 1000</li>
  * <li>lib 2 - charlie - declares {@link CharlieResourceProducer} unselected alternative with default priority 1100</li>
  * </ul>
- * 
+ *
  * Expected result: {@link BravoResourceProducer} resource is available for injection in all bean archives
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ResourceAlternative05Test extends AbstractTest {
@@ -64,12 +62,8 @@ public class ResourceAlternative05Test extends AbstractTest {
                 .withTestClass(ResourceAlternative05Test.class)
                 .withLibrary(ProductionReady.class)
                 .withClasses(Alpha.class, ResourceProducer.class)
-                .withBeanLibrary(
-                        new Beans11DescriptorImpl().alternatives(new BeansXmlClass(BravoResourceProducer.class, 1000)),
-                        Bravo.class, BravoResourceProducer.class)
-                .withBeanLibrary(
-                        new Beans11DescriptorImpl().alternatives(new BeansXmlClass(CharlieResourceProducer.class, false, 1100)),
-                        Charlie.class, CharlieResourceProducer.class)
+                .withBeanLibrary(Bravo.class, BravoResourceProducer.class)
+                .withBeanLibrary(Charlie.class, CharlieResourceProducer.class)
                 .withWebXml(
                         Descriptors.create(WebAppDescriptor.class).createEnvEntry().envEntryName("test1")
                                 .envEntryType("java.lang.String").envEntryValue("hello1").up().createEnvEntry()
@@ -88,7 +82,8 @@ public class ResourceAlternative05Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ca"), @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cc") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ca"),
+            @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cc") })
     public void testAlternativeResourceSelected() {
         assertEquals(alpha.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE), "hello1");
         assertEquals(bravo.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE), "hello1");

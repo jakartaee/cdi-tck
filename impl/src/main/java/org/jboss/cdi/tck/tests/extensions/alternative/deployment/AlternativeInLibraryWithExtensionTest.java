@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.deployment;
 
-import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVES;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_ALTERNATIVE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
 
 import javax.inject.Inject;
@@ -35,14 +35,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * TODO check assertions since this test is not aimed to specific assertion (is a result of practical issue)
- * 
  * This test verifies that alternatives work correctly in BDAs that contain at least one extension.
- * 
+ *
  * <p>
  * This test was originally part of Seam Compatibility project.
  * <p>
- * 
+ *
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15791">GLASSFISH-15791</a>
@@ -63,7 +61,7 @@ public class AlternativeInLibraryWithExtensionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVES, id = "a"), @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"),
             @SpecAssertion(section = INITIALIZATION, id = "b") })
     public void testAlternative() {
         Assert.assertEquals("barAlternative", foo.getBar().ping());

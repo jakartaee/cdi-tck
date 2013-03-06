@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.packaging.war.modules;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
@@ -138,7 +138,7 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "cg") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "i") })
     public void testAlternatives(BarInspector barInspector) throws Exception {
 
         Set<Bean<?>> beans = getCurrentManager().getBeans(AlternativeBar.class);

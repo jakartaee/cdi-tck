@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -37,7 +37,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -58,11 +58,11 @@ public class QualifierNotDeclaredTest extends AbstractTest {
      * {@link Baz} implements {@link Foo} and has {@link True} qualifier declared. {@link Bar} is enabled alternative and
      * implements {@link Foo} but it has not {@link True} declared. Therefore the result of typesafe resolution for type
      * {@link Foo} and qualifier {@link True} is {@link Baz} bean.
-     * 
+     *
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ca"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "lb") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "lb") })
     public void testResolution() throws Exception {
 
         Bean<?> bean = getCurrentManager().resolve(getCurrentManager().getBeans(Foo.class, TrueLiteral.INSTANCE));

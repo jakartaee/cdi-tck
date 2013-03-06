@@ -26,8 +26,6 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -36,31 +34,27 @@ import org.testng.annotations.Test;
 
 /**
  * Test resolution of ambiguous dependencies.
- * 
+ *
  * WAR deployment with 2 libraries:
  * <ul>
  * <li>WEB-INF/classes - alpha - does not declare any alternative, includes {@link TestBean} implementation</li>
  * <li>lib 1 - bravo - declares {@link Foo} alternative selected for the app with priority 1000</li>
  * <li>lib 2 - charlie - declares {@link Bar} alternative selected for the app with priority 2000</li>
  * </ul>
- * 
+ *
  * Expected result: {@link Bar} is resolved in all bean archives
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SelectedAlternative02Test extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return createBuilderBase()
-                .withTestClass(SelectedAlternative02Test.class)
-                .withClasses(Alpha.class, SimpleTestBean.class)
-                .withBeanLibrary(new Beans11DescriptorImpl().alternatives(new BeansXmlClass(Foo.class, 1000)), Bravo.class,
-                        Foo.class)
-                .withBeanLibrary(new Beans11DescriptorImpl().alternatives(new BeansXmlClass(Bar.class, 2000)), Charlie.class,
-                        Bar.class).build();
+        return createBuilderBase().withTestClass(SelectedAlternative02Test.class)
+                .withClasses(Alpha.class, SimpleTestBean.class).withBeanLibrary(Bravo.class, Foo.class)
+                .withBeanLibrary(Charlie.class, Bar.class).build();
     }
 
     @Inject
@@ -73,7 +67,8 @@ public class SelectedAlternative02Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ca"), @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cc") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ca"),
+            @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cc") })
     public void testDependencyResolvable() {
         assertEquals(alpha.assertAvailable(TestBean.class).getId(), Bar.class.getName());
         assertEquals(bravo.assertAvailable(TestBean.class).getId(), Bar.class.getName());

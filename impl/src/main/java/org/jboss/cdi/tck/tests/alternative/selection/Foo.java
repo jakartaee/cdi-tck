@@ -17,8 +17,10 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import javax.annotation.Priority;
 import javax.enterprise.inject.Alternative;
 
+@Priority(1000)
 @Alternative
 public class Foo implements TestBean {
 

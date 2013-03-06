@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
 import static org.testng.Assert.assertEquals;
@@ -40,7 +40,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -61,11 +61,11 @@ public class QualifierNotInheritedTest extends AbstractTest {
      * {@link Troll} is enabled alternative and extends {@link Monster}, which has {@link False} qualifier that does not declare
      * the {@link Inherited} meta-annotation. Therefore the result of typesafe resolution for type {@link Monster} and qualifier
      * {@link False} is the {@link Monster} bean.
-     * 
+     *
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ca"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "lb"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "lb"),
             @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aaa") })
     public void testResolution() throws Exception {
 

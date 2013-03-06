@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.packaging.ear.modules;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
@@ -193,7 +193,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES, id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba") })
     public void testAlternatives() throws Exception {
         Set<Bean<?>> beans = getCurrentManager().getBeans(AlternativeBar.class);
         assertEquals(beans.size(), 1);
