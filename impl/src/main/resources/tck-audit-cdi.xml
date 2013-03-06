@@ -2660,9 +2660,6 @@
             <text>If an injection point of primitive type resolves to a producer method or producer field that returns a null value at runtime, the container must inject the primitive type's default value as defined by the Java Language Specification.</text>
         </assertion>
 
-        <assertion id="c">
-            <text>For a custom implementation of the Bean interface defined in Section 11.1, "The Bean interface", the container calls |isNullable()| to determine whether the bean may have null values.</text>
-        </assertion>
     </section>
 
     <section id="qualifier_annotation_members" title="Qualifier annotations with members" level="3">

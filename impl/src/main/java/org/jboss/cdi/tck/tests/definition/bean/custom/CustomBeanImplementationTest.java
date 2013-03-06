@@ -21,7 +21,6 @@ import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_INSTANCE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 import static org.jboss.cdi.tck.cdi.Sections.NAME_RESOLUTION;
-import static org.jboss.cdi.tck.cdi.Sections.NULL;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
@@ -85,12 +84,6 @@ public class CustomBeanImplementationTest extends AbstractTest {
         assert FooBean.barInjectionPoint.isTransientCalled();
         assert FooBean.integerInjectionPoint.isTransientCalled();
         assert bar.getOne() == 1;
-    }
-
-    @Test
-    @SpecAssertion(section = NULL, id = "c")
-    public void testIsNullableCalled() {
-        assert AfterBeanDiscoveryObserver.integerBean.isNullableCalled();
     }
 
     @Test
