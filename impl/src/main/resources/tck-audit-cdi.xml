@@ -6716,20 +6716,33 @@
         </assertion>
 
         <group>
-            <text>Any observer of this event is permitted to add classes to, or remove classes from, the list of alternatives, list of interceptors or list of decorators. The container must use the final values of these collections, after all observers of |AfterTypeDiscovery| have been called, to determine the order of the enabled alternatives, interceptors, and decorators for application. The initial values of these collections is defined by the |@Priority| annotation.</text>
-            <assertion id="g">
-                <text>Test the list of alternatives.</text>
+            <text>Any observer of this event is permitted to add classes to, or remove classes from, the list of alternatives, list of interceptors or list of decorators. The container must use the final values of these collections, after all observers of |AfterTypeDiscovery| have been called, to determine the order of the enabled alternatives, interceptors, and decorators for application.</text>
+            <assertion id="ga">
+                <text>Test the final values of the list of alternatives.</text>
             </assertion>
-            <assertion id="h">
-                <text>Test the list of interceptors.</text>
+            <assertion id="gb">
+                <text>Test the final values of the list of interceptors.</text>
             </assertion>
-            <assertion id="i">
-                <text>Test the list of decorators.</text>
+            <assertion id="gc">
+                <text>Test the final values of the list of decorators.</text>
             </assertion>
         </group>
 
-        <assertion id="j">
-            <text>If any observer method of an |AfterTypeDiscovery| event throws an exception, the exception is treated as a deployment problem by the container.</text>
+        <group>
+            <text>The initial values of these collections is defined by the |@Priority| annotation.</text>
+            <assertion id="ha">
+                <text>Test the initial values of the list of alternatives.</text>
+            </assertion>
+            <assertion id="hb">
+                <text>Test the initial values of the list of interceptors.</text>
+            </assertion>
+            <assertion id="hc">
+                <text>Test the initial values of the list of decorators.</text>
+            </assertion>
+        </group>
+
+        <assertion id="i">
+            <text>If any observer method of an |AfterTypeDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
     </section>
 
