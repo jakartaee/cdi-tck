@@ -1,6 +1,7 @@
-<beans>
+<?xml version="1.0" encoding="UTF-8"?>
+<beans bean-discovery-mode="annotated" version="1.1">
     <interceptors>
-        <class priority="200" enabled="false">org.jboss.cdi.tck.test.shrinkwrap.descriptors.Bar</class>
-        <class priority="800">org.jboss.cdi.tck.test.shrinkwrap.descriptors.Foo</class>
+        <class>org.jboss.cdi.tck.test.shrinkwrap.descriptors.Bar</class>
+        <class>org.jboss.cdi.tck.test.shrinkwrap.descriptors.Foo</class>
     </interceptors>
 </beans>

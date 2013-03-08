@@ -17,6 +17,11 @@
 
 package org.jboss.cdi.tck.test.shrinkwrap.descriptors;
 
+import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
+import static org.jboss.cdi.tck.shrinkwrap.descriptors.ClassActivator.newClassAvailableActivator;
+import static org.jboss.cdi.tck.shrinkwrap.descriptors.ClassActivator.newClassNotAvailableActivator;
+import static org.jboss.cdi.tck.shrinkwrap.descriptors.Exclude.newExclude;
+import static org.jboss.cdi.tck.shrinkwrap.descriptors.SystemPropertyActivator.newSystemPropertyActivator;
 import static org.testng.Assert.assertEquals;
 
 import java.io.File;
@@ -25,33 +30,45 @@ import java.io.IOException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlClass;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.BeansXmlStereotype;
+import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.descriptor.api.DescriptorExportException;
 import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class Beans11DescriptorImplTest {
 
     @Test
-    public void testAlternatives() throws DescriptorExportException, IOException {
-        checkResult(new Beans11DescriptorImpl().alternatives(new BeansXmlStereotype(Foo.class, 100), new BeansXmlClass(
-                Bar.class, false, 200)), "src/test/resources/beans-01.xml");
+    public void testAlternatives() throws Exception {
+        checkResult(newBeans11Descriptor().alternatives(Foo.class).alternativeStereotypes(Bar.class),
+                "src/test/resources/beans-01.xml");
     }
 
     @Test
-    public void testInterceptors() throws DescriptorExportException, IOException {
-        checkResult(new Beans11DescriptorImpl().interceptors(new BeansXmlClass(Bar.class, false, 200), new BeansXmlClass(
-                Foo.class, 800)), "src/test/resources/beans-02.xml");
+    public void testInterceptors() throws Exception {
+        checkResult(newBeans11Descriptor().interceptors(Bar.class, Foo.class), "src/test/resources/beans-02.xml");
     }
 
     @Test
-    public void testDecorators() throws DescriptorExportException, IOException {
-        checkResult(new Beans11DescriptorImpl().decorators(new BeansXmlClass(Bar.class), new BeansXmlClass(Foo.class, 100)),
-                "src/test/resources/beans-03.xml");
+    public void testDecorators() throws Exception {
+        checkResult(newBeans11Descriptor().decorators(Bar.class, Foo.class), "src/test/resources/beans-03.xml");
+    }
+
+    @Test
+    public void testBeanDiscoveryMode() throws Exception {
+        checkResult(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ALL), "src/test/resources/beans-04.xml");
+    }
+
+    @Test
+    public void testExcludes() throws Exception {
+        checkResult(
+                newBeans11Descriptor().excludes(
+                        newExclude("org.jboss.cdi.tck.*"),
+                        newExclude("org.jboss.cdi.tck.**").activators(newClassAvailableActivator("Foo"),
+                                newClassNotAvailableActivator("Bar"), newSystemPropertyActivator("HOME"),
+                                newSystemPropertyActivator("HOME").setValue("true"))), "src/test/resources/beans-05.xml");
     }
 
     private void checkResult(Beans11DescriptorImpl descriptor, String filePath) throws DescriptorExportException, IOException {

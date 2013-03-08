@@ -16,34 +16,12 @@
  */
 package org.jboss.cdi.tck.shrinkwrap.descriptors;
 
-/**
- * Represents a &lt;stereotype&gt; element in the beans.xml file. Supports enabled and priority attributes. Instances of this
- * class are immutable.
- * 
- * @author Jozef Hartinger
- * @see BeansXmlClass
- * 
- */
-public class BeansXmlStereotype extends BeansXmlClass {
+public interface Activator {
 
-    public BeansXmlStereotype(Class<?> javaClass) {
-        super(javaClass);
-    }
+    public String getElementName();
 
-    public BeansXmlStereotype(Class<?> javaClass, Boolean enabled, Integer priority) {
-        super(javaClass, enabled, priority);
-    }
+    public String getNameAttribute();
 
-    public BeansXmlStereotype(Class<?> javaClass, Boolean enabled) {
-        super(javaClass, enabled);
-    }
+    public String getValueAttribute();
 
-    public BeansXmlStereotype(Class<?> javaClass, Integer priority) {
-        super(javaClass, priority);
-    }
-
-    @Override
-    protected String getElementName() {
-        return "stereotype";
-    }
 }

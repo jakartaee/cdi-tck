@@ -18,41 +18,105 @@
 package org.jboss.cdi.tck.shrinkwrap.descriptors;
 
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.jboss.shrinkwrap.descriptor.api.DescriptorExportException;
 import org.jboss.shrinkwrap.descriptor.api.beans10.Alternatives;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.beans10.Decorators;
 import org.jboss.shrinkwrap.descriptor.api.beans10.Interceptors;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Simple temporary workaround to support CDI 1.1 <code>beans.xml</code>.
- * 
- * Will be deprecated as soon as ShrinkWrap Descriptors supports it.
- * 
+ *
+ * Deprecate as soon as ShrinkWrap Descriptors is ready.
+ *
  * @author Martin Kouba
- * 
  */
 public class Beans11DescriptorImpl implements BeansDescriptor {
 
-    private List<BeansXmlClass> alternatives = new ArrayList<BeansXmlClass>();
-    private List<BeansXmlClass> interceptors = new ArrayList<BeansXmlClass>();
-    private List<BeansXmlClass> decorators = new ArrayList<BeansXmlClass>();
+    private BeanDiscoveryMode mode = BeanDiscoveryMode.ANNOTATED;
 
-    public Beans11DescriptorImpl alternatives(BeansXmlClass... alternatives) {
+    private List<Class<?>> alternatives = new ArrayList<Class<?>>(5);
+
+    private List<Class<?>> interceptors = new ArrayList<Class<?>>(5);
+
+    private List<Class<?>> decorators = new ArrayList<Class<?>>(5);
+
+    private List<Class<?>> alternativeStereotypes = new ArrayList<Class<?>>(5);
+
+    private List<Exclude> excludes = new ArrayList<Exclude>(5);
+
+    /**
+     *
+     * @param mode
+     * @return
+     */
+    public Beans11DescriptorImpl setBeanDiscoveryMode(BeanDiscoveryMode mode) {
+        this.mode = mode;
+        return this;
+    }
+
+    /**
+     *
+     * @param exclude
+     * @return
+     */
+    public Beans11DescriptorImpl excludes(Exclude... excludes) {
+        this.excludes.addAll(Arrays.asList(excludes));
+        return this;
+    }
+
+    /**
+     *
+     * @param alternatives
+     * @return
+     */
+    public Beans11DescriptorImpl alternatives(Class<?>... alternatives) {
         this.alternatives.addAll(Arrays.asList(alternatives));
         return this;
     }
 
-    public Beans11DescriptorImpl interceptors(BeansXmlClass... interceptors) {
+    /**
+     *
+     * @param stereotypes
+     * @return
+     */
+    public Beans11DescriptorImpl alternativeStereotypes(Class<?>... stereotypes) {
+        this.alternativeStereotypes.addAll(Arrays.asList(stereotypes));
+        return this;
+    }
+
+    /**
+     *
+     * @param interceptors
+     * @return
+     */
+    public Beans11DescriptorImpl interceptors(Class<?>... interceptors) {
         this.interceptors.addAll(Arrays.asList(interceptors));
         return this;
     }
 
-    public Beans11DescriptorImpl decorators(BeansXmlClass... decorators) {
+    /**
+     *
+     * @param decorators
+     * @return
+     */
+    public Beans11DescriptorImpl decorators(Class<?>... decorators) {
         this.decorators.addAll(Arrays.asList(decorators));
         return this;
     }
@@ -65,28 +129,97 @@ public class Beans11DescriptorImpl implements BeansDescriptor {
     @Override
     public String exportAsString() throws DescriptorExportException {
 
-        StringBuilder xml = new StringBuilder();
-        xml.append("<beans>\n");
-        appendSection("alternatives", alternatives, xml);
-        appendSection("interceptors", interceptors, xml);
-        appendSection("decorators", decorators, xml);
-        xml.append("</beans>");
+        try {
 
-        return xml.toString();
-    }
+            StringWriter writer = new StringWriter();
 
-    private void appendSection(String name, List<BeansXmlClass> classes, StringBuilder xml) {
-        if (classes.size() > 0) {
-            xml.append("<").append(name).append(">\n");
-            appendClasses(classes, xml);
-            xml.append("</").append(name).append(">\n");
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(new DOMSource(buildDocument()), new StreamResult(writer));
+
+            return writer.toString();
+
+        } catch (Exception e) {
+            throw new IllegalStateException("Cannot export beans.xml", e);
         }
     }
 
-    private void appendClasses(List<BeansXmlClass> classes, StringBuilder xml) {
-        for (BeansXmlClass clazz : classes) {
-            xml.append(clazz.asXmlElement()).append("\n");
+    private Document buildDocument() {
+
+        try {
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setValidating(false);
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            DOMImplementation impl = builder.getDOMImplementation();
+            Document doc = impl.createDocument("http://java.sun.com/xml/ns/javaee", "beans", null);
+
+            Element rootElement = doc.getDocumentElement();
+            rootElement.setAttribute("version", "1.1");
+            rootElement.setAttribute("bean-discovery-mode", this.mode.toString().toLowerCase());
+
+            if (!interceptors.isEmpty()) {
+                Element interceptorsElement = doc.createElement("interceptors");
+                rootElement.appendChild(interceptorsElement);
+                for (Class<?> clazz : interceptors) {
+                    appendChildTextElement(doc, interceptorsElement, "class", clazz.getName());
+                }
+            }
+
+            if (!decorators.isEmpty()) {
+                Element decoratorsElement = doc.createElement("decorators");
+                rootElement.appendChild(decoratorsElement);
+                for (Class<?> clazz : decorators) {
+                    appendChildTextElement(doc, decoratorsElement, "class", clazz.getName());
+                }
+            }
+
+            if (!alternatives.isEmpty() || !alternativeStereotypes.isEmpty()) {
+                Element alternativesElement = doc.createElement("alternatives");
+                rootElement.appendChild(alternativesElement);
+                for (Class<?> clazz : alternatives) {
+                    appendChildTextElement(doc, alternativesElement, "class", clazz.getName());
+                }
+                for (Class<?> clazz : alternativeStereotypes) {
+                    appendChildTextElement(doc, alternativesElement, "stereotype", clazz.getName());
+                }
+            }
+
+            if (!excludes.isEmpty()) {
+
+                Element scanElement = doc.createElement("scan");
+                rootElement.appendChild(scanElement);
+
+                for (Exclude exclude : excludes) {
+
+                    Element exludeElement = doc.createElement("exclude");
+                    exludeElement.setAttribute("name", exclude.getName());
+                    if (!exclude.getActivators().isEmpty()) {
+                        for (Activator activator : exclude.getActivators()) {
+                            Element activatorElement = doc.createElement(activator.getElementName());
+                            exludeElement.appendChild(activatorElement);
+                            activatorElement.setAttribute("name", activator.getNameAttribute());
+                            if (activator.getValueAttribute() != null) {
+                                activatorElement.setAttribute("value", activator.getValueAttribute());
+                            }
+                        }
+                    }
+                    scanElement.appendChild(exludeElement);
+                }
+            }
+            return doc;
+
+        } catch (Exception e) {
+            throw new IllegalStateException("Cannot build beans.xml", e);
         }
+    }
+
+    private void appendChildTextElement(Document doc, Element element, String name, String text) {
+        Element child = doc.createElement(name);
+        child.appendChild(doc.createTextNode(text));
+        element.appendChild(child);
     }
 
     @Override
@@ -172,6 +305,20 @@ public class Beans11DescriptorImpl implements BeansDescriptor {
     @Override
     public BeansDescriptor removeAllAlternatives() {
         throw new UnsupportedOperationException();
+    }
+
+    /**
+     *
+     *
+     */
+    public static enum BeanDiscoveryMode {
+
+        ANNOTATED, ALL, NONE;
+
+    }
+
+    public static Beans11DescriptorImpl newBeans11Descriptor() {
+        return new Beans11DescriptorImpl();
     }
 
 }
