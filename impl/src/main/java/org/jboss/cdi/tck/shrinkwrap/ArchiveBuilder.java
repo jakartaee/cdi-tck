@@ -107,6 +107,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     private Class<?> testClazz = null;
 
+    private boolean isDebugMode = false;
+
     protected ResourceDescriptor beansXml = null;
 
     protected BeansDescriptor beansDescriptor = null;
@@ -477,7 +479,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     public T withWebXml(WebAppDescriptor webXml) {
 
-        if(webXml.getVersion() == null) {
+        if (webXml.getVersion() == null) {
             // CDITCK-316 always set the version attribute
             webXml.version(WebAppVersionType._3_0);
         }
@@ -504,7 +506,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     public T withPersistenceXml(PersistenceDescriptor persistenceDescriptor) {
 
-        if(persistenceDescriptor.getVersion() == null || persistenceDescriptor.getVersion().isEmpty()) {
+        if (persistenceDescriptor.getVersion() == null || persistenceDescriptor.getVersion().isEmpty()) {
             // CDITCK-316 always set the version attribute
             persistenceDescriptor.version("2.0");
         }
@@ -638,6 +640,57 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
+     *
+     * @return <code>true</code> if building as-client mode archive, <code>false</code> otherwise
+     */
+    public Boolean isAsClientMode() {
+        return isAsClientMode != null ? isAsClientMode : false;
+    }
+
+    /**
+     * @param isAsClientMode
+     * @see #resolveAsClientMode()
+     */
+    public T setAsClientMode(boolean isAsClientMode) {
+        this.isAsClientMode = isAsClientMode;
+        return self();
+    }
+
+    /**
+     *
+     * @return <code>true</code> if TCK specific infrastructure (porting package, utils, etc.) should be automatically added,
+     *         <code>false</code> otherwise
+     * @see #resolveAsClientMode()
+     */
+    public boolean isTestArchive() {
+        return isTestArchive;
+    }
+
+    /**
+     * Mark this archive as non-testing. TCK specific infrastructure (porting package, utils, etc.) will not be automatically
+     * added.
+     */
+    public T notTestArchive() {
+        this.isTestArchive = false;
+        return self();
+    }
+
+    /**
+     * Enable debug mode. Basically shows the content of the default beans.xml and built ShrinkWrap archive in the log.
+     */
+    public T debugMode() {
+        this.isDebugMode = true;
+        return self();
+    }
+
+    /**
+     * @return name of final archive
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * @return self to enable generic builder
      */
     public abstract T self();
@@ -667,6 +720,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
 
         A archive = buildInternal();
+
+        if(this.isDebugMode) {
+            logger.info(archive.toString(true));
+        }
+
         logger.log(
                 Level.INFO,
                 "Test archive built [info: {0}, time: {1} ms]",
@@ -805,31 +863,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
     }
 
-    private boolean skipClassName(String className) {
-        return ((isAsClientMode() && testClazz.getName().equals(className)) || (excludedClasses != null && excludedClasses
-                .contains(className)));
-    }
-
-    private boolean isSinglePackage(Set<Class<?>> classes) {
-
-        String packageName = null;
-
-        for (Class<?> clazz : classes) {
-            if (packageName == null) {
-                packageName = getPackageName(clazz);
-            } else {
-                if (!packageName.equals(getPackageName(clazz))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private String getPackageName(Class<?> clazz) {
-        return clazz.getPackage() != null ? clazz.getPackage().getName() : "";
-    }
-
     /**
      * Process libraries.
      *
@@ -898,25 +931,45 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add default libraries from lib directory specified with <code>org.jboss.cdi.tck.libraryDirectory</code> property in
-     * <b>cdi-tck.properties</b>.
+     *
+     * @return
      */
-    private void addDefaultLibraries() {
+    protected StringAsset getBeansDescriptorAsset() {
 
-        File directory = new File(ConfigurationFactory.get(true).getLibraryDirectory());
-        logger.log(Level.FINE, "Scanning default library dir {0}", directory.getPath());
+        String content = null;
 
-        if (directory.isDirectory()) {
-            for (File file : directory.listFiles(new FilenameFilter() {
-                public boolean accept(File dir, String name) {
-                    return name.endsWith(".jar");
-                }
-            })) {
-                logger.log(Level.FINE, "Adding default library {0}", file.getName());
-                withLibrary(file);
-            }
+        if (beansDescriptor != null) {
+            content = beansDescriptor.exportAsString();
+        } else if (beansXml != null) {
+            content = beansXml.getSource();
+        } else {
+            content = Descriptors.create(BeansDescriptor.class).exportAsString();
         }
+
+        if(this.isDebugMode)  {
+            logger.info("\n" + content);
+        }
+        return new StringAsset(content);
     }
+
+    /**
+     *
+     * @return
+     */
+    protected String getBeansDescriptorTarget() {
+
+        String target = null;
+
+        if (beansDescriptor != null) {
+            target = beansDescriptor.getDescriptorName();
+        } else if (beansXml != null) {
+            target = beansXml.getTarget();
+        } else {
+            target = "beans.xml";
+        }
+        return target;
+    }
+
 
     /**
      * Internal service provider descriptor.
@@ -1106,44 +1159,54 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     }
 
+    /**
+     * Add default libraries from lib directory specified with <code>org.jboss.cdi.tck.libraryDirectory</code> property in
+     * <b>cdi-tck.properties</b>.
+     */
+    private void addDefaultLibraries() {
+
+        File directory = new File(ConfigurationFactory.get(true).getLibraryDirectory());
+        logger.log(Level.FINE, "Scanning default library dir {0}", directory.getPath());
+
+        if (directory.isDirectory()) {
+            for (File file : directory.listFiles(new FilenameFilter() {
+                public boolean accept(File dir, String name) {
+                    return name.endsWith(".jar");
+                }
+            })) {
+                logger.log(Level.FINE, "Adding default library {0}", file.getName());
+                withLibrary(file);
+            }
+        }
+    }
+
+    private boolean skipClassName(String className) {
+        return ((isAsClientMode() && testClazz.getName().equals(className)) || (excludedClasses != null && excludedClasses
+                .contains(className)));
+    }
+
+    private boolean isSinglePackage(Set<Class<?>> classes) {
+
+        String packageName = null;
+
+        for (Class<?> clazz : classes) {
+            if (packageName == null) {
+                packageName = getPackageName(clazz);
+            } else {
+                if (!packageName.equals(getPackageName(clazz))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private String getPackageName(Class<?> clazz) {
+        return clazz.getPackage() != null ? clazz.getPackage().getName() : "";
+    }
+
     private String getTestPackagePath() {
         return this.testClazz.getPackage().getName().replace('.', '/').concat("/");
-    }
-
-    /**
-     *
-     * @return <code>true</code> if building as-client mode archive, <code>false</code> otherwise
-     */
-    public Boolean isAsClientMode() {
-        return isAsClientMode != null ? isAsClientMode : false;
-    }
-
-    /**
-     * @param isAsClientMode
-     * @see #resolveAsClientMode()
-     */
-    public T setAsClientMode(boolean isAsClientMode) {
-        this.isAsClientMode = isAsClientMode;
-        return self();
-    }
-
-    /**
-     *
-     * @return <code>true</code> if TCK specific infrastructure (porting package, utils, etc.) should be automatically added,
-     *         <code>false</code> otherwise
-     * @see #resolveAsClientMode()
-     */
-    public boolean isTestArchive() {
-        return isTestArchive;
-    }
-
-    /**
-     * Mark this archive as non-testing. TCK specific infrastructure (porting package, utils, etc.) will not be automatically
-     * added.
-     */
-    public T notTestArchive() {
-        this.isTestArchive = false;
-        return self();
     }
 
     /**
@@ -1189,10 +1252,16 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * @return name of final archive
+     * @param archive
+     * @return Base Path for the ClassContainer resources
      */
-    public String getName() {
-        return name;
+    private ArchivePath resolveClassesPath(Archive<?> archive) {
+        if (archive instanceof WebArchive) {
+            return ArchivePaths.create("WEB-INF/classes");
+        } else if (archive instanceof JavaArchive) {
+            return new BasicPath("/");
+        }
+        return null;
     }
 
     private static JavaArchive buildSupportLibrary() {
@@ -1228,19 +1297,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         logger.log(Level.INFO, "Incontainer library built [time: {0} ms]", System.currentTimeMillis() - start);
         return supportLib;
-    }
-
-    /**
-     * @param archive
-     * @return Base Path for the ClassContainer resources
-     */
-    private ArchivePath resolveClassesPath(Archive<?> archive) {
-        if (archive instanceof WebArchive) {
-            return ArchivePaths.create("WEB-INF/classes");
-        } else if (archive instanceof JavaArchive) {
-            return new BasicPath("/");
-        }
-        return null;
     }
 
 }

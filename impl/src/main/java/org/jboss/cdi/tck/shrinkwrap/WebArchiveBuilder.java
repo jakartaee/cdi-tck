@@ -20,7 +20,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
@@ -88,15 +87,8 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
         processManifestResources(webArchive);
         processResources(webArchive);
 
-        if (beansDescriptor != null) {
-            webArchive.addAsWebInfResource(new StringAsset(beansDescriptor.exportAsString()),
-                    buildBeansDescriptorTargetPath(beansDescriptor.getDescriptorName()));
-        } else if (beansXml != null) {
-            webArchive.addAsWebInfResource(beansXml.getSource(), buildBeansDescriptorTargetPath(beansXml.getTarget()));
-        } else {
-            webArchive.addAsWebInfResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()),
-                    buildBeansDescriptorTargetPath("beans.xml"));
-        }
+        // Beans descriptor
+        webArchive.addAsWebInfResource(getBeansDescriptorAsset(), buildBeansDescriptorTargetPath(getBeansDescriptorTarget()));
 
         if (webXmlDescriptor != null) {
             webArchive.setWebXML(new StringAsset(webXmlDescriptor.exportAsString()));
