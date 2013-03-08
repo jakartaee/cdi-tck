@@ -71,6 +71,13 @@ public final class TestGroups {
     public static final String JAX_RS = "jaxrs";
 
     /**
+     * Requires test system properties.
+     *
+     * @see TestSystemProperty
+     */
+    public static final String SYSTEM_PROPERTIES = "systemProperties";
+
+    /**
      * Test is completely overlapping with the Java Interceptors specification.
      *
      * @see CDITCK-321
