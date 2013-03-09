@@ -55,7 +55,9 @@ import org.jboss.shrinkwrap.api.asset.Asset;
 import org.jboss.shrinkwrap.api.asset.ClassAsset;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.asset.FileAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.asset.UrlAsset;
 import org.jboss.shrinkwrap.api.container.ClassContainer;
 import org.jboss.shrinkwrap.api.container.LibraryContainer;
 import org.jboss.shrinkwrap.api.container.ManifestContainer;
@@ -934,22 +936,25 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      *
      * @return
      */
-    protected StringAsset getBeansDescriptorAsset() {
+    protected Asset getBeansDescriptorAsset() {
 
-        String content = null;
+        Asset asset = null;
+        String content = null; // for debugging
 
         if (beansDescriptor != null) {
             content = beansDescriptor.exportAsString();
+            asset = new StringAsset(content);
         } else if (beansXml != null) {
-            content = beansXml.getSource();
+            asset = new ClassLoaderAsset(beansXml.getSource());
         } else {
             content = Descriptors.create(BeansDescriptor.class).exportAsString();
+            asset = new StringAsset(content);
         }
 
-        if(this.isDebugMode)  {
-            logger.info("\n" + content);
+        if (this.isDebugMode)  {
+            logger.info("\n" + content); // FIXME: only works for BeansDescriptor
         }
-        return new StringAsset(content);
+        return asset;
     }
 
     /**
