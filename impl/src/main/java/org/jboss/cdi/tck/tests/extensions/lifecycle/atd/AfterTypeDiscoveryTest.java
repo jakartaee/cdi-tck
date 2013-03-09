@@ -34,12 +34,14 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 /**
  *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class AfterTypeDiscoveryTest extends AbstractTest {
 
     @Deployment
