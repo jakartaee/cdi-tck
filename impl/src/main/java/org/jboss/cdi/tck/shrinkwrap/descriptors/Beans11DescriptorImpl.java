@@ -49,6 +49,8 @@ import org.w3c.dom.Element;
  */
 public class Beans11DescriptorImpl implements BeansDescriptor {
 
+    private static final String NS = "http://xmlns.jcp.org/xml/ns/javaee";
+
     private BeanDiscoveryMode mode = BeanDiscoveryMode.ANNOTATED;
 
     private List<Class<?>> alternatives = new ArrayList<Class<?>>(5);
@@ -154,7 +156,7 @@ public class Beans11DescriptorImpl implements BeansDescriptor {
             factory.setValidating(false);
             DocumentBuilder builder = factory.newDocumentBuilder();
             DOMImplementation impl = builder.getDOMImplementation();
-            Document doc = impl.createDocument("http://java.sun.com/xml/ns/javaee", "beans", null);
+            Document doc = impl.createDocument(NS, "beans", null);
 
             Element rootElement = doc.getDocumentElement();
             rootElement.setAttribute("version", "1.1");

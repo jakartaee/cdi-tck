@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://java.sun.com/xml/ns/javaee" bean-discovery-mode="annotated" version="1.1">
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee" bean-discovery-mode="annotated" version="1.1">
     <interceptors>
         <class>org.jboss.cdi.tck.test.shrinkwrap.descriptors.Bar</class>
         <class>org.jboss.cdi.tck.test.shrinkwrap.descriptors.Foo</class>
