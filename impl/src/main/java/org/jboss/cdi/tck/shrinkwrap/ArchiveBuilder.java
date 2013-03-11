@@ -55,9 +55,7 @@ import org.jboss.shrinkwrap.api.asset.Asset;
 import org.jboss.shrinkwrap.api.asset.ClassAsset;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.asset.FileAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
-import org.jboss.shrinkwrap.api.asset.UrlAsset;
 import org.jboss.shrinkwrap.api.container.ClassContainer;
 import org.jboss.shrinkwrap.api.container.LibraryContainer;
 import org.jboss.shrinkwrap.api.container.ManifestContainer;
@@ -69,9 +67,6 @@ import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.persistence20.PersistenceDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
-import org.jboss.shrinkwrap.impl.base.URLPackageScanner;
-import org.jboss.shrinkwrap.impl.base.asset.AssetUtil;
-import org.jboss.shrinkwrap.impl.base.path.BasicPath;
 
 /**
  * Abstract ShrinkWrap archive builder for CDI TCK Arquillian test.
@@ -723,7 +718,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         A archive = buildInternal();
 
-        if(this.isDebugMode) {
+        if (this.isDebugMode) {
             logger.info(archive.toString(true));
         }
 
@@ -788,8 +783,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
                     if (classesPath != null) {
                         ArchivePath classNamePath = AssetUtil.getFullPathForClassResource(className);
-                        archive.add(new ClassLoaderAsset(classNamePath.get().substring(1), clToUse), new BasicPath(classesPath,
-                                classNamePath));
+                        archive.add(new ClassLoaderAsset(classNamePath.get().substring(1), clToUse),
+                                ArchivePaths.create(classesPath, classNamePath));
                     } else {
                         archive.addClass(className);
                     }
@@ -831,7 +826,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                     classesPackage = clazz.getPackage();
                 }
                 Asset resource = new ClassAsset(clazz);
-                ArchivePath location = new BasicPath(resolveClassesPath(archive), AssetUtil.getFullPathForClassResource(clazz));
+                ArchivePath location = ArchivePaths.create(resolveClassesPath(archive),
+                        AssetUtil.getFullPathForClassResource(clazz));
                 archive.add(resource, location);
             }
 
@@ -933,26 +929,22 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     *
-     * @return
+     * @return corresponding beans descriptor asset
      */
     protected Asset getBeansDescriptorAsset() {
 
         Asset asset = null;
-        String content = null; // for debugging
 
         if (beansDescriptor != null) {
-            content = beansDescriptor.exportAsString();
-            asset = new StringAsset(content);
+            asset = new StringAsset(beansDescriptor.exportAsString());
         } else if (beansXml != null) {
             asset = new ClassLoaderAsset(beansXml.getSource());
         } else {
-            content = Descriptors.create(BeansDescriptor.class).exportAsString();
-            asset = new StringAsset(content);
+            asset = new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString());
         }
 
-        if (this.isDebugMode)  {
-            logger.info("\n" + content); // FIXME: only works for BeansDescriptor
+        if (this.isDebugMode) {
+            logger.info("\n" + AssetUtil.readAssetContent(asset));
         }
         return asset;
     }
@@ -974,7 +966,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
         return target;
     }
-
 
     /**
      * Internal service provider descriptor.
@@ -1264,7 +1255,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         if (archive instanceof WebArchive) {
             return ArchivePaths.create("WEB-INF/classes");
         } else if (archive instanceof JavaArchive) {
-            return new BasicPath("/");
+            return ArchivePaths.create("/");
         }
         return null;
     }
