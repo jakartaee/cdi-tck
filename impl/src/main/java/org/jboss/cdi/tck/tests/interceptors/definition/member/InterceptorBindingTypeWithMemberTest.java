@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.member;
 
 import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
+import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 
 import java.util.List;
@@ -63,6 +64,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test(groups = INTERCEPTORS_SPEC)
+    @SpecAssertion(section = CONCEPTS, id = "f")
     // @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "a"), @SpecAssertion(section = CONCEPTS, id = "f") })
     public void testInterceptorBindingTypeWithMember() {
         Farm farm = getInstanceByType(Farm.class);

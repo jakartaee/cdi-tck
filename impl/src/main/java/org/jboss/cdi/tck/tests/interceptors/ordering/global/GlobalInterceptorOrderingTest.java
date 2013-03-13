@@ -65,7 +65,7 @@ public class GlobalInterceptorOrderingTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "fc") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "f") })
     public void testOrderingInWebInfClasses(Dao dao) {
 
         assertNotNull(dao);
@@ -88,7 +88,7 @@ public class GlobalInterceptorOrderingTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "i") })
     public void testOrderingInLib(Service service) {
 
         assertNotNull(service);

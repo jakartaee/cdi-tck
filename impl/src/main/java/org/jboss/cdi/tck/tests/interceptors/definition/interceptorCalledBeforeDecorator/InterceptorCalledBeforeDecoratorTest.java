@@ -39,7 +39,7 @@ public class InterceptorCalledBeforeDecoratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS, id = "b"),
-            @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "fa") })
+            @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g") })
     public void testInterceptorCalledBeforeDecorator() {
         FooImpl.interceptorCalledFirst = false;
         FooImpl.decoratorCalledFirst = false;

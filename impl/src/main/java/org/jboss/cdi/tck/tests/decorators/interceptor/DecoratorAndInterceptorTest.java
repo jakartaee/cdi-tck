@@ -57,7 +57,7 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
      * lifecycle callback interception are not business method invocation, and therefore are not intercepted by interceptors.
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS, id = "b"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g"),
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS, id = "b"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "i"),
             @SpecAssertion(section = BIZ_METHOD, id = "ka"), @SpecAssertion(section = BIZ_METHOD, id = "kb"),
             @SpecAssertion(section = BIZ_METHOD, id = "kc"), @SpecAssertion(section = BIZ_METHOD, id = "kd") })
     public void testMethodCallbacks() {

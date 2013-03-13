@@ -34,6 +34,7 @@ import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCA
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -251,7 +252,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     public void testNonDependentProducerReturnsNullValue() {
         getInstanceByType(Pollen.class, new AnnotationLiteral<Yummy>() {
         }).ping();
-        assert false;
+        fail("IllegalProductException not thrown");
     }
 
     @Test

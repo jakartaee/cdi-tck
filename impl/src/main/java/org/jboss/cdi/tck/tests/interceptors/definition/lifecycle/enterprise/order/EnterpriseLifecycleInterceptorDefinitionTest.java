@@ -50,7 +50,8 @@ public class EnterpriseLifecycleInterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g"),
+        @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "h") })
     public void testLifecycleInterception() {
 
         ActionSequence.reset();

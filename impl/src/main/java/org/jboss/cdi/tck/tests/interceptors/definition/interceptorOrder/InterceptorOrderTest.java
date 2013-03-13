@@ -65,7 +65,7 @@ public class InterceptorOrderTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "fa")
+    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g")
     public void testInterceptorsInvocationOrder(AccountTransaction transaction) {
 
         assertNotNull(transaction);

@@ -3787,7 +3787,10 @@
                 <text>Test a passivation capable stateful session bean.</text>
             </assertion>
             <assertion id="ab">
-                <text>Test a stateful session bean with |passivationCapable| flag set to true.</text>
+                <text>Test a passivation capable stateful session bean with |passivationCapable| flag set to true.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test a stateful session bean with |passivationCapable| flag set to false.</text>
             </assertion>
         </group>
 
@@ -5218,20 +5221,21 @@
             <text>If the same class is listed twice under the |&lt;interceptors&gt;| element, the container automatically detects the problem and treats it as a deployment problem.</text>
         </assertion>
 
-        <group>
-            <text>Interceptors declared using |@Interceptors|, declared in |ejb-jar.xml| or enabled using |@Priority| are called before interceptors enabled using |beans.xml|.</text>
-            <assertion id="fa">
-                <text>Test interceptors declared using |@Interceptors|.</text>
-            </assertion>
-            <assertion id="fb">
-                <text>Test interceptors declared in |ejb-jar.xml|.</text>
-            </assertion>
-            <assertion id="fc">
-                <text>Test interceptors enabled using |@Priority|.</text>
-            </assertion>
-        </group>
+		<assertion id="f">
+			<text>Interceptors enabled using |@Priority| are called before interceptors enabled using |beans.xml|.</text>
+		</assertion>
 
-        <assertion id="g" implied="true">
+		<assertion id="g" implied="true">
+			<text>Interceptors declared using interceptor bindings are called after interceptors declared using the |Interceptors| annotation (or using the corresponding element of a deployment descriptor).</text>
+			<note>This is defined in the Interceptors 1.2 spec, 5.1 Defining Interceptor Order.</note>
+		</assertion>
+
+		<assertion id="h" implied="true">
+			<text>Interceptors declared using interceptor bindings are called before any around-invoke, around-timeout, or lifecycle event callback methods declared on the target class or any superclass of the target class.</text>
+			<note>This is defined in the Interceptors 1.2 spec, 5.1 Defining Interceptor Order.</note>
+		</assertion>
+
+        <assertion id="i" implied="true">
             <text>By default, a bean archive has no enabled interceptors.</text>
         </assertion>
 

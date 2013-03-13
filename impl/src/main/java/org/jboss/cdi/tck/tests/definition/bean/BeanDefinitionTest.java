@@ -22,16 +22,16 @@ import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_MANAGED_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_TYPES;
-import static org.jboss.cdi.tck.cdi.Sections.NULL;
 import static org.jboss.cdi.tck.cdi.Sections.SCOPES;
 import static org.jboss.cdi.tck.cdi.Sections.TYPECASTING_BETWEEN_BEAN_TYPES;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
-import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -51,37 +51,31 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BeanDefinitionTest extends AbstractTest {
 
-    private static Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
-
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanDefinitionTest.class).build();
     }
 
-    // TODO This should actually somehow test the reverse as well - that the container
-    // throws a definition exception if any of these occur
-
     @Test
     @SpecAssertion(section = CONCEPTS, id = "a")
     public void testBeanTypesNonEmpty() {
-        assert getBeans(RedSnapper.class).size() == 1;
-        assert getBeans(RedSnapper.class).iterator().next().getTypes().size() > 0;
+        assertEquals(getBeans(RedSnapper.class).size(), 1);
+        assertFalse(getBeans(RedSnapper.class).iterator().next().getTypes().isEmpty());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = CONCEPTS, id = "b"), @SpecAssertion(section = BEAN, id = "ba") })
     public void testQualifiersNonEmpty() {
-        assert getBeans(RedSnapper.class).size() == 1;
-        assert getBeans(RedSnapper.class).iterator().next().getQualifiers().size() > 0;
+        assertEquals(getBeans(RedSnapper.class).size(), 1);
+        assertFalse(getBeans(RedSnapper.class).iterator().next().getQualifiers().isEmpty());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = CONCEPTS, id = "c"), @SpecAssertion(section = SCOPES, id = "a"),
             @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "ba"), @SpecAssertion(section = BEAN, id = "ba") })
     public void testHasScopeType() {
-        assert getBeans(RedSnapper.class).size() == 1;
-        assert getBeans(RedSnapper.class).iterator().next().getScope().equals(RequestScoped.class);
+        assertEquals(getBeans(RedSnapper.class).size(), 1);
+        assertEquals(getBeans(RedSnapper.class).iterator().next().getScope(), RequestScoped.class);
     }
 
     @Test
@@ -92,24 +86,24 @@ public class BeanDefinitionTest extends AbstractTest {
     public void testBeanTypes() {
         assert getBeans(Tarantula.class).size() == 1;
         Bean<Tarantula> bean = getBeans(Tarantula.class).iterator().next();
-        assert bean.getTypes().size() == 6;
-        assert bean.getTypes().contains(Tarantula.class);
-        assert bean.getTypes().contains(Spider.class);
-        assert bean.getTypes().contains(Animal.class);
-        assert bean.getTypes().contains(Object.class);
-        assert bean.getTypes().contains(DeadlySpider.class);
-        assert bean.getTypes().contains(DeadlyAnimal.class);
+        assertEquals(bean.getTypes().size(), 6);
+        assertTrue(bean.getTypes().contains(Tarantula.class));
+        assertTrue(bean.getTypes().contains(Spider.class));
+        assertTrue(bean.getTypes().contains(Animal.class));
+        assertTrue(bean.getTypes().contains(Object.class));
+        assertTrue(bean.getTypes().contains(DeadlySpider.class));
+        assertTrue(bean.getTypes().contains(DeadlyAnimal.class));
     }
 
     @Test
     @SpecAssertion(section = TYPECASTING_BETWEEN_BEAN_TYPES, id = "a")
     @SuppressWarnings("unused")
     public void testBeanClientCanCastBeanInstanceToAnyBeanType() {
-        assert getBeans(Tarantula.class).size() == 1;
-        Bean<Tarantula> bean = getBeans(Tarantula.class).iterator().next();
+        Set<Bean<Tarantula>> beans = getBeans(Tarantula.class);
+        assertEquals(beans.size(), 1);
+        Bean<Tarantula> bean = beans.iterator().next();
         Tarantula tarantula = getCurrentManager().getContext(bean.getScope()).get(bean);
 
-        Spider spider = tarantula;
         Animal animal = tarantula;
         Object obj = tarantula;
         DeadlySpider deadlySpider = tarantula;
@@ -119,41 +113,42 @@ public class BeanDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "c")
     public void testAbstractApiType() {
-        assert getBeans(FriendlyAntelope.class).size() == 1;
-        Bean<FriendlyAntelope> bean = getBeans(FriendlyAntelope.class).iterator().next();
-        assert bean.getTypes().size() == 4;
-        assert bean.getTypes().contains(FriendlyAntelope.class);
-        assert bean.getTypes().contains(AbstractAntelope.class);
-        assert bean.getTypes().contains(Animal.class);
-        assert bean.getTypes().contains(Object.class);
+        Set<Bean<FriendlyAntelope>> beans = getBeans(FriendlyAntelope.class);
+        assertEquals(beans.size(), 1);
+        Bean<FriendlyAntelope> bean = beans.iterator().next();
+        assertEquals(bean.getTypes().size(), 4);
+        assertTrue(bean.getTypes().contains(FriendlyAntelope.class));
+        assertTrue(bean.getTypes().contains(AbstractAntelope.class));
+        assertTrue(bean.getTypes().contains(Animal.class));
+        assertTrue(bean.getTypes().contains(Object.class));
     }
 
     @Test
     @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "d")
     public void testFinalApiType() {
-        assert !getBeans(DependentFinalTuna.class).isEmpty();
+        assertFalse(getBeans(DependentFinalTuna.class).isEmpty());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "bd"), @SpecAssertion(section = BEAN, id = "ba") })
     public void testMultipleStereotypes() {
         Bean<ComplicatedTuna> tunaBean = getBeans(ComplicatedTuna.class).iterator().next();
-        assert tunaBean.getScope().equals(RequestScoped.class);
-        assert tunaBean.getName().equals("complicatedTuna");
+        assertEquals(tunaBean.getScope(), RequestScoped.class);
+        assertEquals(tunaBean.getName(), "complicatedTuna");
     }
 
     @Test
     @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "c")
     public void testBeanExtendsAnotherBean() {
-        assert !getBeans(Spider.class).isEmpty();
-        assert !getBeans(Tarantula.class).isEmpty();
+        assertFalse(getBeans(Spider.class).isEmpty());
+        assertFalse(getBeans(Tarantula.class).isEmpty());
     }
 
     @Test
     @SpecAssertion(section = BEAN, id = "bb")
     public void testBeanClassOnSimpleBean() {
         Set<Bean<Horse>> beans = getBeans(Horse.class);
-        assert beans.size() == 1;
-        assert beans.iterator().next().getBeanClass().equals(Horse.class);
+        assertEquals(beans.size(), 1);
+        assertEquals(beans.iterator().next().getBeanClass(), Horse.class);
     }
 }

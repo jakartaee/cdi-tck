@@ -37,7 +37,7 @@ public class InterceptorNotListedInBeansXmlNotEnabledTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g")
+    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "i")
     public void testInterceptorNotListedInBeansXmlNotInvoked() {
         TransactionInterceptor.invoked = false;
 

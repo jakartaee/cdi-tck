@@ -29,6 +29,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -42,7 +43,8 @@ public class SessionBeanInterceptorOrderTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "fa")
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g"),
+        @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "h") })
     public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding(MissileLocal missile) {
 
         assertNotNull(missile);
