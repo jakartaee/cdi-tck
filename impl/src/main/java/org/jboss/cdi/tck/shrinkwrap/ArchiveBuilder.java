@@ -637,6 +637,20 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
+     * Add specified ShrinkWrap libraries.
+     *
+     * @param libraries
+     * @return
+     */
+    public T withLibraries(JavaArchive... libraries) {
+
+        for (JavaArchive library : libraries) {
+            withLibrary(library);
+        }
+        return self();
+    }
+
+    /**
      *
      * @return <code>true</code> if building as-client mode archive, <code>false</code> otherwise
      */

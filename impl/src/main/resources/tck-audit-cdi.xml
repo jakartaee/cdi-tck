@@ -7652,6 +7652,18 @@
             <text>The type is excluded from discovery if the package name of the type being discovered starts with the value of the name attribute with a suffix ".**" of the exclude filter.</text>
         </assertion>
 
+		<assertion id="ta">
+			<text>The container discovers each Java class, interface or enum deployed in an explicit bean archive.</text>
+		</assertion>
+
+		<assertion id="tb">
+			<text>The container discovers each Java class with a bean defining annotation in an implicit bean archive.</text>
+		</assertion>
+
+		<assertion id="tc">
+			<text>The container discovers each session bean.</text>
+		</assertion>
+
         <group>
             <text>The container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.7, for every Java class, interface or enum discovered.</text>
             <assertion id="ba">
