@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.exclude;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.SYSTEM_PROPERTIES;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
@@ -45,6 +46,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION) // because we need to set up system properties
 public class ExcludeFiltersTest extends AbstractTest {
 
     @Deployment
