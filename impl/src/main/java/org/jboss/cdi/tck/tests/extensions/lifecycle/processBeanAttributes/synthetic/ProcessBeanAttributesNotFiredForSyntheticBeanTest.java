@@ -22,13 +22,12 @@ import static org.jboss.cdi.tck.cdi.Sections.PAT;
 import static org.jboss.cdi.tck.cdi.Sections.PBA;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanAttributes;
 import javax.inject.Inject;
@@ -38,8 +37,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -53,57 +50,37 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
-public class ProcessBeanAttributesFiredForSyntheticBeanTest extends AbstractTest {
+public class ProcessBeanAttributesNotFiredForSyntheticBeanTest extends AbstractTest {
 
-    @SuppressWarnings("unchecked")
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-                .withTestClassPackage(ProcessBeanAttributesFiredForSyntheticBeanTest.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Bicycle.class.getName()).up())
-                .withExtensions(BicycleExtension.class, ModifyingExtension.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(ProcessBeanAttributesNotFiredForSyntheticBeanTest.class)
+                .withExtension(BicycleExtension.class).build();
     }
 
     @Inject
     BicycleExtension bicycleExtension;
 
-    @Inject
-    ModifyingExtension modifyingExtension;
-
-    @SuppressWarnings("unchecked")
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a"), @SpecAssertion(section = PBA, id = "aa"),
-            @SpecAssertion(section = PBA, id = "bb"), @SpecAssertion(section = PBA, id = "bc"),
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a"), @SpecAssertion(section = PBA, id = "ae"),
             @SpecAssertion(section = PAT, id = "bc") })
-    public void testProcessBeanAttributesFired() {
+    public void testProcessBeanAttributesNotFired() {
 
         assertTrue(bicycleExtension.isVetoed());
-        assertTrue(modifyingExtension.isModified());
 
         BeanAttributes<Bicycle> attributesBeforeRegistering = bicycleExtension.getBicycleAttributesBeforeRegistering();
         assertEquals(attributesBeforeRegistering.getScope(), ApplicationScoped.class);
-        assertTrue(typeSetMatches(attributesBeforeRegistering.getStereotypes(), FooStereotype.class));
         assertTrue(typeSetMatches(attributesBeforeRegistering.getTypes(), Object.class, Vehicle.class, Bicycle.class));
-        assertTrue(annotationSetMatches(attributesBeforeRegistering.getQualifiers(), FooQualifier.class, Any.class));
         assertFalse(attributesBeforeRegistering.isAlternative());
 
-        BeanAttributes<Bicycle> attributesBeforeModifying = modifyingExtension.getBicycleAttributesBeforeModifying();
-        assertEquals(attributesBeforeModifying.getScope(), ApplicationScoped.class);
-        assertTrue(typeSetMatches(attributesBeforeModifying.getStereotypes(), FooStereotype.class));
-        assertTrue(typeSetMatches(attributesBeforeModifying.getTypes(), Object.class, Vehicle.class, Bicycle.class));
-        assertTrue(annotationSetMatches(attributesBeforeModifying.getQualifiers(), FooQualifier.class, Any.class));
-        assertFalse(attributesBeforeModifying.isAlternative());
+        assertNull(bicycleExtension.getBicycleAttributesBeforeModifying());
 
         Set<Bean<Bicycle>> beans = getBeans(Bicycle.class, AnyLiteral.INSTANCE);
         assertEquals(beans.size(), 1);
         Bean<Bicycle> bean = beans.iterator().next();
-        assertEquals(bean.getScope(), RequestScoped.class);
-        assertTrue(typeSetMatches(bean.getStereotypes(), BarStereotype.class));
-        assertTrue(typeSetMatches(bean.getTypes(), Object.class, Bicycle.class));
-        assertTrue(annotationSetMatches(bean.getQualifiers(), FooQualifier.class, Any.class));
-        assertTrue(bean.isAlternative());
+        assertEquals(bean.getScope(), ApplicationScoped.class);
+        assertTrue(typeSetMatches(bean.getTypes(), Object.class, Vehicle.class, Bicycle.class));
+        assertFalse(bean.isAlternative());
     }
 }
