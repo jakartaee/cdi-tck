@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.ee.components;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.JAVAEE_COMPONENTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
@@ -42,6 +43,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class JavaEEComponentsTest extends AbstractTest {
 
     @Deployment(testable = false)
