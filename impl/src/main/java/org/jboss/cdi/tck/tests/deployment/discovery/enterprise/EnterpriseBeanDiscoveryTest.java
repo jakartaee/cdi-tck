@@ -76,7 +76,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
     VerifyingExtension extension;
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = BEAN_ARCHIVE, id = "tc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
     public void testExplicitBeanArchiveModeAll(Alpha alpha) {
         assertDiscoveredAndAvailable(alpha, Alpha.class);
     }
@@ -90,7 +90,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
-            @SpecAssertion(section = BEAN_ARCHIVE, id = "ta") })
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
     public void testExplicitBeanArchiveLegacyDescriptor(Charlie charlie) {
         assertDiscoveredAndAvailable(charlie, Charlie.class);
     }
