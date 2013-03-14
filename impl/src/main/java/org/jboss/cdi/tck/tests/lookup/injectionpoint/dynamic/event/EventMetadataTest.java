@@ -129,7 +129,7 @@ public class EventMetadataTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = INJECTION_POINT, id = "bca")
+    @SpecAssertion(section = INJECTION_POINT, id = "bcb")
     public void testInjectionPointGetQualifiers() {
 
         Set<Annotation> lastQualifiers = null;
