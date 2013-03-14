@@ -21,18 +21,17 @@ import javax.enterprise.context.spi.Context;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
 import org.jboss.cdi.tck.spi.EL;
-import org.jboss.cdi.tck.spi.Managers;
 
 /**
  * The configuration of the TCK.
- * 
+ *
  * The TCK may be configured using system properties or placed in a properties file called META-INF/cdi-tck.properties.
- * 
+ *
  * Porting package property names are the FQCN of the SPI class. Other property names (one for each non-porting package SPI
  * configuration option) are specified here. The defaults are also listed here.
- * 
+ *
  * The TCK may also be configured programatically through this interface
- * 
+ *
  * @author Pete Muir
  * @author Martin Kouba
  */
@@ -52,16 +51,9 @@ public interface Configuration {
      */
     public <T extends Context> Contexts<T> getContexts();
 
-    /**
-     * The implementation of {@link Managers} in use.
-     */
-    public Managers getManagers();
-
     public void setBeans(Beans beans);
 
     public <T extends Context> void setContexts(Contexts<T> contexts);
-
-    public void setManagers(Managers managers);
 
     public void setEl(EL el);
 
@@ -73,9 +65,9 @@ public interface Configuration {
     /**
      * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the
      * implementation). Any jars in this directory will be added to the deployed artifact.
-     * 
+     *
      * By default no directory is used.
-     * 
+     *
      * @return path to additional libraries
      */
     public String getLibraryDirectory();
@@ -85,13 +77,13 @@ public interface Configuration {
     /**
      * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - test datasource must be provided.
      * These tests belong to testng group <code>persistence</code>.
-     * 
+     *
      * @return JNDI name of test datasource
      */
     public String getTestDataSource();
 
     /**
-     * 
+     *
      * @param testDatasource
      */
     public void setTestDataSource(String testDatasource);

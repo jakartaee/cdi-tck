@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -28,11 +28,10 @@ import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
 import org.jboss.cdi.tck.spi.EL;
-import org.jboss.cdi.tck.spi.Managers;
 
 /**
  * CDI TCK configuration builder.
- * 
+ *
  * Mostly based on jboss-test-harness code from <code>org.jboss.testharness.impl.PropertiesBasedConfigurationBuilder</code> and
  * <code>org.jboss.testharness.properties.PropertiesManager</code>.
  */
@@ -43,7 +42,7 @@ public class PropertiesBasedConfigurationBuilder {
     private final Configuration configuration;
 
     /**
-     * 
+     *
      */
     public PropertiesBasedConfigurationBuilder() {
         configuration = new ConfigurationImpl();
@@ -64,7 +63,6 @@ public class PropertiesBasedConfigurationBuilder {
     public PropertiesBasedConfigurationBuilder init(boolean deploymentPhase) {
 
         configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, !deploymentPhase));
-        configuration.setManagers(getInstanceValue(Managers.PROPERTY_NAME, Managers.class, !deploymentPhase));
         configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, !deploymentPhase));
         configuration.setContexts(getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
 
@@ -77,9 +75,9 @@ public class PropertiesBasedConfigurationBuilder {
 
     /**
      * Get a list of possible values for a given key.
-     * 
+     *
      * First, System properties are tried, followed by the specified resource bundle (first in classpath only).
-     * 
+     *
      * @param key The key to search for
      * @return A list of possible values. An empty list is returned if there are no matches.
      */
@@ -91,7 +89,7 @@ public class PropertiesBasedConfigurationBuilder {
     }
 
     /**
-     * 
+     *
      * @param propertyName
      * @param defaultValue
      * @param required
@@ -115,7 +113,7 @@ public class PropertiesBasedConfigurationBuilder {
 
     /**
      * Adds matches from system properties
-     * 
+     *
      * @param key The key to match
      * @param values The currently found values
      */
@@ -125,7 +123,7 @@ public class PropertiesBasedConfigurationBuilder {
 
     /**
      * Adds matches from detected resource bundles
-     * 
+     *
      * @param key The key to match
      * @param values The currently found values
      */
@@ -157,7 +155,7 @@ public class PropertiesBasedConfigurationBuilder {
 
     /**
      * Add the property to the set of properties only if it hasn't already been added
-     * 
+     *
      * @param key The key searched for
      * @param value The value of the property
      * @param values The currently found values
@@ -169,7 +167,7 @@ public class PropertiesBasedConfigurationBuilder {
     }
 
     /**
-     * 
+     *
      * @param name
      * @return
      * @throws IOException
@@ -184,7 +182,7 @@ public class PropertiesBasedConfigurationBuilder {
     }
 
     /**
-     * 
+     *
      * @param <T>
      * @param propertyName
      * @param expectedType
@@ -209,7 +207,7 @@ public class PropertiesBasedConfigurationBuilder {
     }
 
     /**
-     * 
+     *
      * @param <T>
      * @param propertyName
      * @param expectedType
