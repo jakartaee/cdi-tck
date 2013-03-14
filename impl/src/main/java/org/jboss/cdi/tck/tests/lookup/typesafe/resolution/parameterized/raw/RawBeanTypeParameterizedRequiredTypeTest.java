@@ -35,9 +35,12 @@ import org.testng.annotations.Test;
  */
 @SuppressWarnings("serial")
 @SpecVersion(spec = "cdi", version = "20091101")
-public class RawBeanTypeParameterizedRequiredTypeTest<T> extends AbstractTest {
+public class RawBeanTypeParameterizedRequiredTypeTest<T, X extends Number> extends AbstractTest {
 
     private final TypeLiteral<Foo<T>> FOO_UNBOUNDED_TYPE_VARIABLE_LITERAL = new TypeLiteral<Foo<T>>() {
+    };
+
+    private final TypeLiteral<Foo<X>> FOO_BOUNDED_TYPE_VARIABLE_LITERAL = new TypeLiteral<Foo<X>>() {
     };
 
     private final TypeLiteral<Foo<Object>> FOO_OBJECT_LITERAL = new TypeLiteral<Foo<Object>>() {
@@ -47,6 +50,12 @@ public class RawBeanTypeParameterizedRequiredTypeTest<T> extends AbstractTest {
     };
 
     private final TypeLiteral<Bar<String, T>> BAR_STRING_UNBOUNDED_TYPE_VARIABLE_LITERAL = new TypeLiteral<Bar<String, T>>() {
+    };
+
+    private final TypeLiteral<Bar<String, X>> BAR_STRING_BOUNDED_TYPE_VARIABLE_LITERAL = new TypeLiteral<Bar<String, X>>() {
+    };
+
+    private final TypeLiteral<Bar<Object, X>> BAR_OBJECT_BOUNDED_TYPE_VARIABLE_LITERAL = new TypeLiteral<Bar<Object, X>>() {
     };
 
     private final TypeLiteral<Bar<Object, Integer>> BAR_OBJECT_STRING_LITERAL = new TypeLiteral<Bar<Object, Integer>>() {
@@ -64,7 +73,10 @@ public class RawBeanTypeParameterizedRequiredTypeTest<T> extends AbstractTest {
     @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "g")
     public void testNotAssignableTypeParams() {
         assertEquals(getBeans(FOO_INTEGER_LITERAL).size(), 0);
+        assertEquals(getBeans(FOO_BOUNDED_TYPE_VARIABLE_LITERAL).size(), 0);
         assertEquals(getBeans(BAR_STRING_UNBOUNDED_TYPE_VARIABLE_LITERAL).size(), 0);
+        assertEquals(getBeans(BAR_STRING_BOUNDED_TYPE_VARIABLE_LITERAL).size(), 0);
+        assertEquals(getBeans(BAR_OBJECT_BOUNDED_TYPE_VARIABLE_LITERAL).size(), 0);
         assertEquals(getBeans(BAR_OBJECT_STRING_LITERAL).size(), 0);
     }
 
