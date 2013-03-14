@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -45,17 +45,17 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProcessInjectionPointFiredTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ProcessInjectionPointFiredTest.class)
+                .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
                 .withExtension(VerifyingExtension.class).build();
     }
 
@@ -63,7 +63,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     private VerifyingExtension extension;
 
     @SuppressWarnings("unchecked")
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testFieldInjectionPoint() {
         InjectionPoint ip = extension.getAlpha();
@@ -79,7 +79,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testConstructorInjectionPoint() {
         InjectionPoint ip = extension.getBravo();
@@ -95,7 +95,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testInitializerInjectionPoint() {
         InjectionPoint ip = extension.getCharlie();
@@ -111,7 +111,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testProducerMethodInjectionPoint1() {
         InjectionPoint ip = extension.getProducerAlpha();
@@ -127,7 +127,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testProducerMethodInjectionPoint2() {
         InjectionPoint ip = extension.getProducerBravo();
@@ -141,6 +141,22 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
         assertFalse(ip.isDelegate());
         assertFalse(ip.isTransient());
     }
+
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = PIP, id = "a") })
+    public void testJavaEEComponentInjectionPoint() {
+        InjectionPoint servletIp = extension.getServletCharlie();
+        assertNotNull(servletIp);
+        verifyType(servletIp, Charlie.class);
+        InjectionPoint filterIp = extension.getFilterCharlie();
+        assertNotNull(filterIp);
+        verifyType(filterIp, Charlie.class);
+        InjectionPoint listenerIp = extension.getListenerCharlie();
+        assertNotNull(listenerIp);
+        verifyType(listenerIp, Charlie.class);
+        assertEquals(extension.getJsfManagedBeanCharlies().size(), 2);
+    }
+
 
     private static void verifyType(InjectionPoint ip, Class<?> rawType, Class<?>... typeParameters) {
         assertEquals(getRawType(ip.getType()), rawType);

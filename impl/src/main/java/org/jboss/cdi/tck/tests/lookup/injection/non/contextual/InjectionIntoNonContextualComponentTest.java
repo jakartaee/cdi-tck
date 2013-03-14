@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -37,25 +37,22 @@ import org.testng.annotations.Test;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InjectionIntoNonContextualComponentTest extends AbstractTest {
 
     @ArquillianResource
     private URL contextPath;
 
-    @SuppressWarnings("unchecked")
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(InjectionIntoNonContextualComponentTest.class)
                 .withWebXml("web2.xml")
-                .withExtensions(ProcessInjectionTargetObserver.class, ProcessAnnotatedTypeObserver.class)
                 .withWebResource("ManagedBeanTestPage.jsp", "ManagedBeanTestPage.jsp")
                 .withWebResource("TagPage.jsp", "TagPage.jsp").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
                 .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld").build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ef"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ae"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bn"), @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoServlet() throws Exception {
@@ -64,7 +61,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         webClient.getPage(contextPath + "Test/Servlet?test=injection");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "af"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bm"),
             @SpecAssertion(section = INITIALIZER_METHODS, id = "b") })
     public void testServletInitializerMethodCalled() throws Exception {
@@ -73,7 +70,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         webClient.getPage(contextPath + "Test/Servlet?test=initializer");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "eg"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ag"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bq"), @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoFilter() throws Exception {
@@ -82,7 +79,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         webClient.getPage(contextPath + "TestFilter?test=injection");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ah"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bp"),
             @SpecAssertion(section = INITIALIZER_METHODS, id = "b") })
     public void testFilterInitializerMethodCalled() throws Exception {
@@ -91,7 +88,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         webClient.getPage(contextPath + "TestFilter?test=initializer");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ea"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ai"),
             @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoServletListener() throws Exception {
@@ -100,7 +97,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         webClient.getPage(contextPath + "Test/ServletListener?test=injection");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "aj"), @SpecAssertion(section = INITIALIZER_METHODS, id = "b") })
     public void testServletListenerInitializerMethodCalled() throws Exception {
         WebClient webClient = new WebClient();
@@ -108,7 +105,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         webClient.getPage(contextPath + "Test/ServletListener?test=initializer");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "eb"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "am"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "an"), @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoTagHandler() throws Exception {
@@ -120,7 +117,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         assert response.getContentAsString().contains(TestTagHandler.INITIALIZER_SUCCESS);
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ec"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "as"),
             @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoTagLibraryListener() throws Exception {
@@ -129,7 +126,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         webClient.getPage(contextPath + "Test/TagLibraryListener?test=injection");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "at"), @SpecAssertion(section = INITIALIZER_METHODS, id = "b") })
     public void testTagLibraryListenerInitializerMethodCalled() throws Exception {
         WebClient webClient = new WebClient();
@@ -137,7 +134,7 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         webClient.getPage(contextPath + "Test/TagLibraryListener?test=initializer");
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "d"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "au"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "av"), @SpecAssertion(section = INJECTED_FIELDS, id = "b") })
     public void testInjectionIntoJSFManagedBean() throws Exception {

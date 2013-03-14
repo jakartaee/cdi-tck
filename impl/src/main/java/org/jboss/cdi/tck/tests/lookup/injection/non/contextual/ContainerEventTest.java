@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
-import static org.jboss.cdi.tck.cdi.Sections.PIT;
 
 import java.util.EventListener;
 
@@ -42,129 +41,67 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * This test verifies that ProcessAnnotatedType and ProcessInjectionTarget events are fired for various Java EE components and
+ * This test verifies that ProcessAnnotatedType event is fired for various Java EE components and
  * tests the AnnotatedType implementation.
- * 
+ *
  * It's placed in this package because it works with the same Java EE components as
  * {@link InjectionIntoNonContextualComponentTest} does.
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ContainerEventTest extends AbstractTest {
 
-    @SuppressWarnings("unchecked")
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ContainerEventTest.class).withWebXml("web.xml")
-                .withExtensions(ProcessInjectionTargetObserver.class, ProcessAnnotatedTypeObserver.class)
+                .withExtension(ProcessAnnotatedTypeObserver.class)
                 .withWebResource("ManagedBeanTestPage.jsp", "ManagedBeanTestPage.jsp")
                 .withWebResource("TagPage.jsp", "TagPage.jsp").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
                 .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld").build();
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aac"), @SpecAssertion(section = PIT, id = "abc"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "de") })
-    public void testProcessInjectionTargetEventFiredForServletListener() {
-        assert ProcessInjectionTargetObserver.getListenerEvent() != null;
-        validateServletListenerAnnotatedType(ProcessInjectionTargetObserver.getListenerEvent().getAnnotatedType());
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aad"), @SpecAssertion(section = PIT, id = "abd"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "df") })
-    public void testProcessInjectionTargetEventFiredForTagHandler() {
-        assert ProcessInjectionTargetObserver.getTagHandlerEvent() != null;
-        validateTagHandlerAnnotatedType(ProcessInjectionTargetObserver.getTagHandlerEvent().getAnnotatedType());
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aae"), @SpecAssertion(section = PIT, id = "abe"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "dg") })
-    public void testProcessInjectionTargetEventFiredForTagLibraryListener() {
-        assert ProcessInjectionTargetObserver.getTagLibraryListenerEvent() != null;
-        validateTagLibraryListenerAnnotatedType(ProcessInjectionTargetObserver.getTagLibraryListenerEvent().getAnnotatedType());
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aah"), @SpecAssertion(section = PIT, id = "abh"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "dj") })
-    public void testProcessInjectionTargetEventFiredForServlet() {
-        assert ProcessInjectionTargetObserver.getServletEvent() != null;
-        validateServletAnnotatedType(ProcessInjectionTargetObserver.getServletEvent().getAnnotatedType());
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aai"), @SpecAssertion(section = PIT, id = "abi"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "dk") })
-    public void testProcessInjectionTargetEventFiredForFilter() {
-        assert ProcessInjectionTargetObserver.getFilterEvent() != null;
-        validateFilterAnnotatedType(ProcessInjectionTargetObserver.getFilterEvent().getAnnotatedType());
-    }
-
-    @Test
-    @SpecAssertion(section = BEAN_DISCOVERY, id = "dd")
-    public void testProcessInjectionTargetEventFiredForJsfManagedBean() {
-        assert ProcessInjectionTargetObserver.getJsfManagedBeanEvent() != null;
-        validateJsfManagedBeanAnnotatedType(ProcessInjectionTargetObserver.getJsfManagedBeanEvent().getAnnotatedType());
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aas"), @SpecAssertion(section = PIT, id = "aao"),
-            @SpecAssertion(section = PIT, id = "aan") })
-    public void testTypeOfProcessInjectionTargetParameter() {
-        assert !ProcessInjectionTargetObserver.isStringObserved();
-        assert ProcessInjectionTargetObserver.isTagHandlerSubTypeObserved();
-        assert !ProcessInjectionTargetObserver.isTagHandlerSuperTypeObserved();
-        assert !ProcessInjectionTargetObserver.isServletSuperTypeObserved();
-        assert ProcessInjectionTargetObserver.isServletSubTypeObserved();
-        assert !ProcessInjectionTargetObserver.isListenerSuperTypeObserved();
-    }
-
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "be")
     public void testProcessAnnotatedTypeEventFiredForServletListener() {
         assert ProcessAnnotatedTypeObserver.getListenerEvent() != null;
         validateServletListenerAnnotatedType(ProcessAnnotatedTypeObserver.getListenerEvent().getAnnotatedType());
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bf")
     public void testProcessAnnotatedTypeEventFiredForTagHandler() {
         assert ProcessAnnotatedTypeObserver.getTagHandlerEvent() != null;
         validateTagHandlerAnnotatedType(ProcessAnnotatedTypeObserver.getTagHandlerEvent().getAnnotatedType());
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bg")
     public void testProcessAnnotatedTypeEventFiredForTagLibraryListener() {
         assert ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent() != null;
         validateTagLibraryListenerAnnotatedType(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent().getAnnotatedType());
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bj")
     public void testProcessAnnotatedTypeEventFiredForServlet() {
         assert ProcessAnnotatedTypeObserver.getServletEvent() != null;
         validateServletAnnotatedType(ProcessAnnotatedTypeObserver.getServletEvent().getAnnotatedType());
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bk")
     public void testProcessAnnotatedTypeEventFiredForFilter() {
         assert ProcessAnnotatedTypeObserver.getFilterEvent() != null;
         validateFilterAnnotatedType(ProcessAnnotatedTypeObserver.getFilterEvent().getAnnotatedType());
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bd")
     public void testProcessAnnotatedTypeEventFiredForJsfManagedBean() {
         assert ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent() != null;
