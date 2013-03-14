@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -110,13 +110,13 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     @SuppressWarnings("serial")
     @Test
     @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "f")
-    public <T1 extends Exception, T2 extends Exception, T3, T4> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
+    public <T1 extends Exception, T2 extends Exception, T3> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
         Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>() {
         });
         assert beans.size() == 1;
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
 
-        Set<Bean<Dao<T3, T4>>> daoBeans = getBeans(new TypeLiteral<Dao<T3, T4>>() {
+        Set<Bean<Dao<T2, T3>>> daoBeans = getBeans(new TypeLiteral<Dao<T2, T3>>() {
         });
         assertEquals(daoBeans.size(), 1);
         assertTrue(rawTypeSetMatches(daoBeans.iterator().next().getTypes(), Dao.class, Object.class));
