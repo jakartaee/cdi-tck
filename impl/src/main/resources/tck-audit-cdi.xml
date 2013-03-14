@@ -3066,7 +3066,7 @@
             <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getQualifiers()| method returns required qualifiers of the injection point including any additional required qualifers (as defined by |Instance.select()|).</text>
         </assertion>
 
-        <assertion id="bca">
+        <assertion id="bcb">
             <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getQualifiers()| method returns required qualifiers of the injection point including any additional required qualifers (as defined by |Event.select()|).</text>
         </assertion>
 

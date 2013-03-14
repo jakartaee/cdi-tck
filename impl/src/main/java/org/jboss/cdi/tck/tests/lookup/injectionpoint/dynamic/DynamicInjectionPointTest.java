@@ -30,6 +30,7 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.Set;
 
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
@@ -122,11 +123,13 @@ public class DynamicInjectionPointTest extends AbstractTest {
 
     @SuppressWarnings("rawtypes")
     @Test
+    @SpecAssertion(section=INJECTION_POINT, id="dab")
     public void testInjectionPointGetAnnotated() {
 
         Annotated fooFieldAnnotated = bar.getFoo().getInjectionPoint().getAnnotated();
         assertTrue(fooFieldAnnotated instanceof AnnotatedField);
         assertEquals(((AnnotatedField) fooFieldAnnotated).getJavaMember().getName(), "fooInstance");
+        assertTrue(fooFieldAnnotated.isAnnotationPresent(Any.class));
 
         Annotated fooInitializerAnnnotated = bar.getInitializerFoo().getInjectionPoint().getAnnotated();
         assertTrue(fooInitializerAnnnotated instanceof AnnotatedParameter);
