@@ -54,7 +54,7 @@ public class WithAnnotationsTest extends AbstractTest {
     @Inject
     ProcessAnnotatedTypeObserver processAnnotatedTypeObserver;
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "fb"),
             @SpecAssertion(section = PAT, id = "fc"), @SpecAssertion(section = PAT, id = "fd"),
             @SpecAssertion(section = PAT, id = "fe"), @SpecAssertion(section = PAT, id = "ff") })
@@ -76,7 +76,7 @@ public class WithAnnotationsTest extends AbstractTest {
                 Turkey.class, OcellatedTurkey.class, Sparrow.class, Jack.class);
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "fc"),
             @SpecAssertion(section = PAT, id = "g") })
     public void testDeliveryMetaAnnotation() {
