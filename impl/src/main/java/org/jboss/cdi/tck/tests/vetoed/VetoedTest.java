@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.cdi.Sections.VETO;
 import static org.jboss.cdi.tck.cdi.Sections.WHAT_CLASSES_ARE_BEANS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
@@ -43,7 +44,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of the Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -57,7 +58,7 @@ public class VetoedTest extends AbstractTest {
                 .withTestClass(VetoedTest.class)
                 .withClasses(Animal.class, Elephant.class, Shark.class, Predator.class, MissileBinding.class,
                         DummyScoped.class, AnimalStereotype.class, Tiger.class, ModifyingExtension.class,
-                        VerifyingExtension.class).withPackage(Piranha.class.getPackage())
+                        VerifyingExtension.class, Shark.class).withPackage(Piranha.class.getPackage())
                 .withExtensions(ModifyingExtension.class, VerifyingExtension.class).withLibrary(Gecko.class, Reptile.class)
                 .build();
     }
@@ -83,22 +84,11 @@ public class VetoedTest extends AbstractTest {
         assertFalse(verifyingExtension.getClasses().contains(Fish.class));
         assertFalse(verifyingExtension.getClasses().contains(FishType.class));
         assertFalse(verifyingExtension.getClasses().contains(Fishy.class));
+        assertTrue(verifyingExtension.getClasses().contains(Shark.class));
         assertEquals(getCurrentManager().getBeans(Piranha.class, AnyLiteral.INSTANCE).size(), 0);
-        assertEquals(getCurrentManager().getBeans(Shark.class).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Shark.class, AnyLiteral.INSTANCE).size(), 1);
         assertEquals(getCurrentManager().getBeans(Shark.class, new AnnotationLiteral<Fishy>() {
-        }).size(), 0);
-
-        // CDI-282
-        // assertFalse(verifyingExtension.getClasses().contains(Predator.class));
-        // assertFalse(verifyingExtension.getClasses().contains(MissileBinding.class));
-        // assertFalse(verifyingExtension.getClasses().contains(AnimalStereotype.class));
-        // assertFalse(verifyingExtension.getClasses().contains(DummyScoped.class));
-        // Bean<Tiger> tigerBean = getUniqueBean(Tiger.class);
-        // assertTrue(tigerBean.getStereotypes().isEmpty());
-        // assertEquals(
-        // getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
-        // new AnnotationLiteral<MissileBinding>() {
-        // }).size(), 0);
+        }).size(), 1);
     }
 
     @Test
