@@ -15,11 +15,16 @@
       <filter-name>OutermostFilter</filter-name>
       <filter-class>org.jboss.cdi.tck.tests.context.conversation.OutermostFilter</filter-class>
     </filter>
-    
-	<filter-mapping>
-		<filter-name>OutermostFilter</filter-name>
-		<url-pattern>*.jsf</url-pattern>
-	</filter-mapping>
+
+    <filter-mapping>
+        <filter-name>OutermostFilter</filter-name>
+        <url-pattern>*.jsf</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>CDI Conversation Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
    <servlet-mapping>
       <servlet-name>Faces Servlet</servlet-name>
