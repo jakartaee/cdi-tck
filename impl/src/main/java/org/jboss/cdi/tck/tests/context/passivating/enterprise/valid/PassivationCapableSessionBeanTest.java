@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.enterprise.valid;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -35,6 +36,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class PassivationCapableSessionBeanTest extends AbstractTest {
 
     @Deployment
