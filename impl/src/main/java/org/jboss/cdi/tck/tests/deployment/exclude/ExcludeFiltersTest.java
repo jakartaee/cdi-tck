@@ -33,6 +33,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.TestSystemProperty;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.BeanDiscoveryMode;
 import org.jboss.cdi.tck.tests.deployment.exclude.mustache.Mustache;
 import org.jboss.cdi.tck.tests.deployment.exclude.mustache.beard.Beard;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -56,7 +57,7 @@ public class ExcludeFiltersTest extends AbstractTest {
                 .withPackage(Mustache.class.getPackage())
                 .withPackage(Beard.class.getPackage())
                 .withBeansXml(
-                        newBeans11Descriptor().excludes(
+                        newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ALL).excludes(
                                 newExclude(Stubble.class.getName()),
                                 newExclude(Mustache.class.getPackage().getName() + ".*"),
                                 newExclude(Mustache.class.getPackage().getName() + ".**"),
