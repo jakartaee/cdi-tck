@@ -89,10 +89,8 @@ public class SimpleAsyncListener implements AsyncListener {
     public void onError(AsyncEvent event) throws IOException {
         logger.log("onError");
         onError = System.currentTimeMillis();
-        if (checkRequestContextAvailability(event)) {
-            event.getAsyncContext().complete();
-            // event.getAsyncContext().dispatch("/bar.jsp");
-        }
+        writeInfo(event.getAsyncContext().getResponse());
+        event.getAsyncContext().complete();
     }
 
     /*

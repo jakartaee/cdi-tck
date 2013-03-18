@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
@@ -58,7 +58,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     public void testApplicationContextActiveOnComplete() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage page = webClient.getPage(getPage(AsyncServlet.TEST_COMPLETE));
+        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
         assertTrue(page.getContent().contains("onTimeout: null"));
         assertTrue(page.getContent().contains("onError: null"));
         assertFalse(page.getContent().contains("onComplete: null"));
@@ -69,7 +69,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     public void testApplicationContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage page = webClient.getPage(getPage(AsyncServlet.TEST_TIMEOUT));
+        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
         assertFalse(page.getContent().contains("onTimeout: null"));
     }
 
@@ -78,7 +78,8 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     public void testApplicationContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        webClient.getPage(getPage(AsyncServlet.TEST_ERROR));
+        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
+        assertFalse(page.getContent().contains("onError: null"));
     }
 
     @Test
@@ -86,12 +87,12 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     public void testApplicationContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage page = webClient.getPage(getPage(AsyncServlet.TEST_LOOP));
+        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_LOOP));
         assertFalse(page.getContent().contains("onStartAsync: null"));
         assertFalse(page.getContent().contains("onComplete: null"));
     }
 
-    private String getPage(String test) {
+    private String getPath(String test) {
         return contextPath + "AsyncServlet?test=" + test;
     }
 }

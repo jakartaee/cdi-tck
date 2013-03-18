@@ -63,7 +63,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
 
-        TextPage page01 = webClient.getPage(getPage(AsyncServlet.TEST_COMPLETE));
+        TextPage page01 = webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
         assertTrue(page01.getContent().contains("onTimeout: null"));
         assertTrue(page01.getContent().contains("onError: null"));
         assertFalse(page01.getContent().contains("onComplete: null"));
@@ -77,7 +77,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     public void testSessionContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage page = webClient.getPage(getPage(AsyncServlet.TEST_TIMEOUT));
+        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
         assertFalse(page.getContent().contains("onTimeout: null"));
     }
 
@@ -86,7 +86,8 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     public void testSessionContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        webClient.getPage(getPage(AsyncServlet.TEST_ERROR));
+        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
+        assertFalse(page.getContent().contains("onError: null"));
     }
 
     @Test(groups = INTEGRATION)
@@ -94,12 +95,12 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     public void testSessionContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage page = webClient.getPage(getPage(AsyncServlet.TEST_LOOP));
+        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_LOOP));
         assertFalse(page.getContent().contains("onStartAsync: null"));
         assertFalse(page.getContent().contains("onComplete: null"));
     }
 
-    private String getPage(String test) {
+    private String getPath(String test) {
         return contextPath + "AsyncServlet?test=" + test;
     }
 

@@ -51,7 +51,7 @@ public class SimpleAsyncListener implements AsyncListener {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see javax.servlet.AsyncListener#onComplete(javax.servlet.AsyncEvent)
      */
     @Override
@@ -68,7 +68,7 @@ public class SimpleAsyncListener implements AsyncListener {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see javax.servlet.AsyncListener#onTimeout(javax.servlet.AsyncEvent)
      */
     @Override
@@ -82,22 +82,21 @@ public class SimpleAsyncListener implements AsyncListener {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see javax.servlet.AsyncListener#onError(javax.servlet.AsyncEvent)
      */
     @Override
     public void onError(AsyncEvent event) throws IOException {
         logger.log("onError");
         onError = System.currentTimeMillis();
-        if (checkApplicationContextAvailability(event)) {
-            event.getAsyncContext().complete();
-            // event.getAsyncContext().dispatch("/bar.jsp");
-        }
+        checkApplicationContextAvailability(event);
+        writeInfo(event.getAsyncContext().getResponse());
+        event.getAsyncContext().complete();
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see javax.servlet.AsyncListener#onStartAsync(javax.servlet.AsyncEvent)
      */
     @Override
