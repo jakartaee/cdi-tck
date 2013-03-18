@@ -89,7 +89,7 @@
         <jboss.jms.api.version>1.0.0.Final</jboss.jms.api.version>
         <jboss.connector.api.version>1.0.1.Final</jboss.connector.api.version>
         <jboss.annotations.api.version>1.0.0.Alpha1</jboss.annotations.api.version>
-        <jboss.interceptors.api.version>1.0.0.Alpha1</jboss.interceptors.api.version>
+        <jboss.interceptors.api.version>1.0.0.Alpha2</jboss.interceptors.api.version>
         <!-- Other EE APIs -->
         <atinject.api.version>1</atinject.api.version>
         <jpa.api.version>1.0</jpa.api.version>
