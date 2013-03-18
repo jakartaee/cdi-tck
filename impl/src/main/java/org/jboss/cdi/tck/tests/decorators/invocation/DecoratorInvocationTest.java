@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -54,9 +54,9 @@ public class DecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "aa"), @SpecAssertion(section = DECORATOR_INVOCATION, id = "b"),
-            @SpecAssertion(section = DECORATED_TYPES, id = "d"), @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "f"),
-            @SpecAssertion(section = BIZ_METHOD, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "aa"),
+            @SpecAssertion(section = DECORATOR_INVOCATION, id = "b"), @SpecAssertion(section = DECORATED_TYPES, id = "d"),
+            @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "f"), @SpecAssertion(section = BIZ_METHOD, id = "b") })
     public void testDecoratorInvocation() {
         TimestampLogger.reset();
         MockLogger.reset();
@@ -67,8 +67,8 @@ public class DecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "d"), @SpecAssertion(section = DECORATOR_INVOCATION, id = "e"),
-            @SpecAssertion(section = DECORATOR_INVOCATION, id = "f"),
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "d"),
+            @SpecAssertion(section = DECORATOR_INVOCATION, id = "e"), @SpecAssertion(section = DECORATOR_INVOCATION, id = "f"),
             // @SpecAssertion(section="8.4", id="a"),
             @SpecAssertion(section = DECORATED_TYPES, id = "d"), @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "f"),
             @SpecAssertion(section = BIZ_METHOD, id = "kb") })
@@ -85,17 +85,17 @@ public class DecoratorInvocationTest extends AbstractTest {
         FooImpl.reset();
     }
 
-    @Test
-    @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "g")
-    // WELD-430
-    public void testDecoratorInvokesDelegateMethodOutsideOfBusinessMethodInterception() {
-        assert getInstanceByType(Bar.class).foo();
-        try {
-            BarDecorator.invokeFooOutsideOfBusinessMethodInterception();
-        } catch (Throwable t) {
-            assert isThrowablePresent(IllegalStateException.class, t);
-            return;
-        }
-        assert false;
-    }
+    // See CDITCK-329 and WELD-430
+    // @Test
+    // @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "g")
+    // public void testDecoratorInvokesDelegateMethodOutsideOfBusinessMethodInterception() {
+    // assert getInstanceByType(Bar.class).foo();
+    // try {
+    // BarDecorator.invokeFooOutsideOfBusinessMethodInterception();
+    // } catch (Throwable t) {
+    // assert isThrowablePresent(IllegalStateException.class, t);
+    // return;
+    // }
+    // assert false;
+    // }
 }
