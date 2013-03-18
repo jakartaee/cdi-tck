@@ -23,6 +23,8 @@ public class ProducedFoo implements Foo {
     public ProducedFoo(Integer value) {
         if(value == null) {
             this.value = 0;
+        } else {
+            this.value = value;
         }
     }
 
