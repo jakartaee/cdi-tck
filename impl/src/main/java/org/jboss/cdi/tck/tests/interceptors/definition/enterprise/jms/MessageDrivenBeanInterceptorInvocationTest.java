@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -39,12 +39,11 @@ import org.testng.annotations.Test;
 /**
  * Test that invocations of message listener methods of message-driven beans during message delivery are business method
  * invocations.
- * 
+ *
  * Note that basic JMS configuration is required for this test.
- * 
+ *
  * @author Martin Kouba
  */
-@Test(groups = { JAVAEE_FULL, JMS })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class MessageDrivenBeanInterceptorInvocationTest extends AbstractTest {
 
@@ -60,7 +59,7 @@ public class MessageDrivenBeanInterceptorInvocationTest extends AbstractTest {
     @Inject
     SimpleMessageProducer producer;
 
-    @Test
+    @Test(groups = { JAVAEE_FULL, JMS })
     @SpecAssertions(@SpecAssertion(section = BIZ_METHOD, id = "la"))
     public void testMessageDrivenBeanMethodIntercepted() throws Exception {
 

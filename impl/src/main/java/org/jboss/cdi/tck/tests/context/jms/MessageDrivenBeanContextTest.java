@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -41,12 +41,11 @@ import org.testng.annotations.Test;
 
 /**
  * Test that buil-in request and application scopes are active during message delivery to EJB message-driven bean.
- * 
+ *
  * Note that basic JMS configuration is required for this test.
- * 
+ *
  * @author Martin Kouba
  */
-@Test(groups = { JAVAEE_FULL, JMS })
 @SpecVersion(spec = "cdi", version = "20091101")
 public class MessageDrivenBeanContextTest extends AbstractTest {
 
@@ -64,7 +63,7 @@ public class MessageDrivenBeanContextTest extends AbstractTest {
     @Inject
     LogStore store;
 
-    @Test
+    @Test(groups = { JAVAEE_FULL, JMS })
     @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "gd"), @SpecAssertion(section = REQUEST_CONTEXT, id = "hd"),
             @SpecAssertion(section = APPLICATION_CONTEXT, id = "dd") })
     public void testRequestScopeActiveDuringMessageDelivery() throws Exception {

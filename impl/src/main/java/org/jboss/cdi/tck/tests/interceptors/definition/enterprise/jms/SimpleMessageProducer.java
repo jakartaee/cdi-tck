@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -28,14 +28,14 @@ import javax.jms.Topic;
 
 public class SimpleMessageProducer {
 
-    @Resource(mappedName = "java:/ConnectionFactory")
-    private static ConnectionFactory connectionFactory;
+    @Resource(name = "java:/ConnectionFactory")
+    private ConnectionFactory connectionFactory;
 
-    @Resource(mappedName = "java:/queue/test")
-    private static Queue queue;
+    @Resource(name = "java:/queue/test")
+    private Queue queue;
 
-    @Resource(mappedName = "java:/topic/test")
-    private static Topic topic;
+    @Resource(name = "java:/topic/test")
+    private Topic topic;
 
     public void sendQueueMessage() {
 
