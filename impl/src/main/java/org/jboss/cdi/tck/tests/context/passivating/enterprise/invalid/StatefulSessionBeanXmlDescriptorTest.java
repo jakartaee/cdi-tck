@@ -14,12 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.passivating.enterprise.valid;
+package org.jboss.cdi.tck.tests.context.passivating.enterprise.invalid;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE;
 
+import javax.enterprise.inject.spi.DeploymentException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -30,26 +33,29 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Verifies that a deployment which contains a passivation capable SFSB is valid.
  *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-@Test(groups = INTEGRATION)
-public class PassivationCapableSessionBeanTest extends AbstractTest {
+public class StatefulSessionBeanXmlDescriptorTest extends AbstractTest {
 
+    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(PassivationCapableSessionBeanTest.class)
+                .withTestClass(StatefulSessionBeanXmlDescriptorTest.class)
+                .withClasses(Digital.class, DigitalInterceptor.class, Elephant.class, ElephantLocal.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(DigitalInterceptor.class.getName()).up()).build();
+                                .clazz(DigitalInterceptor.class.getName()).up())
+                .build()
+                .addAsWebInfResource(
+                        StatefulSessionBeanXmlDescriptorTest.class.getPackage().getName().replace('.', '/') + "/ejb-jar.xml");
     }
 
-    @Test
-    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "aa")
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ab")
     public void testDeployment() {
         // only verify deployment
     }

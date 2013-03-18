@@ -3797,9 +3797,6 @@
         <group>
             <text>As defined by the EJB specification, all stateful session beans are passivation capable if interceptors and decorators of the bean are passivation capable, and the stateful session bean does not have the |passivationCapable| flag set to false.</text>
             <assertion id="aa">
-                <text>Test a passivation capable stateful session bean.</text>
-            </assertion>
-            <assertion id="ab">
                 <text>Test a passivation capable stateful session bean with |passivationCapable| flag set to true.</text>
             </assertion>
             <assertion id="ab">
@@ -3807,8 +3804,9 @@
             </assertion>
         </group>
 
-        <assertion id="i">
+        <assertion id="i" testable="false">
             <text>As defined by the EJB specification, stateless and singleton session beans are not passivation capable.</text>
+            <note>Not possible to test - a stateless session bean must belong to the @Dependent pseudo-scope, a singleton bean must belong to either the @ApplicationScscope or to the @Dependent pseudo-scope.</note>
         </assertion>
 
         <group>
