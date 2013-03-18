@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 import javax.ejb.Stateful;
 
 @Stateful
-public class Delta implements Ping {
+public class Delta implements DeltaLocal {
 
     @Override
     public void pong() {

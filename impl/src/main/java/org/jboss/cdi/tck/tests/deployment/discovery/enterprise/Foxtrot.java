@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 import javax.ejb.Stateful;
 
 @Stateful
-public class Foxtrot implements Ping {
+public class Foxtrot implements FoxtrotLocal {
 
     @Override
     public void pong() {

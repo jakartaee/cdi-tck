@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 import javax.ejb.Stateful;
 
 @Stateful
-public class Charlie implements Ping {
+public class Charlie implements CharlieLocal {
 
     @Override
     public void pong() {

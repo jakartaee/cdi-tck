@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 import javax.ejb.Stateful;
 
 @Stateful
-public class Bravo implements Ping {
+public class Bravo implements BravoLocal {
 
     @Override
     public void pong() {

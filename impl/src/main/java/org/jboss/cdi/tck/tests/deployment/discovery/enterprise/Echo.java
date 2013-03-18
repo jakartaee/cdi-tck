@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 import javax.ejb.Stateful;
 
 @Stateful
-public class Echo implements Ping {
+public class Echo implements EchoLocal {
 
     @Override
     public void pong() {

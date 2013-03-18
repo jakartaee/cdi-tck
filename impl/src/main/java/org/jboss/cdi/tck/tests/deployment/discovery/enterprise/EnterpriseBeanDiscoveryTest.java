@@ -1,3 +1,19 @@
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2013, Red Hat, Inc., and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
@@ -13,13 +29,17 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.BeanDiscoveryMode;
+import org.jboss.cdi.tck.tests.alternative.selection.TestBean;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -32,92 +52,109 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EnterpriseBeanDiscoveryTest extends AbstractTest {
 
+    private static final String ALPHA_JAR = "alpha.jar";
+    private static final String BRAVO_JAR = "bravo.jar";
+    private static final String CHARLIE_JAR = "charlie.jar";
+    private static final String DELTA_JAR = "delta.jar";
+    private static final String ECHO_JAR = "echo.jar";
+    private static final String FOXTROT_JAR = "foxtrot.jar";
+
     @Deployment
     public static EnterpriseArchive createTestArchive() {
 
         // 1.1 version beans.xml with bean-discovery-mode of all
         JavaArchive alpha = ShrinkWrap
-                .create(JavaArchive.class)
-                .addClass(Alpha.class)
+                .create(JavaArchive.class, ALPHA_JAR)
+                .addClasses(Alpha.class, AlphaLocal.class)
                 .addAsManifestResource(
                         new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ALL).exportAsString()),
                         "beans.xml");
         // Empty beans.xml
-        JavaArchive bravo = ShrinkWrap.create(JavaArchive.class).addClass(Bravo.class)
+        JavaArchive bravo = ShrinkWrap.create(JavaArchive.class, BRAVO_JAR).addClasses(Bravo.class, BravoLocal.class)
                 .addAsManifestResource(new StringAsset(""), "beans.xml");
         // No version beans.xml
         JavaArchive charlie = ShrinkWrap
-                .create(JavaArchive.class)
-                .addClass(Charlie.class)
+                .create(JavaArchive.class, CHARLIE_JAR)
+                .addClasses(Charlie.class, CharlieLocal.class)
                 .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml");
         // Session bean and no beans.xml
-        JavaArchive delta = ShrinkWrap.create(JavaArchive.class).addClass(Delta.class);
+        JavaArchive delta = ShrinkWrap.create(JavaArchive.class, DELTA_JAR).addClasses(Delta.class, DeltaLocal.class);
         // Session bean and 1.1 version beans.xml with bean-discovery-mode of annotated
         JavaArchive echo = ShrinkWrap
-                .create(JavaArchive.class)
-                .addClass(Echo.class)
+                .create(JavaArchive.class, ECHO_JAR)
+                .addClasses(Echo.class, EchoLocal.class)
                 .addAsManifestResource(
-                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED).exportAsString()),
-                        "beans.xml");
+                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED)
+                                .exportAsString()), "beans.xml");
         // Session bean and 1.1 version beans.xml with bean-discovery-mode of none
         JavaArchive foxtrot = ShrinkWrap
-                .create(JavaArchive.class)
-                .addClass(Foxtrot.class)
+                .create(JavaArchive.class, FOXTROT_JAR)
+                .addClasses(Foxtrot.class, FoxtrotLocal.class)
                 .addAsManifestResource(
-                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.NONE)
-                                .exportAsString()), "beans.xml");
+                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.NONE).exportAsString()),
+                        "beans.xml");
 
-        return new EnterpriseArchiveBuilder().withTestClass(EnterpriseBeanDiscoveryTest.class).withClasses(VerifyingExtension.class)
-                .withExtension(VerifyingExtension.class).withLibrary(Ping.class)
-                .withLibraries(alpha, bravo, charlie, delta, echo, foxtrot).build();
+        WebArchive webArchive = new WebArchiveBuilder()
+                .withClasses(EnterpriseBeanDiscoveryTest.class, TestBean.class)
+                .notTestArchive()
+                .build()
+                .setManifest(
+                        new StringAsset(Descriptors.create(ManifestDescriptor.class)
+                                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).addToClassPath(ALPHA_JAR)
+                                .addToClassPath(BRAVO_JAR).addToClassPath(CHARLIE_JAR).addToClassPath(DELTA_JAR)
+                                .addToClassPath(ECHO_JAR).addToClassPath(FOXTROT_JAR).exportAsString()));
+
+        return new EnterpriseArchiveBuilder().noDefaultWebModule().withTestClassDefinition(EnterpriseBeanDiscoveryTest.class)
+                .withClasses(VerifyingExtension.class).withExtension(VerifyingExtension.class).withLibrary(Ping.class).build()
+                .addAsModules(webArchive, alpha, bravo, charlie, delta, echo, foxtrot);
     }
 
     @Inject
     VerifyingExtension extension;
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =JAVAEE_FULL)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
-    public void testExplicitBeanArchiveModeAll(Alpha alpha) {
-        assertDiscoveredAndAvailable(alpha, Alpha.class);
+    public void testExplicitBeanArchiveModeAll() {
+        assertDiscoveredAndAvailable(AlphaLocal.class, Alpha.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =JAVAEE_FULL)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bb"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
-    public void testExplicitBeanArchiveEmptyDescriptor(Bravo bravo) {
-        assertDiscoveredAndAvailable(bravo, Bravo.class);
+    public void testExplicitBeanArchiveEmptyDescriptor() {
+        assertDiscoveredAndAvailable(BravoLocal.class, Bravo.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =JAVAEE_FULL)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
-    public void testExplicitBeanArchiveLegacyDescriptor(Charlie charlie) {
-        assertDiscoveredAndAvailable(charlie, Charlie.class);
+    public void testExplicitBeanArchiveLegacyDescriptor() {
+        assertDiscoveredAndAvailable(CharlieLocal.class, Charlie.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
-    public void testImplicitBeanArchiveNoDescriptor(Delta delta) {
-        assertDiscoveredAndAvailable(delta, Delta.class);
+    public void testImplicitBeanArchiveNoDescriptor() {
+        assertDiscoveredAndAvailable(DeltaLocal.class, Delta.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =JAVAEE_FULL)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
-    public void testImplicitBeanArchiveModeAnnotated(Echo echo) {
-        assertDiscoveredAndAvailable(echo, Echo.class);
+    public void testImplicitBeanArchiveModeAnnotated() {
+        assertDiscoveredAndAvailable(EchoLocal.class, Echo.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =JAVAEE_FULL)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "cb"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
-    public void testImplicitBeanArchiveModeNone(Foxtrot foxtrot) {
-        assertDiscoveredAndAvailable(foxtrot, Foxtrot.class);
+    public void testImplicitBeanArchiveModeNone() {
+        assertDiscoveredAndAvailable(FoxtrotLocal.class, Foxtrot.class);
     }
 
-    private <T extends Ping> void assertDiscoveredAndAvailable(T reference, Class<T> clazz) {
-        assertTrue(extension.getObservedAnnotatedTypes().contains(clazz));
-        assertNotNull(reference);
-        reference.pong();
-        getUniqueBean(clazz);
+    private <T extends Ping, B  extends Ping> void assertDiscoveredAndAvailable(Class<T> beanType, Class<B> beanClazz) {
+        T instance = getInstanceByType(beanType);
+        assertNotNull(instance);
+        assertTrue(extension.getObservedAnnotatedTypes().contains(beanClazz));
+        instance.pong();
     }
 
 }

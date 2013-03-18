@@ -16,13 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 
-import javax.ejb.Stateful;
+import javax.ejb.Local;
 
-@Stateful
-public class Alpha implements AlphaLocal {
-
-    @Override
-    public void pong() {
-    }
+@Local
+public interface AlphaLocal extends Ping {
 
 }
