@@ -34,10 +34,10 @@ import org.testng.annotations.Test;
 
 /**
  * Test that bean in web module can inject enabled bean producer method from EJB module.
- * 
+ *
  * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
  * classloading requirements)!
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -62,7 +62,7 @@ public class EnabledProducerMethodInjectionAvailabilityTest extends AbstractTest
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = INTER_MODULE_INJECTION, id = "f") })
     public void testInjection() throws Exception {
-        Assert.assertEquals(bar.ping(), 1);
+        Assert.assertEquals(bar.ping(), 0);
     }
 
 }

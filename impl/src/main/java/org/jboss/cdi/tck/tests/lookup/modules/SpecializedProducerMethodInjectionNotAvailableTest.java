@@ -36,10 +36,10 @@ import org.testng.annotations.Test;
 
 /**
  * Test that bean in web module cannot inject specialized producer methods from EJB module.
- * 
+ *
  * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
  * classloading requirements)!
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -50,8 +50,8 @@ public class SpecializedProducerMethodInjectionNotAvailableTest extends Abstract
 
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
                 .withTestClassDefinition(SpecializedProducerMethodInjectionNotAvailableTest.class)
-                .withClasses(SpecializedFooMethodProducer.class, FooMethodProducer.class, ProducedFoo.class)
-                .withBeanLibrary(Foo.class, Bar.class, Enterprise.class, Standard.class).build();
+                .withClasses(SpecializingFooMethodProducer.class, FooMethodProducer.class, ProducedFoo.class)
+                .withBeanLibrary(Foo.class, Bar.class).build();
 
         enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
                 .withClasses(SpecializedProducerMethodInjectionNotAvailableTest.class, WebBar.class).build());
@@ -67,11 +67,8 @@ public class SpecializedProducerMethodInjectionNotAvailableTest extends Abstract
     public void testManagedBeanInjection() throws Exception {
         assertEquals(bar.ping(), 1);
         Set<Bean<Foo>> beans = getBeans(Foo.class);
-        assert beans.size() == 1;
-        assert beans.iterator().next().getBeanClass().equals(ProducedFoo.class);
-        Foo instance = getInstanceByType(Foo.class);
-        assert instance instanceof ProducedFoo;
-        assert ((ProducedFoo) instance).getName().equals(SpecializedFooMethodProducer.class.getName());
+        assertEquals(beans.size(), 1);
+        assertEquals(beans.iterator().next().getBeanClass(), SpecializingFooMethodProducer.class);
     }
 
 }

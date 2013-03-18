@@ -36,10 +36,10 @@ import org.testng.annotations.Test;
 
 /**
  * Test that bean in web module cannot inject specialized CDI beans from EJB module.
- * 
+ *
  * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
  * classloading requirements)!
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -73,8 +73,8 @@ public class SpecializedBeanInjectionNotAvailableTest extends AbstractTest {
     public void testManagedBeanInjection() throws Exception {
         assertEquals(bar.ping(), 0);
         Set<Bean<PaymentFoo>> beans = getBeans(PaymentFoo.class);
-        assert beans.size() == 1;
-        assert beans.iterator().next().getBeanClass().equals(CashFoo.class);
+        assertEquals(beans.size(), 1);
+        assertEquals(beans.iterator().next().getBeanClass(), CashFoo.class);
     }
 
     @Test(groups = JAVAEE_FULL)
@@ -82,8 +82,8 @@ public class SpecializedBeanInjectionNotAvailableTest extends AbstractTest {
     public void testSessionBeanInjection() throws Exception {
         assertEquals(enterpriseBar.ping(), 0);
         Set<Bean<PaymentEjbFoo>> beans = getBeans(PaymentEjbFoo.class);
-        assert beans.size() == 1;
-        assert beans.iterator().next().getBeanClass().equals(CashEjbFoo.class);
+        assertEquals(beans.size(), 1);
+        assertEquals(beans.iterator().next().getBeanClass(), CashEjbFoo.class);
     }
 
 }

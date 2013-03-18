@@ -2440,7 +2440,7 @@
 
             <assertion id="m" testable="false">
                 <text>Check a specialized producer field is not injectable</text>
-                <note>Specialized producer method is not legal.</note>
+                <note>Specialized producer field is not legal.</note>
             </assertion>
 
             <assertion id="n">
