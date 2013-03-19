@@ -109,6 +109,6 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
     public void testProducerMethodOnSpecializedBeanNotCalled() {
         assertEquals(getBeans(Waste.class).size(), 0);
         // Throw UnsatisfiedResolutionException
-        getInstanceByType(Waste.class);
+        getContextualReference(Waste.class);
     }
 }

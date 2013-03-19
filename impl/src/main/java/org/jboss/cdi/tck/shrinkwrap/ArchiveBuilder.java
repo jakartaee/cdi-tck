@@ -39,8 +39,6 @@ import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.impl.ConfigurationImpl;
-import org.jboss.cdi.tck.impl.MockCreationalContext;
-import org.jboss.cdi.tck.impl.OldSPIBridge;
 import org.jboss.cdi.tck.impl.PropertiesBasedConfigurationBuilder;
 import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.spi.Beans;
@@ -1287,8 +1285,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 // org.jboss.cdi.tck.spi
                 .addPackage(Beans.class.getPackage())
                 // org.jboss.cdi.tck.impl
-                .addClasses(ConfigurationFactory.class, ConfigurationImpl.class, PropertiesBasedConfigurationBuilder.class,
-                        MockCreationalContext.class, OldSPIBridge.class)
+                .addClasses(ConfigurationFactory.class, ConfigurationImpl.class, PropertiesBasedConfigurationBuilder.class)
                 // org.jboss.cdi.tck.literal
                 .addPackage(AnyLiteral.class.getPackage())
                 // Util packages

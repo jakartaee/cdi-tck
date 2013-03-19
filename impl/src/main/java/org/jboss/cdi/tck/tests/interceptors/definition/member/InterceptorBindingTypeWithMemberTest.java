@@ -67,7 +67,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     @SpecAssertion(section = CONCEPTS, id = "f")
     // @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDING_MEMBERS, id = "a"), @SpecAssertion(section = CONCEPTS, id = "f") })
     public void testInterceptorBindingTypeWithMember() {
-        Farm farm = getInstanceByType(Farm.class);
+        Farm farm = getContextualReference(Farm.class);
         assert farm.getAnimalCount() == 20;
         assert IncreasingInterceptor.isIntercepted();
         assert !DecreasingInterceptor.isIntercepted();
@@ -76,7 +76,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     @Test
     @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "b")
     public void testInterceptorBindingTypeWithNonBindingMember() {
-        Farm farm = getInstanceByType(Farm.class);
+        Farm farm = getContextualReference(Farm.class);
         assert farm.getVehicleCount() == 20;
         assert VehicleCountInterceptor.isIntercepted();
     }
@@ -103,7 +103,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
                     }
                 });
         assert interceptors.size() > 0;
-        Plant plant = getInstanceByType(Plant.class);
+        Plant plant = getContextualReference(Plant.class);
         plant.grow();
         assert PlantInterceptor.isIntercepted();
     }

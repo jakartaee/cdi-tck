@@ -59,27 +59,27 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "aa") // removed from spec
     })
     public void testProducerFieldNotAnotherBean() {
-        assert getInstanceByType(BrownRecluse.class) != null;
+        assert getContextualReference(BrownRecluse.class) != null;
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELDS_ACCESS, id = "a"), @SpecAssertion(section = PRODUCER_FIELD, id = "b") })
     public void testProducerStaticFieldBean() {
-        StaticTarantulaConsumer tarantulaConsumer = getInstanceByType(StaticTarantulaConsumer.class);
+        StaticTarantulaConsumer tarantulaConsumer = getContextualReference(StaticTarantulaConsumer.class);
         assert tarantulaConsumer.getConsumedTarantula().equals(StaticTarantulaProducer.produceTarantula);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELDS_ACCESS, id = "b"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "ga") })
     public void testProducerFieldBeanCreate() throws Exception {
-        BlackWidowConsumer spiderConsumer = getInstanceByType(BlackWidowConsumer.class);
+        BlackWidowConsumer spiderConsumer = getContextualReference(BlackWidowConsumer.class);
         assert spiderConsumer.getInjectedSpider().equals(BlackWidowProducer.blackWidow);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = SPECIALIZATION, id = "cd") })
     public void testProducerFieldFromSpecializingBeanUsed() throws Exception {
-        TarantulaConsumer spiderConsumer = getInstanceByType(TarantulaConsumer.class);
+        TarantulaConsumer spiderConsumer = getContextualReference(TarantulaConsumer.class);
         assert spiderConsumer.getConsumedTarantula() != null;
         assert spiderConsumer.getConsumedTarantula() instanceof DefangedTarantula;
     }
@@ -87,7 +87,7 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "d"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "m") })
     public void testProducerFieldReturnsNullIsDependent() throws Exception {
-        NullSpiderConsumer consumerBean = getInstanceByType(NullSpiderConsumer.class);
+        NullSpiderConsumer consumerBean = getContextualReference(NullSpiderConsumer.class);
         assert consumerBean.getInjectedSpider() == null;
     }
 
@@ -105,7 +105,7 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
     @Test(expectedExceptions = IllegalProductException.class)
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "e"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "n") })
     public void testProducerFieldReturnsNullIsNotDependent() throws Exception {
-        NullSpiderConsumerForBrokenProducer consumer = getInstanceByType(NullSpiderConsumerForBrokenProducer.class);
+        NullSpiderConsumerForBrokenProducer consumer = getContextualReference(NullSpiderConsumerForBrokenProducer.class);
         // The injected spider is proxied since it is in the request scope.
         // So to actually create the bean instance, we need to invoke
         // some method on the proxy.

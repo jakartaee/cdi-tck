@@ -47,8 +47,8 @@ public class CustomDecoratorTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "b"), @SpecAssertion(section = PAT, id = "bc"),
             @SpecAssertion(section = ABD, id = "dc") })
     public void testCustomImplementationOfDecoratorInterface() {
-        assert getInstanceByType(Vehicle.class).start().equals("Bus started and decorated.");
-        assert getInstanceByType(Vehicle.class).stop().equals("Bus stopped and decorated.");
+        assert getContextualReference(Vehicle.class).start().equals("Bus started and decorated.");
+        assert getContextualReference(Vehicle.class).stop().equals("Bus stopped and decorated.");
         assert AfterBeanDiscoveryObserver.getDecorator().isGetDecoratedTypesCalled();
         assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateQualifiersCalled();
         assert AfterBeanDiscoveryObserver.getDecorator().isGetDelegateTypeCalled();

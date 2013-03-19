@@ -36,13 +36,13 @@ public class LifecycleCallbackInterceptorExceptionTest extends AbstractTest {
     @Test(expectedExceptions = RuntimeException.class)
     @SpecAssertion(section = "5.2", id = "a")
     public void testPostConstructCanThrowRuntimeException() {
-        getInstanceByType(Sheep.class);
+        getContextualReference(Sheep.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "5.2", id = "c"), @SpecAssertion(section = "5.2", id = "d") })
     public void testLifecycleCallbackInterceptorCanCatchException() {
-        getInstanceByType(Goat.class);
+        getContextualReference(Goat.class);
         assert GoatInterceptor.isExceptionCaught();
     }
 }

@@ -37,6 +37,6 @@ public class AnyInjectionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "a0")
     public void testAnyInjectionIfExactlyOneBeanForType() {
-        assert getInstanceByType(Customer.class).drink != null;
+        assert getContextualReference(Customer.class).drink != null;
     }
 }

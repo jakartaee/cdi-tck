@@ -74,7 +74,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "e")
     public void testApplicationContextShared() throws Exception {
         FMSModelIII.reset();
-        FMS flightManagementSystem = getInstanceByType(FMS.class);
+        FMS flightManagementSystem = getContextualReference(FMS.class);
         flightManagementSystem.climb();
 
         Timer timer = new Timer().setDelay(20000l).addStopCondition(new StopCondition() {
@@ -98,7 +98,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
     @Test
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "dc")
     public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
-        FMS flightManagementSystem = getInstanceByType(FMS.class);
+        FMS flightManagementSystem = getContextualReference(FMS.class);
         flightManagementSystem.climb();
 
         new Timer().setDelay(20000l).addStopCondition(new StopCondition() {

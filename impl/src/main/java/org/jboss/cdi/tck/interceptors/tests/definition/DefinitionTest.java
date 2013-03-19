@@ -35,6 +35,6 @@ public class DefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "1", id = "a")
     public void testInterceptorMethodDefinedOnTargetClass() {
-        assert getInstanceByType(ClassWithAroundInvokeMethod.class).foo().equals("barbar");
+        assert getContextualReference(ClassWithAroundInvokeMethod.class).foo().equals("barbar");
     }
 }

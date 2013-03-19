@@ -65,7 +65,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "ab"), @SpecAssertion(section = INSTANTIATION, id = "ab") })
     public void testConstructorAnnotatedInjectCalled() {
-        ExplicitConstructor bean = getInstanceByType(ExplicitConstructor.class);
+        ExplicitConstructor bean = getContextualReference(ExplicitConstructor.class);
         assert bean.getConstructorCalls() == 1;
         assert bean.getInjectedSimpleBean() instanceof SimpleBean;
     }

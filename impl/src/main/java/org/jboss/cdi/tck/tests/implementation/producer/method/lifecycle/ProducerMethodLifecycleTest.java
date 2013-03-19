@@ -83,7 +83,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     @SpecAssertion(section = PRODUCER_METHOD, id = "j")
     public void testWhenApplicationInvokesProducerMethodParametersAreNotInjected() {
         try {
-            getInstanceByType(BrownRecluse.class).layAnEgg(null);
+            getContextualReference(BrownRecluse.class).layAnEgg(null);
         } catch (AssertionError e) {
             return;
         }

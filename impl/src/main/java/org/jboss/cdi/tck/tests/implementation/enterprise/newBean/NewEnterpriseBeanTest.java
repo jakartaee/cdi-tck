@@ -156,7 +156,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     @SpecAssertion(section = NEW, id = "o")
     public void testNewBeanHasTheSameInterceptorBindings() {
         // Method foo() is intercepted
-        assertTrue(getInstanceByType(NewSessionBeanConsumer.class).getOrder().ping());
+        assertTrue(getContextualReference(NewSessionBeanConsumer.class).getOrder().ping());
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

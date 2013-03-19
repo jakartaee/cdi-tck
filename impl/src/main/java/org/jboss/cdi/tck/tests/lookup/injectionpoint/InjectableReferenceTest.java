@@ -62,7 +62,7 @@ public class InjectableReferenceTest extends AbstractTest {
         BeanWithInjectionPointMetadata.reset();
 
         // Get an instance of the bean which has another bean injected into it
-        FieldInjectionPointBean beanWithInjectedBean = getInstanceByType(FieldInjectionPointBean.class);
+        FieldInjectionPointBean beanWithInjectedBean = getContextualReference(FieldInjectionPointBean.class);
         BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
         InjectionPoint ip = beanWithInjectionPoint.getInjectedMetadata();
         assert ip != null;

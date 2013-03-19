@@ -42,7 +42,7 @@ public class InvocationContextTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "6", id = "d")
     public void testGetTargetMethod() {
-        SimpleBean instance = getInstanceByType(SimpleBean.class);
+        SimpleBean instance = getContextualReference(SimpleBean.class);
         instance.setId(10);
         assert instance.getId() == 10;
         assert Interceptor1.isGetTargetOK();
@@ -51,19 +51,19 @@ public class InvocationContextTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "6", id = "f")
     public void testGetTimerMethod() {
-        assert getInstanceByType(SimpleBean.class).testGetTimer();
+        assert getContextualReference(SimpleBean.class).testGetTimer();
     }
 
     @Test
     @SpecAssertion(section = "6", id = "g")
     public void testGetMethodForAroundInvokeInterceptorMethod() {
-        assert getInstanceByType(SimpleBean.class).testGetMethod();
+        assert getContextualReference(SimpleBean.class).testGetMethod();
     }
 
     @Test
     @SpecAssertion(section = "6", id = "h")
     public void testGetMethodForLifecycleCallbackInterceptorMethod() {
-        getInstanceByType(SimpleBean.class);
+        getContextualReference(SimpleBean.class);
         assert LifecycleCallbackInterceptor.isGetMethodReturnsNull();
     }
 
@@ -71,32 +71,32 @@ public class InvocationContextTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "6", id = "i"), @SpecAssertion(section = "6", id = "j"),
             @SpecAssertion(section = "6", id = "k") })
     public void testMethodParameters() {
-        assert getInstanceByType(SimpleBean.class).add(1, 2) == 5;
+        assert getContextualReference(SimpleBean.class).add(1, 2) == 5;
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "6", id = "la")
     public void testIllegalNumberOfParameters() {
-        getInstanceByType(SimpleBean.class).add2(1, 1);
+        getContextualReference(SimpleBean.class).add2(1, 1);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = "6", id = "lb")
     public void testIllegalTypeOfParameters() {
-        assert getInstanceByType(SimpleBean.class).add3(1, 1) == 2;
+        assert getContextualReference(SimpleBean.class).add3(1, 1) == 2;
     }
 
     @Test
     @SpecAssertion(section = "6", id = "o")
     public void testProceedReturnsNullForVoidMethod() {
-        getInstanceByType(SimpleBean.class).voidMethod();
+        getContextualReference(SimpleBean.class).voidMethod();
         assert Interceptor7.isProceedReturnsNull();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "1", id = "d"), @SpecAssertion(section = "6", id = "a") })
     public void testContextData() {
-        getInstanceByType(SimpleBean.class).foo();
+        getContextualReference(SimpleBean.class).foo();
         assert Interceptor8.isContextDataOK();
         assert Interceptor9.isContextDataOK();
     }
@@ -104,7 +104,7 @@ public class InvocationContextTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "6", id = "n")
     public void testBusinessMethodNotCalledWithoutProceedInvocation() {
-        assert getInstanceByType(SimpleBean.class).echo("foo").equals("foo");
+        assert getContextualReference(SimpleBean.class).echo("foo").equals("foo");
         assert !SimpleBean.isEchoCalled();
     }
 }

@@ -65,17 +65,17 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bb"), @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "b"),
             @SpecAssertion(section = BEAN_ARCHIVE, id = "ja") })
     public void testCreateSFSB() throws Exception {
-        GrossStadt frankfurt = getInstanceByType(GrossStadt.class);
+        GrossStadt frankfurt = getContextualReference(GrossStadt.class);
         Bean<KleinStadt> stadtBean = getBeans(KleinStadt.class).iterator().next();
         assert stadtBean != null : "Expected a bean for stateful session bean Kassel";
-        KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
+        KleinStadt stadtInstance = getContextualReference(KleinStadt.class, new AnnotationLiteral<Important>() {
         });
         assert stadtInstance != null : "Expected instance to be created by container";
         assert frankfurt.isKleinStadtCreated() : "PostConstruct should be invoked when bean instance is created";
         frankfurt.resetCreatedFlags();
 
         // Create a second one to make sure create always does create a new session bean
-        KleinStadt anotherStadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
+        KleinStadt anotherStadtInstance = getContextualReference(KleinStadt.class, new AnnotationLiteral<Important>() {
         });
         assert anotherStadtInstance != null : "Expected second instance of session bean";
         assert frankfurt.isKleinStadtCreated();
@@ -94,7 +94,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "a") })
     public void testSerializeSFSB() throws Exception {
 
-        KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
+        KleinStadt stadtInstance = getContextualReference(KleinStadt.class, new AnnotationLiteral<Important>() {
         });
 
         byte[] bytes = passivate(stadtInstance);
@@ -107,7 +107,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bc"), @SpecAssertion(section = STATELESS_LIFECYCLE, id = "c") })
     public void testDestroyRemovesSFSB() throws Exception {
-        GrossStadt frankfurt = getInstanceByType(GrossStadt.class);
+        GrossStadt frankfurt = getContextualReference(GrossStadt.class);
         Bean<KleinStadt> stadtBean = getBeans(KleinStadt.class).iterator().next();
         assert stadtBean != null : "Expected a bean for stateful session bean Kassel";
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
@@ -125,14 +125,14 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     @Test(groups =  INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bc"), @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "dba") })
     public void testRemovedEjbIgnored() {
-        KleinStadt stadtInstance = getInstanceByType(KleinStadt.class, new AnnotationLiteral<Important>() {
+        KleinStadt stadtInstance = getContextualReference(KleinStadt.class, new AnnotationLiteral<Important>() {
         });
         assert stadtInstance != null : "Expected instance to be created by container";
         stadtInstance.setName("Kassel-Wilhelmshoehe");
         stadtInstance.zustandVergessen();
 
         // Now make sure that the container does not return this instance again
-        KleinStadt newStadtInstance = getInstanceByType(KleinStadt.class);
+        KleinStadt newStadtInstance = getContextualReference(KleinStadt.class);
         assert newStadtInstance != null : "Failed to get SFSB instance the second time";
         assert !"Kassel-Wilhelmshoehe".equals(newStadtInstance.getName()) : "The destroyed SFSB was not ignored";
     }
@@ -154,7 +154,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     @Test(groups =  INTEGRATION)
     @SpecAssertion(section = DECLARING_INITIALIZER, id = "f")
     public void testInitializerMethodsCalledWithCurrentParameterValues() {
-        AlteStadt alteStadt = getInstanceByType(AlteStadt.class);
+        AlteStadt alteStadt = getContextualReference(AlteStadt.class);
         assert alteStadt != null : "Could not find the AlteStadt bean";
         assert alteStadt.getAnotherPlaceOfInterest() != null;
     }
@@ -167,7 +167,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         UniStadt marburg = uniStadtBean.create(creationalContext);
         assert marburg != null : "Couldn't find the main SFSB";
         uniStadtBean.destroy(marburg, creationalContext);
-        GrossStadt frankfurt = getInstanceByType(GrossStadt.class);
+        GrossStadt frankfurt = getContextualReference(GrossStadt.class);
         assert frankfurt.isSchlossDestroyed();
     }
 
@@ -176,7 +176,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     public void testDirectSubClassInheritsPostConstructOnSuperclass() throws Exception {
         OrderProcessor.postConstructCalled = false;
         assert getBeans(DirectOrderProcessorLocal.class).size() == 1;
-        getInstanceByType(DirectOrderProcessorLocal.class).order();
+        getContextualReference(DirectOrderProcessorLocal.class).order();
         assert OrderProcessor.postConstructCalled;
     }
 
@@ -185,7 +185,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     public void testIndirectSubClassInheritsPostConstructOnSuperclass() throws Exception {
         OrderProcessor.postConstructCalled = false;
         assert getBeans(OrderProcessorLocal.class).size() == 1;
-        getInstanceByType(OrderProcessorLocal.class).order();
+        getContextualReference(OrderProcessorLocal.class).order();
         assert OrderProcessor.postConstructCalled;
     }
 

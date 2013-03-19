@@ -39,7 +39,7 @@ public class InvocationOrderTest extends AbstractTest {
             @SpecAssertion(section = "3.1", id = "e"), @SpecAssertion(section = "3.1", id = "f"),
             @SpecAssertion(section = "3.1", id = "g"), @SpecAssertion(section = "8", id = "e") })
     public void testInvocationOrder() {
-        assert getInstanceByType(Tram.class).getId() == 8;
+        assert getContextualReference(Tram.class).getId() == 8;
         assert !Interceptor1.isOverridenMethodCalled();
     }
 }

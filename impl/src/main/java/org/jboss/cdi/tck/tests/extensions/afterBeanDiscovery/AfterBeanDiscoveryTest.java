@@ -46,7 +46,7 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = ABD, id = "db") })
     public void testBeanIsAdded() {
         assert getBeans(Cockatoo.class).size() == 1;
-        assert getInstanceByType(Cockatoo.class).getName().equals("Billy");
+        assert getContextualReference(Cockatoo.class).getName().equals("Billy");
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

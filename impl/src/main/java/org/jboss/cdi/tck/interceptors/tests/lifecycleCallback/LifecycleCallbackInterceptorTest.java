@@ -38,13 +38,13 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "5", id = "a")
     public void testPostConstructInterceptor() {
-        getInstanceByType(Goat.class);
+        getContextualReference(Goat.class);
         assert Goat.isPostConstructInterceptorCalled();
         assert AnimalInterceptor.isPostConstructInterceptorCalled(Goat.GOAT);
-        getInstanceByType(Hen.class).toString();
+        getContextualReference(Hen.class).toString();
         assert Hen.isPostConstructInterceptorCalled();
         assert AnimalInterceptor.isPostConstructInterceptorCalled(Hen.HEN);
-        getInstanceByType(Cow.class).toString();
+        getContextualReference(Cow.class).toString();
         assert Cow.isPostConstructInterceptorCalled();
         assert AnimalInterceptor.isPostConstructInterceptorCalled(Cow.COW);
     }
@@ -77,41 +77,41 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "5", id = "c")
     public void testAroundInvokeAndLifeCycleCallbackInterceptorsCanBeDefinedOnTheSameClass() {
-        assert getInstanceByType(Goat.class).echo("foo").equals("foofoo");
+        assert getContextualReference(Goat.class).echo("foo").equals("foofoo");
     }
 
     @Test
     @SpecAssertion(section = "5", id = "j")
     public void testPublicLifecycleInterceptorMethod() {
-        getInstanceByType(Chicken.class);
+        getContextualReference(Chicken.class);
         assert PublicLifecycleInterceptor.isIntercepted();
     }
 
     @Test
     @SpecAssertion(section = "5", id = "k")
     public void testProtectedLifecycleInterceptorMethod() {
-        getInstanceByType(Chicken.class);
+        getContextualReference(Chicken.class);
         assert ProtectedLifecycleInterceptor.isIntercepted();
     }
 
     @Test
     @SpecAssertion(section = "5", id = "l")
     public void testPrivateLifecycleInterceptorMethod() {
-        getInstanceByType(Chicken.class);
+        getContextualReference(Chicken.class);
         assert PrivateLifecycleInterceptor.isIntercepted();
     }
 
     @Test
     @SpecAssertion(section = "5", id = "m")
     public void testPackagePrivateLifecycleInterceptorMethod() {
-        getInstanceByType(Chicken.class);
+        getContextualReference(Chicken.class);
         assert PackagePrivateLifecycleInterceptor.isIntercepted();
     }
 
     @Test
     @SpecAssertion(section = "8", id = "c")
     public void testLifeCycleCallbackInterceptorNotInvokedForMethodLevelInterceptor() {
-        assert getInstanceByType(Sheep.class).foo().equals("bar");
+        assert getContextualReference(Sheep.class).foo().equals("bar");
         assert SheepInterceptor.isAroundInvokeCalled();
         assert !SheepInterceptor.isPostConstructCalled();
     }

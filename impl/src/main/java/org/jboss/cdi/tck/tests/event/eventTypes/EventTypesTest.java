@@ -57,11 +57,11 @@ public class EventTypesTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "aa"), @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "j") })
     public void testEventTypeIsConcreteTypeWithNoTypeVariables() {
-        Listener listener = getInstanceByType(Listener.class);
+        Listener listener = getContextualReference(Listener.class);
         listener.reset();
         // typical concrete type
         Song s = new Song();
-        getInstanceByType(TuneSelect.class).songPlaying(s);
+        getContextualReference(TuneSelect.class).songPlaying(s);
         assert listener.getObjectsFired().size() == 1;
         assert listener.getObjectsFired().get(0) == s;
         songEvent.fire(s);
@@ -72,7 +72,7 @@ public class EventTypesTest extends AbstractTest {
         // anonymous instance
         Broadcast b = new Broadcast() {
         };
-        getInstanceByType(TuneSelect.class).broadcastPlaying(b);
+        getContextualReference(TuneSelect.class).broadcastPlaying(b);
         assert listener.getObjectsFired().size() == 3;
         assert listener.getObjectsFired().get(2) == b;
         // boxed primitive
@@ -85,7 +85,7 @@ public class EventTypesTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "j") })
     public void testEventTypeIsArray() {
 
-        Listener listener = getInstanceByType(Listener.class);
+        Listener listener = getContextualReference(Listener.class);
         listener.reset();
 
         // array of concrete types
@@ -115,7 +115,7 @@ public class EventTypesTest extends AbstractTest {
     public void testEventTypeIncludesAllSuperclassesAndInterfacesOfEventObject() {
         // we have to use a dependent-scoped observer here because we it is observing the Object event type
         // and a request-scoped object would get called outside of when the request scope is active in this situation
-        EventTypeFamilyObserver observer = getInstanceByType(EventTypeFamilyObserver.class);
+        EventTypeFamilyObserver observer = getContextualReference(EventTypeFamilyObserver.class);
         observer.reset();
         getCurrentManager().fireEvent(new ComplexEvent());
         assert observer.getGeneralEventQuantity() == 1;

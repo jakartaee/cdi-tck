@@ -37,7 +37,8 @@ import javax.inject.Inject;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
-import org.jboss.cdi.tck.impl.OldSPIBridge;
+import org.jboss.cdi.tck.util.BeanLookupUtils;
+import org.jboss.cdi.tck.util.DependentInstance;
 
 /**
  * Abstract CDI TCK test.
@@ -52,7 +53,7 @@ public abstract class AbstractTest extends Arquillian {
      * This affects most of the {@link BeanManager} methods functionality. For instance the method
      * {@link BeanManager#getBeans(Type, Annotation...)} returns the set of beans which are available for injection in the
      * module or library containing the class into which the {@link BeanManager} was injected (simplified).
-     * 
+     *
      * @return the current {@link BeanManager}
      */
     protected BeanManager getCurrentManager() {
@@ -85,7 +86,7 @@ public abstract class AbstractTest extends Arquillian {
 
     /**
      * Checks if all annotations are in a given set of annotations
-     * 
+     *
      * @param annotations The annotation set
      * @param requiredAnnotationTypes The annotations to match
      * @return True if match, false otherwise
@@ -152,19 +153,20 @@ public abstract class AbstractTest extends Arquillian {
         return (Set) getCurrentManager().getBeans(type.getType(), bindings);
     }
 
-    @SuppressWarnings("deprecation")
-    public <T> T getInstanceByType(Class<T> beanType, Annotation... bindings) {
-        return OldSPIBridge.getInstanceByType(getCurrentManager(), beanType, bindings);
+    public <T> T getContextualReference(Class<T> beanType, Annotation... qualifiers) {
+        return BeanLookupUtils.getContextualReference(getCurrentManager(), beanType, qualifiers);
     }
 
-    @SuppressWarnings("deprecation")
-    public <T> T getInstanceByType(TypeLiteral<T> beanType, Annotation... bindings) {
-        return OldSPIBridge.getInstanceByType(getCurrentManager(), beanType, bindings);
+    public <T> T getContextualReference(TypeLiteral<T> beanType, Annotation... qualifiers) {
+        return BeanLookupUtils.getContextualReference(getCurrentManager(), beanType, qualifiers);
     }
 
-    @SuppressWarnings("deprecation")
-    public Object getInstanceByName(String name) {
-        return OldSPIBridge.getInstanceByName(getCurrentManager(), name);
+    public <T> T getContextualReference(String name, Class<T> beanType) {
+        return BeanLookupUtils.getContextualReference(getCurrentManager(), name, beanType);
+    }
+
+    public <T> DependentInstance<T> newDependentInstance(Class<T> beanType, Annotation... qualifiers) {
+        return new DependentInstance<T>(getCurrentManager(), beanType, qualifiers);
     }
 
     private <T> Bean<T> resolveUniqueBean(Type type, Set<Bean<T>> beans) {
@@ -179,7 +181,7 @@ public abstract class AbstractTest extends Arquillian {
     /**
      * Extracted from test harness. We need this since testng expected exceptions feature is not working with exception cause -
      * see org.testng.internal.Invoker.isExpectedException(Throwable, ExpectedExceptionsHolder).
-     * 
+     *
      * @param throwableType
      * @param throwable
      * @return <code>true</code> if throwable type is assignable from specified throwable or any cause in stack (works

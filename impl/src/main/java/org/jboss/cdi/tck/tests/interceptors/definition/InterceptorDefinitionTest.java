@@ -217,7 +217,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
         FileLogger.intercepted = false;
         NetworkLogger.intercepted = false;
 
-        SecureTransaction secureTransaction = getInstanceByType(SecureTransaction.class);
+        SecureTransaction secureTransaction = getContextualReference(SecureTransaction.class);
         secureTransaction.transact();
 
         assertTrue(FileLogger.intercepted);
@@ -231,7 +231,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
         AtomicInterceptor.intercepted = false;
         MissileInterceptor.intercepted = false;
 
-        AtomicFoo foo = getInstanceByType(AtomicFoo.class);
+        AtomicFoo foo = getContextualReference(AtomicFoo.class);
         foo.doAction();
 
         assertTrue(AtomicInterceptor.intercepted);

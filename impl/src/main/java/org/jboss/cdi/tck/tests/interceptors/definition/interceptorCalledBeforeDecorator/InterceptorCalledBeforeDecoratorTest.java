@@ -44,7 +44,7 @@ public class InterceptorCalledBeforeDecoratorTest extends AbstractTest {
         FooImpl.interceptorCalledFirst = false;
         FooImpl.decoratorCalledFirst = false;
 
-        Foo foo = getInstanceByType(Foo.class);
+        Foo foo = getContextualReference(Foo.class);
         foo.bar();
 
         assert FooImpl.interceptorCalledFirst;

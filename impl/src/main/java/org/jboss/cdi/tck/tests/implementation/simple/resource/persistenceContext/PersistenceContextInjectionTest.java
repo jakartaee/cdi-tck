@@ -58,7 +58,7 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "cc"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lb"),
             @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mc") })
     public void testInjectionOfPersistenceContext() {
-        ServiceBean serviceBean = getInstanceByType(ServiceBean.class);
+        ServiceBean serviceBean = getContextualReference(ServiceBean.class);
         ManagedBean managedBean = serviceBean.getManagedBean();
         assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
         assert serviceBean.validateEntityManager();

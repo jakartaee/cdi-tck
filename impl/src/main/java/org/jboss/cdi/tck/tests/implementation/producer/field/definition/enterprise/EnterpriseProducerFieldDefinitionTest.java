@@ -41,9 +41,9 @@ public class EnterpriseProducerFieldDefinitionTest extends AbstractTest {
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "ab"), @SpecAssertion(section = PRODUCER_FIELD, id = "ca") })
     public void testStaticProducerField() {
-        assert getInstanceByType(Egg.class, new AnnotationLiteral<Foo>() {
+        assert getContextualReference(Egg.class, new AnnotationLiteral<Foo>() {
         }) != null;
-        assert getInstanceByType(Egg.class, new AnnotationLiteral<Foo>() {
+        assert getContextualReference(Egg.class, new AnnotationLiteral<Foo>() {
         }).getSize() == Chicken.SIZE;
     }
 

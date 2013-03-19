@@ -68,7 +68,7 @@ public class FireEventTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = BM_FIRE_EVENT, id = "a"), @SpecAssertion(section = BM_FIRE_EVENT, id = "b") })
     public void testBeanManagerFireEvent() {
-        Billing billing = getInstanceByType(Billing.class);
+        Billing billing = getContextualReference(Billing.class);
         billing.reset();
         MiniBar miniBar = new MiniBar();
         miniBar.stockNoNotify();
@@ -83,7 +83,7 @@ public class FireEventTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = BM_FIRE_EVENT, id = "c")
     public void testTypeVariableEventTypeFails() throws Exception {
-        getInstanceByType(Bar.class).<Integer> fireWithTypeVariable();
+        getContextualReference(Bar.class).<Integer> fireWithTypeVariable();
     }
 
     @SuppressWarnings("serial")
@@ -104,7 +104,7 @@ public class FireEventTest extends AbstractTest {
     @Test(groups = REWRITE)
     @SpecAssertion(section = FIRING_EVENTS, id = "a")
     public void testInjectedAnyEventCanFireEvent() {
-        Billing billing = getInstanceByType(Billing.class);
+        Billing billing = getContextualReference(Billing.class);
         billing.reset();
         Bean<MiniBar> miniBarBean = getUniqueBean(MiniBar.class);
         InjectionPoint eventInjection = null;
@@ -134,7 +134,7 @@ public class FireEventTest extends AbstractTest {
     @Test(groups = REWRITE)
     @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS, id = "b"), @SpecAssertion(section = EVENT, id = "cb") })
     public void testInjectedEventAcceptsEventObject() throws SecurityException, NoSuchFieldException, NoSuchMethodException {
-        Billing billing = getInstanceByType(Billing.class);
+        Billing billing = getContextualReference(Billing.class);
         billing.reset();
         Bean<MiniBar> miniBarBean = getUniqueBean(MiniBar.class);
         CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
@@ -185,7 +185,7 @@ public class FireEventTest extends AbstractTest {
     @Test(groups = REWRITE)
     @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS, id = "c"), @SpecAssertion(section = EVENT, id = "cb") })
     public void testInjectedEventCanHaveBindings() {
-        Billing billing = getInstanceByType(Billing.class);
+        Billing billing = getContextualReference(Billing.class);
         billing.reset();
         Bean<MiniBar> miniBarBean = getUniqueBean(MiniBar.class);
 
@@ -219,9 +219,9 @@ public class FireEventTest extends AbstractTest {
     @Test(groups = REWRITE)
     @SpecAssertion(section = FIRING_EVENTS, id = "d")
     public void testInjectedEventCanSpecifyBindingsDynamically() {
-        Billing billing = getInstanceByType(Billing.class);
+        Billing billing = getContextualReference(Billing.class);
         billing.reset();
-        Housekeeping housekeeping = getInstanceByType(Housekeeping.class);
+        Housekeeping housekeeping = getContextualReference(Housekeeping.class);
         Bean<MiniBar> miniBarBean = getUniqueBean(MiniBar.class);
 
         InjectionPoint eventInjection = null;
@@ -248,9 +248,9 @@ public class FireEventTest extends AbstractTest {
     @Test
     @SpecAssertion(section = EVENT, id = "ca")
     public void testEventProvidesMethodForFiringEventsWithCombinationOfTypeAndBindings() {
-        DoggiePoints points = getInstanceByType(DoggiePoints.class);
+        DoggiePoints points = getContextualReference(DoggiePoints.class);
         points.reset();
-        DogWhisperer master = getInstanceByType(DogWhisperer.class);
+        DogWhisperer master = getContextualReference(DogWhisperer.class);
         master.issueTamingCommand();
         assertEquals(points.getNumTamed(), 1);
         assertEquals(points.getNumPraiseReceived(), 0);
@@ -264,9 +264,9 @@ public class FireEventTest extends AbstractTest {
     @Test(groups = REWRITE)
     @SpecAssertion(section = EVENT, id = "eda")
     public void testEventSelectedFiresAndObserversNotified() {
-        Housekeeping houseKeeping = getInstanceByType(Housekeeping.class);
+        Housekeeping houseKeeping = getContextualReference(Housekeeping.class);
         houseKeeping.reset();
-        MiniBar miniBar = getInstanceByType(MiniBar.class);
+        MiniBar miniBar = getContextualReference(MiniBar.class);
         Item chocolate = new Item("Chocolate", 5);
         Item crackers = new Item("Crackers", 2);
 
@@ -285,7 +285,7 @@ public class FireEventTest extends AbstractTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertions({ @SpecAssertion(section = EVENT, id = "f"), @SpecAssertion(section = OBSERVER_RESOLUTION, id = "j") })
     public <T> void testEventFireThrowsExceptionIfEventObjectTypeContainsUnresovableTypeVariable() {
-        MiniBar miniBar = getInstanceByType(MiniBar.class);
+        MiniBar miniBar = getContextualReference(MiniBar.class);
         miniBar.itemEvent.fire(new Item_Illegal<T>("12 oz Beer", 6));
     }
 

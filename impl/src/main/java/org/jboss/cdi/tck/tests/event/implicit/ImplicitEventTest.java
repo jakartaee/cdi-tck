@@ -96,9 +96,9 @@ public class ImplicitEventTest extends AbstractTest {
     @Test
     @SpecAssertion(section = BUILTIN_EVENT, id = "f")
     public void testImplicitEventHasImplementation() {
-        StudentDirectory directory = getInstanceByType(StudentDirectory.class);
+        StudentDirectory directory = getContextualReference(StudentDirectory.class);
         directory.reset();
-        Registration registration = getInstanceByType(Registration.class);
+        Registration registration = getContextualReference(Registration.class);
         assert registration.getInjectedCourseFullEvent() != null;
         assert registration.getInjectedStudentRegisteredEvent() != null;
         Event<StudentRegisteredEvent> event = registration.getInjectedStudentRegisteredEvent();
@@ -112,9 +112,9 @@ public class ImplicitEventTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = BUILTIN_EVENT, id = "g"),
             @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "eb") })
     public void testImplicitEventIsPassivationCapable() throws IOException, ClassNotFoundException {
-        StudentDirectory directory = getInstanceByType(StudentDirectory.class);
+        StudentDirectory directory = getContextualReference(StudentDirectory.class);
         directory.reset();
-        Registration registration = getInstanceByType(Registration.class);
+        Registration registration = getContextualReference(Registration.class);
         Event<StudentRegisteredEvent> event = registration.getInjectedStudentRegisteredEvent();
         assert Serializable.class.isAssignableFrom(event.getClass());
         byte[] serializedEvent = passivate(event);

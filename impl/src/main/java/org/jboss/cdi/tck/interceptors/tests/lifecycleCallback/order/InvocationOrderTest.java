@@ -37,7 +37,7 @@ public class InvocationOrderTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "5.1", id = "c"), @SpecAssertion(section = "5.1", id = "d"),
             @SpecAssertion(section = "5.1", id = "e"), @SpecAssertion(section = "5.1", id = "f") })
     public void testInvocationOrder() {
-        getInstanceByType(LakeCargoShip.class);
+        getContextualReference(LakeCargoShip.class);
         int s = LakeCargoShip.getSequence();
         assert LakeCargoShip.getSequence() == 7;
     }

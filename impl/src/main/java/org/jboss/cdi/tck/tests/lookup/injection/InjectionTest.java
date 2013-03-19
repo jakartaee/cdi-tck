@@ -54,7 +54,7 @@ public class InjectionTest extends AbstractTest {
     @SpecAssertion(section = NULL, id = "aa")
     public void testInjectionPerformsBoxingIfNecessary() throws Exception {
         assert getBeans(SpiderNest.class).size() == 1;
-        SpiderNest spiderNest = getInstanceByType(SpiderNest.class);
+        SpiderNest spiderNest = getContextualReference(SpiderNest.class);
         assert spiderNest.numberOfSpiders != null;
         assert spiderNest.numberOfSpiders.equals(4);
     }
@@ -63,7 +63,7 @@ public class InjectionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "kc"), @SpecAssertion(section = INJECTION, id = "b"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ac") })
     public void testInjectionOfNamedBean() {
-        WolfPack wolfPack = getInstanceByType(WolfPack.class);
+        WolfPack wolfPack = getContextualReference(WolfPack.class);
         assert wolfPack.getAlphaWolf() != null;
     }
 
@@ -81,7 +81,7 @@ public class InjectionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ac")
     public void testFieldDeclaredInIndirectSuperclassInjected() throws Exception {
-        MegaPoorHenHouse henHouse = getInstanceByType(MegaPoorHenHouse.class);
+        MegaPoorHenHouse henHouse = getContextualReference(MegaPoorHenHouse.class);
         assert henHouse.fox != null;
         assert henHouse.fox.getName().equals("gavin");
     }

@@ -49,7 +49,7 @@ public class EventBindingTypesTest extends AbstractTest {
     public void testEventBindingTypeTargetsMethodFieldParameterElementTypes() {
         Animal animal = new Animal();
         getCurrentManager().fireEvent(animal, new TameAnnotationLiteral());
-        getInstanceByType(AnimalAssessment.class).classifyAsTame(animal);
+        getContextualReference(AnimalAssessment.class).classifyAsTame(animal);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class EventBindingTypesTest extends AbstractTest {
     public void testEventBindingTypeTargetsFieldParameterElementTypes() {
         Animal animal = new Animal();
         getCurrentManager().fireEvent(animal, new WildAnnotationLiteral());
-        getInstanceByType(AnimalAssessment.class).classifyAsWild(animal);
+        getContextualReference(AnimalAssessment.class).classifyAsWild(animal);
     }
 
     /**
@@ -66,9 +66,9 @@ public class EventBindingTypesTest extends AbstractTest {
     @Test
     @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "f")
     public void testNonRuntimeBindingTypeIsNotAnEventBindingType() {
-        DiscerningObserver observer = getInstanceByType(DiscerningObserver.class);
+        DiscerningObserver observer = getContextualReference(DiscerningObserver.class);
         observer.reset();
-        EventEmitter emitter = getInstanceByType(EventEmitter.class);
+        EventEmitter emitter = getContextualReference(EventEmitter.class);
         emitter.fireEvent();
         assert observer.getNumTimesAnyBindingTypeEventObserved() == 1;
         assert observer.getNumTimesNonRuntimeBindingTypeObserved() == 1;

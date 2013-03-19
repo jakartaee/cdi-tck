@@ -42,7 +42,7 @@ public class SessionBeanInterceptorOnNonContextualEjbReferenceTest extends Abstr
     public void testNonContextualSessionBeanReferenceIsIntercepted() {
         MissileInterceptor.intercepted = false;
 
-        Ship cruiser = getInstanceByType(Ship.class);
+        Ship cruiser = getContextualReference(Ship.class);
         cruiser.defend();
 
         assert MissileInterceptor.intercepted;

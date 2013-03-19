@@ -55,7 +55,7 @@ public class ConditionalObserverTest extends AbstractTest {
         assert !RecluseSpider.isNotified();
 
         // Now instantiate the bean and fire another event
-        RecluseSpider bean = getInstanceByType(RecluseSpider.class);
+        RecluseSpider bean = getContextualReference(RecluseSpider.class);
         assert bean != null;
         // Must invoke a method to really create the instance
         assert !bean.isInstanceNotified();
@@ -68,7 +68,7 @@ public class ConditionalObserverTest extends AbstractTest {
     @Test
     @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "baa")
     public void testObserverMethodInvokedOnReturnedInstanceFromContext() {
-        RecluseSpider spider = getInstanceByType(RecluseSpider.class);
+        RecluseSpider spider = getContextualReference(RecluseSpider.class);
         spider.setWeb(new Web());
         getCurrentManager().fireEvent(new ConditionalEvent());
         assert spider.isInstanceNotified();
@@ -94,7 +94,7 @@ public class ConditionalObserverTest extends AbstractTest {
 
         Tarantula.reset();
         Context requestContext = getCurrentConfiguration().getContexts().getRequestContext();
-        Tarantula tarantula = getInstanceByType(Tarantula.class);
+        Tarantula tarantula = getContextualReference(Tarantula.class);
         tarantula.ping();
 
         try {

@@ -125,9 +125,9 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertEquals(getBeans(Double.class, AnyLiteral.INSTANCE).size(), 2);
         assertEquals(getBeans(double.class, AnyLiteral.INSTANCE).size(), 2);
 
-        Double min = getInstanceByType(Double.class, new AnnotationLiteral<Min>() {
+        Double min = getContextualReference(Double.class, new AnnotationLiteral<Min>() {
         });
-        double max = getInstanceByType(double.class, new AnnotationLiteral<Max>() {
+        double max = getContextualReference(double.class, new AnnotationLiteral<Max>() {
         });
 
         assertEquals(min, NumberProducer.min);

@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -42,7 +42,7 @@ import org.testng.annotations.Test;
 
 /**
  * This test class contains tests for adding meta data using extensions.
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -65,14 +65,14 @@ public class AlternativeMetadataTest extends AbstractTest {
         // The base type of the fruit injection point is overridden to
         // TropicalFruit
         assertTrue(GroceryWrapper.isGetBaseTypeOfFruitFieldUsed());
-        assertEquals(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getFruit().getMetadata().getType(),
+        assertEquals(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getFruit().getMetadata().getType(),
                 TropicalFruit.class);
     }
 
     @Test
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "hb")
     public void testGetBaseTypeUsedToDetermineTypeOfInitializerInjectionPoint() {
-        assertEquals(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getInitializerFruit().getMetadata().getType(),
+        assertEquals(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getInitializerFruit().getMetadata().getType(),
                 TropicalFruit.class);
         assertTrue(GroceryWrapper.isGetBaseTypeOfInitializerTropicalFruitParameterUsed());
     }
@@ -105,34 +105,34 @@ public class AlternativeMetadataTest extends AbstractTest {
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "n")
     public void testGetAnnotationUsedForGettingStereotypeInformation() {
         // The extension adds a stereotype with @Named qualifier
-        assertNotNull(getInstanceByName("grocery"));
+        assertNotNull(getContextualReference("grocery", Grocery.class));
     }
 
     @Test
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "p")
     public void testGetAnnotationUsedForGettingInterceptorInformation() {
         // The extension adds the GroceryInterceptorBinding
-        Grocery grocery = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE);
+        Grocery grocery = getContextualReference(Grocery.class, AnyLiteral.INSTANCE);
         assertEquals(grocery.foo(), "foo");
     }
 
     @Test
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "r")
     public void testPreviouslyNonInjectAnnotatedConstructorIsUsed() {
-        assertTrue(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isConstructorWithParameterUsed());
+        assertTrue(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).isConstructorWithParameterUsed());
     }
 
     @Test
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "t")
     public void testPreviouslyNonInjectAnnotatedFieldIsInjected() {
-        assertTrue(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isVegetablesInjected());
+        assertTrue(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).isVegetablesInjected());
     }
 
     @SuppressWarnings("unchecked")
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "u")
     public void testExtraQualifierIsAppliedToInjectedField() {
-        assertNotNull(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getFruit());
-        Set<Annotation> qualifiers = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getFruit().getMetadata()
+        assertNotNull(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getFruit());
+        Set<Annotation> qualifiers = getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getFruit().getMetadata()
                 .getQualifiers();
         assertEquals(qualifiers.size(), 1);
         assertTrue(annotationSetMatches(qualifiers, Cheap.class));
@@ -150,7 +150,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     public void testInjectCreatesInitializerMethod() {
         // The extension adds @Inject to the nonInjectAnnotatedInitializer()
         // method
-        assertTrue(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isWaterInjected());
+        assertTrue(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).isWaterInjected());
     }
 
     @SuppressWarnings("unchecked")
@@ -158,7 +158,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "x")
     public void testQualifierAddedToInitializerParameter() {
         // The @Cheap qualifier is added to the method parameter
-        Set<Annotation> qualifiers = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getInitializerFruit().getMetadata()
+        Set<Annotation> qualifiers = getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getInitializerFruit().getMetadata()
                 .getQualifiers();
         assertTrue(annotationSetMatches(qualifiers, Cheap.class));
     }
@@ -183,7 +183,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "aa")
     public void testQualifierIsAppliedToProducerMethodParameter() {
         // The @Cheap qualifier is added to the method parameter
-        Set<Annotation> qualifiers = getInstanceByType(Yogurt.class, AnyLiteral.INSTANCE).getFruit().getMetadata()
+        Set<Annotation> qualifiers = getContextualReference(Yogurt.class, AnyLiteral.INSTANCE).getFruit().getMetadata()
                 .getQualifiers();
         assertEquals(qualifiers.size(), 1);
         assertTrue(annotationSetMatches(qualifiers, Cheap.class));
@@ -194,8 +194,8 @@ public class AlternativeMetadataTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ae"), @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ag") })
     public void testObserverMethod() {
         getCurrentManager().fireEvent(new Milk(true));
-        Milk event = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getObserverEvent();
-        TropicalFruit parameter = getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).getObserverParameter();
+        Milk event = getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getObserverEvent();
+        TropicalFruit parameter = getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getObserverParameter();
         assertNotNull(event);
         assertNotNull(parameter);
         assertEquals(parameter.getMetadata().getQualifiers().size(), 1);
@@ -208,7 +208,7 @@ public class AlternativeMetadataTest extends AbstractTest {
         getCurrentManager().fireEvent(new Bread(true));
         // normally, the event would be observer, however the extension adds the
         // @Expensive qualifier to the method parameter
-        assertFalse(getInstanceByType(Grocery.class, AnyLiteral.INSTANCE).isObserver2Used());
+        assertFalse(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).isObserver2Used());
     }
 
     @SuppressWarnings("serial")

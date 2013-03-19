@@ -114,7 +114,7 @@ public class BeanManagerTest extends AbstractTest {
     @Test(expectedExceptions = InjectionException.class)
     @SpecAssertion(section = BM_VALIDATE_IP, id = "a")
     public void testValidateThrowsException() {
-        DogHouse dogHouse = getInstanceByType(DogHouse.class);
+        DogHouse dogHouse = getContextualReference(DogHouse.class);
         InjectionPoint injectionPoint = new InjectionPointDecorator(dogHouse.getDog().getInjectedMetadata());
         // Wrap the injection point to change the type to a more generalized class
         getCurrentManager().validate(injectionPoint);

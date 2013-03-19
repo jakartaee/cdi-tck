@@ -63,26 +63,26 @@ public class NewSimpleBeanTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = NEW, id = "ya") })
     public void testNewBeanCreatedForFieldInjectionPoint() {
-        assert getInstanceByType(Griffin.class).getList() instanceof ArrayList<?>;
+        assert getContextualReference(Griffin.class).getList() instanceof ArrayList<?>;
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = NEW, id = "yc") })
     public void testNewBeanCreatedForInitializerInjectionPoint() {
-        assert getInstanceByType(Dragon.class).getChildren() instanceof HashSet<?>;
+        assert getContextualReference(Dragon.class).getChildren() instanceof HashSet<?>;
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = NEW, id = "ye") })
     public void testNewBeanCreatedForConstructorInjectioAnPoint() {
-        assert getInstanceByType(Hippogriff.class).getHomes() instanceof HashMap<?, ?>;
+        assert getContextualReference(Hippogriff.class).getHomes() instanceof HashMap<?, ?>;
     }
 
     @SuppressWarnings("serial")
     @Test
     @SpecAssertions({ @SpecAssertion(section = NEW, id = "yg") })
     public void testNewBeanCreatedForProducerMethod() {
-        assert getInstanceByType(new TypeLiteral<Collection<Dragon>>() {
+        assert getContextualReference(new TypeLiteral<Collection<Dragon>>() {
         }) instanceof ArrayList<?>;
     }
 
@@ -90,7 +90,7 @@ public class NewSimpleBeanTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = NEW, id = "yi") })
     public void testNewBeanCreatedForObserverMethod() {
         getCurrentManager().fireEvent(new Griffin());
-        assert getInstanceByType(Bestiary.class).getPossibleNames() instanceof TreeSet<?>;
+        assert getContextualReference(Bestiary.class).getPossibleNames() instanceof TreeSet<?>;
     }
 
     @SuppressWarnings("serial")
@@ -102,13 +102,13 @@ public class NewSimpleBeanTest extends AbstractTest {
         CreationalContext<Collection<Dragon>> ctx = getCurrentManager().createCreationalContext(bean);
         Collection<Dragon> dragons = bean.create(ctx);
         bean.destroy(dragons, ctx);
-        assert getInstanceByType(Bestiary.class).getKnightsWhichKilledTheDragons() instanceof LinkedHashSet<?>;
+        assert getContextualReference(Bestiary.class).getKnightsWhichKilledTheDragons() instanceof LinkedHashSet<?>;
     }
 
     @Test
     @SpecAssertions({})
     public void testNewBeanIsDependentScoped() {
-        FoxRun foxRun = getInstanceByType(FoxRun.class);
+        FoxRun foxRun = getContextualReference(FoxRun.class);
         foxRun.getNewFox().setDen(new Den("TheLarches"));
         assert !foxRun.getNewFox().getDen().getName().equals(foxRun.getNewFox2().getDen().getName());
     }
@@ -119,8 +119,8 @@ public class NewSimpleBeanTest extends AbstractTest {
         Bean<Fox> foxBean = getBeans(Fox.class).iterator().next();
         assert foxBean.getScope().equals(RequestScoped.class);
         assert foxBean.getName().equals("fox");
-        Fox newFox1 = getInstanceByType(FoxRun.class).getNewFox();
-        Fox newFox2 = getInstanceByType(FoxRun.class).getNewFox();
+        Fox newFox1 = getContextualReference(FoxRun.class).getNewFox();
+        Fox newFox2 = getContextualReference(FoxRun.class).getNewFox();
         newFox1.setDen(new Den("TheElms"));
         assert newFox2.getDen().getName() != "TheElms";
     }
@@ -135,29 +135,29 @@ public class NewSimpleBeanTest extends AbstractTest {
     @Test
     @SpecAssertion(section = NEW, id = "w")
     public void testNewBeanHasNoProducerFields() throws Exception {
-        FoxRun foxRun = getInstanceByType(FoxRun.class);
+        FoxRun foxRun = getContextualReference(FoxRun.class);
         foxRun.getNewFox().setDen(new Den("NewFoxDen"));
-        Den theOnlyDen = getInstanceByType(Den.class);
+        Den theOnlyDen = getContextualReference(Den.class);
         assert theOnlyDen.getName().equals(foxRun.getFox().getDen().getName());
     }
 
     @Test
     @SpecAssertion(section = NEW, id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
-        FoxRun foxRun = getInstanceByType(FoxRun.class);
+        FoxRun foxRun = getContextualReference(FoxRun.class);
         foxRun.getFox().setNextLitterSize(3);
         foxRun.getNewFox().setNextLitterSize(5);
-        Litter theOnlyLitter = getInstanceByType(Litter.class);
+        Litter theOnlyLitter = getContextualReference(Litter.class);
         assert theOnlyLitter.getQuantity() == foxRun.getFox().getNextLitterSize();
     }
 
     @Test
     @SpecAssertion(section = NEW, id = "x")
     public void testNewBeanHasNoDisposerMethods() throws Exception {
-        FoxRun foxRun = getInstanceByType(FoxRun.class);
+        FoxRun foxRun = getContextualReference(FoxRun.class);
         Bean<Litter> litterBean = getBeans(Litter.class).iterator().next();
         CreationalContext<Litter> creationalContext = getCurrentManager().createCreationalContext(litterBean);
-        Litter litter = getInstanceByType(Litter.class);
+        Litter litter = getContextualReference(Litter.class);
         litterBean.destroy(litter, creationalContext);
         assert foxRun.getFox().isLitterDisposed();
         assert !foxRun.getNewFox().isLitterDisposed();
@@ -173,7 +173,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assertEquals(orderBean.getQualifiers().size(), 2);
         assertTrue(annotationSetMatches(orderBean.getQualifiers(), Any.class, Default.class));
 
-        assertNotNull(getInstanceByType(Shop.class).getNewOrder());
+        assertNotNull(getContextualReference(Shop.class).getNewOrder());
 
         Bean<Order> newOrderBean = getUniqueBean(Order.class, NewLiteral.INSTANCE);
         assertEquals(newOrderBean.getBeanClass(), Order.class);
@@ -182,7 +182,7 @@ public class NewSimpleBeanTest extends AbstractTest {
         assertEquals(lionBean.getQualifiers().size(), 2);
         assertTrue(annotationSetMatches(lionBean.getQualifiers(), Any.class, Tame.class));
 
-        assertNotNull(getInstanceByType(LionCage.class).getNewLion());
+        assertNotNull(getContextualReference(LionCage.class).getNewLion());
     }
 
     @Test
@@ -196,14 +196,14 @@ public class NewSimpleBeanTest extends AbstractTest {
     @SpecAssertion(section = NEW, id = "i")
     public void testNewBeanHasTheSameInterceptorBindings() {
         // Method foo() is intercepted
-        assertTrue(getInstanceByType(Shop.class).getNewOrder().foo());
+        assertTrue(getContextualReference(Shop.class).getNewOrder().foo());
     }
 
     @Test
     @SpecAssertion(section = NEW, id = "f")
     public void testNewBeanHasSameConstructor() {
         ExplicitContructorSimpleBean.setConstructorCalls(0);
-        Consumer consumer = getInstanceByType(Consumer.class);
+        Consumer consumer = getContextualReference(Consumer.class);
         // Make sure all deps are initialized, even if deps are lazily init'd
         consumer.getExplicitConstructorBean().ping();
         consumer.getNewExplicitConstructorBean().ping();
@@ -215,7 +215,7 @@ public class NewSimpleBeanTest extends AbstractTest {
     @SpecAssertion(section = NEW, id = "g")
     public void testNewBeanHasSameInitializers() {
         InitializerSimpleBean.setInitializerCalls(0);
-        Consumer consumer = getInstanceByType(Consumer.class);
+        Consumer consumer = getContextualReference(Consumer.class);
         consumer.getInitializerSimpleBean().businessMethod(); // Cause proxy to initialize the bean
         consumer.getNewInitializerSimpleBean().businessMethod();
         int calls = InitializerSimpleBean.getInitializerCalls();
@@ -225,7 +225,7 @@ public class NewSimpleBeanTest extends AbstractTest {
     @Test
     @SpecAssertion(section = NEW, id = "h")
     public void testNewBeanHasSameInjectedFields() {
-        Consumer consumer = getInstanceByType(Consumer.class);
+        Consumer consumer = getContextualReference(Consumer.class);
         assert consumer.getNewInitializerSimpleBean().getOrder() != null;
     }
 
@@ -239,6 +239,6 @@ public class NewSimpleBeanTest extends AbstractTest {
     @Test
     @SpecAssertion(section = NEW, id = "z")
     public void testNewBeanWithNoMemberValue() {
-        assert getInstanceByType(NewLionConsumer.class).getLion() instanceof Lion;
+        assert getContextualReference(NewLionConsumer.class).getLion() instanceof Lion;
     }
 }

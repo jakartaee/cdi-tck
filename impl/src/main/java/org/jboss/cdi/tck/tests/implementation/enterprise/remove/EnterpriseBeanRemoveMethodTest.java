@@ -50,7 +50,7 @@ public class EnterpriseBeanRemoveMethodTest extends AbstractTest {
                 getCurrentManager().createCreationalContext(bean));
         stateKeeper.setRemoveCalled(false);
 
-        DependentSessionInterface sessionBean = getInstanceByType(DependentSessionInterface.class);
+        DependentSessionInterface sessionBean = getContextualReference(DependentSessionInterface.class);
         sessionBean.remove();
         assert stateKeeper.isRemoveCalled();
     }
@@ -59,16 +59,16 @@ public class EnterpriseBeanRemoveMethodTest extends AbstractTest {
     @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "da")
     public void testApplicationMayCallRemoveMethodOnDependentScopedSessionEnterpriseBeansButNoParametersArePassed()
             throws Exception {
-        DependentSessionInterface sessionBean = getInstanceByType(DependentSessionInterface.class);
+        DependentSessionInterface sessionBean = getContextualReference(DependentSessionInterface.class);
         sessionBean.anotherRemoveWithParameters("required", null);
-        StateKeeper stateKeeper = getInstanceByType(StateKeeper.class);
+        StateKeeper stateKeeper = getContextualReference(StateKeeper.class);
         assert stateKeeper.isRemoveCalled();
     }
 
     @Test(groups = INTEGRATION, expectedExceptions = UnsupportedOperationException.class)
     @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "b")
     public void testApplicationCannotCallRemoveMethodOnNonDependentScopedSessionEnterpriseBean() {
-        SessionScopedSessionInterface sessionBean = getInstanceByType(SessionScopedSessionInterface.class);
+        SessionScopedSessionInterface sessionBean = getContextualReference(SessionScopedSessionInterface.class);
         sessionBean.remove();
         assert false : "Should never reach this assertion";
     }

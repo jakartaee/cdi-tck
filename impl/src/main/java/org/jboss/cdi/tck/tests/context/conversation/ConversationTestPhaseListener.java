@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -26,7 +26,7 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.cdi.tck.impl.OldSPIBridge;
+import org.jboss.cdi.tck.util.BeanLookupUtils;
 
 public class ConversationTestPhaseListener implements PhaseListener {
 
@@ -39,7 +39,6 @@ public class ConversationTestPhaseListener implements PhaseListener {
     public void afterPhase(PhaseEvent event) {
     }
 
-    @SuppressWarnings("deprecation")
     public void beforePhase(PhaseEvent event) {
 
         BeanManager beanManager = CDI.current().getBeanManager();
@@ -58,7 +57,7 @@ public class ConversationTestPhaseListener implements PhaseListener {
             response.addHeader(AbstractConversationTest.CID_HEADER_NAME,
                     conversation.getId() == null ? " null" : conversation.getId());
             response.addHeader(AbstractConversationTest.LONG_RUNNING_HEADER_NAME, String.valueOf(!conversation.isTransient()));
-            response.addHeader(Cloud.RAINED_HEADER_NAME, new Boolean(OldSPIBridge.getInstanceByType(beanManager, Cloud.class)
+            response.addHeader(Cloud.RAINED_HEADER_NAME, new Boolean(BeanLookupUtils.getContextualReference(beanManager, Cloud.class)
                     .isRained()).toString());
             response.addHeader(ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME,
                     new Boolean(activeBeforeApplyRequestValues).toString());

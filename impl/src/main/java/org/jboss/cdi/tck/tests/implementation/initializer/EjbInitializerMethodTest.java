@@ -42,7 +42,7 @@ public class EjbInitializerMethodTest extends AbstractTest {
     // This DOES NOT TEST initializer methods on Java EE component classes PLM
     public void testInitializerMethodNotABusinessMethod() {
         AndalusianChicken.nonBusinessMethodCalled = false;
-        getInstanceByType(LocalChicken.class).cluck();
+        getContextualReference(LocalChicken.class).cluck();
         assert AndalusianChicken.nonBusinessMethodCalled;
     }
 }

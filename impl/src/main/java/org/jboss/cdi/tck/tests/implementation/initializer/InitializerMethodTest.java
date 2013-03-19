@@ -45,9 +45,9 @@ public class InitializerMethodTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = DECLARING_INITIALIZER, id = "f"), @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "b"),
             @SpecAssertion(section = INITIALIZER_METHODS, id = "a") })
     public void testBindingTypeOnInitializerParameter() {
-        PremiumChickenHutch hutch = getInstanceByType(PremiumChickenHutch.class);
+        PremiumChickenHutch hutch = getContextualReference(PremiumChickenHutch.class);
         assert hutch.getChicken().getName().equals("Preferred");
-        StandardChickenHutch anotherHutch = getInstanceByType(StandardChickenHutch.class);
+        StandardChickenHutch anotherHutch = getContextualReference(StandardChickenHutch.class);
         assert anotherHutch.getChicken().getName().equals("Standard");
     }
 
@@ -56,7 +56,7 @@ public class InitializerMethodTest extends AbstractTest {
             @SpecAssertion(section = DECLARING_INITIALIZER, id = "e"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ad"),
             @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a") })
     public void testMultipleInitializerMethodsAreCalled() {
-        ChickenHutch chickenHutch = getInstanceByType(ChickenHutch.class);
+        ChickenHutch chickenHutch = getContextualReference(ChickenHutch.class);
         assert chickenHutch.fox != null;
         assert chickenHutch.chicken != null;
     }

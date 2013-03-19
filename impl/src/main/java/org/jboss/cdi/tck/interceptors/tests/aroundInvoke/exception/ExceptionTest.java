@@ -37,6 +37,6 @@ public class ExceptionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "3.2", id = "a"), @SpecAssertion(section = "3.2", id = "b"),
             @SpecAssertion(section = "3.2", id = "d") })
     public void testInvocationOrder() {
-        assert getInstanceByType(SimpleBean.class).foo();
+        assert getContextualReference(SimpleBean.class).foo();
     }
 }

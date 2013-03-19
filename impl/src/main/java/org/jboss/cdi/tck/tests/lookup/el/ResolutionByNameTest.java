@@ -47,7 +47,7 @@ public class ResolutionByNameTest extends AbstractTest {
     public void testQualifiedNameLookup() {
         assert getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(),
                 "#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class);
-        assert getInstanceByType(Counter.class).getCount() == 1;
+        assert getContextualReference(Counter.class).getCount() == 1;
     }
 
     @Test
@@ -76,7 +76,7 @@ public class ResolutionByNameTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = EL, id = "d"), @SpecAssertion(section = NAMES, id = "a") })
     public void testELResolverReturnsContextualInstance() {
-        Salmon salmon = getInstanceByType(Salmon.class);
+        Salmon salmon = getContextualReference(Salmon.class);
         salmon.setAge(3);
         assert getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{salmon.age}", Integer.class) == 3;
     }

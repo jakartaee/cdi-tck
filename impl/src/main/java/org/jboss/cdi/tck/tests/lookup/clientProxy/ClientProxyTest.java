@@ -46,14 +46,14 @@ public class ClientProxyTest extends AbstractTest {
     @Test
     @SpecAssertion(section = CLIENT_PROXIES, id = "b")
     public void testClientProxyUsedForNormalScope() {
-        Tuna tuna = getInstanceByType(Tuna.class);
+        Tuna tuna = getContextualReference(Tuna.class);
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
     }
 
     @Test
     @SpecAssertion(section = CLIENT_PROXIES, id = "c")
     public void testSimpleBeanClientProxyIsSerializable() throws IOException, ClassNotFoundException {
-        TunedTuna tuna = getInstanceByType(TunedTuna.class);
+        TunedTuna tuna = getContextualReference(TunedTuna.class);
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
         byte[] bytes = passivate(tuna);
         tuna = (TunedTuna) activate(bytes);
@@ -64,7 +64,7 @@ public class ClientProxyTest extends AbstractTest {
     @Test
     @SpecAssertion(section = CLIENT_PROXY_INVOCATION, id = "aa")
     public void testClientProxyInvocation() {
-        TunedTuna tuna = getInstanceByType(TunedTuna.class);
+        TunedTuna tuna = getContextualReference(TunedTuna.class);
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
         assert tuna.getState().equals("tuned");
     }
@@ -77,7 +77,7 @@ public class ClientProxyTest extends AbstractTest {
         setContextInactive(ctx);
         assert !getCurrentConfiguration().getContexts().getRequestContext().isActive();
         try {
-            getInstanceByType(TunedTuna.class).getState();
+            getContextualReference(TunedTuna.class).getState();
         } finally {
             // need to set request scope active again, some other tests will fail otherwise
             setContextActive(ctx);

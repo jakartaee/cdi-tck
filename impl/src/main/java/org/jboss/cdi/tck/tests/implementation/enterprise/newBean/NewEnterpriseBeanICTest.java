@@ -47,7 +47,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     @Test
     @SpecAssertion(section = NEW, id = "l")
     public void testNewBeanHasSameConstructor() {
-        ExplicitConstructor newBean = getInstanceByType(ExplicitConstructor.class, new NewLiteral(
+        ExplicitConstructor newBean = getContextualReference(ExplicitConstructor.class, new NewLiteral(
                 ExplicitConstructorSessionBean.class));
         assert newBean.getConstructorCalls() == 1;
         assert newBean.getInjectedSimpleBean() != null;
@@ -56,8 +56,8 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     @Test
     @SpecAssertion(section = NEW, id = "m")
     public void testNewBeanHasSameInitializers() {
-        InitializerSimpleBeanLocal bean = getInstanceByType(InitializerSimpleBeanLocal.class);
-        InitializerSimpleBeanLocal newBean = getInstanceByType(InitializerSimpleBeanLocal.class, new NewLiteral(
+        InitializerSimpleBeanLocal bean = getContextualReference(InitializerSimpleBeanLocal.class);
+        InitializerSimpleBeanLocal newBean = getContextualReference(InitializerSimpleBeanLocal.class, new NewLiteral(
                 InitializerSimpleBean.class));
         assert bean != newBean;
         assert bean.getInitializerCalls() == 2;
@@ -72,12 +72,12 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     @Test
     @SpecAssertion(section = NEW, id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
-        FoxLocal fox = getInstanceByType(FoxLocal.class);
-        FoxLocal newFox = getInstanceByType(FoxLocal.class, new NewLiteral(Fox.class));
+        FoxLocal fox = getContextualReference(FoxLocal.class);
+        FoxLocal newFox = getContextualReference(FoxLocal.class, new NewLiteral(Fox.class));
         fox.setNextLitterSize(3);
         newFox.setNextLitterSize(5);
         @SuppressWarnings("serial")
-        Litter theOnlyLitter = getInstanceByType(Litter.class, new AnnotationLiteral<Tame>() {
+        Litter theOnlyLitter = getContextualReference(Litter.class, new AnnotationLiteral<Tame>() {
         });
         assert theOnlyLitter.getQuantity() == fox.getNextLitterSize();
     }
@@ -85,8 +85,8 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     @Test
     @SpecAssertion(section = NEW, id = "x")
     public void testNewBeanHasNoDisposalMethods() throws Exception {
-        FoxLocal fox = getInstanceByType(FoxLocal.class);
-        FoxLocal newFox = getInstanceByType(FoxLocal.class, new NewLiteral(Fox.class));
+        FoxLocal fox = getContextualReference(FoxLocal.class);
+        FoxLocal newFox = getContextualReference(FoxLocal.class, new NewLiteral(Fox.class));
         @SuppressWarnings("serial")
         Set<Bean<Litter>> beans = getBeans(Litter.class, new AnnotationLiteral<Tame>() {
         });

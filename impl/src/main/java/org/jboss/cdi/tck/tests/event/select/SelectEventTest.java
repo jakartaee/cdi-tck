@@ -46,9 +46,9 @@ public class SelectEventTest extends AbstractTest {
     @Test
     @SpecAssertion(section = EVENT, id = "eaa")
     public void testEventSelectReturnsEventOfSameType() {
-        AlarmSystem alarm = getInstanceByType(AlarmSystem.class);
+        AlarmSystem alarm = getContextualReference(AlarmSystem.class);
         alarm.reset();
-        SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
+        SecuritySensor sensor = getContextualReference(SecuritySensor.class);
 
         sensor.securityEvent.fire(new SecurityEvent());
         assert alarm.getNumSecurityEvents() == 1;
@@ -80,7 +80,7 @@ public class SelectEventTest extends AbstractTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = EVENT, id = "eab")
     public <T> void testEventSelectThrowsExceptionIfEventTypeHasTypeVariable() {
-        SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
+        SecuritySensor sensor = getContextualReference(SecuritySensor.class);
         sensor.securityEvent.select(new TypeLiteral<SecurityEvent_Illegal<T>>() {
         });
     }
@@ -88,7 +88,7 @@ public class SelectEventTest extends AbstractTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = EVENT, id = "eba")
     public void testEventSelectThrowsExceptionForDuplicateBindingType() {
-        SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
+        SecuritySensor sensor = getContextualReference(SecuritySensor.class);
         sensor.securityEvent.select(new AnnotationLiteral<SystemTest>() {
         }, new AnnotationLiteral<SystemTest>() {
         });
@@ -97,7 +97,7 @@ public class SelectEventTest extends AbstractTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = EVENT, id = "eba")
     public void testEventSelectWithSubtypeThrowsExceptionForDuplicateBindingType() {
-        SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
+        SecuritySensor sensor = getContextualReference(SecuritySensor.class);
         sensor.securityEvent.select(BreakInEvent.class, new AnnotationLiteral<Violent>() {
         }, new AnnotationLiteral<Violent>() {
         });
@@ -106,7 +106,7 @@ public class SelectEventTest extends AbstractTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = EVENT, id = "ec")
     public void testEventSelectThrowsExceptionIfAnnotationIsNotBindingType() {
-        SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
+        SecuritySensor sensor = getContextualReference(SecuritySensor.class);
         sensor.securityEvent.select(new AnnotationLiteral<NotABindingType>() {
         });
     }
@@ -114,7 +114,7 @@ public class SelectEventTest extends AbstractTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = EVENT, id = "ec")
     public void testEventSelectWithSubtypeThrowsExceptionIfAnnotationIsNotBindingType() {
-        SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
+        SecuritySensor sensor = getContextualReference(SecuritySensor.class);
         sensor.securityEvent.select(BreakInEvent.class, new AnnotationLiteral<NotABindingType>() {
         });
     }

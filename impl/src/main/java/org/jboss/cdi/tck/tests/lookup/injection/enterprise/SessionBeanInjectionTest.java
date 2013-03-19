@@ -44,14 +44,14 @@ public class SessionBeanInjectionTest extends AbstractTest {
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ab"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ba"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "be") })
     public void testInjectionOnContextualSessionBean() {
-        assert getInstanceByType(FarmLocal.class).isInjectionPerformedCorrectly();
+        assert getContextualReference(FarmLocal.class).isInjectionPerformedCorrectly();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "c"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ak"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "al") })
     public void testInjectionOnNonContextualSessionBean() {
-        assert getInstanceByType(InjectedSessionBeanLocal.class).getFarm().isInjectionPerformedCorrectly();
+        assert getContextualReference(InjectedSessionBeanLocal.class).getFarm().isInjectionPerformedCorrectly();
     }
 
     @Test
@@ -59,15 +59,15 @@ public class SessionBeanInjectionTest extends AbstractTest {
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ap") })
     public void testInjectionOnEJBInterceptor() {
         // Test interceptor that intercepts contextual Session Bean
-        assert getInstanceByType(FarmLocal.class).getAnimalCount() == 2;
+        assert getContextualReference(FarmLocal.class).getAnimalCount() == 2;
         // Test interceptor that intercepts non-contextual Session Bean
-        assert getInstanceByType(InjectedSessionBeanLocal.class).getFarm().getAnimalCount() == 2;
+        assert getContextualReference(InjectedSessionBeanLocal.class).getFarm().getAnimalCount() == 2;
     }
 
     @Test
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ab")
     public void testFieldDeclaredInSuperclassInjected() {
-        DeluxeHenHouseLocal henHouse = getInstanceByType(DeluxeHenHouseLocal.class);
+        DeluxeHenHouseLocal henHouse = getContextualReference(DeluxeHenHouseLocal.class);
         assert henHouse.getFox() != null;
         assert henHouse.getFox().getName().equals("gavin");
     }
@@ -75,7 +75,7 @@ public class SessionBeanInjectionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ad")
     public void testFieldDeclaredInSuperclassIndirectlyInjected() {
-        MegaPoorHenHouseLocal henHouse = getInstanceByType(MegaPoorHenHouseLocal.class);
+        MegaPoorHenHouseLocal henHouse = getContextualReference(MegaPoorHenHouseLocal.class);
         assert henHouse.getFox() != null;
         assert henHouse.getFox().getName().equals("gavin");
     }

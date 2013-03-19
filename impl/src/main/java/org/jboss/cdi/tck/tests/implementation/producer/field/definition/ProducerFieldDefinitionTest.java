@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -30,6 +30,7 @@ import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD_NAME;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD_TYPES;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
@@ -74,7 +75,7 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = PRODUCER_FIELD, id = "fa")
     public void testParameterizedReturnType() throws Exception {
-        FunnelWeaverSpiderConsumer spiderConsumer = getInstanceByType(FunnelWeaverSpiderConsumer.class);
+        FunnelWeaverSpiderConsumer spiderConsumer = getContextualReference(FunnelWeaverSpiderConsumer.class);
         assert spiderConsumer != null;
         assert spiderConsumer.getInjectedSpider() != null;
         assert spiderConsumer.getInjectedSpider().equals(FunnelWeaverSpiderProducer.getSpider());
@@ -85,9 +86,9 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
             @SpecAssertion(section = DECLARING_PRODUCER_FIELD, id = "a") })
     public void testBeanDeclaresMultipleProducerFields() {
         assert getBeans(Tarantula.class, TAME_LITERAL).size() == 1;
-        assert getInstanceByType(WolfSpider.class, PET_LITERAL).equals(OtherSpiderProducer.WOLF_SPIDER);
+        assert getContextualReference(WolfSpider.class, PET_LITERAL).equals(OtherSpiderProducer.WOLF_SPIDER);
         assert getBeans(BlackWidow.class, TAME_LITERAL).size() == 1;
-        assert getInstanceByType(BlackWidow.class, TAME_LITERAL).equals(OtherSpiderProducer.BLACK_WIDOW);
+        assert getContextualReference(BlackWidow.class, TAME_LITERAL).equals(OtherSpiderProducer.BLACK_WIDOW);
     }
 
     @Test
@@ -212,19 +213,19 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ea")
     public void testNonStaticProducerFieldNotInherited() {
-        assert !(getInstanceByType(Egg.class, FOO_LITERAL).getMother() instanceof InfertileChicken);
+        assert !(getContextualReference(Egg.class, FOO_LITERAL).getMother() instanceof InfertileChicken);
     }
 
     @Test
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ec")
     public void testNonStaticProducerFieldNotIndirectlyInherited() {
-        assert !(getInstanceByType(Egg.class, FOO_LITERAL).getMother() instanceof LameInfertileChicken);
+        assert !(getContextualReference(Egg.class, FOO_LITERAL).getMother() instanceof LameInfertileChicken);
     }
 
     @Test
     @SpecAssertion(section = PRODUCER_FIELD, id = "fb")
     public void testProducerFieldWithTypeVariable() {
-        assert (getInstanceByType(new TypeLiteral<List<Spider>>() {
-        })) != null;
+        assertNotNull(getContextualReference(new TypeLiteral<List<Spider>>() {
+        }));
     }
 }

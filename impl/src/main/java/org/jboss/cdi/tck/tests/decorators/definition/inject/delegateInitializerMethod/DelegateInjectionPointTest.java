@@ -44,7 +44,7 @@ public class DelegateInjectionPointTest extends AbstractTest {
     public void testDecoratorDelegateInjectionPoints() {
         TimestampLogger.reset();
         MockLogger.reset();
-        getInstanceByType(CowShed.class).milk();
+        getContextualReference(CowShed.class).milk();
         assert TimestampLogger.getInitializerMethod() != null;
         assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + CowShed.MESSAGE);
     }

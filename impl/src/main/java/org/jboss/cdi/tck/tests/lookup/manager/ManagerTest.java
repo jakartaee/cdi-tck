@@ -47,7 +47,7 @@ public class ManagerTest extends AbstractTest {
     @Test
     @SpecAssertion(section = BEANMANAGER, id = "c")
     public void testInjectingManager() {
-        FishFarmOffice fishFarmOffice = getInstanceByType(FishFarmOffice.class);
+        FishFarmOffice fishFarmOffice = getContextualReference(FishFarmOffice.class);
         assert fishFarmOffice.beanManager != null;
     }
 

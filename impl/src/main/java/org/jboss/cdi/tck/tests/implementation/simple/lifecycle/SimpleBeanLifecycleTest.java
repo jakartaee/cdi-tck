@@ -53,8 +53,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.impl.MockCreationalContext;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -76,7 +76,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
             @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "d") })
     public void testInjectionOfParametersIntoBeanConstructor() {
         assert getBeans(FishPond.class).size() == 1;
-        FishPond fishPond = getInstanceByType(FishPond.class);
+        FishPond fishPond = getContextualReference(FishPond.class);
         assert fishPond.goldfish != null;
         assert fishPond.goldfish instanceof Goldfish;
         assert fishPond.goose != null;
@@ -85,7 +85,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "b") })
     public void testSerializeRequestScoped() throws Exception {
-        Cod codInstance = getInstanceByType(Cod.class);
+        Cod codInstance = getContextualReference(Cod.class);
 
         byte[] bytes = passivate(codInstance);
         Object object = activate(bytes);
@@ -96,7 +96,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "b") })
     public void testSerializeSessionScoped() throws Exception {
-        Bream instance = getInstanceByType(Bream.class);
+        Bream instance = getContextualReference(Bream.class);
 
         byte[] bytes = passivate(instance);
         Object object = activate(bytes);
@@ -107,7 +107,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "g")
     public void testQualifierTypeAnnotatedConstructor() {
-        getInstanceByType(Duck.class);
+        getContextualReference(Duck.class);
         assert Duck.constructedCorrectly;
     }
 
@@ -162,8 +162,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
             @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "k"), @SpecAssertion(section = INITIALIZATION, id = "da") })
     public void testManagedBean() {
         assert getBeans(RedSnapper.class).size() == 1;
-        assert getInstanceByType(RedSnapper.class) instanceof RedSnapper;
-        RedSnapper redSnapper = getInstanceByType(RedSnapper.class);
+        assert getContextualReference(RedSnapper.class) instanceof RedSnapper;
+        RedSnapper redSnapper = getContextualReference(RedSnapper.class);
         redSnapper.ping();
         assert redSnapper.isTouched();
     }
@@ -174,7 +174,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
             @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE, id = "jg") })
     public void testCreateInjectsFieldsDeclaredInJava() {
         assert getBeans(TunaFarm.class).size() == 1;
-        TunaFarm tunaFarm = getInstanceByType(TunaFarm.class);
+        TunaFarm tunaFarm = getContextualReference(TunaFarm.class);
         assert tunaFarm.tuna != null;
         assert tunaFarm.tuna.getName().equals("Ophir");
 
@@ -188,7 +188,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
         Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
         assert requestContext.get(tunaBean) == null;
-        TunaFarm tunaFarm = getInstanceByType(TunaFarm.class);
+        TunaFarm tunaFarm = getContextualReference(TunaFarm.class);
         assert tunaFarm.tuna != null;
     }
 
@@ -228,7 +228,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testContextualDestroyCatchesException() {
         Bean<Cod> codBean = getBeans(Cod.class).iterator().next();
         CreationalContext<Cod> creationalContext = getCurrentManager().createCreationalContext(codBean);
-        Cod codInstance = getInstanceByType(Cod.class);
+        Cod codInstance = getContextualReference(Cod.class);
         codInstance.ping();
         codBean.destroy(codInstance, creationalContext);
     }
@@ -248,7 +248,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testSubClassInheritsPostConstructOnSuperclass(Instance<Object> instance) {
         OrderProcessor.postConstructCalled = false;
         assertEquals(getBeans(CdOrderProcessor.class).size(), 1);
-        getInstanceByType(CdOrderProcessor.class).order();
+        getContextualReference(CdOrderProcessor.class).order();
         assertTrue(OrderProcessor.postConstructCalled);
 
         assertNotNull(instance);
@@ -262,7 +262,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testIndirectSubClassInheritsPostConstructOnSuperclass() {
         OrderProcessor.postConstructCalled = false;
         assert getBeans(IndirectOrderProcessor.class).size() == 1;
-        getInstanceByType(IndirectOrderProcessor.class).order();
+        getContextualReference(IndirectOrderProcessor.class).order();
         assert OrderProcessor.postConstructCalled;
     }
 
@@ -273,7 +273,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert getBeans(CdOrderProcessor.class).size() == 1;
         Bean<CdOrderProcessor> bean = getBeans(CdOrderProcessor.class).iterator().next();
         CreationalContext<CdOrderProcessor> creationalContext = getCurrentManager().createCreationalContext(bean);
-        CdOrderProcessor instance = getInstanceByType(CdOrderProcessor.class);
+        CdOrderProcessor instance = getContextualReference(CdOrderProcessor.class);
         bean.destroy(instance, creationalContext);
         assert OrderProcessor.preDestroyCalled;
     }
@@ -285,7 +285,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert getBeans(IndirectOrderProcessor.class).size() == 1;
         Bean<IndirectOrderProcessor> bean = getBeans(IndirectOrderProcessor.class).iterator().next();
         CreationalContext<IndirectOrderProcessor> creationalContext = getCurrentManager().createCreationalContext(bean);
-        IndirectOrderProcessor instance = getInstanceByType(IndirectOrderProcessor.class);
+        IndirectOrderProcessor instance = getContextualReference(IndirectOrderProcessor.class);
         bean.destroy(instance, creationalContext);
         assert OrderProcessor.preDestroyCalled;
     }
@@ -295,7 +295,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testSubClassDoesNotInheritPostConstructOnSuperclassBlockedByIntermediateClass() {
         assert getBeans(NovelOrderProcessor.class).size() == 1;
         OrderProcessor.postConstructCalled = false;
-        getInstanceByType(NovelOrderProcessor.class).order();
+        getContextualReference(NovelOrderProcessor.class).order();
         assert !OrderProcessor.postConstructCalled;
     }
 
@@ -306,7 +306,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert getBeans(NovelOrderProcessor.class).size() == 1;
         Bean<NovelOrderProcessor> bean = getBeans(NovelOrderProcessor.class).iterator().next();
         CreationalContext<NovelOrderProcessor> creationalContext = getCurrentManager().createCreationalContext(bean);
-        NovelOrderProcessor instance = getInstanceByType(NovelOrderProcessor.class);
+        NovelOrderProcessor instance = getContextualReference(NovelOrderProcessor.class);
         bean.destroy(instance, creationalContext);
         assert !OrderProcessor.preDestroyCalled;
     }
@@ -315,14 +315,14 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     @SpecAssertion(section = CONTEXTUAL, id = "a0")
     public void testCreationExceptionWrapsCheckedExceptionThrownFromCreate() {
         assert getBeans(Lorry_Broken.class).size() == 1;
-        getInstanceByType(Lorry_Broken.class);
+        getContextualReference(Lorry_Broken.class);
     }
 
     @Test(expectedExceptions = FooException.class)
     @SpecAssertion(section = CONTEXTUAL, id = "a0")
     public void testUncheckedExceptionThrownFromCreateNotWrapped() {
         assert getBeans(Van_Broken.class).size() == 1;
-        getInstanceByType(Van_Broken.class);
+        getContextualReference(Van_Broken.class);
     }
 
 }

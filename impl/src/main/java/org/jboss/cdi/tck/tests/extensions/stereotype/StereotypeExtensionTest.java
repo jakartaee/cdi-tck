@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.extensions.stereotype;
 import static org.jboss.cdi.tck.cdi.Sections.BBD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.inject.spi.Bean;
 
@@ -33,7 +32,7 @@ import org.testng.annotations.Test;
 
 /**
  * Tests that stereotype registered via the SPI works correctly.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -53,10 +52,9 @@ public class StereotypeExtensionTest extends AbstractTest {
         Bean<Chair> chairBean = getUniqueBean(Chair.class);
         assertEquals(chairBean.getName(), "chair");
 
-        Object instance = getInstanceByName("chair");
+        Chair instance = getContextualReference("chair", Chair.class);
         assertNotNull(instance);
-        assertTrue(instance instanceof Chair);
-        assertEquals(((Chair) instance).breakUpToPieces(), 5);
+        assertEquals(instance.breakUpToPieces(), 5);
     }
 
 }

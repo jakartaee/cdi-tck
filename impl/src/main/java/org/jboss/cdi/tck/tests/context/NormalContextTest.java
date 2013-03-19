@@ -25,8 +25,8 @@ import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.impl.MockCreationalContext;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -94,8 +94,8 @@ public class NormalContextTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = NORMAL_SCOPE, id = "e") })
     public void testSameNormalScopeBeanInjectedEverywhere() {
-        SimpleBeanA instanceOfA = getInstanceByType(SimpleBeanA.class);
-        SimpleBeanB instanceOfB = getInstanceByType(SimpleBeanB.class);
+        SimpleBeanA instanceOfA = getContextualReference(SimpleBeanA.class);
+        SimpleBeanB instanceOfB = getContextualReference(SimpleBeanB.class);
         instanceOfA.getZ().setName("Ben");
         assert instanceOfA.getZ().getName().equals("Ben");
         assert instanceOfB.getZ().getName().equals("Ben");

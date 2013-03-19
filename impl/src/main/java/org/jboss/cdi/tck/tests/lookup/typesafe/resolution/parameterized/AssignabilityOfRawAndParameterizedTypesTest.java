@@ -77,7 +77,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = LEGAL_INJECTION_POINT_TYPES, id = "b") })
     public void testAssignabilityOfParameterizedTypeWithActualTypesToParameterizedTypeWithWildcardsAtInjectionPoint() {
-        assert getInstanceByType(InjectedBean.class).getMap() instanceof IntegerHashMap;
+        assert getContextualReference(InjectedBean.class).getMap() instanceof IntegerHashMap;
     }
 
     @Test

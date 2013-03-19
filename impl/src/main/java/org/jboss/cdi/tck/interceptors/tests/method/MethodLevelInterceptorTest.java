@@ -38,7 +38,7 @@ public class MethodLevelInterceptorTest extends AbstractTest {
             @SpecAssertion(section = "8", id = "d"), @SpecAssertion(section = "8", id = "g"),
             @SpecAssertion(section = "8", id = "h") })
     public void testInterceptorCanBeAppliedToMoreThanOneMethod() {
-        Fish fish = getInstanceByType(Fish.class);
+        Fish fish = getContextualReference(Fish.class);
         assert fish.foo().equals("Intercepted bar");
         assert fish.ping().equals("Intercepted pong");
         assert fish.getName().equals("Salmon");
@@ -48,7 +48,7 @@ public class MethodLevelInterceptorTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "8", id = "j")
     public void testExcludeClassInterceptors() {
-        assert getInstanceByType(Dog.class).foo().equals("Intercepted bar");
-        assert getInstanceByType(Dog.class).ping().equals("pong");
+        assert getContextualReference(Dog.class).foo().equals("Intercepted bar");
+        assert getContextualReference(Dog.class).ping().equals("pong");
     }
 }

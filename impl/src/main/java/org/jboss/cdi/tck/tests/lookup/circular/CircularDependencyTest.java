@@ -37,8 +37,8 @@ public class CircularDependencyTest extends AbstractTest {
     @Test
     @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testCircularInjectionOnTwoNormalBeans() throws Exception {
-        Pig pig = getInstanceByType(Pig.class);
-        Food food = getInstanceByType(Food.class);
+        Pig pig = getContextualReference(Pig.class);
+        Food food = getContextualReference(Food.class);
         assert pig.getNameOfFood().equals(food.getName());
         assert food.getNameOfPig().equals(pig.getName());
     }
@@ -46,8 +46,8 @@ public class CircularDependencyTest extends AbstractTest {
     @Test
     @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testCircularInjectionOnOneNormalAndOneDependentBean() throws Exception {
-        Petrol petrol = getInstanceByType(Petrol.class);
-        Car car = getInstanceByType(Car.class);
+        Petrol petrol = getContextualReference(Petrol.class);
+        Car car = getContextualReference(Car.class);
         assert petrol.getNameOfCar().equals(car.getName());
         assert car.getNameOfPetrol().equals(petrol.getName());
     }
@@ -55,36 +55,36 @@ public class CircularDependencyTest extends AbstractTest {
     @Test
     @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testNormalProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception {
-        getInstanceByType(NormalSelfConsumingNormalProducer.class).ping();
+        getContextualReference(NormalSelfConsumingNormalProducer.class).ping();
     }
 
     @Test
     @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testNormalProducerMethodDeclaredOnDependentBeanWhichInjectsProducedBean() throws Exception {
-        getInstanceByType(DependentSelfConsumingNormalProducer.class).ping();
+        getContextualReference(DependentSelfConsumingNormalProducer.class).ping();
     }
 
     @Test
     @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testDependentProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception {
-        getInstanceByType(NormalSelfConsumingDependentProducer.class).ping();
+        getContextualReference(NormalSelfConsumingDependentProducer.class).ping();
     }
 
     @Test
     @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testNormalCircularConstructors() throws Exception {
-        assert getInstanceByType(Bird.class) != null;
+        assert getContextualReference(Bird.class) != null;
     }
 
     @Test
     @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testNormalAndDependentCircularConstructors() throws Exception {
-        assert getInstanceByType(Planet.class) != null;
+        assert getContextualReference(Planet.class) != null;
     }
 
     @Test
     @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testSelfConsumingConstructorsOnNormalBean() throws Exception {
-        assert getInstanceByType(House.class) != null;
+        assert getContextualReference(House.class) != null;
     }
 }

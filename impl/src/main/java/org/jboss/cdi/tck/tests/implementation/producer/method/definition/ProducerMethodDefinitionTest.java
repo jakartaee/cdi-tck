@@ -77,7 +77,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "b"), @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "a") })
     public void testStaticMethod() throws Exception {
         assert getBeans(String.class, TAME_LITERAL).size() == 1;
-        assert getInstanceByType(String.class, TAME_LITERAL).equals(BeanWithStaticProducerMethod.getString());
+        assert getContextualReference(String.class, TAME_LITERAL).equals(BeanWithStaticProducerMethod.getString());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD, id = "b") })
     public void testStaticDisposerMethod() throws Exception {
         assert getBeans(String.class, TAME_LITERAL).size() == 1;
-        String aString = getInstanceByType(String.class, TAME_LITERAL);
+        String aString = getContextualReference(String.class, TAME_LITERAL);
         Bean<String> stringBean = getBeans(String.class, TAME_LITERAL).iterator().next();
         CreationalContext<String> creationalContext = getCurrentManager().createCreationalContext(stringBean);
         stringBean.destroy(aString, creationalContext);
@@ -212,7 +212,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass() {
         assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
         }).size() == 0;
-        getInstanceByType(Egg.class, new AnnotationLiteral<Yummy>() {
+        getContextualReference(Egg.class, new AnnotationLiteral<Yummy>() {
         });
     }
 
@@ -221,7 +221,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     public void testNonStaticProducerMethodNotInherited() {
         assert getBeans(Apple.class, new AnnotationLiteral<Yummy>() {
         }).size() == 1;
-        assert getInstanceByType(Apple.class, new AnnotationLiteral<Yummy>() {
+        assert getContextualReference(Apple.class, new AnnotationLiteral<Yummy>() {
         }).getTree().getClass().equals(AppleTree.class);
     }
 
@@ -244,13 +244,13 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = PRODUCER_METHOD, id = "e")
     public void testDependentProducerReturnsNullValue() {
-        assert getInstanceByType(Acorn.class) == null;
+        assert getContextualReference(Acorn.class) == null;
     }
 
     @Test(expectedExceptions = { IllegalProductException.class })
     @SpecAssertion(section = PRODUCER_METHOD, id = "f")
     public void testNonDependentProducerReturnsNullValue() {
-        getInstanceByType(Pollen.class, new AnnotationLiteral<Yummy>() {
+        getContextualReference(Pollen.class, new AnnotationLiteral<Yummy>() {
         }).ping();
         fail("IllegalProductException not thrown");
     }

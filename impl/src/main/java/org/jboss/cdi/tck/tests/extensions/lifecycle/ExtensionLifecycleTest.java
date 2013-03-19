@@ -86,7 +86,7 @@ public class ExtensionLifecycleTest extends AbstractTest {
     public void testContainerInstantiatesSingleInstanceOfExtension() {
         // The container instantiates a single instance of each extension
         long id = simpleBean.getSimpleExtension().getId();
-        assertEquals(getInstanceByType(SimpleExtension.class).getId(), id);
+        assertEquals(getContextualReference(SimpleExtension.class).getId(), id);
     }
 
     @Test

@@ -76,7 +76,7 @@ public class ProducerTest extends AbstractTest {
     public void testDisposeDoesNothing() {
         InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
 
-        Cat cat = getInstanceByType(Cat.class);
+        Cat cat = getContextualReference(Cat.class);
         injectionTarget.dispose(cat);
         // The instance should still be available
         cat.ping();
@@ -133,7 +133,7 @@ public class ProducerTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PP, id = "ac"), @SpecAssertion(section = PP, id = "e"),
             @SpecAssertion(section = PP, id = "gb") })
     public void testProduceCallsOverridenResourceProducerMethod() {
-        assertEquals(getInstanceByType(ServiceRemote.class).ping(), "pong");
+        assertEquals(getContextualReference(ServiceRemote.class).ping(), "pong");
         assertTrue(ProducerProcessor.isOverriddenServiceProducerCalled);
     }
 
@@ -141,7 +141,7 @@ public class ProducerTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PP, id = "e"), @SpecAssertion(section = PP, id = "ga") })
     public void testSetProducerOverridesProducer() {
         ProducerProcessor.reset();
-        assert getInstanceByType(Cow.class, new AnnotationLiteral<Noisy>() {
+        assert getContextualReference(Cow.class, new AnnotationLiteral<Noisy>() {
         }) instanceof Cow;
         assert ProducerProcessor.isOverriddenCowProducerCalled();
     }
@@ -200,7 +200,7 @@ public class ProducerTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "j") })
     public void testInjectionTargetPostConstruct() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
-        Dog dog = getInstanceByType(Dog.class, new AnnotationLiteral<Noisy>() {
+        Dog dog = getContextualReference(Dog.class, new AnnotationLiteral<Noisy>() {
         });
         Dog.setPostConstructCalled(false);
         injectionTarget.postConstruct(dog);
@@ -211,7 +211,7 @@ public class ProducerTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "k") })
     public void testInjectionTargetPreDestroy() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
-        Dog dog = getInstanceByType(Dog.class, new AnnotationLiteral<Noisy>() {
+        Dog dog = getContextualReference(Dog.class, new AnnotationLiteral<Noisy>() {
         });
         Dog.setPreDestroyCalled(false);
         injectionTarget.preDestroy(dog);
@@ -222,7 +222,7 @@ public class ProducerTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PIT, id = "bb"), @SpecAssertion(section = PIT, id = "ea") })
     public void testSettingInjectionTargetReplacesIt() {
         CheckableInjectionTarget.setInjectCalled(false);
-        getInstanceByType(BirdCage.class);
+        getContextualReference(BirdCage.class);
         assert CheckableInjectionTarget.isInjectCalled();
     }
 

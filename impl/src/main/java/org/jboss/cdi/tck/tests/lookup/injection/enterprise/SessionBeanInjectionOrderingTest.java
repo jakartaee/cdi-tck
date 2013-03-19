@@ -40,19 +40,19 @@ public class SessionBeanInjectionOrderingTest extends AbstractTest {
     @Test
     @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bb")
     public void testInitializerCalledAfterFieldInjectionOfSuperclass() {
-        MegaPoorHenHouseLocal house = getInstanceByType(MegaPoorHenHouseLocal.class);
+        MegaPoorHenHouseLocal house = getContextualReference(MegaPoorHenHouseLocal.class);
         assert house.isInitializerCalledAfterSuperclassInjection();
     }
 
     @Test
     @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bf")
     public void testPostConstructCalledAfterInitializerOfSuperclass() {
-        assert getInstanceByType(MegaPoorHenHouseLocal.class).isPostConstructCalledAfterSuperclassInitializer();
+        assert getContextualReference(MegaPoorHenHouseLocal.class).isPostConstructCalledAfterSuperclassInitializer();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bc"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bd") })
     public void testInitializerCalledAfterResourceInjection() {
-        assert getInstanceByType(InjectedSessionBeanLocal.class).isInitializerCalledAfterResourceInjection();
+        assert getContextualReference(InjectedSessionBeanLocal.class).isInitializerCalledAfterResourceInjection();
     }
 }

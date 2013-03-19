@@ -36,18 +36,18 @@ public class AroundInvokeInterceptorTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "3", id = "cb")
     public void testPrivateAroundInvokeInterceptor() {
-        assert getInstanceByType(SimpleBean.class).zero() == 1;
+        assert getContextualReference(SimpleBean.class).zero() == 1;
     }
 
     @Test
     @SpecAssertion(section = "3", id = "cc")
     public void testProtectedAroundInvokeInterceptor() {
-        assert getInstanceByType(SimpleBean.class).one() == 2;
+        assert getContextualReference(SimpleBean.class).one() == 2;
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "3", id = "a"), @SpecAssertion(section = "3", id = "cd") })
     public void testPackagePrivateAroundInvokeInterceptor() {
-        assert getInstanceByType(SimpleBean.class).two() == 3;
+        assert getContextualReference(SimpleBean.class).two() == 3;
     }
 }

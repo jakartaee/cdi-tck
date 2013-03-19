@@ -41,7 +41,7 @@ public class InterceptorNotListedInBeansXmlNotEnabledTest extends AbstractTest {
     public void testInterceptorNotListedInBeansXmlNotInvoked() {
         TransactionInterceptor.invoked = false;
 
-        AccountHolder accountHolder = getInstanceByType(AccountHolder.class);
+        AccountHolder accountHolder = getContextualReference(AccountHolder.class);
         accountHolder.transfer(0);
 
         assertFalse(TransactionInterceptor.invoked);

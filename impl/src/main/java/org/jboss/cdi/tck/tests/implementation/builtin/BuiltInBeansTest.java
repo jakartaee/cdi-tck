@@ -53,7 +53,7 @@ public class BuiltInBeansTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "a") })
     public void testUserTransactionBean() throws SystemException {
-        UserTransaction userTransaction = getInstanceByType(UserTransactionInjectedBeanLocal.class).getUserTransaction();
+        UserTransaction userTransaction = getContextualReference(UserTransactionInjectedBeanLocal.class).getUserTransaction();
         assertNotNull(userTransaction);
         // Check that the UserTransaction is at least queryable
         userTransaction.getStatus();
@@ -68,7 +68,7 @@ public class BuiltInBeansTest extends AbstractTest {
     // PLM We should check the Principal somehow
     @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "b") })
     public void testPrincipalBean() throws SystemException, LoginException {
-        PrincipalInjectedBeanLocal instance = getInstanceByType(PrincipalInjectedBeanLocal.class);
+        PrincipalInjectedBeanLocal instance = getContextualReference(PrincipalInjectedBeanLocal.class);
         instance.login();
         Principal principal = instance.getPrincipal();
         // Not much we can check on the Princiapl easily

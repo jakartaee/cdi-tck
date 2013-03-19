@@ -40,7 +40,7 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     public void testInterceptorAppliedToBeanWithAllBindings() {
         MissileInterceptor.intercepted = false;
 
-        Missile missile = getInstanceByType(FastAndDeadlyMissile.class);
+        Missile missile = getContextualReference(FastAndDeadlyMissile.class);
         missile.fire();
 
         assert MissileInterceptor.intercepted;
@@ -51,7 +51,7 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     public void testInterceptorNotAppliedToBeanWithSomeBindings() {
         MissileInterceptor.intercepted = false;
 
-        Missile missile = getInstanceByType(SlowMissile.class);
+        Missile missile = getContextualReference(SlowMissile.class);
         missile.fire();
 
         assert !MissileInterceptor.intercepted;
@@ -62,7 +62,7 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     public void testMultipleInterceptorsOnMethod() {
         LockInterceptor.intercepted = false;
 
-        GuidedMissile bullet = getInstanceByType(GuidedMissile.class);
+        GuidedMissile bullet = getContextualReference(GuidedMissile.class);
 
         bullet.fire();
         assert !LockInterceptor.intercepted;

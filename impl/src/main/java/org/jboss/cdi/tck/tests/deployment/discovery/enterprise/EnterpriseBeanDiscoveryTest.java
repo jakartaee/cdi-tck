@@ -151,7 +151,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
     }
 
     private <T extends Ping, B  extends Ping> void assertDiscoveredAndAvailable(Class<T> beanType, Class<B> beanClazz) {
-        T instance = getInstanceByType(beanType);
+        T instance = getContextualReference(beanType);
         assertNotNull(instance);
         assertTrue(extension.getObservedAnnotatedTypes().contains(beanClazz));
         instance.pong();

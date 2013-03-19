@@ -41,7 +41,7 @@ public class ManagerTestEar extends AbstractTest {
     @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = PROVIDER, id = "d")
     public void testManagerLookupInJndi() throws Exception {
-        BeanManager beanManager = getInstanceByType(JndiBeanManagerInjected.class).getManagerFromJndi();
+        BeanManager beanManager = getContextualReference(JndiBeanManagerInjected.class).getManagerFromJndi();
         assert beanManager != null;
         assert beanManager.equals(getCurrentManager());
     }

@@ -63,7 +63,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testManagedBeanIsIntercepted() {
 
         AlmightyInterceptor.reset();
-        Missile missile = getInstanceByType(Missile.class);
+        Missile missile = getContextualReference(Missile.class);
         missile.fire();
 
         assertTrue(AlmightyInterceptor.methodIntercepted);
@@ -71,7 +71,7 @@ public class InterceptorInvocationTest extends AbstractTest {
 
         AlmightyInterceptor.reset();
         // Test interception of application scoped bean invocation
-        Watcher watcher = getInstanceByType(Watcher.class);
+        Watcher watcher = getContextualReference(Watcher.class);
         watcher.ping();
 
         assertTrue(AlmightyInterceptor.methodIntercepted);
@@ -83,7 +83,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testInitializerMethodsNotIntercepted() {
 
         AlmightyInterceptor.reset();
-        Missile missile = getInstanceByType(Missile.class);
+        Missile missile = getContextualReference(Missile.class);
 
         assertFalse(AlmightyInterceptor.methodIntercepted);
         assertTrue(missile.initCalled()); // this call is intercepted
@@ -95,7 +95,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testProducerMethodsAreIntercepted() {
 
         AlmightyInterceptor.reset();
-        getInstanceByType(Wheat.class);
+        getContextualReference(Wheat.class);
 
         assertTrue(AlmightyInterceptor.methodIntercepted);
     }
@@ -108,7 +108,7 @@ public class InterceptorInvocationTest extends AbstractTest {
 
         Bean<Wheat> bean = getBeans(Wheat.class).iterator().next();
         CreationalContext<Wheat> creationalContext = getCurrentManager().createCreationalContext(bean);
-        Wheat instance = getInstanceByType(Wheat.class);
+        Wheat instance = getContextualReference(Wheat.class);
 
         AlmightyInterceptor.methodIntercepted = false;
         bean.destroy(instance, creationalContext);
@@ -133,7 +133,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testLifecycleCallbacksAreIntercepted() {
 
         AlmightyInterceptor.reset();
-        Rye rye = getInstanceByType(Rye.class);
+        Rye rye = getContextualReference(Rye.class);
         rye.ping();
 
         assertTrue(AlmightyInterceptor.methodIntercepted);
@@ -145,7 +145,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testObjectMethodsAreNotIntercepted() {
 
         AlmightyInterceptor.reset();
-        getInstanceByType(Missile.class).toString();
+        getContextualReference(Missile.class).toString();
 
         assertFalse(AlmightyInterceptor.methodIntercepted);
         assertTrue(AlmightyInterceptor.lifecycleCallbackIntercepted);

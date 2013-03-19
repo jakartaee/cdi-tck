@@ -92,24 +92,24 @@ public class PassivatingContextTest extends AbstractTest {
     @Test
     @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "c")
     public void testInjectionOfDependentPrimitiveProductIntoNormalBean() {
-        getInstanceByType(NumberConsumer.class).ping();
+        getContextualReference(NumberConsumer.class).ping();
     }
 
     @Test
     @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "c")
     public void testInjectionOfDependentSerializableProductIntoNormalBean() {
-        getInstanceByType(SerializableCityConsumer.class).ping();
+        getContextualReference(SerializableCityConsumer.class).ping();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PASSIVATING_SCOPE, id = "a") })
     public void testPassivationOccurs() throws IOException, ClassNotFoundException {
-        Kajaani instance = getInstanceByType(Kajaani.class);
+        Kajaani instance = getContextualReference(Kajaani.class);
         instance.setTheNumber(100);
         Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
         setContextInactive(sessionContext);
         setContextActive(sessionContext);
-        instance = getInstanceByType(Kajaani.class);
+        instance = getContextualReference(Kajaani.class);
         assert instance.getTheNumber() == 100;
     }
 
@@ -123,13 +123,13 @@ public class PassivatingContextTest extends AbstractTest {
     @Test(expectedExceptions = IllegalProductException.class)
     @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ea")
     public void testPassivatingScopeProducerMethodReturnsUnserializableObjectNotOk() {
-        getInstanceByType(Television.class).turnOn();
+        getContextualReference(Television.class).turnOn();
     }
 
     @Test(expectedExceptions = IllegalProductException.class)
     @SpecAssertion(section = PASSIVATION_VALIDATION, id = "eb")
     public void testNonSerializableProducerFieldDeclaredPassivatingThrowsIllegalProductException() {
-        getInstanceByType(HelsinkiNonSerializable.class).ping();
+        getContextualReference(HelsinkiNonSerializable.class).ping();
     }
 
     public static boolean isSerializable(Class<?> clazz) {

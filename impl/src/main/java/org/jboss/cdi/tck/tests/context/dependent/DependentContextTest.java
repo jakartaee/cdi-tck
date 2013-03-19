@@ -40,8 +40,8 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.impl.MockCreationalContext;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -80,8 +80,8 @@ public class DependentContextTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = DEPENDENT_OBJECTS, id = "ga"), @SpecAssertion(section = DEPENDENT_OBJECTS, id = "gb"),
             @SpecAssertion(section = DEPENDENT_OBJECTS, id = "gc") })
     public void testDependentBeanIsDependentObjectOfBeanInjectedInto() {
-        FoxFarm foxFarm = getInstanceByType(FoxFarm.class);
-        FoxHole foxHole = getInstanceByType(FoxHole.class);
+        FoxFarm foxFarm = getContextualReference(FoxFarm.class);
+        FoxHole foxHole = getContextualReference(FoxHole.class);
 
         assert !foxFarm.fox.equals(foxHole.fox);
         assert !foxFarm.fox.equals(foxFarm.constructorFox);
@@ -106,10 +106,10 @@ public class DependentContextTest extends AbstractTest {
     public void testInstanceUsedForProducerMethodNotShared() throws Exception {
 
         SpiderProducer.reset();
-        getInstanceByType(Tarantula.class, PET_LITERAL);
+        getContextualReference(Tarantula.class, PET_LITERAL);
         Integer firstInstanceHash = SpiderProducer.getInstanceUsedForProducerHashcode();
         SpiderProducer.reset();
-        getInstanceByType(Tarantula.class, PET_LITERAL);
+        getContextualReference(Tarantula.class, PET_LITERAL);
         Integer secondInstanceHash = SpiderProducer.getInstanceUsedForProducerHashcode();
 
         assertFalse(firstInstanceHash.equals(secondInstanceHash));
@@ -119,8 +119,8 @@ public class DependentContextTest extends AbstractTest {
     @SpecAssertion(section = DEPENDENT_CONTEXT, id = "db")
     public void testInstanceUsedForProducerFieldNotShared() throws Exception {
 
-        Tarantula firstIntance = getInstanceByType(Tarantula.class, TAME_LITERAL);
-        Tarantula secondIntance = getInstanceByType(Tarantula.class, TAME_LITERAL);
+        Tarantula firstIntance = getContextualReference(Tarantula.class, TAME_LITERAL);
+        Tarantula secondIntance = getContextualReference(Tarantula.class, TAME_LITERAL);
 
         assertNotNull(firstIntance.getProducerInstanceHashcode());
         assertNotNull(secondIntance.getProducerInstanceHashcode());
@@ -131,10 +131,10 @@ public class DependentContextTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dc"), @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dg") })
     public void testInstanceUsedForDisposalMethodNotShared() {
 
-        Integer firstFoxHash = getInstanceByType(Fox.class).hashCode();
+        Integer firstFoxHash = getContextualReference(Fox.class).hashCode();
 
         SpiderProducer.reset();
-        SpiderProducer spiderProducer = getInstanceByType(SpiderProducer.class);
+        SpiderProducer spiderProducer = getContextualReference(SpiderProducer.class);
         Bean<Tarantula> tarantulaBean = getUniqueBean(Tarantula.class, PET_LITERAL);
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
         Tarantula tarantula = tarantulaBean.create(creationalContext);
@@ -165,7 +165,7 @@ public class DependentContextTest extends AbstractTest {
     public void testInstanceUsedForObserverMethodNotShared() {
 
         HorseStable.reset();
-        HorseStable firstStableInstance = getInstanceByType(HorseStable.class);
+        HorseStable firstStableInstance = getContextualReference(HorseStable.class);
 
         getCurrentManager().fireEvent(new HorseInStableEvent());
         Integer firstFoxHash = HorseStable.getFoxUsedForObservedEventHashcode();
@@ -225,7 +225,7 @@ public class DependentContextTest extends AbstractTest {
     })
     public void testContextIsActiveWhenInvokingProducerMethod() {
         SpiderProducer.reset();
-        Tarantula tarantula = getInstanceByType(Tarantula.class, PET_LITERAL);
+        Tarantula tarantula = getContextualReference(Tarantula.class, PET_LITERAL);
         assert tarantula != null;
         assert SpiderProducer.isDependentContextActive();
         SpiderProducer.reset();
@@ -237,7 +237,7 @@ public class DependentContextTest extends AbstractTest {
     public void testContextIsActiveWhenInvokingProducerField() {
         // Reset test class
         Tarantula.reset();
-        getInstanceByType(Tarantula.class, TAME_LITERAL);
+        getContextualReference(Tarantula.class, TAME_LITERAL);
         assert Tarantula.isDependentContextActive();
         SpiderProducer.reset();
     }
@@ -277,7 +277,7 @@ public class DependentContextTest extends AbstractTest {
     @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g")
     // Dependent context is now always active
     public void testContextIsActiveDuringBeanCreation() {
-        SensitiveFox fox1 = getInstanceByType(SensitiveFox.class);
+        SensitiveFox fox1 = getContextualReference(SensitiveFox.class);
         assert fox1 != null;
         assert fox1.isDependentContextActiveDuringCreate();
     }
@@ -389,7 +389,7 @@ public class DependentContextTest extends AbstractTest {
         // Reset the test class
         OtherSpiderProducer.setDestroyed(false);
 
-        Tarantula spiderInstance = getInstanceByType(Tarantula.class, TAME_LITERAL);
+        Tarantula spiderInstance = getContextualReference(Tarantula.class, TAME_LITERAL);
         assert spiderInstance != null;
         assert OtherSpiderProducer.isDestroyed();
     }

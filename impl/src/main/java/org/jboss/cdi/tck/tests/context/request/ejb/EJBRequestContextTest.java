@@ -78,7 +78,7 @@ public class EJBRequestContextTest extends AbstractTest {
     @SpecAssertion(section = REQUEST_CONTEXT, id = "gc")
     public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
-        FMS flightManagementSystem = getInstanceByType(FMS.class);
+        FMS flightManagementSystem = getContextualReference(FMS.class);
         flightManagementSystem.climb();
 
         new Timer().setDelay(20000l).addStopCondition(new StopCondition() {
@@ -99,7 +99,7 @@ public class EJBRequestContextTest extends AbstractTest {
     public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
         SimpleRequestBean.reset();
-        FMS flightManagementSystem = getInstanceByType(FMS.class);
+        FMS flightManagementSystem = getContextualReference(FMS.class);
 
         flightManagementSystem.climb();
 
@@ -135,7 +135,7 @@ public class EJBRequestContextTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "gb"),
             @SpecAssertion(section = REQUEST_CONTEXT, id = "hb") })
     public void testRequestScopeActiveDuringAsyncCallToEjb() throws Exception {
-        SimpleRequestBean simpleRequestBean = getInstanceByType(SimpleRequestBean.class);
+        SimpleRequestBean simpleRequestBean = getContextualReference(SimpleRequestBean.class);
         SimpleRequestBean.reset();
         Future<String> result = bar.compute();
         String id = result.get();

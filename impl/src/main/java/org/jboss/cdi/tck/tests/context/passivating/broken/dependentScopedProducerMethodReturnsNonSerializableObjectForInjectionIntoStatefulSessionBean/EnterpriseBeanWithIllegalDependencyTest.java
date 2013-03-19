@@ -41,7 +41,7 @@ public class EnterpriseBeanWithIllegalDependencyTest extends AbstractTest {
     @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fab")
     public void test() {
         try {
-            getInstanceByType(MaarianHaminaLocal_Broken.class).ping();
+            getContextualReference(MaarianHaminaLocal_Broken.class).ping();
         } catch (Throwable t) {
             assert isThrowablePresent(IllegalProductException.class, t);
             return;

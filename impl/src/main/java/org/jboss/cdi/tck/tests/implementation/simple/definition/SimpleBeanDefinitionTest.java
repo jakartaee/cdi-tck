@@ -90,7 +90,7 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
     @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa")
     public void testInitializerAnnotatedConstructor() throws Exception {
         Sheep.constructedCorrectly = false;
-        getInstanceByType(Sheep.class);
+        getContextualReference(Sheep.class);
         assert Sheep.constructedCorrectly;
     }
 
@@ -99,21 +99,21 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
             @SpecAssertion(section = BEAN_CONSTRUCTORS, id = "a"), @SpecAssertion(section = INSTANTIATION, id = "ba") })
     public void testEmptyConstructorUsed() {
         Donkey.constructedCorrectly = false;
-        getInstanceByType(Donkey.class);
+        getContextualReference(Donkey.class);
         assert Donkey.constructedCorrectly;
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa"), @SpecAssertion(section = INSTANTIATION, id = "aa") })
     public void testInitializerAnnotatedConstructorUsedOverEmptyConstuctor() throws Exception {
-        getInstanceByType(Turkey.class);
+        getContextualReference(Turkey.class);
         assert Turkey.constructedCorrectly;
     }
 
     @Test
     @SpecAssertion(section = MANAGED_BEANS, id = "fa")
     public void testDependentScopedBeanCanHaveNonStaticPublicField() throws Exception {
-        assert getInstanceByType(Tiger.class).name.equals("pete");
+        assert getContextualReference(Tiger.class).name.equals("pete");
     }
 
 }

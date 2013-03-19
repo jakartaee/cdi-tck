@@ -60,7 +60,7 @@ public class DecoratorInvocationTest extends AbstractTest {
     public void testDecoratorInvocation() {
         TimestampLogger.reset();
         MockLogger.reset();
-        getInstanceByType(CowShed.class).milk();
+        getContextualReference(CowShed.class).milk();
         assert TimestampLogger.getMessage().equals(CowShed.MESSAGE);
         assert MockLogger.getMessage().equals(TimestampLogger.PREFIX + CowShed.MESSAGE);
         assert MockLogger.isInitializeCalled();
@@ -76,7 +76,7 @@ public class DecoratorInvocationTest extends AbstractTest {
         FooDecorator1.reset();
         FooDecorator2.reset();
         FooImpl.reset();
-        getInstanceByType(CowShed.class).washDown();
+        getContextualReference(CowShed.class).washDown();
         assert FooDecorator1.getMessage().equals(CowShed.MESSAGE);
         assert FooDecorator2.getMessage().equals(CowShed.MESSAGE + FooDecorator1.SUFFIX);
         assert FooImpl.getMessage().equals(CowShed.MESSAGE + FooDecorator1.SUFFIX + FooDecorator2.SUFFIX);
