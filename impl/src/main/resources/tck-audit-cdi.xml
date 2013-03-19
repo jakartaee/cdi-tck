@@ -1824,7 +1824,7 @@
 
         <group>
 	 <text>A bean type must be proxyable if an injection point resolves to a bean:</text>
-	 
+
 	 <assertion id="ea">
 	    <text>That has an associated decorator.</text>
 	 </assertion>
@@ -1832,7 +1832,7 @@
 	 <assertion id="eb">
 	    <text>That has a bound interceptor.</text>
 	 </assertion>
-	
+
 	</group>
 
     </section>
@@ -6038,6 +6038,11 @@
         <assertion id="c">
             <text>If the given type is not a bean type of the given bean, an |IllegalArgumentException| is thrown.</text>
         </assertion>
+
+        <assertion id="d">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+        	<note>See also method javadoc.</note>
+        </assertion>
     </section>
 
     <section id="bm_obtain_injectable_reference" title="Obtaining an injectable reference" level="3">
@@ -6064,6 +6069,11 @@
         <assertion id="c">
             <text>Implementations of |Bean| usually maintain a reference to an instance of |BeanManager|. When the |Bean| implementation performs dependency injection, it must obtain the contextual instances to inject by calling |BeanManager.getInjectableReference()|, passing an instance of |InjectionPoint| that represents the injection point and the instance of |CreationalContext| that was passed to |Bean.create()|.</text>
             <note>This cannot be well tested at the moment.</note>
+        </assertion>
+
+		<assertion id="d">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+			<note>See also method javadoc.</note>
         </assertion>
     </section>
 
@@ -6117,6 +6127,11 @@
         <assertion id="f">
             <text>If an instance of an annotation that is not a qualifier type is given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
+
+		<assertion id="g">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+			<note>See also method javadoc.</note>
+        </assertion>
     </section>
 
     <section id="bm_obtain_bean_by_name" title="Obtaining a Bean by name" level="3">
@@ -6127,11 +6142,20 @@
         <assertion id="b">
             <text>The parameter is an EL name.</text>
         </assertion>
+
+        <assertion id="c">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+        	<note>See also method javadoc.</note>
+        </assertion>
     </section>
 
     <section id="bm_obtain_passivation_capable_bean" title="Obtaining a passivation capable bean by identifier" level="3">
         <assertion id="a">
             <text>The method |BeanManager.getPassivationCapableBean()| returns the |PassivationCapable| bean with the given identifier (see Section 6.6.1, "Passivation capable beans").</text>
+        </assertion>
+       	<assertion id="b">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+			<note>See also method javadoc.</note>
         </assertion>
     </section>
 
@@ -6154,11 +6178,19 @@
             </assertion>
         </group>
 
+		<assertion id="e">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+			<note>See also method javadoc.</note>
+        </assertion>
     </section>
 
     <section id="bm_validate_ip" title="Validating an injection point" level="3">
         <assertion id="a">
             <text>The |BeanManager.validate()| operation validates an injection point and throws an |InjectionException| if there is a deployment problem (for example, an unsatisfied or unresolvable ambiguous dependency) associated with the injection point.</text>
+        </assertion>
+		<assertion id="b">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+			<note>See also method javadoc.</note>
         </assertion>
     </section>
 
@@ -6209,6 +6241,11 @@
         <assertion id="e">
             <text>If an instance of an annotation that is not a qualifier type is given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
+
+        <assertion id="f">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+			<note>See also method javadoc.</note>
+        </assertion>
     </section>
 
     <section id="bm_decorator_resolution" title="Decorator resolution" level="3">
@@ -6231,6 +6268,11 @@
         <assertion id="e">
             <text>If the set of bean types is empty, an |IllegalArgumentException| is thrown.</text>
         </assertion>
+
+		<assertion id="f">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+			<note>See also method javadoc.</note>
+        </assertion>
     </section>
 
     <section id="bm_interceptor_resolution" title="Interceptor resolution" level="3">
@@ -6248,6 +6290,11 @@
 
         <assertion id="d">
             <text>If an instance of an annotation that is not an interceptor binding type is given, an |IllegalArgumentException| is thrown.</text>
+        </assertion>
+
+        <assertion id="e">
+        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
+			<note>See also method javadoc.</note>
         </assertion>
     </section>
 
