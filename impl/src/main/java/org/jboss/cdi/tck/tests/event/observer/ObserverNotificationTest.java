@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 import static org.testng.Assert.assertFalse;
@@ -33,6 +34,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class ObserverNotificationTest extends AbstractTest {
 
     @Deployment
