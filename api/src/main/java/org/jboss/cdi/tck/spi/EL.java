@@ -22,6 +22,8 @@ import javax.enterprise.inject.spi.BeanManager;
 /**
  * This interface provides operations relating to EL.
  *
+ * For the purpose of TCK, EL function and variable mapping is not required and therefore may be disabled.
+ *
  * The TCK porting package must provide an implementation of this interface which is suitable for the target Web Beans
  * implementation.
  *
@@ -53,7 +55,7 @@ public interface EL {
             Object[] expectedParams);
 
     /**
-     * 
+     *
      * @param beanManager
      * @return
      */
