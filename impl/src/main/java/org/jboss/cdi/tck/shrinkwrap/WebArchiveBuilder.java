@@ -106,7 +106,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
         if (ejbJarDescriptor != null) {
             webArchive.addAsWebInfResource(new StringAsset(ejbJarDescriptor.exportAsString()), "ejb-jar.xml");
         } else if (ejbJarXml != null) {
-            webArchive.addAsWebInfResource(ejbJarXml.getSource());
+            webArchive.addAsWebInfResource(ejbJarXml.getSource(), ejbJarXml.getTarget());
         }
 
         // Web resources

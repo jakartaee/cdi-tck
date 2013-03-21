@@ -132,7 +132,7 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         if (ejbJarDescriptor != null) {
             ejbArchive.addAsManifestResource(new StringAsset(ejbJarDescriptor.exportAsString()), "ejb-jar.xml");
         } else if (ejbJarXml != null) {
-            ejbArchive.addAsManifestResource(ejbJarXml.getSource());
+            ejbArchive.addAsManifestResource(ejbJarXml.getSource(), ejbJarXml.getTarget());
         }
 
         enterpriseArchive.addAsModule(ejbArchive);

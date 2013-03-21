@@ -453,7 +453,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return
      */
     public T withEjbJarXml(String ejbJarXml) {
-        this.ejbJarXml = new ResourceDescriptor(ejbJarXml);
+        this.ejbJarXml = new ResourceDescriptor(ejbJarXml, "ejb-jar.xml");
         return self();
     }
 
