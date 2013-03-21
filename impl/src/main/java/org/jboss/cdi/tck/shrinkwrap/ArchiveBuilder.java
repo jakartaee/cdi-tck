@@ -62,6 +62,7 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.persistence20.PersistenceDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
@@ -113,6 +114,10 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected WebAppDescriptor webXmlDescriptor = null;
 
     protected PersistenceDescriptor persistenceDescriptor = null;
+
+    protected EjbJarDescriptor ejbJarDescriptor = null;
+
+    protected ResourceDescriptor ejbJarXml = null;
 
     protected List<ResourceDescriptor> manifestResources = null;
 
@@ -442,13 +447,26 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add ejb-jar.xml located in src/main/resource/{testPackagePath} to META-INF/ejb-jar.xml.
+     * Add ejb-jar.xml located in src/main/resource/{testPackagePath}.
      *
      * @param ejbJarXml
      * @return
      */
     public T withEjbJarXml(String ejbJarXml) {
-        return withManifestResource(ejbJarXml, "ejb-jar.xml", true);
+        this.ejbJarXml = new ResourceDescriptor(ejbJarXml);
+        return self();
+    }
+
+
+    /**
+     * Add ejb-jar.xml descriptor created with shrinkwrap-descriptors.
+     *
+     * @param ejbJarXml
+     * @return
+     */
+    public T withEjbJarXml(EjbJarDescriptor descriptor) {
+        this.ejbJarDescriptor = descriptor;
+        return self();
     }
 
     /**

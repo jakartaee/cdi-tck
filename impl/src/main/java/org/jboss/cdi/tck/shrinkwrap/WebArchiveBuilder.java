@@ -87,7 +87,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
         processManifestResources(webArchive);
         processResources(webArchive);
 
-        // Beans descriptor
+        // Deployment descriptors
         webArchive.addAsWebInfResource(getBeansDescriptorAsset(), buildBeansDescriptorTargetPath(getBeansDescriptorTarget()));
 
         if (webXmlDescriptor != null) {
@@ -103,6 +103,13 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
             webArchive.addAsResource(new StringAsset(persistenceDescriptor.exportAsString()), "META-INF/persistence.xml");
         }
 
+        if (ejbJarDescriptor != null) {
+            webArchive.addAsWebInfResource(new StringAsset(ejbJarDescriptor.exportAsString()), "ejb-jar.xml");
+        } else if (ejbJarXml != null) {
+            webArchive.addAsWebInfResource(ejbJarXml.getSource());
+        }
+
+        // Web resources
         if (webResources != null) {
             for (ResourceDescriptor resource : webResources) {
                 if (resource.getTarget() == null) {
