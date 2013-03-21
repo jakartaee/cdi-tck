@@ -41,6 +41,12 @@ public interface Configuration {
 
     public static final String TEST_DATASOURCE_PROPERTY_NAME = "org.jboss.cdi.tck.testDataSource";
 
+    public static final String TEST_JMS_CONNECTION_FACTORY = "org.jboss.cdi.tck.testJmsConnectionFactory";
+
+    public static final String TEST_JMS_QUEUE = "org.jboss.cdi.tck.testJmsQueue";
+
+    public static final String TEST_JMS_TOPIC = "org.jboss.cdi.tck.testJmsTopic";
+
     /**
      * The implementation of {@link Beans} in use.
      */
@@ -78,7 +84,7 @@ public interface Configuration {
      * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - test datasource must be provided.
      * These tests belong to testng group <code>persistence</code>.
      *
-     * @return JNDI name of test datasource
+     * @return the JNDI name of the test datasource
      */
     public String getTestDataSource();
 
@@ -87,5 +93,38 @@ public interface Configuration {
      * @param testDatasource
      */
     public void setTestDataSource(String testDatasource);
+
+    /**
+     *
+     * @return the JNDI name of the test JMS connection factory
+     */
+    public String getTestJmsConnectionFactory();
+
+    /**
+     * @param testJmsConnectionFactory
+     */
+    public void setTestJmsConnectionFactory(String testJmsConnectionFactory);
+
+    /**
+    *
+    * @return the JNDI name of the test JMS queue
+    */
+   public String getTestJmsQueue();
+
+   /**
+    * @param testJmsQueue
+    */
+   public void setTestJmsQueue(String testJmsQueue);
+
+   /**
+   *
+   * @return the JNDI name of the test JMS topic
+   */
+  public String getTestJmsTopic();
+
+  /**
+   * @param testJmsTopic
+   */
+  public void setTestJmsTopic(String testJmsTopic);
 
 }

@@ -66,10 +66,14 @@ public class PropertiesBasedConfigurationBuilder {
         configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, !deploymentPhase));
         configuration.setContexts(getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
 
-        configuration.setLibraryDirectory(getStringValue(Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null,
+        configuration.setLibraryDirectory(getStringValue(Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, deploymentPhase));
+
+        configuration.setTestDataSource(getStringValue(Configuration.TEST_DATASOURCE_PROPERTY_NAME, null, deploymentPhase));
+        configuration.setTestJmsConnectionFactory(getStringValue(Configuration.TEST_JMS_CONNECTION_FACTORY, null,
                 deploymentPhase));
-        configuration
-                .setTestDataSource(getStringValue(Configuration.TEST_DATASOURCE_PROPERTY_NAME, null, deploymentPhase));
+        configuration.setTestJmsQueue(getStringValue(Configuration.TEST_JMS_QUEUE, null, deploymentPhase));
+        configuration.setTestJmsTopic(getStringValue(Configuration.TEST_JMS_TOPIC, null, deploymentPhase));
+
         return this;
     }
 

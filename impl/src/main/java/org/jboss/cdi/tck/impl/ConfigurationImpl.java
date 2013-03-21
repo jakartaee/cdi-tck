@@ -34,16 +34,15 @@ public class ConfigurationImpl implements Configuration {
     private Beans beans;
     private Contexts<? extends Context> contexts;
     private EL el;
+
     private String libraryDirectory;
+
     private String testDataSource;
+    private String testJmsConnectionFactory;
+    private String testJmsQueue;
+    private String testJmsTopic;
 
     protected ConfigurationImpl() {
-    }
-
-    public ConfigurationImpl(Configuration configuration) {
-        this.beans = configuration.getBeans();
-        this.contexts = configuration.getContexts();
-        this.el = configuration.getEl();
     }
 
     public Beans getBeans() {
@@ -88,15 +87,48 @@ public class ConfigurationImpl implements Configuration {
     }
 
     @Override
+    public String getTestJmsConnectionFactory() {
+        return testJmsConnectionFactory;
+    }
+
+    @Override
+    public void setTestJmsConnectionFactory(String testJmsConnectionFactory) {
+        this.testJmsConnectionFactory = testJmsConnectionFactory;
+    }
+
+    @Override
+    public String getTestJmsQueue() {
+        return testJmsQueue;
+    }
+
+    @Override
+    public void setTestJmsQueue(String testJmsQueue) {
+        this.testJmsQueue = testJmsQueue;
+    }
+
+    @Override
+    public String getTestJmsTopic() {
+        return testJmsTopic;
+    }
+
+    @Override
+    public void setTestJmsTopic(String testJmsTopic) {
+        this.testJmsTopic = testJmsTopic;
+    }
+
+    @Override
     public String toString() {
         StringBuilder configuration = new StringBuilder();
-        configuration.append("JSR 299 TCK Configuration\n");
+        configuration.append("JSR 346 TCK Configuration\n");
         configuration.append("-----------------\n");
         configuration.append("\tBeans: ").append(getBeans()).append("\n");
         configuration.append("\tContexts: ").append(getContexts()).append("\n");
         configuration.append("\tEL: ").append(getEl()).append("\n");
         configuration.append("\tLibrary dir: ").append(getLibraryDirectory()).append("\n");
         configuration.append("\tTest DS: ").append(getTestDataSource()).append("\n");
+        configuration.append("\tTest JMS connection factory: ").append(getTestJmsConnectionFactory()).append("\n");
+        configuration.append("\tTest JMS queue: ").append(getTestJmsQueue()).append("\n");
+        configuration.append("\tTest JMS topic: ").append(getTestJmsTopic()).append("\n");
         configuration.append("\n");
         return configuration.toString();
     }
