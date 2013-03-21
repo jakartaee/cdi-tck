@@ -16,14 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.jms;
 
-import javax.ejb.ActivationConfigProperty;
-import javax.ejb.MessageDriven;
 import javax.jms.MessageListener;
 
-@MessageDriven(name = "TestTopic", activationConfig = {
-        @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
-        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),
-        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "topic/test") })
 public class TopicMessageDrivenBean extends AbstractMessageListener implements MessageListener {
 
 }

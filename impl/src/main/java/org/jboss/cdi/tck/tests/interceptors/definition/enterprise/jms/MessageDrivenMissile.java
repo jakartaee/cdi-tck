@@ -16,16 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.jms;
 
-import javax.ejb.ActivationConfigProperty;
-import javax.ejb.MessageDriven;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
 @Missile
-@MessageDriven(name = "TestQueue", activationConfig = {
-        @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
-        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
-        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "queue/test") })
 public class MessageDrivenMissile implements MessageListener {
 
     public static boolean messageAccepted = false;

@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JMS;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder.MessageDriven.newMessageDriven;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
@@ -29,11 +30,14 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder;
 import org.jboss.cdi.tck.tests.context.jms.LogStore.LogMessage;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -51,10 +55,19 @@ public class MessageDrivenBeanContextTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-                .withTestClass(MessageDrivenBeanContextTest.class)
-                .withClasses(LoggerService.class, LogStore.class, SimpleMessageProducer.class, AbstractMessageListener.class,
-                        QueueMessageDrivenBean.class, TopicMessageDrivenBean.class).build();
+
+        EjbJarDescriptor ejbJarDescriptor = new EjbJarDescriptorBuilder().messageDrivenBeans(
+                newMessageDriven("TestQueue", QueueMessageDrivenBean.class.getName())
+                        .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
+                        .addActivationConfigProperty("destinationType", "javax.jms.Queue")
+                        .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsQueue()),
+                newMessageDriven("TestTopic", TopicMessageDrivenBean.class.getName())
+                        .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
+                        .addActivationConfigProperty("destinationType", "javax.jms.Topic")
+                        .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsTopic())).build();
+
+        return new WebArchiveBuilder().withTestClassPackage(MessageDrivenBeanContextTest.class).withEjbJarXml(ejbJarDescriptor)
+                .build();
     }
 
     @Inject
@@ -64,8 +77,8 @@ public class MessageDrivenBeanContextTest extends AbstractTest {
     LogStore store;
 
     @Test(groups = { JAVAEE_FULL, JMS })
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "gd"), @SpecAssertion(section = REQUEST_CONTEXT, id = "hd"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "gd"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "hd"), @SpecAssertion(section = APPLICATION_CONTEXT, id = "dd") })
     public void testRequestScopeActiveDuringMessageDelivery() throws Exception {
 
         AbstractMessageListener.resetProcessedMessages();

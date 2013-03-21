@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.context.request.event.jms;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JMS;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder.MessageDriven.newMessageDriven;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -26,10 +27,13 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -44,7 +48,16 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(RequestScopeEventMessageDeliveryTest.class).build();
+
+        EjbJarDescriptor ejbJarDescriptor = new EjbJarDescriptorBuilder().messageDrivenBeans(
+                newMessageDriven("TestTopic", TopicMessageDrivenBean.class.getName())
+                        .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
+                        .addActivationConfigProperty("destinationType", "javax.jms.Topic")
+                        .addActivationConfigProperty("destination", ConfigurationFactory.get().getTestJmsTopic()))
+                .build();
+
+        return new WebArchiveBuilder().withTestClassPackage(RequestScopeEventMessageDeliveryTest.class)
+                .withEjbJarXml(ejbJarDescriptor).build();
     }
 
     @Inject

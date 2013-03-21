@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.request.event.jms;
 
-import javax.annotation.Resource;
+import javax.annotation.PostConstruct;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
@@ -25,13 +25,20 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jms.Topic;
 
+import org.jboss.cdi.tck.impl.ConfigurationFactory;
+import org.jboss.cdi.tck.util.JndiLookupUtils;
+
 public class SimpleMessageProducer {
 
-    @Resource(name = "java:/ConnectionFactory")
     private ConnectionFactory connectionFactory;
 
-    @Resource(name = "java:/topic/test")
     private Topic topic;
+
+    @PostConstruct
+    public void init() {
+        this.connectionFactory = (ConnectionFactory) JndiLookupUtils.lookup(ConfigurationFactory.get().getTestJmsConnectionFactory());
+        this.topic = (Topic) JndiLookupUtils.lookup(ConfigurationFactory.get().getTestJmsTopic());
+    }
 
     public void sendTopicMessage() {
 
