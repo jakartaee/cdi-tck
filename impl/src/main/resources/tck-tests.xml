@@ -1,8 +1,17 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="CDI TCK" verbose="0" configfailurepolicy="continue">
+<suite name="CDI TCK" verbose="0" configfailurepolicy="continue" useDefaultListeners="false">
 
     <listeners>
+        <!-- Required - avoid randomly mixed test method execution -->
         <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor" />
+        <!-- Optional - intended for debug purpose only -->
+        <listener class-name="org.jboss.cdi.tck.impl.testng.ProgressLoggingTestListener"/>
+        <!-- Optional - it's recommended to disable the default JUnit XML reporter -->
+        <listener class-name="org.testng.reporters.SuiteHTMLReporter"/>
+        <listener class-name="org.testng.reporters.FailedReporter"/>
+        <listener class-name="org.testng.reporters.XMLReporter"/>
+        <listener class-name="org.testng.reporters.EmailableReporter"/>
+        <listener class-name="org.testng.reporters.TestHTMLReporter" />
     </listeners>
 
     <test name="CDI TCK">
@@ -16,42 +25,30 @@
 
             <!-- Issues in the spec/TCK -->
 
-            <!-- CDI-206 -->
-            <class name="org.jboss.cdi.tck.tests.context.conversation.ClientConversationContextTest">
+            <!-- CDI-331 - either the Instance.isAmbiguous() behavior is fixed in the spec or AssertBean must not test this method within assertAvailable -->
+            <class name="org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternative02Test">
                 <methods>
-                    <exclude name="testNonexistentConversationExceptionThrown" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
-            <!-- CDI-83 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.beanManager.BeanManagerTest">
+            <!-- CDITCK-283 -->
+            <class name="org.jboss.cdi.tck.tests.context.request.event.jms.RequestScopeEventMessageDeliveryTest">
                 <methods>
-                    <exclude name="testObtainingWrappedAnnotatedType" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
-            <!-- CDI-180 -->
-            <class name="org.jboss.cdi.tck.tests.context.request.ejb.EJBRequestContextTest">
+            <class name="org.jboss.cdi.tck.tests.context.jms.MessageDrivenBeanContextTest">
                 <methods>
-                    <exclude name="testRequestScopeActiveDuringRemoteCallToEjb" />
+                    <exclude name=".*"/>
                 </methods>
             </class>
-            <!-- CDI-247 -->
-            <class name="org.jboss.cdi.tck.tests.definition.bean.custom.CustomBeanImplementationTest">
+            <!-- CDI-352 (WELD-1073) -->
+            <class name="org.jboss.cdi.tck.tests.deployment.packaging.interceptor.InterceptorClassNotInBeanArchiveTest">
                 <methods>
-                    <exclude name="testIsNullableCalled" />
+                    <exclude name="testInterceptor"/>
                 </methods>
             </class>
-            <!-- CDI-52 -->
-            <class name="org.jboss.cdi.tck.tests.implementation.disposal.method.definition.injectionpoint.DisposalMethodInjectionPointTest">
-                <methods>
-                    <exclude name="test" />
-                </methods>
-            </class>
-            <!-- CDI-298 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.annotated.delivery.WithAnnotationsTest">
-                <methods>
-                    <exclude name="testDelivery"/>
-                </methods>
-            </class>
+
 
         </classes>
     </test>
