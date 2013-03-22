@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -31,9 +32,14 @@ public class TestFilter implements Filter {
 
     @Inject
     private Sheep sheep;
+
+    @Resource(name = "greeting")
+    String greeting;
+
     private boolean injectionPerformedCorrectly = false;
     private boolean initializerCalled = false;
     private boolean initCalledAfterInitializer = false;
+    private boolean initCalledAfterResourceInjection = false;
 
     @Inject
     public void initialize(Sheep sheep) {
@@ -53,6 +59,9 @@ public class TestFilter implements Filter {
         } else if (request.getParameter("test").equals("initializer")) {
             // Return 200 if initializer was called, 500 otherwise
             resp.setStatus(initCalledAfterInitializer ? 200 : 500);
+        } else if (request.getParameter("test").equals("resource")) {
+            // Return 200 if resource was injected before init, 500 otherwise
+            resp.setStatus(initCalledAfterResourceInjection ? 200 : 500);
         } else {
             resp.setStatus(404);
         }
@@ -61,5 +70,6 @@ public class TestFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         injectionPerformedCorrectly = sheep != null;
         initCalledAfterInitializer = initializerCalled;
+        initCalledAfterResourceInjection = "Hello".equals(greeting);
     }
 }

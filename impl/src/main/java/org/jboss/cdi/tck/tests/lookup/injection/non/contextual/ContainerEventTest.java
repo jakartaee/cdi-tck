@@ -45,8 +45,8 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * This test verifies that ProcessAnnotatedType event is fired for various Java EE components and
- * tests the AnnotatedType implementation.
+ * This test verifies that ProcessAnnotatedType event is fired for various Java EE components and tests the AnnotatedType
+ * implementation.
  *
  * It's placed in this package because it works with the same Java EE components as
  * {@link InjectionIntoNonContextualComponentTest} does.
@@ -59,7 +59,11 @@ public class ContainerEventTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ContainerEventTest.class).withWebXml("web.xml")
+        return new WebArchiveBuilder()
+                .withTestClass(ContainerEventTest.class)
+                .withWebXml("web.xml")
+                .withClasses(Farm.class, ProcessAnnotatedTypeObserver.class, Sheep.class, TagLibraryListener.class,
+                        TestFilter.class, TestListener.class, TestServlet.class, TestTagHandler.class)
                 .withExtension(ProcessAnnotatedTypeObserver.class)
                 .withWebResource("ManagedBeanTestPage.jsp", "ManagedBeanTestPage.jsp")
                 .withWebResource("TagPage.jsp", "TagPage.jsp").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")

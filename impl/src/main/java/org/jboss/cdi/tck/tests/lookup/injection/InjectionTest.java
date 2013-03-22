@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -37,7 +37,6 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InjectionTest extends AbstractTest {
 
@@ -50,7 +49,7 @@ public class InjectionTest extends AbstractTest {
                                 .envEntryType("java.lang.String").envEntryValue("Hello").up()).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = NULL, id = "aa")
     public void testInjectionPerformsBoxingIfNecessary() throws Exception {
         assert getBeans(SpiderNest.class).size() == 1;
@@ -59,18 +58,22 @@ public class InjectionTest extends AbstractTest {
         assert spiderNest.numberOfSpiders.equals(4);
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "kc"), @SpecAssertion(section = INJECTION, id = "b"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ac") })
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "kc"),
+            @SpecAssertion(section = INJECTION, id = "b"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ac") })
     public void testInjectionOfNamedBean() {
         WolfPack wolfPack = getContextualReference(WolfPack.class);
         assert wolfPack.getAlphaWolf() != null;
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "aa"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bg"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bh"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bk"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bl") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "aa"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bg"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bh"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bk"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bl"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bi"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bj") })
     public void testInjectionFieldsAndInitializerMethods(DeluxeHenHouse henHouse) throws Exception {
         assertNotNull(henHouse.fox);
         assertEquals(henHouse.fox.getName(), "gavin");
@@ -78,7 +81,7 @@ public class InjectionTest extends AbstractTest {
         assertTrue(henHouse.postConstructCalledAfterInitializers);
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ac")
     public void testFieldDeclaredInIndirectSuperclassInjected() throws Exception {
         MegaPoorHenHouse henHouse = getContextualReference(MegaPoorHenHouse.class);
