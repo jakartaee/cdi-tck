@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2012, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,17 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.broken.passivation;
+package org.jboss.cdi.tck.tests.context.passivating.broken.enterprise;
 
-import javax.enterprise.context.SessionScoped;
-
-/**
- * Dependent non passivation capable bean. The {@link ModifyingExtension1} turns it into a {@link SessionScoped} beans, which is
- * not a good idea passivation-wise.
- *
- * @author Jozef Hartinger
- *
- */
-public class Laptop {
+public class Foo {
 
 }
