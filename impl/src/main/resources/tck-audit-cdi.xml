@@ -3980,25 +3980,14 @@
                 <text>Test initializer method parameter which is not annotated with |@TransientReference|.</text>
             </assertion>
             <assertion id="af">
-                <text>Test initializer method parameter which is not annotated with |@TransientReference|.</text>
+                <text>Test initializer method parameter which is annotated with |@TransientReference|.</text>
             </assertion>
         </group>
 
-        <group>
-            <text>If a managed bean which declares a passivating scope, a stateful session bean which declares a passivating scope, or a built-in bean has a non-transient injected field, bean constructor parameter or initializer method parameter that resolves to a bean that is not a dependent scoped bean and that is not a passivation capable dependency then the container automatically detects the problem and treats it as a deployment problem.</text>
-            <assertion id="ag">
-                <text>Test non-transient injected field.</text>
-            </assertion>
-            <assertion id="ah">
-                <text>Test transient injected field.</text>
-            </assertion>
-            <assertion id="ai">
-                <text>Test bean constructor parameter.</text>
-            </assertion>
-            <assertion id="aj">
-                <text>Test initializer method parameter.</text>
-            </assertion>
-        </group>
+		<assertion id="ag" testable="false">
+			<text>If a managed bean which declares a passivating scope, a stateful session bean which declares a passivating scope, or a built-in bean has a non-transient injected field, bean constructor parameter or initializer method parameter that resolves to a bean that is not a dependent scoped bean and that is not a passivation capable dependency then the container automatically detects the problem and treats it as a deployment problem.</text>
+			<note>It's not defined which non-dependent bean is not a passivation capable dependency.</note>
+		</assertion>
 
         <group>
             <text>If a managed bean which declares a passivating scope, a stateful session bean which declares a passivating scope, or a built-in bean has an interceptor or decorator with a non-transient injected field that does not resolve to a passivation capable dependency, then the container automatically detects the problem and treats it as a deployment problem.</text>

@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -30,13 +30,12 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class PassivatingManagedBeanWithNonPassivatingInjcetedFieldTest extends AbstractTest {
+public class NonPassivatingInjectedFieldTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(PassivatingManagedBeanWithNonPassivatingInjcetedFieldTest.class)
-                .build();
+        return new WebArchiveBuilder().withTestClassPackage(NonPassivatingInjectedFieldTest.class).build();
     }
 
     @Test
