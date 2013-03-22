@@ -27,9 +27,6 @@ import javax.inject.Inject;
 public class Qux {
 
     @Inject
-    private Business foo;
-
-    @Inject
     private Event<BusinessOperationObservedEvent> observedEvent;
 
     @Inject
@@ -37,7 +34,6 @@ public class Qux {
 
     public void observeBusinessOperation(@Observes BusinessOperationEvent event) {
         util.utilize();
-        foo.businessOperation2();
         observedEvent.fire(new BusinessOperationObservedEvent());
     }
 

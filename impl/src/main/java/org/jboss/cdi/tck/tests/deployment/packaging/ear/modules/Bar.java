@@ -30,9 +30,6 @@ import javax.inject.Inject;
 public class Bar {
 
     @Inject
-    private Business foo;
-
-    @Inject
     private Event<BusinessOperationObservedEvent> observedEvent;
 
     public boolean isAlternative() {
@@ -40,7 +37,6 @@ public class Bar {
     }
 
     public void observeBusinessOperation(@Observes BusinessOperationEvent event) {
-        foo.businessOperation2();
         observedEvent.fire(new BusinessOperationObservedEvent());
     }
 }

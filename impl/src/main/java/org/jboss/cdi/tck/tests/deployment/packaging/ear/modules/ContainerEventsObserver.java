@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.ear.modules;
 
+import static org.testng.Assert.assertTrue;
+
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AfterDeploymentValidation;
@@ -63,7 +66,7 @@ public class ContainerEventsObserver implements Extension {
         isProcessAnnotatedTypeOk = (beanManager != null);
     }
 
-    public void observeProcessInjectionPoint(@Observes ProcessInjectionPoint<Bar, Business> event, BeanManager beanManager) {
+    public void observeProcessInjectionPoint(@Observes ProcessInjectionPoint<Bar, Event<?>> event, BeanManager beanManager) {
         isProcessInjectionPointOk = (beanManager != null);
     }
 
@@ -89,11 +92,17 @@ public class ContainerEventsObserver implements Extension {
         isProcessObserverMethodOk = (beanManager != null);
     }
 
-    public static boolean allEventsOk() {
-        return isAfterDeploymentValidationOk && isBeforeBeanDiscoveryOk && isAfterBeanDiscoveryOk
-                && isProcessAnnotatedTypeOk && isProcessInjectionPointOk
-                && isProcessInjectionTargetOk && isProcessProducerOk && isProcessBeanAttributesOk && isProcessManagedBeanOk
-                && isProcessObserverMethodOk;
+    public static void assertAllEventsOk() {
+        assertTrue(isAfterDeploymentValidationOk);
+        assertTrue(isBeforeBeanDiscoveryOk);
+        assertTrue(isAfterBeanDiscoveryOk);
+        assertTrue(isProcessAnnotatedTypeOk);
+        assertTrue(isProcessInjectionPointOk);
+        assertTrue(isProcessInjectionTargetOk);
+        assertTrue(isProcessProducerOk);
+        assertTrue(isProcessBeanAttributesOk);
+        assertTrue(isProcessManagedBeanOk);
+        assertTrue(isProcessObserverMethodOk);
     }
 
 }

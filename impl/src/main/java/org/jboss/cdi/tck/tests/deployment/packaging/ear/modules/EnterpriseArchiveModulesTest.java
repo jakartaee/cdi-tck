@@ -150,7 +150,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "bb") })
     public void testExtensionAndContainerEvents() throws Exception {
         // Test extension registration and container lifecycle events
-        assertTrue(ContainerEventsObserver.allEventsOk());
+        ContainerEventsObserver.assertAllEventsOk();
     }
 
     @Test(groups = JAVAEE_FULL)
