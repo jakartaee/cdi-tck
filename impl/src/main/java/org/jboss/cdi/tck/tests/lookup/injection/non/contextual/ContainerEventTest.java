@@ -156,7 +156,7 @@ public class ContainerEventTest extends AbstractTest {
     private void validateFilterAnnotatedType(AnnotatedType<TestFilter> type) {
         assert type.getBaseType().equals(TestFilter.class);
         assert rawTypeSetMatches(type.getTypeClosure(), TestFilter.class, Filter.class, Object.class);
-        assert type.getFields().size() == 4;
+        assert type.getFields().size() == 6;
         assert type.getConstructors().size() == 1;
         assert type.getConstructors().iterator().next().getParameters().isEmpty();
         assert type.getMethods().size() == 4;
