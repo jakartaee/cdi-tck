@@ -42,12 +42,6 @@ public class NonContextualInjectionPointTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(NonContextualInjectionPointTest.class).build();
     }
 
-    @Test
-    @SpecAssertion(section = INJECTION_POINT, id = "aaa")
-    public void testEnumInjectionPointGetBean() {
-        assertNull(BasicEnum.FOO.getFoo().getInjectionPoint().getBean());
-    }
-
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = INJECTION_POINT, id = "aaa")
     public void testEjbInjectionPointGetBean() throws Exception {
