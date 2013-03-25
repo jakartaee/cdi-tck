@@ -52,8 +52,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
 
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(SessionContextAsyncListenerTest.class).withWebResource("foo.jsp")
-                .withWebResource("bar.jsp").build();
+        return new WebArchiveBuilder().withTestClassPackage(SessionContextAsyncListenerTest.class).build();
     }
 
     @Test(groups = INTEGRATION)

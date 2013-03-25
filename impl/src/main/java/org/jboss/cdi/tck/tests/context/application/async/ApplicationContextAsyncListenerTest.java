@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
  *
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ApplicationContextAsyncListenerTest extends AbstractTest {
 
@@ -50,10 +49,10 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ApplicationContextAsyncListenerTest.class)
-                .withWebResource("foo.jsp").withWebResource("bar.jsp").build();
+                .build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnComplete() throws Exception {
         WebClient webClient = new WebClient();
@@ -64,7 +63,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
         assertFalse(page.getContent().contains("onComplete: null"));
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
@@ -73,7 +72,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
         assertFalse(page.getContent().contains("onTimeout: null"));
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
@@ -82,7 +81,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
         assertFalse(page.getContent().contains("onError: null"));
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
