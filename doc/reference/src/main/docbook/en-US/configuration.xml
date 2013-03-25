@@ -48,8 +48,32 @@
                      <literal>org.jboss.cdi.tck.testDataSource=java:jboss/datasources/ExampleDS</literal>
                   </entry>
                   <entry>
-                     A few TCK tests work with Java EE persistence services (JPA, JTA) that require a data source to be provided. 
-                     This property defines JNDI name of such resource.
+                     A few TCK tests work with Java EE persistence services (JPA, JTA) that require a data source to be provided.
+                     This property defines JNDI name of such resource. Required for the tests within the <emphasis>persistence</emphasis> test group.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.cdi.tck.testJmsConnectionFactory=java:/ConnectionFactory</literal>
+                  </entry>
+                  <entry>
+					The JNDI name of the JMS test ConnectionFactory. Required for the tests within the <emphasis>jms</emphasis> test group.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.cdi.tck.testJmsQueue=java:/queue/test</literal>
+                  </entry>
+                  <entry>
+					The JNDI name of the JMS test Queue. Required for the tests within the <emphasis>jms</emphasis> test group.
+                  </entry>
+               </row>
+               <row>
+                  <entry>
+                     <literal>org.jboss.cdi.tck.testJmsTopic=java:/topic/test</literal>
+                  </entry>
+                  <entry>
+					The JNDI name of the JMS test Topic. Required for the tests within the <emphasis>jms</emphasis> test group.
                   </entry>
                </row>
             </tbody>
@@ -59,9 +83,9 @@
    <section id="arquillian-settings">
       <title>Arquillian settings</title>
       <para>
-        The Arquillian testing platform will look for configuration settings in a file named <emphasis>arquillian.xml</emphasis> in 
-        the root of your classpath. If it exists it will be auto loaded, else default values will be used. This file is not a requirement 
-        however it's very useful for container configuration. See an example configuration for JBoss TCK runner:  
+        The Arquillian testing platform will look for configuration settings in a file named <emphasis>arquillian.xml</emphasis> in
+        the root of your classpath. If it exists it will be auto loaded, else default values will be used. This file is not a requirement
+        however it's very useful for container configuration. See an example configuration for JBoss TCK runner:
       </para>
       <programlisting>
         weld/jboss-tck-runner/src/test/jbossas7/arquillian.xml
@@ -78,7 +102,7 @@
          implementation.
       </para>
       <para>
-         The four SPI classes in the CDI TCK are as follows:
+         The SPI classes in the CDI TCK are as follows:
       </para>
       <itemizedlist>
          <listitem>
@@ -96,11 +120,6 @@
                <literal>org.jboss.cdi.tck.spi.EL</literal>
             </para>
          </listitem>
-         <listitem>
-            <para>
-               <literal>org.jboss.cdi.tck.spi.Managers</literal>
-            </para>
-         </listitem>
       </itemizedlist>
 
       <para>
@@ -109,12 +128,12 @@
       </para>
 
    </section>
-   
+
    <section>
       <title>Using the CDI TCK with the Java EE Web Profile</title>
       <para>
          You can configure the CDI TCK to just run tests appropriate to the Java EE
-         Web Profile by excluding TestNG group <emphasis>javaee-full</emphasis>, 
+         Web Profile by excluding TestNG group <emphasis>javaee-full</emphasis>,
          e.g. via maven-surefire-plugin configuration:
       </para>
       <programlisting><![CDATA[
@@ -127,7 +146,7 @@
        </plugin>
         ]]></programlisting>
    </section>
-   
+
    <section>
       <title>Configuring TestNG to execute the TCK</title>
       <para>
@@ -172,30 +191,56 @@
       <title>Configuring your build environment to execute the TCK</title>
       <para>
          It's beyond the scope of this guide to describe in how to set up your
-         build environment to run the TCK. The TestNG documentation provides extensive 
+         build environment to run the TCK. The TestNG documentation provides extensive
          information on launching TestNG using the Java, Ant, Eclipse or IntelliJ IDEA.
       </para>
    </section>
-   
+
    <section>
       <title>Configuring your application server to execute the TCK</title>
       <para>
          The TCK makes use of the Java 1.4 keyword <literal>assert</literal>; you
          must ensure that the JVM used to run the application server is started
-         with assertions enabled. See 
+         with assertions enabled. See
          <ulink url="http://java.sun.com/j2se/1.4.2/docs/guide/lang/assert.html#enable-disable">Programming With Assertions</ulink>
          for more information on how to enable assertions.
       </para>
       <para>
-        Tests within the <emphasis>JMS</emphasis> TestNG group require basic Java Message Service configuration, or two test JMS destinations respectively. 
-        A queue for PTP messaging domain with JNDI name <literal>java:/queue/test</literal> and a topic for pub/sub messaging domain with JNDI name <literal>java:/topic/test</literal>. 
+        Tests within the <emphasis>jms</emphasis> test group require some basic Java Message Service configuration.
+        A connection factory, a queue destination for PTP messaging domain and a topic destination for pub/sub messaging domain must be available via JNDI lookup.
+		The corresponding JNDI names are specified with configuration properties - see <xref linkend="tck-properties" />.
       </para>
       <para>
-        Tests within the <emphasis>persistence</emphasis> TestNG group require basic data source configuration. The data source has to be valid and JTA-based. The JNDI name of the DataSource is specified with <literal>org.jboss.cdi.tck.testDataSource</literal> configuration property.
+        Tests within the <emphasis>persistence</emphasis> test group require basic data source configuration. The data source has to be valid and JTA-based. The JNDI name of the DataSource is specified with configuration property - see <xref linkend="tck-properties" />.
       </para>
       <para>
-        Tests within the <emphasis>installedLib</emphasis> TestNG group require <literal>cdi-tck-ext-lib.jar</literal> artifact to be installed as a library (see also Java EE 6 specification, section EE.8.2.2 Installed Libraries).
+        Tests within the <emphasis>installedLib</emphasis> test group require the CDI TCK <literal>cdi-tck-ext-lib</literal> artifact to be installed as a library (see also Java EE 6 specification, section EE.8.2.2 "Installed Libraries").
       </para>
+      <para>
+      	Tests within the <emphasis>systemProperties</emphasis> test group require the following system properties to be set:
+      </para>
+      <table frame="all">
+         <tgroup cols="2">
+            <colspec colnum="1" colname="name" />
+            <colspec colnum="2" colname="value"  />
+            <thead>
+               <row>
+                  <entry>Name</entry>
+                  <entry>Value</entry>
+               </row>
+            </thead>
+            <tbody>
+               <row>
+                  <entry>
+                     <literal>cdiTckExcludeDummy</literal>
+                  </entry>
+                  <entry>
+                     <literal>true</literal>
+                  </entry>
+               </row>
+            </tbody>
+         </tgroup>
+      </table>
    </section>
 <!--
 vim: ts=3:sw=3:tw=80:set expandtab
