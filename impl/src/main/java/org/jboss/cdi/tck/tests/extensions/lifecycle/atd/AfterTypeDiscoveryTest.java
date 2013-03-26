@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.ATD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -34,7 +35,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 /**
  *
@@ -64,9 +64,8 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = ATD, id = "a"), @SpecAssertion(section = ATD, id = "c"),
             @SpecAssertion(section = ATD, id = "hb") })
     public void testInitialInterceptors() {
-        assertEquals(extension.getInterceptors().size(), 2);
-        assertEquals(extension.getInterceptors().get(0), BravoInterceptor.class);
-        assertEquals(extension.getInterceptors().get(1), AlphaInterceptor.class);
+        assertTrue(extension.getInterceptors().contains(BravoInterceptor.class));
+        assertTrue(extension.getInterceptors().contains(AlphaInterceptor.class));
     }
 
     @Test

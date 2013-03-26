@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.enterprise.event.Observes;
@@ -47,8 +48,12 @@ public class AfterTypeDiscoveryObserver implements Extension {
 
         event.addAnnotatedType(beanManager.createAnnotatedType(Boss.class), AfterTypeDiscoveryObserver.class.getName());
 
-        // First interceptor removed
-        event.getInterceptors().remove(0);
+        // Bravo interceptor removed
+        for (Iterator<Class<?>> iterator = event.getInterceptors().iterator(); iterator.hasNext();) {
+            if(BravoInterceptor.class.equals(iterator.next())) {
+                iterator.remove();
+            }
+        }
         // The order of decorators reverted
         Collections.reverse(event.getDecorators());
         // No selected alternative
