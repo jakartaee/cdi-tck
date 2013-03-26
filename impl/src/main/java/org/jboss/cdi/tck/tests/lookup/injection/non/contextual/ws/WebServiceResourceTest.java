@@ -22,8 +22,8 @@ import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
 import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
 
@@ -77,8 +77,6 @@ public class WebServiceResourceTest extends AbstractTest {
         typeSetMatches(blackSheepWsBean.getTypes(), Object.class, SheepWS.class);
     }
 
-    // Not possible right now
-    // See ARQ-540
      @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
      @SpecAssertion(section = DECLARING_RESOURCE, id = "ff")
      public void testResourceInvocation(@Black SheepWS sheepWS) {
