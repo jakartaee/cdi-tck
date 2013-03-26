@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modify;
+package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modify.broken;
 
-public class Cat implements Animal {
+public class Mouse {
 }

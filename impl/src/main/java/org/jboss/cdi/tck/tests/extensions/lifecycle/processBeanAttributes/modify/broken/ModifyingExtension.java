@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modify;
+package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modify.broken;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -23,58 +23,47 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanAttributes;
 import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
-
-import org.jboss.cdi.tck.literals.AnyLiteral;
 
 public class ModifyingExtension implements Extension {
 
-    private AnnotatedType<Cat> catAnnotatedType = null;
+    public void modify(@Observes final ProcessBeanAttributes<Mouse> event) {
 
-    public void observeCatAnnotatedType(@Observes ProcessAnnotatedType<Cat> event) {
-        catAnnotatedType = event.getAnnotatedType();
-    }
-
-    public void modify(@Observes final ProcessBeanAttributes<Cat> event) {
-        event.setBeanAttributes(new BeanAttributes<Cat>() {
+        event.setBeanAttributes(new BeanAttributes<Mouse>() {
 
             @SuppressWarnings("unchecked")
             public Set<Type> getTypes() {
-                return Collections.unmodifiableSet(new HashSet<Type>(Arrays.asList(Object.class, Cat.class)));
+                return Collections.unmodifiableSet(new HashSet<Type>(Arrays.asList(Object.class, Mouse.class)));
             }
 
             public Set<Annotation> getQualifiers() {
-                return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(new Cute.Literal(), new Wild.Literal(
-                        true), AnyLiteral.INSTANCE)));
+                return Collections.emptySet();
             }
 
+            @Override
             public Class<? extends Annotation> getScope() {
-                return ApplicationScoped.class;
+                // Invalid attribute - a managed bean is passivation capable if and only if the bean class is serializable
+                return SessionScoped.class;
             }
 
             public String getName() {
-                return "cat";
+                return "mouse";
             }
 
             public Set<Class<? extends Annotation>> getStereotypes() {
-                return Collections.<Class<? extends Annotation>> singleton(PersianStereotype.class);
+                return Collections.emptySet();
             }
 
             public boolean isAlternative() {
-                return true;
+                return false;
             }
 
         });
-    }
 
-    public AnnotatedType<Cat> getCatAnnotatedType() {
-        return catAnnotatedType;
     }
 
 }

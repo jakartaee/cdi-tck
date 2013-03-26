@@ -18,11 +18,13 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modif
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.spi.Bean;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -45,7 +47,6 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class SetBeanAttributesTest extends AbstractTest {
 
@@ -57,7 +58,10 @@ public class SetBeanAttributesTest extends AbstractTest {
                 .build();
     }
 
-    @Test
+    @Inject
+    ModifyingExtension extension;
+
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PBA, id = "bc"), @SpecAssertion(section = PBA, id = "ca") })
     public void testBeanModified() {
 
@@ -71,12 +75,20 @@ public class SetBeanAttributesTest extends AbstractTest {
 
         Bean<Cat> bean = getUniqueBean(Cat.class, new Cute.Literal());
 
-        assertTrue(typeSetMatches(bean.getTypes(), Object.class, Cat.class));
-        assertTrue(typeSetMatches(bean.getStereotypes(), PersianStereotype.class));
+        assertTypeSetMatches(bean.getTypes(), Object.class, Cat.class);
+        assertTypeSetMatches(bean.getStereotypes(), PersianStereotype.class);
         assertTrue(annotationSetMatches(bean.getQualifiers(), new Wild.Literal(true), new Cute.Literal(), AnyLiteral.INSTANCE));
 
         // other attributes
         assertEquals(ApplicationScoped.class, bean.getScope());
         assertEquals(true, bean.isAlternative());
+    }
+
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = PBA, id = "cc") })
+    public void testChangesAreNotPropagated() {
+        // No qualifiers, stereotypes, scope
+        assertTrue(extension.getCatAnnotatedType().getAnnotations().isEmpty());
+        assertTypeSetMatches(extension.getCatAnnotatedType().getTypeClosure(), Object.class, Cat.class, Animal.class);
     }
 }
