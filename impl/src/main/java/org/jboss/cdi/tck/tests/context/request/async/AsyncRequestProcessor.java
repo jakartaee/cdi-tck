@@ -46,7 +46,7 @@ public class AsyncRequestProcessor implements Runnable {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.lang.Runnable#run()
      */
     @Override
@@ -63,7 +63,7 @@ public class AsyncRequestProcessor implements Runnable {
         // Dispatch or complete
         if (useDispatch) {
             if (dispatchPath != null) {
-                actx.dispatch(null, dispatchPath);
+                actx.dispatch(dispatchPath);
             } else {
                 actx.dispatch();
             }
