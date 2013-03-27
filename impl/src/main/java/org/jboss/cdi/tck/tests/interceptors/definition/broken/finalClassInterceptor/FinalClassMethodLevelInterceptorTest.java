@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterce
 
 import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class FinalClassMethodLevelInterceptorTest extends AbstractTest {
 
-    @ShouldThrowException(DefinitionException.class)
+    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
