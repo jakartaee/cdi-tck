@@ -17,13 +17,16 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.instance;
 
+import java.io.Serializable;
+
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 @Decorator
-public abstract class MuleInstanceDecorator implements Instance<Mule> {
+@SuppressWarnings("serial")
+public abstract class MuleInstanceDecorator implements Instance<Mule>, Serializable {
 
     @Inject
     @Delegate
