@@ -53,7 +53,7 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
                 newMessageDriven("TestTopic", TopicMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
                         .addActivationConfigProperty("destinationType", "javax.jms.Topic")
-                        .addActivationConfigProperty("destination", ConfigurationFactory.get().getTestJmsTopic()))
+                        .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsTopic()))
                 .build();
 
         return new WebArchiveBuilder().withTestClassPackage(RequestScopeEventMessageDeliveryTest.class)
