@@ -6068,9 +6068,16 @@
 
     <section id="bm_obtain_unmanaged_instance" title="Obtaining an unmanaged instance" level="3">
 
-        <assertion id="a">
-            <text>A helper class, |Unmanaged| provides a set of methods optimized for working with unmanaged instances.</text>
-        </assertion>
+		<group>
+			<text>A helper class, |Unmanaged| provides a set of methods optimized for working with unmanaged instances.</text>
+        	<assertion id="a">
+				<text>Test creating an injector for the given class, using the current bean manager.</text>
+        	</assertion>
+        	<assertion id="b">
+        		<text>Test creating an injector for the given class.</text>
+        		<note>Let the container identify the  current bean manager.</note>
+        	</assertion>
+		</group>
 
     </section>
 

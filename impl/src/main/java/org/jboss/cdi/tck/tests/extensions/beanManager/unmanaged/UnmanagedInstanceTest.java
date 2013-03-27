@@ -54,7 +54,7 @@ public class UnmanagedInstanceTest extends AbstractTest {
         Nail.reset();
         Hammer.reset();
 
-        Unmanaged<Builder> unmanagedBuilder = new Unmanaged<Builder>(Builder.class);
+        Unmanaged<Builder> unmanagedBuilder = new Unmanaged<Builder>(getCurrentManager(), Builder.class);
         UnmanagedInstance<Builder> unmanagedBuilderInstance = unmanagedBuilder.newInstance();
         Builder builder = unmanagedBuilderInstance.produce().inject().postConstruct().get();
         builder.build();
