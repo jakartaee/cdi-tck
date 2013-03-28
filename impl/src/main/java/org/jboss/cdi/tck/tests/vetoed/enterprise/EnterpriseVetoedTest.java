@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.vetoed.enterprise;
 
 import static org.jboss.cdi.tck.cdi.Sections.PAT;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEANS;
-import static org.jboss.cdi.tck.cdi.Sections.VETO;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
@@ -39,7 +38,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of the Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -59,7 +58,7 @@ public class EnterpriseVetoedTest extends AbstractTest {
     VerifyingExtension verifyingExtension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = SESSION_BEANS, id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = SESSION_BEANS, id = "aa"),
             @SpecAssertion(section = PAT, id = "ia") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
@@ -67,14 +66,14 @@ public class EnterpriseVetoedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = PAT, id = "ie") })
+    @SpecAssertions({ @SpecAssertion(section = PAT, id = "ie") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
         assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = SESSION_BEANS, id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = SESSION_BEANS, id = "aa"),
             @SpecAssertion(section = PAT, id = "ii") })
     public void testPackageLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Piranha.class));

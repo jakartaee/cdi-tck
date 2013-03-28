@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PAT;
 import static org.jboss.cdi.tck.util.Assert.assertTypeListMatches;
 

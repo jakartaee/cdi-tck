@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.beanManager.unmanaged;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_UNMANAGED_INSTANCE;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -38,7 +39,6 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-@Test(groups = INTEGRATION)
 public class UnmanagedInstanceTest extends AbstractTest {
 
     @Deployment
@@ -46,9 +46,9 @@ public class UnmanagedInstanceTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(UnmanagedInstanceTest.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_UNMANAGED_INSTANCE, id = "a") })
-    public void testObtainUnmanagedInstance() {
+    public void testObtainNonContextualInstance() {
 
         Builder.reset();
         Nail.reset();
@@ -68,6 +68,20 @@ public class UnmanagedInstanceTest extends AbstractTest {
         assertTrue(Builder.preDestroyCalled);
         assertTrue(Nail.preDestroyCalled);
         assertFalse(Hammer.preDestroyCalled);
+    }
+
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "ac") })
+    public void testNonContextualInstanceIsIntercepted() {
+
+        ToolInterceptor.intercepted = false;
+
+        Unmanaged<Axe> unmanagedAxe = new Unmanaged<Axe>(getCurrentManager(), Axe.class);
+        UnmanagedInstance<Axe> unmanagedAxeInstance = unmanagedAxe.newInstance();
+        unmanagedAxeInstance.produce().inject().postConstruct().get().cut();
+        unmanagedAxeInstance.preDestroy().dispose();
+
+        assertTrue(ToolInterceptor.intercepted);
     }
 
 }

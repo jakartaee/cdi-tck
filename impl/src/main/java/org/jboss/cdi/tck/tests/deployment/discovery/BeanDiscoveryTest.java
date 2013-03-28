@@ -2,6 +2,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DEFINING_ANNOTATIONS;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
 import static org.testng.Assert.assertFalse;
@@ -58,15 +59,15 @@ public class BeanDiscoveryTest extends AbstractTest {
                 .create(JavaArchive.class)
                 .addClass(Echo.class)
                 .addAsManifestResource(
-                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED).exportAsString()),
-                        "beans.xml");
+                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED)
+                                .exportAsString()), "beans.xml");
         // Bean defining annotation and 1.1 version beans.xml with bean-discovery-mode of none
         JavaArchive foxtrot = ShrinkWrap
                 .create(JavaArchive.class)
                 .addClass(Foxtrot.class)
                 .addAsManifestResource(
-                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.NONE)
-                                .exportAsString()), "beans.xml");
+                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.NONE).exportAsString()),
+                        "beans.xml");
 
         return new WebArchiveBuilder().withTestClass(BeanDiscoveryTest.class).withClasses(VerifyingExtension.class)
                 .withExtension(VerifyingExtension.class).withLibrary(Ping.class)
@@ -76,39 +77,41 @@ public class BeanDiscoveryTest extends AbstractTest {
     @Inject
     VerifyingExtension extension;
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =INTEGRATION)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
     public void testExplicitBeanArchiveModeAll(Alpha alpha) {
         assertDiscoveredAndAvailable(alpha, Alpha.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =INTEGRATION)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bb"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
     public void testExplicitBeanArchiveEmptyDescriptor(Bravo bravo) {
         assertDiscoveredAndAvailable(bravo, Bravo.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =INTEGRATION)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
     public void testExplicitBeanArchiveLegacyDescriptor(Charlie charlie) {
         assertDiscoveredAndAvailable(charlie, Charlie.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
     public void testImplicitBeanArchiveNoDescriptor(Delta delta) {
         assertDiscoveredAndAvailable(delta, Delta.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
     public void testImplicitBeanArchiveModeAnnotated(Echo echo) {
         assertDiscoveredAndAvailable(echo, Echo.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups =INTEGRATION)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "cb"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
     public void testImplicitBeanArchiveModeNone(Foxtrot foxtrot) {
         assertNotDiscoveredAndNotAvailable(foxtrot, Foxtrot.class);

@@ -56,7 +56,8 @@ public class DecoratorInvocationTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "aa"),
             @SpecAssertion(section = DECORATOR_INVOCATION, id = "b"), @SpecAssertion(section = DECORATED_TYPES, id = "d"),
-            @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "f"), @SpecAssertion(section = BIZ_METHOD, id = "b") })
+            @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "f"), @SpecAssertion(section = BIZ_METHOD, id = "b"),
+            @SpecAssertion(section = BIZ_METHOD, id = "aa") })
     public void testDecoratorInvocation() {
         TimestampLogger.reset();
         MockLogger.reset();

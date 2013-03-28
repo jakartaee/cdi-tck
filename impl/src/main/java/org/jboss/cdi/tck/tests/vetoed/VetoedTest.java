@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.vetoed;
 
 import static org.jboss.cdi.tck.cdi.Sections.PAT;
-import static org.jboss.cdi.tck.cdi.Sections.VETO;
 import static org.jboss.cdi.tck.cdi.Sections.WHAT_CLASSES_ARE_BEANS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -67,7 +66,7 @@ public class VetoedTest extends AbstractTest {
     VerifyingExtension verifyingExtension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
+    @SpecAssertions({ @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
             @SpecAssertion(section = PAT, id = "ia"), @SpecAssertion(section = PAT, id = "ib") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
@@ -77,7 +76,7 @@ public class VetoedTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
+    @SpecAssertions({ @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
             @SpecAssertion(section = PAT, id = "ii") })
     public void testPackageLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
@@ -92,7 +91,7 @@ public class VetoedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = VETO, id = "a"), @SpecAssertion(section = PAT, id = "ie"),
+    @SpecAssertions({ @SpecAssertion(section = PAT, id = "ie"),
             @SpecAssertion(section = PAT, id = "if") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));

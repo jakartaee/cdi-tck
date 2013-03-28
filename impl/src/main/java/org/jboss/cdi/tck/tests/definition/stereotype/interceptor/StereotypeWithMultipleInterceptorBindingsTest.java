@@ -9,16 +9,17 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.interceptor;
 
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS;
-
-import javax.inject.Inject;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -29,11 +30,10 @@ import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -48,15 +48,18 @@ public class StereotypeWithMultipleInterceptorBindingsTest extends AbstractTest 
                                 .clazz(AlphaInterceptor.class.getName(), OmegaInterceptor.class.getName()).up()).build();
     }
 
-    @Inject
-    Foo foo;
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "a0"),
+            @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "c"),
+            @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a") })
+    public void testMultipleInterceptorBindings(Foo foo) {
+        assertNotNull(foo);
+        foo.getInspections().clear();
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "a0"), @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "c") })
-    public void testMultipleInterceptorBindings() {
         foo.ping();
-        Assert.assertTrue(foo.inspections.contains(AlphaInterceptor.class.getName()));
-        Assert.assertTrue(foo.inspections.contains(OmegaInterceptor.class.getName()));
+
+        assertTrue(foo.getInspections().contains(AlphaInterceptor.class.getName()));
+        assertTrue(foo.getInspections().contains(OmegaInterceptor.class.getName()));
     }
 
 }

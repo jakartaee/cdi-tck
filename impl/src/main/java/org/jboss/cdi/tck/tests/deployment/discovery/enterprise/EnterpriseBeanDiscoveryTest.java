@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DEFINING_ANNOTATIONS;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
 import static org.testng.Assert.assertNotNull;
@@ -133,13 +134,15 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
     public void testImplicitBeanArchiveNoDescriptor() {
         assertDiscoveredAndAvailable(DeltaLocal.class, Delta.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
     public void testImplicitBeanArchiveModeAnnotated() {
         assertDiscoveredAndAvailable(EchoLocal.class, Echo.class);
     }
@@ -150,7 +153,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
         assertDiscoveredAndAvailable(FoxtrotLocal.class, Foxtrot.class);
     }
 
-    private <T extends Ping, B  extends Ping> void assertDiscoveredAndAvailable(Class<T> beanType, Class<B> beanClazz) {
+    private <T extends Ping, B extends Ping> void assertDiscoveredAndAvailable(Class<T> beanType, Class<B> beanClazz) {
         T instance = getContextualReference(beanType);
         assertNotNull(instance);
         assertTrue(extension.getObservedAnnotatedTypes().contains(beanClazz));

@@ -355,7 +355,14 @@
 
     <section id="bean_defining_annotations" title="Bean defining annotations" level="2">
 
-        <!-- Tested within "bean_archive" section -->
+        <assertion id="a" testable="false">
+        	<text>A bean may have a bean defining annotation, allowing it to be placed anywhere in an application, as defined in Section 12.1.</text>
+        	<note>This is a statement of intent</note>
+        </assertion>
+
+		<assertion id="b">
+        	<text>Any scope type is a bean defining annotation, and any bean which has a scope type declared on the bean class is said to have a bean defining annotation.</text>
+        </assertion>
 
     </section>
 
@@ -437,7 +444,7 @@
     <section id="alternatives" title="Alternatives" level="2">
         <assertion id="a" testable="false">
             <text>An alternative is a bean that must be explicitly selected if it should be available for lookup, injection or EL resolution.</text>
-            <note>Tested in section "declaring_selected_alternatives".</note>
+            <note>Tested in section 5.1.1 Declaring selected alternatives.</note>
         </assertion>
     </section>
 
@@ -759,6 +766,12 @@
         <assertion id="q">
             <text>A top-level Java class is only a managed bean if it has an appropriate constructor - a constructor annotated |@Inject|.</text>
         </assertion>
+
+        <assertion id="r" testable="false">
+        	<text>If packages annotated |@Vetoed| are split across jars, non-portable behavior results. An application can prevent packages being split across jars by sealing the package as defined by the Extension Mechanism Architecture.</text>
+        	<note>Non-portable behavior.</note>
+        </assertion>
+
     </section>
 
     <section id="managed_bean_types" title="Bean types of a managed bean" level="3">
@@ -890,6 +903,12 @@
         <assertion id="i">
             <text>If the session bean class is a generic type, it must have scope |@Dependent|. If a session bean with a parameterized bean class declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
+
+        <assertion id="j" testable="false">
+        	<text>If packages annotated |@Vetoed| are split across jars, non-portable behavior results. An application can prevent packages being split across jars by sealing the package as defined by the Extension Mechanism Architecture.</text>
+        	<note>Non-portable behavior.</note>
+        </assertion>
+
     </section>
 
     <section id="session_bean_ejb_remove_method" title="EJB remove methods of session beans" level="3">
@@ -1623,19 +1642,6 @@
         </assertion>
     </section>
 
-    <section id="veto" title="Vetoing types" level="2">
-
-        <assertion id="a">
-            <text>Any type or package may be prevented from being considered by CDI by adding the |@Vetoed| annotation on the type or package.</text>
-        </assertion>
-
-        <assertion id="b" testable="false">
-            <text>If packages are split across jars, non-portable behavior results. An application can prevent packages being split across jars by sealing the package as defined by the Extension Mechanism Architecture.</text>
-            <note>Non-portable behavior</note>
-        </assertion>
-
-    </section>
-
     <section id="named_at_injection_point" title="The qualifier @Named at injection points" level="2">
         <assertion id="a">
             <text>If an injected field declares a |@Named| annotation that does not specify the |value| member, the name of the field is assumed.</text>
@@ -2299,7 +2305,7 @@
     <section id="declaring_selected_alternatives" title="Declaring selected alternatives" level="3">
 
         <assertion id="a" testable="false">
-            <text>This specification defines two methods of selecting alternatives. The |@Priority| annotation, introduced in Contexts and Dependency Injection 1.1 allows an alternative to be selected for an entire application. Contexts and Dependency Injection 1.0 allowed only for an alternative to be selected for a bean archive.</text>
+            <text>This specification defines two methods of selecting alternatives. From Contexts and Dependency Injection 1.1 onwards the |@Priority| annotation allows an alternative to be selected for an entire application. Contexts and Dependency Injection 1.0 allowed only for an alternative to be selected for a bean archive.</text>
             <note>Statement of intent.</note>
         </assertion>
 
@@ -3163,7 +3169,11 @@
             <text>If a bean that declares any scope other than |@Dependent| has an injection point of type |InjectionPoint| and qualifier |@Default|, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
-        <assertion id="ga">
+        <assertion id="g">
+        	<text>If a disposer method has an injection point of type |InjectionPoint| and qualifier |@Default|, the container automatically detects the problema nd treats it as a definition error.</text>
+        </assertion>
+
+        <assertion id="h">
             <text>If a Java EE component class supporting injection that is not a bean has an injection point of type |InjectionPoint| and qualifier |@Default|, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
@@ -4534,9 +4544,19 @@
     </section>
 
     <section id="biz_method" title="Container invocations and interception" level="2">
-        <assertion id="a0" testable="false">
-            <text>When the application invokes a method of a bean via a contextual reference to the bean, as defined in Section 6.5.3, "Contextual reference for a bean", or a business method of a session bean via an EJB remote or local reference, the invocation is treated as a business method invocation.</text>
+
+        <assertion id="aa">
+            <text>When the application invokes a method of a bean via a contextual reference to the bean, as defined in Section 6.5.3, "Contextual reference for a bean", the invocation is treated as a business method invocation.</text>
         </assertion>
+
+        <assertion id="ab">
+            <text>When the application invokes a method of a bean via a non-contextual reference to the bean, if the instance was created by the container, the invocation is treated as a business method invocation.</text>
+        </assertion>
+
+        <assertion id="ac">
+            <text>When the application invokes a business method of a session bean via an EJB remote or local reference, the invocation is treated as a business method invocation.</text>
+        </assertion>
+
 
         <assertion id="a1">
             <text>Invocations of initializer methods by the container are not business method invocations.</text>
@@ -4966,7 +4986,7 @@
     <section id="enabled_decorators" title="Decorator enablement and ordering" level="2">
 
         <assertion id="a" testable="false">
-            <text>This specification defines two methods of enabling and ordering decorators. The @Priority annotation, introduced in Contexts and Dependency Injection 1.1 allows a decorator to be enabled and ordered for an entire application. Contexts and Dependency Injection 1.0 allowed only for a decorator to be enabled and ordered for a bean archive.</text>
+           	<text>This specification defines two methods of enabling and ordering decorators. From Contexts and Dependency Injection 1.1 onwards the |@Priority| annotation allows a decorator to be enabled and ordered for an entire application. Contexts and Dependency Injection 1.0 allowed only for a decorator to be enabled and ordered for a bean archive.</text>
             <note>Statement of intent</note>
         </assertion>
 
@@ -6066,7 +6086,7 @@
         </assertion>
     </section>
 
-    <section id="bm_obtain_unmanaged_instance" title="Obtaining an unmanaged instance" level="3">
+    <section id="bm_obtain_unmanaged_instance" title="Obtaining non-contextual instance" level="3">
 
 		<group>
 			<text>A helper class, |Unmanaged| provides a set of methods optimized for working with unmanaged instances.</text>
@@ -6729,7 +6749,7 @@
         </group>
 
         <group>
-            <text>|addAnnotatedType()| adds a given |AnnotatedType| to the set of types which will be scanned during bean discoverywith an optional identifier. The id of an |AnnotatedType| added by the container is not defined.</text>
+            <text>|addAnnotatedType()| adds a given |AnnotatedType| to the set of types which will be scanned during bean discovery, with an optional identifier.</text>
             <assertion id="af">
                 <text>Test the |addAnnotatedType()| method.</text>
             </assertion>
@@ -7465,6 +7485,8 @@
             <text>Bean classes of enabled beans must be deployed in bean archives.</text>
         </assertion>
 
+   		<!-- TODO A bean archive has a bean discovery mode of all, annotated or none. -->
+
         <group>
             <text>An explicit bean archive is an archive which contains a |beans.xml| file with a version number of 1.1 (or later), with the |bean-discovery-mode| of |all|, or with no version number, or that is an empty file.</text>
             <assertion id="ba">
@@ -7479,7 +7501,7 @@
         </group>
 
         <group>
-            <text>An implicit bean archive is an archive which contains one or more beans with a bean defining annotation, and does not contain a |beans.xml| with the |bean-discovery-mode| of |none|.</text>
+            <text>An implicit bean archive is any other archive which contains one or more beans with a bean defining annotation, and does not contain a |beans.xml| with the |bean-discovery-mode| of |none|.</text>
             <assertion id="ca">
                 <text>Test an archive which contains beans with a bean defining annotation, and does not contain a |beans.xml| with the |bean-discovery-mode| of |none|.</text>
             </assertion>
@@ -7719,7 +7741,7 @@
 		</assertion>
 
         <group>
-            <text>The container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.7, for every Java class, interface or enum discovered.</text>
+            <text>The container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.6, for every type discovered.</text>
             <assertion id="ba">
                 <text>Check managed bean</text>
             </assertion>
@@ -7753,10 +7775,6 @@
         </group>
 
         <assertion id="r">
-            <text>The container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.7, for each Java class, interface or enum that must be delivered to a |ProcessAnnotatedType| observer, where the event parameter is annotated with |@WithAnnotations|.</text>
-        </assertion>
-
-        <assertion id="s">
             <text>If an extension calls |BeforeBeanDiscovery.addAnnotatedType()| or |AfterTypeDiscovery.addAnnotatedType()|, the type passed must be added to the set of discovered types.</text>
         </assertion>
 

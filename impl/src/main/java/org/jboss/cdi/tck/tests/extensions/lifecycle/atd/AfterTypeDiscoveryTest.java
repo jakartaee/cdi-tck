@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.ATD;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -113,7 +114,7 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ATD, id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = ATD, id = "e"), @SpecAssertion(section = BEAN_DISCOVERY, id = "r") })
     public void testAddAnnotatedType() {
         extension.isBossObserved();
         getUniqueBean(Boss.class);
