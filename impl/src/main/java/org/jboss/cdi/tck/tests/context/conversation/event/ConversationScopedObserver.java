@@ -21,7 +21,7 @@ import java.io.Serializable;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
-import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequest;
 
 @SuppressWarnings("serial")
 @ConversationScoped
@@ -29,7 +29,7 @@ public class ConversationScopedObserver implements Serializable {
 
     private boolean initializedObserved;
 
-    void initialize(@Observes @Initialized(ConversationScoped.class) ServletRequestEvent event) {
+    void initialize(@Observes @Initialized(ConversationScoped.class) ServletRequest event) {
         if (event != null) {
             initializedObserved = true;
         }

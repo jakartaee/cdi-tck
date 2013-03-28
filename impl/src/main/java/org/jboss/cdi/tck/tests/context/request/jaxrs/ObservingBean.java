@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,7 +23,7 @@ import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
-import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequest;
 
 @ApplicationScoped
 public class ObservingBean {
@@ -32,11 +32,11 @@ public class ObservingBean {
     private final AtomicInteger destroyedRequestCount = new AtomicInteger();
     private final AtomicInteger fooDestroyedCount = new AtomicInteger();
 
-    public void observeRequestInitialized(@Observes @Initialized(RequestScoped.class) ServletRequestEvent event) {
+    public void observeRequestInitialized(@Observes @Initialized(RequestScoped.class) ServletRequest event) {
         initializedRequestCount.incrementAndGet();
     }
 
-    public void observeRequestDestroyed(@Observes @Destroyed(RequestScoped.class) ServletRequestEvent event) {
+    public void observeRequestDestroyed(@Observes @Destroyed(RequestScoped.class) ServletRequest event) {
         destroyedRequestCount.incrementAndGet();
     }
 

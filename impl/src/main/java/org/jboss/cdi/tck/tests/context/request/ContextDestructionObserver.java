@@ -20,13 +20,13 @@ package org.jboss.cdi.tck.tests.context.request;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
-import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequest;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 public class ContextDestructionObserver {
 
-    public void observerRequestContextDestroyed(@Observes @Destroyed(RequestScoped.class) ServletRequestEvent event) {
+    public void observerRequestContextDestroyed(@Observes @Destroyed(RequestScoped.class) ServletRequest event) {
         ActionSequence.addAction(ContextDestructionObserver.class.getName());
     }
 

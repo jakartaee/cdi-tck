@@ -23,17 +23,17 @@ import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Observes;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletRequestEvent;
-import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class ContextDestructionObserver {
 
-    public void observerRequestContextDestroyed(@Observes @Destroyed(RequestScoped.class) ServletRequestEvent event) {
+    public void observerRequestContextDestroyed(@Observes @Destroyed(RequestScoped.class) ServletRequest event) {
         InfoClient.doGetInfo(RequestScoped.class.getName());
     }
 
-    public void observerApplicationContextDestroyed(@Observes @Destroyed(ApplicationScoped.class) ServletContextEvent event) {
+    public void observerApplicationContextDestroyed(@Observes @Destroyed(ApplicationScoped.class) ServletContext event) {
         InfoClient.doGetInfo(ApplicationScoped.class.getName());
     }
 
@@ -41,7 +41,7 @@ public class ContextDestructionObserver {
         InfoClient.doGetInfo(ConversationScoped.class.getName());
     }
 
-    public void observerSessionContextDestroyed(@Observes @Destroyed(SessionScoped.class) HttpSessionEvent event) {
+    public void observerSessionContextDestroyed(@Observes @Destroyed(SessionScoped.class) HttpSession event) {
         InfoClient.doGetInfo(SessionScoped.class.getName());
     }
 

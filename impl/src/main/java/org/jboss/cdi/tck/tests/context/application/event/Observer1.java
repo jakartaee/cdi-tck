@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,7 +20,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
-import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContext;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 
@@ -31,9 +31,9 @@ public class Observer1 {
 
     private boolean observed;
 
-    void observe(@Observes @Initialized(ApplicationScoped.class) ServletContextEvent event) {
+    void observe(@Observes @Initialized(ApplicationScoped.class) ServletContext event) {
         if (observed) {
-            throw new IllegalStateException("ServletContextEvent invoked multiple times.");
+            throw new IllegalStateException("ServletContext invoked multiple times.");
         }
         observed = true;
     }
@@ -42,7 +42,7 @@ public class Observer1 {
         return observed;
     }
 
-    void observeDestroyedServletContext(@Observes @Destroyed(ApplicationScoped.class) ServletContextEvent event) {
+    void observeDestroyedServletContext(@Observes @Destroyed(ApplicationScoped.class) ServletContext event) {
         logger.log("ServletContext destroyed"); // this is tricky to test properly
     }
 }
