@@ -148,7 +148,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "cb"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
     public void testImplicitBeanArchiveModeNone() {
         assertDiscoveredAndAvailable(FoxtrotLocal.class, Foxtrot.class);
     }

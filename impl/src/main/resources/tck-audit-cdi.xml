@@ -7484,7 +7484,14 @@
             <text>Bean classes of enabled beans must be deployed in bean archives.</text>
         </assertion>
 
-   		<!-- TODO A bean archive has a bean discovery mode of all, annotated or none. -->
+		<assertion id="oa">
+			<text>An archive which contains a |beans.xml| file with the |bean-discovery-mode| of |none| is not a bean archive.</text>
+		</assertion>
+
+		<assertion id="ob" testable="false">
+			<text>An archive which contains an extension and no |beans.xml| file is not a bean archive.</text>
+			<note>TODO requires spec update</note>
+		</assertion>
 
         <group>
             <text>An explicit bean archive is an archive which contains a |beans.xml| file with a version number of 1.1 (or later), with the |bean-discovery-mode| of |all|, or with no version number, or that is an empty file.</text>
@@ -7499,15 +7506,9 @@
             </assertion>
         </group>
 
-        <group>
-            <text>An implicit bean archive is any other archive which contains one or more beans with a bean defining annotation, and does not contain a |beans.xml| with the |bean-discovery-mode| of |none|.</text>
-            <assertion id="ca">
-                <text>Test an archive which contains beans with a bean defining annotation, and does not contain a |beans.xml| with the |bean-discovery-mode| of |none|.</text>
-            </assertion>
-            <assertion id="cb">
-                <text>Test an archive which contains beans with a bean defining annotation, and does contain a |beans.xml| with the |bean-discovery-mode| of |none|.</text>
-            </assertion>
-        </group>
+		<assertion id="ca">
+			<text>An implicit bean archive is any other archive which contains one or more beans with a bean defining annotation, or one or more session beans.</text>
+		</assertion>
 
         <group>
             <text>When determining which archives are bean archives, the container must consider:</text>
