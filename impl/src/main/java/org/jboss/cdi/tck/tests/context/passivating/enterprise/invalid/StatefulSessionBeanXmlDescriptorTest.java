@@ -50,8 +50,7 @@ public class StatefulSessionBeanXmlDescriptorTest extends AbstractTest {
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
                                 .clazz(DigitalInterceptor.class.getName()).up())
                 .build()
-                .addAsWebInfResource(
-                        StatefulSessionBeanXmlDescriptorTest.class.getPackage().getName().replace('.', '/') + "/ejb-jar.xml");
+                .addAsWebInfResource(StatefulSessionBeanXmlDescriptorTest.class.getPackage(), "ejb-jar.xml", "ejb-jar.xml");
     }
 
     @Test(groups = INTEGRATION)

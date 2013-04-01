@@ -18,18 +18,10 @@ package org.jboss.cdi.tck.tests.context.passivating.enterprise.invalid;
 
 import javax.ejb.Remove;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 
 @SessionScoped
 @Digital
 public class Elephant implements ElephantLocal {
-
-    @Inject
-    private TelephoneLine line;
-
-    public TelephoneLine getLine() {
-        return line;
-    }
 
     @Remove
     public void remove() {
