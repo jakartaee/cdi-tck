@@ -8,7 +8,6 @@
 	<servlet>
 		<servlet-name>TestServlet</servlet-name>
 		<servlet-class>org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.not.bean.TestServlet_Broken</servlet-class>
-		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>TestServlet</servlet-name>
