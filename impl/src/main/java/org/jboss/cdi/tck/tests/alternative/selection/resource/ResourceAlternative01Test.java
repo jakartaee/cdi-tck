@@ -22,7 +22,6 @@ import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APP
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -45,14 +44,11 @@ import org.testng.annotations.Test;
  * WAR deployment with 2 libraries:
  * <ul>
  * <li>WEB-INF/classes - alpha - does not declare any alternative</li>
- * <li>lib 1 - bravo - declares {@link ResouceProducer} alternative selected for the app with priority 1000</li>
+ * <li>lib 1 - bravo - declares {@link BravoResouceProducer} alternative selected for the app with priority 1000</li>
  * <li>lib 2 - charlie - does not declare any alternative</li>
  * </ul>
  *
- * Expected results:
- * <ul>
- * <li>{@link EntityManager} with {@link ProductionReady} qualifier is available for injection in all bean archives</li>
- * </ul>
+ * Expected result: {@link CharlieResourceProducer} resource is available for injection in all bean archives
  *
  * @author Martin Kouba
  *
