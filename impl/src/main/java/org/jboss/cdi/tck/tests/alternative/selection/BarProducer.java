@@ -22,7 +22,6 @@ import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 
 @Priority(1100)
-@Alternative
 public class BarProducer {
 
     @Alternative
