@@ -91,7 +91,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ac") })
     public void testSerializeSFSB() throws Exception {
 
         KleinStadt stadtInstance = getContextualReference(KleinStadt.class, new AnnotationLiteral<Important>() {

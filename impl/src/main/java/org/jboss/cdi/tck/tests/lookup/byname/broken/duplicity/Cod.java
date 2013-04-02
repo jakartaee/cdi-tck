@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.byname.duplicateNameResolution;
+package org.jboss.cdi.tck.tests.lookup.byname.broken.duplicity;
 
 import javax.inject.Named;
 
 @Named("whitefish")
-public class Sole {
+public class Cod {
 
 }

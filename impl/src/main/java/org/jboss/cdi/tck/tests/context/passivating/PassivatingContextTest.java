@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.cdi.Sections.PASSIVATING_SCOPE;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATING_SCOPES;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_INJECTION_POINTS;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
 import java.io.IOException;
@@ -55,7 +56,8 @@ public class PassivatingContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ba"), @SpecAssertion(section = PASSIVATING_SCOPES, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ba"),
+            @SpecAssertion(section = PASSIVATING_SCOPES, id = "a") })
     public void testManagedBeanWithSerializableImplementationClassOK() {
         Set<Bean<Jyvaskyla>> beans = getBeans(Jyvaskyla.class);
         assert !beans.isEmpty();
@@ -114,7 +116,8 @@ public class PassivatingContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ab")
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ab"),
+            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "a") })
     public void testBeanWithNonSerializableImplementationInjectedIntoTransientFieldOK() {
         Set<Bean<Joensuu>> beans = getBeans(Joensuu.class);
         assert !beans.isEmpty();

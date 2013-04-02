@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.transientreference;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_INJECTION_POINTS;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -48,7 +49,9 @@ public class TransientReferenceParameterTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ad"),
-            @SpecAssertion(section = PASSIVATION_VALIDATION, id = "af") })
+            @SpecAssertion(section = PASSIVATION_VALIDATION, id = "af"),
+            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "c"),
+            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "e") })
     public void testParamInjectionPoints() {
         assertNotNull(spoon);
         assertTrue(spoon.isConstructorParamInjected());

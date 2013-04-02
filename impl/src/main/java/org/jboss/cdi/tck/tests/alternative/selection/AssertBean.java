@@ -18,7 +18,6 @@
 package org.jboss.cdi.tck.tests.alternative.selection;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -42,7 +41,7 @@ public abstract class AssertBean {
 
     /**
      * Asserts that typesafe resolution fails - multiple beans are eligible for injection.
-     * 
+     *
      * @param beanType
      * @param qualifiers
      */
@@ -56,8 +55,8 @@ public abstract class AssertBean {
 
     /**
      * Asserts that typesafe resolution fails - no bean is eligible for injection.
-     * 
-     * 
+     *
+     *
      * @param beanType
      * @param qualifiers
      */
@@ -76,7 +75,7 @@ public abstract class AssertBean {
 
     /**
      * Assert that a bean with given type and qualifiers is available for injection.
-     * 
+     *
      * @param beanType
      * @param qualifiers
      * @return the bean instance
@@ -86,9 +85,6 @@ public abstract class AssertBean {
         assertNotNull(beanManager.resolve(beanManager.getBeans(beanType, qualifiers)));
 
         Instance<T> beanTypeInstance = instance.select(beanType, qualifiers);
-        assertFalse(beanTypeInstance.isAmbiguous());
-        assertFalse(beanTypeInstance.isUnsatisfied());
-
         T beanInstance = beanTypeInstance.get();
         assertNotNull(beanInstance);
 

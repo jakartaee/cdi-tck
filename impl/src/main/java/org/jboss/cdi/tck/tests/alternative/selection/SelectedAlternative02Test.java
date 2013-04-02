@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import javax.inject.Inject;
 
@@ -53,7 +54,7 @@ public class SelectedAlternative02Test extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return createBuilderBase().withTestClass(SelectedAlternative02Test.class)
-                .withClasses(Alpha.class, SimpleTestBean.class).withBeanLibrary(Bravo.class, Foo.class)
+                .withClasses(Alpha.class, SimpleTestBean.class, Boss.class).withBeanLibrary(Bravo.class, Foo.class)
                 .withBeanLibrary(Charlie.class, Bar.class).build();
     }
 
@@ -67,9 +68,12 @@ public class SelectedAlternative02Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ca"),
-            @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cc") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb")})
     public void testDependencyResolvable() {
+        assertNotNull(alpha);
+        assertNotNull(bravo);
+        assertNotNull(charlie);
+
         assertEquals(alpha.assertAvailable(TestBean.class).getId(), Bar.class.getName());
         assertEquals(bravo.assertAvailable(TestBean.class).getId(), Bar.class.getName());
         assertEquals(charlie.assertAvailable(TestBean.class).getId(), Bar.class.getName());

@@ -9,15 +9,15 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,  
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.passivating.broken.constructor;
 
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_INJECTION_POINTS;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+package org.jboss.cdi.tck.tests.lookup.byname.broken.duplicity;
+
+import static org.jboss.cdi.tck.cdi.Sections.AMBIG_NAMES;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -27,21 +27,21 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class NonPassivatingConstructorParamTest extends AbstractTest {
+public class DuplicitNameTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(NonPassivatingConstructorParamTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(DuplicitNameTest.class).build();
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = PASSIVATION_VALIDATION, id = "ac"), @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "d")})
-    public void testBeanWithNonSerializableImplementationInjectedIntoNonTransientFieldOfBeanWithPassivatingScopeFails() {
+    @SpecAssertion(section = AMBIG_NAMES, id = "da")
+    public void testDuplicateNamedBeans() throws Exception {
     }
+
 }

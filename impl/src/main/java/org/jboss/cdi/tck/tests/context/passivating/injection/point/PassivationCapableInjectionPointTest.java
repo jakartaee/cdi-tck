@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2013, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,15 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.passivating.broken.constructor;
+package org.jboss.cdi.tck.tests.context.passivating.injection.point;
 
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_INJECTION_POINTS;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
-import javax.enterprise.inject.spi.DeploymentException;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -31,17 +31,31 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+/**
+ *
+ * @author Martin Kouba
+ */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class NonPassivatingConstructorParamTest extends AbstractTest {
+public class PassivationCapableInjectionPointTest extends AbstractTest {
 
-    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(NonPassivatingConstructorParamTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(PassivationCapableInjectionPointTest.class).build();
     }
 
+    @Inject
+    Spoon spoon;
+
     @Test
-    @SpecAssertions({@SpecAssertion(section = PASSIVATION_VALIDATION, id = "ac"), @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "d")})
-    public void testBeanWithNonSerializableImplementationInjectedIntoNonTransientFieldOfBeanWithPassivatingScopeFails() {
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "b"),
+            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "d"),
+            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "f") })
+    public void testPassivationCapableInjectionPoints() {
+        assertNotNull(spoon.getMeal1());
+        assertNotNull(spoon.getMeal2());
+        assertNotNull(spoon.getMeal3());
+        assertEquals(spoon.getMeal1().getId(), spoon.getMeal2().getId());
+        assertEquals(spoon.getMeal1().getId(), spoon.getMeal3().getId());
     }
+
 }

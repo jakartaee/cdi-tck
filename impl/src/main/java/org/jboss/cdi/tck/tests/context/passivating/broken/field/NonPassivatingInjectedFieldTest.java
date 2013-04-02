@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.field;
 
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_INJECTION_POINTS;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
 import javax.enterprise.inject.spi.DeploymentException;
@@ -26,6 +27,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -39,7 +41,8 @@ public class NonPassivatingInjectedFieldTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "aa")
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION, id = "aa"),
+            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "b") })
     public void testBeanWithNonSerializableImplementationInjectedIntoNonTransientFieldOfBeanWithPassivatingScopeFails() {
     }
 }

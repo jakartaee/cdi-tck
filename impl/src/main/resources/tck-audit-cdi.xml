@@ -356,12 +356,12 @@
     <section id="bean_defining_annotations" title="Bean defining annotations" level="2">
 
         <assertion id="a" testable="false">
-        	<text>A bean may have a bean defining annotation, allowing it to be placed anywhere in an application, as defined in Section 12.1.</text>
+        	<text>A bean class may have a bean defining annotation, allowing it to be placed anywhere in an application, as defined in Section 12.1.</text>
         	<note>This is a statement of intent</note>
         </assertion>
 
 		<assertion id="b">
-        	<text>Any scope type is a bean defining annotation, and any bean which has a scope type declared on the bean class is said to have a bean defining annotation.</text>
+        	<text>Any scope type is a bean defining annotation. If a scope type is declared on a bean class, then the bean class is said to have a bean defining annotation.</text>
         </assertion>
 
     </section>
@@ -768,7 +768,7 @@
         </assertion>
 
         <assertion id="r" testable="false">
-        	<text>If packages annotated |@Vetoed| are split across jars, non-portable behavior results. An application can prevent packages being split across jars by sealing the package as defined by the Extension Mechanism Architecture.</text>
+        	<text>If packages annotated |@Vetoed| are split across classpath entries, non-portable behavior results. An application can prevent packages being split across jars by sealing the package as defined by the Extension Mechanism Architecture.</text>
         	<note>Non-portable behavior.</note>
         </assertion>
 
@@ -905,7 +905,7 @@
         </assertion>
 
         <assertion id="j" testable="false">
-        	<text>If packages annotated |@Vetoed| are split across jars, non-portable behavior results. An application can prevent packages being split across jars by sealing the package as defined by the Extension Mechanism Architecture.</text>
+        	<text>If packages annotated |@Vetoed| are split across classpath entries, non-portable behavior results. An application can prevent packages being split across jars by sealing the package as defined by the Extension Mechanism Architecture.</text>
         	<note>Non-portable behavior.</note>
         </assertion>
 
@@ -2558,16 +2558,14 @@
     <section id="unsatisfied_and_ambig_dependencies" title="Unsatisfied and ambiguous dependencies" level="3">
 
         <group>
-            <text>When an ambiguous dependency exists, the container attempts to resolve the ambiguity. The container eliminates all eligible beans that are not alternatives, except for producer methods and fields of beans that are alternatives. If there is exactly one bean remaining, the container will select this bean, and the ambiguous dependency is called resolvable. If all the beans left are alternatives with a priority, then the container will select the alternative with the highest priority, and the ambiguous dependency is called resolvable.</text>
-            <assertion id="ca">
-                <text>Test that the container eliminates all eligible beans that are not alternatives~, except for producer methods and fields of beans that are alternatives~.</text>
-            </assertion>
-            <assertion id="cb">
-                <text>Test that the container eliminates all eligible beans that are not alternatives, except for producer methods and fields of beans that are alternatives.</text>
-            </assertion>
-            <assertion id="cc">
-                <text>Test that the container will select the alternative with the highest priority.</text>
-            </assertion>
+            <text>When an ambiguous dependency exists, the container attempts to resolve the ambiguity. The container eliminates all eligible beans that are not alternatives selected for the bean archive or selected for the application, except for producer methods and fields of beans that are alternatives.</text>
+			<assertion id="ca">
+				<text>If there is exactly one bean remaining, the container will select this bean, and the ambiguous dependency is called resolvable.</text>
+			</assertion>
+
+			<assertion id="cb">
+				<text>If all the beans left are alternatives with a priority, then the container will determine the highest priority value, and eliminate all beans, except for producer methods and fields of beans that are alternatives with the highest priority value. If there is exactly one bean remaining, the container will select this bean, and the ambiguous dependency is called resolvable.</text>
+			</assertion>
         </group>
 
         <group>
@@ -2725,9 +2723,16 @@
     </section>
 
     <section id="ambig_names" title="Ambiguous EL names" level="3">
-        <assertion id="ca">
-            <text>An ambiguous EL name exists in an EL expression when an EL name resolves to multiple beans. When an ambiguous EL name exists, the container attempts to resolve the ambiguity. If any of the beans are alternatives, the container eliminates all beans that are not alternatives. If there is exactly one bean remaining, the container will select this bean, and the ambiguous EL name is called resolvable.</text>
-        </assertion>
+
+        <group>
+        	<text>An ambiguous EL name exists in an EL expression when an EL name resolves to multiple beans. When an ambiguous EL name exists, the container attempts to resolve the ambiguity. The container eliminates all eligible beans that are not alternatives selected for the bean archive or selected for the application, except for producer methods and fields of beans that are alternatives.</text>
+			<assertion id="ca">
+				<text>If there is exactly one bean remaining, the container will select this bean, and the ambiguous dependency is called resolvable.</text>
+			</assertion>
+			<assertion id="cb">
+				<text>If all the beans left are alternatives with a priority, then the container will determine the highest priority value, and eliminate all beans, except for producer methods and fields of beans that are alternatives with the highest priority value. If there is exactly one bean remaining, the container will select this bean, and the ambiguous dependency is called resolvable.</text>
+			</assertion>
+        </group>
 
         <group>
             <text>All unresolvable ambiguous EL names are detected by the container when the application is initialized. Suppose two beans are both accessible to classes in a certain war, and either the two beans have the same EL name and the name is not resolvable, or the EL name of one bean is of the form |x.y|, where |y| is a valid bean EL name, and |x| is the EL name of the other bean, the container automatically detects the problem and treats it as a deployment problem.</text>
@@ -3805,7 +3810,7 @@
     <section id="passivation_capable" title="Passivation capable beans" level="3">
 
         <group>
-            <text>As defined by the EJB specification, all stateful session beans are passivation capable if interceptors and decorators of the bean are passivation capable, and the stateful session bean does not have the |passivationCapable| flag set to false.</text>
+            <text>As defined by the EJB specification, a stateful session bean is passivation capable if interceptors and decorators of the bean are passivation capable, and the stateful session bean does not have the |passivationCapable| flag set to false.</text>
             <assertion id="aa">
                 <text>Test a passivation capable stateful session bean with |passivationCapable| flag set to true.</text>
             </assertion>
@@ -3815,7 +3820,7 @@
         </group>
 
         <assertion id="i" testable="false">
-            <text>As defined by the EJB specification, stateless and singleton session beans are not passivation capable.</text>
+            <text>As defined by the EJB specification, a stateless session bean or a singleton session bean is not passivation capable.</text>
             <note>Not possible to test - a stateless session bean must belong to the @Dependent pseudo-scope, a singleton bean must belong to either the @ApplicationScscope or to the @Dependent pseudo-scope.</note>
         </assertion>
 
@@ -3887,9 +3892,46 @@
         </assertion>
     </section>
 
+    <section id="passivation_capable_injection_points" title="Passivation capable injection points" level="3">
+
+    	<assertion id="a">
+    		<text>An injection point of a bean is passivation capable if the injection point is a transient field.</text>
+    	</assertion>
+
+    	<assertion id="b">
+    		<text>An injection point of a bean is passivation capable if the injection point is a non-transient field which resolves to a bean that is a passivation capable dependency.</text>
+    	</assertion>
+
+    	<assertion id="c">
+    		<text>An injection point of a bean is passivation capable if the injection point is a bean constructor parameter which is annotated with |@TransientReference|.</text>
+    	</assertion>
+
+    	<assertion id="d">
+    		<text>An injection point of a bean is passivation capable if the injection point is a bean constructor parameter which resolves to a bean that is a passivation capable dependency.</text>
+    	</assertion>
+
+    	<assertion id="e">
+    		<text>An injection point of a bean is passivation capable if the injection point is a method parameter which is annotated with |@TransientReference|.</text>
+    	</assertion>
+
+    	<assertion id="f">
+    		<text>An injection point of a bean is passivation capable if the injection point is a method parameter which resolves to a bean that is a passivation capable dependency.</text>
+    	</assertion>
+
+    </section>
+
     <section id="passivation_capable_dependency" title="Passivation capable dependencies" level="3">
-        <assertion id="a">
-            <text>The container must guarantee that all session beans are passivation capable dependencies.</text>
+
+        <assertion id="aa">
+            <text>The container must guarantee that all stateless session beans are passivation capable dependencies.</text>
+        </assertion>
+
+        <assertion id="ab">
+            <text>The container must guarantee that all singleton session beans are passivation capable dependencies.</text>
+        </assertion>
+
+        <assertion id="ac">
+            <text>The container must guarantee that all passivation capable stateful session beans are passivation capable dependencies.</text>
         </assertion>
 
         <assertion id="b">
@@ -3936,7 +3978,7 @@
         </group>
 
         <assertion id="fa">
-            <text>A custom implementation of |Bean| is a passivation capable dependency if it implements |PassivationCapable| or if |getScope()| returns a normal scope type.</text>
+            <text>A custom implementation of |Bean| is a passivation capable dependency if it implements |PassivationCapable|.</text>
         </assertion>
     </section>
 
@@ -3973,7 +4015,7 @@
         </group>
 
         <group>
-            <text>If a managed bean which declares a passivating scope, a stateful session bean which declares a passivating scope, or a built-in bean has a non-transient injected field, bean constructor parameter or initializer method parameter which is not annotated with |@TransientReference| and that resolves to a dependent scoped bean that is not a passivation capable dependency then the container automatically detects the problem and treats it as a deployment problem.</text>
+            <text>If a managed bean which declares a passivating scope, a stateful session bean which declares a passivating scope, or a built-in bean has has an injection point that is not passivation capable, then the container automatically detects the problem and treats it as a deployment problem.</text>
             <assertion id="aa">
                 <text>Test non-transient injected field.</text>
             </assertion>
@@ -7514,7 +7556,7 @@
         </group>
 
 		<assertion id="ca">
-			<text>An implicit bean archive is any other archive which contains one or more beans with a bean defining annotation, or one or more session beans.</text>
+			<text>An implicit bean archive is any other archive which contains one or more bean classes with a bean defining annotation, or one or more session beans.</text>
 		</assertion>
 
         <group>
@@ -7748,7 +7790,7 @@
 		</assertion>
 
         <group>
-            <text>The container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.6, for every type discovered.</text>
+        	<text>For every type discovered the container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.6.</text>
             <assertion id="ba">
                 <text>Check managed bean</text>
             </assertion>

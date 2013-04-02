@@ -9,13 +9,12 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.jboss.cdi.tck.tests.lookup.byname.duplicatePrefixResolution;
+package org.jboss.cdi.tck.tests.lookup.byname.ambiguous.broken;
 
 import static org.jboss.cdi.tck.cdi.Sections.AMBIG_NAMES;
 
@@ -27,21 +26,23 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class DuplicateNamePrefixResolutionTest extends AbstractTest {
+public class AmbiguousELNamesTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DuplicateNamePrefixResolutionTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(AmbiguousELNamesTest.class).build();
     }
 
     @Test
-    @SpecAssertion(section = AMBIG_NAMES, id = "db")
-    public void testDuplicateBeanNamePrefix() {
+    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "da"), @SpecAssertion(section = AMBIG_NAMES, id = "cb") })
+    public void testAmbiguousELNamesResolved() throws Exception {
+        // Sole and produced Salmon have the same priority -> deployment exception
     }
 
 }

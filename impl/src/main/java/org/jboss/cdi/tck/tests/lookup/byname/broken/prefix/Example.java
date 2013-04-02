@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.lookup.byname.duplicatePrefixResolution;
+package org.jboss.cdi.tck.tests.lookup.byname.broken.prefix;
 
 import javax.inject.Named;
 

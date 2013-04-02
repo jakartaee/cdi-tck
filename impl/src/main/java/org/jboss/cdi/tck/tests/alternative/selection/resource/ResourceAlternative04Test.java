@@ -82,8 +82,7 @@ public class ResourceAlternative04Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ca"),
-            @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cc") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb") })
     public void testAlternativeResourceSelected() {
         assertEquals(alpha.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE), "hello2");
         assertEquals(bravo.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE), "hello2");
