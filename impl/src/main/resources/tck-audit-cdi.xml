@@ -1808,6 +1808,10 @@
                 <text>Test a class that has non-static, final method with public visibility.</text>
             </assertion>
 
+            <assertion id="bbb">
+                <text>Test a class that has non-static, final method with public visibility declared on a superclass.</text>
+            </assertion>
+
             <assertion id="bca">
                 <text>Test with a class that has static final method with public visibility.</text>
                 <note>This is not allowed in CDI 1.0.</note>
