@@ -22,18 +22,18 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public final class SelectedAlternativeTestUtil {
 
     public static WebArchiveBuilder createBuilderBase() {
         return new WebArchiveBuilder().withLibrary(SelectedAlternativeTestUtil.class, TestBean.class, Wild.class, Tame.class,
-                SelectedStereotype.class, AssertBean.class);
+                AssertBean.class);
     }
 
     public static EnterpriseArchiveBuilder createEnterpriseBuilderBase() {
         return new EnterpriseArchiveBuilder().withLibrary(SelectedAlternativeTestUtil.class, TestBean.class, Wild.class,
-                Tame.class, SelectedStereotype.class, AssertBean.class);
+                Tame.class, AssertBean.class);
     }
 
 }

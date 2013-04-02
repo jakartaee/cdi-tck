@@ -83,7 +83,7 @@ public class ResourceAlternative01Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "bc") })
     public void testAlternativeResourceSelected() {
         alpha.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE);
         bravo.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE);

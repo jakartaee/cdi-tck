@@ -39,16 +39,14 @@ import org.testng.annotations.Test;
  *
  * WAR deployment with 2 libraries:
  * <ul>
- * <li>WEB-INF/classes - alpha - does not declare any alternative</li>
- * <li>lib 1 - bravo - declares {@link Foo} alternative selected for the app with priority 1000 and alternative stereotype
- * {@link SelectedStereotype} for the app with priority 60</li>
- * <li>lib 2 - charlie - declares {@link Bar} producer alternatives selected for the app with priority 1100</li>
+ * <li>WEB-INF/classes - alpha - contains {@link Boss} producer alternative with priority 900</li>
+ * <li>lib 1 - bravo - contains {@link Foo} alternative with priority 1000</li>
+ * <li>lib 2 - charlie - contains {@link Bar} producer alternatives with priority 1100</li>
  * </ul>
  *
  * Expected results:
  * <ul>
  * <li>{@link Foo} is available for injection in all bean archives</li>
- * <li>{@link Baz} is available for injection in all bean archives</li>
  * <li>{@link Bar} with {@link Wild} qualifier is available for injection in all bean archives</li>
  * <li>{@link Bar} with {@link Tame} qualifier is available for injection in all bean archives</li>
  * </ul>
@@ -62,8 +60,7 @@ public class SelectedAlternative01Test extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return createBuilderBase().withTestClass(SelectedAlternative01Test.class).withClasses(Alpha.class)
-                .withBeanLibrary(Bravo.class, Foo.class, Baz.class)
-                .withBeanLibrary(Charlie.class, Bar.class, BarProducer.class).build();
+                .withBeanLibrary(Bravo.class, Foo.class).withBeanLibrary(Charlie.class, Bar.class, BarProducer.class).build();
     }
 
     @Inject
@@ -75,7 +72,7 @@ public class SelectedAlternative01Test extends AbstractTest {
     @Inject
     Charlie charlie;
 
-    @Test(groups=INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "aa") })
     public void testAlternativeManagedBeanSelected() {
         alpha.assertAvailable(Foo.class);
@@ -83,9 +80,9 @@ public class SelectedAlternative01Test extends AbstractTest {
         charlie.assertAvailable(Foo.class);
     }
 
-    @Test(groups=INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ab"),
-            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ac") })
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ba"),
+            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "bb") })
     public void testAlternativeProducerSelected() {
         // Producer field
         alpha.assertAvailable(Bar.class, WildLiteral.INSTANCE);
@@ -95,14 +92,6 @@ public class SelectedAlternative01Test extends AbstractTest {
         alpha.assertAvailable(Bar.class, TameLiteral.INSTANCE);
         bravo.assertAvailable(Bar.class, TameLiteral.INSTANCE);
         charlie.assertAvailable(Bar.class, TameLiteral.INSTANCE);
-    }
-
-    @Test(groups=INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "b") })
-    public void testAlternativeStereotypeSelected() {
-        alpha.assertAvailable(Baz.class);
-        bravo.assertAvailable(Baz.class);
-        charlie.assertAvailable(Baz.class);
     }
 
 }

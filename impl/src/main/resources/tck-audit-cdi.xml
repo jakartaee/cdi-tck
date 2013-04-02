@@ -2314,25 +2314,27 @@
     <section id="declaring_selected_alternatives_application" title="Declaring selected alternatives for an application" level="4">
 
         <group>
-            <text>An alternative may be given a priority for the application by placing the |@Priority| annotation on the bean class, producer method or producer field annotated with the |@Alternative| annotation.</text>
+            <text>An alternative may be given a priority for the application by placing the |@Priority| annotation on the bean class of a managed bean or session bean.</text>
             <assertion id="aa">
-                <text>Test |@Priority| on the bean class.</text>
+                <text>Test |@Priority| on the bean class of a managed bean.</text>
             </assertion>
-            <!-- CDI-334 Following assertions are just a guess -->
             <assertion id="ab">
-                <text>Test |@Priority| on the bean class of a producer method.</text>
-            </assertion>
-            <assertion id="ac">
-                <text>Test |@Priority| on the bean class of a producer field.</text>
-            </assertion>
-            <assertion id="ad">
-                <text>Test |@Priority| on the resource.</text>
+                <text>Test |@Priority| on the bean class of a session bean.</text>
             </assertion>
         </group>
 
-        <assertion id="b">
-            <text>An alternative may be given a priority for the application by placing the |@Priority| annotation on the stereotype declaring the |@Alternative| annotation.</text>
-        </assertion>
+        <group>
+        	<text>An alternative may be given a priority for the application by placing the |@Priority| annotation on the bean class that declares the producer method, field or resource.</text>
+        	<assertion id="ba">
+                <text>Test |@Priority| on the bean class of a producer method.</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Test |@Priority| on the bean class of a producer field.</text>
+            </assertion>
+            <assertion id="bc">
+                <text>Test |@Priority| on the resource.</text>
+            </assertion>
+        </group>
 
     </section>
 
