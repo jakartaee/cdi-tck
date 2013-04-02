@@ -4376,8 +4376,12 @@
             <note>We have no portable way how to test it</note>
         </assertion>
 
+		<assertion id="d">
+			<text>The container provides a filter with the name "CDI Conversation Filter", which may be mapped in |web.xml|, allowing the user alter when the conversation is associated with the servlet request.</text>
+		</assertion>
+
         <group>
-            <text>The conversation associated with a Servlet request is determined at the beginning of the request before calling any |service()| method of any servlet in the web application, calling the |doFilter()| method of any servlet filter in the web application and before the container calls any |ServletRequestListener| or |AsyncListener| in the web application.</text>
+            <text>If this filter is not mapped in any |web.xml| in the application, the conversation associated with a Servlet request is determined at the beginning of the request before calling any |service()| method of any servlet in the web application, calling the |doFilter()| method of any servlet filter in the web application and before the container calls any |ServletRequestListener| or |AsyncListener| in the web application.</text>
             <assertion id="da">
                 <text>Test |service()| method of a servlet.</text>
                 <note>This may only be tested indirectly</note>
@@ -4468,10 +4472,13 @@
             <text>If the propagated conversation cannot be restored, the container must associate the request with a new transient conversation and throw an exception of type |javax.enterprise.context.NonexistentConversationException|.</text>
         </assertion>
 
-        <assertion id="ua">
-            <text>The container ensures that a long-running conversation may be associated with at most one request at a time, by blocking or rejecting concurrent requests. If the container rejects a request, it must associate the request with a new transient conversation and throw an exception of type |javax.enterprise.context.BusyConversationException|.</text>
-            <note>Not testable until CDI-206 is resolved.</note>
-        </assertion>
+		<group>
+		    <text>The container ensures that a long-running conversation may be associated with at most one request at a time, by blocking or rejecting concurrent requests. If the container rejects a request, it must associate the request with a new transient conversation and throw an exception of type |javax.enterprise.context.BusyConversationException|.</text>
+	        <assertion id="ua">
+				<text>Test the container blocks the concurrent request.</text>
+				<note>This assertion may turn in testable=false, as the container is not actually required to reject the concurrent requests.</note>
+	        </assertion>
+		</group>
 
     </section>
 

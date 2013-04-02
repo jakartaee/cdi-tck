@@ -42,7 +42,7 @@ public class IntrospectServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setContentType("text/text");
+        resp.setContentType("text/plain");
         String mode = req.getParameter("mode");
 
         if (mode == null) {
@@ -52,7 +52,6 @@ public class IntrospectServlet extends HttpServlet {
             ActionSequence.addAction(IntrospectServlet.class.getName());
         } else if (MODE_VERIFY.equals(mode)) {
             resp.setStatus(HttpServletResponse.SC_OK);
-            resp.setContentType("text/plain");
             resp.getWriter().write(ActionSequence.getSequence().toString());
         } else {
             throw new ServletException("Unknown guard mode");
