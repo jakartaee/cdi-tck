@@ -457,7 +457,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         return self();
     }
 
-
     /**
      * Add ejb-jar.xml descriptor created with shrinkwrap-descriptors.
      *
@@ -790,7 +789,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 @Override
                 public void classFound(String className) {
 
-                    if (isAsClientMode() && testClazzName.equals(className)) {
+                    if (isAsClientMode() && (testClazzName.equals(className) || className.startsWith(testClazzName))) {
                         return;
                     }
 
@@ -1294,9 +1293,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         long start = System.currentTimeMillis();
 
-        JavaArchive supportLib = ShrinkWrap
-                .create(JavaArchive.class, "cdi-tck-support.jar")
-                // CDI TCK properties
+        JavaArchive supportLib = ShrinkWrap.create(JavaArchive.class, "cdi-tck-support.jar")
+        // CDI TCK properties
                 .addAsResource(PropertiesBasedConfigurationBuilder.RESOURCE_BUNDLE)
                 // org.jboss.cdi.tck.api
                 .addPackage(Configuration.class.getPackage())
