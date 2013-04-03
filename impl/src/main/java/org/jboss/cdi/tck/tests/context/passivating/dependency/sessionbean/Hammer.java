@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2013, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -9,29 +9,30 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.passivating.resource.dependency;
+package org.jboss.cdi.tck.tests.context.passivating.dependency.sessionbean;
 
-import javax.enterprise.inject.Produces;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
+import java.util.UUID;
 
-public class ResourceProducer {
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
 
-    @Produces
-    @Another
-    @PersistenceContext
-    EntityManager persistenceContext;
+@Singleton
+public class Hammer {
 
-    @Produces
-    @Another
-    @PersistenceUnit
-    EntityManagerFactory persistenceUnit;
+    private String id;
+
+    @PostConstruct
+    public void init() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public String getId() {
+        return id;
+    }
 
 }

@@ -14,15 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.resource.resource;
+package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.persistence;
 
-import javax.annotation.Resource;
 import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 
 public class ResourceProducer {
+
     @Produces
     @Another
-    @Resource(name = "java:comp/BeanManager")
-    private BeanManager manager;
+    @PersistenceContext
+    EntityManager persistenceContext;
+
+    @Produces
+    @Another
+    @PersistenceUnit
+    EntityManagerFactory persistenceUnit;
+
 }

@@ -14,15 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.resource.resource;
+package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.persistence;
 
 import javax.annotation.Resource;
 import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
+import javax.sql.DataSource;
 
-public class ResourceProducer {
+public class DataSourceProducer {
+
     @Produces
     @Another
-    @Resource(name = "java:comp/BeanManager")
-    private BeanManager manager;
+    @Resource(name="jdbc/TestDB")
+    DataSource dataSource;
+
 }

@@ -3977,6 +3977,7 @@
             </assertion>
             <assertion id="ec">
                 <text>Test built-in |InjectionPoint|.</text>
+                <note>Pprobably not testable</note>
             </assertion>
             <assertion id="ed">
                 <text>Test built-in |BeanManager|.</text>

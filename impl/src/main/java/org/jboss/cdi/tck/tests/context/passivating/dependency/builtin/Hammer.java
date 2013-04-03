@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2013, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,42 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jboss.cdi.tck.tests.context.passivating.dependency.builtin;
 
-package org.jboss.cdi.tck.tests.context.passivating.resource.dependency;
-
-import java.io.Serializable;
 import java.util.UUID;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 
-@SessionScoped
-public class Profile implements Serializable {
-
-    private static final long serialVersionUID = 1830634635545684272L;
+@RequestScoped
+public class Hammer {
 
     private String id;
 
-    @Inject
-    @Another
-    EntityManager entityManager;
-
-    @Inject
-    @Another
-    EntityManagerFactory entityManagerFactory;
-
-    public Profile() {
+    @PostConstruct
+    public void init() {
         this.id = UUID.randomUUID().toString();
-    }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    public EntityManagerFactory getEntityManagerFactory() {
-        return entityManagerFactory;
     }
 
     public String getId() {

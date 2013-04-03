@@ -15,61 +15,68 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.context.passivating.resource.dependency;
+package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.persistence;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
+ *
  * @author Martin Kouba
- * 
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class ResourceIsPassivationCapableDependencyTest extends AbstractTest {
+public class DataSourcePassivationDependencyTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ResourceIsPassivationCapableDependencyTest.class)
-                .withDefaultPersistenceXml().build();
+        return new WebArchiveBuilder()
+                .withTestClass(DataSourcePassivationDependencyTest.class)
+                .withClasses(Pool.class, Another.class, DataSourceProducer.class)
+                .withWebXml(
+                        Descriptors.create(WebAppDescriptor.class).createResourceRef().resRefName("jdbc/TestDB")
+                                .resType(DataSource.class.getName()).lookupName(ConfigurationFactory.get().getTestDataSource())
+                                .up()).withDefaultPersistenceXml().build();
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { PERSISTENCE, INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "db"),
-            @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "dc") })
-    public void testPassivationCapableDependencies(Profile profile) throws IOException, ClassNotFoundException {
+    @Test(groups = { PERSISTENCE, INTEGRATION })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "da") })
+    public void testDataSource() throws IOException, ClassNotFoundException, SQLException {
 
-        assertNotNull(profile);
-        assertNotNull(profile.getEntityManager());
-        assertTrue(profile.getEntityManager().isOpen());
-        assertNotNull(profile.getEntityManagerFactory());
-        assertTrue(profile.getEntityManagerFactory().isOpen());
+        Pool pool = getContextualReference(Pool.class);
 
-        String profileId = profile.getId();
+        assertNotNull(pool);
+        assertNotNull(pool.getDataSource());
 
-        byte[] serializedProfile = passivate(profile);
+        String poolId = pool.getId();
 
-        Profile profileCopy = (Profile) activate(serializedProfile);
+        byte[] serializedPool = passivate(pool);
 
-        assertEquals(profileCopy.getId(), profileId);
-        assertNotNull(profileCopy.getEntityManager());
-        assertTrue(profileCopy.getEntityManager().isOpen());
-        assertNotNull(profileCopy.getEntityManagerFactory());
-        assertTrue(profileCopy.getEntityManagerFactory().isOpen());
+        Pool poolCopy = (Pool) activate(serializedPool);
+
+        assertNotNull(poolCopy);
+        assertEquals(poolCopy.getId(), poolId);
+        assertNotNull(pool.getDataSource());
+        assertNotNull(pool.getDataSource().getLoginTimeout());
     }
 
 }

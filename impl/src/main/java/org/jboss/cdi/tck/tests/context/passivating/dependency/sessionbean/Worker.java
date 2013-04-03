@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2012, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,15 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.resource.resource;
 
-import javax.annotation.Resource;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
+package org.jboss.cdi.tck.tests.context.passivating.dependency.sessionbean;
 
-public class ResourceProducer {
-    @Produces
-    @Another
-    @Resource(name = "java:comp/BeanManager")
-    private BeanManager manager;
+import java.io.Serializable;
+import java.util.UUID;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+
+@SessionScoped
+public class Worker implements Serializable {
+
+    private static final long serialVersionUID = 1830634635545684272L;
+
+    private String id;
+
+    @Inject
+    Hammer hammer;
+
+    @PostConstruct
+    public void init() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public Hammer getHammer() {
+        return hammer;
+    }
+
+    public String getId() {
+        return id;
+    }
+
 }

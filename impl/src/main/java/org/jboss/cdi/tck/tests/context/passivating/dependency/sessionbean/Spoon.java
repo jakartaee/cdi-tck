@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2013, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,15 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.resource.resource;
+package org.jboss.cdi.tck.tests.context.passivating.dependency.sessionbean;
 
-import javax.annotation.Resource;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
+import javax.ejb.Stateless;
 
-public class ResourceProducer {
-    @Produces
-    @Another
-    @Resource(name = "java:comp/BeanManager")
-    private BeanManager manager;
+@Stateless
+public class Spoon {
+
+    public String getId() {
+        // Don't save state on SLSB
+        return Spoon.class.getName();
+    }
+
 }

@@ -14,15 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.resource.resource;
+package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.remote.ejb;
 
-import javax.annotation.Resource;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
+import javax.ejb.Remote;
 
-public class ResourceProducer {
-    @Produces
-    @Another
-    @Resource(name = "java:comp/BeanManager")
-    private BeanManager manager;
+@Remote
+public interface FooRemote {
+
+    public String getId();
+
 }
