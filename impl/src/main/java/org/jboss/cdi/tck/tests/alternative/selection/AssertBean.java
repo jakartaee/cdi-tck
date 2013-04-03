@@ -42,6 +42,8 @@ public abstract class AssertBean {
     /**
      * Asserts that typesafe resolution fails - multiple beans are eligible for injection.
      *
+     * Don't use this method until CDI-331 is resolved.
+     *
      * @param beanType
      * @param qualifiers
      */
@@ -56,6 +58,7 @@ public abstract class AssertBean {
     /**
      * Asserts that typesafe resolution fails - no bean is eligible for injection.
      *
+     * Don't use this method until CDI-331 is resolved.
      *
      * @param beanType
      * @param qualifiers
