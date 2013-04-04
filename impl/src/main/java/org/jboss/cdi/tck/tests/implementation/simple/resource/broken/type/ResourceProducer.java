@@ -24,6 +24,6 @@ public class ResourceProducer {
     @SuppressWarnings("unused")
     @Another
     @Produces
-    @Resource(name = "java:comp/BeanManager")
+    @Resource(lookup = "java:comp/BeanManager")
     private String manager;
 }

@@ -27,6 +27,6 @@ public class ResourceProducer {
     @Named
     @Another
     @Produces
-    @Resource(name = "java:comp/BeanManager")
+    @Resource(lookup = "java:comp/BeanManager")
     private BeanManager manager;
 }
