@@ -37,6 +37,7 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.util.TypeLiteral;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -51,7 +52,7 @@ import org.testng.annotations.Test;
 /**
  * Note that this info is not available for {@link BeanManager#fireEvent()}.
  *
- * See also https://issues.jboss.org/browse/CDI-271 and https://issues.jboss.org/browse/CDI-323.
+ * See also CDI-271 and CDI-323.
  *
  * @author Martin Kouba
  */
@@ -102,26 +103,29 @@ public class EventMetadataTest extends AbstractTest {
         assertTrue(infoObserver.isLastIsTransient());
     }
 
+    @SuppressWarnings("serial")
     @Test
     @SpecAssertion(section = INJECTION_POINT, id = "bab")
     public void testInjectionPointGetType() {
 
         Type lastType = null;
+        Type eventInfoLiteralType = new TypeLiteral<Event<Info>>() {
+        }.getType();
 
         notifier.fireInfoEvent();
         lastType = infoObserver.getLastType();
         assertNotNull(lastType);
-        assertEquals(lastType, Info.class);
+        assertEquals(lastType, eventInfoLiteralType);
 
         notifier.fireInitializerInfoEvent();
         lastType = infoObserver.getLastType();
         assertNotNull(lastType);
-        assertEquals(lastType, Info.class);
+        assertEquals(lastType, eventInfoLiteralType);
 
         notifier.fireConstructorInfoEvent();
         lastType = infoObserver.getLastType();
         assertNotNull(lastType);
-        assertEquals(lastType, Info.class);
+        assertEquals(lastType, eventInfoLiteralType);
     }
 
     @SuppressWarnings("unchecked")
