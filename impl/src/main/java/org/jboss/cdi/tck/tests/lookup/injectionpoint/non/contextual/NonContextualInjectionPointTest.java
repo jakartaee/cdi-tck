@@ -19,8 +19,13 @@ package org.jboss.cdi.tck.tests.lookup.injectionpoint.non.contextual;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.spi.Bean;
+import javax.inject.Inject;
 import javax.naming.InitialContext;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,6 +42,9 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "20091101")
 public class NonContextualInjectionPointTest extends AbstractTest {
 
+    @Inject
+    private Instance<Baz> baz;
+
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(NonContextualInjectionPointTest.class).build();
@@ -44,9 +52,18 @@ public class NonContextualInjectionPointTest extends AbstractTest {
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = INJECTION_POINT, id = "aaa")
-    public void testEjbInjectionPointGetBean() throws Exception {
+    public void testNonContextualEjbInjectionPointGetBean() throws Exception {
         Bar bar = (Bar) new InitialContext().lookup("java:module/Bar");
-        assertNull(bar.getFoo().getInjectionPoint().getBean());
+        Bean<?> bean = bar.getFoo().getInjectionPoint().getBean();
+        assertNull(bean);
+    }
+
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = INJECTION_POINT, id = "aa")
+    public void testContextualEjbInjectionPointGetBean() throws Exception {
+        Bean<?> bean = baz.get().getFoo().getInjectionPoint().getBean();
+        assertNotNull(bean);
+        assertEquals(bean.getBeanClass(), Baz.class);
     }
 
 }

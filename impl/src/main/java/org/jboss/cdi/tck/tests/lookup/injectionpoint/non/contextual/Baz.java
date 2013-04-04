@@ -21,10 +21,10 @@ import javax.ejb.Stateful;
 import javax.inject.Inject;
 
 /**
- * @author Martin Kouba
+ * @author Jozef Hartinger
  */
-@Stateful(name = "Bar")
-public class Bar {
+@Stateful
+public class Baz {
 
     @Inject
     private Foo foo;
