@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint.dynamic.event;
+package org.jboss.cdi.tck.tests.event.metadata.injectionpoint;
 
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
@@ -37,7 +37,6 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -50,9 +49,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Right now it's only possible to inject {@link InjectionPoint} into observer method parameter.
- *
- * Note that this info is not available for {@link BeanManager#fireEvent(Object, java.lang.annotation.Annotation...)}.
+ * Note that this info is not available for {@link BeanManager#fireEvent()}.
  *
  * See also https://issues.jboss.org/browse/CDI-271 and https://issues.jboss.org/browse/CDI-323.
  *

@@ -5658,6 +5658,31 @@
         </assertion>
     </section>
 
+    <section id="event_metadata" title="The EventMetadata interface" level="3">
+
+    	<group>
+    		<text>The interface |javax.enterprise.inject.spi.EventMetadata| provides access to metadata about an observed event.</text>
+    		<assertion id="a">
+    			<text>|getQualifiers()| returns the set of qualifiers with which the event was fired.</text>
+    		</assertion>
+    		<assertion id="b">
+    			<text>|getInjectionPoint()| returns the |InjectionPoint| from which this event payload was fired, or |null| if it was fired from |BeanManager.fireEvent()|.</text>
+    		</assertion>
+    		<assertion id="c">
+    			<text>|getResolvedType()| returns the resolved event |Type|.</text>
+    		</assertion>
+    	</group>
+
+    	<assertion id="d">
+    		<text>The container must provide a bean with scope |@Dependent|, bean type |EventMetadata| and qualifier |@Default|, allowing observer methods to obtain information about the events they observe.</text>
+    	</assertion>
+
+    	<assertion id="e">
+    		<text>If an injection point of type |EventMetadata| and qualifier |@Default| which is not a parameter of an observer method exists, the container automatically detects the problem and treats it as a definition error.</text>
+    	</assertion>
+
+    </section>
+
     <section id="conditional_observer_methods" title="Conditional observer methods" level="3">
         <assertion id="a">
             <text>A conditional observer method may be declared by specifying |receive=IF_EXISTS|.</text>

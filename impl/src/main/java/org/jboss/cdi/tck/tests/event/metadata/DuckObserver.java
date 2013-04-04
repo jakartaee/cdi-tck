@@ -14,8 +14,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint.dynamic.event;
+package org.jboss.cdi.tck.tests.event.metadata;
 
-public class Info {
+import java.util.List;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.EventMetadata;
+
+@ApplicationScoped
+public class DuckObserver {
+
+    private EventMetadata metadata = null;
+
+    public void observeDuck(@Observes Duck<?> event, EventMetadata metadata) {
+        this.metadata = metadata;
+    }
+
+    public void observeDuck(@Observes List<Duck<?>> event, EventMetadata metadata) {
+        this.metadata = metadata;
+    }
+
+    public EventMetadata getMetadata() {
+        return metadata;
+    }
+
+    public void reset() {
+        this.metadata = null;
+    }
 
 }

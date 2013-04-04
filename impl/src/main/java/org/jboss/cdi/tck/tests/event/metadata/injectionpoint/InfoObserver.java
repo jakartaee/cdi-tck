@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint.dynamic.event;
+package org.jboss.cdi.tck.tests.event.metadata.injectionpoint;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
@@ -26,6 +26,7 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.EventMetadata;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 @RequestScoped
@@ -38,7 +39,8 @@ public class InfoObserver {
     private Member lastMember = null;
     private Annotated lastAnnotated = null;
 
-    public void observeInfo(@Observes @Any Info info, InjectionPoint injectionPoint) {
+    public void observeInfo(@Observes @Any Info info, EventMetadata metadata) {
+        InjectionPoint injectionPoint = metadata.getInjectionPoint();
         lastBean = injectionPoint.getBean();
         lastIsTransient = injectionPoint.isTransient();
         lastType = injectionPoint.getType();
