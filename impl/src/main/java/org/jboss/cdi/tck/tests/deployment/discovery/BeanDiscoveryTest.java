@@ -7,9 +7,9 @@ import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.inject.spi.Extension;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -69,9 +69,13 @@ public class BeanDiscoveryTest extends AbstractTest {
                         new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.NONE).exportAsString()),
                         "beans.xml");
 
+        // Archive which contains an extension and no beans.xml file
+        JavaArchive legacy = ShrinkWrap.create(JavaArchive.class).addClasses(LegacyExtension.class, LegacyAlpha.class,
+                LegacyBravo.class).addAsServiceProvider(Extension.class, LegacyExtension.class);
+
         return new WebArchiveBuilder().withTestClass(BeanDiscoveryTest.class).withClasses(VerifyingExtension.class)
                 .withExtension(VerifyingExtension.class).withLibrary(Ping.class)
-                .withLibraries(alpha, bravo, charlie, delta, echo, foxtrot).build();
+                .withLibraries(alpha, bravo, charlie, delta, echo, foxtrot, legacy).build();
     }
 
     @Inject
@@ -113,8 +117,15 @@ public class BeanDiscoveryTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
-    public void testImplicitBeanArchiveModeNone(Foxtrot foxtrot) {
-        assertNotDiscoveredAndNotAvailable(foxtrot, Foxtrot.class);
+    public void testNoBeanArchiveModeNone() {
+        assertNotDiscoveredAndNotAvailable(Foxtrot.class);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
+    public void testNotBeanArchiveExtension(LegacyAlpha legacyAlpha) {
+        assertDiscoveredAndAvailable(legacyAlpha, LegacyAlpha.class);
+        assertNotDiscoveredAndNotAvailable(LegacyBravo.class);
     }
 
     private <T extends Ping> void assertDiscoveredAndAvailable(T reference, Class<T> clazz) {
@@ -124,9 +135,8 @@ public class BeanDiscoveryTest extends AbstractTest {
         getUniqueBean(clazz);
     }
 
-    private <T extends Ping> void assertNotDiscoveredAndNotAvailable(T reference, Class<T> clazz) {
+    private <T> void assertNotDiscoveredAndNotAvailable(Class<T> clazz) {
         assertFalse(extension.getObservedAnnotatedTypes().contains(clazz));
-        assertNull(reference);
         assertTrue(getBeans(clazz).isEmpty());
     }
 

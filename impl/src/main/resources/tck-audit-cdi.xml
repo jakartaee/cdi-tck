@@ -7537,9 +7537,8 @@
 			<text>An archive which contains a |beans.xml| file with the |bean-discovery-mode| of |none| is not a bean archive.</text>
 		</assertion>
 
-		<assertion id="ob" testable="false">
+		<assertion id="ob">
 			<text>An archive which contains an extension and no |beans.xml| file is not a bean archive.</text>
-			<note>TODO requires spec update</note>
 		</assertion>
 
         <group>
