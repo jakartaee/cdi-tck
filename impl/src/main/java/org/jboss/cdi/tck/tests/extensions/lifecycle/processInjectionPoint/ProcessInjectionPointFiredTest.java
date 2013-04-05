@@ -154,9 +154,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
         InjectionPoint listenerIp = extension.getListenerCharlie();
         assertNotNull(listenerIp);
         verifyType(listenerIp, Charlie.class);
-        assertEquals(extension.getJsfManagedBeanCharlies().size(), 2);
     }
-
 
     private static void verifyType(InjectionPoint ip, Class<?> rawType, Class<?>... typeParameters) {
         assertEquals(getRawType(ip.getType()), rawType);

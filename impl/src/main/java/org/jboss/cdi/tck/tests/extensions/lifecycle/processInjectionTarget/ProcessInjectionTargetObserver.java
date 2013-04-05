@@ -31,7 +31,6 @@ public class ProcessInjectionTargetObserver implements Extension {
     private static ProcessInjectionTarget<TestFilter> filterEvent = null;
     private static ProcessInjectionTarget<TagLibraryListener> tagLibraryListenerEvent = null;
     private static ProcessInjectionTarget<TestTagHandler> tagHandlerEvent = null;
-    private static ProcessInjectionTarget<Farm> jsfManagedBeanEvent = null;
 
     private static boolean servletSuperTypeObserved = false;
     private static boolean servletSubTypeObserved = false;
@@ -58,10 +57,6 @@ public class ProcessInjectionTargetObserver implements Extension {
 
     public void observeTagLibraryListener(@Observes ProcessInjectionTarget<TagLibraryListener> event) {
         tagLibraryListenerEvent = event;
-    }
-
-    public void observeJsfManagedBean(@Observes ProcessInjectionTarget<Farm> event) {
-        jsfManagedBeanEvent = event;
     }
 
     public void observeServletSuperType(@Observes ProcessInjectionTarget<? super HttpServlet> event) {
@@ -106,10 +101,6 @@ public class ProcessInjectionTargetObserver implements Extension {
 
     public static ProcessInjectionTarget<TestTagHandler> getTagHandlerEvent() {
         return tagHandlerEvent;
-    }
-
-    public static ProcessInjectionTarget<Farm> getJsfManagedBeanEvent() {
-        return jsfManagedBeanEvent;
     }
 
     public static boolean isServletSuperTypeObserved() {

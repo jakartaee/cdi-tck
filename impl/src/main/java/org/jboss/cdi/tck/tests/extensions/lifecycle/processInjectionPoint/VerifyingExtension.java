@@ -18,9 +18,6 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint;
 
 import static org.testng.Assert.assertNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.Extension;
@@ -40,7 +37,6 @@ public class VerifyingExtension implements Extension {
     private InjectionPoint servletCharlie;
     private InjectionPoint filterCharlie;
     private InjectionPoint listenerCharlie;
-    private List<InjectionPoint> jsfManagedBeanCharlies = new ArrayList<InjectionPoint>();
 
     private Bean<?> injectingBean;
     private Bean<?> producingBean;
@@ -92,11 +88,6 @@ public class VerifyingExtension implements Extension {
         listenerCharlie = event.getInjectionPoint();
     }
 
-    public void observeJsfManagedBeanInjectionPoints(@Observes ProcessInjectionPoint<Farm, ?> event) {
-        jsfManagedBeanCharlies.add(event.getInjectionPoint());
-    }
-
-
     public InjectionPoint getAlpha() {
         return alpha;
     }
@@ -127,10 +118,6 @@ public class VerifyingExtension implements Extension {
 
     public InjectionPoint getListenerCharlie() {
         return listenerCharlie;
-    }
-
-    public List<InjectionPoint> getJsfManagedBeanCharlies() {
-        return jsfManagedBeanCharlies;
     }
 
     public Bean<?> getInjectingBean() {

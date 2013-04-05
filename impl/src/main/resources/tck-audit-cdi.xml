@@ -7844,9 +7844,6 @@
             <assertion id="db">
                 <text>Check session bean</text>
             </assertion>
-            <assertion id="dd">
-                <text>Check JSF managed beans</text>
-            </assertion>
             <assertion id="de">
                 <text>Check servlet listener</text>
             </assertion>

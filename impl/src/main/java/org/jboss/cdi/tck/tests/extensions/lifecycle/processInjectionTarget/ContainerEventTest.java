@@ -85,12 +85,6 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = BEAN_DISCOVERY, id = "dd")
-    public void testProcessInjectionTargetEventFiredForJsfManagedBean() {
-        assertNotNull(ProcessInjectionTargetObserver.getJsfManagedBeanEvent());
-    }
-
-    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PIT, id = "aas"), @SpecAssertion(section = PIT, id = "aao"),
             @SpecAssertion(section = PIT, id = "aan") })
     public void testTypeOfProcessInjectionTargetParameter() {
