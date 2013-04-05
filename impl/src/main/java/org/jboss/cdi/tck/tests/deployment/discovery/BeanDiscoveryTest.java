@@ -57,7 +57,7 @@ public class BeanDiscoveryTest extends AbstractTest {
         // Bean defining annotation and 1.1 version beans.xml with bean-discovery-mode of annotated
         JavaArchive echo = ShrinkWrap
                 .create(JavaArchive.class)
-                .addClass(Echo.class)
+                .addClasses(Echo.class, EchoNotABean.class)
                 .addAsManifestResource(
                         new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED)
                                 .exportAsString()), "beans.xml");
@@ -113,6 +113,7 @@ public class BeanDiscoveryTest extends AbstractTest {
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
     public void testImplicitBeanArchiveModeAnnotated(Echo echo) {
         assertDiscoveredAndAvailable(echo, Echo.class);
+        assertNotDiscoveredAndNotAvailable(EchoNotABean.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
