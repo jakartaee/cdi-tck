@@ -4875,7 +4875,7 @@
     <section id="decorators" title="Decorators" level="1">
         <assertion id="a" testable="false">
             <text>Decorators may be associated with any managed bean that is not itself an interceptor or decorator, with any EJB session bean or with any built-in bean other than the built-in bean with type |BeanManager| and qualifier |@Default|.</text>
-            <note>Doesn't specify an error</note>
+            <note>Tested elsewhere.</note>
         </assertion>
 
         <assertion id="b">

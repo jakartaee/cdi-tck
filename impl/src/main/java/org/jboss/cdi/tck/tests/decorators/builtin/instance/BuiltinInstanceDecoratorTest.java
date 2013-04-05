@@ -49,7 +49,6 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  *
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class BuiltinInstanceDecoratorTest extends AbstractDecoratorTest {
 
@@ -67,7 +66,7 @@ public class BuiltinInstanceDecoratorTest extends AbstractDecoratorTest {
     Instance<Mule> instance;
 
     @SuppressWarnings({ "serial" })
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acb") })
     public void testDecoratorIsResolved() {
         TypeLiteral<Instance<Mule>> instanceLiteral = new TypeLiteral<Instance<Mule>>() {
@@ -84,7 +83,7 @@ public class BuiltinInstanceDecoratorTest extends AbstractDecoratorTest {
                 instanceLiteral.getType());
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acb") })
     public void testDecoratorIsInvoked() {
         assertTrue(instance.isAmbiguous());
