@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.metadata.injectionpoint;
 
+import static org.jboss.cdi.tck.cdi.Sections.EVENT_METADATA;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
 import static org.testng.Assert.assertEquals;
@@ -24,6 +25,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
@@ -50,18 +52,16 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Note that this info is not available for {@link BeanManager#fireEvent()}.
- *
- * See also CDI-271 and CDI-323.
+ * Note that injection point is not available for {@link BeanManager#fireEvent()}.
  *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-public class EventMetadataTest extends AbstractTest {
+public class EventMetadataInjectionPointTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(EventMetadataTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(EventMetadataInjectionPointTest.class).build();
     }
 
     @Inject
@@ -71,8 +71,8 @@ public class EventMetadataTest extends AbstractTest {
     InfoObserver infoObserver;
 
     @Test
-    @SpecAssertion(section = INJECTION_POINT, id = "aac")
-    public void testInjectionPointGetBean() {
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "aa"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    public void testGetBean() {
 
         Bean<?> lastBean = null;
 
@@ -93,8 +93,8 @@ public class EventMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = INJECTION_POINT, id = "dcc")
-    public void testInjectionPointIsTransient() {
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "dca"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    public void testIsTransient() {
 
         notifier.fireInfoEvent();
         assertFalse(infoObserver.isLastIsTransient());
@@ -105,8 +105,8 @@ public class EventMetadataTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = INJECTION_POINT, id = "bab")
-    public void testInjectionPointGetType() {
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "ba"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    public void testGetType() {
 
         Type lastType = null;
         Type eventInfoLiteralType = new TypeLiteral<Event<Info>>() {
@@ -130,8 +130,8 @@ public class EventMetadataTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertion(section = INJECTION_POINT, id = "bcb")
-    public void testInjectionPointGetQualifiers() {
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "bc"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    public void testGetQualifiers() {
 
         Set<Annotation> lastQualifiers = null;
 
@@ -147,9 +147,10 @@ public class EventMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "cab"),
-            @SpecAssertion(section = INJECTION_POINT, id = "cbb") })
-    public void testInjectionPointGetMember() {
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "ca"),
+            @SpecAssertion(section = INJECTION_POINT, id = "cc"), @SpecAssertion(section = INJECTION_POINT, id = "cb"),
+            @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    public void testGetMember() {
 
         Member lastMember = null;
 
@@ -170,12 +171,20 @@ public class EventMetadataTest extends AbstractTest {
         assertEquals(method.getName(), "setInitializerInjectionInfoEvent");
         assertEquals(method.getParameterTypes().length, 1);
         assertEquals(method.getDeclaringClass(), Notifier.class);
+
+        notifier.fireConstructorInfoEvent();
+        lastMember = infoObserver.getLastMember();
+        assertNotNull(lastMember);
+        assertTrue(lastMember instanceof Constructor);
+        Constructor<?> constructor = (Constructor<?>) lastMember;
+        assertEquals(constructor.getParameterTypes().length, 1);
+        assertEquals(constructor.getDeclaringClass(), Notifier.class);
     }
 
     @SuppressWarnings("rawtypes")
     @Test
-    @SpecAssertion(section = INJECTION_POINT, id = "dac")
-    public void testInjectionPointGetAnnotatedType() {
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "daa"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    public void testGetAnnotatedType() {
 
         Annotated lastAnnotated = null;
 
@@ -184,6 +193,11 @@ public class EventMetadataTest extends AbstractTest {
         assertTrue(lastAnnotated instanceof AnnotatedField);
         assertEquals(((AnnotatedField) lastAnnotated).getJavaMember().getName(), "infoEvent");
         assertTrue(lastAnnotated.isAnnotationPresent(Inject.class));
+
+        notifier.fireInitializerInfoEvent();
+        lastAnnotated = infoObserver.getLastAnnotated();
+        assertTrue(lastAnnotated instanceof AnnotatedParameter);
+        assertEquals(((AnnotatedParameter) lastAnnotated).getPosition(), 0);
 
         notifier.fireConstructorInfoEvent();
         lastAnnotated = infoObserver.getLastAnnotated();

@@ -3061,7 +3061,7 @@
 
     <section id="injection_point" title="Injection point metadata" level="3">
         <assertion id="aa">
-            <text>The |javax.enterprise.inject.spi.InjectionPoint.getBean()| method returns the Bean object representing the bean that defines the injection point.</text>
+            <text>The |getBean()| method returns the Bean object representing the bean that defines the injection point.</text>
         </assertion>
 
         <assertion id="aaa">
@@ -3072,68 +3072,44 @@
             <text>If the injection point represents a dynamically obtained instance, the |getBean()| method should return the |Bean| object representing the bean that defines the |Instance| injection point.</text>
         </assertion>
 
-        <assertion id="aac">
-            <text>If the injection point represents a dynamically obtained instance, the |getBean()| method should return the |Bean| object representing the bean that defines the |Event| injection point.</text>
-        </assertion>
-
         <assertion id="ba">
-            <text>The |javax.enterprise.inject.spi.InjectionPoint.getType()| method returns the required type of the injection point.</text>
+            <text>The |getType()| method returns the required type of the injection point.</text>
         </assertion>
 
         <assertion id="baa">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getType()| method returns the required type (as defined by |Instance.select()|).</text>
-        </assertion>
-
-        <assertion id="bab">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getType()| method returns the required type (as defined by |Event.select()|).</text>
+            <text>If the injection point represents a dynamically obtained instance, the |getType()| method returns the required type (as defined by |Instance.select()|).</text>
         </assertion>
 
         <assertion id="bc">
-            <text>The |javax.enterprise.inject.spi.InjectionPoint.getQualifiers()| method returns the required qualifiers of the injection point.</text>
+            <text>The |getQualifiers()| method returns the required qualifiers of the injection point.</text>
         </assertion>
 
         <assertion id="bca">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getQualifiers()| method returns required qualifiers of the injection point including any additional required qualifers (as defined by |Instance.select()|).</text>
-        </assertion>
-
-        <assertion id="bcb">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getQualifiers()| method returns required qualifiers of the injection point including any additional required qualifers (as defined by |Event.select()|).</text>
+            <text>If the injection point represents a dynamically obtained instance, the |getQualifiers()| method returns required qualifiers of the injection point including any additional required qualifers (as defined by |Instance.select()|).</text>
         </assertion>
 
         <assertion id="ca">
-            <text>The |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Field| object in the case of field injection.</text>
+            <text>The |getMember()| method returns the |Field| object in the case of field injection.</text>
         </assertion>
 
         <assertion id="caa">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Field| object representing the field that defines the |Instance| injection point in the case of field injection.</text>
-        </assertion>
-
-        <assertion id="cab">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Field| object representing the field that defines the |Event| injection point in the case of field injection.</text>
+            <text>If the injection point represents a dynamically obtained instance, the |getMember()| method returns the |Field| object representing the field that defines the |Instance| injection point in the case of field injection.</text>
         </assertion>
 
         <assertion id="cb">
-            <text>The |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Method| object in the case of method parameter injection.</text>
+            <text>The |getMember()| method returns the |Method| object in the case of method parameter injection.</text>
         </assertion>
 
         <assertion id="cba">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Method| object representing the method that defines the |Instance| injection point in the case of method parameter injection.</text>
-        </assertion>
-
-        <assertion id="cbb">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Method| object representing the method that defines the |Event| injection point in the case of method parameter injection.</text>
+            <text>If the injection point represents a dynamically obtained instance, the |getMember()| method returns the |Method| object representing the method that defines the |Instance| injection point in the case of method parameter injection.</text>
         </assertion>
 
         <assertion id="cc">
-            <text>The |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Constructor| object in the case of constructor parameter injection.</text>
+            <text>The |getMember()| method returns the |Constructor| object in the case of constructor parameter injection.</text>
         </assertion>
 
         <assertion id="cca">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Constructor| object representing the constructor that defines the |Instance| injection point in the case of constructor parameter injection.</text>
-        </assertion>
-
-        <assertion id="cca">
-            <text>If the injection point represents a dynamically obtained instance, the |javax.enterprise.inject.spi.InjectionPoint.getMember()| method returns the |Constructor| object representing the constructor that defines the |Event| injection point in the case of constructor parameter injection.</text>
+            <text>If the injection point represents a dynamically obtained instance, the |getMember()| method returns the |Constructor| object representing the constructor that defines the |Instance| injection point in the case of constructor parameter injection.</text>
         </assertion>
 
         <assertion id="daa">
@@ -3142,10 +3118,6 @@
 
         <assertion id="dab">
             <text>If the injection point represents a dynamically obtained instance, then the |getAnnotated()| method returns an instance of |javax.enterprise.inject.spi.AnnotatedField| or |javax.enterprise.inject.spi.AnnotatedParameter| representing the |Instance| injection point, depending upon whether the injection point is an injected field or a constructor/method parameter.</text>
-        </assertion>
-
-        <assertion id="dac">
-            <text>If the injection point represents a dynamically obtained instance, then the |getAnnotated()| method returns an instance of |javax.enterprise.inject.spi.AnnotatedField| or |javax.enterprise.inject.spi.AnnotatedParameter| representing the |Event| injection point, depending upon whether the injection point is an injected field or a constructor/method parameter.</text>
         </assertion>
 
         <assertion id="dba">
@@ -3162,10 +3134,6 @@
 
         <assertion id="dcb">
             <text>If the injection point represents a dynamically obtained instance then the |isTransient()| method returns true if the |Instance| injection point is a transient field, and false otherwise.</text>
-        </assertion>
-
-        <assertion id="dcc">
-            <text>If the injection point represents a dynamically obtained instance then the |isTransient()| method returns true if the |Event| injection point is a transient field, and false otherwise.</text>
         </assertion>
 
         <assertion id="ea">
@@ -5669,7 +5637,7 @@
     			<text>|getInjectionPoint()| returns the |InjectionPoint| from which this event payload was fired, or |null| if it was fired from |BeanManager.fireEvent()|.</text>
     		</assertion>
     		<assertion id="c">
-    			<text>|getResolvedType()| returns the resolved event |Type|.</text>
+    			<text>|getType()| returns the type representing runtime class of the event object with type variables resolved.</text>
     		</assertion>
     	</group>
 
