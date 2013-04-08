@@ -25,7 +25,6 @@ import static org.testng.Assert.assertNotNull;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.extlib.Strict;
 import org.jboss.cdi.tck.extlib.StrictLiteral;
 import org.jboss.cdi.tck.extlib.Translator;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
@@ -86,7 +85,7 @@ public class InstalledLibraryEarTest extends AbstractTest {
 
     @Test(groups = { JAVAEE_FULL, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jf") })
-    public void testWarInjection(@Strict Charlie charlie) {
+    public void testWarInjection(Charlie charlie) {
         assertNotNull(charlie);
         assertEquals(charlie.assertAvailable(Translator.class, StrictLiteral.INSTANCE).echo("hello"), "hello");
     }
