@@ -25,7 +25,6 @@ import static org.testng.Assert.assertNotNull;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.extlib.Strict;
 import org.jboss.cdi.tck.extlib.StrictLiteral;
 import org.jboss.cdi.tck.extlib.Translator;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -42,22 +41,21 @@ import org.testng.annotations.Test;
  * Test installed library bean archive referenced by a WAR.
  *
  * @author Martin Kouba
- *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InstalledLibraryWarTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        // I'm not completely sure about test configuration (manifests contents)
         return new WebArchiveBuilder()
                 .withTestClass(InstalledLibraryWarTest.class)
+                .withClasses(Alpha.class, AssertBean.class)
                 .build()
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
                                 .attribute("Extension-List", "CDITCKExtLib")
                                 .attribute("CDITCKExtLib-Extension-Name", "org.jboss.cdi.tck.extlib")
-                                // .attribute("CDITCKExtLib-Specification-Version", "1.0")
+                                .attribute("CDITCKExtLib-Specification-Version", "1.0")
                                 // .attribute("CDITCKExtLib-Implementation-Version", "1.0")
                                 // .attribute("CDITCKExtLib-Implementation-Vendor-Id", "org.jboss")
                                 .exportAsString()));
@@ -65,15 +63,9 @@ public class InstalledLibraryWarTest extends AbstractTest {
 
     @Test(groups = { INTEGRATION, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ji") })
-    public void testInjection(@Strict Translator translator) {
-        assertNotNull(translator);
-        assertEquals(translator.echo("hello"), "hello");
+    public void testInjection(Alpha alpha) {
+        assertNotNull(alpha);
+        assertEquals(alpha.assertAvailable(Translator.class, StrictLiteral.INSTANCE).echo("hello"), "hello");
     }
 
-    @Test(groups = { INTEGRATION, INSTALLED_LIB })
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ji") })
-    public void testResolution() {
-        // No assertion needed
-        getUniqueBean(Translator.class, StrictLiteral.INSTANCE);
-    }
 }

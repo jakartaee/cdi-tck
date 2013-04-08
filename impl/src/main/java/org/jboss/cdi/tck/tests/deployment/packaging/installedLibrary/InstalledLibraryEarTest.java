@@ -29,8 +29,10 @@ import org.jboss.cdi.tck.extlib.Strict;
 import org.jboss.cdi.tck.extlib.StrictLiteral;
 import org.jboss.cdi.tck.extlib.Translator;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -42,7 +44,6 @@ import org.testng.annotations.Test;
  * Test installed library bean archive referenced by an EAR.
  *
  * @author Martin Kouba
- *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class InstalledLibraryEarTest extends AbstractTest {
@@ -50,14 +51,18 @@ public class InstalledLibraryEarTest extends AbstractTest {
     @Deployment
     public static EnterpriseArchive createTestArchive() {
 
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().withTestClass(InstalledLibraryEarTest.class)
-                .build();
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
+                .withTestClassDefinition(InstalledLibraryEarTest.class).withClasses(Alpha.class).withBeanLibrary(Bravo.class)
+                .withLibrary(AssertBean.class).noDefaultWebModule().build();
 
-        // I'm not completely sure about test configuration (manifests contents)
+        WebArchive webArchive = new WebArchiveBuilder().withClasses(InstalledLibraryEarTest.class, Charlie.class)
+                .notTestArchive().withDefaultEjbModuleDependency().build();
+        enterpriseArchive.addAsModule(webArchive);
+
         enterpriseArchive.setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
                 .attribute("Extension-List", "CDITCKExtLib")
                 .attribute("CDITCKExtLib-Extension-Name", "org.jboss.cdi.tck.extlib")
-                // .attribute("CDITCKExtLib-Specification-Version", "1.0")
+                .attribute("CDITCKExtLib-Specification-Version", "1.0")
                 // .attribute("CDITCKExtLib-Implementation-Version", "1.0")
                 // .attribute("CDITCKExtLib-Implementation-Vendor-Id", "org.jboss")
                 .exportAsString()));
@@ -67,15 +72,23 @@ public class InstalledLibraryEarTest extends AbstractTest {
 
     @Test(groups = { JAVAEE_FULL, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jf") })
-    public void testInjection(@Strict Translator translator) {
-        assertNotNull(translator);
-        assertEquals(translator.echo("hello"), "hello");
+    public void testEjbJarInjection(Alpha alpha) {
+        assertNotNull(alpha);
+        assertEquals(alpha.assertAvailable(Translator.class, StrictLiteral.INSTANCE).echo("hello"), "hello");
     }
 
-    @Test(groups = { JAVAEE_FULL, INSTALLED_LIB })
+    @Test(groups = { JAVAEE_FULL, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jf") })
-    public void testResolution() {
-        // No assertion needed
-        getUniqueBean(Translator.class, StrictLiteral.INSTANCE);
+    public void testBundledLibraryInjection(Bravo bravo) {
+        assertNotNull(bravo);
+        assertEquals(bravo.assertAvailable(Translator.class, StrictLiteral.INSTANCE).echo("hello"), "hello");
     }
+
+    @Test(groups = { JAVAEE_FULL, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jf") })
+    public void testWarInjection(@Strict Charlie charlie) {
+        assertNotNull(charlie);
+        assertEquals(charlie.assertAvailable(Translator.class, StrictLiteral.INSTANCE).echo("hello"), "hello");
+    }
+
 }
