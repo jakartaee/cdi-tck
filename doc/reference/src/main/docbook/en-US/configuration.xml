@@ -38,8 +38,8 @@
                      </literal>
                   </entry>
                   <entry>
-                     Directory containing extra JARs you want placed in
-                     artifact library directory such as the porting package
+                     The directory containing extra JARs to be placed in
+                     the test archive library directory such as the porting package
                      implementation.
                   </entry>
                </row>
@@ -48,7 +48,7 @@
                      <literal>org.jboss.cdi.tck.testDataSource=java:jboss/datasources/ExampleDS</literal>
                   </entry>
                   <entry>
-                     A few TCK tests work with Java EE persistence services (JPA, JTA) that require a data source to be provided.
+                     A few TCK tests work with Java EE persistence services (JPA, JTA) and require a data source to be provided.
                      This property defines JNDI name of such resource. Required for the tests within the <emphasis>persistence</emphasis> test group.
                   </entry>
                </row>
@@ -91,7 +91,7 @@
         weld/jboss-tck-runner/src/test/jbossas7/arquillian.xml
       </programlisting>
    </section>
-   <section>
+   <section id="porting-package">
       <title>The Porting Package</title>
       <para>
          The CDI TCK relies on an implementation of the porting package to

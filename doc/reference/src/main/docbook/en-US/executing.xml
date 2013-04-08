@@ -4,7 +4,7 @@
    <title>Executing the Test Suite</title>
    <para>
       This chapter explains how to run the TCK on Weld as well as your own
-      implementation. The CDI TCK uses the Maven Surefire plugin and the Arquillian 
+      implementation. The CDI TCK uses the Maven Surefire plugin and the Arquillian
       test platform to execute the test suite. Learning to execute the test suite
       from Maven is prerequisite knowledge for running the tests in an IDE,
       such as Eclipse.
@@ -17,11 +17,12 @@
          phase of the Maven life cycle. The execution happens within a TCK
          runner project (as opposed to the TCK project itself). Weld
          includes a TCK runner project that executes the CDI TCK on Weld
-         running inside JBoss AS 7.2.0 FIXME. To execute the CDI TCK on your own CDI
+         running inside JBoss AS 8.x. To execute the CDI TCK on your own CDI
          implementation, you could modify the TCK runner project included with
          Weld to use your CDI implementation as described in <xref
          linkend="configuration" />.
       </para>
+
    </section>
 
    <section>
@@ -45,8 +46,8 @@
       <programlisting>mvn test</programlisting>
       <para>
          Without any command-line flags, the test suite is run in standalone
-         mode (activating weld-embedded Maven profile), which means that any 
-         test within the <emphasis>integration</emphasis> or 
+         mode (activating weld-embedded Maven profile), which means that any
+         test within the <emphasis>integration</emphasis> or
          <emphasis>javaee-full</emphasis> TestNG group is skipped. This mode uses the
          <emphasis>Weld EE Embedded Arquillian container adapter</emphasis>
          to invoke the test within a mock Java EE life cycle and
@@ -59,7 +60,7 @@
       <title>Running the Tests In the Container</title>
       <para>
          To execute the test suite using in-container mode with the JBoss TCK
-         runner, you first have to setup JBoss AS as described in the 
+         runner, you first have to setup JBoss AS as described in the
          <xref linkend="tck-in-jboss-as" /> callout.
       </para>
       <para>
@@ -67,18 +68,22 @@
       </para>
       <programlisting>mvn test -Dincontainer</programlisting>
       <para>
-         The presence of the <emphasis>incontainer</emphasis> property activates an 
+         The presence of the <emphasis>incontainer</emphasis> property activates an
          in-container Maven profile. This time, all the tests in the test suite are
          executed.
       </para>
+
+      <note>
+         <para>
+             In order to run the TCK Test Suite in-container mode an Arqullian Container Adapter is required.
+             See also <ulink url="https://docs.jboss.org/author/display/ARQ/Containers">Arqullian reference guide</ulink>.
+         </para>
+      </note>
+
       <para>
-         The Arquillian will also start and stop the application server automatically.
+         The Arquillian will also start and stop the application server automatically (provided a managed Arqullian Container Adapter is used).
       </para>
-      <para>
-         The in-container mode uses the <emphasis>JBoss AS 7.1 FIXME Managed Arquillian container adapter</emphasis>
-         to deploy the test artifact to the container and execute the test in a
-         true Java EE life cycle.
-      </para>
+
       <para>
          Since in-container tests are executed in a remote JVM, the results of
          the test must be communicated back to the runner over a
@@ -99,7 +104,7 @@
       </para>
       <para>
          The feature just described is activated in the Arquillian configuration file (<xref linkend="arquillian-settings"/>).
-         In order to export the test archive you'll have to add the <literal>deploymentExportPath</literal> property to <literal>engine</literal> tag and assign 
+         In order to export the test archive you'll have to add the <literal>deploymentExportPath</literal> property to <literal>engine</literal> tag and assign
          a relative or absolute directory where the test archive should be exported, e.g.:
          </para>
          <programlisting><![CDATA[
@@ -108,11 +113,11 @@
             </engine>
          ]]></programlisting>
          <para>
-          Arquillian will export 
+          Arquillian will export
          the archive to that location for any test you run.
       </para>
       <para>
-        To enable the export for just a single test, use the VM argument 
+        To enable the export for just a single test, use the VM argument
         <literal>arquillian.deploymentExportPath</literal>:
       </para>
       <programlisting>-Darquillian.deploymentExportPath=target/deployments/</programlisting>

@@ -8,21 +8,21 @@
       chapter also justifies why the TCK is good indicator of how accurately an
       implementation conforms to the JSR 346 specification.
    </para>
-   
+
    <section>
       <title>CDI TCK Coverage Metrics</title>
-      
+
       <para>
-         The CDI TCK coverage has been measured as follows: 
+         The CDI TCK coverage has been measured as follows:
       </para>
-      
+
       <itemizedlist>
          <listitem>
             <para>
                <emphasis role="bold">Assertion Breadth Coverage</emphasis>
             </para>
              <para>
-               The CDI TCK provides at least 95% coverage of identified 
+               The CDI TCK provides at least 95% coverage of identified
                assertions with test cases.
             </para>
          </listitem>
@@ -31,8 +31,8 @@
                <emphasis role="bold">Assertion Breadth Coverage Variance</emphasis>
             </para>
              <para>
-               The coverage of specification sub-sections shows at 75% of sections
-               with greater than 90% coverage.
+               The coverage of specification sub-sections shows at 80% of sections
+               with greater than 95% coverage.
             </para>
          </listitem>
          <listitem>
@@ -40,8 +40,8 @@
                <emphasis role="bold">Assertion Depth Coverage</emphasis>
             </para>
              <para>
-               The assertion depth coverage  has not been measured, as, when an 
-               assertion requires more than one testcase, these have been 
+               The assertion depth coverage  has not been measured, as, when an
+               assertion requires more than one testcase, these have been
                enumerated in an assertion group and so are adequately described
                by the assertion breadth coverage.
             </para>
@@ -56,9 +56,9 @@
             </para>
          </listitem>
       </itemizedlist>
-      
+
    </section>
-   
+
    <section>
       <title>CDI TCK Coverage Report</title>
       <para>
@@ -119,11 +119,11 @@ public void testMultipleQualifiers()
 
          <note>
             <para>
-               Section identifiers are not used directly. Instead automatically generated constants are applied. 
+               Section identifiers are not used directly. Instead automatically generated constants are applied.
             </para>
          </note>
-         
-         
+
+
          <para>
             To help evaluate the distribution of coverage for these assertions,
             the TCK provides a detailed coverage report. This report is also
@@ -144,7 +144,7 @@ public void testMultipleQualifiers()
             is only generated when using Java 6 or above, as it requires the annotation
             processor.
          </para>
-         
+
          <programlisting>mvn clean install</programlisting>
 
          <note>
@@ -206,9 +206,9 @@ public void testMultipleQualifiers()
          <itemizedlist>
             <listitem>
                <para>
-                  <emphasis role="bold">Covered</emphasis> - a test exists for this 
+                  <emphasis role="bold">Covered</emphasis> - a test exists for this
                   assertion
-               </para> 
+               </para>
             </listitem>
             <listitem>
                <para>
@@ -218,16 +218,16 @@ public void testMultipleQualifiers()
             </listitem>
             <listitem>
                <para>
-                  <emphasis role="bold">Problematic</emphasis> - a test exists, but is 
-                  currently disabled. For example, this may be because the test 
+                  <emphasis role="bold">Problematic</emphasis> - a test exists, but is
+                  currently disabled. For example, this may be because the test
                   is under development
                </para>
             </listitem>
             <listitem>
                <para>
-                  <emphasis role="bold">Untestable</emphasis> - the assertion has been 
-                  deemed untestable, a note, explaining why, is normally 
-                  provided 
+                  <emphasis role="bold">Untestable</emphasis> - the assertion has been
+                  deemed untestable, a note, explaining why, is normally
+                  provided
                </para>
             </listitem>
          </itemizedlist>
@@ -246,11 +246,11 @@ public void testMultipleQualifiers()
 
       <section>
          <title>TestNG Reports</title>
-         
+
          <para>
-            As you by now, the CDI TCK test suite is really just a TestNG test 
-            suite. That means an execution of the CDI TCK test suite produces 
-            all the same reports that TestNG produces. This section will go over 
+            As you by now, the CDI TCK test suite is really just a TestNG test
+            suite. That means an execution of the CDI TCK test suite produces
+            all the same reports that TestNG produces. This section will go over
             those reports and show you were to go to find each of them.
          </para>
 
@@ -292,7 +292,7 @@ Tests run: 441, Failures: 0, Errors: 0, Skipped: 0]]></programlisting>
                   mode as the CDI TCK requires.
                </para>
             </note>
-               
+
             <para>
                If the Maven reporting plugin that compliments Surefire is
                configured properly, Maven will also generate a generic HTML test
@@ -305,7 +305,7 @@ Tests run: 441, Failures: 0, Errors: 0, Skipped: 0]]></programlisting>
             <para>
                The one drawback of the Maven Surefire report plugin is that it
                buffers the test failures and puts them in the HTML report rather
-               than outputting them to the commandline. If you are running 
+               than outputting them to the commandline. If you are running
                the test suite to determine if there are any failures, it may
                be more useful to get this information in the foreground. You
                can prevent the failures from being redirected to the report
@@ -364,7 +364,7 @@ Tests run: 441, Failures: 0, Errors: 0, Skipped: 0]]></programlisting>
 
             <para>
                The test suite detail report is very useful, but it borderlines
-               on complex. As an alternative, you can have a look at the 
+               on complex. As an alternative, you can have a look at the
                emailable report, which is a single HTML document that shows
                much of the same information as the test suite detail report
                in a more compact layout. A partial view of the emailable
