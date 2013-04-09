@@ -25,31 +25,6 @@
 
             <!-- Issues in the spec/TCK -->
 
-            <!-- CDI-331 - either the Instance.isAmbiguous() behavior is fixed in the spec or AssertBean must not test this method within assertAvailable -->
-            <class name="org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternative02Test">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <!-- CDITCK-283 -->
-            <class name="org.jboss.cdi.tck.tests.context.request.event.jms.RequestScopeEventMessageDeliveryTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <class name="org.jboss.cdi.tck.tests.context.jms.MessageDrivenBeanContextTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <!-- CDI-352 (WELD-1073) -->
-            <class name="org.jboss.cdi.tck.tests.deployment.packaging.interceptor.InterceptorClassNotInBeanArchiveTest">
-                <methods>
-                    <exclude name="testInterceptor"/>
-                </methods>
-            </class>
-
-
         </classes>
     </test>
 
