@@ -407,6 +407,12 @@ CLSS public abstract interface !annotation javax.enterprise.inject.Stereotype
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[ANNOTATION_TYPE])
 intf java.lang.annotation.Annotation
 
+CLSS public abstract interface !annotation javax.enterprise.inject.TransientReference
+ anno 0 java.lang.annotation.Documented()
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[PARAMETER])
+intf java.lang.annotation.Annotation
+
 CLSS public abstract interface !annotation javax.enterprise.inject.Typed
  anno 0 java.lang.annotation.Documented()
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
@@ -437,6 +443,8 @@ CLSS public abstract interface !annotation javax.enterprise.inject.Vetoed
 intf java.lang.annotation.Annotation
 
 CLSS public abstract interface javax.enterprise.inject.spi.AfterBeanDiscovery
+meth public abstract <%0 extends java.lang.Object> java.lang.Iterable<javax.enterprise.inject.spi.AnnotatedType<{%%0}>> getAnnotatedTypes(java.lang.Class<{%%0}>)
+meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.AnnotatedType<{%%0}> getAnnotatedType(java.lang.Class<{%%0}>,java.lang.String)
 meth public abstract void addBean(javax.enterprise.inject.spi.Bean<?>)
 meth public abstract void addContext(javax.enterprise.context.spi.Context)
 meth public abstract void addDefinitionError(java.lang.Throwable)
@@ -444,6 +452,12 @@ meth public abstract void addObserverMethod(javax.enterprise.inject.spi.Observer
 
 CLSS public abstract interface javax.enterprise.inject.spi.AfterDeploymentValidation
 meth public abstract void addDeploymentProblem(java.lang.Throwable)
+
+CLSS public abstract interface javax.enterprise.inject.spi.AfterTypeDiscovery
+meth public abstract java.util.List<java.lang.Class<?>> getAlternatives()
+meth public abstract java.util.List<java.lang.Class<?>> getDecorators()
+meth public abstract java.util.List<java.lang.Class<?>> getInterceptors()
+meth public abstract void addAnnotatedType(javax.enterprise.inject.spi.AnnotatedType<?>,java.lang.String)
 
 CLSS public abstract interface javax.enterprise.inject.spi.Annotated
 meth public abstract <%0 extends java.lang.annotation.Annotation> {%%0} getAnnotation(java.lang.Class<{%%0}>)
@@ -489,12 +503,12 @@ meth public abstract java.util.Set<javax.enterprise.inject.spi.AnnotatedMethod<?
 CLSS public abstract interface javax.enterprise.inject.spi.Bean<%0 extends java.lang.Object>
 intf javax.enterprise.context.spi.Contextual<{javax.enterprise.inject.spi.Bean%0}>
 intf javax.enterprise.inject.spi.BeanAttributes<{javax.enterprise.inject.spi.Bean%0}>
+meth public abstract boolean isNullable()
 meth public abstract java.lang.Class<?> getBeanClass()
 meth public abstract java.util.Set<javax.enterprise.inject.spi.InjectionPoint> getInjectionPoints()
 
 CLSS public abstract interface javax.enterprise.inject.spi.BeanAttributes<%0 extends java.lang.Object>
 meth public abstract boolean isAlternative()
-meth public abstract boolean isNullable()
 meth public abstract java.lang.Class<? extends java.lang.annotation.Annotation> getScope()
 meth public abstract java.lang.String getName()
 meth public abstract java.util.Set<java.lang.Class<? extends java.lang.annotation.Annotation>> getStereotypes()
@@ -507,17 +521,16 @@ meth public abstract !varargs java.util.List<javax.enterprise.inject.spi.Decorat
 meth public abstract !varargs java.util.List<javax.enterprise.inject.spi.Interceptor<?>> resolveInterceptors(javax.enterprise.inject.spi.InterceptionType,java.lang.annotation.Annotation[])
 meth public abstract !varargs java.util.Set<javax.enterprise.inject.spi.Bean<?>> getBeans(java.lang.reflect.Type,java.lang.annotation.Annotation[])
 meth public abstract !varargs void fireEvent(java.lang.Object,java.lang.annotation.Annotation[])
-meth public abstract <%0 extends java.lang.Object> java.lang.Iterable<javax.enterprise.inject.spi.AnnotatedType<{%%0}>> getAnnotatedTypes(java.lang.Class<{%%0}>)
+meth public abstract <%0 extends java.lang.Object, %1 extends java.lang.Object> javax.enterprise.inject.spi.Bean<{%%0}> createBean(javax.enterprise.inject.spi.BeanAttributes<{%%0}>,java.lang.Class<{%%1}>,javax.enterprise.inject.spi.ProducerFactory<{%%1}>)
 meth public abstract <%0 extends java.lang.Object> javax.enterprise.context.spi.CreationalContext<{%%0}> createCreationalContext(javax.enterprise.context.spi.Contextual<{%%0}>)
 meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.AnnotatedType<{%%0}> createAnnotatedType(java.lang.Class<{%%0}>)
-meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.AnnotatedType<{%%0}> getAnnotatedType(java.lang.Class<{%%0}>,java.lang.String)
 meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.Bean<? extends {%%0}> resolve(java.util.Set<javax.enterprise.inject.spi.Bean<? extends {%%0}>>)
-meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.Bean<{%%0}> createBean(javax.enterprise.inject.spi.BeanAttributes<{%%0}>,java.lang.Class<?>,javax.enterprise.inject.spi.Producer<{%%0}>)
-meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.Bean<{%%0}> createBean(javax.enterprise.inject.spi.BeanAttributes<{%%0}>,java.lang.Class<{%%0}>,javax.enterprise.inject.spi.InjectionTarget<{%%0}>)
+meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.Bean<{%%0}> createBean(javax.enterprise.inject.spi.BeanAttributes<{%%0}>,java.lang.Class<{%%0}>,javax.enterprise.inject.spi.InjectionTargetFactory<{%%0}>)
 meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.BeanAttributes<{%%0}> createBeanAttributes(javax.enterprise.inject.spi.AnnotatedType<{%%0}>)
 meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.InjectionTarget<{%%0}> createInjectionTarget(javax.enterprise.inject.spi.AnnotatedType<{%%0}>)
-meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.Producer<?> createProducer(javax.enterprise.inject.spi.AnnotatedField<? super {%%0}>,javax.enterprise.inject.spi.Bean<{%%0}>)
-meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.Producer<?> createProducer(javax.enterprise.inject.spi.AnnotatedMethod<? super {%%0}>,javax.enterprise.inject.spi.Bean<{%%0}>)
+meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.InjectionTargetFactory<{%%0}> getInjectionTargetFactory(javax.enterprise.inject.spi.AnnotatedType<{%%0}>)
+meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.ProducerFactory<{%%0}> getProducerFactory(javax.enterprise.inject.spi.AnnotatedField<? super {%%0}>,javax.enterprise.inject.spi.Bean<{%%0}>)
+meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.ProducerFactory<{%%0}> getProducerFactory(javax.enterprise.inject.spi.AnnotatedMethod<? super {%%0}>,javax.enterprise.inject.spi.Bean<{%%0}>)
 meth public abstract <%0 extends javax.enterprise.inject.spi.Extension> {%%0} getExtension(java.lang.Class<{%%0}>)
 meth public abstract boolean areInterceptorBindingsEquivalent(java.lang.annotation.Annotation,java.lang.annotation.Annotation)
 meth public abstract boolean areQualifiersEquivalent(java.lang.annotation.Annotation,java.lang.annotation.Annotation)
@@ -547,6 +560,7 @@ CLSS public abstract interface javax.enterprise.inject.spi.BeforeBeanDiscovery
 meth public abstract !varargs void addInterceptorBinding(java.lang.Class<? extends java.lang.annotation.Annotation>,java.lang.annotation.Annotation[])
 meth public abstract !varargs void addStereotype(java.lang.Class<? extends java.lang.annotation.Annotation>,java.lang.annotation.Annotation[])
 meth public abstract void addAnnotatedType(javax.enterprise.inject.spi.AnnotatedType<?>)
+meth public abstract void addAnnotatedType(javax.enterprise.inject.spi.AnnotatedType<?>,java.lang.String)
 meth public abstract void addInterceptorBinding(javax.enterprise.inject.spi.AnnotatedType<? extends java.lang.annotation.Annotation>)
 meth public abstract void addQualifier(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract void addQualifier(javax.enterprise.inject.spi.AnnotatedType<? extends java.lang.annotation.Annotation>)
@@ -579,18 +593,21 @@ cons public DefinitionException(java.lang.String)
 cons public DefinitionException(java.lang.String,java.lang.Throwable)
 cons public DefinitionException(java.lang.Throwable)
 supr java.lang.RuntimeException
+hfds serialVersionUID
 
 CLSS public javax.enterprise.inject.spi.DeploymentException
 cons public DeploymentException(java.lang.String)
 cons public DeploymentException(java.lang.String,java.lang.Throwable)
 cons public DeploymentException(java.lang.Throwable)
 supr java.lang.RuntimeException
+hfds serialVersionUID
+
+CLSS public abstract interface javax.enterprise.inject.spi.EventMetadata
+meth public abstract java.lang.reflect.Type getType()
+meth public abstract java.util.Set<java.lang.annotation.Annotation> getQualifiers()
+meth public abstract javax.enterprise.inject.spi.InjectionPoint getInjectionPoint()
 
 CLSS public abstract interface javax.enterprise.inject.spi.Extension
-
-CLSS public abstract interface javax.enterprise.inject.spi.IdentifiedAnnotatedType<%0 extends java.lang.Object>
-intf javax.enterprise.inject.spi.AnnotatedType<{javax.enterprise.inject.spi.IdentifiedAnnotatedType%0}>
-meth public abstract java.lang.String getId()
 
 CLSS public abstract interface javax.enterprise.inject.spi.InjectionPoint
 meth public abstract boolean isDelegate()
@@ -607,7 +624,11 @@ meth public abstract void inject({javax.enterprise.inject.spi.InjectionTarget%0}
 meth public abstract void postConstruct({javax.enterprise.inject.spi.InjectionTarget%0})
 meth public abstract void preDestroy({javax.enterprise.inject.spi.InjectionTarget%0})
 
+CLSS public abstract interface javax.enterprise.inject.spi.InjectionTargetFactory<%0 extends java.lang.Object>
+meth public abstract javax.enterprise.inject.spi.InjectionTarget<{javax.enterprise.inject.spi.InjectionTargetFactory%0}> createInjectionTarget(javax.enterprise.inject.spi.Bean<{javax.enterprise.inject.spi.InjectionTargetFactory%0}>)
+
 CLSS public final !enum javax.enterprise.inject.spi.InterceptionType
+fld public final static javax.enterprise.inject.spi.InterceptionType AROUND_CONSTRUCT
 fld public final static javax.enterprise.inject.spi.InterceptionType AROUND_INVOKE
 fld public final static javax.enterprise.inject.spi.InterceptionType AROUND_TIMEOUT
 fld public final static javax.enterprise.inject.spi.InterceptionType POST_ACTIVATE
@@ -667,12 +688,6 @@ CLSS public abstract interface javax.enterprise.inject.spi.ProcessManagedBean<%0
 intf javax.enterprise.inject.spi.ProcessBean<{javax.enterprise.inject.spi.ProcessManagedBean%0}>
 meth public abstract javax.enterprise.inject.spi.AnnotatedType<{javax.enterprise.inject.spi.ProcessManagedBean%0}> getAnnotatedBeanClass()
 
-CLSS public abstract interface javax.enterprise.inject.spi.ProcessModule
-meth public abstract java.io.InputStream getBeansXml()
-meth public abstract java.util.List<java.lang.Class<?>> getAlternatives()
-meth public abstract java.util.List<java.lang.Class<?>> getDecorators()
-meth public abstract java.util.List<java.lang.Class<?>> getInterceptors()
-
 CLSS public abstract interface javax.enterprise.inject.spi.ProcessObserverMethod<%0 extends java.lang.Object, %1 extends java.lang.Object>
 meth public abstract javax.enterprise.inject.spi.AnnotatedMethod<{javax.enterprise.inject.spi.ProcessObserverMethod%1}> getAnnotatedMethod()
 meth public abstract javax.enterprise.inject.spi.ObserverMethod<{javax.enterprise.inject.spi.ProcessObserverMethod%0}> getObserverMethod()
@@ -708,6 +723,9 @@ meth public abstract java.util.Set<javax.enterprise.inject.spi.InjectionPoint> g
 meth public abstract void dispose({javax.enterprise.inject.spi.Producer%0})
 meth public abstract {javax.enterprise.inject.spi.Producer%0} produce(javax.enterprise.context.spi.CreationalContext<{javax.enterprise.inject.spi.Producer%0}>)
 
+CLSS public abstract interface javax.enterprise.inject.spi.ProducerFactory<%0 extends java.lang.Object>
+meth public abstract <%0 extends java.lang.Object> javax.enterprise.inject.spi.Producer<{%%0}> createProducer(javax.enterprise.inject.spi.Bean<{%%0}>)
+
 CLSS public final !enum javax.enterprise.inject.spi.SessionBeanType
 fld public final static javax.enterprise.inject.spi.SessionBeanType SINGLETON
 fld public final static javax.enterprise.inject.spi.SessionBeanType STATEFUL
@@ -715,6 +733,24 @@ fld public final static javax.enterprise.inject.spi.SessionBeanType STATELESS
 meth public static javax.enterprise.inject.spi.SessionBeanType valueOf(java.lang.String)
 meth public static javax.enterprise.inject.spi.SessionBeanType[] values()
 supr java.lang.Enum<javax.enterprise.inject.spi.SessionBeanType>
+
+CLSS public javax.enterprise.inject.spi.Unmanaged<%0 extends java.lang.Object>
+cons public Unmanaged(java.lang.Class<{javax.enterprise.inject.spi.Unmanaged%0}>)
+cons public Unmanaged(javax.enterprise.inject.spi.BeanManager,java.lang.Class<{javax.enterprise.inject.spi.Unmanaged%0}>)
+innr public static UnmanagedInstance
+meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged%0}> newInstance()
+supr java.lang.Object
+hfds beanManager,injectionTarget
+
+CLSS public static javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<%0 extends java.lang.Object>
+meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance%0}> dispose()
+meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance%0}> inject()
+meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance%0}> postConstruct()
+meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance%0}> preDestroy()
+meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance%0}> produce()
+meth public {javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance%0} get()
+supr java.lang.Object
+hfds ctx,disposed,injectionTarget,instance
 
 CLSS public abstract interface !annotation javax.enterprise.inject.spi.WithAnnotations
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
