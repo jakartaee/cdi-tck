@@ -117,13 +117,13 @@ public class BeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa") })
     public void testNoBeanArchiveModeNone() {
         assertNotDiscoveredAndNotAvailable(Foxtrot.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ob") })
     public void testNotBeanArchiveExtension(LegacyAlpha legacyAlpha) {
         assertDiscoveredAndAvailable(legacyAlpha, LegacyAlpha.class);
         assertNotDiscoveredAndNotAvailable(LegacyBravo.class);
