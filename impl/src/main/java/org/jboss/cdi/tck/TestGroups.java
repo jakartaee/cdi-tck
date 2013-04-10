@@ -51,11 +51,6 @@ public final class TestGroups {
     public static final String JMS = "jms";
 
     /**
-     * Test support of enums
-     */
-    public static final String ENUMS = "enums";
-
-    /**
      * Requires test data source
      */
     public static final String PERSISTENCE = "persistence";
@@ -74,6 +69,11 @@ public final class TestGroups {
      * Test contains JAX-WS web service.
      */
     public static final String JAX_WS = "jaxws";
+
+    /**
+     * Tests Servlet asynchronous processing.
+     */
+    public static final String ASYNC_SERVLET = "asyncServlet";
 
     /**
      * Requires test system properties.

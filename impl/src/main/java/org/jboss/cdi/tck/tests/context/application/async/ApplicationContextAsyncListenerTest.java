@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.application.async;
 
+import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.testng.Assert.assertFalse;
@@ -52,7 +53,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
                 .build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnComplete() throws Exception {
         WebClient webClient = new WebClient();
@@ -63,25 +64,27 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
         assertFalse(page.getContent().contains("onComplete: null"));
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
-        webClient.setThrowExceptionOnFailingStatusCode(true);
+        webClient.setThrowExceptionOnFailingStatusCode(false);
         TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
+        assertTrue(page.getContent().contains("onTimeout:"));
         assertFalse(page.getContent().contains("onTimeout: null"));
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
         TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
+        assertTrue(page.getContent().contains("onError:"));
         assertFalse(page.getContent().contains("onError: null"));
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();

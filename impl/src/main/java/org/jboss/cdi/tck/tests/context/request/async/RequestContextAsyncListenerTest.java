@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.request.async;
 
+import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertFalse;
@@ -54,7 +55,7 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(RequestContextAsyncListenerTest.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "ad"), @SpecAssertion(section = REQUEST_CONTEXT, id = "bd") })
     public void testRequestContextActiveOnComplete() throws Exception {
 
@@ -72,25 +73,27 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
                 extractSimpleRequestBeanIdString(page02.getContent()));
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertion(section = REQUEST_CONTEXT, id = "ad")
     public void testRequestContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
-        webClient.setThrowExceptionOnFailingStatusCode(true);
+        webClient.setThrowExceptionOnFailingStatusCode(false);
         TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
+        assertTrue(page.getContent().contains("onTimeout:"));
         assertFalse(page.getContent().contains("onTimeout: null"));
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertion(section = REQUEST_CONTEXT, id = "ad")
     public void testRequestContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
         TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
+        assertTrue(page.getContent().contains("onError:"));
         assertFalse(page.getContent().contains("onError: null"));
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertion(section = REQUEST_CONTEXT, id = "ad")
     public void testRequestContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();

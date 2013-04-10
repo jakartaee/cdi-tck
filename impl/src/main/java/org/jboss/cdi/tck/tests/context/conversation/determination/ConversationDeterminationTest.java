@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
+import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT;
 import static org.testng.Assert.assertTrue;
@@ -38,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ConversationDeterminationTest extends AbstractTest {
@@ -51,7 +52,7 @@ public class ConversationDeterminationTest extends AbstractTest {
     @ArquillianResource
     private URL contextPath;
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "da"), @SpecAssertion(section = CONVERSATION_CONTEXT, id = "db"),
             @SpecAssertion(section = CONVERSATION_CONTEXT, id = "dc"), @SpecAssertion(section = CONVERSATION_CONTEXT, id = "dd") })
     public void testConversationDetermination() throws Exception {

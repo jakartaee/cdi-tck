@@ -17,7 +17,8 @@
 
 package org.jboss.cdi.tck.tests.context.request.event.async;
 
-import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -41,9 +42,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * @author Martin Kouba
- * 
  */
-@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class RequestScopeEventAsyncTest extends AbstractTest {
 
@@ -55,7 +54,7 @@ public class RequestScopeEventAsyncTest extends AbstractTest {
     @ArquillianResource
     private URL contextPath;
 
-    @Test
+    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "jd") })
     public void testEventsFired() throws Exception {
 
