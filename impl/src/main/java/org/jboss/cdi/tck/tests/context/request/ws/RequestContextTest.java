@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.request.ws;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.TestGroups.JAX_WS;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertEquals;
@@ -45,10 +46,9 @@ import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
-@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class RequestContextTest extends AbstractTest {
 
@@ -66,7 +66,7 @@ public class RequestContextTest extends AbstractTest {
                                 .up().createServletMapping().servletName("Translator").urlPattern("/translator").up()).build();
     }
 
-    @Test
+    @Test(groups = {JAVAEE_FULL, JAX_WS})
     @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "c"), @SpecAssertion(section = REQUEST_CONTEXT, id = "d"),
             @SpecAssertion(section = APPLICATION_CONTEXT, id = "b") })
     public void testRequestScopeActiveDuringWebServiceInvocation() throws Exception {

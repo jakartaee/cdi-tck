@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.TestGroups.JAX_WS;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
 import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
@@ -42,7 +43,6 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "20091101")
 public class WebServiceResourceTest extends AbstractTest {
 
@@ -52,8 +52,9 @@ public class WebServiceResourceTest extends AbstractTest {
     }
 
     @RunAsClient
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ee"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "aq"),
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { JAVAEE_FULL, JAX_WS })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ee"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "aq"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ar") })
     public void testInjectionIntoWebServiceEndpoint(@ArquillianResource URL contextPath) throws Exception {
         URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
@@ -62,8 +63,9 @@ public class WebServiceResourceTest extends AbstractTest {
         assertTrue(ws.isSheepInjected());
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "ff"), @SpecAssertion(section = RESOURCE_TYPES, id = "ae") })
+    @Test(groups = { JAVAEE_FULL, JAX_WS })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "ff"),
+            @SpecAssertion(section = RESOURCE_TYPES, id = "ae") })
     public void testResourceBeanTypes() {
         Bean<SheepWS> sheepWsBean = getUniqueBean(SheepWS.class);
         assertEquals(sheepWsBean.getTypes().size(), 3);
@@ -77,10 +79,10 @@ public class WebServiceResourceTest extends AbstractTest {
         typeSetMatches(blackSheepWsBean.getTypes(), Object.class, SheepWS.class);
     }
 
-     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-     @SpecAssertion(section = DECLARING_RESOURCE, id = "ff")
-     public void testResourceInvocation(@Black SheepWS sheepWS) {
-         assertNotNull(sheepWS);
-         assertTrue(sheepWS.isSheepInjected());
-     }
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { JAVAEE_FULL, JAX_WS })
+    @SpecAssertion(section = DECLARING_RESOURCE, id = "ff")
+    public void testResourceInvocation(@Black SheepWS sheepWS) {
+        assertNotNull(sheepWS);
+        assertTrue(sheepWS.isSheepInjected());
+    }
 }

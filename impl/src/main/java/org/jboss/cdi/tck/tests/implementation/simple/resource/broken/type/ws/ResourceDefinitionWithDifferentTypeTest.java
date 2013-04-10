@@ -18,6 +18,7 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ws;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.TestGroups.JAX_WS;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
 
 import javax.enterprise.inject.spi.DefinitionException;
@@ -55,7 +56,7 @@ public class ResourceDefinitionWithDifferentTypeTest extends AbstractTest {
                                 .urlPattern("/translator").up()).build();
     }
 
-    @Test(groups = JAVAEE_FULL)
+    @Test(groups = {JAVAEE_FULL, JAX_WS})
     @SpecAssertion(section = DECLARING_RESOURCE, id = "j")
     public void testDeployment() {
     }

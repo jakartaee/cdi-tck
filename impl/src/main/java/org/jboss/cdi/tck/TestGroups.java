@@ -71,6 +71,11 @@ public final class TestGroups {
     public static final String JAX_RS = "jaxrs";
 
     /**
+     * Test contains JAX-WS web service.
+     */
+    public static final String JAX_WS = "jaxws";
+
+    /**
      * Requires test system properties.
      *
      * @see TestSystemProperty
