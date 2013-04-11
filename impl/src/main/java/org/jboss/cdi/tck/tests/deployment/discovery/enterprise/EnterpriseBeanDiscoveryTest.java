@@ -22,6 +22,7 @@ import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DEFINING_ANNOTATIONS;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -32,7 +33,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.BeanDiscoveryMode;
-import org.jboss.cdi.tck.tests.alternative.selection.TestBean;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
@@ -96,7 +96,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
                         "beans.xml");
 
         WebArchive webArchive = new WebArchiveBuilder()
-                .withClasses(EnterpriseBeanDiscoveryTest.class, TestBean.class)
+                .withClasses(EnterpriseBeanDiscoveryTest.class)
                 .notTestArchive()
                 .build()
                 .setManifest(
@@ -149,8 +149,14 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
 
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
-    public void testImplicitBeanArchiveModeNone() {
-        assertDiscoveredAndAvailable(FoxtrotLocal.class, Foxtrot.class);
+    public void testNoBeanArchiveModeNone() {
+        assertNotDiscoveredAndNotAvailable(FoxtrotLocal.class, Foxtrot.class);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ob") })
+    public void testNotBeanArchiveExtension() {
+        assertNotDiscoveredAndNotAvailable(LegacyBean.class, LegacyBean.class);
     }
 
     private <T extends Ping, B extends Ping> void assertDiscoveredAndAvailable(Class<T> beanType, Class<B> beanClazz) {
@@ -158,6 +164,12 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
         assertNotNull(instance);
         assertTrue(extension.getObservedAnnotatedTypes().contains(beanClazz));
         instance.pong();
+    }
+
+
+    private <T extends Ping, B extends Ping> void assertNotDiscoveredAndNotAvailable(Class<T> beanType, Class<B> beanClazz) {
+        assertFalse(extension.getObservedAnnotatedTypes().contains(beanClazz));
+        assertTrue(getBeans(beanType).isEmpty());
     }
 
 }
