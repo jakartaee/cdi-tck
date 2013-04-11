@@ -26,8 +26,8 @@ public class Kitchen {
 
     @Produces
     public Meal cook(@TransientReference Chef transientChef, Chef normalChef, BeanManager beanManager) {
-        transientChef.setOwner(Util.buildOwnerId(Kitchen.class, true, "producer"));
-        normalChef.setOwner(Util.buildOwnerId(Kitchen.class, false, "producer"));
+        transientChef.setOwner(Util.buildOwnerId(Kitchen.class, true, Util.TYPE_PRODUCER));
+        normalChef.setOwner(Util.buildOwnerId(Kitchen.class, false, Util.TYPE_PRODUCER));
         return new Meal("soup");
     }
 

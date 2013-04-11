@@ -24,14 +24,14 @@ public class Spoon {
 
     @Inject
     public Spoon(BeanManager beanManager, @TransientReference Chef transientChef, Chef normalChef) {
-        transientChef.setOwner(Util.buildOwnerId(Spoon.class, true, "constructor"));
-        normalChef.setOwner(Util.buildOwnerId(Spoon.class, false, "constructor"));
+        transientChef.setOwner(Util.buildOwnerId(Spoon.class, true, Util.TYPE_CONSTRUCTOR));
+        normalChef.setOwner(Util.buildOwnerId(Spoon.class, false, Util.TYPE_CONSTRUCTOR));
     }
 
     @Inject
     public void initFoos(@TransientReference Chef transientChef, Chef normalChef, BeanManager beanManager) {
-        transientChef.setOwner(Util.buildOwnerId(Spoon.class, true, "init"));
-        normalChef.setOwner(Util.buildOwnerId(Spoon.class, false, "init"));
+        transientChef.setOwner(Util.buildOwnerId(Spoon.class, true, Util.TYPE_INIT));
+        normalChef.setOwner(Util.buildOwnerId(Spoon.class, false, Util.TYPE_INIT));
     }
 
     public void ping() {
