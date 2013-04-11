@@ -26,6 +26,7 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.inject.spi.Extension;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -59,6 +60,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
     private static final String DELTA_JAR = "delta.jar";
     private static final String ECHO_JAR = "echo.jar";
     private static final String FOXTROT_JAR = "foxtrot.jar";
+    private static final String LEGACY_JAR = "legacy.jar";
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
@@ -95,6 +97,11 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
                         new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.NONE).exportAsString()),
                         "beans.xml");
 
+        // Archive which contains an extension and no beans.xml file - not a bean archive
+        JavaArchive legacy = ShrinkWrap.create(JavaArchive.class, LEGACY_JAR)
+                .addClasses(LegacyExtension.class, LegacyBean.class)
+                .addAsServiceProvider(Extension.class, LegacyExtension.class);
+
         WebArchive webArchive = new WebArchiveBuilder()
                 .withClasses(EnterpriseBeanDiscoveryTest.class)
                 .notTestArchive()
@@ -103,11 +110,12 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
                                 .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).addToClassPath(ALPHA_JAR)
                                 .addToClassPath(BRAVO_JAR).addToClassPath(CHARLIE_JAR).addToClassPath(DELTA_JAR)
-                                .addToClassPath(ECHO_JAR).addToClassPath(FOXTROT_JAR).exportAsString()));
+                                .addToClassPath(ECHO_JAR).addToClassPath(FOXTROT_JAR).addToClassPath(LEGACY_JAR)
+                                .exportAsString()));
 
         return new EnterpriseArchiveBuilder().noDefaultWebModule().withTestClassDefinition(EnterpriseBeanDiscoveryTest.class)
                 .withClasses(VerifyingExtension.class).withExtension(VerifyingExtension.class).withLibrary(Ping.class).build()
-                .addAsModules(webArchive, alpha, bravo, charlie, delta, echo, foxtrot);
+                .addAsModules(webArchive, alpha, bravo, charlie, delta, echo, foxtrot, legacy);
     }
 
     @Inject
@@ -165,7 +173,6 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
         assertTrue(extension.getObservedAnnotatedTypes().contains(beanClazz));
         instance.pong();
     }
-
 
     private <T extends Ping, B extends Ping> void assertNotDiscoveredAndNotAvailable(Class<T> beanType, Class<B> beanClazz) {
         assertFalse(extension.getObservedAnnotatedTypes().contains(beanClazz));
