@@ -7,7 +7,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>cdi-tck-impl</artifactId>
-	<name>CDI TCK tests</name>
+	<name>CDI TCK Test Suite</name>
 
 	<description>CDI TCK tests</description>
 
