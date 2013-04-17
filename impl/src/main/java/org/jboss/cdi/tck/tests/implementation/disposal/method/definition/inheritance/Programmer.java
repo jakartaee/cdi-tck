@@ -20,16 +20,21 @@ import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-public class AppleTree {
+public class Programmer {
 
     @Produces
     @Yummy
-    public Apple produceYummyApple() {
-        return new Apple(this);
+    public Code produceYummyCode() {
+        return new Code(this);
     }
 
-    public void disposeApple(@Disposes @Any Apple apple) {
-        Apple.disposedBy.add(this.getClass());
+    public void disposeCode(@Disposes @Any Code code) {
+        Code.disposedBy.add(this.getClass());
+    }
+
+
+    public Class<?> getOriginClass() {
+        return Programmer.class;
     }
 
 }

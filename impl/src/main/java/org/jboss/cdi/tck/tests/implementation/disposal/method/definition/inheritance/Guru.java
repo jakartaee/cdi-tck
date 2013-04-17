@@ -16,20 +16,21 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-public class AppleTree {
+/**
+ * Test that {@link Programmer#disposeCode(Code)} is not inherited.
+ */
+public class Guru extends Programmer {
 
     @Produces
-    @Yummy
-    public Apple produceYummyApple() {
-        return new Apple(this);
+    public Code produceDefaultCode() {
+        return new Code(this);
     }
 
-    public void disposeApple(@Disposes @Any Apple apple) {
-        Apple.disposedBy.add(this.getClass());
+
+    public Class<?> getOriginClass() {
+        return Guru.class;
     }
 
 }

@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
 import javax.ejb.Stateful;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
@@ -24,12 +25,17 @@ import javax.enterprise.inject.Produces;
 public class Chicken {
 
     @Produces
-    public Egg produceEgg() {
+    @Yummy
+    public Egg produceYummyEgg() {
         return new Egg(this);
     }
 
-    public void disposeApple(@Disposes Egg egg) {
-        Egg.disposedBy.add(this.getClass());
+    public void disposeEgg(@Disposes @Any Egg egg) {
+        Egg.disposedBy.add(getOriginClass());
+    }
+
+    public Class<?> getOriginClass() {
+        return Chicken.class;
     }
 
 }

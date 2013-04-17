@@ -16,20 +16,21 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AppleTree {
+public class Code {
 
-    @Produces
-    @Yummy
-    public Apple produceYummyApple() {
-        return new Apple(this);
+    public static List<Class<?>> disposedBy = new ArrayList<Class<?>>();
+
+    private Programmer programmer;
+
+    public Code(Programmer programmer) {
+        this.programmer = programmer;
     }
 
-    public void disposeApple(@Disposes @Any Apple apple) {
-        Apple.disposedBy.add(this.getClass());
+    public Programmer getProgrammer() {
+        return programmer;
     }
 
 }

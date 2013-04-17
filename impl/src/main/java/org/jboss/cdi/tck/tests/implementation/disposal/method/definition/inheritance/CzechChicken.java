@@ -25,4 +25,9 @@ import javax.ejb.Stateful;
 @Stateful
 public class CzechChicken extends Chicken {
 
+    @Override
+    public Class<?> getOriginClass() {
+        return CzechChicken.class;
+    }
+
 }

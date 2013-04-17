@@ -18,11 +18,22 @@
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
 import javax.ejb.Stateful;
+import javax.enterprise.inject.Produces;
 
 /**
  * @author Martin Kouba
  */
 @Stateful
 public class Sumavanka extends CzechChicken {
+
+    @Produces
+    public Egg produceDefaultEgg() {
+        return new Egg(this);
+    }
+
+    @Override
+    public Class<?> getOriginClass() {
+        return Sumavanka.class;
+    }
 
 }
