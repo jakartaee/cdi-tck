@@ -209,7 +209,7 @@ public void testMultipleQualifiers()
             </listitem>
             <listitem>
                <para>
-                  <emphasis role="bold">Problematic</emphasis> - a test exists, but is
+                  <emphasis role="bold">Problematic</emphasis> - a test exists but is
                   currently disabled. For example, this may be because the test
                   is under development
                </para>
@@ -285,7 +285,7 @@ Tests run: 441, Failures: 0, Errors: 0, Skipped: 0]]></programlisting>
             </note>
 
             <para>
-               If the Maven reporting plugin that compliments Surefire is
+               If the Maven reporting plugin that complements Surefire is
                configured properly, Maven will also generate a generic HTML test
                result report. That report is written to the file
                test-report.html in the target/surefire-reports directory of the
@@ -335,7 +335,7 @@ Tests run: 441, Failures: 0, Errors: 0, Skipped: 0]]></programlisting>
             </itemizedlist>
 
             <para>
-               The first report, the test summary report, show below, is written
+               The first report, the test summary report, shown below, is written
                to the file index.html. It produces the same information as the
                generic Surefire report.
             </para>

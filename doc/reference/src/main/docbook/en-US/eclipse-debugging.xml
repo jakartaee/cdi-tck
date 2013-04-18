@@ -13,7 +13,7 @@
          There is almost no difference in how you debug a standalone test
          from how you run it. With the test class open in the Eclipse editor,
          simply right click in the editor view and select Debug As &gt; TestNG
-         Test. Eclipse will stop at any breakpoints you set just like it would         
+         Test. Eclipse will stop at any breakpoints you set just like it would
          with any other local debug process.
       </para>
       <para>
@@ -51,7 +51,7 @@
          </listitem>
          <listitem>
             <para>
-               Check the project the contains the class you want to debug
+               Check the project that contains the class you want to debug
                (e.g., weld-core)
             </para>
          </listitem>
@@ -72,7 +72,7 @@
          hangs around indefinitely).
       </para>
       <para>
-         Again, running a test in standalone isn't enough to pass the TCK and
+         Again, running a test in standalone mode isn't enough to pass the TCK and
          cannot be used to run or debug an integration test. Let's look at how
          to debug a test running in the context of the container.
       </para>
@@ -128,9 +128,9 @@
          <para>
             Open a test in the Eclipse editor, right click in the editor view, and select Debug
             As &gt; TestNG Test (this works for the container started in debug mode from within the
-            IDE) or run the TestNG test and debug Remote Java Application (remote debug configuration) 
+            IDE) or run the TestNG test and debug Remote Java Application (remote debug configuration)
             in the same time (when attaching the debugger over a socket connection to a container).
-            This time when the IDE hits the breakpoint, it halts the JVM thread of the container 
+            This time when the IDE hits the breakpoint, it halts the JVM thread of the container
             rather than the thread that launched the test.
          </para>
          <para>

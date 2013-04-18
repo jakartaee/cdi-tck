@@ -245,8 +245,7 @@ Weld JBoss TCK Runner
       </para>
       <tip>
         <para>
-            If using m2e Eclipse plugin you can activate the profile in Maven section
-             of project propeties.
+            If using m2e Eclipse plugin, you can activate/deactivate the profile in Maven section of project propeties.
         </para>
       </tip>
       <note>
@@ -283,14 +282,8 @@ Weld JBoss TCK Runner
    <section id="eclipse-in-container">
       <title>Running integration tests</title>
       <para>
-        Use <emphasis>incontainer</emphasis> Maven profile in order to run any test in in-container mode.
+        Use <emphasis>incontainer</emphasis> Maven profile in order to run a test in in-container mode.
       </para>
-      <tip>
-        <para>
-            If using m2e Eclipse plugin you can activate the profile in Maven section
-             of project propeties.
-        </para>
-      </tip>
       <note>
         <para>
             Note that all TestNG tests that are included in <emphasis>integration</emphasis> and <emphasis>javaee-full</emphasis>
