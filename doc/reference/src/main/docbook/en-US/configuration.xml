@@ -98,7 +98,7 @@
          function. There are times when the tests need to tap
          directly into the CDI implementation to manipulate behavior or verify
          results. The porting package includes a set of SPIs that provide the
-         TCK this level of access without tying the tests to a given
+         TCK with this level of access without tying the tests to a given
          implementation.
       </para>
       <para>

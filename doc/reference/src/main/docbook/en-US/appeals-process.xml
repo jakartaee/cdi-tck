@@ -58,7 +58,7 @@
          of the JBoss JIRA using the Issue Type: Bug. The appellant should
          complete the Summary, Component (TCK Appeal), Environment and
          Description Field only. Any communication regarding the issue should
-         be pursed in the comments of the filed issue for accurate record. 
+         be pursed in the comments of the filed issue for accurate record.
       </para>
       <para>
          To submit an issue in the JBoss JIRA, you must have a (free) JBoss.org
@@ -69,7 +69,7 @@
       <para>
          If you wish to make a private challenge, you should follow the above
          procedure, setting the Security Level to Private. Only the issue
-         reporter, TCK Project Lead and designates will be able to view the 
+         reporter, TCK Project Lead and designates will be able to view the
          issue.
       </para>
    </section>
@@ -107,10 +107,10 @@
          specification lead or his/her designate.
       </para>
       <para>
-         Periodically, an updated TCK will be released containing tests altered
-         due to challenges. No new tests will be added. Implementations are 
-         required to pass the updated TCK. This release stream is named 1.1.z where
-         z will be incremented.
+         Periodically, an updated TCK will be released, containing tests altered
+         due to challenges - no new tests will be added. Implementations are
+         required to pass the updated TCK. This release stream is named 1.1.x, where
+         x will be incremented.
       </para>
       <para>
          Additionally, new tests will be added to the TCK improving coverage of the

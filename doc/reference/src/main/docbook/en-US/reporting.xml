@@ -28,15 +28,6 @@
          </listitem>
          <listitem>
             <para>
-               <emphasis role="bold">Assertion Breadth Coverage Variance</emphasis>
-            </para>
-             <para>
-               The coverage of specification sub-sections shows at 80% of sections
-               with greater than 95% coverage.
-            </para>
-         </listitem>
-         <listitem>
-            <para>
                <emphasis role="bold">Assertion Depth Coverage</emphasis>
             </para>
              <para>
@@ -164,7 +155,7 @@ public void testMultipleQualifiers()
          <orderedlist>
             <listitem>
                <para>
-                  <emphasis role="bold">Chapter Summary</emphasis> - List the
+                  <emphasis role="bold">Chapter Summary</emphasis> - Lists the
                   chapters (that contain assertions) in the specification
                   document along with total assertions, tests and coverage
                   percentage.
@@ -226,7 +217,7 @@ public void testMultipleQualifiers()
             <listitem>
                <para>
                   <emphasis role="bold">Untestable</emphasis> - the assertion has been
-                  deemed untestable, a note, explaining why, is normally
+                  deemed untestable; a note, explaining why, is normally
                   provided
                </para>
             </listitem>
@@ -248,10 +239,10 @@ public void testMultipleQualifiers()
          <title>TestNG Reports</title>
 
          <para>
-            As you by now, the CDI TCK test suite is really just a TestNG test
+            The CDI TCK test suite is really just a TestNG test
             suite. That means an execution of the CDI TCK test suite produces
-            all the same reports that TestNG produces. This section will go over
-            those reports and show you were to go to find each of them.
+            the same reports as TestNG does. This section will go over
+            those reports and show you where to find each of them.
          </para>
 
          <section>

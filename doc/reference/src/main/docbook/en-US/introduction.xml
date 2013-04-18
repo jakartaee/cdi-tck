@@ -130,7 +130,7 @@
       </para>
       <note>
          <para>
-           The test archives are built with ShrinkWrap, a Java API for creating archives. ShrinkWrap is a part of Arqullian platform ecosystem.
+           The test archives are built with ShrinkWrap, a Java API for creating archives. ShrinkWrap is a part of the Arqullian platform ecosystem.
          </para>
       </note>
 
@@ -216,12 +216,12 @@
          <itemizedlist>
             <listitem>
                <para>
-                  <emphasis role="bold">Arquillian 1.0.2.Final</emphasis>
+                  <emphasis role="bold">Arquillian 1.0.3.Final</emphasis>
                </para>
             </listitem>
             <listitem>
                <para>
-                  <emphasis role="bold">TestNG 6.2</emphasis>
+                  <emphasis role="bold">TestNG 6.3</emphasis>
                </para>
             </listitem>
             <listitem>
@@ -280,9 +280,8 @@
             </listitem>
          </itemizedlist>
          <para>
-            CDI supports Java EE 5, Java EE 6, Java EE 6 Web Profile, Java EE 7, Java EE 7 Web Profile, and the
-            Embeddable EJB 3.1. The TCK will execute on any of these runtimes,
-            but is only part of the CTS for Java EE 7 and Java EE 7 Web Profile.
+            CDI supports Java EE 5, Java EE 6, Java EE 6 Web Profile, Java EE 7, Java EE 7 Web Profile, Embeddable EJB 3.1, and the Embeddable EJB 3.2.
+            The TCK will execute on any of these runtimes, but is only part of the CTS for Java EE 7 and Java EE 7 Web Profile.
          </para>
       </section>
    </section>

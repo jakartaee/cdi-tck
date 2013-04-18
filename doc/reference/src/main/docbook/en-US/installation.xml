@@ -9,14 +9,16 @@
    <section>
       <title>Obtaining the Software</title>
       <para>
-         You can obtain a release of the CDI TCK project from the from the
-         <ulink url="http://seamframework.org/Download">download page</ulink>
-         on Seam Framework website. The CDI TCK is distributed as a ZIP file,
+         You can obtain a release of the CDI TCK project from the
+         <ulink url="http://www.seamframework.org/Weld/Downloads">download page</ulink>
+         on Seam Framework website.
+         The release stream for JSR 346 is named <emphasis>1.1.x</emphasis>.
+         The CDI TCK is distributed as a ZIP file,
          which contains the TCK artifacts (the test suite binary and source,
          porting package API binary and source, the test suite descriptor, the
          audit source and report) in
          <code>/artifacts</code> and documentation in <code>/doc</code>.
-         The TCK library dependencies are not part of the distribution, can be downloaded on demand (see readme.txt file in <code>/lib</code>).
+         The TCK library dependencies are not part of the distribution and can be downloaded on demand (see readme.txt file in <code>/lib</code>).
       </para>
       <para>
          You can also download the current source code from
@@ -24,8 +26,8 @@
       </para>
       <para>
          The TCK project is also available in the Maven Central repository as
-         <code>org.jboss.cdi.tck:cdi-tck-impl</code>; the POM defines all
-         dependencies required to run the TCK.
+         <code>org.jboss.cdi.tck:cdi-tck-impl</code>. The POM file defines all
+         dependencies required to build the TCK.
       </para>
       <para>
          Executing the TCK requires a Java EE 7 or better runtime environment
@@ -35,8 +37,10 @@
       </para>
       <para>
          The JSR 346: Contexts and Dependency Injection for Java EE 1.1
-         reference implementation (RI) project is named Weld. You can
-         obtain the latest  release from the
+         reference implementation (RI) project is named Weld.
+         The release stream for JSR 346 is named <emphasis>2.x</emphasis>.
+         You can
+         obtain the latest release from the
          <ulink url="http://seamframework.org/Weld/Downloads">download page</ulink>
          on Seam Framework website.
       </para>
@@ -56,16 +60,16 @@
       </para>
    </section>
 
-   <section id="tck-environment">
+   <section>
       <title>The TCK Environment</title>
 
       <para>
-         The TCK requires the following two Java runtime environments:
+         <anchor id="tck-environment"/> The TCK requires the following two Java runtime environments:
       </para>
       <itemizedlist>
          <listitem>
             <para>
-               Java 6 or better
+               Java 7 or better
             </para>
          </listitem>
          <listitem>
@@ -76,7 +80,7 @@
       </itemizedlist>
       <para>
          You should refer to vendor instructions for how to install the
-         runtime.
+         runtime environment.
       </para>
       <para>
          The rest of the TCK software can simply be extracted. It's
@@ -104,15 +108,33 @@
          each test method in the class.
       </para>
 
-      <tip id="tck-in-jboss-as">
-         <title>
+      <tip>
+      	 <title>
             Running the TCK against the CDI RI (Weld) and JBoss AS
          </title>
 
+          <para>
+             <anchor id="tck-in-jboss-as"/> Currently there is no JBoss AS release that bundles Weld 2.x.
+             However it's possible to patch the latest JBoss AS 8.x snapshot with provided Weld subsystem.
+             To install and patch JBoss AS 8.x:
+         </para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					Build the latest JBoss AS 8.x snapshot from <ulink url="https://github.com/jbossas/jboss-as">source</ulink>.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Follow <ulink url="https://github.com/weld/as7-weld-subsystem">the Weld Subsystem intructions</ulink>.
+				</para>
+			</listitem>
+		</itemizedlist>
+
          <para>
-            The CDI TCK includes a TCK runner that executes the TCK using Weld
+            The CDI TCK distribution includes a TCK runner that executes the TCK using Weld
             as the CDI implementation and JBoss AS as the Java EE runtime.
-            To run the tck:
+            To run the TCK:
          </para>
 
          <itemizedlist>
@@ -129,7 +151,7 @@
                <para>
                   Next, instruct Maven to run the TCK:
                </para>
-               <programlisting><![CDATA[cd weld/jboss-tck-runner
+               <programlisting><![CDATA[cd jsr346/tck/weld/jboss-tck-runner
 mvn test -Dincontainer]]></programlisting>
             </listitem>
             <listitem>
