@@ -95,6 +95,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     private static final JavaArchive incontainerLibrary = buildIncontainerLibrary();
 
+    public static final String DEFAULT_EJB_VERSION = "3.1";
+
     private String name;
 
     private Boolean isAsClientMode = null;
@@ -464,6 +466,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return
      */
     public T withEjbJarXml(EjbJarDescriptor descriptor) {
+
+        if (descriptor.getVersion() == null) {
+            // CDITCK-316 always set the version attribute
+            descriptor.version(DEFAULT_EJB_VERSION);
+        }
         this.ejbJarDescriptor = descriptor;
         return self();
     }

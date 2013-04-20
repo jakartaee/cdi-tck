@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jboss.cdi.tck.shrinkwrap.ArchiveBuilder;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.ejbjar31.ActivationConfigType;
 import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
@@ -45,6 +46,7 @@ public class EjbJarDescriptorBuilder {
     public EjbJarDescriptor build() {
 
         EjbJarDescriptor ejbJarDescriptor = Descriptors.create(EjbJarDescriptor.class);
+        ejbJarDescriptor.version(ArchiveBuilder.DEFAULT_EJB_VERSION);
         EnterpriseBeansType<EjbJarDescriptor> enterpriseBeansType = ejbJarDescriptor.getOrCreateEnterpriseBeans();
 
         if (messageDrivenBeans != null && !messageDrivenBeans.isEmpty()) {
