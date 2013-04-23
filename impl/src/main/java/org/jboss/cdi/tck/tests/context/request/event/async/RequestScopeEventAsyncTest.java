@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.context.request.event.async;
 
-import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertEquals;
@@ -41,6 +40,10 @@ import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
+ * An event with qualifier @Initialized(RequestScoped.class) is fired when the request context is initialized and an event with
+ * qualifier @Destroyed(RequestScoped.class) when the request context is destroyed. The event payload is the java.lang.Object if
+ * the context is initialized or destroyed due to a EJB asynchronous method invocation.
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -54,7 +57,7 @@ public class RequestScopeEventAsyncTest extends AbstractTest {
     @ArquillianResource
     private URL contextPath;
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "jd") })
     public void testEventsFired() throws Exception {
 

@@ -29,10 +29,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Martin Kouba
- *
  */
 @SuppressWarnings("serial")
-@WebServlet(value="/info", asyncSupported=true)
+@WebServlet(value="/info")
 public class InfoServlet extends HttpServlet {
 
     @Inject
