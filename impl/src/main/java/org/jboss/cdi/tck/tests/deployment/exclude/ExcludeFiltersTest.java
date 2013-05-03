@@ -34,6 +34,8 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.TestSystemProperty;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.BeanDiscoveryMode;
+import org.jboss.cdi.tck.tests.deployment.exclude.food.Meat;
+import org.jboss.cdi.tck.tests.deployment.exclude.haircut.Chonmage;
 import org.jboss.cdi.tck.tests.deployment.exclude.mustache.Mustache;
 import org.jboss.cdi.tck.tests.deployment.exclude.mustache.beard.Beard;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -47,7 +49,6 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "20091101")
-@Test(groups = INTEGRATION) // because we need to set up system properties
 public class ExcludeFiltersTest extends AbstractTest {
 
     @Deployment
@@ -56,19 +57,25 @@ public class ExcludeFiltersTest extends AbstractTest {
                 .withTestClassPackage(ExcludeFiltersTest.class)
                 .withPackage(Mustache.class.getPackage())
                 .withPackage(Beard.class.getPackage())
+                .withPackage(Chonmage.class.getPackage())
+                .withPackage(Meat.class.getPackage())
                 .withBeansXml(
                         newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ALL).excludes(
-                                newExclude(Stubble.class.getName()),
-                                newExclude(Mustache.class.getPackage().getName() + ".*"),
+                                // Package excludes
+                                newExclude(Chonmage.class.getPackage().getName() + ".*"),
                                 newExclude(Mustache.class.getPackage().getName() + ".**"),
+                                newExclude(Meat.class.getPackage().getName() + ".*").activators(
+                                        newClassAvailableActivator("com.some.unreal.class.Name")),
+                                newExclude(Meat.class.getPackage().getName() + ".*").activators(
+                                        newClassNotAvailableActivator(ExcludeFiltersTest.class.getName())),
+                                // Class excludes
+                                newExclude(Stubble.class.getName()),
                                 newExclude(Alpha.class.getName()).activators(
                                         newClassAvailableActivator(Stubble.class.getName())),
-                                // Foxtrot is not excluded
                                 newExclude(Foxtrot.class.getName()).activators(
                                         newClassAvailableActivator("com.some.unreal.class.Name")),
                                 newExclude(Bravo.class.getName()).activators(
                                         newClassNotAvailableActivator("com.some.unreal.class.Name")),
-                                // Echo is not excluded
                                 newExclude(Echo.class.getName()).activators(
                                         newClassNotAvailableActivator(ExcludeFiltersTest.class.getName())),
                                 newExclude(Charlie.class.getName()).activators(
@@ -95,6 +102,7 @@ public class ExcludeFiltersTest extends AbstractTest {
     public void testTypePackageMatchesExcludeFilterName() {
         assertTypeIsExcluded(Mustache.class);
         assertTypeIsExcluded(Beard.class);
+        assertTypeIsExcluded(Chonmage.class);
     }
 
     @Test
@@ -104,9 +112,10 @@ public class ExcludeFiltersTest extends AbstractTest {
         assertTypeIsNotExcluded(Foxtrot.class);
         assertTypeIsExcluded(Bravo.class);
         assertTypeIsNotExcluded(Echo.class);
+        assertTypeIsNotExcluded(Meat.class);
     }
 
-    @Test(groups = SYSTEM_PROPERTIES)
+    @Test(groups = { INTEGRATION, SYSTEM_PROPERTIES })
     @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "pd"), @SpecAssertion(section = BEAN_DISCOVERY, id = "pe") })
     public void testExcludeSystemPropertyActivator() {
         assertTypeIsExcluded(Charlie.class);
