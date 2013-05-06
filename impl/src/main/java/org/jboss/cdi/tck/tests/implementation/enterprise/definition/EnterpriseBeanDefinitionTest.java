@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SESSION_BEAN;
@@ -46,7 +46,7 @@ import org.testng.annotations.Test;
  * @author Nicklas Karlsson
  * @author Martin Kouba
  */
-@Test(groups = { INTEGRATION })
+@Test(groups = { JAVAEE_FULL }) // The test archive contains a remote EJB
 @SpecVersion(spec = "cdi", version = "20091101")
 public class EnterpriseBeanDefinitionTest extends AbstractTest {
 

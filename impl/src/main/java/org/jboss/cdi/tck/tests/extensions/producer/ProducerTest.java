@@ -9,14 +9,14 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.tests.extensions.producer;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTIONTARGET;
 import static org.jboss.cdi.tck.cdi.Sections.PB;
@@ -43,12 +43,12 @@ import org.testng.annotations.Test;
 
 /**
  * Producer extension tests.
- * 
+ *
  * @author David Allen
  * @author Martin Kouba
  */
 @SuppressWarnings("serial")
-@Test(groups = INTEGRATION)
+@Test(groups = JAVAEE_FULL) // The test archive contains a remote EJB
 @SpecVersion(spec = "cdi", version = "20091101")
 public class ProducerTest extends AbstractTest {
 

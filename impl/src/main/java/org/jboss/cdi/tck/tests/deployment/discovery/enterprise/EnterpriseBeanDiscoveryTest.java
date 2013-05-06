@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DEFINING_ANNOTATIONS;
@@ -141,7 +140,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
         assertDiscoveredAndAvailable(CharlieLocal.class, Charlie.class);
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
     public void testImplicitBeanArchiveNoDescriptor() {
@@ -161,7 +160,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
         assertNotDiscoveredAndNotAvailable(FoxtrotLocal.class, Foxtrot.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ob") })
     public void testNotBeanArchiveExtension() {
         assertNotDiscoveredAndNotAvailable(LegacyBean.class, LegacyBean.class);
