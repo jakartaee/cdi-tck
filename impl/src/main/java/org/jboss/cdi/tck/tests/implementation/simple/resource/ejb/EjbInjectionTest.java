@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.implementation.simple.resource.ejb;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
 import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_LIFECYCLE;
@@ -71,7 +70,7 @@ public class EjbInjectionTest extends AbstractTest {
         assert instance.getMyEjb().knockKnock().equals("We're home");
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = RESOURCE_TYPES, id = "ad") })
     public void testResourceBeanTypes() {
         @SuppressWarnings("serial")
