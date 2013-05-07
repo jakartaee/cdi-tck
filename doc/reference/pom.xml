@@ -23,6 +23,7 @@
                 <configuration>
                     <options>
                         <!-- applyStandardInjectionValues>false</applyStandardInjectionValues -->
+                        <injectionDateFormat>dd/MM/yyyy</injectionDateFormat>
                     </options>
                 </configuration>
             </plugin>
