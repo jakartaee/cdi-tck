@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes;
 
+import javax.ejb.Singleton;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 
-@RequestScoped
 @ApplicationScoped
-public class BeanWithTooManyScopeTypes_Broken {
+@Dependent
+@Singleton
+public class SessionBeanWithTooManyScopeTypes_Broken {
 }

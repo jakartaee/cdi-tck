@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes;
+package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes.producer.field;
 
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_SCOPE;
 import static org.jboss.cdi.tck.cdi.Sections.EXCEPTIONS;
@@ -25,6 +25,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes.producer.field.SessionBeanProducerFieldWithTooManyScopeTypes_Broken;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -32,16 +33,16 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class TooManyScopesTest extends AbstractTest {
+public class SessionBeanProducerFieldTooManyScopesTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(TooManyScopesTest.class).withClass(BeanWithTooManyScopeTypes_Broken.class).build();
+        return new WebArchiveBuilder().withTestClass(SessionBeanProducerFieldTooManyScopesTest.class).withClass(SessionBeanProducerFieldWithTooManyScopeTypes_Broken.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_SCOPE, id = "ba"), @SpecAssertion(section = EXCEPTIONS, id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_SCOPE, id = "bc"), @SpecAssertion(section = EXCEPTIONS, id = "ba") })
     public void testTooManyScopesSpecifiedInJava() {
     }
 

@@ -320,9 +320,18 @@
             <text>The scope of a bean is defined by annotating the bean class or producer method or field with a scope type.</text>
         </assertion>
 
-        <assertion id="ba">
-            <text>A bean class or producer method or field may specify at most one scope type annotation. If a bean class or producer method or field specifies multiple scope type annotations, the container automatically detects the problem and treats it as a definition error.</text>
-        </assertion>
+		<group>
+			<text>A bean class or producer method or field may specify at most one scope type annotation. If a bean class or producer method or field specifies multiple scope type annotations, the container automatically detects the problem and treats it as a definition error.</text>
+        	<assertion id="ba">
+            	<text>Test with a bean class.</text>
+        	</assertion>
+        	<assertion id="bb">
+            	<text>Test with a producer method.</text>
+        	</assertion>
+        	<assertion id="bc">
+            	<text>Test with a producer field.</text>
+        	</assertion>
+        </group>
 
         <assertion id="c">
             <text>A scope type may be specified using a stereotype annotation, as defined in Section 2.7.2, "Declaring the stereotypes for a bean"</text>

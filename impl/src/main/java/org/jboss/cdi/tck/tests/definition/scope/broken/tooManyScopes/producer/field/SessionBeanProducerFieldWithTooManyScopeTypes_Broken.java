@@ -14,12 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes;
+package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes.producer.field;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Stateful;
+import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.enterprise.inject.Produces;
 
-@RequestScoped
-@ApplicationScoped
-public class BeanWithTooManyScopeTypes_Broken {
+@Stateful
+public class SessionBeanProducerFieldWithTooManyScopeTypes_Broken {
+    @Produces
+    @SessionScoped
+    @ConversationScoped
+    @Word
+    public static String word = "producer_field";
 }

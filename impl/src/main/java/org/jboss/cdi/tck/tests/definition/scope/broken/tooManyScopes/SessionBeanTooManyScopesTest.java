@@ -32,12 +32,12 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "20091101")
-public class TooManyScopesTest extends AbstractTest {
+public class SessionBeanTooManyScopesTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(TooManyScopesTest.class).withClass(BeanWithTooManyScopeTypes_Broken.class).build();
+        return new WebArchiveBuilder().withTestClass(SessionBeanTooManyScopesTest.class).withClass(SessionBeanWithTooManyScopeTypes_Broken.class).build();
     }
 
     @Test
