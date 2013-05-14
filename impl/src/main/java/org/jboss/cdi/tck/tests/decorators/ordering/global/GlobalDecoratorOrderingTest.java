@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.decorators.ordering.global;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_PRIORITY;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
 import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -72,7 +73,8 @@ public class GlobalDecoratorOrderingTest extends AbstractTest {
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS_PRIORITY, id = "a"),
             @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a"),
-            @SpecAssertion(section = ENABLED_DECORATORS_PRIORITY, id = "b") })
+            @SpecAssertion(section = ENABLED_DECORATORS_PRIORITY, id = "b"),
+            @SpecAssertion(section = ENABLED_DECORATORS, id = "c")})
     public void testDecoratorsInWebInfClasses() {
 
         List<String> expected = new ArrayList<String>();

@@ -5016,6 +5016,10 @@
         <assertion id="b">
             <text>Decorators are called after interceptors.</text>
         </assertion>
+        
+        <assertion id="c">
+            <text>Decorators enabled using @Priority are called before decorators enabled using |beans.xml|.</text>
+        </assertion>
     </section>
 
     <section id="enabled_decorators_priority" title="Decorator enablement and ordering for an application" level="3">
