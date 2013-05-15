@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.registration;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BBD;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
@@ -45,6 +46,7 @@ import org.testng.annotations.Test;
  * @see <a href="http://java.net/jira/browse/GLASSFISH-14808">GLASSFISH-14808</a> (resolved)
  */
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class BeanRegistrationByExtensionInNonBeanArchiveTest extends AbstractTest {
 
     @Inject
@@ -56,7 +58,7 @@ public class BeanRegistrationByExtensionInNonBeanArchiveTest extends AbstractTes
                 .withLibrary(BeanClassToRegister.class, ManualBeanRegistrationExtension.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
             @SpecAssertion(section = BBD, id = "af"), @SpecAssertion(section = BEAN_ARCHIVE, id = "n") })
     public void shouldFindBeanReference() {

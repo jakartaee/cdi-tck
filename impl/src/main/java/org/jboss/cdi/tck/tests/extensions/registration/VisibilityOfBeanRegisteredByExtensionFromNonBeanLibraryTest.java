@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.registration;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BBD;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 
@@ -34,16 +35,17 @@ import org.testng.annotations.Test;
 /**
  * Validates that a class in one non-bean archive can be registered as a bean by an extension in another non-bean archive and
  * that the bean is visible to the web (bean) archive.
- * 
+ *
  * <p>
  * This test was originally part of Seam Compatibility project.
  * <p>
- * 
+ *
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15721">GLASSFISH-15721</a>
  */
 @SpecVersion(spec = "cdi", version = "20091101")
+@Test(groups = INTEGRATION)
 public class VisibilityOfBeanRegisteredByExtensionFromNonBeanLibraryTest extends AbstractTest {
 
     @Inject
@@ -58,7 +60,7 @@ public class VisibilityOfBeanRegisteredByExtensionFromNonBeanLibraryTest extends
                         AnotherManualBeanRegistrationExtension.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
             @SpecAssertion(section = BBD, id = "af") })
     public void shouldFindBeanReference() {
