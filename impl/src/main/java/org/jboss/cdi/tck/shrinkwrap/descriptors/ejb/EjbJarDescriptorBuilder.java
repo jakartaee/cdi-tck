@@ -53,8 +53,8 @@ public class EjbJarDescriptorBuilder {
             for (MessageDriven messageDriven : messageDrivenBeans) {
                 MessageDrivenBeanType<EnterpriseBeansType<EjbJarDescriptor>> messageDrivenBeanType = enterpriseBeansType
                         .createMessageDriven();
-                messageDrivenBeanType.ejbClass(messageDriven.getEjbClass());
                 messageDrivenBeanType.ejbName(messageDriven.getEjbName());
+                messageDrivenBeanType.ejbClass(messageDriven.getEjbClass());
                 ActivationConfigType<MessageDrivenBeanType<EnterpriseBeansType<EjbJarDescriptor>>> activationConfig = messageDrivenBeanType
                         .getOrCreateActivationConfig();
 
