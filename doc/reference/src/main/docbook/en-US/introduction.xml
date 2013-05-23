@@ -274,7 +274,7 @@
          <itemizedlist>
             <listitem>
                <para>
-                  JBoss AS 7.2 using Oracle Java SE 7 on Red Hat Enterprise
+                  WildFly 8.x using Oracle Java SE 7 on Red Hat Enterprise
                   Linux 5.2
                </para>
             </listitem>

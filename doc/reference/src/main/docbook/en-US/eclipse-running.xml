@@ -225,7 +225,7 @@ Weld JBoss TCK Runner
          <listitem>
             <para>
                <literal>org.jboss.cdi.tck.testDataSource</literal>
-               - the JNDI name of the test datasource, e.g. JBoss AS 7:
+               - the JNDI name of the test datasource, e.g. WildFly 8:
                <programlisting>
                   org.jboss.cdi.tck.testDataSource=java:jboss/datasources/ExampleDS
                </programlisting>
@@ -276,13 +276,13 @@ Weld JBoss TCK Runner
       <para>
          Let's see what has to be done to execute an integration test. This
          will result in the artifact being deployed to the container, which is
-         JBoss AS if you are using the JBoss TCK runner.
+         WildFly if you are using the JBoss TCK runner.
       </para>
    </section>
    <section id="eclipse-in-container">
       <title>Running integration tests</title>
       <para>
-        Use <emphasis>incontainer</emphasis> Maven profile in order to run a test in in-container mode.
+        In order to run a test in the container you must explicitly specify <emphasis>incontainer</emphasis> Maven profile in JBoss TCK runner Eclipse project properties (Active Maven Profiles).
       </para>
       <note>
         <para>
