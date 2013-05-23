@@ -282,7 +282,7 @@ Weld JBoss TCK Runner
    <section id="eclipse-in-container">
       <title>Running integration tests</title>
       <para>
-        In order to run a test in the container you must explicitly specify <emphasis>incontainer</emphasis> Maven profile in JBoss TCK runner Eclipse project properties (Active Maven Profiles).
+        In order to run a test in the container you must explicitly specify following active Maven profiles in JBoss TCK runner Eclipse project properties: <literal>incontainer,!weld-embedded</literal>.
       </para>
       <note>
         <para>
