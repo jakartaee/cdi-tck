@@ -74,7 +74,7 @@
          </listitem>
          <listitem>
             <para>
-               Java EE 7 or better (e.g., JBoss AS 8.x or GlassFish V4)
+               Java EE 7 or better (e.g., WildFly 8.x or GlassFish V4)
             </para>
          </listitem>
       </itemizedlist>
@@ -110,30 +110,27 @@
 
       <tip>
       	 <title>
-            Running the TCK against the CDI RI (Weld) and JBoss AS
+            Running the TCK against the CDI RI (Weld) and WildFly
          </title>
 
-          <para>
-             <anchor id="tck-in-jboss-as"/> Currently there is no JBoss AS release that bundles Weld 2.x.
-             However it's possible to patch the latest JBoss AS 8.x snapshot with provided Weld subsystem.
-             To install and patch JBoss AS 8.x:
+         <para>
+             <anchor id="tck-in-jboss-as"/>
          </para>
+
 		<itemizedlist>
 			<listitem>
-				<para>
-					Build the latest JBoss AS 8.x snapshot from <ulink url="https://github.com/jbossas/jboss-as">source</ulink>.
-				</para>
+                <para>First, you should download WildFly 8.x from the WildFly <ulink url="http://www.wildfly.org/download/">project page</ulink>.</para>
 			</listitem>
 			<listitem>
 				<para>
-					Follow <ulink url="https://github.com/weld/as7-weld-subsystem">the Weld Subsystem intructions</ulink>.
+					Set the JBOSS_HOME environment variable to the location of the WildFly software.
 				</para>
 			</listitem>
 		</itemizedlist>
 
          <para>
             The CDI TCK distribution includes a TCK runner that executes the TCK using Weld
-            as the CDI implementation and JBoss AS as the Java EE runtime.
+            as the CDI implementation and WildFly as the Java EE runtime.
             To run the TCK:
          </para>
 
@@ -153,6 +150,12 @@
                </para>
                <programlisting><![CDATA[cd jsr346/tck/weld/jboss-tck-runner
 mvn test -Dincontainer]]></programlisting>
+            </listitem>
+            <listitem>
+               <para>
+                  Use <literal>cdi.tck.version</literal> system property to specify particular TCK version:
+               </para>
+               <programlisting><![CDATA[mvn test -Dincontainer -Dcdi.tck.version=1.1.0.SP2]]></programlisting>
             </listitem>
             <listitem>
                <para>

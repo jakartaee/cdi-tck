@@ -102,7 +102,7 @@
          <para>
             The Eclipse Server Tools, a subproject of the Eclipse Web Tools
             Project (WTP), has support for launching most major application
-            servers, including JBoss AS 7. However, if you are using JBoss AS,
+            servers, including WildFly 8. However, if you are using WildFly,
             you should consider using JBoss Tools instead, which offers tighter
             integration with JBoss technologies. See either the
             <ulink url="http://www.eclipse.org/webtools/server/server.php">Server Tools documentation</ulink>
@@ -113,8 +113,8 @@
          <para>
             See
             <ulink
-               url="http://maverikpro.wordpress.com/2007/11/26/remote-debug-a-web-application-using-eclipse">this blog entry</ulink>
-            to learn how to start JBoss AS with JPDA enabled and how to get the
+               url="http://justinjohnson.org/development/configuring-remote-debugging-in-jboss-as-7-and-eclipse/">this blog entry</ulink>
+            to learn how to start WildFly with JPDA enabled and how to get the
             Eclipse debugger to connect to the remote process.
          </para>
       </section>
