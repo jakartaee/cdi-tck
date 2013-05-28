@@ -43,7 +43,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -85,7 +85,7 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
         //D
         JavaArchive ejbArchive = ShrinkWrap
                 .create(JavaArchive.class, ejbJar)
-                .addClasses(GloballyEnabledInterceptor2.class, GloballyEnabledInterceptor5.class, LegacyInterceptor3.class)
+                .addClasses(DummyDao.class, GloballyEnabledInterceptor2.class, GloballyEnabledInterceptor5.class, LegacyInterceptor3.class)
                 .addAsManifestResource(
                         new StringAsset(Descriptors.create(BeansDescriptor.class).createInterceptors()
                                 .clazz(LegacyInterceptor3.class.getName()).up().exportAsString()), "beans.xml")
@@ -119,7 +119,7 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "f"),
         @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "i") })
     public void testDecoratorsInWebInfClasses(Dao dao) {
-        
+
         assertNotNull(dao);
         ActionSequence.reset();
         dao.ping();

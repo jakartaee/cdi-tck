@@ -44,7 +44,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "cdi", version = "20091101")
@@ -86,7 +86,7 @@ public class EnterpriseDecoratorOrderingTest extends AbstractTest {
         //D
         JavaArchive ejbArchive = ShrinkWrap
                 .create(JavaArchive.class, ejbJar)
-                .addClasses(GloballyEnabledDecorator2.class, GloballyEnabledDecorator5.class, LegacyDecorator3.class)
+                .addClasses(DummyDao.class, GloballyEnabledDecorator2.class, GloballyEnabledDecorator5.class, LegacyDecorator3.class)
                 .addAsManifestResource(
                         new StringAsset(Descriptors.create(BeansDescriptor.class).createDecorators()
                                 .clazz(LegacyDecorator3.class.getName()).up().exportAsString()), "beans.xml")
