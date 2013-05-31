@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> extends AbstractTest {
 
     private final TypeLiteral<Bar<T>> BAR_TYPE_VARIABLE_LITERAL = new TypeLiteral<Bar<T>>() {

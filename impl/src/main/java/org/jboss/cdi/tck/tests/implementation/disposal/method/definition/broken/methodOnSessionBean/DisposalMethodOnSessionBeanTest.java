@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 
 /**
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class DisposalMethodOnSessionBeanTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)

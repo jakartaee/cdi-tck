@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
  * 
  * @author Shane Bryzak
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class NonPassivationCapableProducerFieldTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

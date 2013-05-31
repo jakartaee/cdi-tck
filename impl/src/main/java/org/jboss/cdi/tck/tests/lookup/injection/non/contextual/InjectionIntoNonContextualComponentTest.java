@@ -37,7 +37,7 @@ import org.testng.annotations.Test;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class InjectionIntoNonContextualComponentTest extends AbstractTest {
 
     @ArquillianResource

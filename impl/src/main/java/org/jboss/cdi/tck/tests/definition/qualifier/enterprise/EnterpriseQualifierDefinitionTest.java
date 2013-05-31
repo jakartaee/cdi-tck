@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
  * should be a parallel set of tests for session and other managed beans.
  * 
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class EnterpriseQualifierDefinitionTest extends AbstractTest {
 
     @Deployment

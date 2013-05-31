@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
  * @author Ondrej Skutka
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class FinalClassMethodLevelInterceptorTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class ObserverMethodParameterInjectionValidationTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
