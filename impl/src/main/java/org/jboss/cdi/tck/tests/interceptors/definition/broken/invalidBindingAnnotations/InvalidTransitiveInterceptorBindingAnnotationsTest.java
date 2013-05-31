@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
 /**
  * Test conflicting transitive interceptor bindings.
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class InvalidTransitiveInterceptorBindingAnnotationsTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)

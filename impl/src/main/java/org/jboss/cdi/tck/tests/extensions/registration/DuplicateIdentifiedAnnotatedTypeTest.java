@@ -27,7 +27,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class DuplicateIdentifiedAnnotatedTypeTest extends AbstractTest {
 
     @Deployment

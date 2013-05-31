@@ -25,7 +25,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class MultipleInterceptorBindingsTest extends AbstractTest {
 
     @Deployment

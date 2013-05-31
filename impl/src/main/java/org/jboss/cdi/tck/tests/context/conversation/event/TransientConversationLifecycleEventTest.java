@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class TransientConversationLifecycleEventTest extends AbstractTest {
 
     @ArquillianResource(Servlet.class)

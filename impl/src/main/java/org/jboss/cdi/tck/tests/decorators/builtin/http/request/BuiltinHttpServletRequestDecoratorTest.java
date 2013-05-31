@@ -51,7 +51,7 @@ import org.testng.annotations.Test;
  * 
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class BuiltinHttpServletRequestDecoratorTest extends AbstractDecoratorTest {
 
     @Deployment

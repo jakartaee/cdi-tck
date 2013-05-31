@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class RequestContextTest extends AbstractTest {
 
     @ArquillianResource

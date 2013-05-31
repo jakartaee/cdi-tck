@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class SessionContextHttpSessionListenerTest extends AbstractTest {
 
 	@ArquillianResource

@@ -37,7 +37,7 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class EventTypesTest extends AbstractTest {
 
     @Deployment

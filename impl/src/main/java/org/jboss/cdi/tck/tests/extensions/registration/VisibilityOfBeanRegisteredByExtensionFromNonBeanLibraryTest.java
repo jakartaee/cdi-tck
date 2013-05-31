@@ -44,7 +44,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15721">GLASSFISH-15721</a>
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 @Test(groups = INTEGRATION)
 public class VisibilityOfBeanRegisteredByExtensionFromNonBeanLibraryTest extends AbstractTest {
 

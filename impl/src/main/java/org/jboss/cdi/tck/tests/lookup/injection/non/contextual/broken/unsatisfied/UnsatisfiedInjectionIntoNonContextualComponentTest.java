@@ -32,7 +32,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class UnsatisfiedInjectionIntoNonContextualComponentTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

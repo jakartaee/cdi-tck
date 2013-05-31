@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 /**
  * Test for problem detection of unproxyable bean with bean constructor with parameters.
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class BeanConstructorWithParametersTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

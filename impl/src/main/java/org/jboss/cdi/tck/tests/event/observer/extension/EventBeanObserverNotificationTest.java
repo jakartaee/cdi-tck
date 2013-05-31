@@ -46,7 +46,7 @@ import org.testng.annotations.Test;
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class EventBeanObserverNotificationTest extends AbstractObserverNotificationTest {
 
     @Deployment

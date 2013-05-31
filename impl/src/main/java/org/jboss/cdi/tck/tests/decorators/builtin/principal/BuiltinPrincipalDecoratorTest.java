@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @Test(groups = JAVAEE_FULL)
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class BuiltinPrincipalDecoratorTest extends AbstractDecoratorTest {
 
     @Deployment

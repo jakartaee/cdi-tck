@@ -60,7 +60,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("serial")
-@SpecVersion(spec = "cdi", version = "20091101")
+@SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class ProducerMethodDefinitionTest extends AbstractTest {
 
     private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
