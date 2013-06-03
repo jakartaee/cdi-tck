@@ -16,14 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer;
 
-import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTIONTARGET;
-import static org.jboss.cdi.tck.cdi.Sections.PB;
 import static org.jboss.cdi.tck.cdi.Sections.PIT;
 import static org.jboss.cdi.tck.cdi.Sections.PP;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -48,7 +45,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SuppressWarnings("serial")
-@Test(groups = JAVAEE_FULL) // The test archive contains a remote EJB
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class ProducerTest extends AbstractTest {
 
@@ -127,14 +124,6 @@ public class ProducerTest extends AbstractTest {
         Dog dog = producer.produce(getCurrentManager().createCreationalContext(dogBean));
         assert DogProducer.isNoisyDogProducerCalled();
         assert dog.getColor().equals(DogProducer.NOISY_DOG_COLOR);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PP, id = "ac"), @SpecAssertion(section = PP, id = "e"),
-            @SpecAssertion(section = PP, id = "gb") })
-    public void testProduceCallsOverridenResourceProducerMethod() {
-        assertEquals(getContextualReference(ServiceRemote.class).ping(), "pong");
-        assertTrue(ProducerProcessor.isOverriddenServiceProducerCalled);
     }
 
     @Test
@@ -231,12 +220,6 @@ public class ProducerTest extends AbstractTest {
     public void testGetAnnotatedTypeOnProcessInjectionTarget() {
         assert ProducerProcessor.getDogAnnotatedType() != null;
         assert ProducerProcessor.getDogAnnotatedType().getBaseType().equals(Dog.class);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "ec") })
-    public void testResourceAreConsideredToBeProducerField() {
-        assertTrue(ProducerProcessor.isServiceProducerFieldObserved);
     }
 
 }

@@ -14,16 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.producer;
+package org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote;
 
-import javax.ejb.Stateless;
+import javax.ejb.Remote;
 
-@Stateless
-public class ServiceBean implements ServiceRemote {
-
-    @Override
-    public String ping() {
-        return "pong";
-    }
+@Remote
+public interface DogRemote {
 
 }

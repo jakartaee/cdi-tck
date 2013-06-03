@@ -14,15 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
+package org.jboss.cdi.tck.tests.extensions.producer.remote;
 
-import javax.ejb.Stateful;
+import javax.ejb.Remote;
 
-/**
- * @author pmuir
- * 
- */
-@Stateful
-public class Retriever extends Dog {
+@Remote
+public interface ServiceRemote {
+
+    public String ping();
 
 }
