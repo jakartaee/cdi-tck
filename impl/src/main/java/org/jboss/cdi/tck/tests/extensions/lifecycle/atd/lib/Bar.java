@@ -14,19 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib;
+package org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib;
 
-import javax.enterprise.inject.Produces;
+public class Bar {
 
-public class Boss {
-
-    @Produces
-    @Pro
-    private static Foo foo = new Foo();
-
-    @Produces
-    @Pro
-    protected Bar produceBar() {
-        return new Bar();
-    }
 }

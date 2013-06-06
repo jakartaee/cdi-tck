@@ -16,6 +16,17 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib;
 
+import javax.enterprise.inject.Produces;
+
 public class Boss {
 
+    @Produces
+    @Pro
+    private static Foo foo = new Foo();
+
+    @Produces
+    @Pro
+    protected Bar produceBar() {
+        return new Bar();
+    }
 }
