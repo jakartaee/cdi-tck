@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class Timer {
 
-    private static final long DEFAULT_DELAY = 1000l;
+    private static final long DEFAULT_DELAY = 2000l;
 
     private static final long DEFAULT_SLEEP_INTERVAL = 50l;
 
@@ -62,7 +62,7 @@ public class Timer {
 
     /**
      * Create new timer with default delay and sleep interval.
-     * 
+     *
      * @param delay
      */
     public Timer() {
@@ -71,7 +71,7 @@ public class Timer {
 
     /**
      * Set new delay value.
-     * 
+     *
      * @param delay
      * @return self
      */
@@ -82,7 +82,7 @@ public class Timer {
 
     /**
      * Set new sleep interval value.
-     * 
+     *
      * @param sleepInterval
      * @return self
      */
@@ -93,7 +93,7 @@ public class Timer {
 
     /**
      * Set new resolution logic.
-     * 
+     *
      * @param resolutionLogic
      * @return self
      */
@@ -104,7 +104,7 @@ public class Timer {
 
     /**
      * Add new stop condition.
-     * 
+     *
      * @param condition
      * @return self
      */
@@ -114,7 +114,7 @@ public class Timer {
 
     /**
      * Add new stop condition.
-     * 
+     *
      * @param condition
      * @param clear Clear stop conditions and reset {@link #stopConditionsSatisfiedBeforeTimeout}
      * @return self
@@ -135,7 +135,7 @@ public class Timer {
 
     /**
      * Start the timer.
-     * 
+     *
      * @throws InterruptedException
      */
     public Timer start() throws InterruptedException {
@@ -184,7 +184,7 @@ public class Timer {
 
     /**
      * Start a new timer with specified delay.
-     * 
+     *
      * @param delay
      * @return finished timer
      * @throws InterruptedException
@@ -195,7 +195,7 @@ public class Timer {
 
     /**
      * Start a new timer with specified delay and sleep interval.
-     * 
+     *
      * @param delay
      * @return finished timer
      * @throws InterruptedException
@@ -255,7 +255,7 @@ public class Timer {
     }
 
     /**
-     * 
+     *
      */
     public static interface StopCondition {
 
