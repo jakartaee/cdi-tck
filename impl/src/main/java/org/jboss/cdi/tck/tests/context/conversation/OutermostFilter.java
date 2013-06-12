@@ -44,17 +44,25 @@ public class OutermostFilter implements Filter {
                 chain.doFilter(request, response);
                 throw new RuntimeException("Expected exception not thrown");
             } catch (NonexistentConversationException e) {
-                response.setContentType("text/html");
-                response.getWriter().print("NonexistentConversationException thrown properly\n");
-                response.getWriter().print("Conversation.isTransient: " + conversation.isTransient());
-                response.getWriter().print("Cloud: " + cloud.getName());
+                writeNonexistenConversationException(response);
             }
         } else {
+          try {
             chain.doFilter(request, response);
+          } catch (NonexistentConversationException e) {
+              writeNonexistenConversationException(response);
+          }
         }
     }
 
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
+
+    private void writeNonexistenConversationException(ServletResponse response) throws IOException {
+        response.setContentType("text/plain");
+        response.getWriter().print("NonexistentConversationException thrown properly\n");
+        response.getWriter().print("Conversation.isTransient: " + conversation.isTransient());
+        response.getWriter().print("Cloud: " + cloud.getName());
+    }
 }
