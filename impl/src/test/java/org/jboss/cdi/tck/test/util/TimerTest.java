@@ -77,11 +77,11 @@ public class TimerTest {
         }).start();
     }
 
-    @Test(timeOut = 7000l)
+    @Test(timeOut = 3000l)
     public void testReuse() throws InterruptedException {
 
         // Will be stopped immediately
-        Timer timer = new Timer().setDelay(5000l).addStopCondition(new StopCondition() {
+        Timer timer = new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
             @Override
             public boolean isSatisfied() {
                 return true;
@@ -89,7 +89,7 @@ public class TimerTest {
         }).start();
         assertTrue(timer.isStopConditionsSatisfiedBeforeTimeout());
 
-        // Will be stopped after timeout (5s) exceeds
+        // Will be stopped after timeout (2s) exceeds
         timer.addStopCondition(new StopCondition() {
             @Override
             public boolean isSatisfied() {
@@ -100,7 +100,8 @@ public class TimerTest {
 
         timer.reset();
 
-        // And finally one more second
+        // And finally half-second
+        timer.setDelay(500l);
         timer.start();
     }
 
