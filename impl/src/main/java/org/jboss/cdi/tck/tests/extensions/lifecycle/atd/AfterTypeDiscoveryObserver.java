@@ -26,8 +26,11 @@ import javax.enterprise.inject.spi.AfterTypeDiscovery;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
+import javax.enterprise.inject.spi.ProcessProducer;
 
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Bar;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Boss;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Foo;
 
 /**
  *
@@ -39,6 +42,8 @@ public class AfterTypeDiscoveryObserver implements Extension {
     private List<Class<?>> alternatives = null;
     private List<Class<?>> decorators = null;
     private boolean bossObserved = false;
+    private boolean processProducerEventFiredForProducerMethod = false;
+    private boolean processProducerEventFiredForProducerField = false;
 
     public void observeAfterTypeDiscovery(@Observes AfterTypeDiscovery event, BeanManager beanManager) {
 
@@ -64,6 +69,14 @@ public class AfterTypeDiscoveryObserver implements Extension {
         bossObserved = true;
     }
 
+    public void observeProcessProducerForProducerField(@Observes ProcessProducer<Boss, Foo> event) {
+        processProducerEventFiredForProducerField = true;
+    }
+
+    public void observeProcessProducerForProducerMethod(@Observes ProcessProducer<Boss, Bar> event) {
+        processProducerEventFiredForProducerMethod = true;
+    }
+
     public List<Class<?>> getInterceptors() {
         return interceptors;
     }
@@ -78,6 +91,14 @@ public class AfterTypeDiscoveryObserver implements Extension {
 
     public boolean isBossObserved() {
         return bossObserved;
+    }
+
+    public boolean isProcessProcuderFieldObserved() {
+        return processProducerEventFiredForProducerField;
+    }
+
+    public boolean isProcessProcuderMethodObserved() {
+        return processProducerEventFiredForProducerMethod;
     }
 
 }

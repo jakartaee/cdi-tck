@@ -19,16 +19,21 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.ATD;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.PP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Bar;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Boss;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Foo;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Pro;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -50,7 +55,7 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AfterTypeDiscoveryTest.class)
                 .withExtension(AfterTypeDiscoveryObserver.class)
-                .withLibrary(Boss.class)
+                .withLibrary(Boss.class, Foo.class, Bar.class, Pro.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
                                 .clazz(CharlieInterceptor.class.getName()).up().createDecorators()
@@ -113,11 +118,32 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         assertTrue(getBeans(BravoAlternative.class).isEmpty());
     }
 
+    @SuppressWarnings("serial")
     @Test
     @SpecAssertions({ @SpecAssertion(section = ATD, id = "e"), @SpecAssertion(section = BEAN_DISCOVERY, id = "r") })
     public void testAddAnnotatedType() {
-        extension.isBossObserved();
+        assertTrue(extension.isBossObserved());
         getUniqueBean(Boss.class);
+
+        assertEquals(getBeans(Bar.class).size(), 0);
+        assertEquals(getBeans(Bar.class, new AnnotationLiteral<Pro>() {
+        }).size(), 1);
+
+        assertEquals(getBeans(Foo.class).size(), 0);
+        assertEquals(getBeans(Foo.class, new AnnotationLiteral<Pro>() {
+        }).size(), 1);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = PP, id = "ab"), @SpecAssertion(section = PP, id = "bb") })
+    public void testProcessProducerEventFiredForProducerField() {
+        assertTrue(extension.isProcessProcuderFieldObserved());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = PP, id = "aa"), @SpecAssertion(section = PP, id = "ba") })
+    public void testProcessProducerEventFiredForProducerMethod() {
+        assertTrue(extension.isProcessProcuderMethodObserved());
     }
 
 }
