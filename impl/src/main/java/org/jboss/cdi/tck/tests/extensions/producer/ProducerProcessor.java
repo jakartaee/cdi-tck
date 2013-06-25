@@ -29,7 +29,6 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.InjectionTarget;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 import javax.enterprise.inject.spi.ProcessProducer;
-import javax.enterprise.inject.spi.ProcessProducerField;
 import javax.enterprise.inject.spi.Producer;
 
 public class ProducerProcessor implements Extension {
@@ -39,9 +38,6 @@ public class ProducerProcessor implements Extension {
     private static InjectionTarget<Dog> dogInjectionTarget;
     private static AnnotatedType<Dog> dogAnnotatedType;
     private static boolean overriddenCowProducerCalled;
-
-    static boolean isOverriddenServiceProducerCalled = false;
-    static boolean isServiceProducerFieldObserved = false;
 
     public void cleanup(@Observes BeforeShutdown shutdown) {
         catInjectionTarget = null;
@@ -92,34 +88,6 @@ public class ProducerProcessor implements Extension {
 
     public void processBirdCage(@Observes ProcessInjectionTarget<BirdCage> event) {
         event.setInjectionTarget(new CheckableInjectionTarget(event.getInjectionTarget()));
-    }
-
-    public void processServiceProducer(@Observes ProcessProducer<ServiceProducer, ServiceRemote> producerEvent) {
-        final Producer<ServiceRemote> producer = producerEvent.getProducer();
-        producerEvent.setProducer(new Producer<ServiceRemote>() {
-
-            public void dispose(ServiceRemote instance) {
-                producer.dispose(instance);
-            }
-
-            public Set<InjectionPoint> getInjectionPoints() {
-                return producer.getInjectionPoints();
-            }
-
-            public ServiceRemote produce(CreationalContext<ServiceRemote> ctx) {
-                isOverriddenServiceProducerCalled = true;
-                return producer.produce(ctx);
-            }
-        });
-    }
-
-    /**
-     * FIXME revise parameters order according to CDI-88/CDITCK-174 resolution
-     * 
-     * @param event
-     */
-    public void processServiceProducerField(@Observes ProcessProducerField<ServiceRemote, ServiceProducer> event) {
-        isServiceProducerFieldObserved = true;
     }
 
     public static Producer<Dog> getNoisyDogProducer() {
