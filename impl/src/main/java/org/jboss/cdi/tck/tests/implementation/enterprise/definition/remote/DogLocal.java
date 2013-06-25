@@ -14,14 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.producer;
+package org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote;
 
-import javax.ejb.EJB;
-import javax.enterprise.inject.Produces;
+import javax.ejb.Local;
 
-public class ServiceProducer {
+@Local
+public interface DogLocal {
 
-    @Produces
-    @EJB
-    public ServiceRemote service;
 }

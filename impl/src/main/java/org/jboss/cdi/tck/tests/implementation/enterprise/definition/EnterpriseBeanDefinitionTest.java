@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
-import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SESSION_BEAN;
@@ -46,7 +46,7 @@ import org.testng.annotations.Test;
  * @author Nicklas Karlsson
  * @author Martin Kouba
  */
-@Test(groups = { JAVAEE_FULL }) // The test archive contains a remote EJB
+@Test(groups = { INTEGRATION })
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class EnterpriseBeanDefinitionTest extends AbstractTest {
 
@@ -103,6 +103,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     public void testEnterpriseBeanClassLocalView() {
         Bean<Retriever> dogBean = getUniqueBean(Retriever.class);
         assert dogBean.getTypes().contains(Retriever.class);
+        assert dogBean.getTypes().contains(Dog.class);
     }
 
     @Test
@@ -111,13 +112,6 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     public void testObjectIsInAPITypes() {
         assert getBeans(GiraffeLocal.class).size() == 1;
         assert getBeans(GiraffeLocal.class).iterator().next().getTypes().contains(Object.class);
-    }
-
-    @Test
-    @SpecAssertion(section = SESSION_BEAN_TYPES, id = "d")
-    public void testRemoteInterfacesAreNotInAPITypes() {
-        Bean<DogLocal> dogBean = getBeans(DogLocal.class).iterator().next();
-        assert !dogBean.getTypes().contains(DogRemote.class);
     }
 
     @Test
@@ -135,7 +129,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "bd")
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "bd"), @SpecAssertion(section = SESSION_BEAN_NAME, id = "a") })
     public void testBeanWithStereotype() {
         Bean<PolarBearLocal> polarBearBean = getBeans(PolarBearLocal.class).iterator().next();
         assert polarBearBean.getScope().equals(RequestScoped.class);

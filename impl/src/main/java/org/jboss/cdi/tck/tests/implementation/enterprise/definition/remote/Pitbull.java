@@ -14,24 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
+package org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote;
 
-import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Default;
 import javax.inject.Named;
 
 @Stateful
 @ApplicationScoped
 @Named
-@Default
-public class Pitbull extends Dog implements PitbullLocal, DogLocal {
+public class Pitbull implements DogLocal, DogRemote {
 
-    public static boolean destructorCalled = false;
-
-    @Remove
-    public void bye() {
-        destructorCalled = true;
-    }
 }
