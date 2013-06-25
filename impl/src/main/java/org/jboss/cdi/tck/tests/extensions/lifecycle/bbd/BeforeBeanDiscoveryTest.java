@@ -29,7 +29,10 @@ import javax.enterprise.util.AnnotationLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Bar;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Boss;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Foo;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Pro;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -48,7 +51,8 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeforeBeanDiscoveryTest.class)
                 .withExtension(BeforeBeanDiscoveryObserver.class)
-                .withLibrary(Boss.class).build();
+                .withLibrary(Boss.class, Foo.class, Bar.class, Pro.class)
+                .build();
     }
 
     @Test
@@ -113,10 +117,17 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
         }).size(), 0);
     }
 
+    @SuppressWarnings("serial")
     @Test
     @SpecAssertions({@SpecAssertion(section = BBD, id = "af"), @SpecAssertion(section = BEAN_DISCOVERY, id = "r")})
     public void testAddAnnotatedType() {
         getUniqueBean(Boss.class);
+        assertEquals(getBeans(Bar.class).size(), 0);
+        assertEquals(getBeans(Bar.class, new AnnotationLiteral<Pro>() {
+        }).size(), 1);
+        assertEquals(getBeans(Foo.class).size(), 0);
+        assertEquals(getBeans(Foo.class, new AnnotationLiteral<Pro>() {
+        }).size(), 1);
     }
 
 }
