@@ -27,6 +27,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Timer;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -35,34 +36,56 @@ import org.testng.annotations.Test;
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
+/**
+ *
+ * @author Martin Kouba
+ */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class SessionContextHttpSessionListenerTest extends AbstractTest {
 
-	@ArquillianResource
-	private URL contextPath;
+    @ArquillianResource
+    private URL contextPath;
 
-	@Deployment(testable = false)
-	public static WebArchive createTestArchive() {
-		return new WebArchiveBuilder()
-				.withTestClassDefinition(SessionContextHttpSessionListenerTest.class)
-				.withClasses(SimpleSessionBean.class, IntrospectServlet.class, TestHttpSessionListener.class)
-				.build();
-	}
+    @Deployment(testable = false)
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassDefinition(SessionContextHttpSessionListenerTest.class)
+                .withClasses(SimpleSessionBean.class, IntrospectServlet.class, TestHttpSessionListener.class).build();
+    }
 
-	@Test(groups = INTEGRATION)
-	@SpecAssertion(section = SESSION_CONTEXT, id = "ac")
-	public void testSessionScopeActiveDuringHttpSessionListenerCall() throws Exception {
-		WebClient webClient = new WebClient();
-		webClient.setThrowExceptionOnFailingStatusCode(true);
-		// Create session
-		String sessionBeanId = webClient.getPage(contextPath + "introspect").getWebResponse().getContentAsString();
-		// Verify session scoped bean id
-		assertEquals(webClient.getPage(contextPath + "introspect").getWebResponse().getContentAsString(), sessionBeanId);
-		// Invalidate session
-		webClient.getPage(contextPath + "introspect?mode=invalidate");
-		// Verify session scope was active during listener calls
-		TextPage page = webClient.getPage(contextPath + "introspect?mode=verify");
-		assertTrue(Boolean.valueOf(page.getContent()));
-	}
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = SESSION_CONTEXT, id = "ac")
+    public void testSessionScopeActiveDuringHttpSessionListenerCall() throws Exception {
+        WebClient webClient = new WebClient();
+        webClient.setThrowExceptionOnFailingStatusCode(true);
+        // Create session
+        String sessionBeanId = webClient.getPage(contextPath + "introspect").getWebResponse().getContentAsString();
+        // Verify session scoped bean id
+        assertEquals(webClient.getPage(contextPath + "introspect").getWebResponse().getContentAsString(), sessionBeanId);
+        // Invalidate session
+        webClient.getPage(contextPath + "introspect?mode=invalidate");
+        // Verify session scope was active during listener calls
+        TextPage page = webClient.getPage(contextPath + "introspect?mode=verify");
+        assertTrue(Boolean.valueOf(page.getContent()));
+    }
+
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = SESSION_CONTEXT, id = "ac")
+    public void testSessionScopeActiveDuringHttpSessionListenerCallOnTimeout() throws Exception {
+
+        WebClient webClient = new WebClient();
+        webClient.setThrowExceptionOnFailingStatusCode(true);
+        // Create session
+        String sessionBeanId = webClient.getPage(contextPath + "introspect").getWebResponse().getContentAsString();
+        // Verify session scoped bean id
+        assertEquals(webClient.getPage(contextPath + "introspect").getWebResponse().getContentAsString(), sessionBeanId);
+
+        // Session timeout
+        webClient.getPage(contextPath + "introspect?mode=timeout");
+        Timer.startNew(2000);
+
+        // Verify session scope was active during listener calls
+        TextPage page = webClient.getPage(contextPath + "introspect?mode=verify");
+        assertTrue(Boolean.valueOf(page.getContent()));
+    }
 
 }
