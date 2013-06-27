@@ -9,12 +9,15 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.interceptors.tests.invocationContext;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -27,11 +30,11 @@ import org.testng.annotations.Test;
 
 /**
  * Tests for the InvocationContext implementation
- * 
+ *
  * @author Jozef Hartinger
- * 
+ *
  */
-@SpecVersion(spec = "int", version = "3.1.PFD")
+@SpecVersion(spec = "int", version = "1.2")
 public class InvocationContextTest extends AbstractTest {
 
     @Deployment
@@ -40,69 +43,68 @@ public class InvocationContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "6", id = "d")
+    @SpecAssertions({@SpecAssertion(section = "2.8", id = "aa"), @SpecAssertion(section = "2.3", id = "c")})
     public void testGetTargetMethod() {
         SimpleBean instance = getContextualReference(SimpleBean.class);
         instance.setId(10);
-        assert instance.getId() == 10;
-        assert Interceptor1.isGetTargetOK();
+        assertEquals(instance.getId(), 10);
+        assertTrue(Interceptor1.isGetTargetOK());
     }
 
     @Test
-    @SpecAssertion(section = "6", id = "f")
+    @SpecAssertion(section = "2.3", id = "db")
     public void testGetTimerMethod() {
-        assert getContextualReference(SimpleBean.class).testGetTimer();
+        assertTrue(getContextualReference(SimpleBean.class).testGetTimer());
     }
 
     @Test
-    @SpecAssertion(section = "6", id = "g")
+    @SpecAssertion(section = "2.3", id = "ea")
     public void testGetMethodForAroundInvokeInterceptorMethod() {
-        assert getContextualReference(SimpleBean.class).testGetMethod();
+        assertTrue(getContextualReference(SimpleBean.class).testGetMethod());
     }
 
     @Test
-    @SpecAssertion(section = "6", id = "h")
+    @SpecAssertion(section = "2.3", id = "eb")
     public void testGetMethodForLifecycleCallbackInterceptorMethod() {
         getContextualReference(SimpleBean.class);
-        assert LifecycleCallbackInterceptor.isGetMethodReturnsNull();
+        assertTrue(LifecycleCallbackInterceptor.isGetMethodReturnsNull());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "6", id = "i"), @SpecAssertion(section = "6", id = "j"),
-            @SpecAssertion(section = "6", id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "f"), @SpecAssertion(section = "2.3", id = "ga") })
     public void testMethodParameters() {
-        assert getContextualReference(SimpleBean.class).add(1, 2) == 5;
+        assertEquals(getContextualReference(SimpleBean.class).add(1, 2), 5);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "6", id = "la")
+    @SpecAssertion(section = "2.3", id = "gb")
     public void testIllegalNumberOfParameters() {
         getContextualReference(SimpleBean.class).add2(1, 1);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "6", id = "lb")
+    @SpecAssertion(section = "2.3", id = "gc")
     public void testIllegalTypeOfParameters() {
         assert getContextualReference(SimpleBean.class).add3(1, 1) == 2;
     }
 
     @Test
-    @SpecAssertion(section = "6", id = "o")
+    @SpecAssertion(section = "2.3", id = "k")
     public void testProceedReturnsNullForVoidMethod() {
         getContextualReference(SimpleBean.class).voidMethod();
-        assert Interceptor7.isProceedReturnsNull();
+        assertTrue(Interceptor7.isProceedReturnsNull());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "1", id = "d"), @SpecAssertion(section = "6", id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "ba") })
     public void testContextData() {
         getContextualReference(SimpleBean.class).foo();
-        assert Interceptor8.isContextDataOK();
-        assert Interceptor9.isContextDataOK();
+        assertTrue(Interceptor8.isContextDataOK());
+        assertTrue(Interceptor9.isContextDataOK());
     }
 
     @Test
-    @SpecAssertion(section = "6", id = "n")
+    @SpecAssertion(section = "2.3", id = "j")
     public void testBusinessMethodNotCalledWithoutProceedInvocation() {
         assert getContextualReference(SimpleBean.class).echo("foo").equals("foo");
         assert !SimpleBean.isEchoCalled();

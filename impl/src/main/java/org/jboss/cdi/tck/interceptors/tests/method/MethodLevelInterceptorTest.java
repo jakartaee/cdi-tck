@@ -9,12 +9,14 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.interceptors.tests.method;
+
+import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -25,7 +27,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "3.1.PFD")
+@SpecVersion(spec = "int", version = "1.2")
 public class MethodLevelInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -34,21 +36,20 @@ public class MethodLevelInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3", id = "ca"), @SpecAssertion(section = "8", id = "a"),
-            @SpecAssertion(section = "8", id = "d"), @SpecAssertion(section = "8", id = "g"),
-            @SpecAssertion(section = "8", id = "h") })
+    @SpecAssertions({ @SpecAssertion(section = "2.8", id = "d"), @SpecAssertion(section = "4", id = "a"),
+            @SpecAssertion(section = "2.8", id = "e") })
     public void testInterceptorCanBeAppliedToMoreThanOneMethod() {
         Fish fish = getContextualReference(Fish.class);
-        assert fish.foo().equals("Intercepted bar");
-        assert fish.ping().equals("Intercepted pong");
-        assert fish.getName().equals("Salmon");
-        assert FishInterceptor.getInstanceCount() == 1;
+        assertEquals(fish.foo(), "Intercepted bar");
+        assertEquals(fish.ping(),"Intercepted pong");
+        assertEquals(fish.getName(),"Salmon");
+        assertEquals(FishInterceptor.getInstanceCount(), 1);
     }
 
     @Test
-    @SpecAssertion(section = "8", id = "j")
+    @SpecAssertion(section = "5.5", id = "g")
     public void testExcludeClassInterceptors() {
-        assert getContextualReference(Dog.class).foo().equals("Intercepted bar");
-        assert getContextualReference(Dog.class).ping().equals("pong");
+        assertEquals(getContextualReference(Dog.class).foo(), "Intercepted bar");
+        assertEquals(getContextualReference(Dog.class).ping(), "pong");
     }
 }

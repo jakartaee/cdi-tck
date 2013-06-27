@@ -9,12 +9,16 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.interceptors.tests.lifecycleCallback;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -24,10 +28,11 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "3.1.PFD")
+@SpecVersion(spec = "int", version = "1.2")
 public class LifecycleCallbackInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -36,32 +41,30 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "a")
+    @SpecAssertions({@SpecAssertion(section = "2.1", id = "ab"), @SpecAssertion(section = "2.6", id = "b")})
     public void testPostConstructInterceptor() {
         getContextualReference(Goat.class);
-        assert Goat.isPostConstructInterceptorCalled();
-        assert AnimalInterceptor.isPostConstructInterceptorCalled(Goat.GOAT);
+        assertTrue(Goat.isPostConstructInterceptorCalled());
+        assertTrue(AnimalInterceptor.isPostConstructInterceptorCalled(Goat.GOAT));
         getContextualReference(Hen.class).toString();
-        assert Hen.isPostConstructInterceptorCalled();
-        assert AnimalInterceptor.isPostConstructInterceptorCalled(Hen.HEN);
+        assertTrue(Hen.isPostConstructInterceptorCalled());
+        assertTrue(AnimalInterceptor.isPostConstructInterceptorCalled(Hen.HEN));
         getContextualReference(Cow.class).toString();
-        assert Cow.isPostConstructInterceptorCalled();
-        assert AnimalInterceptor.isPostConstructInterceptorCalled(Cow.COW);
+        assertTrue(Cow.isPostConstructInterceptorCalled());
+        assertTrue(AnimalInterceptor.isPostConstructInterceptorCalled(Cow.COW));
     }
 
-    @Test
-    @SpecAssertion(section = "5", id = "a")
-    // WELD-436
+    @SpecAssertions({@SpecAssertion(section = "2.1", id = "ab"), @SpecAssertion(section = "2.6", id = "c")})
     public void testPreDestroyInterceptor() {
         createAndDestroyInstance(Goat.class);
-        assert Goat.isPreDestroyInterceptorCalled();
-        assert AnimalInterceptor.isPreDestroyInterceptorCalled(Goat.GOAT);
+        assertTrue(Goat.isPreDestroyInterceptorCalled());
+        assertTrue(AnimalInterceptor.isPreDestroyInterceptorCalled(Goat.GOAT));
         createAndDestroyInstance(Hen.class);
-        assert Hen.isPreDestroyInterceptorCalled();
-        assert AnimalInterceptor.isPreDestroyInterceptorCalled(Hen.HEN);
+        assertTrue(Hen.isPreDestroyInterceptorCalled());
+        assertTrue(AnimalInterceptor.isPreDestroyInterceptorCalled(Hen.HEN));
         createAndDestroyInstance(Cow.class);
-        assert Cow.isPreDestroyInterceptorCalled();
-        assert AnimalInterceptor.isPreDestroyInterceptorCalled(Cow.COW);
+        assertTrue(Cow.isPreDestroyInterceptorCalled());
+        assertTrue(AnimalInterceptor.isPreDestroyInterceptorCalled(Cow.COW));
     }
 
     @SuppressWarnings("unchecked")
@@ -75,44 +78,44 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "c")
+    @SpecAssertions({@SpecAssertion(section = "2.1", id = "ab"), @SpecAssertion(section = "2.1", id = "d")})
     public void testAroundInvokeAndLifeCycleCallbackInterceptorsCanBeDefinedOnTheSameClass() {
-        assert getContextualReference(Goat.class).echo("foo").equals("foofoo");
+        assertEquals(getContextualReference(Goat.class).echo("foo"), "foofoo");
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "j")
+    @SpecAssertion(section = "2.6", id = "ja")
     public void testPublicLifecycleInterceptorMethod() {
         getContextualReference(Chicken.class);
-        assert PublicLifecycleInterceptor.isIntercepted();
+        assertTrue(PublicLifecycleInterceptor.isIntercepted());
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "k")
+    @SpecAssertion(section = "2.6", id = "jc")
     public void testProtectedLifecycleInterceptorMethod() {
         getContextualReference(Chicken.class);
-        assert ProtectedLifecycleInterceptor.isIntercepted();
+        assertTrue(ProtectedLifecycleInterceptor.isIntercepted());
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "l")
+    @SpecAssertion(section = "2.6", id = "jb")
     public void testPrivateLifecycleInterceptorMethod() {
         getContextualReference(Chicken.class);
-        assert PrivateLifecycleInterceptor.isIntercepted();
+        assertTrue(PrivateLifecycleInterceptor.isIntercepted());
     }
 
     @Test
-    @SpecAssertion(section = "5", id = "m")
+    @SpecAssertion(section = "2.6", id = "jd")
     public void testPackagePrivateLifecycleInterceptorMethod() {
         getContextualReference(Chicken.class);
-        assert PackagePrivateLifecycleInterceptor.isIntercepted();
+        assertTrue(PackagePrivateLifecycleInterceptor.isIntercepted());
     }
 
     @Test
-    @SpecAssertion(section = "8", id = "c")
+    @SpecAssertion(section = "2.8", id = "b")
     public void testLifeCycleCallbackInterceptorNotInvokedForMethodLevelInterceptor() {
-        assert getContextualReference(Sheep.class).foo().equals("bar");
-        assert SheepInterceptor.isAroundInvokeCalled();
-        assert !SheepInterceptor.isPostConstructCalled();
+        assertEquals(getContextualReference(Sheep.class).foo(), "bar");
+        assertTrue(SheepInterceptor.isAroundInvokeCalled());
+        assertFalse(SheepInterceptor.isPostConstructCalled());
     }
 }

@@ -30,12 +30,12 @@ import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * There are no assertions assigned at the moment - it's not clear whether Interceptors 1.2 spec should have its own TCK.
- *
  * <p>
  * This test was originally part of the Weld test suite.
  * <p>
@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec = "int", version = "3.1.PFD")
+@SpecVersion(spec = "int", version = "1.2")
 public class SessionBeanConstructorInterceptionTest extends AbstractTest {
 
     @Deployment
@@ -58,28 +58,32 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
                                         BravoInterceptor.class.getName()).up()).build();
     }
 
-    @Test(groups = INTEGRATION, dataProvider=ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "a"), @SpecAssertion(section = "3.1", id = "b") })
     public void testConstructorLevelBinding(Instance<BeanWithConstructorLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
         assertSequenceEquals(AlphaInterceptor2.class, BeanWithConstructorLevelBinding.class);
     }
 
-    @Test(groups = INTEGRATION, dataProvider=ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "a"), @SpecAssertion(section = "3.1", id = "b") })
     public void testTypeLevelBinding(Instance<BeanWithTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
         assertSequenceEquals(AlphaInterceptor1.class, BeanWithTypeLevelBinding.class);
     }
 
-    @Test(groups = INTEGRATION, dataProvider=ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "c") })
     public void testTypeLevelAndConstructorLevelBinding(Instance<BeanWithConstructorLevelAndTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
         assertSequenceEquals(AlphaInterceptor1.class, BravoInterceptor.class, BeanWithConstructorLevelAndTypeLevelBinding.class);
     }
 
-    @Test(groups = INTEGRATION, dataProvider=ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "d") })
     public void testOverridingTypeLevelBinding(Instance<BeanOverridingTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();

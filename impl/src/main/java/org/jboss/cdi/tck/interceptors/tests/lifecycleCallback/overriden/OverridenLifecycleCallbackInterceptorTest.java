@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -29,7 +29,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "3.1.PFD")
+@SpecVersion(spec = "int", version = "1.2")
 public class OverridenLifecycleCallbackInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -38,18 +38,18 @@ public class OverridenLifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.1", id = "g")
+    @SpecAssertion(section = "5.2.1", id = "bb")
     public void testCallbackOverridenByCallback() {
 
         Bird.reset();
         Eagle.reset();
 
-        Bean<Eagle> fooBean = getUniqueBean(Eagle.class);
-        CreationalContext<Eagle> ctx = getCurrentManager().createCreationalContext(fooBean);
-        Eagle foo = fooBean.create(ctx);
+        Bean<Eagle> eagleBean = getUniqueBean(Eagle.class);
+        CreationalContext<Eagle> ctx = getCurrentManager().createCreationalContext(eagleBean);
+        Eagle foo = eagleBean.create(ctx);
 
         foo.ping();
-        fooBean.destroy(foo, ctx);
+        eagleBean.destroy(foo, ctx);
 
         assertEquals(Bird.getInitBirdCalled().get(), 0);
         assertEquals(Eagle.getInitEagleCalled().get(), 1);
@@ -58,18 +58,18 @@ public class OverridenLifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.1", id = "g")
+    @SpecAssertion(section = "5.2.1", id = "bb")
     public void testCallbackOverridenByNonCallback() {
 
         Bird.reset();
         Falcon.reset();
 
-        Bean<Falcon> bazBean = getUniqueBean(Falcon.class);
-        CreationalContext<Falcon> ctx = getCurrentManager().createCreationalContext(bazBean);
-        Falcon baz = bazBean.create(ctx);
+        Bean<Falcon> falconBean = getUniqueBean(Falcon.class);
+        CreationalContext<Falcon> ctx = getCurrentManager().createCreationalContext(falconBean);
+        Falcon baz = falconBean.create(ctx);
 
         baz.ping();
-        bazBean.destroy(baz, ctx);
+        falconBean.destroy(baz, ctx);
 
         assertEquals(Bird.getInitBirdCalled().get(), 0);
         assertEquals(Falcon.getInitFalconCalled().get(), 0);

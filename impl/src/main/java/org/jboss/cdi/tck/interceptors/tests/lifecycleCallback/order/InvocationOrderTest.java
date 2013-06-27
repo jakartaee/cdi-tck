@@ -9,12 +9,14 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.interceptors.tests.lifecycleCallback.order;
+
+import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -25,7 +27,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "3.1.PFD")
+@SpecVersion(spec = "int", version = "1.2")
 public class InvocationOrderTest extends AbstractTest {
 
     @Deployment
@@ -34,11 +36,11 @@ public class InvocationOrderTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.1", id = "c"), @SpecAssertion(section = "5.1", id = "d"),
-            @SpecAssertion(section = "5.1", id = "e"), @SpecAssertion(section = "5.1", id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "b"), @SpecAssertion(section = "5.5", id = "c"),
+            @SpecAssertion(section = "5.2.2", id = "a"), @SpecAssertion(section = "5.2.1", id = "aa"),
+            @SpecAssertion(section = "5.2.1", id = "ab") })
     public void testInvocationOrder() {
         getContextualReference(LakeCargoShip.class);
-        int s = LakeCargoShip.getSequence();
-        assert LakeCargoShip.getSequence() == 7;
+        assertEquals(LakeCargoShip.getSequence(), 7);
     }
 }
