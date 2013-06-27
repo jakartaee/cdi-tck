@@ -48,7 +48,7 @@ import org.testng.annotations.Test;
  * <li>lib 2 - charlie - does not declare any alternative</li>
  * </ul>
  *
- * Expected result: {@link CharlieResourceProducer} resource is available for injection in all bean archives
+ * Expected result: {@link BravoResourceProducer} resource is available for injection in all bean archives
  *
  * @author Martin Kouba
  *
