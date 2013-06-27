@@ -1425,7 +1425,7 @@
     <section id="declaring_resource" title="Declaring a resource" level="3">
         <assertion id="aa" testable="false">
             <text>A resource may be declared by specifying a Java EE component environment injection annotation as part of a producer field declaration.</text>
-            <note>Introductory text for the folloiwing assertions</note>
+            <note>Introductory text for the following assertions</note>
         </assertion>
 
         <assertion id="bb">
@@ -1462,7 +1462,7 @@
         </assertion>
 
         <assertion id="j">
-            <text>If the matching object in the Java EE component environment is not of the same type as the producer field declaration, the container automatically detects the problem and treats it as a definition errors.</text>
+            <text>If the matching object in the Java EE component environment is not of the same type as the producer field declaration, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
     </section>
@@ -2945,7 +2945,7 @@
         </group>
 
         <group>
-            <text>The container must ensure that: Initializer methods declared by a class X in the type hierarchy of the bean are called after all injected fields declared by X or by superclasses of X have been initialized, and after all Java EE component environment resource dependencies declared by X or by superclasses of X have been injected. Any |@PostConstruct| callback declared by a class X in the type hierarchy of the bean is called after all initializer meth- ods declared by X or by superclasses of X have been called, after all injected fields declared by X or by superclasses of X have been initialized, and after all Java EE component environment resource dependencies declared by X
+            <text>The container must ensure that: Initializer methods declared by a class X in the type hierarchy of the bean are called after all injected fields declared by X or by superclasses of X have been initialized, and after all Java EE component environment resource dependencies declared by X or by superclasses of X have been injected. Any |@PostConstruct| callback declared by a class X in the type hierarchy of the bean is called after all initializer methods declared by X or by superclasses of X have been called, after all injected fields declared by X or by superclasses of X have been initialized, and after all Java EE component environment resource dependencies declared by X
                 or by superclasses of X have been injected. Any servlet |init()| method is called after all initializer methods have been called, all injected fields have been initialized and all Java EE component environment resource dependencies have been injected.
             </text>
             <assertion id="ba">
