@@ -49,7 +49,7 @@ public final class BeanLookupUtils {
      */
     public static <T> T getContextualReference(BeanManager beanManager, Class<T> beanType, Annotation... qualifiers) {
         Set<Bean<?>> beans = getBeans(beanManager, beanType, qualifiers);
-        return getContextualReference(beanManager, beanType, beans);
+        return BeanLookupUtils.<T>getContextualReference(beanManager, beanType, beans);
     }
 
     /**
@@ -63,7 +63,7 @@ public final class BeanLookupUtils {
             Annotation... qualifiers) {
         Type beanType = beanTypeLiteral.getType();
         Set<Bean<?>> beans = getBeans(beanManager, beanType, qualifiers);
-        return getContextualReference(beanManager, beanType, beans);
+        return BeanLookupUtils.<T>getContextualReference(beanManager, beanType, beans);
     }
 
     /**
@@ -80,7 +80,7 @@ public final class BeanLookupUtils {
         if (beans == null || beans.isEmpty()) {
             return null;
         }
-        return getContextualReference(beanManager, beanType, beans);
+        return BeanLookupUtils.<T>getContextualReference(beanManager, beanType, beans);
     }
 
     private static Set<Bean<?>> getBeans(BeanManager beanManager, Type beanType, Annotation... qualifiers) {

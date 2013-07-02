@@ -91,7 +91,7 @@ public abstract class AbstractTest extends Arquillian {
      * @param requiredAnnotationTypes The annotations to match
      * @return True if match, false otherwise
      */
-    public boolean annotationSetMatches(Set<? extends Annotation> annotations,
+    protected boolean annotationSetMatches(Set<? extends Annotation> annotations,
             Class<? extends Annotation>... requiredAnnotationTypes) {
         List<Class<? extends Annotation>> annotationTypeList = new ArrayList<Class<? extends Annotation>>();
         annotationTypeList.addAll(Arrays.asList(requiredAnnotationTypes));
@@ -110,12 +110,12 @@ public abstract class AbstractTest extends Arquillian {
      * @param requiredAnnotationTypes The required annotations
      * @return <code>true</code> if speficied set matches required annotations, <code>false</code> otherwise
      */
-    public boolean annotationSetMatches(Set<? extends Annotation> annotations, Annotation... requiredAnnotations) {
+    protected boolean annotationSetMatches(Set<? extends Annotation> annotations, Annotation... requiredAnnotations) {
         List<Annotation> requiredAnnotationList = new ArrayList<Annotation>();
         return requiredAnnotations.length == annotations.size() && annotations.containsAll(requiredAnnotationList);
     }
 
-    public boolean rawTypeSetMatches(Set<Type> types, Class<?>... requiredTypes) {
+    protected boolean rawTypeSetMatches(Set<Type> types, Class<?>... requiredTypes) {
         List<Class<?>> typeList = new ArrayList<Class<?>>();
         typeList.addAll(Arrays.asList(requiredTypes));
         for (Type type : types) {
@@ -128,44 +128,44 @@ public abstract class AbstractTest extends Arquillian {
         return typeList.size() == 0;
     }
 
-    public boolean typeSetMatches(Collection<? extends Type> types, Type... requiredTypes) {
+    protected boolean typeSetMatches(Collection<? extends Type> types, Type... requiredTypes) {
         List<Type> typeList = Arrays.asList(requiredTypes);
         return requiredTypes.length == types.size() && types.containsAll(typeList);
     }
 
-    public <T> Bean<T> getUniqueBean(Class<T> type, Annotation... bindings) {
+    protected <T> Bean<T> getUniqueBean(Class<T> type, Annotation... bindings) {
         Set<Bean<T>> beans = getBeans(type, bindings);
         return resolveUniqueBean(type, beans);
     }
 
-    public <T> Bean<T> getUniqueBean(TypeLiteral<T> type, Annotation... bindings) {
+    protected <T> Bean<T> getUniqueBean(TypeLiteral<T> type, Annotation... bindings) {
         Set<Bean<T>> beans = getBeans(type, bindings);
         return resolveUniqueBean(type.getType(), beans);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public <T> Set<Bean<T>> getBeans(Class<T> type, Annotation... bindings) {
+    protected <T> Set<Bean<T>> getBeans(Class<T> type, Annotation... bindings) {
         return (Set) getCurrentManager().getBeans(type, bindings);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public <T> Set<Bean<T>> getBeans(TypeLiteral<T> type, Annotation... bindings) {
+    protected <T> Set<Bean<T>> getBeans(TypeLiteral<T> type, Annotation... bindings) {
         return (Set) getCurrentManager().getBeans(type.getType(), bindings);
     }
 
-    public <T> T getContextualReference(Class<T> beanType, Annotation... qualifiers) {
-        return BeanLookupUtils.getContextualReference(getCurrentManager(), beanType, qualifiers);
+    protected <T> T getContextualReference(Class<T> beanType, Annotation... qualifiers) {
+        return BeanLookupUtils.<T>getContextualReference(getCurrentManager(), beanType, qualifiers);
     }
 
-    public <T> T getContextualReference(TypeLiteral<T> beanType, Annotation... qualifiers) {
-        return BeanLookupUtils.getContextualReference(getCurrentManager(), beanType, qualifiers);
+    protected <T> T getContextualReference(TypeLiteral<T> beanType, Annotation... qualifiers) {
+        return BeanLookupUtils.<T>getContextualReference(getCurrentManager(), beanType, qualifiers);
     }
 
-    public <T> T getContextualReference(String name, Class<T> beanType) {
-        return BeanLookupUtils.getContextualReference(getCurrentManager(), name, beanType);
+    protected <T> T getContextualReference(String name, Class<T> beanType) {
+        return BeanLookupUtils.<T>getContextualReference(getCurrentManager(), name, beanType);
     }
 
-    public <T> DependentInstance<T> newDependentInstance(Class<T> beanType, Annotation... qualifiers) {
+    protected <T> DependentInstance<T> newDependentInstance(Class<T> beanType, Annotation... qualifiers) {
         return new DependentInstance<T>(getCurrentManager(), beanType, qualifiers);
     }
 

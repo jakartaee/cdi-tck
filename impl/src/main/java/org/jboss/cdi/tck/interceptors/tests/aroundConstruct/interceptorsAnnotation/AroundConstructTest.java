@@ -50,7 +50,7 @@ public class AroundConstructTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "2.8", id = "ab"), @SpecAssertion(section = "2.3", id = "c"), @SpecAssertion(section = "2.3", id = "eb"),
-            @SpecAssertion(section = "2.3", id = "f"), @SpecAssertion(section = "2.6", id = "a"), })
+            @SpecAssertion(section = "2.3", id = "f"), @SpecAssertion(section = "2.6", id = "a") })
     public void testInterceptorInvocation(Instance<Alpha> instance) {
         AlphaInterceptor.reset();
         instance.get();
@@ -58,7 +58,7 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "ga"), })
+    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "ga") })
     public void testReplacingParameters(Instance<Bravo> instance) {
         BravoInterceptor.reset();
         Bravo bravo = instance.get();
