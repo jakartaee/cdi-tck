@@ -285,9 +285,15 @@
             <text>The |AroundConstruct| interceptor methods may be only defined on interceptor classes and/or superclasses of interceptor classes. The |AroundConstruct| callback should not be defined on the target class.</text>
         </assertion>
 
-        <assertion id="e">
+        <group>
             <text>All other interceptor methods that interpose on the target instance lifecycle event callbacks can be defined on an interceptor class and/or directly on the target class.</text>
-        </assertion>
+            <assertion id="ea">
+                <text>Test |PostConstruct| interceptor method.</text>
+            </assertion>
+            <assertion id="eb">
+                <text>Test |PreDestroy| interceptor method.</text>
+            </assertion>
+        </group>
 
         <assertion id="f">
             <text>A single lifecycle callback interceptor method may be used to interpose on multiple callback events.</text>
@@ -479,21 +485,45 @@
 
     <section id="3.3" title="Binding an Interceptor to a Component">
 
-        <assertion id="a">
+        <group>
             <text>An interceptor may be bound to a component by annotating the component class, a method, or constructor of the component class, with the interceptor binding type.</text>
-        </assertion>
+            <assertion id="aa">
+                <text>Test a component class.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test a method.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Test a constructor.</text>
+            </assertion>
+        </group>
 
-        <assertion id="b">
+        <group>
             <text>A component class, method, or constructor of a component class may declare multiple interceptor bindings.</text>
-        </assertion>
+            <assertion id="ba">
+                <text>Test a component class.</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Test a method.</text>
+            </assertion>
+            <assertion id="bc">
+                <text>Test a constructor.</text>
+            </assertion>
+        </group>
 
         <assertion id="c">
             <text>The set of interceptor bindings for a method or constructor are those declared at class level combined with those declared at method or constructor level.</text>
         </assertion>
 
-        <assertion id="d">
+        <group>
             <text>An interceptor binding declared on a method or constructor replaces an interceptor binding of the same type declared at class level or inherited from a superclass.</text>
-        </assertion>
+            <assertion id="da">
+                <text>Test a constructor.</text>
+            </assertion>
+            <assertion id="db">
+                <text>Test a method.</text>
+            </assertion>
+        </group>
 
         <assertion id="e">
             <text>An extension specification may define additional rules for combining interceptor bindings, such as interceptors defined via a CDI stereotype.</text>
@@ -511,17 +541,27 @@
 
     <section id="3.4" title="Interceptor Resolution">
 
-        <assertion id="a">
+        <assertion id="a" testable="false">
             <text>The process of matching interceptors to a certain lifecycle callback method, timeout method, business method or a constructor of a certain component is called interceptor resolution.</text>
+            <note>Statement of intent</note>
         </assertion>
 
         <assertion id="b">
             <text>For a lifecycle callback, the interceptor bindings include the interceptor bindings declared or inherited by the component at the class level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings.</text>
         </assertion>
 
-        <assertion id="c">
+        <group>
             <text>For a business method, timeout method, or constructor the interceptor bindings include the interceptor bindings declared or inherited by the component at the class level, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings, together with all interceptor bindings declared on the constructor or method, including, recursively, interceptor bindings declared as meta-annotations of other interceptor bindings.</text>
-        </assertion>
+            <assertion id="ca">
+                <text>Test a business method.</text>
+            </assertion>
+            <assertion id="cb">
+                <text>Test a timeout method.</text>
+            </assertion>
+            <assertion id="cc">
+                <text>Test a constructor.</text>
+            </assertion>
+        </group>
 
         <group>
             <text>An interceptor is bound to a method or constructor if:</text>
@@ -558,6 +598,7 @@
 
         <assertion id="c">
             <text>Array-valued or annotation-valued members of an interceptor binding type are not supported. An extension specification may add support for these member types. For example the CDI specification adds the |javax.enterprise.util.Nonbinding| annotation, allowing array-valued or annotation-valued members to be used on the annotation type, but ignored by the resolution process.</text>
+            <note>Testing |javax.enterprise.util.Nonbinding| annotation.</note>
         </assertion>
 
         <assertion id="d">
@@ -674,12 +715,14 @@
 
     <section id="5.3" title="Ordering Interceptors using the Priority Annotation">
 
-        <assertion id="a">
+        <assertion id="a" testable="false">
             <text>An interceptor bound to a component, a component method, or constructor using interceptor binding may be enabled for the entire application by applying the |Priority| annotation, along with a priority value, on the interceptor class.</text>
+            <note>Tested within CDI TCK, section 9.4 Interceptor enablement and ordering.</note>
         </assertion>
 
-        <assertion id="b">
+        <assertion id="b" testable="false">
             <text>Interceptors with smaller priority values are called first.</text>
+            <note>Tested within CDI TCK, section 9.4 Interceptor enablement and ordering.</note>
         </assertion>
 
         <assertion id="c" testable="false">
@@ -688,7 +731,7 @@
         </assertion>
 
         <assertion id="d">
-            <text>The Priority annotation is ignored on interceptors bound to a component using the |Interceptors| annotation.</text>
+            <text>The |Priority| annotation is ignored on interceptors bound to a component using the |Interceptors| annotation.</text>
         </assertion>
 
         <assertion id="e" testable="false">

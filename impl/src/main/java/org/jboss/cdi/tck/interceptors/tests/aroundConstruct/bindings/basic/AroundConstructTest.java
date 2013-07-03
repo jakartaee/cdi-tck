@@ -59,7 +59,7 @@ public class AroundConstructTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "2.3", id = "c"), @SpecAssertion(section = "2.3", id = "eb"),
-        @SpecAssertion(section = "2.3", id = "f"), @SpecAssertion(section = "2.6", id = "a") })
+            @SpecAssertion(section = "2.3", id = "f"), @SpecAssertion(section = "2.6", id = "a") })
     public void testInterceptorInvocation(Instance<Alpha> instance) {
         AlphaInterceptor.reset();
         instance.get();
@@ -67,7 +67,7 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "ga") })
+    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "ga"), @SpecAssertion(section = "2.1", id = "e") })
     public void testReplacingParameters(Instance<Bravo> instance) {
         BravoInterceptor.reset();
         Bravo bravo = instance.get();
@@ -77,7 +77,8 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "2.6.1", id = "a"), @SpecAssertion(section = "2.6.1", id = "b")})
+    @SpecAssertions({ @SpecAssertion(section = "2.6.1", id = "a"), @SpecAssertion(section = "2.6.1", id = "b"),
+            @SpecAssertion(section = "3.2", id = "c") })
     public void testExceptions(Instance<Charlie> instance) {
         CharlieInterceptor1.reset();
         CharlieInterceptor2.reset();

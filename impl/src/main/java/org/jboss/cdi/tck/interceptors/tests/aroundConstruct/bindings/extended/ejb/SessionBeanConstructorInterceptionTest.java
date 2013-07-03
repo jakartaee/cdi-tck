@@ -83,7 +83,7 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "da") })
     public void testOverridingTypeLevelBinding(Instance<BeanOverridingTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();

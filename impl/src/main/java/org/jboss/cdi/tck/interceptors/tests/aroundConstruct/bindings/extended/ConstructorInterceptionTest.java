@@ -58,11 +58,21 @@ public class ConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "a"), @SpecAssertion(section = "3.1", id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "a"), @SpecAssertion(section = "3.1", id = "b"),
+            @SpecAssertion(section = "3.3", id = "ac"), })
     public void testConstructorLevelBinding(Instance<BeanWithConstructorLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
         assertSequenceEquals(AlphaInterceptor2.class, BeanWithConstructorLevelBinding.class);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "bc"), @SpecAssertion(section = "3.4", id = "da"),
+            @SpecAssertion(section = "3.4", id = "db"), @SpecAssertion(section = "3.4", id = "dc") })
+    public void testMultipleConstructorLevelBinding(Instance<BeanWithMultipleConstructorLevelBinding> instance) {
+        ActionSequence.reset();
+        instance.get();
+        assertSequenceEquals(AlphaInterceptor2.class, BravoInterceptor.class, BeanWithMultipleConstructorLevelBinding.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -82,7 +92,7 @@ public class ConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "da") })
     public void testOverridingTypeLevelBinding(Instance<BeanOverridingTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -91,9 +101,9 @@ public class ConstructorInterceptionTest extends AbstractTest {
 
     private void assertSequenceEquals(Class<?>... expected) {
         List<String> data = ActionSequence.getSequence().getData();
-        assertEquals(expected.length, data.size());
+        assertEquals(data.size(), expected.length);
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i].getSimpleName(), data.get(i));
+            assertEquals(data.get(i), expected[i].getSimpleName());
         }
     }
 }
