@@ -14,13 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.member;
+package org.jboss.cdi.tck.interceptors.tests.definition.member;
 
-import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
-import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+
+import java.util.List;
+
+import javax.enterprise.inject.spi.InterceptionType;
+import javax.enterprise.inject.spi.Interceptor;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -29,6 +33,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -38,8 +43,13 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "int", version = "1.2")
 public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
+
+    @SuppressWarnings("serial")
+    public abstract class PlantInterceptorBindingLiteral extends AnnotationLiteral<PlantInterceptorBinding> implements
+            PlantInterceptorBinding {
+    }
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -50,12 +60,12 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
                                 .create(BeansDescriptor.class)
                                 .createInterceptors()
                                 .clazz(IncreasingInterceptor.class.getName(), DecreasingInterceptor.class.getName(),
-                                        VehicleCountInterceptor.class.getName()).up())
+                                        VehicleCountInterceptor.class.getName(), PlantInterceptor.class.getName()).up())
                 .build();
     }
 
     @Test
-    @SpecAssertion(section = CONCEPTS, id = "f")
+    @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "a") })
     public void testInterceptorBindingTypeWithMember() {
         Farm farm = getContextualReference(Farm.class);
         assertEquals(farm.getAnimalCount(), 20);
@@ -64,11 +74,37 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "b")
+    @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "c") })
     public void testInterceptorBindingTypeWithNonBindingMember() {
         Farm farm = getContextualReference(Farm.class);
-        assertEquals(farm.getVehicleCount(), 20);
-        assertTrue(VehicleCountInterceptor.isIntercepted());
+        assert farm.getVehicleCount() == 20;
+        assert VehicleCountInterceptor.isIntercepted();
     }
 
+    /**
+     * Note that we cannot directly test that member values are compared using equals() as only primitive types, String, Class,
+     * enum and annotation are permitted to be annotation attributes. We test that two different String objects used as member
+     * values are considered equal when resolving interceptor (interceptor is resolved and applied).
+     */
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "b") })
+    public void testInterceptorBindingTypeMemberValuesComparedWithEquals() {
+
+        @SuppressWarnings("serial")
+        List<Interceptor<?>> interceptors = getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE,
+                new PlantInterceptorBindingLiteral() {
+
+                    public String name() {
+                        return new String("TEST");
+                    }
+
+                    public int age() {
+                        return 1;
+                    }
+                });
+        assertTrue(interceptors.size() > 0);
+        Plant plant = getContextualReference(Plant.class);
+        plant.grow();
+        assertTrue(PlantInterceptor.isIntercepted());
+    }
 }

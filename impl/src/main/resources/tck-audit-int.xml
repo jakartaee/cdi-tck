@@ -407,8 +407,9 @@
 
     <section id="3" title="Associating Interceptors using Interceptor Bindings">
 
-        <assertion id="a">
+        <assertion id="a" testable="false">
             <text>Interceptor bindings are intermediate annotations that may be used to associate interceptors with any component that is not itself an interceptor.</text>
+            <note>Statement of intent</note>
         </assertion>
 
     </section>

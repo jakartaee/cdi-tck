@@ -9,27 +9,28 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.member;
+package org.jboss.cdi.tck.interceptors.tests.definition.member;
 
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@Interceptor
-@PlantInterceptorBinding(age = 1, name = "TEST")
-public class PlantInterceptor {
+import org.jboss.cdi.tck.interceptors.tests.definition.member.AnimalCountInterceptorBinding.Operation;
 
+@Interceptor
+@AnimalCountInterceptorBinding(Operation.DECREASE)
+public class DecreasingInterceptor {
     private static boolean intercepted = false;
 
     @AroundInvoke
     public Object aroundInvoke(InvocationContext ctx) throws Exception {
         intercepted = true;
-        return ctx.proceed();
+        return ((Integer) ctx.proceed()) - 10;
     }
 
     public static boolean isIntercepted() {

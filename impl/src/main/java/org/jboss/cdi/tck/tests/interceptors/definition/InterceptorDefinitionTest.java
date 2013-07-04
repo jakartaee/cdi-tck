@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
-import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.BM_INTERCEPTOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS;
@@ -189,11 +189,8 @@ public class InterceptorDefinitionTest extends AbstractTest {
         getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, nonBinding);
     }
 
-    @Test(groups = INTERCEPTORS_SPEC)
-    // @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "a"), @SpecAssertion(section =
-    // INTERCEPTOR_BINDINGS, id = "b"),
-    // @SpecAssertion(section = INTERCEPTOR_BINDINGS, id = "c"), @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a")
-    // })
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c") })
     public void testInterceptorBindingAnnotation() {
         List<Interceptor<?>> interceptors = getLoggedInterceptors();
         assertTrue(interceptors.size() > 1);
@@ -224,9 +221,9 @@ public class InterceptorDefinitionTest extends AbstractTest {
         assertTrue(NetworkLogger.intercepted);
     }
 
-    @Test(groups = INTERCEPTORS_SPEC)
-    // @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS, id = "a"),
-    //        @SpecAssertion(section = INTERCEPTOR_BINDING_WITH_ADDITIONAL_INTERCEPTOR_BINDINGS, id = "b") })
+    // This is also tested in the Interceptors part of the TCK
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c") })
     public void testInterceptorBindingsCanDeclareOtherInterceptorBindings() {
         AtomicInterceptor.intercepted = false;
         MissileInterceptor.intercepted = false;

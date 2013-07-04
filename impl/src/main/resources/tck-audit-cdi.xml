@@ -5238,6 +5238,10 @@
 
     <section id="binding_interceptor_to_bean" title="Binding an interceptor to a bean" level="2">
 
+        <assertion id="c">
+            <text>Interceptor bindings may be used to associate interceptors with any managed bean that is not a decorator.</text>
+        </assertion>
+
         <assertion id="a">
             <text>The set of interceptor bindings for a method are those declared at class level includes those declared on stereotypes. An interceptor binding declared on a bean class replaces an interceptor binding of the same type declared by a stereotype that is applied to the bean class.</text>
         </assertion>

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 
-import static org.jboss.cdi.tck.TestGroups.INTERCEPTORS_SPEC;
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEAN;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -36,6 +36,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -99,8 +100,8 @@ public class SyntheticBeanTest extends AbstractTest {
         testOffice(bean);
     }
 
-    @Test(groups = INTERCEPTORS_SPEC)
-    // @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a")
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c") })
     public void testSyntheticBeanIntercepted() {
         assertTrue(office.intercepted());
         assertTrue(serializableOffice.intercepted());
