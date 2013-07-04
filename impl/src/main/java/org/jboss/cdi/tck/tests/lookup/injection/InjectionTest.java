@@ -46,7 +46,9 @@ public class InjectionTest extends AbstractTest {
                 .withTestClassPackage(InjectionTest.class)
                 .withWebXml(
                         Descriptors.create(WebAppDescriptor.class).createEnvEntry().envEntryName("greeting")
-                                .envEntryType("java.lang.String").envEntryValue("Hello").up()).build();
+                                .envEntryType("java.lang.String").envEntryValue("Hello").up().createEnvEntry()
+                                .envEntryName("game").envEntryType("java.lang.String").envEntryValue("poker").up())
+                .build();
     }
 
     @Test(groups = INTEGRATION)

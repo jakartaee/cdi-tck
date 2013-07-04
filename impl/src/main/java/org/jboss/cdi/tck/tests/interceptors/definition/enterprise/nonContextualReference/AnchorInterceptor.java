@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,8 +16,21 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.nonContextualReference;
 
-public interface Ship {
-    void defend();
+import java.io.Serializable;
 
-    void stop();
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
+
+@SuppressWarnings("serial")
+@Interceptor
+@Waterborne
+public class AnchorInterceptor implements Serializable {
+    public static boolean intercepted = false;
+
+    @AroundInvoke
+    public Object alwaysReturnThat(InvocationContext ctx) throws Exception {
+        intercepted = true;
+        return ctx.proceed();
+    }
 }

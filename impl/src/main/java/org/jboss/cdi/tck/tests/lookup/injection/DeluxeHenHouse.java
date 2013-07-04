@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.injection;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.inject.Inject;
 
 public class DeluxeHenHouse extends HenHouse {
@@ -28,17 +29,32 @@ public class DeluxeHenHouse extends HenHouse {
     @Inject
     Wolf wolf;
 
+    private String game;
+
+    private SessionBean sessionBean;
+
     public boolean initializerCalledAfterInjectionPointsInit = false;
 
     public boolean postConstructCalledAfterInitializers = false;
 
     @Inject
     public void initialize() {
-        initializerCalledAfterInjectionPointsInit = (fox != null && wolf != null && "Hello".equals(greeting) && "Hello".equals(superGreeting));
+        initializerCalledAfterInjectionPointsInit = (fox != null && wolf != null && "Hello".equals(greeting) && "Hello".equals(superGreeting)
+                && game.equals("poker") && superGame.equals("poker") && sessionBean.ping() && superSessionBean.ping());
     }
 
     @PostConstruct
     public void postConstruct() {
         postConstructCalledAfterInitializers = (initializerCalledAfterInjectionPointsInit && hen != null);
+    }
+    
+    @Resource(name = "game")
+    private void setGame(String game) {
+        this.game = game;
+    }
+
+    @EJB
+    private void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
     }
 }

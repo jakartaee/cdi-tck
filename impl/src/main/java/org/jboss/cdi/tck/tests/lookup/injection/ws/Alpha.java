@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,38 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injection;
+package org.jboss.cdi.tck.tests.lookup.injection.ws;
 
-import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.xml.ws.WebServiceRef;
 
-public class HenHouse {
+public class Alpha extends Bravo {
 
-    @Resource(name = "greeting")
-    protected String superGreeting;
+    public boolean initializerCalledAfterResourceInjection = false;
 
-    protected String superGame;
-
-    @Inject
-    public Fox fox;
-
-    protected Hen hen;
-
-    protected SessionBean superSessionBean;
+    @WebServiceRef(value = TranslatorEndpointService.class)
+    Translator translatorField;
+    
+    Translator translator;
 
     @Inject
-    public void initializeHenHouse() {
-        this.hen = (fox != null ? new Hen() : null);
+    public void initialize() {
+        initializerCalledAfterResourceInjection = (translator != null && translatorField != null
+                && superTranslator != null && superTranslatorField != null);
     }
 
-    @Resource(name = "game")
-    private void setSuperGame(String superGame) {
-        this.superGame = superGame;
-    }
-
-    @EJB
-    public void setSuperSessionBean(SessionBean superSessionBean) {
-        this.superSessionBean = superSessionBean;
+    @WebServiceRef(value = TranslatorEndpointService.class)
+    private void setTranslator(Translator translator) {
+        this.translator = translator;
     }
 }

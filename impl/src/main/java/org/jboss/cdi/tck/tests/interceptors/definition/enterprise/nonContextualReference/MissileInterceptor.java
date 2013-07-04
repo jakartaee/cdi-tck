@@ -22,6 +22,7 @@ import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
+@SuppressWarnings("serial")
 @Interceptor
 @Airborne
 public class MissileInterceptor implements Serializable {
