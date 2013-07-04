@@ -23,7 +23,18 @@ public class Cruiser implements Ship {
     @EJB
     MissileLocal missile;
 
+    Anchor anchor;
+
     public void defend() {
         missile.fire();
+    }
+
+    public void stop() {
+        anchor.throwOut();
+    }
+
+    @EJB
+    public void setAnchor(Anchor anchor) {
+        this.anchor = anchor;
     }
 }

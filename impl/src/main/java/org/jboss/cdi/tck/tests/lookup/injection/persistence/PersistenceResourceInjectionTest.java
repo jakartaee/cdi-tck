@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,11 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.nonContextualReference;
+package org.jboss.cdi.tck.tests.lookup.injection.persistence;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -30,25 +32,20 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
-public class SessionBeanInterceptorOnNonContextualEjbReferenceTest extends AbstractTest {
+public class PersistenceResourceInjectionTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(SessionBeanInterceptorOnNonContextualEjbReferenceTest.class)
-                .withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(PersistenceResourceInjectionTest.class)
+                .withDefaultPersistenceXml().build();
     }
 
-    @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "h"), @SpecAssertion(section = BIZ_METHOD, id = "ab") })
-    public void testNonContextualSessionBeanReferenceIsIntercepted() {
-        MissileInterceptor.intercepted = false;
-        AnchorInterceptor.intercepted = false;
-
-        Ship cruiser = getContextualReference(Ship.class);
-        cruiser.defend();
-        cruiser.stop();
-
-        assert MissileInterceptor.intercepted;
-        assert AnchorInterceptor.intercepted;
+    @Test(groups = { PERSISTENCE, INTEGRATION }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bi"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bj") })
+    public void testInitializerMethodsAfterEEResourcePersistenceInjection(SpecialPersistor sp) throws Exception {
+        assertNotNull(sp);
+        assertTrue(sp.initializerCalledAfterResourceInjection);
     }
 }

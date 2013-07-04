@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,8 +16,20 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.nonContextualReference;
 
-public interface Ship {
-    void defend();
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-    void stop();
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import javax.interceptor.InterceptorBinding;
+
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface Waterborne {
+
 }
