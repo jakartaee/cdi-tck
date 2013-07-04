@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.persistence;
+package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.persistence.unit;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
