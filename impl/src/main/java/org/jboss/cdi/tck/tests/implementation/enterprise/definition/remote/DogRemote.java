@@ -19,6 +19,6 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote;
 import javax.ejb.Remote;
 
 @Remote
-public interface DogRemote {
+public interface DogRemote extends Bar, Foo {
 
 }

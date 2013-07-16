@@ -17,12 +17,14 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types.enterprise;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_TYPES;
 import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -36,7 +38,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ * @author Matus Abaffy
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class SessionBeanTypesTest extends AbstractTest {
@@ -47,28 +49,61 @@ public class SessionBeanTypesTest extends AbstractTest {
     }
 
     @SuppressWarnings("serial")
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = SESSION_BEAN_TYPES, id = "aa"), @SpecAssertion(section = SESSION_BEAN_TYPES, id = "ba"),
-            @SpecAssertion(section = SESSION_BEAN_TYPES, id = "c") })
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = SESSION_BEAN_TYPES, id = "aa"),
+            @SpecAssertion(section = SESSION_BEAN_TYPES, id = "ba"), @SpecAssertion(section = SESSION_BEAN_TYPES, id = "c") })
     public void testGenericHierarchyBeanTypes() {
 
-        // Generic class inheritance with abstact class and interface
+        // Generic class inheritance with abstract class and interface
         Bean<Vulture> vultureBean = getUniqueBean(Vulture.class);
         assertNotNull(vultureBean);
-        // Object, Animal<Integer>, Bird<Integer>, Vulture
-        assertEquals(vultureBean.getTypes().size(), 4);
-        assertTypeSetMatches(vultureBean.getTypes(), Object.class, Vulture.class, new TypeLiteral<Animal<Integer>>() {
-        }.getType(), new TypeLiteral<Bird<Integer>>() {
+        // Object, Bird<Integer>, Vulture
+        assertEquals(vultureBean.getTypes().size(), 3);
+        assertTypeSetMatches(vultureBean.getTypes(), Object.class, Vulture.class, new TypeLiteral<Bird<Integer>>() {
         }.getType());
 
         // Generic class inheritance with two interfaces
-        TypeLiteral<Mammal<String>> mammaLiteral = new TypeLiteral<Mammal<String>>() {
+        TypeLiteral<Mammal<String>> mammalLiteral = new TypeLiteral<Mammal<String>>() {
         };
-        Bean<Mammal<String>> tigerBean = getUniqueBean(mammaLiteral);
+        Bean<Mammal<String>> tigerBean = getUniqueBean(mammalLiteral);
         assertNotNull(tigerBean);
         // Object, Animal<String>, Mammal<String>
         assertEquals(tigerBean.getTypes().size(), 3);
         assertTypeSetMatches(tigerBean.getTypes(), Object.class, new TypeLiteral<Animal<String>>() {
-        }.getType(), mammaLiteral.getType());
+        }.getType(), mammalLiteral.getType());
+
+        // session bean with both local business interface and no-interface view
+        Bean<LegendaryCreature> creatureBean = getUniqueBean(LegendaryCreature.class);
+        assertNotNull(creatureBean);
+        // Object, LegendaryCreature, LegendaryLocal, Creature
+        assertEquals(creatureBean.getTypes().size(), 4);
+        assertTypeSetMatches(creatureBean.getTypes(), Object.class, LegendaryCreature.class, LegendaryLocal.class,
+                Creature.class);
+    }
+
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = SESSION_BEAN_TYPES, id = "aa"),
+            @SpecAssertion(section = SESSION_BEAN_TYPES, id = "ba"), @SpecAssertion(section = SESSION_BEAN_TYPES, id = "c") })
+    public void testSessionBeanWithBothLocalInterfaceAndNoInterfaceView() {
+        // session bean with both local business interface and no-interface view
+        Bean<LegendaryCreature> creatureBean = getUniqueBean(LegendaryCreature.class);
+        assertNotNull(creatureBean);
+        // Object, LegendaryCreature, LegendaryLocal, Creature
+        assertEquals(creatureBean.getTypes().size(), 4);
+        assertTypeSetMatches(creatureBean.getTypes(), Object.class, LegendaryCreature.class, LegendaryLocal.class,
+                Creature.class);
+    }
+
+    @SuppressWarnings("serial")
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = SESSION_BEAN_TYPES, id = "ba")
+    public void testSessionBeanExtendingSessionBeanWithLocalClientView() {
+        // no-interface view
+        Bean<MockLoginActionBean> loginBean = getUniqueBean(MockLoginActionBean.class, new AnnotationLiteral<Mock>() {
+        });
+        assertNotNull(loginBean);
+        // MockLoginActionBean, LoginActionBean, Object
+        assertEquals(loginBean.getTypes().size(), 3);
+        assertTypeSetMatches(loginBean.getTypes(), Object.class, LoginActionBean.class, MockLoginActionBean.class);
     }
 }

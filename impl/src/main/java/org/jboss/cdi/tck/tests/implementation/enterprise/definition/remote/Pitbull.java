@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote;
 
+import javax.ejb.Local;
 import javax.ejb.Stateful;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
@@ -23,6 +24,8 @@ import javax.inject.Named;
 @Stateful
 @ApplicationScoped
 @Named
-public class Pitbull implements DogLocal, DogRemote {
+@Local({ org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote.Bar.class,
+        org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote.DogLocal.class })
+public class Pitbull implements DogRemote {
 
 }

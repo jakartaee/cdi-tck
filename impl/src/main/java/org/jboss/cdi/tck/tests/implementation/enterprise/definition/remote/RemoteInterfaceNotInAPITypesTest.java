@@ -18,22 +18,25 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_TYPES;
-import static org.testng.Assert.assertFalse;
+import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
  * @author Matus Abaffy
  */
-@Test(groups = { JAVAEE_FULL }) // The test archive contains a remote EJB
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class RemoteInterfaceNotInAPITypesTest extends AbstractTest {
 
@@ -42,11 +45,22 @@ public class RemoteInterfaceNotInAPITypesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(RemoteInterfaceNotInAPITypesTest.class).build();
     }
 
-    @Test
-    @SpecAssertion(section = SESSION_BEAN_TYPES, id = "d")
+    @SuppressWarnings("serial")
+    @Test(groups = { JAVAEE_FULL }) // The test archive contains a remote EJB
+    @SpecAssertions({ @SpecAssertion(section = SESSION_BEAN_TYPES, id = "d"),
+            @SpecAssertion(section = SESSION_BEAN_TYPES, id = "c"), @SpecAssertion(section = SESSION_BEAN_TYPES, id = "aa") })
     public void testRemoteInterfacesAreNotInAPITypes() {
-        Bean<DogLocal> dogBean = getBeans(DogLocal.class).iterator().next();
-        assertFalse(dogBean.getTypes().contains(DogRemote.class));
+        // only remote view
+        Bean<Object> collieBean = getUniqueBean(Object.class, new AnnotationLiteral<Tame>() {
+        });
+        assertNotNull(collieBean);
+        assertTypeSetMatches(collieBean.getTypes(), Object.class);
+
+        Bean<DogLocal> pitbullBean = getUniqueBean(DogLocal.class);
+        assertNotNull(pitbullBean);
+        // DogLocal, Bar, SuperBar, Object
+        assertEquals(pitbullBean.getTypes().size(), 4);
+        assertTypeSetMatches(pitbullBean.getTypes(), Object.class, DogLocal.class, Bar.class, SuperBar.class);
     }
 
 }
