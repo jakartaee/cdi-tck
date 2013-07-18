@@ -25,8 +25,9 @@
             <note>It's not possible to test all the combinations, we only test few basic scenarios.</note>
         </assertion>
 
-        <assertion id="c">
+        <assertion id="c" testable="false">
             <text>An interceptor class must not be |abstract| and must have a |public| no-arg constructor.</text>
+            <note>INTERCEPTORS_SPEC-22</note>
         </assertion>
 
         <assertion id="d">
@@ -47,8 +48,9 @@
             <note>Tested in sections 3.3 and 4</note>
         </assertion>
 
-        <assertion id="h">
+        <assertion id="h" testable="false">
             <text>A deployment descriptor may be used to specify the invocation order of interceptors or to override the order specified in metadata annotations. A deployment descriptor can be optionally used to define default interceptors or to associate interceptors with the target class. The EJB specification requires support for the ejb-jar.xml deployment descriptor and the CDI specification requires supports for the beans.xml deployment descriptor.</text>
+        	<note>The ejb-jar.xml deployment descriptor is tested within the EJB TCK. The beans.xml deployment descriptor is tested within the CDI TCK, section 9.4 Interceptor enablement and ordering.</note>
         </assertion>
 
     </section>
@@ -253,8 +255,9 @@
             </assertion>
         </group>
 
-        <assertion id="d">
+        <assertion id="d" testable="false">
             <text>An around-invoke method must not be declared as |abstract|, |final| or |static|.</text>
+            <note>INTERCEPTORS_SPEC-22</note>
         </assertion>
 
         <assertion id="e">
@@ -327,8 +330,9 @@
             </assertion>
         </group>
 
-        <assertion id="k">
+        <assertion id="k" testable="false">
             <text>A lifecycle callback interceptor method must not be declared as |abstract|, |final| or |static|.</text>
+            <note>INTERCEPTORS_SPEC-22</note>
         </assertion>
 
     </section>
@@ -351,16 +355,25 @@
 
     <section id="2.7" title="Timeout Method Interceptors">
 
-        <assertion id="a">
+        <assertion id="a" testable="false">
             <text>Interceptor methods that interpose on timeout methods are denoted by the |AroundTimeout| annotation.</text>
+            <note>Tested within the CDI TCK, 7.2 Container invocations and interception.</note>
         </assertion>
 
-        <assertion id="b">
-            <text>Around-timeout methods may be defined on interceptor classes and/or the target class and/or superclasses of the target class or interceptor classes. However, only one around-timeout method may be defined on a given class.</text>
-        </assertion>
+		<group>
+		    <text>Around-timeout methods may be defined on interceptor classes and/or the target class and/or superclasses of the target class or interceptor classes. However, only one around-timeout method may be defined on a given class.</text>
+			<assertion id="ba">
+        		<text>Test interceptor classes and/or superclasses.</text>
+        		<note>Partially tested within the CDI TCK, 7.2 Container invocations and interception.</note>
+        	</assertion>
+        	<assertion id="bb">
+        		<text>Test target class and/or superclasses.</text>
+        	</assertion>
+		</group>
 
-        <assertion id="c">
+        <assertion id="c" testable="false">
             <text>Around-timeout methods can have |public|, |private|, |protected|, or |package| level access. An around-timeout method must not be declared as |abstract|, |final| or |static|.</text>
+            <note>INTERCEPTORS_SPEC-22</note>
         </assertion>
 
         <assertion id="d">
@@ -391,8 +404,9 @@
             <text>Only the interceptor methods of the interceptor class that are relevant for the context in which the interceptor is bound are invoked. For example, if the interceptor is bound only to a business method, any |AroundConstruct|, |AroundTimeout|, |PostConstruct|, or |PreDestroy| methods on the interceptor are not called.</text>
         </assertion>
 
-        <assertion id="c">
+        <assertion id="c" testable="false">
             <text>Method-level interceptors may not be associated with a lifecycle callback method of the target class.</text>
+            <note>INTERCEPTORS_SPEC-22</note>
         </assertion>
 
         <assertion id="d">
@@ -530,12 +544,14 @@
             <text>An extension specification may define additional rules for combining interceptor bindings, such as interceptors defined via a CDI stereotype.</text>
         </assertion>
 
-        <assertion id="f">
+        <assertion id="f" testable="false">
             <text>If the component class declares or inherits a class level interceptor binding, it must not be declared |final|, or have any non-|static|, non-|private|, |final| methods. If a component has a class-level interceptor binding and is declared |final| or has a non-|static|, non-|private|, |final| method, the container automatically detects the problem and treats it as a definition error.</text>
+            <note>Tested within the CDI TCK, 9.3 Binding an interceptor to a bean.</note>
         </assertion>
 
-        <assertion id="g">
+        <assertion id="g" testable="false">
             <text>If a non-|static|, non-|private| method of a component class declares a method level interceptor binding, neither the method nor the component class may be declared |final|. If a non-|static|, non-|private|, |final| method of a component has a method level interceptor binding, the container automatically detects the problem and treats it as a definition error.</text>
+            <note>Tested within the CDI TCK, 9.3 Binding an interceptor to a bean.</note>
         </assertion>
 
     </section>
@@ -620,8 +636,9 @@
             <note>Tested in section 5.</note>
         </assertion>
 
-        <assertion id="c">
+        <assertion id="c" testable="false">
             <text>If a deployment descriptor is supported, it can be used to associate interceptor classes with the target class, and/or methods, and/or a constructor of the target class and specify the order of interceptor invocation or override metadata specified by annotations.</text>
+            <note>Should be tested in the EJB TCK.</note>
         </assertion>
 
         <assertion id="d">
@@ -641,12 +658,14 @@
 
     <section id="4.1" title="Default Interceptors">
 
-        <assertion id="a">
+        <assertion id="a" testable="false">
             <text>Default interceptors are interceptors that apply to a set of target classes. If a deployment descriptor is supported, it may be used to define default interceptors and their relative ordering.</text>
+            <note>Should be tested in the EJB TCK.</note>
         </assertion>
 
-        <assertion id="b">
+        <assertion id="b" testable="false">
             <text>The |ExcludeDefaultInterceptors| annotation is used to exclude the invocation of default interceptors for a target class, or when applied to a target class constructor or method, is used to exclude the invocation of default interceptors for that constructor or that method.</text>
+            <note>Should be tested in the EJB TCK.</note>
         </assertion>
 
     </section>
@@ -660,16 +679,18 @@
             <text>Associating interceptors with the target class or method of the target class using the |Interceptors| annotation enables them for the target class, a method, or a constructor of the target class. The order in which they are invoked is determined by the order in which they are specified in the annotation.</text>
         </assertion>
 
-        <assertion id="b">
+        <assertion id="b" testable="false">
             <text>Interceptors declared using interceptor bindings are enabled and ordered using the |Priority| annotation or the beans.xml deployment descriptor.</text>
+            <note>Tested within the CDI TCK, section 9.4 Interceptor enablement and ordering.</note>
         </assertion>
 
         <assertion id="c" testable="false">
             <text>An extension specification may define alternative mechanisms to enable and order interceptors.</text>
         </assertion>
 
-        <assertion id="d">
+        <assertion id="d" testable="false">
             <text>For the same interceptor method type, interceptors declared using interceptor bindings are called after interceptors declared using the |Interceptors| annotation (or using the corresponding element of a deployment descriptor) and before an interceptor method of the same interceptor type declared on the target class or any superclass of the target class.</text>
+           	<note>Tested within the CDI TCK, section 9.4 Interceptor enablement and ordering.</note>
         </assertion>
 
         <assertion testable="false">
@@ -718,12 +739,12 @@
 
         <assertion id="a" testable="false">
             <text>An interceptor bound to a component, a component method, or constructor using interceptor binding may be enabled for the entire application by applying the |Priority| annotation, along with a priority value, on the interceptor class.</text>
-            <note>Tested within CDI TCK, section 9.4 Interceptor enablement and ordering.</note>
+            <note>Tested within the CDI TCK, section 9.4 Interceptor enablement and ordering.</note>
         </assertion>
 
         <assertion id="b" testable="false">
             <text>Interceptors with smaller priority values are called first.</text>
-            <note>Tested within CDI TCK, section 9.4 Interceptor enablement and ordering.</note>
+            <note>Tested within the CDI TCK, section 9.4 Interceptor enablement and ordering.</note>
         </assertion>
 
         <assertion id="c" testable="false">
@@ -749,8 +770,9 @@
 
         <group>
             <text>If multiple business or timeout method interceptor methods are defined for a target class or multiple callback interceptor methods are defined for a lifecycle event for a target class using the Interceptors annotation, the following rules govern their invocation order for each interceptor type. A deployment descriptor may be used to override the interceptor invocation order specified in annotations.</text>
-            <assertion id="a">
+            <assertion id="a" testable="false">
                 <text>Default interceptors, if any, are invoked first. Default interceptors can only be specified in a deployment descriptor. Default interceptors are invoked in the order of their specification in the deployment descriptor.</text>
+                <note>Should be tested in the EJB TCK.</note>
             </assertion>
             <assertion id="b">
                 <text>If there are any interceptor classes associated with the target class using the |Interceptors| annotation, the interceptor methods defined by those interceptor classes are invoked before any interceptor methods defined on the target class itself.</text>

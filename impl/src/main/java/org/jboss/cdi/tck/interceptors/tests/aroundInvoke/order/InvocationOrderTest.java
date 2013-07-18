@@ -37,11 +37,10 @@ public class InvocationOrderTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "aa"), @SpecAssertion(section = "5.2.1", id = "ab"),
-            @SpecAssertion(section = "5.2.1", id = "ba"), @SpecAssertion(section = "4", id = "a"),
-            @SpecAssertion(section = "4", id = "d"), @SpecAssertion(section = "5.5", id = "b"),
-            @SpecAssertion(section = "5.5", id = "c"), @SpecAssertion(section = "5.2.2", id = "a"),
-            @SpecAssertion(section = "5.5", id = "e"), @SpecAssertion(section = "2.3", id = "ha") })
+    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "aa"), @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "5.2.1", id = "ba"),
+            @SpecAssertion(section = "4", id = "a"), @SpecAssertion(section = "4", id = "d"), @SpecAssertion(section = "5.5", id = "b"),
+            @SpecAssertion(section = "5.5", id = "c"), @SpecAssertion(section = "5.2.2", id = "a"), @SpecAssertion(section = "5.5", id = "e"),
+            @SpecAssertion(section = "2.3", id = "ha"), @SpecAssertion(section = "5.1", id = "a") })
     public void testInvocationOrder() {
 
         // Expected order: Interceptor1, Interceptor2, Interceptor3, Interceptor4, Interceptor5, RailVehicle.intercept2,

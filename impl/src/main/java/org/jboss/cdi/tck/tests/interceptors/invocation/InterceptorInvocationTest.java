@@ -57,7 +57,6 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    // @SpecAssertion(section = DECLARING_INTERCEPTOR, id = "a")
     @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "a"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "kb"),  @SpecAssertion(section = BIZ_METHOD, id = "aa")})
     public void testManagedBeanIsIntercepted() {
