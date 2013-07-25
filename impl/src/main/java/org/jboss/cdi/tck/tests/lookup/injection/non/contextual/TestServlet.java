@@ -19,7 +19,12 @@ package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,10 +39,20 @@ public class TestServlet extends HttpServlet {
     @Resource(name = "greeting")
     String greeting;
 
+    String game;
+
+    SessionBean sessionBean;
+
+    EntityManager persistenceContext;
+
+    EntityManagerFactory persistenceUnit;
+
     private boolean injectionPerformedCorrectly = false;
     private boolean initializerCalled = false;
     private boolean initCalledAfterInitializer = false;
     private boolean initCalledAfterResourceInjection = false;
+    private boolean initCalledAfterEJBResourceInjection = false;
+    private boolean initCalledAfterPersistenceResourceInjection = false;
 
     private static final long serialVersionUID = -7672096092047821010L;
 
@@ -69,6 +84,12 @@ public class TestServlet extends HttpServlet {
         } else if (req.getParameter("test").equals("resource")) {
             // Return 200 if the resource was injected before init, 500 otherwise
             resp.setStatus(initCalledAfterResourceInjection ? 200 : 500);
+        } else if (req.getParameter("test").equals("ejb")) {
+            // Return 200 if the resource was injected before init, 500 otherwise
+            resp.setStatus(initCalledAfterEJBResourceInjection ? 200 : 500);
+        } else if (req.getParameter("test").equals("persistence")) {
+            // Return 200 if the resource was injected before init, 500 otherwise
+            resp.setStatus(initCalledAfterPersistenceResourceInjection ? 200 : 500);
         } else {
             resp.setStatus(404);
         }
@@ -107,11 +128,33 @@ public class TestServlet extends HttpServlet {
     public void init() throws ServletException {
         injectionPerformedCorrectly = sheep != null;
         initCalledAfterInitializer = initializerCalled;
-        initCalledAfterResourceInjection = "Hello".equals(greeting);
+        initCalledAfterResourceInjection = "Hello".equals(greeting) && "poker".equals(game);
+        initCalledAfterEJBResourceInjection = sessionBean.ping();
+        initCalledAfterPersistenceResourceInjection = (persistenceContext != null) && (persistenceUnit != null);
     }
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         init();
+    }
+
+    @Resource(name = "game")
+    private void setGame(String game) {
+        this.game = game;
+    }
+
+    @EJB
+    private void setSessionBean(SessionBean sessionBean) {
+        this.sessionBean = sessionBean;
+    }
+
+    @PersistenceContext
+    private void setPersistenceContext(EntityManager persistenceContext) {
+        this.persistenceContext = persistenceContext;
+    }
+
+    @PersistenceUnit
+    private void setPersistenceUnit(EntityManagerFactory persistenceUnit) {
+        this.persistenceUnit = persistenceUnit;
     }
 }

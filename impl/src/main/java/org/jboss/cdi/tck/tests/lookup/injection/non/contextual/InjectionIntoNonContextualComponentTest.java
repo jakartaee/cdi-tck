@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
 import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELDS;
@@ -46,12 +47,13 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(InjectionIntoNonContextualComponentTest.class)
-                .withClasses(Farm.class, ProcessAnnotatedTypeObserver.class, Sheep.class, TagLibraryListener.class,
+                .withClasses(Farm.class, ProcessAnnotatedTypeObserver.class, SessionBean.class, Sheep.class, TagLibraryListener.class,
                         TestFilter.class, TestListener.class, TestServlet.class, TestTagHandler.class)
                 .withWebXml("web2.xml")
                 .withWebResource("ManagedBeanTestPage.jsp", "ManagedBeanTestPage.jsp")
                 .withWebResource("TagPage.jsp", "TagPage.jsp").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
-                .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld").build();
+                .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld")
+                .withDefaultPersistenceXml().build();
     }
 
     @Test(groups = INTEGRATION)
@@ -73,11 +75,20 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bo") })
+    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bo")
     public void testServletInitCalledAfterResourceInjection() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
         webClient.getPage(contextPath + "Test/Servlet?test=resource");
+        webClient.getPage(contextPath + "Test/Servlet?test=ejb");
+    }
+
+    @Test(groups = { INTEGRATION, PERSISTENCE })
+    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bo")
+    public void testServletInitCalledAfterPersistenceResourceInjection() throws Exception {
+        WebClient webClient = new WebClient();
+        webClient.setThrowExceptionOnFailingStatusCode(true);
+        webClient.getPage(contextPath + "Test/Servlet?test=persistence");
     }
 
     @Test(groups = INTEGRATION)
@@ -98,13 +109,21 @@ public class InjectionIntoNonContextualComponentTest extends AbstractTest {
         webClient.getPage(contextPath + "TestFilter?test=initializer");
     }
 
-
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "br") })
+    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "br")
     public void testFilterInitCalledAfterResourceInjection() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
         webClient.getPage(contextPath + "TestFilter?test=resource");
+        webClient.getPage(contextPath + "TestFilter?test=ejb");
+    }
+
+    @Test(groups = { INTEGRATION, PERSISTENCE })
+    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "br")
+    public void testFilterInitCalledAfterPersistenceResourceInjection() throws Exception {
+        WebClient webClient = new WebClient();
+        webClient.setThrowExceptionOnFailingStatusCode(true);
+        webClient.getPage(contextPath + "TestFilter?test=persistence");
     }
 
     @Test(groups = INTEGRATION)

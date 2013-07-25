@@ -44,4 +44,10 @@
 	<env-entry-value>Hello</env-entry-value>
    </env-entry>
 
+   <env-entry>
+   	<env-entry-name>game</env-entry-name>
+   	<env-entry-type>java.lang.String</env-entry-type>
+	<env-entry-value>poker</env-entry-value>
+   </env-entry>
+
 </web-app>
