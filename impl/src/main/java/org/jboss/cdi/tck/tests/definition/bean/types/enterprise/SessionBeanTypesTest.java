@@ -52,23 +52,22 @@ public class SessionBeanTypesTest extends AbstractTest {
             @SpecAssertion(section = SESSION_BEAN_TYPES, id = "c") })
     public void testGenericHierarchyBeanTypes() {
 
-        // Generic class inheritance with abstact class and interface
+        // Generic class inheritance with abstract class and interface
         Bean<Vulture> vultureBean = getUniqueBean(Vulture.class);
         assertNotNull(vultureBean);
-        // Object, Animal<Integer>, Bird<Integer>, Vulture
-        assertEquals(vultureBean.getTypes().size(), 4);
-        assertTypeSetMatches(vultureBean.getTypes(), Object.class, Vulture.class, new TypeLiteral<Animal<Integer>>() {
-        }.getType(), new TypeLiteral<Bird<Integer>>() {
+        // Object, Bird<Integer>, Vulture
+        assertEquals(vultureBean.getTypes().size(), 3);
+        assertTypeSetMatches(vultureBean.getTypes(), Object.class, Vulture.class, new TypeLiteral<Bird<Integer>>() {
         }.getType());
 
         // Generic class inheritance with two interfaces
-        TypeLiteral<Mammal<String>> mammaLiteral = new TypeLiteral<Mammal<String>>() {
+        TypeLiteral<Mammal<String>> mammalLiteral = new TypeLiteral<Mammal<String>>() {
         };
-        Bean<Mammal<String>> tigerBean = getUniqueBean(mammaLiteral);
+        Bean<Mammal<String>> tigerBean = getUniqueBean(mammalLiteral);
         assertNotNull(tigerBean);
         // Object, Animal<String>, Mammal<String>
         assertEquals(tigerBean.getTypes().size(), 3);
         assertTypeSetMatches(tigerBean.getTypes(), Object.class, new TypeLiteral<Animal<String>>() {
-        }.getType(), mammaLiteral.getType());
+        }.getType(), mammalLiteral.getType());
     }
 }

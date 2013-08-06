@@ -21,5 +21,5 @@ import javax.enterprise.inject.Specializes;
 
 @Specializes
 @Stateful
-public class SheepFarmer_Broken extends Farmer {
+public class SheepFarmer_Broken extends Farmer implements FarmerInterface {
 }
