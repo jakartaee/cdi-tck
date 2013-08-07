@@ -35,11 +35,10 @@ import org.testng.ITestContext;
 /**
  * This {@link IMethodInterceptor} fixes one or the other problem with CDI TCK test suite execution:
  * <ol>
- * <li>Run tests from single test class - it seems that Maven Surefire plugin is not able to run single test that is located
- * outside src/test dir. If test class system property is set all test methods that don't belong to specified test class are
- * excluded.</li>
- * <li>Avoid randomly mixed test method execution - causing test archive deployments collisions. If test class system property
- * is not set group test methods by test class.</li>
+ * <li>Run tests from single test class - it seems that Maven Surefire plugin is not able to run single test that is located outside src/test dir. If test class
+ * system property is set all test methods that don't belong to specified test class are excluded.</li>
+ * <li>Avoid randomly mixed test method execution - causing test archive deployments collisions. If test class system property is not set group test methods by
+ * test class.</li>
  * <ol>
  * 
  * @author Stuart Douglas
@@ -57,13 +56,12 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
             return methods;
         }
 
-        logger.log(Level.INFO, "Intercepting... [methods: {0}, testRun: {1}, suiteName: {2}]", new Object[] { methods.size(),
-                context.getName(), context.getSuite().getName() });
+        logger.log(Level.INFO, "Intercepting... [methods: {0}, testRun: {1}, suiteName: {2}]", new Object[] { methods.size(), context.getName(),
+                context.getSuite().getName() });
 
         long start = System.currentTimeMillis();
-        String testClass = System.getProperty(TEST_CLASS_PROPERTY);
-
-        if (testClass == null || testClass.isEmpty()) {
+        String testString = System.getProperty(TEST_CLASS_PROPERTY);
+        if (testString == null || testString.isEmpty()) {
 
             // Run the test suite - group test methods by class name
             Collections.sort(methods, new Comparator<IMethodInstance>() {
@@ -76,24 +74,35 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
             return methods;
         }
 
-        // Run the tests of a single test class
+        // Run the tests of a single test class or single method
         List<IMethodInstance> ret = new ArrayList<IMethodInstance>();
-
-        if (testClass.contains(".")) {
+        String testClass = null;
+        String testMethod = null;
+        if (testString.contains("#")) {
+            testClass = testString.split("#")[0];
+            testMethod = testString.split("#")[1];
+        } else {
+            testClass = testString;
+        }
+        if (testString.contains(".")) {
             for (IMethodInstance method : methods) {
                 if (method.getMethod().getTestClass().getName().equals(testClass)) {
-                    ret.add(method);
+                    if ((testMethod == null) || (method.getMethod().getMethodName().equals(testMethod))) {
+                        ret.add(method);
+                    }
                 }
             }
         } else {
             for (IMethodInstance method : methods) {
                 if (method.getMethod().getTestClass().getName().endsWith("." + testClass)) {
-                    ret.add(method);
+                    if ((testMethod == null) || (method.getMethod().getMethodName().equals(testMethod))) {
+                        ret.add(method);
+                    }
                 }
             }
         }
-        logger.log(Level.INFO, "tckTest set to {0} [methods: {1}, time: {2} ms]",
-                new Object[] { testClass, ret.size(), System.currentTimeMillis() - start });
+
+        logger.log(Level.INFO, "tckTest set to {0} [methods: {1}, time: {2} ms]", new Object[] { testClass, ret.size(), System.currentTimeMillis() - start });
         return ret;
     }
 
