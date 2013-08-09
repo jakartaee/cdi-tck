@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.vetoed.enterprise;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PAT;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEANS;
 import static org.testng.Assert.assertEquals;
@@ -57,7 +58,7 @@ public class EnterpriseVetoedTest extends AbstractTest {
     @Inject
     VerifyingExtension verifyingExtension;
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = SESSION_BEANS, id = "aa"),
             @SpecAssertion(section = PAT, id = "ia") })
     public void testClassLevelVeto() {
@@ -65,14 +66,14 @@ public class EnterpriseVetoedTest extends AbstractTest {
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PAT, id = "ie") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
         assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = SESSION_BEANS, id = "aa"),
             @SpecAssertion(section = PAT, id = "ii") })
     public void testPackageLevelVeto() {

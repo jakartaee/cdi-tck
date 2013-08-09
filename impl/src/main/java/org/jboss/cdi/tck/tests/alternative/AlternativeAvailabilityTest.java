@@ -69,7 +69,6 @@ public class AlternativeAvailabilityTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "e"),
-            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "bb"),
             @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"),
             @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "ka")
 

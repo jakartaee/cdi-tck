@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.enterprise.nonstatic;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_FIELD;
 
 import javax.enterprise.inject.spi.DefinitionException;
@@ -38,7 +39,7 @@ public class NonStaticFieldOfSessionBeanTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(NonStaticFieldOfSessionBeanTest.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = DECLARING_PRODUCER_FIELD, id = "h")
     public void testNonStaticFieldOfSessionBeanCannotBeProducerField() {
     }

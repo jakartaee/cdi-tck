@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.enterprise;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
 import javax.enterprise.inject.spi.DeploymentException;
@@ -49,7 +50,7 @@ public class NonPassivationCapableEjbWithPassivatingScopeTest extends AbstractTe
         return new WebArchiveBuilder().withTestClassPackage(NonPassivationCapableEjbWithPassivatingScopeTest.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = PASSIVATION_VALIDATION, id = "aa")
     public void testDeployment() {
     }

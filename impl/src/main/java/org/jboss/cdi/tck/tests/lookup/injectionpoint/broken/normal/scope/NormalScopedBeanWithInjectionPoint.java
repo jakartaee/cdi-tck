@@ -40,7 +40,7 @@ public class NormalScopedBeanWithInjectionPoint extends AbstractTest {
 
     @Test
     @SpecAssertion(section = INJECTION_POINT, id = "f")
-    public void testSessionScopedBeanWithInjectionPoint() {
+    public void testRequestScopedBeanWithInjectionPoint() {
     }
 
 }
