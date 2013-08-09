@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise.broken.twobeans;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.INCONSISTENT_SPECIALIZATION;
 
 import javax.enterprise.inject.spi.DeploymentException;
@@ -38,8 +39,8 @@ public class TwoBeansSpecializeTheSameBeanTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(TwoBeansSpecializeTheSameBeanTest.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = INCONSISTENT_SPECIALIZATION, id = "a")
-    public void testTwoBeansSpecializeTheSameBean() {
+    public void testTwoSessionBeansSpecializeTheSameBean() {
     }
 }

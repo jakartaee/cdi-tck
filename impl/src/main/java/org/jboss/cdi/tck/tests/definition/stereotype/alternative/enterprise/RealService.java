@@ -17,9 +17,11 @@
 
 package org.jboss.cdi.tck.tests.definition.stereotype.alternative.enterprise;
 
+import javax.ejb.Local;
 import javax.ejb.Singleton;
 
 @Singleton
+@Local(Service.class)
 public class RealService extends AbstractService {
 
     @Override

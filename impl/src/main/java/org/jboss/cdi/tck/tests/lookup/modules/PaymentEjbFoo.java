@@ -16,8 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules;
 
+import javax.ejb.Local;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+@LocalBean
+@Local(Foo.class)
 @Stateless
 public class PaymentEjbFoo implements Foo {
 
