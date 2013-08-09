@@ -17,11 +17,13 @@
 
 package org.jboss.cdi.tck.tests.definition.stereotype.alternative.enterprise;
 
+import javax.ejb.Local;
 import javax.ejb.Singleton;
 import javax.enterprise.inject.Specializes;
 
 @Mock
 @Singleton
+@Local(Service.class)
 @Specializes
 public class MockService extends RealService {
 
