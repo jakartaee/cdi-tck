@@ -414,7 +414,7 @@
         </assertion>
 
         <assertion id="e">
-            <text>The applicability of a method-level interceptor to more than one method of an associated target class does not affect the relationship between the interceptor instance and the target class-only a single instance of the interceptor class is created per target class instance.</text>
+            <text>The applicability of a method-level interceptor to more than one method of an associated target class does not affect the relationship between the interceptor instance and the target class - only a single instance of the interceptor class is created per target class instance.</text>
         </assertion>
 
     </section>
@@ -448,7 +448,7 @@
         </assertion>
 
         <assertion id="b">
-            <text>Interceptor bindings are transitive — an interceptor binding declared by an interceptor binding type is inherited by all components and other interceptor binding types that declare that interceptor binding type.</text>
+            <text>Interceptor bindings are transitive - an interceptor binding declared by an interceptor binding type is inherited by all components and other interceptor binding types that declare that interceptor binding type.</text>
         </assertion>
 
         <assertion id="c">
