@@ -22,9 +22,12 @@
 package org.jboss.cdi.tck.impl.testng;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -77,17 +80,18 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
         // Run the tests of a single test class or single method
         List<IMethodInstance> ret = new ArrayList<IMethodInstance>();
         String testClass = null;
-        String testMethod = null;
+        Set<String> testMethodsSet = new HashSet<String>();
         if (testString.contains("#")) {
             testClass = testString.split("#")[0];
-            testMethod = testString.split("#")[1];
+            String[] testMethod = testString.split("#")[1].split("\\+");
+            testMethodsSet.addAll(Arrays.asList(testMethod));
         } else {
             testClass = testString;
         }
-        if (testString.contains(".")) {
+        if (testClass.contains(".")) {
             for (IMethodInstance method : methods) {
                 if (method.getMethod().getTestClass().getName().equals(testClass)) {
-                    if ((testMethod == null) || (method.getMethod().getMethodName().equals(testMethod))) {
+                    if ((testMethodsSet.isEmpty()) || (testMethodsSet.contains(method.getMethod().getMethodName()))) {
                         ret.add(method);
                     }
                 }
@@ -95,7 +99,7 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
         } else {
             for (IMethodInstance method : methods) {
                 if (method.getMethod().getTestClass().getName().endsWith("." + testClass)) {
-                    if ((testMethod == null) || (method.getMethod().getMethodName().equals(testMethod))) {
+                    if ((testMethodsSet.isEmpty()) || (testMethodsSet.contains(method.getMethod().getMethodName()))) {
                         ret.add(method);
                     }
                 }
@@ -105,5 +109,4 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
         logger.log(Level.INFO, "tckTest set to {0} [methods: {1}, time: {2} ms]", new Object[] { testClass, ret.size(), System.currentTimeMillis() - start });
         return ret;
     }
-
 }
