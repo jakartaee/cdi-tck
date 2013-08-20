@@ -41,7 +41,7 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "2.6", id = "b"), @SpecAssertion(section = "2.6", id = "c") })
-    public void testCallbackOverridenByCallback() {
+    public void testLifecycleCallbackInterception() {
 
         Bird.reset();
         Eagle.reset();

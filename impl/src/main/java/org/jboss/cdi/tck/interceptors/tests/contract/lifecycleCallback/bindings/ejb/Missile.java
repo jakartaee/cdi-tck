@@ -17,11 +17,19 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings.ejb;
 
 import javax.ejb.Stateful;
+import javax.inject.Inject;
 
 @Airborne
 @Stateful
 public class Missile {
 
+    @Inject
+    private Foo foo;
+
     public void fire() {
+    }
+
+    public Foo getFoo() {
+        return foo;
     }
 }

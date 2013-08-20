@@ -20,11 +20,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Inject;
 
 public class Eagle extends Bird {
 
     private static AtomicInteger initEagleCalled = new AtomicInteger();
     private static AtomicInteger destroyEagleCalled = new AtomicInteger();
+
+    @Inject
+    private void initEagleBar(Bar bar) {
+        eagleBar = bar;
+    }
 
     @PostConstruct
     public void initEagle() {

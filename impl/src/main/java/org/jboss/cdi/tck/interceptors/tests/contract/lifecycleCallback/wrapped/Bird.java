@@ -16,18 +16,33 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.wrapped;
 
+import static org.testng.Assert.assertNotNull;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Inject;
 
 public class Bird {
 
     private static AtomicInteger initBirdCalled = new AtomicInteger();
     private static AtomicInteger destroyBirdCalled = new AtomicInteger();
 
+    protected Bar eagleBar;
+
+    private Bar birdBar;
+
+    @Inject
+    private void initBirdBar(Bar bar) {
+        birdBar = bar;
+    }
+
     @PostConstruct
     public void initBird() {
+        // assert that injection on Eagle instance has been completed
+        assertNotNull(birdBar);
+        assertNotNull(eagleBar);
         initBirdCalled.incrementAndGet();
     }
 

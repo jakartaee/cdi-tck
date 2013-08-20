@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
+import static org.testng.Assert.assertNotNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,7 +32,9 @@ class AnimalInterceptor {
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
-        postConstructInterceptorCalledFor.add(((Animal) ctx.getTarget()).getAnimalType());
+        Animal target = (Animal) ctx.getTarget();
+        assertNotNull(target.getBar());
+        postConstructInterceptorCalledFor.add((target).getAnimalType());
         try {
             ctx.proceed();
         } catch (Exception e) {

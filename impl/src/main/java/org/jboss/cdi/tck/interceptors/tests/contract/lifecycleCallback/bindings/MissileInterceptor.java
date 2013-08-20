@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings;
 
+import static org.testng.Assert.assertNotNull;
+
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -42,6 +44,8 @@ public class MissileInterceptor implements Serializable {
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
+        Missile target = (Missile) ctx.getTarget();
+        assertNotNull(target.getFoo());
         ActionSequence.addAction("postConstruct", MissileInterceptor.class.getName());
         try {
             ctx.proceed();

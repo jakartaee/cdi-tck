@@ -14,20 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings;
+package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.wrapped;
 
-import javax.inject.Inject;
-
-@Airborne
-public class Missile {
-
-    @Inject
-    private Foo foo;
-
-    public void fire() {
-    }
-
-    public Foo getFoo() {
-        return foo;
-    }
+public class Bar {
 }

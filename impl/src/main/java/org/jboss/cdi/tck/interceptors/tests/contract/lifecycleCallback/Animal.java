@@ -16,9 +16,18 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
-public abstract class Animal {
-    void foo() {
+import javax.inject.Inject;
 
+public abstract class Animal {
+
+    @Inject
+    protected Bar bar;
+
+    void foo() {
+    }
+
+    public Bar getBar() {
+        return bar;
     }
 
     public abstract String getAnimalType();

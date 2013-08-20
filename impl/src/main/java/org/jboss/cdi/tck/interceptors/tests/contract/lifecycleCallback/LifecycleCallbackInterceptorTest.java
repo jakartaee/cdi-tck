@@ -54,6 +54,7 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
         assertTrue(AnimalInterceptor.isPostConstructInterceptorCalled(Cow.COW));
     }
 
+    @Test
     @SpecAssertions({@SpecAssertion(section = "2.1", id = "ab"), @SpecAssertion(section = "2.6", id = "c")})
     public void testPreDestroyInterceptor() {
         createAndDestroyInstance(Goat.class);
