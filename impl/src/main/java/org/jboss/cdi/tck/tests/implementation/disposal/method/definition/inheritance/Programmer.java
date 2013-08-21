@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
+import javax.ejb.Stateful;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
+@Stateful
 public class Programmer {
 
     @Produces
@@ -31,7 +33,6 @@ public class Programmer {
     public void disposeCode(@Disposes @Any Code code) {
         Code.disposedBy.add(this.getClass());
     }
-
 
     public Class<?> getOriginClass() {
         return Programmer.class;
