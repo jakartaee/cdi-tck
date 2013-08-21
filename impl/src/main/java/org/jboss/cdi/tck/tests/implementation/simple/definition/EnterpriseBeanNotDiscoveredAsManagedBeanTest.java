@@ -1,5 +1,6 @@
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.WHAT_CLASSES_ARE_BEANS;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -15,11 +16,12 @@ public class EnterpriseBeanNotDiscoveredAsManagedBeanTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(EnterpriseBeanNotDiscoveredAsManagedBeanTest.class)
+        return new WebArchiveBuilder().withTestClass(EnterpriseBeanNotDiscoveredAsManagedBeanTest.class)
+                .withClasses(EnterpriseBeanObserver.class, Sheep.class, MockEnterpriseBean.class)
                 .withExtension(EnterpriseBeanObserver.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "f")
     public void testClassesImplementingEnterpriseBeanInterfaceNotDiscoveredAsSimpleBean() {
         assert !EnterpriseBeanObserver.observedEnterpriseBean;

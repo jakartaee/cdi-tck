@@ -20,7 +20,7 @@ import javax.ejb.EnterpriseBean;
 import javax.ejb.Stateless;
 
 /**
- * This mock originaly implemented {@link EnterpriseBean} - does not correspond to relevant assertion.
+ * This mock originally implemented {@link EnterpriseBean} - does not correspond to relevant assertion.
  */
 @Stateless
 public class MockEnterpriseBean {

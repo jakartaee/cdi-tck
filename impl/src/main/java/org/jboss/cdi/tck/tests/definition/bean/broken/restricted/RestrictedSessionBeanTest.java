@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.broken.restricted;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.RESTRICTING_BEAN_TYPES;
 
 import javax.enterprise.inject.spi.DefinitionException;
@@ -43,7 +44,7 @@ public class RestrictedSessionBeanTest extends AbstractTest {
                 .withClasses(Animal.class, RockBean.class).build();
     }
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "k")
     public void testInvalidTypedValueOnSessionBean() {
     }

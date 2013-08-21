@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEANATTRIBUTES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -92,7 +93,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a")
     public void testBeanAttributesForSessionBean() {
         AnnotatedType<Lake> type = getCurrentManager().createAnnotatedType(Lake.class);
