@@ -20,5 +20,5 @@ import javax.ejb.Local;
 
 @Local
 public interface LightYellowPearTreeLocal extends PearTreeLocal {
-
+    Pear produceLightYellowPear();
 }

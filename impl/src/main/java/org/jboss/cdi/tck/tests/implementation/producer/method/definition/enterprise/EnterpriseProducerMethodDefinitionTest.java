@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.definition.enterp
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -44,8 +46,8 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractTest {
     @Test(groups = INTEGRATION, expectedExceptions = UnsatisfiedResolutionException.class)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dd")
     public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass() {
-        assert getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
-        }).size() == 0;
+        assertEquals(getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
+        }).size(), 0);
         getContextualReference(Egg.class, new AnnotationLiteral<Yummy>() {
         }).getMother();
     }
@@ -53,10 +55,10 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractTest {
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dd")
     public void testNonStaticProducerMethodNotInherited() {
-        assert getBeans(Apple.class, new AnnotationLiteral<Yummy>() {
-        }).size() == 1;
-        assert getContextualReference(Apple.class, new AnnotationLiteral<Yummy>() {
-        }).getTree() instanceof AppleTreeLocal;
+        assertEquals(getBeans(Apple.class, new AnnotationLiteral<Yummy>() {
+        }).size(), 1);
+        assertTrue(getContextualReference(Apple.class, new AnnotationLiteral<Yummy>() {
+        }).getTree() instanceof AppleTree);
     }
 
     @Test(groups = INTEGRATION)
@@ -64,6 +66,6 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractTest {
     public void testNonStaticProducerMethodNotIndirectlyInherited() {
         Set<Bean<Pear>> beans = getBeans(Pear.class, new AnnotationLiteral<Yummy>() {
         });
-        assert beans.size() == 2;
+        assertEquals(beans.size(), 2);
     }
 }

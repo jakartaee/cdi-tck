@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.enterprise;
 
+import javax.ejb.Stateful;
+
+@Stateful
 public class YellowPearTree extends PearTree {
 
 }

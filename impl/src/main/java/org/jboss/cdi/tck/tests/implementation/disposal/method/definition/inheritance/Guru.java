@@ -16,18 +16,19 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
+import javax.ejb.Stateful;
 import javax.enterprise.inject.Produces;
 
 /**
  * Test that {@link Programmer#disposeCode(Code)} is not inherited.
  */
+@Stateful
 public class Guru extends Programmer {
 
     @Produces
     public Code produceDefaultCode() {
         return new Code(this);
     }
-
 
     public Class<?> getOriginClass() {
         return Guru.class;

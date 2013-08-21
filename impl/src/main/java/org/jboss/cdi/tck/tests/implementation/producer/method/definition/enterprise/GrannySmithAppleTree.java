@@ -17,13 +17,8 @@
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.enterprise;
 
 import javax.ejb.Stateful;
-import javax.enterprise.inject.Produces;
 
 @Stateful
-public class PearTree implements PearTreeLocal {
-    @Produces
-    @Yummy
-    public Pear producePear() {
-        return new Pear("green");
-    }
+public class GrannySmithAppleTree extends AppleTree implements AppleTreeLocal {
+
 }
