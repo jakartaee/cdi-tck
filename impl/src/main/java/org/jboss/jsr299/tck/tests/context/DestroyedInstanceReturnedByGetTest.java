@@ -16,7 +16,6 @@
  */
 package org.jboss.jsr299.tck.tests.context;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
 import javax.enterprise.context.spi.CreationalContext;
@@ -48,21 +47,9 @@ public class DestroyedInstanceReturnedByGetTest extends AbstractJSR299Test
       Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
       destroyContext(sessionContext);
       setContextActive(sessionContext);
-      
+
       beanInstance = sessionContext.get(mySessionBean);
       assert beanInstance == null;
-      
-      Bean<MyApplicationBean> myApplicationBean = getBeans(MyApplicationBean.class).iterator().next();
-      CreationalContext<MyApplicationBean> applicationCreationalContext = getCurrentManager().createCreationalContext(myApplicationBean);
-
-      MyApplicationBean myApplicationBeanInstance = myApplicationBean.create(applicationCreationalContext);
-      assert myApplicationBeanInstance != null;
-      Context applicationContext = getCurrentManager().getContext(ApplicationScoped.class); 
-      destroyContext(applicationContext);
-      setContextActive(applicationContext);
-
-      myApplicationBeanInstance = applicationContext.get(myApplicationBean);
-      assert myApplicationBeanInstance == null;
    }
-   
+
 }
