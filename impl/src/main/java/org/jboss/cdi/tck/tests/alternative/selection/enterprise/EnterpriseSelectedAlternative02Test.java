@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jboss.cdi.tck.tests.alternative.selection.enterprise;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
+import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createEnterpriseBuilderBase;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -29,6 +29,8 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.tests.alternative.selection.Alpha;
 import org.jboss.cdi.tck.tests.alternative.selection.Bravo;
+import org.jboss.cdi.tck.tests.alternative.selection.Charlie;
+import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -36,29 +38,39 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * The simplest possible scenario - test session bean alternative selected for the entire application, no priority ordering during resolution.
  * 
- * WAR deployment with 2 libraries:
+ * EAR deployment with 1 library and 1 war:
  * <ul>
- * <li>WEB-INF/classes - alpha - contains {@link EnterpriseService} alternative with priority 1000</li>
- * <li>lib 1 - bravo - contains {@link PojoService}</li>
+ * <li>ear lib - contains {@link Service} and a simple service implementation {@link PojoService}</li>
+ * <li>war - contains {@link EnterpriseService} alternative with priority 1000, should be visible for the war only</li>
  * </ul>
  * 
  * Expected results:
  * <ul>
- * <li>{@link EnterpriseService} is available for injection in all bean archives</li>
+ * <li>{@link EnterpriseService} is available for injection in beans in war only</li>
  * </ul>
  * 
- * @author Martin Kouba
+ * @author Matej Briskar
  * 
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
-public class EnterpriseSelectedAlternative01Test extends AbstractTest {
+public class EnterpriseSelectedAlternative02Test extends AbstractTest {
 
     @Deployment
-    public static WebArchive createTestArchive() {
-        return createBuilderBase().withTestClass(EnterpriseSelectedAlternative01Test.class).withClasses(Service.class, EnterpriseService.class, Alpha.class)
-                .withBeanLibrary(PojoService.class, Bravo.class).build();
+    public static EnterpriseArchive createTestArchive() {
+
+        EnterpriseArchive enterpriseArchive = createEnterpriseBuilderBase()
+        // A - default EJB jar
+                .withTestClassDefinition(EnterpriseSelectedAlternative02Test.class)
+                // C - lib visible to all
+                .withBeanLibrary(Bravo.class, Service.class, PojoService.class).noDefaultWebModule().build();
+
+        // E - not visible for AC
+        WebArchive bazWebArchive = createBuilderBase().notTestArchive()
+                .withClasses(Charlie.class, EnterpriseService.class, EnterpriseSelectedAlternative02Test.class).withBeanLibrary(Alpha.class).build();
+        enterpriseArchive.addAsModule(bazWebArchive);
+
+        return enterpriseArchive;
     }
 
     @Inject
@@ -67,14 +79,21 @@ public class EnterpriseSelectedAlternative01Test extends AbstractTest {
     @Inject
     Bravo bravo;
 
-    @Test(groups = INTEGRATION)
+    @Inject
+    Charlie charlie;
+
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ab") })
     public void testAlternativeSessionBeanSelected() {
         assertNotNull(alpha);
         assertNotNull(bravo);
+        assertNotNull(charlie);
 
         assertEquals(alpha.assertAvailable(Service.class).getId(), EnterpriseService.class.getName());
-        assertEquals(bravo.assertAvailable(Service.class).getId(), EnterpriseService.class.getName());
+        // EnterpriseService is not visible to bravo
+        assertEquals(bravo.assertAvailable(Service.class).getId(), PojoService.class.getName());
+        assertEquals(charlie.assertAvailable(Service.class).getId(), EnterpriseService.class.getName());
+
     }
 
 }
