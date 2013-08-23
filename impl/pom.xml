@@ -212,9 +212,9 @@
                   <configuration>
                      <source>1.5</source>
                      <target>1.5</target>
-                     <!-- this is a really ugly workaround for passing multiple arguments to 
+                     <!-- this is a really ugly workaround for passing multiple arguments to
                           the annotation processor tool, see MCOMPILER-75 and MCOMPILER-135 for more details -->
-                     <compilerArguments>                     
+                     <compilerArguments>
                         <Aapt.flag1>-AoutputDir=${basedir}/../target/</Aapt.flag1>
                      </compilerArguments>
                      <compilerArgument>-AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml</compilerArgument>
@@ -313,12 +313,5 @@
       </profile>
 
    </profiles>
-
-   <!--scm>
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/impl</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/impl</developerConnection>
-      <url>https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/impl</url>
-   </scm-->
-
 
 </project>

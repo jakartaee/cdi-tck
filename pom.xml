@@ -304,9 +304,9 @@
    </build>
 
    <scm>
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0</developerConnection>
-      <url>https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0</url>
+     <connection>scm:git:git://github.com/cdi-spec/cdi-tck.git</connection>
+     <developerConnection>scm:git:git@github.com:cdi-spec/cdi-tck.git</developerConnection>
+     <url>https://github.com/cdi-spec/cdi-tck</url>
    </scm>
 
    <profiles>
@@ -321,7 +321,7 @@
             <module>doc/reference</module>
          </modules>
       </profile>
-      
+
       <profile>
          <id>verify-release</id>
          <activation>
@@ -332,7 +332,7 @@
          <build>
             <plugins>
                <plugin>
-                  <groupId>org.apache.maven.plugins</groupId> 
+                  <groupId>org.apache.maven.plugins</groupId>
                   <artifactId>maven-enforcer-plugin</artifactId>
                   <executions>
                      <execution>

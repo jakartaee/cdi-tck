@@ -9,7 +9,7 @@
    <groupId>org.jboss.jsr299.tck</groupId>
    <artifactId>jsr299-tck-interceptor-decorator</artifactId>
    <name>JSR-299 TCK tests and harness (Interceptors and Decorators)</name>
-   
+
    <dependencies>
 
       <dependency>
@@ -21,7 +21,7 @@
          <groupId>org.jboss.jsr299.tck</groupId>
          <artifactId>jsr299-tck-api</artifactId>
       </dependency>
-      
+
       <dependency>
          <groupId>org.jboss.test-harness</groupId>
          <artifactId>jboss-test-harness</artifactId>
@@ -42,7 +42,7 @@
          <groupId>javax.transaction</groupId>
          <artifactId>jta</artifactId>
       </dependency>
-      
+
       <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>tck-utils-api</artifactId>
@@ -86,7 +86,7 @@
          <groupId>javax.faces</groupId>
          <artifactId>jsf-api</artifactId>
       </dependency>
-      
+
       <dependency>
       	<groupId>javax.persistence</groupId>
       	<artifactId>persistence-api</artifactId>
@@ -96,7 +96,7 @@
          <groupId>commons-httpclient</groupId>
          <artifactId>commons-httpclient</artifactId>
       </dependency>
-      
+
       <dependency>
          <groupId>net.sourceforge.htmlunit</groupId>
          <artifactId>htmlunit</artifactId>
@@ -161,7 +161,7 @@
          </plugin>
       </plugins>
    </build>
-   
+
    <profiles>
       <profile>
          <id>tck-audit</id>
@@ -243,7 +243,7 @@
            <defaultGoal>compile</defaultGoal>
         </build>
       </profile>
-      
+
       <profile>
          <id>write-artifacts-to-disk</id>
          <activation>
@@ -259,7 +259,7 @@
                   <executions>
                      <execution>
                         <id>generate-jsr-299-artifacts</id>
-                        <phase>package</phase> 
+                        <phase>package</phase>
                         <goals>
                         <goal>java</goal>
                         </goals>
@@ -286,14 +286,7 @@
             </plugins>
          </build>
       </profile>
-      
-   </profiles>   
 
-   <scm>    
-      <connection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/interceptor</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/interceptor</developerConnection>
-      <url>https://svn.jboss.org/repos/weld/cdi-tck/trunk/interceptor</url>
-   </scm>
-
+   </profiles>
 
 </project>

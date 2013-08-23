@@ -60,10 +60,4 @@
       </plugins>
    </build>
 
-   <scm>
-      <connection>scm:svn:http://anonsvn.jboss.org/repos/weld/cdi-tck/branches/1.0/doc/reference</connection>
-      <developerConnection>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/doc/reference</developerConnection>
-     <url>scm:svn:https://svn.jboss.org/repos/weld/cdi-tck/branches/1.0/doc/reference</url>
-  </scm>
-
 </project>
