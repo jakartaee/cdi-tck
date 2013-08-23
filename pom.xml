@@ -96,6 +96,7 @@
       <jws.api.version>1.0-MR1</jws.api.version>
       <apache.httpclient.version>3.1</apache.httpclient.version>
       <htmlunit.version>2.4</htmlunit.version>
+      <maven.release.plugin.version>2.2.1</maven.release.plugin.version>
    </properties>
 
    <!-- Dependency management -->
@@ -264,8 +265,8 @@
             <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-release-plugin</artifactId>
+               <version>${maven.release.plugin.version}</version>
                <configuration>
-                  <tagBase>https://svn.jboss.org/repos/weld/cdi-tck/tags</tagBase>
                   <preparationGoals>install</preparationGoals>
                   <arguments>-Drelease -Dtck-audit</arguments>
                </configuration>
