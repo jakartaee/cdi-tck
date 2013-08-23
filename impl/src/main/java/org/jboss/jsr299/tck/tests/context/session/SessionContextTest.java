@@ -38,6 +38,9 @@ import com.gargoylesoftware.htmlunit.WebClient;
 @SpecVersion(spec="cdi", version="20091101")
 public class SessionContextTest extends AbstractJSR299Test
 {
+
+   private static final long DEFAULT_SLEEP_INTERVAL = 3000;
+
    @Test(groups = { "contexts", "servlet", "integration" })
    @SpecAssertion(section = "6.7.2", id = "aa")
    public void testSessionScopeActiveDuringServiceMethod() throws Exception
@@ -85,13 +88,13 @@ public class SessionContextTest extends AbstractJSR299Test
       TextPage secondRequestResult = webClient.getPage(getContextPath() + "IntrospectSession");
       assert secondRequestResult.getContent() != null;
       assert Long.parseLong(secondRequestResult.getContent()) != Long.parseLong(firstRequestResult.getContent());
-      
+
       // As final confirmation that the context was destroyed, check that its beans
       // were also destroyed.
       TextPage beanDestructionResult = webClient.getPage(getContextPath() + "InvalidateSession?isBeanDestroyed");
       assert Boolean.parseBoolean(beanDestructionResult.getContent());
    }
-   
+
    @Test(groups = { "contexts", "integration" })
    @SpecAssertion(section = "6.7.2", id = "cb")
    public void testSessionContextDestroyedWhenHttpSessionTimesOut() throws Exception
@@ -102,12 +105,12 @@ public class SessionContextTest extends AbstractJSR299Test
       assert firstRequestResult.getContent() != null;
       assert Long.parseLong(firstRequestResult.getContent()) != 0;
       webClient.getPage(getContextPath() + "InvalidateSession?timeout=1");
-      Thread.sleep(1500);
+      Thread.sleep(DEFAULT_SLEEP_INTERVAL);
       // Make a second request and make sure the same context is not there
       TextPage secondRequestResult = webClient.getPage(getContextPath() + "IntrospectSession");
       assert secondRequestResult.getContent() != null;
       assert Long.parseLong(secondRequestResult.getContent()) != Long.parseLong(firstRequestResult.getContent());
-      
+
       // As final confirmation that the context was destroyed, check that its beans
       // were also destroyed.
       TextPage beanDestructionResult = webClient.getPage(getContextPath() + "InvalidateSession?isBeanDestroyed");
