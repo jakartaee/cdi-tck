@@ -31,7 +31,7 @@ import org.testng.annotations.Test;
 
 /**
  * Event bus tests
- * 
+ *
  * @author Nicklas Karlsson
  * @author David Allen
  */
@@ -80,10 +80,10 @@ public class EventTest extends AbstractJSR299Test
 
    @Test(groups = { "events" })
    @SpecAssertions({ @SpecAssertion(section = "4.3", id = "cc"), @SpecAssertion(section = "5.5.6", id = "baa") })
-   public void testObserverNotCalled() {
+   public void testObserverCalledOnSpecializingBeanOnly() {
        Shop.deliveryObservedBy = null;
        getCurrentManager().fireEvent(new Delivery());
-       assert Shop.deliveryObservedBy == null;
+       assert Shop.deliveryObservedBy == FarmShop.class.getName();
    }
 
    @Test(groups = { "events" }, expectedExceptions = IllegalArgumentException.class)
@@ -97,7 +97,7 @@ public class EventTest extends AbstractJSR299Test
    {
       getCurrentManager().resolveObserverMethods(eventToFire);
    }
-   
+
    @Test(groups = { "events" })
    @SpecAssertions( {
       @SpecAssertion(section = "10.2.3", id = "b"),
@@ -114,7 +114,7 @@ public class EventTest extends AbstractJSR299Test
     * By default, Java implementation reuse is assumed. In this case, the
     * producer, disposal and observer methods of the first bean are not
     * inherited by the second bean.
-    * 
+    *
     * @throws Exception
     */
    @Test(groups = { "events", "inheritance" })
@@ -125,7 +125,7 @@ public class EventTest extends AbstractJSR299Test
       getCurrentManager().fireEvent(egg);
       assert typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class);
    }
-   
+
    @Test(groups = { "events", "inheritance" })
    @SpecAssertions({
       @SpecAssertion(section = "4.2", id = "di"),
