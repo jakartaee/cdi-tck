@@ -75,15 +75,15 @@ public class InvocationContextTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "6", id = "la")
+    @SpecAssertion(section = "6", id = "lb")
     public void testIllegalNumberOfParameters() {
         getContextualReference(SimpleBean.class).add2(1, 1);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    @SpecAssertion(section = "6", id = "lb")
+    @SpecAssertion(section = "6", id = "la")
     public void testIllegalTypeOfParameters() {
-        assert getContextualReference(SimpleBean.class).add3(1, 1) == 2;
+        getContextualReference(SimpleBean.class).add3(1, 1);
     }
 
     @Test
