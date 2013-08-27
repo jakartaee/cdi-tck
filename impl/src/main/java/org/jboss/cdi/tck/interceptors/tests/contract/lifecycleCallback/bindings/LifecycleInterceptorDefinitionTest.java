@@ -44,7 +44,7 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
                 .withTestClassPackage(LifecycleInterceptorDefinitionTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(MissileInterceptor.class.getName(), DestructionInterceptor.class.getName()).up())
+                                .clazz(AirborneInterceptor.class.getName(), DestructionInterceptor.class.getName()).up())
                 .build();
     }
 
@@ -61,9 +61,9 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
         bean.destroy(missile, ctx);
 
         assertEquals(ActionSequence.getSequenceSize("postConstruct"), 1);
-        assertEquals(ActionSequence.getSequenceData("postConstruct").get(0), MissileInterceptor.class.getName());
+        assertEquals(ActionSequence.getSequenceData("postConstruct").get(0), AirborneInterceptor.class.getName());
         assertEquals(ActionSequence.getSequenceSize("preDestroy"), 1);
-        assertEquals(ActionSequence.getSequenceData("preDestroy").get(0), MissileInterceptor.class.getName());
+        assertEquals(ActionSequence.getSequenceData("preDestroy").get(0), AirborneInterceptor.class.getName());
     }
 
     @Test
@@ -81,14 +81,14 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
 
         List<String> postConstruct = ActionSequence.getSequenceData("postConstruct");
         assertEquals(postConstruct.size(), 4);
-        assertEquals(postConstruct.get(0), MissileInterceptor.class.getName());
+        assertEquals(postConstruct.get(0), AirborneInterceptor.class.getName());
         assertEquals(postConstruct.get(1), DestructionInterceptor.class.getName());
         assertEquals(postConstruct.get(2), Weapon.class.getName());
         assertEquals(postConstruct.get(3), Rocket.class.getName());
 
         List<String> preDestroy = ActionSequence.getSequenceData("preDestroy");
         assertEquals(preDestroy.size(), 4);
-        assertEquals(preDestroy.get(0), MissileInterceptor.class.getName());
+        assertEquals(preDestroy.get(0), AirborneInterceptor.class.getName());
         assertEquals(preDestroy.get(1), DestructionInterceptor.class.getName());
         assertEquals(preDestroy.get(2), Weapon.class.getName());
         assertEquals(preDestroy.get(3), Rocket.class.getName());

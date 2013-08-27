@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings;
 
-import static org.testng.Assert.assertNotNull;
-
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -30,11 +28,11 @@ import org.jboss.cdi.tck.util.ActionSequence;
 @SuppressWarnings("serial")
 @Airborne
 @Interceptor
-public class MissileInterceptor implements Serializable {
+public class AirborneInterceptor implements Serializable {
 
     @PreDestroy
     public void preDestroy(InvocationContext ctx) {
-        ActionSequence.addAction("preDestroy", MissileInterceptor.class.getName());
+        ActionSequence.addAction("preDestroy", AirborneInterceptor.class.getName());
         try {
             ctx.proceed();
         } catch (Throwable e) {
@@ -44,9 +42,7 @@ public class MissileInterceptor implements Serializable {
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
-        Missile target = (Missile) ctx.getTarget();
-        assertNotNull(target.getFoo());
-        ActionSequence.addAction("postConstruct", MissileInterceptor.class.getName());
+        ActionSequence.addAction("postConstruct", AirborneInterceptor.class.getName());
         try {
             ctx.proceed();
         } catch (Throwable e) {

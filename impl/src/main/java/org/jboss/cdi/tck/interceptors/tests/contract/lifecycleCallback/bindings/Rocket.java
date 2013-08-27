@@ -19,12 +19,20 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Inject;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Destructive
 @Airborne
 public class Rocket extends Weapon {
+
+    @Inject
+    private Foo foo;
+
+    public Foo getFoo() {
+        return foo;
+    }
 
     public void fire() {
     }
