@@ -93,7 +93,7 @@ public class SessionContextListenerShutdownTest extends AbstractTest {
      * @throws Exception
      */
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
-    @SpecAssertion(section = SESSION_CONTEXT, id = "")
+    @SpecAssertion(section = SESSION_CONTEXT, id = "ac")
     public void testApplicationContextDestroyed(@ArquillianResource @OperateOnDeployment(ALPHA_DEPLOYMENT_NAME) URL alphaContext,
             @ArquillianResource @OperateOnDeployment(BRAVO_ARCHIVE_NAME) URL bravoContext) throws Exception {
 

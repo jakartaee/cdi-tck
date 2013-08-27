@@ -42,7 +42,7 @@ public class InfoServlet extends HttpServlet {
 
         String action = request.getParameter("action");
 
-        if ("fooDestroyed".equals(action)) {
+        if ("set".equals(action)) {
             logger.log("Set test flag");
             testFlag.set();
             response.setStatus(HttpServletResponse.SC_OK);
