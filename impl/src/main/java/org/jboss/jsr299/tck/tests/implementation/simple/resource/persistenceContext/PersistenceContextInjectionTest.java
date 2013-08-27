@@ -47,7 +47,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec="cdi", version="20091101")
 public class PersistenceContextInjectionTest extends AbstractJSR299Test
 {
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration", "persistence" })
    @SpecAssertions( {
       @SpecAssertion(section = "3.5.1", id = "cc"),
       @SpecAssertion(section = "7.3.6", id = "lb"),
@@ -60,8 +60,8 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test
       assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
       assert serviceBean.validateEntityManager();
    }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+
+   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration", "persistence" })
    @SpecAssertions( {
       @SpecAssertion(section = "3.5.1", id = "dd"),
       @SpecAssertion(section = "7.3.6", id = "lc"),
@@ -75,8 +75,8 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test
       assert managedBean.getPersistenceUnit() != null : "Persistence unit was not injected into bean";
       assert managedBean.getPersistenceUnit().isOpen() : "Persistence unit not open injected into bean";
    }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+
+   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration", "persistence" })
    @SpecAssertions( {
       @SpecAssertion(section = "7.3.6", id = "md")
    })
@@ -89,8 +89,8 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test
       assert managedBean.getPersistenceContext() != null : "Persistence context was not injected into bean";
       assert managedBean.getPersistenceContext().getDelegate() != null : "Persistence context not deserialized correctly";
    }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+
+   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration", "persistence" })
    @SpecAssertions( {
       @SpecAssertion(section = "7.3.6", id = "lc"),
       @SpecAssertion(section = "7.3.6", id = "mf")
@@ -104,8 +104,8 @@ public class PersistenceContextInjectionTest extends AbstractJSR299Test
       assert managedBean.getPersistenceUnit() != null : "Persistence unit was not injected into bean";
       assert managedBean.getPersistenceUnit().isOpen() : "Persistence unit not open injected into bean";
    }
-   
-   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration" })
+
+   @Test(groups = { "beanLifecycle", "commonAnnotations", "integration", "persistence" })
    @SpecAssertions( {
       @SpecAssertion(section = "3.5.1", id = "hh")
    })
