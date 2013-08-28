@@ -30,7 +30,7 @@ import org.testng.ISuiteListener;
 
 public class ConfigurationLoggingListener implements ISuiteListener {
 
-    private static final String CONFIGURATION_FILE_PATH = "target/cdi-tck-configuration.txt";
+    private static final String CONFIGURATION_FILE_PATH = "target/cdi-tck-configuration.log";
     private final Logger logger = Logger.getLogger(ConfigurationLoggingListener.class.getName());
 
     @Override
