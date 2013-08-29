@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.aroundConstruct;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.List;
+import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
 
 import javax.enterprise.inject.Instance;
 
@@ -63,7 +61,7 @@ public class ConstructorInterceptionTest extends AbstractTest {
     public void testConstructorLevelBinding(Instance<BeanWithConstructorLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
-        assertSequenceEquals(AlphaInterceptor2.class, BeanWithConstructorLevelBinding.class);
+        assertSequenceDataEquals(AlphaInterceptor2.class, BeanWithConstructorLevelBinding.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -72,7 +70,7 @@ public class ConstructorInterceptionTest extends AbstractTest {
     public void testMultipleConstructorLevelBinding(Instance<BeanWithMultipleConstructorLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
-        assertSequenceEquals(AlphaInterceptor2.class, BravoInterceptor.class, BeanWithMultipleConstructorLevelBinding.class);
+        assertSequenceDataEquals(AlphaInterceptor2.class, BravoInterceptor.class, BeanWithMultipleConstructorLevelBinding.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -80,7 +78,7 @@ public class ConstructorInterceptionTest extends AbstractTest {
     public void testTypeLevelBinding(Instance<BeanWithTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
-        assertSequenceEquals(AlphaInterceptor1.class, BeanWithTypeLevelBinding.class);
+        assertSequenceDataEquals(AlphaInterceptor1.class, BeanWithTypeLevelBinding.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -88,7 +86,7 @@ public class ConstructorInterceptionTest extends AbstractTest {
     public void testTypeLevelAndConstructorLevelBinding(Instance<BeanWithConstructorLevelAndTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
-        assertSequenceEquals(AlphaInterceptor1.class, BravoInterceptor.class, BeanWithConstructorLevelAndTypeLevelBinding.class);
+        assertSequenceDataEquals(AlphaInterceptor1.class, BravoInterceptor.class, BeanWithConstructorLevelAndTypeLevelBinding.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -96,14 +94,6 @@ public class ConstructorInterceptionTest extends AbstractTest {
     public void testOverridingTypeLevelBinding(Instance<BeanOverridingTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
-        assertSequenceEquals(AlphaInterceptor2.class, BeanOverridingTypeLevelBinding.class);
-    }
-
-    private void assertSequenceEquals(Class<?>... expected) {
-        List<String> data = ActionSequence.getSequence().getData();
-        assertEquals(data.size(), expected.length);
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(data.get(i), expected[i].getSimpleName());
-        }
+        assertSequenceDataEquals(AlphaInterceptor2.class, BeanOverridingTypeLevelBinding.class);
     }
 }

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.util;
 
+import static org.testng.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -146,6 +148,18 @@ public final class ActionSequence {
         return csv.toString();
     }
 
+    /**
+     * Assert that strings stored in this sequence equal (in order!) to the simple class names of {@code expected}.
+     * 
+     * @param expected
+     */
+    public void assertDataEquals(Class<?>... expected) {
+        assertEquals(data.size(), expected.length);
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(data.get(i), expected[i].getSimpleName());
+        }
+    }
+
     // Static members
 
     private static final String DEFAULT_SEQUENCE = "default";
@@ -268,6 +282,18 @@ public final class ActionSequence {
             }
         }
         return sequence;
+    }
+
+    /**
+     * Assert that strings stored in the default sequence equal (in order!) to the simple class names of {@code expected}.
+     * Do nothing if there is no default sequence.
+     * 
+     * @param expected
+     */
+    public static void assertSequenceDataEquals(Class<?>... expected) {
+        if (getSequence() != null) {
+            getSequence().assertDataEquals(expected);
+        }
     }
 
     private static void checkStringValue(String value) {
