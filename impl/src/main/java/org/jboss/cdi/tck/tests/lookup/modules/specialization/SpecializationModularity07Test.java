@@ -40,9 +40,9 @@ import org.testng.annotations.Test;
  * <li>1 shared library</li>
  * </ul>
  * 
- * Shared library 1 defines {@link Handler}. WAR 1 defines {@link UppercaseHandler} which specializes {@link Handler}. WAR 2
- * defines {@link LowercaseHandler} which specializes {@link Handler}. Bean {@link Alpha} packaged in WAR 1 has an injection
- * point of type {@link Handler}. Bean {@link Bravo} packaged in WAR 2 has an injection point of type {@link Handler}.
+ * Shared library 1 defines {@link Handler}. WAR 1 defines {@link UppercaseHandler} which specializes {@link Handler}. WAR 2 defines {@link LowercaseHandler}
+ * which specializes {@link Handler}. Bean {@link Alpha} packaged in WAR 1 has an injection point of type {@link Handler}. Bean {@link Bravo} packaged in WAR 2
+ * has an injection point of type {@link Handler}.
  * 
  * Expected result: Inconsistent specialization
  * 
@@ -56,9 +56,8 @@ public class SpecializationModularity07Test extends AbstractTest {
     @Deployment
     public static EnterpriseArchive createTestArchive() {
 
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule()
-                .withTestClassDefinition(SpecializationModularity07Test.class).withBeanLibrary(Handler.class)
-                .withLibrary(Connector.class).build();
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().noDefaultWebModule().withTestClassDefinition(SpecializationModularity07Test.class)
+                .withBeanLibrary(Handler.class).withLibrary(Connector.class).build();
 
         // WAR 1
         enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
