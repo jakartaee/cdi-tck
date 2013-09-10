@@ -37,11 +37,11 @@ public class SheepWSEndPointService extends Service {
 
     @WebEndpoint(name = "SheepWSPort")
     public SheepWS getSheepWSPort() {
-        return super.getPort(new QName(ObjectFactory.TARGET_NS, "SheepWSEndPointPort"), SheepWS.class);
+        return super.getPort(SheepWS.class);
     }
 
     @WebEndpoint(name = "SheepWSPort")
     public SheepWS getSheepWSPort(WebServiceFeature... features) {
-        return super.getPort(new QName(ObjectFactory.TARGET_NS, "SheepWSEndPointPort"), SheepWS.class, features);
+        return super.getPort(SheepWS.class, features);
     }
 }
