@@ -157,9 +157,9 @@ public class InterceptorInvocationTest extends AbstractTest {
 
         timing.createTimer();
 
-        new Timer().addStopCondition(new StopCondition() {
+        new Timer().setDelay(10000l).addStopCondition(new StopCondition() {
             public boolean isSatisfied() {
-                return AlmightyInterceptor.timeoutIntercepted;
+                return Timing.timeoutAt != null;
             }
         }).start();
 
