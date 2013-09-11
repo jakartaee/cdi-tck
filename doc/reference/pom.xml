@@ -35,6 +35,12 @@
          <plugin>
             <groupId>org.jboss.maven.plugins</groupId>
             <artifactId>maven-jdocbook-plugin</artifactId>
+            <configuration>
+                    <options>
+                        <!-- Workaround for MPJDOCBOOK-55 -->
+                        <injectionDateFormat>dd/MM/yyyy</injectionDateFormat>
+                    </options>
+                </configuration>
          </plugin>
          <plugin>
             <groupId>org.codehaus.mojo</groupId>
