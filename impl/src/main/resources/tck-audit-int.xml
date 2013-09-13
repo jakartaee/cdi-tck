@@ -57,16 +57,22 @@
 
     <section id="2.2" title="Interceptor Life Cycle">
 
-        <assertion id="a">
+        <assertion id="a" testable="false">
             <text>The lifecycle of an interceptor instance is the same as that of the target class instance with which it is associated.</text>
+            <note>Tested within 2.2 ba) and 2.2 bb).</note>
         </assertion>
 
-        <assertion id="b">
-            <text>Except as noted below, when the target instance is created, a corresponding interceptor instance is created for each associated interceptor class. These interceptor instances are destroyed if the target instance fails to be created or when it is removed.</text>
+        <assertion id="ba">
+            <text>Except as noted below, when the target instance is created, a corresponding interceptor instance is created for each associated interceptor class.</text>
+        </assertion>
+        <assertion id="bb" testable="false">
+            <text>These interceptor instances are destroyed if the target instance fails to be created or when it is removed.</text>
+            <note>Unable to test whether an instance is really destroyed.</note>
         </assertion>
 
-        <assertion id="c">
+        <assertion id="c" teastable="false">
             <text>An interceptor instance may be the target of dependency injection. Dependency injection is performed when the interceptor instance is created, using the naming context of the associated target class.</text>
+            <note>Tested within 2.2.1 a).</note>
         </assertion>
 
         <group>
@@ -98,10 +104,11 @@
 
         <assertion id="e">
             <text>With the exception of |AroundConstruct| lifecycle callback interceptors, all interceptor methods, including |PostConstruct| callbacks are invoked after dependency injection has been completed on both the interceptor instances and the target instance.</text>
+            <note>Implied by 2.2 ba) and 2.2 c).</note>
             <note>If the PostConstruct callback is defined on the interceptor class, it is not invoked when the interceptor instance itself is created.</note>
         </assertion>
 
-        <assertion id="f">
+        <assertion id="f" testable="false">
             <text>|PreDestroy| callbacks, if any, are invoked before the target instance and all interceptor instances associated with it are destroyed.</text>
             <note>If the PreDestroy callback is defined on the interceptor class, it is not invoked when the interceptor instance itself is destroyed.</note>
         </assertion>

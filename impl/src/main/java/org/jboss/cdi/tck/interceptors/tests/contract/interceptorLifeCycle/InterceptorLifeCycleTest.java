@@ -16,9 +16,12 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,6 +48,34 @@ public class InterceptorLifeCycleTest extends AbstractTest {
         assertTrue(AroundInvokeInterceptor.called);
         assertTrue(PostConstructInterceptor.called);
         assertTrue(PreDestroyInterceptor.called);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = "2.2", id = "ba")
+    public void testInterceptorInstanceCreatedWhenTargetInstanceCreated(Instance<Warrior> instance) {
+        for (int i = 1; i < 3; i++) {
+            createWarriorInstanceAndAssertInterceptorsCount(instance, i);
+        }
+    }
+
+    private void createWarriorInstanceAndAssertInterceptorsCount(Instance<Warrior> instance, int repetition) {
+        Warrior warrior = instance.get();
+        assertEquals(WarriorPCInterceptor.count, repetition);
+        assertEquals(WarriorPDInterceptor.count, repetition);
+        assertEquals(WarriorAIInterceptor.count, repetition);
+        assertEquals(MethodInterceptor.count, repetition);
+        assertEquals(WarriorAttackAIInterceptor.count, repetition);
+        // two weapons injected into warrior
+        assertEquals(WeaponAIInterceptor.count, 2 * repetition);
+
+        // when warrior attacks, he uses his weapon - at that time
+        // an instance of WeaponAIInterceptor intercepting its usage is set to its field
+        warrior.attack1();
+        warrior.attack2();
+        assertNotEquals(warrior.weapon1.getWI(), warrior.weapon2.getWI());
+        assertEquals(WarriorAIInterceptor.count, repetition);
+        assertEquals(MethodInterceptor.count, repetition);
+        assertEquals(WarriorAttackAIInterceptor.count, repetition);
     }
 
     private void createCallAndDestroyBazInstance() {
