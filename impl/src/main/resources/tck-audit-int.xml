@@ -72,7 +72,10 @@
         <group>
             <text>When a |AroundConstruct| lifecycle callback interceptor is used, the following rules apply:</text>
             <assertion id="da">
-                <text>The |AroundConstruct| lifecycle callback is invoked after the dependency injection has been completed on instances of all interceptor classes associated with the target class. Injection of the target component into interceptor instances that are invoked during the |AroundConstruct| lifecycle callback is not supported.</text>
+                <text>The |AroundConstruct| lifecycle callback is invoked after the dependency injection has been completed on instances of all interceptor classes associated with the target class.</text>
+            </assertion>
+            <assertion id="daz" testable="false">
+                <text>Injection of the target component into interceptor instances that are invoked during the |AroundConstruct| lifecycle callback is not supported.</text>
             </assertion>
             <assertion id="db">
                 <text>The target instance is created and its constructor injection is performed, if applicable, when the last interceptor method in the |AroundConstruct| interceptor chain invokes the |InvocationContext.proceed| method. If the |InvocationContext.proceed| method is not invoked by an interceptor method, the target instance will not be created.</text>
@@ -80,20 +83,22 @@
             <assertion id="dc">
                 <text>The |AroundConstruct| interceptor method can access the constructed instance using the |InvocationContext.getTarget| method after the |InvocationContext.proceed| completes.</text>
             </assertion>
-            <assertion id="dd">
+            <assertion id="dd" testable="false">
                 <text>Dependency injection on the target instance is not completed until after invocation of all interceptor methods in the |AroundConstruct| interceptor chain complete successfully.</text>
+                <note>INTERCEPTORS_SPEC-26</note>
             </assertion>
-            <assertion id="de">
+            <assertion id="de" testable="false">
                 <text>The |PostConstruct| lifecycle callback chain for the target instance, if any, will be invoked after the dependency injection has been completed on the target instance.</text>
+                <note>Tested in 2.2 e).</note>
             </assertion>
-            <assertion id="df">
+            <assertion id="df" testable="false">
                 <text>An |AroundConstruct| lifecycle callback interceptor method should exercise caution when invoking methods of the target instance since its dependency injection may not have been completed.</text>
             </assertion>
         </group>
 
         <assertion id="e">
             <text>With the exception of |AroundConstruct| lifecycle callback interceptors, all interceptor methods, including |PostConstruct| callbacks are invoked after dependency injection has been completed on both the interceptor instances and the target instance.</text>
-            <note>If the PostConstruct callback is defined on the interceptor class, this callback it is not invoked when the interceptor instance itself is created.</note>
+            <note>If the PostConstruct callback is defined on the interceptor class, it is not invoked when the interceptor instance itself is created.</note>
         </assertion>
 
         <assertion id="f">
