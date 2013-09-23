@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServlet;
 
 @SuppressWarnings("serial")
 @Vetoed
-@WebServlet
+@WebServlet("/testServlet")
 public class TestServlet extends HttpServlet {
     @Inject
     Charlie charlie;
