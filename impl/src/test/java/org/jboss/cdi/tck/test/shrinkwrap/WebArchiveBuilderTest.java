@@ -36,8 +36,7 @@ public class WebArchiveBuilderTest {
     public void testAddClasses() {
 
         // Optimization possible, no skipped classes
-        WebArchive archive = new WebArchiveBuilder().withTestClass(TestClass.class).withClasses(Qux.class, Excluded.class)
-                .build();
+        WebArchive archive = new WebArchiveBuilder().withTestClass(TestClass.class).withClasses(Qux.class, Excluded.class).build();
 
         assertContainsClass(archive, Qux.class);
         assertContainsClass(archive, Excluded.class);
@@ -46,18 +45,25 @@ public class WebArchiveBuilderTest {
         assertContainsInnerClass(archive, Ping.class);
 
         // Optimization possible, skip excluded class and test class
-        archive = new WebArchiveBuilder().withTestClass(TestClass.class).setAsClientMode(true)
-                .withClasses(Qux.class, Excluded.class).withExcludedClass(Excluded.class.getName()).build();
+        archive = new WebArchiveBuilder().withTestClass(TestClass.class).setAsClientMode(true).withClasses(Qux.class, Excluded.class, Engine.class)
+                .withExcludedClass(Excluded.class.getName()).build();
 
         assertContainsClass(archive, Qux.class);
         assertDoesNotContainClass(archive, Excluded.class);
         assertDoesNotContainClass(archive, TestClass.class);
         assertContainsInnerClass(archive, Baz.class);
         assertDoesNotContainInnerClass(archive, Ping.class);
+        assertDoesNotContainInnerClass(archive, EnginePowered.EnginePoweredLiteral.class);
+        assertDoesNotContainInnerClass(archive, PoweredEngine.PoweredEngineLiteral.class);
+
+        // Inner class included
+        archive = new WebArchiveBuilder().withTestClass(TestClass.class).setAsClientMode(true).withClasses(EnginePowered.class).build();
+        assertContainsClass(archive, EnginePowered.class);
+        assertContainsInnerClass(archive, EnginePowered.EnginePoweredLiteral.class);
 
         // Optimization not possible, skip excluded class and test class
-        archive = new WebArchiveBuilder().withTestClass(TestClass.class).setAsClientMode(true)
-                .withClasses(Qux.class, Excluded.class, Bar.class).withExcludedClass(Excluded.class.getName()).build();
+        archive = new WebArchiveBuilder().withTestClass(TestClass.class).setAsClientMode(true).withClasses(Qux.class, Excluded.class, Bar.class)
+                .withExcludedClass(Excluded.class.getName()).build();
 
         assertContainsClass(archive, Qux.class);
         assertContainsClass(archive, Bar.class);
@@ -78,8 +84,7 @@ public class WebArchiveBuilderTest {
         assertContainsInnerClass(archive, Baz.class);
         assertContainsInnerClass(archive, Ping.class);
 
-        archive = new WebArchiveBuilder().withTestClassPackage(TestClass.class).setAsClientMode(true)
-                .withExcludedClass(Excluded.class.getName()).build();
+        archive = new WebArchiveBuilder().withTestClassPackage(TestClass.class).setAsClientMode(true).withExcludedClass(Excluded.class.getName()).build();
 
         assertContainsClass(archive, Qux.class);
         assertDoesNotContainClass(archive, Excluded.class);
@@ -87,8 +92,8 @@ public class WebArchiveBuilderTest {
         assertContainsInnerClass(archive, Baz.class);
         assertDoesNotContainInnerClass(archive, Ping.class);
 
-        archive = new WebArchiveBuilder().withTestClassPackage(TestClass.class).setAsClientMode(true)
-                .withClasses(Qux.class, Excluded.class, Bar.class).withExcludedClass(Excluded.class.getName()).build();
+        archive = new WebArchiveBuilder().withTestClassPackage(TestClass.class).setAsClientMode(true).withClasses(Qux.class, Excluded.class, Bar.class)
+                .withExcludedClass(Excluded.class.getName()).build();
 
         assertContainsClass(archive, Qux.class);
         assertContainsClass(archive, Bar.class);
@@ -97,7 +102,6 @@ public class WebArchiveBuilderTest {
         assertContainsInnerClass(archive, Baz.class);
         assertDoesNotContainInnerClass(archive, Ping.class);
     }
-
 
     private <A extends Archive<?>, T> void assertContainsClass(A archive, Class<T> clazz) {
         assertTrue(archive.contains("/WEB-INF/classes/" + StringUtils.replace(clazz.getName(), ".", "/") + ".class"));
@@ -109,17 +113,17 @@ public class WebArchiveBuilderTest {
 
     private <A extends Archive<?>, T> void assertContainsInnerClass(A archive, Class<T> clazz) {
         for (ArchivePath path : archive.getContent().keySet()) {
-            if(path.get().contains(clazz.getSimpleName())) {
+            if (path.get().contains(clazz.getSimpleName())) {
                 return;
             }
         }
-        fail();
+        fail(clazz.getName() + " should be there");
     }
 
     private <A extends Archive<?>, T> void assertDoesNotContainInnerClass(A archive, Class<T> clazz) {
         for (ArchivePath path : archive.getContent().keySet()) {
-            if(path.get().contains(clazz.getSimpleName())) {
-                fail();
+            if (path.get().contains(clazz.getSimpleName())) {
+                fail(clazz.getName() + " should not be there");
             }
         }
     }
