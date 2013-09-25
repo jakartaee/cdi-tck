@@ -67,6 +67,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     };
     private static final Annotation DEADLIEST_LITERAL = new AnnotationLiteral<Deadliest>() {
     };
+    private static final Annotation NUMBER_LITERAL = new AnnotationLiteral<Number>() {
+    };
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -142,7 +144,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = PRODUCER_METHOD_TYPES, id = "ba")
     public void testApiTypeForPrimitiveReturn() throws Exception {
-        assert getBeans(Integer.class).size() == 1;
+        assert getBeans(Integer.class,NUMBER_LITERAL).size() == 1;
         Bean<Integer> integer = getBeans(Integer.class).iterator().next();
         assert integer.getTypes().size() == 2;
         assert integer.getTypes().contains(int.class);

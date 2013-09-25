@@ -51,6 +51,7 @@ public class SpiderProducer {
         return new WolfSpider();
     }
 
+    @Number
     @Produces
     public int getWolfSpiderSize() {
         return 4;

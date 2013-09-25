@@ -40,7 +40,6 @@ import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -63,6 +62,8 @@ public class ResolutionByTypeTest extends AbstractTest {
     private static final Annotation TAME = new AnnotationLiteral<Tame>() {
     };
     private static final Annotation WILD = new AnnotationLiteral<Wild>() {
+    };
+    private static final Annotation NUMBER = new AnnotationLiteral<Number>() {
     };
 
     @Deployment
@@ -122,8 +123,8 @@ public class ResolutionByTypeTest extends AbstractTest {
             @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "c"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "j") })
     public void testResolveByTypeWithPrimitives() {
 
-        assertEquals(getBeans(Double.class, AnyLiteral.INSTANCE).size(), 2);
-        assertEquals(getBeans(double.class, AnyLiteral.INSTANCE).size(), 2);
+        assertEquals(getBeans(Double.class, NUMBER).size(), 2);
+        assertEquals(getBeans(double.class, NUMBER).size(), 2);
 
         Double min = getContextualReference(Double.class, new AnnotationLiteral<Min>() {
         });
