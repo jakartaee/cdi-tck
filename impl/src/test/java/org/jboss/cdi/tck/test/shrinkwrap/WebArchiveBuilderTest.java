@@ -61,6 +61,10 @@ public class WebArchiveBuilderTest {
         assertContainsClass(archive, EnginePowered.class);
         assertContainsInnerClass(archive, EnginePowered.EnginePoweredLiteral.class);
 
+        archive = new WebArchiveBuilder().withTestClass(TestClass.class).setAsClientMode(true).withClasses(PoweredEngine.class).build();
+        assertContainsClass(archive, PoweredEngine.class);
+        assertContainsInnerClass(archive, PoweredEngine.PoweredEngineLiteral.class);
+
         // Optimization not possible, skip excluded class and test class
         archive = new WebArchiveBuilder().withTestClass(TestClass.class).setAsClientMode(true).withClasses(Qux.class, Excluded.class, Bar.class)
                 .withExcludedClass(Excluded.class.getName()).build();
