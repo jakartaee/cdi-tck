@@ -101,6 +101,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     private static final String INNER_CLASS_MARKER = "\\" + DOLLAR_SIGN;
 
+    private static final String INNER_CLASS_MATCH_PATTERN_BASE = ".*" + AssetUtil.DELIMITER_RESOURCE_PATH + "%s" + INNER_CLASS_MARKER + ".+\\.class";
+
     private String name;
 
     private Boolean isAsClientMode = null;
@@ -865,8 +867,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
             // Quite naive way of handling inner classes
             // The reason for this is that similar code would be normally called
-            // for each class - see also
-            // ContainerBase.addClasses()
+            // for each class - see also ContainerBase.addClasses()
             archive.addPackages(false, new Filter<ArchivePath>() {
 
                 @Override
@@ -877,7 +878,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                         if (isInnerClassCandidate(simpleName, pathStr)) {
                             // Match inner class filename
                             // .*/SimpleName\\$.+\\.class
-                            return pathStr.matches(String.format(".*%s%s%s.+\\.class", AssetUtil.DELIMITER_RESOURCE_PATH, simpleName, INNER_CLASS_MARKER));
+                            return pathStr.matches(String.format(INNER_CLASS_MATCH_PATTERN_BASE, simpleName));
                         }
                     }
                     return false;
