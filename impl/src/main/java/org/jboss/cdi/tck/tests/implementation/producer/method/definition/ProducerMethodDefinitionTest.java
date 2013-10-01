@@ -38,6 +38,7 @@ import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
+import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
@@ -53,6 +54,7 @@ import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Assert;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -144,11 +146,10 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = PRODUCER_METHOD_TYPES, id = "ba")
     public void testApiTypeForPrimitiveReturn() throws Exception {
-        assert getBeans(Integer.class,NUMBER_LITERAL).size() == 1;
-        Bean<Integer> integer = getBeans(Integer.class).iterator().next();
-        assert integer.getTypes().size() == 2;
-        assert integer.getTypes().contains(int.class);
-        assert integer.getTypes().contains(Object.class);
+        Set<Bean<Integer>> beans = getBeans(Integer.class,NUMBER_LITERAL);
+        assertEquals(beans.size(), 1);
+        Bean<Integer> bean = beans.iterator().next();
+        Assert.assertTypeSetMatches(bean.getTypes(), Object.class, int.class);
     }
 
     @Test
