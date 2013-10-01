@@ -878,7 +878,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                         if (isInnerClassCandidate(simpleName, pathStr)) {
                             // Match inner class filename
                             // .*/SimpleName\\$.+\\.class
-                            return pathStr.matches(String.format(INNER_CLASS_MATCH_PATTERN_BASE, simpleName));
+                            if(pathStr.matches(String.format(INNER_CLASS_MATCH_PATTERN_BASE, simpleName))) {
+                                return true;
+                            }
                         }
                     }
                     return false;
