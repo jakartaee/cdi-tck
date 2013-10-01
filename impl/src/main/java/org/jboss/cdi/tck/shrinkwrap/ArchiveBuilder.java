@@ -865,6 +865,10 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 archive.add(resource, location);
             }
 
+            if(simpleNames.isEmpty()) {
+                return;
+            }
+
             // Quite naive way of handling inner classes
             // The reason for this is that similar code would be normally called
             // for each class - see also ContainerBase.addClasses()
