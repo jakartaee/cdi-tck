@@ -1424,7 +1424,7 @@
 
     <section id="declaring_resource" title="Declaring a resource" level="3">
         <assertion id="aa" testable="false">
-            <text>A resource may be declared by specifying a Java EE component environment injection annotation as part of a producer field declaration.</text>
+            <text>A resource may be declared by specifying a Java EE component environment injection annotation as part of a producer field declaration. The producer field may be static.</text>
             <note>Introductory text for the following assertions</note>
         </assertion>
 
