@@ -97,6 +97,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     public static final String DEFAULT_EJB_VERSION = "3.1";
 
+    public static final String DEBUG_MODE_PROPERTY = "debugMode";
+
     private static final String DOLLAR_SIGN = "$";
 
     private static final String INNER_CLASS_MARKER = "\\" + DOLLAR_SIGN;
@@ -144,6 +146,14 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected List<JavaArchive> shrinkWrapLibraries = null;
 
     protected List<ServiceProviderDescriptor> serviceProviders = null;
+
+
+    public void readSystemProperties() {
+        String debugMode = System.getProperty(DEBUG_MODE_PROPERTY);
+        if (debugMode != null && !("false".equals(debugMode))) {
+            debugMode();
+        }
+    }
 
     /**
      * Set the name of the archive.
@@ -736,7 +746,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return ShrinkWrap archive
      */
     public A build() {
-
+        readSystemProperties();
         long start = System.currentTimeMillis();
 
         if (isTestArchive()) {
