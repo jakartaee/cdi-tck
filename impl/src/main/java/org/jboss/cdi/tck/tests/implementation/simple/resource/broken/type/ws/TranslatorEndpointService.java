@@ -26,10 +26,10 @@ import javax.xml.ws.WebServiceClient;
 @WebServiceClient(name="Translator", targetNamespace = "http://ws.resources.tests.weld.jboss.org/")
 public class TranslatorEndpointService extends Service {
 
-    protected TranslatorEndpointService(URL wsdlDocumentLocation, QName serviceName) {
+    public TranslatorEndpointService(URL wsdlDocumentLocation, QName serviceName) {
         super(wsdlDocumentLocation, serviceName);
     }
-    
+
     @WebEndpoint(name="TranslatorPort")
     public Translator getTranslatorPort() {
         return super.getPort(Translator.class);

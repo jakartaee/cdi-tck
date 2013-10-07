@@ -26,7 +26,7 @@ import javax.xml.ws.WebServiceClient;
 @WebServiceClient(name = "Translator")
 public class TranslatorEndpointService extends Service {
 
-    protected TranslatorEndpointService(URL wsdlDocumentLocation, QName serviceName) {
+    public TranslatorEndpointService(URL wsdlDocumentLocation, QName serviceName) {
         super(wsdlDocumentLocation, serviceName);
     }
 
