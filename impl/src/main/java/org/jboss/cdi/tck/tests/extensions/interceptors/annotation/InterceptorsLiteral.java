@@ -25,10 +25,7 @@ public class InterceptorsLiteral extends AnnotationLiteral<Interceptors> impleme
     @Override
     @SuppressWarnings({ "rawtypes" })
     public Class[] value() {
-        Class[] classes = new Class[1];
-        classes[0] = BooInterceptor.class;
-        return classes;
-
+        return new Class[] { BooInterceptor.class };
     }
 
 }
