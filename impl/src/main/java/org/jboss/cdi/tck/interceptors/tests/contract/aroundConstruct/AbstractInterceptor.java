@@ -23,20 +23,12 @@ import java.lang.reflect.Constructor;
 
 import javax.interceptor.InvocationContext;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 public abstract class AbstractInterceptor {
 
-    private static boolean invoked;
-
-    public static boolean isInvoked() {
-        return invoked;
-    }
-
-    public static void reset() {
-        invoked = false;
-    }
-
-    public static void setInvoked() {
-        invoked = true;
+    protected void setInvoked() {
+        ActionSequence.addAction(getClass().getSimpleName());
     }
 
     protected void checkConstructor(InvocationContext ctx, Class<?> expectedDeclaringClass) {

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct.bindings;
 
+import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import javax.enterprise.inject.Instance;
@@ -26,6 +26,7 @@ import javax.enterprise.inject.Instance;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -41,6 +42,7 @@ import org.testng.annotations.Test;
  *
  * @author Jozef Hartinger
  * @author Martin Kouba
+ * @author Matus Abaffy
  */
 @SpecVersion(spec = "int", version = "1.2")
 public class AroundConstructTest extends AbstractTest {
@@ -61,41 +63,34 @@ public class AroundConstructTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "2.3", id = "c"), @SpecAssertion(section = "2.3", id = "eb"),
             @SpecAssertion(section = "2.3", id = "f"), @SpecAssertion(section = "2.6", id = "a") })
     public void testInterceptorInvocation(Instance<Alpha> instance) {
-        AlphaInterceptor.reset();
+        ActionSequence.reset();
         instance.get();
-        assertTrue(AlphaInterceptor.isInvoked());
+        assertSequenceDataEquals(AlphaInterceptor.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "2.3", id = "ga"), @SpecAssertion(section = "2.1", id = "e") })
     public void testReplacingParameters(Instance<Bravo> instance) {
-        BravoInterceptor.reset();
+        ActionSequence.reset();
         Bravo bravo = instance.get();
         assertNotNull(bravo.getParameter());
         assertEquals(BravoInterceptor.NEW_PARAMETER_VALUE, bravo.getParameter().getValue());
-        assertTrue(BravoInterceptor.isInvoked());
+        assertSequenceDataEquals(BravoInterceptor.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = "2.6.1", id = "a"), @SpecAssertion(section = "2.6.1", id = "b"),
             @SpecAssertion(section = "3.2", id = "c") })
     public void testExceptions(Instance<Charlie> instance) {
-        CharlieInterceptor1.reset();
-        CharlieInterceptor2.reset();
+        ActionSequence.reset();
         try {
             instance.get();
             fail();
         } catch (CharlieException e) {
-            assertTrue(CharlieInterceptor1.isInvoked());
-            assertTrue(CharlieInterceptor2.isInvoked());
+            // reverse order because interceptors are stored in the ActionSequence after ctx.proceed() returns
+            assertSequenceDataEquals(CharlieInterceptor2.class, CharlieInterceptor1.class);
         } catch (Throwable e) {
             fail();
         }
-    }
-
-    // FIXME remove?
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    public void testSerialization(Instance<Alpha> instance) throws Exception {
-        activate(passivate(instance.get()));
     }
 }
