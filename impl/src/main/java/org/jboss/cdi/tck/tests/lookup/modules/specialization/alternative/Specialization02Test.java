@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.specialization.alternative;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_ALTERNATIVE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
@@ -68,7 +69,7 @@ public class Specialization02Test extends AbstractTest {
     @Inject
     private Event<FactoryEvent> event;
 
-    @Test
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ac"),
             @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "i"), @SpecAssertion(section = SPECIALIZATION, id = "ca"),
             @SpecAssertion(section = SPECIALIZATION, id = "cb") })
