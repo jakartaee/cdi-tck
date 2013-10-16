@@ -49,6 +49,14 @@ import org.testng.ITestContext;
  */
 public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
 
+    private final class MethodComparator implements Comparator<IMethodInstance> {
+        @Override
+        public int compare(IMethodInstance o1, IMethodInstance o2) {
+            int result = o1.getMethod().getTestClass().getName().compareTo(o2.getMethod().getTestClass().getName());
+            return result;
+        }
+    }
+
     public static final String TEST_CLASS_PROPERTY = "tckTest";
 
     private final Logger logger = Logger.getLogger(SingleTestClassMethodInterceptor.class.getName());
@@ -67,20 +75,14 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
         String testString = System.getProperty(TEST_CLASS_PROPERTY);
 
         // Run the test suite - group test methods by class name
-        Collections.sort(methods, new Comparator<IMethodInstance>() {
-            @Override
-            public int compare(IMethodInstance o1, IMethodInstance o2) {
-                int result = o1.getMethod().getTestClass().getName().compareTo(o2.getMethod().getTestClass().getName());
-                return result;
-            }
-        });
-
         if (testString == null || testString.isEmpty()) {
+            Collections.sort(methods, new MethodComparator());
             logger.log(Level.INFO, "tckTest not set [time: {0} ms]", System.currentTimeMillis() - start);
             return methods;
         }
 
-        // Run the tests of a single test class or a single method
+        // Run the tests of each test class with the specified name (there might be more of them)
+        // or its specific methods
         List<IMethodInstance> methodsToRun = new ArrayList<IMethodInstance>();
         String testClass = null;
         Set<String> testMethodsSet = new HashSet<String>();
@@ -109,6 +111,7 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
             }
         }
 
+        Collections.sort(methodsToRun, new MethodComparator());
         logger.log(Level.INFO, "tckTest set to {0} [methods: {1}, time: {2} ms]", new Object[] { testClass, methodsToRun.size(), System.currentTimeMillis() - start });
         return methodsToRun;
     }
