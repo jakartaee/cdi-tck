@@ -21,6 +21,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.event.Event;
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,6 +40,9 @@ import org.testng.annotations.Test;
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class EventTypesTest extends AbstractTest {
+
+    private AnnotationLiteral<Extra> extraLiteral = new AnnotationLiteral<Extra>() {
+    };
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -76,7 +80,7 @@ public class EventTypesTest extends AbstractTest {
         assert listener.getObjectsFired().size() == 3;
         assert listener.getObjectsFired().get(2) == b;
         // boxed primitive
-        getCurrentManager().fireEvent(1);
+        getCurrentManager().fireEvent(1, extraLiteral);
         assert listener.getObjectsFired().size() == 4;
         assert listener.getObjectsFired().get(3).equals(1);
     }

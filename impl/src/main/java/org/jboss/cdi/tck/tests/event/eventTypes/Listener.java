@@ -27,7 +27,7 @@ import javax.enterprise.inject.Any;
 class Listener {
     List<Object> objectsFired = new ArrayList<Object>();
 
-    public void registerNumberFired(@Observes @Any Integer i) {
+    public void registerNumberFired(@Observes @Extra Integer i) {
         objectsFired.add(i);
     }
 
