@@ -18,18 +18,17 @@ package org.jboss.cdi.tck.tests.event.bindingTypes;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Any;
 
 @RequestScoped
 class DiscerningObserver {
     private int numTimesAnyBindingTypeEventObserved = 0;
     private int numTimesNonRuntimeBindingTypeObserved = 0;
 
-    public void observeAny(@Observes @Any String event) {
+    public void observeAny(@Observes @Extra String event) {
         numTimesAnyBindingTypeEventObserved++;
     }
 
-    public void observeNonRuntime(@Observes @Any @NonRuntimeBindingType String event) {
+    public void observeNonRuntime(@Observes @Extra @NonRuntimeBindingType String event) {
         numTimesNonRuntimeBindingTypeObserved++;
     }
 

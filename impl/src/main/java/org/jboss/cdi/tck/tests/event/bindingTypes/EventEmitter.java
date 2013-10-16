@@ -17,16 +17,15 @@
 package org.jboss.cdi.tck.tests.event.bindingTypes;
 
 import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 public class EventEmitter {
     @Inject
-    @Any
+    @Extra
     Event<String> stringEvent;
 
     @Inject
-    @Any
+    @Extra
     @NonRuntimeBindingType
     Event<String> stringEventWithAnyAndNonRuntimeBindingType;
 
