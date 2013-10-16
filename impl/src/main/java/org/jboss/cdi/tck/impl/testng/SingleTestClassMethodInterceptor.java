@@ -43,7 +43,7 @@ import org.testng.ITestContext;
  * <li>Avoid randomly mixed test method execution - causing test archive deployments collisions. If test class system property is not set group test methods by
  * test class.</li>
  * <ol>
- * 
+ *
  * @author Stuart Douglas
  * @author Martin Kouba
  */
@@ -53,9 +53,10 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
 
     private final Logger logger = Logger.getLogger(SingleTestClassMethodInterceptor.class.getName());
 
+    @Override
     public List<IMethodInstance> intercept(List<IMethodInstance> methods, ITestContext context) {
 
-        if (methods == null || methods.isEmpty() || methods.size() == 1) {
+        if (methods == null || methods.isEmpty()) {
             return methods;
         }
 
@@ -64,21 +65,23 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
 
         long start = System.currentTimeMillis();
         String testString = System.getProperty(TEST_CLASS_PROPERTY);
-        if (testString == null || testString.isEmpty()) {
 
-            // Run the test suite - group test methods by class name
-            Collections.sort(methods, new Comparator<IMethodInstance>() {
-                public int compare(IMethodInstance o1, IMethodInstance o2) {
-                    int result = o1.getMethod().getTestClass().getName().compareTo(o2.getMethod().getTestClass().getName());
-                    return result;
-                }
-            });
+        // Run the test suite - group test methods by class name
+        Collections.sort(methods, new Comparator<IMethodInstance>() {
+            @Override
+            public int compare(IMethodInstance o1, IMethodInstance o2) {
+                int result = o1.getMethod().getTestClass().getName().compareTo(o2.getMethod().getTestClass().getName());
+                return result;
+            }
+        });
+
+        if (testString == null || testString.isEmpty()) {
             logger.log(Level.INFO, "tckTest not set [time: {0} ms]", System.currentTimeMillis() - start);
             return methods;
         }
 
-        // Run the tests of a single test class or single method
-        List<IMethodInstance> ret = new ArrayList<IMethodInstance>();
+        // Run the tests of a single test class or a single method
+        List<IMethodInstance> methodsToRun = new ArrayList<IMethodInstance>();
         String testClass = null;
         Set<String> testMethodsSet = new HashSet<String>();
         if (testString.contains("#")) {
@@ -92,7 +95,7 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
             for (IMethodInstance method : methods) {
                 if (method.getMethod().getTestClass().getName().equals(testClass)) {
                     if ((testMethodsSet.isEmpty()) || (testMethodsSet.contains(method.getMethod().getMethodName()))) {
-                        ret.add(method);
+                        methodsToRun.add(method);
                     }
                 }
             }
@@ -100,13 +103,13 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
             for (IMethodInstance method : methods) {
                 if (method.getMethod().getTestClass().getName().endsWith("." + testClass)) {
                     if ((testMethodsSet.isEmpty()) || (testMethodsSet.contains(method.getMethod().getMethodName()))) {
-                        ret.add(method);
+                        methodsToRun.add(method);
                     }
                 }
             }
         }
 
-        logger.log(Level.INFO, "tckTest set to {0} [methods: {1}, time: {2} ms]", new Object[] { testClass, ret.size(), System.currentTimeMillis() - start });
-        return ret;
+        logger.log(Level.INFO, "tckTest set to {0} [methods: {1}, time: {2} ms]", new Object[] { testClass, methodsToRun.size(), System.currentTimeMillis() - start });
+        return methodsToRun;
     }
 }
