@@ -28,9 +28,8 @@ import org.testng.ITestResult;
 
 /**
  * Intended for debug purpose only.
- * 
+ *
  * @author Martin Kouba
- * 
  */
 public class ProgressLoggingTestListener implements IInvokedMethodListener2 {
 
@@ -38,7 +37,11 @@ public class ProgressLoggingTestListener implements IInvokedMethodListener2 {
 
     private final AtomicInteger testMethodInvocations = new AtomicInteger(0);
 
+    private final AtomicInteger processedTestClasses = new AtomicInteger(0);
+
     private Integer totalCountOfMethods = null;
+
+    private String lastTestClassName = null;
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
@@ -50,17 +53,21 @@ public class ProgressLoggingTestListener implements IInvokedMethodListener2 {
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult, ITestContext context) {
-
         if (!method.isTestMethod()) {
             return;
         }
-
+        // Note that TCK is processing test classes sequentially in one thread - see also SingleTestClassMethodInterceptor
         if (totalCountOfMethods == null) {
             totalCountOfMethods = context.getSuite().getAllMethods().size();
         }
-
-        logger.log(Level.INFO, "Invoke {0}: {1}/{2}", new Object[] { method.getTestMethod().getMethodName(),
-                testMethodInvocations.incrementAndGet(), totalCountOfMethods });
+        String testClassName = method.getTestMethod().getTestClass().getName();
+        if (!testClassName.equals(lastTestClassName)) {
+            processedTestClasses.incrementAndGet();
+            lastTestClassName = testClassName;
+        }
+        // {testClassSimpleName.testMethodName}: {testMethodInvocations}/{totalCountOfTestMethodsInTheSuite} ({processedTestClasses})
+        logger.log(Level.INFO, "Invoke {0}.{1}: {2}/{3} ({4})", new Object[] { method.getTestMethod().getTestClass().getRealClass().getSimpleName(),
+                method.getTestMethod().getMethodName(), testMethodInvocations.incrementAndGet(), totalCountOfMethods, processedTestClasses.get() });
     }
 
     @Override
