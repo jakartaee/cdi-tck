@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.jboss.cdi.tck</groupId>
         <artifactId>cdi-tck-parent</artifactId>
-        <version>1.1.2-SNAPSHOT</version>
+        <version>1.1.2.Final</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
