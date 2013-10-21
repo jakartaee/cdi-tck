@@ -28,8 +28,12 @@ import javax.jms.Topic;
 
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.util.JndiLookupUtils;
+import org.jboss.cdi.tck.util.SimpleLogger;
+
 
 public class SimpleMessageProducer {
+
+    private static final SimpleLogger simpleLogger = new SimpleLogger(SimpleMessageProducer.class);
 
     private ConnectionFactory connectionFactory;
 
@@ -61,12 +65,13 @@ public class SimpleMessageProducer {
             messageProducer.send(message);
 
         } catch (JMSException e) {
-            throw new RuntimeException("Cannot send message");
+            throw new RuntimeException("Cannot send message", e);
         } finally {
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (JMSException e) {
+                    simpleLogger.log(e);
                 }
             }
         }
@@ -89,12 +94,13 @@ public class SimpleMessageProducer {
             messageProducer.send(message);
 
         } catch (JMSException e) {
-            throw new RuntimeException("Cannot send message");
+            throw new RuntimeException("Cannot send message", e);
         } finally {
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (JMSException e) {
+                    simpleLogger.log(e);
                 }
             }
         }

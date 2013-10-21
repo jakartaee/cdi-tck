@@ -47,4 +47,14 @@ public final class SimpleLogger {
     public void log(String message, Object... parameters) {
         logger.log(Level.FINE, message, parameters);
     }
+
+    /**
+     * Log message with specified throwed exception. {@link Level#FINE} is always used since the message is considered to be tracing information.
+     * 
+     * @param message
+     * @param parameters
+     */
+    public void log(Throwable thrown) {
+        logger.log(Level.FINE, thrown.getMessage(), thrown);
+    }
 }
