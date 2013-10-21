@@ -8,9 +8,11 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
 
+import org.jboss.cdi.tck.util.SimpleLogger;
 public class AbstractMessageListener implements MessageListener {
 
     public static AtomicInteger processedMessages = new AtomicInteger(0);
+    private static final SimpleLogger simpleLogger = new SimpleLogger(AbstractMessageListener.class);
 
     @Inject
     private LoggerService loggerService;
@@ -22,7 +24,7 @@ public class AbstractMessageListener implements MessageListener {
             try {
                 loggerService.log(((TextMessage) message).getText());
             } catch (JMSException e) {
-                // Cannot consume message
+                simpleLogger.log(e);
             } finally {
                 processedMessages.incrementAndGet();
             }
