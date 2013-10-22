@@ -55,6 +55,19 @@ public class InterceptorExtension implements Extension {
                 return annotations;
             }
 
+            @SuppressWarnings("unchecked")
+            @Override
+            public <T extends Annotation> T getAnnotation(final Class<T> annType) {
+                if (LoginInterceptorBinding.class.equals(annType)) {
+                    return (T) interceptorBinding;
+                }
+                if (Secured.class.equals(annType)) {
+                    return (T) securedAnnotation;
+                }
+
+                return null;
+            }
+
             @Override
             public boolean isAnnotationPresent(Class<? extends Annotation> annotationType) {
                 return LoginInterceptorBinding.class.equals(annotationType) || Secured.class.equals(annotationType);
