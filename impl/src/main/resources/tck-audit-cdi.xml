@@ -2482,11 +2482,11 @@
             </assertion>
 
             <assertion id="o">
-                <text>Check a selected alternative is injected for a managed bean</text>
+                <text>Check a selected alternative being managed bean is injected</text>
             </assertion>
 
             <assertion id="p">
-                <text>Check a selected alternative is injected for a session bean</text>
+                <text>Check a selected alternative being session bean is injected</text>
             </assertion>
 
         </group>
