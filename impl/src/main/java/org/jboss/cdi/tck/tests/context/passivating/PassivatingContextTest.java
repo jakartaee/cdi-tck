@@ -22,13 +22,15 @@ import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_INJECTION_POINTS;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.Context;
+import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.IllegalProductException;
 import javax.enterprise.inject.spi.Bean;
 
@@ -42,7 +44,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- *
+ * 
  * @author Nicklas Karlsson
  * @author David Allen
  * @author Martin Kouba
@@ -60,35 +62,42 @@ public class PassivatingContextTest extends AbstractTest {
             @SpecAssertion(section = PASSIVATING_SCOPES, id = "a") })
     public void testManagedBeanWithSerializableImplementationClassOK() {
         Set<Bean<Jyvaskyla>> beans = getBeans(Jyvaskyla.class);
-        assert !beans.isEmpty();
+        assertFalse(beans.isEmpty());
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "bb")
-    public void testManagedBeanWithSerializableInterceptorClassOK() {
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE, id = "bb"),
+            @SpecAssertion(section = PASSIVATING_SCOPE, id = "a"), })
+    public void testManagedBeanWithSerializableInterceptorClassOK() throws ClassNotFoundException, IOException {
         Set<Bean<Kokkola>> beans = getBeans(Kokkola.class);
-        assert !beans.isEmpty();
+        assertFalse(beans.isEmpty());
+        Bean<Kokkola> bean = beans.iterator().next();
+        CreationalContext<Kokkola> ctx = getCurrentManager().createCreationalContext(bean);
+        Kokkola instance = (Kokkola) getCurrentManager().getReference(bean, Kokkola.class, ctx);
+        assertEquals(instance.ping(), 1);
+        Kokkola instance2 = (Kokkola) activate(passivate(instance));
+        assertEquals(instance2.ping(), 2);
     }
 
     @Test
     @SpecAssertion(section = PASSIVATION_CAPABLE, id = "bc")
     public void testManagedBeanWithSerializableDecoratorOK() {
         Set<Bean<City>> beans = getBeans(City.class);
-        assert !beans.isEmpty();
+        assertFalse(beans.isEmpty());
     }
 
     @Test
     @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ca")
     public void testPassivationCapableProducerMethodIsOK() {
         Set<Bean<Record>> beans = getBeans(Record.class);
-        assert !beans.isEmpty();
+        assertFalse(beans.isEmpty());
     }
 
     @Test
     @SpecAssertion(section = PASSIVATION_CAPABLE, id = "da")
     public void testPassivationCapableProducerFieldIsOK() {
         Set<Bean<Wheat>> beans = getBeans(Wheat.class);
-        assert !beans.isEmpty();
+        assertFalse(beans.isEmpty());
     }
 
     @Test
@@ -112,7 +121,7 @@ public class PassivatingContextTest extends AbstractTest {
         setContextInactive(sessionContext);
         setContextActive(sessionContext);
         instance = getContextualReference(Kajaani.class);
-        assert instance.getTheNumber() == 100;
+        assertEquals(instance.getTheNumber(), 100);
     }
 
     @Test
@@ -120,7 +129,7 @@ public class PassivatingContextTest extends AbstractTest {
             @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "a") })
     public void testBeanWithNonSerializableImplementationInjectedIntoTransientFieldOK() {
         Set<Bean<Joensuu>> beans = getBeans(Joensuu.class);
-        assert !beans.isEmpty();
+        assertFalse(beans.isEmpty());
     }
 
     @Test(expectedExceptions = IllegalProductException.class)
@@ -134,9 +143,4 @@ public class PassivatingContextTest extends AbstractTest {
     public void testNonSerializableProducerFieldDeclaredPassivatingThrowsIllegalProductException() {
         getContextualReference(HelsinkiNonSerializable.class).ping();
     }
-
-    public static boolean isSerializable(Class<?> clazz) {
-        return clazz.isPrimitive() || Serializable.class.isAssignableFrom(clazz);
-    }
-
 }
