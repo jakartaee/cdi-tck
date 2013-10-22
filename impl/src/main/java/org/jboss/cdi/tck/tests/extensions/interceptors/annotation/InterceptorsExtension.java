@@ -50,6 +50,14 @@ public class InterceptorsExtension implements Extension {
             }
 
             @Override
+            public <T extends Annotation> T getAnnotation(final Class<T> annType) {
+                if (Interceptors.class.equals(annType)) {
+                    return (T) interceptorsAnnotation;
+                }
+                return null;
+            }
+
+            @Override
             public boolean isAnnotationPresent(Class<? extends Annotation> annotationType) {
                 return Interceptors.class.equals(annotationType);
             }
