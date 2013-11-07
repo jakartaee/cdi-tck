@@ -21,28 +21,33 @@ import javax.inject.Inject;
 public class Game {
 
     @Inject
+    @ProducedPrimitive
     private byte injectedByte;
 
     @Inject
+    @ProducedPrimitive
     private short injectedShort;
 
     private int injectedInt;
 
     @Inject
+    @ProducedPrimitive
     private long injectedLong;
 
     @Inject
+    @ProducedPrimitive
     private float injectedFloat;
 
     private double injectedDouble;
 
     @Inject
+    @ProducedPrimitive
     private char injectedChar;
 
     private boolean injectedBoolean;
 
     @Inject
-    public Game(boolean booleanValue, double doubleValue) {
+    public Game(@ProducedPrimitive boolean booleanValue, @ProducedPrimitive double doubleValue) {
         this.injectedBoolean = booleanValue;
         this.injectedDouble = doubleValue;
     }
@@ -60,7 +65,7 @@ public class Game {
     }
 
     @Inject
-    public void setInjectedInt(int intValue) {
+    public void setInjectedInt(@ProducedPrimitive int intValue) {
         this.injectedInt = intValue;
     }
 

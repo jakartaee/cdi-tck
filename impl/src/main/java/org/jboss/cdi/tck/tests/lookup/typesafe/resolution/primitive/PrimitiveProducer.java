@@ -21,37 +21,45 @@ import javax.enterprise.inject.Produces;
 public class PrimitiveProducer {
 
     @Produces
+    @ProducedPrimitive
     public Short producedShort = null;
 
     @Produces
+    @ProducedPrimitive
     public Long producedLong = null;
 
     @Produces
+    @ProducedPrimitive
     public Byte getByte() {
         return null;
     }
 
     @Produces
+    @ProducedPrimitive
     public Integer getInteger() {
         return null;
     }
 
     @Produces
+    @ProducedPrimitive
     public Float getFloat() {
         return null;
     }
 
     @Produces
+    @ProducedPrimitive
     public Double getDouble() {
         return null;
     }
 
     @Produces
+    @ProducedPrimitive
     public Character getChar() {
         return null;
     }
 
     @Produces
+    @ProducedPrimitive
     public Boolean getBoolean() {
         return null;
     }

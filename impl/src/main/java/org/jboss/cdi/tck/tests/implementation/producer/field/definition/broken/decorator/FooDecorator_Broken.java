@@ -33,5 +33,6 @@ public class FooDecorator_Broken implements Foo {
 
     @SuppressWarnings("unused")
     @Produces
+    @Number
     private Integer zero = 0;
 }

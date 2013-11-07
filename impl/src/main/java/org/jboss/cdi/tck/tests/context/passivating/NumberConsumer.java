@@ -23,6 +23,7 @@ import javax.inject.Inject;
 public class NumberConsumer {
 
     @Inject
+    @ProducedInteger
     int number;
 
     public void ping() {
