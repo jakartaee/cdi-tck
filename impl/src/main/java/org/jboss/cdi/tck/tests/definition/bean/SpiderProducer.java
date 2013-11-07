@@ -33,6 +33,7 @@ public class SpiderProducer {
     }
 
     @Produces
+    @ProducedInteger
     public int getWolfSpiderSize() {
         return 4;
     }

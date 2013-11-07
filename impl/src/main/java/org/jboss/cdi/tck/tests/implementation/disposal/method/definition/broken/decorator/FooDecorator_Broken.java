@@ -31,6 +31,6 @@ public class FooDecorator_Broken implements Foo {
         return !delegate.foo();
     }
 
-    public void dispose(@Disposes Integer zero) {
+    public void dispose(@Disposes @Number Integer zero) {
     }
 }

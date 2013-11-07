@@ -31,5 +31,6 @@ public class SimpleInterceptor_Broken {
 
     @SuppressWarnings("unused")
     @Produces
+    @Number
     private Integer zero = 0;
 }

@@ -25,6 +25,7 @@ public class Bar implements Foo {
     }
 
     @Produces
+    @Number
     public Integer produce() {
         return 0;
     }

@@ -29,6 +29,6 @@ public class SimpleInterceptor_Broken {
         return ctx.proceed();
     }
 
-    public void dispose(@Disposes String foo) {
+    public void dispose(@Disposes @ProducedString String foo) {
     }
 }

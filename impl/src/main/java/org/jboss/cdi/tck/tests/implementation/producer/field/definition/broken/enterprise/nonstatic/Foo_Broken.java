@@ -22,5 +22,6 @@ import javax.enterprise.inject.Produces;
 @Stateless
 public class Foo_Broken implements FooLocal_Broken {
     @Produces
+    @Number
     Integer zero = 0;
 }

@@ -20,6 +20,7 @@ import javax.enterprise.inject.Produces;
 
 public class FooProducer {
     @Produces
+    @ProducedString
     public String produce() {
         return "foo";
     }

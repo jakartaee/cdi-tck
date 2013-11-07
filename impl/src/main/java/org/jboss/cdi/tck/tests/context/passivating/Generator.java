@@ -29,6 +29,7 @@ public class Generator implements Serializable {
     private int number = 100;
 
     @Produces
+    @ProducedInteger
     int getNumber() {
         return number;
     }
