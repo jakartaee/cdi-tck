@@ -23,7 +23,7 @@ public class SpiderNest {
     public Integer numberOfSpiders;
 
     @Inject
-    public SpiderNest(Integer numberOfSpiders) {
+    public SpiderNest(@ProducedInteger Integer numberOfSpiders) {
         this.numberOfSpiders = numberOfSpiders;
     }
 

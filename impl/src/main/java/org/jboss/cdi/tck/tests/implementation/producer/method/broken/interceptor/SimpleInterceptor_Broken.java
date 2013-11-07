@@ -30,6 +30,7 @@ public class SimpleInterceptor_Broken {
     }
 
     @Produces
+    @Number
     public Integer foo() {
         return 0;
     }

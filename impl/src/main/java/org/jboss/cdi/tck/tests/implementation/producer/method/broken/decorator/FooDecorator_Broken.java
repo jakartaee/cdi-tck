@@ -32,6 +32,7 @@ public class FooDecorator_Broken implements Foo {
     }
 
     @Produces
+    @Number
     public Integer getInt() {
         return 0;
     }
