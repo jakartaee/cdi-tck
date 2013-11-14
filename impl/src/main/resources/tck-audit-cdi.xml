@@ -3747,9 +3747,15 @@
             <text>If the bean has a pseudo-scope, the container must obtain a contextual instance of the bean. If the bean has scope |@Dependent|, the container must associate it with the |CreationalContext|.</text>
         </assertion>
 
-        <assertion id="d">
+        <group>
             <text>The container must ensure that every injection point of type |InjectionPoint| and qualifier |@Default| of any dependent object instantiated during this process receives an instance of |InjectionPoint| representing the injection point into which the dependent object will be injected, or a null value if it is not being injected into any injection point.</text>
-        </assertion>
+            <assertion id="da">
+                <text>Test an injected dependent object.</text>
+            </assertion>
+            <assertion id="db">
+                <text>Test a non-injected dependent object.</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="contextual_reference_validity" title="Contextual reference validity" level="3">

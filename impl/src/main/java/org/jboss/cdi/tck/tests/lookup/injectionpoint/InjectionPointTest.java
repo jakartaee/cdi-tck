@@ -70,7 +70,7 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "d"), @SpecAssertion(section = INJECTION_POINT, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "da"), @SpecAssertion(section = INJECTION_POINT, id = "aa") })
     public void testGetBean() {
 
         // Get an instance of the bean which has another bean injected into it
@@ -81,6 +81,17 @@ public class InjectionPointTest extends AbstractTest {
         Set<Bean<FieldInjectionPointBean>> resolvedBeans = getBeans(FieldInjectionPointBean.class);
         assert resolvedBeans.size() == 1;
         assert beanWithInjectionPoint.getInjectedMetadata().getBean().equals(resolvedBeans.iterator().next());
+    }
+
+    @Test
+    @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "db")
+    public void testNullInjectionPointInjectedIntoNonInjectedObject() {
+        Foo foo = getContextualReference(Foo.class);
+        assertTrue(foo.isEveryInjectionPointNull(),
+                "A non-null value of InjectionPoint injected into a dependent object that is not being injected.");
+
+        // Check for null injection point is done in BazProducer's producer method
+        getContextualReference(Baz.class).ping();
     }
 
     @Test
