@@ -25,8 +25,12 @@ import org.jboss.cdi.tck.util.ActionSequence;
 public class FooSuperInterceptor {
 
     @AroundConstruct
-    public Object alwaysReturnThis1(InvocationContext ctx) throws Exception {
+    public void alwaysReturnThis1(InvocationContext ctx) {
         ActionSequence.addAction(FooSuperInterceptor.class.getSimpleName());
-        return ctx.proceed();
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

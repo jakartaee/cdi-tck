@@ -24,8 +24,12 @@ import org.jboss.cdi.tck.util.ActionSequence;
 public class Interceptor4 {
 
     @AroundConstruct
-    public Object intercept(InvocationContext ctx) throws Exception {
+    public void intercept(InvocationContext ctx) {
         ActionSequence.addAction(getClass().getSimpleName());
-        return ctx.proceed();
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

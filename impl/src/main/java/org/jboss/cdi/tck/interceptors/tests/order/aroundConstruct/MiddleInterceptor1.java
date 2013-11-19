@@ -24,8 +24,12 @@ import org.jboss.cdi.tck.util.ActionSequence;
 public class MiddleInterceptor1 extends SuperInterceptor1 {
 
     @AroundConstruct
-    public Object intercept2(InvocationContext ctx) throws Exception {
+    public void intercept2(InvocationContext ctx) {
         ActionSequence.addAction(MiddleInterceptor1.class.getSimpleName());
-        return ctx.proceed();
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

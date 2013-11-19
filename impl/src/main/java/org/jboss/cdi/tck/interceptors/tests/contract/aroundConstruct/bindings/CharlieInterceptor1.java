@@ -22,7 +22,6 @@ import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-
 @Interceptor
 @CharlieBinding
 public class CharlieInterceptor1 extends AbstractInterceptor {

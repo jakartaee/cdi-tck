@@ -33,12 +33,16 @@ public class FooCommonInterceptor {
     // this interceptor method is called first - check whether the dependency injection has been completed
     // on instances of all interceptor classes associated with Foo.class
     @AroundConstruct
-    public Object intercept1(InvocationContext ctx) throws Exception {
+    public void intercept1(InvocationContext ctx) {
         assertNotNull(bar);
         assertNotNull(FooSuperInterceptor.bar);
         assertEquals(FooInterceptor.number, 5);
         commonAroundConstructCalled = true;
-        return ctx.proceed();
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void reset() {

@@ -26,8 +26,12 @@ public class FooSuperInterceptor {
     public static Bar bar;
 
     @AroundConstruct
-    public Object intercept2(InvocationContext ctx) throws Exception {
-        return ctx.proceed();
+    public void intercept2(InvocationContext ctx) {
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Inject

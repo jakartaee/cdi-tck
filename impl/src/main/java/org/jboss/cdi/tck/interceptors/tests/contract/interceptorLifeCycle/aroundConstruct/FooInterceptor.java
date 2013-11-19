@@ -29,8 +29,12 @@ public class FooInterceptor extends FooSuperInterceptor {
     public static int number;
 
     @AroundConstruct
-    public Object intercept3(InvocationContext ctx) throws Exception {
-        return ctx.proceed();
+    public void intercept3(InvocationContext ctx) {
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Inject
