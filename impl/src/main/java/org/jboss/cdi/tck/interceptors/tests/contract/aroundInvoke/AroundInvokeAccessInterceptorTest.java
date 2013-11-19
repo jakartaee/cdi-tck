@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.contract.businessMethods;
+package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
 import static org.testng.Assert.assertEquals;
 
@@ -23,33 +23,35 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "1.2")
-public class AroundInvokeInterceptorTest extends AbstractTest {
+public class AroundInvokeAccessInterceptorTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(AroundInvokeInterceptorTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(AroundInvokeAccessInterceptorTest.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.5", id = "a"), @SpecAssertion(section = "2.5", id = "cb") })
+    @SpecAssertion(section = "2.5", id = "cb")
     public void testPrivateAroundInvokeInterceptor() {
         assertEquals(getContextualReference(SimpleBean.class).zero(), 1);
+        assertEquals(getContextualReference(Bean3.class).zero(), 1);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.5", id = "a"), @SpecAssertion(section = "2.5", id = "cc") })
+    @SpecAssertion(section = "2.5", id = "cc")
     public void testProtectedAroundInvokeInterceptor() {
         assertEquals(getContextualReference(SimpleBean.class).one(), 2);
+        assertEquals(getContextualReference(Bean1.class).zero(), 1);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.5", id = "a"), @SpecAssertion(section = "2.5", id = "cd") })
+    @SpecAssertion(section = "2.5", id = "cd")
     public void testPackagePrivateAroundInvokeInterceptor() {
         assertEquals(getContextualReference(SimpleBean.class).two(), 3);
+        assertEquals(getContextualReference(Bean2.class).zero(), 1);
     }
 }

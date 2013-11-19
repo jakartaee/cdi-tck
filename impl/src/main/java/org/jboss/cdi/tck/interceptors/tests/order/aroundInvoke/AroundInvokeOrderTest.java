@@ -48,6 +48,6 @@ public class AroundInvokeOrderTest extends AbstractTest {
         assertEquals(getContextualReference(Tram.class).getId(), 8);
 
         // Overriden interceptor methods are not invoked
-        assertFalse(Interceptor1.isOverridenMethodCalled());
+        assertFalse(OverridenInterceptor.isOverridenMethodCalled());
     }
 }
