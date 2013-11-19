@@ -14,14 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.contract.businessMethods;
+package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import javax.interceptor.Interceptors;
 
-class PrivateInterceptor {
-    @AroundInvoke
-    private Object intercept(InvocationContext ctx) throws Exception {
-        return ((Integer) ctx.proceed()) + 1;
+class SimpleBean {
+    @Interceptors(PrivateInterceptor.class)
+    public int zero() {
+        return 0;
+    }
+
+    @Interceptors(ProtectedInterceptor.class)
+    public int one() {
+        return 1;
+    }
+
+    @Interceptors(PackagePrivateInterceptor.class)
+    public int two() {
+        return 2;
     }
 }
