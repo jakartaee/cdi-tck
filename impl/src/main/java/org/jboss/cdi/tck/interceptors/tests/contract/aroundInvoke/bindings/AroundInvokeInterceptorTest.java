@@ -14,40 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
+package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.bindings;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+/**
+ * @author Matus Abaffy
+ */
 @SpecVersion(spec = "int", version = "1.2")
-public class AroundInvokeOrderTest extends AbstractTest {
+public class AroundInvokeInterceptorTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(AroundInvokeOrderTest.class).build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(AroundInvokeInterceptorTest.class).build();
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = "5.2.1", id = "aa"), @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "5.2.1", id = "ba"),
-            @SpecAssertion(section = "4", id = "a"), @SpecAssertion(section = "4", id = "d"), @SpecAssertion(section = "5.5", id = "b"),
-            @SpecAssertion(section = "5.5", id = "c"), @SpecAssertion(section = "5.2.2", id = "a"), @SpecAssertion(section = "5.5", id = "e"),
-            @SpecAssertion(section = "2.3", id = "ha"), @SpecAssertion(section = "5.1", id = "a") })
-    public void testInvocationOrder() {
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = "2.1", id = "aa"), @SpecAssertion(section = "2.5", id = "a"),
+            @SpecAssertion(section = "2.5", id = "b"), @SpecAssertion(section = "2.5", id = "ca"),
+            @SpecAssertion(section = "5.2.2", id = "a") })
+    public void testBusinessMethodIntercepted(Foo foo) throws Exception {
+        ActionSequence.reset();
+        foo.ping();
 
-        // Expected order: Interceptor1, Interceptor2, Interceptor3, Interceptor4, Interceptor5, Vehicle.intercept,
-        // RailVehicle.intercept2, Tram.intercept3
-        assertEquals(getContextualReference(Tram.class).getId(), 8);
+        ActionSequence.assertSequenceDataContainsAll(SuperInterceptor1.class, MiddleInterceptor1.class, Interceptor1.class,
+                SuperInterceptor2.class, Interceptor2.class, SuperFoo.class, MiddleFoo.class, Foo.class);
 
-        // Overriden interceptor methods are not invoked
-        assertFalse(OverridenInterceptor.isOverridenMethodCalled());
+        ActionSequence.assertSequenceDataEquals(SuperInterceptor1.class, MiddleInterceptor1.class, Interceptor1.class,
+                SuperInterceptor2.class, Interceptor2.class, SuperFoo.class, MiddleFoo.class, Foo.class);
     }
 }
