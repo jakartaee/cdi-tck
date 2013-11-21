@@ -16,37 +16,45 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings.ejb;
 
-import static org.testng.Assert.assertNotNull;
-
-import java.io.Serializable;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@SuppressWarnings("serial")
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @Airborne
 @Interceptor
-public class MissileInterceptor implements Serializable {
-
-    public static boolean preDestroyCalled = false;
-    public static boolean postConstructCalled = false;
+public class AirborneInterceptor {
 
     @PreDestroy
     public void preDestroy(InvocationContext ctx) {
-        preDestroyCalled = true;
+        ActionSequence.addAction("preDestroy", AirborneInterceptor.class.getSimpleName());
+        try {
+            ctx.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
-        Missile target = (Missile) ctx.getTarget();
-        assertNotNull(target.getFoo());
-        postConstructCalled = true;
+        ActionSequence.addAction("postConstruct", AirborneInterceptor.class.getSimpleName());
+        try {
+            ctx.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static void reset() {
-        preDestroyCalled = false;
-        postConstructCalled = false;
+    @AroundConstruct
+    public void aroundConstruct(InvocationContext ctx) {
+        ActionSequence.addAction("aroundConstruct", AirborneInterceptor.class.getSimpleName());
+        try {
+            ctx.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
     }
 }

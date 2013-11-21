@@ -16,12 +16,19 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings.ejb;
 
-import javax.ejb.Stateful;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Airborne
-@Stateful
-public class Missile {
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    public void fire() {
-    }
+import javax.interceptor.InterceptorBinding;
+
+@Target({ TYPE })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface Destructive {
+
 }
