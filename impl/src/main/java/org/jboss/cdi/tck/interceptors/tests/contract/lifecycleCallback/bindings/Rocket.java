@@ -39,12 +39,12 @@ public class Rocket extends Weapon {
 
     @PostConstruct
     public void postConstruct() {
-        ActionSequence.addAction("postConstruct", Rocket.class.getName());
+        ActionSequence.addAction("postConstruct", Rocket.class.getSimpleName());
     }
 
     @PreDestroy
     public void preDestroy() {
-        ActionSequence.addAction("preDestroy", Rocket.class.getName());
+        ActionSequence.addAction("preDestroy", Rocket.class.getSimpleName());
     }
 
 }
