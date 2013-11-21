@@ -30,12 +30,12 @@ public class Weapon {
 
     @PostConstruct
     public void postConstructWeapon() {
-        ActionSequence.addAction("postConstruct", Weapon.class.getName());
+        ActionSequence.addAction("postConstruct", Weapon.class.getSimpleName());
     }
 
     @PreDestroy
     public void preDestroyWeapon() {
-        ActionSequence.addAction("preDestroy", Weapon.class.getName());
+        ActionSequence.addAction("preDestroy", Weapon.class.getSimpleName());
     }
 
 }

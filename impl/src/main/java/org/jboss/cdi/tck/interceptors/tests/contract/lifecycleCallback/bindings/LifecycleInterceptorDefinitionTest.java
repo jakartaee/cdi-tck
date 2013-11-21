@@ -18,8 +18,6 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.List;
-
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
@@ -61,15 +59,16 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
         bean.destroy(missile, ctx);
 
         assertEquals(ActionSequence.getSequenceSize("postConstruct"), 1);
-        assertEquals(ActionSequence.getSequenceData("postConstruct").get(0), AirborneInterceptor.class.getName());
+        assertEquals(ActionSequence.getSequenceData("postConstruct").get(0), AirborneInterceptor.class.getSimpleName());
         assertEquals(ActionSequence.getSequenceSize("preDestroy"), 1);
-        assertEquals(ActionSequence.getSequenceData("preDestroy").get(0), AirborneInterceptor.class.getName());
+        assertEquals(ActionSequence.getSequenceData("preDestroy").get(0), AirborneInterceptor.class.getSimpleName());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = "2.6", id = "ea"), @SpecAssertion(section = "2.6", id = "eb"),
-            @SpecAssertion(section = "5.2.1", id = "aa"), @SpecAssertion(section = "5.2.1", id = "ab") })
-    public void tesMultipleLifecycleInterceptors() {
+            @SpecAssertion(section = "2.6", id = "i"), @SpecAssertion(section = "5.2.1", id = "aa"),
+            @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "5.2.2", id = "a") })
+    public void testMultipleLifecycleInterceptors() {
 
         ActionSequence.reset();
 
@@ -79,18 +78,16 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
         rocket.fire();
         bean.destroy(rocket, ctx);
 
-        List<String> postConstruct = ActionSequence.getSequenceData("postConstruct");
-        assertEquals(postConstruct.size(), 4);
-        assertEquals(postConstruct.get(0), AirborneInterceptor.class.getName());
-        assertEquals(postConstruct.get(1), DestructionInterceptor.class.getName());
-        assertEquals(postConstruct.get(2), Weapon.class.getName());
-        assertEquals(postConstruct.get(3), Rocket.class.getName());
+        ActionSequence postConstruct = ActionSequence.getSequence("postConstruct");
+        postConstruct.assertDataEquals(AirborneInterceptor.class, SuperDestructionInterceptor.class,
+                DestructionInterceptor.class, Weapon.class, Rocket.class);
 
-        List<String> preDestroy = ActionSequence.getSequenceData("preDestroy");
-        assertEquals(preDestroy.size(), 4);
-        assertEquals(preDestroy.get(0), AirborneInterceptor.class.getName());
-        assertEquals(preDestroy.get(1), DestructionInterceptor.class.getName());
-        assertEquals(preDestroy.get(2), Weapon.class.getName());
-        assertEquals(preDestroy.get(3), Rocket.class.getName());
+        ActionSequence preDestroy = ActionSequence.getSequence("preDestroy");
+        preDestroy.assertDataEquals(AirborneInterceptor.class, SuperDestructionInterceptor.class, DestructionInterceptor.class,
+                Weapon.class, Rocket.class);
+
+        ActionSequence aroundConstruct = ActionSequence.getSequence("aroundConstruct");
+        aroundConstruct.assertDataEquals(AirborneInterceptor.class, SuperDestructionInterceptor.class,
+                DestructionInterceptor.class);
     }
 }

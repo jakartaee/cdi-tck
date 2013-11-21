@@ -22,6 +22,7 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
@@ -30,11 +31,11 @@ import org.jboss.cdi.tck.util.ActionSequence;
 @SuppressWarnings("serial")
 @Destructive
 @Interceptor
-public class DestructionInterceptor implements Serializable {
+public class DestructionInterceptor extends SuperDestructionInterceptor implements Serializable {
 
     @PreDestroy
     public void preDestroy(InvocationContext ctx) {
-        ActionSequence.addAction("preDestroy", DestructionInterceptor.class.getName());
+        ActionSequence.addAction("preDestroy", DestructionInterceptor.class.getSimpleName());
         try {
             ctx.proceed();
         } catch (Throwable e) {
@@ -46,7 +47,17 @@ public class DestructionInterceptor implements Serializable {
     public void postConstruct(InvocationContext ctx) {
         Rocket target = (Rocket) ctx.getTarget();
         assertNotNull(target.getFoo());
-        ActionSequence.addAction("postConstruct", DestructionInterceptor.class.getName());
+        ActionSequence.addAction("postConstruct", DestructionInterceptor.class.getSimpleName());
+        try {
+            ctx.proceed();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @AroundConstruct
+    public void aroundConstruct(InvocationContext ctx) {
+        ActionSequence.addAction("aroundConstruct", DestructionInterceptor.class.getSimpleName());
         try {
             ctx.proceed();
         } catch (Throwable e) {

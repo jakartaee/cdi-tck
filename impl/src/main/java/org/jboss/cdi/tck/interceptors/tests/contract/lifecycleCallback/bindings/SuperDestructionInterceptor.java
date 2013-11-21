@@ -16,24 +16,18 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings;
 
-import java.io.Serializable;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.interceptor.AroundConstruct;
-import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
-@SuppressWarnings("serial")
-@Airborne
-@Interceptor
-public class AirborneInterceptor implements Serializable {
+public class SuperDestructionInterceptor {
 
     @PreDestroy
-    public void preDestroy(InvocationContext ctx) {
-        ActionSequence.addAction("preDestroy", AirborneInterceptor.class.getSimpleName());
+    public void preDestroyS(InvocationContext ctx) {
+        ActionSequence.addAction("preDestroy", SuperDestructionInterceptor.class.getSimpleName());
         try {
             ctx.proceed();
         } catch (Throwable e) {
@@ -42,8 +36,8 @@ public class AirborneInterceptor implements Serializable {
     }
 
     @PostConstruct
-    public void postConstruct(InvocationContext ctx) {
-        ActionSequence.addAction("postConstruct", AirborneInterceptor.class.getSimpleName());
+    public void postConstructS(InvocationContext ctx) {
+        ActionSequence.addAction("postConstruct", SuperDestructionInterceptor.class.getSimpleName());
         try {
             ctx.proceed();
         } catch (Throwable e) {
@@ -52,8 +46,8 @@ public class AirborneInterceptor implements Serializable {
     }
 
     @AroundConstruct
-    public void aroundConstruct(InvocationContext ctx) {
-        ActionSequence.addAction("aroundConstruct", AirborneInterceptor.class.getSimpleName());
+    public void aroundConstructS(InvocationContext ctx) {
+        ActionSequence.addAction("aroundConstruct", SuperDestructionInterceptor.class.getSimpleName());
         try {
             ctx.proceed();
         } catch (Throwable e) {
