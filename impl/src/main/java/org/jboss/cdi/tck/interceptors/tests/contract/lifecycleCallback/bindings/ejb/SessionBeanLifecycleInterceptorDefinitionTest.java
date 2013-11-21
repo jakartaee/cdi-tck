@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -25,6 +25,7 @@ import javax.enterprise.inject.spi.Bean;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -34,22 +35,23 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "1.2")
-public class EnterpriseLifecycleInterceptorDefinitionTest extends AbstractTest {
+public class SessionBeanLifecycleInterceptorDefinitionTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(EnterpriseLifecycleInterceptorDefinitionTest.class)
+                .withTestClassPackage(SessionBeanLifecycleInterceptorDefinitionTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(MissileInterceptor.class.getName()).up()).build();
+                                .clazz(AirborneInterceptor.class.getName(), DestructionInterceptor.class.getName()).up())
+                .build();
     }
 
     @Test(groups = { INTEGRATION })
     @SpecAssertions({ @SpecAssertion(section = "2.6", id = "b"), @SpecAssertion(section = "2.6", id = "c") })
     public void testLifecycleInterception() {
 
-        MissileInterceptor.reset();
+        ActionSequence.reset();
 
         Bean<Missile> bean = getUniqueBean(Missile.class);
         CreationalContext<Missile> ctx = getCurrentManager().createCreationalContext(bean);
@@ -57,7 +59,36 @@ public class EnterpriseLifecycleInterceptorDefinitionTest extends AbstractTest {
         missile.fire();
         bean.destroy(missile, ctx);
 
-        assertTrue(MissileInterceptor.postConstructCalled);
-        assertTrue(MissileInterceptor.preDestroyCalled);
+        assertEquals(ActionSequence.getSequenceSize("postConstruct"), 1);
+        assertEquals(ActionSequence.getSequenceData("postConstruct").get(0), AirborneInterceptor.class.getSimpleName());
+        assertEquals(ActionSequence.getSequenceSize("preDestroy"), 1);
+        assertEquals(ActionSequence.getSequenceData("preDestroy").get(0), AirborneInterceptor.class.getSimpleName());
+    }
+
+    @Test(groups = { INTEGRATION })
+    @SpecAssertions({ @SpecAssertion(section = "2.6", id = "ea"), @SpecAssertion(section = "2.6", id = "eb"),
+            @SpecAssertion(section = "2.6", id = "i"), @SpecAssertion(section = "5.2.1", id = "aa"),
+            @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "5.2.2", id = "a") })
+    public void testMultipleLifecycleInterceptors() {
+
+        ActionSequence.reset();
+
+        Bean<Rocket> bean = getUniqueBean(Rocket.class);
+        CreationalContext<Rocket> ctx = getCurrentManager().createCreationalContext(bean);
+        Rocket rocket = bean.create(ctx);
+        rocket.fire();
+        bean.destroy(rocket, ctx);
+
+        ActionSequence postConstruct = ActionSequence.getSequence("postConstruct");
+        postConstruct.assertDataEquals(AirborneInterceptor.class, SuperDestructionInterceptor.class,
+                DestructionInterceptor.class, Weapon.class, Rocket.class);
+
+        ActionSequence preDestroy = ActionSequence.getSequence("preDestroy");
+        preDestroy.assertDataEquals(AirborneInterceptor.class, SuperDestructionInterceptor.class, DestructionInterceptor.class,
+                Weapon.class, Rocket.class);
+
+        ActionSequence aroundConstruct = ActionSequence.getSequence("aroundConstruct");
+        aroundConstruct.assertDataEquals(AirborneInterceptor.class, SuperDestructionInterceptor.class,
+                DestructionInterceptor.class);
     }
 }
