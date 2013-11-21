@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,8 +17,11 @@
 package org.jboss.cdi.tck.tests.lookup.injection.visibility;
 
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,12 +41,15 @@ public class InjectionVisibilityTest extends AbstractTest {
     }
 
     @Inject
-    SimpleSessionBean bean;
+    SimpleSessionBean simpleSessionBean;
 
     @Test
     @SpecAssertion(section = INJECTION, id = "a")
     public void testPackagePrivateSetMethodInjection() throws Exception {
-        bean.simpleMethod(); // because of lazy loading
+        Bean<SimpleSessionBean> bean = getUniqueBean(SimpleSessionBean.class);
+        assertNotNull(bean.getInjectionPoints());
+        assertEquals(bean.getInjectionPoints().size(), 1);
+        simpleSessionBean.simpleMethod(); // because of lazy loading
         assertTrue(AbstractBean.fooSetCalled);
     }
 
