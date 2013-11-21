@@ -17,9 +17,11 @@
 package org.jboss.cdi.tck.util;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -37,6 +39,13 @@ import java.util.regex.Pattern;
 public final class ActionSequence {
 
     private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.]+");
+
+    private static final TransformationUtils.Function<Class<?>, String> GET_SIMPLE_NAME = new TransformationUtils.Function<Class<?>, String>() {
+        @Override
+        public String apply(Class<?> input) {
+            return input.getSimpleName();
+        }
+    };
 
     private String name;
 
@@ -149,15 +158,66 @@ public final class ActionSequence {
     }
 
     /**
-     * Assert that strings stored in this sequence equal (in order!) to the simple class names of {@code expected}.
+     * Assert that strings stored in this sequence equal (in order!) to the {@code expected} strings.
+     * 
+     * @param expected
+     */
+    public void assertDataEquals(List<String> expected) {
+        assertEquals(data.size(), expected.size(), String.format("%s and expected sequence differ in size.", toString()));
+        for (int i = 0; i < expected.size(); i++) {
+            assertEquals(data.get(i), expected.get(i),
+                    String.format("%s and expected sequence differ on the index %d.", toString(), i));
+        }
+    }
+
+    /**
+     * Assert that strings stored in this sequence equal (in order!) to the {@code expected} strings.
+     * 
+     * @param expected
+     */
+    public void assertDataEquals(String... expected) {
+        assertDataEquals(Arrays.asList(expected));
+    }
+
+    /**
+     * Assert that strings stored in this sequence equal (in order!) to the simple class names of the {@code expected} classes.
      * 
      * @param expected
      */
     public void assertDataEquals(Class<?>... expected) {
-        assertEquals(data.size(), expected.length);
-        for (int i = 0; i < expected.length; i++) {
-            assertEquals(data.get(i), expected[i].getSimpleName());
+        assertDataEquals(TransformationUtils.transform(GET_SIMPLE_NAME, expected));
+    }
+
+    /**
+     * Assert that this sequence contains all of the {@code expected} strings. Note that this only verifies that the
+     * {@code expected} strings are a SUBSET of the actual strings stored in this sequence.
+     * 
+     * @param expected
+     */
+    public void assertDataContainsAll(Collection<String> expected) {
+        for (String s : expected) {
+            assertTrue(String.format("%s does not contain %s", toString(), s), data.contains(s));
         }
+    }
+
+    /**
+     * Assert that this sequence contains all of the {@code expected} strings. Note that this only verifies that the
+     * {@code expected} strings are a SUBSET of the actual strings stored in this sequence.
+     * 
+     * @param expected
+     */
+    public void assertDataContainsAll(String... expected) {
+        assertDataContainsAll(Arrays.asList(expected));
+    }
+
+    /**
+     * Assert that this sequence contains simple class names of all of the {@code expected} classes. Note that this only
+     * verifies that the {@code expected} classes are a SUBSET of the actual classes stored in this sequence.
+     * 
+     * @param expected
+     */
+    public void assertDataContainsAll(Class<?>... expected) {
+        assertDataContainsAll(TransformationUtils.transform(GET_SIMPLE_NAME, expected));
     }
 
     // Static members
@@ -285,15 +345,72 @@ public final class ActionSequence {
     }
 
     /**
-     * Assert that strings stored in the default sequence equal (in order!) to the simple class names of {@code expected}.
-     * Do nothing if there is no default sequence.
+     * Assert that strings stored in this sequence equal (in order!) to the {@code expected} strings.
      * 
      * @param expected
+     * @throws IllegalStateException if there is no default sequence
+     */
+    public static void assertSequenceDataEquals(List<String> expected) {
+        checkDefaultSequenceExists();
+        getSequence().assertDataEquals(expected);
+    }
+
+    /**
+     * Assert that strings stored in this sequence equal (in order!) to the {@code expected} strings.
+     * 
+     * @param expected
+     * @throws IllegalStateException if there is no default sequence
+     */
+    public static void assertSequenceDataEquals(String... expected) {
+        checkDefaultSequenceExists();
+        getSequence().assertDataEquals(Arrays.asList(expected));
+    }
+
+    /**
+     * Assert that strings stored in the default sequence equal (in order!) to the simple class names of {@code expected}.
+     *
+     * @param expected
+     * @throws IllegalStateException if there is no default sequence
      */
     public static void assertSequenceDataEquals(Class<?>... expected) {
-        if (getSequence() != null) {
-            getSequence().assertDataEquals(expected);
-        }
+        checkDefaultSequenceExists();
+        getSequence().assertDataEquals(expected);
+    }
+
+    /**
+     * Assert that this sequence contains all of the {@code expected} strings. Note that this only verifies that the
+     * {@code expected} strings are a SUBSET of the actual strings stored in this sequence.
+     * 
+     * @param expected
+     * @throws IllegalStateException if there is no default sequence
+     */
+    public static void assertSequenceDataContainsAll(Collection<String> expected) {
+        checkDefaultSequenceExists();
+        getSequence().assertDataContainsAll(expected);
+    }
+
+    /**
+     * Assert that this sequence contains all of the {@code expected} strings. Note that this only verifies that the
+     * {@code expected} strings are a SUBSET of the actual strings stored in this sequence.
+     * 
+     * @param expected
+     * @throws IllegalStateException if there is no default sequence
+     */
+    public static void assertSequenceDataContainsAll(String... expected) {
+        checkDefaultSequenceExists();
+        getSequence().assertDataContainsAll(Arrays.asList(expected));
+    }
+
+    /**
+     * Assert that the default sequence contains simple class names of all of the {@code expected} classes. Note that this only
+     * verifies that the {@code expected} classes are a SUBSET of the actual classes stored in this sequence.
+     *
+     * @param expected
+     * @throws IllegalStateException if there is no default sequence
+     */
+    public static void assertSequenceDataContainsAll(Class<?>... expected) {
+        checkDefaultSequenceExists();
+        getSequence().assertDataContainsAll(expected);
     }
 
     private static void checkStringValue(String value) {
@@ -304,4 +421,9 @@ public final class ActionSequence {
         throw new IllegalArgumentException("Invalid name/id specified:" + value);
     }
 
+    private static void checkDefaultSequenceExists() {
+        if (getSequence() == null) {
+            throw new IllegalStateException("There is no default sequence. You cannot assert anything about it.");
+        }
+    }
 }
