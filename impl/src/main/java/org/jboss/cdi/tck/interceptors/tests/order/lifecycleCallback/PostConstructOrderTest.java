@@ -14,34 +14,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.order.aroundConstruct.bindings;
+package org.jboss.cdi.tck.interceptors.tests.order.lifecycleCallback;
 
-import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
-
-import javax.enterprise.inject.Instance;
+import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "1.2")
-public class AroundConstructOrderTest extends AbstractTest {
+public class PostConstructOrderTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(AroundConstructOrderTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(PostConstructOrderTest.class).build();
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "5.2.2", id = "a")
-    public void testInvocationOrder(Instance<Foo> instance) {
-        ActionSequence.reset();
-        instance.get();
-        assertSequenceDataEquals(FooSuperInterceptor.class, FooMiddleInterceptor.class, FooInterceptor.class);
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "5.5", id = "b"), @SpecAssertion(section = "5.5", id = "c"),
+            @SpecAssertion(section = "5.2.2", id = "a"), @SpecAssertion(section = "5.2.1", id = "aa"),
+            @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "5.1", id = "a") })
+    public void testInvocationOrder() {
+        getContextualReference(LakeCargoShip.class);
+        assertEquals(LakeCargoShip.getSequence(), 7);
     }
 }

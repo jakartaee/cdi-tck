@@ -29,11 +29,11 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "int", version = "1.2")
-public class InvocationOrderTest extends AbstractTest {
+public class AroundInvokeOrderTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(InvocationOrderTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(AroundInvokeOrderTest.class).build();
     }
 
     @Test
