@@ -23,23 +23,17 @@ import javax.enterprise.inject.spi.CDIProvider;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Vetoed
-public class ForwardingCDIProvider implements CDIProvider {
+public class CustomCDIProvider implements CDIProvider {
 
     public static boolean isCalled = false;
-
-    private CDI<Object> cdi;
-
-    public ForwardingCDIProvider(CDI<Object> discoveredCdi) {
-        cdi = discoveredCdi;
-    }
 
     @Override
     public CDI<Object> getCDI() {
         isCalled = true;
-        return cdi;
+        return null;
     }
 
     public static void reset() {
