@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.lookup.manager.provider.custom;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.inject.spi.CDI;
@@ -33,7 +34,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class CustomCDIProviderTest extends AbstractTest {
@@ -43,14 +44,18 @@ public class CustomCDIProviderTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(CustomCDIProviderTest.class).build();
     }
 
-    @Test(groups = INTEGRATION )
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = PROVIDER, id = "ba")
     public void testCustomCDIProvider() {
-        ForwardingCDIProvider.reset();
-        CDI<Object> discovered = CDI.current();
-        CDI.setCDIProvider(new ForwardingCDIProvider(discovered));
-        CDI.current();
-        assertTrue(ForwardingCDIProvider.isCalled);
+        try {
+            CustomCDIProvider.reset();
+            CDI.setCDIProvider(new CustomCDIProvider());
+            assertNull(CDI.current());
+            assertTrue(CustomCDIProvider.isCalled);
+        } finally {
+            // Unset the CDIProvider so that other tests are not affected
+            TestCDI.unsetCDIProvider();
+        }
     }
 
 }
