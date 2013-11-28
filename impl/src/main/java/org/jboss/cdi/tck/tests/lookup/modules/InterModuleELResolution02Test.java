@@ -31,7 +31,7 @@ public class InterModuleELResolution02Test extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        WebArchive webArchive = new WebArchiveBuilder().withTestClass(InterModuleELResolution02Test.java.class)
+        WebArchive webArchive = new WebArchiveBuilder().withTestClass(InterModuleELResolution02Test.class)
                 .withClasses(ManagedFoo.class).withBeanLibrary(Foo.class).withBeanLibrary(WebFooELResolver.class).build();
         return webArchive;
     }
