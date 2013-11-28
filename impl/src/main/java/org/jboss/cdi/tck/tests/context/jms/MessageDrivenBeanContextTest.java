@@ -25,6 +25,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -87,7 +88,7 @@ public class MessageDrivenBeanContextTest extends AbstractTest {
         producer.sendTopicMessage();
 
         // Wait for async processing
-        new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
+        new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             public boolean isSatisfied() {
                 return AbstractMessageListener.processedMessages.get() >= 2;
             }

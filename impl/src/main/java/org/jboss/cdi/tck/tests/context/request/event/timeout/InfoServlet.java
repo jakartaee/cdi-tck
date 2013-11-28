@@ -33,7 +33,7 @@ import org.jboss.cdi.tck.util.Timer.StopCondition;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SuppressWarnings("serial")
 @WebServlet("/info")
@@ -69,7 +69,7 @@ public class InfoServlet extends HttpServlet {
 
         // wait for the request scope created for the async method invocation to be destroyed
         try {
-            new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
+            new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
                 public boolean isSatisfied() {
                     return observingBean.isDestroyedCalled();
                 }
@@ -77,7 +77,7 @@ public class InfoServlet extends HttpServlet {
         } catch (InterruptedException e) {
             throw new ServletException(e);
         }
-        
+
         resp.getWriter().append("Destroyed:" + observingBean.isDestroyedCalled());
         resp.setContentType("text/plain");
     }

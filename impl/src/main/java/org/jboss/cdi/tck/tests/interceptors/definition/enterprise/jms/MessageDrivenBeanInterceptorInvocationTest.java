@@ -22,6 +22,8 @@ import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder.MessageDriven.newMessageDriven;
 import static org.testng.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -80,7 +82,7 @@ public class MessageDrivenBeanInterceptorInvocationTest extends AbstractTest {
         producer.sendQueueMessage();
 
         // Wait for async processing
-        new Timer().setDelay(3000l).addStopCondition(new StopCondition() {
+        new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             @Override
             public boolean isSatisfied() {
                 return MessageDrivenMissile.messageAccepted;

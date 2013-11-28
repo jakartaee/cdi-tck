@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.conversation.filter;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
@@ -27,6 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
+import org.jboss.cdi.tck.util.Timer;
+import org.jboss.cdi.tck.util.Timer.StopCondition;
 
 @SuppressWarnings("serial")
 @WebServlet("/introspect")
@@ -41,11 +44,6 @@ public class IntrospectServlet extends HttpServlet {
     public static final String MODE_LONG_TASK = "long_task";
 
     public static final String MODE_BUSY_REQUEST = "busy_request";
-
-    /**
-     * The concurrent access timeout is not defined by the spec
-     */
-    public static final long LONG_TASK_TIMEOUT = 10000l;
 
     @Inject
     Dummy dummy;
@@ -82,12 +80,16 @@ public class IntrospectServlet extends HttpServlet {
                 resp.sendError(500, "No long running conversation");
             } else {
                 long start = System.currentTimeMillis();
-                while (!state.isBusyAttemptMade() && (System.currentTimeMillis() - start < LONG_TASK_TIMEOUT)) {
-                    try {
-                        Thread.sleep(100l);
-                    } catch (InterruptedException e) {
-                        throw new IllegalStateException();
-                    }
+                try {
+                    // The concurrent access timeout is not defined by the spec
+                    new Timer().setSleepInterval(100l).setDelay(10, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
+                        @Override
+                        public boolean isSatisfied() {
+                            return state.isBusyAttemptMade();
+                        }
+                    }).start();
+                } catch (InterruptedException e1) {
+                    throw new IllegalStateException();
                 }
                 logger.log("Long task finished [isBusyAttemptMade: {0}, time: {1} ms]", state.isBusyAttemptMade(),
                         System.currentTimeMillis() - start);

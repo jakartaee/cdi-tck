@@ -20,6 +20,7 @@ package org.jboss.cdi.tck.tests.context.application.async;
 import javax.servlet.AsyncContext;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
+import org.jboss.cdi.tck.util.Timer;
 
 /**
  * @author Martin Kouba
@@ -54,7 +55,7 @@ public class AsyncRequestProcessor implements Runnable {
         try {
             if (timerValue > 0) {
                 // Simulate long running operation
-                Thread.sleep(timerValue);
+                Timer.startNew(timerValue);
             }
         } catch (InterruptedException e) {
             throw new IllegalStateException("Interrupted");

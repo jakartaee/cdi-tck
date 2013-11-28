@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -24,6 +24,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -42,9 +43,9 @@ import org.testng.annotations.Test;
 
 /**
  * EJB and related tests with the built-in request context.
- * 
+ *
  * Clarification for request context lifecycle during remote method invocation of EJB is required - see CDI-180.
- * 
+ *
  * @author David Allen
  * @author Martin Kouba
  */
@@ -81,7 +82,7 @@ public class EJBRequestContextTest extends AbstractTest {
         FMS flightManagementSystem = getContextualReference(FMS.class);
         flightManagementSystem.climb();
 
-        new Timer().setDelay(20000l).addStopCondition(new StopCondition() {
+        new Timer().setDelay(20, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             public boolean isSatisfied() {
                 return FMSModelIII.isClimbed();
             }
@@ -103,7 +104,7 @@ public class EJBRequestContextTest extends AbstractTest {
 
         flightManagementSystem.climb();
 
-        Timer timer = new Timer().setDelay(20000l).addStopCondition(new StopCondition() {
+        Timer timer = new Timer().setDelay(20, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             public boolean isSatisfied() {
                 return FMSModelIII.isClimbed();
             }

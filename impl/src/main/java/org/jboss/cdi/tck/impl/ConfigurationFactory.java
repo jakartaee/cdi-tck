@@ -47,7 +47,7 @@ public final class ConfigurationFactory {
     }
 
     /**
-     * @return current JSR299 configuration
+     * @return current JSR 346 TCK configuration
      */
     public static Configuration get() {
         return get(false);

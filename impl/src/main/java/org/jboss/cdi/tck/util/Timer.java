@@ -18,21 +18,23 @@ package org.jboss.cdi.tck.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.jboss.cdi.tck.api.Configuration;
+import org.jboss.cdi.tck.impl.ConfigurationFactory;
 
 /**
- * Delays thread execution for specified time or unless stop conditions are satisfied according to actual
- * {@link #resolutionLogic}.
+ * Delays thread execution for specified time or unless stop conditions are satisfied according to the actual {@link ResolutionLogic}. This class is not
+ * thread-safe.
  * <p>
- * Setting the sleep interval to value less than 15 ms is questionable since some operating systems do not provide such
- * precision. Moreover such values may impact test performance.
+ * Setting the sleep interval to the value less than 15 ms is questionable since some operating systems do not provide such precision. Moreover such values may
+ * impact test performance.
  * </p>
  * <p>
- * In case of no stop conditions are specified, timer logic corresponds to regular {@link Thread#sleep(long)} execution.
+ * In case of no stop conditions are specified (not recommended), the timer logic corresponds to the regular {@link Thread#sleep(long)} execution.
  * </p>
  */
 public class Timer {
-
-    private static final long DEFAULT_DELAY = 2000l;
 
     private static final long DEFAULT_SLEEP_INTERVAL = 50l;
 
@@ -41,12 +43,12 @@ public class Timer {
     /**
      * Delay in ms
      */
-    private long delay = DEFAULT_DELAY;
+    private long delay;
 
     /**
      * Thread sleep interval
      */
-    private long sleepInterval = DEFAULT_SLEEP_INTERVAL;
+    private long sleepInterval;
 
     /**
      * Stop conditions
@@ -56,27 +58,55 @@ public class Timer {
     /**
      * Stop conditions resolution logic
      */
-    private ResolutionLogic resolutionLogic = DEFAULT_RESOLUTION_LOGIC;
+    private ResolutionLogic resolutionLogic;
 
-    private boolean stopConditionsSatisfiedBeforeTimeout = false;
+    private boolean stopConditionsSatisfiedBeforeTimeout;
 
     /**
-     * Create new timer with default delay and sleep interval.
-     *
-     * @param delay
+     * Create new timer with default delay, sleep interval and stop conditions resolution logic.
      */
     public Timer() {
-        super();
+        reset();
     }
 
     /**
-     * Set new delay value.
+     * Set the delay value. The value is automatically adjusted according to the {@link Configuration#getTestTimeoutFactor()} so that it's possible to configure
+     * timeouts according to the testing runtime performance and throughput.
      *
-     * @param delay
+     * @param delay The delay in milliseconds
      * @return self
      */
     public Timer setDelay(long delay) {
-        this.delay = delay;
+        return setDelay(delay, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Set the delay value. The value is automatically adjusted according to the {@link Configuration#getTestTimeoutFactor()} so that it's possible to configure
+     * timeouts according to the testing runtime performance and throughput.
+     *
+     * @param delay
+     * @param timeUnit
+     * @return self
+     */
+    public Timer setDelay(long delay, TimeUnit timeUnit) {
+
+        if (delay < 0) {
+            throw new IllegalArgumentException("Delay must be greater than zero");
+        }
+
+        long millis = timeUnit.toMillis(delay);
+        int factor = ConfigurationFactory.get().getTestTimeoutFactor();
+
+        if (factor == 100) {
+            this.delay = millis;
+        } else {
+            long numerator = millis * factor;
+            if (numerator % 100 == 0) {
+                this.delay = numerator / 100;
+            } else {
+                this.delay = (numerator / 100) + 1;
+            }
+        }
         return this;
     }
 
@@ -159,7 +189,7 @@ public class Timer {
      * Reset to default values.
      */
     public void reset() {
-        this.delay = DEFAULT_DELAY;
+        this.delay = -1;
         this.sleepInterval = DEFAULT_SLEEP_INTERVAL;
         this.resolutionLogic = DEFAULT_RESOLUTION_LOGIC;
         clearStopConditions();
@@ -169,17 +199,32 @@ public class Timer {
      * Clear stop conditions and reset {@link #stopConditionsSatisfiedBeforeTimeout}.
      */
     public void clearStopConditions() {
-        if (this.stopConditions != null && !this.stopConditions.isEmpty())
-            this.stopConditions.clear();
+        if (stopConditions != null) {
+            stopConditions.clear();
+        }
         this.stopConditionsSatisfiedBeforeTimeout = false;
     }
 
     /**
-     * @return <code>true</code> if stop conditions are satisfied according to actual {@link #resolutionLogic} before timeout
-     *         occurs, <code>false</code> otherwise
+     * @return <code>true</code> if stop conditions are satisfied according to actual {@link #resolutionLogic} before timeout occurs, <code>false</code>
+     *         otherwise
      */
     public boolean isStopConditionsSatisfiedBeforeTimeout() {
         return stopConditionsSatisfiedBeforeTimeout;
+    }
+
+    /**
+     * @return the current delay in ms
+     */
+    public long getDelay() {
+        return delay;
+    }
+
+    /**
+     * @return the current sleep interval in ms
+     */
+    public long getSleepInterval() {
+        return sleepInterval;
     }
 
     /**
@@ -218,7 +263,7 @@ public class Timer {
 
     private void checkConfiguration() {
         if (delay < 0 || sleepInterval < 0 || delay < sleepInterval)
-            throw new IllegalArgumentException("Invalid timer configuration");
+            throw new IllegalStateException("Invalid timer configuration");
     }
 
     private boolean hasConditionsSatisfied() {

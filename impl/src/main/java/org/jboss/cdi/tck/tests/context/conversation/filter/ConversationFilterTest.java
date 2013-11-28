@@ -27,11 +27,14 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Timer;
+import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
@@ -115,13 +118,17 @@ public class ConversationFilterTest extends AbstractTest {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         WebRequest longTask = new WebRequest(IntrospectServlet.MODE_LONG_TASK, contextPath, cid, jsessionid);
         WebRequest busyRequest = new WebRequest(IntrospectServlet.MODE_BUSY_REQUEST, contextPath, cid, jsessionid);
-        Future<String> longTaskFuture = executorService.submit(longTask);
-        Thread.sleep(100l);
-        Future<String> busyRequestFuture = executorService.submit(busyRequest);
 
-        while (!longTaskFuture.isDone() || !busyRequestFuture.isDone()) {
-            Thread.sleep(100l);
-        }
+        final Future<String> longTaskFuture = executorService.submit(longTask);
+        Timer timer = Timer.startNew(100l);
+        final Future<String> busyRequestFuture = executorService.submit(busyRequest);
+        timer.setSleepInterval(100l).setDelay(10, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
+            @Override
+            public boolean isSatisfied() {
+                return longTaskFuture.isDone() || busyRequestFuture.isDone();
+            }
+        }).start();
+
         assertEquals(longTaskFuture.get(), "OK");
         assertEquals(busyRequestFuture.get(), "BusyConversationException");
         executorService.shutdown();

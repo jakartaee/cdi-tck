@@ -16,16 +16,27 @@
  */
 package org.jboss.cdi.tck.test.util;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
+import java.util.concurrent.TimeUnit;
+
+import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.ResolutionLogic;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.internal.thread.ThreadTimeoutException;
 
 public class TimerTest {
+
+    @BeforeMethod
+    public void beforeTestMethod() {
+        ConfigurationFactory.get().setTestTimeoutFactor(100);
+    }
 
     @Test(timeOut = 1000l, expectedExceptions = { ThreadTimeoutException.class })
     public void testNoCondition() throws InterruptedException {
@@ -103,6 +114,47 @@ public class TimerTest {
         // And finally half-second
         timer.setDelay(500l);
         timer.start();
+    }
+
+    @Test(timeOut = 1000l, expectedExceptions = { ThreadTimeoutException.class })
+    public void testTimeoutFactor() throws InterruptedException {
+        ConfigurationFactory.get().setTestTimeoutFactor(200);
+        new Timer().setDelay(1000).start();
+    }
+
+    @Test
+    public void testTimeUnits() {
+        Timer timer = new Timer();
+        timer.setDelay(2, TimeUnit.SECONDS);
+        assertEquals(2000, timer.getDelay());
+        timer.setDelay(1, TimeUnit.MINUTES);
+        assertEquals(60000, timer.getDelay());
+        try {
+            timer.setDelay(-10, TimeUnit.MILLISECONDS);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
+    }
+
+    @Test
+    public void testDelayAdjustment() {
+        ConfigurationFactory.get().setTestTimeoutFactor(200);
+        Timer timer = new Timer();
+        timer.setDelay(2, TimeUnit.SECONDS);
+        assertEquals(4000, timer.getDelay());
+        timer.setDelay(10);
+        assertEquals(20, timer.getDelay());
+        ConfigurationFactory.get().setTestTimeoutFactor(25);
+        timer.setDelay(888);
+        assertEquals(222, timer.getDelay());
+        timer.setDelay(13);
+        assertEquals(4, timer.getDelay());
+    }
+
+    @Test(expectedExceptions = { IllegalStateException.class })
+    public void testNoDelaySet() throws InterruptedException {
+        new Timer().start();
     }
 
 }
