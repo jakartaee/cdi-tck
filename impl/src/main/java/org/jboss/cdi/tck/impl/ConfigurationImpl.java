@@ -41,6 +41,7 @@ public class ConfigurationImpl implements Configuration {
     private String testJmsConnectionFactory;
     private String testJmsQueue;
     private String testJmsTopic;
+    private int testTimeoutFactor;
 
     protected ConfigurationImpl() {
     }
@@ -117,6 +118,19 @@ public class ConfigurationImpl implements Configuration {
     }
 
     @Override
+    public int getTestTimeoutFactor() {
+        return testTimeoutFactor;
+    }
+
+    @Override
+    public void setTestTimeoutFactor(int timeoutFactor) {
+        if(timeoutFactor <= 0) {
+            throw new IllegalArgumentException("Test timeout factor must be greater than zero");
+        }
+        this.testTimeoutFactor = timeoutFactor;
+    }
+
+    @Override
     public String toString() {
         StringBuilder configuration = new StringBuilder();
         configuration.append("JSR 346 TCK Configuration\n");
@@ -129,6 +143,7 @@ public class ConfigurationImpl implements Configuration {
         configuration.append("\tTest JMS connection factory: ").append(getTestJmsConnectionFactory()).append("\n");
         configuration.append("\tTest JMS queue: ").append(getTestJmsQueue()).append("\n");
         configuration.append("\tTest JMS topic: ").append(getTestJmsTopic()).append("\n");
+        configuration.append("\tTest timeout factor: ").append(getTestTimeoutFactor()).append("\n");
         configuration.append("\n");
         return configuration.toString();
     }

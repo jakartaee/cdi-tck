@@ -23,6 +23,8 @@ import static org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuild
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -75,7 +77,7 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
 
         producer.sendTopicMessage();
 
-        new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
+        new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             public boolean isSatisfied() {
                 return AbstractMessageListener.getProcessedMessages() >= 1;
             }
@@ -85,7 +87,7 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
         assertTrue(AbstractMessageListener.isInitializedEventObserver());
 
         // wait for the request scope for the message delivery to be destroyed and verify that the event was delivered
-        new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
+        new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             public boolean isSatisfied() {
                 return observer.isDestroyedCalled();
             }

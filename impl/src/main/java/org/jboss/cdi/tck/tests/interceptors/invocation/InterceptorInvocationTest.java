@@ -24,6 +24,8 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
@@ -156,7 +158,7 @@ public class InterceptorInvocationTest extends AbstractTest {
 
         timing.createTimer();
 
-        new Timer().setDelay(10000l).addStopCondition(new StopCondition() {
+        new Timer().setDelay(10, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             public boolean isSatisfied() {
                 return Timing.timeoutAt != null;
             }

@@ -27,10 +27,10 @@ import org.jboss.cdi.tck.spi.EL;
  *
  * The TCK may be configured using system properties or placed in a properties file called META-INF/cdi-tck.properties.
  *
- * Porting package property names are the FQCN of the SPI class. Other property names (one for each non-porting package SPI
- * configuration option) are specified here. The defaults are also listed here.
+ * Porting package property names are the FQCN of the SPI class. Other property names (one for each non-porting package SPI configuration option) are specified
+ * here.
  *
- * The TCK may also be configured programatically through this interface
+ * The TCK may also be configured programatically through this interface.
  *
  * @author Pete Muir
  * @author Martin Kouba
@@ -46,6 +46,10 @@ public interface Configuration {
     public static final String TEST_JMS_QUEUE = "org.jboss.cdi.tck.testJmsQueue";
 
     public static final String TEST_JMS_TOPIC = "org.jboss.cdi.tck.testJmsTopic";
+
+    public static final String TEST_TIMEOUT_FACTOR = "org.jboss.cdi.tck.testTimeoutFactor";
+
+    public static final int TEST_TIMEOUT_FACTOR_DEFAULT_VALUE = 100;
 
     /**
      * The implementation of {@link Beans} in use.
@@ -69,8 +73,8 @@ public interface Configuration {
     public EL getEl();
 
     /**
-     * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the
-     * implementation). Any jars in this directory will be added to the deployed artifact.
+     * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the implementation). Any jars in this
+     * directory will be added to the deployed artifact.
      *
      * By default no directory is used.
      *
@@ -81,8 +85,8 @@ public interface Configuration {
     public void setLibraryDirectory(String libraryDir);
 
     /**
-     * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - test datasource must be provided.
-     * These tests belong to testng group <code>persistence</code>.
+     * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - test datasource must be provided. These tests belong to testng group
+     * <code>persistence</code>.
      *
      * @return the JNDI name of the test datasource
      */
@@ -106,25 +110,39 @@ public interface Configuration {
     public void setTestJmsConnectionFactory(String testJmsConnectionFactory);
 
     /**
-    *
-    * @return the JNDI name of the test JMS queue
-    */
-   public String getTestJmsQueue();
+     *
+     * @return the JNDI name of the test JMS queue
+     */
+    public String getTestJmsQueue();
 
-   /**
-    * @param testJmsQueue
-    */
-   public void setTestJmsQueue(String testJmsQueue);
+    /**
+     * @param testJmsQueue
+     */
+    public void setTestJmsQueue(String testJmsQueue);
 
-   /**
-   *
-   * @return the JNDI name of the test JMS topic
-   */
-  public String getTestJmsTopic();
+    /**
+     *
+     * @return the JNDI name of the test JMS topic
+     */
+    public String getTestJmsTopic();
 
-  /**
-   * @param testJmsTopic
-   */
-  public void setTestJmsTopic(String testJmsTopic);
+    /**
+     * @param testJmsTopic
+     */
+    public void setTestJmsTopic(String testJmsTopic);
+
+    /**
+     * All tests using some timeout technique (e.g. wait for async processing) should use this value to adjust the final timeout so that it's possible to configure timeouts
+     * according to the testing runtime performance and throughput.
+     *
+     * @return the test timeout factor (in percent)
+     */
+    public int getTestTimeoutFactor();
+
+    /**
+     *
+     * @param timeoutFactor
+     */
+    public void setTestTimeoutFactor(int timeoutFactor);
 
 }
