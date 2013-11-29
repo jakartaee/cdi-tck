@@ -157,13 +157,20 @@
          url="http://testng.org/doc/documentation-main.html">testng.org</ulink>.
       </para>
       <para>
-         The
-         <literal>artifacts/cdi-tck-impl-suite.xml</literal>
-         artifact provided in the TCK distribution must be run by TestNG 6.3
-         (described by the TestNG documentation as "with a
-         <literal>testng.xml</literal>
-         file") unmodified for an implementation to pass the TCK. This file also
-         allows tests to be excluded from a run:
+         Certain TestNG configuration file must be run by TestNG 6.3 (described by the TestNG documentation as "with a
+         <literal>testng.xml</literal> file") unmodified for an implementation to pass the TCK.
+         The TCK distribution contains the configuration file accurate at the date of the release - <literal>artifacts/cdi-tck-impl-suite.xml</literal>.
+         However this artifact may not be up to date due to unresolved challenges or pending releases. Therefore a canonical configuration file exists.
+         This file is located in the CDI TCK source code repository at <emphasis>${CORRESPONDING_BRANCH_ROOT}/impl/src/main/resources/tck-tests.xml</emphasis>.
+      </para>
+      <note>
+         <para>
+            The canonical configuration file for CDI TCK 1.1.x is located at <ulink
+         url="https://github.com/cdi-spec/cdi-tck/blob/1.1/impl/src/main/resources/tck-tests.xml">https://github.com/cdi-spec/cdi-tck/blob/1.1/impl/src/main/resources/tck-tests.xml</ulink>.
+         </para>
+      </note>
+      <para>
+        This file also allows tests to be excluded from a run:
       </para>
       <programlisting><![CDATA[<suite name="CDI TCK" verbose="0" configfailurepolicy="continue">
    <test name="CDI TCK">
