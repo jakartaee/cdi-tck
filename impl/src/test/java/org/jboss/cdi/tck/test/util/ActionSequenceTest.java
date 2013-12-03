@@ -24,7 +24,10 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -35,6 +38,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
+ * @author Matus Abaffy
  */
 public class ActionSequenceTest {
 
@@ -192,5 +196,70 @@ public class ActionSequenceTest {
         ActionSequence built = ActionSequence.buildFromCsvData(csv);
         assertEquals(built.getData().size(), 3);
         assertTrue(built.endsWith("1_test"));
+    }
+
+    @Test
+    public void testAssertDataContainsAll() {
+        ActionSequence.reset();
+        ActionSequence seq = new ActionSequence();
+        Set<String> set = new HashSet<String>();
+        set.add("1");
+        set.add("2");
+        set.add("3");
+        
+        for (String s : set) {
+            seq.add(s);
+        }
+        seq.add("4");
+
+        seq.assertDataContainsAll(set);
+        try {
+            seq.assertDataContainsAll("1", "2", "5");
+        } catch (Throwable expected) {
+        }
+
+        try {
+            ActionSequence.assertSequenceDataContainsAll(set);
+        } catch (Throwable expected) {
+            // should fail because there is no default sequence
+        }
+    }
+
+    @Test
+    public void testAssertDataEquals() {
+        ActionSequence seq = new ActionSequence();
+        seq.add("1");
+        seq.add("2");
+        seq.add("3");
+        seq.assertDataEquals(Arrays.asList("1", "2", "3"));
+        try {
+            seq.assertDataEquals("2", "1", "3");
+        } catch (Throwable expected) {
+            // should fail as the ordering is incorrect
+        }
+        seq.add("1");
+        try {
+            seq.assertDataEquals("1", "2", "3");
+        } catch (Throwable expected) {
+            // should fail as "1" is missing at the end of the expected
+        }
+    }
+
+    @Test
+    public void testAssertMethodsWithClassParameters() {
+        class Foo {
+        }
+        
+        class Bar {
+        }
+        
+        ActionSequence.addAction("Foo");
+        ActionSequence.addAction("Bar");
+        ActionSequence.assertSequenceDataContainsAll(Bar.class, Foo.class, Bar.class);
+        ActionSequence.assertSequenceDataEquals(Foo.class, Bar.class);
+        try {
+            ActionSequence.assertSequenceDataEquals(Foo.class, Bar.class, Foo.class);
+        } catch (Throwable expected) {
+        }
     }
 }
