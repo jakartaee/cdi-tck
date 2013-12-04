@@ -69,8 +69,7 @@ public class PropertiesBasedConfigurationBuilder {
         configuration.setLibraryDirectory(getStringValue(Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, deploymentPhase));
 
         configuration.setTestDataSource(getStringValue(Configuration.TEST_DATASOURCE_PROPERTY_NAME, null, deploymentPhase));
-        configuration.setTestJmsConnectionFactory(getStringValue(Configuration.TEST_JMS_CONNECTION_FACTORY, null,
-                deploymentPhase));
+        configuration.setTestJmsConnectionFactory(getStringValue(Configuration.TEST_JMS_CONNECTION_FACTORY, null, deploymentPhase));
         configuration.setTestJmsQueue(getStringValue(Configuration.TEST_JMS_QUEUE, null, deploymentPhase));
         configuration.setTestJmsTopic(getStringValue(Configuration.TEST_JMS_TOPIC, null, deploymentPhase));
 
@@ -102,19 +101,8 @@ public class PropertiesBasedConfigurationBuilder {
      * @return
      */
     public String getStringValue(String propertyName, String defaultValue, boolean required) {
-        Set<String> values = getPropertyValues(propertyName);
-        if (values.size() == 0) {
-            if (required) {
-                throw new IllegalArgumentException("Cannot find required property " + propertyName
-                        + ", check that it is specified");
-            } else {
-                return defaultValue;
-            }
-        } else if (values.size() > 1) {
-            throw new IllegalArgumentException("More than one value given for " + propertyName + ", not sure which one to use!");
-        } else {
-            return values.iterator().next();
-        }
+        String value = getValue(propertyName, required);
+        return value != null ? value : defaultValue;
     }
 
     /**
@@ -125,21 +113,11 @@ public class PropertiesBasedConfigurationBuilder {
      * @return
      */
     public long getLongValue(String propertyName, long defaultValue, boolean required) {
-        Set<String> values = getPropertyValues(propertyName);
-        if (values.size() == 0) {
-            if (required) {
-                throw new IllegalArgumentException("Cannot find required property " + propertyName + ", check that it is specified");
-            } else {
-                return defaultValue;
-            }
-        } else if (values.size() > 1) {
-            throw new IllegalArgumentException("More than one value given for " + propertyName + ", not sure which one to use!");
-        } else {
-            try {
-                return Long.valueOf(values.iterator().next());
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid property value", e);
-            }
+        try {
+            String value = getValue(propertyName, required);
+            return value != null ? Long.valueOf(value) : defaultValue;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid property value", e);
         }
     }
 
@@ -151,21 +129,11 @@ public class PropertiesBasedConfigurationBuilder {
      * @return
      */
     public int getIntegerValue(String propertyName, int defaultValue, boolean required) {
-        Set<String> values = getPropertyValues(propertyName);
-        if (values.size() == 0) {
-            if (required) {
-                throw new IllegalArgumentException("Cannot find required property " + propertyName + ", check that it is specified");
-            } else {
-                return defaultValue;
-            }
-        } else if (values.size() > 1) {
-            throw new IllegalArgumentException("More than one value given for " + propertyName + ", not sure which one to use!");
-        } else {
-            try {
-                return Integer.valueOf(values.iterator().next());
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid property value", e);
-            }
+        try {
+            String value = getValue(propertyName, required);
+            return value != null ? Integer.valueOf(value) : defaultValue;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid property value", e);
         }
     }
 
@@ -293,16 +261,31 @@ public class PropertiesBasedConfigurationBuilder {
 
         if (classes.size() == 0) {
             if (required) {
-                throw new IllegalArgumentException("Cannot find any implementations of " + expectedType.getSimpleName()
-                        + ", check that " + propertyName + " is specified");
+                throw new IllegalArgumentException("Cannot find any implementations of " + expectedType.getSimpleName() + ", check that " + propertyName
+                        + " is specified");
             } else {
                 return null;
             }
         } else if (classes.size() > 1) {
-            throw new IllegalArgumentException("More than one implementation of " + expectedType.getSimpleName()
-                    + " specified by " + propertyName + ", not sure which one to use!");
+            throw new IllegalArgumentException("More than one implementation of " + expectedType.getSimpleName() + " specified by " + propertyName
+                    + ", not sure which one to use!");
         } else {
             return classes.iterator().next();
+        }
+    }
+
+
+    private String getValue(String propertyName, boolean required) {
+        Set<String> values = getPropertyValues(propertyName);
+        if (values.size() == 0) {
+            if (required) {
+                throw new IllegalArgumentException("Cannot find required property " + propertyName + ", check that it is specified");
+            }
+            return null;
+        } else if (values.size() > 1) {
+            throw new IllegalArgumentException("More than one value given for " + propertyName + ", not sure which one to use!");
+        } else {
+            return values.iterator().next();
         }
     }
 

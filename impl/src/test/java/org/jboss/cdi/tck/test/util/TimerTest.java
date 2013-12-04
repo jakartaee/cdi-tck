@@ -135,6 +135,12 @@ public class TimerTest {
         } catch (IllegalArgumentException e) {
             // Expected
         }
+        try {
+            timer.setDelay(0);
+            fail();
+        } catch (IllegalArgumentException e) {
+            // Expected
+        }
     }
 
     @Test
