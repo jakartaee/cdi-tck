@@ -169,6 +169,7 @@ public class ActionSequenceTest {
         ActionSequence seq = null;
         try {
             seq = new ActionSequence("The best sequence");
+            fail();
         } catch (IllegalArgumentException expected) {
         }
         seq = new ActionSequence();
@@ -176,10 +177,12 @@ public class ActionSequenceTest {
         seq.add(ActionSequence.class.getName());
         try {
             seq.add("^$loop");
+            fail();
         } catch (IllegalArgumentException expected) {
         }
         try {
             seq.add("My test");
+            fail();
         } catch (IllegalArgumentException expected) {
         }
     }
@@ -215,11 +218,13 @@ public class ActionSequenceTest {
         seq.assertDataContainsAll(set);
         try {
             seq.assertDataContainsAll("1", "2", "5");
+            fail();
         } catch (Throwable expected) {
         }
 
         try {
             ActionSequence.assertSequenceDataContainsAll(set);
+            fail();
         } catch (Throwable expected) {
             // should fail because there is no default sequence
         }
@@ -234,12 +239,14 @@ public class ActionSequenceTest {
         seq.assertDataEquals(Arrays.asList("1", "2", "3"));
         try {
             seq.assertDataEquals("2", "1", "3");
+            fail();
         } catch (Throwable expected) {
             // should fail as the ordering is incorrect
         }
         seq.add("1");
         try {
             seq.assertDataEquals("1", "2", "3");
+            fail();
         } catch (Throwable expected) {
             // should fail as "1" is missing at the end of the expected
         }
@@ -259,6 +266,7 @@ public class ActionSequenceTest {
         ActionSequence.assertSequenceDataEquals(Foo.class, Bar.class);
         try {
             ActionSequence.assertSequenceDataEquals(Foo.class, Bar.class, Foo.class);
+            fail();
         } catch (Throwable expected) {
         }
     }
