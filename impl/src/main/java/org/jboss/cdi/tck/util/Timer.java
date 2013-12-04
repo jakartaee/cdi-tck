@@ -89,24 +89,10 @@ public class Timer {
      * @return self
      */
     public Timer setDelay(long delay, TimeUnit timeUnit) {
-
-        if (delay < 0) {
+        if (delay <= 0) {
             throw new IllegalArgumentException("Delay must be greater than zero");
         }
-
-        long millis = timeUnit.toMillis(delay);
-        int factor = ConfigurationFactory.get().getTestTimeoutFactor();
-
-        if (factor == 100) {
-            this.delay = millis;
-        } else {
-            long numerator = millis * factor;
-            if (numerator % 100 == 0) {
-                this.delay = numerator / 100;
-            } else {
-                this.delay = (numerator / 100) + 1;
-            }
-        }
+        this.delay = (timeUnit.toMillis(delay) * ConfigurationFactory.get().getTestTimeoutFactor() -1) / 100 + 1;
         return this;
     }
 
