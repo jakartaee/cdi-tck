@@ -10,12 +10,12 @@
       <title>Obtaining the Software</title>
       <para>
          You can obtain a release of the CDI TCK project from the
-         <ulink url="http://www.seamframework.org/Weld/Downloads">download page</ulink>
-         on Seam Framework website.
+         <ulink url="http://http://www.cdi-spec.org/download/">download page</ulink>
+         on the CDI specification website.
          The release stream for JSR 346 is named <emphasis>1.1.x</emphasis>.
          The CDI TCK is distributed as a ZIP file,
          which contains the TCK artifacts (the test suite binary and source,
-         porting package API binary and source, the test suite descriptor, the
+         porting package API binary and source, the test suite configuration file, the
          audit source and report) in
          <code>/artifacts</code> and documentation in <code>/doc</code>.
          The TCK library dependencies are not part of the distribution and can be downloaded on demand (see readme.txt file in <code>/lib</code>).
@@ -25,10 +25,15 @@
          <ulink url="https://github.com/jboss/cdi-tck">GitHub repository</ulink>.
       </para>
       <para>
-         The TCK project is also available in the Maven Central repository as
-         <code>org.jboss.cdi.tck:cdi-tck-impl</code>. The POM file defines all
+         The TCK project is also available in the Maven Central repository. The POM file defines all
          dependencies required to build the TCK.
       </para>
+      <programlisting><![CDATA[
+            <dependency>
+                <groupId>org.jboss.cdi.tck</groupId>
+                <artifactId>cdi-tck-impl</artifactId>
+                <version>${cdi-tck.version}</version>
+            </dependency>]]></programlisting>
       <para>
          Executing the TCK requires a Java EE 7 or better runtime environment
          (i.e., application server), to which the test artifacts are deployed
@@ -39,10 +44,9 @@
          The JSR 346: Contexts and Dependency Injection for Java EE 1.1
          reference implementation (RI) project is named Weld.
          The release stream for JSR 346 is named <emphasis>2.x</emphasis>.
-         You can
-         obtain the latest release from the
-         <ulink url="http://seamframework.org/Weld/Downloads">download page</ulink>
-         on Seam Framework website.
+         You can obtain the latest release from the
+         <ulink url="http://weld.cdi-spec.org/download/">download page</ulink>
+         on the Weld website.
       </para>
       <note>
          <para>
@@ -155,7 +159,7 @@ mvn test -Dincontainer]]></programlisting>
                <para>
                   Use <literal>cdi.tck.version</literal> system property to specify particular TCK version:
                </para>
-               <programlisting><![CDATA[mvn test -Dincontainer -Dcdi.tck.version=1.1.0.SP2]]></programlisting>
+               <programlisting><![CDATA[mvn test -Dincontainer -Dcdi.tck.version=1.1.2.Final]]></programlisting>
             </listitem>
             <listitem>
                <para>
