@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -31,14 +31,14 @@ import java.util.regex.Pattern;
 
 /**
  * Simple data holder for sequence of actions identified with {@link String}.
- * 
+ *
  * Always call {@link #reset()} before your test code to remove previous sequences stored in static map!
- * 
+ *
  * @author Martin Kouba
  */
 public final class ActionSequence {
 
-    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.]+");
+    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.$]+");
 
     private static final TransformationUtils.Function<Class<?>, String> GET_SIMPLE_NAME = new TransformationUtils.Function<Class<?>, String>() {
         @Override
@@ -93,7 +93,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @param actions
      * @return <code>true</code> if sequence data contain all of the specified actions, <code>false</code> otherwise
      */
@@ -102,7 +102,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @param actions
      * @return <code>true</code> if sequence data begins with the specified actions, <code>false</code> otherwise
      */
@@ -118,7 +118,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @param actions
      * @return <code>true</code> if sequence data ends with the specified actions, <code>false</code> otherwise
      */
@@ -139,7 +139,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @return data in simple CSV format
      */
     public String dataToCsv() {
@@ -159,7 +159,7 @@ public final class ActionSequence {
 
     /**
      * Assert that strings stored in this sequence equal (in order!) to the {@code expected} strings.
-     * 
+     *
      * @param expected
      */
     public void assertDataEquals(List<String> expected) {
@@ -172,7 +172,7 @@ public final class ActionSequence {
 
     /**
      * Assert that strings stored in this sequence equal (in order!) to the {@code expected} strings.
-     * 
+     *
      * @param expected
      */
     public void assertDataEquals(String... expected) {
@@ -181,7 +181,7 @@ public final class ActionSequence {
 
     /**
      * Assert that strings stored in this sequence equal (in order!) to the simple class names of the {@code expected} classes.
-     * 
+     *
      * @param expected
      */
     public void assertDataEquals(Class<?>... expected) {
@@ -191,7 +191,7 @@ public final class ActionSequence {
     /**
      * Assert that this sequence contains all of the {@code expected} strings. Note that this only verifies that the
      * {@code expected} strings are a SUBSET of the actual strings stored in this sequence.
-     * 
+     *
      * @param expected
      */
     public void assertDataContainsAll(Collection<String> expected) {
@@ -203,7 +203,7 @@ public final class ActionSequence {
     /**
      * Assert that this sequence contains all of the {@code expected} strings. Note that this only verifies that the
      * {@code expected} strings are a SUBSET of the actual strings stored in this sequence.
-     * 
+     *
      * @param expected
      */
     public void assertDataContainsAll(String... expected) {
@@ -213,7 +213,7 @@ public final class ActionSequence {
     /**
      * Assert that this sequence contains simple class names of all of the {@code expected} classes. Note that this only
      * verifies that the {@code expected} classes are a SUBSET of the actual classes stored in this sequence.
-     * 
+     *
      * @param expected
      */
     public void assertDataContainsAll(Class<?>... expected) {
@@ -240,7 +240,7 @@ public final class ActionSequence {
 
     /**
      * Add actionId to specified sequence. Add new sequence if needed.
-     * 
+     *
      * @param sequence
      * @param actionId
      * @return <code>true</code> if a new sequence was added, <code>false</code> otherwise
@@ -262,7 +262,7 @@ public final class ActionSequence {
 
     /**
      * Add actionId to default sequence.
-     * 
+     *
      * @param actionId
      * @return <code>true</code> if a new sequence was added, <code>false</code> otherwise
      */
@@ -322,7 +322,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @param csv
      * @return
      */
@@ -346,7 +346,7 @@ public final class ActionSequence {
 
     /**
      * Assert that strings stored in this sequence equal (in order!) to the {@code expected} strings.
-     * 
+     *
      * @param expected
      * @throws IllegalStateException if there is no default sequence
      */
@@ -357,7 +357,7 @@ public final class ActionSequence {
 
     /**
      * Assert that strings stored in this sequence equal (in order!) to the {@code expected} strings.
-     * 
+     *
      * @param expected
      * @throws IllegalStateException if there is no default sequence
      */
@@ -380,7 +380,7 @@ public final class ActionSequence {
     /**
      * Assert that this sequence contains all of the {@code expected} strings. Note that this only verifies that the
      * {@code expected} strings are a SUBSET of the actual strings stored in this sequence.
-     * 
+     *
      * @param expected
      * @throws IllegalStateException if there is no default sequence
      */
@@ -392,7 +392,7 @@ public final class ActionSequence {
     /**
      * Assert that this sequence contains all of the {@code expected} strings. Note that this only verifies that the
      * {@code expected} strings are a SUBSET of the actual strings stored in this sequence.
-     * 
+     *
      * @param expected
      * @throws IllegalStateException if there is no default sequence
      */
@@ -414,11 +414,9 @@ public final class ActionSequence {
     }
 
     private static void checkStringValue(String value) {
-
-        if (VALID_NAME_PATTERN.matcher(value).matches())
-            return;
-
-        throw new IllegalArgumentException("Invalid name/id specified:" + value);
+        if (!VALID_NAME_PATTERN.matcher(value).matches()) {
+            throw new IllegalArgumentException("Invalid name/id specified:" + value);
+        }
     }
 
     private static void checkDefaultSequenceExists() {

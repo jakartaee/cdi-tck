@@ -80,7 +80,7 @@ public class ActionSequenceTest {
     /**
      * Very simple concurrency test - add data to the default sequence using several parallel threads. More complex test would
      * be overkill as {@link ActionSequence} is not intended to be used under heavy concurrent use.
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -175,6 +175,7 @@ public class ActionSequenceTest {
         seq = new ActionSequence();
         seq.add("01254_55757.dd");
         seq.add(ActionSequence.class.getName());
+        seq.add("org.jboss.weld.Proxy$Foo");
         try {
             seq.add("^$loop");
             fail();
@@ -209,7 +210,7 @@ public class ActionSequenceTest {
         set.add("1");
         set.add("2");
         set.add("3");
-        
+
         for (String s : set) {
             seq.add(s);
         }
@@ -256,10 +257,10 @@ public class ActionSequenceTest {
     public void testAssertMethodsWithClassParameters() {
         class Foo {
         }
-        
+
         class Bar {
         }
-        
+
         ActionSequence.addAction("Foo");
         ActionSequence.addAction("Bar");
         ActionSequence.assertSequenceDataContainsAll(Bar.class, Foo.class, Bar.class);
