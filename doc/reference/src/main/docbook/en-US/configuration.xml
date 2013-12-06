@@ -18,7 +18,7 @@
          a Java properties file, are used to configure the TCK.
       </para>
       <para>
-         You should set the following properties:
+         You should set the following required properties:
       </para>
       <table frame="all">
          <title>Required TCK Configuration Properties</title>
@@ -57,7 +57,7 @@
                      <literal>org.jboss.cdi.tck.testJmsConnectionFactory=java:/ConnectionFactory</literal>
                   </entry>
                   <entry>
-					The JNDI name of the JMS test ConnectionFactory. Required for the tests within the <emphasis>jms</emphasis> test group.
+                    The JNDI name of the JMS test ConnectionFactory. Required for the tests within the <emphasis>jms</emphasis> test group.
                   </entry>
                </row>
                <row>
@@ -65,7 +65,7 @@
                      <literal>org.jboss.cdi.tck.testJmsQueue=java:/queue/test</literal>
                   </entry>
                   <entry>
-					The JNDI name of the JMS test Queue. Required for the tests within the <emphasis>jms</emphasis> test group.
+                    The JNDI name of the JMS test Queue. Required for the tests within the <emphasis>jms</emphasis> test group.
                   </entry>
                </row>
                <row>
@@ -73,7 +73,31 @@
                      <literal>org.jboss.cdi.tck.testJmsTopic=java:/topic/test</literal>
                   </entry>
                   <entry>
-					The JNDI name of the JMS test Topic. Required for the tests within the <emphasis>jms</emphasis> test group.
+                    The JNDI name of the JMS test Topic. Required for the tests within the <emphasis>jms</emphasis> test group.
+                  </entry>
+               </row>
+            </tbody>
+         </tgroup>
+      </table>
+       <table frame="all">
+         <title>Optional TCK Configuration Properties</title>
+         <tgroup cols="2">
+            <colspec colnum="1" colname="property" colwidth="5*" />
+            <colspec colnum="2" colname="description" colwidth="2*" />
+            <thead>
+               <row>
+                  <entry>Property = Example Value</entry>
+                  <entry>Description</entry>
+               </row>
+            </thead>
+            <tbody>
+               <row>
+                  <entry>
+                     <literal>org.jboss.cdi.tck.testTimeoutFactor=200</literal>
+                  </entry>
+                  <entry>
+                    Tests use this percentage value to adjust the final timeout (e.g. when waiting for some async processing) so that it's possible to configure timeouts according to the testing runtime performance and throughput.
+                    The value must be an integer greater than zero. The default value is 100% - i.e. timeouts will remain the same.
                   </entry>
                </row>
             </tbody>
@@ -215,7 +239,7 @@
       <para>
         Tests within the <emphasis>jms</emphasis> test group require some basic Java Message Service configuration.
         A connection factory, a queue destination for PTP messaging domain and a topic destination for pub/sub messaging domain must be available via JNDI lookup.
-		The corresponding JNDI names are specified with configuration properties - see <xref linkend="tck-properties" />.
+    The corresponding JNDI names are specified with configuration properties - see <xref linkend="tck-properties" />.
       </para>
       <para>
         Tests within the <emphasis>persistence</emphasis> test group require basic data source configuration. The data source has to be valid and JTA-based. The JNDI name of the DataSource is specified with configuration property - see <xref linkend="tck-properties" />.
@@ -224,7 +248,7 @@
         Tests within the <emphasis>installedLib</emphasis> test group require the CDI TCK <literal>cdi-tck-ext-lib</literal> artifact to be installed as a library (see also Java EE 6 specification, section EE.8.2.2 "Installed Libraries").
       </para>
       <para>
-      	Tests within the <emphasis>systemProperties</emphasis> test group require the following system properties to be set:
+        Tests within the <emphasis>systemProperties</emphasis> test group require the following system properties to be set:
       </para>
       <table frame="all">
          <tgroup cols="2">
