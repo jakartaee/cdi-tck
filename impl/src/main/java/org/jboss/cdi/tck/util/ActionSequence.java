@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -27,14 +27,14 @@ import java.util.regex.Pattern;
 
 /**
  * Simple data holder for sequence of actions identified with {@link String}.
- * 
+ *
  * Always call {@link #reset()} before your test code to remove previous sequences stored in static map!
- * 
+ *
  * @author Martin Kouba
  */
 public final class ActionSequence {
 
-    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.]+");
+    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.$]+");
 
     private String name;
 
@@ -82,7 +82,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @param actions
      * @return <code>true</code> if sequence data contain all of the specified actions, <code>false</code> otherwise
      */
@@ -91,7 +91,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @param actions
      * @return <code>true</code> if sequence data begins with the specified actions, <code>false</code> otherwise
      */
@@ -107,7 +107,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @param actions
      * @return <code>true</code> if sequence data ends with the specified actions, <code>false</code> otherwise
      */
@@ -128,7 +128,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @return data in simple CSV format
      */
     public String dataToCsv() {
@@ -166,7 +166,7 @@ public final class ActionSequence {
 
     /**
      * Add actionId to specified sequence. Add new sequence if needed.
-     * 
+     *
      * @param sequence
      * @param actionId
      * @return <code>true</code> if a new sequence was added, <code>false</code> otherwise
@@ -188,7 +188,7 @@ public final class ActionSequence {
 
     /**
      * Add actionId to default sequence.
-     * 
+     *
      * @param actionId
      * @return <code>true</code> if a new sequence was added, <code>false</code> otherwise
      */
@@ -248,7 +248,7 @@ public final class ActionSequence {
     }
 
     /**
-     * 
+     *
      * @param csv
      * @return
      */
@@ -271,11 +271,9 @@ public final class ActionSequence {
     }
 
     private static void checkStringValue(String value) {
-
-        if (VALID_NAME_PATTERN.matcher(value).matches())
-            return;
-
-        throw new IllegalArgumentException("Invalid name/id specified:" + value);
+        if (!VALID_NAME_PATTERN.matcher(value).matches()) {
+            throw new IllegalArgumentException("Invalid name/id specified:" + value);
+        }
     }
 
 }

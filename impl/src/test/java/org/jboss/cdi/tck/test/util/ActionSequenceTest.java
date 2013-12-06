@@ -171,6 +171,7 @@ public class ActionSequenceTest {
         seq = new ActionSequence();
         seq.add("01254_55757.dd");
         seq.add(ActionSequence.class.getName());
+        seq.add("org.jboss.weld.Proxy$Foo");
         try {
             seq.add("^$loop");
             fail();
