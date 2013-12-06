@@ -62,7 +62,7 @@ public final class ActionSequence {
      * @return data holder
      */
     public ActionSequence add(String actionId) {
-        checkStringValue(name);
+        checkStringValue(actionId);
         this.data.add(actionId);
         return this;
     }

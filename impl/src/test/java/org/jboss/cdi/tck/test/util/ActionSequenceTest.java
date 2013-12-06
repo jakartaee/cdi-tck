@@ -76,7 +76,7 @@ public class ActionSequenceTest {
     /**
      * Very simple concurrency test - add data to the default sequence using several parallel threads. More complex test would
      * be overkill as {@link ActionSequence} is not intended to be used under heavy concurrent use.
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -165,6 +165,7 @@ public class ActionSequenceTest {
         ActionSequence seq = null;
         try {
             seq = new ActionSequence("The best sequence");
+            fail();
         } catch (IllegalArgumentException expected) {
         }
         seq = new ActionSequence();
@@ -172,10 +173,12 @@ public class ActionSequenceTest {
         seq.add(ActionSequence.class.getName());
         try {
             seq.add("^$loop");
+            fail();
         } catch (IllegalArgumentException expected) {
         }
         try {
             seq.add("My test");
+            fail();
         } catch (IllegalArgumentException expected) {
         }
     }
@@ -193,4 +196,5 @@ public class ActionSequenceTest {
         assertEquals(built.getData().size(), 3);
         assertTrue(built.endsWith("1_test"));
     }
+
 }
