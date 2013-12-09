@@ -276,9 +276,15 @@
             <text>An around-invoke method can invoke any component or resource that the method it is intercepting can invoke.</text>
         </assertion>
 
-        <assertion id="f">
+        <group>
             <text>In general, an around-invoke method invocation occurs within the same transaction and security context as the method on which it is interposing. However, note that the transaction context may be changed by transactional interceptors in the invocation chain.</text>
-        </assertion>
+            <assertion id="fa">
+                <text>Test transaction context.</text>
+            </assertion>
+            <assertion id="fb">
+                <text>Test security context.</text>
+            </assertion>
+        </group>
 
     </section>
 
