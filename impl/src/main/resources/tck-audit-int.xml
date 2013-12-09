@@ -150,8 +150,9 @@
             <text>The getTarget method returns the associated target instance. For the |AroundConstruct| lifecycle callback interceptor method, |getTarget| returns |null| if called before the proceed method returns.</text>
         </assertion>
 
-        <assertion id="da">
+        <assertion id="da" testable="false">
             <text>The |getTimer| method returns the timer object associated with a timeout method invocation.</text>
+            <note>Duplicate of 2.7 f)</note>
         </assertion>
 
         <assertion id="db">
@@ -296,8 +297,9 @@
             <text>The |PreDestroy| annotation denotes lifecycle callback interceptor methods that interpose on the target instance’s removal.</text>
         </assertion>
 
-        <assertion id="d">
+        <assertion id="d" testable="false">
             <text>The |AroundConstruct| interceptor methods may be only defined on interceptor classes and/or superclasses of interceptor classes. The |AroundConstruct| callback should not be defined on the target class.</text>
+            <note>INTERCEPTORS_SPEC-22</note>
         </assertion>
 
         <group>
@@ -372,16 +374,16 @@
             <note>Tested within the CDI TCK, 7.2 Container invocations and interception.</note>
         </assertion>
 
-		<group>
-		    <text>Around-timeout methods may be defined on interceptor classes and/or the target class and/or superclasses of the target class or interceptor classes. However, only one around-timeout method may be defined on a given class.</text>
-			<assertion id="ba">
-        		<text>Test interceptor classes and/or superclasses.</text>
-        		<note>Partially tested within the CDI TCK, 7.2 Container invocations and interception.</note>
-        	</assertion>
-        	<assertion id="bb">
-        		<text>Test target class and/or superclasses.</text>
-        	</assertion>
-		</group>
+        <group>
+            <text>Around-timeout methods may be defined on interceptor classes and/or the target class and/or superclasses of the target class or interceptor classes. However, only one around-timeout method may be defined on a given class.</text>
+            <assertion id="ba">
+                <text>Test interceptor classes and/or superclasses.</text>
+                <note>Partially tested within the CDI TCK, 7.2 Container invocations and interception.</note>
+            </assertion>
+            <assertion id="bb">
+                <text>Test target class and/or superclasses.</text>
+            </assertion>
+        </group>
 
         <assertion id="c" testable="false">
             <text>Around-timeout methods can have |public|, |private|, |protected|, or |package| level access. An around-timeout method must not be declared as |abstract|, |final| or |static|.</text>
@@ -392,9 +394,15 @@
             <text>An around-timeout method can invoke any component or resource that its corresponding timeout method can invoke.</text>
         </assertion>
 
-        <assertion id="e">
+        <group>
             <text>An around-timeout method invocation occurs within the same transaction and security context as the timeout method on which it is interposing.</text>
-        </assertion>
+            <assertion id="ea">
+                <text>Test transaction context.</text>
+            </assertion>
+            <assertion id="eb">
+                <text>Test security context.</text>
+            </assertion>
+        </group>
 
         <assertion id="f">
             <text>The |InvocationContext.getTimer| method allows an around-timeout method to retrieve the timer object associated with the timeout.</text>
@@ -463,8 +471,9 @@
             <text>Interceptor bindings are transitive - an interceptor binding declared by an interceptor binding type is inherited by all components and other interceptor binding types that declare that interceptor binding type.</text>
         </assertion>
 
-        <assertion id="c">
+        <assertion id="c" testable="false">
             <text>An interceptor binding type can only be applied to an interceptor binding type defining a superset of it's target types. For example interceptor binding types declared |Target(TYPE)| may not be applied to interceptor binding types declared |Target({TYPE, METHOD})|.</text>
+            <note>INTERCEPTORS_SPEC-21</note>
         </assertion>
 
     </section>
@@ -504,8 +513,9 @@
             <note>Non-portable mode</note>
         </assertion>
 
-        <assertion id="g">
+        <assertion id="g" testable="false">
             <text>With the exception of |AroundConstruct| lifecycle callback interceptors, an interceptor for lifecycle callbacks may only declare interceptor binding types that are defined as |Target(TYPE)|.</text>
+            <note>INTERCEPTORS_SPEC-22</note>
         </assertion>
 
     </section>
@@ -764,8 +774,9 @@
             <note>Undefined behaviour.</note>
         </assertion>
 
-        <assertion id="d">
+        <assertion id="d" testable="false">
             <text>The |Priority| annotation is ignored on interceptors bound to a component using the |Interceptors| annotation.</text>
+            <note>INTERCEPTORS_SPEC-23</note>
         </assertion>
 
         <assertion id="e" testable="false">

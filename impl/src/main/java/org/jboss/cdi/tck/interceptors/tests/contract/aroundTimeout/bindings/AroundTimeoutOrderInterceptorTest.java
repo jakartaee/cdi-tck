@@ -37,16 +37,18 @@ import org.testng.annotations.Test;
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "int", version = "1.2")
-public class AroundTimeoutInterceptorTest extends AbstractTest {
+public class AroundTimeoutOrderInterceptorTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(AroundTimeoutInterceptorTest.class).build();
+                .withTestClassPackage(AroundTimeoutOrderInterceptorTest.class).build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "ba"), @SpecAssertion(section = "2.7", id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "hb"), @SpecAssertion(section = "2.7", id = "ba"),
+            @SpecAssertion(section = "2.7", id = "bb"), @SpecAssertion(section = "5.2.1", id = "aa"),
+            @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "5.2.2", id = "a") })
     public void testTimeoutMethodIntercepted(TimingBean timing) throws Exception {
         ActionSequence.reset();
 
