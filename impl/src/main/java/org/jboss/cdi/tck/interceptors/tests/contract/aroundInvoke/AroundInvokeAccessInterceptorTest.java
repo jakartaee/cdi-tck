@@ -16,13 +16,16 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -53,5 +56,13 @@ public class AroundInvokeAccessInterceptorTest extends AbstractTest {
     public void testPackagePrivateAroundInvokeInterceptor() {
         assertEquals(getContextualReference(SimpleBean.class).two(), 3);
         assertEquals(getContextualReference(Bean2.class).zero(), 1);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
+    @SpecAssertions({ @SpecAssertion(section = "2.5", id = "e"), @SpecAssertion(section = "2.5", id = "fb") })
+    public void testSecurityContext(Student student) throws Exception {
+        student.printArticle();
+        assertTrue(PrinterSecurityInterceptor.securityContextOK);
+        assertTrue(Toner.calledFromInterceptor);
     }
 }
