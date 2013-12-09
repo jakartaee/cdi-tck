@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
  */
 public final class ActionSequence {
 
-    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.$]+");
+    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.$\\-]+");
 
     private String name;
 

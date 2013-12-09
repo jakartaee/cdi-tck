@@ -25,6 +25,7 @@ import static org.testng.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -172,6 +173,8 @@ public class ActionSequenceTest {
         seq.add("01254_55757.dd");
         seq.add(ActionSequence.class.getName());
         seq.add("org.jboss.weld.Proxy$Foo");
+        seq.add("-$");
+        seq.add(UUID.randomUUID().toString());
         try {
             seq.add("^$loop");
             fail();
