@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptions;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -46,5 +48,17 @@ public class LifecycleCallbackInterceptorExceptionTest extends AbstractTest {
     public void testLifecycleCallbackInterceptorCanCatchException() {
         getContextualReference(Goat.class);
         assertTrue(GoatInterceptor.isExceptionCaught());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "2.6.1", id = "c") })
+    public void testPreDestroyNotInvokedWhenInstanceDiscarded() {
+        try {
+            getContextualReference(Cat.class);
+            fail("Bean instance creation should fail.");
+        } catch (RuntimeException expected) {
+        }
+        assertFalse(CatInterceptor.preDestroyCalled);
+        assertFalse(Cat.preDestroyCalled);
     }
 }

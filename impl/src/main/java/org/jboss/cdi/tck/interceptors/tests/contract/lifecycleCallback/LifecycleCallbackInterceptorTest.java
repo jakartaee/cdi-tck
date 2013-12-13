@@ -68,6 +68,16 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
         assertTrue(AnimalInterceptor.isPreDestroyInterceptorCalled(Cow.COW));
     }
 
+    @Test
+    @SpecAssertion(section = "2.6", id = "f")
+    public void testSingleMethodInterposingMultipleLifecycleCallbackEvents() {
+        AlmightyLifecycleInterceptor.reset();
+        Dog.reset();
+        createAndDestroyInstance(Dog.class);
+        assertEquals(AlmightyLifecycleInterceptor.getNumberOfInterceptions(), 3);
+        assertEquals(Dog.getNumberOfInterceptions(), 2);
+    }
+
     @SuppressWarnings("unchecked")
     private <T extends Animal> void createAndDestroyInstance(Class<T> clazz) {
         Bean<T> bean = getUniqueBean(clazz);
