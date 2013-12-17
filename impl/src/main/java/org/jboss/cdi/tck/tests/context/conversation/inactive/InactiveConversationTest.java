@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
 /**
  * As "The conversation scope is active during all Servlet requests", this test needs to use some EE functionality (currently
  * EJB Timer service) and thus be placed in {@link TestGroups#JAVAEE_FULL}.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
@@ -69,7 +69,7 @@ public class InactiveConversationTest extends AbstractTest {
                 return bar.isContextNotActiveExceptionThrown();
             }
         };
-        Timer timer = new Timer().addStopCondition(condition).start();
+        Timer timer = new Timer().setDelay(1000).addStopCondition(condition).start();
         assertTrue(timer.isStopConditionsSatisfiedBeforeTimeout() || condition.isSatisfied());
     }
 }

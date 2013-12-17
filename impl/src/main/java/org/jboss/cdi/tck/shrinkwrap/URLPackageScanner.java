@@ -148,6 +148,7 @@ public class URLPackageScanner {
                     foundClass(className);
                 }
             }
+            zip.close();
         } catch (ZipException e) {
             throw new RuntimeException("Error handling file " + file, e);
         }

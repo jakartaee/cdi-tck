@@ -23,6 +23,8 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InterceptionType;
@@ -102,7 +104,7 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
                 return ComplicatedInterceptor.intercepted;
             }
         };
-        Timer timer = new Timer().addStopCondition(condition).start();
+        Timer timer = new Timer().setDelay(3, TimeUnit.SECONDS).addStopCondition(condition).start();
         assertTrue(timer.isStopConditionsSatisfiedBeforeTimeout() || condition.isSatisfied());
     }
 

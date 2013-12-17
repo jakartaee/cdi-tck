@@ -41,6 +41,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
+import org.jboss.cdi.tck.util.TransformationUtils;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -52,7 +53,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Test application shutdown lifecycle.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
@@ -74,7 +75,7 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
 
     @Deployment(name = INFO, managed = false, testable = false)
     public static WebArchive createBarTestArchive() {
-        return new WebArchiveBuilder().notTestArchive().withClasses(InfoServlet.class, ActionSequence.class).build();
+        return new WebArchiveBuilder().notTestArchive().withClasses(InfoServlet.class, ActionSequence.class, TransformationUtils.class, TransformationUtils.Function.class).build();
     }
 
     @ArquillianResource
@@ -82,7 +83,7 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
 
     /**
      * This is not a real test method.
-     * 
+     *
      * @see #testShutdown()
      */
     @Test
@@ -94,7 +95,7 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
 
     /**
      * Note that this test method depends on (must be run after)
-     * 
+     *
      * @throws Exception
      */
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
@@ -118,8 +119,8 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
         ActionSequence actual = ActionSequence.buildFromCsvData(info.getContent());
         assertTrue(actual.endsWith(BeforeShutdown.class.getName()));
         assertTrue(actual.containsAll(RequestScoped.class.getName(), SessionScoped.class.getName(),
-                ApplicationScoped.class.getName(), ConversationScoped.class.getName(), Foo.class.getName(),
-                Bar.class.getName(), Baz.class.getName(), Qux.class.getName()));
+ ApplicationScoped.class.getName(),
+                ConversationScoped.class.getName(), Foo.class.getName(), Bar.class.getName(), Baz.class.getName(), Qux.class.getName()));
 
         // Undeploy info
         deployer.undeploy(INFO);
