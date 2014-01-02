@@ -16,28 +16,25 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
-import javax.interceptor.AroundInvoke;
+import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 @Interceptor
 @TransactionalBinding
 @LoggedBinding
-@MessageBinding
-@PingBinding
-// @PongBinding inherited from @PingBinding
-@BallBinding(requiresBall = true)
-public class ComplicatedInterceptor {
+@MachineBinding
+@ConstructorBinding
+public class ComplicatedAroundConstructInterceptor {
 
-    public static boolean intercepted = false;
+    public static boolean aroundConstructCalled = false;
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        intercepted = true;
-        return ctx.proceed();
+    @AroundConstruct
+    public void postConstruct(InvocationContext ctx) {
+        aroundConstructCalled = true;
     }
 
     public static void reset() {
-        intercepted = false;
+        aroundConstructCalled = false;
     }
 }
