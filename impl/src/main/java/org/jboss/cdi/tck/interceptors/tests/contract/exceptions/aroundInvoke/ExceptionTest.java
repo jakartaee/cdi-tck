@@ -38,7 +38,14 @@ public class ExceptionTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = "2.4", id = "a"), @SpecAssertion(section = "2.4", id = "ba"),
             @SpecAssertion(section = "2.4", id = "c") })
-    public void testInvocationOrder() throws Exception {
+    public void testExceptions1() throws Exception {
         assertTrue(getContextualReference(SimpleBean.class).foo());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "2.4", id = "a"), @SpecAssertion(section = "2.4", id = "ba"),
+            @SpecAssertion(section = "2.4", id = "bb") })
+    public void testExceptions2() throws Exception {
+        assertTrue(getContextualReference(ExceptionBean.class).bar());
     }
 }
