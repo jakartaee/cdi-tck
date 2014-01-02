@@ -9,35 +9,28 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
+package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import javax.interceptor.Interceptors;
 
-@Interceptor
-@TransactionalBinding
-@LoggedBinding
-@MessageBinding
-@PingBinding
-// @PongBinding inherited from @PingBinding
-@BallBinding(requiresBall = true)
-public class ComplicatedInterceptor {
+class ExceptionBean {
 
-    public static boolean intercepted = false;
+    private static int count = 0;
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        intercepted = true;
-        return ctx.proceed();
+    @Interceptors({ Interceptor3.class, Interceptor4.class })
+    public boolean bar() {
+        return true;
     }
 
-    public static void reset() {
-        intercepted = false;
+    public static void failFirstTwoInvocations() {
+        count++;
+        if (count <= 2) {
+            throw new RuntimeException();
+        }
     }
 }

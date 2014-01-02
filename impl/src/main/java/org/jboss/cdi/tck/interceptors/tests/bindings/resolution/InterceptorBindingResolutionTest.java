@@ -52,7 +52,8 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
                 .withTestClassPackage(InterceptorBindingResolutionTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(ComplicatedInterceptor.class.getName(), ComplicatedLifecycleInterceptor.class.getName())
+                                .clazz(ComplicatedInterceptor.class.getName(), ComplicatedLifecycleInterceptor.class.getName(),
+                                        ComplicatedAroundConstructInterceptor.class.getName())
                                 .up()).build();
     }
 
@@ -99,10 +100,11 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
                         }, new AnnotationLiteral<TransactionalBinding>() {
                         }, new BasketBindingLiteral(true, true)).size(), 1);
         assertEquals(
-                getCurrentManager().resolveInterceptors(InterceptionType.PRE_DESTROY, new AnnotationLiteral<MessageBinding>() {
-                }, new AnnotationLiteral<LoggedBinding>() {
-                }, new AnnotationLiteral<TransactionalBinding>() {
-                }, new BasketBindingLiteral(true, true)).size(), 1);
+                getCurrentManager().resolveInterceptors(InterceptionType.PRE_DESTROY,
+                        new AnnotationLiteral<MessageBinding>() {
+                        }, new AnnotationLiteral<LoggedBinding>() {
+                        }, new AnnotationLiteral<TransactionalBinding>() {
+                        }, new BasketBindingLiteral(true, true)).size(), 1);
 
         // Test the set of interceptor bindings
         ComplicatedLifecycleInterceptor.reset();
@@ -115,5 +117,30 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
 
         assertTrue(ComplicatedLifecycleInterceptor.postConstructCalled);
         assertTrue(ComplicatedLifecycleInterceptor.preDestroyCalled);
+    }
+    
+    @SuppressWarnings("serial")
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = "3.4", id = "b"), @SpecAssertion(section = "3.4.1", id = "c") })
+    public void testConstructorInterceptorBindings() {
+
+        // Test interceptor is resolved
+        assertEquals(
+                getCurrentManager().resolveInterceptors(InterceptionType.AROUND_CONSTRUCT,
+                        new AnnotationLiteral<MachineBinding>() {
+                        }, new AnnotationLiteral<LoggedBinding>() {
+                        }, new AnnotationLiteral<TransactionalBinding>() {
+                        }, new AnnotationLiteral<ConstructorBinding>() {
+                        }, new AnnotationLiteral<CreativeBinding>() {
+                        }).size(), 1);
+
+        // Test the set of interceptor bindings
+        ComplicatedAroundConstructInterceptor.reset();
+
+        Bean<MachineService> bean = getUniqueBean(MachineService.class);
+        CreationalContext<MachineService> ctx = getCurrentManager().createCreationalContext(bean);
+        bean.create(ctx);
+
+        assertTrue(ComplicatedAroundConstructInterceptor.aroundConstructCalled);
     }
 }

@@ -14,29 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
+package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
-import javax.annotation.PostConstruct;
+import javax.interceptor.AroundConstruct;
+import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-class PostConstructInterceptor {
-    private static boolean getMethodReturnsNull = false;
-    private static boolean ctxProceedReturnsNull = false;
+@Interceptor
+@TransactionalBinding
+@LoggedBinding
+@MachineBinding
+@ConstructorBinding
+public class ComplicatedAroundConstructInterceptor {
 
-    @PostConstruct
+    public static boolean aroundConstructCalled = false;
+
+    @AroundConstruct
     public void postConstruct(InvocationContext ctx) {
-        getMethodReturnsNull = ctx.getMethod() == null;
-        try {
-            ctxProceedReturnsNull = ctx.proceed() == null;
-        } catch (Exception e) {
-        }
+        aroundConstructCalled = true;
     }
 
-    public static boolean isGetMethodReturnsNull() {
-        return getMethodReturnsNull;
-    }
-
-    public static boolean isCtxProceedReturnsNull() {
-        return ctxProceedReturnsNull;
+    public static void reset() {
+        aroundConstructCalled = false;
     }
 }

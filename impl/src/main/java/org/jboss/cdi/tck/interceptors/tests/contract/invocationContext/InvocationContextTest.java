@@ -71,6 +71,13 @@ public class InvocationContextTest extends AbstractTest {
     }
 
     @Test
+    @SpecAssertion(section = "2.3", id = "l")
+    public void testCtxProceedForLifecycleCallbackInterceptorMethod() {
+        getContextualReference(SimpleBean.class);
+        assertTrue(PostConstructInterceptor.isCtxProceedReturnsNull());
+    }
+
+    @Test
     @SpecAssertions({ @SpecAssertion(section = "2.3", id = "f"), @SpecAssertion(section = "2.3", id = "ga") })
     public void testMethodParameters() {
         assertEquals(getContextualReference(SimpleBean.class).add(1, 2), 5);

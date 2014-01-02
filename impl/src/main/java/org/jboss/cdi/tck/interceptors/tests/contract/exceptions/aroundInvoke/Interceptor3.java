@@ -14,29 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
+package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 
-import javax.annotation.PostConstruct;
+import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class PostConstructInterceptor {
-    private static boolean getMethodReturnsNull = false;
-    private static boolean ctxProceedReturnsNull = false;
-
-    @PostConstruct
-    public void postConstruct(InvocationContext ctx) {
-        getMethodReturnsNull = ctx.getMethod() == null;
+class Interceptor3 {
+    @AroundInvoke
+    public Object intercept(InvocationContext ctx) throws Exception {
         try {
-            ctxProceedReturnsNull = ctx.proceed() == null;
-        } catch (Exception e) {
+            ExceptionBean.failFirstTwoInvocations();
+        } catch (RuntimeException e) {
+            // OK - first invocation
         }
-    }
-
-    public static boolean isGetMethodReturnsNull() {
-        return getMethodReturnsNull;
-    }
-
-    public static boolean isCtxProceedReturnsNull() {
-        return ctxProceedReturnsNull;
+        try {
+            ctx.proceed();
+        } catch (RuntimeException e) {
+            // OK - second invocation
+        }
+        return ctx.proceed();
     }
 }
