@@ -16,28 +16,20 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Interceptor
-@TransactionalBinding
-@LoggedBinding
-@MessageBinding
-@PingBinding
-// @PongBinding inherited from @PingBinding
-@BallBinding(requiresBall = true)
-public class ComplicatedInterceptor {
+import java.lang.annotation.Documented;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    public static boolean intercepted = false;
+import javax.interceptor.InterceptorBinding;
 
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        intercepted = true;
-        return ctx.proceed();
-    }
-
-    public static void reset() {
-        intercepted = false;
-    }
+@Target(TYPE)
+@Retention(RUNTIME)
+@Inherited
+@Documented
+@InterceptorBinding
+public @interface MachineBinding {
 }
