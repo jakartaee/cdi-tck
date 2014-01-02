@@ -210,8 +210,9 @@
             <text>For all other lifecycle callback interceptor methods, if there is no callback method defined on the target class, the invocation of proceed in the last interceptor method in the chain is a no-op, and null is returned.</text>
         </assertion>
 
-        <assertion id="m">
+        <assertion id="m" testable="false"> 
             <text>In case of the |PostConstruct| interceptor, if there is no callback method defined on the target class, the invocation of |InvocationContext.proceed| method in the last interceptor method in the chain validates the target instance.</text>
+            <note>Unclear meaning of validation.</note>
         </assertion>
 
     </section>

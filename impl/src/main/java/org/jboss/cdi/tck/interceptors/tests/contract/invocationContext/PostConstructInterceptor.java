@@ -21,17 +21,22 @@ import javax.interceptor.InvocationContext;
 
 class PostConstructInterceptor {
     private static boolean getMethodReturnsNull = false;
+    private static boolean ctxProceedReturnsNull = false;
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
         getMethodReturnsNull = ctx.getMethod() == null;
         try {
-            ctx.proceed();
+            ctxProceedReturnsNull = ctx.proceed() == null;
         } catch (Exception e) {
         }
     }
 
     public static boolean isGetMethodReturnsNull() {
         return getMethodReturnsNull;
+    }
+
+    public static boolean isCtxProceedReturnsNull() {
+        return ctxProceedReturnsNull;
     }
 }
