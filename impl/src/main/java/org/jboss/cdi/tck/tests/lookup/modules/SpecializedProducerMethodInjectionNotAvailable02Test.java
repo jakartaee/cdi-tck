@@ -37,7 +37,7 @@ public class SpecializedProducerMethodInjectionNotAvailable02Test extends Abstra
 
     @Deployment
     public static WebArchive createTestArchive() {
-        WebArchive webArchive = new WebArchiveBuilder().withTestClass(SpecializedBeanInjectionNotAvailable02Test.class)
+        WebArchive webArchive = new WebArchiveBuilder().withTestClass(SpecializedProducerMethodInjectionNotAvailable02Test.class)
                 .withClasses(SpecializingFooMethodProducer.class, FooMethodProducer.class, ProducedFoo.class).withBeanLibrary(Foo.class, Bar.class)
                 .withBeanLibrary(WebBar.class).build();
         return webArchive;
