@@ -246,16 +246,17 @@ public class PropertiesBasedConfigurationBuilder {
         Set<Class<T>> classes = new HashSet<Class<T>>();
 
         for (String className : getPropertyValues(propertyName)) {
+            ClassLoader currentThreadClassLoader = Thread.currentThread().getContextClassLoader();
             try {
-
-                if (Thread.currentThread().getContextClassLoader() != null) {
-                    classes.add((Class<T>) Thread.currentThread().getContextClassLoader().loadClass(className));
+                if (currentThreadClassLoader != null) {
+                    classes.add((Class<T>) currentThreadClassLoader.loadClass(className));
                 } else {
                     classes.add((Class<T>) Class.forName(className));
                 }
 
             } catch (ClassNotFoundException e) {
-                throw new IllegalArgumentException("Implementation class not found");
+                throw new IllegalArgumentException("Implementation class with name " + className + " not found using classloader "
+                        + (currentThreadClassLoader != null ? currentThreadClassLoader : this.getClass().getClassLoader()), e);
             }
         }
 
