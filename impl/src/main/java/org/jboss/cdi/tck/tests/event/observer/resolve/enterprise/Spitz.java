@@ -21,9 +21,14 @@ import javax.enterprise.event.Observes;
 
 @Stateful
 public class Spitz implements PomeranianInterface {
+    static boolean notified = false;
+    static boolean staticallyNotified = false;
+
     public void observeSimpleEvent(@Observes EJBEvent someEvent) {
+        notified = true;
     }
 
     public static void staticallyObserveEvent(@Observes EJBEvent someEvent) {
+        staticallyNotified = true;
     }
 }
