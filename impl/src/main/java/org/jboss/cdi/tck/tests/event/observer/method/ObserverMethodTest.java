@@ -27,6 +27,7 @@ import java.util.Set;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.spi.ObserverMethod;
+import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -118,7 +119,8 @@ public class ObserverMethodTest extends AbstractTest {
     @SpecAssertion(section = OBSERVER_METHOD, id = "f")
     public void testNotifyOnObserverMethod() {
         Integer event = Integer.valueOf(1);
-        Set<ObserverMethod<? super Integer>> observerMethods = getCurrentManager().resolveObserverMethods(event);
+        Set<ObserverMethod<? super Integer>> observerMethods = getCurrentManager().resolveObserverMethods(event, new AnnotationLiteral<Number>() {
+        });
         assertEquals(observerMethods.size(), 1);
         observerMethods.iterator().next().notify(event);
         assertTrue(IntegerObserver.wasNotified);

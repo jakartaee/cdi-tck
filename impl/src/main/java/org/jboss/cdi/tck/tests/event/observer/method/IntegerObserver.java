@@ -27,7 +27,7 @@ public class IntegerObserver {
 
     public static boolean wasNotified = false;
 
-    public static void observeInteger(@Observes Integer event) {
+    public static void observeInteger(@Observes @Number Integer event) {
         wasNotified = true;
     }
 
