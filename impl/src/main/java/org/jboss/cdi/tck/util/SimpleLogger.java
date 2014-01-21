@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.util;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,8 +26,9 @@ import java.util.logging.Logger;
  * 
  * @author Martin Kouba
  */
-public final class SimpleLogger {
+public final class SimpleLogger implements Serializable {
 
+    private static final long serialVersionUID = -2461635783455781420L;
     private final Logger logger;
 
     public SimpleLogger(String name) {
