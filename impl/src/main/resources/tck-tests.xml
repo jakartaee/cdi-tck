@@ -5,7 +5,7 @@
         <!-- Required - avoid randomly mixed test method execution -->
         <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor" />
         <!-- Optional - intended for debug purpose only -->
-        <listener class-name="org.jboss.cdi.tck.impl.testng.ConfigurationLoggingListener"/> 
+        <listener class-name="org.jboss.cdi.tck.impl.testng.ConfigurationLoggingListener"/>
         <listener class-name="org.jboss.cdi.tck.impl.testng.ProgressLoggingTestListener"/>
         <!-- Optional - it's recommended to disable the default JUnit XML reporter -->
         <listener class-name="org.testng.reporters.SuiteHTMLReporter"/>
@@ -27,6 +27,13 @@
             <!-- Issues in the spec/TCK -->
             <!-- CDITCK-375 -->
             <class name="org.jboss.cdi.tck.tests.lookup.manager.provider.custom.CustomCDIProviderTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-386 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.beanManager.bootstrap.unavailable.methods.UnavailableMethodsDuringApplicationInitializationTest">
                 <methods>
                     <exclude name=".*"/>
                 </methods>
