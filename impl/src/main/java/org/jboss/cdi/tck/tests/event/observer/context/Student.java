@@ -14,7 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer.context.enterprise.staticMethod;
+package org.jboss.cdi.tck.tests.event.observer.context;
 
-public class Foo {
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RunAs;
+import javax.ejb.EJB;
+import javax.ejb.Stateful;
+
+@Stateful
+@RunAs("student")
+@PermitAll
+public class Student {
+
+    @EJB
+    private Printer printer;
+
+    public void printSuccess() throws Exception {
+        printer.printSuccess();
+    }
+
+    public void printFailure() throws Exception {
+        printer.printFailure();
+    }
 }

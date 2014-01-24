@@ -14,7 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer.context.enterprise.staticMethod;
+package org.jboss.cdi.tck.tests.event.observer.context;
 
-public class Foo {
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.Stateless;
+
+@Stateless
+@RolesAllowed("printer")
+public class Toner {
+
+    public void spill() {
+    }
 }

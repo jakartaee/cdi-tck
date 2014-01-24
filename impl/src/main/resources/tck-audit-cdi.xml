@@ -5883,19 +5883,19 @@
     </section>
 
     <section id="observer_method_invocation_context" title="Observer method invocation context" level="3">
-        <assertion id="ba">
+        <assertion id="a">
             <text>If the observer method is a before completion transactional observer method, it is called within the context of the transaction that is about to complete and with the same client security context and lifecycle contexts.</text>
         </assertion>
 
-        <assertion id="c">
+        <assertion id="b">
             <text>If the observer method is any other kind of transactional observer method, it is called in an unspecified transaction context, but with the same client security context and lifecycle contexts as the transaction that just completed.</text>
         </assertion>
 
-        <assertion id="da">
+        <assertion id="c">
             <text>If an observer method is not a before completion transactional method, and not any other kind of transactional observer method, then the observer method is called in the same transaction context, client security context and lifecycle contexts as the invocation of |Event.fire()| or |BeanManager.fireEvent()|.</text>
         </assertion>
 
-        <assertion id="e">
+        <assertion id="d">
             <text>The transaction and security contexts for a business method of a session bean also depend upon the transaction attribute and |@RunAs| descriptor, if any.</text>
         </assertion>
     </section>
