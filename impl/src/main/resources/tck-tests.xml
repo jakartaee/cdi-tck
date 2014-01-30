@@ -39,6 +39,21 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-389 -->
+            <class name="org.jboss.cdi.tck.tests.interceptors.definition.inheritance.InterceptorBindingInheritanceTest">
+                <methods>
+                    <exclude name="testMethodInterceptorBindingDirectlyInheritedFromSessionBean"/>
+                    <exclude name="testMethodInterceptorBindingIndirectlyInheritedFromSessionBean"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-391 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.beanManager.equivalence.qualifier.QualifierEquivalenceTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
         </classes>
     </test>
 
