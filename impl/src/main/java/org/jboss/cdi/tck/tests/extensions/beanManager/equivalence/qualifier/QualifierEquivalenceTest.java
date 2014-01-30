@@ -22,8 +22,11 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
+
+import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -36,7 +39,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class QualifierEquivalenceTest extends AbstractTest {
@@ -61,7 +64,7 @@ public class QualifierEquivalenceTest extends AbstractTest {
             }
 
         };
-        Annotation containerProvided = getUniqueBean(Troll.class, literal1).getQualifiers().iterator().next();
+        Annotation containerProvided = getContainerProvidedQualifier(getUniqueBean(Troll.class, literal1), Monster.class);
         assertTrue(getCurrentManager().areQualifiersEquivalent(literal1, containerProvided));
         assertFalse(getCurrentManager().areQualifiersEquivalent(literal2, containerProvided));
         assertFalse(getCurrentManager().areQualifiersEquivalent(literal1, literal2));
@@ -86,11 +89,22 @@ public class QualifierEquivalenceTest extends AbstractTest {
                 return Level.B;
             }
         };
-        Annotation containerProvided = getUniqueBean(Troll.class, literal1).getQualifiers().iterator().next();
+        Annotation containerProvided = getContainerProvidedQualifier(getUniqueBean(Troll.class, literal1), Monster.class);
         assertEquals(getCurrentManager().getQualifierHashCode(literal1),
                 getCurrentManager().getQualifierHashCode(containerProvided));
         assertNotEquals(getCurrentManager().getQualifierHashCode(literal2),
                 getCurrentManager().getQualifierHashCode(containerProvided));
         assertNotEquals(getCurrentManager().getQualifierHashCode(literal1), getCurrentManager().getQualifierHashCode(literal2));
     }
+
+    private Annotation getContainerProvidedQualifier(Bean<?> bean, Class<? extends Annotation> qualifierClass) {
+        for (Annotation annotation : bean.getQualifiers()) {
+            if(annotation.annotationType().equals(qualifierClass)) {
+                return annotation;
+            }
+        }
+        fail("Container provided qualifier not found");
+        return null;
+    }
+
 }
