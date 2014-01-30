@@ -20,12 +20,18 @@ import javax.ejb.Stateful;
 import javax.enterprise.event.Observes;
 
 @Stateful
-public class Spitz implements PomeranianInterface {
-    static boolean notified = false;
+public class Spitz implements LocalInterface, RemoteInterface {
+
+    static boolean localNotified = false;
+    static boolean remoteNotified = false;
     static boolean staticallyNotified = false;
 
-    public void observeSimpleEvent(@Observes EJBEvent someEvent) {
-        notified = true;
+    public void observeLocal(@Observes EJBEvent someEvent) {
+        localNotified = true;
+    }
+
+    public void observeRemote(@Observes EJBEvent someEvent) {
+        remoteNotified = true;
     }
 
     public static void staticallyObserveEvent(@Observes EJBEvent someEvent) {

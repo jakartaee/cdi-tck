@@ -16,8 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve.enterprise;
 
-import java.io.Serializable;
+import javax.ejb.Stateless;
+import javax.enterprise.event.Observes;
 
-@SuppressWarnings("serial")
-public class EJBEvent implements Serializable {
+@Stateless
+public class NoInterfaceSLSB {
+
+    static boolean notified = false;
+
+    public void observe(@Observes EJBEvent someEvent) {
+        notified = true;
+    }
 }

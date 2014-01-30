@@ -16,8 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve.enterprise;
 
-import java.io.Serializable;
+import javax.ejb.Local;
 
-@SuppressWarnings("serial")
-public class EJBEvent implements Serializable {
+@Local
+public interface LocalInterface {
+    public void observeLocal(EJBEvent someEvent);
 }

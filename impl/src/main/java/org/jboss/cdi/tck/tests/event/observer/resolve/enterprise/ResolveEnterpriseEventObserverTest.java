@@ -40,9 +40,11 @@ public class ResolveEnterpriseEventObserverTest extends AbstractTest {
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = OBSERVER_METHODS, id = "d")
     public void testObserverMethodOnEnterpriseBeanIsBusinessMethodOrStatic() {
-        assertEquals(getCurrentManager().resolveObserverMethods(new EJBEvent()).size(), 2);
+        assertEquals(getCurrentManager().resolveObserverMethods(new EJBEvent()).size(), 4);
         getCurrentManager().fireEvent(new EJBEvent());
-        assertTrue(Spitz.notified);
+        assertTrue(Spitz.localNotified);
+        assertTrue(Spitz.remoteNotified);
         assertTrue(Spitz.staticallyNotified);
+        assertTrue(NoInterfaceSLSB.notified);
     }
 }

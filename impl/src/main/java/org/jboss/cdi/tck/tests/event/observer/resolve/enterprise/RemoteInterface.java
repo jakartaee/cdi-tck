@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,10 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve.enterprise;
 
-import javax.ejb.Local;
-import javax.enterprise.event.Observes;
+import javax.ejb.Remote;
 
-@Local
-public interface PomeranianInterface {
-    public void observeSimpleEvent(@Observes EJBEvent someEvent);
+@Remote
+public interface RemoteInterface {
+    public void observeRemote(EJBEvent someEvent);
 }
