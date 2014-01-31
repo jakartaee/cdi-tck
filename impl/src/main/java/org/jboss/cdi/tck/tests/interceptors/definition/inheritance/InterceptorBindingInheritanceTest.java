@@ -38,7 +38,6 @@ import org.testng.annotations.Test;
  * 
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class InterceptorBindingInheritanceTest extends AbstractTest {
 
@@ -72,7 +71,7 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
         assertFalse(europeanLarch.inspectedBy(woodpecker));
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "an"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ana") })
     public void testInterceptorBindingDirectlyInheritedFromSessionBean(ForgetMeNot forgetMeNot) throws Exception {
         forgetMeNot.pong();
@@ -80,7 +79,7 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
         assertFalse(forgetMeNot.inspectedBy(woodpecker));
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ar"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ara") })
     public void testInterceptorBindingIndirectlyInheritedFromSessionBean(@European ForgetMeNot woodForgetMeNot)
             throws Exception {
@@ -105,14 +104,14 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
         assertTrue(thyme.inspectedBy(squirrel));
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kb")
     public void testMethodInterceptorBindingDirectlyInheritedFromSessionBean(Grass grass) {
         grass.pong();
         assertTrue(grass.inspectedBy(squirrel));
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kd")
     public void testMethodInterceptorBindingIndirectlyInheritedFromSessionBean(@Culinary Grass waterChestnut) {
         waterChestnut.pong();
@@ -122,16 +121,31 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ka")
-    public void testMethodInterceptorBindingDirectlyNotInherited(Shrub shrub) {
+    public void testMethodInterceptorBindingDirectlyNotInheritedFromManagedBean(Shrub shrub) {
         shrub.pong();
         assertFalse(shrub.inspectedBy(squirrel));
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kc")
-    public void testMethodInterceptorBindingIndirectlyNotInherited(@Culinary Shrub rosehip) {
+    public void testMethodInterceptorBindingIndirectlyNotInheritedFromManagedBean(@Culinary Shrub rosehip) {
         rosehip.pong();
         assertTrue(rosehip instanceof Rosehip);
         assertFalse(rosehip.inspectedBy(squirrel));
+    }
+
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kb")
+    public void testMethodInterceptorBindingDirectlyNotInheritedFromSessionBean(Cactus cactus) {
+        cactus.pong();
+        assertFalse(cactus.inspectedBy(squirrel));
+    }
+
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kd")
+    public void testMethodInterceptorBindingIndirectlyNotInheritedFromSessionBean(@Culinary Cactus opuncia) {
+        opuncia.pong();
+        assertTrue(opuncia instanceof Opuncia);
+        assertFalse(opuncia.inspectedBy(squirrel));
     }
 }
