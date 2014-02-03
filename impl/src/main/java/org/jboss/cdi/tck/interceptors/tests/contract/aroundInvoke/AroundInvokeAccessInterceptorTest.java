@@ -18,7 +18,9 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.Assert.assertTrue;
+
+import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -64,5 +66,18 @@ public class AroundInvokeAccessInterceptorTest extends AbstractTest {
         student.printArticle();
         assertTrue(PrinterSecurityInterceptor.securityContextOK);
         assertTrue(Toner.calledFromInterceptor);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
+    @SpecAssertion(section = "2.5", id = "fa")
+    public void testTransactionContext(Foo foo, UserTransaction ut) throws Exception {
+        ut.begin();
+
+        foo.invoke();
+        // checks are done in FooInterceptor and BazInterceptor
+        assertTrue(FooInterceptor.called);
+        assertTrue(BazInterceptor.called);
+
+        ut.commit();
     }
 }
