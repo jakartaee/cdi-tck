@@ -85,11 +85,11 @@
 		<!-- CDI API -->
 		<cdi.api.version>1.1</cdi.api.version>
 		<!-- JBoss EE APIs -->
-		<jboss.ejb.api.version>1.0.0.Alpha2</jboss.ejb.api.version>
+		<jboss.ejb.api.version>1.0.0.Final</jboss.ejb.api.version>
 		<jboss.jms.api.version>1.0.0.Final</jboss.jms.api.version>
 		<jboss.connector.api.version>1.0.1.Final</jboss.connector.api.version>
-		<jboss.annotations.api.version>1.0.0.Alpha1</jboss.annotations.api.version>
-		<jboss.interceptors.api.version>1.0.0.Alpha2</jboss.interceptors.api.version>
+		<jboss.annotations.api.version>1.0.0.Final</jboss.annotations.api.version>
+		<jboss.interceptors.api.version>1.0.0.Final</jboss.interceptors.api.version>
 		<!-- Other EE APIs -->
 		<atinject.api.version>1</atinject.api.version>
 		<jpa.api.version>1.0</jpa.api.version>
@@ -103,8 +103,6 @@
 		<jboss.test.audit.version>1.1.1.CR1</jboss.test.audit.version>
 		<testng.version>6.3</testng.version>
 		<arquillian.version>1.1.2.Final</arquillian.version>
-		<!-- Upgrade once a new version with stable API is released -->
-		<shrinkwrap.descriptors.version>2.0.0-alpha-3</shrinkwrap.descriptors.version>
 		<apache.httpclient.version>3.1</apache.httpclient.version>
 		<htmlunit.version>2.9</htmlunit.version>
 	</properties>
