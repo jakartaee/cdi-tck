@@ -102,7 +102,7 @@
 		<!-- Test tools/dependencies -->
 		<jboss.test.audit.version>1.1.1.CR1</jboss.test.audit.version>
 		<testng.version>6.3</testng.version>
-		<arquillian.version>1.0.3.Final</arquillian.version>
+		<arquillian.version>1.1.2.Final</arquillian.version>
 		<!-- Upgrade once a new version with stable API is released -->
 		<shrinkwrap.descriptors.version>2.0.0-alpha-3</shrinkwrap.descriptors.version>
 		<apache.httpclient.version>3.1</apache.httpclient.version>
@@ -239,17 +239,13 @@
 				<version>${htmlunit.version}</version>
 			</dependency>
 
-			<dependency>
-				<groupId>org.jboss.arquillian.testng</groupId>
-				<artifactId>arquillian-testng-container</artifactId>
-				<version>${arquillian.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.jboss.shrinkwrap.descriptors</groupId>
-				<artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
-				<version>${shrinkwrap.descriptors.version}</version>
-			</dependency>
+	       <dependency>
+		      <groupId>org.jboss.arquillian</groupId>
+		      <artifactId>arquillian-bom</artifactId>
+		      <version>${arquillian.version}</version>
+		      <scope>import</scope>
+		      <type>pom</type>
+	       </dependency>
 
 		</dependencies>
 	</dependencyManagement>
