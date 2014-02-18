@@ -19,16 +19,27 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 import javax.ejb.Timer;
 import javax.interceptor.AroundTimeout;
 import javax.interceptor.InvocationContext;
+import javax.naming.InitialContext;
+import javax.transaction.TransactionSynchronizationRegistry;
 
 public class TimeoutInterceptor {
 
-    public static boolean timerOK = false;
+    static boolean timerOK = false;
+    static Object key;
 
     @AroundTimeout
     public Object interceptTimeout(InvocationContext ctx) throws Exception {
         if (((String) ((Timer) ctx.getTimer()).getInfo()).equals("some info")) {
             timerOK = true;
         }
+        TransactionSynchronizationRegistry tsr;
+        try {
+            tsr = (TransactionSynchronizationRegistry) InitialContext.doLookup("java:comp/TransactionSynchronizationRegistry");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        key = tsr.getTransactionKey();
+
         return ctx.proceed();
     }
 }

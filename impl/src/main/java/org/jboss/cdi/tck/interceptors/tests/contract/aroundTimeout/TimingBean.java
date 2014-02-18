@@ -16,18 +16,28 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
+import static org.testng.Assert.assertNotNull;
+
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
+import javax.transaction.TransactionSynchronizationRegistry;
 
 @Interceptors(TimeoutInterceptor.class)
 @Stateless
 public class TimingBean {
 
     public static Long timeoutAt = null;
+
+    static Object key;
+
+    @Resource
+    private TransactionSynchronizationRegistry tsr;
 
     @Resource
     private SessionContext ctx;
@@ -37,7 +47,10 @@ public class TimingBean {
     }
 
     @Timeout
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public void ejbTimeout(Timer timer) {
         timeoutAt = System.currentTimeMillis();
+        key = tsr.getTransactionKey();
+        assertNotNull(key);
     }
 }
