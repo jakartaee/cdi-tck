@@ -4,7 +4,7 @@
 	<groupId>org.jboss.cdi.tck</groupId>
 	<artifactId>cdi-tck-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.2.0.Beta1</version>
+	<version>1.2.0-SNAPSHOT</version>
 	<name>CDI TCK</name>
 
 	<parent>
