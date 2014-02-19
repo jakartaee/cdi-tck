@@ -18,6 +18,11 @@ package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 import java.util.EventListener;
 
@@ -63,118 +68,120 @@ public class ContainerEventTest extends AbstractTest {
                 .withTestClass(ContainerEventTest.class)
                 .withWebXml("web.xml")
                 .withClasses(Farm.class, ProcessAnnotatedTypeObserver.class, Sheep.class, TagLibraryListener.class,
-                        TestFilter.class, TestListener.class, TestServlet.class, TestTagHandler.class)
+                        TestFilter.class, TestListener.class, TestServlet.class, TestTagHandler.class, SessionBean.class)
                 .withExtension(ProcessAnnotatedTypeObserver.class)
                 .withWebResource("ManagedBeanTestPage.jsp", "ManagedBeanTestPage.jsp")
                 .withWebResource("TagPage.jsp", "TagPage.jsp").withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
-                .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld").build();
+                .withWebResource("TestLibrary.tld", "WEB-INF/TestLibrary.tld")
+                .withDefaultPersistenceXml()
+                .build();
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "be")
     public void testProcessAnnotatedTypeEventFiredForServletListener() {
-        assert ProcessAnnotatedTypeObserver.getListenerEvent() != null;
+        assertNotNull(ProcessAnnotatedTypeObserver.getListenerEvent());
         validateServletListenerAnnotatedType(ProcessAnnotatedTypeObserver.getListenerEvent().getAnnotatedType());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bf")
     public void testProcessAnnotatedTypeEventFiredForTagHandler() {
-        assert ProcessAnnotatedTypeObserver.getTagHandlerEvent() != null;
+        assertNotNull(ProcessAnnotatedTypeObserver.getTagHandlerEvent());
         validateTagHandlerAnnotatedType(ProcessAnnotatedTypeObserver.getTagHandlerEvent().getAnnotatedType());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bg")
     public void testProcessAnnotatedTypeEventFiredForTagLibraryListener() {
-        assert ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent() != null;
+        assertNotNull(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent());
         validateTagLibraryListenerAnnotatedType(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent().getAnnotatedType());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bj")
     public void testProcessAnnotatedTypeEventFiredForServlet() {
-        assert ProcessAnnotatedTypeObserver.getServletEvent() != null;
+        assertNotNull(ProcessAnnotatedTypeObserver.getServletEvent());
         validateServletAnnotatedType(ProcessAnnotatedTypeObserver.getServletEvent().getAnnotatedType());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bk")
     public void testProcessAnnotatedTypeEventFiredForFilter() {
-        assert ProcessAnnotatedTypeObserver.getFilterEvent() != null;
+        assertNotNull(ProcessAnnotatedTypeObserver.getFilterEvent());
         validateFilterAnnotatedType(ProcessAnnotatedTypeObserver.getFilterEvent().getAnnotatedType());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bd")
     public void testProcessAnnotatedTypeEventFiredForJsfManagedBean() {
-        assert ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent() != null;
+        assertNotNull(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent());
         validateJsfManagedBeanAnnotatedType(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent().getAnnotatedType());
     }
 
     private void validateServletListenerAnnotatedType(AnnotatedType<TestListener> type) {
-        assert type.getBaseType().equals(TestListener.class);
-        assert type.getAnnotations().isEmpty();
-        assert type.getFields().size() == 2;
-        assert type.getMethods().size() == 3;
+        assertEquals(type.getBaseType(), TestListener.class);
+        assertTrue(type.getAnnotations().isEmpty());
+        assertEquals(type.getFields().size(), 2);
+        assertEquals(type.getMethods().size(), 3);
 
         int initializers = 0;
         for (AnnotatedMethod<?> method : type.getMethods()) {
-            assert method.getParameters().size() == 1;
-            assert method.getBaseType().equals(void.class);
+            assertEquals(method.getParameters().size(), 1);
+            assertEquals(method.getBaseType(), void.class);
             if (method.isAnnotationPresent(Inject.class)) {
                 initializers++;
             }
         }
-        assert initializers == 1;
+        assertEquals(initializers, 1);
     }
 
     private void validateTagHandlerAnnotatedType(AnnotatedType<TestTagHandler> type) {
-        assert type.getBaseType().equals(TestTagHandler.class);
-        assert rawTypeSetMatches(type.getTypeClosure(), TestTagHandler.class, SimpleTagSupport.class, SimpleTag.class,
-                JspTag.class);
-        assert type.getAnnotations().size() == 1;
-        assert type.isAnnotationPresent(Any.class);
+        assertEquals(type.getBaseType(), TestTagHandler.class);
+        assertTrue(rawTypeSetMatches(type.getTypeClosure(), TestTagHandler.class, SimpleTagSupport.class, SimpleTag.class,
+                JspTag.class));
+        assertEquals(type.getAnnotations().size(), 1);
+        assertTrue(type.isAnnotationPresent(Any.class));
     }
 
     private void validateTagLibraryListenerAnnotatedType(AnnotatedType<TagLibraryListener> type) {
-        assert type.getBaseType().equals(TagLibraryListener.class);
-        assert rawTypeSetMatches(type.getTypeClosure(), TagLibraryListener.class, ServletContextListener.class,
-                EventListener.class, Object.class);
-        assert type.getFields().size() == 2;
-        assert type.getConstructors().size() == 1;
-        assert type.getMethods().size() == 3;
+        assertEquals(type.getBaseType(), TagLibraryListener.class);
+        assertTrue(rawTypeSetMatches(type.getTypeClosure(), TagLibraryListener.class, ServletContextListener.class,
+                EventListener.class, Object.class));
+        assertEquals(type.getFields().size(), 2);
+        assertEquals(type.getConstructors().size(), 1);
+        assertEquals(type.getMethods().size(), 3);
     }
 
     private void validateServletAnnotatedType(AnnotatedType<TestServlet> type) {
-        assert type.getBaseType().equals(TestServlet.class);
-        assert rawTypeSetMatches(type.getTypeClosure(), TestServlet.class, HttpServlet.class, GenericServlet.class,
-                Servlet.class, ServletConfig.class, Object.class);
-        assert type.getAnnotations().isEmpty();
+        assertEquals(type.getBaseType(), TestServlet.class);
+        assertTrue(rawTypeSetMatches(type.getTypeClosure(), TestServlet.class, HttpServlet.class, GenericServlet.class,
+                Servlet.class, ServletConfig.class, Object.class));
+        assertTrue(type.getAnnotations().isEmpty());
     }
 
     private void validateFilterAnnotatedType(AnnotatedType<TestFilter> type) {
-        assert type.getBaseType().equals(TestFilter.class);
-        assert rawTypeSetMatches(type.getTypeClosure(), TestFilter.class, Filter.class, Object.class);
-        assert type.getFields().size() == 6;
-        assert type.getConstructors().size() == 1;
-        assert type.getConstructors().iterator().next().getParameters().isEmpty();
-        assert type.getMethods().size() == 4;
+        assertEquals(type.getBaseType(), TestFilter.class);
+        assertTrue(rawTypeSetMatches(type.getTypeClosure(), TestFilter.class, Filter.class, Object.class));
+        assertEquals(type.getFields().size(), 12);
+        assertEquals(type.getConstructors().size(), 1);
+        assertTrue(type.getConstructors().iterator().next().getParameters().isEmpty());
+        assertEquals(type.getMethods().size(), 8);
     }
 
     private void validateJsfManagedBeanAnnotatedType(AnnotatedType<Farm> type) {
         assert type.getFields().size() == 2;
         for (AnnotatedField<?> field : type.getFields()) {
             if (field.getJavaMember().getName().equals("sheep")) {
-                assert field.isAnnotationPresent(Inject.class);
-                assert !field.isStatic();
+                assertTrue(field.isAnnotationPresent(Inject.class));
+                assertFalse(field.isStatic());
             } else if (field.getJavaMember().getName().equals("initializerCalled")) {
-                assert !field.isStatic();
-                assert field.getBaseType().equals(boolean.class);
+                assertFalse(field.isStatic());
+                assertTrue(field.getBaseType().equals(boolean.class));
             } else {
-                assert false; // there is no other field
+                fail(); // there is no other field
             }
         }
-        assert type.getMethods().size() == 3;
+        assertEquals(type.getMethods().size(), 3);
     }
 }
