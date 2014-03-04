@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
@@ -30,6 +31,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
     private List<Class<?>> processedDesiredTypes = new ArrayList<Class<?>>();
     private List<Class<?>> processedDesiredAndWantedTypes = new ArrayList<Class<?>>();
     private List<Class<?>> processedMetaAnnotationTypes = new ArrayList<Class<?>>();
+    private List<Class<?>> processedRequestScopeTypes = new ArrayList<Class<?>>();
 
     public void observeDesiredTypes(@WithAnnotations({ Desired.class }) @Observes ProcessAnnotatedType<?> pat) {
         processedDesiredTypes.add(pat.getAnnotatedType().getJavaClass());
@@ -43,6 +45,10 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         processedMetaAnnotationTypes.add(pat.getAnnotatedType().getJavaClass());
     }
 
+    public void observeRequestScopeTypes(@WithAnnotations({ RequestScoped.class }) @Observes ProcessAnnotatedType<?> pat) {
+        processedRequestScopeTypes.add(pat.getAnnotatedType().getJavaClass());
+    }
+
     public List<Class<?>> getProcessedDesiredTypes() {
         return Collections.unmodifiableList(processedDesiredTypes);
     }
@@ -53,6 +59,10 @@ public class ProcessAnnotatedTypeObserver implements Extension {
 
     public List<Class<?>> getProcessedMetaAnnotationTypes() {
         return Collections.unmodifiableList(processedMetaAnnotationTypes);
+    }
+
+    public List<Class<?>> getProcessedRequestScopeTypes() {
+        return Collections.unmodifiableList(processedRequestScopeTypes);
     }
 
 }
