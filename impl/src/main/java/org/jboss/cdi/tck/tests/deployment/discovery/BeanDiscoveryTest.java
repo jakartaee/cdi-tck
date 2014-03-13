@@ -103,14 +103,14 @@ public class BeanDiscoveryTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
-            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba") })
     public void testImplicitBeanArchiveNoDescriptor(Delta delta) {
         assertDiscoveredAndAvailable(delta, Delta.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
-            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba") })
     public void testImplicitBeanArchiveModeAnnotated(Echo echo) {
         assertDiscoveredAndAvailable(echo, Echo.class);
         assertNotDiscoveredAndNotAvailable(EchoNotABean.class);
