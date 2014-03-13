@@ -365,14 +365,39 @@
     <section id="bean_defining_annotations" title="Bean defining annotations" level="2">
 
         <assertion id="a" testable="false">
-        	<text>A bean class may have a bean defining annotation, allowing it to be placed anywhere in an application, as defined in Section 12.1.</text>
-        	<note>This is a statement of intent</note>
+            <text>A bean class may have a bean defining annotation, allowing it to be placed anywhere in an application, as defined in Section 12.1. A bean class with a bean defining annotation is said to be an implicit bean.</text>
+            <note>This is a statement of intent</note>
         </assertion>
 
-		<assertion id="b">
-        	<text>Any scope type is a bean defining annotation. If a scope type is declared on a bean class, then the bean class is said to have a bean defining annotation.</text>
-        </assertion>
+        <group>
+            <text>The set of bean defining annotations contains:</text>
+            <assertion id="ba">
+                <text>@ApplicationScoped, @SessionScoped, @ConversationScoped and @RequestScoped annotations</text>
+            </assertion>
+            <assertion id="bb">
+                <text>all other normal scope types</text>
+            </assertion>
+            <assertion id="bc">
+                <text>@Interceptor annotation</text>
+            </assertion>
+            <assertion id="bd">
+                <text>@Decorator annotation</text>
+            </assertion>
+            <assertion id="be">
+                <text>all stereotype annotations (i.e. annotations annotated with @Stereotype)</text>
+            </assertion>
+            <assertion id="bf">
+                <text>the @Dependent scope annotation</text>
+            </assertion>
+        </group>
 
+        <assertion id="ca">
+            <text>Note that to ensure compatibility with other JSR-330 implementations, all pseudo-scope annotations except @Dependent are not bean defining annotations.</text>
+        </assertion>
+        <assertion id="cb">
+            <text>However, a stereotype annotation including a pseudo-scope annotation is a bean defining annotation.</text>
+        </assertion>    
+            
     </section>
 
     <section id="names" title="Bean names" level="2">
@@ -1318,7 +1343,7 @@
         </assertion>
 
         <assertion id="ba">
-            <text>When searching for disposer methods for a producer method or producer field the container considers the type and qualifiers of the disposed parameter. f a producer method or producer field declared by the same bean class is assignable to the disposed parameter, according to the rules of typesafe resolution defined in Section 5.2, "Typesafe resolution", the container must call this method when destroying any instance returned by that producer method or producer field.</text>
+            <text>When searching for disposer methods for a producer method or producer field the container considers the type and qualifiers of the disposed parameter. If a producer method or producer field declared by the same bean class is assignable to the disposed parameter, according to the rules of typesafe resolution defined in Section 5.2, "Typesafe resolution", the container must call this method when destroying any instance returned by that producer method or producer field.</text>
         </assertion>
 
         <assertion id="da">
