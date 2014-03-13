@@ -53,11 +53,11 @@ public class BeanDiscoveryTest extends AbstractTest {
                 .addClass(Charlie.class)
                 .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml");
         // Bean defining annotation and no beans.xml
-        JavaArchive delta = ShrinkWrap.create(JavaArchive.class).addClass(Delta.class);
+        JavaArchive delta = ShrinkWrap.create(JavaArchive.class).addClasses(Delta.class, Interceptor1.class, Decorator1.class);
         // Bean defining annotation and 1.1 version beans.xml with bean-discovery-mode of annotated
         JavaArchive echo = ShrinkWrap
                 .create(JavaArchive.class)
-                .addClasses(Echo.class, EchoNotABean.class)
+                .addClasses(Echo.class, EchoNotABean.class, Interceptor2.class, Decorator2.class)
                 .addAsManifestResource(
                         new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED)
                                 .exportAsString()), "beans.xml");
@@ -73,7 +73,7 @@ public class BeanDiscoveryTest extends AbstractTest {
         JavaArchive legacy = ShrinkWrap.create(JavaArchive.class).addClasses(LegacyExtension.class, LegacyAlpha.class,
                 LegacyBravo.class).addAsServiceProvider(Extension.class, LegacyExtension.class);
 
-        return new WebArchiveBuilder().withTestClass(BeanDiscoveryTest.class).withClasses(VerifyingExtension.class)
+        return new WebArchiveBuilder().withTestClass(BeanDiscoveryTest.class).withClasses(VerifyingExtension.class, Binding.class)
                 .withExtension(VerifyingExtension.class).withLibrary(Ping.class)
                 .withLibraries(alpha, bravo, charlie, delta, echo, foxtrot, legacy).build();
     }
@@ -116,6 +116,22 @@ public class BeanDiscoveryTest extends AbstractTest {
         assertNotDiscoveredAndNotAvailable(EchoNotABean.class);
     }
 
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bc"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
+    public void testInterceptorIsBeanDefiningAnnotation() {
+        assertDiscovered(Interceptor1.class);
+        assertDiscovered(Interceptor2.class);
+    }
+
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bd"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
+    public void testDecoratorIsBeanDefiningAnnotation() {
+        assertDiscovered(Decorator1.class);
+        assertDiscovered(Decorator2.class);
+    }
+
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa") })
     public void testNoBeanArchiveModeNone() {
@@ -130,10 +146,14 @@ public class BeanDiscoveryTest extends AbstractTest {
     }
 
     private <T extends Ping> void assertDiscoveredAndAvailable(T reference, Class<T> clazz) {
-        assertTrue(extension.getObservedAnnotatedTypes().contains(clazz));
+        assertDiscovered(clazz);
         assertNotNull(reference);
         reference.pong();
         getUniqueBean(clazz);
+    }
+
+    private void assertDiscovered(Class<?> clazz) {
+        assertTrue(extension.getObservedAnnotatedTypes().contains(clazz), clazz.getSimpleName() + " not discovered.");
     }
 
     private <T> void assertNotDiscoveredAndNotAvailable(Class<T> clazz) {
