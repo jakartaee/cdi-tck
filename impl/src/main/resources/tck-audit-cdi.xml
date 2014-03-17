@@ -5384,91 +5384,6 @@
         </assertion>
     </section>
 
-    <section id="observer_resolution" title="Observer resolution" level="2">
-        <assertion id="a" testable="false">
-            <text>The process of matching an event to its observer methods is called observer resolution. The container considers event type and qualifiers when resolving observers.</text>
-            <note>Statement of intent</note>
-        </assertion>
-
-        <assertion id="b" testable="false">
-            <text>Observer resolution usually occurs at runtime.</text>
-            <note>Describes non-portable behavior</note>
-        </assertion>
-
-        <group>
-            <text>An event is delivered to an observer method if the observer method belongs to an enabled bean, an event type is assignable to the observed event type, taking type parameters into consideration, the observer method has no event qualifiers or has a subset of the event qualifiers. An observer method has an event qualifier if it has an observed event qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.Nonbinding|. Also the event is not a container lifecycle event, as defined in Section 11.5 "Container lifecycle events", or the observer method belongs to an extension.</text>
-            <assertion id="c">
-                <text>Check an event is delivered if the observer method belongs to an enabled bean, an event type is assignable to the observed event type and has a subset of the event qualifiers.</text>
-            </assertion>
-            <assertion id="d">
-                <text>Check an event is not delivered if the observer method belongs to an disabled bean.</text>
-            </assertion>
-        </group>
-
-        <assertion id="j">
-            <text>If the runtime type of the event object contains an unresolvable type variable, the container must throw an |IllegalArgumentException|.</text>
-        </assertion>
-
-        <assertion id="k">
-            <text>For a custom implementation of the |ObserverMethod| interface defined in Section 11.1.3, "The ObserverMethod interface", the container must call |getObservedType()| and |getObservedQualifiers()| to determine the observed event type and qualifiers.</text>
-        </assertion>
-    </section>
-
-    <section id="observers_assignability" title="Assignability of type variables, raw and parameterized types" level="3">
-        <assertion id="a">
-            <text>An event type is considered assignable to a type variable if the event type is assignable to the upper bound, if any.</text>
-        </assertion>
-
-        <assertion id="b">
-            <text>A parameterized event type is considered assignable to a raw observed event type if the raw types are identical.</text>
-        </assertion>
-
-        <group>
-            <text>A parameterized event type is considered assignable to a parameterized observed event type if they have identical raw type and for each parameter the observed event type parameter is an actual type with identical raw type to the event type parameter, and, if the type is parameterized, the event type parameter is assignable to the observed event type parameter according to these rules, or the observed event type parameter is a wildcard and the event type parameter is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the observed event type parameter is a type variable and the event type parameter is
-                assignable to the upper bound, if any, of the type variable.
-            </text>
-            <assertion id="c">
-                <text>Check the event type parameter and the observed event type parameter are actual types with identical raw type.</text>
-            </assertion>
-            <assertion id="d">
-                <text>Check the event type parameter and the observed event type parameter are actual types with identical raw type for nested type parameters.</text>
-            </assertion>
-            <assertion id="e">
-                <text>Check the observed event type parameter is a wildcard and the event type parameter is assignable to the upper bound, if any,
-                    of the wildcard and assignable from the lower bound, if any, of the wildcard.
-                </text>
-            </assertion>
-            <assertion id="f">
-                <text>Check the observed event type parameter is a type variable and the event type parameter is assignable to the upper bound, if
-                    any, of the type variable.
-                </text>
-            </assertion>
-        </group>
-
-    </section>
-
-    <section id="event_qualifier_types_with_members" title="Event qualifier types with members" level="3">
-        <assertion id="a">
-            <text>The qualifier type for an |Event| qualifier may have annotation members.</text>
-        </assertion>
-
-        <assertion id="b" testable="false">
-            <text>The container uses |equals()| to compare event qualifier type member values.</text>
-            <note>Since only primitive types are allowed, the call to equals() cannot be checked</note>
-        </assertion>
-    </section>
-
-    <section id="multiple_event_qualifiers" title="Multiple event qualifiers" level="3">
-        <assertion id="a">
-            <text>An event parameter may have multiple qualifiers.</text>
-        </assertion>
-
-        <assertion id="b">
-            <text>An observer method will only be notified if all the observed event qualifiers are specified when the event is fired.</text>
-        </assertion>
-
-    </section>
-
     <section id="firing_events" title="Firing events" level="2">
         <assertion id="a">
             <text>Beans fire events via an instance of the |javax.enterprise.event.Event| interface, which may be injected.</text>
@@ -5560,6 +5475,91 @@
                 dependencies".
             </text>
         </assertion>
+    </section>
+
+    <section id="observer_resolution" title="Observer resolution" level="2">
+        <assertion id="a" testable="false">
+            <text>The process of matching an event to its observer methods is called observer resolution. The container considers event type and qualifiers when resolving observers.</text>
+            <note>Statement of intent</note>
+        </assertion>
+
+        <assertion id="b" testable="false">
+            <text>Observer resolution usually occurs at runtime.</text>
+            <note>Describes non-portable behavior</note>
+        </assertion>
+
+        <group>
+            <text>An event is delivered to an observer method if the observer method belongs to an enabled bean, an event type is assignable to the observed event type, taking type parameters into consideration, the observer method has no event qualifiers or has a subset of the event qualifiers. An observer method has an event qualifier if it has an observed event qualifier with (a) the same type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.Nonbinding|. Also the event is not a container lifecycle event, as defined in Section 11.5 "Container lifecycle events", or the observer method belongs to an extension.</text>
+            <assertion id="c">
+                <text>Check an event is delivered if the observer method belongs to an enabled bean, an event type is assignable to the observed event type and has a subset of the event qualifiers.</text>
+            </assertion>
+            <assertion id="d">
+                <text>Check an event is not delivered if the observer method belongs to an disabled bean.</text>
+            </assertion>
+        </group>
+
+        <assertion id="j">
+            <text>If the runtime type of the event object contains an unresolvable type variable, the container must throw an |IllegalArgumentException|.</text>
+        </assertion>
+
+        <assertion id="k">
+            <text>For a custom implementation of the |ObserverMethod| interface defined in Section 11.1.3, "The ObserverMethod interface", the container must call |getObservedType()| and |getObservedQualifiers()| to determine the observed event type and qualifiers.</text>
+        </assertion>
+    </section>
+
+    <section id="observers_assignability" title="Assignability of type variables, raw and parameterized types" level="3">
+        <assertion id="a">
+            <text>An event type is considered assignable to a type variable if the event type is assignable to the upper bound, if any.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>A parameterized event type is considered assignable to a raw observed event type if the raw types are identical.</text>
+        </assertion>
+
+        <group>
+            <text>A parameterized event type is considered assignable to a parameterized observed event type if they have identical raw type and for each parameter the observed event type parameter is an actual type with identical raw type to the event type parameter, and, if the type is parameterized, the event type parameter is assignable to the observed event type parameter according to these rules, or the observed event type parameter is a wildcard and the event type parameter is assignable to the upper bound, if any, of the wildcard and assignable from the lower bound, if any, of the wildcard, or the observed event type parameter is a type variable and the event type parameter is
+                assignable to the upper bound, if any, of the type variable.
+            </text>
+            <assertion id="c">
+                <text>Check the event type parameter and the observed event type parameter are actual types with identical raw type.</text>
+            </assertion>
+            <assertion id="d">
+                <text>Check the event type parameter and the observed event type parameter are actual types with identical raw type for nested type parameters.</text>
+            </assertion>
+            <assertion id="e">
+                <text>Check the observed event type parameter is a wildcard and the event type parameter is assignable to the upper bound, if any,
+                    of the wildcard and assignable from the lower bound, if any, of the wildcard.
+                </text>
+            </assertion>
+            <assertion id="f">
+                <text>Check the observed event type parameter is a type variable and the event type parameter is assignable to the upper bound, if
+                    any, of the type variable.
+                </text>
+            </assertion>
+        </group>
+
+    </section>
+
+    <section id="event_qualifier_types_with_members" title="Event qualifier types with members" level="3">
+        <assertion id="a">
+            <text>The qualifier type for an |Event| qualifier may have annotation members.</text>
+        </assertion>
+
+        <assertion id="b" testable="false">
+            <text>The container uses |equals()| to compare event qualifier type member values.</text>
+            <note>Since only primitive types are allowed, the call to equals() cannot be checked</note>
+        </assertion>
+    </section>
+
+    <section id="multiple_event_qualifiers" title="Multiple event qualifiers" level="3">
+        <assertion id="a">
+            <text>An event parameter may have multiple qualifiers.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>An observer method will only be notified if all the observed event qualifiers are specified when the event is fired.</text>
+        </assertion>
+
     </section>
 
     <section id="observer_methods" title="Observer methods" level="2">
