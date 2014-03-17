@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -19,19 +19,15 @@ package org.jboss.cdi.tck.tests.context.application.event;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 
 public class Observer2 {
 
-    private static boolean observed;
+    @Inject
+    Collector collector;
 
     void observe(@Observes @Initialized(ApplicationScoped.class) ServletContext event) {
-        if (!event.getContextPath().equals("/test1")) {
-            throw new IllegalArgumentException("Excepted /test1 but received " + event.getContextPath());
-        }
-        if (observed) {
-            throw new IllegalStateException("ServletContext invoked multiple times.");
-        }
-        observed = true;
+        collector.addContextPath(new Helper(ObserverNames.OBSERVER2_NAME, event));
     }
 }

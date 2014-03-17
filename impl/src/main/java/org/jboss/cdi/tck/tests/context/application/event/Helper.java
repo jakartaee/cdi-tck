@@ -16,33 +16,24 @@
  */
 package org.jboss.cdi.tck.tests.context.application.event;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Destroyed;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
 import javax.servlet.ServletContext;
 
-import org.jboss.cdi.tck.util.SimpleLogger;
+public class Helper {
 
-@ApplicationScoped
-public class Observer1 {
+    private String className;
+    private ServletContext context;
 
-    private static final SimpleLogger logger = new SimpleLogger(Observer1.class);
-
-    private boolean observed;
-
-    void observe(@Observes @Initialized(ApplicationScoped.class) ServletContext event) {
-        if (observed) {
-            throw new IllegalStateException("ServletContext invoked multiple times.");
-        }
-        observed = true;
+    public Helper(String className, ServletContext context) {
+        this.className = className;
+        this.context = context;
     }
 
-    public boolean isObserved() {
-        return observed;
+    public String getClassName() {
+        return className;
     }
 
-    void observeDestroyedServletContext(@Observes @Destroyed(ApplicationScoped.class) ServletContext event) {
-        logger.log("ServletContext destroyed"); // this is tricky to test properly
+    public ServletContext getContext() {
+        return context;
     }
+
 }

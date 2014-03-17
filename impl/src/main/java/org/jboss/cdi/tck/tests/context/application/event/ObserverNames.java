@@ -16,18 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.application.event;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-import javax.servlet.ServletContext;
 
-public class Observer3 {
+public class ObserverNames {
 
-    @Inject
-    Collector collector;
+    public static final String OBSERVER2_NAME = "org.jboss.cdi.tck.tests.context.application.event.Observer2";
+    public static final String OBSERVER3_NAME = "org.jboss.cdi.tck.tests.context.application.event.Observer3";
 
-    void observe(@Observes @Initialized(ApplicationScoped.class) ServletContext event) {
-        collector.addContextPath(new Helper(ObserverNames.OBSERVER3_NAME, event));
-    }
 }

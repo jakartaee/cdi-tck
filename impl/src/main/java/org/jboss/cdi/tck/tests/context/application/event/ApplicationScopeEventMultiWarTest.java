@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,12 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.context.application.event;
 
+import static org.testng.AssertJUnit.assertEquals;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -37,16 +40,16 @@ import org.testng.annotations.Test;
 
 /**
  * Verifies that an observer is not notified of a non-visible {@link ServletContext}.
- *
+ * 
  * <p>
  * Note that this test has to run in as-client mode since arquillian cannot work with such archive (doesn't know which WAR to
  * enrich).
  * </p>
- *
+ * 
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- *
+ * 
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -54,10 +57,15 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class ApplicationScopeEventMultiWarTest extends AbstractTest {
 
-    @Deployment(testable = false)
+    @Inject
+    Collector collector;
+
+    @Deployment
     public static EnterpriseArchive createTestArchive() {
 
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().build();
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
+                .withTestClassDefinition(ApplicationScopeEventMultiWarTest.class)
+                .withClasses(Collector.class, ObserverNames.class, Helper.class).noDefaultWebModule().build();
         StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class)
                 .version(EnterpriseArchiveBuilder.DEFAULT_APP_VERSION).applicationName("Test").createModule()
                 .ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb().webUri("test1.war")
@@ -65,11 +73,11 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
                 .up().exportAsString());
         enterpriseArchive.setApplicationXML(applicationXml);
 
-        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("test1.war").withClasses(Observer2.class)
-                .withDefaultEjbModuleDependency().build();
-        enterpriseArchive.addAsModule(fooArchive);
+        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("test1.war")
+                .withClasses(Observer2.class, ApplicationScopeEventMultiWarTest.class).withDefaultEjbModuleDependency().build();
+        enterpriseArchive.addAsModule(Testable.archiveToTest(fooArchive));
 
-        WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName("test2.war").withClasses(Observer3.class)
+        WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName("test2.war").withClass(Observer3.class)
                 .withDefaultEjbModuleDependency().build();
         enterpriseArchive.addAsModule(barArchive);
 
@@ -79,6 +87,9 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT, id = "ga") })
     public void testDeployment() {
-        // noop - the deployment either fails or not
+        assertEquals(2, collector.getContextPaths().size());
+        assertEquals("/test1", collector.getByClassName(ObserverNames.OBSERVER2_NAME).getContext().getContextPath());
+        assertEquals("/test2", collector.getByClassName(ObserverNames.OBSERVER3_NAME).getContext().getContextPath());
+
     }
 }

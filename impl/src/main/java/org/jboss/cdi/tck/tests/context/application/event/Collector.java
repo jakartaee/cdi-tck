@@ -16,18 +16,35 @@
  */
 package org.jboss.cdi.tck.tests.context.application.event;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
-import javax.servlet.ServletContext;
 
-public class Observer3 {
+@ApplicationScoped
+public class Collector {
 
-    @Inject
-    Collector collector;
+    private List<Helper> contextPaths = new ArrayList<Helper>();
 
-    void observe(@Observes @Initialized(ApplicationScoped.class) ServletContext event) {
-        collector.addContextPath(new Helper(ObserverNames.OBSERVER3_NAME, event));
+    public Collector() {
+
     }
+
+    public List<Helper> getContextPaths() {
+        return contextPaths;
+    }
+
+    public void addContextPath(Helper helper) {
+        contextPaths.add(helper);
+    }
+
+    public Helper getByClassName(String className) {
+        Helper helper = null;
+        for (Helper val : contextPaths) {
+            if (val.getClassName().equals(className))
+                helper = val;
+        }
+        return helper;
+    }
+
 }
