@@ -55,13 +55,13 @@ public class BeanDiscoveryTest extends AbstractTest {
                 .addClass(Charlie.class)
                 .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml");
         // Bean defining annotation and no beans.xml
-        JavaArchive delta = ShrinkWrap.create(JavaArchive.class).addClasses(Delta.class, Golf.class, India.class,
-                Interceptor1.class, Decorator1.class);
+        JavaArchive delta = ShrinkWrap.create(JavaArchive.class).addClasses(Delta.class, Golf.class, India.class, Kilo.class,
+                Mike.class, Interceptor1.class, Decorator1.class);
         // Bean defining annotation and 1.1 version beans.xml with bean-discovery-mode of annotated
         JavaArchive echo = ShrinkWrap
                 .create(JavaArchive.class)
-                .addClasses(Echo.class, EchoNotABean.class, Hotel.class, Juliet.class, JulietNotABean.class,
-                        Interceptor2.class, Decorator2.class)
+                .addClasses(Echo.class, EchoNotABean.class, Hotel.class, Juliet.class, JulietNotABean.class, Lima.class,
+                        November.class, Interceptor2.class, Decorator2.class)
                 .addAsManifestResource(
                         new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED)
                                 .exportAsString()), "beans.xml");
@@ -156,6 +156,24 @@ public class BeanDiscoveryTest extends AbstractTest {
     public void testDecoratorIsBeanDefiningAnnotation() {
         assertDiscovered(Decorator1.class);
         assertDiscovered(Decorator2.class);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "be"),
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "cb") })
+    public void testStereotypeImplicitBeanArchiveNoDescriptor(Mike mike) {
+        assertDiscoveredAndAvailable(mike, Mike.class);
+        assertDiscovered(Kilo.class);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "be"),
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "cb") })
+    public void testStereotypeImplicitBeanArchiveModeAnnotatedr(November november) {
+        assertDiscoveredAndAvailable(november, November.class);
+        assertDiscovered(Lima.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
