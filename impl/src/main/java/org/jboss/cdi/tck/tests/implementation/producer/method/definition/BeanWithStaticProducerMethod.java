@@ -29,7 +29,7 @@ public class BeanWithStaticProducerMethod {
         return "Pete";
     }
 
-    public static void destroyString(@Disposes String someString) {
+    public static void destroyString(@Disposes @Tame String someString) {
         stringDestroyed = true;
     }
 }
