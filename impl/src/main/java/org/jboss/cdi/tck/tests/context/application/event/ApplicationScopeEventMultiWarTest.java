@@ -22,6 +22,7 @@ import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import javax.servlet.ServletContext;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -37,16 +38,16 @@ import org.testng.annotations.Test;
 
 /**
  * Verifies that an observer is not notified of a non-visible {@link ServletContext}.
- *
+ * 
  * <p>
  * Note that this test has to run in as-client mode since arquillian cannot work with such archive (doesn't know which WAR to
  * enrich).
  * </p>
- *
+ * 
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- *
+ * 
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -54,10 +55,11 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class ApplicationScopeEventMultiWarTest extends AbstractTest {
 
-    @Deployment(testable = false)
+    @Deployment
     public static EnterpriseArchive createTestArchive() {
 
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().notTestArchive().noDefaultWebModule().build();
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
+                .withTestClassDefinition(ApplicationScopeEventMultiWarTest.class).noDefaultWebModule().build();
         StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class)
                 .version(EnterpriseArchiveBuilder.DEFAULT_APP_VERSION).applicationName("Test").createModule()
                 .ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb().webUri("test1.war")
@@ -65,9 +67,9 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
                 .up().exportAsString());
         enterpriseArchive.setApplicationXML(applicationXml);
 
-        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("test1.war").withClasses(Observer2.class)
-                .withDefaultEjbModuleDependency().build();
-        enterpriseArchive.addAsModule(fooArchive);
+        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("test1.war")
+                .withClasses(Observer2.class, ApplicationScopeEventMultiWarTest.class).withDefaultEjbModuleDependency().build();
+        enterpriseArchive.addAsModule(Testable.archiveToTest(fooArchive));
 
         WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName("test2.war").withClasses(Observer3.class)
                 .withDefaultEjbModuleDependency().build();
