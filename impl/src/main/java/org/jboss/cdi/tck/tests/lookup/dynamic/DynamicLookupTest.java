@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,6 +20,8 @@ import static org.jboss.cdi.tck.cdi.Sections.ANNOTATIONLITERAL_TYPELITERAL;
 import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
 import static org.jboss.cdi.tck.cdi.Sections.NEW;
 import static org.jboss.cdi.tck.cdi.Sections.PROGRAMMATIC_LOOKUP;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,10 +42,9 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
 /**
  * Tests for dynamic lookup features
- * 
+ *
  * @author Shane Bryzak
  * @author Jozef Hartinger
  */
@@ -160,6 +161,7 @@ public class DynamicLookupTest extends AbstractTest {
         assert remote.getValue() == 2;
 
         Iterator<RemotePaymentProcessor> iterator2 = instance.select(RemotePaymentProcessor.class, new PayByBinding() {
+            @Override
             public PaymentMethod value() {
                 return PaymentMethod.CREDIT_CARD;
             }
@@ -167,6 +169,20 @@ public class DynamicLookupTest extends AbstractTest {
 
         assert iterator2.next().getValue() == 2;
         assert !iterator2.hasNext();
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ka"),
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m") })
+    public void testAlternatives() {
+        Instance<Common> instance = getContextualReference(ObtainsInstanceBean.class).getCommon();
+        assertFalse(instance.isAmbiguous());
+        Iterator<Common> iterator = instance.iterator();
+        assertTrue(iterator.hasNext());
+        assertTrue(iterator.next() instanceof Baz);
+        assertFalse(iterator.hasNext());
+
+        assertTrue(instance.get().ping());
     }
 
     @Test
