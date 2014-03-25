@@ -97,6 +97,18 @@
         <assertion id="lb">
             <text>A parameterized type that contains a wildcard type parameter is not a legal bean type.</text>
         </assertion>
+
+        <group>
+            <text>An array type whose component type is not a legal bean type.</text>
+            <!-- TODO tested through producers -->
+            <assertion id="lc">
+                <text>An array type whose component type is a type variable is not a legal bean type.</text>
+            </assertion>
+            <assertion id="ld">
+                <text>An array type whose component type is a parameterized type that contains a wildcard type parameter is not a legal bean type.</text>
+            </assertion>
+        </group>
+
     </section>
 
     <section id="restricting_bean_types" title="Restricting the bean types of a bean" level="3">
@@ -396,8 +408,8 @@
         </assertion>
         <assertion id="cb">
             <text>However, a stereotype annotation including a pseudo-scope annotation is a bean defining annotation.</text>
-        </assertion>    
-            
+        </assertion>
+
     </section>
 
     <section id="names" title="Bean names" level="2">
@@ -1060,6 +1072,10 @@
             <text>If a producer method return type contains a wildcard type parameter the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
+        <assertion id="hb">
+            <text>If a producer method return type is an array type whose component type contains a wildcard type parameter the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
+
         <assertion id="iaa">
             <text>If the producer method return type is a parameterized type with a type variable, it must have scope |@Dependent|.</text>
         </assertion>
@@ -1070,6 +1086,10 @@
 
         <assertion id="ib">
             <text>If a producer method return type is a type variable the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
+
+        <assertion id="ic">
+            <text>If a producer method return type is an array type whose component type is a type variable the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
         <assertion id="j">
@@ -1230,12 +1250,20 @@
             <text>If a producer field type contains a wildcard type parameter the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
+          <assertion id="gc">
+            <text>If a producer field type is an array type whose component type contains a wildcard parameter the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
+
         <assertion id="gb">
             <text>If the producer field type is a parameterized type with a type variable, it must have scope |@Dependent|. If a producer field with a parameterized type with a type variable declares any scope other than |@Dependent|, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
         <assertion id="ha">
             <text>If a producer field type is a type variable the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
+
+         <assertion id="hb">
+            <text>If a producer field type is an array type whose component type is a type variable the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
         <assertion id="i" testable="false">
@@ -2647,11 +2675,21 @@
         </assertion>
 
         <assertion id="b">
-            <text>The required type of an injection point may contain a wildcard type parameter. However, a type variable is not a legal injection point type.</text>
+            <text>The required type of an injection point may contain a wildcard type parameter.</text>
+        </assertion>
+
+        <assertion id="d" testable="false">
+            <note>TODO this change will be most likely reverted</note>
+            <text>The required type of an injection point may be an array type whose component type contains a wildcard type parameter.</text>
         </assertion>
 
         <assertion id="c">
             <text>If an injection point type is a type variable, the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
+
+        <assertion id="d" testable="false">
+            <note>TODO not sure if the spec wording is final</note>
+            <text>If an injection point type is an array type whose component type is a type variable, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
     </section>
 
@@ -5630,6 +5668,17 @@
             </assertion>
 
             <assertion id="cb">
+                <text>Test with a wildcard.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>The event parameter may be an array type whose component type contains a type variable or a wildcard.</text>
+            <assertion id="da">
+                <text>Test with a type variable.</text>
+            </assertion>
+
+            <assertion id="db">
                 <text>Test with a wildcard.</text>
             </assertion>
         </group>

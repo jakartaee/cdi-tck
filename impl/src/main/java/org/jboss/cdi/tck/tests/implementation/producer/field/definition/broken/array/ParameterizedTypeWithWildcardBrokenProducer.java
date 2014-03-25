@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,15 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer.wildcardAndTypeVariable;
+package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.array;
 
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author pmuir
- *
- */
-@SuppressWarnings("serial")
-public class ObjectList extends ArrayList<Object> {
+import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.Vetoed;
+
+
+public class ParameterizedTypeWithWildcardBrokenProducer<T> {
+
+    @Produces
+    private List<?>[] myList = new MyList[1];
+
+    @Vetoed
+    @SuppressWarnings("serial")
+    private static class MyList extends ArrayList<String> {
+    }
 
 }

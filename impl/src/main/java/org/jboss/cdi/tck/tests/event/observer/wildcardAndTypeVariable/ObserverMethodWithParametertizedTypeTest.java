@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 
 /**
  * Tests an observer method defined to observe an event type which is generic and a type variable
- * 
+ *
  * @author David Allen
  * @author Martin Kouba
  */
@@ -47,20 +47,38 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractTest {
     @Test
     @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "ca")
     public void testObserverMethodCanObserveTypeVariable() {
-        BostonTerrier.observed = false;
+        BostonTerrier.reset();
         Behavior event = new Behavior() {
         };
         getCurrentManager().fireEvent(event);
-        assertTrue(BostonTerrier.observed);
+        assertTrue(BostonTerrier.observedTypeVariable);
     }
 
     @Test
     @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "cb")
     public void testObserverMethodCanObserveWildcardType() {
-        WildBostonTerrier.observed = false;
+        BostonTerrier.reset();
         List<Object> event = new ObjectList();
         getCurrentManager().fireEvent(event);
-        assertTrue(WildBostonTerrier.observed);
+        assertTrue(BostonTerrier.observedWildcard);
+    }
+
+    @Test
+    @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "da")
+    public void testObserverMethodCanObserveArrayTypeVariable() {
+        BostonTerrier.reset();
+        Behavior[] event = new Behavior[] {};
+        getCurrentManager().fireEvent(event);
+        assertTrue(BostonTerrier.observedArrayTypeVariable);
+    }
+
+    @Test
+    @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "db")
+    public void testObserverMethodCanObserveArrayWildcard() {
+        BostonTerrier.reset();
+        List<?>[] event = new ObjectList[0];
+        getCurrentManager().fireEvent(event);
+        assertTrue(BostonTerrier.observedArrayWildCard);
     }
 
 }
