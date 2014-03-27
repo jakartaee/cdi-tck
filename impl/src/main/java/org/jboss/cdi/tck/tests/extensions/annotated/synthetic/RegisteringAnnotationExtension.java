@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -21,26 +21,42 @@ import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
-
 import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 
-public class RegisteringExtension3 implements Extension {
-	
-	void registerEnum(@Observes BeforeBeanDiscovery event, final BeanManager manager){
-		
-        new AddForwardingAnnotatedTypeAction<Vegetables>() {
+public class RegisteringAnnotationExtension implements Extension {
+
+    void registerMy(@Observes BeforeBeanDiscovery event, final BeanManager manager) {
+
+        new AddForwardingAnnotatedTypeAction<TestAnnotation>() {
 
             @Override
             public String getBaseId() {
-                return RegisteringExtension3.class.getName();
+                return RegisteringAnnotationExtension.class.getName();
             }
 
             @Override
-            public AnnotatedType<Vegetables> delegate() {
-                return manager.createAnnotatedType(Vegetables.class);
+            public AnnotatedType<TestAnnotation> delegate() {
+                return manager.createAnnotatedType(TestAnnotation.class);
             }
         }.perform(event);
-		
-	}
+
+    }
+    
+    void registerJuicy(@Observes BeforeBeanDiscovery event, final BeanManager manager) {
+
+        new AddForwardingAnnotatedTypeAction<Juicy>() {
+
+            @Override
+            public String getBaseId() {
+                return RegisteringAnnotationExtension.class.getName();
+            }
+
+            @Override
+            public AnnotatedType<Juicy> delegate() {
+                return manager.createAnnotatedType(Juicy.class);
+            }
+        }.perform(event);
+
+    }
 
 }

@@ -7014,7 +7014,7 @@
     <section id="pat" title="ProcessAnnotatedType event" level="3">
 
         <group>
-            <text>The container must fire an event, before it processes a type, for each Java class, interface or enum in a bean archive and annotated type added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            <text>The container must fire an event, before it processes a type, for every Java class, interface (excluding the special kind of interface declaration annotation type) or enum discovered.</text>
             <assertion id="aa">
                 <text>Test class discovered in a bean archive.</text>
             </assertion>
@@ -7032,6 +7032,9 @@
             </assertion>
             <assertion id="ag">
                 <text>Test enum added by |BeforeBeanDiscovery.addAnnotatedType()|.</text>
+            </assertion>
+            <assertion id="ah">
+                <text>Excluding the special kind of interface declaration annotation type.</text>
             </assertion>
         </group>
 

@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS IS" BASIS,  
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -42,7 +42,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- *
+ * 
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -57,18 +57,18 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ProcessSyntheticAnnotatedTypeTest.class)
-                .withExtensions(RegisteringExtension1.class, RegisteringExtension2.class, RegisteringExtension3.class, ModifyingExtension.class,
-                        VerifyingExtension.class).build();
+                .withExtensions(RegisteringAnnotationExtension.class, RegisteringExtension1.class, RegisteringExtension2.class,
+                        RegisteringExtension3.class, ModifyingExtension.class, VerifyingExtension.class).build();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PAT, id = "ae"), @SpecAssertion(section = PAT, id = "af"),
-            @SpecAssertion(section = PAT, id = "j"), @SpecAssertion(section = PAT, id = "ag") })
+            @SpecAssertion(section = PAT, id = "j"), @SpecAssertion(section = PAT, id = "ag"),
+            @SpecAssertion(section = PAT, id = "ah") })
     public void testEventsFired() {
         Set<Class<?>> patClasses = verifyingExtension.getPatClasses();
         Set<Class<?>> psatClasses = verifyingExtension.getPsatClasses();
 
-        assertEquals(psatClasses.size(), 4);
         assertTrue(psatClasses.contains(Orange.class));
         assertTrue(psatClasses.contains(Apple.class));
         assertTrue(psatClasses.contains(Pear.class));
@@ -78,6 +78,9 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
         assertTrue(patClasses.contains(Apple.class));
         assertTrue(patClasses.contains(Pear.class));
 
+        // Verify that PAT is not fired for annotation type
+        assertFalse(psatClasses.contains(TestAnnotation.class));
+        assertFalse(psatClasses.contains(Juicy.class));
 
         // Test changes applied
         Set<Bean<?>> oranges = getCurrentManager().getBeans(Orange.class, AnyLiteral.INSTANCE);
@@ -91,6 +94,9 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
         assertEquals(getCurrentManager().getBeans(Pear.class, AnyLiteral.INSTANCE).size(), 2);
         Set<Bean<?>> juicyPears = getCurrentManager().getBeans(Pear.class, Juicy.Literal.INSTANCE);
         assertEquals(juicyPears.size(), 1);
+        Set<Bean<?>> annotation = getCurrentManager().getBeans(TestAnnotation.class, AnyLiteral.INSTANCE);
+        assertEquals(annotation.size(), 0);
+
     }
 
     @Test
