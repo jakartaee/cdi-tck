@@ -79,7 +79,7 @@ public class BeanDiscoveryTest extends AbstractTest {
 
         return new WebArchiveBuilder().withTestClass(BeanDiscoveryTest.class)
                 .withClasses(VerifyingExtension.class, ScopesExtension.class, Binding.class, MyNormalScope.class, MyPseudoScope.class,
-                        MyNormalContext.class, MyPseudoContext.class)
+                        MyNormalContext.class, MyPseudoContext.class, MyStereotype.class)
                 .withExtensions(VerifyingExtension.class, ScopesExtension.class).withLibrary(Ping.class)
                 .withLibraries(alpha, bravo, charlie, delta, echo, foxtrot, legacy).build();
     }
@@ -171,7 +171,7 @@ public class BeanDiscoveryTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "be"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "cb") })
-    public void testStereotypeImplicitBeanArchiveModeAnnotatedr(November november) {
+    public void testStereotypeImplicitBeanArchiveModeAnnotated(November november) {
         assertDiscoveredAndAvailable(november, November.class);
         assertDiscovered(Lima.class);
     }
