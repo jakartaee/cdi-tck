@@ -88,7 +88,7 @@ public class TimerTest {
         }).start();
     }
 
-    @Test(timeOut = 3000l)
+    @Test(timeOut = 5000l)
     public void testReuse() throws InterruptedException {
 
         // Will be stopped immediately
