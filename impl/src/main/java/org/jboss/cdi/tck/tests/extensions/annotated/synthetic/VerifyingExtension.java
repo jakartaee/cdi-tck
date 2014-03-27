@@ -33,7 +33,7 @@ public class VerifyingExtension implements Extension {
     private Set<Class<?>> psatClasses = new HashSet<Class<?>>();
     private Map<Class<?>, Extension> sources = new HashMap<Class<?>, Extension>();
 
-    public <T extends Plants> void verify(@Observes ProcessAnnotatedType<T> event) {
+    public <T> void verify(@Observes ProcessAnnotatedType<T> event) {
         if (event instanceof ProcessSyntheticAnnotatedType<?>) {
             psatClasses.add(event.getAnnotatedType().getJavaClass());
         } else {
