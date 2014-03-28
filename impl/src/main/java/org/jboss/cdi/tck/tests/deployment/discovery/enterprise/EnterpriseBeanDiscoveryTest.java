@@ -142,14 +142,14 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
 
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
-            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba") })
     public void testImplicitBeanArchiveNoDescriptor() {
         assertDiscoveredAndAvailable(DeltaLocal.class, Delta.class);
     }
 
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
-            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "b") })
+            @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba") })
     public void testImplicitBeanArchiveModeAnnotated() {
         assertDiscoveredAndAvailable(EchoLocal.class, Echo.class);
     }
