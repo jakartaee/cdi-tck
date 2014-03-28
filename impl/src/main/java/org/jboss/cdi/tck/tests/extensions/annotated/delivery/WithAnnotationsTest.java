@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
 import static org.jboss.cdi.tck.cdi.Sections.PAT;
 import static org.jboss.cdi.tck.util.Assert.assertTypeListMatches;
+import static org.testng.Assert.assertFalse;
 
 import javax.inject.Inject;
 
@@ -65,7 +66,7 @@ public class WithAnnotationsTest extends AbstractTest {
                 Bird.class, Hummingbird.class, BeeHummingbird.class,
                 // member-level
                 Falcon.class, BatFalcon.class, Griffin.class, Hen.class, RubberChicken.class, Turkey.class,
-                OcellatedTurkey.class, Jack.class, Sparrow.class);
+                OcellatedTurkey.class, Jack.class, Sparrow.class, AplomadoFalcon.class);
 
         // Annotated with @Desired only
         assertTypeListMatches(processAnnotatedTypeObserver.getProcessedDesiredTypes(),
@@ -74,9 +75,7 @@ public class WithAnnotationsTest extends AbstractTest {
                 // member-level
                 Turkey.class, OcellatedTurkey.class, Sparrow.class, Jack.class);
 
-        // Annotated with @RequestScoped only
-        assertTypeListMatches(processAnnotatedTypeObserver.getProcessedRequestScopeTypes(),
-                Falcon.class, BatFalcon.class);
+        assertFalse(processAnnotatedTypeObserver.getProcessedRequestScopeTypes().contains(AplomadoFalcon.class));
     }
 
     @Test
