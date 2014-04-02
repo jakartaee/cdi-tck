@@ -16,17 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bootstrap.unavailable.methods;
 
-import static org.jboss.cdi.tck.cdi.Sections.BM_DECORATOR_RESOLUTION;
-import static org.jboss.cdi.tck.cdi.Sections.BM_INTERCEPTOR_RESOLUTION;
-import static org.jboss.cdi.tck.cdi.Sections.BM_OBSERVER_METHOD_RESOLUTION;
-import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEAN_BY_NAME;
-import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEAN_BY_TYPE;
-import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_CONTEXTUAL_REFERENCE;
-import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTABLE_REFERENCE;
-import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_PASSIVATION_CAPABLE_BEAN;
-import static org.jboss.cdi.tck.cdi.Sections.BM_RESOLVE_AMBIGUOUS_DEP;
-import static org.jboss.cdi.tck.cdi.Sections.BM_VALIDATE_IP;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -36,12 +25,15 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEANMANAGER;
+
 /**
- * <p>
+ * <p/>
  * This test was originally part of the Weld test suite.
- * <p>
+ * <p/>
  *
  * @author Martin Kouba
+ * @author Tomas Remes
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class UnavailableMethodsDuringApplicationInitializationTest extends AbstractTest {
@@ -53,15 +45,16 @@ public class UnavailableMethodsDuringApplicationInitializationTest extends Abstr
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_CONTEXTUAL_REFERENCE, id = "d"),
-            @SpecAssertion(section = BM_OBTAIN_INJECTABLE_REFERENCE, id = "d"),
-            @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "g"),
-            @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "c"),
-            @SpecAssertion(section = BM_OBTAIN_PASSIVATION_CAPABLE_BEAN, id = "b"),
-            @SpecAssertion(section = BM_RESOLVE_AMBIGUOUS_DEP, id = "e"), @SpecAssertion(section = BM_VALIDATE_IP, id = "b"),
-            @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "f"),
-            @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "f"),
-            @SpecAssertion(section = BM_INTERCEPTOR_RESOLUTION, id = "e") })
+    @SpecAssertions({@SpecAssertion(section = BEANMANAGER, id = "ad"),
+            @SpecAssertion(section = BEANMANAGER, id = "ae"),
+            @SpecAssertion(section = BEANMANAGER, id = "af"),
+            @SpecAssertion(section = BEANMANAGER, id = "ag"),
+            @SpecAssertion(section = BEANMANAGER, id = "ah"),
+            @SpecAssertion(section = BEANMANAGER, id = "ai"),
+            @SpecAssertion(section = BEANMANAGER, id = "aj"),
+            @SpecAssertion(section = BEANMANAGER, id = "ak"),
+            @SpecAssertion(section = BEANMANAGER, id = "al"),
+            @SpecAssertion(section = BEANMANAGER, id = "am")})
     public void testUnavailableMethods() {
         // Test deployment does not fail
     }
