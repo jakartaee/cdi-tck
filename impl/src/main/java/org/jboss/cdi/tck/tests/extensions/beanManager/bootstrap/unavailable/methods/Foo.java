@@ -19,11 +19,16 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.bootstrap.unavailable.met
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.enterprise.event.Observes;
 
 @Named("foo")
 public class Foo {
 
     @Inject
     BeanManager beanManager;
+
+    private void observe(@Observes Integer i){
+
+    }
 
 }

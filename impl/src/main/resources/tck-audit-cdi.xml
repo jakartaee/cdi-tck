@@ -6129,6 +6129,52 @@
             </assertion>
         </group>
 
+        <group>
+            <text>Exception is thrown if the following operations are called before the AfterBeanDiscovery event is fired:</text>
+
+            <assertion id="ad">
+                <text>Test getBeans(String)</text>
+            </assertion>
+
+            <assertion id="ae">
+                <text>Test getBeans(Type, Annotation...)</text>
+            </assertion>
+
+            <assertion id="af">
+                <text>Test getPassivationCapableBean(String)</text>
+            </assertion>
+
+            <assertion id="ag">
+                <text>Test resolve(Set)</text>
+            </assertion>
+
+            <assertion id="ah">
+                <text>Test resolveDecorators(Set, Annotation...)</text>
+            </assertion>
+
+            <assertion id="ai">
+                <text>Test resolveInterceptors(InterceptionType, Annotation...)</text>
+            </assertion>
+
+            <assertion id="aj">
+                <text>Test resolveObserverMethods(Object, Annotation...)</text>
+            </assertion>
+
+            <assertion id="ak">
+                <text>Test validate(InjectionPoint)</text>
+            </assertion>
+
+            <text>Exception is thrown if the following operations are called before the {@Link AfterDeploymentValidation} event is fired:</text>
+
+            <assertion id="al">
+                <text>Test getReference(Bean, Type, CreationalContext)</text>
+            </assertion>
+
+            <assertion id="am">
+                <text>Test getInjectableReference(InjectionPoint, CreationalContext)</text>
+            </assertion>
+        </group>
+
         <assertion id="b">
             <text>The built-in implementation must be a passivation capable dependency, as defined in Section 6.6.2, "Passivation capable dependencies".</text>
         </assertion>
@@ -6192,11 +6238,6 @@
         <assertion id="c">
             <text>If the given type is not a bean type of the given bean, an |IllegalArgumentException| is thrown.</text>
         </assertion>
-
-        <assertion id="d">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-        	<note>See also method javadoc.</note>
-        </assertion>
     </section>
 
     <section id="bm_obtain_injectable_reference" title="Obtaining an injectable reference" level="3">
@@ -6225,10 +6266,6 @@
             <note>This cannot be well tested at the moment.</note>
         </assertion>
 
-		<assertion id="d">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-			<note>See also method javadoc.</note>
-        </assertion>
     </section>
 
     <section id="bm_obtain_unmanaged_instance" title="Obtaining non-contextual instance" level="3">
@@ -6289,10 +6326,6 @@
             <text>If an instance of an annotation that is not a qualifier type is given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
-		<assertion id="g">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-			<note>See also method javadoc.</note>
-        </assertion>
     </section>
 
     <section id="bm_obtain_bean_by_name" title="Obtaining a Bean by name" level="3">
@@ -6303,20 +6336,11 @@
         <assertion id="b">
             <text>The parameter is an EL name.</text>
         </assertion>
-
-        <assertion id="c">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-        	<note>See also method javadoc.</note>
-        </assertion>
     </section>
 
     <section id="bm_obtain_passivation_capable_bean" title="Obtaining a passivation capable bean by identifier" level="3">
         <assertion id="a">
             <text>The method |BeanManager.getPassivationCapableBean()| returns the |PassivationCapable| bean with the given identifier (see Section 6.6.1, "Passivation capable beans").</text>
-        </assertion>
-       	<assertion id="b">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-			<note>See also method javadoc.</note>
         </assertion>
     </section>
 
@@ -6339,19 +6363,11 @@
             </assertion>
         </group>
 
-		<assertion id="e">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-			<note>See also method javadoc.</note>
-        </assertion>
     </section>
 
     <section id="bm_validate_ip" title="Validating an injection point" level="3">
         <assertion id="a">
             <text>The |BeanManager.validate()| operation validates an injection point and throws an |InjectionException| if there is a deployment problem (for example, an unsatisfied or unresolvable ambiguous dependency) associated with the injection point.</text>
-        </assertion>
-		<assertion id="b">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-			<note>See also method javadoc.</note>
         </assertion>
     </section>
 
@@ -6403,10 +6419,6 @@
             <text>If an instance of an annotation that is not a qualifier type is given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
-        <assertion id="f">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-			<note>See also method javadoc.</note>
-        </assertion>
     </section>
 
     <section id="bm_decorator_resolution" title="Decorator resolution" level="3">
@@ -6430,10 +6442,6 @@
             <text>If the set of bean types is empty, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
-		<assertion id="f">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-			<note>See also method javadoc.</note>
-        </assertion>
     </section>
 
     <section id="bm_interceptor_resolution" title="Interceptor resolution" level="3">
@@ -6451,11 +6459,6 @@
 
         <assertion id="d">
             <text>If an instance of an annotation that is not an interceptor binding type is given, an |IllegalArgumentException| is thrown.</text>
-        </assertion>
-
-        <assertion id="e">
-        	<text>If called during application initialization, before the |AfterDeploymentValidation| event is fired, an |IllegalStateException| is thrown.</text>
-			<note>See also method javadoc.</note>
         </assertion>
     </section>
 

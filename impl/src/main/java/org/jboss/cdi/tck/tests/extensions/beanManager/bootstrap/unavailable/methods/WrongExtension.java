@@ -16,8 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bootstrap.unavailable.methods;
 
-import static org.testng.Assert.fail;
-
+import javax.enterprise.context.Dependent;
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Vetoed;
+import javax.enterprise.inject.spi.*;
+import javax.enterprise.util.AnnotationLiteral;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.lang.reflect.Type;
@@ -26,22 +30,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Vetoed;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
-import javax.enterprise.inject.spi.AfterDeploymentValidation;
-import javax.enterprise.inject.spi.Annotated;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.BeforeBeanDiscovery;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.enterprise.inject.spi.InterceptionType;
-import javax.enterprise.inject.spi.ProcessBean;
-import javax.enterprise.inject.spi.ProcessInjectionPoint;
-import javax.enterprise.util.AnnotationLiteral;
+import static org.testng.Assert.fail;
 
 public class WrongExtension implements Extension {
 
@@ -49,112 +38,135 @@ public class WrongExtension implements Extension {
     private InjectionPoint injectionPoint;
 
     public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager beanManager) {
-        testUnavailableMethods(beanManager);
+        testUnavailableMethodsBeforeABD(beanManager);
+        testUnavailableMethodsBeforeADV(beanManager);
     }
 
-    public void observeProcessBean(@Observes ProcessBean<Foo> event, BeanManager beanManager) {
-        this.fooBean = event.getBean();
-        testUnavailableMethods(beanManager);
+    public void observeProcessAnnotatedType(@Observes ProcessAnnotatedType<?> event, BeanManager beanManager) {
+
+        testUnavailableMethodsBeforeABD(beanManager);
+        testUnavailableMethodsBeforeADV(beanManager);
     }
 
-    public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
-        testUnavailableMethods(beanManager);
+    public void observeAfterTypeDiscovery(@Observes AfterTypeDiscovery event, BeanManager beanManager) {
+        testUnavailableMethodsBeforeABD(beanManager);
+        testUnavailableMethodsBeforeADV(beanManager);
     }
 
-    public void observeInjectionPoint(@Observes ProcessInjectionPoint<?, ?> event) {
+    public void observeProcessInjectionTarget(@Observes ProcessInjectionTarget<Foo> event, BeanManager beanManager) {
+        testUnavailableMethodsBeforeABD(beanManager);
+        testUnavailableMethodsBeforeADV(beanManager);
+    }
+
+    public void observeInjectionPoint(@Observes ProcessInjectionPoint<Foo, ?> event, BeanManager beanManager) {
         if (injectionPoint == null) {
             // simply store some IP which we'll try to validate later
             injectionPoint = event.getInjectionPoint();
         }
+        testUnavailableMethodsBeforeABD(beanManager);
+        testUnavailableMethodsBeforeADV(beanManager);
     }
 
-    public void validate(@Observes AfterDeploymentValidation event, BeanManager manager) {
+    public void observerProcessBeanAttributes(@Observes ProcessBeanAttributes<Foo> event, BeanManager beanManager) {
+        testUnavailableMethodsBeforeABD(beanManager);
+    }
+
+    public void observeProcessBean(@Observes ProcessBean<Foo> event, BeanManager beanManager) {
+        this.fooBean = event.getBean();
+        testUnavailableMethodsBeforeABD(beanManager);
+        testUnavailableMethodsBeforeADV(beanManager);
+    }
+
+    public void observerProcessObserverMethod(@Observes ProcessObserverMethod<Integer, Foo> event, BeanManager beanManager) {
+        testUnavailableMethodsBeforeABD(beanManager);
+        testUnavailableMethodsBeforeADV(beanManager);
+    }
+
+    public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
+        testUnavailableMethodsBeforeADV(beanManager);
+    }
+
+    public void observerAfterDeploymentValidation(@Observes AfterDeploymentValidation event, BeanManager manager) {
         testAvailableMethods(manager);
     }
 
+    @SuppressWarnings({"serial", "unchecked"})
+    private void testUnavailableMethodsBeforeABD(final BeanManager beanManager) {
 
-    @SuppressWarnings({ "serial", "unchecked" })
-    private void testUnavailableMethods(BeanManager beanManager) {
-
-        if (fooBean != null) {
-            try {
-                beanManager.getReference(fooBean, Foo.class, null);
-                fail("getReference() must not be available");
-            } catch (IllegalStateException e) {
-                // Expected
+        new Invocation() {
+            void execute() {
+                beanManager.getBeans("foo");
             }
-        }
+        }.run();
 
-        try {
-            beanManager.getBeans("foo");
-            fail("getBeans() must not be available");
-        } catch (IllegalStateException e) {
-            // Expected
-        }
+        new Invocation() {
+            void execute() {
+                beanManager.getBeans(Foo.class);
+            }
+        }.run();
 
-        try {
-            beanManager.getBeans(Foo.class);
-            fail("getBeans() must not be available");
-        } catch (IllegalStateException e) {
-            // Expected
-        }
+        new Invocation() {
+            void execute() {
+                beanManager.resolve(null);
+            }
+        }.run();
 
-        try {
-            beanManager.getInjectableReference(
-                    beanManager.createInjectionPoint(beanManager.createAnnotatedType(Foo.class).getFields().iterator().next()),
-                    null);
-            fail("getInjectableReference() must not be available");
-        } catch (IllegalStateException e) {
-            // Expected
-        }
+        new Invocation() {
+            void execute() {
+                beanManager.resolveObserverMethods(new Foo());
+            }
+        }.run();
 
-        try {
-            beanManager.resolve(null);
-            fail("resolve() must not be available");
-        } catch (IllegalStateException e) {
-            // Expected
-        }
+        new Invocation() {
+            void execute() {
+                beanManager.resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>() {
+                });
+            }
+        }.run();
 
-        try {
-            beanManager.resolveObserverMethods(new Foo());
-            fail("resolveObserverMethods() must not be available");
-        } catch (IllegalStateException e) {
-            // Expected
-        }
+        new Invocation() {
+            void execute() {
+                beanManager.resolveDecorators(new HashSet<Type>(Arrays.asList(Foo.class)));
+            }
+        }.run();
 
-        try {
-            beanManager.resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>() {
-            });
-            fail("resolveInterceptors() must not be available");
-        } catch (IllegalStateException e) {
-            // Expected
-        }
+        new Invocation() {
+            void execute() {
+                beanManager.validate(injectionPoint);
+            }
+        }.run();
 
-        try {
-            beanManager.resolveDecorators(new HashSet<Type>(Arrays.asList(Foo.class)));
-            fail("resolveDecorators() must not be available");
-        } catch (IllegalStateException e) {
-            // Expected
-        }
-
-        try {
-            beanManager.validate(new FooInjectionPoint());
-            fail("validate() must not be available");
-        } catch (IllegalStateException e) {
-            // Expected
-        }
-
-        try {
-            beanManager.getPassivationCapableBean("foo");
-            fail("getPassivationCapableBean() must not be available");
-        } catch (IllegalStateException e) {
-            // Expected
-        }
+        new Invocation() {
+            void execute() {
+                beanManager.getPassivationCapableBean("foo");
+            }
+        }.run();
 
     }
 
+    @SuppressWarnings({"serial", "unchecked"})
+    private void testUnavailableMethodsBeforeADV(final BeanManager beanManager) {
 
-    @SuppressWarnings({ "unchecked", "serial" })
+        // if (fooBean != null) {
+        final CreationalContext<Foo> creationalContext = beanManager.createCreationalContext(fooBean);
+
+        new Invocation() {
+            void execute() {
+                beanManager.getReference(fooBean, Foo.class, creationalContext);
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                beanManager.getInjectableReference(
+                        beanManager.createInjectionPoint(beanManager.createAnnotatedType(Foo.class).getFields().iterator().next()),
+                        creationalContext);
+            }
+        }.run();
+        //}
+    }
+
+    @SuppressWarnings({"unchecked", "serial"})
     private void testAvailableMethods(BeanManager beanManager) {
         beanManager.getReference(new FooBean(), Foo.class, beanManager.createCreationalContext(null));
         beanManager.getBeans("foo");
@@ -164,12 +176,12 @@ public class WrongExtension implements Extension {
                 beanManager.createCreationalContext(null));
         beanManager.resolve(null);
         beanManager.resolveObserverMethods(new Foo());
-        beanManager.resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>() { });
+        beanManager.resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>() {
+        });
         beanManager.resolveDecorators(new HashSet<Type>(Arrays.asList(Foo.class)));
         beanManager.validate(injectionPoint);
         beanManager.getPassivationCapableBean("foo");
     }
-
 
     private static class FooBean implements Bean<Foo> {
         @Override
@@ -266,5 +278,17 @@ public class WrongExtension implements Extension {
         public Annotated getAnnotated() {
             return null;
         }
+    }
+
+    private static abstract class Invocation {
+        void run() {
+            try {
+                execute();
+                fail("Expected exception not thrown");
+            } catch (IllegalStateException expected) {
+            }
+        }
+
+        abstract void execute();
     }
 }
