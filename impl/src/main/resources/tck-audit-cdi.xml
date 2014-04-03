@@ -981,7 +981,7 @@
         </assertion>
 
         <assertion id="ba">
-            <text>If the session bean has a bean class local view, the set of bean types contains the bean class and all superclasses.</text>
+            <text>If the session bean has a no-interface view, the set of bean types contains the bean class and all superclasses.</text>
         </assertion>
 
         <assertion id="c">
