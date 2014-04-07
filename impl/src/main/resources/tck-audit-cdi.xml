@@ -6910,6 +6910,11 @@
         <assertion id="ag">
             <text>If any observer method of the |BeforeBeanDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
+        
+         <assertion id="b">
+            <text>If any BeforeBeanDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
+        </assertion>
+        
     </section>
 
     <section id="atd" title="AfterTypeDiscovery event" level="3">
@@ -6966,6 +6971,10 @@
 
         <assertion id="i">
             <text>If any observer method of an |AfterTypeDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
+        </assertion>
+        
+        <assertion id="j">
+        	<text>If any AfterTypeDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
     </section>
 
@@ -7029,6 +7038,10 @@
         <assertion id="g">
             <text>If any observer method of the |AfterBeanDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
+        
+        <assertion id="h">
+        	<text>If any AfterBeanDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
+        </assertion>
     </section>
 
     <section id="adv" title="AfterDeploymentValidation event" level="3">
@@ -7046,6 +7059,10 @@
 
         <assertion id="d">
             <text>The container must not allow any request to be processed by the deployment until all observers of this event return.</text>
+        </assertion>
+        
+        <assertion id="e">
+        	<text>If any AfterDeploymentValidation method is called outside of the observer method invocation,an IllegalStateException is thrown.</text>
         </assertion>
     </section>
 
@@ -7166,6 +7183,10 @@
         <assertion id="e">
             <text>If any observer method of a |ProcessAnnotatedType| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
+        
+        <assertion id="f">
+        	<text>If any ProcessAnnotatedType method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
+        </assertion>
     </section>
 
     <section id="pip" title="ProcessInjectionPoint event" level="3">
@@ -7192,6 +7213,10 @@
 
         <assertion id="d">
             <text>If any observer method of a |ProcessInjectionPoint| event throws an exception, the exception is treated as a definition error by the container.</text>
+        </assertion>
+
+        <assertion id="e">
+            <text>If any ProcessInjectionPoint method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
 
     </section>
@@ -7323,6 +7348,10 @@
         <assertion id="f">
             <text>If any observer method of a |ProcessInjectionTarget| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
+
+        <assertion id="g">
+            <text>If any ProcessInjectionTarget method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
+        </assertion>
     </section>
 
     <section id="pp" title="ProcessProducer event" level="3">
@@ -7389,6 +7418,10 @@
 
         <assertion id="h">
             <text>If any observer method of a |ProcessProducer| event throws an exception, the exception is treated as a definition error by the container.</text>
+        </assertion>
+
+        <assertion id="i">
+            <text>If any ProcessProducer method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
     </section>
 
@@ -7457,13 +7490,17 @@
                 <text>Test the changes are not propagated.</text>
             </assertion>
         </group>
+        
+        <assertion id="d">
+            <text>If any observer method of a |ProcessBeanAttributes| event throws an exception, the exception is treated as a definition error by the container.</text>
+        </assertion>
 
         <assertion id="e">
             <text>Any bean which has its bean attributes altered must have it’s definition validated during deployment validation.</text>
         </assertion>
-
-        <assertion id="d">
-            <text>If any observer method of a |ProcessBeanAttributes| event throws an exception, the exception is treated as a definition error by the container.</text>
+        
+        <assertion id="f">
+            <text>If any ProcessBeanAttributes method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
 
     </section>
@@ -7599,6 +7636,10 @@
         <assertion id="n" implied="true">
             <text>Check the |getAnnotatedProducerField()|</text>
         </assertion>
+        
+         <assertion id="o">
+            <text>If any ProcessBean method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
+        </assertion>
 
     </section>
 
@@ -7621,6 +7662,10 @@
 
         <assertion id="db">
             <text>If any observer method of a |ProcessObserverMethod| event throws an exception, the exception is treated as a definition error by the container.</text>
+        </assertion>
+        
+        <assertion id="dc">
+            <text>If any ProcessObserverMethod method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
     </section>
 
