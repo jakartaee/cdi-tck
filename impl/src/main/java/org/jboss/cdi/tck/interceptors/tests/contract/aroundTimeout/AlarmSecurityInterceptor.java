@@ -43,7 +43,7 @@ public class AlarmSecurityInterceptor {
         assertTrue(!this.sc.isCallerInRole("alarm"));
         securityContextOK = true;
 
-        bell.ring();
+        bell.callFromInterceptor();
 
         return obj;
     }
