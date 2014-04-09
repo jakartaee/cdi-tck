@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,17 +17,18 @@
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 
 public class ProcessAnnotatedTypeObserver implements Extension {
-    private static ProcessAnnotatedType<TestServlet> servletEvent = null;
-    private static ProcessAnnotatedType<TestListener> listenerEvent = null;
-    private static ProcessAnnotatedType<TestFilter> filterEvent = null;
-    private static ProcessAnnotatedType<TagLibraryListener> tagLibraryListenerEvent = null;
-    private static ProcessAnnotatedType<TestTagHandler> tagHandlerEvent = null;
-    private static ProcessAnnotatedType<Farm> jsfManagedBeanEvent = null;
+    private static AnnotatedType<TestServlet> servletEvent = null;
+    private static AnnotatedType<TestListener> listenerEvent = null;
+    private static AnnotatedType<TestFilter> filterEvent = null;
+    private static AnnotatedType<TagLibraryListener> tagLibraryListenerEvent = null;
+    private static AnnotatedType<TestTagHandler> tagHandlerEvent = null;
+    private static AnnotatedType<Farm> jsfManagedBeanEvent = null;
 
     public void cleanup(@Observes BeforeShutdown shutdown) {
         servletEvent = null;
@@ -39,50 +40,50 @@ public class ProcessAnnotatedTypeObserver implements Extension {
     }
 
     public void observeServlet(@Observes ProcessAnnotatedType<TestServlet> event) {
-        servletEvent = event;
+        servletEvent = event.getAnnotatedType();
     }
 
     public void observeFilter(@Observes ProcessAnnotatedType<TestFilter> event) {
-        filterEvent = event;
+        filterEvent = event.getAnnotatedType();
     }
 
     public void observeListener(@Observes ProcessAnnotatedType<TestListener> event) {
-        listenerEvent = event;
+        listenerEvent = event.getAnnotatedType();
     }
 
     public void observeTagHandler(@Observes ProcessAnnotatedType<TestTagHandler> event) {
-        tagHandlerEvent = event;
+        tagHandlerEvent = event.getAnnotatedType();
     }
 
     public void observeTagLibraryListener(@Observes ProcessAnnotatedType<TagLibraryListener> event) {
-        tagLibraryListenerEvent = event;
+        tagLibraryListenerEvent = event.getAnnotatedType();
     }
 
     public void observeJsfManagedBean(@Observes ProcessAnnotatedType<Farm> event) {
-        jsfManagedBeanEvent = event;
+        jsfManagedBeanEvent = event.getAnnotatedType();
     }
 
-    public static ProcessAnnotatedType<TestServlet> getServletEvent() {
+    public static AnnotatedType<TestServlet> getServletEvent() {
         return servletEvent;
     }
 
-    public static ProcessAnnotatedType<TestListener> getListenerEvent() {
+    public static AnnotatedType<TestListener> getListenerEvent() {
         return listenerEvent;
     }
 
-    public static ProcessAnnotatedType<TestFilter> getFilterEvent() {
+    public static AnnotatedType<TestFilter> getFilterEvent() {
         return filterEvent;
     }
 
-    public static ProcessAnnotatedType<TagLibraryListener> getTagLibraryListenerEvent() {
+    public static AnnotatedType<TagLibraryListener> getTagLibraryListenerEvent() {
         return tagLibraryListenerEvent;
     }
 
-    public static ProcessAnnotatedType<TestTagHandler> getTagHandlerEvent() {
+    public static AnnotatedType<TestTagHandler> getTagHandlerEvent() {
         return tagHandlerEvent;
     }
 
-    public static ProcessAnnotatedType<Farm> getJsfManagedBeanEvent() {
+    public static AnnotatedType<Farm> getJsfManagedBeanEvent() {
         return jsfManagedBeanEvent;
     }
 }

@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,65 +17,73 @@
 package org.jboss.cdi.tck.tests.extensions.container.event;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessManagedBean;
-import javax.enterprise.inject.spi.ProcessProducerField;
-import javax.enterprise.inject.spi.ProcessProducerMethod;
 import javax.enterprise.inject.spi.ProcessSessionBean;
+import javax.enterprise.inject.spi.SessionBeanType;
 
 public class ProcessBeanObserver implements Extension {
-    private static ProcessManagedBean<Farm> processManagedBeanEvent = null;
-    private static ProcessSessionBean<Sheep> processStatelessSessionBeanEvent = null;
-    private static ProcessSessionBean<Cow> processStatefulSessionBeanEvent = null;
-    private static ProcessProducerField<Milk, Farm> processProducerFieldEvent = null;
-    private static ProcessProducerMethod<Cheese, Farm> processProducerMethodEvent = null;
+    private static AnnotatedType<Farm> processManagedBeanType = null;
+    private static AnnotatedType<Object> processStatelessSessionBeanAnnotatedType = null;
+    private static String processStatelessSessionBeanName = null;
+    private static SessionBeanType processStatelessSessionBeanType = null;
+    private static AnnotatedType<Object> processStatefulSessionBeanAnnotatedType = null;
+    private static String processStatefulSessionBeanName = null;
+    private static SessionBeanType processStatefulSessionBeanType = null;
 
     public void cleanup(@Observes BeforeShutdown shutdown) {
-        processManagedBeanEvent = null;
-        processStatefulSessionBeanEvent = null;
-        processStatelessSessionBeanEvent = null;
-        processProducerFieldEvent = null;
-        processProducerMethodEvent = null;
+        processManagedBeanType = null;
+        processStatelessSessionBeanAnnotatedType = null;
+        processStatelessSessionBeanName = null;
+        processStatelessSessionBeanType = null;
+        processStatefulSessionBeanAnnotatedType = null;
+        processStatefulSessionBeanName = null;
+        processStatefulSessionBeanType = null;
     }
 
     public void observeProcessManagedBean(@Observes ProcessManagedBean<Farm> event) {
-        processManagedBeanEvent = event;
+        processManagedBeanType = event.getAnnotatedBeanClass();
     }
 
     public void observeProcessStatelessSessionBean(@Observes ProcessSessionBean<Sheep> event) {
-        processStatelessSessionBeanEvent = event;
+        processStatelessSessionBeanAnnotatedType = event.getAnnotatedBeanClass();
+        processStatelessSessionBeanName = event.getEjbName();
+        processStatelessSessionBeanType = event.getSessionBeanType();
     }
 
     public void observeProcessStatefulSessionBean(@Observes ProcessSessionBean<Cow> event) {
-        processStatefulSessionBeanEvent = event;
+        processStatefulSessionBeanAnnotatedType = event.getAnnotatedBeanClass();
+        processStatefulSessionBeanName = event.getEjbName();
+        processStatefulSessionBeanType = event.getSessionBeanType();
     }
 
-    public void observeProcessProduceField(@Observes ProcessProducerField<Milk, Farm> event) {
-        processProducerFieldEvent = event;
+    public static AnnotatedType<Farm> getProcessManagedBeanType() {
+        return processManagedBeanType;
     }
 
-    public void observeProcessProduceMethod(@Observes ProcessProducerMethod<Cheese, Farm> event) {
-        processProducerMethodEvent = event;
+    public static AnnotatedType<Object> getProcessStatelessSessionBeanAnnotatedType() {
+        return processStatelessSessionBeanAnnotatedType;
     }
 
-    public static ProcessProducerField<Milk, Farm> getProcessProducerFieldEvent() {
-        return processProducerFieldEvent;
+    public static String getProcessStatelessSessionBeanName() {
+        return processStatelessSessionBeanName;
     }
 
-    public static ProcessManagedBean<Farm> getProcessManagedBeanEvent() {
-        return processManagedBeanEvent;
+    public static SessionBeanType getProcessStatelessSessionBeanType() {
+        return processStatelessSessionBeanType;
     }
 
-    public static ProcessSessionBean<Sheep> getProcessStatelessSessionBeanEvent() {
-        return processStatelessSessionBeanEvent;
+    public static AnnotatedType<Object> getProcessStatefulSessionBeanAnnotatedType() {
+        return processStatefulSessionBeanAnnotatedType;
     }
 
-    public static ProcessSessionBean<Cow> getProcessStatefulSessionBeanEvent() {
-        return processStatefulSessionBeanEvent;
+    public static String getProcessStatefulSessionBeanName() {
+        return processStatefulSessionBeanName;
     }
 
-    public static ProcessProducerMethod<Cheese, Farm> getProcessProducerMethodEvent() {
-        return processProducerMethodEvent;
+    public static SessionBeanType getProcessStatefulSessionBeanType() {
+        return processStatefulSessionBeanType;
     }
 }

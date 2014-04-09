@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,52 +17,53 @@
 package org.jboss.cdi.tck.tests.extensions.container.event;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 
 public class ProcessInjectionTargetObserver implements Extension {
-    private static ProcessInjectionTarget<Sheep> statelessSessionBeanEvent = null;
-    private static ProcessInjectionTarget<Cow> statefulSessionBeanEvent = null;
-    private static ProcessInjectionTarget<SheepInterceptor> sessionBeanInterceptorEvent = null;
-    private static ProcessInjectionTarget<Farm> managedBeanEvent = null;
+    private static AnnotatedType<Sheep> statelessSessionBeanType = null;
+    private static AnnotatedType<Cow> statefulSessionBeanType = null;
+    private static AnnotatedType<SheepInterceptor> sessionBeanInterceptorType = null;
+    private static AnnotatedType<Farm> managedBeanType = null;
 
     public void cleanup(@Observes BeforeShutdown shutdown) {
-        statefulSessionBeanEvent = null;
-        statelessSessionBeanEvent = null;
-        sessionBeanInterceptorEvent = null;
-        managedBeanEvent = null;
+        statefulSessionBeanType = null;
+        statelessSessionBeanType = null;
+        sessionBeanInterceptorType = null;
+        managedBeanType = null;
     }
 
     public void observeStatelessSessionBean(@Observes ProcessInjectionTarget<Sheep> event) {
-        statelessSessionBeanEvent = event;
+        statelessSessionBeanType = event.getAnnotatedType();
     }
 
     public void observeStatefulSessionBean(@Observes ProcessInjectionTarget<Cow> event) {
-        statefulSessionBeanEvent = event;
+        statefulSessionBeanType = event.getAnnotatedType();
     }
 
     public void observeSessionBeanInterceptor(@Observes ProcessInjectionTarget<SheepInterceptor> event) {
-        sessionBeanInterceptorEvent = event;
+        sessionBeanInterceptorType = event.getAnnotatedType();
     }
 
     public void observeManagedBean(@Observes ProcessInjectionTarget<Farm> event) {
-        managedBeanEvent = event;
+        managedBeanType = event.getAnnotatedType();
     }
 
-    public static ProcessInjectionTarget<Sheep> getStatelessSessionBeanEvent() {
-        return statelessSessionBeanEvent;
+    public static AnnotatedType<Sheep> getStatelessSessionBeanType() {
+        return statelessSessionBeanType;
     }
 
-    public static ProcessInjectionTarget<Cow> getStatefulSessionBeanEvent() {
-        return statefulSessionBeanEvent;
+    public static AnnotatedType<Cow> getStatefulSessionBeanType() {
+        return statefulSessionBeanType;
     }
 
-    public static ProcessInjectionTarget<SheepInterceptor> getSessionBeanInterceptorEvent() {
-        return sessionBeanInterceptorEvent;
+    public static AnnotatedType<SheepInterceptor> getSessionBeanInterceptorType() {
+        return sessionBeanInterceptorType;
     }
 
-    public static ProcessInjectionTarget<Farm> getManagedBeanEvent() {
-        return managedBeanEvent;
+    public static AnnotatedType<Farm> getManagedBeanType() {
+        return managedBeanType;
     }
 }

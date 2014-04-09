@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,19 +17,19 @@
 package org.jboss.cdi.tck.tests.extensions.container.event.jms;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 
 public class ProcessInjectionTargetObserver implements Extension {
 
-    private static ProcessInjectionTarget<QueueMessageDrivenBean> mdbEvent = null;
+    private static AnnotatedType<QueueMessageDrivenBean> mdbType = null;
 
     public void observeMdb(@Observes ProcessInjectionTarget<QueueMessageDrivenBean> event) {
-        mdbEvent = event;
+        mdbType = event.getAnnotatedType();
     }
 
-    public static ProcessInjectionTarget<QueueMessageDrivenBean> getMdbEvent() {
-        return mdbEvent;
+    public static AnnotatedType<QueueMessageDrivenBean> getMdbType() {
+        return mdbType;
     }
-
 }

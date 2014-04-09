@@ -81,42 +81,42 @@ public class ContainerEventTest extends AbstractTest {
     @SpecAssertion(section = BEAN_DISCOVERY, id = "be")
     public void testProcessAnnotatedTypeEventFiredForServletListener() {
         assertNotNull(ProcessAnnotatedTypeObserver.getListenerEvent());
-        validateServletListenerAnnotatedType(ProcessAnnotatedTypeObserver.getListenerEvent().getAnnotatedType());
+        validateServletListenerAnnotatedType(ProcessAnnotatedTypeObserver.getListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bf")
     public void testProcessAnnotatedTypeEventFiredForTagHandler() {
         assertNotNull(ProcessAnnotatedTypeObserver.getTagHandlerEvent());
-        validateTagHandlerAnnotatedType(ProcessAnnotatedTypeObserver.getTagHandlerEvent().getAnnotatedType());
+        validateTagHandlerAnnotatedType(ProcessAnnotatedTypeObserver.getTagHandlerEvent());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bg")
     public void testProcessAnnotatedTypeEventFiredForTagLibraryListener() {
         assertNotNull(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent());
-        validateTagLibraryListenerAnnotatedType(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent().getAnnotatedType());
+        validateTagLibraryListenerAnnotatedType(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bj")
     public void testProcessAnnotatedTypeEventFiredForServlet() {
         assertNotNull(ProcessAnnotatedTypeObserver.getServletEvent());
-        validateServletAnnotatedType(ProcessAnnotatedTypeObserver.getServletEvent().getAnnotatedType());
+        validateServletAnnotatedType(ProcessAnnotatedTypeObserver.getServletEvent());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bk")
     public void testProcessAnnotatedTypeEventFiredForFilter() {
         assertNotNull(ProcessAnnotatedTypeObserver.getFilterEvent());
-        validateFilterAnnotatedType(ProcessAnnotatedTypeObserver.getFilterEvent().getAnnotatedType());
+        validateFilterAnnotatedType(ProcessAnnotatedTypeObserver.getFilterEvent());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bd")
     public void testProcessAnnotatedTypeEventFiredForJsfManagedBean() {
         assertNotNull(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent());
-        validateJsfManagedBeanAnnotatedType(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent().getAnnotatedType());
+        validateJsfManagedBeanAnnotatedType(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent());
     }
 
     private void validateServletListenerAnnotatedType(AnnotatedType<TestListener> type) {

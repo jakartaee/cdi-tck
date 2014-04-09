@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -39,7 +39,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author David Allen
  * @author Martin Kouba
  */
@@ -61,14 +61,12 @@ public class ProcessSessionBeanTest extends AbstractTest {
             @SpecAssertion(section = PB, id = "k"), @SpecAssertion(section = BEAN_DISCOVERY, id = "fb") })
     public void testProcessSessionBeanEvent() {
 
-        ProcessSessionBean<Elephant> event = ProcessSessionBeanObserver.getElephantProcessSessionBean();
-
-        assertEquals(event.getBean().getBeanClass(), Elephant.class);
+        assertEquals(ProcessSessionBeanObserver.getElephantBean().getBeanClass(), Elephant.class);
         assertEquals(ProcessSessionBeanObserver.getElephantProcessBeanCount(), 0);
-        assertEquals(event.getEjbName(), "Rosie");
-        assertEquals(event.getSessionBeanType(), SessionBeanType.STATELESS);
-        assertTrue(event.getAnnotated() instanceof AnnotatedType<?>);
-        assertEquals(event.getAnnotatedBeanClass().getBaseType(), Elephant.class);
+        assertEquals(ProcessSessionBeanObserver.getElephantName(), "Rosie");
+        assertEquals(ProcessSessionBeanObserver.getElephantType(), SessionBeanType.STATELESS);
+        assertTrue(ProcessSessionBeanObserver.getElephantAnnotated() instanceof AnnotatedType<?>);
+        assertEquals(ProcessSessionBeanObserver.getElephantAnnotatedType().getBaseType(), Elephant.class);
 
         assertEquals(ProcessSessionBeanObserver.getElephantActionSeq().getData(),
                 Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessSessionBean.class.getName()));
