@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -46,7 +46,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author David Allen
  * @author Martin Kouba
  */
@@ -70,14 +70,12 @@ public class ProcessBeanTest extends AbstractTest {
             @SpecAssertion(section = BEAN_DISCOVERY, id = "fa") })
     public void testProcessBeanEvent() {
 
-        ProcessManagedBean<Cat> event = ProcessBeanObserver.getCatProcessManagedBean();
-
-        assertNotNull(event.getBean());
-        assertEquals(event.getBean().getBeanClass(), Cat.class);
-        assertTrue(annotationSetMatches(event.getBean().getQualifiers(), Domestic.class, Any.class));
-        assertEquals(event.getAnnotatedBeanClass().getBaseType(), Cat.class);
+        assertNotNull(ProcessBeanObserver.getCatBean());
+        assertEquals(ProcessBeanObserver.getCatBean().getBeanClass(), Cat.class);
+        assertTrue(annotationSetMatches(ProcessBeanObserver.getCatBean().getQualifiers(), Domestic.class, Any.class));
+        assertEquals(ProcessBeanObserver.getCatAnnotatedType().getBaseType(), Cat.class);
         assertEquals(ProcessBeanObserver.getCatProcessBeanCount(), 2);
-        assertTrue(ProcessBeanObserver.getCatProcessManagedBean().getAnnotated() instanceof AnnotatedType<?>);
+        assertTrue(ProcessBeanObserver.getCatAnnotated() instanceof AnnotatedType<?>);
 
         assertEquals(ProcessBeanObserver.getCatActionSeq().getData(),
                 Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessManagedBean.class.getName()));
@@ -90,24 +88,22 @@ public class ProcessBeanTest extends AbstractTest {
     @Test
     public void testProcessProducerMethodEvent() {
 
-        ProcessProducerMethod<Cow, Cowshed> event = ProcessBeanObserver.getCowProcessProducerMethod();
-
-        assertTrue(event.getBean().getTypes().contains(Cow.class));
-        assertEquals(event.getBean().getBeanClass(), Cowshed.class);
-        assertEquals(event.getAnnotatedProducerMethod().getBaseType(), Cow.class);
-        assertEquals(event.getAnnotatedProducerMethod().getDeclaringType().getBaseType(), Cowshed.class);
+        assertTrue(ProcessBeanObserver.getCowBean().getTypes().contains(Cow.class));
+        assertEquals(ProcessBeanObserver.getCowBean().getBeanClass(), Cowshed.class);
+        assertEquals(ProcessBeanObserver.getCowMethod().getBaseType(), Cow.class);
+        assertEquals(ProcessBeanObserver.getCowMethod().getDeclaringType().getBaseType(), Cowshed.class);
 
         // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and
         // ProcessProducerMethod
         // https://issues.jboss.org/browse/CDITCK-168
         // https://issues.jboss.org/browse/WELD-586
         assertEquals(ProcessBeanObserver.getCowShedProcessBeanCount(), 2);
-        assertTrue(event.getAnnotated() instanceof AnnotatedMethod<?>);
+        assertTrue(ProcessBeanObserver.getCowAnnotated() instanceof AnnotatedMethod<?>);
 
-        assertEquals(event.getAnnotatedProducerMethod().getJavaMember().getName(), "getDaisy");
-        assertEquals(event.getAnnotatedProducerMethod().getJavaMember().getDeclaringClass(), Cowshed.class);
+        assertEquals(ProcessBeanObserver.getCowMethod().getJavaMember().getName(), "getDaisy");
+        assertEquals(ProcessBeanObserver.getCowMethod().getJavaMember().getDeclaringClass(), Cowshed.class);
 
-        AnnotatedParameter<Cow> disposedParam = event.getAnnotatedDisposedParameter();
+        AnnotatedParameter<Cow> disposedParam = ProcessBeanObserver.getCowParameter();
         assertNotNull(disposedParam);
         assertTrue(disposedParam.isAnnotationPresent(Disposes.class));
         assertEquals(disposedParam.getBaseType(), Cow.class);
@@ -126,24 +122,22 @@ public class ProcessBeanTest extends AbstractTest {
     @Test
     public void testProcessProducerFieldEvent() {
 
-        ProcessProducerField<Chicken, ChickenHutch> event = ProcessBeanObserver.getChickenProcessProducerField();
-
-        assertTrue(event.getBean().getTypes().contains(Chicken.class));
-        assertEquals(event.getBean().getBeanClass(), ChickenHutch.class);
-        assertEquals(event.getAnnotatedProducerField().getBaseType(), Chicken.class);
-        assertEquals(event.getAnnotatedProducerField().getDeclaringType().getBaseType(), ChickenHutch.class);
+        assertTrue(ProcessBeanObserver.getChickenBean().getTypes().contains(Chicken.class));
+        assertEquals(ProcessBeanObserver.getChickenBean().getBeanClass(), ChickenHutch.class);
+        assertEquals(ProcessBeanObserver.getChickenField().getBaseType(), Chicken.class);
+        assertEquals(ProcessBeanObserver.getChickenField().getDeclaringType().getBaseType(), ChickenHutch.class);
 
         // There are bugs in the API that mean generic type parameter ordering is wrong for ProcessProducerField and
         // ProcessProducerMethod
         // https://issues.jboss.org/browse/CDITCK-168
         // https://issues.jboss.org/browse/WELD-586
         assertEquals(ProcessBeanObserver.getChickenHutchProcessBeanCount(), 2);
-        assertTrue(event.getAnnotated() instanceof AnnotatedField<?>);
+        assertTrue(ProcessBeanObserver.getChickedAnnotated() instanceof AnnotatedField<?>);
 
-        assertEquals(event.getAnnotatedProducerField().getJavaMember().getName(), "chicken");
-        assertEquals(event.getAnnotatedProducerField().getJavaMember().getDeclaringClass(), ChickenHutch.class);
+        assertEquals(ProcessBeanObserver.getChickenField().getJavaMember().getName(), "chicken");
+        assertEquals(ProcessBeanObserver.getChickenField().getJavaMember().getDeclaringClass(), ChickenHutch.class);
 
-        AnnotatedParameter<Chicken> disposedParam = event.getAnnotatedDisposedParameter();
+        AnnotatedParameter<Chicken> disposedParam = ProcessBeanObserver.getChickenParameter();
         assertNotNull(disposedParam);
         assertTrue(disposedParam.isAnnotationPresent(Disposes.class));
         assertEquals(disposedParam.getBaseType(), Chicken.class);

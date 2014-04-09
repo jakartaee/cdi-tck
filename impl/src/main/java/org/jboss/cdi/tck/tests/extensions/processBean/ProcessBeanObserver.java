@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,6 +17,12 @@
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.Annotated;
+import javax.enterprise.inject.spi.AnnotatedField;
+import javax.enterprise.inject.spi.AnnotatedMethod;
+import javax.enterprise.inject.spi.AnnotatedParameter;
+import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
@@ -28,15 +34,23 @@ import org.jboss.cdi.tck.util.ActionSequence;
 
 public class ProcessBeanObserver implements Extension {
 
-    private static ProcessManagedBean<Cat> catProcessManagedBean;
+    private static Bean<Cat> catBean;
+    private static AnnotatedType<Cat> catAnnotatedType;
+    private static Annotated catAnnotated;
     private static int catProcessBeanCount;
 
     // https://issues.jboss.org/browse/WELD-586
-    private static ProcessProducerMethod<Cow, Cowshed> cowProcessProducerMethod;
+    private static Bean<Cowshed> cowBean;
+    private static AnnotatedMethod<Cow> cowMethod;
+    private static AnnotatedParameter<Cow> cowParameter;
+    private static Annotated cowAnnotated;
     private static int cowShedProcessBeanCount;
 
     // https://issues.jboss.org/browse/WELD-586
-    private static ProcessProducerField<Chicken, ChickenHutch> chickenProcessProducerField;
+    private static Bean<ChickenHutch> chickenBean;
+    private static AnnotatedField<Chicken> chickenField;
+    private static AnnotatedParameter<Chicken> chickenParameter;
+    private static Annotated chickedAnnotated;
     private static int chickenHutchProcessBeanCount;
 
     private static ActionSequence catActionSeq = new ActionSequence();
@@ -44,7 +58,9 @@ public class ProcessBeanObserver implements Extension {
     private static ActionSequence chickenActionSeq = new ActionSequence();
 
     public void observeCatManagedBean(@Observes ProcessManagedBean<Cat> event) {
-        ProcessBeanObserver.catProcessManagedBean = event;
+        catBean = event.getBean();
+        catAnnotatedType = event.getAnnotatedBeanClass();
+        catAnnotated = event.getAnnotated();
         ProcessBeanObserver.catProcessBeanCount++;
         catActionSeq.add(ProcessManagedBean.class.getName());
     }
@@ -55,11 +71,14 @@ public class ProcessBeanObserver implements Extension {
 
     /**
      * https://issues.jboss.org/browse/WELD-586
-     * 
+     *
      * @param event
      */
     public void observeCowProcessProducerMethod(@Observes ProcessProducerMethod<Cow, Cowshed> event) {
-        ProcessBeanObserver.cowProcessProducerMethod = event;
+        cowBean = event.getBean();
+        cowAnnotated = event.getAnnotated();
+        cowMethod = event.getAnnotatedProducerMethod();
+        cowParameter = event.getAnnotatedDisposedParameter();
         cowActionSeq.add(ProcessProducerMethod.class.getName());
     }
 
@@ -69,11 +88,14 @@ public class ProcessBeanObserver implements Extension {
 
     /**
      * https://issues.jboss.org/browse/WELD-586
-     * 
+     *
      * @param event
      */
     public void observeChickenProcessProducerField(@Observes ProcessProducerField<Chicken, ChickenHutch> event) {
-        ProcessBeanObserver.chickenProcessProducerField = event;
+        chickenBean = event.getBean();
+        chickenField = event.getAnnotatedProducerField();
+        chickenParameter = event.getAnnotatedDisposedParameter();
+        chickedAnnotated = event.getAnnotated();
         chickenActionSeq.add(ProcessProducerField.class.getName());
     }
 
@@ -91,14 +113,6 @@ public class ProcessBeanObserver implements Extension {
 
     public void observeChickenBeanAttributes(@Observes ProcessBeanAttributes<Chicken> event) {
         chickenActionSeq.add(ProcessBeanAttributes.class.getName());
-    }
-
-    public static ProcessManagedBean<Cat> getCatProcessManagedBean() {
-        return catProcessManagedBean;
-    }
-
-    public static ProcessProducerMethod<Cow, Cowshed> getCowProcessProducerMethod() {
-        return cowProcessProducerMethod;
     }
 
     public static int getCatProcessBeanCount() {
@@ -125,13 +139,48 @@ public class ProcessBeanObserver implements Extension {
         return chickenActionSeq;
     }
 
-    /**
-     * https://issues.jboss.org/browse/WELD-586
-     * 
-     * @return
-     */
-    public static ProcessProducerField<Chicken, ChickenHutch> getChickenProcessProducerField() {
-        return chickenProcessProducerField;
+    public static Bean<Cat> getCatBean() {
+        return catBean;
+    }
+
+    public static AnnotatedType<Cat> getCatAnnotatedType() {
+        return catAnnotatedType;
+    }
+
+    public static Annotated getCatAnnotated() {
+        return catAnnotated;
+    }
+
+    public static Bean<Cowshed> getCowBean() {
+        return cowBean;
+    }
+
+    public static AnnotatedMethod<Cow> getCowMethod() {
+        return cowMethod;
+    }
+
+    public static AnnotatedParameter<Cow> getCowParameter() {
+        return cowParameter;
+    }
+
+    public static Annotated getCowAnnotated() {
+        return cowAnnotated;
+    }
+
+    public static AnnotatedField<Chicken> getChickenField() {
+        return chickenField;
+    }
+
+    public static AnnotatedParameter<Chicken> getChickenParameter() {
+        return chickenParameter;
+    }
+
+    public static Annotated getChickedAnnotated() {
+        return chickedAnnotated;
+    }
+
+    public static Bean<ChickenHutch> getChickenBean() {
+        return chickenBean;
     }
 
 }

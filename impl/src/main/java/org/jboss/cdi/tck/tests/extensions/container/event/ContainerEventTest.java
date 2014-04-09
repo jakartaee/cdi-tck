@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
 
 /**
  * Tests for ProcessAnnotatedType, ProcessBean and ProcessInjectionTarget events.
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -59,84 +59,84 @@ public class ContainerEventTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "da"), @SpecAssertion(section = PIT, id = "aaa") })
     public void testProcessInjectionTargetFiredForManagedBean() {
-        assert ProcessInjectionTargetObserver.getManagedBeanEvent() != null;
-        validateManagedBean(ProcessInjectionTargetObserver.getManagedBeanEvent().getAnnotatedType());
+        assert ProcessInjectionTargetObserver.getManagedBeanType() != null;
+        validateManagedBean(ProcessInjectionTargetObserver.getManagedBeanType());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PIT, id = "aab"), @SpecAssertion(section = PIT, id = "abb"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "db") })
     public void testProcessInjectionTargetFiredForSessionBean() {
-        assert ProcessInjectionTargetObserver.getStatelessSessionBeanEvent() != null;
-        assert ProcessInjectionTargetObserver.getStatefulSessionBeanEvent() != null;
-        validateStatelessSessionBean(ProcessInjectionTargetObserver.getStatelessSessionBeanEvent().getAnnotatedType());
-        validateStatefulSessionBean(ProcessInjectionTargetObserver.getStatefulSessionBeanEvent().getAnnotatedType());
+        assert ProcessInjectionTargetObserver.getStatelessSessionBeanType() != null;
+        assert ProcessInjectionTargetObserver.getStatefulSessionBeanType() != null;
+        validateStatelessSessionBean(ProcessInjectionTargetObserver.getStatelessSessionBeanType());
+        validateStatefulSessionBean(ProcessInjectionTargetObserver.getStatefulSessionBeanType());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PIT, id = "aaf"), @SpecAssertion(section = PIT, id = "abf"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "dh") })
     public void testProcessInjectionTargetFiredForSessionBeanInterceptor() {
-        assert ProcessInjectionTargetObserver.getSessionBeanInterceptorEvent() != null;
-        validateSessionBeanInterceptor(ProcessInjectionTargetObserver.getSessionBeanInterceptorEvent().getAnnotatedType());
+        assert ProcessInjectionTargetObserver.getSessionBeanInterceptorType() != null;
+        validateSessionBeanInterceptor(ProcessInjectionTargetObserver.getSessionBeanInterceptorType());
     }
 
     @Test
     @SpecAssertion(section = BEAN_DISCOVERY, id = "ba")
     public void testProcessAnnotatedTypeFiredForManagedBean() {
-        assert ProcessAnnotatedTypeObserver.getManagedBeanEvent() != null;
-        validateManagedBean(ProcessAnnotatedTypeObserver.getManagedBeanEvent().getAnnotatedType());
+        assert ProcessAnnotatedTypeObserver.getManagedBeanType() != null;
+        validateManagedBean(ProcessAnnotatedTypeObserver.getManagedBeanType());
     }
 
     @Test
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bb")
     public void testProcessAnnotatedTypeFiredForSessionBean() {
-        assert ProcessAnnotatedTypeObserver.getStatelessSessionBeanEvent() != null;
-        assert ProcessAnnotatedTypeObserver.getStatefulSessionBeanEvent() != null;
-        validateStatelessSessionBean(ProcessAnnotatedTypeObserver.getStatelessSessionBeanEvent().getAnnotatedType());
-        validateStatefulSessionBean(ProcessAnnotatedTypeObserver.getStatefulSessionBeanEvent().getAnnotatedType());
+        assert ProcessAnnotatedTypeObserver.getStatelessSessionBeanType() != null;
+        assert ProcessAnnotatedTypeObserver.getStatefulSessionBeanType() != null;
+        validateStatelessSessionBean(ProcessAnnotatedTypeObserver.getStatelessSessionBeanType());
+        validateStatefulSessionBean(ProcessAnnotatedTypeObserver.getStatefulSessionBeanType());
     }
 
     @Test
     @SpecAssertion(section = BEAN_DISCOVERY, id = "bh")
     public void testProcessAnnotatedTypeFiredForSessionBeanInterceptor() {
-        assert ProcessAnnotatedTypeObserver.getSessionBeanInterceptorEvent() != null;
-        validateSessionBeanInterceptor(ProcessAnnotatedTypeObserver.getSessionBeanInterceptorEvent().getAnnotatedType());
+        assert ProcessAnnotatedTypeObserver.getSessionBeanInterceptorType() != null;
+        validateSessionBeanInterceptor(ProcessAnnotatedTypeObserver.getSessionBeanInterceptorType());
     }
 
     @Test
     @SpecAssertion(section = PB, id = "ba")
     public void testProcessManagedBeanFired() {
-        assert ProcessBeanObserver.getProcessManagedBeanEvent() != null;
-        validateManagedBean(ProcessBeanObserver.getProcessManagedBeanEvent().getAnnotatedBeanClass());
+        assert ProcessBeanObserver.getProcessManagedBeanType() != null;
+        validateManagedBean(ProcessBeanObserver.getProcessManagedBeanType());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PB, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "fb") })
     public void testProcessSessionBeanFiredForStatelessSessionBean() {
-        assert ProcessBeanObserver.getProcessStatelessSessionBeanEvent() != null;
-        validateStatelessSessionBean(ProcessBeanObserver.getProcessStatelessSessionBeanEvent().getAnnotatedBeanClass());
+        assert ProcessBeanObserver.getProcessStatelessSessionBeanAnnotatedType() != null;
+        validateStatelessSessionBean(ProcessBeanObserver.getProcessStatelessSessionBeanAnnotatedType());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PB, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "fb") })
     public void testProcessSessionBeanFiredForStatefulSessionBean() {
-        assert ProcessBeanObserver.getProcessStatefulSessionBeanEvent() != null;
-        validateStatefulSessionBean(ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getAnnotatedBeanClass());
+        assert ProcessBeanObserver.getProcessStatefulSessionBeanAnnotatedType() != null;
+        validateStatefulSessionBean(ProcessBeanObserver.getProcessStatefulSessionBeanAnnotatedType());
     }
 
     @Test
     @SpecAssertion(section = PB, id = "hb")
     public void testGetEJBName() {
-        assert ProcessBeanObserver.getProcessStatelessSessionBeanEvent().getEjbName().equals("sheep");
-        assert ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getEjbName().equals("cow");
+        assert ProcessBeanObserver.getProcessStatelessSessionBeanName().equals("sheep");
+        assert ProcessBeanObserver.getProcessStatefulSessionBeanName().equals("cow");
     }
 
     @Test
     @SpecAssertion(section = PB, id = "hc")
     public void testGetSessionBeanType() {
-        assert ProcessBeanObserver.getProcessStatelessSessionBeanEvent().getSessionBeanType().equals(STATELESS);
-        assert ProcessBeanObserver.getProcessStatefulSessionBeanEvent().getSessionBeanType().equals(STATEFUL);
+        assert ProcessBeanObserver.getProcessStatelessSessionBeanType().equals(STATELESS);
+        assert ProcessBeanObserver.getProcessStatefulSessionBeanType().equals(STATEFUL);
     }
 
     private void validateStatelessSessionBean(Annotated type) {

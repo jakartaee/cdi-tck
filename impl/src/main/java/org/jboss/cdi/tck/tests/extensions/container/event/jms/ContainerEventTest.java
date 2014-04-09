@@ -28,7 +28,6 @@ import static org.testng.Assert.fail;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
-import javax.enterprise.inject.spi.ProcessInjectionTarget;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -71,10 +70,9 @@ public class ContainerEventTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PIT, id = "aaba"), @SpecAssertion(section = PIT, id = "abba") })
     public void testProcessInjectionTargetEventFiredForMessageDrivenBean() {
 
-        ProcessInjectionTarget<QueueMessageDrivenBean> event = ProcessInjectionTargetObserver.getMdbEvent();
+        AnnotatedType<QueueMessageDrivenBean> annotatedType = ProcessInjectionTargetObserver.getMdbType();
 
-        assertNotNull(event);
-        AnnotatedType<QueueMessageDrivenBean> annotatedType = event.getAnnotatedType();
+        assertNotNull(annotatedType);
         assertEquals(annotatedType.getBaseType(), QueueMessageDrivenBean.class);
 
         // Methods initialize() and onMessage()

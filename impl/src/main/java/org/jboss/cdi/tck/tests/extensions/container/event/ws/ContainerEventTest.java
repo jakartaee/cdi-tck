@@ -57,15 +57,15 @@ public class ContainerEventTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PIT, id = "aag"), @SpecAssertion(section = PIT, id = "abg"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "di") })
     public void testProcessInjectionTargetFiredForWsEndpoint() {
-        assertNotNull(ProcessInjectionTargetObserver.getWsEndpointEvent());
-        validateWsEndpointAnnotatedType(ProcessInjectionTargetObserver.getWsEndpointEvent().getAnnotatedType());
+        assertNotNull(ProcessInjectionTargetObserver.getWsEndpointType());
+        validateWsEndpointAnnotatedType(ProcessInjectionTargetObserver.getWsEndpointType());
     }
 
     @Test(groups = {JAVAEE_FULL, JAX_WS})
     @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "bi") })
     public void testProcessAnnotatedTypeFiredForWsEndpoint() {
-        assertNotNull(ProcessAnnotatedTypeObserver.getWsEndpointEvent());
-        validateWsEndpointAnnotatedType(ProcessAnnotatedTypeObserver.getWsEndpointEvent().getAnnotatedType());
+        assertNotNull(ProcessAnnotatedTypeObserver.getWsEndpointType());
+        validateWsEndpointAnnotatedType(ProcessAnnotatedTypeObserver.getWsEndpointType());
     }
 
     private void validateWsEndpointAnnotatedType(AnnotatedType<TranslatorEndpoint> annotatedType) {
