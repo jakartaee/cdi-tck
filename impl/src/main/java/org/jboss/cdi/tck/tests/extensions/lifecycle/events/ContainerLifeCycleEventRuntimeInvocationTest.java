@@ -56,7 +56,7 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(ContainerLifeCycleEventRuntimeInvocationTest.class)
-                .withClasses(TestExtension.class, SimpleAnnotation.class, SimpleBean.class).withExtension(TestExtension.class)
+                .withClasses(TestExtension.class, SimpleAnnotation.class, SimpleBean.class, SessionBean.class).withExtension(TestExtension.class)
                 .build();
     }
 
@@ -66,7 +66,6 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
         final BeforeBeanDiscovery event = extension.getBeforeBeanDiscovery();
         final AnnotatedType<?> type = beanManager.createAnnotatedType(ContainerLifeCycleEventRuntimeInvocationTest.class);
         final AnnotatedType<? extends Annotation> annotation = beanManager.createAnnotatedType(SimpleAnnotation.class);
-
 
         new Invocation() {
             void execute() {
@@ -207,12 +206,186 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
     }
 
     @Test
+    @SpecAssertions({@SpecAssertion(section = PAT, id = "f")})
+    public void testProcessSyntheticAnnotatedTypeEventFails() {
+        final ProcessSyntheticAnnotatedType<SimpleBean> event = extension.getProcessSyntheticAnnotatedType();
+        final AnnotatedType<SimpleBean> type = beanManager.createAnnotatedType(SimpleBean.class);
+        new Invocation() {
+            void execute() {
+                event.getAnnotatedType();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getSource();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.setAnnotatedType(type);
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.veto();
+            }
+        }.run();
+    }
+
+    @Test
     @SpecAssertions({@SpecAssertion(section = PB, id = "o")})
     public void testProcessBeanEventFails() {
         final ProcessBean<SimpleBean> event = extension.getProcessBean();
         new Invocation() {
             void execute() {
                 event.getAnnotated();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.addDefinitionError(new NullPointerException());
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getBean();
+            }
+        }.run();
+
+    }
+
+    @Test
+    @SpecAssertions({@SpecAssertion(section = PB, id = "o")})
+    public void testProcessManagedBeanEventFails() {
+        final ProcessManagedBean<SimpleBean> event = extension.getProcessManagedBean();
+        new Invocation() {
+            void execute() {
+                event.getAnnotated();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getAnnotatedBeanClass();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.addDefinitionError(new NullPointerException());
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getBean();
+            }
+        }.run();
+
+    }
+
+    @Test
+    @SpecAssertions({@SpecAssertion(section = PB, id = "o")})
+    public void testProcessSessionBeanEventFails() {
+        final ProcessSessionBean<SessionBean> event = extension.getProcessSessionBean();
+        new Invocation() {
+            void execute() {
+                event.getAnnotated();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getAnnotatedBeanClass();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getEjbName();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getSessionBeanType();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.addDefinitionError(new NullPointerException());
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getBean();
+            }
+        }.run();
+
+    }
+
+    @Test
+    @SpecAssertions({@SpecAssertion(section = PB, id = "o")})
+    public void testProcessProducerMethodEventFails() {
+        final ProcessProducerMethod<Integer, SimpleBean> event = extension.getProcessProducerMethod();
+        new Invocation() {
+            void execute() {
+                event.getAnnotated();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getAnnotatedProducerMethod();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getAnnotatedDisposedParameter();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.addDefinitionError(new NullPointerException());
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getBean();
+            }
+        }.run();
+
+    }
+
+    @Test
+    @SpecAssertions({@SpecAssertion(section = PB, id = "o")})
+    public void testProcessProducerFieldEventFails() {
+        final ProcessProducerField<Integer, SimpleBean> event = extension.getProcessProducerField();
+        new Invocation() {
+            void execute() {
+                event.getAnnotated();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getAnnotatedProducerField();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.getAnnotatedDisposedParameter();
             }
         }.run();
 

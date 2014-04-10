@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.events;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.*;
+
 import static org.testng.Assert.fail;
 
 public class TestExtension implements Extension {
@@ -26,20 +27,30 @@ public class TestExtension implements Extension {
     private AfterTypeDiscovery atd;
     private AfterBeanDiscovery abd;
     private ProcessAnnotatedType<SimpleBean> pat;
+    private ProcessSyntheticAnnotatedType<SimpleBean> psat;
     private AfterDeploymentValidation adv;
     private ProcessBean<SimpleBean> pb;
     private ProcessBeanAttributes<SimpleBean> pba;
     private ProcessObserverMethod<SimpleBean, ?> pom;
     private ProcessInjectionTarget<SimpleBean> pit;
-    private ProcessInjectionPoint<SimpleBean,?> pip;
-    private ProcessProducer<SimpleBean,Integer> pp;
+    private ProcessInjectionPoint<SimpleBean, ?> pip;
+    private ProcessProducer<SimpleBean, Integer> pp;
+    private ProcessManagedBean<SimpleBean> pmb;
+    private ProcessSessionBean<SessionBean> psb;
+    private ProcessProducerField<Integer,SimpleBean> ppf;
+    private ProcessProducerMethod<Integer,SimpleBean> ppm;
 
-    void observesBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event) {
+    void observesBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager bm) {
         this.bbd = event;
+        bbd.addAnnotatedType(bm.createAnnotatedType(SimpleBean.class));
     }
 
     void observesProcessAnnotatedType(@Observes ProcessAnnotatedType<SimpleBean> event) {
         this.pat = event;
+    }
+
+    void observesProcessSyntheticAnnotatedType(@Observes ProcessSyntheticAnnotatedType<SimpleBean> event) {
+        this.psat = event;
     }
 
     void observesAfterTypeDiscovery(@Observes AfterTypeDiscovery event) {
@@ -50,11 +61,11 @@ public class TestExtension implements Extension {
         this.pit = event;
     }
 
-    void observesProcessProducer(@Observes ProcessProducer<SimpleBean,Integer> event) {
+    void observesProcessProducer(@Observes ProcessProducer<SimpleBean, Integer> event) {
         this.pp = event;
     }
 
-    void observesProcessInjectionPoint(@Observes ProcessInjectionPoint<SimpleBean,?> event) {
+    void observesProcessInjectionPoint(@Observes ProcessInjectionPoint<SimpleBean, ?> event) {
         this.pip = event;
     }
 
@@ -79,6 +90,22 @@ public class TestExtension implements Extension {
         } catch (IllegalStateException expected) {
         }
 
+    }
+
+    void observesProcessManagedBean(@Observes ProcessManagedBean<SimpleBean> event) {
+        this.pmb = event;
+    }
+
+    void observesProcessSessionBean(@Observes ProcessSessionBean<SessionBean> event) {
+        this.psb = event;
+    }
+
+    void observesProcessProducerField(@Observes ProcessProducerField<Integer,SimpleBean> event) {
+        this.ppf = event;
+    }
+
+    void observesProcessSessionBean(@Observes ProcessProducerMethod<Integer,SimpleBean> event) {
+        this.ppm = event;
     }
 
     void observesProcessObserverMethod(@Observes ProcessObserverMethod<SimpleBean, ?> event) {
@@ -117,6 +144,10 @@ public class TestExtension implements Extension {
         return pat;
     }
 
+    public ProcessSyntheticAnnotatedType<SimpleBean> getProcessSyntheticAnnotatedType() {
+        return psat;
+    }
+
     public ProcessBeanAttributes<SimpleBean> getProcessBeanAttributes() {
         return pba;
     }
@@ -129,12 +160,28 @@ public class TestExtension implements Extension {
         return pit;
     }
 
-    public ProcessInjectionPoint<SimpleBean,?> getProcessInjectionPoint() {
+    public ProcessInjectionPoint<SimpleBean, ?> getProcessInjectionPoint() {
         return pip;
     }
 
-    public ProcessProducer<SimpleBean,Integer> getProcessProducer() {
+    public ProcessProducer<SimpleBean, Integer> getProcessProducer() {
         return pp;
+    }
+
+    public ProcessManagedBean<SimpleBean> getProcessManagedBean() {
+        return pmb;
+    }
+
+    public ProcessSessionBean<SessionBean> getProcessSessionBean() {
+        return psb;
+    }
+
+    public ProcessProducerField<Integer,SimpleBean> getProcessProducerField() {
+        return ppf;
+    }
+
+    public ProcessProducerMethod<Integer,SimpleBean> getProcessProducerMethod() {
+        return ppm;
     }
 
 }
