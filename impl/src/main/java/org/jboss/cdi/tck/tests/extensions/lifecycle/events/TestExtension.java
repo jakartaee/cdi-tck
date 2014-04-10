@@ -16,10 +16,27 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.events;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.*;
-
 import static org.testng.Assert.fail;
+
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.AfterBeanDiscovery;
+import javax.enterprise.inject.spi.AfterDeploymentValidation;
+import javax.enterprise.inject.spi.AfterTypeDiscovery;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.BeforeBeanDiscovery;
+import javax.enterprise.inject.spi.Extension;
+import javax.enterprise.inject.spi.ProcessAnnotatedType;
+import javax.enterprise.inject.spi.ProcessBean;
+import javax.enterprise.inject.spi.ProcessBeanAttributes;
+import javax.enterprise.inject.spi.ProcessInjectionPoint;
+import javax.enterprise.inject.spi.ProcessInjectionTarget;
+import javax.enterprise.inject.spi.ProcessManagedBean;
+import javax.enterprise.inject.spi.ProcessObserverMethod;
+import javax.enterprise.inject.spi.ProcessProducer;
+import javax.enterprise.inject.spi.ProcessProducerField;
+import javax.enterprise.inject.spi.ProcessProducerMethod;
+import javax.enterprise.inject.spi.ProcessSessionBean;
+import javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
 
 public class TestExtension implements Extension {
 
@@ -42,11 +59,13 @@ public class TestExtension implements Extension {
 
     void observesBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager bm) {
         this.bbd = event;
-        bbd.addAnnotatedType(bm.createAnnotatedType(SimpleBean.class));
+        bbd.addAnnotatedType(bm.createAnnotatedType(SimpleBean.class), TestExtension.class.getName() + ":" + SimpleBean.class.getName());
     }
 
     void observesProcessAnnotatedType(@Observes ProcessAnnotatedType<SimpleBean> event) {
-        this.pat = event;
+        if (!(event instanceof ProcessSyntheticAnnotatedType<?>)) {
+            this.pat = event;
+        }
     }
 
     void observesProcessSyntheticAnnotatedType(@Observes ProcessSyntheticAnnotatedType<SimpleBean> event) {
@@ -77,9 +96,8 @@ public class TestExtension implements Extension {
     void observesProcessBean(@Observes ProcessBean<SimpleBean> event, BeanManager bm) {
 
         this.pb = event;
-        AnnotatedType<SimpleBean> local = null;
         try {
-            local = pat.getAnnotatedType();
+            pat.getAnnotatedType();
             fail("Expected exception not thrown");
         } catch (IllegalStateException expected) {
         }
