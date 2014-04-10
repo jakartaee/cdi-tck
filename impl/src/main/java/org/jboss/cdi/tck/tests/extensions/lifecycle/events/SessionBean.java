@@ -16,28 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.events;
 
-import javax.enterprise.context.Conversation;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
+import javax.ejb.Stateless;
 
-public class SimpleBean {
+/**
+ * @author Tomas Remes
+ */
 
-    @Inject
-    Conversation conversation;
-
-    @Produces
-    public Integer numberOfNumbers = new Integer(13);
-
-
-    @Produces
-    public Integer create(){
-        return new Integer(0);
-    }
-
-
-    // we need some observer for this bean just for test purposes
-    public void dummyObserver(@Observes SimpleBean bean){
-    }
-
+@Stateless
+public class SessionBean {
 }
