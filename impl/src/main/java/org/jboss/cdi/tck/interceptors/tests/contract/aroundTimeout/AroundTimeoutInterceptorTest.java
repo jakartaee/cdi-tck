@@ -63,7 +63,8 @@ public class AroundTimeoutInterceptorTest extends AbstractTest {
                 "Around-timeout method invocation did NOT occur within the same transaction context as the timeout method on which it is interposing");
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
+    // test disabled due to WFLY-2654
+    @Test(enabled = false, dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = "2.7", id = "d"), @SpecAssertion(section = "2.7", id = "eb") })
     public void testSecurityContext(Student student) throws Exception {
         student.sleep();
