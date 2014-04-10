@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,13 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
+import javax.ejb.Remote;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 
-@WebService(name = "TranslatorPortType", targetNamespace = "http://contextual.non.injection.lookup.tests.tck.cdi.jboss.org/")
+@SOAPBinding(style = SOAPBinding.Style.RPC)
+@Remote
+@WebService(targetNamespace = "http://www.something.something")
 public interface Translator {
 
-    @WebMethod
-	public String translate(@WebParam String sentence);
+    public String translate(String sentence);
 }

@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -24,21 +24,25 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 
+@WebFilter("/TestFilter2")
 public class TestFilter2 implements Filter {
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorEndpointService.class, wsdlLocation = "WEB-INF/wsdl/TestService.wsdl")
     Translator translatorField;
 
     Translator translator;
 
     static boolean initCalledAfterWSResourceInjection = false;
 
+    @Override
     public void destroy() {
     }
 
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException {
         HttpServletResponse resp = (HttpServletResponse) response;
@@ -51,11 +55,12 @@ public class TestFilter2 implements Filter {
         }
     }
 
+    @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         initCalledAfterWSResourceInjection = translator != null & translatorField != null;
     }
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorEndpointService.class, wsdlLocation = "WEB-INF/wsdl/TestService.wsdl")
     private void setTranslator(Translator translator) {
         this.translator = translator;
     }

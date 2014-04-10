@@ -1,0 +1,37 @@
+<definitions name='TranslatorEndpointService' targetNamespace='http://www.something.something'
+             xmlns='http://schemas.xmlsoap.org/wsdl/'
+             xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+             xmlns:tns='http://www.something.something'
+             xmlns:xsd='http://www.w3.org/2001/XMLSchema'>
+    <types></types>
+    <message name='Translator_translateResponse'>
+        <part name='return' type='xsd:string'></part>
+    </message>
+    <message name='Translator_translate'>
+        <part name='arg0' type='xsd:string'></part>
+    </message>
+    <portType name='Translator'>
+
+        <operation name='translate' parameterOrder='arg0'>
+            <input message='tns:Translator_translate'></input>
+            <output message='tns:Translator_translateResponse'></output>
+        </operation>
+    </portType>
+    <binding name='TranslatorBinding' type='tns:Translator'>
+        <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
+        <operation name='translate'>
+            <soap:operation soapAction=''/>
+            <input>
+                <soap:body namespace='http://www.something.something' use='literal'/>
+            </input>
+            <output>
+                <soap:body namespace='http://www.something.something' use='literal'/>
+            </output>
+        </operation>
+    </binding>
+    <service name='Translator'>
+        <port binding='tns:TranslatorBinding' name='TranslatorPort'>
+            <soap:address location='http://localhost:8080/ws-injection-into-non-contextual/Translator/Translator'/>
+        </port>
+    </service>
+</definitions>

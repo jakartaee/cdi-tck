@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -23,16 +23,18 @@ import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
 
-@WebServiceClient(name = "Translator", targetNamespace = "http://contextual.non.injection.lookup.tests.tck.cdi.jboss.org/")
+@WebServiceClient(name = "Translator", targetNamespace = "http://www.something.something")
 public class TranslatorEndpointService extends Service {
+
+    private final static QName ENDPOINT_PORT = new QName("http://www.something.something", "TranslatorPort");
 
     public TranslatorEndpointService(URL wsdlDocumentLocation, QName serviceName) {
         super(wsdlDocumentLocation, serviceName);
     }
-    
+
     @WebEndpoint(name="TranslatorPort")
     public Translator getTranslatorPort() {
-        return super.getPort(Translator.class);
+        return super.getPort(ENDPOINT_PORT, Translator.class);
     }
 
 }
