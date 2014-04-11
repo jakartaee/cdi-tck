@@ -83,7 +83,7 @@
 
 	<properties>
 		<!-- CDI API -->
-		<cdi.api.version>1.1</cdi.api.version>
+		<cdi.api.version>1.2</cdi.api.version>
 		<!-- JBoss EE APIs -->
 		<jboss.ejb.api.version>1.0.0.Final</jboss.ejb.api.version>
 		<jboss.jms.api.version>1.0.0.Final</jboss.jms.api.version>
