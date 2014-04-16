@@ -7838,30 +7838,23 @@
         </assertion>
 
         <assertion id="i">
-            <text>Next, the container must perform type discovery. Additionally, for every type discovered the container must fire an event of type |ProcessAnnotatedType|, as defined in Section 11.5.7.</text>
+            <text>Next, the container must perform type discovery, as defined in Section 12.4.1, “Type discovery”</text>
         </assertion>
 
         <assertion id="j">
-            <text>Next, the container must fire an event of type |AfterTypeDiscovery|, as defined in Section 11.5.2.</text>
+            <text>Next, the container must fire an event of type |AfterTypeDiscovery|, as defined in Section 11.5.2., "AfterTypeDiscovery event".</text>
         </assertion>
 
-        <group>
-            <text>Next, the container must perform bean discovery, and abort initialization of the application if any definition errors exist, as defined in Section 2.8, "Problems detected automatically by the container". Additionally, for every Java EE component class supporting injection that may be instantiated by the container at runtime, the container must create an |InjectionTarget| for the class, as defined in 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type ProcessInjectionTarget, as defined in Section 11.5.6, "ProcessInjectionTarget event".</text>
-
-            <assertion id="da">
-                <text>Check beans are discovered.</text>
-            </assertion>
-            <assertion id="db">
-                <text>Check definitions error occurs.</text>
-            </assertion>
-        </group>
+        <assertion id="ja">
+            <text>Next, the container must perform bean discovery, as defined in Section 12.4.3, “Bean discovery”</text>
+        </assertion>
 
         <assertion id="e">
             <text>Next, the container must fire an event of type |AfterBeanDiscovery|, as defined in Section 11.5.2, "AfterBeanDiscovery event", and abort initialization of the application if any observer registers a definition error.</text>
         </assertion>
 
         <assertion id="f">
-            <text>Next, the container must detect deployment problems by validating bean dependencies and specialization and abort initialization of the application if any deployment problems exist, as defined in Section 2.8, "Problems detected automatically by the container".</text>
+            <text>Next, the container must detect deployment problems by validating bean dependencies and specialization and abort initialization of the application if any deployment problems exist, as defined in Section 2.9, "Problems detected automatically by the container".</text>
         </assertion>
 
         <assertion id="g">

@@ -59,7 +59,7 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INITIALIZATION, id = "b"), @SpecAssertion(section = INITIALIZATION, id = "c"),
-            @SpecAssertion(section = INITIALIZATION, id = "da"), @SpecAssertion(section = INITIALIZATION, id = "f"),
+            @SpecAssertion(section = INITIALIZATION, id = "ja"), @SpecAssertion(section = INITIALIZATION, id = "f"),
             @SpecAssertion(section = INITIALIZATION, id = "g"), @SpecAssertion(section = INITIALIZATION, id = "h"),
             @SpecAssertion(section = INITIALIZATION, id = "i"), @SpecAssertion(section = INITIALIZATION, id = "j") })
     public void testInitialization() {
