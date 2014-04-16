@@ -159,7 +159,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = CONCEPTS, id = "g"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "b"),
-            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "k"), @SpecAssertion(section = INITIALIZATION, id = "da") })
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "k"), @SpecAssertion(section = INITIALIZATION, id = "ja") })
     public void testManagedBean() {
         assert getBeans(RedSnapper.class).size() == 1;
         assert getContextualReference(RedSnapper.class) instanceof RedSnapper;
