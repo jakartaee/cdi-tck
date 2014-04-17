@@ -10,9 +10,9 @@
       <title>Obtaining the Software</title>
       <para>
          You can obtain a release of the CDI TCK project from the
-         <ulink url="http://http://www.cdi-spec.org/download/">download page</ulink>
+         <ulink url="http://www.cdi-spec.org/download/">download page</ulink>
          on the CDI specification website.
-         The release stream for JSR 346 is named <emphasis>1.1.x</emphasis>.
+         The release stream for JSR 346 is named <emphasis>1.2.x</emphasis>.
          The CDI TCK is distributed as a ZIP file,
          which contains the TCK artifacts (the test suite binary and source,
          porting package API binary and source, the test suite configuration file, the
@@ -123,7 +123,7 @@
 
 		<itemizedlist>
 			<listitem>
-                <para>First, you should download WildFly 8.x from the WildFly <ulink url="http://www.wildfly.org/download/">project page</ulink>.</para>
+                <para>First, you should download WildFly 8.x from the WildFly <ulink url="http://www.wildfly.org/downloads/">project page</ulink>.</para>
 			</listitem>
 			<listitem>
 				<para>
@@ -144,7 +144,7 @@
                   You need to install Maven. You can find documentation on how to
                   install Maven in the
                   <ulink
-                     url="http://www.sonatype.com/books/maven-book/reference/installation-sect-maven-install.html">Maven: The Definitive Guide</ulink>
+                     url="http://books.sonatype.com/mvnref-book/reference/installation.html">Maven: The Definitive Guide</ulink>
                   book published by Sonatype.
                </para>
             </listitem>

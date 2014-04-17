@@ -162,7 +162,7 @@
             <listitem>
                <para>
                   <emphasis role="bold">Testing platform</emphasis>
-                  - The CDI TCK requires version 1.0.2.Final of the Arquillian
+                  - The CDI TCK requires version 1.1.2.Final of the Arquillian
                   (<ulink url="http://arquillian.org">http://arquillian.org</ulink>).
                   The TCK test suite is based on TestNG 6.x
                   (<ulink url="http://testng.org">http://testng.org</ulink>).
@@ -174,7 +174,7 @@
                   <emphasis role="bold">Porting Package</emphasis>
                   - An implementation of SPIs that are required for the test
                   suite to run the in-container tests and at times extend the
-                  CDI 1.1 API to provide extra information to the TCK.
+                  CDI 1.2 API to provide extra information to the TCK.
                </para>
             </listitem>
             <listitem>
@@ -188,7 +188,7 @@
             <listitem>
                <para>
                   <emphasis role="bold">Reference runtime</emphasis>
-                  - The designated reference runtimes for compatibility testing
+                  - The designated reference runtime for compatibility testing
                   of the CDI specification is the Oracle Java Platform, Enterprise
                   Edition (Java EE) 7 reference implementation (RI).
                </para>
@@ -216,7 +216,7 @@
          <itemizedlist>
             <listitem>
                <para>
-                  <emphasis role="bold">Arquillian 1.0.3.Final</emphasis>
+                  <emphasis role="bold">Arquillian 1.1.2.Final</emphasis>
                </para>
             </listitem>
             <listitem>
@@ -270,7 +270,7 @@
                Implementation .
             </para>
          </note>
-         <para>The CDI TCK has been tested run on following platforms:</para>
+         <para>The CDI TCK has been tested on following platforms:</para>
          <itemizedlist>
             <listitem>
                <para>

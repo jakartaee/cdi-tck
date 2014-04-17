@@ -109,7 +109,7 @@
       <para>
          Periodically, an updated TCK will be released, containing tests altered
          due to challenges - no new tests will be added. Implementations are
-         required to pass the updated TCK. This release stream is named 1.1.x, where
+         required to pass the updated TCK. This release stream is named 1.2.x, where
          x will be incremented.
       </para>
       <para>

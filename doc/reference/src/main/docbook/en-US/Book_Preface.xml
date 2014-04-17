@@ -11,7 +11,7 @@
    </para>
    <para>
       The CDI TCK is built atop TestNG framework and Arquillian platform. The CDI TCK uses 
-      the Arquillian version <emphasis>1.0.3.Final</emphasis> to execute the test suite.
+      the Arquillian version <emphasis>1.1.2.Final</emphasis> to execute the test suite.
    </para>
 
    <para>
@@ -81,7 +81,7 @@
          <listitem>
             <para>
                <xref linkend="appeals-process" />
-               explains the process to be followed by an implementor should they
+               explains the process to be followed by an implementor, who
                wish to challenge any test in the TCK.
             </para>
          </listitem>
@@ -127,7 +127,7 @@
          </listitem>
          <listitem>
             <para>
-               <xref linkend="eclipse-debugging" />
+               <xref linkend="eclipse-debugging" /> 
                builds on
                <xref linkend="eclipse-running" />
                by detailing how to debug individual tests in Eclipse.

@@ -112,7 +112,7 @@
         however it's very useful for container configuration. See an example configuration for JBoss TCK runner:
       </para>
       <programlisting>
-        weld/jboss-tck-runner/src/test/jbossas7/arquillian.xml
+        weld/jboss-tck-runner/src/test/wildfly/arquillian.xml
       </programlisting>
    </section>
    <section id="porting-package">
@@ -189,8 +189,8 @@
       </para>
       <note>
          <para>
-            The canonical configuration file for CDI TCK 1.1.x is located at <ulink
-         url="https://github.com/cdi-spec/cdi-tck/blob/1.1/impl/src/main/resources/tck-tests.xml">https://github.com/cdi-spec/cdi-tck/blob/1.1/impl/src/main/resources/tck-tests.xml</ulink>.
+            The canonical configuration file for CDI TCK is located at <ulink
+         url="https://github.com/cdi-spec/cdi-tck/blob/master/impl/src/main/resources/tck-tests.xml">https://github.com/cdi-spec/cdi-tck/blob/master/impl/src/main/resources/tck-tests.xml</ulink>.
          </para>
       </note>
       <para>
@@ -233,7 +233,7 @@
          The TCK makes use of the Java 1.4 keyword <literal>assert</literal>; you
          must ensure that the JVM used to run the application server is started
          with assertions enabled. See
-         <ulink url="http://java.sun.com/j2se/1.4.2/docs/guide/lang/assert.html#enable-disable">Programming With Assertions</ulink>
+         <ulink url="http://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html#enable-disable">Programming With Assertions</ulink>
          for more information on how to enable assertions.
       </para>
       <para>

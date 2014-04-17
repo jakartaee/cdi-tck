@@ -245,7 +245,7 @@ Weld JBoss TCK Runner
       </para>
       <tip>
         <para>
-            If using m2e Eclipse plugin, you can activate/deactivate the profile in Maven section of project propeties.
+            If using m2e Eclipse plugin, you can activate/deactivate the profile in Maven section of project properties.
         </para>
       </tip>
       <note>
