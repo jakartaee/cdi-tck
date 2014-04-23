@@ -39,20 +39,18 @@ public class ConditionalObserverTest extends AbstractJSR299Test
    } )
    public void testConditionalObserver()
    {
-      RecluseSpider.reset();
       getCurrentManager().fireEvent(new ConditionalEvent());
       // Should not be notified since bean is not instantiated yet
-      assert !RecluseSpider.isNotified();
+      assert !WidowSpider.isNotified();
 
       // Now instantiate the bean and fire another event
-      RecluseSpider bean = getInstanceByType(RecluseSpider.class);
+       WidowSpider bean = getInstanceByType(WidowSpider.class);
       assert bean != null;
       // Must invoke a method to really create the instance
       assert !bean.isInstanceNotified();
       getCurrentManager().fireEvent(new ConditionalEvent());
-      assert RecluseSpider.isNotified() && bean.isInstanceNotified();
+      assert WidowSpider.isNotified() && bean.isInstanceNotified();
 
-      RecluseSpider.reset();
    }
    
    @Test(groups = { "events" })

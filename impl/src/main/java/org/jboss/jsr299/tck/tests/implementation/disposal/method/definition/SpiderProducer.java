@@ -19,43 +19,57 @@ package org.jboss.jsr299.tck.tests.implementation.disposal.method.definition;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 
-class SpiderProducer
-{
-   private static boolean tameSpiderDestroyed = false;
-   private static boolean deadliestSpiderDestroyed = false;
+class SpiderProducer {
+    private static boolean tameSpiderDestroyed = false;
+    private static boolean deadliestTarantulaDestroyed = false;
+    private static boolean deadliestSandSpiderDestroyed = false;
 
-   @Produces
-   @Tame
-   public Tarantula produceTameTarantula()
-   {
-      return new DefangedTarantula(0);
-   }
+    @Produces
+    @Tame
+    public Tarantula produceTameTarantula() {
+        return new DefangedTarantula(0);
+    }
 
-   @Produces
-   @Deadliest
-   public Tarantula producesDeadliestTarantula(@Tame Tarantula tameTarantula, Tarantula tarantula)
-   {
-      return tameTarantula.getDeathsCaused() >= tarantula.getDeathsCaused() ? tameTarantula : tarantula;
-   }
+    @Produces
+    @Deadliest
+    public SandSpider produceDeadliestSandSpider() {
+        return new SandSpider();
+    }
 
-   public void destroyTameSpider(@Disposes @Tame Tarantula spider)
-   {
-      SpiderProducer.tameSpiderDestroyed = true;
-   }
+    @Produces
+    @Deadliest
+    public WebSpider produceDeadliestWebSpider() {
+        return new WebSpider();
+    }
 
-   public static void destroyDeadliestSpider(@Disposes @Deadliest Tarantula spider, Tarantula anotherSpider)
-   {
-      assert spider != anotherSpider;
-      SpiderProducer.deadliestSpiderDestroyed = true;
-   }
+    @Produces
+    @Deadliest
+    public Tarantula producesDeadliestTarantula(@Tame Tarantula tameTarantula, Tarantula tarantula) {
+        return tameTarantula.getDeathsCaused() >= tarantula.getDeathsCaused() ? tameTarantula : tarantula;
+    }
 
-   public static boolean isTameSpiderDestroyed()
-   {
-      return tameSpiderDestroyed;
-   }
+    public void destroyTameTarantula(@Disposes @Tame Tarantula spider) {
+        SpiderProducer.tameSpiderDestroyed = true;
+    }
 
-   public static boolean isDeadliestSpiderDestroyed()
-   {
-      return deadliestSpiderDestroyed;
-   }
+    public void destroyTameSandSpider(@Disposes @Deadliest SandSpider spider) {
+        SpiderProducer.deadliestSandSpiderDestroyed = true;
+    }
+
+    public static void destroyDeadliestSpider(@Disposes @Deadliest Tarantula spider, Tarantula anotherSpider) {
+        assert spider != anotherSpider;
+        SpiderProducer.deadliestTarantulaDestroyed = true;
+    }
+
+    public static boolean isTameSpiderDestroyed() {
+        return tameSpiderDestroyed;
+    }
+
+    public static boolean isDeadliestTarantulaDestroyed() {
+        return deadliestTarantulaDestroyed;
+    }
+
+    public static boolean isDeadliestSandSpiderDestroyed() {
+        return deadliestSandSpiderDestroyed;
+    }
 }

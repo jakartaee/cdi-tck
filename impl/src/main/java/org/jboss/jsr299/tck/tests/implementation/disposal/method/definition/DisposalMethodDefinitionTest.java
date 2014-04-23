@@ -52,13 +52,13 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test
    public void testBindingTypesAppliedToDisposalMethodParameters() throws Exception
    {
       assert !SpiderProducer.isTameSpiderDestroyed();
-      assert !SpiderProducer.isDeadliestSpiderDestroyed();
+      assert !SpiderProducer.isDeadliestTarantulaDestroyed();
       Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
       CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);
       Tarantula instance = tarantula.create(creationalContext);
       tarantula.destroy(instance, creationalContext);
       assert SpiderProducer.isTameSpiderDestroyed();
-      assert SpiderProducer.isDeadliestSpiderDestroyed();
+      assert SpiderProducer.isDeadliestTarantulaDestroyed();
    }
 
    @Test
@@ -68,11 +68,11 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test
    })
    public void testDisposalMethodOnNonBean() throws Exception
    {
-      Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
-      CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);
-      Tarantula instance = getCurrentManager().getContext(tarantula.getScope()).get(tarantula);
-      tarantula.destroy(instance, creationalContext);
-      assert !DisposalNonBean.isSpiderDestroyed();
+      Bean<WebSpider> webSpider = getBeans(WebSpider.class, DEADLIEST_LITERAL).iterator().next();
+      CreationalContext<WebSpider> creationalContext = getCurrentManager().createCreationalContext(webSpider);
+      WebSpider instance = getCurrentManager().getContext(webSpider.getScope()).get(webSpider);
+      webSpider.destroy(instance, creationalContext);
+      assert !DisposalNonBean.isWebSpiderdestroyed();
    }
 
    /**
@@ -90,11 +90,11 @@ public class DisposalMethodDefinitionTest extends AbstractJSR299Test
    })
    public void testDisposalMethodParametersGetInjected() throws Exception
    {
-      Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
-      CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);
-      Tarantula instance = getCurrentManager().getContext(tarantula.getScope()).get(tarantula);
-      tarantula.destroy(instance, creationalContext);
-      assert SpiderProducer.isDeadliestSpiderDestroyed();
+      Bean<SandSpider> sandSpider = getBeans(SandSpider.class, DEADLIEST_LITERAL).iterator().next();
+      CreationalContext<SandSpider> creationalContext = getCurrentManager().createCreationalContext(sandSpider);
+      SandSpider instance = getCurrentManager().getContext(sandSpider.getScope()).get(sandSpider);
+      sandSpider.destroy(instance, creationalContext);
+      assert SpiderProducer.isDeadliestSandSpiderDestroyed();
    }
 
 }
