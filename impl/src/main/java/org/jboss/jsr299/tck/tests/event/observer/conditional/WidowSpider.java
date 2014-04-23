@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -20,44 +20,24 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 
-/**
- * Simple web bean that conditionally listens to events.
- *
- */
 @RequestScoped
-class RecluseSpider
-{
-   private static boolean notified = false;
-   private static  boolean instanceNotified = false;
-   private Web web;
-   
-   public void observe(@Observes(notifyObserver = Reception.IF_EXISTS) ConditionalEvent someEvent)
-   {
-      notified = true;
-      instanceNotified = true;
-      if (web != null)
-      {
-         web.addRing();
-      }
-   }
-   
-   public boolean isInstanceNotified()
-   {
-      return instanceNotified;
-   }
-   
-   public static boolean isNotified()
-   {
-      return notified;
-   }
-   
-   public void setWeb(Web web)
-   {
-      this.web = web;
-   }
-   
-   public Web getWeb()
-   {
-      return this.web;
-   }
+public class WidowSpider {
+
+    private static boolean notified = false;
+    private static boolean instanceNotified = false;
+
+    public void observe(@Observes(notifyObserver = Reception.IF_EXISTS) ConditionalEvent someEvent) {
+        notified = true;
+        instanceNotified = true;
+    }
+
+    public boolean isInstanceNotified() {
+        return instanceNotified;
+    }
+
+    public static boolean isNotified() {
+        return notified;
+    }
+
+
 }

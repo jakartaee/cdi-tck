@@ -20,25 +20,40 @@ import javax.enterprise.inject.Disposes;
 
 class DisposalNonBean
 {
-   private static boolean spiderDestroyed = false;
+   private static boolean tarantulaDestroyed = false;
+
+   private static boolean webSpiderdestroyed = false;
    
    public DisposalNonBean(String someString)
    {
       
    }
    
-   public void destroyDeadliest(@Disposes @Deadliest Tarantula spider)
+   public void destroyDeadliestTarantula(@Disposes @Deadliest Tarantula spider)
    {
-      spiderDestroyed = true;
+      tarantulaDestroyed = true;
    }
 
-   public static boolean isSpiderDestroyed()
+   public void destroyDeadliestWebSpider(@Disposes @Deadliest WebSpider spider)
+    {
+        webSpiderdestroyed = true;
+    }
+
+   public static boolean isTarantulaDestroyed()
    {
-      return spiderDestroyed;
+      return tarantulaDestroyed;
    }
 
-   public static void setSpiderDestroyed(boolean spiderDestroyed)
+   public static void setTarantulaDestroyed(boolean tarantulaDestroyed)
    {
-      DisposalNonBean.spiderDestroyed = spiderDestroyed;
+      DisposalNonBean.tarantulaDestroyed = tarantulaDestroyed;
    }
+
+    public static boolean isWebSpiderdestroyed() {
+        return webSpiderdestroyed;
+    }
+
+    public static void setWebSpiderdestroyed(boolean webSpiderdestroyed) {
+        DisposalNonBean.webSpiderdestroyed = webSpiderdestroyed;
+    }
 }
