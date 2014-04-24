@@ -16,13 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
-import static org.jboss.cdi.tck.cdi.Sections.PIT;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -31,6 +24,11 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.PIT;
+import static org.testng.Assert.*;
 
 /**
  * This test verifies that ProcessInjectionTarget event is fired for various Java EE components.
@@ -50,43 +48,43 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aac"), @SpecAssertion(section = PIT, id = "abc"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "de") })
+    @SpecAssertions({@SpecAssertion(section = PIT, id = "aac"), @SpecAssertion(section = PIT, id = "abc"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "de")})
     public void testProcessInjectionTargetEventFiredForServletListener() {
         assertNotNull(ProcessInjectionTargetObserver.getListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aad"), @SpecAssertion(section = PIT, id = "abd"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "df") })
+    @SpecAssertions({@SpecAssertion(section = PIT, id = "aad"), @SpecAssertion(section = PIT, id = "abd"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "df")})
     public void testProcessInjectionTargetEventFiredForTagHandler() {
         assertNotNull(ProcessInjectionTargetObserver.getTagHandlerEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aae"), @SpecAssertion(section = PIT, id = "abe"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "dg") })
+    @SpecAssertions({@SpecAssertion(section = PIT, id = "aae"), @SpecAssertion(section = PIT, id = "abe"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "dg")})
     public void testProcessInjectionTargetEventFiredForTagLibraryListener() {
         assertNotNull(ProcessInjectionTargetObserver.getTagLibraryListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aah"), @SpecAssertion(section = PIT, id = "abh"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "dj") })
+    @SpecAssertions({@SpecAssertion(section = PIT, id = "aah"), @SpecAssertion(section = PIT, id = "abh"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "dj")})
     public void testProcessInjectionTargetEventFiredForServlet() {
         assertNotNull(ProcessInjectionTargetObserver.getServletEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aai"), @SpecAssertion(section = PIT, id = "abi"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "dk") })
+    @SpecAssertions({@SpecAssertion(section = PIT, id = "aai"), @SpecAssertion(section = PIT, id = "abi"),
+            @SpecAssertion(section = BEAN_DISCOVERY, id = "dk")})
     public void testProcessInjectionTargetEventFiredForFilter() {
         assertNotNull(ProcessInjectionTargetObserver.getFilterEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aas"), @SpecAssertion(section = PIT, id = "aao"),
-            @SpecAssertion(section = PIT, id = "aan") })
+    @SpecAssertions({@SpecAssertion(section = PIT, id = "aas"), @SpecAssertion(section = PIT, id = "aao"),
+            @SpecAssertion(section = PIT, id = "aan")})
     public void testTypeOfProcessInjectionTargetParameter() {
         assertFalse(ProcessInjectionTargetObserver.isStringObserved());
         assertTrue(ProcessInjectionTargetObserver.isTagHandlerSubTypeObserved());
@@ -94,6 +92,26 @@ public class ContainerEventTest extends AbstractTest {
         assertFalse(ProcessInjectionTargetObserver.isServletSuperTypeObserved());
         assertTrue(ProcessInjectionTargetObserver.isServletSubTypeObserved());
         assertFalse(ProcessInjectionTargetObserver.isListenerSuperTypeObserved());
+    }
+
+    @Test
+    @SpecAssertions({@SpecAssertion(section = PIT, id = "eb"),
+            @SpecAssertion(section = PIT, id = "ec"),
+            @SpecAssertion(section = PIT, id = "ed"),
+            @SpecAssertion(section = PIT, id = "ee"),
+            @SpecAssertion(section = PIT, id = "ef"),
+            @SpecAssertion(section = PIT, id = "eg"),
+            @SpecAssertion(section = PIT, id = "eh"),
+            @SpecAssertion(section = PIT, id = "ei")})
+    public void testWrappedInjectionTargetIsUsed() {
+        assertTrue(CustomInjectionTarget.getWrappedComponents().contains(TestListener.class));
+        assertTrue(CustomInjectionTarget.getWrappedComponents().contains(TagLibraryListener.class));
+        assertTrue(CustomInjectionTarget.getWrappedComponents().contains(TestServlet.class));
+        assertTrue(CustomInjectionTarget.getWrappedComponents().contains(TestFilter.class));
+        assertTrue(CustomInjectionTarget.getWrappedComponents().contains(TestTagHandler.class));
+        assertTrue(CustomInjectionTarget.getWrappedComponents().contains(Fence.class));
+        assertTrue(CustomInjectionTarget.getWrappedComponents().contains(FenceInterceptor.class));
+        assertTrue(CustomInjectionTarget.getWrappedComponents().contains(CowboyEndpoint.class));
     }
 
 }
