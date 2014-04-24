@@ -41,22 +41,27 @@ public class ProcessInjectionTargetObserver implements Extension {
 
     public void observeServlet(@Observes ProcessInjectionTarget<TestServlet> event) {
         servletEvent = event;
+        event.setInjectionTarget(new CustomInjectionTarget<TestServlet>(event.getInjectionTarget()));
     }
 
     public void observeFilter(@Observes ProcessInjectionTarget<TestFilter> event) {
         filterEvent = event;
+        event.setInjectionTarget(new CustomInjectionTarget<TestFilter>(event.getInjectionTarget()));
     }
 
     public void observeListener(@Observes ProcessInjectionTarget<TestListener> event) {
         listenerEvent = event;
+        event.setInjectionTarget(new CustomInjectionTarget<TestListener>(event.getInjectionTarget()));
     }
 
     public void observeTagHandler(@Observes ProcessInjectionTarget<TestTagHandler> event) {
         tagHandlerEvent = event;
+        event.setInjectionTarget(new CustomInjectionTarget<TestTagHandler>(event.getInjectionTarget()));
     }
 
     public void observeTagLibraryListener(@Observes ProcessInjectionTarget<TagLibraryListener> event) {
         tagLibraryListenerEvent = event;
+        event.setInjectionTarget(new CustomInjectionTarget<TagLibraryListener>(event.getInjectionTarget()));
     }
 
     public void observeServletSuperType(@Observes ProcessInjectionTarget<? super HttpServlet> event) {
@@ -65,6 +70,7 @@ public class ProcessInjectionTargetObserver implements Extension {
 
     public void observeServletSubType(@Observes ProcessInjectionTarget<? extends HttpServlet> event) {
         servletSubTypeObserved = true;
+
     }
 
     public void observeListenerSuperType(@Observes ProcessInjectionTarget<? super ServletContextListener> event) {
@@ -77,6 +83,18 @@ public class ProcessInjectionTargetObserver implements Extension {
 
     public void tagHandlerSubType(@Observes ProcessInjectionTarget<? extends SimpleTag> event) {
         tagHandlerSubTypeObserved = true;
+    }
+
+    public void observeSessionBean(@Observes ProcessInjectionTarget<Fence> event) {
+        event.setInjectionTarget(new CustomInjectionTarget<Fence>(event.getInjectionTarget()));
+    }
+
+    public void observeEJBInterceptor(@Observes ProcessInjectionTarget<FenceInterceptor> event) {
+        event.setInjectionTarget(new CustomInjectionTarget<FenceInterceptor>(event.getInjectionTarget()));
+    }
+
+    public void observeWSEndpoint(@Observes ProcessInjectionTarget<CowboyEndpoint> event) {
+        event.setInjectionTarget(new CustomInjectionTarget<CowboyEndpoint>(event.getInjectionTarget()));
     }
 
     public void stringObserver(@Observes ProcessInjectionTarget<String> event) {
