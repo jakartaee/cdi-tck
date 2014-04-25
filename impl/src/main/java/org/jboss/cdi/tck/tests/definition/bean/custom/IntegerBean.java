@@ -92,9 +92,7 @@ public class IntegerBean implements Bean<Integer>, PassivationCapable {
 
     public boolean isAlternative() {
         isAlternativeCalled = true;
-        // Spec needs clarification - see CDITCK-273
-        // return true
-        return false;
+        return true;
     }
 
     public boolean isNullable() {

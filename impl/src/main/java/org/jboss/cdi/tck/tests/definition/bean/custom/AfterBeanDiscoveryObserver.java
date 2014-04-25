@@ -19,10 +19,7 @@ package org.jboss.cdi.tck.tests.definition.bean.custom;
 import java.lang.reflect.Type;
 
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
-import javax.enterprise.inject.spi.AnnotatedField;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.Extension;
+import javax.enterprise.inject.spi.*;
 
 public class AfterBeanDiscoveryObserver implements Extension {
 
@@ -42,6 +39,10 @@ public class AfterBeanDiscoveryObserver implements Extension {
             }
         }
         return null;
+    }
+
+    public void afterTypeDiscovery(@Observes AfterTypeDiscovery event) {
+        event.getAlternatives().add(IntegerBean.class);
     }
 
 }
