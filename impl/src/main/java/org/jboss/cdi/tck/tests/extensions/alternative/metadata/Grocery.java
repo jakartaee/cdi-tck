@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
@@ -31,8 +32,12 @@ public class Grocery implements Shop {
     private Fruit fruit;
     private boolean constructorWithParameterUsed = false;
     private Fruit initializerFruit = null;
+    private Fruit observerFruit = null;
+    private Fruit disposerFruit = null;
     private Bread bread = new Bread(true);
     private Water water = null;
+    private Vegetables wrappedEventParameter = null;
+    private Vegetables wrappedDisposalParameter = null;
 
     private Milk observerEvent = null;
     private TropicalFruit observerParameter = null;
@@ -108,4 +113,49 @@ public class Grocery implements Shop {
     public boolean isObserver2Used() {
         return observer2Used;
     }
+
+    public void observerMilk(@Observes Milk milk, @Any Fruit fruit) {
+        this.observerFruit = fruit;
+    }
+
+    public Fruit getObserverFruit() {
+        return observerFruit;
+    }
+
+    public Fruit getDisposerFruit() {
+        return disposerFruit;
+    }
+
+    @Produces
+    @Cheap
+    public Bill createBill(@Any Fruit fruit) {
+        return new Bill(fruit);
+    }
+
+    public void destroyBill(@Disposes @Cheap Bill bill, @Any Fruit fruit) {
+        disposerFruit = fruit;
+    }
+
+    @Produces
+    @Cheap
+    public Carrot createVegetable() {
+        return new Carrot();
+    }
+
+    public Vegetables getWrappedDisposalParameter() {
+        return wrappedDisposalParameter;
+    }
+
+    public void destroyVegetable(@Disposes @Cheap Vegetables vegetables) {
+        wrappedDisposalParameter = vegetables;
+    }
+
+    public Vegetables getWrappedEventParameter() {
+        return wrappedEventParameter;
+    }
+
+    public void observesVegetable(@Observes Vegetables vegetable) {
+        wrappedEventParameter = vegetable;
+    }
+
 }

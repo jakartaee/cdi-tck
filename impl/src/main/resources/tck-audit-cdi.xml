@@ -6646,10 +6646,10 @@
             <assertion id="aab">
                 <text>Test that |getMethods()| returns all default-access, public, protected or private methods declared on the type and those declared on any supertypes.</text>
             </assertion>
-            <assertion id="aad">
+            <assertion id="aac">
                 <text>The container should call |AnnotatedMethod.getJavaMember().getDeclaringClass()| to determine the type in the type hierarchy that declared the method.</text>
             </assertion>
-            <assertion id="aac">
+            <assertion id="aad">
                 <text>Test that |getFields()| returns all default-access, public, protected or private fields declared on the type and those declared on any supertypes.</text>
             </assertion>
         </group>
