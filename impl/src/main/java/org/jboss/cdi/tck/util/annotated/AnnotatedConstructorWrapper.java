@@ -18,21 +18,30 @@ package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
-
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import javax.enterprise.inject.spi.AnnotatedConstructor;
+import javax.enterprise.inject.spi.AnnotatedParameter;
 
 public class AnnotatedConstructorWrapper<X> extends AnnotatedCallableWraper<X> implements AnnotatedConstructor<X> {
 
     private AnnotatedConstructor<X> delegate;
+    private List<AnnotatedParameter<X>> parameters;
 
     public AnnotatedConstructorWrapper(AnnotatedConstructor<X> delegate, AnnotatedTypeWrapper<X> declaringType, boolean keepOriginalAnnotations,
             Annotation... annotations) {
         super(delegate, declaringType, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
+        this.parameters =delegate.getParameters();
     }
 
     public Constructor<X> getJavaMember() {
         return delegate.getJavaMember();
+    }
+
+    public List<AnnotatedParameter<X>> getParameters() {
+        return this.parameters;
     }
 
     public AnnotatedTypeWrapper<X> getDeclaringType() {
@@ -41,5 +50,20 @@ public class AnnotatedConstructorWrapper<X> extends AnnotatedCallableWraper<X> i
 
     public boolean isStatic() {
         return delegate.isStatic();
+    }
+
+    public AnnotatedConstructorWrapper<X> replaceParameters(AnnotatedParameter<X>... parameters) {
+        this.parameters = Arrays.asList(parameters);
+        return this;
+    }
+
+    public AnnotatedParameter<X> getParameter(int position) {
+        for (Iterator<AnnotatedParameter<X>> iterator = this.parameters.iterator(); iterator.hasNext();) {
+            AnnotatedParameter<X> parameter = iterator.next();
+            if (parameter.getPosition() == position) {
+                return parameter;
+            }
+        }
+        return null;
     }
 }

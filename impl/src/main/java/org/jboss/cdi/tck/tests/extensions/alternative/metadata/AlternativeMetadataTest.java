@@ -26,6 +26,8 @@ import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,6 +47,7 @@ import org.testng.annotations.Test;
  *
  * @author Jozef Hartinger
  * @author Martin Kouba
+ * @author Tomas Remes
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class AlternativeMetadataTest extends AbstractTest {
@@ -75,6 +78,64 @@ public class AlternativeMetadataTest extends AbstractTest {
         assertEquals(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getInitializerFruit().getMetadata().getType(),
                 TropicalFruit.class);
         assertTrue(GroceryWrapper.isGetBaseTypeOfInitializerTropicalFruitParameterUsed());
+    }
+
+    @Test
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "hc")
+    public void testGetBaseTypeUsedToDetermineTypeOfConstructorInjectionPoint() {
+        assertEquals(getContextualReference(Market.class).getConstructorFruit().getMetadata().getType(),
+                TropicalFruit.class);
+        assertTrue(MarketWrapper.isGetBaseTypeOfMarketConstructorParameterUsed());
+    }
+
+    @Test
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "hd")
+    public void testGetBaseTypeUsedToDetermineTypeOfProducerInjectionPoint() {
+       assertEquals(getContextualReference(Bill.class, new ExpensiveLiteral()).getFruit().getMetadata().getType(), TropicalFruit.class);
+       assertTrue(MarketWrapper.isGetBaseTypeOfBillProducerParameterUsed());
+    }
+
+    @Test
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "he")
+    public void testGetBaseTypeUsedToDetermineTypeOfObserverInjectionPoint() {
+        getCurrentManager().fireEvent(new Milk(false));
+        assertEquals(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getObserverFruit().getMetadata().getType(),
+                TropicalFruit.class);
+
+        assertTrue(GroceryWrapper.isGetBaseTypeOfBillDisposerParameterUsed());
+    }
+
+    @Test
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "hf")
+    public void testGetBaseTypeUsedToDetermineTypeOfDisposerInjectionPoint() {
+        Bean<Bill> bill = getBeans(Bill.class, new CheapLiteral()).iterator().next();
+        CreationalContext<Bill> context = getCurrentManager().createCreationalContext(bill);
+        Bill instance = getCurrentManager().getContext(bill.getScope()).get(bill);
+        bill.destroy(instance, context);
+        assertEquals(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getDisposerFruit().getMetadata().getType(),
+                TropicalFruit.class);
+        assertTrue(GroceryWrapper.isGetBaseTypeOfBillDisposerParameterUsed());
+
+    }
+
+    @Test
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "i")
+    public void testGetBaseTypeUsedToDetermineTypeOfEventParameter() {
+        getCurrentManager().fireEvent(new Carrot());
+        assertEquals(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getWrappedEventParameter().getClass(),
+                Carrot.class);
+    }
+
+    @Test
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "j")
+    public void testGetBaseTypeUsedToDetermineTypeOfDisposalParameter() {
+        Bean<Carrot> carrot = getBeans(Carrot.class, new CheapLiteral()).iterator().next();
+        CreationalContext<Carrot> context = getCurrentManager().createCreationalContext(carrot);
+        Carrot instance = getCurrentManager().getContext(carrot.getScope()).get(carrot, context);
+        carrot.destroy(instance, context);
+        assertEquals(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getWrappedDisposalParameter().getClass(),
+                Carrot.class);
+
     }
 
     @Test

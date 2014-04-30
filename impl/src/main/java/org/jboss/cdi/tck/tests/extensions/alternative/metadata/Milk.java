@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
+import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Inject;
+
 public class Milk {
     @SuppressWarnings("unused")
     private boolean fresh;
@@ -23,4 +26,12 @@ public class Milk {
     public Milk(boolean fresh) {
         this.fresh = fresh;
     }
+
+    @Inject
+    private InjectionPoint metadata;
+
+    public InjectionPoint getMetadata() {
+        return metadata;
+    }
+
 }
