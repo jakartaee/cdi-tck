@@ -19,21 +19,32 @@ package org.jboss.cdi.tck.tests.implementation.disposal.method.definition;
 import javax.enterprise.inject.Disposes;
 
 public class DisposalNonBean {
-    private static boolean spiderDestroyed = false;
+    private static boolean tarantulaDestroyed = false;
+    private static boolean webSpiderdestroyed = false;
 
     public DisposalNonBean(String someString) {
 
     }
 
-    public void destroyDeadliest(@Disposes @Deadliest Tarantula spider) {
-        spiderDestroyed = true;
+    public void destroyDeadliestTarantula(@Disposes @Deadliest Tarantula spider) {
+        tarantulaDestroyed = true;
     }
 
-    public static boolean isSpiderDestroyed() {
-        return spiderDestroyed;
+    public static boolean isTarantulaDestroyed() {
+        return tarantulaDestroyed;
     }
 
-    public static void setSpiderDestroyed(boolean spiderDestroyed) {
+    /*public static void setSpiderDestroyed(boolean spiderDestroyed) {
         DisposalNonBean.spiderDestroyed = spiderDestroyed;
+    } */
+
+
+    public static boolean isWebSpiderdestroyed() {
+        return webSpiderdestroyed;
     }
+
+    public static void setWebSpiderdestroyed(boolean webSpiderdestroyed) {
+        DisposalNonBean.webSpiderdestroyed = webSpiderdestroyed;
+    }
+
 }
