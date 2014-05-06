@@ -24,11 +24,12 @@ import javax.enterprise.inject.Produces;
 public class SpiderProducer {
 
     private static boolean tameSpiderDestroyed = false;
-    private static boolean deadliestSpiderDestroyed = false;
+    private static boolean deadliestTarantulaDestroyed = false;
+    private static boolean deadliestSandSpiderDestroyed = false;
     private static int widowsDestroyed = 0;
     private static boolean scaryBlackWidowDestroyed = false;
     private static boolean tameBlackWidowDestroyed = false;
-    
+
     @Produces
     @Scary
     @SuppressWarnings("unused")
@@ -38,12 +39,25 @@ public class SpiderProducer {
     @SuppressWarnings("unused")
     @RequestScoped
     private final Calisoga tameCalisoga = new Calisoga("tame");
-    
+
 
     @Produces
     @Tame
     public Tarantula produceTameTarantula() {
         return new DefangedTarantula(0);
+    }
+
+
+    @Produces
+    @Deadliest
+    public SandSpider produceDeadliestSandSpider() {
+        return new SandSpider();
+    }
+
+    @Produces
+    @Deadliest
+    public WebSpider produceDeadliestWebSpider() {
+        return new WebSpider();
     }
 
     @Produces
@@ -64,13 +78,17 @@ public class SpiderProducer {
         return new Widow("black");
     }
 
-    public void destroyTameSpider(@Disposes @Tame Tarantula spider) {
+    public void destroyTameTarantula(@Disposes @Tame Tarantula spider) {
         SpiderProducer.tameSpiderDestroyed = true;
+    }
+
+    public void destroyTameSandSpider(@Disposes @Deadliest SandSpider spider) {
+        SpiderProducer.deadliestSandSpiderDestroyed = true;
     }
 
     public static void destroyDeadliestSpider(@Disposes @Deadliest Tarantula spider, Tarantula anotherSpider) {
         assert spider != anotherSpider;
-        SpiderProducer.deadliestSpiderDestroyed = true;
+        SpiderProducer.deadliestTarantulaDestroyed = true;
     }
 
     public void destroyScaryCalisoga(@Disposes @Scary Calisoga calisoga) {
@@ -93,8 +111,8 @@ public class SpiderProducer {
         return tameSpiderDestroyed;
     }
 
-    public static boolean isDeadliestSpiderDestroyed() {
-        return deadliestSpiderDestroyed;
+    public static boolean isDeadliestTarantulaDestroyed() {
+        return deadliestTarantulaDestroyed;
     }
 
     public static int getWidowsDestroyed() {
@@ -108,10 +126,14 @@ public class SpiderProducer {
     public static boolean isTameBlackWidowDestroyed() {
         return tameBlackWidowDestroyed;
     }
-    
+
+    public static boolean isDeadliestSandSpiderDestroyed() {
+        return deadliestSandSpiderDestroyed;
+    }
+
     public static void reset() {
         tameSpiderDestroyed = false;
-        deadliestSpiderDestroyed = false;
+        deadliestTarantulaDestroyed = false;
         widowsDestroyed = 0;
         scaryBlackWidowDestroyed = false;
         tameBlackWidowDestroyed = false;
