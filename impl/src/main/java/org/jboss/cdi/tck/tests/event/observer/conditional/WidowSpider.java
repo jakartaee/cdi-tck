@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -9,7 +9,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -20,22 +20,15 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 
-/**
- * Simple web bean that conditionally listens to events.
- * 
- */
 @RequestScoped
-public class RecluseSpider {
+public class WidowSpider {
+
     private static boolean notified = false;
     private static boolean instanceNotified = false;
-    private Web web;
 
     public void observe(@Observes(notifyObserver = Reception.IF_EXISTS) ConditionalEvent someEvent) {
         notified = true;
         instanceNotified = true;
-        if (web != null) {
-            web.addRing();
-        }
     }
 
     public boolean isInstanceNotified() {
@@ -44,13 +37,5 @@ public class RecluseSpider {
 
     public static boolean isNotified() {
         return notified;
-    }
-
-    public void setWeb(Web web) {
-        this.web = web;
-    }
-
-    public Web getWeb() {
-        return this.web;
     }
 }
