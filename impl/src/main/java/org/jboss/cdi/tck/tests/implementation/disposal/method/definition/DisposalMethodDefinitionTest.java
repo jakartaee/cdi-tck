@@ -16,24 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition;
 
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
-import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD;
-import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_DISPOSED_PARAMETER;
-import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_RESOLUTION;
-import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT_DEFAULT_QUALIFIER;
-import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
-import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD_LIFECYCLE;
-import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
-import java.lang.annotation.Annotation;
-
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.util.AnnotationLiteral;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -42,6 +24,14 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
+import java.lang.annotation.Annotation;
+
+import static org.jboss.cdi.tck.cdi.Sections.*;
+import static org.testng.Assert.*;
 
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class DisposalMethodDefinitionTest extends AbstractTest {
@@ -60,17 +50,15 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "c"), @SpecAssertion(section = DISPOSER_METHOD, id = "b"),
+    @SpecAssertions({@SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "c"), @SpecAssertion(section = DISPOSER_METHOD, id = "b"),
             @SpecAssertion(section = DISPOSER_METHOD, id = "c"), @SpecAssertion(section = DISPOSER_METHOD, id = "e"),
             @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba"), @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "a"),
             @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "b0"), @SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "aa"),
-            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "b") })
+            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "b")})
     public void testBindingTypesAppliedToDisposalMethodParameters() throws Exception {
 
-        SpiderProducer.reset();
-
         assertFalse(SpiderProducer.isTameSpiderDestroyed());
-        assertFalse(SpiderProducer.isDeadliestSpiderDestroyed());
+        assertFalse(SpiderProducer.isDeadliestTarantulaDestroyed());
 
         Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);
@@ -78,48 +66,42 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
         tarantula.destroy(instance, creationalContext);
 
         assertTrue(SpiderProducer.isTameSpiderDestroyed());
-        assertTrue(SpiderProducer.isDeadliestSpiderDestroyed());
+        assertTrue(SpiderProducer.isDeadliestTarantulaDestroyed());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD, id = "aa"), @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba") })
+    @SpecAssertions({@SpecAssertion(section = DISPOSER_METHOD, id = "aa"), @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba")})
     public void testDisposalMethodOnNonBean() throws Exception {
 
-        Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
-        CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);
-        Tarantula instance = getCurrentManager().getContext(tarantula.getScope()).get(tarantula);
-        tarantula.destroy(instance, creationalContext);
-
-        assertFalse(DisposalNonBean.isSpiderDestroyed());
+        Bean<WebSpider> webSpider = getBeans(WebSpider.class, DEADLIEST_LITERAL).iterator().next();
+        CreationalContext<WebSpider> creationalContext = getCurrentManager().createCreationalContext(webSpider);
+        WebSpider instance = getCurrentManager().getContext(webSpider.getScope()).get(webSpider);
+        webSpider.destroy(instance, creationalContext);
+        assert !DisposalNonBean.isWebSpiderdestroyed();
     }
 
     /**
      * In addition to the disposed parameter, a disposal method may declare additional parameters, which may also specify
      * bindings. The container calls Manager.getInstanceToInject() to determine a value for each parameter of a disposal method
      * and calls the disposal method with those parameter values
-     * 
+     *
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "h"), @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a"),
-            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "e") })
+    @SpecAssertions({@SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "h"), @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a"),
+            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "e")})
     public void testDisposalMethodParametersGetInjected() throws Exception {
 
-        SpiderProducer.reset();
-
-        Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
-        CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);
-        Tarantula instance = getCurrentManager().getContext(tarantula.getScope()).get(tarantula);
-        tarantula.destroy(instance, creationalContext);
-
-        assertTrue(SpiderProducer.isDeadliestSpiderDestroyed());
+        Bean<SandSpider> sandSpider = getBeans(SandSpider.class, DEADLIEST_LITERAL).iterator().next();
+        CreationalContext<SandSpider> creationalContext = getCurrentManager().createCreationalContext(sandSpider);
+        SandSpider instance = getCurrentManager().getContext(sandSpider.getScope()).get(sandSpider);
+        sandSpider.destroy(instance, creationalContext);
+        assert SpiderProducer.isDeadliestSandSpiderDestroyed();
     }
 
     @Test
     @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "da")
     public void testDisposalMethodForMultipleProducerMethods() throws Exception {
-
-        SpiderProducer.reset();
 
         Bean<Widow> deadliest = getBeans(Widow.class, DEADLIEST_LITERAL).iterator().next();
         CreationalContext<Widow> deadliestCreationalContext = getCurrentManager().createCreationalContext(deadliest);
@@ -138,10 +120,9 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
      * Tests that a disposal method can be bound to a product of a producer field. CDI-145
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "ab"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "o") })
+    @SpecAssertions({@SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "ab"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "o")})
     public void testDisposalMethodCalledForProducerField() throws Exception {
 
-        SpiderProducer.reset();
         createAndDestroyBean(Calisoga.class, new Scary.Literal());
         assertTrue(SpiderProducer.isScaryBlackWidowDestroyed());
         assertFalse(SpiderProducer.isTameBlackWidowDestroyed());
