@@ -16,12 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import org.jboss.cdi.tck.util.annotated.AnnotatedConstructorWrapper;
-import org.jboss.cdi.tck.util.annotated.AnnotatedMethodWrapper;
-import org.jboss.cdi.tck.util.annotated.AnnotatedParameterWrapper;
-import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
+import org.jboss.cdi.tck.literals.AnyLiteral;
+import org.jboss.cdi.tck.util.annotated.*;
 
 import javax.enterprise.inject.spi.AnnotatedConstructor;
+import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 import java.lang.annotation.Annotation;
@@ -34,6 +33,7 @@ public class MarketWrapper extends AnnotatedTypeWrapper<Market> {
     private final Set<Type> typeClosure = new HashSet<Type>();
     private static boolean getBaseTypeOfMarketConstructorParameterUsed = false;
     private static boolean getBaseTypeOfBillProducerParameterUsed = false;
+    private static boolean getTypeCLosureOfProducerFieldUsed = false;
 
     public MarketWrapper(AnnotatedType<Market> delegate) {
         super(delegate, true);
@@ -52,12 +52,34 @@ public class MarketWrapper extends AnnotatedTypeWrapper<Market> {
         Set<AnnotatedConstructor<Market>> constructors = new HashSet<AnnotatedConstructor<Market>>();
         for (AnnotatedConstructor<Market> constructor : super.getConstructors()) {
             if (constructor.getParameters().size() == 1) {
-                constructors.add(wrapConstructor(constructor, true));
+                constructors.add(wrapConstructor(constructor, true, AnyLiteral.INSTANCE));
             } else {
                 constructors.add(constructor);
             }
         }
         return constructors;
+    }
+
+    @Override
+    public Set<AnnotatedField<? super Market>> getFields() {
+        Set<AnnotatedField<? super Market>> fields = new HashSet<AnnotatedField<? super Market>>();
+        for (AnnotatedField<? super Market> field : super.getFields()) {
+            if (field.getJavaMember().getType().equals(Carrot.class)) {
+                AnnotatedFieldWrapper<? super Market> fieldWrapper = new AnnotatedFieldWrapper(field, true) {
+                    @Override
+                    public Set<Type> getTypeClosure() {
+                        Set<Type> types = new HashSet<Type>();
+                        types.add(Carrot.class);
+                        getTypeCLosureOfProducerFieldUsed = true;
+                        return types;
+                    }
+                };
+                fields.add(fieldWrapper);
+            } else {
+                fields.add(field);
+            }
+        }
+        return fields;
     }
 
     @Override
@@ -108,5 +130,9 @@ public class MarketWrapper extends AnnotatedTypeWrapper<Market> {
 
     public static boolean isGetBaseTypeOfBillProducerParameterUsed() {
         return getBaseTypeOfBillProducerParameterUsed;
+    }
+
+    public static boolean isGetTypeCLosureOfProducerFieldUsed() {
+        return getTypeCLosureOfProducerFieldUsed;
     }
 }

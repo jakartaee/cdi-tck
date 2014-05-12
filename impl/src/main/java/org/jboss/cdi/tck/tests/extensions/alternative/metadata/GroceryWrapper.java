@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
+import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.InjectLiteral;
 import org.jboss.cdi.tck.util.annotated.*;
 
@@ -39,8 +40,10 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
     private static boolean getBaseTypeOfFruitFieldUsed = false;
     private static boolean getBaseTypeOfInitializerTropicalFruitParameterUsed = false;
     private static boolean getBaseTypeOfBillDisposerParameterUsed = false;
-    private static boolean getBaseTypeOfObserverFruitParameterUsed = false;
+    private static boolean getBaseTypeOfObserverInjectionPointUsed = false;
+    private static boolean getBaseTypeOfObserverParameterUsed = false;
     private static boolean getTypeClosureUsed = false;
+    private static boolean getTypeClosureOfProducerMethodUsed = false;
 
     public GroceryWrapper(AnnotatedType<Grocery> delegate) {
         super(delegate, false, new AnnotationLiteral<RequestScoped>() {
@@ -88,7 +91,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
         return fields;
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes", "serial"})
+    @SuppressWarnings({ "unchecked", "rawtypes", "serial" })
     @Override
     public Set<AnnotatedMethod<? super Grocery>> getMethods() {
         Set<AnnotatedMethod<? super Grocery>> methods = new HashSet<AnnotatedMethod<? super Grocery>>();
@@ -102,7 +105,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
                         new AnnotationLiteral<Produces>() {
                         }
                 );
-                methods.add(wrapMethodParameters(wrappedMethod, false, new Annotation[]{new CheapLiteral()}));
+                methods.add(wrapMethodParameters(wrappedMethod, false, new Annotation[] { new CheapLiteral() }));
             } else if (method.getJavaMember().getName().equals("nonInjectAnnotatedInitializer")) {
                 methods.add(wrapMethod(method, false, new InjectLiteral()));
             } else if (method.getJavaMember().getName().equals("initializer")) {
@@ -119,45 +122,48 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
                 methods.add(methodWrapper);
 
             } else if (method.getJavaMember().getName().equals("observer1")) {
-                Annotation[] secondParameterAnnotations = new Annotation[]{new CheapLiteral()};
+                Annotation[] secondParameterAnnotations = new Annotation[] { new CheapLiteral() };
                 methods.add(wrapMethodParameters(method, false, observesAnnotation(), secondParameterAnnotations));
             } else if (method.getJavaMember().getName().equals("observer2")) {
-                methods.add(wrapMethodParameters(method, true, new Annotation[]{new ExpensiveLiteral()}));
+                methods.add(wrapMethodParameters(method, true, new Annotation[] { new ExpensiveLiteral() }));
             } else if (method.getJavaMember().getName().equals("observerMilk")) {
                 AnnotatedMethodWrapper<? super Grocery> methodWrapper = new AnnotatedMethodWrapper(method, true);
-                methodWrapper.replaceParameters(new AnnotatedParameterWrapper(methodWrapper.getParameter(0), true), new AnnotatedParameterWrapper(methodWrapper.getParameter(1), true) {
-                    @Override
-                    public Type getBaseType() {
-                        getBaseTypeOfObserverFruitParameterUsed = true;
-                        return TropicalFruit.class;
-                    }
-                });
+                methodWrapper.replaceParameters(new AnnotatedParameterWrapper(methodWrapper.getParameter(0), true),
+                        new AnnotatedParameterWrapper(methodWrapper.getParameter(1), true) {
+                            @Override
+                            public Type getBaseType() {
+                                getBaseTypeOfObserverInjectionPointUsed = true;
+                                return TropicalFruit.class;
+                            }
+                        });
                 methods.add(methodWrapper);
             } else if (method.getJavaMember().getName().equals("destroyBill")) {
                 AnnotatedMethodWrapper<? super Grocery> methodWrapper = new AnnotatedMethodWrapper(method, true);
                 // replace the second parameter and keep the first one
-                methodWrapper = methodWrapper.replaceParameters(new AnnotatedParameterWrapper(methodWrapper.getParameter(0), true), new AnnotatedParameterWrapper(methodWrapper.getParameter(1), true) {
-                    @Override
-                    public Type getBaseType() {
-                        getBaseTypeOfBillDisposerParameterUsed = true;
-                        return TropicalFruit.class;
-                    }
-                });
-                methods.add(methodWrapper) ;
+                methodWrapper = methodWrapper.replaceParameters(new AnnotatedParameterWrapper(methodWrapper.getParameter(0), true),
+                        new AnnotatedParameterWrapper(methodWrapper.getParameter(1), true, AnyLiteral.INSTANCE) {
+                            @Override
+                            public Type getBaseType() {
+                                getBaseTypeOfBillDisposerParameterUsed = true;
+                                return TropicalFruit.class;
+                            }
+                        });
+                methods.add(methodWrapper);
 
             } else if (method.getJavaMember().getName().equals("observesVegetable")) {
                 AnnotatedMethodWrapper<? super Grocery> methodWrapper = new AnnotatedMethodWrapper(method, true);
                 methodWrapper = methodWrapper.replaceParameters(new AnnotatedParameterWrapper(methodWrapper.getParameter(0), true) {
                     @Override
                     public Type getBaseType() {
+                        getBaseTypeOfObserverParameterUsed = true;
                         return Carrot.class;
                     }
                 });
-                methods.add(methodWrapper) ;
+                methods.add(methodWrapper);
 
             } else if (method.getJavaMember().getName().equals("destroyVegetable")) {
                 AnnotatedMethodWrapper<? super Grocery> methodWrapper = new AnnotatedMethodWrapper(method, true);
-                methodWrapper = methodWrapper.replaceParameters(new AnnotatedParameterWrapper(methodWrapper.getParameter(0), true) {
+                methodWrapper = methodWrapper.replaceParameters(new AnnotatedParameterWrapper(methodWrapper.getParameter(0), true, new CheapLiteral()) {
                     @Override
                     public Type getBaseType() {
                         return Carrot.class;
@@ -165,7 +171,30 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
                 });
                 methods.add(methodWrapper);
 
-            } else{
+            } else if (method.getJavaMember().getName().equals("destroyYogurt")) {
+                AnnotatedMethodWrapper<? super Grocery> methodWrapper = new AnnotatedMethodWrapper(method, true);
+                methodWrapper = methodWrapper.replaceParameters(
+                        new AnnotatedParameterWrapper(methodWrapper.getParameter(0), false, new Annotation[] { new ExpensiveLiteral(), new Disposes() {
+                            public Class<? extends Annotation> annotationType() {
+                                return Disposes.class;
+                            }
+                        } }));
+                methods.add(methodWrapper);
+
+            } else if (method.getJavaMember().getName().equals("createVegetable")) {
+
+                AnnotatedMethodWrapper<? super Grocery> methodWrapper = new AnnotatedMethodWrapper(method, true) {
+                    @Override
+                    public Set<Type> getTypeClosure() {
+                        Set<Type> types = new HashSet<Type>();
+                        types.add(Carrot.class);
+                        getTypeClosureOfProducerMethodUsed = true;
+                        return types;
+                    }
+                };
+                methods.add(methodWrapper);
+
+            } else {
                 methods.add(method);
             }
         }
@@ -204,7 +233,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
     }
 
     private <Y> AnnotatedMethodWrapper<Y> wrapMethod(AnnotatedMethod<Y> delegate, boolean keepOriginalAnnotations,
-                                                     Annotation... annotations) {
+            Annotation... annotations) {
         return new AnnotatedMethodWrapper<Y>(delegate, keepOriginalAnnotations, annotations);
     }
 
@@ -213,7 +242,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
      * method-level annotations.
      */
     private <Y> AnnotatedMethodWrapper<Y> wrapMethodParameters(AnnotatedMethod<Y> delegate,
-                                                               final boolean keepOriginalAnnotations, final Annotation[]... annotations) {
+            final boolean keepOriginalAnnotations, final Annotation[]... annotations) {
         return new AnnotatedMethodWrapper<Y>(delegate, true) {
             @Override
             public List<AnnotatedParameter<Y>> getParameters() {
@@ -227,8 +256,8 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
         };
     }
 
-    public Annotation[] observesAnnotation(){
-        return new Annotation[]{new Observes() {
+    public Annotation[] observesAnnotation() {
+        return new Annotation[] { new Observes() {
 
             public TransactionPhase during() {
                 return TransactionPhase.IN_PROGRESS;
@@ -242,7 +271,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
                 return Observes.class;
             }
 
-        }};
+        } };
     }
 
     public static boolean isGetBaseTypeOfFruitFieldUsed() {
@@ -261,7 +290,16 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
         return getBaseTypeOfBillDisposerParameterUsed;
     }
 
-    public static boolean isGetBaseTypeOfObserverFruitParameterUsed() {
-        return getBaseTypeOfObserverFruitParameterUsed;
+    public static boolean isGetBaseTypeOfObserverInjectionPointUsed() {
+        return getBaseTypeOfObserverInjectionPointUsed;
     }
+
+    public static boolean isGetTypeClosureOfProducerMethodUsed() {
+        return getTypeClosureOfProducerMethodUsed;
+    }
+
+    public static boolean isGetBaseTypeOfObserverParameterUsed() {
+        return getBaseTypeOfObserverParameterUsed;
+    }
+
 }

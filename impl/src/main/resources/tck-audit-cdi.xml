@@ -6765,7 +6765,7 @@
             </assertion>
 
             <assertion id="s">
-                <text>Check that a qualifier added to a parameter is used by the container to instantiate a bean.</text>
+                <text>Check that a qualifier added to a constructor parameter is used by the container to instantiate a bean.</text>
             </assertion>
 
             <assertion id="t">
@@ -6773,7 +6773,7 @@
             </assertion>
 
             <assertion id="u">
-                <text>Check that an extra qualifier is applied.</text>
+                <text>Check that an extra qualifier is applied to a field.</text>
             </assertion>
 
             <assertion id="v">
