@@ -16,34 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-
-@SuppressWarnings("unused")
-@Dependent
-public class Market implements Shop {
-
-    private Fruit constructorFruit = null;
-
-    @Inject
-    public Market(Fruit fruit) {
-        this.constructorFruit = fruit;
-    }
-
-    @Produces
-    @Expensive
-    public Bill createBill(@Any Fruit fruit) {
-        return new Bill(fruit);
-    }
-
-    @Produces
-    @Expensive
-    public Carrot carrot = new Carrot();
-
-    public Fruit getConstructorFruit() {
-        return constructorFruit;
-    }
-
+public class ItalianFood {
 }

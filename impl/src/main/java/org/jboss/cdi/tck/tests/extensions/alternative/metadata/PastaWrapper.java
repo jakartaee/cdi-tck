@@ -16,34 +16,26 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
-@SuppressWarnings("unused")
-@Dependent
-public class Market implements Shop {
+import javax.enterprise.inject.spi.AnnotatedType;
+import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.Set;
 
-    private Fruit constructorFruit = null;
+public class PastaWrapper extends AnnotatedTypeWrapper<Pasta> {
 
-    @Inject
-    public Market(Fruit fruit) {
-        this.constructorFruit = fruit;
+    private final Set<Type> typeClosure = new HashSet<Type>();
+
+    public PastaWrapper(AnnotatedType<Pasta> delegate) {
+        super(delegate, true);
+        typeClosure.add(Pasta.class);
+        typeClosure.add(Object.class);
+
     }
 
-    @Produces
-    @Expensive
-    public Bill createBill(@Any Fruit fruit) {
-        return new Bill(fruit);
+    @Override
+    public Set<Type> getTypeClosure() {
+        return typeClosure;
     }
-
-    @Produces
-    @Expensive
-    public Carrot carrot = new Carrot();
-
-    public Fruit getConstructorFruit() {
-        return constructorFruit;
-    }
-
 }
