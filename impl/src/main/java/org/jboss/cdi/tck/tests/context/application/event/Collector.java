@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.application.event;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -24,7 +25,8 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class Collector {
 
-    private List<Helper> contextPaths = new ArrayList<Helper>();
+    //using synchronized collection - see WELD-1673
+    private List<Helper> contextPaths = Collections.synchronizedList(new ArrayList<Helper>());
 
     public Collector() {
 
