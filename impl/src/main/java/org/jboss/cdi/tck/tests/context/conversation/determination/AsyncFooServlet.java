@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.servlet.AsyncContext;
@@ -26,26 +27,50 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.cdi.tck.util.Timer;
 
 @WebServlet(value = { "/foo-async" }, asyncSupported = true)
 @SuppressWarnings("serial")
 public class AsyncFooServlet extends HttpServlet {
 
+    public static final String TIMEOUT = "timeout";
+    public static final String COMPLETE = "complete";
+    public static final String ERROR = "error";
+    public static final String LOOP = "loop";
+
+    private static boolean inLoop = false;
+    private ExecutorService executorService;
+
+    @Override
+    public void init() throws ServletException {
+        // Note that executor thread does not use the same CL
+        executorService = Executors.newSingleThreadExecutor();
+    }
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String param = req.getParameter("action");
+        String cid = req.getParameter("cid");
+
+        QuxAsyncListener.reset();
         final AsyncContext actx = req.startAsync();
         actx.addListener(actx.createListener(QuxAsyncListener.class));
-        Executors.newSingleThreadExecutor().execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Timer.startNew(100l);
-                } catch (InterruptedException e) {
-                    throw new IllegalStateException("Interrupted");
-                }
-                actx.complete();
+        resp.setContentType("text/plain");
+
+        if (TIMEOUT.equals(param)) {
+            actx.setTimeout(150l);
+        } else if (COMPLETE.equals(param)) {
+            executorService.execute(new AsyncRequestProcessor(actx, 50l, false, null));
+        } else if (ERROR.equals(param)) {
+            executorService.execute(new AsyncRequestProcessor(actx, 50l, true, "/FailingServlet?cid="+cid));
+        } else if (LOOP.equals(param)) {
+            if (inLoop) {
+                executorService.execute(new AsyncRequestProcessor(actx, 50l, false, null));
+
+            } else {
+                executorService.execute(new AsyncRequestProcessor(actx, 50l, true, null));
+                inLoop = true;
             }
-        });
+        }
     }
 }

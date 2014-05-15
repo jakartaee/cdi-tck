@@ -23,6 +23,7 @@ import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 import javax.servlet.AsyncEvent;
 import javax.servlet.AsyncListener;
+import javax.servlet.ServletResponse;
 
 /**
  * @author Martin Kouba
@@ -33,33 +34,59 @@ public class QuxAsyncListener implements AsyncListener {
     @Inject
     Conversation conversation;
 
-    @Inject
-    TestResult testResult;
+    public static boolean onStartAsync = false;
+    public static boolean onError = false;
+    public static boolean onTimeout = false;
+    public static boolean onComplete = false;
 
     @Override
     public void onComplete(AsyncEvent event) throws IOException {
 
-        if ("test".equals(event.getSuppliedRequest().getParameter("action"))) {
-            if (FooServlet.CID.equals(conversation.getId())) {
-                // The long-running conversation is available
-                testResult.setAsyncListenerOk();
-            }
+        if (!onTimeout && !onError) {
+            onComplete = checkSameConversationActive();
+            writeInfo(event.getAsyncContext().getResponse());
         }
-
-        event.getAsyncContext().getResponse().setContentType("text/plain");
-        event.getAsyncContext().getResponse().getWriter().append(testResult.toString());
     }
 
     @Override
     public void onTimeout(AsyncEvent event) throws IOException {
+        onTimeout = checkSameConversationActive();
+        writeInfo(event.getAsyncContext().getResponse());
+        event.getAsyncContext().complete();
     }
 
     @Override
     public void onError(AsyncEvent event) throws IOException {
+        onError = checkSameConversationActive();
+        writeInfo(event.getAsyncContext().getResponse());
+        event.getAsyncContext().complete();
     }
 
     @Override
     public void onStartAsync(AsyncEvent event) throws IOException {
+        onStartAsync = checkSameConversationActive();
+    }
+
+    private void writeInfo(ServletResponse response) throws IOException {
+        response.getWriter().print(getInfo());
+        response.getWriter().flush();
+        response.getWriter().close();
+    }
+
+    public static String getInfo() {
+        return String
+                .format("onStartAsync: %s, onError: %s, onTimeout: %s, onComplete: %s", onStartAsync, onError, onTimeout, onComplete);
+    }
+
+    public boolean checkSameConversationActive(){
+        return FooServlet.CID.equals(conversation.getId());
+    }
+
+    public static void reset() {
+        onStartAsync = false;
+        onError = false;
+        onTimeout = false;
+        onComplete = false;
     }
 
 }

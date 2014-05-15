@@ -20,6 +20,7 @@ package org.jboss.cdi.tck.tests.context.conversation.determination;
 import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
@@ -67,14 +68,28 @@ public class ConversationDeterminationTest extends AbstractTest {
         assertTrue(cidPage.getContent().contains("transient: false"));
 
         // Test built-in conversation bean is available
-        TextPage resultPage = webClient.getPage(contextPath + "foo?action=test&cid=" + cid.trim());
+        TextPage resultPage = webClient.getPage(getContextPath(contextPath,"foo","test",cid));
         assertTrue(resultPage.getContent().contains("testServlet=true"));
         assertTrue(resultPage.getContent().contains("testFilter=true"));
         assertTrue(resultPage.getContent().contains("testListener=true"));
 
         // Async listener
-        resultPage = webClient.getPage(contextPath + "foo-async?action=test&cid=" + cid.trim());
-        assertTrue(resultPage.getContent().contains("testAsyncListener=true"));
+        resultPage = webClient.getPage(getContextPath(contextPath,"foo-async","complete",cid));
+        assertTrue(resultPage.getContent().contains("onComplete: true"));
+
+        webClient.setThrowExceptionOnFailingStatusCode(false);
+        resultPage = webClient.getPage(getContextPath(contextPath,"foo-async","timeout",cid));
+        assertTrue(resultPage.getContent().contains("onTimeout: true"));
+
+        resultPage = webClient.getPage(getContextPath(contextPath,"foo-async","error",cid));
+        assertTrue(resultPage.getContent().contains("onError: true"));
+
+        resultPage = webClient.getPage(getContextPath(contextPath,"foo-async","loop",cid));
+        assertTrue(resultPage.getContent().contains("onStartAsync: true"));
+    }
+
+    private String getContextPath(URL contextPath, String servlet, String param, String cid){
+        return contextPath + servlet + "?action="+ param + "&cid=" + cid.trim();
     }
 
 }
