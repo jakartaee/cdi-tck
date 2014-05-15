@@ -29,7 +29,6 @@ public class TestResult {
     private boolean testFilter = false;
     private boolean testServlet = false;
     private boolean testListener = false;
-    private boolean testAsyncListener = false;
 
     public boolean isTestFilter() {
         return testFilter;
@@ -55,18 +54,10 @@ public class TestResult {
         this.testListener = true;
     }
 
-    public boolean isTestAsyncListener() {
-        return testAsyncListener;
-    }
-
-    public void setAsyncListenerOk() {
-        this.testAsyncListener = true;
-    }
-
     @Override
     public String toString() {
-        return String.format("TestResult [testFilter=%s, testServlet=%s, testListener=%s, testAsyncListener=%s]", testFilter,
-                testServlet, testListener, testAsyncListener);
+        return String.format("TestResult [testFilter=%s, testServlet=%s, testListener=%s]", testFilter,
+                testServlet, testListener);
     }
 
 }
