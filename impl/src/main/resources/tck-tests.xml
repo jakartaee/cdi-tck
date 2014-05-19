@@ -21,6 +21,14 @@
             <package name="org.jboss.cdi.tck.tests.*" />
             <package name="org.jboss.cdi.tck.interceptors.tests.*" />
         </packages>
+	
+	<!-- Issues in the spec -->
+        <!-- CDI-437 -->
+        <class name="org.jboss.cdi.tck.tests.lookup.byname.ambiguous.broken.AmbiguousELNamesTest">
+            <methods>
+               <exclude name=".*"/>
+            </methods>
+        </class>
 
     </test>
 
