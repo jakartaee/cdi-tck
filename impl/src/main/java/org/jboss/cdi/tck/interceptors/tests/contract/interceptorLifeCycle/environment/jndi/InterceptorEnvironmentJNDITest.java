@@ -100,7 +100,7 @@ public class InterceptorEnvironmentJNDITest extends AbstractTest {
     @ArquillianResource(BarServlet.class)
     URL barContextPath;
 
-    @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = "2.2.1", id = "a")
     public void testInterceptorEnvironment() throws FailingHttpStatusCodeException, MalformedURLException, IOException {
 

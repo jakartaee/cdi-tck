@@ -22,7 +22,7 @@ import javax.ejb.Stateless;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-@BarBinding
+@MyBinding
 @Stateless
 public class Bar {
 

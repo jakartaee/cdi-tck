@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.envir
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -28,7 +27,6 @@ public class Bar {
     @Resource(name = "greeting")
     private String greeting;
 
-    @Inject
     private Animal animal;
 
     public String getGreeting() {
