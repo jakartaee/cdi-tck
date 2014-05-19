@@ -18,29 +18,32 @@ package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.envir
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
-import javax.enterprise.inject.Instance;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.Testable;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.application6.ApplicationDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.WebClient;
+
 /**
  * @author Matus Abaffy
  */
+@RunAsClient
 @SpecVersion(spec = "int", version = "1.2")
 public class InterceptorEnvironmentJNDISessionBeanTest extends AbstractTest {
 
@@ -50,23 +53,20 @@ public class InterceptorEnvironmentJNDISessionBeanTest extends AbstractTest {
     private static final String HELLO = "Hello";
     private static final String BYE = "Bye";
 
-    @Deployment
+    private static final String FOO_GET = "foo?get=";
+    private static final String BAR_GET = "bar?get=";
+
+    @Deployment(testable = false)
     public static EnterpriseArchive createTestArchive() {
 
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
-                .withTestClassDefinition(InterceptorEnvironmentJNDISessionBeanTest.class)
-                .withClasses(BarBinding.class, Animal.class)
+                .notTestArchive()
+                .withClasses(MyBinding.class, MyInterceptor.class, Animal.class)
                 .noDefaultWebModule().build();
 
-        StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class)
-                .version(EnterpriseArchiveBuilder.DEFAULT_APP_VERSION).applicationName("Test").createModule()
-                .ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb().webUri("test1.war")
-                .contextRoot("/test1").up().up().createModule().getOrCreateWeb().webUri("test2.war").contextRoot("/test2").up()
-                .up().exportAsString());
-        enterpriseArchive.setApplicationXML(applicationXml);
-
-        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("test1.war")
-                .withClasses(BarInterceptor.class, Foo.class, FooInterceptor.class, FooBinding.class, Dog.class)
+        WebArchive fooArchive = new WebArchiveBuilder()
+                .notTestArchive()
+                .withClasses(FooServlet.class, Foo.class, Dog.class)
                 .withWebXml(
                         Descriptors.create(WebAppDescriptor.class).createEnvEntry().envEntryName(GREETING)
                                 .envEntryType(JAVA_LANG_STRING).envEntryValue(BYE).up())
@@ -74,45 +74,62 @@ public class InterceptorEnvironmentJNDISessionBeanTest extends AbstractTest {
                 .build();
         enterpriseArchive.addAsModule(fooArchive);
 
-        WebArchive barArchive = Testable.archiveToTest(new WebArchiveBuilder().notTestArchive().withName("test2.war")
-                .withClasses(InterceptorEnvironmentJNDISessionBeanTest.class, Bar.class, Cat.class)
+        WebArchive barArchive = new WebArchiveBuilder()
+                .notTestArchive()
+                .withClasses(BarServlet.class, Bar.class, Cat.class)
                 .withWebXml(
                         Descriptors.create(WebAppDescriptor.class).createEnvEntry().envEntryName(GREETING)
                                 .envEntryType(JAVA_LANG_STRING).envEntryValue(HELLO).up())
-                .build()
-                .setManifest(
-                        new StringAsset(Descriptors.create(ManifestDescriptor.class)
-                                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME)
-                                .addToClassPath("test1.war")
-                                .exportAsString())));
+                .withDefaultEjbModuleDependency()
+                .build();
         enterpriseArchive.addAsModule(barArchive);
 
         return enterpriseArchive;
     }
 
-    @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.2.1", id = "a")
-    public void testInterceptorEnvironment(Instance<Bar> barInstance, Instance<Foo> fooInstance) {
-        FooInterceptor.reset();
-        Foo foo = fooInstance.get();
-        String fooAnimalName = foo.getAnimal().getName();
-        String fooGreeting = foo.getGreeting();
+    @ArquillianResource(FooServlet.class)
+    URL fooContextPath;
 
-        assertTrue(FooInterceptor.isInterceptorCalled());
-        assertEquals(FooInterceptor.getGreeting(), fooGreeting);
-        assertEquals(FooInterceptor.getAnimal().getName(), fooAnimalName);
-        assertEquals(foo.getGreeting(), BYE);
+    @ArquillianResource(BarServlet.class)
+    URL barContextPath;
+
+    @Test(groups = JAVAEE_FULL)
+    @SpecAssertion(section = "2.2.1", id = "a")
+    public void testInterceptorEnvironment() throws FailingHttpStatusCodeException, MalformedURLException, IOException {
+
+        WebClient webClient = new WebClient();
+        webClient.setThrowExceptionOnFailingStatusCode(true);
+
+        // create an instance of Foo and fail if interceptor was not called
+        webClient.getPage(fooContextPath + FOO_GET + "init");
+
+        String fooAnimalName = webClient.getPage(fooContextPath + FOO_GET + "name").getWebResponse().getContentAsString();
+        String fooGreeting = webClient.getPage(fooContextPath + FOO_GET + "greeting").getWebResponse().getContentAsString();
+
+        String fooInterceptorAnimalName = webClient.getPage(fooContextPath + FOO_GET + "intName").getWebResponse()
+                .getContentAsString();
+        String fooInterceptorGreeting = webClient.getPage(fooContextPath + FOO_GET + "intGreeting").getWebResponse()
+                .getContentAsString();
+
+        assertEquals(fooInterceptorAnimalName, fooAnimalName);
+        assertEquals(fooInterceptorGreeting, fooGreeting);
+        assertEquals(fooGreeting, BYE);
         assertEquals(fooAnimalName, "Dog");
 
-        BarInterceptor.reset();
-        Bar bar = barInstance.get();
-        String barAnimalName = bar.getAnimal().getName();
-        String barGreeting = bar.getGreeting();
+        // create an instance of Bar and fail if interceptor was not called
+        webClient.getPage(barContextPath + BAR_GET + "init");
 
-        assertTrue(BarInterceptor.isInterceptorCalled());
-        assertEquals(BarInterceptor.getGreeting(), barGreeting);
-        assertEquals(BarInterceptor.getAnimal().getName(), barAnimalName);
-        assertEquals(bar.getGreeting(), HELLO);
+        String barAnimalName = webClient.getPage(barContextPath + BAR_GET + "name").getWebResponse().getContentAsString();
+        String barGreeting = webClient.getPage(barContextPath + BAR_GET + "greeting").getWebResponse().getContentAsString();
+
+        String barInterceptorAnimalName = webClient.getPage(barContextPath + BAR_GET + "intName").getWebResponse()
+                .getContentAsString();
+        String barInterceptorGreeting = webClient.getPage(barContextPath + BAR_GET + "intGreeting").getWebResponse()
+                .getContentAsString();
+
+        assertEquals(barInterceptorAnimalName, barAnimalName);
+        assertEquals(barInterceptorGreeting, barGreeting);
+        assertEquals(barGreeting, HELLO);
         assertEquals(barAnimalName, "Cat");
     }
 }

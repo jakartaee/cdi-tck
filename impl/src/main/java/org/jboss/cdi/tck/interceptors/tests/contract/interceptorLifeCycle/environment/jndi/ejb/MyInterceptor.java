@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -25,10 +25,10 @@ import javax.interceptor.InvocationContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-@BarBinding
+@MyBinding
 @Priority(1000)
 @Interceptor
-public class BarInterceptor {
+public class MyInterceptor {
 
     private static boolean interceptorCalled = false;
     private static String greeting;
@@ -36,12 +36,12 @@ public class BarInterceptor {
 
     @Resource(name = "greeting")
     private void setGreeting(String greeting) {
-        BarInterceptor.greeting = greeting;
+        MyInterceptor.greeting = greeting;
     }
 
     @Inject
     private void init() throws NamingException {
-        BarInterceptor.animal = (Animal) InitialContext.doLookup("java:module/Animal");
+        MyInterceptor.animal = (Animal) InitialContext.doLookup("java:module/Animal");
     }
 
     public static void reset() {
