@@ -31,5 +31,5 @@ import javax.interceptor.InterceptorBinding;
 @Documented
 @Inherited
 @InterceptorBinding
-public @interface FooBinding {
+public @interface MyBinding {
 }
