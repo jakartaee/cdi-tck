@@ -28,6 +28,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
@@ -95,6 +97,43 @@ public class BeanDefinitionTest extends AbstractTest {
         assertTrue(bean.getTypes().contains(DeadlyAnimal.class));
     }
 
+    @SuppressWarnings("unchecked")
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_TYPES, id = "a"), @SpecAssertion(section = BEAN_TYPES, id = "a"),
+            @SpecAssertion(section = BEAN_TYPES, id = "l"), @SpecAssertion(section = BEAN, id = "ba") })
+    public void testGenericBeanTypes() {
+        assertEquals(getBeans(MyRawBean.class).size(), 1);
+        Bean<MyGenericBean<?>> bean = (Bean<MyGenericBean<?>>) getCurrentManager().getBeans(MyGenericBean.class).iterator().next();
+        assertEquals(bean.getTypes().size(), 5);
+
+        assertTrue(containsClass(bean.getTypes(), MyGenericBean.class));
+        assertFalse(bean.getTypes().contains(MyGenericBean.class));
+
+        assertTrue(containsClass(bean.getTypes(), MyBean.class));
+        assertFalse(bean.getTypes().contains(MyBean.class));
+
+        assertTrue(bean.getTypes().contains(MyInterface.class));
+
+        assertTrue(containsClass(bean.getTypes(), MySuperInterface.class));
+        assertFalse(bean.getTypes().contains(MySuperInterface.class));
+
+        assertTrue(bean.getTypes().contains(Object.class));
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_TYPES, id = "a"), @SpecAssertion(section = BEAN_TYPES, id = "a"),
+            @SpecAssertion(section = BEAN_TYPES, id = "l"), @SpecAssertion(section = BEAN, id = "ba") })
+    public void testRawBeanTypes() {
+        assertEquals(getBeans(MyRawBean.class).size(), 1);
+        Bean<MyRawBean> bean = getBeans(MyRawBean.class).iterator().next();
+        assertEquals(bean.getTypes().size(), 5);
+        assertTrue(bean.getTypes().contains(MyRawBean.class));
+        assertTrue(bean.getTypes().contains(MyBean.class));
+        assertTrue(bean.getTypes().contains(MyInterface.class));
+        assertTrue(bean.getTypes().contains(MySuperInterface.class));
+        assertTrue(bean.getTypes().contains(Object.class));
+    }
+
     @Test
     @SpecAssertion(section = TYPECASTING_BETWEEN_BEAN_TYPES, id = "a")
     @SuppressWarnings("unused")
@@ -150,5 +189,21 @@ public class BeanDefinitionTest extends AbstractTest {
         Set<Bean<Horse>> beans = getBeans(Horse.class);
         assertEquals(beans.size(), 1);
         assertEquals(beans.iterator().next().getBeanClass(), Horse.class);
+    }
+
+    private static boolean containsClass(Set<Type> types, Class<?> clazz) {
+        for (Type type : types) {
+            if (type instanceof Class<?>) {
+                if (((Class<?>) type).equals(clazz)) {
+                    return true;
+                }
+            }
+            if (type instanceof ParameterizedType) {
+                if (((ParameterizedType) type).getRawType().equals(clazz)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
