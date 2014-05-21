@@ -53,7 +53,9 @@ public class BeanRegistrationByExtensionInEarLibraryTest extends AbstractTest {
                 .withLibrary(BeanClassToRegister.class, ManualBeanRegistrationExtension.class).noDefaultWebModule().build();
 
         WebArchive webArchive = new WebArchiveBuilder().withExtension(WarDummyObserverExtension.class).notTestArchive()
-                .withClasses(WarDummyObserverExtension.class).build();
+                .withClasses(WarDummyObserverExtension.class)
+                .withDefaultEjbModuleDependency()
+                .build();
         enterpriseArchive.addAsModule(webArchive);
 
         return enterpriseArchive;
