@@ -3,7 +3,7 @@
 
     <listeners>
         <!-- Required - avoid randomly mixed test method execution -->
-        <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor" />
+        <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor"/>
         <!-- Optional - intended for debug purpose only -->
         <listener class-name="org.jboss.cdi.tck.impl.testng.ConfigurationLoggingListener"/>
         <listener class-name="org.jboss.cdi.tck.impl.testng.ProgressLoggingTestListener"/>
@@ -12,21 +12,21 @@
         <listener class-name="org.testng.reporters.FailedReporter"/>
         <listener class-name="org.testng.reporters.XMLReporter"/>
         <listener class-name="org.testng.reporters.EmailableReporter"/>
-        <listener class-name="org.testng.reporters.TestHTMLReporter" />
+        <listener class-name="org.testng.reporters.TestHTMLReporter"/>
     </listeners>
 
     <test name="CDI TCK">
 
         <packages>
-            <package name="org.jboss.cdi.tck.tests.*" />
-            <package name="org.jboss.cdi.tck.interceptors.tests.*" />
+            <package name="org.jboss.cdi.tck.tests.*"/>
+            <package name="org.jboss.cdi.tck.interceptors.tests.*"/>
         </packages>
-	
-	<!-- Issues in the spec -->
+
+        <!-- Issues in the spec -->
         <!-- CDI-437 -->
         <class name="org.jboss.cdi.tck.tests.lookup.byname.ambiguous.broken.AmbiguousELNamesTest">
             <methods>
-               <exclude name=".*"/>
+                <exclude name=".*"/>
             </methods>
         </class>
 
