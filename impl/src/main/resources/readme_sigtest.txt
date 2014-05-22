@@ -26,3 +26,9 @@ JDK7 signature test
 ---------------------------
 
 cdi-api-jdk7.sig is a signature file build with JDK 7 -  Java(TM) SE Runtime Environment (build 1.7.0-b147)
+
+JDK8 signature test
+---------------------------
+
+cdi-api-jdk7.sig is a signature file build with JDK 8 -  Java(TM) SE Runtime Environment (build 1.8.0_05). sigtestdev.jar built and used in version 3_0-FCS-b12 from https://wiki.openjdk.java.net/display/CodeTools/Code+structure
+
