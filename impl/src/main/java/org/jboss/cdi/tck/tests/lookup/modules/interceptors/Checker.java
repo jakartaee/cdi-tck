@@ -16,32 +16,42 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.interceptors;
 
-import java.io.Serializable;
+import javax.enterprise.context.ApplicationScoped;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Priority;
-import javax.inject.Inject;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+@ApplicationScoped
+public class Checker {
 
-@SuppressWarnings("serial")
-@BarBinding
-@Priority(1000)
-@Interceptor
-public class BarInterceptor extends BarSuperInterceptor implements Serializable {
+    private boolean interceptorCalled = false;
+    private Animal animal;
+    private Animal superAnimal;
 
-    @Inject
-    public void setAnimal(Animal animal) {
-        checker.setAnimal(animal);
+    public void setBarInterceptorCalled(boolean called) {
+        interceptorCalled = called;
     }
 
-    @PostConstruct
-    public void intercept(InvocationContext ctx) {
-        checker.setBarInterceptorCalled(true);
-        try {
-            ctx.proceed();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public boolean isBarInterceptorCalled() {
+        return interceptorCalled;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public Animal getSuperAnimal() {
+        return superAnimal;
+    }
+
+    public void setSuperAnimal(Animal animal) {
+        this.superAnimal = animal;
+    }
+
+    public void reset() {
+        interceptorCalled = false;
+        animal = null;
+        superAnimal = null;
     }
 }
