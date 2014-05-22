@@ -29,11 +29,13 @@ import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.application6.ApplicationDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -41,35 +43,32 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Test that interceptor class's injection and injection point validation is done with respect to the module containing the
- * interceptor class and not the intercepted class, i.e. test that interceptor of a bean uses the interceptor's bean manager and
- * not the bean's bean manager (for injection and injection point validation).
- * 
+ * Test that interceptor class's injection and injection point validation are done with respect to the module containing the
+ * interceptor class and not the intercepted class, i.e. test that an interceptor of a bean uses the interceptor's bean manager
+ * and not the bean's bean manager (for injection and injection point validation).
+ *
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class InterceptorModularityTest extends AbstractTest {
+
+    private static final String TEST1_JAR = "test1.jar";
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
 
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
                 .withTestClassDefinition(InterceptorModularityTest.class)
-                .withClasses(BarBinding.class, Animal.class, Cow.class, BarSuperInterceptor.class)
+                .withClasses(Checker.class, BarBinding.class, Animal.class, Cow.class, BarSuperInterceptor.class)
                 .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Cow.class.getName()).up())
                 .noDefaultWebModule().build();
 
-        StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class)
-                .version(EnterpriseArchiveBuilder.DEFAULT_APP_VERSION).applicationName("Test").createModule()
-                .ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb().webUri("test1.war")
-                .contextRoot("/test1").up().up().createModule().getOrCreateWeb().webUri("test2.war").contextRoot("/test2").up()
-                .up().exportAsString());
-        enterpriseArchive.setApplicationXML(applicationXml);
-
-        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("test1.war")
-                .withClasses(BarInterceptor.class, Dog.class)
-                .withDefaultEjbModuleDependency()
-                .build();
+        JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class, TEST1_JAR)
+                .addClasses(BarInterceptor.class, Dog.class)
+                .setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
+                                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME)
+                                .exportAsString()))
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         enterpriseArchive.addAsModule(fooArchive);
 
         WebArchive barArchive = Testable.archiveToTest(new WebArchiveBuilder().notTestArchive().withName("test2.war")
@@ -78,7 +77,7 @@ public class InterceptorModularityTest extends AbstractTest {
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
                                 .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME)
-                                .addToClassPath("test1.war")
+                                .addToClassPath(TEST1_JAR)
                                 .exportAsString())));
         enterpriseArchive.addAsModule(barArchive);
 
@@ -87,16 +86,17 @@ public class InterceptorModularityTest extends AbstractTest {
 
     @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = SELECTION, id = "aa")
-    public void testInterceptorEnvironment(Instance<Bar> barInstance, Instance<BarSuperInterceptor> barSIInstance) {
-        BarInterceptor.reset();
+    public void testInterceptorEnvironment(Instance<Bar> barInstance, Instance<BarSuperInterceptor> barSIInstance,
+            Checker checker) {
+        checker.reset();
         barInstance.get().ping();
 
-        assertTrue(BarInterceptor.isInterceptorCalled());
-        assertNotNull(BarInterceptor.getAnimal());
-        assertEquals(BarInterceptor.getAnimal().getName(), "Dog");
-        assertEquals(BarSuperInterceptor.getSuperAnimal().getName(), "Dog");
+        assertTrue(checker.isBarInterceptorCalled());
+        assertNotNull(checker.getAnimal());
+        assertEquals(checker.getAnimal().getName(), "Dog");
+        assertEquals(checker.getSuperAnimal().getName(), "Dog");
 
         barSIInstance.get();
-        assertEquals(BarSuperInterceptor.getSuperAnimal().getName(), "Cow");
+        assertEquals(checker.getSuperAnimal().getName(), "Cow");
     }
 }
