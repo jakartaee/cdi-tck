@@ -37,6 +37,19 @@
             </methods>
         </class>
 
+        <!-- CDITCK-421 -->
+        <class name="org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.AroundInvokeAccessInterceptorTest">
+            <methods>
+                <exclude name=".*"/>
+            </methods>
+        </class>
+
+        <class name="org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout.AroundTimeoutInterceptorTest">
+            <methods>
+                <exclude name=".*"/>
+            </methods>
+        </class>
+
 
     </test>
 
