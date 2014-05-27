@@ -27,6 +27,7 @@ import javax.enterprise.inject.Instance;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.shrinkwrap.DummySessionBean;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -64,7 +65,7 @@ public class InterceptorModularityTest extends AbstractTest {
                 .noDefaultWebModule().build();
 
         JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class, TEST1_JAR)
-                .addClasses(BarInterceptor.class, Dog.class)
+                .addClasses(BarInterceptor.class, Dog.class, DummySessionBean.class)
                 .setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
                                 .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME)
                                 .exportAsString()))
