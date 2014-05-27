@@ -16,25 +16,20 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Bar;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Boss;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Foo;
+
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterTypeDiscovery;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
-import javax.enterprise.inject.spi.ProcessProducer;
-
-import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Bar;
-import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Boss;
-import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Foo;
-
 /**
- *
  * @author Martin Kouba
+ * @author Tomas Remes
  */
 public class AfterTypeDiscoveryObserver implements Extension {
 
@@ -44,8 +39,15 @@ public class AfterTypeDiscoveryObserver implements Extension {
     private boolean bossObserved = false;
     private boolean processProducerEventFiredForProducerMethod = false;
     private boolean processProducerEventFiredForProducerField = false;
+    private DeltaAlternativeBean deltaAlternative = new DeltaAlternativeBean();
+    private DeltaInterceptorBean deltaInterceptor = new DeltaInterceptorBean();
+    private DeltaDecoratorBean deltaDecorator;
 
     public void observeAfterTypeDiscovery(@Observes AfterTypeDiscovery event, BeanManager beanManager) {
+
+        event.getAlternatives().add(DeltaAlternative.class);
+        event.getInterceptors().add(DeltaInterceptor.class);
+        event.getDecorators().add(DeltaDecorator.class);
 
         interceptors = Collections.unmodifiableList(new ArrayList<Class<?>>(event.getInterceptors()));
         alternatives = Collections.unmodifiableList(new ArrayList<Class<?>>(event.getAlternatives()));
@@ -54,15 +56,30 @@ public class AfterTypeDiscoveryObserver implements Extension {
         event.addAnnotatedType(beanManager.createAnnotatedType(Boss.class), AfterTypeDiscoveryObserver.class.getName());
 
         // Bravo interceptor removed
-        for (Iterator<Class<?>> iterator = event.getInterceptors().iterator(); iterator.hasNext();) {
-            if(BravoInterceptor.class.equals(iterator.next())) {
+        for (Iterator<Class<?>> iterator = event.getInterceptors().iterator(); iterator.hasNext(); ) {
+            if (BravoInterceptor.class.equals(iterator.next())) {
                 iterator.remove();
             }
         }
         // The order of decorators reverted
         Collections.reverse(event.getDecorators());
-        // No selected alternative
-        event.getAlternatives().clear();
+        // Remove first alternative - AlphaAlternative
+        event.getAlternatives().remove(0);
+    }
+
+    public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
+
+        AnnotatedType<DeltaDecorator> type = beanManager.createAnnotatedType(DeltaDecorator.class);
+        deltaDecorator = new DeltaDecoratorBean(type.getFields().iterator().next(), beanManager);
+
+        event.addBean(deltaAlternative);
+        event.addBean(deltaInterceptor);
+        event.addBean(deltaDecorator);
+
+    }
+
+    public void observeProcessAnnotatedType(@Observes ProcessAnnotatedType<DeltaDecorator> event) {
+        event.veto();
     }
 
     public void observeBossAnnotatedType(@Observes ProcessAnnotatedType<Boss> event) {
