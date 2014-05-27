@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,24 +16,17 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-import javax.enterprise.util.AnnotationLiteral;
-import javax.interceptor.InterceptorBinding;
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import javax.decorator.Delegate;
+import javax.inject.Inject;
 
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+public class DeltaDecorator implements Logger {
 
-@Target({ TYPE, METHOD })
-@Retention(RUNTIME)
-@Documented
-@InterceptorBinding
-public @interface Monitored {
+    @Inject
+    @Delegate
+    Logger logger;
 
-    public class MonitoredBindingLiteral extends AnnotationLiteral<Monitored> implements Monitored {
-        public static final MonitoredBindingLiteral INSTANCE = new MonitoredBindingLiteral();
+    @Override
+    public String log(String string) {
+       return logger.log(string + "delta");
     }
-
 }

@@ -16,11 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-import javax.annotation.Priority;
-import javax.enterprise.inject.Alternative;
-
-@Priority(2501)
-@Alternative
-public class BravoAlternative {
+public class BravoAlternative implements Alternatives {
 
 }

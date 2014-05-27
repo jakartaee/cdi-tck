@@ -16,17 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.ATD;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
-import static org.jboss.cdi.tck.cdi.Sections.PP;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -42,8 +31,14 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+import javax.enterprise.util.AnnotationLiteral;
+import javax.inject.Inject;
+
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.*;
+import static org.testng.Assert.*;
+
 /**
- *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
@@ -72,6 +67,7 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
     public void testInitialInterceptors() {
         assertTrue(extension.getInterceptors().contains(BravoInterceptor.class));
         assertTrue(extension.getInterceptors().contains(AlphaInterceptor.class));
+        assertTrue(extension.getInterceptors().contains(DeltaInterceptor.class));
     }
 
     @Test
@@ -79,15 +75,16 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
     public void testInitialAlternatives() {
         assertEquals(extension.getAlternatives().size(), 2);
         assertEquals(extension.getAlternatives().get(0), AlphaAlternative.class);
-        assertEquals(extension.getAlternatives().get(1), BravoAlternative.class);
+        assertEquals(extension.getAlternatives().get(1), DeltaAlternative.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = ATD, id = "d"), @SpecAssertion(section = ATD, id = "hc") })
     public void testInitialDecorators() {
-        assertEquals(extension.getDecorators().size(), 2);
+        assertEquals(extension.getDecorators().size(), 3);
         assertEquals(extension.getDecorators().get(0), AlphaDecorator.class);
         assertEquals(extension.getDecorators().get(1), BravoDecorator.class);
+        assertEquals(extension.getDecorators().get(2), DeltaDecorator.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -97,25 +94,29 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         AlphaInterceptor.reset();
         BravoInterceptor.reset();
         CharlieInterceptor.reset();
+        DeltaInterceptor.reset();
 
         logger.ping();
 
         assertTrue(AlphaInterceptor.isIntercepted());
         assertFalse(BravoInterceptor.isIntercepted());
         assertTrue(CharlieInterceptor.isIntercepted());
+        assertTrue(DeltaInterceptor.isIntercepted());
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = ATD, id = "gc") })
+
     public void testFinalDecorators(TransactionLogger logger) {
-        assertEquals(logger.log("ping"), "pingbravoalphacharlie");
+        assertEquals(logger.log("ping"), "pingdeltabravoalphacharlie");
     }
 
-    @Test
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = ATD, id = "ga") })
-    public void testFinalAlternatives() {
+    public void testFinalAlternatives(TransactionLogger logger) {
+        // assert that proper alternative is injected
+        assertEquals(logger.getAlternativeClass(), DeltaAlternative.class);
         assertTrue(getBeans(AlphaAlternative.class).isEmpty());
-        assertTrue(getBeans(BravoAlternative.class).isEmpty());
     }
 
     @SuppressWarnings("serial")

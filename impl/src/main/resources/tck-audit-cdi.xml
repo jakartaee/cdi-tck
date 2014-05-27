@@ -6926,15 +6926,15 @@
         </assertion>
 
         <assertion id="b">
-            <text>|getAlternatives()| returns the ordered list of enabled alternatives for the application. Alternative enabled for a bean archive are not included in the list.</text>
+            <text>|getAlternatives()| returns list of enabled alternatives for the application, sorted by priority in ascending order. Alternatives enabled for a bean archive are not included.</text>
         </assertion>
 
         <assertion id="c">
-            <text>|getInterceptors()| returns the ordered list of enabled interceptors for the application. Interceptors enabled for a bean archive are not included in the list.</text>
+            <text>|getInterceptors()| returns the list of enabled interceptors for the application, sorted by priority in ascending order. Interceptors enabled for a bean archive are not included.</text>
         </assertion>
 
         <assertion id="d">
-            <text>|getDecorators()| returns the ordered list of enabled decorators for the application. Decorators enabled for a bean archive are not included in the list.</text>
+            <text>|getDecorators()| returns list of enabled decorators for the application, sorted by priority in ascending order. Decorators enabled for a bean archive are not included.</text>
         </assertion>
 
         <assertion id="e">

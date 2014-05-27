@@ -16,7 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
+import javax.inject.Inject;
+
 public class TransactionLogger implements Logger {
+
+    @Inject
+    Alternatives alt;
 
     @Override
     public String log(String msg) {
@@ -25,6 +30,10 @@ public class TransactionLogger implements Logger {
 
     @Monitored
     public void ping() {
+    }
+
+    public Class getAlternativeClass() {
+        return alt.getClass();
     }
 
 }
