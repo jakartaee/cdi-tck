@@ -2716,11 +2716,15 @@
             </assertion>
 
             <assertion id="da">
-                <text>Check the required type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is _assignable to_ the upper bound of the wildcard and assignable from the lower bound of the wildcard</text>
+                <text>Check the required type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is _assignable to_ the _upper_ bound of the wildcard</text>
             </assertion>
 
             <assertion id="db">
-                <text>Check the required type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is _assignable from_ the upper bound of the wildcard and assignable from the lower bound of the wildcard</text>
+                <text>Check the required type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is _assignable from_ the _upper_ bound of the wildcard</text>
+            </assertion>
+
+            <assertion id="dc">
+                <text>Check the required type parameter is a wildcard, the bean type parameter is a type variable and the upper bound of the type variable is _assignable from_ the _lower_ bound of the wildcard</text>
             </assertion>
 
             <assertion id="e">
