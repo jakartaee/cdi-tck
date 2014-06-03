@@ -39,6 +39,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@SuppressWarnings("serial")
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
 
@@ -81,42 +82,59 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "da")
+    @SpecAssertions({ @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "da"),
+            @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "dc") })
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards() {
         Set<Bean<Result<? extends Throwable, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Throwable, ? super Exception>>() {
         });
         assert beans.size() == 1;
-        assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
+        assert rawTypeSetMatches(beans.iterator().next().getTypes(), ResultImpl.class, Result.class, Object.class);
     }
 
     @Test
-    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "db")
+    @SpecAssertions({ @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "db"),
+            @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "dc") })
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards2() {
-        Set<Bean<Result<? extends Exception, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Exception, ? super Exception>>() {
+        Set<Bean<Result<? extends RuntimeException, ? super RuntimeException>>> beans = getBeans(new TypeLiteral<Result<? extends RuntimeException, ? super RuntimeException>>() {
         });
         assert beans.size() == 1;
-        assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
+        assert rawTypeSetMatches(beans.iterator().next().getTypes(), ResultImpl.class, Result.class, Object.class);
+    }
+
+    @Test
+    @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "dc")
+    public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcardsBroken() {
+        Set<Bean<Result<? extends Exception, ? super Throwable>>> beans = getBeans(new TypeLiteral<Result<? extends Exception, ? super Throwable>>() {
+        });
+        assertEquals(beans.size(), 0);
     }
 
     @Test
     @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "e")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithActualTypes() {
-        Set<Bean<Result<Exception, Exception>>> beans = getBeans(new TypeLiteral<Result<Exception, Exception>>() {
+        Set<Bean<Result<RuntimeException, IllegalStateException>>> beans = getBeans(new TypeLiteral<Result<RuntimeException, IllegalStateException>>() {
         });
         assert beans.size() == 1;
-        assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
+        assert rawTypeSetMatches(beans.iterator().next().getTypes(), ResultImpl.class, Result.class, Object.class);
+
+        Set<Bean<Result<RuntimeException, Throwable>>> noBeans = getBeans(new TypeLiteral<Result<RuntimeException, Throwable>>() {
+        });
+        assertEquals(noBeans.size(), 0);
     }
 
-    @SuppressWarnings("serial")
     @Test
     @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "f")
-    public <T1 extends Exception, T2 extends Exception, T3> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeTypeVariable() {
+    public <T1 extends RuntimeException, T2 extends T1, T3> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithTypeVariable() {
         Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>() {
         });
         assert beans.size() == 1;
-        assert rawTypeSetMatches(beans.iterator().next().getTypes(), Result.class, Object.class);
+        assert rawTypeSetMatches(beans.iterator().next().getTypes(), ResultImpl.class, Result.class, Object.class);
 
-        Set<Bean<Dao<T2, T3>>> daoBeans = getBeans(new TypeLiteral<Dao<T2, T3>>() {
+        Set<Bean<Result<T1, T3>>> noBeans = getBeans(new TypeLiteral<Result<T1, T3>>() {
+        });
+        assertEquals(noBeans.size(), 0);
+
+        Set<Bean<Dao<T1, T3>>> daoBeans = getBeans(new TypeLiteral<Dao<T1, T3>>() {
         });
         assertEquals(daoBeans.size(), 1);
         assertTrue(rawTypeSetMatches(daoBeans.iterator().next().getTypes(), Dao.class, Object.class));
