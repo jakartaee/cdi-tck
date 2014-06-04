@@ -21,7 +21,7 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
-@Stateful
+@Stateful(mappedName = "Pitbull")
 @ApplicationScoped
 @Named
 @Local({ org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote.Bar.class,
