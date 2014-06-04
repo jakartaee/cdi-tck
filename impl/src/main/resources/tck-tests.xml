@@ -57,6 +57,12 @@
             </methods>
         </class>
 
+        <!-- CDITCK-423 -->
+        <class name="org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote.RemoteInterfaceNotInAPITypesTest">
+            <methods>
+                <exclude name=".*"/>
+            </methods>
+        </class>
 
     </test>
 
