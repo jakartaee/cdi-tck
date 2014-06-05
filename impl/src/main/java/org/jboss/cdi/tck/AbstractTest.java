@@ -23,6 +23,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -93,22 +94,17 @@ public abstract class AbstractTest extends Arquillian {
      */
     protected boolean annotationSetMatches(Set<? extends Annotation> annotations,
             Class<? extends Annotation>... requiredAnnotationTypes) {
-        List<Class<? extends Annotation>> annotationTypeList = new ArrayList<Class<? extends Annotation>>();
-        annotationTypeList.addAll(Arrays.asList(requiredAnnotationTypes));
+        Set<Class<? extends Annotation>> annotationsTypeSet = new HashSet<Class<? extends Annotation>>();
         for (Annotation annotation : annotations) {
-            if (annotationTypeList.contains(annotation.annotationType())) {
-                annotationTypeList.remove(annotation.annotationType());
-            } else {
-                return false;
-            }
+            annotationsTypeSet.add(annotation.annotationType());
         }
-        return annotationTypeList.size() == 0;
+        return typeSetMatches(annotationsTypeSet, requiredAnnotationTypes);
     }
 
     /**
      * @param annotations The annotation set
      * @param requiredAnnotationTypes The required annotations
-     * @return <code>true</code> if speficied set matches required annotations, <code>false</code> otherwise
+     * @return <code>true</code> if the specified set matches required annotations, <code>false</code> otherwise
      */
     protected boolean annotationSetMatches(Set<? extends Annotation> annotations, Annotation... requiredAnnotations) {
         List<Annotation> requiredAnnotationList = new ArrayList<Annotation>();
@@ -116,16 +112,15 @@ public abstract class AbstractTest extends Arquillian {
     }
 
     protected boolean rawTypeSetMatches(Set<Type> types, Class<?>... requiredTypes) {
-        List<Class<?>> typeList = new ArrayList<Class<?>>();
-        typeList.addAll(Arrays.asList(requiredTypes));
+        Set<Type> typesRawSet = new HashSet<Type>();
         for (Type type : types) {
             if (type instanceof Class<?>) {
-                typeList.remove(type);
+                typesRawSet.add(type);
             } else if (type instanceof ParameterizedType) {
-                typeList.remove(((ParameterizedType) type).getRawType());
+                typesRawSet.add(((ParameterizedType) type).getRawType());
             }
         }
-        return typeList.size() == 0;
+        return typeSetMatches(typesRawSet, requiredTypes);
     }
 
     protected boolean typeSetMatches(Collection<? extends Type> types, Type... requiredTypes) {

@@ -24,6 +24,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+import java.io.Serializable;
 import java.util.EventListener;
 
 import javax.enterprise.inject.Any;
@@ -139,7 +140,7 @@ public class ContainerEventTest extends AbstractTest {
     private void validateTagHandlerAnnotatedType(AnnotatedType<TestTagHandler> type) {
         assertEquals(type.getBaseType(), TestTagHandler.class);
         assertTrue(rawTypeSetMatches(type.getTypeClosure(), TestTagHandler.class, SimpleTagSupport.class, SimpleTag.class,
-                JspTag.class));
+                JspTag.class, Object.class));
         assertEquals(type.getAnnotations().size(), 1);
         assertTrue(type.isAnnotationPresent(Any.class));
     }
@@ -156,7 +157,7 @@ public class ContainerEventTest extends AbstractTest {
     private void validateServletAnnotatedType(AnnotatedType<TestServlet> type) {
         assertEquals(type.getBaseType(), TestServlet.class);
         assertTrue(rawTypeSetMatches(type.getTypeClosure(), TestServlet.class, HttpServlet.class, GenericServlet.class,
-                Servlet.class, ServletConfig.class, Object.class));
+                Servlet.class, ServletConfig.class, Serializable.class, Object.class));
         assertTrue(type.getAnnotations().isEmpty());
     }
 
