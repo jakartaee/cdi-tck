@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote;
 
-import javax.ejb.Singleton;
+import javax.ejb.Remote;
 
-@Tame
-@Singleton
-public class Collie implements DoggieRemote {
-
+@Remote
+public interface DoggieRemote extends Bar, Foo {
 }

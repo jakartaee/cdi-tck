@@ -22,47 +22,43 @@
             <package name="org.jboss.cdi.tck.interceptors.tests.*"/>
         </packages>
 
-        <!-- Issues in the spec -->
-        <!-- CDI-437 -->
-        <class name="org.jboss.cdi.tck.tests.lookup.byname.ambiguous.broken.AmbiguousELNamesTest">
-            <methods>
-                <exclude name=".*"/>
-            </methods>
-        </class>
+        <classes>
+            <!-- Issues in the spec -->
+            <!-- CDI-437 -->
+            <class name="org.jboss.cdi.tck.tests.lookup.byname.ambiguous.broken.AmbiguousELNamesTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
 
-        <!-- CDITCK-418 -->
-        <class name="org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.environment.jndi.ejb.InterceptorEnvironmentJNDISessionBeanTest">
-            <methods>
-                <exclude name=".*"/>
-            </methods>
-        </class>
+            <!-- CDITCK-418 -->
+            <class name="org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.environment.jndi.ejb.InterceptorEnvironmentJNDISessionBeanTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
 
-        <!-- CDITCK-417 -->
-        <class name="org.jboss.cdi.tck.tests.extensions.registration.BeanRegistrationByExtensionInEarLibraryTest">
-            <methods>
-                <exclude name=".*"/>
-            </methods>
-        </class>
+            <!-- CDITCK-417 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.registration.BeanRegistrationByExtensionInEarLibraryTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
 
-        <!-- CDITCK-421 -->
-        <class name="org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.AroundInvokeAccessInterceptorTest">
-            <methods>
-                <exclude name=".*"/>
-            </methods>
-        </class>
+            <!-- CDITCK-421 -->
+            <class name="org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.AroundInvokeAccessInterceptorTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
 
-        <class name="org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout.AroundTimeoutInterceptorTest">
-            <methods>
-                <exclude name=".*"/>
-            </methods>
-        </class>
+            <class name="org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout.AroundTimeoutInterceptorTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
 
-        <!-- CDITCK-423 -->
-        <class name="org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote.RemoteInterfaceNotInAPITypesTest">
-            <methods>
-                <exclude name=".*"/>
-            </methods>
-        </class>
+        </classes>
 
     </test>
 
