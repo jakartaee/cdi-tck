@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.implementation.disposal.method.definition;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -73,11 +74,11 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
     @SpecAssertions({@SpecAssertion(section = DISPOSER_METHOD, id = "aa"), @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba")})
     public void testDisposalMethodOnNonBean() throws Exception {
 
-        Bean<WebSpider> webSpider = getBeans(WebSpider.class, DEADLIEST_LITERAL).iterator().next();
-        CreationalContext<WebSpider> creationalContext = getCurrentManager().createCreationalContext(webSpider);
-        WebSpider instance = getCurrentManager().getContext(webSpider.getScope()).get(webSpider);
-        webSpider.destroy(instance, creationalContext);
-        assert !DisposalNonBean.isWebSpiderdestroyed();
+        DependentInstance<WebSpider> webSpider = newDependentInstance(WebSpider.class, DEADLIEST_LITERAL);
+        WebSpider instance = webSpider.get();
+        assertNotNull(instance);
+        webSpider.destroy();
+        assertFalse(DisposalNonBean.isWebSpiderdestroyed());
     }
 
     /**
@@ -92,26 +93,26 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
             @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "e")})
     public void testDisposalMethodParametersGetInjected() throws Exception {
 
-        Bean<SandSpider> sandSpider = getBeans(SandSpider.class, DEADLIEST_LITERAL).iterator().next();
-        CreationalContext<SandSpider> creationalContext = getCurrentManager().createCreationalContext(sandSpider);
-        SandSpider instance = getCurrentManager().getContext(sandSpider.getScope()).get(sandSpider);
-        sandSpider.destroy(instance, creationalContext);
-        assert SpiderProducer.isDeadliestSandSpiderDestroyed();
+        DependentInstance<SandSpider> sandSpider = newDependentInstance(SandSpider.class, DEADLIEST_LITERAL);
+        SandSpider sandSpiderInst = sandSpider.get();
+        assertNotNull(sandSpiderInst);
+        sandSpider.destroy();
+        assertTrue(SpiderProducer.isDeadliestSandSpiderDestroyed());
     }
 
     @Test
     @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "da")
     public void testDisposalMethodForMultipleProducerMethods() throws Exception {
 
-        Bean<Widow> deadliest = getBeans(Widow.class, DEADLIEST_LITERAL).iterator().next();
-        CreationalContext<Widow> deadliestCreationalContext = getCurrentManager().createCreationalContext(deadliest);
-        Widow deadliestInstance = getCurrentManager().getContext(deadliest.getScope()).get(deadliest);
-        deadliest.destroy(deadliestInstance, deadliestCreationalContext);
+        DependentInstance<Widow> deadliest = newDependentInstance(Widow.class, DEADLIEST_LITERAL);
+        Widow deadliestInstance = deadliest.get();
+        assertNotNull(deadliestInstance);
+        deadliest.destroy();
 
-        Bean<Widow> tame = getBeans(Widow.class, TAME_LITERAL).iterator().next();
-        CreationalContext<Widow> tameCreationalContext = getCurrentManager().createCreationalContext(tame);
-        Widow tameInstance = getCurrentManager().getContext(deadliest.getScope()).get(tame);
-        tame.destroy(tameInstance, tameCreationalContext);
+        DependentInstance<Widow> tame = newDependentInstance(Widow.class, TAME_LITERAL);
+        Widow tameInstance = tame.get();
+        assertNotNull(tameInstance);
+        tame.destroy();
 
         assertEquals(SpiderProducer.getWidowsDestroyed(), 2);
     }
