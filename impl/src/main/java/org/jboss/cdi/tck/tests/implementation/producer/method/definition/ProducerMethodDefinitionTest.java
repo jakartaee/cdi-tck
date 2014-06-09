@@ -55,6 +55,7 @@ import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.Assert;
+import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -94,11 +95,10 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD, id = "b") })
     public void testStaticDisposerMethod() throws Exception {
         assert getBeans(String.class, TAME_LITERAL).size() == 1;
-        String aString = getContextualReference(String.class, TAME_LITERAL);
-        Bean<String> stringBean = getBeans(String.class, TAME_LITERAL).iterator().next();
-        CreationalContext<String> creationalContext = getCurrentManager().createCreationalContext(stringBean);
-        stringBean.destroy(aString, creationalContext);
-        assert BeanWithStaticProducerMethod.stringDestroyed;
+        DependentInstance<String> stringBean =  newDependentInstance(String.class, TAME_LITERAL);
+        assertTrue(stringBean.get().equals("Pete"));
+        stringBean.destroy();
+        assertTrue(BeanWithStaticProducerMethod.stringDestroyed);
     }
 
     @Test

@@ -16,29 +16,16 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
-import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
-import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
-import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL;
-import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
-import static org.jboss.cdi.tck.cdi.Sections.CREATIONAL_CONTEXT;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INJECTED_FIELD;
-import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS_DESTRUCTION;
-import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
-import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELDS;
-import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELD_QUALIFIERS;
-import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
-import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_LIFECYCLE;
-import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
-import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
-import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
-import java.lang.annotation.Annotation;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.DependentInstance;
+import org.jboss.cdi.tck.util.MockCreationalContext;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.annotations.Test;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
@@ -51,15 +38,11 @@ import javax.enterprise.inject.Specializes;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.MockCreationalContext;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
-import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.annotations.Test;
+
+import java.lang.annotation.Annotation;
+import static org.jboss.cdi.tck.cdi.Sections.*;
+import static org.testng.Assert.*;
+import static org.testng.Assert.assertFalse;
 
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class SimpleBeanLifecycleTest extends AbstractTest {
@@ -228,9 +211,10 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testContextualDestroyCatchesException() {
         Bean<Cod> codBean = getBeans(Cod.class).iterator().next();
         CreationalContext<Cod> creationalContext = getCurrentManager().createCreationalContext(codBean);
-        Cod codInstance = getContextualReference(Cod.class);
+        Cod codInstance = codBean.create(creationalContext);
         codInstance.ping();
         codBean.destroy(codInstance, creationalContext);
+        assertTrue(Cod.isExpcetionThrown());
     }
 
     @Test
@@ -271,11 +255,12 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testSubClassInheritsPreDestroyOnSuperclass() {
         OrderProcessor.preDestroyCalled = false;
         assert getBeans(CdOrderProcessor.class).size() == 1;
-        Bean<CdOrderProcessor> bean = getBeans(CdOrderProcessor.class).iterator().next();
-        CreationalContext<CdOrderProcessor> creationalContext = getCurrentManager().createCreationalContext(bean);
-        CdOrderProcessor instance = getContextualReference(CdOrderProcessor.class);
-        bean.destroy(instance, creationalContext);
-        assert OrderProcessor.preDestroyCalled;
+
+        DependentInstance<CdOrderProcessor> bean = newDependentInstance(CdOrderProcessor.class);
+        CdOrderProcessor instance = bean.get();
+        assertFalse(instance.equals(null));
+        bean.destroy();
+        assertTrue(OrderProcessor.preDestroyCalled);
     }
 
     @Test
@@ -283,11 +268,10 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testIndirectSubClassInheritsPreDestroyOnSuperclass() {
         OrderProcessor.preDestroyCalled = false;
         assert getBeans(IndirectOrderProcessor.class).size() == 1;
-        Bean<IndirectOrderProcessor> bean = getBeans(IndirectOrderProcessor.class).iterator().next();
-        CreationalContext<IndirectOrderProcessor> creationalContext = getCurrentManager().createCreationalContext(bean);
-        IndirectOrderProcessor instance = getContextualReference(IndirectOrderProcessor.class);
-        bean.destroy(instance, creationalContext);
-        assert OrderProcessor.preDestroyCalled;
+        DependentInstance<IndirectOrderProcessor> bean = newDependentInstance(IndirectOrderProcessor.class);
+        assertFalse(bean.get().equals(null));
+        bean.destroy();
+        assertTrue(OrderProcessor.preDestroyCalled);
     }
 
     @Test
@@ -304,11 +288,11 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testSubClassDoesNotInheritPreDestroyConstructOnSuperclassBlockedByIntermediateClass() {
         OrderProcessor.preDestroyCalled = false;
         assert getBeans(NovelOrderProcessor.class).size() == 1;
-        Bean<NovelOrderProcessor> bean = getBeans(NovelOrderProcessor.class).iterator().next();
-        CreationalContext<NovelOrderProcessor> creationalContext = getCurrentManager().createCreationalContext(bean);
-        NovelOrderProcessor instance = getContextualReference(NovelOrderProcessor.class);
-        bean.destroy(instance, creationalContext);
-        assert !OrderProcessor.preDestroyCalled;
+        DependentInstance<NovelOrderProcessor> bean = newDependentInstance(NovelOrderProcessor.class);
+        NovelOrderProcessor instance = bean.get();
+        assertFalse(instance.equals(null));
+        bean.destroy();
+        assertFalse(OrderProcessor.preDestroyCalled);
     }
 
     @Test(expectedExceptions = CreationException.class)

@@ -32,6 +32,7 @@ import javax.enterprise.inject.spi.Bean;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -107,12 +108,11 @@ public class InterceptorInvocationTest extends AbstractTest {
 
         AlmightyInterceptor.reset();
 
-        Bean<Wheat> bean = getBeans(Wheat.class).iterator().next();
-        CreationalContext<Wheat> creationalContext = getCurrentManager().createCreationalContext(bean);
-        Wheat instance = getContextualReference(Wheat.class);
-
+        DependentInstance<Wheat> bean = newDependentInstance(Wheat.class);
+        Wheat instance = bean.get();
+        assertNotNull(instance);
         AlmightyInterceptor.methodIntercepted = false;
-        bean.destroy(instance, creationalContext);
+        bean.destroy();
 
         assertTrue(WheatProducer.destroyed);
         assertTrue(AlmightyInterceptor.methodIntercepted);

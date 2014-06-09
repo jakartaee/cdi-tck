@@ -17,9 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.simple.newSimpleBean;
 
 import static org.jboss.cdi.tck.cdi.Sections.NEW;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,6 +38,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.NewLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
@@ -155,12 +154,12 @@ public class NewSimpleBeanTest extends AbstractTest {
     @SpecAssertion(section = NEW, id = "x")
     public void testNewBeanHasNoDisposerMethods() throws Exception {
         FoxRun foxRun = getContextualReference(FoxRun.class);
-        Bean<Litter> litterBean = getBeans(Litter.class).iterator().next();
-        CreationalContext<Litter> creationalContext = getCurrentManager().createCreationalContext(litterBean);
-        Litter litter = getContextualReference(Litter.class);
-        litterBean.destroy(litter, creationalContext);
-        assert foxRun.getFox().isLitterDisposed();
-        assert !foxRun.getNewFox().isLitterDisposed();
+        DependentInstance<Litter> litterBean = newDependentInstance(Litter.class);
+        Litter litter = litterBean.get();
+        assertFalse(litter.equals(null));
+        litterBean.destroy();
+        assertTrue(foxRun.getFox().isLitterDisposed());
+        assertFalse(foxRun.getNewFox().isLitterDisposed());
     }
 
     @SuppressWarnings("unchecked")
