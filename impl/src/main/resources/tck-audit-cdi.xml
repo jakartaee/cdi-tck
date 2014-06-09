@@ -3628,7 +3628,7 @@
         </group>
 
         <assertion id="dg">
-            <text>When a bean id declared to have |@Dependent| scope, any instance of the bean injected into method parameters of a disposer method or observer method exists to service the method invocation only (except for observer methods of container lifecycle events).</text>
+            <text>When a bean is declared to have |@Dependent| scope, any instance of the bean injected into method parameters of a disposer method or observer method exists to service the method invocation only (except for observer methods of container lifecycle events).</text>
         </assertion>
 
         <assertion id="e">
