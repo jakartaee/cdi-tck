@@ -77,7 +77,7 @@ public class EjbInjectionTest extends AbstractTest {
         Bean<BeanRemote> beanRemote = getBeans(BeanRemote.class, new AnnotationLiteral<Lazy>() {
         }).iterator().next();
         assert beanRemote.getTypes().size() == 3;
-        assert rawTypeSetMatches(beanRemote.getTypes(), BeanRemote.class, Object.class, AnotherInterface.class);
+        assert typeSetMatches(beanRemote.getTypes(), BeanRemote.class, Object.class, AnotherInterface.class);
     }
 
 }

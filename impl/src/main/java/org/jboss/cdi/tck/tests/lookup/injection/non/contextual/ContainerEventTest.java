@@ -139,7 +139,7 @@ public class ContainerEventTest extends AbstractTest {
 
     private void validateTagHandlerAnnotatedType(AnnotatedType<TestTagHandler> type) {
         assertEquals(type.getBaseType(), TestTagHandler.class);
-        assertTrue(rawTypeSetMatches(type.getTypeClosure(), TestTagHandler.class, SimpleTagSupport.class, SimpleTag.class,
+        assertTrue(typeSetMatches(type.getTypeClosure(), TestTagHandler.class, SimpleTagSupport.class, SimpleTag.class,
                 JspTag.class, Object.class));
         assertEquals(type.getAnnotations().size(), 1);
         assertTrue(type.isAnnotationPresent(Any.class));
@@ -147,7 +147,7 @@ public class ContainerEventTest extends AbstractTest {
 
     private void validateTagLibraryListenerAnnotatedType(AnnotatedType<TagLibraryListener> type) {
         assertEquals(type.getBaseType(), TagLibraryListener.class);
-        assertTrue(rawTypeSetMatches(type.getTypeClosure(), TagLibraryListener.class, ServletContextListener.class,
+        assertTrue(typeSetMatches(type.getTypeClosure(), TagLibraryListener.class, ServletContextListener.class,
                 EventListener.class, Object.class));
         assertEquals(type.getFields().size(), 2);
         assertEquals(type.getConstructors().size(), 1);
@@ -156,14 +156,14 @@ public class ContainerEventTest extends AbstractTest {
 
     private void validateServletAnnotatedType(AnnotatedType<TestServlet> type) {
         assertEquals(type.getBaseType(), TestServlet.class);
-        assertTrue(rawTypeSetMatches(type.getTypeClosure(), TestServlet.class, HttpServlet.class, GenericServlet.class,
+        assertTrue(typeSetMatches(type.getTypeClosure(), TestServlet.class, HttpServlet.class, GenericServlet.class,
                 Servlet.class, ServletConfig.class, Serializable.class, Object.class));
         assertTrue(type.getAnnotations().isEmpty());
     }
 
     private void validateFilterAnnotatedType(AnnotatedType<TestFilter> type) {
         assertEquals(type.getBaseType(), TestFilter.class);
-        assertTrue(rawTypeSetMatches(type.getTypeClosure(), TestFilter.class, Filter.class, Object.class));
+        assertTrue(typeSetMatches(type.getTypeClosure(), TestFilter.class, Filter.class, Object.class));
         assertEquals(type.getFields().size(), 12);
         assertEquals(type.getConstructors().size(), 1);
         assertTrue(type.getConstructors().iterator().next().getParameters().isEmpty());
