@@ -134,7 +134,7 @@ public class SyntheticBeanTest extends AbstractTest {
     private void testOffice(Bean<Office> bean) {
         Office.reset();
         CreationalContext<Office> ctx = getCurrentManager().createCreationalContext(bean);
-        Office office = (Office) bean.create(ctx);
+        Office office = bean.create(ctx);
         assertNotNull(office);
         assertNotNull(office.getConstructorEmployee());
         assertNotNull(office.getFieldEmployee());

@@ -44,9 +44,9 @@ public class PreferredSpiderProducer extends SpiderProducer {
     }
 
     @Override
-    public @Produces
+    @Produces
     @Null
-    Spider getNullSpider() {
+    public Spider getNullSpider() {
         return null;
     }
 
