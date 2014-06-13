@@ -23,6 +23,14 @@
       <firstname>Martin</firstname>
       <surname>Kouba</surname>
       <affiliation>
+         <jobtitle>Former CDI TCK lead</jobtitle>
+         <!-- orgname>Red Hat Inc.</orgname-->
+      </affiliation>
+   </author>
+   <author>
+      <firstname>Tomas</firstname>
+      <surname>Remes</surname>
+      <affiliation>
          <jobtitle>CDI TCK lead</jobtitle>
          <!-- orgname>Red Hat Inc.</orgname-->
       </affiliation>
