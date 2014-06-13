@@ -42,7 +42,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
     }
 
     public void afterTypeDiscovery(@Observes AfterTypeDiscovery event) {
-        event.getAlternatives().add(IntegerBean.class);
+        event.getAlternatives().add(Integer.class);
     }
 
 }
