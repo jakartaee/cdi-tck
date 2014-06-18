@@ -10,8 +10,8 @@
    <section>
      <title>Obtaining the sigtest tool</title>
      <para>
-       You can obtain the Sigtest tool (at the time of writing the TCK uses version 2.1) from the Sigtest home 
-       page at <ulink url="http://sigtest.java.net/"/>. The user guide can be found at 
+       You can obtain the Sigtest tool (at the time of writing the TCK uses version 3.0) from the Sigtest home 
+       page at <ulink url="http://download.java.net/sigtest/3.0/PreRel/sigtest-3_0-dev-bin-b09-24_apr_2013.zip"/>. The user guide can be found at 
        <ulink url="http://docs.oracle.com/javame/test-tools/sigtest/2_1/sigtest2.1_usersguide.pdf"/>.
      </para>
    </section>
