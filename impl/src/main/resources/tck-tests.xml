@@ -24,13 +24,6 @@
 
         <classes>
 
-            <!-- CDITCK-401 -->
-            <class name="org.jboss.cdi.tck.tests.implementation.producer.method.definition.ProducerMethodDefinitionTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
         </classes>
     </test>
 

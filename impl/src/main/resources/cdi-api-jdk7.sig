@@ -1,4 +1,4 @@
-#Signature file v4.0
+#Signature file v4.1
 #Version 
 
 CLSS public abstract interface java.io.Serializable
@@ -7,7 +7,7 @@ CLSS public abstract interface java.lang.Comparable<%0 extends java.lang.Object>
 meth public abstract int compareTo({java.lang.Comparable%0})
 
 CLSS public abstract java.lang.Enum<%0 extends java.lang.Enum<{java.lang.Enum%0}>>
-cons protected Enum(java.lang.String,int)
+cons protected <init>(java.lang.String,int)
 intf java.io.Serializable
 intf java.lang.Comparable<{java.lang.Enum%0}>
 meth protected final java.lang.Object clone() throws java.lang.CloneNotSupportedException
@@ -24,11 +24,11 @@ supr java.lang.Object
 hfds name,ordinal
 
 CLSS public java.lang.Exception
-cons protected Exception(java.lang.String,java.lang.Throwable,boolean,boolean)
-cons public Exception()
-cons public Exception(java.lang.String)
-cons public Exception(java.lang.String,java.lang.Throwable)
-cons public Exception(java.lang.Throwable)
+cons protected <init>(java.lang.String,java.lang.Throwable,boolean,boolean)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr java.lang.Throwable
 hfds serialVersionUID
 
@@ -36,7 +36,7 @@ CLSS public abstract interface java.lang.Iterable<%0 extends java.lang.Object>
 meth public abstract java.util.Iterator<{java.lang.Iterable%0}> iterator()
 
 CLSS public java.lang.Object
-cons public Object()
+cons public <init>()
 meth protected java.lang.Object clone() throws java.lang.CloneNotSupportedException
 meth protected void finalize() throws java.lang.Throwable
 meth public boolean equals(java.lang.Object)
@@ -50,20 +50,20 @@ meth public int hashCode()
 meth public java.lang.String toString()
 
 CLSS public java.lang.RuntimeException
-cons protected RuntimeException(java.lang.String,java.lang.Throwable,boolean,boolean)
-cons public RuntimeException()
-cons public RuntimeException(java.lang.String)
-cons public RuntimeException(java.lang.String,java.lang.Throwable)
-cons public RuntimeException(java.lang.Throwable)
+cons protected <init>(java.lang.String,java.lang.Throwable,boolean,boolean)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr java.lang.Exception
 hfds serialVersionUID
 
 CLSS public java.lang.Throwable
-cons protected Throwable(java.lang.String,java.lang.Throwable,boolean,boolean)
-cons public Throwable()
-cons public Throwable(java.lang.String)
-cons public Throwable(java.lang.String,java.lang.Throwable)
-cons public Throwable(java.lang.Throwable)
+cons protected <init>(java.lang.String,java.lang.Throwable,boolean,boolean)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 intf java.io.Serializable
 meth public final java.lang.Throwable[] getSuppressed()
 meth public final void addSuppressed(java.lang.Throwable)
@@ -136,26 +136,26 @@ CLSS public abstract interface !annotation javax.enterprise.context.ApplicationS
 intf java.lang.annotation.Annotation
 
 CLSS public javax.enterprise.context.BusyConversationException
-cons public BusyConversationException()
-cons public BusyConversationException(java.lang.String)
-cons public BusyConversationException(java.lang.String,java.lang.Throwable)
-cons public BusyConversationException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr javax.enterprise.context.ContextException
 hfds serialVersionUID
 
 CLSS public javax.enterprise.context.ContextException
-cons public ContextException()
-cons public ContextException(java.lang.String)
-cons public ContextException(java.lang.String,java.lang.Throwable)
-cons public ContextException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr java.lang.RuntimeException
 hfds serialVersionUID
 
 CLSS public javax.enterprise.context.ContextNotActiveException
-cons public ContextNotActiveException()
-cons public ContextNotActiveException(java.lang.String)
-cons public ContextNotActiveException(java.lang.String,java.lang.Throwable)
-cons public ContextNotActiveException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr javax.enterprise.context.ContextException
 hfds serialVersionUID
 
@@ -201,10 +201,10 @@ intf java.lang.annotation.Annotation
 meth public abstract java.lang.Class<? extends java.lang.annotation.Annotation> value()
 
 CLSS public javax.enterprise.context.NonexistentConversationException
-cons public NonexistentConversationException()
-cons public NonexistentConversationException(java.lang.String)
-cons public NonexistentConversationException(java.lang.String,java.lang.Throwable)
-cons public NonexistentConversationException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr javax.enterprise.context.ContextException
 hfds serialVersionUID
 
@@ -256,10 +256,10 @@ meth public abstract !varargs javax.enterprise.event.Event<{javax.enterprise.eve
 meth public abstract void fire({javax.enterprise.event.Event%0})
 
 CLSS public javax.enterprise.event.ObserverException
-cons public ObserverException()
-cons public ObserverException(java.lang.String)
-cons public ObserverException(java.lang.String,java.lang.Throwable)
-cons public ObserverException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr java.lang.RuntimeException
 hfds serialVersionUID
 
@@ -295,10 +295,10 @@ CLSS public abstract interface !annotation javax.enterprise.inject.Alternative
 intf java.lang.annotation.Annotation
 
 CLSS public javax.enterprise.inject.AmbiguousResolutionException
-cons public AmbiguousResolutionException()
-cons public AmbiguousResolutionException(java.lang.String)
-cons public AmbiguousResolutionException(java.lang.String,java.lang.Throwable)
-cons public AmbiguousResolutionException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr javax.enterprise.inject.ResolutionException
 hfds serialVersionUID
 
@@ -310,10 +310,10 @@ CLSS public abstract interface !annotation javax.enterprise.inject.Any
 intf java.lang.annotation.Annotation
 
 CLSS public javax.enterprise.inject.CreationException
-cons public CreationException()
-cons public CreationException(java.lang.String)
-cons public CreationException(java.lang.String,java.lang.Throwable)
-cons public CreationException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr javax.enterprise.inject.InjectionException
 hfds serialVersionUID
 
@@ -338,18 +338,18 @@ CLSS public abstract interface !annotation javax.enterprise.inject.Disposes
 intf java.lang.annotation.Annotation
 
 CLSS public javax.enterprise.inject.IllegalProductException
-cons public IllegalProductException()
-cons public IllegalProductException(java.lang.String)
-cons public IllegalProductException(java.lang.String,java.lang.Throwable)
-cons public IllegalProductException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr javax.enterprise.inject.InjectionException
 hfds serialVersionUID
 
 CLSS public javax.enterprise.inject.InjectionException
-cons public InjectionException()
-cons public InjectionException(java.lang.String)
-cons public InjectionException(java.lang.String,java.lang.Throwable)
-cons public InjectionException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr java.lang.RuntimeException
 hfds serialVersionUID
 
@@ -394,10 +394,10 @@ CLSS public abstract interface !annotation javax.enterprise.inject.Produces
 intf java.lang.annotation.Annotation
 
 CLSS public javax.enterprise.inject.ResolutionException
-cons public ResolutionException()
-cons public ResolutionException(java.lang.String)
-cons public ResolutionException(java.lang.String,java.lang.Throwable)
-cons public ResolutionException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr javax.enterprise.inject.InjectionException
 hfds serialVersionUID
 
@@ -427,18 +427,18 @@ intf java.lang.annotation.Annotation
 meth public abstract !hasdefault java.lang.Class<?>[] value()
 
 CLSS public javax.enterprise.inject.UnproxyableResolutionException
-cons public UnproxyableResolutionException()
-cons public UnproxyableResolutionException(java.lang.String)
-cons public UnproxyableResolutionException(java.lang.String,java.lang.Throwable)
-cons public UnproxyableResolutionException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr javax.enterprise.inject.ResolutionException
 hfds serialVersionUID
 
 CLSS public javax.enterprise.inject.UnsatisfiedResolutionException
-cons public UnsatisfiedResolutionException()
-cons public UnsatisfiedResolutionException(java.lang.String)
-cons public UnsatisfiedResolutionException(java.lang.String,java.lang.Throwable)
-cons public UnsatisfiedResolutionException(java.lang.Throwable)
+cons public <init>()
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr javax.enterprise.inject.ResolutionException
 hfds serialVersionUID
 
@@ -575,9 +575,9 @@ meth public abstract void addScope(java.lang.Class<? extends java.lang.annotatio
 CLSS public abstract interface javax.enterprise.inject.spi.BeforeShutdown
 
 CLSS public abstract javax.enterprise.inject.spi.CDI<%0 extends java.lang.Object>
-cons public CDI()
-fld protected static volatile java.util.Set<javax.enterprise.inject.spi.CDIProvider> discoveredProviders
-fld protected static volatile javax.enterprise.inject.spi.CDIProvider configuredProvider
+cons public <init>()
+fld protected static java.util.Set<javax.enterprise.inject.spi.CDIProvider> discoveredProviders
+fld protected static javax.enterprise.inject.spi.CDIProvider configuredProvider
 intf javax.enterprise.inject.Instance<{javax.enterprise.inject.spi.CDI%0}>
 meth public abstract javax.enterprise.inject.spi.BeanManager getBeanManager()
 meth public static javax.enterprise.inject.spi.CDI<java.lang.Object> current()
@@ -595,16 +595,16 @@ meth public abstract java.util.Set<java.lang.annotation.Annotation> getDelegateQ
 meth public abstract java.util.Set<java.lang.reflect.Type> getDecoratedTypes()
 
 CLSS public javax.enterprise.inject.spi.DefinitionException
-cons public DefinitionException(java.lang.String)
-cons public DefinitionException(java.lang.String,java.lang.Throwable)
-cons public DefinitionException(java.lang.Throwable)
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr java.lang.RuntimeException
 hfds serialVersionUID
 
 CLSS public javax.enterprise.inject.spi.DeploymentException
-cons public DeploymentException(java.lang.String)
-cons public DeploymentException(java.lang.String,java.lang.Throwable)
-cons public DeploymentException(java.lang.Throwable)
+cons public <init>(java.lang.String)
+cons public <init>(java.lang.String,java.lang.Throwable)
+cons public <init>(java.lang.Throwable)
 supr java.lang.RuntimeException
 hfds serialVersionUID
 
@@ -741,14 +741,15 @@ meth public static javax.enterprise.inject.spi.SessionBeanType[] values()
 supr java.lang.Enum<javax.enterprise.inject.spi.SessionBeanType>
 
 CLSS public javax.enterprise.inject.spi.Unmanaged<%0 extends java.lang.Object>
-cons public Unmanaged(java.lang.Class<{javax.enterprise.inject.spi.Unmanaged%0}>)
-cons public Unmanaged(javax.enterprise.inject.spi.BeanManager,java.lang.Class<{javax.enterprise.inject.spi.Unmanaged%0}>)
+cons public <init>(java.lang.Class<{javax.enterprise.inject.spi.Unmanaged%0}>)
+cons public <init>(javax.enterprise.inject.spi.BeanManager,java.lang.Class<{javax.enterprise.inject.spi.Unmanaged%0}>)
 innr public static UnmanagedInstance
 meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged%0}> newInstance()
 supr java.lang.Object
 hfds beanManager,injectionTarget
 
 CLSS public static javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<%0 extends java.lang.Object>
+ outer javax.enterprise.inject.spi.Unmanaged
 meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance%0}> dispose()
 meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance%0}> inject()
 meth public javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance<{javax.enterprise.inject.spi.Unmanaged$UnmanagedInstance%0}> postConstruct()
@@ -765,7 +766,7 @@ intf java.lang.annotation.Annotation
 meth public abstract java.lang.Class<? extends java.lang.annotation.Annotation>[] value()
 
 CLSS public abstract javax.enterprise.util.AnnotationLiteral<%0 extends java.lang.annotation.Annotation>
-cons protected AnnotationLiteral()
+cons protected <init>()
 intf java.io.Serializable
 intf java.lang.annotation.Annotation
 meth public boolean equals(java.lang.Object)
@@ -781,7 +782,7 @@ CLSS public abstract interface !annotation javax.enterprise.util.Nonbinding
 intf java.lang.annotation.Annotation
 
 CLSS public abstract javax.enterprise.util.TypeLiteral<%0 extends java.lang.Object>
-cons protected TypeLiteral()
+cons protected <init>()
 intf java.io.Serializable
 meth public boolean equals(java.lang.Object)
 meth public final java.lang.Class<{javax.enterprise.util.TypeLiteral%0}> getRawType()
