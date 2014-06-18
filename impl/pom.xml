@@ -200,7 +200,7 @@
 									<classifier>audit-int</classifier>
 								</artifact>
 								<artifact>
-									<file>${basedir}/src/main/resources/cdi-api.sig</file>
+									<file>${basedir}/src/main/resources/cdi-api-jdk6.sig</file>
 									<type>sig</type>
 									<classifier>sigtest</classifier>
 								</artifact>
@@ -209,6 +209,11 @@
 									<type>sig</type>
 									<classifier>sigtest-jdk7</classifier>
 								</artifact>
+			                                         <artifact>
+                                                                        <file>${basedir}/src/main/resources/cdi-api-jdk8.sig</file>
+                                                                        <type>sig</type>
+                                                                        <classifier>sigtest-jdk8</classifier>
+                                                                </artifact>
 							</artifacts>
 						</configuration>
 					</execution>
