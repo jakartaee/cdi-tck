@@ -23,7 +23,7 @@ limitations under the License.
 	<parent>
 		<groupId>org.jboss.jsr299.tck</groupId>
 		<artifactId>jsr299-tck-parent</artifactId>
-		<version>1.0.6.Final</version>
+		<version>1.0.7-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.jboss.jsr299.tck</groupId>
