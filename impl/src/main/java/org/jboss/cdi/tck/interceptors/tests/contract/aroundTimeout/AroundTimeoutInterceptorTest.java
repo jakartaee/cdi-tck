@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.TestGroups.SECURITY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
@@ -63,7 +64,7 @@ public class AroundTimeoutInterceptorTest extends AbstractTest {
                 "Around-timeout method invocation did NOT occur within the same transaction context as the timeout method on which it is interposing");
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = {JAVAEE_FULL, SECURITY})
     @SpecAssertions({ @SpecAssertion(section = "2.7", id = "d"), @SpecAssertion(section = "2.7", id = "eb") })
     public void testSecurityContext(Student student) throws Exception {
         student.sleep();
