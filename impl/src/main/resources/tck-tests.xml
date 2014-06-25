@@ -43,6 +43,16 @@
                     <exclude name=".*"/>
                 </methods>
             </class>
+            
+            <!-- CDITCK-426 -->
+            <class name="org.jboss.cdi.tck.tests.event.observer.transactional.TransactionalObserverTest">
+                <methods>
+                    <exclude name="testFailedTransaction"/>
+                    <exclude name="testSucessfullTransaction"/>
+                    <exclude name="testObserverFailedTransaction"/>
+                </methods>
+            </class>
+
 
         </classes>
 
