@@ -1,3 +1,19 @@
+/*
+ * JBoss, Home of Professional Open Source
+ * Copyright 2014, Red Hat, Inc., and individual contributors
+ * by the @authors tag. See the copyright.txt in the distribution for a
+ * full listing of individual contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.jboss.cdi.tck.tests.event.observer.transactional;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
@@ -5,12 +21,11 @@ import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import static org.jboss.cdi.tck.cdi.Sections.TRANSACTIONAL_OBSERVER_METHODS;
 import static org.testng.Assert.assertEquals;
-
-import java.util.List;
+import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.event.TransactionPhase;
 import javax.inject.Inject;
-
+import java.util.List;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -23,7 +38,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
  * @author Martin Kouba
  */
 @Test(groups = { INTEGRATION, PERSISTENCE })
@@ -58,10 +72,13 @@ public class TransactionalObserverTest extends AbstractTest {
         // BEFORE_COMPLETION must be fired at the beginning of the commit (after checkpoint)
         // AFTER_SUCCESS and AFTER_COMPLETION must be fired after BEFORE_COMPLETION
         // AFTER_FAILURE is not fired
-        ActionSequence.getSequence().beginsWith(TransactionPhase.IN_PROGRESS.toString(), "checkpoint",
-                TransactionPhase.BEFORE_COMPLETION.toString());
-        ActionSequence.getSequence().containsAll(TransactionPhase.AFTER_SUCCESS.toString(),
-                TransactionPhase.AFTER_COMPLETION.toString());
+        List<String> phases = ActionSequence.getSequenceData();
+        assertEquals(phases.size(), 5);
+        assertEquals(phases.get(0), TransactionPhase.IN_PROGRESS.name());
+        assertEquals(phases.get(1), "checkpoint");
+        assertEquals(phases.get(2), TransactionPhase.BEFORE_COMPLETION.name());
+        assertTrue(phases.contains(TransactionPhase.AFTER_SUCCESS.name()));
+        assertTrue(phases.contains(TransactionPhase.AFTER_COMPLETION.name()));
     }
 
     @Test
@@ -79,14 +96,17 @@ public class TransactionalObserverTest extends AbstractTest {
 
         // AFTER_FAILURE and AFTER_COMPLETION must be fired after checkpoint
         // AFTER_SUCCESS and BEFORE_COMPLETION is not fired
-        ActionSequence.getSequence().beginsWith(TransactionPhase.IN_PROGRESS.toString(), "checkpoint");
-        ActionSequence.getSequence().containsAll(TransactionPhase.AFTER_FAILURE.toString(),
-                TransactionPhase.AFTER_COMPLETION.toString());
+        List<String> phases = ActionSequence.getSequenceData();
+        assertEquals(phases.size(), 4);
+        assertEquals(phases.get(0), TransactionPhase.IN_PROGRESS.name());
+        assertEquals(phases.get(1), "checkpoint");
+        assertTrue(phases.contains(TransactionPhase.AFTER_FAILURE.name()));
+        assertTrue(phases.contains(TransactionPhase.AFTER_COMPLETION.name()));
     }
 
     /**
      * No transaction - send all events immediately.
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -117,10 +137,13 @@ public class TransactionalObserverTest extends AbstractTest {
         // IN_PROGRESS is fired twice
         // AFTER_FAILURE and AFTER_COMPLETION must be fired after checkpoint
         // AFTER_SUCCESS and BEFORE_COMPLETION is not fired
-        ActionSequence.getSequence().beginsWith(TransactionPhase.IN_PROGRESS.toString(),
-                TransactionPhase.IN_PROGRESS.toString(), "checkpoint");
-        ActionSequence.getSequence().containsAll(TransactionPhase.AFTER_FAILURE.toString(),
-                TransactionPhase.AFTER_COMPLETION.toString());
+        List<String> phases = ActionSequence.getSequenceData();
+        assertEquals(phases.size(), 5);
+        assertEquals(phases.get(0), TransactionPhase.IN_PROGRESS.name());
+        assertEquals(phases.get(1), TransactionPhase.IN_PROGRESS.name());
+        assertEquals(phases.get(2), "checkpoint");
+        assertTrue(phases.contains(TransactionPhase.AFTER_FAILURE.name()));
+        assertTrue(phases.contains(TransactionPhase.AFTER_COMPLETION.name()));
     }
 
 }
