@@ -18,17 +18,70 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Vetoed
-@WebServlet("/Test/*")
+@WebServlet("/test")
 public class TestServlet extends HttpServlet {
 
     private static final long serialVersionUID = -7672096092047821010L;
+    private static boolean isWrappedInjectionSuccessfull = false;
+
+    Sheep sheep;
+
+    @Inject
+    Fence fence;
 
     @Inject
     public void initialize(Sheep sheep) {
+        this.sheep = sheep;
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        PrintWriter writer = resp.getWriter();
+
+        // to invoke interceptor
+        fence.ping();
+        String param = req.getParameter("type");
+        if (param.equals("servlet")) {
+            writer.append(String.valueOf(isWrappedInjectionSuccessfull));
+        }
+        if (param.equals("interceptor")) {
+            writer.append(String.valueOf(FenceInterceptor.isIsWrappedInjectionSuccessfull()));
+        }
+        if (param.equals("wsendpoint")) {
+            writer.append(String.valueOf(CowboyEndpoint.isIsWrappedInjectionSuccessfull()));
+        }
+        if (param.equals("filter")) {
+            writer.append(String.valueOf(TestFilter.isIsWrappedInjectionSuccessfull()));
+        }
+        if (param.equals("sessionbean")) {
+            writer.append(String.valueOf(Fence.isIsWrappedInjectionSuccessfull()));
+        }
+        if (param.equals("listener")) {
+            writer.append(String.valueOf(TestListener.isIsWrappedInjectionSuccessfull()));
+        }
+        if (param.equals("taglibrary")) {
+            writer.append(String.valueOf(TagLibraryListener.isIsWrappedInjectionSuccessfull()));
+        }
+
+        writer.append("\n"+req.getServletContext().getAttribute("initialized").toString() + "\n");
+    }
+
+    public static void setIsWrappedInjectionSuccessfull(boolean isWrappedInjectionSuccessfull) {
+        TestServlet.isWrappedInjectionSuccessfull = isWrappedInjectionSuccessfull;
+    }
+
+    public static boolean isIsWrappedInjectionSuccessfull() {
+        return isWrappedInjectionSuccessfull;
     }
 
 }

@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
@@ -29,11 +30,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 @Vetoed
-@WebFilter("/TestFilter")
+@WebFilter("/test")
 public class TestFilter implements Filter {
 
     @Inject
     private Sheep sheep;
+
+    private static boolean isWrappedInjectionSuccessfull = false;
 
     @Inject
     public void initialize(Sheep sheep) {
@@ -44,8 +47,18 @@ public class TestFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException {
+
+        chain.doFilter(request,response);
     }
 
     public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    public static boolean isIsWrappedInjectionSuccessfull() {
+        return isWrappedInjectionSuccessfull;
+    }
+
+    public static void setIsWrappedInjectionSuccessfull(boolean isWrappedInjectionSuccessfull) {
+        TestFilter.isWrappedInjectionSuccessfull = isWrappedInjectionSuccessfull;
     }
 }

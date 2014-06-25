@@ -27,6 +27,7 @@ public class TagLibraryListener implements ServletContextListener {
     @Inject
     private Sheep sheep;
     private boolean initializerCalled = false;
+    private static boolean isWrappedInjectionSuccessfull = false;
 
     @Inject
     public void initialize(Sheep sheep) {
@@ -40,4 +41,13 @@ public class TagLibraryListener implements ServletContextListener {
         sce.getServletContext().setAttribute("tag.library.listener.injected", sheep != null);
         sce.getServletContext().setAttribute("tag.library.listener.initializer.called", initializerCalled);
     }
+
+    public static boolean isIsWrappedInjectionSuccessfull() {
+        return isWrappedInjectionSuccessfull;
+    }
+
+    public static void setIsWrappedInjectionSuccessfull(boolean isWrappedInjectionSuccessfull) {
+        TagLibraryListener.isWrappedInjectionSuccessfull = isWrappedInjectionSuccessfull;
+    }
+
 }

@@ -17,23 +17,23 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.InjectionTarget;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class CustomInjectionTarget<T> implements InjectionTarget<T> {
 
     private InjectionTarget<T> wrappedInjectionTarget;
-    private static List<Class> wrappedComponents = new ArrayList<Class>();
+    private BeanManager beanManager;
 
-    public CustomInjectionTarget(InjectionTarget<T> originalInjectionTarget) {
+    public CustomInjectionTarget(InjectionTarget<T> originalInjectionTarget, BeanManager beanManager) {
         this.wrappedInjectionTarget = originalInjectionTarget;
+        this.beanManager = beanManager;
     }
 
     public void inject(T instance, CreationalContext<T> ctx) {
-        wrappedComponents.add(instance.getClass());
+        beanManager.fireEvent(instance);
         wrappedInjectionTarget.inject(instance, ctx);
     }
 
@@ -62,7 +62,4 @@ public class CustomInjectionTarget<T> implements InjectionTarget<T> {
         return wrappedInjectionTarget.getInjectionPoints();
     }
 
-    public static List<Class> getWrappedComponents() {
-        return wrappedComponents;
-    }
 }

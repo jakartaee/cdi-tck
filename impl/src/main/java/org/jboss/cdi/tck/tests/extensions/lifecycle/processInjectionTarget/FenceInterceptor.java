@@ -24,10 +24,21 @@ public class FenceInterceptor {
 
     @Inject Sheep sheep;
 
+    private static boolean isWrappedInjectionSuccessfull = false;
+
     @AroundInvoke
     public Object visitFence(InvocationContext ctx) throws Exception {
 
         return ctx.proceed();
+    }
+
+
+    public static boolean isIsWrappedInjectionSuccessfull() {
+        return isWrappedInjectionSuccessfull;
+    }
+
+    public static void setIsWrappedInjectionSuccessfull(boolean isWrappedInjectionSuccessfull) {
+        FenceInterceptor.isWrappedInjectionSuccessfull = isWrappedInjectionSuccessfull;
     }
 
 }

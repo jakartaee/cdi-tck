@@ -29,9 +29,20 @@ public class TestListener implements ServletContextListener {
     @Inject
     private Sheep sheep;
 
+    private static boolean isWrappedInjectionSuccessfull = false;
+
     public void contextDestroyed(ServletContextEvent sce) {
     }
 
     public void contextInitialized(ServletContextEvent sce) {
+        sce.getServletContext().setAttribute("initialized",sheep);
+    }
+
+    public static boolean isIsWrappedInjectionSuccessfull() {
+        return isWrappedInjectionSuccessfull;
+    }
+
+    public static void setIsWrappedInjectionSuccessfull(boolean isWrappedInjectionSuccessfull) {
+        TestListener.isWrappedInjectionSuccessfull = isWrappedInjectionSuccessfull;
     }
 }

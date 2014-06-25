@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 import javax.servlet.ServletContextListener;
@@ -39,29 +40,29 @@ public class ProcessInjectionTargetObserver implements Extension {
     private static boolean tagHandlerSubTypeObserved = false;
     private static boolean stringObserved = false;
 
-    public void observeServlet(@Observes ProcessInjectionTarget<TestServlet> event) {
+    public void observeServlet(@Observes ProcessInjectionTarget<TestServlet> event, BeanManager beanManager) {
         servletEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TestServlet>(event.getInjectionTarget()));
+        event.setInjectionTarget(new CustomInjectionTarget<TestServlet>(event.getInjectionTarget(), beanManager));
     }
 
-    public void observeFilter(@Observes ProcessInjectionTarget<TestFilter> event) {
+    public void observeFilter(@Observes ProcessInjectionTarget<TestFilter> event, BeanManager beanManager) {
         filterEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TestFilter>(event.getInjectionTarget()));
+        event.setInjectionTarget(new CustomInjectionTarget<TestFilter>(event.getInjectionTarget(), beanManager));
     }
 
-    public void observeListener(@Observes ProcessInjectionTarget<TestListener> event) {
+    public void observeListener(@Observes ProcessInjectionTarget<TestListener> event, BeanManager beanManager) {
         listenerEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TestListener>(event.getInjectionTarget()));
+        event.setInjectionTarget(new CustomInjectionTarget<TestListener>(event.getInjectionTarget(), beanManager));
     }
 
-    public void observeTagHandler(@Observes ProcessInjectionTarget<TestTagHandler> event) {
+    public void observeTagHandler(@Observes ProcessInjectionTarget<TestTagHandler> event, BeanManager beanManager) {
         tagHandlerEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TestTagHandler>(event.getInjectionTarget()));
+        event.setInjectionTarget(new CustomInjectionTarget<TestTagHandler>(event.getInjectionTarget(), beanManager));
     }
 
-    public void observeTagLibraryListener(@Observes ProcessInjectionTarget<TagLibraryListener> event) {
+    public void observeTagLibraryListener(@Observes ProcessInjectionTarget<TagLibraryListener> event, BeanManager beanManager) {
         tagLibraryListenerEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TagLibraryListener>(event.getInjectionTarget()));
+        event.setInjectionTarget(new CustomInjectionTarget<TagLibraryListener>(event.getInjectionTarget(), beanManager));
     }
 
     public void observeServletSuperType(@Observes ProcessInjectionTarget<? super HttpServlet> event) {
@@ -85,16 +86,16 @@ public class ProcessInjectionTargetObserver implements Extension {
         tagHandlerSubTypeObserved = true;
     }
 
-    public void observeSessionBean(@Observes ProcessInjectionTarget<Fence> event) {
-        event.setInjectionTarget(new CustomInjectionTarget<Fence>(event.getInjectionTarget()));
+    public void observeSessionBean(@Observes ProcessInjectionTarget<Fence> event, BeanManager beanManager) {
+        event.setInjectionTarget(new CustomInjectionTarget<Fence>(event.getInjectionTarget(), beanManager));
     }
 
-    public void observeEJBInterceptor(@Observes ProcessInjectionTarget<FenceInterceptor> event) {
-        event.setInjectionTarget(new CustomInjectionTarget<FenceInterceptor>(event.getInjectionTarget()));
+    public void observeEJBInterceptor(@Observes ProcessInjectionTarget<FenceInterceptor> event, BeanManager beanManager) {
+        event.setInjectionTarget(new CustomInjectionTarget<FenceInterceptor>(event.getInjectionTarget(), beanManager));
     }
 
-    public void observeWSEndpoint(@Observes ProcessInjectionTarget<CowboyEndpoint> event) {
-        event.setInjectionTarget(new CustomInjectionTarget<CowboyEndpoint>(event.getInjectionTarget()));
+    public void observeWSEndpoint(@Observes ProcessInjectionTarget<CowboyEndpoint> event, BeanManager beanManager) {
+        event.setInjectionTarget(new CustomInjectionTarget<CowboyEndpoint>(event.getInjectionTarget(), beanManager));
     }
 
     public void stringObserver(@Observes ProcessInjectionTarget<String> event) {
