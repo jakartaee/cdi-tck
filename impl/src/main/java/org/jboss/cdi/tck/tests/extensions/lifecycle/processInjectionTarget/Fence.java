@@ -26,4 +26,18 @@ public class Fence {
 
     @Inject
     Sheep sheep;
+
+    private static boolean isWrappedInjectionSuccessfull = false;
+
+    public void ping(){
+    }
+
+    public static boolean isIsWrappedInjectionSuccessfull() {
+        return isWrappedInjectionSuccessfull;
+    }
+
+    public static void setIsWrappedInjectionSuccessfull(boolean isWrappedInjectionSuccessfull) {
+        Fence.isWrappedInjectionSuccessfull = isWrappedInjectionSuccessfull;
+    }
+
 }

@@ -16,28 +16,19 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
-import javax.inject.Inject;
-import javax.jws.WebService;
 
-@WebService(endpointInterface = "org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget.Cowboy", serviceName = "Cowboy")
-public class CowboyEndpoint implements Cowboy {
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
+import javax.xml.ws.WebServiceClient;
+import java.net.URL;
 
-    @Inject
-    Sheep sheep;
+@WebServiceClient(name="Cowboy")
+public class CowboyEndpointService extends Service {
 
-    private static boolean isWrappedInjectionSuccessfull = false;
-
-    @Override
-    public Sheep catchSheep() {
-        return sheep;
+    public CowboyEndpointService(URL wsdlDocumentLocation, QName serviceName) {
+        super(wsdlDocumentLocation, serviceName);
     }
 
-    public static boolean isIsWrappedInjectionSuccessfull() {
-        return isWrappedInjectionSuccessfull;
-    }
 
-    public static void setIsWrappedInjectionSuccessfull(boolean isWrappedInjectionSuccessfull) {
-        CowboyEndpoint.isWrappedInjectionSuccessfull = isWrappedInjectionSuccessfull;
-    }
 
 }

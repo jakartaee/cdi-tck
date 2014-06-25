@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 import javax.enterprise.inject.Vetoed;
 import javax.inject.Inject;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
+import java.io.IOException;
 
 @Vetoed
 public class TestTagHandler extends SimpleTagSupport {
@@ -26,8 +27,23 @@ public class TestTagHandler extends SimpleTagSupport {
     @Inject
     private Sheep sheep;
 
+    private static boolean isWrappedInjectionSuccessfull = false;
+
     @Inject
     public void initialize(Sheep sheep) {
+    }
+
+    @Override
+    public void doTag() throws IOException {
+       getJspContext().getOut().write(String.valueOf(isWrappedInjectionSuccessfull));
+    }
+
+    public static boolean isIsWrappedInjectionSuccessfull() {
+        return isWrappedInjectionSuccessfull;
+    }
+
+    public static void setIsWrappedInjectionSuccessfull(boolean isWrappedInjectionSuccessfull) {
+        TestTagHandler.isWrappedInjectionSuccessfull = isWrappedInjectionSuccessfull;
     }
 
 }
