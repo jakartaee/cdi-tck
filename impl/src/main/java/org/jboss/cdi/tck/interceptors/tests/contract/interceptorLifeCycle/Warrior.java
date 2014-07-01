@@ -22,7 +22,7 @@ import javax.interceptor.Interceptors;
 @WarriorBinding
 @Interceptors(WarriorPDInterceptor.class)
 public class Warrior {
-    
+
     @Inject
     Weapon weapon1;
 
@@ -43,5 +43,13 @@ public class Warrior {
     @Interceptors(MethodInterceptor.class)
     public void attack2() {
         weapon2.use();
+    }
+
+    public Weapon getWeapon2() {
+        return weapon2;
+    }
+
+    public Weapon getWeapon1() {
+        return weapon1;
     }
 }

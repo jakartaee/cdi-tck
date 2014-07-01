@@ -72,7 +72,7 @@ public class InterceptorLifeCycleTest extends AbstractTest {
         // an instance of WeaponAIInterceptor intercepting its usage is set to its field
         warrior.attack1();
         warrior.attack2();
-        assertNotEquals(warrior.weapon1.getWI(), warrior.weapon2.getWI());
+        assertNotEquals(warrior.getWeapon1().getWI(), warrior.getWeapon2().getWI());
         assertEquals(WarriorAIInterceptor.count, repetition);
         assertEquals(MethodInterceptor.count, repetition);
         assertEquals(WarriorAttackAIInterceptor.count, repetition);
