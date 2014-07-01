@@ -66,12 +66,6 @@ public class CircularDependencyTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
-    public void testDependentProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception {
-        getContextualReference(NormalSelfConsumingDependentProducer.class).ping();
-    }
-
-    @Test
-    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
     public void testNormalCircularConstructors() throws Exception {
         assert getContextualReference(Bird.class) != null;
     }
