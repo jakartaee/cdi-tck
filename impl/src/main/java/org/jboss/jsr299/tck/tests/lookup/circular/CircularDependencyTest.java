@@ -61,14 +61,7 @@ public class CircularDependencyTest extends AbstractJSR299Test
    {
       getInstanceByType(DependentSelfConsumingNormalProducer.class).ping();
    }
-   
-   @Test
-   @SpecAssertion(section="5", id="b")
-   public void testDependentProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception
-   {
-      getInstanceByType(NormalSelfConsumingDependentProducer.class).ping();
-   }
-   
+
    @Test
    @SpecAssertion(section="5", id="b")
    public void testNormalSelfConsumingProducer() throws Exception
