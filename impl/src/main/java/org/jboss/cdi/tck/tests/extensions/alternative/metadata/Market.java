@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -9,29 +9,41 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import javax.enterprise.inject.spi.InjectionPoint;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
-public class Milk {
-    @SuppressWarnings("unused")
-    private boolean fresh;
+@SuppressWarnings("unused")
+@Dependent
+public class Market implements Shop {
 
-    public Milk(boolean fresh) {
-        this.fresh = fresh;
-    }
+    private Fruit constructorFruit = null;
 
     @Inject
-    private InjectionPoint metadata;
+    public Market(Fruit fruit) {
+        this.constructorFruit = fruit;
+    }
 
-    public InjectionPoint getMetadata() {
-        return metadata;
+    @Produces
+    @Expensive
+    public Bill createBill(@Any Fruit fruit) {
+        return new Bill(fruit);
+    }
+
+    @Produces
+    @Expensive
+    public Carrot carrot = new Carrot();
+
+    public Fruit getConstructorFruit() {
+        return constructorFruit;
     }
 
 }

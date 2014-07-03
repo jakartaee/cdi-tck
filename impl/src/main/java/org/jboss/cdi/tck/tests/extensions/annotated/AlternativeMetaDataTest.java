@@ -142,7 +142,7 @@ public class AlternativeMetaDataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "aac")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "aad")
     public void testFields() {
         AnnotatedType<WildCat> annotatedType = getCurrentManager().createAnnotatedType(WildCat.class);
         Set<AnnotatedField<? super WildCat>> fields = annotatedType.getFields();

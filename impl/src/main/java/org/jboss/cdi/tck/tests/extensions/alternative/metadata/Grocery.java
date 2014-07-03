@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
@@ -30,9 +31,14 @@ public class Grocery implements Shop {
     @Inject
     private Fruit fruit;
     private boolean constructorWithParameterUsed = false;
+    private static boolean disposerMethodCalled = false;
     private Fruit initializerFruit = null;
+    private Fruit observerFruit = null;
+    private Fruit disposerFruit = null;
     private Bread bread = new Bread(true);
     private Water water = null;
+    private Vegetables wrappedEventParameter = null;
+    private Vegetables wrappedDisposalParameter = null;
 
     private Milk observerEvent = null;
     private TropicalFruit observerParameter = null;
@@ -78,12 +84,6 @@ public class Grocery implements Shop {
         return new Milk(true);
     }
 
-    @Produces
-    @Cheap
-    public Yogurt getYogurt(@Any TropicalFruit fruit) {
-        return new Yogurt(fruit);
-    }
-
     public void observer1(Milk event, TropicalFruit fruit) {
         observerEvent = event;
         observerParameter = fruit;
@@ -92,6 +92,44 @@ public class Grocery implements Shop {
     public void observer2(@Observes Bread event) {
         observer2Used = true;
     }
+
+    public void observerMilk(@Observes Milk milk, @Any Fruit fruit) {
+        this.observerFruit = fruit;
+    }
+
+    public void observesVegetable(@Observes Vegetables vegetable) {
+        wrappedEventParameter = vegetable;
+    }
+
+    @Produces
+    @Cheap
+    public Yogurt getYogurt(@Any TropicalFruit fruit) {
+        return new Yogurt(fruit);
+    }
+
+    @Produces
+    @Cheap
+    public Bill createBill(@Any Fruit fruit) {
+        return new Bill(fruit);
+    }
+
+    @Produces
+    @Cheap
+    public Vegetables createVegetable() {
+        return new Carrot();
+    }
+
+    public void destroyBill(@Disposes @Cheap Bill bill, Fruit fruit) {
+        disposerFruit = fruit;
+    }
+
+    public void destroyVegetable(@Disposes Vegetables vegetables) {
+        wrappedDisposalParameter = vegetables;
+    }
+
+    public void destroyYogurt(Yogurt yogurt){
+       disposerMethodCalled = true;
+    };
 
     public boolean isWaterInjected() {
         return water != null;
@@ -108,4 +146,25 @@ public class Grocery implements Shop {
     public boolean isObserver2Used() {
         return observer2Used;
     }
+
+    public Fruit getObserverFruit() {
+        return observerFruit;
+    }
+
+    public Fruit getDisposerFruit() {
+        return disposerFruit;
+    }
+
+    public Vegetables getWrappedEventParameter() {
+        return wrappedEventParameter;
+    }
+
+    public Vegetables getWrappedDisposalParameter() {
+        return wrappedDisposalParameter;
+    }
+
+    public static boolean isDisposerMethodCalled() {
+        return disposerMethodCalled;
+    }
+
 }

@@ -36,6 +36,15 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         event.setAnnotatedType(new GroceryWrapper(event.getAnnotatedType()));
     }
 
+    public void observeMarketAnnotatedType(@Observes ProcessAnnotatedType<Market> event) {
+        event.setAnnotatedType(new MarketWrapper(event.getAnnotatedType()));
+    }
+
+    public void observeFoodAnnotatedType(@Observes ProcessAnnotatedType<Pasta> event) {
+        event.setAnnotatedType(new PastaWrapper(event.getAnnotatedType()));
+    }
+
+
     public void observeSausageAnnotatedType(@Observes ProcessAnnotatedType<Sausage> event) {
 
         final AnnotatedConstructor<Sausage> originalConstructor = event.getAnnotatedType().getConstructors().iterator().next();
