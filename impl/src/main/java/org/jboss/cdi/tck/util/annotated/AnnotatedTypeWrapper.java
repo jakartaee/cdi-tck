@@ -16,28 +16,47 @@
  */
 package org.jboss.cdi.tck.util.annotated;
 
-import java.lang.annotation.Annotation;
-import java.util.Set;
-
 import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
+import java.lang.annotation.Annotation;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AnnotatedTypeWrapper<X> extends AnnotatedWrapper implements AnnotatedType<X> {
     private AnnotatedType<X> delegate;
+    private Set<AnnotatedConstructor<X>> constructors;
+    private Set<AnnotatedField<? super X>> fields;
+    private Set<AnnotatedMethod<? super X>> methods;
 
     public AnnotatedTypeWrapper(AnnotatedType<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
         super(delegate, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
+        this.constructors = new HashSet<AnnotatedConstructor<X>>();
+        for (AnnotatedConstructor<X> constructor : delegate.getConstructors()) {
+            constructors.add(new AnnotatedConstructorWrapper<X>(constructor, this, true, constructor.getAnnotations().toArray(
+                    new Annotation[] { })));
+        }
+
+        this.fields = new HashSet<AnnotatedField<? super X>>();
+        for (AnnotatedField<? super X> field : delegate.getFields()) {
+            fields.add(new AnnotatedFieldWrapper(field, this, true, field.getAnnotations().toArray(new Annotation[] { })));
+        }
+
+        this.methods = new HashSet<AnnotatedMethod<? super X>>();
+        for (AnnotatedMethod<? super X> method : delegate.getMethods()) {
+            methods.add(new AnnotatedMethodWrapper(method, this, true, method.getAnnotations().toArray(new Annotation[] { })));
+        }
+
     }
 
     public Set<AnnotatedConstructor<X>> getConstructors() {
-        return delegate.getConstructors();
+        return constructors;
     }
 
     public Set<AnnotatedField<? super X>> getFields() {
-        return delegate.getFields();
+        return fields;
     }
 
     public Class<X> getJavaClass() {
@@ -45,6 +64,6 @@ public class AnnotatedTypeWrapper<X> extends AnnotatedWrapper implements Annotat
     }
 
     public Set<AnnotatedMethod<? super X>> getMethods() {
-        return delegate.getMethods();
+        return methods;
     }
 }

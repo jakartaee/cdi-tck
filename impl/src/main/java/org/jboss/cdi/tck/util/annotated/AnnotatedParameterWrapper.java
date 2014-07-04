@@ -18,20 +18,22 @@ package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.inject.spi.AnnotatedCallable;
 import javax.enterprise.inject.spi.AnnotatedParameter;
 
 public class AnnotatedParameterWrapper<X> extends AnnotatedWrapper implements AnnotatedParameter<X> {
     private AnnotatedParameter<X> delegate;
+    private AnnotatedCallableWraper<X> declaringMethod;
 
-    public AnnotatedParameterWrapper(AnnotatedParameter<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
+    public AnnotatedParameterWrapper(AnnotatedParameter<X> delegate,  AnnotatedCallableWraper<X> declaringMethod, boolean keepOriginalAnnotations, Annotation... annotations) {
         super(delegate, keepOriginalAnnotations, annotations);
+        this.declaringMethod = declaringMethod;
         this.delegate = delegate;
+
+    }
+    public AnnotatedCallableWraper<X> getDeclaringCallable(){
+        return declaringMethod;
     }
 
-    public AnnotatedCallable<X> getDeclaringCallable() {
-        return delegate.getDeclaringCallable();
-    }
 
     public int getPosition() {
         return delegate.getPosition();

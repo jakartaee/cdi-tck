@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptors;
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
@@ -26,6 +24,8 @@ import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.Nonbinding;
+import java.util.HashSet;
+import java.util.Set;
 import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 import org.jboss.cdi.tck.util.annotated.AnnotatedMethodWrapper;
 import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
@@ -51,9 +51,10 @@ public class InterceptorExtension implements Extension {
                 methods = new HashSet<AnnotatedMethod<? super Suffixed>>();
                 for (AnnotatedMethod<? super Suffixed> method : super.getMethods()) {
                     if ("value".equals(method.getJavaMember().getName())) {
-                        methods.add(new AnnotatedMethodWrapper<Suffixed>((AnnotatedMethod<Suffixed>) method, true, new AnnotationLiteral<Nonbinding>() {}));
+                        methods.add(new AnnotatedMethodWrapper<Suffixed>((AnnotatedMethod<Suffixed>) method, this, true, new AnnotationLiteral<Nonbinding>() {
+                        }));
                     } else {
-                        methods.add(method);
+                        methods.add(new AnnotatedMethodWrapper<Suffixed>((AnnotatedMethod<Suffixed>) method, this, true));
                     }
                 }
             }
