@@ -18,47 +18,31 @@ package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedParameter;
-import javax.enterprise.inject.spi.AnnotatedType;
 
-public class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements AnnotatedMethod<X> {
+public class AnnotatedMethodWrapper<X> extends AnnotatedCallableWraper<X> implements AnnotatedMethod<X> {
 
     private AnnotatedMethod<X> delegate;
 
-    private List<AnnotatedParameter<X>> parameters;
-
-    public AnnotatedMethodWrapper(AnnotatedMethod<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
-        super(delegate, keepOriginalAnnotations, annotations);
+    public AnnotatedMethodWrapper(AnnotatedMethod<X> delegate,AnnotatedTypeWrapper<X> declaringType, boolean keepOriginalAnnotations, Annotation... annotations ) {
+        super(delegate, declaringType,keepOriginalAnnotations, annotations);
         this.delegate = delegate;
-        this.parameters = delegate.getParameters();
     }
 
     public Method getJavaMember() {
         return delegate.getJavaMember();
     }
 
-    public List<AnnotatedParameter<X>> getParameters() {
-        return parameters;
-    }
 
     public AnnotatedParameter<X> getParameter(int position) {
-        for (Iterator<AnnotatedParameter<X>> iterator = this.parameters.iterator(); iterator.hasNext();) {
-            AnnotatedParameter<X> parameter = iterator.next();
-            if (parameter.getPosition() == position) {
-                return parameter;
-            }
-        }
-        return null;
+      return super.getParameters().get(position);
     }
 
-    public AnnotatedType<X> getDeclaringType() {
-        return delegate.getDeclaringType();
+    public AnnotatedTypeWrapper getDeclaringType() {
+        return super.getDeclaringType();
     }
 
     public boolean isStatic() {
@@ -70,9 +54,5 @@ public class AnnotatedMethodWrapper<X> extends AnnotatedWrapper implements Annot
         return super.getAnnotations();
     }
 
-    public AnnotatedMethodWrapper<X> replaceParameters(AnnotatedParameter<X>... parameters) {
-        this.parameters = Arrays.asList(parameters);
-        return this;
-    }
 
 }

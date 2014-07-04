@@ -129,6 +129,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
+    @Test
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "u")
     public void testExtraQualifierIsAppliedToInjectedField() {
         assertNotNull(getContextualReference(Grocery.class, AnyLiteral.INSTANCE).getFruit());

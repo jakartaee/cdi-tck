@@ -20,14 +20,13 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
 import javax.enterprise.inject.spi.AnnotatedField;
-import javax.enterprise.inject.spi.AnnotatedType;
 
-public class AnnotatedFieldWrapper<X> extends AnnotatedWrapper implements AnnotatedField<X> {
+public class AnnotatedFieldWrapper<X> extends AnnotatedMemberWrapper<X> implements AnnotatedField<X> {
 
     private AnnotatedField<X> delegate;
 
-    public AnnotatedFieldWrapper(AnnotatedField<X> delegate, boolean keepOriginalAnnotations, Annotation... annotations) {
-        super(delegate, keepOriginalAnnotations, annotations);
+    public AnnotatedFieldWrapper(AnnotatedField<X> delegate, AnnotatedTypeWrapper<X> declaringType, boolean keepOriginalAnnotations, Annotation... annotations) {
+        super(delegate, declaringType, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
     }
 
@@ -35,8 +34,8 @@ public class AnnotatedFieldWrapper<X> extends AnnotatedWrapper implements Annota
         return delegate.getJavaMember();
     }
 
-    public AnnotatedType<X> getDeclaringType() {
-        return delegate.getDeclaringType();
+    public AnnotatedTypeWrapper<X> getDeclaringType() {
+        return super.getDeclaringType();
     }
 
     public boolean isStatic() {

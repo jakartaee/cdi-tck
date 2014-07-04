@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
@@ -27,7 +24,8 @@ import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.Nonbinding;
-
+import java.util.HashSet;
+import java.util.Set;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Boss;
 import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 import org.jboss.cdi.tck.util.annotated.AnnotatedMethodWrapper;
@@ -76,11 +74,11 @@ public class BeforeBeanDiscoveryObserver implements Extension {
                 methods = new HashSet<AnnotatedMethod<? super Skill>>();
                 for (final AnnotatedMethod<? super Skill> method : super.getMethods()) {
                     if ("level".equals(method.getJavaMember().getName())) {
-                        methods.add(new AnnotatedMethodWrapper<Skill>((AnnotatedMethod<Skill>) method, true,
+                        methods.add(new AnnotatedMethodWrapper<Skill>((AnnotatedMethod<Skill>) method, this, true,
                                 new AnnotationLiteral<Nonbinding>() {
                                 }));
                     } else {
-                        methods.add(method);
+                        methods.add(new AnnotatedMethodWrapper<Skill>((AnnotatedMethod<Skill>) method, this, true));
                     }
                 }
             }
