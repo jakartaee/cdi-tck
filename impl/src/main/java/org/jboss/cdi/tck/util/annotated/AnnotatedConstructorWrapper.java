@@ -18,19 +18,16 @@ package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
-import java.util.List;
 
 import javax.enterprise.inject.spi.AnnotatedConstructor;
-import javax.enterprise.inject.spi.AnnotatedParameter;
-import javax.enterprise.inject.spi.AnnotatedType;
 
-public class AnnotatedConstructorWrapper<X> extends AnnotatedWrapper implements AnnotatedConstructor<X> {
+public class AnnotatedConstructorWrapper<X> extends AnnotatedCallableWraper<X> implements AnnotatedConstructor<X> {
 
     private AnnotatedConstructor<X> delegate;
 
-    public AnnotatedConstructorWrapper(AnnotatedConstructor<X> delegate, boolean keepOriginalAnnotations,
+    public AnnotatedConstructorWrapper(AnnotatedConstructor<X> delegate, AnnotatedTypeWrapper<X> declaringType, boolean keepOriginalAnnotations,
             Annotation... annotations) {
-        super(delegate, keepOriginalAnnotations, annotations);
+        super(delegate, declaringType, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
     }
 
@@ -38,12 +35,8 @@ public class AnnotatedConstructorWrapper<X> extends AnnotatedWrapper implements 
         return delegate.getJavaMember();
     }
 
-    public List<AnnotatedParameter<X>> getParameters() {
-        return delegate.getParameters();
-    }
-
-    public AnnotatedType<X> getDeclaringType() {
-        return delegate.getDeclaringType();
+    public AnnotatedTypeWrapper<X> getDeclaringType() {
+        return super.getDeclaringType();
     }
 
     public boolean isStatic() {
