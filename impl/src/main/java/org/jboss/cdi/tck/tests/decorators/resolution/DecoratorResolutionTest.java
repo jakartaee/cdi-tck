@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.decorators.resolution;
 
 import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ASSIGNABLE_PARAMETERS;
 
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -42,16 +43,8 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
-public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> extends AbstractTest {
+public class DecoratorResolutionTest<C extends Cow, F extends FresianCow> extends AbstractTest {
 
-    private final TypeLiteral<Bar<T>> BAR_TYPE_VARIABLE_LITERAL = new TypeLiteral<Bar<T>>() {
-    };
-    private final TypeLiteral<Baz<T>> BAZ_TYPE_VARIABLE_LITERAL = new TypeLiteral<Baz<T>>() {
-    };
-    private final TypeLiteral<Foo<T>> FOO_TYPE_VARIABLE_LITERAL = new TypeLiteral<Foo<T>>() {
-    };
-    private final TypeLiteral<Foo<Object>> FOO_OBJECT_LITERAL = new TypeLiteral<Foo<Object>>() {
-    };
     private final TypeLiteral<Qux<String>> QUX_STRING_LITERAL = new TypeLiteral<Qux<String>>() {
     };
     private final TypeLiteral<Qux<List<String>>> QUX_STRING_LIST_LITERAL = new TypeLiteral<Qux<List<String>>>() {
@@ -81,28 +74,22 @@ public class DecoratorResolutionTest<T, C extends Cow, F extends FresianCow> ext
     @Test
     @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "aa") })
     public void testUnboundedTypeVariables() {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
-                Collections.singleton(BAR_TYPE_VARIABLE_LITERAL.getType()));
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type>singleton(Bar.class));
         assert decoratorCollectionMatches(decorators, BarDecorator.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "ab") })
     public void testObject() {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
-                Collections.singleton(BAZ_TYPE_VARIABLE_LITERAL.getType()));
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type>singleton(Baz.class));
         assert decoratorCollectionMatches(decorators, BazDecorator.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "ac") })
     public void testUnboundedTypeVariablesAndObject() {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(
-                Collections.singleton(FOO_TYPE_VARIABLE_LITERAL.getType()));
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type>singleton(Foo.class));
         assert decoratorCollectionMatches(decorators, FooDecorator.class, FooObjectDecorator.class);
-        List<Decorator<?>> decorators1 = getCurrentManager().resolveDecorators(
-                Collections.singleton(FOO_OBJECT_LITERAL.getType()));
-        assert decoratorCollectionMatches(decorators1, FooDecorator.class, FooObjectDecorator.class);
     }
 
     @Test
