@@ -23,8 +23,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import java.util.Arrays;
-
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.spi.AnnotatedField;
@@ -35,18 +33,19 @@ import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessManagedBean;
 import javax.enterprise.inject.spi.ProcessProducerField;
 import javax.enterprise.inject.spi.ProcessProducerMethod;
-
+import java.util.Arrays;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author David Allen
  * @author Martin Kouba
  */
@@ -59,7 +58,10 @@ public class ProcessBeanTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(ProcessBeanTest.class)
                 .withClasses(Cat.class, Cow.class, Cowshed.class, Domestic.class, Chicken.class, ChickenHutch.class,
-                        ProcessBeanObserver.class).withExtension(ProcessBeanObserver.class).build();
+                        ProcessBeanObserver.class, CatInterceptor.class, CatInterceptorBinding.class, Animal.class, AnimalDecorator.class).
+                        withBeansXml(Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(CatInterceptor.class.getName())
+                                .up().createDecorators().clazz(AnimalDecorator.class.getName()).up()).
+                        withExtension(ProcessBeanObserver.class).build();
     }
 
     @SuppressWarnings("unchecked")
@@ -147,6 +149,16 @@ public class ProcessBeanTest extends AbstractTest {
 
         assertEquals(ProcessBeanObserver.getChickenActionSeq().getData(),
                 Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessProducerField.class.getName()));
+    }
+
+    @SpecAssertions({ @SpecAssertion(section = PB, id = "aa") })
+    public void testProcessBeanFiredForInterceptor() {
+        assertNotNull(ProcessBeanObserver.getInterceptor());
+    }
+
+    @SpecAssertions({ @SpecAssertion(section = PB, id = "aa") })
+    public void testProcessBeanFiredForDecorator() {
+        assertNotNull(ProcessBeanObserver.getDecorator());
     }
 
 }
