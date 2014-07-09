@@ -27,16 +27,17 @@ public class Observers {
     private final ActionSequence sequence = new ActionSequence(Observers.class.getName());
 
     @Ordered(20)
-    void observe1(@Observes @Foo @Bar @Baz Payload event) {
+    void observe1(@Observes @Bar @Baz Payload event) {
+
         sequence.add("third");
     }
 
     @Ordered(-10)
-    void observe2(@Observes @Foo @Bar @Baz Payload event) {
+    void observe2(@Observes @Bar @Baz Payload event) {
         sequence.add("first");
     }
 
-    void observe3(@Observes @Foo @Bar @Baz Payload event) {
+    void observe3(@Observes @Bar @Baz Payload event) {
         sequence.add("second");
     }
 

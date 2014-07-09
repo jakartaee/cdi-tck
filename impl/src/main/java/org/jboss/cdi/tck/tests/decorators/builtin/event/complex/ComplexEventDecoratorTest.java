@@ -46,7 +46,6 @@ import org.testng.annotations.Test;
 public class ComplexEventDecoratorTest extends AbstractTest {
 
     @Inject
-    @Foo
     private Event<Payload> event;
 
     @Inject

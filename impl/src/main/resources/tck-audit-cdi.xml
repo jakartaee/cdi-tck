@@ -3290,7 +3290,7 @@
                 <text>If the injection point is a field, an initializer method parameter or a bean constructor of an interceptor, with qualifier |@Intercepted| and the type parameter of the injected |Bean| is not an unbounded wildcard, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
             <assertion id="n">
-                <text>If he injection point is a field, an initializer method parameter or a bean constructor of a decorator, with qualifier |@Decorated| and the type parameter of the injected |Bean| is not the same as the delegate type, the container automatically detects the problem and treats it as a definition error.</text>
+                <text>If the injection point is a field, an initializer method parameter or a bean constructor of a decorator, with qualifier |@Decorated| and the type parameter of the injected |Bean| is not the same as the delegate type, the container automatically detects the problem and treats it as a definition error.</text>
             </assertion>
             <assertion id="o">
                 <text>If the injection point is a producer method parameter and the type parameter of the injected |Bean| is not the same as the producer method return type, the container automatically detects the problem and treats it as a definition error.</text>
