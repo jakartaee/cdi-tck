@@ -48,9 +48,9 @@ public class OrderedEventDeliveryDecorator<T> implements Event<T>, Serializable 
     }
 
     @Inject
-    public OrderedEventDeliveryDecorator(@Delegate Event<T> delegate, InjectionPoint ip, BeanManager manager,
+    public OrderedEventDeliveryDecorator(@Delegate Event<T> delegate, BeanManager manager,
             OrderedEventDeliveryExtension extension) {
-        this.qualifiers = new HashSet<Annotation>(ip.getQualifiers());
+        this.qualifiers = new HashSet<Annotation>();
         this.manager = manager;
         this.comparator = new ObserverMethodComparator(extension);
     }
