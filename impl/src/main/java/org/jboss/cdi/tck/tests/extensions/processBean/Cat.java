@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
 @Domestic
-@CatInterceptorBinding
 public class Cat {
 
 }

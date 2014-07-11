@@ -37,8 +37,6 @@ public class ProcessBeanObserver implements Extension {
     private static Bean<Cat> catBean;
     private static AnnotatedType<Cat> catAnnotatedType;
     private static Annotated catAnnotated;
-    private static Bean<CatInterceptor> interceptor;
-    private static Bean<AnimalDecorator> decorator;
     private static int catProcessBeanCount;
 
     // https://issues.jboss.org/browse/WELD-586
@@ -99,14 +97,6 @@ public class ProcessBeanObserver implements Extension {
         chickenParameter = event.getAnnotatedDisposedParameter();
         chickedAnnotated = event.getAnnotated();
         chickenActionSeq.add(ProcessProducerField.class.getName());
-    }
-
-    public void observeInterceptor(@Observes ProcessBean<CatInterceptor> event) {
-        interceptor = event.getBean();
-    }
-
-    public void observeDecorator(@Observes ProcessBean<AnimalDecorator> event) {
-        decorator = event.getBean();
     }
 
     public void observeChickenHutchProccesBean(@Observes ProcessBean<ChickenHutch> event) {
@@ -191,14 +181,6 @@ public class ProcessBeanObserver implements Extension {
 
     public static Bean<ChickenHutch> getChickenBean() {
         return chickenBean;
-    }
-
-    public static Bean<CatInterceptor> getInterceptor() {
-        return interceptor;
-    }
-
-    public static Bean<AnimalDecorator> getDecorator() {
-        return decorator;
     }
 
 }
