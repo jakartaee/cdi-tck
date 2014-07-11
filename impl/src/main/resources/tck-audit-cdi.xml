@@ -3248,10 +3248,10 @@
         <group>
             <text>Additionally, the container must provide beans allowing interceptors and decorators to obtain information about the beans they intercept and decorate.</text>
             <assertion id="d">
-                <text>Bean with scope |@Dependent|, qualifier |@@Decorated| and type |Bean| can be injected into any decorator instance.</text>
+                <text>Bean with scope |@Dependent|, qualifier |@Intercepted| and type |Bean| which can be injected into any interceptor instance.</text>
             </assertion>
             <assertion id="e">
-                <text>Bean with scope |@Dependent|, qualifier |@Intercepted| and type |Bean| which can be injected into any interceptor instance.</text>
+                <text>Bean with scope |@Dependent|, qualifier |@Decorated| and type |Bean| can be injected into any decorator instance.</text>
             </assertion>
         </group>
 

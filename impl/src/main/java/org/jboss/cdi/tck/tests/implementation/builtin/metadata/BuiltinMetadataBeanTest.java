@@ -61,11 +61,18 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).createInterceptors()
                                 .clazz(YoghurtInterceptor.class.getName()).up().createDecorators()
+                                .clazz(BakeryProductDecorator.class.getName())
                                 .clazz(MilkProductDecorator.class.getName()).up()).build();
     }
 
     @Inject
     private Yoghurt yoghurt;
+
+    @Inject
+    private FatYoghurt fatYoghurt;
+
+    @Inject
+    private BakeryProduct bakery;
 
     @Inject
     private YoghurtFactory factory;
@@ -101,10 +108,17 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
         Bean<?> bean = getUniqueBean(Yoghurt.class);
         Interceptor<?> interceptor = getCurrentManager()
                 .resolveInterceptors(InterceptionType.AROUND_INVOKE, new Frozen.Literal()).iterator().next();
-        YoghurtInterceptor instance = yoghurt.getInterceptorInstance();
-        assertEquals(interceptor, instance.getBean());
-        assertEquals(interceptor, instance.getInterceptor());
-        assertEquals(bean, instance.getInterceptedBean());
+        YoghurtInterceptor yoghurtInterceptor = yoghurt.getInterceptorInstance();
+        assertEquals(interceptor, yoghurtInterceptor.getBean());
+        assertEquals(interceptor, yoghurtInterceptor.getInterceptor());
+        assertEquals(bean, yoghurtInterceptor.getInterceptedBean());
+
+        // test also for session bean
+        Bean<?> sessionBean = getUniqueBean(FatYoghurt.class);
+        YoghurtInterceptor fatYoghurtInterceptor = fatYoghurt.getInterceptorInstance();
+        assertEquals(interceptor, fatYoghurtInterceptor.getBean());
+        assertEquals(interceptor, fatYoghurtInterceptor.getInterceptor());
+        assertEquals(sessionBean, fatYoghurtInterceptor.getInterceptedBean());
     }
 
     @Test
@@ -118,6 +132,15 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
         assertEquals(decorator, instance.getBean());
         assertEquals(decorator, instance.getDecorator());
         assertEquals(bean, instance.getDecoratedBean());
+
+        // test also for session bean
+        Bean<?> sessionBean = getUniqueBean(BakeryProduct.class);
+        Decorator<?> decoratorInstance = getCurrentManager().resolveDecorators(Collections.<Type> singleton(BakeryProduct.class))
+                .iterator().next();
+        BakeryProductDecorator bakeryDecorator = bakery.getDecoratorInstance();
+        assertEquals(decoratorInstance, bakeryDecorator.getBean());
+        assertEquals(decoratorInstance, bakeryDecorator.getDecorator());
+        assertEquals(sessionBean, bakeryDecorator.getDecoratedBean());
     }
 
 }

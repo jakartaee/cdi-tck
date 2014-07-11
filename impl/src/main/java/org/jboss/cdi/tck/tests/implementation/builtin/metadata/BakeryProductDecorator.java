@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -24,35 +24,35 @@ import javax.inject.Inject;
 
 @javax.decorator.Decorator
 @SuppressWarnings({ "unused", "serial" })
-public class MilkProductDecorator implements MilkProduct {
+public class BakeryProductDecorator implements BakeryProduct {
 
     @Inject
     @Delegate
-    private MilkProduct delegate;
+    private BakeryProduct delegate;
 
     @Inject
-    private Bean<MilkProductDecorator> bean;
+    private Bean<BakeryProductDecorator> bean;
 
     @Inject
-    private Decorator<MilkProductDecorator> decorator;
+    private Decorator<BakeryProductDecorator> decorator;
 
     @Inject
     @Decorated
-    private Bean<MilkProduct> decoratedBean;
+    private Bean<BakeryProduct> decoratedBean;
 
-    public Bean<MilkProductDecorator> getBean() {
+    public Bean<BakeryProductDecorator> getBean() {
         return bean;
     }
 
-    public Decorator<MilkProductDecorator> getDecorator() {
+    public Decorator<BakeryProductDecorator> getDecorator() {
         return decorator;
     }
 
-    public Bean<? extends MilkProduct> getDecoratedBean() {
+    public Bean<? extends BakeryProduct> getDecoratedBean() {
         return decoratedBean;
     }
 
-    public MilkProductDecorator getDecoratorInstance() {
+    public BakeryProductDecorator getDecoratorInstance() {
         return this;
     }
 }
