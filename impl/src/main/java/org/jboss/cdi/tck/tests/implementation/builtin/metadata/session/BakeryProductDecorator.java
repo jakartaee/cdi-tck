@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.builtin.metadata;
+package org.jboss.cdi.tck.tests.implementation.builtin.metadata.session;
 
 import javax.decorator.Delegate;
 import javax.enterprise.inject.Decorated;

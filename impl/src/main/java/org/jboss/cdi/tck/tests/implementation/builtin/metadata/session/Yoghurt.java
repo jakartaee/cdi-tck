@@ -14,19 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.builtin.metadata;
+package org.jboss.cdi.tck.tests.implementation.builtin.metadata.session;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.Frozen;
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.YoghurtInterceptor;
 
 @Stateless
-public class FatYoghurt {
+public class Yoghurt {
 
     @Inject
-    private Bean<FatYoghurt> bean;
+    private Bean<Yoghurt> bean;
 
-    public Bean<FatYoghurt> getBeanBean() {
+    public Bean<Yoghurt> getBeanBean() {
         return bean;
     }
 

@@ -14,14 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.builtin.metadata;
+package org.jboss.cdi.tck.tests.implementation.builtin.metadata.session;
 
-import javax.ejb.Stateless;
+public interface BakeryProduct {
 
-@Stateless
-public class Bread implements BakeryProduct {
-
-    public BakeryProductDecorator getDecoratorInstance() {
-        return null;
-    }
+    BakeryProductDecorator getDecoratorInstance();
 }
