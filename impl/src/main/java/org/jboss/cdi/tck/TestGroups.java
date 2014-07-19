@@ -83,6 +83,18 @@ public final class TestGroups {
     public static final String SYSTEM_PROPERTIES = "systemProperties";
 
     /**
+     * Requires following mapping of roles to principals:
+     *  --------------------------------
+     *  | Principal | Group            |
+     *  --------------------------------
+     *  | student   | student          |
+     *  | alarm     | student, alarm   |
+     *  | printer   | student, printer |
+     *  --------------------------------
+     */
+    public static final String SECURITY = "security";
+
+    /**
      * No instance
      */
     private TestGroups() {

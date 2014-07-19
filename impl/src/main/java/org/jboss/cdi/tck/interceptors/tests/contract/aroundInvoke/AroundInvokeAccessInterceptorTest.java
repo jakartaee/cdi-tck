@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.TestGroups.SECURITY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -60,7 +61,7 @@ public class AroundInvokeAccessInterceptorTest extends AbstractTest {
         assertEquals(getContextualReference(Bean2.class).zero(), 1);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = {JAVAEE_FULL, SECURITY})
     @SpecAssertions({ @SpecAssertion(section = "2.5", id = "e"), @SpecAssertion(section = "2.5", id = "fb") })
     public void testSecurityContext(Student student) throws Exception {
         student.printArticle();
