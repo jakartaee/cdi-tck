@@ -1,0 +1,51 @@
+<!--title>Technology Compatibility Kit Reference Guide for JSR 346: Contexts and Dependency Injection for Java EE 1.1</title-->
+<subtitle>
+ Specification Lead: Red Hat Inc.
+</subtitle>
+<authorgroup>
+   <author>
+      <firstname>Pete</firstname>
+      <surname>Muir</surname>
+      <affiliation>
+             <jobtitle>JSR 346: Contexts and Dependency Injection (CDI) for Java EE 1.1 specification lead</jobtitle>
+      </affiliation>
+   </author>
+   <author>
+      <firstname>Gavin</firstname>
+      <surname>King</surname>
+      <affiliation>
+             <jobtitle>JSR 299: Contexts and Dependency Injection (CDI) for Java EE 1.0 specification lead</jobtitle>
+      </affiliation>
+   </author>
+   <author>
+      <firstname>Martin</firstname>
+      <surname>Kouba</surname>
+      <affiliation>
+             <jobtitle>Former CDI TCK lead</jobtitle>
+      </affiliation>
+   </author>
+   <author>
+      <firstname>Tomas</firstname>
+      <surname>Remes</surname>
+      <affiliation>
+             <jobtitle>CDI TCK lead</jobtitle>
+      </affiliation>
+   </author>
+   <author>
+      <firstname>David</firstname>
+      <surname>Allen</surname>
+      <affiliation>
+             <jobtitle>CDI TCK developer</jobtitle>
+      </affiliation>
+   </author>
+<!--
+vim:et:ts=3:sw=3:tw=120
+-->
+</authorgroup>
+<copyright>
+   <holder>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+	http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and limitations under the License.</holder>
+   <year>2012 Red Hat Inc., and individual contributors listed as authors.</year>
+</copyright>

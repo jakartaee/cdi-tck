@@ -1,0 +1,82 @@
+[[sigtest]]
+
+== Running the Signature Test
+
+One of the requirements of an implementation passing the TCK is for it to pass the CDI signature test. This section describes how the signature file is generated and how to run it against your implementation. 
+
+
+
+=== Obtaining the sigtest tool
+
+You can obtain the Sigtest tool (at the time of writing the TCK uses version 2.1) from the Sigtest home  page at link:$$http://sigtest.java.net/$$[]. The user guide can be found at  link:$$http://docs.oracle.com/javame/test-tools/sigtest/2_1/sigtest2.1_usersguide.pdf$$[]. 
+
+
+
+=== Running the signature test
+
+To run the signature test simply change the execution command from +Setup+ to +SignatureTest+:
+
+[source, console]
+----
+java -jar sigtestdev.jar SignatureTest -classpath "%JAVA_HOME%\jre\lib\rt.jar:lib/cdi-api.jar:lib/javax.inject.jar:lib/el-api.jar:lib/jboss-interceptor-api.jar" -Package javax.decorator -Package javax.enterprise -FileName artifacts/cdi-tck-impl-sigtest.sig -static
+----
+
+When running the signature test, you may get the following message:
+
++"The return type java.lang.reflect.Member can't be resolved"+
+
+This can safely be ignored - the important thing is to get the +"STATUS:Passed."+ message.
+
+=== Forcing a signature test failure
+
+Just for fun (and to confirm that the signature test is working correctly), you can try the following:
+
+1) Edit cdi-api.sig
+
+2) Modify one of the class signatures - in the following example we change one of the constructors for +BusyConversationException+ - here's the original:
+
+[source, console]
+----
+CLSS public javax.enterprise.context.BusyConversationException
+cons public BusyConversationException()
+cons public BusyConversationException(java.lang.String)
+cons public BusyConversationException(java.lang.String,java.lang.Throwable)
+cons public BusyConversationException(java.lang.Throwable)
+supr javax.enterprise.context.ContextException
+hfds serialVersionUID
+
+----
+
+Let's change the default (empty) constructor parameter to one with a +java.lang.Integer+ parameter instead:
+
+[source, console]
+----
+CLSS public javax.enterprise.context.BusyConversationException
+cons public BusyConversationException(java.lang.Integer)
+cons public BusyConversationException(java.lang.String)
+cons public BusyConversationException(java.lang.String,java.lang.Throwable)
+cons public BusyConversationException(java.lang.Throwable)
+supr javax.enterprise.context.ContextException
+hfds serialVersionUID
+
+----
+
+3) Now when we run the signature test using the above command, we should get the following errors:
+
+
+[source, console]
+....
+Missing Constructors
+--------------------
+
+javax.enterprise.context.BusyConversationException:         constructor public javax.enterprise.context.BusyConversationException.BusyConversationException(java.lang.Integer)
+
+Added Constructors
+------------------
+
+javax.enterprise.context.BusyConversationException:         constructor public javax.enterprise.context.BusyConversationException.BusyConversationException()
+
+
+STATUS:Failed.2 errors
+....
+
