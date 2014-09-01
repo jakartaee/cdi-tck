@@ -17,12 +17,11 @@
 
 package org.jboss.jsr299.tck.tests.extensions.bean.bytype;
 
-import java.lang.reflect.GenericDeclaration;
-import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.Set;
 
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.DefaultLiteral;
@@ -69,26 +68,10 @@ public class BeanByTypeTest extends AbstractJSR299Test
    @SpecAssertions({
       @SpecAssertion(section = "11.3.4", id = "da")
    })
-   public void testTypeVariable()
+   public <T> void testTypeVariable()
    {
-      TypeVariable<?> t = new TypeVariable<GenericDeclaration>()
-      {
-
-         public Type[] getBounds()
-         {
-            return new Type[0];
-         }
-
-         public GenericDeclaration getGenericDeclaration()
-         {
-            return null;
-         }
-
-         public String getName()
-         {
-            return ""; 
-         }
-      };
+      TypeVariable<?> t = (TypeVariable<?>) new TypeLiteral<T>() {
+      }.getType();
       getCurrentManager().getBeans(t);
    }
    
