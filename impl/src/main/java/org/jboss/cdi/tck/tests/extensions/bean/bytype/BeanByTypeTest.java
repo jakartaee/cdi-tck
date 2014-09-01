@@ -22,13 +22,10 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
-import java.lang.reflect.GenericDeclaration;
-import java.lang.reflect.Type;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.TypeLiteral;
 import java.lang.reflect.TypeVariable;
 import java.util.Set;
-
-import javax.enterprise.inject.spi.Bean;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.DefaultLiteral;
@@ -43,7 +40,7 @@ import org.testng.annotations.Test;
 
 /**
  * Tests related to obtaining beans by their type from the bean manager.
- * 
+ *
  * @author David Allen
  * @author Martin Kouba
  */
@@ -90,21 +87,9 @@ public class BeanByTypeTest extends AbstractTest {
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "da") })
-    public void testTypeVariable() {
-        TypeVariable<?> t = new TypeVariable<GenericDeclaration>() {
-
-            public Type[] getBounds() {
-                return new Type[0];
-            }
-
-            public GenericDeclaration getGenericDeclaration() {
-                return null;
-            }
-
-            public String getName() {
-                return "";
-            }
-        };
+    public <T> void testTypeVariable() {
+        TypeVariable<?> t = (TypeVariable<?>) new TypeLiteral<T>() {
+        }.getType();
         getCurrentManager().getBeans(t);
     }
 
