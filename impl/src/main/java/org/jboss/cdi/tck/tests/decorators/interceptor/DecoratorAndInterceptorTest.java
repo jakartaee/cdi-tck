@@ -21,11 +21,9 @@ import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
-import java.util.List;
-
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
-
+import java.util.List;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -78,17 +76,17 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
     public void testLifecycleCallbacks() {
 
         ActionSequence.reset();
-        String fooClass = useFoo();
+        useFoo();
 
         List<String> postConstruct = ActionSequence.getSequenceData("postConstruct");
         assertEquals(postConstruct.size(), 2);
-        assertEquals(postConstruct.get(0), fooClass + FooInterceptor1.NAME);
-        assertEquals(postConstruct.get(1), fooClass + FooInterceptor2.NAME);
+        assertEquals(postConstruct.get(0), FooInterceptor1.NAME);
+        assertEquals(postConstruct.get(1), FooInterceptor2.NAME);
 
         List<String> preDestroy = ActionSequence.getSequenceData("preDestroy");
         assertEquals(preDestroy.size(), 2);
-        assertEquals(preDestroy.get(0), fooClass + FooInterceptor1.NAME);
-        assertEquals(preDestroy.get(1), fooClass + FooInterceptor2.NAME);
+        assertEquals(preDestroy.get(0), FooInterceptor1.NAME);
+        assertEquals(preDestroy.get(1), FooInterceptor2.NAME);
     }
 
     private String useFoo() {

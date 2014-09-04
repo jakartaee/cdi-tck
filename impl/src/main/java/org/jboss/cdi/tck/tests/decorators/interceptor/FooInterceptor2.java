@@ -21,7 +21,6 @@ import javax.annotation.PreDestroy;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Interceptor
@@ -38,7 +37,9 @@ public class FooInterceptor2 {
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
-        ActionSequence.addAction("postConstruct", ctx.getTarget().getClass().getName() + NAME);
+        if (ctx.getTarget() instanceof Foo) {
+            ActionSequence.addAction("postConstruct", NAME);
+        }
         try {
             ctx.proceed();
         } catch (Throwable e) {
@@ -48,7 +49,9 @@ public class FooInterceptor2 {
 
     @PreDestroy
     public void preDestroy(InvocationContext ctx) {
-        ActionSequence.addAction("preDestroy", ctx.getTarget().getClass().getName() + NAME);
+        if (ctx.getTarget() instanceof Foo) {
+            ActionSequence.addAction("preDestroy", NAME);
+        }
         try {
             ctx.proceed();
         } catch (Throwable e) {
