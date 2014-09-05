@@ -24,14 +24,15 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.event.Event;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.spi.ObserverMethod;
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
-
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.ObserverMethod;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -50,6 +51,9 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         return new WebArchiveBuilder().withTestClassPackage(CheckTypeParametersWhenResolvingObserversTest.class).build();
     }
 
+    @Inject
+    Event<Box<Integer, String, Random>> event;
+
     @Test
     @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "b"), @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "a") })
     public void testResolvingChecksTypeParameters() {
@@ -61,6 +65,9 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     @Test
     @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "b")
     public void testParameterizedEventTypeAssignableToRawType() {
+        Box<Integer, String, Random> box = new Box<Integer, String, Random>();
+        event.fire(box);
+        assertTrue(RawTypeObserver.OBSERVED);
         verifyObserver(new RawTypeObserver.BoxWithDifferentTypeParameters(), 1, RawTypeObserver.class);
         verifyObserver(new RawTypeObserver.BoxWithObjectTypeParameters(), 1, RawTypeObserver.class);
     }
@@ -193,8 +200,9 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
 
     private void verifyObserver(Object event, int expectedNumberOfObservers, Class<?>... expectedObserverTypes) {
 
-        if (expectedNumberOfObservers < expectedObserverTypes.length)
+        if (expectedNumberOfObservers < expectedObserverTypes.length) {
             throw new IllegalArgumentException("Invalid expected arguments");
+        }
 
         Set<ObserverMethod<? super Object>> observers = getCurrentManager().resolveObserverMethods(event);
         assertEquals(observers.size(), expectedNumberOfObservers);
@@ -206,7 +214,6 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     }
 
     /**
-     * 
      * @param sequenceName
      * @param expectedSequenceSize
      * @param actions Sequence data must contain all specified actions
