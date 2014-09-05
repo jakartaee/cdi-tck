@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,22 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
-import java.util.Random;
+public class Box <A,B,C> {
 
-import javax.enterprise.event.Observes;
-
-public class RawTypeObserver {
-
-    public static boolean OBSERVED = false;
-
-    @SuppressWarnings("rawtypes") // raw type used intentionally
-    public void observe(@Observes Box box) {
-         OBSERVED = true;
-    }
-
-    protected static class BoxWithObjectTypeParameters extends Box<Object, Object, Object> {
-    }
-
-    protected static class BoxWithDifferentTypeParameters extends Box<Number, String, Random> {
-    }
 }
