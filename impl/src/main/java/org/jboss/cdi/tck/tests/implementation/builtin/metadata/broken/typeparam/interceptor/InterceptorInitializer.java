@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.interceptor;
 
+import javax.annotation.Priority;
 import javax.enterprise.inject.spi.Interceptor;
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
@@ -30,6 +31,7 @@ import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.
  */
 @Binding
 @javax.interceptor.Interceptor
+@Priority(100)
 public class InterceptorInitializer {
 
     @Inject
