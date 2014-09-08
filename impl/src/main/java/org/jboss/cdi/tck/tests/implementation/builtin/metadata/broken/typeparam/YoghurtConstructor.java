@@ -23,8 +23,13 @@ import javax.inject.Inject;
 @RequestScoped
 public class YoghurtConstructor {
 
+    public YoghurtConstructor() {
+
+    }
+
     @Inject
     public YoghurtConstructor(Bean<Cream> bean) {
+
     }
 
 }

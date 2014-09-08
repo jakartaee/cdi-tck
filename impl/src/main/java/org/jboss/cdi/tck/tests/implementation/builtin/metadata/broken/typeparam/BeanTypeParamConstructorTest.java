@@ -20,6 +20,7 @@ package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
 
 import javax.enterprise.inject.spi.DefinitionException;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -36,6 +37,10 @@ import org.testng.annotations.Test;
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class BeanTypeParamConstructorTest extends AbstractTest {
+
+    //CDITCK-439 - provide default constructor and some injection point to have proxyable bean.
+    @Inject
+    YoghurtConstructor yoghurtConstructor;
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment

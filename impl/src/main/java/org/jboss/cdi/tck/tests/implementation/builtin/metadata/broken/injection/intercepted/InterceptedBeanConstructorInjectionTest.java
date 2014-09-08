@@ -20,6 +20,7 @@ package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
 
 import javax.enterprise.inject.spi.DefinitionException;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -35,12 +36,12 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
-public class InterceptedBeanConstrutctorInjectionTest extends AbstractTest {
+public class InterceptedBeanConstructorInjectionTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassDefinition(InterceptedBeanConstrutctorInjectionTest.class)
+        return new WebArchiveBuilder().withTestClassDefinition(InterceptedBeanConstructorInjectionTest.class)
                 .withClasses(InterceptedConstructorInjector.class).build();
     }
 
