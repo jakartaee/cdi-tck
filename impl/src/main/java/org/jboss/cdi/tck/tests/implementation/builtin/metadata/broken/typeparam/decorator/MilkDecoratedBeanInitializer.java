@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.decorator;
 
+import javax.annotation.Priority;
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.inject.spi.Bean;
@@ -25,6 +26,7 @@ import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.
 import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Milk;
 
 @Decorator
+@Priority(100)
 public class MilkDecoratedBeanInitializer implements Milk {
 
     @Inject
