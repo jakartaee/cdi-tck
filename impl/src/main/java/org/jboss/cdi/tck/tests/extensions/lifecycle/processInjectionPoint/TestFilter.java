@@ -29,7 +29,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 @Vetoed
-@WebFilter
+@WebFilter("/TestFilter")
 public class TestFilter implements Filter {
 
     @Inject
