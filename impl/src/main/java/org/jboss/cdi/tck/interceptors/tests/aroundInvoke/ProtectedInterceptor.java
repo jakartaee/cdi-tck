@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.aroundInvoke;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class ProtectedInterceptor {
+public class ProtectedInterceptor {
     @AroundInvoke
     protected Object intercept(InvocationContext ctx) throws Exception {
         return ((Integer) ctx.proceed()) + 1;

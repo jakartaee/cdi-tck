@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.aroundInvoke;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class PrivateInterceptor {
+public class PrivateInterceptor {
     @SuppressWarnings("unused")
     @AroundInvoke
     private Object intercept(InvocationContext ctx) throws Exception {
