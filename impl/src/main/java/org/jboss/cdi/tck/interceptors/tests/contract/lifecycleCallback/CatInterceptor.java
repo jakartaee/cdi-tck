@@ -24,7 +24,7 @@ import javax.interceptor.InvocationContext;
 import javax.naming.InitialContext;
 import javax.transaction.TransactionSynchronizationRegistry;
 
-class CatInterceptor {
+public class CatInterceptor {
 
     static boolean pcCalled = false;
     static boolean pdCalled = false;

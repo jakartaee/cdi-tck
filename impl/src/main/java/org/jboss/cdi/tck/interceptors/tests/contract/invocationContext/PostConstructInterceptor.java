@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 import javax.annotation.PostConstruct;
 import javax.interceptor.InvocationContext;
 
-class PostConstructInterceptor {
+public class PostConstructInterceptor {
     private static boolean getMethodReturnsNull = false;
     private static boolean ctxProceedReturnsNull = false;
 

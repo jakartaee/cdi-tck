@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class Interceptor5 {
+public class Interceptor5 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         Integer[] parameters = new Integer[] { 1, 2, 3 };

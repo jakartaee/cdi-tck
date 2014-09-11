@@ -21,7 +21,7 @@ import javax.annotation.PreDestroy;
 import javax.interceptor.AroundConstruct;
 import javax.interceptor.InvocationContext;
 
-class AlmightyLifecycleInterceptor {
+public class AlmightyLifecycleInterceptor {
     private static int numberOfInterceptions = 0;
 
     @AroundConstruct

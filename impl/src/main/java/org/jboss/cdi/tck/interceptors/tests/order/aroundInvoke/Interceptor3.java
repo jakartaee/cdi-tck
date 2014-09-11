@@ -21,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class Interceptor3 extends Interceptor2 {
+public class Interceptor3 extends Interceptor2 {
     @AroundInvoke
     public Object intercept2(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();

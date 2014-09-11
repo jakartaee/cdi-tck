@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class Interceptor8 {
+public class Interceptor8 {
     private static boolean contextDataOK = false;
 
     @AroundInvoke
