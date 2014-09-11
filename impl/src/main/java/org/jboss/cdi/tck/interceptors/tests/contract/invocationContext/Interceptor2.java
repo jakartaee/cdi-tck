@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class Interceptor2 {
+public class Interceptor2 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         return ctx.getTimer() == null;

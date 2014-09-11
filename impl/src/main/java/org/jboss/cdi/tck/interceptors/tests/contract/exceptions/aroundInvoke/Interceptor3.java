@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class Interceptor3 {
+public class Interceptor3 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         try {

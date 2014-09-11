@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class Interceptor4 {
+public class Interceptor4 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         Object[] parameters = ctx.getParameters();

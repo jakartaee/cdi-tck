@@ -26,7 +26,7 @@ import javax.annotation.PreDestroy;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class AnimalInterceptor {
+public class AnimalInterceptor {
     private static Set<String> postConstructInterceptorCalledFor = new HashSet<String>();
     private static Set<String> preDestroyInterceptorCalledFor = new HashSet<String>();
 

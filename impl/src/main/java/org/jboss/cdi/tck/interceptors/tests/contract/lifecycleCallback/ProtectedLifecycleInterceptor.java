@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 import javax.annotation.PostConstruct;
 import javax.interceptor.InvocationContext;
 
-class ProtectedLifecycleInterceptor {
+public class ProtectedLifecycleInterceptor {
     private static boolean intercepted = false;
 
     @PostConstruct

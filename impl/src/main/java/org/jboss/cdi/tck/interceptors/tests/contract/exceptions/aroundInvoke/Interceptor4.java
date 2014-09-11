@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class Interceptor4 {
+public class Interceptor4 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         ExceptionBean.failFirstTwoInvocations();

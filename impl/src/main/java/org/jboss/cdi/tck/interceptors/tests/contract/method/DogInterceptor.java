@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.method;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class DogInterceptor {
+public class DogInterceptor {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         return "Intercepted " + ctx.proceed();
