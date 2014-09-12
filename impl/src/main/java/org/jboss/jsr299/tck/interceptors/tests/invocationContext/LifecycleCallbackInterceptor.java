@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.interceptors.tests.invocationContext;
 import javax.annotation.PostConstruct;
 import javax.interceptor.InvocationContext;
 
-class LifecycleCallbackInterceptor
+public class LifecycleCallbackInterceptor
 {
    private static boolean getMethodReturnsNull = false;
 

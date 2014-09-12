@@ -21,7 +21,7 @@ import javax.annotation.PreDestroy;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class GoatInterceptor
+public class GoatInterceptor
 {
    private static boolean postConstructInterceptorCalled = false;
    private static boolean preDestroyInterceptorCalled = false;

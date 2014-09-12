@@ -20,7 +20,7 @@ import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class BrokenInterceptor
+public class BrokenInterceptor
 {
    @Inject District district;
 

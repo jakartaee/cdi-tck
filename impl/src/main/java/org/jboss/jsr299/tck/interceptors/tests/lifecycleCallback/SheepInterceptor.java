@@ -20,7 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class SheepInterceptor
+public class SheepInterceptor
 {
    private static boolean postConstructCalled = false;
    private static boolean aroundInvokeCalled = false;

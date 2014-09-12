@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.interceptors.tests.method;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class FishInterceptor
+public class FishInterceptor
 {
    private static int instanceCount = 0;
    

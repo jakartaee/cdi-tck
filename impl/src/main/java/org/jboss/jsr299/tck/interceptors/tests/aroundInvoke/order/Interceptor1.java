@@ -19,7 +19,7 @@ package org.jboss.jsr299.tck.interceptors.tests.aroundInvoke.order;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-class Interceptor1 extends OverridenInterceptor
+public class Interceptor1 extends OverridenInterceptor
 {
    @AroundInvoke
    @Override
