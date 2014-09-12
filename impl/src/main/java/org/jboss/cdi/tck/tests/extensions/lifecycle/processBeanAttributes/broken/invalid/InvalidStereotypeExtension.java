@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.broken.invalid;
 
 import java.lang.annotation.Annotation;
+import java.util.Collections;
 import java.util.Set;
 
 import javax.enterprise.event.Observes;
@@ -34,7 +35,7 @@ public class InvalidStereotypeExtension implements Extension {
 
             @Override
             public Set<Class<? extends Annotation>> getStereotypes() {
-                return null;
+                return Collections.<Class<? extends Annotation>>singleton(PlainOldAnnotation.class);
             }
 
             @Override

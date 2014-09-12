@@ -30,8 +30,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * FIXME The related part of spec needs clarification - see CDI-197, CDI-200, CDI-201.
- * 
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
