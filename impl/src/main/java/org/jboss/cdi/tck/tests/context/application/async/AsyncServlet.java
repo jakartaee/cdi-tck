@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.inject.Inject;
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,6 +49,9 @@ public class AsyncServlet extends HttpServlet {
 
     private ExecutorService executorService;
 
+    @Inject
+    StatusBean statusBean;
+
     @Override
     public void init() throws ServletException {
         // Note that executor thread does not use the same CL
@@ -63,7 +67,7 @@ public class AsyncServlet extends HttpServlet {
             return;
         }
 
-        SimpleAsyncListener.reset();
+        statusBean.reset();
         final AsyncContext actx = req.startAsync();
         actx.addListener(actx.createListener(SimpleAsyncListener.class));
         resp.setContentType("text/plain");

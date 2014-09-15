@@ -73,18 +73,22 @@ public class ConversationDeterminationTest extends AbstractTest {
         assertTrue(resultPage.getContent().contains("testListener=true"));
 
         // Async listener
-        resultPage = webClient.getPage(getContextPath(contextPath,"foo-async","complete",cid));
-        assertTrue(resultPage.getContent().contains("onComplete: true"));
+        webClient.getPage(getContextPath(contextPath,"foo-async","complete",cid));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onComplete: true"));
 
         webClient.setThrowExceptionOnFailingStatusCode(false);
-        resultPage = webClient.getPage(getContextPath(contextPath,"foo-async","timeout",cid));
-        assertTrue(resultPage.getContent().contains("onTimeout: true"));
+        webClient.getPage(getContextPath(contextPath,"foo-async","timeout",cid));
+        results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onTimeout: true"));
 
-        resultPage = webClient.getPage(getContextPath(contextPath,"foo-async","error",cid));
-        assertTrue(resultPage.getContent().contains("onError: true"));
+        webClient.getPage(getContextPath(contextPath,"foo-async","error",cid));
+        results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onError: true"));
 
-        resultPage = webClient.getPage(getContextPath(contextPath,"foo-async","loop",cid));
-        assertTrue(resultPage.getContent().contains("onStartAsync: true"));
+        webClient.getPage(getContextPath(contextPath,"foo-async","loop",cid));
+        results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onStartAsync: true"));
     }
 
     private String getContextPath(URL contextPath, String servlet, String param, String cid){

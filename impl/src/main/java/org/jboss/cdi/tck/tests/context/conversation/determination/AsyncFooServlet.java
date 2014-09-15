@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.inject.Inject;
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,6 +41,9 @@ public class AsyncFooServlet extends HttpServlet {
     private static boolean inLoop = false;
     private ExecutorService executorService;
 
+    @Inject
+    StatusBean statusBean;
+
     @Override
     public void init() throws ServletException {
         // Note that executor thread does not use the same CL
@@ -52,7 +56,7 @@ public class AsyncFooServlet extends HttpServlet {
         String param = req.getParameter("action");
         String cid = req.getParameter("cid");
 
-        QuxAsyncListener.reset();
+        statusBean.reset();
         final AsyncContext actx = req.startAsync();
         actx.addListener(actx.createListener(QuxAsyncListener.class));
         resp.setContentType("text/plain");

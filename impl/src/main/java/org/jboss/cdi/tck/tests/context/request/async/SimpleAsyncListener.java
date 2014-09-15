@@ -18,29 +18,20 @@
 package org.jboss.cdi.tck.tests.context.request.async;
 
 import java.io.IOException;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.AsyncEvent;
 import javax.servlet.AsyncListener;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
-
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba
+ * @author Tomas Remes
  */
 public class SimpleAsyncListener implements AsyncListener {
 
-    public static Long onStartAsync = null;
-    public static Long onError = null;
-    public static Long onTimeout = null;
-    public static Long onComplete = null;
     public static boolean isRequestContextActive = false;
-    public static Long simpleRequestBeanId = null;
-
     private static final SimpleLogger logger = new SimpleLogger(SimpleAsyncListener.class);
 
     @Inject
@@ -48,6 +39,9 @@ public class SimpleAsyncListener implements AsyncListener {
 
     @Inject
     BeanManager beanManager;
+
+    @Inject
+    StatusBean statusBean;
 
     /*
      * (non-Javadoc)
@@ -57,12 +51,10 @@ public class SimpleAsyncListener implements AsyncListener {
     @Override
     public void onComplete(AsyncEvent event) throws IOException {
         logger.log("onComplete");
-        onComplete = System.currentTimeMillis();
 
-        if (onTimeout == null && onError == null) {
+        if (!statusBean.isOnTimeout() && !statusBean.isOnError()) {
             // Do not check and write info in case of post timeout/error action
-            checkRequestContextAvailability(event);
-            writeInfo(event.getAsyncContext().getResponse());
+            statusBean.setOnComplete(checkRequestContextAvailability());
         }
     }
 
@@ -74,9 +66,7 @@ public class SimpleAsyncListener implements AsyncListener {
     @Override
     public void onTimeout(AsyncEvent event) throws IOException {
         logger.log("onTimeout");
-        onTimeout = System.currentTimeMillis();
-        checkRequestContextAvailability(event);
-        writeInfo(event.getAsyncContext().getResponse());
+        statusBean.setOnTimeout(checkRequestContextAvailability());
         event.getAsyncContext().complete();
     }
 
@@ -88,8 +78,7 @@ public class SimpleAsyncListener implements AsyncListener {
     @Override
     public void onError(AsyncEvent event) throws IOException {
         logger.log("onError");
-        onError = System.currentTimeMillis();
-        writeInfo(event.getAsyncContext().getResponse());
+        statusBean.setOnError(checkRequestContextAvailability());
         event.getAsyncContext().complete();
     }
 
@@ -101,42 +90,19 @@ public class SimpleAsyncListener implements AsyncListener {
     @Override
     public void onStartAsync(AsyncEvent event) throws IOException {
         logger.log("onStartAsync");
-        onStartAsync = System.currentTimeMillis();
-        checkRequestContextAvailability(event);
+        statusBean.setOnStartAsync(checkRequestContextAvailability());
     }
 
-    private boolean checkRequestContextAvailability(AsyncEvent event) throws IOException {
+    private boolean checkRequestContextAvailability() throws IOException {
         try {
-            simpleRequestBeanId = simpleRequestBean.getId();
+            statusBean.setRequestBeanId(simpleRequestBean.getId());
             isRequestContextActive = beanManager.getContext(RequestScoped.class).isActive();
         } catch (Throwable e) {
             logger.log("Problem while checking request scope: " + e.getMessage());
         }
-        if (!isRequestContextActive || simpleRequestBeanId == null) {
-            ((HttpServletResponse) event.getAsyncContext().getResponse()).setStatus(500);
+        if (!isRequestContextActive || statusBean.getRequestBeanId() == null) {
             return false;
         }
         return true;
     }
-
-    public static void reset() {
-        onStartAsync = null;
-        onError = null;
-        onTimeout = null;
-        onComplete = null;
-        isRequestContextActive = false;
-        simpleRequestBeanId = null;
-    }
-
-    private void writeInfo(ServletResponse response) throws IOException {
-        response.getWriter().print(getInfo());
-        response.getWriter().flush();
-    }
-
-    public static String getInfo() {
-        return String
-                .format("onStartAsync: %s, onError: %s, onTimeout: %s, onComplete: %s, isRequestContextActive: %s, simpleRequestBeanId: %s",
-                        onStartAsync, onError, onTimeout, onComplete, isRequestContextActive, simpleRequestBeanId);
-    }
-
 }
