@@ -20,11 +20,11 @@ package org.jboss.cdi.tck.tests.context.application.async;
 import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 import java.net.URL;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
@@ -34,12 +34,10 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
-
 /**
  *
  * @author Martin Kouba
+ * @author Tomas Remes
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class ApplicationContextAsyncListenerTest extends AbstractTest {
@@ -57,11 +55,13 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnComplete() throws Exception {
         WebClient webClient = new WebClient();
-        webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
-        assertTrue(page.getContent().contains("onTimeout: null"));
-        assertTrue(page.getContent().contains("onError: null"));
-        assertFalse(page.getContent().contains("onComplete: null"));
+
+        // make async request
+        webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
+
+        // check the status servlet results
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onComplete: true"));
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
@@ -69,9 +69,9 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     public void testApplicationContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
-        assertTrue(page.getContent().contains("onTimeout:"));
-        assertFalse(page.getContent().contains("onTimeout: null"));
+        webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onTimeout: true"));
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
@@ -79,19 +79,19 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     public void testApplicationContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
-        assertTrue(page.getContent().contains("onError:"));
-        assertFalse(page.getContent().contains("onError: null"));
+        webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onError: true"));
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
     public void testApplicationContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
-        webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_LOOP));
-        assertFalse(page.getContent().contains("onStartAsync: null"));
-        assertFalse(page.getContent().contains("onComplete: null"));
+        webClient.getPage(getPath(AsyncServlet.TEST_LOOP));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onStartAsync: true"));
+        assertTrue(results.getContent().contains("onComplete: true"));
     }
 
     private String getPath(String test) {

@@ -59,15 +59,12 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
     public void testSessionContextActiveOnComplete() throws Exception {
-
         WebClient webClient = new WebClient();
-        webClient.setThrowExceptionOnFailingStatusCode(true);
 
-        TextPage page01 = webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
-        assertTrue(page01.getContent().contains("onTimeout: null"));
-        assertTrue(page01.getContent().contains("onError: null"));
-        assertFalse(page01.getContent().contains("onComplete: null"));
-        String id = extractSimpleSessionBeanId(page01.getContent());
+        webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onComplete: true"));
+        String id = extractSimpleSessionBeanId(results.getContent());
         assertNotNull(id);
         assertFalse(id.isEmpty());
     }
@@ -77,9 +74,9 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     public void testSessionContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
-        assertTrue(page.getContent().contains("onTimeout:"));
-        assertFalse(page.getContent().contains("onTimeout: null"));
+        webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onTimeout: true"));
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
@@ -87,19 +84,19 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     public void testSessionContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
-        assertTrue(page.getContent().contains("onError:"));
-        assertFalse(page.getContent().contains("onError: null"));
+        webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onError: true"));
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
     public void testSessionContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
-        webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_LOOP));
-        assertFalse(page.getContent().contains("onStartAsync: null"));
-        assertFalse(page.getContent().contains("onComplete: null"));
+        webClient.getPage(getPath(AsyncServlet.TEST_LOOP));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onComplete: true"));
+        assertTrue(results.getContent().contains("onStartAsync: true"));
     }
 
     private String getPath(String test) {
