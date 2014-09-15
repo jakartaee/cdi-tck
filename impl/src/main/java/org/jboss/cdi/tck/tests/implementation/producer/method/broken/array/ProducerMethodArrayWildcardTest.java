@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.array;
 
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
 
 import javax.enterprise.inject.spi.DefinitionException;
@@ -26,6 +27,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -44,7 +46,10 @@ public class ProducerMethodArrayWildcardTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PRODUCER_METHOD, id = "hb")
+    @SpecAssertions({
+        @SpecAssertion(section = PRODUCER_METHOD, id = "hb"),
+        @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "ld")
+    })
     public void testBeanTypes() {
     }
 
