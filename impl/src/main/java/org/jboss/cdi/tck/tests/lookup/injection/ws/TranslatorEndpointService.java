@@ -17,11 +17,11 @@
 package org.jboss.cdi.tck.tests.lookup.injection.ws;
 
 import java.net.URL;
-
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
+import javax.xml.ws.WebServiceFeature;
 
 @WebServiceClient(name = "Translator", targetNamespace = "http://ws.injection.lookup.tests.tck.cdi.jboss.org/")
 public class TranslatorEndpointService extends Service {
@@ -29,7 +29,11 @@ public class TranslatorEndpointService extends Service {
     public TranslatorEndpointService(URL wsdlDocumentLocation, QName serviceName) {
         super(wsdlDocumentLocation, serviceName);
     }
-    
+
+    public TranslatorEndpointService(URL wsdlDocumentLocation, QName serviceName, WebServiceFeature... features) {
+        super(wsdlDocumentLocation, serviceName, features);
+    }
+
     @WebEndpoint(name="TranslatorPort")
     public Translator getTranslatorPort() {
         return super.getPort(Translator.class);
