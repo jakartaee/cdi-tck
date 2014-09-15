@@ -35,6 +35,10 @@ public class SheepWSEndPointService extends Service {
         super(wsdlLocation, serviceName);
     }
 
+    public SheepWSEndPointService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+        super(wsdlLocation, serviceName, features);
+    }
+
     @WebEndpoint(name = "SheepWSPort")
     public SheepWS getSheepWSPort() {
         return super.getPort(SheepWS.class);
