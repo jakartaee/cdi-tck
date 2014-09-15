@@ -35,7 +35,7 @@ public class AsyncFooServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final AsyncContext actx = req.startAsync();
-        actx.addListener(actx.createListener(QuxAsyncListener.class));
+        actx.addListener(actx.createListener(QuxAsyncListener.class), req, resp);
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {

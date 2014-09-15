@@ -18,19 +18,16 @@
 package org.jboss.cdi.tck.tests.context.application.async;
 
 import java.io.IOException;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.AsyncEvent;
 import javax.servlet.AsyncListener;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
-
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba
+ * @author Tomas Remes
  */
 public class SimpleAsyncListener implements AsyncListener {
 
@@ -39,7 +36,6 @@ public class SimpleAsyncListener implements AsyncListener {
     public static Long onTimeout = null;
     public static Long onComplete = null;
     public static boolean isApplicationContextActive = false;
-    public static boolean isSimpleApplicationBeanAvailable = false;
 
     private static final SimpleLogger logger = new SimpleLogger(SimpleAsyncListener.class);
 
@@ -49,6 +45,9 @@ public class SimpleAsyncListener implements AsyncListener {
     @Inject
     BeanManager beanManager;
 
+    @Inject
+    StatusBean statusBean;
+
     /*
      * (non-Javadoc)
      *
@@ -57,12 +56,10 @@ public class SimpleAsyncListener implements AsyncListener {
     @Override
     public void onComplete(AsyncEvent event) throws IOException {
         logger.log("onComplete");
-        onComplete = System.currentTimeMillis();
 
-        if (onTimeout == null && onError == null) {
+        if (!statusBean.isOnTimeout() && !statusBean.isOnError()) {
             // Do not check and write info in case of post timeout/error action
-            checkApplicationContextAvailability(event);
-            writeInfo(event.getAsyncContext().getResponse());
+            statusBean.setOnComplete(checkApplicationContextAvailability());
         }
     }
 
@@ -74,9 +71,7 @@ public class SimpleAsyncListener implements AsyncListener {
     @Override
     public void onTimeout(AsyncEvent event) throws IOException {
         logger.log("onTimeout");
-        onTimeout = System.currentTimeMillis();
-        checkApplicationContextAvailability(event);
-        writeInfo(event.getAsyncContext().getResponse());
+        statusBean.setOnTimeout(checkApplicationContextAvailability());
         event.getAsyncContext().complete();
     }
 
@@ -88,9 +83,7 @@ public class SimpleAsyncListener implements AsyncListener {
     @Override
     public void onError(AsyncEvent event) throws IOException {
         logger.log("onError");
-        onError = System.currentTimeMillis();
-        checkApplicationContextAvailability(event);
-        writeInfo(event.getAsyncContext().getResponse());
+        statusBean.setOnError(checkApplicationContextAvailability());
         event.getAsyncContext().complete();
     }
 
@@ -102,43 +95,20 @@ public class SimpleAsyncListener implements AsyncListener {
     @Override
     public void onStartAsync(AsyncEvent event) throws IOException {
         logger.log("onStartAsync");
-        onStartAsync = System.currentTimeMillis();
-        checkApplicationContextAvailability(event);
+        statusBean.setOnStartAsync(checkApplicationContextAvailability());
     }
 
-    private boolean checkApplicationContextAvailability(AsyncEvent event) throws IOException {
+    private boolean checkApplicationContextAvailability() throws IOException {
         try {
-            isSimpleApplicationBeanAvailable = simpleApplicationBean.ping();
+            statusBean.setApplicationBeanAvailable(simpleApplicationBean.ping());
             isApplicationContextActive = beanManager.getContext(ApplicationScoped.class).isActive();
         } catch (Throwable e) {
             logger.log("Problem while checking application scope: " + e.getMessage());
         }
-        if (!isApplicationContextActive || !isSimpleApplicationBeanAvailable) {
-            ((HttpServletResponse) event.getAsyncContext().getResponse()).setStatus(500);
+        if (!isApplicationContextActive || !statusBean.isApplicationBeanAvailable()) {
             return false;
         }
         return true;
-    }
-
-    public static void reset() {
-        onStartAsync = null;
-        onError = null;
-        onTimeout = null;
-        onComplete = null;
-        isApplicationContextActive = false;
-        isSimpleApplicationBeanAvailable = false;
-    }
-
-    private void writeInfo(ServletResponse response) throws IOException {
-        response.getWriter().print(getInfo());
-        response.getWriter().flush();
-    }
-
-    public static String getInfo() {
-        return String
-                .format("onStartAsync: %s, onError: %s, onTimeout: %s, onComplete: %s, isApplicationContextActive: %s, isSimpleApplicationBeanAvailable: %s",
-                        onStartAsync, onError, onTimeout, onComplete, isApplicationContextActive,
-                        isSimpleApplicationBeanAvailable);
     }
 
 }

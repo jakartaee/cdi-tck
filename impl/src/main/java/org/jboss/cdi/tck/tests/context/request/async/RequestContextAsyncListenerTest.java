@@ -20,12 +20,12 @@ package org.jboss.cdi.tck.tests.context.request.async;
 import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 import java.net.URL;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
@@ -37,12 +37,10 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
-
 /**
  *
  * @author Martin Kouba
+ * @author Tomas Remes
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class RequestContextAsyncListenerTest extends AbstractTest {
@@ -60,17 +58,17 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
     public void testRequestContextActiveOnComplete() throws Exception {
 
         WebClient webClient = new WebClient();
-        webClient.setThrowExceptionOnFailingStatusCode(true);
+        webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
 
-        TextPage page01 = webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
-        assertTrue(page01.getContent().contains("onTimeout: null"));
-        assertTrue(page01.getContent().contains("onError: null"));
-        assertFalse(page01.getContent().contains("onComplete: null"));
+        // check status servlet for results
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onComplete: true"));
 
         // Indirectly test request context is destroyed after onComplete()
-        TextPage page02 = webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
-        assertNotEquals(extractSimpleRequestBeanIdString(page01.getContent()),
-                extractSimpleRequestBeanIdString(page02.getContent()));
+        webClient.getPage(getPath(AsyncServlet.TEST_COMPLETE));
+        TextPage results2 = webClient.getPage(contextPath + "Status");
+        assertNotEquals(extractSimpleRequestBeanIdString(results.getContent()),
+                extractSimpleRequestBeanIdString(results2.getContent()));
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
@@ -78,9 +76,11 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
     public void testRequestContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
-        assertTrue(page.getContent().contains("onTimeout:"));
-        assertFalse(page.getContent().contains("onTimeout: null"));
+        webClient.getPage(getPath(AsyncServlet.TEST_TIMEOUT));
+
+        // check status servlet for results
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onTimeout: true"));
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
@@ -88,19 +88,18 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
     public void testRequestContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
-        assertTrue(page.getContent().contains("onError:"));
-        assertFalse(page.getContent().contains("onError: null"));
+        webClient.getPage(getPath(AsyncServlet.TEST_ERROR));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onError: true"));
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
     @SpecAssertion(section = REQUEST_CONTEXT, id = "ad")
     public void testRequestContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
-        webClient.setThrowExceptionOnFailingStatusCode(true);
-        TextPage page = webClient.getPage(getPath(AsyncServlet.TEST_LOOP));
-        assertFalse(page.getContent().contains("onStartAsync: null"));
-        assertFalse(page.getContent().contains("onComplete: null"));
+        webClient.getPage(getPath(AsyncServlet.TEST_LOOP));
+        TextPage results = webClient.getPage(contextPath + "Status");
+        assertTrue(results.getContent().contains("onStartAsync: true"));
     }
 
     private String getPath(String test) {
@@ -110,6 +109,6 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
     private String extractSimpleRequestBeanIdString(String content) {
         String[] tokens = content.split(",");
         // See SimpleAsyncListener#getInfo()
-        return tokens[5];
+        return tokens[4];
     }
 }
