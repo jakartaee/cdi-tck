@@ -6,9 +6,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.io.IOException;
-
 import javax.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -21,6 +19,7 @@ import org.testng.annotations.Test;
 /**
  *
  * @author Martin Kouba
+ * @author Kirill Gaevskii
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
@@ -35,6 +34,10 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
 
     @Inject
     Boss boss;
+    
+    @Inject
+    InspectorAssistant inspectorAssist;
+
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ea") })
@@ -71,6 +74,31 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
         assertNotNull(bossCopy.getBeanManager());
         assertEquals(bossCopy.getId(), bossId);
         assertEquals(bossCopy.getBeanManager().getBeans(Boss.class).size(), 1);
+    }
+    
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ec") })
+    public void testInjectionPoint() throws IOException, ClassNotFoundException {
+
+        Inspector inspector = inspectorAssist.getInspector();
+        assertNotNull(inspector);
+        assertNotNull(inspector.getInjectionPoint());
+        String inspectorId = inspector.getId();
+
+        byte[] serializedInspector = passivate(inspector);
+        Inspector inspectorCopy = (Inspector) activate(serializedInspector);
+        
+        assertNotNull(inspectorCopy);
+        assertNotNull(inspectorCopy.getInjectionPoint());
+        assertEquals(inspectorCopy.getId(), inspectorId);
+        assertEquals(inspectorCopy.getInjectionPoint(), inspector.getInjectionPoint());
+        assertEquals(inspectorCopy.getInjectionPoint().getType(), inspector.getInjectionPoint().getType());
+        assertEquals(inspectorCopy.getInjectionPoint().getQualifiers(), inspector.getInjectionPoint().getQualifiers());
+        assertEquals(inspectorCopy.getInjectionPoint().getBean(), inspector.getInjectionPoint().getBean());
+        assertEquals(inspectorCopy.getInjectionPoint().getMember(), inspector.getInjectionPoint().getMember());
+        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated(), inspector.getInjectionPoint().getAnnotated());
+        assertEquals(inspectorCopy.getInjectionPoint().isDelegate(), inspector.getInjectionPoint().isDelegate());
+        assertEquals(inspectorCopy.getInjectionPoint().isTransient(), inspector.getInjectionPoint().isTransient());
     }
 
 }
