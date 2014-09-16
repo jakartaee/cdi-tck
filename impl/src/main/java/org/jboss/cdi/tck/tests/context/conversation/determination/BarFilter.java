@@ -40,7 +40,7 @@ public class BarFilter implements Filter {
     Conversation conversation;
 
     @Inject
-    TestResult testResult;
+    StatusBean testResult;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

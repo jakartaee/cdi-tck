@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,17 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 
-/**
- * @author Martin Kouba
- * 
- */
-@RequestScoped
-public class TestResult {
+@ApplicationScoped
+public class StatusBean {
 
     private boolean testFilter = false;
     private boolean testServlet = false;
@@ -67,6 +62,13 @@ public class TestResult {
     public String toString() {
         return String.format("TestResult [testFilter=%s, testServlet=%s, testListener=%s, testAsyncListener=%s]", testFilter,
                 testServlet, testListener, testAsyncListener);
+    }
+
+    public void reset(){
+        testFilter = false;
+        testServlet = false;
+        testListener = false;
+        testAsyncListener = false;
     }
 
 }

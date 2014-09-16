@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,46 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
 import java.io.IOException;
-
-import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
-import javax.servlet.AsyncEvent;
-import javax.servlet.AsyncListener;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-/**
- * @author Martin Kouba
- */
-public class QuxAsyncListener implements AsyncListener {
-
-    @Inject
-    Conversation conversation;
+@WebServlet(name = "StatusServlet", urlPatterns = { "/Status" })
+public class StatusServlet extends HttpServlet {
 
     @Inject
-    StatusBean testResult;
+    StatusBean statusBean;
 
     @Override
-    public void onComplete(AsyncEvent event) throws IOException {
-
-        if (FooServlet.CID.equals(conversation.getId())) {
-            // The long-running conversation is available
-            testResult.setAsyncListenerOk();
-        }
-    }
-
-    @Override
-    public void onTimeout(AsyncEvent event) throws IOException {
-    }
-
-    @Override
-    public void onError(AsyncEvent event) throws IOException {
-    }
-
-    @Override
-    public void onStartAsync(AsyncEvent event) throws IOException {
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.getWriter().write(statusBean.toString());
     }
 
 }
