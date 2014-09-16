@@ -34,7 +34,7 @@ public class BazRequestListener implements ServletRequestListener {
     Conversation conversation;
 
     @Inject
-    TestResult testResult;
+    StatusBean testResult;
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {

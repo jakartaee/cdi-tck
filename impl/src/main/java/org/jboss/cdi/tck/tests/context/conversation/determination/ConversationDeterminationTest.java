@@ -73,7 +73,8 @@ public class ConversationDeterminationTest extends AbstractTest {
         assertTrue(resultPage.getContent().contains("testListener=true"));
 
         // Async listener
-        resultPage = webClient.getPage(contextPath + "foo-async?action=test&cid=" + cid.trim());
+        webClient.getPage(contextPath + "foo-async?action=test&cid=" + cid.trim());
+        resultPage = webClient.getPage(contextPath + "Status");
         assertTrue(resultPage.getContent().contains("testAsyncListener=true"));
     }
 

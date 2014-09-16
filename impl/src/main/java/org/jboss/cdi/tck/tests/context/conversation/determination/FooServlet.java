@@ -18,7 +18,6 @@
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
 import java.io.IOException;
-
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -42,7 +41,7 @@ public class FooServlet extends HttpServlet {
     Conversation conversation;
 
     @Inject
-    TestResult testResult;
+    StatusBean testResult;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
