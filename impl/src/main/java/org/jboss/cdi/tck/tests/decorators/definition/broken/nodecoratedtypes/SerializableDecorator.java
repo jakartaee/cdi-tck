@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.decorators.definition.broken.nodecoratedtypes;
 
 import java.io.Serializable;
 
+import javax.annotation.Priority;
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.inject.Any;
@@ -25,6 +26,7 @@ import javax.inject.Inject;
 
 @SuppressWarnings("serial")
 @Decorator
+@Priority(value = 10)
 public class SerializableDecorator implements Serializable {
 
     @SuppressWarnings("unused")
