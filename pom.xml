@@ -4,7 +4,7 @@
 	<groupId>org.jboss.cdi.tck</groupId>
 	<artifactId>cdi-tck-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>1.2.2.Final</version>
+	<version>1.2.2-SNAPSHOT</version>
 	<name>CDI TCK</name>
 
 	<parent>
@@ -259,7 +259,7 @@
 					<configuration>
 						<mavenExecutorId>forked-path</mavenExecutorId>
 						<preparationGoals>clean install</preparationGoals>
-						<arguments>-Drelease -Dtck-audit -Dgpg.executable=/usr/bin/gpg2</arguments>
+						<arguments>-Drelease -Dtck-audit</arguments>
 					</configuration>
 				</plugin>
 			</plugins>
