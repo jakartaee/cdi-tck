@@ -7,3 +7,8 @@ Sources in GIT
 --------------
 
 Master branch contains the work-in-progress on CDI TCK 1.2
+
+Mailing list
+------------
+
+cdi-tck@lists.jboss.org
