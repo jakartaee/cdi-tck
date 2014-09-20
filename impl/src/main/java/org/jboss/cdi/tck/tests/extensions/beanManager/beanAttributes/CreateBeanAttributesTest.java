@@ -84,7 +84,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
         AnnotatedType<Mountain> wrappedType = new AnnotatedTypeWrapper<Mountain>(type, false, new NamedLiteral("Mount Blanc"));
         BeanAttributes<Mountain> attributes = getCurrentManager().createBeanAttributes(wrappedType);
 
-        assertTrue(typeSetMatches(attributes.getTypes(), Mountain.class, Landmark.class, Object.class));
+        assertTrue(typeSetMatches(attributes.getTypes(), Landmark.class, Object.class));
         assertTrue(attributes.getStereotypes().isEmpty());
         assertTrue(annotationSetMatches(attributes.getQualifiers(), Named.class, Any.class, Default.class));
         assertEquals(attributes.getScope(), Dependent.class);
