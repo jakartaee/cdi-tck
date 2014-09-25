@@ -75,7 +75,7 @@ public class FireEventTest extends AbstractTest {
         getCurrentManager().fireEvent(miniBar);
         assertTrue(billing.isActive());
         Item chocolate = miniBar.getItemByName("Chocolate");
-        getCurrentManager().fireEvent(chocolate, new AnnotationLiteral<Lifted>() {
+        getCurrentManager().fireEvent(chocolate, new Lifted.LiftedLiteral() {
         });
         assertEquals(billing.getCharge(), 5);
     }
@@ -90,8 +90,8 @@ public class FireEventTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = BM_FIRE_EVENT, id = "d")
     public void testDuplicateBindingsToFireEventFails() throws Exception {
-        getCurrentManager().fireEvent(new Object(), new AnnotationLiteral<Lifted>() {
-        }, new AnnotationLiteral<Lifted>() {
+        getCurrentManager().fireEvent(new Object(), new Lifted.LiftedLiteral("a") {
+        }, new Lifted.LiftedLiteral("b") {
         });
     }
 
@@ -199,7 +199,7 @@ public class FireEventTest extends AbstractTest {
 
         assertNotNull(eventInjection);
         assertEquals(eventInjection.getQualifiers().size(), 1);
-        assertTrue(eventInjection.getQualifiers().contains(new AnnotationLiteral<Lifted>() {
+        assertTrue(eventInjection.getQualifiers().contains(new Lifted.LiftedLiteral() {
         }));
 
         CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
@@ -274,7 +274,7 @@ public class FireEventTest extends AbstractTest {
         assertEquals(houseKeeping.getItemActivity().size(), 1);
         assertEquals(houseKeeping.getItemActivity().get(0), chocolate);
 
-        miniBar.getItemEvent().select(new AnnotationLiteral<Lifted>() {
+        miniBar.getItemEvent().select(new Lifted.LiftedLiteral() {
         }).fire(crackers);
         assertEquals(houseKeeping.getItemActivity().size(), 2);
         assertEquals(houseKeeping.getItemActivity().get(1), crackers);
