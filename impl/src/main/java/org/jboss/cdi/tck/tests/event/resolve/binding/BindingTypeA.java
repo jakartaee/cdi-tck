@@ -33,4 +33,6 @@ import javax.inject.Qualifier;
 @Documented
 @Qualifier
 public @interface BindingTypeA {
+
+    String value() default "";
 }

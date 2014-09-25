@@ -50,6 +50,6 @@ public class DuplicateBindingTypesWhenResolvingTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "d")
     public void testDuplicateBindingTypesWhenResolvingFails() {
-        getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeABinding(), new BindingTypeABinding());
+        getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeABinding("a1"), new BindingTypeABinding("a2"));
     }
 }

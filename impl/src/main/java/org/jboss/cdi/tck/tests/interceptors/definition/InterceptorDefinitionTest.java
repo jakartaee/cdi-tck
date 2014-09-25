@@ -64,7 +64,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class InterceptorDefinitionTest extends AbstractTest {
 
-    private static final AnnotationLiteral<Transactional> TRANSACTIONAL_LITERAL = new AnnotationLiteral<Transactional>() {
+    private static final Transactional.TransactionalLiteral TRANSACTIONAL_LITERAL = new Transactional.TransactionalLiteral("") {
     };
 
     private static final AnnotationLiteral<Secure> SECURE_LITERAL = new AnnotationLiteral<Secure>() {
@@ -170,9 +170,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertions({ @SpecAssertion(section = BM_INTERCEPTOR_RESOLUTION, id = "b") })
     public void testSameBindingTypesToResolveInterceptorsFails() {
-        Annotation transactionalBinding = new AnnotationLiteral<Transactional>() {
-        };
-        getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, transactionalBinding, transactionalBinding);
+        getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new Transactional.TransactionalLiteral("a"), new Transactional.TransactionalLiteral("b"));
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
@@ -239,8 +237,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     private Interceptor<?> getTransactionalInterceptor() {
-        return getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>() {
-        }).iterator().next();
+        return getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, TRANSACTIONAL_LITERAL).iterator().next();
     }
 
     private List<Interceptor<?>> getLoggedInterceptors() {

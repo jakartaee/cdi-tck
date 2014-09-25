@@ -20,4 +20,13 @@ import javax.enterprise.util.AnnotationLiteral;
 
 abstract class PayByBinding extends AnnotationLiteral<PayBy> implements PayBy {
 
+    PaymentMethod method;
+
+    public PayByBinding(PaymentMethod method){
+        this.method = method;
+    }
+
+    public PaymentMethod value(){
+        return method;
+    }
 }

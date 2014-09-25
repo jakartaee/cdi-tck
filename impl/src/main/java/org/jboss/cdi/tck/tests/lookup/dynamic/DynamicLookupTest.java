@@ -24,16 +24,13 @@ import static org.jboss.cdi.tck.cdi.Sections.PROGRAMMATIC_LOOKUP;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.util.AnnotationLiteral;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -67,7 +64,9 @@ public class DynamicLookupTest extends AbstractTest {
     public void testDuplicateBindingsThrowsException() {
         try {
             ObtainsInstanceBean injectionPoint = getContextualReference(ObtainsInstanceBean.class);
-            injectionPoint.getAnyPaymentProcessor().select(new DefaultLiteral(), new DefaultLiteral());
+            injectionPoint.getAnyPaymentProcessor().select(new PayByBinding(PayBy.PaymentMethod.CASH) {
+            }, new PayByBinding(PayBy.PaymentMethod.CREDIT_CARD) {
+            });
         } catch (Throwable t) {
             assert isThrowablePresent(IllegalArgumentException.class, t);
             return;
@@ -159,10 +158,7 @@ public class DynamicLookupTest extends AbstractTest {
         assert remote != null;
         assert remote.getValue() == 2;
 
-        Iterator<RemotePaymentProcessor> iterator2 = instance.select(RemotePaymentProcessor.class, new PayByBinding() {
-            public PaymentMethod value() {
-                return PaymentMethod.CREDIT_CARD;
-            }
+        Iterator<RemotePaymentProcessor> iterator2 = instance.select(RemotePaymentProcessor.class, new PayByBinding(PayBy.PaymentMethod.CREDIT_CARD) {
         }).iterator();
 
         assert iterator2.next().getValue() == 2;

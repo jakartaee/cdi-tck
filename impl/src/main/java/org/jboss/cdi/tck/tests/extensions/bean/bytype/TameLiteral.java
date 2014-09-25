@@ -20,4 +20,14 @@ import javax.enterprise.util.AnnotationLiteral;
 
 public class TameLiteral extends AnnotationLiteral<Tame> implements Tame {
 
+    private String value;
+
+    public TameLiteral(String value){
+        this.value=value;
+    }
+
+    @Override
+    public String value() {
+        return value;
+    }
 }
