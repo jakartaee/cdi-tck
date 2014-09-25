@@ -46,6 +46,6 @@ public class DuplicateBindingTypesWhenResolvingTest extends AbstractJSR299Test
    @SpecAssertion(section = "11.3.10", id = "d")
    public void testDuplicateBindingTypesWhenResolvingFails()
    {
-      getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeABinding(), new BindingTypeABinding());
+      getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeABinding("a1"), new BindingTypeABinding("a2"));
    }
 }

@@ -48,7 +48,7 @@ public class SelectEventTest extends AbstractJSR299Test
       assert alarm.getNumBreakIns() == 0;
       assert alarm.getNumViolentBreakIns() == 0;
       
-      sensor.securityEvent.select(new AnnotationLiteral<SystemTest>() {}).fire(new SecurityEvent());
+      sensor.securityEvent.select(new SystemTest.SystemTestLiteral("") {}).fire(new SecurityEvent());
       assert alarm.getNumSecurityEvents() == 2;
       assert alarm.getNumSystemTests() == 1;
       assert alarm.getNumBreakIns() == 0;
@@ -80,7 +80,7 @@ public class SelectEventTest extends AbstractJSR299Test
    public void testEventSelectThrowsExceptionForDuplicateBindingType()
    {
       SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
-      sensor.securityEvent.select(new AnnotationLiteral<SystemTest>() {}, new AnnotationLiteral<SystemTest>() {});
+      sensor.securityEvent.select(new SystemTest.SystemTestLiteral("a") {}, new SystemTest.SystemTestLiteral("b") {});
    }
    
    @Test(groups = "events", expectedExceptions = IllegalArgumentException.class)
@@ -88,7 +88,7 @@ public class SelectEventTest extends AbstractJSR299Test
    public void testEventSelectWithSubtypeThrowsExceptionForDuplicateBindingType()
    {
       SecuritySensor sensor = getInstanceByType(SecuritySensor.class);
-      sensor.securityEvent.select(BreakInEvent.class, new AnnotationLiteral<Violent>() {}, new AnnotationLiteral<Violent>() {});
+      sensor.securityEvent.select(BreakInEvent.class, new SystemTest.SystemTestLiteral("a") {}, new SystemTest.SystemTestLiteral("b") {});
    }
    
    @Test(groups = "events", expectedExceptions = IllegalArgumentException.class)

@@ -24,13 +24,25 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import javax.enterprise.util.AnnotationLiteral;
 import javax.interceptor.InterceptorBinding;
 
-@Target( { TYPE, METHOD })
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented
-@InterceptorBinding
-@interface Transactional
-{
+@InterceptorBinding @interface Transactional {
+    String value() default "";
 
+    public static class TransactionalLiteral extends AnnotationLiteral<Transactional> implements Transactional {
+
+        private String value;
+
+        public TransactionalLiteral(String value) {
+            this.value = value;
+        }
+
+        public String value() {
+            return value;
+        }
+    }
 }

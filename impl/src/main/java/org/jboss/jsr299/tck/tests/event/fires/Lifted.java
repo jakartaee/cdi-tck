@@ -26,6 +26,7 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Qualifier;
 
 @Target( { TYPE, METHOD, PARAMETER, FIELD })
@@ -34,4 +35,25 @@ import javax.inject.Qualifier;
 @Qualifier
 @interface Lifted
 {
+    String value() default "";
+
+    public static class LiftedLiteral extends AnnotationLiteral<Lifted> implements Lifted {
+
+        private static final long serialVersionUID = 1L;
+
+        private String value;
+
+        public LiftedLiteral(){
+            this.value = "";
+        }
+
+        public LiftedLiteral(String value){
+            this.value = value;
+        }
+
+        public String value(){
+            return value;
+        }
+
+    }
 }

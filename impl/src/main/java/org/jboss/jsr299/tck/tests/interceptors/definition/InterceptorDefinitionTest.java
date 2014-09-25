@@ -51,6 +51,8 @@ import org.testng.annotations.Test;
 @BeansXml("beans.xml")
 public class InterceptorDefinitionTest extends AbstractJSR299Test
 {
+    private static final Transactional.TransactionalLiteral TRANSACTIONAL_LITERAL = new Transactional.TransactionalLiteral("") {};
+
    @Test
    @SpecAssertions({
          @SpecAssertion(section = "11.1.2", id = "a")
@@ -79,7 +81,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
    {
       Interceptor<?> interceptorBean = getTransactionalInterceptor();
       assert interceptorBean.getInterceptorBindings().size() == 1;
-      assert interceptorBean.getInterceptorBindings().contains(new AnnotationLiteral<Transactional>(){});
+      assert interceptorBean.getInterceptorBindings().contains(TRANSACTIONAL_LITERAL);
    }
 
    @Test(groups="rewrite")
@@ -105,7 +107,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
    public void testInstanceOfInterceptorForEveryEnabledInterceptor()
    {
       List<AnnotationLiteral<?>> annotationLiterals = Arrays.<AnnotationLiteral<?>>asList(
-            new AnnotationLiteral<Transactional>(){},
+            new Transactional.TransactionalLiteral(""){},
             new AnnotationLiteral<Secure>(){},
             new AnnotationLiteral<MissileBinding>(){},
             new AnnotationLiteral<Logged>(){});
@@ -148,22 +150,19 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
    // WBRI-59
    public void testResolveInterceptorsReturnsOrderedList()
    {
-      Annotation transactionalBinding = new AnnotationLiteral<Transactional>()
-      {
-      };
       Annotation secureBinding = new AnnotationLiteral<Secure>()
       {
       };
       List<Interceptor<?>> interceptors = getCurrentManager().resolveInterceptors(
             InterceptionType.AROUND_INVOKE,
-            transactionalBinding,
+              TRANSACTIONAL_LITERAL,
             secureBinding
       );
       assert interceptors.size() == 2;
       assert interceptors.get(0).getInterceptorBindings().size() == 1;
       assert interceptors.get(0).getInterceptorBindings().contains(secureBinding);
       assert interceptors.get(1).getInterceptorBindings().size() == 1;
-      assert interceptors.get(1).getInterceptorBindings().contains(transactionalBinding);
+      assert interceptors.get(1).getInterceptorBindings().contains(TRANSACTIONAL_LITERAL);
    }
 
    @Test(expectedExceptions = {IllegalArgumentException.class})
@@ -173,10 +172,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
    // WBRI-59
    public void testSameBindingTypesToResolveInterceptorsFails()
    {
-      Annotation transactionalBinding = new AnnotationLiteral<Transactional>()
-      {
-      };
-      getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, transactionalBinding, transactionalBinding);
+      getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new Transactional.TransactionalLiteral("a"), new Transactional.TransactionalLiteral("b"));
    }
 
    @Test(expectedExceptions = {IllegalArgumentException.class})
@@ -301,9 +297,7 @@ public class InterceptorDefinitionTest extends AbstractJSR299Test
 
    private Interceptor<?> getTransactionalInterceptor()
    {
-      return getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>()
-      {
-      }).iterator().next();
+      return getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, TRANSACTIONAL_LITERAL).iterator().next();
    }
 
    private List<Interceptor<?>> getLoggedInterceptors()

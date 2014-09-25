@@ -72,7 +72,7 @@ public class FireEventTest extends AbstractJSR299Test
       getCurrentManager().fireEvent(miniBar);
       assert billing.isActive();
       Item chocolate = miniBar.getItemByName("Chocolate");
-      getCurrentManager().fireEvent(chocolate, new AnnotationLiteral<Lifted>() {});
+      getCurrentManager().fireEvent(chocolate, new Lifted.LiftedLiteral() {});
       assert billing.getCharge() == 5.00d;
    }
    
@@ -87,7 +87,7 @@ public class FireEventTest extends AbstractJSR299Test
    @SpecAssertion(section = "11.3.9", id = "d")
    public void testDuplicateBindingsToFireEventFails() throws Exception
    {
-      getCurrentManager().fireEvent(new Object(), new AnnotationLiteral<Lifted>() {}, new AnnotationLiteral<Lifted>() {});
+      getCurrentManager().fireEvent(new Object(), new Lifted.LiftedLiteral("a"){}, new Lifted.LiftedLiteral("b") {});
    }
    
    /**
@@ -210,7 +210,7 @@ public class FireEventTest extends AbstractJSR299Test
       
       assert eventInjection != null;
       assert eventInjection.getQualifiers().size() == 1;
-      assert eventInjection.getQualifiers().contains(new AnnotationLiteral<Lifted>() {});
+      assert eventInjection.getQualifiers().contains(new Lifted.LiftedLiteral() {});
       
       CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
       MiniBar miniBar = miniBarBean.create(miniBarCc);
@@ -288,7 +288,7 @@ public class FireEventTest extends AbstractJSR299Test
       assert houseKeeping.getItemActivity().size() == 1;
       assert houseKeeping.getItemActivity().get(0) == chocolate;
       
-      miniBar.getItemEvent().select(new AnnotationLiteral<Lifted>() {}).fire(crackers);
+      miniBar.getItemEvent().select(new Lifted.LiftedLiteral() {}).fire(crackers);
       assert houseKeeping.getItemActivity().size() == 2;
       assert houseKeeping.getItemActivity().get(1) == crackers;
       assert houseKeeping.getItemsMissing().size() == 1;

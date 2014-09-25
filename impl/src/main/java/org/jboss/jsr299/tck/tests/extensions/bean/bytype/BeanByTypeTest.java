@@ -81,7 +81,7 @@ public class BeanByTypeTest extends AbstractJSR299Test
    })
    public void testSameBindingTwice()
    {
-      getCurrentManager().getBeans(SimpleBean.class, new TameLiteral(), new TameLiteral());
+      getCurrentManager().getBeans(SimpleBean.class, new TameLiteral("a"), new TameLiteral("b"));
    }
 
    @Test(expectedExceptions = IllegalArgumentException.class)

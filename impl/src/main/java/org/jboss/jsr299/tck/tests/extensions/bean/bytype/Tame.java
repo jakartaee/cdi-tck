@@ -34,5 +34,5 @@ import javax.inject.Qualifier;
 @Qualifier
 @interface Tame
 {
-
+    String value() default "";
 }

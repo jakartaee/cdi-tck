@@ -18,15 +18,12 @@ package org.jboss.jsr299.tck.tests.lookup.dynamic;
 
 
 import java.util.Iterator;
-
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.util.AnnotationLiteral;
-
 import org.jboss.jsr299.tck.AbstractJSR299Test;
 import org.jboss.jsr299.tck.literals.AnyLiteral;
-import org.jboss.jsr299.tck.literals.DefaultLiteral;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -58,7 +55,7 @@ public class DynamicLookupTest extends AbstractJSR299Test
    public void testDuplicateBindingsThrowsException()
    {
       ObtainsInstanceBean injectionPoint = getInstanceByType(ObtainsInstanceBean.class);
-      injectionPoint.getAnyPaymentProcessor().select(new DefaultLiteral(), new DefaultLiteral());      
+      injectionPoint.getAnyPaymentProcessor().select(new PayByBinding(PayBy.PaymentMethod.CASH) { }, new PayByBinding(PayBy.PaymentMethod.CREDIT_CARD) { });
    }      
    
    @Test(expectedExceptions = IllegalArgumentException.class)
@@ -144,12 +141,7 @@ public class DynamicLookupTest extends AbstractJSR299Test
       assert remote != null;
       assert remote.getValue() == 2;
 
-      Iterator<RemotePaymentProcessor> iterator2 = instance.select(RemotePaymentProcessor.class, new PayByBinding()
-      {
-         public PaymentMethod value()
-         {
-            return PaymentMethod.CREDIT_CARD;
-         }
+      Iterator<RemotePaymentProcessor> iterator2 = instance.select(RemotePaymentProcessor.class, new PayByBinding(PayBy.PaymentMethod.CREDIT_CARD){
       }).iterator();
 
       assert iterator2.next().getValue() == 2;
