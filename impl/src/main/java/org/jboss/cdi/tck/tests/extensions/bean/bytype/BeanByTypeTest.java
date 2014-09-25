@@ -96,7 +96,7 @@ public class BeanByTypeTest extends AbstractTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "e") })
     public void testSameBindingTwice() {
-        getCurrentManager().getBeans(SimpleBean.class, new TameLiteral(), new TameLiteral());
+        getCurrentManager().getBeans(SimpleBean.class, new TameLiteral("a"), new TameLiteral("b"));
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)

@@ -56,7 +56,7 @@ public class SelectEventTest extends AbstractTest {
         assert alarm.getNumBreakIns() == 0;
         assert alarm.getNumViolentBreakIns() == 0;
 
-        sensor.securityEvent.select(new AnnotationLiteral<SystemTest>() {
+        sensor.securityEvent.select(new SystemTest.SystemTestLiteral("") {
         }).fire(new SecurityEvent());
         assert alarm.getNumSecurityEvents() == 2;
         assert alarm.getNumSystemTests() == 1;
@@ -89,8 +89,8 @@ public class SelectEventTest extends AbstractTest {
     @SpecAssertion(section = EVENT, id = "eba")
     public void testEventSelectThrowsExceptionForDuplicateBindingType() {
         SecuritySensor sensor = getContextualReference(SecuritySensor.class);
-        sensor.securityEvent.select(new AnnotationLiteral<SystemTest>() {
-        }, new AnnotationLiteral<SystemTest>() {
+        sensor.securityEvent.select(new SystemTest.SystemTestLiteral("a") {
+        }, new SystemTest.SystemTestLiteral("b") {
         });
     }
 
@@ -98,8 +98,8 @@ public class SelectEventTest extends AbstractTest {
     @SpecAssertion(section = EVENT, id = "eba")
     public void testEventSelectWithSubtypeThrowsExceptionForDuplicateBindingType() {
         SecuritySensor sensor = getContextualReference(SecuritySensor.class);
-        sensor.securityEvent.select(BreakInEvent.class, new AnnotationLiteral<Violent>() {
-        }, new AnnotationLiteral<Violent>() {
+        sensor.securityEvent.select(BreakInEvent.class, new SystemTest.SystemTestLiteral("a") {
+        }, new SystemTest.SystemTestLiteral("b") {
         });
     }
 
