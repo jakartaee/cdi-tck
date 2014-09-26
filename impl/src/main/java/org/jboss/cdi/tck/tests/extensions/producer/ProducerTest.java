@@ -36,6 +36,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -43,6 +44,7 @@ import org.testng.annotations.Test;
  *
  * @author David Allen
  * @author Martin Kouba
+ * @author Kirill Gaevskii
  */
 @SuppressWarnings("serial")
 @Test(groups = INTEGRATION)
@@ -51,21 +53,37 @@ public class ProducerTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ProducerTest.class).withExtension(ProducerProcessor.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(ProducerTest.class)
+                .withExtension(ProducerProcessor.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "ba"), @SpecAssertion(section = INJECTIONTARGET, id = "bb"),
-            @SpecAssertion(section = INJECTIONTARGET, id = "bc") })
+    @SpecAssertions({ 
+        @SpecAssertion(section = INJECTIONTARGET, id = "ba"),
+        @SpecAssertion(section = INJECTIONTARGET, id = "bb"),
+        @SpecAssertion(section = INJECTIONTARGET, id = "bc")
+    })
     public void testProduceAndInjectCallsInitializerAndConstructor() {
-        InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
-        Bean<Cat> catBean = getUniqueBean(Cat.class);
         Cat.reset();
-        CreationalContext<Cat> ctx = getCurrentManager().createCreationalContext(catBean);
+        InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
+        CreationalContext<Cat> ctx = getCurrentManager().createCreationalContext(null);
         Cat instance = injectionTarget.produce(ctx);
         assert Cat.isConstructorCalled();
         injectionTarget.inject(instance, ctx);
         assert Cat.isInitializerCalled();
+    }
+    
+    @Test
+    @SpecAssertions({
+        @SpecAssertion(section = INJECTIONTARGET, id = "bd"),
+        @SpecAssertion(section = INJECTIONTARGET, id = "be")
+    })
+    public void testInterceptorAndDecoratorStackBuilt() {
+        InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
+        CreationalContext<Cat> ctx = getCurrentManager().createCreationalContext(null);
+        Cat instance = injectionTarget.produce(ctx);
+        Assert.assertEquals(instance.foo(), 11);
+        Assert.assertEquals(instance.saySomething(), "Meow meow");
     }
 
     @Test
@@ -221,5 +239,4 @@ public class ProducerTest extends AbstractTest {
         assert ProducerProcessor.getDogAnnotatedType() != null;
         assert ProducerProcessor.getDogAnnotatedType().getBaseType().equals(Dog.class);
     }
-
 }
