@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.producer;
 
 import javax.inject.Inject;
 
-public class Cat {
+public class Cat implements Speakable{
     private static boolean constructorCalled;
     private static boolean initializerCalled;
 
@@ -26,6 +26,9 @@ public class Cat {
     protected CatFoodDish foodDish;
 
     private Bird bird;
+    
+    public Cat() {
+    }
 
     @Inject
     public Cat(LitterBox litterBox) {
@@ -54,5 +57,16 @@ public class Cat {
 
     public void ping() {
 
+    }
+    
+    @CatSpectator
+    @CatHolder
+    public int foo() {
+        return 0;
+    }
+
+    @Override
+    public String saySomething() {
+        return "Meow";
     }
 }
