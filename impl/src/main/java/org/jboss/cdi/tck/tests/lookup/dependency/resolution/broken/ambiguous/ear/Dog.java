@@ -18,6 +18,6 @@ package org.jboss.cdi.tck.tests.lookup.dependency.resolution.broken.ambiguous.ea
 
 import javax.ejb.Stateful;
 
-@Stateful(name = "Animal")
+@Stateful(name = "Dog")
 public class Dog implements Animal {
 }
