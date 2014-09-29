@@ -17,7 +17,7 @@ public class EnterpriseBeanNotDiscoveredAsManagedBeanTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(EnterpriseBeanNotDiscoveredAsManagedBeanTest.class)
-                .withClasses(EnterpriseBeanObserver.class, Sheep.class, MockEnterpriseBean.class)
+                .withClasses(EnterpriseBeanObserver.class, Sheep.class, MockEnterpriseBean.class, ClovenHoved.class)
                 .withExtension(EnterpriseBeanObserver.class).build();
     }
 
