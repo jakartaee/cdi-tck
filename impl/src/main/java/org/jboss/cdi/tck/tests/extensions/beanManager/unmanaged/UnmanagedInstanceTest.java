@@ -48,7 +48,7 @@ public class UnmanagedInstanceTest extends AbstractTest {
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_UNMANAGED_INSTANCE, id = "a") })
-    public void testObtainNonContextualInstance() {
+    public void testObtainNonContextualInstanceUsingCurrentBeanManager() {
 
         Builder.reset();
         Nail.reset();
@@ -69,7 +69,32 @@ public class UnmanagedInstanceTest extends AbstractTest {
         assertTrue(Nail.preDestroyCalled);
         assertFalse(Hammer.preDestroyCalled);
     }
+    
 
+    
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = BM_OBTAIN_UNMANAGED_INSTANCE, id = "b")
+    public void testObtainNonContextualInstance() {
+        Zoo.reset();
+        Proboscis.reset();
+        Elephant.reset();
+
+        Unmanaged<Zoo> unmanagedZoo = new Unmanaged<Zoo>(Zoo.class);
+        UnmanagedInstance<Zoo> unmanagedZooInstance = unmanagedZoo.newInstance();
+        Zoo zoo = unmanagedZooInstance.produce().inject().postConstruct().get();
+        zoo.build();
+
+        assertTrue(Zoo.postConstructCalled);
+        assertTrue(Proboscis.postConstructCalled);
+        assertTrue(Elephant.postConstructCalled);
+
+        unmanagedZooInstance.preDestroy().dispose();
+
+        assertTrue(Zoo.preDestroyCalled);
+        assertTrue(Proboscis.preDestroyCalled);
+        assertFalse(Elephant.preDestroyCalled);
+    }
+    
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "ac") })
     public void testNonContextualInstanceIsIntercepted() {
