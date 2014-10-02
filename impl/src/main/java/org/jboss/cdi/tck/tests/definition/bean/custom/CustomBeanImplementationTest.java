@@ -21,10 +21,12 @@ import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_INSTANCE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 import static org.jboss.cdi.tck.cdi.Sections.NAME_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
 
+import java.io.IOException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -32,6 +34,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(groups = INTEGRATION)
@@ -41,13 +44,15 @@ public class CustomBeanImplementationTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(CustomBeanImplementationTest.class)
-                .withClasses(AfterBeanDiscoveryObserver.class, House.class, CustomInjectionPoint.class, Bar.class)
-                .withLibrary(Foo.class, FooBean.class, IntegerBean.class).withExtension(AfterBeanDiscoveryObserver.class)
+                .withClasses(AfterBeanDiscoveryObserver.class, House.class, CustomInjectionPoint.class, Bar.class, PassivationCapableBean.class)
+                .withLibrary(Foo.class, FooBean.class, IntegerBean.class, Passivable.class, PassivableLiteral.class)
+                .withExtension(AfterBeanDiscoveryObserver.class)
                 .build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "h"), @SpecAssertion(section = INTER_MODULE_INJECTION, id = "q") })
+    @SpecAssertions(
+            { @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "h"), @SpecAssertion(section = INTER_MODULE_INJECTION, id = "q") })
     public void testGetBeanClassCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetBeanClassCalled();
     }
@@ -95,5 +100,15 @@ public class CustomBeanImplementationTest extends AbstractTest {
     @SpecAssertion(section = CONTEXTUAL_INSTANCE, id = "e")
     public void testGetScopeTypeCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetScopeCalled();
+    }
+
+    @Test
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "fa")
+    public void testCustomBeanIsPassivationCapableDependency() throws IOException, ClassNotFoundException {
+        PassivationCapableBean passCapBean = getContextualReference(PassivationCapableBean.class);
+        byte[] serializedBean = passivate(passCapBean);
+        PassivationCapableBean actCapBean = (PassivationCapableBean) activate(serializedBean);
+        Assert.assertEquals(passCapBean.getFoo().getId(), actCapBean.getFoo().getId());
+        Assert.assertEquals(passCapBean.getFoo().hashCode(), actCapBean.getFoo().hashCode());
     }
 }

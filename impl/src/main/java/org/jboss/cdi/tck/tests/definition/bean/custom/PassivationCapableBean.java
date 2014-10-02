@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -17,31 +17,15 @@
 package org.jboss.cdi.tck.tests.definition.bean.custom;
 
 import java.io.Serializable;
-import java.util.concurrent.atomic.AtomicInteger;
-import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
-@SuppressWarnings("unused")
-@SessionScoped
-public class Foo implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
-    private long id = ID_GENERATOR.incrementAndGet();
-
-    private static final AtomicInteger ID_GENERATOR = new AtomicInteger();
+public class PassivationCapableBean implements Serializable{
 
     @Inject
-    private Integer one;
+    @Passivable
+    Foo foo;
 
-    @Inject
-    private transient Bar bar;
-
-    public long getId() {
-        return id;
+    public Foo getFoo() {
+        return foo;
     }
-
-
-
-
 }
