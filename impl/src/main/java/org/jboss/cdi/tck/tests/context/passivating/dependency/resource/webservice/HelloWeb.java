@@ -20,7 +20,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-@WebService(targetNamespace = "http://ws.resources.tests.weld.jboss.org/")
+@WebService(targetNamespace = "http://webservice.resource.dependency.passivating.context.tests.tck.cdi.jboss.org/")
 public interface HelloWeb {
 
     @WebMethod

@@ -23,7 +23,7 @@ import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
 
-@WebServiceClient(name = "HelloWeb", targetNamespace = "http://ws.resources.tests.weld.jboss.org/")
+@WebServiceClient(name = "HelloWeb", targetNamespace = "http://webservice.resource.dependency.passivating.context.tests.tck.cdi.jboss.org/")
 public class HelloWebEndpointService extends Service {
 
     public HelloWebEndpointService(URL wsdlDocumentLocation, QName serviceName) {
