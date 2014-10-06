@@ -24,7 +24,7 @@ import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
 import javax.xml.ws.WebServiceFeature;
 
-@WebServiceClient(name="Translator", targetNamespace = "http://ws.resources.tests.weld.jboss.org/")
+@WebServiceClient(name="Translator", targetNamespace = "http://ws.type.broken.resource.simple.implementation.tests.tck.cdi.jboss.org/")
 public class TranslatorEndpointService extends Service {
 
     public TranslatorEndpointService(URL wsdlDocumentLocation, QName serviceName) {

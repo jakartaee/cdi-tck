@@ -23,6 +23,13 @@
         </packages>
 
         <classes>
+
+	     <!-- CDITCK-452--
+	    <class name="org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ws.ResourceDefinitionWithDifferentTypeTest">
+               <methods>
+                   <exclude name=".*"/>
+               </methods>
+            </class>
             
         </classes>
     </test>
