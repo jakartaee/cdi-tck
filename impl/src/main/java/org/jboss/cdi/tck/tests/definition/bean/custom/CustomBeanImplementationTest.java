@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_INSTANCE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 import static org.jboss.cdi.tck.cdi.Sections.NAME_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
@@ -100,6 +101,17 @@ public class CustomBeanImplementationTest extends AbstractTest {
     @SpecAssertion(section = CONTEXTUAL_INSTANCE, id = "e")
     public void testGetScopeTypeCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isGetScopeCalled();
+    }
+
+    @Test
+    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ea")
+    public void testCustomBeanIsPassivationCapable() throws IOException, ClassNotFoundException {
+
+        Foo customFoo = getContextualReference(Foo.class, new PassivableLiteral());
+        byte[] serializedBean = passivate(customFoo);
+        Foo customFooDeserialized = (Foo) activate(serializedBean);
+        Assert.assertEquals(customFoo.getId(), customFooDeserialized.getId());
+        Assert.assertEquals(customFoo.hashCode(), customFooDeserialized.hashCode());
     }
 
     @Test
