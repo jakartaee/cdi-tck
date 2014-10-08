@@ -20,13 +20,12 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.lang.reflect.Type;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
-
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
-
 import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 public class CustomInjectionPoint implements InjectionPoint {
@@ -40,6 +39,8 @@ public class CustomInjectionPoint implements InjectionPoint {
     private boolean isTransientCalled = false;
 
     private AnnotatedField<?> annotatedField;
+
+    private static Set<Class<?>> membersClasses = new HashSet<>();
 
     public CustomInjectionPoint(Type type, Bean<?> bean, boolean isTransient, AnnotatedField<?> annotatedField) {
         this.type = type;
@@ -66,7 +67,8 @@ public class CustomInjectionPoint implements InjectionPoint {
 
     @Override
     public Member getMember() {
-        return annotatedField.getJavaMember();
+       membersClasses.add(annotatedField.getJavaMember().getType());
+       return annotatedField.getJavaMember();
     }
 
     @Override
@@ -88,5 +90,10 @@ public class CustomInjectionPoint implements InjectionPoint {
     public boolean isTransientCalled() {
         return isTransientCalled;
     }
+
+    public static Set<Class<?>> getMembersClasses() {
+        return membersClasses;
+    }
+
 
 }

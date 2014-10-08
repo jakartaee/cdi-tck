@@ -123,4 +123,12 @@ public class CustomBeanImplementationTest extends AbstractTest {
         Assert.assertEquals(passCapBean.getFoo().getId(), actCapBean.getFoo().getId());
         Assert.assertEquals(passCapBean.getFoo().hashCode(), actCapBean.getFoo().hashCode());
     }
+
+    @Test
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "r")
+    public void testInjectionPointGetMemberIsUsedToDetermineTheClassThatDeclaresAnInjectionPoint(){
+        Assert.assertEquals(CustomInjectionPoint.getMembersClasses().size(),2);
+        Assert.assertTrue(CustomInjectionPoint.getMembersClasses().contains(Bar.class));
+        Assert.assertTrue(CustomInjectionPoint.getMembersClasses().contains(Integer.class));
+    }
 }
