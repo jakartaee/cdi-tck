@@ -44,7 +44,7 @@ public class DecoratorWithNoDecoratedTypes1Test extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(DecoratorWithNoDecoratedTypes1Test.class)
-                .withClass(SerializableDecorator.class).build();
+                .withClasses(SerializableDecorator.class, NonExisting.class).build();
     }
 
     @Test
