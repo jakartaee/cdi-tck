@@ -24,13 +24,20 @@
 
         <classes>
 
-	     <!-- CDITCK-452--
-	    <class name="org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ws.ResourceDefinitionWithDifferentTypeTest">
+            <!-- CDITCK-452-->
+            <class name="org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ws.ResourceDefinitionWithDifferentTypeTest">
                <methods>
                    <exclude name=".*"/>
                </methods>
             </class>
-            
+
+            <!-- CDITCK-453-->
+            <class name="org.jboss.cdi.tck.tests.decorators.definition.broken.nodecoratedtypes.DecoratorWithNoDecoratedTypes1Test">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
         </classes>
     </test>
 
