@@ -20,8 +20,8 @@ import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_QUALIFIERS;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELD_QUALIFIERS;
 import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.MULTIPLE_QUALIFIERS;
-import static org.jboss.cdi.tck.cdi.Sections.NULL;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.PRIMITIVE_TYPES_AND_NULL_VALUES;
 import static org.jboss.cdi.tck.cdi.Sections.QUALIFIER_ANNOTATION_MEMBERS;
 import static org.jboss.cdi.tck.cdi.Sections.RESTRICTING_BEAN_TYPES;
 import static org.testng.Assert.assertEquals;
@@ -33,11 +33,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -118,8 +116,8 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "i"), @SpecAssertion(section = NULL, id = "aa"),
-            @SpecAssertion(section = NULL, id = "ab"), @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "i"), @SpecAssertion(section = PRIMITIVE_TYPES_AND_NULL_VALUES, id = "aa"),
+            @SpecAssertion(section = PRIMITIVE_TYPES_AND_NULL_VALUES, id = "ab"), @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "b"),
             @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "c"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "j") })
     public void testResolveByTypeWithPrimitives() {
 

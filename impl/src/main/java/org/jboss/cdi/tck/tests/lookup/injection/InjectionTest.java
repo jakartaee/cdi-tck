@@ -20,8 +20,8 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
-import static org.jboss.cdi.tck.cdi.Sections.NULL;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.PRIMITIVE_TYPES_AND_NULL_VALUES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -52,7 +52,7 @@ public class InjectionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = NULL, id = "aa")
+    @SpecAssertion(section = PRIMITIVE_TYPES_AND_NULL_VALUES, id = "aa")
     public void testInjectionPerformsBoxingIfNecessary() throws Exception {
         assert getBeans(SpiderNest.class).size() == 1;
         SpiderNest spiderNest = getContextualReference(SpiderNest.class);

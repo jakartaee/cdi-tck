@@ -41,7 +41,7 @@ public class MultipleDisposeParametersDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "a"), @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "a"), @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "bb") })
     public void testMultipleDisposeParameters() {
     }
 

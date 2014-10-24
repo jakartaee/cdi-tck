@@ -166,12 +166,12 @@
 
     <section id="builtin_qualifiers" title="Built-in qualifier types" level="3">
 
-        <assertion id="a0">
+        <assertion id="aa">
             <text>Every bean has the built-in qualifier |@Any|, even if it does not explicitly declare this qualifier, ~except for the special |@New| qualified beans defined in Section 3.14, "@New qualified beans"~.</text>
             <note>@New qualified beans cannot be checked since @New beans aren't required to be available via programmatic lookup</note>
         </assertion>
 
-        <assertion id="aa">
+        <assertion id="ab">
             <text>If a bean does not explicitly declare a qualifier other than |@Named|, the bean has exactly one additional qualifier, of type |@Default|. This is called the default qualifier.</text>
         </assertion>
 
@@ -612,7 +612,7 @@
     </section>
 
     <section id="specify_stereotype_interceptor_bindings" title="Specifying interceptor bindings for a stereotype" level="4">
-        <assertion id="a0">
+        <assertion id="aa">
             <text>The interceptor bindings of a stereotype are defined by annotating the stereotype with the interceptor binding types.</text>
         </assertion>
 
@@ -1384,11 +1384,11 @@
             <text>A disposer method may be declared by annotating a parameter |@javax.enterprise.inject.Disposes|. That parameter is the disposed parameter</text>
         </assertion>
 
-        <assertion id="b0">
+        <assertion id="ba">
             <text>Qualifiers may be declared by annotating the disposed parameter.</text>
         </assertion>
 
-        <assertion id="ba">
+        <assertion id="bb">
             <text>If a method has more than one parameter annotated |@Disposes|, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
@@ -2744,7 +2744,7 @@
 
     </section>
 
-    <section id="null" title="Primitive types and null values" level="3">
+    <section id="primitive_types_and_null_values" title="Primitive types and null values" level="3">
         <group>
             <text>If necessary, the container performs boxing or unboxing when it injects a value to a field or parameter of primitive or wrapper type.</text>
 
@@ -3445,15 +3445,15 @@
     </section>
 
     <section id="contextual" title="The Contextual interface" level="2">
-        <assertion id="a0">
+        <assertion id="aa">
             <text>If an exception occurs while creating an instance, the exception is rethrown by the |create()| method. If the exception is a checked exception, it must be wrapped and rethrown as an (unchecked) |CreationException|.</text>
         </assertion>
 
-        <assertion id="a1">
+        <assertion id="ab">
             <text>If an exception occurs while destroying an instance, the exception must be caught by the |destroy()| method.</text>
         </assertion>
 
-        <assertion id="a2" testable="false">
+        <assertion id="ac" testable="false">
             <text>If the application invokes a contextual instance after it has been destroyed, the behavior is undefined.</text>
             <note>A statement about container specific behavior which is not spec defined</note>
         </assertion>
@@ -3800,7 +3800,7 @@
     </section>
 
     <section id="contextual_reference" title="Contextual reference for a bean" level="3">
-        <assertion id="a0">
+        <assertion id="aa">
             <text>Contextual references must be obtained with a given |CreationalContext|, allowing any instance of scope |@Dependent| that is created to be later destroyed.</text>
         </assertion>
 
@@ -4664,7 +4664,7 @@
         </assertion>
 
 
-        <assertion id="a1">
+        <assertion id="ad">
             <text>Invocations of initializer methods by the container are not business method invocations.</text>
         </assertion>
 
@@ -5631,12 +5631,12 @@
     </section>
 
     <section id="observer_methods" title="Observer methods" level="2">
-        <assertion id="a0" testable="false">
+        <assertion id="aa" testable="false">
             <text>An observer method allows the application to receive and respond to event notifications.</text>
             <note>A general statement.</note>
         </assertion>
 
-        <assertion id="aa">
+        <assertion id="ab">
             <text>An observer method is a non-abstract method of a managed bean class or session bean class (or of an extension, as defined in Section 11.5, "Container lifecycle events").</text>
         </assertion>
 
