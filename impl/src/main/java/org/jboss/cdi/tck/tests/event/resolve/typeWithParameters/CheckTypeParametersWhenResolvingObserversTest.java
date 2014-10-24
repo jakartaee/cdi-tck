@@ -73,7 +73,7 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "c"), @SpecAssertion(section = OBSERVER_METHODS, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "c"), @SpecAssertion(section = OBSERVER_METHODS, id = "ab") })
     public void testObservedEventTypeParameterIsActualType() {
         ActionSequence.reset();
         Foo<String> fooString = new Foo.FooString();

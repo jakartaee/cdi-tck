@@ -110,7 +110,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "c"), @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "a"),
-            @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "a0"), @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "aa") })
+            @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "aa"), @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "ab") })
     public void testDefaultBindingType() throws Exception {
         assert getCurrentManager().getBeans(Tarantula.class).size() == 1;
         assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().size() == 2;
