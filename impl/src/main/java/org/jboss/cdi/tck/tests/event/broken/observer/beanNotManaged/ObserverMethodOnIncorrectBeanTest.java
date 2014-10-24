@@ -41,7 +41,7 @@ public class ObserverMethodOnIncorrectBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = OBSERVER_METHODS, id = "ab")
+    @SpecAssertion(section = OBSERVER_METHODS, id = "aa")
     public void testObserverMethodNotOnManagedOrSessionBeanFails() {
         assert getCurrentManager().resolveObserverMethods(new String()).isEmpty();
     }

@@ -25,6 +25,10 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
+
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.Bean;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -77,7 +81,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "ad"), @SpecAssertion(section = INITIALIZER_METHODS, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "a1"), @SpecAssertion(section = INITIALIZER_METHODS, id = "f") })
     public void testInitializerMethodsNotIntercepted() {
 
         AlmightyInterceptor.reset();

@@ -51,7 +51,7 @@ public class QualifierDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "aa"), @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "a0"), @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "aa") })
     public void testDefaultQualifierDeclaredInJava() {
         Bean<Order> order = getBeans(Order.class).iterator().next();
         assert order.getQualifiers().size() == 2;

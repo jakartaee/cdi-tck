@@ -16,11 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.primitive;
 
-import static org.jboss.cdi.tck.cdi.Sections.PRIMITIVE_TYPES_AND_NULL_VALUES;
+import static org.jboss.cdi.tck.cdi.Sections.NULL;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import javax.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -48,7 +49,7 @@ public class PrimitiveInjectionPointTest extends AbstractTest {
     Game game;
 
     @Test
-    @SpecAssertion(section = PRIMITIVE_TYPES_AND_NULL_VALUES, id = "b")
+    @SpecAssertion(section = NULL, id = "b")
     public void testPrimitiveInjectionPointResolvedToNonPrimitiveProducerMethod() {
         assertTrue(game.getInjectedByte() == 0);
         assertTrue(game.getInjectedShort() == 0);

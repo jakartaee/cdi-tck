@@ -16,30 +16,16 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
-import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
-import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
-import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL;
-import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
-import static org.jboss.cdi.tck.cdi.Sections.CREATIONAL_CONTEXT;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INJECTED_FIELD;
-import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS_DESTRUCTION;
-import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
-import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELDS;
-import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELD_QUALIFIERS;
-import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
-import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_LIFECYCLE;
-import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
-import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
-import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
-
-import java.lang.annotation.Annotation;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.DependentInstance;
+import org.jboss.cdi.tck.util.MockCreationalContext;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.annotations.Test;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
@@ -52,16 +38,31 @@ import javax.enterprise.inject.Specializes;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.DependentInstance;
-import org.jboss.cdi.tck.util.MockCreationalContext;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
-import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.annotations.Test;
+
+import java.lang.annotation.Annotation;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
+import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL;
+import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.CREATIONAL_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INJECTED_FIELD;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELD_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTED_FIELDS;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS_DESTRUCTION;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
+import static org.testng.Assert.assertFalse;
+
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class SimpleBeanLifecycleTest extends AbstractTest {
@@ -210,7 +211,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "aa"), @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba"),
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "a0"), @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba"),
             @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "c") })
     public void testContextualDestroyDisposesWhenNecessary() {
         final Bean<Goose> gooseBean = getBeans(Goose.class).iterator().next();
@@ -226,7 +227,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "a1") })
     public void testContextualDestroyCatchesException() {
         Bean<Cod> codBean = getBeans(Cod.class).iterator().next();
         CreationalContext<Cod> creationalContext = getCurrentManager().createCreationalContext(codBean);
@@ -246,7 +247,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert Salmon.isBeanDestroyed();
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(dataProvider=ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "baa")
     public void testSubClassInheritsPostConstructOnSuperclass(Instance<Object> instance) {
         OrderProcessor.postConstructCalled = false;
@@ -315,14 +316,14 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = CreationException.class)
-    @SpecAssertion(section = CONTEXTUAL, id = "aa")
+    @SpecAssertion(section = CONTEXTUAL, id = "a0")
     public void testCreationExceptionWrapsCheckedExceptionThrownFromCreate() {
         assert getBeans(Lorry_Broken.class).size() == 1;
         getContextualReference(Lorry_Broken.class);
     }
 
     @Test(expectedExceptions = FooException.class)
-    @SpecAssertion(section = CONTEXTUAL, id = "aa")
+    @SpecAssertion(section = CONTEXTUAL, id = "a0")
     public void testUncheckedExceptionThrownFromCreateNotWrapped() {
         assert getBeans(Van_Broken.class).size() == 1;
         getContextualReference(Van_Broken.class);

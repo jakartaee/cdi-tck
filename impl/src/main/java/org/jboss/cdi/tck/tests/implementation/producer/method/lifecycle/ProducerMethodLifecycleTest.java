@@ -142,7 +142,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = FooException.class)
-    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "a0") })
     public void testCreateRethrowsUncheckedException() {
         Bean<Ship> shipBean = getBeans(Ship.class, FAIL_LITERAL).iterator().next();
         CreationalContext<Ship> shipCc = getCurrentManager().createCreationalContext(shipBean);
@@ -151,7 +151,7 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = CreationException.class)
-    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "a0") })
     public void testCreateWrapsCheckedExceptionAndRethrows() {
         Bean<Lorry> lorryBean = getBeans(Lorry.class, FAIL_LITERAL).iterator().next();
         CreationalContext<Lorry> lorryCc = getCurrentManager().createCreationalContext(lorryBean);

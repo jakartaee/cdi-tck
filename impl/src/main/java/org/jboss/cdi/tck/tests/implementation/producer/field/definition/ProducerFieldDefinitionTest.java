@@ -92,7 +92,7 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "aa") })
     public void testDefaultBindingType() {
         Set<Bean<Tarantula>> tarantulaBeans = getBeans(Tarantula.class);
         assert tarantulaBeans.size() == 2;
