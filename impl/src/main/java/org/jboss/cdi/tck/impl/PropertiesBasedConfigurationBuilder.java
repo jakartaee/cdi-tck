@@ -64,7 +64,7 @@ public class PropertiesBasedConfigurationBuilder {
 
         configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, !deploymentPhase));
         configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, !deploymentPhase));
-        configuration.setContexts(getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
+        configuration.setContexts((Contexts<?>)getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
 
         configuration.setLibraryDirectory(getStringValue(Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, deploymentPhase));
 
