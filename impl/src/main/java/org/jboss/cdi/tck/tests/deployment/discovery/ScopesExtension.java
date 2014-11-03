@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
+import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
 public class ScopesExtension implements Extension {
@@ -28,5 +29,9 @@ public class ScopesExtension implements Extension {
     void registerContext(@Observes AfterBeanDiscovery event) {
         event.addContext(normalCtx);
         event.addContext(pseudoCtx);
+    }
+
+    void registerScope(@Observes BeforeBeanDiscovery event) {
+        event.addScope(MyPseudoScope.class, false, false);
     }
 }
