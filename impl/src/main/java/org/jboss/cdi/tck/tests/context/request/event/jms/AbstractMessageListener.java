@@ -1,7 +1,9 @@
 package org.jboss.cdi.tck.tests.context.request.event.jms;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -10,8 +12,8 @@ import javax.jms.TextMessage;
 public class AbstractMessageListener implements MessageListener {
 
     private static AtomicInteger processedMessages = new AtomicInteger(0);
-
-    private static boolean initializedEventObserver;
+    private static AtomicBoolean initializedEventObserver = new AtomicBoolean();
+    private static AtomicBoolean initialized = new AtomicBoolean();
 
     @Inject
     private RequestScopedObserver observer;
@@ -21,7 +23,7 @@ public class AbstractMessageListener implements MessageListener {
 
         if (message instanceof TextMessage) {
             processedMessages.incrementAndGet();
-            initializedEventObserver = observer.isInitializedObserved();
+            initializedEventObserver.set(observer.isInitializedObserved());
         } else {
             throw new IllegalArgumentException("Unsupported message type");
         }
@@ -29,7 +31,7 @@ public class AbstractMessageListener implements MessageListener {
 
     public static void reset() {
         processedMessages.set(0);
-        initializedEventObserver = false;
+        initializedEventObserver.set(false);
     }
 
     public static int getProcessedMessages() {
@@ -37,6 +39,15 @@ public class AbstractMessageListener implements MessageListener {
     }
 
     public static boolean isInitializedEventObserver() {
-        return initializedEventObserver;
+        return initializedEventObserver.get();
+    }
+
+    public static boolean isInitialized() {
+        return initialized.get();
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        initialized.set(true);
     }
 }
