@@ -70,6 +70,12 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "jf") })
     public void testEventsFired() throws Exception {
 
+        new Timer().setDelay(2000l).addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return AbstractMessageListener.isInitialized();
+            }
+        }).start();
+
         AbstractMessageListener.reset();
         observer.reset();
 
