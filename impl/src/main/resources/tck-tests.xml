@@ -51,6 +51,12 @@
                 </methods>
             </class>
 
+            <class name="org.jboss.cdi.tck.tests.context.jms.MessageDrivenBeanContextTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
         </classes>
 
     </test>

@@ -82,6 +82,12 @@ public class MessageDrivenBeanContextTest extends AbstractTest {
             @SpecAssertion(section = REQUEST_CONTEXT, id = "hd"), @SpecAssertion(section = APPLICATION_CONTEXT, id = "dd") })
     public void testRequestScopeActiveDuringMessageDelivery() throws Exception {
 
+        new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
+            public boolean isSatisfied() {
+                return AbstractMessageListener.isInitialized();
+            }
+        }).start();
+
         AbstractMessageListener.resetProcessedMessages();
 
         producer.sendQueueMessage();
