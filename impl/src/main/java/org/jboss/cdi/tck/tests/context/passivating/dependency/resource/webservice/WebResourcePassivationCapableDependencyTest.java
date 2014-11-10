@@ -55,9 +55,10 @@ public class WebResourcePassivationCapableDependencyTest extends AbstractTest {
         byte[] serializedBean = passivate(bean);
 
         PassivatedBean beanCopy = (PassivatedBean) activate(serializedBean);
+        String message = beanCopy.getHelloWeb().sayHello("John");
 
         assertEquals(beanCopy.getId(), beanId);
-        assertNotNull(beanCopy.getHelloWeb());
+        assertEquals(message, "Hello John.");
     }
 
 }

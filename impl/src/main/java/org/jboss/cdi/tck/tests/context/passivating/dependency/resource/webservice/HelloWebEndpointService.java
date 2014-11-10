@@ -22,12 +22,17 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
+import javax.xml.ws.WebServiceFeature;
 
 @WebServiceClient(name = "HelloWeb", targetNamespace = "http://webservice.resource.dependency.passivating.context.tests.tck.cdi.jboss.org/")
 public class HelloWebEndpointService extends Service {
 
     public HelloWebEndpointService(URL wsdlDocumentLocation, QName serviceName) {
         super(wsdlDocumentLocation, serviceName);
+    }
+
+    public HelloWebEndpointService(URL wsdlDocumentLocation, QName serviceName, WebServiceFeature... features) {
+        super(wsdlDocumentLocation, serviceName, features);
     }
     
     @WebEndpoint(name = "HelloWebPort")
