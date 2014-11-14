@@ -20,7 +20,7 @@ package org.jboss.cdi.tck.tests.implementation.simple.resource.ws.staticProducer
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-@WebService(targetNamespace = "http://staticProducer.ws.resource.simple.implementation.tests.tck.cdi.jboss.org/")
+@WebService(targetNamespace = "http://staticProducer.ws.resource.simple.implementation.tests.tck.cdi.jboss.org/", wsdlLocation = "WEB-INF/SheepWS.wsdl")
 public interface SheepWS {
 
     @WebMethod

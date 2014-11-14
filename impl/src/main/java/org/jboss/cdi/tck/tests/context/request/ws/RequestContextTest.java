@@ -28,25 +28,19 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.xml.namespace.QName;
-
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
-
 /**
- *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
@@ -57,24 +51,21 @@ public class RequestContextTest extends AbstractTest {
 
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
+        return new WebArchiveBuilder().withName("ws-test.war")
                 .withTestClassPackage(RequestContextTest.class)
-                .withExcludedClass(TranslatorEndpointService.class.getName())
-                .withWebXml(
-                        Descriptors.create(WebAppDescriptor.class).createServlet().servletName("Translator")
-                                .servletClass("org.jboss.cdi.tck.tests.context.request.ws.TranslatorEndpoint").loadOnStartup(1)
-                                .up().createServletMapping().servletName("Translator").urlPattern("/translator").up()).build();
+                .withExcludedClass(TranslatorService.class.getName()).
+                        withWebResource("Translator.wsdl", "WEB-INF/Translator.wsdl").
+                        withWebResource("Translator_schema1.xsd", "WEB-INF/Translator_schema1.xsd").build();
     }
 
-    @Test(groups = {JAVAEE_FULL, JAX_WS})
+    @Test(groups = { JAVAEE_FULL, JAX_WS })
     @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "c"), @SpecAssertion(section = REQUEST_CONTEXT, id = "d"),
             @SpecAssertion(section = APPLICATION_CONTEXT, id = "b") })
     public void testRequestScopeActiveDuringWebServiceInvocation() throws Exception {
 
         URL wsdlLocation = new URL(contextPath.toExternalForm() + "translator?wsdl");
-        TranslatorEndpointService endpointService = new TranslatorEndpointService(wsdlLocation, new QName(
-                "http://ws.request.context.tests.tck.cdi.jboss.org/", "Translator"));
-        Translator translator = endpointService.getTranslatorPort();
+        TranslatorService endpointService = new TranslatorService(wsdlLocation);
+        Translator translator = endpointService.getTranslatorEndpointPort();
 
         // New instance of Foo is created for each WS request
         String id01 = translator.translate();

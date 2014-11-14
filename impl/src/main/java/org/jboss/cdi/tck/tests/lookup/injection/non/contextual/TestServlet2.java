@@ -20,14 +20,16 @@ import java.io.IOException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 
+@WebServlet(urlPatterns = "/TestServlet2", loadOnStartup = 1)
 public class TestServlet2 extends HttpServlet {
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorService.class)
     Translator translatorField;
 
     Translator translator;
@@ -41,6 +43,7 @@ public class TestServlet2 extends HttpServlet {
         if (req.getParameter("test").equals("wsresource")) {
             // Return 200 if the resource was injected before init, 500 otherwise
             resp.setStatus(initCalledAfterWSResourceInjection ? 200 : 500);
+            resp.getWriter().append("Servlet init: "+initCalledAfterWSResourceInjection);
         } else {
             resp.setStatus(404);
         }
@@ -48,7 +51,7 @@ public class TestServlet2 extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        initCalledAfterWSResourceInjection = translator != null & translatorField != null;
+        this.initCalledAfterWSResourceInjection = translator != null & translatorField != null;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class TestServlet2 extends HttpServlet {
         init();
     }
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorService.class)
     private void setTranslator(Translator translator) {
         this.translator = translator;
     }

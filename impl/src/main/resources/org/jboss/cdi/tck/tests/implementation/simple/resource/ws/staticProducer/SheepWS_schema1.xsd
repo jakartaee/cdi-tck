@@ -1,0 +1,17 @@
+<xs:schema xmlns:tns="http://staticProducer.ws.resource.simple.implementation.tests.tck.cdi.jboss.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://staticProducer.ws.resource.simple.implementation.tests.tck.cdi.jboss.org/" version="1.0">
+
+  <xs:element name="ping" type="tns:ping"></xs:element>
+
+  <xs:element name="pingResponse" type="tns:pingResponse"></xs:element>
+
+  <xs:complexType name="ping">
+    <xs:sequence></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pingResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

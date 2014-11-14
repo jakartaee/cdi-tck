@@ -28,8 +28,6 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -43,20 +41,13 @@ public class ResourceDefinitionWithDifferentTypeTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
+        return new WebArchiveBuilder().withName("ws-test.war")
                 .withTestClassPackage(ResourceDefinitionWithDifferentTypeTest.class)
-                .withWebXml(
-                        Descriptors
-                                .create(WebAppDescriptor.class)
-                                .createServlet()
-                                .servletName("Translator")
-                                .servletClass(
-                                        "org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ws.TranslatorEndpoint")
-                                .loadOnStartup(1).up().createServletMapping().servletName("Translator")
-                                .urlPattern("/translator").up()).build();
+                .withWebResource("Translator.wsdl", "WEB-INF/Translator.wsdl")
+                .withWebResource("Translator_schema1.xsd", "WEB-INF/Translator_schema1.xsd").build();
     }
 
-    @Test(groups = {JAVAEE_FULL, JAX_WS})
+    @Test(groups = { JAVAEE_FULL, JAX_WS })
     @SpecAssertion(section = DECLARING_RESOURCE, id = "j")
     public void testDeployment() {
     }

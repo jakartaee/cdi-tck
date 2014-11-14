@@ -24,12 +24,14 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 
+@WebFilter(urlPatterns = "/TestFilter2")
 public class TestFilter2 implements Filter {
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorService.class)
     Translator translatorField;
 
     Translator translator;
@@ -46,6 +48,7 @@ public class TestFilter2 implements Filter {
         if (request.getParameter("test").equals("wsresource")) {
             // Return 200 if the resource was injected before init, 500 otherwise
             resp.setStatus(initCalledAfterWSResourceInjection ? 200 : 500);
+            resp.getWriter().append("Filter init: "+initCalledAfterWSResourceInjection);
         } else {
             resp.setStatus(404);
         }
@@ -55,7 +58,7 @@ public class TestFilter2 implements Filter {
         initCalledAfterWSResourceInjection = translator != null & translatorField != null;
     }
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorService.class)
     private void setTranslator(Translator translator) {
         this.translator = translator;
     }
