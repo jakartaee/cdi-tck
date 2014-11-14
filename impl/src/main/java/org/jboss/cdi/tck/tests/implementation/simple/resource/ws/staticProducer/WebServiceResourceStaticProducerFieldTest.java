@@ -26,8 +26,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -37,21 +35,10 @@ public class WebServiceResourceStaticProducerFieldTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
+        return new WebArchiveBuilder().withName("ws-test.war")
                 .withTestClassPackage(WebServiceResourceStaticProducerFieldTest.class)
-                .withWebXml(
-                        Descriptors
-                                .create(WebAppDescriptor.class)
-                                .displayName("WebService resource static producer field test")
-                                .createServlet()
-                                    .servletName("SheepWSEndPoint")
-                                    .servletClass("org.jboss.cdi.tck.tests.implementation.simple.resource.ws.staticProducer.SheepWSEndPoint")
-                                    .loadOnStartup(1).up()
-                                .createServletMapping()
-                                    .servletName("SheepWSEndPoint")
-                                    .urlPattern("/TestWebService").up()
-                            )
-                .build();
+                .withWebResource("SheepWS.wsdl", "WEB-INF/SheepWS.wsdl")
+                .withWebResource("SheepWS_schema1.xsd", "WEB-INF/SheepWS_schema1.xsd").build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { JAVAEE_FULL, JAX_WS })

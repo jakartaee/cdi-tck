@@ -23,7 +23,7 @@ public class ResourceProducer {
 
     @Online
     @Produces
-    @WebServiceRef(value = HelloWebEndpointService.class)
+    @WebServiceRef(value = HelloWebService.class)
     HelloWeb helloWeb;
 
 }

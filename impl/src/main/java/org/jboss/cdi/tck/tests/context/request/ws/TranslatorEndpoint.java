@@ -18,7 +18,9 @@ package org.jboss.cdi.tck.tests.context.request.ws;
 
 import javax.inject.Inject;
 import javax.jws.WebService;
+import javax.servlet.annotation.WebServlet;
 
+@WebServlet(loadOnStartup = 1, name = "Translator", urlPatterns = "translator")
 @WebService(endpointInterface = "org.jboss.cdi.tck.tests.context.request.ws.Translator", serviceName = "Translator")
 public class TranslatorEndpoint implements Translator {
 

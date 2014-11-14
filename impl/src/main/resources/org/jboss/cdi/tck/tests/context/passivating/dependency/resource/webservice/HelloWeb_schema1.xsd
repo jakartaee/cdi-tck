@@ -1,0 +1,19 @@
+<xs:schema xmlns:tns="http://webservice.resource.dependency.passivating.context.tests.tck.cdi.jboss.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://webservice.resource.dependency.passivating.context.tests.tck.cdi.jboss.org/" version="1.0">
+
+  <xs:element name="sayHello" type="tns:sayHello"></xs:element>
+
+  <xs:element name="sayHelloResponse" type="tns:sayHelloResponse"></xs:element>
+
+  <xs:complexType name="sayHello">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sayHelloResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
