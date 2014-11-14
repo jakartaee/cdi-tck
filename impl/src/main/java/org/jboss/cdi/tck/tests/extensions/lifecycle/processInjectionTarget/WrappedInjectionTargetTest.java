@@ -16,11 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PIT;
 import static org.testng.Assert.assertTrue;
 
-import javax.xml.namespace.QName;
 import java.net.URL;
+
+import javax.xml.namespace.QName;
+
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -40,6 +43,7 @@ import org.testng.annotations.Test;
 /**
  * @author Tomas Remes
  */
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class WrappedInjectionTargetTest extends AbstractTest {
 

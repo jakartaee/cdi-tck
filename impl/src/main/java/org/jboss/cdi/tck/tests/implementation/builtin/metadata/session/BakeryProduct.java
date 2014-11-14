@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.session;
 
+import javax.ejb.Local;
+
+@Local
 public interface BakeryProduct {
 
     BakeryProductDecorator getDecoratorInstance();

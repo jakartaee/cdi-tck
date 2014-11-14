@@ -17,15 +17,18 @@
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.session;
 
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.testng.Assert.assertEquals;
+
+import java.lang.reflect.Type;
+import java.util.Collections;
 
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.InterceptionType;
 import javax.enterprise.inject.spi.Interceptor;
 import javax.inject.Inject;
-import java.lang.reflect.Type;
-import java.util.Collections;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -42,6 +45,7 @@ import org.testng.annotations.Test;
 /**
  * @author Tomas Remes
  */
+@Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class BuiltinMetadataSessionBeanTest extends AbstractTest {
 
