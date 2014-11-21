@@ -23,7 +23,7 @@ public class Alpha extends Bravo {
 
     public boolean initializerCalledAfterResourceInjection = false;
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorService.class)
     Translator translatorField;
     
     Translator translator;
@@ -34,7 +34,7 @@ public class Alpha extends Bravo {
                 && superTranslator != null && superTranslatorField != null);
     }
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorService.class)
     private void setTranslator(Translator translator) {
         this.translator = translator;
     }

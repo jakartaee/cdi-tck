@@ -17,5 +17,4 @@
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws;
 
 public class Sheep {
-
 }

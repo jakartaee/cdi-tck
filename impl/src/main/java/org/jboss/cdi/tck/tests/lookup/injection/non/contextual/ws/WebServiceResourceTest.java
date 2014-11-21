@@ -26,15 +26,11 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import java.net.URL;
-
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
-import javax.xml.namespace.QName;
+import javax.xml.ws.WebServiceRef;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -46,21 +42,20 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class WebServiceResourceTest extends AbstractTest {
 
+    @WebServiceRef(value = SheepWSService.class)
+    public SheepWS sheepWS;
+
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(WebServiceResourceTest.class).withWebXml("web.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(WebServiceResourceTest.class).build();
     }
 
-    @RunAsClient
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { JAVAEE_FULL, JAX_WS })
+    @Test(groups = { JAVAEE_FULL, JAX_WS })
     @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ee"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "aq"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ar") })
-    public void testInjectionIntoWebServiceEndpoint(@ArquillianResource URL contextPath) throws Exception {
-        URL wsdlLocation = new URL(contextPath.toExternalForm() + "TestWebService?wsdl");
-        SheepWSEndPointService service = new SheepWSEndPointService(wsdlLocation, new QName(ObjectFactory.TARGET_NS, "SheepWS"));
-        SheepWS ws = service.getSheepWSPort();
-        assertTrue(ws.isSheepInjected());
+    public void testInjectionIntoWebServiceEndpoint() throws Exception {
+        assertTrue(sheepWS.isSheepInjected());
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })

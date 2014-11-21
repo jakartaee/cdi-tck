@@ -35,10 +35,9 @@ public class WebServiceResourceStaticProducerFieldTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withName("ws-test.war")
+        return new WebArchiveBuilder()
                 .withTestClassPackage(WebServiceResourceStaticProducerFieldTest.class)
-                .withWebResource("SheepWS.wsdl", "WEB-INF/SheepWS.wsdl")
-                .withWebResource("SheepWS_schema1.xsd", "WEB-INF/SheepWS_schema1.xsd").build();
+                .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { JAVAEE_FULL, JAX_WS })

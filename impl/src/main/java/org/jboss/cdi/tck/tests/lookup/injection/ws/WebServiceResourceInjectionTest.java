@@ -27,8 +27,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -44,15 +42,7 @@ public class WebServiceResourceInjectionTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(WebServiceResourceInjectionTest.class)
-                .withWebXml(
-                        Descriptors
-                                .create(WebAppDescriptor.class)
-                                .createServlet()
-                                .servletName("Translator")
-                                .servletClass(
-                                        "org.jboss.cdi.tck.tests.lookup.injection.ws.TranslatorEndpoint")
-                                .loadOnStartup(1).up().createServletMapping().servletName("Translator")
-                                .urlPattern("/translator").up()).build();
+                .build();
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })
