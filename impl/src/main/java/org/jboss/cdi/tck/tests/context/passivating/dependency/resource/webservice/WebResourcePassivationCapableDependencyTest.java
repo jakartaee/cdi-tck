@@ -37,11 +37,8 @@ public class WebResourcePassivationCapableDependencyTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withName("ws-test.war")
-                .withTestClassPackage(WebResourcePassivationCapableDependencyTest.class).
-                        withPackage(HelloWeb.class.getPackage()).
-                        withWebResource("HelloWeb.wsdl","WEB-INF/HelloWeb.wsdl").
-                        withWebResource("HelloWeb_schema1.xsd","WEB-INF/HelloWeb_schema1.xsd").build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(WebResourcePassivationCapableDependencyTest.class).build();
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })

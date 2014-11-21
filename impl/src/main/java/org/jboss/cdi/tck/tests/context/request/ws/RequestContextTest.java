@@ -35,6 +35,8 @@ import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -51,11 +53,14 @@ public class RequestContextTest extends AbstractTest {
 
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withName("ws-test.war")
-                .withTestClassPackage(RequestContextTest.class)
-                .withExcludedClass(TranslatorService.class.getName()).
-                        withWebResource("Translator.wsdl", "WEB-INF/Translator.wsdl").
-                        withWebResource("Translator_schema1.xsd", "WEB-INF/Translator_schema1.xsd").build();
+        return new WebArchiveBuilder().withTestClassPackage(RequestContextTest.class)
+                .withExcludedClass(TranslatorService.class.getName())
+
+                //TODO - keeping servlet definition in web.xml due to GLASSFISH-21303
+                .withWebXml(
+                        Descriptors.create(WebAppDescriptor.class).createServlet().servletName("Translator")
+                                .servletClass("org.jboss.cdi.tck.tests.context.request.ws.TranslatorEndpoint").loadOnStartup(1)
+                                .up().createServletMapping().servletName("Translator").urlPattern("/translator").up()).build();
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })

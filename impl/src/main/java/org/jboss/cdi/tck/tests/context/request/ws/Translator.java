@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.context.request.ws;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-@WebService(targetNamespace = "http://ws.request.context.tests.tck.cdi.jboss.org/", wsdlLocation = "WEB-INF/Translator.wsdl")
+@WebService(targetNamespace = "http://ws.request.context.tests.tck.cdi.jboss.org/")
 public interface Translator {
 
     @WebMethod

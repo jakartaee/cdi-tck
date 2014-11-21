@@ -20,12 +20,12 @@ import javax.xml.ws.WebServiceRef;
 
 public class Bravo {
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorService.class)
     Translator superTranslatorField;
 
     Translator superTranslator;
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorService.class)
     private void setSuperTranslator(Translator superTranslator) {
         this.superTranslator = superTranslator;
     }

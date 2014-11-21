@@ -41,10 +41,8 @@ public class ResourceDefinitionWithDifferentTypeTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withName("ws-test.war")
-                .withTestClassPackage(ResourceDefinitionWithDifferentTypeTest.class)
-                .withWebResource("Translator.wsdl", "WEB-INF/Translator.wsdl")
-                .withWebResource("Translator_schema1.xsd", "WEB-INF/Translator_schema1.xsd").build();
+        return new WebArchiveBuilder().withTestClassPackage(ResourceDefinitionWithDifferentTypeTest.class)
+                .build();
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })

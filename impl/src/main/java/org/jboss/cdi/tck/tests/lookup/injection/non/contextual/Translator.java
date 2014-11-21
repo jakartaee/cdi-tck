@@ -20,7 +20,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-@WebService(targetNamespace = "http://contextual.non.injection.lookup.tests.tck.cdi.jboss.org/", wsdlLocation = "WEB-INF/Translator.wsdl")
+@WebService(targetNamespace = "http://contextual.non.injection.lookup.tests.tck.cdi.jboss.org/")
 public interface Translator {
 
     @WebMethod

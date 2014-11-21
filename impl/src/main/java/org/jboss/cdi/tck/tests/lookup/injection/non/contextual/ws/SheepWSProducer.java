@@ -23,7 +23,7 @@ public class SheepWSProducer {
 
     @Black
     @Produces
-    @WebServiceRef(value = SheepWSEndPointService.class)
+    @WebServiceRef(value = SheepWSService.class)
     public SheepWS sheepWS;
 
 }
