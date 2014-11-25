@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -78,7 +79,7 @@
                         <phase>process-classes</phase>
                         <configuration>
                             <tasks>
-                                <copy file="${basedir}/target/docbook/publish/en-US/pdf/${pdf.name}" todir="${basedir}" />
+                                <copy file="${basedir}/target/docbook/publish/en-US/pdf/${pdf.name}" todir="${basedir}"/>
                             </tasks>
                         </configuration>
                         <goals>
@@ -129,6 +130,5 @@
         <connection>scm:git:git://github.com/cdi-spec/cditck.git</connection>
         <developerConnection>scm:git:git@github.com:cdi-spec/cdi-tck.git</developerConnection>
         <url>https://github.com/cdi-spec/cdi-tck/</url>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
 </project>

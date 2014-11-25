@@ -272,8 +272,7 @@
 		<connection>scm:git:git://github.com/cdi-spec/cdi-tck.git</connection>
 		<developerConnection>scm:git:git@github.com:cdi-spec/cdi-tck.git</developerConnection>
 		<url>https://github.com/cdi-spec/cdi-tck</url>
-	  <tag>HEAD</tag>
-  </scm>
+	</scm>
 
 	<profiles>
 		<profile>
