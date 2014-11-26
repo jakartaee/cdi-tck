@@ -18,11 +18,13 @@
 package org.jboss.cdi.tck.tests.context.session.async;
 
 import java.io.IOException;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.servlet.AsyncEvent;
 import javax.servlet.AsyncListener;
+
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
@@ -51,7 +53,7 @@ public class SimpleAsyncListener implements AsyncListener {
     public void onComplete(AsyncEvent event) throws IOException {
         logger.log("onComplete");
 
-        if (!statusBean.isOnError() && !statusBean.isOnError()) {
+        if (!statusBean.isOnTimeout() && !statusBean.isOnError()) {
             // Do not check and write info in case of post timeout/error action
             statusBean.setOnComplete(checkSessionContextAvailability());
         }
