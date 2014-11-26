@@ -23,7 +23,6 @@ import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessManagedBean;
 import javax.enterprise.inject.spi.ProcessProducerField;
 import javax.enterprise.inject.spi.ProcessProducerMethod;
-import javax.enterprise.inject.spi.ProcessSessionBean;
 
 public class ProcessBeanObserver implements Extension
 {
@@ -33,8 +32,6 @@ public class ProcessBeanObserver implements Extension
    private static ProcessProducerMethod<Cow, Cowshed> cowProcessProducerMethod;
    private static int cowShedProcessBeanCount;
    
-   private static ProcessSessionBean<Elephant> elephantProcessSessionBean;
-   private static int elephantProcessBeanCount;
    private static ProcessProducerField<Chicken, ChickenHutch> chickenProcessProducerField;
    private static int chickenHutchProcessBeanCount;
    
@@ -42,7 +39,6 @@ public class ProcessBeanObserver implements Extension
    {
       catProcessManagedBean = null;
       cowProcessProducerMethod = null;
-      elephantProcessSessionBean = null;
       chickenProcessProducerField = null;
    }
 
@@ -57,16 +53,7 @@ public class ProcessBeanObserver implements Extension
       ProcessBeanObserver.catProcessBeanCount++;
    }
    
-   public void observeElephantSessionBean(@Observes ProcessSessionBean<Elephant> event)
-   {
-      ProcessBeanObserver.elephantProcessSessionBean = event;
-   }
-   
-   public void observeElephantBean(@Observes ProcessBean<Elephant> event)
-   {
-      ProcessBeanObserver.elephantProcessBeanCount++;
-   }
-   
+
    public void observeCowProcessProducerMethod(@Observes ProcessProducerMethod<Cow, Cowshed> event)
    {
       ProcessBeanObserver.cowProcessProducerMethod = event;
@@ -97,11 +84,6 @@ public class ProcessBeanObserver implements Extension
       return cowProcessProducerMethod;
    }
    
-   public static ProcessSessionBean<Elephant> getElephantProcessSessionBean()
-   {
-      return elephantProcessSessionBean;
-   }
-   
    public static int getCatProcessBeanCount()
    {
       return catProcessBeanCount;
@@ -110,11 +92,6 @@ public class ProcessBeanObserver implements Extension
    public static int getCowShedProcessBeanCount()
    {
       return cowShedProcessBeanCount;
-   }
-   
-   public static int getElephantProcessBeanCount()
-   {
-      return elephantProcessBeanCount;
    }
    
    public static int getChickenHutchProcessBeanCount()
