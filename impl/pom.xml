@@ -209,6 +209,11 @@
 									<type>sig</type>
 									<classifier>sigtest-jdk7</classifier>
 								</artifact>
+                                                                <artifact>
+									<file>${basedir}/src/main/resources/cdi-api-jdk8.sig</file>
+									<type>sig</type>
+									<classifier>sigtest-jdk8</classifier>
+								</artifact>
 							</artifacts>
 						</configuration>
 					</execution>
