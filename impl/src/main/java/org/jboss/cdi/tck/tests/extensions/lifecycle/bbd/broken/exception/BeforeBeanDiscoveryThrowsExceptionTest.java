@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.broken.exception;
 
-import static org.jboss.cdi.tck.cdi.Sections.BBD;
+import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -44,7 +44,7 @@ public class BeforeBeanDiscoveryThrowsExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BBD, id = "ag")
+    @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "ag")
     public void testThrowsException() {
     }
 

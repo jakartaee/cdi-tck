@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.broken.addDefinitionError;
 
-import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
 
 import javax.enterprise.inject.spi.DefinitionException;
@@ -49,7 +49,7 @@ public class AddDefinitionErrorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ABD, id = "ca"), @SpecAssertion(section = INITIALIZATION, id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ca"), @SpecAssertion(section = INITIALIZATION, id = "e") })
     public void testObserverDefinitionErrorTreatedAsDefinitionError() {
     }
 

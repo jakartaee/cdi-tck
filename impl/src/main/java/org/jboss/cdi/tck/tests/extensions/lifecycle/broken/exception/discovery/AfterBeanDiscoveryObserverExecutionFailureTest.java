@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.broken.exception.discovery;
 
-import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -47,7 +47,7 @@ public class AfterBeanDiscoveryObserverExecutionFailureTest extends AbstractTest
     }
 
     @Test
-    @SpecAssertion(section = ABD, id = "g")
+    @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "g")
     public void testObserverFailureTreatedAsDefinitionError() {
     }
 }

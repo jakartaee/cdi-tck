@@ -3,7 +3,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DEFINING_ANNOTATIONS;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -88,27 +88,27 @@ public class BeanDiscoveryTest extends AbstractTest {
     VerifyingExtension extension;
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ta") })
     public void testExplicitBeanArchiveModeAll(Alpha alpha) {
         assertDiscoveredAndAvailable(alpha, Alpha.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bb"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ta") })
     public void testExplicitBeanArchiveEmptyDescriptor(Bravo bravo) {
         assertDiscoveredAndAvailable(bravo, Bravo.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ta") })
     public void testExplicitBeanArchiveLegacyDescriptor(Charlie charlie) {
         assertDiscoveredAndAvailable(charlie, Charlie.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tb"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bb") })
     public void testNormalScopeImplicitBeanArchiveNoDescriptor(Delta delta, Golf golf) {
@@ -117,7 +117,7 @@ public class BeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tb"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bb") })
     public void testNormalScopeImplicitBeanArchiveModeAnnotated(Echo echo, Hotel hotel) {
@@ -127,14 +127,14 @@ public class BeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tb"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bf") })
     public void testDependentScopeImplicitBeanArchiveNoDescriptor(India india) {
         assertDiscoveredAndAvailable(india, India.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tb"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bf"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ca") })
     public void testPseudoScopeImplicitBeanArchiveModeAnnotated(Juliet juliet) {
@@ -144,7 +144,7 @@ public class BeanDiscoveryTest extends AbstractTest {
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bc"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tb") })
     public void testInterceptorIsBeanDefiningAnnotation() {
         assertDiscovered(Interceptor1.class);
         assertDiscovered(Interceptor2.class);
@@ -152,14 +152,14 @@ public class BeanDiscoveryTest extends AbstractTest {
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bd"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "tb") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tb") })
     public void testDecoratorIsBeanDefiningAnnotation() {
         assertDiscovered(Decorator1.class);
         assertDiscovered(Decorator2.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tb"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "be"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "cb") })
     public void testStereotypeImplicitBeanArchiveNoDescriptor(Mike mike) {
@@ -168,7 +168,7 @@ public class BeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY, id = "tb"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tb"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "be"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "cb") })
     public void testStereotypeImplicitBeanArchiveModeAnnotated(November november) {

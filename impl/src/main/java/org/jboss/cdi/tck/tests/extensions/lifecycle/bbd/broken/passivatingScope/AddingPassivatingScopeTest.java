@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.broken.passivatingScope;
 
-import static org.jboss.cdi.tck.cdi.Sections.BBD;
+import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
 import javax.enterprise.inject.spi.DefinitionException;
@@ -47,7 +47,7 @@ public class AddingPassivatingScopeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BBD, id = "ac"), @SpecAssertion(section = PASSIVATION_VALIDATION, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "ac"), @SpecAssertion(section = PASSIVATION_VALIDATION, id = "a") })
     public void testAddingScopeType() {
     }
 

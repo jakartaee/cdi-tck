@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata.interceptor;
 
-import static org.jboss.cdi.tck.cdi.Sections.BBD;
+import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -58,7 +58,7 @@ public class AlternativeMetadataInterceptorTest extends AbstractTest {
     private Login securedLogin;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BBD, id = "af") })
+    @SpecAssertions({ @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af") })
     public void testInterceptorInterceptsOnlyBindedClass() {
         assertTrue(login instanceof Login);
         assertTrue(securedLogin instanceof Login);

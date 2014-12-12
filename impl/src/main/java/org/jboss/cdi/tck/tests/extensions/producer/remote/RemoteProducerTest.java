@@ -17,8 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.producer.remote;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.PB;
-import static org.jboss.cdi.tck.cdi.Sections.PP;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_PRODUCER;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -47,15 +47,15 @@ public class RemoteProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PP, id = "ac"), @SpecAssertion(section = PP, id = "e"),
-            @SpecAssertion(section = PP, id = "gb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "ac"), @SpecAssertion(section = PROCESS_PRODUCER, id = "e"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "gb") })
     public void testProduceCallsOverridenResourceProducerMethod() {
         assertEquals(getContextualReference(ServiceRemote.class).ping(), "pong");
         assertTrue(ProducerProcessor.isOverriddenServiceProducerCalled);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "ec") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "ec") })
     public void testResourceAreConsideredToBeProducerField() {
         assertTrue(ProducerProcessor.isServiceProducerFieldObserved);
     }

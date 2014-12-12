@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.observer.broken.exception;
 
-import static org.jboss.cdi.tck.cdi.Sections.POM;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_OBSERVER_METHOD;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -47,7 +47,7 @@ public class ProcessObserverMethodExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = POM, id = "db")
+    @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "db")
     public void testExceptionIsDefinitionError() {
     }
 

@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.specialization;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -60,7 +60,7 @@ public class VetoTest extends AbstractTest {
     private VerifyingExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "be"), @SpecAssertion(section = PBA, id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "be"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"),
             @SpecAssertion(section = SPECIALIZATION, id = "ca") })
     public void testSpecializedBeanAvailableAfterSpecializingBeanVetoed() {
         Bean<Alpha> bean = getUniqueBean(Alpha.class, AnyLiteral.INSTANCE);

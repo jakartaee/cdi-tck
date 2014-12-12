@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.interceptors.custom;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 
 import javax.interceptor.Interceptor;
 
@@ -63,7 +63,7 @@ public class CustomInterceptorRegistrationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd") })
     public void testCustomInterceptorRegistration() {
         // noop, we verify that the app deploys
     }

@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.veto;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -46,7 +46,7 @@ public class VetoTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PBA, id = "be")
+    @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "be")
     public void testBeanVetoed() {
         assertEquals(getCurrentManager().getBeans(Field.class).size(), 0);
         assertEquals(getCurrentManager().getBeans(Wheat.class).size(), 0);

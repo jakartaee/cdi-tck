@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery.broken;
 
-import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -45,7 +45,7 @@ public class WithAnnotationsAppliedToIllegalEventParameterTest extends AbstractT
     }
 
     @Test
-    @SpecAssertion(section = PAT, id = "h")
+    @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "h")
     public void testDeploymentFails() {
     }
 

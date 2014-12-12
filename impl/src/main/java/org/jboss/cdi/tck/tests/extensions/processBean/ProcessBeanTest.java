@@ -17,11 +17,13 @@
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
-import static org.jboss.cdi.tck.cdi.Sections.PB;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
+
+import java.util.Arrays;
 
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Disposes;
@@ -33,7 +35,7 @@ import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessManagedBean;
 import javax.enterprise.inject.spi.ProcessProducerField;
 import javax.enterprise.inject.spi.ProcessProducerMethod;
-import java.util.Arrays;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -66,10 +68,10 @@ public class ProcessBeanTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "ba"), @SpecAssertion(section = PB, id = "bb"),
-            @SpecAssertion(section = PB, id = "eda"), @SpecAssertion(section = PB, id = "efa"),
-            @SpecAssertion(section = PB, id = "fa"), @SpecAssertion(section = PB, id = "l"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "ba"), @SpecAssertion(section = PROCESS_BEAN, id = "bb"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "eda"), @SpecAssertion(section = PROCESS_BEAN, id = "efa"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "fa"), @SpecAssertion(section = PROCESS_BEAN, id = "l"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "fa") })
     public void testProcessBeanEvent() {
 
         assertNotNull(ProcessBeanObserver.getCatBean());
@@ -83,10 +85,10 @@ public class ProcessBeanTest extends AbstractTest {
                 Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessManagedBean.class.getName()));
     }
 
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "eaa"), @SpecAssertion(section = PB, id = "eab"),
-            @SpecAssertion(section = PB, id = "edc"), @SpecAssertion(section = PB, id = "efc"),
-            @SpecAssertion(section = PB, id = "fc"), @SpecAssertion(section = PB, id = "i"),
-            @SpecAssertion(section = PB, id = "j"), @SpecAssertion(section = BEAN_DISCOVERY, id = "ha") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "eaa"), @SpecAssertion(section = PROCESS_BEAN, id = "eab"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "edc"), @SpecAssertion(section = PROCESS_BEAN, id = "efc"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "fc"), @SpecAssertion(section = PROCESS_BEAN, id = "i"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "j"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ha") })
     @Test
     public void testProcessProducerMethodEvent() {
 
@@ -117,10 +119,10 @@ public class ProcessBeanTest extends AbstractTest {
                 Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessProducerMethod.class.getName()));
     }
 
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "eba"), @SpecAssertion(section = PB, id = "ebb"),
-            @SpecAssertion(section = PB, id = "edd"), @SpecAssertion(section = PB, id = "efd"),
-            @SpecAssertion(section = PB, id = "fd"), @SpecAssertion(section = PB, id = "n"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "hb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "eba"), @SpecAssertion(section = PROCESS_BEAN, id = "ebb"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "edd"), @SpecAssertion(section = PROCESS_BEAN, id = "efd"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "fd"), @SpecAssertion(section = PROCESS_BEAN, id = "n"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "hb") })
     @Test
     public void testProcessProducerFieldEvent() {
 
@@ -151,12 +153,12 @@ public class ProcessBeanTest extends AbstractTest {
                 Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessProducerField.class.getName()));
     }
 
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "aa") })
     public void testProcessBeanFiredForInterceptor() {
         assertNotNull(ProcessBeanObserver.getInterceptor());
     }
 
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "aa") })
     public void testProcessBeanFiredForDecorator() {
         assertNotNull(ProcessBeanObserver.getDecorator());
     }

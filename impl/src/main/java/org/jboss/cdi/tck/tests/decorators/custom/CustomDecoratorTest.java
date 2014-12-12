@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.decorators.custom;
 
-import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
-import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
 
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -44,8 +44,8 @@ public class CustomDecoratorTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "b"), @SpecAssertion(section = PAT, id = "bc"),
-            @SpecAssertion(section = ABD, id = "dc") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "b"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "bc"),
+            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dc") })
     public void testCustomImplementationOfDecoratorInterface() {
         assert getContextualReference(Vehicle.class).start().equals("Bus started and decorated.");
         assert getContextualReference(Vehicle.class).stop().equals("Bus stopped and decorated.");

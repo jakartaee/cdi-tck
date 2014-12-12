@@ -17,8 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
-import static org.jboss.cdi.tck.cdi.Sections.PB;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -54,11 +54,11 @@ public class ProcessSessionBeanTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PB, id = "ca"), @SpecAssertion(section = PB, id = "cb"),
-            @SpecAssertion(section = PB, id = "edb"), @SpecAssertion(section = PB, id = "efb"),
-            @SpecAssertion(section = PB, id = "fb"), @SpecAssertion(section = PB, id = "hb"),
-            @SpecAssertion(section = PB, id = "hc"), @SpecAssertion(section = PB, id = "m"),
-            @SpecAssertion(section = PB, id = "k"), @SpecAssertion(section = BEAN_DISCOVERY, id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "ca"), @SpecAssertion(section = PROCESS_BEAN, id = "cb"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "edb"), @SpecAssertion(section = PROCESS_BEAN, id = "efb"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "fb"), @SpecAssertion(section = PROCESS_BEAN, id = "hb"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "hc"), @SpecAssertion(section = PROCESS_BEAN, id = "m"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "k"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "fb") })
     public void testProcessSessionBeanEvent() {
 
         assertEquals(ProcessSessionBeanObserver.getElephantBean().getBeanClass(), Elephant.class);

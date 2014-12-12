@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.registration;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BBD;
+import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 
 import javax.inject.Inject;
@@ -62,7 +62,7 @@ public class VisibilityOfBeanRegisteredByExtensionFromNonBeanLibraryTest extends
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
-            @SpecAssertion(section = BBD, id = "af") })
+            @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af") })
     public void shouldFindBeanReference() {
         Assert.assertNotNull(bean);
         Assert.assertNotNull(bean.getCollaborator());

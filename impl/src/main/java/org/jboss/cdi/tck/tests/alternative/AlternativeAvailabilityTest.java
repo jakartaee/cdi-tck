@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.alternative;
 
 import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_STEREOTYPE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_ALTERNATIVE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
@@ -70,7 +70,7 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "e"),
             @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"),
-            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "ka")
+            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ka")
 
     })
     public void testAlternativeAvailability() throws Exception {

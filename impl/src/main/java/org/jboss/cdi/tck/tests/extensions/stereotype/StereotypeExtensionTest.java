@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.stereotype;
 
-import static org.jboss.cdi.tck.cdi.Sections.BBD;
+import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -46,7 +46,7 @@ public class StereotypeExtensionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BBD, id = "ad")
+    @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "ad")
     public void testStereotypeWorks() {
 
         Bean<Chair> chairBean = getUniqueBean(Chair.class);

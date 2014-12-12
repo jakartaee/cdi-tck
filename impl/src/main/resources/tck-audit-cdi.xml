@@ -6868,7 +6868,7 @@
         </assertion>
     </section>
 
-    <section id="bbd" title="BeforeBeanDiscovery event" level="3">
+    <section id="before_bean_discovery" title="BeforeBeanDiscovery event" level="3">
         <assertion id="a">
             <text>The container must fire an event before it begins the bean discovery process. The event object must be of type |javax.enterprise.inject.spi.BeforeBeanDiscovery|.</text>
         </assertion>
@@ -6925,7 +6925,7 @@
         
     </section>
 
-    <section id="atd" title="AfterTypeDiscovery event" level="3">
+    <section id="after_type_discovery" title="AfterTypeDiscovery event" level="3">
         <assertion id="a">
             <text>The container must fire an event when it has fully completed the type discovery process and before it begins the bean discovery process. The event object must be of type |javax.enterprise.inject.spi.AfterTypeDiscovery|.</text>
         </assertion>
@@ -6986,7 +6986,7 @@
         </assertion>
     </section>
 
-    <section id="abd" title="AfterBeanDiscovery event" level="3">
+    <section id="after_bean_discovery" title="AfterBeanDiscovery event" level="3">
         <assertion id="a">
             <text>The container must fire an event when it has fully completed the bean discovery process, validated that there are no definition errors relating to the discovered beans, and registered |Bean| and |ObserverMethod| objects for the discovered beans, but before detecting deployment problems. The event object must be of type |javax.enterprise.inject.spi.AfterBeanDiscovery|.</text>
         </assertion>
@@ -7052,7 +7052,7 @@
         </assertion>
     </section>
 
-    <section id="adv" title="AfterDeploymentValidation event" level="3">
+    <section id="after_deployment_validation" title="AfterDeploymentValidation event" level="3">
         <assertion id="a">
             <text>The container must fire an event after it has validated that there are no deployment problems and before creating contexts or processing requests. The event object must be of type |javax.enterprise.inject.spi.AfterDeploymentValidation|.</text>
         </assertion>
@@ -7074,7 +7074,7 @@
         </assertion>
     </section>
 
-    <section id="bs" title="BeforeShutdown event" level="3">
+    <section id="before_shutdown" title="BeforeShutdown event" level="3">
         <assertion id="a">
             <text>The container must fire a final event after it has finished processing requests and destroyed all contexts. The event object must be of type |javax.enterprise.inject.spi.BeforeShutdown|.</text>
         </assertion>
@@ -7085,7 +7085,7 @@
         </assertion>
     </section>
 
-    <section id="pat" title="ProcessAnnotatedType event" level="3">
+    <section id="process_annotated_type" title="ProcessAnnotatedType event" level="3">
 
         <group>
             <text>The container must fire an event, before it processes a type, for every Java class, interface (excluding the special kind of interface declaration annotation type) or enum discovered.</text>
@@ -7197,7 +7197,7 @@
         </assertion>
     </section>
 
-    <section id="pip" title="ProcessInjectionPoint event" level="3">
+    <section id="process_injection_point" title="ProcessInjectionPoint event" level="3">
 
         <assertion id="a">
             <text>The container must fire an event for every injection point of every Java EE component class supporting injection that may be instantiated by the container at runtime. The event object must be of type |javax.enterprise.inject.spi.ProcessInjectionPoint&lt;T, X&gt;| where |T| is the bean class of the bean that declares the injection point, and |X| is the declared type of the injection point.</text>
@@ -7229,7 +7229,7 @@
 
     </section>
 
-    <section id="pit" title="ProcessInjectionTarget event" level="3">
+    <section id="process_injection_target" title="ProcessInjectionTarget event" level="3">
         <group>
             <text>The container must fire an event for every Java EE component class supporting injection that may be instantiated by the container at runtime, including every managed bean declared using |@ManagedBean|, EJB session or message-driven bean, enabled bean, enabled interceptor or enabled decorator. The event object must be of type |javax.enterprise.inject.spi.ProcessInjectionTarget&lt;X&gt;|, where |x| is the managed bean class, session bean class or Java EE component class supporting injection.</text>
             <assertion id="aaa">
@@ -7362,7 +7362,7 @@
         </assertion>
     </section>
 
-    <section id="pba" title="ProcessBeanAttributes event" level="3">
+    <section id="process_bean_attributes" title="ProcessBeanAttributes event" level="3">
 
         <group>
             <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean archive, before registering the |Bean| object. No event is fired for any |@New| qualified bean, defined in Section 3.14, "@New qualified beans" or beans added programmatically using |AfterBeanDiscovery.addBean()| or for any built-in beans. The event object must be of type |javax.enterprise.inject.spi.ProcessBeanAttributes&lt;T&gt;| where |T| is the bean class of the managed bean or session bean, the return type of the producer method, or the type of the producer field.</text>
@@ -7442,7 +7442,7 @@
 
     </section>
 
-    <section id="pb" title="ProcessBean event" level="3">
+    <section id="process_bean" title="ProcessBean event" level="3">
         <assertion id="aa">
             <text>The container must fire an event for each bean, interceptor or decorator deployed in a bean archive, after firing the |ProcessBeanAttributes| for the bean and before registering the |Bean| object. No event is fired for any |@New| qualified bean, defined in Section 3.12, "@New qualified beans".</text>
         </assertion>
@@ -7579,7 +7579,7 @@
 
     </section>
 
-    <section id="pp" title="ProcessProducer event" level="3">
+    <section id="process_producer" title="ProcessProducer event" level="3">
         <group>
             <text>The container must fire an event for each producer method or field of each enabled bean, including resources.</text>
             <assertion id="aa">
@@ -7650,7 +7650,7 @@
         </assertion>
     </section>
 
-    <section id="pom" title="ProcessObserverMethod event" level="3">
+    <section id="process_observer_method" title="ProcessObserverMethod event" level="3">
         <assertion id="aaa">
             <text>The container must fire an event for each observer method of each enabled bean, before registering the |ObserverMethod| object. The event object must be of type |javax.enterprise.inject.spi.ProcessObserverMethod&lt;T, X&gt;| where |T| is the bean class of the bean that declares the observer method and |X| is the observed event type of the observer method.</text>
         </assertion>
@@ -7884,7 +7884,7 @@
 
     </section>
 
-    <section id="bean_discovery" title="Bean discovery" level="2">
+    <section id="bean_discovery_steps" title="Bean discovery" level="2">
         <assertion id="a" testable="false">
             <text>The container automatically discovers managed beans (according to the rules of Section 3.1.1, "Which Java classes are managed beans?") and session beans in bean archives and searches the bean classes for producer methods, producer fields, disposer methods and observer methods.</text>
             <note>Statement of intent</note>

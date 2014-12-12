@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modify.broken;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -47,7 +47,7 @@ public class SetBeanAttributesTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "e") })
     public void testBeanDefinitionIsValidated() {
     }
 }

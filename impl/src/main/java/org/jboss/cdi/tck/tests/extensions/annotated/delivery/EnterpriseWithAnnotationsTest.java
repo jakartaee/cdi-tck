@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -57,7 +57,7 @@ public class EnterpriseWithAnnotationsTest extends AbstractTest {
     ProcessAnnotatedTypeObserver processAnnotatedTypeObserver;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PAT, id = "fc") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc") })
     public void testDelivery() {
 
         List<Class<?>> processedDesiredAnWantedTypes = processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes();
@@ -71,7 +71,7 @@ public class EnterpriseWithAnnotationsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PAT, id = "fc"), @SpecAssertion(section = PAT, id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "g") })
     public void testDeliveryMetaAnnotation() {
         List<Class<?>> processedTypes = processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes();
         assertFalse(processedTypes.isEmpty());

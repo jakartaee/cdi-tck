@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
 import static org.testng.Assert.assertFalse;
@@ -25,6 +25,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -57,7 +58,7 @@ public class InterceptorInvocationTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "a"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "kb"),  @SpecAssertion(section = BIZ_METHOD, id = "aa")})
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kb"),  @SpecAssertion(section = BIZ_METHOD, id = "aa")})
     public void testManagedBeanIsIntercepted() {
 
         AlmightyInterceptor.reset();

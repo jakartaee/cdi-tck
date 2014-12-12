@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.broken.processAnnotatedObserverThrowsException;
 
-import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -44,7 +44,7 @@ public class ProcessAnnotatedTypeEventThrowsExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PAT, id = "e")
+    @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "e")
     public void testProcessAnnotatedTypeEventThrowsExceptionNotOk() {
     }
 }

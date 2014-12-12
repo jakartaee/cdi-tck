@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.extensions.annotated.broken.processInjectionTargetThrowsException;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PIT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -46,7 +46,7 @@ public class ProcessInjectionTargetEventThrowsExceptionTest extends AbstractTest
     }
 
     @Test
-    @SpecAssertion(section = PIT, id = "f")
+    @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "f")
     public void testProcessInjectionTargetEventThrowsExceptionNotOk() {
     }
 }

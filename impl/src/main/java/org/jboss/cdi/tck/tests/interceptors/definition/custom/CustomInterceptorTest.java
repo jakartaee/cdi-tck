@@ -22,7 +22,7 @@ import static javax.enterprise.inject.spi.InterceptionType.POST_ACTIVATE;
 import static javax.enterprise.inject.spi.InterceptionType.POST_CONSTRUCT;
 import static javax.enterprise.inject.spi.InterceptionType.PRE_DESTROY;
 import static javax.enterprise.inject.spi.InterceptionType.PRE_PASSIVATE;
-import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +44,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ca"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ca"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd") })
     // WELD-238
     public void testCustomPostConstructInterceptor() {
         assert !getCurrentManager().resolveInterceptors(POST_CONSTRUCT, new SecureLiteral(), new TransactionalLiteral())
@@ -54,7 +54,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cb"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cb"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd") })
     // WELD-238
     public void testCustomPreDestroyInterceptor() {
         assert !getCurrentManager().resolveInterceptors(PRE_DESTROY, new SecureLiteral(), new TransactionalLiteral()).isEmpty();
@@ -63,7 +63,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cc"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cc"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd") })
     // WELD-238
     public void testCustomPostActivateInterceptor() {
         assert !getCurrentManager().resolveInterceptors(POST_ACTIVATE, new SecureLiteral(), new TransactionalLiteral())
@@ -73,7 +73,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cd"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cd"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd") })
     // WELD-238
     public void testCustomPrePassivateInterceptor() {
         assert !getCurrentManager().resolveInterceptors(PRE_PASSIVATE, new SecureLiteral(), new TransactionalLiteral())
@@ -83,7 +83,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ce"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "ce"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd") })
     // WELD-238
     public void testCustomAroundInvokeInterceptor() {
         assert !getCurrentManager().resolveInterceptors(AROUND_INVOKE, new SecureLiteral(), new TransactionalLiteral())
@@ -93,7 +93,7 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cf"), @SpecAssertion(section = ABD, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cf"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd") })
     // WELD-238
     public void testCustomAroundTimeoutInterceptor() {
         assert !getCurrentManager().resolveInterceptors(AROUND_TIMEOUT, new SecureLiteral(), new TransactionalLiteral())

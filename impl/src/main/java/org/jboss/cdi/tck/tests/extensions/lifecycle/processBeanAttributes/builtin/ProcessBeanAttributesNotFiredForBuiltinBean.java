@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.builtin;
 
-import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.testng.Assert.assertTrue;
 
 import javax.inject.Inject;
@@ -46,7 +46,7 @@ public class ProcessBeanAttributesNotFiredForBuiltinBean extends AbstractTest {
     ProcessBeanAttributesObserver observer;
 
     @Test
-    @SpecAssertion(section = PBA, id = "af")
+    @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "af")
     public void testProcessBeanAttributesNotFired() {
         assertTrue(observer.getObservedBeanAttributes().isEmpty());
     }

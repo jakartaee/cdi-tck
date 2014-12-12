@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.container.event.broken.processBeanObserverRegistersException;
 
-import static org.jboss.cdi.tck.cdi.Sections.PB;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -40,7 +40,7 @@ public class AddDefinitionErrorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PB, id = "h")
+    @SpecAssertion(section = PROCESS_BEAN, id = "h")
     public void testAddDefinitionError() {
     }
 }

@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.decorator;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -55,13 +55,13 @@ public class DecoratorProcessBeanAttributesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PBA, id = "ac")
+    @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ac")
     public void testAlphaDecoratorObserved() {
         assertEquals(VerifyingExtension.aplhaDecoratorObserved.get(), 1);
     }
 
     @Test
-    @SpecAssertion(section = PBA, id = "ac")
+    @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ac")
     public void testBravoDecoratorObserved() {
         assertEquals(VerifyingExtension.bravoDecoratorObserved.get(), 1);
     }

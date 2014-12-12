@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.synthetic;
 
-import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -62,9 +62,9 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PAT, id = "ae"), @SpecAssertion(section = PAT, id = "af"),
-            @SpecAssertion(section = PAT, id = "j"), @SpecAssertion(section = PAT, id = "ag"),
-            @SpecAssertion(section = PAT, id = "ah") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ae"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "af"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "j"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ag"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ah") })
     public void testEventsFired() {
         Set<Class<?>> patClasses = verifyingExtension.getPatClasses();
         Set<Class<?>> psatClasses = verifyingExtension.getPsatClasses();
@@ -100,7 +100,7 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PAT, id = "bd") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "bd") })
     public void testEventsSources() {
         Map<Class<?>, Extension> sources = verifyingExtension.getSources();
         assertTrue(sources.get(Apple.class) instanceof RegisteringExtension1);

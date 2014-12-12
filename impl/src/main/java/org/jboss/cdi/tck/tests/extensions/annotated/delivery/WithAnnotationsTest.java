@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
-import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
 import static org.jboss.cdi.tck.util.Assert.assertTypeListMatches;
 import static org.testng.Assert.assertFalse;
 
@@ -55,9 +55,9 @@ public class WithAnnotationsTest extends AbstractTest {
     ProcessAnnotatedTypeObserver processAnnotatedTypeObserver;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "fb"),
-            @SpecAssertion(section = PAT, id = "fc"), @SpecAssertion(section = PAT, id = "fd"),
-            @SpecAssertion(section = PAT, id = "fe"), @SpecAssertion(section = PAT, id = "ff") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fa"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fb"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fd"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fe"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ff") })
     public void testDelivery() {
 
         // Annotated with @Desired or @Wanted
@@ -79,8 +79,8 @@ public class WithAnnotationsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PAT, id = "fa"), @SpecAssertion(section = PAT, id = "fc"),
-            @SpecAssertion(section = PAT, id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fa"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "g") })
     public void testDeliveryMetaAnnotation() {
         assertTypeListMatches(processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes(), Chicken.class, Hen.class,
                 RubberChicken.class, Hummingbird.class, BeeHummingbird.class);

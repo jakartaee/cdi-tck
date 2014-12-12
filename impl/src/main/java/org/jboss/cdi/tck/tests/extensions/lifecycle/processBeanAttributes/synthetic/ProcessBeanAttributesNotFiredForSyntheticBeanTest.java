@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.synth
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEANATTRIBUTES;
-import static org.jboss.cdi.tck.cdi.Sections.PAT;
-import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
@@ -63,8 +63,8 @@ public class ProcessBeanAttributesNotFiredForSyntheticBeanTest extends AbstractT
     BicycleExtension bicycleExtension;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a"), @SpecAssertion(section = PBA, id = "ae"),
-            @SpecAssertion(section = PAT, id = "bc") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ae"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "bc") })
     public void testProcessBeanAttributesNotFired() {
 
         assertTrue(bicycleExtension.isVetoed());

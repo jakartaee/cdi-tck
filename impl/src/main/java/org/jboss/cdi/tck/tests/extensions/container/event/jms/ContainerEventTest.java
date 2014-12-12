@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.container.event.jms;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JMS;
-import static org.jboss.cdi.tck.cdi.Sections.PIT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder.MessageDriven.newMessageDriven;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -67,7 +67,7 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test(groups = { JAVAEE_FULL, JMS })
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aaba"), @SpecAssertion(section = PIT, id = "abba") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaba"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "abba") })
     public void testProcessInjectionTargetEventFiredForMessageDrivenBean() {
 
         AnnotatedType<QueueMessageDrivenBean> annotatedType = ProcessInjectionTargetObserver.getMdbType();

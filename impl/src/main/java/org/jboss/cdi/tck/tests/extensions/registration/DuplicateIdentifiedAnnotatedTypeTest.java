@@ -16,8 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.registration;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
+
 import javax.enterprise.inject.spi.DeploymentException;
-import static org.jboss.cdi.tck.cdi.Sections.BBD;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -32,7 +33,7 @@ public class DuplicateIdentifiedAnnotatedTypeTest extends AbstractTest {
 
     @Deployment
     @ShouldThrowException(DeploymentException.class)
-    @SpecAssertion(section = BBD, id = "afb")
+    @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "afb")
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(DuplicateIdentifiedAnnotatedTypeTest.class)
                 .withLibrary(BeanClassToRegister.class, Beanie.class, DuplicateIdentifiedAnnotatedTypeExtension.class).build();

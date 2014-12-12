@@ -17,10 +17,10 @@
 package org.jboss.cdi.tck.tests.extensions.producer;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTIONTARGET;
-import static org.jboss.cdi.tck.cdi.Sections.PIT;
-import static org.jboss.cdi.tck.cdi.Sections.PP;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_PRODUCER;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -131,9 +131,9 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eaa"), @SpecAssertion(section = PP, id = "aa"),
-            @SpecAssertion(section = PP, id = "ba"), @SpecAssertion(section = PP, id = "ca"),
-            @SpecAssertion(section = PP, id = "da"), @SpecAssertion(section = BEAN_DISCOVERY, id = "ha") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eaa"), @SpecAssertion(section = PROCESS_PRODUCER, id = "aa"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "ba"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ca"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "da"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ha") })
     public void testProduceCallsProducerMethod() {
         Producer<Dog> producer = ProducerProcessor.getNoisyDogProducer();
         Bean<Dog> dogBean = getUniqueBean(Dog.class, new AnnotationLiteral<Noisy>() {
@@ -145,7 +145,7 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PP, id = "e"), @SpecAssertion(section = PP, id = "ga") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "e"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ga") })
     public void testSetProducerOverridesProducer() {
         ProducerProcessor.reset();
         assert getContextualReference(Cow.class, new AnnotationLiteral<Noisy>() {
@@ -154,9 +154,9 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eba"), @SpecAssertion(section = PP, id = "ab"),
-            @SpecAssertion(section = PP, id = "bb"), @SpecAssertion(section = PP, id = "cb"),
-            @SpecAssertion(section = PP, id = "db"), @SpecAssertion(section = BEAN_DISCOVERY, id = "hb") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eba"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ab"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "bb"), @SpecAssertion(section = PROCESS_PRODUCER, id = "cb"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "db"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "hb") })
     public void testProduceAccessesProducerField() {
         Producer<Dog> producer = ProducerProcessor.getQuietDogProducer();
         Bean<Dog> dogBean = getUniqueBean(Dog.class, new AnnotationLiteral<Quiet>() {
@@ -191,8 +191,8 @@ public class ProducerTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "i"), @SpecAssertion(section = BEAN_DISCOVERY, id = "ba"),
-            @SpecAssertion(section = PIT, id = "aaa") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "i"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ba"),
+            @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaa") })
     public void testInjectionTargetInject() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
         Bean<Dog> dogBean = (Bean<Dog>) getCurrentManager().getBeans(Dog.class).iterator().next();
@@ -226,7 +226,7 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "bb"), @SpecAssertion(section = PIT, id = "ea") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "bb"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "ea") })
     public void testSettingInjectionTargetReplacesIt() {
         CheckableInjectionTarget.setInjectCalled(false);
         getContextualReference(BirdCage.class);
@@ -234,7 +234,7 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PIT, id = "aba") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aba") })
     public void testGetAnnotatedTypeOnProcessInjectionTarget() {
         assert ProducerProcessor.getDogAnnotatedType() != null;
         assert ProducerProcessor.getDogAnnotatedType().getBaseType().equals(Dog.class);

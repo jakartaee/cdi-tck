@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.interceptors;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BBD;
+import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -77,7 +77,7 @@ public class InterceptorExtensionTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
-            @SpecAssertion(section = BBD, id = "ae") })
+            @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "ae") })
     public void testInterceptorAddedByClass() {
         assertEquals(numberSource.value(), 2);
         assertTrue(IncrementingInterceptor.isDoAroundCalled());
@@ -85,7 +85,7 @@ public class InterceptorExtensionTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
-            @SpecAssertion(section = BBD, id = "ae") })
+            @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "ae") })
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public void testLifecycleInterceptor() {
 
@@ -101,7 +101,7 @@ public class InterceptorExtensionTest extends AbstractTest {
     
     @Test
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
-            @SpecAssertion(section = BBD, id = "aea") })
+            @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "aea") })
     public void testInterceptorAddedByAnnotatedType() {
         assertEquals(wordSource.getWord(), WordSource.word);
         assertEquals(wordSource.getWordWithSuffix(), WordSource.wordWithSuffix);

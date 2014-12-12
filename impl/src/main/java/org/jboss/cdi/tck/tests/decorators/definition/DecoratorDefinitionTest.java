@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition;
 
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.BM_DECORATOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATED_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR;
@@ -76,7 +76,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN, id = "d"), @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a"),
             @SpecAssertion(section = DECORATED_TYPES, id = "c"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
-            @SpecAssertion(section = DECORATOR, id = "a"), @SpecAssertion(section = BEAN_DISCOVERY, id = "kc") })
+            @SpecAssertion(section = DECORATOR, id = "a"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kc") })
     public void testDecoratorIsManagedBean() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(MockLogger.TYPES);
         assertEquals(decorators.size(), 1);

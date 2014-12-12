@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated;
 
-import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -57,7 +57,7 @@ public class GetAnnotatedTypesTest extends AbstractTest {
     ModifyingExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ABD, id = "h") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "h") })
     public void testGetAnnotatedType() {
 
         AnnotatedType<Foo> aplha = extension.getAplha();
@@ -87,7 +87,7 @@ public class GetAnnotatedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ABD, id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "i") })
     public void testGetAnnotatedTypes() {
 
         List<AnnotatedType<Foo>> allFoo = extension.getAllFoo();

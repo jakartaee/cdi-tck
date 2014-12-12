@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBSERVER_METHOD_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.EVENT_QUALIFIER_TYPES_WITH_MEMBERS;
 import static org.jboss.cdi.tck.cdi.Sections.MULTIPLE_EVENT_QUALIFIERS;
@@ -122,14 +122,14 @@ public class ResolveEventObserversTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BEAN_DISCOVERY, id = "o")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "o")
     public void testObserverMethodAutomaticallyRegistered() {
         assert !getCurrentManager().resolveObserverMethods(new String(), new AnnotationLiteral<Secret>() {
         }).isEmpty();
     }
 
     @Test
-    @SpecAssertion(section = BEAN_DISCOVERY, id = "o")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "o")
     public void testObserverMethodNotAutomaticallyRegisteredForDisabledBeans() {
         Set<ObserverMethod<? super Ghost>> ghostObservers = getCurrentManager().resolveObserverMethods(new Ghost());
         assert ghostObservers.size() == 0;

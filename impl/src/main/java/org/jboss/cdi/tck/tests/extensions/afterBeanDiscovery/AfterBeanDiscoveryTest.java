@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery;
 
-import static org.jboss.cdi.tck.cdi.Sections.ABD;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -43,7 +43,7 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ABD, id = "db") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "db") })
     public void testBeanIsAdded() {
         assert getBeans(Cockatoo.class).size() == 1;
         assert getContextualReference(Cockatoo.class).getName().equals("Billy");
@@ -59,26 +59,26 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ABD, id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "da") })
     public void testProcessBeanIsFired() {
         assert AfterBeanDiscoveryObserver.isProcessBeanFiredForCockatooBean;
     }
 
     @Test
-    @SpecAssertion(section = ABD, id = "ea")
+    @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ea")
     public void testProcessObserverMethodFiredWhileAddingObserverMethod() {
         assertTrue(AfterBeanDiscoveryObserver.isTalkProcessObserverMethodObserved);
     }
 
     @Test
-    @SpecAssertion(section = ABD, id = "eb")
+    @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "eb")
     public void testObserverMethodRegistered() {
         getCurrentManager().fireEvent(new Talk("Hello"));
         assertTrue(AfterBeanDiscoveryObserver.addedObserverMethod.isObserved());
     }
 
     @Test
-    @SpecAssertion(section = ABD, id = "f")
+    @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "f")
     public void testAddContext() {
         Context context = getCurrentManager().getContext(SuperScoped.class);
         assertNotNull(context);

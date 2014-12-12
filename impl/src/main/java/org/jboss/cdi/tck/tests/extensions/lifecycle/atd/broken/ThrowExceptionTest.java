@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd.broken;
 
-import static org.jboss.cdi.tck.cdi.Sections.ATD;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_TYPE_DISCOVERY;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -40,7 +40,7 @@ public class ThrowExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = ATD, id = "i")
+    @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "i")
     public void testDeployment() {
     }
 

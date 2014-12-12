@@ -18,8 +18,8 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.ABD;
-import static org.jboss.cdi.tck.cdi.Sections.ADV;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_DEPLOYMENT_VALIDATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -49,7 +49,7 @@ public class DeploymentTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ABD, id = "a"), @SpecAssertion(section = ADV, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "a"), @SpecAssertion(section = AFTER_DEPLOYMENT_VALIDATION, id = "a") })
     public void testDeployedManagerEvent() {
         assertTrue(ManagerObserver.isAfterDeploymentValidationCalled());
         assertTrue(ManagerObserver.isAfterBeanDiscoveryCalled());

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.broken;
 
-import static org.jboss.cdi.tck.cdi.Sections.PIP;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_POINT;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -41,7 +41,7 @@ public class ThrowExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PIP, id = "d")
+    @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "d")
     public void testDeployment() {
     }
 

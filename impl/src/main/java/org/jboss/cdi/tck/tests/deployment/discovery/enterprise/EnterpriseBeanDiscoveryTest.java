@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DEFINING_ANNOTATIONS;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -121,41 +121,41 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
     VerifyingExtension extension;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tc") })
     public void testExplicitBeanArchiveModeAll() {
         assertDiscoveredAndAvailable(AlphaLocal.class, Alpha.class);
     }
 
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bb"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tc") })
     public void testExplicitBeanArchiveEmptyDescriptor() {
         assertDiscoveredAndAvailable(BravoLocal.class, Bravo.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
-            @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tc"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ta") })
     public void testExplicitBeanArchiveLegacyDescriptor() {
         assertDiscoveredAndAvailable(CharlieLocal.class, Charlie.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tc"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba") })
     public void testImplicitBeanArchiveNoDescriptor() {
         assertDiscoveredAndAvailable(DeltaLocal.class, Delta.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tc"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba") })
     public void testImplicitBeanArchiveModeAnnotated() {
         assertDiscoveredAndAvailable(EchoLocal.class, Echo.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa"), @SpecAssertion(section = BEAN_DISCOVERY, id = "tc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "oa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "tc") })
     public void testNoBeanArchiveModeNone() {
         assertNotDiscoveredAndNotAvailable(FoxtrotLocal.class, Foxtrot.class);
     }

@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modify;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -62,7 +62,7 @@ public class SetBeanAttributesTest extends AbstractTest {
     ModifyingExtension extension;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "bc"), @SpecAssertion(section = PBA, id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bc"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ca") })
     public void testBeanModified() {
 
         assertEquals(getCurrentManager().getBeans(Cat.class, DefaultLiteral.INSTANCE).size(), 0);
@@ -85,7 +85,7 @@ public class SetBeanAttributesTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "cc") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "cc") })
     public void testChangesAreNotPropagated() {
         // No qualifiers, stereotypes, scope
         assertTrue(extension.getCatAnnotatedType().getAnnotations().isEmpty());

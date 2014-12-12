@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.vetoed;
 
-import static org.jboss.cdi.tck.cdi.Sections.PAT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
 import static org.jboss.cdi.tck.cdi.Sections.WHAT_CLASSES_ARE_BEANS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -67,7 +67,7 @@ public class VetoedTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
-            @SpecAssertion(section = PAT, id = "ia"), @SpecAssertion(section = PAT, id = "ib") })
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ia"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ib") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
@@ -77,7 +77,7 @@ public class VetoedTest extends AbstractTest {
     @SuppressWarnings("serial")
     @Test
     @SpecAssertions({ @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
-            @SpecAssertion(section = PAT, id = "ii") })
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ii") })
     public void testPackageLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
         assertFalse(verifyingExtension.getClasses().contains(Fish.class));
@@ -91,8 +91,8 @@ public class VetoedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PAT, id = "ie"),
-            @SpecAssertion(section = PAT, id = "if") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ie"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "if") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
         assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);

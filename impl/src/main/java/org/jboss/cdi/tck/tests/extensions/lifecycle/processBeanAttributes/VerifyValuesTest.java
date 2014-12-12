@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PBA;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -80,7 +80,7 @@ public class VerifyValuesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "baa") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "baa") })
     public void testManagedBeanAnnotated() {
         Annotated alphaAnnotated = extension.getAnnotatedMap().get(Alpha.class);
         assertNotNull(alphaAnnotated);
@@ -93,7 +93,7 @@ public class VerifyValuesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "aa"), @SpecAssertion(section = PBA, id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ad") })
     public void testManagedBeanAttributes() {
 
         assertEquals(getCurrentManager().getBeans(Alpha.class, new NewLiteral(Alpha.class)).size(), 1);
@@ -114,7 +114,7 @@ public class VerifyValuesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "bab") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bab") })
     public void testSessionBeanAnnotated() {
         Annotated deltaAnnotated = extension.getAnnotatedMap().get(Delta.class);
         assertNotNull(deltaAnnotated);
@@ -128,8 +128,8 @@ public class VerifyValuesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "aa"), @SpecAssertion(section = PBA, id = "bab"),
-            @SpecAssertion(section = PBA, id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bab"),
+            @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bb") })
     public void testSessionBeanAttributes() {
         BeanAttributes<Delta> deltaAttributes = extension.getDeltaAttributes();
         assertNotNull(deltaAttributes);
@@ -143,7 +143,7 @@ public class VerifyValuesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "bac") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bac") })
     public void testProducerMethodAnnotated() {
         Annotated bravoAnnotated = extension.getAnnotatedMap().get(Bravo.class);
         assertNotNull(bravoAnnotated);
@@ -155,7 +155,7 @@ public class VerifyValuesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa") })
     public void testProducerMethodBeanAttributes() {
         BeanAttributes<Bravo> attributes = extension.getProducedBravoAttributes();
         assertNotNull(attributes);
@@ -169,7 +169,7 @@ public class VerifyValuesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "bad") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bad") })
     public void testProducerFieldAnnotated() {
         Annotated charlieAnnotated = extension.getAnnotatedMap().get(Charlie.class);
         assertNotNull(charlieAnnotated);
@@ -181,7 +181,7 @@ public class VerifyValuesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa") })
     public void testProducerFieldBeanAttributes() {
         BeanAttributes<Charlie> attributes = extension.getProducedCharlieAttributes();
         assertNotNull(attributes);
@@ -195,7 +195,7 @@ public class VerifyValuesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "ab"), @SpecAssertion(section = PBA, id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ab"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bb") })
     public void testInterceptorBeanAttributes() {
         BeanAttributes<BravoInterceptor> attributes = extension.getBravoInterceptorAttributes();
         assertNotNull(attributes);
@@ -207,7 +207,7 @@ public class VerifyValuesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PBA, id = "ac"), @SpecAssertion(section = PBA, id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ac"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bb") })
     public void testDecoratorBeanAttributes() {
         BeanAttributes<BravoDecorator> attributes = extension.getBravoDecoratorAttributes();
         assertNotNull(attributes);

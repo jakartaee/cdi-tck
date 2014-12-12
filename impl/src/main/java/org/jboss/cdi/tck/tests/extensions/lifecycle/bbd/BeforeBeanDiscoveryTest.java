@@ -17,8 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BBD;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
+import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -57,7 +57,7 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = BBD, id = "a"),
+        @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "a"),
         @SpecAssertion(section = INITIALIZATION, id = "b"),
         @SpecAssertion(section = INITIALIZATION, id = "c")})
     public void testBeforeBeanDiscoveryEventIsCalled() {
@@ -65,7 +65,7 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BBD, id = "ac")
+    @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "ac")
     public void testAddingScopeType() {
         assertTrue(BeforeBeanDiscoveryObserver.isObserved());
         assertEquals(getBeans(RomanEmpire.class).size(), 1);
@@ -75,7 +75,7 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = BBD, id = "ab")
+    @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "ab")
     public void testAddingQualifierByClass() {
         assertTrue(BeforeBeanDiscoveryObserver.isObserved());
         assertEquals(getBeans(Alligator.class).size(), 0);
@@ -86,7 +86,7 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = BBD, id = "aba")
+    @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "aba")
     public void testAddingQualifierByAnnotatedType() {
         assertTrue(BeforeBeanDiscoveryObserver.isObserved());
 
@@ -119,7 +119,7 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({@SpecAssertion(section = BBD, id = "af"), @SpecAssertion(section = BEAN_DISCOVERY, id = "r")})
+    @SpecAssertions({@SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "r")})
     public void testAddAnnotatedType() {
         getUniqueBean(Boss.class);
         assertEquals(getBeans(Bar.class).size(), 0);

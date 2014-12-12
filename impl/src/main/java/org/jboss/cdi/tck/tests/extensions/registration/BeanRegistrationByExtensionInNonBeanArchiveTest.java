@@ -17,8 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.registration;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BBD;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 
 import javax.inject.Inject;
@@ -60,7 +60,7 @@ public class BeanRegistrationByExtensionInNonBeanArchiveTest extends AbstractTes
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
-            @SpecAssertion(section = BBD, id = "af"), @SpecAssertion(section = BEAN_ARCHIVE, id = "n") })
+            @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af"), @SpecAssertion(section = BEAN_ARCHIVE, id = "n") })
     public void shouldFindBeanReference() {
         Assert.assertNotNull(bean);
         Assert.assertTrue(bean.isInvokable());
