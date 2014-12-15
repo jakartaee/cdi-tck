@@ -202,7 +202,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = NEW, id = "yl") })
-    public void testNewBeanCreatedForDisposerMethod(Wizard wizard) {
+    public void testNewBeanCreatedForDisposerMethod(DragonProducer producer) {
 
         Bean<Fireball> bean = getUniqueBean(Fireball.class, NewLiteral.INSTANCE);
         checkNewQualifiedBean(bean, Object.class, Fireball.class);
@@ -212,7 +212,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
         Dragon dragon = dragonBean.create(ctx);
         dragonBean.destroy(dragon, ctx);
 
-        assertTrue(wizard.isDragonDestroyed());
+        assertTrue(producer.isDragonDestroyed());
     }
 
     private <T> void checkNewQualifiedBean(Bean<T> bean, Type... requiredTypes) {
