@@ -19,9 +19,7 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.New;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
 @RequestScoped
@@ -39,8 +37,6 @@ public class Wizard {
     @Tame
     private Dragon dragon;
 
-    private boolean isDragonDestroyed = false;
-
     private Hat hat;
 
     public Wizard() {
@@ -56,23 +52,10 @@ public class Wizard {
         this.staff = staff;
     }
 
-    @Produces
-    @Tame
-    public Dragon summon(@New Dragon dragon) {
-        return dragon;
-    }
-
     public void observeWizards(@Observes Wizard wizard, @New Hat hat) {
         this.hat = hat;
     }
 
-    public void destroyDragon(@Disposes @Tame Dragon dragon, @New Fireball fireball) {
-        isDragonDestroyed = true;
-    }
-
-    public boolean isDragonDestroyed() {
-        return isDragonDestroyed;
-    }
 
     public Tiger getTiger() {
         return tiger;
