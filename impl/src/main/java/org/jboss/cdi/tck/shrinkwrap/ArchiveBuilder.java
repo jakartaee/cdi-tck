@@ -813,7 +813,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                     if (excludedClasses != null && !excludedClasses.isEmpty()) {
                         for (String exludeClassName : excludedClasses) {
                             // Handle annonymous inner classes
-                            if (className.startsWith(exludeClassName))
+                            if (className.equals(exludeClassName))
+                                return;
+                            else if(className.startsWith(exludeClassName) && className.contains("$"))
                                 return;
                         }
                     }

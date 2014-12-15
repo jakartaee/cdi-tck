@@ -57,6 +57,14 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-459 -->
+            <class name="org.jboss.cdi.tck.tests.implementation.enterprise.newBean.NewEnterpriseBeanTest">
+                <methods>
+                    <exclude name="testNewBeanCreatedForProducerMethod"/>
+                    <exclude name="testNewBeanCreatedForDisposerMethod"/>
+                </methods>
+            </class>
+
         </classes>
 
     </test>
