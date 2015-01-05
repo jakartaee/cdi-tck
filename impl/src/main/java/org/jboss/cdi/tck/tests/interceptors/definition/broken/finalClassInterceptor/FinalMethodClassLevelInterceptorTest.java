@@ -52,7 +52,8 @@ public class FinalMethodClassLevelInterceptorTest extends AbstractTest {
                                 .clazz(MissileInterceptor.class.getName()).up()).build();
     }
 
-    @Test(groups = INTEGRATION)
+    //TODO disable due to https://issues.jboss.org/browse/CDI-496
+    @Test(groups = INTEGRATION, enabled = false)
     @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "b")
     public void testFinalMethodWithClassLevelInterceptor() throws Exception {
     }
