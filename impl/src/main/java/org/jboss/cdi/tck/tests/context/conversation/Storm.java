@@ -60,4 +60,8 @@ public class Storm implements Serializable {
         this.strength = strength;
     }
 
+    public Conversation getConversation() {
+        return conversation;
+    }
+
 }
