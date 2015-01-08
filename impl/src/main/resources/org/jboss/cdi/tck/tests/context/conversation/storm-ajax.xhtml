@@ -9,7 +9,7 @@
 <h:body>
 
 	<h:form id="ajaxForm">
-		<h:inputHidden value="#{javax.enterprise.context.conversation.id}" id="conversationId" />
+		<h:inputHidden value="#{storm.conversation.id}" id="conversationId" />
 		<h:inputText value="#{storm.strength}" id="stormStrength" />
 		<h:commandButton action="#{storm.beginConversation}"
 			value="Begin conversation" id="beginConversationButton">
