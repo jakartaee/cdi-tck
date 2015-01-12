@@ -44,7 +44,8 @@ public class CustomCDIProviderTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(CustomCDIProviderTest.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    // disabled due to CDITCK-463
+    @Test(groups = INTEGRATION, enabled = false)
     @SpecAssertion(section = PROVIDER, id = "ba")
     public void testCustomCDIProvider() {
         try {
