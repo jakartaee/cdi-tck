@@ -24,7 +24,7 @@ class ExceptionBean {
 
     @Interceptors({ Interceptor3.class, Interceptor4.class })
     public boolean bar() {
-        return true;
+        return false;
     }
 
     public static void failFirstTwoInvocations() {
