@@ -60,13 +60,6 @@
                 </methods>
             </class>
 
-            <!-- CDITCK-462 -->
-            <class name="org.jboss.cdi.tck.tests.context.conversation.LongRunningConversationPropagatedByFacesContextTest">
-                <methods>
-                    <exclude name="testConversationPropagatedAjax"/>
-                </methods>
-            </class>
-
             <!-- CDITCK-463 -->
             <class name="org.jboss.cdi.tck.tests.lookup.manager.provider.custom.CustomCDIProviderTest">
                 <methods>
