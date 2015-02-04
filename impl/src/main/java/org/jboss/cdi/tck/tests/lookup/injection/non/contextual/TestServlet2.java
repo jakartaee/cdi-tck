@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -20,14 +20,16 @@ import java.io.IOException;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 
+@WebServlet(urlPatterns = "/TestServlet2", loadOnStartup = 1)
 public class TestServlet2 extends HttpServlet {
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorEndpointService.class, wsdlLocation = "WEB-INF/wsdl/TestService.wsdl")
     Translator translatorField;
 
     Translator translator;
@@ -56,7 +58,7 @@ public class TestServlet2 extends HttpServlet {
         init();
     }
 
-    @WebServiceRef(value = TranslatorEndpointService.class)
+    @WebServiceRef(value = TranslatorEndpointService.class, wsdlLocation = "WEB-INF/wsdl/TestService.wsdl")
     private void setTranslator(Translator translator) {
         this.translator = translator;
     }

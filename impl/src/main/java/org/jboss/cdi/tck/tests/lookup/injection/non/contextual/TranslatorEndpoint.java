@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2014, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -18,11 +18,11 @@ package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import javax.jws.WebService;
 
-@WebService(endpointInterface = "org.jboss.cdi.tck.tests.lookup.injection.non.contextual.Translator", serviceName = "Translator")
+@WebService(serviceName = "Translator", targetNamespace = "http://www.something.something", endpointInterface = "org.jboss.cdi.tck.tests.lookup.injection.non.contextual.Translator")
 public class TranslatorEndpoint implements Translator {
 
-    public String translate(String sentence) {
+    @Override
+    public String translate(final String sentence) {
         return "ok";
     }
-
 }
