@@ -20,6 +20,10 @@ import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_INSTANCE;
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_SCOPE_EL;
 import static org.jboss.cdi.tck.cdi.Sections.EL;
 import static org.jboss.cdi.tck.cdi.Sections.NAMES;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.Context;
@@ -45,9 +49,9 @@ public class ResolutionByNameTest extends AbstractTest {
     @Test
     @SpecAssertion(section = DEPENDENT_SCOPE_EL, id = "a")
     public void testQualifiedNameLookup() {
-        assert getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(),
-                "#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class);
-        assert getContextualReference(Counter.class).getCount() == 1;
+        assertTrue(getCurrentConfiguration().getEl()
+                .evaluateValueExpression(getCurrentManager(), "#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class));
+        assertEquals(getContextualReference(Counter.class).getCount(), 1);
     }
 
     @Test
@@ -55,22 +59,22 @@ public class ResolutionByNameTest extends AbstractTest {
     public void testContextCreatesNewInstanceForInjection() {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
         Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
-        assert requestContext.get(tunaBean) == null;
+        assertNull(requestContext.get(tunaBean));
         TunaFarm tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{tunaFarm}",
                 TunaFarm.class);
-        assert tunaFarm.tuna != null;
+        assertNotNull(tunaFarm.tuna);
         long timestamp = tunaFarm.tuna.getTimestamp();
         // Lookup once again - do not create new instance - contextual instance already exists
         Tuna tuna = requestContext.get(tunaBean);
-        assert tuna != null;
-        assert timestamp == tuna.getTimestamp();
+        assertNotNull(tuna);
+        assertEquals(timestamp, tuna.getTimestamp());
     }
 
     @Test
     @SpecAssertion(section = EL, id = "c")
     public void testUnresolvedNameReturnsNull() {
-        assert getCurrentManager().getELResolver().getValue(
-                getCurrentConfiguration().getEl().createELContext(getCurrentManager()), null, "nonExistingTuna") == null;
+        assertNull(
+                getCurrentManager().getELResolver().getValue(getCurrentConfiguration().getEl().createELContext(getCurrentManager()), null, "nonExistingTuna"));
     }
 
     @Test
@@ -78,6 +82,12 @@ public class ResolutionByNameTest extends AbstractTest {
     public void testELResolverReturnsContextualInstance() {
         Salmon salmon = getContextualReference(Salmon.class);
         salmon.setAge(3);
-        assert getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{salmon.age}", Integer.class) == 3;
+        assertEquals(getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{salmon.age}", Integer.class), new Integer(3));
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = NAMES, id = "a") })
+    public void testBeanNameWithSeparatedListOfELIdentifiers() {
+        assertNotNull(getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{magic.golden.fish}", GoldenFish.class));
     }
 }

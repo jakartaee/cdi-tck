@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2015, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -31,12 +31,12 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
-public class NamePrefixTest extends AbstractTest {
+public class ExpandedNamePrefixTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(NamePrefixTest.class).withClasses(Example.class, ExampleWebsite_Broken.class).build();
+        return new WebArchiveBuilder().withTestClass(ExpandedNamePrefixTest.class).withClasses(Foo.class, FooBarBaz.class).build();
     }
 
     @Test
