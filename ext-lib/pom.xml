@@ -3,7 +3,7 @@
     <parent>
         <artifactId>cdi-tck-parent</artifactId>
         <groupId>org.jboss.cdi.tck</groupId>
-        <version>1.2.4-SNAPSHOT</version>
+        <version>1.2.4.Final</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>cdi-tck-ext-lib</artifactId>
