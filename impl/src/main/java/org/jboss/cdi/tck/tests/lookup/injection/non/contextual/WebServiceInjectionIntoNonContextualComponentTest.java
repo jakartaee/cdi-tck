@@ -53,8 +53,7 @@ public class WebServiceInjectionIntoNonContextualComponentTest extends AbstractT
                 .build();
     }
 
-    // Test fails because the wsdl file is not accessible on the expected location during filter/servlet initialization
-    @Test(groups = { JAVAEE_FULL, JAX_WS }, enabled = false)
+    @Test(groups = { JAVAEE_FULL, JAX_WS })
     @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bo")
     public void testServletInitCalledAfterResourceInjection() throws Exception {
         WebClient webClient = new WebClient();
@@ -63,8 +62,7 @@ public class WebServiceInjectionIntoNonContextualComponentTest extends AbstractT
         assertTrue(page.getContent().contains("Servlet init: true"));
     }
 
-    // Test fails because the wsdl file is not accessible on the expected location during filter/servlet initialization
-    @Test(groups = { JAVAEE_FULL, JAX_WS }, enabled = false)
+    @Test(groups = { JAVAEE_FULL, JAX_WS })
     @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "br")
     public void testFilterInitCalledAfterResourceInjection() throws Exception {
         WebClient webClient = new WebClient();

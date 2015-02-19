@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 
-@WebServlet(urlPatterns = "/TestServlet2", loadOnStartup = 1)
+@WebServlet(urlPatterns = "/TestServlet2")
 public class TestServlet2 extends HttpServlet {
 
     @WebServiceRef(value = TranslatorService.class)
