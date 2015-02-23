@@ -88,7 +88,7 @@ public class BeanManagerTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanManagerTest.class)
                 .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Soy.class.getName()).up())
-                .withExtensions(AfterBeanDiscoveryObserver.class, ProcessAnnotatedTypeObserver.class).build();
+                .withExtensions(AfterBeanDiscoveryObserver.class).build();
     }
 
     @Test
@@ -222,18 +222,6 @@ public class BeanManagerTest extends AbstractTest {
         assertEquals(1, annotatedType.getFields().size());
         assertTrue(annotatedType.getMethods().isEmpty());
         assertEquals(3, annotatedType.getTypeClosure().size());
-    }
-
-    // @Test
-    // @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_ANNOTATEDTYPE, id = "b") })
-    public void testObtainingWrappedAnnotatedType() {
-        // FIXME remove the test
-        AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(WrappedBean.class);
-        assertTrue(annotatedType.isAnnotationPresent(Tame.class));
-        assertTrue(annotatedType.isAnnotationPresent(Transactional.class));
-        assertTrue(annotatedType.getFields().isEmpty());
-        assertTrue(annotatedType.getMethods().isEmpty());
-        assertEquals(2, annotatedType.getTypeClosure().size());
     }
 
     @Test

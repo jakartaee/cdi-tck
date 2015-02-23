@@ -57,11 +57,6 @@ public class AfterBeanDiscoveryObserver implements Extension {
         assert event.getBean().getName().equals("cockatoo");
     }
 
-    /**
-     * FIXME revise parameters order according to CDI-88/CDITCK-174 resolution
-     * 
-     * @param event
-     */
     public void observeProcessObserverMethod(@Observes ProcessObserverMethod<Talk, Listener> event) {
         isTalkProcessObserverMethodObserved = true;
     }

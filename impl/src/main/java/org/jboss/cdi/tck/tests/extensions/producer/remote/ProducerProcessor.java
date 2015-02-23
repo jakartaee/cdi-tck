@@ -50,11 +50,6 @@ public class ProducerProcessor implements Extension {
         });
     }
 
-    /**
-     * FIXME revise parameters order according to CDI-88/CDITCK-174 resolution
-     * 
-     * @param event
-     */
     public void processServiceProducerField(@Observes ProcessProducerField<ServiceRemote, ServiceProducer> event) {
         isServiceProducerFieldObserved = true;
     }
