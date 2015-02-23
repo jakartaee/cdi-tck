@@ -34,8 +34,8 @@ public class InfoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.getWriter().append("Foo destroyed:" + observer.getFooDestroyedCount().get());
         resp.setContentType("text/plain");
+        resp.getWriter().append("Foo destroyed:" + observer.getFooDestroyedCount().get());
     }
 
 }

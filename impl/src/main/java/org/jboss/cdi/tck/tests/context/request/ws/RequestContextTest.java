@@ -20,11 +20,12 @@ import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JAX_WS;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.assertTrue;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +35,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Timer;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
@@ -77,18 +79,31 @@ public class RequestContextTest extends AbstractTest {
         String id02 = translator.translate();
         assertNotEquals(id01, id02);
 
-        WebClient webClient = new WebClient();
+        final WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
 
         TextPage info = webClient.getPage(contextPath + "info");
+        Timer timer = new Timer().setDelay(5, TimeUnit.SECONDS).setSleepInterval(1000).addStopCondition(new Timer.StopCondition() {
 
-        Matcher matcher = Pattern.compile("(Foo destroyed:)(\\w+)").matcher(info.getContent());
-        if (matcher.find()) {
-            String value = matcher.group(2);
-            assertEquals(value, "2");
-        } else {
-            fail();
-        }
+            @Override
+            public boolean isSatisfied() {
+                TextPage info = null;
+                try {
+                    info = webClient.getPage(contextPath + "info");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+                Matcher matcher = Pattern.compile("(Foo destroyed:)(\\w+)").matcher(info.getContent());
+                if (matcher.find()) {
+                    String value = matcher.group(2);
+                    return Integer.valueOf(value) == 2 ? true : false;
+                }
+                return false;
+            }
+        }).start();
+
+        assertTrue(timer.isStopConditionsSatisfiedBeforeTimeout());
     }
 
 }
