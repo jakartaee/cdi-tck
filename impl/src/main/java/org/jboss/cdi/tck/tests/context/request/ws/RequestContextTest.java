@@ -23,6 +23,7 @@ import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -78,14 +79,20 @@ public class RequestContextTest extends AbstractTest {
         String id02 = translator.translate();
         assertNotEquals(id01, id02);
 
-        WebClient webClient = new WebClient();
+        final WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
 
-        final TextPage info = webClient.getPage(contextPath + "info");
-
         Timer timer = new Timer().setDelay(5, TimeUnit.SECONDS).setSleepInterval(1000).addStopCondition(new Timer.StopCondition() {
+
             @Override
             public boolean isSatisfied() {
+                TextPage info = null;
+                try {
+                    info = webClient.getPage(contextPath + "info");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
                 Matcher matcher = Pattern.compile("(Foo destroyed:)(\\w+)").matcher(info.getContent());
                 if (matcher.find()) {
                     String value = matcher.group(2);
