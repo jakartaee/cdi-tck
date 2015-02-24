@@ -38,6 +38,7 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-421 & CDITCK-465-->
             <class name="org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout.AroundTimeoutInterceptorTest">
                 <methods>
                     <exclude name=".*"/>

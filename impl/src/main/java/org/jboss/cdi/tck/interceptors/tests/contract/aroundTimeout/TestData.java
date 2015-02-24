@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2015, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,20 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
-import javax.annotation.PreDestroy;
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateless;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-@Stateless
-@RolesAllowed("alarm")
-public class Bell {
+public class TestData {
 
-    public void callFromInterceptor() {
-        TestData.calledFromInterceptor.set(true);
-    }
-
-    @PreDestroy
-    public void preDestroy(){
-        TestData.preDestroyed.set(true);
-    }
+    public static final AtomicBoolean preDestroyed = new AtomicBoolean(false);
+    public static final AtomicBoolean securityContextOk = new AtomicBoolean(false);
+    public static final AtomicBoolean calledFromInterceptor = new AtomicBoolean(false);
 }

@@ -73,9 +73,16 @@ public class AroundTimeoutInterceptorTest extends AbstractTest {
                 return Alarm.timeoutAt != null;
             }
         }).start();
-        assertNotNull(Alarm.timeoutAt);
+        assertNotNull(Alarm.timeoutAt.get());
 
-        assertTrue(AlarmSecurityInterceptor.securityContextOK);
-        assertTrue(Bell.calledFromInterceptor);
+        new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
+            @Override
+            public boolean isSatisfied() {
+                return TestData.preDestroyed.get();
+            }
+        }).start();
+
+        assertTrue(TestData.securityContextOk.get());
+        assertTrue(TestData.calledFromInterceptor.get());
     }
 }
