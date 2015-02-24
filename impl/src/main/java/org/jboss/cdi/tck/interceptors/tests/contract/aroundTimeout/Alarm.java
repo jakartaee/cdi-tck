@@ -18,10 +18,11 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
 import static org.testng.Assert.assertTrue;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.annotation.security.RunAs;
-import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.Timeout;
@@ -34,10 +35,7 @@ import javax.interceptor.Interceptors;
 @RolesAllowed("student")
 public class Alarm {
 
-    public static Long timeoutAt = null;
-
-    @EJB
-    private Bell bell;
+    public static AtomicLong timeoutAt = null;
 
     @Resource
     private SessionContext ctx;
@@ -48,10 +46,8 @@ public class Alarm {
 
     @Timeout
     public void ejbTimeout(Timer timer) {
-        timeoutAt = System.currentTimeMillis();
+        timeoutAt = new AtomicLong(System.currentTimeMillis());
         assertTrue(!this.ctx.isCallerInRole("student"));
         assertTrue(!this.ctx.isCallerInRole("alarm"));
-
-        bell.ring();
     }
 }

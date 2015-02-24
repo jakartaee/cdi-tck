@@ -26,8 +26,6 @@ import javax.interceptor.InvocationContext;
 
 public class AlarmSecurityInterceptor {
 
-    public static boolean securityContextOK = false;
-
     @EJB
     private Bell bell;
 
@@ -41,10 +39,10 @@ public class AlarmSecurityInterceptor {
         // Since a timeout callback method is an internal method of the bean class, it has no client security context
         assertTrue(!this.sc.isCallerInRole("student"));
         assertTrue(!this.sc.isCallerInRole("alarm"));
-        securityContextOK = true;
 
+        TestData.securityContextOk.set(true);
         bell.callFromInterceptor();
-
         return obj;
     }
+
 }
