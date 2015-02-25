@@ -54,12 +54,11 @@ public class InterceptorEnvironmentTest extends AbstractTest {
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             @Override
             public boolean isSatisfied() {
-                return Bar.timeoutAt != null;
+                return TestEndObserver.toBeDestroyed.get();
             }
         }).start();
         assertNotNull(Bar.timeoutAt);
-
-        assertTrue(AroundTimeoutThreadInterceptor.threadOK);
+        assertTrue(AroundTimeoutThreadInterceptor.threadOK.get());
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

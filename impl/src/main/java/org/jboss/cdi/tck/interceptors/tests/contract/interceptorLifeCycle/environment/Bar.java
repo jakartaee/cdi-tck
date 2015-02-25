@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.envir
 
 import static org.testng.Assert.assertEquals;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -36,7 +38,7 @@ public class Bar {
         return 1;
     }
 
-    public static Long timeoutAt = null;
+    public static AtomicLong timeoutAt = null;
 
     @Resource
     private SessionContext ctx;
@@ -49,6 +51,7 @@ public class Bar {
     public void ejbTimeout(Timer timer) {
         assertEquals(Thread.currentThread().getName(), "abc");
         Thread.currentThread().setName("def");
-        timeoutAt = System.currentTimeMillis();
+        timeoutAt = new AtomicLong(System.currentTimeMillis());
     }
+
 }
