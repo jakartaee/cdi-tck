@@ -42,7 +42,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
@@ -85,7 +84,7 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
 
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             public boolean isSatisfied() {
-                return AbstractMessageListener.getProcessedMessages() >= 1;
+                return AbstractMessageListener.isInitializedEventObserver() && AbstractMessageListener.getProcessedMessages() >= 1;
             }
         }).start();
 
