@@ -31,6 +31,13 @@
                 </methods>
             </class>
 
+            <!-- CDI-513 & CDITCK-466 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.broken.passivatingScope.AddingPassivatingScopeTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
             <!-- CDITCK-421 -->
             <class name="org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.AroundInvokeAccessInterceptorTest">
                 <methods>
