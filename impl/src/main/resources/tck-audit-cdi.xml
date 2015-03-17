@@ -374,7 +374,30 @@
         </assertion>
     </section>
 
-    <section id="bean_defining_annotations" title="Bean defining annotations" level="2">
+    <section id="default_bean_discovery_mode" title="Default bean discovery mode" level="2">
+
+        <group>
+            <text>If the bean discovery mode is annotated then:</text>
+            <assertion id="a">
+               <text>bean classes that don’t have bean defining annotation (as defined in Section 2.5.1, “Bean defining annotations”) and are not bean classes of sessions beans, are not discovered</text>
+            </assertion>
+            <assertion id="b">
+                <text>producer methods (as defined in Section 3.3, “Producer methods”) that are not on a session bean and whose bean class does not have a bean defining annotation are not discovered</text>
+            </assertion>
+            <assertion id="c">
+                <text>producer fields (as defined in Section 3.4, “Producer fields”) that are not on a session bean and whose bean class does not have a bean defining annotation are not discovered</text>
+            </assertion>
+            <assertion id="d">
+                <text>disposer methods (as defined in Section 3.5, “Disposer methods”) that are not on a session bean and whose bean class does not have a bean defining annotation are not discovered</text>
+            </assertion>
+            <assertion id="e">
+                <text>observer methods (as defined in Section 10.4.2, “Declaring an observer method”) that are not on a session bean and whose bean class does not have a bean defining annotation are not discovered</text>
+            </assertion>
+        </group>
+
+    </section>
+
+    <section id="bean_defining_annotations" title="Bean defining annotations" level="3">
 
         <assertion id="a" testable="false">
             <text>A bean class may have a bean defining annotation, allowing it to be placed anywhere in an application, as defined in Section 12.1. A bean class with a bean defining annotation is said to be an implicit bean.</text>
@@ -6918,11 +6941,10 @@
         <assertion id="ag">
             <text>If any observer method of the |BeforeBeanDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
-        
-         <assertion id="b">
+        <assertion id="b">
             <text>If any BeforeBeanDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
-        
+
     </section>
 
     <section id="after_type_discovery" title="AfterTypeDiscovery event" level="3">
@@ -6980,7 +7002,7 @@
         <assertion id="i">
             <text>If any observer method of an |AfterTypeDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
-        
+
         <assertion id="j">
         	<text>If any AfterTypeDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
@@ -7046,7 +7068,7 @@
         <assertion id="g">
             <text>If any observer method of the |AfterBeanDiscovery| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
-        
+
         <assertion id="h">
         	<text>If any AfterBeanDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
@@ -7068,7 +7090,7 @@
         <assertion id="d">
             <text>The container must not allow any request to be processed by the deployment until all observers of this event return.</text>
         </assertion>
-        
+
         <assertion id="e">
         	<text>If any AfterDeploymentValidation method is called outside of the observer method invocation,an IllegalStateException is thrown.</text>
         </assertion>
@@ -7191,7 +7213,7 @@
         <assertion id="e">
             <text>If any observer method of a |ProcessAnnotatedType| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
-        
+
         <assertion id="f">
         	<text>If any ProcessAnnotatedType method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
@@ -7670,7 +7692,7 @@
         <assertion id="db">
             <text>If any observer method of a |ProcessObserverMethod| event throws an exception, the exception is treated as a definition error by the container.</text>
         </assertion>
-        
+
         <assertion id="dc">
             <text>If any ProcessObserverMethod method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
