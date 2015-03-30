@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
-import static junit.framework.Assert.assertTrue;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JAX_WS;
 import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
 
