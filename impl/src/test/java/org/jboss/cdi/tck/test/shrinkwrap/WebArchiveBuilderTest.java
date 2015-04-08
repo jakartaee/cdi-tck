@@ -16,9 +16,13 @@
  */
 package org.jboss.cdi.tck.test.shrinkwrap;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.lang.StringUtils;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -105,6 +109,20 @@ public class WebArchiveBuilderTest {
         assertDoesNotContainClass(archive, TestClass.class);
         assertContainsInnerClass(archive, Baz.class);
         assertDoesNotContainInnerClass(archive, Ping.class);
+    }
+    
+    @Test
+    public void testGeneratedArchiveName() throws NoSuchAlgorithmException {
+        WebArchive archive = new WebArchiveBuilder().withTestClass(TestClass.class).build();
+        MessageDigest md = MessageDigest.getInstance("SHA-1");
+        md.update(TestClass.class.getName().getBytes());
+        byte[] digest = md.digest();
+        
+        StringBuilder hexString = new StringBuilder();
+        for (int i = 0; i < digest.length; i++) {
+            hexString.append(Integer.toHexString(0xFF & digest[i]));
+        }
+        assertEquals(archive.getName().split("\\.")[0], hexString.toString());
     }
 
     private <A extends Archive<?>, T> void assertContainsClass(A archive, Class<T> clazz) {
