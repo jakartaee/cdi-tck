@@ -99,7 +99,12 @@ public class EnterpriseArchiveBuilder extends ArchiveBuilder<EnterpriseArchiveBu
         if (getName() == null) {
             // Let arquillian generate archive name in order to avoid reload issues in AS7 (AS7-1638)
             // enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, DEFAULT_EAR_NAME);
-            enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class);
+            String hash = getSha1OfTestClass();
+            if (hash != null) {
+                enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, hash + ".ear");
+            } else {
+                enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class);
+            }
         } else {
             enterpriseArchive = ShrinkWrap.create(EnterpriseArchive.class, getName());
         }

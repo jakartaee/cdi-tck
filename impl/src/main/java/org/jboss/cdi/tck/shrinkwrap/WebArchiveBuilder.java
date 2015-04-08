@@ -41,8 +41,8 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
     /**
      * Add default EJB module dependency to manifest. Useful when building custom web module of enterprise archive.
      *
-     * @see EnterpriseArchiveBuilder#DEFAULT_EJB_MODULE_NAME
      * @return self
+     * @see EnterpriseArchiveBuilder#DEFAULT_EJB_MODULE_NAME
      */
     public WebArchiveBuilder withDefaultEjbModuleDependency() {
         this.hasDefaultEjbModuleDependency = true;
@@ -51,7 +51,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
 
     /**
      * Set the beans.xml descriptor target path base.
-     *
+     * <p/>
      * By default the target base is <code>null</code> and the beans.xml descriptor is placed in WEB-INF dir. However CDI 1.1
      * allows an alternative location: WEB-INF/classes/META-INF.
      *
@@ -76,7 +76,12 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
         if (getName() == null) {
             // Let arquillian generate archive name in order to avoid reload issues in AS7 (AS7-1638)
             // webArchive = ShrinkWrap.create(WebArchive.class, DEFAULT_WAR_NAME);
-            webArchive = ShrinkWrap.create(WebArchive.class);
+            String hash = getSha1OfTestClass();
+            if (hash != null) {
+                webArchive = ShrinkWrap.create(WebArchive.class, hash + ".war");
+            } else {
+                webArchive = ShrinkWrap.create(WebArchive.class);
+            }
         } else {
             webArchive = ShrinkWrap.create(WebArchive.class, getName());
         }
