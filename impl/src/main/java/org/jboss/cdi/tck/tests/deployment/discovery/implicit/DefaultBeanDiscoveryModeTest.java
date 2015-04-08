@@ -30,6 +30,7 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -41,6 +42,7 @@ import org.testng.annotations.Test;
  * @author Tomas Remes
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@Test(groups = TestGroups.INTEGRATION)
 public class DefaultBeanDiscoveryModeTest extends AbstractTest {
 
     @Inject
