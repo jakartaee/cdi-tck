@@ -5451,15 +5451,7 @@
         </assertion>
 
         <assertion id="d">
-            <text>An event qualifier type is a Java annotation defined as |@Target({FIELD, PARAMETER})| ~or |@Target({METHOD, FIELD, PARAMETER, TYPE})| and |@Retention(RUNTIME)|~</text>
-        </assertion>
-
-        <assertion id="e">
-            <text>An event qualifier type is a Java annotation defined as ~|@Target({FIELD, PARAMETER})| or~ |@Target({METHOD, FIELD, PARAMETER, TYPE})| ~and |@Retention(RUNTIME)|~</text>
-        </assertion>
-
-        <assertion id="f">
-            <text>An event qualifier type is a Java annotation defined as ~|@Target({FIELD, PARAMETER})| or |@Target({METHOD, FIELD, PARAMETER, TYPE})| and ~|@Retention(RUNTIME)|</text>
+            <text>An event qualifier type is a Java annotation defined as |@Target({FIELD, PARAMETER})| or |@Target({METHOD, FIELD, PARAMETER, TYPE})|</text>
         </assertion>
 
         <assertion id="g">

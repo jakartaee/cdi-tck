@@ -53,7 +53,7 @@ public class EventBindingTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "e")
+    @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "d")
     public void testEventBindingTypeTargetsFieldParameterElementTypes() {
         Animal animal = new Animal();
         getCurrentManager().fireEvent(animal, new WildAnnotationLiteral());
@@ -64,7 +64,7 @@ public class EventBindingTypesTest extends AbstractTest {
      * This test ensures that an event binding type without runtime retention is effectively invisible
      */
     @Test
-    @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "f")
+    @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "d")
     public void testNonRuntimeBindingTypeIsNotAnEventBindingType() {
         DiscerningObserver observer = getContextualReference(DiscerningObserver.class);
         observer.reset();
@@ -78,7 +78,7 @@ public class EventBindingTypesTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
-    @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "f")
+    @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "d")
     public void testFireEventWithNonRuntimeBindingTypeFails() {
         getCurrentManager().fireEvent(new Animal(), new AnnotationLiteral<NonRuntimeBindingType>() {
         });
