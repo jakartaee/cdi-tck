@@ -58,7 +58,7 @@ public class SelectedAlternativeManagedBeanInjectionAvailabilityTest extends Abs
                 .notTestArchive()
                 .withDefaultEjbModuleDependency()
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(AlternativeFoo.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeFoo.class.getName())
                                 .up()).withClasses(SelectedAlternativeManagedBeanInjectionAvailabilityTest.class, WebBar.class)
                 .build());
 

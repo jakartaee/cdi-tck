@@ -44,7 +44,7 @@ public class DifferentTypeParametersTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DifferentTypeParametersTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(RadioDecorator.class.getName()).up())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(RadioDecorator.class.getName()).up())
                 .build();
     }
 

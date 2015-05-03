@@ -45,7 +45,7 @@ public class FinalMethodWithInheritedClassLevelInterceptorTest extends AbstractT
                 .withTestClassDefinition(FinalMethodWithInheritedClassLevelInterceptorTest.class)
                 .withClasses(Jumbojet.class, Boeing.class, LandingBinding.class, LandingInterceptor.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(LandingInterceptor.class.getName()).up()).build();
     }
 

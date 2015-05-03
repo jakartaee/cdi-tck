@@ -56,7 +56,7 @@ public class AlternativeInLibraryWithExtensionTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(AlternativeInLibraryWithExtensionTest.class)
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(BarAlternative.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(BarAlternative.class.getName())
                                 .up(), Foo.class, Bar.class, BarAlternative.class, NoopExtension.class).build();
     }
 

@@ -46,7 +46,7 @@ public class AlternativeMetadataInterceptorTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(AlternativeMetadataInterceptorTest.class)
                 .withClasses(InterceptorExtension.class, Login.class, LoginInterceptor.class, LoginInterceptorBinding.class, Secured.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(LoginInterceptor.class.getName()).up())
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(LoginInterceptor.class.getName()).up())
                 .withExtension(InterceptorExtension.class).build();
     }
 

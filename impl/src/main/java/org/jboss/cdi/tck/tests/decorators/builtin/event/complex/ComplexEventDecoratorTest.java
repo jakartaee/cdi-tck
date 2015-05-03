@@ -57,7 +57,7 @@ public class ComplexEventDecoratorTest extends AbstractTest {
                 .withTestClassPackage(ComplexEventDecoratorTest.class)
                 .withExtension(OrderedEventDeliveryExtension.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(OrderedEventDeliveryDecorator.class.getName()).up()).build();
     }
 

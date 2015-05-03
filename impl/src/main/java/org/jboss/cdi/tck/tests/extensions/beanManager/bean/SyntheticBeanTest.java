@@ -56,8 +56,8 @@ public class SyntheticBeanTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(SyntheticBeanTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(SimpleInterceptor.class.getName())
-                                .up().createDecorators().clazz(VehicleDecorator.class.getName()).up())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(SimpleInterceptor.class.getName())
+                                .up().getOrCreateDecorators().clazz(VehicleDecorator.class.getName()).up())
                 .withExtension(BeanExtension.class).build();
     }
 

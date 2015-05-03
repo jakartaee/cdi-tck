@@ -64,7 +64,7 @@ public class CustomInterceptorInvocationTest extends AbstractTest {
                         InterceptedBean.class)
                 .withExtension(CustomInterceptorExtension.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(FooInterceptor.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(FooInterceptor.class.getName())
                                 .up()).build();
     }
 

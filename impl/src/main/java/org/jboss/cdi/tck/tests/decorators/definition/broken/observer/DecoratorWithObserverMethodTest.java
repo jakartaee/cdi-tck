@@ -45,7 +45,7 @@ public class DecoratorWithObserverMethodTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorWithObserverMethodTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(FilesystemLogger.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(FilesystemLogger.class.getName())
                                 .up()).build();
     }
 

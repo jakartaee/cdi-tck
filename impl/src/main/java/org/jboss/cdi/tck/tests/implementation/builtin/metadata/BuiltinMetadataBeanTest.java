@@ -59,8 +59,8 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(BuiltinMetadataBeanTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(YoghurtInterceptor.class.getName()).up().createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
+                                .clazz(YoghurtInterceptor.class.getName()).up().getOrCreateDecorators()
                                 .clazz(MilkProductDecorator.class.getName()).up()).build();
     }
 

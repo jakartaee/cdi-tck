@@ -56,7 +56,7 @@ public class GlobalInterceptorOrderingTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createInterceptors().clazz(LegacyInterceptor1.class.getName(), LegacyInterceptor2.class.getName(),
+                                .getOrCreateInterceptors().clazz(LegacyInterceptor1.class.getName(), LegacyInterceptor2.class.getName(),
                                         LegacyInterceptor3.class.getName()).clazz().up())
                 .withBeanLibrary(Transactional.class, AbstractInterceptor.class, Service.class,
                         GloballyEnabledInterceptor1.class, GloballyEnabledInterceptor3.class,

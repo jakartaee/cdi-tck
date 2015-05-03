@@ -42,7 +42,7 @@ public class Specialization05Test extends AbstractTest {
                 .withTestClassDefinition(Specialization05Test.class)
                 .noDefaultWebModule()
                 .withBeanLibrary(Factory.class, Product.class, InjectedBean1.class, FactoryEvent.class)
-                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(AlternativeSpecializedFactory.class.getName()).up(),
+                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeSpecializedFactory.class.getName()).up(),
                         AlternativeSpecializedFactory.class).build();
 
         enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()

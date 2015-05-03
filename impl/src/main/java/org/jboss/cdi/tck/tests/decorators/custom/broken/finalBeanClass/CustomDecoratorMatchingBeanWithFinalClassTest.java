@@ -42,7 +42,7 @@ public class CustomDecoratorMatchingBeanWithFinalClassTest extends AbstractTest 
         return new WebArchiveBuilder()
                 .withTestClassPackage(CustomDecoratorMatchingBeanWithFinalClassTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(VehicleDecorator.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(VehicleDecorator.class.getName())
                                 .up()).withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 

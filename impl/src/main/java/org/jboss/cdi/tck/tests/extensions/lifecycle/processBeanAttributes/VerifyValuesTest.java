@@ -73,9 +73,9 @@ public class VerifyValuesTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(VerifyValuesTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
                                 .clazz(Alpha.class.getName(), BravoProducer.class.getName(), CharlieProducer.class.getName())
-                                .up().createInterceptors().clazz(BravoInterceptor.class.getName()).up().createDecorators()
+                                .up().getOrCreateInterceptors().clazz(BravoInterceptor.class.getName()).up().getOrCreateDecorators()
                                 .clazz(BravoDecorator.class.getName()).up()).withExtension(VerifyingExtension.class).build();
     }
 

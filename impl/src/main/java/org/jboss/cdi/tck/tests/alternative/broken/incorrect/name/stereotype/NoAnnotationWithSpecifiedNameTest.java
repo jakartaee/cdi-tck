@@ -40,7 +40,7 @@ public class NoAnnotationWithSpecifiedNameTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(NoAnnotationWithSpecifiedNameTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
                                 .stereotype("org.jboss.cdi.tck.tests.policy.broken.incorrect.name.stereotype.Mock").up())
                 .build();
     }

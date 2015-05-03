@@ -40,7 +40,7 @@ public class SameTypeListedTwiceTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(SameTypeListedTwiceTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
                                 .clazz(Dog.class.getName(), Cat.class.getName(), Cat.class.getName()).up()).build();
     }
 

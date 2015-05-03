@@ -46,7 +46,7 @@ public class DecoratorWithInvalidAbstractMethodTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorWithInvalidAbstractMethodTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(ThiefDecorator.class.getName()).up())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(ThiefDecorator.class.getName()).up())
                 .build();
     }
 

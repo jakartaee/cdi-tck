@@ -45,7 +45,7 @@ public class DelegateTypeImplementsParameterizedDecoratedTypeTest extends Abstra
         return new WebArchiveBuilder()
                 .withTestClassPackage(DelegateTypeImplementsParameterizedDecoratedTypeTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(TimestampLogger.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(TimestampLogger.class.getName())
                                 .up()).build();
     }
 

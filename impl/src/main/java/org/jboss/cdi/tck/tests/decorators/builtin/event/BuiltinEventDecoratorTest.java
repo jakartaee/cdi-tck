@@ -54,7 +54,7 @@ public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinEventDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(FooEventDecorator.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(FooEventDecorator.class.getName())
                         .clazz(StringEventDecorator.class.getName()).clazz(CharSequenceEventDecorator.class.getName())
                                 .up()).build();
     }

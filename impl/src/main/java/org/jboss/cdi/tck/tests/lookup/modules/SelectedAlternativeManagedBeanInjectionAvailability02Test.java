@@ -38,7 +38,7 @@ public class SelectedAlternativeManagedBeanInjectionAvailability02Test extends A
     public static WebArchive createTestArchive() {
         WebArchive webArchive = new WebArchiveBuilder().withTestClass(SelectedAlternativeManagedBeanInjectionAvailability02Test.class)
                 .withClasses(AlternativeFoo.class).withBeanLibrary(Foo.class, Bar.class)
-                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(AlternativeFoo.class.getName()).up(), WebBar.class)
+                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeFoo.class.getName()).up(), WebBar.class)
                 .build();
 
         return webArchive;

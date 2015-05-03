@@ -86,7 +86,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createInterceptors()
+                                .getOrCreateInterceptors()
                                 .clazz(AtomicInterceptor.class.getName(), MissileInterceptor.class.getName(),
                                         SecureInterceptor.class.getName(), TransactionalInterceptor.class.getName(),
                                         FileLogger.class.getName(), NetworkLogger.class.getName()).up()).build();

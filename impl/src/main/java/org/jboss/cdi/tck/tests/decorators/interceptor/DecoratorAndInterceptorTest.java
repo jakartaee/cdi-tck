@@ -21,9 +21,11 @@ import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
+import java.util.List;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
-import java.util.List;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -44,9 +46,9 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorAndInterceptorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(FooInterceptor1.class.getName(), FooInterceptor2.class.getName()).up()
-                                .createDecorators().clazz(FooDecorator1.class.getName(), FooDecorator2.class.getName()).up())
+                                .getOrCreateDecorators().clazz(FooDecorator1.class.getName(), FooDecorator2.class.getName()).up())
                 .build();
     }
 

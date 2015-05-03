@@ -42,7 +42,7 @@ public class EnterpriseBeanWithNonPassivatingInterceptorTest extends AbstractTes
         return new WebArchiveBuilder()
                 .withTestClassPackage(EnterpriseBeanWithNonPassivatingInterceptorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(DigitalInterceptor.class.getName()).up()).build();
     }
 

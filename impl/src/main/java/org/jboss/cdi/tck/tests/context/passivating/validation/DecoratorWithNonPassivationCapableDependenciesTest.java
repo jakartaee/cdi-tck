@@ -52,7 +52,7 @@ public class DecoratorWithNonPassivationCapableDependenciesTest extends Abstract
                 .withTestClass(DecoratorWithNonPassivationCapableDependenciesTest.class)
                 .withClasses(Engine.class, Ferry.class, Vessel.class, VesselDecorator.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(VesselDecorator.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(VesselDecorator.class.getName())
                                 .up()).build();
     }
 

@@ -40,7 +40,7 @@ public class SameClassListedTwiceInBeansXmlTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(SameClassListedTwiceInBeansXmlTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(FordInterceptor.class.getName(), FordInterceptor.class.getName()).up()).build();
     }
 

@@ -47,7 +47,7 @@ public class EJBDecoratorInvocationTest extends AbstractTest {
                 .withTestClass(EJBDecoratorInvocationTest.class)
                 .withClasses(PigSty.class, PigStyImpl.class, PigStyDecorator.class, Pig.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(PigStyDecorator.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(PigStyDecorator.class.getName())
                                 .up()).build();
     }
 

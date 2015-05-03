@@ -47,7 +47,7 @@ public class StatefulSessionBeanTest extends AbstractTest {
                 .withTestClass(StatefulSessionBeanTest.class)
                 .withClasses(Digital.class, DigitalInterceptor.class, Telephone.class, TelephoneLine.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(DigitalInterceptor.class.getName()).up()).build();
     }
 

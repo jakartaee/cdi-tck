@@ -38,7 +38,7 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(MultipleInterceptorBindingsTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(MissileInterceptor.class.getName(), LockInterceptor.class.getName()).up()).build();
     }
 

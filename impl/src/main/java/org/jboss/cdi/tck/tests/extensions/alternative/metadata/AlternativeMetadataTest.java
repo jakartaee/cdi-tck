@@ -54,8 +54,9 @@ public class AlternativeMetadataTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AlternativeMetadataTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(GroceryInterceptor.class.getName()).up())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
+                                .clazz(GroceryInterceptor.class.getName()).up()
+                )
                 .withExtension(ProcessAnnotatedTypeObserver.class).build();
     }
 

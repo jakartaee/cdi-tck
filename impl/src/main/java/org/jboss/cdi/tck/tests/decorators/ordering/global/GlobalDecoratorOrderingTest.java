@@ -59,7 +59,7 @@ public class GlobalDecoratorOrderingTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createDecorators()
+                                .getOrCreateDecorators()
                                 .clazz(LegacyDecorator1.class.getName(), LegacyDecorator2.class.getName(),
                                         LegacyDecorator3.class.getName()).up())
                 .withBeanLibrary(AbstractDecorator.class, Decorated.class, GloballyEnabledDecorator1.class,

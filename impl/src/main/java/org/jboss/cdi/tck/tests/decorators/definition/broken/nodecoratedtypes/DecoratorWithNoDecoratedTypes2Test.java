@@ -49,7 +49,7 @@ public class DecoratorWithNoDecoratedTypes2Test extends AbstractTest {
                 .withTestClass(DecoratorWithNoDecoratedTypes1Test.class)
                 .withClasses(Foo.class, FooDecorator.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(FooDecorator.class.getName()).up())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(FooDecorator.class.getName()).up())
                 .build();
     }
 

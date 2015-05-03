@@ -47,7 +47,7 @@ public class EnterpriseStereotypeAlternativeSpecializeTest extends AbstractTest 
                 .withTestClass(EnterpriseStereotypeAlternativeSpecializeTest.class)
                 .withClasses(Mock.class, Service.class, MockService.class, RealService.class, AbstractService.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().stereotype(Mock.class.getName()).up())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().stereotype(Mock.class.getName()).up())
                 .build();
     }
 

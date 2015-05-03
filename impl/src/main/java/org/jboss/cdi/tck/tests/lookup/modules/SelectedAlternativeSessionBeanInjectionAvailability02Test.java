@@ -40,7 +40,7 @@ public class SelectedAlternativeSessionBeanInjectionAvailability02Test extends A
 
         WebArchive webArchive = new WebArchiveBuilder().withTestClass(SelectedAlternativeSessionBeanInjectionAvailability02Test.class)
                 .withClasses(AlternativeEjbFoo.class, EjbFooLocal.class).withBeanLibrary(Foo.class, Bar.class)
-                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(AlternativeEjbFoo.class.getName()).up(), WebBar.class)
+                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeEjbFoo.class.getName()).up(), WebBar.class)
                 .build();
 
         return webArchive;

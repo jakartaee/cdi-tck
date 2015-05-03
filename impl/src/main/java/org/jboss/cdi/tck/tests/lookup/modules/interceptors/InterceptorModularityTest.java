@@ -61,7 +61,7 @@ public class InterceptorModularityTest extends AbstractTest {
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
                 .withTestClassDefinition(InterceptorModularityTest.class)
                 .withClasses(Checker.class, BarBinding.class, Animal.class, Cow.class, BarSuperInterceptor.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Cow.class.getName()).up())
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Cow.class.getName()).up())
                 .noDefaultWebModule().build();
 
         JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class, TEST1_JAR)

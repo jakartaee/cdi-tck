@@ -44,7 +44,7 @@ public class InterceptorOrderTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createInterceptors()
+                                .getOrCreateInterceptors()
                                 .clazz(SecondInterceptor.class.getName(), FirstInterceptor.class.getName(),
                                         TransactionalInterceptor.class.getName()).up()).build();
     }

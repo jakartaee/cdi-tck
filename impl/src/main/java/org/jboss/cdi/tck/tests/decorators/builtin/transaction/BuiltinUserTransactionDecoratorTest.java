@@ -51,7 +51,7 @@ public class BuiltinUserTransactionDecoratorTest extends AbstractTest {
         return new EnterpriseArchiveBuilder()
                 .withTestClassPackage(BuiltinUserTransactionDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(UserTransactionDecorator.class.getName()).up()).build();
     }
 

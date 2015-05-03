@@ -47,7 +47,7 @@ public class StatefulSessionBeanXmlDescriptorTest extends AbstractTest {
                 .withTestClass(StatefulSessionBeanXmlDescriptorTest.class)
                 .withClasses(Digital.class, DigitalInterceptor.class, Elephant.class, ElephantLocal.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(DigitalInterceptor.class.getName()).up())
                 .build()
                 .addAsWebInfResource(StatefulSessionBeanXmlDescriptorTest.class.getPackage(), "ejb-jar.xml", "ejb-jar.xml");

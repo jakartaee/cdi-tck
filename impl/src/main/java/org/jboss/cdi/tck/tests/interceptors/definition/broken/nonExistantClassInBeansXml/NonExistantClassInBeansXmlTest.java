@@ -38,7 +38,7 @@ public class NonExistantClassInBeansXmlTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(NonExistantClassInBeansXmlTest.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createInterceptors().clazz("com.acme.Foo").up())
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz("com.acme.Foo").up())
                 .build();
     }
 

@@ -58,8 +58,8 @@ public class NewSimpleBeanTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(NewSimpleBeanTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Tiger.class.getName()).up()
-                                .createInterceptors().clazz(OrderInterceptor.class.getName()).up()).build();
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Tiger.class.getName()).up()
+                                .getOrCreateInterceptors().clazz(OrderInterceptor.class.getName()).up()).build();
     }
 
     @Test

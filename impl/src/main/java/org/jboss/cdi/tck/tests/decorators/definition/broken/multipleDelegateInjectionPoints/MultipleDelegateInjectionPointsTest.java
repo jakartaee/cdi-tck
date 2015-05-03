@@ -44,7 +44,7 @@ public class MultipleDelegateInjectionPointsTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(MultipleDelegateInjectionPointsTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(TimestampLogger.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(TimestampLogger.class.getName())
                                 .up()).build();
     }
 

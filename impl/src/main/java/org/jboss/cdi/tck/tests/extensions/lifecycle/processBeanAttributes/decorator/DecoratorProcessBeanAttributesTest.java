@@ -47,10 +47,10 @@ public class DecoratorProcessBeanAttributesTest extends AbstractTest {
                 .withExtension(VerifyingExtension.class)
                 .withBeanLibrary(BravoDecorator.class, Bravo.class)
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(AlphaDecorator.class.getName(), BravoDecorator.class.getName()).up())
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(AlphaDecorator.class.getName(), BravoDecorator.class.getName()).up()).build();
     }
 

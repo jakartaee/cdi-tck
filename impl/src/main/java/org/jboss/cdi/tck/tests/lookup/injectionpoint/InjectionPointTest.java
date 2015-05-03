@@ -64,7 +64,7 @@ public class InjectionPointTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InjectionPointTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(AnimalDecorator1.class.getName(), AnimalDecorator2.class.getName(), AnimalDecorator3.class.getName()).up())
                 .build();
     }

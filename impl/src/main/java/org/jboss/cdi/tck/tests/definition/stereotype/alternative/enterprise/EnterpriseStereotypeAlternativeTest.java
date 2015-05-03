@@ -47,7 +47,7 @@ public class EnterpriseStereotypeAlternativeTest extends AbstractTest {
                 .withTestClass(EnterpriseStereotypeAlternativeTest.class)
                 .withClasses(Mock.class, SimpleAlternativeService.class, Service.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().stereotype(Mock.class.getName()).up())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().stereotype(Mock.class.getName()).up())
                 .build();
     }
 

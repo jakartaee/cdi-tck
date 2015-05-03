@@ -54,7 +54,7 @@ public class AlternativeAvailabilityTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AlternativeAvailabilityTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
                                 .clazz(Chicken.class.getName(), EnabledSheepProducer.class.getName())
                                 .stereotype(EnabledAlternativeStereotype.class.getName()).up()).build();
     }

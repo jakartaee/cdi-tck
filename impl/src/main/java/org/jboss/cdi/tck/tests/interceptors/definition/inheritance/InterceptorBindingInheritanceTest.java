@@ -46,7 +46,7 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorBindingInheritanceTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(SquirrelInterceptor.class.getName(), WoodpeckerInterceptor.class.getName()).up())
                 .build();
     }

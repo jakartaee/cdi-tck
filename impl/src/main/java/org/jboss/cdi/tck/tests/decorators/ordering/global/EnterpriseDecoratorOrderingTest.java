@@ -76,7 +76,7 @@ public class EnterpriseDecoratorOrderingTest extends AbstractTest {
                 .withTestClassDefinition(EnterpriseDecoratorOrderingTest.class)
                 .withClasses(DecoratedImpl.class, LegacyDecorator2.class)
                 .withBeansXml(Descriptors.create(BeansDescriptor.class)
-                        .createDecorators().clazz(LegacyDecorator2.class.getName()).up())
+                        .getOrCreateDecorators().clazz(LegacyDecorator2.class.getName()).up())
                 //B
                 .withBeanLibrary(Decorated.class, GloballyEnabledDecorator3.class)
                 //C
@@ -88,7 +88,7 @@ public class EnterpriseDecoratorOrderingTest extends AbstractTest {
                 .create(JavaArchive.class, ejbJar)
                 .addClasses(DummyDao.class, GloballyEnabledDecorator2.class, GloballyEnabledDecorator5.class, LegacyDecorator3.class)
                 .addAsManifestResource(
-                        new StringAsset(Descriptors.create(BeansDescriptor.class).createDecorators()
+                        new StringAsset(Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(LegacyDecorator3.class.getName()).up().exportAsString()), "beans.xml")
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
@@ -102,7 +102,7 @@ public class EnterpriseDecoratorOrderingTest extends AbstractTest {
                 //F
                 .withClasses(EnterpriseDecoratorOrderingTest.class, GloballyEnabledDecorator1.class, LegacyDecorator1.class)
                 .withBeansXml(Descriptors.create(BeansDescriptor.class)
-                        .createDecorators().clazz(LegacyDecorator1.class.getName()).up())
+                        .getOrCreateDecorators().clazz(LegacyDecorator1.class.getName()).up())
                 //G
                 .withBeanLibrary(GloballyEnabledDecorator4.class)
                 .build()

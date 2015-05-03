@@ -54,7 +54,7 @@ public class CDIProviderRuntimeTest extends AbstractTest {
                 .withClasses(Alpha.class, Powerful.class, PowerfulLiteral.class, AlphaLocator.class)
                 // BDA01
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Bravo.class.getName()).up(),
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Bravo.class.getName()).up(),
                         Bravo.class, BravoLocator.class, BravoMarker.class).build();
     }
 

@@ -75,16 +75,16 @@ public class WebArchiveModulesTest extends AbstractTest {
                 // A
                 .withClasses(Foo.class, Secured.class, SecurityInterceptor.class, Business.class, BusinessOperationEvent.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(AlternativeBar.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeBar.class.getName())
                                 .up())
                 // B
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(SecurityInterceptor.class.getName()).up(), Bar.class, AlternativeBar.class,
                         BarInspector.class)
                 // C
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(LoggingDecorator.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(LoggingDecorator.class.getName())
                                 .up(), Baz.class, LoggingDecorator.class, Bazinga.class)
                 // D
                 .withBeanLibrary(Qux.class, ContainerEventsObserver.class, LegacyServiceProducer.class)

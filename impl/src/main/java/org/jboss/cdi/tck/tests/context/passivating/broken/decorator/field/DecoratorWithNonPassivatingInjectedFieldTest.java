@@ -40,7 +40,7 @@ public class DecoratorWithNonPassivatingInjectedFieldTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorWithNonPassivatingInjectedFieldTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(CityDecorator.class.getName()).up())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(CityDecorator.class.getName()).up())
                 .build();
     }
 

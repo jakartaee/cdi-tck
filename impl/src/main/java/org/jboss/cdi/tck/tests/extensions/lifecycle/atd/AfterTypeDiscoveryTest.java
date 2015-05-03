@@ -55,9 +55,9 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
                 .withExtension(AfterTypeDiscoveryObserver.class)
                 .withLibrary(Boss.class, Foo.class, Bar.class, Pro.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(CharlieInterceptor.class.getName()).up().createDecorators()
-                                .clazz(CharlieDecorator.class.getName()).up().createAlternatives()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
+                                .clazz(CharlieInterceptor.class.getName()).up().getOrCreateDecorators()
+                                .clazz(CharlieDecorator.class.getName()).up().getOrCreateAlternatives()
                                 .clazz(CharlieAlternative.class.getName()).up()).build();
     }
 

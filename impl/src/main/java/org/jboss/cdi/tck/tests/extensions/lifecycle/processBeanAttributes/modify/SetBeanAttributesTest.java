@@ -54,7 +54,7 @@ public class SetBeanAttributesTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(SetBeanAttributesTest.class)
                 .withExtension(ModifyingExtension.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Cat.class.getName()).up())
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Cat.class.getName()).up())
                 .build();
     }
 

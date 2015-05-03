@@ -59,7 +59,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
                         Fireball.class.getName())
                 .withLibrary(Tiger.class, Spell.class, Staff.class, Dragon.class, Hat.class, Fireball.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(OrderInterceptor.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(OrderInterceptor.class.getName())
                                 .up()).build();
     }
 

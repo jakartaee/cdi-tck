@@ -45,7 +45,7 @@ public class DelegateInjectionPointTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DelegateInjectionPointTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(TimestampLogger.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(TimestampLogger.class.getName())
                                 .up()).build();
     }
 

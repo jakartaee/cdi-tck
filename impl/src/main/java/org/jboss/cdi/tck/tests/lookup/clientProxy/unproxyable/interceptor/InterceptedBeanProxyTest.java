@@ -2,7 +2,6 @@ package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.interceptor;
 
 import static org.jboss.cdi.tck.cdi.Sections.UNPROXYABLE;
 
-import javax.enterprise.inject.spi.DefinitionException;
 import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -28,7 +27,7 @@ public class InterceptedBeanProxyTest extends AbstractTest {
 				.withTestClassPackage(InterceptedBeanProxyTest.class)
 				.withBeansXml(
 						Descriptors.create(BeansDescriptor.class)
-								.createInterceptors()
+								.getOrCreateInterceptors()
 								.clazz(FishInterceptor.class.getName()).up())
 				.build();
 	}
