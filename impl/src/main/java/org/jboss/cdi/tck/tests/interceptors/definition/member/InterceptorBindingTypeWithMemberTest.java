@@ -48,7 +48,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createInterceptors()
+                                .getOrCreateInterceptors()
                                 .clazz(IncreasingInterceptor.class.getName(), DecreasingInterceptor.class.getName(),
                                         VehicleCountInterceptor.class.getName()).up())
                 .build();

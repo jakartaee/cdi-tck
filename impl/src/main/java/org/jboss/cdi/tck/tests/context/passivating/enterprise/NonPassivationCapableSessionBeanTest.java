@@ -48,7 +48,7 @@ public class NonPassivationCapableSessionBeanTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(NonPassivationCapableSessionBeanTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(DigitalInterceptor.class.getName()).up()).build();
     }
 

@@ -61,9 +61,9 @@ public class Specialization04Test extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(Specialization04Test.class)
-                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(AlternativeSpecializedFactory.class.getName()).up(),
+                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeSpecializedFactory.class.getName()).up(),
                         Factory.class, AlternativeSpecializedFactory.class, Product.class, InjectedBean2.class, FactoryEvent.class)
-                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(AlternativeSpecializedFactory.class.getName()).up(),
+                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeSpecializedFactory.class.getName()).up(),
                         InjectedBean1.class).build();
     }
 

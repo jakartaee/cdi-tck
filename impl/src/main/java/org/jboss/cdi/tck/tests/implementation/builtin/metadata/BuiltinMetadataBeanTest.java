@@ -18,7 +18,9 @@ package org.jboss.cdi.tck.tests.implementation.builtin.metadata;
 
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+
+import java.lang.reflect.Type;
+import java.util.Collections;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -26,8 +28,7 @@ import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.InterceptionType;
 import javax.enterprise.inject.spi.Interceptor;
 import javax.inject.Inject;
-import java.lang.reflect.Type;
-import java.util.Collections;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -58,8 +59,8 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(BuiltinMetadataBeanTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
-                                .clazz(YoghurtInterceptor.class.getName()).up().createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
+                                .clazz(YoghurtInterceptor.class.getName()).up().getOrCreateDecorators()
                                 .clazz(MilkProductDecorator.class.getName()).up()).build();
     }
 

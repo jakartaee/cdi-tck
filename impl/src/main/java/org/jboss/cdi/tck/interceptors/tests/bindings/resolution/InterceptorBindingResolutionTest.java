@@ -51,7 +51,7 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorBindingResolutionTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(ComplicatedInterceptor.class.getName(), ComplicatedLifecycleInterceptor.class.getName(),
                                         ComplicatedAroundConstructInterceptor.class.getName())
                                 .up()).build();

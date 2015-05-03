@@ -52,7 +52,7 @@ public class BeanByTypeTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(BeanByTypeTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
                                 .clazz(AlternativeConnector.class.getName()).up()).build();
     }
 

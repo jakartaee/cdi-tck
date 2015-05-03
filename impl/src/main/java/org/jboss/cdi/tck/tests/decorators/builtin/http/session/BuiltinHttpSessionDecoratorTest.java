@@ -55,7 +55,7 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinHttpSessionDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(HttpSessionDecorator1.class.getName()).clazz(HttpSessionDecorator2.class.getName()).up())
                 .build();
     }

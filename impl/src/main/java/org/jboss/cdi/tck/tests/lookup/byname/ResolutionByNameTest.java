@@ -42,7 +42,7 @@ public class ResolutionByNameTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ResolutionByNameTest.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Sole.class.getName()).up())
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Sole.class.getName()).up())
                 .build();
     }
 

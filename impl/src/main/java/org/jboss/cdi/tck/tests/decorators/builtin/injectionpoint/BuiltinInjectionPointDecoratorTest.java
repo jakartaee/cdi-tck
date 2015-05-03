@@ -50,7 +50,7 @@ public class BuiltinInjectionPointDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinInjectionPointDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(InjectionPointDecorator.class.getName()).up()).build();
     }
 

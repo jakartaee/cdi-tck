@@ -41,7 +41,7 @@ public class InterceptorForLifecycleTargetMethodTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorForLifecycleTargetMethodTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(LifecycleInterceptor.class.getName()).up()).build();
     }
 

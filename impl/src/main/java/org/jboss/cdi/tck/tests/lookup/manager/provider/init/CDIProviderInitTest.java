@@ -59,12 +59,12 @@ public class CDIProviderInitTest extends AbstractTest {
                 .withClasses(Alpha.class, MarkerObtainerWar.class, Foo.class, Marker.class,
                         AfterDeploymentValidationObserver.class)
                 .withExtension(AfterDeploymentValidationObserver.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Alpha.class.getName()).up())
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Alpha.class.getName()).up())
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Bravo.class.getName()).up(),
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Bravo.class.getName()).up(),
                         Bravo.class, MarkerObtainerBda1.class, Bar.class)
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Charlie.class.getName()).up(),
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Charlie.class.getName()).up(),
                         Charlie.class, MarkerObtainerBda2.class, Baz.class)
                 .withLibrary(MarkerObtainerNonBda.class, NonBdaAfterDeploymentValidationObserver.class).build();
     }

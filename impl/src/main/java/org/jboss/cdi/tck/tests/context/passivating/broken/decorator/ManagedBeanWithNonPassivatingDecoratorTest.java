@@ -41,7 +41,7 @@ public class ManagedBeanWithNonPassivatingDecoratorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ManagedBeanWithNonPassivatingDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(MaarianhaminaDecorator.class.getName()).up()).build();
     }
 

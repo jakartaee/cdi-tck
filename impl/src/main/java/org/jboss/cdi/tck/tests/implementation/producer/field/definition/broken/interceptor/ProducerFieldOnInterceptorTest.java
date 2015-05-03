@@ -40,7 +40,7 @@ public class ProducerFieldOnInterceptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ProducerFieldOnInterceptorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(SimpleInterceptor_Broken.class.getName()).up()).build();
     }
 

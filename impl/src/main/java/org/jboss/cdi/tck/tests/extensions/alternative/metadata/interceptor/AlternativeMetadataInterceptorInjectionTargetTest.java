@@ -52,7 +52,7 @@ public class AlternativeMetadataInterceptorInjectionTargetTest extends AbstractT
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(AlternativeMetadataInterceptorInjectionTargetTest.class)
                 .withClasses(Login.class, LoginInterceptor.class, LoginInterceptorBinding.class, Secured.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(LoginInterceptor.class.getName()).up()).build();
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(LoginInterceptor.class.getName()).up()).build();
     }
 
     @Inject

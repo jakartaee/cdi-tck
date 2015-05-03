@@ -51,7 +51,7 @@ public class InterceptorWithNonPassivationCapableDependenciesTest extends Abstra
                 .withTestClass(InterceptorWithNonPassivationCapableDependenciesTest.class)
                 .withClasses(Engine.class, EnginePowered.class, EnginePoweredInterceptor.class, Ferry.class, Vessel.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(EnginePoweredInterceptor.class.getName()).up()).build();
     }
 

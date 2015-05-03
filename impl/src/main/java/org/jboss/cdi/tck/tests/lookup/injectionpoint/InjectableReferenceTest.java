@@ -50,7 +50,7 @@ public class InjectableReferenceTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(InjectableReferenceTest.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createDecorators().clazz(TimestampLogger.class.getName()).up()).build();
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(TimestampLogger.class.getName()).up()).build();
     }
 
     @SuppressWarnings("unchecked")

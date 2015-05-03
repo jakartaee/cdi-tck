@@ -60,7 +60,7 @@ public class BuiltinHttpServletRequestDecoratorTest extends AbstractDecoratorTes
                 .withTestClassPackage(BuiltinHttpServletRequestDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(HttpServletRequestDecorator1.class.getName())
                                 .clazz(HttpServletRequestDecorator2.class.getName()).up()).build();
     }

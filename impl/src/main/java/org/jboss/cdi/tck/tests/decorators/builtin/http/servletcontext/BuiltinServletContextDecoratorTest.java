@@ -55,7 +55,7 @@ public class BuiltinServletContextDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinServletContextDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(ServletContextDecorator1.class.getName())
                                 .clazz(ServletContextDecorator2.class.getName()).up()).build();
     }

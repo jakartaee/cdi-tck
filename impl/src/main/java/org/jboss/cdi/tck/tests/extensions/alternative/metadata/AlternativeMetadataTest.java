@@ -16,6 +16,20 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
+import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
+import java.lang.annotation.Annotation;
+import java.util.Set;
+
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.util.AnnotationLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.AnyLiteral;
@@ -27,16 +41,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.util.AnnotationLiteral;
-import java.lang.annotation.Annotation;
-import java.util.Set;
-
-import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES;
-import static org.testng.Assert.*;
 
 /**
  * This test class contains tests for adding meta data using extensions.
@@ -53,7 +57,7 @@ public class AlternativeMetadataTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AlternativeMetadataTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(GroceryInterceptor.class.getName()).up()
                 )
                 .withExtension(ProcessAnnotatedTypeObserver.class).build();

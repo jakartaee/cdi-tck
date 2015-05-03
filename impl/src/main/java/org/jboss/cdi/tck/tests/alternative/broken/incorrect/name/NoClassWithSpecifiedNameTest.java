@@ -44,7 +44,7 @@ public class NoClassWithSpecifiedNameTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createAlternatives()
+                                .getOrCreateAlternatives()
                                 .clazz("org.jboss.jsr299.org.jboss.cdi.tck.tests.alternative.broken.incorrect.name.NonExistingClass")
                                 .up()).build();
     }

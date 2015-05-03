@@ -47,10 +47,10 @@ public class InterceptorProcessBeanAttributesTest extends AbstractTest {
                 .withExtension(VerifyingExtension.class)
                 .withBeanLibrary(BravoInterceptor.class, BravoInterceptorBinding.class)
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(AlphaInterceptor.class.getName(), BravoInterceptor.class.getName()).up())
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(AlphaInterceptor.class.getName(), BravoInterceptor.class.getName()).up()).build();
     }
 

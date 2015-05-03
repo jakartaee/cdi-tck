@@ -104,7 +104,7 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
                 .addClasses(Bar.class, AlternativeBar.class, BarInspector.class, ContainerEventsObserver.class, LegacyServiceProducer.class)
                 .addAsServiceProvider(Extension.class, ContainerEventsObserver.class)
                 .addAsManifestResource(
-                        new StringAsset(Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        new StringAsset(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(SecurityInterceptor.class.getName()).up().exportAsString()), "beans.xml")
                 // Make A visible in a portable way
                 .setManifest(
@@ -118,8 +118,8 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
                 // F - with enabled decorator
                 .withClasses(Baz.class, EnterpriseArchiveModulesTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(LoggingDecorator.class.getName())
-                                .up().createAlternatives().clazz(AlternativeBar.class.getName()).up())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(LoggingDecorator.class.getName())
+                                .up().getOrCreateAlternatives().clazz(AlternativeBar.class.getName()).up())
                 // G
                 .withBeanLibrary(Qux.class)
                 .build()

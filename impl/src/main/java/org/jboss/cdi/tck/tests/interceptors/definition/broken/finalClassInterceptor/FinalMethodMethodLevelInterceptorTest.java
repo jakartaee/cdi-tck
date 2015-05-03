@@ -48,7 +48,7 @@ public class FinalMethodMethodLevelInterceptorTest extends AbstractTest {
                 .withClasses(FooBinding.class, MissileInterceptor.class, FinalMethodMethodLevelMissile.class,
                         FinalMethodMethodLevelMissileLocal.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(MissileInterceptor.class.getName()).up()).build();
     }
 

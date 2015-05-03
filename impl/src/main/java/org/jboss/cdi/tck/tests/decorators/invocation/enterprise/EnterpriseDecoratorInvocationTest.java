@@ -60,10 +60,10 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createInterceptors()
+                                .getOrCreateInterceptors()
                                 .clazz(FooInterceptor.class.getName())
                                 .up()
-                                .createDecorators()
+                                .getOrCreateDecorators()
                                 .clazz(FooBusinessDecorator1.class.getName(), FooBusinessDecorator2.class.getName(),
                                         BarBusinessDecorator.class.getName()).up()).build();
     }

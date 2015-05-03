@@ -51,7 +51,7 @@ public class ResourceAlternativeAvailabilityTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ResourceAlternativeAvailabilityTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
                                 .clazz(EnabledResourceProducer.class.getName()).up()).withDefaultPersistenceXml().build();
     }
 

@@ -48,7 +48,7 @@ public class DecoratorInvocationTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createDecorators()
+                                .getOrCreateDecorators()
                                 .clazz(BarDecorator.class.getName(), FooDecorator1.class.getName(),
                                         FooDecorator2.class.getName(), TimestampLogger.class.getName()).up()).build();
     }

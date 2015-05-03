@@ -75,7 +75,7 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
                 .withTestClassDefinition(EnterpriseInterceptorOrderingTest.class)
                 .withClasses(Dao.class, LegacyInterceptor2.class)
                 .withBeansXml(Descriptors.create(BeansDescriptor.class)
-                        .createInterceptors().clazz(LegacyInterceptor2.class.getName()).up())
+                        .getOrCreateInterceptors().clazz(LegacyInterceptor2.class.getName()).up())
                 //B
                 .withBeanLibrary(Transactional.class, GloballyEnabledInterceptor3.class)
                 //C
@@ -87,7 +87,7 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
                 .create(JavaArchive.class, ejbJar)
                 .addClasses(DummyDao.class, GloballyEnabledInterceptor2.class, GloballyEnabledInterceptor5.class, LegacyInterceptor3.class)
                 .addAsManifestResource(
-                        new StringAsset(Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        new StringAsset(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(LegacyInterceptor3.class.getName()).up().exportAsString()), "beans.xml")
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
@@ -101,7 +101,7 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
                 //F
                 .withClasses(EnterpriseInterceptorOrderingTest.class, GloballyEnabledInterceptor1.class, LegacyInterceptor1.class)
                 .withBeansXml(Descriptors.create(BeansDescriptor.class)
-                        .createInterceptors().clazz(LegacyInterceptor1.class.getName()).up())
+                        .getOrCreateInterceptors().clazz(LegacyInterceptor1.class.getName()).up())
                 //G
                 .withBeanLibrary(GloballyEnabledInterceptor4.class)
                 .build()

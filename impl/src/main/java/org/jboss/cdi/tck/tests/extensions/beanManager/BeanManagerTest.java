@@ -87,7 +87,7 @@ public class BeanManagerTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanManagerTest.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Soy.class.getName()).up())
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Soy.class.getName()).up())
                 .withExtensions(AfterBeanDiscoveryObserver.class).build();
     }
 

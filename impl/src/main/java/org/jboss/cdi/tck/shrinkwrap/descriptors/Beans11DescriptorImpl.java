@@ -255,17 +255,7 @@ public class Beans11DescriptorImpl implements BeansDescriptor {
     }
 
     @Override
-    public Interceptors<BeansDescriptor> createInterceptors() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public List<Interceptors<BeansDescriptor>> getAllInterceptors() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public BeansDescriptor removeAllInterceptors() {
+    public BeansDescriptor removeInterceptors() {
         throw new UnsupportedOperationException();
     }
 
@@ -275,17 +265,7 @@ public class Beans11DescriptorImpl implements BeansDescriptor {
     }
 
     @Override
-    public Decorators<BeansDescriptor> createDecorators() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public List<Decorators<BeansDescriptor>> getAllDecorators() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public BeansDescriptor removeAllDecorators() {
+    public BeansDescriptor removeDecorators() {
         throw new UnsupportedOperationException();
     }
 
@@ -295,17 +275,7 @@ public class Beans11DescriptorImpl implements BeansDescriptor {
     }
 
     @Override
-    public Alternatives<BeansDescriptor> createAlternatives() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public List<Alternatives<BeansDescriptor>> getAllAlternatives() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public BeansDescriptor removeAllAlternatives() {
+    public BeansDescriptor removeAlternatives() {
         throw new UnsupportedOperationException();
     }
 

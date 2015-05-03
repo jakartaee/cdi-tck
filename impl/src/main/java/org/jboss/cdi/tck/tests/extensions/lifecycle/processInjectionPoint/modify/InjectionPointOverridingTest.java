@@ -55,7 +55,7 @@ public class InjectionPointOverridingTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InjectionPointOverridingTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(AnimalDecorator.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(AnimalDecorator.class.getName())
                                 .up()).withExtension(ModifyingExtension.class).build();
     }
 

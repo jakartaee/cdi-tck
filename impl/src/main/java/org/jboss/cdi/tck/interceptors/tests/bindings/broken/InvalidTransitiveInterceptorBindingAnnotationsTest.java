@@ -45,7 +45,7 @@ public class InvalidTransitiveInterceptorBindingAnnotationsTest extends Abstract
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createInterceptors()
+                                .getOrCreateInterceptors()
                                 .clazz(FooInterceptor.class.getName(), BarInterceptor.class.getName(),
                                         YesBazInterceptor.class.getName(), NoBazInterceptor.class.getName()).up()).build();
     }

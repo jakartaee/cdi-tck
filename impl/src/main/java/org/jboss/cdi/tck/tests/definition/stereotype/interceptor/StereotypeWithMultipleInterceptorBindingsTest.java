@@ -44,7 +44,7 @@ public class StereotypeWithMultipleInterceptorBindingsTest extends AbstractTest 
         return new WebArchiveBuilder()
                 .withTestClassPackage(StereotypeWithMultipleInterceptorBindingsTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(AlphaInterceptor.class.getName(), OmegaInterceptor.class.getName()).up()).build();
     }
 

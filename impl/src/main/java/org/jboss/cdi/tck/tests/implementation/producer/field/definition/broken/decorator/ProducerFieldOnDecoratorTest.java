@@ -40,7 +40,7 @@ public class ProducerFieldOnDecoratorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ProducerFieldOnDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(FooDecorator_Broken.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(FooDecorator_Broken.class.getName())
                                 .up()).build();
     }
 

@@ -44,7 +44,7 @@ public class LifecycleInterceptorOrderTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(LifecycleInterceptorOrderTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(TransactionalInterceptor.class.getName()).up()).build();
     }
 

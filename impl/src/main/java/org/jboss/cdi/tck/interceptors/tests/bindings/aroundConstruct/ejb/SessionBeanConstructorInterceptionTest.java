@@ -51,7 +51,7 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createInterceptors()
+                                .getOrCreateInterceptors()
                                 .clazz(AlphaInterceptor1.class.getName(), AlphaInterceptor2.class.getName(),
                                         BravoInterceptor.class.getName()).up()).build();
     }

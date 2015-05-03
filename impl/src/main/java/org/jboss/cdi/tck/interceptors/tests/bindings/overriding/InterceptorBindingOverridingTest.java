@@ -51,7 +51,7 @@ public class InterceptorBindingOverridingTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createInterceptors()
+                                .getOrCreateInterceptors()
                                 .clazz(NegatingInterceptor.class.getName(), FastAgingInterceptor.class.getName(),
                                         SlowAgingInterceptor.class.getName()).up()).build();
     }

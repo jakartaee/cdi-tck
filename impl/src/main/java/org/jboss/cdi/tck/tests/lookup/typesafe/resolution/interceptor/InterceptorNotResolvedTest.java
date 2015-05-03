@@ -41,7 +41,7 @@ public class InterceptorNotResolvedTest extends AbstractTest {
                 .withTestClass(InterceptorNotResolvedTest.class)
                 .withClasses(Cat.class, CatInterceptor.class, CatInterceptorBinding.class, Foo.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(CatInterceptor.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(CatInterceptor.class.getName())
                                 .up()).build();
     }
 

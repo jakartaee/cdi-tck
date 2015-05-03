@@ -58,7 +58,7 @@ public class BuiltinInstanceDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinInstanceDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(MuleInstanceDecorator.class.getName()).up()).build();
     }
 

@@ -40,7 +40,7 @@ public class NonExistantDecoratorClassInBeansXmlTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(NonExistantDecoratorClassInBeansXmlTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz("com.acme.NonExistantDecoratorClass").up()).build();
     }
 

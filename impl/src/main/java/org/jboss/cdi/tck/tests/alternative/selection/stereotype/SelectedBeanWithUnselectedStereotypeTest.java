@@ -45,7 +45,7 @@ public class SelectedBeanWithUnselectedStereotypeTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(SelectedBeanWithUnselectedStereotypeTest.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createAlternatives().clazz(Bar.class.getName()).up())
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Bar.class.getName()).up())
                 .build();
     }
 

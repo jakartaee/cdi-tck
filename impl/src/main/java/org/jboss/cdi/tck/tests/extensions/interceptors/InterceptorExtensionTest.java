@@ -61,7 +61,7 @@ public class InterceptorExtensionTest extends AbstractTest {
                 .withLibrary(SuffixingInterceptor.class, IncrementingInterceptor.class, LifecycleInterceptor.class, Suffixed.class, FullMarathon.class, Incremented.class,
                         InterceptorExtension.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(SuffixingInterceptor.class.getName(), IncrementingInterceptor.class.getName(), LifecycleInterceptor.class.getName()).up())
                 .build();
     }

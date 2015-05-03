@@ -40,7 +40,7 @@ public class PassivationCapableBeanWithNonPassivatingInterceptorTest extends Abs
         return new WebArchiveBuilder()
                 .withTestClassPackage(PassivationCapableBeanWithNonPassivatingInterceptorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(BrokenInterceptor.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(BrokenInterceptor.class.getName())
                                 .up()).build();
     }
 

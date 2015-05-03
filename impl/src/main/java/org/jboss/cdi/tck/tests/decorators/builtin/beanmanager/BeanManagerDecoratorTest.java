@@ -50,7 +50,7 @@ public class BeanManagerDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BeanManagerDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
                                 .clazz(BeanManagerDecorator.class.getName()).up()).build();
     }
 

@@ -42,7 +42,7 @@ public class SessionBeanLifecycleInterceptorDefinitionTest extends AbstractTest 
         return new WebArchiveBuilder()
                 .withTestClassPackage(SessionBeanLifecycleInterceptorDefinitionTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(AirborneInterceptor.class.getName(), DestructionInterceptor.class.getName()).up())
                 .build();
     }

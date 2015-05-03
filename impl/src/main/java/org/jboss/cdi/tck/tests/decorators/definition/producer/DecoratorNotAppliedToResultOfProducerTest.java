@@ -43,7 +43,7 @@ public class DecoratorNotAppliedToResultOfProducerTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorNotAppliedToResultOfProducerTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(ChargeDecorator.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(ChargeDecorator.class.getName())
                                 .up()).build();
     }
 

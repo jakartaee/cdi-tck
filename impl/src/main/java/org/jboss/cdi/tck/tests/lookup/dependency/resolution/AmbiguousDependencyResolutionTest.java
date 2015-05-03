@@ -44,7 +44,7 @@ public class AmbiguousDependencyResolutionTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AmbiguousDependencyResolutionTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createAlternatives()
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
                                 .clazz(FooProducer.class.getName(), BarProducer.class.getName()).up()).build();
     }
 

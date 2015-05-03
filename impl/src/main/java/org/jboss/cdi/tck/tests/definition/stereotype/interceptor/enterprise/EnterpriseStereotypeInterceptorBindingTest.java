@@ -46,7 +46,7 @@ public class EnterpriseStereotypeInterceptorBindingTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(EnterpriseStereotypeInterceptorBindingTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(AlphaInterceptor.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(AlphaInterceptor.class.getName())
                                 .up()).build();
     }
 

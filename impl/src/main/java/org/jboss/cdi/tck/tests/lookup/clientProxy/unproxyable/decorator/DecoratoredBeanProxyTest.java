@@ -25,7 +25,7 @@ public class DecoratoredBeanProxyTest extends AbstractTest {
 	public static WebArchive createTestArchive() {
 		return new WebArchiveBuilder()
 				.withTestClassPackage(DecoratoredBeanProxyTest.class)
-				.withBeansXml(Descriptors.create(BeansDescriptor.class).createDecorators().clazz(MarineDecorator.class.getName()).up()).build();
+				.withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(MarineDecorator.class.getName()).up()).build();
 	}
 
 	@Test

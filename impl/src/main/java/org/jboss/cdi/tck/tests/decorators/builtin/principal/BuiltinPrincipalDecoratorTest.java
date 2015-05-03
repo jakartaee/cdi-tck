@@ -52,7 +52,7 @@ public class BuiltinPrincipalDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinPrincipalDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(PrincipalDecorator.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(PrincipalDecorator.class.getName())
                                 .up()).build();
     }
 

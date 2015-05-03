@@ -61,8 +61,8 @@ public class ProcessBeanTest extends AbstractTest {
                 .withTestClass(ProcessBeanTest.class)
                 .withClasses(Cat.class, Cow.class, Cowshed.class, Domestic.class, Chicken.class, ChickenHutch.class,
                         ProcessBeanObserver.class, CatInterceptor.class, CatInterceptorBinding.class, Animal.class, AnimalDecorator.class).
-                        withBeansXml(Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(CatInterceptor.class.getName())
-                                .up().createDecorators().clazz(AnimalDecorator.class.getName()).up()).
+                        withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(CatInterceptor.class.getName())
+                                .up().getOrCreateDecorators().clazz(AnimalDecorator.class.getName()).up()).
                         withExtension(ProcessBeanObserver.class).build();
     }
 

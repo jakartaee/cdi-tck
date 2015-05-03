@@ -38,7 +38,7 @@ public class NonInterceptorClassInBeansXmlTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(NonInterceptorClassInBeansXmlTest.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).createInterceptors().clazz(Foo.class.getName()).up())
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(Foo.class.getName()).up())
                 .build();
     }
 

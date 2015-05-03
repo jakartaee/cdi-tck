@@ -54,7 +54,7 @@ public class AroundConstructTest extends AbstractTest {
                 .withBeansXml(
                         Descriptors
                                 .create(BeansDescriptor.class)
-                                .createInterceptors()
+                                .getOrCreateInterceptors()
                                 .clazz(AlphaInterceptor.class.getName(), BravoInterceptor.class.getName(),
                                         CharlieInterceptor1.class.getName(), CharlieInterceptor2.class.getName()).up()).build();
     }

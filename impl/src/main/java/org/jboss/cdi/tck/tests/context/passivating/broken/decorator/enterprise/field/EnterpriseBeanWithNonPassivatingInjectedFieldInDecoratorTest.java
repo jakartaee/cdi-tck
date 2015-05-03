@@ -41,7 +41,7 @@ public class EnterpriseBeanWithNonPassivatingInjectedFieldInDecoratorTest extend
         return new WebArchiveBuilder()
                 .withTestClassPackage(EnterpriseBeanWithNonPassivatingInjectedFieldInDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).createDecorators().clazz(BrokenDecorator.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(BrokenDecorator.class.getName())
                                 .up()).build();
     }
 
