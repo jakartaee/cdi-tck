@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.enterprise.valid;
 
-public interface ElephantLocal {
+public interface ElephantLocal{
 
+    void remove();
+    
 }
