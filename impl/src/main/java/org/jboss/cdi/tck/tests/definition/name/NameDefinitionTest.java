@@ -89,5 +89,12 @@ public class NameDefinitionTest extends AbstractTest {
         Bean<Minnow> bean = getUniqueBean(Minnow.class);
         assertNull(bean.getName());
     }
+    
+    @Test
+    @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a")
+    public void testNameStartingWithMultipleUpperCaseCharacters(){
+        Bean<JSFBean> bean = getUniqueBean(JSFBean.class);
+        assertEquals(bean.getName(), "jSFBean");
+    }
 
 }
