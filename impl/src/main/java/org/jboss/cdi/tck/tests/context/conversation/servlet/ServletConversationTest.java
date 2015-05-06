@@ -190,7 +190,7 @@ public class ServletConversationTest extends AbstractTest {
 
     protected String getPath(String viewId, String cid) {
         StringBuilder builder = new StringBuilder(url.toString());
-        builder.append("/servlet");
+        builder.append("servlet");
         builder.append(viewId);
         if (cid != null) {
             builder.append("?");
