@@ -23,63 +23,13 @@
         </packages>
 
         <classes>
-
-            <!-- CDITCK-452-->
-            <class name="org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ws.ResourceDefinitionWithDifferentTypeTest">
-               <methods>
-                   <exclude name=".*"/>
-               </methods>
-            </class>
-
-            <!-- CDITCK-453-->
-            <class name="org.jboss.cdi.tck.tests.decorators.definition.broken.nodecoratedtypes.DecoratorWithNoDecoratedTypes1Test">
+            <!-- CDI-437 -->
+            <class name="org.jboss.cdi.tck.tests.lookup.byname.ambiguous.broken.AmbiguousELNamesTest">
                 <methods>
                     <exclude name=".*"/>
                 </methods>
             </class>
 
-            <!-- CDITCK-455 -->
-            <class name="org.jboss.cdi.tck.tests.context.request.event.jms.RequestScopeEventMessageDeliveryTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-459 -->
-            <class name="org.jboss.cdi.tck.tests.implementation.enterprise.newBean.NewEnterpriseBeanTest">
-                <methods>
-                    <exclude name="testNewBeanCreatedForProducerMethod"/>
-                    <exclude name="testNewBeanCreatedForDisposerMethod"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-461 -->
-            <class name="org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor.FinalMethodClassLevelInterceptorTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-463 -->
-            <class name="org.jboss.cdi.tck.tests.lookup.manager.provider.custom.CustomCDIProviderTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            
-            <!-- CDITCK-474 -->
-            <class name="org.jboss.cdi.tck.tests.context.passivating.enterprise.valid.StatefulSessionBeanXmlDescriptorTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-475 -->
-            <class name="org.jboss.cdi.tck.tests.context.conversation.servlet.ServletConversationTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
 
         </classes>
     </test>
