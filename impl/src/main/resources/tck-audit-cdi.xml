@@ -2439,7 +2439,7 @@
         </assertion>
 
         <assertion id="e">
-            <text>Each child |&lt;class&gt;| element must specify the name of a bean class of an alternative bean. If there is no class with the specified name, or if the class with the specified name is not an alternative bean class, the container automatically detects the problem and treats it as a deployment problem.</text>
+            <text>Each child |&lt;class&gt;| element must specify the name of a bean class of an alternative bean. If there is no bean whose bean class has the specified name, or if no bean whose bean class has the specified name is an alternative, the container automatically detects the problem and treats it as a deployment problem.</text>
         </assertion>
 
         <assertion id="f">
