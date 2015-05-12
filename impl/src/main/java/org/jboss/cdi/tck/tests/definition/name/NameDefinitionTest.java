@@ -97,4 +97,25 @@ public class NameDefinitionTest extends AbstractTest {
         assertEquals(bean.getName(), "jSFBean");
     }
 
+    @Test
+    @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a")
+    public void testNameStartingWithUnderScoreCharacter(){
+        Bean<_Underscore> bean = getUniqueBean(_Underscore.class);
+        assertEquals(bean.getName(), "_Underscore");
+    }
+
+    @Test
+    @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a")
+    public void testNameStartingWithDollarCharacter(){
+        Bean<$Dollar> bean = getUniqueBean($Dollar.class);
+        assertEquals(bean.getName(), "$Dollar");
+    }
+
+    @Test
+    @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a")
+    public void testNameStartingWithLowerCaseCharacter(){
+        Bean<lowerCase> bean = getUniqueBean(lowerCase.class);
+        assertEquals(bean.getName(), "lowerCase");
+    }
+
 }
