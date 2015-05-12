@@ -2,5 +2,7 @@ target
 .project
 .settings
 .classpath
+.idea
+*.iml
 
 test-output
