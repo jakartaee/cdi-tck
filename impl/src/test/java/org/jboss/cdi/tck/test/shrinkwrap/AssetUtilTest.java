@@ -26,7 +26,7 @@ import org.jboss.cdi.tck.shrinkwrap.AssetUtil;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.testng.annotations.Test;
 
 public class AssetUtilTest {

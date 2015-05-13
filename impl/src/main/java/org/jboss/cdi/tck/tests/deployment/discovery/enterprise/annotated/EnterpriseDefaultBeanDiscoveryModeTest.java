@@ -31,15 +31,17 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@Test(groups = { JAVAEE_FULL, INTEGRATION})
+@Test(groups = { JAVAEE_FULL, INTEGRATION })
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class EnterpiseDefaultBeanDiscoveryModeTest extends AbstractTest {
+public class EnterpriseDefaultBeanDiscoveryModeTest extends AbstractTest {
 
     @Inject
     TestExtension extension;
@@ -49,9 +51,9 @@ public class EnterpiseDefaultBeanDiscoveryModeTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(EnterpiseDefaultBeanDiscoveryModeTest.class)
-                .withBeansXml(new Beans11DescriptorImpl().setBeanDiscoveryMode(
-                        Beans11DescriptorImpl.BeanDiscoveryMode.ANNOTATED)).withExtension(TestExtension.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseDefaultBeanDiscoveryModeTest.class)
+                .withBeansXml(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ANNOTATED.toString())).withExtension(
+                        TestExtension.class).build();
     }
 
     @Test

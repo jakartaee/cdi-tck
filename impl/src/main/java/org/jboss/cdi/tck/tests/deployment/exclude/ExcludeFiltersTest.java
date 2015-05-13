@@ -19,11 +19,6 @@ package org.jboss.cdi.tck.tests.deployment.exclude;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.SYSTEM_PROPERTIES;
 import static org.jboss.cdi.tck.cdi.Sections.EXCLUDE_FILTERS;
-import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
-import static org.jboss.cdi.tck.shrinkwrap.descriptors.ClassActivator.newClassAvailableActivator;
-import static org.jboss.cdi.tck.shrinkwrap.descriptors.ClassActivator.newClassNotAvailableActivator;
-import static org.jboss.cdi.tck.shrinkwrap.descriptors.Exclude.newExclude;
-import static org.jboss.cdi.tck.shrinkwrap.descriptors.SystemPropertyActivator.newSystemPropertyActivator;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -33,19 +28,20 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.TestSystemProperty;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.BeanDiscoveryMode;
 import org.jboss.cdi.tck.tests.deployment.exclude.food.Meat;
 import org.jboss.cdi.tck.tests.deployment.exclude.haircut.Chonmage;
 import org.jboss.cdi.tck.tests.deployment.exclude.mustache.Mustache;
 import org.jboss.cdi.tck.tests.deployment.exclude.mustache.beard.Beard;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
@@ -60,29 +56,20 @@ public class ExcludeFiltersTest extends AbstractTest {
                 .withPackage(Chonmage.class.getPackage())
                 .withPackage(Meat.class.getPackage())
                 .withBeansXml(
-                        newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ALL).excludes(
-                                // Package excludes
-                                newExclude(Chonmage.class.getPackage().getName() + ".*"),
-                                newExclude(Mustache.class.getPackage().getName() + ".**"),
-                                newExclude(Meat.class.getPackage().getName() + ".*").activators(
-                                        newClassAvailableActivator("com.some.unreal.class.Name")),
-                                newExclude(Meat.class.getPackage().getName() + ".*").activators(
-                                        newClassNotAvailableActivator(ExcludeFiltersTest.class.getName())),
-                                // Class excludes
-                                newExclude(Stubble.class.getName()),
-                                newExclude(Alpha.class.getName()).activators(
-                                        newClassAvailableActivator(Stubble.class.getName())),
-                                newExclude(Foxtrot.class.getName()).activators(
-                                        newClassAvailableActivator("com.some.unreal.class.Name")),
-                                newExclude(Bravo.class.getName()).activators(
-                                        newClassNotAvailableActivator("com.some.unreal.class.Name")),
-                                newExclude(Echo.class.getName()).activators(
-                                        newClassNotAvailableActivator(ExcludeFiltersTest.class.getName())),
-                                newExclude(Charlie.class.getName()).activators(
-                                        newSystemPropertyActivator(TestSystemProperty.EXCLUDE_DUMMY.getKey())),
-                                newExclude(Delta.class.getName()).activators(
-                                        newSystemPropertyActivator(TestSystemProperty.EXCLUDE_DUMMY.getKey()).setValue(
-                                                TestSystemProperty.EXCLUDE_DUMMY.getValue()))))
+                        Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).createScan().createExclude()
+                                .name(Chonmage.class.getPackage().getName() + ".*").up().createExclude()
+                                .name(Mustache.class.getPackage().getName() + ".**").up().createExclude()
+                                .name(Meat.class.getPackage().getName() + ".*").createIfClassAvailable().name("com.some.unreal.class.Name").up().up().createExclude()
+                                .name(Meat.class.getPackage().getName() + ".*").createIfClassNotAvailable().name(ExcludeFiltersTest.class.getName()).up().up().createExclude()
+                                .name(Alpha.class.getName()).createIfClassAvailable().name(Stubble.class.getName()).up().up().createExclude()
+                                .name(Stubble.class.getName()).up().createExclude()
+                                .name(Foxtrot.class.getName()).createIfClassAvailable().name("com.some.unreal.class.Name").up().up().createExclude()
+                                .name(Bravo.class.getName()).createIfClassNotAvailable().name("com.some.unreal.class.Name").up().up().createExclude()
+                                .name(Echo.class.getName()).createIfClassNotAvailable().name(ExcludeFiltersTest.class.getName()).up().up().createExclude()
+                                .name(Charlie.class.getName()).createIfSystemProperty().name(TestSystemProperty.EXCLUDE_DUMMY.getKey()).up().up().createExclude()
+                                .name(Delta.class.getName()).createIfSystemProperty().name(TestSystemProperty.EXCLUDE_DUMMY.getKey())
+                                .value(TestSystemProperty.EXCLUDE_DUMMY.getValue()).up().up().up()
+                )
                 .withExtension(VerifyingExtension.class).build();
     }
 

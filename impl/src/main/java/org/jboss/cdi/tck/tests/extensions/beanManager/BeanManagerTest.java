@@ -66,7 +66,7 @@ import org.jboss.cdi.tck.literals.TargetLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -87,6 +87,7 @@ public class BeanManagerTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanManagerTest.class)
+                .withClasses(RetentionLiteral.class, TargetLiteral.class)
                 .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Soy.class.getName()).up())
                 .withExtensions(AfterBeanDiscoveryObserver.class).build();
     }

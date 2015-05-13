@@ -50,6 +50,7 @@ public class GetAnnotatedTypesTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(GetAnnotatedTypesTest.class)
+                .withClass(InjectLiteral.class)
                 .withExtension(ModifyingExtension.class).build();
     }
 

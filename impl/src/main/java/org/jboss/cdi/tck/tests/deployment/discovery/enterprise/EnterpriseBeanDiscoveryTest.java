@@ -21,7 +21,6 @@ import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DEFINING_ANNOTATIONS;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_BEAN_DISCOVERY_EE;
-import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -33,14 +32,14 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -69,7 +68,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
                 .create(JavaArchive.class, ALPHA_JAR)
                 .addClasses(Alpha.class, AlphaLocal.class)
                 .addAsManifestResource(
-                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ALL).exportAsString()),
+                        new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).exportAsString()),
                         "beans.xml");
         // Empty beans.xml
         JavaArchive bravo = ShrinkWrap.create(JavaArchive.class, BRAVO_JAR).addClasses(Bravo.class, BravoLocal.class)
@@ -86,14 +85,14 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
                 .create(JavaArchive.class, ECHO_JAR)
                 .addClasses(Echo.class, EchoLocal.class)
                 .addAsManifestResource(
-                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED)
-                                .exportAsString()), "beans.xml");
+                        new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ANNOTATED.toString()).exportAsString()),
+                        "beans.xml");
         // Session bean and 1.1 version beans.xml with bean-discovery-mode of none
         JavaArchive foxtrot = ShrinkWrap
                 .create(JavaArchive.class, FOXTROT_JAR)
                 .addClasses(Foxtrot.class, FoxtrotLocal.class)
                 .addAsManifestResource(
-                        new StringAsset(newBeans11Descriptor().setBeanDiscoveryMode(BeanDiscoveryMode.NONE).exportAsString()),
+                        new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._NONE.toString()).exportAsString()),
                         "beans.xml");
 
         // Archive which contains an extension and no beans.xml file - not a bean archive
