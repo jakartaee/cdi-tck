@@ -48,7 +48,7 @@ public class TimingBean {
 
     @Timeout
     @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-    public void ejbTimeout(Timer timer) {
+    public void timeout(Timer timer) {
         timeoutAt = System.currentTimeMillis();
         key = tsr.getTransactionKey();
         assertNotNull(key);
