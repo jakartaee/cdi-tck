@@ -45,7 +45,7 @@ public class Alarm {
     }
 
     @Timeout
-    public void ejbTimeout(Timer timer) {
+    public void timeout(Timer timer) {
         timeoutAt = new AtomicLong(System.currentTimeMillis());
         assertTrue(!this.ctx.isCallerInRole("student"));
         assertTrue(!this.ctx.isCallerInRole("alarm"));

@@ -40,7 +40,7 @@ public class TimingBean extends MiddleTimingBean {
     }
 
     @Timeout
-    public void ejbTimeout(Timer timer) {
+    public void timeout(Timer timer) {
         timeoutAt = System.currentTimeMillis();
     }
 

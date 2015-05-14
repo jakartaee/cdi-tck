@@ -48,7 +48,7 @@ public class Bar {
     }
 
     @Timeout
-    public void ejbTimeout(Timer timer) {
+    public void timeout(Timer timer) {
         assertEquals(Thread.currentThread().getName(), "abc");
         Thread.currentThread().setName("def");
         timeoutAt = new AtomicLong(System.currentTimeMillis());
