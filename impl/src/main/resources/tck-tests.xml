@@ -66,6 +66,26 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-480 -->
+            <class name="org.jboss.cdi.tck.tests.context.conversation.ClientConversationContextTest">
+                <methods>
+                    <exclude name="testSuppressedConversationPropagation"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-481 -->
+            <class name="org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.environment.InterceptorEnvironmentTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <class name="org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout.bindings.AroundTimeoutOrderInterceptorTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
         </classes>
 
     </test>
