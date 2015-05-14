@@ -392,10 +392,6 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         // conversationPropagation=none)
         HtmlPage page3 = client.getPage(getPath("cloud.jsf", cid) + "&conversationPropagation=none");
         assertEquals(getFirstMatchingElement(page3, HtmlSpan.class, "cloudName").getTextContent(), Cloud.NAME);
-
-        // Test again using the proprietary "nocid" parameter (kept for backwards compatibility)
-        HtmlPage page4 = client.getPage(getPath("cloud.jsf", cid) + "&nocid=true");
-        assertEquals(getFirstMatchingElement(page4, HtmlSpan.class, "cloudName").getTextContent(), Cloud.NAME);
     }
 
 
