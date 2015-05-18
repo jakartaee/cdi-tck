@@ -45,5 +45,6 @@ public class InitServlet extends HttpServlet {
         } else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
+        request.getSession().invalidate();
     }
 }
