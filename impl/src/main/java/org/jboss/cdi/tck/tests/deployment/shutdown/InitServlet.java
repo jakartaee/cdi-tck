@@ -46,5 +46,6 @@ public class InitServlet extends HttpServlet {
         }
 
         foo.ping();
+        request.getSession().invalidate();
     }
 }
