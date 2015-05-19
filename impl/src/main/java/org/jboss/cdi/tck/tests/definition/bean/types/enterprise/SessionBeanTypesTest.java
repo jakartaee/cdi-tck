@@ -106,4 +106,13 @@ public class SessionBeanTypesTest extends AbstractTest {
         assertEquals(loginBean.getTypes().size(), 3);
         assertTypeSetMatches(loginBean.getTypes(), Object.class, LoginActionBean.class, MockLoginActionBean.class);
     }
+    
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = SESSION_BEAN_TYPES, id = "ba")
+    public void testSessionBeanWithNoInterfaceView(){
+        Bean<Cobra> cobraBean = getUniqueBean(Cobra.class);
+        assertNotNull(cobraBean);
+        assertEquals(cobraBean.getTypes().size(), 3);
+        assertTypeSetMatches(cobraBean.getTypes(), Object.class, Cobra.class, Snake.class);
+    }
 }
