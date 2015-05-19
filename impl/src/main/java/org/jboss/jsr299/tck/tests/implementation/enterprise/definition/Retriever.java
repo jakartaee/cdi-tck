@@ -16,16 +16,16 @@
  */
 package org.jboss.jsr299.tck.tests.implementation.enterprise.definition;
 
-
+import javax.ejb.LocalBean;
+import javax.ejb.Stateful;
 
 /**
  * @author pmuir
  *
  */
-// TODO Enable when we support EJB 3.1
-//@Stateful
-//@LocalBean
-public class Retriever
+@Stateful
+@LocalBean
+public class Retriever extends Dog
 {
 
 }

@@ -95,9 +95,9 @@ public class EnterpriseBeanDefinitionTest extends AbstractJSR299Test
    @SpecAssertion(section = "3.2.2", id = "ba")
    public void testEnterpriseBeanClassLocalView()
    {
-      //TODO We need a 3.1 compliant container for this test
       Bean<Retriever> dogBean = getBeans(Retriever.class).iterator().next();
       assert dogBean.getTypes().contains(Retriever.class);
+      assert dogBean.getTypes().contains(Dog.class);
    }
 
    @Test(groups = "enterpriseBeans")
