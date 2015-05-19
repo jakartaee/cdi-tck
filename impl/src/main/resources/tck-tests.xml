@@ -16,27 +16,8 @@
 
       <!-- Issues in the TCK -->
 
-      <!-- Following issues are only fixed in CDI TCK 1.1 and will not be fixed in CDI TCK 1.0 -->
-
-      <!-- CDITCK-217 -->
-      <class
-        name="org.jboss.jsr299.tck.tests.lookup.injection.non.contextual.ws.InjectionIntoWebServiceEndPointTest">
-        <methods>
-          <exclude name="testInjectionIntoWebServiceEndpoint" />
-        </methods>
-      </class>
-
       <!-- CDITCK-265 -->
-      <class
-        name="org.jboss.jsr299.tck.tests.implementation.producer.field.lifecycle.ProducerFieldLifecycleTest">
-        <methods>
-          <exclude name=".*" />
-        </methods>
-      </class>
-
-      <!-- CDITCK-263 -->
-      <class
-        name="org.jboss.jsr299.tck.tests.implementation.simple.lifecycle.unproxyable.UnproxyableManagedBeanTest">
+      <class name="org.jboss.jsr299.tck.tests.implementation.producer.field.lifecycle.ProducerFieldLifecycleTest">
         <methods>
           <exclude name=".*" />
         </methods>
