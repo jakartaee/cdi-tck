@@ -30,6 +30,6 @@ import javax.enterprise.inject.Specializes;
 @Specializes
 public class SpecializedTarantulaProducer extends TarantulaProducer
 {
-   @Produces public Tarantula produceTarantula = new DefangedTarantula();
+   @Produces @Tame public Tarantula produceTarantula = new DefangedTarantula();
 
 }

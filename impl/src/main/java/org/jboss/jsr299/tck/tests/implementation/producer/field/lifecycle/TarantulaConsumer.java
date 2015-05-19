@@ -17,7 +17,6 @@
 
 package org.jboss.jsr299.tck.tests.implementation.producer.field.lifecycle;
 
-import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 
@@ -30,7 +29,7 @@ import javax.inject.Inject;
  */
 public class TarantulaConsumer
 {
-   @Inject @Any
+   @Inject @Tame
    private Tarantula consumedTarantula;
 
    public Tarantula getConsumedTarantula()
