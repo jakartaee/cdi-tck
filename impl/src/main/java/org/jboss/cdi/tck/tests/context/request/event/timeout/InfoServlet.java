@@ -18,7 +18,6 @@
 package org.jboss.cdi.tck.tests.context.request.event.timeout;
 
 import java.io.IOException;
-import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -33,7 +32,6 @@ import org.jboss.cdi.tck.util.Timer.StopCondition;
 
 /**
  * @author Martin Kouba
- *
  */
 @SuppressWarnings("serial")
 @WebServlet("/info")
@@ -49,20 +47,13 @@ public class InfoServlet extends HttpServlet {
         this.observingBean = observingBean;
     }
 
-
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        SynchronousQueue<Boolean> queue = new SynchronousQueue<Boolean>();
-        timeoutService.start(queue);
+        timeoutService.start();
 
         Boolean initializedResult;
-        try {
-            initializedResult = queue.poll(5, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            throw new ServletException(e);
-        }
+        initializedResult = observingBean.pollQueue(5, TimeUnit.SECONDS);
 
         resp.getWriter().append("Initialized:" + initializedResult);
         resp.getWriter().append("\n");
