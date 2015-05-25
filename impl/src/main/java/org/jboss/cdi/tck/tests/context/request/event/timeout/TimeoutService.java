@@ -17,9 +17,6 @@
 
 package org.jboss.cdi.tck.tests.context.request.event.timeout;
 
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.TimeUnit;
-
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.ejb.Timeout;
@@ -35,28 +32,18 @@ public class TimeoutService {
     private TimerService timerService;
 
     @Inject
-    private RequestScopedObserver observer;
-
-    @Inject
     private ApplicationScopedObserver appObserver;
 
-    public void start(SynchronousQueue<Boolean> queue) {
-        TimerConfig config = new TimerConfig(queue, false);
+    public void start() {
+        TimerConfig config = new TimerConfig();
+        config.setPersistent(false);
         timerService.createSingleActionTimer(100, config);
     }
 
     @Timeout
     public void onTimeout(Timer timer) {
-        if (timer.getInfo() instanceof SynchronousQueue<?>) {
-            appObserver.reset();
-            @SuppressWarnings("unchecked")
-            SynchronousQueue<Boolean> queue = (SynchronousQueue<Boolean>) timer.getInfo();
-            try {
-                queue.offer(observer.isInitializedObserved(), 5, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        appObserver.reset();
+        appObserver.offerQueue();
     }
 
 }
