@@ -16,15 +16,19 @@
  */
 package org.jboss.cdi.tck.tests.context.application.event;
 
-import static org.testng.AssertJUnit.assertEquals;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 
-import javax.inject.Inject;
+import java.io.IOException;
+import java.net.URL;
+
 import javax.servlet.ServletContext;
 
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.Testable;
+import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -36,20 +40,21 @@ import org.jboss.shrinkwrap.descriptor.api.application6.ApplicationDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
  * Verifies that an observer is not notified of a non-visible {@link ServletContext}.
- * 
+ * <p/>
  * <p>
  * Note that this test has to run in as-client mode since arquillian cannot work with such archive (doesn't know which WAR to
  * enrich).
  * </p>
- * 
- * <p>
+ * <p/>
+ * <p/>
  * This test was originally part of Weld test suite.
- * <p>
- * 
+ * <p/>
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -57,10 +62,13 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class ApplicationScopeEventMultiWarTest extends AbstractTest {
 
-    @Inject
-    Collector collector;
+    @ArquillianResource
+    URL context;
 
-    @Deployment
+    private static final String TEST1_ARCHIVE_NAME = "test1";
+    private static final String TEST2_ARCHIVE_NAME = "test2";
+
+    @Deployment(testable = false)
     public static EnterpriseArchive createTestArchive() {
 
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
@@ -68,16 +76,16 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
                 .withClasses(Collector.class, ObserverNames.class, Helper.class).noDefaultWebModule().build();
         StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class)
                 .version(EnterpriseArchiveBuilder.DEFAULT_APP_VERSION).applicationName("Test").createModule()
-                .ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb().webUri("test1.war")
-                .contextRoot("/test1").up().up().createModule().getOrCreateWeb().webUri("test2.war").contextRoot("/test2").up()
+                .ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb().webUri(TEST1_ARCHIVE_NAME+".war")
+                .contextRoot("/"+TEST1_ARCHIVE_NAME).up().up().createModule().getOrCreateWeb().webUri(TEST2_ARCHIVE_NAME+".war").contextRoot("/"+TEST2_ARCHIVE_NAME).up()
                 .up().exportAsString());
         enterpriseArchive.setApplicationXML(applicationXml);
 
-        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName("test1.war")
-                .withClasses(Observer2.class, ApplicationScopeEventMultiWarTest.class).withDefaultEjbModuleDependency().build();
+        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName(TEST1_ARCHIVE_NAME+".war")
+                .withClasses(Observer2.class, ApplicationScopeEventMultiWarTest.class, PingServlet.class).withDefaultEjbModuleDependency().build();
         enterpriseArchive.addAsModule(Testable.archiveToTest(fooArchive));
 
-        WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName("test2.war").withClass(Observer3.class)
+        WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName(TEST2_ARCHIVE_NAME+".war").withClasses(Observer3.class, PingServlet.class)
                 .withDefaultEjbModuleDependency().build();
         enterpriseArchive.addAsModule(barArchive);
 
@@ -86,10 +94,13 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT, id = "ga") })
-    public void testDeployment() {
-        assertEquals(2, collector.getContextPaths().size());
-        assertEquals("/test1", collector.getByClassName(ObserverNames.OBSERVER2_NAME).getContext().getContextPath());
-        assertEquals("/test2", collector.getByClassName(ObserverNames.OBSERVER3_NAME).getContext().getContextPath());
+    public void testInitializedApplicationScopedEventObserved() throws IOException {
+
+        WebClient client = new WebClient();
+        TextPage page1 = client.getPage(context + "/" + TEST1_ARCHIVE_NAME + "/ping");
+        TextPage page2 = client.getPage(context + "/" + TEST2_ARCHIVE_NAME + "/ping");
+        Assert.assertTrue(page1.getContent().toString().contains(ObserverNames.OBSERVER2_NAME));
+        Assert.assertTrue(page2.getContent().toString().contains(ObserverNames.OBSERVER3_NAME));
 
     }
 }
