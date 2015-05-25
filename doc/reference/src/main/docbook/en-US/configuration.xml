@@ -291,7 +291,7 @@
                      <literal>student</literal>
                   </entry>
                   <entry>
-                     <literal>student</literal>
+                     <literal>students</literal>
                   </entry>
                </row>
                <row>
@@ -299,7 +299,7 @@
                      <literal>alarm</literal>
                   </entry>
                   <entry>
-                     <literal>student, alarm</literal>
+                     <literal>students, alarms</literal>
                   </entry>
                </row>
                <row>
@@ -307,7 +307,7 @@
                      <literal>printer</literal>
                   </entry>
                   <entry>
-                     <literal>student, printer</literal>
+                     <literal>students, printers</literal>
                   </entry>
                </row>
             </tbody>

@@ -20,7 +20,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 
 @Stateless
-@RolesAllowed("printer")
+@RolesAllowed("printers")
 public class Toner {
 
     public static boolean calledFromInterceptor = false;

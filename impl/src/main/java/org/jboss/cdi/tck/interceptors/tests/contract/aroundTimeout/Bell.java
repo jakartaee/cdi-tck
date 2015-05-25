@@ -21,7 +21,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 
 @Stateless
-@RolesAllowed("alarm")
+@RolesAllowed("alarms")
 public class Bell {
 
     public void callFromInterceptor() {

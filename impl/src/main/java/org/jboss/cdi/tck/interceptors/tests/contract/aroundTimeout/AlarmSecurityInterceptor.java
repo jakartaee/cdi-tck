@@ -37,8 +37,8 @@ public class AlarmSecurityInterceptor {
         Object obj = ic.proceed();
 
         // Since a timeout callback method is an internal method of the bean class, it has no client security context
-        assertTrue(!this.sc.isCallerInRole("student"));
-        assertTrue(!this.sc.isCallerInRole("alarm"));
+        assertTrue(!this.sc.isCallerInRole("students"));
+        assertTrue(!this.sc.isCallerInRole("alarms"));
 
         TestData.securityContextOk.set(true);
         bell.callFromInterceptor();
