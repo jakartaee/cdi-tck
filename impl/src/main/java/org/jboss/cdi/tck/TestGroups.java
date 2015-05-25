@@ -87,9 +87,9 @@ public final class TestGroups {
      *  --------------------------------
      *  | Principal | Group            |
      *  --------------------------------
-     *  | student   | student          |
-     *  | alarm     | student, alarm   |
-     *  | printer   | student, printer |
+     *  | student   | students          |
+     *  | alarm     | students, alarms   |
+     *  | printer   | students, printers |
      *  --------------------------------
      */
     public static final String SECURITY = "security";

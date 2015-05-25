@@ -24,8 +24,8 @@ import javax.interceptor.Interceptors;
 
 @Stateless
 @Interceptors(PrinterSecurityInterceptor.class)
-@RunAs("printer")
-@RolesAllowed("student")
+@RunAs("printers")
+@RolesAllowed("students")
 public class Printer {
 
     @EJB
