@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterce
 import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 
 import javax.enterprise.inject.spi.DeploymentException;
-import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -40,15 +39,12 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class FinalClassMethodLevelInterceptorTest extends AbstractTest {
 
-    @Inject
-    FinalClassMethodLevelMissile finalClassMethodLevelMissile;
-    
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(FinalClassMethodLevelInterceptorTest.class)
-                .withClasses(FooBinding.class, MissileInterceptor.class, FinalClassMethodLevelMissile.class)
+                .withClasses(FooBinding.class, MissileInterceptor.class, FinalClassMethodLevelMissile.class, FinalClassMethodLevelIPBean.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(MissileInterceptor.class.getName()).up()).build();
