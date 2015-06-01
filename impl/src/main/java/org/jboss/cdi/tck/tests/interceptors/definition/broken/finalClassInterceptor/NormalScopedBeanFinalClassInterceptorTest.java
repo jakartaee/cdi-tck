@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 
 import javax.enterprise.inject.spi.DeploymentException;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -35,6 +35,9 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class NormalScopedBeanFinalClassInterceptorTest extends AbstractTest {
 
+    @Inject
+    AntiAircraftMissileFinalClass antiAircraftMissileFinalClass;
+    
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
@@ -46,7 +49,7 @@ public class NormalScopedBeanFinalClassInterceptorTest extends AbstractTest {
                                 .clazz(MissileInterceptor.class.getName()).up()).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "b")
     public void testFinalClassWithClassLevelInterceptor() throws Exception {
     }

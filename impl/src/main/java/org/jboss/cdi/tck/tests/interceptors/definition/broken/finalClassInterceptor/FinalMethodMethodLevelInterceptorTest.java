@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 
 import javax.enterprise.inject.spi.DeploymentException;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -39,6 +40,9 @@ import org.testng.annotations.Test;
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class FinalMethodMethodLevelInterceptorTest extends AbstractTest {
+
+    @Inject
+    FinalMethodMethodLevelMissile finalMethodMethodLevelMissile;
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
