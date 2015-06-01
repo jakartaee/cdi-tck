@@ -38,6 +38,13 @@
             </class>
 
 
+            <!-- CDITCK-461 -->
+            <class name="org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor.FinalMethodMethodLevelInterceptorTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
         </classes>
     </test>
 
