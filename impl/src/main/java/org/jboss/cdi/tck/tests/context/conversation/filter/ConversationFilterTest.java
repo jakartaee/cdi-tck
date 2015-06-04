@@ -54,6 +54,8 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class ConversationFilterTest extends AbstractTest {
+    
+    private static final String JSESSIONID = "JSESSIONID";
 
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
@@ -111,7 +113,7 @@ public class ConversationFilterTest extends AbstractTest {
         String cid = extractCid(initPage.getContent());
         assertNotNull(cid);
         assertFalse(cid.isEmpty());
-        String jsessionid = extractJsessionid(initPage.getContent());
+        String jsessionid = client.getCookieManager().getCookie(JSESSIONID).getValue();
         assertNotNull(jsessionid);
         assertFalse(jsessionid.isEmpty());
 
@@ -160,7 +162,7 @@ public class ConversationFilterTest extends AbstractTest {
 
             WebClient client = new WebClient();
             client.setThrowExceptionOnFailingStatusCode(false);
-            client.getCookieManager().addCookie(new Cookie(contextPath.getHost(), "JSESSIONID", jsessionid));
+            client.getCookieManager().addCookie(new Cookie(contextPath.getHost(), JSESSIONID, jsessionid));
 
             Page page = client.getPage(contextPath + "introspect?mode=" + mode + "&cid=" + cid);
 
@@ -179,14 +181,6 @@ public class ConversationFilterTest extends AbstractTest {
             throw new IllegalArgumentException();
         }
         return tokens[0];
-    }
-
-    private String extractJsessionid(String content) {
-        String[] tokens = content.split("::");
-        if (tokens.length != 2) {
-            throw new IllegalArgumentException();
-        }
-        return tokens[1];
     }
 
 }
