@@ -30,17 +30,17 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
-public class ParameterizedReturnTypeWithWildcardTest extends AbstractTest {
+public class ProducerFieldTypeWithWildcardTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ParameterizedReturnTypeWithWildcardTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(ProducerFieldTypeWithWildcardTest.class).build();
     }
 
     @Test
     @SpecAssertion(section = PRODUCER_FIELD, id = "ga")
-    public void testParameterizedReturnTypeWithWildcard() {
+    public void testProducerFieldTypeWithWildcard() {
     }
 
 }

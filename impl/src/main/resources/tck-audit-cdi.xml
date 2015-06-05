@@ -1258,7 +1258,7 @@
         </assertion>
 
         <assertion id="e">
-            <text>If a producer method contains a null value at runtime, and the producer field declares any other scope, an |IllegalProductException| is thrown by the container. This restriction allows the container to use a client proxy, as defined in Section 5.4, "Client proxies"</text>
+            <text>If a producer field contains a null value at runtime, and the producer field declares any other scope, an |IllegalProductException| is thrown by the container. This restriction allows the container to use a client proxy, as defined in Section 5.4, "Client proxies"</text>
         </assertion>
 
         <assertion id="fa">
