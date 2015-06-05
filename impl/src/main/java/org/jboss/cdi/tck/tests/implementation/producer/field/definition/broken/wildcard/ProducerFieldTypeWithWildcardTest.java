@@ -40,7 +40,7 @@ public class ProducerFieldTypeWithWildcardTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = PRODUCER_FIELD, id = "ga")
-    public void testParameterizedReturnTypeWithWildcard() {
+    public void testProducerFieldTypeWithWildcard() {
     }
 
 }
