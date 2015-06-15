@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 @Stateful
 @SessionScoped
-public class FieldInjectionCorralBroken extends Corral {
+public class FieldInjectionCorralBroken extends Ranch {
 
     @Inject
     @British

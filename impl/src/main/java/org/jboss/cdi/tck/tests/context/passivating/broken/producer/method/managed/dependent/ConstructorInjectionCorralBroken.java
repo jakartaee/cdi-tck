@@ -20,7 +20,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 
 @SessionScoped
-public class ConstructorInjectionCorralBroken extends Corral {
+public class ConstructorInjectionCorralBroken extends Ranch {
 
     private Cow cow;
 

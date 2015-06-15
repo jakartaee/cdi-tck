@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.tests.context.passivating.broken.producer.method.manag
 
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
+import java.lang.annotation.Annotation;
+
 import javax.enterprise.inject.IllegalProductException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -55,15 +57,15 @@ public class ManagedBeanWithIllegalDependencyTest extends AbstractTest {
         verify(ConstructorInjectionCorralBroken.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test
     @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fab")
-    public void testProducerMethodParamInjectionPointRequiringPassivationCapableDependency(@British Herd herd) {
-        verify(ProducerMethodParamInjectionCorralBroken.class);
+    public void testProducerMethodParamInjectionPointRequiringPassivationCapableDependency() {
+       verify(Herd.class, British.BritishLiteral.INSTANCE);
     }
 
-    private void verify(Class<? extends Corral> clazz){
+    private void verify(Class<? extends Ranch> clazz, Annotation... annotations) {
         try {
-            getContextualReference(clazz).ping();
+            getContextualReference(clazz, annotations).ping();
         } catch (Throwable t) {
             Assert.assertTrue(isThrowablePresent(IllegalProductException.class, t));
             return;

@@ -16,5 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.producer.method.enterprise;
 
-public class Herd {
+public class Herd extends Ranch{
+    
+    public void ping(){}
 }

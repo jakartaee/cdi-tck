@@ -6,7 +6,7 @@ import javax.enterprise.inject.Produces;
 
 @Stateful
 @SessionScoped
-public class ProducerMethodParamInjectionCorralBroken extends Corral {
+public class ProducerMethodParamInjectionCorralBroken extends Ranch {
     @Override
     public void ping() {
         
@@ -14,6 +14,7 @@ public class ProducerMethodParamInjectionCorralBroken extends Corral {
     
     @Produces
     @British
+    @SessionScoped
     public Herd produce(@British Cow cow){
        return new Herd();
     }

@@ -25,11 +25,17 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Qualifier;
 
 @Qualifier
 @Target({ FIELD, PARAMETER, METHOD, TYPE })
 @Retention(RUNTIME)
 public @interface British {
+    
+    public static class BritishLiteral extends AnnotationLiteral<British> implements British{
+        
+       public static British INSTANCE = new BritishLiteral();
+    }
 
 }

@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context.passivating.broken.producer.method.managed.dependent;
+package org.jboss.cdi.tck.tests.context.passivating.broken.producer.method.enterprise;
 
 import java.io.Serializable;
 
-public abstract class Corral implements Serializable {
+public abstract class Ranch implements Serializable {
 
     public abstract void ping();
 

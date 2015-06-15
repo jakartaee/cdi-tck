@@ -19,6 +19,8 @@ package org.jboss.cdi.tck.tests.context.passivating.broken.producer.method.enter
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
+import java.lang.annotation.Annotation;
+
 import javax.enterprise.inject.IllegalProductException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -30,7 +32,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test(groups =  INTEGRATION)
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class EnterpriseBeanWithIllegalDependencyTest extends AbstractTest {
 
@@ -57,15 +59,15 @@ public class EnterpriseBeanWithIllegalDependencyTest extends AbstractTest {
         verify(ConstructorInjectionCorralBroken.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test
     @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fab")
-    public void testProducerMethodParamInjectionPointRequiringPassivationCapableDependency(@British Herd herd) {
-        verify(ProducerMethodParamInjectionCorralBroken.class);
+    public void testProducerMethodParamInjectionPointRequiringPassivationCapableDependency() {
+        verify(Herd.class, British.BritishLiteral.INSTANCE);
     }
 
-    private void verify(Class<? extends Corral> clazz){
+    private void verify(Class<? extends Ranch> clazz, Annotation... annotations) {
         try {
-            getContextualReference(clazz).ping();
+            getContextualReference(clazz, annotations).ping();
         } catch (Throwable t) {
             Assert.assertTrue(isThrowablePresent(IllegalProductException.class, t));
             return;
