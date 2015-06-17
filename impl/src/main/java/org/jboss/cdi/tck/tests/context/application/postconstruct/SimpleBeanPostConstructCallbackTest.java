@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.application.postconstruct;
 
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,7 +45,7 @@ public class SimpleBeanPostConstructCallbackTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT, id = "h") })
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "h") })
     public void testSimplePostConstructCallback(Action action, SimpleBean simpleBean) throws Exception {
         assertTrue(action.isApplicationContextActiveDuringPostConstruct());
         assertTrue(simpleBean.isApplicationContextActiveDuringPostConstruct());

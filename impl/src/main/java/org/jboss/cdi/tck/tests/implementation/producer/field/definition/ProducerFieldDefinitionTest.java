@@ -181,7 +181,7 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
    @Test
     @SpecAssertions({ @SpecAssertion(section = DEFAULT_NAME, id = "c"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa"),
             @SpecAssertion(section = NAMED_STEREOTYPE, id = "ab"), @SpecAssertion(section = BEANS_WITH_NO_NAME, id = "a"),
-            @SpecAssertion(section = PRODUCER_FIELD_NAME, id = "a"), @SpecAssertion(section = DECLARING_BEAN_NAME, id = "d") })
+            @SpecAssertion(section = PRODUCER_FIELD_NAME, id = "a") })
     public void testDefaultNamedByStereotype() {
         Bean<Tarantula> staticTarantulaBean = getUniqueBean(Tarantula.class, STATIC_LITERAL);
         assertEquals(staticTarantulaBean.getName(), "produceTarantula");

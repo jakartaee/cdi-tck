@@ -24,8 +24,8 @@ import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS_DESTRUCTION;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_EJB_REMOVE_METHOD;
-import static org.jboss.cdi.tck.cdi.Sections.STATEFUL_LIFECYCLE;
-import static org.jboss.cdi.tck.cdi.Sections.STATELESS_LIFECYCLE;
+import static org.jboss.cdi.tck.cdi.Sections.STATEFUL_LIFECYCLE_EE;
+import static org.jboss.cdi.tck.cdi.Sections.STATELESS_LIFECYCLE_EE;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.Context;
@@ -62,7 +62,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bb"), @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE_EE, id = "bb"), @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "b"),
             @SpecAssertion(section = BEAN_ARCHIVE, id = "ja") })
     public void testCreateSFSB() throws Exception {
         GrossStadt frankfurt = getContextualReference(GrossStadt.class);
@@ -105,7 +105,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bc"), @SpecAssertion(section = STATELESS_LIFECYCLE, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE_EE, id = "bc"), @SpecAssertion(section = STATELESS_LIFECYCLE_EE, id = "c") })
     public void testDestroyRemovesSFSB() throws Exception {
         GrossStadt frankfurt = getContextualReference(GrossStadt.class);
         Bean<KleinStadt> stadtBean = getBeans(KleinStadt.class).iterator().next();
@@ -123,7 +123,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bc"), @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "dba") })
+    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE_EE, id = "bc"), @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "dba") })
     public void testRemovedEjbIgnored() {
         KleinStadt stadtInstance = getContextualReference(KleinStadt.class, new AnnotationLiteral<Important>() {
         });
@@ -138,7 +138,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = STATELESS_LIFECYCLE, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = STATELESS_LIFECYCLE_EE, id = "b") })
     public void testCreateSLSB() {
         Bean<NeueStadt> stadtBean = getBeans(NeueStadt.class).iterator().next();
         assert stadtBean != null : "Expected a bean for stateful session bean Kassel";

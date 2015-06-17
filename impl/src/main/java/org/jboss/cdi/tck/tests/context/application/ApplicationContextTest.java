@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.application;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.JAX_RS;
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -58,7 +58,7 @@ public class ApplicationContextTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "aa")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "aa")
     public void testApplicationScopeActiveDuringServiceMethod() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -66,7 +66,7 @@ public class ApplicationContextTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ab")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ab")
     public void testApplicationScopeActiveDuringDoFilterMethod() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -74,7 +74,7 @@ public class ApplicationContextTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ac")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ac")
     public void testApplicationScopeActiveDuringServletContextListenerInvocation() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -82,7 +82,7 @@ public class ApplicationContextTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ad")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ad")
     public void testApplicationScopeActiveDuringHttpSessionListenerInvocation() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -90,7 +90,7 @@ public class ApplicationContextTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "af")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "af")
     public void testApplicationScopeActiveDuringServletRequestListenerInvocation() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -98,7 +98,7 @@ public class ApplicationContextTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "e")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "e")
     public void testApplicationContextSharedBetweenServletRequests() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -118,7 +118,7 @@ public class ApplicationContextTest extends AbstractTest {
      * @throws Exception
      */
     @Test(groups = { INTEGRATION, JAX_RS })
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "e")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "e")
     public void testApplicationContextSharedBetweenJaxRsRequests() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);

@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.session.listener.shutdown;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 
 import java.net.URL;
@@ -93,7 +93,7 @@ public class SessionContextListenerShutdownTest extends AbstractTest {
      * @throws Exception
      */
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
-    @SpecAssertion(section = SESSION_CONTEXT, id = "ac")
+    @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ac")
     public void testApplicationContextDestroyed(@ArquillianResource @OperateOnDeployment(ALPHA_DEPLOYMENT_NAME) URL alphaContext,
             @ArquillianResource @OperateOnDeployment(BRAVO_ARCHIVE_NAME) URL bravoContext) throws Exception {
 

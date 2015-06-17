@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.context.session.async;
 
 import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT_EE;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -57,7 +57,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ad") })
     public void testSessionContextActiveOnComplete() throws Exception {
         WebClient webClient = new WebClient();
 
@@ -70,7 +70,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ad") })
     public void testSessionContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
@@ -80,7 +80,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ad") })
     public void testSessionContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
@@ -90,7 +90,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ad") })
     public void testSessionContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
         webClient.getPage(getPath(AsyncServlet.TEST_LOOP));

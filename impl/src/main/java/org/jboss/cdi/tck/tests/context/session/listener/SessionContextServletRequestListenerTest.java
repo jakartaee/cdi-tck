@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.session.listener;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT_EE;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
@@ -49,7 +49,7 @@ public class SessionContextServletRequestListenerTest extends AbstractTest {
 	}
 
 	@Test(groups = INTEGRATION)
-	@SpecAssertion(section = SESSION_CONTEXT, id = "ae")
+	@SpecAssertion(section = SESSION_CONTEXT_EE, id = "ae")
 	public void testSessionScopeActiveDuringServletRequestListenerCall() throws Exception {
 		WebClient webClient = new WebClient();
 		webClient.setThrowExceptionOnFailingStatusCode(true);

@@ -58,8 +58,7 @@ public class ContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BUILTIN_SCOPES, id = "aa"), @SpecAssertion(section = BUILTIN_SCOPES, id = "ab"),
-            @SpecAssertion(section = BUILTIN_SCOPES, id = "ac"), @SpecAssertion(section = BUILTIN_SCOPES, id = "ca"),
+    @SpecAssertions({ @SpecAssertion(section = BUILTIN_SCOPES, id = "a"),@SpecAssertion(section = BUILTIN_SCOPES, id = "ca"),
             @SpecAssertion(section = BM_OBTAIN_ACTIVE_CONTEXT, id = "a") })
     public void testBuiltInContexts() {
         Context context = getCurrentManager().getContext(Dependent.class);

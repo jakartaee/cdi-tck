@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.application.disposer;
 
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -53,7 +53,7 @@ public class ApplicationContextDisposerTest extends AbstractTest {
     Forest forest;
 
     @Test
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "dg")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "dg")
     public void testApplicationContextActiveDuringDispose() {
         logger.log("Injected forest: {0}", forest.toString());
         @SuppressWarnings("serial")

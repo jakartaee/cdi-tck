@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.manager.provider.custom;
 
+import java.util.Map;
+
 import javax.enterprise.inject.Vetoed;
 import javax.enterprise.inject.spi.CDI;
 import javax.enterprise.inject.spi.CDIProvider;
@@ -33,6 +35,16 @@ public class CustomCDIProvider implements CDIProvider {
     @Override
     public CDI<Object> getCDI() {
         isCalled = true;
+        return null;
+    }
+
+    @Override
+    public boolean isInitialized() {
+        return false;
+    }
+
+    @Override
+    public CDI<Object> initialize(Map<String, Object> params) {
         return null;
     }
 

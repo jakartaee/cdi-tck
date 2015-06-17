@@ -19,12 +19,13 @@ package org.jboss.cdi.tck.tests.context.application.async;
 
 import static org.jboss.cdi.tck.TestGroups.ASYNC_SERVLET;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 import static org.testng.Assert.assertTrue;
+
+import java.net.URL;
 
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import java.net.URL;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
@@ -52,7 +53,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ae")
     public void testApplicationContextActiveOnComplete() throws Exception {
         WebClient webClient = new WebClient();
 
@@ -65,7 +66,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ae")
     public void testApplicationContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
@@ -75,7 +76,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ae")
     public void testApplicationContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(false);
@@ -85,7 +86,7 @@ public class ApplicationContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "ae")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ae")
     public void testApplicationContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
         webClient.getPage(getPath(AsyncServlet.TEST_LOOP));

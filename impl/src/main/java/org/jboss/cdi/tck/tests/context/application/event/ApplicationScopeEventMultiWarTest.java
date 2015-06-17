@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.application.event;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 
 import java.io.IOException;
 import java.net.URL;
@@ -93,7 +93,7 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT, id = "ga") })
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga") })
     public void testInitializedApplicationScopedEventObserved() throws IOException {
 
         WebClient client = new WebClient();

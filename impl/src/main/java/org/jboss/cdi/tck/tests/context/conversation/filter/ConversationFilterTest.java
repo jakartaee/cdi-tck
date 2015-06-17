@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.conversation.filter;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -77,7 +77,7 @@ public class ConversationFilterTest extends AbstractTest {
      * @throws Exception
      */
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "d") })
     public void testConversationActivation() throws Exception {
 
         WebClient client = new WebClient();
@@ -102,7 +102,7 @@ public class ConversationFilterTest extends AbstractTest {
      * @throws Exception
      */
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "ua") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ua") })
     public void testConversationBusy() throws Exception {
 
         // Init the long-running conversation

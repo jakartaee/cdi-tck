@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.context.application.destroy;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 
 import java.net.URL;
@@ -89,7 +89,7 @@ public class ApplicationContextDestructionTest extends AbstractTest {
      * @throws Exception
      */
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "f")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "f")
     public void testApplicationContextDestroyed(@ArquillianResource @OperateOnDeployment(FOO) URL fooContext,
             @ArquillianResource @OperateOnDeployment(BAR) URL barContext) throws Exception {
 

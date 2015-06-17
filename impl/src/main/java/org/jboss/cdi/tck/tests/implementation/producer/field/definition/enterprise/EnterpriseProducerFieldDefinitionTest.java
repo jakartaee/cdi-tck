@@ -39,7 +39,7 @@ public class EnterpriseProducerFieldDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "ab"), @SpecAssertion(section = PRODUCER_FIELD, id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "a"), @SpecAssertion(section = PRODUCER_FIELD, id = "ca") })
     public void testStaticProducerField() {
         assert getContextualReference(Egg.class, new AnnotationLiteral<Foo>() {
         }) != null;

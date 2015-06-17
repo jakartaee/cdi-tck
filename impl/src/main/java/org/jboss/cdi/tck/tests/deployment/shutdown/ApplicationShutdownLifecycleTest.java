@@ -18,9 +18,9 @@
 package org.jboss.cdi.tck.tests.deployment.shutdown;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 import static org.jboss.cdi.tck.cdi.Sections.BEFORE_SHUTDOWN;
-import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
 import static org.jboss.cdi.tck.cdi.Sections.SHUTDOWN;
 import static org.testng.Assert.assertTrue;
 
@@ -100,7 +100,7 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
      */
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
     @SpecAssertions({ @SpecAssertion(section = SHUTDOWN, id = "a"), @SpecAssertion(section = SHUTDOWN, id = "b"),
-            @SpecAssertion(section = REQUEST_CONTEXT, id = "ja"), @SpecAssertion(section = APPLICATION_CONTEXT, id = "ga"),
+            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ja"), @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga"),
             @SpecAssertion(section = BEFORE_SHUTDOWN, id = "a") })
     public void testShutdown(@ArquillianResource @OperateOnDeployment(FOO) URL fooContext,
             @ArquillianResource @OperateOnDeployment(INFO) URL infoContext) throws Exception {

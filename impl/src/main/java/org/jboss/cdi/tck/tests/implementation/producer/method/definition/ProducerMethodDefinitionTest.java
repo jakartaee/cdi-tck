@@ -190,7 +190,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "bb"), @SpecAssertion(section = DEFAULT_NAME, id = "b"),
-            @SpecAssertion(section = DEFAULT_NAME, id = "fb"), @SpecAssertion(section = DECLARING_BEAN_NAME, id = "d") })
+            @SpecAssertion(section = DEFAULT_NAME, id = "fb") })
     public void testDefaultNamedMethod() throws Exception {
         String name = "produceDaddyLongLegs";
         Bean<DaddyLongLegs> daddyLongLegs = getUniqueBean(DaddyLongLegs.class, TAME_LITERAL);

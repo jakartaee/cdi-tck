@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.context.request.ws;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JAX_WS;
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
-import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -66,8 +66,8 @@ public class RequestContextTest extends AbstractTest {
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "c"), @SpecAssertion(section = REQUEST_CONTEXT, id = "d"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "c"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "d"),
+            @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "b") })
     public void testRequestScopeActiveDuringWebServiceInvocation() throws Exception {
 
         URL wsdlLocation = new URL(contextPath.toExternalForm() + "translator?wsdl");

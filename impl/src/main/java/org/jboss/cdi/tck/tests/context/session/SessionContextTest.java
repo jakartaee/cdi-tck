@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.session;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
@@ -55,8 +55,8 @@ public class SessionContextTest extends AbstractTest {
 	}
 
 	@Test(groups = INTEGRATION)
-	@SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "aa"),
-			@SpecAssertion(section = SESSION_CONTEXT, id = "ae") })
+	@SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "aa"),
+			@SpecAssertion(section = SESSION_CONTEXT_EE, id = "ae") })
 	public void testSessionScopeActiveDuringServiceMethod() throws Exception {
 		WebClient webClient = new WebClient();
 		webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -64,8 +64,8 @@ public class SessionContextTest extends AbstractTest {
 	}
 
 	@Test(groups = INTEGRATION)
-	@SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT, id = "ab"),
-			@SpecAssertion(section = SESSION_CONTEXT, id = "ae") })
+	@SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ab"),
+			@SpecAssertion(section = SESSION_CONTEXT_EE, id = "ae") })
 	public void testSessionScopeActiveDuringDoFilterMethod() throws Exception {
 		WebClient webClient = new WebClient();
 		webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -73,7 +73,7 @@ public class SessionContextTest extends AbstractTest {
 	}
 
 	@Test(groups = INTEGRATION)
-	@SpecAssertion(section = SESSION_CONTEXT, id = "b")
+	@SpecAssertion(section = SESSION_CONTEXT_EE, id = "b")
 	public void testSessionContextSharedBetweenServletRequestsInSameHttpSession()
 			throws Exception {
 		WebClient webClient = new WebClient();
@@ -98,7 +98,7 @@ public class SessionContextTest extends AbstractTest {
 	 * @throws Exception
 	 */
 	@Test(groups = INTEGRATION)
-	@SpecAssertion(section = SESSION_CONTEXT, id = "ca")
+	@SpecAssertion(section = SESSION_CONTEXT_EE, id = "ca")
 	public void testSessionContextDestroyedWhenHttpSessionInvalidated()
 			throws Exception {
 		WebClient webClient = new WebClient();
@@ -136,7 +136,7 @@ public class SessionContextTest extends AbstractTest {
 	 * @throws Exception
 	 */
 	@Test(groups = INTEGRATION)
-	@SpecAssertion(section = SESSION_CONTEXT, id = "cb")
+	@SpecAssertion(section = SESSION_CONTEXT_EE, id = "cb")
 	public void testSessionContextDestroyedWhenHttpSessionTimesOut()
 			throws Exception {
 		WebClient webClient = new WebClient();

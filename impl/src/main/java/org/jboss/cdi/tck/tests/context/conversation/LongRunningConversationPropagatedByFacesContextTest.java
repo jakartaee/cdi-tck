@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.conversation;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_SCOPES;
-import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -61,7 +61,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "l"), @SpecAssertion(section = BUILTIN_SCOPES, id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "l"), @SpecAssertion(section = BUILTIN_SCOPES, id = "ba") })
     public void testConversationPropagated() throws Exception {
 
         WebClient webClient = new WebClient();
@@ -86,7 +86,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
     }
 
     @Test
-    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "m")
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "m")
     public void testConversationPropagatedOverRedirect() throws Exception {
 
         WebClient webClient = new WebClient();
@@ -112,7 +112,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "l") })
     public void testConversationPropagatedAjax() throws Exception {
 
         WebClient webClient = new WebClient();

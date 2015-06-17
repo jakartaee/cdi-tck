@@ -79,6 +79,11 @@ public class TestCDI extends CDI<Object> {
     }
 
     @Override
+    public void shutdown() {
+
+    }
+
+    @Override
     public BeanManager getBeanManager() {
         throw new UnsupportedOperationException();
     }

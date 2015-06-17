@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.context.conversation.event.notattached;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT_EE;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
@@ -53,7 +53,7 @@ public class DestroyConversationNotAssociatedWithCurrentRequestEventTest extends
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT, id = "bc") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bc") })
     public void testLifecycleEventFired() throws Exception {
 
         WebClient webClient = new WebClient();

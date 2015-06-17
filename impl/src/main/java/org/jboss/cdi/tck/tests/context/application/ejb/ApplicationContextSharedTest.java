@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.application.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
@@ -72,7 +72,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "e")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "e")
     public void testApplicationContextShared() throws Exception {
         FMSModelIII.reset();
         FMS flightManagementSystem = getContextualReference(FMS.class);
@@ -97,7 +97,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "dc")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "dc")
     public void testApplicationScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMS flightManagementSystem = getContextualReference(FMS.class);
         flightManagementSystem.climb();
@@ -113,7 +113,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT, id = "db") })
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "db") })
     public void testApplicationScopeActiveDuringAsyncCallToEjb(SimpleApplicationBean simpleApplicationBean) throws Exception {
         Future<Double> result = bar.compute();
         Double id = result.get();
@@ -123,7 +123,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test
-    @SpecAssertion(section = APPLICATION_CONTEXT, id = "da")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "da")
     public void testApplicationScopeActiveDuringRemoteCallToEjb() {
         assertNotNull(foo.ping());
     }

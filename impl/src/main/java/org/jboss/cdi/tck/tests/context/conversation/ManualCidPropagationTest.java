@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.conversation;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT_EE;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -50,7 +50,7 @@ public class ManualCidPropagationTest extends AbstractConversationTest {
     }
 
     @Test
-    @SpecAssertion(section = CONVERSATION_CONTEXT, id = "n")
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "n")
     public void testManualCidPropagation() throws Exception {
 
         WebClient webClient = new WebClient();

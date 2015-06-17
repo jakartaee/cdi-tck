@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.request.event.jms;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JMS;
-import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder.MessageDriven.newMessageDriven;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -68,7 +68,7 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
     private ApplicationScopedObserver observer;
 
     @Test(groups = { JAVAEE_FULL, JMS })
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "jf") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jf") })
     public void testEventsFired() throws Exception {
 
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {

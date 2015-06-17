@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.session.listener;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -53,7 +53,7 @@ public class SessionContextHttpSessionListenerTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = SESSION_CONTEXT, id = "ac")
+    @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ac")
     public void testSessionScopeActiveDuringHttpSessionListenerCall() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -69,7 +69,7 @@ public class SessionContextHttpSessionListenerTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = SESSION_CONTEXT, id = "ac")
+    @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ac")
     public void testSessionScopeActiveDuringHttpSessionListenerCallOnTimeout() throws Exception {
 
         WebClient webClient = new WebClient();

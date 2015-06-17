@@ -56,8 +56,7 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "aa") // removed from spec
-    })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "a")})
     public void testProducerFieldNotAnotherBean() {
         assert getContextualReference(BrownRecluse.class) != null;
     }

@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.request.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
@@ -76,7 +76,7 @@ public class EJBRequestContextTest extends AbstractTest {
      */
     @OperateOnDeployment("TEST")
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = REQUEST_CONTEXT, id = "gc")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "gc")
     public void testRequestScopeActiveDuringCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
         FMS flightManagementSystem = getContextualReference(FMS.class);
@@ -96,7 +96,7 @@ public class EJBRequestContextTest extends AbstractTest {
      */
     @OperateOnDeployment("TEST")
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = REQUEST_CONTEXT, id = "hc")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "hc")
     public void testRequestScopeDestroyedAfterCallToEjbTimeoutMethod() throws Exception {
         FMSModelIII.reset();
         SimpleRequestBean.reset();
@@ -124,8 +124,8 @@ public class EJBRequestContextTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "ga"),
-            @SpecAssertion(section = REQUEST_CONTEXT, id = "ha") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ga"),
+            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ha") })
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
         assertNotNull(foo.ping());
         assertTrue(foo.wasRequestBeanInPreviousCallDestroyed());
@@ -133,8 +133,8 @@ public class EJBRequestContextTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "gb"),
-            @SpecAssertion(section = REQUEST_CONTEXT, id = "hb") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "gb"),
+            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "hb") })
     public void testRequestScopeActiveDuringAsyncCallToEjb() throws Exception {
         SimpleRequestBean simpleRequestBean = getContextualReference(SimpleRequestBean.class);
         SimpleRequestBean.reset();

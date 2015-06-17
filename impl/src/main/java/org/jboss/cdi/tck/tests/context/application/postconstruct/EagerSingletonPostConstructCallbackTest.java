@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.context.application.postconstruct;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -46,7 +46,7 @@ public class EagerSingletonPostConstructCallbackTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT, id = "h") })
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "h") })
     public void testEagerSingletonPostConstructCallback(EagerSingleton eagerSingleton) throws Exception {
         assertTrue(eagerSingleton.isApplicationContextActiveDuringPostConstruct());
     }

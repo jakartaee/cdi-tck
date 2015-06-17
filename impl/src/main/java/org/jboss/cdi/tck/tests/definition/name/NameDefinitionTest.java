@@ -60,7 +60,7 @@ public class NameDefinitionTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DEFAULT_NAME, id = "a"), @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a"),
-            @SpecAssertion(section = DECLARING_BEAN_NAME, id = "d"), @SpecAssertion(section = DEFAULT_NAME, id = "fa") })
+            @SpecAssertion(section = DEFAULT_NAME, id = "fa") })
     public void testDefaultNamed() {
         String name = "haddock";
         Bean<Haddock> haddock = getUniqueBean(Haddock.class);
@@ -89,31 +89,31 @@ public class NameDefinitionTest extends AbstractTest {
         Bean<Minnow> bean = getUniqueBean(Minnow.class);
         assertNull(bean.getName());
     }
-    
+
     @Test
     @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a")
-    public void testNameStartingWithMultipleUpperCaseCharacters(){
+    public void testNameStartingWithMultipleUpperCaseCharacters() {
         Bean<JSFBean> bean = getUniqueBean(JSFBean.class);
         assertEquals(bean.getName(), "jSFBean");
     }
 
     @Test
     @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a")
-    public void testNameStartingWithUnderScoreCharacter(){
+    public void testNameStartingWithUnderScoreCharacter() {
         Bean<_Underscore> bean = getUniqueBean(_Underscore.class);
         assertEquals(bean.getName(), "_Underscore");
     }
 
     @Test
     @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a")
-    public void testNameStartingWithDollarCharacter(){
+    public void testNameStartingWithDollarCharacter() {
         Bean<$Dollar> bean = getUniqueBean($Dollar.class);
         assertEquals(bean.getName(), "$Dollar");
     }
 
     @Test
     @SpecAssertion(section = MANAGED_BEAN_NAME, id = "a")
-    public void testNameStartingWithLowerCaseCharacter(){
+    public void testNameStartingWithLowerCaseCharacter() {
         Bean<lowerCase> bean = getUniqueBean(lowerCase.class);
         assertEquals(bean.getName(), "lowerCase");
     }

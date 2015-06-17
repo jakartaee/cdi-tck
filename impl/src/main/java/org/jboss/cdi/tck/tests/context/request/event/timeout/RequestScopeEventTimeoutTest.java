@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.context.request.event.timeout;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
@@ -56,7 +56,7 @@ public class RequestScopeEventTimeoutTest extends AbstractTest {
     private URL contextPath;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "je") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "je") })
     public void testEventsFired() throws Exception {
 
         WebClient client = new WebClient();
