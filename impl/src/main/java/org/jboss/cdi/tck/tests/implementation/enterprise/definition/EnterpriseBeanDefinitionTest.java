@@ -20,7 +20,7 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SESSION_BEAN;
-import static org.jboss.cdi.tck.cdi.Sections.INSTANTIATION;
+import static org.jboss.cdi.tck.cdi.Sections.INSTANTIATION_EE;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEANS;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_NAME;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_TYPES;
@@ -63,7 +63,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "ab"), @SpecAssertion(section = INSTANTIATION, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "ab"), @SpecAssertion(section = INSTANTIATION_EE, id = "ab") })
     public void testConstructorAnnotatedInjectCalled() {
         ExplicitConstructor bean = getContextualReference(ExplicitConstructor.class);
         assert bean.getConstructorCalls() == 1;
@@ -71,7 +71,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = INSTANTIATION, id = "bb")
+    @SpecAssertion(section = INSTANTIATION_EE, id = "bb")
     public void testConstructorWithNoParamsUsed(NoParamConstructorSessionBean noParamConstructorSessionBean) {
         noParamConstructorSessionBean.ping();
         assertTrue(NoParamConstructorSessionBean.constructedCorrectly);

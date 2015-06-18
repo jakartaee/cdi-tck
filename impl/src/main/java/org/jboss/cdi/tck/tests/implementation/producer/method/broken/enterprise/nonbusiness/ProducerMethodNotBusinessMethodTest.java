@@ -17,8 +17,8 @@
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.enterprise.nonbusiness;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_METHOD;
-import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_METHOD_EE;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_EE;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -42,7 +42,7 @@ public class ProducerMethodNotBusinessMethodTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "fa"), @SpecAssertion(section = PRODUCER_METHOD, id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD_EE, id = "a"), @SpecAssertion(section = PRODUCER_METHOD_EE, id = "a") })
     public void testProducerMethodOnSessionBeanMustBeBusinessMethod() {
     }
 }

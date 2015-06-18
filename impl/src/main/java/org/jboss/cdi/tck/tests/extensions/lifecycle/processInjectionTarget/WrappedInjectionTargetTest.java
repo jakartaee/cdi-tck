@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET_EE;
 import static org.testng.Assert.assertTrue;
 
 import java.net.URL;
@@ -71,7 +71,7 @@ public class WrappedInjectionTargetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "eb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "eb") })
     public void testWrappedInjectionTargetUsedForSessionBean() throws Exception {
 
         TextPage page = invokeContextPath("test?type=sessionbean", TextPage.class);
@@ -79,7 +79,7 @@ public class WrappedInjectionTargetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "ec") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "ec") })
     public void testWrappedInjectionTargetUsedForServletListener() throws Exception {
 
         TextPage page = invokeContextPath("test?type=listener", TextPage.class);
@@ -88,7 +88,7 @@ public class WrappedInjectionTargetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "ed") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "ed") })
     public void testWrappedInjectionTargetUsedForTagHandler() throws Exception {
 
         HtmlPage page = invokeContextPath("index.jsp", HtmlPage.class);
@@ -96,7 +96,7 @@ public class WrappedInjectionTargetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "ee") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "ee") })
     public void testWrappedInjectionTargetUsedForTagLibraryListener() throws Exception {
 
         TextPage page = invokeContextPath("test?type=taglibrary", TextPage.class);
@@ -104,7 +104,7 @@ public class WrappedInjectionTargetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "eh") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "eh") })
     public void testWrappedInjectionTargetUsedForServlet() throws Exception {
 
         TextPage page = invokeContextPath("test?type=servlet", TextPage.class);
@@ -112,7 +112,7 @@ public class WrappedInjectionTargetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "ef") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "ef") })
     public void testWrappedInjectionTargetUsedForEjbInterceptor() throws Exception {
 
         TextPage page = invokeContextPath("test?type=interceptor", TextPage.class);
@@ -120,7 +120,7 @@ public class WrappedInjectionTargetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "eg") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "eg") })
     public void testWrappedInjectionTargetUsedForWsEndpoint() throws Exception {
         URL wsdlLocation = new URL(contextPath.toExternalForm() + "cowboy?wsdl");
         CowboyEndpointService endpointService = new CowboyEndpointService(wsdlLocation, new QName(TEST_URI, "Cowboy"));
@@ -135,7 +135,7 @@ public class WrappedInjectionTargetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "ei") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "ei") })
     public void testWrappedInjectionTargetIsUsedForFilter() throws Exception {
 
         TextPage page = invokeContextPath("test?type=filter", TextPage.class);

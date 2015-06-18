@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
-import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET_EE;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -50,43 +50,43 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aac"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "abc"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aac"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abc"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "de") })
     public void testProcessInjectionTargetEventFiredForServletListener() {
         assertNotNull(ProcessInjectionTargetObserver.getListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aad"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "abd"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aad"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abd"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "df") })
     public void testProcessInjectionTargetEventFiredForTagHandler() {
         assertNotNull(ProcessInjectionTargetObserver.getTagHandlerEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aae"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "abe"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aae"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abe"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "dg") })
     public void testProcessInjectionTargetEventFiredForTagLibraryListener() {
         assertNotNull(ProcessInjectionTargetObserver.getTagLibraryListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aah"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "abh"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aah"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abh"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "dj") })
     public void testProcessInjectionTargetEventFiredForServlet() {
         assertNotNull(ProcessInjectionTargetObserver.getServletEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aai"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "abi"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aai"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abi"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "dk") })
     public void testProcessInjectionTargetEventFiredForFilter() {
         assertNotNull(ProcessInjectionTargetObserver.getFilterEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aas"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aao"),
-            @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aan") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aas"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aao"),
+            @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aan") })
     public void testTypeOfProcessInjectionTargetParameter() {
         assertFalse(ProcessInjectionTargetObserver.isStringObserved());
         assertTrue(ProcessInjectionTargetObserver.isTagHandlerSubTypeObserved());

@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.war.modules;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
@@ -103,7 +103,7 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jg"), @SpecAssertion(section = BEAN_ARCHIVE, id = "jh"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jg"), @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jh"),
             @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
     public void testInjectionChainVisibilityAndInterceptorEnablement() {
         // Test injection chain, visibility, SecurityInterceptor is enabled in B only

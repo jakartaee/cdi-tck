@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.visibility;
 
-import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -44,7 +44,7 @@ public class InjectionVisibilityTest extends AbstractTest {
     SimpleSessionBean simpleSessionBean;
 
     @Test
-    @SpecAssertion(section = INJECTION, id = "a")
+    @SpecAssertion(section = INJECTION_EE, id = "a")
     public void testPackagePrivateSetMethodInjection() throws Exception {
         Bean<SimpleSessionBean> bean = getUniqueBean(SimpleSessionBean.class);
         assertNotNull(bean.getInjectionPoints());

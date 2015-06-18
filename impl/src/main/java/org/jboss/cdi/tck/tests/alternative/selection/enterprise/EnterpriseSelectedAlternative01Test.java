@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.alternative.selection.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -68,7 +68,7 @@ public class EnterpriseSelectedAlternative01Test extends AbstractTest {
     Bravo bravo;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ab") })
     public void testAlternativeSessionBeanSelected() {
         assertNotNull(alpha);
         assertNotNull(bravo);

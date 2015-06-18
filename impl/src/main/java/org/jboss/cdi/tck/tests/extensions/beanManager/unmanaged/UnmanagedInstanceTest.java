@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.beanManager.unmanaged;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD_EE;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_UNMANAGED_INSTANCE;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -96,7 +96,7 @@ public class UnmanagedInstanceTest extends AbstractTest {
     }
     
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD_EE, id = "ac") })
     public void testNonContextualInstanceIsIntercepted() {
 
         ToolInterceptor.intercepted = false;

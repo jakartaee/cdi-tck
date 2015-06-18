@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.packaging.installedLibrary;
 
 import static org.jboss.cdi.tck.TestGroups.INSTALLED_LIB;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -62,7 +62,7 @@ public class InstalledLibraryWarTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ji") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "ji") })
     public void testInjection(Alpha alpha) {
         assertNotNull(alpha);
         assertEquals(alpha.assertAvailable(Translator.class, StrictLiteral.INSTANCE).echo("hello"), "hello");

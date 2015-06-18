@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -65,7 +65,7 @@ public class EJBJarDeploymentTest extends AbstractTest {
 
     @Test(groups = JAVAEE_FULL)
     @OperateOnDeployment("TEST")
-    @SpecAssertion(section = BEAN_ARCHIVE, id = "jj")
+    @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jj")
     public void testContainerSearchesEJBJar() throws Exception {
         assertNotNull(foo);
         assertTrue(foo.isBarBeanObserved());

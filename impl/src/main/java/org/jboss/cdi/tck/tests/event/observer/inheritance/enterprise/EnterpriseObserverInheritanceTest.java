@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.event.observer.inheritance.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -45,7 +45,7 @@ public class EnterpriseObserverInheritanceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "df")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "df")
     public void testNonStaticObserverMethodInherited() throws Exception {
         Egg egg = new Egg();
         getCurrentManager().fireEvent(egg);
@@ -55,7 +55,7 @@ public class EnterpriseObserverInheritanceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dl")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "dl")
     public void testNonStaticObserverMethodIndirectlyInherited() throws Exception {
         StockPrice stockPrice = new StockPrice();
         getCurrentManager().fireEvent(stockPrice);

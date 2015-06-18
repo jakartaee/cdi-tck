@@ -20,8 +20,11 @@ import static javax.enterprise.inject.spi.SessionBeanType.STATEFUL;
 import static javax.enterprise.inject.spi.SessionBeanType.STATELESS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS_EE;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_EE;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET_EE;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
@@ -64,8 +67,8 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aab"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "abb"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "db") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aab"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abb"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bd") })
     public void testProcessInjectionTargetFiredForSessionBean() {
         assert ProcessInjectionTargetObserver.getStatelessSessionBeanType() != null;
         assert ProcessInjectionTargetObserver.getStatefulSessionBeanType() != null;
@@ -74,7 +77,7 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaf"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "abf"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aaf"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abf"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "dh") })
     public void testProcessInjectionTargetFiredForSessionBeanInterceptor() {
         assert ProcessInjectionTargetObserver.getSessionBeanInterceptorType() != null;
@@ -89,7 +92,7 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "bb")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bb")
     public void testProcessAnnotatedTypeFiredForSessionBean() {
         assert ProcessAnnotatedTypeObserver.getStatelessSessionBeanType() != null;
         assert ProcessAnnotatedTypeObserver.getStatefulSessionBeanType() != null;
@@ -98,7 +101,7 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "bh")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bh")
     public void testProcessAnnotatedTypeFiredForSessionBeanInterceptor() {
         assert ProcessAnnotatedTypeObserver.getSessionBeanInterceptorType() != null;
         validateSessionBeanInterceptor(ProcessAnnotatedTypeObserver.getSessionBeanInterceptorType());
@@ -112,28 +115,28 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_EE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "fb") })
     public void testProcessSessionBeanFiredForStatelessSessionBean() {
         assert ProcessBeanObserver.getProcessStatelessSessionBeanAnnotatedType() != null;
         validateStatelessSessionBean(ProcessBeanObserver.getProcessStatelessSessionBeanAnnotatedType());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "fb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_EE, id = "ca"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "fb") })
     public void testProcessSessionBeanFiredForStatefulSessionBean() {
         assert ProcessBeanObserver.getProcessStatefulSessionBeanAnnotatedType() != null;
         validateStatefulSessionBean(ProcessBeanObserver.getProcessStatefulSessionBeanAnnotatedType());
     }
 
     @Test
-    @SpecAssertion(section = PROCESS_BEAN, id = "hb")
+    @SpecAssertion(section = PROCESS_BEAN_EE, id = "hb")
     public void testGetEJBName() {
         assert ProcessBeanObserver.getProcessStatelessSessionBeanName().equals("sheep");
         assert ProcessBeanObserver.getProcessStatefulSessionBeanName().equals("cow");
     }
 
     @Test
-    @SpecAssertion(section = PROCESS_BEAN, id = "hc")
+    @SpecAssertion(section = PROCESS_BEAN_EE, id = "hc")
     public void testGetSessionBeanType() {
         assert ProcessBeanObserver.getProcessStatelessSessionBeanType().equals(STATELESS);
         assert ProcessBeanObserver.getProcessStatefulSessionBeanType().equals(STATEFUL);

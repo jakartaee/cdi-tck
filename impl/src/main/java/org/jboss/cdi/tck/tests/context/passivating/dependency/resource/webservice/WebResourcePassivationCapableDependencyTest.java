@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.webservi
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JAX_WS;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -42,7 +42,7 @@ public class WebResourcePassivationCapableDependencyTest extends AbstractTest {
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })
-    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "de")
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "de")
     public void testWebResourcePassivated() throws IOException, ClassNotFoundException {
 
         PassivatedBean bean = getContextualReference(PassivatedBean.class);

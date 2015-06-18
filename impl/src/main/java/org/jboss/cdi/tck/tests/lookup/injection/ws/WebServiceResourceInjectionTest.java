@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.injection.ws;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JAX_WS;
-import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -46,8 +46,8 @@ public class WebServiceResourceInjectionTest extends AbstractTest {
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })
-    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bi"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bj") })
+    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bi"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bj") })
     public void testInitializerMethodsCalledAfterEEResourceWebServiceRefInjection() throws Exception {
         Alpha alpha = getContextualReference(Alpha.class);
         assertNotNull(alpha);

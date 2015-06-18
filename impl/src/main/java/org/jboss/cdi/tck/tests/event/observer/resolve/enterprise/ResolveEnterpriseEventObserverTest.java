@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.event.observer.resolve.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -38,7 +38,7 @@ public class ResolveEnterpriseEventObserverTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = OBSERVER_METHODS, id = "d")
+    @SpecAssertion(section = OBSERVER_METHODS_EE, id = "d")
     public void testObserverMethodOnEnterpriseBeanIsBusinessMethodOrStatic() {
         assertEquals(getCurrentManager().resolveObserverMethods(new EJBEvent()).size(), 4);
         getCurrentManager().fireEvent(new EJBEvent());

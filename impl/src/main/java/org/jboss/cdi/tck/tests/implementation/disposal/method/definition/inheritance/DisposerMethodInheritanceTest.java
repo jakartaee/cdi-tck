@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheri
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -65,8 +66,8 @@ public class DisposerMethodInheritanceTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "de"),
-            @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dk") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "de"),
+            @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "dk") })
     public void testSessionBeanDisposerMethodNotInherited() {
 
         DependentInstance<Egg> eggInstance = new DependentInstance<Egg>(getCurrentManager(), Egg.class);

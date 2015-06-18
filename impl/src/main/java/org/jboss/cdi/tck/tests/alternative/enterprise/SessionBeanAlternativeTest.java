@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.alternative.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE_EE;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -36,7 +36,7 @@ public class SessionBeanAlternativeTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "bb")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE_EE, id = "bb")
     public void testEnabledPolicyAvailable() {
         assert getBeans(EjbInterface.class).size() == 1;
         assert getBeans(EjbInterface.class).iterator().next().getTypes().contains(EjbInterface.class);

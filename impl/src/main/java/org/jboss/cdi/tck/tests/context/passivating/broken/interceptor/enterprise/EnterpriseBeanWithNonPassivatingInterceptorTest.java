@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.broken.interceptor.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION_EE;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -47,7 +47,7 @@ public class EnterpriseBeanWithNonPassivatingInterceptorTest extends AbstractTes
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION, id = "b"), @SpecAssertion(section = PASSIVATION_VALIDATION, id = "hd") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "b"), @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "hd") })
     public void testEnterpriseBeanWithNonPassivatingDecoratorFails() {
     }
 }

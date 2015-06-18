@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.simpleInterce
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD_EE;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -53,7 +54,7 @@ public class SessionBeanInterceptorDefinitionTest extends AbstractTest {
     Rocket rocket;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "c"), @SpecAssertion(section = BIZ_METHOD, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD_EE, id = "c"), @SpecAssertion(section = BIZ_METHOD, id = "aa") })
     public void testSessionBeanIsIntercepted() {
 
         assertNotNull(missile);

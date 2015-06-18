@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.definition.enterp
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -53,7 +54,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dd")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "dd")
     public void testNonStaticProducerMethodNotInherited() {
         assertEquals(getBeans(Apple.class, new AnnotationLiteral<Yummy>() {
         }).size(), 1);
@@ -62,7 +63,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dj")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "dj")
     public void testNonStaticProducerMethodNotIndirectlyInherited() {
         Set<Bean<Pear>> beans = getBeans(Pear.class, new AnnotationLiteral<Yummy>() {
         });

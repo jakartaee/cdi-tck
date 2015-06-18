@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.definition.qualifier.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE_EE;
 
 import java.lang.annotation.Annotation;
 import java.util.Set;
@@ -48,7 +48,7 @@ public class EnterpriseQualifierDefinitionTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "al")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "al")
     public void testQualifierDeclaredInheritedIsInherited() throws Exception {
         Set<? extends Annotation> qualifiers = getBeans(BorderCollieLocal.class, new HairyQualifier(false)).iterator().next()
                 .getQualifiers();
@@ -56,13 +56,13 @@ public class EnterpriseQualifierDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ala")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ala")
     public void testQualifierNotDeclaredInheritedIsNotInherited() throws Exception {
         assert getBeans(TameSkinnyHairlessCatLocal.class, new SkinnyQualifier()).size() == 0;
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ap")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ap")
     public void testQualifierDeclaredInheritedIsIndirectlyInherited() {
         Set<? extends Annotation> qualifiers = getBeans(EnglishBorderCollieLocal.class, new HairyQualifier(false)).iterator()
                 .next().getQualifiers();
@@ -70,7 +70,7 @@ public class EnterpriseQualifierDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "apa")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "apa")
     public void testQualifierNotDeclaredInheritedIsNotIndirectlyInherited() {
         Set<Bean<FamousCatLocal>> beans = getBeans(FamousCatLocal.class, new SkinnyQualifier());
         assert beans.size() == 0;

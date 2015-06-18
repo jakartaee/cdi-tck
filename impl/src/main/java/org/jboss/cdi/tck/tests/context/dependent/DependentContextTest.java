@@ -20,7 +20,9 @@ import static org.jboss.cdi.tck.cdi.Sections.BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.CREATIONAL_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVERS_METHOD_INVOCATION;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
@@ -91,7 +93,7 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "ca")
+    @SpecAssertion(section = DEPENDENT_CONTEXT_EE, id = "ca")
     public void testInstanceUsedForElEvaluationNotShared() throws Exception {
         Set<Bean<Fox>> foxBeans = getBeans(Fox.class);
         assert foxBeans.size() == 1;
@@ -350,7 +352,7 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "eee")
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION_EE, id = "eee")
     public void testDependentsDestroyedWhenElEvaluationCompletes() throws Exception {
         // Reset test class
         Fox.reset();

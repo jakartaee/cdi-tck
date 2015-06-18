@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.injection;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS_EE;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
@@ -74,8 +75,8 @@ public class InjectionTest extends AbstractTest {
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bh"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bk"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bl"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bi"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bj") })
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bi"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bj") })
     public void testInjectionFieldsAndInitializerMethods(DeluxeHenHouse henHouse) throws Exception {
         assertNotNull(henHouse.fox);
         assertEquals(henHouse.fox.getName(), "gavin");

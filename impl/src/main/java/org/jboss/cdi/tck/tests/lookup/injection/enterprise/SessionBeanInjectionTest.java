@@ -17,9 +17,9 @@
 package org.jboss.cdi.tck.tests.lookup.injection.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
-import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
-import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS_EE;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_EE;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -40,23 +40,23 @@ public class SessionBeanInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "a"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "aa"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ab"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ba"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "be") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "a"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "aa"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ab"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ba"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "be") })
     public void testInjectionOnContextualSessionBean() {
         assert getContextualReference(FarmLocal.class).isInjectionPerformedCorrectly();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "c"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ak"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "al") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "c"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ak"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "al") })
     public void testInjectionOnNonContextualSessionBean() {
         assert getContextualReference(InjectedSessionBeanLocal.class).getFarm().isInjectionPerformedCorrectly();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ed"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ao"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ap") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "ed"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ao"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ap") })
     public void testInjectionOnEJBInterceptor() {
         // Test interceptor that intercepts contextual Session Bean
         assert getContextualReference(FarmLocal.class).getAnimalCount() == 2;
@@ -65,7 +65,7 @@ public class SessionBeanInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ab")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "ab")
     public void testFieldDeclaredInSuperclassInjected() {
         DeluxeHenHouseLocal henHouse = getContextualReference(DeluxeHenHouseLocal.class);
         assert henHouse.getFox() != null;
@@ -73,7 +73,7 @@ public class SessionBeanInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ad")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "ad")
     public void testFieldDeclaredInSuperclassIndirectlyInjected() {
         MegaPoorHenHouseLocal henHouse = getContextualReference(MegaPoorHenHouseLocal.class);
         assert henHouse.getFox() != null;

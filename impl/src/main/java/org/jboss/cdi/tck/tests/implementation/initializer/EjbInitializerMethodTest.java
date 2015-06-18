@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.initializer;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS_EE;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -38,7 +38,7 @@ public class EjbInitializerMethodTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = INITIALIZER_METHODS, id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = INITIALIZER_METHODS_EE, id = "e") })
     // This DOES NOT TEST initializer methods on Java EE component classes PLM
     public void testInitializerMethodNotABusinessMethod() {
         AndalusianChicken.nonBusinessMethodCalled = false;

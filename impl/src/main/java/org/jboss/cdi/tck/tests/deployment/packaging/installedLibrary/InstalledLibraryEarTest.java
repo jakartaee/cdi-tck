@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.deployment.packaging.installedLibrary;
 
 import static org.jboss.cdi.tck.TestGroups.INSTALLED_LIB;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -70,21 +70,21 @@ public class InstalledLibraryEarTest extends AbstractTest {
     }
 
     @Test(groups = { JAVAEE_FULL, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jf") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jf") })
     public void testEjbJarInjection(Alpha alpha) {
         assertNotNull(alpha);
         assertEquals(alpha.assertAvailable(Translator.class, StrictLiteral.INSTANCE).echo("hello"), "hello");
     }
 
     @Test(groups = { JAVAEE_FULL, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jf") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jf") })
     public void testBundledLibraryInjection(Bravo bravo) {
         assertNotNull(bravo);
         assertEquals(bravo.assertAvailable(Translator.class, StrictLiteral.INSTANCE).echo("hello"), "hello");
     }
 
     @Test(groups = { JAVAEE_FULL, INSTALLED_LIB }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jf") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jf") })
     public void testWarInjection(Charlie charlie) {
         assertNotNull(charlie);
         assertEquals(charlie.assertAvailable(Translator.class, StrictLiteral.INSTANCE).echo("hello"), "hello");

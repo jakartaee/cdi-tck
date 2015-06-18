@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.definition.stereotype.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE_EE;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
@@ -39,37 +39,37 @@ public class EnterpriseStereotypeDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "am")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "am")
     public void testStereotypeDeclaredInheritedIsInherited() throws Exception {
         assert getBeans(BorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ama")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ama")
     public void testStereotypeNotDeclaredInheritedIsNotInherited() throws Exception {
         assert !getBeans(BarracudaLocal.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aq")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "aq")
     public void testStereotypeDeclaredInheritedIsIndirectlyInherited() {
         assert getBeans(EnglishBorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aqa")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "aqa")
     public void testStereotypeNotDeclaredInheritedIsNotIndirectlyInherited() {
         assert !getBeans(TameBarracudaLocal.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "hhj")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "hhj")
     public void testStereotypeScopeIsOverriddenByInheritedScope() {
         assert getBeans(ChihuahuaLocal.class).iterator().next().getScope().equals(SessionScoped.class);
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "hhk")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "hhk")
     public void testStereotypeScopeIsOverriddenByIndirectlyInheritedScope() {
         assert getBeans(MexicanChihuahuaLocal.class).iterator().next().getScope().equals(SessionScoped.class);
     }

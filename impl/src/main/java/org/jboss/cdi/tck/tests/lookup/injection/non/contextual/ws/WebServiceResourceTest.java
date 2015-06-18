@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JAX_WS;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
-import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
-import static org.jboss.cdi.tck.cdi.Sections.INJECTION;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS_EE;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_EE;
 import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -51,9 +51,9 @@ public class WebServiceResourceTest extends AbstractTest {
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })
-    @SpecAssertions({ @SpecAssertion(section = INJECTION, id = "ee"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "aq"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ar") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "ee"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "aq"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ar") })
     public void testInjectionIntoWebServiceEndpoint() throws Exception {
         assertTrue(sheepWS.isSheepInjected());
     }

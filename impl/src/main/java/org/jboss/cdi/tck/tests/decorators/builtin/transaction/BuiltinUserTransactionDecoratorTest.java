@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.decorators.builtin.transaction;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 
 import javax.inject.Inject;
 import javax.transaction.Status;
@@ -56,7 +56,7 @@ public class BuiltinUserTransactionDecoratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "acn") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN_EE, id = "acn") })
     public void testUserTransactionDecorated() throws Exception {
         Assert.assertEquals(sessionBean.getTransaction().getStatus(), Status.STATUS_UNKNOWN);
     }

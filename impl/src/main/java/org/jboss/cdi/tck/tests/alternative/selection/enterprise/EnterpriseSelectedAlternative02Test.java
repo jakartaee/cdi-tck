@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.alternative.selection.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createEnterpriseBuilderBase;
 import static org.testng.Assert.assertEquals;
@@ -83,7 +83,7 @@ public class EnterpriseSelectedAlternative02Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ab") })
     public void testAlternativeSessionBeanSelected() {
         assertNotNull(alpha);
         assertNotNull(bravo);

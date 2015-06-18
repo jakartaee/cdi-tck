@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.definition.scope.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE_EE;
 
 import javax.enterprise.context.RequestScoped;
 
@@ -38,25 +38,25 @@ public class EnterpriseScopeDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "be")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "be")
     public void testScopeTypeDeclaredInheritedIsInherited() throws Exception {
         assert getBeans(BorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "bea")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "bea")
     public void testScopeTypeNotDeclaredInheritedIsNotInherited() throws Exception {
         assert !getBeans(SiameseLocal.class).iterator().next().getScope().equals(FooScoped.class);
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "bh")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "bh")
     public void testScopeTypeDeclaredInheritedIsIndirectlyInherited() {
         assert getBeans(EnglishBorderCollieLocal.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "bha")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "bha")
     public void testScopeTypeNotDeclaredInheritedIsNotIndirectlyInherited() {
         assert !getBeans(BengalTigerLocal.class).iterator().next().getScope().equals(FooScoped.class);
     }

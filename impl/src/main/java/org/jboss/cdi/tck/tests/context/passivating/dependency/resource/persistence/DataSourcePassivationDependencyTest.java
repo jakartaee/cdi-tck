@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.persiste
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -59,7 +59,7 @@ public class DataSourcePassivationDependencyTest extends AbstractTest {
     }
 
     @Test(groups = { PERSISTENCE, INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "da") })
     public void testDataSource() throws IOException, ClassNotFoundException, SQLException {
 
         Pool pool = getContextualReference(Pool.class);

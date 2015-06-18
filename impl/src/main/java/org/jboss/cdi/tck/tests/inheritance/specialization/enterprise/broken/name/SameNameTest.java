@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise.broken.name;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION_EE;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -40,7 +40,7 @@ public class SameNameTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "lc")
+    @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION_EE, id = "lc")
     public void testSpecializingAndSpecializedBeanHasName() {
     }
 

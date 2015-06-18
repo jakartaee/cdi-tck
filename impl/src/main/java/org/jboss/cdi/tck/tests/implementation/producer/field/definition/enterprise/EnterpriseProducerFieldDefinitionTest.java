@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.producer.field.definition.enterpr
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD_EE;
 
 import javax.enterprise.util.AnnotationLiteral;
 
@@ -39,7 +40,7 @@ public class EnterpriseProducerFieldDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "a"), @SpecAssertion(section = PRODUCER_FIELD, id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "a"), @SpecAssertion(section = PRODUCER_FIELD_EE, id = "a") })
     public void testStaticProducerField() {
         assert getContextualReference(Egg.class, new AnnotationLiteral<Foo>() {
         }) != null;

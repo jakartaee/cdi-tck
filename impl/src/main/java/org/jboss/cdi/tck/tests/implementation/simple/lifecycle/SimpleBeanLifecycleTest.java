@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 import static org.jboss.cdi.tck.cdi.Sections.CONCEPTS;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL;
@@ -173,7 +173,7 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa"), @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa"),
             @SpecAssertion(section = INJECTED_FIELD_QUALIFIERS, id = "a"), @SpecAssertion(section = INJECTED_FIELDS, id = "a"),
-            @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE, id = "jg") })
+            @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jg") })
     public void testCreateInjectsFieldsDeclaredInJava() {
         assert getBeans(TunaFarm.class).size() == 1;
         TunaFarm tunaFarm = getContextualReference(TunaFarm.class);

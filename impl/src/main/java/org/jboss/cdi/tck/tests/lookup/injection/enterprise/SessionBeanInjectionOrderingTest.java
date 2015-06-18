@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.injection.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS_EE;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -38,20 +38,20 @@ public class SessionBeanInjectionOrderingTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bb")
+    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bb")
     public void testInitializerCalledAfterFieldInjectionOfSuperclass() {
         MegaPoorHenHouseLocal house = getContextualReference(MegaPoorHenHouseLocal.class);
         assert house.isInitializerCalledAfterSuperclassInjection();
     }
 
     @Test
-    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bf")
+    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bf")
     public void testPostConstructCalledAfterInitializerOfSuperclass() {
         assert getContextualReference(MegaPoorHenHouseLocal.class).isPostConstructCalledAfterSuperclassInitializer();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bc"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bd") })
+    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bc"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bd") })
     public void testInitializerCalledAfterResourceInjection() {
         assert getContextualReference(InjectedSessionBeanLocal.class).isInitializerCalledAfterResourceInjection();
     }

@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.decorators.invocation.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_ANNOTATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
@@ -72,7 +72,7 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
     FooBusiness foo;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "d"), @SpecAssertion(section = DECORATOR_BEAN, id = "d"),
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD_EE, id = "d"), @SpecAssertion(section = DECORATOR_BEAN, id = "d"),
             @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a"), @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "cc"),
             @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a"), @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "b"),
             @SpecAssertion(section = ENABLED_DECORATORS, id = "b") })
@@ -99,7 +99,7 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "i"), @SpecAssertion(section = DECORATOR_BEAN, id = "d"),
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD_EE, id = "i"), @SpecAssertion(section = DECORATOR_BEAN, id = "d"),
             @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a") })
     public void testNonContextualDecorated() throws Exception {
 

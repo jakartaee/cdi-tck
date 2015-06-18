@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.NEW;
+import static org.jboss.cdi.tck.cdi.Sections.NEW_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
@@ -113,7 +114,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = NEW, id = "j"), @SpecAssertion(section = NEW, id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = NEW_EE, id = "j"), @SpecAssertion(section = NEW_EE, id = "k") })
     public void testForEachEnterpriseBeanANewBeanExists() {
         Bean<OrderLocal> orderBean = getBeans(OrderLocal.class).iterator().next();
         Set<Bean<OrderLocal>> newOrderBeans = getBeans(OrderLocal.class, new NewLiteral(Order.class));
@@ -143,7 +144,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "n")
+    @SpecAssertion(section = NEW_EE, id = "n")
     public void testNewBeanHasSameInjectedFields() {
         Bean<InitializerSimpleBeanLocal> simpleBean = getBeans(InitializerSimpleBeanLocal.class).iterator().next();
         Bean<InitializerSimpleBeanLocal> newSimpleBean = getBeans(InitializerSimpleBeanLocal.class,
@@ -153,14 +154,14 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "o")
+    @SpecAssertion(section = NEW_EE, id = "o")
     public void testNewBeanHasTheSameInterceptorBindings() {
         // Method foo() is intercepted
         assertTrue(getContextualReference(NewSessionBeanConsumer.class).getOrder().ping());
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = NEW, id = "yb") })
+    @SpecAssertions({ @SpecAssertion(section = NEW_EE, id = "yb") })
     public void testNewBeanCreatedForFieldInjectionPoint(Wizard wizard) {
         Bean<Tiger> bean = getUniqueBean(Tiger.class, NewLiteral.INSTANCE);
         checkNewQualifiedBean(bean, Object.class, Tiger.class);
@@ -168,7 +169,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = NEW, id = "yd") })
+    @SpecAssertions({ @SpecAssertion(section = NEW_EE, id = "yd") })
     public void testNewBeanCreatedForInitializerInjectionPoint(Wizard wizard) {
         Bean<Staff> bean = getUniqueBean(Staff.class, NewLiteral.INSTANCE);
         checkNewQualifiedBean(bean, Object.class, Staff.class);
@@ -176,7 +177,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = NEW, id = "yf") })
+    @SpecAssertions({ @SpecAssertion(section = NEW_EE, id = "yf") })
     public void testNewBeanCreatedForConstructorInjectionPoint(Wizard wizard) {
         Bean<Spell> bean = getUniqueBean(Spell.class, NewLiteral.INSTANCE);
         checkNewQualifiedBean(bean, Object.class, Spell.class);
@@ -184,7 +185,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = NEW, id = "yh") })
+    @SpecAssertions({ @SpecAssertion(section = NEW_EE, id = "yh") })
     public void testNewBeanCreatedForProducerMethod(Wizard wizard) {
         Bean<Dragon> bean = getUniqueBean(Dragon.class, NewLiteral.INSTANCE);
         checkNewQualifiedBean(bean, Object.class, Dragon.class);
@@ -192,7 +193,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = NEW, id = "yj") })
+    @SpecAssertions({ @SpecAssertion(section = NEW_EE, id = "yj") })
     public void testNewBeanCreatedForObserverMethod(Wizard wizard) {
         Bean<Hat> bean = getUniqueBean(Hat.class, NewLiteral.INSTANCE);
         checkNewQualifiedBean(bean, Object.class, Hat.class);
@@ -201,7 +202,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = NEW, id = "yl") })
+    @SpecAssertions({ @SpecAssertion(section = NEW_EE, id = "yl") })
     public void testNewBeanCreatedForDisposerMethod(DragonProducer producer) {
 
         Bean<Fireball> bean = getUniqueBean(Fireball.class, NewLiteral.INSTANCE);

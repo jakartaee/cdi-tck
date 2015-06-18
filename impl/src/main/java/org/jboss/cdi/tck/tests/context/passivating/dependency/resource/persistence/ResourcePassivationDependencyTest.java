@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.persiste
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -49,8 +49,8 @@ public class ResourcePassivationDependencyTest extends AbstractTest {
     }
 
     @Test(groups = { PERSISTENCE, INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "db"),
-            @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "dc") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "db"),
+            @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "dc") })
     public void testPersistenceUnitAndContext() throws IOException, ClassNotFoundException {
 
         Profile profile = getContextualReference(Profile.class);

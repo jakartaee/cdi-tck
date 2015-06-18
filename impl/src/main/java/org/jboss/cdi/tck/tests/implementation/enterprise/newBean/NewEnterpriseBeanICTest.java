@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.NEW;
+import static org.jboss.cdi.tck.cdi.Sections.NEW_EE;
 
 import java.util.Set;
 
@@ -45,7 +46,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "l")
+    @SpecAssertion(section = NEW_EE, id = "l")
     public void testNewBeanHasSameConstructor() {
         ExplicitConstructor newBean = getContextualReference(ExplicitConstructor.class, new NewLiteral(
                 ExplicitConstructorSessionBean.class));
@@ -54,7 +55,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "m")
+    @SpecAssertion(section = NEW_EE, id = "m")
     public void testNewBeanHasSameInitializers() {
         InitializerSimpleBeanLocal bean = getContextualReference(InitializerSimpleBeanLocal.class);
         InitializerSimpleBeanLocal newBean = getContextualReference(InitializerSimpleBeanLocal.class, new NewLiteral(

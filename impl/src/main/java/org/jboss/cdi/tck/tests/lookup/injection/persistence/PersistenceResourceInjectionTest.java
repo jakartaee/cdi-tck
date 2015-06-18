@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.injection.persistence;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
-import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
+import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS_EE;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -42,8 +42,8 @@ public class PersistenceResourceInjectionTest extends AbstractTest {
     }
 
     @Test(groups = { PERSISTENCE, INTEGRATION }, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bi"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "bj") })
+    @SpecAssertions({ @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bi"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bj") })
     public void testInitializerMethodsAfterEEResourcePersistenceInjection(SpecialPersistor sp) throws Exception {
         assertNotNull(sp);
         assertTrue(sp.initializerCalledAfterResourceInjection);

@@ -1,7 +1,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.dependency.sessionbean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -37,7 +37,7 @@ public class SessionBeanPassivationDependencyTest extends AbstractTest {
     Chef chef;
 
     @Test(groups=INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "ab") })
     public void testSingleton() throws IOException, ClassNotFoundException {
         assertNotNull(worker);
         assertNotNull(worker.getHammer());
@@ -55,7 +55,7 @@ public class SessionBeanPassivationDependencyTest extends AbstractTest {
     }
 
     @Test(groups=INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "aa") })
     public void testStateless() throws IOException, ClassNotFoundException {
         assertNotNull(chef);
         assertNotNull(chef.getSpoon());

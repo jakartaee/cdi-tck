@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.interceptors.invocation;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD_EE;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -150,7 +151,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertion(section = BIZ_METHOD, id = "ig")
+    @SpecAssertion(section = BIZ_METHOD_EE, id = "ig")
     public void testTimeoutMethodIntercepted(Timing timing) throws Exception {
 
         timing.createTimer();

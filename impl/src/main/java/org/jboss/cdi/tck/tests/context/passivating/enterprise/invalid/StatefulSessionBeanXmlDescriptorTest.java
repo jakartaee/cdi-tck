@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.enterprise.invalid;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_EE;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -54,7 +54,7 @@ public class StatefulSessionBeanXmlDescriptorTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ab")
+    @SpecAssertion(section = PASSIVATION_CAPABLE_EE, id = "ab")
     public void testDeployment() {
         // only verify deployment
     }

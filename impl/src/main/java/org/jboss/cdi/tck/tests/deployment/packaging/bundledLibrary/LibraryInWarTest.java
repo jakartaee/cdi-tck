@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary;
 
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 import static org.testng.Assert.assertEquals;
 
 import javax.inject.Inject;
@@ -50,7 +50,7 @@ public class LibraryInWarTest extends AbstractTest {
     Foo foo;
 
     @Test(groups = {})
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jh") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jh") })
     public void test() {
         assertEquals(getCurrentManager().getBeans(Foo.class).size(), 1);
         assertEquals(getCurrentManager().getBeans(Bar.class).size(), 1);

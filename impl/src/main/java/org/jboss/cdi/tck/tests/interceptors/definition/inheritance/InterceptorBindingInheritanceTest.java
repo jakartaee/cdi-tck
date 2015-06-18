@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition.inheritance;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE_EE;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -72,7 +73,7 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "an"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ana") })
+    @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "an"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ana") })
     public void testInterceptorBindingDirectlyInheritedFromSessionBean(ForgetMeNot forgetMeNot) throws Exception {
         forgetMeNot.pong();
         assertTrue(forgetMeNot.inspectedBy(squirrel));
@@ -80,7 +81,7 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ar"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ara") })
+    @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ar"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ara") })
     public void testInterceptorBindingIndirectlyInheritedFromSessionBean(@European ForgetMeNot woodForgetMeNot)
             throws Exception {
         woodForgetMeNot.pong();

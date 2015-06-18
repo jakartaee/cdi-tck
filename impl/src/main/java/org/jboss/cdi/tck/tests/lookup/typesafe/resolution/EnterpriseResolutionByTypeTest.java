@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.RESTRICTING_BEAN_TYPES;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_TYPES_EE;
 
 import javax.enterprise.inject.spi.Bean;
 
@@ -38,7 +38,7 @@ public class EnterpriseResolutionByTypeTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = RESTRICTING_BEAN_TYPES, id = "b")
+    @SpecAssertion(section = BEAN_TYPES_EE, id = "a")
     public void testBeanTypesOnSessionBean() {
         assert getBeans(CapercaillieLocal.class).size() == 1;
         assert getBeans(ScottishBirdLocal.class).isEmpty();

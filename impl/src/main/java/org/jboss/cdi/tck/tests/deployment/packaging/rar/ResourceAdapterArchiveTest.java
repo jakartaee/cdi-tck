@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.deployment.packaging.rar;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -70,14 +70,14 @@ public class ResourceAdapterArchiveTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jd") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jd") })
     public void testInjection(Translator translator) {
         assertNotNull(translator);
         assertEquals(translator.ping(), 1);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jd") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jd") })
     public void testResolution() {
         getUniqueBean(Translator.class);
     }

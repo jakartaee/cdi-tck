@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION_EE;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -53,7 +53,7 @@ public class NonPassivationCapableSessionBeanTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "j")
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "j")
     public void testDeployment() {
         // only verify deployment
     }

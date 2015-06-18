@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -79,42 +79,42 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "be")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "be")
     public void testProcessAnnotatedTypeEventFiredForServletListener() {
         assertNotNull(ProcessAnnotatedTypeObserver.getListenerEvent());
         validateServletListenerAnnotatedType(ProcessAnnotatedTypeObserver.getListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "bf")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bf")
     public void testProcessAnnotatedTypeEventFiredForTagHandler() {
         assertNotNull(ProcessAnnotatedTypeObserver.getTagHandlerEvent());
         validateTagHandlerAnnotatedType(ProcessAnnotatedTypeObserver.getTagHandlerEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "bg")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bg")
     public void testProcessAnnotatedTypeEventFiredForTagLibraryListener() {
         assertNotNull(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent());
         validateTagLibraryListenerAnnotatedType(ProcessAnnotatedTypeObserver.getTagLibraryListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "bj")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bj")
     public void testProcessAnnotatedTypeEventFiredForServlet() {
         assertNotNull(ProcessAnnotatedTypeObserver.getServletEvent());
         validateServletAnnotatedType(ProcessAnnotatedTypeObserver.getServletEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "bk")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bk")
     public void testProcessAnnotatedTypeEventFiredForFilter() {
         assertNotNull(ProcessAnnotatedTypeObserver.getFilterEvent());
         validateFilterAnnotatedType(ProcessAnnotatedTypeObserver.getFilterEvent());
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "bd")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bd")
     public void testProcessAnnotatedTypeEventFiredForJsfManagedBean() {
         assertNotNull(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent());
         validateJsfManagedBeanAnnotatedType(ProcessAnnotatedTypeObserver.getJsfManagedBeanEvent());

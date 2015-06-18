@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.context.dependent.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION_EE;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -40,7 +40,7 @@ public class DependentContextEjbTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "aaab")
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION_EE, id = "aaab")
     public void testDestroyingEjbDestroysDependents() throws Exception {
         assert getBeans(HouseLocal.class).size() == 1;
         Bean<HouseLocal> bean = getBeans(HouseLocal.class).iterator().next();
@@ -57,7 +57,7 @@ public class DependentContextEjbTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "aaab")
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION_EE, id = "aaab")
     public void testDestroyingEjbDestroysDependentSimples() throws Exception {
         assert getBeans(FarmLocal.class).size() == 1;
         Bean<FarmLocal> farmBean = getBeans(FarmLocal.class).iterator().next();
