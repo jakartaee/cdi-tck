@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
 import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES;
+import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -158,7 +159,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "kb")
+    @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES_EE, id = "kb")
     public void testGetTypeClosureUsedToDetermineTypeOfSessionBean() {
         Bean<Pasta> pasta = getBeans(Pasta.class).iterator().next();
         assertEquals(pasta.getTypes().size(), 2);

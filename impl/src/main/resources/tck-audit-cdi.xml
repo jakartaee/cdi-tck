@@ -7796,8 +7796,54 @@
 
     </section>
 
-    <section id="contexts_ee" title="Scopes and contexts in Java SE" level="1">
+    <section id="init_container" title="Starting the container" level="2">
+        <assertion id="a">
+            <text>Container can be initialized from a CDIProvider instance. Calling one of the initialize methods will start a container and return a CDI
+                utility object to interact with it.
+            </text>
+        </assertion>
 
+        <assertion id="b">
+            <text>Each time initialize method is called on the CDIProvider it returns a new CDI instance.</text>
+        </assertion>
+
+        <assertion id="c">
+            <text>The application context is started automatically by the container on start up</text>
+        </assertion>
+    </section>
+
+    <section id="stop_container" title="Stopping the container" level="2">
+        <assertion id="a">
+            <text>The CDI instance may also be stopped manually by calling the shutdown method on the CDI object.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>If the shutdown method is explicitly invoked and the container was not initialized or already stopped , an IllegalStateException will be
+                thrown
+            </text>
+        </assertion>
+    </section>
+
+    <section id="contexts_se" title="Scopes and contexts in Java SE" level="1">
+
+    </section>
+
+    <section id="application_context_se" title="Application context lifecycle in Java SE" level="2">
+        <assertion id="a">
+            <text>The application context is shared between all the beans that execute within the same container</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>An event with qualifier @Initialized(ApplicationScoped.class) is fired when the application context is initialized</text>
+        </assertion>
+
+        <assertion id="c">
+            <text>An event with qualifier @Destroyed(ApplicationScoped.class) is fired when the application is destroyed</text>
+        </assertion>
+
+        <assertion id="d">
+            <text>The event payload is any java.lang.Object</text>
+        </assertion>
     </section>
 
     <section id="packaging_deployment_se" title="Packaging and deployment in Java SE" level="1">
@@ -8214,15 +8260,6 @@
         </assertion>
     </section>
 
-    <section id="declaring_bean_constructor" title="Declaring a bean constructor" level="3">
-        <group>
-            <text>The bean constructor may be identified by annotating the constructor |@Inject|</text>
-            <assertion id="ab">
-                <text>Test an @Inject constructor is used on a session bean</text>
-            </assertion>
-        </group>
-    </section>
-
     <section id="injected_fields_ee" title="Injected fields in Java EE" level="2">
         <group>
             <text>An injected field is a non-static, non-final field of a bean class or of any other classes supporting injection.</text>
@@ -8495,6 +8532,31 @@
         </group>
     </section>
 
+    <section id="selection_ee" title="Modularity in Java EE" level="2">
+        <group>
+            <text>A bean is available for injection in a certain module if the bean is not an interceptor or decorator, the bean is enabled, the bean is either
+                not an alternative, or the module is a bean archive and the bean is a selected alternative of the bean archive, and the bean class is required
+                to be accessible to classes in the module, according to the class accessibility requirements of the module architecture.
+            </text>
+            <assertion id="d" implied="true">
+                <text>Check an enabled session bean can be injected</text>
+            </assertion>
+
+            <assertion id="j" implied="true">
+                <text>Check a disabled session bean is not injectable</text>
+            </assertion>
+
+            <assertion id="k" implied="true">
+                <text>Check a specialized session bean is not injectable</text>
+            </assertion>
+
+            <assertion id="p" implied="true">
+                <text>Check a selected alternative being session bean is injected</text>
+            </assertion>
+
+        </group>
+    </section>
+
     <section id="declaring_selected_alternatives_application_ee" title="Declaring selected alternatives for an application in Java EE" level="3">
 
         <group>
@@ -8522,33 +8584,8 @@
         </group>
     </section>
 
-    <section id="inter_module_injection" title="Inter-module injection" level="3">
-        <group>
-            <text>A bean is available for injection in a certain module if the bean is not an interceptor or decorator, the bean is enabled, the bean is either
-                not an alternative, or the module is a bean archive and the bean is a selected alternative of the bean archive, and the bean class is required
-                to be accessible to classes in the module, according to the class accessibility requirements of the module architecture.
-            </text>
-            <assertion id="d">
-                <text>Check an enabled session bean can be injected</text>
-            </assertion>
 
-            <assertion id="j">
-                <text>Check a disabled session bean is not injectable</text>
-            </assertion>
-
-            <assertion id="k">
-                <text>Check a specialized session bean is not injectable</text>
-            </assertion>
-
-            <assertion id="p">
-                <text>Check a selected alternative being session bean is injected</text>
-            </assertion>
-
-        </group>
-    </section>
-
-    <!-- FIXME change the id of the chapter-->
-    <section id="unsatisfied_and_ambig_dependencies_FIXME" title="Unsatisfied and ambiguous dependencies" level="3">
+    <section id="unsatisfied_and_ambig_dependencies_ee" title="Unsatisfied and ambiguous dependencies" level="3">
         <group>
             <text>The container must validate all injection points of all enabled beans, all observer methods, all disposer methods and all other Java EE
                 component classes supporting injection when the application is initialized to ensure that there are no unsatisfied or ambiguous dependencies. If
@@ -8608,6 +8645,14 @@
     </section>
 
     <section id="instantiation_ee" title="Injection using the bean constructor in Java EE" level="3">
+
+        <group>
+            <text>The bean constructor may be identified by annotating the constructor |@Inject|</text>
+            <assertion id="a" implied="true">
+                <text>Test an @Inject constructor is used on a session bean</text>
+            </assertion>
+        </group>
+
         <group>
             <text>When the container instantiates a session bean with a constructor annotated |@Inject|, the container calls this constructor, passing an
                 injectable reference to each parameter. If there is no constructor annotated |@Inject|, the container calls the constructor with no parameters.
@@ -8619,6 +8664,8 @@
                 <text>Test constructor with no parameters is used for a session bean</text>
             </assertion>
         </group>
+
+
     </section>
 
     <section id="fields_initializer_methods_ee" title="Injection of fields and initializer methods in Java EE" level="3">
@@ -9602,7 +9649,7 @@
         </assertion>
     </section>
 
-    <section id="provider" title="Obtaining a reference to the CDI container" level="3">
+    <section id="provider_ee" title="Obtaining a reference to the CDI container in Java EE" level="3">
         <assertion id="d">
             <text>Java EE components may obtain an instance of |BeanManager| from JNDI by looking up the name |java:comp/BeanManager|.</text>
         </assertion>
@@ -9623,7 +9670,7 @@
         </assertion>
     </section>
 
-    <section id="alternative_metadata_sources" title="Alternative metadata sources" level="2">
+    <section id="alternative_metadata_sources_ee" title="Alternative metadata sources" level="2">
         <group>
             <text>The container must use the operations of |Annotated| and its subinterfaces to discover program element types and annotations. The container
                 must not directly call the Java Reflection API. In particular, the container must call |Annotated.getBaseType()| to determine the type of an
@@ -9749,7 +9796,7 @@
         </group>
     </section>
 
-    <section id="process_bean_attributes" title="ProcessBeanAttributes event" level="3">
+    <section id="process_bean_attributes_ee" title="ProcessBeanAttributes event" level="3">
         <group>
             <text>|getAnnotated()| returns the |AnnotatedType| representing the bean class or session bean class, the |AnnotatedMethod| representing the
                 producer field, or the |AnnotatedField| representing the producer field.

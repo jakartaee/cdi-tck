@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.broken.unsatisfied;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
+import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES_EE;
 
 import javax.enterprise.inject.spi.DeploymentException;
 
@@ -42,7 +42,7 @@ public class UnsatisfiedInjectionIntoNonContextualComponentTest extends Abstract
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ad") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES_EE, id = "ad") })
     public void testInjectionIntoServlet() throws Exception {
     }
 

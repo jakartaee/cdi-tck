@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.manager.jndi;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
+import static org.jboss.cdi.tck.cdi.Sections.PROVIDER_EE;
 import static org.testng.Assert.assertNotNull;
 
 import javax.inject.Inject;
@@ -43,7 +43,7 @@ public class ManagerTestEar extends AbstractTest {
     JndiBeanManagerInjected jndiBeanManagerInjected;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = PROVIDER, id = "d")
+    @SpecAssertion(section = PROVIDER_EE, id = "d")
     public void testManagerLookupInJndi() throws Exception {
         assertNotNull(jndiBeanManagerInjected);
         assertNotNull(jndiBeanManagerInjected.getManagerFromJndi());

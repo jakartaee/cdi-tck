@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.modules;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
+import static org.jboss.cdi.tck.cdi.Sections.SELECTION_EE;
 
 import javax.inject.Inject;
 
@@ -50,7 +50,7 @@ public class SelectedAlternativeSessionBeanInjectionAvailability02Test extends A
     Bar bar;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "p")
+    @SpecAssertion(section = SELECTION_EE, id = "p")
     public void testInjection() throws Exception {
         Assert.assertEquals(bar.ping(), 42);
     }

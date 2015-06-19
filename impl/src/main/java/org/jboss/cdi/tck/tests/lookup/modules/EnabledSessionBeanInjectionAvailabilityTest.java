@@ -17,8 +17,8 @@
 package org.jboss.cdi.tck.tests.lookup.modules;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 import static org.jboss.cdi.tck.cdi.Sections.SELECTION;
+import static org.jboss.cdi.tck.cdi.Sections.SELECTION_EE;
 
 import javax.inject.Inject;
 
@@ -61,7 +61,7 @@ public class EnabledSessionBeanInjectionAvailabilityTest extends AbstractTest {
     Bar bar;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = INTER_MODULE_INJECTION, id = "d"), @SpecAssertion(section = SELECTION, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = SELECTION_EE, id = "d"), @SpecAssertion(section = SELECTION, id = "aa") })
     public void testInjection() throws Exception {
         Assert.assertEquals(bar.ping(), 0);
     }

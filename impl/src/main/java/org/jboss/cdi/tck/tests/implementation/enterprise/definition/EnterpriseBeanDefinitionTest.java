@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_TYPES;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_CONSTRUCTOR;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SESSION_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.INSTANTIATION_EE;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEANS;
@@ -63,7 +62,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "ab"), @SpecAssertion(section = INSTANTIATION_EE, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = INSTANTIATION_EE, id = "a"), @SpecAssertion(section = INSTANTIATION_EE, id = "ab") })
     public void testConstructorAnnotatedInjectCalled() {
         ExplicitConstructor bean = getContextualReference(ExplicitConstructor.class);
         assert bean.getConstructorCalls() == 1;

@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.modules;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
+import static org.jboss.cdi.tck.cdi.Sections.SELECTION_EE;
 import static org.testng.Assert.assertEquals;
 
 import java.util.Set;
@@ -78,7 +79,7 @@ public class SpecializedBeanInjectionNotAvailableTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "k")
+    @SpecAssertion(section = SELECTION_EE, id = "k")
     public void testSessionBeanInjection() throws Exception {
         assertEquals(enterpriseBar.ping(), 0);
         Set<Bean<PaymentEjbFoo>> beans = getBeans(PaymentEjbFoo.class);
