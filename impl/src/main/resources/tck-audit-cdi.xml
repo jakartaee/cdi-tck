@@ -5217,10 +5217,6 @@
 
     <section id="declaring_interceptor" title="Declaring the interceptor bindings of an interceptor" level="2">
 
-        <assertion id="a">
-            <text>If an interceptor for lifecycle callbacks declares an interceptor binding type that not defined |@Target(TYPE)|, the container automatically detects the problem and treats it as a definition error.</text>
-        </assertion>
-
     </section>
 
     <section id="binding_interceptor_to_bean" title="Binding an interceptor to a bean" level="2">

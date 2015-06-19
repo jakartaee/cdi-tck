@@ -45,6 +45,13 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-493 -->
+            <class name=" org.jboss.cdi.tck.tests.interceptors.definition.broken.interceptorForLifecycleTargetMethod.InterceptorForLifecycleTargetMethodTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
         </classes>
     </test>
 
