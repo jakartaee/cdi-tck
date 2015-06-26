@@ -52,6 +52,13 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-490 -->
+            <class name=" org.jboss.cdi.tck.tests.decorators.definition.inject.broken.delegateProducerMethod.DelegateInjectionPointTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
         </classes>
     </test>
 
