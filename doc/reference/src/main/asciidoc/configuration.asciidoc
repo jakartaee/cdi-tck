@@ -114,7 +114,7 @@ Certain TestNG configuration file must be run by TestNG 6.3 (described by the Te
 
 [NOTE]
 ====
-The canonical configuration file for CDI TCK is located at link:$$https://github.com/cdi-spec/cdi-tck/blob/master/impl/src/main/resources/tck-tests.xml$$[https://github.com/cdi-spec/cdi-tck/blob/master/impl/src/main/resources/tck-tests.xml]. 
+The canonical configuration file for CDI TCK is located at https://github.com/cdi-spec/cdi-tck/blob/master/impl/src/main/resources/tck-tests.xml.
 
 
 ====
@@ -137,6 +137,15 @@ This file also allows tests to be excluded from a run:
    </test>
 </suite>
 ----
+
+
+[NOTE]
+====
+Additionally there is available canonical configuration file at https://github.com/cdi-spec/cdi-tck/blob/master/impl/src/main/resources/tck-tests-previous.xml.
+Please note that this exclude list serves only for the previous micro version of TCK release! This means that if the latest version of TCK is e.g. 1.2.5.Final then this exclude list is valid only for the version 1.2.4.Final and invalid for any other version!
+    
+    
+====
 
 TestNG provides extensive reporting information. Depending on the build tool or IDE you use, the reporting will take a different format. Please consult the TestNG documentation and the tool documentation for more information. 
 
