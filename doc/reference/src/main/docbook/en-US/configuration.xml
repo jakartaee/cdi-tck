@@ -209,6 +209,16 @@
       ...
    </test>
 </suite>]]></programlisting>
+      
+      <note>
+         <para>
+          Additionaly there is available canonical configuration file at
+             <ulink url="https://github.com/cdi-spec/cdi-tck/blob/master/impl/src/main/resources/tck-tests-previous.xml">https://github.com/cdi-spec/cdi-tck/blob/master/impl/src/main/resources/tck-tests-previous.xml</ulink>.
+         Please note that this exclude list serves only for the previous micro version of TCK release!
+         This means that if the latest version of TCK is e.g. 1.2.5.Final then this exclude list is valid
+         only for the version 1.2.4.Final and invalid for any other version!
+         </para>
+      </note>
 
       <para>
          TestNG provides extensive reporting information. Depending on the

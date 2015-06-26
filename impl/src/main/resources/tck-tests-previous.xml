@@ -1,0 +1,97 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CDI TCK" verbose="0" configfailurepolicy="continue" useDefaultListeners="false">
+
+    <!-- !!!!!! WARNING + README !!!!!!
+     
+     Please note that this exclude list serves only for the previous micro version of TCK release! 
+     This means that if the latest version of TCK is e.g. 1.2.5.Final then this exclude list is valid 
+     only for the version 1.2.4.Final and invalid for any other version!
+     
+     For the exclude list of latest TCK version please check the canonical exclude list in tck-tests.xml.
+     
+    -->
+
+    <listeners>
+        <!-- Required - avoid randomly mixed test method execution -->
+        <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor"/>
+        <!-- Optional - intended for debug purpose only -->
+        <listener class-name="org.jboss.cdi.tck.impl.testng.ConfigurationLoggingListener"/>
+        <listener class-name="org.jboss.cdi.tck.impl.testng.ProgressLoggingTestListener"/>
+        <!-- Optional - it's recommended to disable the default JUnit XML reporter -->
+        <listener class-name="org.testng.reporters.SuiteHTMLReporter"/>
+        <listener class-name="org.testng.reporters.FailedReporter"/>
+        <listener class-name="org.testng.reporters.XMLReporter"/>
+        <listener class-name="org.testng.reporters.EmailableReporter"/>
+        <listener class-name="org.testng.reporters.TestHTMLReporter"/>
+    </listeners>
+
+    <test name="CDI TCK">
+
+        <packages>
+            <package name="org.jboss.cdi.tck.tests.*"/>
+            <package name="org.jboss.cdi.tck.interceptors.tests.*"/>
+        </packages>
+
+        <classes>
+            <!-- Issues in the spec -->
+            <!-- CDI-437 -->
+            <class name="org.jboss.cdi.tck.tests.lookup.byname.ambiguous.broken.AmbiguousELNamesTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDI-513 & CDITCK-466 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.broken.passivatingScope.AddingPassivatingScopeTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-484 -->
+            <class name="org.jboss.cdi.tck.tests.context.application.event.ApplicationScopeEventMultiWarTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-486 -->
+            <class name="org.jboss.cdi.tck.tests.context.request.event.timeout.RequestScopeEventTimeoutTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-461 -->
+            <class name="org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor.FinalMethodMethodLevelInterceptorTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-488 -->
+            <class name="org.jboss.cdi.tck.tests.context.conversation.filter.ConversationFilterTest">
+                <methods>
+                    <exclude name="testConversationBusy"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-493 -->
+            <class name=" org.jboss.cdi.tck.tests.interceptors.definition.broken.interceptorForLifecycleTargetMethod.InterceptorForLifecycleTargetMethodTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-490 -->
+            <class name=" org.jboss.cdi.tck.tests.decorators.definition.inject.broken.delegateProducerMethod.DelegateInjectionPointTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+        </classes>
+
+    </test>
+
+</suite>
