@@ -95,6 +95,11 @@ public final class TestGroups {
     public static final String SECURITY = "security";
 
     /**
+     * Requires manual bootstrapping of CDI SE container
+     */
+    public static final String SE = "se";
+
+    /**
      * No instance
      */
     private TestGroups() {

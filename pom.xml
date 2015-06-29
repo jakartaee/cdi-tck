@@ -1,366 +1,374 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jboss.cdi.tck</groupId>
-	<artifactId>cdi-tck-parent</artifactId>
-	<packaging>pom</packaging>
-	<version>2.0.0-SNAPSHOT</version>
-	<name>CDI TCK</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jboss.cdi.tck</groupId>
+    <artifactId>cdi-tck-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>2.0.0-SNAPSHOT</version>
+    <name>CDI TCK</name>
 
-	<parent>
-		<groupId>org.jboss.weld</groupId>
-		<artifactId>weld-parent</artifactId>
-		<version>31</version>
-	</parent>
+    <parent>
+        <groupId>org.jboss.weld</groupId>
+        <artifactId>weld-parent</artifactId>
+        <version>31</version>
+    </parent>
 
-	<!-- Metadata -->
-	<url>http://weld.cdi-spec.org/</url>
+    <!-- Metadata -->
+    <url>http://weld.cdi-spec.org/</url>
 
-	<developers>
-		<developer>
-			<name>Pete Muir</name>
-			<email>pete.muir@jboss.org</email>
-			<organization>Red Hat Inc.</organization>
-			<url>http://in.relation.to/Bloggers/Pete</url>
-		</developer>
+    <developers>
+        <developer>
+            <name>Pete Muir</name>
+            <email>pete.muir@jboss.org</email>
+            <organization>Red Hat Inc.</organization>
+            <url>http://in.relation.to/Bloggers/Pete</url>
+        </developer>
 
-		<developer>
-			<name>Shane Bryzak</name>
-			<organization>Red Hat Inc.</organization>
-		</developer>
+        <developer>
+            <name>Shane Bryzak</name>
+            <organization>Red Hat Inc.</organization>
+        </developer>
 
-		<developer>
-			<name>David Allen</name>
-		</developer>
+        <developer>
+            <name>David Allen</name>
+        </developer>
 
-		<developer>
-			<name>Nicklas Karlsson</name>
-		</developer>
+        <developer>
+            <name>Nicklas Karlsson</name>
+        </developer>
 
-		<developer>
-			<name>Jozef Hartinger</name>
-			<email>jharting@redhat.com</email>
-			<organization>Red Hat Inc.</organization>
-		</developer>
+        <developer>
+            <name>Jozef Hartinger</name>
+            <email>jharting@redhat.com</email>
+            <organization>Red Hat Inc.</organization>
+        </developer>
 
-		<developer>
-			<name>Martin Kouba</name>
-			<email>mkouba@redhat.com</email>
-			<organization>Red Hat Inc.</organization>
-		</developer>
+        <developer>
+            <name>Martin Kouba</name>
+            <email>mkouba@redhat.com</email>
+            <organization>Red Hat Inc.</organization>
+        </developer>
 
-	</developers>
+    </developers>
 
-	<organization>
-		<name>CDI TCK</name>
-		<url>http://www.cdi-spec.org/</url>
-	</organization>
+    <organization>
+        <name>CDI TCK</name>
+        <url>http://www.cdi-spec.org/</url>
+    </organization>
 
-	<ciManagement>
-		<system>Hudson</system>
-		<url />
-	</ciManagement>
+    <ciManagement>
+        <system>Hudson</system>
+        <url/>
+    </ciManagement>
 
-	<issueManagement>
-		<system>JIRA</system>
-		<url>http://jira.jboss.org/browse/CDITCK</url>
-	</issueManagement>
+    <issueManagement>
+        <system>JIRA</system>
+        <url>http://jira.jboss.org/browse/CDITCK</url>
+    </issueManagement>
 
-	<inceptionYear>2008</inceptionYear>
+    <inceptionYear>2008</inceptionYear>
 
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
 
-	<modules>
-		<module>api</module>
-		<module>ext-lib</module>
-		<module>impl</module>
-	</modules>
+    <modules>
+        <module>api</module>
+        <module>ext-lib</module>
+        <module>impl</module>
+    </modules>
 
-	<properties>
-		<!-- CDI API -->
-		<cdi.api.version>2.0-EDR1</cdi.api.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<!-- JBoss EE APIs -->
-		<jboss.ejb.api.version>1.0.0.Final</jboss.ejb.api.version>
-		<jboss.jms.api.version>1.0.0.Final</jboss.jms.api.version>
-		<jboss.connector.api.version>1.0.1.Final</jboss.connector.api.version>
-		<jboss.annotations.api.version>1.0.0.Final</jboss.annotations.api.version>
-		<jboss.interceptors.api.version>1.0.0.Final</jboss.interceptors.api.version>
-		<!-- Other EE APIs -->
-		<atinject.api.version>1</atinject.api.version>
-		<jpa.api.version>1.0</jpa.api.version>
-		<servlet.api.version>3.0.1</servlet.api.version>
-		<jsp.api.version>2.2</jsp.api.version>
-		<jta.api.version>1.1</jta.api.version>
-		<el.api.version>2.2</el.api.version>
-		<jsf.api.version>2.1</jsf.api.version>
-		<resteasy.version>2.2.1.GA</resteasy.version>
-		<!-- Test tools/dependencies -->
-		<jboss.test.audit.version>1.1.1.Final</jboss.test.audit.version>
-		<testng.version>6.8.8</testng.version>
-		<arquillian.version>1.1.7.Final</arquillian.version>
-		<apache.httpclient.version>3.1</apache.httpclient.version>
-		<htmlunit.version>2.9</htmlunit.version>
-	</properties>
+    <properties>
+        <!-- CDI API -->
+        <cdi.api.version>2.0-EDR1</cdi.api.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- JBoss EE APIs -->
+        <jboss.ejb.api.version>1.0.0.Final</jboss.ejb.api.version>
+        <jboss.jms.api.version>1.0.0.Final</jboss.jms.api.version>
+        <jboss.connector.api.version>1.0.1.Final</jboss.connector.api.version>
+        <jboss.annotations.api.version>1.0.0.Final</jboss.annotations.api.version>
+        <jboss.interceptors.api.version>1.0.0.Final</jboss.interceptors.api.version>
+        <!-- Other EE APIs -->
+        <atinject.api.version>1</atinject.api.version>
+        <jpa.api.version>1.0</jpa.api.version>
+        <servlet.api.version>3.0.1</servlet.api.version>
+        <jsp.api.version>2.2</jsp.api.version>
+        <jta.api.version>1.1</jta.api.version>
+        <el.api.version>2.2</el.api.version>
+        <jsf.api.version>2.1</jsf.api.version>
+        <resteasy.version>2.2.1.GA</resteasy.version>
+        <!-- Test tools/dependencies -->
+        <jboss.test.audit.version>1.1.1.Final</jboss.test.audit.version>
+        <testng.version>6.8.8</testng.version>
+        <arquillian.version>1.1.7.Final</arquillian.version>
+        <arquillian.container.se.api.version>1.0.0.Alpha1</arquillian.container.se.api.version>
+        <apache.httpclient.version>3.1</apache.httpclient.version>
+        <htmlunit.version>2.9</htmlunit.version>
+    </properties>
 
-	<!-- Dependency management -->
-	<dependencyManagement>
-		<dependencies>
+    <!-- Dependency management -->
+    <dependencyManagement>
+        <dependencies>
 
-			<dependency>
-				<groupId>org.jboss.cdi.tck</groupId>
-				<artifactId>cdi-tck-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.cdi.tck</groupId>
+                <artifactId>cdi-tck-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.cdi.tck</groupId>
-				<artifactId>cdi-tck-ext-lib</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.cdi.tck</groupId>
+                <artifactId>cdi-tck-ext-lib</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.enterprise</groupId>
-				<artifactId>cdi-api</artifactId>
-				<version>${cdi.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.enterprise</groupId>
+                <artifactId>cdi-api</artifactId>
+                <version>${cdi.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.spec.javax.ejb</groupId>
-				<artifactId>jboss-ejb-api_3.2_spec</artifactId>
-				<version>${jboss.ejb.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.spec.javax.ejb</groupId>
+                <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+                <version>${jboss.ejb.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.spec.javax.interceptor</groupId>
-				<artifactId>jboss-interceptors-api_1.2_spec</artifactId>
-				<version>${jboss.interceptors.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.spec.javax.interceptor</groupId>
+                <artifactId>jboss-interceptors-api_1.2_spec</artifactId>
+                <version>${jboss.interceptors.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.spec.javax.jms</groupId>
-				<artifactId>jboss-jms-api_1.1_spec</artifactId>
-				<version>${jboss.jms.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.spec.javax.jms</groupId>
+                <artifactId>jboss-jms-api_1.1_spec</artifactId>
+                <version>${jboss.jms.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.spec.javax.resource</groupId>
-				<artifactId>jboss-connector-api_1.6_spec</artifactId>
-				<version>${jboss.connector.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.spec.javax.resource</groupId>
+                <artifactId>jboss-connector-api_1.6_spec</artifactId>
+                <version>${jboss.connector.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.spec.javax.annotation</groupId>
-				<artifactId>jboss-annotations-api_1.2_spec</artifactId>
-				<version>${jboss.annotations.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.spec.javax.annotation</groupId>
+                <artifactId>jboss-annotations-api_1.2_spec</artifactId>
+                <version>${jboss.annotations.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>${servlet.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.servlet.jsp</groupId>
-				<artifactId>jsp-api</artifactId>
-				<version>${jsp.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>${jsp.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.inject</groupId>
-				<artifactId>javax.inject</artifactId>
-				<version>${atinject.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${atinject.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.transaction</groupId>
-				<artifactId>jta</artifactId>
-				<version>${jta.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.transaction</groupId>
+                <artifactId>jta</artifactId>
+                <version>${jta.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.el</groupId>
-				<artifactId>el-api</artifactId>
-				<version>${el.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>el-api</artifactId>
+                <version>${el.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.faces</groupId>
-				<artifactId>jsf-api</artifactId>
-				<version>${jsf.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.faces</groupId>
+                <artifactId>jsf-api</artifactId>
+                <version>${jsf.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>javax.persistence</groupId>
-				<artifactId>persistence-api</artifactId>
-				<version>${jpa.api.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${jpa.api.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>jaxrs-api</artifactId>
-				<version>${resteasy.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>jaxrs-api</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.testng</groupId>
-				<artifactId>testng</artifactId>
-				<version>${testng.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.test-audit</groupId>
-				<artifactId>jboss-test-audit-api</artifactId>
-				<version>${jboss.test.audit.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.test-audit</groupId>
+                <artifactId>jboss-test-audit-api</artifactId>
+                <version>${jboss.test.audit.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>org.jboss.test-audit</groupId>
-				<artifactId>jboss-test-audit-impl</artifactId>
-				<version>${jboss.test.audit.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.jboss.test-audit</groupId>
+                <artifactId>jboss-test-audit-impl</artifactId>
+                <version>${jboss.test.audit.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>commons-httpclient</groupId>
-				<artifactId>commons-httpclient</artifactId>
-				<version>${apache.httpclient.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>${apache.httpclient.version}</version>
+            </dependency>
 
-			<dependency>
-				<groupId>net.sourceforge.htmlunit</groupId>
-				<artifactId>htmlunit</artifactId>
-				<version>${htmlunit.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>net.sourceforge.htmlunit</groupId>
+                <artifactId>htmlunit</artifactId>
+                <version>${htmlunit.version}</version>
+            </dependency>
 
-	       <dependency>
-		      <groupId>org.jboss.arquillian</groupId>
-		      <artifactId>arquillian-bom</artifactId>
-		      <version>${arquillian.version}</version>
-		      <scope>import</scope>
-		      <type>pom</type>
-	       </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${arquillian.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
 
-		</dependencies>
-	</dependencyManagement>
+            <dependency>
+                <groupId>org.jboss.arquillian.container</groupId>
+                <artifactId>container-se-api</artifactId>
+                <version>${arquillian.container.se.api.version}</version>
+            </dependency>
 
-	<!-- Configure the build -->
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-release-plugin</artifactId>
-					<version>2.5</version>
-					<configuration>
-						<mavenExecutorId>forked-path</mavenExecutorId>
-						<preparationGoals>clean install</preparationGoals>
-						<arguments>-Drelease -Dtck-audit</arguments>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+        </dependencies>
+    </dependencyManagement>
 
-	<scm>
-		<connection>scm:git:git://github.com/cdi-spec/cdi-tck.git</connection>
-		<developerConnection>scm:git:git@github.com:cdi-spec/cdi-tck.git</developerConnection>
-		<url>https://github.com/cdi-spec/cdi-tck</url>
-	  <tag>HEAD</tag>
-  </scm>
+    <!-- Configure the build -->
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                        <preparationGoals>clean install</preparationGoals>
+                        <arguments>-Drelease -Dtck-audit</arguments>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
-	<profiles>
-		<profile>
-			<id>docs</id>
-			<activation>
-				<property>
-					<name>release</name>
-				</property>
-			</activation>
-			<modules>
-				<module>doc/reference</module>
-			</modules>
-		</profile>
+    <scm>
+        <connection>scm:git:git://github.com/cdi-spec/cdi-tck.git</connection>
+        <developerConnection>scm:git:git@github.com:cdi-spec/cdi-tck.git</developerConnection>
+        <url>https://github.com/cdi-spec/cdi-tck</url>
+        <tag>HEAD</tag>
+    </scm>
 
-		<profile>
-			<id>verify-release</id>
-			<activation>
-				<property>
-					<name>release</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-enforcer-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>enforce-java-release</id>
-								<goals>
-									<goal>enforce</goal>
-								</goals>
-								<configuration>
-									<rules>
-										<requireJavaVersion>
-											<version>1.6</version>
-										</requireJavaVersion>
-									</rules>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+    <profiles>
+        <profile>
+            <id>docs</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                </property>
+            </activation>
+            <modules>
+                <module>doc/reference</module>
+            </modules>
+        </profile>
 
-		<profile>
-			<id>jboss-public-repository</id>
-			<activation>
-				<property>
-					<name>jboss-public-repository</name>
-					<value>!false</value>
-				</property>
-			</activation>
-			<repositories>
-				<repository>
-					<id>jboss-public-repository-group</id>
-					<name>JBoss Public Maven Repository Group</name>
-					<url>http://repository.jboss.org/nexus/content/groups/public</url>
-					<releases>
-						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-						<updatePolicy>never</updatePolicy>
-					</snapshots>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>jboss-public-repository-group</id>
-					<name>JBoss Public Maven Repository Group</name>
-					<url>http://repository.jboss.org/nexus/content/groups/public</url>
-					<releases>
-						<enabled>true</enabled>
-						<updatePolicy>never</updatePolicy>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-						<updatePolicy>never</updatePolicy>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
+        <profile>
+            <id>verify-release</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>enforce-java-release</id>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <requireJavaVersion>
+                                            <version>1.6</version>
+                                        </requireJavaVersion>
+                                    </rules>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>jboss-public-repository</id>
+            <activation>
+                <property>
+                    <name>jboss-public-repository</name>
+                    <value>!false</value>
+                </property>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>jboss-public-repository-group</id>
+                    <name>JBoss Public Maven Repository Group</name>
+                    <url>http://repository.jboss.org/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>jboss-public-repository-group</id>
+                    <name>JBoss Public Maven Repository Group</name>
+                    <url>http://repository.jboss.org/nexus/content/groups/public</url>
+                    <releases>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
 
 
-	</profiles>
+    </profiles>
 
 </project>

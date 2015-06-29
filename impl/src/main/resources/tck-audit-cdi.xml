@@ -4920,7 +4920,7 @@
             </text>
         </assertion>
 
-        <assertion>
+        <assertion id="f">
             <text>A synchronous observer notification blocks the calling thread until it completes.</text>
         </assertion>
     </section>
@@ -4929,8 +4929,7 @@
 
         <assertion id="a">
             <text>Event fired with the fireAsync() method is fired asynchronously. All resolved synchronous observers are called in the same thread in which
-                fireAsync() was called, and all the resolved
-                asynchronous observers are called in one or more different thread.
+                fireAsync() was called, and all the resolved asynchronous observers are called in one or more different thread.
             </text>
         </assertion>
 
@@ -7793,6 +7792,14 @@
 
     <!-- SE SECTION FROM HERE -->
     <section id="bootstrap-se" title="Bootstrapping a CDI container in Java SE" level="1">
+    </section>
+
+    <section id="cdiprovider_lookup" title="CDIProvider lookup" level="2">
+        <assertion id="a">
+            <text>The CDI utility class provides static lookup for CDIProvider. By default, CDIProvider will be looked up via a ServiceLoader but this can be
+                over-written by calling setCDIProvider on the CDI utility class.
+            </text>
+        </assertion>
     </section>
 
     <section id="init_container" title="Starting the container" level="2">

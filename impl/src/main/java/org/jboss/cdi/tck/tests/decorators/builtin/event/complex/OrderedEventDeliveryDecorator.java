@@ -23,6 +23,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.Executor;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
@@ -64,6 +66,16 @@ public class OrderedEventDeliveryDecorator<T> implements Event<T>, Serializable 
         for (ObserverMethod<? super T> observer : sortedObservers) {
             observer.notify(event);
         }
+    }
+
+    @Override
+    public <U extends T> CompletionStage<U> fireAsync(U event) {
+        return null;
+    }
+
+    @Override
+    public <U extends T> CompletionStage<U> fireAsync(U event, Executor executor) {
+        return null;
     }
 
     @Override
