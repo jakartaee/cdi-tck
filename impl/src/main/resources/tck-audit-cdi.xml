@@ -7793,7 +7793,6 @@
 
     <!-- SE SECTION FROM HERE -->
     <section id="bootstrap-se" title="Bootstrapping a CDI container in Java SE" level="1">
-
     </section>
 
     <section id="init_container" title="Starting the container" level="2">
@@ -7825,7 +7824,6 @@
     </section>
 
     <section id="contexts_se" title="Scopes and contexts in Java SE" level="1">
-
     </section>
 
     <section id="application_context_se" title="Application context lifecycle in Java SE" level="2">
@@ -7847,9 +7845,23 @@
     </section>
 
     <section id="packaging_deployment_se" title="Packaging and deployment in Java SE" level="1">
-
     </section>
 
+    <section id="bean_archive_se" title="Bean archive in Java SE" level="2">
+
+        <group>
+            <text>An archive which doesn’t contain a beans.xml file can’t be discovered as an implicit bean archive unless:</text>
+            <assertion id="a">
+                <text>Application is launched with system property javax.enterprise.inject.scan.implicit set to true</text>
+            </assertion>
+            <assertion id="b">
+                <text>the container was initialized with a parameter map containing an entry with javax.enterprise.inject.scan.implicit as key and Boolean.TRUE
+                    as value
+                </text>
+            </assertion>
+        </group>
+
+    </section>
 
     <!-- EE SECTION FROM HERE -->
     <section id="concepts_ee" title="Extended Concepts for Java EE" level="1">
