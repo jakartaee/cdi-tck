@@ -38,34 +38,6 @@
                 </methods>
             </class>
 
-            <!-- CDITCK-484 -->
-            <class name="org.jboss.cdi.tck.tests.context.application.event.ApplicationScopeEventMultiWarTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-486 -->
-            <class name="org.jboss.cdi.tck.tests.context.request.event.timeout.RequestScopeEventTimeoutTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-461 -->
-            <class name="org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor.FinalMethodMethodLevelInterceptorTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-488 -->
-            <class name="org.jboss.cdi.tck.tests.context.conversation.filter.ConversationFilterTest">
-                <methods>
-                    <exclude name="testConversationBusy"/>
-                </methods>
-            </class>
-            
         </classes>
 
     </test>
