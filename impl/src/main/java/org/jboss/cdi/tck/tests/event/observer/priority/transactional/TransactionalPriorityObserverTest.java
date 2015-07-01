@@ -62,10 +62,10 @@ public class TransactionalPriorityObserverTest extends AbstractTest {
             @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "d"),
             @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "e"),
             @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "gaa"),
-            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "bb"), @SpecAssertion(section = OBSERVER_ORDERING, id = "c") })
-    public void testSucessfullTransaction() throws Exception {
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "b"), @SpecAssertion(section = OBSERVER_ORDERING, id = "c") })
+    public void testSucessfulTransaction() throws Exception {
 
-        logger.log("testSucessfullTransaction");
+        logger.log("testSucessfulTransaction");
         ActionSequence.reset();
 
         // Checkpoint is right before tx commit

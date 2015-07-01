@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.inject.Inject;
+import javax.interceptor.Interceptor;
 
 import org.apache.commons.collections.IteratorUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -46,7 +47,7 @@ public class EventObserverOrderingTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(Sunrise.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(Sunrise.class).withTestClassPackage(ActionSequence.class).withExtension(ObserverExtension.class).build();
     }
 
     @Inject
@@ -55,8 +56,22 @@ public class EventObserverOrderingTest extends AbstractTest {
     @Inject
     private Event<Sunrise> sunrise;
 
+
     @Test
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "a") })
+    public void testDefaultPriority(ObserverExtension observerExtension) {
+        assertEquals(observerExtension.getObserverMethodPriority("Observer2.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 500);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "aa") })
+    public void testProcessObserverMethodPriority(ObserverExtension observerExtension) {
+        assertEquals(observerExtension.getObserverMethodPriority("Observer3.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 900);
+    }
+
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "b") })
     public void testFireEventLowerPriorityBeforeDefaultPriority() {
 
         ActionSequence.reset();
@@ -74,7 +89,7 @@ public class EventObserverOrderingTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "b") })
     public void testResolveObserversLowerPriorityBeforeDefaultPriority() {
 
         Set<ObserverMethod<? super Sunrise>> observerMethods = getCurrentManager().resolveObserverMethods(new Sunrise());
@@ -105,7 +120,7 @@ public class EventObserverOrderingTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "b") })
     public void testPrioritizedEventSubclass() {
 
         ActionSequence.reset();
@@ -122,7 +137,7 @@ public class EventObserverOrderingTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "b") })
     public void testPrioritizedEventBaseclass() {
 
         ActionSequence.reset();
