@@ -53,7 +53,7 @@ public class TransactionalPriorityObserverTest extends AbstractTest {
     }
 
     @Inject
-    AccountService accountService;
+    OnlineAccountService accountService;
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"),

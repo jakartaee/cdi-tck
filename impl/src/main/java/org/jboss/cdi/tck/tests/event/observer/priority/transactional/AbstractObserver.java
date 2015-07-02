@@ -1,10 +1,3 @@
-package org.jboss.cdi.tck.tests.event.observer.priority.transactional;
-
-import javax.enterprise.event.TransactionPhase;
-
-import org.jboss.cdi.tck.util.ActionSequence;
-import org.jboss.cdi.tck.util.SimpleLogger;
-
 /*
  * JBoss, Home of Professional Open Source
  * Copyright 2015, Red Hat, Inc., and individual contributors
@@ -21,6 +14,13 @@ import org.jboss.cdi.tck.util.SimpleLogger;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jboss.cdi.tck.tests.event.observer.priority.transactional;
+
+import javax.enterprise.event.TransactionPhase;
+
+import org.jboss.cdi.tck.util.ActionSequence;
+import org.jboss.cdi.tck.util.SimpleLogger;
+
 public abstract class AbstractObserver {
 
     private final SimpleLogger logger = new SimpleLogger(getClass());

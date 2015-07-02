@@ -5452,10 +5452,6 @@
             <assertion id="a">
                 <text>If no @Priority annotation is specified, the default priority APPLICATION + 500 is assumed</text>
             </assertion>
-             <assertion id="aa">
-                <text>ObserverMethod.priority returns the value of the @Priority annotation</text>
-            </assertion>
-
             <assertion id="b">
                 <text>Observers with smaller priority values are called first</text>
             </assertion>

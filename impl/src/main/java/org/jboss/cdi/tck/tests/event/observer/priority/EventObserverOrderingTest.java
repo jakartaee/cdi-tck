@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority;
 
-import static org.jboss.cdi.tck.cdi.Sections.*;
-import static org.testng.Assert.*;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_ORDERING;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 import java.util.Set;
@@ -28,7 +30,6 @@ import javax.enterprise.inject.spi.ObserverMethod;
 import javax.inject.Inject;
 import javax.interceptor.Interceptor;
 
-import org.apache.commons.collections.IteratorUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -47,7 +48,7 @@ public class EventObserverOrderingTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(Sunrise.class).withTestClassPackage(ActionSequence.class).withExtension(ObserverExtension.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(Sunrise.class).withExtension(ObserverExtension.class).build();
     }
 
     @Inject
@@ -58,13 +59,13 @@ public class EventObserverOrderingTest extends AbstractTest {
 
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "a"),  @SpecAssertion(section = OBSERVER_METHOD, id = "ea")  })
     public void testDefaultPriority(ObserverExtension observerExtension) {
         assertEquals(observerExtension.getObserverMethodPriority("Observer2.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 500);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD, id = "ea") })
     public void testProcessObserverMethodPriority(ObserverExtension observerExtension) {
         assertEquals(observerExtension.getObserverMethodPriority("Observer3.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 900);
     }
@@ -93,12 +94,11 @@ public class EventObserverOrderingTest extends AbstractTest {
     public void testResolveObserversLowerPriorityBeforeDefaultPriority() {
 
         Set<ObserverMethod<? super Sunrise>> observerMethods = getCurrentManager().resolveObserverMethods(new Sunrise());
-        List<ObserverMethod<? super Sunrise>> list = IteratorUtils.toList(observerMethods.iterator());
 
-        assertEquals(3, list.size());
-        assertEquals(list.get(0).getBeanClass(), SunriseObservers.AsianObserver.class);
+        assertEquals(3, observerMethods.size());
+        assertEquals(observerMethods.iterator().next().getBeanClass(), SunriseObservers.AsianObserver.class);
 
-        List<Class<?>> classes = list.stream().map(ObserverMethod::getBeanClass).collect(Collectors.toList());
+        List<Class<?>> classes = observerMethods.stream().map(ObserverMethod::getBeanClass).collect(Collectors.toList());
 
         assertTrue(classes.contains(SunriseObservers.GermanObserver.class));
         assertTrue(classes.contains(SunriseObservers.ItalianObserver.class));
