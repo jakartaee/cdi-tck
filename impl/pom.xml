@@ -145,6 +145,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- TODO remove once the priority annotations is updated -->
+        <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-api</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
