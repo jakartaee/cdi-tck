@@ -47,7 +47,7 @@ public class EventObserverOrderingTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(Sunrise.class).withTestClassPackage(ActionSequence.class).withExtension(ObserverExtension.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(Sunrise.class).withExtension(ObserverExtension.class).build();
     }
 
     @Inject
@@ -58,13 +58,13 @@ public class EventObserverOrderingTest extends AbstractTest {
 
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "a"),  @SpecAssertion(section = OBSERVER_METHOD, id = "ea")  })
     public void testDefaultPriority(ObserverExtension observerExtension) {
         assertEquals(observerExtension.getObserverMethodPriority("Observer2.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 500);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD, id = "ea") })
     public void testProcessObserverMethodPriority(ObserverExtension observerExtension) {
         assertEquals(observerExtension.getObserverMethodPriority("Observer3.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 900);
     }

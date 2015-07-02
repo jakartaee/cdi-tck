@@ -22,7 +22,7 @@ import javax.enterprise.event.TransactionPhase;
 import javax.interceptor.Interceptor;
 import javax.transaction.UserTransaction;
 
-import org.jboss.cdi.tck.tests.event.observer.priority.Priority;
+import org.jboss.weld.experimental.Priority;
 
 /**
  * 

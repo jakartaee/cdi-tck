@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.event.observer.priority;
 import javax.enterprise.event.Observes;
 
 import org.jboss.cdi.tck.util.ActionSequence;
+import org.jboss.weld.experimental.Priority;
 
 public class SunsetObservers {
 

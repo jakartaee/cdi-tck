@@ -8,7 +8,7 @@ import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBean;
 import javax.interceptor.Interceptor;
 
-import org.jboss.cdi.tck.tests.event.observer.priority.Priority;
+import org.jboss.weld.experimental.Priority;
 
 /**
  * @author Mark Paluch
