@@ -58,7 +58,6 @@ public class MixedObserversTest extends AbstractTest {
 
         ActionSequence.reset();
         event.select(American.AmericanLiteral.INSTANCE).fireAsync(new ScientificExperiment());
-        System.out.println(MixedObservers.class.getClasses());
         ActionSequence.assertSequenceDataContainsAll(MixedObservers.class.getClasses());
     }
 
