@@ -255,6 +255,13 @@
                 <version>${arquillian.container.se.api.version}</version>
             </dependency>
 
+            <!-- TODO remove once the priority annotations is updated -->
+            <dependency>
+                <groupId>org.jboss.weld</groupId>
+                <artifactId>weld-api</artifactId>
+                <version>3.0.Alpha11</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
