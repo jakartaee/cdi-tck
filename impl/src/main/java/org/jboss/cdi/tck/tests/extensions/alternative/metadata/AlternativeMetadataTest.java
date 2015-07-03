@@ -50,7 +50,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @author Tomas Remes
  */
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class AlternativeMetadataTest extends AbstractTest {
 
     @Deployment

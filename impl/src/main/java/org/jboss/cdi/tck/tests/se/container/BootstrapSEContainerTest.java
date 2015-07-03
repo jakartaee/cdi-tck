@@ -17,9 +17,9 @@
 package org.jboss.cdi.tck.tests.se.container;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
 import static org.jboss.cdi.tck.cdi.Sections.CDIPROVIDER_LOOKUP;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_CONTAINER;
-import static org.jboss.cdi.tck.cdi.Sections.PACKAGING_DEPLOYMENT_SE;
 import static org.jboss.cdi.tck.cdi.Sections.STOP_CONTAINER;
 
 import java.util.HashMap;
@@ -101,7 +101,7 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertion(section = PACKAGING_DEPLOYMENT_SE, id = "b")
+    @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "b")
     public void testImplicitArchiveDiscovered() {
         Map<String, Object> params = new HashMap<>();
         params.put(IMPLICIT_SCAN_KEY, Boolean.TRUE);

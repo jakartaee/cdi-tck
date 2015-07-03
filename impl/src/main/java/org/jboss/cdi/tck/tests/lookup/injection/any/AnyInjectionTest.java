@@ -26,7 +26,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class AnyInjectionTest extends AbstractTest {
 
     @Deployment

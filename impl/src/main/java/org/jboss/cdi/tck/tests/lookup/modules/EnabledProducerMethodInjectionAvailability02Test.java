@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  * @author Matej Briskar
  */
 
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class EnabledProducerMethodInjectionAvailability02Test extends AbstractTest {
 
     @Deployment

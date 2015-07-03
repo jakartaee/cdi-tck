@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  */
 @RunAsClient
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class ApplicationContextDestructionTest extends AbstractTest {
 
     private static final String FOO = "foo";

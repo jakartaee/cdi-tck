@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class NonPassivationCapableEjbWithPassivatingScopeTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

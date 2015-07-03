@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  * Tests that an exception thrown by a ProcessAnnotatedType event observer is treated as a deployment error
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class ProcessInjectionTargetEventThrowsExceptionTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)

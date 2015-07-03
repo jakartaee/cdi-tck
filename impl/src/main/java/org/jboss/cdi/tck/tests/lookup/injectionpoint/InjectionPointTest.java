@@ -56,7 +56,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Jozef Hartinger
  */
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class InjectionPointTest extends AbstractTest {
 
     @Deployment

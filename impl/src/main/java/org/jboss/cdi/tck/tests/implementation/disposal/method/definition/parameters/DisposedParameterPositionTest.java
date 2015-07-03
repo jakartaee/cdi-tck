@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @see <a href="https://issues.jboss.org/browse/CDITCK-271">CDITCK-271</a>
  */
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class DisposedParameterPositionTest extends AbstractTest {
 
     @Deployment

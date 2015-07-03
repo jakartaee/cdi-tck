@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * 
  */
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class BeanTypeParamConstructorTest extends AbstractTest {
 
     //CDITCK-439 - provide default constructor and some injection point to have proxyable bean.

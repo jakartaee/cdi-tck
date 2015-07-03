@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
  * @author Shane Bryzak
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class DecoratorListedTwiceInBeansXmlTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

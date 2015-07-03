@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  *
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 @Test(groups = INTEGRATION)
 public class ApplicationShutdownLifecycleTest extends AbstractTest {
 

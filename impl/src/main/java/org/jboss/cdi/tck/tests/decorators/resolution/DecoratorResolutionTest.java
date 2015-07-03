@@ -42,7 +42,7 @@ import org.testng.annotations.Test;
  * @author pmuir
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class DecoratorResolutionTest<C extends Cow, F extends FresianCow> extends AbstractTest {
 
     private final TypeLiteral<Qux<String>> QUX_STRING_LITERAL = new TypeLiteral<Qux<String>>() {

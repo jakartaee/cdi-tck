@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * 
  */
 @Test(groups = JAVAEE_FULL)
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class RequestScopeEventTimeoutTest extends AbstractTest {
 
     @Deployment(testable = false)

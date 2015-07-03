@@ -45,7 +45,7 @@ import org.testng.annotations.Test;
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15735">GLASSFISH-15735</a> (unresolved)
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "1.1 Final Release")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class VisibilityOfAnnotatedTypesFromExtensionInBravoBeanArchiveTest extends AbstractTest {
 
     @Deployment
