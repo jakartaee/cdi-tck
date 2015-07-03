@@ -72,7 +72,7 @@ public class ReceiverAccountTransactionObserver extends AbstractObserver {
      * @throws Exception
      */
     public void withdrawNoTx(
-            @Observes(during = TransactionPhase.IN_PROGRESS) @Priority(Interceptor.Priority.APPLICATION + 1) TxWithdrawal txWithdrawal)
+            @Observes(during = TransactionPhase.IN_PROGRESS) @Priority(Interceptor.Priority.APPLICATION + 600) TxWithdrawal txWithdrawal)
             throws Exception {
         logEventFired(TransactionPhase.IN_PROGRESS);
     }

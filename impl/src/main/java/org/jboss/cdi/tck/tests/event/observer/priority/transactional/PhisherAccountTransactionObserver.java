@@ -62,7 +62,7 @@ public class PhisherAccountTransactionObserver extends AbstractObserver{
      * @throws Exception
      */
     public void withdrawBeforeCompletion(
-            @Observes(during = TransactionPhase.BEFORE_COMPLETION) @Priority(Interceptor.Priority.APPLICATION + 200) TxWithdrawal txWithdrawal)
+            @Observes(during = TransactionPhase.BEFORE_COMPLETION) @Priority(Interceptor.Priority.APPLICATION + 700) TxWithdrawal txWithdrawal)
             throws Exception {
         logEventFired(TransactionPhase.BEFORE_COMPLETION);
     }
@@ -74,7 +74,7 @@ public class PhisherAccountTransactionObserver extends AbstractObserver{
      * @throws Exception
      */
     public void withdrawNoTx(
-            @Observes(during = TransactionPhase.IN_PROGRESS) @Priority(Interceptor.Priority.APPLICATION + 500) TxWithdrawal txWithdrawal)
+            @Observes(during = TransactionPhase.IN_PROGRESS) @Priority(Interceptor.Priority.APPLICATION + 700) TxWithdrawal txWithdrawal)
             throws Exception {
         logEventFired(TransactionPhase.IN_PROGRESS);
     }
