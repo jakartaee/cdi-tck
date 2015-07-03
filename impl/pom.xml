@@ -138,13 +138,6 @@
             <artifactId>jaxrs-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.4</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- TODO remove once the priority annotations is updated -->
         <dependency>
             <groupId>org.jboss.weld</groupId>
