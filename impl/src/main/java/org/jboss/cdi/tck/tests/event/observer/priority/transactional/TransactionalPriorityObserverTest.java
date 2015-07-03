@@ -16,9 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority.transactional;
 
-import static org.jboss.cdi.tck.TestGroups.*;
-import static org.jboss.cdi.tck.cdi.Sections.*;
-import static org.testng.Assert.*;
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_ORDERING;
+import static org.jboss.cdi.tck.cdi.Sections.TRANSACTIONAL_OBSERVER_METHODS;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
@@ -28,7 +32,6 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.event.observer.transactional.AccountService;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -41,7 +44,7 @@ import org.testng.annotations.Test;
  * @author Mark Paluch
  */
 @Test(groups = { INTEGRATION, PERSISTENCE })
-@SpecVersion(spec = "cdi", version = "2.0 EDR")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class TransactionalPriorityObserverTest extends AbstractTest {
 
     private static final SimpleLogger logger = new SimpleLogger(TransactionalPriorityObserverTest.class);

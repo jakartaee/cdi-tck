@@ -8056,9 +8056,6 @@
                 treats it as a definition error.
             </text>
         </assertion>
-        <assertion id="dc">
-            <text>Test a specializing bean directly extending an enterprise bean class.</text>
-        </assertion>
     </section>
 
     <section id="session_bean_name" title="Default bean name for a session bean" level="3">
