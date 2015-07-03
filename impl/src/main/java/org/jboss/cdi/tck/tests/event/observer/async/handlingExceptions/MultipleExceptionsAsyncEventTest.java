@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.event.observer.async.handlingExceptions;
 
 import static org.jboss.cdi.tck.cdi.Sections.ASYNC_EXCEPTION;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -51,7 +52,8 @@ public class MultipleExceptionsAsyncEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ASYNC_EXCEPTION, id = "a"), @SpecAssertion(section = ASYNC_EXCEPTION, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = ASYNC_EXCEPTION, id = "a"), @SpecAssertion(section = ASYNC_EXCEPTION, id = "b"),
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cb") })
     public void testMultipleExceptionDuringAsynObserverNotification() throws InterruptedException {
         BlockingQueue<Throwable> queue = new LinkedBlockingQueue<>();
         event.fireAsync(new RadioMessage()).handle((event, throwable) -> queue.add(throwable));
@@ -62,7 +64,7 @@ public class MultipleExceptionsAsyncEventTest extends AbstractTest {
         assertTrue(ParisRadioStation.observed.get());
         assertTrue(PragueRadioStation.observed.get());
         assertTrue(throwable instanceof FireAsyncException);
-        
+
         List<Throwable> suppressedExceptions = Arrays.asList(throwable.getSuppressed());
         assertTrue(suppressedExceptions.contains(ParisRadioStation.exception.get()));
         assertTrue(suppressedExceptions.contains(NewYorkRadioStation.exception.get()));

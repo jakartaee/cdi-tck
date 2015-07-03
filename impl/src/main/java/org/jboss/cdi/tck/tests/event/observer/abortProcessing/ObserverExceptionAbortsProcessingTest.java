@@ -60,7 +60,7 @@ public class ObserverExceptionAbortsProcessingTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cb")
+    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cd")
     public void testObserverThrowsExceptionAbortsNotifications() {
         // Fire an event that will be delivered to the two above observers
         AnEventType anEvent = new AnEventType();

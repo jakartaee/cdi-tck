@@ -42,7 +42,7 @@ public class ObserverExceptionRethrownTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = { TeaCupPomeranian.OversizedException.class })
-    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cc")
+    @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cd")
     public void testNonTransactionalObserverThrowsNonCheckedExceptionIsRethrown() {
         getCurrentManager().fireEvent("string event");
     }
