@@ -41,34 +41,39 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class MultipleExceptionsAsyncEventTest extends AbstractTest {
+public class MultipleExceptionsInObserversNotificationTest extends AbstractTest {
 
     @Inject
     Event<RadioMessage> event;
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(MultipleExceptionsAsyncEventTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(MultipleExceptionsInObserversNotificationTest.class).build();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = ASYNC_EXCEPTION, id = "a"), @SpecAssertion(section = ASYNC_EXCEPTION, id = "b"),
             @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cb") })
-    public void testMultipleExceptionDuringAsynObserverNotification() throws InterruptedException {
+    public void testMultipleExceptionsDuringVariousObserversNotification() throws InterruptedException {
         BlockingQueue<Throwable> queue = new LinkedBlockingQueue<>();
         event.fireAsync(new RadioMessage()).handle((event, throwable) -> queue.add(throwable));
 
         Throwable throwable = queue.poll(2, TimeUnit.SECONDS);
         assertNotNull(throwable);
+        assertTrue(TokioRadioStation.observed.get());
+        assertTrue(LondonRadioStation.observed.get());
         assertTrue(NewYorkRadioStation.observed.get());
         assertTrue(ParisRadioStation.observed.get());
         assertTrue(PragueRadioStation.observed.get());
+        
         assertTrue(throwable instanceof FireAsyncException);
 
         List<Throwable> suppressedExceptions = Arrays.asList(throwable.getSuppressed());
         assertTrue(suppressedExceptions.contains(ParisRadioStation.exception.get()));
         assertTrue(suppressedExceptions.contains(NewYorkRadioStation.exception.get()));
+        assertTrue(suppressedExceptions.contains(LondonRadioStation.exception.get()));
         assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(ParisRadioStation.class)));
         assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(NewYorkRadioStation.class)));
+        assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(LondonRadioStation.class)));
     }
 }
