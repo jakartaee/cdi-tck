@@ -31,8 +31,8 @@ import javax.interceptor.Interceptors;
 
 @Stateless
 @Interceptors(AlarmSecurityInterceptor.class)
-@RunAs("alarms")
-@RolesAllowed("students")
+@RunAs("alarm")
+@RolesAllowed("student")
 public class Alarm {
 
     public static AtomicLong timeoutAt = null;
@@ -47,7 +47,7 @@ public class Alarm {
     @Timeout
     public void timeout(Timer timer) {
         timeoutAt = new AtomicLong(System.currentTimeMillis());
-        assertTrue(!this.ctx.isCallerInRole("students"));
-        assertTrue(!this.ctx.isCallerInRole("alarms"));
+        assertTrue(!this.ctx.isCallerInRole("student"));
+        assertTrue(!this.ctx.isCallerInRole("alarm"));
     }
 }

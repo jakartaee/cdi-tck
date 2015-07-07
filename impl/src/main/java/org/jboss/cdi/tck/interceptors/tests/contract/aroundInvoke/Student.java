@@ -22,7 +22,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 @Stateful
-@RunAs("students")
+@RunAs("student")
 @PermitAll
 public class Student {
 

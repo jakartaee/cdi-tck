@@ -25,7 +25,7 @@ import javax.ejb.SessionContext;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-@DeclareRoles(value = { "students", "printers" })
+@DeclareRoles(value = { "student", "printer" })
 public class PrinterSecurityInterceptor {
 
     public static boolean securityContextOK = false;
@@ -40,8 +40,8 @@ public class PrinterSecurityInterceptor {
     public Object intercept(InvocationContext ic) throws Exception {
         Object obj = ic.proceed();
 
-        assertTrue(this.sc.isCallerInRole("students"));
-        assertTrue(!this.sc.isCallerInRole("printers"));
+        assertTrue(this.sc.isCallerInRole("student"));
+        assertTrue(!this.sc.isCallerInRole("printer"));
         securityContextOK = true;
 
         toner.callFromInterceptor();
