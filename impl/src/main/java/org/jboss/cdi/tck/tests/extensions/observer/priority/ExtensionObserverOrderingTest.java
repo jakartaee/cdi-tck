@@ -17,26 +17,29 @@
 
 package org.jboss.cdi.tck.tests.extensions.observer.priority;
 
-import static org.jboss.cdi.tck.cdi.Sections.*;
-import static org.testng.Assert.*;
+import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 
-import java.util.List;
+import java.util.Arrays;
+
+import javax.enterprise.inject.spi.AfterDeploymentValidation;
+import javax.enterprise.inject.spi.BeforeBeanDiscovery;
+import javax.enterprise.inject.spi.ProcessAnnotatedType;
+import javax.enterprise.inject.spi.ProcessBeanAttributes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.extensions.observer.EventA;
-import org.jboss.cdi.tck.tests.extensions.observer.ProcessObserverMethodObserver;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Tests for the extensions provided by the ProcessObserverMethod events.
- * 
+ * Test ordering of container lifecycle events.
+ *
  * @author Mark Paluch
+ * @author Tomas Remes
  */
 @SpecVersion(spec = "cdi", version = "2.0 EDR1")
 public class ExtensionObserverOrderingTest extends AbstractTest {
@@ -48,13 +51,12 @@ public class ExtensionObserverOrderingTest extends AbstractTest {
     }
 
     @Test
-    public void testEventOrdering(PrioritizedExtensionEvents prioritizedExtensionEvents) {
-        List<String> notificationOrder = prioritizedExtensionEvents.getNotificationOrder();
-
-        assertTrue(notificationOrder.size() > 3);
-
-        assertEquals(notificationOrder.get(0), "processBeanEarly");
-        assertEquals(notificationOrder.get(1), "processBeanSomewhereInTheMiddle");
-        assertEquals(notificationOrder.get(2), "processBeanLate");
+    @SpecAssertion(section = INIT_EVENTS, id = "e")
+    public void testEventOrdering() {
+        String[] expectedArray = new String[] { AfterDeploymentValidation.class.getSimpleName(), PrioritizedExtensionEvents.A,
+                ProcessAnnotatedType.class.getSimpleName(), PrioritizedExtensionEvents.B, PrioritizedExtensionEvents.C,
+                ProcessBeanAttributes.class.getSimpleName(),
+                BeforeBeanDiscovery.class.getSimpleName() };
+        ActionSequence.assertSequenceDataEquals(Arrays.asList(expectedArray));
     }
 }
