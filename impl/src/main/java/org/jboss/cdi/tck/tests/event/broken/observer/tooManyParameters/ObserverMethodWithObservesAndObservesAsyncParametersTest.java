@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2015, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.tooManyParameters;
 
-import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_EVENT_PARAMETER;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
 
 import javax.enterprise.inject.spi.DefinitionException;
@@ -27,22 +26,21 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class ObserverMethodWithTwoEventParametersTest extends AbstractTest {
+public class ObserverMethodWithObservesAndObservesAsyncParametersTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withClasses(YorkshireTerrier_Broken.class, Boxer.class).withTestClass(ObserverMethodWithTwoEventParametersTest.class)
+        return new WebArchiveBuilder().withClasses(Poodle_Broken.class, Boxer.class).withTestClass(ObserverMethodWithObservesAndObservesAsyncParametersTest.class)
                 .build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "a"), @SpecAssertion(section = OBSERVES, id = "b") })
+    @SpecAssertion(section = OBSERVES, id = "b")
     public void testObserverMethodMustHaveOnlyOneEventParameter() {
     }
 
