@@ -180,9 +180,9 @@ Tests within the _security_ test group require the following mapping of roles to
 [options="header"]
 |===============
 |Principal|Group
-|+student+|+students+
-|+alarm+|+alarms+, +students+
-|+printer+|+printers+, +students+|
+|+student+|+student+
+|+alarm+|+alarm+, +student+
+|+printer+|+printer+, +student+|
 
 |===============
 
