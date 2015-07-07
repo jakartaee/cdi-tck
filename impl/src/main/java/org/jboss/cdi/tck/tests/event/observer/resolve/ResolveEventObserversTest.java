@@ -24,6 +24,10 @@ import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_EVENT_PARAMETER;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -54,14 +58,14 @@ public class ResolveEventObserversTest extends AbstractTest {
     @Test
     @SpecAssertion(section = OBSERVER_METHODS, id = "e")
     public void testMultipleObserverMethodsForSameEventPermissible() {
-        assert getCurrentManager().resolveObserverMethods(new DiskSpaceEvent()).size() == 2;
+        assertEquals(getCurrentManager().resolveObserverMethods(new DiskSpaceEvent()).size(), 2);
     }
 
     @Test
     @SpecAssertion(section = OBSERVER_METHODS, id = "f")
     public void testMultipleObserverMethodsOnBeanPermissible() {
-        assert getCurrentManager().resolveObserverMethods(new BatteryEvent()).size() == 1;
-        assert getCurrentManager().resolveObserverMethods(new DiskSpaceEvent()).size() == 2;
+        assertEquals(getCurrentManager().resolveObserverMethods(new BatteryEvent()).size(), 1);
+        assertEquals(getCurrentManager().resolveObserverMethods(new DiskSpaceEvent()).size(), 2);
     }
 
     @Test
@@ -70,23 +74,23 @@ public class ResolveEventObserversTest extends AbstractTest {
             NoSuchMethodException {
         Set<ObserverMethod<? super Temperature>> temperatureObservers = getCurrentManager().resolveObserverMethods(
                 new Temperature(0d));
-        assert temperatureObservers.size() == 1;
+        assertEquals(temperatureObservers.size(), 1);
         ObserverMethod<? super Temperature> temperatureObserver = temperatureObservers.iterator().next();
-        assert temperatureObserver.getBeanClass().equals(AirConditioner.class);
-        assert temperatureObserver.getObservedType().equals(Temperature.class);
+        assertEquals(temperatureObserver.getBeanClass(), AirConditioner.class);
+        assertEquals(temperatureObserver.getObservedType(), Temperature.class);
 
         Method method = AirConditioner.class.getMethod("temperatureChanged", Temperature.class);
-        assert method != null;
-        assert method.getParameterTypes().length == 1;
-        assert method.getParameterTypes()[0].equals(Temperature.class);
-        assert method.getParameterAnnotations()[0][0].annotationType().equals(Observes.class);
+        assertNotNull(method);
+        assertEquals(method.getParameterTypes().length, 1);
+        assertEquals(method.getParameterTypes()[0], Temperature.class);
+        assertEquals(method.getParameterAnnotations()[0][0].annotationType(), Observes.class);
     }
 
     @Test
     @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "b")
     public void testObserverMethodWithoutBindingTypesObservesEventsWithoutBindingTypes() {
         // Resolve registered observers with an event containing no binding types
-        assert getCurrentManager().resolveObserverMethods(new SimpleEventType()).size() == 2;
+        assertEquals(getCurrentManager().resolveObserverMethods(new SimpleEventType()).size(), 2);
     }
 
     @Test
@@ -94,15 +98,14 @@ public class ResolveEventObserversTest extends AbstractTest {
             @SpecAssertion(section = MULTIPLE_EVENT_QUALIFIERS, id = "a") })
     public void testObserverMethodMayHaveMultipleBindingTypes() {
         // If we can resolve the observer with the two binding types, then it worked
-        assert getCurrentManager().resolveObserverMethods(new MultiBindingEvent(), new RoleBinding("Admin"),
-                new TameAnnotationLiteral()).size() == 2;
+        assertEquals(getCurrentManager().resolveObserverMethods(new MultiBindingEvent(), new RoleBinding("Admin"), new TameAnnotationLiteral()).size(), 2);
     }
 
     @Test
     @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "aa")
     public void testObserverMethodRegistration() {
         // Resolve registered observers with an event containing no binding types
-        assert getCurrentManager().resolveObserverMethods(new SimpleEventType()).size() == 2;
+        assertEquals(getCurrentManager().resolveObserverMethods(new SimpleEventType()).size(), 2);
     }
 
     @Test
@@ -110,8 +113,7 @@ public class ResolveEventObserversTest extends AbstractTest {
             // these two assertions combine to create a logical, testable assertion
             @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "a"), @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "b") })
     public void testBeanManagerResolveObserversSignature() throws Exception {
-        assert getCurrentManager().getClass().getDeclaredMethod(BEAN_MANAGER_RESOLVE_OBSERVERS_METHOD_NAME, Object.class,
-                Annotation[].class) != null;
+        assertNotNull(getCurrentManager().getClass().getDeclaredMethod(BEAN_MANAGER_RESOLVE_OBSERVERS_METHOD_NAME, Object.class, Annotation[].class));
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
@@ -124,24 +126,39 @@ public class ResolveEventObserversTest extends AbstractTest {
     @Test
     @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "o")
     public void testObserverMethodAutomaticallyRegistered() {
-        assert !getCurrentManager().resolveObserverMethods(new String(), new AnnotationLiteral<Secret>() {
-        }).isEmpty();
+        assertFalse(getCurrentManager().resolveObserverMethods(new String(), new AnnotationLiteral<Secret>() {
+        }).isEmpty());
     }
 
     @Test
     @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "o")
     public void testObserverMethodNotAutomaticallyRegisteredForDisabledBeans() {
         Set<ObserverMethod<? super Ghost>> ghostObservers = getCurrentManager().resolveObserverMethods(new Ghost());
-        assert ghostObservers.size() == 0;
+        assertEquals(ghostObservers.size(), 0);
 
         Set<ObserverMethod<? super String>> stringObservers = getCurrentManager().resolveObserverMethods(new String(),
                 new AnnotationLiteral<Secret>() {
                 });
-        assert stringObservers.size() == 1;
+        assertEquals(stringObservers.size(), 1);
         for (ObserverMethod<? super String> observer : stringObservers) {
             // an assertion error will be raised if an inappropriate observer is called
             observer.notify("fail if disabled observer invoked");
         }
+    }
+
+    @Test
+    @SpecAssertion(section = OBSERVES, id = "ab")
+    public void testSyncObserver() {
+        Set<ObserverMethod<? super DiskSpaceEvent>> diskSpaceObservers = getCurrentManager().resolveObserverMethods(new DiskSpaceEvent());
+        assertTrue(diskSpaceObservers.stream().allMatch(method -> !method.isAsync()));
+    }
+
+    @Test
+    @SpecAssertion(section = OBSERVES, id = "ac")
+    public void testAsyncObserver() {
+        Set<ObserverMethod<? super User>> userObservers = getCurrentManager().resolveObserverMethods(new User());
+        assertEquals(userObservers.size(), 1);
+        assertTrue(userObservers.iterator().next().isAsync());
     }
 
 }

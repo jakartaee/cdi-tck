@@ -5211,17 +5211,19 @@
             </text>
         </assertion>
 
+        <assertion id="ab">
+            <text>If @Observes is used the observer method is a synchronous observer method.</text>
+        </assertion>
+
+        <assertion id="ac">
+            <text>If @ObservesAsync is used the observer method is an asynchronous observer method.</text>
+        </assertion>
+
         <assertion id="b">
             <text>If a method has more than one parameter annotated |@Observes| or |@ObservesAsync|, the container automatically detects the problem and treats
                 it as a definition error.
             </text>
         </assertion>
-
-        <assertionon id="ba">
-            <text>If a method has one parameter annotated @Observes and one parameter annotated @ObservesAsync, the container automatically detects the problem
-                and treats it as a definition error.
-            </text>
-        </assertionon>
 
         <assertion id="c">
             <text>Observed event qualifiers may be declared by annotating the event parameter.</text>
