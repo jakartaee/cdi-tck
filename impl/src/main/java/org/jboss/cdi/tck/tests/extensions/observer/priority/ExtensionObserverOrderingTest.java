@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  * @author Mark Paluch
  * @author Tomas Remes
  */
-@SpecVersion(spec = "cdi", version = "2.0 EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class ExtensionObserverOrderingTest extends AbstractTest {
 
     @Deployment
