@@ -17,19 +17,16 @@
 
 package org.jboss.cdi.tck.tests.extensions.observer.priority;
 
-import static org.jboss.cdi.tck.cdi.Sections.*;
-import static org.testng.Assert.*;
+import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
+import static org.testng.Assert.assertEquals;
 
 import java.util.List;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.extensions.observer.EventA;
-import org.jboss.cdi.tck.tests.extensions.observer.ProcessObserverMethodObserver;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -46,15 +43,15 @@ public class ExtensionObserverOrderingTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ExtensionObserverOrderingTest.class)
                 .withExtension(PrioritizedExtensionEvents.class).build();
     }
-
-    @Test
+    
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = INIT_EVENTS, id = "e")
     public void testEventOrdering(PrioritizedExtensionEvents prioritizedExtensionEvents) {
         List<String> notificationOrder = prioritizedExtensionEvents.getNotificationOrder();
 
-        assertTrue(notificationOrder.size() > 3);
-
-        assertEquals(notificationOrder.get(0), "processBeanEarly");
-        assertEquals(notificationOrder.get(1), "processBeanSomewhereInTheMiddle");
-        assertEquals(notificationOrder.get(2), "processBeanLate");
+        assertEquals(notificationOrder.size(), 3);
+        assertEquals(notificationOrder.get(0), PrioritizedExtensionEvents.EARLY);
+        assertEquals(notificationOrder.get(1), PrioritizedExtensionEvents.MIDDLE);
+        assertEquals(notificationOrder.get(2), PrioritizedExtensionEvents.LATE);
     }
 }

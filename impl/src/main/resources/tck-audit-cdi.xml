@@ -6648,6 +6648,12 @@
         </assertion>
 
         <assertion id="e">
+            <text>The notification order for observer methods within extensions follows the same ordering rule as defined in Observer ordering for non-extension
+                observers. The priority of an observer method may be declared using the @Priority annotation.
+            </text>
+        </assertion>
+
+        <assertion id="f">
             <text>For each service provider, the container must provide a bean of scope |@ApplicationScoped| and qualifier |@Default|, supporting injection of a
                 reference to the service provider instance. The bean types of this bean include the class of the service provider and all superclases and
                 interfaces.
