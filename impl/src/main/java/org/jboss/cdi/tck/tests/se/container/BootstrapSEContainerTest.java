@@ -51,7 +51,7 @@ public class BootstrapSEContainerTest extends Arquillian {
     public static Archive<?> deployment() {
         final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class, BootstrapSEContainerTest.class, CustomCDIProvider.class)
                 .addAsResource(EmptyAsset.INSTANCE,
-                        "beans.xml");
+                        "META-INF/beans.xml");
         final JavaArchive implicitArchive = ShrinkWrap.create(JavaArchive.class).addClass(Bar.class);
         return ClassPath.builder().add(testArchive, implicitArchive).build();
     }

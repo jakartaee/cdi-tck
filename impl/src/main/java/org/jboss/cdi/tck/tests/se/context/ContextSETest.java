@@ -44,9 +44,9 @@ public class ContextSETest extends Arquillian {
     public static Archive<?> deployment() {
         final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClasses(ContextSETest.class, ApplicationScopedCounter.class)
                 .addAsResource(EmptyAsset.INSTANCE, "beans.xml");
-        final JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class).addAsResource(EmptyAsset.INSTANCE, "beans.xml");
-        final JavaArchive barArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Bar.class).addAsResource(EmptyAsset.INSTANCE, "beans.xml");
-        final JavaArchive bazArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Baz.class).addAsResource(EmptyAsset.INSTANCE, "beans.xml");
+        final JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
+        final JavaArchive barArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Bar.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
+        final JavaArchive bazArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Baz.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
         return ClassPath.builder().add(testArchive, fooArchive, barArchive, bazArchive).build();
     }
 
