@@ -42,8 +42,8 @@ public class ContextSETest extends Arquillian {
 
     @Deployment
     public static Archive<?> deployment() {
-        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClasses(ContextSETest.class, ApplicationScopedCounter.class)
-                .addAsResource(EmptyAsset.INSTANCE, "beans.xml");
+        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClasses(ContextSETest.class, ApplicationScopedCounter.class, ApplicationScopedObserver.class)
+                .addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
         final JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
         final JavaArchive barArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Bar.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
         final JavaArchive bazArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Baz.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
@@ -69,6 +69,7 @@ public class ContextSETest extends Arquillian {
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
             @SpecAssertion(section = INIT_CONTAINER, id = "c") })
     public void testEventIsFiredWhenAplicationContextInitialized() {
+        ApplicationScopedObserver.reset();
         CDIProvider cdiProvider = CDI.getCDIProvider();
         CDI<Object> cdi = cdiProvider.initialize();
         Assert.assertTrue(ApplicationScopedObserver.isInitialized);
@@ -79,11 +80,12 @@ public class ContextSETest extends Arquillian {
     @Test
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "c"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d") })
     public void testEventIsFiredWhenAplicationContextDestroyed() {
+        ApplicationScopedObserver.reset();
         CDIProvider cdiProvider = CDI.getCDIProvider();
         CDI<Object> cdi = cdiProvider.initialize();
+        cdi.shutdown();
         Assert.assertTrue(ApplicationScopedObserver.isDestroyed);
         Assert.assertNotNull(ApplicationScopedObserver.destroyedEventPayload);
-        cdi.shutdown();
     }
 
 }

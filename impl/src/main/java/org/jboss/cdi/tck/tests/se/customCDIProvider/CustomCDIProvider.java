@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.se.container;
+package org.jboss.cdi.tck.tests.se.customCDIProvider;
 
 import java.util.Map;
 
@@ -29,11 +29,10 @@ import javax.enterprise.inject.spi.CDIProvider;
 @Vetoed
 public class CustomCDIProvider implements CDIProvider {
 
-    public static boolean isCalled = false;
+    public static boolean initializedCalled = false;
 
     @Override
     public CDI<Object> getCDI() {
-        isCalled = true;
         return null;
     }
 
@@ -44,11 +43,8 @@ public class CustomCDIProvider implements CDIProvider {
 
     @Override
     public CDI<Object> initialize(Map<String, Object> params) {
+        initializedCalled = true;
         return null;
-    }
-
-    public static void reset() {
-        isCalled = false;
     }
 
 }

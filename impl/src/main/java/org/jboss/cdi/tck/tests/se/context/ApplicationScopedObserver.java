@@ -37,4 +37,11 @@ public class ApplicationScopedObserver {
         isDestroyed = true;
         destroyedEventPayload = obj;
     }
+    
+    public static void reset(){
+        isInitialized = false;
+        isDestroyed = false;
+        initializedEventPayload = null;
+        destroyedEventPayload = null;
+    }
 }

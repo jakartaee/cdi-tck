@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.se.container;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
-import static org.jboss.cdi.tck.cdi.Sections.CDIPROVIDER_LOOKUP;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_CONTAINER;
 import static org.jboss.cdi.tck.cdi.Sections.STOP_CONTAINER;
 
@@ -49,7 +48,7 @@ public class BootstrapSEContainerTest extends Arquillian {
 
     @Deployment
     public static Archive<?> deployment() {
-        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class, BootstrapSEContainerTest.class, CustomCDIProvider.class)
+        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class, BootstrapSEContainerTest.class)
                 .addAsResource(EmptyAsset.INSTANCE,
                         "META-INF/beans.xml");
         final JavaArchive implicitArchive = ShrinkWrap.create(JavaArchive.class).addClass(Bar.class);
@@ -84,20 +83,12 @@ public class BootstrapSEContainerTest extends Arquillian {
     public void testInvocationOfInitializedMethodReturnsNewCDIInstance() {
         CDIProvider cdiProvider = CDI.getCDIProvider();
         CDI<Object> cdi1 = cdiProvider.initialize();
-        CDI<Object> cdi2 = cdiProvider.initialize();
         Assert.assertNotNull(cdi1);
+        cdi1.shutdown();
+        CDI<Object> cdi2 = cdiProvider.initialize();
         Assert.assertNotNull(cdi2);
+        cdi2.shutdown();
         Assert.assertNotEquals(cdi1, cdi2);
-    }
-
-    @Test
-    @SpecAssertion(section = CDIPROVIDER_LOOKUP, id = "a")
-    public void testCustomCDIProvider() {
-        CDI.setCDIProvider(new CustomCDIProvider());
-        CDIProvider cdiProvider = CDI.getCDIProvider();
-        cdiProvider.initialize();
-        Assert.assertTrue(CustomCDIProvider.isCalled);
-        CDI.setCDIProvider(null);
     }
 
     @Test
