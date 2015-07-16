@@ -72,8 +72,8 @@ public class MultipleExceptionsInObserversNotificationTest extends AbstractTest 
         assertTrue(suppressedExceptions.contains(ParisRadioStation.exception.get()));
         assertTrue(suppressedExceptions.contains(NewYorkRadioStation.exception.get()));
         assertTrue(suppressedExceptions.contains(LondonRadioStation.exception.get()));
-        assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(ParisRadioStation.class)));
-        assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(NewYorkRadioStation.class)));
-        assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(LondonRadioStation.class)));
+        assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(ParisRadioStation.class.getName())));
+        assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(NewYorkRadioStation.class.getName())));
+        assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(LondonRadioStation.class.getName())));
     }
 }
