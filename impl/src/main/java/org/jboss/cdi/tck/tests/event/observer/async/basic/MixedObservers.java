@@ -23,21 +23,24 @@ import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.weld.experimental.Priority;
 
 public class MixedObservers {
-
+    
     public static class MassachusettsInstituteObserver {
         public void observes(@Observes @Priority(2000) Experiment experiment) {
+            experiment.addUniversity(getClass());
             ActionSequence.addAction(getClass().getSimpleName());
         }
     }
 
     public static class StandfordUniversityObserver {
         public void observes(@Observes Experiment experiment) {
+            experiment.addUniversity(getClass());
             ActionSequence.addAction(getClass().getSimpleName());
         }
     }
 
     public static class YaleUniversityObserver {
         public void observes(@ObservesAsync @American Experiment experiment) {
+            experiment.addUniversity(getClass());
             ActionSequence.addAction(getClass().getSimpleName());
         }
 
@@ -45,6 +48,7 @@ public class MixedObservers {
 
     public static class OxfordUniversityObserver {
         public void observes(@ObservesAsync Experiment experiment) {
+            experiment.addUniversity(getClass());
             ActionSequence.addAction(getClass().getSimpleName());
         }
 

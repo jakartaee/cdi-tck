@@ -1,7 +1,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.remote;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -20,7 +20,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
@@ -39,8 +38,8 @@ public class ResourcePassivationDependencyTest extends AbstractTest {
     }
 
     @OperateOnDeployment("TEST")
-    @Test(groups=JAVAEE_FULL)
-    @SpecAssertions({@SpecAssertion(section=PASSIVATION_CAPABLE_DEPENDENCY, id="dd")})
+    @Test(groups = JAVAEE_FULL)
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "dd") })
     public void testRemoteSessionBean() throws IOException, ClassNotFoundException {
 
         Worker worker = getContextualReference(Worker.class);

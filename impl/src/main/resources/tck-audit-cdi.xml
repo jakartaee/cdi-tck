@@ -4728,12 +4728,6 @@
 
     <section id="declaring_interceptor" title="Declaring the interceptor bindings of an interceptor" level="2">
 
-        <assertion id="a">
-            <text>If an interceptor for lifecycle callbacks declares an interceptor binding type that not defined |@Target(TYPE)|, the container automatically
-                detects the problem and treats it as a definition error.
-            </text>
-        </assertion>
-
     </section>
 
     <section id="binding_interceptor_to_bean" title="Binding an interceptor to a bean" level="2">
@@ -5463,15 +5457,15 @@
         <group>
             <text>If the observer method is asynchronous, it is called:</text>
             <assertion id="aa">
-                <text>in the same client security context BeanManager.fireAsync()</text>
+                <text>in a new lifecycle contexts.</text>
             </assertion>
 
             <assertion id="ab">
-                <text>in an unspecified transaction context</text>
+                <text>in a new transaction context.</text>
             </assertion>
 
             <assertion id="ac">
-                <text>within a new lifecycle for request context, session context and conversation context</text>
+                <text>in the same security context as the invocation of Event.fireAsync().</text>
             </assertion>
         </group>
 

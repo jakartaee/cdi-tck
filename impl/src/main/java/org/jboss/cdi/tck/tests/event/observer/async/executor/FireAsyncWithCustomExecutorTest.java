@@ -37,18 +37,18 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class CustomExecutorTest extends AbstractTest {
+public class FireAsyncWithCustomExecutorTest extends AbstractTest {
 
     @Inject
     Event<Message> event;
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(CustomExecutorTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(FireAsyncWithCustomExecutorTest.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = EVENT, id = "ee"), @SpecAssertion(section = EVENT, id = "eda") })
+    @SpecAssertions({ @SpecAssertion(section = EVENT, id = "ee") })
     public void testCustomExecutor() throws InterruptedException {
         BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
         event.fireAsync(new Message(), new CustomExecutor()).thenAccept(queue::add);

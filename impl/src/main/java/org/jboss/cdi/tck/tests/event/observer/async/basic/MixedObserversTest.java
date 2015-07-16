@@ -16,8 +16,19 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.async.basic;
 
+import static org.jboss.cdi.tck.cdi.Sections.EVENT;
 import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENT_ASYNCHRONOUSLY;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
+import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.MassachusettsInstituteObserver;
+import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.OxfordUniversityObserver;
+import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.StandfordUniversityObserver;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -49,16 +60,26 @@ public class MixedObserversTest extends AbstractTest {
 
         ActionSequence.reset();
         event.fire(new ScientificExperiment());
-        ActionSequence.assertSequenceDataEquals(MixedObservers.MassachusettsInstituteObserver.class, MixedObservers.StandfordUniversityObserver.class);
+        ActionSequence.assertSequenceDataEquals(MassachusettsInstituteObserver.class, StandfordUniversityObserver.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "f"), @SpecAssertion(section = FIRING_EVENT_ASYNCHRONOUSLY, id = "b") })
-    public void testQualifiedAsyncEventIsDelivered() {
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "f"), @SpecAssertion(section = FIRING_EVENT_ASYNCHRONOUSLY, id = "b"),
+            @SpecAssertion(section = EVENT, id = "ef"), @SpecAssertion(section = EVENT, id = "eda") })
+    public void testQualifiedAsyncEventIsDelivered() throws InterruptedException {
 
-        ActionSequence.reset();
-        event.select(American.AmericanLiteral.INSTANCE).fireAsync(new ScientificExperiment());
-        ActionSequence.assertSequenceDataContainsAll(MixedObservers.class.getClasses());
+        BlockingQueue<Experiment> queue = new LinkedBlockingQueue<>();
+        
+        event.select(American.AmericanLiteral.INSTANCE).fireAsync(new ScientificExperiment()).thenAccept(queue::offer);
+        Experiment experiment = queue.poll(2, TimeUnit.SECONDS);
+        assertTrue(experiment.getUniversities().containsAll(Arrays.asList(MixedObservers.class.getClasses())));
+
+        event.fireAsync(new ScientificExperiment()).thenAccept(queue::offer);
+        Experiment experiment2 = queue.poll(2, TimeUnit.SECONDS);
+        assertEquals(experiment2.getUniversities().size(), 3);
+        assertTrue(experiment2.getUniversities().contains(MassachusettsInstituteObserver.class));
+        assertTrue(experiment2.getUniversities().contains(StandfordUniversityObserver.class));
+        assertTrue(experiment2.getUniversities().contains(OxfordUniversityObserver.class));
     }
 
 }

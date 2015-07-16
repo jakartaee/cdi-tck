@@ -16,5 +16,19 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.async.basic;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class Experiment {
+
+    public List<Class<?>> getUniversities() {
+        return universities;
+    }
+
+    public void addUniversity(Class<?> university) {
+        this.universities.add(university);
+    }
+
+    private List<Class<?>> universities = new CopyOnWriteArrayList<>();
+    
 }
