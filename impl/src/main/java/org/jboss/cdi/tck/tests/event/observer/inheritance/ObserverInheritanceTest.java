@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.event.observer.inheritance;
 
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -58,7 +57,7 @@ public class ObserverInheritanceTest extends AbstractTest {
         // Baz indirectly extends AbstractFooObserver but overrides the observer method and does not define @Observes - not
         // invoked
         assertEquals(ActionSequence.getSequenceSize(), 2);
-        assertTrue(ActionSequence.getSequence().containsAll(Foo.class.getName(), Bar.class.getName()));
+        ActionSequence.getSequence().assertDataContainsAll(Foo.class.getName(), Bar.class.getName());
     }
 
 }

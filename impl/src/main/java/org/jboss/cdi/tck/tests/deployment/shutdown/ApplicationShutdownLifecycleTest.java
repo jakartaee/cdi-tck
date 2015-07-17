@@ -33,6 +33,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.spi.BeforeShutdown;
 
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 import org.jboss.arquillian.container.test.api.Deployer;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
@@ -47,9 +49,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Test application shutdown lifecycle.
@@ -75,7 +74,8 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
 
     @Deployment(name = INFO, managed = false, testable = false)
     public static WebArchive createBarTestArchive() {
-        return new WebArchiveBuilder().notTestArchive().withClasses(InfoServlet.class, ActionSequence.class, TransformationUtils.class, TransformationUtils.Function.class).build();
+        return new WebArchiveBuilder().notTestArchive()
+                .withClasses(InfoServlet.class, ActionSequence.class, TransformationUtils.class, TransformationUtils.Function.class).build();
     }
 
     @ArquillianResource
@@ -118,9 +118,9 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
         TextPage info = webClient.getPage(infoContext + "info?action=get");
         ActionSequence actual = ActionSequence.buildFromCsvData(info.getContent());
         assertTrue(actual.endsWith(BeforeShutdown.class.getName()));
-        assertTrue(actual.containsAll(RequestScoped.class.getName(), SessionScoped.class.getName(),
- ApplicationScoped.class.getName(),
-                ConversationScoped.class.getName(), Foo.class.getName(), Bar.class.getName(), Baz.class.getName(), Qux.class.getName()));
+        actual.assertDataContainsAll(RequestScoped.class.getName(), SessionScoped.class.getName(),
+                ApplicationScoped.class.getName(),
+                ConversationScoped.class.getName(), Foo.class.getName(), Bar.class.getName(), Baz.class.getName(), Qux.class.getName());
 
         // Undeploy info
         deployer.undeploy(INFO);

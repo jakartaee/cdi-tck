@@ -21,7 +21,6 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -33,8 +32,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
- * 
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
@@ -57,15 +54,15 @@ public class ExtensionsCommunicationTest extends AbstractTest {
         // Fired by alpha, recorder by beta
         ActionSequence patSeq = ActionSequence.getSequence(EventBase.PAT_SEQ);
         assertNotNull(patSeq);
-        assertTrue(patSeq.containsAll(Foo.class.getName(), Bar.class.getName(), EventBase.class.getName(),
+        patSeq.assertDataContainsAll(Foo.class.getName(), Bar.class.getName(), EventBase.class.getName(),
                 PatEvent.class.getName(), PbEvent.class.getName(), ExtensionAlpha.class.getName(),
-                ExtensionBeta.class.getName()));
+                ExtensionBeta.class.getName());
 
         // Fired by beta, recorder by alpha
         ActionSequence pbSeq = ActionSequence.getSequence(EventBase.PB_SEQ);
         assertNotNull(pbSeq);
         assertEquals(pbSeq.getData().size(), 2);
-        assertTrue(pbSeq.containsAll(Foo.class.getName(), Bar.class.getName()));
+        pbSeq.assertDataContainsAll(Foo.class.getName(), Bar.class.getName());
     }
 
 }

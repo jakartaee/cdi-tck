@@ -78,7 +78,7 @@ public class CustomTransactionalObserverTest extends AbstractTest {
         // AFTER_SUCCESS and AFTER_COMPLETION must be fired after BEFORE_COMPLETION
         // AFTER_FAILURE is not fired
         ActionSequence.getSequence().beginsWith("checkpoint", TransactionPhase.BEFORE_COMPLETION.toString());
-        ActionSequence.getSequence().containsAll(TransactionPhase.AFTER_SUCCESS.toString(),
+        ActionSequence.getSequence().assertDataContainsAll(TransactionPhase.AFTER_SUCCESS.toString(),
                 TransactionPhase.AFTER_COMPLETION.toString());
     }
 

@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.context.dependent.transientreference;
 
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -51,15 +50,15 @@ public class DependentTransientReferenceDestroyedTest extends AbstractTest {
 
         // transientChef params in Spoon bean constructor and initializer
         assertEquals(ActionSequence.getSequenceSize(), 2);
-        assertTrue(ActionSequence.getSequence().containsAll(Util.buildOwnerId(Spoon.class, true, Util.TYPE_CONSTRUCTOR),
-                Util.buildOwnerId(Spoon.class, true, Util.TYPE_INIT)));
+        ActionSequence.getSequence().assertDataContainsAll(Util.buildOwnerId(Spoon.class, true, Util.TYPE_CONSTRUCTOR),
+                Util.buildOwnerId(Spoon.class, true, Util.TYPE_INIT));
 
         ActionSequence.reset();
         spoonInstance.destroy();
 
         assertEquals(ActionSequence.getSequenceSize(), 2);
-        assertTrue(ActionSequence.getSequence().containsAll(Util.buildOwnerId(Spoon.class, false, Util.TYPE_CONSTRUCTOR),
-                Util.buildOwnerId(Spoon.class, false, Util.TYPE_INIT)));
+        ActionSequence.getSequence().assertDataContainsAll(Util.buildOwnerId(Spoon.class, false, Util.TYPE_CONSTRUCTOR),
+                Util.buildOwnerId(Spoon.class, false, Util.TYPE_INIT));
     }
 
     @Test
@@ -74,7 +73,7 @@ public class DependentTransientReferenceDestroyedTest extends AbstractTest {
         assertEquals(meal.getName(), "soup");
         // transientChef param in Kitchen producer
         assertEquals(ActionSequence.getSequenceSize(), 1);
-        assertTrue(ActionSequence.getSequence().containsAll(Util.buildOwnerId(Kitchen.class, true, Util.TYPE_PRODUCER)));
+        ActionSequence.getSequence().assertDataContainsAll(Util.buildOwnerId(Kitchen.class, true, Util.TYPE_PRODUCER));
 
         mealInstance.destroy();
     }
