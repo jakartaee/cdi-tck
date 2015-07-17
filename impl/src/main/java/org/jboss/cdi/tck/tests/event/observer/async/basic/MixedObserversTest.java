@@ -81,6 +81,7 @@ public class MixedObserversTest extends AbstractTest {
     @SpecAssertions({@SpecAssertion(section = FIRING_EVENT_ASYNCHRONOUSLY, id = "a")})
     public void testAsyncObserversCalledInDifferentThread() throws InterruptedException {
         BlockingQueue<Experiment> queue = new LinkedBlockingQueue<>();
+        int threadId = (int) Thread.currentThread().getId();
         event.fireAsync(new ScientificExperiment()).thenAccept(queue::offer);
         
         Experiment experiment2 = queue.poll(2, TimeUnit.SECONDS);
@@ -89,6 +90,7 @@ public class MixedObserversTest extends AbstractTest {
         assertTrue(experiment2.getUniversities().contains(StandfordUniversityObserver.class));
         assertTrue(experiment2.getUniversities().contains(OxfordUniversityObserver.class));
 
+        assertEquals(threadId, MassachusettsInstituteObserver.threadId.get());
         assertEquals(MassachusettsInstituteObserver.threadId.get(), StandfordUniversityObserver.threadId.get());
         assertNotEquals(StandfordUniversityObserver.threadId.get(), OxfordUniversityObserver.threadId.get());
 
