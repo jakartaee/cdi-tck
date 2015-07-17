@@ -23,6 +23,7 @@ import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.
 import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.OxfordUniversityObserver;
 import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.StandfordUniversityObserver;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -69,17 +70,28 @@ public class MixedObserversTest extends AbstractTest {
     public void testQualifiedAsyncEventIsDelivered() throws InterruptedException {
 
         BlockingQueue<Experiment> queue = new LinkedBlockingQueue<>();
-        
+
         event.select(American.AmericanLiteral.INSTANCE).fireAsync(new ScientificExperiment()).thenAccept(queue::offer);
         Experiment experiment = queue.poll(2, TimeUnit.SECONDS);
         assertTrue(experiment.getUniversities().containsAll(Arrays.asList(MixedObservers.class.getClasses())));
 
+    }
+
+    @Test
+    @SpecAssertions({@SpecAssertion(section = FIRING_EVENT_ASYNCHRONOUSLY, id = "a")})
+    public void testAsyncObserversCalledInDifferentThread() throws InterruptedException {
+        BlockingQueue<Experiment> queue = new LinkedBlockingQueue<>();
         event.fireAsync(new ScientificExperiment()).thenAccept(queue::offer);
+        
         Experiment experiment2 = queue.poll(2, TimeUnit.SECONDS);
         assertEquals(experiment2.getUniversities().size(), 3);
         assertTrue(experiment2.getUniversities().contains(MassachusettsInstituteObserver.class));
         assertTrue(experiment2.getUniversities().contains(StandfordUniversityObserver.class));
         assertTrue(experiment2.getUniversities().contains(OxfordUniversityObserver.class));
+
+        assertEquals(MassachusettsInstituteObserver.threadId.get(), StandfordUniversityObserver.threadId.get());
+        assertNotEquals(StandfordUniversityObserver.threadId.get(), OxfordUniversityObserver.threadId.get());
+
     }
 
 }

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.async.basic;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.ObservesAsync;
 
@@ -23,22 +25,31 @@ import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.weld.experimental.Priority;
 
 public class MixedObservers {
-    
+
     public static class MassachusettsInstituteObserver {
+
+        public static final AtomicInteger threadId = new AtomicInteger();
+
         public void observes(@Observes @Priority(2000) Experiment experiment) {
             experiment.addUniversity(getClass());
             ActionSequence.addAction(getClass().getSimpleName());
+            threadId.set((int) Thread.currentThread().getId());
         }
     }
 
     public static class StandfordUniversityObserver {
+
+        public static final AtomicInteger threadId = new AtomicInteger();
+
         public void observes(@Observes Experiment experiment) {
             experiment.addUniversity(getClass());
             ActionSequence.addAction(getClass().getSimpleName());
+            threadId.set((int) Thread.currentThread().getId());
         }
     }
 
     public static class YaleUniversityObserver {
+
         public void observes(@ObservesAsync @American Experiment experiment) {
             experiment.addUniversity(getClass());
             ActionSequence.addAction(getClass().getSimpleName());
@@ -47,9 +58,13 @@ public class MixedObservers {
     }
 
     public static class OxfordUniversityObserver {
+
+        public static final AtomicInteger threadId = new AtomicInteger();
+
         public void observes(@ObservesAsync Experiment experiment) {
             experiment.addUniversity(getClass());
             ActionSequence.addAction(getClass().getSimpleName());
+            threadId.set((int) Thread.currentThread().getId());
         }
 
     }
