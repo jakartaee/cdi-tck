@@ -17,8 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_TYPE_DISCOVERY;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_PRODUCER;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_DISCOVERY_STEPS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -123,7 +123,7 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "e"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "r") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "e"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "d") })
     public void testAddAnnotatedType() {
         assertTrue(extension.isBossObserved());
         getUniqueBean(Boss.class);

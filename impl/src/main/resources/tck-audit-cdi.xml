@@ -7608,82 +7608,93 @@
 
     </section>
 
-    <section id="bean_discovery_steps" title="Bean discovery" level="2">
+    <section id="type_bean_discovery" title="Type and Bean discovery" level="2">
         <assertion id="a" testable="false">
             <text>The container automatically discovers managed beans (according to the rules of Section 3.1.1, "Which Java classes are managed beans?") in bean
                 archives and searches the bean classes for producer methods, producer fields, disposer methods and observer methods.
             </text>
             <note>Statement of intent</note>
         </assertion>
+    </section>
 
+    <section id="type_discovery_steps" title="Type discovery" level="3">
+        <group>
+            <text>First the container must discover types. The container discovers:</text>
+            <assertion id="a">
+                <text>The container discovers each Java class, interface or enum deployed in an explicit bean archive.</text>
+            </assertion>
+
+            <assertion id="b">
+                <text>The container discovers each Java class with a bean defining annotation in an implicit bean archive.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>For every type discovered the container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|,
+                as defined in Section 11.5.6.
+            </text>
+            <assertion id="c">
+                <text>Check managed bean</text>
+            </assertion>
+        </group>
+
+        <assertion id="d">
+            <text>If an extension calls |BeforeBeanDiscovery.addAnnotatedType()| or |AfterTypeDiscovery.addAnnotatedType()|, the type passed must be added to
+                the set of discovered types.
+            </text>
+        </assertion>
+
+    </section>
+
+    <section id="exclude_filters" title="Exclude filters" level="3">
         <group>
             <text>Exclude filters are defined by &lt;exclude&gt; elements in the |beans.xml| for the bean archive as children of the &lt;scan&gt; element.
             </text>
-            <assertion id="pa">
+            <assertion id="a">
                 <text>By default an exclude filter is active.</text>
             </assertion>
-            <assertion id="pb">
+            <assertion id="b">
                 <text>An exclude filter is not active if the definition contains a child element named &lt;if-class-available&gt; with a name attribute, and the
                     classloader for the bean archive can load a class for that name.
                 </text>
             </assertion>
-            <assertion id="pc">
+            <assertion id="c">
                 <text>An exclude filter is not active if the definition contains a child element named &lt;if-class-not-available&gt; with a name attribute, and
                     the classloader for the bean archive cannot load a class for that name.
                 </text>
             </assertion>
-            <assertion id="pd">
+            <assertion id="d">
                 <text>An exclude filter is not active if the definition contains a child element named &lt;if-system-property&gt; with a name attribute, and
                     there is no system property defined for that name.
                 </text>
             </assertion>
-            <assertion id="pe">
+            <assertion id="e">
                 <text>An exclude filter is not active if the definition contains a child element named &lt;if-system-property&gt; with a name attribute and a
                     value attribute, and there is no system property defined for that name with that value.
                 </text>
             </assertion>
         </group>
 
-        <assertion id="qa">
+        <assertion id="f">
             <text>The type is excluded from discovery if the fully qualified name of the type being discovered matches the value of the name attribute of the
                 exclude filter.
             </text>
         </assertion>
 
-        <assertion id="qb">
+        <assertion id="g">
             <text>The type is excluded from discovery if the package name of the type being discovered matches the value of the name attribute with a suffix
                 ".*" of the exclude filter.
             </text>
         </assertion>
 
-        <assertion id="qc">
+        <assertion id="h">
             <text>The type is excluded from discovery if the package name of the type being discovered starts with the value of the name attribute with a suffix
                 ".**" of the exclude filter.
             </text>
         </assertion>
+    </section>
 
-        <assertion id="ta">
-            <text>The container discovers each Java class, interface or enum deployed in an explicit bean archive.</text>
-        </assertion>
-
-        <assertion id="tb">
-            <text>The container discovers each Java class with a bean defining annotation in an implicit bean archive.</text>
-        </assertion>
-
-        <group>
-            <text>For every type discovered the container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|,
-                as defined in Section 11.5.6.
-            </text>
-            <assertion id="ba">
-                <text>Check managed bean</text>
-            </assertion>
-        </group>
-
-        <assertion id="r">
-            <text>If an extension calls |BeforeBeanDiscovery.addAnnotatedType()| or |AfterTypeDiscovery.addAnnotatedType()|, the type passed must be added to
-                the set of discovered types.
-            </text>
-        </assertion>
+    <section id="bean_discovery_steps" title="Bean discovery" level="2">
 
         <assertion id="c" testable="false">
             <text>For each Java class in any bean archive, the container must inspect the type metadata to determine if it is a bean.</text>
@@ -7871,12 +7882,6 @@
     <section id="capabilities_ee" title="Functionality provided by the container to the bean in Java EE" level="2">
     </section>
 
-    <section id="scopes_ee" title="Scopes" level="2">
-    </section>
-
-    <section id="builtin_scopes_ee" title="Built-in scope types in Java EE" level="3">
-    </section>
-
     <section id="bean_types_ee" title="Bean types for Java EE component" level="2">
         <group>
             <text>The bean types of a bean may be restricted by annotating the bean class or producer method or field with the annotation
@@ -7898,6 +7903,25 @@
             </assertion>
         </group>
     </section>
+
+    <section id="scopes_ee" title="Scopes" level="2">
+    </section>
+
+    <section id="builtin_scopes_ee" title="Built-in scope types in Java EE" level="3">
+    </section>
+
+    <section id="default_bean_discovery_ee" title="Default bean discovery mode for Java EE" level="2">
+    </section>
+
+    <section id="names_ee" title="Bean names in Java EE" level="2">
+    </section>
+
+    <section id="default_name_ee" title="Default bean names for EJB session beans" level="3"></section>
+
+    <section id="implementation_ee" title="Addition to programming model for Java EE" level="1">
+    </section>
+
+    <section id="managed_beans_ee" title="Managed beans in Java EE" level="2"></section>
 
     <section id="what_classes_are_beans_ee" title="Which Java classes are managed beans in Java EE?" level="3">
         <assertion id="a">
@@ -8108,7 +8132,7 @@
         </assertion>
     </section>
 
-    <section id="declaring_disposer_method_ee" title="Declaring a disposer method" level="3">
+    <section id="declaring_disposer_method_ee" title="Declaring a disposer method on an EJB session bean" level="3">
         <assertion id="a">
             <text>If a non-static method of a session bean class has a parameter annotated |@Disposes|, and the method is not a business method of the session
                 bean, the container automatically detects the problem and treats it as a definition error.
@@ -8531,6 +8555,9 @@
 
     </section>
 
+    <section id="specialization_ee" title="Specialization in Java EE" level="2">
+    </section>
+
     <section id="direct_and_indirect_specialization_ee" title="Direct and indirect specialization in Java EE" level="3">
         <group>
             <text>If Y has a bean name and X declares a bean name explicitly the container automatically detects the problem and treats it as a definition
@@ -8541,6 +8568,8 @@
             </assertion>
         </group>
     </section>
+
+    <section id="injection_el_resolution_ee" title="Dependency injection, lookup and EL in Java EE" level="1"></section>
 
     <section id="selection_ee" title="Modularity in Java EE" level="2">
         <group>
@@ -8608,6 +8637,14 @@
                 <text>Test ambiguous dependency for Java EE component.</text>
             </assertion>
         </group>
+    </section>
+
+    <section id="name_resolution_ee" title="EL name resolution" level="2">
+
+    </section>
+
+    <section id="ambig_names_ee" title="Ambiguous EL names" level="3">
+
     </section>
 
     <section id="injection_ee" title="Dependency injection in Java EE" level="2">
@@ -8799,6 +8836,10 @@
         </group>
     </section>
 
+    <section id="dependent_objects_destruction_ee" title="Destruction of dependent objects in Java EE" level="3"></section>
+
+    <section id="contexts_ee" title="Scopes and contexts in Java EE" level="1"></section>
+
     <section id="dependent_context_ee" title="Dependent pseudo-scope in Java EE" level="2">
         <assertion id="ca">
             <text>When a bean is declared to have |@Dependent| scope, when a unified EL expression in a JSF or JSP page that refers to the bean by its EL name
@@ -8807,6 +8848,10 @@
                 when another EL expression is evaluated.
             </text>
         </assertion>
+    </section>
+
+    <section id="dependent_objects_ee" title="Dependent objects in Java EE" level="3">
+
     </section>
 
     <section id="dependent_destruction_ee" title="Destruction of objects with scope @Dependent in Java EE" level="3">
@@ -8838,6 +8883,8 @@
             <text>Portable extensions that integrate with the container via Unified EL should also ensure that these rules are enforced.</text>
         </assertion>
     </section>
+
+    <section id="passivating_scope_ee" title="Passivation and passivating scopes in Java EE" level="2"></section>
 
     <section id="passivation_capable_ee" title="Passivation capable beans in Java EE" level="3">
 
@@ -9410,6 +9457,10 @@
 
     </section>
 
+    <section id="lifecycle_ee" title="Lifecycle of contextual instances" level="1">
+
+    </section>
+
     <section id="biz_method_ee" title="Container invocations and interception in Java EE" level="2">
         <assertion id="ac">
             <text>When the application invokes a business method of a session bean via an EJB remote or local reference, the invocation is treated as a business
@@ -9612,6 +9663,10 @@
 
     </section>
 
+    <section id="decorators_ee" title="Decorators in Java EE" level="1">
+
+    </section>
+
     <section id="decorator_bean_ee" title="Decorator beans in Java EE" level="2">
 
         <group>
@@ -9644,6 +9699,17 @@
         </group>
     </section>
 
+
+    <section id="interceptors_ee" title="Interceptor bindings in Java EE" level="1">
+
+    </section>
+
+    <section id="interceptor_resolution_ee" title="Interceptor resolution in Java EE" level="2">
+
+    </section>
+
+    <section id="events_ee" title="Events in Java EE" level="1"></section>
+
     <section id="observer_methods_ee" title="Observer methods in EJB session beans" level="2">
         <assertion id="d">
             <text>If the bean is a session bean, the observer method must be either a business method of the EJB or a static method of the bean class.</text>
@@ -9657,6 +9723,30 @@
                 container automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
+    </section>
+
+    <section id="observer_method_invocation_context_ee" title="Observer method invocation context in Java EE" level="3">
+
+    </section>
+
+    <section id="spi_ee" title="Portable extensions in Java EE" level="1">
+
+    </section>
+
+    <section id="bean_ee" title="The Bean interface in Java EE" level="2">
+
+    </section>
+
+    <section id="interceptor_ee" title="The Interceptor interface in Java EE" level="3">
+
+    </section>
+
+    <section id="injectiontarget_ee" title="InjectionTarget interface in Java EE" level="2">
+
+    </section>
+
+    <section id="beanmanager_ee" title="The BeanManager object in Java EE" level="2">
+
     </section>
 
     <section id="provider_ee" title="Obtaining a reference to the CDI container in Java EE" level="3">
@@ -9697,6 +9787,12 @@
             </assertion>
         </group>
     </section>
+
+    <section id="init_events_ee" title="Addition to Container lifecycle events in Java EE" level="2">
+
+    </section>
+
+    <section id="process_injection_point_ee" title="ProcessInjectionPoint event and EJB" level="3"></section>
 
     <section id="process_injection_target_ee" title="ProcessInjectionTarget event" level="3">
         <group>
@@ -9870,6 +9966,10 @@
         </group>
     </section>
 
+    <section id="packaging_deployment_ee" title="Packaging and deployment in Java EE" level="1">
+
+    </section>
+
     <section id="bean_archive_ee" title="Bean archive with EJB Session Beans" level="2">
         <group>
             <text>When determining which archives are bean archives, the container must consider:</text>
@@ -9969,7 +10069,11 @@
         </assertion>
     </section>
 
-    <section id="bean_discovery_steps_ee" title="Bean discovery in Java EE" level="2">
+    <section id="type_bean_discovery_ee" title="Type and Bean discovery for EJB" level="2">
+
+    </section>
+
+    <section id="bean_discovery_steps_ee" title="Bean discovery in Java EE" level="3">
         <assertion id="tc">
             <text>The container discovers each session bean.</text>
         </assertion>
@@ -10018,7 +10122,7 @@
         </group>
     </section>
 
-    <section id="el" title="Integration with Unified EL" level="2">
+    <section id="el" title="Integration with Unified EL" level="3">
         <assertion id="a">
             <text>The container must provide a Unified EL |ELResolver| to the servlet engine and JSF implementation that resolves bean EL names using the rules
                 of name resolution defined in 5.3, "EL name resolution" and resolving ambiguities according to Section 5.3.1, "Ambiguous EL names".

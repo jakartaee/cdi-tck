@@ -25,6 +25,7 @@ import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_EE;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET_EE;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_DISCOVERY_STEPS;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Produces;
@@ -85,7 +86,7 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ba")
+    @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "c")
     public void testProcessAnnotatedTypeFiredForManagedBean() {
         assert ProcessAnnotatedTypeObserver.getManagedBeanType() != null;
         validateManagedBean(ProcessAnnotatedTypeObserver.getManagedBeanType());

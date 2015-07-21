@@ -17,9 +17,9 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_DISCOVERY_STEPS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -119,7 +119,7 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({@SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "r")})
+    @SpecAssertions({@SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "d")})
     public void testAddAnnotatedType() {
         getUniqueBean(Boss.class);
         assertEquals(getBeans(Bar.class).size(), 0);

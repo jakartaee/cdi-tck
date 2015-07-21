@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DEFINING_ANNOTATIONS;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS_EE;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
 import static org.testng.Assert.assertFalse;
@@ -48,7 +47,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
@@ -135,8 +133,7 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ta") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc") })
     public void testExplicitBeanArchiveLegacyDescriptor() {
         assertDiscoveredAndAvailable(CharlieLocal.class, Charlie.class);
     }

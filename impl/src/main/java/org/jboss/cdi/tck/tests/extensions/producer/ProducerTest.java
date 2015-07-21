@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTIONTARGET;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_PRODUCER;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_DISCOVERY_STEPS;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
@@ -191,7 +192,7 @@ public class ProducerTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "i"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ba"),
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "i"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "c"),
             @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaa") })
     public void testInjectionTargetInject() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();

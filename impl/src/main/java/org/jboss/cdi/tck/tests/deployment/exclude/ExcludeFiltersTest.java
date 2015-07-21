@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.deployment.exclude;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.SYSTEM_PROPERTIES;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
+import static org.jboss.cdi.tck.cdi.Sections.EXCLUDE_FILTERS;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.Beans11DescriptorImpl.newBeans11Descriptor;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.ClassActivator.newClassAvailableActivator;
 import static org.jboss.cdi.tck.shrinkwrap.descriptors.ClassActivator.newClassNotAvailableActivator;
@@ -90,15 +90,15 @@ public class ExcludeFiltersTest extends AbstractTest {
     VerifyingExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "pa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "qa") })
+    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "a"), @SpecAssertion(section = EXCLUDE_FILTERS, id = "f") })
     public void testTypeFcqnMatchesExcludeFilterName() {
         assertTypeIsExcluded(Stubble.class);
         assertTypeIsNotExcluded(Golf.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "pa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "qb"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "qc") })
+    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "a"), @SpecAssertion(section = EXCLUDE_FILTERS, id = "g"),
+            @SpecAssertion(section = EXCLUDE_FILTERS, id = "h") })
     public void testTypePackageMatchesExcludeFilterName() {
         assertTypeIsExcluded(Mustache.class);
         assertTypeIsExcluded(Beard.class);
@@ -106,7 +106,7 @@ public class ExcludeFiltersTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "pb"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "pc") })
+    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "b"), @SpecAssertion(section = EXCLUDE_FILTERS, id = "c") })
     public void testExcludeClassActivators() {
         assertTypeIsExcluded(Alpha.class);
         assertTypeIsNotExcluded(Foxtrot.class);
@@ -116,7 +116,7 @@ public class ExcludeFiltersTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION, SYSTEM_PROPERTIES })
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "pd"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "pe") })
+    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "d"), @SpecAssertion(section = EXCLUDE_FILTERS, id = "e") })
     public void testExcludeSystemPropertyActivator() {
         assertTypeIsExcluded(Charlie.class);
         assertTypeIsExcluded(Delta.class);
