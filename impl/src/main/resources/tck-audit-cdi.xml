@@ -4891,13 +4891,9 @@
         </assertion>
     </section>
 
-    <section id="firing_events" title="Firing events synchronously" level="2">
+    <section id="firing_events" title="Firing events" level="2">
         <assertion id="a">
             <text>Beans fire events via an instance of the |javax.enterprise.event.Event| interface, which may be injected.</text>
-        </assertion>
-
-        <assertion id="b">
-            <text>The method |fire()| accepts an event object.</text>
         </assertion>
 
         <assertion id="c">
@@ -4906,6 +4902,14 @@
 
         <assertion id="d">
             <text>Or, the |@Any| qualifier may be used, allowing the application to specify qualifiers dynamically.</text>
+        </assertion>
+
+    </section>
+
+    <section id="firing_events_sycnronously" title="Firing events synchronously" level="3">
+
+        <assertion id="b">
+            <text>The method |fire()| accepts an event object.</text>
         </assertion>
 
         <assertion id="e">
@@ -4919,7 +4923,7 @@
         </assertion>
     </section>
 
-    <section id="firing_event_asynchronously" title="Firing events asynchronously" level="2">
+    <section id="firing_event_asynchronously" title="Firing events asynchronously" level="3">
 
         <assertion id="a">
             <text>Event fired with the fireAsync() method is fired asynchronously. All resolved synchronous observers are called in the same thread in which
@@ -7694,74 +7698,85 @@
         </assertion>
     </section>
 
-    <section id="bean_discovery_steps" title="Bean discovery" level="2">
-
-        <assertion id="c" testable="false">
-            <text>For each Java class in any bean archive, the container must inspect the type metadata to determine if it is a bean.</text>
-            <note>No consequence</note>
-        </assertion>
-
-        <assertion id="d" testable="false">
-            <text>For each Java class in any bean archive, the container must detect definition errors by validating the class and its metadata.</text>
-            <note>Tested elsewhere</note>
-        </assertion>
-
+    <section id="bean_discovery_steps" title="Bean discovery" level="3">
         <group>
-            <text>For each Java class in any bean archive, the container must, if the class is a managed bean, create an |InjectionTarget| for the class, as
-                defined in Section 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type |ProcessInjectionTarget|, as defined in
-                Section 11.5.6, "ProcessInjectionTarget event"
-            </text>
-            <assertion id="da">
-                <text>Check managed bean</text>
+            <text>For every type in the set of discovered types (as defined in Type discovery), the container must:</text>
+
+            <assertion id="c" testable="false">
+                <text>Inspect the type metadata to determine if it is a bean.</text>
+                <note>No consequence</note>
+            </assertion>
+
+            <assertion id="d" testable="false">
+                <text>detect definition errors by validating the class and its metadata.</text>
+                <note>Tested elsewhere</note>
+            </assertion>
+
+            <assertion id="e">
+                <text>if the class is a managed bean, fire an event of type ProcessInjectionPoint for each injection point in the class, as defined in
+                    ProcessInjectionPoint event.
+                </text>
+            </assertion>
+
+            <assertion id="f">
+                <text>if the class is a managed bean, fire an event of type ProcessInjectionTarget, as defined in ProcessInjectionTarget event.</text>
+            </assertion>
+
+            <assertion id="g">
+                <text>determine which alternatives, interceptors and decorators are enabled, according to the rules defined in Enabled and disabled beans,
+                    Interceptor enablement and ordering and Decorator enablement and ordering.
+                </text>
+            </assertion>
+
+            <assertion id="h">
+                <text>if the class is an enabled bean, interceptor or decorator, fire an event of type ProcessBeanAttributes, as defined in
+                    ProcessBeanAttributes event.
+                </text>
+            </assertion>
+
+            <assertion id="i">
+                <text>if the class is an enabled bean, interceptor or decorator and if ProcessBeanAttributes.veto() wasn’t called in previous step, fire an
+                    event which is a subtype of ProcessBean, as defined in ProcessBean event.
+                </text>
             </assertion>
         </group>
 
         <group>
-            <text>For each Java class in any bean archive, the container must, if the class is an enabled bean, interceptor or decorator, create a |Bean| object
-                that implements the rules defined in Section 7.3.1, "Lifecycle of managed beans", and fire an event which is a subtype of |ProcessBean|, as
-                defined in Section 11.5.8, "ProcessBean event".
+            <text>For each enabled bean, the container must search the class for producer methods and fields, as defined in Producer methods and in Producer
+                fields, including resources, and for each producer:
             </text>
-            <assertion id="fa">
-                <text>Check a managed bean</text>
+            <assertion id="ja">
+                <text>if it is a producer method, fire an event of type ProcessInjectionPoint for each injection point in the method parameters, as defined in
+                    ProcessInjectionPoint event
+                </text>
+            </assertion>
+            <assertion id="jb">
+                <text>fire an event of type ProcessProducer, as defined in ProcessProducer event.</text>
+            </assertion>
+            <assertion id="jc">
+                <text>if the producer method or field is enabled, fire an event of type ProcessBeanAttributes, as defined in ProcessBeanAttributes event</text>
+            </assertion>
+            <assertion id="jd">
+                <text>if the producer method or field is enabled and if ProcessBeanAttributes.veto() wasn’t called in previous step, fire an event which is a
+                    subtype of ProcessBean, as defined in ProcessBean event.
+                </text>
             </assertion>
         </group>
 
-        <group>
-            <text>For each enabled bean, the container must search the class for producer methods and fields, including resources, and for each producer method
-                or field create a |Producer|, as defined in Section 11.2, "The Producer and InjectionTarget interfaces", and fire an event of type
-                |ProcessProducer|, as defined in Section 11.5.7, "ProcessProducer event", and then if the producer method or field is enabled, create a |Bean|
-                object that implements the rules defined in Section 7.3.4, "Lifecycle of producer methods", Section 7.3.5, "Lifecycle of producer fields", and
-                fire an event which is a subtype of |ProcessBean|, as defined in Section 11.5.8, "ProcessBean event".
-            </text>
-            <assertion id="ha">
-                <text>Check a producer method</text>
-            </assertion>
-            <assertion id="hb">
-                <text>Check a producer field</text>
-            </assertion>
-        </group>
-
-        <assertion id="i">
-            <text>For each enabled bean, the container must search the class for observer methods, and for each observer method create an |ObserverMethod|
-                object, as defined in Section 11.1.3, "The ObserverMethod interface" and fire an event of type |ProcessObserverMethod|, as defined in Section
-                11.5.9, "ProcessObserverMethod event".
+        <assertion id="je">
+            <text>For each enabled bean, the container must search for disposer methods as defined in Disposer methods, and for each disposer method fire an
+                event of type ProcessInjectionPoint for each injection point in the method parameters, as defined in ProcessInjectionPoint event.
             </text>
         </assertion>
 
         <group>
-            <text>The container determines which alternatives, interceptors and decorators are enabled, according to the rules defined in Section 5.1.2,
-                "Enabled and disabled beans", Section 9.4, "Interceptor enablement and ordering" and Section 8.2, "Decorator enablement and ordering", taking
-                into account any |&lt;enable&gt;|, |&lt;interceptors&gt;| and |&lt;decorators&gt;| declarations in the |beans.xml| files, and registers the
-                |Bean| and |ObserverMethod| objects.
-            </text>
+            <text>For each enabled bean, the container must search the class for observer methods, and for each observer method:</text>
             <assertion id="ka">
-                <text>Check only beans for enabled policies registered</text>
+                <text>fire an event of type ProcessInjectionPoint for each injection point in the method parameters, as defined in ProcessInjectionPoint event
+                </text>
             </assertion>
             <assertion id="kb">
-                <text>Check only enabled interceptors registered</text>
-            </assertion>
-            <assertion id="kc">
-                <text>Check only enabled decorators registered</text>
+                <text>fire an event of type ProcessObserverMethod, as defined in ProcessObserverMethod event.</text>
             </assertion>
         </group>
 
@@ -7795,6 +7810,11 @@
 
     <!-- SE SECTION FROM HERE -->
     <section id="bootstrap-se" title="Bootstrapping a CDI container in Java SE" level="1">
+        <assertion id="a">
+            <text>In Java SE, the CDI container must be explicitly bootstrapped by the application. This is performed with CDIProvider and CDI utility
+                classes.
+            </text>
+        </assertion>
     </section>
 
     <section id="cdiprovider_lookup" title="CDIProvider lookup" level="2">
@@ -7838,7 +7858,11 @@
     <section id="contexts_se" title="Scopes and contexts in Java SE" level="1">
     </section>
 
-    <section id="application_context_se" title="Application context lifecycle in Java SE" level="2">
+    <section id="builtin_contexts_se" title="Context management for built-in scopes in Java SE" level="2">
+
+    </section>
+
+    <section id="application_context_se" title="Application context lifecycle in Java SE" level="3">
         <assertion id="a">
             <text>The application context is shared between all the beans that execute within the same container</text>
         </assertion>
@@ -7877,9 +7901,30 @@
 
     <!-- EE SECTION FROM HERE -->
     <section id="concepts_ee" title="Extended Concepts for Java EE" level="1">
+        <group>
+            <text>When running in Java EE, the container must extend the concepts defined in Concepts with:</text>
+            <assertion id="a">
+                <text>A Java EE component is a bean if the lifecycle of its instances may be managed by the container according to the lifecycle context model
+                    defined in Scopes and contexts.
+                </text>
+            </assertion>
+            <assertion id="b">
+                <text>Contextual instances of a bean may be used in EL expressions that are evaluated in the same context</text>
+            </assertion>
+            <assertion id="c">
+                <text>For some Java EE components - like environment resources, defined in Resources - the developer provides only the annotations and the bean
+                    implementation is provided by the container.
+                </text>
+            </assertion>
+        </group>
     </section>
 
     <section id="capabilities_ee" title="Functionality provided by the container to the bean in Java EE" level="2">
+        <assertion id="a">
+            <text>When running in Java EE, the container must extend the capabilities defined in Functionality provided by the container to the bean, by
+                providing scoped resolution by bean name when used in a Unified EL expression, as defined by Name resolution.
+            </text>
+        </assertion>
     </section>
 
     <section id="bean_types_ee" title="Bean types for Java EE component" level="2">
@@ -7911,9 +7956,32 @@
     </section>
 
     <section id="default_bean_discovery_ee" title="Default bean discovery mode for Java EE" level="2">
+        <group>
+            <text>When running in Java EE, If the bean discovery mode is annotated, the container must extend the rules defined in Default bean discovery mode
+                with:
+            </text>
+            <assertion id="a">
+                <text>bean classes of EJB sessions beans, are discovered</text>
+            </assertion>
+            <assertion id="b">
+                <text>producer methods that are on an EJB session bean are discovered</text>
+            </assertion>
+            <assertion id="c">
+                <text>producer fields that are on an EJB session bean are discovered</text>
+            </assertion>
+            <assertion id="d">
+                <text>disposer methods that are on an EJB session bean are discovered</text>
+            </assertion>
+            <assertion id="e">
+                <text>observer methods that are on an EJB session bean are discovered.</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="names_ee" title="Bean names in Java EE" level="2">
+        <assertion id="a">
+            <text>A bean with a name may be referred to by its name in Unified EL expressions.</text>
+        </assertion>
     </section>
 
     <section id="default_name_ee" title="Default bean names for EJB session beans" level="3"></section>
@@ -9726,7 +9794,11 @@
     </section>
 
     <section id="observer_method_invocation_context_ee" title="Observer method invocation context in Java EE" level="3">
-
+        <assertion id="a">
+            <text>The transaction and security contexts for a business method of an EJB session bean also depend upon the transaction attribute and @RunAs
+                descriptor, if any.
+            </text>
+        </assertion>
     </section>
 
     <section id="spi_ee" title="Portable extensions in Java EE" level="1">
@@ -9738,10 +9810,31 @@
     </section>
 
     <section id="interceptor_ee" title="The Interceptor interface in Java EE" level="3">
-
+        <assertion id="a">
+            <text>When Running in Java EE, the container must extend the rules defined in The Interceptor interface and must also ensure that PRE_PASSIVATE,
+                POST_ACTIVATE and AROUND_TIMEOUT InterceptorType values are linked to EJB lifecycle callback or timeout method.
+            </text>
+        </assertion>
     </section>
 
     <section id="injectiontarget_ee" title="InjectionTarget interface in Java EE" level="2">
+        <group>
+            <text>When running in Java EE, the container must extend the rules defined for InjectionTarget in The Producer and InjectionTarget interfaces and
+                must also ensure that:
+            </text>
+            <assertion id="a">
+                <text>when inject() is called, The container performs Java EE component environment injection, according to the semantics required by the Java
+                    EE platform specification, sets the value of all injected fields, and calls all initializer methods, as defined in Injection of fields and
+                    initializer methods in Java EE.
+                </text>
+            </assertion>
+            <assertion id="b">
+                <text>@PostConstruct callback is called according to the semantics required by the Java EE platform specification.</text>
+            </assertion>
+            <assertion id="c">
+                <text>@PreDestroy callback is called according to the semantics required by the Java EE platform specification.</text>
+            </assertion>
+        </group>
 
     </section>
 
@@ -9792,7 +9885,14 @@
 
     </section>
 
-    <section id="process_injection_point_ee" title="ProcessInjectionPoint event and EJB" level="3"></section>
+    <section id="process_injection_point_ee" title="ProcessInjectionPoint event and EJB" level="3">
+        <assertion id="a">
+            <text>When running in Java EE, the container must also fire an event for every injection point of every Java EE component class supporting injection
+                that may be instantiated by the container at runtime, including every managed bean declared using @ManagedBean, EJB session or message-driven
+                bean.
+            </text>
+        </assertion>
+    </section>
 
     <section id="process_injection_target_ee" title="ProcessInjectionTarget event" level="3">
         <group>

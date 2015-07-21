@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.se.container;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
+import static org.jboss.cdi.tck.cdi.Sections.BOOTSTRAPSE;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_CONTAINER;
 import static org.jboss.cdi.tck.cdi.Sections.STOP_CONTAINER;
 
@@ -56,7 +57,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INIT_CONTAINER, id = "a"), @SpecAssertion(section = STOP_CONTAINER, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = INIT_CONTAINER, id = "a"),
+            @SpecAssertion(section = STOP_CONTAINER, id = "a") })
     public void testContainerIsInitialized() {
         CDIProvider cdiProvider = CDI.getCDIProvider();
         CDI<Object> cdi = cdiProvider.initialize();
@@ -79,7 +81,7 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions(@SpecAssertion(section = INIT_CONTAINER, id = "b"))
+    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = INIT_CONTAINER, id = "b") })
     public void testInvocationOfInitializedMethodReturnsNewCDIInstance() {
         CDIProvider cdiProvider = CDI.getCDIProvider();
         CDI<Object> cdi1 = cdiProvider.initialize();
@@ -92,7 +94,7 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "b")
+    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "b") })
     public void testImplicitArchiveDiscovered() {
         Map<String, Object> params = new HashMap<>();
         params.put(IMPLICIT_SCAN_KEY, Boolean.TRUE);

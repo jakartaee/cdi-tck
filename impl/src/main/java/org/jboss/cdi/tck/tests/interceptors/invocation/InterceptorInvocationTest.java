@@ -59,7 +59,7 @@ public class InterceptorInvocationTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "a"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kb"),  @SpecAssertion(section = BIZ_METHOD, id = "aa")})
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "g"),  @SpecAssertion(section = BIZ_METHOD, id = "aa")})
     public void testManagedBeanIsIntercepted() {
 
         AlmightyInterceptor.reset();

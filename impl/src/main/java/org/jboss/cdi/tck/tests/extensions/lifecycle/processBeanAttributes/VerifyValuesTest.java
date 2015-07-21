@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES_EE;
 import static org.testng.Assert.assertEquals;
@@ -55,9 +56,9 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * <p>
+ * <p/>
  * This test was originally part of Weld test suite.
- * <p>
+ * <p/>
  *
  * @author Jozef Hartinger
  * @author Martin Kouba
@@ -156,7 +157,7 @@ public class VerifyValuesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jc") })
     public void testProducerMethodBeanAttributes() {
         BeanAttributes<Bravo> attributes = extension.getProducedBravoAttributes();
         assertNotNull(attributes);
@@ -182,7 +183,7 @@ public class VerifyValuesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jc") })
     public void testProducerFieldBeanAttributes() {
         BeanAttributes<Charlie> attributes = extension.getProducedCharlieAttributes();
         assertNotNull(attributes);

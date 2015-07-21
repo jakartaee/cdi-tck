@@ -76,7 +76,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN, id = "d"), @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a"),
             @SpecAssertion(section = DECORATED_TYPES, id = "c"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
-            @SpecAssertion(section = DECORATOR, id = "a"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kc") })
+            @SpecAssertion(section = DECORATOR, id = "a"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "g") })
     public void testDecoratorIsManagedBean() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(MockLogger.TYPES);
         assertEquals(decorators.size(), 1);

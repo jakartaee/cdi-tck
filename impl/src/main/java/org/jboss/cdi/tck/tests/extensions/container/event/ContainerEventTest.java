@@ -61,7 +61,7 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "da"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaa") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "f"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaa") })
     public void testProcessInjectionTargetFiredForManagedBean() {
         assert ProcessInjectionTargetObserver.getManagedBeanType() != null;
         validateManagedBean(ProcessInjectionTargetObserver.getManagedBeanType());

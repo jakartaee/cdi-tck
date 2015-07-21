@@ -17,7 +17,9 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_POINT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_POINT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -42,9 +44,9 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * <p>
+ * <p/>
  * This test was originally part of Weld test suite.
- * <p>
+ * <p/>
  *
  * @author Jozef Hartinger
  * @author Martin Kouba
@@ -64,7 +66,8 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "e"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ja") })
     public void testFieldInjectionPoint() {
         InjectionPoint ip = extension.getAlpha();
         assertNotNull(ip);
@@ -80,7 +83,8 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "e"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ja") })
     public void testConstructorInjectionPoint() {
         InjectionPoint ip = extension.getBravo();
         assertNotNull(ip);
@@ -96,7 +100,8 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "e") })
     public void testInitializerInjectionPoint() {
         InjectionPoint ip = extension.getCharlie();
         assertNotNull(ip);
@@ -143,7 +148,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT_EE, id = "a") })
     public void testJavaEEComponentInjectionPoint() {
         InjectionPoint servletIp = extension.getServletCharlie();
         assertNotNull(servletIp);

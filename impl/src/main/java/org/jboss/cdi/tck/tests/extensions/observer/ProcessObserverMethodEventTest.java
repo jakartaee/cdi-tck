@@ -45,7 +45,7 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "aaa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "aaa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kb") })
     public void testProcessObserverMethodEventsSent() {
         assert ProcessObserverMethodObserver.getEventtypes().contains(EventA.class);
     }
@@ -58,7 +58,7 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kb") })
     public void testGetObserverMethod() {
         assert ProcessObserverMethodObserver.getObserverMethod().getObservedType().equals(EventA.class);
     }

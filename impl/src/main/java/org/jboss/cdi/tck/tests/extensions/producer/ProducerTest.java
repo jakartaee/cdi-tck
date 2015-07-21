@@ -134,7 +134,7 @@ public class ProducerTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eaa"), @SpecAssertion(section = PROCESS_PRODUCER, id = "aa"),
             @SpecAssertion(section = PROCESS_PRODUCER, id = "ba"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ca"),
-            @SpecAssertion(section = PROCESS_PRODUCER, id = "da"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ha") })
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "da"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jb") })
     public void testProduceCallsProducerMethod() {
         Producer<Dog> producer = ProducerProcessor.getNoisyDogProducer();
         Bean<Dog> dogBean = getUniqueBean(Dog.class, new AnnotationLiteral<Noisy>() {
@@ -157,7 +157,7 @@ public class ProducerTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eba"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ab"),
             @SpecAssertion(section = PROCESS_PRODUCER, id = "bb"), @SpecAssertion(section = PROCESS_PRODUCER, id = "cb"),
-            @SpecAssertion(section = PROCESS_PRODUCER, id = "db"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "hb") })
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "db"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jb") })
     public void testProduceAccessesProducerField() {
         Producer<Dog> producer = ProducerProcessor.getQuietDogProducer();
         Bean<Dog> dogBean = getUniqueBean(Dog.class, new AnnotationLiteral<Quiet>() {
