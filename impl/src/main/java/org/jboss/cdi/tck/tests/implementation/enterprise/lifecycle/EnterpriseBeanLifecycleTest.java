@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.lifecycle;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INITIALIZER;
-import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS_DESTRUCTION;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS_DESTRUCTION_EE;
+import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS_EE;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY_EE;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_EJB_REMOVE_METHOD;
@@ -152,7 +152,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertion(section = DECLARING_INITIALIZER, id = "f")
+    @SpecAssertion(section = INITIALIZER_METHODS_EE, id = "f")
     public void testInitializerMethodsCalledWithCurrentParameterValues() {
         AlteStadt alteStadt = getContextualReference(AlteStadt.class);
         assert alteStadt != null : "Could not find the AlteStadt bean";
@@ -160,7 +160,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION, id = "a")
+    @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION_EE, id = "a")
     public void testDependentObjectsDestroyed() {
         Bean<UniStadt> uniStadtBean = getBeans(UniStadt.class).iterator().next();
         CreationalContext<UniStadt> creationalContext = getCurrentManager().createCreationalContext(uniStadtBean);

@@ -8124,6 +8124,15 @@
                 treats it as a definition error.
             </text>
         </assertion>
+
+        <group>
+            <text>When an enabled bean specializes a second bean, we can be certain that the second bean is never instantiated or called by the container. Even
+                if the second bean defines a producer or observer method, the method will never be called.
+            </text>
+            <assertion id="ca" implied="true">
+                <text>The second bean is never instantiated.</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="session_bean_name" title="Default bean name for a session bean" level="3">
@@ -8138,12 +8147,24 @@
         <assertion id="a">
             <text>If the bean is a session bean, the producer method must be either a business method of the EJB or a static method of the bean class</text>
         </assertion>
+
+        <assertion id="aa" implied="true">
+            <text>If a producer method X is annotated |@Specializes|, then it must be non-static and directly override another producer method Y. Then X
+                directly specializes Y, as defined in Section 4.3 "Specialization".
+            </text>
+        </assertion>
     </section>
 
     <section id="declaring_producer_method_ee" title="Declaring a producer method in an EJB session bean" level="3">
         <assertion id="a">
             <text>If a non-static method of a session bean class is annotated |@Produces|, and the method is not a business method of the session bean, the
                 container automatically detects the problem and treats it as a definition error.
+            </text>
+        </assertion>
+
+        <assertion id="c">
+            <text>When the container calls a producer method, if the method is non-static the container must obtain a contextual instance of the bean which
+                declares the method, as defined by Section 6.5.2 "Contextual instance of a bean", then invoke the method upon this instance.
             </text>
         </assertion>
     </section>
@@ -8354,6 +8375,10 @@
 
         <assertion id="e">
             <text>If the bean is a session bean, the initializer method is not required to be a business method of the session bean.</text>
+        </assertion>
+
+        <assertion id="f">
+            <text>All initializer method parameters are injection points.</text>
         </assertion>
     </section>
 
@@ -8611,6 +8636,19 @@
     </section>
 
     <section id="direct_and_indirect_specialization_ee" title="Direct and indirect specialization in Java EE" level="3">
+
+        <assertion id="ia" implied="true">
+            <text>A bean X is said to specialize another bean Y if X directly specializes Y.</text>
+        </assertion>
+
+        <assertion id="j" implied="true">
+            <text>A bean X that specializes bean Y will include all qualifiers of Y, together with all qualifiers declared explicitly by X.</text>
+        </assertion>
+
+        <assertion id="k" implied="true">
+            <text>A bean X that specializes bean Y will have the same name as Y if Y has a name.</text>
+        </assertion>
+
         <group>
             <text>If Y has a bean name and X declares a bean name explicitly the container automatically detects the problem and treats it as a definition
                 error.
@@ -8650,6 +8688,10 @@
 
     <section id="declaring_selected_alternatives_application_ee" title="Declaring selected alternatives for an application in Java EE" level="3">
 
+        <assertion id="a" implied="true">
+            <text>A stereotype may declare an |@Alternative| annotation, which specifies that every bean with the stereotype is an alternative.</text>
+        </assertion>
+        
         <group>
             <text>An alternative may be given a priority for the application by placing the |@Priority| annotation on the bean class of a session bean.</text>
             <assertion id="ab">
@@ -8888,7 +8930,13 @@
         </group>
     </section>
 
-    <section id="dependent_objects_destruction_ee" title="Destruction of dependent objects in Java EE" level="3"></section>
+    <section id="dependent_objects_destruction_ee" title="Destruction of dependent objects in Java EE" level="3">
+        <assertion id="a">
+            <text>When the container destroys an instance of a bean, the container destroys all dependent objects, as defined in Section 6.4.2, "Destruction of
+                objects with scope @Dependent", after the |@PreDestroy| callback completes.
+            </text>
+        </assertion>
+    </section>
 
     <section id="contexts_ee" title="Scopes and contexts in Java EE" level="1"></section>
 
@@ -9043,6 +9091,20 @@
             <text>Stateful session bean which does not declare a passivating scope needn't be passivation capable.</text>
             <note>This was not allowed in CDI 1.0</note>
         </assertion>
+
+        <group>
+            <text>If a producer method or field of scope |@Dependent| returns an unserializable object for injection into an injection point that requires a
+                passivation capable dependency, the container must throw an |IllegalProductException|
+            </text>
+
+            <assertion id="fab">
+                <text>Test for a runtime exception with a producer method.</text>
+            </assertion>
+
+            <assertion id="fbb">
+                <text>Test for a runtime exception with a producer field.</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="builtin_contexts_ee" title="Context management for built-in scopes in Java EE" level="2">
@@ -9717,6 +9779,38 @@
 
     <section id="decorators_ee" title="Decorators in Java EE" level="1">
 
+        <assertion id="a">
+            <text>When running in Java EE, the container must extend the rules defined for managed beans in Decorators to EJB session beans.</text>
+        </assertion>
+
+        <assertion id="b" implied="true">
+            <text>A decorator may be enabled for the entire application by applying the |@Priority| annotation, along with a priority value, on the decorator
+                class.
+            </text>
+        </assertion>
+
+        <assertion id="c" implied="true">
+            <text>Decorators with the smaller priority values are called first.</text>
+        </assertion>
+
+        <assertion id="d" implied="true">
+            <text>A decorator may be explicitly enabled by listing its bean class under the |&lt;decorators&gt;| element of the beans.xml file of the bean
+                archive.
+            </text>
+        </assertion>
+
+        <assertion id="e" implied="true">
+            <text>A decorator is declared by annotating the bean class with the |@javax.decorator.Decorator| stereotype.</text>
+        </assertion>
+
+        <assertion id="f" implied="true">
+            <text>Decorators are called after interceptors.</text>
+        </assertion>
+
+        <assertion id="g" implied="true">
+            <text>The order of the decorator declarations determines the decorator ordering. Decorators which occur earlier in the list are called first.</text>
+        </assertion>
+
     </section>
 
     <section id="decorator_bean_ee" title="Decorator beans in Java EE" level="2">
@@ -9749,11 +9843,17 @@
                 <text>Test injected UserTransaction</text>
             </assertion>
         </group>
+
+        <assertion id="d" implied="true">
+            <text>The decorator class may be abstract.</text>
+        </assertion>
     </section>
 
 
     <section id="interceptors_ee" title="Interceptor bindings in Java EE" level="1">
-
+        <assertion id="b" implied="true">
+            <text>A stereotype may declare one interceptor bindings.</text>
+        </assertion>
     </section>
 
     <section id="interceptor_resolution_ee" title="Interceptor resolution in Java EE" level="2">
@@ -10156,6 +10256,30 @@
                 archives might be directories, library jars or EJB jars.
             </text>
         </assertion>
+
+        <group>
+            <text>An explicit bean archive is an archive which contains a |beans.xml| file with a version number of 1.1 (or later), with the
+                |bean-discovery-mode| of |all|, or with no version number, or that is an empty file.
+            </text>
+            <assertion id="ba" implied="true">
+                <text>Test an archive which contains a |beans.xml| file with a version number of 1.1, with the |bean-discovery-mode| of |all|.</text>
+            </assertion>
+            <assertion id="bb" implied="true">
+                <text>Test an archive which contains a |beans.xml| file with no version number.</text>
+            </assertion>
+            <assertion id="bc" implied="true">
+                <text>Test an archive which contains an empty |beans.xml|.</text>
+            </assertion>
+        </group>
+
+        <assertion id="oa" implied="true">
+            <text>An archive which contains a |beans.xml| file with the |bean-discovery-mode| of |none| is not a bean archive.</text>
+        </assertion>
+
+        <assertion id="ob" implied="true">
+            <text>An archive which contains an extension and no |beans.xml| file is not a bean archive.</text>
+        </assertion>
+
     </section>
 
     <section id="type_bean_discovery_ee" title="Type and Bean discovery for EJB" level="2">

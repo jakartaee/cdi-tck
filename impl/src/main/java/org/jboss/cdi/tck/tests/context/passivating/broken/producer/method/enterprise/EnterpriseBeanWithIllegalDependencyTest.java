@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.broken.producer.method.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION_EE;
 
 import java.lang.annotation.Annotation;
 
@@ -42,25 +42,25 @@ public class EnterpriseBeanWithIllegalDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fab")
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "fab")
     public void testFieldInjectionPointRequiringPassivationCapableDependency() {
         verify(FieldInjectionCorralBroken.class);
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fab")
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "fab")
     public void testSetterInjectionPointRequiringPassivationCapableDependency() {
         verify(SetterInjectionCorralBroken.class);
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fab")
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "fab")
     public void testConstructorInjectionPointRequiringPassivationCapableDependency() {
         verify(ConstructorInjectionCorralBroken.class);
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fab")
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "fab")
     public void testProducerMethodParamInjectionPointRequiringPassivationCapableDependency() {
         verify(Herd.class, British.BritishLiteral.INSTANCE);
     }

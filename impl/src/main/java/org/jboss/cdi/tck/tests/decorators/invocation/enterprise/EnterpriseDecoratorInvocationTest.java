@@ -19,11 +19,9 @@ package org.jboss.cdi.tck.tests.decorators.invocation.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD_EE;
-import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_ANNOTATION;
-import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATORS_EE;
+import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
-import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
-import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 import static org.testng.Assert.assertEquals;
 
 import java.lang.reflect.Type;
@@ -72,10 +70,10 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
     FooBusiness foo;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD_EE, id = "d"), @SpecAssertion(section = DECORATOR_BEAN, id = "d"),
-            @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a"), @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "cc"),
-            @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a"), @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "b"),
-            @SpecAssertion(section = ENABLED_DECORATORS, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD_EE, id = "d"), @SpecAssertion(section = DECORATOR_BEAN_EE, id = "d"),
+            @SpecAssertion(section = DECORATORS_EE, id = "e"), @SpecAssertion(section = DELEGATE_ATTRIBUTE, id = "cc"),
+            @SpecAssertion(section = DECORATORS_EE, id = "d"), @SpecAssertion(section = DECORATORS_EE, id = "g"),
+            @SpecAssertion(section = DECORATORS_EE, id = "f") })
     public void testContextualDecorated() throws Exception {
 
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(FooBusiness.class));
@@ -99,8 +97,8 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD_EE, id = "i"), @SpecAssertion(section = DECORATOR_BEAN, id = "d"),
-            @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD_EE, id = "i"), @SpecAssertion(section = DECORATOR_BEAN_EE, id = "d"),
+            @SpecAssertion(section = DECORATORS_EE, id = "e") })
     public void testNonContextualDecorated() throws Exception {
 
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(BarBusiness.class));

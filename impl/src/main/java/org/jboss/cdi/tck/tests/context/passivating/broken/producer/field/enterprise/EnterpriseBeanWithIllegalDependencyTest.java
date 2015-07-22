@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.broken.producer.field.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION_EE;
 
 import javax.enterprise.inject.IllegalProductException;
 
@@ -30,7 +30,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test(groups =  INTEGRATION)
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class EnterpriseBeanWithIllegalDependencyTest extends AbstractTest {
 
@@ -40,24 +40,24 @@ public class EnterpriseBeanWithIllegalDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fbb")
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "fbb")
     public void testFieldInjectionPointRequiringPassivationCapableDependency() {
-       verify(FieldInjectionCorralBroken.class);
+        verify(FieldInjectionCorralBroken.class);
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fbb")
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "fbb")
     public void testSetterInjectionPointRequiringPassivationCapableDependency() {
-      verify(SetterInjectionCorralBroken.class);
+        verify(SetterInjectionCorralBroken.class);
     }
 
     @Test
-    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "fbb")
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "fbb")
     public void testConstructorInjectionPointRequiringPassivationCapableDependency() {
         verify(ConstructorInjectionCorralBroken.class);
     }
-    
-    private void verify(Class<? extends Corral> clazz){
+
+    private void verify(Class<? extends Corral> clazz) {
         try {
             getContextualReference(clazz).ping();
         } catch (Throwable t) {
@@ -65,6 +65,6 @@ public class EnterpriseBeanWithIllegalDependencyTest extends AbstractTest {
             return;
         }
         Assert.fail();
-        
+
     }
 }

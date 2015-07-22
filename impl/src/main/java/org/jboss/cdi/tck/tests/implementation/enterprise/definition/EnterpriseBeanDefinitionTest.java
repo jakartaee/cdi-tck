@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SESSION_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.INSTANTIATION_EE;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEANS;
@@ -106,8 +105,7 @@ public class EnterpriseBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SESSION_BEAN_TYPES, id = "c"), @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "aa"),
-            @SpecAssertion(section = BEAN_TYPES, id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = SESSION_BEAN_TYPES, id = "c"), @SpecAssertion(section = DECLARING_SESSION_BEAN, id = "aa") })
     public void testObjectIsInAPITypes() {
         assert getBeans(GiraffeLocal.class).size() == 1;
         assert getBeans(GiraffeLocal.class).iterator().next().getTypes().contains(Object.class);

@@ -17,9 +17,9 @@
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
-import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
-import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_PRODUCER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_METHOD_EE;
+import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION_EE;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -60,8 +60,8 @@ public class EnterpriseProducerMethodSpecializationTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia"), @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "c"),
-            @SpecAssertion(section = SPECIALIZE_PRODUCER_METHOD, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION_EE, id = "ia"), @SpecAssertion(section = DECLARING_PRODUCER_METHOD_EE, id = "c"),
+            @SpecAssertion(section = PRODUCER_METHOD_EE, id = "aa") })
     public void testSpecializingProducerMethod() {
 
         Set<Bean<Necklace>> expensiveNecklaceBeans = getBeans(Necklace.class, EXPENSIVE_LITERAL);
@@ -89,7 +89,7 @@ public class EnterpriseProducerMethodSpecializationTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION_EE, id = "ia") })
     public void testSpecializingBeanInjection(@Expensive Product expensiveProduct, @Default Product plainProduct) {
         assertTrue(expensiveProduct instanceof Necklace);
         assertEquals(expensiveProduct.getPrice(), 10);

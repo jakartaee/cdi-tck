@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.event.observer.priority.transactional;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.PERSISTENCE;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
-import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_ORDERING;
 import static org.jboss.cdi.tck.cdi.Sections.TRANSACTIONAL_OBSERVER_METHODS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -65,7 +64,7 @@ public class TransactionalPriorityObserverTest extends AbstractTest {
             @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "d"),
             @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "e"),
             @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "gaa"),
-            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "b"), @SpecAssertion(section = OBSERVER_ORDERING, id = "c") })
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "b") })
     public void testSucessfulTransaction() throws Exception {
 
         logger.log("testSucessfulTransaction");

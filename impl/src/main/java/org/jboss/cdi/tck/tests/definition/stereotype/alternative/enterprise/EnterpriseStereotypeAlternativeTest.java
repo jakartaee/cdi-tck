@@ -18,7 +18,7 @@
 package org.jboss.cdi.tck.tests.definition.stereotype.alternative.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_STEREOTYPE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -52,7 +52,7 @@ public class EnterpriseStereotypeAlternativeTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_STEREOTYPE, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "a") })
     public void testStereotypeAlternative(Service service) {
         assertNotNull(service);
         assertEquals(service.ping(), SimpleAlternativeService.class.getName());
