@@ -17,9 +17,8 @@
 package org.jboss.cdi.tck.tests.event.observer.context.async;
 
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_INVOCATION_CONTEXT;
-
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -32,7 +31,6 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
@@ -40,9 +38,15 @@ public class AsyncObserverMethodInvocationContextTest extends AbstractTest {
 
     @Inject
     UserTransaction userTransaction;
-    
+
     @Inject
     Event<Message> event;
+
+    @Inject
+    Event<String> stringEvent;
+
+    @Inject
+    Counter counter;
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -53,10 +57,18 @@ public class AsyncObserverMethodInvocationContextTest extends AbstractTest {
     @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "ab")
     public void testAsyncObserverIsCalledInNewTransactionContext() throws Exception {
         userTransaction.begin();
-        BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        event.fireAsync(new Message()).thenAccept(queue::offer);
-        Assert.assertEquals(Status.STATUS_NO_TRANSACTION, AsyncMessageObserver.status.get());
+        event.fireAsync(new Message()).toCompletableFuture().get();
+        assertEquals(Status.STATUS_NO_TRANSACTION, AsyncMessageObserver.status.get());
         userTransaction.commit();
+    }
+
+    @Test
+    @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "aa")
+    public void testAsyncObserverIsCalledInNewRequestContext() throws Exception {
+        counter.increment();
+        stringEvent.fireAsync(new String()).toCompletableFuture().get();
+        assertTrue(AsyncMessageObserver.counterIsZero.get());
+
     }
 
 }

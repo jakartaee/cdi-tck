@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.context.async;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -30,10 +31,21 @@ public class AsyncMessageObserver {
     @Inject
     UserTransaction transaction;
 
+    @Inject
+    Counter counter;
+
     public static AtomicInteger status = new AtomicInteger();
+    public static AtomicBoolean counterIsZero = new AtomicBoolean();
 
     public void observe(@ObservesAsync Message message) throws SystemException {
         status.set(transaction.getStatus());
+
     }
+
+    public void observe(@ObservesAsync String text) throws SystemException {
+        counterIsZero.set(counter.getCount().get() > 0 ? false : true);
+
+    }
+
 
 }

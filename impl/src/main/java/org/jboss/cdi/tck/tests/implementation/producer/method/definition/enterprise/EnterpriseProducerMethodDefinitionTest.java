@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.enterprise;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -45,7 +44,7 @@ public class EnterpriseProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, expectedExceptions = UnsatisfiedResolutionException.class)
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dd")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "dd")
     public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass() {
         assertEquals(getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
         }).size(), 0);

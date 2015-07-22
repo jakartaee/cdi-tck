@@ -5361,15 +5361,9 @@
             <note>Tested in 5.5.6.</note>
         </assertion>
 
-        <assertion id="bb">
+        <assertion id="b">
             <text>If the observer method is a transactional observer method and there is currently a JTA transaction in progress, the container calls the
                 observer method during the appropriate transaction completion phase. ~Otherwise, the container calls the observer immediately.~
-            </text>
-        </assertion>
-
-        <assertion id="bc">
-            <text>If the observer method is a transactional observer method and there is currently a JTA transaction in progress, ~the container calls the
-                observer method during the appropriate transaction completion phase.~ Otherwise, the container calls the observer immediately.
             </text>
         </assertion>
 
@@ -5468,8 +5462,9 @@
                 <text>in a new transaction context.</text>
             </assertion>
 
-            <assertion id="ac">
+            <assertion id="ac" testable="false">
                 <text>in the same security context as the invocation of Event.fireAsync().</text>
+                <note>Tested in EE part.</note>
             </assertion>
         </group>
 
@@ -5489,12 +5484,6 @@
             <text>If an observer method is not a before completion transactional method, and not any other kind of transactional observer method, then the
                 observer method is called in the same transaction context, client security context and lifecycle contexts as the invocation of |Event.fire()| or
                 |BeanManager.fireEvent()|.
-            </text>
-        </assertion>
-
-        <assertion id="d">
-            <text>The transaction and security contexts for a business method of a session bean also depend upon the transaction attribute and |@RunAs|
-                descriptor, if any.
             </text>
         </assertion>
     </section>
@@ -7901,30 +7890,9 @@
 
     <!-- EE SECTION FROM HERE -->
     <section id="concepts_ee" title="Extended Concepts for Java EE" level="1">
-        <group>
-            <text>When running in Java EE, the container must extend the concepts defined in Concepts with:</text>
-            <assertion id="a">
-                <text>A Java EE component is a bean if the lifecycle of its instances may be managed by the container according to the lifecycle context model
-                    defined in Scopes and contexts.
-                </text>
-            </assertion>
-            <assertion id="b">
-                <text>Contextual instances of a bean may be used in EL expressions that are evaluated in the same context</text>
-            </assertion>
-            <assertion id="c">
-                <text>For some Java EE components - like environment resources, defined in Resources - the developer provides only the annotations and the bean
-                    implementation is provided by the container.
-                </text>
-            </assertion>
-        </group>
     </section>
 
     <section id="capabilities_ee" title="Functionality provided by the container to the bean in Java EE" level="2">
-        <assertion id="a">
-            <text>When running in Java EE, the container must extend the capabilities defined in Functionality provided by the container to the bean, by
-                providing scoped resolution by bean name when used in a Unified EL expression, as defined by Name resolution.
-            </text>
-        </assertion>
     </section>
 
     <section id="bean_types_ee" title="Bean types for Java EE component" level="2">
@@ -8594,6 +8562,22 @@
 
             <assertion id="dp">
                 <text>Check session bean X _indirectly_ extends session bean Y with a _initializer method_</text>
+            </assertion>
+
+        </group>
+
+        <group>
+            <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean. If X declares a non-static method x() annotated with
+                an interceptor binding type Z then Y inherits the binding if and only if neither Y nor any intermediate class that is a subclass of X and a
+                superclass of Y overrides the method x().
+            </text>
+
+            <assertion id="kb">
+                <text>Check session bean X _directly_ extends managed bean Y</text>
+            </assertion>
+
+            <assertion id="kd">
+                <text>Check session bean X _indirectly_ extends managed bean Y</text>
             </assertion>
 
         </group>
@@ -9799,6 +9783,11 @@
                 descriptor, if any.
             </text>
         </assertion>
+
+        <assertion id="b">
+            <text>If the observer method is asynchronous, it is called in the same security context as the invocation of Event.fireAsync().</text>
+        </assertion>
+
     </section>
 
     <section id="spi_ee" title="Portable extensions in Java EE" level="1">
@@ -10170,7 +10159,38 @@
     </section>
 
     <section id="type_bean_discovery_ee" title="Type and Bean discovery for EJB" level="2">
-
+        <group>
+            <text>For every type discovered the container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|,
+                as defined in Section 11.5.6.
+            </text>
+            <assertion id="bb">
+                <text>Check session bean</text>
+            </assertion>
+            <assertion id="bd">
+                <text>Check JSF managed beans</text>
+            </assertion>
+            <assertion id="be">
+                <text>Check servlet listener</text>
+            </assertion>
+            <assertion id="bf">
+                <text>Check tag handler</text>
+            </assertion>
+            <assertion id="bg">
+                <text>Check tag library listener</text>
+            </assertion>
+            <assertion id="bh">
+                <text>Check EJB Interceptor</text>
+            </assertion>
+            <assertion id="bi">
+                <text>Check WS endpoint</text>
+            </assertion>
+            <assertion id="bj">
+                <text>Check servlet</text>
+            </assertion>
+            <assertion id="bk">
+                <text>Check filter</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="bean_discovery_steps_ee" title="Bean discovery in Java EE" level="3">
@@ -10179,8 +10199,8 @@
         </assertion>
 
         <group>
-            <text>For every type discovered the container must create an |AnnotatedType| representing the type and fire an event of type |ProcessAnnotatedType|,
-                as defined in Section 11.5.6.
+            <text>For every type in the set of discovered types (as defined in Type discovery), the container must fire an event of type ProcessInjectionTarget,
+                as defined in ProcessInjectionTarget event,
             </text>
             <assertion id="bb">
                 <text>Check session bean</text>

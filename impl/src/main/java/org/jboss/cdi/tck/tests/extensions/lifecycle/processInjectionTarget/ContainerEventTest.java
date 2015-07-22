@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS_EE;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET_EE;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -51,35 +51,42 @@ public class ContainerEventTest extends AbstractTest {
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aac"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abc"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "de") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bd") })
+    public void testProcessInjectionTargetEventFiredForJsfManagedBean() {
+        assertNotNull(ProcessInjectionTargetObserver.getJsfManagedBeanEvent());
+    }
+    
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aac"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abc"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "be") })
     public void testProcessInjectionTargetEventFiredForServletListener() {
         assertNotNull(ProcessInjectionTargetObserver.getListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aad"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abd"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "df") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bf") })
     public void testProcessInjectionTargetEventFiredForTagHandler() {
         assertNotNull(ProcessInjectionTargetObserver.getTagHandlerEvent());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aae"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abe"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "dg") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bg") })
     public void testProcessInjectionTargetEventFiredForTagLibraryListener() {
         assertNotNull(ProcessInjectionTargetObserver.getTagLibraryListenerEvent());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aah"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abh"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "dj") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bj") })
     public void testProcessInjectionTargetEventFiredForServlet() {
         assertNotNull(ProcessInjectionTargetObserver.getServletEvent());
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aai"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abi"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "dk") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bk") })
     public void testProcessInjectionTargetEventFiredForFilter() {
         assertNotNull(ProcessInjectionTargetObserver.getFilterEvent());
     }

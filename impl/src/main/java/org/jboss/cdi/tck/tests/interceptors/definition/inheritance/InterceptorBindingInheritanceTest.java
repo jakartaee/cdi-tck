@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition.inheritance;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
 import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
 import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE_EE;
 import static org.testng.Assert.assertFalse;
@@ -106,14 +107,14 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kb")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "kb")
     public void testMethodInterceptorBindingDirectlyInheritedFromSessionBean(Grass grass) {
         grass.pong();
         assertTrue(grass.inspectedBy(squirrel));
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kd")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "kd")
     public void testMethodInterceptorBindingIndirectlyInheritedFromSessionBean(@Culinary Grass waterChestnut) {
         waterChestnut.pong();
         assertTrue(waterChestnut instanceof WaterChestnut);
@@ -136,14 +137,14 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kb")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "kb")
     public void testMethodInterceptorBindingDirectlyNotInheritedFromSessionBean(Cactus cactus) {
         cactus.pong();
         assertFalse(cactus.inspectedBy(squirrel));
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kd")
+    @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "kd")
     public void testMethodInterceptorBindingIndirectlyNotInheritedFromSessionBean(@Culinary Cactus opuncia) {
         opuncia.pong();
         assertTrue(opuncia instanceof Opuncia);

@@ -29,6 +29,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
     private static AnnotatedType<TagLibraryListener> tagLibraryListenerEvent = null;
     private static AnnotatedType<TestTagHandler> tagHandlerEvent = null;
     private static AnnotatedType<Farm> jsfManagedBeanEvent = null;
+    private static AnnotatedType<SessionBean> sessionBeanEvent = null;
 
     public void cleanup(@Observes BeforeShutdown shutdown) {
         servletEvent = null;
@@ -37,10 +38,15 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         tagLibraryListenerEvent = null;
         tagHandlerEvent = null;
         jsfManagedBeanEvent = null;
+        sessionBeanEvent = null;
     }
 
     public void observeServlet(@Observes ProcessAnnotatedType<TestServlet> event) {
         servletEvent = event.getAnnotatedType();
+    }
+
+    public void observeSessionBean(@Observes ProcessAnnotatedType<SessionBean> event) {
+        sessionBeanEvent = event.getAnnotatedType();
     }
 
     public void observeFilter(@Observes ProcessAnnotatedType<TestFilter> event) {
@@ -86,4 +92,9 @@ public class ProcessAnnotatedTypeObserver implements Extension {
     public static AnnotatedType<Farm> getJsfManagedBeanEvent() {
         return jsfManagedBeanEvent;
     }
+
+    public static AnnotatedType<SessionBean> getSessionBeanEvent() {
+        return sessionBeanEvent;
+    }
+
 }

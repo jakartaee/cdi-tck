@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.extensions.container.event.ws;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JAX_WS;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS_EE;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET_EE;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_BEAN_DISCOVERY_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -54,16 +54,16 @@ public class ContainerEventTest extends AbstractTest {
                 .withExtensions(ProcessInjectionTargetObserver.class, ProcessAnnotatedTypeObserver.class).build();
     }
 
-    @Test(groups = {JAVAEE_FULL, JAX_WS})
+    @Test(groups = { JAVAEE_FULL, JAX_WS })
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aag"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abg"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "di") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bi") })
     public void testProcessInjectionTargetFiredForWsEndpoint() {
         assertNotNull(ProcessInjectionTargetObserver.getWsEndpointType());
         validateWsEndpointAnnotatedType(ProcessInjectionTargetObserver.getWsEndpointType());
     }
 
-    @Test(groups = {JAVAEE_FULL, JAX_WS})
-    @SpecAssertions({ @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "bi") })
+    @Test(groups = { JAVAEE_FULL, JAX_WS })
+    @SpecAssertions({ @SpecAssertion(section = TYPE_BEAN_DISCOVERY_EE, id = "bi") })
     public void testProcessAnnotatedTypeFiredForWsEndpoint() {
         assertNotNull(ProcessAnnotatedTypeObserver.getWsEndpointType());
         validateWsEndpointAnnotatedType(ProcessAnnotatedTypeObserver.getWsEndpointType());

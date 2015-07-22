@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.JAX_WS;
-import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS_EE;
 import static org.testng.Assert.assertTrue;
 
@@ -64,7 +63,7 @@ public class WebServiceInjectionIntoNonContextualComponentTest extends AbstractT
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })
-    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "br")
+    @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "br")
     public void testFilterInitCalledAfterResourceInjection() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
