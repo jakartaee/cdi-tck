@@ -9,8 +9,9 @@ public class LondonRadioStation {
     public static AtomicBoolean observed = new AtomicBoolean(false);
     public static AtomicReference<Exception> exception;
 
-    public void observe(@Observes RadioMessage radioMessage) {
+    public void observe(@Observes RadioMessage radioMessage) throws Exception {
         observed.set(true);
         exception = new AtomicReference<>(new IllegalStateException(LondonRadioStation.class.getName()));
+        throw exception.get();
     }
 }
