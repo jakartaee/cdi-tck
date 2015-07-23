@@ -100,11 +100,11 @@ public class BootstrapSEContainerTest extends Arquillian {
         params.put(IMPLICIT_SCAN_KEY, Boolean.TRUE);
 
         CDIProvider cdiProvider = CDI.getCDIProvider();
-        CDI<Object> cdi = cdiProvider.initialize(params);
-        Bar bar = cdi.select(Bar.class).get();
-        Assert.assertNotNull(bar);
-        bar.ping();
-        cdi.shutdown();
+        try (CDI<Object> cdi = cdiProvider.initialize(params)) {
+            Bar bar = cdi.select(Bar.class).get();
+            Assert.assertNotNull(bar);
+            bar.ping();
+        }
     }
 
 }
