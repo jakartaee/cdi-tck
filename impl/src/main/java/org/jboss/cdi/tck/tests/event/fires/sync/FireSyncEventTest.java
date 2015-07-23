@@ -26,6 +26,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -46,7 +47,7 @@ public class FireSyncEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = FIRING_EVENTS_SYCNRONOUSLY, id = "e")
+    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYCNRONOUSLY, id = "e"), @SpecAssertion(section = FIRING_EVENTS_SYCNRONOUSLY, id = "f") })
     public void testSyncObservesCalledInSameThread() {
 
         event.fire(new Letter());

@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.NEW;
 import static org.jboss.cdi.tck.cdi.Sections.NEW_EE;
 
 import java.util.Set;
@@ -71,7 +70,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertion(section = NEW, id = "v")
+    @SpecAssertion(section = NEW_EE, id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
         FoxLocal fox = getContextualReference(FoxLocal.class);
         FoxLocal newFox = getContextualReference(FoxLocal.class, new NewLiteral(Fox.class));
@@ -84,7 +83,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "x")
+    @SpecAssertion(section = NEW_EE, id = "x")
     public void testNewBeanHasNoDisposalMethods() throws Exception {
         FoxLocal fox = getContextualReference(FoxLocal.class);
         FoxLocal newFox = getContextualReference(FoxLocal.class, new NewLiteral(Fox.class));

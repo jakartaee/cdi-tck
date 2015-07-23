@@ -8407,6 +8407,34 @@
             <text>For each session bean, a second bean exists which has the same interceptor bindings.</text>
         </assertion>
 
+        <assertion id="p">
+            <text>This second bean has scope |@Dependent|.</text>
+        </assertion>
+
+        <assertion id="r">
+            <text>This second bean has exactly one qualifier: |@javax.enterprise.inject.New(X.class)| where |x| is the bean class.</text>
+        </assertion>
+
+        <assertion id="s">
+            <text>This second bean has no bean name.</text>
+        </assertion>
+
+        <assertion id="t">
+            <text>This second bean has no stereotypes.</text>
+        </assertion>
+
+        <assertion id="u">
+            <text>This second bean has no observer methods.</text>
+        </assertion>
+
+        <assertion id="v">
+            <text>This second bean has no producer methods.</text>
+        </assertion>
+
+        <assertion id="x">
+            <text>This second bean has no disposer methods.</text>
+        </assertion>
+
         <group>
             <text>Note that this second bean exists, and may be enabled and available for injection even if the first bean is disabled, as defined by Section
                 5.1.2, “Enabled and disabled beans” or if the bean class is deployed outside of a bean deployment archive, as defined in Section 12.1, “Bean

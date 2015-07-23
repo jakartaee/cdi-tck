@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.producer;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTIONTARGET;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTIONTARGET_EE;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_PRODUCER;
 import static org.jboss.cdi.tck.cdi.Sections.TYPE_DISCOVERY_STEPS;
@@ -193,7 +194,7 @@ public class ProducerTest extends AbstractTest {
     @SuppressWarnings("unchecked")
     @Test
     @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "i"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "c"),
-            @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaa") })
+            @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaa"), @SpecAssertion(section = INJECTIONTARGET_EE, id = "a") })
     public void testInjectionTargetInject() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
         Bean<Dog> dogBean = (Bean<Dog>) getCurrentManager().getBeans(Dog.class).iterator().next();
@@ -205,7 +206,7 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "j") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "j"), @SpecAssertion(section = INJECTIONTARGET_EE, id = "b") })
     public void testInjectionTargetPostConstruct() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
         Dog dog = getContextualReference(Dog.class, new AnnotationLiteral<Noisy>() {
@@ -216,7 +217,7 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "k"),  @SpecAssertion(section = INJECTIONTARGET_EE, id = "c") })
     public void testInjectionTargetPreDestroy() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
         Dog dog = getContextualReference(Dog.class, new AnnotationLiteral<Noisy>() {

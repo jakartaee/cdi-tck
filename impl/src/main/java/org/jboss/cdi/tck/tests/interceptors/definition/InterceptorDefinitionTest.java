@@ -20,6 +20,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition;
 import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.BM_INTERCEPTOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_EE;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS;
 import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPE_INTERCEPTOR_BINDINGS;
 import static org.testng.Assert.assertEquals;
@@ -114,7 +115,8 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR, id = "c"), @SpecAssertion(section = INTERCEPTOR, id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR, id = "c"), @SpecAssertion(section = INTERCEPTOR, id = "e"),
+            @SpecAssertion(section = INTERCEPTOR_EE, id = "a") })
     public void testInterceptionType() {
         Interceptor<?> interceptorBean = getTransactionalInterceptor();
         assertTrue(interceptorBean.intercepts(InterceptionType.AROUND_INVOKE));
@@ -128,10 +130,10 @@ public class InterceptorDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = INTERCEPTOR, id = "f")
     public void testInstanceOfInterceptorForEveryEnabledInterceptor() {
-        List<AnnotationLiteral<?>> annotationLiterals = Arrays.<AnnotationLiteral<?>> asList(TRANSACTIONAL_LITERAL,
+        List<AnnotationLiteral<?>> annotationLiterals = Arrays.<AnnotationLiteral<?>>asList(TRANSACTIONAL_LITERAL,
                 SECURE_LITERAL, MISSILE_LITERAL, LOGGED_LITERAL);
 
-        List<Class<?>> interceptorClasses = new ArrayList<Class<?>>(Arrays.<Class<?>> asList(AtomicInterceptor.class,
+        List<Class<?>> interceptorClasses = new ArrayList<Class<?>>(Arrays.<Class<?>>asList(AtomicInterceptor.class,
                 MissileInterceptor.class, SecureInterceptor.class, TransactionalInterceptor.class, NetworkLogger.class,
                 FileLogger.class, NotEnabledAtomicInterceptor.class));
 
@@ -170,7 +172,8 @@ public class InterceptorDefinitionTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertions({ @SpecAssertion(section = BM_INTERCEPTOR_RESOLUTION, id = "b") })
     public void testSameBindingTypesToResolveInterceptorsFails() {
-        getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new Transactional.TransactionalLiteral("a"), new Transactional.TransactionalLiteral("b"));
+        getCurrentManager()
+                .resolveInterceptors(InterceptionType.AROUND_INVOKE, new Transactional.TransactionalLiteral("a"), new Transactional.TransactionalLiteral("b"));
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })

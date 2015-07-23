@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.NEW;
 import static org.jboss.cdi.tck.cdi.Sections.NEW_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -65,7 +64,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "p")
+    @SpecAssertion(section = NEW_EE, id = "p")
     public void testNewBeanIsDependentScoped() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, new NewLiteral(
                 WrappedEnterpriseBean.class));
@@ -75,7 +74,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "r")
+    @SpecAssertion(section = NEW_EE, id = "r")
     public void testNewBeanHasOnlyOneQualifier() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, new NewLiteral(
                 WrappedEnterpriseBean.class));
@@ -86,7 +85,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "s")
+    @SpecAssertion(section = NEW_EE, id = "s")
     public void testNewBeanHasNoBeanELName() {
         Set<Bean<WrappedEnterpriseBeanLocal>> beans = getBeans(WrappedEnterpriseBeanLocal.class, new NewLiteral(
                 WrappedEnterpriseBean.class));
@@ -96,7 +95,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "t")
+    @SpecAssertion(section = NEW_EE, id = "t")
     public void testNewBeanHasNoStereotypes() {
         Bean<MonkeyLocal> monkeyBean = getBeans(MonkeyLocal.class).iterator().next();
         Bean<MonkeyLocal> newMonkeyBean = getBeans(MonkeyLocal.class, new NewLiteral(Monkey.class)).iterator().next();
@@ -107,7 +106,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = NEW, id = "u")
+    @SpecAssertion(section = NEW_EE, id = "u")
     public void testNewBeanHasNoObservers() {
         // Should just be 1 observer from bean, not new bean
         assert getCurrentManager().resolveObserverMethods("event").size() == 1;
