@@ -55,14 +55,14 @@ public class ContextSETest extends Arquillian {
     public void applicationContextSharedBetweenAllBeansWithinContainer() {
 
         CDIProvider cdiProvider = CDI.getCDIProvider();
-        CDI<Object> cdi = cdiProvider.initialize();
-        cdi.select(Foo.class).get().ping();
-        cdi.select(Bar.class).get().ping();
-        cdi.select(Baz.class).get().ping();
+        try(CDI<Object> cdi = cdiProvider.initialize()) {
+            cdi.select(Foo.class).get().ping();
+            cdi.select(Bar.class).get().ping();
+            cdi.select(Baz.class).get().ping();
 
-        ApplicationScopedCounter applicationScopedCounter = cdi.select(ApplicationScopedCounter.class).get();
-        Assert.assertEquals(applicationScopedCounter.getCount(), 3);
-        cdi.shutdown();
+            ApplicationScopedCounter applicationScopedCounter = cdi.select(ApplicationScopedCounter.class).get();
+            Assert.assertEquals(applicationScopedCounter.getCount(), 3);
+        }
     }
 
     @Test
@@ -71,10 +71,10 @@ public class ContextSETest extends Arquillian {
     public void testEventIsFiredWhenAplicationContextInitialized() {
         ApplicationScopedObserver.reset();
         CDIProvider cdiProvider = CDI.getCDIProvider();
-        CDI<Object> cdi = cdiProvider.initialize();
-        Assert.assertTrue(ApplicationScopedObserver.isInitialized);
-        Assert.assertNotNull(ApplicationScopedObserver.initializedEventPayload);
-        cdi.shutdown();
+        try(CDI<Object> cdi = cdiProvider.initialize()) {
+            Assert.assertTrue(ApplicationScopedObserver.isInitialized);
+            Assert.assertNotNull(ApplicationScopedObserver.initializedEventPayload);
+        }
     }
 
     @Test
@@ -82,8 +82,9 @@ public class ContextSETest extends Arquillian {
     public void testEventIsFiredWhenAplicationContextDestroyed() {
         ApplicationScopedObserver.reset();
         CDIProvider cdiProvider = CDI.getCDIProvider();
-        CDI<Object> cdi = cdiProvider.initialize();
-        cdi.shutdown();
+        try(CDI<Object> cdi = cdiProvider.initialize()){
+            
+        }
         Assert.assertTrue(ApplicationScopedObserver.isDestroyed);
         Assert.assertNotNull(ApplicationScopedObserver.destroyedEventPayload);
     }

@@ -52,11 +52,11 @@ public class BootstrapSEWithSystemPropertyTest extends Arquillian {
     @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "a")
     public void testImplicitArchiveDiscovered() {
         CDIProvider cdiProvider = CDI.getCDIProvider();
-        CDI<Object> cdi = cdiProvider.initialize();
-        Bar bar = cdi.select(Bar.class).get();
-        Assert.assertNotNull(bar);
-        bar.ping();
-        cdi.shutdown();
+        try (CDI<Object> cdi = cdiProvider.initialize()) {
+            Bar bar = cdi.select(Bar.class).get();
+            Assert.assertNotNull(bar);
+            bar.ping();
+        }
     }
 
 }

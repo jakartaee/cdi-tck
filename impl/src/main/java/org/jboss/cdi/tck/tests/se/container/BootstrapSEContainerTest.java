@@ -61,13 +61,13 @@ public class BootstrapSEContainerTest extends Arquillian {
             @SpecAssertion(section = STOP_CONTAINER, id = "a") })
     public void testContainerIsInitialized() {
         CDIProvider cdiProvider = CDI.getCDIProvider();
-        CDI<Object> cdi = cdiProvider.initialize();
-        Assert.assertTrue(cdiProvider.isInitialized());
+        try(CDI<Object> cdi = cdiProvider.initialize()) {
+            Assert.assertTrue(cdiProvider.isInitialized());
 
-        Foo foo = cdi.select(Foo.class).get();
-        Assert.assertNotNull(foo);
-        foo.ping();
-        cdi.shutdown();
+            Foo foo = cdi.select(Foo.class).get();
+            Assert.assertNotNull(foo);
+            foo.ping();
+        }
         Assert.assertFalse(cdiProvider.isInitialized());
     }
 
@@ -100,11 +100,11 @@ public class BootstrapSEContainerTest extends Arquillian {
         params.put(IMPLICIT_SCAN_KEY, Boolean.TRUE);
 
         CDIProvider cdiProvider = CDI.getCDIProvider();
-        CDI<Object> cdi = cdiProvider.initialize(params);
-        Bar bar = cdi.select(Bar.class).get();
-        Assert.assertNotNull(bar);
-        bar.ping();
-        cdi.shutdown();
+        try (CDI<Object> cdi = cdiProvider.initialize(params)) {
+            Bar bar = cdi.select(Bar.class).get();
+            Assert.assertNotNull(bar);
+            bar.ping();
+        }
     }
 
 }

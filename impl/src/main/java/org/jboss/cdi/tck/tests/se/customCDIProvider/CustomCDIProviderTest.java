@@ -51,8 +51,9 @@ public class CustomCDIProviderTest extends Arquillian {
     public void testCustomCDIProvider() {
         CDI.setCDIProvider(new CustomCDIProvider());
         CDIProvider cdiProvider = CDI.getCDIProvider();
-        cdiProvider.initialize();
-        assertTrue(CustomCDIProvider.initializedCalled);
+        try (CDI cdi = cdiProvider.initialize()) {
+            assertTrue(CustomCDIProvider.initializedCalled);
+        }
     }
 
 }
