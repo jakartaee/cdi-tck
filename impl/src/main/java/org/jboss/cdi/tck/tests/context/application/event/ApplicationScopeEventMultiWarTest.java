@@ -72,7 +72,7 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
     public static EnterpriseArchive createTestArchive() {
 
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
-                .withTestClassDefinition(ApplicationScopeEventMultiWarTest.class)
+                .notTestArchive()
                 .withClasses(Collector.class, ObserverNames.class, Helper.class).noDefaultWebModule().build();
         StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class)
                 .version(EnterpriseArchiveBuilder.DEFAULT_APP_VERSION).applicationName("Test").createModule()
@@ -82,7 +82,7 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
         enterpriseArchive.setApplicationXML(applicationXml);
 
         WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName(TEST1_ARCHIVE_NAME+".war")
-                .withClasses(Observer2.class, ApplicationScopeEventMultiWarTest.class, PingServlet.class).withDefaultEjbModuleDependency().build();
+                .withClasses(Observer2.class, PingServlet.class).withDefaultEjbModuleDependency().build();
         enterpriseArchive.addAsModule(Testable.archiveToTest(fooArchive));
 
         WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName(TEST2_ARCHIVE_NAME+".war").withClasses(Observer3.class, PingServlet.class)
