@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint;
 
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
@@ -38,5 +39,9 @@ public class InjectingBean {
     @Produces
     public ProducedBean produce(@PlainAnnotation @Foo Alpha<Integer> alpha, @PlainAnnotation @Bar Bravo<Integer> bravo) {
         return null;
+    }
+    
+    public void destroy(@Disposes ProducedBean producedBean, Delta delta){
+
     }
 }

@@ -172,6 +172,14 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
         verifyType(deltaIp, Delta.class);
     }
 
+    @Test
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "je")
+    public void testDisposerMethodInjectionPoint() {
+        InjectionPoint deltaIp = extension.getDisposerDeltaIp();
+        assertNotNull(deltaIp);
+        verifyType(deltaIp, Delta.class);
+    }
+
     private static void verifyType(InjectionPoint ip, Class<?> rawType, Class<?>... typeParameters) {
         assertEquals(getRawType(ip.getType()), rawType);
         if (typeParameters.length > 0) {

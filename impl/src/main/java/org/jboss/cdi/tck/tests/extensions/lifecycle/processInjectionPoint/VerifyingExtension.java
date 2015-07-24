@@ -39,6 +39,7 @@ public class VerifyingExtension implements Extension {
     private InjectionPoint listenerCharlie;
     private InjectionPoint observerCharliIp;
     private InjectionPoint observerDeltaIp;
+    private InjectionPoint disposerDeltaIp;
 
     private Bean<?> injectingBean;
     private Bean<?> producingBean;
@@ -86,6 +87,11 @@ public class VerifyingExtension implements Extension {
     public void observeDeltaInjectionPointInObserverMethod(@Observes ProcessInjectionPoint<BravoObserver, Delta> event) {
         assertNull(observerDeltaIp);
         observerDeltaIp = event.getInjectionPoint();
+    }
+
+    public void observeDeltaInjectionPointInDisposerMethod(@Observes ProcessInjectionPoint<InjectingBean, Delta> event) {
+        assertNull(disposerDeltaIp);
+        disposerDeltaIp = event.getInjectionPoint();
     }
 
     public void observeServletInjectionPoint(@Observes ProcessInjectionPoint<TestServlet, ?> event) {
@@ -147,5 +153,10 @@ public class VerifyingExtension implements Extension {
     public InjectionPoint getObserverDeltaIp() {
         return observerDeltaIp;
     }
+
+    public InjectionPoint getDisposerDeltaIp() {
+        return disposerDeltaIp;
+    }
+
 
 }
