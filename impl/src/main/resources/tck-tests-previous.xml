@@ -48,43 +48,15 @@
                 </methods>
             </class>
 
-            <!-- CDITCK-484 -->
+            <!-- CDI-545 & CDITCK-497 -->
+            <class name="org.jboss.cdi.tck.tests.event.observer.resolve.enterprise.ResolveEnterpriseEventObserverTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-499 -->
             <class name="org.jboss.cdi.tck.tests.context.application.event.ApplicationScopeEventMultiWarTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-486 -->
-            <class name="org.jboss.cdi.tck.tests.context.request.event.timeout.RequestScopeEventTimeoutTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-461 -->
-            <class name="org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor.FinalMethodMethodLevelInterceptorTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-488 -->
-            <class name="org.jboss.cdi.tck.tests.context.conversation.filter.ConversationFilterTest">
-                <methods>
-                    <exclude name="testConversationBusy"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-493 -->
-            <class name=" org.jboss.cdi.tck.tests.interceptors.definition.broken.interceptorForLifecycleTargetMethod.InterceptorForLifecycleTargetMethodTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-490 -->
-            <class name=" org.jboss.cdi.tck.tests.decorators.definition.inject.broken.delegateProducerMethod.DelegateInjectionPointTest">
                 <methods>
                     <exclude name=".*"/>
                 </methods>
