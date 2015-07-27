@@ -33,11 +33,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-/**
- * TODO This test specifically tests session beans even though the assertions are true for all managed beans. So likely there
- * should be a parallel set of tests for session and other managed beans.
- * 
- */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class EnterpriseQualifierDefinitionTest extends AbstractTest {
 

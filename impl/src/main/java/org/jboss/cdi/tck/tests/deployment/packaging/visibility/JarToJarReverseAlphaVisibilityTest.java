@@ -35,7 +35,6 @@ import org.testng.annotations.Test;
  * This test was originally part of Seam Compatibility project.
  * <p>
  *
- * TODO verify assertions
  *
  * @author <a href="mailto:jharting@redhat.com">Jozef Hartinger</a>
  * @author Martin Kouba

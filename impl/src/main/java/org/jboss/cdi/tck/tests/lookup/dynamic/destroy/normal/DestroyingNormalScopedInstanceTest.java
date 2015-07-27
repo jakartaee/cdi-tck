@@ -120,11 +120,6 @@ public class DestroyingNormalScopedInstanceTest extends AbstractTest {
 		assertTrue(CustomAlterableContext.isDestroyCalled());
 	}
 
-	/**
-	 * TODO add assertion - OPEN ISSUE atm
-	 *
-	 * @param application
-	 */
 	@Test(expectedExceptions = NullPointerException.class, dataProvider = ARQUILLIAN_DATA_PROVIDER)
 	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
 	public void testNullParameter(Instance<ApplicationScopedComponent> instance) {

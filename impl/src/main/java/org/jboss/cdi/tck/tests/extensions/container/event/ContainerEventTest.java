@@ -148,8 +148,7 @@ public class ContainerEventTest extends AbstractTest {
         assert type.getBaseType().equals(Sheep.class);
         assert typeSetMatches(type.getTypeClosure(), Sheep.class, SheepLocal.class, Object.class);
         assert type.getAnnotations().size() == 2;
-        assert annotationSetMatches(type.getAnnotations(), Tame.class, Stateless.class); // TODO
-                                                                                         // Check
+        assert annotationSetMatches(type.getAnnotations(), Tame.class, Stateless.class);
     }
 
     private void validateStatefulSessionBean(Annotated type) {

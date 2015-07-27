@@ -41,7 +41,6 @@ public class NamedNonFieldInjectionPointTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = NAMED_AT_INJECTION_POINT, id = "b")
-    // WELD-427
     public void testNamedProducerInjectionPointNotAllowed() throws Exception {
     }
 

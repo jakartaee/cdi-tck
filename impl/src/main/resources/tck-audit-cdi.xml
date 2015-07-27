@@ -103,7 +103,6 @@
 
         <group>
             <text>An array type whose component type is not a legal bean type.</text>
-            <!-- TODO tested through producers -->
             <assertion id="lc">
                 <text>An array type whose component type is a type variable is not a legal bean type.</text>
             </assertion>
@@ -2469,21 +2468,10 @@
             <text>The required type of an injection point may contain a wildcard type parameter.</text>
         </assertion>
 
-        <assertion id="d" testable="false">
-            <note>TODO this change will be most likely reverted</note>
-            <text>The required type of an injection point may be an array type whose component type contains a wildcard type parameter.</text>
-        </assertion>
-
         <assertion id="c">
             <text>If an injection point type is a type variable, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
-        <assertion id="d" testable="false">
-            <note>TODO not sure if the spec wording is final</note>
-            <text>If an injection point type is an array type whose component type is a type variable, the container automatically detects the problem and
-                treats it as a definition error.
-            </text>
-        </assertion>
     </section>
 
     <section id="assignable_parameters" title="Assignability of raw and parameterized types" level="3">
@@ -4676,13 +4664,9 @@
             <assertion id="acb">
                 <text>Test injected Instance</text>
             </assertion>
-            <!-- TODO these assertions will be probably removed - see CDI-164 -->
-            <!-- assertion id="acc"> <text>Test injected @Default Bean</text> </assertion> <assertion id="acd"> <text>Test injected @Intercepted Bean</text> </assertion> <assertion id="ace"> <text>Test injected @Decorated Bean</text> </assertion> <assertion id="acf"> <text>Test injected Interceptor</text> </assertion> <assertion id="acg"> <text>Test injected Decorator</text> </assertion -->
             <assertion id="ach">
                 <text>Test injected Conversation</text>
             </assertion>
-            <!-- TODO these assertions will be probably removed - see CDI-164 -->
-            <!-- assertion id="aco"> <text>Test injected Validator</text> </assertion> <assertion id="acp"> <text>Test injected ValidatorFactory</text> </assertion> <assertion id="acq"> <text>Test injected ConstraintValidator</text> </assertion -->
         </group>
 
         <assertion id="b">

@@ -38,8 +38,6 @@ import org.testng.annotations.Test;
  * This test was originally part of Seam Compatibility project.
  * <p>
  * 
- * TODO verify assertions
- * 
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15735">GLASSFISH-15735</a>
