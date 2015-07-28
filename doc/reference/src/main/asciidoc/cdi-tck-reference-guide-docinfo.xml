@@ -1,8 +1,15 @@
-<!--title>Technology Compatibility Kit Reference Guide for JSR 346: Contexts and Dependency Injection for Java EE 1.1</title-->
+<!--title>Technology Compatibility Kit Reference Guide for JSR 365: Contexts and Dependency Injection for Java 2.0</title-->
 <subtitle>
  Specification Lead: Red Hat Inc.
 </subtitle>
 <authorgroup>
+<author>
+      <firstname>Antoine</firstname>
+      <surname>Sabot-Durand</surname>
+      <affiliation>
+            <jobtitle>JSR 365: Contexts and Dependency Injection (CDI) for Java 2.0 specification lead</jobtitle>
+      </affiliation>
+   </author>
    <author>
       <firstname>Pete</firstname>
       <surname>Muir</surname>

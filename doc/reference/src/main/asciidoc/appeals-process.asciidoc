@@ -2,7 +2,7 @@
 
 == Appeals Process
 
-While the CDI TCK is rigorous about enforcing an implementation's conformance to the JSR 346 specification, it's reasonable to assume that an implementor may discover new and/or better ways to validate the assertions. This chapter covers the appeals process, defined by the Specification Lead, Red Hat Middleware LLC., which allows implementors of the JSR 346 specification to challenge one or more tests defined by the CDI TCK. 
+While the CDI TCK is rigorous about enforcing an implementation's conformance to the JSR 365 specification, it's reasonable to assume that an implementor may discover new and/or better ways to validate the assertions. This chapter covers the appeals process, defined by the Specification Lead, Red Hat Middleware LLC., which allows implementors of the JSR 365 specification to challenge one or more tests defined by the CDI TCK.
 
 The appeals process identifies who can make challenges to the TCK, what challenges to the TCK may be submitted, how these challenges are submitted, how and by whom challenges are addressed and how accepted challenges to the TCK are managed. 
 
@@ -12,7 +12,7 @@ Following the recent adoption of transparency in the JCP, implementors are encou
 
 === Who can make challenges to the TCK?
 
-Any implementor may submit an appeal to challenge one or more tests in the CDI TCK. In fact, members of the JSR 346 Expert Group (EG) encourage this level of participation. 
+Any implementor may submit an appeal to challenge one or more tests in the CDI TCK. In fact, members of the JSR 365 Expert Group (EG) encourage this level of participation.
 
 
 
@@ -20,7 +20,7 @@ Any implementor may submit an appeal to challenge one or more tests in the CDI T
 
 Any test case (e.g., test class, +@Test+ method), test case configuration (e.g., beans.xml), test beans, annotations and other resources may be challenged by an appeal. 
 
-What is generally not challengeable are the assertions made by the specification. The specification document is controlled by a separate process and challenges to it should be handled through the JSR 346 EG by sending an e-mail to link:$$mailto:jsr346-comments@jcp.org$$[jsr346-comments@jcp.org]. 
+What is generally not challengeable are the assertions made by the specification. The specification document is controlled by a separate process and challenges to it should be handled through the JSR 365 EG by sending an e-mail to link:$$mailto:cdi-dev@lists.jboss.org$$[cdi-dev@lists.jboss.org].
 
 
 
@@ -46,9 +46,9 @@ The current TCK Project Lead is listed on the link:$$https://jira.jboss.org/jira
 
 Accepted challenges will be acknowledged via the filed issue's comment section. Communication between the CDI TCK Project Lead and the appellant will take place via the issue comments. The issue's status will be set to "Resolved" when the TCK project lead believes the issue to be resolved. The appellant should, within 30 days, either close the issue if they agree, or reopen the issue if they do not believe the issue to be resolved. 
 
-Resolved issue not addressed for 30 days will be closed by the TCK Project Lead. If the TCK Project Lead and appellant are unable to agree on the issue resolution, it will be referred to the JSR 346 specification lead or his/her designate. 
+Resolved issue not addressed for 30 days will be closed by the TCK Project Lead. If the TCK Project Lead and appellant are unable to agree on the issue resolution, it will be referred to the JSR 365 specification lead or his/her designate.
 
-Periodically, an updated TCK will be released, containing tests altered due to challenges - no new tests will be added. Implementations are required to pass the updated TCK. This release stream is named 1.2.x, where x will be incremented. 
+Periodically, an updated TCK will be released, containing tests altered due to challenges - no new tests will be added. Implementations are required to pass the updated TCK. This release stream is named 2.0.x, where x will be incremented.
 
-Additionally, new tests will be added to the TCK improving coverage of the specification. We encourage implementations to pass this TCK, however it is not required. This release stream is named 1.y.z where y &gt; 1. 
+Additionally, new tests will be added to the TCK improving coverage of the specification. We encourage implementations to pass this TCK, however it is not required. This release stream is named 2.y.z where y &gt; 1.
 

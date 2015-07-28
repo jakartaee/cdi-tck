@@ -19,6 +19,7 @@
         <asciidoctor.version>0.1.4</asciidoctor.version>
         <pdf.name>cdi-tck-reference-guide.pdf</pdf.name>
         <jdocbook.source.directory>target/docbook</jdocbook.source.directory>
+        <pressgang.version>2.0.2</pressgang.version>
     </properties>
 
     <build>
@@ -66,10 +67,50 @@
                             <include>images/*.png</include>
                         </includes>
                     </imageResource>
+                    <cssResource>
+                        <directory>${project.basedir}/src/main/style</directory>
+                        <includes>
+                            <include>css/*.css</include>
+                        </includes>
+                    </cssResource>
+                    <formats>
+                        <format>
+                            <formatName>pdf</formatName>
+                            <stylesheetResource>classpath:/xslt/org/jboss/pdf.xsl</stylesheetResource>
+                            <finalName>${pdf.name}</finalName>
+                        </format>
+                        <format>
+                            <formatName>html</formatName>
+                            <stylesheetResource>file:${project.basedir}/src/main/style/xslt/org/jboss/cdi/tck/xhtml.xsl</stylesheetResource>
+                            <finalName>index.html</finalName>
+                        </format>
+                        <format>
+                            <formatName>html_single</formatName>
+                            <stylesheetResource>file:${project.basedir}/src/main/style/xslt/org/jboss/cdi/tck/xhtml-single.xsl</stylesheetResource>
+                            <finalName>index.html</finalName>
+                        </format>
+                    </formats>
                     <options>
+                        <xincludeSupported>true</xincludeSupported>
+                        <xmlTransformerType>saxon</xmlTransformerType>
+                        <docbookVersion>1.72.0</docbookVersion>
+                        <localeSeparator>-</localeSeparator>
                         <injectionDateFormat>dd/MM/yyyy</injectionDateFormat>
                     </options>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.pressgang</groupId>
+                        <artifactId>pressgang-xslt-ns</artifactId>
+                        <version>${pressgang.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jboss.pressgang</groupId>
+                        <artifactId>pressgang-jdocbook-style</artifactId>
+                        <type>jdocbook-style</type>
+                        <version>${pressgang.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
