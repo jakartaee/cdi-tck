@@ -1,0 +1,47 @@
+
+[[eclipse-debugging]]
+
+== Debugging Tests in Eclipse
+
+This chapter explains how to debug standalone and integration tests from the TCK test suite in Eclipse. You should be able to use the lessons learned here to debug tests in an alternate IDE as well.
+
+=== Debugging a standalone test
+
+There is almost no difference in how you debug a standalone test from how you run it. With the test class open in the Eclipse editor, simply right click in the editor view and select Debug As > TestNG Test. Eclipse will stop at any breakpoints you set just like it would with any other local debug process.
+
+If you plan to step into a class in the Weld implementation (or any other dependent library), you must ensure that the source is properly associated with the library. Below are the steps to follow to associate the source of Weld with the TestNG debug configuration:
+
+. Select the Run > Debug Configurations... menu from the main menubar
+. Select the name of the test class in the TestNG category
+. Select the Source tab
+. Click the Add... button on the right
+. Select Java Project
+. Check the project that contains the class you want to debug (e.g., weld-core)
+. Click OK on the Project Selection window
+. Click Close on the Debug Configurations window
+
+You'll have to complete those steps for any test class you are debugging, though you only have to do it once (the debug configuration hangs around indefinitely).
+
+Again, running a test in standalone mode isn't enough to pass the TCK and cannot be used to run or debug an integration test. Let's look at how to debug a test running in the context of the container.
+
+=== Debugging an integration test
+
+In order to debug an integration test, or any test run using in-container mode, the test must be configured to run in-container, as described in <<running-integration-tests>>, and you must attach the IDE debugger to the container. That puts the debugger on both sides of the fence, so to speak.
+
+Since setting up a test to run in-container has already been covered, we'll look at how to attach the IDE debugger to the container, and then move on launching the test in debug mode.
+
+===== Attaching the IDE debugger to the container
+
+There are two ways to attach the IDE debugger to the container. You can either start the container in debug mode from within the IDE, or you can attach the debugger over a socket connection to a standalone container running with JPDA enabled.
+
+The Eclipse Server Tools, a subproject of the Eclipse Web Tools Project (WTP), has support for launching most major application servers, including WildFly 8. However, if you are using WildFly, you should consider using JBoss Tools instead, which offers tighter integration with JBoss technologies. See either the link:$$http://www.eclipse.org/webtools/server/server.php$$[Server Tools documentation] or the link:$$http://docs.jboss.org/tools/$$[JBoss Tools documentation] for how to setup a container and start it in debug mode.
+
+See link:$$http://justinjohnson.org/java/configuring-remote-debugging-in-jboss-as-7-and-eclipse/$$[this blog entry] to learn how to start WildFly with JPDA enabled and how to get the Eclipse debugger to connect to the remote process.
+
+==== Launching the test in the debugger
+
+Once Eclipse is debugging the container, you can set a breakpoint in the test and debug it just like a standalone test. Let's give it a try.
+
+Open a test in the Eclipse editor, right click in the editor view, and select Debug As > TestNG Test (this works for the container started in debug mode from within the IDE) or run the TestNG test and debug Remote Java Application (remote debug configuration) in the same time (when attaching the debugger over a socket connection to a container). This time when the IDE hits the breakpoint, it halts the JVM thread of the container rather than the thread that launched the test.
+
+Remember that if you need to debug into dependent libraries, the source code for those libraries will need to be registered with the TestNG debug configuration as described in the first section in this chapter.
