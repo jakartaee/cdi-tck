@@ -84,7 +84,7 @@ This section lists the applicable requirements and specifications for the CDI TC
                      Java 2.0 API* - The Java API defined in the CDI specification and provided by the reference implementation.
 
 
-*  *Testing platform* - The CDI TCK requires version 1.1.7.Final of the Arquillian (link:$$http://arquillian.org$$[http://arquillian.org]). The TCK test suite is based on TestNG 6.x (link:$$http://testng.org$$[http://testng.org]). .
+*  *Testing platform* - The CDI TCK requires version 1.1.7.Final of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG 6.x (http://testng.org). .
 
 
 *  *Porting Package* - An implementation of SPIs that are required for the test suite to run the in-container tests and at times extend the CDI 2.0 API to provide extra information to the TCK.
@@ -115,10 +115,10 @@ The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X
 The CDI TCK includes the following components:
 
 
-*  *Arquillian 1.1.2.Final* 
+*  *Arquillian 1.1.7.Final*
 
 
-*  *TestNG 6.3* 
+*  *TestNG 6.8.8*
 
 
 *  *Porting Package SPIs* - Extensions to the CDI SPIs to allow testing of a container. 
