@@ -21,7 +21,7 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 import javax.annotation.Resource;
-import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -33,7 +33,7 @@ import javax.transaction.TransactionSynchronizationRegistry;
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Stateless
-@DeclareRoles({ "student", "printer" })
+@RolesAllowed("printer")
 public class FooObserver implements ObserverLocal {
 
     @EJB
@@ -81,17 +81,8 @@ public class FooObserver implements ObserverLocal {
     }
 
     private void assertClientSecurityContext(TransactionPhase phase) {
-        // TODO is using injected SC correct? no need to look it up before checking security context?
-        // EJBContext sc;
-        // try {
-        // sc = (EJBContext) InitialContext.doLookup("java:comp/EJBContext");
-        // } catch (NamingException e) {
-        // throw new RuntimeException(e);
-        // }
-
-        // both fail - see WFLY-2847
-        assertTrue(sc.isCallerInRole("student"));
-        assertTrue(!sc.isCallerInRole("printer"));
+        
+        assertTrue(sc.isCallerInRole("printer"));
 
         toner.spill();
         try {
