@@ -58,13 +58,13 @@ public class EventObserverOrderingTest extends AbstractTest {
     private Event<Sunrise> sunrise;
 
 
-    @Test
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "a"),  @SpecAssertion(section = OBSERVER_METHOD, id = "ea")  })
     public void testDefaultPriority(ObserverExtension observerExtension) {
         assertEquals(observerExtension.getObserverMethodPriority("Observer2.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 500);
     }
 
-    @Test
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD, id = "ea") })
     public void testProcessObserverMethodPriority(ObserverExtension observerExtension) {
         assertEquals(observerExtension.getObserverMethodPriority("Observer3.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 900);
