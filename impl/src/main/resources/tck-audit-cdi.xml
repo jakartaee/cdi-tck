@@ -5446,7 +5446,7 @@
                 <text>in a new transaction context.</text>
             </assertion>
 
-            <assertion id="ac" testable="false">
+            <assertion id="ac">
                 <text>in the same security context as the invocation of Event.fireAsync().</text>
                 <note>Tested in EE part.</note>
             </assertion>
