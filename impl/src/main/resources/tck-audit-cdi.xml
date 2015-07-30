@@ -381,7 +381,7 @@
         </assertion>
     </section>
 
-    <section id="default_bean_discovery_mode" title="Default bean discovery mode" level="2">
+    <section id="default_bean_discovery" title="Default bean discovery mode" level="2">
 
         <group>
             <text>If the bean discovery mode is annotated then:</text>
@@ -2081,7 +2081,7 @@
         </assertion>
     </section>
 
-    <section id="injection_el_resolution" title="Dependency injection and lookup" level="1">
+    <section id="injection_and_resolution" title="Dependency injection and lookup" level="1">
 
         <assertion id="b">
             <text>The container is required to support circularities in the bean dependency graph where at least one bean participating in every circular chain
@@ -4890,7 +4890,7 @@
 
     </section>
 
-    <section id="firing_events_sycnronously" title="Firing events synchronously" level="3">
+    <section id="firing_events_synchronously" title="Firing events synchronously" level="3">
 
         <assertion id="b">
             <text>The method |fire()| accepts an event object.</text>
@@ -4907,7 +4907,7 @@
         </assertion>
     </section>
 
-    <section id="firing_event_asynchronously" title="Firing events asynchronously" level="3">
+    <section id="firing_events_asynchronously" title="Firing events asynchronously" level="3">
 
         <assertion id="a">
             <text>Event fired with the fireAsync() method is fired asynchronously. All resolved synchronous observers are called in the same thread in which
@@ -8730,7 +8730,7 @@
     </section>
 
 
-    <section id="unsatisfied_and_ambig_dependencies_ee" title="Unsatisfied and ambiguous dependencies" level="3">
+    <section id="unsatisfied_and_ambig_dependencies_ee" title="Unsatisfied and ambiguous dependencies in Java EE" level="3">
         <group>
             <text>The container must validate all injection points of all enabled beans, all observer methods, all disposer methods and all other Java EE
                 component classes supporting injection when the application is initialized to ensure that there are no unsatisfied or ambiguous dependencies. If
@@ -9055,7 +9055,7 @@
 
     </section>
 
-    <section id="passivation_validation_ee" title="Validation of passivation capable beans and dependencies" level="3">
+    <section id="passivation_validation_ee" title="Validation of passivation capable beans and dependencies in Java EE" level="3">
 
         <group>
             <text>If a stateful session bean which declares a passivating scope, or a built-in bean is not passivation capable then the container automatically
@@ -9637,7 +9637,7 @@
 
     </section>
 
-    <section id="stateful_lifecycle_ee" title="Lifecycle of EJB stateful session beans" level="3">
+    <section id="stateful_lifecycle" title="Lifecycle of EJB stateful session beans" level="3">
         <assertion id="aa" testable="false">
             <text>When the |create()| method of a |Bean| object that represents a stateful session bean that is called, the container creates and returns a
                 container-specific internal local reference to a new session bean instance. The reference must be passivation capable. This reference is not
@@ -9660,7 +9660,7 @@
         </assertion>
     </section>
 
-    <section id="stateless_lifecycle_ee" title="Lifecycle of EJB stateless and singleton session beans" level="3">
+    <section id="stateless_lifecycle" title="Lifecycle of EJB stateless and singleton session beans" level="3">
         <assertion id="a" testable="false">
             <text>When the |create()| method of a Bean object that represents a stateless session or singleton session bean is called, the container
                 creates and returns a container-specific internal local reference to the session bean. This reference is not directly exposed to the
@@ -9964,7 +9964,7 @@
         </assertion>
     </section>
 
-    <section id="alternative_metadata_sources_ee" title="Alternative metadata sources" level="2">
+    <section id="alternative_metadata_sources_ee" title="Alternative metadata sources and EJB" level="2">
         <group>
             <text>The container must use the operations of |Annotated| and its subinterfaces to discover program element types and annotations. The container
                 must not directly call the Java Reflection API. In particular, the container must call |Annotated.getBaseType()| to determine the type of an
@@ -9995,7 +9995,7 @@
         </assertion>
     </section>
 
-    <section id="process_injection_target_ee" title="ProcessInjectionTarget event" level="3">
+    <section id="process_injection_target_ee" title="ProcessInjectionTarget event and EJB" level="3">
         <group>
             <text>The container must fire an event for every bean, interceptor or decorator. The event object must be of type
                 |javax.enterprise.inject.spi.ProcessInjectionTarget&lt;X&gt;|, where |x| is the managed bean class.
@@ -10103,7 +10103,7 @@
         </group>
     </section>
 
-    <section id="process_bean_attributes_ee" title="ProcessBeanAttributes event" level="3">
+    <section id="process_bean_attributes_ee" title="ProcessBeanAttributes event and EJB" level="3">
         <group>
             <text>|getAnnotated()| returns the |AnnotatedType| representing the bean class or session bean class, the |AnnotatedMethod| representing the
                 producer field, or the |AnnotatedField| representing the producer field.

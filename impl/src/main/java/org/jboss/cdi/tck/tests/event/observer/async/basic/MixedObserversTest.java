@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.event.observer.async.basic;
 
 import static org.jboss.cdi.tck.cdi.Sections.EVENT;
-import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENT_ASYNCHRONOUSLY;
+import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENTS_ASYNCHRONOUSLY;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.MassachusettsInstituteObserver;
 import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.OxfordUniversityObserver;
@@ -65,7 +65,7 @@ public class MixedObserversTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "f"), @SpecAssertion(section = FIRING_EVENT_ASYNCHRONOUSLY, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "f"), @SpecAssertion(section = FIRING_EVENTS_ASYNCHRONOUSLY, id = "b"),
             @SpecAssertion(section = EVENT, id = "ef"), @SpecAssertion(section = EVENT, id = "eda") })
     public void testQualifiedAsyncEventIsDelivered() throws InterruptedException {
 
@@ -78,7 +78,7 @@ public class MixedObserversTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = FIRING_EVENT_ASYNCHRONOUSLY, id = "a")})
+    @SpecAssertions({@SpecAssertion(section = FIRING_EVENTS_ASYNCHRONOUSLY, id = "a")})
     public void testAsyncObserversCalledInDifferentThread() throws InterruptedException {
         BlockingQueue<Experiment> queue = new LinkedBlockingQueue<>();
         int threadId = (int) Thread.currentThread().getId();

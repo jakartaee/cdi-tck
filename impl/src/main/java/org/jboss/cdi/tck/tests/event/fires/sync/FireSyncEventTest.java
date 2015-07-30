@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.fires.sync;
 
-import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENTS_SYCNRONOUSLY;
+import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENTS_SYNCHRONOUSLY;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -47,7 +47,7 @@ public class FireSyncEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYCNRONOUSLY, id = "e"), @SpecAssertion(section = FIRING_EVENTS_SYCNRONOUSLY, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "e"), @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "f") })
     public void testSyncObservesCalledInSameThread() {
 
         event.fire(new Letter());

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.circular;
 
-import static org.jboss.cdi.tck.cdi.Sections.INJECTION_EL_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.INJECTION_AND_RESOLUTION;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -35,7 +35,7 @@ public class CircularDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
+    @SpecAssertion(section = INJECTION_AND_RESOLUTION, id = "b")
     public void testCircularInjectionOnTwoNormalBeans() throws Exception {
         Pig pig = getContextualReference(Pig.class);
         Food food = getContextualReference(Food.class);
@@ -44,7 +44,7 @@ public class CircularDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
+    @SpecAssertion(section = INJECTION_AND_RESOLUTION, id = "b")
     public void testCircularInjectionOnOneNormalAndOneDependentBean() throws Exception {
         Petrol petrol = getContextualReference(Petrol.class);
         Car car = getContextualReference(Car.class);
@@ -53,31 +53,31 @@ public class CircularDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
+    @SpecAssertion(section = INJECTION_AND_RESOLUTION, id = "b")
     public void testNormalProducerMethodDeclaredOnNormalBeanWhichInjectsProducedBean() throws Exception {
         getContextualReference(NormalSelfConsumingNormalProducer.class).ping();
     }
 
     @Test
-    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
+    @SpecAssertion(section = INJECTION_AND_RESOLUTION, id = "b")
     public void testNormalProducerMethodDeclaredOnDependentBeanWhichInjectsProducedBean() throws Exception {
         getContextualReference(DependentSelfConsumingNormalProducer.class).ping();
     }
 
     @Test
-    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
+    @SpecAssertion(section = INJECTION_AND_RESOLUTION, id = "b")
     public void testNormalCircularConstructors() throws Exception {
         assert getContextualReference(Bird.class) != null;
     }
 
     @Test
-    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
+    @SpecAssertion(section = INJECTION_AND_RESOLUTION, id = "b")
     public void testNormalAndDependentCircularConstructors() throws Exception {
         assert getContextualReference(Planet.class) != null;
     }
 
     @Test
-    @SpecAssertion(section = INJECTION_EL_RESOLUTION, id = "b")
+    @SpecAssertion(section = INJECTION_AND_RESOLUTION, id = "b")
     public void testSelfConsumingConstructorsOnNormalBean() throws Exception {
         assert getContextualReference(House.class) != null;
     }

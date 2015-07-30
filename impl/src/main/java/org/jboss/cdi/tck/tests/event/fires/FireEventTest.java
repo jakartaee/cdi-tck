@@ -20,7 +20,7 @@ import static org.jboss.cdi.tck.TestGroups.REWRITE;
 import static org.jboss.cdi.tck.cdi.Sections.BM_FIRE_EVENT;
 import static org.jboss.cdi.tck.cdi.Sections.EVENT;
 import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENTS;
-import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENTS_SYCNRONOUSLY;
+import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENTS_SYNCHRONOUSLY;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -132,7 +132,7 @@ public class FireEventTest extends AbstractTest {
      **/
     // Simplify assertions
     @Test(groups = REWRITE)
-    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYCNRONOUSLY, id = "b"), @SpecAssertion(section = EVENT, id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "b"), @SpecAssertion(section = EVENT, id = "cb") })
     public void testInjectedEventAcceptsEventObject() throws SecurityException, NoSuchFieldException, NoSuchMethodException {
         Billing billing = getContextualReference(Billing.class);
         billing.reset();
