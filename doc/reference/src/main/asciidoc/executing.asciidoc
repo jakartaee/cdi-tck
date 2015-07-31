@@ -37,13 +37,13 @@ Then execute the Maven life cycle through the test phase:
 mvn test
 ----
 
-Without any command-line flags, the test suite is run in standalone mode (activating weld-embedded Maven profile), which means that any test within the _integration_ or _javaee-full_ TestNG group is excluded. This mode uses the _Weld EE Embedded Arquillian container adapter_ to invoke the test within a mock Java EE life cycle and capture the results of the test. However, passing the suite in this mode is not sufficient to pass the TCK as a whole. The suite must be passed while executing using the in-container mode. 
+Without any command-line flags, the test suite is run in standalone mode (activating weld-embedded Maven profile), which means that any test within the _integration_, _javaee-full_ and SE TestNG group is excluded. This mode uses the _Weld EE Embedded Arquillian container adapter_ to invoke the test within a mock Java EE life cycle and capture the results of the test. However, passing the suite in this mode is not sufficient to pass the TCK as a whole. The suite must be passed while executing using the in-container mode. 
 
 
 
-=== Running the Tests In the Container
+=== Running the Tests In the Container - Core and EE parts
 
-To execute the test suite using in-container mode with the JBoss TCK runner, you first have to setup WildFly as described in the <<tck-in-jboss-as,Running the TCK against the CDI RI>> callout. 
+To execute tests within Core and EE parts of the specification you need to use in-container mode with the JBoss TCK runner, you first have to setup WildFly as described in the <<tck-in-jboss-as,Running the TCK against the CDI RI>> callout.
 
 Then, execute the TCK runner with Maven as follows: 
 
@@ -52,7 +52,7 @@ Then, execute the TCK runner with Maven as follows:
 mvn test -Dincontainer
 ----
 
-The presence of the +incontainer+ property activates an incontainer Maven profile. This time, all the tests in the test suite are executed. 
+The presence of the +incontainer+ property activates an incontainer Maven profile. This time, all the tests except the tests within SE TestNG group are executed. 
 
 In order to run tests appropriate to the Java EE Web Profile execute: 
 
@@ -60,6 +60,8 @@ In order to run tests appropriate to the Java EE Web Profile execute:
 ----
 mvn test -Dincontainer=webprofile
 ----
+
+
 
 To specify particular TCK version: 
 
@@ -81,6 +83,17 @@ The Arquillian will also start and stop the application server automatically (pr
 
 Since Arquillian in-container tests are executed in a remote JVM, the results of the test must be communicated back to the runner over a container-supported protocol. The TCK utilizes servlet-based protocol (communication over HTTP). 
 
+
+=== Running the Tests In the Container - SE part
+
+To execute full TCK testsuite you have to run tests within SE group as well. For this you need to execute "weld-se" Maven profile from the JBoss TCK runner POM file as follows: 
+
+[source, console]
+---
+mvn test -Dincontainer=se
+---
+
+This profile uses link:$$https://github.com/tremes/arquillian-container-se$$[Arquillian container SE] which enables you to run SE tests in a separate JVM instance with isolated configurable classpath.
 
 
 === Dumping the Test Archives

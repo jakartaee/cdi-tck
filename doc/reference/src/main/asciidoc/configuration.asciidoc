@@ -186,4 +186,6 @@ Tests within the _security_ test group require the following mapping of roles to
 
 |===============
 
+Tests within _SE_ test groups require execution in a separate JVM instance with isolated classpath including all required dependencies.
+
 

@@ -25,7 +25,7 @@ The TCK project is also available in the Maven Central repository. The POM file 
 
 Executing the TCK requires a Java EE 7 or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK does not depend on any particular Java EE implementation. 
 
-The JSR 365: Contexts and Dependency Injection for Java 2.0 reference implementation (RI) project is named Weld. The release stream for JSR 365 is named _2.x_. You can obtain the latest release from the link:$$http://weld.cdi-spec.org/download/$$[download page] on the Weld website.
+The JSR 365: Contexts and Dependency Injection for Java 2.0 reference implementation (RI) project is named Weld. The release stream for JSR 365 is named _3.x_. You can obtain the latest release from the link:$$http://weld.cdi-spec.org/download/$$[download page] on the Weld website.
 
 
 [NOTE]
