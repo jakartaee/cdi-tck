@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.deployment.initialization;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
 import static org.testng.Assert.assertEquals;
 
@@ -57,7 +56,7 @@ public class ApplicationInitializationLifecycleTest extends AbstractTest {
     @Inject
     Foo foo;
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = INITIALIZATION, id = "b"), @SpecAssertion(section = INITIALIZATION, id = "c"),
             @SpecAssertion(section = INITIALIZATION, id = "ja"), @SpecAssertion(section = INITIALIZATION, id = "f"),
             @SpecAssertion(section = INITIALIZATION, id = "g"), @SpecAssertion(section = INITIALIZATION, id = "h"),

@@ -38,7 +38,8 @@ public class ApplicationContextLifecycleEventObserverOrderingTest extends Abstra
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withClass(ApplicationScopedObserver.class).withTestClass(ApplicationContextLifecycleEventObserverOrderingTest.class).build();
+        return new WebArchiveBuilder().withClass(ApplicationScopedObserver.class).withTestClass(ApplicationContextLifecycleEventObserverOrderingTest.class)
+                .withExtension(TestExtension.class).build();
     }
 
     @Test

@@ -33,6 +33,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 public class LifecycleMonitoringExtension implements Extension {
 
     public LifecycleMonitoringExtension() {
+        ActionSequence.reset();
         ActionSequence.addAction(LifecycleMonitoringExtension.class.getName());
     }
 

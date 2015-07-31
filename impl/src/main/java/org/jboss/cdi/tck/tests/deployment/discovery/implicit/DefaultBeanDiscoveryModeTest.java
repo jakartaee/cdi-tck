@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery.implicit;
 
-import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_BEAN_DISCOVERY_MODE;
+import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_BEAN_DISCOVERY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
@@ -57,33 +57,33 @@ public class DefaultBeanDiscoveryModeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(id = "a", section = DEFAULT_BEAN_DISCOVERY_MODE)
+    @SpecAssertion(id = "a", section = DEFAULT_BEAN_DISCOVERY)
     public void beanClassesNotDiscoveredTest() {
         Set<Bean<?>> beans = beanManager.getBeans(NotDiscoveredBean.class);
         assertEquals(beans.size(), 0);
     }
 
     @Test
-    @SpecAssertion(id = "b", section = DEFAULT_BEAN_DISCOVERY_MODE)
+    @SpecAssertion(id = "b", section = DEFAULT_BEAN_DISCOVERY)
     public void producerMethodNotDiscovered() {
         assertEquals(TestExtension.processProducerMethodCounter.get(), 0);
     }
 
     @Test
-    @SpecAssertion(id = "c", section = DEFAULT_BEAN_DISCOVERY_MODE)
+    @SpecAssertion(id = "c", section = DEFAULT_BEAN_DISCOVERY)
     public void producerFieldNotDiscovered() {
         assertEquals(TestExtension.processProducerFieldCounter.get(), 0);
     }
 
     @Test
-    @SpecAssertion(id = "d", section = DEFAULT_BEAN_DISCOVERY_MODE)
+    @SpecAssertion(id = "d", section = DEFAULT_BEAN_DISCOVERY)
     public void disposerMethodNotDiscovered() {
         assertNull(TestExtension.disposerParam);
         assertFalse(NotDiscoveredBean.disposerCalled);
     }
 
     @Test
-    @SpecAssertion(id = "e", section = DEFAULT_BEAN_DISCOVERY_MODE)
+    @SpecAssertion(id = "e", section = DEFAULT_BEAN_DISCOVERY)
     public void observerMethodNotDiscovered() {
         Set<ObserverMethod<? super ProducedBean>> observerMethods = beanManager.resolveObserverMethods(new ProducedBean());
         assertEquals(observerMethods.size(), 0);
