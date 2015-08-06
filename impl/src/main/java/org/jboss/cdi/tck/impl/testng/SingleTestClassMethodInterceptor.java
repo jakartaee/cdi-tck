@@ -31,6 +31,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.jboss.cdi.tck.api.InSequence;
 import org.testng.IMethodInstance;
 import org.testng.IMethodInterceptor;
 import org.testng.ITestContext;
@@ -53,6 +54,15 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
         @Override
         public int compare(IMethodInstance o1, IMethodInstance o2) {
             int result = o1.getMethod().getTestClass().getName().compareTo(o2.getMethod().getTestClass().getName());
+
+            if (result == 0) {
+                InSequence inSequence1 = o1.getMethod().getConstructorOrMethod().getMethod().getAnnotation(InSequence.class);
+                int o1Priority = inSequence1 != null ? inSequence1.value() : 0;
+
+                InSequence inSequence2 = o2.getMethod().getConstructorOrMethod().getMethod().getAnnotation(InSequence.class);
+                int o2Priority = inSequence2 != null ? inSequence2.value() : 0;
+                return Integer.compare(o2Priority, o1Priority);
+            }
             return result;
         }
     }
@@ -112,7 +122,8 @@ public class SingleTestClassMethodInterceptor implements IMethodInterceptor {
         }
 
         Collections.sort(methodsToRun, new MethodComparator());
-        logger.log(Level.INFO, "tckTest set to {0} [methods: {1}, time: {2} ms]", new Object[] { testClass, methodsToRun.size(), System.currentTimeMillis() - start });
+        logger.log(Level.INFO, "tckTest set to {0} [methods: {1}, time: {2} ms]",
+                new Object[] { testClass, methodsToRun.size(), System.currentTimeMillis() - start });
         return methodsToRun;
     }
 }

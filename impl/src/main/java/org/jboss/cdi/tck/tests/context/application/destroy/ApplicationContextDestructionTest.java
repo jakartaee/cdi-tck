@@ -30,6 +30,7 @@ import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.api.InSequence;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.SimpleLogger;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -75,6 +76,7 @@ public class ApplicationContextDestructionTest extends AbstractTest {
      * @see #testApplicationContextDestroyed(URL, URL)
      */
     @Test
+    @InSequence(1)
     public void deployArchives() {
         // In order to use @ArquillianResource URLs we need to deploy both test archives first
         deployer.deploy(FOO);
@@ -88,7 +90,7 @@ public class ApplicationContextDestructionTest extends AbstractTest {
      * @param barContext
      * @throws Exception
      */
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = APPLICATION_CONTEXT, id = "f")
     public void testApplicationContextDestroyed(@ArquillianResource @OperateOnDeployment(FOO) URL fooContext,
             @ArquillianResource @OperateOnDeployment(BAR) URL barContext) throws Exception {

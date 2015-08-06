@@ -38,6 +38,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.api.InSequence;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
@@ -86,6 +87,7 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
      * @see #testShutdown()
      */
     @Test
+    @InSequence(1)
     public void deployArchives() {
         // In order to use @ArquillianResource URLs we need to deploy both test archives first
         deployer.deploy(FOO);
@@ -97,7 +99,7 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
      * 
      * @throws Exception
      */
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = SHUTDOWN, id = "a"), @SpecAssertion(section = SHUTDOWN, id = "b"),
             @SpecAssertion(section = REQUEST_CONTEXT, id = "ja"), @SpecAssertion(section = APPLICATION_CONTEXT, id = "ga"),
             @SpecAssertion(section = BS, id = "a") })
