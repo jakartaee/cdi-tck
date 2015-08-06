@@ -30,6 +30,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.api.InSequence;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.SimpleLogger;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -79,6 +80,7 @@ public class SessionContextListenerShutdownTest extends AbstractTest {
      * @see #testApplicationContextDestroyed(URL, URL)
      */
     @Test(groups = INTEGRATION)
+    @InSequence(1)
     public void deployArchives() {
         // In order to use @ArquillianResource URLs we need to deploy both test archives first
         deployer.deploy(ALPHA_DEPLOYMENT_NAME);
@@ -92,7 +94,7 @@ public class SessionContextListenerShutdownTest extends AbstractTest {
      * @param bravoContext
      * @throws Exception
      */
-    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER, dependsOnMethods = "deployArchives")
+    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ac")
     public void testApplicationContextDestroyed(@ArquillianResource @OperateOnDeployment(ALPHA_DEPLOYMENT_NAME) URL alphaContext,
             @ArquillianResource @OperateOnDeployment(BRAVO_ARCHIVE_NAME) URL bravoContext) throws Exception {
