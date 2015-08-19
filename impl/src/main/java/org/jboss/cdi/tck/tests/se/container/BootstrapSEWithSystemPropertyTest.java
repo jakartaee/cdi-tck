@@ -45,7 +45,7 @@ public class BootstrapSEWithSystemPropertyTest extends Arquillian {
         final JavaArchive implicitArchive = ShrinkWrap.create(JavaArchive.class).addClass(Bar.class);
         Properties properties = new Properties();
         properties.put("javax.enterprise.inject.scan.implicit", "true");
-        return ClassPath.builder().add(testArchive, implicitArchive).addSystemProperties(properties).build();
+        return ClassPath.builder().add(testArchive, implicitArchive).setSystemProperties(properties).build();
     }
 
     @Test
