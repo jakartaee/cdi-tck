@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.jms;
 
 import javax.annotation.PostConstruct;
+import javax.interceptor.AroundConstruct;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -28,10 +29,17 @@ public class MissileInterceptor {
     public static boolean methodIntercepted = false;
 
     public static boolean lifecycleCallbackIntercepted = false;
-
+    public static boolean aroundConstructInterceptorCalled = false;
+    
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
         methodIntercepted = true;
+        return ctx.proceed();
+    }
+    
+    @AroundConstruct
+    public Object aroundConstruct(InvocationContext ctx) throws Exception {
+        aroundConstructInterceptorCalled = true;
         return ctx.proceed();
     }
 
@@ -50,6 +58,7 @@ public class MissileInterceptor {
     public static void reset() {
         methodIntercepted = false;
         lifecycleCallbackIntercepted = false;
+        aroundConstructInterceptorCalled = false;
     }
 
 }

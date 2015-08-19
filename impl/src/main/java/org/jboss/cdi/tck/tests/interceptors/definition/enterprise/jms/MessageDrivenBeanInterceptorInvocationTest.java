@@ -92,6 +92,7 @@ public class MessageDrivenBeanInterceptorInvocationTest extends AbstractTest {
         assertTrue(MessageDrivenMissile.messageAccepted);
         assertTrue(MissileInterceptor.methodIntercepted);
         assertTrue(MissileInterceptor.lifecycleCallbackIntercepted);
+        assertTrue(MissileInterceptor.aroundConstructInterceptorCalled);
     }
 
 }
