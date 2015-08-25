@@ -8703,7 +8703,7 @@
         <assertion id="a" implied="true">
             <text>A stereotype may declare an |@Alternative| annotation, which specifies that every bean with the stereotype is an alternative.</text>
         </assertion>
-        
+
         <group>
             <text>An alternative may be given a priority for the application by placing the |@Priority| annotation on the bean class of a session bean.</text>
             <assertion id="ab">
@@ -9946,6 +9946,10 @@
     <section id="provider_ee" title="Obtaining a reference to the CDI container in Java EE" level="3">
         <assertion id="d">
             <text>Java EE components may obtain an instance of |BeanManager| from JNDI by looking up the name |java:comp/BeanManager|.</text>
+        </assertion>
+
+        <assertion id="e">
+            <text>When running in Java EE, when initialize method of CDIProvider is called an UnsupportedOperationException is thrown.</text>
         </assertion>
 
     </section>

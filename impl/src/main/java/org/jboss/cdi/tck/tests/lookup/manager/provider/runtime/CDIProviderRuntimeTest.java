@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.lookup.manager.provider.runtime;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
+import static org.jboss.cdi.tck.cdi.Sections.PROVIDER_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -91,6 +92,12 @@ public class CDIProviderRuntimeTest extends AbstractTest {
         Bravo bravo = bravoMarker.lookupBravo();
         assertNotNull(bravo);
         assertTrue(bravo.ping());
+    }
+    
+    @Test(expectedExceptions = UnsupportedOperationException.class)
+    @SpecAssertion(section = PROVIDER_EE, id = "e")
+    public void testCDIProviderInitializeThrowUnsupportedOperationException(){
+       CDI.getCDIProvider().initialize();
     }
 
 }
