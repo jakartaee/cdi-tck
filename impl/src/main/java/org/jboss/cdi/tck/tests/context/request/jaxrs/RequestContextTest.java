@@ -54,7 +54,7 @@ public class RequestContextTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION, JAX_RS})
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "c"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "d"),
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "b"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "d"),
             @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jb") })
     public void testRequestScopeActiveDuringWebServiceInvocation() throws Exception {
 

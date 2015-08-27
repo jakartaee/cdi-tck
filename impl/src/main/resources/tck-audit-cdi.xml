@@ -9149,8 +9149,12 @@
             </assertion>
         </group>
 
-        <assertion id="c">
+        <assertion id="b">
             <text>The request scope is active during any Java EE web service invocation.</text>
+        </assertion>
+
+        <assertion id="c">
+            <text>The request scope is active during any asynchronous invocation of an event observer,.</text>
         </assertion>
 
         <group>

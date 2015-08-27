@@ -123,7 +123,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = STATELESS_LIFECYCLE, id = "bc"), @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "dba") })
+    @SpecAssertions({ @SpecAssertion(section = STATELESS_LIFECYCLE, id = "c"), @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "dba") })
     public void testRemovedEjbIgnored() {
         KleinStadt stadtInstance = getContextualReference(KleinStadt.class, new AnnotationLiteral<Important>() {
         });

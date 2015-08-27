@@ -20,7 +20,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.ObservesAsync;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
@@ -33,6 +35,11 @@ public class AsyncMessageObserver {
 
     @Inject
     Counter counter;
+    
+    @Inject
+    BeanManager bm;
+    
+    public static AtomicBoolean requestScopeActive = new AtomicBoolean(false);
 
     public static AtomicInteger status = new AtomicInteger();
     public static AtomicBoolean counterIsZero = new AtomicBoolean();
@@ -43,6 +50,7 @@ public class AsyncMessageObserver {
     }
 
     public void observe(@ObservesAsync String text) throws SystemException {
+        requestScopeActive.set(bm.getContext(RequestScoped.class).isActive());
         counterIsZero.set(counter.getCount().get() > 0 ? false : true);
 
     }

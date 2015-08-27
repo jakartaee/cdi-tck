@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.event.observer.context.async;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_INVOCATION_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -31,6 +32,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -65,12 +67,12 @@ public class AsyncObserverMethodInvocationContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "aa")
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "aa"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "c") })
     public void testAsyncObserverIsCalledInNewRequestContext() throws Exception {
         counter.increment();
         stringEvent.fireAsync(new String()).toCompletableFuture().get();
+        assertTrue(AsyncMessageObserver.requestScopeActive.get());
         assertTrue(AsyncMessageObserver.counterIsZero.get());
-
     }
 
 }

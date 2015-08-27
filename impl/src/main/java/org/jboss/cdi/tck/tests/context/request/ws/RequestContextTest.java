@@ -66,7 +66,7 @@ public class RequestContextTest extends AbstractTest {
     }
 
     @Test(groups = { JAVAEE_FULL, JAX_WS })
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "c"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "d"),
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "b"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "d"),
             @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "b") })
     public void testRequestScopeActiveDuringWebServiceInvocation() throws Exception {
 
