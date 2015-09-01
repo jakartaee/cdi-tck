@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.registration;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -35,9 +36,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
  * @author Tomas Remes
- * 
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class BeanRegistrationByExtensionInEarLibraryTest extends AbstractTest {
@@ -61,13 +60,13 @@ public class BeanRegistrationByExtensionInEarLibraryTest extends AbstractTest {
         return enterpriseArchive;
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = { INTEGRATION, JAVAEE_FULL })
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "n") })
     public void shouldFindBeanReference() {
         assertNotNull(bean);
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = { INTEGRATION, JAVAEE_FULL })
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "n") })
     public void shouldRegisterExtensions() {
         assertTrue(EarExtensionsCheck.extensionInEjbJarRegistered);
