@@ -43,7 +43,7 @@ public class InvalidEventMetadataInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = EVENT_METADATA, id = "e")
+    @SpecAssertion(section = EVENT_METADATA, id = "f")
     public void testDeployment() {
     }
 

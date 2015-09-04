@@ -5186,6 +5186,10 @@
                 <text>Test with a wildcard.</text>
             </assertion>
         </group>
+        
+        <assertion id="e">
+            <text>Modifications made to the event parameter in an observer method are propagated to following observers.</text>
+        </assertion>
 
     </section>
 
@@ -5257,15 +5261,18 @@
             <assertion id="c">
                 <text>|getType()| returns the type representing runtime class of the event object with type variables resolved.</text>
             </assertion>
+            <assertion id="d">
+                    <text>|isAsync()| returns true if the event was fired with fireAsync() or fireAsyncEvent() methods otherwise returns false.</text>
+            </assertion>
         </group>
 
-        <assertion id="d">
+        <assertion id="e">
             <text>The container must provide a bean with scope |@Dependent|, bean type |EventMetadata| and qualifier |@Default|, allowing observer methods to
                 obtain information about the events they observe.
             </text>
         </assertion>
 
-        <assertion id="e">
+        <assertion id="f">
             <text>If an injection point of type |EventMetadata| and qualifier |@Default| which is not a parameter of an observer method exists, the container
                 automatically detects the problem and treats it as a definition error.
             </text>
@@ -5402,11 +5409,11 @@
 
     <section id="async_exception" title="Handling multiple exceptions thrown during an asynchronous event" level="3">
         <assertion id="a">
-            <text>If an event is asynchronous, and one or more exception occurred in notified observers, the container must throw a FireAsyncException</text>
+            <text>If an event is asynchronous, and one or more exception occurred in notified observers, the CompletionStage returned by fireAsync will complete exceptionally with FireAsyncException exception.</text>
         </assertion>
 
         <assertion id="b">
-            <text>FireAsyncException contains all suppressed exception launch by observers. They can be accessed as an array of throwable with the getSuppressed
+            <text>FireAsyncException contains all exceptions thrown by observers as suppressed exceptions. They can be accessed as an array of throwable with the getSuppressed
                 method.
             </text>
         </assertion>
@@ -5619,6 +5626,10 @@
 
         <assertion id="f">
             <text>|notify()| calls the observer method, as defined in Section 5.5.6 "Invocation of observer methods".</text>
+        </assertion>
+        
+        <assertion id="g">
+            <text>|isAsync()| returns true if the method is an asynchronous observer method otherwise returns false</text>
         </assertion>
 
         <assertion id="ga">

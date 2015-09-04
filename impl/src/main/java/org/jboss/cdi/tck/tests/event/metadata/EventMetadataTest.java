@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -57,28 +58,28 @@ public class EventMetadataTest extends AbstractTest {
     @SuppressWarnings("unchecked")
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = EVENT_METADATA, id = "a"), @SpecAssertion(section = EVENT_METADATA, id = "b"),
-            @SpecAssertion(section = EVENT_METADATA, id = "c"), @SpecAssertion(section = EVENT_METADATA, id = "d") })
+            @SpecAssertion(section = EVENT_METADATA, id = "c"), @SpecAssertion(section = EVENT_METADATA, id = "e") })
     public void testSimpleEvent(SimpleEventNotifier notifier, SimpleEventObserver observer) {
 
         assertNotNull(notifier);
         assertNotNull(observer);
 
         notifier.fireSimpleEvent();
-        verifyMetadata(observer.getMetadata(), true, SimpleEvent.class, Any.class);
+        verifyMetadata(observer.getSyncMetadata(), true, SimpleEvent.class, Any.class);
 
         notifier.fireSimpleEventBeanManager();
-        verifyMetadata(observer.getMetadata(), false, SimpleEvent.class, Any.class);
+        verifyMetadata(observer.getSyncMetadata(), false, SimpleEvent.class, Any.class);
 
         notifier.fireSimpleEventWithQualifiers();
-        verifyMetadata(observer.getMetadata(), true, SimpleEvent.class, Alpha.class, Bravo.class, Any.class);
+        verifyMetadata(observer.getSyncMetadata(), true, SimpleEvent.class, Alpha.class, Bravo.class, Any.class);
 
         notifier.fireSimpleEventBeanManagerWithQualifiers();
-        verifyMetadata(observer.getMetadata(), false, SimpleEvent.class, Charlie.class, Any.class);
+        verifyMetadata(observer.getSyncMetadata(), false, SimpleEvent.class, Charlie.class, Any.class);
     }
 
     @SuppressWarnings({ "serial", "unchecked" })
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({})
+    @SpecAssertion(section = EVENT_METADATA, id = "c")
     public void testParameterizedResolvedType(DuckNotifier notifier, DuckObserver observer) {
 
         assertNotNull(notifier);
@@ -95,6 +96,15 @@ public class EventMetadataTest extends AbstractTest {
         notifier.fireListDuck();
         verifyMetadata(observer.getMetadata(), true, new TypeLiteral<ArrayList<Duck<Number>>>() {
         }.getType(), Any.class);
+    }
+
+    @SpecAssertion(section = EVENT_METADATA, id = "d")
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    public void testAsyncEvent(SimpleEventNotifier notifier, SimpleEventObserver observer) throws InterruptedException {
+        notifier.fireAsyncEvent();
+        assertNotNull(notifier.getDeliveredAsyncEvent());
+        assertNotNull(observer.getAsyncMetadata());
+        assertTrue(observer.getAsyncMetadata().isAsync());
     }
 
     private void verifyMetadata(EventMetadata metadata, boolean isInjectionPointAvailable, Type resolvedType,
