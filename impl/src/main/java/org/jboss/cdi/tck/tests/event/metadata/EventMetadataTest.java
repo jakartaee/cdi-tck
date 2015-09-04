@@ -78,7 +78,7 @@ public class EventMetadataTest extends AbstractTest {
 
     @SuppressWarnings({ "serial", "unchecked" })
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({})
+    @SpecAssertion(section = EVENT_METADATA, id = "c")
     public void testParameterizedResolvedType(DuckNotifier notifier, DuckObserver observer) {
 
         assertNotNull(notifier);
