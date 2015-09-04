@@ -55,8 +55,8 @@
                 </methods>
             </class>
 
-            <!-- CDITCK-499 -->
-            <class name="org.jboss.cdi.tck.tests.context.application.event.ApplicationScopeEventMultiWarTest">
+            <!-- CDITCK-505 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.registration.BeanRegistrationByExtensionInEarLibraryTest">
                 <methods>
                     <exclude name=".*"/>
                 </methods>
