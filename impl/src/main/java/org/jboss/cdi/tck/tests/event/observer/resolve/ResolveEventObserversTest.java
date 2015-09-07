@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBSERVER_METHOD_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.EVENT_QUALIFIER_TYPES_WITH_MEMBERS;
 import static org.jboss.cdi.tck.cdi.Sections.MULTIPLE_EVENT_QUALIFIERS;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_EVENT_PARAMETER;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
@@ -154,7 +155,7 @@ public class ResolveEventObserversTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = OBSERVES, id = "ac")
+    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "ac"), @SpecAssertion(section = OBSERVER_METHOD, id = "g") })
     public void testAsyncObserver() {
         Set<ObserverMethod<? super User>> userObservers = getCurrentManager().resolveObserverMethods(new User());
         assertEquals(userObservers.size(), 1);
