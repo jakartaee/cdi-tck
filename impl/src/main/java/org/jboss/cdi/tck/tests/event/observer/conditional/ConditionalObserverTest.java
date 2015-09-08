@@ -21,13 +21,19 @@ import static org.jboss.cdi.tck.cdi.Sections.CONDITIONAL_OBSERVER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVERS_METHOD_INVOCATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.context.spi.Context;
+import javax.enterprise.event.Event;
 import javax.enterprise.event.Reception;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -40,6 +46,9 @@ import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class ConditionalObserverTest extends AbstractTest {
+
+    @Inject
+    Event<AsyncConditionalEvent> asyncConditionalEventEvent;
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -109,6 +118,26 @@ public class ConditionalObserverTest extends AbstractTest {
         // Context is active now
         getCurrentManager().fireEvent(new TarantulaEvent());
         assertTrue(Tarantula.isNotified());
+    }
+
+    @Test
+    @SpecAssertion(section = CONDITIONAL_OBSERVER_METHODS, id = "a")
+    public void testAsyncConditionalObserver() throws InterruptedException {
+        BlockingQueue<AsyncConditionalEvent> queue = new LinkedBlockingQueue<>();
+        asyncConditionalEventEvent.fireAsync(new AsyncConditionalEvent()).thenAccept(queue::offer);
+        AsyncConditionalEvent event = queue.poll(2, TimeUnit.SECONDS);
+        assertFalse(AsyncConditionalObserver.isSyncNotified());
+        assertFalse(AsyncConditionalObserver.IsNotified().get());
+        
+        AsyncConditionalObserver observer = getContextualReference(AsyncConditionalObserver.class);
+        assertNotNull(observer);
+        observer.ping();
+        
+        asyncConditionalEventEvent.fireAsync(new AsyncConditionalEvent()).thenAccept(queue::offer);
+        event = queue.poll(2, TimeUnit.SECONDS);
+        assertTrue(AsyncConditionalObserver.IsNotified().get());
+        assertTrue(AsyncConditionalObserver.isSyncNotified());
+
     }
 
 }
