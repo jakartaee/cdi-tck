@@ -18,13 +18,11 @@
 package org.jboss.cdi.tck.tests.extensions.observer.priority;
 
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
-import static org.testng.Assert.assertEquals;
-
-import java.util.List;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -32,26 +30,24 @@ import org.testng.annotations.Test;
 
 /**
  * Tests for the extensions provided by the ProcessObserverMethod events.
- * 
+ *
  * @author Mark Paluch
+ * @author Tomas Remes
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class ExtensionObserverOrderingTest extends AbstractTest {
+    
+    private final static String[] numbers = new String[] { "1", "2", "3", "4", "5", "6", "7" };
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ExtensionObserverOrderingTest.class)
-                .withExtension(PrioritizedExtensionEvents.class).build();
+                .withExtensions(TestExtension01.class, TestExtension02.class, TestExtension03.class).build();
     }
-    
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = INIT_EVENTS, id = "e")
-    public void testEventOrdering(PrioritizedExtensionEvents prioritizedExtensionEvents) {
-        List<String> notificationOrder = prioritizedExtensionEvents.getNotificationOrder();
 
-        assertEquals(notificationOrder.size(), 3);
-        assertEquals(notificationOrder.get(0), PrioritizedExtensionEvents.EARLY);
-        assertEquals(notificationOrder.get(1), PrioritizedExtensionEvents.MIDDLE);
-        assertEquals(notificationOrder.get(2), PrioritizedExtensionEvents.LATE);
+    @Test
+    @SpecAssertion(section = INIT_EVENTS, id = "e")
+    public void testEventOrdering() {
+        ActionSequence.assertSequenceDataEquals(numbers);
     }
 }

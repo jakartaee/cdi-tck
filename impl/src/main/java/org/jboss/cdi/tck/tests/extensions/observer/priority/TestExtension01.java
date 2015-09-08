@@ -17,40 +17,25 @@
 
 package org.jboss.cdi.tck.tests.extensions.observer.priority;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBean;
 import javax.interceptor.Interceptor;
 
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.weld.experimental.Priority;
 
-/**
- * @author Mark Paluch
- */
-public class PrioritizedExtensionEvents implements Extension {
-
-    public static final String EARLY = "processBeanEarly";
-    public static final String MIDDLE = "processBeanSomewhereInTheMiddle";
-    public static final String LATE = "processBeanLate";
-
-    private List<String> notificationOrder = new ArrayList<String>();
+public class TestExtension01 implements Extension {
 
     void processBeanEarly(@Observes @Priority(Interceptor.Priority.LIBRARY_BEFORE) ProcessBean<TestBean> processBean) {
-        notificationOrder.add(EARLY);
+        ActionSequence.addAction("1");
     }
 
     void processBeanSomewhereInTheMiddle(@Observes ProcessBean<TestBean> processBean) {
-        notificationOrder.add(MIDDLE);
+        ActionSequence.addAction("4");
     }
 
     void processBeanLate(@Observes @Priority(Interceptor.Priority.LIBRARY_AFTER) ProcessBean<TestBean> processBean) {
-        notificationOrder.add(LATE);
-    }
-
-    public List<String> getNotificationOrder() {
-        return notificationOrder;
+        ActionSequence.addAction("7");
     }
 }
