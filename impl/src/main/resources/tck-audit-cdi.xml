@@ -5186,7 +5186,7 @@
                 <text>Test with a wildcard.</text>
             </assertion>
         </group>
-        
+
         <assertion id="e">
             <text>Modifications made to the event parameter in an observer method are propagated to following observers.</text>
         </assertion>
@@ -5262,7 +5262,7 @@
                 <text>|getType()| returns the type representing runtime class of the event object with type variables resolved.</text>
             </assertion>
             <assertion id="d">
-                    <text>|isAsync()| returns true if the event was fired with fireAsync() or fireAsyncEvent() methods otherwise returns false.</text>
+                <text>|isAsync()| returns true if the event was fired with fireAsync() or fireAsyncEvent() methods otherwise returns false.</text>
             </assertion>
         </group>
 
@@ -5409,11 +5409,14 @@
 
     <section id="async_exception" title="Handling multiple exceptions thrown during an asynchronous event" level="3">
         <assertion id="a">
-            <text>If an event is asynchronous, and one or more exception occurred in notified observers, the CompletionStage returned by fireAsync will complete exceptionally with FireAsyncException exception.</text>
+            <text>If an event is asynchronous, and one or more exception occurred in notified observers, the CompletionStage returned by fireAsync will complete
+                exceptionally with FireAsyncException exception.
+            </text>
         </assertion>
 
         <assertion id="b">
-            <text>FireAsyncException contains all exceptions thrown by observers as suppressed exceptions. They can be accessed as an array of throwable with the getSuppressed
+            <text>FireAsyncException contains all exceptions thrown by observers as suppressed exceptions. They can be accessed as an array of throwable with
+                the getSuppressed
                 method.
             </text>
         </assertion>
@@ -5627,7 +5630,7 @@
         <assertion id="f">
             <text>|notify()| calls the observer method, as defined in Section 5.5.6 "Invocation of observer methods".</text>
         </assertion>
-        
+
         <assertion id="g">
             <text>|isAsync()| returns true if the method is an asynchronous observer method otherwise returns false</text>
         </assertion>
@@ -7916,6 +7919,11 @@
     </section>
 
     <section id="builtin_scopes_ee" title="Built-in scope types in Java EE" level="3">
+        <assertion id="a" testable="false">
+            <text>When running in Java EE, the implementations of the @RequestScoped, @ApplicationScoped and @SessionScoped annotations provided by the
+                container, represent the standard scopes defined by the Java Servlets specification.
+            </text>
+        </assertion>
     </section>
 
     <section id="default_bean_discovery_ee" title="Default bean discovery mode for Java EE" level="2">
@@ -7947,7 +7955,13 @@
         </assertion>
     </section>
 
-    <section id="default_name_ee" title="Default bean names for EJB session beans" level="3"></section>
+    <section id="default_name_ee" title="Default bean names for EJB session beans" level="3">
+        <assertion id="a" testable="false">
+            <text>In the circumstances listed in 2.6.2 "Default bean names", the rule for determining default name for an EJB session bean are defined in 17.2.5 "Default bean
+                name for a session bean".
+            </text>
+        </assertion>
+    </section>
 
     <section id="implementation_ee" title="Addition to programming model for Java EE" level="1">
     </section>
@@ -8757,6 +8771,11 @@
     </section>
 
     <section id="name_resolution_ee" title="EL name resolution" level="2">
+        <assertion id="a">
+            <text>An EL name resolves to a bean if the name can be resolved to a bean according to rules in 5.3, "Name resolution", and the bean is available
+                for injection in the war containing the JSP or JSF page with the EL expression.
+            </text>
+        </assertion>
 
     </section>
 
@@ -9884,14 +9903,21 @@
     </section>
 
     <section id="interceptor_resolution_ee" title="Interceptor resolution in Java EE" level="2">
-
+        <assertion id="a">
+            <text>For a custom implementation of the Interceptor interface defined in Section 11.1.2. "The Interceptor interface", the container also calls
+                intercepts() to
+                determine if the interceptor intercepts an EJB timeout method invocation.
+            </text>
+        </assertion>
     </section>
 
     <section id="events_ee" title="Events in Java EE" level="1"></section>
 
     <section id="observer_methods_ee" title="Observer methods in EJB session beans" level="2">
         <assertion id="d">
-            <text>If the bean is a session bean, the observer method must be either a business method of the EJB or a static method of the bean class.</text>
+            <text>An observer method may also be a non-abstract method of an EJB session bean class. It must be either a business method of the EJB or a static
+                method of the bean class.
+            </text>
         </assertion>
 
     </section>
@@ -9927,7 +9953,8 @@
 
     <section id="interceptor_ee" title="The Interceptor interface in Java EE" level="3">
         <assertion id="a">
-            <text>When Running in Java EE, the container must extend the rules defined in The Interceptor interface and must also ensure that PRE_PASSIVATE,
+            <text>When Running in Java EE, the container must extend the rules defined in Section 11.1.2 "The Interceptor interface" and must also ensure that
+                PRE_PASSIVATE,
                 POST_ACTIVATE and AROUND_TIMEOUT InterceptorType values are linked to EJB lifecycle callback or timeout method.
             </text>
         </assertion>
@@ -10400,7 +10427,7 @@
     <section id="el" title="Integration with Unified EL" level="3">
         <assertion id="a">
             <text>The container must provide a Unified EL |ELResolver| to the servlet engine and JSF implementation that resolves bean EL names using the rules
-                of name resolution defined in 5.3, "EL name resolution" and resolving ambiguities according to Section 5.3.1, "Ambiguous EL names".
+                of name resolution defined in 5.3, "Name resolution" and resolving ambiguities according to Section 5.3.1, "Ambiguous names".
             </text>
         </assertion>
 

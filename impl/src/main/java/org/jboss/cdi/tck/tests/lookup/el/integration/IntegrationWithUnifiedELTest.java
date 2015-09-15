@@ -18,7 +18,9 @@ package org.jboss.cdi.tck.tests.lookup.el.integration;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.EL;
+import static org.jboss.cdi.tck.cdi.Sections.NAMES_EE;
 import static org.jboss.cdi.tck.cdi.Sections.NAME_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.NAME_RESOLUTION_EE;
 
 import java.net.URL;
 
@@ -49,7 +51,8 @@ public class IntegrationWithUnifiedELTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = EL, id = "a"), @SpecAssertion(section = NAME_RESOLUTION, id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = EL, id = "a"), @SpecAssertion(section = NAME_RESOLUTION, id = "d"),
+            @SpecAssertion(section = NAME_RESOLUTION_EE, id = "a"), @SpecAssertion(section = NAMES_EE, id = "a") })
     public void testELResolverRegisteredWithJsf() throws Exception {
         WebClient webclient = new WebClient();
         String content = webclient.getPage(contextPath + "JSFTestPage.jsf").getWebResponse().getContentAsString();
@@ -57,7 +60,8 @@ public class IntegrationWithUnifiedELTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = EL, id = "a"), @SpecAssertion(section = NAME_RESOLUTION, id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = EL, id = "a"), @SpecAssertion(section = NAME_RESOLUTION, id = "d"),
+            @SpecAssertion(section = NAME_RESOLUTION_EE, id = "a"), @SpecAssertion(section = NAMES_EE, id = "a") })
     public void testELResolverRegisteredWithServletContainer() throws Exception {
         WebClient webclient = new WebClient();
         String content = webclient.getPage(contextPath + "JSPTestPage.jsp").getWebResponse().getContentAsString();

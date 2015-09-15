@@ -24,6 +24,7 @@ import static javax.enterprise.inject.spi.InterceptionType.PRE_DESTROY;
 import static javax.enterprise.inject.spi.InterceptionType.PRE_PASSIVATE;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION_EE;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -93,7 +94,8 @@ public class CustomInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cf"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd") })
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTOR_RESOLUTION, id = "cf"), @SpecAssertion(section = INTERCEPTOR_RESOLUTION_EE, id = "a"),
+            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd") })
     // WELD-238
     public void testCustomAroundTimeoutInterceptor() {
         assert !getCurrentManager().resolveInterceptors(AROUND_TIMEOUT, new SecureLiteral(), new TransactionalLiteral())
