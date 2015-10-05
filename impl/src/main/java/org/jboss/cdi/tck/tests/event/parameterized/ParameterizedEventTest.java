@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.event.parameterized;
 
 import static org.jboss.cdi.tck.cdi.Sections.EVENT;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVERS_ASSIGNABILITY;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -43,14 +44,13 @@ import org.testng.annotations.Test;
 /**
  * Test that verifies that the container uses the runtime type of the event object as the event type. If the event type contains
  * an unresolved type variable the selected type is used to resolve it.
- * 
- * <p>
+ * <p/>
+ * <p/>
  * This test was originally part of the Weld test suite.
- * <p>
- * 
+ * <p/>
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
- * 
  * @see WELD-1272
  * @see CDI-256
  */
@@ -81,7 +81,7 @@ public class ParameterizedEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = EVENT, id = "edb") })
+    @SpecAssertions({ @SpecAssertion(section = EVENT, id = "edb"), @SpecAssertion(section = OBSERVES, id = "a") })
     public void testSelectedEventTypeUsedForResolvingEventTypeArguments() {
         reset();
         // Event types: Bar<T>, Foo<T>, Fooable<T>
@@ -104,7 +104,7 @@ public class ParameterizedEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = EVENT, id = "edb") })
+    @SpecAssertions({ @SpecAssertion(section = EVENT, id = "edb"), @SpecAssertion(section = OBSERVES, id = "a") })
     public void testSelectedEventTypeUsedForResolvingEventTypeArguments2() {
         reset();
         @SuppressWarnings("serial")
@@ -130,7 +130,7 @@ public class ParameterizedEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = EVENT, id = "edb") })
+    @SpecAssertions({ @SpecAssertion(section = EVENT, id = "edb"), @SpecAssertion(section = OBSERVES, id = "a") })
     public void testSelectedEventTypeCombinedWithEventObjectRuntimeTypeForResolvingEventTypeArguments() {
         reset();
         @SuppressWarnings("serial")
