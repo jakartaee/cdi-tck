@@ -59,7 +59,8 @@ public class EventTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "i"), @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "c"),
-            @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "ca"), @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a") })
+            @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "ca"),
+            @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a") })
     public void testObserverMethodParameterInjectionPoints() {
         TerrierObserver.reset();
         getCurrentManager().fireEvent(new BullTerrier());
@@ -89,6 +90,14 @@ public class EventTest extends AbstractTest {
         } finally {
             getCurrentConfiguration().getContexts().setActive(requestContext);
         }
+    }
+
+    @Test
+    @SpecAssertion(section = OBSERVES, id = "a")
+    public void testPrivateObserverMethodInvoked() {
+        PrivateObserver.reset();
+        getCurrentManager().fireEvent(new Delivery());
+        assertTrue(PrivateObserver.isObserved);
     }
 
     @Test
