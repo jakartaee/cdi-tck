@@ -83,14 +83,16 @@ public class WrongExtension implements Extension {
     }
 
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
+        testAvailableMethodsInABD(beanManager);
         testUnavailableMethodsBeforeADV(beanManager);
     }
 
     public void observerAfterDeploymentValidation(@Observes AfterDeploymentValidation event, BeanManager manager) {
-        testAvailableMethods(manager);
+        testAvailableMethodsInABD(manager);
+        testAvailableMethodsInADV(manager);
     }
 
-    @SuppressWarnings({"serial", "unchecked"})
+    @SuppressWarnings({ "serial", "unchecked" })
     private void testUnavailableMethodsBeforeABD(final BeanManager beanManager) {
 
         new Invocation() {
@@ -144,7 +146,7 @@ public class WrongExtension implements Extension {
 
     }
 
-    @SuppressWarnings({"serial", "unchecked"})
+    @SuppressWarnings({ "serial", "unchecked" })
     private void testUnavailableMethodsBeforeADV(final BeanManager beanManager) {
 
         // if (fooBean != null) {
@@ -166,14 +168,10 @@ public class WrongExtension implements Extension {
         //}
     }
 
-    @SuppressWarnings({"unchecked", "serial"})
-    private void testAvailableMethods(BeanManager beanManager) {
-        beanManager.getReference(new FooBean(), Foo.class, beanManager.createCreationalContext(null));
+    @SuppressWarnings({ "unchecked", "serial" })
+    private void testAvailableMethodsInABD(BeanManager beanManager) {
         beanManager.getBeans("foo");
         beanManager.getBeans(Foo.class);
-        beanManager.getInjectableReference(
-                beanManager.createInjectionPoint(beanManager.createAnnotatedType(Foo.class).getFields().iterator().next()),
-                beanManager.createCreationalContext(null));
         beanManager.resolve(null);
         beanManager.resolveObserverMethods(new Foo());
         beanManager.resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>() {
@@ -181,6 +179,13 @@ public class WrongExtension implements Extension {
         beanManager.resolveDecorators(new HashSet<Type>(Arrays.asList(Foo.class)));
         beanManager.validate(injectionPoint);
         beanManager.getPassivationCapableBean("foo");
+    }
+
+    private void testAvailableMethodsInADV(BeanManager beanManager) {
+        beanManager.getReference(new FooBean(), Foo.class, beanManager.createCreationalContext(null));
+        beanManager.getInjectableReference(
+                beanManager.createInjectionPoint(beanManager.createAnnotatedType(Foo.class).getFields().iterator().next()),
+                beanManager.createCreationalContext(null));
     }
 
     private static class FooBean implements Bean<Foo> {
