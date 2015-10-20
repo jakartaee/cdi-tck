@@ -4977,11 +4977,6 @@
         <assertion id="g">
             <text>If the runtime type of the event object is assignable to the type of a container lifecycle event, |IllegalArgumentException| is thrown.</text>
         </assertion>
-
-        <assertion id="h">
-            <text>If the provided executor cannot execute observers notification, an IllegalArgumentException is thrown.</text>
-        </assertion>
-
     </section>
 
     <section id="builtin_event" title="The built-in Event" level="3">
