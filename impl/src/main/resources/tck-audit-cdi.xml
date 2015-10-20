@@ -178,7 +178,7 @@
         </assertion>
 
         <assertion id="ab">
-            <text>If a bean does not explicitly declare a qualifier other than |@Named|, the bean has exactly one additional qualifier, of type |@Default|. This
+            <text>If a bean does not explicitly declare a qualifier other than |@Named| or |@Any|, the bean has exactly one additional qualifier, of type |@Default|. This
                 is called the default qualifier.
             </text>
         </assertion>

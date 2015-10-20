@@ -14,12 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.definition.qualifier;
+package org.jboss.cdi.tck.tests.definition.qualifier.builtin;
 
-import javax.inject.Inject;
+public class OrderProcessor {
 
-public class Order {
-    @Inject
-    public Order(OrderProcessor processor) {
-    }
 }

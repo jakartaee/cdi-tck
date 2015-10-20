@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
-import static org.jboss.cdi.tck.cdi.Sections.BEAN;
-import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_QUALIFIERS;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_BEAN_QUALIFIERS;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_MANAGED_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.DEFINING_QUALIFIER_TYPES;
@@ -29,7 +27,6 @@ import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -48,24 +45,6 @@ public class QualifierDefinitionTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(QualifierDefinitionTest.class).build();
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "aa"), @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "ab") })
-    public void testDefaultQualifierDeclaredInJava() {
-        Bean<Order> order = getBeans(Order.class).iterator().next();
-        assert order.getQualifiers().size() == 2;
-        assert order.getQualifiers().contains(new DefaultLiteral());
-        assert order.getQualifiers().contains(AnyLiteral.INSTANCE);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "b"), @SpecAssertion(section = BEAN, id = "c") })
-    public void testDefaultQualifierForInjectionPoint() {
-        Bean<Order> order = getBeans(Order.class).iterator().next();
-        assert order.getInjectionPoints().size() == 1;
-        InjectionPoint injectionPoint = order.getInjectionPoints().iterator().next();
-        assert injectionPoint.getQualifiers().contains(new DefaultLiteral());
     }
 
     @Test
