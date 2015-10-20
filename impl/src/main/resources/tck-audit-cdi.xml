@@ -5455,11 +5455,6 @@
             <assertion id="ab">
                 <text>in a new transaction context.</text>
             </assertion>
-
-            <assertion id="ac" testable="false">
-                <text>in the same security context as the invocation of Event.fireAsync().</text>
-                <note>Tested in EE part.</note>
-            </assertion>
         </group>
 
         <assertion id="a">
@@ -9938,7 +9933,7 @@
         </assertion>
 
         <assertion id="b">
-            <text>If the observer method is asynchronous, it is called in the same security context as the invocation of Event.fireAsync().</text>
+            <text>All kinds of observers are called in the same client security context as the invocation of Event.fire() or Event.fireAsync() or BeanManager.fireEvent().</text>
         </assertion>
 
     </section>
