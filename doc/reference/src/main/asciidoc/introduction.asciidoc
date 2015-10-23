@@ -54,6 +54,188 @@ Java platform compatibility is important to different groups involved with Java 
 The CDI specification goes to great lengths to ensure that programs written for Java EE are compatible and the TCK is rigorous about enforcing the rules the specification lays down. 
 
 
+=== Compatibility Requirements
+
+The compatibility requirements for Contexts and Dependency Injection for Java Version 2.0 consist of meeting the
+requirements set forth by the rules and associated definitions contained in this section.
+
+==== Definitions
+
+These definitions are for use only with these compatibility requirements and are not
+intended for any other purpose.
+
+.Definitions
+[options="header"]
+|===============
+|Term|Definition
+|API Definition Product   +|
+                     A Product for which the only Java class files contained in the product
+                     are those corresponding to the application programming interfaces
+                     defined by the Specifications, and which is intended only as a means
+                     for formally specifying the application programming interfaces
+                     defined by the Specifications.
+|Computational Resource   +|
+                     A piece of hardware or software that may vary in quantity, existence,
+                     or version, which may be required to exist in a minimum quantity
+                     and/or at a specific or minimum revision level so as to satisfy the
+                     requirements of the Test Suite.
+                     Examples of computational resources that may vary in quantity are
+                     RAM and file descriptors.
+                     Examples of computational resources that may vary in existence (that
+                     is, may or may not exist) are graphics cards and device drivers.
+                     Examples of computational resources that may vary in version are
+                     operating systems and device drivers.
+|Conformance Tests   +|
+                     All tests in the Test Suite for an indicated Technology Under Test, as
+                     distributed by the Maintenance Lead, excluding those tests on the
+                     Exclude List for the Technology Under Test.
+|Documented   +|
+                     Made technically accessible and made known to users, typically by
+                     means such as marketing materials, product documentation, usage
+                     messages, or developer support programs.
+|Edition   +|
+                     A Version of the Java Platform. Editions include Java Platform
+                     Standard Edition and Java Platform Enterprise Edition.
+|Exclude List   +|
+                     The most current list of tests, distributed by the Maintenance Lead or TCK Lead,
+                     that are not required to be passed to certify conformance. The
+                     Maintenance Lead or TCK Lead may add to the Exclude List for that Test Suite as
+                     needed at any time, in which case the updated Exclude List supplants
+                     any previous Exclude Lists for that Test Suite.
+|Libraries   +|
+                     The class libraries, as specified through the Java Community Process
+                     (JCP), for the Technology Under Test.
+                     The Libraries for Contexts and Dependency Injection for Java Version 2.0 are listed in <<libraries>>.
+|Location Resource   +|
+                     A location of classes or native libraries that are components of the test
+                     tools or tests, such that these classes or libraries may be required to
+                     exist in a certain location in order to satisfy the requirements of the
+                     test suite.
+                     For example, classes may be required to exist in directories named in a
+                     CLASSPATH variable, or native libraries may be required to exist in
+                     directories named in a PATH variable.
+|Maintenance Lead   +|
+                     The Java Community Process member responsible for maintaining the
+                     Specification, reference implementation, and TCK for the Technology.
+                     Red Hat is the Maintenance Lead for Contexts and Dependency Injection for Java Version 2.0.
+|Operating Mode   +|
+                     Any Documented option of a Product that can be changed by a user in
+                     order to modify the behavior of the Product.
+                     For example, an Operating Mode can be binary (enable/disable
+                     optimization), an enumeration (select from a list of protocols), or a
+                     range (set the maximum number of active threads).
+                     Note that an Operating Mode may be selected by a command line
+                     switch, an environment variable, a GUI user interface element, a
+                     configuration or control file, etc.
+|Product   +|
+                     A licensee product in which the Technology Under Test is
+                     implemented or incorporated, and that is subject to compatibility
+                     testing.
+|Product Configuration   +|
+                     A specific setting or instantiation of an Operating Mode.
+                     For example, a Product supporting an Operating Mode that permits
+                     user selection of an external encryption package may have a Product
+                     Configuration that links the Product to that encryption package.
+|Reference Implementation (RI)   +|
+                     The prototype or "proof of concept" implementation of a Specification.
+|Resource   +|
+                     A Computational Resource, a Location Resource, or a Security
+                     Resource.
+|Rules   +|
+                     These definitions and rules in this Compatibility Requirements section
+                     of this User’s Guide.
+|Specifications   +|
+                     The documents produced through the Java Community Process that
+                     define a particular Version of a Technology.
+                     The Specifications for the Technology Under Test are referenced later
+                     in this chapter.
+|TCK Lead   +|
+                     Person responsible for maintaining TCK for the Technology. TCK Lead is deputy of Red Hat.
+|Technology   +|
+                     Specifications and a reference implementation produced through the
+                     Java Community Process.
+|Technology Under Test  +|
+                     Specifications and the reference implementation for Contexts and Dependency Injection for Java Version 2.0.
+|Test Suite   +|
+                     The requirements, tests, and testing tools distributed by the
+                     Maintenance Lead or TCK Lead as applicable to a given Version of the Technology.
+|Version  +|
+                     A release of the Technology, as produced through the Java
+                     Community Process.
+|===============
+
+==== Rules for Contexts and Dependency Injection for Java Version 2.0 Products
+
+The following rules apply for each version of an operating system, software
+component, and hardware platform Documented as supporting the Product:
+
+*CDI-1* The Product must be able to satisfy all applicable compatibility requirements,
+including passing all Conformance Tests, in every Product Configuration and in every
+combination of Product Configurations, except only as specifically exempted by these
+Rules.
+
+For example, if a Product provides distinct Operating Modes to optimize performance,
+then that Product must satisfy all applicable compatibility requirements for a Product
+in each Product Configuration, and combination of Product Configurations, of those
+Operating Modes.
+
+*CDI-1.1* If an Operating Mode controls a Resource necessary for the basic execution of
+the Test Suite, testing may always use a Product Configuration of that Operating Mode
+providing that Resource, even if other Product Configurations do not provide that
+Resource. Notwithstanding such exceptions, each Product must have at least one set of
+Product Configurations of such Operating Modes that is able to pass all the Conformance Tests.
+
+For example, a Product with an Operating Mode that controls a security policy which has one or more Product Configurations that cause
+Conformance Tests to fail may be tested using a Product Configuration that allows all Conformance Tests to pass.
+
+*CDI-1.2* A Product Configuration of an Operating Mode that causes the Product to
+report only version, usage, or diagnostic information is exempted from these
+compatibility rules.
+
+*CDI-1.3* A Product may contain an Operating Mode that selects the Edition with
+which it is compatible. The Product must meet the compatibility requirements for the
+corresponding Edition for all Product Configurations of this Operating Mode. This
+Operating Mode must affect no smaller unit of execution than an entire Application.
+
+*CDI-1.4* An API Definition Product is exempt from all functional testing requirements
+defined here, except the signature tests.
+
+*CDI-2* Some Conformance Tests may have properties that may be changed. Properties
+that can be changed are identified in the configuration interview. Properties that can be
+changed are specified in <<tck-properties>>. Apart from changing such properties and other allowed
+modifications described in this User’s Guide (if any), no source or binary code for a
+Conformance Test may be altered in any way without prior written permission.
+
+*CDI-3* The testing tools supplied as part of the Test Suite or as updated by the
+Maintenance Lead or TCK Lead must be used to certify compliance.
+
+*CDI-4* The Exclude List associated with the Test Suite cannot be modified.
+
+*CDI-5* The Maintenance Lead or TCK Lead can define exceptions to these Rules. Such exceptions
+would be made available to and apply to all licensees.
+
+*CDI-6* All hardware and software component additions, deletions, and modifications to
+a Documented supporting hardware/software platform, that are not part of the
+Product but required for the Product to satisfy the compatibility requirements, must be
+Documented and available to users of the Product.
+For example, if a patch to a particular version of a supporting operating system is
+required for the Product to pass the Conformance Tests, that patch must be
+Documented and available to users of the Product.
+
+*CDI-7* The Product must contain the full set of public and protected classes and
+interfaces for all the Libraries. Those classes and interfaces must contain exactly the set
+of public and protected methods, constructors, and fields defined by the Specifications
+for those Libraries. No subsetting, supersetting, or modifications of the public and
+protected API of the Libraries are allowed except only as specifically exempted by
+these Rules.
+
+*CDI-8* Except for tests specifically required by this TCK to be recompiled (if any), the
+binary Conformance Tests supplied as part of the Test Suite or as updated by the
+Maintenance Lead or TCK Lead must be used to certify compliance.
+
+*CDI-9* The functional programmatic behavior of any binary class or interface must be
+that defined by the Specifications.
+
 
 === About the CDI TCK
 
@@ -150,3 +332,17 @@ The CDI TCK has been tested on following platforms:
 
 CDI supports Java EE 5, Java EE 6, Java EE 6 Web Profile, Java EE 7, Java EE 7 Web Profile, Embeddable EJB 3.1, and the Embeddable EJB 3.2. The TCK will execute on any of these runtimes, but is only part of the CTS for Java EE 7 and Java EE 7 Web Profile. 
 
+[[libraries]]
+
+=== Libraries for Contexts and Dependency Injection for Java Version 2.0
+
+The following is the list of packages that constitute the required class libraries for
+Contexts and Dependency Injection for Java:
+
+* javax.decorator
+* javax.enterprise.context
+* javax.enterprise.context.spi
+* javax.enterprise.event
+* javax.enterprise.inject
+* javax.enterprise.inject.spi
+* javax.enterprise.util
