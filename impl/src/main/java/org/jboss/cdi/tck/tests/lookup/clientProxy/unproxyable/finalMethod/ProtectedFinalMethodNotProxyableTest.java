@@ -17,11 +17,11 @@
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalMethod;
 
 import static org.jboss.cdi.tck.cdi.Sections.UNPROXYABLE;
-import static org.testng.Assert.assertEquals;
 
-import javax.inject.Inject;
+import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -29,25 +29,18 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-/**
- * 
- * @author Martin Kouba
- */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class PrivateFinalMethodTest extends AbstractTest {
-    
-    @Inject
-    WhaleCovey whaleCovey;
+public class ProtectedFinalMethodNotProxyableTest extends AbstractTest {
 
+    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(PrivateFinalMethodTest.class).withClasses(Whale.class, WhaleCovey.class).build();
+        return new WebArchiveBuilder().withTestClass(ProtectedFinalMethodNotProxyableTest.class)
+                .withClasses(CarpFarm.class, CarpBroken.class).build();
     }
 
     @Test
-    @SpecAssertion(section = UNPROXYABLE, id = "bda")
-    public void testClassWithPrivateFinalMethodCanBeProxied() {
-        whaleCovey.ping();
-        assertEquals(getCurrentManager().getBeans(Whale.class).size(), 1);
+    @SpecAssertion(section = UNPROXYABLE, id = "bba")
+    public void testClassWithPublicFinalMethodCannotBeProxied() {
     }
 }

@@ -30,13 +30,13 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class NonPrivateNonStaticMethodTest extends AbstractTest {
+public class PackagePrivateFinalMethodNotProxyableTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(NonPrivateNonStaticMethodTest.class)
-                .withClasses(FishFarm.class, Tuna_Broken.class).build();
+        return new WebArchiveBuilder().withTestClass(PackagePrivateFinalMethodNotProxyableTest.class)
+                .withClasses(PikeFarm.class, PikeBroken.class).build();
     }
 
     @Test

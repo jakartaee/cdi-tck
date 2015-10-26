@@ -40,9 +40,38 @@ public class UnproxyableManagedBeanTest extends AbstractTest {
 
     @Test(expectedExceptions = UnproxyableResolutionException.class)
     @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "a")
-    public void testNormalScopedUnproxyableBeanResolution() {
-        Bean<UnproxyableBean> bean = getUniqueBean(UnproxyableBean.class);
-        CreationalContext<UnproxyableBean> ctx = getCurrentManager().createCreationalContext(bean);
-        getCurrentManager().getReference(bean, UnproxyableBean.class, ctx);
+    public void testNormalScopedUnproxyableBeanWithPrivateConstructorResolution() {
+        testObtainingContextualReference(UnproxyableBean.class);
     }
+
+    @Test(expectedExceptions = UnproxyableResolutionException.class)
+    @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "a")
+    public void testNormalScopedUnproxyableBeanWithFinalClassResolution() {
+        testObtainingContextualReference(UnproxyableFinalClass.class);
+    }
+
+    @Test(expectedExceptions = UnproxyableResolutionException.class)
+    @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "a")
+    public void testNormalScopedUnproxyableBeanWithPublicFinalMethodResolution() {
+        testObtainingContextualReference(UnproxyableBeanWithPublicFinalMethod.class);
+    }
+
+    @Test(expectedExceptions = UnproxyableResolutionException.class)
+    @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "a")
+    public void testNormalScopedUnproxyableBeanWithProtectedFinalMethodResolution() {
+        testObtainingContextualReference(UnproxyableBeanWithProtectedFinalMethod.class);
+    }
+
+    @Test(expectedExceptions = UnproxyableResolutionException.class)
+    @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "a")
+    public void testNormalScopedUnproxyableBeanWithPackagePrivateFinalMethodResolution() {
+        testObtainingContextualReference(UnproxyableBeanWithPackagePrivateFinalMethod.class);
+    }
+
+    private <T> void testObtainingContextualReference(Class<T> t) {
+        Bean<T> bean = getUniqueBean(t);
+        CreationalContext<T> ctx = getCurrentManager().createCreationalContext(bean);
+        getCurrentManager().getReference(bean, t, ctx);
+    }
+
 }
