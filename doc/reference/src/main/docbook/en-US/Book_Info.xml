@@ -17,7 +17,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</literallayout></releaseinfo>
-   <title>Technology Compatibility Kit Reference Guide for JSR 346: Contexts and Dependency Injection for Java EE 1.1</title>
+   <title>Technology Compatibility Kit Reference Guide for JSR 346: Contexts and Dependency Injection for Java EE 1.2</title>
    <subtitle>Specification Lead: Red Hat Inc.</subtitle>
    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Author_Group.xml" />
 <!--

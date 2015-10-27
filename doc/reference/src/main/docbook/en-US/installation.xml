@@ -41,7 +41,7 @@
          particular Java EE implementation.
       </para>
       <para>
-         The JSR 346: Contexts and Dependency Injection for Java EE 1.1
+         The JSR 346: Contexts and Dependency Injection for Java EE 1.2
          reference implementation (RI) project is named Weld.
          The release stream for JSR 346 is named <emphasis>2.x</emphasis>.
          You can obtain the latest release from the

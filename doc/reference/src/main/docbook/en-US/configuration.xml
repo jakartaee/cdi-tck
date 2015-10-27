@@ -181,7 +181,7 @@
          url="http://testng.org/doc/documentation-main.html">testng.org</ulink>.
       </para>
       <para>
-         Certain TestNG configuration file must be run by TestNG 6.3 (described by the TestNG documentation as "with a
+         Certain TestNG configuration file must be run by TestNG 6.8.8 (described by the TestNG documentation as "with a
          <literal>testng.xml</literal> file") unmodified for an implementation to pass the TCK.
          The TCK distribution contains the configuration file accurate at the date of the release - <literal>artifacts/cdi-tck-impl-suite.xml</literal>.
          However this artifact may not be up to date due to unresolved challenges or pending releases. Therefore a canonical configuration file exists.

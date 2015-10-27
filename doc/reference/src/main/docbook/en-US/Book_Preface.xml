@@ -7,11 +7,11 @@
       This guide describes how to download, install, configure, and run the
       Technology Compatibility Kit (TCK) used to verify the compatibility of an
       implementation of the JSR 346: Context and Dependency Injection for Java
-      EE (CDI) 1.1 specification.
+      EE (CDI) 1.2 specification.
    </para>
    <para>
       The CDI TCK is built atop TestNG framework and Arquillian platform. The CDI TCK uses 
-      the Arquillian version <emphasis>1.1.2.Final</emphasis> to execute the test suite.
+      the Arquillian version <emphasis>1.1.7.Final</emphasis> to execute the test suite.
    </para>
 
    <para>
@@ -24,7 +24,7 @@
       <para>
          This guide is for implementors of the Context and Dependency
          Injection
-         for Java EE 1.1 technology to assist in running the test
+         for Java EE 1.2 technology to assist in running the test
          suite
          that verifies the compatibility of their implementation.
       </para>
@@ -36,7 +36,7 @@
       <para>
          Before reading this guide, you should familiarize yourself with the
          Java EE programming model, specifically the Enterprise JavaBeans (EJB)
-         3.1 and the Contexts and Dependency Injection for Java EE 1.1
+         3.1 and the Contexts and Dependency Injection for Java EE 1.2
          specifications. A good resource for the Java EE programming model is
          the
          <ulink url="http://jcp.org">JCP</ulink>
@@ -44,7 +44,7 @@
       </para>
       <para>
          The CDI TCK is based on the Context and Dependency Injection for Java
-         EE 1.1 technology specification (JSR 346). Information about the
+         EE 1.2 technology specification (JSR 346). Information about the
          specification, including links to the specification documents, can be
          found on the
          <ulink url="http://jcp.org/en/jsr/detail?id=346">JSR 346 JCP page</ulink>.
