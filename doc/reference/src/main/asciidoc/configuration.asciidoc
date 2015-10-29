@@ -69,7 +69,7 @@ The Arquillian testing platform will look for configuration settings in a file n
 
 === The Porting Package
 
-The CDI TCK relies on an implementation of the porting package to function. There are times when the tests need to tap directly into the CDI implementation to manipulate behavior or verify results. The porting package includes a set of SPIs that provide the TCK with this level of access without tying the tests to a given implementation. 
+The CDI TCK relies on an implementation of the porting package to function. There are times when the tests need to tap directly into the CDI implementation to manipulate behavior or verify results. The porting package is Java package named "org.jboss.cdi.tck.spi" and includes a set of SPIs that provide the TCK with this level of access without tying the tests to a given implementation.
 
 The SPI classes in the CDI TCK are as follows: 
 

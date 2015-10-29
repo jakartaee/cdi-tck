@@ -36,14 +36,14 @@ Weld is not required for running the CDI TCK, but it can be used as a reference 
 ====
 
 
-Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java 7 or better, which you can obtain from the link:$$http://www.oracle.com/technetwork/java/index.html$$[Java Software] website. 
+Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 7 or better, which you can obtain from the link:$$http://www.oracle.com/technetwork/java/index.html$$[Java Software] website.
 
 
 === The TCK Environment
 
 The TCK requires the following two Java runtime environments: 
 
-*  Java 7 or better 
+*  Java SE 7 or better
 
 *  Java EE 7 or better (e.g., WildFly 8.x or GlassFish V4) 
 

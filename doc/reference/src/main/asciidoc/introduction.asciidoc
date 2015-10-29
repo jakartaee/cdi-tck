@@ -117,7 +117,7 @@ intended for any other purpose.
 |Maintenance Lead   +|
                      The Java Community Process member responsible for maintaining the
                      Specification, reference implementation, and TCK for the Technology.
-                     Red Hat is the Maintenance Lead for Contexts and Dependency Injection for Java Version 2.0.
+                     Red Hat Inc. is the Maintenance Lead for Contexts and Dependency Injection for Java Version 2.0.
 |Operating Mode   +|
                      Any Documented option of a Product that can be changed by a user in
                      order to modify the behavior of the Product.
@@ -144,13 +144,19 @@ intended for any other purpose.
 |Rules   +|
                      These definitions and rules in this Compatibility Requirements section
                      of this User’s Guide.
+|Security Resource   +|
+                     A security privilege or policy necessary for the proper execution of the
+                     Test Suite.
+                     For example, the user executing the Test Suite will need the privilege
+                     to access the files and network resources necessary for use of the
+                     Product.
 |Specifications   +|
                      The documents produced through the Java Community Process that
                      define a particular Version of a Technology.
                      The Specifications for the Technology Under Test are referenced later
                      in this chapter.
 |TCK Lead   +|
-                     Person responsible for maintaining TCK for the Technology. TCK Lead is deputy of Red Hat.
+                     Person responsible for maintaining TCK for the Technology. TCK Lead is representative of Red Hat Inc.
 |Technology   +|
                      Specifications and a reference implementation produced through the
                      Java Community Process.
@@ -337,7 +343,7 @@ CDI supports Java EE 5, Java EE 6, Java EE 6 Web Profile, Java EE 7, Java EE 7 W
 === Libraries for Contexts and Dependency Injection for Java Version 2.0
 
 The following is the list of packages that constitute the required class libraries for
-Contexts and Dependency Injection for Java:
+Contexts and Dependency Injection for Java Version 2.0:
 
 * javax.decorator
 * javax.enterprise.context
