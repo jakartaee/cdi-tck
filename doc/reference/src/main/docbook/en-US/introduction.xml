@@ -226,7 +226,7 @@
                             </entry>
                             <entry>
                                 The Java Community Process member responsible for maintaining the Specification, reference implementation,
-                                and TCK for the Technology. Red Hat is the Maintenance Lead for Contexts and Dependency Injection for Java EE 1.2.
+                                and TCK for the Technology. Red Hat Inc. is the Maintenance Lead for Contexts and Dependency Injection for Java EE 1.2.
                             </entry>
                         </row>
                         <row>
@@ -285,6 +285,16 @@
                         </row>
                         <row>
                             <entry valign="top">
+                                Security resource
+                            </entry>
+                            <entry>
+                                A security privilege or policy necessary for the proper execution of the Test Suite.
+                                For example, the user executing the Test Suite will need the privilege to access the files 
+                                and network resources necessary for use of the Product.
+                            </entry>
+                        </row>
+                        <row>
+                            <entry valign="top">
                                 Specifications
                             </entry>
                             <entry>
@@ -297,7 +307,7 @@
                                 TCK Lead
                             </entry>
                             <entry>
-                                Person responsible for maintaining TCK for the Technology. TCK Lead is deputy of Red Hat.
+                                Person responsible for maintaining TCK for the Technology. TCK Lead is representative of Red Hat Inc.
                             </entry>
                         </row>
                         <row>
@@ -381,7 +391,7 @@
             <para>
                 <emphasis role="bold">CDI-2</emphasis>
                 Some Conformance Tests may have properties that may be changed. Properties that can be changed are identified in the configuration interview.
-                Properties that can be changed are specified in<xref linkend="tck-properties"/>. Apart from changing such properties and other allowed
+                Properties that can be changed are specified in <xref linkend="tck-properties"/>. Apart from changing such properties and other allowed
                 modifications
                 described in this User’s Guide (if any),
                 no source or binary code for a Conformance Test may be altered in any way without prior written permission.
@@ -605,6 +615,9 @@
     </section>
     <section id="libraries">
         <title>Libraries for Contexts and Dependency Injection for Java EE 1.2</title>
+        <para>
+            The following is the list of packages that constitute the required class libraries for Contexts and Dependency Injection for Java EE 1.2:
+        </para>
         <itemizedlist>
             <listitem>
                 javax.decorator

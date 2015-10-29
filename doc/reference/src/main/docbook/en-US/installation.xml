@@ -57,7 +57,7 @@
       </note>
       <para>
          Naturally, to execute Java programs, you must have a Java SE runtime
-         environment. The TCK requires Java 7 or better, which you can obtain
+         environment. The TCK requires Java SE 7 or better, which you can obtain
          from the
          <ulink url="http://www.oracle.com/technetwork/java/index.html">Java Software</ulink>
          website.
@@ -73,7 +73,7 @@
       <itemizedlist>
          <listitem>
             <para>
-               Java 7 or better
+               Java SE 7 or better
             </para>
          </listitem>
          <listitem>

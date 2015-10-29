@@ -7,7 +7,7 @@
       conformance to the JSR 346 specification, it's reasonable to assume that
       an implementor may discover new and/or better ways to validate the
       assertions. This chapter covers the appeals process, defined by the
-      Specification Lead, Red Hat Middleware LLC., which allows implementors of
+      Specification Lead, Red Hat Inc., which allows implementors of
       the JSR 346 specification to challenge one or more tests defined by the
       CDI TCK.
    </para>
@@ -45,9 +45,9 @@
       <para>
          What is generally not challengeable are the assertions made by the
          specification. The specification document is controlled by a separate
-         process and challenges to it should be handled through the JSR 346 EG
+         process and challenges to it should be handled by the Maintenance Lead or
          by sending an e-mail to <ulink
-         url="mailto:jsr346-comments@jcp.org">jsr346-comments@jcp.org</ulink>.
+         url="mailto:cdi-dev@lists.jboss.org">cdi-dev@lists.jboss.org</ulink>.
       </para>
    </section>
    <section>
@@ -69,22 +69,21 @@
       <para>
          If you wish to make a private challenge, you should follow the above
          procedure, setting the Security Level to Private. Only the issue
-         reporter, TCK Project Lead and designates will be able to view the
+         reporter, TCK Lead and designates will be able to view the
          issue.
       </para>
    </section>
    <section>
       <title>How and by whom challenges are addressed?</title>
       <para>
-         The challenges will be addressed in a timely fashion by the CDI TCK
-         Project Lead, as designated by Specification Lead, Red Hat Middleware
-         LLC. or his/her designate. The appellant can also monitor the process
+         The challenges will be addressed in a timely fashion by the TCK
+         Lead, as designated by Specification Lead, Red Hat Inc. or his/her designate. The appellant can also monitor the process
          by following the issue report filed in the <ulink
          url="https://jira.jboss.org/jira/browse/CDITCK">CDI TCK project</ulink>
          of the JBoss JIRA or can subscribe and check <ulink url="mailto:cdi-tck@lists.jboss.org">CDI TCK mailing list</ulink>.
       </para>
       <para>
-         The current TCK Project Lead is listed on the <ulink
+         The current TCK Lead is listed on the <ulink
          url="https://jira.jboss.org/jira/browse/CDITCK">CDI TCK Project Summary
          Page</ulink> on the JBoss JIRA.
       </para>
@@ -93,16 +92,16 @@
       <title>How accepted challenges to the TCK are managed?</title>
       <para>
          Accepted challenges will be acknowledged via the filed issue's comment
-         section. Communication between the CDI TCK Project Lead and the
+         section. Communication between the TCK Lead and the
          appellant will take place via the issue comments. The issue's status
-         will be set to "Resolved" when the TCK project lead believes the issue
+         will be set to "Resolved" when the TCK lead believes the issue
          to be resolved. The appellant should, within 30 days, either close the
          issue if they agree, or reopen the issue if they do not believe the
          issue to be resolved.
       </para>
       <para>
          Resolved issue not addressed for 30 days will be closed by the TCK
-         Project Lead. If the TCK Project Lead and appellant are unable to
+         Lead. If the TCK Lead and appellant are unable to
          agree on the issue resolution, it will be referred to the JSR 346
          specification lead or his/her designate.
       </para>
