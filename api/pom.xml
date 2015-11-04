@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.jboss.cdi.tck</groupId>
 		<artifactId>cdi-tck-parent</artifactId>
-		<version>1.2.8-SNAPSHOT</version>
+		<version>1.2.8.Final</version>
 	</parent>
 
 	<artifactId>cdi-tck-api</artifactId>
