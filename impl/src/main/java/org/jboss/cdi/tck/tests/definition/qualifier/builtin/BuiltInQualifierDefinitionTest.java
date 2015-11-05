@@ -70,7 +70,7 @@ public class BuiltInQualifierDefinitionTest extends AbstractTest {
     public void testNamedAndAnyBeanHasDefaultQualifier() {
         Bean<NamedAnyBean> nameAnyBeanBean = getUniqueBean(NamedAnyBean.class, AnyLiteral.INSTANCE);
         assertEquals(nameAnyBeanBean.getQualifiers().size(), 3);
-        checkSetContainsAllQuallifiers(nameAnyBeanBean.getQualifiers(), new DefaultLiteral(), NamedLiteral.INSTANCE, AnyLiteral.INSTANCE);
+        checkSetContainsAllQuallifiers(nameAnyBeanBean.getQualifiers(), new DefaultLiteral(), new NamedLiteral("namedAnyBean"), AnyLiteral.INSTANCE);
     }
 
     @Test
@@ -92,9 +92,10 @@ public class BuiltInQualifierDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "ab")
     public void testProducedNamedAndAnyBeanHasDefaultQualifier() {
-        Bean<ProducedNamedAnyBean> producedNamedAnyBeanBean = getUniqueBean(ProducedNamedAnyBean.class, AnyLiteral.INSTANCE);
+        Bean<ProducedNamedAnyBean> producedNamedAnyBeanBean = getUniqueBean(ProducedNamedAnyBean.class);
         assertEquals(producedNamedAnyBeanBean.getQualifiers().size(), 3);
-        checkSetContainsAllQuallifiers(producedNamedAnyBeanBean.getQualifiers(), new DefaultLiteral(), NamedLiteral.INSTANCE, AnyLiteral.INSTANCE);
+        checkSetContainsAllQuallifiers(producedNamedAnyBeanBean.getQualifiers(), new DefaultLiteral(), new NamedLiteral("producedNamedAnyBean"),
+                AnyLiteral.INSTANCE);
     }
 
     @Test
@@ -108,7 +109,7 @@ public class BuiltInQualifierDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "ab")
     public void testProducedAnyBeanHasDefaultQualifier() {
-        Bean<ProducedAnyBean> producedAnyBeanBean = getUniqueBean(ProducedAnyBean.class, AnyLiteral.INSTANCE);
+        Bean<ProducedAnyBean> producedAnyBeanBean = getUniqueBean(ProducedAnyBean.class);
         assertEquals(producedAnyBeanBean.getQualifiers().size(), 2);
         checkSetContainsAllQuallifiers(producedAnyBeanBean.getQualifiers(), new DefaultLiteral(), AnyLiteral.INSTANCE);
     }

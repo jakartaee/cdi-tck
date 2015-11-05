@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.builtin;
 
-@NonProduced
+import javax.enterprise.inject.Vetoed;
+
+@Vetoed
 public class ProducedNamedBean {
 }
