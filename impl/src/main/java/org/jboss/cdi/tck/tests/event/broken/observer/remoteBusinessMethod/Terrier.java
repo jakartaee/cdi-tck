@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2015, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,22 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer.resolve.enterprise;
+package org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod;
 
-import javax.ejb.Stateful;
-import javax.enterprise.event.Observes;
+import javax.ejb.Remote;
 
-@Stateful
-public class Spitz implements LocalInterface {
+@Remote
+public interface Terrier {
 
-    static boolean localNotified = false;
-    static boolean staticallyNotified = false;
-
-    public void observeLocal(@Observes EJBEvent someEvent) {
-        localNotified = true;
-    }
-
-    public static void staticallyObserveEvent(@Observes EJBEvent someEvent) {
-        staticallyNotified = true;
-    }
+   void observeSomeEvent(String someEvent);
 }

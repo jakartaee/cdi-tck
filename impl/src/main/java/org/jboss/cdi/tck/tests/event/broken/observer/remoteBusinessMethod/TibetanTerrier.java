@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2014, Red Hat, Inc., and individual contributors
+ * Copyright 2015, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,11 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer.resolve.enterprise;
+package org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod;
 
-import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.enterprise.event.Observes;
 
-@Remote
-public interface RemoteInterface {
-    public void observeRemote(EJBEvent someEvent);
+@Stateless
+public class TibetanTerrier implements Terrier {
+    
+    public void observeSomeEvent(@Observes String someEvent) {
+    
+    }
 }

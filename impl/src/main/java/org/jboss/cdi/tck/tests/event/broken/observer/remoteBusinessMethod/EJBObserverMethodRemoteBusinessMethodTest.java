@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2015, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,36 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.observer.resolve.enterprise;
+package org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS_EE;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES_EE;
+
+import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class ResolveEnterpriseEventObserverTest extends AbstractTest {
+public class EJBObserverMethodRemoteBusinessMethodTest extends AbstractTest {
 
+    @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ResolveEnterpriseEventObserverTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(EJBObserverMethodRemoteBusinessMethodTest.class).build();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertion(section = OBSERVER_METHODS_EE, id = "d")
-    public void testObserverMethodOnEnterpriseBeanIsBusinessMethodOrStatic() {
-        assertEquals(getCurrentManager().resolveObserverMethods(new EJBEvent()).size(), 3);
-        getCurrentManager().fireEvent(new EJBEvent());
-        assertTrue(Spitz.localNotified);
-        assertTrue(Spitz.staticallyNotified);
-        assertTrue(NoInterfaceSLSB.notified);
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHODS_EE, id = "d"), @SpecAssertion(section = OBSERVES_EE, id = "g") })
+    public void testObserverMethodOnRemoteBusinessMethodFails() {
     }
 }

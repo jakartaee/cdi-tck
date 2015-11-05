@@ -9905,7 +9905,7 @@
 
     <section id="observer_methods_ee" title="Observer methods in EJB session beans" level="2">
         <assertion id="d">
-            <text>An observer method may also be a non-abstract method of an EJB session bean class. It must be either a business method of the EJB or a static
+            <text>An observer method may also be a non-abstract method of an EJB session bean class. It must be either a local business method of the EJB or a static
                 method of the bean class.
             </text>
         </assertion>
@@ -9914,7 +9914,7 @@
 
     <section id="observes_ee" title="Declaring an observer method in an EJB" level="3">
         <assertion id="g">
-            <text>If a non-static method of a session bean class has a parameter annotated |@Observes|, and the method is not a business method of the EJB, the
+            <text>If a non-static method of a session bean class has a parameter annotated |@Observes|, and the method is not a local business method of the EJB, the
                 container automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
@@ -9922,7 +9922,7 @@
 
     <section id="observer_method_invocation_context_ee" title="Observer method invocation context in Java EE" level="3">
         <assertion id="a">
-            <text>The transaction and security contexts for a business method of an EJB session bean also depend upon the transaction attribute and @RunAs
+            <text>The transaction and security contexts for a local business method of an EJB session bean also depend upon the transaction attribute and @RunAs
                 descriptor, if any.
             </text>
         </assertion>
