@@ -24,11 +24,11 @@ import static org.testng.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.event.Event;
-import javax.enterprise.event.FireAsyncException;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -60,20 +60,16 @@ public class MultipleExceptionsInObserversNotificationTest extends AbstractTest 
 
         Throwable throwable = queue.poll(2, TimeUnit.SECONDS);
         assertNotNull(throwable);
-        assertTrue(TokioRadioStation.observed.get());
-        assertTrue(LondonRadioStation.observed.get());
         assertTrue(NewYorkRadioStation.observed.get());
         assertTrue(ParisRadioStation.observed.get());
         assertTrue(PragueRadioStation.observed.get());
         
-        assertTrue(throwable instanceof FireAsyncException);
+        assertTrue(throwable instanceof CompletionException);
 
         List<Throwable> suppressedExceptions = Arrays.asList(throwable.getSuppressed());
         assertTrue(suppressedExceptions.contains(ParisRadioStation.exception.get()));
         assertTrue(suppressedExceptions.contains(NewYorkRadioStation.exception.get()));
-        assertTrue(suppressedExceptions.contains(LondonRadioStation.exception.get()));
         assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(ParisRadioStation.class.getName())));
         assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(NewYorkRadioStation.class.getName())));
-        assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(LondonRadioStation.class.getName())));
     }
 }

@@ -22,11 +22,11 @@ import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
 import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.MassachusettsInstituteObserver;
 import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.OxfordUniversityObserver;
 import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.StandfordUniversityObserver;
+import static org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObservers.YaleUniversityObserver;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
-import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -61,38 +61,39 @@ public class MixedObserversTest extends AbstractTest {
 
         ActionSequence.reset();
         event.fire(new ScientificExperiment());
-        ActionSequence.assertSequenceDataEquals(MassachusettsInstituteObserver.class, StandfordUniversityObserver.class);
+        ActionSequence.assertSequenceDataEquals(OxfordUniversityObserver.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "f"), @SpecAssertion(section = FIRING_EVENTS_ASYNCHRONOUSLY, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "f"),
             @SpecAssertion(section = EVENT, id = "ef"), @SpecAssertion(section = EVENT, id = "eda") })
-    public void testQualifiedAsyncEventIsDelivered() throws InterruptedException {
+    public void testQualifiedAsyncEventIsDeliveredOnlyToAsyncObservers() throws InterruptedException {
 
         BlockingQueue<Experiment> queue = new LinkedBlockingQueue<>();
 
         event.select(American.AmericanLiteral.INSTANCE).fireAsync(new ScientificExperiment()).thenAccept(queue::offer);
         Experiment experiment = queue.poll(2, TimeUnit.SECONDS);
-        assertTrue(experiment.getUniversities().containsAll(Arrays.asList(MixedObservers.class.getClasses())));
+        assertEquals(experiment.getUniversities().size(), 3);
+        assertTrue(experiment.getUniversities().contains(YaleUniversityObserver.class));
+        assertTrue(experiment.getUniversities().contains(StandfordUniversityObserver.class));
+        assertTrue(experiment.getUniversities().contains(MassachusettsInstituteObserver.class));
 
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = FIRING_EVENTS_ASYNCHRONOUSLY, id = "a")})
+    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_ASYNCHRONOUSLY, id = "a") })
     public void testAsyncObserversCalledInDifferentThread() throws InterruptedException {
         BlockingQueue<Experiment> queue = new LinkedBlockingQueue<>();
         int threadId = (int) Thread.currentThread().getId();
         event.fireAsync(new ScientificExperiment()).thenAccept(queue::offer);
-        
-        Experiment experiment2 = queue.poll(2, TimeUnit.SECONDS);
-        assertEquals(experiment2.getUniversities().size(), 3);
-        assertTrue(experiment2.getUniversities().contains(MassachusettsInstituteObserver.class));
-        assertTrue(experiment2.getUniversities().contains(StandfordUniversityObserver.class));
-        assertTrue(experiment2.getUniversities().contains(OxfordUniversityObserver.class));
 
-        assertEquals(threadId, MassachusettsInstituteObserver.threadId.get());
+        Experiment experiment2 = queue.poll(2, TimeUnit.SECONDS);
+        assertEquals(experiment2.getUniversities().size(), 2);
+        assertTrue(experiment2.getUniversities().contains(StandfordUniversityObserver.class));
+        assertTrue(experiment2.getUniversities().contains(MassachusettsInstituteObserver.class));
+
+        assertNotEquals(threadId, MassachusettsInstituteObserver.threadId.get());
         assertEquals(MassachusettsInstituteObserver.threadId.get(), StandfordUniversityObserver.threadId.get());
-        assertNotEquals(StandfordUniversityObserver.threadId.get(), OxfordUniversityObserver.threadId.get());
 
     }
 

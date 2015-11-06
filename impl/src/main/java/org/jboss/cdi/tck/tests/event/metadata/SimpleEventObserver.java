@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.event.metadata;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
-import javax.enterprise.event.ObservesAsync;
 import javax.enterprise.inject.spi.EventMetadata;
 
 @ApplicationScoped
@@ -35,17 +34,10 @@ public class SimpleEventObserver {
         return syncMetadata;
     }
 
-    public EventMetadata getAsyncMetadata() {
-        return asyncMetadata;
-    }
 
     public void reset() {
         this.syncMetadata = null;
         this.asyncMetadata = null;
-    }
-
-    public void observeAsyncSimpleEvent(@ObservesAsync @Async SimpleEvent event, EventMetadata metadata) {
-        this.asyncMetadata = metadata;
     }
 
 }

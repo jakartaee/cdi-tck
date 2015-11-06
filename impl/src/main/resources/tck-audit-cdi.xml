@@ -4910,15 +4910,9 @@
     <section id="firing_events_asynchronously" title="Firing events asynchronously" level="3">
 
         <assertion id="a">
-            <text>Event fired with the fireAsync() method is fired asynchronously. All resolved synchronous observers are called in the same thread in which
-                fireAsync() was called, and all the resolved asynchronous observers are called in one or more different thread.
-            </text>
+            <text>Event fired with the fireAsync() method is fired asynchronously. All the resolved asynchronous observers are called in one or more different threads.</text>
         </assertion>
 
-        <assertion id="b">
-            <text>The method fireAsync accepts an event object which can be qualified with the rules defined in Section 10.2, “Firing events synchronously”.
-            </text>
-        </assertion>
     </section>
 
     <section id="event" title="The Event interface" level="3">
@@ -5046,8 +5040,7 @@
                 <text>Check an event is delivered if the observer method if the event is fired synchronously and the observer is defined with @Observes</text>
             </assertion>
             <assertion id="f">
-                <text>Check an event is delivered if the observer method if the event is fired asynchronously and the observer is defined with @Observes or
-                    @ObservesAsync .
+                <text>Check an event is delivered if the observer method if the event is fired asynchronously and the observer is defined with @ObservesAsync .
                 </text>
             </assertion>
         </group>
@@ -5256,9 +5249,6 @@
             <assertion id="c">
                 <text>|getType()| returns the type representing runtime class of the event object with type variables resolved.</text>
             </assertion>
-            <assertion id="d">
-                <text>|isAsync()| returns true if the event was fired with fireAsync() or fireAsyncEvent() methods otherwise returns false.</text>
-            </assertion>
         </group>
 
         <assertion id="e">
@@ -5404,15 +5394,13 @@
 
     <section id="async_exception" title="Handling multiple exceptions thrown during an asynchronous event" level="3">
         <assertion id="a">
-            <text>If an event is asynchronous, and one or more exception occurred in notified observers, the CompletionStage returned by fireAsync will complete
-                exceptionally with FireAsyncException exception.
+            <text>If an event is asynchronous, and an exception is thrown by any of its notified observers, the CompletionStage returned by fireAsync will complete exceptionally with java.util.concurrent.CompletionException exception.
             </text>
         </assertion>
 
         <assertion id="b">
-            <text>FireAsyncException contains all exceptions thrown by observers as suppressed exceptions. They can be accessed as an array of throwable with
-                the getSuppressed
-                method.
+            <text>java.util.concurrent.CompletionException contains all exceptions thrown by observers as suppressed exceptions. They can be accessed as an
+                array of throwable with the getSuppressed method.
             </text>
         </assertion>
     </section>

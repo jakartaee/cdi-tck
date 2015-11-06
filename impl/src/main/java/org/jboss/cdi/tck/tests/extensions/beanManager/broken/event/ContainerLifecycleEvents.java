@@ -255,6 +255,16 @@ public class ContainerLifecycleEvents {
         @Override
         public void addDefinitionError(Throwable t) {
         }
+
+        //@Override
+        public void setObserverMethod(ObserverMethod<String> observerMethod) {
+
+        }
+
+        //@Override
+        public void veto() {
+
+        }
     };
 
     public static final ProcessSessionBean<Object> PROCESS_SESSION_BEAN = new ProcessSessionBean<Object>() {

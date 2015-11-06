@@ -98,15 +98,6 @@ public class EventMetadataTest extends AbstractTest {
         }.getType(), Any.class);
     }
 
-    @SpecAssertion(section = EVENT_METADATA, id = "d")
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    public void testAsyncEvent(SimpleEventNotifier notifier, SimpleEventObserver observer) throws InterruptedException {
-        notifier.fireAsyncEvent();
-        assertNotNull(notifier.getDeliveredAsyncEvent());
-        assertNotNull(observer.getAsyncMetadata());
-        assertTrue(observer.getAsyncMetadata().isAsync());
-    }
-
     private void verifyMetadata(EventMetadata metadata, boolean isInjectionPointAvailable, Type resolvedType,
             Class<? extends Annotation>... qualifiers) {
         assertNotNull(metadata);

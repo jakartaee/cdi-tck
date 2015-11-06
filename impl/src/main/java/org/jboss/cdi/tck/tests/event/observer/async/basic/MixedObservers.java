@@ -30,14 +30,14 @@ public class MixedObservers {
 
         public static final AtomicInteger threadId = new AtomicInteger();
 
-        public void observes(@Observes @Priority(2000) Experiment experiment) {
+        public void observes(@ObservesAsync @Priority(2000) Experiment experiment) {
             experiment.addUniversity(getClass());
             ActionSequence.addAction(getClass().getSimpleName());
             threadId.set((int) Thread.currentThread().getId());
         }
     }
 
-    public static class StandfordUniversityObserver {
+    public static class OxfordUniversityObserver {
 
         public static final AtomicInteger threadId = new AtomicInteger();
 
@@ -57,7 +57,7 @@ public class MixedObservers {
 
     }
 
-    public static class OxfordUniversityObserver {
+    public static class StandfordUniversityObserver {
 
         public static final AtomicInteger threadId = new AtomicInteger();
 

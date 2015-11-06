@@ -16,10 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.metadata;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.BeanManager;
@@ -44,12 +40,6 @@ public class SimpleEventNotifier {
     @Alpha
     Event<SimpleEvent> alphaEvent;
 
-    @Inject
-    @Async
-    Event<SimpleEvent> asyncEvent;
-
-    SimpleEvent deliveredAsyncEvent;
-
     public void fireSimpleEvent() {
         observer.reset();
         event.fire(new SimpleEvent());
@@ -68,17 +58,6 @@ public class SimpleEventNotifier {
     public void fireSimpleEventBeanManagerWithQualifiers() {
         observer.reset();
         beanManager.fireEvent(new SimpleEvent(), CharlieLiteral.INSTANCE);
-    }
-
-    public void fireAsyncEvent() throws InterruptedException {
-        BlockingQueue<SimpleEvent> queue = new LinkedBlockingQueue<>();
-        asyncEvent.select(Async.AsyncLiteral.INSTANCE).fireAsync(new SimpleEvent()).thenAccept(queue::offer);
-        deliveredAsyncEvent = queue.poll(2, TimeUnit.SECONDS);
-
-    }
-
-    public SimpleEvent getDeliveredAsyncEvent() {
-        return deliveredAsyncEvent;
     }
 
 }
