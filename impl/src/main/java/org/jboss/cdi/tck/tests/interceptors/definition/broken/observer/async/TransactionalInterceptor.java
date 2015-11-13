@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.observer.async;
 
+import javax.annotation.Priority;
 import javax.enterprise.event.ObservesAsync;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -25,6 +26,7 @@ import org.jboss.cdi.tck.util.SimpleLogger;
 
 @Transactional
 @Interceptor
+@Priority(2500)
 public class TransactionalInterceptor {
 
     private static final SimpleLogger logger = new SimpleLogger(TransactionalInterceptor.class);
