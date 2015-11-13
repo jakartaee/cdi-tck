@@ -33,16 +33,16 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class EJBObserverMethodRemoteBusinessMethodTest extends AbstractTest {
+public class EJBAsyncObserverMethodRemoteBusinessMethodTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withClasses(Terrier.class, TibetanTerrier.class).withTestClass(EJBObserverMethodRemoteBusinessMethodTest.class).build();
+        return new WebArchiveBuilder().withClasses(Terrier.class, FoxTerrrier.class).withTestClass(EJBAsyncObserverMethodRemoteBusinessMethodTest.class).build();
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHODS_EE, id = "d"), @SpecAssertion(section = OBSERVES_EE, id = "g") })
-    public void testObserverMethodOnRemoteBusinessMethodFails() {
+    public void testAsyncObserverMethodOnRemoteBusinessMethodFails() {
     }
 }
