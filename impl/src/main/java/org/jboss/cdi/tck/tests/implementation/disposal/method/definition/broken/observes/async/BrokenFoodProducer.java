@@ -14,27 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.decorators.definition.broken.observer;
+package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.observes.async;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Any;
-import javax.inject.Inject;
+import javax.enterprise.event.ObservesAsync;
+import javax.enterprise.inject.Disposes;
+import javax.ws.rs.Produces;
 
-@Decorator
-public class FilesystemLogger implements Logger {
+public class BrokenFoodProducer {
 
-    @Inject
-    @Any
-    @Delegate
-    Logger logger;
-
-    public void log() {
-        logger.log();
+    @Produces
+    public Food cookSomething(){
+       return new Food();
     }
 
-    public void observeFoo(@Observes FooPayload fooPayload) {
-    }
+    public void eatFood(@Disposes @ObservesAsync Food food){
 
+    }
 }

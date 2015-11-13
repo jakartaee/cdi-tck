@@ -1109,7 +1109,7 @@
         </assertion>
 
         <group>
-            <text>If a producer method is annotated |@Inject|, has a parameter annotated |@Disposes|, or has a parameter annotated |@Observes|, the container
+            <text>If a producer method is annotated |@Inject|, has a parameter annotated |@Disposes|, or has a parameter annotated |@Observes|, or has a parameter annotated |@ObservesAsync|, the container
                 automatically detects the problem and treats it as a definition error.
             </text>
 
@@ -1123,6 +1123,10 @@
 
             <assertion id="ea">
                 <text>Test with a producer method annotated |@Observes|.</text>
+            </assertion>
+
+            <assertion id="fa">
+                <text>Test with a producer method annotated |@ObservesAsync|.</text>
             </assertion>
         </group>
 
@@ -1394,6 +1398,12 @@
             </text>
         </assertion>
 
+        <assertion id="fa">
+            <text>If a disposer method has a parameter annotated |@ObservesAsync|, the container automatically detects the problem and treats it as a definition
+                error.
+            </text>
+        </assertion>
+
         <assertion id="ga">
             <text>Interceptors ~and decorators~ may not declare disposer methods. If an interceptor ~or decorator~ has a method annotated |@Disposes|, the
                 container automatically detects the problem and treats it as a definition error.
@@ -1482,6 +1492,12 @@
             </text>
         </assertion>
 
+        <assertion id="fa">
+            <text>If a bean constructor has a parameter annotated |@ObservesAsync|, the container automatically detects the problem and treats it as a definition
+                error.
+            </text>
+        </assertion>
+
         <assertion id="f">
             <text>A bean constructor may have any number of parameters.</text>
         </assertion>
@@ -1560,6 +1576,12 @@
 
         <assertion id="da">
             <text>If an initializer method has a parameter annotated |@Observes|, the container automatically detects the problem and treats it as a definition
+                error.
+            </text>
+        </assertion>
+
+        <assertion id="ea">
+            <text>If an initializer method has a parameter annotated |@ObservesAsync|, the container automatically detects the problem and treats it as a definition
                 error.
             </text>
         </assertion>
@@ -5223,7 +5245,7 @@
 
         <assertion id="h">
             <text>Interceptors and decorators may not declare observer methods. If an interceptor or decorator has a method with a parameter annotated
-                |@Observes|, the container automatically detects the problem and treats it as a definition error.
+                |@Observes| or |@ObservesAsync|, the container automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
 

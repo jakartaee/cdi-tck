@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.observesUnallowed;
+package org.jboss.cdi.tck.tests.interceptors.definition.broken.observer.async;
 
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -24,23 +24,29 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.interceptors.definition.broken.observer.TransactionalInterceptor;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class ObserverParameterUnallowedDefinitionTest extends AbstractTest {
+public class InterceptorWithAsyncObserverMethodTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ObserverParameterUnallowedDefinitionTest.class).build();
+        return new WebArchiveBuilder()
+                .withTestClassPackage(InterceptorWithAsyncObserverMethodTest.class)
+                .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
+                                .clazz(TransactionalInterceptor.class.getName()).up()).build();
     }
 
     @Test
-    @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "ea")
-    public void testObserverParameterUnallowed() {
+    @SpecAssertion(section = OBSERVES, id = "h")
+    public void testInterceptorWithAsyncObserverMethodNotOk() {
     }
-
 }

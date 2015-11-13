@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2015, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.decorators.definition.broken.observer;
+package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.observes.async;
 
-import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
 
 import javax.enterprise.inject.spi.DefinitionException;
 
@@ -25,33 +25,22 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans10.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-/**
- * Test that decorators may not declare observer methods.
- * 
- * @author Martin Kouba
- */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class DecoratorWithObserverMethodTest extends AbstractTest {
+public class DisposerMethodWithAsyncObservesTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-                .withClasses(FilesystemLogger.class, FooPayload.class, Logger.class, MockLogger.class)
-                .withTestClass(DecoratorWithObserverMethodTest.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(FilesystemLogger.class.getName())
-                                .up()).build();
+        return new WebArchiveBuilder().withTestClassPackage(DisposerMethodWithAsyncObservesTest.class).build();
     }
 
     @Test
-    @SpecAssertion(section = OBSERVES, id = "h")
-    public void testDecoratorWithObserverMethodNotOk() {
+    @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "fa")
+    public void testObserverParameterUnallowed() {
     }
+
 }

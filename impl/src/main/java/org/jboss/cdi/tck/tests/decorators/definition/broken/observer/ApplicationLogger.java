@@ -18,12 +18,12 @@ package org.jboss.cdi.tck.tests.decorators.definition.broken.observer;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
-import javax.enterprise.event.Observes;
+import javax.enterprise.event.ObservesAsync;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 @Decorator
-public class FilesystemLogger implements Logger {
+public class ApplicationLogger implements Logger {
 
     @Inject
     @Any
@@ -34,7 +34,7 @@ public class FilesystemLogger implements Logger {
         logger.log();
     }
 
-    public void observeFoo(@Observes FooPayload fooPayload) {
+    public void observeFoo(@ObservesAsync FooPayload fooPayload) {
     }
 
 }

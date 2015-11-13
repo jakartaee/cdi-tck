@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.observesUnallowed;
+package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.observes;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Disposes;

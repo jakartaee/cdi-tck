@@ -31,27 +31,22 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-/**
- * Test that decorators may not declare observer methods.
- * 
- * @author Martin Kouba
- */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class DecoratorWithObserverMethodTest extends AbstractTest {
+public class DecoratorWithAsyncObserverMethodTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withClasses(FilesystemLogger.class, FooPayload.class, Logger.class, MockLogger.class)
-                .withTestClass(DecoratorWithObserverMethodTest.class)
+                .withClasses(ApplicationLogger.class, FooPayload.class, Logger.class, MockLogger.class)
+                .withTestClass(DecoratorWithAsyncObserverMethodTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(FilesystemLogger.class.getName())
+                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(ApplicationLogger.class.getName())
                                 .up()).build();
     }
 
     @Test
     @SpecAssertion(section = OBSERVES, id = "h")
-    public void testDecoratorWithObserverMethodNotOk() {
+    public void testDecoratorWithAsyncObserverMethodNotOk() {
     }
 }
