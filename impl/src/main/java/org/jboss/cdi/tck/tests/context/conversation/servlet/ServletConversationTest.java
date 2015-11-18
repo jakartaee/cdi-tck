@@ -19,8 +19,10 @@ package org.jboss.cdi.tck.tests.context.conversation.servlet;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,10 +31,12 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -51,6 +55,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class ServletConversationTest extends AbstractTest {
+
+    private final String CONVERSATION_CREATED = "conversationCreated";
+    private final String CONVERSATION_DESTROYED = "conversationDestroyed";
+    private final String BEFORE_INVALIDATE = "beforeInvalidate";
+    private final String AFTER_INVALIDATE = "afterInvalidate";
 
     @ArquillianResource
     private URL url;
@@ -159,24 +168,31 @@ public class ServletConversationTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "qa")
-    // TODO this test doesn't verify that the long-running conversation is destroyed but that it cannot be associated
     public void testInvalidatingSessionDestroysConversation() throws Exception {
         WebClient client = new WebClient();
 
-        // begin conversation
-        TextPage initialPage = client.getPage(getPath("/begin", null));
-        String content = initialPage.getContent();
-        assertTrue(content.contains("message: Hello"));
-        assertTrue(content.contains("transient: false"));
-
-        String cid = getCid(content);
+        // reset ActionSequence and begin conversation
+        String cid = beginConversation(client, true);
 
         // Invalidate the session
         {
             client.getPage(getPath("/invalidateSession", cid));
         }
-
-        // Verify that the conversation cannot be associated
+        
+        TextPage sequence = client.getPage(getPath("/getSequence", null));
+        String result = sequence.getContent().trim();
+        
+        // Construct expected result locally
+        ActionSequence.reset();
+        ActionSequence.addAction(CONVERSATION_CREATED);
+        ActionSequence.addAction(BEFORE_INVALIDATE);
+        ActionSequence.addAction(AFTER_INVALIDATE);
+        ActionSequence.addAction(CONVERSATION_DESTROYED);
+            
+        // Verify that the action sequence fetched from server is equal to the expected sequence
+        assertEquals(result, ActionSequence.getSequence().dataToCsv());
+        
+        // Additional verification that the conversation cannot be associated
         {
             client.setThrowExceptionOnFailingStatusCode(false);
             Page page = client.getPage(getPath("/display", cid));
@@ -184,6 +200,36 @@ public class ServletConversationTest extends AbstractTest {
         }
     }
 
+    @Test
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "qa")
+    public void testInvalidatingSessionDestroysAllLongRunningConversations() throws Exception {
+        WebClient client = new WebClient();
+
+        // reset ActionSequence and begin two conversations
+        String firstCid = beginConversation(client, true);
+        String secondCid = beginConversation(client, false);
+        assertFalse(firstCid.equals(secondCid));
+        
+        // Invalidate the session with one cid
+        client.getPage(getPath("/invalidateSession", secondCid));
+        
+        TextPage sequence = client.getPage(getPath("/getSequence", null));
+        String result = sequence.getContent().trim();
+        
+        // Construct expected result locally
+        // Two conv. should be created and both destroyed after invalidation
+        ActionSequence.reset();
+        ActionSequence.addAction(CONVERSATION_CREATED);
+        ActionSequence.addAction(CONVERSATION_CREATED);
+        ActionSequence.addAction(BEFORE_INVALIDATE);
+        ActionSequence.addAction(AFTER_INVALIDATE);
+        ActionSequence.addAction(CONVERSATION_DESTROYED);
+        ActionSequence.addAction(CONVERSATION_DESTROYED);
+            
+        // Verify that the action sequence fetched from server is equal to the expected sequence
+        assertEquals(result, ActionSequence.getSequence().dataToCsv());
+    }
+    
     protected String getCid(String content) {
         return content.substring(content.indexOf("cid: [") + 6, content.indexOf("]"));
     }
@@ -225,4 +271,16 @@ public class ServletConversationTest extends AbstractTest {
         return result;
 
     }
+    
+    protected String beginConversation(WebClient client, boolean resetSequence) throws IOException {
+        if (resetSequence) {
+            client.getPage(getPath("/resetSequence", null));
+        }
+        TextPage initialPage = client.getPage(getPath("/begin", null));
+        String content = initialPage.getContent();
+        assertTrue(content.contains("message: Hello"));
+        assertTrue(content.contains("transient: false"));
+        return getCid(content);
+    }
+    
 }
