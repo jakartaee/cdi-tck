@@ -50,7 +50,8 @@ public class InvalidatingSessionDestroysConversationTest extends AbstractConvers
 
     @Test
     @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "qa")
-    // TODO this test doesn't precisely probe the boundaries of the service() method
+    // Doesn't precisely probe the boundaries of the service() method, rather tests that the conversation
+    // is eventually destroyed.
     public void testInvalidatingSessionDestroysConversation() throws Exception {
 
         WebClient webClient = new WebClient();

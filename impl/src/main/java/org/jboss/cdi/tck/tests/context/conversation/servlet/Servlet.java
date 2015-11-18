@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jboss.cdi.tck.util.ActionSequence;
+
 @SuppressWarnings("serial")
 @WebServlet("/servlet/*")
 public class Servlet extends HttpServlet {
@@ -52,8 +54,14 @@ public class Servlet extends HttpServlet {
             setMessage(req);
             printInfo(resp.getWriter());
         } else if (uri.endsWith("/invalidateSession")) {
+            ActionSequence.addAction("beforeInvalidate");
             req.getSession().invalidate();
+            ActionSequence.addAction("afterInvalidate");
             printInfo(resp.getWriter());
+        } else if (uri.endsWith("/resetSequence")) {
+            ActionSequence.reset();
+        } else if (uri.endsWith("/getSequence")) {
+            resp.getWriter().print(ActionSequence.getSequence().dataToCsv());
         } else {
             resp.setStatus(404);
         }
