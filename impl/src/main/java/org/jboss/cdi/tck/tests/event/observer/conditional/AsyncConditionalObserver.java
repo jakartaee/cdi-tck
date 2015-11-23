@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.event.observer.conditional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
 import javax.enterprise.event.ObservesAsync;
 import javax.enterprise.event.Reception;
 
@@ -27,18 +26,9 @@ import javax.enterprise.event.Reception;
 public class AsyncConditionalObserver {
 
     private static AtomicBoolean notified = new AtomicBoolean(false);
-    private static boolean syncNotified = false;
 
     public static AtomicBoolean IsNotified() {
         return notified;
-    }
-
-    public static boolean isSyncNotified() {
-        return syncNotified;
-    }
-
-    public void observeSync(@Observes(notifyObserver = Reception.IF_EXISTS) AsyncConditionalEvent event) {
-        syncNotified = true;
     }
 
     public void observeAsync(@ObservesAsync(notifyObserver = Reception.IF_EXISTS) AsyncConditionalEvent event) {
@@ -47,7 +37,6 @@ public class AsyncConditionalObserver {
 
     public static void reset() {
         notified.set(false);
-        syncNotified = false;
     }
 
     public void ping() {

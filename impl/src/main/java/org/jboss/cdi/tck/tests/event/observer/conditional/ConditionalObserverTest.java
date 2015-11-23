@@ -126,7 +126,6 @@ public class ConditionalObserverTest extends AbstractTest {
         BlockingQueue<AsyncConditionalEvent> queue = new LinkedBlockingQueue<>();
         asyncConditionalEventEvent.fireAsync(new AsyncConditionalEvent()).thenAccept(queue::offer);
         AsyncConditionalEvent event = queue.poll(2, TimeUnit.SECONDS);
-        assertFalse(AsyncConditionalObserver.isSyncNotified());
         assertFalse(AsyncConditionalObserver.IsNotified().get());
         
         AsyncConditionalObserver observer = getContextualReference(AsyncConditionalObserver.class);
@@ -136,8 +135,6 @@ public class ConditionalObserverTest extends AbstractTest {
         asyncConditionalEventEvent.fireAsync(new AsyncConditionalEvent()).thenAccept(queue::offer);
         event = queue.poll(2, TimeUnit.SECONDS);
         assertTrue(AsyncConditionalObserver.IsNotified().get());
-        assertTrue(AsyncConditionalObserver.isSyncNotified());
-
     }
 
 }
