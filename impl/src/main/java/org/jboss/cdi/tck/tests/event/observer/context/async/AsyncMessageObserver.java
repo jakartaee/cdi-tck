@@ -49,10 +49,9 @@ public class AsyncMessageObserver {
 
     }
 
-    public void observe(@ObservesAsync String text) throws SystemException {
+    public void observe(@ObservesAsync String text) {
         requestScopeActive.set(bm.getContext(RequestScoped.class).isActive());
         counterIsZero.set(counter.getCount().get() > 0 ? false : true);
-
     }
 
 

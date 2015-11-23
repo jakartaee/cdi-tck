@@ -20,11 +20,9 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_INVOCATION_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import javax.ejb.EJBAccessException;
@@ -65,14 +63,8 @@ public class EnterpriseSecurityContextPropagationInAsyncObserverTest extends Abs
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT_EE, id = "a"),
             @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT_EE, id = "b") })
     public void testSecurityContextNotPropagated() throws InterruptedException {
-        try {
-            teacher.print();
-            fail();
-        } catch (ExecutionException ex) {
-            List<Throwable> throwableList = Arrays.asList(ex.getCause().getSuppressed());
-            assertEquals(throwableList.size(), 1);
-            assertTrue(throwableList.get(0) instanceof EJBAccessException);
-        }
-
+        Throwable expectedException = teacher.print();
+        assertNotNull(expectedException);
+        assertTrue(expectedException.getCause() instanceof EJBAccessException);
     }
 }

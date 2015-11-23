@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.context.async.enterprise;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RunAs;
@@ -28,14 +31,16 @@ import javax.inject.Inject;
 @RunAs("student")
 @PermitAll
 public class Student {
-    
+
     public static String STUDENT_MESSAGE = "student message";
 
     @Inject
     Event<Text> printer;
-    
+
     public Text print() throws ExecutionException, InterruptedException {
-        return printer.fireAsync(new Text(STUDENT_MESSAGE)).toCompletableFuture().get();
+        BlockingQueue<Text> sync = new LinkedBlockingQueue<>();
+        printer.fireAsync(new Text(STUDENT_MESSAGE)).thenAccept(sync::offer);
+        return sync.poll(2l, TimeUnit.SECONDS);
     }
 
 }

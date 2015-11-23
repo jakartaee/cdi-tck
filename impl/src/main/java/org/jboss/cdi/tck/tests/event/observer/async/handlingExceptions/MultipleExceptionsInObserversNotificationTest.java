@@ -56,7 +56,7 @@ public class MultipleExceptionsInObserversNotificationTest extends AbstractTest 
             @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cb") })
     public void testMultipleExceptionsDuringVariousObserversNotification() throws InterruptedException {
         BlockingQueue<Throwable> queue = new LinkedBlockingQueue<>();
-        event.fireAsync(new RadioMessage()).handle((event, throwable) -> queue.add(throwable));
+        event.fireAsync(new RadioMessage()).handle((event, throwable) -> queue.offer(throwable));
 
         Throwable throwable = queue.poll(2, TimeUnit.SECONDS);
         assertNotNull(throwable);

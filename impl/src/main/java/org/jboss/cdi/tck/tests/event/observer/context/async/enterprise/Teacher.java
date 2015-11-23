@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.context.async.enterprise;
 
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.security.PermitAll;
 import javax.ejb.Stateful;
@@ -26,14 +28,17 @@ import javax.inject.Inject;
 @Stateful
 @PermitAll
 public class Teacher {
-    
+
     public static String TEACHER_MESSAGE = "teacher message";
 
     @Inject
     Event<Text> printer;
-    
-    public Text print() throws ExecutionException, InterruptedException {
-        return printer.fireAsync(new Text(TEACHER_MESSAGE)).toCompletableFuture().get();
+
+    public Throwable print() throws InterruptedException {
+        BlockingQueue<Throwable> sync = new LinkedBlockingQueue<>();
+        // this expects javax.ejb.EJBAccessException so the queue accepts only Throwable instance
+        printer.fireAsync(new Text(TEACHER_MESSAGE)).whenComplete((text, throwable) -> sync.offer(throwable));
+        return sync.poll(2l, TimeUnit.SECONDS);
     }
 
 }

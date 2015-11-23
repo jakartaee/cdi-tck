@@ -20,7 +20,12 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_INVOCATION_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -61,7 +66,10 @@ public class AsyncObserverMethodInvocationContextTest extends AbstractTest {
     @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "ab")
     public void testAsyncObserverIsCalledInNewTransactionContext() throws Exception {
         userTransaction.begin();
-        event.fireAsync(new Message()).toCompletableFuture().get();
+        BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+        event.fireAsync(new Message()).thenAccept(queue::offer);
+        Message message = queue.poll(2l, TimeUnit.SECONDS);
+        assertNotNull(message);
         assertEquals(Status.STATUS_NO_TRANSACTION, AsyncMessageObserver.status.get());
         userTransaction.commit();
     }
@@ -70,7 +78,10 @@ public class AsyncObserverMethodInvocationContextTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "aa"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "c") })
     public void testAsyncObserverIsCalledInNewRequestContext() throws Exception {
         counter.increment();
-        stringEvent.fireAsync(new String()).toCompletableFuture().get();
+        BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+        stringEvent.fireAsync(new String()).thenAccept(queue::offer);
+        String string = queue.poll(2l, TimeUnit.SECONDS);
+        assertNotNull(string);
         assertTrue(AsyncMessageObserver.requestScopeActive.get());
         assertTrue(AsyncMessageObserver.counterIsZero.get());
     }
