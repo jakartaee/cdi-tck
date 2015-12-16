@@ -4982,9 +4982,18 @@
             <text>The method fireAsync() may be called with a specific Executor object to be used to invoke observers method.</text>
         </assertion>
 
-        <assertion id="ef">
-            <text>The container should provide a default Executor when fireAsync() is called without specifying one.</text>
-        </assertion>
+        <group>
+            <text>The following elements are container specific:</text>
+            <assertion id="efa" testable="false">
+                <text>the default Executor used by the container when fireAsync() is called without specifying an Executor,</text>
+            </assertion>
+            <assertion id="efb" testable="false">
+                <text>the CompletionStage returned by fireAsync methods,</text>
+            </assertion>
+            <assertion id="efc" testable="false">
+                <text>all dependent stages of this initial CompletionStage.</text>
+            </assertion>
+        </group>
 
         <assertion id="f">
             <text>If the runtime type of the event object contains an unresolvable type variable, an |IllegalArgumentException| is thrown.</text>
