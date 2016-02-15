@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.extension;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_RESOLUTION;
@@ -64,7 +63,7 @@ public class EventBeanObserverNotificationTest extends AbstractObserverNotificat
         event.select(qualifiers).fire(payload);
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fb"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "eb"),
             @SpecAssertion(section = OBSERVER_RESOLUTION, id = "k") })
     public void testNotifyInvoked() {

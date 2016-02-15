@@ -65,7 +65,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     private VerifyingExtension extension;
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "e"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ja") })
     public void testFieldInjectionPoint() {
@@ -82,7 +82,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "e"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ja") })
     public void testConstructorInjectionPoint() {
@@ -99,7 +99,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "e") })
     public void testInitializerInjectionPoint() {
@@ -116,7 +116,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba") })
     public void testProducerMethodInjectionPoint1() {
         InjectionPoint ip = extension.getProducerAlpha();
@@ -132,7 +132,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "ba") })
     public void testProducerMethodInjectionPoint2() {
         InjectionPoint ip = extension.getProducerBravo();

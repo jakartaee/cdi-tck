@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.lookup.dynamic.broken.raw;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
 
 import javax.enterprise.inject.spi.DefinitionException;
@@ -47,7 +46,7 @@ public class RawInstanceCustomBeanTest extends AbstractTest {
                         CustomInstanceInjectionPoint.class).withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertion(section = DYNAMIC_LOOKUP, id = "c")
     public void testDefinitionError() {
         // Test initialization is aborted by the container

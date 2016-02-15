@@ -35,7 +35,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
@@ -46,7 +45,7 @@ public class UnmanagedInstanceTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(UnmanagedInstanceTest.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_UNMANAGED_INSTANCE, id = "a") })
     public void testObtainNonContextualInstanceUsingCurrentBeanManager() {
 
@@ -69,9 +68,7 @@ public class UnmanagedInstanceTest extends AbstractTest {
         assertTrue(Nail.preDestroyCalled);
         assertFalse(Hammer.preDestroyCalled);
     }
-    
 
-    
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = BM_OBTAIN_UNMANAGED_INSTANCE, id = "b")
     public void testObtainNonContextualInstance() {
@@ -94,8 +91,8 @@ public class UnmanagedInstanceTest extends AbstractTest {
         assertTrue(Proboscis.preDestroyCalled);
         assertFalse(Elephant.preDestroyCalled);
     }
-    
-    @Test(groups = INTEGRATION)
+
+    @Test
     @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD_EE, id = "ac") })
     public void testNonContextualInstanceIsIntercepted() {
 

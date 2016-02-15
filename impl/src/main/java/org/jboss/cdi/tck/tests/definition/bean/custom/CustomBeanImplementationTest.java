@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.custom;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_INSTANCE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
@@ -38,7 +37,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test(groups = INTEGRATION)
+@Test
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class CustomBeanImplementationTest extends AbstractTest {
 

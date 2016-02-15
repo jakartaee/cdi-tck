@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.interceptor;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
 import javax.enterprise.inject.spi.DeploymentException;
@@ -51,7 +50,7 @@ public class InterceptorNotResolvedInterModuleTest extends AbstractTest {
                 .withBeanLibrary(Cat.class, CatInterceptor.class, CatInterceptorBinding.class).withClasses(Foo.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertion(section = INTER_MODULE_INJECTION, id = "b")
     public void testInterceptorNotAvailableForInjection() {
         // Test deployment problem

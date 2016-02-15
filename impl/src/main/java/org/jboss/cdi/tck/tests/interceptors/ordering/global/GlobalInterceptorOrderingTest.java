@@ -41,7 +41,6 @@ import org.testng.annotations.Test;
  * Test interceptor enablement and ordering.
  *
  * @author Martin Kouba
- *
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class GlobalInterceptorOrderingTest extends AbstractTest {
@@ -57,14 +56,14 @@ public class GlobalInterceptorOrderingTest extends AbstractTest {
                         Descriptors
                                 .create(BeansDescriptor.class)
                                 .getOrCreateInterceptors().clazz(LegacyInterceptor1.class.getName(), LegacyInterceptor2.class.getName(),
-                                        LegacyInterceptor3.class.getName()).clazz().up())
+                                LegacyInterceptor3.class.getName()).clazz().up())
                 .withBeanLibrary(Transactional.class, AbstractInterceptor.class, Service.class,
                         GloballyEnabledInterceptor1.class, GloballyEnabledInterceptor3.class,
                         GloballyEnabledInterceptor4.class, GloballyEnabledInterceptor5.class)
                 .withBeanLibrary(GloballyEnabledInterceptor2.class).build();
     }
 
-    @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "f") })
     public void testOrderingInWebInfClasses(Dao dao) {
 

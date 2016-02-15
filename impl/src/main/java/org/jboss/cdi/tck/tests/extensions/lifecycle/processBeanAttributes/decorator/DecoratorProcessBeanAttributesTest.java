@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.decorator;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.testng.Assert.assertEquals;
 
@@ -35,7 +34,7 @@ import org.testng.annotations.Test;
  * 
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
+@Test
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class DecoratorProcessBeanAttributesTest extends AbstractTest {
 

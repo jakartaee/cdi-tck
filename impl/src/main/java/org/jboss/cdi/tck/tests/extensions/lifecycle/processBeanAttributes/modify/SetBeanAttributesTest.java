@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modify;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
 import static org.testng.Assert.assertEquals;
@@ -61,7 +60,7 @@ public class SetBeanAttributesTest extends AbstractTest {
     @Inject
     ModifyingExtension extension;
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bc"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ca") })
     public void testBeanModified() {
 
@@ -84,7 +83,7 @@ public class SetBeanAttributesTest extends AbstractTest {
         assertEquals(true, bean.isAlternative());
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "cc") })
     public void testChangesAreNotPropagated() {
         // No qualifiers, stereotypes, scope

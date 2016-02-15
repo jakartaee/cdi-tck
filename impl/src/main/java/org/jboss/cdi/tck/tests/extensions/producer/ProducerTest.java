@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTIONTARGET;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTIONTARGET_EE;
@@ -49,7 +48,7 @@ import org.testng.annotations.Test;
  * @author Kirill Gaevskii
  */
 @SuppressWarnings("serial")
-@Test(groups = INTEGRATION)
+@Test
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class ProducerTest extends AbstractTest {
 

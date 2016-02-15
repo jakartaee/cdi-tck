@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 
@@ -72,7 +71,7 @@ public class SelectedAlternative01Test extends AbstractTest {
     @Inject
     Charlie charlie;
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "aa") })
     public void testAlternativeManagedBeanSelected() {
         alpha.assertAvailable(Foo.class);
@@ -80,7 +79,7 @@ public class SelectedAlternative01Test extends AbstractTest {
         charlie.assertAvailable(Foo.class);
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ba"),
             @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "bb") })
     public void testAlternativeProducerSelected() {

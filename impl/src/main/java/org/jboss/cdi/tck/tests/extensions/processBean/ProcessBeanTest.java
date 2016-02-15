@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
 import static org.testng.Assert.assertEquals;
@@ -52,7 +51,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-@Test(groups = INTEGRATION)
+@Test
 public class ProcessBeanTest extends AbstractTest {
 
     @Deployment

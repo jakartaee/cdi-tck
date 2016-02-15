@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.custom;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -41,7 +40,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
+@Test
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class CustomPassivatingScopeCalledWithSerializableParametersTest extends AbstractTest {
 

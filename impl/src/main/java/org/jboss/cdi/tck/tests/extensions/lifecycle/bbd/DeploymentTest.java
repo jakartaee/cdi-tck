@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_DEPLOYMENT_VALIDATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN;
@@ -40,7 +39,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-@Test(groups = INTEGRATION)
+@Test
 public class DeploymentTest extends AbstractTest {
 
     @Deployment
