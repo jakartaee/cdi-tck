@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.specialization;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PBA;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 import static org.testng.Assert.assertEquals;
@@ -45,7 +44,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
+@Test
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class SpecializationTest extends AbstractTest {
 

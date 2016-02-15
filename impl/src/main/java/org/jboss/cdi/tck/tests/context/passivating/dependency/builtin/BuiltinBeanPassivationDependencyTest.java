@@ -1,6 +1,5 @@
 package org.jboss.cdi.tck.tests.context.passivating.dependency.builtin;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -36,7 +35,7 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
     @Inject
     Boss boss;
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ea") })
     public void testInstance() throws IOException, ClassNotFoundException {
         assertNotNull(worker);
@@ -56,7 +55,7 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
         assertEquals(workerCopy.getInstance().get().getId(), hammerId);
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ed") })
     public void testBeanManager() throws IOException, ClassNotFoundException {
         assertNotNull(boss);

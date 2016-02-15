@@ -63,7 +63,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     private VerifyingExtension extension;
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testFieldInjectionPoint() {
         InjectionPoint ip = extension.getAlpha();
@@ -79,7 +79,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testConstructorInjectionPoint() {
         InjectionPoint ip = extension.getBravo();
@@ -95,7 +95,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testInitializerInjectionPoint() {
         InjectionPoint ip = extension.getCharlie();
@@ -111,7 +111,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testProducerMethodInjectionPoint1() {
         InjectionPoint ip = extension.getProducerAlpha();
@@ -127,7 +127,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PIP, id = "a"), @SpecAssertion(section = PIP, id = "ba") })
     public void testProducerMethodInjectionPoint2() {
         InjectionPoint ip = extension.getProducerBravo();

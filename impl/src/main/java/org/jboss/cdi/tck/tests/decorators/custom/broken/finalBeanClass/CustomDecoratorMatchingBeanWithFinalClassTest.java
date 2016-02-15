@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.custom.broken.finalBeanClass;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 
 import javax.enterprise.inject.spi.DeploymentException;
@@ -33,7 +32,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
-@Test(groups = INTEGRATION)
+@Test
 public class CustomDecoratorMatchingBeanWithFinalClassTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 import static org.testng.Assert.assertEquals;
@@ -67,7 +66,7 @@ public class SelectedAlternative02Test extends AbstractTest {
     @Inject
     Charlie charlie;
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb")})
     public void testDependencyResolvable() {
         assertNotNull(alpha);

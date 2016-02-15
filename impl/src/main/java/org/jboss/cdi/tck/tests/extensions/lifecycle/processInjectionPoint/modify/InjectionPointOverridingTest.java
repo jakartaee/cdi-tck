@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.modify;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PIP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -46,7 +45,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
+@Test
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class InjectionPointOverridingTest extends AbstractTest {
 

@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_PASSIVATION_CAPABLE_BEAN;
 
 import javax.enterprise.inject.spi.Bean;
@@ -45,7 +44,7 @@ public class PassivationIdTest extends AbstractTest {
                 .withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertion(section = BM_OBTAIN_PASSIVATION_CAPABLE_BEAN, id = "a")
     public void testGetPassivationCapableBeanById() {
         Bean<?> passivatingBean = getCurrentManager().getPassivationCapableBean(CowBean.PASSIVATION_ID);

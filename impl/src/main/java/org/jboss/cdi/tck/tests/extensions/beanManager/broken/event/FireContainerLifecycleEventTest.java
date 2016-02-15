@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.broken.event;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_FIRE_EVENT;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -45,7 +44,7 @@ public class FireContainerLifecycleEventTest extends AbstractTest {
                 .withExtension(FooExtension.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertion(section = BM_FIRE_EVENT, id = "f")
     public void testFireContainerLifecycleEvent() {
         for (Object event : ContainerLifecycleEvents.CONTAINER_LIFECYCLE_EVENTS) {

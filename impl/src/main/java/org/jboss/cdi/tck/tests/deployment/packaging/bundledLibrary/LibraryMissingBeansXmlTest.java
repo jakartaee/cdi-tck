@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -45,7 +44,7 @@ public class LibraryMissingBeansXmlTest extends AbstractTest {
                 .withLibrary(Unlucky.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "jh") })
     public void test() {
         assertEquals(getCurrentManager().getBeans(Foo.class).size(), 1);

@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BBD;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
@@ -44,7 +43,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
-@Test(groups = INTEGRATION)
+@Test
 public class BeforeBeanDiscoveryTest extends AbstractTest {
 
     @Deployment

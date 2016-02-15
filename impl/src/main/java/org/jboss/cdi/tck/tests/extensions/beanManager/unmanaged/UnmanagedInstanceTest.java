@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.unmanaged;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_UNMANAGED_INSTANCE;
 import static org.testng.Assert.assertFalse;
@@ -46,7 +45,7 @@ public class UnmanagedInstanceTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(UnmanagedInstanceTest.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_UNMANAGED_INSTANCE, id = "a") })
     public void testObtainNonContextualInstance() {
 
@@ -70,7 +69,7 @@ public class UnmanagedInstanceTest extends AbstractTest {
         assertFalse(Hammer.preDestroyCalled);
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "ac") })
     public void testNonContextualInstanceIsIntercepted() {
 

@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INITIALIZER;
 import static org.jboss.cdi.tck.cdi.Sections.FIELDS_INITIALIZER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZER_METHODS;
@@ -41,7 +40,7 @@ public class InitializerMethodTest extends AbstractTest {
                 .withExcludedClass(EjbInitializerMethodTest.class.getName()).build();
     }
 
-    @Test(groups =  INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = DECLARING_INITIALIZER, id = "f"), @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "b"),
             @SpecAssertion(section = INITIALIZER_METHODS, id = "a") })
     public void testBindingTypeOnInitializerParameter() {
@@ -51,7 +50,7 @@ public class InitializerMethodTest extends AbstractTest {
         assert anotherHutch.getChicken().getName().equals("Standard");
     }
 
-    @Test(groups =  INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = INITIALIZER_METHODS, id = "g"), @SpecAssertion(section = DECLARING_INITIALIZER, id = "a"),
             @SpecAssertion(section = DECLARING_INITIALIZER, id = "e"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ad"),
             @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a") })

@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.visibility;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE;
 
 import javax.inject.Inject;
@@ -42,7 +41,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15721">GLASSFISH-15721</a>
  */
-@Test(groups = INTEGRATION)
+@Test
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class VisibilityOfBeanInWebModuleFromBeanManagerInBeanLibraryTest extends AbstractTest {
 

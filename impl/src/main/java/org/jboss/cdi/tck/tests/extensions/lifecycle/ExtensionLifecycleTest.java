@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_EVENTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -46,7 +45,7 @@ import org.testng.annotations.Test;
  * 
  * @author Martin Kouba
  */
-@Test(groups = INTEGRATION)
+@Test
 @SpecVersion(spec = "cdi", version = "1.1 Final Release")
 public class ExtensionLifecycleTest extends AbstractTest {
 

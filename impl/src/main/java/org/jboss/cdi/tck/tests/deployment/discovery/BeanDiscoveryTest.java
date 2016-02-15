@@ -28,7 +28,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author Martin Kouba
  * @author Matus Abaffy
  */
@@ -87,20 +86,20 @@ public class BeanDiscoveryTest extends AbstractTest {
     @Inject
     VerifyingExtension extension;
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
     public void testExplicitBeanArchiveModeAll(Alpha alpha) {
         assertDiscoveredAndAvailable(alpha, Alpha.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bb"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
     public void testExplicitBeanArchiveEmptyDescriptor(Bravo bravo) {
         assertDiscoveredAndAvailable(bravo, Bravo.class);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
             @SpecAssertion(section = BEAN_DISCOVERY, id = "ta") })
     public void testExplicitBeanArchiveLegacyDescriptor(Charlie charlie) {

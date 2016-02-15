@@ -51,7 +51,7 @@ public class InjectionTest extends AbstractTest {
                 .build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertion(section = NULL, id = "aa")
     public void testInjectionPerformsBoxingIfNecessary() throws Exception {
         assert getBeans(SpiderNest.class).size() == 1;
@@ -60,7 +60,7 @@ public class InjectionTest extends AbstractTest {
         assert spiderNest.numberOfSpiders.equals(4);
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "kc"),
             @SpecAssertion(section = INJECTION, id = "b"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ac") })
     public void testInjectionOfNamedBean() {
@@ -83,7 +83,7 @@ public class InjectionTest extends AbstractTest {
         assertTrue(henHouse.postConstructCalledAfterInitializers);
     }
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ac")
     public void testFieldDeclaredInIndirectSuperclassInjected() throws Exception {
         MegaPoorHenHouse henHouse = getContextualReference(MegaPoorHenHouse.class);

@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.synthetic;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEANATTRIBUTES;
 import static org.jboss.cdi.tck.cdi.Sections.PAT;
 import static org.jboss.cdi.tck.cdi.Sections.PBA;
@@ -62,7 +61,7 @@ public class ProcessBeanAttributesNotFiredForSyntheticBeanTest extends AbstractT
     @Inject
     BicycleExtension bicycleExtension;
 
-    @Test(groups = INTEGRATION)
+    @Test
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a"), @SpecAssertion(section = PBA, id = "ae"),
             @SpecAssertion(section = PAT, id = "bc") })
     public void testProcessBeanAttributesNotFired() {
