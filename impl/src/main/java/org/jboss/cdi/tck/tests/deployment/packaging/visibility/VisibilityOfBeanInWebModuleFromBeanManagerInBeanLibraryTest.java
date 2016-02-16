@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.visibility;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_EE;
 
 import javax.inject.Inject;
@@ -32,7 +33,7 @@ import org.testng.annotations.Test;
 /**
  * Validates that a bean in the WEB-INF/classes directory is visible to the BeanManager injected into a bean contained within a
  * bean library in the same bean (web) archive.
- *
+ * <p>
  * <p>
  * This test was originally part of Seam Compatibility project.
  * <p>
@@ -41,7 +42,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15721">GLASSFISH-15721</a>
  */
-@Test
+@Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class VisibilityOfBeanInWebModuleFromBeanManagerInBeanLibraryTest extends AbstractTest {
 
