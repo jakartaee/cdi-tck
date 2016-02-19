@@ -55,7 +55,7 @@ public class AlternativeAvailabilityTest extends AbstractTest {
                 .withTestClassPackage(AlternativeAvailabilityTest.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
-                                .clazz(Chicken.class.getName(), EnabledSheepProducer.class.getName())
+                                .clazz(Chicken.class.getName(), EnabledSheepProducer.class.getName(), SnakeProducer.class.getName())
                                 .stereotype(EnabledAlternativeStereotype.class.getName()).up()).build();
     }
 
@@ -128,6 +128,7 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     public void testProducerAlternativesOnMethodAndField() throws Exception {
         assertEquals(getBeans(Cat.class, WILD_LITERAL).size(), 2);
         assertEquals(getBeans(Cat.class, TAME_LITERAL).size(), 0);
+        assertEquals(getBeans(Snake.class, WILD_LITERAL).size(), 2);
     }
 
     @Test
