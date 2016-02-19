@@ -26,6 +26,7 @@ import static org.jboss.cdi.tck.cdi.Sections.SELECTION;
 import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.reflect.Type;
@@ -128,7 +129,8 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     public void testProducerAlternativesOnMethodAndField() throws Exception {
         assertEquals(getBeans(Cat.class, WILD_LITERAL).size(), 2);
         assertEquals(getBeans(Cat.class, TAME_LITERAL).size(), 0);
-        assertEquals(getBeans(Snake.class, WILD_LITERAL).size(), 2);
+        Set<Bean<?>> snakeBeans = getCurrentManager().getBeans(Snake.class, WILD_LITERAL);
+        assertNotNull(getCurrentManager().resolve(snakeBeans));
     }
 
     @Test

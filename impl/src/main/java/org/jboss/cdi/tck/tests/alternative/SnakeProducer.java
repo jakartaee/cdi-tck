@@ -22,7 +22,6 @@ import javax.enterprise.inject.Produces;
 public class SnakeProducer {
 
     @Produces
-    @Alternative
     @Wild
     Snake snake = new Snake();
 
