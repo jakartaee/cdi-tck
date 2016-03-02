@@ -65,8 +65,7 @@ public class MixedObserversTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "f"),
-            @SpecAssertion(section = EVENT, id = "ef"), @SpecAssertion(section = EVENT, id = "eda") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "f"), @SpecAssertion(section = EVENT, id = "eda") })
     public void testQualifiedAsyncEventIsDeliveredOnlyToAsyncObservers() throws InterruptedException {
 
         BlockingQueue<Experiment> queue = new LinkedBlockingQueue<>();

@@ -4375,14 +4375,9 @@
         </assertion>
 
         <assertion id="f">
-            <text>Decorators of a session bean must comply with the bean provider programming restrictions defined by the EJB specification.</text>
+            <text>If a decorator declares any scope other than @Dependent, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
-        <assertion id="g">
-            <text>Decorators of a stateful session bean must comply with the rules for instance passivation and conversational state defined by the EJB
-                specification.
-            </text>
-        </assertion>
     </section>
 
     <section id="decorator_annotation" title="Declaring a decorator" level="3">
@@ -4817,6 +4812,10 @@
 
         <assertion id="i" implied="true">
             <text>By default, a bean archive has no enabled interceptors.</text>
+        </assertion>
+
+        <assertion id="j">
+            <text>If an interceptor declares any scope other than @Dependent, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
 
     </section>
@@ -9901,6 +9900,16 @@
 
         <assertion id="d" implied="true">
             <text>The decorator class may be abstract.</text>
+        </assertion>
+
+        <assertion id="e">
+            <text>Decorators of a session bean must comply with the bean provider programming restrictions defined by the EJB specification.</text>
+        </assertion>
+
+        <assertion id="f">
+            <text>Decorators of a stateful session bean must comply with the rules for instance passivation and conversational state defined by the EJB
+                specification.
+            </text>
         </assertion>
     </section>
 
