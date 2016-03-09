@@ -19,13 +19,13 @@ package org.jboss.cdi.tck.tests.event.bindingTypes;
 import static org.jboss.cdi.tck.cdi.Sections.EVENT_TYPES_AND_QUALIFIER_TYPES;
 
 import javax.enterprise.event.Event;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -96,14 +96,14 @@ public class EventBindingTypesTest extends AbstractTest {
     public void testEventAlwaysHasAnyBinding() {
         Bean<Event<Animal>> animalEventBean = getUniqueBean(new TypeLiteral<Event<Animal>>() {
         }, new WildAnnotationLiteral());
-        assert animalEventBean.getQualifiers().contains(AnyLiteral.INSTANCE);
+        assert animalEventBean.getQualifiers().contains(Any.Literal.INSTANCE);
 
         Bean<Event<Animal>> tameAnimalEventBean = getUniqueBean(new TypeLiteral<Event<Animal>>() {
         }, new TameAnnotationLiteral());
-        assert tameAnimalEventBean.getQualifiers().contains(AnyLiteral.INSTANCE);
+        assert tameAnimalEventBean.getQualifiers().contains(Any.Literal.INSTANCE);
 
         Bean<Event<Animal>> wildAnimalEventBean = getUniqueBean(new TypeLiteral<Event<Animal>>() {
         }, new WildAnnotationLiteral());
-        assert wildAnimalEventBean.getQualifiers().contains(AnyLiteral.INSTANCE);
+        assert wildAnimalEventBean.getQualifiers().contains(Any.Literal.INSTANCE);
     }
 }

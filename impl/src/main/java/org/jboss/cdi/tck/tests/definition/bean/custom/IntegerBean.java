@@ -24,11 +24,10 @@ import java.util.Set;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.PassivationCapable;
-
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 public class IntegerBean implements Bean<Integer>, PassivationCapable {
 
@@ -62,7 +61,7 @@ public class IntegerBean implements Bean<Integer>, PassivationCapable {
         getQualifiersCalled = true;
         return new HashSet<Annotation>() {
             {
-                add(new DefaultLiteral());
+                add(Default.Literal.INSTANCE);
             }
         };
     }

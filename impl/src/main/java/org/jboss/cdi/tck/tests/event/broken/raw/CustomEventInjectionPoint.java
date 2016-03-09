@@ -23,12 +23,11 @@ import java.util.Collections;
 import java.util.Set;
 
 import javax.enterprise.event.Event;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
-
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 public class CustomEventInjectionPoint implements InjectionPoint {
 
@@ -48,8 +47,7 @@ public class CustomEventInjectionPoint implements InjectionPoint {
 
     @Override
     public Set<Annotation> getQualifiers() {
-        Annotation defaultQualifier = new DefaultLiteral();
-        return Collections.singleton(defaultQualifier);
+        return Collections.singleton(Default.Literal.INSTANCE);
     }
 
     @Override

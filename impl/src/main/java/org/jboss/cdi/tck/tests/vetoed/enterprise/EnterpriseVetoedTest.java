@@ -22,11 +22,11 @@ import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEANS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
+import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.vetoed.enterprise.aquarium.Piranha;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -63,14 +63,14 @@ public class EnterpriseVetoedTest extends AbstractTest {
             @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ia") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
-        assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
+        assertEquals(getCurrentManager().getBeans(Elephant.class, Any.Literal.INSTANCE).size(), 0);
     }
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ie") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
-        assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);
+        assertEquals(getCurrentManager().getBeans(Gecko.class, Any.Literal.INSTANCE).size(), 0);
     }
 
     @Test(groups = INTEGRATION)
@@ -78,6 +78,6 @@ public class EnterpriseVetoedTest extends AbstractTest {
             @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ii") })
     public void testPackageLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Piranha.class));
-        assertEquals(getCurrentManager().getBeans(Piranha.class, AnyLiteral.INSTANCE).size(), 0);
+        assertEquals(getCurrentManager().getBeans(Piranha.class, Any.Literal.INSTANCE).size(), 0);
     }
 }

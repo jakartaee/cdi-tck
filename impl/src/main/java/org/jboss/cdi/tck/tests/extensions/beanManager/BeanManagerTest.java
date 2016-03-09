@@ -166,8 +166,7 @@ public class BeanManagerTest extends AbstractTest {
         assertEquals(stereotypeAnnotations.size(), 5);
         assertTrue(stereotypeAnnotations.contains(new AnnotationLiteral<Stereotype>() {
         }));
-        assertTrue(stereotypeAnnotations.contains(new AnnotationLiteral<RequestScoped>() {
-        }));
+        assertTrue(stereotypeAnnotations.contains(RequestScoped.Literal.INSTANCE));
         assertTrue(stereotypeAnnotations.contains(new AnnotationLiteral<Inherited>() {
         }));
         assertTrue(stereotypeAnnotations.contains(new RetentionLiteral() {

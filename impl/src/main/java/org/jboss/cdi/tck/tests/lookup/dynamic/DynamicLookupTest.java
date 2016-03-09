@@ -27,12 +27,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.enterprise.inject.AmbiguousResolutionException;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.util.AnnotationLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -96,7 +96,7 @@ public class DynamicLookupTest extends AbstractTest {
             @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fa"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fc") })
     public void testGetMethod() {
         // initial setup of contextual instance
-        getContextualReference(AdvancedPaymentProcessor.class, AnyLiteral.INSTANCE).setValue(10);
+        getContextualReference(AdvancedPaymentProcessor.class, Any.Literal.INSTANCE).setValue(10);
 
         Instance<AsynchronousPaymentProcessor> instance = getContextualReference(ObtainsInstanceBean.class).getPaymentProcessor();
         assert instance.get() instanceof AdvancedPaymentProcessor;
@@ -133,8 +133,8 @@ public class DynamicLookupTest extends AbstractTest {
             @SpecAssertion(section = ANNOTATIONLITERAL_TYPELITERAL, id = "a") })
     public void testIteratorMethod() {
         // initial setup of contextual instances
-        getContextualReference(AdvancedPaymentProcessor.class, AnyLiteral.INSTANCE).setValue(1);
-        getContextualReference(RemotePaymentProcessor.class, AnyLiteral.INSTANCE).setValue(2);
+        getContextualReference(AdvancedPaymentProcessor.class, Any.Literal.INSTANCE).setValue(1);
+        getContextualReference(RemotePaymentProcessor.class, Any.Literal.INSTANCE).setValue(2);
 
         Instance<PaymentProcessor> instance = getContextualReference(ObtainsInstanceBean.class).getAnyPaymentProcessor();
         Iterator<AsynchronousPaymentProcessor> iterator1 = instance.select(AsynchronousPaymentProcessor.class).iterator();

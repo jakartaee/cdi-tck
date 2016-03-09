@@ -22,13 +22,12 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
-
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 public class AmbiguousInjectionPoint implements InjectionPoint {
     private final Bean<SimpleBean> bean;
@@ -36,8 +35,8 @@ public class AmbiguousInjectionPoint implements InjectionPoint {
 
     public AmbiguousInjectionPoint(Bean<SimpleBean> bean) {
         this.bean = bean;
-        bindings.add(new DefaultLiteral());
-        bindings.add(AnyLiteral.INSTANCE);
+        bindings.add(Default.Literal.INSTANCE);
+        bindings.add(Any.Literal.INSTANCE);
     }
 
     public Annotated getAnnotated() {

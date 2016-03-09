@@ -26,14 +26,13 @@ import java.util.Set;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.InjectionPoint;
-
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 public class CustomDecorator implements Decorator<VehicleDecorator> {
 
@@ -123,7 +122,7 @@ public class CustomDecorator implements Decorator<VehicleDecorator> {
         }
 
         public Set<Annotation> getQualifiers() {
-            return Collections.<Annotation> singleton(new DefaultLiteral());
+            return Collections.<Annotation> singleton(Default.Literal.INSTANCE);
         }
 
         public Member getMember() {

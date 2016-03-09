@@ -23,8 +23,6 @@ import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.New;
 import javax.inject.Inject;
 
-import org.jboss.cdi.tck.literals.NewLiteral;
-
 public class ObtainsNewInstanceBean {
     @Inject
     @New(HashMap.class)
@@ -46,6 +44,6 @@ public class ObtainsNewInstanceBean {
     }
 
     public Instance<IllegalArgumentException> getIae() {
-        return iae.select(new NewLiteral(IllegalArgumentException.class));
+        return iae.select(New.Literal.of(IllegalArgumentException.class));
     }
 }

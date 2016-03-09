@@ -21,7 +21,6 @@ import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_SE;
 import static org.jboss.cdi.tck.cdi.Sections.INIT_CONTAINER;
 
 import javax.enterprise.inject.spi.CDI;
-import javax.enterprise.inject.spi.CDIProvider;
 
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +41,8 @@ public class ContextSETest extends Arquillian {
 
     @Deployment
     public static Archive<?> deployment() {
-        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClasses(ContextSETest.class, ApplicationScopedCounter.class, ApplicationScopedObserver.class)
+        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class)
+                .addClasses(ContextSETest.class, ApplicationScopedCounter.class, ApplicationScopedObserver.class)
                 .addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
         final JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
         final JavaArchive barArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Bar.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
@@ -53,9 +53,9 @@ public class ContextSETest extends Arquillian {
     @Test
     @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "a")
     public void applicationContextSharedBetweenAllBeansWithinContainer() {
-
-        CDIProvider cdiProvider = CDI.getCDIProvider();
-        try(CDI<Object> cdi = cdiProvider.initialize()) {
+        //        FIXME
+        //        CDIProvider cdiProvider = CDI.getCDIProvider();
+        try (CDI<Object> cdi = CDI.current()) {
             cdi.select(Foo.class).get().ping();
             cdi.select(Bar.class).get().ping();
             cdi.select(Baz.class).get().ping();
@@ -70,8 +70,9 @@ public class ContextSETest extends Arquillian {
             @SpecAssertion(section = INIT_CONTAINER, id = "c") })
     public void testEventIsFiredWhenAplicationContextInitialized() {
         ApplicationScopedObserver.reset();
-        CDIProvider cdiProvider = CDI.getCDIProvider();
-        try(CDI<Object> cdi = cdiProvider.initialize()) {
+        //        FIXME
+        //        CDIProvider cdiProvider = CDI.getCDIProvider();
+        try (CDI<Object> cdi = CDI.current()) {
             Assert.assertTrue(ApplicationScopedObserver.isInitialized);
             Assert.assertNotNull(ApplicationScopedObserver.initializedEventPayload);
         }
@@ -81,9 +82,10 @@ public class ContextSETest extends Arquillian {
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "c"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d") })
     public void testEventIsFiredWhenAplicationContextDestroyed() {
         ApplicationScopedObserver.reset();
-        CDIProvider cdiProvider = CDI.getCDIProvider();
-        try(CDI<Object> cdi = cdiProvider.initialize()){
-            
+        //        FIXME
+        //        CDIProvider cdiProvider = CDI.getCDIProvider();
+        try (CDI<Object> cdi = CDI.current()) {
+
         }
         Assert.assertTrue(ApplicationScopedObserver.isDestroyed);
         Assert.assertNotNull(ApplicationScopedObserver.destroyedEventPayload);

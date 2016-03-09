@@ -25,13 +25,12 @@ import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanAttributes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
-
-import org.jboss.cdi.tck.literals.AnyLiteral;
 
 public class ModifyingExtension implements Extension {
 
@@ -51,7 +50,7 @@ public class ModifyingExtension implements Extension {
 
             public Set<Annotation> getQualifiers() {
                 return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(new Cute.Literal(), new Wild.Literal(
-                        true), AnyLiteral.INSTANCE)));
+                        true), Any.Literal.INSTANCE)));
             }
 
             public Class<? extends Annotation> getScope() {

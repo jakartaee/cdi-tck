@@ -24,13 +24,13 @@ import static org.testng.Assert.assertTrue;
 import java.util.Map;
 import java.util.Set;
 
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.Extension;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -83,18 +83,18 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
         assertFalse(psatClasses.contains(Juicy.class));
 
         // Test changes applied
-        Set<Bean<?>> oranges = getCurrentManager().getBeans(Orange.class, AnyLiteral.INSTANCE);
+        Set<Bean<?>> oranges = getCurrentManager().getBeans(Orange.class, Any.Literal.INSTANCE);
         assertEquals(oranges.size(), 1);
         assertFalse(oranges.iterator().next().getQualifiers().contains(Juicy.Literal.INSTANCE));
-        Set<Bean<?>> apples = getCurrentManager().getBeans(Apple.class, AnyLiteral.INSTANCE);
+        Set<Bean<?>> apples = getCurrentManager().getBeans(Apple.class, Any.Literal.INSTANCE);
         assertEquals(apples.size(), 2);
         Set<Bean<?>> juicyApples = getCurrentManager().getBeans(Apple.class, Juicy.Literal.INSTANCE);
         assertEquals(juicyApples.size(), 1);
         assertTrue(juicyApples.iterator().next().getQualifiers().contains(Fresh.Literal.INSTANCE));
-        assertEquals(getCurrentManager().getBeans(Pear.class, AnyLiteral.INSTANCE).size(), 2);
+        assertEquals(getCurrentManager().getBeans(Pear.class, Any.Literal.INSTANCE).size(), 2);
         Set<Bean<?>> juicyPears = getCurrentManager().getBeans(Pear.class, Juicy.Literal.INSTANCE);
         assertEquals(juicyPears.size(), 1);
-        Set<Bean<?>> annotation = getCurrentManager().getBeans(TestAnnotation.class, AnyLiteral.INSTANCE);
+        Set<Bean<?>> annotation = getCurrentManager().getBeans(TestAnnotation.class, Any.Literal.INSTANCE);
         assertEquals(annotation.size(), 0);
 
     }

@@ -38,15 +38,15 @@ import java.util.List;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.literal.NamedLiteral;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
-import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -96,7 +96,7 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
     public void testDefaultBindingType() {
         Set<Bean<Tarantula>> tarantulaBeans = getBeans(Tarantula.class);
         assert tarantulaBeans.size() == 2;
-        assert tarantulaBeans.iterator().next().getQualifiers().contains(new DefaultLiteral());
+        assert tarantulaBeans.iterator().next().getQualifiers().contains(Default.Literal.INSTANCE);
     }
 
     @Test
@@ -186,7 +186,7 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
         Bean<Tarantula> staticTarantulaBean = getUniqueBean(Tarantula.class, STATIC_LITERAL);
         assertEquals(staticTarantulaBean.getName(), "produceTarantula");
         // Any, Static
-        assertTrue(annotationSetMatches(staticTarantulaBean.getQualifiers(), AnyLiteral.INSTANCE, STATIC_LITERAL));
+        assertTrue(annotationSetMatches(staticTarantulaBean.getQualifiers(), Any.Literal.INSTANCE, STATIC_LITERAL));
 
     }
 
@@ -196,7 +196,7 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
         Bean<Tarantula> tarantulaBean = getUniqueBean(Tarantula.class, PET_LITERAL);
         assertEquals(tarantulaBean.getName(), "producedPetTarantula");
         // Any, Pet, Named
-        assertTrue(annotationSetMatches(tarantulaBean.getQualifiers(), AnyLiteral.INSTANCE, PET_LITERAL, new NamedLiteral(
+        assertTrue(annotationSetMatches(tarantulaBean.getQualifiers(), Any.Literal.INSTANCE, PET_LITERAL, NamedLiteral.of(
                 "producedPetTarantula")));
     }
 

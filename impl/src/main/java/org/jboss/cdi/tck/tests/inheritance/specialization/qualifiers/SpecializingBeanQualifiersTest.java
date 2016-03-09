@@ -23,13 +23,13 @@ import static org.testng.Assert.assertTrue;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -77,7 +77,7 @@ public class SpecializingBeanQualifiersTest extends AbstractTest {
         Bean<?> bean = specializationBeans.iterator().next();
         Set<Annotation> qualifiers = bean.getQualifiers();
         assertEquals(2, qualifiers.size());
-        assertTrue(qualifiers.contains(AnyLiteral.INSTANCE));
+        assertTrue(qualifiers.contains(Any.Literal.INSTANCE));
         assertTrue(qualifiers.contains(new Mock.MockLiteral()));
         return bean;
     }

@@ -24,6 +24,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
@@ -34,7 +35,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.tests.implementation.simple.ee.components.Tame.TameLiteral;
 import org.jboss.cdi.tck.tests.implementation.simple.ee.components.Wild.WildLiteral;
 import org.jboss.cdi.tck.util.ActionSequence;
@@ -86,13 +86,13 @@ public class IntrospectServlet extends HttpServlet {
         String mode = req.getParameter("mode");
 
         if (MODE_INJECT.equals(mode)) {
-            resp.getWriter().println(pingInstance.select(DefaultLiteral.INSTANCE).get().pong() + ":" + getId());
+            resp.getWriter().println(pingInstance.select(Default.Literal.INSTANCE).get().pong() + ":" + getId());
         } else if (MODE_PRODUCER_METHOD.equals(mode)) {
             resp.getWriter().println(pingInstance.select(TameLiteral.INSTANCE).get().getTestServletId() + ":" + getId());
         } else if (MODE_PRODUCER_FIELD.equals(mode)) {
             resp.getWriter().println(pingInstance.select(WildLiteral.INSTANCE).get().getTestServletId() + ":" + getId());
         } else if (MODE_OBSERVER_METHOD.equals(mode)) {
-            pingEvent.select(DefaultLiteral.INSTANCE).fire(new Ping());
+            pingEvent.select(Default.Literal.INSTANCE).fire(new Ping());
             resp.getWriter().println(ActionSequence.getSequenceData().get(0) + ":" + getId());
         } else if (MODE_DISPOSER_METHOD.equals(mode)) {
             pingEvent.select(WildLiteral.INSTANCE).fire(new Ping());

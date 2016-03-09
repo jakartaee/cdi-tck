@@ -28,6 +28,8 @@ import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedType;
@@ -38,8 +40,6 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
 
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 public class AfterBeanDiscoveryObserver implements Extension {
@@ -70,7 +70,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
     private void addBean(AfterBeanDiscovery event, final BeanManager beanManager) {
         event.addBean(new Bean<Cockatoo>() {
 
-            private final Set<Annotation> qualifiers = new HashSet<Annotation>(Arrays.asList(new DefaultLiteral()));
+            private final Set<Annotation> qualifiers = new HashSet<Annotation>(Arrays.asList(Default.Literal.INSTANCE));
             private final Set<Type> types = new HashSet<Type>(Arrays.<Type> asList(Cockatoo.class));
 
             public Class<?> getBeanClass() {
@@ -166,7 +166,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
             }
 
             public Set<Annotation> getObservedQualifiers() {
-                return Collections.<Annotation> singleton(AnyLiteral.INSTANCE);
+                return Collections.<Annotation> singleton(Any.Literal.INSTANCE);
             }
 
             public Type getObservedType() {

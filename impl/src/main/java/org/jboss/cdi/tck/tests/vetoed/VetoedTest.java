@@ -22,12 +22,12 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.inject.Any;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.vetoed.aquarium.Fish;
 import org.jboss.cdi.tck.tests.vetoed.aquarium.FishType;
@@ -70,7 +70,7 @@ public class VetoedTest extends AbstractTest {
             @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ia"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ib") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
-        assertEquals(getCurrentManager().getBeans(Elephant.class, AnyLiteral.INSTANCE).size(), 0);
+        assertEquals(getCurrentManager().getBeans(Elephant.class, Any.Literal.INSTANCE).size(), 0);
         assertFalse(verifyingExtension.getClasses().contains(Animal.class));
     }
 
@@ -84,8 +84,8 @@ public class VetoedTest extends AbstractTest {
         assertFalse(verifyingExtension.getClasses().contains(FishType.class));
         assertFalse(verifyingExtension.getClasses().contains(Fishy.class));
         assertTrue(verifyingExtension.getClasses().contains(Shark.class));
-        assertEquals(getCurrentManager().getBeans(Piranha.class, AnyLiteral.INSTANCE).size(), 0);
-        assertEquals(getCurrentManager().getBeans(Shark.class, AnyLiteral.INSTANCE).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Piranha.class, Any.Literal.INSTANCE).size(), 0);
+        assertEquals(getCurrentManager().getBeans(Shark.class, Any.Literal.INSTANCE).size(), 1);
         assertEquals(getCurrentManager().getBeans(Shark.class, new AnnotationLiteral<Fishy>() {
         }).size(), 1);
     }
@@ -95,7 +95,7 @@ public class VetoedTest extends AbstractTest {
             @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "if") })
     public void testAnnotatedTypeAddedByExtension() {
         assertFalse(verifyingExtension.getClasses().contains(Gecko.class));
-        assertEquals(getCurrentManager().getBeans(Gecko.class, AnyLiteral.INSTANCE).size(), 0);
+        assertEquals(getCurrentManager().getBeans(Gecko.class, Any.Literal.INSTANCE).size(), 0);
         assertFalse(verifyingExtension.getClasses().contains(Reptile.class));
     }
 

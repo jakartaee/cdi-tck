@@ -23,6 +23,7 @@ import java.util.Set;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
@@ -32,7 +33,6 @@ import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
 
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.util.ForwardingBeanAttributes;
 import org.jboss.cdi.tck.util.ForwardingInjectionPoint;
 
@@ -53,7 +53,7 @@ public class GlueDecoratorExtension implements Extension {
 
             @Override
             public Set<Annotation> getDelegateQualifiers() {
-                return Collections.<Annotation> singleton(AnyLiteral.INSTANCE);
+                return Collections.<Annotation> singleton(Any.Literal.INSTANCE);
             }
 
             @Override

@@ -20,6 +20,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.AnnotatedConstructor;
@@ -34,7 +35,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.InjectLiteral;
 import org.jboss.cdi.tck.util.annotated.AnnotatedConstructorWrapper;
 import org.jboss.cdi.tck.util.annotated.AnnotatedFieldWrapper;
@@ -53,8 +53,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
     private static boolean getTypeClosureOfProducerMethodUsed = false;
 
     public GroceryWrapper(AnnotatedType<Grocery> delegate) {
-        super(delegate, false, new AnnotationLiteral<RequestScoped>() {
-        }, new CheapLiteral(), new AnnotationLiteral<NamedStereotype>() {
+        super(delegate, false, RequestScoped.Literal.INSTANCE, new CheapLiteral(), new AnnotationLiteral<NamedStereotype>() {
         }, new AnnotationLiteral<GroceryInterceptorBinding>() {
         });
         typeClosure.add(Grocery.class);
@@ -172,7 +171,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
                 AnnotatedMethodWrapper<? super Grocery> methodWrapper = new AnnotatedMethodWrapper(method, this, true);
                 // replace the second parameter and keep the first one
                 methodWrapper.replaceParameters(new AnnotatedParameterWrapper(methodWrapper.getParameter(0), methodWrapper, true),
-                        new AnnotatedParameterWrapper(methodWrapper.getParameter(1), methodWrapper, true, AnyLiteral.INSTANCE) {
+                        new AnnotatedParameterWrapper(methodWrapper.getParameter(1), methodWrapper, true, Any.Literal.INSTANCE) {
                             @Override
                             public Type getBaseType() {
                                 getBaseTypeOfBillDisposerParameterUsed = true;

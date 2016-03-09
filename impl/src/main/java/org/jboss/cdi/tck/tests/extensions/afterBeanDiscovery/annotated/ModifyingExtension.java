@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
@@ -31,7 +32,6 @@ import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
 
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Alpha.AlphaLiteral;
 import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Bravo.BravoLiteral;
 import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Charlie.CharlieLiteral;
@@ -72,7 +72,7 @@ public class ModifyingExtension implements Extension {
             @Override
             public AnnotatedType<Foo> delegate() {
                 return new AnnotatedTypeWrapper<Foo>(beanManager.createAnnotatedType(Foo.class), false, BravoLiteral.INSTANCE,
-                        AnyLiteral.INSTANCE);
+                        Any.Literal.INSTANCE);
             }
 
         }.perform(event);

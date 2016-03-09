@@ -34,12 +34,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
+import javax.enterprise.inject.New;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.NewLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -177,7 +177,7 @@ public class NewSimpleBeanTest extends AbstractTest {
 
         assertNotNull(getContextualReference(Shop.class).getNewOrder());
 
-        Bean<Order> newOrderBean = getUniqueBean(Order.class, NewLiteral.INSTANCE);
+        Bean<Order> newOrderBean = getUniqueBean(Order.class, New.Literal.INSTANCE);
         assertEquals(newOrderBean.getBeanClass(), Order.class);
 
         Bean<Lion> lionBean = getUniqueBean(Lion.class, new TameLiteral());
@@ -190,7 +190,7 @@ public class NewSimpleBeanTest extends AbstractTest {
     @Test
     @SpecAssertion(section = NEW, id = "e")
     public void testNewBeanHasTheSameBeanTypes() {
-        Bean<Order> bean = getUniqueBean(Order.class, NewLiteral.INSTANCE);
+        Bean<Order> bean = getUniqueBean(Order.class, New.Literal.INSTANCE);
         assertTrue(typeSetMatches(bean.getTypes(), Object.class, Serializable.class, Order.class));
     }
 
@@ -235,7 +235,7 @@ public class NewSimpleBeanTest extends AbstractTest {
     @SpecAssertion(section = NEW, id = "xb")
     public void testNewBeanIsNotAlternative() {
         assert getUniqueBean(Tiger.class).isAlternative();
-        assert !getUniqueBean(Tiger.class, NewLiteral.INSTANCE).isAlternative();
+        assert !getUniqueBean(Tiger.class, New.Literal.INSTANCE).isAlternative();
     }
 
     @Test

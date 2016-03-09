@@ -23,12 +23,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -68,7 +68,7 @@ public class ManagerTest extends AbstractTest {
     @SpecAssertion(section = BEANMANAGER, id = "ac")
     public void testManagerBeanHasCurrentBinding() {
         Bean<BeanManager> beanManager = getBeans(BeanManager.class).iterator().next();
-        assert beanManager.getQualifiers().contains(new DefaultLiteral());
+        assert beanManager.getQualifiers().contains(Default.Literal.INSTANCE);
     }
 
     @Test

@@ -17,20 +17,12 @@
 package org.jboss.cdi.tck.tests.event.observer.priority;
 
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.tests.event.observer.extension.Angry;
-import org.jboss.cdi.tck.tests.event.observer.extension.GiraffeObserver;
-import org.jboss.cdi.tck.tests.event.observer.extension.Nubian;
-import org.jboss.cdi.tck.tests.event.observer.extension.Tall;
-import org.jboss.cdi.tck.util.ActionSequence;
 
 public class ObserverExtension implements Extension {
 

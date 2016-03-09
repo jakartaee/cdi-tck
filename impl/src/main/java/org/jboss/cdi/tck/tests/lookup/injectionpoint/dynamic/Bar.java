@@ -18,11 +18,11 @@
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.dynamic;
 
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 /**
  * @author Martin Kouba
@@ -52,7 +52,7 @@ public class Bar {
     }
 
     public Foo getFoo() {
-        return fooInstance.select(DefaultLiteral.INSTANCE).get();
+        return fooInstance.select(Default.Literal.INSTANCE).get();
     }
 
     public Foo getTypeNiceFoo() {
@@ -74,7 +74,7 @@ public class Bar {
     }
 
     public Foo getTransientFoo() {
-        return transientFooInstance.select(DefaultLiteral.INSTANCE).get();
+        return transientFooInstance.select(Default.Literal.INSTANCE).get();
     }
 
 }

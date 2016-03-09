@@ -24,11 +24,10 @@ import java.util.Set;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
-
-import org.jboss.cdi.tck.literals.AnyLiteral;
 
 public class CustomBarBean implements Bean<Bar> {
 
@@ -59,7 +58,7 @@ public class CustomBarBean implements Bean<Bar> {
     @Override
     public Set<Annotation> getQualifiers() {
         Set<Annotation> qualifiers = new HashSet<Annotation>();
-        qualifiers.add(AnyLiteral.INSTANCE);
+        qualifiers.add(Any.Literal.INSTANCE);
         return qualifiers;
     }
 

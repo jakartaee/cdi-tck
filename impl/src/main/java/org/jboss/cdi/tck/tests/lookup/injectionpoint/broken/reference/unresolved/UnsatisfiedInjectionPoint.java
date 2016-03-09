@@ -22,13 +22,12 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
-
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 public class UnsatisfiedInjectionPoint implements InjectionPoint {
 
@@ -37,8 +36,8 @@ public class UnsatisfiedInjectionPoint implements InjectionPoint {
 
     public UnsatisfiedInjectionPoint(Bean<SimpleBean> beanWithInjectionPoint) {
         this.bean = beanWithInjectionPoint;
-        bindings.add(new DefaultLiteral());
-        bindings.add(AnyLiteral.INSTANCE);
+        bindings.add(Default.Literal.INSTANCE);
+        bindings.add(Any.Literal.INSTANCE);
     }
 
     public Annotated getAnnotated() {

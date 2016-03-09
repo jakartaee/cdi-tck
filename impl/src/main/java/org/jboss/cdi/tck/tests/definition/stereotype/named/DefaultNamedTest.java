@@ -22,13 +22,13 @@ import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.literal.NamedLiteral;
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
-import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -50,7 +50,7 @@ public class DefaultNamedTest extends AbstractTest {
     public void testStereotypeDeclaringNamed() {
         Bean<FallowDeer> fallowBean = getUniqueBean(FallowDeer.class);
         assertEquals(fallowBean.getName(), "fallowDeer");
-        assertTrue(annotationSetMatches(fallowBean.getQualifiers(), AnyLiteral.INSTANCE, DefaultLiteral.INSTANCE));
+        assertTrue(annotationSetMatches(fallowBean.getQualifiers(), Any.Literal.INSTANCE, Default.Literal.INSTANCE));
     }
 
     @Test
@@ -59,8 +59,8 @@ public class DefaultNamedTest extends AbstractTest {
         // The bean name is overriden by the bean
         Bean<RoeDeer> roeBean = getUniqueBean(RoeDeer.class);
         assertEquals(roeBean.getName(), "roe");
-        assertTrue(annotationSetMatches(roeBean.getQualifiers(), AnyLiteral.INSTANCE, DefaultLiteral.INSTANCE,
-                new NamedLiteral("roe")));
+        assertTrue(annotationSetMatches(roeBean.getQualifiers(), Any.Literal.INSTANCE, Default.Literal.INSTANCE,
+                NamedLiteral.of("roe")));
     }
 
 }

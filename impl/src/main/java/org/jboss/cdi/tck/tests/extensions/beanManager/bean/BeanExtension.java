@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
@@ -39,7 +40,6 @@ import javax.enterprise.inject.spi.InjectionTargetFactory;
 import javax.enterprise.inject.spi.ProcessManagedBean;
 import javax.enterprise.inject.spi.ProducerFactory;
 
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.util.ForwardingBeanAttributes;
 
 public class BeanExtension implements Extension {
@@ -112,7 +112,7 @@ public class BeanExtension implements Extension {
             public Set<Annotation> getQualifiers() {
                 Set<Annotation> qualifiers = new HashSet<Annotation>(attributes.getQualifiers());
                 qualifiers.add(Hungry.Literal.INSTANCE);
-                qualifiers.remove(DefaultLiteral.INSTANCE);
+                qualifiers.remove(Default.Literal.INSTANCE);
                 return Collections.unmodifiableSet(qualifiers);
             }
 

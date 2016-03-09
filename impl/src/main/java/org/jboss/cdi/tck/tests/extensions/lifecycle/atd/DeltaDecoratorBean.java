@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
@@ -28,6 +27,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.enterprise.inject.Default;
 public class DeltaDecoratorBean implements Decorator<DeltaDecorator> {
 
     private AnnotatedField<? super DeltaDecorator> annotatedField = null;
@@ -109,7 +109,7 @@ public class DeltaDecoratorBean implements Decorator<DeltaDecorator> {
         }
 
         public Set<Annotation> getQualifiers() {
-            return Collections.<Annotation>singleton(new DefaultLiteral());
+            return Collections.<Annotation>singleton(Default.Literal.INSTANCE);
         }
 
         public Bean<?> getBean() {

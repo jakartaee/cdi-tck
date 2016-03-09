@@ -24,12 +24,12 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.InjectLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Alpha.AlphaLiteral;
@@ -73,7 +73,7 @@ public class GetAnnotatedTypesTest extends AbstractTest {
         assertNotNull(bravo);
         assertEquals(bravo.getAnnotations().size(), 2);
         assertTrue(bravo.getAnnotations().contains(BravoLiteral.INSTANCE));
-        assertTrue(bravo.getAnnotations().contains(AnyLiteral.INSTANCE));
+        assertTrue(bravo.getAnnotations().contains(Any.Literal.INSTANCE));
 
         AnnotatedType<Foo> charlie = extension.getCharlie();
         assertNotNull(charlie);

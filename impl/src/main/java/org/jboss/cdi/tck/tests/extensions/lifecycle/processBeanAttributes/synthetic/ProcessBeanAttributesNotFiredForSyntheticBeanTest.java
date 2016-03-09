@@ -27,13 +27,13 @@ import static org.testng.Assert.assertTrue;
 import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanAttributes;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -75,7 +75,7 @@ public class ProcessBeanAttributesNotFiredForSyntheticBeanTest extends AbstractT
 
         assertNull(bicycleExtension.getBicycleAttributesBeforeModifying());
 
-        Set<Bean<Bicycle>> beans = getBeans(Bicycle.class, AnyLiteral.INSTANCE);
+        Set<Bean<Bicycle>> beans = getBeans(Bicycle.class, Any.Literal.INSTANCE);
         assertEquals(beans.size(), 1);
         Bean<Bicycle> bean = beans.iterator().next();
         assertEquals(bean.getScope(), ApplicationScoped.class);

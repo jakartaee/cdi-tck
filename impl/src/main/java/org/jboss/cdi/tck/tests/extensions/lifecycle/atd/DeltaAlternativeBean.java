@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
@@ -28,6 +27,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.enterprise.inject.Default;
 public class DeltaAlternativeBean implements Bean<DeltaAlternative> {
     public Class<?> getBeanClass() {
         return DeltaAlternative.class;
@@ -53,7 +53,7 @@ public class DeltaAlternativeBean implements Bean<DeltaAlternative> {
     public Set<Annotation> getQualifiers() {
         return new HashSet<Annotation>() {
             {
-                add(new DefaultLiteral());
+                add(Default.Literal.INSTANCE);
             }
         };
     }

@@ -26,9 +26,9 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.TypeLiteral;
 import java.lang.reflect.TypeVariable;
 import java.util.Set;
+import javax.enterprise.inject.Default;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -69,7 +69,7 @@ public class BeanByTypeTest extends AbstractTest {
     public void testNoBindingImpliesCurrent() {
         Set<Bean<?>> beans = getCurrentManager().getBeans(SimpleBean.class);
         assertEquals(beans.size(), 1);
-        assertTrue(beans.iterator().next().getQualifiers().contains(new DefaultLiteral()));
+        assertTrue(beans.iterator().next().getQualifiers().contains(Default.Literal.INSTANCE));
     }
 
     @Test

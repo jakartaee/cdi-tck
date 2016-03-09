@@ -42,17 +42,17 @@ import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.IllegalProductException;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
+import javax.enterprise.inject.literal.NamedLiteral;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
-import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.Assert;
 import org.jboss.cdi.tck.util.DependentInstance;
@@ -114,8 +114,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     public void testDefaultBindingType() throws Exception {
         assert getCurrentManager().getBeans(Tarantula.class).size() == 1;
         assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().size() == 2;
-        assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(new DefaultLiteral());
-        assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(AnyLiteral.INSTANCE);
+        assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(Default.Literal.INSTANCE);
+        assert getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(Any.Literal.INSTANCE);
     }
 
     @Test
@@ -196,8 +196,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
         Bean<DaddyLongLegs> daddyLongLegs = getUniqueBean(DaddyLongLegs.class, TAME_LITERAL);
         assertEquals(daddyLongLegs.getName(), name);
         // Any, Tame, Named
-        assertTrue(annotationSetMatches(daddyLongLegs.getQualifiers(), AnyLiteral.INSTANCE, TAME_LITERAL,
-                new NamedLiteral(name)));
+        assertTrue(annotationSetMatches(daddyLongLegs.getQualifiers(), Any.Literal.INSTANCE, TAME_LITERAL,
+                 NamedLiteral.of(name)));
     }
 
     // Review 2.2

@@ -24,14 +24,14 @@ import static org.testng.Assert.assertTrue;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.literal.NamedLiteral;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
-import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -52,8 +52,8 @@ public class BuiltInQualifierDefinitionTest extends AbstractTest {
     public void testDefaultQualifierDeclaredInJava() {
         Bean<Order> order = getBeans(Order.class).iterator().next();
         assertEquals(order.getQualifiers().size(), 2);
-        assertTrue(order.getQualifiers().contains(new DefaultLiteral()));
-        assertTrue(order.getQualifiers().contains(AnyLiteral.INSTANCE));
+        assertTrue(order.getQualifiers().contains(Default.Literal.INSTANCE));
+        assertTrue(order.getQualifiers().contains(Any.Literal.INSTANCE));
     }
 
     @Test
@@ -62,15 +62,15 @@ public class BuiltInQualifierDefinitionTest extends AbstractTest {
         Bean<Order> order = getBeans(Order.class).iterator().next();
         assertEquals(order.getInjectionPoints().size(), 1);
         InjectionPoint injectionPoint = order.getInjectionPoints().iterator().next();
-        assertTrue(injectionPoint.getQualifiers().contains(new DefaultLiteral()));
+        assertTrue(injectionPoint.getQualifiers().contains(Default.Literal.INSTANCE));
     }
 
     @Test
     @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "ab")
     public void testNamedAndAnyBeanHasDefaultQualifier() {
-        Bean<NamedAnyBean> nameAnyBeanBean = getUniqueBean(NamedAnyBean.class, AnyLiteral.INSTANCE);
+        Bean<NamedAnyBean> nameAnyBeanBean = getUniqueBean(NamedAnyBean.class, Any.Literal.INSTANCE);
         assertEquals(nameAnyBeanBean.getQualifiers().size(), 3);
-        checkSetContainsAllQuallifiers(nameAnyBeanBean.getQualifiers(), new DefaultLiteral(), new NamedLiteral("namedAnyBean"), AnyLiteral.INSTANCE);
+        checkSetContainsAllQuallifiers(nameAnyBeanBean.getQualifiers(), Default.Literal.INSTANCE, NamedLiteral.of("namedAnyBean"), Any.Literal.INSTANCE);
     }
 
     @Test
@@ -78,15 +78,15 @@ public class BuiltInQualifierDefinitionTest extends AbstractTest {
     public void testNamedBeanHasDefaultQualifier() {
         Bean<NamedBean> namedBean = getUniqueBean(NamedBean.class);
         assertEquals(namedBean.getQualifiers().size(), 3);
-        checkSetContainsAllQuallifiers(namedBean.getQualifiers(), new DefaultLiteral(), new NamedLiteral("namedBean"), AnyLiteral.INSTANCE);
+        checkSetContainsAllQuallifiers(namedBean.getQualifiers(), Default.Literal.INSTANCE, NamedLiteral.of("namedBean"), Any.Literal.INSTANCE);
     }
 
     @Test
     @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "ab")
     public void testAnyBeanHasDefaultQualifier() {
-        Bean<AnyBean> anyBean = getUniqueBean(AnyBean.class, AnyLiteral.INSTANCE);
+        Bean<AnyBean> anyBean = getUniqueBean(AnyBean.class, Any.Literal.INSTANCE);
         assertEquals(anyBean.getQualifiers().size(), 2);
-        checkSetContainsAllQuallifiers(anyBean.getQualifiers(), new DefaultLiteral(), AnyLiteral.INSTANCE);
+        checkSetContainsAllQuallifiers(anyBean.getQualifiers(), Default.Literal.INSTANCE, Any.Literal.INSTANCE);
     }
 
     @Test
@@ -94,8 +94,8 @@ public class BuiltInQualifierDefinitionTest extends AbstractTest {
     public void testProducedNamedAndAnyBeanHasDefaultQualifier() {
         Bean<ProducedNamedAnyBean> producedNamedAnyBeanBean = getUniqueBean(ProducedNamedAnyBean.class);
         assertEquals(producedNamedAnyBeanBean.getQualifiers().size(), 3);
-        checkSetContainsAllQuallifiers(producedNamedAnyBeanBean.getQualifiers(), new DefaultLiteral(), new NamedLiteral("producedNamedAnyBean"),
-                AnyLiteral.INSTANCE);
+        checkSetContainsAllQuallifiers(producedNamedAnyBeanBean.getQualifiers(), Default.Literal.INSTANCE, NamedLiteral.of("producedNamedAnyBean"),
+                Any.Literal.INSTANCE);
     }
 
     @Test
@@ -103,7 +103,7 @@ public class BuiltInQualifierDefinitionTest extends AbstractTest {
     public void testProducedNamedBeanHasDefaultQualifier() {
         Bean<ProducedNamedBean> producedNamedBeanBean = getUniqueBean(ProducedNamedBean.class);
         assertEquals(producedNamedBeanBean.getQualifiers().size(), 3);
-        checkSetContainsAllQuallifiers(producedNamedBeanBean.getQualifiers(), new DefaultLiteral(), new NamedLiteral("producedNamedBean"), AnyLiteral.INSTANCE);
+        checkSetContainsAllQuallifiers(producedNamedBeanBean.getQualifiers(), Default.Literal.INSTANCE, NamedLiteral.of("producedNamedBean"), Any.Literal.INSTANCE);
     }
 
     @Test
@@ -111,7 +111,7 @@ public class BuiltInQualifierDefinitionTest extends AbstractTest {
     public void testProducedAnyBeanHasDefaultQualifier() {
         Bean<ProducedAnyBean> producedAnyBeanBean = getUniqueBean(ProducedAnyBean.class);
         assertEquals(producedAnyBeanBean.getQualifiers().size(), 2);
-        checkSetContainsAllQuallifiers(producedAnyBeanBean.getQualifiers(), new DefaultLiteral(), AnyLiteral.INSTANCE);
+        checkSetContainsAllQuallifiers(producedAnyBeanBean.getQualifiers(), Default.Literal.INSTANCE, Any.Literal.INSTANCE);
     }
 
     private void checkSetContainsAllQuallifiers(Set<Annotation> qualifiersSet, Annotation... literals) {

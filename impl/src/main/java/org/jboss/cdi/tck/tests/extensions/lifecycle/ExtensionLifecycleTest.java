@@ -24,14 +24,14 @@ import java.lang.reflect.Type;
 import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.Extension;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -69,8 +69,8 @@ public class ExtensionLifecycleTest extends AbstractTest {
         assertEquals(simpleExtensionBean.getScope(), ApplicationScoped.class);
         // Bean has two qualifiers @Default and @Any
         assertEquals(simpleExtensionBean.getQualifiers().size(), 2);
-        assertTrue(simpleExtensionBean.getQualifiers().contains(new DefaultLiteral()));
-        assertTrue(simpleExtensionBean.getQualifiers().contains(AnyLiteral.INSTANCE));
+        assertTrue(simpleExtensionBean.getQualifiers().contains(Default.Literal.INSTANCE));
+        assertTrue(simpleExtensionBean.getQualifiers().contains(Any.Literal.INSTANCE));
         // Bean types include the class of the service provider and all superclases and interfaces
         Set<Type> types = simpleExtensionBean.getTypes();
         assertEquals(types.size(), 4);

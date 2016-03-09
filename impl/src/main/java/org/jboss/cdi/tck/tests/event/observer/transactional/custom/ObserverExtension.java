@@ -17,14 +17,13 @@
 package org.jboss.cdi.tck.tests.event.observer.transactional.custom;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
-import org.jboss.cdi.tck.literals.AnyLiteral;
-
 public class ObserverExtension implements Extension {
 
-    private GiraffeCustomObserver anyGiraffeObserver = new GiraffeCustomObserver(AnyLiteral.INSTANCE);
+    private GiraffeCustomObserver anyGiraffeObserver = new GiraffeCustomObserver(Any.Literal.INSTANCE);
 
     public void registerObservers(@Observes AfterBeanDiscovery event) {
         event.addObserverMethod(anyGiraffeObserver);

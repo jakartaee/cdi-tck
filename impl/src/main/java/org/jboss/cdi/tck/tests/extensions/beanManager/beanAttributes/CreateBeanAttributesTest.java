@@ -28,6 +28,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
+import javax.enterprise.inject.literal.NamedLiteral;
 import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
@@ -37,7 +38,6 @@ import javax.inject.Named;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -81,7 +81,7 @@ public class CreateBeanAttributesTest extends AbstractTest {
     @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a")
     public void testBeanAttributesForManagedBeanWithModifiedAnnotatedType() {
         AnnotatedType<Mountain> type = getCurrentManager().createAnnotatedType(Mountain.class);
-        AnnotatedType<Mountain> wrappedType = new AnnotatedTypeWrapper<Mountain>(type, false, new NamedLiteral("Mount Blanc"));
+        AnnotatedType<Mountain> wrappedType = new AnnotatedTypeWrapper<Mountain>(type, false, NamedLiteral.of("Mount Blanc"));
         BeanAttributes<Mountain> attributes = getCurrentManager().createBeanAttributes(wrappedType);
 
         assertTrue(typeSetMatches(attributes.getTypes(), Mountain.class, Landmark.class, Object.class));

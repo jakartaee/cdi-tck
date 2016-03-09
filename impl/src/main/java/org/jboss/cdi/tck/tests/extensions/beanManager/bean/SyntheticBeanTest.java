@@ -23,6 +23,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.PassivationCapable;
@@ -30,7 +31,6 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -95,7 +95,7 @@ public class SyntheticBeanTest extends AbstractTest {
     public void testSerializableBean() {
         @SuppressWarnings("unchecked")
         Bean<Office> bean = (Bean<Office>) getCurrentManager().resolve(
-                getCurrentManager().getBeans(SerializableOffice.class, AnyLiteral.INSTANCE));
+                getCurrentManager().getBeans(SerializableOffice.class, Any.Literal.INSTANCE));
         assertTrue(bean instanceof PassivationCapable);
         testOffice(bean);
     }

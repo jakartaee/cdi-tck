@@ -22,12 +22,12 @@ import static org.jboss.cdi.tck.cdi.Sections.NEW_EE;
 import java.util.Set;
 
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.New;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.NewLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -47,7 +47,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     @Test
     @SpecAssertion(section = NEW_EE, id = "l")
     public void testNewBeanHasSameConstructor() {
-        ExplicitConstructor newBean = getContextualReference(ExplicitConstructor.class, new NewLiteral(
+        ExplicitConstructor newBean = getContextualReference(ExplicitConstructor.class, New.Literal.of(
                 ExplicitConstructorSessionBean.class));
         assert newBean.getConstructorCalls() == 1;
         assert newBean.getInjectedSimpleBean() != null;
@@ -57,7 +57,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     @SpecAssertion(section = NEW_EE, id = "m")
     public void testNewBeanHasSameInitializers() {
         InitializerSimpleBeanLocal bean = getContextualReference(InitializerSimpleBeanLocal.class);
-        InitializerSimpleBeanLocal newBean = getContextualReference(InitializerSimpleBeanLocal.class, new NewLiteral(
+        InitializerSimpleBeanLocal newBean = getContextualReference(InitializerSimpleBeanLocal.class, New.Literal.of(
                 InitializerSimpleBean.class));
         assert bean != newBean;
         assert bean.getInitializerCalls() == 2;
@@ -73,7 +73,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     @SpecAssertion(section = NEW_EE, id = "v")
     public void testNewBeanHasNoProducerMethods() throws Exception {
         FoxLocal fox = getContextualReference(FoxLocal.class);
-        FoxLocal newFox = getContextualReference(FoxLocal.class, new NewLiteral(Fox.class));
+        FoxLocal newFox = getContextualReference(FoxLocal.class, New.Literal.of(Fox.class));
         fox.setNextLitterSize(3);
         newFox.setNextLitterSize(5);
         @SuppressWarnings("serial")
@@ -86,7 +86,7 @@ public class NewEnterpriseBeanICTest extends AbstractTest {
     @SpecAssertion(section = NEW_EE, id = "x")
     public void testNewBeanHasNoDisposalMethods() throws Exception {
         FoxLocal fox = getContextualReference(FoxLocal.class);
-        FoxLocal newFox = getContextualReference(FoxLocal.class, new NewLiteral(Fox.class));
+        FoxLocal newFox = getContextualReference(FoxLocal.class, New.Literal.of(Fox.class));
         @SuppressWarnings("serial")
         Set<Bean<Litter>> beans = getBeans(Litter.class, new AnnotationLiteral<Tame>() {
         });

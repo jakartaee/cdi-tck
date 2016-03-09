@@ -10,16 +10,15 @@ import java.util.Set;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.PassivationCapable;
 
-import org.jboss.cdi.tck.literals.DefaultLiteral;
-
 public class CowBean implements Bean<Cow>, PassivationCapable, Serializable {
     private static final long serialVersionUID = 6249623250272328272L;
     public static final String PASSIVATION_ID = "Cow-6249623250272328272L";
-    private final Set<Annotation> qualifiers = new HashSet<Annotation>(Arrays.asList(new DefaultLiteral()));
+    private final Set<Annotation> qualifiers = new HashSet<Annotation>(Arrays.asList(Default.Literal.INSTANCE));
     private final Set<Type> types = new HashSet<Type>(Arrays.<Type> asList(Cow.class));
 
     public Class<?> getBeanClass() {

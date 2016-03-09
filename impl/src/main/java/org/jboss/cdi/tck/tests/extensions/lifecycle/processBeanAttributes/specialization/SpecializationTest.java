@@ -22,13 +22,13 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.literal.NamedLiteral;
 import javax.enterprise.inject.spi.BeanAttributes;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.NamedLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -67,7 +67,7 @@ public class SpecializationTest extends AbstractTest {
         BeanAttributes<Charlie> charlieAttributes = extension.getCharlie();
         assertNotNull(charlieAttributes);
         annotationSetMatches(charlieAttributes.getQualifiers(), Foo.Literal.INSTANCE, Bar.Literal.INSTANCE,
-                Baz.Literal.INSTANCE, AnyLiteral.INSTANCE, new NamedLiteral("alpha"));
+                Baz.Literal.INSTANCE, Any.Literal.INSTANCE, NamedLiteral.of("alpha"));
         assertEquals(charlieAttributes.getName(), "alpha");
     }
 

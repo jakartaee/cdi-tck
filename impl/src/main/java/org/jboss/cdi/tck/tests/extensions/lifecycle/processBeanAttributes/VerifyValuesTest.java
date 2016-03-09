@@ -34,6 +34,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
+import javax.enterprise.inject.New;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
@@ -44,7 +45,6 @@ import javax.inject.Named;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.NewLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -97,7 +97,7 @@ public class VerifyValuesTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ad") })
     public void testManagedBeanAttributes() {
 
-        assertEquals(getCurrentManager().getBeans(Alpha.class, new NewLiteral(Alpha.class)).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Alpha.class, New.Literal.of(Alpha.class)).size(), 1);
         // No event is fired for any @New qualified bean
         assertEquals(extension.getAlphaAttributesObserved(), 1);
 

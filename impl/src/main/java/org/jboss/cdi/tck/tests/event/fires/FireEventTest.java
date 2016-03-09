@@ -35,12 +35,12 @@ import java.lang.reflect.TypeVariable;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Event;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -117,7 +117,7 @@ public class FireEventTest extends AbstractTest {
 
         assertNotNull(eventInjection);
         assertEquals(eventInjection.getQualifiers().size(), 1);
-        assertTrue(eventInjection.getQualifiers().contains(AnyLiteral.INSTANCE));
+        assertTrue(eventInjection.getQualifiers().contains(Any.Literal.INSTANCE));
 
         CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
         MiniBar miniBar = miniBarBean.create(miniBarCc);
@@ -234,7 +234,7 @@ public class FireEventTest extends AbstractTest {
 
         assertNotNull(eventInjection);
         assertEquals(eventInjection.getQualifiers().size(), 1);
-        assertTrue(eventInjection.getQualifiers().contains(AnyLiteral.INSTANCE));
+        assertTrue(eventInjection.getQualifiers().contains(Any.Literal.INSTANCE));
         CreationalContext<MiniBar> miniBarCc = getCurrentManager().createCreationalContext(miniBarBean);
         MiniBar miniBar = miniBarBean.create(miniBarCc);
         miniBar.stock();

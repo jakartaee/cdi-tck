@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.util.annotated.*;
 
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
@@ -52,7 +52,7 @@ public class MarketWrapper extends AnnotatedTypeWrapper<Market> {
         Set<AnnotatedConstructor<Market>> constructors = new HashSet<AnnotatedConstructor<Market>>();
         for (AnnotatedConstructor<Market> constructor : super.getConstructors()) {
             if (constructor.getParameters().size() == 1) {
-                constructors.add(wrapConstructor(constructor, true, AnyLiteral.INSTANCE));
+                constructors.add(wrapConstructor(constructor, true, Any.Literal.INSTANCE));
             } else {
                 constructors.add(constructor);
             }

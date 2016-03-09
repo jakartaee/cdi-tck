@@ -25,11 +25,11 @@ import java.io.Serializable;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Event;
+import javax.enterprise.inject.Any;
 import javax.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -68,16 +68,16 @@ public class ImplicitEventTest extends AbstractTest {
     @Test
     @SpecAssertion(section = BUILTIN_EVENT, id = "b")
     public void testImplicitEventHasAllExplicitBindingTypes() {
-        assert getBeans(AWARD_EVENT_LITERAL, AnyLiteral.INSTANCE, new HonorsLiteral()).size() == 1;
+        assert getBeans(AWARD_EVENT_LITERAL, Any.Literal.INSTANCE, new HonorsLiteral()).size() == 1;
     }
 
     @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "i")
     public void testImplicitEventHasAnyBinding() {
-        assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
-        assert getUniqueBean(COURSE_FULL_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
-        assert getUniqueBean(AWARD_EVENT_LITERAL).getQualifiers().contains(AnyLiteral.INSTANCE);
-        assert getUniqueBean(AWARD_EVENT_LITERAL, new HonorsLiteral()).getQualifiers().contains(AnyLiteral.INSTANCE);
-        assert getUniqueBean(AWARD_EVENT_LITERAL, AnyLiteral.INSTANCE, new HonorsLiteral()) == getUniqueBean(
+        assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getQualifiers().contains(Any.Literal.INSTANCE);
+        assert getUniqueBean(COURSE_FULL_EVENT_LITERAL).getQualifiers().contains(Any.Literal.INSTANCE);
+        assert getUniqueBean(AWARD_EVENT_LITERAL).getQualifiers().contains(Any.Literal.INSTANCE);
+        assert getUniqueBean(AWARD_EVENT_LITERAL, new HonorsLiteral()).getQualifiers().contains(Any.Literal.INSTANCE);
+        assert getUniqueBean(AWARD_EVENT_LITERAL, Any.Literal.INSTANCE, new HonorsLiteral()) == getUniqueBean(
                 AWARD_EVENT_LITERAL, new HonorsLiteral());
     }
 

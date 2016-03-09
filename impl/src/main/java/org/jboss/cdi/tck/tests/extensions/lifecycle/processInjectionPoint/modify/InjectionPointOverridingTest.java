@@ -23,11 +23,11 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.New;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.NewLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -90,7 +90,7 @@ public class InjectionPointOverridingTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "bb"),
             @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "c") })
     public void testNewInjectionPointDiscovered() {
-        assertEquals(getBeans(Cat.class, NewLiteral.INSTANCE).size(), 1);
+        assertEquals(getBeans(Cat.class, New.Literal.INSTANCE).size(), 1);
         assertNotNull(bean.getCat());
         assertNotNull(bean.getCat().getBean());
         assertEquals(bean.getCat().getBean().getScope(), Dependent.class);

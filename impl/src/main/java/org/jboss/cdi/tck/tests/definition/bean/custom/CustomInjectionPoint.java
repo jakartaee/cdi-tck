@@ -22,11 +22,12 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 public class CustomInjectionPoint implements InjectionPoint {
 
@@ -56,8 +57,7 @@ public class CustomInjectionPoint implements InjectionPoint {
 
     @Override
     public Set<Annotation> getQualifiers() {
-        Annotation defaultQualifier = new DefaultLiteral();
-        return Collections.singleton(defaultQualifier);
+        return Collections.singleton(Default.Literal.INSTANCE);
     }
 
     @Override

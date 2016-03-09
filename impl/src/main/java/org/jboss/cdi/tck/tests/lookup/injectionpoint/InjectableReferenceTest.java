@@ -22,12 +22,12 @@ import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTABLE_REFERENCE;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTABLE_REFERENCE;
 
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -87,7 +87,7 @@ public class InjectableReferenceTest extends AbstractTest {
         InjectionPoint loggerInjectionPoint = null;
         for (InjectionPoint ip : bean.getInjectionPoints()) {
             if (ip.getAnnotated().getTypeClosure().contains(Logger.class) && ip.getQualifiers().size() == 1
-                    && ip.getQualifiers().contains(new DefaultLiteral())) {
+                    && ip.getQualifiers().contains(Default.Literal.INSTANCE)) {
                 loggerInjectionPoint = ip;
             }
         }

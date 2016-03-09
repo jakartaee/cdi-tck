@@ -40,7 +40,6 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -138,7 +137,7 @@ public class InjectionPointTest extends AbstractTest {
         // Since the type and bindings must correspond to the parameter, check
         // them
         assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
-        assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
+        assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(Default.Literal.INSTANCE);
     }
 
     @Test
@@ -153,7 +152,7 @@ public class InjectionPointTest extends AbstractTest {
         // Since the type and bindings must correspond to the parameter, check
         // them
         assert beanWithInjectionPoint.getInjectedMetadata().getType().equals(BeanWithInjectionPointMetadata.class);
-        assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
+        assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(Default.Literal.INSTANCE);
     }
 
     @Test
@@ -218,7 +217,7 @@ public class InjectionPointTest extends AbstractTest {
         FieldInjectionPointBean beanWithInjectedBean = getContextualReference(FieldInjectionPointBean.class);
         BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
         assert beanWithInjectionPoint.getInjectedMetadata() != null;
-        assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(new DefaultLiteral());
+        assert beanWithInjectionPoint.getInjectedMetadata().getQualifiers().contains(Default.Literal.INSTANCE);
     }
 
     @Test

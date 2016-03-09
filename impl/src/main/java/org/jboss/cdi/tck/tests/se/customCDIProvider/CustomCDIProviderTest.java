@@ -20,7 +20,6 @@ import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.inject.spi.CDI;
-import javax.enterprise.inject.spi.CDIProvider;
 
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -50,8 +49,9 @@ public class CustomCDIProviderTest extends Arquillian {
     @SpecAssertion(section = Sections.CDIPROVIDER_LOOKUP, id = "a")
     public void testCustomCDIProvider() {
         CDI.setCDIProvider(new CustomCDIProvider());
-        CDIProvider cdiProvider = CDI.getCDIProvider();
-        try (CDI cdi = cdiProvider.initialize()) {
+        //        FIXME
+        //        CDIProvider cdiProvider = CDI.getCDIProvider();
+        try (CDI cdi = CDI.current()) {
             assertTrue(CustomCDIProvider.initializedCalled);
         }
     }

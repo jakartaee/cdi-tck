@@ -24,12 +24,11 @@ import java.util.Set;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.PassivationCapable;
-
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 
 public class CatBean implements Bean<Cat>, PassivationCapable {
     public static final CatBean bean = new CatBean();
@@ -38,7 +37,7 @@ public class CatBean implements Bean<Cat>, PassivationCapable {
     public Set<Annotation> getQualifiers() {
         return new HashSet<Annotation>() {
             {
-                add(new DefaultLiteral());
+                add(Default.Literal.INSTANCE);
             }
         };
     }

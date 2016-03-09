@@ -29,7 +29,6 @@ import javax.enterprise.inject.Default;
 import javax.enterprise.util.TypeLiteral;
 import javax.inject.Inject;
 
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.literals.InjectLiteral;
 import org.jboss.cdi.tck.util.Assert;
 import org.testng.annotations.Test;
@@ -44,7 +43,7 @@ public class AssertTest {
     @Test
     public void testAnnotationSetMatches() {
         Set<Annotation> annotations = new HashSet<Annotation>();
-        annotations.add(AnyLiteral.INSTANCE);
+        annotations.add(Any.Literal.INSTANCE);
         annotations.add(InjectLiteral.INSTANCE);
         Assert.assertAnnotationSetMatches(annotations, Any.class, Inject.class);
     }
@@ -53,7 +52,7 @@ public class AssertTest {
     @Test(expectedExceptions = AssertionError.class)
     public void testAnnotationSetDoesNotMatchA() {
         Set<Annotation> annotations = new HashSet<Annotation>();
-        annotations.add(AnyLiteral.INSTANCE);
+        annotations.add(Any.Literal.INSTANCE);
         annotations.add(InjectLiteral.INSTANCE);
         Assert.assertAnnotationSetMatches(annotations, Any.class);
     }
@@ -70,7 +69,7 @@ public class AssertTest {
     @Test(expectedExceptions = AssertionError.class)
     public void testAnnotationSetDoesNotMatchC() {
         Set<Annotation> annotations = new HashSet<Annotation>();
-        annotations.add(AnyLiteral.INSTANCE);
+        annotations.add(Any.Literal.INSTANCE);
         annotations.add(InjectLiteral.INSTANCE);
         Assert.assertAnnotationSetMatches(annotations, Any.class, Default.class);
     }

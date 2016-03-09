@@ -17,14 +17,13 @@
 package org.jboss.cdi.tck.tests.event.observer.extension;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
-import org.jboss.cdi.tck.literals.AnyLiteral;
-
 public class ObserverExtension implements Extension {
 
-    private GiraffeObserver anyGiraffeObserver = new GiraffeObserver(AnyLiteral.INSTANCE);
+    private GiraffeObserver anyGiraffeObserver = new GiraffeObserver(Any.Literal.INSTANCE);
     private GiraffeObserver fiveMeterTallGiraffeObserver = new GiraffeObserver(Tall.Literal.FIVE_METERS);
     private GiraffeObserver sixMeterTallAngryGiraffeObserver = new GiraffeObserver(Tall.Literal.SIX_METERS, new Angry.Literal());
     private GiraffeObserver angryNubianGiraffeObserver = new GiraffeObserver(new Angry.Literal(), new Nubian.Literal());

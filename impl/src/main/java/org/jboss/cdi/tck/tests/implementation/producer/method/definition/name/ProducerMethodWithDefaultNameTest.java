@@ -22,13 +22,13 @@ import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_NAME;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -72,7 +72,7 @@ public class ProducerMethodWithDefaultNameTest extends AbstractTest {
         Bean<Bug> john = getUniqueBean(Bug.class, new AnnotationLiteral<Funny>() {
         });
         assertEquals(john.getName(), name);
-        assertTrue(annotationSetMatches(john.getQualifiers(), AnyLiteral.INSTANCE, DefaultLiteral.INSTANCE));
+        assertTrue(annotationSetMatches(john.getQualifiers(), Any.Literal.INSTANCE, Default.Literal.INSTANCE));
     }
 
 }

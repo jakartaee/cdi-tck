@@ -26,12 +26,12 @@ import static org.testng.Assert.assertFalse;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -83,7 +83,7 @@ public class QualifierDefinitionTest extends AbstractTest {
                 .getQualifiers();
         assert bindings.size() == 2;
         assert bindings.contains(new HairyQualifier(false));
-        assert bindings.contains(AnyLiteral.INSTANCE);
+        assert bindings.contains(Any.Literal.INSTANCE);
     }
 
     @Test
@@ -91,8 +91,8 @@ public class QualifierDefinitionTest extends AbstractTest {
     public void testQualifierNotDeclaredInheritedIsNotInherited() {
         Set<? extends Annotation> bindings = getBeans(ShetlandPony.class).iterator().next().getQualifiers();
         assert bindings.size() == 2;
-        assert bindings.contains(new DefaultLiteral());
-        assert bindings.contains(AnyLiteral.INSTANCE);
+        assert bindings.contains(Default.Literal.INSTANCE);
+        assert bindings.contains(Any.Literal.INSTANCE);
     }
 
     @Test
@@ -103,7 +103,7 @@ public class QualifierDefinitionTest extends AbstractTest {
         assert bindings.size() == 2;
         Annotation hairyLiteral = new HairyQualifier(true);
         assert bindings.contains(hairyLiteral);
-        assert bindings.contains(AnyLiteral.INSTANCE);
+        assert bindings.contains(Any.Literal.INSTANCE);
     }
 
     @Test
@@ -120,8 +120,8 @@ public class QualifierDefinitionTest extends AbstractTest {
     public void testQualifierNotDeclaredInheritedIsNotIndirectlyInherited() {
         Set<? extends Annotation> bindings = getBeans(MiniatureShetlandPony.class).iterator().next().getQualifiers();
         assert bindings.size() == 2;
-        assert bindings.contains(new DefaultLiteral());
-        assert bindings.contains(AnyLiteral.INSTANCE);
+        assert bindings.contains(Default.Literal.INSTANCE);
+        assert bindings.contains(Any.Literal.INSTANCE);
     }
 
 }

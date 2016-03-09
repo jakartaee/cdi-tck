@@ -42,7 +42,6 @@ import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.impl.ConfigurationImpl;
 import org.jboss.cdi.tck.impl.PropertiesBasedConfigurationBuilder;
-import org.jboss.cdi.tck.literals.AnyLiteral;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.annotated.AnnotatedWrapper;
@@ -1313,8 +1312,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 .addPackage(Beans.class.getPackage())
                 // org.jboss.cdi.tck.impl
                 .addClasses(ConfigurationFactory.class, ConfigurationImpl.class, PropertiesBasedConfigurationBuilder.class)
-                // org.jboss.cdi.tck.literal
-                .addPackage(AnyLiteral.class.getPackage())
                 // Util packages
                 .addPackage(Timer.class.getPackage()).addPackage(AnnotatedWrapper.class.getPackage());
 

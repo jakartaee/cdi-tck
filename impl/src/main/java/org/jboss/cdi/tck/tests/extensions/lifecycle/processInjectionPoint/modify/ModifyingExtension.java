@@ -22,11 +22,11 @@ import java.util.Collections;
 import java.util.Set;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.New;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.ProcessInjectionPoint;
 
-import org.jboss.cdi.tck.literals.NewLiteral;
 import org.jboss.cdi.tck.util.ForwardingInjectionPoint;
 
 public class ModifyingExtension implements Extension {
@@ -89,7 +89,7 @@ public class ModifyingExtension implements Extension {
 
             @Override
             public Set<Annotation> getQualifiers() {
-                return Collections.<Annotation> singleton(NewLiteral.INSTANCE);
+                return Collections.<Annotation> singleton(New.Literal.INSTANCE);
             }
         });
     }

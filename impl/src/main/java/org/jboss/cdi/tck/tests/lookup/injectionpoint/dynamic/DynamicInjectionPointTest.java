@@ -31,6 +31,7 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.AnnotatedField;
@@ -40,8 +41,6 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -84,8 +83,8 @@ public class DynamicInjectionPointTest extends AbstractTest {
         Set<Annotation> fooQualifiers = bar.getFoo().getInjectionPoint().getQualifiers();
         Set<Annotation> niceFooQualifiers = bar.getQualifierNiceFoo().getInjectionPoint().getQualifiers();
 
-        annotationSetMatches(fooQualifiers, AnyLiteral.INSTANCE, DefaultLiteral.INSTANCE);
-        annotationSetMatches(niceFooQualifiers, AnyLiteral.INSTANCE, new AnnotationLiteral<Nice>() {
+        annotationSetMatches(fooQualifiers, Any.Literal.INSTANCE, Default.Literal.INSTANCE);
+        annotationSetMatches(niceFooQualifiers, Any.Literal.INSTANCE, new AnnotationLiteral<Nice>() {
         });
     }
 

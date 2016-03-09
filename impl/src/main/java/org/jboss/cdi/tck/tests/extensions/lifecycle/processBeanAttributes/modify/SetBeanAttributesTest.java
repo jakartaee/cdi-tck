@@ -22,13 +22,13 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.AnyLiteral;
-import org.jboss.cdi.tck.literals.DefaultLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -64,8 +64,8 @@ public class SetBeanAttributesTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bc"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ca") })
     public void testBeanModified() {
 
-        assertEquals(getCurrentManager().getBeans(Cat.class, DefaultLiteral.INSTANCE).size(), 0);
-        assertEquals(getCurrentManager().getBeans(Animal.class, AnyLiteral.INSTANCE).size(), 0);
+        assertEquals(getCurrentManager().getBeans(Cat.class, Default.Literal.INSTANCE).size(), 0);
+        assertEquals(getCurrentManager().getBeans(Animal.class, Any.Literal.INSTANCE).size(), 0);
         assertEquals(getCurrentManager().getBeans(Animal.class, new Wild.Literal(false)).size(), 0);
 
         assertEquals(getCurrentManager().getBeans(Cat.class, new Wild.Literal(true)).size(), 1);
@@ -76,7 +76,7 @@ public class SetBeanAttributesTest extends AbstractTest {
 
         assertTypeSetMatches(bean.getTypes(), Object.class, Cat.class);
         assertTypeSetMatches(bean.getStereotypes(), PersianStereotype.class);
-        assertTrue(annotationSetMatches(bean.getQualifiers(), new Wild.Literal(true), new Cute.Literal(), AnyLiteral.INSTANCE));
+        assertTrue(annotationSetMatches(bean.getQualifiers(), new Wild.Literal(true), new Cute.Literal(), Any.Literal.INSTANCE));
 
         // other attributes
         assertEquals(ApplicationScoped.class, bean.getScope());
