@@ -6,4 +6,4 @@ Check out the [TCK Reference Guide](http://docs.jboss.org/cdi/tck/reference/late
 Sources in GIT
 --------------
 
-Master branch contains the work-in-progress on CDI TCK 1.2
+Master branch contains the work-in-progress on CDI TCK 2.0
