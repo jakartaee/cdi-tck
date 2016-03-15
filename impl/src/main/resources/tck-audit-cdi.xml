@@ -3263,6 +3263,10 @@
         </assertion>
     </section>
 
+    <section id="built_in_annotation_literals" title="Built-in annotation literals" level="3">
+
+    </section>
+
     <section id="contexts" title="Scopes and contexts" level="1">
 
     </section>
