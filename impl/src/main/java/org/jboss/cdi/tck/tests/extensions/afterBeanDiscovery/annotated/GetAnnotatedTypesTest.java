@@ -25,12 +25,12 @@ import static org.testng.Assert.assertTrue;
 import java.util.List;
 
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.literal.InjectLiteral;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.literals.InjectLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Alpha.AlphaLiteral;
 import org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery.annotated.Bravo.BravoLiteral;

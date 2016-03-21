@@ -26,10 +26,10 @@ import java.util.Set;
 
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
+import javax.enterprise.inject.literal.InjectLiteral;
 import javax.enterprise.util.TypeLiteral;
 import javax.inject.Inject;
 
-import org.jboss.cdi.tck.literals.InjectLiteral;
 import org.jboss.cdi.tck.util.Assert;
 import org.testng.annotations.Test;
 
