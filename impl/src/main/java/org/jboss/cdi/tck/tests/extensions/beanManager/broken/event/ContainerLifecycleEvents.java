@@ -51,6 +51,11 @@ import javax.enterprise.inject.spi.ProcessProducerMethod;
 import javax.enterprise.inject.spi.ProcessSessionBean;
 import javax.enterprise.inject.spi.Producer;
 import javax.enterprise.inject.spi.SessionBeanType;
+import javax.enterprise.inject.spi.builder.AnnotatedTypeConfigurator;
+import javax.enterprise.inject.spi.builder.BeanAttributesConfigurator;
+import javax.enterprise.inject.spi.builder.BeanConfigurator;
+import javax.enterprise.inject.spi.builder.InjectionPointConfigurator;
+import javax.enterprise.inject.spi.builder.ObserverMethodConfigurator;
 
 public class ContainerLifecycleEvents {
 
@@ -91,11 +96,21 @@ public class ContainerLifecycleEvents {
         @Override
         public void addAnnotatedType(AnnotatedType<?> type, String id) {
         }
+
+        @Override
+        public AnnotatedTypeConfigurator<?> addAnnotatedType(String s) {
+            return null;
+        }
     };
 
     public static final AfterBeanDiscovery AFTER_BEAN_DISCOVERY = new AfterBeanDiscovery() {
         @Override
         public void addObserverMethod(ObserverMethod<?> observerMethod) {
+        }
+
+        @Override
+        public ObserverMethodConfigurator<?> addObserverMethod() {
+            return null;
         }
 
         @Override
@@ -108,6 +123,11 @@ public class ContainerLifecycleEvents {
 
         @Override
         public void addBean(Bean<?> bean) {
+        }
+
+        @Override
+        public BeanConfigurator<?> addBean() {
+            return null;
         }
 
         @Override
@@ -132,6 +152,11 @@ public class ContainerLifecycleEvents {
 
     public static final ProcessAnnotatedType<Integer> PROCESS_ANNOTATED_TYPE = new ProcessAnnotatedType<Integer>() {
         @Override
+        public AnnotatedTypeConfigurator<Integer> configureAnnotatedType() {
+            return null;
+        }
+
+        @Override
         public AnnotatedType<Integer> getAnnotatedType() {
             return null;
         }
@@ -146,6 +171,11 @@ public class ContainerLifecycleEvents {
     };
 
     public static final ProcessInjectionPoint<String, Number> PROCESS_INJECTION_POINT = new ProcessInjectionPoint<String, Number>() {
+        @Override
+        public InjectionPointConfigurator configureInjectionPoint() {
+            return null;
+        }
+
         @Override
         public InjectionPoint getInjectionPoint() {
             return null;
@@ -216,6 +246,11 @@ public class ContainerLifecycleEvents {
         }
 
         @Override
+        public BeanAttributesConfigurator<Exception> configureBeanAttributes() {
+            return null;
+        }
+
+        @Override
         public void addDefinitionError(Throwable t) {
         }
 
@@ -242,6 +277,11 @@ public class ContainerLifecycleEvents {
     };
 
     public static final ProcessObserverMethod<String, String> PROCESS_OBSERVER_METHOD = new ProcessObserverMethod<String, String>() {
+        @Override
+        public ObserverMethodConfigurator<String> configureObserverMethod() {
+            return null;
+        }
+
         @Override
         public AnnotatedMethod<String> getAnnotatedMethod() {
             return null;
