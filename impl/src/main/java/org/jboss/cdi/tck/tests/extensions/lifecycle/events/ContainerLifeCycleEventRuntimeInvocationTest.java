@@ -94,7 +94,7 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "b")})
+    @SpecAssertions({@SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "d")})
     public void testBeforeBeanDiscoveryEventFails() {
         final BeforeBeanDiscovery event = extension.getBeforeBeanDiscovery();
         final AnnotatedType<?> type = beanManager.createAnnotatedType(ContainerLifeCycleEventRuntimeInvocationTest.class);

@@ -178,7 +178,8 @@
         </assertion>
 
         <assertion id="ab">
-            <text>If a bean does not explicitly declare a qualifier other than |@Named| or |@Any|, the bean has exactly one additional qualifier, of type |@Default|. This
+            <text>If a bean does not explicitly declare a qualifier other than |@Named| or |@Any|, the bean has exactly one additional qualifier, of type
+                |@Default|. This
                 is called the default qualifier.
             </text>
         </assertion>
@@ -1109,7 +1110,8 @@
         </assertion>
 
         <group>
-            <text>If a producer method is annotated |@Inject|, has a parameter annotated |@Disposes|, or has a parameter annotated |@Observes|, or has a parameter annotated |@ObservesAsync|, the container
+            <text>If a producer method is annotated |@Inject|, has a parameter annotated |@Disposes|, or has a parameter annotated |@Observes|, or has a
+                parameter annotated |@ObservesAsync|, the container
                 automatically detects the problem and treats it as a definition error.
             </text>
 
@@ -1493,7 +1495,8 @@
         </assertion>
 
         <assertion id="fa">
-            <text>If a bean constructor has a parameter annotated |@ObservesAsync|, the container automatically detects the problem and treats it as a definition
+            <text>If a bean constructor has a parameter annotated |@ObservesAsync|, the container automatically detects the problem and treats it as a
+                definition
                 error.
             </text>
         </assertion>
@@ -1581,7 +1584,8 @@
         </assertion>
 
         <assertion id="ea">
-            <text>If an initializer method has a parameter annotated |@ObservesAsync|, the container automatically detects the problem and treats it as a definition
+            <text>If an initializer method has a parameter annotated |@ObservesAsync|, the container automatically detects the problem and treats it as a
+                definition
                 error.
             </text>
         </assertion>
@@ -4379,7 +4383,9 @@
         </assertion>
 
         <assertion id="f">
-            <text>If a decorator declares any scope other than @Dependent, the container automatically detects the problem and treats it as a definition error.</text>
+            <text>If a decorator declares any scope other than @Dependent, the container automatically detects the problem and treats it as a definition
+                error.
+            </text>
         </assertion>
 
     </section>
@@ -4819,7 +4825,9 @@
         </assertion>
 
         <assertion id="j">
-            <text>If an interceptor declares any scope other than @Dependent, the container automatically detects the problem and treats it as a definition error.</text>
+            <text>If an interceptor declares any scope other than @Dependent, the container automatically detects the problem and treats it as a definition
+                error.
+            </text>
         </assertion>
 
     </section>
@@ -4935,7 +4943,9 @@
     <section id="firing_events_asynchronously" title="Firing events asynchronously" level="3">
 
         <assertion id="a">
-            <text>Event fired with the fireAsync() method is fired asynchronously. All the resolved asynchronous observers are called in one or more different threads.</text>
+            <text>Event fired with the fireAsync() method is fired asynchronously. All the resolved asynchronous observers are called in one or more different
+                threads.
+            </text>
         </assertion>
 
     </section>
@@ -5428,7 +5438,8 @@
 
     <section id="async_exception" title="Handling multiple exceptions thrown during an asynchronous event" level="3">
         <assertion id="a">
-            <text>If an event is asynchronous, and an exception is thrown by any of its notified observers, the CompletionStage returned by fireAsync will complete exceptionally with java.util.concurrent.CompletionException exception.
+            <text>If an event is asynchronous, and an exception is thrown by any of its notified observers, the CompletionStage returned by fireAsync will
+                complete exceptionally with java.util.concurrent.CompletionException exception.
             </text>
         </assertion>
 
@@ -6708,14 +6719,105 @@
             </assertion>
         </group>
 
-        <assertion id="ag">
+        <assertion id="b">
+            <text>Test |AnnotatedTypeConfigurator&lt;?&gt; addAnnotatedType(String id)| returns a new AnnotatedTypeConfigurator as defined in
+                AnnotatedTypeConfigurator interface to easily configure the AnnotatedType which will be added at the end of the observer invocation.
+            </text>
+        </assertion>
+
+        <assertion id="c">
             <text>If any observer method of the |BeforeBeanDiscovery| event throws an exception, the exception is treated as a definition error by the
                 container.
             </text>
         </assertion>
-        <assertion id="b">
+        <assertion id="d">
             <text>If any BeforeBeanDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
+
+    </section>
+
+    <section id="annotated_type_configurator" title="AnnotatedTypeConfigurator interface" level="4">
+
+        <group>
+            <text>AnnotatedTypeConfigurator must be initialized from a java.lang.Class or an existing AnnotatedType with one of its read() methods</text>
+            <assertion id="a">
+                <text>Test initialization of `AnnotatedTypeConfigurator` from a java.lang.Class.</text>
+            </assertion>
+            <assertion id="b">
+                <text>Test initialization of `AnnotatedTypeConfigurator` from an existing AnnotatedType.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>With `AnnotatedTypeConfigurator` you can perform the following operation:</text>
+            <assertion id="c">
+                <text>Test add annotation at type level with |addToType| method.</text>
+            </assertion>
+
+            <assertion id="d">
+                <text>Test remove annotation at type level with |removeFromType| method.</text>
+            </assertion>
+
+            <assertion id="e">
+                <text>Test add annotation on a field with |addToField| method.</text>
+            </assertion>
+
+            <assertion id="f">
+                <text>Test remove annotation on a field with |removeFromField| method.</text>
+            </assertion>
+
+            <assertion id="g">
+                <text>Test add annotation on a method with |addToMethod| method.</text>
+            </assertion>
+
+            <assertion id="h">
+                <text>Test remove annotation on a method with |removeFromMethod| method.</text>
+            </assertion>
+
+            <assertion id="i">
+                <text>Test add annotation on a method parameter with |addToMethodParameter| method.</text>
+            </assertion>
+
+            <assertion id="j">
+                <text>Test remove annotation on a method parameter with |removeFromMethodParameter| method.</text>
+            </assertion>
+
+            <assertion id="k">
+                <text>Test add annotation on a constructor with |addToConstructor| method.</text>
+            </assertion>
+
+            <assertion id="l">
+                <text>Test remove annotation on a constructor with |removeFromConstructor| method.</text>
+            </assertion>
+
+            <assertion id="m">
+                <text>Test add annotation on a constructor parameter with |addToConstructorParameter| method.</text>
+            </assertion>
+
+            <assertion id="n">
+                <text>Test remove annotation on a constructor with |removeFromConstructorParameter| method.</text>
+            </assertion>
+
+            <assertion id="o">
+                <text>Test remove an annotation from the type or any type member with |removeFromAll| method.</text>
+            </assertion>
+
+            <assertion id="p">
+                <text>Test override a field type with |overrideFieldType| methods.</text>
+            </assertion>
+
+            <assertion id="q">
+                <text>Test override a method parameter type with |overrideMethodParameterType| method.</text>
+            </assertion>
+
+            <assertion id="r">
+                <text>Test override a constructor parameter type with |overrideConstructorParameterType| method.</text>
+            </assertion>
+
+            <assertion id="r">
+                <text>Test change the class that the AnnotatedType will represent.</text>
+            </assertion>
+        </group>
 
     </section>
 
@@ -6746,6 +6848,12 @@
 
         <assertion id="e">
             <text>|addAnnotatedType()| adds a given AnnotatedType to the set of types which will be scanned during bean discovery, with an identifier.</text>
+        </assertion>
+
+        <assertion id="ea">
+            <text>Test |AnnotatedTypeConfigurator&lt;?&gt; addAnnotatedType(String id)| returns a new AnnotatedTypeConfigurator as defined in
+                AnnotatedTypeConfigurator interface to easily configure the AnnotatedType which will be added at the end of observer invocation.
+            </text>
         </assertion>
 
         <assertion id="f" testable="false">
@@ -6829,6 +6937,13 @@
             </assertion>
         </group>
 
+        <assertion id="de">
+            <text>Test |BeanConfigurator&lt;?&gt; addBean()| returns a new BeanConfigurator as defined in BeanConfigurator interface to easily configure the
+                Bean
+                which will be added at the end of observer invocation.
+            </text>
+        </assertion>
+
         <group>
             <text>|addObserverMethod()| fires an event of type |ProcessObserverMethod| containing the given |ObserverMethod| and then registers the
                 |ObserverMethod| with the container, thereby making it available for event notifications.
@@ -6840,6 +6955,13 @@
                 <text>Check that the observer method is registered</text>
             </assertion>
         </group>
+
+        <assertion id="ec">
+            <text>Test |ObserverMethodConfigurator&lt;?&gt; addObserverMethod()| returns a new ObserverMethodConfigurator as defined in
+                ObserverMethodConfigurator
+                interface to easily configure the ObserverMethod which will be added at the end of observer invocation.
+            </text>
+        </assertion>
 
         <assertion id="f">
             <text>|addContext()| registers a custom |Context| object with the container.</text>
@@ -6872,6 +6994,88 @@
         <assertion id="h">
             <text>If any AfterBeanDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
+    </section>
+
+    <section id="bean_configurator" title="BeanConfigurator interface" level="4">
+        <group>
+            <text>With BeanConfigurator you can perform all the operations defined in BeanAttributesConfigurator interface plus the following:</text>
+            <assertion id="a">
+                <text>Set the class of the bean with |beanClass| method.</text>
+            </assertion>
+            <assertion id="b">
+                <text>Add an injection point for the bean with |addInjectionPoint| method.</text>
+            </assertion>
+            <assertion id="c">
+                <text>Add multiple injection points for the bean with |addInjectionPoints| methods.</text>
+            </assertion>
+            <assertion id="d">
+                <text>Replace all injection points for the bean with |injectionPoints| methods.</text>
+            </assertion>
+            <assertion id="e">
+                <text>Make the bean implements `PassivationCapable` and set its id with |id| method.</text>
+            </assertion>
+            <assertion id="f">
+                <text>Set the Function to create a bean instance from a CreationalContext with |createWith| method.</text>
+            </assertion>
+            <assertion id="g">
+                <text>Set the Supplier or Function to create a bean instance with |produceWith| method.</text>
+            </assertion>
+            <assertion id="h">
+                <text>Set the object to return when creating a bean instance with |producing| method.</text>
+            </assertion>
+            <assertion id="i">
+                <text>Set the BiConsumer or Consumer to destroy an instance from or without a CreationalContext with |disposeWith| methods.</text>
+            </assertion>
+        </group>
+    </section>
+
+    <section id="observer_method_configurator" title="ObserverMethodConfigurator interface" level="4">
+        <group>
+            <text>`ObserverMethodConfigurator` must be initialized from a `java.lang.reflect.Method`, `AnnotatedMethod` or an existing `ObserverMethod` with one
+                of its `read()` methods.
+            </text>
+            <assertion id="aa">
+                <text>Test initialization of `ObserverMethodConfigurator` from a `java.lang.reflect.Method`.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test initialization of `ObserverMethodConfigurator` from a `AnnotatedMethod`.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Test initialization of `ObserverMethodConfigurator` from an existing `ObserverMethod`.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>With ObserverMethodConfigurator you can perform the following operations:</text>
+            <assertion id="ba">
+                <text>Set the `ObserverMethod` bean class with |beanClass| method.</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Set the type of the observed event with |observedType| method.</text>
+            </assertion>
+            <assertion id="bc">
+                <text>Add a qualifier with |addQualifier| method.</text>
+            </assertion>
+            <assertion id="bd">
+                <text>Set or add multiple qualifiers with |addQualifiers| and |qualifiers| methods.</text>
+            </assertion>
+            <assertion id="be">
+                <text>Set the `Reception` type with |reception| method.</text>
+            </assertion>
+            <assertion id="bf">
+                <text>Set the `TransactionPhase` type with |transactionPhase| method.</text>
+            </assertion>
+            <assertion id="bg">
+                <text>Set the priority with |priority| method.</text>
+            </assertion>
+            <assertion id="bh">
+                <text>Define the `Consumer` to call on notification with |notifyWith| method.</text>
+            </assertion>
+            <assertion id="bi">
+                <text>Make the observer asynchronous with |async| method.</text>
+            </assertion>
+        </group>
+
     </section>
 
     <section id="after_deployment_validation" title="AfterDeploymentValidation event" level="3">
@@ -7013,6 +7217,13 @@
             <text>|setAnnotatedType()| replaces the |AnnotatedType|.</text>
         </assertion>
 
+        <assertion id="bba">
+            <text>|configureAnnotatedType()| returns an `AnnotatedTypeConfigurator` (as defined in AnnotatedTypeConfigurator interface) initialized with the
+                AnnotatedType processed by the event to easily configure the AnnotatedType which will be used to replace the original one at the end of observer
+                invocation. The method always return the same AnnotatedTypeConfigurator
+            </text>
+        </assertion>
+
         <assertion id="bc">
             <text>|veto()| forces the container to ignore the type.</text>
         </assertion>
@@ -7057,6 +7268,13 @@
             <text>|setInjectionPoint()| replaces the |InjectionPoint|.</text>
         </assertion>
 
+        <assertion id="bba">
+            <text>|configureInjectionPoint()| returns an `InjectionPointConfigurator` (as defined in InjectionPointConfigurator interface) initialized with the
+                `InjectionPoint` processed by the event to easily configure the InjectionPoint which will be used to replace the original one at the end of
+                observer invocation. The method always return the same InjectionPointConfigurator.
+            </text>
+        </assertion>
+
         <assertion id="bc">
             <text>|addDefinitionError()| registers a definition error with the container, causing the container to abort deployment after bean discovery is
                 complete.
@@ -7078,6 +7296,49 @@
         <assertion id="e">
             <text>If any ProcessInjectionPoint method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
+
+    </section>
+
+    <section id="injection_point_configurator" title="InjectionPointConfigurator interface" level="4">
+        <group>
+            <text>`InjectionPointConfigurator` must be initialized from a field, a method or constructor parameter or an existing `InjectionPoint` with one of
+                its `read()` methods.
+            </text>
+            <assertion id="aa">
+                <text>Test initialization of `InjectionPointConfigurator` from a field.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test initialization of `InjectionPointConfigurator` from a method parameter.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Test initialization of `InjectionPointConfigurator` from a constructor parameter.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>Test initialization of `InjectionPointConfigurator` from an existing `InjectionPoint`.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>With `InjectionPointConfigurator` you can perform the following operation:</text>
+            <assertion id="ba">
+                <text>Set the type of `InjectionPoint` with |type| method.</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Add a qualifier with |addQualifier| method.</text>
+            </assertion>
+            <assertion id="bc">
+                <text>Set or add multiple qualifiers with |addQualifiers| and |qualifiers| methods.</text>
+            </assertion>
+            <assertion id="bd">
+                <text>Set the bean that defines this injection point with |bean| method.</text>
+            </assertion>
+            <assertion id="be">
+                <text>Make the injection point delegate with |delegate| method.</text>
+            </assertion>
+            <assertion id="bf">
+                <text>Make the injection point a transient field with |transientField| method.</text>
+            </assertion>
+        </group>
 
     </section>
 
@@ -7183,6 +7444,13 @@
             <text>|setBeanAttributes()| replaces the |BeanAttributes|.</text>
         </assertion>
 
+        <assertion id="bca">
+            <text>|configureBeanAttributes()| returns a `BeanAttributesConfigurator` (as defined in BeanAttributesConfigurator interface) initialized with the
+                BeanAttributes processed by the event to easily configure the BeanAttributes which will be used to replace the original one at the end of
+                observer invocation. The method always return the same BeanAttributesConfigurator.
+            </text>
+        </assertion>
+
         <assertion id="bd">
             <text>|addDefinitionError()| registers a definition error with the container, causing the container to abort deployment after bean discovery is
                 complete.
@@ -7219,6 +7487,50 @@
         <assertion id="f">
             <text>If any ProcessBeanAttributes method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
+    </section>
+
+    <section id="bean_attributes_configurator" title="BeanAttributesConfigurator interface" level="4">
+        <group>
+            <text>BeanAttributesConfigurator must be initialized from an AnnotatedType, or an existing BeanAttributes with one of its read() methods.</text>
+            <assertion id="aa">
+                <text>Test initialization of `BeanAttributesConfigurator` from an AnnotatedType.</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>Test initialization of `BeanAttributesConfigurator` from an existing BeanAttributes.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>With `BeanAttributesConfigurator` you can perform the following operation:</text>
+            <assertion id="ba">
+                <text>Add type with |addType| or |addTransitiveTypeClosure| methods.</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Set multiple types with |types| methods.</text>
+            </assertion>
+            <assertion id="bc">
+                <text>Set scope with |scope| method.</text>
+            </assertion>
+            <assertion id="bd">
+                <text>Add a qualifier with |addQualifier| method.</text>
+            </assertion>
+            <assertion id="be">
+                <text>Set or add multiple qualifiers with |addQualifiers| and |qualifiers| methods.</text>
+            </assertion>
+            <assertion id="bf">
+                <text>Add a stereotype with |addStereotype| method.</text>
+            </assertion>
+            <assertion id="bg">
+                <text>Set or add multiple stereotypes with |addStereotypes| and |stereotypes| methods.</text>
+            </assertion>
+            <assertion id="bh">
+                <text>Set the bean name |name| method.</text>
+            </assertion>
+            <assertion id="bi">
+                <text>Make the bean an alternative with |alternative| methods.</text>
+            </assertion>
+        </group>
 
     </section>
 
@@ -7441,6 +7753,21 @@
             </text>
         </assertion>
 
+        <assertion id="daa">
+            <text>|setObserverMethod()| replaces the ObserverMethod.</text>
+        </assertion>
+
+        <assertion id="dab">
+            <text>|configureObserverMethod()| returns an `ObserverMethodConfigurator` (as defined in
+                ObserverMethodConfigurator interface) initialized with the ObserverMethod processed by the event to easily configure the ObserverMethod which
+                will be used to replace the original one at the end of observer invocation. The method always return the same `ObserverMethodConfigurator`.
+            </text>
+        </assertion>
+
+        <assertion id="dac">
+            <text>|veto()| forces the container to ignore the ObserverMethod.</text>
+        </assertion>
+
         <assertion id="db">
             <text>If any observer method of a |ProcessObserverMethod| event throws an exception, the exception is treated as a definition error by the
                 container.
@@ -7452,7 +7779,114 @@
         </assertion>
     </section>
 
+    <section id="configurators" title="Configurators interfaces" level="2">
+
+        <group>
+            <text>CDI 2.0 introduced the following Configurators interface:</text>
+            <assertion id="aa" testable="false">
+                <text>AnnotatedTypeConfigurator for `AnnotatedType` configuration.</text>
+                <note>Tested in related lifecycle event.</note>
+            </assertion>
+            <assertion id="ab" testable="false">
+                <text>InjectionPointConfigurator for `InjectionPoint` configuration</text>
+                <note>Tested in related lifecycle event.</note>
+            </assertion>
+            <assertion id="ac" testable="false">
+                <text>BeanAttributesConfigurator for `BeanAttributes` configuration</text>
+                <note>Tested in related lifecycle event.</note>
+            </assertion>
+            <assertion id="ad" testable="false">
+                <text>BeanConfigurator for `Bean` configuration</text>
+                <note>Tested in related lifecycle event.</note>
+            </assertion>
+            <assertion id="ae" testable="false">
+                <text>ObserverMethodConfigurator for `ObserverMethod` configuration.</text>
+                <note>Tested in related lifecycle event.</note>
+            </assertion>
+            <assertion id="af" testable="false">
+                <text>The container must provide implementation for all these configurators and make them available in matching container lifecycle events as
+                    defined in `Container lifecycle events`.
+                </text>
+            </assertion>
+        </group>
+
+    </section>
+
+    <section id="builders" title="Builders interfaces" level="2">
+        <group>
+            <text>Builders interfaces are helpers to create instances for the following SPI elements:</text>
+            <assertion id="aa" testable="false">
+                <text>`AnnotatedType` built with `javax.enterprise.inject.spi.builder.AnnotatedTypeBuilder`,</text>
+            </assertion>
+            <assertion id="ab" testable="false">
+                <text>`InjectionPoint` built with `javax.enterprise.inject.spi.builder.InjectionPointBuilder`,</text>
+            </assertion>
+            <assertion id="ac" testable="false">
+                <text>`BeanAttributes` built with `javax.enterprise.inject.spi.builder.BeanAttributesBuilder`,</text>
+            </assertion>
+            <assertion id="ad" testable="false">
+                <text>`Bean` built with `javax.enterprise.inject.spi.builder.BeanBuilder`,</text>
+            </assertion>
+            <assertion id="ae" testable="false">
+                <text>`ObserverMethod` built with `javax.enterprise.inject.spi.builder.ObserverMethodBuilder`.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>Each builder uses a configurator accessible with configure() method:</text>
+            <assertion id="ba" testable="false">
+                <text>`AnnotatedTypeBuilder` uses `AnnotatedTypeConfigurator` as defined in `AnnotatedTypeConfigurator interface`</text>
+            </assertion>
+            <assertion id="bb" testable="false">
+                <text>`InjectionPointBuilder` uses `InjectionPointConfigurator` as defined in `InjectionPointConfigurator interface`</text>
+            </assertion>
+            <assertion id="bc" testable="false">
+                <text>`BeanAttributesBuilder` uses `BeanAttributesConfigurator` as defined in `BeanAttributesConfigurator interface`</text>
+            </assertion>
+            <assertion id="bd" testable="false">
+                <text>`BeanBuilder` uses `BeanConfigurator` as defined in `BeanConfigurator interface`</text>
+            </assertion>
+            <assertion id="be" testable="false">
+                <text>`ObserverMethodBuilder` uses `ObserverMethodConfigurator` as defined in `ObserverMethodConfigurator interface`</text>
+            </assertion>
+            <assertion id="bf" testable="false">
+                <text>`The container must provide implementation for all these builders and make them available through ServiceLoader for
+                    `javax.enterprise.inject.spi.builder.BuildersProvider` interface.
+                </text>
+            </assertion>
+        </group>
+
+        <assertion id="c" testable="false">
+            <text>The class `javax.enterprise.inject.spi.builder.Builders` provides static method to obtain each builder.</text>
+        </assertion>
+    </section>
+
     <section id="packaging_deployment" title="Packaging and deployment" level="1">
+        <assertion id="a" testable="false">
+            <text>When an application is started, the container must perform bean discovery, detect definition errors and deployment problems and raise events
+                that allow portable extensions to integrate with the deployment lifecycle.
+            </text>
+        </assertion>
+
+        <group>
+            <text>Bean discovery is the process of determining:</text>
+            <assertion id="ba" testable="false">
+                <text>The bean archives that exist in the application, and the beans they contain</text>
+            </assertion>
+            <assertion id="bb" testable="false">
+                <text>Which alternatives, interceptors and decorators are enabled for each bean archive</text>
+            </assertion>
+            <assertion id="bc" testable="false">
+                <text>The ordering of enabled interceptors and decorators</text>
+            </assertion>
+        </group>
+
+        <assertion id="c" testable="false">
+            <text>Additional beans may be registered programmatically with the container by the application or a portable extension after the automatic bean
+                discovery completes. Portable extensions may even integrate with the process of building the |Bean| object for a bean, to enhance the container’s
+                built-in functionality.
+            </text>
+        </assertion>
 
     </section>
 
@@ -7969,7 +8403,8 @@
 
     <section id="default_name_ee" title="Default bean names for EJB session beans" level="3">
         <assertion id="a" testable="false">
-            <text>In the circumstances listed in 2.6.2 "Default bean names", the rule for determining default name for an EJB session bean are defined in 17.2.5 "Default bean
+            <text>In the circumstances listed in 2.6.2 "Default bean names", the rule for determining default name for an EJB session bean are defined in 17.2.5
+                "Default bean
                 name for a session bean".
             </text>
         </assertion>
@@ -9937,7 +10372,8 @@
 
     <section id="observer_methods_ee" title="Observer methods in EJB session beans" level="2">
         <assertion id="d">
-            <text>An observer method may also be a non-abstract method of an EJB session bean class. It must be either a local business method of the EJB or a static
+            <text>An observer method may also be a non-abstract method of an EJB session bean class. It must be either a local business method of the EJB or a
+                static
                 method of the bean class.
             </text>
         </assertion>
@@ -9946,7 +10382,8 @@
 
     <section id="observes_ee" title="Declaring an observer method in an EJB" level="3">
         <assertion id="g">
-            <text>If a non-static method of a session bean class has a parameter annotated |@Observes|, and the method is not a local business method of the EJB, the
+            <text>If a non-static method of a session bean class has a parameter annotated |@Observes|, and the method is not a local business method of the
+                EJB, the
                 container automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
@@ -9960,7 +10397,9 @@
         </assertion>
 
         <assertion id="b">
-            <text>All kinds of observers are called in the same client security context as the invocation of Event.fire() or Event.fireAsync() or BeanManager.fireEvent().</text>
+            <text>All kinds of observers are called in the same client security context as the invocation of Event.fire() or Event.fireAsync() or
+                BeanManager.fireEvent().
+            </text>
         </assertion>
 
     </section>
