@@ -6814,9 +6814,6 @@
                 <text>Test override a constructor parameter type with |overrideConstructorParameterType| method.</text>
             </assertion>
 
-            <assertion id="r">
-                <text>Test change the class that the AnnotatedType will represent.</text>
-            </assertion>
         </group>
 
     </section>
