@@ -14,22 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.configurators.BeanAttributesConfigurator;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import javax.enterprise.inject.Stereotype;
+package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@Stereotype
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface Melee {
+public class Skeleton {
     
+    private int healthPoints;
+    
+    // cons. with params to make sure this won't be a valid bean
+    public Skeleton (int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+    
+    public void rattle() {
+    }
 }

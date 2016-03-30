@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.configurators.BeanAttributesConfigurator;
+package org.jboss.cdi.tck.tests.extensions.configurators.beanAttributes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

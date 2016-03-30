@@ -14,15 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.configurators.BeanAttributesConfigurator;
+package org.jboss.cdi.tck.tests.extensions.configurators.beanAttributes;
 
-import javax.enterprise.context.ApplicationScoped;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import javax.enterprise.util.AnnotationLiteral;
+import javax.inject.Qualifier;
 
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@ApplicationScoped
-public class Axe {
-    
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
+public @interface TwoHanded {
+
+    public static class TwoHandedLiteral extends AnnotationLiteral<TwoHanded> implements TwoHanded {
+
+        public static TwoHandedLiteral INSTANCE = new TwoHandedLiteral();
+    }
 }

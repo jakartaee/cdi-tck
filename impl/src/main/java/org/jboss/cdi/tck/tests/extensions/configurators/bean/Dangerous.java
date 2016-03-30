@@ -14,12 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.configurators.BeanAttributesConfigurator;
+package org.jboss.cdi.tck.tests.extensions.configurators.bean;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import javax.enterprise.util.AnnotationLiteral;
+import javax.inject.Qualifier;
 
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-public interface Tool extends UsableItem {
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
+public @interface Dangerous {
+    
+    public static class DangerousLiteral extends AnnotationLiteral<Dangerous> implements Dangerous {
+        
+        public static DangerousLiteral INSTANCE = new DangerousLiteral();
+    }
     
 }

@@ -14,12 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.configurators.BeanAttributesConfigurator;
+package org.jboss.cdi.tck.tests.extensions.configurators.bean;
+
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-public interface UsableItem {
+@ApplicationScoped
+public class Dungeon {
     
+    
+    // will be turned into injection point
+    private Skeleton skeleton;
+    
+    // will be turned into injection point
+    private Zombie zombie;
+    
+    // will be turned into injection point
+    private Ghost ghost;
+    
+    // will be turned into injection point
+    private Vampire vampire;
+    
+    public boolean hasMonters() {
+        return skeleton != null && zombie != null && ghost!= null;
+    }
 }

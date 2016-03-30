@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.configurators.BeanAttributesConfigurator;
+package org.jboss.cdi.tck.tests.extensions.configurators.beanAttributes;
 
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ATTRIBUTES_CONFIGURATOR;
 import static org.testng.Assert.assertFalse;
@@ -27,7 +27,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;

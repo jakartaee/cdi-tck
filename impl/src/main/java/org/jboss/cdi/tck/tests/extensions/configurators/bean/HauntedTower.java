@@ -14,27 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.configurators.BeanAttributesConfigurator;
+package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Qualifier;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
-public @interface TwoHanded {
+@ApplicationScoped
+public class HauntedTower {
 
-    public static class TwoHandedLiteral extends AnnotationLiteral<TwoHanded> implements TwoHanded {
+    // this injection point will be replaced, hence the object here will be null
+    @Inject
+    @Undead
+    @Dangerous
+    private Zombie monster;
 
-        public static TwoHandedLiteral INSTANCE = new TwoHandedLiteral();
+    // will be turned into IP
+    private Ghost ghost;
+    
+    public boolean hasZombie() {
+        return !(monster == null);
+    }
+    
+    public boolean hasGhost() {
+        return ghost != null;
     }
 }
