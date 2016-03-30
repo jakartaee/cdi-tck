@@ -35,5 +35,6 @@ public @interface Reforged {
     
     public static class ReforgedLiteral extends AnnotationLiteral<Reforged> implements Reforged {
         
+        public static ReforgedLiteral INSTANCE = new ReforgedLiteral();
     }
 }

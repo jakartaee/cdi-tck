@@ -35,5 +35,6 @@ public @interface TwoHanded {
 
     public static class TwoHandedLiteral extends AnnotationLiteral<TwoHanded> implements TwoHanded {
 
+        public static TwoHandedLiteral INSTANCE = new TwoHandedLiteral();
     }
 }

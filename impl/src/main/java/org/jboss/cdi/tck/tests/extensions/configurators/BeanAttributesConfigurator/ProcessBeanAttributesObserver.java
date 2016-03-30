@@ -46,7 +46,7 @@ public class ProcessBeanAttributesObserver implements Extension {
         // set name
         // set stereotype 
         configurator.read(pba.getBeanAttributes());
-        configurator.addQualifier(new TwoHanded.TwoHandedLiteral());
+        configurator.addQualifier(TwoHanded.TwoHandedLiteral.INSTANCE);
         configurator.addType(Weapon.class);
         configurator.name(BeanAttributesConfiguratorTest.SWORD_NAME);
         configurator.addStereotype(Equipment.class); //cannot use literal, have to use class due to type Class<? extends Annotation>
@@ -80,7 +80,7 @@ public class ProcessBeanAttributesObserver implements Extension {
         Set<Class<? extends Annotation>> stereotypes = getStereotypes();
         stereotypes.remove(Melee.class);
         configurator.stereotypes(stereotypes);
-        configurator.qualifiers(new Reforged.ReforgedLiteral());
+        configurator.qualifiers(Reforged.ReforgedLiteral.INSTANCE);
     }
 
     public void observePAT(@Observes ProcessAnnotatedType<Axe> pat) {
@@ -89,8 +89,8 @@ public class ProcessBeanAttributesObserver implements Extension {
     
     private Set<Annotation> getAxeQualifiers() {
         Set<Annotation> result = new HashSet<>();
-        result.add(new TwoHanded.TwoHandedLiteral());
-        result.add(new Reforged.ReforgedLiteral());
+        result.add(TwoHanded.TwoHandedLiteral.INSTANCE);
+        result.add(Reforged.ReforgedLiteral.INSTANCE);
         return result;
     }
     

@@ -20,6 +20,6 @@ package org.jboss.cdi.tck.tests.extensions.configurators.BeanAttributesConfigura
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-public interface Tool extends UsableItem{
+public interface Tool extends UsableItem {
     
 }

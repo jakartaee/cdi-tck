@@ -63,9 +63,9 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
         @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bf"),
         @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bh") })
     public void testSingleAdditionMethods() {
-        Bean<Sword> bean = getUniqueBean(Sword.class, new TwoHanded.TwoHandedLiteral());
+        Bean<Sword> bean = getUniqueBean(Sword.class, TwoHanded.TwoHandedLiteral.INSTANCE);
 
-        assertTrue(bean.getQualifiers().contains(new TwoHanded.TwoHandedLiteral()));
+        assertTrue(bean.getQualifiers().contains(TwoHanded.TwoHandedLiteral.INSTANCE));
         assertTrue(bean.getName().equals(SWORD_NAME));
         assertTrue(bean.getTypes().contains(Weapon.class));
         assertTrue(bean.getStereotypes().contains(Equipment.class));
@@ -80,14 +80,14 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
         @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bg"),
         @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bi") })
     public void testMultiAdditionMethods() {
-        Bean<Axe> bean = getUniqueBean(Axe.class, new TwoHanded.TwoHandedLiteral(), new Reforged.ReforgedLiteral());
+        Bean<Axe> bean = getUniqueBean(Axe.class, TwoHanded.TwoHandedLiteral.INSTANCE, Reforged.ReforgedLiteral.INSTANCE);
         
         Set<Annotation> qualifiers = bean.getQualifiers();
         Set<Class<? extends Annotation>> stereotypes = bean.getStereotypes();
         Set<Type> types = bean.getTypes();
         
         assertTrue(bean.getScope().equals(RequestScoped.class));
-        assertTrue(qualifiers.containsAll(new HashSet<>(Arrays.asList(new Reforged.ReforgedLiteral(), new TwoHanded.TwoHandedLiteral()))));
+        assertTrue(qualifiers.containsAll(new HashSet<>(Arrays.asList(Reforged.ReforgedLiteral.INSTANCE, TwoHanded.TwoHandedLiteral.INSTANCE))));
         assertTrue(stereotypes.containsAll(new HashSet<>(Arrays.asList(Melee.class, Equipment.class))));
         assertTrue(types.containsAll(new HashSet<>(Arrays.asList(Weapon.class, Tool.class))));
         assertTrue(bean.isAlternative());
@@ -100,15 +100,13 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
         @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "be"),
         @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bg") })
     public void testReplacementMethods() {
-        Bean<Hoe> bean = getUniqueBean(Hoe.class, new Reforged.ReforgedLiteral());
+        Bean<Hoe> bean = getUniqueBean(Hoe.class, Reforged.ReforgedLiteral.INSTANCE);
         
         Set<Type> types = bean.getTypes();
         Set<Class<? extends Annotation>> stereotypes = bean.getStereotypes();
         
-        assertTrue(bean.getQualifiers().contains(new Reforged.ReforgedLiteral()));
-        assertFalse(bean.getQualifiers().contains(new TwoHanded.TwoHandedLiteral()));
+        assertTrue(bean.getQualifiers().equals(new HashSet<>(Arrays.asList(Reforged.ReforgedLiteral.INSTANCE))));
         assertTrue(types.containsAll(new HashSet<>(Arrays.asList(Tool.class, UsableItem.class))));
-        assertTrue(stereotypes.contains(Equipment.class)); 
-        assertFalse(stereotypes.contains(Melee.class));
+        assertTrue(stereotypes.equals(new HashSet<>(Arrays.asList(Equipment.class))));
     }
 }
