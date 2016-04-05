@@ -83,7 +83,7 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>2.0.Alpha2</cdi.api.version>
+        <cdi.api.version>2.0.Alpha3</cdi.api.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- JBoss EE APIs -->
