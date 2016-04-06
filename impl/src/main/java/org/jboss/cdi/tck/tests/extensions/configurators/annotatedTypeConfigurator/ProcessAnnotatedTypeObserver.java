@@ -59,7 +59,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
 
         // add @Disposes to DogDependenciesProducer.disposeFeed
         annotatedTypeConfigurator.filterMethods(am -> am.getJavaMember().getName().equals("disposeFeed")).findFirst().get()
-                .filterParams(ap -> ap.getPosition() == 0).findFirst().get().add(DisposesLiteral.INSTANCE);
+                .filterParams(ap -> ap.getPosition() == 0).findFirst().get().add(DisposesLiteral.INSTANCE).add(Dogs.DogsLiteral.INSTANCE);
     }
 
     void observesCatPAT(@Observes ProcessAnnotatedType<Cat> event) {
@@ -69,7 +69,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         // remove @RequestScoped from Cat
         annotatedTypeConfigurator.remove(RequestScoped.class);
         // remove @Produces and @Cats Cat.produceCatName()
-        annotatedTypeConfigurator.filterMethods(am -> am.getJavaMember().getName().equals("produceCatName")).findFirst().get().remove(ProducesLiteral.INSTANCE)
+        annotatedTypeConfigurator.filterMethods(am -> am.getJavaMember().getName().equals("produceCatFeed")).findFirst().get().remove(ProducesLiteral.INSTANCE)
                 .remove(Cats.CatsLiteral.INSTANCE);
         // remove @Inject from Cat.feed
         annotatedTypeConfigurator.filterFields(af -> af.getJavaMember().getName().equals("feed")).findFirst().get().remove(InjectLiteral.INSTANCE);
@@ -79,15 +79,17 @@ public class ProcessAnnotatedTypeObserver implements Extension {
                 .filterParams(ap -> ap.getPosition() == 0).findFirst().get().remove(Cats.CatsLiteral.INSTANCE);
 
         // remove @Observes from Cat.observesCatsFeed method parameter
-        annotatedTypeConfigurator.filterMethods(am -> am.getJavaMember().getName().equals("observersCatsFeed")).findFirst().get()
+        annotatedTypeConfigurator.filterMethods(am -> am.getJavaMember().getName().equals("observesCatsFeed")).findFirst().get()
                 .filterParams(ap -> ap.getPosition() == 0).findFirst().get().remove(Observes.class);
 
     }
 
     void observesDogProducerPAT(@Observes ProcessAnnotatedType<DogProducer> event) {
         // remove all @Produces from DogProducer
-        event.configureAnnotatedType().methods().stream().forEach(am -> am.remove(Produces.class));
+        AnnotatedTypeConfigurator<DogProducer> annotatedTypeConfigurator = event.configureAnnotatedType();
 
+        annotatedTypeConfigurator.methods().stream().forEach(am -> am.remove(Produces.class));
+        annotatedTypeConfigurator.fields().stream().forEach(am -> am.remove(Produces.class));
     }
 
 }

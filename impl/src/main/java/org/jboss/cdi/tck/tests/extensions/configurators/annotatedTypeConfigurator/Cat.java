@@ -48,8 +48,8 @@ public class Cat {
 
     @Produces
     @Cats
-    public String produceCatName() {
-        return "kitty";
+    public Feed produceCatFeed() {
+        return new Feed();
     }
 
     public void observesCatsFeed(@Observes Feed feed) {

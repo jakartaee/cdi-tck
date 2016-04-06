@@ -19,6 +19,8 @@ package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurat
 import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_TYPE_CONFIGURATOR;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.Dependent;
@@ -29,6 +31,8 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.literals.DisposesLiteral;
+import org.jboss.cdi.tck.literals.ProducesLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -47,6 +51,7 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(AnnotatedTypeConfiguratorTest.class)
+                .withClasses(ProducesLiteral.class, DisposesLiteral.class)
                 .withExtension(ProcessAnnotatedTypeObserver.class).build();
     }
 
@@ -67,11 +72,13 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
         Assert.assertNotNull(dog.getFeed());
         Assert.assertEquals(dog.getName(), DogDependenciesProducer.dogName);
 
-        List<InjectionPoint> injectionPoinsWithCreated = dogBean.getInjectionPoints().stream()
+        List<InjectionPoint> dogsInjectionPoints = dogBean.getInjectionPoints().stream()
                 .filter(injectionPoint -> injectionPoint.getQualifiers().contains(new Dogs.DogsLiteral())).collect(
                         Collectors.toList());
-        Assert.assertEquals(injectionPoinsWithCreated.size(), 1);
-        Assert.assertEquals(injectionPoinsWithCreated.get(0).getType(), Feed.class);
+        Assert.assertEquals(dogsInjectionPoints.size(), 2);
+        Optional<InjectionPoint> feedIpOptional = dogsInjectionPoints.stream().filter(injectionPoint -> injectionPoint.getType().equals(Feed.class))
+                .findFirst();
+        Assert.assertTrue(feedIpOptional.isPresent());
 
         dogBean.destroy(dog, creationalContext);
         Assert.assertTrue(DogDependenciesProducer.disposerCalled.get());
@@ -91,7 +98,8 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
         Assert.assertEquals(catBean.getScope(), Dependent.class);
 
         Assert.assertNull(cat.getFeed());
-        Assert.assertNull(getContextualReference(String.class, new Cats.CatsLiteral()));
+        Set<Bean<Feed>> catFeedBeans = getBeans(Feed.class, Cats.CatsLiteral.INSTANCE);
+        Assert.assertEquals(catFeedBeans.size(), 0);
 
         getCurrentManager().fireEvent(new Feed());
         Assert.assertFalse(cat.isFeedObserved());

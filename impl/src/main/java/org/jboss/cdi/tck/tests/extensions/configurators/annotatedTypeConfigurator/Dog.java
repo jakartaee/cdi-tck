@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurat
 
 public class Dog {
 
-    public Feed feed;
+    private Feed feed;
 
     private String name;
 
