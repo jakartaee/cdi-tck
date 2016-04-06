@@ -20,6 +20,7 @@ import java.lang.annotation.Annotation;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.spi.Extension;
@@ -31,15 +32,15 @@ public class ProcessObserverMethodObserver implements Extension {
     public static AtomicBoolean consumerNotified = new AtomicBoolean(false);
     public static Set<Annotation> pineAppleQualifiers;
 
-    void observesBreadPOM(ProcessObserverMethod<Bread, FoodObserver> event) {
+    void observesBreadPOM(@Observes ProcessObserverMethod<Bread, FoodObserver> event) {
         // set beanClass of the observer to FruitObserver
-        // set observed typ to Apple
+        // set observed type to Apple
         event.configureObserverMethod()
                 .beanClass(FruitObserver.class)
                 .observedType(Apple.class);
     }
 
-    void observesPearPOM(ProcessObserverMethod<Pear, FruitObserver> event) {
+    void observesPearPOM(@Observes ProcessObserverMethod<Pear, FruitObserver> event) {
         // add @Ripe and @Delicious to the observed type
         // make observer asynchronous
         // set priority
@@ -49,7 +50,7 @@ public class ProcessObserverMethodObserver implements Extension {
                 .priority(Interceptor.Priority.APPLICATION + 100);
     }
 
-    void observesOrangePOM(ProcessObserverMethod<Orange, FruitObserver> event) {
+    void observesOrangePOM(@Observes ProcessObserverMethod<Orange, FruitObserver> event) {
         // replace qualifiers
         // set reception to Reception.IF_EXISTS
         // set transaction phase to TransactionPhase.AFTER_SUCCESS
@@ -59,7 +60,7 @@ public class ProcessObserverMethodObserver implements Extension {
                 .transactionPhase(TransactionPhase.AFTER_SUCCESS);
     }
 
-    void observesPineapplePOM(ProcessObserverMethod<Pineapple, FruitObserver> event) {
+    void observesPineapplePOM(@Observes ProcessObserverMethod<Pineapple, FruitObserver> event) {
         event.configureObserverMethod()
                 .addQualifier(Delicious.DeliciousLiteral.INSTANCE)
                 .notifyWith((pineapple, eventMetadata) -> {
