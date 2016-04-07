@@ -25,8 +25,6 @@ import javax.enterprise.inject.spi.BeforeShutdown;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
-import javax.enterprise.inject.spi.builder.Builders;
-import javax.enterprise.inject.spi.builder.ObserverMethodBuilder;
 
 public class ProcessObserverMethodObserver implements Extension {
     private static final HashSet<Type> eventTypes = new HashSet<Type>();
@@ -50,9 +48,7 @@ public class ProcessObserverMethodObserver implements Extension {
     }
 
     public void observeObserverMethodForEventB(@Observes ProcessObserverMethod<EventB, EventObserver> event) {
-        ObserverMethodBuilder<EventB> omBuilder = Builders.observerMethod(EventB.class);
-        omBuilder.configure().read(event.getObserverMethod()).observedType(EventC.class);
-        event.setObserverMethod(omBuilder.build());
+        event.setObserverMethod(new EventBObserverMethod());
     }
 
     public void observeObserverMethodForEventD(@Observes ProcessObserverMethod<EventD, EventObserver> event) {
@@ -70,4 +66,5 @@ public class ProcessObserverMethodObserver implements Extension {
     public static ObserverMethod<?> getObserverMethod() {
         return observerMethod;
     }
+
 }
