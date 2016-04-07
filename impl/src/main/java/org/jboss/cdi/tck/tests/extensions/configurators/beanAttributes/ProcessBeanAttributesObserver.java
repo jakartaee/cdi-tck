@@ -25,7 +25,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.builder.BeanAttributesConfigurator;
 
@@ -49,19 +48,19 @@ public class ProcessBeanAttributesObserver implements Extension {
         configurator.addQualifier(TwoHanded.TwoHandedLiteral.INSTANCE);
         configurator.addType(Weapon.class);
         configurator.name(BeanAttributesConfiguratorTest.SWORD_NAME);
-        configurator.addStereotype(Equipment.class); //cannot use literal, have to use class due to type Class<? extends Annotation>
+        configurator.addStereotype(Equipment.class);
     }
 
     public void observeAxe(@Observes ProcessBeanAttributes<Axe> pba) {
         BeanAttributesConfigurator<Axe> configurator = pba.configureBeanAttributes();
 
-        // init configurator with previously stored annotated type
+        // init configurator with bean attributes
         // make alternative
         // add multiple qualifiers (TwoHanded, Reforged)
         // add multiple stereotypes (Equipment, Melee)
         // add multiple types (Weapon, Tool)
         // change scope to RequestScoped
-        configurator.read(annotatedType);
+        configurator.read(pba.getBeanAttributes());
         configurator.alternative(true);
         configurator.addQualifiers(getAxeQualifiers());
         configurator.addStereotypes(getStereotypes());
@@ -76,15 +75,12 @@ public class ProcessBeanAttributesObserver implements Extension {
         // add types with closure method (adding a Tool.java will result in having a type UsableItem as well)
         // replace @Melee stereotype with @Equipment
         // replace qualifier @TwoHanded with @Reforged
+        configurator.read(pba.getBeanAttributes());
         configurator.addTransitiveTypeClosure(Tool.class);
         Set<Class<? extends Annotation>> stereotypes = getStereotypes();
         stereotypes.remove(Melee.class);
         configurator.stereotypes(stereotypes);
         configurator.qualifiers(Reforged.ReforgedLiteral.INSTANCE);
-    }
-
-    public void observePAT(@Observes ProcessAnnotatedType<Axe> pat) {
-        annotatedType = pat.getAnnotatedType();
     }
     
     private Set<Annotation> getAxeQualifiers() {
@@ -105,6 +101,7 @@ public class ProcessBeanAttributesObserver implements Extension {
         Set<Type> result = new HashSet<>();
         result.add(Weapon.class);
         result.add(Tool.class);
+        result.add(Axe.class);
         return result;
     }
 }

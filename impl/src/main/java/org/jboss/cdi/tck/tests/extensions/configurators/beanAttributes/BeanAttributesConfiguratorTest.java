@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.extensions.configurators.beanAttributes;
 
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ATTRIBUTES_CONFIGURATOR;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
@@ -27,12 +26,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -51,7 +53,11 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanAttributesConfiguratorTest.class)
-            .withExtension(ProcessBeanAttributesObserver.class).build();
+            .withExtension(ProcessBeanAttributesObserver.class)
+            .withBeansXml(
+                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
+                                .clazz(Axe.class.getName()).up())
+            .build();
     }
 
     @Test
@@ -104,7 +110,8 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
         Set<Type> types = bean.getTypes();
         Set<Class<? extends Annotation>> stereotypes = bean.getStereotypes();
         
-        assertTrue(bean.getQualifiers().equals(new HashSet<>(Arrays.asList(Reforged.ReforgedLiteral.INSTANCE))));
+        // list will contain the replaced Qualifier + Any
+        assertTrue(bean.getQualifiers().equals(new HashSet<>(Arrays.asList(Reforged.ReforgedLiteral.INSTANCE, Any.Literal.INSTANCE))));
         assertTrue(types.containsAll(new HashSet<>(Arrays.asList(Tool.class, UsableItem.class))));
         assertTrue(stereotypes.equals(new HashSet<>(Arrays.asList(Equipment.class))));
     }
