@@ -16,12 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
-import javax.inject.Inject;
-
 @Driving
 public class Car implements Vehicle {
-
-    @Inject
-    Engine engine;
 
 }

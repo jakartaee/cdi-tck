@@ -50,16 +50,7 @@ public class InjectionPointConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = Sections.INJECTION_POINT_CONFIGURATOR, id = "ba"),
-            @SpecAssertion(section = Sections.INJECTION_POINT_CONFIGURATOR, id = "bd")
-    })
-    public void changeBeanAndTypeOfInjectionPoint() {
-        Bean<MotorBike> motorBikeBean = getUniqueBean(MotorBike.class);
-        Assert.assertEquals(motorBikeBean.getInjectionPoints().size(), 1);
-        Assert.assertEquals(motorBikeBean.getInjectionPoints().iterator().next().getType(), Tank.class);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = Sections.INJECTION_POINT_CONFIGURATOR, id = "bb") })
+            @SpecAssertion(section = Sections.INJECTION_POINT_CONFIGURATOR, id = "bb") })
     public void changeTypeAndAddQualifier() {
         Bean<AirPlane> airPlaneBean = getUniqueBean(AirPlane.class);
         Assert.assertEquals(airPlaneBean.getInjectionPoints().size(), 1);

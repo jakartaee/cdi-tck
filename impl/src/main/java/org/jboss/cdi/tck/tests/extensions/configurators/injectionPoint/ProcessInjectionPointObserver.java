@@ -17,25 +17,10 @@
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessInjectionPoint;
-import javax.enterprise.inject.spi.builder.InjectionPointConfigurator;
 
 public class ProcessInjectionPointObserver implements Extension {
-
-    private Bean<MotorBike> motorBikeBean;
-    private InjectionPointConfigurator injectionPointConfigurator;
-
-    void observesPB(@Observes ProcessBean<MotorBike> event) {
-        motorBikeBean = event.getBean();
-        injectionPointConfigurator.bean(motorBikeBean).type(Tank.class);
-    }
-
-    void observesCarPIPEngine(@Observes ProcessInjectionPoint<Car, Engine> event) {
-        injectionPointConfigurator = event.configureInjectionPoint();
-    }
 
     void observesAirPlanePIP(@Observes ProcessInjectionPoint<AirPlane, Tank> event) {
 
