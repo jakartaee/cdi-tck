@@ -23,6 +23,7 @@ import static org.jboss.cdi.tck.cdi.Sections.PROCESS_OBSERVER_METHOD;
 
 import java.util.Set;
 
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -72,14 +73,14 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ac"), @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "daa") })
     public void replaceWithSetObserverMethod() {
-        Set<ObserverMethod<? super EventC>> observerMethods = getCurrentManager().resolveObserverMethods(new EventC());
+        Set<ObserverMethod<? super EventC>> observerMethods = getCurrentManager().resolveObserverMethods(new EventC(), Any.Literal.INSTANCE);
         Assert.assertEquals(observerMethods.size(), 1);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "dac") })
     public void vetoEventD() {
-        Set<ObserverMethod<? super EventD>> observerMethods = getCurrentManager().resolveObserverMethods(new EventD());
+        Set<ObserverMethod<? super EventD>> observerMethods = getCurrentManager().resolveObserverMethods(new EventD(), Any.Literal.INSTANCE);
         Assert.assertEquals(observerMethods.size(), 0);
     }
 

@@ -23,7 +23,7 @@ import java.util.Set;
 
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
-import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.ObserverMethod;
 
 public class EventBObserverMethod implements ObserverMethod<EventB>{
@@ -40,7 +40,7 @@ public class EventBObserverMethod implements ObserverMethod<EventB>{
     @Override
     public Set<Annotation> getObservedQualifiers() {
         Set<Annotation> qualifiers = new HashSet<>();
-        qualifiers.add(Default.Literal.INSTANCE);
+        qualifiers.add(Any.Literal.INSTANCE);
         return qualifiers;
     }
 

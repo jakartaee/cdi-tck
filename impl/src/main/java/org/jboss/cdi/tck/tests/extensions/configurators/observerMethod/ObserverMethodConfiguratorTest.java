@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -23,6 +24,7 @@ import java.util.stream.Stream;
 
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.interceptor.Interceptor;
 
@@ -54,7 +56,7 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bb") })
     public void changeBeanClassAndObservedType() {
-        Set<ObserverMethod<? super Apple>> appleEventObservers = getCurrentManager().resolveObserverMethods(new Apple());
+        Set<ObserverMethod<? super Apple>> appleEventObservers = getCurrentManager().resolveObserverMethods(new Apple(), Any.Literal.INSTANCE);
         Assert.assertEquals(appleEventObservers.size(), 1);
         Assert.assertEquals(appleEventObservers.iterator().next().getBeanClass(), FruitObserver.class);
         Assert.assertEquals(appleEventObservers.iterator().next().getObservedType(), Apple.class);
@@ -65,7 +67,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bd"),
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bi") })
     public void addQualifiersAndSetPriority() {
-        Set<ObserverMethod<? super Pear>> pearEventObservers = getCurrentManager().resolveObserverMethods(new Pear());
+        Set<ObserverMethod<? super Pear>> pearEventObservers = getCurrentManager()
+                .resolveObserverMethods(new Pear(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
         Assert.assertEquals(pearEventObservers.size(), 1);
         Assert.assertEquals(pearEventObservers.iterator().next().getPriority(), Interceptor.Priority.APPLICATION + 100);
         Assert.assertEquals(pearEventObservers.iterator().next().isAsync(), true);
@@ -78,7 +81,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "be"),
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bf") })
     public void setReceptionAndTransactionPhase() {
-        Set<ObserverMethod<? super Orange>> orangeEventObservers = getCurrentManager().resolveObserverMethods(new Orange());
+        Set<ObserverMethod<? super Orange>> orangeEventObservers = getCurrentManager()
+                .resolveObserverMethods(new Orange(), Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
         Assert.assertEquals(orangeEventObservers.size(), 1);
         Assert.assertEquals(orangeEventObservers.iterator().next().getReception(), Reception.IF_EXISTS);
         Assert.assertEquals(orangeEventObservers.iterator().next().getTransactionPhase(), TransactionPhase.AFTER_SUCCESS);
@@ -91,6 +95,6 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     public void notifyAcceptingConsumerNotified() {
         getCurrentManager().fireEvent(new Pineapple(), Delicious.DeliciousLiteral.INSTANCE);
         Assert.assertTrue(ProcessObserverMethodObserver.consumerNotified.get());
-        Assert.assertEquals(ProcessObserverMethodObserver.pineAppleQualifiers, Collections.singleton(Delicious.DeliciousLiteral.INSTANCE));
+        Assert.assertEquals(ProcessObserverMethodObserver.pineAppleQualifiers, Arrays.asList(Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE));
     }
 }
