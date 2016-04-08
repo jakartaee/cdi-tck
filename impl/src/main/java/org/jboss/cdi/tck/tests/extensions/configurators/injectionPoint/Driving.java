@@ -26,11 +26,11 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.PARAMETER, ElementType.METHOD })
-public @interface Flying {
+@Target({ ElementType.PARAMETER, ElementType.TYPE })
+public @interface Driving {
 
-    public static class FlyingLiteral extends AnnotationLiteral<Flying> implements Flying {
+    public static class DrivingLiteral extends AnnotationLiteral<Driving> implements Driving {
 
-        public static FlyingLiteral INSTANCE = new FlyingLiteral();
+        public static DrivingLiteral INSTANCE = new DrivingLiteral();
     }
 }

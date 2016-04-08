@@ -53,12 +53,13 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
+    // FIXME remove or enable assertion "ba" in the future
+    @SpecAssertions({ //@SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bb") })
     public void changeBeanClassAndObservedType() {
         Set<ObserverMethod<? super Apple>> appleEventObservers = getCurrentManager().resolveObserverMethods(new Apple(), Any.Literal.INSTANCE);
         Assert.assertEquals(appleEventObservers.size(), 1);
-        Assert.assertEquals(appleEventObservers.iterator().next().getBeanClass(), FruitObserver.class);
+        Assert.assertEquals(appleEventObservers.iterator().next().getBeanClass(), FoodObserver.class);
         Assert.assertEquals(appleEventObservers.iterator().next().getObservedType(), Apple.class);
     }
 

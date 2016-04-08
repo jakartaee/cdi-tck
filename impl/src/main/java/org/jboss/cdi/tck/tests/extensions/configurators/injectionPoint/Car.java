@@ -18,12 +18,10 @@ package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
 import javax.inject.Inject;
 
-public class Car {
+@Driving
+public class Car implements Vehicle {
 
     @Inject
     Engine engine;
 
-    @Inject
-    public void initTank(Tank tank){
-    }
 }

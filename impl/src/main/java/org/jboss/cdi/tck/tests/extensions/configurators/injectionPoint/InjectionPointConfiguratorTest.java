@@ -16,9 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
+import java.lang.reflect.Type;
 import java.util.Collections;
+import java.util.List;
 
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.Decorator;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -49,7 +52,7 @@ public class InjectionPointConfiguratorTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = Sections.INJECTION_POINT_CONFIGURATOR, id = "ba"),
             @SpecAssertion(section = Sections.INJECTION_POINT_CONFIGURATOR, id = "bd")
     })
-    public void readFromExistingIPAndChangeBeanAndTypeOfInjectionPoint() {
+    public void changeBeanAndTypeOfInjectionPoint() {
         Bean<MotorBike> motorBikeBean = getUniqueBean(MotorBike.class);
         Assert.assertEquals(motorBikeBean.getInjectionPoints().size(), 1);
         Assert.assertEquals(motorBikeBean.getInjectionPoints().iterator().next().getType(), Tank.class);
@@ -57,24 +60,27 @@ public class InjectionPointConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = Sections.INJECTION_POINT_CONFIGURATOR, id = "bb") })
-    public void readFromConstructorAndAddQualifier() {
+    public void changeTypeAndAddQualifier() {
         Bean<AirPlane> airPlaneBean = getUniqueBean(AirPlane.class);
         Assert.assertEquals(airPlaneBean.getInjectionPoints().size(), 1);
-        InjectionPoint tankIP = airPlaneBean.getInjectionPoints().iterator().next();
-        Assert.assertNotNull(tankIP);
-        Assert.assertEquals(tankIP.getQualifiers(), Collections.singleton(Flying.FlyingLiteral.INSTANCE));
+        InjectionPoint engineIP = airPlaneBean.getInjectionPoints().iterator().next();
+        Assert.assertNotNull(engineIP);
+        Assert.assertEquals(engineIP.getType(), Engine.class);
+        Assert.assertEquals(engineIP.getQualifiers(), Collections.singleton(Flying.FlyingLiteral.INSTANCE));
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = Sections.INJECTION_POINT_CONFIGURATOR, id = "bc"),
             @SpecAssertion(section = Sections.INJECTION_POINT_CONFIGURATOR, id = "be")
     })
-    public void readFromMethodParamAndReplaceQsualifiersAndDelegate() {
-        Bean<Car> carBean = getUniqueBean(Car.class);
-        Assert.assertEquals(carBean.getInjectionPoints().size(), 1);
-        InjectionPoint tankIP = carBean.getInjectionPoints().iterator().next();
-        Assert.assertEquals(tankIP.isDelegate(), true);
-        Assert.assertEquals(tankIP.getQualifiers(), Collections.singleton(Flying.FlyingLiteral.INSTANCE));
+    public void replaceQualifiersAndDelegate() {
+        List<Decorator<?>> vehicleDecorators = getCurrentManager().resolveDecorators(Collections.<Type>singleton(Car.class), Driving.DrivingLiteral.INSTANCE);
+        Assert.assertEquals(vehicleDecorators.size(), 1);
+        Decorator<Car> vehicleDecorator = (Decorator<Car>) vehicleDecorators.get(0);
+        Assert.assertEquals(vehicleDecorator.getInjectionPoints().size(), 1);
+        InjectionPoint vehicleIp = vehicleDecorator.getInjectionPoints().iterator().next();
+        Assert.assertEquals(vehicleIp.isDelegate(), true);
+        Assert.assertEquals(vehicleIp.getQualifiers(), Collections.singleton(Driving.DrivingLiteral.INSTANCE));
     }
 
     @Test

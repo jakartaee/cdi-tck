@@ -16,21 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.enterprise.inject.Produces;
 
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Qualifier;
+public class EngineProducer {
 
-@Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.PARAMETER, ElementType.METHOD })
-public @interface Flying {
-
-    public static class FlyingLiteral extends AnnotationLiteral<Flying> implements Flying {
-
-        public static FlyingLiteral INSTANCE = new FlyingLiteral();
+    @Produces
+    @Flying
+    public Engine createEngine() {
+        return new Engine();
     }
 }

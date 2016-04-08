@@ -36,7 +36,8 @@ public class ProcessObserverMethodObserver implements Extension {
         // set beanClass of the observer to FruitObserver
         // set observed type to Apple
         event.configureObserverMethod()
-                .beanClass(FruitObserver.class)
+                // FIXME this will be likely forbidden
+                // .beanClass(FruitObserver.class)
                 .observedType(Apple.class);
     }
 
