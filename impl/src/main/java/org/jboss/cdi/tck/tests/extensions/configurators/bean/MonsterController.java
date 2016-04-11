@@ -23,6 +23,7 @@ import java.util.function.Supplier;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.Produces;
 
 
 /** Producer and Consumer logic resides here
@@ -41,13 +42,13 @@ public class MonsterController {
     
     private static Ghost ghostInstance = new Ghost(false);
     
-    // skeleton Supplier user as producer
+    // skeleton Supplier used as producer
     public static Supplier<Skeleton> skeletonSupplier = () -> {
         skeletonProducerCalled = true;
         return new Skeleton(100);
     };
 
-    // zombie Fuction used as producer
+    // zombie producing Fuction used as producer
     public static Function<Instance<Object>, Zombie> zombieProducingFunction = (Instance<Object> t) -> {
         zombieProducerCalled = true;
         return new Zombie(t.select(Boolean.class).get());
@@ -72,5 +73,11 @@ public class MonsterController {
     public static Ghost getGhostInstance() {
         ghostInstanceObtained = true;
         return ghostInstance;
+    }
+    
+    // used in zombie producer function
+    @Produces
+    public Boolean giveMeTrue() {
+        return true;
     }
 }

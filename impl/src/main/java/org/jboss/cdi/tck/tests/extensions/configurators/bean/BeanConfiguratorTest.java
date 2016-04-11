@@ -16,17 +16,22 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.annotation.Annotation;
+import java.util.Set;
+
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -40,15 +45,15 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class BeanConfiguratorTest extends AbstractTest {
 
+    @Deployment
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(BeanConfiguratorTest.class)
+            .withExtension(AfterBeanDiscoveryObserver.class).build();
+    }
+
     @Inject
     Dungeon dungeon;
 
-    @Inject
-    HauntedTower tower;
-    
-    @Inject
-    BeanManager manager;
-    
     @Test
     @SpecAssertions({
         @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
@@ -60,24 +65,28 @@ public class BeanConfiguratorTest extends AbstractTest {
         Bean<Skeleton> skeletonBean = getUniqueBean(Skeleton.class, Undead.UndeadLiteral.INSTANCE);
         CreationalContext<Skeleton> skeletonCreationalContext = getCurrentManager().createCreationalContext(skeletonBean);
         Skeleton skeleton = skeletonBean.create(skeletonCreationalContext);
-        
+
         Bean<Zombie> zombieBean = getUniqueBean(Zombie.class, Undead.UndeadLiteral.INSTANCE, Dangerous.DangerousLiteral.INSTANCE);
         CreationalContext<Zombie> zombieCreationalContext = getCurrentManager().createCreationalContext(zombieBean);
         Zombie zombie = zombieBean.create(zombieCreationalContext);
-        
+
+        // instantiate Ghost and Vampire to verify their creational methods were called
+        spawnMonster(Ghost.class, Undead.UndeadLiteral.INSTANCE);
+        spawnMonster(Vampire.class, Undead.UndeadLiteral.INSTANCE);
+
         // verify creational methods were called
         assertTrue(MonsterController.skeletonProducerCalled);
         assertTrue(MonsterController.zombieProducerCalled);
         assertTrue(MonsterController.ghostInstanceObtained);
         assertTrue(MonsterController.vampireInstanceCreated);
-        
+
         // verify destroy methods were called
         skeletonBean.destroy(skeleton, skeletonCreationalContext);
         zombieBean.destroy(zombie, zombieCreationalContext);
         assertTrue(MonsterController.zombieKilled);
         assertTrue(MonsterController.skeletonKilled);
     }
-    
+
     @Test
     @SpecAssertions({
         @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
@@ -85,19 +94,32 @@ public class BeanConfiguratorTest extends AbstractTest {
         @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "c"),
         @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "d") })
     public void testInjectionPoints() {
-        // Dungeon should have Skeleton, Zombie, Ghost and Vampire injected
-        assertTrue(dungeon.hasMonters());
-        // HauntedTower should have Zombie IP removed and Ghost IP added
-        assertFalse(tower.hasZombie());
-        assertTrue(tower.hasGhost());
+        // Dungeon should have Skeleton, Zombie, Ghost and Vampire Injected
+        assertTrue(dungeon.hasAllMonters());
+
+        // skeleton has one IP only
+        assertTrue(getUniqueBean(Skeleton.class, Undead.UndeadLiteral.INSTANCE).getInjectionPoints().size() == 1);
+        // zombie has two different
+        assertTrue(getUniqueBean(Zombie.class, Undead.UndeadLiteral.INSTANCE, Dangerous.DangerousLiteral.INSTANCE).getInjectionPoints().size() == 2);
+        // ghost has two but one was replaces with the other, resulting in only one IP
+        Set<InjectionPoint> ghostIP = getUniqueBean(Ghost.class, Undead.UndeadLiteral.INSTANCE).getInjectionPoints();
+        assertTrue(ghostIP.size() == 1);
+        assertTrue(ghostIP.iterator().next().getAnnotated().getTypeClosure().contains(DesireToHurtHumans.class));
     }
-    
+
     @Test
     @SpecAssertions({
         @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
         @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "e") })
     public void testPassivationCapability() {
         // BeanManager should be able to find a passivation capable bean
-        assertNotNull(manager.getPassivationCapableBean("zombie"));
+        assertNotNull(getCurrentManager().getPassivationCapableBean("zombie"));
+    }
+
+    // helper method to create a bean
+    private <T> void spawnMonster(Class<T> type, Annotation... annotation) {
+        Bean<T> bean = getUniqueBean(type, annotation);
+        CreationalContext<T> creationalContext = getCurrentManager().createCreationalContext(bean);
+        bean.create(creationalContext);
     }
 }
