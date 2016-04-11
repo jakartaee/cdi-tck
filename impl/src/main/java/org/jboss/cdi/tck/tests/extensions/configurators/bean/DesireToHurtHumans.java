@@ -16,30 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
-/**
+/** Dummy bean used to add as injection point into newly created beans
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@ApplicationScoped
-public class HauntedTower {
-
-    // this injection point will be replaced, hence the object here will be null
-    @Inject
-    @Undead
-    @Dangerous
-    private Zombie monster;
-
-    // will be turned into IP
-    private Ghost ghost;
+public class DesireToHurtHumans {
     
-    public boolean hasZombie() {
-        return !(monster == null);
-    }
-    
-    public boolean hasGhost() {
-        return ghost != null;
-    }
 }

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
@@ -23,67 +24,73 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanAttributes;
 import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
-import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.builder.BeanConfigurator;
-import javax.enterprise.inject.spi.builder.Builders;
-import javax.enterprise.inject.spi.builder.InjectionPointBuilder;
 
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-public class AfterBeanDiscoveryObserver {
-
-    public static BeanAttributes<Zombie> zombieAttributes;
-    public static BeanAttributes<Vampire> vampireAttributes;
-
-    public static AnnotatedType<Vampire> vampireAnnotatedType;
-
-    public static AnnotatedField<?> skeletonField;
-    public static AnnotatedField<?> zombieField;
-    public static AnnotatedField<?> ghostFieldInDungeon;
-    public static AnnotatedField<?> ghostFieldInTower;
-    public static AnnotatedField<?> vampireField;
-
+public class AfterBeanDiscoveryObserver implements Extension {
+    
     public void observeUndead(@Observes AfterBeanDiscovery abd, BeanManager bm) {
-        // firstly, create a Skeleton bean
-        BeanConfigurator<Skeleton> skeleton = abd.addBean();
+        // create Skeleton bean
+        configureSkeleton(bm, abd.addBean());
 
-        // set bean class, qualifier, stereotype
+        // create Zombie bean
+        configureZombie(bm, abd.addBean());
+
+        // create Ghost bean
+        configureGhost(bm, abd.addBean());
+
+        // create Vampire bean
+        configureVampire(bm, abd.addBean());
+    }
+    
+    private void configureSkeleton(BeanManager bm, BeanConfigurator<Skeleton> skeleton) {
+        // set bean class, qualifier, stereotype, scope       
+        // no read() method used here, all set manually
         skeleton.beanClass(Skeleton.class);
         skeleton.addQualifier(Undead.UndeadLiteral.INSTANCE);
         skeleton.addStereotype(Monster.class);
-
-        // use builder to create injection points
-        InjectionPointBuilder injectionPointBuilder = Builders.injectionPoint();
-        injectionPointBuilder.configure().read(skeletonField)
-            .addQualifier(Undead.UndeadLiteral.INSTANCE)
-            .type(Skeleton.class);
-
-        //set IP
-        skeleton.addInjectionPoint(injectionPointBuilder.build());
+        skeleton.scope(RequestScoped.class);
+        skeleton.addTransitiveTypeClosure(Skeleton.class);
+        
+        for (AnnotatedField<? super Skeleton> field : bm.createAnnotatedType(Skeleton.class).getFields()) {
+            if (field.getJavaMember().getType().equals(DesireToHurtHumans.class)) {
+                skeleton.addInjectionPoint(bm.createInjectionPoint(field));
+                break;
+            }
+        }
 
         // set Supplier as producer
         skeleton.produceWith(MonsterController.skeletonSupplier);
 
         // set Consumer in dispose method
         skeleton.disposeWith(MonsterController.skeletonConsumer);
-
-        BeanConfigurator<Zombie> zombie = abd.addBean();
-
+    }
+    
+    private void configureZombie(BeanManager bm, BeanConfigurator<Zombie> zombie) {
+        // init with read() method, then set values
+        zombie.read(bm.createAnnotatedType(Zombie.class));
         zombie.beanClass(Zombie.class);
         zombie.addQualifiers(Undead.UndeadLiteral.INSTANCE, Dangerous.DangerousLiteral.INSTANCE);
         zombie.addStereotype(Monster.class);
-
-        // use builder to create injection points
-        injectionPointBuilder.configure().read(zombieField)
-            .addQualifiers(Undead.UndeadLiteral.INSTANCE, Dangerous.DangerousLiteral.INSTANCE)
-            .type(Zombie.class);
-
-        // replace the injection point in HauntedTower with the one in Dungeon
-        zombie.injectionPoints(injectionPointBuilder.build());
+        zombie.scope(RequestScoped.class);
+        
+        InjectionPoint zombieWeaponIP = null;
+        InjectionPoint zombieDesireIP = null;
+        for (AnnotatedField<? super Zombie> field : bm.createAnnotatedType(Zombie.class).getFields()) {
+            if (field.getJavaMember().getType().equals(DesireToHurtHumans.class)) {
+                zombieDesireIP = bm.createInjectionPoint(field);
+            }
+            if (field.getJavaMember().getType().equals(Weapon.class)) {
+                zombieWeaponIP = bm.createInjectionPoint(field);
+            }
+        }
+        // add multiple injection points
+        zombie.addInjectionPoints(zombieWeaponIP, zombieDesireIP);
 
         // set Function as a supplier
         zombie.produceWith(MonsterController.zombieProducingFunction);
@@ -93,85 +100,48 @@ public class AfterBeanDiscoveryObserver {
 
         // make passivation capable
         zombie.id("zombie");
-
-        BeanConfigurator<Ghost> ghost = abd.addBean();
-
+    }
+    
+    private void configureGhost(BeanManager bm, BeanConfigurator<Ghost> ghost) {
+        // creation using read from bean attributes
+        ghost.read(bm.createBeanAttributes(bm.createAnnotatedType(Ghost.class)));
         ghost.beanClass(Ghost.class);
         ghost.addQualifier(Undead.UndeadLiteral.INSTANCE);
         ghost.addStereotype(Monster.class);
+        ghost.scope(RequestScoped.class);
 
-        injectionPointBuilder.configure().read(ghostFieldInDungeon)
-            .addQualifier(Undead.UndeadLiteral.INSTANCE)
-            .type(Ghost.class);
-
-        InjectionPoint dungeonIP = injectionPointBuilder.build();
-
-        injectionPointBuilder.configure().read(ghostFieldInTower)
-            .addQualifier(Undead.UndeadLiteral.INSTANCE)
-            .type(Ghost.class);
-
-        InjectionPoint towerIP = injectionPointBuilder.build();
-
-        // add multiple IPs
-        ghost.addInjectionPoints(dungeonIP, towerIP);
+        // test replacement of IPs
+        InjectionPoint ghostWeaponIP = null;
+        InjectionPoint ghostDesireIP = null;
+        for (AnnotatedField<? super Ghost> field : bm.createAnnotatedType(Ghost.class).getFields()) {
+            if (field.getJavaMember().getType().equals(DesireToHurtHumans.class)) {
+                ghostDesireIP = bm.createInjectionPoint(field);
+            }
+            if (field.getJavaMember().getType().equals(Weapon.class)) {
+                ghostWeaponIP = bm.createInjectionPoint(field);
+            }
+        }
+        // firstly add one IP, then replace it with other
+        ghost.addInjectionPoint(ghostWeaponIP);
+        ghost.injectionPoints(ghostDesireIP);
 
         // set producing
         ghost.producing(MonsterController.getGhostInstance());
-
-        BeanConfigurator<Vampire> vampire = abd.addBean();
-
+    }
+    
+    private void configureVampire(BeanManager bm, BeanConfigurator<Vampire> vampire) {
+        vampire.read(bm.createAnnotatedType(Vampire.class));
         vampire.beanClass(Vampire.class);
         vampire.addQualifier(Undead.UndeadLiteral.INSTANCE);
         vampire.addStereotype(Monster.class);
-
-        injectionPointBuilder.configure().read(vampireField)
-            .addQualifier(Undead.UndeadLiteral.INSTANCE)
-            .type(Vampire.class);
-
-        vampire.addInjectionPoint(injectionPointBuilder.build());
+        vampire.scope(RequestScoped.class);
 
         // set createWith function
         vampire.createWith((CreationalContext<Vampire> creationalContext) -> {
             MonsterController.vampireInstanceCreated = true;
-            return bm.createBean(vampireAttributes, Vampire.class, bm.getInjectionTargetFactory(vampireAnnotatedType)).create(creationalContext);
+            AnnotatedType<Vampire> at = bm.createAnnotatedType(Vampire.class);
+            BeanAttributes<Vampire> ba = bm.createBeanAttributes(at);
+            return bm.createBean(ba, Vampire.class, bm.getInjectionTargetFactory(at)).create(creationalContext);
         });
     }
-
-    public void observeZombieAttributes(@Observes ProcessBeanAttributes<Zombie> pba) {
-        zombieAttributes = pba.getBeanAttributes();
-    }
-
-    public void observeVampireAttributes(@Observes ProcessBeanAttributes<Vampire> pba) {
-        vampireAttributes = pba.getBeanAttributes();
-    }
-
-    public void observeDungeon(@Observes ProcessAnnotatedType<Dungeon> pat) {
-        for (AnnotatedField<?> field : pat.getAnnotatedType().getFields()) {
-            if (field.getJavaMember().getName().equals("skeleton")) {
-                skeletonField = field;
-            }
-            if (field.getJavaMember().getName().equals("zombie")) {
-                zombieField = field;
-            }
-            if (field.getJavaMember().getName().equals("ghost")) {
-                ghostFieldInDungeon = field;
-            }
-            if (field.getJavaMember().getName().equals("vampire")) {
-                vampireField = field;
-            }
-        }
-    }
-
-    public void observeHauntedTower(@Observes ProcessAnnotatedType<HauntedTower> pat) {
-        for (AnnotatedField<?> field : pat.getAnnotatedType().getFields()) {
-            if (field.getJavaMember().getName().equals("ghost")) {
-                ghostFieldInTower = field;
-            }
-        }
-    }
-
-    public void observeVampire(@Observes ProcessAnnotatedType<Vampire> pat) {
-        vampireAnnotatedType = pat.getAnnotatedType();
-    }
-
 }

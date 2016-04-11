@@ -17,28 +17,49 @@
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
-/**
+/** Simple class checking that all 'manually' created beans can be injected
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @ApplicationScoped
 public class Dungeon {
     
-    
-    // will be turned into injection point
+    @Inject
+    @Undead
     private Skeleton skeleton;
     
-    // will be turned into injection point
+    @Inject
+    @Undead
+    @Dangerous
     private Zombie zombie;
     
-    // will be turned into injection point
+    @Inject
+    @Undead
     private Ghost ghost;
     
-    // will be turned into injection point
+    @Inject
+    @Undead
     private Vampire vampire;
     
-    public boolean hasMonters() {
-        return skeleton != null && zombie != null && ghost!= null;
+    public boolean hasAllMonters() {
+        return skeleton != null && zombie != null && ghost != null && vampire != null;
+    }
+    
+    public Skeleton getSkeleton() {
+        return skeleton;
+    }
+    
+    public Zombie getZombie() {
+        return zombie;
+    }
+    
+    public Ghost getGhost() {
+        return ghost;
+    }
+    
+    public Vampire getVampire() {
+        return vampire;
     }
 }

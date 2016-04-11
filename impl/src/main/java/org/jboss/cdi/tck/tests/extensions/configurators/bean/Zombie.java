@@ -16,20 +16,25 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-/**
+import javax.enterprise.inject.Vetoed;
+
+/** @Vetoed makes sure this bean does not get picked up by CDI
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
+@Vetoed
 public class Zombie {
     
     private boolean decaying;
     
-    // due to constructor with params, this should not be a valid bean
+    private Weapon weapon;
+    private DesireToHurtHumans evilDesire;
+    
     public Zombie(boolean decaying) {
         this.decaying = decaying;
     }
     
-    public void groan () {
+    public Zombie() {
         
     }
 }
