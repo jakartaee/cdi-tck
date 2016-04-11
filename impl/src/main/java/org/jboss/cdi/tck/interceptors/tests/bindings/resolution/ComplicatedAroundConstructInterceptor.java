@@ -31,8 +31,9 @@ public class ComplicatedAroundConstructInterceptor {
     public static boolean aroundConstructCalled = false;
 
     @AroundConstruct
-    public void postConstruct(InvocationContext ctx) {
+    public void postConstruct(InvocationContext ctx) throws Exception {
         aroundConstructCalled = true;
+        ctx.proceed();
     }
 
     public static void reset() {

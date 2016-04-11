@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct;
 
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.inject.Instance;
@@ -52,7 +52,7 @@ public class AroundConstructLifeCycleTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = "2.2", id = "db"), @SpecAssertion(section = "2.2", id = "dc") })
     public void testInstanceNotCreatedUnlessInvocationContextProceedCalled(Instance<Baz> instance) {
         Baz2Interceptor.setProceed(false);
-        assertNull(instance.get(), "Instance created even though InvocationContext.proceed() was not called.");
+        assertFalse(Baz.postConstructedCalled, "Instance created even though InvocationContext.proceed() was not called.");
 
         Baz2Interceptor.setProceed(true);
         Baz baz = instance.get();

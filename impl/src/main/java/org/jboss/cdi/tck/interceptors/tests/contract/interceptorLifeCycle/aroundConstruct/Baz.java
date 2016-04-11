@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 
@@ -25,6 +26,8 @@ public class Baz {
 
     public boolean accessed = false;
 
+    public static boolean postConstructedCalled = false;
+
     @Inject
     @Interceptors({ Baz1Interceptor.class, Baz2Interceptor.class })
     public Baz(Bar bar) {
@@ -33,5 +36,10 @@ public class Baz {
 
     public boolean injectionPerformedCorrectly() {
         return bar.five() == 5;
+    }
+
+    @PostConstruct
+    public void postConstruct(){
+        postConstructedCalled = true;
     }
 }
