@@ -16,15 +16,22 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-/**
+import javax.enterprise.inject.Vetoed;
+
+/** @Vetoed makes sure this bean does not get picked up by CDI
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
+@Vetoed
 public class Vampire {
     
     private boolean hungry;
     
     public Vampire(boolean hungry) {
         this.hungry = hungry;
+    }
+    
+    public Vampire() {
+        
     }
 }
