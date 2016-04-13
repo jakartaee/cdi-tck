@@ -335,6 +335,10 @@
             <text>|AroundConstruct| lifecycle callback interceptor methods may be defined on superclasses of interceptor classes. All other lifecycle callback interceptor methods may be defined on superclasses of the target class or of interceptor classes. However, a given class may not have more than one lifecycle callback interceptor method for the same lifecycle event. Any subset or combination of lifecycle callback annotations may otherwise be specified on a target class or interceptor class.</text>
         </assertion>
 
+        <assertion id="ia">
+            <text>If a lifecycle callback interceptor method returns a value, it is ignored by the container.</text>
+        </assertion>
+
         <group>
             <text>Lifecycle callback interceptor methods can have |public|, |private|, |protected|, or |package| level access.</text>
             <assertion id="ja">
