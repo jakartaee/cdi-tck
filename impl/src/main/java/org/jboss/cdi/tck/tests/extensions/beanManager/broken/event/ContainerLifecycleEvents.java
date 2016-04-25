@@ -66,6 +66,11 @@ public class ContainerLifecycleEvents {
 
     public static final BeforeBeanDiscovery BEFORE_BEAN_DISCOVERY = new BeforeBeanDiscovery() {
         @Override
+        public <T> AnnotatedTypeConfigurator<T> addAnnotatedType(String s, Class<T> aClass) {
+            return null;
+        }
+
+        @Override
         public void addStereotype(Class<? extends Annotation> stereotype, Annotation... stereotypeDef) {
         }
 
@@ -97,10 +102,6 @@ public class ContainerLifecycleEvents {
         public void addAnnotatedType(AnnotatedType<?> type, String id) {
         }
 
-        @Override
-        public AnnotatedTypeConfigurator<?> addAnnotatedType(String s) {
-            return null;
-        }
     };
 
     public static final AfterBeanDiscovery AFTER_BEAN_DISCOVERY = new AfterBeanDiscovery() {

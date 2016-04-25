@@ -44,7 +44,6 @@ public class ProcessBeanAttributesObserver implements Extension {
         // add Type Weapon.class
         // set name
         // set stereotype 
-        configurator.read(pba.getBeanAttributes());
         configurator.addQualifier(TwoHanded.TwoHandedLiteral.INSTANCE);
         configurator.addType(Weapon.class);
         configurator.name(BeanAttributesConfiguratorTest.SWORD_NAME);
@@ -60,7 +59,6 @@ public class ProcessBeanAttributesObserver implements Extension {
         // add multiple stereotypes (Equipment, Melee)
         // add multiple types (Weapon, Tool)
         // change scope to RequestScoped
-        configurator.read(pba.getBeanAttributes());
         configurator.alternative(true);
         configurator.addQualifiers(getAxeQualifiers());
         configurator.addStereotypes(getStereotypes());
@@ -75,7 +73,6 @@ public class ProcessBeanAttributesObserver implements Extension {
         // add types with closure method (adding a Tool.java will result in having a type UsableItem as well)
         // replace @Melee stereotype with @Equipment
         // replace qualifier @TwoHanded with @Reforged
-        configurator.read(pba.getBeanAttributes());
         configurator.addTransitiveTypeClosure(Tool.class);
         Set<Class<? extends Annotation>> stereotypes = getStereotypes();
         stereotypes.remove(Melee.class);
