@@ -138,7 +138,7 @@ public class ServletConversationTest extends AbstractTest {
 
         // submit a form
         {
-            HtmlPage form = client.getPage(url.toString() + "/message.html");
+            HtmlPage form = client.getPage(url.toString() + "message.html");
             getFirstMatchingElement(form, HtmlTextInput.class, "message").setValueAttribute("Hola!");
             getFirstMatchingElement(form, HtmlTextInput.class, "cid").setValueAttribute(cid);
             TextPage page = getFirstMatchingElement(form, HtmlSubmitInput.class, "submit").click();
