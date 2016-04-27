@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.jms;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.annotation.PostConstruct;
 import javax.interceptor.AroundConstruct;
 import javax.interceptor.AroundInvoke;
@@ -26,14 +28,14 @@ import javax.interceptor.InvocationContext;
 @Missile
 public class MissileInterceptor {
 
-    public static boolean methodIntercepted = false;
+    static final AtomicBoolean METHOD_INTERCEPTED = new AtomicBoolean(false);
 
     public static boolean lifecycleCallbackIntercepted = false;
     public static boolean aroundConstructInterceptorCalled = false;
     
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
-        methodIntercepted = true;
+        METHOD_INTERCEPTED.set(true);
         return ctx.proceed();
     }
     
@@ -56,7 +58,7 @@ public class MissileInterceptor {
     }
 
     public static void reset() {
-        methodIntercepted = false;
+        METHOD_INTERCEPTED.set(false);
         lifecycleCallbackIntercepted = false;
         aroundConstructInterceptorCalled = false;
     }
