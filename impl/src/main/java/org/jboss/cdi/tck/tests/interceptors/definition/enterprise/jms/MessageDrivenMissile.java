@@ -16,17 +16,19 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.jms;
 
+import java.util.concurrent.LinkedBlockingDeque;
+
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
 @Missile
 public class MessageDrivenMissile implements MessageListener {
 
-    public static boolean messageAccepted = false;
+    static final LinkedBlockingDeque<String> MESSAGES = new LinkedBlockingDeque<String>();
 
     @Override
     public void onMessage(Message message) {
-        messageAccepted = true;
+        MESSAGES.add(MessageDrivenMissile.class.getName());
     }
 
 }
