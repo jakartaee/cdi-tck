@@ -856,36 +856,36 @@
 
     <section id="what_classes_are_beans" title="Which Java classes are managed beans?" level="3">
         <assertion id="b">
-            <text>A top-level Java class is not a managed bean if it is a non-static inner class.</text>
+            <text>A Java class is not a managed bean if it is an inner class.</text>
         </assertion>
 
         <assertion id="ba">
-            <text>A top-level Java class that is a static inner class can be a managed bean.</text>
+            <text>A Java class that is a static nested class can be a managed bean.</text>
             <note>Implied as the inverse of assertion 3.1.1.b</note>
         </assertion>
 
         <assertion id="ca">
-            <text>A top-level Java class is not a managed bean if it is an abstract class, unless it is annotated |@Decorator|.</text>
+            <text>A Java class is not a managed bean if it is an abstract class, unless it is annotated |@Decorator|.</text>
         </assertion>
 
         <assertion id="cb">
-            <text>A top-level Java class is not a managed bean if it is an interface, unless it is annotated |@Decorator|.</text>
+            <text>A Java class is not a managed bean if it is an interface, unless it is annotated |@Decorator|.</text>
         </assertion>
 
         <assertion id="g">
-            <text>A top-level Java class is not a managed bean if it implements |javax.enterprise.inject.spi.Extension|.</text>
+            <text>A Java class is not a managed bean if it implements |javax.enterprise.inject.spi.Extension|.</text>
         </assertion>
 
         <assertion id="h">
-            <text>A top-level Java class is not a managed bean if it is annotated |@Vetoed| or placed in a package annotated |@Vetoed|.</text>
+            <text>A Java class is not a managed bean if it is annotated |@Vetoed| or placed in a package annotated |@Vetoed|.</text>
         </assertion>
 
         <assertion id="p">
-            <text>A top-level Java class is only a managed bean if it has an appropriate constructor - a constructor with no parameters.</text>
+            <text>A Java class is only a managed bean if it has an appropriate constructor - a constructor with no parameters.</text>
         </assertion>
 
         <assertion id="q">
-            <text>A top-level Java class is only a managed bean if it has an appropriate constructor - a constructor annotated |@Inject|.</text>
+            <text>A Java class is only a managed bean if it has an appropriate constructor - a constructor annotated |@Inject|.</text>
         </assertion>
 
         <assertion id="r" testable="false">

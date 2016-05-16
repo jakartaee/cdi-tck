@@ -32,6 +32,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
@@ -45,45 +46,45 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "ca")
     public void testAbstractClassDeclaredInJavaNotDiscovered() {
-        assert getBeans(Cow_NotBean.class).size() == 0;
+        Assert.assertEquals(getBeans(Cow_NotBean.class).size(), 0);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "ba") })
     public void testStaticInnerClassDeclaredInJavaAllowed() {
-        assert getBeans(StaticInnerClass.class).size() == 1;
+        Assert.assertEquals(getBeans(StaticInnerClass.class).size(), 1);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "b") })
     public void testNonStaticInnerClassDeclaredInJavaNotDiscovered() {
-        assert getBeans(InnerClass_NotBean.class).size() == 0;
+        Assert.assertEquals(getBeans(InnerClass_NotBean.class).size(), 0);
     }
 
     @Test
     @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "cb")
     public void testInterfaceNotDiscoveredAsSimpleBean() {
-        assert getBeans(Car.class).size() == 0;
+        Assert.assertEquals(getBeans(Car.class).size(), 0);
     }
 
     @Test
     @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "g")
     public void testExtensionNotDiscoveredAsSimpleBean() {
-        assert getBeans(SimpleExtension.class).size() == 0;
+        Assert.assertEquals(getBeans(SimpleExtension.class).size(), 0);
     }
 
     @Test
     @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "p")
     public void testSimpleBeanOnlyIfConstructorParameterless() {
-        assert getBeans(Antelope_NotBean.class).isEmpty();
-        assert !getBeans(Donkey.class).isEmpty();
+        Assert.assertTrue(getBeans(Antelope_NotBean.class).isEmpty());
+        Assert.assertFalse(getBeans(Donkey.class).isEmpty());
     }
 
     @Test
     @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "q")
     public void testSimpleBeanOnlyIfConstructorIsInitializer() {
-        assert getBeans(Antelope_NotBean.class).isEmpty();
-        assert !getBeans(Sheep.class).isEmpty();
+        Assert.assertTrue(getBeans(Antelope_NotBean.class).isEmpty());
+        Assert.assertFalse(getBeans(Sheep.class).isEmpty());
     }
 
     @Test
@@ -91,7 +92,7 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
     public void testInitializerAnnotatedConstructor() throws Exception {
         Sheep.constructedCorrectly = false;
         getContextualReference(Sheep.class);
-        assert Sheep.constructedCorrectly;
+        Assert.assertTrue(Sheep.constructedCorrectly);
     }
 
     @Test
@@ -100,20 +101,20 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
     public void testEmptyConstructorUsed() {
         Donkey.constructedCorrectly = false;
         getContextualReference(Donkey.class);
-        assert Donkey.constructedCorrectly;
+        Assert.assertTrue(Donkey.constructedCorrectly);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa"), @SpecAssertion(section = INSTANTIATION, id = "aa") })
     public void testInitializerAnnotatedConstructorUsedOverEmptyConstuctor() throws Exception {
         getContextualReference(Turkey.class);
-        assert Turkey.constructedCorrectly;
+        Assert.assertTrue(Turkey.constructedCorrectly);
     }
 
     @Test
     @SpecAssertion(section = MANAGED_BEANS, id = "fa")
     public void testDependentScopedBeanCanHaveNonStaticPublicField() throws Exception {
-        assert getContextualReference(Tiger.class).name.equals("pete");
+        Assert.assertEquals(getContextualReference(Tiger.class).name, "pete");
     }
 
 }
