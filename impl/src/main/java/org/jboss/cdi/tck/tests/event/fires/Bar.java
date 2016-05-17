@@ -16,16 +16,16 @@
  */
 package org.jboss.cdi.tck.tests.event.fires;
 
-import javax.enterprise.event.Event;
+import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 public class Bar {
 
     @Inject
-    private Event<Foo<? extends Number>> event;
+    BeanManager beanManager;
 
     public <T extends Number> void fireWithTypeVariable() {
-        event.fire(new Foo<T>());
+        beanManager.fireEvent(new Foo<T>());
     }
 
 }
