@@ -6616,6 +6616,119 @@
         </group>
     </section>
 
+    <section id="annotated_type_configurator" title="AnnotatedTypeConfigurator SPI" level="3">
+
+        <group>
+            <text>This SPI is composed of the following interfaces:</text>
+            <assertion id="aa" testable="false">
+                <text>`javax.enterprise.inject.spi.builder.AnnotatedTypeConfigurator` to configure an AnnotatedType</text>
+            </assertion>
+            <assertion id="ab" testable="false">
+                <text>`javax.enterprise.inject.spi.builder.AnnotatedFieldConfigurator` to configure an AnnotatedField</text>
+            </assertion>
+            <assertion id="ac" testable="false">
+                <text>`javax.enterprise.inject.spi.builder.AnnotatedConstructorConfigurator` to configure an AnnotatedConstructor</text>
+            </assertion>
+            <assertion id="ad" testable="false">
+                <text>`javax.enterprise.inject.spi.builder.AnnotatedMethodConfigurator` to configure an AnnotatedMethod</text>
+            </assertion>
+            <assertion id="ae" testable="false">
+                <text>`javax.enterprise.inject.spi.builder.AnnotatedParameterConfigurator` to configure an AnnotatedParameter</text>
+            </assertion>
+        </group>
+
+
+        <group>
+            <text>AnnotatedTypeConfigurator is the entry point for this SPI.</text>
+            <assertion id="bc">
+                <text>Test |getAnnotated()| returns the original AnnotatedType with which this configurator was initialized.</text>
+            </assertion>
+
+            <assertion id="bd">
+                <text>Test |add()| adds an annotation to the configured AnnotatedType.</text>
+            </assertion>
+
+            <assertion id="be">
+                <text>Test |remove()| methods remove all annotation from the configured AnnotatedType.</text>
+            </assertion>
+
+            <assertion id="bf">
+                <text>Test |removeAll()| remove all existing annotation on the configured AnnotatedType.</text>
+            </assertion>
+
+            <assertion id="bg">
+                <text>Test |methods()| returns a set of AnnotatedMethodConfigurator to configure annotations on methods..</text>
+            </assertion>
+
+            <assertion id="bh">
+                <text>Test |filterMethods()| returns a `Stream &lt; AnnotatedMethodsConfigurator &gt;` filtered by applying the provided Predicate on methods().</text>
+            </assertion>
+
+            <assertion id="bi">
+                <text>Test |fields()| returns a set of AnnotatedFieldConfigurator to configure annotations on fields..</text>
+            </assertion>
+
+            <assertion id="bj">
+                <text>Test |filterFields()| returns a `Stream &lt; AnnotatedFieldConfigurator &gt;` filtered by applying the provided Predicate on fields().</text>
+            </assertion>
+
+            <assertion id="bk">
+                <text>Test |constructors()| returns a set of AnnotatedConstructorConfigurator to configure annotations on constructors.</text>
+            </assertion>
+
+            <assertion id="bl">
+                <text>Test |filterConstructors()| returns a Stream `&lt;AnnotatedConstructorConfigurator &gt;` filtered by applying the provided Predicate on Constructors().</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>AnnotatedMethodConfigurator and AnnotatedConstructorConfigurator</text>
+            <assertion id="ca">
+                <text>Test |getAnnotated()| returns the original `AnnotatedConstructor` or `AnnotatedMethod` with which this configurator was initialized.</text>
+            </assertion>
+
+            <assertion id="cb">
+                <text>Test add() adds an annotation to the configured element.</text>
+            </assertion>
+
+            <assertion id="cd">
+                <text>Test |remove()| methods remove all annotation from the configured element.</text>
+            </assertion>
+
+            <assertion id="ce">
+                <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
+            </assertion>
+
+            <assertion id="cf">
+                <text>Test |params()| returns a list of AnnotatedParameterConfigurator to configure annotations on parameters.</text>
+            </assertion>
+
+            <assertion id="cg">
+                <text>Test |filterParams(Predicate `&lt; AnnotatedParameter &lt;T &gt;&gt;` predicate)| returns a `Stream &lt;AnnotatedParameterConfigurator&gt;` filtered by applying the provided Predicate on params().</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>AnnotatedFieldConfigurator</text>
+            <assertion id="da">
+                <text>Test |getAnnotated()| returns the original `AnnotatedField` with which this configurator was initialized.</text>
+            </assertion>
+
+            <assertion id="db">
+                <text>Test |add()| adds an annotation to the configured element.</text>
+            </assertion>
+
+            <assertion id="dc">
+                <text>Test |remove()| methods remove all annotation from the configured element.</text>
+            </assertion>
+
+            <assertion id="dd">
+                <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
+            </assertion>
+        </group>
+
+    </section>
+
     <section id="init_events" title="Container lifecycle events" level="2">
         <assertion id="a" testable="false">
             <text>During the application initialization process, the container fires a series of events, allowing portable extensions to integrate with the
@@ -6733,88 +6846,6 @@
         <assertion id="d">
             <text>If any BeforeBeanDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
-
-    </section>
-
-    <section id="annotated_type_configurator" title="AnnotatedTypeConfigurator interface" level="4">
-
-        <group>
-            <text>AnnotatedTypeConfigurator must be initialized from a java.lang.Class or an existing AnnotatedType with one of its read() methods</text>
-            <assertion id="a">
-                <text>Test initialization of `AnnotatedTypeConfigurator` from a java.lang.Class.</text>
-            </assertion>
-            <assertion id="b">
-                <text>Test initialization of `AnnotatedTypeConfigurator` from an existing AnnotatedType.</text>
-            </assertion>
-        </group>
-
-        <group>
-            <text>With `AnnotatedTypeConfigurator` you can perform the following operation:</text>
-            <assertion id="c">
-                <text>Test add annotation at type level with |addToType| method.</text>
-            </assertion>
-
-            <assertion id="d">
-                <text>Test remove annotation at type level with |removeFromType| method.</text>
-            </assertion>
-
-            <assertion id="e">
-                <text>Test add annotation on a field with |addToField| method.</text>
-            </assertion>
-
-            <assertion id="f">
-                <text>Test remove annotation on a field with |removeFromField| method.</text>
-            </assertion>
-
-            <assertion id="g">
-                <text>Test add annotation on a method with |addToMethod| method.</text>
-            </assertion>
-
-            <assertion id="h">
-                <text>Test remove annotation on a method with |removeFromMethod| method.</text>
-            </assertion>
-
-            <assertion id="i">
-                <text>Test add annotation on a method parameter with |addToMethodParameter| method.</text>
-            </assertion>
-
-            <assertion id="j">
-                <text>Test remove annotation on a method parameter with |removeFromMethodParameter| method.</text>
-            </assertion>
-
-            <assertion id="k">
-                <text>Test add annotation on a constructor with |addToConstructor| method.</text>
-            </assertion>
-
-            <assertion id="l">
-                <text>Test remove annotation on a constructor with |removeFromConstructor| method.</text>
-            </assertion>
-
-            <assertion id="m">
-                <text>Test add annotation on a constructor parameter with |addToConstructorParameter| method.</text>
-            </assertion>
-
-            <assertion id="n">
-                <text>Test remove annotation on a constructor with |removeFromConstructorParameter| method.</text>
-            </assertion>
-
-            <assertion id="o">
-                <text>Test remove an annotation from the type or any type member with |removeFromAll| method.</text>
-            </assertion>
-
-            <assertion id="p">
-                <text>Test override a field type with |overrideFieldType| methods.</text>
-            </assertion>
-
-            <assertion id="q">
-                <text>Test override a method parameter type with |overrideMethodParameterType| method.</text>
-            </assertion>
-
-            <assertion id="r">
-                <text>Test override a constructor parameter type with |overrideConstructorParameterType| method.</text>
-            </assertion>
-
-        </group>
 
     </section>
 
@@ -7807,55 +7838,6 @@
             </assertion>
         </group>
 
-    </section>
-
-    <section id="builders" title="Builders interfaces" level="2">
-        <group>
-            <text>Builders interfaces are helpers to create instances for the following SPI elements:</text>
-            <assertion id="aa" testable="false">
-                <text>`AnnotatedType` built with `javax.enterprise.inject.spi.builder.AnnotatedTypeBuilder`,</text>
-            </assertion>
-            <assertion id="ab" testable="false">
-                <text>`InjectionPoint` built with `javax.enterprise.inject.spi.builder.InjectionPointBuilder`,</text>
-            </assertion>
-            <assertion id="ac" testable="false">
-                <text>`BeanAttributes` built with `javax.enterprise.inject.spi.builder.BeanAttributesBuilder`,</text>
-            </assertion>
-            <assertion id="ad" testable="false">
-                <text>`Bean` built with `javax.enterprise.inject.spi.builder.BeanBuilder`,</text>
-            </assertion>
-            <assertion id="ae" testable="false">
-                <text>`ObserverMethod` built with `javax.enterprise.inject.spi.builder.ObserverMethodBuilder`.</text>
-            </assertion>
-        </group>
-
-        <group>
-            <text>Each builder uses a configurator accessible with configure() method:</text>
-            <assertion id="ba" testable="false">
-                <text>`AnnotatedTypeBuilder` uses `AnnotatedTypeConfigurator` as defined in `AnnotatedTypeConfigurator interface`</text>
-            </assertion>
-            <assertion id="bb" testable="false">
-                <text>`InjectionPointBuilder` uses `InjectionPointConfigurator` as defined in `InjectionPointConfigurator interface`</text>
-            </assertion>
-            <assertion id="bc" testable="false">
-                <text>`BeanAttributesBuilder` uses `BeanAttributesConfigurator` as defined in `BeanAttributesConfigurator interface`</text>
-            </assertion>
-            <assertion id="bd" testable="false">
-                <text>`BeanBuilder` uses `BeanConfigurator` as defined in `BeanConfigurator interface`</text>
-            </assertion>
-            <assertion id="be" testable="false">
-                <text>`ObserverMethodBuilder` uses `ObserverMethodConfigurator` as defined in `ObserverMethodConfigurator interface`</text>
-            </assertion>
-            <assertion id="bf" testable="false">
-                <text>`The container must provide implementation for all these builders and make them available through ServiceLoader for
-                    `javax.enterprise.inject.spi.builder.BuildersProvider` interface.
-                </text>
-            </assertion>
-        </group>
-
-        <assertion id="c" testable="false">
-            <text>The class `javax.enterprise.inject.spi.builder.Builders` provides static method to obtain each builder.</text>
-        </assertion>
     </section>
 
     <section id="packaging_deployment" title="Packaging and deployment" level="1">

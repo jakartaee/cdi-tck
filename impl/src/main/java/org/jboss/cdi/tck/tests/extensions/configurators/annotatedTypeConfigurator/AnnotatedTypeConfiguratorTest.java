@@ -56,11 +56,10 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "a"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "b"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "c"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "e"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "g"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "i"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "k"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "m"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bd"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bg"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bi"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bj"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "cb"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "cg"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "db") })
     public void addMethodsOfAnnotationTypecConfigurator() {
         Bean<Dog> dogBean = getUniqueBean(Dog.class);
         CreationalContext<Dog> creationalContext = getCurrentManager().createCreationalContext(dogBean);
@@ -86,9 +85,9 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "d"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "f"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "h"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "j"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "l"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "be"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bh"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bj"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bl"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "cd"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "dc") })
     public void removeMethodsOfAnnotationTypeConfigurator() {
         Bean<Cat> catBean = getUniqueBean(Cat.class);
         CreationalContext<Cat> creationalContext = getCurrentManager().createCreationalContext(catBean);
