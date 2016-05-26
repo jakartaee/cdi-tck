@@ -18,16 +18,36 @@ package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @ApplicationScoped
 public class FruitObserver {
 
+    public static AtomicBoolean melonObserverNotified = new AtomicBoolean(false);
+    public static AtomicBoolean peachObserverNotified = new AtomicBoolean(false);
+    public static AtomicBoolean bananaObserverNotified = new AtomicBoolean(false);
+    public static AtomicBoolean pearObserverNotified = new AtomicBoolean(false);
+
+
     public void observesPear(@Observes Pear pear) {
+        pearObserverNotified.set(true);
     }
 
     public void observesOrange(@Observes @Ripe Orange orange) {
     }
 
     public void observesOrange(@Observes Pineapple pineapple) {
+    }
+
+    public void observesBanana(@Observes Banana banana) {
+        bananaObserverNotified.set(true);
+    }
+
+    public void observesMelon(@Observes Melon melon) {
+        melonObserverNotified.set(true);
+    }
+
+    public void observesPeach(Peach peach) {
+        peachObserverNotified.set(true);
     }
 }

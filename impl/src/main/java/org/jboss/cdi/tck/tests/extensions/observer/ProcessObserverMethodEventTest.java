@@ -71,7 +71,7 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ac"), @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "daa") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "daa") })
     public void replaceWithSetObserverMethod() {
         Set<ObserverMethod<? super EventC>> observerMethods = getCurrentManager().resolveObserverMethods(new EventC(), Any.Literal.INSTANCE);
         Assert.assertEquals(observerMethods.size(), 1);

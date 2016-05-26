@@ -16,11 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
-import javax.enterprise.event.Observes;
-
-public class FoodObserver {
-
-    public void observesApple(@Observes Bread apple){
-
-    }
+public class Banana {
 }
