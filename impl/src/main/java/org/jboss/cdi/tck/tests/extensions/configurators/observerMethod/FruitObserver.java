@@ -39,7 +39,7 @@ public class FruitObserver {
     public void observesOrange(@Observes Pineapple pineapple) {
     }
 
-    public void observesBanana(@Observes Banana banana) {
+    public void observesBanana(@Observes Fruit banana) {
         bananaObserverNotified.set(true);
     }
 

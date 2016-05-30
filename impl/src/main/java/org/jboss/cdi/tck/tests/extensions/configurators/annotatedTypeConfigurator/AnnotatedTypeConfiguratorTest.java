@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
@@ -102,6 +103,33 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
 
         getCurrentManager().fireEvent(new Feed());
         Assert.assertFalse(cat.isFeedObserved());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bc"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "ca"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "da") })
+    public void annotatedTypesAndMemebersEqual() {
+        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedTypesEqual.get());
+        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedMethodEqual.get());
+        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedFieldEqual.get());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bf"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bk"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "ce"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "cf"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "dd") })
+    public void annotationsRemovedFromAnimalShelter() {
+        Bean<AnimalShelter> animalShelterBean = getUniqueBean(AnimalShelter.class);
+        CreationalContext<AnimalShelter> creationalContext = getCurrentManager().createCreationalContext(animalShelterBean);
+        AnimalShelter animalShelter = animalShelterBean.create(creationalContext);
+        getCurrentManager().fireEvent(new Room(), Cats.CatsLiteral.INSTANCE, Any.Literal.INSTANCE);
+
+        Assert.assertNotNull(animalShelterBean);
+        Assert.assertEquals(animalShelterBean.getName(), null);
+        Assert.assertEquals(animalShelterBean.getScope(), Dependent.class);
+        Assert.assertFalse(animalShelter.isPostConstructCalled());
+        Assert.assertFalse(animalShelter.isRoomObserved());
+        Assert.assertNull(animalShelter.getCat());
     }
 
 }

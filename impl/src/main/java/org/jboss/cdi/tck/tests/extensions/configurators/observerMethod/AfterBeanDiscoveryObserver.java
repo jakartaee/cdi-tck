@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 import org.jboss.cdi.tck.literals.ObservesLiteral;
 
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.Extension;
@@ -30,9 +31,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AfterBeanDiscoveryObserver implements Extension {
 
-    private ObserverMethod<Banana> bananaObserverMethod;
+    private ObserverMethod<Fruit> fruitObserverMethod;
 
-    public static AtomicBoolean newPineappleObserverNotified = new AtomicBoolean(false);
+    public static AtomicBoolean newBananaObserverNotified = new AtomicBoolean(false);
     public static AtomicBoolean newMelonObserverNotified = new AtomicBoolean(false);
     public static AtomicBoolean newPeachObserverNotified = new AtomicBoolean(false);
 
@@ -48,16 +49,17 @@ public class AfterBeanDiscoveryObserver implements Extension {
                 .add(ObservesLiteral.INSTANCE);
     }
 
-    void processObserverMethod(@Observes ProcessObserverMethod<Banana, FruitObserver> event) {
-        bananaObserverMethod = event.getObserverMethod();
+    void processObserverMethod(@Observes ProcessObserverMethod<Fruit, FruitObserver> event) {
+        fruitObserverMethod = event.getObserverMethod();
     }
 
     void observesABD(@Observes AfterBeanDiscovery abd) throws NoSuchMethodException {
 
         // read from ObserverMethod
-        abd.<Banana> addObserverMethod().read(bananaObserverMethod).beanClass(FruitObserver.class).observedType(Pineapple.class).addQualifier(Delicious.DeliciousLiteral.INSTANCE)
+        abd.<Fruit>addObserverMethod().read(fruitObserverMethod).beanClass(FruitObserver.class).observedType(Banana.class)
+                .addQualifiers(Ripe.RipeLiteral.INSTANCE, Any.Literal.INSTANCE)
                 .notifyWith((b) -> {
-                    newPineappleObserverNotified.set(true);
+                    newBananaObserverNotified.set(true);
                 });
 
         // read from Method
@@ -74,7 +76,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
 
     public static void reset() {
         newMelonObserverNotified.set(false);
-        newPineappleObserverNotified.set(false);
+        newBananaObserverNotified.set(false);
         newPeachObserverNotified.set(false);
     }
 

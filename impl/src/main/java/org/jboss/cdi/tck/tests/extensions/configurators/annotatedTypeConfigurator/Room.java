@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
+package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
-public class Banana extends Fruit {
+public class Room {
 }

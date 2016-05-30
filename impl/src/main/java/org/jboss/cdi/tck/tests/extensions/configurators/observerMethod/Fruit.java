@@ -16,5 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
-public class Banana extends Fruit {
+public class Fruit {
 }

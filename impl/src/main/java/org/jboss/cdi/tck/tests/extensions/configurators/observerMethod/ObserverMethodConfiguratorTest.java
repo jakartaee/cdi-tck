@@ -42,6 +42,9 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 /**
  * @author Tomas Remes
  */
@@ -63,7 +66,7 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bg"),
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bd"),
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bi") })
-    public void addQualifiersAndSetPriorityAndChangeToAsync() {
+    public void addQualifiersAndSetPriorityAndChangeToAsync() throws InterruptedException {
         Set<ObserverMethod<? super Pear>> pearEventObservers = getCurrentManager()
                 .resolveObserverMethods(new Pear(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
         Assert.assertEquals(pearEventObservers.size(), 1);
@@ -73,7 +76,10 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
                 Stream.of(Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).collect(
                         Collectors.toSet()));
 
-        pearEvent.select(Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).fireAsync(new Pear());
+        BlockingQueue<Pear> queue = new LinkedBlockingQueue<>();
+        pearEvent.select(Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).fireAsync(new Pear()).thenAccept(queue::offer);
+        Pear pear = queue.poll(2, TimeUnit.SECONDS);
+        Assert.assertNotNull(pear);
         Assert.assertTrue(FruitObserver.pearObserverNotified.get());
     }
 
@@ -103,21 +109,24 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "ab"),
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "ac"),
             @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
-            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bb")})
+            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bb") })
     public void addNewObserverMethodFromReadingExistingOne() {
         AfterBeanDiscoveryObserver.reset();
-        getCurrentManager().fireEvent(new Pineapple(), Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
+        getCurrentManager().fireEvent(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
         getCurrentManager().fireEvent(new Melon(), Any.Literal.INSTANCE);
         getCurrentManager().fireEvent(new Peach(), Any.Literal.INSTANCE);
         Set<ObserverMethod<? super Peach>> peachEventObservers = getCurrentManager().resolveObserverMethods(new Peach(), Any.Literal.INSTANCE);
-        // one if FruitObserver and second one added in AfterBeanDiscoveryObserver
+        Set<ObserverMethod<? super Banana>> bananaEventObservers = getCurrentManager()
+                .resolveObserverMethods(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
+        // one in FruitObserver and second one added in AfterBeanDiscoveryObserver
         Assert.assertEquals(peachEventObservers.size(), 2);
-        Assert.assertTrue(AfterBeanDiscoveryObserver.newPineappleObserverNotified.get());
+        Assert.assertEquals(bananaEventObservers.size(), 2);
+        Assert.assertTrue(AfterBeanDiscoveryObserver.newBananaObserverNotified.get());
         Assert.assertTrue(AfterBeanDiscoveryObserver.newMelonObserverNotified.get());
         Assert.assertTrue(AfterBeanDiscoveryObserver.newPeachObserverNotified.get());
 
         Assert.assertTrue(FruitObserver.melonObserverNotified.get());
         Assert.assertTrue(FruitObserver.peachObserverNotified.get());
-        Assert.assertFalse(FruitObserver.bananaObserverNotified.get());
+        Assert.assertTrue(FruitObserver.bananaObserverNotified.get());
     }
 }
