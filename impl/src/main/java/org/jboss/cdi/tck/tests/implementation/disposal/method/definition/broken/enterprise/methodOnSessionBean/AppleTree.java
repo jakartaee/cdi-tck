@@ -14,8 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.methodOnSessionBean;
+package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.enterprise.methodOnSessionBean;
 
-public class Apple {
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Disposes;
+import javax.enterprise.inject.Produces;
+
+@Stateless
+public class AppleTree implements AppleTreeLocal {
+    @Produces
+    public Apple getApple() {
+        return new Apple();
+    }
+
+    public void recycle(@Disposes Apple apple) {
+
+    }
 
 }

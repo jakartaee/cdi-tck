@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2016, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,13 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.methodOnSessionBean;
-
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD_EE;
-import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_EE;
-
-import javax.enterprise.inject.spi.DefinitionException;
+package org.jboss.cdi.tck.tests.implementation.producer.method.broken.enterprise.remoteMethod;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -32,20 +26,23 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-/**
- */
+import javax.enterprise.inject.spi.DefinitionException;
+
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_PRODUCER_METHOD_EE;
+import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_EE;
+
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
-public class DisposalMethodOnSessionBeanTest extends AbstractTest {
+public class RemoteBusinessProducerMethodTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DisposalMethodOnSessionBeanTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(RemoteBusinessProducerMethodTest.class).build();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD_EE, id = "a"), @SpecAssertion(section = DECLARING_DISPOSER_METHOD_EE, id = "a") })
-    public void testDisposalMethodNotBusinessOrStatic() {
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD_EE, id = "a"), @SpecAssertion(section = PRODUCER_METHOD_EE, id = "a") })
+    public void producerMethodOnSessionBeanCannotBeRemoteBusinessMethod() {
     }
-
 }

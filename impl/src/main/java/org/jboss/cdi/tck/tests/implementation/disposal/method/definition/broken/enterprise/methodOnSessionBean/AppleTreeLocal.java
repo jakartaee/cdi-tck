@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.methodOnSessionBean;
+package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.enterprise.methodOnSessionBean;
 
 import javax.ejb.Local;
 
