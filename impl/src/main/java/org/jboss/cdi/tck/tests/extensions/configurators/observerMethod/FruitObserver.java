@@ -47,7 +47,7 @@ public class FruitObserver {
         melonObserverNotified.set(true);
     }
 
-    public void observesPeach(Peach peach) {
+    public void observesPeach(@Observes Peach peach) {
         peachObserverNotified.set(true);
     }
 }

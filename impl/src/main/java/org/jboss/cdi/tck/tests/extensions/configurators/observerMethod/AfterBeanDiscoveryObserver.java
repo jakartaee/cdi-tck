@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
-import org.jboss.cdi.tck.literals.ObservesLiteral;
-
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
@@ -44,9 +42,6 @@ public class AfterBeanDiscoveryObserver implements Extension {
         peachObserver = pat.getAnnotatedType().getMethods().stream()
                 .filter(annotatedMethod -> annotatedMethod.getJavaMember().getName().equals("observesPeach")).findAny().get();
 
-        // add @Observes to the method param
-        pat.configureAnnotatedType().filterMethods(annotatedMethod -> annotatedMethod.equals(peachObserver)).findAny().get().params().stream().findAny().get()
-                .add(ObservesLiteral.INSTANCE);
     }
 
     void processObserverMethod(@Observes ProcessObserverMethod<Fruit, FruitObserver> event) {
