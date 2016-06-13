@@ -21,6 +21,22 @@ import javax.enterprise.inject.Produces;
 
 public class BeanWithStaticProducerMethod {
     static boolean stringDestroyed;
+    static boolean yummyDestroyed;
+    static boolean numberDestroyed;
+
+    @Produces
+    @Yummy
+    public static String yummy() {
+        yummyDestroyed = false;
+        return "yummy";
+    }
+
+    @Produces
+    @Number
+    public String number() {
+        numberDestroyed = false;
+        return "number";
+    }
 
     @Produces
     @Tame
@@ -31,5 +47,13 @@ public class BeanWithStaticProducerMethod {
 
     public static void destroyString(@Disposes @Tame String someString) {
         stringDestroyed = true;
+    }
+
+    public void destroyYummy(@Disposes @Yummy String someString) {
+        yummyDestroyed = true;
+    }
+
+    public static void destroyNumber(@Disposes @Number String someString) {
+        numberDestroyed = true;
     }
 }
