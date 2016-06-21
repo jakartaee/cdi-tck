@@ -6661,7 +6661,9 @@
             </assertion>
 
             <assertion id="bh">
-                <text>Test |filterMethods()| returns a `Stream &lt; AnnotatedMethodsConfigurator &gt;` filtered by applying the provided Predicate on methods().</text>
+                <text>Test |filterMethods()| returns a `Stream &lt; AnnotatedMethodsConfigurator &gt;` filtered by applying the provided Predicate on
+                    methods().
+                </text>
             </assertion>
 
             <assertion id="bi">
@@ -6669,7 +6671,8 @@
             </assertion>
 
             <assertion id="bj">
-                <text>Test |filterFields()| returns a `Stream &lt; AnnotatedFieldConfigurator &gt;` filtered by applying the provided Predicate on fields().</text>
+                <text>Test |filterFields()| returns a `Stream &lt; AnnotatedFieldConfigurator &gt;` filtered by applying the provided Predicate on fields().
+                </text>
             </assertion>
 
             <assertion id="bk">
@@ -6677,52 +6680,115 @@
             </assertion>
 
             <assertion id="bl">
-                <text>Test |filterConstructors()| returns a Stream `&lt;AnnotatedConstructorConfigurator &gt;` filtered by applying the provided Predicate on Constructors().</text>
+                <text>Test |filterConstructors()| returns a Stream `&lt;AnnotatedConstructorConfigurator &gt;` filtered by applying the provided Predicate on
+                    Constructors().
+                </text>
             </assertion>
         </group>
+    </section>
+
+    <section id="annotated_method_configurator" title="AnnotatedMethodConfigurator" level="4">
 
         <group>
-            <text>AnnotatedMethodConfigurator and AnnotatedConstructorConfigurator</text>
-            <assertion id="ca">
-                <text>Test |getAnnotated()| returns the original `AnnotatedConstructor` or `AnnotatedMethod` with which this configurator was initialized.</text>
+            <text>AnnotatedMethodConfigurator</text>
+            <assertion id="a">
+                <text>Test |getAnnotated()| returns the original `AnnotatedMethod` with which this configurator was initialized.</text>
             </assertion>
 
-            <assertion id="cb">
+            <assertion id="b">
                 <text>Test add() adds an annotation to the configured element.</text>
             </assertion>
 
-            <assertion id="cd">
+            <assertion id="c">
                 <text>Test |remove()| methods remove all annotation from the configured element.</text>
             </assertion>
 
-            <assertion id="ce">
+            <assertion id="d">
                 <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
             </assertion>
 
-            <assertion id="cf">
+            <assertion id="e">
                 <text>Test |params()| returns a list of AnnotatedParameterConfigurator to configure annotations on parameters.</text>
             </assertion>
 
-            <assertion id="cg">
-                <text>Test |filterParams(Predicate `&lt; AnnotatedParameter &lt;T &gt;&gt;` predicate)| returns a `Stream &lt;AnnotatedParameterConfigurator&gt;` filtered by applying the provided Predicate on params().</text>
+            <assertion id="f">
+                <text>Test |filterParams(Predicate `&lt; AnnotatedParameter &lt;T &gt;&gt;` predicate)| returns a `Stream &lt;AnnotatedParameterConfigurator&gt;`
+                    filtered by applying the provided Predicate on params().
+                </text>
             </assertion>
         </group>
+    </section>
+
+    <section id="annotated_constructor_configurator" title="AnnotatedConstructorConfigurator" level="4">
 
         <group>
-            <text>AnnotatedFieldConfigurator</text>
-            <assertion id="da">
-                <text>Test |getAnnotated()| returns the original `AnnotatedField` with which this configurator was initialized.</text>
+            <text>AnnotatedConstructorConfigurator</text>
+            <assertion id="a">
+                <text>Test |getAnnotated()| returns the original `AnnotatedConstructor` with which this configurator was initialized.</text>
             </assertion>
 
-            <assertion id="db">
-                <text>Test |add()| adds an annotation to the configured element.</text>
+            <assertion id="b">
+                <text>Test add() adds an annotation to the configured element.</text>
             </assertion>
 
-            <assertion id="dc">
+            <assertion id="c">
                 <text>Test |remove()| methods remove all annotation from the configured element.</text>
             </assertion>
 
-            <assertion id="dd">
+            <assertion id="d">
+                <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
+            </assertion>
+
+            <assertion id="e">
+                <text>Test |params()| returns a list of AnnotatedParameterConfigurator to configure annotations on parameters.</text>
+            </assertion>
+
+            <assertion id="f">
+                <text>Test |filterParams(Predicate `&lt; AnnotatedParameter &lt;T &gt;&gt;` predicate)| returns a `Stream &lt;AnnotatedParameterConfigurator&gt;`
+                    filtered by applying the provided Predicate on params().
+                </text>
+            </assertion>
+        </group>
+    </section>
+
+    <section id="annotated_parameter_configurator" title="AnnotatedParameterConfigurator" level="4">
+        <group>
+            <text>AnnotatedParameterConfigurator</text>
+            <assertion id="a">
+                <text>Test |getAnnotated()| returns the original `AnnotatedParameter` with which this configurator was initialized.</text>
+            </assertion>
+
+            <assertion id="b">
+                <text>Test |add()| adds an annotation to the configured element.</text>
+            </assertion>
+
+            <assertion id="c">
+                <text>Test |remove()| methods remove all annotation from the configured element.</text>
+            </assertion>
+
+            <assertion id="d">
+                <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
+            </assertion>
+        </group>
+
+    </section>
+
+    <section id="annotated_field_configurator" title="AnnotatedFieldConfigurator" level="4">
+        <group>
+            <text>AnnotatedFieldConfigurator</text>
+            <assertion id="a">
+                <text>Test |getAnnotated()| returns the original `AnnotatedField` with which this configurator was initialized.</text>
+            </assertion>
+
+            <assertion id="b">
+                <text>Test |add()| adds an annotation to the configured element.</text>
+            </assertion>
+
+            <assertion id="c">
+                <text>Test |remove()| methods remove all annotation from the configured element.</text>
+            </assertion>
+
+            <assertion id="d">
                 <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
             </assertion>
         </group>
@@ -7862,7 +7928,8 @@
 
         <assertion id="c" testable="false">
             <text>Additional beans may be registered programmatically with the container by the application or a portable extension after the automatic bean
-                discovery completes. Portable extensions may even integrate with the process of building the |Bean| object for a bean, to enhance the container’s
+                discovery completes. Portable extensions may even integrate with the process of building the |Bean| object for a bean, to enhance the
+                container’s
                 built-in functionality.
             </text>
         </assertion>
@@ -8580,7 +8647,9 @@
 
     <section id="producer_method_ee" title="Producer methods on EJB session bean" level="2">
         <assertion id="a">
-            <text>If the bean is a session bean, the producer method must be either a business method exposed by a local business interface of the EJB or a static method of the bean class</text>
+            <text>If the bean is a session bean, the producer method must be either a business method exposed by a local business interface of the EJB or a
+                static method of the bean class
+            </text>
         </assertion>
 
         <assertion id="aa" implied="true">
@@ -8592,7 +8661,8 @@
 
     <section id="declaring_producer_method_ee" title="Declaring a producer method in an EJB session bean" level="3">
         <assertion id="a">
-            <text>If a non-static method of a session bean class is annotated |@Produces|, and the method is not a business method exposed by a local business interface of the session bean, the
+            <text>If a non-static method of a session bean class is annotated |@Produces|, and the method is not a business method exposed by a local business
+                interface of the session bean, the
                 container automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
@@ -8620,13 +8690,16 @@
 
     <section id="disposer_method_ee" title="Disposer methods on EJB session bean" level="2">
         <assertion id="a">
-            <text>If the bean is a session bean, the disposer method must be a business method exposed by a local business interface of the EJB or a static method of the bean class.</text>
+            <text>If the bean is a session bean, the disposer method must be a business method exposed by a local business interface of the EJB or a static
+                method of the bean class.
+            </text>
         </assertion>
     </section>
 
     <section id="declaring_disposer_method_ee" title="Declaring a disposer method on an EJB session bean" level="3">
         <assertion id="a">
-            <text>If a non-static method of a session bean class has a parameter annotated |@Disposes|, and the method is not a business method exposed by a local business interface of the session
+            <text>If a non-static method of a session bean class has a parameter annotated |@Disposes|, and the method is not a business method exposed by a
+                local business interface of the session
                 bean, the container automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
@@ -10351,7 +10424,8 @@
 
     <section id="observer_methods_ee" title="Observer methods in EJB session beans" level="2">
         <assertion id="d">
-            <text>An observer method may also be a non-abstract method of an EJB session bean class. It must be either a business method exposed by a local business interface of the EJB or a
+            <text>An observer method may also be a non-abstract method of an EJB session bean class. It must be either a business method exposed by a local
+                business interface of the EJB or a
                 static method of the bean class.
             </text>
         </assertion>
@@ -10360,7 +10434,8 @@
 
     <section id="observes_ee" title="Declaring an observer method in an EJB" level="3">
         <assertion id="g">
-            <text>If a non-static method of a session bean class has a parameter annotated |@Observes|, and the method is not a business method exposed by a local business interface of the
+            <text>If a non-static method of a session bean class has a parameter annotated |@Observes|, and the method is not a business method exposed by a
+                local business interface of the
                 EJB, the container automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
@@ -10368,7 +10443,8 @@
 
     <section id="observer_method_invocation_context_ee" title="Observer method invocation context in Java EE" level="3">
         <assertion id="a">
-            <text>The transaction and security contexts for a business method exposed by a local business interface of an EJB session bean also depend upon the transaction attribute and @RunAs
+            <text>The transaction and security contexts for a business method exposed by a local business interface of an EJB session bean also depend upon the
+                transaction attribute and @RunAs
                 descriptor, if any.
             </text>
         </assertion>

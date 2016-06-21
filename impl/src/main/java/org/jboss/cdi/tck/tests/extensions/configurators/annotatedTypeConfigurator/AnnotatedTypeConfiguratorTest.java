@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
-import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_TYPE_CONFIGURATOR;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -41,6 +39,11 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_CONSTRUCTOR_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_FIELD_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_METHOD_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_PARAMETER_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_TYPE_CONFIGURATOR;
 
 /**
  * @author Tomas Remes
@@ -59,8 +62,10 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bd"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bg"),
             @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bi"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bj"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "cb"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "cg"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "db") })
+            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "b"), @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "b"),
+            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "f"), @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "b"),
+            @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "b")
+    })
     public void addMethodsOfAnnotationTypecConfigurator() {
         Bean<Dog> dogBean = getUniqueBean(Dog.class);
         CreationalContext<Dog> creationalContext = getCurrentManager().createCreationalContext(dogBean);
@@ -88,7 +93,9 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "be"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bh"),
             @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bj"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bl"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "cd"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "dc") })
+            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "c"), @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "c"),
+            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "f"), @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "c"),
+            @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "c") })
     public void removeMethodsOfAnnotationTypeConfigurator() {
         Bean<Cat> catBean = getUniqueBean(Cat.class);
         CreationalContext<Cat> creationalContext = getCurrentManager().createCreationalContext(catBean);
@@ -106,8 +113,8 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bc"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "ca"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bc"), @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "a") })
     public void annotatedTypesAndMemebersEqual() {
         Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedTypesEqual.get());
         Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedMethodEqual.get());
@@ -116,8 +123,9 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bf"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bk"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "ce"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "cf"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "dd") })
+            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "d"), @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "d"),
+            @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "d"), @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "e"),
+            @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "d") })
     public void annotationsRemovedFromAnimalShelter() {
         Bean<AnimalShelter> animalShelterBean = getUniqueBean(AnimalShelter.class);
         CreationalContext<AnimalShelter> creationalContext = getCurrentManager().createCreationalContext(animalShelterBean);

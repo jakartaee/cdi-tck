@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
@@ -32,7 +34,6 @@ import javax.enterprise.inject.spi.builder.AnnotatedTypeConfigurator;
 
 import org.jboss.cdi.tck.literals.DisposesLiteral;
 import org.jboss.cdi.tck.literals.ProducesLiteral;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ProcessAnnotatedTypeObserver implements Extension {
 
@@ -45,7 +46,6 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         AnnotatedTypeConfigurator<Dog> annotatedTypeConfigurator = event.configureAnnotatedType();
 
         // add @RequestScoped to Dog and @Inject and @Dogs to its Feed field
-        // add @Inject to Dog constructor
         annotatedTypeConfigurator.add(RequestScoped.Literal.INSTANCE)
                 .filterFields(af -> (af.getJavaMember()
                         .getName().equals("feed"))).findFirst().get().add(InjectLiteral.INSTANCE).add(Dogs.DogsLiteral.INSTANCE);
