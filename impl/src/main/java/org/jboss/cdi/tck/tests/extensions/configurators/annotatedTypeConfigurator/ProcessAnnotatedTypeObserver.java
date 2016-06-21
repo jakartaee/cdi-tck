@@ -22,8 +22,10 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.literal.InjectLiteral;
+import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
+import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.builder.AnnotatedConstructorConfigurator;
@@ -31,6 +33,7 @@ import javax.enterprise.inject.spi.builder.AnnotatedFieldConfigurator;
 import javax.enterprise.inject.spi.builder.AnnotatedMethodConfigurator;
 import javax.enterprise.inject.spi.builder.AnnotatedParameterConfigurator;
 import javax.enterprise.inject.spi.builder.AnnotatedTypeConfigurator;
+import javax.inject.Inject;
 
 import org.jboss.cdi.tck.literals.DisposesLiteral;
 import org.jboss.cdi.tck.literals.ProducesLiteral;
@@ -40,6 +43,9 @@ public class ProcessAnnotatedTypeObserver implements Extension {
     public static AtomicBoolean annotatedTypesEqual = new AtomicBoolean(false);
     public static AtomicBoolean annotatedMethodEqual = new AtomicBoolean(false);
     public static AtomicBoolean annotatedFieldEqual = new AtomicBoolean(false);
+    public static AtomicBoolean annotatedConstructorEqual = new AtomicBoolean(false);
+    public static AtomicBoolean annotatedParameterEqual = new AtomicBoolean(false);
+
     void observesDogPAT(@Observes ProcessAnnotatedType<Dog> event) {
 
         annotatedTypesEqual.set(event.configureAnnotatedType().getAnnotated().equals(event.getAnnotatedType()));
@@ -113,7 +119,22 @@ public class ProcessAnnotatedTypeObserver implements Extension {
             return aM.equals(annotatedMethod);
         }));
 
-        //compare AnnotatedMethod from AnnotatedType to the one from AnnotatedMethodConfigurator
+        // compare AnnotatedConstructor from AnnotatedType to the one from AnnotatedConstructorConfigurator
+        AnnotatedConstructorConfigurator<AnimalShelter> constructorConfigurator = annotatedTypeConfigurator
+                .filterConstructors(ac -> ac.isAnnotationPresent(Inject.class))
+                .findFirst().get();
+        AnnotatedConstructor<AnimalShelter> annotatedConstructor = constructorConfigurator.getAnnotated();
+        annotatedConstructorEqual.set(event.getAnnotatedType().getConstructors().stream().anyMatch(aM -> {
+            return aM.equals(annotatedConstructor);
+        }));
+
+        // compare AnnotatedParameter from AnnotatedType to the one from AnnotatedParameterConfigurator
+        AnnotatedParameterConfigurator<AnimalShelter> parameterConfigurator = constructorConfigurator.filterParams(ap -> ap.getBaseType().equals(Cat.class))
+                .findFirst().get();
+        AnnotatedParameter<AnimalShelter> annotatedParameter = parameterConfigurator.getAnnotated();
+        annotatedParameterEqual.set(annotatedConstructor.getParameters().stream().anyMatch(ap -> ap.equals(annotatedParameter)));
+
+        //compare AnnnotatedField from AnnotatedType to the one from AnnotatedFieldConfigurator
         AnnotatedFieldConfigurator<? super AnimalShelter> fieldConfigurator = annotatedTypeConfigurator.filterFields(annotatedField -> {
             return annotatedField.getJavaMember().getName().equals("cat");
         }).findFirst().get();
@@ -122,7 +143,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
             return aF.equals(annotatedField);
         }));
 
-	// remove all annotations
+        // remove all annotations
         annotatedTypeConfigurator.removeAll();
         annotatedTypeConfigurator.constructors().stream().forEach(AnnotatedConstructorConfigurator::removeAll);
         annotatedTypeConfigurator.methods().stream().forEach(AnnotatedMethodConfigurator::removeAll);

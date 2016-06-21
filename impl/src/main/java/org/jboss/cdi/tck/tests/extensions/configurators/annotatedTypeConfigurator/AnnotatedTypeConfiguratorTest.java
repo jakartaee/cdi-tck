@@ -114,11 +114,14 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bc"), @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "a"),
-            @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "a") })
+            @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "a"), @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "a") })
     public void annotatedTypesAndMemebersEqual() {
         Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedTypesEqual.get());
         Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedMethodEqual.get());
         Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedFieldEqual.get());
+        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedConstructorEqual.get());
+        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedParameterEqual.get());
     }
 
     @Test
