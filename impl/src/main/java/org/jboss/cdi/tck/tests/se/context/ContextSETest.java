@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.se.context;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_SE;
-import static org.jboss.cdi.tck.cdi.Sections.INIT_CONTAINER;
 
 import javax.enterprise.inject.spi.CDI;
 
@@ -35,6 +34,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+// TODO reflect new assertions
 @Test(groups = SE)
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class ContextSETest extends Arquillian {
@@ -66,8 +66,8 @@ public class ContextSETest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
-            @SpecAssertion(section = INIT_CONTAINER, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d")})
+           // @SpecAssertion(section = INIT_CONTAINER, id = "c") })
     public void testEventIsFiredWhenAplicationContextInitialized() {
         ApplicationScopedObserver.reset();
         //        FIXME

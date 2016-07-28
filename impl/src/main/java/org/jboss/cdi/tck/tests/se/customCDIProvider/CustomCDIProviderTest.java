@@ -33,6 +33,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+// TODO remove or reflect new assertions
 @Test(groups = SE)
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class CustomCDIProviderTest extends Arquillian {
@@ -46,7 +47,7 @@ public class CustomCDIProviderTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertion(section = Sections.CDIPROVIDER_LOOKUP, id = "a")
+ //   @SpecAssertion(section = Sections.CDIPROVIDER_LOOKUP, id = "a")
     public void testCustomCDIProvider() {
         CDI.setCDIProvider(new CustomCDIProvider());
         //        FIXME

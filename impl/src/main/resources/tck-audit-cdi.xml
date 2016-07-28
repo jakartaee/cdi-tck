@@ -8288,50 +8288,129 @@
     </section>
 
     <!-- SE SECTION FROM HERE -->
-    <section id="bootstrap-se" title="Bootstrapping a CDI container in Java SE" level="1">
+    <section id="se_bootstrap" title="Bootstrapping a CDI container in Java SE" level="1">
         <assertion id="a">
-            <text>In Java SE, the CDI container must be explicitly bootstrapped by the application. This is performed with CDIProvider and CDI utility
-                classes.
-            </text>
-        </assertion>
-    </section>
-
-    <section id="cdiprovider_lookup" title="CDIProvider lookup" level="2">
-        <assertion id="a">
-            <text>The CDI utility class provides static lookup for CDIProvider. By default, CDIProvider will be looked up via a ServiceLoader but this can be
-                over-written by calling setCDIProvider on the CDI utility class.
-            </text>
-        </assertion>
-    </section>
-
-    <section id="init_container" title="Starting the container" level="2">
-        <assertion id="a">
-            <text>Container can be initialized from a CDIProvider instance. Calling one of the initialize methods will start a container and return a CDI
-                utility object to interact with it.
+            <text>In Java SE, the CDI container must be explicitly bootstrapped by the application. This is performed with `SeContainerInitializer` abstract
+                class and its static method `newInstance()`.
             </text>
         </assertion>
 
         <assertion id="b">
-            <text>Each time initialize method is called on the CDIProvider it returns a new CDI instance. An implementation need not support calling initialize
-                multiple times on the same provider without the prior container being shutdown.
+            <text>`SeContainerInitializer` is a service provider of the service javax.enterprise.inject.se.SeContainerInitializer declared in META-INF/services.
+                It allows the configuration of the CDI container before its bootstrapping.
             </text>
         </assertion>
 
         <assertion id="c">
+            <text>The `SeContainerInitializer.initialize()` method bootstraps the container and returns a `SeContainer` instance.</text>
+        </assertion>
+        <group>
+            <text>Unless specified differently each method of `SeContainerInitializer` returns the current `SeContainerInitializer` object.</text>
+            <assertion id="da">
+                <text>|newInstance()| static method returns an instance of the implementation of `SeContainerInitializer` discovered by java service-provider.
+                    Each
+                    call returns a new instance of `SeContainerInitializer`.
+                </text>
+            </assertion>
+            <assertion id="db">
+                <text>|addBeanClasses()| add classes to the the synthetic bean archive</text>
+            </assertion>
+            <assertion id="dc">
+                <text>|addAnnotatedTypes()| add the provided AnnotatedTypes to the synthetic bean archive.</text>
+            </assertion>
+            <assertion id="dd">
+                <text>|addExtensions()| add the provided extensions (class or instance) to the synthetic bean archive.</text>
+            </assertion>
+            <assertion id="de">
+                <text>|addInterceptors()| add the provided interceptors to the synthetic bean archive.</text>
+            </assertion>
+            <assertion id="df">
+                <text>|addDecorators()| add the provided decorators to the synthetic bean archive.</text>
+            </assertion>
+            <assertion id="dg">
+                <text>|addAlternatives()| add the provided alternatives classes to the synthetic bean archive.</text>
+            </assertion>
+            <assertion id="dh">
+                <text>|addAlternativeStereotypes()| add the provided stereotypes classes to the synthetic bean archive.</text>
+            </assertion>
+            <assertion id="di">
+                <text>|addProperty()| add a configuration property for the container</text>
+            </assertion>
+            <assertion id="dj">
+                <text>|setProperties()| set the Map of configuration properties for the container. replace previous properties.</text>
+            </assertion>
+            <assertion id="dk">
+                <text>|addBeans()| add the provided beans to the set of discovered beans.</text>
+            </assertion>
+            <assertion id="dl">
+                <text>|disableDiscovery()| deactivate automatic type scanning and discovery. All bean archive will be ignored except the implicit bean
+                    archive.
+                </text>
+            </assertion>
+            <assertion id="dm">
+                <text>|setClassLoader()| change the default class loader for the container</text>
+            </assertion>
+            <assertion id="dn">
+                <text>|initialize()| bootstrap the container and returns a `SeContaine`r as defined in `SeContainer interface`.</text>
+            </assertion>
+        </group>
+
+        <assertion id="e">
+            <text>Every invocation of the `SeContainerInitializer.initialize()` method returns a new `SeContainer` instance.</text>
+        </assertion>
+
+        <assertion id="f">
             <text>The application context is started automatically by the container on start up.</text>
         </assertion>
     </section>
 
-    <section id="stop_container" title="Stopping the container" level="2">
+    <section id="se_container_initializer" title="SeContainerInitializer class" level="2">
         <assertion id="a">
-            <text>The CDI instance may also be stopped manually by calling the shutdown method on the CDI object.</text>
+            <text>A CDI implementation is required to provide an implementation of `SeContainerInitializer` declared as a service-provider. `newInstance()`
+                static
+                method uses java service-provider to obtain an implementation of `SeContainerInitializer` and return an instance of it. There must be exactly
+                one
+                provider available, otherwise an `IllegalStateException` is thrown.
+            </text>
+        </assertion>
+        <assertion id="b">
+            <text>`SeContainerInitializer` configuration allows explicit addition of elements to the set of automatically discovered elements. These additions
+                are
+                done in an internal synthetic bean archive that is added to the set of bean archives discovered by the container during deployment.
+            </text>
+        </assertion>
+        <assertion id="c" testable="false">
+            <text>This synthetic bean archive behaves like an explicit bean archive (as defined in Bean archives).</text>
+        </assertion>
+    </section>
+
+    <section id="se_container" title="SeContainer interface" level="2">
+        <assertion id="a">
+            <text>The |javax.enterprise.inject.se.SeContainer| interface provides access to the |BeanManager| and programmatic lookup as defined in The Instance
+                interface.
+            </text>
         </assertion>
 
         <assertion id="b">
-            <text>If the shutdown method is explicitly invoked and the container was not initialized or already stopped , an IllegalStateException will be
-                thrown
-            </text>
+            <text>|SeContainer| extends |AutoCloseable|, so when dereferenced, it should shutdown automatically.</text>
         </assertion>
+
+        <group>
+            <text>'SeContainer' methods:</text>
+            <assertion id="ca">
+                <text>|close()| method explicitly shutdown the container. If it is called and the container was already shutdown, it throws an
+                    |IllegalStateException|.
+                </text>
+            </assertion>
+            <assertion id="cb">
+                <text>|isRunning()| method returns true if called before container shutdown and false after.</text>
+            </assertion>
+            <assertion id="cc">
+                <text>|getBeanManager()| method returns the |BeanManager| (as defined in The BeanManager object) for the running container. if it is called and the
+                    container was already shutdown, it throws an |IllegalStateException|.
+                </text>
+            </assertion>
+        </group>
     </section>
 
     <section id="contexts_se" title="Scopes and contexts in Java SE" level="1">
@@ -8376,6 +8455,22 @@
             </assertion>
         </group>
 
+    </section>
+
+    <section id="spi_se" title="Portable extensions in Java SE" level="1">
+
+    </section>
+
+    <section id="beanmanager_se" title="The `BeanManager` object in Java SE" level="2">
+
+    </section>
+
+    <section id="provider_se" title="Obtaining a reference to the CDI container in Java SE" level="3">
+        <assertion id="a" testable="false">
+            <text>In Java SE, while the access to CDI container and `BeanManager` described in `Obtaining a reference to the CDI container` is available, the
+                preferred way to access them is through `SeContainer` interface as described in `SeContainer interface`.
+            </text>
+        </assertion>
     </section>
 
     <!-- EE SECTION FROM HERE -->

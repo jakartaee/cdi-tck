@@ -18,9 +18,6 @@ package org.jboss.cdi.tck.tests.se.container;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
-import static org.jboss.cdi.tck.cdi.Sections.BOOTSTRAPSE;
-import static org.jboss.cdi.tck.cdi.Sections.INIT_CONTAINER;
-import static org.jboss.cdi.tck.cdi.Sections.STOP_CONTAINER;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +37,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+// TODO reflect new assertions
 @Test(groups = SE)
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class BootstrapSEContainerTest extends Arquillian {
@@ -56,8 +54,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = INIT_CONTAINER, id = "a"),
-            @SpecAssertion(section = STOP_CONTAINER, id = "a") })
+//    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = INIT_CONTAINER, id = "a"),
+//            @SpecAssertion(section = STOP_CONTAINER, id = "a") })
     public void testContainerIsInitialized() {
         //        FIXME
         //        CDIProvider cdiProvider = CDI.getCDIProvider();
@@ -72,7 +70,7 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test(expectedExceptions = IllegalStateException.class)
-    @SpecAssertions(@SpecAssertion(section = STOP_CONTAINER, id = "b"))
+//    @SpecAssertions(@SpecAssertion(section = STOP_CONTAINER, id = "b"))
     public void testContainerShutdownMethodOnNotInitializedContainer() {
         //        FIXME
         //        CDIProvider cdiProvider = CDI.getCDIProvider();
@@ -82,7 +80,7 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = INIT_CONTAINER, id = "b") })
+//    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = INIT_CONTAINER, id = "b") })
     public void testInvocationOfInitializedMethodReturnsNewCDIInstance() {
         //        FIXME
         //        CDIProvider cdiProvider = CDI.getCDIProvider();
@@ -96,7 +94,7 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "b") })
     public void testImplicitArchiveDiscovered() {
         Map<String, Object> params = new HashMap<>();
         params.put(IMPLICIT_SCAN_KEY, Boolean.TRUE);
