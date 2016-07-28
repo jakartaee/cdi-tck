@@ -75,6 +75,9 @@ public class ParameterizedEventTest extends AbstractTest {
     @Inject
     private StringListObserver stringObserver;
 
+    @Inject
+    Event<Foo<? extends Number>> fooEvent;
+
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ParameterizedEventTest.class).build();
@@ -222,6 +225,14 @@ public class ParameterizedEventTest extends AbstractTest {
             Assert.fail();
         } catch (IllegalArgumentException expected) {
         }
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "e") })
+    public void testWildcardIsResolvable() {
+        reset();
+        fooEvent.fire(new Bar<Integer>());
+        assertTrue(observer.isIntegerFooObserved());
     }
 
     private void reset() {
