@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2015, Red Hat, Inc., and individual contributors
+ * Copyright 2016, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,24 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.se.customCDIProvider;
+package org.jboss.cdi.tck.tests.se.container;
 
-import javax.enterprise.inject.Vetoed;
-import javax.enterprise.inject.spi.CDI;
-import javax.enterprise.inject.spi.CDIProvider;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-/**
- * @author Martin Kouba
- *
- */
-@Vetoed
-public class CustomCDIProvider implements CDIProvider {
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Stereotype;
 
-    public static boolean initializedCalled = false;
-
-    @Override
-    public CDI<Object> getCDI() {
-        return null;
-    }
-
+@Stereotype
+@Alternative
+@Target({ TYPE, METHOD, FIELD })
+@Retention(RUNTIME)
+public @interface AlternativeStereotype {
 }

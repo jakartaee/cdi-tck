@@ -8339,7 +8339,7 @@
             </text>
         </assertion>
 
-        <assertion id="b">
+        <assertion id="b" testable="false">
             <text>`SeContainerInitializer` is a service provider of the service javax.enterprise.inject.se.SeContainerInitializer declared in META-INF/services.
                 It allows the configuration of the CDI container before its bootstrapping.
             </text>
@@ -8352,8 +8352,7 @@
             <text>Unless specified differently each method of `SeContainerInitializer` returns the current `SeContainerInitializer` object.</text>
             <assertion id="da">
                 <text>|newInstance()| static method returns an instance of the implementation of `SeContainerInitializer` discovered by java service-provider.
-                    Each
-                    call returns a new instance of `SeContainerInitializer`.
+                    Each call returns a new instance of `SeContainerInitializer`.
                 </text>
             </assertion>
             <assertion id="db">
@@ -8395,7 +8394,7 @@
                 <text>|setClassLoader()| change the default class loader for the container</text>
             </assertion>
             <assertion id="dn">
-                <text>|initialize()| bootstrap the container and returns a `SeContaine`r as defined in `SeContainer interface`.</text>
+                <text>|initialize()| bootstrap the container and returns a `SeContainer` as defined in `SeContainer interface`.</text>
             </assertion>
         </group>
 
@@ -8411,16 +8410,13 @@
     <section id="se_container_initializer" title="SeContainerInitializer class" level="2">
         <assertion id="a">
             <text>A CDI implementation is required to provide an implementation of `SeContainerInitializer` declared as a service-provider. `newInstance()`
-                static
-                method uses java service-provider to obtain an implementation of `SeContainerInitializer` and return an instance of it. There must be exactly
-                one
-                provider available, otherwise an `IllegalStateException` is thrown.
+                static method uses java service-provider to obtain an implementation of `SeContainerInitializer` and return an instance of it. There must be
+                exactly one provider available, otherwise an `IllegalStateException` is thrown.
             </text>
         </assertion>
         <assertion id="b">
             <text>`SeContainerInitializer` configuration allows explicit addition of elements to the set of automatically discovered elements. These additions
-                are
-                done in an internal synthetic bean archive that is added to the set of bean archives discovered by the container during deployment.
+                are done in an internal synthetic bean archive that is added to the set of bean archives discovered by the container during deployment.
             </text>
         </assertion>
         <assertion id="c" testable="false">
@@ -8435,7 +8431,7 @@
             </text>
         </assertion>
 
-        <assertion id="b">
+        <assertion id="b" testable="false">
             <text>|SeContainer| extends |AutoCloseable|, so when dereferenced, it should shutdown automatically.</text>
         </assertion>
 
@@ -8450,8 +8446,8 @@
                 <text>|isRunning()| method returns true if called before container shutdown and false after.</text>
             </assertion>
             <assertion id="cc">
-                <text>|getBeanManager()| method returns the |BeanManager| (as defined in The BeanManager object) for the running container. if it is called and the
-                    container was already shutdown, it throws an |IllegalStateException|.
+                <text>|getBeanManager()| method returns the |BeanManager| (as defined in The BeanManager object) for the running container. if it is called and
+                    the container was already shutdown, it throws an |IllegalStateException|.
                 </text>
             </assertion>
         </group>

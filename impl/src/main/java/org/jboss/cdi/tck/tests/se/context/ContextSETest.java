@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.se.context;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_SE;
+import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
 
-import javax.enterprise.inject.spi.CDI;
+import javax.enterprise.inject.se.SeContainer;
+import javax.enterprise.inject.se.SeContainerInitializer;
 
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -34,7 +36,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-// TODO reflect new assertions
 @Test(groups = SE)
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class ContextSETest extends Arquillian {
@@ -53,26 +54,22 @@ public class ContextSETest extends Arquillian {
     @Test
     @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "a")
     public void applicationContextSharedBetweenAllBeansWithinContainer() {
-        //        FIXME
-        //        CDIProvider cdiProvider = CDI.getCDIProvider();
-        try (CDI<Object> cdi = CDI.current()) {
-            cdi.select(Foo.class).get().ping();
-            cdi.select(Bar.class).get().ping();
-            cdi.select(Baz.class).get().ping();
+        try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
+            seContainer.select(Foo.class).get().ping();
+            seContainer.select(Bar.class).get().ping();
+            seContainer.select(Baz.class).get().ping();
 
-            ApplicationScopedCounter applicationScopedCounter = cdi.select(ApplicationScopedCounter.class).get();
+            ApplicationScopedCounter applicationScopedCounter = seContainer.select(ApplicationScopedCounter.class).get();
             Assert.assertEquals(applicationScopedCounter.getCount(), 3);
         }
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d")})
-           // @SpecAssertion(section = INIT_CONTAINER, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "f"), @SpecAssertion(section= SE_BOOTSTRAP, id = "f") })
     public void testEventIsFiredWhenAplicationContextInitialized() {
         ApplicationScopedObserver.reset();
-        //        FIXME
-        //        CDIProvider cdiProvider = CDI.getCDIProvider();
-        try (CDI<Object> cdi = CDI.current()) {
+        try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
             Assert.assertTrue(ApplicationScopedObserver.isInitialized);
             Assert.assertNotNull(ApplicationScopedObserver.initializedEventPayload);
         }
@@ -82,9 +79,7 @@ public class ContextSETest extends Arquillian {
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "c"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d") })
     public void testEventIsFiredWhenAplicationContextDestroyed() {
         ApplicationScopedObserver.reset();
-        //        FIXME
-        //        CDIProvider cdiProvider = CDI.getCDIProvider();
-        try (CDI<Object> cdi = CDI.current()) {
+        try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
 
         }
         Assert.assertTrue(ApplicationScopedObserver.isDestroyed);

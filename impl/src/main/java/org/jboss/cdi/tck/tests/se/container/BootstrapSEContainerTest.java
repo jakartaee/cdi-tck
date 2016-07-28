@@ -18,11 +18,16 @@ package org.jboss.cdi.tck.tests.se.container;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
+import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
+import static org.jboss.cdi.tck.cdi.Sections.SE_CONTAINER;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.enterprise.inject.spi.CDI;
+import java.util.Optional;
+import java.util.Set;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.se.SeContainer;
+import javax.enterprise.inject.se.SeContainerInitializer;
+import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanManager;
 
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,7 +42,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-// TODO reflect new assertions
 @Test(groups = SE)
 @SpecVersion(spec = "cdi", version = "2.0-EDR1")
 public class BootstrapSEContainerTest extends Arquillian {
@@ -46,7 +50,9 @@ public class BootstrapSEContainerTest extends Arquillian {
 
     @Deployment
     public static Archive<?> deployment() {
-        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class, BootstrapSEContainerTest.class)
+        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class)
+                .addClasses(Foo.class, Baz.class, Qux.class, BazObserver.class, QuxObserver.class, Shape.class, Square.class, Circle.class,
+                        BootstrapSEContainerTest.class)
                 .addAsResource(EmptyAsset.INSTANCE,
                         "META-INF/beans.xml");
         final JavaArchive implicitArchive = ShrinkWrap.create(JavaArchive.class).addClass(Bar.class);
@@ -54,58 +60,92 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-//    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = INIT_CONTAINER, id = "a"),
-//            @SpecAssertion(section = STOP_CONTAINER, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "a"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "b"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "c"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "dn"),
+            @SpecAssertion(section = SE_CONTAINER, id = "cb") })
     public void testContainerIsInitialized() {
-        //        FIXME
-        //        CDIProvider cdiProvider = CDI.getCDIProvider();
-        try (CDI<Object> cdi = CDI.current()) {
-            //            Assert.assertTrue(cdiProvider.isInitialized());
-
-            Foo foo = cdi.select(Foo.class).get();
-            Assert.assertNotNull(foo);
-            foo.ping();
-        }
-        //        Assert.assertFalse(cdiProvider.isInitialized());
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        SeContainer seContainer = seContainerInitializer.initialize();
+        Assert.assertTrue(seContainer.isRunning());
+        Foo foo = seContainer.select(Foo.class).get();
+        Assert.assertNotNull(foo);
+        foo.ping();
+        seContainer.close();
+        Assert.assertFalse(seContainer.isRunning());
     }
 
     @Test(expectedExceptions = IllegalStateException.class)
-//    @SpecAssertions(@SpecAssertion(section = STOP_CONTAINER, id = "b"))
-    public void testContainerShutdownMethodOnNotInitializedContainer() {
-        //        FIXME
-        //        CDIProvider cdiProvider = CDI.getCDIProvider();
-        CDI<Object> cdi = CDI.current();
-        cdi.shutdown();
-        cdi.shutdown();
+    @SpecAssertions(@SpecAssertion(section = SE_CONTAINER, id = "ca"))
+    public void testContainerCloseMethodOnNotInitializedContainer() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        SeContainer seContainer = seContainerInitializer.initialize();
+        seContainer.close();
+        seContainer.close();
     }
 
     @Test
-//    @SpecAssertions({ @SpecAssertion(section = BOOTSTRAPSE, id = "a"), @SpecAssertion(section = INIT_CONTAINER, id = "b") })
-    public void testInvocationOfInitializedMethodReturnsNewCDIInstance() {
-        //        FIXME
-        //        CDIProvider cdiProvider = CDI.getCDIProvider();
-        CDI<Object> cdi1 = CDI.current();//.initialize();
-        Assert.assertNotNull(cdi1);
-        cdi1.shutdown();
-        CDI<Object> cdi2 = CDI.current();//.initialize();
-        Assert.assertNotNull(cdi2);
-        cdi2.shutdown();
-        Assert.assertNotEquals(cdi1, cdi2);
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "c"), @SpecAssertion(section = SE_BOOTSTRAP, id = "da"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "dn"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "e") })
+    public void testInvocationOfInitializedMethodReturnsNewSeContainerInstance() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();//.initialize();
+        SeContainer seContainer1 = seContainerInitializer.initialize();
+        Assert.assertNotNull(seContainer1);
+        seContainer1.close();
+
+        SeContainer seContainer2 = seContainerInitializer.initialize();
+        Assert.assertNotNull(seContainer2);
+        seContainer1.close();
+        Assert.assertNotEquals(seContainer1, seContainer2);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "b"), @SpecAssertion(section = SE_BOOTSTRAP, id = "di") })
     public void testImplicitArchiveDiscovered() {
-        Map<String, Object> params = new HashMap<>();
-        params.put(IMPLICIT_SCAN_KEY, Boolean.TRUE);
+        try (SeContainer seContainer = SeContainerInitializer.newInstance().addProperty(IMPLICIT_SCAN_KEY, true).initialize()) {
+            Bar bar = seContainer.select(Bar.class).get();
+            Assert.assertNotNull(bar);
+            bar.ping();
+        }
+    }
 
-        //        FIXME
-        //        CDIProvider cdiProvider = CDI.getCDIProvider();
-        //        try (CDI<Object> cdi = cdiProvider.initialize(params)) {
-        //            Bar bar = cdi.select(Bar.class).get();
-        //            Assert.assertNotNull(bar);
-        //            bar.ping();
-        //        }
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "db"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dl"),
+            @SpecAssertion(section = SE_CONTAINER, id = "a") })
+    public void testSyntheticArchive() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        SeContainer seContainer = seContainerInitializer.disableDiscovery().addBeanClasses(Baz.class, Qux.class, BazObserver.class).initialize();
+        BeanManager beanManager = seContainer.getBeanManager();
+        beanManager.fireEvent(new Baz(), Any.Literal.INSTANCE);
+        beanManager.fireEvent(new Qux(), Any.Literal.INSTANCE);
+        Assert.assertNotNull(seContainer.select(Baz.class).get().ping());
+        Assert.assertTrue(BazObserver.isNotified);
+        // is not in synthetic archive
+        Assert.assertFalse(QuxObserver.isNotified);
+        seContainer.close();
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "db"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dg"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "dh"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dl") })
+    public void testAlternativesInSE() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
+                .addBeanClasses(Square.class, Circle.class, Foo.class, FooProducer.class)
+                .addAlternatives(Circle.class)
+                .addAlternativeStereotypes(AlternativeStereotype.class)
+                .initialize()) {
+            Shape shape = seContainer.select(Shape.class).get();
+            Assert.assertEquals(shape.name(), Circle.NAME);
+            Set<Bean<?>> foos = seContainer.getBeanManager().getBeans(Foo.class);
+            Optional<Bean<?>> alternativeFoo = foos.stream().filter(bean -> bean.isAlternative()).findAny();
+            Assert.assertTrue(alternativeFoo.isPresent());
+            Assert.assertEquals(alternativeFoo.get().getName(), "createFoo");
+
+        }
+
     }
 
 }

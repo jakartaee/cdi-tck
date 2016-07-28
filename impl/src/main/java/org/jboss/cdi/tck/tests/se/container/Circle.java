@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2015, Red Hat, Inc., and individual contributors
+ * Copyright 2016, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,24 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.se.customCDIProvider;
+package org.jboss.cdi.tck.tests.se.container;
 
-import javax.enterprise.inject.Vetoed;
-import javax.enterprise.inject.spi.CDI;
-import javax.enterprise.inject.spi.CDIProvider;
+import javax.enterprise.inject.Alternative;
 
-/**
- * @author Martin Kouba
- *
- */
-@Vetoed
-public class CustomCDIProvider implements CDIProvider {
+@Alternative
+public class Circle implements Shape {
 
-    public static boolean initializedCalled = false;
+    public static String NAME = "Circle";
 
     @Override
-    public CDI<Object> getCDI() {
-        return null;
+    public String name() {
+        return NAME;
     }
-
 }

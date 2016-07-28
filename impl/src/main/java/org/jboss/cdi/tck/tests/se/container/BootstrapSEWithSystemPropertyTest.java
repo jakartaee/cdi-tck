@@ -20,8 +20,8 @@ import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
 
 import java.util.Properties;
-
-import javax.enterprise.inject.spi.CDI;
+import javax.enterprise.inject.se.SeContainer;
+import javax.enterprise.inject.se.SeContainerInitializer;
 
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -50,10 +50,8 @@ public class BootstrapSEWithSystemPropertyTest extends Arquillian {
     @Test
     @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "a")
     public void testImplicitArchiveDiscovered() {
-        //        FIXME
-        //        CDIProvider cdiProvider = CDI.getCDIProvider();
-        try (CDI<Object> cdi = CDI.current()) {
-            Bar bar = cdi.select(Bar.class).get();
+        try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
+            Bar bar = seContainer.select(Bar.class).get();
             Assert.assertNotNull(bar);
             bar.ping();
         }
