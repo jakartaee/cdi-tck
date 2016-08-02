@@ -39,7 +39,7 @@ public final class TransformationUtils {
      * 
      * @throws IllegalArgumentException in case of a null argument
      */
-    public static <F, T> List<T> transform(final Function<? super F, ? extends T> function, final Collection<F> fromCollection) {
+    public static <F, T> List<T> transform(final Function<? super F, T> function, final Collection<F> fromCollection) {
         checkNotNull(fromCollection);
         checkNotNull(function);
         List<T> result = new ArrayList<T>(fromCollection.size());
@@ -53,7 +53,7 @@ public final class TransformationUtils {
      * Returns a list that applies {@code function} to each element of {@code inputElements}.
      */
     @SafeVarargs
-    public static <F, T> List<T> transform(final Function<? super F, ? extends T> function, final F... inputElements) {
+    public static <F, T> List<T> transform(final Function<? super F, T> function, final F... inputElements) {
         return transform(function, Arrays.asList(inputElements));
     }
 
