@@ -5958,6 +5958,50 @@
             </assertion>
         </group>
 
+        <group>
+            <text>|UnmanagedInstance| methods throws IllegalStateException in following cases:</text>
+            <assertion id="c" implied="true">
+                <text>|produce()| is called on an already produced instance.</text>
+                <note>CDI-602</note>
+            </assertion>
+            <assertion id="d" implied="true">
+                <text>|produce()| is called on an instance that has already been disposed</text>
+                <note>CDI-602</note>
+            </assertion>
+            <assertion id="e" implied="true">
+                <text>|inject()| is called before produce() is called</text>
+                <note>CDI-602</note>
+            </assertion>
+            <assertion id="f" implied="true">
+                <text>|inject()| is called on an instance that has already been disposed</text>
+                <note>CDI-602</note>
+            </assertion>
+            <assertion id="g" implied="true">
+                <text>|postConstruct()| is called before produce() is called</text>
+                <note>CDI-602</note>
+            </assertion>
+            <assertion id="h" implied="true">
+                <text>|postConstruct()| is called on an instance that has already been disposed</text>
+                <note>CDI-602</note>
+            </assertion>
+            <assertion id="i" implied="true">
+                <text>|preDestroy()| is called before produce() is called</text>
+                <note>CDI-602</note>
+            </assertion>
+            <assertion id="j" implied="true">
+                <text>|preDestroy()| is called on an instance that has already been disposed</text>
+                <note>CDI-602</note>
+            </assertion>
+            <assertion id="k" implied="true">
+                <text>|dispose()| is called before produce() is called</text>
+                <note>CDI-602</note>
+            </assertion>
+            <assertion id="l" implied="true">
+                <text>|dispose()| is called on an instance that has already been disposed</text>
+                <note>CDI-602</note>
+            </assertion>
+        </group>
+
     </section>
 
     <section id="bm_obtain_creationalcontext" title="Obtaining a CreationalContext" level="3">
