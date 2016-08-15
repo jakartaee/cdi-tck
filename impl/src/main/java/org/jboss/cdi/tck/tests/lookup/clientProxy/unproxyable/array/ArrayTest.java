@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 /**
  * Test for problem detection of array injection.
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class ArrayTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

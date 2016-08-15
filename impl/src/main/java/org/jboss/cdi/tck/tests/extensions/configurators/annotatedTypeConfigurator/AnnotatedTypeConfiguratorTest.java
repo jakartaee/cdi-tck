@@ -49,7 +49,7 @@ import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_TYPE_CONFIGURATOR;
  * @author Tomas Remes
  */
 @Test
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class AnnotatedTypeConfiguratorTest extends AbstractTest {
 
     @Deployment

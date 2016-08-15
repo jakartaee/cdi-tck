@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SuppressWarnings("serial")
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class RawBeanTypeParameterizedRequiredTypeTest<T, X extends Number> extends AbstractTest {
 
     private final TypeLiteral<Foo<T>> FOO_UNBOUNDED_TYPE_VARIABLE_LITERAL = new TypeLiteral<Foo<T>>() {

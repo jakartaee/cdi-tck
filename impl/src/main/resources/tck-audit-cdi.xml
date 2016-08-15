@@ -1,6 +1,6 @@
 <specification xmlns="http://jboss.com/products/weld/tck/audit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd"
-               name="JSR 365: Contexts and Dependency Injection for Java 2.0" id="cdi" version="2.0-EDR1" generateSectionIds="true">
+               name="JSR 365: Contexts and Dependency Injection for Java 2.0" id="cdi" version="2.0-EDR2" generateSectionIds="true">
 
     <section id="architecture" title="Architecture" level="1"/>
 

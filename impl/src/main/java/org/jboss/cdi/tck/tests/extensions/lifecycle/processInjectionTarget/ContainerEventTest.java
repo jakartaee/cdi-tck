@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class ContainerEventTest extends AbstractTest {
 
     @Deployment

@@ -49,7 +49,7 @@ import org.testng.annotations.Test;
 /**
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class EnterpriseBeanDiscoveryTest extends AbstractTest {
 
     private static final String ALPHA_JAR = "alpha.jar";

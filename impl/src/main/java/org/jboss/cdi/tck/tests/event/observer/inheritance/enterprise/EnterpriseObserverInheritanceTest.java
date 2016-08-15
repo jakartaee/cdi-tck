@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @Test(groups = JAVAEE_FULL)
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class EnterpriseObserverInheritanceTest extends AbstractTest {
 
     @Deployment

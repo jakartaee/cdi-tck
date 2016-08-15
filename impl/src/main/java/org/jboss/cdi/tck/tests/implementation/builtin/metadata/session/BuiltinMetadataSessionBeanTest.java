@@ -46,7 +46,7 @@ import org.testng.annotations.Test;
  * @author Tomas Remes
  */
 @Test(groups = JAVAEE_FULL)
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class BuiltinMetadataSessionBeanTest extends AbstractTest {
 
     @Deployment

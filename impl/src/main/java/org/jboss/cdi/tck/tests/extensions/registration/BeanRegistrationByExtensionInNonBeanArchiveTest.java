@@ -45,7 +45,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-14808">GLASSFISH-14808</a> (resolved)
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 @Test(groups = INTEGRATION)
 public class BeanRegistrationByExtensionInNonBeanArchiveTest extends AbstractTest {
 

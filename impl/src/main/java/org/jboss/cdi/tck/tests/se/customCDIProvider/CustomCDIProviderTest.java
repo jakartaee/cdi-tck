@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 
 // TODO remove or reflect new assertions
 @Test(groups = SE)
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class CustomCDIProviderTest extends Arquillian {
 
     @Deployment

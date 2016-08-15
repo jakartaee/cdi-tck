@@ -42,7 +42,7 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class EnvInjectionTest extends AbstractTest {
 
     @Deployment

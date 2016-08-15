@@ -32,7 +32,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class SelectedAlternativeSessionBeanInjectionAvailability02Test extends AbstractTest {
 
     @Deployment

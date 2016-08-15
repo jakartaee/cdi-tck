@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class AddDeploymentProblemTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  *
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class RequestScopeEventAsyncTest extends AbstractTest {
 
     @Deployment(testable = false)

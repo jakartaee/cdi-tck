@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
 /**
  * Tests that an exception thrown by a ProcessAnnotatedType event observer is treated as a definition error
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class ProcessAnnotatedTypeEventThrowsExceptionTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)

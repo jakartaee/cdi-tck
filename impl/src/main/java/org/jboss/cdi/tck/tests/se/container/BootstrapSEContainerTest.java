@@ -43,7 +43,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(groups = SE)
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class BootstrapSEContainerTest extends Arquillian {
 
     private static final String IMPLICIT_SCAN_KEY = "javax.enterprise.inject.scan.implicit";

@@ -32,7 +32,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class FireSyncEventTest extends AbstractTest {
 
     @Inject

@@ -31,7 +31,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class SessionBeanInjectionTest extends AbstractTest {
 
     @Deployment

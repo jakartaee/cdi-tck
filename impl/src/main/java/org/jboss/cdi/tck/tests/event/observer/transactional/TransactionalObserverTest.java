@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @Test(groups = { INTEGRATION, PERSISTENCE })
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class TransactionalObserverTest extends AbstractTest {
 
     private static final SimpleLogger logger = new SimpleLogger(TransactionalObserverTest.class);

@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
 /**
  * Tests for built-in Instance.
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR1")
+@SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class BuiltinInstanceTest extends AbstractTest {
 
     @SuppressWarnings("serial")
