@@ -17,13 +17,13 @@
 package org.jboss.cdi.tck.tests.se.container;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
 import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
 import static org.jboss.cdi.tck.cdi.Sections.SE_CONTAINER;
 
 import java.util.Optional;
 import java.util.Set;
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.se.SeContainer;
 import javax.enterprise.inject.se.SeContainerInitializer;
 import javax.enterprise.inject.spi.Bean;
@@ -32,6 +32,9 @@ import javax.enterprise.inject.spi.BeanManager;
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
+import org.jboss.cdi.tck.tests.se.container.testPackage.Apple;
+import org.jboss.cdi.tck.tests.se.container.testPackage.Worm;
+import org.jboss.cdi.tck.tests.se.container.testPackage.nestedPackage.Pear;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -46,24 +49,21 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class BootstrapSEContainerTest extends Arquillian {
 
-    private static final String IMPLICIT_SCAN_KEY = "javax.enterprise.inject.scan.implicit";
-
     @Deployment
     public static Archive<?> deployment() {
         final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class)
-                .addClasses(Foo.class, Baz.class, Qux.class, BazObserver.class, QuxObserver.class, Shape.class, Square.class, Circle.class,
-                        BootstrapSEContainerTest.class)
+                .addPackage(BootstrapSEContainerTest.class.getPackage())
+                .addClasses(Apple.class, Worm.class, Pear.class)
                 .addAsResource(EmptyAsset.INSTANCE,
                         "META-INF/beans.xml");
-        final JavaArchive implicitArchive = ShrinkWrap.create(JavaArchive.class).addClass(Bar.class);
-        return ClassPath.builder().add(testArchive, implicitArchive).build();
+        return ClassPath.builder().add(testArchive).build();
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "a"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "b"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "c"),
-            @SpecAssertion(section = SE_BOOTSTRAP, id = "dn"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "do"),
             @SpecAssertion(section = SE_CONTAINER, id = "cb") })
     public void testContainerIsInitialized() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
@@ -87,7 +87,7 @@ public class BootstrapSEContainerTest extends Arquillian {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "c"), @SpecAssertion(section = SE_BOOTSTRAP, id = "da"),
-            @SpecAssertion(section = SE_BOOTSTRAP, id = "dn"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "do"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "e") })
     public void testInvocationOfInitializedMethodReturnsNewSeContainerInstance() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();//.initialize();
@@ -102,34 +102,24 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "b"), @SpecAssertion(section = SE_BOOTSTRAP, id = "di") })
-    public void testImplicitArchiveDiscovered() {
-        try (SeContainer seContainer = SeContainerInitializer.newInstance().addProperty(IMPLICIT_SCAN_KEY, true).initialize()) {
-            Bar bar = seContainer.select(Bar.class).get();
-            Assert.assertNotNull(bar);
-            bar.ping();
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "db"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dm"),
+            @SpecAssertion(section = SE_CONTAINER, id = "a") })
+    public void testSyntheticArchive() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery().addBeanClasses(Baz.class, Qux.class, BazObserver.class).initialize()) {
+            BeanManager beanManager = seContainer.getBeanManager();
+            beanManager.fireEvent(new Baz(), Any.Literal.INSTANCE);
+            beanManager.fireEvent(new Qux(), Any.Literal.INSTANCE);
+            Assert.assertNotNull(seContainer.select(Baz.class).get().ping());
+            Assert.assertTrue(BazObserver.isNotified);
+            // is not in synthetic archive
+            Assert.assertFalse(QuxObserver.isNotified);
         }
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "db"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dl"),
-            @SpecAssertion(section = SE_CONTAINER, id = "a") })
-    public void testSyntheticArchive() {
-        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
-        SeContainer seContainer = seContainerInitializer.disableDiscovery().addBeanClasses(Baz.class, Qux.class, BazObserver.class).initialize();
-        BeanManager beanManager = seContainer.getBeanManager();
-        beanManager.fireEvent(new Baz(), Any.Literal.INSTANCE);
-        beanManager.fireEvent(new Qux(), Any.Literal.INSTANCE);
-        Assert.assertNotNull(seContainer.select(Baz.class).get().ping());
-        Assert.assertTrue(BazObserver.isNotified);
-        // is not in synthetic archive
-        Assert.assertFalse(QuxObserver.isNotified);
-        seContainer.close();
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "db"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dg"),
-            @SpecAssertion(section = SE_BOOTSTRAP, id = "dh"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dl") })
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "db"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dh"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "di"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dm") })
     public void testAlternativesInSE() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
@@ -143,9 +133,78 @@ public class BootstrapSEContainerTest extends Arquillian {
             Optional<Bean<?>> alternativeFoo = foos.stream().filter(bean -> bean.isAlternative()).findAny();
             Assert.assertTrue(alternativeFoo.isPresent());
             Assert.assertEquals(alternativeFoo.get().getName(), "createFoo");
-
         }
+    }
 
+    @Test
+    @SpecAssertion(section = SE_BOOTSTRAP, id = "dc")
+    public void testAddPackageNotRecursively() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
+                .addPackages(Apple.class.getPackage())
+                .initialize()) {
+            Instance<Apple> appleInstance = seContainer.select(Apple.class);
+            Instance<Pear> pearInstance = seContainer.select(Pear.class);
+            Assert.assertFalse(appleInstance.isUnsatisfied());
+            Assert.assertTrue(pearInstance.isUnsatisfied());
+            Assert.assertNotNull(appleInstance.get().getWorm());
+        }
+    }
+
+    @Test
+    @SpecAssertion(section = SE_BOOTSTRAP, id = "dc")
+    public void testAddPackageRecursively() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
+                .addPackages(true, Apple.class.getPackage())
+                .initialize()) {
+            Instance<Apple> appleInstance = seContainer.select(Apple.class);
+            Instance<Pear> pearInstance = seContainer.select(Pear.class);
+            Assert.assertFalse(appleInstance.isUnsatisfied());
+            Assert.assertFalse(pearInstance.isUnsatisfied());
+            Assert.assertNotNull(appleInstance.get().getWorm());
+        }
+    }
+
+    @Test
+    @SpecAssertion(section = SE_BOOTSTRAP, id = "de")
+    public void testAddExtensionAsExtensionInstance() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        TestExtension testExtension = new TestExtension();
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
+                .addBeanClasses(Foo.class)
+                .addExtensions(testExtension)
+                .initialize()) {
+            TestExtension containerExtension = seContainer.select(TestExtension.class).get();
+            Assert.assertTrue(containerExtension.getBeforeBeanDiscoveryNotified().get());
+            Assert.assertTrue(containerExtension.getAfterTypeDiscoveryNotified().get());
+            Assert.assertTrue(containerExtension.getAfterBeanDiscoveryNotified().get());
+            Assert.assertTrue(containerExtension.getAfterDeploymentValidationNotified().get());
+            Assert.assertTrue(containerExtension.getProcessAnnotatedTypeNotified().get());
+            Assert.assertTrue(containerExtension.getProcessInjectionTargetNotified().get());
+            Assert.assertTrue(containerExtension.getProcessBeanAttributesNotified().get());
+            Assert.assertTrue(containerExtension.getProcessBeanNotified().get());
+        }
+    }
+
+    @Test
+    @SpecAssertion(section = SE_BOOTSTRAP, id = "de")
+    public void testAddExtensionAsClass() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
+                .addBeanClasses(Foo.class)
+                .addExtensions(TestExtension.class)
+                .initialize()) {
+            TestExtension containerExtension = seContainer.select(TestExtension.class).get();
+            Assert.assertTrue(containerExtension.getBeforeBeanDiscoveryNotified().get());
+            Assert.assertTrue(containerExtension.getAfterTypeDiscoveryNotified().get());
+            Assert.assertTrue(containerExtension.getAfterBeanDiscoveryNotified().get());
+            Assert.assertTrue(containerExtension.getAfterDeploymentValidationNotified().get());
+            Assert.assertTrue(containerExtension.getProcessAnnotatedTypeNotified().get());
+            Assert.assertTrue(containerExtension.getProcessInjectionTargetNotified().get());
+            Assert.assertTrue(containerExtension.getProcessBeanAttributesNotified().get());
+            Assert.assertTrue(containerExtension.getProcessBeanNotified().get());
+        }
     }
 
 }

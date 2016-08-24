@@ -14,12 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.se.container;
+package org.jboss.cdi.tck.tests.se.container.implicitBA;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
+import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
 
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 import javax.enterprise.inject.se.SeContainer;
 import javax.enterprise.inject.se.SeContainerInitializer;
 
@@ -30,6 +32,7 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -40,17 +43,17 @@ public class BootstrapSEWithSystemPropertyTest extends Arquillian {
 
     @Deployment
     public static Archive<?> deployment() {
-        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClass(BootstrapSEWithSystemPropertyTest.class);
-        final JavaArchive implicitArchive = ShrinkWrap.create(JavaArchive.class).addClass(Bar.class);
-        Properties properties = new Properties();
-        properties.put("javax.enterprise.inject.scan.implicit", "true");
-        return ClassPath.builder().add(testArchive, implicitArchive).setSystemProperties(properties).build();
+        final JavaArchive implicitArchive = ShrinkWrap.create(JavaArchive.class)
+                .addClasses(BootstrapSEWithSystemPropertyTest.class, Bar.class);
+        return ClassPath.builder().add(implicitArchive).build();
     }
 
     @Test
-    @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "a")
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "a"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dk") })
     public void testImplicitArchiveDiscovered() {
-        try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("javax.enterprise.inject.scan.implicit", true);
+        try (SeContainer seContainer = SeContainerInitializer.newInstance().setProperties(properties).initialize()) {
             Bar bar = seContainer.select(Bar.class).get();
             Assert.assertNotNull(bar);
             bar.ping();

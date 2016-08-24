@@ -14,18 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.se.container;
+package org.jboss.cdi.tck.tests.se.container.testPackage;
 
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
-
-public class FooProducer {
-
-    @AlternativeStereotype
-    @Produces
-    @Named
-    public Foo createFoo(){
-        return new Foo();
-    }
-
+public class Worm {
 }

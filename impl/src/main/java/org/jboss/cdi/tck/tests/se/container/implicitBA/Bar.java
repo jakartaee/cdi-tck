@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2016, Red Hat, Inc., and individual contributors
+ * Copyright 2015, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,18 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.se.container;
+package org.jboss.cdi.tck.tests.se.container.implicitBA;
 
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
+import javax.enterprise.context.Dependent;
 
-public class FooProducer {
-
-    @AlternativeStereotype
-    @Produces
-    @Named
-    public Foo createFoo(){
-        return new Foo();
-    }
-
+@Dependent
+public class Bar {
+    
+    public void ping(){}
 }
