@@ -207,4 +207,36 @@ public class BootstrapSEContainerTest extends Arquillian {
         }
     }
 
+    @Test
+    @SpecAssertion(section = SE_BOOTSTRAP, id = "df")
+    public void testAddInterceptor() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
+                .addBeanClasses(Bar.class, BarInterceptor1.class, BarInterceptor2.class)
+                .addInterceptors(BarInterceptor1.class, BarInterceptor2.class)
+                .initialize()) {
+            Bar bar = seContainer.select(Bar.class).get();
+            int result = bar.ping();
+            Assert.assertTrue(BarInterceptor1.notified);
+            Assert.assertTrue(BarInterceptor2.notified);
+            Assert.assertEquals(result, 3);
+
+        }
+    }
+
+    @Test
+    @SpecAssertion(section = SE_BOOTSTRAP, id = "dg")
+    public void testAddDecorator() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
+                .addBeanClasses(Corge.class, CorgeImpl.class, CorgeDecorator.class)
+                .addDecorators(CorgeDecorator.class)
+                .initialize()) {
+            Corge corge = seContainer.select(Corge.class).get();
+            int result = corge.ping();
+            Assert.assertTrue(CorgeDecorator.notified);
+            Assert.assertEquals(2, result);
+        }
+    }
+
 }
