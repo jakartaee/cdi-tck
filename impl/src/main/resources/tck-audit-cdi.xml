@@ -7379,6 +7379,11 @@
             </assertion>
         </group>
 
+        <assertion id="k">
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|. 
+                If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
+        </assertion>
+        
         <assertion id="e">
             <text>If any observer method of a |ProcessAnnotatedType| event throws an exception, the exception is treated as a definition error by the
                 container.
@@ -7423,6 +7428,11 @@
             <text>Any observer of this event is permitted to wrap and/or replace the |InjectionPoint|. The container must use the final value of this property,
                 after all observers have been called, whenever it performs injection upon the injection point.
             </text>
+        </assertion>
+        
+        <assertion id="g">
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|. 
+                If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
         </assertion>
 
         <assertion id="d">
@@ -7616,6 +7626,11 @@
             <text>If any observer method of a |ProcessBeanAttributes| event throws an exception, the exception is treated as a definition error by the
                 container.
             </text>
+        </assertion>
+
+        <assertion id="g">
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|. 
+                If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
         </assertion>
 
         <assertion id="e">
@@ -7904,6 +7919,11 @@
 
         <assertion id="dac">
             <text>|veto()| forces the container to ignore the ObserverMethod.</text>
+        </assertion>
+        
+        <assertion id="e">
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|. 
+                If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
         </assertion>
 
         <assertion id="db">
