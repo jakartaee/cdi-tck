@@ -6945,6 +6945,7 @@
         <assertion id="b">
             <text>Test |AnnotatedTypeConfigurator&lt;?&gt; addAnnotatedType(String id)| returns a new AnnotatedTypeConfigurator as defined in
                 AnnotatedTypeConfigurator interface to easily configure the AnnotatedType which will be added at the end of the observer invocation.
+                The returned AnnotatedTypeConfigurator is initialized with type and annotations of the provided class.
             </text>
         </assertion>
 
@@ -6991,6 +6992,7 @@
         <assertion id="ea">
             <text>Test |AnnotatedTypeConfigurator&lt;?&gt; addAnnotatedType(String id)| returns a new AnnotatedTypeConfigurator as defined in
                 AnnotatedTypeConfigurator interface to easily configure the AnnotatedType which will be added at the end of observer invocation.
+                The returned AnnotatedTypeConfigurator is initialized with type and annotations of the provided class.
             </text>
         </assertion>
 
