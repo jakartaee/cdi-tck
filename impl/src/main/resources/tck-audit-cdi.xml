@@ -8383,9 +8383,6 @@
                     objects themselves. Other version of the method allows recursive addition
                 </text>
             </assertion>
-            <assertion id="dd">
-                <text>|addAnnotatedTypes()| add the provided AnnotatedTypes to the synthetic bean archive.</text>
-            </assertion>
             <assertion id="de">
                 <text>|addExtensions()| add the provided extensions (class or instance) to the synthetic bean archive.</text>
             </assertion>
@@ -8406,9 +8403,6 @@
             </assertion>
             <assertion id="dk">
                 <text>|setProperties()| set the Map of configuration properties for the container. replace previous properties.</text>
-            </assertion>
-            <assertion id="dl">
-                <text>|addBeans()| add the provided beans to the set of discovered beans.</text>
             </assertion>
             <assertion id="dm">
                 <text>|disableDiscovery()| deactivate automatic type scanning and discovery. All bean archive will be ignored except the implicit bean
