@@ -16,16 +16,27 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Bar;
-import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Boss;
-import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Foo;
-
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.literal.InjectLiteral;
+import javax.enterprise.inject.spi.AfterBeanDiscovery;
+import javax.enterprise.inject.spi.AfterTypeDiscovery;
+import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.enterprise.inject.spi.Extension;
+import javax.enterprise.inject.spi.ProcessAnnotatedType;
+import javax.enterprise.inject.spi.ProcessProducer;
+
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Bar;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Baz;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Boss;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Foo;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Pro;
 
 /**
  * @author Martin Kouba
@@ -65,6 +76,14 @@ public class AfterTypeDiscoveryObserver implements Extension {
         Collections.reverse(event.getDecorators());
         // Remove first alternative - AlphaAlternative
         event.getAlternatives().remove(0);
+
+        // add Baz annotatedType via AnnotatedTypeConfigurator
+        event.addAnnotatedType(AfterTypeDiscoveryObserver.class.getName() + ":" + Baz.class.getName(), Baz.class)
+                .add(Pro.ProLiteral.INSTANCE)
+                .add(RequestScoped.Literal.INSTANCE)
+                .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst().get()
+                .add(InjectLiteral.INSTANCE)
+                .add(Pro.ProLiteral.INSTANCE);
     }
 
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {

@@ -26,6 +26,7 @@ import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedParameter;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.builder.AnnotatedConstructorConfigurator;
@@ -45,6 +46,8 @@ public class ProcessAnnotatedTypeObserver implements Extension {
     public static AtomicBoolean annotatedFieldEqual = new AtomicBoolean(false);
     public static AtomicBoolean annotatedConstructorEqual = new AtomicBoolean(false);
     public static AtomicBoolean annotatedParameterEqual = new AtomicBoolean(false);
+
+    private AnnotatedType<Cat> originalCatAT;
 
     void observesDogPAT(@Observes ProcessAnnotatedType<Dog> event) {
 
@@ -82,6 +85,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
     void observesCatPAT(@Observes ProcessAnnotatedType<Cat> event) {
 
         AnnotatedTypeConfigurator<Cat> annotatedTypeConfigurator = event.configureAnnotatedType();
+        originalCatAT = annotatedTypeConfigurator.getAnnotated();
 
         // remove @RequestScoped from Cat
         annotatedTypeConfigurator.remove(RequestScoped.class);
@@ -155,6 +159,10 @@ public class ProcessAnnotatedTypeObserver implements Extension {
 
     private <T> AnnotatedMethodConfigurator<? super T> getAMConfiguratorByName(AnnotatedTypeConfigurator<T> annotatedTypeConfigurator, String name) {
         return annotatedTypeConfigurator.filterMethods(am -> am.getJavaMember().getName().equals(name)).findFirst().get();
+    }
+
+    public AnnotatedType<Cat> getOriginalCatAT() {
+        return originalCatAT;
     }
 
 }

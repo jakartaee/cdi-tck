@@ -7360,7 +7360,12 @@
         <assertion id="bba">
             <text>|configureAnnotatedType()| returns an `AnnotatedTypeConfigurator` (as defined in AnnotatedTypeConfigurator interface) initialized with the
                 AnnotatedType processed by the event to easily configure the AnnotatedType which will be used to replace the original one at the end of observer
-                invocation. The method always return the same AnnotatedTypeConfigurator
+                invocation. The method always return the same AnnotatedTypeConfigurator.
+            </text>
+        </assertion>
+
+        <assertion id="bbb">
+            <text>|configureAnnotatedType()| always returns the same AnnotatedTypeConfigurator.
             </text>
         </assertion>
 

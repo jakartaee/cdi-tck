@@ -16,7 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.literal.InjectLiteral;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanManager;
@@ -24,9 +29,10 @@ import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.enterprise.util.Nonbinding;
-import java.util.HashSet;
-import java.util.Set;
+
+import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Baz;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Boss;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Pro;
 import org.jboss.cdi.tck.util.AddForwardingAnnotatedTypeAction;
 import org.jboss.cdi.tck.util.annotated.AnnotatedMethodWrapper;
 import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
@@ -105,6 +111,14 @@ public class BeforeBeanDiscoveryObserver implements Extension {
             }
 
         }.perform(event);
+
+        //add Baz annotatedType via AnnotatedTypeConfigurator
+        event.addAnnotatedType(BeforeBeanDiscoveryObserver.class.getName() + ":" + Baz.class.getName(), Baz.class)
+                .add(Pro.ProLiteral.INSTANCE)
+                .add(RequestScoped.Literal.INSTANCE)
+                .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst().get()
+                .add(InjectLiteral.INSTANCE)
+                .add(Pro.ProLiteral.INSTANCE);
 
     }
 

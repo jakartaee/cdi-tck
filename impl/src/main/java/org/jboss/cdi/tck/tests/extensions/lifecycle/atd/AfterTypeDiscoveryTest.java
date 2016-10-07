@@ -23,6 +23,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 
@@ -30,6 +32,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Bar;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Baz;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Boss;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Foo;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Pro;
@@ -52,7 +55,7 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AfterTypeDiscoveryTest.class)
                 .withExtension(AfterTypeDiscoveryObserver.class)
-                .withLibrary(Boss.class, Foo.class, Bar.class, Pro.class)
+                .withLibrary(Boss.class, Foo.class, Bar.class, Baz.class, Pro.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
                                 .clazz(CharlieInterceptor.class.getName()).up().getOrCreateDecorators()
@@ -135,6 +138,16 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         assertEquals(getBeans(Foo.class).size(), 0);
         assertEquals(getBeans(Foo.class, new AnnotationLiteral<Pro>() {
         }).size(), 1);
+    }
+
+    @SuppressWarnings("serial")
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ea") })
+    public void testAddAnnotatedTypeWithConfigurator() {
+        Bean<Baz> bazBean = getUniqueBean(Baz.class, Pro.ProLiteral.INSTANCE);
+        assertEquals(bazBean.getScope(), RequestScoped.class);
+        Baz baz = (Baz) getCurrentManager().getReference(bazBean, Baz.class, getCurrentManager().createCreationalContext(bazBean));
+        assertFalse(baz.getBarInstance().isUnsatisfied());
     }
 
     @Test

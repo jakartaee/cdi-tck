@@ -16,17 +16,31 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_CONSTRUCTOR_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_FIELD_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_METHOD_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_PARAMETER_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_TYPE_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.spi.AnnotatedConstructor;
+import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -37,13 +51,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_CONSTRUCTOR_CONFIGURATOR;
-import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_FIELD_CONFIGURATOR;
-import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_METHOD_CONFIGURATOR;
-import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_PARAMETER_CONFIGURATOR;
-import static org.jboss.cdi.tck.cdi.Sections.ANNOTATED_TYPE_CONFIGURATOR;
 
 /**
  * @author Tomas Remes
@@ -71,22 +79,22 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
         CreationalContext<Dog> creationalContext = getCurrentManager().createCreationalContext(dogBean);
         Dog dog = dogBean.create(creationalContext);
 
-        Assert.assertNotNull(dogBean);
-        Assert.assertEquals(dogBean.getScope(), RequestScoped.class);
+        assertNotNull(dogBean);
+        assertEquals(dogBean.getScope(), RequestScoped.class);
 
-        Assert.assertNotNull(dog.getFeed());
-        Assert.assertEquals(dog.getName(), DogDependenciesProducer.dogName);
+        assertNotNull(dog.getFeed());
+        assertEquals(dog.getName(), DogDependenciesProducer.dogName);
 
         List<InjectionPoint> dogsInjectionPoints = dogBean.getInjectionPoints().stream()
                 .filter(injectionPoint -> injectionPoint.getQualifiers().contains(new Dogs.DogsLiteral())).collect(
                         Collectors.toList());
-        Assert.assertEquals(dogsInjectionPoints.size(), 2);
+        assertEquals(dogsInjectionPoints.size(), 2);
         Optional<InjectionPoint> feedIpOptional = dogsInjectionPoints.stream().filter(injectionPoint -> injectionPoint.getType().equals(Feed.class))
                 .findFirst();
-        Assert.assertTrue(feedIpOptional.isPresent());
+        assertTrue(feedIpOptional.isPresent());
 
         dogBean.destroy(dog, creationalContext);
-        Assert.assertTrue(DogDependenciesProducer.disposerCalled.get());
+        assertTrue(DogDependenciesProducer.disposerCalled.get());
 
     }
 
@@ -101,15 +109,15 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
         CreationalContext<Cat> creationalContext = getCurrentManager().createCreationalContext(catBean);
         Cat cat = catBean.create(creationalContext);
 
-        Assert.assertNotNull(catBean);
-        Assert.assertEquals(catBean.getScope(), Dependent.class);
+        assertNotNull(catBean);
+        assertEquals(catBean.getScope(), Dependent.class);
 
-        Assert.assertNull(cat.getFeed());
+        assertNull(cat.getFeed());
         Set<Bean<Feed>> catFeedBeans = getBeans(Feed.class, Cats.CatsLiteral.INSTANCE);
-        Assert.assertEquals(catFeedBeans.size(), 0);
+        assertEquals(catFeedBeans.size(), 0);
 
         getCurrentManager().fireEvent(new Feed());
-        Assert.assertFalse(cat.isFeedObserved());
+        assertFalse(cat.isFeedObserved());
     }
 
     @Test
@@ -117,11 +125,11 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "a"), @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "a"),
             @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "a") })
     public void annotatedTypesAndMemebersEqual() {
-        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedTypesEqual.get());
-        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedMethodEqual.get());
-        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedFieldEqual.get());
-        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedConstructorEqual.get());
-        Assert.assertTrue(ProcessAnnotatedTypeObserver.annotatedParameterEqual.get());
+        assertTrue(ProcessAnnotatedTypeObserver.annotatedTypesEqual.get());
+        assertTrue(ProcessAnnotatedTypeObserver.annotatedMethodEqual.get());
+        assertTrue(ProcessAnnotatedTypeObserver.annotatedFieldEqual.get());
+        assertTrue(ProcessAnnotatedTypeObserver.annotatedConstructorEqual.get());
+        assertTrue(ProcessAnnotatedTypeObserver.annotatedParameterEqual.get());
     }
 
     @Test
@@ -135,12 +143,23 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
         AnimalShelter animalShelter = animalShelterBean.create(creationalContext);
         getCurrentManager().fireEvent(new Room(), Cats.CatsLiteral.INSTANCE, Any.Literal.INSTANCE);
 
-        Assert.assertNotNull(animalShelterBean);
-        Assert.assertEquals(animalShelterBean.getName(), null);
-        Assert.assertEquals(animalShelterBean.getScope(), Dependent.class);
-        Assert.assertFalse(animalShelter.isPostConstructCalled());
-        Assert.assertFalse(animalShelter.isRoomObserved());
-        Assert.assertNull(animalShelter.getCat());
+        assertNotNull(animalShelterBean);
+        assertEquals(animalShelterBean.getName(), null);
+        assertEquals(animalShelterBean.getScope(), Dependent.class);
+        assertFalse(animalShelter.isPostConstructCalled());
+        assertFalse(animalShelter.isRoomObserved());
+        assertNull(animalShelter.getCat());
+    }
+
+    @Test
+    @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "bba")
+    public void configuratorInitializedWithOriginalAT() {
+        AnnotatedType<Cat> catAT = getCurrentManager().getExtension(ProcessAnnotatedTypeObserver.class).getOriginalCatAT();
+        assertTrue(catAT.isAnnotationPresent(RequestScoped.class));
+        AnnotatedConstructor<Cat> annotatedConstructor = catAT.getConstructors().stream()
+                .filter(catAnnotatedConstructor -> catAnnotatedConstructor.getParameters().size() == 1).findFirst().get();
+        assertTrue(annotatedConstructor.getParameters().iterator().next().isAnnotationPresent(Cats.class));
+        assertTrue(annotatedConstructor.isAnnotationPresent(Inject.class));
     }
 
 }
