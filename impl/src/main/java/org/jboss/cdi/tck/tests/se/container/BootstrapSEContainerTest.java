@@ -62,7 +62,6 @@ public class BootstrapSEContainerTest extends Arquillian {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "a"),
-            @SpecAssertion(section = SE_BOOTSTRAP, id = "b"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "c"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "do"),
             @SpecAssertion(section = SE_CONTAINER, id = "cb") })

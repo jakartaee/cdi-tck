@@ -153,11 +153,13 @@ public class ProcessBeanTest extends AbstractTest {
                 Arrays.asList(ProcessBeanAttributes.class.getName(), ProcessProducerField.class.getName()));
     }
 
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
     public void testProcessBeanFiredForInterceptor() {
         assertNotNull(ProcessBeanObserver.getInterceptor());
     }
 
+    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
     public void testProcessBeanFiredForDecorator() {
         assertNotNull(ProcessBeanObserver.getDecorator());
