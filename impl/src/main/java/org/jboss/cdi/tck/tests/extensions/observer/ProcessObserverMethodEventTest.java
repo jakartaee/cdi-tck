@@ -18,7 +18,6 @@
 package org.jboss.cdi.tck.tests.extensions.observer;
 
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
-import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_CONFIGURATOR;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_OBSERVER_METHOD;
 
 import java.util.Set;
@@ -78,7 +77,7 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "dac") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "dad") })
     public void vetoEventD() {
         Set<ObserverMethod<? super EventD>> observerMethods = getCurrentManager().resolveObserverMethods(new EventD(), Any.Literal.INSTANCE);
         Assert.assertEquals(observerMethods.size(), 0);

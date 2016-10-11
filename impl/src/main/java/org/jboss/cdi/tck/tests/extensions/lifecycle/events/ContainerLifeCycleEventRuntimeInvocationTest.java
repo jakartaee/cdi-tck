@@ -140,6 +140,12 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
                 event.addStereotype(SimpleAnnotation.class);
             }
         }.run();
+        new Invocation() {
+            void execute() {
+                event.addAnnotatedType("test", String.class);
+            }
+        }.run();
+
 
     }
 
@@ -169,10 +175,15 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
                 event.getInterceptors();
             }
         }.run();
+        new Invocation() {
+            void execute() {
+                event.addAnnotatedType("test", String.class);
+            }
+        }.run();
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "h")})
+    @SpecAssertions({@SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "j")})
     public void testAfterBeanDiscoveryEventFails() {
 
         final AfterBeanDiscovery event = extension.getAfterBeanDiscovery();
@@ -206,7 +217,16 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
                 event.addDefinitionError(new NullPointerException());
             }
         }.run();
-
+        new Invocation() {
+            void execute() {
+                event.addBean();
+            }
+        }.run();
+        new Invocation() {
+            void execute() {
+                event.addObserverMethod();
+            }
+        }.run();
     }
 
     @Test
@@ -234,6 +254,18 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
         new Invocation() {
             void execute() {
                 event.setAnnotatedType(type);
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.configureAnnotatedType();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.veto();
             }
         }.run();
     }
@@ -264,6 +296,12 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
         new Invocation() {
             void execute() {
                 event.veto();
+            }
+        }.run();
+
+        new Invocation() {
+            void execute() {
+                event.configureAnnotatedType();
             }
         }.run();
     }
@@ -467,6 +505,11 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
                 event.veto();
             }
         }.run();
+        new Invocation() {
+            void execute() {
+                event.configureBeanAttributes();
+            }
+        }.run();
     }
 
     @Test
@@ -486,6 +529,11 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
         new Invocation() {
             void execute() {
                 event.getObserverMethod();
+            }
+        }.run();
+        new Invocation() {
+            void execute() {
+                event.configureObserverMethod();
             }
         }.run();
     }
@@ -540,6 +588,11 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
         new Invocation() {
             void execute() {
                 event.setInjectionPoint(injectionPoint);
+            }
+        }.run();
+        new Invocation() {
+            void execute() {
+                event.configureInjectionPoint();
             }
         }.run();
     }

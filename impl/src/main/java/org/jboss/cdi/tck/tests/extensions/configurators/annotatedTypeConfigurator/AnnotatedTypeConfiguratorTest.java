@@ -64,7 +64,8 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(AnnotatedTypeConfiguratorTest.class)
                 .withClasses(ProducesLiteral.class, DisposesLiteral.class)
-                .withExtension(ProcessAnnotatedTypeObserver.class).build();
+                .withExtensions(ProcessAnnotatedTypeObserver.class
+                ).build();
     }
 
     @Test

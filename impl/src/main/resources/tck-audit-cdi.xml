@@ -7108,6 +7108,12 @@
             <note>Right now only the registation process is tested</note>
         </assertion>
 
+        <assertion id="g">
+            <text>If any observer method of the |AfterBeanDiscovery| event throws an exception, the exception is treated as a definition error by the
+                container.
+            </text>
+        </assertion>
+
         <assertion id="h">
             <text>|getAnnotatedType()| returns the |AnnotatedType| discovered or added during container initialization. If the |id| passed is null, the
                 container should substitute the container generated id.
@@ -7125,15 +7131,10 @@
             <note>See d*, e* and f</note>
         </assertion>
 
-        <assertion id="g">
-            <text>If any observer method of the |AfterBeanDiscovery| event throws an exception, the exception is treated as a definition error by the
-                container.
-            </text>
-        </assertion>
-
-        <assertion id="h">
+        <assertion id="j">
             <text>If any AfterBeanDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
+
     </section>
 
     <section id="bean_configurator" title="BeanConfigurator interface" level="4">
@@ -7358,14 +7359,14 @@
         </assertion>
 
         <assertion id="bba">
-            <text>|configureAnnotatedType()| returns an `AnnotatedTypeConfigurator` (as defined in AnnotatedTypeConfigurator interface) initialized with the
-                AnnotatedType processed by the event to easily configure the AnnotatedType which will be used to replace the original one at the end of observer
-                invocation. The method always return the same AnnotatedTypeConfigurator.
+            <text>|configureAnnotatedType()| returns an |AnnotatedTypeConfigurator| (as defined in AnnotatedTypeConfigurator interface) initialized with the
+                |AnnotatedType| processed by the event to easily configure the AnnotatedType which will be used to replace the original one at the end of observer
+                invocation.
             </text>
         </assertion>
 
         <assertion id="bbb">
-            <text>|configureAnnotatedType()| always returns the same AnnotatedTypeConfigurator.
+            <text>|configureAnnotatedType()| method always returns the same |AnnotatedTypeConfigurator|.
             </text>
         </assertion>
 
@@ -7419,10 +7420,14 @@
         </assertion>
 
         <assertion id="bba">
-            <text>|configureInjectionPoint()| returns an `InjectionPointConfigurator` (as defined in InjectionPointConfigurator interface) initialized with the
-                `InjectionPoint` processed by the event to easily configure the InjectionPoint which will be used to replace the original one at the end of
-                observer invocation. The method always return the same InjectionPointConfigurator.
+            <text>|configureInjectionPoint()| returns an |InjectionPointConfigurator| (as defined in InjectionPointConfigurator interface) initialized with the
+                |InjectionPoint| processed by the event to easily configure the InjectionPoint which will be used to replace the original one at the end of
+                observer invocation.
             </text>
+        </assertion>
+
+        <assertion id="bbb">
+            <text>|configureInjectionPoint()| method always returns the same |InjectionPointConfigurator|.</text>
         </assertion>
 
         <assertion id="bc">
@@ -7449,7 +7454,7 @@
         </assertion>
 
         <assertion id="e">
-            <text>If any ProcessInjectionPoint method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
+            <text>If any |ProcessInjectionPoint| method is called outside of the observer method invocation, an |IllegalStateException| is thrown.</text>
         </assertion>
 
     </section>
@@ -7474,7 +7479,7 @@
         </group>
 
         <group>
-            <text>With `InjectionPointConfigurator` you can perform the following operation:</text>
+            <text>With |InjectionPointConfigurator| you can perform the following operation:</text>
             <assertion id="ba">
                 <text>Set the type of `InjectionPoint` with |type| method.</text>
             </assertion>
@@ -7600,10 +7605,14 @@
         </assertion>
 
         <assertion id="bca">
-            <text>|configureBeanAttributes()| returns a `BeanAttributesConfigurator` (as defined in BeanAttributesConfigurator interface) initialized with the
-                BeanAttributes processed by the event to easily configure the BeanAttributes which will be used to replace the original one at the end of
-                observer invocation. The method always return the same BeanAttributesConfigurator.
+            <text>|configureBeanAttributes()| returns a |BeanAttributesConfigurator| (as defined in BeanAttributesConfigurator interface) initialized with the
+                |BeanAttributes| processed by the event to easily configure the |BeanAttributes| which will be used to replace the original one at the end of
+                observer invocation.
             </text>
+        </assertion>
+
+        <assertion id="bcb">
+              <text>|configureBeanAttributes()| method always returns the same |BeanAttributesConfigurator|</text>
         </assertion>
 
         <assertion id="bd">
@@ -7918,13 +7927,17 @@
         </assertion>
 
         <assertion id="dab">
-            <text>|configureObserverMethod()| returns an `ObserverMethodConfigurator` (as defined in
-                ObserverMethodConfigurator interface) initialized with the ObserverMethod processed by the event to easily configure the ObserverMethod which
-                will be used to replace the original one at the end of observer invocation. The method always return the same `ObserverMethodConfigurator`.
+            <text>|configureObserverMethod()| returns an |ObserverMethodConfigurator| (as defined in
+                ObserverMethodConfigurator interface) initialized with the ObserverMethod processed by the event to easily configure the |ObserverMethod| which
+                will be used to replace the original one at the end of observer invocation.
             </text>
         </assertion>
 
         <assertion id="dac">
+            <text>|configureObserverMethod()| method always returns the same |ObserverMethodConfigurator|</text>
+        </assertion>
+
+        <assertion id="dad">
             <text>|veto()| forces the container to ignore the ObserverMethod.</text>
         </assertion>
         
@@ -7940,7 +7953,7 @@
         </assertion>
 
         <assertion id="dc">
-            <text>If any ProcessObserverMethod method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
+            <text>If any |ProcessObserverMethod| method is called outside of the observer method invocation, an |IllegalStateException| is thrown.</text>
         </assertion>
     </section>
 
