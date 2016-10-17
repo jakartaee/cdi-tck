@@ -7419,7 +7419,7 @@
             <text>|setInjectionPoint()| replaces the |InjectionPoint|.</text>
         </assertion>
 
-        <assertion id="bba">
+        <assertion id="bba" testable="false">
             <text>|configureInjectionPoint()| returns an |InjectionPointConfigurator| (as defined in InjectionPointConfigurator interface) initialized with the
                 |InjectionPoint| processed by the event to easily configure the InjectionPoint which will be used to replace the original one at the end of
                 observer invocation.
@@ -7604,7 +7604,7 @@
             <text>|setBeanAttributes()| replaces the |BeanAttributes|.</text>
         </assertion>
 
-        <assertion id="bca">
+        <assertion id="bca" testable="false">
             <text>|configureBeanAttributes()| returns a |BeanAttributesConfigurator| (as defined in BeanAttributesConfigurator interface) initialized with the
                 |BeanAttributes| processed by the event to easily configure the |BeanAttributes| which will be used to replace the original one at the end of
                 observer invocation.
@@ -7926,7 +7926,7 @@
             <text>|setObserverMethod()| replaces the ObserverMethod.</text>
         </assertion>
 
-        <assertion id="dab">
+        <assertion id="dab" testable="false">
             <text>|configureObserverMethod()| returns an |ObserverMethodConfigurator| (as defined in
                 ObserverMethodConfigurator interface) initialized with the ObserverMethod processed by the event to easily configure the |ObserverMethod| which
                 will be used to replace the original one at the end of observer invocation.
