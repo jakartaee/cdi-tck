@@ -19,11 +19,11 @@ package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.spi.Extension;
+import javax.enterprise.inject.spi.ObserverMethod;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
 import javax.interceptor.Interceptor;
 
@@ -31,6 +31,7 @@ public class ProcessObserverMethodObserver implements Extension {
 
     public static AtomicBoolean consumerNotified = new AtomicBoolean(false);
     public static Set<Annotation> pineAppleQualifiers;
+    private ObserverMethod<Kiwi> originalOM;
 
     void observesPearPOM(@Observes ProcessObserverMethod<Pear, FruitObserver> event) {
         // add @Ripe and @Delicious to the observed type
@@ -59,5 +60,14 @@ public class ProcessObserverMethodObserver implements Extension {
                     pineAppleQualifiers = eventMetadata.getQualifiers();
                     consumerNotified.set(true);
                 });
+    }
+
+    void observesKiwiPOM(@Observes ProcessObserverMethod<Kiwi, FruitObserver> event) {
+        originalOM = event.getObserverMethod();
+        event.configureObserverMethod().reception(Reception.IF_EXISTS);
+    }
+
+    public ObserverMethod<Kiwi> getOriginalOM() {
+        return originalOM;
     }
 }

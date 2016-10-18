@@ -20,21 +20,21 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.inject.spi.BeanAttributes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.builder.BeanAttributesConfigurator;
 
 /**
- *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 public class ProcessBeanAttributesObserver implements Extension {
 
     public static AnnotatedType<Axe> annotatedType;
+    private BeanAttributes<Mace> originalBA;
 
     public void observeSword(@Observes ProcessBeanAttributes<Sword> pba) {
         BeanAttributesConfigurator<Sword> configurator = pba.configureBeanAttributes();
@@ -65,7 +65,7 @@ public class ProcessBeanAttributesObserver implements Extension {
         configurator.types(getAxeTypes());
         configurator.scope(RequestScoped.class);
     }
-    
+
     public void observeHoe(@Observes ProcessBeanAttributes<Hoe> pba) {
         BeanAttributesConfigurator<Hoe> configurator = pba.configureBeanAttributes();
 
@@ -79,21 +79,26 @@ public class ProcessBeanAttributesObserver implements Extension {
         configurator.stereotypes(stereotypes);
         configurator.qualifiers(Reforged.ReforgedLiteral.INSTANCE);
     }
-    
+
+    public void observesMacePBA(@Observes ProcessBeanAttributes<Mace> event) {
+        originalBA = event.getBeanAttributes();
+        event.configureBeanAttributes().name("test");
+    }
+
     private Set<Annotation> getAxeQualifiers() {
         Set<Annotation> result = new HashSet<>();
         result.add(TwoHanded.TwoHandedLiteral.INSTANCE);
         result.add(Reforged.ReforgedLiteral.INSTANCE);
         return result;
     }
-    
+
     private Set<Class<? extends Annotation>> getStereotypes() {
         Set<Class<? extends Annotation>> result = new HashSet<>();
         result.add(Equipment.class);
         result.add(Melee.class);
         return result;
     }
-    
+
     private Set<Type> getAxeTypes() {
         Set<Type> result = new HashSet<>();
         result.add(Weapon.class);
@@ -101,4 +106,9 @@ public class ProcessBeanAttributesObserver implements Extension {
         result.add(Axe.class);
         return result;
     }
+
+    public BeanAttributes<Mace> getOriginalBA() {
+        return originalBA;
+    }
+
 }

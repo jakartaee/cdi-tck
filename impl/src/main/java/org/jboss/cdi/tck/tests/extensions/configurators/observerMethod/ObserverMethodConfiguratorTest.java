@@ -16,12 +16,20 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
+import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_OBSERVER_METHOD;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
@@ -32,19 +40,14 @@ import javax.interceptor.Interceptor;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.literals.ObservesLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
 /**
  * @author Tomas Remes
  */
@@ -63,53 +66,53 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bg"),
-            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bd"),
-            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bi") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bg"),
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bd"),
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bi") })
     public void addQualifiersAndSetPriorityAndChangeToAsync() throws InterruptedException {
         Set<ObserverMethod<? super Pear>> pearEventObservers = getCurrentManager()
                 .resolveObserverMethods(new Pear(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
-        Assert.assertEquals(pearEventObservers.size(), 1);
-        Assert.assertEquals(pearEventObservers.iterator().next().getPriority(), Interceptor.Priority.APPLICATION + 100);
-        Assert.assertEquals(pearEventObservers.iterator().next().isAsync(), true);
-        Assert.assertEquals(pearEventObservers.iterator().next().getObservedQualifiers(),
+        assertEquals(pearEventObservers.size(), 1);
+        assertEquals(pearEventObservers.iterator().next().getPriority(), Interceptor.Priority.APPLICATION + 100);
+        assertEquals(pearEventObservers.iterator().next().isAsync(), true);
+        assertEquals(pearEventObservers.iterator().next().getObservedQualifiers(),
                 Stream.of(Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).collect(
                         Collectors.toSet()));
 
         BlockingQueue<Pear> queue = new LinkedBlockingQueue<>();
         pearEvent.select(Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).fireAsync(new Pear()).thenAccept(queue::offer);
         Pear pear = queue.poll(2, TimeUnit.SECONDS);
-        Assert.assertNotNull(pear);
-        Assert.assertTrue(FruitObserver.pearObserverNotified.get());
+        assertNotNull(pear);
+        assertTrue(FruitObserver.pearObserverNotified.get());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "be"),
-            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bf") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "be"),
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bf") })
     public void setReceptionAndTransactionPhase() {
         Set<ObserverMethod<? super Orange>> orangeEventObservers = getCurrentManager()
                 .resolveObserverMethods(new Orange(), Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
-        Assert.assertEquals(orangeEventObservers.size(), 1);
-        Assert.assertEquals(orangeEventObservers.iterator().next().getReception(), Reception.IF_EXISTS);
-        Assert.assertEquals(orangeEventObservers.iterator().next().getTransactionPhase(), TransactionPhase.AFTER_SUCCESS);
-        Assert.assertEquals(orangeEventObservers.iterator().next().getObservedQualifiers(), Collections.singleton(Delicious.DeliciousLiteral.INSTANCE));
+        assertEquals(orangeEventObservers.size(), 1);
+        assertEquals(orangeEventObservers.iterator().next().getReception(), Reception.IF_EXISTS);
+        assertEquals(orangeEventObservers.iterator().next().getTransactionPhase(), TransactionPhase.AFTER_SUCCESS);
+        assertEquals(orangeEventObservers.iterator().next().getObservedQualifiers(), Collections.singleton(Delicious.DeliciousLiteral.INSTANCE));
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bc"),
-            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bh") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bc"),
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bh") })
     public void notifyAcceptingConsumerNotified() {
         getCurrentManager().fireEvent(new Pineapple(), Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
-        Assert.assertTrue(ProcessObserverMethodObserver.consumerNotified.get());
-        Assert.assertEquals(ProcessObserverMethodObserver.pineAppleQualifiers, Arrays.asList(Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE));
+        assertTrue(ProcessObserverMethodObserver.consumerNotified.get());
+        assertEquals(ProcessObserverMethodObserver.pineAppleQualifiers, Arrays.asList(Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE));
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "aa"),
-            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "ab"),
-            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "ac"),
-            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
-            @SpecAssertion(section = Sections.OBSERVER_METHOD_CONFIGURATOR, id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "aa"),
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ab"),
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ac"),
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bb") })
     public void addNewObserverMethodFromReadingExistingOne() {
         AfterBeanDiscoveryObserver.reset();
         getCurrentManager().fireEvent(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
@@ -119,14 +122,24 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
         Set<ObserverMethod<? super Banana>> bananaEventObservers = getCurrentManager()
                 .resolveObserverMethods(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
         // one in FruitObserver and second one added in AfterBeanDiscoveryObserver
-        Assert.assertEquals(peachEventObservers.size(), 2);
-        Assert.assertEquals(bananaEventObservers.size(), 2);
-        Assert.assertTrue(AfterBeanDiscoveryObserver.newBananaObserverNotified.get());
-        Assert.assertTrue(AfterBeanDiscoveryObserver.newMelonObserverNotified.get());
-        Assert.assertTrue(AfterBeanDiscoveryObserver.newPeachObserverNotified.get());
+        assertEquals(peachEventObservers.size(), 2);
+        assertEquals(bananaEventObservers.size(), 2);
+        assertTrue(AfterBeanDiscoveryObserver.newBananaObserverNotified.get());
+        assertTrue(AfterBeanDiscoveryObserver.newMelonObserverNotified.get());
+        assertTrue(AfterBeanDiscoveryObserver.newPeachObserverNotified.get());
 
-        Assert.assertTrue(FruitObserver.melonObserverNotified.get());
-        Assert.assertTrue(FruitObserver.peachObserverNotified.get());
-        Assert.assertTrue(FruitObserver.bananaObserverNotified.get());
+        assertTrue(FruitObserver.melonObserverNotified.get());
+        assertTrue(FruitObserver.peachObserverNotified.get());
+        assertTrue(FruitObserver.bananaObserverNotified.get());
+    }
+
+    @Test
+    @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "dab")
+    public void configuratorInitializedWithOriginalObserverMethod() {
+        ObserverMethod<? super Kiwi> configuredOne = getCurrentManager().resolveObserverMethods(new Kiwi(), Ripe.RipeLiteral.INSTANCE).iterator().next();
+        ObserverMethod<Kiwi> originalOne = getCurrentManager().getExtension(ProcessObserverMethodObserver.class).getOriginalOM();
+        assertEquals(configuredOne.getObservedType(), originalOne.getObservedType());
+        assertEquals(configuredOne.getObservedQualifiers(), originalOne.getObservedQualifiers());
+        assertEquals(configuredOne.getPriority(), originalOne.getPriority());
     }
 }

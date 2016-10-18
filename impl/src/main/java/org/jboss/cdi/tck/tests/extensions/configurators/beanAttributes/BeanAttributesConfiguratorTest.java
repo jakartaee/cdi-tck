@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.configurators.beanAttributes;
 
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ATTRIBUTES_CONFIGURATOR;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
@@ -24,10 +26,10 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
+import javax.enterprise.inject.spi.BeanAttributes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -41,7 +43,6 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Test
@@ -53,20 +54,20 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanAttributesConfiguratorTest.class)
-            .withExtension(ProcessBeanAttributesObserver.class)
-            .withBeansXml(
+                .withExtension(ProcessBeanAttributesObserver.class)
+                .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
                                 .clazz(Axe.class.getName()).up())
-            .build();
+                .build();
     }
 
     @Test
-    @SpecAssertions({ 
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "aa"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ba"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bd"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bf"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bh") })
+    @SpecAssertions({
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "aa"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ba"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bd"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bf"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bh") })
     public void testSingleAdditionMethods() {
         Bean<Sword> bean = getUniqueBean(Sword.class, TwoHanded.TwoHandedLiteral.INSTANCE);
 
@@ -77,42 +78,53 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ 
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ab"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bb"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bc"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "be"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bg"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bi") })
+    @SpecAssertions({
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ab"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bb"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bc"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "be"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bg"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bi") })
     public void testMultiAdditionMethods() {
         Bean<Axe> bean = getUniqueBean(Axe.class, TwoHanded.TwoHandedLiteral.INSTANCE, Reforged.ReforgedLiteral.INSTANCE);
-        
+
         Set<Annotation> qualifiers = bean.getQualifiers();
         Set<Class<? extends Annotation>> stereotypes = bean.getStereotypes();
         Set<Type> types = bean.getTypes();
-        
+
         assertTrue(bean.getScope().equals(RequestScoped.class));
         assertTrue(qualifiers.containsAll(new HashSet<>(Arrays.asList(Reforged.ReforgedLiteral.INSTANCE, TwoHanded.TwoHandedLiteral.INSTANCE))));
         assertTrue(stereotypes.containsAll(new HashSet<>(Arrays.asList(Melee.class, Equipment.class))));
         assertTrue(types.containsAll(new HashSet<>(Arrays.asList(Weapon.class, Tool.class))));
         assertTrue(bean.isAlternative());
     }
-    
+
     @Test
-    @SpecAssertions({ 
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ab"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ba"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "be"),
-        @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bg") })
+    @SpecAssertions({
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ab"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ba"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "be"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bg") })
     public void testReplacementMethods() {
         Bean<Hoe> bean = getUniqueBean(Hoe.class, Reforged.ReforgedLiteral.INSTANCE);
-        
+
         Set<Type> types = bean.getTypes();
         Set<Class<? extends Annotation>> stereotypes = bean.getStereotypes();
-        
+
         // list will contain the replaced Qualifier + Any
         assertTrue(bean.getQualifiers().equals(new HashSet<>(Arrays.asList(Reforged.ReforgedLiteral.INSTANCE, Any.Literal.INSTANCE))));
         assertTrue(types.containsAll(new HashSet<>(Arrays.asList(Tool.class, UsableItem.class))));
         assertTrue(stereotypes.equals(new HashSet<>(Arrays.asList(Equipment.class))));
+    }
+
+    @Test
+    @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bca")
+    public void configuratorInitializedWithOriginalBeanAttributes() {
+        Bean<Mace> configuredBean = getUniqueBean(Mace.class);
+        BeanAttributes<Mace> originalBA = getCurrentManager().getExtension(ProcessBeanAttributesObserver.class).getOriginalBA();
+        assertEquals(configuredBean.getTypes(), originalBA.getTypes());
+        assertEquals(configuredBean.getQualifiers(), originalBA.getQualifiers());
+        assertEquals(configuredBean.getStereotypes(), originalBA.getStereotypes());
+        assertEquals(configuredBean.getScope(), originalBA.getScope());
     }
 }

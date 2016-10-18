@@ -18,9 +18,12 @@ package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
+import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.ProcessInjectionPoint;
 
 public class ProcessInjectionPointObserver implements Extension {
+
+    private InjectionPoint engineIP;
 
     void observesAirPlanePIP(@Observes ProcessInjectionPoint<AirPlane, Tank> event) {
 
@@ -39,6 +42,15 @@ public class ProcessInjectionPointObserver implements Extension {
 
     void observesShipPIPEngine(@Observes ProcessInjectionPoint<Ship, Engine> event) {
         event.configureInjectionPoint().transientField(true);
+    }
+
+    void observesHelicopterPIPEngine(@Observes ProcessInjectionPoint<Helicopter, Engine> event) {
+        engineIP = event.getInjectionPoint();
+        event.configureInjectionPoint().transientField(true);
+    }
+
+    public InjectionPoint getEngineIP() {
+        return engineIP;
     }
 
 }

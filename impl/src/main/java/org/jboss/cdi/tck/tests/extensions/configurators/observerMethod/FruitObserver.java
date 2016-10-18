@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @ApplicationScoped
 public class FruitObserver {
@@ -49,5 +49,9 @@ public class FruitObserver {
 
     public void observesPeach(@Observes Peach peach) {
         peachObserverNotified.set(true);
+    }
+
+    public void observesKiwi(@Observes @Ripe Kiwi kiwi){
+
     }
 }
