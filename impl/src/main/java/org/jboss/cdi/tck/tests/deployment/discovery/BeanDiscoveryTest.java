@@ -30,6 +30,7 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Versions;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
@@ -67,7 +68,8 @@ public class BeanDiscoveryTest extends AbstractTest {
         JavaArchive charlie = ShrinkWrap
                 .create(JavaArchive.class)
                 .addClass(Charlie.class)
-                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml");
+                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(
+                        Versions.v1_1).exportAsString()), "beans.xml");
         // Bean defining annotation and no beans.xml
         JavaArchive delta = ShrinkWrap.create(JavaArchive.class).addClasses(Delta.class, Golf.class, India.class, Kilo.class,
                 Mike.class, Interceptor1.class, Decorator1.class);
@@ -77,7 +79,8 @@ public class BeanDiscoveryTest extends AbstractTest {
                 .addClasses(Echo.class, EchoNotABean.class, Hotel.class, Juliet.class, JulietNotABean.class, Lima.class,
                         November.class, Interceptor2.class, Decorator2.class)
                 .addAsManifestResource(
-                        new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ANNOTATED.toString()).exportAsString()), "beans.xml");
+                        new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ANNOTATED.toString()).exportAsString()),
+                        "beans.xml");
         // Bean defining annotation and 1.1 version beans.xml with bean-discovery-mode of none
         JavaArchive foxtrot = ShrinkWrap
                 .create(JavaArchive.class)
