@@ -41,12 +41,14 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Versions;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -105,7 +107,8 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
                 .addAsServiceProvider(Extension.class, ContainerEventsObserver.class)
                 .addAsManifestResource(
                         new StringAsset(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
-                                .clazz(SecurityInterceptor.class.getName()).up().exportAsString()), "beans.xml")
+                                .clazz(SecurityInterceptor.class.getName()).up().beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(Versions.v1_1)
+                                .exportAsString()), "beans.xml")
                 // Make A visible in a portable way
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)

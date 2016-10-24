@@ -25,12 +25,14 @@ import static org.testng.Assert.assertNotNull;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
+import org.jboss.cdi.tck.util.Versions;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.ResourceAdapterArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.connector16.ConnectorDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -57,7 +59,9 @@ public class ResourceAdapterArchiveTest extends AbstractTest {
         rar.addAsLibrary(ShrinkWrap
                 .create(JavaArchive.class)
                 .addClasses(Translator.class, TestResourceAdapter.class)
-                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml"));
+                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class)
+                        .beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(Versions.v1_1)
+                        .exportAsString()), "beans.xml"));
         rar.addAsManifestResource(
                 new StringAsset(Descriptors.create(ConnectorDescriptor.class).version("1.6").displayName("Test RA")
                         .vendorName("Red Hat Middleware LLC").eisType("Test RA").resourceadapterVersion("0.1")

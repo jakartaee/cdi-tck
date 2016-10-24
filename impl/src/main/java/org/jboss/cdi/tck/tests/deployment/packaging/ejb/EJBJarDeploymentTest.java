@@ -29,11 +29,13 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Versions;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -51,7 +53,8 @@ public class EJBJarDeploymentTest extends AbstractTest {
                 .create(JavaArchive.class, "test-ejb.jar")
                 .addClasses(FooRemote.class, FooBean.class, Bar.class, ProcessBeanObserver.class)
                 .addAsServiceProvider(Extension.class, ProcessBeanObserver.class)
-                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml");
+                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(
+                        Versions.v1_1).exportAsString()), "beans.xml");
     }
 
     @Deployment(name = "TEST", order = 1)

@@ -44,6 +44,7 @@ import org.jboss.cdi.tck.impl.ConfigurationImpl;
 import org.jboss.cdi.tck.impl.PropertiesBasedConfigurationBuilder;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.util.Timer;
+import org.jboss.cdi.tck.util.Versions;
 import org.jboss.cdi.tck.util.annotated.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePath;
@@ -62,6 +63,7 @@ import org.jboss.shrinkwrap.api.container.ResourceContainer;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.persistence20.PersistenceDescriptor;
@@ -986,11 +988,15 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         Asset asset = null;
 
         if (beansDescriptor != null) {
+            if (beansDescriptor.getBeanDiscoveryMode() == null || beansDescriptor.getBeanDiscoveryMode().isEmpty()) {
+                beansDescriptor.beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(Versions.v1_1);
+            }
             asset = new StringAsset(beansDescriptor.exportAsString());
         } else if (beansXml != null) {
             asset = new ClassLoaderAsset(beansXml.getSource());
         } else {
-            asset = new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString());
+            asset = new StringAsset(
+                    Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(Versions.v1_1).exportAsString());
         }
 
         if (this.isDebugMode) {
@@ -1119,6 +1125,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 this.serviceProviders.add(serviceProvider);
             }
             this.beansDescriptor = beansDescriptor;
+            if (beansDescriptor.getBeanDiscoveryMode() == null || beansDescriptor.getBeanDiscoveryMode().isEmpty()) {
+                beansDescriptor.beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(Versions.v1_1);
+            }
             this.libraryClasses = Arrays.asList(classes);
             this.name = name;
         }
