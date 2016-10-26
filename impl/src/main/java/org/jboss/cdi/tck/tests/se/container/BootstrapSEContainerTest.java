@@ -240,4 +240,14 @@ public class BootstrapSEContainerTest extends Arquillian {
         }
     }
 
+    @Test(expectedExceptions = IllegalStateException.class)
+    @SpecAssertion(section = SE_CONTAINER, id = "cc")
+    public void seContainerThrowsISAWhenAccessingBMwithShutdownedContainer(){
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        SeContainer seContainer = seContainerInitializer.initialize();
+        seContainer.close();
+        Assert.assertFalse(seContainer.isRunning());
+        BeanManager bm = seContainer.getBeanManager();
+    }
+
 }

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_CONFIGURATOR;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_OBSERVER_METHOD;
 import static org.testng.Assert.assertEquals;
@@ -112,7 +113,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ab"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ac"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
-            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bb") })
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bb"),
+            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ec")})
     public void addNewObserverMethodFromReadingExistingOne() {
         AfterBeanDiscoveryObserver.reset();
         getCurrentManager().fireEvent(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
