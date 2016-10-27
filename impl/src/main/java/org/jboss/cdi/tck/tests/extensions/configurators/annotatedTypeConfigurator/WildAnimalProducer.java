@@ -16,53 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 
-@RequestScoped
-public class Cat {
-
-    private boolean feedObserved = false;
-    private String name;
-
-    @Inject
-    Feed feed;
-
-    public Cat() {
-
-    }
-
-    public Cat(String name) {
-        this.name = name;
-    }
-
-    @Inject
-    public Cat(@Cats Feed feed) {
-
-    }
-
-    public Feed getFeed() {
-        return feed;
-    }
-
-    public boolean isFeedObserved() {
-        return feedObserved;
-    }
+public class WildAnimalProducer {
 
     @Produces
-    @Cats
-    public Feed produceCatFeed() {
-        return new Feed();
-    }
+    @Wild
+    Dog wildDog = new Dog("wild dog");
 
-    public void observesCatsFeed(@Observes Feed feed) {
-        feedObserved = true;
-    }
-
-    public String getName() {
-        return name;
-    }
-
+    @Produces
+    @Wild
+    Cat wildCat = new Cat("wild cat");
 }

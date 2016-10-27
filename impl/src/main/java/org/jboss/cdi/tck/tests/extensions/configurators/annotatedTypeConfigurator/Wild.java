@@ -16,53 +16,20 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import javax.enterprise.util.AnnotationLiteral;
+import javax.inject.Qualifier;
 
-@RequestScoped
-public class Cat {
+@Qualifier
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
+public @interface Wild {
 
-    private boolean feedObserved = false;
-    private String name;
+    public static class WildLiteral extends AnnotationLiteral<Wild> implements Wild {
 
-    @Inject
-    Feed feed;
-
-    public Cat() {
-
+        public static WildLiteral INSTANCE = new WildLiteral();
     }
-
-    public Cat(String name) {
-        this.name = name;
-    }
-
-    @Inject
-    public Cat(@Cats Feed feed) {
-
-    }
-
-    public Feed getFeed() {
-        return feed;
-    }
-
-    public boolean isFeedObserved() {
-        return feedObserved;
-    }
-
-    @Produces
-    @Cats
-    public Feed produceCatFeed() {
-        return new Feed();
-    }
-
-    public void observesCatsFeed(@Observes Feed feed) {
-        feedObserved = true;
-    }
-
-    public String getName() {
-        return name;
-    }
-
 }

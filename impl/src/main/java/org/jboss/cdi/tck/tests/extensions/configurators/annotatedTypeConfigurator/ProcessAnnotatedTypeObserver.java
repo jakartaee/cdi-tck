@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
@@ -127,6 +126,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         AnnotatedConstructorConfigurator<AnimalShelter> constructorConfigurator = annotatedTypeConfigurator
                 .filterConstructors(ac -> ac.isAnnotationPresent(Inject.class))
                 .findFirst().get();
+
         AnnotatedConstructor<AnimalShelter> annotatedConstructor = constructorConfigurator.getAnnotated();
         annotatedConstructorEqual.set(event.getAnnotatedType().getConstructors().stream().anyMatch(aM -> {
             return aM.equals(annotatedConstructor);
@@ -142,6 +142,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         AnnotatedFieldConfigurator<? super AnimalShelter> fieldConfigurator = annotatedTypeConfigurator.filterFields(annotatedField -> {
             return annotatedField.getJavaMember().getName().equals("cat");
         }).findFirst().get();
+
         AnnotatedField<? super AnimalShelter> annotatedField = fieldConfigurator.getAnnotated();
         annotatedFieldEqual.set(event.getAnnotatedType().getFields().stream().anyMatch(aF -> {
             return aF.equals(annotatedField);
@@ -155,6 +156,15 @@ public class ProcessAnnotatedTypeObserver implements Extension {
             annotatedMethodConfigurator.params().stream().forEach(AnnotatedParameterConfigurator::removeAll);
         });
         annotatedTypeConfigurator.fields().stream().forEach(AnnotatedFieldConfigurator::removeAll);
+    }
+
+    void observesCountrysidePAT(@Observes ProcessAnnotatedType<Countryside> event) {
+
+        AnnotatedConstructorConfigurator<Countryside> annotatedConstructorConfigurator = event.configureAnnotatedType()
+                .filterConstructors(constructor -> constructor.isAnnotationPresent(Inject.class)).findFirst().get();
+
+        //add qualifier to each constructor param
+        annotatedConstructorConfigurator.params().forEach(annotatedParam -> annotatedParam.add(Wild.WildLiteral.INSTANCE));
     }
 
     private <T> AnnotatedMethodConfigurator<? super T> getAMConfiguratorByName(AnnotatedTypeConfigurator<T> annotatedTypeConfigurator, String name) {

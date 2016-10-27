@@ -36,6 +36,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Bean;
@@ -51,6 +52,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -59,6 +61,9 @@ import org.testng.annotations.Test;
 @Test
 @SpecVersion(spec = "cdi", version = "2.0-EDR2")
 public class AnnotatedTypeConfiguratorTest extends AbstractTest {
+
+    @Inject
+    Instance<Countryside> countrysideInstance;
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -140,6 +145,7 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "d") })
     public void annotationsRemovedFromAnimalShelter() {
         Bean<AnimalShelter> animalShelterBean = getUniqueBean(AnimalShelter.class);
+
         CreationalContext<AnimalShelter> creationalContext = getCurrentManager().createCreationalContext(animalShelterBean);
         AnimalShelter animalShelter = animalShelterBean.create(creationalContext);
         getCurrentManager().fireEvent(new Room(), Cats.CatsLiteral.INSTANCE, Any.Literal.INSTANCE);
@@ -161,6 +167,16 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
                 .filter(catAnnotatedConstructor -> catAnnotatedConstructor.getParameters().size() == 1).findFirst().get();
         assertTrue(annotatedConstructor.getParameters().iterator().next().isAnnotationPresent(Cats.class));
         assertTrue(annotatedConstructor.isAnnotationPresent(Inject.class));
+    }
+
+    @Test
+    @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "e")
+    public void configureAndTestConstructorAnnotatedParams(){
+        Assert.assertFalse(countrysideInstance.isUnsatisfied());
+        Countryside countryside = countrysideInstance.get();
+        Assert.assertEquals(countryside.getWildDog().getName(), "wild dog");
+        Assert.assertEquals(countryside.getWildCat().getName(), "wild cat");
+
     }
 
 }
