@@ -3181,18 +3181,35 @@
             </text>
         </assertion>
 
-        <assertion id="ja">
+        <assertion id="ia">
             <text>The |iterator()| method must identify the set of beans that have the required type and required qualifiers and are eligible for injection into
                 the class into which the parent |Instance| was injected, according to the rules of typesafe resolution, as defined in Section 5.2, "Typesafe
                 resolution".
             </text>
         </assertion>
 
-        <assertion id="ka">
+        <assertion id="ib">
             <text>The |iterator()| method must return an |Iterator|, that iterates over the set of contextual references for the resulting beans and required
                 type, as defined in Section 6.5.3, "Contextual reference for a bean".
             </text>
         </assertion>
+
+        <assertion id="ja">
+            <text>
+                The |stream()| method must identify the set of beans that have the required type and required qualifiers and are eligible for
+                injection into the class into which the parent |Instance| was injected, according to the rules of
+                typesafe resolution, as defined in Section 5.2.1, "Performing typesafe resolution", resolving ambiguities according
+                to Section 5.2.2 "Unsatisfied and ambiguous dependencies".
+            </text>
+        </assertion>
+
+        <assertion id="jb">
+            <text>
+                The |stream()| method must return a |Stream|, that can stream over the set of contextual references for the resulting beans and
+                required type, as defined in Section 6.5.3, "Contextual reference for a bean".
+            </text>
+        </assertion>
+
 
         <assertion id="l">
             <text>The method |isUnsatisfied()| returns |true| if there is no bean that has the required type and qualifiers and is eligible for injection into
@@ -9649,6 +9666,15 @@
         <assertion id="a">
             <text>When the container destroys an instance of a bean, the container destroys all dependent objects, as defined in Section 6.4.2, "Destruction of
                 objects with scope @Dependent", after the |@PreDestroy| callback completes.
+            </text>
+        </assertion>
+    </section>
+
+    <section id="bean_metadata_ee" title="Bean metadata in Java EE" level="3">
+        <assertion id="a">
+            <text>Interceptor and decorator instances associated with Java EE components that are not considered beans
+                (as defined by this specification) cannot obtain information about the beans they intercept and
+                decorate (as defined in Bean metadata) and thus null is injected into relevant injection points.
             </text>
         </assertion>
     </section>

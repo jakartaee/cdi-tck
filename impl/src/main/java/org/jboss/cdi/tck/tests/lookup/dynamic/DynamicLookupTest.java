@@ -129,7 +129,7 @@ public class DynamicLookupTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "aa"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ba"),
-            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ka"),
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ia"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ib"),
             @SpecAssertion(section = ANNOTATIONLITERAL_TYPELITERAL, id = "a") })
     public void testIteratorMethod() {
         // initial setup of contextual instances
@@ -168,7 +168,7 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ka"),
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ia"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ib"),
             @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m") })
     public void testAlternatives() {
         Instance<Common> instance = getContextualReference(ObtainsInstanceBean.class).getCommon();
