@@ -7478,24 +7478,6 @@
 
     <section id="injection_point_configurator" title="InjectionPointConfigurator interface" level="4">
         <group>
-            <text>`InjectionPointConfigurator` must be initialized from a field, a method or constructor parameter or an existing `InjectionPoint` with one of
-                its `read()` methods.
-            </text>
-            <assertion id="aa">
-                <text>Test initialization of `InjectionPointConfigurator` from a field.</text>
-            </assertion>
-            <assertion id="ab">
-                <text>Test initialization of `InjectionPointConfigurator` from a method parameter.</text>
-            </assertion>
-            <assertion id="ac">
-                <text>Test initialization of `InjectionPointConfigurator` from a constructor parameter.</text>
-            </assertion>
-            <assertion id="ad">
-                <text>Test initialization of `InjectionPointConfigurator` from an existing `InjectionPoint`.</text>
-            </assertion>
-        </group>
-
-        <group>
             <text>With |InjectionPointConfigurator| you can perform the following operation:</text>
             <assertion id="ba">
                 <text>Set the type of `InjectionPoint` with |type| method.</text>
@@ -8507,6 +8489,10 @@
                 </text>
             </assertion>
         </group>
+
+        <assertion id="d">
+            <text>If any |Instance.select()| method is called and the container was already shutdown, the |IllegalStateException| is thrown.</text>
+        </assertion>
     </section>
 
     <section id="contexts_se" title="Scopes and contexts in Java SE" level="1">
