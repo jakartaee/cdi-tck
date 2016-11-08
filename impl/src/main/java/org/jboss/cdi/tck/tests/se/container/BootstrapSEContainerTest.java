@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.literal.InjectLiteral;
 import javax.enterprise.inject.se.SeContainer;
 import javax.enterprise.inject.se.SeContainerInitializer;
 import javax.enterprise.inject.spi.Bean;
@@ -79,9 +80,7 @@ public class BootstrapSEContainerTest extends Arquillian {
     @Test(expectedExceptions = IllegalStateException.class)
     @SpecAssertions(@SpecAssertion(section = SE_CONTAINER, id = "ca"))
     public void testContainerCloseMethodOnNotInitializedContainer() {
-        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
-        SeContainer seContainer = seContainerInitializer.initialize();
-        seContainer.close();
+        SeContainer seContainer = initializeAndShutdownContainer();
         seContainer.close();
     }
 
@@ -242,12 +241,33 @@ public class BootstrapSEContainerTest extends Arquillian {
 
     @Test(expectedExceptions = IllegalStateException.class)
     @SpecAssertion(section = SE_CONTAINER, id = "cc")
-    public void seContainerThrowsISAWhenAccessingBmAtShutdownContainer(){
+    public void seContainerThrowsISEWhenAccessingBmAtShutdownContainer() {
+        SeContainer seContainer = initializeAndShutdownContainer();
+        BeanManager bm = seContainer.getBeanManager();
+    }
+
+    @Test(expectedExceptions = IllegalStateException.class)
+    @SpecAssertion(section = SE_CONTAINER, id = "d")
+    public void instanceSelectClassThrowsISEWhenAccessedAfterShutdown() {
+        SeContainer seContainer = initializeAndShutdownContainer();
+        seContainer.select(Corge.class);
+    }
+
+    @Test(expectedExceptions = IllegalStateException.class)
+    @SpecAssertion(section = SE_CONTAINER, id = "d")
+    public void instanceSelectAnnotationThrowsISEWhenAccessedAfterShutdown() {
+        SeContainer seContainer = initializeAndShutdownContainer();
+        seContainer.select(InjectLiteral.INSTANCE);
+    }
+
+    private SeContainer initializeAndShutdownContainer(){
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         SeContainer seContainer = seContainerInitializer.initialize();
         seContainer.close();
         Assert.assertFalse(seContainer.isRunning());
-        BeanManager bm = seContainer.getBeanManager();
+        return  seContainer;
     }
+
+
 
 }
