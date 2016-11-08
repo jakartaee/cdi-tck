@@ -3678,6 +3678,67 @@
         </assertion>
     </section>
 
+    <section id="activating_builtin_contexts" title="Activating Built In Contexts" level="3">
+        <assertion id="a" testable="false">
+            <text>
+                Certain built in contexts support the ability to be activated and deactivated. This allows developers to
+                control built-in contexts in ways that they could also manage custom built contexts.
+                When activating and deactivating built in contexts, it is important to realize that they can only be
+                activated if not already active within a given thread.
+            </text>
+        </assertion>
+    </section>
+
+    <section id="activating_request_context" title="6.5.2.1. Activating a Request Context" level="4">
+        <assertion id="a">
+            <text>Request contexts can be managed either programmatically or via interceptor.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text> To programmatically manage request contexts, the container provides a built in bean that is @Dependent
+                scoped and of type RequestContextController that allows you to activate and deactivate a request
+                context on the current thread. The object should be considered stateful, invoking the same instance on
+                different threads may not work properly, non-portable behavior may occur.
+            </text>
+        </assertion>
+
+        <assertion id="c">
+            <text> When the activate() method is called, if the request context is not already active on the current thread
+                then it will be activated and the method returns true. Otherwise, the method returns false. </text>
+        </assertion>
+
+        <group>
+            <text>When the deactivate() method is called, </text>
+            <assertion id="da">
+                <text>if this controller started the request context then the request context is stopped</text>
+            </assertion>
+            <assertion id="db">
+                <text>The method does nothing if this controller did not activate the context and the context is active.</text>
+            </assertion>
+            <assertion id="dc">
+                <text>This method throws a ContextNotActiveException if there is no request context active.</text>
+            </assertion>
+        </group>
+
+        <assertion id="e">
+            <text> If within the same thread the activate() and deactivate() methods are invoked repeatedly, the
+                instances between the activations are not the same instances, each request context should be assumed
+                to be new. </text>
+        </assertion>
+
+        <assertion id="f">
+            <text> To automatically start a request context via interceptor binding, the container provides an interceptor
+                @ActivateRequestContext which will activate a request context if not already active prior to the
+                method’s invocation, and deactivate it upon method completion, with the same rules as in
+                RequestContextController. </text>
+        </assertion>
+
+        <assertion id="g">
+            <text>When the requestContext is managed via interceptor binding, the interceptor is automatically registered with a priority of PLATFORM_BEFORE + 100</text>
+        </assertion>
+
+    </section>
+
     <section id="contextual_instance" title="Contextual instance of a bean" level="3">
         <assertion id="a">
             <text>From time to time, the container must obtain a contextual instance of a bean. The container must obtain the active context object for the bean
