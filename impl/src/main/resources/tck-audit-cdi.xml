@@ -4166,6 +4166,83 @@
 
     </section>
 
+    <section id="builtin_contexts" title="Context management for built-in scopes" level="2">
+        <assertion id="a">
+            <text> The container must provide an implementation of the |Context| interface for each of the built-in scopes
+                defined in Built-in scope types. These implementations depend on the platform the container is
+                running.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text> A portable extension may define a custom context object for any or all of the built-in scopes. For
+                example, a remoting framework might provide a request context object for the built-in request scope. </text>
+        </assertion>
+
+        <assertion id="c">
+            <text> The context associated with a built-in normal scope propagates across local, synchronous Java method
+                calls. The context does not propagate across remote method invocations or to asynchronous processes. </text>
+        </assertion>
+
+        <group>
+            <text>Portable extensions are encouraged to synchronously fire (where X is the scope type associated with the context.):</text>
+            <assertion id="ea">
+                <text>an event with qualifier @Initialized(X.class) when a custom context is initialized, i.e. ready for
+                    use,</text>
+            </assertion>
+            <assertion id="eb">
+                <text>an event with qualifier @BeforeDestroyed(X.class) when a custom context is about to be destroyed,
+                    i.e. before the actual destruction,</text>
+            </assertion>
+            <assertion id="ec">
+                <text>an event with qualifier @Destroyed(X.class) when a custom context is destroyed, i.e. after the actual
+                    destruction,</text>
+            </assertion>
+        </group>
+
+    </section>
+
+    <section id="request_context" title="Request context lifecycle" level="3">
+        <assertion id="a">
+            <text>An event with qualifier |@Initialized(RequestScoped.class)| is synchronously fired when the request
+                context is initialized.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>An event with qualifier @BeforeDestroyed(RequestScoped.class) is synchronously
+                fired when the request context is about to be destroyed, i.e. before the actual destruction.</text>
+        </assertion>
+
+        <assertion id="c">
+            <text>An event with qualifier @Destroyed(RequestScoped.class) is synchronously fired when the request context is
+                destroyed, i.e. after the actual destruction.</text>
+        </assertion>
+
+    </section>
+
+    <section id="session_context" title="Session context lifecycle" level="3">
+    </section>
+
+    <section id="application_context" title="Application context lifecycle" level="3">
+        <assertion id="a">
+            <text>An event with qualifier @Initialized(ApplicationScoped.class) is synchronously fired when the
+                application context is initialized.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>An event with qualifier @BeforeDestroyed(ApplicationScoped.class) is
+                synchronously fired when the application context is about to be destroyed, i.e. before the actual
+                destruction.</text>
+        </assertion>
+
+        <assertion id="c">
+            <text>An event with qualifier @Destroyed(ApplicationScoped.class) is synchronously fired when
+                the application context is destroyed, i.e. after the actual destruction.</text>
+        </assertion>
+    </section>
+
+    <section id="conversation_context" title="Conversation context lifecycle" level="3">
+    </section>
+
 
     <section id="conversation" title="The Conversation interface" level="3">
         <group>
@@ -9902,7 +9979,6 @@
                 custom context object for any or all of the built-in scopes.
             </text>
         </group>
-
     </section>
 
     <section id="request_context_ee" title="Request context lifecycle in Java EE" level="3">
