@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.tests.context.request.event;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_CONTEXTS;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
 import static org.testng.Assert.assertTrue;
 
@@ -56,7 +58,10 @@ public class RequestScopeEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ja") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ja"), @SpecAssertion(section = REQUEST_CONTEXT, id = "a")
+            , @SpecAssertion(section = REQUEST_CONTEXT, id = "c"),
+            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ea"),
+            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ec") })
     public void test() throws Exception {
         WebClient client = new WebClient();
 

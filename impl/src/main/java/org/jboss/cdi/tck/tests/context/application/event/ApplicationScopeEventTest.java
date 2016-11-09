@@ -17,7 +17,9 @@
 package org.jboss.cdi.tck.tests.context.application.event;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_CONTEXTS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
 import static org.testng.Assert.assertTrue;
 
@@ -36,7 +38,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -53,7 +55,11 @@ public class ApplicationScopeEventTest extends AbstractTest {
     private Observer1 observer;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga"), @SpecAssertion(section = OBSERVES, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga"), @SpecAssertion(section = OBSERVES, id = "a"),
+            @SpecAssertion(section = APPLICATION_CONTEXT, id = "a"),
+            @SpecAssertion(section = APPLICATION_CONTEXT, id = "c"),
+            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ea"),
+            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ec") })
     public void testServletContextInitializedInvoked() {
         assertTrue(observer.isObserved());
     }
