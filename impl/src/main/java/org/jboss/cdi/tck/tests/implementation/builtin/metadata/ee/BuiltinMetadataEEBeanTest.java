@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.ee;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA_EE;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +27,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -52,7 +52,7 @@ public class BuiltinMetadataEEBeanTest extends AbstractTest {
     URL servletContextPath;
 
     @Test
-    @SpecAssertion(section = Sections.BEAN_METADATA_EE, id = "")
+    @SpecAssertion(section = BEAN_METADATA_EE, id = "a")
     public void interceptedBeanForEEComponentIsNullInInterceptor() throws IOException {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
