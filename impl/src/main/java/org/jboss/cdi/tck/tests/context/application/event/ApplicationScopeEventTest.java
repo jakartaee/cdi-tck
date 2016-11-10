@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.context.application.event;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
-import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_CONTEXTS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
 import static org.testng.Assert.assertTrue;
 
@@ -57,9 +56,7 @@ public class ApplicationScopeEventTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga"), @SpecAssertion(section = OBSERVES, id = "a"),
             @SpecAssertion(section = APPLICATION_CONTEXT, id = "a"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "c"),
-            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ea"),
-            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ec") })
+            @SpecAssertion(section = APPLICATION_CONTEXT, id = "c") })
     public void testServletContextInitializedInvoked() {
         assertTrue(observer.isObserved());
     }

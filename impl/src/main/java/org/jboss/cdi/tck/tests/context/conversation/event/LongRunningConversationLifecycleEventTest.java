@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.context.conversation.event;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_CONTEXTS;
 import static org.jboss.cdi.tck.cdi.Sections.CONVERSATION_CONTEXT_EE;
 import static org.testng.Assert.assertTrue;
 
@@ -60,9 +59,7 @@ public class LongRunningConversationLifecycleEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bb"),
-            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ea"),
-            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ec"), })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bb") })
     public void testLifecycleEventFiredForLongRunningConversation() throws Exception {
 
         WebClient client = new WebClient();
