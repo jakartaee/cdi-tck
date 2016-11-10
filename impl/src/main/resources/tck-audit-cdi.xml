@@ -4200,15 +4200,15 @@
 
         <group>
             <text>Portable extensions are encouraged to synchronously fire (where X is the scope type associated with the context.):</text>
-            <assertion id="ea">
+            <assertion id="ea" testable="false">
                 <text>an event with qualifier @Initialized(X.class) when a custom context is initialized, i.e. ready for
                     use,</text>
             </assertion>
-            <assertion id="eb">
+            <assertion id="eb" testable="false">
                 <text>an event with qualifier @BeforeDestroyed(X.class) when a custom context is about to be destroyed,
                     i.e. before the actual destruction,</text>
             </assertion>
-            <assertion id="ec">
+            <assertion id="ec" testable="false">
                 <text>an event with qualifier @Destroyed(X.class) when a custom context is destroyed, i.e. after the actual
                     destruction,</text>
             </assertion>

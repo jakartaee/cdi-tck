@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.se.context;
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_SE;
-import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_CONTEXTS;
 import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
 
 import javax.enterprise.inject.se.SeContainer;
@@ -69,8 +68,7 @@ public class ContextSETest extends Arquillian {
     @Test
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "f"), @SpecAssertion(section = SE_BOOTSTRAP, id = "f"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "a"),
-            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ea")})
+            @SpecAssertion(section = APPLICATION_CONTEXT, id = "a")})
     public void testEventIsFiredWhenAplicationContextInitialized() {
         ApplicationScopedObserver.reset();
         try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
@@ -81,7 +79,7 @@ public class ContextSETest extends Arquillian {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "c"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT, id = "c"), @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ec") })
+            @SpecAssertion(section = APPLICATION_CONTEXT, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT, id = "c") })
     public void testEventIsFiredWhenAplicationContextDestroyed() {
         ApplicationScopedObserver.reset();
         try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
