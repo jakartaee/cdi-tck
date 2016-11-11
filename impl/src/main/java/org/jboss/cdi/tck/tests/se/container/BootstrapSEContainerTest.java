@@ -96,7 +96,7 @@ public class BootstrapSEContainerTest extends Arquillian {
 
         SeContainer seContainer2 = seContainerInitializer.initialize();
         Assert.assertNotNull(seContainer2);
-        seContainer1.close();
+        seContainer2.close();
         Assert.assertNotEquals(seContainer1, seContainer2);
     }
 
