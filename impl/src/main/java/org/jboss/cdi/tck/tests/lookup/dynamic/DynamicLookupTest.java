@@ -20,12 +20,15 @@ import static org.jboss.cdi.tck.cdi.Sections.ANNOTATIONLITERAL_TYPELITERAL;
 import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
 import static org.jboss.cdi.tck.cdi.Sections.NEW;
 import static org.jboss.cdi.tck.cdi.Sections.PROGRAMMATIC_LOOKUP;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.stream.Stream;
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
@@ -38,6 +41,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -58,7 +62,7 @@ public class DynamicLookupTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "aa") })
     public void testObtainsInjectsInstanceOfInstance() {
         ObtainsInstanceBean injectionPoint = getContextualReference(ObtainsInstanceBean.class);
-        assert injectionPoint.getPaymentProcessor() != null;
+        assertNotNull(injectionPoint.getPaymentProcessor());
     }
 
     @Test
@@ -70,10 +74,10 @@ public class DynamicLookupTest extends AbstractTest {
             }, new PayByBinding(PayBy.PaymentMethod.CREDIT_CARD) {
             });
         } catch (Throwable t) {
-            assert isThrowablePresent(IllegalArgumentException.class, t);
+            assertTrue(isThrowablePresent(IllegalArgumentException.class, t));
             return;
         }
-        assert false;
+        Assert.fail();
     }
 
     @Test
@@ -84,10 +88,10 @@ public class DynamicLookupTest extends AbstractTest {
             injectionPoint.getAnyPaymentProcessor().select(new AnnotationLiteral<NonBinding>() {
             });
         } catch (Throwable t) {
-            assert isThrowablePresent(IllegalArgumentException.class, t);
+            assertTrue(isThrowablePresent(IllegalArgumentException.class, t));
             return;
         }
-        assert false;
+        Assert.fail();
     }
 
     @Test
@@ -99,8 +103,8 @@ public class DynamicLookupTest extends AbstractTest {
         getContextualReference(AdvancedPaymentProcessor.class, Any.Literal.INSTANCE).setValue(10);
 
         Instance<AsynchronousPaymentProcessor> instance = getContextualReference(ObtainsInstanceBean.class).getPaymentProcessor();
-        assert instance.get() instanceof AdvancedPaymentProcessor;
-        assert instance.get().getValue() == 10;
+        assertTrue(instance.get() instanceof AdvancedPaymentProcessor);
+        assertEquals(instance.get().getValue(), 10);
     }
 
     @Test
@@ -109,10 +113,10 @@ public class DynamicLookupTest extends AbstractTest {
         try {
             getContextualReference(ObtainsInstanceBean.class).getPaymentProcessor().select(RemotePaymentProcessor.class).get();
         } catch (Throwable t) {
-            assert isThrowablePresent(UnsatisfiedResolutionException.class, t);
+            assertTrue(isThrowablePresent(UnsatisfiedResolutionException.class, t));
             return;
         }
-        assert false;
+        Assert.fail();
     }
 
     @Test
@@ -121,10 +125,10 @@ public class DynamicLookupTest extends AbstractTest {
         try {
             getContextualReference(ObtainsInstanceBean.class).getAnyPaymentProcessor().get();
         } catch (Throwable t) {
-            assert isThrowablePresent(AmbiguousResolutionException.class, t);
+            assertTrue(isThrowablePresent(AmbiguousResolutionException.class, t));
             return;
         }
-        assert false;
+        Assert.fail();
     }
 
     @Test
@@ -154,17 +158,17 @@ public class DynamicLookupTest extends AbstractTest {
             instances++;
         }
 
-        assert instances == 2;
-        assert advanced != null;
-        assert advanced.getValue() == 1;
-        assert remote != null;
-        assert remote.getValue() == 2;
+        assertEquals(instances, 2);
+        assertNotNull(advanced);
+        assertEquals(advanced.getValue(), 1);
+        assertNotNull(remote);
+        assertEquals(remote.getValue(), 2);
 
         Iterator<RemotePaymentProcessor> iterator2 = instance.select(RemotePaymentProcessor.class, new PayByBinding(PayBy.PaymentMethod.CREDIT_CARD) {
         }).iterator();
 
-        assert iterator2.next().getValue() == 2;
-        assert !iterator2.hasNext();
+        assertEquals(iterator2.next().getValue(), 2);
+        assertFalse(iterator2.hasNext());
     }
 
     @Test
@@ -185,38 +189,48 @@ public class DynamicLookupTest extends AbstractTest {
     @SpecAssertion(section = DYNAMIC_LOOKUP, id = "l")
     public void testIsUnsatisfied() {
         ObtainsInstanceBean injectionPoint = getContextualReference(ObtainsInstanceBean.class);
-        assert !injectionPoint.getAnyPaymentProcessor().isUnsatisfied();
-        assert injectionPoint.getPaymentProcessor().select(RemotePaymentProcessor.class).isUnsatisfied();
+        assertFalse(injectionPoint.getAnyPaymentProcessor().isUnsatisfied());
+        assertTrue(injectionPoint.getPaymentProcessor().select(RemotePaymentProcessor.class).isUnsatisfied());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "da"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m") })
     public void testIsAmbiguous() {
         ObtainsInstanceBean injectionPoint = getContextualReference(ObtainsInstanceBean.class);
-        assert injectionPoint.getAnyPaymentProcessor().isAmbiguous();
-        assert !injectionPoint.getPaymentProcessor().isAmbiguous();
+        assertTrue(injectionPoint.getAnyPaymentProcessor().isAmbiguous());
+        assertFalse(injectionPoint.getPaymentProcessor().isAmbiguous());
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "e"), @SpecAssertion(section = ANNOTATIONLITERAL_TYPELITERAL, id = "b") })
     public void testNewBean() {
         Instance<String> string = getContextualReference(ObtainsNewInstanceBean.class).getString();
-        assert !string.isAmbiguous();
-        assert !string.isUnsatisfied();
-        assert string.get() != null;
-        assert string.get() instanceof String;
+        assertFalse(string.isAmbiguous());
+        assertFalse(string.isUnsatisfied());
+        assertNotNull(string.get());
+        assertTrue(string.get() instanceof String);
 
         Instance<Map<String, String>> map = getContextualReference(ObtainsNewInstanceBean.class).getMap();
-        assert !map.isAmbiguous();
-        assert !map.isUnsatisfied();
+        assertFalse(map.isAmbiguous());
+        assertFalse(map.isUnsatisfied());
         Map<String, String> instance = map.get();
-        assert instance != null;
-        assert instance instanceof HashMap<?, ?>;
+        assertNotNull(instance);
+        assertTrue(instance instanceof HashMap<?, ?>);
     }
 
     @Test
     @SpecAssertion(section = NEW, id = "xc")
     public void testNewBeanNotEnabledWithouInjectionPoint() {
-        assert getContextualReference(ObtainsNewInstanceBean.class).getIae().isUnsatisfied();
+        assertTrue(getContextualReference(ObtainsNewInstanceBean.class).getIae().isUnsatisfied());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "jb") })
+    public void testStream() {
+        Instance<Common> instance = getContextualReference(ObtainsInstanceBean.class).getCommon();
+        Stream<Common> stream = instance.stream();
+        assertEquals(stream.count(), 2);
+        assertTrue(stream.findFirst().isPresent());
+        assertTrue(stream.findFirst().get() instanceof Baz);
     }
 }
