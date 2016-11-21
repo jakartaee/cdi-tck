@@ -8497,6 +8497,16 @@
         </assertion>
     </section>
 
+    <section id="trimmed_bean_archive" title="Trimmed bean archive" level="3">
+        <assertion id="a">
+            <text>
+                If an explicit bean archive contains the &lt;trim/&gt; element in its beans.xml file, types that don’t have
+                either a bean defining annotation (as defined in Bean defining annotations) or any scope annotation,
+                are removed from the set of discovered types.
+            </text>
+        </assertion>
+    </section>
+
     <section id="bean_discovery_steps" title="Bean discovery" level="3">
         <group>
             <text>For every type in the set of discovered types (as defined in Type discovery), the container must:</text>
