@@ -191,7 +191,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a") })
     public void testInterceptorBindingAnnotation() {
         List<Interceptor<?>> interceptors = getLoggedInterceptors();
         assertTrue(interceptors.size() > 1);
@@ -224,7 +224,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
 
     // This is also tested in the Interceptors part of the TCK
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a") })
     public void testInterceptorBindingsCanDeclareOtherInterceptorBindings() {
         AtomicInterceptor.intercepted = false;
         MissileInterceptor.intercepted = false;

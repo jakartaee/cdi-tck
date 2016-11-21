@@ -54,7 +54,7 @@ public class FinalMethodMethodLevelInterceptorTest extends AbstractTest {
 
     //TODO disable due to https://issues.jboss.org/browse/CDI-496
     @Test(groups = INTEGRATION, enabled = false)
-    @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "b")
+    @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "d")
     public void testFinalMethodWithMethodLevelInterceptor() throws Exception {
     }
 }

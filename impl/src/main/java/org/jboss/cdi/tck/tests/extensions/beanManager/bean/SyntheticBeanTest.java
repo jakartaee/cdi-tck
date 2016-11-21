@@ -101,7 +101,7 @@ public class SyntheticBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a") })
     public void testSyntheticBeanIntercepted() {
         assertTrue(office.intercepted());
         assertTrue(serializableOffice.intercepted());

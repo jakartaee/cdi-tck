@@ -4331,6 +4331,12 @@
             </text>
         </assertion>
 
+        <assertion id="ac">
+            <text>When the application invokes a method of a bean via a non-contextual reference to the bean, if the instance was enhanced with
+                the |InterceptionFactory| interface as defined in `Apply interceptor programmatically`, the invocation is treated as a business method invocation.
+            </text>
+        </assertion>
+
         <assertion id="ad">
             <text>Invocations of initializer methods by the container are not business method invocations.</text>
         </assertion>
@@ -4904,17 +4910,22 @@
 
     <section id="binding_interceptor_to_bean" title="Binding an interceptor to a bean" level="2">
 
-        <assertion id="c">
+        <assertion id="a">
             <text>Interceptor bindings may be used to associate interceptors with any managed bean that is not a decorator.</text>
         </assertion>
 
-        <assertion id="a">
+        <assertion id="b">
             <text>The set of interceptor bindings for a method are those declared at class level includes those declared on stereotypes. An interceptor binding
                 declared on a bean class replaces an interceptor binding of the same type declared by a stereotype that is applied to the bean class.
             </text>
         </assertion>
 
-        <assertion id="b">
+        <assertion id="c">
+            <text>Since CDI 2.0 it is possible to apply interceptors programmatically to the return value of a producer
+                method, with the |InterceptionFactory| interface as defined in `Apply interceptor programmatically`.</text>
+        </assertion>
+
+        <assertion id="d">
             <text>If a managed bean has a class-level or method-level interceptor binding, the managed bean must be a proxyable bean type, as defined in Section
                 "unproxyable".
             </text>
@@ -6587,6 +6598,15 @@
         </group>
     </section>
 
+    <section id="bm_obtain_interception_factory" title="Obtain an InterceptionFactory" level="3">
+        <assertion id="a">
+            <text>
+                The method BeanManager.getInterceptionFactory() returns an InterceptionFactory for the provided type
+                as defined in `Apply interceptor programmatically`.
+            </text>
+        </assertion>
+    </section>
+
     <section id="alternative_metadata_sources" title="Alternative metadata sources" level="2">
         <assertion id="a" testable="false">
             <text>The interfaces |AnnotatedType|, |AnnotatedField|, |AnnotatedMethod|, |AnnotatedConstructor| and |AnnotatedParameter| in the package
@@ -8152,6 +8172,58 @@
             </assertion>
         </group>
 
+    </section>
+
+    <section id="interception_factory" title="Apply interceptor programmatically" level="2">
+        <assertion id="a">
+            <text>
+                Method |ignoreFinalMethods()| instructs the container to ignore all non-static, final
+                methods with public, protected or default visibility declared on any bean type of the specific bean
+                during validation of injection points that require proxyable bean type.
+            </text>
+        </assertion>
+        <assertion id="b">
+            <text>
+                Method |configure()| returns an AnnotatedTypeConfigurator (as defined in AnnotatedTypeConfigurator SPI)
+                initialized with the instance type to easily apply specific interceptor binding to apply when
+                enhancing the instance. The method always return the same AnnotatedTypeConfigurator
+            </text>
+        </assertion>
+        <assertion id="c">
+            <text>
+                Method |createInterceptedInstance()| returns an enhanced version of the instance for which each method
+                invocations will be a business method invocation.
+            </text>
+        </assertion>
+        <assertion id="d">
+            <text>
+                The method |createInterceptedInstance()| can be only called once, subsequent calls will throw an exception
+            </text>
+        </assertion>
+        <assertion id="e">
+            <text>
+                If the method |createInterceptedInstance()| is called at the type of the instance which is not proxyable as defined in `Unproxyable
+                bean types` an |UnproxyableResolutionException| exception is thrown.
+            </text>
+        </assertion>
+
+        <assertion id="f">
+            <text>
+                An |InterceptionFactory| can be obtain be calling |BeanManager.createInterceptionFactory| as defined in `Obtain an InterceptionFactory`
+            </text>
+        </assertion>
+        <assertion id="g">
+            <text>
+                The container must provide a bean with scope `@Dependent`, bean type |InterceptionFactory| and qualifier `@Default` allowing producer methods
+                to obtain this factory to produce their instance
+            </text>
+        </assertion>
+        <assertion id="h">
+            <text>
+                If an injection point of type |InterceptionFactory| and qualifier |@Default| which is not a parameter of a producer method exists,
+                the container automatically detects the problem and treats it as a definition error.
+            </text>
+        </assertion>
     </section>
 
     <section id="packaging_deployment" title="Packaging and deployment" level="1">

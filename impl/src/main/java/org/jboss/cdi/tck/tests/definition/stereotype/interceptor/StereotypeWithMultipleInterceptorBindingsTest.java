@@ -51,7 +51,7 @@ public class StereotypeWithMultipleInterceptorBindingsTest extends AbstractTest 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "aa"),
             @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "c"),
-            @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "a") })
+            @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "b") })
     public void testMultipleInterceptorBindings(Foo foo) {
         assertNotNull(foo);
         foo.getInspections().clear();

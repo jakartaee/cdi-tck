@@ -51,7 +51,7 @@ public class FinalClassMethodLevelInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "b")
+    @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "d")
     public void testFinalClassWithMethodLevelInterceptor() throws Exception {
     }
 }
