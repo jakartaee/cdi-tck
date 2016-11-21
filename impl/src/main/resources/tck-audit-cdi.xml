@@ -3814,7 +3814,13 @@
             </text>
         </assertion>
 
-        <assertion id="b" testable="false">
+        <assertion id="b">
+            <text>Any reference to a bean with a normal scope is invalid after CDI container shutdown. Maintaining such reference and attempting
+                to use it after container shutdown results in an IllegalStateException.
+            </text>
+        </assertion>
+
+        <assertion id="c" testable="false">
             <text>Any reference to a bean with a pseudo-scope (such as |@Dependent|) is valid until the bean instance to which it refers is destroyed. It may be
                 invoked even if the context associated with the pseudo-scope is not active. If the application invokes a method of a reference to an instance
                 that has already been destroyed, the behavior is undefined.
@@ -7555,10 +7561,10 @@
         </group>
 
         <assertion id="k">
-            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|. 
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|.
                 If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
         </assertion>
-        
+
         <assertion id="e">
             <text>If any observer method of a |ProcessAnnotatedType| event throws an exception, the exception is treated as a definition error by the
                 container.
@@ -7608,9 +7614,9 @@
                 after all observers have been called, whenever it performs injection upon the injection point.
             </text>
         </assertion>
-        
+
         <assertion id="g">
-            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|. 
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|.
                 If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
         </assertion>
 
@@ -7794,7 +7800,7 @@
         </assertion>
 
         <assertion id="g">
-            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|. 
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|.
                 If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
         </assertion>
 
@@ -8089,9 +8095,9 @@
         <assertion id="dad">
             <text>|veto()| forces the container to ignore the ObserverMethod.</text>
         </assertion>
-        
+
         <assertion id="e">
-            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|. 
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|.
                 If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
         </assertion>
 
