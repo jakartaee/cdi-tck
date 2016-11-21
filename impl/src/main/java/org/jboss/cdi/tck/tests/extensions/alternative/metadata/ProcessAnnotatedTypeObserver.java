@@ -50,6 +50,10 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         final AnnotatedConstructor<Sausage> originalConstructor = event.getAnnotatedType().getConstructors().iterator().next();
 
         AnnotatedType<Sausage> overridingSausage = new AnnotatedType<Sausage>() {
+            @Override
+            public <T extends Annotation> Set<T> getAnnotations(Class<T> annotationType) {
+                return Collections.emptySet();
+            }
 
             @Override
             public boolean isAnnotationPresent(Class<? extends Annotation> annotationType) {

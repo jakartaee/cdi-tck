@@ -142,7 +142,7 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
         }.run();
         new Invocation() {
             void execute() {
-                event.addAnnotatedType("test", String.class);
+                event.addAnnotatedType(String.class, "test");
             }
         }.run();
 
@@ -177,7 +177,7 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
         }.run();
         new Invocation() {
             void execute() {
-                event.addAnnotatedType("test", String.class);
+                event.addAnnotatedType(String.class, "test");
             }
         }.run();
     }

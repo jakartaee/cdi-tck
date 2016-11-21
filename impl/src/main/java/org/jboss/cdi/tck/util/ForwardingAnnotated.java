@@ -41,6 +41,10 @@ public abstract class ForwardingAnnotated implements Annotated {
         return delegate().getAnnotations();
     }
 
+    public <A extends Annotation> Set<A> getAnnotations(Class<A> aClass) {
+        return delegate().getAnnotations(aClass);
+    }
+
     public boolean isAnnotationPresent(Class<? extends Annotation> annotationType) {
         return delegate().isAnnotationPresent(annotationType);
     }

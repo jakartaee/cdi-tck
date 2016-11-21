@@ -25,7 +25,6 @@ import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
-import javax.interceptor.Interceptor;
 
 public class ProcessObserverMethodObserver implements Extension {
 
@@ -40,7 +39,7 @@ public class ProcessObserverMethodObserver implements Extension {
         event.configureObserverMethod()
                 .addQualifiers(Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE)
                 .async(true)
-                .priority(Interceptor.Priority.APPLICATION + 100);
+                .priority(ObserverMethod.DEFAULT_PRIORITY + 100);
     }
 
     void observesOrangePOM(@Observes ProcessObserverMethod<Orange, FruitObserver> event) {

@@ -28,11 +28,11 @@ import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
-import javax.enterprise.inject.spi.builder.AnnotatedConstructorConfigurator;
-import javax.enterprise.inject.spi.builder.AnnotatedFieldConfigurator;
-import javax.enterprise.inject.spi.builder.AnnotatedMethodConfigurator;
-import javax.enterprise.inject.spi.builder.AnnotatedParameterConfigurator;
-import javax.enterprise.inject.spi.builder.AnnotatedTypeConfigurator;
+import javax.enterprise.inject.spi.configurator.AnnotatedConstructorConfigurator;
+import javax.enterprise.inject.spi.configurator.AnnotatedFieldConfigurator;
+import javax.enterprise.inject.spi.configurator.AnnotatedMethodConfigurator;
+import javax.enterprise.inject.spi.configurator.AnnotatedParameterConfigurator;
+import javax.enterprise.inject.spi.configurator.AnnotatedTypeConfigurator;
 import javax.inject.Inject;
 
 import org.jboss.cdi.tck.literals.DisposesLiteral;

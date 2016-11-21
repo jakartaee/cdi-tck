@@ -53,6 +53,11 @@ public class AnnotatedInjectionField implements AnnotatedField<InjectedBean> {
         return null;
     }
 
+    @Override
+    public <T extends Annotation> Set<T> getAnnotations(Class<T> aClass) {
+        return null;
+    }
+
     public Set<Annotation> getAnnotations() {
         return null;
     }

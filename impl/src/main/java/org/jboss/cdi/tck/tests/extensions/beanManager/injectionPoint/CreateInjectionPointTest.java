@@ -147,6 +147,11 @@ public class CreateInjectionPointTest extends AbstractTest {
             }
 
             @Override
+            public <T extends Annotation> Set<T> getAnnotations(Class<T> annotationType) {
+                return null;
+            }
+
+            @Override
             public Set<Annotation> getAnnotations() {
                 return null;
             }

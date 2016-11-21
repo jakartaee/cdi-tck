@@ -26,7 +26,7 @@ import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.BeanAttributes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
-import javax.enterprise.inject.spi.builder.BeanAttributesConfigurator;
+import javax.enterprise.inject.spi.configurator.BeanAttributesConfigurator;
 
 /**
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>

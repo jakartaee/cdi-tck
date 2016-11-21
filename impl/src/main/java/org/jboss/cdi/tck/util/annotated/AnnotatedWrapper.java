@@ -68,4 +68,9 @@ public class AnnotatedWrapper implements Annotated {
         }
         return false;
     }
+
+    @Override
+    public <T extends Annotation> Set<T> getAnnotations(Class<T> annotationType) {
+        return delegate.getAnnotations(annotationType);
+    }
 }

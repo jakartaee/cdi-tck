@@ -78,7 +78,7 @@ public class AfterTypeDiscoveryObserver implements Extension {
         event.getAlternatives().remove(0);
 
         // add Baz annotatedType via AnnotatedTypeConfigurator
-        event.addAnnotatedType(AfterTypeDiscoveryObserver.class.getName() + ":" + Baz.class.getName(), Baz.class)
+        event.addAnnotatedType(Baz.class, AfterTypeDiscoveryObserver.class.getName() + ":" + Baz.class.getName())
                 .add(Pro.ProLiteral.INSTANCE)
                 .add(RequestScoped.Literal.INSTANCE)
                 .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst().get()

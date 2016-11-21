@@ -17,13 +17,13 @@
 package org.jboss.cdi.tck.tests.event.observer.param.modification;
 
 import javax.enterprise.event.Observes;
-import javax.interceptor.Interceptor;
+import javax.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.weld.experimental.Priority;
 
 public class CounterObserver01 {
 
-    public void observe(@Observes @Priority(Interceptor.Priority.APPLICATION) Counter counter) {
+    public void observe(@Observes @Priority(ObserverMethod.DEFAULT_PRIORITY) Counter counter) {
         counter.increment();
     }
 

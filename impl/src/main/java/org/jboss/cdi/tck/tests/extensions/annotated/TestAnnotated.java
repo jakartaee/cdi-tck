@@ -45,6 +45,11 @@ public class TestAnnotated implements Annotated {
         return null;
     }
 
+    @Override
+    public <T extends Annotation> Set<T> getAnnotations(Class<T> annotationType) {
+        return delegate.getAnnotations(annotationType);
+    }
+
     public Set<Annotation> getAnnotations() {
         return Collections.unmodifiableSet(annotations);
     }

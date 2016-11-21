@@ -74,6 +74,7 @@ public class BeforeBeanDiscoveryObserver implements Extension {
 
         // add @Skill(language(); @Nonbinding level()) as qualifier
         beforeBeanDiscovery.addQualifier(new AnnotatedTypeWrapper<Skill>(beanManager.createAnnotatedType(Skill.class), true) {
+
             Set<AnnotatedMethod<? super Skill>> methods;
 
             {
@@ -113,7 +114,7 @@ public class BeforeBeanDiscoveryObserver implements Extension {
         }.perform(event);
 
         //add Baz annotatedType via AnnotatedTypeConfigurator
-        event.addAnnotatedType(BeforeBeanDiscoveryObserver.class.getName() + ":" + Baz.class.getName(), Baz.class)
+        event.addAnnotatedType(Baz.class, BeforeBeanDiscoveryObserver.class.getName() + ":" + Baz.class.getName())
                 .add(Pro.ProLiteral.INSTANCE)
                 .add(RequestScoped.Literal.INSTANCE)
                 .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst().get()

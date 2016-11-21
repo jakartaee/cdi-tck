@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.jboss.weld</groupId>
         <artifactId>weld-parent</artifactId>
-        <version>31</version>
+        <version>36</version>
     </parent>
 
     <!-- Metadata -->
@@ -83,7 +83,7 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>2.0-EDR2</cdi.api.version>
+        <cdi.api.version>2.0.Alpha5</cdi.api.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- JBoss EE APIs -->

@@ -24,11 +24,9 @@ import static org.testng.Assert.assertTrue;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.inject.Inject;
-import javax.interceptor.Interceptor;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -61,13 +59,13 @@ public class EventObserverOrderingTest extends AbstractTest {
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "a"),  @SpecAssertion(section = OBSERVER_METHOD, id = "ea")  })
     public void testDefaultPriority(ObserverExtension observerExtension) {
-        assertEquals(observerExtension.getObserverMethodPriority("Observer2.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 500);
+        assertEquals(observerExtension.getObserverMethodPriority("Observer2.observeMoon").intValue(), ObserverMethod.DEFAULT_PRIORITY);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD, id = "ea") })
     public void testProcessObserverMethodPriority(ObserverExtension observerExtension) {
-        assertEquals(observerExtension.getObserverMethodPriority("Observer3.observeMoon").intValue(), Interceptor.Priority.APPLICATION + 900);
+        assertEquals(observerExtension.getObserverMethodPriority("Observer3.observeMoon").intValue(), ObserverMethod.DEFAULT_PRIORITY + 400);
     }
 
 

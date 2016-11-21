@@ -51,11 +51,11 @@ import javax.enterprise.inject.spi.ProcessProducerMethod;
 import javax.enterprise.inject.spi.ProcessSessionBean;
 import javax.enterprise.inject.spi.Producer;
 import javax.enterprise.inject.spi.SessionBeanType;
-import javax.enterprise.inject.spi.builder.AnnotatedTypeConfigurator;
-import javax.enterprise.inject.spi.builder.BeanAttributesConfigurator;
-import javax.enterprise.inject.spi.builder.BeanConfigurator;
-import javax.enterprise.inject.spi.builder.InjectionPointConfigurator;
-import javax.enterprise.inject.spi.builder.ObserverMethodConfigurator;
+import javax.enterprise.inject.spi.configurator.AnnotatedTypeConfigurator;
+import javax.enterprise.inject.spi.configurator.BeanAttributesConfigurator;
+import javax.enterprise.inject.spi.configurator.BeanConfigurator;
+import javax.enterprise.inject.spi.configurator.InjectionPointConfigurator;
+import javax.enterprise.inject.spi.configurator.ObserverMethodConfigurator;
 
 public class ContainerLifecycleEvents {
 
@@ -66,7 +66,7 @@ public class ContainerLifecycleEvents {
 
     public static final BeforeBeanDiscovery BEFORE_BEAN_DISCOVERY = new BeforeBeanDiscovery() {
         @Override
-        public <T> AnnotatedTypeConfigurator<T> addAnnotatedType(String s, Class<T> aClass) {
+        public <T> AnnotatedTypeConfigurator<T> addAnnotatedType(Class<T> aClass, String s) {
             return null;
         }
 
@@ -232,6 +232,10 @@ public class ContainerLifecycleEvents {
     };
 
     public static final ProcessBeanAttributes<Exception> PROCESS_BEAN_ATTRIBUTES = new ProcessBeanAttributes<Exception>() {
+        @Override
+        public void ignoreFinalMethods() {
+        }
+
         @Override
         public Annotated getAnnotated() {
             return null;

@@ -37,7 +37,6 @@ import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.inject.Inject;
-import javax.interceptor.Interceptor;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -74,7 +73,7 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
         Set<ObserverMethod<? super Pear>> pearEventObservers = getCurrentManager()
                 .resolveObserverMethods(new Pear(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
         assertEquals(pearEventObservers.size(), 1);
-        assertEquals(pearEventObservers.iterator().next().getPriority(), Interceptor.Priority.APPLICATION + 100);
+        assertEquals(pearEventObservers.iterator().next().getPriority(), ObserverMethod.DEFAULT_PRIORITY + 100);
         assertEquals(pearEventObservers.iterator().next().isAsync(), true);
         assertEquals(pearEventObservers.iterator().next().getObservedQualifiers(),
                 Stream.of(Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).collect(

@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.event.observer.param.modification;
 
 import javax.enterprise.event.Observes;
-import javax.interceptor.Interceptor;
+import javax.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.weld.experimental.Priority;
 
@@ -25,11 +25,11 @@ public class CounterObserver02 {
 
     public static int count;
 
-    public void observe(@Observes @Priority(Interceptor.Priority.APPLICATION + 100) Counter counter) {
+    public void observe(@Observes @Priority(ObserverMethod.DEFAULT_PRIORITY + 100) Counter counter) {
         counter.increment();
     }
 
-    public void observeNext(@Observes @Priority(Interceptor.Priority.APPLICATION + 200) Counter counter) {
+    public void observeNext(@Observes @Priority(ObserverMethod.DEFAULT_PRIORITY + 200) Counter counter) {
         counter.increment();
         count = counter.getI();
     }

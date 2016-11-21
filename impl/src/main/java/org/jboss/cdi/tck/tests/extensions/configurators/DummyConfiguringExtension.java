@@ -24,10 +24,10 @@ import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessBeanAttributes;
 import javax.enterprise.inject.spi.ProcessInjectionPoint;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
-import javax.enterprise.inject.spi.builder.AnnotatedTypeConfigurator;
-import javax.enterprise.inject.spi.builder.BeanAttributesConfigurator;
-import javax.enterprise.inject.spi.builder.InjectionPointConfigurator;
-import javax.enterprise.inject.spi.builder.ObserverMethodConfigurator;
+import javax.enterprise.inject.spi.configurator.AnnotatedTypeConfigurator;
+import javax.enterprise.inject.spi.configurator.BeanAttributesConfigurator;
+import javax.enterprise.inject.spi.configurator.InjectionPointConfigurator;
+import javax.enterprise.inject.spi.configurator.ObserverMethodConfigurator;
 
 public class DummyConfiguringExtension implements Extension {
 
