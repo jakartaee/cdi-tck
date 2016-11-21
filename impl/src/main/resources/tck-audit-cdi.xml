@@ -5585,7 +5585,7 @@
 
         <group>
             <text>For a custom implementation of the |ObserverMethod| interface defined in Section 11.1.3, "The ObserverMethod interface", the container must
-                call |getTransactionPhase()| to determine if the observer method is a transactional observer method, and |notify()| to invoke the method.
+                call |getTransactionPhase()| to determine if the observer method is a transactional observer method, and |notify()| which accepts |javax.enterprise.inject.spi.EventContext| to invoke the method.
             </text>
             <assertion id="fa">
                 <text>Check |getTransactionPhase()| is called.</text>
@@ -7258,6 +7258,12 @@
         </group>
 
         <assertion id="ec">
+            <text>If the given ObserverMethod does not override either |ObserverMethod.notify(T)| or
+                |ObserverMethod.notify(EventContext&lt;T&gt;)|, the container automatically detects the problem and treats it as a definition error.
+            </text>
+        </assertion>
+
+        <assertion id="ed">
             <text>Test |ObserverMethodConfigurator&lt;?&gt; addObserverMethod()| returns a new ObserverMethodConfigurator as defined in
                 ObserverMethodConfigurator
                 interface to easily configure the ObserverMethod which will be added at the end of observer invocation.

@@ -24,6 +24,7 @@ import java.util.Set;
 
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
+import javax.enterprise.inject.spi.EventContext;
 import javax.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.cdi.tck.util.ActionSequence;
@@ -31,7 +32,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 public class GiraffeCustomObserver implements ObserverMethod<Giraffe> {
 
     private boolean transactionPhaseCalled;
-    private Giraffe receivedPayload;
+    private EventContext<Giraffe> receivedPayload;
 
     private final Set<Annotation> qualifiers;
 
@@ -70,12 +71,13 @@ public class GiraffeCustomObserver implements ObserverMethod<Giraffe> {
         return TransactionPhase.AFTER_SUCCESS;
     }
 
-    public void notify(Giraffe event) {
+    public void notify(EventContext<Giraffe> event) {
         ActionSequence.addAction(TransactionPhase.AFTER_SUCCESS.toString());
         receivedPayload = event;
+
     }
 
-    public Giraffe getReceivedPayload() {
+    public EventContext<Giraffe> getReceivedPayload() {
         return receivedPayload;
     }
 

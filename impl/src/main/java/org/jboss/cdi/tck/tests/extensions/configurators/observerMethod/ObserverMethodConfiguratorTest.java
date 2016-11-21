@@ -113,7 +113,7 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ac"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bb"),
-            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ec")})
+            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ed")})
     public void addNewObserverMethodFromReadingExistingOne() {
         AfterBeanDiscoveryObserver.reset();
         getCurrentManager().fireEvent(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
