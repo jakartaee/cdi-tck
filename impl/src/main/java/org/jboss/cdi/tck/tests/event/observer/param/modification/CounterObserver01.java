@@ -16,10 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.param.modification;
 
+import javax.annotation.Priority;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.ObserverMethod;
-
-import org.jboss.weld.experimental.Priority;
 
 public class CounterObserver01 {
 

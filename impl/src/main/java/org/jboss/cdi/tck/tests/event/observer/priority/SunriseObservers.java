@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority;
 
+import javax.annotation.Priority;
 import javax.enterprise.event.Observes;
 import javax.interceptor.Interceptor;
 
 import org.jboss.cdi.tck.util.ActionSequence;
-import org.jboss.weld.experimental.Priority;
 
 public class SunriseObservers {
 

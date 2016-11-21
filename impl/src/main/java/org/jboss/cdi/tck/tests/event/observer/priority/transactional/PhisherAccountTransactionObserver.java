@@ -16,13 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority.transactional;
 
+import javax.annotation.Priority;
 import javax.annotation.Resource;
 import javax.enterprise.event.Observes;
 import javax.enterprise.event.TransactionPhase;
 import javax.interceptor.Interceptor;
 import javax.transaction.UserTransaction;
-
-import org.jboss.weld.experimental.Priority;
 
 /**
  * 

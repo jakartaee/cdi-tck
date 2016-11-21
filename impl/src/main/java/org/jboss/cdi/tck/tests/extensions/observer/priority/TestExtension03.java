@@ -16,13 +16,13 @@
 */
 package org.jboss.cdi.tck.tests.extensions.observer.priority;
 
+import javax.annotation.Priority;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessBean;
 import javax.interceptor.Interceptor;
 
 import org.jboss.cdi.tck.util.ActionSequence;
-import org.jboss.weld.experimental.Priority;
 
 public class TestExtension03 implements Extension {
 
