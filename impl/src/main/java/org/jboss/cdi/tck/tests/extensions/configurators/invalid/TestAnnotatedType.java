@@ -16,40 +16,24 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.invalid;
 
-import java.lang.annotation.Annotation;
-import java.util.Set;
-
-import javax.enterprise.inject.spi.AnnotatedConstructor;
-import javax.enterprise.inject.spi.AnnotatedField;
-import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-/**
+import org.jboss.cdi.tck.util.ForwardingAnnotatedType;
+
+/** Makes use of util class ForwardingAnnotatedType<X>
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-public class TestAnnotatedType<X> extends TestAnnotated implements AnnotatedType<X> {
+public class TestAnnotatedType<X> extends ForwardingAnnotatedType<X> {
 
     private AnnotatedType<X> delegate;
 
-    public TestAnnotatedType(AnnotatedType<X> delegate, Annotation... annotations) {
-        super(delegate, annotations);
+    public TestAnnotatedType(AnnotatedType<X> delegate) {
         this.delegate = delegate;
     }
 
-    public Set<AnnotatedConstructor<X>> getConstructors() {
-        return delegate.getConstructors();
-    }
-
-    public Set<AnnotatedField<? super X>> getFields() {
-        return delegate.getFields();
-    }
-
-    public Class<X> getJavaClass() {
-        return delegate.getJavaClass();
-    }
-
-    public Set<AnnotatedMethod<? super X>> getMethods() {
-        return delegate.getMethods();
+    @Override
+    public AnnotatedType<X> delegate() {
+        return delegate;
     }
 }

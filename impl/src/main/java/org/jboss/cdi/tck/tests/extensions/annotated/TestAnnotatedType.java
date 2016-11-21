@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
-import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import javax.enterprise.inject.spi.AnnotatedConstructor;
@@ -24,34 +23,42 @@ import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
 import javax.enterprise.inject.spi.AnnotatedType;
 
-public class TestAnnotatedType<X> extends TestAnnotated implements AnnotatedType<X> {
+import org.jboss.cdi.tck.util.ForwardingAnnotatedType;
+
+/** Makes use of util class ForwardingAnnotatedType<X>
+ * 
+ */
+public class TestAnnotatedType<X> extends ForwardingAnnotatedType<X> {
     private AnnotatedType<X> delegate;
     private static boolean getConstructorsUsed = false;
     private static boolean getFieldsUsed = false;
     private static boolean getMethodsUsed = false;
 
-    public TestAnnotatedType(AnnotatedType<X> delegate, Annotation... annotations) {
-        super(delegate, annotations);
+    public TestAnnotatedType(AnnotatedType<X> delegate) {
         this.delegate = delegate;
     }
 
+    @Override
+    public AnnotatedType<X> delegate() {
+        return delegate;
+    }
+
+    @Override
     public Set<AnnotatedConstructor<X>> getConstructors() {
         getConstructorsUsed = true;
-        return delegate.getConstructors();
+        return super.getConstructors();
     }
 
+    @Override
     public Set<AnnotatedField<? super X>> getFields() {
         getFieldsUsed = true;
-        return delegate.getFields();
+        return super.getFields();
     }
 
-    public Class<X> getJavaClass() {
-        return delegate.getJavaClass();
-    }
-
+    @Override
     public Set<AnnotatedMethod<? super X>> getMethods() {
         getMethodsUsed = true;
-        return delegate.getMethods();
+        return super.getMethods();
     }
 
     public static boolean isGetConstructorsUsed() {
