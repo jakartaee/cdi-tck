@@ -3223,6 +3223,14 @@
             </text>
         </assertion>
 
+        <assertion id="ma">
+            <text>
+                The method |isResolvable()| returns true if there is exactly one bean that has the required type and
+                qualifiers and is eligible for injection into the class into which the parent Instance was injected, or
+                false otherwise.
+            </text>
+        </assertion>
+
         <group>
             <text>The method |destroy()| instructs the container to destroy the instance. The bean instance passed to |destroy()| should be a dependent scoped
                 bean instance, or a client proxy for a normal scoped bean. Applications are encouraged to always call |destroy()| when they no longer require an
@@ -7663,9 +7671,6 @@
             </assertion>
             <assertion id="bc">
                 <text>Set or add multiple qualifiers with |addQualifiers| and |qualifiers| methods.</text>
-            </assertion>
-            <assertion id="bd">
-                <text>Set the bean that defines this injection point with |bean| method.</text>
             </assertion>
             <assertion id="be">
                 <text>Make the injection point delegate with |delegate| method.</text>
