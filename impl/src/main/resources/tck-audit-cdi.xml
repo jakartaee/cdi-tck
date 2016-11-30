@@ -5178,7 +5178,8 @@
         </assertion>
 
         <assertion id="ee">
-            <text>The method fireAsync() may be called with a specific Executor object to be used to invoke observers method.</text>
+            <text>The method fireAsync() may be called with a |NotificationOptions| object to configure the observer
+                methods notification, e.g. to specify an |Executor| object to be used for asynchronous delivery.</text>
         </assertion>
 
         <group>
