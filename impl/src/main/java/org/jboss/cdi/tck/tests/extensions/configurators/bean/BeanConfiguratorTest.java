@@ -58,9 +58,7 @@ public class BeanConfiguratorTest extends AbstractTest {
     @SpecAssertions({
         @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
         @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "f"),
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "g"),
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "h"),
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "i") })
+        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "g")})
     public void testCreationalAndDisposalMethods() {
         Bean<Skeleton> skeletonBean = getUniqueBean(Skeleton.class, Undead.UndeadLiteral.INSTANCE);
         CreationalContext<Skeleton> skeletonCreationalContext = getCurrentManager().createCreationalContext(skeletonBean);

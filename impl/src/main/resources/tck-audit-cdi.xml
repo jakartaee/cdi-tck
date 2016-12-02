@@ -7359,16 +7359,10 @@
                 <text>Make the bean implements `PassivationCapable` and set its id with |id| method.</text>
             </assertion>
             <assertion id="f">
-                <text>Set the Function to create a bean instance from a CreationalContext with |createWith| method.</text>
+                <text>Set a callback to create a bean instance with createWith() or produceWith() method.</text>
             </assertion>
             <assertion id="g">
-                <text>Set the Supplier or Function to create a bean instance with |produceWith| method.</text>
-            </assertion>
-            <assertion id="h">
-                <text>Set the object to return when creating a bean instance with |producing| method.</text>
-            </assertion>
-            <assertion id="i">
-                <text>Set the BiConsumer or Consumer to destroy an instance from or without a CreationalContext with |disposeWith| methods.</text>
+                <text>Set a callback to destroy a bean instance with destroyWith() or disposeWith() method.</text>
             </assertion>
         </group>
     </section>
