@@ -2229,9 +2229,9 @@
         </assertion>
 
         <assertion id="e">
-            <text>Each child |&lt;class&gt;| element must specify the name of a bean class of an alternative bean. If there is no bean whose bean class has the
-                specified name, or if no bean whose bean class has the specified name is an alternative, the container automatically detects the problem and
-                treats it as a deployment problem.
+            <text>For each child |&lt;class&gt;| element the container verifies that either a |&lt;class&gt;|  T exists which is annotated with @Alternative or contains a producer field or producer
+                method which is annotated with @Alternative, or an alternative Bean|&lt;T&gt;|  exists for the bean class.
+                Otherwise the container automatically detects the problem and treats it as a deployment problem.
             </text>
         </assertion>
 
