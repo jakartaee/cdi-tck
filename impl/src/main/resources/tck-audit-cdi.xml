@@ -6880,25 +6880,25 @@
 
 
         <group>
-            <text>AnnotatedTypeConfigurator is the entry point for this SPI.</text>
+            <text>|AnnotatedTypeConfigurator| is the entry point for this SPI.</text>
             <assertion id="bc">
                 <text>Test |getAnnotated()| returns the original AnnotatedType with which this configurator was initialized.</text>
             </assertion>
 
             <assertion id="bd">
-                <text>Test |add()| adds an annotation to the configured AnnotatedType.</text>
+                <text>Test |add()| adds an annotation to the configured element.</text>
             </assertion>
 
             <assertion id="be">
-                <text>Test |remove()| methods remove all annotation from the configured AnnotatedType.</text>
+                <text>Test |remove()| method removes annotations that match the specified predicate from the configured element.</text>
             </assertion>
 
             <assertion id="bf">
-                <text>Test |removeAll()| remove all existing annotation on the configured AnnotatedType.</text>
+                <text>Test |removeAll()| removes all annotations from the configured element.</text>
             </assertion>
 
             <assertion id="bg">
-                <text>Test |methods()| returns a set of AnnotatedMethodConfigurator to configure annotations on methods..</text>
+                <text>Test |methods()| returns a set of |AnnotatedMethodConfigurator| to configure annotations on methods.</text>
             </assertion>
 
             <assertion id="bh">
@@ -6908,7 +6908,7 @@
             </assertion>
 
             <assertion id="bi">
-                <text>Test |fields()| returns a set of AnnotatedFieldConfigurator to configure annotations on fields..</text>
+                <text>Test |fields()| returns a set of |AnnotatedFieldConfigurator| to configure annotations on fields.</text>
             </assertion>
 
             <assertion id="bj">
@@ -6917,11 +6917,11 @@
             </assertion>
 
             <assertion id="bk">
-                <text>Test |constructors()| returns a set of AnnotatedConstructorConfigurator to configure annotations on constructors.</text>
+                <text>Test |constructors()| returns a set of |AnnotatedConstructorConfigurator| to configure annotations on constructors.</text>
             </assertion>
 
             <assertion id="bl">
-                <text>Test |filterConstructors()| returns a Stream `&lt;AnnotatedConstructorConfigurator &gt;` filtered by applying the provided Predicate on
+                <text>Test |filterConstructors()| returns a |Stream `&lt;AnnotatedConstructorConfigurator &gt;`| filtered by applying the provided Predicate on
                     Constructors().
                 </text>
             </assertion>
@@ -6941,11 +6941,11 @@
             </assertion>
 
             <assertion id="c">
-                <text>Test |remove()| methods remove all annotation from the configured element.</text>
+                <text>Test |remove()| method removes annotations that match the specified predicate from the configured element.</text>
             </assertion>
 
             <assertion id="d">
-                <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
+                <text>Test |removeAll()| removes all annotations from the configured element.</text>
             </assertion>
 
             <assertion id="e">
@@ -6969,15 +6969,15 @@
             </assertion>
 
             <assertion id="b">
-                <text>Test add() adds an annotation to the configured element.</text>
+                <text>Test |add()| adds an annotation to the configured element.</text>
             </assertion>
 
             <assertion id="c">
-                <text>Test |remove()| methods remove all annotation from the configured element.</text>
+                <text>Test |remove()| method removes annotations that match the specified predicate from the configured element.</text>
             </assertion>
 
             <assertion id="d">
-                <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
+                <text>Test |removeAll()| removes all annotations from the configured element.</text>
             </assertion>
 
             <assertion id="e">
@@ -7004,11 +7004,11 @@
             </assertion>
 
             <assertion id="c">
-                <text>Test |remove()| methods remove all annotation from the configured element.</text>
+                <text>Test |remove()| method removes annotations that match the specified predicate from the configured element.</text>
             </assertion>
 
             <assertion id="d">
-                <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
+                <text>Test |removeAll()| removes all annotations from the configured element.</text>
             </assertion>
         </group>
 
@@ -7026,11 +7026,11 @@
             </assertion>
 
             <assertion id="c">
-                <text>Test |remove()| methods remove all annotation from the configured element.</text>
+                <text>Test |remove()| method removes annotations that match the specified predicate from the configured element.</text>
             </assertion>
 
             <assertion id="d">
-                <text>Test |removeAll()| remove all existing annotation on the configured element.</text>
+                <text>Test |removeAll()| removes all annotations from the configured element.</text>
             </assertion>
         </group>
 
