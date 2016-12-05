@@ -7152,12 +7152,12 @@
             </text>
         </assertion>
 
-        <asssertion id="d">
+        <assertion id="d">
             <text>|configureInterceptorBinding()| returns a new |AnnotatedTypeConfigurator| as defined in
                 |AnnotatedTypeConfigurator| SPI to configure a new |AnnotatedType| and declares it as an interceptor
                 binding.
             </text>
-        </asssertion>
+        </assertion>
 
         <assertion id="e">
             <text>If any observer method of the |BeforeBeanDiscovery| event throws an exception, the exception is treated as a definition error by the
