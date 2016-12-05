@@ -7266,12 +7266,12 @@
         </assertion>
 
         <group>
-            <text>|addBean()| fires an event of type |ProcessBean| containing the given |Bean| and then registers the |Bean| with the container, thereby making
+            <text>|addBean()| fires an event of type |ProcessSyntheticBean| containing the given |Bean| and then registers the |Bean| with the container, thereby making
                 it available for injection into other beans. The given |Bean| may implement |Interceptor| or |Decorator|.
             </text>
 
             <assertion id="da">
-                <text>Check that |ProcessBean| is fired</text>
+                <text>Check that |ProcessSyntheticBean| is fired</text>
             </assertion>
 
             <assertion id="db">
@@ -7937,6 +7937,10 @@
             <text>Test |ProcessProducerField| is fired after |ProcessBeanAttributes|.</text>
         </assertion>
 
+        <assertion id="eca">
+            <text>For a custom implementation of |Bean|, the container must raise an event of type |ProcessSyntheticBean &lt;X&gt;|.</text>
+        </assertion>
+
         <assertion id="ec">
             <text>Resources are considered to be producer fields.</text>
         </assertion>
@@ -7956,7 +7960,8 @@
 
         <group>
             <text>|getAnnotated()| returns the |AnnotatedType| representing the bean class, the |AnnotatedMethod| representing the producer method, or the
-                |AnnotatedField| representing the producer field.
+                |AnnotatedField| representing the producer field. If invoked upon a |ProcessSyntheticBean| event, non-portable behavior results and the returned value
+                should be ignored.
             </text>
             <assertion id="efa">
                 <text>Test |ProcessManagedBean|</text>
