@@ -44,7 +44,7 @@ public class BeforeBeanDiscoveryThrowsExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "c")
+    @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "e")
     public void testThrowsException() {
     }
 

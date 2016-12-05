@@ -7147,11 +7147,24 @@
         </assertion>
 
         <assertion id="c">
+            <text>|configureQualifier()| returns a new |AnnotatedTypeConfigurator| as defined in
+                AnnotatedTypeConfigurator SPI to configure a new |AnnotatedType| and declares it as a qualifier type.
+            </text>
+        </assertion>
+
+        <asssertion id="d">
+            <text>|configureInterceptorBinding()| returns a new |AnnotatedTypeConfigurator| as defined in
+                |AnnotatedTypeConfigurator| SPI to configure a new |AnnotatedType| and declares it as an interceptor
+                binding.
+            </text>
+        </asssertion>
+
+        <assertion id="e">
             <text>If any observer method of the |BeforeBeanDiscovery| event throws an exception, the exception is treated as a definition error by the
                 container.
             </text>
         </assertion>
-        <assertion id="d">
+        <assertion id="f">
             <text>If any BeforeBeanDiscovery method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
 
