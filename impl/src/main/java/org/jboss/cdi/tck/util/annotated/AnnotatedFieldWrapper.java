@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Set;
 
 import javax.enterprise.inject.spi.AnnotatedField;
 
@@ -40,5 +41,10 @@ public class AnnotatedFieldWrapper<X> extends AnnotatedMemberWrapper<X> implemen
 
     public boolean isStatic() {
         return delegate.isStatic();
+    }
+
+    @Override
+    public <T extends Annotation> Set<T> getAnnotations(Class<T> annotationType) {
+        return delegate.getAnnotations(annotationType);
     }
 }

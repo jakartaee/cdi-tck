@@ -38,7 +38,7 @@ public class DummyConfiguringExtension implements Extension {
 
     void observesFooPAT(@Observes ProcessAnnotatedType<Foo> event) {
         AnnotatedTypeConfigurator<Foo> annotatedTypeConfigurator = event.configureAnnotatedType();
-        annotatedTypeConfigurator.remove(RequestScoped.class);
+        annotatedTypeConfigurator.remove(p -> p.annotationType().equals(RequestScoped.class));
         sameATConfiguratorReturned.set(annotatedTypeConfigurator.equals(event.configureAnnotatedType()));
     }
 

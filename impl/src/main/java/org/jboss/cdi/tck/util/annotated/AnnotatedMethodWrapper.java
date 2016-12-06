@@ -54,5 +54,10 @@ public class AnnotatedMethodWrapper<X> extends AnnotatedCallableWraper<X> implem
         return super.getAnnotations();
     }
 
+    @Override
+    public <T extends Annotation> Set<T> getAnnotations(Class<T> annotationType) {
+        return delegate.getAnnotations(annotationType);
+    }
+
 
 }

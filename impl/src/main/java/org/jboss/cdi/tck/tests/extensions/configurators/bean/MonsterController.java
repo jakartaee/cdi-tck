@@ -17,38 +17,32 @@
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
 
-
-/** Producer and Consumer logic resides here
+/**
+ * Producer and Consumer logic resides here
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 public class MonsterController {
 
-    
     public static boolean zombieKilled = false;
     public static boolean skeletonKilled = false;
     public static boolean zombieProducerCalled = false;
     public static boolean skeletonProducerCalled = false;
-    public static boolean ghostInstanceObtained = false; 
+    public static boolean ghostInstanceObtained = false;
     public static boolean vampireInstanceCreated = false;
-    
-    private static Ghost ghostInstance = new Ghost(false);
-    
-    // skeleton Supplier used as producer
-    public static Supplier<Skeleton> skeletonSupplier = () -> {
+
+    public static Function<Instance<Object>, Skeleton> skeletonSupplier = (Instance<Object> i) -> {
         skeletonProducerCalled = true;
         return new Skeleton(100);
     };
 
-    // zombie producing Fuction used as producer
+    // zombie producing Function used as producer
     public static Function<Instance<Object>, Zombie> zombieProducingFunction = (Instance<Object> t) -> {
         zombieProducerCalled = true;
         return new Zombie(t.select(Boolean.class).get());
@@ -61,20 +55,20 @@ public class MonsterController {
             zombieKilled = true;
         }
     };
-    
-    public static Consumer<Skeleton> skeletonConsumer = new Consumer<Skeleton>() {
+
+    public static BiConsumer<Skeleton, Instance<Object>> skeletonConsumer = new BiConsumer<Skeleton, Instance<Object>>() {
 
         @Override
-        public void accept(Skeleton t) {
+        public void accept(Skeleton t, Instance<Object> instance) {
             skeletonKilled = true;
         }
     };
-    
-    public static Ghost getGhostInstance() {
+
+    public static Function<Instance<Object>, Ghost> getGhostInstance = (Instance<Object> i) -> {
         ghostInstanceObtained = true;
-        return ghostInstance;
-    }
-    
+        return new Ghost(false);
+    };
+
     // used in zombie producer function
     @Produces
     public Boolean giveMeTrue() {

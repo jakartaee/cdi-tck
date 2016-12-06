@@ -71,6 +71,16 @@ public class ContainerLifecycleEvents {
         }
 
         @Override
+        public <T extends Annotation> AnnotatedTypeConfigurator<T> configureQualifier(Class<T> qualifier) {
+            return null;
+        }
+
+        @Override
+        public <T extends Annotation> AnnotatedTypeConfigurator<T> configureInterceptorBinding(Class<T> bindingType) {
+            return null;
+        }
+
+        @Override
         public void addStereotype(Class<? extends Annotation> stereotype, Annotation... stereotypeDef) {
         }
 

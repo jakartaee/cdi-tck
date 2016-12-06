@@ -24,11 +24,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletionStage;
-import java.util.concurrent.Executor;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;
 import javax.enterprise.event.Event;
+import javax.enterprise.event.NotificationOptions;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.ObserverMethod;
@@ -74,7 +74,7 @@ public class OrderedEventDeliveryDecorator<T> implements Event<T>, Serializable 
     }
 
     @Override
-    public <U extends T> CompletionStage<U> fireAsync(U event, Executor executor) {
+    public <U extends T> CompletionStage<U> fireAsync(U event, NotificationOptions options) {
         return null;
     }
 

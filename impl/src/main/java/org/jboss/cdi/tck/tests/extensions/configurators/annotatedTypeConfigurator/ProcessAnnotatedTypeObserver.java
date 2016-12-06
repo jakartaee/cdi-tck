@@ -87,20 +87,21 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         originalCatAT = annotatedTypeConfigurator.getAnnotated();
 
         // remove @RequestScoped from Cat
-        annotatedTypeConfigurator.remove(RequestScoped.class);
+        annotatedTypeConfigurator.remove(a -> a.annotationType().equals(RequestScoped.class));
         // remove @Produces and @Cats Cat.produceCatName()
-        getAMConfiguratorByName(annotatedTypeConfigurator, "produceCatFeed").remove(ProducesLiteral.INSTANCE)
-                .remove(Cats.CatsLiteral.INSTANCE);
+        getAMConfiguratorByName(annotatedTypeConfigurator, "produceCatFeed").remove(a -> a.equals(ProducesLiteral.INSTANCE))
+                .remove(a -> a.equals(Cats.CatsLiteral.INSTANCE));
         // remove @Inject from Cat.feed
-        annotatedTypeConfigurator.filterFields(af -> af.getJavaMember().getName().equals("feed")).findFirst().get().remove(InjectLiteral.INSTANCE);
+        annotatedTypeConfigurator.filterFields(af -> af.getJavaMember().getName().equals("feed")).findFirst().get()
+                .remove(a -> a.equals(InjectLiteral.INSTANCE));
 
         // remove @Inject and @Cats from constructor with parameter
-        annotatedTypeConfigurator.filterConstructors(ac -> ac.getParameters().size() > 0).findFirst().get().remove(InjectLiteral.INSTANCE)
-                .filterParams(ap -> ap.getPosition() == 0).findFirst().get().remove(Cats.CatsLiteral.INSTANCE);
+        annotatedTypeConfigurator.filterConstructors(ac -> ac.getParameters().size() > 0).findFirst().get().remove(a -> a.equals(InjectLiteral.INSTANCE))
+                .filterParams(ap -> ap.getPosition() == 0).findFirst().get().remove(a -> a.equals(Cats.CatsLiteral.INSTANCE));
 
         // remove @Observes from Cat.observesCatsFeed method parameter
         getAMConfiguratorByName(annotatedTypeConfigurator, "observesCatsFeed")
-                .filterParams(ap -> ap.getPosition() == 0).findFirst().get().remove(Observes.class);
+                .filterParams(ap -> ap.getPosition() == 0).findFirst().get().remove(a -> a.annotationType().equals(Observes.class));
 
     }
 
@@ -108,8 +109,8 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         // remove all @Produces from DogProducer
         AnnotatedTypeConfigurator<DogProducer> annotatedTypeConfigurator = event.configureAnnotatedType();
 
-        annotatedTypeConfigurator.methods().stream().forEach(am -> am.remove(Produces.class));
-        annotatedTypeConfigurator.fields().stream().forEach(am -> am.remove(Produces.class));
+        annotatedTypeConfigurator.methods().stream().forEach(am -> am.remove(a -> a.annotationType().equals(Produces.class)));
+        annotatedTypeConfigurator.fields().stream().forEach(am -> am.remove(a -> a.annotationType().equals(Produces.class)));
     }
 
     void observesAnimalShelterPAT(@Observes ProcessAnnotatedType<AnimalShelter> event) {
