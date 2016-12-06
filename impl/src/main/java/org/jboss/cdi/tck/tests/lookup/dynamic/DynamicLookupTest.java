@@ -202,7 +202,8 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "e"), @SpecAssertion(section = ANNOTATIONLITERAL_TYPELITERAL, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "e"), @SpecAssertion(section = ANNOTATIONLITERAL_TYPELITERAL, id = "b"),
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma")})
     public void testNewBean() {
         Instance<String> string = getContextualReference(ObtainsNewInstanceBean.class).getString();
         assertFalse(string.isAmbiguous());
@@ -211,8 +212,7 @@ public class DynamicLookupTest extends AbstractTest {
         assertTrue(string.get() instanceof String);
 
         Instance<Map<String, String>> map = getContextualReference(ObtainsNewInstanceBean.class).getMap();
-        assertFalse(map.isAmbiguous());
-        assertFalse(map.isUnsatisfied());
+        assertTrue(map.isResolvable());
         Map<String, String> instance = map.get();
         assertNotNull(instance);
         assertTrue(instance instanceof HashMap<?, ?>);
@@ -225,9 +225,11 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "jb") })
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "jb"),
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma") })
     public void testStream() {
         Instance<Common> instance = getContextualReference(ObtainsInstanceBean.class).getCommon();
+        Assert.assertFalse(instance.isResolvable());
         Stream<Common> stream = instance.stream();
         assertEquals(stream.count(), 2);
         assertTrue(stream.findFirst().isPresent());
