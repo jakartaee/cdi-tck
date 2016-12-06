@@ -62,7 +62,7 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "a"), @SpecAssertion(section = SE_BOOTSTRAP, id = "a"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "c"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "do"),
             @SpecAssertion(section = SE_CONTAINER, id = "cb") })
@@ -85,7 +85,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "c"), @SpecAssertion(section = SE_BOOTSTRAP, id = "da"),
+    @SpecAssertions({ @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "a"), @SpecAssertion(section = SE_BOOTSTRAP, id = "c"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "da"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "do"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "e") })
     public void testInvocationOfInitializedMethodReturnsNewSeContainerInstance() {
@@ -117,7 +118,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "db"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dh"),
+    @SpecAssertions({ @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "a"), @SpecAssertion(section = SE_BOOTSTRAP, id = "db"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "dh"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "di"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dm"),
             @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
     public void testAlternativesInSE() {
@@ -260,14 +262,12 @@ public class BootstrapSEContainerTest extends Arquillian {
         seContainer.select(InjectLiteral.INSTANCE);
     }
 
-    private SeContainer initializeAndShutdownContainer(){
+    private SeContainer initializeAndShutdownContainer() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         SeContainer seContainer = seContainerInitializer.initialize();
         seContainer.close();
         Assert.assertFalse(seContainer.isRunning());
-        return  seContainer;
+        return seContainer;
     }
-
-
 
 }

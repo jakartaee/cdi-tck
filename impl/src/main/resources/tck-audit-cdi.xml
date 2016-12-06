@@ -8717,6 +8717,7 @@
                 static method uses java service-provider to obtain an implementation of `SeContainerInitializer` and return an instance of it. There must be
                 exactly one provider available, otherwise an `IllegalStateException` is thrown.
             </text>
+            <note>Exceptional states tested in CDI API.</note>
         </assertion>
         <assertion id="b">
             <text>`SeContainerInitializer` configuration allows explicit addition of elements to the set of automatically discovered elements. These additions
