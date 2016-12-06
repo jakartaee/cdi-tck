@@ -25,6 +25,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 import javax.enterprise.event.Event;
+import javax.enterprise.event.NotificationOptions;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -51,7 +52,8 @@ public class FireAsyncWithCustomExecutorTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = EVENT, id = "ee") })
     public void testCustomExecutor() throws InterruptedException {
         BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-        event.fireAsync(new Message(), new CustomExecutor()).thenAccept(queue::add);
+        NotificationOptions notificationOptions = NotificationOptions.ofExecutor(new CustomExecutor());
+        event.fireAsync(new Message(), notificationOptions).thenAccept(queue::add);
 
         Message message = queue.poll(2, TimeUnit.SECONDS);
         assertNotNull(message);

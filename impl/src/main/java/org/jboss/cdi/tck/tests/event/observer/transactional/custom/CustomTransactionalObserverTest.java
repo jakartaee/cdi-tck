@@ -70,7 +70,7 @@ public class CustomTransactionalObserverTest extends AbstractTest {
 
         // Test ObserverMethod.notify() was called
         assertNotNull(extension.getAnyGiraffeObserver().getReceivedPayload());
-        assertEquals(Giraffe.class, extension.getAnyGiraffeObserver().getReceivedPayload().getEventObject().getClass());
+        assertEquals(Giraffe.class, extension.getAnyGiraffeObserver().getReceivedPayload().getEvent().getClass());
         assertNotNull(extension.getAnyGiraffeObserver().getReceivedPayload().getMetadata());
         // Test ObserverMethod.getTransactionPhase() was called
         assertTrue(extension.getAnyGiraffeObserver().isTransactionPhaseCalled());

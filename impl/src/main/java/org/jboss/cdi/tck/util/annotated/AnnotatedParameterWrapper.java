@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.util.annotated;
 
 import java.lang.annotation.Annotation;
+import java.util.Set;
 
 import javax.enterprise.inject.spi.AnnotatedParameter;
 
@@ -37,6 +38,11 @@ public class AnnotatedParameterWrapper<X> extends AnnotatedWrapper implements An
 
     public int getPosition() {
         return delegate.getPosition();
+    }
+
+    @Override
+    public <T extends Annotation> Set<T> getAnnotations(Class<T> annotationType) {
+        return delegate.getAnnotations(annotationType);
     }
 
 }

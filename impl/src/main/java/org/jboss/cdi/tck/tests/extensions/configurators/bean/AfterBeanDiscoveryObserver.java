@@ -126,7 +126,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
         ghost.injectionPoints(ghostDesireIP);
 
         // set producing
-        ghost.producing(MonsterController.getGhostInstance());
+        ghost.produceWith(MonsterController.getGhostInstance);
     }
     
     private void configureVampire(BeanManager bm, BeanConfigurator<Vampire> vampire) {

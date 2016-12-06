@@ -55,8 +55,8 @@ public class ProcessObserverMethodObserver implements Extension {
     void observesPineapplePOM(@Observes ProcessObserverMethod<Pineapple, FruitObserver> event) {
         event.configureObserverMethod()
                 .addQualifier(Delicious.DeliciousLiteral.INSTANCE)
-                .notifyWith((pineapple, eventMetadata) -> {
-                    pineAppleQualifiers = eventMetadata.getQualifiers();
+                .notifyWith((eventConsumer) -> {
+                    pineAppleQualifiers = eventConsumer.getMetadata().getQualifiers();
                     consumerNotified.set(true);
                 });
     }
