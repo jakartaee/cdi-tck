@@ -58,8 +58,9 @@ public class RequestScopeEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ja"), @SpecAssertion(section = REQUEST_CONTEXT, id = "a")
-            , @SpecAssertion(section = REQUEST_CONTEXT, id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ja"), @SpecAssertion(section = REQUEST_CONTEXT, id = "a"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "b"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "c"),
             @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ea"),
             @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ec") })
     public void test() throws Exception {
@@ -67,10 +68,12 @@ public class RequestScopeEventTest extends AbstractTest {
 
         TextPage page1 = client.getPage(contextPath + "?foo=bar");
         assertTrue(page1.getContent().contains("Initialized requests:1")); // the current request
+        assertTrue(page1.getContent().contains("Before destroyed requests:0"));
         assertTrue(page1.getContent().contains("Destroyed requests:0")); // not destroyed yet
 
         TextPage page2 = client.getPage(contextPath + "?foo=bar");
         assertTrue(page2.getContent().contains("Initialized requests:2"));
+        assertTrue(page1.getContent().contains("Before destroyed requests:1"));
         assertTrue(page2.getContent().contains("Destroyed requests:1"));
     }
 }

@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.se.context;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.BeforeDestroyed;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
@@ -24,13 +25,20 @@ import javax.enterprise.event.Observes;
 public class ApplicationScopedObserver {
 
     public static boolean isInitialized;
+    public static boolean isBeforeDestroyed;
     public static boolean isDestroyed;
     public static Object initializedEventPayload;
+    public static Object beforeDestroyedEventPayload;
     public static Object destroyedEventPayload;
 
     public void observesApplicationScopedIsInitialized(@Observes @Initialized(ApplicationScoped.class) Object obj) {
         isInitialized = true;
         initializedEventPayload = obj;
+    }
+
+    public void observesApplicationScopedBeforeDestroyed(@Observes @BeforeDestroyed(ApplicationScoped.class) Object obj){
+        isBeforeDestroyed = true;
+        beforeDestroyedEventPayload = obj;
     }
 
     public void observesApplicationScopedIsDestroyed(@Observes @Destroyed(ApplicationScoped.class) Object obj) {
@@ -40,8 +48,10 @@ public class ApplicationScopedObserver {
     
     public static void reset(){
         isInitialized = false;
+        isBeforeDestroyed = false;
         isDestroyed = false;
         initializedEventPayload = null;
+        beforeDestroyedEventPayload = null;
         destroyedEventPayload = null;
     }
 }

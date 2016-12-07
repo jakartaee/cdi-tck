@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.context.request.event;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.BeforeDestroyed;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.context.RequestScoped;
@@ -29,6 +30,7 @@ import javax.servlet.ServletRequest;
 public class ObservingBean {
 
     private final AtomicInteger initializedRequestCount = new AtomicInteger();
+    private final AtomicInteger beforeDestroyedRequestCount = new AtomicInteger();
     private final AtomicInteger destroyedRequestCount = new AtomicInteger();
 
     public void observeRequestInitialized(@Observes @Initialized(RequestScoped.class) ServletRequest event) {
@@ -36,6 +38,10 @@ public class ObservingBean {
             throw new IllegalArgumentException("Unknown request, parameter foo not set.");
         }
         initializedRequestCount.incrementAndGet();
+    }
+
+    public void observeBeforeDestroyed(@Observes @BeforeDestroyed(RequestScoped.class) ServletRequest event){
+         beforeDestroyedRequestCount.incrementAndGet();
     }
 
     public void observeRequestDestroyed(@Observes @Destroyed(RequestScoped.class) ServletRequest event) {
@@ -48,5 +54,9 @@ public class ObservingBean {
 
     public AtomicInteger getDestroyedRequestCount() {
         return destroyedRequestCount;
+    }
+
+    public AtomicInteger getBeforeDestroyedRequestCount() {
+        return beforeDestroyedRequestCount;
     }
 }

@@ -37,6 +37,8 @@ public class Servlet extends HttpServlet {
         resp.getWriter().append("Initialized requests:" + observer.getInitializedRequestCount().get());
         resp.getWriter().append("\n");
         resp.getWriter().append("Destroyed requests:" + observer.getDestroyedRequestCount().get());
+        resp.getWriter().append("\n");
+        resp.getWriter().append("Before destroyed requests:" + observer.getBeforeDestroyedRequestCount().get());
         resp.setContentType("text/plain");
     }
 

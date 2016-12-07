@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.se.context.activation.interceptor;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.ACTIVATING_REQUEST_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 
 import java.io.IOException;
 import javax.enterprise.inject.se.SeContainer;
@@ -53,35 +54,43 @@ public class ActivateRequestContextByInterceptorTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "a"), @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "a"), @SpecAssertion(section = REQUEST_CONTEXT, id = "b"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "c"), @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "a"),
+            @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "f") })
     public void classInterceptorRequestContextActivation() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer container = seContainerInitializer
                 .initialize()) {
             ClassInterceptorContextActivator activator = container.select(ClassInterceptorContextActivator.class).get();
             Assert.assertEquals(11, activator.callRequestScopeBean());
-            // request context is activated on class level so the same context should be still active
-            Assert.assertEquals(22, activator.callRequestScopeBean());
+            RequestContextObserver requestContextObserver = container.select(RequestContextObserver.class).get();
+            Assert.assertEquals(1, requestContextObserver.getInitCounter());
+            Assert.assertEquals(1, requestContextObserver.getBeforeDestroyedCounter());
+            Assert.assertEquals(1, requestContextObserver.getDestroyedCounter());
         }
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "a"), @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "a"), @SpecAssertion(section = REQUEST_CONTEXT, id = "b"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "c"), @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "a"),
+            @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "f") })
     public void methodInterceptorRequestContextActivation() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer container = seContainerInitializer
                 .initialize()) {
             MethodInterceptorContextActivator activator = container.select(MethodInterceptorContextActivator.class).get();
             Assert.assertEquals(11, activator.callRequestScopeBean());
-            // request context is activated on method level so the same context shouldn't be active
-            Assert.assertEquals(11, activator.callRequestScopeBean());
+            RequestContextObserver requestContextObserver = container.select(RequestContextObserver.class).get();
+            Assert.assertEquals(1, requestContextObserver.getInitCounter());
+            Assert.assertEquals(1, requestContextObserver.getBeforeDestroyedCounter());
+            Assert.assertEquals(1, requestContextObserver.getDestroyedCounter());
         }
     }
 
     // indirectly test ActivateRequestContext interceptor priority
     @Test
-    @SpecAssertions({@SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "g")})
-    public void builtInInterceptorHasGivenPriority(){
+    @SpecAssertions({ @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "g") })
+    public void builtInInterceptorHasGivenPriority() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer container = seContainerInitializer
                 .initialize()) {

@@ -81,12 +81,14 @@ public class ContextSETest extends Arquillian {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "c"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "c"), @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ec") })
+            @SpecAssertion(section = APPLICATION_CONTEXT, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT, id = "c"), @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ec") })
     public void testEventIsFiredWhenAplicationContextDestroyed() {
         ApplicationScopedObserver.reset();
         try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
 
         }
+        Assert.assertTrue(ApplicationScopedObserver.isBeforeDestroyed);
+        Assert.assertNotNull(ApplicationScopedObserver.beforeDestroyedEventPayload);
         Assert.assertTrue(ApplicationScopedObserver.isDestroyed);
         Assert.assertNotNull(ApplicationScopedObserver.destroyedEventPayload);
     }
