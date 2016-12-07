@@ -34,6 +34,7 @@ import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.util.AnnotationLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -203,7 +204,7 @@ public class DynamicLookupTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "e"), @SpecAssertion(section = ANNOTATIONLITERAL_TYPELITERAL, id = "b"),
-            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma")})
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma") })
     public void testNewBean() {
         Instance<String> string = getContextualReference(ObtainsNewInstanceBean.class).getString();
         assertFalse(string.isAmbiguous());
@@ -224,15 +225,14 @@ public class DynamicLookupTest extends AbstractTest {
         assertTrue(getContextualReference(ObtainsNewInstanceBean.class).getIae().isUnsatisfied());
     }
 
-    @Test
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "jb"),
             @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma") })
-    public void testStream() {
-        Instance<Common> instance = getContextualReference(ObtainsInstanceBean.class).getCommon();
-        assertTrue(instance.isResolvable());
-        Stream<Common> stream = instance.stream();
+    public void testStream(Instance<Uncommon> uncommonInstance) {
+        assertFalse(uncommonInstance.isResolvable());
+        Stream<Uncommon> stream = uncommonInstance.stream();
         assertEquals(stream.count(), 2);
-        assertTrue(stream.findFirst().isPresent());
-        assertTrue(stream.findFirst().get() instanceof Baz);
+        assertTrue(stream.filter(p -> p.getClass().equals(Garply.class)).findFirst().isPresent());
+        assertTrue(stream.filter(p -> p.getClass().equals(Corge.class)).findFirst().isPresent());
     }
 }
