@@ -267,6 +267,12 @@
         </group>
     </section>
 
+    <section id="repeating_qualifiers" title="Repeating qualifiers" level="3">
+        <assertion id="a">
+            <text>A repeated qualifier behaves just as any other qualifier does</text>
+        </assertion>
+    </section>
+
     <section id="scopes" title="Scopes" level="2">
         <assertion id="a">
             <text>All beans have a scope.</text>
