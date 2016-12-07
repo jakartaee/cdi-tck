@@ -23,6 +23,7 @@ import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -36,7 +37,7 @@ import org.testng.annotations.Test;
  */
 @Test
 @SpecVersion(spec = "cdi", version = "2.0-EDR2")
-public class AnnotatedTypeConfiguratorInBBDTest {
+public class AnnotatedTypeConfiguratorInBBDTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -56,7 +57,7 @@ public class AnnotatedTypeConfiguratorInBBDTest {
         Assert.assertNotNull(fooInstance.get());
     }
     
-    @Test
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "d")
     public void testInterceptorBindingAddition(@Any Foo foo) {
         foo.shouldTriggerInterceptor();
