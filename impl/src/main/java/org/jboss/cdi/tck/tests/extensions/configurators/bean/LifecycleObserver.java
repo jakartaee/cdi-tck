@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
@@ -26,14 +27,20 @@ import javax.enterprise.inject.spi.BeanAttributes;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.enterprise.inject.spi.ProcessSyntheticBean;
 import javax.enterprise.inject.spi.configurator.BeanConfigurator;
 
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-public class AfterBeanDiscoveryObserver implements Extension {
-    
+public class LifecycleObserver implements Extension {
+
+    private AtomicBoolean vampirePSBFired = new AtomicBoolean(false);
+    private AtomicBoolean skeletonPSBFired = new AtomicBoolean(false);
+    private AtomicBoolean ghostPSBFired = new AtomicBoolean(false);
+    private AtomicBoolean zombiePSBFired = new AtomicBoolean(false);
+
     public void observeUndead(@Observes AfterBeanDiscovery abd, BeanManager bm) {
         // create Skeleton bean
         configureSkeleton(bm, abd.addBean());
@@ -47,7 +54,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
         // create Vampire bean
         configureVampire(bm, abd.addBean());
     }
-    
+
     private void configureSkeleton(BeanManager bm, BeanConfigurator<Skeleton> skeleton) {
         // set bean class, qualifier, stereotype, scope       
         // no read() method used here, all set manually
@@ -56,7 +63,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
         skeleton.addStereotype(Monster.class);
         skeleton.scope(RequestScoped.class);
         skeleton.addTransitiveTypeClosure(Skeleton.class);
-        
+
         for (AnnotatedField<? super Skeleton> field : bm.createAnnotatedType(Skeleton.class).getFields()) {
             if (field.getJavaMember().getType().equals(DesireToHurtHumans.class)) {
                 skeleton.addInjectionPoint(bm.createInjectionPoint(field));
@@ -70,7 +77,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
         // set Consumer in dispose method
         skeleton.disposeWith(MonsterController.skeletonConsumer);
     }
-    
+
     private void configureZombie(BeanManager bm, BeanConfigurator<Zombie> zombie) {
         // init with read() method, then set values
         zombie.read(bm.createAnnotatedType(Zombie.class));
@@ -78,7 +85,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
         zombie.addQualifiers(Undead.UndeadLiteral.INSTANCE, Dangerous.DangerousLiteral.INSTANCE);
         zombie.addStereotype(Monster.class);
         zombie.scope(RequestScoped.class);
-        
+
         InjectionPoint zombieWeaponIP = null;
         InjectionPoint zombieDesireIP = null;
         for (AnnotatedField<? super Zombie> field : bm.createAnnotatedType(Zombie.class).getFields()) {
@@ -101,7 +108,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
         // make passivation capable
         zombie.id("zombie");
     }
-    
+
     private void configureGhost(BeanManager bm, BeanConfigurator<Ghost> ghost) {
         // creation using read from bean attributes
         ghost.read(bm.createBeanAttributes(bm.createAnnotatedType(Ghost.class)));
@@ -128,7 +135,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
         // set producing
         ghost.produceWith(MonsterController.getGhostInstance);
     }
-    
+
     private void configureVampire(BeanManager bm, BeanConfigurator<Vampire> vampire) {
         vampire.read(bm.createAnnotatedType(Vampire.class));
         vampire.beanClass(Vampire.class);
@@ -144,4 +151,37 @@ public class AfterBeanDiscoveryObserver implements Extension {
             return bm.createBean(ba, Vampire.class, bm.getInjectionTargetFactory(at)).create(creationalContext);
         });
     }
+
+    void processSkeletonBean(@Observes ProcessSyntheticBean<Skeleton> event) {
+        skeletonPSBFired.set(true);
+    }
+
+    void processSVampireBean(@Observes ProcessSyntheticBean<Vampire> event) {
+        vampirePSBFired.set(true);
+    }
+
+    void processZombieBean(@Observes ProcessSyntheticBean<Zombie> event) {
+        zombiePSBFired.set(true);
+    }
+
+    void processGhostBean(@Observes ProcessSyntheticBean<Ghost> event) {
+        ghostPSBFired.set(true);
+    }
+
+    public boolean isVampirePSBFired() {
+        return vampirePSBFired.get();
+    }
+
+    public boolean isSkeletonPSBFired() {
+        return skeletonPSBFired.get();
+    }
+
+    public boolean isGhostPSBFired() {
+        return ghostPSBFired.get();
+    }
+
+    public boolean isZombiePSBFired() {
+        return zombiePSBFired.get();
+    }
+
 }

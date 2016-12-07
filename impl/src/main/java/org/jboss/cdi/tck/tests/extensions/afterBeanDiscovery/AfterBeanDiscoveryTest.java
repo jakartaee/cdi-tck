@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery;
 
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -45,8 +46,8 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "db") })
     public void testBeanIsAdded() {
-        assert getBeans(Cockatoo.class).size() == 1;
-        assert getContextualReference(Cockatoo.class).getName().equals("Billy");
+        assertEquals(1, getBeans(Cockatoo.class).size());
+        assertEquals("Billy", getContextualReference(Cockatoo.class).getName());
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -59,9 +60,9 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "da"), @SpecAssertion(section = PROCESS_BEAN, id = "eca") })
     public void testProcessBeanIsFired() {
-        assert AfterBeanDiscoveryObserver.isProcessBeanFiredForCockatooBean;
+        assertTrue(AfterBeanDiscoveryObserver.isProcessBeanFiredForCockatooBean);
     }
 
     @Test

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
+import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
@@ -48,7 +50,7 @@ public class BeanConfiguratorTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanConfiguratorTest.class)
-            .withExtension(AfterBeanDiscoveryObserver.class).build();
+                .withExtension(LifecycleObserver.class).build();
     }
 
     @Inject
@@ -56,9 +58,9 @@ public class BeanConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "f"),
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "g")})
+            @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "f"),
+            @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "g") })
     public void testCreationalAndDisposalMethods() {
         Bean<Skeleton> skeletonBean = getUniqueBean(Skeleton.class, Undead.UndeadLiteral.INSTANCE);
         CreationalContext<Skeleton> skeletonCreationalContext = getCurrentManager().createCreationalContext(skeletonBean);
@@ -87,10 +89,10 @@ public class BeanConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "b"),
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "c"),
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "d") })
+            @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "b"),
+            @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "c"),
+            @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "d") })
     public void testInjectionPoints() {
         // Dungeon should have Skeleton, Zombie, Ghost and Vampire Injected
         assertTrue(dungeon.hasAllMonters());
@@ -107,11 +109,20 @@ public class BeanConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
-        @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "e") })
+            @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = Sections.BEAN_CONFIGURATOR, id = "e") })
     public void testPassivationCapability() {
         // BeanManager should be able to find a passivation capable bean
         assertNotNull(getCurrentManager().getPassivationCapableBean("zombie"));
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "da"), @SpecAssertion(section = PROCESS_BEAN, id = "eca") })
+    public void processSynthethicBeanEventFired(LifecycleObserver extension) {
+        assertTrue(extension.isSkeletonPSBFired());
+        assertTrue(extension.isVampirePSBFired());
+        assertTrue(extension.isZombiePSBFired());
+        assertTrue(extension.isGhostPSBFired());
     }
 
     // helper method to create a bean

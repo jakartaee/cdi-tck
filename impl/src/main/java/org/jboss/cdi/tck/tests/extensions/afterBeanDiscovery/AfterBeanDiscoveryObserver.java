@@ -37,8 +37,8 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
-import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
+import javax.enterprise.inject.spi.ProcessSyntheticBean;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 
@@ -52,7 +52,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
 
     public static boolean isProcessBeanFiredForCockatooBean = false;
 
-    public void observeProcessBean(@Observes ProcessBean<Cockatoo> event) {
+    public void observeProcessBean(@Observes ProcessSyntheticBean<Cockatoo> event) {
         isProcessBeanFiredForCockatooBean = true;
         assert event.getBean().getName().equals("cockatoo");
     }
