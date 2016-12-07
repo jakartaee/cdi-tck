@@ -232,7 +232,7 @@ public class DynamicLookupTest extends AbstractTest {
         assertFalse(uncommonInstance.isResolvable());
         Stream<Uncommon> stream = uncommonInstance.stream();
         assertEquals(stream.count(), 2);
-        assertTrue(stream.filter(p -> p.getClass().equals(Garply.class)).findFirst().isPresent());
-        assertTrue(stream.filter(p -> p.getClass().equals(Corge.class)).findFirst().isPresent());
+        assertTrue(uncommonInstance.stream().filter(p -> p.getClass().equals(Garply.class)).findFirst().isPresent());
+        assertTrue(uncommonInstance.stream().filter(p -> p.getClass().equals(Corge.class)).findFirst().isPresent());
     }
 }
