@@ -229,7 +229,7 @@ public class DynamicLookupTest extends AbstractTest {
             @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma") })
     public void testStream() {
         Instance<Common> instance = getContextualReference(ObtainsInstanceBean.class).getCommon();
-        Assert.assertFalse(instance.isResolvable());
+        assertTrue(instance.isResolvable());
         Stream<Common> stream = instance.stream();
         assertEquals(stream.count(), 2);
         assertTrue(stream.findFirst().isPresent());
