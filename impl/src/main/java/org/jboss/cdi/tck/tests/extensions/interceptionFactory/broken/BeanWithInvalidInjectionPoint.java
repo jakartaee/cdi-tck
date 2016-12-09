@@ -23,6 +23,8 @@ import javax.inject.Inject;
 @ApplicationScoped
 public class BeanWithInvalidInjectionPoint {
 
+    public BeanWithInvalidInjectionPoint(){}
+
     @Inject
     public BeanWithInvalidInjectionPoint(InterceptionFactory<?> interceptionFactory){
 

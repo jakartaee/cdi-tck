@@ -28,6 +28,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 public class TestExtension01 implements Extension {
 
     void processBeanEarly(@Observes @Priority(Interceptor.Priority.LIBRARY_BEFORE) ProcessBean<TestBean> processBean) {
+        ActionSequence.reset();
         ActionSequence.addAction("1");
     }
 

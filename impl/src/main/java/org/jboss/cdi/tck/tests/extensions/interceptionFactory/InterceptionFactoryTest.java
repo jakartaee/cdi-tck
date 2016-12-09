@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.extensions.interceptionFactory;
 
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTION_FACTORY;
 
-import java.util.Collections;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InterceptionFactory;
@@ -52,7 +54,7 @@ public class InterceptionFactoryTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "c") })
     public void producedInstanceIsIntercepted(Product product) {
         ActionSequence.reset();
-        Assert.assertEquals(3, product.ping());
+        Assert.assertEquals(4, product.ping());
         ActionSequence.assertSequenceDataEquals(ProductInterceptor1.class, ProductInterceptor2.class, ProductInterceptor3.class);
     }
 
@@ -61,6 +63,6 @@ public class InterceptionFactoryTest extends AbstractTest {
     public void interceptionFactoryBeanIsAvailable() {
         Bean<?> interceptionFactoryBean = getCurrentManager().resolve(getCurrentManager().getBeans(InterceptionFactory.class));
         Assert.assertEquals(Dependent.class, interceptionFactoryBean.getScope());
-        Assert.assertEquals(Collections.singleton(Default.Literal.INSTANCE), interceptionFactoryBean.getQualifiers());
+        Assert.assertEquals(Stream.of(Default.Literal.INSTANCE, Any.Literal.INSTANCE).collect(Collectors.toSet()), interceptionFactoryBean.getQualifiers());
     }
 }

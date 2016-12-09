@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
 public class UnproxyableType {
 
+    public UnproxyableType(){}
+
     public UnproxyableType(String name){
 
     }
