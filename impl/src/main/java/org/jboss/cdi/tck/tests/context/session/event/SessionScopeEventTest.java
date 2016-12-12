@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.context.session.event;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_CONTEXTS;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_CONTEXT_EE;
 import static org.testng.Assert.assertTrue;
 
@@ -58,9 +57,7 @@ public class SessionScopeEventTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "da"), @SpecAssertion(section = SESSION_CONTEXT_EE, id = "db"),
-            @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ca"),
-            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ea"),
-            @SpecAssertion(section = BUILTIN_CONTEXTS, id = "ec") })
+            @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ca") })
     public void test() throws Exception {
         WebClient client = new WebClient();
 

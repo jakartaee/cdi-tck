@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.context.request.event;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.BeforeDestroyed;
 import javax.enterprise.context.Destroyed;
