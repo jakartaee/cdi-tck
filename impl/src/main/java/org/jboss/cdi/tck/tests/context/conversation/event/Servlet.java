@@ -56,6 +56,8 @@ public class Servlet extends HttpServlet {
         }
         resp.getWriter().append("Initialized:" + conversationScopedObserver.isInitializedObserved());
         resp.getWriter().append("\n");
+        resp.getWriter().append("Before Destroyed:" + applicationScopedObserver.isBeforeDestroyedCalled());
+        resp.getWriter().append("\n");
         resp.getWriter().append("Destroyed:" + applicationScopedObserver.isDestroyedCalled());
         resp.getWriter().append("\n");
         resp.getWriter().append("cid:" + conversation.getId());

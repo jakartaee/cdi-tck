@@ -53,7 +53,7 @@ public class DestroyConversationNotAssociatedWithCurrentRequestEventTest extends
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bc") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bd") })
     public void testLifecycleEventFired() throws Exception {
 
         WebClient webClient = new WebClient();

@@ -59,7 +59,7 @@ public class TransientConversationLifecycleEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bc") })
     public void testLifecycleEventFiredForTransientConversation() throws Exception {
 
         WebClient client = new WebClient();

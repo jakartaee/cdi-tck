@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.context.session.event;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.BeforeDestroyed;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.context.SessionScoped;
@@ -29,10 +30,15 @@ import javax.servlet.http.HttpSession;
 public class ObservingBean {
 
     private final AtomicInteger initializedSessionCount = new AtomicInteger();
+    private final AtomicInteger beforedDestroyedSessionCount = new AtomicInteger();
     private final AtomicInteger destroyedSessionCount = new AtomicInteger();
 
     public void observeSessionInitialized(@Observes @Initialized(SessionScoped.class) HttpSession event) {
         initializedSessionCount.incrementAndGet();
+    }
+
+    public void observeSessionBeforeDestroyed(@Observes @BeforeDestroyed(SessionScoped.class) HttpSession event) {
+        beforedDestroyedSessionCount.incrementAndGet();
     }
 
     public void observeSessionDestroyed(@Observes @Destroyed(SessionScoped.class) HttpSession event) {
@@ -41,6 +47,10 @@ public class ObservingBean {
 
     public AtomicInteger getInitializedSessionCount() {
         return initializedSessionCount;
+    }
+
+    public AtomicInteger getBeforedDestroyedSessionCount() {
+        return beforedDestroyedSessionCount;
     }
 
     public AtomicInteger getDestroyedSessionCount() {

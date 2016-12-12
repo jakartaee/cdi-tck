@@ -17,8 +17,8 @@
 package org.jboss.cdi.tck.tests.context.conversation.event;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.BeforeDestroyed;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.Destroyed;
 import javax.enterprise.event.Observes;
@@ -28,6 +28,13 @@ import javax.servlet.ServletRequest;
 public class ApplicationScopedObserver {
 
     private final AtomicBoolean destroyedCalled = new AtomicBoolean();
+    private final AtomicBoolean beforeDestroyedCalled = new AtomicBoolean();
+
+    void observeBeforeDestroyed(@Observes @BeforeDestroyed(ConversationScoped.class) ServletRequest event) {
+        if (event.getAttribute("foo") != null) {
+            beforeDestroyedCalled.set(true);
+        }
+    }
 
     void observeRequestDestroyed(@Observes @Destroyed(ConversationScoped.class) ServletRequest event) {
         if (event.getAttribute("foo") != null) {
@@ -35,11 +42,16 @@ public class ApplicationScopedObserver {
         }
     }
 
+    boolean isBeforeDestroyedCalled() {
+        return beforeDestroyedCalled.get();
+    }
+
     boolean isDestroyedCalled() {
         return destroyedCalled.get();
     }
 
     public void reset() {
+        beforeDestroyedCalled.set(false);
         destroyedCalled.set(false);
     }
 }

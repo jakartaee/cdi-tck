@@ -59,7 +59,8 @@ public class LongRunningConversationLifecycleEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bb"),
+            @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bc") })
     public void testLifecycleEventFiredForLongRunningConversation() throws Exception {
 
         WebClient client = new WebClient();
@@ -67,23 +68,27 @@ public class LongRunningConversationLifecycleEventTest extends AbstractTest {
         // The current transient conversation is promoted to long-running
         TextPage page = client.getPage(contextPath + "/begin");
         assertTrue(page.getContent().contains("Initialized:true"));
+        assertTrue(page.getContent().contains("Before Destroyed:false"));
         assertTrue(page.getContent().contains("Destroyed:false"));
         assertTrue(page.getContent().contains("cid:" + ConversationScopedBean.CID));
 
         // The long-running conversation is reassociated
         page = client.getPage(contextPath + "/display?cid=" + ConversationScopedBean.CID);
         assertTrue(page.getContent().contains("Initialized:true"));
+        assertTrue(page.getContent().contains("Before Destroyed:false"));
         assertTrue(page.getContent().contains("Destroyed:false"));
         assertTrue(page.getContent().contains("cid:" + ConversationScopedBean.CID));
 
         page = client.getPage(contextPath + "/display?cid=" + ConversationScopedBean.CID);
         assertTrue(page.getContent().contains("Initialized:true"));
+        assertTrue(page.getContent().contains("Before Destroyed:false"));
         assertTrue(page.getContent().contains("Destroyed:false"));
         assertTrue(page.getContent().contains("cid:" + ConversationScopedBean.CID));
 
         // The long-running conversation is marked transient
         page = client.getPage(contextPath + "/end?cid=" + ConversationScopedBean.CID);
         assertTrue(page.getContent().contains("Initialized:true"));
+        assertTrue(page.getContent().contains("Before Destroyed:false"));
         assertTrue(page.getContent().contains("Destroyed:false"));
         assertTrue(page.getContent().contains("cid:null"));
 
@@ -91,6 +96,7 @@ public class LongRunningConversationLifecycleEventTest extends AbstractTest {
         // The last long-running conversation was destroyed after the previous servlet request service() method completed
         page = client.getPage(contextPath + "/display");
         assertTrue(page.getContent().contains("Initialized:true"));
+        assertTrue(page.getContent().contains("Before Destroyed:true"));
         assertTrue(page.getContent().contains("Destroyed:true"));
         assertTrue(page.getContent().contains("cid:null"));
     }

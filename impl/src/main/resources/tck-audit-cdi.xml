@@ -10369,13 +10369,19 @@
         </assertion>
 
         <assertion id="da">
-            <text>An event with the |HttpSession| as payload and with qualifier |@Initialized(SessionScoped.class)| is fired when the session context is
+            <text>An event with the |HttpSession| as payload and with qualifier |@Initialized(SessionScoped.class)| is synchronously fired when the session context is
                 initialized.
             </text>
         </assertion>
 
         <assertion id="db">
-            <text>An event with the |HttpSession| as payload and with qualifier |@Destroyed(SessionScoped.class)| is fired when the session context is
+            <text>An event with the |HttpSession| as payload and with qualifier |@BeforeDestroyed(SessionScoped.class)| is synchronously
+                fired when the session context is about to be destroyed, i.e. before the actual destruction.
+            </text>
+        </assertion>
+
+        <assertion id="dc">
+            <text>An event with the |HttpSession| as payload and with qualifier |@Destroyed(SessionScoped.class)| is synchronously fired when the session context is
                 destroyed.
             </text>
         </assertion>
@@ -10493,22 +10499,30 @@
         </group>
 
         <group>
-            <text>An event with qualifier |@Initialized(ConversationContext.class)| is fired when the conversation context is initialized and an event with
-                qualifier |@Destroyed(ConversationScoped.class)| is fired when the conversation is destroyed. The event payload is the conversation id if the
-                conversation context is destroyed and is not associated with a current Servlet request, the |ServletRequestEvent| if the application is a web
-                application deployed to a Servlet container, any |java.lang.Object| for other types of application.
+            <text>An event with qualifier |@Initialized(ConversationContext.class)| is fired when the conversation context is initialized. An event with
+                qualifier |@BeforeDestroyed(ConversationScoped.class)| is synchronously fired when the conversation is about to be destroyed, i.e. before the
+                actual destruction.An event with qualifier |@Destroyed(ConversationScoped.class)| is fired when the conversation is destroyed. The event payload
+                is the conversation id if the conversation context is destroyed and is not associated with a current Servlet request, the |ServletRequestEvent|
+                if the application is a web application deployed to a Servlet container, any |java.lang.Object| for other types of application.
             </text>
             <assertion id="ba">
-                <text>An event with the |ServletRequest| as the payload and with qualifier |@Initialized(ConversationContext.class)| is fired when the
+                <text>An event with the |ServletRequest| as the payload and with qualifier |@Initialized(ConversationContext.class)| is synchronously fired when
+                    the
                     conversation context is initialized.
                 </text>
             </assertion>
             <assertion id="bb">
-                <text>An event with the |ServletRequest| as the payload and with qualifier |@Destroyed(ConversationContext.class)| is fired when the
-                    conversation context is destroyed.
+                <text>An event with the |ServletRequest| as the payload and with qualifier |@BeforeDestroyed(ConversationScoped.class)|
+                    is synchronously fired when the conversation is about to be destroyed
                 </text>
             </assertion>
             <assertion id="bc">
+                <text>An event with the |ServletRequest| as the payload and with qualifier |@Destroyed(ConversationContext.class)| is synchronously fired when
+                    the
+                    conversation context is destroyed.
+                </text>
+            </assertion>
+            <assertion id="bd">
                 <text>An event with the conversation id as the payload and with qualifier |@Destroyed(ConversationContext.class)| is fired when the conversation
                     context is destroyed and is not associated with a current Servlet request.
                 </text>

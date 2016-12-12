@@ -47,6 +47,8 @@ public class Servlet extends HttpServlet {
         }
         resp.getWriter().append("Initialized sessions:" + observer.getInitializedSessionCount().get());
         resp.getWriter().append("\n");
+        resp.getWriter().append("Before Destroyed sessions:" + observer.getBeforedDestroyedSessionCount().get());
+        resp.getWriter().append("\n");
         resp.getWriter().append("Destroyed sessions:" + observer.getDestroyedSessionCount().get());
         resp.setContentType("text/plain");
     }

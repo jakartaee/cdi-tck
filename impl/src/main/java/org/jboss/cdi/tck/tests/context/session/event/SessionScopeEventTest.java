@@ -57,22 +57,26 @@ public class SessionScopeEventTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "da"), @SpecAssertion(section = SESSION_CONTEXT_EE, id = "db"),
+            @SpecAssertion(section = SESSION_CONTEXT_EE, id = "dc"),
             @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ca") })
     public void test() throws Exception {
         WebClient client = new WebClient();
 
         TextPage page = client.getPage(contextPath);
         assertTrue(page.getContent().contains("Initialized sessions:1")); // the current session
+        assertTrue(page.getContent().contains("Before Destroyed sessions:0"));
         assertTrue(page.getContent().contains("Destroyed sessions:0")); // not destroyed yet
 
         // nothing should change
         page = client.getPage(contextPath);
         assertTrue(page.getContent().contains("Initialized sessions:1"));
+        assertTrue(page.getContent().contains("Before Destroyed sessions:0"));
         assertTrue(page.getContent().contains("Destroyed sessions:0"));
 
         // invalidate the session
         page = client.getPage(contextPath + "/invalidate");
         assertTrue(page.getContent().contains("Initialized sessions:1"));
+        assertTrue(page.getContent().contains("Before Destroyed sessions:0"));
         // the context is destroyed after the response is sent
         // verify in the next request
         assertTrue(page.getContent().contains("Destroyed sessions:0"));
@@ -80,6 +84,7 @@ public class SessionScopeEventTest extends AbstractTest {
         page = client.getPage(contextPath);
         // new session context was initialized
         assertTrue(page.getContent().contains("Initialized sessions:2"));
+        assertTrue(page.getContent().contains("Before Destroyed sessions:1"));
         // the previous one was destroyed
         assertTrue(page.getContent().contains("Destroyed sessions:1"));
     }
