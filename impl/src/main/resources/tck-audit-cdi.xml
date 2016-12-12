@@ -3710,7 +3710,7 @@
         </assertion>
 
         <assertion id="b">
-            <text> To programmatically manage request contexts, the container provides a built in bean that is @Dependent
+            <text>To programmatically manage request contexts, the container provides a built in bean that is @Dependent
                 scoped and of type RequestContextController that allows you to activate and deactivate a request
                 context on the current thread. The object should be considered stateful, invoking the same instance on
                 different threads may not work properly, non-portable behavior may occur.
@@ -3718,12 +3718,13 @@
         </assertion>
 
         <assertion id="c">
-            <text> When the activate() method is called, if the request context is not already active on the current thread
-                then it will be activated and the method returns true. Otherwise, the method returns false. </text>
+            <text>When the activate() method is called, if the request context is not already active on the current thread
+                then it will be activated and the method returns true. Otherwise, the method returns false.
+            </text>
         </assertion>
 
         <group>
-            <text>When the deactivate() method is called, </text>
+            <text>When the deactivate() method is called,</text>
             <assertion id="da">
                 <text>if this controller started the request context then the request context is stopped</text>
             </assertion>
@@ -3736,20 +3737,24 @@
         </group>
 
         <assertion id="e">
-            <text> If within the same thread the activate() and deactivate() methods are invoked repeatedly, the
+            <text>If within the same thread the activate() and deactivate() methods are invoked repeatedly, the
                 instances between the activations are not the same instances, each request context should be assumed
-                to be new. </text>
+                to be new.
+            </text>
         </assertion>
 
         <assertion id="f">
-            <text> To automatically start a request context via interceptor binding, the container provides an interceptor
+            <text>To automatically start a request context via interceptor binding, the container provides an interceptor
                 @ActivateRequestContext which will activate a request context if not already active prior to the
                 method’s invocation, and deactivate it upon method completion, with the same rules as in
-                RequestContextController. </text>
+                RequestContextController.
+            </text>
         </assertion>
 
         <assertion id="g">
-            <text>When the requestContext is managed via interceptor binding, the interceptor is automatically registered with a priority of PLATFORM_BEFORE + 100</text>
+            <text>When the requestContext is managed via interceptor binding, the interceptor is automatically registered with a priority of PLATFORM_BEFORE +
+                100
+            </text>
         </assertion>
 
     </section>
@@ -4189,28 +4194,33 @@
 
     <section id="builtin_contexts" title="Context management for built-in scopes" level="2">
         <assertion id="a">
-            <text> A portable extension may define a custom context object for any or all of the built-in scopes. For
-                example, a remoting framework might provide a request context object for the built-in request scope. </text>
+            <text>A portable extension may define a custom context object for any or all of the built-in scopes. For
+                example, a remoting framework might provide a request context object for the built-in request scope.
+            </text>
         </assertion>
 
         <assertion id="b">
-            <text> The context associated with a built-in normal scope propagates across local, synchronous Java method
-                calls. The context does not propagate across remote method invocations or to asynchronous processes. </text>
+            <text>The context associated with a built-in normal scope propagates across local, synchronous Java method
+                calls. The context does not propagate across remote method invocations or to asynchronous processes.
+            </text>
         </assertion>
 
         <group>
             <text>Portable extensions are encouraged to synchronously fire (where X is the scope type associated with the context.):</text>
             <assertion id="ea" testable="false">
                 <text>an event with qualifier @Initialized(X.class) when a custom context is initialized, i.e. ready for
-                    use,</text>
+                    use,
+                </text>
             </assertion>
             <assertion id="eb" testable="false">
                 <text>an event with qualifier @BeforeDestroyed(X.class) when a custom context is about to be destroyed,
-                    i.e. before the actual destruction,</text>
+                    i.e. before the actual destruction,
+                </text>
             </assertion>
             <assertion id="ec" testable="false">
                 <text>an event with qualifier @Destroyed(X.class) when a custom context is destroyed, i.e. after the actual
-                    destruction,</text>
+                    destruction,
+                </text>
             </assertion>
         </group>
 
@@ -4219,17 +4229,20 @@
     <section id="request_context" title="Request context lifecycle" level="3">
         <assertion id="a">
             <text>An event with qualifier |@Initialized(RequestScoped.class)| is synchronously fired when the request
-                context is initialized.</text>
+                context is initialized.
+            </text>
         </assertion>
 
         <assertion id="b">
             <text>An event with qualifier @BeforeDestroyed(RequestScoped.class) is synchronously
-                fired when the request context is about to be destroyed, i.e. before the actual destruction.</text>
+                fired when the request context is about to be destroyed, i.e. before the actual destruction.
+            </text>
         </assertion>
 
         <assertion id="c">
             <text>An event with qualifier @Destroyed(RequestScoped.class) is synchronously fired when the request context is
-                destroyed, i.e. after the actual destruction.</text>
+                destroyed, i.e. after the actual destruction.
+            </text>
         </assertion>
 
     </section>
@@ -4240,18 +4253,21 @@
     <section id="application_context" title="Application context lifecycle" level="3">
         <assertion id="a">
             <text>An event with qualifier @Initialized(ApplicationScoped.class) is synchronously fired when the
-                application context is initialized.</text>
+                application context is initialized.
+            </text>
         </assertion>
 
         <assertion id="b">
             <text>An event with qualifier @BeforeDestroyed(ApplicationScoped.class) is
                 synchronously fired when the application context is about to be destroyed, i.e. before the actual
-                destruction.</text>
+                destruction.
+            </text>
         </assertion>
 
         <assertion id="c">
             <text>An event with qualifier @Destroyed(ApplicationScoped.class) is synchronously fired when
-                the application context is destroyed, i.e. after the actual destruction.</text>
+                the application context is destroyed, i.e. after the actual destruction.
+            </text>
         </assertion>
     </section>
 
@@ -4348,7 +4364,8 @@
 
         <assertion id="ac">
             <text>When the application invokes a method of a bean via a non-contextual reference to the bean, if the instance was enhanced with
-                the |InterceptionFactory| interface as defined in `Apply interceptor programmatically`, the invocation is treated as a business method invocation.
+                the |InterceptionFactory| interface as defined in `Apply interceptor programmatically`, the invocation is treated as a business method
+                invocation.
             </text>
         </assertion>
 
@@ -4700,7 +4717,8 @@
         <assertion id="d">
             <text>If a decorator is enabled for the application and for the bean archive, then the enablement from the
                 bean archive is ignored by the container. The decorator will only be executed once based on the
-                @Priority annotation’s invocation chain.</text>
+                @Priority annotation’s invocation chain.
+            </text>
         </assertion>
     </section>
 
@@ -4937,7 +4955,8 @@
 
         <assertion id="c">
             <text>Since CDI 2.0 it is possible to apply interceptors programmatically to the return value of a producer
-                method, with the |InterceptionFactory| interface as defined in `Apply interceptor programmatically`.</text>
+                method, with the |InterceptionFactory| interface as defined in `Apply interceptor programmatically`.
+            </text>
         </assertion>
 
         <assertion id="d">
@@ -5020,7 +5039,8 @@
         <assertion id="k">
             <text>If an interceptor is enabled for the application and for the bean archive, then the enablement from the
                 bean archive is ignored by the container. The interceptor will only be executed once based on the
-                @Priority annotation’s invocation chain.</text>
+                @Priority annotation’s invocation chain.
+            </text>
         </assertion>
 
     </section>
@@ -5186,7 +5206,8 @@
 
         <assertion id="ee">
             <text>The method fireAsync() may be called with a |NotificationOptions| object to configure the observer
-                methods notification, e.g. to specify an |Executor| object to be used for asynchronous delivery.</text>
+                methods notification, e.g. to specify an |Executor| object to be used for asynchronous delivery.
+            </text>
         </assertion>
 
         <group>
@@ -5618,7 +5639,8 @@
 
         <group>
             <text>For a custom implementation of the |ObserverMethod| interface defined in Section 11.1.3, "The ObserverMethod interface", the container must
-                call |getTransactionPhase()| to determine if the observer method is a transactional observer method, and |notify()| which accepts |javax.enterprise.inject.spi.EventContext| to invoke the method.
+                call |getTransactionPhase()| to determine if the observer method is a transactional observer method, and |notify()| which accepts
+                |javax.enterprise.inject.spi.EventContext| to invoke the method.
             </text>
             <assertion id="fa">
                 <text>Check |getTransactionPhase()| is called.</text>
@@ -7272,7 +7294,8 @@
         </assertion>
 
         <group>
-            <text>|addBean()| fires an event of type |ProcessSyntheticBean| containing the given |Bean| and then registers the |Bean| with the container, thereby making
+            <text>|addBean()| fires an event of type |ProcessSyntheticBean| containing the given |Bean| and then registers the |Bean| with the container,
+                thereby making
                 it available for injection into other beans. The given |Bean| may implement |Interceptor| or |Decorator|.
             </text>
 
@@ -7301,11 +7324,11 @@
         </assertion>
 
         <group>
-            <text>|addObserverMethod()| fires an event of type |ProcessObserverMethod| containing the given |ObserverMethod| and then registers the
+            <text>|addObserverMethod()| fires an event of type |ProcessSyntheticObserverMethod| containing the given |ObserverMethod| and then registers the
                 |ObserverMethod| with the container, thereby making it available for event notifications.
             </text>
             <assertion id="ea">
-                <text>Check that the |ProcessObserverMethod| is fired</text>
+                <text>Check that the |ProcessSynthethicObserverMethod| is fired</text>
             </assertion>
             <assertion id="eb">
                 <text>Check that the observer method is registered</text>
@@ -7576,7 +7599,8 @@
 
         <assertion id="bba">
             <text>|configureAnnotatedType()| returns an |AnnotatedTypeConfigurator| (as defined in AnnotatedTypeConfigurator interface) initialized with the
-                |AnnotatedType| processed by the event to easily configure the AnnotatedType which will be used to replace the original one at the end of observer
+                |AnnotatedType| processed by the event to easily configure the AnnotatedType which will be used to replace the original one at the end of
+                observer
                 invocation.
             </text>
         </assertion>
@@ -7604,8 +7628,10 @@
         </group>
 
         <assertion id="k">
-            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|.
-                If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or
+                |configureAnnotatedType()|.
+                If both methods are called within an observer notification an |IllegalStateException| is thrown.
+            </text>
         </assertion>
 
         <assertion id="e">
@@ -7659,8 +7685,10 @@
         </assertion>
 
         <assertion id="g">
-            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|.
-                If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or
+                |configureAnnotatedType()|.
+                If both methods are called within an observer notification an |IllegalStateException| is thrown.
+            </text>
         </assertion>
 
         <assertion id="d">
@@ -7807,7 +7835,7 @@
         </assertion>
 
         <assertion id="bcb">
-              <text>|configureBeanAttributes()| method always returns the same |BeanAttributesConfigurator|</text>
+            <text>|configureBeanAttributes()| method always returns the same |BeanAttributesConfigurator|</text>
         </assertion>
 
         <assertion id="bd">
@@ -7849,8 +7877,10 @@
         </assertion>
 
         <assertion id="g">
-            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|.
-                If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or
+                |configureAnnotatedType()|.
+                If both methods are called within an observer notification an |IllegalStateException| is thrown.
+            </text>
         </assertion>
 
         <assertion id="e">
@@ -7966,7 +7996,8 @@
 
         <group>
             <text>|getAnnotated()| returns the |AnnotatedType| representing the bean class, the |AnnotatedMethod| representing the producer method, or the
-                |AnnotatedField| representing the producer field. If invoked upon a |ProcessSyntheticBean| event, non-portable behavior results and the returned value
+                |AnnotatedField| representing the producer field. If invoked upon a |ProcessSyntheticBean| event, non-portable behavior results and the returned
+                value
                 should be ignored.
             </text>
             <assertion id="efa">
@@ -8117,8 +8148,19 @@
             </text>
         </assertion>
 
+        <assertion id="aab">
+            <text>
+                For a custom implementation of javax.enterprise.inject.spi.ObserverMethod, the container must raise an event of type
+                |javax.enterprise.inject.spi.ProcessSyntheticObserverMethod&lt;T, X&gt;|, where |T| is the observed
+                event type of the observer method and |X| is the return value of |ObserverMethod.getBeanClass()|.
+            </text>
+        </assertion>
+
         <assertion id="aba">
-            <text>|getAnnotatedEventParameter()| returns the |AnnotatedParameter| representing the event parameter.</text>
+            <text>|getAnnotatedMethod()| returns the |AnnotatedMethod| representing the observer method. If invoked
+                upon a |ProcessSyntheticObserverMethod| event, non-portable behavior results and the returned
+                value should be ignored.
+            </text>
         </assertion>
 
         <assertion id="ba">
@@ -8150,9 +8192,15 @@
             <text>|veto()| forces the container to ignore the ObserverMethod.</text>
         </assertion>
 
+        <assertion id="dae">
+            <text>|getSource()| returns the |Extension| instance that added the observer method.</text>
+        </assertion>
+
         <assertion id="e">
-            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or |configureAnnotatedType()|.
-                If both methods are called within an observer notification an |IllegalStateException| is thrown.</text>
+            <text>Any observer of this event is permitted to wrap and/or replace the |AnnotatedType| by calling either |setAnnotatedType()| or
+                |configureAnnotatedType()|.
+                If both methods are called within an observer notification an |IllegalStateException| is thrown.
+            </text>
         </assertion>
 
         <assertion id="db">
