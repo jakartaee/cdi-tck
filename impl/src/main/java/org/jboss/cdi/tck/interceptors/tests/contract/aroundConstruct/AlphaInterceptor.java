@@ -39,7 +39,7 @@ public class AlphaInterceptor extends AbstractInterceptor implements Serializabl
             assertNull(ctx.getMethod());
             assertNull(ctx.getTarget());
 
-            assertEquals(1, ctx.getParameters().length);
+            assertEquals(ctx.getParameters().length, 1);
             assertTrue(ctx.getParameters()[0] instanceof BeanManager);
 
             assertNull(ctx.proceed());
@@ -49,7 +49,7 @@ public class AlphaInterceptor extends AbstractInterceptor implements Serializabl
             assertNotNull(ctx.getTarget());
             assertTrue(ctx.getTarget() instanceof Alpha);
 
-            assertEquals(1, ctx.getParameters().length);
+            assertEquals(ctx.getParameters().length, 1);
             assertTrue(ctx.getParameters()[0] instanceof BeanManager);
         } catch (Exception e) {
             throw new RuntimeException(e);

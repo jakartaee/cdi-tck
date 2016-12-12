@@ -54,7 +54,7 @@ public class InterceptionFactoryTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "c") })
     public void producedInstanceIsIntercepted(Product product) {
         ActionSequence.reset();
-        Assert.assertEquals(4, product.ping());
+        Assert.assertEquals(product.ping(), 4);
         ActionSequence.assertSequenceDataEquals(ProductInterceptor1.class, ProductInterceptor2.class, ProductInterceptor3.class);
     }
 

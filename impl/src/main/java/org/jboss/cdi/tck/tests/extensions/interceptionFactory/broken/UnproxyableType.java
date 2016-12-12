@@ -16,10 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
+import javax.enterprise.inject.Vetoed;
+import javax.inject.Inject;
+
+@Vetoed
 public class UnproxyableType {
 
-    public UnproxyableType(){}
-
+    @Inject
     public UnproxyableType(String name){
 
     }

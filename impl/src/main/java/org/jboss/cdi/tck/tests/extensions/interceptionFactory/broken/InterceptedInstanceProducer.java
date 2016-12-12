@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InterceptionFactory;
-import javax.ws.rs.Produces;
 
 @ApplicationScoped
 public class InterceptedInstanceProducer {

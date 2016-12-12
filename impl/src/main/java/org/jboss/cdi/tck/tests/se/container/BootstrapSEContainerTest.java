@@ -237,7 +237,7 @@ public class BootstrapSEContainerTest extends Arquillian {
             Corge corge = seContainer.select(Corge.class).get();
             int result = corge.ping();
             Assert.assertTrue(CorgeDecorator.notified);
-            Assert.assertEquals(2, result);
+            Assert.assertEquals(result, 2);
         }
     }
 

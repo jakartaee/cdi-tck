@@ -73,13 +73,13 @@ public class ActivateRequestContextProgrammaticallyTest extends Arquillian {
             Assert.assertFalse(contextActivator.activate());
             contextActivator.callRequestScopeBean();
             RequestScopeCounter counter = container.select(RequestScopeCounter.class).get();
-            Assert.assertEquals(2, contextActivator.callRequestScopeBean());
+            Assert.assertEquals(contextActivator.callRequestScopeBean(), 2);
             contextActivator.deactivate();
 
             contextActivator.activate();
             BeanManager beanManager = container.getBeanManager();
             Assert.assertTrue(beanManager.getContext(RequestScoped.class).isActive());
-            Assert.assertEquals(1, contextActivator.callRequestScopeBean());
+            Assert.assertEquals(contextActivator.callRequestScopeBean(), 1);
             contextActivator.deactivate();
             try {
                 beanManager.getContext(RequestScoped.class).isActive();

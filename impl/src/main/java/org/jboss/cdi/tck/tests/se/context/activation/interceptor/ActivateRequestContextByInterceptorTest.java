@@ -62,11 +62,11 @@ public class ActivateRequestContextByInterceptorTest extends Arquillian {
         try (SeContainer container = seContainerInitializer
                 .initialize()) {
             ClassInterceptorContextActivator activator = container.select(ClassInterceptorContextActivator.class).get();
-            Assert.assertEquals(11, activator.callRequestScopeBean());
+            Assert.assertEquals(activator.callRequestScopeBean(), 11);
             RequestContextObserver requestContextObserver = container.select(RequestContextObserver.class).get();
-            Assert.assertEquals(1, requestContextObserver.getInitCounter());
-            Assert.assertEquals(1, requestContextObserver.getBeforeDestroyedCounter());
-            Assert.assertEquals(1, requestContextObserver.getDestroyedCounter());
+            Assert.assertEquals(requestContextObserver.getInitCounter(), 1);
+            Assert.assertEquals(requestContextObserver.getBeforeDestroyedCounter(), 1);
+            Assert.assertEquals(requestContextObserver.getDestroyedCounter(), 1);
         }
     }
 
@@ -79,11 +79,11 @@ public class ActivateRequestContextByInterceptorTest extends Arquillian {
         try (SeContainer container = seContainerInitializer
                 .initialize()) {
             MethodInterceptorContextActivator activator = container.select(MethodInterceptorContextActivator.class).get();
-            Assert.assertEquals(11, activator.callRequestScopeBean());
+            Assert.assertEquals(activator.callRequestScopeBean(), 11);
             RequestContextObserver requestContextObserver = container.select(RequestContextObserver.class).get();
-            Assert.assertEquals(1, requestContextObserver.getInitCounter());
-            Assert.assertEquals(1, requestContextObserver.getBeforeDestroyedCounter());
-            Assert.assertEquals(1, requestContextObserver.getDestroyedCounter());
+            Assert.assertEquals(requestContextObserver.getInitCounter(), 1);
+            Assert.assertEquals(requestContextObserver.getBeforeDestroyedCounter(), 1);
+            Assert.assertEquals(requestContextObserver.getDestroyedCounter(), 1);
         }
     }
 

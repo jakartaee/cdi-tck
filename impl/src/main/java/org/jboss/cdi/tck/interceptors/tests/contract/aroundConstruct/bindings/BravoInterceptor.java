@@ -41,7 +41,7 @@ public class BravoInterceptor extends AbstractInterceptor {
             assertNull(ctx.getTarget());
 
             // replace constructor parameter
-            assertEquals(1, ctx.getParameters().length);
+            assertEquals(ctx.getParameters().length, 1);
             assertTrue(ctx.getParameters()[0] instanceof BravoParameter);
             BravoParameter parameter1 = (BravoParameter) ctx.getParameters()[0];
             assertEquals("parameter1", parameter1.getValue());
@@ -54,7 +54,7 @@ public class BravoInterceptor extends AbstractInterceptor {
             assertNotNull(ctx.getTarget());
             assertTrue(ctx.getTarget() instanceof Bravo);
 
-            assertEquals(1, ctx.getParameters().length);
+            assertEquals(ctx.getParameters().length, 1);
             assertTrue(ctx.getParameters()[0] instanceof BravoParameter);
             parameter1 = (BravoParameter) ctx.getParameters()[0];
             assertEquals(NEW_PARAMETER_VALUE, parameter1.getValue());
