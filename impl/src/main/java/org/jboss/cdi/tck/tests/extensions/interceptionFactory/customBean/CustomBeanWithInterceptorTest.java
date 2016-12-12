@@ -16,15 +16,17 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory.customBean;
 
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INTERCEPTION_FACTORY;
+import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTION_FACTORY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -43,8 +45,8 @@ public class CustomBeanWithInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = Sections.BM_OBTAIN_INTERCEPTION_FACTORY, id = "a")
-    public void customBeanIntercepted(){
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INTERCEPTION_FACTORY, id = "a"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "f") })
+    public void customBeanIntercepted() {
         Account customAccount = getContextualReference(Account.class, Custom.CustomLiteral.INSTANCE);
         assertNotNull(customAccount);
         int remainingBalance = customAccount.withdraw(100);

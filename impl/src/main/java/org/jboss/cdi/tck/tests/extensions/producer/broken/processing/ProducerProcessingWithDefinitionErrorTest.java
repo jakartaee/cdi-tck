@@ -48,7 +48,7 @@ public class ProducerProcessingWithDefinitionErrorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "g") })
     public void testExplicitDefinitionError() {
     }
 

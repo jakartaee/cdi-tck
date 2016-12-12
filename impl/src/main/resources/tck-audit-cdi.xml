@@ -8113,13 +8113,23 @@
         </assertion>
 
         <assertion id="f">
+            <text>|configureProducer()| returns a |ProducerConfigurator| (as defined in ProducerConfigurator interface)
+                initialized with the |Producer| processed by this event to configure the |Producer| that will replace the
+                original one at the end of the observer invocation. Each call returns the same configurator instance
+                within an observer notification
+            </text>
+        </assertion>
+
+        <assertion id="g">
             <text>|addDefinitionError()| registers a definition error with the container, causing the container to abort deployment after bean discovery is
                 complete.
             </text>
         </assertion>
 
         <group>
-            <text>Any observer of this event is permitted to wrap and/or replace the |Producer|. The container must use the final value of this property, after
+            <text>Any observer of this event is permitted to wrap and/or replace the |Producer| by calling either
+                |setProducer()| or |configureProducer()|. If both methods are called within an observer notification an
+                IllegalStateException is thrown. The container must use the final value of this property, after
                 all observers have been called, whenever it calls the producer or disposer.
             </text>
             <assertion id="ga">
@@ -8127,6 +8137,11 @@
             </assertion>
             <assertion id="gb">
                 <text>Test producer field</text>
+            </assertion>
+            <assertion id="gc">
+                <text>If both methods |setProducer()| and |configureProducer()| are called within an observer notification an
+                    IllegalStateException is thrown.
+                </text>
             </assertion>
         </group>
 
@@ -8138,6 +8153,28 @@
         <assertion id="i">
             <text>If any ProcessProducer method is called outside of the observer method invocation, an IllegalStateException is thrown.</text>
         </assertion>
+    </section>
+
+    <section id="producer_configurator" title="ProducerConfigurator interface" level="4">
+        <group>
+            <text>With |ProducerConfigurator| you can perform the following operations:</text>
+            <assertion id="a">
+                <text>Set a callback to produce a new instance with |produceWith()| method.</text>
+            </assertion>
+            <assertion id="b">
+                <text>Set a callback to destroy the produced instance with |disposeWith()| method.</text>
+            </assertion>
+            <assertion id="c">
+                <text>Add an injection point for the producer with |addInjectionPoint| method.</text>
+            </assertion>
+            <assertion id="d">
+                <text>Add multiple injection points for the producer with |addInjectionPoints| methods.</text>
+            </assertion>
+            <assertion id="e">
+                <text>Replace all injection points for the producer with |injectionPoints| method.</text>
+            </assertion>
+        </group>
+
     </section>
 
     <section id="process_observer_method" title="ProcessObserverMethod event" level="3">
