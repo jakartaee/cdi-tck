@@ -48,7 +48,7 @@ public class VetoedAlternativeTest extends AbstractTest {
     @Test
     @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "e")
     public void mockAlternativeIsVetoed() {
-        Assert.assertEquals(getUniqueBean(PaymentProcessor.class).getName(), PaymentProcessorImpl.class.getSimpleName());
+        Assert.assertEquals(getUniqueBean(PaymentProcessor.class).getName(), "paymentProcessorImpl");
     }
 
 }
