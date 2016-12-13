@@ -70,7 +70,7 @@ public class RequestScopeEventTest extends AbstractTest {
 
         TextPage page2 = client.getPage(contextPath + "?foo=bar");
         assertTrue(page2.getContent().contains("Initialized requests:2"));
-        assertTrue(page1.getContent().contains("Before destroyed requests:1"));
+        assertTrue(page2.getContent().contains("Before destroyed requests:1"));
         assertTrue(page2.getContent().contains("Destroyed requests:1"));
     }
 }
