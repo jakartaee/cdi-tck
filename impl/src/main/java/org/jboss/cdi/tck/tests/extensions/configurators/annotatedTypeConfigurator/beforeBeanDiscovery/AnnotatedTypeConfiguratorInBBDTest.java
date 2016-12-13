@@ -47,6 +47,7 @@ public class AnnotatedTypeConfiguratorInBBDTest extends AbstractTest {
     }
     
     @Inject
+    @Any
     Instance<Object> instance;
     
     @Test
