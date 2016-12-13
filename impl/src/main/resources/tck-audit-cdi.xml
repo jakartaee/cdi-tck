@@ -3161,7 +3161,7 @@
         </assertion>
 
         <assertion id="da">
-            <text>If two instances of the same qualifier type are passed to |select()|, an |IllegalArgumentException| is thrown.</text>
+            <text>If two instances of the same non repeating qualifier type are passed to |select()|, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
         <assertion id="e">
@@ -5185,7 +5185,7 @@
         </assertion>
 
         <assertion id="eba">
-            <text>If two instances of the same qualifier type are passed to |select()|, an |IllegalArgumentException| is thrown.</text>
+            <text>If two instances of the same non repeating qualifier type are passed to |select()|, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
         <assertion id="ec">
@@ -6262,7 +6262,7 @@
         </assertion>
 
         <assertion id="e">
-            <text>If two instances of the same qualifier type are given, an |IllegalArgumentException| is thrown.</text>
+            <text>If two instances of the same non repeating qualifier type are given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
         <assertion id="f">
@@ -6337,7 +6337,7 @@
         </assertion>
 
         <assertion id="d">
-            <text>If two instances of the same qualifier type are given, an |IllegalArgumentException| is thrown.</text>
+            <text>If two instances of the same non repeating qualifier type are given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
         <assertion id="e">
@@ -6366,7 +6366,7 @@
         </assertion>
 
         <assertion id="d">
-            <text>If two instances of the same qualifier type are given, an |IllegalArgumentException| is thrown.</text>
+            <text>If two instances of the same non repeating qualifier type are given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
         <assertion id="e">
@@ -6388,7 +6388,7 @@
         </assertion>
 
         <assertion id="c">
-            <text>If two instances of the same qualifier type are given, an |IllegalArgumentException| is thrown.</text>
+            <text>If two instances of the same non repeating qualifier type are given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
         <assertion id="d">
@@ -6410,7 +6410,7 @@
         </assertion>
 
         <assertion id="b">
-            <text>If two instances of the same interceptor binding type are given, an |IllegalArgumentException| is thrown.</text>
+            <text>If two instances of the same non repeating interceptor binding type are given, an |IllegalArgumentException| is thrown.</text>
         </assertion>
 
         <assertion id="c">
