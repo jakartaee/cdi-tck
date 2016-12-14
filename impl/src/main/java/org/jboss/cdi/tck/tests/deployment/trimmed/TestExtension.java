@@ -29,16 +29,16 @@ public class TestExtension implements Extension {
     private AtomicBoolean bikerProducerPBAFired = new AtomicBoolean(false);
     private AtomicBoolean bikerProducerPATFired = new AtomicBoolean(false);
 
-    void observesVehiclePBA(@Observes ProcessBeanAttributes<MotorizedVehicle> event){
-       vehiclePBAinvocations.incrementAndGet();
+    void observesVehiclePBA(@Observes ProcessBeanAttributes<? extends MotorizedVehicle> event) {
+        vehiclePBAinvocations.incrementAndGet();
     }
 
-    void observesBikeProducerPBA(@Observes ProcessBeanAttributes<BikeProducer> event){
+    void observesBikeProducerPBA(@Observes ProcessBeanAttributes<BikeProducer> event) {
         bikerProducerPBAFired.set(true);
     }
 
-    void observesBikerProducerPAT(@Observes ProcessAnnotatedType<BikeProducer> event){
-
+    void observesBikerProducerPAT(@Observes ProcessAnnotatedType<BikeProducer> event) {
+        bikerProducerPATFired.set(true);
     }
 
     public AtomicInteger getVehiclePBAinvocations() {

@@ -50,7 +50,7 @@ public class TrimmedBeanArchiveTest extends AbstractTest {
     @Test
     @SpecAssertion(section = Sections.TRIMMED_BEAN_ARCHIVE, id = "a")
     public void testDiscoveredBean() {
-        Assert.assertEquals(1, extension.getVehiclePBAinvocations().get());
+        Assert.assertEquals(extension.getVehiclePBAinvocations().get(), 1);
         Bean<MotorizedVehicle> vehicleBean = getUniqueBean(MotorizedVehicle.class);
         CreationalContext<MotorizedVehicle> cc = getCurrentManager().createCreationalContext(vehicleBean);
         MotorizedVehicle vehicle = (MotorizedVehicle) getCurrentManager().getReference(vehicleBean, MotorizedVehicle.class, cc);

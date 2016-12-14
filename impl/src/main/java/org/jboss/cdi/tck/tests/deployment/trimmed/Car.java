@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.deployment.trimmed;
 
-import javax.ejb.Stateless;
-
-@Stateless
 public class Car implements MotorizedVehicle {
 
     @Override
