@@ -59,17 +59,19 @@ public class TransientConversationLifecycleEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bc") })
+    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bb"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bc") })
     public void testLifecycleEventFiredForTransientConversation() throws Exception {
 
         WebClient client = new WebClient();
 
         TextPage page = client.getPage(contextPath + "/display-transient");
         assertTrue(page.getContent().contains("Initialized:true")); // the current transient
+        assertTrue(page.getContent().contains("Before Destroyed:false"));
         assertTrue(page.getContent().contains("Destroyed:false")); // not destroyed yet
 
         page = client.getPage(contextPath + "/display");
         assertTrue(page.getContent().contains("Initialized:true")); // the current transient
+        assertTrue(page.getContent().contains("Before Destroyed:true"));
         assertTrue(page.getContent().contains("Destroyed:true")); // the previous transient was destroyed
     }
 }
