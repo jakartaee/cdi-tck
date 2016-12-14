@@ -3217,26 +3217,30 @@
             </text>
         </assertion>
 
+        <group>
+            <text>The methods |isUnsatisfied()|, |isAmbiguous()| and |isResolvable()| must:</text>
 
-        <assertion id="l">
-            <text>The method |isUnsatisfied()| returns |true| if there is no bean that has the required type and qualifiers and is eligible for injection into
-                the class into which the parent |Instance| was injected, or |false| otherwise.
-            </text>
-        </assertion>
+            <assertion id="la">
+                <text>
+                    Identify the set of beans that have the required type and required qualifiers and are eligible for
+                    injection into the class into which the parent Instance was injected, according to the rules of
+                    typesafe resolution, as defined in Performing typesafe resolution, resolving ambiguities according
+                    to Unsatisfied and ambiguous dependencies.
+                </text>
+            </assertion>
 
-        <assertion id="m">
-            <text>The method |isAmbiguous()| returns |true| if there is more than one bean that has the required type and qualifiers and is eligible for
-                injection into the class into which the parent |Instance| was injected, or |false| otherwise.
-            </text>
-        </assertion>
+            <assertion id="l">
+                <text>The method |isUnsatisfied()| returns true if there is no bean found, or false otherwise.</text>
+            </assertion>
 
-        <assertion id="ma">
-            <text>
-                The method |isResolvable()| returns true if there is exactly one bean that has the required type and
-                qualifiers and is eligible for injection into the class into which the parent Instance was injected, or
-                false otherwise.
-            </text>
-        </assertion>
+            <assertion id="m">
+                <text>The method |isAmbiguous()| returns true if there is more than one bean found, or false otherwise.</text>
+            </assertion>
+
+            <assertion id="ma">
+                <text>The method |isResolvable()| returns true if there is exactly one bean found, or false otherwise.</text>
+            </assertion>
+        </group>
 
         <group>
             <text>The method |destroy()| instructs the container to destroy the instance. The bean instance passed to |destroy()| should be a dependent scoped
@@ -10369,7 +10373,8 @@
         </assertion>
 
         <assertion id="da">
-            <text>An event with the |HttpSession| as payload and with qualifier |@Initialized(SessionScoped.class)| is synchronously fired when the session context is
+            <text>An event with the |HttpSession| as payload and with qualifier |@Initialized(SessionScoped.class)| is synchronously fired when the session
+                context is
                 initialized.
             </text>
         </assertion>
@@ -10381,7 +10386,8 @@
         </assertion>
 
         <assertion id="dc">
-            <text>An event with the |HttpSession| as payload and with qualifier |@Destroyed(SessionScoped.class)| is synchronously fired when the session context is
+            <text>An event with the |HttpSession| as payload and with qualifier |@Destroyed(SessionScoped.class)| is synchronously fired when the session
+                context is
                 destroyed.
             </text>
         </assertion>

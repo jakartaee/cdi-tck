@@ -174,7 +174,7 @@ public class DynamicLookupTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ia"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ib"),
-            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m") })
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "la"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m") })
     public void testAlternatives() {
         Instance<Common> instance = getContextualReference(ObtainsInstanceBean.class).getCommon();
         assertFalse(instance.isAmbiguous());
@@ -187,7 +187,7 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "l")
+    @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "la"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "l") })
     public void testIsUnsatisfied() {
         ObtainsInstanceBean injectionPoint = getContextualReference(ObtainsInstanceBean.class);
         assertFalse(injectionPoint.getAnyPaymentProcessor().isUnsatisfied());
@@ -195,7 +195,8 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "da"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m") })
+    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "da"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "la"),
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m") })
     public void testIsAmbiguous() {
         ObtainsInstanceBean injectionPoint = getContextualReference(ObtainsInstanceBean.class);
         assertTrue(injectionPoint.getAnyPaymentProcessor().isAmbiguous());
@@ -227,7 +228,7 @@ public class DynamicLookupTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "jb"),
-            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma") })
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "la"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma") })
     public void testStream(Instance<Uncommon> uncommonInstance) {
         assertFalse(uncommonInstance.isResolvable());
         Stream<Uncommon> stream = uncommonInstance.stream();
