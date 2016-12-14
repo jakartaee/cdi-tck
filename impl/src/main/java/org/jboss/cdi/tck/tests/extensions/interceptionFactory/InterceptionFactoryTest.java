@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory;
 
+import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTION_FACTORY;
 
 import java.util.stream.Collectors;
@@ -51,7 +52,8 @@ public class InterceptionFactoryTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"),
+            @SpecAssertion(section = INTERCEPTION_FACTORY, id = "c") })
     public void producedInstanceIsIntercepted(Product product) {
         ActionSequence.reset();
         Assert.assertEquals(product.ping(), 4);
