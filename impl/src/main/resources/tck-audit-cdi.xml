@@ -6649,6 +6649,15 @@
         </assertion>
     </section>
 
+    <section id="bm_obtain_instance" title="Obtain an Instance" level="3">
+        <assertion id="a">
+            <text>
+                The method |BeanManager.createInstance()| returns an |Instance&lt;Object&gt;| to request bean instances
+                programmatically as described in The Instance interface.
+            </text>
+        </assertion>
+    </section>
+
     <section id="alternative_metadata_sources" title="Alternative metadata sources" level="2">
         <assertion id="a" testable="false">
             <text>The interfaces |AnnotatedType|, |AnnotatedField|, |AnnotatedMethod|, |AnnotatedConstructor| and |AnnotatedParameter| in the package
