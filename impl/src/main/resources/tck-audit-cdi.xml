@@ -6097,14 +6097,17 @@
         <group>
             <text>
                 The |CDIProvider| to use may be set by the application or container using the |setCDIProvider()| method. If the |setCDIProvider()| has not been
-                called, the first service provider of the service |javax.enterprise.inject.spi.CDIProvider|
-                declared in META-INF/services is used. If no provider is available an |IllegalStateException| is thrown.
+                called, the service provider with highest priority of the service
+                javax.enterprise.inject.spi.CDIProvider declared in META-INF/services is used. The order of more
+                than one CDIProvider with the same priority is undefined.. If no provider is available an |IllegalStateException| is thrown.
             </text>
             <assertion id="ba">
                 <text>
                     Test using |CDIProvider| set by the application.
                 </text>
+                <note>Priority ordering is tested in CDI API.</note>
             </assertion>
+
         </group>
 
     </section>
