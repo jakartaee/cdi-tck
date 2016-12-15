@@ -26,6 +26,7 @@ import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InterceptionFactory;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -51,10 +52,17 @@ public class InterceptionFactoryTest extends AbstractTest {
                 .build();
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Inject
+    @Custom
+    FinalProduct finalProduct;
+
+    @Inject
+    Product product;
+
+    @Test
     @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"),
             @SpecAssertion(section = INTERCEPTION_FACTORY, id = "c") })
-    public void producedInstanceIsIntercepted(Product product) {
+    public void producedInstanceIsIntercepted() {
         ActionSequence.reset();
         Assert.assertEquals(product.ping(), 4);
         ActionSequence.assertSequenceDataEquals(ProductInterceptor1.class, ProductInterceptor2.class, ProductInterceptor3.class);
@@ -66,5 +74,15 @@ public class InterceptionFactoryTest extends AbstractTest {
         Bean<?> interceptionFactoryBean = getCurrentManager().resolve(getCurrentManager().getBeans(InterceptionFactory.class));
         Assert.assertEquals(Dependent.class, interceptionFactoryBean.getScope());
         Assert.assertEquals(Stream.of(Default.Literal.INSTANCE, Any.Literal.INSTANCE).collect(Collectors.toSet()), interceptionFactoryBean.getQualifiers());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "a"),
+            @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"),
+            @SpecAssertion(section = INTERCEPTION_FACTORY, id = "c") })
+    public void producedWithFinalMethodIsIntercepted() {
+        ActionSequence.reset();
+        Assert.assertEquals(finalProduct.ping(), 3);
+        ActionSequence.assertSequenceDataEquals(ProductInterceptor1.class, ProductInterceptor2.class);
     }
 }
