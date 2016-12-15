@@ -16,18 +16,19 @@
  */
 package org.jboss.cdi.tck.tests.alternative.veto;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
-import javax.enterprise.inject.spi.ProcessBeanAttributes;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Stereotype;
 
-public class VetoingExtension implements Extension {
+@Stereotype
+@Alternative
+@Dependent
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface AlternativeConsumerStereotype {
 
-    void observeMockPaymentProcessorPAT(@Observes ProcessAnnotatedType<MockPaymentProcessorImpl> event) {
-        event.veto();
-    }
-
-    void observeAlternativeConsumerPBA(@Observes ProcessBeanAttributes<AlternativeConsumerProducer> event) {
-        event.veto();
-    }
 }

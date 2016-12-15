@@ -16,18 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.alternative.veto;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
-import javax.enterprise.inject.spi.ProcessBeanAttributes;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
 
-public class VetoingExtension implements Extension {
+@ApplicationScoped
+public class AlternativeConsumerProducer {
 
-    void observeMockPaymentProcessorPAT(@Observes ProcessAnnotatedType<MockPaymentProcessorImpl> event) {
-        event.veto();
-    }
-
-    void observeAlternativeConsumerPBA(@Observes ProcessBeanAttributes<AlternativeConsumerProducer> event) {
-        event.veto();
+    @Produces
+    @AlternativeConsumerStereotype
+    public Consumer createAlternativeConsumer(){
+        return  new Consumer();
     }
 }

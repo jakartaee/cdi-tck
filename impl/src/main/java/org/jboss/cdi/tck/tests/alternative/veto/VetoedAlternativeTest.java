@@ -18,6 +18,8 @@ package org.jboss.cdi.tck.tests.alternative.veto;
 
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 
+import javax.enterprise.context.RequestScoped;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -42,13 +44,20 @@ public class VetoedAlternativeTest extends AbstractTest {
                 .withExtension(VetoingExtension.class)
                 .withBeansXml(
                         Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
-                                .clazz(MockPaymentProcessorImpl.class.getName()).up()).build();
+                                .clazz(MockPaymentProcessorImpl.class.getName())
+                                .stereotype(AlternativeConsumerStereotype.class.getName()).up()).build();
     }
 
     @Test
     @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "e")
     public void mockAlternativeIsVetoed() {
         Assert.assertEquals(getUniqueBean(PaymentProcessor.class).getName(), "paymentProcessorImpl");
+    }
+
+    @Test
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "e")
+    public void alternativeStereotypeIsVetoed() {
+        Assert.assertEquals(getUniqueBean(Consumer.class).getScope(), RequestScoped.class);
     }
 
 }
