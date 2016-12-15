@@ -23,18 +23,22 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.inject.Inject;
 
@@ -58,15 +62,20 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     @Inject
     Event<Pear> pearEvent;
 
+    @Inject
+    ProcessSyntheticObserverMethodObserver extension;
+
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodConfiguratorTest.class)
                 .withClass(ObservesLiteral.class)
-                .withExtensions(ProcessObserverMethodObserver.class, AfterBeanDiscoveryObserver.class).build();
+                .withExtensions(ProcessObserverMethodObserver.class, AfterBeanDiscoveryObserver.class,
+                        ProcessSyntheticObserverMethodObserver.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bg"),
+    @SpecAssertions({
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bg"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bd"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bi") })
     public void addQualifiersAndSetPriorityAndChangeToAsync() throws InterruptedException {
@@ -87,7 +96,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "be"),
+    @SpecAssertions({
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "be"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bf") })
     public void setReceptionAndTransactionPhase() {
         Set<ObserverMethod<? super Orange>> orangeEventObservers = getCurrentManager()
@@ -99,7 +109,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bc"),
+    @SpecAssertions({
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bc"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bh") })
     public void notifyAcceptingConsumerNotified() {
         getCurrentManager().fireEvent(new Pineapple(), Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
@@ -108,12 +119,13 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "aa"),
+    @SpecAssertions({
+            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "aa"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ab"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ac"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bb"),
-            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ed")})
+            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ed") })
     public void addNewObserverMethodFromReadingExistingOne() {
         AfterBeanDiscoveryObserver.reset();
         getCurrentManager().fireEvent(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
@@ -142,5 +154,17 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
         assertEquals(configuredOne.getObservedType(), originalOne.getObservedType());
         assertEquals(configuredOne.getObservedQualifiers(), originalOne.getObservedQualifiers());
         assertEquals(configuredOne.getPriority(), originalOne.getPriority());
+    }
+
+    @Test
+    @SpecAssertions({
+            @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "aab"),
+            @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "dae") })
+    public void syntheticEventInvokedAndReturningSourceTest() {
+        assertEquals(extension.timesInvoked(), new Integer(3));
+        Map<Type, Extension> map = extension.getSources();
+        assertEquals(map.get(Peach.class).getClass(), ProcessSyntheticObserverMethodObserver.class);
+        assertEquals(map.get(Banana.class).getClass(), ProcessSyntheticObserverMethodObserver.class);
+        assertEquals(map.get(Melon.class).getClass(), ProcessSyntheticObserverMethodObserver.class);
     }
 }
