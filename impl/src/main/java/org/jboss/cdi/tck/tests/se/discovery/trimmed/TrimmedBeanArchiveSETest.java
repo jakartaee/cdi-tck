@@ -59,7 +59,7 @@ public class TrimmedBeanArchiveSETest extends Arquillian {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = TRIMMED_BEAN_ARCHIVE, id = "a"), @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"),
-            @SpecAssertion(section = INTERCEPTION_FACTORY, id = "c") })
+            @SpecAssertion(section = INTERCEPTION_FACTORY, id = "ca") })
     public void discoveredTypes() {
         try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
             Bar bar = seContainer.select(Bar.class).get();

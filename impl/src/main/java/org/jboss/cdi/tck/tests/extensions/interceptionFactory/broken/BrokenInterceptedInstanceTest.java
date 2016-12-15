@@ -53,13 +53,13 @@ public class BrokenInterceptedInstanceTest extends AbstractTest {
     Instance<Foo> fooInstance;
 
     @Test
-    @SpecAssertion(section = Sections.INTERCEPTION_FACTORY, id = "e")
+    @SpecAssertion(section = Sections.INTERCEPTION_FACTORY, id = "cd")
     public void unproxyableExceptionIsThrown() {
         Assert.assertNull(unproxyableTypeInstance.get());
     }
 
     @Test
-    @SpecAssertion(section = Sections.INTERCEPTION_FACTORY, id = "d")
+    @SpecAssertion(section = Sections.INTERCEPTION_FACTORY, id = "cb")
     public void illegalExceptionIsThrownForSubsequentCall() {
         Assert.assertNull(fooInstance.get());
     }

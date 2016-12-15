@@ -27,9 +27,20 @@ public class ProductProducer {
     @Produces
     @RequestScoped
     public Product createInterceptedProduct(InterceptionFactory<Product> interceptionFactory) {
-        interceptionFactory.configure().add(ProductInterceptorBinding3.BindingLiteral.INSTANCE).methods().stream().findFirst().get()
+        interceptionFactory.configure().add(ProductInterceptorBinding3.BindingLiteral.INSTANCE).filterMethods(m -> m.getJavaMember().getName().equals("ping"))
+                .findFirst().get()
                 .add(ProductInterceptorBinding1.BindingLiteral.INSTANCE)
                 .add(ProductInterceptorBinding2.BindingLiteral.INSTANCE);
         return interceptionFactory.createInterceptedInstance(new Product());
+    }
+
+    @Produces
+    @Custom
+    public FinalProduct createInterceptedFinalProduct(InterceptionFactory<FinalProduct> interceptionFactory) {
+        interceptionFactory.ignoreFinalMethods().configure().filterMethods(m -> m.getJavaMember().getName().equals("ping"))
+                .findFirst().get()
+                .add(ProductInterceptorBinding1.BindingLiteral.INSTANCE)
+                .add(ProductInterceptorBinding2.BindingLiteral.INSTANCE);
+        return interceptionFactory.createInterceptedInstance(new FinalProduct());
     }
 }
