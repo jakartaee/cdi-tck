@@ -23,18 +23,22 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Reception;
 import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.inject.Inject;
 
@@ -58,26 +62,31 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     @Inject
     Event<Pear> pearEvent;
 
+    @Inject
+    ProcessSyntheticObserverMethodObserver extension;
+
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ObserverMethodConfiguratorTest.class)
-                .withClass(ObservesLiteral.class)
-                .withExtensions(ProcessObserverMethodObserver.class, AfterBeanDiscoveryObserver.class).build();
+            .withClass(ObservesLiteral.class)
+            .withExtensions(ProcessObserverMethodObserver.class, AfterBeanDiscoveryObserver.class,
+                ProcessSyntheticObserverMethodObserver.class).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bg"),
-            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bd"),
-            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bi") })
+    @SpecAssertions({
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bg"),
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bd"),
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bi") })
     public void addQualifiersAndSetPriorityAndChangeToAsync() throws InterruptedException {
         Set<ObserverMethod<? super Pear>> pearEventObservers = getCurrentManager()
-                .resolveObserverMethods(new Pear(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
+            .resolveObserverMethods(new Pear(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
         assertEquals(pearEventObservers.size(), 1);
         assertEquals(pearEventObservers.iterator().next().getPriority(), ObserverMethod.DEFAULT_PRIORITY + 100);
         assertEquals(pearEventObservers.iterator().next().isAsync(), true);
         assertEquals(pearEventObservers.iterator().next().getObservedQualifiers(),
-                Stream.of(Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).collect(
-                        Collectors.toSet()));
+            Stream.of(Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).collect(
+                Collectors.toSet()));
 
         BlockingQueue<Pear> queue = new LinkedBlockingQueue<>();
         pearEvent.select(Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).fireAsync(new Pear()).thenAccept(queue::offer);
@@ -87,11 +96,12 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "be"),
-            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bf") })
+    @SpecAssertions({
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "be"),
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bf") })
     public void setReceptionAndTransactionPhase() {
         Set<ObserverMethod<? super Orange>> orangeEventObservers = getCurrentManager()
-                .resolveObserverMethods(new Orange(), Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
+            .resolveObserverMethods(new Orange(), Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
         assertEquals(orangeEventObservers.size(), 1);
         assertEquals(orangeEventObservers.iterator().next().getReception(), Reception.IF_EXISTS);
         assertEquals(orangeEventObservers.iterator().next().getTransactionPhase(), TransactionPhase.AFTER_SUCCESS);
@@ -99,8 +109,9 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bc"),
-            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bh") })
+    @SpecAssertions({
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bc"),
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bh") })
     public void notifyAcceptingConsumerNotified() {
         getCurrentManager().fireEvent(new Pineapple(), Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
         assertTrue(ProcessObserverMethodObserver.consumerNotified.get());
@@ -108,12 +119,13 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "aa"),
-            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ab"),
-            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ac"),
-            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
-            @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bb"),
-            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ed")})
+    @SpecAssertions({
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "aa"),
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ab"),
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ac"),
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "ba"),
+        @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bb"),
+        @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ed") })
     public void addNewObserverMethodFromReadingExistingOne() {
         AfterBeanDiscoveryObserver.reset();
         getCurrentManager().fireEvent(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
@@ -121,7 +133,7 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
         getCurrentManager().fireEvent(new Peach(), Any.Literal.INSTANCE);
         Set<ObserverMethod<? super Peach>> peachEventObservers = getCurrentManager().resolveObserverMethods(new Peach(), Any.Literal.INSTANCE);
         Set<ObserverMethod<? super Banana>> bananaEventObservers = getCurrentManager()
-                .resolveObserverMethods(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
+            .resolveObserverMethods(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
         // one in FruitObserver and second one added in AfterBeanDiscoveryObserver
         assertEquals(peachEventObservers.size(), 2);
         assertEquals(bananaEventObservers.size(), 2);
@@ -142,5 +154,17 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
         assertEquals(configuredOne.getObservedType(), originalOne.getObservedType());
         assertEquals(configuredOne.getObservedQualifiers(), originalOne.getObservedQualifiers());
         assertEquals(configuredOne.getPriority(), originalOne.getPriority());
+    }
+
+    @Test
+    @SpecAssertions({
+        @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "aab"),
+        @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "dae") })
+    public void syntheticEventInvokedAndReturningSourceTest() {
+        assertEquals(extension.timesInvoked(), new Integer(3));
+        Map<Type, Extension> map = extension.getSources();
+        assertEquals(map.get(Peach.class).getClass(), ProcessSyntheticObserverMethodObserver.class);
+        assertEquals(map.get(Banana.class).getClass(), ProcessSyntheticObserverMethodObserver.class);
+        assertEquals(map.get(Melon.class).getClass(), ProcessSyntheticObserverMethodObserver.class);
     }
 }
