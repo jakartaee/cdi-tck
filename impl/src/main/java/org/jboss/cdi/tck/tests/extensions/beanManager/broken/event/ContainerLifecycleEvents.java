@@ -56,6 +56,7 @@ import javax.enterprise.inject.spi.configurator.BeanAttributesConfigurator;
 import javax.enterprise.inject.spi.configurator.BeanConfigurator;
 import javax.enterprise.inject.spi.configurator.InjectionPointConfigurator;
 import javax.enterprise.inject.spi.configurator.ObserverMethodConfigurator;
+import javax.enterprise.inject.spi.configurator.ProducerConfigurator;
 
 public class ContainerLifecycleEvents {
 
@@ -234,6 +235,11 @@ public class ContainerLifecycleEvents {
 
         @Override
         public void setProducer(Producer<String> producer) {
+        }
+
+        @Override
+        public ProducerConfigurator<String> configureProducer() {
+            return null;
         }
 
         @Override

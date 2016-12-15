@@ -8789,16 +8789,18 @@
                 <text>|addExtensions()| add the provided extensions (class or instance) to the synthetic bean archive.</text>
             </assertion>
             <assertion id="df">
-                <text>|addInterceptors()| add the provided interceptors to the synthetic bean archive.</text>
+                <text>|enableInterceptors()| adds interceptor classes to the list of enabled interceptors for the synthetic bean archive.</text>
             </assertion>
             <assertion id="dg">
-                <text>|addDecorators()| add the provided decorators to the synthetic bean archive.</text>
+                <text>|enableDecorators()| adds decorator classes to the list of enabled decorators for the synthetic bean archive.</text>
             </assertion>
             <assertion id="dh">
-                <text>|addAlternatives()| add the provided alternatives classes to the synthetic bean archive.</text>
+                <text>|selectAlternatives()| adds alternatives classes to the list of selected alternatives for the synthetic bean archive.</text>
             </assertion>
             <assertion id="di">
-                <text>|addAlternativeStereotypes()| add the provided stereotypes classes to the synthetic bean archive.</text>
+                <text>|selectAlternativeStereotypes()| adds alternative stereotype classes to the list of selected alternative stereotypes for the synthetic
+                    bean archive.
+                </text>
             </assertion>
             <assertion id="dj">
                 <text>|addProperty()| add a configuration property for the container</text>

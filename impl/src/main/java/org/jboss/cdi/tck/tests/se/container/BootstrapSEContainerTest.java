@@ -126,8 +126,8 @@ public class BootstrapSEContainerTest extends Arquillian {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
                 .addBeanClasses(Square.class, Circle.class, Foo.class, FooProducer.class)
-                .addAlternatives(Circle.class)
-                .addAlternativeStereotypes(AlternativeStereotype.class)
+                .selectAlternatives(Circle.class)
+                .selectAlternativeStereotypes(AlternativeStereotype.class)
                 .initialize()) {
             Shape shape = seContainer.select(Shape.class).get();
             Assert.assertEquals(shape.name(), Circle.NAME);
@@ -215,7 +215,7 @@ public class BootstrapSEContainerTest extends Arquillian {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
                 .addBeanClasses(Bar.class, BarInterceptor1.class, BarInterceptor2.class)
-                .addInterceptors(BarInterceptor1.class, BarInterceptor2.class)
+                .enableInterceptors(BarInterceptor1.class, BarInterceptor2.class)
                 .initialize()) {
             Bar bar = seContainer.select(Bar.class).get();
             int result = bar.ping();
@@ -232,7 +232,7 @@ public class BootstrapSEContainerTest extends Arquillian {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
                 .addBeanClasses(Corge.class, CorgeImpl.class, CorgeDecorator.class)
-                .addDecorators(CorgeDecorator.class)
+                .enableDecorators(CorgeDecorator.class)
                 .initialize()) {
             Corge corge = seContainer.select(Corge.class).get();
             int result = corge.ping();
