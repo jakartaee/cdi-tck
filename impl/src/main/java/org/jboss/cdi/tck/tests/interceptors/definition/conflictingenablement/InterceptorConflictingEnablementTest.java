@@ -52,7 +52,7 @@ public class InterceptorConflictingEnablementTest extends AbstractTest {
                         .clazz(TestDecorator.class.getName(), AnotherTestDecorator.class.getName()).up()).build();
     }
 
-    @org.testng.annotations.Test
+    @org.testng.annotations.Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "k"), @SpecAssertion(section = ENABLED_DECORATORS, id = "d") })
     public void testInterception(TestBean testBean) {
         ActionSequence.reset();
