@@ -36,6 +36,8 @@ public class IoCForFramework {
     private InjectionTarget<NotOurClass> it;
     private boolean exceptionThrown = false;
 
+    public IoCForFramework(){}
+
     @Inject
     public IoCForFramework(BeanManager bm) {
         nocc = bm.createCreationalContext(null);
