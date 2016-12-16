@@ -16,7 +16,16 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.enterprise.event.Observes;
+import javax.enterprise.event.Reception;
+import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AnnotatedMethod;
@@ -24,8 +33,6 @@ import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
-import java.lang.reflect.Method;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AfterBeanDiscoveryObserver implements Extension {
 
@@ -66,6 +73,39 @@ public class AfterBeanDiscoveryObserver implements Extension {
         // read from AnnotatedMethod
         abd.addObserverMethod().read(peachObserver).beanClass(FruitObserver.class).observedType(Peach.class).notifyWith((a) -> {
             newPeachObserverNotified.set(true);
+        });
+
+        abd.addObserverMethod(new ObserverMethod<Cherry>() {
+
+            @Override
+            public Class<?> getBeanClass() {
+                return FruitObserver.class;
+            }
+
+            @Override
+            public Type getObservedType() {
+                return Cherry.class;
+            }
+
+            @Override
+            public Set<Annotation> getObservedQualifiers() {
+                return Collections.emptySet();
+            }
+
+            @Override
+            public Reception getReception() {
+                return Reception.ALWAYS;
+            }
+
+            @Override
+            public TransactionPhase getTransactionPhase() {
+                return TransactionPhase.IN_PROGRESS;
+            }
+
+            @Override
+            public void notify(Cherry cherry) {
+
+            }
         });
     }
 

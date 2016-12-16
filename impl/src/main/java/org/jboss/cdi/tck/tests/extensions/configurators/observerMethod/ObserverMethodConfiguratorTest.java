@@ -161,10 +161,11 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "aab"),
             @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "dae") })
     public void syntheticEventInvokedAndReturningSourceTest() {
-        assertEquals(extension.timesInvoked(), new Integer(3));
+        assertEquals(extension.timesInvoked(), new Integer(4));
         Map<Type, Extension> map = extension.getSources();
         assertEquals(map.get(Peach.class).getClass(), AfterBeanDiscoveryObserver.class);
         assertEquals(map.get(Banana.class).getClass(), AfterBeanDiscoveryObserver.class);
         assertEquals(map.get(Melon.class).getClass(), AfterBeanDiscoveryObserver.class);
+        assertEquals(map.get(Cherry.class).getClass(), AfterBeanDiscoveryObserver.class);
     }
 }
