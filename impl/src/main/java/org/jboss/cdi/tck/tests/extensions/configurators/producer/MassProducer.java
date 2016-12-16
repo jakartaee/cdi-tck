@@ -16,25 +16,32 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.producer;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Qualifier;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Produces;
 
 /**
+ * Producer class.
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE, ElementType.PARAMETER })
-public @interface OneAmongMany {
+@ApplicationScoped
+public class MassProducer {
 
-    public static class OneAmongManyLiteral extends AnnotationLiteral<OneAmongMany> implements OneAmongMany {
+    // producers for Bar - this will be altered in an extension
 
-        public static OneAmongManyLiteral INSTANCE = new OneAmongManyLiteral();
+    @Produces
+    @Some
+    public Bar produceBarSome(ParameterInjectedBean param) {
+        return new Bar(param);
+    }
+
+    // producers for ParameterInjectedBean
+    @Produces
+    @Default
+    @Dependent
+    public ParameterInjectedBean produceParamOne() {
+        return new ParameterInjectedBean(Default.class);
     }
 }

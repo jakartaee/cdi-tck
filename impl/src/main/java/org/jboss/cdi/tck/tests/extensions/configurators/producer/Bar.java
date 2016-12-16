@@ -16,25 +16,23 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.producer;
 
-import java.lang.annotation.Annotation;
-
 import javax.enterprise.inject.Vetoed;
 
 /**
- * Class which will be produced. Stores information about what qualifier the original producer had.
+ * Class which will be produced. Stores info about what ParameterInjectedBean it got in producer method.
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Vetoed
 public class Bar {
 
-    private Class<? extends Annotation> annotation;
+    private ParameterInjectedBean paramInjectedBean;
 
-    public Bar(Class<? extends Annotation> annotation) {
-        this.annotation = annotation;
+    public Bar(ParameterInjectedBean paramInjectedBean) {
+        this.paramInjectedBean = paramInjectedBean;
     }
 
-    public Class<? extends Annotation> getAnnotationWithWhichBarWasProduced() {
-        return annotation;
+    public ParameterInjectedBean getParamInjectedBean() {
+        return paramInjectedBean;
     }
 }

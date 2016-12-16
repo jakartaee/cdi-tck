@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.configurators.producer;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_PRODUCER;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_CONFIGURATOR;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 import javax.enterprise.inject.Default;
@@ -32,6 +33,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -45,50 +47,25 @@ public class ProducerConfiguratorTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ProducerConfiguratorTest.class)
-                .withExtension(ProducerConfiguringExtension.class)
-                .build();
+            .withExtension(ProducerConfiguringExtension.class)
+            .build();
     }
 
     @Inject
-    SomeBeanWithInjectionPoints bean;
-
-    @Inject
-    @Another
+    @Some
     Instance<Bar> barInstance;
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = PROCESS_PRODUCER, id = "f"),
-            @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "a"),
-            @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "b"),
-            @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "c"),
-            @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "d"),
-            @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "e") })
+        @SpecAssertion(section = PROCESS_PRODUCER, id = "f"),
+        @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "a"),
+        @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "b") })
     public void configuratorOptionsTest() {
-        // Just by deploying this, we are making sure that all IPs within SomeBeanWithInjectionPoints are satisfied
-        // Now check then one by one for the annotation with which they were created
-
-        // should have @YetAnother annotation
-        assertEquals(bean.getBarOne().getAnnotationWithWhichBarWasProduced().getSimpleName(), YetAnother.class.getSimpleName());
-
-        // should have @Some annotation
-        assertEquals(bean.getBarTwo().getAnnotationWithWhichBarWasProduced().getSimpleName(), Some.class.getSimpleName());
-        assertEquals(bean.getBarThree().getAnnotationWithWhichBarWasProduced().getSimpleName(), Some.class.getSimpleName());
-
-        //should have @OneAmongMany annotation
-        assertEquals(bean.getBarFour().getAnnotationWithWhichBarWasProduced().getSimpleName(), OneAmongMany.class.getSimpleName());
-        assertEquals(bean.getBarFive().getAnnotationWithWhichBarWasProduced().getSimpleName(), OneAmongMany.class.getSimpleName());
-
-        // should have @Default annotation
-        assertEquals(bean.getBarSix().getAnnotationWithWhichBarWasProduced().getSimpleName(), Default.class.getSimpleName());
-        assertEquals(bean.getBarSeven().getAnnotationWithWhichBarWasProduced().getSimpleName(), Default.class.getSimpleName());
-
-        // should have @Another annotation, also has changed producer/disposer
-        assertEquals(bean.getBarEight().getAnnotationWithWhichBarWasProduced().getSimpleName(), Another.class.getSimpleName());
+        // verify producer/disposer were changed
         assertTrue(barInstance.isResolvable());
-        // verify producer/disposer
         Bar actualInstance = barInstance.get();
         assertTrue(ProducerConfiguringExtension.producerCalled.get());
+        assertNull(actualInstance.getParamInjectedBean().getAnnotation());
         barInstance.destroy(actualInstance);
         assertTrue(ProducerConfiguringExtension.disposerCalled.get());
     }
