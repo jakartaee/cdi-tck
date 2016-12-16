@@ -163,8 +163,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     public void syntheticEventInvokedAndReturningSourceTest() {
         assertEquals(extension.timesInvoked(), new Integer(3));
         Map<Type, Extension> map = extension.getSources();
-        assertEquals(map.get(Peach.class).getClass(), ProcessSyntheticObserverMethodObserver.class);
-        assertEquals(map.get(Banana.class).getClass(), ProcessSyntheticObserverMethodObserver.class);
-        assertEquals(map.get(Melon.class).getClass(), ProcessSyntheticObserverMethodObserver.class);
+        assertEquals(map.get(Peach.class).getClass(), AfterBeanDiscoveryObserver.class);
+        assertEquals(map.get(Banana.class).getClass(), AfterBeanDiscoveryObserver.class);
+        assertEquals(map.get(Melon.class).getClass(), AfterBeanDiscoveryObserver.class);
     }
 }
