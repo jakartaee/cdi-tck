@@ -16,25 +16,24 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.producer;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.Annotation;
 
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Qualifier;
+import javax.enterprise.inject.Vetoed;
 
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@Qualifier
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE, ElementType.PARAMETER })
-public @interface YetAnother {
+@Vetoed
+public class ParameterInjectedBean {
 
-    public static class YetAnotherLiteral extends AnnotationLiteral<YetAnother> implements YetAnother {
+    private Class<? extends Annotation> annotation;
 
-        public static YetAnotherLiteral INSTANCE = new YetAnotherLiteral();
+    public ParameterInjectedBean(Class<? extends Annotation> annotation) {
+        this.annotation = annotation;
+    }
+
+    public Class<?> getAnnotation() {
+        return annotation;
     }
 }

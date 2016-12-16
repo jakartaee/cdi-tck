@@ -8191,13 +8191,13 @@
             <assertion id="b">
                 <text>Set a callback to destroy the produced instance with |disposeWith()| method.</text>
             </assertion>
-            <assertion id="c">
+            <assertion id="c" testable="false">
                 <text>Add an injection point for the producer with |addInjectionPoint| method.</text>
             </assertion>
-            <assertion id="d">
+            <assertion id="d" testable="false">
                 <text>Add multiple injection points for the producer with |addInjectionPoints| methods.</text>
             </assertion>
-            <assertion id="e">
+            <assertion id="e" testable="false">
                 <text>Replace all injection points for the producer with |injectionPoints| method.</text>
             </assertion>
         </group>
