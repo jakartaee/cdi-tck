@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
 import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.UnproxyableResolutionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -46,11 +45,7 @@ public class UnproxyableInterceptedInstanceTest extends AbstractTest {
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = Sections.INTERCEPTION_FACTORY, id = "e")
     public void unproxyableExceptionIsThrown(Instance<UnproxyableType> unproxyableTypeInstance) {
-        try {
-            unproxyableTypeInstance.get();
-            Assert.fail();
-        } catch (UnproxyableResolutionException e) {
-        }
+        Assert.assertNull(unproxyableTypeInstance.get());
     }
 
 }

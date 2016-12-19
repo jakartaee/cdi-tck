@@ -17,17 +17,23 @@
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.UnproxyableResolutionException;
 import javax.enterprise.inject.spi.InterceptionFactory;
 
 @ApplicationScoped
 public class InterceptedInstanceProducer {
 
     @Produces
-    @RequestScoped
+    @Dependent
     public UnproxyableType attemptToCreateUnproxyableInterceptedInstance(InterceptionFactory<UnproxyableType> interceptionFactory) {
-        return interceptionFactory.createInterceptedInstance(new UnproxyableType("test"));
+        try {
+            return interceptionFactory.createInterceptedInstance(new UnproxyableType());
+        } catch (UnproxyableResolutionException e) {
+
+        }
+        return null;
     }
 
 }
