@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.se.container.implicitBA;
+package org.jboss.cdi.tck.tests.se.discovery.implicit;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
@@ -39,12 +39,12 @@ import org.testng.annotations.Test;
 
 @Test(groups = SE)
 @SpecVersion(spec = "cdi", version = "2.0-EDR2")
-public class BootstrapSEWithSystemPropertyTest extends Arquillian {
+public class ImplicitBeanArchiveWithSystemPropertyTest extends Arquillian {
 
     @Deployment
     public static Archive<?> deployment() {
         final JavaArchive implicitArchive = ShrinkWrap.create(JavaArchive.class)
-                .addClasses(BootstrapSEWithSystemPropertyTest.class, Bar.class);
+                .addClasses(ImplicitBeanArchiveWithSystemPropertyTest.class, Bar.class);
         return ClassPath.builder().add(implicitArchive).build();
     }
 

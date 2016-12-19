@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.se.container.implicitBA;
+package org.jboss.cdi.tck.tests.se.discovery.implicit;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;

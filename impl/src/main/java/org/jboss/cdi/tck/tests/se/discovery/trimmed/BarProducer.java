@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2015, Red Hat, Inc., and individual contributors
+ * Copyright 2016, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,12 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.se.container.implicitBA;
+package org.jboss.cdi.tck.tests.se.discovery.trimmed;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.InterceptionFactory;
 
-@Dependent
-public class Bar {
-    
-    public void ping(){}
+@TestStereotype
+public class BarProducer {
+
+    @Produces
+    public Bar createBar(InterceptionFactory<Bar> interceptionFactory) {
+        interceptionFactory.configure().filterMethods(m -> m.getJavaMember().getName().equals("ping")).findFirst().get()
+                .add(BarInterceptorBinding.BarInterceptorBindingLiteral.INSTANCE);
+        return interceptionFactory.createInterceptedInstance(new Bar());
+    }
+
 }
