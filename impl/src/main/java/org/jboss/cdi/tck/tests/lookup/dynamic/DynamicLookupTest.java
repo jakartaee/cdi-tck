@@ -17,9 +17,11 @@
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
 import static org.jboss.cdi.tck.cdi.Sections.ANNOTATIONLITERAL_TYPELITERAL;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INSTANCE;
 import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
 import static org.jboss.cdi.tck.cdi.Sections.NEW;
 import static org.jboss.cdi.tck.cdi.Sections.PROGRAMMATIC_LOOKUP;
+import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -29,10 +31,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Stream;
+
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
+import javax.enterprise.inject.spi.CDI;
 import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -235,5 +239,22 @@ public class DynamicLookupTest extends AbstractTest {
         assertEquals(stream.count(), 2);
         assertTrue(uncommonInstance.stream().filter(p -> p.getClass().equals(Garply.class)).findFirst().isPresent());
         assertTrue(uncommonInstance.stream().filter(p -> p.getClass().equals(Corge.class)).findFirst().isPresent());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INSTANCE, id = "a"), @SpecAssertion(section = BM_OBTAIN_INSTANCE, id = "b") })
+    public void beanManageCreateInstance() {
+        Instance<Object> instance = getCurrentManager().createInstance();
+        Instance<AsynchronousPaymentProcessor> asyncProcessors = instance.select(AsynchronousPaymentProcessor.class);
+        // there's no AsynchronousPaymentProcessor with default qualifier
+        assertTrue(asyncProcessors.isUnsatisfied());
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = PROVIDER, id = "b") })
+    public void cdiSelectLookup() {
+        Instance<AsynchronousPaymentProcessor> asyncProcessors = CDI.current().select(AsynchronousPaymentProcessor.class);
+        // there's no AsynchronousPaymentProcessor with default qualifier
+        assertTrue(asyncProcessors.isUnsatisfied());
     }
 }

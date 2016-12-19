@@ -20,9 +20,15 @@ import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
 import static org.jboss.cdi.tck.cdi.Sections.SE_CONTAINER;
 import static org.jboss.cdi.tck.cdi.Sections.SE_CONTAINER_INITIALIZER;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 import java.util.Optional;
 import java.util.Set;
+
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.literal.InjectLiteral;
@@ -44,7 +50,6 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(groups = SE)
@@ -69,12 +74,12 @@ public class BootstrapSEContainerTest extends Arquillian {
     public void testContainerIsInitialized() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         SeContainer seContainer = seContainerInitializer.initialize();
-        Assert.assertTrue(seContainer.isRunning());
+        assertTrue(seContainer.isRunning());
         Foo foo = seContainer.select(Foo.class).get();
-        Assert.assertNotNull(foo);
+        assertNotNull(foo);
         foo.ping();
         seContainer.close();
-        Assert.assertFalse(seContainer.isRunning());
+        assertFalse(seContainer.isRunning());
     }
 
     @Test(expectedExceptions = IllegalStateException.class)
@@ -90,15 +95,15 @@ public class BootstrapSEContainerTest extends Arquillian {
             @SpecAssertion(section = SE_BOOTSTRAP, id = "do"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "e") })
     public void testInvocationOfInitializedMethodReturnsNewSeContainerInstance() {
-        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();//.initialize();
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         SeContainer seContainer1 = seContainerInitializer.initialize();
-        Assert.assertNotNull(seContainer1);
+        assertNotNull(seContainer1);
         seContainer1.close();
 
         SeContainer seContainer2 = seContainerInitializer.initialize();
-        Assert.assertNotNull(seContainer2);
+        assertNotNull(seContainer2);
         seContainer2.close();
-        Assert.assertNotEquals(seContainer1, seContainer2);
+        assertNotEquals(seContainer1, seContainer2);
     }
 
     @Test
@@ -110,10 +115,10 @@ public class BootstrapSEContainerTest extends Arquillian {
             BeanManager beanManager = seContainer.getBeanManager();
             beanManager.fireEvent(new Baz(), Any.Literal.INSTANCE);
             beanManager.fireEvent(new Qux(), Any.Literal.INSTANCE);
-            Assert.assertNotNull(seContainer.select(Baz.class).get().ping());
-            Assert.assertTrue(BazObserver.isNotified);
+            assertNotNull(seContainer.select(Baz.class).get().ping());
+            assertTrue(BazObserver.isNotified);
             // is not in synthetic archive
-            Assert.assertFalse(QuxObserver.isNotified);
+            assertFalse(QuxObserver.isNotified);
         }
     }
 
@@ -130,11 +135,11 @@ public class BootstrapSEContainerTest extends Arquillian {
                 .selectAlternativeStereotypes(AlternativeStereotype.class)
                 .initialize()) {
             Shape shape = seContainer.select(Shape.class).get();
-            Assert.assertEquals(shape.name(), Circle.NAME);
+            assertEquals(shape.name(), Circle.NAME);
             Set<Bean<?>> foos = seContainer.getBeanManager().getBeans(Foo.class);
             Optional<Bean<?>> alternativeFoo = foos.stream().filter(bean -> bean.isAlternative()).findAny();
-            Assert.assertTrue(alternativeFoo.isPresent());
-            Assert.assertEquals(alternativeFoo.get().getName(), "createFoo");
+            assertTrue(alternativeFoo.isPresent());
+            assertEquals(alternativeFoo.get().getName(), "createFoo");
         }
     }
 
@@ -147,9 +152,9 @@ public class BootstrapSEContainerTest extends Arquillian {
                 .initialize()) {
             Instance<Apple> appleInstance = seContainer.select(Apple.class);
             Instance<Pear> pearInstance = seContainer.select(Pear.class);
-            Assert.assertFalse(appleInstance.isUnsatisfied());
-            Assert.assertTrue(pearInstance.isUnsatisfied());
-            Assert.assertNotNull(appleInstance.get().getWorm());
+            assertFalse(appleInstance.isUnsatisfied());
+            assertTrue(pearInstance.isUnsatisfied());
+            assertNotNull(appleInstance.get().getWorm());
         }
     }
 
@@ -162,9 +167,9 @@ public class BootstrapSEContainerTest extends Arquillian {
                 .initialize()) {
             Instance<Apple> appleInstance = seContainer.select(Apple.class);
             Instance<Pear> pearInstance = seContainer.select(Pear.class);
-            Assert.assertFalse(appleInstance.isUnsatisfied());
-            Assert.assertFalse(pearInstance.isUnsatisfied());
-            Assert.assertNotNull(appleInstance.get().getWorm());
+            assertFalse(appleInstance.isUnsatisfied());
+            assertFalse(pearInstance.isUnsatisfied());
+            assertNotNull(appleInstance.get().getWorm());
         }
     }
 
@@ -178,14 +183,14 @@ public class BootstrapSEContainerTest extends Arquillian {
                 .addExtensions(testExtension)
                 .initialize()) {
             TestExtension containerExtension = seContainer.select(TestExtension.class).get();
-            Assert.assertTrue(containerExtension.getBeforeBeanDiscoveryNotified().get());
-            Assert.assertTrue(containerExtension.getAfterTypeDiscoveryNotified().get());
-            Assert.assertTrue(containerExtension.getAfterBeanDiscoveryNotified().get());
-            Assert.assertTrue(containerExtension.getAfterDeploymentValidationNotified().get());
-            Assert.assertTrue(containerExtension.getProcessAnnotatedTypeNotified().get());
-            Assert.assertTrue(containerExtension.getProcessInjectionTargetNotified().get());
-            Assert.assertTrue(containerExtension.getProcessBeanAttributesNotified().get());
-            Assert.assertTrue(containerExtension.getProcessBeanNotified().get());
+            assertTrue(containerExtension.getBeforeBeanDiscoveryNotified().get());
+            assertTrue(containerExtension.getAfterTypeDiscoveryNotified().get());
+            assertTrue(containerExtension.getAfterBeanDiscoveryNotified().get());
+            assertTrue(containerExtension.getAfterDeploymentValidationNotified().get());
+            assertTrue(containerExtension.getProcessAnnotatedTypeNotified().get());
+            assertTrue(containerExtension.getProcessInjectionTargetNotified().get());
+            assertTrue(containerExtension.getProcessBeanAttributesNotified().get());
+            assertTrue(containerExtension.getProcessBeanNotified().get());
         }
     }
 
@@ -198,14 +203,14 @@ public class BootstrapSEContainerTest extends Arquillian {
                 .addExtensions(TestExtension.class)
                 .initialize()) {
             TestExtension containerExtension = seContainer.select(TestExtension.class).get();
-            Assert.assertTrue(containerExtension.getBeforeBeanDiscoveryNotified().get());
-            Assert.assertTrue(containerExtension.getAfterTypeDiscoveryNotified().get());
-            Assert.assertTrue(containerExtension.getAfterBeanDiscoveryNotified().get());
-            Assert.assertTrue(containerExtension.getAfterDeploymentValidationNotified().get());
-            Assert.assertTrue(containerExtension.getProcessAnnotatedTypeNotified().get());
-            Assert.assertTrue(containerExtension.getProcessInjectionTargetNotified().get());
-            Assert.assertTrue(containerExtension.getProcessBeanAttributesNotified().get());
-            Assert.assertTrue(containerExtension.getProcessBeanNotified().get());
+            assertTrue(containerExtension.getBeforeBeanDiscoveryNotified().get());
+            assertTrue(containerExtension.getAfterTypeDiscoveryNotified().get());
+            assertTrue(containerExtension.getAfterBeanDiscoveryNotified().get());
+            assertTrue(containerExtension.getAfterDeploymentValidationNotified().get());
+            assertTrue(containerExtension.getProcessAnnotatedTypeNotified().get());
+            assertTrue(containerExtension.getProcessInjectionTargetNotified().get());
+            assertTrue(containerExtension.getProcessBeanAttributesNotified().get());
+            assertTrue(containerExtension.getProcessBeanNotified().get());
         }
     }
 
@@ -219,9 +224,9 @@ public class BootstrapSEContainerTest extends Arquillian {
                 .initialize()) {
             Bar bar = seContainer.select(Bar.class).get();
             int result = bar.ping();
-            Assert.assertTrue(BarInterceptor1.notified);
-            Assert.assertTrue(BarInterceptor2.notified);
-            Assert.assertEquals(result, 3);
+            assertTrue(BarInterceptor1.notified);
+            assertTrue(BarInterceptor2.notified);
+            assertEquals(result, 3);
 
         }
     }
@@ -236,8 +241,19 @@ public class BootstrapSEContainerTest extends Arquillian {
                 .initialize()) {
             Corge corge = seContainer.select(Corge.class).get();
             int result = corge.ping();
-            Assert.assertTrue(CorgeDecorator.notified);
-            Assert.assertEquals(result, 2);
+            assertTrue(CorgeDecorator.notified);
+            assertEquals(result, 2);
+        }
+    }
+
+    @Test
+    @SpecAssertion(section = SE_CONTAINER, id = "d")
+    public void testSeContainerLookup() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        try (SeContainer seContainer = seContainerInitializer.initialize()) {
+            Instance<Garply> garplyInstance = seContainer.select(Garply.class);
+            assertTrue(garplyInstance.isResolvable());
+            assertEquals(garplyInstance.get().getNumber(), 0);
         }
     }
 
@@ -266,7 +282,7 @@ public class BootstrapSEContainerTest extends Arquillian {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         SeContainer seContainer = seContainerInitializer.initialize();
         seContainer.close();
-        Assert.assertFalse(seContainer.isRunning());
+        assertFalse(seContainer.isRunning());
         return seContainer;
     }
 
