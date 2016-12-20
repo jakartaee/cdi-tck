@@ -265,14 +265,14 @@ ShrinkWrap is a part of the Arqullian platform ecosystem.
 This section lists the applicable requirements and specifications for the CDI TCK. 
 
 
-*  *Specification requirements* - Software requirements for a CDI implementation are itemized in section 1.2, "Relationship to other specifications" in the CDI specification, with details provided throughout the specification. Generally, the CDI specification targets the Java EE 7 platform and is aligned with its specifications. 
+*  *Specification requirements* - Software requirements for a CDI implementation are itemized in section 1.2, "Relationship to other specifications" in the CDI specification, with details provided throughout the specification. Generally, the CDI specification targets the Java EE 8 platform and will be aligned with its specifications.
 
 
 *  *Contexts and Dependency Injection for
                      Java 2.0 API* - The Java API defined in the CDI specification and provided by the reference implementation.
 
 
-*  *Testing platform* - The CDI TCK requires version 1.1.7.Final of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG 6.x (http://testng.org). .
+*  *Testing platform* - The CDI TCK requires version 1.1.11.Final of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG 6.x (http://testng.org). .
 
 
 *  *Porting Package* - An implementation of SPIs that are required for the test suite to run the in-container tests and at times extend the CDI 2.0 API to provide extra information to the TCK.
@@ -281,7 +281,7 @@ This section lists the applicable requirements and specifications for the CDI TC
 *  *TCK Audit Tool* - An itemization of the assertions in the specification documents which are cross referenced by the individual tests. Describes how well the TCK covers the specification. 
 
 
-*  *Reference runtime* - The designated reference runtime for compatibility testing of the CDI specification is the Oracle Java Platform, Enterprise Edition (Java EE) 7 reference implementation (RI). 
+*  *Reference runtime* - The designated reference runtime for compatibility testing of the CDI specification is the Oracle Java Platform, Enterprise Edition (Java EE) 8 reference implementation (RI).
 
 
 *  *JSR 330* - CDI builds on JSR 330, and as such JSR 365 implementations must additionally pass the JSR 330 TCK.
@@ -303,7 +303,7 @@ The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X
 The CDI TCK includes the following components:
 
 
-*  *Arquillian 1.1.7.Final*
+*  *Arquillian 1.1.11.Final*
 
 
 *  *TestNG 6.8.8*
@@ -334,9 +334,9 @@ Oracle Corporation will implement the porting package for the CDI RI and test th
 The CDI TCK has been tested on following platforms:
 
 
-*  WildFly 8.x using Oracle Java SE 7 on Red Hat Enterprise Linux 5.2 
+*  WildFly 10.x using Oracle Java SE 8 on Red Hat Enterprise Linux 7.2
 
-CDI supports Java EE 5, Java EE 6, Java EE 6 Web Profile, Java EE 7, Java EE 7 Web Profile, Embeddable EJB 3.1, and the Embeddable EJB 3.2. The TCK will execute on any of these runtimes, but is only part of the CTS for Java EE 7 and Java EE 7 Web Profile. 
+CDI supports Java EE 6, Java EE 6 Web Profile, Java EE 7, Java EE 7 Web Profile, Embeddable EJB 3.1, and the Embeddable EJB 3.2. The TCK will execute on any of these runtimes, but is only part of the CTS for Java EE 8 and Java EE 8 Web Profile.
 
 [[libraries]]
 
@@ -347,8 +347,12 @@ Contexts and Dependency Injection for Java Version 2.0:
 
 * javax.decorator
 * javax.enterprise.context
+* javax.enterprise.context.control
 * javax.enterprise.context.spi
 * javax.enterprise.event
 * javax.enterprise.inject
+* javax.enterprise.inject.literal
+* javax.enterprise.inject.se
 * javax.enterprise.inject.spi
+* javax.enterprise.inject.spi.configurator
 * javax.enterprise.util

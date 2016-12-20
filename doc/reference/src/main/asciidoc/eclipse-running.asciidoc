@@ -62,7 +62,7 @@ Weld JBoss TCK Runner
 
 ----
 
-The tests in the TCK test suite are located in the cdi-tck-impl project. You'll be working within this project in Eclipse when you are developing tests. However, as you learned earlier, there are no references to a CDI implementation in the TCK. So how can you execute an individual test in Eclipse? The secret is that you need to establish a link in Eclipse (not in Maven) between the cdi-tck-impl project and your TCK runner project, which in this case is weld-jboss-runner-tck (the project in the jboss-tck-runner/1.1 directory).
+The tests in the TCK test suite are located in the cdi-tck-impl project. You'll be working within this project in Eclipse when you are developing tests. However, as you learned earlier, there are no references to a CDI implementation in the TCK. So how can you execute an individual test in Eclipse? The secret is that you need to establish a link in Eclipse (not in Maven) between the cdi-tck-impl project and your TCK runner project, which in this case is weld-jboss-runner-tck (the project in the jboss-tck-runner directory).
 
 Here are the steps to establish the link:
 
@@ -88,7 +88,7 @@ As you have learned, the TCK determines how to behave based on the values of sys
 The CDI TCK project conveniently provides the properties file src/test/resources/META-INF/cdi-tck.properties that contains all of the necessary properties for testing in Eclipse. You have to tune the org.jboss.cdi.tck.libraryDirectory and org.jboss.cdi.tck.testDataSource properties to point to the relative location of the related projects and specify the name of test datasource. The properties should be defined as follows:
 
 org.jboss.cdi.tck.libraryDirectory - the path to the target/dependency/lib directory in the TCK runner project
-org.jboss.cdi.tck.testDataSource - the JNDI name of the test datasource, e.g. WildFly 8:
+org.jboss.cdi.tck.testDataSource - the JNDI name of the test datasource, e.g. WildFly 10:
 
 [source, console]
 ----

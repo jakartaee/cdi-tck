@@ -36,16 +36,16 @@ Weld is not required for running the CDI TCK, but it can be used as a reference 
 ====
 
 
-Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 7 or better, which you can obtain from the link:$$http://www.oracle.com/technetwork/java/index.html$$[Java Software] website.
+Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 8 or better, which you can obtain from the link:$$http://www.oracle.com/technetwork/java/index.html$$[Java Software] website.
 
 
 === The TCK Environment
 
 The TCK requires the following two Java runtime environments: 
 
-*  Java SE 7 or better
+*  Java SE 8 or better
 
-*  Java EE 7 or better (e.g., WildFly 8.x or GlassFish V4) 
+*  Java EE 7 or better (e.g., WildFly 10.x or GlassFish V4)
 
 You should refer to vendor instructions for how to install the runtime environment. 
 
@@ -71,7 +71,7 @@ Each test class is treated as an individual artifact. All test methods (i.e., me
 ==== 
 Running the TCK against the CDI RI (Weld) and WildFly
 
-* First, you should download WildFly 8.x from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
+* First, you should download WildFly 10.x from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
 
 * Set the JBOSS_HOME environment variable to the location of the WildFly software. 
 

@@ -7,7 +7,7 @@ Technology Compatibility Kit (TCK) used to verify the compatibility of an
 implementation of the JSR 365:{nbsp}Contexts and Dependency Injection for Java 2.0.
 
 The CDI TCK is built atop TestNG framework and Arquillian platform. The CDI TCK uses 
-the Arquillian version _1.1.7.Final_ to execute the test suite.
+the Arquillian version _1.1.11.Final_ to execute the test suite.
 
 The CDI TCK is provided under link:$$http://www.apache.org/licenses/LICENSE-2.0$$[Apache Public License 2.0].
 

@@ -49,6 +49,18 @@
             <organization>Red Hat Inc.</organization>
         </developer>
 
+        <developer>
+            <name>Tomas Remes</name>
+            <email>tremes@redhat.com</email>
+            <organization>Red Hat Inc.</organization>
+        </developer>
+
+        <developer>
+            <name>Matej Novotny</name>
+            <email>manovotn@redhat.com</email>
+            <organization>Red Hat Inc.</organization>
+        </developer>
+
     </developers>
 
     <organization>
