@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
+import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -32,20 +34,34 @@ import org.testng.annotations.Test;
  * @author Tomas Remes
  */
 @SpecVersion(spec = "cdi", version = "2.0-EDR2")
-public class UnproxyableInterceptedInstanceTest extends AbstractTest {
+public class BrokenInterceptedInstanceTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClass(UnproxyableInterceptedInstanceTest.class)
-                .withClasses(InterceptedInstanceProducer.class, UnproxyableType.class)
+                .withTestClass(BrokenInterceptedInstanceTest.class)
+                .withClasses(InterceptedInstanceProducer.class, UnproxyableType.class, Foo.class)
                 .build();
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Inject
+    @Any
+    Instance<UnproxyableType> unproxyableTypeInstance;
+
+    @Inject
+    @Any
+    Instance<Foo> fooInstance;
+
+    @Test
     @SpecAssertion(section = Sections.INTERCEPTION_FACTORY, id = "e")
-    public void unproxyableExceptionIsThrown(Instance<UnproxyableType> unproxyableTypeInstance) {
+    public void unproxyableExceptionIsThrown() {
         Assert.assertNull(unproxyableTypeInstance.get());
+    }
+
+    @Test
+    @SpecAssertion(section = Sections.INTERCEPTION_FACTORY, id = "d")
+    public void illegalExceptionIsThrownForSubsequentCall() {
+        Assert.assertNull(fooInstance.get());
     }
 
 }

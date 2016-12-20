@@ -36,4 +36,14 @@ public class InterceptedInstanceProducer {
         return null;
     }
 
+    @Produces
+    public Foo attemptToSubsequentCallOfCreateInterceptedInstance(InterceptionFactory<Foo> iFactory) {
+        try {
+            iFactory.createInterceptedInstance(new Foo());
+            return iFactory.createInterceptedInstance(new Foo());
+        } catch (IllegalStateException e) {
+        }
+        return null;
+    }
+
 }
