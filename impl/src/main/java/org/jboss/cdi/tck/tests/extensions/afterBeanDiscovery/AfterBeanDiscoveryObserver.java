@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
@@ -37,8 +38,10 @@ import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessObserverMethod;
 import javax.enterprise.inject.spi.ProcessSyntheticBean;
+import javax.enterprise.inject.spi.ProcessSyntheticObserverMethod;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 
@@ -48,17 +51,26 @@ public class AfterBeanDiscoveryObserver implements Extension {
 
     public static TestableObserverMethod<Talk> addedObserverMethod;
 
-    public static boolean isTalkProcessObserverMethodObserved = false;
+    private AtomicInteger talkPOMObservedCount = new AtomicInteger(0);
+    private AtomicInteger talkPSOMObservedCount = new AtomicInteger(0);
+    private AtomicInteger cockatooPBObservedCount = new AtomicInteger(0);
+    private AtomicInteger cockatooPSBObservedCount = new AtomicInteger(0);
 
-    public static boolean isProcessBeanFiredForCockatooBean = false;
-
-    public void observeProcessBean(@Observes ProcessSyntheticBean<Cockatoo> event) {
-        isProcessBeanFiredForCockatooBean = true;
+    public void observeProcessSyntheticBean(@Observes ProcessSyntheticBean<Cockatoo> event) {
+        cockatooPSBObservedCount.incrementAndGet();
         assert event.getBean().getName().equals("cockatoo");
     }
 
+    public void observeProcessBean(@Observes ProcessBean<Cockatoo> event) {
+        cockatooPBObservedCount.incrementAndGet();
+    }
+
     public void observeProcessObserverMethod(@Observes ProcessObserverMethod<Talk, Listener> event) {
-        isTalkProcessObserverMethodObserved = true;
+        talkPOMObservedCount.incrementAndGet();
+    }
+
+    public void observeProcessSyntheticObserverMethod(@Observes ProcessSyntheticObserverMethod<Talk, Listener> event) {
+        talkPSOMObservedCount.incrementAndGet();
     }
 
     public void addABean(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
@@ -183,6 +195,22 @@ public class AfterBeanDiscoveryObserver implements Extension {
 
         };
         event.addObserverMethod(addedObserverMethod);
+    }
+
+    public AtomicInteger getTalkPOMObservedCount() {
+        return talkPOMObservedCount;
+    }
+
+    public AtomicInteger getTalkPSOMObservedCount() {
+        return talkPSOMObservedCount;
+    }
+
+    public AtomicInteger getCockatooPBObservedCount() {
+        return cockatooPBObservedCount;
+    }
+
+    public AtomicInteger getCockatooPSBObservedCount() {
+        return cockatooPSBObservedCount;
     }
 
 }

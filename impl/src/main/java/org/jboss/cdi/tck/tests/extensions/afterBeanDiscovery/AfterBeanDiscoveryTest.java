@@ -62,13 +62,15 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "da"), @SpecAssertion(section = PROCESS_BEAN, id = "eca") })
     public void testProcessBeanIsFired() {
-        assertTrue(AfterBeanDiscoveryObserver.isProcessBeanFiredForCockatooBean);
+        assertEquals(getCurrentManager().getExtension(AfterBeanDiscoveryObserver.class).getCockatooPBObservedCount().get(), 1);
+        assertEquals(getCurrentManager().getExtension(AfterBeanDiscoveryObserver.class).getCockatooPSBObservedCount().get(), 1);
     }
 
     @Test
     @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ea")
     public void testProcessObserverMethodFiredWhileAddingObserverMethod() {
-        assertTrue(AfterBeanDiscoveryObserver.isTalkProcessObserverMethodObserved);
+        assertEquals(getCurrentManager().getExtension(AfterBeanDiscoveryObserver.class).getTalkPOMObservedCount().get(), 1);
+        assertEquals(getCurrentManager().getExtension(AfterBeanDiscoveryObserver.class).getTalkPSOMObservedCount().get(), 1);
     }
 
     @Test
