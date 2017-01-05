@@ -71,8 +71,6 @@ public class BuiltinInstanceTest extends AbstractTest {
 
     @SuppressWarnings({ "serial", "rawtypes" })
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    // CDI-232
-    // @SpecAssertion(section = BUILTIN_INSTANCE, id = "a")
     @SpecAssertions({ @SpecAssertion(section = BUILTIN_INSTANCE, id = "f") })
     public void testInstanceProvidedForEveryLegalBeanType(Farm farm, Instance<Predator<?>> predatorInstance) {
 
