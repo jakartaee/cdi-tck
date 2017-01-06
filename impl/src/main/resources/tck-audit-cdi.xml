@@ -11524,7 +11524,14 @@
         </group>
     </section>
 
-    <section id="el" title="Integration with Unified EL" level="3">
+    <section id="trimmed_bean_archive_ee" title="Trimmed bean archive in Java EE" level="3">
+       <assertion id="a">
+           <text>When running in Java EE, the container must extend the rules defined in "Trimmed bean archive" and
+               must ensure that EJB session beans are not removed from the set of discovered types.</text>
+       </assertion>
+    </section>
+
+    <section id="el" title="Integration with Unified EL" level="2">
         <assertion id="a">
             <text>The container must provide a Unified EL |ELResolver| to the servlet engine and JSF implementation that resolves bean EL names using the rules
                 of name resolution defined in 5.3, "Name resolution" and resolving ambiguities according to Section 5.3.1, "Ambiguous names".
