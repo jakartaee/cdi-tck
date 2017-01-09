@@ -63,7 +63,7 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "aa"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "a"),
             @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ba"),
             @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bd"),
             @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bf"),
@@ -79,7 +79,7 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ab"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "a"),
             @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bb"),
             @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bc"),
             @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "be"),
@@ -101,7 +101,7 @@ public class BeanAttributesConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ab"),
+            @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "a"),
             @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "ba"),
             @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "be"),
             @SpecAssertion(section = BEAN_ATTRIBUTES_CONFIGURATOR, id = "bg") })

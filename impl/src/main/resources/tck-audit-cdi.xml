@@ -7918,16 +7918,11 @@
     </section>
 
     <section id="bean_attributes_configurator" title="BeanAttributesConfigurator interface" level="4">
-        <group>
-            <text>BeanAttributesConfigurator must be initialized from an AnnotatedType, or an existing BeanAttributes with one of its read() methods.</text>
-            <assertion id="aa">
-                <text>Test initialization of `BeanAttributesConfigurator` from an AnnotatedType.</text>
-            </assertion>
-
-            <assertion id="ab">
-                <text>Test initialization of `BeanAttributesConfigurator` from an existing BeanAttributes.</text>
-            </assertion>
-        </group>
+        <assertion id="a">
+            <text>|BeanAttributesConfigurator| is obtainable during |ProcessBeanAttributes| event and is therefore
+                automatically initialized from existing |BeanAttributes|.
+            </text>
+        </assertion>
 
         <group>
             <text>With `BeanAttributesConfigurator` you can perform the following operation:</text>
