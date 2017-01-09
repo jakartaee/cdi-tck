@@ -5548,7 +5548,6 @@
                 transaction in which the event was fired. If no transaction is in progress when the event is fired, they are notified at the same time as other
                 observers
             </text>
-            <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
         </assertion>
 
         <assertion id="aa">
@@ -5561,24 +5560,20 @@
 
         <assertion id="b">
             <text>A before completion observer method is called during the before completion phase of the transaction</text>
-            <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
         </assertion>
 
         <assertion id="c">
             <text>An after completion observer method is called during the after completion phase of the transaction</text>
-            <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
         </assertion>
 
         <assertion id="d">
             <text>An after success observer method is called during the after completion phase of the transaction, only when the transaction completes
                 successfully
             </text>
-            <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
         </assertion>
 
         <assertion id="e">
             <text>An after failure observer method is called during the after completion phase of the transaction, only when the transaction fails</text>
-            <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
         </assertion>
 
         <assertion id="f" testable="false">
