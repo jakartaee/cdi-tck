@@ -5551,6 +5551,14 @@
             <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
         </assertion>
 
+        <assertion id="aa">
+            <text>If the transaction is in progress, but |javax.transaction.Synchronization| callback cannot be registered due to the transaction being already
+                marked for rollback or in state where |javax.transaction.Synchronization| callbacks cannot be registered, the before completion, after
+                completion and after failure observer methods are notified at the same time as other observers, but
+                after success observer methods get skipped.
+            </text>
+        </assertion>
+
         <assertion id="b">
             <text>A before completion observer method is called during the before completion phase of the transaction</text>
             <note>Unverifiable since an observer method cannot detect if a transaction is involved or not</note>
