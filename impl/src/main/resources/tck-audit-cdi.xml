@@ -8315,13 +8315,14 @@
         </assertion>
         <assertion id="c">
             <text>
-                Method |createInterceptedInstance()| returns an enhanced version of the instance for which each method
-                invocations will be a business method invocation.
+                Method |createInterceptedInstance()| returns an enhanced version of the instance whose method
+                invocations are treated as business method invocations as defined in `Container invocations and
+                interception`.
             </text>
         </assertion>
         <assertion id="d">
             <text>
-                The method |createInterceptedInstance()| can be only called once, subsequent calls will throw an exception
+                The method |createInterceptedInstance()| can be only called once, subsequent calls will throw an |IllegalStateException|.
             </text>
         </assertion>
         <assertion id="e">
