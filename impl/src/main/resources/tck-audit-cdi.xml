@@ -3264,7 +3264,8 @@
 
     <section id="builtin_instance" title="The built-in Instance" level="3">
         <assertion id="a" testable="false">
-            <text>The container must provide a built-in bean that is eligible for injection to any injection point with required type Instance &lt;X&gt; or Provider&lt;&gt;, for any
+            <text>The container must provide a built-in bean that is eligible for injection to any injection point with required type Instance &lt;X&gt; or
+                Provider&lt;&gt;, for any
                 legal bean type X.
             </text>
         </assertion>
@@ -7346,8 +7347,7 @@
 
         <assertion id="de">
             <text>Test |BeanConfigurator&lt;?&gt; addBean()| returns a new BeanConfigurator as defined in BeanConfigurator interface to easily configure the
-                Bean
-                which will be added at the end of observer invocation.
+                Bean which will be added at the end of observer invocation.
             </text>
         </assertion>
 
@@ -7376,8 +7376,9 @@
         </assertion>
 
         <assertion id="ee">
-             <text>If the container is unable to process the |ObserverMethodConfigurator| it
-                 automatically detects the problem and treats it as a deployment problem.</text>
+            <text>If the container is unable to process the |ObserverMethodConfigurator| it
+                automatically detects the problem and treats it as a deployment problem.
+            </text>
         </assertion>
 
         <assertion id="f">
@@ -11519,10 +11520,11 @@
     </section>
 
     <section id="trimmed_bean_archive_ee" title="Trimmed bean archive in Java EE" level="3">
-       <assertion id="a">
-           <text>When running in Java EE, the container must extend the rules defined in "Trimmed bean archive" and
-               must ensure that EJB session beans are not removed from the set of discovered types.</text>
-       </assertion>
+        <assertion id="a">
+            <text>When running in Java EE, the container must extend the rules defined in "Trimmed bean archive" and
+                must ensure that EJB session beans are not removed from the set of discovered types.
+            </text>
+        </assertion>
     </section>
 
     <section id="el" title="Integration with Unified EL" level="2">
