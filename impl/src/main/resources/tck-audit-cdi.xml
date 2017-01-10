@@ -7371,14 +7371,18 @@
 
         <assertion id="ed">
             <text>Test |ObserverMethodConfigurator&lt;?&gt; addObserverMethod()| returns a new ObserverMethodConfigurator as defined in
-                ObserverMethodConfigurator
-                interface to easily configure the ObserverMethod which will be added at the end of observer invocation.
+                ObserverMethodConfigurator interface to easily configure the ObserverMethod which will be added at the end of observer invocation.
             </text>
+        </assertion>
+
+        <assertion id="ee">
+             <text>If the container is unable to process the |ObserverMethodConfigurator| it
+                 automatically detects the problem and treats it as a deployment problem.</text>
         </assertion>
 
         <assertion id="f">
             <text>|addContext()| registers a custom |Context| object with the container.</text>
-            <note>Right now only the registation process is tested</note>
+            <note>Right now only the registration process is tested</note>
         </assertion>
 
         <assertion id="g">

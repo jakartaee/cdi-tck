@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.broken.observerMethod;
 
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import javax.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -38,15 +38,16 @@ import org.testng.annotations.Test;
 public class ObserverMethodWithoutNotifyMethodTest extends AbstractTest {
 
     @Deployment
-    @ShouldThrowException(DefinitionException.class)
+    @ShouldThrowException(DeploymentException.class)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(ObserverMethodWithoutNotifyMethodTest.class)
                 .withClasses(AfterBeanDiscoveryObserver.class, Foo.class, FooObserver.class).withExtension(AfterBeanDiscoveryObserver.class)
                 .build();
     }
 
+    // unable to process ObserverMethodConfigurator due to missing notify method impl
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ec") })
-    public void observerMethodNotOverridingNotifyMethodTreatedAsDefinitionError() {
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ee") })
+    public void unableToProcessObserverMethodConfigurator() {
     }
 }
