@@ -8275,26 +8275,29 @@
         <group>
             <text>CDI 2.0 introduced the following Configurators interface:</text>
             <assertion id="aa" testable="false">
-                <text>AnnotatedTypeConfigurator for `AnnotatedType` configuration.</text>
+                <text>|AnnotatedTypeConfigurator| for |AnnotatedType| configuration.</text>
                 <note>Tested in related lifecycle event.</note>
             </assertion>
             <assertion id="ab" testable="false">
-                <text>InjectionPointConfigurator for `InjectionPoint` configuration</text>
+                <text>|InjectionPointConfigurator| for |InjectionPoint| configuration</text>
                 <note>Tested in related lifecycle event.</note>
             </assertion>
             <assertion id="ac" testable="false">
-                <text>BeanAttributesConfigurator for `BeanAttributes` configuration</text>
+                <text>|BeanAttributesConfigurator| for |BeanAttributes| configuration</text>
                 <note>Tested in related lifecycle event.</note>
             </assertion>
             <assertion id="ad" testable="false">
-                <text>BeanConfigurator for `Bean` configuration</text>
+                <text>|BeanConfigurator| for |Bean| configuration</text>
                 <note>Tested in related lifecycle event.</note>
             </assertion>
             <assertion id="ae" testable="false">
-                <text>ObserverMethodConfigurator for `ObserverMethod` configuration.</text>
+                <text>|ObserverMethodConfigurator| for |ObserverMethod| configuration.</text>
                 <note>Tested in related lifecycle event.</note>
             </assertion>
             <assertion id="af" testable="false">
+                <text>|ProducerConfigurator| interface for |Producer| configuration</text>
+            </assertion>
+            <assertion id="ag" testable="false">
                 <text>The container must provide implementation for all these configurators and make them available in matching container lifecycle events as
                     defined in `Container lifecycle events`.
                 </text>
