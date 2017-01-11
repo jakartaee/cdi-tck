@@ -7440,6 +7440,9 @@
                 <text>Set a callback to destroy a bean instance with destroyWith() or disposeWith() method.</text>
             </assertion>
         </group>
+        <assertion id="h">
+            <text>If a |BeanConfigurator| has no scope specified via the |BeanConfigurator.scope()| method, the Default Scope rules apply.</text>
+        </assertion>
     </section>
 
     <section id="observer_method_configurator" title="ObserverMethodConfigurator interface" level="4">
