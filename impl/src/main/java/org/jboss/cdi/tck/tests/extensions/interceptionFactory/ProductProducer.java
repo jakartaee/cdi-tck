@@ -20,9 +20,13 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InterceptionFactory;
+import javax.inject.Inject;
 
 @ApplicationScoped
 public class ProductProducer {
+
+    @Inject
+    ContainerProduct containerProduct;
 
     @Produces
     @RequestScoped
@@ -42,5 +46,14 @@ public class ProductProducer {
                 .add(ProductInterceptorBinding1.BindingLiteral.INSTANCE)
                 .add(ProductInterceptorBinding2.BindingLiteral.INSTANCE);
         return interceptionFactory.createInterceptedInstance(new FinalProduct());
+    }
+
+    @Produces
+    @Custom
+    public ContainerProduct noInterceptionProducer (InterceptionFactory<ContainerProduct> interceptionFactory) {
+        interceptionFactory.configure().filterMethods(m -> m.getJavaMember().getName().equals("ping"))
+                .findFirst().get()
+                .add(ProductInterceptorBinding1.BindingLiteral.INSTANCE);
+        return interceptionFactory.createInterceptedInstance(containerProduct);
     }
 }
