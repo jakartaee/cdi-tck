@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTION_FACTORY;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
@@ -59,6 +60,10 @@ public class InterceptionFactoryTest extends AbstractTest {
     @Inject
     Product product;
 
+    @Inject
+    @Custom
+    ContainerProduct containerProduct;
+
     @Test
     @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"),
             @SpecAssertion(section = INTERCEPTION_FACTORY, id = "ca") })
@@ -84,5 +89,11 @@ public class InterceptionFactoryTest extends AbstractTest {
         ActionSequence.reset();
         Assert.assertEquals(finalProduct.ping(), 3);
         ActionSequence.assertSequenceDataEquals(ProductInterceptor1.class, ProductInterceptor2.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = INTERCEPTION_FACTORY, id = "ce") })
+    public void createdInterceptedInstanceDoesNothingForInstanceCreatedByContainer() {
+        Assert.assertEquals(containerProduct.ping(), 1);
     }
 }
