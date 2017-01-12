@@ -19,17 +19,13 @@ package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_CONFIGURATOR;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.literal.NamedLiteral;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
@@ -119,14 +115,6 @@ public class BeanConfiguratorTest extends AbstractTest {
     public void testPassivationCapability() {
         // BeanManager should be able to find a passivation capable bean
         assertNotNull(getCurrentManager().getPassivationCapableBean("zombie"));
-    }
-
-    @Test
-    public void testDefaultScopeOfAddedBean(){
-        Bean<Bogey> bogeyBean = getUniqueBean(Bogey.class, Undead.UndeadLiteral.INSTANCE);
-        assertEquals(bogeyBean.getScope(), Dependent.class);
-        Bean<Werewolf> werewolfBean = getUniqueBean(Werewolf.class, NamedLiteral.INSTANCE);
-        assertEquals(werewolfBean.getScope(), RequestScoped.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

@@ -16,14 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-import java.lang.annotation.Annotation;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Model;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedType;
@@ -57,12 +53,6 @@ public class LifecycleObserver implements Extension {
 
         // create Vampire bean
         configureVampire(bm, abd.addBean());
-
-        // create Bogey bean
-        configureBogey(bm, abd.addBean());
-
-        // create Werewolf bean
-        configureWerewolf(bm, abd.addBean());
     }
 
     private void configureSkeleton(BeanManager bm, BeanConfigurator<Skeleton> skeleton) {
@@ -160,20 +150,6 @@ public class LifecycleObserver implements Extension {
             BeanAttributes<Vampire> ba = bm.createBeanAttributes(at);
             return bm.createBean(ba, Vampire.class, bm.getInjectionTargetFactory(at)).create(creationalContext);
         });
-    }
-
-    private void configureBogey(BeanManager bm, BeanConfigurator<Bogey> bogey){
-        bogey.read(bm.createAnnotatedType(Bogey.class));
-        bogey.beanClass(Bogey.class);
-        bogey.addQualifier(Undead.UndeadLiteral.INSTANCE);
-    }
-
-    private void configureWerewolf(BeanManager bm, BeanConfigurator<Werewolf> werewolf){
-        werewolf.read(bm.createAnnotatedType(Werewolf.class));
-        werewolf.beanClass(Werewolf.class);
-        Set<Class<? extends Annotation>> stereotypes = new HashSet<>();
-        stereotypes.add(Model.class);
-        werewolf.stereotypes(stereotypes);
     }
 
     void processSkeletonBean(@Observes ProcessSyntheticBean<Skeleton> event) {
