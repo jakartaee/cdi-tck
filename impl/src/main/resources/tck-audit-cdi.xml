@@ -3154,6 +3154,10 @@
             </text>
         </assertion>
 
+        <assertion id="bb" testable="false">
+            <text>Rules specified at "The default qualifier at injection points" are applied before performing typesafe resolution.</text>
+        </assertion>
+
         <assertion id="c">
             <text>If an injection point of raw type |Instance| is defined, the container automatically detects the problem and treats it as a definition
                 error.
@@ -6095,6 +6099,19 @@
             </assertion>
         </group>
 
+        <assertion id="b">
+            <text>
+                |CDI| implements |javax.enterprise.inject.Instance| and therefore might be used to perform
+                programmatic lookup as defined in "The Instance interface". If no qualifier is passed to |CDI.select()|
+                method, the |@Default| qualifier is assumed.
+            </text>
+        </assertion>
+
+        <assertion id="c">
+            <text>
+                When |CDI.current()| is called, |getCDI()| method is called on |javax.enterprise.inject.spi.CDIProvider|.
+            </text>
+        </assertion>
 
         <group>
             <text>
@@ -6103,7 +6120,7 @@
                 javax.enterprise.inject.spi.CDIProvider declared in META-INF/services is used. The order of more
                 than one CDIProvider with the same priority is undefined.. If no provider is available an |IllegalStateException| is thrown.
             </text>
-            <assertion id="ba">
+            <assertion id="da">
                 <text>
                     Test using |CDIProvider| set by the application.
                 </text>
@@ -6669,7 +6686,12 @@
         <assertion id="a">
             <text>
                 The method |BeanManager.createInstance()| returns an |Instance&lt;Object&gt;| to request bean instances
-                programmatically as described in The Instance interface.
+                programmatically as described in "The Instance interface".
+            </text>
+        </assertion>
+        <assertion id="b">
+            <text>
+                If no qualifier is passed to |Instance.select()| method, the |@Default| qualifier is assumed.
             </text>
         </assertion>
     </section>
@@ -8883,6 +8905,14 @@
         </group>
 
         <assertion id="d">
+            <text>
+                |SeContainer| implements |javax.enterprise.inject.Instance| and therefore might be used to perform
+                programmatic lookup as defined in "The Instance interface". If no qualifier is passed to
+                |SeContainer.select()| method, the |@Default| qualifier is assumed.
+            </text>
+        </assertion>
+
+        <assertion id="e">
             <text>If any |Instance.select()| method is called and the container was already shutdown, the |IllegalStateException| is thrown.</text>
         </assertion>
     </section>

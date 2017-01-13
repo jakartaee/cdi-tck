@@ -249,14 +249,14 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test(expectedExceptions = IllegalStateException.class)
-    @SpecAssertion(section = SE_CONTAINER, id = "d")
+    @SpecAssertion(section = SE_CONTAINER, id = "e")
     public void instanceSelectClassThrowsISEWhenAccessedAfterShutdown() {
         SeContainer seContainer = initializeAndShutdownContainer();
         seContainer.select(Corge.class);
     }
 
     @Test(expectedExceptions = IllegalStateException.class)
-    @SpecAssertion(section = SE_CONTAINER, id = "d")
+    @SpecAssertion(section = SE_CONTAINER, id = "e")
     public void instanceSelectAnnotationThrowsISEWhenAccessedAfterShutdown() {
         SeContainer seContainer = initializeAndShutdownContainer();
         seContainer.select(InjectLiteral.INSTANCE);
