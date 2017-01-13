@@ -31,7 +31,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class EnterpriseBeanWithIllegalDependencyTest extends AbstractTest {
 
     @Deployment

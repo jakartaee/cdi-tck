@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15735">GLASSFISH-15735</a>
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class VisibilityOfAnnotatedTypesFromExtensionInAlphaBeanArchiveTest extends AbstractTest {
 
     @Deployment

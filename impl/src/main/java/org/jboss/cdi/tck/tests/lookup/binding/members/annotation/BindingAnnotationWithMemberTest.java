@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
  * This test originally tested non-portable behavior (qualifier annotation with annotation-valued member) which does not make
  * sense since non-portable behavior is not testable.
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class BindingAnnotationWithMemberTest extends AbstractTest {
 
     @Deployment

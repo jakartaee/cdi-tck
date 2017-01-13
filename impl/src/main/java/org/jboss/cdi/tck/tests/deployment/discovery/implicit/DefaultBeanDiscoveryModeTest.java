@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
 /**
  * @author Tomas Remes
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 @Test(groups = TestGroups.INTEGRATION)
 public class DefaultBeanDiscoveryModeTest extends AbstractTest {
 

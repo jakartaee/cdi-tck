@@ -59,7 +59,7 @@ import org.testng.annotations.Test;
  * @author Tomas Remes
  */
 @Test
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class AnnotatedTypeConfiguratorTest extends AbstractTest {
 
     @Inject

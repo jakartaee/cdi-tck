@@ -41,7 +41,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
  * @see WELD-1780
  */
 
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class InterceptorConflictingEnablementTest extends AbstractTest {
 
     @Deployment

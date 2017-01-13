@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @author Kirill Gaevskii
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
 
     @Deployment

@@ -37,7 +37,7 @@ public class AddAndConfigureExtension implements Extension {
     public static AtomicBoolean setThanConfigureExceptionThrown = new AtomicBoolean(false);
 
     public void configureThanSet(@Observes ProcessProducer<ProducerBean, Foo> event) {
-        event.configureProducer().injectionPoints(); // replace all IPs with empty array
+        event.configureProducer(); // replace all IPs with empty array
         // trying to call setProducer after configureProducer should raise an exception
         try {
             event.setProducer(new Producer<Foo>() {
@@ -83,7 +83,7 @@ public class AddAndConfigureExtension implements Extension {
         });
         // calling configure after set should raise exception
         try {
-            event.configureProducer().injectionPoints(); // replace all IPs with empty array
+            event.configureProducer(); // replace all IPs with empty array
         } catch (IllegalStateException e) {
             //expected
             setThanConfigureExceptionThrown.set(true);

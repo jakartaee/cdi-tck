@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 /**
  * Test for problem detection of unproxyable bean with private constructor.
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class PrivateConstructorTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

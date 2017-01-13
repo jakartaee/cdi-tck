@@ -44,7 +44,7 @@ import org.testng.annotations.Test;
  * @author Matej Briskar
  * 
  */
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class Specialization01Test extends AbstractTest {
 
     public static String TEST_JAR = "test.jar";

@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class SessionContextServletRequestListenerTest extends AbstractTest {
 
 	@ArquillianResource

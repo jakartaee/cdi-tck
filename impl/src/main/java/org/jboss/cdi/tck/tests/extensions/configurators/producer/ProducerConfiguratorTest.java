@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Test
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class ProducerConfiguratorTest extends AbstractTest {
 
     @Deployment

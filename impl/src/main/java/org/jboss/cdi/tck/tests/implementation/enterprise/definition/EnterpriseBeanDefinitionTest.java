@@ -45,7 +45,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @Test(groups = { INTEGRATION })
-@SpecVersion(spec = "cdi", version = "2.0-EDR2")
+@SpecVersion(spec = "cdi", version = "2.0-PFD")
 public class EnterpriseBeanDefinitionTest extends AbstractTest {
 
     @Deployment
