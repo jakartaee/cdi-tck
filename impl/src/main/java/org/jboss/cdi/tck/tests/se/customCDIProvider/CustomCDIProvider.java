@@ -31,6 +31,7 @@ public class CustomCDIProvider implements CDIProvider {
 
     @Override
     public CDI<Object> getCDI() {
+        initializedCalled = true;
         return null;
     }
 
