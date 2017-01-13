@@ -8309,30 +8309,27 @@
 
     </section>
 
-    <section id="interception_factory" title="Apply interceptor programmatically" level="2">
+    <section id="interception_factory" title="The InterceptionFactory interface" level="2">
         <assertion id="a">
             <text>
-                Method |ignoreFinalMethods()| instructs the container to ignore all non-static, final
-                methods with public, protected or default visibility declared by any class in the type hierarchy of
-                the intercepted instance during invocation of createInterceptedInstance() method. These method
-                should never be invoked upon bean instances, otherwise, unpredictable behavior results. It will
-                bypass standard rules defined in Unproxyable bean types.
+                Method |ignoreFinalMethods()| instructs the container to ignore all non-static, final methods with public,
+                protected or default visibility declared by any class in the type hierarchy of the intercepted
+                instance during invocation of createInterceptedInstance() method. Ignored methods should never
+                be invoked upon the wrapper instance. Otherwise, unpredictable behavior results.
             </text>
         </assertion>
         <assertion id="b">
             <text>
-                Method |configure()| returns an AnnotatedTypeConfigurator (as defined in AnnotatedTypeConfigurator SPI)
-                initialized with the instance type to easily apply specific interceptor binding to apply when
-                enhancing the instance. The method always return the same AnnotatedTypeConfigurator
+                Method configure() returns an |AnnotatedTypeConfigurator| (as defined in AnnotatedTypeConfigurator SPI) initialized with the |AnnotatedType| created
+                either for the class passed to |BeanManager.createInterceptionFactory(CreationalContext, Class)| or derived from the InterceptionFactory parameter
+                injection point. The method always return the same AnnotatedTypeConfigurator
             </text>
         </assertion>
         <group>
             <text>Method |createInterceptedInstance()|</text>
             <assertion id="ca">
                 <text>
-                    returns an enhanced version of the instance whose method
-                    invocations are treated as business method invocations as defined in `Container invocations and
-                    interception`.
+                    returns a wrapper instance whose method invocations are intercepted by method interceptors and forwarded to a provided instance.
                 </text>
             </assertion>
             <assertion id="cb">
@@ -8346,10 +8343,9 @@
                     bean types` an |UnproxyableResolutionException| exception is thrown.
                 </text>
             </assertion>
-            <assertion id="ce">
+            <assertion id="ce" testable="false">
                 <text>
-                    If called on an instance created by the container, this
-                    method does nothing and returns the provided instance.
+                    If the provided instance is an internal container construct (such as client proxy), non-portable behavior results.
                 </text>
             </assertion>
         </group>
@@ -8361,14 +8357,13 @@
         </assertion>
         <assertion id="g">
             <text>
-                The container must provide a bean with scope `@Dependent`, bean type |InterceptionFactory| and qualifier `@Default` allowing producer methods
-                to obtain this factory to produce their instance
+                The container must provide a bean with scope `@Dependent`, bean type |InterceptionFactory| and qualifier `@Default`.
             </text>
         </assertion>
         <assertion id="h">
             <text>
-                If an injection point of type |InterceptionFactory| and qualifier |@Default| which is not a parameter of a producer method exists,
-                the container automatically detects the problem and treats it as a definition error.
+                If an injection point of type |InterceptionFactory| and qualifier |@Default| exists and is not a parameter of
+                a producer method, the container automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
     </section>

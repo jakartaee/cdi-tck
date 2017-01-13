@@ -60,10 +60,6 @@ public class InterceptionFactoryTest extends AbstractTest {
     @Inject
     Product product;
 
-    @Inject
-    @Custom
-    ContainerProduct containerProduct;
-
     @Test
     @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"),
             @SpecAssertion(section = INTERCEPTION_FACTORY, id = "ca") })
@@ -91,9 +87,4 @@ public class InterceptionFactoryTest extends AbstractTest {
         ActionSequence.assertSequenceDataEquals(ProductInterceptor1.class, ProductInterceptor2.class);
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = INTERCEPTION_FACTORY, id = "ce") })
-    public void createdInterceptedInstanceDoesNothingForInstanceCreatedByContainer() {
-        Assert.assertEquals(containerProduct.ping(), 1);
-    }
 }
