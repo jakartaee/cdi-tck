@@ -34,7 +34,7 @@ Since setting up a test to run in-container has already been covered, we'll look
 
 There are two ways to attach the IDE debugger to the container. You can either start the container in debug mode from within the IDE, or you can attach the debugger over a socket connection to a standalone container running with JPDA enabled.
 
-The Eclipse Server Tools, a subproject of the Eclipse Web Tools Project (WTP), has support for launching most major application servers, including WildFly 8. However, if you are using WildFly, you should consider using JBoss Tools instead, which offers tighter integration with JBoss technologies. See either the link:$$http://www.eclipse.org/webtools/server/server.php$$[Server Tools documentation] or the link:$$http://docs.jboss.org/tools/$$[JBoss Tools documentation] for how to setup a container and start it in debug mode.
+The Eclipse Server Tools, a subproject of the Eclipse Web Tools Project (WTP), has support for launching most major application servers, including WildFly 10. However, if you are using WildFly, you should consider using JBoss Tools instead, which offers tighter integration with JBoss technologies. See either the link:$$http://www.eclipse.org/webtools/server/server.php$$[Server Tools documentation] or the link:$$http://docs.jboss.org/tools/$$[JBoss Tools documentation] for how to setup a container and start it in debug mode.
 
 See link:$$http://justinjohnson.org/java/configuring-remote-debugging-in-jboss-as-7-and-eclipse/$$[this blog entry] to learn how to start WildFly with JPDA enabled and how to get the Eclipse debugger to connect to the remote process.
 

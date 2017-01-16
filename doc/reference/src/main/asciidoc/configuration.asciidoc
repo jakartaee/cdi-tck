@@ -61,7 +61,7 @@ The Arquillian testing platform will look for configuration settings in a file n
 
 [source, console]
 ----
-        weld/jboss-tck-runner/src/test/wildfly/arquillian.xml
+        weld/jboss-tck-runner/src/test/wildfly8/arquillian.xml
 ----
 
 [[porting-package]]
@@ -109,7 +109,7 @@ You can configure the CDI TCK to just run tests appropriate to the Java EE Web P
 
 The CDI TCK is built atop Arquillian and TestNG, and it's TestNG that is responsible for selecting the tests to execute, the order of execution, and reporting the results. Detailed TestNG documentation can be found at link:$$http://testng.org/doc/documentation-main.html$$[testng.org]. 
 
-Certain TestNG configuration file must be run by TestNG 6.3 (described by the TestNG documentation as "with a +testng.xml+ file") unmodified for an implementation to pass the TCK. The TCK distribution contains the configuration file accurate at the date of the release - +artifacts/cdi-tck-impl-suite.xml+. However this artifact may not be up to date due to unresolved challenges or pending releases. Therefore a canonical configuration file exists. This file is located in the CDI TCK source code repository at _$$${CORRESPONDING_BRANCH_ROOT}/impl/src/main/resources/tck-tests.xml$$_. 
+Certain TestNG configuration file must be run by TestNG (described by the TestNG documentation as "with a +testng.xml+ file") unmodified for an implementation to pass the TCK. The TCK distribution contains the configuration file accurate at the date of the release - +artifacts/cdi-tck-impl-suite.xml+. However this artifact may not be up to date due to unresolved challenges or pending releases. Therefore a canonical configuration file exists. This file is located in the CDI TCK source code repository at _$$${CORRESPONDING_BRANCH_ROOT}/impl/src/main/resources/tck-tests.xml$$_.
 
 
 [NOTE]

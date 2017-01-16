@@ -73,7 +73,7 @@ mvn test -Dincontainer -Dcdi.tck.version=1.1.0.SP2
 
 [NOTE]
 ====
-In order to run the TCK Test Suite in the container an Arqullian container adapter is required. See also link:$$https://docs.jboss.org/author/display/ARQ/Containers$$[Arqullian reference guide]. 
+In order to run the TCK Test Suite in the container an Arquillian container adapter is required. See also link:$$https://docs.jboss.org/author/display/ARQ/Containers$$[Arqullian reference guide].
 
 
 ====
@@ -93,7 +93,7 @@ To execute full TCK testsuite you have to run tests within SE group as well. For
 mvn test -Dincontainer=se
 ---
 
-This profile uses link:$$https://github.com/tremes/arquillian-container-se$$[Arquillian container SE] which enables you to run SE tests in a separate JVM instance with isolated configurable classpath.
+This profile uses link:$$https://github.com/arquillian/arquillian-container-se$$[Arquillian container SE] which enables you to run SE tests in a separate JVM instance with isolated configurable classpath.
 
 
 === Dumping the Test Archives
