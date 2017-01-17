@@ -910,6 +910,13 @@
                 indirectly.
             </text>
         </assertion>
+
+        <assertion id="b">
+            <text>
+                The resulting set of bean types for a managed bean consists only of legal bean types, all other types are
+                removed from the set of bean types.
+            </text>
+        </assertion>
     </section>
 
     <section id="declaring_managed_bean" title="Declaring a managed bean" level="3">
@@ -1090,6 +1097,12 @@
         <assertion id="c">
             <text>If the return type of a producer method is a class, the unrestricted set of bean types contains the return type, every superclass and all
                 interfaces it implements directly or indirectly.
+            </text>
+        </assertion>
+
+        <assertion id="d">
+            <text>The resulting set of bean types for a producer method consists only of legal bean types, all other types
+                are removed from the set of bean types.
             </text>
         </assertion>
     </section>
@@ -1287,6 +1300,11 @@
         <assertion id="c">
             <text>The bean types of a producer field depend upon the field type. If the field type is a class, the unrestricted set of bean types contains the
                 field type, every superclass and all interfaces it implements directly or indirectly
+            </text>
+        </assertion>
+        <assertion id="d">
+            <text>The resulting set of bean types for a producer field consists only of legal bean types, all other types
+                are removed from the set of bean types.
             </text>
         </assertion>
     </section>
@@ -7658,8 +7676,7 @@
         <assertion id="bba">
             <text>|configureAnnotatedType()| returns an |AnnotatedTypeConfigurator| (as defined in AnnotatedTypeConfigurator interface) initialized with the
                 |AnnotatedType| processed by the event to easily configure the AnnotatedType which will be used to replace the original one at the end of
-                observer
-                invocation.
+                observer invocation.
             </text>
         </assertion>
 
@@ -8342,9 +8359,9 @@
         </assertion>
         <assertion id="b">
             <text>
-                Method configure() returns an |AnnotatedTypeConfigurator| (as defined in AnnotatedTypeConfigurator SPI) initialized with the |AnnotatedType| created
-                either for the class passed to |BeanManager.createInterceptionFactory(CreationalContext, Class)| or derived from the InterceptionFactory parameter
-                injection point. The method always return the same AnnotatedTypeConfigurator
+                Method configure() returns an |AnnotatedTypeConfigurator| (as defined in AnnotatedTypeConfigurator SPI) initialized with the |AnnotatedType|
+                created either for the class passed to |BeanManager.createInterceptionFactory(CreationalContext, Class)| or derived from the InterceptionFactory
+                parameter injection point. The method always return the same AnnotatedTypeConfigurator
             </text>
         </assertion>
         <group>
@@ -9179,6 +9196,12 @@
         <assertion id="d">
             <text>Remote interfaces are not included in the set of bean types</text>
         </assertion>
+
+        <assertion id="e">
+            <text>The resulting set of bean types for a session bean consists only of legal bean types, all other types are
+                removed from the set of bean types.
+            </text>
+        </assertion>
     </section>
 
     <section id="declaring_session_bean" title="Declaring a session bean" level="3">
@@ -9416,6 +9439,11 @@
                 <text>Check @WebServiceRef</text>
             </assertion>
         </group>
+        <assertion id="b">
+            <text>The resulting set of bean types for a resource consists only of legal bean types, all other types are
+                removed from the set of bean types.
+            </text>
+        </assertion>
     </section>
 
     <section id="additional_builtin_beans" title="Additional built-in beans" level="2">
