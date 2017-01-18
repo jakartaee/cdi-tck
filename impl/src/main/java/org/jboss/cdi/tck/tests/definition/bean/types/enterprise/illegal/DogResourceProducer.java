@@ -15,24 +15,15 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.definition.bean;
+package org.jboss.cdi.tck.tests.definition.bean.types.enterprise.illegal;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.annotation.Resource;
+import javax.enterprise.inject.Produces;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+public class DogResourceProducer<T> {
 
-import javax.inject.Qualifier;
-
-@Target({ TYPE, METHOD, PARAMETER, FIELD })
-@Retention(RUNTIME)
-@Documented
-@Qualifier
-public @interface ProducedInteger {
-
+    @Produces
+    @Resource(name = "doggie")
+    @Produced
+    public Dog<T> doggie;
 }
