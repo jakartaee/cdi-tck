@@ -15,24 +15,12 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.definition.bean;
+package org.jboss.cdi.tck.tests.definition.bean.types.illegal;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+public class Animal<T> {
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+    public final void ping(){
 
-import javax.inject.Qualifier;
-
-@Target({ TYPE, METHOD, PARAMETER, FIELD })
-@Retention(RUNTIME)
-@Documented
-@Qualifier
-public @interface ProducedInteger {
+    }
 
 }
