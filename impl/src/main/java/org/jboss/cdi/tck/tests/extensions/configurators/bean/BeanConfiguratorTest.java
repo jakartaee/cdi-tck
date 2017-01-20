@@ -57,7 +57,8 @@ public class BeanConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = BEAN_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = BEAN_CONFIGURATOR, id = "aa"),
+            @SpecAssertion(section = BEAN_CONFIGURATOR, id = "ab"),
             @SpecAssertion(section = BEAN_CONFIGURATOR, id = "f"),
             @SpecAssertion(section = BEAN_CONFIGURATOR, id = "g"),
             @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "de") })
@@ -89,7 +90,8 @@ public class BeanConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = BEAN_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = BEAN_CONFIGURATOR, id = "aa"),
+            @SpecAssertion(section = BEAN_CONFIGURATOR, id = "ab"),
             @SpecAssertion(section = BEAN_CONFIGURATOR, id = "b"),
             @SpecAssertion(section = BEAN_CONFIGURATOR, id = "c"),
             @SpecAssertion(section = BEAN_CONFIGURATOR, id = "d"),
@@ -110,7 +112,7 @@ public class BeanConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-            @SpecAssertion(section = BEAN_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = BEAN_CONFIGURATOR, id = "ab"),
             @SpecAssertion(section = BEAN_CONFIGURATOR, id = "e") })
     public void testPassivationCapability() {
         // BeanManager should be able to find a passivation capable bean

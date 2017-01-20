@@ -7458,7 +7458,13 @@
     <section id="bean_configurator" title="BeanConfigurator interface" level="4">
         <group>
             <text>With BeanConfigurator you can perform all the operations defined in BeanAttributesConfigurator interface plus the following:</text>
-            <assertion id="a">
+            <assertion id="aa">
+                <text>Initialize the bean metadata with one of its |read()| methods. It can be done from an existing
+                    |BeanAttributes| or by reading metadata on a given |AnnotatedType|, according to the rules defined in
+                    Concepts.
+                </text>
+            </assertion>
+            <assertion id="ab">
                 <text>Set the class of the bean with |beanClass| method.</text>
             </assertion>
             <assertion id="b">
@@ -7481,7 +7487,7 @@
             </assertion>
         </group>
         <assertion id="h">
-            <text>If a |BeanConfigurator| has no scope specified via the |BeanConfigurator.scope()| method, the Default Scope rules apply.</text>
+            <text>If a |BeanConfigurator| has no scope specified, the default scope rules, defined in the Default Scope rules apply.</text>
         </assertion>
     </section>
 
