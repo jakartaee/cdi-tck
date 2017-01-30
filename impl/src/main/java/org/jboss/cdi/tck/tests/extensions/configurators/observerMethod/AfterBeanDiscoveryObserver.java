@@ -41,6 +41,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
     public static AtomicBoolean newBananaObserverNotified = new AtomicBoolean(false);
     public static AtomicBoolean newMelonObserverNotified = new AtomicBoolean(false);
     public static AtomicBoolean newPeachObserverNotified = new AtomicBoolean(false);
+    public static AtomicBoolean newPapayaObserverNotified = new AtomicBoolean(false);
 
     AnnotatedMethod<? super FruitObserver> peachObserver;
 
@@ -107,6 +108,8 @@ public class AfterBeanDiscoveryObserver implements Extension {
 
             }
         });
+
+        abd.addObserverMethod().observedType(Papaya.class).reception(Reception.ALWAYS).notifyWith(eventContext -> newPapayaObserverNotified.set(true));
     }
 
     public static void reset() {

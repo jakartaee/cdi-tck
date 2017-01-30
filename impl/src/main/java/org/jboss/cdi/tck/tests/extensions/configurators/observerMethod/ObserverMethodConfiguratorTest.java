@@ -168,4 +168,13 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
         assertEquals(map.get(Melon.class).getClass(), AfterBeanDiscoveryObserver.class);
         assertEquals(map.get(Cherry.class).getClass(), AfterBeanDiscoveryObserver.class);
     }
+
+    @Test
+    @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "baa")
+    public void defaultBeanClassIsExtensionClass(){
+        Set<ObserverMethod<? super Papaya>> papayaEventObservers = getCurrentManager().resolveObserverMethods(new Papaya(), Any.Literal.INSTANCE);
+        ObserverMethod<? super Papaya> papayaObserver = papayaEventObservers.iterator().next();
+        assertNotNull(papayaObserver, "There is no Papaya Observer available!");
+        assertEquals(papayaObserver.getBeanClass(), AfterBeanDiscoveryObserver.class);
+    }
 }

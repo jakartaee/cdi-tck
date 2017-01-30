@@ -7512,6 +7512,10 @@
             <assertion id="ba">
                 <text>Set the `ObserverMethod` bean class with |beanClass| method.</text>
             </assertion>
+            <assertion id="baa">
+                <text>If the class of the bean is not set, the extension class is used.</text>
+                <note>Defined in javadoc of |beanClass| method</note>
+            </assertion>
             <assertion id="bb">
                 <text>Set the type of the observed event with |observedType| method.</text>
             </assertion>
