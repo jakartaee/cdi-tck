@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -42,7 +41,7 @@ public class GetFromContextualTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "o") })
+    @SpecAssertion(section = CONTEXT, id = "o")
     public void testGetMayNotCreateNewInstanceUnlessCreationalContextGiven() {
         Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
         assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean) == null;

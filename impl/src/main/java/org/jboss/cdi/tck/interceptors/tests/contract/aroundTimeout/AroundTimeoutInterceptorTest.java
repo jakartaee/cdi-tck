@@ -31,7 +31,6 @@ import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -48,7 +47,8 @@ public class AroundTimeoutInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "f"), @SpecAssertion(section = "2.7", id = "ea") })
+    @SpecAssertion(section = "2.7", id = "f")
+    @SpecAssertion(section = "2.7", id = "ea")
     public void testInvocationContextGetTimer(TimingBean timingBean) throws Exception {
         timingBean.createTimer();
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
@@ -65,7 +65,8 @@ public class AroundTimeoutInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = {JAVAEE_FULL, SECURITY})
-    @SpecAssertions({ @SpecAssertion(section = "2.7", id = "d"), @SpecAssertion(section = "2.7", id = "eb") })
+    @SpecAssertion(section = "2.7", id = "d")
+    @SpecAssertion(section = "2.7", id = "eb")
     public void testSecurityContext(Student student) throws Exception {
         student.sleep();
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {

@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -55,25 +54,25 @@ public class AlterableContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "t") })
+    @SpecAssertion(section = CONTEXT, id = "t")
     public void testApplicationScopedComponent() {
         testComponent(ApplicationScopedComponent.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "t") })
+    @SpecAssertion(section = CONTEXT, id = "t")
     public void testRequestScopedComponent() {
         testComponent(RequestScopedComponent.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "t") })
+    @SpecAssertion(section = CONTEXT, id = "t")
     public void testCustomScopedComponent() {
         testComponent(CustomScopedComponent.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "t") })
+    @SpecAssertion(section = CONTEXT, id = "t")
     public void testNothingHappensIfNoInstanceToDestroy(ApplicationScopedComponent application) {
         Bean<?> bean = getUniqueBean(ApplicationScopedComponent.class);
         AlterableContext context = (AlterableContext) getCurrentManager().getContext(bean.getScope());

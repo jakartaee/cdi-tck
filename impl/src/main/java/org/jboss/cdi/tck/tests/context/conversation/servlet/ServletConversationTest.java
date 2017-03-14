@@ -34,7 +34,6 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -71,7 +70,7 @@ public class ServletConversationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "aa") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "aa")
     public void testTransientConversation() throws Exception {
         WebClient client = new WebClient();
         TextPage page = client.getPage(getPath("/display", null));
@@ -81,7 +80,7 @@ public class ServletConversationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "aa") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "aa")
     public void testLongRunningConversation() throws Exception {
         WebClient client = new WebClient();
 
@@ -133,7 +132,7 @@ public class ServletConversationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "aa") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "aa")
     public void testPost() throws Exception {
         WebClient client = new WebClient();
 

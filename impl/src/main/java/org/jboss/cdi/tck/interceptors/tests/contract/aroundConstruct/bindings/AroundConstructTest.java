@@ -31,7 +31,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -60,8 +59,10 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "c"), @SpecAssertion(section = "2.3", id = "eb"),
-            @SpecAssertion(section = "2.3", id = "f"), @SpecAssertion(section = "2.6", id = "a") })
+    @SpecAssertion(section = "2.3", id = "c")
+    @SpecAssertion(section = "2.3", id = "eb")
+    @SpecAssertion(section = "2.3", id = "f")
+    @SpecAssertion(section = "2.6", id = "a")
     public void testInterceptorInvocation(Instance<Alpha> instance) {
         ActionSequence.reset();
         instance.get();
@@ -69,7 +70,8 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "ga"), @SpecAssertion(section = "2.1", id = "e") })
+    @SpecAssertion(section = "2.3", id = "ga")
+    @SpecAssertion(section = "2.1", id = "e")
     public void testReplacingParameters(Instance<Bravo> instance) {
         ActionSequence.reset();
         Bravo bravo = instance.get();
@@ -79,8 +81,9 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "2.6.1", id = "a"), @SpecAssertion(section = "2.6.1", id = "b"),
-            @SpecAssertion(section = "3.2", id = "c") })
+    @SpecAssertion(section = "2.6.1", id = "a")
+    @SpecAssertion(section = "2.6.1", id = "b")
+    @SpecAssertion(section = "3.2", id = "c")
     public void testExceptions(Instance<Charlie> instance) {
         ActionSequence.reset();
         try {

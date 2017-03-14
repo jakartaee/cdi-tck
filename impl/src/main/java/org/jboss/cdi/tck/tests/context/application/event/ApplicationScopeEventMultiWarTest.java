@@ -38,7 +38,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.application6.ApplicationDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -93,7 +92,7 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga") })
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga")
     public void testInitializedApplicationScopedEventObserved() throws IOException {
 
         WebClient client = new WebClient();

@@ -43,7 +43,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -69,11 +68,10 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     };
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "e"),
-            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"),
-            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "g")
-
-    })
+    @SpecAssertion(section = SELECTION, id = "e")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa")
+    @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "g")
     public void testAlternativeAvailability() throws Exception {
 
         // Bird, Cat and Chicken = enabled alternatives
@@ -103,29 +101,30 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "d"),
-            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ba"), @SpecAssertion(section = STEREOTYPES, id = "aa"),
-            @SpecAssertion(section = ALTERNATIVE_STEREOTYPE, id = "a") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "d")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ba")
+    @SpecAssertion(section = STEREOTYPES, id = "aa")
+    @SpecAssertion(section = ALTERNATIVE_STEREOTYPE, id = "a")
     public void testAnyEnabledAlternativeStereotypeMakesAlternativeEnabled() throws Exception {
         assertEquals(getBeans(Bird.class).size(), 1);
         assertEquals(getCurrentManager().getBeans("bird").size(), 1);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTER_MODULE_INJECTION, id = "e"),
-            @SpecAssertion(section = INTER_MODULE_INJECTION, id = "f"),
-            @SpecAssertion(section = INTER_MODULE_INJECTION, id = "g"),
-            @SpecAssertion(section = INTER_MODULE_INJECTION, id = "h") })
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "e")
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "f")
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "g")
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "h")
     public void testProducersOnAlternativeClass() throws Exception {
         assertEquals(getBeans(Sheep.class, WILD_LITERAL).size(), 2);
         assertEquals(getBeans(Sheep.class, TAME_LITERAL).size(), 0);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ca"),
-            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "cb"),
-            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ab"),
-            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ac") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ca")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "cb")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ab")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ac")
     public void testProducerAlternativesOnMethodAndField() throws Exception {
         assertEquals(getBeans(Cat.class, WILD_LITERAL).size(), 2);
         assertEquals(getBeans(Cat.class, TAME_LITERAL).size(), 0);
@@ -134,9 +133,9 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "d"),
-            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "bb"),
-            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "bc") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "d")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "bb")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "bc")
     public void testStereotypeAlternativeOnProducerMethodAndField() throws Exception {
         assertEquals(getBeans(Bird.class, WILD_LITERAL).size(), 0);
         assertEquals(getBeans(Bird.class, TAME_LITERAL).size(), 2);

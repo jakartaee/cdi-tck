@@ -34,7 +34,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -82,7 +81,7 @@ public class ResourceAlternative04Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb") })
+    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb")
     public void testAlternativeResourceSelected() {
         assertEquals(alpha.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE), "hello2");
         assertEquals(bravo.assertAvailable(String.class, ProductionReadyLiteral.INSTANCE), "hello2");

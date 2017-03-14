@@ -28,7 +28,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -59,7 +58,9 @@ public class TransientConversationLifecycleEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bb"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bc") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ba")
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bb")
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bc")
     public void testLifecycleEventFiredForTransientConversation() throws Exception {
 
         WebClient client = new WebClient();

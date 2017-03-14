@@ -40,7 +40,6 @@ import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -78,8 +77,9 @@ public class MessageDrivenBeanContextTest extends AbstractTest {
     LogStore store;
 
     @Test(groups = { JAVAEE_FULL, JMS })
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "gd"),
-            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "hd"), @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "dd") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "gd")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "hd")
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "dd")
     public void testRequestScopeActiveDuringMessageDelivery() throws Exception {
 
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {

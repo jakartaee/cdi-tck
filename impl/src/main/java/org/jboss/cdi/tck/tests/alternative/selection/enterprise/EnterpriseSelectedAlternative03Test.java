@@ -40,7 +40,6 @@ import org.jboss.cdi.tck.tests.alternative.selection.Wild.WildLiteral;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -97,7 +96,7 @@ public class EnterpriseSelectedAlternative03Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "aa") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "aa")
     public void testAlternativeManagedBeanAvailable() {
         assertNotNull(alpha);
         assertNotNull(bravo);
@@ -111,7 +110,7 @@ public class EnterpriseSelectedAlternative03Test extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb") })
+    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb")
     public void testDependencyResolvable() {
 
         assertEquals(alpha.assertAvailable(TestBean.class).getId(), Bar.class.getName());
@@ -121,8 +120,8 @@ public class EnterpriseSelectedAlternative03Test extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ba"),
-            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "bb") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ba")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "bb")
     public void testAlternativeProducerSelected() {
         // Producer field
         alpha.assertAvailable(Bar.class, WildLiteral.INSTANCE);

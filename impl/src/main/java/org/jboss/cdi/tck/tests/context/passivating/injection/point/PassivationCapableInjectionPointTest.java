@@ -27,7 +27,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -47,9 +46,9 @@ public class PassivationCapableInjectionPointTest extends AbstractTest {
     Spoon spoon;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "b"),
-            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "d"),
-            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "f") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "b")
+    @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "d")
+    @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "f")
     public void testPassivationCapableInjectionPoints() {
         assertNotNull(spoon.getMeal1());
         assertNotNull(spoon.getMeal2());

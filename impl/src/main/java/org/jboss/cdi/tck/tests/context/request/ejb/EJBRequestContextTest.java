@@ -37,7 +37,6 @@ import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -124,8 +123,8 @@ public class EJBRequestContextTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ga"),
-            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ha") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ga")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ha")
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
         assertNotNull(foo.ping());
         assertTrue(foo.wasRequestBeanInPreviousCallDestroyed());
@@ -133,8 +132,8 @@ public class EJBRequestContextTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "gb"),
-            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "hb") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "gb")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "hb")
     public void testRequestScopeActiveDuringAsyncCallToEjb() throws Exception {
         SimpleRequestBean simpleRequestBean = getContextualReference(SimpleRequestBean.class);
         SimpleRequestBean.reset();

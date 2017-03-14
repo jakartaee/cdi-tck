@@ -35,7 +35,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -65,8 +64,9 @@ public class QualifierInheritedTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "la"),
-            @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aa") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba")
+    @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "la")
+    @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aa")
     public void testResolution() throws Exception {
 
         Bean<?> bean = getCurrentManager().resolve(getCurrentManager().getBeans(Tree.class, TrueLiteral.INSTANCE));

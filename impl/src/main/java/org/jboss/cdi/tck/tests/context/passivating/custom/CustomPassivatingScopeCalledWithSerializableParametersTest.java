@@ -28,7 +28,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -52,7 +51,7 @@ public class CustomPassivatingScopeCalledWithSerializableParametersTest extends 
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "s") })
+    @SpecAssertion(section = CONTEXT, id = "s")
     public void testWithImplicitBean(Instance<Foo> foo, ClusteringExtension extension) {
         ClusterContext ctx = extension.getContext();
         ctx.reset();
@@ -64,7 +63,7 @@ public class CustomPassivatingScopeCalledWithSerializableParametersTest extends 
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "s") })
+    @SpecAssertion(section = CONTEXT, id = "s")
     public void testWithExtensionProvidedBean(Instance<Bar> bar, ClusteringExtension extension) {
         ClusterContext ctx = extension.getContext();
         ctx.reset();

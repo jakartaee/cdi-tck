@@ -29,7 +29,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -47,7 +46,8 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.6", id = "b"), @SpecAssertion(section = "2.6", id = "c") })
+    @SpecAssertion(section = "2.6", id = "b")
+    @SpecAssertion(section = "2.6", id = "c")
     public void testLifecycleInterception() {
 
         ActionSequence.reset();
@@ -65,9 +65,12 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.6", id = "ea"), @SpecAssertion(section = "2.6", id = "eb"),
-            @SpecAssertion(section = "2.6", id = "i"), @SpecAssertion(section = "5.2.1", id = "aa"),
-            @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "5.2.2", id = "a") })
+    @SpecAssertion(section = "2.6", id = "ea")
+    @SpecAssertion(section = "2.6", id = "eb")
+    @SpecAssertion(section = "2.6", id = "i")
+    @SpecAssertion(section = "5.2.1", id = "aa")
+    @SpecAssertion(section = "5.2.1", id = "ab")
+    @SpecAssertion(section = "5.2.2", id = "a")
     public void testMultipleLifecycleInterceptors() {
 
         ActionSequence.reset();

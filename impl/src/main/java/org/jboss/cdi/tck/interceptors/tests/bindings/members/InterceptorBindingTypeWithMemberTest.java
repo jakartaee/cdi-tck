@@ -33,7 +33,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -65,7 +64,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "a") })
+    @SpecAssertion(section = "3.4.2", id = "a")
     public void testInterceptorBindingTypeWithMember() {
         Farm farm = getContextualReference(Farm.class);
         assertEquals(farm.getAnimalCount(), 20);
@@ -74,7 +73,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "c") })
+    @SpecAssertion(section = "3.4.2", id = "c")
     public void testInterceptorBindingTypeWithNonBindingMember() {
         Farm farm = getContextualReference(Farm.class);
         assert farm.getVehicleCount() == 20;
@@ -87,7 +86,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
      * values are considered equal when resolving interceptor (interceptor is resolved and applied).
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.4.2", id = "b") })
+    @SpecAssertion(section = "3.4.2", id = "b")
     public void testInterceptorBindingTypeMemberValuesComparedWithEquals() {
 
         @SuppressWarnings("serial")

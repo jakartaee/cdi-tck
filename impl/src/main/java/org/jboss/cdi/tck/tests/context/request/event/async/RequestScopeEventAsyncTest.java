@@ -33,7 +33,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -59,8 +58,9 @@ public class RequestScopeEventAsyncTest extends AbstractTest {
     private URL contextPath;
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jd"),  @SpecAssertion(section = REQUEST_CONTEXT, id = "a")
-            , @SpecAssertion(section = REQUEST_CONTEXT, id = "c") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jd")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "a")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "c")
     public void testEventsFired() throws Exception {
 
         WebClient client = new WebClient();

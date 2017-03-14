@@ -36,7 +36,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -59,7 +58,7 @@ public class DataSourcePassivationDependencyTest extends AbstractTest {
     }
 
     @Test(groups = { PERSISTENCE, INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "da") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "da")
     public void testDataSource() throws IOException, ClassNotFoundException, SQLException {
 
         Pool pool = getContextualReference(Pool.class);

@@ -26,7 +26,6 @@ import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -39,8 +38,8 @@ public class DependentTransientReferenceDestroyedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "fb"),
-            @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "fc") })
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "fb")
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "fc")
     public void testConstructorAndInitializer() {
 
         ActionSequence.reset();
@@ -62,7 +61,7 @@ public class DependentTransientReferenceDestroyedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "fa") })
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "fa")
     public void testProducerMethod() {
 
         ActionSequence.reset();

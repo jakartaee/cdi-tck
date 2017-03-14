@@ -28,7 +28,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -59,7 +58,7 @@ public class RequestScopeEventRemoteTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(groups =  JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jc") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jc")
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
 
         assertTrue(foo.first());

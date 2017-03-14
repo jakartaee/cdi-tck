@@ -26,7 +26,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -43,9 +42,11 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "aa"), @SpecAssertion(section = "3.3", id = "ba"),
-            @SpecAssertion(section = "3.2", id = "a"), @SpecAssertion(section = "3.2", id = "b"),
-            @SpecAssertion(section = "3.2", id = "c") })
+    @SpecAssertion(section = "3.3", id = "aa")
+    @SpecAssertion(section = "3.3", id = "ba")
+    @SpecAssertion(section = "3.2", id = "a")
+    @SpecAssertion(section = "3.2", id = "b")
+    @SpecAssertion(section = "3.2", id = "c")
     public void testInterceptorAppliedToBeanWithAllBindings() {
         MissileInterceptor.intercepted = false;
         Missile missile = getContextualReference(FastAndDeadlyMissile.class);
@@ -54,9 +55,11 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "aa"), @SpecAssertion(section = "3.3", id = "ba"),
-            @SpecAssertion(section = "3.2", id = "a"), @SpecAssertion(section = "3.2", id = "b"),
-            @SpecAssertion(section = "3.2", id = "c") })
+    @SpecAssertion(section = "3.3", id = "aa")
+    @SpecAssertion(section = "3.3", id = "ba")
+    @SpecAssertion(section = "3.2", id = "a")
+    @SpecAssertion(section = "3.2", id = "b")
+    @SpecAssertion(section = "3.2", id = "c")
     public void testInterceptorNotAppliedToBeanWithSomeBindings() {
         MissileInterceptor.intercepted = false;
         Missile missile = getContextualReference(SlowMissile.class);
@@ -65,7 +68,8 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "ab"), @SpecAssertion(section = "3.3", id = "bb") })
+    @SpecAssertion(section = "3.3", id = "ab")
+    @SpecAssertion(section = "3.3", id = "bb")
     public void testMultipleInterceptorsOnMethod() {
         LockInterceptor.intercepted = false;
         GuidedMissile bullet = getContextualReference(GuidedMissile.class);

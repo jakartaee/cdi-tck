@@ -14,7 +14,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -37,7 +36,7 @@ public class SessionBeanPassivationDependencyTest extends AbstractTest {
     Chef chef;
 
     @Test(groups=INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "ab") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "ab")
     public void testSingleton() throws IOException, ClassNotFoundException {
         assertNotNull(worker);
         assertNotNull(worker.getHammer());
@@ -55,7 +54,7 @@ public class SessionBeanPassivationDependencyTest extends AbstractTest {
     }
 
     @Test(groups=INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "aa") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "aa")
     public void testStateless() throws IOException, ClassNotFoundException {
         assertNotNull(chef);
         assertNotNull(chef.getSpoon());

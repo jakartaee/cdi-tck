@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -53,7 +52,7 @@ public class DestroyConversationNotAssociatedWithCurrentRequestEventTest extends
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bd") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "bd")
     public void testLifecycleEventFired() throws Exception {
 
         WebClient webClient = new WebClient();

@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -46,9 +45,12 @@ public class AroundTimeoutOrderInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "hb"), @SpecAssertion(section = "2.7", id = "ba"),
-            @SpecAssertion(section = "2.7", id = "bb"), @SpecAssertion(section = "5.2.1", id = "aa"),
-            @SpecAssertion(section = "5.2.1", id = "ab"), @SpecAssertion(section = "5.2.2", id = "a") })
+    @SpecAssertion(section = "2.3", id = "hb")
+    @SpecAssertion(section = "2.7", id = "ba")
+    @SpecAssertion(section = "2.7", id = "bb")
+    @SpecAssertion(section = "5.2.1", id = "aa")
+    @SpecAssertion(section = "5.2.1", id = "ab")
+    @SpecAssertion(section = "5.2.2", id = "a")
     public void testTimeoutMethodIntercepted(TimingBean timing) throws Exception {
         ActionSequence.reset();
 

@@ -61,7 +61,8 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "l"), @SpecAssertion(section = BUILTIN_SCOPES, id = "ba") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "l")
+    @SpecAssertion(section = BUILTIN_SCOPES, id = "ba")
     public void testConversationPropagated() throws Exception {
 
         WebClient webClient = new WebClient();
@@ -112,7 +113,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "l") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "l")
     public void testConversationPropagatedAjax() throws Exception {
 
         WebClient webClient = new WebClient();

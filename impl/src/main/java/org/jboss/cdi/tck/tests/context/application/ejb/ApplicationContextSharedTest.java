@@ -37,7 +37,6 @@ import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -113,7 +112,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "db") })
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "db")
     public void testApplicationScopeActiveDuringAsyncCallToEjb(SimpleApplicationBean simpleApplicationBean) throws Exception {
         Future<Double> result = bar.compute();
         Double id = result.get();

@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -42,7 +41,8 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = "2.1", id = "ab"), @SpecAssertion(section = "2.6", id = "b")})
+    @SpecAssertion(section = "2.1", id = "ab")
+    @SpecAssertion(section = "2.6", id = "b")
     public void testPostConstructInterceptor() {
         getContextualReference(Goat.class);
         assertTrue(Goat.isPostConstructInterceptorCalled());
@@ -56,7 +56,8 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = "2.1", id = "ab"), @SpecAssertion(section = "2.6", id = "c")})
+    @SpecAssertion(section = "2.1", id = "ab")
+    @SpecAssertion(section = "2.6", id = "c")
     public void testPreDestroyInterceptor() {
         createAndDestroyInstance(Goat.class);
         assertTrue(Goat.isPreDestroyInterceptorCalled());
@@ -90,7 +91,8 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = "2.1", id = "ab"), @SpecAssertion(section = "2.1", id = "d")})
+    @SpecAssertion(section = "2.1", id = "ab")
+    @SpecAssertion(section = "2.1", id = "d")
     public void testAroundInvokeAndLifeCycleCallbackInterceptorsCanBeDefinedOnTheSameClass() {
         assertEquals(getContextualReference(Goat.class).echo("foo"), "foofoo");
     }

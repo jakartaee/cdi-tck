@@ -27,7 +27,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -60,7 +59,8 @@ public class InterceptorBindingOverridingTest extends AbstractTest {
     Pony pony;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "db"), @SpecAssertion(section = "3.4.2", id = "a") })
+    @SpecAssertion(section = "3.3", id = "db")
+    @SpecAssertion(section = "3.4.2", id = "a")
     public void testInterceptorBindingOverriden() {
         // getAge() returns 3, SlowAgingInterceptor adds one (4) and NegatingInterceptor negates (-4)
         assertEquals(pony.getAge(), -4);

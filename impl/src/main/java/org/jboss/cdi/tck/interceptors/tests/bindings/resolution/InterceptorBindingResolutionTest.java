@@ -34,7 +34,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -59,10 +58,14 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "e"), @SpecAssertion(section = "3.4", id = "ca"),
-            @SpecAssertion(section = "3.4", id = "da"), @SpecAssertion(section = "3.4", id = "db"),
-            @SpecAssertion(section = "3.4", id = "dc"), @SpecAssertion(section = "3.1.2", id = "a"),
-            @SpecAssertion(section = "3.1.1", id = "a"), @SpecAssertion(section = "3.1.1", id = "b") })
+    @SpecAssertion(section = "3.3", id = "e")
+    @SpecAssertion(section = "3.4", id = "ca")
+    @SpecAssertion(section = "3.4", id = "da")
+    @SpecAssertion(section = "3.4", id = "db")
+    @SpecAssertion(section = "3.4", id = "dc")
+    @SpecAssertion(section = "3.1.2", id = "a")
+    @SpecAssertion(section = "3.1.1", id = "a")
+    @SpecAssertion(section = "3.1.1", id = "b")
     public void testBusinessMethodInterceptorBindings(MessageService messageService, MonitorService monitorService) {
 
         // Test interceptor is resolved (note non-binding member of BallBinding)
@@ -89,7 +92,8 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.4", id = "b"), @SpecAssertion(section = "3.4.1", id = "a") })
+    @SpecAssertion(section = "3.4", id = "b")
+    @SpecAssertion(section = "3.4.1", id = "a")
     public void testLifecycleInterceptorBindings() {
 
         // Test interceptor is resolved (note non-binding member of BallBinding)
@@ -121,7 +125,8 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
     
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "3.4", id = "b"), @SpecAssertion(section = "3.4", id = "cc") })
+    @SpecAssertion(section = "3.4", id = "b")
+    @SpecAssertion(section = "3.4", id = "cc")
     public void testConstructorInterceptorBindings() {
 
         // Test interceptor is resolved

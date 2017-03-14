@@ -37,7 +37,6 @@ import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -68,8 +67,9 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
     private ApplicationScopedObserver observer;
 
     @Test(groups = { JAVAEE_FULL, JMS })
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jf"), @SpecAssertion(section = REQUEST_CONTEXT, id = "a")
-            , @SpecAssertion(section = REQUEST_CONTEXT, id = "c") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jf")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "a")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "c")
     public void testEventsFired() throws Exception {
 
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {

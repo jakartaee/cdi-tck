@@ -27,7 +27,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -49,7 +48,8 @@ public class AroundConstructLifeCycleTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "2.2", id = "db"), @SpecAssertion(section = "2.2", id = "dc") })
+    @SpecAssertion(section = "2.2", id = "db")
+    @SpecAssertion(section = "2.2", id = "dc")
     public void testInstanceNotCreatedUnlessInvocationContextProceedCalled(Instance<Baz> instance) {
         Baz2Interceptor.setProceed(false);
         assertFalse(Baz.postConstructedCalled, "Instance created even though InvocationContext.proceed() was not called.");

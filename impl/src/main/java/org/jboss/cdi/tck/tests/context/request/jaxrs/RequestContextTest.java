@@ -31,7 +31,6 @@ import org.jboss.cdi.tck.jaxrs.JaxRsActivator;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -54,8 +53,9 @@ public class RequestContextTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION, JAX_RS})
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "b"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "d"),
-            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jb") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "b")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "d")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jb")
     public void testRequestScopeActiveDuringWebServiceInvocation() throws Exception {
 
         WebClient webClient = new WebClient();

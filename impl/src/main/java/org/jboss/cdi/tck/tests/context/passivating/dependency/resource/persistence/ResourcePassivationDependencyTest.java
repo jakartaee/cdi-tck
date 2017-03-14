@@ -31,7 +31,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -49,8 +48,8 @@ public class ResourcePassivationDependencyTest extends AbstractTest {
     }
 
     @Test(groups = { PERSISTENCE, INTEGRATION })
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "db"),
-            @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "dc") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "db")
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "dc")
     public void testPersistenceUnitAndContext() throws IOException, ClassNotFoundException {
 
         Profile profile = getContextualReference(Profile.class);

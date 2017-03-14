@@ -46,7 +46,6 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -64,7 +63,8 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_CONTEXT, id = "a"), @SpecAssertion(section = DEPENDENT_OBJECTS, id = "ga") })
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "a")
+    @SpecAssertion(section = DEPENDENT_OBJECTS, id = "ga")
     public void testInstanceNotSharedBetweenInjectionPoints() {
         Set<Bean<Fox>> foxBeans = getBeans(Fox.class);
         assert foxBeans.size() == 1;
@@ -79,8 +79,9 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_OBJECTS, id = "ga"), @SpecAssertion(section = DEPENDENT_OBJECTS, id = "gb"),
-            @SpecAssertion(section = DEPENDENT_OBJECTS, id = "gc") })
+    @SpecAssertion(section = DEPENDENT_OBJECTS, id = "ga")
+    @SpecAssertion(section = DEPENDENT_OBJECTS, id = "gb")
+    @SpecAssertion(section = DEPENDENT_OBJECTS, id = "gc")
     public void testDependentBeanIsDependentObjectOfBeanInjectedInto() {
         FoxFarm foxFarm = getContextualReference(FoxFarm.class);
         FoxHole foxHole = getContextualReference(FoxHole.class);
@@ -130,7 +131,8 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dc"), @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dg") })
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dc")
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dg")
     public void testInstanceUsedForDisposalMethodNotShared() {
 
         Integer firstFoxHash = getContextualReference(Fox.class).hashCode();
@@ -163,7 +165,8 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dd"), @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dg") })
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dd")
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "dg")
     public void testInstanceUsedForObserverMethodNotShared() {
 
         HorseStable.reset();
@@ -215,16 +218,15 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "ha"), @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g") })
+    @SpecAssertion(section = CONTEXT, id = "ha")
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g")
     public void testContextIsActive() {
         assert getCurrentManager().getContext(Dependent.class).isActive();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "ha"), @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g") // Dependent context
-                                                                                                            // is now always
-                                                                                                            // active
-    })
+    @SpecAssertion(section = CONTEXT, id = "ha")
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g") // Dependent context is now always active
     public void testContextIsActiveWhenInvokingProducerMethod() {
         SpiderProducer.reset();
         Tarantula tarantula = getContextualReference(Tarantula.class, PET_LITERAL);
@@ -245,7 +247,8 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g"), @SpecAssertion(section = BEAN, id = "aa") })
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g")
+    @SpecAssertion(section = BEAN, id = "aa")
     public void testContextIsActiveWhenInvokingDisposalMethod() {
         Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class, PET_LITERAL).iterator().next();
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
@@ -294,7 +297,8 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "aaaa"), @SpecAssertion(section = DEPENDENT_CONTEXT, id = "b") })
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "aaaa")
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "b")
     public void testDestroyingSimpleParentDestroysDependents() {
         assert getBeans(Farm.class).size() == 1;
         Bean<Farm> farmBean = getBeans(Farm.class).iterator().next();
@@ -309,7 +313,7 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CREATIONAL_CONTEXT, id = "e") })
+    @SpecAssertion(section = CREATIONAL_CONTEXT, id = "e")
     public void testCallingCreationalContextReleaseDestroysDependents() {
         assert getBeans(Farm.class).size() == 1;
 
@@ -336,7 +340,8 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "aaaa"), @SpecAssertion(section = DEPENDENT_CONTEXT, id = "b") })
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "aaaa")
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "b")
     public void testDestroyingManagedParentDestroysDependentsOfSameBean() {
         // Reset test class
         Fox.reset();
@@ -364,8 +369,9 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ddd"), @SpecAssertion(section = DEPENDENT_OBJECTS, id = "h"),
-            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "f") })
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ddd")
+    @SpecAssertion(section = DEPENDENT_OBJECTS, id = "h")
+    @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "f")
     public void testDependentsDestroyedWhenProducerMethodCompletes() {
         // Reset the test classes
         SpiderProducer.reset();
@@ -397,8 +403,10 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ddf"), @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ccc"),
-            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "d"), @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "f") })
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ddf")
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ccc")
+    @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "d")
+    @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "f")
     public void testDependentsDestroyedWhenDisposerMethodCompletes() {
         Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class, PET_LITERAL).iterator().next();
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantulaBean);
@@ -419,8 +427,9 @@ public class DependentContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ddg"), @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ccd"),
-            @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "d") })
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ddg")
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ccd")
+    @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "d")
     public void testDependentsDestroyedWhenObserverMethodEvaluationCompletes() {
         // Reset test class state...
         HorseStable.reset();

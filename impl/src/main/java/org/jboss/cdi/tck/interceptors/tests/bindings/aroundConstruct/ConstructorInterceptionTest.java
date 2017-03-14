@@ -28,7 +28,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -56,8 +55,9 @@ public class ConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "a"), @SpecAssertion(section = "3.1", id = "b"),
-            @SpecAssertion(section = "3.3", id = "ac"), })
+    @SpecAssertion(section = "3.1", id = "a")
+    @SpecAssertion(section = "3.1", id = "b")
+    @SpecAssertion(section = "3.3", id = "ac")
     public void testConstructorLevelBinding(Instance<BeanWithConstructorLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -65,8 +65,10 @@ public class ConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "bc"), @SpecAssertion(section = "3.4", id = "da"),
-            @SpecAssertion(section = "3.4", id = "db"), @SpecAssertion(section = "3.4", id = "dc") })
+    @SpecAssertion(section = "3.3", id = "bc")
+    @SpecAssertion(section = "3.4", id = "da")
+    @SpecAssertion(section = "3.4", id = "db")
+    @SpecAssertion(section = "3.4", id = "dc")
     public void testMultipleConstructorLevelBinding(Instance<BeanWithMultipleConstructorLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -74,7 +76,8 @@ public class ConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "a"), @SpecAssertion(section = "3.1", id = "b") })
+    @SpecAssertion(section = "3.1", id = "a")
+    @SpecAssertion(section = "3.1", id = "b")
     public void testTypeLevelBinding(Instance<BeanWithTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -82,7 +85,8 @@ public class ConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "c"), @SpecAssertion(section = "2.3", id = "i") })
+    @SpecAssertion(section = "3.3", id = "c")
+    @SpecAssertion(section = "2.3", id = "i")
     public void testTypeLevelAndConstructorLevelBinding(Instance<BeanWithConstructorLevelAndTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -90,7 +94,7 @@ public class ConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "da") })
+    @SpecAssertion(section = "3.3", id = "da")
     public void testOverridingTypeLevelBinding(Instance<BeanOverridingTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();

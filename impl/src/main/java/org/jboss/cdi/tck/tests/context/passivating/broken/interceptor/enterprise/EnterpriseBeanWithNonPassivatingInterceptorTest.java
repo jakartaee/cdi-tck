@@ -29,7 +29,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -47,7 +46,8 @@ public class EnterpriseBeanWithNonPassivatingInterceptorTest extends AbstractTes
     }
 
     @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "b"), @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "hd") })
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "b")
+    @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "hd")
     public void testEnterpriseBeanWithNonPassivatingDecoratorFails() {
     }
 }

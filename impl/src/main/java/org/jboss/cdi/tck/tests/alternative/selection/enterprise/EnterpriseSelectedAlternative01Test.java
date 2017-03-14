@@ -31,7 +31,6 @@ import org.jboss.cdi.tck.tests.alternative.selection.Alpha;
 import org.jboss.cdi.tck.tests.alternative.selection.Bravo;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -68,7 +67,7 @@ public class EnterpriseSelectedAlternative01Test extends AbstractTest {
     Bravo bravo;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ab") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ab")
     public void testAlternativeSessionBeanSelected() {
         assertNotNull(alpha);
         assertNotNull(bravo);

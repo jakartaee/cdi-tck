@@ -28,7 +28,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -62,7 +61,8 @@ public class AroundInvokeAccessInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = {JAVAEE_FULL, SECURITY})
-    @SpecAssertions({ @SpecAssertion(section = "2.5", id = "e"), @SpecAssertion(section = "2.5", id = "fb") })
+    @SpecAssertion(section = "2.5", id = "e")
+    @SpecAssertion(section = "2.5", id = "fb")
     public void testSecurityContext(Student student) throws Exception {
         student.printArticle();
         assertTrue(PrinterSecurityInterceptor.securityContextOK);

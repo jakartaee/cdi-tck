@@ -33,7 +33,6 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.context.application.async.AsyncServlet;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -54,7 +53,8 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
     }
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ad"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "bd") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ad")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "bd")
     public void testRequestContextActiveOnComplete() throws Exception {
 
         WebClient webClient = new WebClient();

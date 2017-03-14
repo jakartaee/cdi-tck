@@ -23,7 +23,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -36,8 +35,9 @@ public class MethodLevelInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.8", id = "d"), @SpecAssertion(section = "4", id = "a"),
-            @SpecAssertion(section = "2.8", id = "e") })
+    @SpecAssertion(section = "2.8", id = "d")
+    @SpecAssertion(section = "4", id = "a")
+    @SpecAssertion(section = "2.8", id = "e")
     public void testInterceptorCanBeAppliedToMoreThanOneMethod() {
         Fish fish = getContextualReference(Fish.class);
         assertEquals(fish.foo(), "Intercepted bar");

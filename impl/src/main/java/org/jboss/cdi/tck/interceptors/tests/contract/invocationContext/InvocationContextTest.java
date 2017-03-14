@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -24,7 +25,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -43,7 +43,8 @@ public class InvocationContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = "2.8", id = "aa"), @SpecAssertion(section = "2.3", id = "c")})
+    @SpecAssertion(section = "2.8", id = "aa")
+    @SpecAssertion(section = "2.3", id = "c")
     public void testGetTargetMethod() {
         SimpleBean instance = getContextualReference(SimpleBean.class);
         instance.setId(10);
@@ -78,7 +79,8 @@ public class InvocationContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "f"), @SpecAssertion(section = "2.3", id = "ga") })
+    @SpecAssertion(section = "2.3", id = "f")
+    @SpecAssertion(section = "2.3", id = "ga")
     public void testMethodParameters() {
         assertEquals(getContextualReference(SimpleBean.class).add(1, 2), 5);
     }
@@ -103,7 +105,7 @@ public class InvocationContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.3", id = "ba") })
+    @SpecAssertion(section = "2.3", id = "ba")
     public void testContextData() {
         getContextualReference(SimpleBean.class).foo();
         assertTrue(Interceptor8.isContextDataOK());
@@ -113,7 +115,7 @@ public class InvocationContextTest extends AbstractTest {
     @Test
     @SpecAssertion(section = "2.3", id = "j")
     public void testBusinessMethodNotCalledWithoutProceedInvocation() {
-        assert getContextualReference(SimpleBean.class).echo("foo").equals("foo");
-        assert !SimpleBean.isEchoCalled();
+        assertEquals(getContextualReference(SimpleBean.class).echo("foo"), "foo");
+        assertFalse(SimpleBean.isEchoCalled());
     }
 }

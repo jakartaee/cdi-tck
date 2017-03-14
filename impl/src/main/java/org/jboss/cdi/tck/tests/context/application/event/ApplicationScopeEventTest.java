@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -54,9 +53,10 @@ public class ApplicationScopeEventTest extends AbstractTest {
     private Observer1 observer;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga"), @SpecAssertion(section = OBSERVES, id = "a"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "a"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "c") })
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga")
+    @SpecAssertion(section = OBSERVES, id = "a")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "a")
+    @SpecAssertion(section = APPLICATION_CONTEXT, id = "c")
     public void testServletContextInitializedInvoked() {
         assertTrue(observer.isObserved());
     }

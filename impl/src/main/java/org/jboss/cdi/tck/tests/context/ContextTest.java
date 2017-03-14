@@ -32,7 +32,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -58,8 +57,9 @@ public class ContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BUILTIN_SCOPES, id = "a"),@SpecAssertion(section = BUILTIN_SCOPES, id = "ca"),
-            @SpecAssertion(section = BM_OBTAIN_ACTIVE_CONTEXT, id = "a") })
+    @SpecAssertion(section = BUILTIN_SCOPES, id = "a")
+    @SpecAssertion(section = BUILTIN_SCOPES, id = "ca")
+    @SpecAssertion(section = BM_OBTAIN_ACTIVE_CONTEXT, id = "a")
     public void testBuiltInContexts() {
         Context context = getCurrentManager().getContext(Dependent.class);
         assert context != null;

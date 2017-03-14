@@ -22,7 +22,6 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -39,9 +38,11 @@ public class AroundInvokeInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "2.1", id = "aa"), @SpecAssertion(section = "2.5", id = "a"),
-            @SpecAssertion(section = "2.5", id = "b"), @SpecAssertion(section = "2.5", id = "ca"),
-            @SpecAssertion(section = "5.2.2", id = "a") })
+    @SpecAssertion(section = "2.1", id = "aa")
+    @SpecAssertion(section = "2.5", id = "a")
+    @SpecAssertion(section = "2.5", id = "b")
+    @SpecAssertion(section = "2.5", id = "ca")
+    @SpecAssertion(section = "5.2.2", id = "a")
     public void testBusinessMethodIntercepted(Foo foo) throws Exception {
         ActionSequence.reset();
         foo.ping();

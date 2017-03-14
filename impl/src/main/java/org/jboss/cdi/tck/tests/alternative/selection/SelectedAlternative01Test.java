@@ -28,7 +28,6 @@ import org.jboss.cdi.tck.tests.alternative.selection.Tame.TameLiteral;
 import org.jboss.cdi.tck.tests.alternative.selection.Wild.WildLiteral;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -72,7 +71,7 @@ public class SelectedAlternative01Test extends AbstractTest {
     Charlie charlie;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "aa") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "aa")
     public void testAlternativeManagedBeanSelected() {
         alpha.assertAvailable(Foo.class);
         bravo.assertAvailable(Foo.class);
@@ -80,8 +79,8 @@ public class SelectedAlternative01Test extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ba"),
-            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "bb") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ba")
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "bb")
     public void testAlternativeProducerSelected() {
         // Producer field
         alpha.assertAvailable(Bar.class, WildLiteral.INSTANCE);

@@ -31,7 +31,6 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -55,7 +54,8 @@ public class RequestContextTest extends AbstractTest {
      * The request scope is active during the service() method of any Servlet in the web application.
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "aa"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ac") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "aa")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ac")
     public void testRequestScopeActiveDuringServiceMethod() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -66,7 +66,8 @@ public class RequestContextTest extends AbstractTest {
      * The request scope is active during the doFilter() method of any Filter in the web application.
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ab"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ac") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ab")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ac")
     public void testRequestScopeActiveDuringServletFilter() throws Exception {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
@@ -78,8 +79,9 @@ public class RequestContextTest extends AbstractTest {
      * methods, and all requestDestroyed() notifications return.
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ba"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "bb"),
-            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "bc") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ba")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "bb")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "bc")
     public void testRequestScopeIsDestroyedAfterServletRequest() throws Exception {
 
         WebClient webClient = new WebClient();

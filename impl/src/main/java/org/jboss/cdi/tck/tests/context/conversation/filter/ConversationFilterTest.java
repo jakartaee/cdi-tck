@@ -39,7 +39,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -77,7 +76,7 @@ public class ConversationFilterTest extends AbstractTest {
      * @throws Exception
      */
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "d") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "d")
     public void testConversationActivation() throws Exception {
 
         WebClient client = new WebClient();
@@ -102,7 +101,7 @@ public class ConversationFilterTest extends AbstractTest {
      * @throws Exception
      */
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ua") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ua")
     public void testConversationBusy() throws Exception {
 
         // Init the long-running conversation

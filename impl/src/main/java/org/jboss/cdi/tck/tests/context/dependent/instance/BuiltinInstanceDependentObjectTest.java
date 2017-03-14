@@ -26,7 +26,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -45,7 +44,8 @@ public class BuiltinInstanceDependentObjectTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_OBJECTS, id = "i"), @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ccd") })
+    @SpecAssertion(section = DEPENDENT_OBJECTS, id = "i")
+    @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ccd")
     public void testInstanceDependentObject() {
         Foo.reset();
         getCurrentManager().fireEvent(new GoodEvent());

@@ -61,7 +61,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "hb"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "o") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "hb")
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "o")
     public void testConversationIdSetByContainerIsUnique() throws Exception {
         WebClient client = new WebClient();
         HtmlPage storm = client.getPage(getPath("storm.jsf"));
@@ -234,8 +235,9 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "g"), @SpecAssertion(section = CONVERSATION, id = "k"),
-            @SpecAssertion(section = CONVERSATION, id = "o") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "g")
+    @SpecAssertion(section = CONVERSATION, id = "k")
+    @SpecAssertion(section = CONVERSATION, id = "o")
     public void testConversationEndMakesConversationTransient() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -268,7 +270,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION, id = "ib"), @SpecAssertion(section = CONVERSATION, id = "iaa") })
+    @SpecAssertion(section = CONVERSATION, id = "ib")
+    @SpecAssertion(section = CONVERSATION, id = "iaa")
     public void testBeanWithRequestScope() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("builtin.jsf"));
@@ -292,7 +295,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION, id = "l"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "e") })
+    @SpecAssertion(section = CONVERSATION, id = "l")
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "e")
     public void testTransientConversationHasNullId() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("builtin.jsf"));
@@ -300,7 +304,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ha"), @SpecAssertion(section = CONVERSATION, id = "j") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "ha")
+    @SpecAssertion(section = CONVERSATION, id = "j")
     public void testConversationIdMayBeSetByApplication() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -320,7 +325,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "hb"), @SpecAssertion(section = CONVERSATION, id = "j") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "hb")
+    @SpecAssertion(section = CONVERSATION, id = "j")
     public void testConversationIdMayBeSetByContainer() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));
@@ -343,7 +349,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION, id = "m"), @SpecAssertion(section = CONVERSATION, id = "n") })
+    @SpecAssertion(section = CONVERSATION, id = "m")
+    @SpecAssertion(section = CONVERSATION, id = "n")
     public void testSetConversationTimeoutOverride() throws Exception {
         WebClient client = new WebClient();
         HtmlPage page = client.getPage(getPath("cumulus.jsf"));

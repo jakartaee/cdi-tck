@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -56,7 +55,8 @@ public class EagerSingletonPostConstructCallbackTest extends AbstractTest {
     private URL contextPath;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "e"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "f") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "e")
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "f")
     public void testEagerSingletonPostConstructCallback() throws Exception {
 
         WebClient client = new WebClient();

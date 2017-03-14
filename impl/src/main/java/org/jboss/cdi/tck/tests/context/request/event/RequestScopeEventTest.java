@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -57,9 +56,10 @@ public class RequestScopeEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ja"), @SpecAssertion(section = REQUEST_CONTEXT, id = "a"),
-            @SpecAssertion(section = REQUEST_CONTEXT, id = "b"),
-            @SpecAssertion(section = REQUEST_CONTEXT, id = "c") })
+    @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ja")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "a")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "b")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "c")
     public void test() throws Exception {
         WebClient client = new WebClient();
 

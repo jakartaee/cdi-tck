@@ -26,7 +26,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -46,7 +45,7 @@ public class EagerSingletonPostConstructCallbackTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "h") })
+    @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "h")
     public void testEagerSingletonPostConstructCallback(EagerSingleton eagerSingleton) throws Exception {
         assertTrue(eagerSingleton.isApplicationContextActiveDuringPostConstruct());
     }

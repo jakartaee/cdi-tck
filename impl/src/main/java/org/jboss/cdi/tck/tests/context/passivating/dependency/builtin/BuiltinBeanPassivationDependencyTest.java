@@ -5,13 +5,14 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.io.IOException;
+
 import javax.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -39,7 +40,7 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
 
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ea") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ea")
     public void testInstance() throws IOException, ClassNotFoundException {
         assertNotNull(worker);
         assertNotNull(worker.getInstance());
@@ -59,7 +60,7 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ed") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ed")
     public void testBeanManager() throws IOException, ClassNotFoundException {
         assertNotNull(boss);
         assertNotNull(boss.getBeanManager());
@@ -76,7 +77,7 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
     }
     
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ec") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ec")
     public void testInjectionPoint() throws IOException, ClassNotFoundException {
 
         Inspector inspector = inspectorAssist.getInspector();

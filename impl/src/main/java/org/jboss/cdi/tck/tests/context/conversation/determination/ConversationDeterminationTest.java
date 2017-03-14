@@ -30,7 +30,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -53,8 +52,10 @@ public class ConversationDeterminationTest extends AbstractTest {
     private URL contextPath;
 
     @Test(groups = {INTEGRATION, ASYNC_SERVLET})
-    @SpecAssertions({ @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "da"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "db"),
-            @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "dc"), @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "dd") })
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "da")
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "db")
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "dc")
+    @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "dd")
     public void testConversationDetermination() throws Exception {
 
         WebClient webClient = new WebClient();

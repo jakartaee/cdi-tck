@@ -29,7 +29,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -57,7 +56,8 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "a"), @SpecAssertion(section = "3.1", id = "b") })
+    @SpecAssertion(section = "3.1", id = "a")
+    @SpecAssertion(section = "3.1", id = "b")
     public void testConstructorLevelBinding(Instance<BeanWithConstructorLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -65,7 +65,8 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.1", id = "a"), @SpecAssertion(section = "3.1", id = "b") })
+    @SpecAssertion(section = "3.1", id = "a")
+    @SpecAssertion(section = "3.1", id = "b")
     public void testTypeLevelBinding(Instance<BeanWithTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -73,7 +74,7 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "c") })
+    @SpecAssertion(section = "3.3", id = "c")
     public void testTypeLevelAndConstructorLevelBinding(Instance<BeanWithConstructorLevelAndTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -81,7 +82,7 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = "3.3", id = "da") })
+    @SpecAssertion(section = "3.3", id = "da")
     public void testOverridingTypeLevelBinding(Instance<BeanOverridingTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();

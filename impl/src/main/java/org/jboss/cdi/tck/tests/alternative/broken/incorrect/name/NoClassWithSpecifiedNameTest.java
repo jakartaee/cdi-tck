@@ -29,7 +29,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -50,8 +49,9 @@ public class NoClassWithSpecifiedNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "e"), @SpecAssertion(section = EXCEPTIONS, id = "c"),
-            @SpecAssertion(section = EXCEPTIONS, id = "ca") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "e")
+    @SpecAssertion(section = EXCEPTIONS, id = "c")
+    @SpecAssertion(section = EXCEPTIONS, id = "ca")
     public void test() {
     }
 }

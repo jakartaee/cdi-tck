@@ -27,7 +27,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -41,8 +40,8 @@ public class NonPassivatingInitParamTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ae"),
-            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "f") })
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ae")
+    @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "f")
     public void testBeanWithNonSerializableImplementationInjectedIntoNonTransientFieldOfBeanWithPassivatingScopeFails() {
     }
 }

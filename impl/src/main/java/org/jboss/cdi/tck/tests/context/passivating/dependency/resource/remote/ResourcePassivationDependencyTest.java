@@ -15,7 +15,6 @@ import org.jboss.cdi.tck.tests.context.passivating.dependency.resource.remote.ej
 import org.jboss.cdi.tck.tests.context.passivating.dependency.resource.remote.ejb.FooRemote;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -39,7 +38,7 @@ public class ResourcePassivationDependencyTest extends AbstractTest {
 
     @OperateOnDeployment("TEST")
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "dd") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "dd")
     public void testRemoteSessionBean() throws IOException, ClassNotFoundException {
 
         Worker worker = getContextualReference(Worker.class);

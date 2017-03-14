@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -50,8 +49,9 @@ public class NormalContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "j"), @SpecAssertion(section = CONTEXT, id = "l"),
-            @SpecAssertion(section = NORMAL_SCOPE, id = "c") })
+    @SpecAssertion(section = CONTEXT, id = "j")
+    @SpecAssertion(section = CONTEXT, id = "l")
+    @SpecAssertion(section = NORMAL_SCOPE, id = "c")
     public void testGetReturnsExistingInstance() {
         Bean<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
         CreationalContext<MySessionBean> creationalContext = getCurrentManager().createCreationalContext(mySessionBean);
@@ -67,7 +67,7 @@ public class NormalContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "l") })
+    @SpecAssertion(section = CONTEXT, id = "l")
     public void testGetWithCreationalContextReturnsNewInstance() {
         MyContextual bean = AfterBeanDiscoveryObserver.getBean();
         bean.setShouldReturnNullInstances(false);
@@ -92,7 +92,7 @@ public class NormalContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = NORMAL_SCOPE, id = "e") })
+    @SpecAssertion(section = NORMAL_SCOPE, id = "e")
     public void testSameNormalScopeBeanInjectedEverywhere() {
         SimpleBeanA instanceOfA = getContextualReference(SimpleBeanA.class);
         SimpleBeanB instanceOfB = getContextualReference(SimpleBeanB.class);

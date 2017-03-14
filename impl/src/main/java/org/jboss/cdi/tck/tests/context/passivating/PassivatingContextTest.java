@@ -39,7 +39,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -58,16 +57,16 @@ public class PassivatingContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ba"),
-            @SpecAssertion(section = PASSIVATING_SCOPES, id = "a") })
+    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "ba")
+    @SpecAssertion(section = PASSIVATING_SCOPES, id = "a")
     public void testManagedBeanWithSerializableImplementationClassOK() {
         Set<Bean<Jyvaskyla>> beans = getBeans(Jyvaskyla.class);
         assertFalse(beans.isEmpty());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE, id = "bb"),
-            @SpecAssertion(section = PASSIVATING_SCOPE, id = "a"), })
+    @SpecAssertion(section = PASSIVATION_CAPABLE, id = "bb")
+    @SpecAssertion(section = PASSIVATING_SCOPE, id = "a")
     public void testManagedBeanWithSerializableInterceptorClassOK() throws ClassNotFoundException, IOException {
         Set<Bean<Kokkola>> beans = getBeans(Kokkola.class);
         assertFalse(beans.isEmpty());
@@ -113,7 +112,7 @@ public class PassivatingContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATING_SCOPE, id = "a") })
+    @SpecAssertion(section = PASSIVATING_SCOPE, id = "a")
     public void testPassivationOccurs() throws IOException, ClassNotFoundException {
         Kajaani instance = getContextualReference(Kajaani.class);
         instance.setTheNumber(100);
@@ -125,8 +124,8 @@ public class PassivatingContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ab"),
-            @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "a") })
+    @SpecAssertion(section = PASSIVATION_VALIDATION, id = "ab")
+    @SpecAssertion(section = PASSIVATION_CAPABLE_INJECTION_POINTS, id = "a")
     public void testBeanWithNonSerializableImplementationInjectedIntoTransientFieldOK() {
         Set<Bean<Joensuu>> beans = getBeans(Joensuu.class);
         assertFalse(beans.isEmpty());

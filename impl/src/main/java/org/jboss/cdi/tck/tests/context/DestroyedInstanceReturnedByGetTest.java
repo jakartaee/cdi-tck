@@ -29,7 +29,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -42,7 +41,8 @@ public class DestroyedInstanceReturnedByGetTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXT, id = "q"), @SpecAssertion(section = BEAN, id = "aa") })
+    @SpecAssertion(section = CONTEXT, id = "q")
+    @SpecAssertion(section = BEAN, id = "aa")
     public void testDestroyedInstanceMustNotBeReturnedByGet() {
         assert getBeans(MySessionBean.class).size() == 1;
         Bean<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();

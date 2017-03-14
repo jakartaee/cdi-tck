@@ -23,7 +23,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -36,15 +35,17 @@ public class ExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.4", id = "a"), @SpecAssertion(section = "2.4", id = "ba"),
-            @SpecAssertion(section = "2.4", id = "c") })
+    @SpecAssertion(section = "2.4", id = "a")
+    @SpecAssertion(section = "2.4", id = "ba")
+    @SpecAssertion(section = "2.4", id = "c")
     public void testExceptions1() throws Exception {
         assertTrue(getContextualReference(SimpleBean.class).foo());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = "2.4", id = "a"), @SpecAssertion(section = "2.4", id = "ba"),
-            @SpecAssertion(section = "2.4", id = "bb") })
+    @SpecAssertion(section = "2.4", id = "a")
+    @SpecAssertion(section = "2.4", id = "ba")
+    @SpecAssertion(section = "2.4", id = "bb")
     public void testExceptions2() throws Exception {
         assertTrue(getContextualReference(ExceptionBean.class).bar());
     }

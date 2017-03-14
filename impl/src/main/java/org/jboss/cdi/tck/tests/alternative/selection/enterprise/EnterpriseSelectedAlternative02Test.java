@@ -33,7 +33,6 @@ import org.jboss.cdi.tck.tests.alternative.selection.Charlie;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -83,7 +82,7 @@ public class EnterpriseSelectedAlternative02Test extends AbstractTest {
     Charlie charlie;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ab") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ab")
     public void testAlternativeSessionBeanSelected() {
         assertNotNull(alpha);
         assertNotNull(bravo);
