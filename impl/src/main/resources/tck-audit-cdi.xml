@@ -7172,6 +7172,13 @@
             </text>
         </assertion>
 
+        <assertion id="da" testable="false">
+            <text>
+                If an extension declares a static observer method whose event parameter type is a container lifecycle event, or is |java.lang.Object| and the
+                event parameter has either no qualifiers or a single qualifier |@Any|, non-portable behavior results.
+            </text>
+        </assertion>
+
         <assertion id="e">
             <text>The notification order for observer methods within extensions follows the same ordering rule as defined in Observer ordering for non-extension
                 observers. The priority of an observer method may be declared using the @Priority annotation.
