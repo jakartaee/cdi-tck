@@ -28,7 +28,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -42,7 +41,8 @@ public class EJBObserverMethodRemoteBusinessMethodTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHODS_EE, id = "d"), @SpecAssertion(section = OBSERVES_EE, id = "g") })
+    @SpecAssertion(section = OBSERVER_METHODS_EE, id = "d")
+    @SpecAssertion(section = OBSERVES_EE, id = "g")
     public void testObserverMethodOnRemoteBusinessMethodFails() {
     }
 }

@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2017, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.broken.observer.inject;
+package org.jboss.cdi.tck.tests.event.broken.observer.bothObservesAnnotations;
 
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
 
@@ -30,17 +30,18 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0-PFD")
-public class DeploymentFailureTest extends AbstractTest {
+public class ObserverMethodParameterAnnotatedAsSyncAndAsyncTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DeploymentFailureTest.class).build();
+        return new WebArchiveBuilder().withClasses(BrokenObserver.class).withTestClass(ObserverMethodParameterAnnotatedAsSyncAndAsyncTest.class)
+                .build();
     }
 
     @Test
-    @SpecAssertion(section = OBSERVES, id = "e")
-    public void testDeploymentFailsBeforeNotifyingObserversAfterBeanDiscovery() {
+    @SpecAssertion(section = OBSERVES, id = "ba")
+    public void observerMethodMustBeSyncOrAsync() {
     }
 
 }
