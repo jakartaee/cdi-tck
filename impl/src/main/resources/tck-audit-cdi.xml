@@ -5487,6 +5487,11 @@
             </text>
         </assertion>
 
+        <assertion id="ba">
+            <text>If a method has a parameter annotated |@Observes| and |@ObservesAsync|, the container automatically
+                detects the problem and treats it as a definition error.</text>
+        </assertion>
+
         <assertion id="c">
             <text>Observed event qualifiers may be declared by annotating the event parameter.</text>
         </assertion>
@@ -11112,8 +11117,7 @@
     <section id="observer_method_invocation_context_ee" title="Observer method invocation context in Java EE" level="3">
         <assertion id="a">
             <text>The transaction and security contexts for a business method exposed by a local business interface of an EJB session bean also depend upon the
-                transaction attribute and @RunAs
-                descriptor, if any.
+                transaction attribute and @RunAs descriptor, if any.
             </text>
         </assertion>
 
