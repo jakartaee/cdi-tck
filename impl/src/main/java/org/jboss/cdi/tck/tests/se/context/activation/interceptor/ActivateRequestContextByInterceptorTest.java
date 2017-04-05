@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.cdi.Sections.ACTIVATING_REQUEST_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 
 import java.io.IOException;
+
 import javax.enterprise.inject.se.SeContainer;
 import javax.enterprise.inject.se.SeContainerInitializer;
 
@@ -32,7 +33,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -50,13 +50,14 @@ public class ActivateRequestContextByInterceptorTest extends Arquillian {
                 .addPackage(ActivateRequestContextByInterceptorTest.class.getPackage())
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         return ClassPath.builder().add(bda1).build();
-
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "a"), @SpecAssertion(section = REQUEST_CONTEXT, id = "b"),
-            @SpecAssertion(section = REQUEST_CONTEXT, id = "c"), @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "a"),
-            @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "f") })
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "a")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "b")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "c")
+    @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "a")
+    @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "f")
     public void classInterceptorRequestContextActivation() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer container = seContainerInitializer
@@ -71,9 +72,11 @@ public class ActivateRequestContextByInterceptorTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "a"), @SpecAssertion(section = REQUEST_CONTEXT, id = "b"),
-            @SpecAssertion(section = REQUEST_CONTEXT, id = "c"), @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "a"),
-            @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "f") })
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "a")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "b")
+    @SpecAssertion(section = REQUEST_CONTEXT, id = "c")
+    @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "a")
+    @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "f")
     public void methodInterceptorRequestContextActivation() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer container = seContainerInitializer
@@ -89,7 +92,7 @@ public class ActivateRequestContextByInterceptorTest extends Arquillian {
 
     // indirectly test ActivateRequestContext interceptor priority
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "g") })
+    @SpecAssertion(section = ACTIVATING_REQUEST_CONTEXT, id = "g")
     public void builtInInterceptorHasGivenPriority() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer container = seContainerInitializer

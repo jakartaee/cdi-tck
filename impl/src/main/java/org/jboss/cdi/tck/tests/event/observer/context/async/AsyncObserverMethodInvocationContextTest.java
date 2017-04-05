@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.event.observer.context.async;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_INVOCATION_CONTEXT;
-import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
+import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -75,7 +75,7 @@ public class AsyncObserverMethodInvocationContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "aa"), @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "aa"), @SpecAssertion(section = REQUEST_CONTEXT, id = "da") })
     public void testAsyncObserverIsCalledInNewRequestContext() throws Exception {
         counter.increment();
         BlockingQueue<String> queue = new LinkedBlockingQueue<>();
