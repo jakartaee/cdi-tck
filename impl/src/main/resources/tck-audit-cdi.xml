@@ -4259,16 +4259,36 @@
         </assertion>
 
         <assertion id="b">
-            <text>An event with qualifier @BeforeDestroyed(RequestScoped.class) is synchronously
+            <text>An event with qualifier |@BeforeDestroyed(RequestScoped.class)| is synchronously
                 fired when the request context is about to be destroyed, i.e. before the actual destruction.
             </text>
         </assertion>
 
         <assertion id="c">
-            <text>An event with qualifier @Destroyed(RequestScoped.class) is synchronously fired when the request context is
+            <text>An event with qualifier |@Destroyed(RequestScoped.class)| is synchronously fired when the request context is
                 destroyed, i.e. after the actual destruction.
             </text>
         </assertion>
+
+        <group>
+            <text>The request context is active:</text>
+            <assertion id="da">
+                <text>during notification of an asynchronous observer method</text>
+            </assertion>
+            <assertion id="db">
+                <text>during |@PostConstruct| callback of any bean.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>The request context is destroyed:</text>
+            <assertion id="ea">
+                <text>after the invocation of an asynchronous observer method completes</text>
+            </assertion>
+            <assertion id="eb">
+                <text>after the |@PostConstruct| callback completes, if it did not already exist when the |@PostConstruct| callback occurred</text>
+            </assertion>
+        </group>
 
     </section>
 
@@ -5489,7 +5509,8 @@
 
         <assertion id="ba">
             <text>If a method has a parameter annotated |@Observes| and |@ObservesAsync|, the container automatically
-                detects the problem and treats it as a definition error.</text>
+                detects the problem and treats it as a definition error.
+            </text>
         </assertion>
 
         <assertion id="c">
@@ -10339,10 +10360,6 @@
             <text>The request scope is active during any Java EE web service invocation.</text>
         </assertion>
 
-        <assertion id="c">
-            <text>The request scope is active during any asynchronous invocation of an event observer,.</text>
-        </assertion>
-
         <group>
             <text>The request scope is active during any remote method invocation of any EJB, during any asynchronous method invocation of any EJB, during any
                 call to an EJB timeout method and during message delivery to any EJB message-driven bean.
@@ -10364,11 +10381,6 @@
                 <text>Test the request scope is active during message delivery to any EJB message-driven bean.</text>
             </assertion>
         </group>
-
-        <assertion id="e">
-            <text>The request scope is active during |@PostConstruct| callback of any bean.</text>
-        </assertion>
-
 
         <group>
             <text>The request context is destroyed at the end of the servlet request, after the |service()| method and all |doFilter()| methods, and all
@@ -10413,12 +10425,6 @@
                 <text>Test the request context is destroyed after the message delivery completes.</text>
             </assertion>
         </group>
-
-        <assertion id="f">
-            <text>The request context is destroyed after the after the @PostConstruct callback completes, if it did not already exist when the @PostConstruct
-                callback occurred.
-            </text>
-        </assertion>
 
         <group>
             <text>An event with qualifier |@Initialized(RequestScoped.class)| is fired when the request context is initialized and an event with qualifier
