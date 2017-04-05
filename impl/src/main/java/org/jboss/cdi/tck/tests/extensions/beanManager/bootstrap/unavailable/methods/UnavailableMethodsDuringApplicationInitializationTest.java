@@ -21,7 +21,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -45,16 +44,17 @@ public class UnavailableMethodsDuringApplicationInitializationTest extends Abstr
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = BEANMANAGER, id = "ad"),
-            @SpecAssertion(section = BEANMANAGER, id = "ae"),
-            @SpecAssertion(section = BEANMANAGER, id = "af"),
-            @SpecAssertion(section = BEANMANAGER, id = "ag"),
-            @SpecAssertion(section = BEANMANAGER, id = "ah"),
-            @SpecAssertion(section = BEANMANAGER, id = "ai"),
-            @SpecAssertion(section = BEANMANAGER, id = "aj"),
-            @SpecAssertion(section = BEANMANAGER, id = "ak"),
-            @SpecAssertion(section = BEANMANAGER, id = "al"),
-            @SpecAssertion(section = BEANMANAGER, id = "am")})
+    @SpecAssertion(section = BEANMANAGER, id = "ad")
+    @SpecAssertion(section = BEANMANAGER, id = "ae")
+    @SpecAssertion(section = BEANMANAGER, id = "af")
+    @SpecAssertion(section = BEANMANAGER, id = "ag")
+    @SpecAssertion(section = BEANMANAGER, id = "ah")
+    @SpecAssertion(section = BEANMANAGER, id = "ai")
+    @SpecAssertion(section = BEANMANAGER, id = "aj")
+    @SpecAssertion(section = BEANMANAGER, id = "ak")
+    @SpecAssertion(section = BEANMANAGER, id = "al")
+    @SpecAssertion(section = BEANMANAGER, id = "am")
+    @SpecAssertion(section = BEANMANAGER, id = "an")
     public void testUnavailableMethods() {
         // Test deployment does not fail
     }

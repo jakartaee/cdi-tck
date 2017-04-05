@@ -149,7 +149,6 @@ public class WrongExtension implements Extension {
     @SuppressWarnings({ "serial", "unchecked" })
     private void testUnavailableMethodsBeforeADV(final BeanManager beanManager) {
 
-        // if (fooBean != null) {
         final CreationalContext<Foo> creationalContext = beanManager.createCreationalContext(fooBean);
 
         new Invocation() {
@@ -165,7 +164,12 @@ public class WrongExtension implements Extension {
                         creationalContext);
             }
         }.run();
-        //}
+
+        new Invocation() {
+            void execute() {
+                beanManager.createInstance().select(Foo.class);
+            }
+        }.run();
     }
 
     @SuppressWarnings({ "unchecked", "serial" })

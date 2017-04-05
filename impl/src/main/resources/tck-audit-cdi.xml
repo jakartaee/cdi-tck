@@ -6097,15 +6097,20 @@
             <assertion id="ak">
                 <text>Test validate(InjectionPoint)</text>
             </assertion>
-
+        </group>
+        <group>
             <text>Exception is thrown if the following operations are called before the {@Link AfterDeploymentValidation} event is fired:</text>
 
             <assertion id="al">
-                <text>Test getReference(Bean, Type, CreationalContext)</text>
+                <text>Test |createInstance()|</text>
             </assertion>
 
             <assertion id="am">
-                <text>Test getInjectableReference(InjectionPoint, CreationalContext)</text>
+                <text>Test |getReference(Bean, Type, CreationalContext)|</text>
+            </assertion>
+
+            <assertion id="an">
+                <text>Test |getInjectableReference(InjectionPoint, CreationalContext)|</text>
             </assertion>
         </group>
 
