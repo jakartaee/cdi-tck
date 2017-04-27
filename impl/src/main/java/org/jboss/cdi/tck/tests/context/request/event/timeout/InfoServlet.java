@@ -53,7 +53,7 @@ public class InfoServlet extends HttpServlet {
         timeoutService.start();
 
         Boolean initializedResult;
-        initializedResult = observingBean.pollQueue(5, TimeUnit.SECONDS);
+        initializedResult = observingBean.await(5, TimeUnit.SECONDS);
 
         resp.getWriter().append("Initialized:" + initializedResult);
         resp.getWriter().append("\n");

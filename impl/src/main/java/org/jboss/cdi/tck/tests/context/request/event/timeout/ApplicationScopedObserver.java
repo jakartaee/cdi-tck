@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.request.event.timeout;
 
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -32,8 +32,8 @@ public class ApplicationScopedObserver {
     @Inject
     private RequestScopedObserver observer;
 
+    private final CountDownLatch latch = new CountDownLatch(1);
     private final AtomicBoolean destroyedCalled = new AtomicBoolean();
-    private SynchronousQueue<Boolean> queue = new SynchronousQueue<Boolean>();
 
     void observeRequestDestroyed(@Observes @Destroyed(RequestScoped.class) Object event) {
         destroyedCalled.set(true);
@@ -47,14 +47,16 @@ public class ApplicationScopedObserver {
         return destroyedCalled.get();
     }
 
-    public void offerQueue() {
-        queue.offer(observer.isInitializedObserved());
+    public void countDown() {
+        if (observer.isInitializedObserved()) {
+            latch.countDown();
+        }
     }
 
-    public Boolean pollQueue(long timeout, TimeUnit timeUnit) {
+    public Boolean await(long timeout, TimeUnit timeUnit) {
         Boolean result = new Boolean(false);
         try {
-            result = queue.poll(timeout, timeUnit);
+            result = latch.await(timeout, timeUnit);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
