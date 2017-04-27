@@ -43,7 +43,7 @@ public class TimeoutService {
     @Timeout
     public void onTimeout(Timer timer) {
         appObserver.reset();
-        appObserver.offerQueue();
+        appObserver.countDown();
     }
 
 }
