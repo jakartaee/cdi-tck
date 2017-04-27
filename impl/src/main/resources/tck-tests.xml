@@ -22,6 +22,17 @@
             <package name="org.jboss.cdi.tck.interceptors.tests.*" />
         </packages>
 
+        <classes>
+
+            <!-- CDITCK-572 -->
+            <class name="org.jboss.cdi.tck.tests.context.request.event.timeout.RequestScopeEventTimeoutTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+        </classes>
+
     </test>
 
 </suite>
