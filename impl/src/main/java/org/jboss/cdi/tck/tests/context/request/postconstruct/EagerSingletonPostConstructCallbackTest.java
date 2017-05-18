@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Martin Kouba
  * 
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class EagerSingletonPostConstructCallbackTest extends AbstractTest {
 
     @Deployment(testable = false)

@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class ApplicationContextTest extends AbstractTest {
 
     @ArquillianResource

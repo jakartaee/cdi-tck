@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * 
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class FireContainerLifecycleEventTest extends AbstractTest {
 
     @Deployment

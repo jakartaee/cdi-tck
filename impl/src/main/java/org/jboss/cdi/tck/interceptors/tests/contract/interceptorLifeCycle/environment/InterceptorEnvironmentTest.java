@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.environment;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INTERCEPTOR_ENVIRONMENT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -37,7 +38,7 @@ import org.testng.annotations.Test;
 /**
  * @author Matus Abaffy
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class InterceptorEnvironmentTest extends AbstractTest {
 
     @Deployment
@@ -46,7 +47,7 @@ public class InterceptorEnvironmentTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertion(section = "2.2.1", id = "b")
+    @SpecAssertion(section = INTERCEPTOR_ENVIRONMENT, id = "b")
     public void testSameThread(Bar bar) throws InterruptedException {
         assertEquals(bar.ping(), 2);
 
@@ -62,7 +63,7 @@ public class InterceptorEnvironmentTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.2.1", id = "c")
+    @SpecAssertion(section = INTERCEPTOR_ENVIRONMENT, id = "c")
     public void testInvocationContext(Foo foo) {
         final int input = 5;
         final int result = ((2 * input) + 3) * 3;

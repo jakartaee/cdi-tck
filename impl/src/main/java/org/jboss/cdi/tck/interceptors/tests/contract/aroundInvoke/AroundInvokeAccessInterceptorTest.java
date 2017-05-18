@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.SECURITY;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BUSINESS_METHOD_INTERCEPTOR_METHODS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -31,7 +32,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class AroundInvokeAccessInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -40,29 +41,29 @@ public class AroundInvokeAccessInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.5", id = "cb")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "cb")
     public void testPrivateAroundInvokeInterceptor() {
         assertEquals(getContextualReference(SimpleBean.class).zero(), 1);
         assertEquals(getContextualReference(Bean3.class).zero(), 1);
     }
 
     @Test
-    @SpecAssertion(section = "2.5", id = "cc")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "cc")
     public void testProtectedAroundInvokeInterceptor() {
         assertEquals(getContextualReference(SimpleBean.class).one(), 2);
         assertEquals(getContextualReference(Bean1.class).zero(), 1);
     }
 
     @Test
-    @SpecAssertion(section = "2.5", id = "cd")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "cd")
     public void testPackagePrivateAroundInvokeInterceptor() {
         assertEquals(getContextualReference(SimpleBean.class).two(), 3);
         assertEquals(getContextualReference(Bean2.class).zero(), 1);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = {JAVAEE_FULL, SECURITY})
-    @SpecAssertion(section = "2.5", id = "e")
-    @SpecAssertion(section = "2.5", id = "fb")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "e")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "fb")
     public void testSecurityContext(Student student) throws Exception {
         student.printArticle();
         assertTrue(PrinterSecurityInterceptor.securityContextOK);
@@ -70,7 +71,7 @@ public class AroundInvokeAccessInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertion(section = "2.5", id = "fa")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "fa")
     public void testTransactionContext(Foo foo, UserTransaction ut) throws Exception {
         ut.begin();
 

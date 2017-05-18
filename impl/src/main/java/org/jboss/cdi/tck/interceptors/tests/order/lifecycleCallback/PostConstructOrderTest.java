@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.lifecycleCallback;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.ENABLING_INTERCEPTORS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_ORDERING_RULES;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -26,7 +28,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class PostConstructOrderTest extends AbstractTest {
 
     @Deployment
@@ -35,12 +37,10 @@ public class PostConstructOrderTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5", id = "b")
-    @SpecAssertion(section = "5.5", id = "c")
-    @SpecAssertion(section = "5.2.2", id = "a")
-    @SpecAssertion(section = "5.2.1", id = "aa")
-    @SpecAssertion(section = "5.2.1", id = "ab")
-    @SpecAssertion(section = "5.1", id = "a")
+    @SpecAssertion(section = ENABLING_INTERCEPTORS, id = "a")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "c")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "d")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "i")
     public void testInvocationOrder() {
         getContextualReference(LakeCargoShip.class);
         assertEquals(LakeCargoShip.getSequence(), 7);

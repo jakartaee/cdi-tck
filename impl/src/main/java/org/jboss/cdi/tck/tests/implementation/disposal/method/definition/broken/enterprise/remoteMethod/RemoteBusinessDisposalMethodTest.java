@@ -32,7 +32,7 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_EE;
 
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class RemoteBusinessDisposalMethodTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)

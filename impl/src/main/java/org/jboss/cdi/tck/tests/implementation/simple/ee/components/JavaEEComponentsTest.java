@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  *
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = INTEGRATION)
 public class JavaEEComponentsTest extends AbstractTest {
 

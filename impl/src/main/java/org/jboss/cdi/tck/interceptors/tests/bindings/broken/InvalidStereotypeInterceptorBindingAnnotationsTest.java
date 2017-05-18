@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.broken;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_BINDING_TYPES_WITH_MEMBERS;
+
 import javax.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -34,7 +36,7 @@ import org.testng.annotations.Test;
  *
  * @author Martin Kouba
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class InvalidStereotypeInterceptorBindingAnnotationsTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
@@ -54,7 +56,7 @@ public class InvalidStereotypeInterceptorBindingAnnotationsTest extends Abstract
     }
 
     @Test
-    @SpecAssertion(section = "3.4.2", id = "d")
+    @SpecAssertion(section = INT_BINDING_TYPES_WITH_MEMBERS, id = "d")
     public void testInterceptorBindingsWithConflictingAnnotationMembersNotOk() {
     }
 }

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.wrapped;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS;
 import static org.testng.Assert.assertEquals;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -29,7 +30,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class LifecycleCallbackInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -39,8 +40,8 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.6", id = "b")
-    @SpecAssertion(section = "2.6", id = "c")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "b")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "c")
     public void testLifecycleCallbackInterception() {
 
         Bird.reset();

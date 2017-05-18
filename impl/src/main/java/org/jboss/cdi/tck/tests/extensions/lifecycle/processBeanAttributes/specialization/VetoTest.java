@@ -39,7 +39,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @Test
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class VetoTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")

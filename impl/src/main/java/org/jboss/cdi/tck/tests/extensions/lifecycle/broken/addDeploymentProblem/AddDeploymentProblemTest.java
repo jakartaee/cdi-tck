@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
  * @author Dan Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class AddDeploymentProblemTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

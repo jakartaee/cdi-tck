@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @Test(groups = JAVAEE_FULL) // The test archive contains a remote EJB
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class RemoteProducerTest extends AbstractTest {
 
     @Deployment

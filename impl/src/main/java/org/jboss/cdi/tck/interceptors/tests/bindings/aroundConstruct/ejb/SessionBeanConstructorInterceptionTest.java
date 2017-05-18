@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.interceptors.tests.bindings.aroundConstruct.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BINDING_INT_TO_COMPONENT;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_BINDING_TYPES;
 import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
 
 import javax.enterprise.inject.Instance;
@@ -40,7 +42,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class SessionBeanConstructorInterceptionTest extends AbstractTest {
 
     @Deployment
@@ -56,8 +58,8 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "3.1", id = "a")
-    @SpecAssertion(section = "3.1", id = "b")
+    @SpecAssertion(section = INT_BINDING_TYPES, id = "a")
+    @SpecAssertion(section = INT_BINDING_TYPES, id = "b")
     public void testConstructorLevelBinding(Instance<BeanWithConstructorLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -65,8 +67,8 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "3.1", id = "a")
-    @SpecAssertion(section = "3.1", id = "b")
+    @SpecAssertion(section = INT_BINDING_TYPES, id = "a")
+    @SpecAssertion(section = INT_BINDING_TYPES, id = "b")
     public void testTypeLevelBinding(Instance<BeanWithTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -74,7 +76,7 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "3.3", id = "c")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "c")
     public void testTypeLevelAndConstructorLevelBinding(Instance<BeanWithConstructorLevelAndTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
@@ -82,7 +84,7 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "3.3", id = "da")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "da")
     public void testOverridingTypeLevelBinding(Instance<BeanOverridingTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();

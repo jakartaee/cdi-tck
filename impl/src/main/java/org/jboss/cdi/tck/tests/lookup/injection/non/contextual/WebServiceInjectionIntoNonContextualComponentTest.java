@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
  *
  * @author Matus Abaffy
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class WebServiceInjectionIntoNonContextualComponentTest extends AbstractTest {
 
     @ArquillianResource

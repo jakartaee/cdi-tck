@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.environment.jndi;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INTERCEPTOR_ENVIRONMENT;
 import static org.testng.Assert.assertEquals;
 
 import java.io.IOException;
@@ -46,7 +47,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Matus Abaffy
  */
 @RunAsClient
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class InterceptorEnvironmentJNDITest extends AbstractTest {
 
     private static final String GREETING = "greeting";
@@ -101,7 +102,7 @@ public class InterceptorEnvironmentJNDITest extends AbstractTest {
     URL barContextPath;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = "2.2.1", id = "a")
+    @SpecAssertion(section = INTERCEPTOR_ENVIRONMENT, id = "a")
     public void testInterceptorEnvironment() throws FailingHttpStatusCodeException, MalformedURLException, IOException {
 
         WebClient webClient = new WebClient();

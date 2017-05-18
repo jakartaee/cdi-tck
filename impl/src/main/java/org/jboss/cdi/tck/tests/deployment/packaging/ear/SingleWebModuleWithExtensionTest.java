@@ -46,7 +46,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @see https://issues.jboss.org/browse/JBAS-8683
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class SingleWebModuleWithExtensionTest extends AbstractTest {
 
     @Deployment

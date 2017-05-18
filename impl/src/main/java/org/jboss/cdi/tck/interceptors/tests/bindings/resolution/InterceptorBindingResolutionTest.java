@@ -17,6 +17,11 @@
 
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BINDING_INT_TO_COMPONENT;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_BINDING_TYPES_WITH_ADDITIONAL_INT_BINDINGS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_RESOLUTION;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_WITH_MULTIPLE_BINDINGS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.OTHER_SOURCES_OF_INT_BINDINGS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -42,7 +47,7 @@ import org.testng.annotations.Test;
  *
  * @author Martin Kouba
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class InterceptorBindingResolutionTest extends AbstractTest {
 
     @Deployment
@@ -58,14 +63,14 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "3.3", id = "e")
-    @SpecAssertion(section = "3.4", id = "ca")
-    @SpecAssertion(section = "3.4", id = "da")
-    @SpecAssertion(section = "3.4", id = "db")
-    @SpecAssertion(section = "3.4", id = "dc")
-    @SpecAssertion(section = "3.1.2", id = "a")
-    @SpecAssertion(section = "3.1.1", id = "a")
-    @SpecAssertion(section = "3.1.1", id = "b")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "e")
+    @SpecAssertion(section = INT_RESOLUTION, id = "ca")
+    @SpecAssertion(section = INT_RESOLUTION, id = "da")
+    @SpecAssertion(section = INT_RESOLUTION, id = "db")
+    @SpecAssertion(section = INT_RESOLUTION, id = "dc")
+    @SpecAssertion(section = OTHER_SOURCES_OF_INT_BINDINGS, id = "a")
+    @SpecAssertion(section = INT_BINDING_TYPES_WITH_ADDITIONAL_INT_BINDINGS, id = "a")
+    @SpecAssertion(section = INT_BINDING_TYPES_WITH_ADDITIONAL_INT_BINDINGS, id = "b")
     public void testBusinessMethodInterceptorBindings(MessageService messageService, MonitorService monitorService) {
 
         // Test interceptor is resolved (note non-binding member of BallBinding)
@@ -92,8 +97,8 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "3.4", id = "b")
-    @SpecAssertion(section = "3.4.1", id = "a")
+    @SpecAssertion(section = INT_RESOLUTION, id = "b")
+    @SpecAssertion(section = INT_WITH_MULTIPLE_BINDINGS, id = "a")
     public void testLifecycleInterceptorBindings() {
 
         // Test interceptor is resolved (note non-binding member of BallBinding)
@@ -125,8 +130,8 @@ public class InterceptorBindingResolutionTest extends AbstractTest {
     
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertion(section = "3.4", id = "b")
-    @SpecAssertion(section = "3.4", id = "cc")
+    @SpecAssertion(section = INT_RESOLUTION, id = "b")
+    @SpecAssertion(section = INT_RESOLUTION, id = "cc")
     public void testConstructorInterceptorBindings() {
 
         // Test interceptor is resolved

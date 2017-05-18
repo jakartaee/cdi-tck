@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INTERCEPTOR_LIFECYCLE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
@@ -32,7 +33,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class InterceptorLifeCycleTest extends AbstractTest {
 
     @Deployment
@@ -41,7 +42,7 @@ public class InterceptorLifeCycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.2", id = "e")
+    @SpecAssertion(section = INTERCEPTOR_LIFECYCLE, id = "ca")
     public void testInterceptorMethodsCalledAfterDependencyInjection() {
         createCallAndDestroyBazInstance();
         // assertions checking dependency injection are made in interceptors
@@ -51,7 +52,7 @@ public class InterceptorLifeCycleTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.2", id = "ba")
+    @SpecAssertion(section = INTERCEPTOR_LIFECYCLE, id = "ba")
     public void testInterceptorInstanceCreatedWhenTargetInstanceCreated(Instance<Warrior> instance) {
         for (int i = 1; i < 3; i++) {
             createWarriorInstanceAndAssertInterceptorsCount(instance, i);

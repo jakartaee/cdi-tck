@@ -45,7 +45,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @Test(groups = { INTEGRATION, PERSISTENCE })
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class PersistenceContextInjectionTest extends AbstractTest {
 
     @Deployment

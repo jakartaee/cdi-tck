@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct.returnValueIgnored;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -25,7 +27,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class AroundConstructInterceptorReturnValueTest extends AbstractTest {
 
     @Deployment
@@ -34,7 +36,7 @@ public class AroundConstructInterceptorReturnValueTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.6", id = "ia")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "ia")
     public void testAroundConstructInvokedAfterDependencyInjectionOnInterceptorClasses(Foo foo) {
         Assert.assertEquals(foo.getName(), "default");
     }

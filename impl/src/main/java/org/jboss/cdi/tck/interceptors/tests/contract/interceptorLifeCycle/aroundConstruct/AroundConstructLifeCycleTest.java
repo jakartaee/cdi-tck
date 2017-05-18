@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INTERCEPTOR_LIFECYCLE;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -30,7 +31,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class AroundConstructLifeCycleTest extends AbstractTest {
 
     @Deployment
@@ -39,7 +40,7 @@ public class AroundConstructLifeCycleTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.2", id = "da")
+    @SpecAssertion(section = INTERCEPTOR_LIFECYCLE, id = "da")
     public void testAroundConstructInvokedAfterDependencyInjectionOnInterceptorClasses(Instance<Foo> instance) {
         FooCommonInterceptor.reset();
         instance.get();
@@ -48,8 +49,8 @@ public class AroundConstructLifeCycleTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.2", id = "db")
-    @SpecAssertion(section = "2.2", id = "dc")
+    @SpecAssertion(section = INTERCEPTOR_LIFECYCLE, id = "db")
+    @SpecAssertion(section = INTERCEPTOR_LIFECYCLE, id = "dc")
     public void testInstanceNotCreatedUnlessInvocationContextProceedCalled(Instance<Baz> instance) {
         Baz2Interceptor.setProceed(false);
         assertFalse(Baz.postConstructedCalled, "Instance created even though InvocationContext.proceed() was not called.");

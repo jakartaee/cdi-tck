@@ -46,7 +46,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("serial")
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class ResolutionByTypeTest extends AbstractTest {
 
     private static final TypeLiteral<FlightlessBird<Australian>> AUSTRALIAN_FLIGHTLESS_BIRD = new TypeLiteral<FlightlessBird<Australian>>() {

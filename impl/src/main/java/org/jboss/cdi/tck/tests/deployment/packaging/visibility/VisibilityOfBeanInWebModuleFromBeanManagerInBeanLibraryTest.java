@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15721">GLASSFISH-15721</a>
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class VisibilityOfBeanInWebModuleFromBeanManagerInBeanLibraryTest extends AbstractTest {
 
     @Deployment

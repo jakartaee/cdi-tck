@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_ORDERING_RULES;
 import static org.testng.Assert.assertEquals;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -33,7 +35,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class SessionBeanLifecycleInterceptorDefinitionTest extends AbstractTest {
 
     @Deployment
@@ -47,8 +49,8 @@ public class SessionBeanLifecycleInterceptorDefinitionTest extends AbstractTest 
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = "2.6", id = "b")
-    @SpecAssertion(section = "2.6", id = "c")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "b")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "c")
     public void testLifecycleInterception() {
 
         ActionSequence.reset();
@@ -66,12 +68,10 @@ public class SessionBeanLifecycleInterceptorDefinitionTest extends AbstractTest 
     }
 
     @Test(groups = { INTEGRATION })
-    @SpecAssertion(section = "2.6", id = "ea")
-    @SpecAssertion(section = "2.6", id = "eb")
-    @SpecAssertion(section = "2.6", id = "i")
-    @SpecAssertion(section = "5.2.1", id = "aa")
-    @SpecAssertion(section = "5.2.1", id = "ab")
-    @SpecAssertion(section = "5.2.2", id = "a")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "ea")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "eb")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "i")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "i")
     public void testMultipleLifecycleInterceptors() {
 
         ActionSequence.reset();

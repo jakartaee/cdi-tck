@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class NonPassivationManagedBeanHasPassivatingScopeTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)

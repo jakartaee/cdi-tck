@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
  * @author Nicklas Karlsson
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class EnterpriseBeanRemoveMethodTest extends AbstractTest {
 
     @Deployment

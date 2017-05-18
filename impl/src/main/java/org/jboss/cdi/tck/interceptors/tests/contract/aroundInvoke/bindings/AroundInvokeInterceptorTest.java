@@ -16,6 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.bindings;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BUSINESS_METHOD_INTERCEPTOR_METHODS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_ORDERING_RULES;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -28,7 +32,7 @@ import org.testng.annotations.Test;
 /**
  * @author Matus Abaffy
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class AroundInvokeInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -38,11 +42,13 @@ public class AroundInvokeInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.1", id = "aa")
-    @SpecAssertion(section = "2.5", id = "a")
-    @SpecAssertion(section = "2.5", id = "b")
-    @SpecAssertion(section = "2.5", id = "ca")
-    @SpecAssertion(section = "5.2.2", id = "a")
+    @SpecAssertion(section = DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS, id = "ac")
+    @SpecAssertion(section = DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS, id = "aa")
+    @SpecAssertion(section = DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS, id = "ad")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "a")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "b")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "ca")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "h")
     public void testBusinessMethodIntercepted(Foo foo) throws Exception {
         ActionSequence.reset();
         foo.ping();

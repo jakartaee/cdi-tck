@@ -49,7 +49,7 @@ import org.testng.annotations.Test;
  */
 @SuppressWarnings("serial")
 @Test
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class ProducerTest extends AbstractTest {
 
     @Deployment

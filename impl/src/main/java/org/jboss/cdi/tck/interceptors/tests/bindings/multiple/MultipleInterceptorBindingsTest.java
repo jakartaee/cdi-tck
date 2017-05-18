@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.multiple;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BINDING_INT_TO_COMPONENT;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -29,7 +31,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class MultipleInterceptorBindingsTest extends AbstractTest {
 
     @Deployment
@@ -42,11 +44,11 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3", id = "aa")
-    @SpecAssertion(section = "3.3", id = "ba")
-    @SpecAssertion(section = "3.2", id = "a")
-    @SpecAssertion(section = "3.2", id = "b")
-    @SpecAssertion(section = "3.2", id = "c")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "aa")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "ba")
+    @SpecAssertion(section = DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR, id = "a")
+    @SpecAssertion(section = DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR, id = "b")
+    @SpecAssertion(section = DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR, id = "c")
     public void testInterceptorAppliedToBeanWithAllBindings() {
         MissileInterceptor.intercepted = false;
         Missile missile = getContextualReference(FastAndDeadlyMissile.class);
@@ -55,11 +57,11 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3", id = "aa")
-    @SpecAssertion(section = "3.3", id = "ba")
-    @SpecAssertion(section = "3.2", id = "a")
-    @SpecAssertion(section = "3.2", id = "b")
-    @SpecAssertion(section = "3.2", id = "c")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "aa")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "ba")
+    @SpecAssertion(section = DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR, id = "a")
+    @SpecAssertion(section = DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR, id = "b")
+    @SpecAssertion(section = DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR, id = "c")
     public void testInterceptorNotAppliedToBeanWithSomeBindings() {
         MissileInterceptor.intercepted = false;
         Missile missile = getContextualReference(SlowMissile.class);
@@ -68,8 +70,8 @@ public class MultipleInterceptorBindingsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.3", id = "ab")
-    @SpecAssertion(section = "3.3", id = "bb")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "ab")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "bb")
     public void testMultipleInterceptorsOnMethod() {
         LockInterceptor.intercepted = false;
         GuidedMissile bullet = getContextualReference(GuidedMissile.class);

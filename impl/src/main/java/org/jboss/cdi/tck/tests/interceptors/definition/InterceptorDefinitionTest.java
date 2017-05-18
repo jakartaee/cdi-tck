@@ -62,7 +62,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SuppressWarnings("serial")
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class InterceptorDefinitionTest extends AbstractTest {
 
     private static final Transactional.TransactionalLiteral TRANSACTIONAL_LITERAL = new Transactional.TransactionalLiteral("") {

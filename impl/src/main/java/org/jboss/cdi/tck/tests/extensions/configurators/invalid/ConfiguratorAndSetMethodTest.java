@@ -46,7 +46,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 @RunAsClient
 public class ConfiguratorAndSetMethodTest extends AbstractTest {
 

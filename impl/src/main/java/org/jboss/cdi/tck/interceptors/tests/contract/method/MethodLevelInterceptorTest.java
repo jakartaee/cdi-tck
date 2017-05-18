@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.method;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.CONSTRUCTOR_AND_METHOD_LEVEL_INT;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.EXCLUDING_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -26,7 +29,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class MethodLevelInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -35,9 +38,9 @@ public class MethodLevelInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.8", id = "d")
-    @SpecAssertion(section = "4", id = "a")
-    @SpecAssertion(section = "2.8", id = "e")
+    @SpecAssertion(section = CONSTRUCTOR_AND_METHOD_LEVEL_INT, id = "d")
+    @SpecAssertion(section = ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION, id = "a")
+    @SpecAssertion(section = CONSTRUCTOR_AND_METHOD_LEVEL_INT, id = "e")
     public void testInterceptorCanBeAppliedToMoreThanOneMethod() {
         Fish fish = getContextualReference(Fish.class);
         assertEquals(fish.foo(), "Intercepted bar");
@@ -47,7 +50,7 @@ public class MethodLevelInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.5", id = "g")
+    @SpecAssertion(section = EXCLUDING_INTERCEPTORS, id = "b")
     public void testExcludeClassInterceptors() {
         assertEquals(getContextualReference(Dog.class).foo(), "Intercepted bar");
         assertEquals(getContextualReference(Dog.class).ping(), "pong");

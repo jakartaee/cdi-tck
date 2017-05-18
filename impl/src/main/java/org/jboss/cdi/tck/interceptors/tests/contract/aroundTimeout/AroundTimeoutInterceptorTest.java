@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.TestGroups.SECURITY;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.TIMEOUT_METHOD_INT_METHODS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertTrue;
@@ -37,7 +38,7 @@ import org.testng.annotations.Test;
 /**
  * @author Matus Abaffy
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class AroundTimeoutInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -47,8 +48,8 @@ public class AroundTimeoutInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertion(section = "2.7", id = "f")
-    @SpecAssertion(section = "2.7", id = "ea")
+    @SpecAssertion(section = TIMEOUT_METHOD_INT_METHODS, id = "f")
+    @SpecAssertion(section = TIMEOUT_METHOD_INT_METHODS, id = "ea")
     public void testInvocationContextGetTimer(TimingBean timingBean) throws Exception {
         timingBean.createTimer();
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
@@ -65,8 +66,8 @@ public class AroundTimeoutInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = {JAVAEE_FULL, SECURITY})
-    @SpecAssertion(section = "2.7", id = "d")
-    @SpecAssertion(section = "2.7", id = "eb")
+    @SpecAssertion(section = TIMEOUT_METHOD_INT_METHODS, id = "d")
+    @SpecAssertion(section = TIMEOUT_METHOD_INT_METHODS, id = "eb")
     public void testSecurityContext(Student student) throws Exception {
         student.sleep();
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {

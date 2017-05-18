@@ -50,7 +50,7 @@ import org.testng.annotations.Test;
  *
  * @author Matus Abaffy
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class InterceptorModularityTest extends AbstractTest {
 
     private static final String TEST1_JAR = "test1.jar";

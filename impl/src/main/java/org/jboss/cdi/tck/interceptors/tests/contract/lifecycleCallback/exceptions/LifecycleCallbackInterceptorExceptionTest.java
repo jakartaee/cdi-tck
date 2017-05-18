@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptions;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.LIC_EXCEPTIONS;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -28,7 +29,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class LifecycleCallbackInterceptorExceptionTest extends AbstractTest {
 
     @Deployment
@@ -37,20 +38,20 @@ public class LifecycleCallbackInterceptorExceptionTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = RuntimeException.class)
-    @SpecAssertion(section = "2.6.1", id = "a")
+    @SpecAssertion(section = LIC_EXCEPTIONS, id = "a")
     public void testPostConstructCanThrowRuntimeException() {
         getContextualReference(Sheep.class);
     }
 
     @Test
-    @SpecAssertion(section = "2.6.1", id = "b")
+    @SpecAssertion(section = LIC_EXCEPTIONS, id = "b")
     public void testLifecycleCallbackInterceptorCanCatchException() {
         getContextualReference(Goat.class);
         assertTrue(GoatInterceptor.isExceptionCaught());
     }
 
     @Test
-    @SpecAssertion(section = "2.6.1", id = "c")
+    @SpecAssertion(section = LIC_EXCEPTIONS, id = "c")
     public void testPreDestroyNotInvokedWhenInstanceDiscarded() {
         try {
             getContextualReference(Cat.class);

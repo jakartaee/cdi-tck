@@ -54,7 +54,7 @@ import org.testng.annotations.Test;
  * @see WELD-1272
  * @see CDI-256
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class ParameterizedEventTest extends AbstractTest {
 
     @Inject

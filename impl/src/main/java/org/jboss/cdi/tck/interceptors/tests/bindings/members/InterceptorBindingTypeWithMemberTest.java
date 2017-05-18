@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.members;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_BINDING_TYPES_WITH_MEMBERS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -42,7 +43,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptos", version = "1.2")
 public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
 
     @SuppressWarnings("serial")
@@ -64,7 +65,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.4.2", id = "a")
+    @SpecAssertion(section = INT_BINDING_TYPES_WITH_MEMBERS, id = "a")
     public void testInterceptorBindingTypeWithMember() {
         Farm farm = getContextualReference(Farm.class);
         assertEquals(farm.getAnimalCount(), 20);
@@ -73,7 +74,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "3.4.2", id = "c")
+    @SpecAssertion(section = INT_BINDING_TYPES_WITH_MEMBERS, id = "c")
     public void testInterceptorBindingTypeWithNonBindingMember() {
         Farm farm = getContextualReference(Farm.class);
         assert farm.getVehicleCount() == 20;
@@ -86,7 +87,7 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
      * values are considered equal when resolving interceptor (interceptor is resolved and applied).
      */
     @Test
-    @SpecAssertion(section = "3.4.2", id = "b")
+    @SpecAssertion(section = INT_BINDING_TYPES_WITH_MEMBERS, id = "b")
     public void testInterceptorBindingTypeMemberValuesComparedWithEquals() {
 
         @SuppressWarnings("serial")

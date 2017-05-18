@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.EXCEPTIONS;
 import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -26,7 +27,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class ExceptionTest extends AbstractTest {
 
     @Deployment
@@ -35,17 +36,17 @@ public class ExceptionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.4", id = "a")
-    @SpecAssertion(section = "2.4", id = "ba")
-    @SpecAssertion(section = "2.4", id = "c")
+    @SpecAssertion(section = EXCEPTIONS, id = "a")
+    @SpecAssertion(section = EXCEPTIONS, id = "ba")
+    @SpecAssertion(section = EXCEPTIONS, id = "c")
     public void testExceptions1() throws Exception {
         assertTrue(getContextualReference(SimpleBean.class).foo());
     }
 
     @Test
-    @SpecAssertion(section = "2.4", id = "a")
-    @SpecAssertion(section = "2.4", id = "ba")
-    @SpecAssertion(section = "2.4", id = "bb")
+    @SpecAssertion(section = EXCEPTIONS, id = "a")
+    @SpecAssertion(section = EXCEPTIONS, id = "ba")
+    @SpecAssertion(section = EXCEPTIONS, id = "bb")
     public void testExceptions2() throws Exception {
         assertTrue(getContextualReference(ExceptionBean.class).bar());
     }

@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class LongRunningConversationPropagatedByFacesContextTest extends AbstractConversationTest {
 
     private static final String STORM_STRENGTH = "12";

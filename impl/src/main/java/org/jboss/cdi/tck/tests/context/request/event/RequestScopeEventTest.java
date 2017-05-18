@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class RequestScopeEventTest extends AbstractTest {
 
     @ArquillianResource(Servlet.class)

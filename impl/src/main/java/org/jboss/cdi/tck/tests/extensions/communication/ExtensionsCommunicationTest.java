@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
 /**
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class ExtensionsCommunicationTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")

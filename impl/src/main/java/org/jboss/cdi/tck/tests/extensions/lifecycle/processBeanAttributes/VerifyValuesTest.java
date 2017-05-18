@@ -63,7 +63,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @Test
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class VerifyValuesTest extends AbstractTest {
 
     @Inject

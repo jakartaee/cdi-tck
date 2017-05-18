@@ -40,7 +40,7 @@ import org.testng.annotations.Test;
  *
  */
 @Test(groups = JAVAEE_FULL)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class BuiltinUserTransactionDecoratorTest extends AbstractTest {
 
     @Inject

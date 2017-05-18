@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.overriden.lifecycleCallback;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_ORDERING_RULES;
 import static org.testng.Assert.assertEquals;
 
 import javax.enterprise.context.spi.CreationalContext;
@@ -29,7 +30,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class OverridenLifecycleCallbackInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -38,7 +39,7 @@ public class OverridenLifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.1", id = "bb")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "j")
     public void testCallbackOverridenByCallback() {
 
         Bird.reset();
@@ -58,7 +59,7 @@ public class OverridenLifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "5.2.1", id = "bb")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "j")
     public void testCallbackOverridenByNonCallback() {
 
         Bird.reset();

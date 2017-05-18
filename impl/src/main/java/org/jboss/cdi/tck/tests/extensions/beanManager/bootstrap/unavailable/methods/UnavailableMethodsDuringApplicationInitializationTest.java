@@ -34,7 +34,7 @@ import static org.jboss.cdi.tck.cdi.Sections.BEANMANAGER;
  * @author Martin Kouba
  * @author Tomas Remes
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class UnavailableMethodsDuringApplicationInitializationTest extends AbstractTest {
 
     @Deployment

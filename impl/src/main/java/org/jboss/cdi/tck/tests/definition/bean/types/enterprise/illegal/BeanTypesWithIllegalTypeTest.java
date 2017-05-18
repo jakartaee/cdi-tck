@@ -38,7 +38,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @Test(groups = TestGroups.INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class BeanTypesWithIllegalTypeTest extends AbstractTest {
 
     @Deployment

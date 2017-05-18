@@ -45,7 +45,7 @@ import org.testng.annotations.Test;
  * @author Matus Abaffy
  */
 @SuppressWarnings("serial")
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
 
     private static final Class<?>[] RESULT_TYPES = new Class<?>[] { ResultImpl.class, Result.class, Object.class };

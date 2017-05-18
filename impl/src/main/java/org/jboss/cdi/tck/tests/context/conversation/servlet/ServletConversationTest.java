@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class ServletConversationTest extends AbstractTest {
 
     private final String CONVERSATION_CREATED = "conversationCreated";

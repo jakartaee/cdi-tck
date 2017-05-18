@@ -55,7 +55,7 @@ import org.testng.annotations.Test;
  * @author Shane Bryzak
  * @author Jozef Hartinger
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class DynamicLookupTest extends AbstractTest {
 
     @Deployment

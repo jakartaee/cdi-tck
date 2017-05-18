@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
 /**
  * @author Mark Paluch
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class EventObserverOrderingTest extends AbstractTest {
 
     @Deployment

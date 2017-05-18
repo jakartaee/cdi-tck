@@ -44,7 +44,7 @@ import org.testng.annotations.Test;
  * @author Tomas Remes
  */
 @Test(groups = SE)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class TrimmedBeanArchiveSETest extends Arquillian {
 
     @Deployment

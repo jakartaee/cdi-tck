@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
  * @author Tomas Remes
  */
 @Test(groups = TestGroups.INTEGRATION)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class EnterpriseTrimmedBeanArchiveTest extends AbstractTest {
 
     @Inject

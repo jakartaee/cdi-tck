@@ -332,9 +332,9 @@
                                             <classifier>coverage-mb</classifier>
                                         </artifact>
                                         <artifact>
-                                            <file>../target/coverage-int.html</file>
+                                            <file>../target/coverage-interceptors.html</file>
                                             <type>html</type>
-                                            <classifier>coverage-int</classifier>
+                                            <classifier>coverage-interceptors</classifier>
                                         </artifact>
                                     </artifacts>
                                 </configuration>
@@ -374,6 +374,26 @@
                                     </arguments>
                                 </configuration>
                             </execution>
+                            <execution>
+                                <id>interceptors-sections</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <mainClass>org.jboss.test.audit.generate.SectionsClassGenerator</mainClass>
+                                    <arguments>
+                                        <!-- auditFilePath -->
+                                        <argument>${basedir}/src/main/resources/tck-audit-int.xml</argument>
+                                        <!-- packageBase -->
+                                        <argument>org.jboss.cdi.tck</argument>
+                                        <!-- outputDirPath -->
+                                        <argument>${basedir}/target/generated-sources/audit</argument>
+                                        <argument>InterceptorsSections</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+
                         </executions>
                     </plugin>
                 </plugins>

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.overriding;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BINDING_INT_TO_COMPONENT;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_BINDING_TYPES_WITH_MEMBERS;
 import static org.testng.Assert.assertEquals;
 
 import javax.inject.Inject;
@@ -40,7 +42,7 @@ import org.testng.annotations.Test;
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class InterceptorBindingOverridingTest extends AbstractTest {
 
     @Deployment
@@ -59,8 +61,8 @@ public class InterceptorBindingOverridingTest extends AbstractTest {
     Pony pony;
 
     @Test
-    @SpecAssertion(section = "3.3", id = "db")
-    @SpecAssertion(section = "3.4.2", id = "a")
+    @SpecAssertion(section = BINDING_INT_TO_COMPONENT, id = "db")
+    @SpecAssertion(section = INT_BINDING_TYPES_WITH_MEMBERS, id = "a")
     public void testInterceptorBindingOverriden() {
         // getAge() returns 3, SlowAgingInterceptor adds one (4) and NegatingInterceptor negates (-4)
         assertEquals(pony.getAge(), -4);

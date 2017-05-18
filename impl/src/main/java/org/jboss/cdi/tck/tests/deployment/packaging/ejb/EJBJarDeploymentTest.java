@@ -44,7 +44,7 @@ import org.testng.annotations.Test;
 /**
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class EJBJarDeploymentTest extends AbstractTest {
 
     @Deployment(name = "EJB", order = 2, testable = false)

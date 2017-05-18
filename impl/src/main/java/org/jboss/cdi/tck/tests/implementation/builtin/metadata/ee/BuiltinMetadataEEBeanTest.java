@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
  */
 @Test(groups = JAVAEE_FULL)
 @RunAsClient
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class BuiltinMetadataEEBeanTest extends AbstractTest {
 
     @Deployment(testable = false)

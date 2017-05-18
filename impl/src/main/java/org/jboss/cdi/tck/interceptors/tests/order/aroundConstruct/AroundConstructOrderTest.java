@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.aroundConstruct;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.ENABLING_INTERCEPTORS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_ORDERING_RULES;
 import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
 
 import javax.enterprise.inject.Instance;
@@ -29,7 +31,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class AroundConstructOrderTest extends AbstractTest {
 
     @Deployment
@@ -38,10 +40,11 @@ public class AroundConstructOrderTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "5.2.2", id = "a")
-    @SpecAssertion(section = "5.5", id = "c")
-    @SpecAssertion(section = "5.5", id = "e")
-    @SpecAssertion(section = "5.1", id = "a")
+    @SpecAssertion(section = ENABLING_INTERCEPTORS, id = "a")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "c")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "d")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "e")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "f")
     public void testInvocationOrder(Instance<Foo> instance) {
         ActionSequence.reset();
         instance.get();

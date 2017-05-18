@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout.bindings;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_ORDERING_RULES;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INVOCATIONCONTEXT;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.TIMEOUT_METHOD_INT_METHODS;
 import static org.testng.Assert.assertNotNull;
 
 import java.util.concurrent.TimeUnit;
@@ -35,7 +38,7 @@ import org.testng.annotations.Test;
 /**
  * @author Matus Abaffy
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class AroundTimeoutOrderInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -45,12 +48,11 @@ public class AroundTimeoutOrderInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertion(section = "2.3", id = "hb")
-    @SpecAssertion(section = "2.7", id = "ba")
-    @SpecAssertion(section = "2.7", id = "bb")
-    @SpecAssertion(section = "5.2.1", id = "aa")
-    @SpecAssertion(section = "5.2.1", id = "ab")
-    @SpecAssertion(section = "5.2.2", id = "a")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "hb")
+    @SpecAssertion(section = TIMEOUT_METHOD_INT_METHODS, id = "ba")
+    @SpecAssertion(section = TIMEOUT_METHOD_INT_METHODS, id = "bb")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "h")
+    @SpecAssertion(section = INT_ORDERING_RULES, id = "i")
     public void testTimeoutMethodIntercepted(TimingBean timing) throws Exception {
         ActionSequence.reset();
 

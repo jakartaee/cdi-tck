@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
  * This test was originally part of the Weld testsuite.
  */
 @Test(groups = { INTEGRATION })
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class TransactionalObserverRollbackTest extends AbstractTest{
 
     @Inject

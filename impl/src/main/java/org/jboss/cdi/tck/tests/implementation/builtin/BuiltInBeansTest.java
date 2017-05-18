@@ -42,7 +42,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @Test(groups = JAVAEE_FULL)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class BuiltInBeansTest extends AbstractTest {
 
     @Deployment

@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 /**
  * This test was originally part of the Weld testsuite.
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class NonDependentDecoratorTest extends AbstractTest {
 
     @Deployment

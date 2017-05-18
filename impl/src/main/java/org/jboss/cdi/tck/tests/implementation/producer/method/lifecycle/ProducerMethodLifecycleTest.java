@@ -42,7 +42,7 @@ import org.testng.annotations.Test;
 /**
  * NOTE May be able to get rid of some of the binding types if the producer method precedence question is resolved
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class ProducerMethodLifecycleTest extends AbstractTest {
     private AnnotationLiteral<Pet> PET_LITERAL = new AnnotationLiteral<Pet>() {
     };

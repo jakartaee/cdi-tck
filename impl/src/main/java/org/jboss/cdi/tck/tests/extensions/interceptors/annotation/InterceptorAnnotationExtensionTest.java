@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptors.annotation;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION;
 import static org.testng.Assert.assertEquals;
 
 import javax.inject.Inject;
@@ -28,7 +29,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class InterceptorAnnotationExtensionTest extends AbstractTest {
 
     @Inject
@@ -42,7 +43,7 @@ public class InterceptorAnnotationExtensionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "4", id = "a")
+    @SpecAssertion(section = ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION, id = "a")
     public void testInterceptorAddedByExtension() {
         assertEquals("intercepted", bean.simpleMethod());
     }

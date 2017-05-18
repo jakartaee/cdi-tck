@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.CONSTRUCTOR_AND_METHOD_LEVEL_INT;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -32,7 +35,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class LifecycleCallbackInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -41,8 +44,8 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.1", id = "ab")
-    @SpecAssertion(section = "2.6", id = "b")
+    @SpecAssertion(section = DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS, id = "ab")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "b")
     public void testPostConstructInterceptor() {
         getContextualReference(Goat.class);
         assertTrue(Goat.isPostConstructInterceptorCalled());
@@ -56,8 +59,8 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.1", id = "ab")
-    @SpecAssertion(section = "2.6", id = "c")
+    @SpecAssertion(section = DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS, id = "ab")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "c")
     public void testPreDestroyInterceptor() {
         createAndDestroyInstance(Goat.class);
         assertTrue(Goat.isPreDestroyInterceptorCalled());
@@ -71,7 +74,7 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.6", id = "f")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "f")
     public void testSingleMethodInterposingMultipleLifecycleCallbackEvents() {
         AlmightyLifecycleInterceptor.reset();
         Dog.reset();
@@ -91,42 +94,42 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = "2.1", id = "ab")
-    @SpecAssertion(section = "2.1", id = "d")
+    @SpecAssertion(section = DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS, id = "ab")
+    @SpecAssertion(section = DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS, id = "d")
     public void testAroundInvokeAndLifeCycleCallbackInterceptorsCanBeDefinedOnTheSameClass() {
         assertEquals(getContextualReference(Goat.class).echo("foo"), "foofoo");
     }
 
     @Test
-    @SpecAssertion(section = "2.6", id = "ja")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "ja")
     public void testPublicLifecycleInterceptorMethod() {
         getContextualReference(Chicken.class);
         assertTrue(PublicLifecycleInterceptor.isIntercepted());
     }
 
     @Test
-    @SpecAssertion(section = "2.6", id = "jc")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "jc")
     public void testProtectedLifecycleInterceptorMethod() {
         getContextualReference(Chicken.class);
         assertTrue(ProtectedLifecycleInterceptor.isIntercepted());
     }
 
     @Test
-    @SpecAssertion(section = "2.6", id = "jb")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "jb")
     public void testPrivateLifecycleInterceptorMethod() {
         getContextualReference(Chicken.class);
         assertTrue(PrivateLifecycleInterceptor.isIntercepted());
     }
 
     @Test
-    @SpecAssertion(section = "2.6", id = "jd")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "jd")
     public void testPackagePrivateLifecycleInterceptorMethod() {
         getContextualReference(Chicken.class);
         assertTrue(PackagePrivateLifecycleInterceptor.isIntercepted());
     }
 
     @Test
-    @SpecAssertion(section = "2.8", id = "b")
+    @SpecAssertion(section = CONSTRUCTOR_AND_METHOD_LEVEL_INT, id = "b")
     public void testLifeCycleCallbackInterceptorNotInvokedForMethodLevelInterceptor() {
         assertEquals(getContextualReference(Sheep.class).foo(), "bar");
         assertTrue(SheepInterceptor.isAroundInvokeCalled());
@@ -134,7 +137,7 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = "2.6", id = "h")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "h")
     public void testLifecycleCallbackInterceptorTransactionContext() {
         createAndDestroyInstance(Cat.class);
         // checks are done in CatInterceptor

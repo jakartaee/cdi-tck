@@ -17,6 +17,8 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.bindings.ejb;
 
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BUSINESS_METHOD_INTERCEPTOR_METHODS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS;
 import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -34,7 +36,7 @@ import org.testng.annotations.Test;
 /**
  * @author Matus Abaffy
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class SessionBeanAroundInvokeInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -44,10 +46,10 @@ public class SessionBeanAroundInvokeInterceptorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertion(section = "2.1", id = "aa")
-    @SpecAssertion(section = "2.5", id = "a")
-    @SpecAssertion(section = "2.5", id = "b")
-    @SpecAssertion(section = "2.5", id = "ca")
+    @SpecAssertion(section = DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS, id = "aa")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "a")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "b")
+    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "ca")
     public void testBusinessMethodIntercepted(Foo foo) throws Exception {
         ActionSequence.reset();
         foo.ping();

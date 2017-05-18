@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Test(groups = SE)
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class InvalidContextualReferenceTest extends Arquillian {
     
     @Deployment

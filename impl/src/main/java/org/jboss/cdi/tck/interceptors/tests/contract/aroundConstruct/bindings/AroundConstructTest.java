@@ -16,6 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct.bindings;
 
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INVOCATIONCONTEXT;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.LIC_EXCEPTIONS;
 import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -43,7 +47,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  * @author Matus Abaffy
  */
-@SpecVersion(spec = "int", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "1.2")
 public class AroundConstructTest extends AbstractTest {
 
     @Deployment
@@ -59,10 +63,10 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.3", id = "c")
-    @SpecAssertion(section = "2.3", id = "eb")
-    @SpecAssertion(section = "2.3", id = "f")
-    @SpecAssertion(section = "2.6", id = "a")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "c")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "eb")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "f")
+    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "a")
     public void testInterceptorInvocation(Instance<Alpha> instance) {
         ActionSequence.reset();
         instance.get();
@@ -70,8 +74,7 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.3", id = "ga")
-    @SpecAssertion(section = "2.1", id = "e")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "ga")
     public void testReplacingParameters(Instance<Bravo> instance) {
         ActionSequence.reset();
         Bravo bravo = instance.get();
@@ -81,9 +84,9 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = "2.6.1", id = "a")
-    @SpecAssertion(section = "2.6.1", id = "b")
-    @SpecAssertion(section = "3.2", id = "c")
+    @SpecAssertion(section = LIC_EXCEPTIONS, id = "a")
+    @SpecAssertion(section = LIC_EXCEPTIONS, id = "b")
+    @SpecAssertion(section = DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR, id = "c")
     public void testExceptions(Instance<Charlie> instance) {
         ActionSequence.reset();
         try {

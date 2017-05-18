@@ -55,7 +55,7 @@ import org.testng.annotations.Test;
  * @author David Allen
  * @author Jozef Hartinger
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class InjectionPointTest extends AbstractTest {
 
     @Deployment

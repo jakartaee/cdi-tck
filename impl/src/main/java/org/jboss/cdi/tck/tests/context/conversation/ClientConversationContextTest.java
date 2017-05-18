@@ -45,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
  * @author Dan Allen
  * @author Martin Kouba
  */
-@SpecVersion(spec = "cdi", version = "2.0-PFD")
+@SpecVersion(spec = "cdi", version = "2.0")
 public class ClientConversationContextTest extends AbstractConversationTest {
 
     @Deployment(testable = false)
