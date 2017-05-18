@@ -31,6 +31,15 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-574 -->
+            <class name="org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ContainerEventTest">
+                <methods>
+                    <exclude name="testProcessAnnotatedTypeEventFiredForFilter"/>
+                    <exclude name="testProcessAnnotatedTypeEventFiredForTagLibraryListener"/>
+                    <exclude name="testProcessAnnotatedTypeEventFiredForServletListener"/>
+                </methods>
+            </class>
+
         </classes>
 
     </test>
