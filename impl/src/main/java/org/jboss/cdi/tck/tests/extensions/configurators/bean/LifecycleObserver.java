@@ -166,6 +166,7 @@ public class LifecycleObserver implements Extension {
         bogey.beanClass(Bogey.class);
         bogey.addType(Bogey.class);
         bogey.addQualifier(Undead.UndeadLiteral.INSTANCE);
+        bogey.produceWith(obj -> new Bogey());
     }
 
     private void configureWerewolf(BeanManager bm, BeanConfigurator<Werewolf> werewolf){
@@ -174,6 +175,7 @@ public class LifecycleObserver implements Extension {
         Set<Class<? extends Annotation>> stereotypes = new HashSet<>();
         stereotypes.add(Model.class);
         werewolf.stereotypes(stereotypes);
+        werewolf.produceWith(obj -> new Werewolf());
     }
 
     void processSkeletonBean(@Observes ProcessSyntheticBean<Skeleton> event) {
