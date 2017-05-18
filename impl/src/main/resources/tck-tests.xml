@@ -23,6 +23,13 @@
         </packages>
 
         <classes>
+            
+            <!-- CDITCK-573 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.configurators.bean.BeanConfiguratorTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
 
         </classes>
 
