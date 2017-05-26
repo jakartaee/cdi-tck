@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types.enterprise.illegal;
 
-import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.SESSION_BEAN_TYPES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
@@ -43,7 +42,8 @@ public class BeanTypesWithIllegalTypeTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(BeanTypesWithIllegalTypeTest.class).withWebXml("web.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(BeanTypesWithIllegalTypeTest.class)
+                .build();
     }
 
     @Test
@@ -59,8 +59,9 @@ public class BeanTypesWithIllegalTypeTest extends AbstractTest {
         assertEquals(birdBean.getTypes().size(), 2);
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = RESOURCE_TYPES, id = "b") })
+    @Test(enabled = false)
+    // disabled due to CDITCK-575 and marked as testable false
+    // @SpecAssertions({ @SpecAssertion(section = RESOURCE_TYPES, id = "b") })
     public void resourceBeanTypesContainsOnlyLegalTypes() {
 
         Bean<Dog> dogBean = getUniqueBean(Dog.class, Produced.ProducedLiteral.INSTANCE);

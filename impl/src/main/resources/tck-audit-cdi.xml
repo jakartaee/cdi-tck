@@ -9487,7 +9487,7 @@
                 <text>Check @WebServiceRef</text>
             </assertion>
         </group>
-        <assertion id="b">
+        <assertion id="b" testable="false">
             <text>The resulting set of bean types for a resource consists only of legal bean types, all other types are
                 removed from the set of bean types.
             </text>
