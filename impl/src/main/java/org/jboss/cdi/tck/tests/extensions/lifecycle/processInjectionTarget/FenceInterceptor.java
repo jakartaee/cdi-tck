@@ -16,11 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
+import java.io.Serializable;
+
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 
-public class FenceInterceptor {
+public class FenceInterceptor implements Serializable {
 
     @Inject Sheep sheep;
 
@@ -31,7 +33,6 @@ public class FenceInterceptor {
 
         return ctx.proceed();
     }
-
 
     public static boolean isIsWrappedInjectionSuccessfull() {
         return isWrappedInjectionSuccessfull;

@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
-public class Sheep {
+import java.io.Serializable;
+
+public class Sheep implements Serializable {
 
 }
