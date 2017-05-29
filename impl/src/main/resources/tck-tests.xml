@@ -47,6 +47,28 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-576 -->
+            <class name="org.jboss.cdi.tck.tests.context.passivating.dependency.builtin.BuiltinBeanPassivationDependencyTest">
+                <methods>
+                    <exclude name="testInjectionPoint"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-578 -->
+            <class name="org.jboss.cdi.tck.tests.definition.bean.custom.CustomBeanImplementationTest">
+                <methods>
+                    <exclude name="testCustomBeanIsPassivationCapable"/>
+                    <exclude name="testCustomBeanIsPassivationCapableDependency"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-579 -->
+            <class name="org.jboss.cdi.tck.tests.definition.bean.custom.CustomBeanImplementationTest">
+                <methods>
+                    <exclude name="testInjectionPointGetMemberIsUsedToDetermineTheClassThatDeclaresAnInjectionPoint"/>
+                </methods>
+            </class>
+
         </classes>
 
     </test>
