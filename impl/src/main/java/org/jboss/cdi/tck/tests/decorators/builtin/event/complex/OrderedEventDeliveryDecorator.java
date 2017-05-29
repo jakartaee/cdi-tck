@@ -30,7 +30,6 @@ import javax.decorator.Delegate;
 import javax.enterprise.event.Event;
 import javax.enterprise.event.NotificationOptions;
 import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.ObserverMethod;
 import javax.enterprise.util.TypeLiteral;
 import javax.inject.Inject;
@@ -50,9 +49,9 @@ public class OrderedEventDeliveryDecorator<T> implements Event<T>, Serializable 
     }
 
     @Inject
-    public OrderedEventDeliveryDecorator(@Delegate Event<T> delegate, InjectionPoint ip, BeanManager manager,
+    public OrderedEventDeliveryDecorator(@Delegate Event<T> delegate, BeanManager manager,
             OrderedEventDeliveryExtension extension) {
-        this.qualifiers = new HashSet<Annotation>(ip.getQualifiers());
+        this.qualifiers = new HashSet<Annotation>();
         this.manager = manager;
         this.comparator = new ObserverMethodComparator(extension);
     }

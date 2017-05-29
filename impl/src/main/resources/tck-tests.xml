@@ -23,7 +23,14 @@
         </packages>
 
         <classes>
-            
+
+            <!-- CDITCK-432 -->
+            <class name="org.jboss.cdi.tck.tests.decorators.builtin.event.complex.ComplexEventDecoratorTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
             <!-- CDITCK-573 -->
             <class name="org.jboss.cdi.tck.tests.extensions.configurators.bean.BeanConfiguratorTest">
                 <methods>
