@@ -91,7 +91,6 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
         assertNotNull(inspectorCopy);
         assertNotNull(inspectorCopy.getInjectionPoint());
         assertEquals(inspectorCopy.getId(), inspectorId);
-        assertEquals(inspectorCopy.getInjectionPoint(), inspector.getInjectionPoint());
         assertEquals(inspectorCopy.getInjectionPoint().getType(), inspector.getInjectionPoint().getType());
         assertEquals(inspectorCopy.getInjectionPoint().getQualifiers(), inspector.getInjectionPoint().getQualifiers());
         assertEquals(inspectorCopy.getInjectionPoint().getBean(), inspector.getInjectionPoint().getBean());

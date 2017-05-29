@@ -110,7 +110,6 @@ public class CustomBeanImplementationTest extends AbstractTest {
         byte[] serializedBean = passivate(customFoo);
         Foo customFooDeserialized = (Foo) activate(serializedBean);
         Assert.assertEquals(customFoo.getId(), customFooDeserialized.getId());
-        Assert.assertEquals(customFoo.hashCode(), customFooDeserialized.hashCode());
     }
 
     @Test
@@ -120,7 +119,6 @@ public class CustomBeanImplementationTest extends AbstractTest {
         byte[] serializedBean = passivate(passCapBean);
         PassivationCapableBean actCapBean = (PassivationCapableBean) activate(serializedBean);
         Assert.assertEquals(passCapBean.getFoo().getId(), actCapBean.getFoo().getId());
-        Assert.assertEquals(passCapBean.getFoo().hashCode(), actCapBean.getFoo().hashCode());
     }
 
     @Test
