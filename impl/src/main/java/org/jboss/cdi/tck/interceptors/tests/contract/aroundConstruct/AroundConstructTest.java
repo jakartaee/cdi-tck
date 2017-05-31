@@ -61,7 +61,7 @@ public class AroundConstructTest extends AbstractTest {
     @SpecAssertion(section =  INVOCATIONCONTEXT, id = "eb")
     @SpecAssertion(section =  INVOCATIONCONTEXT, id = "f")
     @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "a")
-    @SpecAssertion(section = ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION, id = "e")
+    @SpecAssertion(section = ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION, id = "c")
     public void testInterceptorInvocation(Instance<Alpha> instance) {
         ActionSequence.reset();
         instance.get();

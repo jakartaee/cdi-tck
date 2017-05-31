@@ -874,40 +874,44 @@
             </text>
         </assertion>
 
-        <assertion id="b" testable="false">
+        <assertion id="b">
+            <text>Method-level around-invoke and around-timeout interceptors can be defined by applying the |Interceptors| annotation to the method for which
+                the interceptors are to be invoked.
+            </text>
+        </assertion>
+
+        <assertion id="c">
+            <text>Constructor-level interceptors can be defined by applying the |Interceptors| annotation to the constructor for which the interceptors are to
+                be invoked.
+            </text>
+        </assertion>
+
+        <assertion id="ca" testable="false">
+            <text>Constructor- and method-level interceptors are invoked in addition to any default interceptors and interceptors defined for
+                the target class (and its superclasses).
+            </text>
+            <note>Tested in section 5.</note>
+        </assertion>
+
+        <assertion id="d" testable="false">
             <text>If multiple interceptors are defined for the target class in the Interceptors annotation, they are invoked in the order in which they are
                 specified. See Chapter 5 for the rules on interceptors ordering.
             </text>
             <note>Tested in section 5.</note>
         </assertion>
 
-        <assertion id="c" testable="false">
-            <text>If a deployment descriptor is supported, it can be used to associate interceptor classes with the target class, and/or methods, and/or a
-                constructor of the target class and specify the order of interceptor invocation or override metadata specified by annotations.
-            </text>
-            <note>Should be tested in the EJB TCK.</note>
-        </assertion>
-
-        <assertion id="d">
-            <text>Method-level around-invoke and around-timeout interceptors can be defined by applying the |Interceptors| annotation to the method for which
-                the interceptors are to be invoked.
-            </text>
-        </assertion>
-
         <assertion id="e">
-            <text>Constructor-level interceptors can be defined by applying the |Interceptors| annotation to the constructor for which the interceptors are to
-                be invoked.
+            <text>The Interceptor annotation is ignored on interceptor classes bound using the Interceptors
+                annotation.
             </text>
         </assertion>
 
         <assertion id="f" testable="false">
-            <text>If more than one constructor- or method-level interceptor is defined for a target class constructor or method, the interceptors are invoked in
-                the order specified. Constructor- and method-level interceptors are invoked in addition to any default interceptors and interceptors defined for
-                the target class (and its superclasses).
+            <text>
+                An extension specification may support the use of a deployment descriptor to associate interceptor classes with a target class, and/or method or
+                constructor of a target class, and to specify the order of interceptor invocation or override metadata specified by annotations.
             </text>
-            <note>Tested in section 5.</note>
         </assertion>
-
     </section>
 
     <section id="int_ordering" title="Interceptor Ordering" level="1">

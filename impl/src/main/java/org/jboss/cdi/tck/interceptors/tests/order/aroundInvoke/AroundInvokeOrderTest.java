@@ -41,7 +41,7 @@ public class AroundInvokeOrderTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION, id = "a")
-    @SpecAssertion(section = ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION, id = "d")
+    @SpecAssertion(section = ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION, id = "b")
     @SpecAssertion(section = INVOCATIONCONTEXT, id = "ha")
     @SpecAssertion(section = ENABLING_INTERCEPTORS, id = "a")
     @SpecAssertion(section = INT_ORDERING_RULES, id = "c")
