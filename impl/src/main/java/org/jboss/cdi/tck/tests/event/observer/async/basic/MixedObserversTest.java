@@ -92,8 +92,6 @@ public class MixedObserversTest extends AbstractTest {
         assertTrue(experiment2.getUniversities().contains(MassachusettsInstituteObserver.class));
 
         assertNotEquals(threadId, MassachusettsInstituteObserver.threadId.get());
-        assertEquals(MassachusettsInstituteObserver.threadId.get(), StandfordUniversityObserver.threadId.get());
-
     }
 
 }
