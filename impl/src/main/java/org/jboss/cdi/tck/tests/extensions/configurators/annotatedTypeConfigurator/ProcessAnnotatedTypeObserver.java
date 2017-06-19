@@ -96,8 +96,8 @@ public class ProcessAnnotatedTypeObserver implements Extension {
                 .remove(a -> a.equals(InjectLiteral.INSTANCE));
 
         // remove @Inject and @Cats from constructor with parameter
-        annotatedTypeConfigurator.filterConstructors(ac -> ac.getParameters().size() > 0).findFirst().get().remove(a -> a.equals(InjectLiteral.INSTANCE))
-                .filterParams(ap -> ap.getPosition() == 0).findFirst().get().remove(a -> a.equals(Cats.CatsLiteral.INSTANCE));
+        annotatedTypeConfigurator.filterConstructors(ac -> ac.getParameters().size() == 1 && ac.getParameters().get(0).getBaseType().equals(Feed.class))
+                .findFirst().get().remove(a -> a.equals(InjectLiteral.INSTANCE)).params().get(0).remove(a -> a.equals(Cats.CatsLiteral.INSTANCE));
 
         // remove @Observes from Cat.observesCatsFeed method parameter
         getAMConfiguratorByName(annotatedTypeConfigurator, "observesCatsFeed")
