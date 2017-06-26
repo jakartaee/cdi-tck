@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
@@ -24,7 +25,6 @@ import javax.enterprise.inject.literal.InjectLiteral;
 import javax.enterprise.inject.spi.AnnotatedConstructor;
 import javax.enterprise.inject.spi.AnnotatedField;
 import javax.enterprise.inject.spi.AnnotatedMethod;
-import javax.enterprise.inject.spi.AnnotatedParameter;
 import javax.enterprise.inject.spi.AnnotatedType;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.ProcessAnnotatedType;
@@ -37,6 +37,7 @@ import javax.inject.Inject;
 
 import org.jboss.cdi.tck.literals.DisposesLiteral;
 import org.jboss.cdi.tck.literals.ProducesLiteral;
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypes;
 
 public class ProcessAnnotatedTypeObserver implements Extension {
 
@@ -50,7 +51,7 @@ public class ProcessAnnotatedTypeObserver implements Extension {
 
     void observesDogPAT(@Observes ProcessAnnotatedType<Dog> event) {
 
-        annotatedTypesEqual.set(event.configureAnnotatedType().getAnnotated().equals(event.getAnnotatedType()));
+        annotatedTypesEqual.set(AnnotatedTypes.compareAnnotatedTypes(event.configureAnnotatedType().getAnnotated(), event.getAnnotatedType()));
         AnnotatedTypeConfigurator<Dog> annotatedTypeConfigurator = event.configureAnnotatedType();
 
         // add @RequestScoped to Dog and @Inject and @Dogs to its Feed field
@@ -119,25 +120,23 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         //compare AnnotatedMethod from AnnotatedType to the one from AnnotatedMethodConfigurator
         AnnotatedMethodConfigurator<? super AnimalShelter> methodConfigurator = getAMConfiguratorByName(annotatedTypeConfigurator, "observesRoomInShelter");
         AnnotatedMethod<? super AnimalShelter> annotatedMethod = methodConfigurator.getAnnotated();
-        annotatedMethodEqual.set(event.getAnnotatedType().getMethods().stream().anyMatch(aM -> {
-            return aM.equals(annotatedMethod);
-        }));
+        annotatedMethodEqual.set(AnnotatedTypes.compareAnnotatedCallable(
+                event.getAnnotatedType().getMethods().stream().filter(m -> m.getJavaMember().getName().equals("observesRoomInShelter")).findAny().get(),
+                annotatedMethod));
 
         // compare AnnotatedConstructor from AnnotatedType to the one from AnnotatedConstructorConfigurator
         AnnotatedConstructorConfigurator<AnimalShelter> constructorConfigurator = annotatedTypeConfigurator
                 .filterConstructors(ac -> ac.isAnnotationPresent(Inject.class))
                 .findFirst().get();
 
-        AnnotatedConstructor<AnimalShelter> annotatedConstructor = constructorConfigurator.getAnnotated();
-        annotatedConstructorEqual.set(event.getAnnotatedType().getConstructors().stream().anyMatch(aM -> {
-            return aM.equals(annotatedConstructor);
-        }));
+        AnnotatedConstructor<AnimalShelter> configuratorAnnotatedConstructor = constructorConfigurator.getAnnotated();
+        AnnotatedConstructor<AnimalShelter> originalAnnotatedConstructor = event.getAnnotatedType().getConstructors().stream()
+                .filter(m -> m.isAnnotationPresent(Inject.class)).findAny().get();
 
+        annotatedConstructorEqual.set(AnnotatedTypes.compareAnnotatedCallable(originalAnnotatedConstructor, configuratorAnnotatedConstructor));
         // compare AnnotatedParameter from AnnotatedType to the one from AnnotatedParameterConfigurator
-        AnnotatedParameterConfigurator<AnimalShelter> parameterConfigurator = constructorConfigurator.filterParams(ap -> ap.getBaseType().equals(Cat.class))
-                .findFirst().get();
-        AnnotatedParameter<AnimalShelter> annotatedParameter = parameterConfigurator.getAnnotated();
-        annotatedParameterEqual.set(annotatedConstructor.getParameters().stream().anyMatch(ap -> ap.equals(annotatedParameter)));
+        annotatedParameterEqual
+                .set(AnnotatedTypes.compareAnnotatedParameters(originalAnnotatedConstructor.getParameters(), configuratorAnnotatedConstructor.getParameters()));
 
         //compare AnnnotatedField from AnnotatedType to the one from AnnotatedFieldConfigurator
         AnnotatedFieldConfigurator<? super AnimalShelter> fieldConfigurator = annotatedTypeConfigurator.filterFields(annotatedField -> {
@@ -145,9 +144,9 @@ public class ProcessAnnotatedTypeObserver implements Extension {
         }).findFirst().get();
 
         AnnotatedField<? super AnimalShelter> annotatedField = fieldConfigurator.getAnnotated();
-        annotatedFieldEqual.set(event.getAnnotatedType().getFields().stream().anyMatch(aF -> {
-            return aF.equals(annotatedField);
-        }));
+        annotatedFieldEqual.set(AnnotatedTypes
+                .compareAnnotatedField(event.getAnnotatedType().getFields().stream().filter(af -> af.getJavaMember().getName().equals("cat")).findAny().get(),
+                        annotatedField));
 
         // remove all annotations
         annotatedTypeConfigurator.removeAll();
