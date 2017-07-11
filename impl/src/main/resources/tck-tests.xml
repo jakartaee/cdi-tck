@@ -24,83 +24,10 @@
 
         <classes>
 
-            <!-- CDITCK-432 -->
-            <class name="org.jboss.cdi.tck.tests.decorators.builtin.event.complex.ComplexEventDecoratorTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-573 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.configurators.bean.BeanConfiguratorTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-574 -->
-            <class name="org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ContainerEventTest">
-                <methods>
-                    <exclude name="testProcessAnnotatedTypeEventFiredForFilter"/>
-                    <exclude name="testProcessAnnotatedTypeEventFiredForTagLibraryListener"/>
-                    <exclude name="testProcessAnnotatedTypeEventFiredForServletListener"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-575 -->
-            <class name="org.jboss.cdi.tck.tests.definition.bean.types.enterprise.illegal.BeanTypesWithIllegalTypeTest">
-                <methods>
-                    <exclude name="resourceBeanTypesContainsOnlyLegalTypes"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-576 -->
-            <class name="org.jboss.cdi.tck.tests.context.passivating.dependency.builtin.BuiltinBeanPassivationDependencyTest">
-                <methods>
-                    <exclude name="testInjectionPoint"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-578 -->
-            <class name="org.jboss.cdi.tck.tests.definition.bean.custom.CustomBeanImplementationTest">
-                <methods>
-                    <exclude name="testCustomBeanIsPassivationCapable"/>
-                    <exclude name="testCustomBeanIsPassivationCapableDependency"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-579 -->
-            <class name="org.jboss.cdi.tck.tests.definition.bean.custom.CustomBeanImplementationTest">
-                <methods>
-                    <exclude name="testInjectionPointGetMemberIsUsedToDetermineTheClassThatDeclaresAnInjectionPoint"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-586 -->
-            <class name="org.jboss.cdi.tck.tests.event.observer.async.basic.MixedObserversTest">
-                <methods>
-                    <exclude name="testAsyncObserversCalledInDifferentThread"/>
-                </methods>
-            </class>
-
             <!-- CDITCK-587 -->
             <class name="org.jboss.cdi.tck.tests.event.observer.transactional.roolback.TransactionalObserverRollbackTest">
                 <methods>
                     <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-588 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator.AnnotatedTypeConfiguratorTest">
-                <methods>
-                    <exclude name="annotatedTypesAndMemebersEqual"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-589 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator.AnnotatedTypeConfiguratorTest">
-                <methods>
-                    <exclude name="removeMethodsOfAnnotationTypeConfigurator"/>
                 </methods>
             </class>
 
