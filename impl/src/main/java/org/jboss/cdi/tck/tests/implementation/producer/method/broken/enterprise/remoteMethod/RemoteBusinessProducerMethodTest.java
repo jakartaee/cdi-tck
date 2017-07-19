@@ -16,13 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.enterprise.remoteMethod;
 
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -41,8 +41,9 @@ public class RemoteBusinessProducerMethodTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(RemoteBusinessProducerMethodTest.class).build();
     }
 
-    @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD_EE, id = "a"), @SpecAssertion(section = PRODUCER_METHOD_EE, id = "a") })
+    @Test(groups = { INTEGRATION, JAVAEE_FULL })
+    @SpecAssertion(section = DECLARING_PRODUCER_METHOD_EE, id = "a")
+    @SpecAssertion(section = PRODUCER_METHOD_EE, id = "a")
     public void producerMethodOnSessionBeanCannotBeRemoteBusinessMethod() {
     }
 }

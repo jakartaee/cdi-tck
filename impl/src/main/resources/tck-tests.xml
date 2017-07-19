@@ -31,6 +31,33 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-593 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget.WrappedInjectionTargetTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+            <class name="org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.enterprise.remoteMethod.RemoteBusinessDisposalMethodTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+            <class name="org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod.EJBObserverMethodRemoteBusinessMethodTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+            <class name="org.jboss.cdi.tck.tests.implementation.producer.method.broken.enterprise.remoteMethod.RemoteBusinessProducerMethodTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+            <class name="org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod.EJBAsyncObserverMethodRemoteBusinessMethodTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
         </classes>
 
     </test>

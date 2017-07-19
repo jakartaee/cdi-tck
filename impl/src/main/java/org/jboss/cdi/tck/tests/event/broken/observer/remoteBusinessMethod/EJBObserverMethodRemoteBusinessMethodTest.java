@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS_EE;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES_EE;
 
@@ -40,7 +41,7 @@ public class EJBObserverMethodRemoteBusinessMethodTest extends AbstractTest {
         return new WebArchiveBuilder().withClasses(Terrier.class, TibetanTerrier.class).withTestClass(EJBObserverMethodRemoteBusinessMethodTest.class).build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = { INTEGRATION, JAVAEE_FULL })
     @SpecAssertion(section = OBSERVER_METHODS_EE, id = "d")
     @SpecAssertion(section = OBSERVES_EE, id = "g")
     public void testObserverMethodOnRemoteBusinessMethodFails() {

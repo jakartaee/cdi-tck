@@ -182,7 +182,7 @@ Tests within the _security_ test group require the following mapping of roles to
 |Principal|Group
 |+student+|+student+
 |+alarm+|+alarm+, +student+
-|+printer+|+printer+, +student+|
+|+printer+|+printer+|
 
 |===============
 
