@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod;
 
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS_EE;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES_EE;
 
@@ -37,10 +38,11 @@ public class EJBAsyncObserverMethodRemoteBusinessMethodTest extends AbstractTest
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withClasses(Terrier.class, FoxTerrrier.class).withTestClass(EJBAsyncObserverMethodRemoteBusinessMethodTest.class).build();
+        return new WebArchiveBuilder().withClasses(Terrier.class, FoxTerrrier.class).withTestClass(EJBAsyncObserverMethodRemoteBusinessMethodTest.class)
+                .build();
     }
 
-    @Test(groups = INTEGRATION)
+    @Test(groups = { INTEGRATION, JAVAEE_FULL })
     @SpecAssertion(section = OBSERVER_METHODS_EE, id = "d")
     @SpecAssertion(section = OBSERVES_EE, id = "g")
     public void testAsyncObserverMethodOnRemoteBusinessMethodFails() {
