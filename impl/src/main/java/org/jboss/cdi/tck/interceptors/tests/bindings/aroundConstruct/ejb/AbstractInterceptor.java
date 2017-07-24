@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.aroundConstruct.ejb;
 
+import java.io.Serializable;
+
 import javax.interceptor.AroundConstruct;
 import javax.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
-public abstract class AbstractInterceptor {
+public abstract class AbstractInterceptor implements Serializable {
 
     @AroundConstruct
     public void intercept(InvocationContext ctx) {
