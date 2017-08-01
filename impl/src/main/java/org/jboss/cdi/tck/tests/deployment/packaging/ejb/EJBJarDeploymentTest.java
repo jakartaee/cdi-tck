@@ -47,7 +47,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class EJBJarDeploymentTest extends AbstractTest {
 
-    @Deployment(name = "EJB", order = 2, testable = false)
+    @Deployment(name = "EJB", order = 1, testable = false)
     public static JavaArchive createEjbtArchive() {
         return ShrinkWrap
                 .create(JavaArchive.class, "test-ejb.jar")
@@ -57,7 +57,7 @@ public class EJBJarDeploymentTest extends AbstractTest {
                         Versions.v1_1).exportAsString()), "beans.xml");
     }
 
-    @Deployment(name = "TEST", order = 1)
+    @Deployment(name = "TEST", order = 2)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(EJBJarDeploymentTest.class).withClasses(FooRemote.class)
                 .setAsClientMode(false).build();
