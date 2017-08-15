@@ -32,7 +32,7 @@ public final class ConfigurationFactory {
 
     /**
      * @param deploymentPhase Deployment phase (building test archive) initialization includes deployment specific properties
-     * @return current JSR 346 TCK configuration
+     * @return current JSR 365 TCK configuration
      */
     public static Configuration get(boolean deploymentPhase) {
 
@@ -47,7 +47,7 @@ public final class ConfigurationFactory {
     }
 
     /**
-     * @return current JSR 346 TCK configuration
+     * @return current JSR 365 TCK configuration
      */
     public static Configuration get() {
         return get(false);
