@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.definition.bean.custom;
 
 import java.lang.reflect.Type;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.*;
 
@@ -29,6 +30,14 @@ public class AfterBeanDiscoveryObserver implements Extension {
         event.addBean(integerBean);
         event.addBean(new FooBean(getAnnotatedField(beanManager, Integer.class), getAnnotatedField(beanManager, Bar.class),
                 true));
+
+        // register custom alternative via configurator but don't select it
+        event.addBean()
+            .beanClass(SomeBean.class)
+            .types(SomeBean.class, AlternativeSomeBean.class, Object.class)
+            .scope(ApplicationScoped.class)
+            .alternative(true)
+            .produceWith(obj -> new AlternativeSomeBean());
     }
 
     private AnnotatedField<?> getAnnotatedField(BeanManager beanManager, Type memberType) {
