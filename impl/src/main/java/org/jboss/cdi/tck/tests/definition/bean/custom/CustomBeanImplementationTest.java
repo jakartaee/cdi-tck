@@ -27,6 +27,10 @@ import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
 
 import java.io.IOException;
+
+import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -44,7 +48,7 @@ public class CustomBeanImplementationTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(CustomBeanImplementationTest.class)
-                .withClasses(AfterBeanDiscoveryObserver.class, House.class, CustomInjectionPoint.class, Bar.class, PassivationCapableBean.class)
+                .withClasses(AfterBeanDiscoveryObserver.class, House.class, CustomInjectionPoint.class, Bar.class, PassivationCapableBean.class, SomeBean.class, AlternativeSomeBean.class)
                 .withLibrary(Foo.class, FooBean.class, IntegerBean.class, Passivable.class, PassivableLiteral.class)
                 .withExtension(AfterBeanDiscoveryObserver.class)
                 .build();
@@ -67,6 +71,17 @@ public class CustomBeanImplementationTest extends AbstractTest {
     @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "h")
     public void testIsPolicyCalled() {
         assert AfterBeanDiscoveryObserver.integerBean.isAlternativeCalled();
+    }
+
+    @Inject
+    Instance<SomeBean> instance;
+
+    @Test
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "h")
+    public void testCustomBeanNotAutomaticallySelected() {
+        // custom bean AlternativeSomeBean has no priority and should't be selected
+        Assert.assertTrue(instance.isResolvable());
+        Assert.assertEquals(instance.get().whoAmI(), SomeBean.class.getSimpleName());
     }
 
     @Test
