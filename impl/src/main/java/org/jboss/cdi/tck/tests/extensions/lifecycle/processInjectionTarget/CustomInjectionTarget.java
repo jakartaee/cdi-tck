@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.enterprise.inject.spi.InjectionTarget;
 import java.util.Set;
@@ -25,15 +24,15 @@ import java.util.Set;
 public class CustomInjectionTarget<T> implements InjectionTarget<T> {
 
     private InjectionTarget<T> wrappedInjectionTarget;
-    private BeanManager beanManager;
+    private Runnable runnable;
 
-    public CustomInjectionTarget(InjectionTarget<T> originalInjectionTarget, BeanManager beanManager) {
+    public CustomInjectionTarget(InjectionTarget<T> originalInjectionTarget, Runnable runnable) {
         this.wrappedInjectionTarget = originalInjectionTarget;
-        this.beanManager = beanManager;
+        this.runnable = runnable;
     }
 
     public void inject(T instance, CreationalContext<T> ctx) {
-        beanManager.fireEvent(instance);
+        runnable.run();
         wrappedInjectionTarget.inject(instance, ctx);
     }
 
