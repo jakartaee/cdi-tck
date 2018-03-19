@@ -52,10 +52,12 @@ public class DefaultBeanDiscoveryModeTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withBeansXml(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ANNOTATED.toString()))
-                .withTestClass(DefaultBeanDiscoveryModeTest.class)
-                .withExtension(TestExtension.class)
-                .withPackage(DefaultBeanDiscoveryModeTest.class.getPackage()).build();
+        return new WebArchiveBuilder()
+            .withBeansXml(Descriptors.create(BeansDescriptor.class)
+                .beanDiscoveryMode(BeanDiscoveryMode._ANNOTATED.toString()).version("2.0"))
+            .withTestClass(DefaultBeanDiscoveryModeTest.class)
+            .withExtension(TestExtension.class)
+            .withPackage(DefaultBeanDiscoveryModeTest.class.getPackage()).build();
     }
 
     @Test
