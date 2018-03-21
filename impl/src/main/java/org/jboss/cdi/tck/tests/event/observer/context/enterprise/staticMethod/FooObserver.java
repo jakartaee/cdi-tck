@@ -54,8 +54,8 @@ public class FooObserver {
     private static void init() throws Exception {
         tsr = (TransactionSynchronizationRegistry) InitialContext.doLookup("java:comp/TransactionSynchronizationRegistry");
         ejbContext = (EJBContext) InitialContext.doLookup("java:comp/EJBContext");
-        toner = (Toner) InitialContext.doLookup("java:comp/Toner");
-        printer = (Printer) InitialContext.doLookup("java:comp/Printer");
+        toner = (Toner) InitialContext.doLookup("java:module/Toner");
+        printer = (Printer) InitialContext.doLookup("java:module/Printer");
     }
 
     public static void observeBeforeCompletion(@Observes(during = TransactionPhase.BEFORE_COMPLETION) Foo foo) throws Exception {
