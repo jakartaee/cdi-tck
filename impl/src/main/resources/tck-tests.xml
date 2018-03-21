@@ -38,13 +38,6 @@
                 </methods>
             </class>
 
-            <!-- CDITCK-598 -->
-            <class name="org.jboss.cdi.tck.tests.event.observer.context.enterprise.staticMethod.SessionBeanStaticObserverMethodInvocationContextTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
         </classes>
 
     </test>
