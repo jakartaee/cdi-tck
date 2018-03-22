@@ -4,7 +4,7 @@
     <groupId>org.jboss.cdi.tck</groupId>
     <artifactId>cdi-tck-parent</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.4.Final</version>
+    <version>2.0.5-SNAPSHOT</version>
     <name>CDI TCK</name>
 
     <parent>
@@ -307,7 +307,7 @@
         <connection>scm:git:git://github.com/cdi-spec/cdi-tck.git</connection>
         <developerConnection>scm:git:git@github.com:cdi-spec/cdi-tck.git</developerConnection>
         <url>https://github.com/cdi-spec/cdi-tck</url>
-        <tag>2.0.4.Final</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <profiles>
