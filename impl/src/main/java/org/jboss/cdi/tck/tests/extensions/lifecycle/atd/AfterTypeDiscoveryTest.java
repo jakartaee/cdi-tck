@@ -73,23 +73,26 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         assertTrue(extension.getInterceptors().contains(BravoInterceptor.class));
         assertTrue(extension.getInterceptors().contains(AlphaInterceptor.class));
         assertTrue(extension.getInterceptors().contains(DeltaInterceptor.class));
+        assertTrue(extension.getInterceptors().contains(EchoInterceptor.class));
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "b"), @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ha") })
     public void testInitialAlternatives() {
-        assertEquals(extension.getAlternatives().size(), 2);
+        assertEquals(extension.getAlternatives().size(), 3);
         assertEquals(extension.getAlternatives().get(0), AlphaAlternative.class);
-        assertEquals(extension.getAlternatives().get(1), DeltaAlternative.class);
+        assertEquals(extension.getAlternatives().get(1), EchoAlternative.class);
+        assertEquals(extension.getAlternatives().get(2), DeltaAlternative.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "d"), @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hc") })
     public void testInitialDecorators() {
-        assertEquals(extension.getDecorators().size(), 3);
+        assertEquals(extension.getDecorators().size(), 4);
         assertEquals(extension.getDecorators().get(0), AlphaDecorator.class);
         assertEquals(extension.getDecorators().get(1), BravoDecorator.class);
-        assertEquals(extension.getDecorators().get(2), DeltaDecorator.class);
+        assertEquals(extension.getDecorators().get(2), EchoDecorator.class);
+        assertEquals(extension.getDecorators().get(3), DeltaDecorator.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -100,6 +103,7 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         BravoInterceptor.reset();
         CharlieInterceptor.reset();
         DeltaInterceptor.reset();
+        EchoInterceptor.reset();
 
         logger.ping();
 
@@ -107,6 +111,7 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         assertFalse(BravoInterceptor.isIntercepted());
         assertTrue(CharlieInterceptor.isIntercepted());
         assertTrue(DeltaInterceptor.isIntercepted());
+        assertFalse(EchoInterceptor.isIntercepted());
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -122,6 +127,7 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         // assert that proper alternative is injected
         assertEquals(logger.getAlternativeClass(), DeltaAlternative.class);
         assertTrue(getBeans(AlphaAlternative.class).isEmpty());
+        assertTrue(getBeans(EchoAlternative.class).isEmpty());
     }
 
     @SuppressWarnings("serial")
