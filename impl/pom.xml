@@ -208,21 +208,6 @@
                                     <type>xml</type>
                                     <classifier>audit-int</classifier>
                                 </artifact>
-                                <artifact>
-                                    <file>${basedir}/src/main/resources/cdi-api.sig</file>
-                                    <type>sig</type>
-                                    <classifier>sigtest</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${basedir}/src/main/resources/cdi-api-jdk7.sig</file>
-                                    <type>sig</type>
-                                    <classifier>sigtest-jdk7</classifier>
-                                </artifact>
-                                <artifact>
-                                    <file>${basedir}/src/main/resources/cdi-api-jdk8.sig</file>
-                                    <type>sig</type>
-                                    <classifier>sigtest-jdk8</classifier>
-                                </artifact>
                             </artifacts>
                         </configuration>
                     </execution>
@@ -395,6 +380,92 @@
                             </execution>
 
                         </executions>
+                    </plugin>
+
+                    <!-- Signature generation related plugins -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>javax.enterprise</groupId>
+                                            <artifactId>cdi-api</artifactId>
+                                            <version>2.0</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
+                                            <includes>**/*.class,**/*.xml</includes>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>org.jboss.interceptor</groupId>
+                                            <artifactId>jboss-interceptor-api</artifactId>
+                                            <version>3.1.0-CR3</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
+                                            <includes>**/*.class,**/*.xml</includes>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>javax.inject</groupId>
+                                            <artifactId>javax.inject</artifactId>
+                                            <version>1</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
+                                            <includes>**/*.class,**/*.xml</includes>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>javax.el</groupId>
+                                            <artifactId>javax.el-api</artifactId>
+                                            <version>3.0.0</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
+                                            <includes>**/*.class,**/*.xml</includes>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <includes>**/*.java</includes>
+                                    <excludes>**/*.properties</excludes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.netbeans.tools</groupId>
+                        <artifactId>sigtest-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <classes>${project.build.directory}/cdi-api</classes>
+                            <packages>
+                                javax.decorator,
+                                javax.enterprise.context,
+                                javax.enterprise.context.control,
+                                javax.enterprise.context.spi,
+                                javax.enterprise.event,
+                                javax.enterprise.inject,
+                                javax.enterprise.inject.literal,
+                                javax.enterprise.inject.se,
+                                javax.enterprise.inject.spi,
+                                javax.enterprise.inject.spi.configurator,
+                                javax.enterprise.util
+                            </packages>
+                            <attach>false</attach>
+                            <sigfile>${project.build.directory}/classes/cdi-api-jdk8.sig</sigfile>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
