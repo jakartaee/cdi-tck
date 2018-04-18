@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jboss.cdi.tck.tests.extensions.beanManager;
 
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_PASSIVATION_CAPABLE_BEAN;
@@ -31,17 +30,20 @@ import org.testng.annotations.Test;
 
 /**
  * Tests retrieving beans with the BeanManager by the ID for a passivation-capable bean.
- * 
+ *
  * @author David Allen
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class PassivationIdTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(PassivationIdTest.class)
-                .withExtension(AfterBeanDiscoveryObserver.class).build();
+        return new WebArchiveBuilder()
+            .withTestClass(PassivationIdTest.class)
+            .withClasses(CowBean.class, DummyContext.class)
+            .withExtension(AfterBeanDiscoveryObserver.class)
+            .build();
     }
 
     @Test
