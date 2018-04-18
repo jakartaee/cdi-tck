@@ -27,6 +27,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.spi.BeanAttributes;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -83,7 +84,7 @@ public class ConfigureAndSetExtension implements Extension {
                 }
 
                 public Set<Annotation> getQualifiers() {
-                    return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE)));
+                    return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE, Default.Literal.INSTANCE)));
                 }
 
                 public Class<? extends Annotation> getScope() {
@@ -117,7 +118,7 @@ public class ConfigureAndSetExtension implements Extension {
             }
 
             public Set<Annotation> getQualifiers() {
-                return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE)));
+                return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE, Default.Literal.INSTANCE)));
             }
 
             public Class<? extends Annotation> getScope() {
@@ -168,7 +169,7 @@ public class ConfigureAndSetExtension implements Extension {
 
                 @Override
                 public Set<Annotation> getQualifiers() {
-                    return Collections.<Annotation>emptySet();
+                    return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE)));
                 }
             });
         } catch (IllegalStateException e) {
@@ -198,7 +199,7 @@ public class ConfigureAndSetExtension implements Extension {
 
             @Override
             public Set<Annotation> getQualifiers() {
-                return Collections.<Annotation>emptySet();
+                return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE)));
             }
         });
         try {
