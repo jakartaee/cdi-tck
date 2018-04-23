@@ -16,6 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.enterprise.invalid;
 
+import javax.ejb.Local;
+
+@Local
 public interface ElephantLocal {
 
+    public void remove();
 }
