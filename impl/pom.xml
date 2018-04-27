@@ -88,16 +88,10 @@
             <artifactId>jboss-interceptors-api_1.2_spec</artifactId>
         </dependency>
 
-        <!-- TODO use org.jboss.spec.javax.annotation below once https://issues.jboss.org/browse/JBEE-168 is done -->
         <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
+            <groupId>org.jboss.spec.javax.annotation</groupId>
+            <artifactId>jboss-annotations-api_1.3_spec</artifactId>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.jboss.spec.javax.annotation</groupId>-->
-            <!--<artifactId>jboss-annotations-api_1.2_spec</artifactId>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.jboss.spec.javax.resource</groupId>
@@ -166,8 +160,8 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>javax.annotation</groupId>
-                                    <artifactId>javax.annotation-api</artifactId>
+                                    <groupId>org.jboss.spec.javax.annotation</groupId>
+                                    <artifactId>jboss-annotations-api_1.3_spec</artifactId>
                                 </artifactItem>
                             </artifactItems>
                             <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
@@ -207,6 +201,11 @@
                                     <file>${basedir}/src/main/resources/tck-audit-int.xml</file>
                                     <type>xml</type>
                                     <classifier>audit-int</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${basedir}/src/main/resources/cdi-api-jdk8.sig</file>
+                                    <type>sig</type>
+                                    <classifier>sigtest-jdk8</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>
@@ -381,8 +380,25 @@
 
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
 
-                    <!-- Signature generation related plugins -->
+        <profile>
+            <!--This profile can be used to (re)generate signatures of CDI API, note that they differ based on JDK used to build them-->
+            <!--All .sig files should be included in the generated jar files!-->
+            <id>signature-generation</id>
+            <activation>
+                <property>
+                    <name>signature</name>
+                </property>
+            </activation>
+            <properties>
+                <!--Default assumed JDK version, can be overriden via -Dmajor.jdk.version=X-->
+                <jdk.major.version>8</jdk.major.version>
+            </properties>
+            <build>
+                <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
@@ -398,34 +414,7 @@
                                         <artifactItem>
                                             <groupId>javax.enterprise</groupId>
                                             <artifactId>cdi-api</artifactId>
-                                            <version>2.0</version>
-                                            <type>jar</type>
-                                            <overWrite>false</overWrite>
-                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
-                                            <includes>**/*.class,**/*.xml</includes>
-                                        </artifactItem>
-                                        <artifactItem>
-                                            <groupId>org.jboss.interceptor</groupId>
-                                            <artifactId>jboss-interceptor-api</artifactId>
-                                            <version>3.1.0-CR3</version>
-                                            <type>jar</type>
-                                            <overWrite>false</overWrite>
-                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
-                                            <includes>**/*.class,**/*.xml</includes>
-                                        </artifactItem>
-                                        <artifactItem>
-                                            <groupId>javax.inject</groupId>
-                                            <artifactId>javax.inject</artifactId>
-                                            <version>1</version>
-                                            <type>jar</type>
-                                            <overWrite>false</overWrite>
-                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
-                                            <includes>**/*.class,**/*.xml</includes>
-                                        </artifactItem>
-                                        <artifactItem>
-                                            <groupId>javax.el</groupId>
-                                            <artifactId>javax.el-api</artifactId>
-                                            <version>3.0.0</version>
+                                            <version>${cdi.api.version}</version>
                                             <type>jar</type>
                                             <overWrite>false</overWrite>
                                             <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
@@ -464,13 +453,12 @@
                                 javax.enterprise.util
                             </packages>
                             <attach>false</attach>
-                            <sigfile>${project.build.directory}/classes/cdi-api-jdk8.sig</sigfile>
+                            <sigfile>${project.build.directory}/cdi-api-jdk${jdk.major.version}.sig</sigfile>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
-
     </profiles>
 
 </project>
