@@ -57,7 +57,7 @@ public class BuiltinMetadataEEBeanTest extends AbstractTest {
         WebClient webClient = new WebClient();
         webClient.setThrowExceptionOnFailingStatusCode(true);
 
-        String servletResponse = webClient.getPage(servletContextPath + "/test").getWebResponse().getContentAsString();
+        String servletResponse = webClient.getPage(servletContextPath + "test").getWebResponse().getContentAsString();
         Assert.assertTrue(servletResponse.contains(String.valueOf(1)));
 
     }
