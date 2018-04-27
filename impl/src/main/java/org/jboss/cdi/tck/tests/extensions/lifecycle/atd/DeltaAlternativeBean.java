@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -28,13 +28,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.enterprise.inject.Default;
-public class DeltaAlternativeBean implements Bean<DeltaAlternative> {
+import javax.enterprise.inject.spi.Prioritized;
+
+public class DeltaAlternativeBean implements Bean<DeltaAlternative>, Prioritized {
+
     public Class<?> getBeanClass() {
         return DeltaAlternative.class;
     }
 
     public Set<InjectionPoint> getInjectionPoints() {
         return Collections.emptySet();
+    }
+
+    @Override
+    public int getPriority() {
+        return 2700;
     }
 
     public boolean isNullable() {

@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.inject.spi.*;
@@ -28,7 +27,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.enterprise.inject.Default;
-public class DeltaDecoratorBean implements Decorator<DeltaDecorator> {
+
+public class DeltaDecoratorBean implements Decorator<DeltaDecorator>, Prioritized {
 
     private AnnotatedField<? super DeltaDecorator> annotatedField = null;
     private BeanManager beanManager;
@@ -58,6 +58,11 @@ public class DeltaDecoratorBean implements Decorator<DeltaDecorator> {
         HashSet<InjectionPoint> injectionPoints = new HashSet<InjectionPoint>();
         injectionPoints.add(new CustomInjectionPoint());
         return injectionPoints;
+    }
+
+    @Override
+    public int getPriority() {
+        return 2011;
     }
 
     public boolean isNullable() {

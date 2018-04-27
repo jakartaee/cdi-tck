@@ -67,7 +67,7 @@ public class AfterTypeDiscoveryObserver implements Extension {
         event.addAnnotatedType(beanManager.createAnnotatedType(Boss.class), AfterTypeDiscoveryObserver.class.getName());
 
         // Bravo interceptor removed
-        for (Iterator<Class<?>> iterator = event.getInterceptors().iterator(); iterator.hasNext(); ) {
+        for (Iterator<Class<?>> iterator = event.getInterceptors().iterator(); iterator.hasNext();) {
             if (BravoInterceptor.class.equals(iterator.next())) {
                 iterator.remove();
             }
@@ -79,11 +79,17 @@ public class AfterTypeDiscoveryObserver implements Extension {
 
         // add Baz annotatedType via AnnotatedTypeConfigurator
         event.addAnnotatedType(Baz.class, AfterTypeDiscoveryObserver.class.getName() + ":" + Baz.class.getName())
-                .add(Pro.ProLiteral.INSTANCE)
-                .add(RequestScoped.Literal.INSTANCE)
-                .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst().get()
-                .add(InjectLiteral.INSTANCE)
-                .add(Pro.ProLiteral.INSTANCE);
+            .add(Pro.ProLiteral.INSTANCE)
+            .add(RequestScoped.Literal.INSTANCE)
+            .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst().get()
+            .add(InjectLiteral.INSTANCE)
+            .add(Pro.ProLiteral.INSTANCE);
+
+        // Remove alternative, decorator and interceptor based on Class<?>
+        event.getAlternatives().remove(EchoAlternative.class);
+        event.getInterceptors().remove(EchoInterceptor.class);
+        event.getDecorators().remove(EchoDecorator.class);
+
     }
 
     public void observeAfterBeanDiscovery(@Observes AfterBeanDiscovery event, BeanManager beanManager) {
