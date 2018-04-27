@@ -3,4 +3,4 @@ Specification-Vendor: Red Hat Middleware LLC
 Specification-Version: 1.0
 Implementation-Vendor-Id: org.jboss
 Implementation-Vendor: Red Hat Middleware LLC
-Implemenation-Version: 1.0
+Implementation-Version: 1.0
