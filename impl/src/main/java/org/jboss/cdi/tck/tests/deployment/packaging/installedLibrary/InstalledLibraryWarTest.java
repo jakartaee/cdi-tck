@@ -56,8 +56,8 @@ public class InstalledLibraryWarTest extends AbstractTest {
                                 .attribute("Extension-List", "CDITCKExtLib")
                                 .attribute("CDITCKExtLib-Extension-Name", "org.jboss.cdi.tck.extlib")
                                 .attribute("CDITCKExtLib-Specification-Version", "1.0")
-                                // .attribute("CDITCKExtLib-Implementation-Version", "1.0")
-                                // .attribute("CDITCKExtLib-Implementation-Vendor-Id", "org.jboss")
+                                .attribute("CDITCKExtLib-Implementation-Version", "1.0")
+                                .attribute("CDITCKExtLib-Implementation-Vendor-Id", "org.jboss")
                                 .exportAsString()));
     }
 
