@@ -26,6 +26,7 @@ import java.net.URL;
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -44,16 +45,23 @@ public class WebServiceInjectionIntoNonContextualComponentTest extends AbstractT
     @ArquillianResource
     private URL contextPath;
 
-    @Deployment(testable = false)
-    public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-                .withTestClass(WebServiceInjectionIntoNonContextualComponentTest.class)
-                .withClasses(Translator.class, TranslatorEndpoint.class, TranslatorService.class,
-                        TestServlet2.class, TestFilter2.class)
+    @Deployment(name = "webservice", order = 1, testable = false)
+    public static WebArchive createWebServiceArchive() {
+        return (WebArchive) new WebArchiveBuilder()
+                .notTestArchive()
+                .withClasses(Translator.class, TranslatorEndpoint.class)
                 .build();
     }
 
-    @Test(groups = { JAVAEE_FULL, JAX_WS })
+    @Deployment(name = "client", order = 2, testable = false)
+    public static WebArchive createWebServiceClientArchive() {
+        return (WebArchive) new WebArchiveBuilder()
+                .withTestClass(WebServiceInjectionIntoNonContextualComponentTest.class)
+                .withClasses(Translator.class, TranslatorService.class, TestFilter2.class, TestServlet2.class)
+                .build();
+    }
+
+    @Test(groups = { JAVAEE_FULL, JAX_WS }) @OperateOnDeployment("client")
     @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "bo")
     public void testServletInitCalledAfterResourceInjection() throws Exception {
         WebClient webClient = new WebClient();
@@ -62,7 +70,7 @@ public class WebServiceInjectionIntoNonContextualComponentTest extends AbstractT
         assertTrue(page.getContent().contains("Servlet init: true"));
     }
 
-    @Test(groups = { JAVAEE_FULL, JAX_WS })
+    @Test(groups = { JAVAEE_FULL, JAX_WS }) @OperateOnDeployment("client")
     @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "br")
     public void testFilterInitCalledAfterResourceInjection() throws Exception {
         WebClient webClient = new WebClient();
