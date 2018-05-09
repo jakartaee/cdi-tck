@@ -164,7 +164,7 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
         AnnotatedType<Cat> catAT = getCurrentManager().getExtension(ProcessAnnotatedTypeObserver.class).getOriginalCatAT();
         assertTrue(catAT.isAnnotationPresent(RequestScoped.class));
         AnnotatedConstructor<Cat> annotatedConstructor = catAT.getConstructors().stream()
-                .filter(catAnnotatedConstructor -> catAnnotatedConstructor.getParameters().size() == 1).findFirst().get();
+                .filter(ac -> ac.getParameters().size() == 1 && ac.getParameters().get(0).getBaseType().equals(Feed.class)).findFirst().get();
         assertTrue(annotatedConstructor.getParameters().iterator().next().isAnnotationPresent(Cats.class));
         assertTrue(annotatedConstructor.isAnnotationPresent(Inject.class));
     }
