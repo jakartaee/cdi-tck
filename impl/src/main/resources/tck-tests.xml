@@ -59,6 +59,12 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-620 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator.AnnotatedTypeConfiguratorTest">
+                <methods>
+                    <exclude name="configuratorInitializedWithOriginalAT"/>
+                </methods>
+            </class>
         </classes>
 
     </test>
