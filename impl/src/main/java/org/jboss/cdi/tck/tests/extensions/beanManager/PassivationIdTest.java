@@ -41,7 +41,7 @@ public class PassivationIdTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
             .withTestClass(PassivationIdTest.class)
-            .withClasses(CowBean.class, DummyContext.class)
+            .withClasses(CowBean.class, DummyContext.class, AfterBeanDiscoveryObserver.class, Cow.class, DummyScoped.class)
             .withExtension(AfterBeanDiscoveryObserver.class)
             .build();
     }
