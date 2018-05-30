@@ -38,12 +38,7 @@
                 </methods>
             </class>
 
-            <!-- CDITCK-623 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.beanManager.PassivationIdTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
+        </classes>
     </test>
 
 </suite>

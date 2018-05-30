@@ -1,6 +1,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="CDI TCK" verbose="0" configfailurepolicy="continue" useDefaultListeners="false">
 
+    <!-- !!!!!! WARNING + README !!!!!!
+
+     Please note that this exclude list serves only for the previous micro version of TCK release!
+     This means that if the latest version of TCK is e.g. 2.0.5.Final then this exclude list is valid
+     only for the version 2.0.4.Final and invalid for any other version!
+
+     For the exclude list of latest TCK version please check the canonical exclude list in tck-tests.xml.
+
+    -->
+
     <listeners>
         <!-- Required - avoid randomly mixed test method execution -->
         <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor" />
@@ -38,31 +48,10 @@
                 </methods>
             </class>
 
-            <!-- CDITCK-614 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.configurators.invalid.ConfiguratorAndSetMethodTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-618 -->
-            <class name="org.jboss.cdi.tck.tests.context.passivating.enterprise.invalid.StatefulSessionBeanXmlDescriptorTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-616 -->
+            <!-- CDITCK-623 -->
             <class name="org.jboss.cdi.tck.tests.extensions.beanManager.PassivationIdTest">
                 <methods>
                     <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-620 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator.AnnotatedTypeConfiguratorTest">
-                <methods>
-                    <exclude name="configuratorInitializedWithOriginalAT"/>
                 </methods>
             </class>
         </classes>
