@@ -1,19 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="CDI TCK" verbose="0" configfailurepolicy="continue" useDefaultListeners="false">
 
-    <!-- !!!!!! WARNING + README !!!!!!
-
-     Please note that this exclude list serves only for the previous micro version of TCK release!
-     This means that if the latest version of TCK is e.g. 1.2.5.Final then this exclude list is valid
-     only for the version 1.2.4.Final and invalid for any other version!
-
-     For the exclude list of latest TCK version please check the canonical exclude list in tck-tests.xml.
-
-    -->
-
     <listeners>
         <!-- Required - avoid randomly mixed test method execution -->
-        <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor"/>
+        <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor" />
         <!-- Optional - intended for debug purpose only -->
         <listener class-name="org.jboss.cdi.tck.impl.testng.ConfigurationLoggingListener"/>
         <listener class-name="org.jboss.cdi.tck.impl.testng.ProgressLoggingTestListener"/>
@@ -22,17 +12,18 @@
         <listener class-name="org.testng.reporters.FailedReporter"/>
         <listener class-name="org.testng.reporters.XMLReporter"/>
         <listener class-name="org.testng.reporters.EmailableReporter"/>
-        <listener class-name="org.testng.reporters.TestHTMLReporter"/>
+        <listener class-name="org.testng.reporters.TestHTMLReporter" />
     </listeners>
 
     <test name="CDI TCK">
 
         <packages>
-            <package name="org.jboss.cdi.tck.tests.*"/>
-            <package name="org.jboss.cdi.tck.interceptors.tests.*"/>
+            <package name="org.jboss.cdi.tck.tests.*" />
+            <package name="org.jboss.cdi.tck.interceptors.tests.*" />
         </packages>
 
         <classes>
+
             <!-- CDITCK-587 -->
             <class name="org.jboss.cdi.tck.tests.event.observer.transactional.roolback.TransactionalObserverRollbackTest">
                 <methods>
@@ -40,33 +31,40 @@
                 </methods>
             </class>
 
-            <!-- CDITCK-593 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget.WrappedInjectionTargetTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <class name="org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.enterprise.remoteMethod.RemoteBusinessDisposalMethodTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <class name="org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod.EJBObserverMethodRemoteBusinessMethodTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <class name="org.jboss.cdi.tck.tests.implementation.producer.method.broken.enterprise.remoteMethod.RemoteBusinessProducerMethodTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-            <class name="org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod.EJBAsyncObserverMethodRemoteBusinessMethodTest">
+            <!-- CDITCK-597 -->
+            <class name="org.jboss.cdi.tck.tests.deployment.packaging.ejb.EJBJarDeploymentTest">
                 <methods>
                     <exclude name=".*"/>
                 </methods>
             </class>
 
+            <!-- CDITCK-614 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.configurators.invalid.ConfiguratorAndSetMethodTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-618 -->
+            <class name="org.jboss.cdi.tck.tests.context.passivating.enterprise.invalid.StatefulSessionBeanXmlDescriptorTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-616 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.beanManager.PassivationIdTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- CDITCK-620 -->
+            <class name="org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator.AnnotatedTypeConfiguratorTest">
+                <methods>
+                    <exclude name="configuratorInitializedWithOriginalAT"/>
+                </methods>
+            </class>
         </classes>
 
     </test>

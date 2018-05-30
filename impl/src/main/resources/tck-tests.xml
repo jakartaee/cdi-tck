@@ -38,35 +38,6 @@
                 </methods>
             </class>
 
-            <!-- CDITCK-614 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.configurators.invalid.ConfiguratorAndSetMethodTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-618 -->
-            <class name="org.jboss.cdi.tck.tests.context.passivating.enterprise.invalid.StatefulSessionBeanXmlDescriptorTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-616 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.beanManager.PassivationIdTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
-            <!-- CDITCK-620 -->
-            <class name="org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator.AnnotatedTypeConfiguratorTest">
-                <methods>
-                    <exclude name="configuratorInitializedWithOriginalAT"/>
-                </methods>
-            </class>
-        </classes>
-
     </test>
 
 </suite>
