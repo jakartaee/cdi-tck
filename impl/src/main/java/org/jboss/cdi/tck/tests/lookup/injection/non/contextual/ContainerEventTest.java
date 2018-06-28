@@ -123,7 +123,14 @@ public class ContainerEventTest extends AbstractTest {
         assertEquals(type.getBaseType(), TestListener.class);
         assertTrue(type.getAnnotations().isEmpty());
         assertEquals(type.getFields().size(), 2);
-        assertEquals(type.getMethods().size(), 3);
+        AnnotatedMethod<? super TestListener> methodFound = null;
+        for (AnnotatedMethod<? super TestListener> m : type.getMethods()) {
+            if (m.getJavaMember().getName().equals("contextInitialized")) {
+                methodFound = m;
+                break;
+            }
+        }
+        assertNotNull(methodFound);
 
         int initializers = 0;
         for (AnnotatedMethod<?> method : type.getMethods()) {
@@ -150,7 +157,14 @@ public class ContainerEventTest extends AbstractTest {
                 EventListener.class, Object.class));
         assertEquals(type.getFields().size(), 2);
         assertEquals(type.getConstructors().size(), 1);
-        assertEquals(type.getMethods().size(), 3);
+        AnnotatedMethod<? super TagLibraryListener> methodFound = null;
+        for (AnnotatedMethod<? super TagLibraryListener> m : type.getMethods()) {
+            if (m.getJavaMember().getName().equals("contextInitialized")) {
+                methodFound = m;
+                break;
+            }
+        }
+        assertNotNull(methodFound);
     }
 
     private void validateServletAnnotatedType(AnnotatedType<TestServlet> type) {
@@ -166,7 +180,14 @@ public class ContainerEventTest extends AbstractTest {
         assertEquals(type.getFields().size(), 12);
         assertEquals(type.getConstructors().size(), 1);
         assertTrue(type.getConstructors().iterator().next().getParameters().isEmpty());
-        assertEquals(type.getMethods().size(), 8);
+        AnnotatedMethod<? super TestFilter> methodFound = null;
+        for (AnnotatedMethod<? super TestFilter> m : type.getMethods()) {
+            if (m.getJavaMember().getName().equals("doFilter")) {
+                methodFound = m;
+                break;
+            }
+        }
+        assertNotNull(methodFound);
     }
 
     private void validateJsfManagedBeanAnnotatedType(AnnotatedType<Farm> type) {
