@@ -73,4 +73,14 @@ public abstract class ForwardingBeanAttributes<T> implements BeanAttributes<T> {
         return attributes().equals(obj);
     }
 
+    @Override
+    public String toString() {
+        return "ForwardingBeanAttributes with name = " + getName()
+            + " with qualifiers = " + getQualifiers()
+            + " with scope = " + getScope()
+            + " with stereotypes = " + getStereotypes()
+            + " with types = " + getTypes()
+            + " alternative = " + isAlternative();
+    }
+
 }
