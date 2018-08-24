@@ -11,10 +11,11 @@ import javax.enterprise.inject.spi.InjectionPoint;
 
 /**
  * Delegating {@link InjectionPoint}.
- * 
+ *
  * @author Jozef Hartinger
  */
 public abstract class ForwardingInjectionPoint implements InjectionPoint {
+
     protected abstract InjectionPoint delegate();
 
     public Annotated getAnnotated() {
@@ -60,6 +61,9 @@ public abstract class ForwardingInjectionPoint implements InjectionPoint {
 
     @Override
     public String toString() {
-        return delegate().toString();
+        return "ForwardingInjectionPoint with type=" + getType() 
+            + " with qualifiers=" + getQualifiers()
+            + " with delegate=" + isDelegate() 
+            + " with transient=" + isTransient() + ".";
     }
 }
