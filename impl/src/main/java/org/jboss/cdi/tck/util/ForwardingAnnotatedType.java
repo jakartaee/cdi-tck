@@ -50,4 +50,13 @@ public abstract class ForwardingAnnotatedType<X> extends ForwardingAnnotated imp
         return delegate().getMethods();
     }
 
+    @Override
+    public String toString() {
+        return "ForwardingAnnotatedType extending " + super.toString()
+            + " with Java class " + getJavaClass()
+            + " with constructors = " + getConstructors()
+            + " with fields = " + getFields()
+            + " with methods = " + getMethods();
+    }
+
 }
