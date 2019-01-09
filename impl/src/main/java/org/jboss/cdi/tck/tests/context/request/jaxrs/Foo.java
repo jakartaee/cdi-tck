@@ -20,12 +20,15 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import java.util.concurrent.atomic.AtomicLong;
 
 @RequestScoped
 public class Foo {
 
     @Inject
     ObservingBean observingBean;
+
+    private static AtomicLong atomicLong = new AtomicLong(System.currentTimeMillis());
 
     private long id;
 
@@ -35,7 +38,7 @@ public class Foo {
 
     @PostConstruct
     public void init() {
-        this.id = System.currentTimeMillis();
+        this.id = atomicLong.getAndIncrement();
     }
 
     @PreDestroy
