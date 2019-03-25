@@ -13,6 +13,12 @@
 		<env-entry-value>Hello there my friend</env-entry-value>
 	</env-entry>
 
+	<env-entry>
+		<env-entry-name>check</env-entry-name>
+		<env-entry-type>java.lang.Boolean</env-entry-type>
+		<env-entry-value>true</env-entry-value>
+	</env-entry>
+
 	<session-config>
 		<session-timeout>10</session-timeout>
 	</session-config>
