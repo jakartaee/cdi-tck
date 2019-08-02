@@ -4,8 +4,8 @@
     <groupId>org.jboss.cdi.tck</groupId>
     <artifactId>cdi-tck-parent</artifactId>
     <packaging>pom</packaging>
-    <version>2.1.0-SNAPSHOT</version>
-    <name>CDI TCK</name>
+    <version>2.1.0</version>
+    <name>Jakarta CDI TCK</name>
 
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
@@ -64,18 +64,18 @@
     </developers>
 
     <organization>
-        <name>CDI TCK</name>
-        <url>http://www.cdi-spec.org/</url>
+        <name>Jakarta CDI TCK</name>
+        <url>https://projects.eclipse.org/projects/ee4j.cdi</url>
     </organization>
 
     <ciManagement>
-        <system>Hudson</system>
-        <url />
+        <system>Jenkins</system>
+        <url>https://projects.eclipse.org/projects/ee4j.cdi</url>
     </ciManagement>
 
     <issueManagement>
-        <system>JIRA</system>
-        <url>http://jira.jboss.org/browse/CDITCK</url>
+        <system>GitHub</system>
+        <url>https://github.com/eclipse-ee4j/cdi-tck/issues</url>
     </issueManagement>
 
     <inceptionYear>2008</inceptionYear>
