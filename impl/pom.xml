@@ -14,8 +14,8 @@
     <dependencies>
 
         <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
             <exclusions>
                 <exclusion>
                     <artifactId>jboss-interceptors-api_1.1_spec</artifactId>
@@ -59,8 +59,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
 
         <dependency>
@@ -69,8 +69,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>jta</artifactId>
+            <groupId>jakarta.transaction</groupId>
+            <artifactId>jakarta.transaction-api</artifactId>
         </dependency>
 
         <dependency>
@@ -104,8 +104,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>el-api</artifactId>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
         </dependency>
 
         <dependency>
@@ -114,8 +114,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
         </dependency>
 
         <dependency>
@@ -412,8 +412,8 @@
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>javax.enterprise</groupId>
-                                            <artifactId>cdi-api</artifactId>
+                                            <groupId>jakarta.enterprise</groupId>
+                                            <artifactId>jakarta.enterprise.cdi-api</artifactId>
                                             <version>${cdi.api.version}</version>
                                             <type>jar</type>
                                             <overWrite>false</overWrite>
