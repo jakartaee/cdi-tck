@@ -4,13 +4,13 @@
     <groupId>org.jboss.cdi.tck</groupId>
     <artifactId>cdi-tck-parent</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.5.SP1</version>
+    <version>2.0.6</version>
     <name>CDI TCK</name>
 
     <parent>
-        <groupId>org.jboss.weld</groupId>
-        <artifactId>weld-parent</artifactId>
-        <version>37</version>
+        <groupId>org.eclipse.ee4j</groupId>
+        <artifactId>project</artifactId>
+        <version>1.0.5</version>
     </parent>
 
     <!-- Metadata -->
@@ -64,18 +64,18 @@
     </developers>
 
     <organization>
-        <name>CDI TCK</name>
-        <url>http://www.cdi-spec.org/</url>
+        <name>Jakarta CDI TCK</name>
+        <url>https://projects.eclipse.org/projects/ee4j.cdi</url>
     </organization>
 
     <ciManagement>
-        <system>Hudson</system>
-        <url />
+        <system>Jenkins</system>
+        <url>https://projects.eclipse.org/projects/ee4j.cdi</url>
     </ciManagement>
 
     <issueManagement>
-        <system>JIRA</system>
-        <url>http://jira.jboss.org/browse/CDITCK</url>
+        <system>GitHub</system>
+        <url>https://github.com/eclipse-ee4j/cdi-tck/issues</url>
     </issueManagement>
 
     <inceptionYear>2008</inceptionYear>
@@ -95,7 +95,7 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>2.0</cdi.api.version>
+        <cdi.api.version>2.0.2</cdi.api.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- JBoss EE APIs -->
@@ -105,12 +105,12 @@
         <jboss.annotations.api.version>1.0.1.Final</jboss.annotations.api.version>
         <jboss.interceptors.api.version>1.0.1.Final</jboss.interceptors.api.version>
         <!-- Other EE APIs -->
-        <atinject.api.version>1</atinject.api.version>
+        <atinject.api.version>1.0</atinject.api.version>
         <jpa.api.version>1.0</jpa.api.version>
-        <servlet.api.version>3.0.1</servlet.api.version>
+        <servlet.api.version>4.0.3</servlet.api.version>
         <jsp.api.version>2.2</jsp.api.version>
-        <jta.api.version>1.1</jta.api.version>
-        <el.api.version>2.2</el.api.version>
+        <jta.api.version>1.3.3</jta.api.version>
+        <el.api.version>3.0.3</el.api.version>
         <jsf.api.version>2.1</jsf.api.version>
         <resteasy.version>2.2.1.GA</resteasy.version>
         <javax.ws.api.version>2.2.11</javax.ws.api.version>
@@ -140,8 +140,8 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.enterprise</groupId>
-                <artifactId>cdi-api</artifactId>
+                <groupId>jakarta.enterprise</groupId>
+                <artifactId>jakarta.enterprise.cdi-api</artifactId>
                 <version>${cdi.api.version}</version>
             </dependency>
 
@@ -176,8 +176,8 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
                 <version>${servlet.api.version}</version>
             </dependency>
 
@@ -188,20 +188,20 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
+                <groupId>jakarta.inject</groupId>
+                <artifactId>jakarta.inject-api</artifactId>
                 <version>${atinject.api.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>javax.transaction</groupId>
-                <artifactId>jta</artifactId>
+                <groupId>jakarta.transaction</groupId>
+                <artifactId>jakarta.transaction-api</artifactId>
                 <version>${jta.api.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>javax.el</groupId>
-                <artifactId>el-api</artifactId>
+                <groupId>jakarta.el</groupId>
+                <artifactId>jakarta.el-api</artifactId>
                 <version>${el.api.version}</version>
             </dependency>
 
@@ -304,7 +304,7 @@
         <connection>scm:git:git://github.com/cdi-spec/cdi-tck.git</connection>
         <developerConnection>scm:git:git@github.com:cdi-spec/cdi-tck.git</developerConnection>
         <url>https://github.com/cdi-spec/cdi-tck</url>
-        <tag>2.0.5.SP1</tag>
+        <tag>2.0.6</tag>
     </scm>
 
     <profiles>
@@ -395,4 +395,10 @@
 
     </profiles>
 
+    <repositories>
+      <repository>
+        <id>cdi-api-staging</id>
+        <url>https://oss.sonatype.org/content/repositories/central_bundles-18505</url>
+      </repository>
+    </repositories>
 </project>
