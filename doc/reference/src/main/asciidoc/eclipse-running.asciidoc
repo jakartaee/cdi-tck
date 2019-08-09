@@ -130,7 +130,7 @@ In order to run a test in the container you must explicitly specify following ac
 
 [NOTE]
 ====
-Note that all TestNG tests that are included in integration and javaee-full test groups are considered to be integration tests and must be run in in-container mode. javaee-full TestNG test group contains tests that require full Java EE platform (EAR packaging, JAX-WS, EJB timers, etc.).
+Note that all TestNG tests that are included in integration and javaee-full test groups are considered to be integration tests and must be run in in-container mode. javaee-full TestNG test group contains tests that require full Jakarta EE platform (EAR packaging, JAX-WS, EJB timers, etc.).
 ====
 
 Select an integration test (a class that extends org.jboss.cdi.tck.AbstractTest and open it in your Eclipse editor. Right click in the editor view and select Run As > TestNG Test.

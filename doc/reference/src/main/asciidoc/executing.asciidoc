@@ -54,7 +54,7 @@ mvn test -Dincontainer
 
 The presence of the +incontainer+ property activates an incontainer Maven profile. This time, all the tests except the tests within SE TestNG group are executed. 
 
-In order to run tests appropriate to the Java EE Web Profile execute: 
+In order to run tests appropriate to the Jakarta EE Web Profile execute:
 
 [source, console]
 ----

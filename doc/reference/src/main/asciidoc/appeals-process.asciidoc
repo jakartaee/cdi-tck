@@ -2,18 +2,9 @@
 
 == Appeals Process
 
-While the CDI TCK is rigorous about enforcing an implementation's conformance to the JSR 365 specification, it's reasonable to assume that an implementor may discover new and/or better ways to validate the assertions. This chapter covers the appeals process, defined by the Specification Lead, Red Hat Inc., which allows implementors of the JSR 365 specification to challenge one or more tests defined by the CDI TCK.
-
-The appeals process identifies who can make challenges to the TCK, what challenges to the TCK may be submitted, how these challenges are submitted, how and by whom challenges are addressed and how accepted challenges to the TCK are managed. 
-
-Following the recent adoption of transparency in the JCP, implementors are encouraged to make their appeals public, which this process facilitates. The JCP community should recognize that issue reports are a central aspect of any good software and it's only natural to point out shortcomings and strive to make improvements. Despite this good faith, not all implementors will be comfortable with a public appeals process. Instructions about how to make a private appeal are therefore provided. 
-
-
-
-=== Who can make challenges to the TCK?
-
-Any implementor may submit an appeal to challenge one or more tests in the CDI TCK. In fact, members of the JSR 365 Expert Group (EG) encourage this level of participation.
-
+While the CDI TCK is rigorous about enforcing an implementation's conformance to the Jakarta CDI specification, it's reasonable to assume that an implementor may discover new and/or better ways to validate the assertions.
+The appeals process is defined by the Jakarta EE
+link:$$https://github.com/jakartaee/specification-committee/blob/master/process.adoc$$[Jakarta EE TCK Process 1.0]
 
 
 === What challenges to the TCK may be submitted?
@@ -23,30 +14,20 @@ Any test case (e.g., test class, +@Test+ method), test case configuration (e.g.,
 What is generally not challengeable are the assertions made by the specification. The specification document is controlled by a separate process and challenges to it should be handled by the Maintenance Lead or by sending an e-mail to link:$$mailto:cdi-dev@lists.jboss.org$$[cdi-dev@lists.jboss.org].
 
 
-
 === How these challenges are submitted?
 
-To submit a challenge, a new issue should be created in the link:$$https://jira.jboss.org/jira/browse/CDITCK$$[CDI TCK project] of the JBoss JIRA using the Issue Type: Bug. The appellant should complete the Summary, Component (TCK Appeal), Environment and Description Field only. Any communication regarding the issue should be pursed in the comments of the filed issue for accurate record. 
-
-To submit an issue in the JBoss JIRA, you must have a (free) JBoss.org member account. You can create a member account using the link:$$https://community.jboss.org/register.jspa$$[on-line registration]. 
-
-If you wish to make a private challenge, you should follow the above procedure, setting the Security Level to Private. Only the issue reporter, TCK Lead and designates will be able to view the issue.
-
-
+To submit a challenge, a new issue should be created in the link:$$https://github.com/eclipse-ee4j/cdi$$[CDI TCK project] of the JBoss JIRA using the Issue Type: Bug. The appellant should complete the Summary, Component (TCK Appeal), Environment and Description Field only. Any communication regarding the issue should be pursed in the comments of the filed issue for accurate record.
 
 === How and by whom challenges are addressed?
 
 The challenges will be addressed in a timely fashion by the TCK Lead, as designated by Specification Lead, Red Hat Inc. or his/her designate. The appellant can also monitor the process by following the issue report filed in the link:$$https://jira.jboss.org/jira/browse/CDITCK$$[CDI TCK project] of the JBoss JIRA.
 
-The current TCK Lead is listed on the link:$$https://jira.jboss.org/jira/browse/CDITCK$$[CDI TCK Project Summary Page] on the JBoss JIRA.
-
+The current TCK Lead is listed on the link:$$https://jakarta.ee/specifications/cdi$$[CDI Project Summary Page] on Jakarta EE.
 
 
 === How accepted challenges to the TCK are managed?
-
-Accepted challenges will be acknowledged via the filed issue's comment section. Communication between the TCK Lead and the appellant will take place via the issue comments. The issue's status will be set to "Resolved" when the TCK Lead believes the issue to be resolved. The appellant should, within 30 days, either close the issue if they agree, or reopen the issue if they do not believe the issue to be resolved.
-
-Resolved issue not addressed for 30 days will be closed by the TCK Lead. If the TCK Lead and appellant are unable to agree on the issue resolution, it will be referred to the JSR 365 specification lead or his/her designate.
+The worflow for TCK challenges is outlined in
+link:$$https://github.com/jakartaee/specification-committee/blob/master/process.adoc$$[Jakarta EE TCK Process 1.0].
 
 Periodically, an updated TCK will be released, containing tests altered due to challenges - no new tests will be added. Implementations are required to pass the updated TCK. This release stream is named 2.0.x, where x will be incremented.
 
