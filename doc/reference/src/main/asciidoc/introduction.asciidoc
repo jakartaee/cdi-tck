@@ -8,7 +8,7 @@ This chapter explains the purpose of a TCK and identifies the foundation element
 
 === TCK Primer
 
-A TCK, or Technology Compatibility Kit, is one of the three required pieces for any JSR (the other two being the specification document and the reference implementation). The TCK is a set of tools and tests to verify that an implementation of the technology conforms to the specification. The tests are the primary component, but the tools serve an equally critical role of providing a framework and/or set of SPIs for executing the tests. 
+A TCK, or Technology Compatibility Kit, is one of the three required pieces for any specification (the other two being the specification document and the reference implementation). The TCK is a set of tools and tests to verify that an implementation of the technology conforms to the specification. The tests are the primary component, but the tools serve an equally critical role of providing a framework and/or set of SPIs for executing the tests.
 
 The tests in the TCK are derived from assertions in the written specification document. The assertions are itemized in an XML document, where they each get assigned a unique identifier, and materialize as a suite of automated tests that collectively validate whether an implementation complies with the aforementioned assertions, and in turn the specification. For a particular implementation to be certified, all of the required tests must pass (i.e., the provided test suite must be run unmodified). 
 
@@ -17,8 +17,7 @@ A TCK is entirely implementation agnostic. Ideally, it should validate assertion
 
 [NOTE]
 ====
-Oracle Corporation will implement the porting package for the CDI RI and test the CDI RI on the Java EE Reference Implementation. 
-
+Oracle Corporation will implement the porting package for the CDI Weld implementation and test the CDI RI on the Jakarta EE Reference Implementation.
 
 ====
 
@@ -51,7 +50,7 @@ Java platform compatibility is important to different groups involved with Java 
 
 * Conformance testing benefits Java platform implementors by ensuring the same extent of reliability for all Java platform ports. 
 
-The CDI specification goes to great lengths to ensure that programs written for Java EE are compatible and the TCK is rigorous about enforcing the rules the specification lays down. 
+The CDI specification goes to great lengths to ensure that programs written for Jakarta EE are compatible and the TCK is rigorous about enforcing the rules the specification lays down.
 
 
 === Compatibility Requirements
@@ -245,7 +244,7 @@ that defined by the Specifications.
 
 === About the CDI TCK
 
-The CDI TCK is designed as a portable, configurable and automated test suite for verifying the compatibility of an implementation of the JSR 365: Contexts and Dependency Injection for Java 2.0 specification. The test suite is built atop TestNG framework and Arquillian platform.
+The CDI TCK is designed as a portable, configurable and automated test suite for verifying the compatibility of an implementation of the Jakarta CDI specification. The test suite is built atop TestNG framework and Arquillian platform.
 
 Each test class in the suite acts as a deployable unit. The deployable units, or artifacts, can be either a WAR or an EAR. 
 
@@ -265,7 +264,7 @@ ShrinkWrap is a part of the Arqullian platform ecosystem.
 This section lists the applicable requirements and specifications for the CDI TCK. 
 
 
-*  *Specification requirements* - Software requirements for a CDI implementation are itemized in section 1.2, "Relationship to other specifications" in the CDI specification, with details provided throughout the specification. Generally, the CDI specification targets the Java EE 8 platform and will be aligned with its specifications.
+*  *Specification requirements* - Software requirements for a CDI implementation are itemized in section 1.2, "Relationship to other specifications" in the CDI specification, with details provided throughout the specification. Generally, the CDI specification targets the Jakarta EE 8 platform and will be aligned with its specifications.
 
 
 *  *Contexts and Dependency Injection for
@@ -281,15 +280,15 @@ This section lists the applicable requirements and specifications for the CDI TC
 *  *TCK Audit Tool* - An itemization of the assertions in the specification documents which are cross referenced by the individual tests. Describes how well the TCK covers the specification. 
 
 
-*  *Reference runtime* - The designated reference runtime for compatibility testing of the CDI specification is the Oracle Java Platform, Enterprise Edition (Java EE) 8 reference implementation (RI).
+*  *Compatible implementation* - A compatible implementation runtime for compatibility testing of the CDI specification is the Jakarta Platform Enterprise Edition 8 reference implementation (RI).
 
 
-*  *JSR 330* - CDI builds on JSR 330, and as such JSR 365 implementations must additionally pass the JSR 330 TCK.
+*  *Jarkarta Dependency Injection* - CDI builds on DI, and as such CDI implementations must additionally pass the Jakarta Dependency Injection TCK.
 
 
 [TIP]
 ====
-The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar+ which contains two classes showing how the CDI RI passes the JSR 330 TCK. The source for these classes is available from link:$$https://github.com/weld/core/tree/2.0/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck$$[] 
+The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar+ which contains two classes showing how the Weld compatible implementation passes the CDI TCK. The source for these classes is available from link:$$https://github.com/weld/core/tree/2.0/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck$$[]
 
 
 ====
@@ -325,7 +324,7 @@ The audit document is provided along with the TCK; at least 95% of assertions ar
 
 [NOTE]
 ====
-Oracle Corporation will implement the porting package for the CDI RI and test the CDI RI on the Java EE Reference Implementation. 
+Oracle Corporation will implement the porting package for the CDI RI and test the CDI RI on the Jakarta EE Reference Implementation.
 
 
 ====
@@ -334,9 +333,9 @@ Oracle Corporation will implement the porting package for the CDI RI and test th
 The CDI TCK has been tested on following platforms:
 
 
-*  WildFly 10.x using Oracle Java SE 8 on Red Hat Enterprise Linux 7.2
+*  WildFly 17.x using Oracle Java SE 8 on Red Hat Enterprise Linux 7.2
 
-CDI supports Java EE 6, Java EE 6 Web Profile, Java EE 7, Java EE 7 Web Profile, Embeddable EJB 3.1, and the Embeddable EJB 3.2. The TCK will execute on any of these runtimes, but is only part of the CTS for Java EE 8 and Java EE 8 Web Profile.
+CDI supports Jakarta EE 8, Jakarta EE 6 Web Profile, Embeddable Jakarta Enterprise Beans 3.2. The TCK will execute on any of these runtimes, but is only part of the CTS for Java EE 8 and Java EE 8 Web Profile.
 
 [[libraries]]
 

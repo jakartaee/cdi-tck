@@ -2,7 +2,7 @@
 
 == Reporting
 
-This chapter covers the two types of reports that can be generated from the TCK, an assertion coverage report and the test execution results. The chapter also justifies why the TCK is good indicator of how accurately an implementation conforms to the JSR 365 specification.
+This chapter covers the two types of reports that can be generated from the TCK, an assertion coverage report and the test execution results. The chapter also justifies why the TCK is good indicator of how accurately an implementation conforms to the CDI specification.
 
 
 === CDI TCK Coverage Metrics
@@ -28,7 +28,7 @@ The CDI TCK covers 100% of all API public methods using the Java CTT Sig Test to
 
 === CDI TCK Coverage Report
 
-A specification can be distilled into a collection of assertions that define the behavior of the software. This section introduces the CDI TCK coverage report, which documents the relationship between the assertions that have been identified in the JSR 365 specification document and the tests in the TCK test suite.
+A specification can be distilled into a collection of assertions that define the behavior of the software. This section introduces the CDI TCK coverage report, which documents the relationship between the assertions that have been identified in the Jakarta CDI specification document and the tests in the TCK test suite.
 
 The structure of this report is controlled by the assertion document, so we'll start there. 
 
@@ -36,7 +36,7 @@ The structure of this report is controlled by the assertion document, so we'll s
 
 ==== CDK TCK Assertions
 
-The CDI TCK developers have analyzed the JSR 365 specification document and identified the assertions that are present in each chapter. Here's an example of one such assertion found in section 2.3.3:
+The CDI TCK developers have analyzed the Jakarta CDI specification document and identified the assertions that are present in each chapter. Here's an example of one such assertion found in section 2.3.3:
 
 [quote]
 ____

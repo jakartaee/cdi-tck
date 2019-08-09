@@ -24,7 +24,7 @@ You should set the following required properties:
                      implementation.
                   
 |+org.jboss.cdi.tck.testDataSource=java:jboss/datasources/ExampleDS+|
-                     A few TCK tests work with Java EE persistence services (JPA, JTA) and require a data source to be provided.
+                     A few TCK tests work with Jakarta Persistence services and require a data source to be provided.
                      This property defines JNDI name of such resource. Required for the tests within the _persistence_ test group.
                   
 |+org.jboss.cdi.tck.testJmsConnectionFactory=java:/ConnectionFactory+|
@@ -86,9 +86,9 @@ Please consult the JavaDoc for these interfaces for the implementation requireme
 
 
 
-=== Using the CDI TCK with the Java EE Web Profile
+=== Using the CDI TCK with the Jakarta EE Web Profile
 
-You can configure the CDI TCK to just run tests appropriate to the Java EE Web Profile by excluding TestNG group _javaee-full_, e.g. via maven-surefire-plugin configuration: 
+You can configure the CDI TCK to just run tests appropriate to the Jakarta EE Web Profile by excluding TestNG group _javaee-full_, e.g. via maven-surefire-plugin configuration:
 
 [source.XML, xml]
 ----
@@ -164,7 +164,7 @@ Tests within the _jms_ test group require some basic Java Message Service config
 
 Tests within the _persistence_ test group require basic data source configuration. The data source has to be valid and JTA-based. The JNDI name of the DataSource is specified with configuration property - see <<tck-properties>>. 
 
-Tests within the _installedLib_ test group require the CDI TCK +cdi-tck-ext-lib+ artifact to be installed as a library (see also Java EE 6 specification, section EE.8.2.2 "Installed Libraries"). 
+Tests within the _installedLib_ test group require the CDI TCK +cdi-tck-ext-lib+ artifact to be installed as a library (see also Jakarta EE 8 specification, section EE.8.2.2 "Installed Libraries").
 
 Tests within the _systemProperties_ test group require the following system properties to be set: 
 
