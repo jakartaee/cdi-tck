@@ -70,7 +70,7 @@
 
     <ciManagement>
         <system>Jenkins</system>
-        <url>https://projects.eclipse.org/projects/ee4j.cdi</url>
+        <url>https://ci.eclipse.org/cdi/</url>
     </ciManagement>
 
     <issueManagement>
@@ -106,14 +106,14 @@
         <jboss.interceptors.api.version>1.0.1.Final</jboss.interceptors.api.version>
         <!-- Other EE APIs -->
         <atinject.api.version>1.0</atinject.api.version>
-        <jpa.api.version>1.0</jpa.api.version>
+        <jpa.api.version>2.2.3</jpa.api.version>
         <servlet.api.version>4.0.3</servlet.api.version>
-        <jsp.api.version>2.2</jsp.api.version>
+        <jsp.api.version>2.3.6</jsp.api.version>
         <jta.api.version>1.3.3</jta.api.version>
         <el.api.version>3.0.3</el.api.version>
-        <jsf.api.version>2.1</jsf.api.version>
+        <jsf.api.version>2.3.2</jsf.api.version>
         <resteasy.version>2.2.1.GA</resteasy.version>
-        <javax.ws.api.version>2.2.11</javax.ws.api.version>
+        <javax.ws.api.version>2.3.3</javax.ws.api.version>
         <!-- Test tools/dependencies -->
         <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
         <testng.version>6.8.8</testng.version>
@@ -182,8 +182,8 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>jsp-api</artifactId>
+                <groupId>jakarta.servlet.jsp</groupId>
+                <artifactId>jakarta.servlet.jsp-api</artifactId>
                 <version>${jsp.api.version}</version>
             </dependency>
 
@@ -206,20 +206,20 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.faces</groupId>
-                <artifactId>jsf-api</artifactId>
+                <groupId>jakarta.faces</groupId>
+                <artifactId>jakarta.faces-api</artifactId>
                 <version>${jsf.api.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>javax.persistence</groupId>
-                <artifactId>persistence-api</artifactId>
+                <groupId>jakarta.persistence</groupId>
+                <artifactId>jakarta.persistence-api</artifactId>
                 <version>${jpa.api.version}</version>
             </dependency>
             
             <dependency>
-                <groupId>javax.xml.ws</groupId>
-                <artifactId>jaxws-api</artifactId>
+                <groupId>jakarta.xml.ws</groupId>
+                <artifactId>jakarta.xml.ws-api</artifactId>
                 <version>${javax.ws.api.version}</version>
             </dependency>
 
@@ -394,11 +394,4 @@
 
 
     </profiles>
-
-    <repositories>
-      <repository>
-        <id>cdi-api-staging</id>
-        <url>https://oss.sonatype.org/content/repositories/central_bundles-18505</url>
-      </repository>
-    </repositories>
 </project>
