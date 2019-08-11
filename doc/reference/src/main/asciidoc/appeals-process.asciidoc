@@ -20,7 +20,7 @@ To submit a challenge, a new issue should be created in the link:$$https://githu
 
 === How and by whom challenges are addressed?
 
-The challenges will be addressed in a timely fashion by the TCK Lead, as designated by Specification Lead, Red Hat Inc. or his/her designate. The appellant can also monitor the process by following the issue report filed in the link:$$https://jira.jboss.org/jira/browse/CDITCK$$[CDI TCK project] of the JBoss JIRA.
+The challenges will be addressed in a timely fashion by the TCK Lead, as designated by Specification Lead, Red Hat Inc. or his/her designate. The appellant can also monitor the process by following the issue report filed in the link:$$https://github.com/eclipse-ee4j/cdiK$$[CDI TCK project] issues.
 
 The current TCK Lead is listed on the link:$$https://jakarta.ee/specifications/cdi$$[CDI Project Summary Page] on Jakarta EE.
 
