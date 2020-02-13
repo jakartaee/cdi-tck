@@ -114,6 +114,7 @@
         <jsf.api.version>2.3.2</jsf.api.version>
         <resteasy.version>2.2.1.GA</resteasy.version>
         <javax.ws.api.version>2.3.2</javax.ws.api.version>
+        <jax.artifacts.version>2.3.2</jax.artifacts.version>
         <!-- Test tools/dependencies -->
         <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
         <testng.version>6.8.8</testng.version>
@@ -221,9 +222,8 @@
             <dependency>
                 <groupId>jakarta.xml.ws</groupId>
                 <artifactId>jakarta.xml.ws-api</artifactId>
-                <version>${javax.ws.api.version}</version>
+                <version>${jax.artifacts.version}</version>
             </dependency>
-
 
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
@@ -275,6 +275,13 @@
                 <version>${arquillian.container.se.api.version}</version>
             </dependency>
 
+            <!-- Dependencies used with JDK 9+-->
+            <dependency>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-ri</artifactId>
+                <type>zip</type>
+                <version>${jax.artifacts.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
