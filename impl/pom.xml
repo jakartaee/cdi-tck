@@ -95,12 +95,12 @@
 
         <dependency>
             <groupId>org.jboss.spec.javax.resource</groupId>
-            <artifactId>jboss-connector-api_1.6_spec</artifactId>
+            <artifactId>jboss-connector-api_1.7_spec</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.spec.javax.jms</groupId>
-            <artifactId>jboss-jms-api_1.1_spec</artifactId>
+            <artifactId>jboss-jms-api_2.0_spec</artifactId>
         </dependency>
 
         <dependency>
@@ -274,7 +274,7 @@
         <profile>
             <id>tck-audit</id>
             <activation>
-                <jdk>[1.6,)</jdk>
+                <jdk>[1.8,)</jdk>
             </activation>
             <dependencies>
                 <dependency>
@@ -469,6 +469,21 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+
+        <profile>
+            <!-- auto-activated profile for any JDK 9+ -->
+            <id>jdk9+</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.sun.xml.ws</groupId>
+                    <artifactId>jaxws-ri</artifactId>
+                    <type>zip</type>
+                </dependency>
+            </dependencies>
         </profile>
 
         <!--
