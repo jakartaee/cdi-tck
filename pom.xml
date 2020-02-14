@@ -8,9 +8,9 @@
     <name>CDI TCK</name>
 
     <parent>
-        <groupId>org.jboss.weld</groupId>
-        <artifactId>weld-parent</artifactId>
-        <version>37</version>
+        <groupId>org.eclipse.ee4j</groupId>
+        <artifactId>project</artifactId>
+        <version>1.0.6</version>
     </parent>
 
     <!-- Metadata -->
@@ -99,11 +99,11 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- JBoss EE APIs -->
-        <jboss.ejb.api.version>1.0.0.Final</jboss.ejb.api.version>
-        <jboss.jms.api.version>1.0.0.Final</jboss.jms.api.version>
-        <jboss.connector.api.version>1.0.1.Final</jboss.connector.api.version>
-        <jboss.annotations.api.version>1.0.1.Final</jboss.annotations.api.version>
-        <jboss.interceptors.api.version>1.0.1.Final</jboss.interceptors.api.version>
+        <jboss.ejb.api.version>2.0.0.Final</jboss.ejb.api.version>
+        <jboss.jms.api.version>2.0.0.Final</jboss.jms.api.version>
+        <jboss.connector.api.version>2.0.0.Final</jboss.connector.api.version>
+        <jboss.annotations.api.version>2.0.0.Final</jboss.annotations.api.version>
+        <jboss.interceptors.api.version>2.0.0.Final</jboss.interceptors.api.version>
         <!-- Other EE APIs -->
         <atinject.api.version>1.0</atinject.api.version>
         <jpa.api.version>2.2.3</jpa.api.version>
@@ -113,7 +113,8 @@
         <el.api.version>3.0.3</el.api.version>
         <jsf.api.version>2.3.2</jsf.api.version>
         <resteasy.version>2.2.1.GA</resteasy.version>
-        <javax.ws.api.version>2.3.3</javax.ws.api.version>
+        <javax.ws.api.version>2.3.2</javax.ws.api.version>
+        <jax.artifacts.version>2.3.2</jax.artifacts.version>
         <!-- Test tools/dependencies -->
         <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
         <testng.version>6.8.8</testng.version>
@@ -159,13 +160,13 @@
 
             <dependency>
                 <groupId>org.jboss.spec.javax.jms</groupId>
-                <artifactId>jboss-jms-api_1.1_spec</artifactId>
+                <artifactId>jboss-jms-api_2.0_spec</artifactId>
                 <version>${jboss.jms.api.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jboss.spec.javax.resource</groupId>
-                <artifactId>jboss-connector-api_1.6_spec</artifactId>
+                <artifactId>jboss-connector-api_1.7_spec</artifactId>
                 <version>${jboss.connector.api.version}</version>
             </dependency>
 
@@ -223,7 +224,6 @@
                 <version>${javax.ws.api.version}</version>
             </dependency>
 
-
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>jaxrs-api</artifactId>
@@ -274,6 +274,14 @@
                 <version>${arquillian.container.se.api.version}</version>
             </dependency>
 
+            <!-- Dependencies used with JDK 9+-->
+            <dependency>
+                <groupId>com.sun.xml.ws</groupId>
+                <artifactId>jaxws-ri</artifactId>
+                <type>zip</type>
+                <version>${jax.artifacts.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -284,7 +292,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>2.5.3</version>
                     <configuration>
                         <mavenExecutorId>forked-path</mavenExecutorId>
                         <preparationGoals>clean install</preparationGoals>
@@ -294,7 +302,43 @@
                 <plugin>
                     <groupId>org.netbeans.tools</groupId>
                     <artifactId>sigtest-maven-plugin</artifactId>
-                    <version>1.0</version>
+                    <version>1.2</version>
+                </plugin>
+                <!-- Plugin versions since ee4j parent no longer declares them-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.6.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>build-helper-maven-plugin</artifactId>
+                    <version>3.0.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -341,7 +385,7 @@
                                 <configuration>
                                     <rules>
                                         <requireJavaVersion>
-                                            <version>1.6</version>
+                                            <version>1.8</version>
                                         </requireJavaVersion>
                                     </rules>
                                 </configuration>
@@ -391,7 +435,5 @@
                 </pluginRepository>
             </pluginRepositories>
         </profile>
-
-
     </profiles>
 </project>
