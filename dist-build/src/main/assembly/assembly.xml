@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+   <id>dist</id>
+   <baseDirectory>cdi-tck-${cdi.tck.version}</baseDirectory>
+   <formats>
+      <format>zip</format>
+   </formats>
+
+   <files>
+      <!-- This is the final EFTL license -->
+      <file>
+         <source>EFTL.txt</source>
+         <destName>LICENSE</destName>
+      </file>
+      <file>
+         <source>artifact-install.sh</source>
+         <outputDirectory>artifacts</outputDirectory>
+      </file>
+   </files>
+   <fileSets>
+      <fileSet>
+         <directory>${project.basedir}</directory>
+         <outputDirectory>/</outputDirectory>
+         <includes>
+            <include>README.adoc</include>
+         </includes>
+      </fileSet>
+   </fileSets>
+
+   <dependencySets>
+      <dependencySet>
+         <includes>
+            <include>jakarta.enterprise:cdi-tck-parent</include>
+            <include>jakarta.enterprise:cdi-tck-impl</include>
+            <include>jakarta.enterprise:cdi-tck-api</include>
+            <include>jakarta.enterprise:cdi-tck-ext-lib</include>
+         </includes>
+         <useTransitiveDependencies>true</useTransitiveDependencies>
+         <outputDirectory>artifacts</outputDirectory>
+         <useProjectArtifact>false</useProjectArtifact>
+      </dependencySet>
+      <dependencySet>
+         <includes>
+            <include>jakarta.enterprise:cdi-tck-dist-libs</include>
+         </includes>
+         <useTransitiveDependencies>false</useTransitiveDependencies>
+         <outputDirectory>/lib</outputDirectory>
+         <useProjectArtifact>false</useProjectArtifact>
+         <unpack>true</unpack>
+      </dependencySet>
+      <dependencySet>
+         <includes>
+            <include>jakarta.enterprise:cdi-tck-dist-porting-package</include>
+         </includes>
+         <useTransitiveDependencies>false</useTransitiveDependencies>
+         <outputDirectory>/weld</outputDirectory>
+         <useProjectArtifact>false</useProjectArtifact>
+         <unpack>true</unpack>
+      </dependencySet>
+      <dependencySet>
+         <includes>
+            <include>jakarta.enterprise:cdi-tck-reference-guide</include>
+         </includes>
+         <unpack>true</unpack>
+         <unpackOptions>
+            <excludes>
+               <exclude>META-INF/</exclude>
+            </excludes>
+         </unpackOptions>
+         <outputDirectory>doc</outputDirectory>
+         <useProjectArtifact>false</useProjectArtifact>
+      </dependencySet>
+   </dependencySets>
+
+</assembly>
