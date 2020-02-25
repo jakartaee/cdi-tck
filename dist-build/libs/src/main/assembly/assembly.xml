@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/assembly-1.1.1.xsd">
+
+    <id>dist</id>
+    <baseDirectory>/</baseDirectory>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <fileSets>
+        <fileSet>
+            <useDefaultExcludes>false</useDefaultExcludes>
+            <excludes>
+                <exclude>**/target/**</exclude>
+            </excludes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+</assembly>
