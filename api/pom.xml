@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.jboss.cdi.tck</groupId>
+		<groupId>jakarta.enterprise</groupId>
 		<artifactId>cdi-tck-parent</artifactId>
 		<version>2.1.0</version>
 	</parent>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.jboss.cdi.tck</groupId>
+    <groupId>jakarta.enterprise</groupId>
     <artifactId>cdi-tck-parent</artifactId>
     <packaging>pom</packaging>
     <version>2.1.0</version>
@@ -122,6 +122,9 @@
         <arquillian.container.se.api.version>1.0.1.Final</arquillian.container.se.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
         <htmlunit.version>2.9</htmlunit.version>
+        <!-- Required for distribution build, should be overriden for each build -->
+        <cdi.tck.version>${project.version}</cdi.tck.version>
+        <weld.version>3.1.1.Final</weld.version>
     </properties>
 
     <!-- Dependency management -->
@@ -129,13 +132,13 @@
         <dependencies>
 
             <dependency>
-                <groupId>org.jboss.cdi.tck</groupId>
+                <groupId>jakarta.enterprise</groupId>
                 <artifactId>cdi-tck-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.cdi.tck</groupId>
+                <groupId>jakarta.enterprise</groupId>
                 <artifactId>cdi-tck-ext-lib</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -354,6 +357,11 @@
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>1.4.1</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -375,6 +383,7 @@
             </activation>
             <modules>
                 <module>doc/reference</module>
+                <module>dist-build</module>
             </modules>
         </profile>
 
