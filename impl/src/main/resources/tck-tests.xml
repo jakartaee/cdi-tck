@@ -38,12 +38,18 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-625 -->
+            <class name="org.jboss.cdi.tck.tests.context.request.jaxrs.RequestContextTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
             <!-- CDITCK-626 -->
             <class name="org.jboss.cdi.tck.tests.implementation.simple.resource.env.EnvInjectionTest">
                 <methods>
                     <exclude name="testResourceBeanTypes"/>
-                </methods>
-            </class>
+
 
         </classes>
     </test>

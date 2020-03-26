@@ -69,7 +69,7 @@ public abstract class ForwardingAnnotated implements Annotated {
 
     @Override
     public String toString() {
-        return delegate().toString();
+        return "ForwardingAnnotated with base type " + getBaseType() + " and type closure " + getTypeClosure();
     }
 
 }
