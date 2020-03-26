@@ -9468,7 +9468,7 @@
 
     <section id="resource_types" title="Bean types of a resource" level="3">
         <group>
-            <text>The unrestricted set of bean types of a resource is determined by the declared type of the producer field, as specified by Section 3.4.1,
+            <text>The unrestricted set of bean types for a resource is determined by the declared type of the producer field, as specified by Section 3.4.1,
                 "Bean types of a producer field".
             </text>
             <assertion id="aa">
