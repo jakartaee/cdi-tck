@@ -45,6 +45,12 @@
                 </methods>
             </class>
 
+            <!-- CDITCK-626 -->
+            <class name="org.jboss.cdi.tck.tests.implementation.simple.resource.env.EnvInjectionTest">
+                <methods>
+                    <exclude name="testResourceBeanTypes"/>
+
+
         </classes>
     </test>
 

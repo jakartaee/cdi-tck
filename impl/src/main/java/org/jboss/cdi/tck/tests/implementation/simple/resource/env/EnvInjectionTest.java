@@ -78,10 +78,9 @@ public class EnvInjectionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = RESOURCE_TYPES, id = "aa") })
     public void testResourceBeanTypes() {
         @SuppressWarnings("serial")
-        Bean<String> greeting = getBeans(String.class, new AnnotationLiteral<Greeting>() {
+        Bean<Boolean> check = getBeans(Boolean.class, new AnnotationLiteral<Greeting>() {
         }).iterator().next();
-        assert greeting.getTypes().size() == 5;
-        assert rawTypeSetMatches(greeting.getTypes(), String.class, Object.class, Serializable.class, Comparable.class,
-                CharSequence.class);
+        assert check.getTypes().size() == 4;
+        assert rawTypeSetMatches(check.getTypes(), Boolean.class, Object.class, Serializable.class, Comparable.class);
     }
 }
