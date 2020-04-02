@@ -3,7 +3,7 @@
     <parent>
         <artifactId>cdi-tck-parent</artifactId>
         <groupId>jakarta.enterprise</groupId>
-        <version>2.0.7-SNAPSHOT</version>
+        <version>2.0.7.SP1</version>
     </parent>
     <artifactId>cdi-tck-ext-lib</artifactId>
     <name>CDI TCK Installed Library - test bean archive</name>
