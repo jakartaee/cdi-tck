@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
 import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
-import javax.enterprise.inject.spi.AnnotatedType;
+import jakarta.enterprise.inject.spi.AnnotatedType;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;

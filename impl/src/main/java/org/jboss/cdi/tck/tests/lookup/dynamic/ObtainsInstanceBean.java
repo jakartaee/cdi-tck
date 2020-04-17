@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.lookup.dynamic;
 
 import static org.jboss.cdi.tck.tests.lookup.dynamic.PayBy.PaymentMethod.CHEQUE;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
 public class ObtainsInstanceBean {
     @Inject

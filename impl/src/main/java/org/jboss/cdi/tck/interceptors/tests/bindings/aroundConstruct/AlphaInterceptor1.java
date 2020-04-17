@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.aroundConstruct;
 
-import javax.interceptor.Interceptor;
+import jakarta.interceptor.Interceptor;
 
 @Interceptor
 @AlphaBinding(1)

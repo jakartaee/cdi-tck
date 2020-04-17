@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
 import java.io.Serializable;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * Simple bean that has an injection point for a spider

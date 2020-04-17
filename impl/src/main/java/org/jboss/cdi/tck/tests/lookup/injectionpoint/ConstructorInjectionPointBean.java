@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * Test bean to inject a bean using injection point metadata into a constructor

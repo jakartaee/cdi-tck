@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.enterprise.methodOnSessionBean;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface AppleTreeLocal {

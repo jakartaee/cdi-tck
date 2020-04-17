@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes.producer.field;
 
-import javax.ejb.Stateful;
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.context.ConversationScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.Produces;
 
 @Stateful
 public class SessionBeanProducerFieldWithTooManyScopeTypes_Broken {

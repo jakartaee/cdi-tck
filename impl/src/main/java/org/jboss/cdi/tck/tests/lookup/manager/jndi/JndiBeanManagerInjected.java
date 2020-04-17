@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.manager.jndi;
 
-import javax.ejb.Stateful;
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.inject.spi.BeanManager;
 import javax.naming.NamingException;
 
 import org.jboss.cdi.tck.util.JndiLookupUtils;

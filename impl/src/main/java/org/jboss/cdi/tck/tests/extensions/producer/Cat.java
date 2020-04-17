@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Cat implements Speakable{
     private static boolean constructorCalled;

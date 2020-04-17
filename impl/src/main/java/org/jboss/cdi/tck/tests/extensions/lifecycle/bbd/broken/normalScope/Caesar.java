@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.broken.normalScope;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Caesar {
 

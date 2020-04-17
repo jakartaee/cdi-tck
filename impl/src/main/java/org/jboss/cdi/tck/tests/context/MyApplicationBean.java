@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MyApplicationBean implements Serializable {

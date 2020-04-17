@@ -23,9 +23,9 @@ import static org.testng.Assert.assertTrue;
 
 import java.io.Serializable;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.interceptor.AroundConstruct;
-import javax.interceptor.InvocationContext;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.InvocationContext;
 
 @SuppressWarnings("serial")
 public class AlphaInterceptor extends AbstractInterceptor implements Serializable {

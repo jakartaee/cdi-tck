@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.genericbroken;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class FooBroken<T> {

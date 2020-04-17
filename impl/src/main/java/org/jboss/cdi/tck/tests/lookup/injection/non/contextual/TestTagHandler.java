@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
 import java.io.IOException;
 
-import javax.enterprise.inject.Any;
-import javax.inject.Inject;
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
+import jakarta.enterprise.inject.Any;
+import jakarta.inject.Inject;
+import jakarta.servlet.jsp.JspException;
+import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 
 @Any
 public class TestTagHandler extends SimpleTagSupport {

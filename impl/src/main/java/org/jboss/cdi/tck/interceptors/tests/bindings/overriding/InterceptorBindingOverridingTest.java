@@ -20,7 +20,7 @@ import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BINDING_INT_TO
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_BINDING_TYPES_WITH_MEMBERS;
 import static org.testng.Assert.assertEquals;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

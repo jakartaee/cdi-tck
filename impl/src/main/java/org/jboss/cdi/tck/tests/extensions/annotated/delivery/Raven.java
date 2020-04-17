@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class Raven {

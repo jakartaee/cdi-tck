@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection;
 
-import javax.annotation.Resource;
-import javax.ejb.EJB;
-import javax.inject.Inject;
+import jakarta.annotation.Resource;
+import jakarta.ejb.EJB;
+import jakarta.inject.Inject;
 
 public class HenHouse {
 

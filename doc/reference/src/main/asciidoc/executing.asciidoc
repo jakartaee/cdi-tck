@@ -89,7 +89,7 @@ Since Arquillian in-container tests are executed in a remote JVM, the results of
 To execute full TCK testsuite you have to run tests within SE group as well. 
 SE tests make use of link:$$https://github.com/arquillian/arquillian-container-se$$[Arquillian container SE].
 This way the tests are executed in a separate JVM instance with isolated and configurable classpath.
-The Arquillian container does not start CDI container in any way - this is still done directly in the tests using CDI SE bootstrap API and `javax.enterprise.inject.se.SeContainerInitializer`.
+The Arquillian container does not start CDI container in any way - this is still done directly in the tests using CDI SE bootstrap API and `jakarta.enterprise.inject.se.SeContainerInitializer`.
 In order to run SE TCK tests in RI, you need to execute "weld-se" Maven profile from the JBoss TCK runner POM file as follows: 
 
 [source, console]

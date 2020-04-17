@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.named;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named
 // -> @Named("carp")

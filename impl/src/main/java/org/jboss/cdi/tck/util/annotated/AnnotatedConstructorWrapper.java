@@ -21,8 +21,8 @@ import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import javax.enterprise.inject.spi.AnnotatedConstructor;
-import javax.enterprise.inject.spi.AnnotatedParameter;
+import jakarta.enterprise.inject.spi.AnnotatedConstructor;
+import jakarta.enterprise.inject.spi.AnnotatedParameter;
 
 public class AnnotatedConstructorWrapper<X> extends AnnotatedCallableWraper<X> implements AnnotatedConstructor<X> {
 

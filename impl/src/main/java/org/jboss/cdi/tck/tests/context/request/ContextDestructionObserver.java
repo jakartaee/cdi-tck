@@ -17,10 +17,10 @@
 
 package org.jboss.cdi.tck.tests.context.request;
 
-import javax.enterprise.context.Destroyed;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
-import javax.servlet.ServletRequest;
+import jakarta.enterprise.context.Destroyed;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.servlet.ServletRequest;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

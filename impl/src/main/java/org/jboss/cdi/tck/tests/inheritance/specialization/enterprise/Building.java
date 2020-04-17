@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise;
 
-import javax.ejb.Stateful;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.inject.Produces;
 
 @Stateful
 public class Building implements BuildingLocal {

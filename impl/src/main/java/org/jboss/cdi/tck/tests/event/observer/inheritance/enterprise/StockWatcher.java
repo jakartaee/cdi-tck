@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.inheritance.enterprise;
 
-import javax.ejb.Stateful;
-import javax.enterprise.event.Observes;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.event.Observes;
 
 public @Stateful
 class StockWatcher implements StockWatcherLocal {

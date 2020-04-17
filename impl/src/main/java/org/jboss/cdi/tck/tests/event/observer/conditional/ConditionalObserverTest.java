@@ -30,10 +30,10 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import javax.enterprise.context.spi.Context;
-import javax.enterprise.event.Event;
-import javax.enterprise.event.Reception;
-import javax.inject.Inject;
+import jakarta.enterprise.context.spi.Context;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.event.Reception;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

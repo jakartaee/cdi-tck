@@ -19,14 +19,14 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.built
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.Conversation;
-import javax.enterprise.event.Event;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessBeanAttributes;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.enterprise.context.Conversation;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessBeanAttributes;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class ProcessBeanAttributesObserver implements Extension {
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.custom;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  *

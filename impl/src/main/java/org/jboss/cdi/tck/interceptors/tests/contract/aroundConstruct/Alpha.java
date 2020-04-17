@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct;
 
 import java.io.Serializable;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
-import javax.interceptor.Interceptors;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptors;
 
 @SuppressWarnings("serial")
 public class Alpha implements Serializable {

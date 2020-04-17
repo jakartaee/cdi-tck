@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.application.async;
 
-import javax.servlet.AsyncContext;
+import jakarta.servlet.AsyncContext;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 import org.jboss.cdi.tck.util.Timer;

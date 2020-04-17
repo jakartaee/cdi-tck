@@ -1,6 +1,6 @@
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 @AlmightyBinding
 public class MissileObserver {

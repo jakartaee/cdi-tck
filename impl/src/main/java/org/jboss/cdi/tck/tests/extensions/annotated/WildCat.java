@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.annotated;
 
 import java.util.Date;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class WildCat extends Cat {

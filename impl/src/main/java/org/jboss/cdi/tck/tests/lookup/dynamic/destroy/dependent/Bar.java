@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.dependent;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 
 @Transactional
 public class Bar {

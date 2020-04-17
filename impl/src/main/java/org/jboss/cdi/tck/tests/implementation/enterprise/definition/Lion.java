@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
-import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.context.RequestScoped;
 
 @Stateful
 @RequestScoped

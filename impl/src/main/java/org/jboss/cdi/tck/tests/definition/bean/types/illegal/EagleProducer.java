@@ -1,6 +1,6 @@
 package org.jboss.cdi.tck.tests.definition.bean.types.illegal;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class EagleProducer<T> {
 

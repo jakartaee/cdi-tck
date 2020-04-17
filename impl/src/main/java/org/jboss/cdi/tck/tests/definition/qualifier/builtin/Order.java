@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.builtin;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Order {
     @Inject

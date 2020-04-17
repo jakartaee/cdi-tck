@@ -25,8 +25,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Set;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.Decorator;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.Decorator;
 
 import org.jboss.cdi.tck.AbstractTest;
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.normal;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 
 public abstract class AbstractComponent {
 

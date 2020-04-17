@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 @SuppressWarnings("all")
 public class RoleLiteral extends AnnotationLiteral<Role> implements Role {

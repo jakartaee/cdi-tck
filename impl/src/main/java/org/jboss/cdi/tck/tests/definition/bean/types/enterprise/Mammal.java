@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types.enterprise;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface Mammal<T> extends Animal<T> {

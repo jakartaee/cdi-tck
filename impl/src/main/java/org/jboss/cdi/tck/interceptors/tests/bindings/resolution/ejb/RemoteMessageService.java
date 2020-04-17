@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution.ejb;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @MessageBinding
 @BasketBinding(requiresBall = true)

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod;
 
-import javax.ejb.Stateless;
-import javax.enterprise.event.Observes;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.event.Observes;
 
 @Stateless
 public class TibetanTerrier implements Terrier {

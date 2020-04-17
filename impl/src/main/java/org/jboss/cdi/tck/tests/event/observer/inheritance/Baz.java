@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.event.observer.inheritance;
 
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

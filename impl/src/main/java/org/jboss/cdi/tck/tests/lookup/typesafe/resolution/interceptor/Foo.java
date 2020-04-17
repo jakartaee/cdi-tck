@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.interceptor;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba

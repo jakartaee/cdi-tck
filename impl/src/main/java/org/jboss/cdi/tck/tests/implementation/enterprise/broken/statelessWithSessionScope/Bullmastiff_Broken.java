@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.statelessWithSessionScope;
 
-import javax.ejb.Stateless;
-import javax.enterprise.context.SessionScoped;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.SessionScoped;
 
 @Stateless
 @SessionScoped

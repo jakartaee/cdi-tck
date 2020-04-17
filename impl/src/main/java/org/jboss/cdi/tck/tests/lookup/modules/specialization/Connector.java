@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.modules.specialization;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public abstract class Connector {
 

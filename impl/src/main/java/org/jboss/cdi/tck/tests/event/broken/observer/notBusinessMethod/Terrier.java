@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.notBusinessMethod;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface Terrier {

@@ -20,7 +20,7 @@ package org.jboss.cdi.tck.tests.context.conversation.determination;
 import org.jboss.cdi.tck.util.SimpleLogger;
 import org.jboss.cdi.tck.util.Timer;
 
-import javax.servlet.AsyncContext;
+import jakarta.servlet.AsyncContext;
 
 /**
  * @author Martin Kouba

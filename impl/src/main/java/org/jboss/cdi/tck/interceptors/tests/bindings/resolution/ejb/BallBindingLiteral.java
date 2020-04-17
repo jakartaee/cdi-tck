@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution.ejb;
 
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Named;
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.inject.Named;
 
 /**
  * Annotation literal for {@link Named}

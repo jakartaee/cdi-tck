@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Specializes;
 
 public class SpecializingFooMethodProducer extends FooMethodProducer {
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.remote;
 
-import javax.ejb.Remote;
+import jakarta.ejb.Remote;
 
 @Remote
 public interface ServiceRemote {

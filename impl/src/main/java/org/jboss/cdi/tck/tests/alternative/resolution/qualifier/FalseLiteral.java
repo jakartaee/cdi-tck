@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 @SuppressWarnings("serial")
 public class FalseLiteral extends AnnotationLiteral<False> {

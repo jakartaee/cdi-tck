@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.event.observer.async.handlingExceptions;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.enterprise.event.ObservesAsync;
+import jakarta.enterprise.event.ObservesAsync;
 
 public class PragueRadioStation {
 

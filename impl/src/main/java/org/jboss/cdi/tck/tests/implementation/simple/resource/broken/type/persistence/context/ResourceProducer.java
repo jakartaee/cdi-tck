@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.persistence.context;
 
-import javax.enterprise.inject.Produces;
-import javax.persistence.PersistenceContext;
+import jakarta.enterprise.inject.Produces;
+import jakarta.persistence.PersistenceContext;
 
 import org.jboss.cdi.tck.tests.implementation.simple.resource.persistenceContext.Database;
 

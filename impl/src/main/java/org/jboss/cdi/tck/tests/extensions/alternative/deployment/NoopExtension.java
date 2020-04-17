@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.deployment;
 
-import javax.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.Extension;
 
 public class NoopExtension implements Extension {
 

@@ -21,7 +21,7 @@ import static org.testng.Assert.assertNull;
 
 import java.lang.annotation.Annotation;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.AbstractTest;
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 @Tame

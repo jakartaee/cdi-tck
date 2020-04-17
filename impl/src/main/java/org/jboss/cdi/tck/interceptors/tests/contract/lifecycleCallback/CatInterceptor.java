@@ -18,11 +18,11 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
 import static org.testng.Assert.assertEquals;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.interceptor.InvocationContext;
 import javax.naming.InitialContext;
-import javax.transaction.TransactionSynchronizationRegistry;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 public class CatInterceptor {
 

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.remove;
 
-import javax.ejb.Local;
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.ejb.Local;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 @Local
 public interface DependentSessionInterface {

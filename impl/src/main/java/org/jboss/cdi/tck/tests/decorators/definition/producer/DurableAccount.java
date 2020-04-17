@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.producer;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class DurableAccount implements BankAccount {

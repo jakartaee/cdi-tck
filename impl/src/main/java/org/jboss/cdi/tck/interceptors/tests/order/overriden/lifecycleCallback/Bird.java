@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.interceptors.tests.order.overriden.lifecycleCallback;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
 public class Bird {
 

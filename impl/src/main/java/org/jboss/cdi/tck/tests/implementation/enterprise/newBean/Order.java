@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
+import jakarta.ejb.Remove;
+import jakarta.ejb.Stateful;
 
 @Secure
 @Stateful

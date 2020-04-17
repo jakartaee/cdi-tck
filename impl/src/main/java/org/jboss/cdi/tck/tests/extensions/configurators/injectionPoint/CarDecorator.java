@@ -1,8 +1,8 @@
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
-import javax.annotation.Priority;
-import javax.decorator.Decorator;
-import javax.inject.Inject;
+import jakarta.annotation.Priority;
+import jakarta.decorator.Decorator;
+import jakarta.inject.Inject;
 
 @Decorator
 @Priority(2000)

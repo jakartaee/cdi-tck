@@ -24,8 +24,8 @@ import static org.testng.Assert.assertNotNull;
 import java.security.Principal;
 
 import javax.security.auth.login.LoginException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
+import jakarta.transaction.SystemException;
+import jakarta.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

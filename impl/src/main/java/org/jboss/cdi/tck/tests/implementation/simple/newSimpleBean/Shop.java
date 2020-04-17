@@ -2,8 +2,8 @@ package org.jboss.cdi.tck.tests.implementation.simple.newSimpleBean;
 
 import java.io.Serializable;
 
-import javax.enterprise.inject.New;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.New;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("serial")
 public class Shop implements Serializable {

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.broken.restricted;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Typed;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Typed;
 
 /**
  * 

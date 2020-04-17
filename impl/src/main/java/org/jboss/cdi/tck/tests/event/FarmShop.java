@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event;
 
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Specializes;
 
 @Specializes
 public class FarmShop extends Shop {

@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types.enterprise.illegal;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Stateless
 public class Eagle<T> implements Bird<T> {

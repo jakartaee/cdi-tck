@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Whitefish
 @Chunky(realChunky = true)

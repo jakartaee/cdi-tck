@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.nonContextualReference;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface MissileLocal {

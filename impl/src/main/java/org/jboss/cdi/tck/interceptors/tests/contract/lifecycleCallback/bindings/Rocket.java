@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

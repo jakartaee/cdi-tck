@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 class Vehicle {
     @AroundInvoke

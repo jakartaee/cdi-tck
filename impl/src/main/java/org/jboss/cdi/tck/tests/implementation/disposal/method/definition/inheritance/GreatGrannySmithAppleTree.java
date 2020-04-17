@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 /**
  * Test that {@link AppleTree#disposeApple(Apple)} is not inherited.

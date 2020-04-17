@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.lifecycleCallback;
 
-import javax.annotation.PostConstruct;
-import javax.interceptor.Interceptors;
+import jakarta.annotation.PostConstruct;
+import jakarta.interceptor.Interceptors;
 
 @Interceptors({ Interceptor1.class, Interceptor4.class })
 class LakeCargoShip extends CargoShip {

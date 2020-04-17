@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.context.passivating.validation;
 
 import java.io.Serializable;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("serial")
 @Decorator

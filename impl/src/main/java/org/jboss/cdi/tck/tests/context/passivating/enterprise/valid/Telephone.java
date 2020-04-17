@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.enterprise.valid;
 
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import jakarta.ejb.Remove;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 
 @Stateful
 @SessionScoped

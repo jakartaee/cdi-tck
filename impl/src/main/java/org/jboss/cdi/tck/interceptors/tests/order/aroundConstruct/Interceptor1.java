@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.aroundConstruct;
 
-import javax.interceptor.AroundConstruct;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

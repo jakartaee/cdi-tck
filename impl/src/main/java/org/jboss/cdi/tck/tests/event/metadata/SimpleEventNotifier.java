@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.metadata;
 
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.tests.event.metadata.Bravo.BravoLiteral;
 import org.jboss.cdi.tck.tests.event.metadata.Charlie.CharlieLiteral;

@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
 import java.io.Serializable;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("rawtypes")
 public class ConsumerWildcard {

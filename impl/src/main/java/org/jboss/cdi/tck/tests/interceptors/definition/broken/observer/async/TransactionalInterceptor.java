@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.observer.async;
 
-import javax.annotation.Priority;
-import javax.enterprise.event.ObservesAsync;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.event.ObservesAsync;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 

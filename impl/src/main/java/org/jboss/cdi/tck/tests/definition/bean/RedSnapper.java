@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @FishStereotype
 @RequestScoped

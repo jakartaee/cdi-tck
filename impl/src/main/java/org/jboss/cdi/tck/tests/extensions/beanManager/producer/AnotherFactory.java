@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.producer;
 
 import static org.testng.Assert.assertNotNull;
 
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 public class AnotherFactory {
 

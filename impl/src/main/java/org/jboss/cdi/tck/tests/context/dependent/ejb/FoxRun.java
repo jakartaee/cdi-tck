@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent.ejb;
 
-import javax.annotation.PreDestroy;
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.annotation.PreDestroy;
+import jakarta.ejb.Remove;
+import jakarta.ejb.Stateful;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("foxRun")
 @Stateful

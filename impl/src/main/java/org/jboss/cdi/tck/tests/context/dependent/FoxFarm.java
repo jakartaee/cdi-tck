@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class FoxFarm {
     @Inject

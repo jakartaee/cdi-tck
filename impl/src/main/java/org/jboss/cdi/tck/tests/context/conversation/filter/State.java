@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.conversation.filter;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 

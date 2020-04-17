@@ -19,9 +19,9 @@ package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.Produces;
 
 /**
  * Producer and Consumer logic resides here

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.resource.resource;
 
-import javax.annotation.Resource;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.annotation.Resource;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 public class ResourceProducer {
     @Produces

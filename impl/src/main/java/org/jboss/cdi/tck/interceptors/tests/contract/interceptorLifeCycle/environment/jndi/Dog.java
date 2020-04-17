@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.environment.jndi;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Stateful(name = "Animal")
 public class Dog implements Animal {

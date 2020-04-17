@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.context.application.disposer;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 

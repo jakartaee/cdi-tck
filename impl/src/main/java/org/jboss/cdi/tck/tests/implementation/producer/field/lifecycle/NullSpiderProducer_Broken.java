@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
 
 /**
  * Bean with a producer field that always returns null and is not in Dependent context (the produced result)

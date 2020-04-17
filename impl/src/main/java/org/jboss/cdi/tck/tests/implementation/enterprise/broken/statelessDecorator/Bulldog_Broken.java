@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.statelessDecorator;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 @Stateless
 @Decorator

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.enterprise.remoteMethod;
 
-import javax.ejb.Stateful;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
 
 @Stateful
 public class FooDisposal implements FooDisposalRemote {

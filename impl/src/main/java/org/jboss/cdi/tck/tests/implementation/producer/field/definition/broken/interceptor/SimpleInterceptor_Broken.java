@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.interceptor;
 
-import javax.enterprise.inject.Produces;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.enterprise.inject.Produces;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @Secure

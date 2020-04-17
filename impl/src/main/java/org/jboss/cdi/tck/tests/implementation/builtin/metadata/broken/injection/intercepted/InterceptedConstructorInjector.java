@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection.intercepted;
 
-import javax.enterprise.inject.Intercepted;
-import javax.enterprise.inject.spi.Bean;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Intercepted;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.inject.Inject;
 
 public class InterceptedConstructorInjector {
 

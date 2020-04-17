@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.trimmed;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class Bike {

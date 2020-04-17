@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.util.annotated;
 
-import javax.enterprise.inject.spi.AnnotatedMember;
+import jakarta.enterprise.inject.spi.AnnotatedMember;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.lang.reflect.Type;

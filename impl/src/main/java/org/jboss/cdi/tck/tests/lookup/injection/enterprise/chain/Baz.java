@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.lookup.injection.enterprise.chain;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 @Stateless
 public class Baz {

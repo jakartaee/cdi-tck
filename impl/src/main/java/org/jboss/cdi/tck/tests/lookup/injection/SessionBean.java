@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Stateless
 public class SessionBean {

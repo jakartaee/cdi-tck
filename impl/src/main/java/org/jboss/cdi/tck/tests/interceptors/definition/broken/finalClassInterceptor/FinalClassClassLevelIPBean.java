@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class FinalClassClassLevelIPBean {
     

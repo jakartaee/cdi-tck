@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.context.async.enterprise;
 
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateless;
-import javax.enterprise.event.ObservesAsync;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.event.ObservesAsync;
 
 @Stateless
 @RolesAllowed("student")

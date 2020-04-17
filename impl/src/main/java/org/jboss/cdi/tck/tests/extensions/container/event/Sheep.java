@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.container.event;
 
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
+import jakarta.ejb.Stateless;
+import jakarta.interceptor.Interceptors;
 
 @Stateless(name = "sheep")
 @Tame

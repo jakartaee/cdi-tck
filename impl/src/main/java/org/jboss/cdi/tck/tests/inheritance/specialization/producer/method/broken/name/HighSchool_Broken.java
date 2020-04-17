@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.broken.name;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.Specializes;
-import javax.inject.Named;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Specializes;
+import jakarta.inject.Named;
 
 public class HighSchool_Broken extends School {
     @Override

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.broken.passivatingScope;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.BeforeBeanDiscovery;
-import javax.enterprise.inject.spi.Extension;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.BeforeBeanDiscovery;
+import jakarta.enterprise.inject.spi.Extension;
 
 /**
  * @author pmuir

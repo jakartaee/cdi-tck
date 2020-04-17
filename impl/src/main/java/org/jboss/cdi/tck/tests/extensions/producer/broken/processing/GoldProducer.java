@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.broken.processing;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class GoldProducer {
 

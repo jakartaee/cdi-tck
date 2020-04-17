@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.application.ejb;
 
-import javax.ejb.Remote;
+import jakarta.ejb.Remote;
 
 @Remote
 public interface FooRemote {

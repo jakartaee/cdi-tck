@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.specialization.alternative;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Produces;
 
 public class Factory {
 

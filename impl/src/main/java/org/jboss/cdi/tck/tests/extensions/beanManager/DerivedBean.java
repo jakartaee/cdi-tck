@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager;
 
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Specializes;
 
 @Specializes
 @Tame

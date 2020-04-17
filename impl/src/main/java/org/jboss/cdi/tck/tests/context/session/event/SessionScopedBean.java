@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.session.event;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 @SessionScoped
 @SuppressWarnings("serial")

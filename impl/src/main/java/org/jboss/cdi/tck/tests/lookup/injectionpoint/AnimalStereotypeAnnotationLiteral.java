@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class AnimalStereotypeAnnotationLiteral extends AnnotationLiteral<AnimalStereotype> implements AnimalStereotype {
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  * @author pmuir

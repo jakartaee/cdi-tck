@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 abstract class PayByBinding extends AnnotationLiteral<PayBy> implements PayBy {
 

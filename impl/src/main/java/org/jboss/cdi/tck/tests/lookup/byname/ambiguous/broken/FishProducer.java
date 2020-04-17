@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname.ambiguous.broken;
 
-import javax.annotation.Priority;
-import javax.enterprise.inject.Alternative;
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Named;
 
 @Priority(1000)
 @Alternative

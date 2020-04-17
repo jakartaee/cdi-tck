@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.specialization.alternative;
 
-import javax.enterprise.inject.Alternative;
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Specializes;
 
 @Specializes
 @Alternative

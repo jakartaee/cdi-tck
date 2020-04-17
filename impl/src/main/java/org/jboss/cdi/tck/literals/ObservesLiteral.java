@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.literals;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.Reception;
-import javax.enterprise.event.TransactionPhase;
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.Reception;
+import jakarta.enterprise.event.TransactionPhase;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 /**
  * @author Tomas Remes

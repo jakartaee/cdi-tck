@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.event.observer.broken.validation.unsatisfied;
 
 import java.io.File;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class Observer {
     public void observe(@Observes String event, File file) {

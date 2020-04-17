@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.alternative;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Alternative;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 @RequestScoped

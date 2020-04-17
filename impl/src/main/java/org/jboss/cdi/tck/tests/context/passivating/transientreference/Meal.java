@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.transientreference;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class Meal {

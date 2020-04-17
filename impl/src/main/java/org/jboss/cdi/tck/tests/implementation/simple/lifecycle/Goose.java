@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Goose {
     @Inject

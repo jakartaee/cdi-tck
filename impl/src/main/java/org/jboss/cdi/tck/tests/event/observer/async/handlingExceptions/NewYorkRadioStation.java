@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.event.observer.async.handlingExceptions;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
-import javax.enterprise.event.ObservesAsync;
+import jakarta.enterprise.event.ObservesAsync;
 
 public class NewYorkRadioStation {
     

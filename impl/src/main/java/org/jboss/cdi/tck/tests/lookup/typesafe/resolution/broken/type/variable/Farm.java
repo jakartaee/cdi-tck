@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.type.variable;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("unused")
 public class Farm {

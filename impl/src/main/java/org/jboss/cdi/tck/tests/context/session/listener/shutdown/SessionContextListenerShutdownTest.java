@@ -23,7 +23,7 @@ import static org.testng.Assert.assertEquals;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import javax.servlet.http.HttpSessionListener;
+import jakarta.servlet.http.HttpSessionListener;
 
 import org.jboss.arquillian.container.test.api.Deployer;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
- * Test the session context is active during {@link HttpSessionListener#sessionDestroyed(javax.servlet.http.HttpSessionEvent)}
+ * Test the session context is active during {@link HttpSessionListener#sessionDestroyed(jakarta.servlet.http.HttpSessionEvent)}
  * invocation when the application is undeployed.
  *
  * @author Martin Kouba

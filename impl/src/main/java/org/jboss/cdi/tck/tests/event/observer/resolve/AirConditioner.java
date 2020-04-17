@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class AirConditioner {
     private Temperature target;

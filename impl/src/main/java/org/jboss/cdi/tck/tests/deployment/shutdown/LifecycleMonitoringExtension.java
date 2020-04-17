@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.deployment.shutdown;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.BeforeShutdown;
-import javax.enterprise.inject.spi.Extension;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.BeforeShutdown;
+import jakarta.enterprise.inject.spi.Extension;
 
 /**
  * 

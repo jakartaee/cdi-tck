@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.tooManyInitializerAnnotatedConstructors;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Goose_Broken {
 

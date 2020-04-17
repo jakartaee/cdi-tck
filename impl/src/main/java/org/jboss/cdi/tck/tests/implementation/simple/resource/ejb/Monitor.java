@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.simple.resource.ejb;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class Monitor implements Serializable {

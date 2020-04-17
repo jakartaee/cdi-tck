@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.visibility;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 abstract class AbstractBean {
 

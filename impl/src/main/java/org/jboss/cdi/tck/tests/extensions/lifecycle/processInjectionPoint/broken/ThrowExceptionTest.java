@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.broke
 
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_POINT;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

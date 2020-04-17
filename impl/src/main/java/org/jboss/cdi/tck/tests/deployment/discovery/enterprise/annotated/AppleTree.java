@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery.enterprise.annotated;
 
-import javax.ejb.Stateless;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
 
 @Stateless
 public class AppleTree implements AppleTreeLocal {

@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.decorators.invocation.enterprise;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 /**
  * @author Martin Kouba

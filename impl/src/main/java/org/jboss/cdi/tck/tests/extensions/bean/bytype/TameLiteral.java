@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.bean.bytype;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class TameLiteral extends AnnotationLiteral<Tame> implements Tame {
 

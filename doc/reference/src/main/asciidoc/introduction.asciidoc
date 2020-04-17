@@ -345,14 +345,14 @@ CDI supports Java EE 6, Java EE 6 Web Profile, Java EE 7, Java EE 7 Web Profile,
 The following is the list of packages that constitute the required class libraries for
 Contexts and Dependency Injection for Java Version 2.0:
 
-* javax.decorator
-* javax.enterprise.context
-* javax.enterprise.context.control
-* javax.enterprise.context.spi
-* javax.enterprise.event
-* javax.enterprise.inject
-* javax.enterprise.inject.literal
-* javax.enterprise.inject.se
-* javax.enterprise.inject.spi
-* javax.enterprise.inject.spi.configurator
-* javax.enterprise.util
+* jakarta.decorator
+* jakarta.enterprise.context
+* jakarta.enterprise.context.control
+* jakarta.enterprise.context.spi
+* jakarta.enterprise.event
+* jakarta.enterprise.inject
+* jakarta.enterprise.inject.literal
+* jakarta.enterprise.inject.se
+* jakarta.enterprise.inject.spi
+* jakarta.enterprise.inject.spi.configurator
+* jakarta.enterprise.util

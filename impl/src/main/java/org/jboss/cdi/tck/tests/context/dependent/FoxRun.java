@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.inject.Default;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named("foxRun")
 @Default

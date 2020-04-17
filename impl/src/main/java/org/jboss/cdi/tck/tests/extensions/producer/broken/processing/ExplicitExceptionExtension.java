@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.broken.processing;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessProducer;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessProducer;
 
 /**
  * 

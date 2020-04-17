@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.context.session.listener;
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.SessionScoped;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.SessionScoped;
 
 @SessionScoped
 public class SimpleSessionBean implements Serializable {

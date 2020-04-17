@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.deployment.packaging.war.modules;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba

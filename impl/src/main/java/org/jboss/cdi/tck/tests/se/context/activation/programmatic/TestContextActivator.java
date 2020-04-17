@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.se.context.activation.programmatic;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.control.RequestContextController;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.control.RequestContextController;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class TestContextActivator {

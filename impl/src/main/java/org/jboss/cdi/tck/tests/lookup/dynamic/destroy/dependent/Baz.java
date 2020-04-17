@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.dependent;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.RequestScoped;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class Baz {

@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class GeneralListProducer<T> {
 

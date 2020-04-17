@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 
-import javax.interceptor.Interceptors;
+import jakarta.interceptor.Interceptors;
 
 @Interceptors(PostConstructInterceptor.class)
 class SimpleBean {

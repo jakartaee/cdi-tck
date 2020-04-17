@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
-import javax.enterprise.inject.Typed;
+import jakarta.enterprise.inject.Typed;
 
 @Typed(NumberDao.class)
 public class NumberDao<T1 extends Number, T2 extends Number> extends Dao<T1, T2> {

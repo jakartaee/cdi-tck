@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.inheritance.enterprise;
 
-import javax.ejb.Local;
-import javax.enterprise.event.Observes;
+import jakarta.ejb.Local;
+import jakarta.enterprise.event.Observes;
 
 public @Local
 interface StockWatcherLocal {

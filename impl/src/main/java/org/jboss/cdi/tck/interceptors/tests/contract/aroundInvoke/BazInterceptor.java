@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
 import static org.testng.Assert.assertEquals;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 import javax.naming.InitialContext;
-import javax.transaction.TransactionSynchronizationRegistry;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 public class BazInterceptor {
 

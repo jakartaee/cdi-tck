@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.observes.async;
 
-import javax.enterprise.event.ObservesAsync;
-import javax.enterprise.inject.Disposes;
+import jakarta.enterprise.event.ObservesAsync;
+import jakarta.enterprise.inject.Disposes;
 import javax.ws.rs.Produces;
 
 public class BrokenFoodProducer {

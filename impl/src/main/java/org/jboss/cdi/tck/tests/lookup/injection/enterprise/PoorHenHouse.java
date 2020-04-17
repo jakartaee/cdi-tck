@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.enterprise;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class PoorHenHouse extends HenHouse {
     protected boolean initializerCalledAfterSuperclassInjection = false;

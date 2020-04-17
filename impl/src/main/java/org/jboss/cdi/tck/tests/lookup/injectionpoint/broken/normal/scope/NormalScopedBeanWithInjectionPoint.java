@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.normal.scope;
 
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

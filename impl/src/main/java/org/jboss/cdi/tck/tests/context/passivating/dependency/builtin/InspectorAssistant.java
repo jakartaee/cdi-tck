@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.dependency.builtin;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class InspectorAssistant {
 

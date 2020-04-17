@@ -20,9 +20,9 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessSyntheticObserverMethod;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessSyntheticObserverMethod;
 
 /**
  * Verify that observer for synthetic OM was invoked and that the source was AfterBeanDiscoveryObserver.

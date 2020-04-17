@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 @SuppressWarnings("all")
 public class TameAnnotationLiteral extends AnnotationLiteral<Tame> implements Tame {

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.fires.nonbinding;
 
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Any;
+import jakarta.inject.Inject;
 
 public class OwlFinch_Broken {
     @Inject

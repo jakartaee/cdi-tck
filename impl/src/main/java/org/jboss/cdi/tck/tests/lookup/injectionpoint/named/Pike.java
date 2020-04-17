@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.named;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @RequestScoped
 public class Pike {

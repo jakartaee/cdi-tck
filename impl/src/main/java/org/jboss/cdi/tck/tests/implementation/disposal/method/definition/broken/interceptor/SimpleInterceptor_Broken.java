@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.interceptor;
 
-import javax.enterprise.inject.Disposes;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @Secure

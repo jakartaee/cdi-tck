@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Helicopter {
 

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.alternative;
 
-import javax.enterprise.inject.Default;
-import javax.inject.Named;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Named;
 
 @EnabledAlternativeStereotype
 @Named

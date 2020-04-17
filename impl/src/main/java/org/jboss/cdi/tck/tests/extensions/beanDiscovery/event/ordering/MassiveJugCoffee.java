@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanDiscovery.event.ordering;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 /**
  *

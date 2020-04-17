@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Stateless(name = "Rosie")
 public class Elephant implements ElephantLocal {

@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.ejb;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessBean;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessBean;
 
 public class ProcessBeanObserver implements Extension {
 

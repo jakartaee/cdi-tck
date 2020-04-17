@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.conversation.event.notattached;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ConversationScoped;
+import jakarta.enterprise.context.ConversationScoped;
 
 @SuppressWarnings("serial")
 @ConversationScoped

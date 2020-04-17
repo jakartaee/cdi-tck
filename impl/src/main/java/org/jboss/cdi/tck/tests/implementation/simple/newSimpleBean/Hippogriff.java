@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.implementation.simple.newSimpleBean;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.inject.New;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.New;
+import jakarta.inject.Inject;
 
 public class Hippogriff {
 

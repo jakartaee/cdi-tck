@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * @author Martin Kouba

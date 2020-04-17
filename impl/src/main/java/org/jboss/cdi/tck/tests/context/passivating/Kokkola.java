@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.context.passivating;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
-import javax.interceptor.Interceptors;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.interceptor.Interceptors;
 
 @SuppressWarnings("serial")
 @SessionScoped

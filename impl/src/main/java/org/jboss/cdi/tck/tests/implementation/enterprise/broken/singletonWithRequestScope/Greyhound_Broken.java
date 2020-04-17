@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.singletonWithRequestScope;
 
-import javax.ejb.Singleton;
-import javax.enterprise.context.RequestScoped;
+import jakarta.ejb.Singleton;
+import jakarta.enterprise.context.RequestScoped;
 
 @Singleton
 @RequestScoped

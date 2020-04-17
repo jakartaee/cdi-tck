@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.extendejb;
 
-import javax.ejb.Stateful;
-import javax.inject.Named;
+import jakarta.ejb.Stateful;
+import jakarta.inject.Named;
 
 @Named("plough")
 @Stateful

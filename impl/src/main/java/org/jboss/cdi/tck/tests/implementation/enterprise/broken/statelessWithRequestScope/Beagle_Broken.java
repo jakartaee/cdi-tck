@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.statelessWithRequestScope;
 
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.RequestScoped;
 
 @Stateless
 @RequestScoped

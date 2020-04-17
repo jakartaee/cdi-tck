@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin;
 
-import javax.ejb.Local;
-import javax.transaction.UserTransaction;
+import jakarta.ejb.Local;
+import jakarta.transaction.UserTransaction;
 
 /**
  * @author pmuir

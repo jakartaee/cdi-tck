@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.custom;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 @SuppressWarnings("serial")
 public class PassivableLiteral extends AnnotationLiteral<Passivable> implements Passivable {

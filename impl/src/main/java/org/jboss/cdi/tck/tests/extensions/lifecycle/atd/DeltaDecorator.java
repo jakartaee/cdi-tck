@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
 public class DeltaDecorator implements Logger {
 

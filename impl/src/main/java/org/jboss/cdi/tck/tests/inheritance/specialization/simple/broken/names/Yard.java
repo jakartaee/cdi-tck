@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.names;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("backyard")
 public class Yard {

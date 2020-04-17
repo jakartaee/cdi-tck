@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.dependency.sessionbean;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Stateless
 public class Spoon {

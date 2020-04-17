@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 @Stateless
 public class Hawk {

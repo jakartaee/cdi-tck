@@ -21,7 +21,7 @@ import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION_EE;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.inject.IllegalProductException;
+import jakarta.enterprise.inject.IllegalProductException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
 import java.io.Serializable;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface WrappedEnterpriseBeanLocal extends Serializable {

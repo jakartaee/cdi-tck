@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.alternative.selection.resource;
 
-import javax.annotation.Priority;
-import javax.annotation.Resource;
-import javax.enterprise.inject.Alternative;
-import javax.enterprise.inject.Produces;
+import jakarta.annotation.Priority;
+import jakarta.annotation.Resource;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Produces;
 
 @Alternative
 @Priority(1100)

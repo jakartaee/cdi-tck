@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.dependent.ejb;
 
 import java.io.Serializable;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 
 public class Horse implements Serializable {
 

@@ -25,7 +25,7 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.enterprise.context.NormalScope;
+import jakarta.enterprise.context.NormalScope;
 
 @Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)

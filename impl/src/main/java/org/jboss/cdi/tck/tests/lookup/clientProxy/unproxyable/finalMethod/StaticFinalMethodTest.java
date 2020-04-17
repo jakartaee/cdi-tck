@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalMethod;
 
 import static org.jboss.cdi.tck.cdi.Sections.UNPROXYABLE;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

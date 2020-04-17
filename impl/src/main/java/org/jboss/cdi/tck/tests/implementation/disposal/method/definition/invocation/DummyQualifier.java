@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.invoca
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Qualifier;
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.inject.Qualifier;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Qualifier

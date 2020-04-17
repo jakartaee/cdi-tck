@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.circular;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Car {
 

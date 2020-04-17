@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple;
 
-import javax.enterprise.inject.Specializes;
-import javax.inject.Named;
+import jakarta.enterprise.inject.Specializes;
+import jakarta.inject.Named;
 
 @Specializes
 @Landowner

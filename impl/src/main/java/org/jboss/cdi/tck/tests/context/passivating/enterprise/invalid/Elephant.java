@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.enterprise.invalid;
 
-import javax.ejb.Remove;
-import javax.enterprise.context.SessionScoped;
+import jakarta.ejb.Remove;
+import jakarta.enterprise.context.SessionScoped;
 
 @SessionScoped
 @Digital

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope.enterprise;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Stateful
 public class BorderCollie extends Dog implements BorderCollieLocal {

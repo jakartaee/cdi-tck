@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.aroundConstruct;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

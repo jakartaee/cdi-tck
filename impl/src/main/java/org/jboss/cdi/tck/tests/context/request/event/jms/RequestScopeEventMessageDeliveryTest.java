@@ -25,7 +25,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -52,7 +52,7 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
         EjbJarDescriptor ejbJarDescriptor = new EjbJarDescriptorBuilder().messageDrivenBeans(
                 newMessageDriven("TestTopic", TopicMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
-                        .addActivationConfigProperty("destinationType", "javax.jms.Topic")
+                        .addActivationConfigProperty("destinationType", "jakarta.jms.Topic")
                         .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsTopic()))
                 .build();
 

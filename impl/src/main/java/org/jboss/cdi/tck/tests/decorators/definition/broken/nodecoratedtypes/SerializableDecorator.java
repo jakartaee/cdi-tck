@@ -17,10 +17,10 @@
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nodecoratedtypes;
 
 import java.io.Serializable;
-import javax.annotation.Priority;
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import jakarta.annotation.Priority;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("serial")
 @Decorator

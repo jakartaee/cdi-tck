@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ws;
 
 import javax.jws.WebService;
-import javax.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.WebServlet;
 
 @WebServlet(loadOnStartup = 1, name = "Translator", urlPatterns = "translator")
 @WebService(endpointInterface = "org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ws.Translator", serviceName = "Translator")

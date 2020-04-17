@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.beanmanager;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Observes;
 
 /**
  * @author Martin Kouba

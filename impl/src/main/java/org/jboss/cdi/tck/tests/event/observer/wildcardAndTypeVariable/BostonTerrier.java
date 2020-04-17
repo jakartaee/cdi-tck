@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.event.observer.wildcardAndTypeVariable;
 
 import java.util.List;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class BostonTerrier {
 

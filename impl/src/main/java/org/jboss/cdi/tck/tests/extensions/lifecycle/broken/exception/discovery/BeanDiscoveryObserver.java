@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.broken.exception.discovery;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
-import javax.enterprise.inject.spi.Extension;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
+import jakarta.enterprise.inject.spi.Extension;
 
 public class BeanDiscoveryObserver implements Extension {
     public void afterBeanDiscovery(@Observes AfterBeanDiscovery event) {

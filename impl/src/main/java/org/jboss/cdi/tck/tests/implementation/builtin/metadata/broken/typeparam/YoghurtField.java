@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.spi.Bean;
-import javax.inject.Inject;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("serial")
 @SessionScoped

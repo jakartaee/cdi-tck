@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.custom;
 
-import javax.enterprise.inject.Vetoed;
+import jakarta.enterprise.inject.Vetoed;
 
 /**
  *

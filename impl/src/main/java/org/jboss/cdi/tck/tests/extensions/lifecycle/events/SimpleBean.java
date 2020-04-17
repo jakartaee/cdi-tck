@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.events;
 
-import javax.enterprise.context.Conversation;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Conversation;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 
 public class SimpleBean {
 

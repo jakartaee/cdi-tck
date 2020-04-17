@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
 /**
  * Test bean to inject another bean which uses injection point metadata in a field

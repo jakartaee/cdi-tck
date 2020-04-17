@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.primitive;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Game {
 

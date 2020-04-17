@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.alternative.broken.not.alternative;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 
 @RequestScoped
 @Named

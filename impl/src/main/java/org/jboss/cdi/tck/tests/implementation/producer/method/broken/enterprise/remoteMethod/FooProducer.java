@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.enterprise.remoteMethod;
 
-import javax.ejb.Stateful;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.inject.Produces;
 
 @Stateful
 public class FooProducer implements FooProducerRemote {

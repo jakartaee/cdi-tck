@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.context.enterprise.staticMethod;
 
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateless;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ejb.Stateless;
 
 @Stateless
 @RolesAllowed("printer")

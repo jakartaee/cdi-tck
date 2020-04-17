@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.resource.env.staticProducer;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class GreetingBean {
     @Inject

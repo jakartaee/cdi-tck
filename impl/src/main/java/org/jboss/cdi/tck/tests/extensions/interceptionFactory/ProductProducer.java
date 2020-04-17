@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InterceptionFactory;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InterceptionFactory;
 
 @ApplicationScoped
 public class ProductProducer {

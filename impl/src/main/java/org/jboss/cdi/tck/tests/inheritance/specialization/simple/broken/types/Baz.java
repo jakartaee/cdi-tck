@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.types;
 
-import javax.enterprise.inject.Specializes;
-import javax.enterprise.inject.Typed;
+import jakarta.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Typed;
 
 @Typed(value = { Baz.class, Bar.class })
 @Specializes

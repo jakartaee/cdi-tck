@@ -20,10 +20,10 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.security.PermitAll;
-import javax.ejb.Stateful;
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+import jakarta.annotation.security.PermitAll;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 
 @Stateful
 @PermitAll
@@ -36,7 +36,7 @@ public class Teacher {
 
     public Throwable print() throws InterruptedException {
         BlockingQueue<Throwable> sync = new LinkedBlockingQueue<>();
-        // this expects javax.ejb.EJBAccessException so the queue accepts only Throwable instance
+        // this expects jakarta.ejb.EJBAccessException so the queue accepts only Throwable instance
         printer.fireAsync(new Text(TEACHER_MESSAGE)).whenComplete((text, throwable) -> sync.offer(throwable));
         return sync.poll(2l, TimeUnit.SECONDS);
     }

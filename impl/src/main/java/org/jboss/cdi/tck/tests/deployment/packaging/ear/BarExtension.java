@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.ear;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.BeforeBeanDiscovery;
-import javax.enterprise.inject.spi.Extension;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.BeforeBeanDiscovery;
+import jakarta.enterprise.inject.spi.Extension;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 

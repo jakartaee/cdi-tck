@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.application;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class SimpleApplicationBean {

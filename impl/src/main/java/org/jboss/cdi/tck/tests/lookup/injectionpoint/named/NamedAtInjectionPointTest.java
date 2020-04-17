@@ -22,7 +22,7 @@ import static org.jboss.cdi.tck.cdi.Sections.NAMED_AT_INJECTION_POINT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

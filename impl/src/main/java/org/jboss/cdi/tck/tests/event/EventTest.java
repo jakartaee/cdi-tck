@@ -31,7 +31,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 
-import javax.enterprise.context.spi.Context;
+import jakarta.enterprise.context.spi.Context;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

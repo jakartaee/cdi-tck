@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.context.passivating.injection.point;
 
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
 
 /**
  * All beans with normal scope are passivation capable dependencies.

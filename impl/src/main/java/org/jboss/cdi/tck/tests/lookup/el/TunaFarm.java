@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.el;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 public class TunaFarm {

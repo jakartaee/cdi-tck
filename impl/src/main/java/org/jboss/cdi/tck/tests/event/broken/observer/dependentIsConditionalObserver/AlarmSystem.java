@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.dependentIsConditionalObserver;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.Reception;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.Reception;
 
 public class AlarmSystem {
     public void onBreakInAttempt(@Observes(notifyObserver = Reception.IF_EXISTS) BreakIn breakIn) {

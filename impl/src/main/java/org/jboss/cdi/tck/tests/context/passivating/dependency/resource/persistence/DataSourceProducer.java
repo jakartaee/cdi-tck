@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.persistence;
 
-import javax.annotation.Resource;
-import javax.enterprise.inject.Produces;
+import jakarta.annotation.Resource;
+import jakarta.enterprise.inject.Produces;
 import javax.sql.DataSource;
 
 public class DataSourceProducer {

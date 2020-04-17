@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Stateless
 public class EjbFoo implements EjbFooLocal {

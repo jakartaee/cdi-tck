@@ -16,12 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.custom;
 
-import static javax.enterprise.inject.spi.InterceptionType.AROUND_INVOKE;
-import static javax.enterprise.inject.spi.InterceptionType.AROUND_TIMEOUT;
-import static javax.enterprise.inject.spi.InterceptionType.POST_ACTIVATE;
-import static javax.enterprise.inject.spi.InterceptionType.POST_CONSTRUCT;
-import static javax.enterprise.inject.spi.InterceptionType.PRE_DESTROY;
-import static javax.enterprise.inject.spi.InterceptionType.PRE_PASSIVATE;
+import static jakarta.enterprise.inject.spi.InterceptionType.AROUND_INVOKE;
+import static jakarta.enterprise.inject.spi.InterceptionType.AROUND_TIMEOUT;
+import static jakarta.enterprise.inject.spi.InterceptionType.POST_ACTIVATE;
+import static jakarta.enterprise.inject.spi.InterceptionType.POST_CONSTRUCT;
+import static jakarta.enterprise.inject.spi.InterceptionType.PRE_DESTROY;
+import static jakarta.enterprise.inject.spi.InterceptionType.PRE_PASSIVATE;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION_EE;

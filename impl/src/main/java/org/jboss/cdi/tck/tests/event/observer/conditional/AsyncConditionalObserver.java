@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.event.observer.conditional;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.ObservesAsync;
-import javax.enterprise.event.Reception;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.ObservesAsync;
+import jakarta.enterprise.event.Reception;
 
 @ApplicationScoped
 public class AsyncConditionalObserver {

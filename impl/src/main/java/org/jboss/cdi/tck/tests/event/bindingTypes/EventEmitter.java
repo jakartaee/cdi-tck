@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.bindingTypes;
 
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 
 public class EventEmitter {
     @Inject

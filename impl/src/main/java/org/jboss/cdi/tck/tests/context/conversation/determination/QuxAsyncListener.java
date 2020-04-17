@@ -18,10 +18,10 @@
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
 import java.io.IOException;
-import javax.enterprise.context.Conversation;
-import javax.inject.Inject;
-import javax.servlet.AsyncEvent;
-import javax.servlet.AsyncListener;
+import jakarta.enterprise.context.Conversation;
+import jakarta.inject.Inject;
+import jakarta.servlet.AsyncEvent;
+import jakarta.servlet.AsyncListener;
 
 /**
  * @author Martin Kouba

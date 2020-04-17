@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct;
 
-import javax.interceptor.Interceptors;
+import jakarta.interceptor.Interceptors;
 
 @Interceptors({CharlieInterceptor1.class, CharlieInterceptor2.class})
 public class Charlie {

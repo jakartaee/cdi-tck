@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.repeatable;
 
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 
 public class ProcessProducer {
 

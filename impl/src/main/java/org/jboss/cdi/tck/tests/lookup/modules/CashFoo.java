@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules;
 
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Specializes;
 
 @Specializes
 public class CashFoo extends PaymentFoo {

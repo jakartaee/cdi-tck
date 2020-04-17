@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class ConsumerTypeVariableUpperBound<T1 extends Exception, T2> {
 

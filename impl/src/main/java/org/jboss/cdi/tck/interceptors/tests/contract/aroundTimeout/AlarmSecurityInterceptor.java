@@ -18,11 +18,11 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
 import static org.testng.Assert.assertTrue;
 
-import javax.annotation.Resource;
-import javax.ejb.EJB;
-import javax.ejb.SessionContext;
-import javax.interceptor.AroundTimeout;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.Resource;
+import jakarta.ejb.EJB;
+import jakarta.ejb.SessionContext;
+import jakarta.interceptor.AroundTimeout;
+import jakarta.interceptor.InvocationContext;
 
 public class AlarmSecurityInterceptor {
 

@@ -19,9 +19,9 @@ package org.jboss.cdi.tck.tests.deployment.packaging.war.modules;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba

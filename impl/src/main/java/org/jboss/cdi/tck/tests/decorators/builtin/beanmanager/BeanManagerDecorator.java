@@ -20,10 +20,10 @@ package org.jboss.cdi.tck.tests.decorators.builtin.beanmanager;
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba

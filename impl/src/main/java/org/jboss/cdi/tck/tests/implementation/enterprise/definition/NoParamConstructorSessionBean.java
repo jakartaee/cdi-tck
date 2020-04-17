@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 /**
  * @author Martin Kouba

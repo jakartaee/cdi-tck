@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import java.io.Serializable;
 
-import javax.inject.Inject;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.inject.Inject;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 public class FenceInterceptor implements Serializable {
 

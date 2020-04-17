@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.spi;
 
-import javax.enterprise.context.spi.Context;
+import jakarta.enterprise.context.spi.Context;
 
 /**
  * This interface provides operations relating to Contexts.

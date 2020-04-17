@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptions;
 
-import javax.annotation.PreDestroy;
-import javax.interceptor.Interceptors;
+import jakarta.annotation.PreDestroy;
+import jakarta.interceptor.Interceptors;
 
 @Interceptors(CatInterceptor.class)
 class Cat {

@@ -2,9 +2,9 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
 import static org.testng.Assert.assertEquals;
 
-import javax.interceptor.Interceptors;
+import jakarta.interceptor.Interceptors;
 import javax.naming.InitialContext;
-import javax.transaction.TransactionSynchronizationRegistry;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 public class Baz {
 

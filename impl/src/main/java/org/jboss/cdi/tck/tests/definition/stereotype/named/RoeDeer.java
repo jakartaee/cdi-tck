@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.named;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 /**
  * 

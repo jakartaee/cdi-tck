@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.invocation;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
 @Dependent
 public class TestObserver {

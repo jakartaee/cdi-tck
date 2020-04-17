@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.se.customCDIProvider;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
 
-import javax.enterprise.inject.spi.CDI;
+import jakarta.enterprise.inject.spi.CDI;
 
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;

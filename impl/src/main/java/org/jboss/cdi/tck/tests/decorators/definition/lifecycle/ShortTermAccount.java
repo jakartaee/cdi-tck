@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.lifecycle;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class ShortTermAccount implements BankAccount {

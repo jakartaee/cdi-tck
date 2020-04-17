@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.tests.context.conversation.event;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
-import javax.servlet.ServletRequest;
+import jakarta.enterprise.context.ConversationScoped;
+import jakarta.enterprise.context.Initialized;
+import jakarta.enterprise.event.Observes;
+import jakarta.servlet.ServletRequest;
 
 @SuppressWarnings("serial")
 @ConversationScoped

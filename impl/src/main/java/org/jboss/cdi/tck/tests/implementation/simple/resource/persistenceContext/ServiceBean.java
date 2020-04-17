@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.simple.resource.persistenceContext;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  * @author Marius Bogoevici

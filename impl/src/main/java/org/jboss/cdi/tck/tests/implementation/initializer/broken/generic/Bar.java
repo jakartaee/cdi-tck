@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.implementation.initializer.broken.generic;
 import java.util.Collections;
 import java.util.List;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class Bar {
     @Produces

@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.clientProxy.incontainer;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class Car implements Serializable {

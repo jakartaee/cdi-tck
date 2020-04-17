@@ -26,8 +26,8 @@ import static org.testng.Assert.assertTrue;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import javax.ejb.EJB;
-import javax.inject.Inject;
+import jakarta.ejb.EJB;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;

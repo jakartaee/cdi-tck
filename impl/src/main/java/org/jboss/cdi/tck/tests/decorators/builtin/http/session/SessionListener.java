@@ -17,10 +17,10 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.http.session;
 
-import javax.inject.Inject;
-import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
+import jakarta.inject.Inject;
+import jakarta.servlet.annotation.WebListener;
+import jakarta.servlet.http.HttpSessionEvent;
+import jakarta.servlet.http.HttpSessionListener;
 
 /**
  * @author Martin Kouba

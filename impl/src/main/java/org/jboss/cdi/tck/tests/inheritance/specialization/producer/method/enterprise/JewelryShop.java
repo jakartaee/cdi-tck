@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.enterprise;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.Specializes;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Specializes;
 
 @Stateless
 public class JewelryShop extends Shop {

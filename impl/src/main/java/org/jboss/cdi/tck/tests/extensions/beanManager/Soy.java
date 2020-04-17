@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager;
 
-import javax.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 public class Soy implements Food {

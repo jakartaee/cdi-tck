@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.event.observer.abortProcessing;
 
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

@@ -4,7 +4,7 @@
     <groupId>jakarta.enterprise</groupId>
     <artifactId>cdi-tck-parent</artifactId>
     <packaging>pom</packaging>
-    <version>2.1.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <name>Jakarta CDI TCK</name>
 
     <parent>
@@ -95,23 +95,23 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>2.0.2</cdi.api.version>
+        <cdi.api.version>3.0.0-M2</cdi.api.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- JBoss EE APIs -->
-        <jboss.ejb.api.version>2.0.0.Final</jboss.ejb.api.version>
-        <jboss.jms.api.version>2.0.0.Final</jboss.jms.api.version>
-        <jboss.connector.api.version>2.0.0.Final</jboss.connector.api.version>
-        <jboss.annotations.api.version>2.0.0.Final</jboss.annotations.api.version>
-        <jboss.interceptors.api.version>2.0.0.Final</jboss.interceptors.api.version>
+        <jboss.ejb.api.version>4.0.0-RC1</jboss.ejb.api.version>
+        <jboss.jms.api.version>3.0.0-RC1</jboss.jms.api.version>
+        <jboss.connector.api.version>2.0.0-RC1</jboss.connector.api.version>
+        <jboss.annotations.api.version>2.0.0-RC1</jboss.annotations.api.version>
+        <jboss.interceptors.api.version>2.0.0-RC2</jboss.interceptors.api.version>
         <!-- Other EE APIs -->
-        <atinject.api.version>1.0</atinject.api.version>
-        <jpa.api.version>2.2.3</jpa.api.version>
-        <servlet.api.version>4.0.3</servlet.api.version>
-        <jsp.api.version>2.3.6</jsp.api.version>
-        <jta.api.version>1.3.3</jta.api.version>
-        <el.api.version>3.0.3</el.api.version>
-        <jsf.api.version>2.3.2</jsf.api.version>
+        <atinject.api.version>2.0.0-RC3</atinject.api.version>
+        <jpa.api.version>3.0.0-RC2</jpa.api.version>
+        <servlet.api.version>5.0.0-M1</servlet.api.version>
+        <jsp.api.version>3.0.0-M1</jsp.api.version>
+        <jta.api.version>2.0.0-RC1</jta.api.version>
+        <el.api.version>4.0.0-RC1</el.api.version>
+        <jsf.api.version>3.0.0-RC1</jsf.api.version>
         <resteasy.version>2.2.1.GA</resteasy.version>
         <javax.ws.api.version>2.3.2</javax.ws.api.version>
         <jax.artifacts.version>2.3.2</jax.artifacts.version>
@@ -150,33 +150,33 @@
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.spec.javax.ejb</groupId>
-                <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+                <groupId>jakarta.ejb</groupId>
+                <artifactId>jakarta.ejb-api</artifactId>
                 <version>${jboss.ejb.api.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.spec.javax.interceptor</groupId>
-                <artifactId>jboss-interceptors-api_1.2_spec</artifactId>
+                <groupId>jakarta.interceptor</groupId>
+                <artifactId>jakarta.interceptor-api</artifactId>
                 <version>${jboss.interceptors.api.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.spec.javax.jms</groupId>
-                <artifactId>jboss-jms-api_2.0_spec</artifactId>
+                <groupId>jakarta.jms</groupId>
+                <artifactId>jakarta.jms-api</artifactId>
                 <version>${jboss.jms.api.version}</version>
             </dependency>
 
             <!--            TODO this wasnt updated?-->
             <dependency>
-                <groupId>org.jboss.spec.javax.resource</groupId>
-                <artifactId>jboss-connector-api_1.7_spec</artifactId>
+                <groupId>jakarta.resource</groupId>
+                <artifactId>jakarta.resource-api</artifactId>
                 <version>${jboss.connector.api.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.spec.javax.annotation</groupId>
-                <artifactId>jboss-annotations-api_1.3_spec</artifactId>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
                 <version>${jboss.annotations.api.version}</version>
             </dependency>
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.enterprise;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class HairyQualifier extends AnnotationLiteral<Hairy> implements Hairy {
     private boolean clipped;

@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * This bean contains an injection point for a Tarantula that must be provided by the container via a (static) producer field.

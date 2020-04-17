@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface ElephantLocal {

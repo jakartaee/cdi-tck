@@ -15,8 +15,8 @@
  * limitations under the License.
  */package org.jboss.cdi.tck.tests.se.container.testPackage;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class Apple {

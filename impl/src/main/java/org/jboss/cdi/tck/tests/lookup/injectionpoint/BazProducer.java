@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
 import static org.testng.AssertJUnit.assertNull;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 
 public class BazProducer {
 

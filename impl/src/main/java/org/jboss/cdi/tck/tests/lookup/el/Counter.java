@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.el;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class Counter {

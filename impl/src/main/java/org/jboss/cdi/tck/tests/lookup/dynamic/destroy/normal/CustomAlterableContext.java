@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.normal;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.context.spi.AlterableContext;
-import javax.enterprise.context.spi.Contextual;
+import jakarta.enterprise.context.spi.AlterableContext;
+import jakarta.enterprise.context.spi.Contextual;
 
 public class CustomAlterableContext extends AbstractContext implements AlterableContext {
 

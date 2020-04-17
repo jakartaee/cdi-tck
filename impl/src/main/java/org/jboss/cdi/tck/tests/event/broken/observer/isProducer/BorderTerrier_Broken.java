@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.isProducer;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
 
 public class BorderTerrier_Broken {
     public @Produces

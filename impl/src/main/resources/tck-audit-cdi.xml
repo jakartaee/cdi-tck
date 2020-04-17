@@ -116,7 +116,7 @@
     <section id="restricting_bean_types" title="Restricting the bean types of a bean" level="3">
         <group>
             <text>The bean types of a bean may be restricted by annotating the bean class or producer method or field with the annotation
-                |@javax.enterprise.inject.Typed|. When a |@Typed| annotation is explicitly specified, only the types whose classes are explicitly listed using
+                |@jakarta.enterprise.inject.Typed|. When a |@Typed| annotation is explicitly specified, only the types whose classes are explicitly listed using
                 the |value| member, together with |java.lang.Object| are bean types of the bean.
             </text>
             <assertion id="a">
@@ -196,7 +196,7 @@
         </assertion>
 
         <assertion id="ba">
-            <text>A qualifier type may be declared by specifying the |@javax.inject.Qualifier| meta-annotation.</text>
+            <text>A qualifier type may be declared by specifying the |@jakarta.inject.Qualifier| meta-annotation.</text>
         </assertion>
 
         <assertion id="d" testable="false">
@@ -292,7 +292,7 @@
 
         <group>
 
-            <text>There are five standard scope types defined by this specification, all defined in the package |javax.enterprise.context|.</text>
+            <text>There are five standard scope types defined by this specification, all defined in the package |jakarta.enterprise.context|.</text>
 
             <assertion id="a">
                 <text>The container must provide an implementation of the @RequestScoped, @ApplicationScoped and @SessionScoped annotations defined in Section
@@ -331,7 +331,7 @@
         </assertion>
 
         <assertion id="ba">
-            <text>All scope types must specify the |@javax.inject.Scope| or |@javax.enterprise.context.NormalScope| meta-annotation.</text>
+            <text>All scope types must specify the |@jakarta.inject.Scope| or |@jakarta.enterprise.context.NormalScope| meta-annotation.</text>
         </assertion>
 
     </section>
@@ -471,7 +471,7 @@
     <section id="declaring_bean_name" title="Declaring the bean name" level="3">
 
         <group>
-            <text>To specify the name of a bean, the qualifier |@javax.inject.Named| is applied to the bean class or producer method or field.</text>
+            <text>To specify the name of a bean, the qualifier |@jakarta.inject.Named| is applied to the bean class or producer method or field.</text>
 
             <assertion id="a">
                 <text>Test with a bean class.</text>
@@ -647,7 +647,7 @@
         </group>
 
         <assertion id="b">
-            <text>A stereotype may be declared by specifying the |@javax.enterprise.inject.Stereotype| meta-annotation.</text>
+            <text>A stereotype may be declared by specifying the |@jakarta.enterprise.inject.Stereotype| meta-annotation.</text>
         </assertion>
     </section>
 
@@ -771,7 +771,7 @@
 
     <section id="builtin_stereotypes" title="Built-in stereotypes" level="3">
         <assertion id="aa" testable="false">
-            <text>The built-in stereotype |@javax.enterprise.inject.Model| is intended for use with beans that define the model layer of an MVC web application
+            <text>The built-in stereotype |@jakarta.enterprise.inject.Model| is intended for use with beans that define the model layer of an MVC web application
                 architecture such as JSF.
             </text>
             <note>Tested by API signature test</note>
@@ -794,7 +794,7 @@
         </assertion>
 
         <assertion id="ba">
-            <text>If a definition error exists, the container must throw a subclass of |javax.enterprise.inject.spi.DefinitionException|.</text>
+            <text>If a definition error exists, the container must throw a subclass of |jakarta.enterprise.inject.spi.DefinitionException|.</text>
         </assertion>
 
         <assertion id="c">
@@ -804,7 +804,7 @@
         </assertion>
 
         <assertion id="ca">
-            <text>If a deployment problem occurs, the container must throw a subclass of |javax.enterprise.inject.spi.DeploymentException|.</text>
+            <text>If a deployment problem occurs, the container must throw a subclass of |jakarta.enterprise.inject.spi.DeploymentException|.</text>
         </assertion>
 
         <assertion id="d" testable="false">
@@ -879,7 +879,7 @@
         </assertion>
 
         <assertion id="g">
-            <text>A Java class is not a managed bean if it implements |javax.enterprise.inject.spi.Extension|.</text>
+            <text>A Java class is not a managed bean if it implements |jakarta.enterprise.inject.spi.Extension|.</text>
         </assertion>
 
         <assertion id="h">
@@ -1109,7 +1109,7 @@
 
     <section id="declaring_producer_method" title="Declaring a producer method" level="3">
         <assertion id="a">
-            <text>A producer method may be declared by annotating a method with the |@javax.enterprise.inject.Produces| annotation</text>
+            <text>A producer method may be declared by annotating a method with the |@jakarta.enterprise.inject.Produces| annotation</text>
         </assertion>
 
         <assertion id="ba">
@@ -1311,7 +1311,7 @@
 
     <section id="declaring_producer_field" title="Declaring a producer field" level="3">
         <assertion id="a">
-            <text>A producer field may be declared by annotating a field with the |@javax.enterprise.inject.Produces| annotation.</text>
+            <text>A producer field may be declared by annotating a field with the |@jakarta.enterprise.inject.Produces| annotation.</text>
         </assertion>
 
         <assertion id="b">
@@ -1396,7 +1396,7 @@
 
     <section id="declaring_disposer_method" title="Declaring a disposer method" level="3">
         <assertion id="a">
-            <text>A disposer method may be declared by annotating a parameter |@javax.enterprise.inject.Disposes|. That parameter is the disposed parameter
+            <text>A disposer method may be declared by annotating a parameter |@jakarta.enterprise.inject.Disposes|. That parameter is the disposed parameter
             </text>
         </assertion>
 
@@ -1547,7 +1547,7 @@
 
     <section id="declaring_injected_field" title="Declaring an injected field" level="3">
         <assertion id="aa">
-            <text>An injected field may be declared by annotating the field |@javax.inject.Inject|.</text>
+            <text>An injected field may be declared by annotating the field |@jakarta.inject.Inject|.</text>
         </assertion>
 
         <assertion id="b">
@@ -1583,7 +1583,7 @@
 
     <section id="declaring_initializer" title="Declaring an initializer method" level="3">
         <assertion id="a">
-            <text>An initializer method may be declared by annotating the method |@javax.inject.Inject|</text>
+            <text>An initializer method may be declared by annotating the method |@jakarta.inject.Inject|</text>
         </assertion>
 
         <assertion id="ab">
@@ -1671,7 +1671,7 @@
         </assertion>
 
         <assertion id="r">
-            <text>This second bean has exactly one qualifier: |@javax.enterprise.inject.New(X.class)| where |x| is the bean class.</text>
+            <text>This second bean has exactly one qualifier: |@jakarta.enterprise.inject.New(X.class)| where |x| is the bean class.</text>
         </assertion>
 
         <assertion id="s">
@@ -2415,7 +2415,7 @@
         <group>
             <text>A bean is assignable to a given injection point if the bean has all the required qualifiers. If no required qualifiers were explicitly
                 specified, the container assumes the required qualifier |@Default|. A bean has the required qualifier if it has a qualifier with (a) the same
-                type and (b) the same annotation member value for each member which is not annotated |@javax.enterprise.util.NonBinding|.
+                type and (b) the same annotation member value for each member which is not annotated |@jakarta.enterprise.util.NonBinding|.
             </text>
 
             <assertion id="la">
@@ -2432,7 +2432,7 @@
 
             <assertion id="ld">
                 <text>Test with matching beans with matching qualifier with same annotation member value for each member which is not annotated
-                    |@javax.enterprise.util.NonBinding|.
+                    |@jakarta.enterprise.util.NonBinding|.
                 </text>
             </assertion>
         </group>
@@ -2966,15 +2966,15 @@
         </assertion>
 
         <assertion id="daa">
-            <text>The |getAnnotated()| method returns an instance of |javax.enterprise.inject.spi.AnnotatedField| or
-                |javax.enterprise.inject.spi.AnnotatedParameter|, depending upon whether the injection point is an injected field or a constructor/method
+            <text>The |getAnnotated()| method returns an instance of |jakarta.enterprise.inject.spi.AnnotatedField| or
+                |jakarta.enterprise.inject.spi.AnnotatedParameter|, depending upon whether the injection point is an injected field or a constructor/method
                 parameter.
             </text>
         </assertion>
 
         <assertion id="dab">
             <text>If the injection point represents a dynamically obtained instance, then the |getAnnotated()| method returns an instance of
-                |javax.enterprise.inject.spi.AnnotatedField| or |javax.enterprise.inject.spi.AnnotatedParameter| representing the |Instance| injection point,
+                |jakarta.enterprise.inject.spi.AnnotatedField| or |jakarta.enterprise.inject.spi.AnnotatedParameter| representing the |Instance| injection point,
                 depending upon whether the injection point is an injected field or a constructor/method parameter.
             </text>
         </assertion>
@@ -3131,11 +3131,11 @@
 
     <section id="programmatic_lookup" title="Programmatic lookup" level="2">
         <assertion id="aa">
-            <text>An instance of the |javax.enterprise.inject.Instance| interface may be injected.</text>
+            <text>An instance of the |jakarta.enterprise.inject.Instance| interface may be injected.</text>
         </assertion>
 
         <assertion id="ba">
-            <text>The method |javax.enterprise.inject.Instance.get()| returns a contextual reference.</text>
+            <text>The method |jakarta.enterprise.inject.Instance.get()| returns a contextual reference.</text>
         </assertion>
 
         <assertion id="ca">
@@ -3315,11 +3315,11 @@
 
     <section id="annotationliteral_typeliteral" title="Using AnnotationLiteral and TypeLiteral" level="3">
         <assertion id="a" implied="true">
-            <text>Test |javax.enterprise.util.AnnotationLiteral| when using |Instance.select()| to specify qualifiers.</text>
+            <text>Test |jakarta.enterprise.util.AnnotationLiteral| when using |Instance.select()| to specify qualifiers.</text>
         </assertion>
 
         <assertion id="b" implied="true">
-            <text>Test |javax.enterprise.util.TypeLiteral| when specifying a parameterized type with actual type parameters when calling |Instance.select()|.
+            <text>Test |jakarta.enterprise.util.TypeLiteral| when specifying a parameterized type with actual type parameters when calling |Instance.select()|.
             </text>
         </assertion>
     </section>
@@ -3358,7 +3358,7 @@
 
     <section id="creational_context" title="The CreationalContext interface" level="3">
         <assertion id="ca" testable="false">
-            <text>The interface |javax.enterprise.context.spi.CreationalContext| provides operations that are used by the |Contextual| implementation during
+            <text>The interface |jakarta.enterprise.context.spi.CreationalContext| provides operations that are used by the |Contextual| implementation during
                 instance creation and destruction.
             </text>
             <note>introductory text</note>
@@ -3403,7 +3403,7 @@
 
     <section id="context" title="The Context interface" level="2">
         <assertion id="aa" testable="false">
-            <text>The |javax.enterprise.context.spi.Context| interface provides an operation for obtaining contextual instances with a particular scope of any
+            <text>The |jakarta.enterprise.context.spi.Context| interface provides an operation for obtaining contextual instances with a particular scope of any
                 contextual type.
             </text>
             <note>Introductory text</note>
@@ -4323,7 +4323,7 @@
     <section id="conversation" title="The Conversation interface" level="3">
         <group>
             <text>The container provides a built-in bean with bean type |Conversation|, scope |@RequestScoped|, and qualifier |@Default|, named
-                |javax.enterprise.context.conversation|.
+                |jakarta.enterprise.context.conversation|.
             </text>
             <assertion id="iaa">
                 <text>Test the bean type is correct.</text>
@@ -4630,7 +4630,7 @@
 
     <section id="decorator_annotation" title="Declaring a decorator" level="3">
         <assertion id="a">
-            <text>A decorator is declared by annotating the bean class with the |@javax.decorator.Decorator| stereotype.</text>
+            <text>A decorator is declared by annotating the bean class with the |@jakarta.decorator.Decorator| stereotype.</text>
         </assertion>
     </section>
 
@@ -4639,7 +4639,7 @@
             <text>All decorators have a delegate injection point. A delegate injection point is an injection point of the bean class. The type and qualifiers of
                 the injection point are called the delegate type and delegate qualifiers. The decorator applies to beans that are assignable to the delegate
                 injection point. The delegate injection point must be be declared by annotating the injection point with the annotation
-                |@javax.decorator.Delegate|.
+                |@jakarta.decorator.Delegate|.
             </text>
         </assertion>
 
@@ -5100,7 +5100,7 @@
         </assertion>
 
         <assertion id="b">
-            <text>If any interceptor binding has a member annotated |@javax.enterprise.util.Nonbinding|, the member is ignored when performing interceptor
+            <text>If any interceptor binding has a member annotated |@jakarta.enterprise.util.Nonbinding|, the member is ignored when performing interceptor
                 resolution, and the method does not need to have the same annotation member value.
             </text>
         </assertion>
@@ -5154,11 +5154,11 @@
         </assertion>
 
         <assertion id="g">
-            <text>All event qualifier types must specify the |@javax.inject.Qualifier| meta-annotation</text>
+            <text>All event qualifier types must specify the |@jakarta.inject.Qualifier| meta-annotation</text>
         </assertion>
 
         <assertion id="i">
-            <text>Every event has the qualifier |@javax.enterprise.inject.Any|, even if it does not explicitly declare this qualifier.</text>
+            <text>Every event has the qualifier |@jakarta.enterprise.inject.Any|, even if it does not explicitly declare this qualifier.</text>
         </assertion>
 
         <assertion id="j">
@@ -5168,7 +5168,7 @@
 
     <section id="firing_events" title="Firing events" level="2">
         <assertion id="a">
-            <text>Beans fire events via an instance of the |javax.enterprise.event.Event| interface, which may be injected.</text>
+            <text>Beans fire events via an instance of the |jakarta.enterprise.event.Event| interface, which may be injected.</text>
         </assertion>
 
         <assertion id="c">
@@ -5329,7 +5329,7 @@
             <text>An event is delivered to an observer method if the observer method belongs to an enabled bean, an event type is assignable to the observed
                 event type, taking type parameters into consideration, the observer method has no event qualifiers or has a subset of the event qualifiers. An
                 observer method has an event qualifier if it has an observed event qualifier with (a) the same type and (b) the same annotation member value for
-                each member which is not annotated |@javax.enterprise.util.Nonbinding|. Also the event is not a container lifecycle event, as defined in Section
+                each member which is not annotated |@jakarta.enterprise.util.Nonbinding|. Also the event is not a container lifecycle event, as defined in Section
                 11.5 "Container lifecycle events", or the observer method belongs to an extension.
             </text>
             <assertion id="c">
@@ -5487,7 +5487,7 @@
 
     <section id="observes" title="Declaring an observer method" level="3">
         <assertion id="a">
-            <text>An observer method may be declared by annotating a parameter |@javax.enterprise.event.Observes| or |@javax.enterprise.event.ObservesAsync| of
+            <text>An observer method may be declared by annotating a parameter |@jakarta.enterprise.event.Observes| or |@jakarta.enterprise.event.ObservesAsync| of
                 a default-access, public, protected or private method. That parameter is the event parameter. The declared type of the parameter is the observed
                 event type.
             </text>
@@ -5547,7 +5547,7 @@
     <section id="event_metadata" title="The EventMetadata interface" level="3">
 
         <group>
-            <text>The interface |javax.enterprise.inject.spi.EventMetadata| provides access to metadata about an observed event.</text>
+            <text>The interface |jakarta.enterprise.inject.spi.EventMetadata| provides access to metadata about an observed event.</text>
             <assertion id="a">
                 <text>|getQualifiers()| returns the set of qualifiers with which the event was fired.</text>
             </assertion>
@@ -5587,7 +5587,7 @@
         </assertion>
 
         <assertion id="c">
-            <text>The enumeration |javax.enterprise.event.Reception| identifies the possible values of |receive|.</text>
+            <text>The enumeration |jakarta.enterprise.event.Reception| identifies the possible values of |receive|.</text>
         </assertion>
     </section>
 
@@ -5600,8 +5600,8 @@
         </assertion>
 
         <assertion id="aa">
-            <text>If the transaction is in progress, but |javax.transaction.Synchronization| callback cannot be registered due to the transaction being already
-                marked for rollback or in state where |javax.transaction.Synchronization| callbacks cannot be registered, the before completion, after
+            <text>If the transaction is in progress, but |jakarta.transaction.Synchronization| callback cannot be registered due to the transaction being already
+                marked for rollback or in state where |jakarta.transaction.Synchronization| callbacks cannot be registered, the before completion, after
                 completion and after failure observer methods are notified at the same time as other observers, but
                 after success observer methods get skipped.
             </text>
@@ -5626,7 +5626,7 @@
         </assertion>
 
         <assertion id="f" testable="false">
-            <text>The enumeration |javax.enterprise.event.TransactionPhase| identifies the kind of transactional observer method.</text>
+            <text>The enumeration |jakarta.enterprise.event.TransactionPhase| identifies the kind of transactional observer method.</text>
             <note>Should we just sigtest this?</note>
         </assertion>
 
@@ -5694,7 +5694,7 @@
         <group>
             <text>For a custom implementation of the |ObserverMethod| interface defined in Section 11.1.3, "The ObserverMethod interface", the container must
                 call |getTransactionPhase()| to determine if the observer method is a transactional observer method, and |notify()| which accepts
-                |javax.enterprise.inject.spi.EventContext| to invoke the method.
+                |jakarta.enterprise.inject.spi.EventContext| to invoke the method.
             </text>
             <assertion id="fa">
                 <text>Check |getTransactionPhase()| is called.</text>
@@ -5812,7 +5812,7 @@
         </group>
 
         <group>
-            <text>The interface |javax.enterprise.inject.spi.Bean| defines everything the container needs to manage instances of a certain bean.</text>
+            <text>The interface |jakarta.enterprise.inject.spi.Bean| defines everything the container needs to manage instances of a certain bean.</text>
 
             <assertion id="bb">
                 <text>|getBeanClass()| returns the bean class of the managed bean or of the bean that declares the producer method or field.</text>
@@ -5850,7 +5850,7 @@
 
     <section id="decorator" title="The Decorator interface" level="3">
         <assertion id="a">
-            <text>The |Bean| object for a decorator must implement the interface |javax.enterprise.inject.spi.Decorator|.</text>
+            <text>The |Bean| object for a decorator must implement the interface |jakarta.enterprise.inject.spi.Decorator|.</text>
         </assertion>
 
         <assertion id="b">
@@ -5868,7 +5868,7 @@
 
     <section id="interceptor" title="The Interceptor interface" level="3">
         <assertion id="a">
-            <text>The |Bean| object for an interceptor must implement |javax.enterprise.inject.spi.Interceptor|.</text>
+            <text>The |Bean| object for an interceptor must implement |jakarta.enterprise.inject.spi.Interceptor|.</text>
         </assertion>
 
         <assertion id="b">
@@ -5897,7 +5897,7 @@
 
     <section id="observer_method" title="The ObserverMethod interface" level="3">
         <assertion id="a" testable="false">
-            <text>The interface |javax.enterprise.inject.spi.ObserverMethod| defines everything the container needs to know about an observer method.</text>
+            <text>The interface |jakarta.enterprise.inject.spi.ObserverMethod| defines everything the container needs to know about an observer method.</text>
         </assertion>
 
         <assertion id="b">
@@ -5935,7 +5935,7 @@
 
     <section id="injectiontarget" title="The Producer and InjectionTarget interfaces" level="2">
         <assertion id="a" testable="false">
-            <text>The interface |javax.enterprise.inject.spi.Producer| provides a generic operation for producing an instance of a type.</text>
+            <text>The interface |jakarta.enterprise.inject.spi.Producer| provides a generic operation for producing an instance of a type.</text>
             <note>Statement of intent</note>
         </assertion>
 
@@ -6017,7 +6017,7 @@
         </assertion>
 
         <assertion id="h" testable="false">
-            <text>The subinterface |javax.enterprise.inject.spi.InjectionTarget| provides operations for performing dependency injection and lifecycle callbacks
+            <text>The subinterface |jakarta.enterprise.inject.spi.InjectionTarget| provides operations for performing dependency injection and lifecycle callbacks
                 on an instance of a type.
             </text>
             <note>Statement of intent</note>
@@ -6150,7 +6150,7 @@
 
         <assertion id="b">
             <text>
-                |CDI| implements |javax.enterprise.inject.Instance| and therefore might be used to perform
+                |CDI| implements |jakarta.enterprise.inject.Instance| and therefore might be used to perform
                 programmatic lookup as defined in "The Instance interface". If no qualifier is passed to |CDI.select()|
                 method, the |@Default| qualifier is assumed.
             </text>
@@ -6158,7 +6158,7 @@
 
         <assertion id="c">
             <text>
-                When |CDI.current()| is called, |getCDI()| method is called on |javax.enterprise.inject.spi.CDIProvider|.
+                When |CDI.current()| is called, |getCDI()| method is called on |jakarta.enterprise.inject.spi.CDIProvider|.
             </text>
         </assertion>
 
@@ -6166,7 +6166,7 @@
             <text>
                 The |CDIProvider| to use may be set by the application or container using the |setCDIProvider()| method. If the |setCDIProvider()| has not been
                 called, the service provider with highest priority of the service
-                javax.enterprise.inject.spi.CDIProvider declared in META-INF/services is used. The order of more
+                jakarta.enterprise.inject.spi.CDIProvider declared in META-INF/services is used. The order of more
                 than one CDIProvider with the same priority is undefined.. If no provider is available an |IllegalStateException| is thrown.
             </text>
             <assertion id="da">
@@ -6569,7 +6569,7 @@
 
     <section id="bm_obtain_elresolver" title="Obtaining the ELResolver" level="3">
         <assertion id="a">
-            <text>The method |BeanManager.getELResolver()| returns the |javax.el.ELResolver| specified in Section 12.4, "Integration with Unified EL".</text>
+            <text>The method |BeanManager.getELResolver()| returns the |jakarta.el.ELResolver| specified in Section 12.4, "Integration with Unified EL".</text>
         </assertion>
     </section>
 
@@ -6748,7 +6748,7 @@
     <section id="alternative_metadata_sources" title="Alternative metadata sources" level="2">
         <assertion id="a" testable="false">
             <text>The interfaces |AnnotatedType|, |AnnotatedField|, |AnnotatedMethod|, |AnnotatedConstructor| and |AnnotatedParameter| in the package
-                |javax.enterprise.inject.spi| allow a portable extension to specify metadata that overrides the annotations that exist on a bean class. The
+                |jakarta.enterprise.inject.spi| allow a portable extension to specify metadata that overrides the annotations that exist on a bean class. The
                 portable extension is responsible for implementing the interfaces, thereby exposing the metadata to the container.
             </text>
             <note>Statement of intent. In fact some assertions in this section do test metadata constructed by container as defined in sections "11.3.18.
@@ -6757,7 +6757,7 @@
         </assertion>
 
         <group>
-            <text>The interface |javax.enterprise.inject.spi.AnnotatedType| exposes the |Class| object and members.</text>
+            <text>The interface |jakarta.enterprise.inject.spi.AnnotatedType| exposes the |Class| object and members.</text>
             <assertion id="aaa">
                 <text>Test that |getConstructors()| returns all default-access, public, protected or private constructors declared for the type.</text>
             </assertion>
@@ -6785,7 +6785,7 @@
         </assertion>
 
         <group>
-            <text>The interface |javax.enterprise.inject.spi.Annotated| exposes the overriding annotations and type declarations.</text>
+            <text>The interface |jakarta.enterprise.inject.spi.Annotated| exposes the overriding annotations and type declarations.</text>
             <assertion id="c">
                 <text>|getBaseType()| returns the type of the program element.</text>
             </assertion>
@@ -6990,19 +6990,19 @@
         <group>
             <text>This SPI is composed of the following interfaces:</text>
             <assertion id="aa" testable="false">
-                <text>`javax.enterprise.inject.spi.builder.AnnotatedTypeConfigurator` to configure an AnnotatedType</text>
+                <text>`jakarta.enterprise.inject.spi.builder.AnnotatedTypeConfigurator` to configure an AnnotatedType</text>
             </assertion>
             <assertion id="ab" testable="false">
-                <text>`javax.enterprise.inject.spi.builder.AnnotatedFieldConfigurator` to configure an AnnotatedField</text>
+                <text>`jakarta.enterprise.inject.spi.builder.AnnotatedFieldConfigurator` to configure an AnnotatedField</text>
             </assertion>
             <assertion id="ac" testable="false">
-                <text>`javax.enterprise.inject.spi.builder.AnnotatedConstructorConfigurator` to configure an AnnotatedConstructor</text>
+                <text>`jakarta.enterprise.inject.spi.builder.AnnotatedConstructorConfigurator` to configure an AnnotatedConstructor</text>
             </assertion>
             <assertion id="ad" testable="false">
-                <text>`javax.enterprise.inject.spi.builder.AnnotatedMethodConfigurator` to configure an AnnotatedMethod</text>
+                <text>`jakarta.enterprise.inject.spi.builder.AnnotatedMethodConfigurator` to configure an AnnotatedMethod</text>
             </assertion>
             <assertion id="ae" testable="false">
-                <text>`javax.enterprise.inject.spi.builder.AnnotatedParameterConfigurator` to configure an AnnotatedParameter</text>
+                <text>`jakarta.enterprise.inject.spi.builder.AnnotatedParameterConfigurator` to configure an AnnotatedParameter</text>
             </assertion>
         </group>
 
@@ -7174,7 +7174,7 @@
 
         <assertion id="b">
             <text>Observer methods of these events must belong to extensions. An extension is a service provider of the service
-                |javax.enterprise.inject.spi.Extension| declared in |META-INF/services|.
+                |jakarta.enterprise.inject.spi.Extension| declared in |META-INF/services|.
             </text>
         </assertion>
 
@@ -7227,7 +7227,7 @@
     <section id="before_bean_discovery" title="BeforeBeanDiscovery event" level="3">
         <assertion id="a">
             <text>The container must fire an event before it begins the bean discovery process. The event object must be of type
-                |javax.enterprise.inject.spi.BeforeBeanDiscovery|.
+                |jakarta.enterprise.inject.spi.BeforeBeanDiscovery|.
             </text>
         </assertion>
 
@@ -7308,7 +7308,7 @@
     <section id="after_type_discovery" title="AfterTypeDiscovery event" level="3">
         <assertion id="a">
             <text>The container must fire an event when it has fully completed the type discovery process and before it begins the bean discovery process. The
-                event object must be of type |javax.enterprise.inject.spi.AfterTypeDiscovery|.
+                event object must be of type |jakarta.enterprise.inject.spi.AfterTypeDiscovery|.
             </text>
         </assertion>
 
@@ -7390,7 +7390,7 @@
         <assertion id="a">
             <text>The container must fire an event when it has fully completed the bean discovery process, validated that there are no definition errors
                 relating to the discovered beans, and registered |Bean| and |ObserverMethod| objects for the discovered beans, but before detecting deployment
-                problems. The event object must be of type |javax.enterprise.inject.spi.AfterBeanDiscovery|.
+                problems. The event object must be of type |jakarta.enterprise.inject.spi.AfterBeanDiscovery|.
             </text>
         </assertion>
 
@@ -7585,7 +7585,7 @@
     <section id="after_deployment_validation" title="AfterDeploymentValidation event" level="3">
         <assertion id="a">
             <text>The container must fire an event after it has validated that there are no deployment problems and before creating contexts or processing
-                requests. The event object must be of type |javax.enterprise.inject.spi.AfterDeploymentValidation|.
+                requests. The event object must be of type |jakarta.enterprise.inject.spi.AfterDeploymentValidation|.
             </text>
         </assertion>
 
@@ -7613,7 +7613,7 @@
     <section id="before_shutdown" title="BeforeShutdown event" level="3">
         <assertion id="a">
             <text>The container must fire a final event after it has finished processing requests and destroyed all contexts. The event object must be of type
-                |javax.enterprise.inject.spi.BeforeShutdown|.
+                |jakarta.enterprise.inject.spi.BeforeShutdown|.
             </text>
         </assertion>
 
@@ -7672,8 +7672,8 @@
         </group>
 
         <assertion id="j">
-            <text>The event object must be of type |javax.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where X is the class, for types discovered in a
-                bean archive, or of type |javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType&lt;X&gt;| for types added by
+            <text>The event object must be of type |jakarta.enterprise.inject.spi.ProcessAnnotatedType&lt;X&gt;|, where X is the class, for types discovered in a
+                bean archive, or of type |jakarta.enterprise.inject.spi.ProcessSyntheticAnnotatedType&lt;X&gt;| for types added by
                 |BeforeBeanDiscovery.addAnnotatedType()|.
             </text>
         </assertion>
@@ -7772,7 +7772,7 @@
 
         <assertion id="a">
             <text>The container must fire an event for every injection point of every bean, interceptor and decorator. The event object must be of type
-                |javax.enterprise.inject.spi.ProcessInjectionPoint&lt;T, X&gt;| where |T| is the bean class and |X| is the declared type of the injection point.
+                |jakarta.enterprise.inject.spi.ProcessInjectionPoint&lt;T, X&gt;| where |T| is the bean class and |X| is the declared type of the injection point.
             </text>
         </assertion>
 
@@ -7851,7 +7851,7 @@
     <section id="process_injection_target" title="ProcessInjectionTarget event" level="3">
         <group>
             <text>The container must fire an event for every bean, interceptor or decorator. The event object must be of type
-                |javax.enterprise.inject.spi.ProcessInjectionTarget&lt;X&gt;|, where |x| is the managed bean class.
+                |jakarta.enterprise.inject.spi.ProcessInjectionTarget&lt;X&gt;|, where |x| is the managed bean class.
             </text>
             <assertion id="aaa">
                 <text>Test event is fired for a managed bean</text>
@@ -7904,7 +7904,7 @@
         <group>
             <text>The container must fire an event for each enabled bean, interceptor or decorator deployed in a bean archive, before registering the |Bean|
                 object. No event is fired for any |@New| qualified bean, defined in Section 3.14, "@New qualified beans" or beans added programmatically using
-                |AfterBeanDiscovery.addBean()| or for any built-in beans. The event object must be of type |javax.enterprise.inject.spi.ProcessBeanAttributes&lt;T&gt;|
+                |AfterBeanDiscovery.addBean()| or for any built-in beans. The event object must be of type |jakarta.enterprise.inject.spi.ProcessBeanAttributes&lt;T&gt;|
                 where |T| is the bean class of the bean, the return type of the producer method, or the type of the producer field.
             </text>
             <assertion id="aa">
@@ -8100,7 +8100,7 @@
         </assertion>
 
         <group>
-            <text>The interface |javax.enterprise.inject.spi.ProcessBean| is a supertype of all these event types.</text>
+            <text>The interface |jakarta.enterprise.inject.spi.ProcessBean| is a supertype of all these event types.</text>
             <assertion id="eda">
                 <text>Test |ProcessManagedBean|</text>
             </assertion>
@@ -8192,7 +8192,7 @@
         </group>
 
         <group>
-            <text>The event object must be of type |javax.enterprise.inject.spi.ProcessProducer&lt;T, X&gt;|, where |T| is the bean class of the bean that
+            <text>The event object must be of type |jakarta.enterprise.inject.spi.ProcessProducer&lt;T, X&gt;|, where |T| is the bean class of the bean that
                 declares the producer method or field and |X| is the return type of the producer method or the type of the producer field.
             </text>
             <assertion id="ba">
@@ -8289,15 +8289,15 @@
     <section id="process_observer_method" title="ProcessObserverMethod event" level="3">
         <assertion id="aaa">
             <text>The container must fire an event for each observer method of each enabled bean, before registering the |ObserverMethod| object. The event
-                object must be of type |javax.enterprise.inject.spi.ProcessObserverMethod&lt;T, X&gt;| where |T| is the bean class of the bean that declares the
+                object must be of type |jakarta.enterprise.inject.spi.ProcessObserverMethod&lt;T, X&gt;| where |T| is the bean class of the bean that declares the
                 observer method and |X| is the observed event type of the observer method.
             </text>
         </assertion>
 
         <assertion id="aab">
             <text>
-                For a custom implementation of javax.enterprise.inject.spi.ObserverMethod, the container must raise an event of type
-                |javax.enterprise.inject.spi.ProcessSyntheticObserverMethod&lt;T, X&gt;|, where |T| is the observed
+                For a custom implementation of jakarta.enterprise.inject.spi.ObserverMethod, the container must raise an event of type
+                |jakarta.enterprise.inject.spi.ProcessSyntheticObserverMethod&lt;T, X&gt;|, where |T| is the observed
                 event type of the observer method and |X| is the return value of |ObserverMethod.getBeanClass()|.
             </text>
         </assertion>
@@ -8581,7 +8581,7 @@
         </assertion>
 
         <assertion id="b">
-            <text>First, the container must search for service providers for the service |javax.enterprise.inject.spi.Extension| defined in Section 11.5,
+            <text>First, the container must search for service providers for the service |jakarta.enterprise.inject.spi.Extension| defined in Section 11.5,
                 "Container lifecycle events", instantiate a single instance of each service provider, and search the service provider class for observer methods
                 of initialization events.
             </text>
@@ -8855,7 +8855,7 @@
         </assertion>
 
         <assertion id="b" testable="false">
-            <text>`SeContainerInitializer` is a service provider of the service javax.enterprise.inject.se.SeContainerInitializer declared in META-INF/services.
+            <text>`SeContainerInitializer` is a service provider of the service jakarta.enterprise.inject.se.SeContainerInitializer declared in META-INF/services.
                 It allows the configuration of the CDI container before its bootstrapping.
             </text>
         </assertion>
@@ -8943,7 +8943,7 @@
 
     <section id="se_container" title="SeContainer interface" level="2">
         <assertion id="a">
-            <text>The |javax.enterprise.inject.se.SeContainer| interface provides access to the |BeanManager| and programmatic lookup as defined in The Instance
+            <text>The |jakarta.enterprise.inject.se.SeContainer| interface provides access to the |BeanManager| and programmatic lookup as defined in The Instance
                 interface.
             </text>
         </assertion>
@@ -8971,7 +8971,7 @@
 
         <assertion id="d">
             <text>
-                |SeContainer| implements |javax.enterprise.inject.Instance| and therefore might be used to perform
+                |SeContainer| implements |jakarta.enterprise.inject.Instance| and therefore might be used to perform
                 programmatic lookup as defined in "The Instance interface". If no qualifier is passed to
                 |SeContainer.select()| method, the |@Default| qualifier is assumed.
             </text>
@@ -9015,10 +9015,10 @@
         <group>
             <text>An archive which doesn’t contain a beans.xml file can’t be discovered as an implicit bean archive unless:</text>
             <assertion id="a">
-                <text>Application is launched with system property javax.enterprise.inject.scan.implicit set to true</text>
+                <text>Application is launched with system property jakarta.enterprise.inject.scan.implicit set to true</text>
             </assertion>
             <assertion id="b">
-                <text>the container was initialized with a parameter map containing an entry with javax.enterprise.inject.scan.implicit as key and Boolean.TRUE
+                <text>the container was initialized with a parameter map containing an entry with jakarta.enterprise.inject.scan.implicit as key and Boolean.TRUE
                     as value
                 </text>
             </assertion>
@@ -9052,7 +9052,7 @@
     <section id="bean_types_ee" title="Bean types for Java EE component" level="2">
         <group>
             <text>The bean types of a bean may be restricted by annotating the bean class or producer method or field with the annotation
-                |@javax.enterprise.inject.Typed|. When a |@Typed| annotation is explicitly specified, only the types whose classes are explicitly listed using
+                |@jakarta.enterprise.inject.Typed|. When a |@Typed| annotation is explicitly specified, only the types whose classes are explicitly listed using
                 the |value| member, together with |java.lang.Object| are bean types of the bean.
             </text>
             <assertion id="a">
@@ -9496,7 +9496,7 @@
 
     <section id="additional_builtin_beans" title="Additional built-in beans" level="2">
         <assertion id="a">
-            <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.transaction.UserTransaction|,
+            <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |jakarta.transaction.UserTransaction|,
                 allowing injection of a reference to the JTA |UserTransaction|.
             </text>
         </assertion>
@@ -9508,20 +9508,20 @@
         </assertion>
 
         <assertion id="da">
-            <text>A servlet container must provide a bean with qualifier |@Default| and bean type |javax.servlet.http.HttpServletRequest|, allowing injection of
+            <text>A servlet container must provide a bean with qualifier |@Default| and bean type |jakarta.servlet.http.HttpServletRequest|, allowing injection of
                 a reference to the |HttpServletRequest|. This bean is passivation capable dependency, as defined in Section 6.6.2, "Passivation capable
                 dependencies".
             </text>
         </assertion>
 
         <assertion id="db">
-            <text>A servlet container must provide a bean with qualifier |@Default| and bean type |javax.servlet.http.HttpSession|, allowing injection of a
+            <text>A servlet container must provide a bean with qualifier |@Default| and bean type |jakarta.servlet.http.HttpSession|, allowing injection of a
                 reference to the |HttpSession|. This bean is passivation capable dependency, as defined in Section 6.6.2, "Passivation capable dependencies".
             </text>
         </assertion>
 
         <assertion id="dc">
-            <text>A servlet container must provide a bean with qualifier |@Default| and bean type |javax.servlet.ServletContext|, allowing injection of a
+            <text>A servlet container must provide a bean with qualifier |@Default| and bean type |jakarta.servlet.ServletContext|, allowing injection of a
                 reference to the |ServletContext|. This bean is passivation capable dependency, as defined in Section 6.6.2, "Passivation capable dependencies".
             </text>
         </assertion>
@@ -9595,7 +9595,7 @@
         </assertion>
 
         <assertion id="r">
-            <text>This second bean has exactly one qualifier: |@javax.enterprise.inject.New(X.class)| where |x| is the bean class.</text>
+            <text>This second bean has exactly one qualifier: |@jakarta.enterprise.inject.New(X.class)| where |x| is the bean class.</text>
         </assertion>
 
         <assertion id="s">
@@ -10783,14 +10783,14 @@
 
         <assertion id="tb">
             <text>If the propagated conversation cannot be restored, the container must associate the request with a new transient conversation and throw an
-                exception of type |javax.enterprise.context.NonexistentConversationException|.
+                exception of type |jakarta.enterprise.context.NonexistentConversationException|.
             </text>
         </assertion>
 
         <group>
             <text>The container ensures that a long-running conversation may be associated with at most one request at a time, by blocking or rejecting
                 concurrent requests. If the container rejects a request, it must associate the request with a new transient conversation and throw an exception
-                of type |javax.enterprise.context.BusyConversationException|.
+                of type |jakarta.enterprise.context.BusyConversationException|.
             </text>
             <assertion id="ua">
                 <text>Test the container blocks the concurrent request.</text>
@@ -11029,7 +11029,7 @@
         </assertion>
 
         <assertion id="e" implied="true">
-            <text>A decorator is declared by annotating the bean class with the |@javax.decorator.Decorator| stereotype.</text>
+            <text>A decorator is declared by annotating the bean class with the |@jakarta.decorator.Decorator| stereotype.</text>
         </assertion>
 
         <assertion id="f" implied="true">
@@ -11195,7 +11195,7 @@
 
     <section id="bm_wrap_expressionfactory" title="Wrapping a Unified EL ExpressionFactory" level="3">
         <assertion id="a">
-            <text>The method |BeanManager.wrapExpressionFactory()| returns a wrapper |javax.el.ExpressionFactory| that delegates |MethodExpression| and
+            <text>The method |BeanManager.wrapExpressionFactory()| returns a wrapper |jakarta.el.ExpressionFactory| that delegates |MethodExpression| and
                 |ValueExpression| creation to the given |ExpressionFactory|.
             </text>
         </assertion>
@@ -11241,7 +11241,7 @@
     <section id="process_injection_target_ee" title="ProcessInjectionTarget event and EJB" level="3">
         <group>
             <text>The container must fire an event for every bean, interceptor or decorator. The event object must be of type
-                |javax.enterprise.inject.spi.ProcessInjectionTarget&lt;X&gt;|, where |x| is the managed bean class.
+                |jakarta.enterprise.inject.spi.ProcessInjectionTarget&lt;X&gt;|, where |x| is the managed bean class.
             </text>
             <assertion id="aab">
                 <text>Test event is fired for a session bean</text>
@@ -11368,7 +11368,7 @@
         </assertion>
 
         <group>
-            <text>The interface |javax.enterprise.inject.spi.ProcessBean| is a supertype of all these event types.</text>
+            <text>The interface |jakarta.enterprise.inject.spi.ProcessBean| is a supertype of all these event types.</text>
             <assertion id="edb">
                 <text>Test |ProcessSessionBean|</text>
             </assertion>
@@ -11395,7 +11395,7 @@
         </assertion>
 
         <assertion id="hc">
-            <text>|getSessionBeanType()| returns a |javax.enterprise.inject.spi.SessionBeanType| representing the kind of session bean.</text>
+            <text>|getSessionBeanType()| returns a |jakarta.enterprise.inject.spi.SessionBeanType| representing the kind of session bean.</text>
         </assertion>
 
         <assertion id="k" implied="true">
@@ -11507,7 +11507,7 @@
 
         <assertion id="jl">
             <text>An embeddable EJB container searches each bean archive in the JVM classpath that is listed in the value of the embeddable container
-                initialization property |javax.ejb.embeddable.modules|, or every bean archive in the JVM classpath if the property is not specified. The bean
+                initialization property |jakarta.ejb.embeddable.modules|, or every bean archive in the JVM classpath if the property is not specified. The bean
                 archives might be directories, library jars or EJB jars.
             </text>
         </assertion>

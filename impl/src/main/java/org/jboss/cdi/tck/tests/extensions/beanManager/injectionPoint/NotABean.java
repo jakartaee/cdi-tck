@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.injectionPoint;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 public class NotABean {
 

@@ -24,8 +24,8 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.enterprise.inject.Vetoed;
-import javax.interceptor.InterceptorBinding;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.interceptor.InterceptorBinding;
 
 @Vetoed
 @Target({ TYPE, METHOD })

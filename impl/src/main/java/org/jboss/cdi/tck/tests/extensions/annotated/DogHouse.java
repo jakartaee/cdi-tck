@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class DogHouse {
     @Inject

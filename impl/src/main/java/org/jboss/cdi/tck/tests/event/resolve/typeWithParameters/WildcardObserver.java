@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
 import java.util.List;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class WildcardObserver extends AbstractObserver {
 

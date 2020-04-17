@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.decorators.builtin.conversation;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ConversationScoped;
+import jakarta.enterprise.context.ConversationScoped;
 
 @ConversationScoped
 public class Duck implements Serializable {

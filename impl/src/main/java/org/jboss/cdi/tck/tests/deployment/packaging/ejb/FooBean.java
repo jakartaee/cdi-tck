@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.ejb;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Stateless
 public class FooBean implements FooRemote {

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.singletonWithConversationScope;
 
-import javax.ejb.Singleton;
-import javax.enterprise.context.ConversationScoped;
+import jakarta.ejb.Singleton;
+import jakarta.enterprise.context.ConversationScoped;
 
 @Singleton
 @ConversationScoped

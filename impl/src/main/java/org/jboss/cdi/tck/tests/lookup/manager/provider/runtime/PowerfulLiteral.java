@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.manager.provider.runtime;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 /**
  * @author Martin Kouba

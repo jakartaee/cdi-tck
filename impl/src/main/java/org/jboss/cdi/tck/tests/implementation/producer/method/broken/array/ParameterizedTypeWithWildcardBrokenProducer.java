@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.broken.array;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.Vetoed;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Vetoed;
 
 
 public class ParameterizedTypeWithWildcardBrokenProducer<T> {

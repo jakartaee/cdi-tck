@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.builtin;
 
 import java.security.Principal;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 import javax.security.auth.login.LoginException;
 
 /**

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.remote;
 
-import javax.ejb.EJB;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.inject.Produces;
 
 public class ServiceProducer {
 

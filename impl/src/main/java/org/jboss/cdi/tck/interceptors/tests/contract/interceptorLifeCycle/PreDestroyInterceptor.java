@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
 import static org.testng.Assert.assertNotNull;
 
-import javax.annotation.PreDestroy;
-import javax.inject.Inject;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Inject;
+import jakarta.interceptor.InvocationContext;
 
 public class PreDestroyInterceptor {
 

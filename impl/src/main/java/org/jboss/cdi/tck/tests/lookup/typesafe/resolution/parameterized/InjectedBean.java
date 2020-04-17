@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
 import java.util.HashMap;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class InjectedBean {
     @Inject

@@ -1,7 +1,7 @@
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.parameterAnnotatedObservesAsync;
 
-import javax.enterprise.event.ObservesAsync;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.event.ObservesAsync;
+import jakarta.enterprise.inject.Produces;
 
 public class BrokenProducer {
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.unmanaged;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class Axe {

@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.equivalence.qualifier;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 @SuppressWarnings("all")
 public abstract class MonsterQualifier extends AnnotationLiteral<Monster> implements Monster {

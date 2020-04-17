@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Default;
-import javax.inject.Named;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Named;
 
 @Stateless
 @Named("Monkey")

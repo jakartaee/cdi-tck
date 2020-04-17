@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.nonContextualReference;
 
-import javax.ejb.EJB;
+import jakarta.ejb.EJB;
 
 public class Cruiser implements Ship {
 

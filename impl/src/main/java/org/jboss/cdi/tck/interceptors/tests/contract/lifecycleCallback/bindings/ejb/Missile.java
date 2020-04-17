@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings.ejb;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Airborne
 @Stateful

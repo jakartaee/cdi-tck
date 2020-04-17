@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types.enterprise.illegal;
 
-import javax.annotation.Resource;
-import javax.enterprise.inject.Produces;
+import jakarta.annotation.Resource;
+import jakarta.enterprise.inject.Produces;
 
 public class DogResourceProducer<T> {
 

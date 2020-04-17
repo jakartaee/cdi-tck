@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.event.observer.checkedException;
 
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 
-import javax.enterprise.event.ObserverException;
+import jakarta.enterprise.event.ObserverException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

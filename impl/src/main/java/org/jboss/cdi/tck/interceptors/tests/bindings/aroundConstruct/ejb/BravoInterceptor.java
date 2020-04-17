@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.aroundConstruct.ejb;
 
-import javax.interceptor.Interceptor;
+import jakarta.interceptor.Interceptor;
 
 @Interceptor
 @BravoBinding

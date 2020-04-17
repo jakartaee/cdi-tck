@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.simple.resource.ejb;
 
 import java.io.Serializable;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class ManagedBean implements Serializable {
     @Inject

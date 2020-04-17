@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.synthetic;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
 
 import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.members;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @PlantInterceptorBinding(age = 1, name = "TEST")

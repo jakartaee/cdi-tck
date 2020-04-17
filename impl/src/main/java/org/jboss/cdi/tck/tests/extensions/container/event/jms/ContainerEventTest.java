@@ -25,10 +25,10 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
-import javax.enterprise.inject.spi.AnnotatedField;
-import javax.enterprise.inject.spi.AnnotatedMethod;
-import javax.enterprise.inject.spi.AnnotatedType;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.spi.AnnotatedField;
+import jakarta.enterprise.inject.spi.AnnotatedMethod;
+import jakarta.enterprise.inject.spi.AnnotatedType;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -58,7 +58,7 @@ public class ContainerEventTest extends AbstractTest {
         EjbJarDescriptor ejbJarDescriptor = new EjbJarDescriptorBuilder().messageDrivenBeans(
                 newMessageDriven("TestQueue", QueueMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
-                        .addActivationConfigProperty("destinationType", "javax.jms.Queue")
+                        .addActivationConfigProperty("destinationType", "jakarta.jms.Queue")
                         .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsQueue())).build();
 
         return new WebArchiveBuilder().withTestClassPackage(ContainerEventTest.class)

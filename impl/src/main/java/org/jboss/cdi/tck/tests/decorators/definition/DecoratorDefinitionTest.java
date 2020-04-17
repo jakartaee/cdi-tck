@@ -36,10 +36,10 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.decorator.Delegate;
-import javax.enterprise.inject.Default;
-import javax.enterprise.inject.spi.Decorator;
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.spi.Decorator;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

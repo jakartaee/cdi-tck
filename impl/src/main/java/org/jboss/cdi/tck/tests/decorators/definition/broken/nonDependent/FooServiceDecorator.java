@@ -17,11 +17,11 @@
 
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nonDependent;
 
-import javax.annotation.Priority;
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import jakarta.annotation.Priority;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
 @Decorator
 @RequestScoped

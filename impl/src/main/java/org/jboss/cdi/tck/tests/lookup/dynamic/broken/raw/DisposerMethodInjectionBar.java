@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.lookup.dynamic.broken.raw;
 
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.Produces;
 
 /**
  * @author Martin Kouba

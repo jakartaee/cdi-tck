@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.bothObservesAnnotations;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.ObservesAsync;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.ObservesAsync;
 
 @Dependent
 public class BrokenObserver {

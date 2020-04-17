@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
-import javax.ejb.Singleton;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.ejb.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @Singleton
 @ApplicationScoped

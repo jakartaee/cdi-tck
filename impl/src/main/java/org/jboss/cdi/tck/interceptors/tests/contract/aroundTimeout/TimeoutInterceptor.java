@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
-import javax.ejb.Timer;
-import javax.interceptor.AroundTimeout;
-import javax.interceptor.InvocationContext;
+import jakarta.ejb.Timer;
+import jakarta.interceptor.AroundTimeout;
+import jakarta.interceptor.InvocationContext;
 import javax.naming.InitialContext;
-import javax.transaction.TransactionSynchronizationRegistry;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 public class TimeoutInterceptor {
 

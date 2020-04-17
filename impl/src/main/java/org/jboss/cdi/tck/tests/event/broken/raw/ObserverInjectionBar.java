@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.event.broken.raw;
 
-import javax.enterprise.event.Event;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.event.Observes;
 
 /**
  * @author Martin Kouba

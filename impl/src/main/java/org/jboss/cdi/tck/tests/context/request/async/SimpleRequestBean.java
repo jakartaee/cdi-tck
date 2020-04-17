@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.context.request.async;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
 
 /**
  * @author Martin Kouba

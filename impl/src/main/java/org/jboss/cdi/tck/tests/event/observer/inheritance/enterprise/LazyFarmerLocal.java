@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.inheritance.enterprise;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 public @Local
 interface LazyFarmerLocal {

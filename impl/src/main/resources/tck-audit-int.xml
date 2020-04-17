@@ -47,30 +47,30 @@
                 types.
             </text>
             <assertion id="ca" testable="false">
-                <text>Around-invoke interceptor methods (annotated with the |javax.interceptor.AroundInvoke| annotation). Around-invoke interceptor methods
+                <text>Around-invoke interceptor methods (annotated with the |jakarta.interceptor.AroundInvoke| annotation). Around-invoke interceptor methods
                     interpose on the invocation of business methods.
                 </text>
             </assertion>
             <assertion id="cb" testable="false">
-                <text>Around-timeout interceptor methods (annotated with the |javax.interceptor.AroundTimeout| annotation). Around-timeout interceptor methods
+                <text>Around-timeout interceptor methods (annotated with the |jakarta.interceptor.AroundTimeout| annotation). Around-timeout interceptor methods
                     interpose on the invocation of timeout methods, in response to timer events.
                 </text>
             </assertion>
             <assertion id="cc" testable="false">
-                <text>Post-construct interceptor methods (annotated with the |javax.annotation.PostConstruct| annotation). Post-construct interceptor methods
+                <text>Post-construct interceptor methods (annotated with the |jakarta.annotation.PostConstruct| annotation). Post-construct interceptor methods
                     are invoked after dependency injection has been completed on the target instance.
                 </text>
                 <note>Tested in "Interceptor Methods for Lifecycle Event Callbacks" section.</note>
             </assertion>
             <assertion id="cd" testable="false">
                 <text>
-                    Pre-destroy interceptor methods (annotated with the |javax.annotation.PreDestroy| annotation). Pre-destroy interceptor methods are invoked
+                    Pre-destroy interceptor methods (annotated with the |jakarta.annotation.PreDestroy| annotation). Pre-destroy interceptor methods are invoked
                     before the target instance and all interceptor instances associated with it are destroyed by the container.
                 </text>
             </assertion>
             <assertion id="ce" testable="false">
                 <text>
-                    Around-construct interceptor methods (annotated with the |javax.interceptor.AroundConstruct| annotation). Around-construct interceptor
+                    Around-construct interceptor methods (annotated with the |jakarta.interceptor.AroundConstruct| annotation). Around-construct interceptor
                     methods
                     interpose on the invocation of the constructor of the target instance.
                 </text>
@@ -816,7 +816,7 @@
             <assertion id="da">
                 <text>The method or constructor has all the interceptor bindings of the interceptor. A method or constructor has an interceptor binding of an
                     interceptor if it has an interceptor binding with (a) the same type and (b) the same annotation member value for each member. An extension
-                    specification may further refine this rule. For example the CDI specification adds the |javax.enterprise.util.Nonbinding| annotation,
+                    specification may further refine this rule. For example the CDI specification adds the |jakarta.enterprise.util.Nonbinding| annotation,
                     causing member values to be ignored by the resolution process.
                 </text>
             </assertion>
@@ -850,10 +850,10 @@
 
         <assertion id="c">
             <text>Array-valued or annotation-valued members of an interceptor binding type are not supported. An extension specification may add support for
-                these member types. For example the CDI specification adds the |javax.enterprise.util.Nonbinding| annotation, allowing array-valued or
+                these member types. For example the CDI specification adds the |jakarta.enterprise.util.Nonbinding| annotation, allowing array-valued or
                 annotation-valued members to be used on the annotation type, but ignored by the resolution process.
             </text>
-            <note>Testing |javax.enterprise.util.Nonbinding| annotation.</note>
+            <note>Testing |jakarta.enterprise.util.Nonbinding| annotation.</note>
         </assertion>
 
         <assertion id="d">

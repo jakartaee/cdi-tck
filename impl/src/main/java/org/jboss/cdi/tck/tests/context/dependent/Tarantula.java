@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
 

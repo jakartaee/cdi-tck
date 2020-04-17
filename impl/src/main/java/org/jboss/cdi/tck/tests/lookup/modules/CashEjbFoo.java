@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules;
 
-import javax.ejb.Local;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Specializes;
+import jakarta.ejb.Local;
+import jakarta.ejb.LocalBean;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Specializes;
 
 @Specializes
 @LocalBean

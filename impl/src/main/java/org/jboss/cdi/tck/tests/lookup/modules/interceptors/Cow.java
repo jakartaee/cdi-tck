@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.interceptors;
 
-import javax.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 public class Cow implements Animal {

@@ -16,15 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.resource.ejb;
 
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
-import javax.inject.Inject;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
+import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Resource;
+import jakarta.ejb.Remove;
+import jakarta.ejb.Stateful;
+import jakarta.ejb.TransactionManagement;
+import jakarta.ejb.TransactionManagementType;
+import jakarta.inject.Inject;
+import jakarta.transaction.SystemException;
+import jakarta.transaction.UserTransaction;
 
 @Stateful
 @TransactionManagement(TransactionManagementType.BEAN)

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.remote;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Stateless
 public class ServiceBean implements ServiceRemote {

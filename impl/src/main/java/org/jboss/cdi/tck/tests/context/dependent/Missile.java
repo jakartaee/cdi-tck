@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import javax.interceptor.Interceptors;
+import jakarta.interceptor.Interceptors;
 
 @Interceptors(MissileInterceptor.class)
 public class Missile {

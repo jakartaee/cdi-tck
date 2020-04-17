@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname.broken.duplicity;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("whitefish")
 public class Sole {

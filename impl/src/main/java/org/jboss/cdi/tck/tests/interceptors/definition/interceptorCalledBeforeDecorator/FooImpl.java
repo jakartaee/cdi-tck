@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator;
 
-import javax.interceptor.Interceptors;
+import jakarta.interceptor.Interceptors;
 
 @Interceptors(TransactionInterceptor.class)
 public class FooImpl implements Foo {

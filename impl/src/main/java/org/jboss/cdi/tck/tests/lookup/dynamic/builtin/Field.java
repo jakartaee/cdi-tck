@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
 import java.io.Serializable;
 
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("serial")
 public class Field implements Serializable {

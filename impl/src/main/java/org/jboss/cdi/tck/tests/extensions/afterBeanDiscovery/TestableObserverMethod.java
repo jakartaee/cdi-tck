@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery;
 
-import javax.enterprise.inject.spi.ObserverMethod;
+import jakarta.enterprise.inject.spi.ObserverMethod;
 
 public interface TestableObserverMethod<T> extends ObserverMethod<T> {
 

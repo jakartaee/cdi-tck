@@ -16,12 +16,12 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.environment.jndi;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Priority;
-import javax.annotation.Resource;
-import javax.inject.Inject;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.annotation.Resource;
+import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 

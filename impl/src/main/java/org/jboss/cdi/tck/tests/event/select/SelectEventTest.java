@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.event.select;
 
 import static org.jboss.cdi.tck.cdi.Sections.EVENT;
 
-import javax.enterprise.util.AnnotationLiteral;
-import javax.enterprise.util.TypeLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

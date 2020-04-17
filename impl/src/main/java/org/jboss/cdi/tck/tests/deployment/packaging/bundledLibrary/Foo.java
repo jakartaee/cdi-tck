@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * @author pmuir

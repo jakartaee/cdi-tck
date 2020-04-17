@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.interceptor.field;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class ViolationProducer {
     public final @Produces

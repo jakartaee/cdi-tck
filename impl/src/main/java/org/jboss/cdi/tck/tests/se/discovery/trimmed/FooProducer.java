@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.se.discovery.trimmed;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class FooProducer {
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.application.event;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 public class Helper {
 

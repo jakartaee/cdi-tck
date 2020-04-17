@@ -1,6 +1,6 @@
 package org.jboss.cdi.tck.shrinkwrap;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 /**
  * Dummy session bean used to make every EJB module <i>true</i> EJB module (JBoss AS7 sub-deployment).

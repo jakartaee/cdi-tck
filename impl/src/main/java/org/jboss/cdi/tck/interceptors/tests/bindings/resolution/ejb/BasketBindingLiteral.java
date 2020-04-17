@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution.ejb;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 /**
  * Annotation literal for {@link BasketBinding}

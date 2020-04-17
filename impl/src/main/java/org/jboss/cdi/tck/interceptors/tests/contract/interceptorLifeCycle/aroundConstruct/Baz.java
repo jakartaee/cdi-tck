@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.interceptor.Interceptors;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptors;
 
 public class Baz {
 

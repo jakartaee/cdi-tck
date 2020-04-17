@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalClass;
 
 import static org.jboss.cdi.tck.cdi.Sections.UNPROXYABLE;
 
-import javax.enterprise.inject.spi.DeploymentException;
+import jakarta.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

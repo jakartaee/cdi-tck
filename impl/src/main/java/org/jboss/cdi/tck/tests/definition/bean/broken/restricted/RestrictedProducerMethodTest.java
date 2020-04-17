@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.definition.bean.broken.restricted;
 
 import static org.jboss.cdi.tck.cdi.Sections.RESTRICTING_BEAN_TYPES;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

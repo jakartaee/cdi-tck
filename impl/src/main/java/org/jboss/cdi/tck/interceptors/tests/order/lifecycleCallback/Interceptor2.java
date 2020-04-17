@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.lifecycleCallback;
 
-import javax.annotation.PostConstruct;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.interceptor.InvocationContext;
 
 class Interceptor2 {
     @PostConstruct

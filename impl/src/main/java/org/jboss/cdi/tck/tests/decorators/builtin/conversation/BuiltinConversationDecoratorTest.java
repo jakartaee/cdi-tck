@@ -25,8 +25,8 @@ import static org.testng.Assert.assertFalse;
 import java.lang.reflect.Type;
 import java.util.Collections;
 
-import javax.enterprise.context.Conversation;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Conversation;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;

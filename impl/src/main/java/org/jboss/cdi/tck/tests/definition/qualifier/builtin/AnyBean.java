@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.builtin;
 
-import javax.enterprise.inject.Any;
+import jakarta.enterprise.inject.Any;
 
 @Any
 public class AnyBean {

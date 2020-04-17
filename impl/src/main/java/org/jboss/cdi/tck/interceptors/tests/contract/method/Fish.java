@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.method;
 
-import javax.interceptor.Interceptors;
+import jakarta.interceptor.Interceptors;
 
 class Fish {
     @Interceptors(FishInterceptor.class)

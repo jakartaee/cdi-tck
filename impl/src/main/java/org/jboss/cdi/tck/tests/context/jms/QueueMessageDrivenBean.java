@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.jms;
 
-import javax.jms.MessageListener;
+import jakarta.jms.MessageListener;
 
 public class QueueMessageDrivenBean extends AbstractMessageListener implements MessageListener {
 

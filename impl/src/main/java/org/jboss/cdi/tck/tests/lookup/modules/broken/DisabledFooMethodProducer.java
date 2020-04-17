@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.broken;
 
-import javax.enterprise.inject.Alternative;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Produces;
 
 @Alternative
 public class DisabledFooMethodProducer {

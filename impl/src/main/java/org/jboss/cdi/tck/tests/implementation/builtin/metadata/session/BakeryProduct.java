@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.session;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface BakeryProduct {

@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.modif
 
 import java.io.Serializable;
 
-import javax.decorator.Decorator;
-import javax.enterprise.inject.Any;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.enterprise.inject.Any;
+import jakarta.inject.Inject;
 
 @Decorator
 @SuppressWarnings("serial")

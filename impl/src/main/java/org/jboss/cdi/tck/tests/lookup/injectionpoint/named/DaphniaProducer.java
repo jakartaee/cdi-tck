@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.named;
 
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Named;
 
 /**
  * @author Martin Kouba

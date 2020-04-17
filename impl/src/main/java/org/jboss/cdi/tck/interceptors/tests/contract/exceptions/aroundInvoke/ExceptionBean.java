@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 
-import javax.interceptor.Interceptors;
+import jakarta.interceptor.Interceptors;
 
 class ExceptionBean {
 

@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.definition.bean.genericbroken;
 
 import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEANS;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

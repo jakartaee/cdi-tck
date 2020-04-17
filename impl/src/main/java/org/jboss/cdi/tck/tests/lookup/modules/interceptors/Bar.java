@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.modules.interceptors;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 @SuppressWarnings("serial")
 @BarBinding

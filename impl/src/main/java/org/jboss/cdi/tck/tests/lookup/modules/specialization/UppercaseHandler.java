@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.modules.specialization;
 
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Specializes;
 
 @Specializes
 public class UppercaseHandler extends Handler {

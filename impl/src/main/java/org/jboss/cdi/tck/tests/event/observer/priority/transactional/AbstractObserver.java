@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority.transactional;
 
-import javax.enterprise.event.TransactionPhase;
+import jakarta.enterprise.event.TransactionPhase;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;

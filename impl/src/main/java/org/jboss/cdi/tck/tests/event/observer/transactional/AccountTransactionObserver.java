@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.transactional;
 
-import javax.annotation.Resource;
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.TransactionPhase;
-import javax.transaction.UserTransaction;
+import jakarta.annotation.Resource;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.TransactionPhase;
+import jakarta.transaction.UserTransaction;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;

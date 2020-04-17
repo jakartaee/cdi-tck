@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Named;
 
 public class SpiderProducer {
 

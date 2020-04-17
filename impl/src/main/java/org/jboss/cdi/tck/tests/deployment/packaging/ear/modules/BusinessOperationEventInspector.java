@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.deployment.packaging.ear.modules;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 
 /**
  * @author Martin Kouba

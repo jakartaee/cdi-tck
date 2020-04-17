@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname.broken.injectionPointWithNamed2;
 
-import javax.enterprise.event.Observes;
-import javax.inject.Named;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Named;
 
 public class Foo {
     public void observe(@Observes Bar bar, @Named Bar bar1) {

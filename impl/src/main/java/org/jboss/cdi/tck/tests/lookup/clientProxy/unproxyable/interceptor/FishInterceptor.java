@@ -1,8 +1,8 @@
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.interceptor;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @Fish
 @Interceptor

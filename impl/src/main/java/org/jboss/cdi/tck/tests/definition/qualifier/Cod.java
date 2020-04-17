@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Whitefish
 @Chunky(realChunky = true)

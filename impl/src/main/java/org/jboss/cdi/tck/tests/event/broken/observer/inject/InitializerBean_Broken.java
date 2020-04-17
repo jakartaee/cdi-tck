@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.inject;
 
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 public class InitializerBean_Broken {
     @Inject

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import javax.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 
 public interface Animal {
 

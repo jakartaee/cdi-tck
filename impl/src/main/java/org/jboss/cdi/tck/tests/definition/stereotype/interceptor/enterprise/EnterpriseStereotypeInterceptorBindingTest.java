@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.definition.stereotype.interceptor.enterprise;
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTORS_EE;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

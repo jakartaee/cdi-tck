@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
 
 public class OakTree {
     @Produces

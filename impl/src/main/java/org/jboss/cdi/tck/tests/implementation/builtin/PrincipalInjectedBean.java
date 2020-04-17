@@ -19,9 +19,9 @@ package org.jboss.cdi.tck.tests.implementation.builtin;
 import java.security.Principal;
 import java.util.HashMap;
 
-import javax.ejb.Stateful;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.AppConfigurationEntry.LoginModuleControlFlag;
 import javax.security.auth.login.LoginContext;

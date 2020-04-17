@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.inheritance.generics;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 /**
  * 

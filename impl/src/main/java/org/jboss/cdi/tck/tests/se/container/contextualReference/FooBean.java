@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.se.container.contextualReference;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /** Normal scoped bean
  *

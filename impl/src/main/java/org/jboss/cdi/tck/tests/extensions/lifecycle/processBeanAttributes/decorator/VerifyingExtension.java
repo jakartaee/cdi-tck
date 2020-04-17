@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.decor
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessBeanAttributes;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessBeanAttributes;
 
 public class VerifyingExtension implements Extension {
 

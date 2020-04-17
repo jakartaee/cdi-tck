@@ -19,10 +19,10 @@ package org.jboss.cdi.tck.tests.decorators.builtin.instance;
 
 import java.io.Serializable;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
 @Decorator
 @SuppressWarnings("serial")

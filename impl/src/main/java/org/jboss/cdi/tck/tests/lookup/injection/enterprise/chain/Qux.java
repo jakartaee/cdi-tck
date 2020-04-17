@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.lookup.injection.enterprise.chain;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 @Stateful

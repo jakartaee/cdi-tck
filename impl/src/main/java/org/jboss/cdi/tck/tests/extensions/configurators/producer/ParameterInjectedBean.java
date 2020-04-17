@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.configurators.producer;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.inject.Vetoed;
+import jakarta.enterprise.inject.Vetoed;
 
 /**
  *

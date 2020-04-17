@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.binding;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class BindingTypeCBinding extends AnnotationLiteral<BindingTypeC> implements BindingTypeC {
     private String value;

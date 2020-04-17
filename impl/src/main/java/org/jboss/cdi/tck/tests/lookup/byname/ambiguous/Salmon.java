@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname.ambiguous;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("fish")
 public class Salmon {

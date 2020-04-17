@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.context.conversation.servlet;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ConversationScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ConversationScoped;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

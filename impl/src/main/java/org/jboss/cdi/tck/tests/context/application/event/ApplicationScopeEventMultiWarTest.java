@@ -22,7 +22,7 @@ import static org.jboss.cdi.tck.cdi.Sections.APPLICATION_CONTEXT_EE;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;

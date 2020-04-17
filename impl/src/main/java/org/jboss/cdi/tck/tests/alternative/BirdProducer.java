@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.alternative;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class BirdProducer {
 

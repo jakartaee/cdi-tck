@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname;
 
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Specializes;
 
 @Specializes
 public class AlaskaPlaice extends Plaice {

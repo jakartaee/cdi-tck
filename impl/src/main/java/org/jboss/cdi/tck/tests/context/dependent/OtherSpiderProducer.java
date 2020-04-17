@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.inject.Produces;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.inject.Produces;
 
 public class OtherSpiderProducer {
     private static boolean destroyed = false;

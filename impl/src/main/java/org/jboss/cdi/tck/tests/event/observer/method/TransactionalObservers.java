@@ -16,12 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.method;
 
-import static javax.enterprise.event.TransactionPhase.AFTER_COMPLETION;
-import static javax.enterprise.event.TransactionPhase.AFTER_FAILURE;
-import static javax.enterprise.event.TransactionPhase.AFTER_SUCCESS;
-import static javax.enterprise.event.TransactionPhase.BEFORE_COMPLETION;
+import static jakarta.enterprise.event.TransactionPhase.AFTER_COMPLETION;
+import static jakarta.enterprise.event.TransactionPhase.AFTER_FAILURE;
+import static jakarta.enterprise.event.TransactionPhase.AFTER_SUCCESS;
+import static jakarta.enterprise.event.TransactionPhase.BEFORE_COMPLETION;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class TransactionalObservers {
     public void train(@Observes(during = BEFORE_COMPLETION) DisobedientDog dog) {

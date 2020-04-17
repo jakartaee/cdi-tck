@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.decorator;
 
-import javax.annotation.Priority;
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.enterprise.inject.spi.Bean;
-import javax.inject.Inject;
+import jakarta.annotation.Priority;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Cream;
 import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Milk;

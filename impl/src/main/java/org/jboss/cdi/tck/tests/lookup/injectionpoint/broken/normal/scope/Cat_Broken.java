@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.normal.scope;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("unused")
 @RequestScoped

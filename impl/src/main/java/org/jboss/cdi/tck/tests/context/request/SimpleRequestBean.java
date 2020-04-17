@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.request;
 
 import java.util.UUID;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class SimpleRequestBean {
